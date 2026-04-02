@@ -11,61 +11,37 @@ mdx:
 type GetProcessDefinitionInstanceVersionStatisticsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13156](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13156)
+Defined in: [gen/types.gen.ts:12911](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12911)
 
 ## Properties
 
 ### body
 
 ```ts
-body: object;
+body: ProcessDefinitionInstanceVersionStatisticsQuery;
 ```
 
-Defined in: [gen/types.gen.ts:13157](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13157)
-
-#### filter
-
-```ts
-filter: ProcessDefinitionInstanceVersionStatisticsFilter;
-```
-
-The process definition instance version statistics search filters.
-
-#### page?
-
-```ts
-optional page: OffsetPagination;
-```
-
-Pagination criteria.
-
-#### sort?
-
-```ts
-optional sort: object[];
-```
-
-Sort field criteria.
+Defined in: [gen/types.gen.ts:12912](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12912)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:13177](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13177)
+Defined in: [gen/types.gen.ts:12913](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12913)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:13178](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13178)
+Defined in: [gen/types.gen.ts:12914](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12914)
 
 ---
 
@@ -75,4 +51,4 @@ Defined in: [gen/types.gen.ts:13178](https://github.com/camunda/orchestration-cl
 url: "/process-definitions/statistics/process-instances-by-version";
 ```
 
-Defined in: [gen/types.gen.ts:13179](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13179)
+Defined in: [gen/types.gen.ts:12915](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12915)

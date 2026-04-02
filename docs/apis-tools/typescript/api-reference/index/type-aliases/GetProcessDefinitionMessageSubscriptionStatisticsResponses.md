@@ -11,7 +11,7 @@ mdx:
 type GetProcessDefinitionMessageSubscriptionStatisticsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:12773](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12773)
+Defined in: [gen/types.gen.ts:12672](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12672)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:12773](https://github.com/camunda/orchestration-cl
 200: ProcessDefinitionMessageSubscriptionStatisticsQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:12777](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12777)
+Defined in: [gen/types.gen.ts:12676](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12676)
 
 The process definition message subscription statistics result.

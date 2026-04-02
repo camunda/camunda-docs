@@ -11,7 +11,7 @@ mdx:
 type DeploymentProcessResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2019](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2019)
+Defined in: [gen/types.gen.ts:2095](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2095)
 
 A deployed process.
 
@@ -23,7 +23,7 @@ A deployed process.
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:2025](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2025)
+Defined in: [gen/types.gen.ts:2101](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2101)
 
 The bpmn process ID, as parsed during deployment, together with the version forms a
 unique identifier for a specific process definition.
@@ -36,7 +36,7 @@ unique identifier for a specific process definition.
 processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:2041](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2041)
+Defined in: [gen/types.gen.ts:2117](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2117)
 
 The assigned key, which acts as a unique identifier for this process.
 
@@ -48,7 +48,7 @@ The assigned key, which acts as a unique identifier for this process.
 processDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:2029](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2029)
+Defined in: [gen/types.gen.ts:2105](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2105)
 
 The assigned process version.
 
@@ -60,7 +60,7 @@ The assigned process version.
 resourceName: string;
 ```
 
-Defined in: [gen/types.gen.ts:2033](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2033)
+Defined in: [gen/types.gen.ts:2109](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2109)
 
 The resource name from which this process was parsed.
 
@@ -72,6 +72,6 @@ The resource name from which this process was parsed.
 tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:2037](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2037)
+Defined in: [gen/types.gen.ts:2113](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2113)
 
 The tenant ID of the deployed process.

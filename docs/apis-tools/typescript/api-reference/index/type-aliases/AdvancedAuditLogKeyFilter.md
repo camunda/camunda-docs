@@ -11,7 +11,7 @@ mdx:
 type AdvancedAuditLogKeyFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4377](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4377)
+Defined in: [gen/types.gen.ts:5018](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5018)
 
 Advanced filter
 
@@ -22,10 +22,10 @@ Advanced AuditLogKey filter.
 ### $eq?
 
 ```ts
-optional $eq: AuditLogKey;
+optional $eq?: AuditLogKey;
 ```
 
-Defined in: [gen/types.gen.ts:4381](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4381)
+Defined in: [gen/types.gen.ts:5022](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5022)
 
 Checks for equality with the provided value.
 
@@ -34,10 +34,10 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:4389](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4389)
+Defined in: [gen/types.gen.ts:5030](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5030)
 
 Checks if the current property exists.
 
@@ -46,10 +46,10 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: AuditLogKey[];
+optional $in?: AuditLogKey[];
 ```
 
-Defined in: [gen/types.gen.ts:4393](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4393)
+Defined in: [gen/types.gen.ts:5034](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5034)
 
 Checks if the property matches any of the provided values.
 
@@ -58,10 +58,10 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq: AuditLogKey;
+optional $neq?: AuditLogKey;
 ```
 
-Defined in: [gen/types.gen.ts:4385](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4385)
+Defined in: [gen/types.gen.ts:5026](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5026)
 
 Checks for inequality with the provided value.
 
@@ -70,9 +70,9 @@ Checks for inequality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn: AuditLogKey[];
+optional $notIn?: AuditLogKey[];
 ```
 
-Defined in: [gen/types.gen.ts:4397](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4397)
+Defined in: [gen/types.gen.ts:5038](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5038)
 
 Checks if the property matches none of the provided values.

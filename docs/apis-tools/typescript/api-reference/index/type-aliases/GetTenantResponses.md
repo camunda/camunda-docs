@@ -11,7 +11,7 @@ mdx:
 type GetTenantResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:15715](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15715)
+Defined in: [gen/types.gen.ts:15019](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15019)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15715](https://github.com/camunda/orchestration-cl
 200: TenantResult;
 ```
 
-Defined in: [gen/types.gen.ts:15719](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15719)
+Defined in: [gen/types.gen.ts:15023](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15023)
 
 The tenant was retrieved successfully.

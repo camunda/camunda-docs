@@ -11,7 +11,7 @@ mdx:
 type CreateTenantData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15526](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15526)
+Defined in: [gen/types.gen.ts:14848](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14848)
 
 ## Properties
 
@@ -21,27 +21,27 @@ Defined in: [gen/types.gen.ts:15526](https://github.com/camunda/orchestration-cl
 body: TenantCreateRequest;
 ```
 
-Defined in: [gen/types.gen.ts:15527](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15527)
+Defined in: [gen/types.gen.ts:14849](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14849)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:15528](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15528)
+Defined in: [gen/types.gen.ts:14850](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14850)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:15529](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15529)
+Defined in: [gen/types.gen.ts:14851](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14851)
 
 ---
 
@@ -51,4 +51,4 @@ Defined in: [gen/types.gen.ts:15529](https://github.com/camunda/orchestration-cl
 url: "/tenants";
 ```
 
-Defined in: [gen/types.gen.ts:15530](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15530)
+Defined in: [gen/types.gen.ts:14852](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14852)

@@ -11,7 +11,7 @@ mdx:
 type AdvancedUserTaskStateFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:7084](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7084)
+Defined in: [gen/types.gen.ts:7891](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7891)
 
 Advanced filter
 
@@ -22,10 +22,10 @@ Advanced UserTaskStateEnum filter.
 ### $eq?
 
 ```ts
-optional $eq: UserTaskStateEnum;
+optional $eq?: UserTaskStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:7088](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7088)
+Defined in: [gen/types.gen.ts:7895](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7895)
 
 Checks for equality with the provided value.
 
@@ -34,10 +34,10 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:7096](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7096)
+Defined in: [gen/types.gen.ts:7903](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7903)
 
 Checks if the current property exists.
 
@@ -46,10 +46,10 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: UserTaskStateEnum[];
+optional $in?: UserTaskStateEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:7100](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7100)
+Defined in: [gen/types.gen.ts:7907](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7907)
 
 Checks if the property matches any of the provided values.
 
@@ -58,19 +58,19 @@ Checks if the property matches any of the provided values.
 ### $like?
 
 ```ts
-optional $like: LikeFilter;
+optional $like?: LikeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:7101](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7101)
+Defined in: [gen/types.gen.ts:7908](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7908)
 
 ---
 
 ### $neq?
 
 ```ts
-optional $neq: UserTaskStateEnum;
+optional $neq?: UserTaskStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:7092](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7092)
+Defined in: [gen/types.gen.ts:7899](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7899)
 
 Checks for inequality with the provided value.

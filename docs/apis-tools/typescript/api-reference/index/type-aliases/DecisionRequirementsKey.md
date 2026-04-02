@@ -11,6 +11,6 @@ mdx:
 type DecisionRequirementsKey = CamundaKey<"DecisionRequirementsKey">;
 ```
 
-Defined in: [gen/types.gen.ts:4079](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4079)
+Defined in: [gen/types.gen.ts:4718](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4718)
 
 System-generated key for a deployed decision requirements definition.

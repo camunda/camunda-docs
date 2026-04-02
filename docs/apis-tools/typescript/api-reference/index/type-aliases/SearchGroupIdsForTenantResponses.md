@@ -11,7 +11,7 @@ mdx:
 type SearchGroupIdsForTenantResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:15928](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15928)
+Defined in: [gen/types.gen.ts:15231](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15231)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15928](https://github.com/camunda/orchestration-cl
 200: TenantGroupSearchResult;
 ```
 
-Defined in: [gen/types.gen.ts:15932](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15932)
+Defined in: [gen/types.gen.ts:15235](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15235)
 
 The search result of groups for the tenant.

@@ -11,17 +11,17 @@ mdx:
 type SuspendBatchOperationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8473](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8473)
+Defined in: [gen/types.gen.ts:8996](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8996)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: unknown;
+optional body?: unknown;
 ```
 
-Defined in: [gen/types.gen.ts:8474](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8474)
+Defined in: [gen/types.gen.ts:8997](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8997)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:8474](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:8475](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8475)
+Defined in: [gen/types.gen.ts:8998](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8998)
 
 #### batchOperationKey
 
@@ -46,10 +46,10 @@ The key (or operate legacy ID) of the batch operation.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8481](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8481)
+Defined in: [gen/types.gen.ts:9004](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9004)
 
 ---
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:8481](https://github.com/camunda/orchestration-clu
 url: "/batch-operations/{batchOperationKey}/suspension";
 ```
 
-Defined in: [gen/types.gen.ts:8482](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8482)
+Defined in: [gen/types.gen.ts:9005](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9005)

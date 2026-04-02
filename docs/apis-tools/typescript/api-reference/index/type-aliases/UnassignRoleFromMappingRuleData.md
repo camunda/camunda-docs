@@ -11,17 +11,17 @@ mdx:
 type UnassignRoleFromMappingRuleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15104](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15104)
+Defined in: [gen/types.gen.ts:14390](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14390)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:15105](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15105)
+Defined in: [gen/types.gen.ts:14391](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14391)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:15105](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:15106](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15106)
+Defined in: [gen/types.gen.ts:14392](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14392)
 
 #### mappingRuleId
 
@@ -54,10 +54,10 @@ The role ID.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:15116](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15116)
+Defined in: [gen/types.gen.ts:14402](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14402)
 
 ---
 
@@ -67,4 +67,4 @@ Defined in: [gen/types.gen.ts:15116](https://github.com/camunda/orchestration-cl
 url: "/roles/{roleId}/mapping-rules/{mappingRuleId}";
 ```
 
-Defined in: [gen/types.gen.ts:15117](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15117)
+Defined in: [gen/types.gen.ts:14403](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14403)

@@ -11,7 +11,7 @@ mdx:
 type CursorBackwardPagination = object;
 ```
 
-Defined in: [gen/types.gen.ts:6447](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6447)
+Defined in: [gen/types.gen.ts:7167](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7167)
 
 Cursor-based backward pagination
 
@@ -23,7 +23,7 @@ Cursor-based backward pagination
 before: StartCursor;
 ```
 
-Defined in: [gen/types.gen.ts:6451](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6451)
+Defined in: [gen/types.gen.ts:7171](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7171)
 
 Use the `startCursor` value from the previous response to fetch the previous page of results.
 
@@ -32,9 +32,9 @@ Use the `startCursor` value from the previous response to fetch the previous pag
 ### limit?
 
 ```ts
-optional limit: number;
+optional limit?: number;
 ```
 
-Defined in: [gen/types.gen.ts:6455](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6455)
+Defined in: [gen/types.gen.ts:7175](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7175)
 
 The maximum number of items to return in one request.

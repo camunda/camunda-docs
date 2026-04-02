@@ -11,17 +11,17 @@ mdx:
 type GetProcessDefinitionData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12831](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12831)
+Defined in: [gen/types.gen.ts:12718](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12718)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:12832](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12832)
+Defined in: [gen/types.gen.ts:12719](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12719)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:12832](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:12833](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12833)
+Defined in: [gen/types.gen.ts:12720](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12720)
 
 #### processDefinitionKey
 
@@ -46,10 +46,10 @@ The assigned key of the process definition, which acts as a unique identifier fo
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:12840](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12840)
+Defined in: [gen/types.gen.ts:12727](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12727)
 
 ---
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:12840](https://github.com/camunda/orchestration-cl
 url: "/process-definitions/{processDefinitionKey}";
 ```
 
-Defined in: [gen/types.gen.ts:12841](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12841)
+Defined in: [gen/types.gen.ts:12728](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12728)

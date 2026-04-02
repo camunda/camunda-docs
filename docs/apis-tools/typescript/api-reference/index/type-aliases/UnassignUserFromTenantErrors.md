@@ -11,7 +11,7 @@ mdx:
 type UnassignUserFromTenantErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:16333](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16333)
+Defined in: [gen/types.gen.ts:15653](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15653)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:16333](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:16337](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16337)
+Defined in: [gen/types.gen.ts:15657](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15657)
 
 The provided data is not valid.
 
@@ -33,7 +33,7 @@ The provided data is not valid.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:16341](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16341)
+Defined in: [gen/types.gen.ts:15661](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15661)
 
 Forbidden. The request is not allowed.
 
@@ -45,7 +45,7 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:16345](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16345)
+Defined in: [gen/types.gen.ts:15665](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15665)
 
 Not found. The tenant or user was not found.
 
@@ -57,7 +57,7 @@ Not found. The tenant or user was not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:16349](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16349)
+Defined in: [gen/types.gen.ts:15669](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15669)
 
 An internal error occurred while processing the request.
 
@@ -69,6 +69,6 @@ An internal error occurred while processing the request.
 503: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:16354](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16354)
+Defined in: [gen/types.gen.ts:15674](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15674)
 
 The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .

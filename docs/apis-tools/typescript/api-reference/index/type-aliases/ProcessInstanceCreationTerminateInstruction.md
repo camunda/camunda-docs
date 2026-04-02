@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceCreationTerminateInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:5551](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5551)
+Defined in: [gen/types.gen.ts:6223](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6223)
 
 Terminates the process instance after a specific BPMN element is completed or terminated.
 
@@ -23,7 +23,7 @@ Terminates the process instance after a specific BPMN element is completed or te
 afterElementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:5560](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5560)
+Defined in: [gen/types.gen.ts:6232](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6232)
 
 The id of the element that, once completed or terminated, will cause the process to be terminated.
 
@@ -32,9 +32,9 @@ The id of the element that, once completed or terminated, will cause the process
 ### type?
 
 ```ts
-optional type: string;
+optional type?: string;
 ```
 
-Defined in: [gen/types.gen.ts:5555](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5555)
+Defined in: [gen/types.gen.ts:6227](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6227)
 
 The type of the runtime instruction

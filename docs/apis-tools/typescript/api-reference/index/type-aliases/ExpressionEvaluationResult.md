@@ -11,7 +11,7 @@ mdx:
 type ExpressionEvaluationResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2594](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2594)
+Defined in: [gen/types.gen.ts:2745](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2745)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:2594](https://github.com/camunda/orchestration-clu
 expression: string;
 ```
 
-Defined in: [gen/types.gen.ts:2598](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2598)
+Defined in: [gen/types.gen.ts:2749](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2749)
 
 The evaluated expression
 
@@ -33,7 +33,7 @@ The evaluated expression
 result: unknown;
 ```
 
-Defined in: [gen/types.gen.ts:2602](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2602)
+Defined in: [gen/types.gen.ts:2753](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2753)
 
 The result value. Its type can vary.
 
@@ -42,9 +42,9 @@ The result value. Its type can vary.
 ### warnings
 
 ```ts
-warnings: string[];
+warnings: ExpressionEvaluationWarningItem[];
 ```
 
-Defined in: [gen/types.gen.ts:2606](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2606)
+Defined in: [gen/types.gen.ts:2757](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2757)
 
 List of warnings generated during expression evaluation

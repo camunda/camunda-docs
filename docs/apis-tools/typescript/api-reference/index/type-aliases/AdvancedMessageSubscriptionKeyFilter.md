@@ -11,7 +11,7 @@ mdx:
 type AdvancedMessageSubscriptionKeyFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:5012](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5012)
+Defined in: [gen/types.gen.ts:5667](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5667)
 
 Advanced filter
 
@@ -22,10 +22,10 @@ Advanced MessageSubscriptionKey filter.
 ### $eq?
 
 ```ts
-optional $eq: MessageSubscriptionKey;
+optional $eq?: MessageSubscriptionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5016](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5016)
+Defined in: [gen/types.gen.ts:5671](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5671)
 
 Checks for equality with the provided value.
 
@@ -34,10 +34,10 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:5024](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5024)
+Defined in: [gen/types.gen.ts:5679](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5679)
 
 Checks if the current property exists.
 
@@ -46,10 +46,10 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: MessageSubscriptionKey[];
+optional $in?: MessageSubscriptionKey[];
 ```
 
-Defined in: [gen/types.gen.ts:5028](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5028)
+Defined in: [gen/types.gen.ts:5683](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5683)
 
 Checks if the property matches any of the provided values.
 
@@ -58,10 +58,10 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq: MessageSubscriptionKey;
+optional $neq?: MessageSubscriptionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5020](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5020)
+Defined in: [gen/types.gen.ts:5675](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5675)
 
 Checks for equality with the provided value.
 
@@ -70,9 +70,9 @@ Checks for equality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn: MessageSubscriptionKey[];
+optional $notIn?: MessageSubscriptionKey[];
 ```
 
-Defined in: [gen/types.gen.ts:5032](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5032)
+Defined in: [gen/types.gen.ts:5687](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5687)
 
 Checks if the property matches none of the provided values.

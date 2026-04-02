@@ -11,7 +11,7 @@ mdx:
 type EvaluateConditionalsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9059](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9059)
+Defined in: [gen/types.gen.ts:9516](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9516)
 
 ## Properties
 
@@ -21,27 +21,27 @@ Defined in: [gen/types.gen.ts:9059](https://github.com/camunda/orchestration-clu
 body: ConditionalEvaluationInstruction;
 ```
 
-Defined in: [gen/types.gen.ts:9060](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9060)
+Defined in: [gen/types.gen.ts:9517](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9517)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9061](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9061)
+Defined in: [gen/types.gen.ts:9518](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9518)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9062](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9062)
+Defined in: [gen/types.gen.ts:9519](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9519)
 
 ---
 
@@ -51,4 +51,4 @@ Defined in: [gen/types.gen.ts:9062](https://github.com/camunda/orchestration-clu
 url: "/conditionals/evaluation";
 ```
 
-Defined in: [gen/types.gen.ts:9063](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9063)
+Defined in: [gen/types.gen.ts:9520](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9520)

@@ -11,17 +11,17 @@ mdx:
 type CamundaUserResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:488](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L488)
+Defined in: [gen/types.gen.ts:501](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L501)
 
 ## Properties
 
-### authorizedComponents?
+### authorizedComponents
 
 ```ts
-optional authorizedComponents: string[];
+authorizedComponents: string[];
 ```
 
-Defined in: [gen/types.gen.ts:504](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L504)
+Defined in: [gen/types.gen.ts:517](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L517)
 
 The web components the user is authorized to use.
 
@@ -33,7 +33,7 @@ The web components the user is authorized to use.
 c8Links: object;
 ```
 
-Defined in: [gen/types.gen.ts:524](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L524)
+Defined in: [gen/types.gen.ts:537](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L537)
 
 The links to the components in the C8 stack.
 
@@ -51,31 +51,31 @@ The links to the components in the C8 stack.
 canLogout: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:530](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L530)
+Defined in: [gen/types.gen.ts:543](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L543)
 
 Flag for understanding if the user is able to perform logout.
 
 ---
 
-### displayName?
+### displayName
 
 ```ts
-optional displayName: string | null;
+displayName: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:496](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L496)
+Defined in: [gen/types.gen.ts:509](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L509)
 
 The display name of the user.
 
 ---
 
-### email?
+### email
 
 ```ts
-optional email: string | null;
+email: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:500](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L500)
+Defined in: [gen/types.gen.ts:513](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L513)
 
 The email of the user.
 
@@ -87,7 +87,7 @@ The email of the user.
 groups: string[];
 ```
 
-Defined in: [gen/types.gen.ts:512](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L512)
+Defined in: [gen/types.gen.ts:525](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L525)
 
 The groups assigned to the user.
 
@@ -99,7 +99,7 @@ The groups assigned to the user.
 roles: string[];
 ```
 
-Defined in: [gen/types.gen.ts:516](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L516)
+Defined in: [gen/types.gen.ts:529](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L529)
 
 The roles assigned to the user.
 
@@ -108,10 +108,10 @@ The roles assigned to the user.
 ### salesPlanType
 
 ```ts
-salesPlanType: string;
+salesPlanType: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:520](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L520)
+Defined in: [gen/types.gen.ts:533](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L533)
 
 The plan of the user.
 
@@ -123,18 +123,18 @@ The plan of the user.
 tenants: TenantResult[];
 ```
 
-Defined in: [gen/types.gen.ts:508](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L508)
+Defined in: [gen/types.gen.ts:521](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L521)
 
 The tenants the user is a member of.
 
 ---
 
-### username?
+### username
 
 ```ts
-optional username: Username | null;
+username: Username;
 ```
 
-Defined in: [gen/types.gen.ts:492](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L492)
+Defined in: [gen/types.gen.ts:505](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L505)
 
 The username of the user.

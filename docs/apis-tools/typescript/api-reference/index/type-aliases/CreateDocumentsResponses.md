@@ -11,7 +11,7 @@ mdx:
 type CreateDocumentsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:10093](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10093)
+Defined in: [gen/types.gen.ts:10187](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10187)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:10093](https://github.com/camunda/orchestration-cl
 201: DocumentCreationBatchResponse;
 ```
 
-Defined in: [gen/types.gen.ts:10097](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10097)
+Defined in: [gen/types.gen.ts:10191](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10191)
 
 All documents were uploaded successfully.
 
@@ -33,6 +33,6 @@ All documents were uploaded successfully.
 207: DocumentCreationBatchResponse;
 ```
 
-Defined in: [gen/types.gen.ts:10101](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10101)
+Defined in: [gen/types.gen.ts:10195](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10195)
 
 Some documents were uploaded successfully, others failed.

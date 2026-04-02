@@ -11,7 +11,7 @@ mdx:
 type CancelBatchOperationErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:8396](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8396)
+Defined in: [gen/types.gen.ts:8919](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8919)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:8396](https://github.com/camunda/orchestration-clu
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8400](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8400)
+Defined in: [gen/types.gen.ts:8923](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8923)
 
 The provided data is not valid.
 
@@ -33,7 +33,7 @@ The provided data is not valid.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8404](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8404)
+Defined in: [gen/types.gen.ts:8927](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8927)
 
 Forbidden. The request is not allowed.
 
@@ -45,7 +45,7 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8408](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8408)
+Defined in: [gen/types.gen.ts:8931](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8931)
 
 Not found. The batch operation was not found.
 
@@ -57,6 +57,6 @@ Not found. The batch operation was not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8412](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8412)
+Defined in: [gen/types.gen.ts:8935](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8935)
 
 An internal error occurred while processing the request.

@@ -11,14 +11,14 @@ mdx:
 type TenantUserResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:6660](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6660)
+Defined in: [gen/types.gen.ts:7418](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7418)
 
 ## Properties
 
-### username?
+### username
 
 ```ts
-optional username: Username;
+username: Username;
 ```
 
-Defined in: [gen/types.gen.ts:6661](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6661)
+Defined in: [gen/types.gen.ts:7419](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7419)

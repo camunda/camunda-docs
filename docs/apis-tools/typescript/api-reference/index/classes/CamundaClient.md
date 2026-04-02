@@ -7,21 +7,21 @@ mdx:
 
 # Class: CamundaClient
 
-Defined in: [gen/CamundaClient.ts:1186](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1186)
+Defined in: [gen/CamundaClient.ts:1181](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1181)
 
 ## Constructors
 
 ### Constructor
 
 ```ts
-new CamundaClient(opts): CamundaClient;
+new CamundaClient(opts?): CamundaClient;
 ```
 
-Defined in: [gen/CamundaClient.ts:1212](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1212)
+Defined in: [gen/CamundaClient.ts:1210](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1210)
 
 #### Parameters
 
-##### opts
+##### opts?
 
 [`CamundaOptions`](../interfaces/CamundaOptions.md) = `{}`
 
@@ -39,7 +39,7 @@ Defined in: [gen/CamundaClient.ts:1212](https://github.com/camunda/orchestration
 get config(): Readonly<CamundaConfig>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1330](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1330)
+Defined in: [gen/CamundaClient.ts:1332](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1332)
 
 ##### Returns
 
@@ -53,7 +53,7 @@ Defined in: [gen/CamundaClient.ts:1330](https://github.com/camunda/orchestration
 _getSupportLogger(): SupportLogger;
 ```
 
-Defined in: [gen/CamundaClient.ts:1459](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1459)
+Defined in: [gen/CamundaClient.ts:1463](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1463)
 
 Internal accessor for support logger (no public API commitment yet).
 
@@ -69,7 +69,7 @@ Internal accessor for support logger (no public API commitment yet).
 _invokeWithRetry<T>(op, opts): Promise<T>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1492](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1492)
+Defined in: [gen/CamundaClient.ts:1502](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1502)
 
 Internal invocation helper to apply global backpressure gating + retry + normalization
 
@@ -99,6 +99,11 @@ Internal invocation helper to apply global backpressure gating + retry + normali
 
 `string`
 
+###### retryOverride?
+
+\| `false`
+\| `Partial`\<[`HttpRetryPolicy`](../interfaces/HttpRetryPolicy.md)\>
+
 #### Returns
 
 `Promise`\<`T`\>
@@ -108,10 +113,10 @@ Internal invocation helper to apply global backpressure gating + retry + normali
 ### activateAdHocSubProcessActivities()
 
 ```ts
-activateAdHocSubProcessActivities(input): CancelablePromise<void>;
+activateAdHocSubProcessActivities(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1578](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1578)
+Defined in: [gen/CamundaClient.ts:1609](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1609)
 
 Activate activities within an ad-hoc sub-process
 
@@ -127,9 +132,29 @@ provided adHocSubProcessInstanceKey.
 
 [`activateAdHocSubProcessActivitiesInput`](../type-aliases/activateAdHocSubProcessActivitiesInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function activateAdHocSubProcessActivitiesExample(
+  adHocSubProcessInstanceKey: ElementInstanceKey,
+  elementId: ElementId
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.activateAdHocSubProcessActivities({
+    adHocSubProcessInstanceKey,
+    elements: [{ elementId }],
+  });
+}
+```
 
 #### Operation Id
 
@@ -144,12 +169,12 @@ Ad-hoc sub-process
 ### activateJobs()
 
 ```ts
-activateJobs(input): CancelablePromise<{
+activateJobs(input, options?): CancelablePromise<{
   jobs: EnrichedActivatedJob[];
 }>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1641](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1641)
+Defined in: [gen/CamundaClient.ts:1674](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1674)
 
 Activate jobs
 
@@ -162,6 +187,10 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 ##### input
 
 [`JobActivationRequest`](../type-aliases/JobActivationRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
@@ -203,10 +232,10 @@ Job
 ### assignClientToGroup()
 
 ```ts
-assignClientToGroup(input): CancelablePromise<void>;
+assignClientToGroup(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1702](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1702)
+Defined in: [gen/CamundaClient.ts:1739](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1739)
 
 Assign a client to a group
 
@@ -221,9 +250,26 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
 
 [`assignClientToGroupInput`](../type-aliases/assignClientToGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignClientToGroupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.assignClientToGroup({
+    groupId: "engineering-team",
+    clientId: "my-service-account",
+  });
+}
+```
 
 #### Operation Id
 
@@ -238,10 +284,10 @@ Group
 ### assignClientToTenant()
 
 ```ts
-assignClientToTenant(input): CancelablePromise<void>;
+assignClientToTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1762](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1762)
+Defined in: [gen/CamundaClient.ts:1803](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1803)
 
 Assign a client to a tenant
 
@@ -256,9 +302,26 @@ The client can then access tenant data and perform authorized actions.
 
 [`assignClientToTenantInput`](../type-aliases/assignClientToTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignClientToTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.assignClientToTenant({
+    tenantId,
+    clientId: "my-service-account",
+  });
+}
+```
 
 #### Operation Id
 
@@ -273,10 +336,10 @@ Tenant
 ### assignGroupToTenant()
 
 ```ts
-assignGroupToTenant(input): CancelablePromise<void>;
+assignGroupToTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1822](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1822)
+Defined in: [gen/CamundaClient.ts:1867](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1867)
 
 Assign a group to a tenant
 
@@ -291,9 +354,26 @@ Group members (users, clients) can then access tenant data and perform authorize
 
 [`assignGroupToTenantInput`](../type-aliases/assignGroupToTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignGroupToTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.assignGroupToTenant({
+    tenantId,
+    groupId: "engineering-team",
+  });
+}
+```
 
 #### Operation Id
 
@@ -308,10 +388,10 @@ Tenant
 ### assignMappingRuleToGroup()
 
 ```ts
-assignMappingRuleToGroup(input): CancelablePromise<void>;
+assignMappingRuleToGroup(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1880](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1880)
+Defined in: [gen/CamundaClient.ts:1929](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1929)
 
 Assign a mapping rule to a group
 
@@ -325,9 +405,26 @@ Assigns a mapping rule to a group.
 
 [`assignMappingRuleToGroupInput`](../type-aliases/assignMappingRuleToGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignMappingRuleToGroupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.assignMappingRuleToGroup({
+    groupId: "engineering-team",
+    mappingRuleId: "rule-123",
+  });
+}
+```
 
 #### Operation Id
 
@@ -342,10 +439,10 @@ Group
 ### assignMappingRuleToTenant()
 
 ```ts
-assignMappingRuleToTenant(input): CancelablePromise<void>;
+assignMappingRuleToTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1938](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1938)
+Defined in: [gen/CamundaClient.ts:1991](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1991)
 
 Assign a mapping rule to a tenant
 
@@ -359,9 +456,26 @@ Assign a single mapping rule to a specified tenant.
 
 [`assignMappingRuleToTenantInput`](../type-aliases/assignMappingRuleToTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignMappingRuleToTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.assignMappingRuleToTenant({
+    tenantId,
+    mappingRuleId: "rule-123",
+  });
+}
+```
 
 #### Operation Id
 
@@ -376,10 +490,10 @@ Tenant
 ### assignRoleToClient()
 
 ```ts
-assignRoleToClient(input): CancelablePromise<void>;
+assignRoleToClient(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1996](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1996)
+Defined in: [gen/CamundaClient.ts:2053](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2053)
 
 Assign a role to a client
 
@@ -393,9 +507,26 @@ Assigns the specified role to the client. The client will inherit the authorizat
 
 [`assignRoleToClientInput`](../type-aliases/assignRoleToClientInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignRoleToClientExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.assignRoleToClient({
+    roleId: "process-admin",
+    clientId: "my-service-account",
+  });
+}
+```
 
 #### Operation Id
 
@@ -410,10 +541,10 @@ Role
 ### assignRoleToGroup()
 
 ```ts
-assignRoleToGroup(input): CancelablePromise<void>;
+assignRoleToGroup(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2054](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2054)
+Defined in: [gen/CamundaClient.ts:2115](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2115)
 
 Assign a role to a group
 
@@ -427,9 +558,26 @@ Assigns the specified role to the group. Every member of the group (user or clie
 
 [`assignRoleToGroupInput`](../type-aliases/assignRoleToGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignRoleToGroupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.assignRoleToGroup({
+    roleId: "process-admin",
+    groupId: "engineering-team",
+  });
+}
+```
 
 #### Operation Id
 
@@ -444,10 +592,10 @@ Role
 ### assignRoleToMappingRule()
 
 ```ts
-assignRoleToMappingRule(input): CancelablePromise<void>;
+assignRoleToMappingRule(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2112](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2112)
+Defined in: [gen/CamundaClient.ts:2177](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2177)
 
 Assign a role to a mapping rule
 
@@ -461,9 +609,26 @@ Assigns a role to a mapping rule.
 
 [`assignRoleToMappingRuleInput`](../type-aliases/assignRoleToMappingRuleInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignRoleToMappingRuleExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.assignRoleToMappingRule({
+    roleId: "process-admin",
+    mappingRuleId: "rule-123",
+  });
+}
+```
 
 #### Operation Id
 
@@ -478,10 +643,10 @@ Role
 ### assignRoleToTenant()
 
 ```ts
-assignRoleToTenant(input): CancelablePromise<void>;
+assignRoleToTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2172](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2172)
+Defined in: [gen/CamundaClient.ts:2241](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2241)
 
 Assign a role to a tenant
 
@@ -496,9 +661,26 @@ Users, Clients or Groups, that have the role assigned, will get access to the te
 
 [`assignRoleToTenantInput`](../type-aliases/assignRoleToTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignRoleToTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.assignRoleToTenant({
+    tenantId,
+    roleId: "process-admin",
+  });
+}
+```
 
 #### Operation Id
 
@@ -513,10 +695,10 @@ Tenant
 ### assignRoleToUser()
 
 ```ts
-assignRoleToUser(input): CancelablePromise<void>;
+assignRoleToUser(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2230](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2230)
+Defined in: [gen/CamundaClient.ts:2303](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2303)
 
 Assign a role to a user
 
@@ -530,9 +712,26 @@ Assigns the specified role to the user. The user will inherit the authorizations
 
 [`assignRoleToUserInput`](../type-aliases/assignRoleToUserInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignRoleToUserExample(username: Username) {
+  const camunda = createCamundaClient();
+
+  await camunda.assignRoleToUser({
+    roleId: "process-admin",
+    username,
+  });
+}
+```
 
 #### Operation Id
 
@@ -547,14 +746,14 @@ Role
 ### assignUserTask()
 
 ```ts
-assignUserTask(input): CancelablePromise<void>;
+assignUserTask(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2290](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2290)
+Defined in: [gen/CamundaClient.ts:2366](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2366)
 
 Assign user task
 
-Assigns a user task with the given key to the given assignee.
+Assigns a user task with the given key to the given assignee. Assignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 -
 
@@ -564,6 +763,10 @@ Assigns a user task with the given key to the given assignee.
 
 [`assignUserTaskInput`](../type-aliases/assignUserTaskInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
@@ -571,10 +774,8 @@ Assigns a user task with the given key to the given assignee.
 #### Example
 
 ```ts
-async function assignUserTaskExample() {
+async function assignUserTaskExample(userTaskKey: UserTaskKey) {
   const camunda = createCamundaClient();
-
-  const userTaskKey = UserTaskKey.assumeExists("2251799813685249");
 
   await camunda.assignUserTask({
     userTaskKey,
@@ -597,10 +798,10 @@ User task
 ### assignUserToGroup()
 
 ```ts
-assignUserToGroup(input): CancelablePromise<void>;
+assignUserToGroup(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2352](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2352)
+Defined in: [gen/CamundaClient.ts:2432](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2432)
 
 Assign a user to a group
 
@@ -615,9 +816,26 @@ Group members inherit the group authorizations, roles, and tenant assignments.
 
 [`assignUserToGroupInput`](../type-aliases/assignUserToGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignUserToGroupExample(username: Username) {
+  const camunda = createCamundaClient();
+
+  await camunda.assignUserToGroup({
+    groupId: "engineering-team",
+    username,
+  });
+}
+```
 
 #### Operation Id
 
@@ -632,10 +850,10 @@ Group
 ### assignUserToTenant()
 
 ```ts
-assignUserToTenant(input): CancelablePromise<void>;
+assignUserToTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2410](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2410)
+Defined in: [gen/CamundaClient.ts:2494](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2494)
 
 Assign a user to a tenant
 
@@ -649,9 +867,29 @@ Assign a single user to a specified tenant. The user can then access tenant data
 
 [`assignUserToTenantInput`](../type-aliases/assignUserToTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function assignUserToTenantExample(
+  tenantId: TenantId,
+  username: Username
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.assignUserToTenant({
+    tenantId,
+    username,
+  });
+}
+```
 
 #### Operation Id
 
@@ -666,10 +904,10 @@ Tenant
 ### broadcastSignal()
 
 ```ts
-broadcastSignal(input): CancelablePromise<SignalBroadcastResult>;
+broadcastSignal(input, options?): CancelablePromise<SignalBroadcastResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2470](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2470)
+Defined in: [gen/CamundaClient.ts:2556](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2556)
 
 Broadcast signal
 
@@ -682,6 +920,10 @@ Broadcasts a signal.
 ##### input
 
 [`SignalBroadcastRequest`](../type-aliases/SignalBroadcastRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
@@ -717,10 +959,10 @@ Signal
 ### cancelBatchOperation()
 
 ```ts
-cancelBatchOperation(input, consistencyManagement): CancelablePromise<void>;
+cancelBatchOperation(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2535](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2535)
+Defined in: [gen/CamundaClient.ts:2624](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2624)
 
 Cancel Batch operation
 
@@ -737,13 +979,25 @@ This is done asynchronously, the progress can be tracked using the batch operati
 
 [`BatchOperationKey`](../type-aliases/BatchOperationKey.md)
 
-##### consistencyManagement
+##### options?
 
-[`cancelBatchOperationConsistency`](../type-aliases/cancelBatchOperationConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function cancelBatchOperationExample(
+  batchOperationKey: BatchOperationKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.cancelBatchOperation({ batchOperationKey });
+}
+```
 
 #### Operation Id
 
@@ -753,23 +1007,19 @@ cancelBatchOperation
 
 Batch operation
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### cancelProcessInstance()
 
 ```ts
-cancelProcessInstance(input): CancelablePromise<void>;
+cancelProcessInstance(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2601](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2601)
+Defined in: [gen/CamundaClient.ts:2689](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2689)
 
 Cancel process instance
 
-Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted.
+Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 -
 
@@ -779,6 +1029,10 @@ Cancels a running process instance. As a cancellation includes more than just th
 
 `object` & `object`
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
@@ -786,12 +1040,14 @@ Cancels a running process instance. As a cancellation includes more than just th
 #### Example
 
 ```ts
-async function cancelProcessInstanceExample() {
+async function cancelProcessInstanceExample(
+  processDefinitionId: ProcessDefinitionId
+) {
   const camunda = createCamundaClient();
 
   // Create a process instance and get its key from the response
   const created = await camunda.createProcessInstance({
-    processDefinitionId: ProcessDefinitionId.assumeExists("order-process"),
+    processDefinitionId,
   });
 
   // Cancel the process instance using the key from the creation response
@@ -814,10 +1070,10 @@ Process instance
 ### cancelProcessInstancesBatchOperation()
 
 ```ts
-cancelProcessInstancesBatchOperation(input, consistencyManagement): CancelablePromise<BatchOperationCreatedResult>;
+cancelProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOperationCreatedResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2666](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2666)
+Defined in: [gen/CamundaClient.ts:2757](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2757)
 
 Cancel process instances (batch)
 
@@ -832,23 +1088,33 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 ##### input
 
-###### filter
+[`ProcessInstanceCancellationBatchOperationRequest`](../type-aliases/ProcessInstanceCancellationBatchOperationRequest.md)
 
-[`ProcessInstanceFilter`](../type-aliases/ProcessInstanceFilter.md)
+##### options?
 
-The process instance filter.
-
-###### operationReference?
-
-`number`
-
-##### consistencyManagement
-
-[`cancelProcessInstancesBatchOperationConsistency`](../type-aliases/cancelProcessInstancesBatchOperationConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+```ts
+async function cancelProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.cancelProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
 
 #### Operation Id
 
@@ -858,10 +1124,6 @@ cancelProcessInstancesBatchOperation
 
 Process instance
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### clearAuthCache()
@@ -870,7 +1132,7 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 clearAuthCache(opts?): void;
 ```
 
-Defined in: [gen/CamundaClient.ts:1438](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1438)
+Defined in: [gen/CamundaClient.ts:1442](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1442)
 
 #### Parameters
 
@@ -893,10 +1155,10 @@ Defined in: [gen/CamundaClient.ts:1438](https://github.com/camunda/orchestration
 ### completeJob()
 
 ```ts
-completeJob(input): CancelablePromise<void>;
+completeJob(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2731](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2731)
+Defined in: [gen/CamundaClient.ts:2820](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2820)
 
 Complete job
 
@@ -910,6 +1172,10 @@ Complete a job with the given payload, which allows completing the associated se
 
 [`completeJobInput`](../type-aliases/completeJobInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
@@ -917,10 +1183,8 @@ Complete a job with the given payload, which allows completing the associated se
 #### Example
 
 ```ts
-async function completeJobExample() {
+async function completeJobExample(jobKey: JobKey) {
   const camunda = createCamundaClient();
-
-  const jobKey = JobKey.assumeExists("2251799813685249");
 
   await camunda.completeJob({
     jobKey,
@@ -945,14 +1209,14 @@ Job
 ### completeUserTask()
 
 ```ts
-completeUserTask(input): CancelablePromise<void>;
+completeUserTask(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2793](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2793)
+Defined in: [gen/CamundaClient.ts:2885](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2885)
 
 Complete user task
 
-Completes a user task with the given key.
+Completes a user task with the given key. Completion waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 -
 
@@ -962,6 +1226,10 @@ Completes a user task with the given key.
 
 [`completeUserTaskInput`](../type-aliases/completeUserTaskInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
@@ -969,10 +1237,8 @@ Completes a user task with the given key.
 #### Example
 
 ```ts
-async function completeUserTaskExample() {
+async function completeUserTaskExample(userTaskKey: UserTaskKey) {
   const camunda = createCamundaClient();
-
-  const userTaskKey = UserTaskKey.assumeExists("2251799813685249");
 
   await camunda.completeUserTask({
     userTaskKey,
@@ -1000,7 +1266,7 @@ User task
 configure(next): void;
 ```
 
-Defined in: [gen/CamundaClient.ts:1342](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1342)
+Defined in: [gen/CamundaClient.ts:1344](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1344)
 
 #### Parameters
 
@@ -1017,10 +1283,10 @@ Defined in: [gen/CamundaClient.ts:1342](https://github.com/camunda/orchestration
 ### correlateMessage()
 
 ```ts
-correlateMessage(input): CancelablePromise<MessageCorrelationResult>;
+correlateMessage(input, options?): CancelablePromise<MessageCorrelationResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2859](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2859)
+Defined in: [gen/CamundaClient.ts:2953](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L2953)
 
 Correlate message
 
@@ -1036,6 +1302,10 @@ Use the publish message endpoint to send messages that can be buffered.
 ##### input
 
 [`MessageCorrelationRequest`](../type-aliases/MessageCorrelationRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
@@ -1073,10 +1343,10 @@ Message
 ### createAdminUser()
 
 ```ts
-createAdminUser(input, consistencyManagement): CancelablePromise<UserCreateResult>;
+createAdminUser(input, options?): CancelablePromise<UserCreateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2922](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2922)
+Defined in: [gen/CamundaClient.ts:3019](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3019)
 
 Create admin user
 
@@ -1090,13 +1360,30 @@ Creates a new user and assigns the admin role to it. This endpoint is only usabl
 
 [`UserRequest`](../type-aliases/UserRequest.md)
 
-##### consistencyManagement
+##### options?
 
-[`createAdminUserConsistency`](../type-aliases/createAdminUserConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserCreateResult`](../type-aliases/UserCreateResult.md)\>
+
+#### Example
+
+```ts
+async function createAdminUserExample(username: Username) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createAdminUser({
+    username,
+    name: "Admin User",
+    email: "admin@example.com",
+    password: "admin-password-123",
+  });
+
+  console.log(`Created admin user: ${result.username}`);
+}
+```
 
 #### Operation Id
 
@@ -1106,19 +1393,15 @@ createAdminUser
 
 Setup
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### createAuthorization()
 
 ```ts
-createAuthorization(input): CancelablePromise<AuthorizationCreateResult>;
+createAuthorization(input, options?): CancelablePromise<AuthorizationCreateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:2984](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L2984)
+Defined in: [gen/CamundaClient.ts:3081](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3081)
 
 Create authorization
 
@@ -1130,11 +1413,34 @@ Create the authorization.
 
 ##### input
 
-[`AuthorizationIdBasedRequest`](../type-aliases/AuthorizationIdBasedRequest.md) | [`AuthorizationPropertyBasedRequest`](../type-aliases/AuthorizationPropertyBasedRequest.md)
+\| [`AuthorizationIdBasedRequest`](../type-aliases/AuthorizationIdBasedRequest.md)
+\| [`AuthorizationPropertyBasedRequest`](../type-aliases/AuthorizationPropertyBasedRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuthorizationCreateResult`](../type-aliases/AuthorizationCreateResult.md)\>
+
+#### Example
+
+```ts
+async function createAuthorizationExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createAuthorization({
+    ownerId: "user-123",
+    ownerType: "USER",
+    resourceId: "order-process",
+    resourceType: "PROCESS_DEFINITION",
+    permissionTypes: ["CREATE_PROCESS_INSTANCE", "READ_PROCESS_INSTANCE"],
+  });
+
+  console.log(`Authorization key: ${result.authorizationKey}`);
+}
+```
 
 #### Operation Id
 
@@ -1149,10 +1455,10 @@ Authorization
 ### createDeployment()
 
 ```ts
-createDeployment(input): CancelablePromise<ExtendedDeploymentResult>;
+createDeployment(input, options?): CancelablePromise<ExtendedDeploymentResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3047](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3047)
+Defined in: [gen/CamundaClient.ts:3146](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3146)
 
 Deploy resources
 
@@ -1166,6 +1472,10 @@ This is an atomic call, i.e. either all resources are deployed or none of them a
 ##### input
 
 [`createDeploymentInput`](../type-aliases/createDeploymentInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
@@ -1209,10 +1519,10 @@ Resource
 ### createDocument()
 
 ```ts
-createDocument(input): CancelablePromise<DocumentReference>;
+createDocument(input, options?): CancelablePromise<DocumentReference>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3127](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3127)
+Defined in: [gen/CamundaClient.ts:3230](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3230)
 
 Upload document
 
@@ -1228,9 +1538,30 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 
 [`createDocumentInput`](../type-aliases/createDocumentInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DocumentReference`](../type-aliases/DocumentReference.md)\>
+
+#### Example
+
+```ts
+async function createDocumentExample() {
+  const camunda = createCamundaClient();
+
+  const file = new Blob(["Hello, world!"], { type: "text/plain" });
+
+  const result = await camunda.createDocument({
+    file,
+    metadata: { fileName: "hello.txt" },
+  });
+
+  console.log(`Document ID: ${result.documentId}`);
+}
+```
 
 #### Operation Id
 
@@ -1245,10 +1576,10 @@ Document
 ### createDocumentLink()
 
 ```ts
-createDocumentLink(input): CancelablePromise<DocumentLink>;
+createDocumentLink(input, options?): CancelablePromise<DocumentLink>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3190](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3190)
+Defined in: [gen/CamundaClient.ts:3297](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3297)
 
 Create document link
 
@@ -1264,9 +1595,28 @@ Note that this is currently supported for document stores of type: AWS, GCP
 
 [`createDocumentLinkInput`](../type-aliases/createDocumentLinkInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DocumentLink`](../type-aliases/DocumentLink.md)\>
+
+#### Example
+
+```ts
+async function createDocumentLinkExample(documentId: DocumentId) {
+  const camunda = createCamundaClient();
+
+  const link = await camunda.createDocumentLink({
+    documentId,
+    timeToLive: 3600000,
+  });
+
+  console.log(`Document link: ${link.url}`);
+}
+```
 
 #### Operation Id
 
@@ -1281,10 +1631,10 @@ Document
 ### createDocuments()
 
 ```ts
-createDocuments(input): CancelablePromise<DocumentCreationBatchResponse>;
+createDocuments(input, options?): CancelablePromise<DocumentCreationBatchResponse>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3267](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3267)
+Defined in: [gen/CamundaClient.ts:3378](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3378)
 
 Upload multiple documents
 
@@ -1312,9 +1662,33 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 
 [`createDocumentsInput`](../type-aliases/createDocumentsInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DocumentCreationBatchResponse`](../type-aliases/DocumentCreationBatchResponse.md)\>
+
+#### Example
+
+```ts
+async function createDocumentsExample() {
+  const camunda = createCamundaClient();
+
+  const file1 = new Blob(["File one"], { type: "text/plain" });
+  const file2 = new Blob(["File two"], { type: "text/plain" });
+
+  const result = await camunda.createDocuments({
+    files: [file1, file2],
+    metadataList: [{ fileName: "one.txt" }, { fileName: "two.txt" }],
+  });
+
+  for (const doc of result.createdDocuments ?? []) {
+    console.log(`Created: ${doc.documentId}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -1329,15 +1703,19 @@ Document
 ### createElementInstanceVariables()
 
 ```ts
-createElementInstanceVariables(input): CancelablePromise<void>;
+createElementInstanceVariables(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3329](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3329)
+Defined in: [gen/CamundaClient.ts:3448](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3448)
 
 Update element instance variables
 
 Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.
 Specify the element instance in the `elementInstanceKey` parameter.
+Variable updates can be delayed by listener-related processing; if processing exceeds the
+request timeout, this endpoint can return 504. Other gateway timeout causes are also
+possible. Retry with backoff and inspect listener worker availability and logs when this
+repeats.
 
 -
 
@@ -1347,9 +1725,28 @@ Specify the element instance in the `elementInstanceKey` parameter.
 
 [`createElementInstanceVariablesInput`](../type-aliases/createElementInstanceVariablesInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function createElementInstanceVariablesExample(
+  elementInstanceKey: ElementInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.createElementInstanceVariables({
+    elementInstanceKey,
+    variables: { orderId: "ORD-12345", status: "processing" },
+  });
+}
+```
 
 #### Operation Id
 
@@ -1364,10 +1761,10 @@ Element instance
 ### createGlobalClusterVariable()
 
 ```ts
-createGlobalClusterVariable(input): CancelablePromise<ClusterVariableResult>;
+createGlobalClusterVariable(input, options?): CancelablePromise<ClusterVariableResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3389](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3389)
+Defined in: [gen/CamundaClient.ts:3512](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3512)
 
 Create a global-scoped cluster variable
 
@@ -1381,9 +1778,28 @@ Create a global-scoped cluster variable.
 
 [`CreateClusterVariableRequest`](../type-aliases/CreateClusterVariableRequest.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterVariableResult`](../type-aliases/ClusterVariableResult.md)\>
+
+#### Example
+
+```ts
+async function createGlobalClusterVariableExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createGlobalClusterVariable({
+    name: "feature-flags",
+    value: { darkMode: true },
+  });
+
+  console.log(`Created: ${result.name}`);
+}
+```
 
 #### Operation Id
 
@@ -1395,13 +1811,67 @@ Cluster Variable
 
 ---
 
+### createGlobalTaskListener()
+
+```ts
+createGlobalTaskListener(input, options?): CancelablePromise<GlobalTaskListenerResult>;
+```
+
+Defined in: [gen/CamundaClient.ts:3574](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3574)
+
+Create global user task listener
+
+Create a new global user task listener.
+
+-
+
+#### Parameters
+
+##### input
+
+[`CreateGlobalTaskListenerRequest`](../type-aliases/CreateGlobalTaskListenerRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GlobalTaskListenerResult`](../type-aliases/GlobalTaskListenerResult.md)\>
+
+#### Example
+
+```ts
+async function createGlobalTaskListenerExample(id: GlobalListenerId) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createGlobalTaskListener({
+    id,
+    eventTypes: ["completing"],
+    type: "audit-log-listener",
+  });
+
+  console.log(`Created listener: ${result.id}`);
+}
+```
+
+#### Operation Id
+
+createGlobalTaskListener
+
+#### Tags
+
+Global listener
+
+---
+
 ### createGroup()
 
 ```ts
-createGroup(input): CancelablePromise<GroupCreateResult>;
+createGroup(input, options?): CancelablePromise<GroupCreateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3447](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3447)
+Defined in: [gen/CamundaClient.ts:3636](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3636)
 
 Create group
 
@@ -1415,9 +1885,28 @@ Create a new group.
 
 [`GroupCreateRequest`](../type-aliases/GroupCreateRequest.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GroupCreateResult`](../type-aliases/GroupCreateResult.md)\>
+
+#### Example
+
+```ts
+async function createGroupExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createGroup({
+    groupId: "engineering-team",
+    name: "Engineering Team",
+  });
+
+  console.log(`Created group: ${result.groupId}`);
+}
+```
 
 #### Operation Id
 
@@ -1435,9 +1924,14 @@ Group
 createJobWorker<In, Out, Headers>(cfg): JobWorker;
 ```
 
-Defined in: [gen/CamundaClient.ts:12362](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L12362)
+Defined in: [gen/CamundaClient.ts:13711](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13711)
 
 Create a job worker that activates and processes jobs of the given type.
+
+Worker configuration fields inherit global defaults resolved via the
+unified configuration (environment variables or equivalent `CAMUNDA_WORKER_*`
+keys provided via `CamundaOptions.config`) when not explicitly set on the
+config object.
 
 #### Type Parameters
 
@@ -1471,7 +1965,7 @@ Worker configuration
 async function createJobWorkerExample() {
   const camunda = createCamundaClient();
 
-  const worker = camunda.createJobWorker({
+  const _worker = camunda.createJobWorker({
     jobType: "payment-processing",
     jobTimeoutMs: 30000,
     maxParallelJobs: 5,
@@ -1517,10 +2011,10 @@ async function jobWorkerWithErrorHandlingExample() {
 ### createMappingRule()
 
 ```ts
-createMappingRule(input): CancelablePromise<MappingRuleCreateUpdateResult>;
+createMappingRule(input, options?): CancelablePromise<MappingRuleCreateUpdateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3506](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3506)
+Defined in: [gen/CamundaClient.ts:3699](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3699)
 
 Create mapping rule
 
@@ -1534,9 +2028,30 @@ Create a new mapping rule
 
 [`MappingRuleCreateRequest`](../type-aliases/MappingRuleCreateRequest.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`MappingRuleCreateUpdateResult`](../type-aliases/MappingRuleCreateUpdateResult.md)\>
+
+#### Example
+
+```ts
+async function createMappingRuleExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createMappingRule({
+    mappingRuleId: "ldap-group-mapping",
+    name: "LDAP Group Mapping",
+    claimName: "groups",
+    claimValue: "engineering",
+  });
+
+  console.log(`Created mapping rule: ${result.mappingRuleId}`);
+}
+```
 
 #### Operation Id
 
@@ -1551,10 +2066,10 @@ Mapping rule
 ### createProcessInstance()
 
 ```ts
-createProcessInstance(input): CancelablePromise<CreateProcessInstanceResult>;
+createProcessInstance(input, options?): CancelablePromise<CreateProcessInstanceResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3574](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3574)
+Defined in: [gen/CamundaClient.ts:3769](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3769)
 
 Create process instance
 
@@ -1571,191 +2086,12 @@ when awaitCompletion is enabled.
 
 ##### input
 
-\{
-`awaitCompletion?`: `boolean`;
-`fetchVariables?`: `string`[];
-`operationReference?`: `number`;
-`processDefinitionId`: [`ProcessDefinitionId`](../type-aliases/ProcessDefinitionId.md);
-`processDefinitionVersion?`: `number`;
-`requestTimeout?`: `number`;
-`runtimeInstructions?`: [`ProcessInstanceCreationRuntimeInstruction`](../type-aliases/ProcessInstanceCreationRuntimeInstruction.md)[];
-`startInstructions?`: [`ProcessInstanceCreationStartInstruction`](../type-aliases/ProcessInstanceCreationStartInstruction.md)[];
-`tags?`: [`TagSet`](../type-aliases/TagSet.md);
-`tenantId?`: [`TenantId`](../type-aliases/TenantId.md);
-`variables?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-\}
+\| [`ProcessInstanceCreationInstructionByKey`](../type-aliases/ProcessInstanceCreationInstructionByKey.md)
+\| [`ProcessInstanceCreationInstructionById`](../type-aliases/ProcessInstanceCreationInstructionById.md)
 
-###### awaitCompletion?
+##### options?
 
-`boolean`
-
-Wait for the process instance to complete. If the process instance completion does
-not occur within the requestTimeout, the request will be closed. This can lead to a 504
-response status. Disabled by default.
-
-###### fetchVariables?
-
-`string`[]
-
-List of variables by name to be included in the response when awaitCompletion is set to true.
-If empty, all visible variables in the root scope will be returned.
-
-###### operationReference?
-
-`number`
-
-###### processDefinitionId
-
-[`ProcessDefinitionId`](../type-aliases/ProcessDefinitionId.md)
-
-The BPMN process id of the process definition to start an instance of.
-
-###### processDefinitionVersion?
-
-`number`
-
-The version of the process. By default, the latest version of the process is used.
-
-###### requestTimeout?
-
-`number`
-
-Timeout (in ms) the request waits for the process to complete. By default or
-when set to 0, the generic request timeout configured in the cluster is applied.
-
-###### runtimeInstructions?
-
-[`ProcessInstanceCreationRuntimeInstruction`](../type-aliases/ProcessInstanceCreationRuntimeInstruction.md)[]
-
-Runtime instructions (alpha). List of instructions that affect the runtime behavior of
-the process instance. Refer to specific instruction types for more details.
-
-This parameter is an alpha feature and may be subject to change
-in future releases.
-
-###### startInstructions?
-
-[`ProcessInstanceCreationStartInstruction`](../type-aliases/ProcessInstanceCreationStartInstruction.md)[]
-
-List of start instructions. By default, the process instance will start at
-the start event. If provided, the process instance will apply start instructions
-after it has been created.
-
-###### tags?
-
-[`TagSet`](../type-aliases/TagSet.md)
-
-###### tenantId?
-
-[`TenantId`](../type-aliases/TenantId.md)
-
-The tenant id of the process definition.
-
-###### variables?
-
-\{
-\[`key`: `string`\]: `unknown`;
-\}
-
-JSON object that will instantiate the variables for the root variable scope
-of the process instance.
-
-|
-
-\{
-`awaitCompletion?`: `boolean`;
-`fetchVariables?`: `string`[];
-`operationReference?`: `number`;
-`processDefinitionKey`: [`ProcessDefinitionKey`](../type-aliases/ProcessDefinitionKey.md);
-`processDefinitionVersion?`: `number`;
-`requestTimeout?`: `number`;
-`runtimeInstructions?`: [`ProcessInstanceCreationRuntimeInstruction`](../type-aliases/ProcessInstanceCreationRuntimeInstruction.md)[];
-`startInstructions?`: [`ProcessInstanceCreationStartInstruction`](../type-aliases/ProcessInstanceCreationStartInstruction.md)[];
-`tags?`: [`TagSet`](../type-aliases/TagSet.md);
-`tenantId?`: [`TenantId`](../type-aliases/TenantId.md);
-`variables?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-\}
-
-###### awaitCompletion?
-
-`boolean`
-
-Wait for the process instance to complete. If the process instance completion does
-not occur within the requestTimeout, the request will be closed. This can lead to a 504
-response status. Disabled by default.
-
-###### fetchVariables?
-
-`string`[]
-
-List of variables by name to be included in the response when awaitCompletion is set to true.
-If empty, all visible variables in the root scope will be returned.
-
-###### operationReference?
-
-`number`
-
-###### processDefinitionKey
-
-[`ProcessDefinitionKey`](../type-aliases/ProcessDefinitionKey.md)
-
-The unique key identifying the process definition, for example, returned for a process in the
-deploy resources endpoint.
-
-###### processDefinitionVersion?
-
-`number`
-
-As the version is already identified by the `processDefinitionKey`, the value of this field is ignored.
-It's here for backwards-compatibility only as previous releases accepted it in request bodies.
-
-###### requestTimeout?
-
-`number`
-
-Timeout (in ms) the request waits for the process to complete. By default or
-when set to 0, the generic request timeout configured in the cluster is applied.
-
-###### runtimeInstructions?
-
-[`ProcessInstanceCreationRuntimeInstruction`](../type-aliases/ProcessInstanceCreationRuntimeInstruction.md)[]
-
-Runtime instructions (alpha). List of instructions that affect the runtime behavior of
-the process instance. Refer to specific instruction types for more details.
-
-This parameter is an alpha feature and may be subject to change
-in future releases.
-
-###### startInstructions?
-
-[`ProcessInstanceCreationStartInstruction`](../type-aliases/ProcessInstanceCreationStartInstruction.md)[]
-
-List of start instructions. By default, the process instance will start at
-the start event. If provided, the process instance will apply start instructions
-after it has been created.
-
-###### tags?
-
-[`TagSet`](../type-aliases/TagSet.md)
-
-###### tenantId?
-
-[`TenantId`](../type-aliases/TenantId.md)
-
-The tenant id of the process definition.
-
-###### variables?
-
-\{
-\[`key`: `string`\]: `unknown`;
-\}
-
-JSON object that will instantiate the variables for the root variable scope
-of the process instance.
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
@@ -1764,11 +2100,13 @@ of the process instance.
 #### Examples
 
 ```ts
-async function createProcessInstanceByIdExample() {
+async function createProcessInstanceByIdExample(
+  processDefinitionId: ProcessDefinitionId
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createProcessInstance({
-    processDefinitionId: ProcessDefinitionId.assumeExists("order-process"),
+    processDefinitionId,
     variables: {
       orderId: "ORD-12345",
       amount: 99.95,
@@ -1780,13 +2118,12 @@ async function createProcessInstanceByIdExample() {
 ```
 
 ```ts
-async function createProcessInstanceByKeyExample() {
+async function createProcessInstanceByKeyExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   // Key from a previous API response (e.g. deployment)
-  const processDefinitionKey =
-    ProcessDefinitionKey.assumeExists("2251799813685249");
-
   const result = await camunda.createProcessInstance({
     processDefinitionKey,
     variables: {
@@ -1812,10 +2149,10 @@ Process instance
 ### createRole()
 
 ```ts
-createRole(input): CancelablePromise<RoleCreateResult>;
+createRole(input, options?): CancelablePromise<RoleCreateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3636](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3636)
+Defined in: [gen/CamundaClient.ts:3835](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3835)
 
 Create role
 
@@ -1829,9 +2166,28 @@ Create a new role.
 
 [`RoleCreateRequest`](../type-aliases/RoleCreateRequest.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RoleCreateResult`](../type-aliases/RoleCreateResult.md)\>
+
+#### Example
+
+```ts
+async function createRoleExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createRole({
+    roleId: "process-admin",
+    name: "Process Admin",
+  });
+
+  console.log(`Created role: ${result.roleId}`);
+}
+```
 
 #### Operation Id
 
@@ -1846,10 +2202,10 @@ Role
 ### createTenant()
 
 ```ts
-createTenant(input): CancelablePromise<TenantCreateResult>;
+createTenant(input, options?): CancelablePromise<TenantCreateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3694](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3694)
+Defined in: [gen/CamundaClient.ts:3897](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3897)
 
 Create tenant
 
@@ -1863,9 +2219,28 @@ Creates a new tenant.
 
 [`TenantCreateRequest`](../type-aliases/TenantCreateRequest.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantCreateResult`](../type-aliases/TenantCreateResult.md)\>
+
+#### Example
+
+```ts
+async function createTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createTenant({
+    tenantId,
+    name: "Customer Service",
+  });
+
+  console.log(`Created tenant: ${result.tenantId}`);
+}
+```
 
 #### Operation Id
 
@@ -1880,10 +2255,10 @@ Tenant
 ### createTenantClusterVariable()
 
 ```ts
-createTenantClusterVariable(input): CancelablePromise<ClusterVariableResult>;
+createTenantClusterVariable(input, options?): CancelablePromise<ClusterVariableResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3752](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3752)
+Defined in: [gen/CamundaClient.ts:3959](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L3959)
 
 Create a tenant-scoped cluster variable
 
@@ -1897,9 +2272,29 @@ Create a new cluster variable for the given tenant.
 
 [`createTenantClusterVariableInput`](../type-aliases/createTenantClusterVariableInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterVariableResult`](../type-aliases/ClusterVariableResult.md)\>
+
+#### Example
+
+```ts
+async function createTenantClusterVariableExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createTenantClusterVariable({
+    tenantId,
+    name: "config",
+    value: { region: "us-east-1" },
+  });
+
+  console.log(`Created: ${result.name}`);
+}
+```
 
 #### Operation Id
 
@@ -1911,13 +2306,72 @@ Cluster Variable
 
 ---
 
+### createThreadedJobWorker()
+
+```ts
+createThreadedJobWorker<In, Out, Headers>(cfg): ThreadedJobWorker;
+```
+
+Defined in: [gen/CamundaClient.ts:13756](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13756)
+
+Create a threaded job worker that runs handler logic in a pool of worker threads.
+The handler must be a separate module file that exports a default function with
+signature `(job, client) => Promise<JobActionReceipt>`.
+
+This keeps the main event loop free for polling and I/O, dramatically improving
+throughput for CPU-bound job handlers.
+
+Worker configuration fields inherit global defaults resolved via the
+unified configuration (environment variables or equivalent `CAMUNDA_WORKER_*`
+keys provided via `CamundaOptions.config`) when not explicitly set on the
+config object.
+
+#### Type Parameters
+
+##### In
+
+`In` _extends_ `ZodType`\<`unknown`, `unknown`, `$ZodTypeInternals`\<`unknown`, `unknown`\>\> = `any`
+
+##### Out
+
+`Out` _extends_ `ZodType`\<`unknown`, `unknown`, `$ZodTypeInternals`\<`unknown`, `unknown`\>\> = `any`
+
+##### Headers
+
+`Headers` _extends_ `ZodType`\<`unknown`, `unknown`, `$ZodTypeInternals`\<`unknown`, `unknown`\>\> = `any`
+
+#### Parameters
+
+##### cfg
+
+[`ThreadedJobWorkerConfig`](../interfaces/ThreadedJobWorkerConfig.md)\<`In`, `Out`, `Headers`\>
+
+Threaded worker configuration
+
+#### Returns
+
+[`ThreadedJobWorker`](../interfaces/ThreadedJobWorker.md)
+
+#### Example
+
+```ts
+const worker = client.createThreadedJobWorker({
+  jobType: "cpu-heavy-task",
+  handlerModule: "./my-handler.js",
+  maxParallelJobs: 32,
+  jobTimeoutMs: 30000,
+});
+```
+
+---
+
 ### createUser()
 
 ```ts
-createUser(input, consistencyManagement): CancelablePromise<UserCreateResult>;
+createUser(input, options?): CancelablePromise<UserCreateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3813](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3813)
+Defined in: [gen/CamundaClient.ts:4023](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4023)
 
 Create user
 
@@ -1931,13 +2385,30 @@ Create a new user.
 
 [`UserRequest`](../type-aliases/UserRequest.md)
 
-##### consistencyManagement
+##### options?
 
-[`createUserConsistency`](../type-aliases/createUserConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserCreateResult`](../type-aliases/UserCreateResult.md)\>
+
+#### Example
+
+```ts
+async function createUserExample(username: Username) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createUser({
+    username,
+    name: "Alice Smith",
+    email: "alice@example.com",
+    password: "secure-password-123",
+  });
+
+  console.log(`Created user: ${result.username}`);
+}
+```
 
 #### Operation Id
 
@@ -1947,19 +2418,15 @@ createUser
 
 User
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### deleteAuthorization()
 
 ```ts
-deleteAuthorization(input): CancelablePromise<void>;
+deleteAuthorization(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3875](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3875)
+Defined in: [gen/CamundaClient.ts:4085](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4085)
 
 Delete authorization
 
@@ -1973,9 +2440,23 @@ Deletes the authorization with the given key.
 
 [`deleteAuthorizationInput`](../type-aliases/deleteAuthorizationInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteAuthorizationExample(authorizationKey: AuthorizationKey) {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteAuthorization({ authorizationKey });
+}
+```
 
 #### Operation Id
 
@@ -1990,10 +2471,10 @@ Authorization
 ### deleteDecisionInstance()
 
 ```ts
-deleteDecisionInstance(input, consistencyManagement): CancelablePromise<void>;
+deleteDecisionInstance(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:3934](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L3934)
+Defined in: [gen/CamundaClient.ts:4147](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4147)
 
 Delete decision instance
 
@@ -2007,13 +2488,25 @@ Delete all associated decision evaluations based on provided key.
 
 `object` & `object`
 
-##### consistencyManagement
+##### options?
 
-[`deleteDecisionInstanceConsistency`](../type-aliases/deleteDecisionInstanceConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteDecisionInstanceExample(
+  decisionEvaluationKey: DecisionEvaluationKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteDecisionInstance({ decisionEvaluationKey });
+}
+```
 
 #### Operation Id
 
@@ -2023,19 +2516,15 @@ deleteDecisionInstance
 
 Decision instance
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### deleteDecisionInstancesBatchOperation()
 
 ```ts
-deleteDecisionInstancesBatchOperation(input, consistencyManagement): CancelablePromise<BatchOperationCreatedResult>;
+deleteDecisionInstancesBatchOperation(input, options?): CancelablePromise<BatchOperationCreatedResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4001](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4001)
+Defined in: [gen/CamundaClient.ts:4213](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4213)
 
 Delete decision instances (batch)
 
@@ -2048,134 +2537,29 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 ##### input
 
-###### filter
+[`DecisionInstanceDeletionBatchOperationRequest`](../type-aliases/DecisionInstanceDeletionBatchOperationRequest.md)
 
-\{
-`decisionDefinitionId?`: [`DecisionDefinitionId`](../type-aliases/DecisionDefinitionId.md);
-`decisionDefinitionKey?`: [`DecisionDefinitionKeyFilterProperty`](../type-aliases/DecisionDefinitionKeyFilterProperty.md);
-`decisionDefinitionName?`: `string`;
-`decisionDefinitionType?`: [`DecisionDefinitionTypeEnum`](../type-aliases/DecisionDefinitionTypeEnum.md);
-`decisionDefinitionVersion?`: `number`;
-`decisionEvaluationInstanceKey?`: [`DecisionEvaluationInstanceKeyFilterProperty`](../type-aliases/DecisionEvaluationInstanceKeyFilterProperty.md);
-`decisionEvaluationKey?`: [`DecisionEvaluationKey`](../type-aliases/DecisionEvaluationKey.md);
-`decisionRequirementsKey?`: [`DecisionRequirementsKeyFilterProperty`](../type-aliases/DecisionRequirementsKeyFilterProperty.md);
-`elementInstanceKey?`: [`ElementInstanceKeyFilterProperty`](../type-aliases/ElementInstanceKeyFilterProperty.md);
-`evaluationDate?`: [`DateTimeFilterProperty`](../type-aliases/DateTimeFilterProperty.md);
-`evaluationFailure?`: `string`;
-`processDefinitionKey?`: [`ProcessDefinitionKey`](../type-aliases/ProcessDefinitionKey.md);
-`processInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`rootDecisionDefinitionKey?`: [`DecisionDefinitionKeyFilterProperty`](../type-aliases/DecisionDefinitionKeyFilterProperty.md);
-`state?`: [`DecisionInstanceStateFilterProperty`](../type-aliases/DecisionInstanceStateFilterProperty.md);
-`tenantId?`: [`TenantId`](../type-aliases/TenantId.md);
-\}
+##### options?
 
-Decision instance search filter.
-
-###### filter.decisionDefinitionId?
-
-[`DecisionDefinitionId`](../type-aliases/DecisionDefinitionId.md)
-
-The ID of the DMN decision.
-
-###### filter.decisionDefinitionKey?
-
-[`DecisionDefinitionKeyFilterProperty`](../type-aliases/DecisionDefinitionKeyFilterProperty.md)
-
-The key of the decision.
-
-###### filter.decisionDefinitionName?
-
-`string`
-
-The name of the DMN decision.
-
-###### filter.decisionDefinitionType?
-
-[`DecisionDefinitionTypeEnum`](../type-aliases/DecisionDefinitionTypeEnum.md)
-
-###### filter.decisionDefinitionVersion?
-
-`number`
-
-The version of the decision.
-
-###### filter.decisionEvaluationInstanceKey?
-
-[`DecisionEvaluationInstanceKeyFilterProperty`](../type-aliases/DecisionEvaluationInstanceKeyFilterProperty.md)
-
-The key of the decision evaluation instance.
-
-###### filter.decisionEvaluationKey?
-
-[`DecisionEvaluationKey`](../type-aliases/DecisionEvaluationKey.md)
-
-The key of the parent decision evaluation. Note that this is not the identifier of an individual decision instance; the `decisionEvaluationInstanceKey` is the identifier for a decision instance.
-
-###### filter.decisionRequirementsKey?
-
-[`DecisionRequirementsKeyFilterProperty`](../type-aliases/DecisionRequirementsKeyFilterProperty.md)
-
-The key of the decision requirements definition.
-
-###### filter.elementInstanceKey?
-
-[`ElementInstanceKeyFilterProperty`](../type-aliases/ElementInstanceKeyFilterProperty.md)
-
-The key of the element instance this decision instance is linked to.
-
-###### filter.evaluationDate?
-
-[`DateTimeFilterProperty`](../type-aliases/DateTimeFilterProperty.md)
-
-The evaluation date of the decision instance.
-
-###### filter.evaluationFailure?
-
-`string`
-
-The evaluation failure of the decision instance.
-
-###### filter.processDefinitionKey?
-
-[`ProcessDefinitionKey`](../type-aliases/ProcessDefinitionKey.md)
-
-The key of the process definition.
-
-###### filter.processInstanceKey?
-
-[`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md)
-
-The key of the process instance.
-
-###### filter.rootDecisionDefinitionKey?
-
-[`DecisionDefinitionKeyFilterProperty`](../type-aliases/DecisionDefinitionKeyFilterProperty.md)
-
-The key of the root decision definition.
-
-###### filter.state?
-
-[`DecisionInstanceStateFilterProperty`](../type-aliases/DecisionInstanceStateFilterProperty.md)
-
-The state of the decision instance.
-
-###### filter.tenantId?
-
-[`TenantId`](../type-aliases/TenantId.md)
-
-The tenant ID of the decision instance.
-
-###### operationReference?
-
-`number`
-
-##### consistencyManagement
-
-[`deleteDecisionInstancesBatchOperationConsistency`](../type-aliases/deleteDecisionInstancesBatchOperationConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+```ts
+async function deleteDecisionInstancesBatchOperationExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.deleteDecisionInstancesBatchOperation({
+    filter: {},
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
 
 #### Operation Id
 
@@ -2185,19 +2569,15 @@ deleteDecisionInstancesBatchOperation
 
 Decision instance
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### deleteDocument()
 
 ```ts
-deleteDocument(input): CancelablePromise<void>;
+deleteDocument(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4066](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4066)
+Defined in: [gen/CamundaClient.ts:4278](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4278)
 
 Delete document
 
@@ -2213,9 +2593,23 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 
 [`deleteDocumentInput`](../type-aliases/deleteDocumentInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteDocumentExample(documentId: DocumentId) {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteDocument({ documentId });
+}
+```
 
 #### Operation Id
 
@@ -2230,10 +2624,10 @@ Document
 ### deleteGlobalClusterVariable()
 
 ```ts
-deleteGlobalClusterVariable(input): CancelablePromise<void>;
+deleteGlobalClusterVariable(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4126](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4126)
+Defined in: [gen/CamundaClient.ts:4342](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4342)
 
 Delete a global-scoped cluster variable
 
@@ -2247,9 +2641,23 @@ Delete a global-scoped cluster variable.
 
 [`deleteGlobalClusterVariableInput`](../type-aliases/deleteGlobalClusterVariableInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteGlobalClusterVariableExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteGlobalClusterVariable({ name: "feature-flags" });
+}
+```
 
 #### Operation Id
 
@@ -2261,13 +2669,63 @@ Cluster Variable
 
 ---
 
+### deleteGlobalTaskListener()
+
+```ts
+deleteGlobalTaskListener(input, options?): CancelablePromise<void>;
+```
+
+Defined in: [gen/CamundaClient.ts:4404](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4404)
+
+Delete global user task listener
+
+Deletes a global user task listener.
+
+-
+
+#### Parameters
+
+##### input
+
+[`deleteGlobalTaskListenerInput`](../type-aliases/deleteGlobalTaskListenerInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteGlobalTaskListenerExample(id: GlobalListenerId) {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteGlobalTaskListener({
+    id,
+  });
+}
+```
+
+#### Operation Id
+
+deleteGlobalTaskListener
+
+#### Tags
+
+Global listener
+
+---
+
 ### deleteGroup()
 
 ```ts
-deleteGroup(input): CancelablePromise<void>;
+deleteGroup(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4184](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4184)
+Defined in: [gen/CamundaClient.ts:4466](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4466)
 
 Delete group
 
@@ -2281,9 +2739,23 @@ Deletes the group with the given ID.
 
 [`deleteGroupInput`](../type-aliases/deleteGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteGroupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteGroup({ groupId: "engineering-team" });
+}
+```
 
 #### Operation Id
 
@@ -2298,10 +2770,10 @@ Group
 ### deleteMappingRule()
 
 ```ts
-deleteMappingRule(input): CancelablePromise<void>;
+deleteMappingRule(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4243](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4243)
+Defined in: [gen/CamundaClient.ts:4529](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4529)
 
 Delete a mapping rule
 
@@ -2315,9 +2787,23 @@ Deletes the mapping rule with the given ID.
 
 [`deleteMappingRuleInput`](../type-aliases/deleteMappingRuleInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteMappingRuleExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteMappingRule({ mappingRuleId: "ldap-group-mapping" });
+}
+```
 
 #### Operation Id
 
@@ -2332,10 +2818,10 @@ Mapping rule
 ### deleteProcessInstance()
 
 ```ts
-deleteProcessInstance(input, consistencyManagement): CancelablePromise<void>;
+deleteProcessInstance(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4302](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4302)
+Defined in: [gen/CamundaClient.ts:4591](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4591)
 
 Delete process instance
 
@@ -2349,13 +2835,25 @@ Deletes a process instance. Only instances that are completed or terminated can 
 
 `object` & `object`
 
-##### consistencyManagement
+##### options?
 
-[`deleteProcessInstanceConsistency`](../type-aliases/deleteProcessInstanceConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteProcessInstanceExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteProcessInstance({ processInstanceKey });
+}
+```
 
 #### Operation Id
 
@@ -2365,19 +2863,15 @@ deleteProcessInstance
 
 Process instance
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### deleteProcessInstancesBatchOperation()
 
 ```ts
-deleteProcessInstancesBatchOperation(input, consistencyManagement): CancelablePromise<BatchOperationCreatedResult>;
+deleteProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOperationCreatedResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4370](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4370)
+Defined in: [gen/CamundaClient.ts:4658](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4658)
 
 Delete process instances (batch)
 
@@ -2391,23 +2885,33 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 ##### input
 
-###### filter
+[`ProcessInstanceDeletionBatchOperationRequest`](../type-aliases/ProcessInstanceDeletionBatchOperationRequest.md)
 
-[`ProcessInstanceFilter`](../type-aliases/ProcessInstanceFilter.md)
+##### options?
 
-The process instance filter.
-
-###### operationReference?
-
-`number`
-
-##### consistencyManagement
-
-[`deleteProcessInstancesBatchOperationConsistency`](../type-aliases/deleteProcessInstancesBatchOperationConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+```ts
+async function deleteProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.deleteProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
 
 #### Operation Id
 
@@ -2417,19 +2921,15 @@ deleteProcessInstancesBatchOperation
 
 Process instance
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### deleteResource()
 
 ```ts
-deleteResource(input): CancelablePromise<DeleteResourceResponse>;
+deleteResource(input, options?): CancelablePromise<DeleteResourceResponse>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4446](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4446)
+Defined in: [gen/CamundaClient.ts:4732](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4732)
 
 Delete resource
 
@@ -2455,6 +2955,10 @@ will be deleted.
 
 `object` & `object`
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DeleteResourceResponse`](../type-aliases/DeleteResourceResponse.md)\>
@@ -2462,12 +2966,10 @@ will be deleted.
 #### Example
 
 ```ts
-async function deleteResourceExample() {
+async function deleteResourceExample(resourceKey: ProcessDefinitionKey) {
   const camunda = createCamundaClient();
 
   // Use a process definition key as a resource key for deletion
-  const resourceKey = ProcessDefinitionKey.assumeExists("2251799813685249");
-
   await camunda.deleteResource({
     resourceKey,
   });
@@ -2487,10 +2989,10 @@ Resource
 ### deleteRole()
 
 ```ts
-deleteRole(input): CancelablePromise<void>;
+deleteRole(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4506](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4506)
+Defined in: [gen/CamundaClient.ts:4796](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4796)
 
 Delete role
 
@@ -2504,9 +3006,23 @@ Deletes the role with the given ID.
 
 [`deleteRoleInput`](../type-aliases/deleteRoleInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteRoleExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteRole({ roleId: "process-admin" });
+}
+```
 
 #### Operation Id
 
@@ -2521,10 +3037,10 @@ Role
 ### deleteTenant()
 
 ```ts
-deleteTenant(input): CancelablePromise<void>;
+deleteTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4564](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4564)
+Defined in: [gen/CamundaClient.ts:4858](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4858)
 
 Delete tenant
 
@@ -2538,9 +3054,23 @@ Deletes an existing tenant.
 
 [`deleteTenantInput`](../type-aliases/deleteTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteTenant({ tenantId });
+}
+```
 
 #### Operation Id
 
@@ -2555,10 +3085,10 @@ Tenant
 ### deleteTenantClusterVariable()
 
 ```ts
-deleteTenantClusterVariable(input): CancelablePromise<void>;
+deleteTenantClusterVariable(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4622](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4622)
+Defined in: [gen/CamundaClient.ts:4920](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4920)
 
 Delete a tenant-scoped cluster variable
 
@@ -2572,9 +3102,26 @@ Delete a tenant-scoped cluster variable.
 
 [`deleteTenantClusterVariableInput`](../type-aliases/deleteTenantClusterVariableInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteTenantClusterVariableExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteTenantClusterVariable({
+    tenantId,
+    name: "config",
+  });
+}
+```
 
 #### Operation Id
 
@@ -2589,10 +3136,10 @@ Cluster Variable
 ### deleteUser()
 
 ```ts
-deleteUser(input, consistencyManagement): CancelablePromise<void>;
+deleteUser(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4681](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4681)
+Defined in: [gen/CamundaClient.ts:4982](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L4982)
 
 Delete user
 
@@ -2606,13 +3153,23 @@ Deletes a user.
 
 [`deleteUserInput`](../type-aliases/deleteUserInput.md)
 
-##### consistencyManagement
+##### options?
 
-[`deleteUserConsistency`](../type-aliases/deleteUserConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function deleteUserExample(username: Username) {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteUser({ username });
+}
+```
 
 #### Operation Id
 
@@ -2622,10 +3179,6 @@ deleteUser
 
 User
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### deployResourcesFromFiles()
@@ -2634,7 +3187,7 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 deployResourcesFromFiles(resourceFilenames, options?): CancelablePromise<ExtendedDeploymentResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:12378](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L12378)
+Defined in: [gen/CamundaClient.ts:13784](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13784)
 
 Node-only convenience: deploy resources from local filesystem paths.
 
@@ -2668,7 +3221,7 @@ ExtendedDeploymentResult
 emitSupportLogPreamble(): void;
 ```
 
-Defined in: [gen/CamundaClient.ts:1468](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1468)
+Defined in: [gen/CamundaClient.ts:1472](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1472)
 
 Emit the standard support log preamble & redacted configuration to the current support logger.
 Safe to call multiple times; subsequent calls are ignored (idempotent).
@@ -2683,10 +3236,10 @@ Useful when a custom supportLogger was injected and you still want the canonical
 ### evaluateConditionals()
 
 ```ts
-evaluateConditionals(input): CancelablePromise<EvaluateConditionalResult>;
+evaluateConditionals(input, options?): CancelablePromise<EvaluateConditionalResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4746](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4746)
+Defined in: [gen/CamundaClient.ts:5047](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5047)
 
 Evaluate root level conditional start events
 
@@ -2702,9 +3255,28 @@ Multiple root-level conditional start events of the same process definition can 
 
 [`ConditionalEvaluationInstruction`](../type-aliases/ConditionalEvaluationInstruction.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`EvaluateConditionalResult`](../type-aliases/EvaluateConditionalResult.md)\>
+
+#### Example
+
+```ts
+async function evaluateConditionalsExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.evaluateConditionals({
+    variables: { orderReady: true },
+    tenantId,
+  });
+
+  console.log(`Evaluated conditionals: ${JSON.stringify(result)}`);
+}
+```
 
 #### Operation Id
 
@@ -2719,10 +3291,10 @@ Conditional
 ### evaluateDecision()
 
 ```ts
-evaluateDecision(input): CancelablePromise<EvaluateDecisionResult>;
+evaluateDecision(input, options?): CancelablePromise<EvaluateDecisionResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4816](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4816)
+Defined in: [gen/CamundaClient.ts:5119](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5119)
 
 Evaluate decision
 
@@ -2737,7 +3309,12 @@ version of the decision is used.
 
 ##### input
 
-[`DecisionEvaluationById`](../type-aliases/DecisionEvaluationById.md) | [`DecisionEvaluationByKey`](../type-aliases/DecisionEvaluationByKey.md)
+\| [`DecisionEvaluationById`](../type-aliases/DecisionEvaluationById.md)
+\| [`DecisionEvaluationByKey`](../type-aliases/DecisionEvaluationByKey.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
@@ -2746,13 +3323,13 @@ version of the decision is used.
 #### Examples
 
 ```ts
-async function evaluateDecisionByIdExample() {
+async function evaluateDecisionByIdExample(
+  decisionDefinitionId: DecisionDefinitionId
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.evaluateDecision({
-    decisionDefinitionId: DecisionDefinitionId.assumeExists(
-      "invoice-classification"
-    ),
+    decisionDefinitionId,
     variables: {
       amount: 1000,
       invoiceCategory: "Misc",
@@ -2765,11 +3342,10 @@ async function evaluateDecisionByIdExample() {
 ```
 
 ```ts
-async function evaluateDecisionByKeyExample() {
+async function evaluateDecisionByKeyExample(
+  decisionDefinitionKey: DecisionDefinitionKey
+) {
   const camunda = createCamundaClient();
-
-  const decisionDefinitionKey =
-    DecisionDefinitionKey.assumeExists("2251799813685249");
 
   const result = await camunda.evaluateDecision({
     decisionDefinitionKey,
@@ -2796,10 +3372,10 @@ Decision definition
 ### evaluateExpression()
 
 ```ts
-evaluateExpression(input): CancelablePromise<ExpressionEvaluationResult>;
+evaluateExpression(input, options?): CancelablePromise<ExpressionEvaluationResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4878](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4878)
+Defined in: [gen/CamundaClient.ts:5185](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5185)
 
 Evaluate an expression
 
@@ -2813,9 +3389,28 @@ Evaluates a FEEL expression and returns the result. Supports references to tenan
 
 [`ExpressionEvaluationRequest`](../type-aliases/ExpressionEvaluationRequest.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ExpressionEvaluationResult`](../type-aliases/ExpressionEvaluationResult.md)\>
+
+#### Example
+
+```ts
+async function evaluateExpressionExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.evaluateExpression({
+    expression: "= x + y",
+    variables: { x: 10, y: 20 },
+  });
+
+  console.log(`Result: ${result.result}`);
+}
+```
 
 #### Operation Id
 
@@ -2830,10 +3425,10 @@ Expression
 ### failJob()
 
 ```ts
-failJob(input): CancelablePromise<void>;
+failJob(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:4943](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L4943)
+Defined in: [gen/CamundaClient.ts:5252](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5252)
 
 Fail job
 
@@ -2847,6 +3442,10 @@ Mark the job as failed.
 
 [`failJobInput`](../type-aliases/failJobInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
@@ -2854,10 +3453,8 @@ Mark the job as failed.
 #### Example
 
 ```ts
-async function failJobExample() {
+async function failJobExample(jobKey: JobKey) {
   const camunda = createCamundaClient();
-
-  const jobKey = JobKey.assumeExists("2251799813685249");
 
   await camunda.failJob({
     jobKey,
@@ -2884,7 +3481,7 @@ Job
 forceAuthRefresh(): Promise<string | undefined>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1435](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1435)
+Defined in: [gen/CamundaClient.ts:1439](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1439)
 
 #### Returns
 
@@ -2895,42 +3492,13 @@ Defined in: [gen/CamundaClient.ts:1435](https://github.com/camunda/orchestration
 ### getAuditLog()
 
 ```ts
-getAuditLog(input, consistencyManagement): CancelablePromise<{
-  actorId?: string;
-  actorType?: AuditLogActorTypeEnum;
-  annotation?: string;
-  auditLogKey?: AuditLogKey;
-  batchOperationKey?: BatchOperationKey;
-  batchOperationType?: BatchOperationTypeEnum;
-  category?: AuditLogCategoryEnum;
-  decisionDefinitionId?: DecisionDefinitionId;
-  decisionDefinitionKey?: DecisionDefinitionKey;
-  decisionEvaluationKey?: DecisionEvaluationKey;
-  decisionRequirementsId?: string;
-  decisionRequirementsKey?: DecisionRequirementsKey;
-  deploymentKey?: DeploymentKey;
-  elementInstanceKey?: ElementInstanceKey;
-  entityDescription?: string;
-  entityKey?: AuditLogEntityKey;
-  entityType?: AuditLogEntityTypeEnum;
-  formKey?: FormKey;
-  jobKey?: JobKey;
-  operationType?: AuditLogOperationTypeEnum;
-  processDefinitionId?: ProcessDefinitionId;
-  processDefinitionKey?: ProcessDefinitionKey;
-  processInstanceKey?: ProcessInstanceKey;
-  relatedEntityKey?: AuditLogEntityKey;
-  relatedEntityType?: AuditLogEntityTypeEnum;
-  resourceKey?: ResourceKey;
-  result?: AuditLogResultEnum;
-  rootProcessInstanceKey?: ProcessInstanceKey;
-  tenantId?: TenantId;
-  timestamp?: string;
-  userTaskKey?: UserTaskKey;
-}>;
+getAuditLog(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AuditLogResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5004](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5004)
+Defined in: [gen/CamundaClient.ts:5317](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5317)
 
 Get audit log
 
@@ -2948,41 +3516,28 @@ Get an audit log entry by auditLogKey.
 
 [`getAuditLogConsistency`](../type-aliases/getAuditLogConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`actorId?`: `string`;
-`actorType?`: [`AuditLogActorTypeEnum`](../type-aliases/AuditLogActorTypeEnum.md);
-`annotation?`: `string`;
-`auditLogKey?`: [`AuditLogKey`](../type-aliases/AuditLogKey.md);
-`batchOperationKey?`: [`BatchOperationKey`](../type-aliases/BatchOperationKey.md);
-`batchOperationType?`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
-`category?`: [`AuditLogCategoryEnum`](../type-aliases/AuditLogCategoryEnum.md);
-`decisionDefinitionId?`: [`DecisionDefinitionId`](../type-aliases/DecisionDefinitionId.md);
-`decisionDefinitionKey?`: [`DecisionDefinitionKey`](../type-aliases/DecisionDefinitionKey.md);
-`decisionEvaluationKey?`: [`DecisionEvaluationKey`](../type-aliases/DecisionEvaluationKey.md);
-`decisionRequirementsId?`: `string`;
-`decisionRequirementsKey?`: [`DecisionRequirementsKey`](../type-aliases/DecisionRequirementsKey.md);
-`deploymentKey?`: [`DeploymentKey`](../type-aliases/DeploymentKey.md);
-`elementInstanceKey?`: [`ElementInstanceKey`](../type-aliases/ElementInstanceKey.md);
-`entityDescription?`: `string`;
-`entityKey?`: [`AuditLogEntityKey`](../type-aliases/AuditLogEntityKey.md);
-`entityType?`: [`AuditLogEntityTypeEnum`](../type-aliases/AuditLogEntityTypeEnum.md);
-`formKey?`: [`FormKey`](../type-aliases/FormKey.md);
-`jobKey?`: [`JobKey`](../type-aliases/JobKey.md);
-`operationType?`: [`AuditLogOperationTypeEnum`](../type-aliases/AuditLogOperationTypeEnum.md);
-`processDefinitionId?`: [`ProcessDefinitionId`](../type-aliases/ProcessDefinitionId.md);
-`processDefinitionKey?`: [`ProcessDefinitionKey`](../type-aliases/ProcessDefinitionKey.md);
-`processInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`relatedEntityKey?`: [`AuditLogEntityKey`](../type-aliases/AuditLogEntityKey.md);
-`relatedEntityType?`: [`AuditLogEntityTypeEnum`](../type-aliases/AuditLogEntityTypeEnum.md);
-`resourceKey?`: [`ResourceKey`](../type-aliases/ResourceKey.md);
-`result?`: [`AuditLogResultEnum`](../type-aliases/AuditLogResultEnum.md);
-`rootProcessInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`tenantId?`: [`TenantId`](../type-aliases/TenantId.md);
-`timestamp?`: `string`;
-`userTaskKey?`: [`UserTaskKey`](../type-aliases/UserTaskKey.md);
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuditLogResult`](../type-aliases/AuditLogResult.md)\>
+
+#### Example
+
+```ts
+async function getAuditLogExample(auditLogKey: AuditLogKey) {
+  const camunda = createCamundaClient();
+
+  const log = await camunda.getAuditLog(
+    { auditLogKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Audit log: ${log.operationType}`);
+}
+```
 
 #### Operation Id
 
@@ -3001,10 +3556,10 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getAuthentication()
 
 ```ts
-getAuthentication(): CancelablePromise<CamundaUserResult>;
+getAuthentication(options?): CancelablePromise<CamundaUserResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5066](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5066)
+Defined in: [gen/CamundaClient.ts:5383](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5383)
 
 Get current user
 
@@ -3012,9 +3567,27 @@ Retrieves the current authenticated user.
 
 -
 
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`CamundaUserResult`](../type-aliases/CamundaUserResult.md)\>
+
+#### Example
+
+```ts
+async function getAuthenticationExample() {
+  const camunda = createCamundaClient();
+
+  const user = await camunda.getAuthentication();
+
+  console.log(`Authenticated as: ${user.username}`);
+}
+```
 
 #### Operation Id
 
@@ -3032,7 +3605,7 @@ Authentication
 getAuthHeaders(): Promise<Record<string, string>>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1432](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1432)
+Defined in: [gen/CamundaClient.ts:1436](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1436)
 
 #### Returns
 
@@ -3043,10 +3616,13 @@ Defined in: [gen/CamundaClient.ts:1432](https://github.com/camunda/orchestration
 ### getAuthorization()
 
 ```ts
-getAuthorization(input, consistencyManagement): CancelablePromise<AuthorizationResult>;
+getAuthorization(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AuthorizationResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5116](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5116)
+Defined in: [gen/CamundaClient.ts:5436](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5436)
 
 Get authorization
 
@@ -3064,9 +3640,28 @@ Get authorization by the given key.
 
 [`getAuthorizationConsistency`](../type-aliases/getAuthorizationConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuthorizationResult`](../type-aliases/AuthorizationResult.md)\>
+
+#### Example
+
+```ts
+async function getAuthorizationExample(authorizationKey: AuthorizationKey) {
+  const camunda = createCamundaClient();
+
+  const authorization = await camunda.getAuthorization(
+    { authorizationKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Owner: ${authorization.ownerId} (${authorization.ownerType})`);
+}
+```
 
 #### Operation Id
 
@@ -3087,6 +3682,7 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ```ts
 getBackpressureState():
   | {
+  backoffMs: number;
   consecutive: number;
   permitsCurrent: number;
   permitsMax: number | null;
@@ -3102,13 +3698,14 @@ getBackpressureState():
 };
 ```
 
-Defined in: [gen/CamundaClient.ts:1537](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1537)
+Defined in: [gen/CamundaClient.ts:1554](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1554)
 
 Public accessor for current backpressure adaptive limiter state (stable)
 
 #### Returns
 
 \| \{
+`backoffMs`: `number`;
 `consecutive`: `number`;
 `permitsCurrent`: `number`;
 `permitsMax`: `number` \| `null`;
@@ -3128,10 +3725,13 @@ Public accessor for current backpressure adaptive limiter state (stable)
 ### getBatchOperation()
 
 ```ts
-getBatchOperation(input, consistencyManagement): CancelablePromise<BatchOperationResponse>;
+getBatchOperation(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<BatchOperationResponse>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5179](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5179)
+Defined in: [gen/CamundaClient.ts:5503](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5503)
 
 Get batch operation
 
@@ -3149,9 +3749,28 @@ Get batch operation by key.
 
 [`getBatchOperationConsistency`](../type-aliases/getBatchOperationConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationResponse`](../type-aliases/BatchOperationResponse.md)\>
+
+#### Example
+
+```ts
+async function getBatchOperationExample(batchOperationKey: BatchOperationKey) {
+  const camunda = createCamundaClient();
+
+  const batch = await camunda.getBatchOperation(
+    { batchOperationKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Batch: ${batch.batchOperationType} (${batch.state})`);
+}
+```
 
 #### Operation Id
 
@@ -3173,7 +3792,7 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 getConfig(): Readonly<CamundaConfig>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1337](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1337)
+Defined in: [gen/CamundaClient.ts:1339](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1339)
 
 Read-only snapshot of current hydrated configuration (do not mutate directly).
 Use configure(...) to apply changes.
@@ -3187,10 +3806,13 @@ Use configure(...) to apply changes.
 ### getDecisionDefinition()
 
 ```ts
-getDecisionDefinition(input, consistencyManagement): CancelablePromise<DecisionDefinitionResult>;
+getDecisionDefinition(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<DecisionDefinitionResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5244](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5244)
+Defined in: [gen/CamundaClient.ts:5570](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5570)
 
 Get decision definition
 
@@ -3208,6 +3830,10 @@ Returns a decision definition by key.
 
 [`getDecisionDefinitionConsistency`](../type-aliases/getDecisionDefinitionConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionDefinitionResult`](../type-aliases/DecisionDefinitionResult.md)\>
@@ -3215,11 +3841,10 @@ Returns a decision definition by key.
 #### Example
 
 ```ts
-async function getDecisionDefinitionExample() {
+async function getDecisionDefinitionExample(
+  decisionDefinitionKey: DecisionDefinitionKey
+) {
   const camunda = createCamundaClient();
-
-  const decisionDefinitionKey =
-    DecisionDefinitionKey.assumeExists("2251799813685249");
 
   const definition = await camunda.getDecisionDefinition(
     { decisionDefinitionKey },
@@ -3248,10 +3873,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getDecisionDefinitionXml()
 
 ```ts
-getDecisionDefinitionXml(input, consistencyManagement): CancelablePromise<string>;
+getDecisionDefinitionXml(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<string>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5307](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5307)
+Defined in: [gen/CamundaClient.ts:5637](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5637)
 
 Get decision definition XML
 
@@ -3269,9 +3897,30 @@ Returns decision definition as XML.
 
 [`getDecisionDefinitionXmlConsistency`](../type-aliases/getDecisionDefinitionXmlConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>
+
+#### Example
+
+```ts
+async function getDecisionDefinitionXmlExample(
+  decisionDefinitionKey: DecisionDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const xml = await camunda.getDecisionDefinitionXml(
+    { decisionDefinitionKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`XML length: ${JSON.stringify(xml).length}`);
+}
+```
 
 #### Operation Id
 
@@ -3290,10 +3939,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getDecisionInstance()
 
 ```ts
-getDecisionInstance(input, consistencyManagement): CancelablePromise<object & object>;
+getDecisionInstance(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<DecisionInstanceGetQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5370](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5370)
+Defined in: [gen/CamundaClient.ts:5704](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5704)
 
 Get decision instance
 
@@ -3311,9 +3963,30 @@ Returns a decision instance.
 
 [`getDecisionInstanceConsistency`](../type-aliases/getDecisionInstanceConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object` & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionInstanceGetQueryResult`](../type-aliases/DecisionInstanceGetQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getDecisionInstanceExample(
+  decisionEvaluationInstanceKey: DecisionEvaluationInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const instance = await camunda.getDecisionInstance(
+    { decisionEvaluationInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Decision: ${instance.decisionDefinitionId}`);
+}
+```
 
 #### Operation Id
 
@@ -3332,10 +4005,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getDecisionRequirements()
 
 ```ts
-getDecisionRequirements(input, consistencyManagement): CancelablePromise<DecisionRequirementsResult>;
+getDecisionRequirements(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<DecisionRequirementsResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5433](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5433)
+Defined in: [gen/CamundaClient.ts:5771](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5771)
 
 Get decision requirements
 
@@ -3353,9 +4029,30 @@ Returns Decision Requirements as JSON.
 
 [`getDecisionRequirementsConsistency`](../type-aliases/getDecisionRequirementsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionRequirementsResult`](../type-aliases/DecisionRequirementsResult.md)\>
+
+#### Example
+
+```ts
+async function getDecisionRequirementsExample(
+  decisionRequirementsKey: DecisionRequirementsKey
+) {
+  const camunda = createCamundaClient();
+
+  const requirements = await camunda.getDecisionRequirements(
+    { decisionRequirementsKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Requirements: ${requirements.decisionRequirementsId}`);
+}
+```
 
 #### Operation Id
 
@@ -3374,10 +4071,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getDecisionRequirementsXml()
 
 ```ts
-getDecisionRequirementsXml(input, consistencyManagement): CancelablePromise<string>;
+getDecisionRequirementsXml(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<string>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5496](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5496)
+Defined in: [gen/CamundaClient.ts:5838](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5838)
 
 Get decision requirements XML
 
@@ -3395,9 +4095,30 @@ Returns decision requirements as XML.
 
 [`getDecisionRequirementsXmlConsistency`](../type-aliases/getDecisionRequirementsXmlConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>
+
+#### Example
+
+```ts
+async function getDecisionRequirementsXmlExample(
+  decisionRequirementsKey: DecisionRequirementsKey
+) {
+  const camunda = createCamundaClient();
+
+  const xml = await camunda.getDecisionRequirementsXml(
+    { decisionRequirementsKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`XML length: ${JSON.stringify(xml).length}`);
+}
+```
 
 #### Operation Id
 
@@ -3416,10 +4137,10 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getDocument()
 
 ```ts
-getDocument(input): CancelablePromise<Blob>;
+getDocument(input, options?): CancelablePromise<Blob>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5561](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5561)
+Defined in: [gen/CamundaClient.ts:5907](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5907)
 
 Download document
 
@@ -3435,9 +4156,25 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 
 [`getDocumentInput`](../type-aliases/getDocumentInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`Blob`\>
+
+#### Example
+
+```ts
+async function getDocumentExample(documentId: DocumentId) {
+  const camunda = createCamundaClient();
+
+  await camunda.getDocument({ documentId });
+
+  console.log(`Downloaded document: ${documentId}`);
+}
+```
 
 #### Operation Id
 
@@ -3452,51 +4189,13 @@ Document
 ### getElementInstance()
 
 ```ts
-getElementInstance(input, consistencyManagement): CancelablePromise<{
-  elementId: ElementId;
-  elementInstanceKey: ElementInstanceKey;
-  elementName: string;
-  endDate?: string;
-  hasIncident: boolean;
-  incidentKey?: IncidentKey;
-  processDefinitionId: ProcessDefinitionId;
-  processDefinitionKey: ProcessDefinitionKey;
-  processInstanceKey: ProcessInstanceKey;
-  rootProcessInstanceKey?: ProcessInstanceKey;
-  startDate: string;
-  state: ElementInstanceStateEnum;
-  tenantId: TenantId;
-  type:   | "USER_TASK"
-     | "UNKNOWN"
-     | "UNSPECIFIED"
-     | "PROCESS"
-     | "SUB_PROCESS"
-     | "EVENT_SUB_PROCESS"
-     | "AD_HOC_SUB_PROCESS"
-     | "AD_HOC_SUB_PROCESS_INNER_INSTANCE"
-     | "START_EVENT"
-     | "INTERMEDIATE_CATCH_EVENT"
-     | "INTERMEDIATE_THROW_EVENT"
-     | "BOUNDARY_EVENT"
-     | "END_EVENT"
-     | "SERVICE_TASK"
-     | "RECEIVE_TASK"
-     | "MANUAL_TASK"
-     | "TASK"
-     | "EXCLUSIVE_GATEWAY"
-     | "INCLUSIVE_GATEWAY"
-     | "PARALLEL_GATEWAY"
-     | "EVENT_BASED_GATEWAY"
-     | "SEQUENCE_FLOW"
-     | "MULTI_INSTANCE_BODY"
-     | "CALL_ACTIVITY"
-     | "BUSINESS_RULE_TASK"
-     | "SCRIPT_TASK"
-     | "SEND_TASK";
-}>;
+getElementInstance(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ElementInstanceResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5622](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5622)
+Defined in: [gen/CamundaClient.ts:5972](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L5972)
 
 Get element instance
 
@@ -3514,50 +4213,30 @@ Returns element instance as JSON.
 
 [`getElementInstanceConsistency`](../type-aliases/getElementInstanceConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`elementId`: [`ElementId`](../type-aliases/ElementId.md);
-`elementInstanceKey`: [`ElementInstanceKey`](../type-aliases/ElementInstanceKey.md);
-`elementName`: `string`;
-`endDate?`: `string`;
-`hasIncident`: `boolean`;
-`incidentKey?`: [`IncidentKey`](../type-aliases/IncidentKey.md);
-`processDefinitionId`: [`ProcessDefinitionId`](../type-aliases/ProcessDefinitionId.md);
-`processDefinitionKey`: [`ProcessDefinitionKey`](../type-aliases/ProcessDefinitionKey.md);
-`processInstanceKey`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`rootProcessInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`startDate`: `string`;
-`state`: [`ElementInstanceStateEnum`](../type-aliases/ElementInstanceStateEnum.md);
-`tenantId`: [`TenantId`](../type-aliases/TenantId.md);
-`type`: \| `"USER_TASK"`
-\| `"UNKNOWN"`
-\| `"UNSPECIFIED"`
-\| `"PROCESS"`
-\| `"SUB_PROCESS"`
-\| `"EVENT_SUB_PROCESS"`
-\| `"AD_HOC_SUB_PROCESS"`
-\| `"AD_HOC_SUB_PROCESS_INNER_INSTANCE"`
-\| `"START_EVENT"`
-\| `"INTERMEDIATE_CATCH_EVENT"`
-\| `"INTERMEDIATE_THROW_EVENT"`
-\| `"BOUNDARY_EVENT"`
-\| `"END_EVENT"`
-\| `"SERVICE_TASK"`
-\| `"RECEIVE_TASK"`
-\| `"MANUAL_TASK"`
-\| `"TASK"`
-\| `"EXCLUSIVE_GATEWAY"`
-\| `"INCLUSIVE_GATEWAY"`
-\| `"PARALLEL_GATEWAY"`
-\| `"EVENT_BASED_GATEWAY"`
-\| `"SEQUENCE_FLOW"`
-\| `"MULTI_INSTANCE_BODY"`
-\| `"CALL_ACTIVITY"`
-\| `"BUSINESS_RULE_TASK"`
-\| `"SCRIPT_TASK"`
-\| `"SEND_TASK"`;
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ElementInstanceResult`](../type-aliases/ElementInstanceResult.md)\>
+
+#### Example
+
+```ts
+async function getElementInstanceExample(
+  elementInstanceKey: ElementInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const element = await camunda.getElementInstance(
+    { elementInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Element: ${element.elementId} (${element.type})`);
+}
+```
 
 #### Operation Id
 
@@ -3576,26 +4255,29 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getErrorMode()
 
 ```ts
-getErrorMode(): "result" | "throw";
+getErrorMode(): "throw" | "result";
 ```
 
-Defined in: [gen/CamundaClient.ts:1454](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1454)
+Defined in: [gen/CamundaClient.ts:1458](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1458)
 
 Internal accessor (read-only) for eventual consistency error mode.
 
 #### Returns
 
-`"result"` \| `"throw"`
+`"throw"` \| `"result"`
 
 ---
 
 ### getGlobalClusterVariable()
 
 ```ts
-getGlobalClusterVariable(input, consistencyManagement): CancelablePromise<ClusterVariableResult>;
+getGlobalClusterVariable(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ClusterVariableResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5685](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5685)
+Defined in: [gen/CamundaClient.ts:6039](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6039)
 
 Get a global-scoped cluster variable
 
@@ -3613,9 +4295,28 @@ Get a global-scoped cluster variable.
 
 [`getGlobalClusterVariableConsistency`](../type-aliases/getGlobalClusterVariableConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterVariableResult`](../type-aliases/ClusterVariableResult.md)\>
+
+#### Example
+
+```ts
+async function getGlobalClusterVariableExample() {
+  const camunda = createCamundaClient();
+
+  const variable = await camunda.getGlobalClusterVariable(
+    { name: "feature-flags" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`${variable.name} = ${variable.value}`);
+}
+```
 
 #### Operation Id
 
@@ -3634,10 +4335,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getGlobalJobStatistics()
 
 ```ts
-getGlobalJobStatistics(input, consistencyManagement): CancelablePromise<GlobalJobStatisticsQueryResult>;
+getGlobalJobStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<GlobalJobStatisticsQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5749](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5749)
+Defined in: [gen/CamundaClient.ts:6107](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6107)
 
 Global job statistics
 
@@ -3655,9 +4359,31 @@ Returns global aggregated counts for jobs. Optionally filter by the creation tim
 
 [`getGlobalJobStatisticsConsistency`](../type-aliases/getGlobalJobStatisticsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GlobalJobStatisticsQueryResult`](../type-aliases/GlobalJobStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getGlobalJobStatisticsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getGlobalJobStatistics(
+    {
+      from: "2025-01-01T00:00:00Z",
+      to: "2025-12-31T23:59:59Z",
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Statistics retrieved: ${JSON.stringify(result)}`);
+}
+```
 
 #### Operation Id
 
@@ -3673,13 +4399,80 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### getGlobalTaskListener()
+
+```ts
+getGlobalTaskListener(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<GlobalTaskListenerResult>;
+```
+
+Defined in: [gen/CamundaClient.ts:6174](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6174)
+
+Get global user task listener
+
+Get a global user task listener by its id.
+
+-
+
+#### Parameters
+
+##### input
+
+[`getGlobalTaskListenerInput`](../type-aliases/getGlobalTaskListenerInput.md)
+
+##### consistencyManagement
+
+[`getGlobalTaskListenerConsistency`](../type-aliases/getGlobalTaskListenerConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GlobalTaskListenerResult`](../type-aliases/GlobalTaskListenerResult.md)\>
+
+#### Example
+
+```ts
+async function getGlobalTaskListenerExample(id: GlobalListenerId) {
+  const camunda = createCamundaClient();
+
+  const listener = await camunda.getGlobalTaskListener(
+    { id },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Listener: ${listener.type} (${listener.eventTypes})`);
+}
+```
+
+#### Operation Id
+
+getGlobalTaskListener
+
+#### Tags
+
+Global listener
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### getGroup()
 
 ```ts
-getGroup(input, consistencyManagement): CancelablePromise<GroupResult>;
+getGroup(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<GroupResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5812](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5812)
+Defined in: [gen/CamundaClient.ts:6241](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6241)
 
 Get group
 
@@ -3697,9 +4490,28 @@ Get a group by its ID.
 
 [`getGroupConsistency`](../type-aliases/getGroupConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GroupResult`](../type-aliases/GroupResult.md)\>
+
+#### Example
+
+```ts
+async function getGroupExample() {
+  const camunda = createCamundaClient();
+
+  const group = await camunda.getGroup(
+    { groupId: "engineering-team" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Group: ${group.name}`);
+}
+```
 
 #### Operation Id
 
@@ -3718,24 +4530,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getIncident()
 
 ```ts
-getIncident(input, consistencyManagement): CancelablePromise<{
-  creationTime?: string;
-  elementId?: ElementId;
-  elementInstanceKey?: ElementInstanceKey;
-  errorMessage?: string;
-  errorType?: IncidentErrorTypeEnum;
-  incidentKey?: IncidentKey;
-  jobKey?: JobKey;
-  processDefinitionId?: ProcessDefinitionId;
-  processDefinitionKey?: ProcessDefinitionKey;
-  processInstanceKey?: ProcessInstanceKey;
-  rootProcessInstanceKey?: ProcessInstanceKey;
-  state?: IncidentStateEnum;
-  tenantId?: TenantId;
-}>;
+getIncident(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<IncidentResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5878](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5878)
+Defined in: [gen/CamundaClient.ts:6309](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6309)
 
 Get incident
 
@@ -3753,31 +4554,19 @@ Returns incident as JSON.
 
 [`getIncidentConsistency`](../type-aliases/getIncidentConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`creationTime?`: `string`;
-`elementId?`: [`ElementId`](../type-aliases/ElementId.md);
-`elementInstanceKey?`: [`ElementInstanceKey`](../type-aliases/ElementInstanceKey.md);
-`errorMessage?`: `string`;
-`errorType?`: [`IncidentErrorTypeEnum`](../type-aliases/IncidentErrorTypeEnum.md);
-`incidentKey?`: [`IncidentKey`](../type-aliases/IncidentKey.md);
-`jobKey?`: [`JobKey`](../type-aliases/JobKey.md);
-`processDefinitionId?`: [`ProcessDefinitionId`](../type-aliases/ProcessDefinitionId.md);
-`processDefinitionKey?`: [`ProcessDefinitionKey`](../type-aliases/ProcessDefinitionKey.md);
-`processInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`rootProcessInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`state?`: [`IncidentStateEnum`](../type-aliases/IncidentStateEnum.md);
-`tenantId?`: [`TenantId`](../type-aliases/TenantId.md);
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`IncidentResult`](../type-aliases/IncidentResult.md)\>
 
 #### Example
 
 ```ts
-async function getIncidentExample() {
+async function getIncidentExample(incidentKey: IncidentKey) {
   const camunda = createCamundaClient();
-
-  const incidentKey = IncidentKey.assumeExists("2251799813685249");
 
   const incident = await camunda.getIncident(
     { incidentKey },
@@ -3804,13 +4593,297 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### getJobErrorStatistics()
+
+```ts
+getJobErrorStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<JobErrorStatisticsQueryResult>;
+```
+
+Defined in: [gen/CamundaClient.ts:6377](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6377)
+
+Get error metrics for a job type
+
+Returns aggregated metrics per error for the given jobType.
+
+-
+
+#### Parameters
+
+##### input
+
+[`JobErrorStatisticsQuery`](../type-aliases/JobErrorStatisticsQuery.md)
+
+##### consistencyManagement
+
+[`getJobErrorStatisticsConsistency`](../type-aliases/getJobErrorStatisticsConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`JobErrorStatisticsQueryResult`](../type-aliases/JobErrorStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getJobErrorStatisticsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getJobErrorStatistics(
+    {
+      filter: {
+        from: "2025-01-01T00:00:00Z",
+        to: "2025-12-31T23:59:59Z",
+        jobType: "payment-processing",
+      },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Error: ${stat.errorMessage}, workers: ${stat.workers}`);
+  }
+}
+```
+
+#### Operation Id
+
+getJobErrorStatistics
+
+#### Tags
+
+Job
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### getJobTimeSeriesStatistics()
+
+```ts
+getJobTimeSeriesStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<JobTimeSeriesStatisticsQueryResult>;
+```
+
+Defined in: [gen/CamundaClient.ts:6447](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6447)
+
+Get time-series metrics for a job type
+
+Returns a list of time-bucketed metrics ordered ascending by time.
+The `from` and `to` fields select the time window of interest.
+Each item in the response corresponds to one time bucket of the requested resolution.
+
+-
+
+#### Parameters
+
+##### input
+
+[`JobTimeSeriesStatisticsQuery`](../type-aliases/JobTimeSeriesStatisticsQuery.md)
+
+##### consistencyManagement
+
+[`getJobTimeSeriesStatisticsConsistency`](../type-aliases/getJobTimeSeriesStatisticsConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`JobTimeSeriesStatisticsQueryResult`](../type-aliases/JobTimeSeriesStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getJobTimeSeriesStatisticsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getJobTimeSeriesStatistics(
+    {
+      filter: {
+        from: "2025-01-01T00:00:00Z",
+        to: "2025-12-31T23:59:59Z",
+        jobType: "payment-processing",
+      },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const point of result.items ?? []) {
+    console.log(`Time: ${point.time}, created: ${point.created.count}`);
+  }
+}
+```
+
+#### Operation Id
+
+getJobTimeSeriesStatistics
+
+#### Tags
+
+Job
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### getJobTypeStatistics()
+
+```ts
+getJobTypeStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<JobTypeStatisticsQueryResult>;
+```
+
+Defined in: [gen/CamundaClient.ts:6515](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6515)
+
+Get job statistics by type
+
+Get statistics about jobs, grouped by job type.
+
+-
+
+#### Parameters
+
+##### input
+
+[`JobTypeStatisticsQuery`](../type-aliases/JobTypeStatisticsQuery.md)
+
+##### consistencyManagement
+
+[`getJobTypeStatisticsConsistency`](../type-aliases/getJobTypeStatisticsConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`JobTypeStatisticsQueryResult`](../type-aliases/JobTypeStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getJobTypeStatisticsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getJobTypeStatistics(
+    {},
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Type: ${stat.jobType}, workers: ${stat.workers}`);
+  }
+}
+```
+
+#### Operation Id
+
+getJobTypeStatistics
+
+#### Tags
+
+Job
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### getJobWorkerStatistics()
+
+```ts
+getJobWorkerStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<JobWorkerStatisticsQueryResult>;
+```
+
+Defined in: [gen/CamundaClient.ts:6583](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6583)
+
+Get job statistics by worker
+
+Get statistics about jobs, grouped by worker, for a given job type.
+
+-
+
+#### Parameters
+
+##### input
+
+[`JobWorkerStatisticsQuery`](../type-aliases/JobWorkerStatisticsQuery.md)
+
+##### consistencyManagement
+
+[`getJobWorkerStatisticsConsistency`](../type-aliases/getJobWorkerStatisticsConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`JobWorkerStatisticsQueryResult`](../type-aliases/JobWorkerStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getJobWorkerStatisticsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getJobWorkerStatistics(
+    {
+      filter: {
+        from: "2025-01-01T00:00:00Z",
+        to: "2025-12-31T23:59:59Z",
+        jobType: "payment-processing",
+      },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Worker: ${stat.worker}, completed: ${stat.completed.count}`);
+  }
+}
+```
+
+#### Operation Id
+
+getJobWorkerStatistics
+
+#### Tags
+
+Job
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### getLicense()
 
 ```ts
-getLicense(): CancelablePromise<LicenseResponse>;
+getLicense(options?): CancelablePromise<LicenseResponse>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5940](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5940)
+Defined in: [gen/CamundaClient.ts:6649](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6649)
 
 Get license status
 
@@ -3818,9 +4891,27 @@ Obtains the status of the current Camunda license.
 
 -
 
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`LicenseResponse`](../type-aliases/LicenseResponse.md)\>
+
+#### Example
+
+```ts
+async function getLicenseExample() {
+  const camunda = createCamundaClient();
+
+  const license = await camunda.getLicense();
+
+  console.log(`License type: ${license.validLicense}`);
+}
+```
 
 #### Operation Id
 
@@ -3835,10 +4926,13 @@ License
 ### getMappingRule()
 
 ```ts
-getMappingRule(input, consistencyManagement): CancelablePromise<MappingRuleResult>;
+getMappingRule(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<MappingRuleResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:5991](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L5991)
+Defined in: [gen/CamundaClient.ts:6703](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6703)
 
 Get a mapping rule
 
@@ -3856,9 +4950,28 @@ Gets the mapping rule with the given ID.
 
 [`getMappingRuleConsistency`](../type-aliases/getMappingRuleConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`MappingRuleResult`](../type-aliases/MappingRuleResult.md)\>
+
+#### Example
+
+```ts
+async function getMappingRuleExample() {
+  const camunda = createCamundaClient();
+
+  const rule = await camunda.getMappingRule(
+    { mappingRuleId: "ldap-group-mapping" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Rule: ${rule.name} (${rule.claimName}=${rule.claimValue})`);
+}
+```
 
 #### Operation Id
 
@@ -3877,10 +4990,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessDefinition()
 
 ```ts
-getProcessDefinition(input, consistencyManagement): CancelablePromise<ProcessDefinitionResult>;
+getProcessDefinition(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessDefinitionResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6054](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6054)
+Defined in: [gen/CamundaClient.ts:6770](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6770)
 
 Get process definition
 
@@ -3898,9 +5014,32 @@ Returns process definition as JSON.
 
 [`getProcessDefinitionConsistency`](../type-aliases/getProcessDefinitionConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionResult`](../type-aliases/ProcessDefinitionResult.md)\>
+
+#### Example
+
+```ts
+async function getProcessDefinitionExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const definition = await camunda.getProcessDefinition(
+    { processDefinitionKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(
+    `Process: ${definition.processDefinitionId} v${definition.version}`
+  );
+}
+```
 
 #### Operation Id
 
@@ -3919,10 +5058,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessDefinitionInstanceStatistics()
 
 ```ts
-getProcessDefinitionInstanceStatistics(input, consistencyManagement): CancelablePromise<ProcessDefinitionInstanceStatisticsQueryResult>;
+getProcessDefinitionInstanceStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessDefinitionInstanceStatisticsQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6118](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6118)
+Defined in: [gen/CamundaClient.ts:6838](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6838)
 
 Get process instance statistics
 
@@ -3934,23 +5076,38 @@ Get statistics about process instances, grouped by process definition and tenant
 
 ##### input
 
-###### page?
-
-[`OffsetPagination`](../type-aliases/OffsetPagination.md)
-
-###### sort?
-
-`object`[]
-
-Sort field criteria.
+[`ProcessDefinitionInstanceStatisticsQuery`](../type-aliases/ProcessDefinitionInstanceStatisticsQuery.md)
 
 ##### consistencyManagement
 
 [`getProcessDefinitionInstanceStatisticsConsistency`](../type-aliases/getProcessDefinitionInstanceStatisticsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionInstanceStatisticsQueryResult`](../type-aliases/ProcessDefinitionInstanceStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getProcessDefinitionInstanceStatisticsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessDefinitionInstanceStatistics(
+    {},
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(
+      `Definition ${stat.processDefinitionId}: ${stat.activeInstancesWithoutIncidentCount} active`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -3969,10 +5126,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessDefinitionInstanceVersionStatistics()
 
 ```ts
-getProcessDefinitionInstanceVersionStatistics(input, consistencyManagement): CancelablePromise<ProcessDefinitionInstanceVersionStatisticsQueryResult>;
+getProcessDefinitionInstanceVersionStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessDefinitionInstanceVersionStatisticsQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6183](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6183)
+Defined in: [gen/CamundaClient.ts:6907](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6907)
 
 Get process instance statistics by version
 
@@ -3985,31 +5145,44 @@ The process definition ID must be provided as a required field in the request bo
 
 ##### input
 
-###### filter
-
-[`ProcessDefinitionInstanceVersionStatisticsFilter`](../type-aliases/ProcessDefinitionInstanceVersionStatisticsFilter.md)
-
-The process definition instance version statistics search filters.
-
-###### page?
-
-[`OffsetPagination`](../type-aliases/OffsetPagination.md)
-
-Pagination criteria.
-
-###### sort?
-
-`object`[]
-
-Sort field criteria.
+[`ProcessDefinitionInstanceVersionStatisticsQuery`](../type-aliases/ProcessDefinitionInstanceVersionStatisticsQuery.md)
 
 ##### consistencyManagement
 
 [`getProcessDefinitionInstanceVersionStatisticsConsistency`](../type-aliases/getProcessDefinitionInstanceVersionStatisticsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionInstanceVersionStatisticsQueryResult`](../type-aliases/ProcessDefinitionInstanceVersionStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getProcessDefinitionInstanceVersionStatisticsExample(
+  processDefinitionId: ProcessDefinitionId
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessDefinitionInstanceVersionStatistics(
+    {
+      filter: {
+        processDefinitionId,
+      },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(
+      `Version ${stat.processDefinitionVersion}: ${stat.activeInstancesWithoutIncidentCount} active`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -4028,10 +5201,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessDefinitionMessageSubscriptionStatistics()
 
 ```ts
-getProcessDefinitionMessageSubscriptionStatistics(input, consistencyManagement): CancelablePromise<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>;
+getProcessDefinitionMessageSubscriptionStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6247](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6247)
+Defined in: [gen/CamundaClient.ts:6975](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L6975)
 
 Get message subscription statistics
 
@@ -4043,101 +5219,39 @@ Get message subscription statistics, grouped by process definition.
 
 ##### input
 
-###### filter?
-
-\{
-`correlationKey?`: [`StringFilterProperty`](../type-aliases/StringFilterProperty.md);
-`elementId?`: [`StringFilterProperty`](../type-aliases/StringFilterProperty.md);
-`elementInstanceKey?`: [`ElementInstanceKeyFilterProperty`](../type-aliases/ElementInstanceKeyFilterProperty.md);
-`lastUpdatedDate?`: [`DateTimeFilterProperty`](../type-aliases/DateTimeFilterProperty.md);
-`messageName?`: [`StringFilterProperty`](../type-aliases/StringFilterProperty.md);
-`messageSubscriptionKey?`: [`MessageSubscriptionKeyFilterProperty`](../type-aliases/MessageSubscriptionKeyFilterProperty.md);
-`messageSubscriptionState?`: [`MessageSubscriptionStateFilterProperty`](../type-aliases/MessageSubscriptionStateFilterProperty.md);
-`processDefinitionId?`: [`StringFilterProperty`](../type-aliases/StringFilterProperty.md);
-`processDefinitionKey?`: [`ProcessDefinitionKeyFilterProperty`](../type-aliases/ProcessDefinitionKeyFilterProperty.md);
-`processInstanceKey?`: [`ProcessInstanceKeyFilterProperty`](../type-aliases/ProcessInstanceKeyFilterProperty.md);
-`tenantId?`: [`StringFilterProperty`](../type-aliases/StringFilterProperty.md);
-\}
-
-Message subscription search filter.
-
-###### filter.correlationKey?
-
-[`StringFilterProperty`](../type-aliases/StringFilterProperty.md)
-
-The correlation key of the message subscription.
-
-###### filter.elementId?
-
-[`StringFilterProperty`](../type-aliases/StringFilterProperty.md)
-
-The element ID associated with this message subscription.
-
-###### filter.elementInstanceKey?
-
-[`ElementInstanceKeyFilterProperty`](../type-aliases/ElementInstanceKeyFilterProperty.md)
-
-The element instance key associated with this message subscription.
-
-###### filter.lastUpdatedDate?
-
-[`DateTimeFilterProperty`](../type-aliases/DateTimeFilterProperty.md)
-
-The last updated date of the message subscription.
-
-###### filter.messageName?
-
-[`StringFilterProperty`](../type-aliases/StringFilterProperty.md)
-
-The name of the message associated with the message subscription.
-
-###### filter.messageSubscriptionKey?
-
-[`MessageSubscriptionKeyFilterProperty`](../type-aliases/MessageSubscriptionKeyFilterProperty.md)
-
-The message subscription key associated with this message subscription.
-
-###### filter.messageSubscriptionState?
-
-[`MessageSubscriptionStateFilterProperty`](../type-aliases/MessageSubscriptionStateFilterProperty.md)
-
-The message subscription state.
-
-###### filter.processDefinitionId?
-
-[`StringFilterProperty`](../type-aliases/StringFilterProperty.md)
-
-The process definition ID associated with this message subscription.
-
-###### filter.processDefinitionKey?
-
-[`ProcessDefinitionKeyFilterProperty`](../type-aliases/ProcessDefinitionKeyFilterProperty.md)
-
-The process definition key associated with this correlated message subscription. This only works for data created with 8.9 and later.
-
-###### filter.processInstanceKey?
-
-[`ProcessInstanceKeyFilterProperty`](../type-aliases/ProcessInstanceKeyFilterProperty.md)
-
-The process instance key associated with this message subscription.
-
-###### filter.tenantId?
-
-[`StringFilterProperty`](../type-aliases/StringFilterProperty.md)
-
-The unique external tenant ID.
-
-###### page?
-
-[`CursorForwardPagination`](../type-aliases/CursorForwardPagination.md)
+[`ProcessDefinitionMessageSubscriptionStatisticsQuery`](../type-aliases/ProcessDefinitionMessageSubscriptionStatisticsQuery.md)
 
 ##### consistencyManagement
 
 [`getProcessDefinitionMessageSubscriptionStatisticsConsistency`](../type-aliases/getProcessDefinitionMessageSubscriptionStatisticsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionMessageSubscriptionStatisticsQueryResult`](../type-aliases/ProcessDefinitionMessageSubscriptionStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getProcessDefinitionMessageSubscriptionStatisticsExample() {
+  const camunda = createCamundaClient();
+
+  const result =
+    await camunda.getProcessDefinitionMessageSubscriptionStatistics(
+      {},
+      { consistency: { waitUpToMs: 5000 } }
+    );
+
+  for (const stat of result.items ?? []) {
+    console.log(
+      `Definition ${stat.processDefinitionId}: ${stat.activeSubscriptions} subscriptions`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -4156,10 +5270,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessDefinitionStatistics()
 
 ```ts
-getProcessDefinitionStatistics(input, consistencyManagement): CancelablePromise<ProcessDefinitionElementStatisticsQueryResult>;
+getProcessDefinitionStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessDefinitionElementStatisticsQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6310](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6310)
+Defined in: [gen/CamundaClient.ts:7042](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7042)
 
 Get process definition statistics
 
@@ -4177,9 +5294,32 @@ Get statistics about elements in currently running process instances by process 
 
 [`getProcessDefinitionStatisticsConsistency`](../type-aliases/getProcessDefinitionStatisticsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionElementStatisticsQueryResult`](../type-aliases/ProcessDefinitionElementStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getProcessDefinitionStatisticsExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessDefinitionStatistics(
+    { processDefinitionKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Element ${stat.elementId}: active=${stat.active}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -4198,10 +5338,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessDefinitionXml()
 
 ```ts
-getProcessDefinitionXml(input, consistencyManagement): CancelablePromise<string>;
+getProcessDefinitionXml(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<string>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6375](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6375)
+Defined in: [gen/CamundaClient.ts:7111](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7111)
 
 Get process definition XML
 
@@ -4219,9 +5362,30 @@ Returns process definition as XML.
 
 [`getProcessDefinitionXmlConsistency`](../type-aliases/getProcessDefinitionXmlConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>
+
+#### Example
+
+```ts
+async function getProcessDefinitionXmlExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const xml = await camunda.getProcessDefinitionXml(
+    { processDefinitionKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`XML length: ${JSON.stringify(xml).length}`);
+}
+```
 
 #### Operation Id
 
@@ -4240,26 +5404,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessInstance()
 
 ```ts
-getProcessInstance(input, consistencyManagement): CancelablePromise<{
-  endDate?: string;
-  hasIncident: boolean;
-  parentElementInstanceKey?: ElementInstanceKey;
-  parentProcessInstanceKey?: ProcessInstanceKey;
-  processDefinitionId: ProcessDefinitionId;
-  processDefinitionKey: ProcessDefinitionKey;
-  processDefinitionName: string;
-  processDefinitionVersion: number;
-  processDefinitionVersionTag?: string;
-  processInstanceKey: ProcessInstanceKey;
-  rootProcessInstanceKey?: ProcessInstanceKey;
-  startDate: string;
-  state: ProcessInstanceStateEnum;
-  tags?: TagSet;
-  tenantId: TenantId;
-}>;
+getProcessInstance(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessInstanceResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6440](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6440)
+Defined in: [gen/CamundaClient.ts:7178](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7178)
 
 Get process instance
 
@@ -4277,34 +5428,21 @@ Get the process instance by the process instance key.
 
 [`getProcessInstanceConsistency`](../type-aliases/getProcessInstanceConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`endDate?`: `string`;
-`hasIncident`: `boolean`;
-`parentElementInstanceKey?`: [`ElementInstanceKey`](../type-aliases/ElementInstanceKey.md);
-`parentProcessInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`processDefinitionId`: [`ProcessDefinitionId`](../type-aliases/ProcessDefinitionId.md);
-`processDefinitionKey`: [`ProcessDefinitionKey`](../type-aliases/ProcessDefinitionKey.md);
-`processDefinitionName`: `string`;
-`processDefinitionVersion`: `number`;
-`processDefinitionVersionTag?`: `string`;
-`processInstanceKey`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`rootProcessInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`startDate`: `string`;
-`state`: [`ProcessInstanceStateEnum`](../type-aliases/ProcessInstanceStateEnum.md);
-`tags?`: [`TagSet`](../type-aliases/TagSet.md);
-`tenantId`: [`TenantId`](../type-aliases/TenantId.md);
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceResult`](../type-aliases/ProcessInstanceResult.md)\>
 
 #### Example
 
 ```ts
-async function getProcessInstanceExample() {
+async function getProcessInstanceExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
-
-  const processInstanceKey =
-    ProcessInstanceKey.assumeExists("2251799813685249");
 
   const instance = await camunda.getProcessInstance(
     { processInstanceKey },
@@ -4333,10 +5471,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessInstanceCallHierarchy()
 
 ```ts
-getProcessInstanceCallHierarchy(input, consistencyManagement): CancelablePromise<ProcessInstanceCallHierarchyEntry[]>;
+getProcessInstanceCallHierarchy(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessInstanceCallHierarchyEntry[]>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6503](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6503)
+Defined in: [gen/CamundaClient.ts:7245](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7245)
 
 Get call hierarchy
 
@@ -4354,9 +5495,30 @@ Returns the call hierarchy for a given process instance, showing its ancestry up
 
 [`getProcessInstanceCallHierarchyConsistency`](../type-aliases/getProcessInstanceCallHierarchyConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceCallHierarchyEntry`](../type-aliases/ProcessInstanceCallHierarchyEntry.md)[]\>
+
+#### Example
+
+```ts
+async function getProcessInstanceCallHierarchyExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceCallHierarchy(
+    { processInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Call hierarchy entries: ${result.length}`);
+}
+```
 
 #### Operation Id
 
@@ -4375,12 +5537,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessInstanceSequenceFlows()
 
 ```ts
-getProcessInstanceSequenceFlows(input, consistencyManagement): CancelablePromise<{
-  items?: object[];
-}>;
+getProcessInstanceSequenceFlows(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessInstanceSequenceFlowsQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6566](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6566)
+Defined in: [gen/CamundaClient.ts:7312](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7312)
 
 Get sequence flows
 
@@ -4398,11 +5561,32 @@ Get sequence flows taken by the process instance.
 
 [`getProcessInstanceSequenceFlowsConsistency`](../type-aliases/getProcessInstanceSequenceFlowsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`items?`: `object`[];
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceSequenceFlowsQueryResult`](../type-aliases/ProcessInstanceSequenceFlowsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getProcessInstanceSequenceFlowsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceSequenceFlows(
+    { processInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const flow of result.items ?? []) {
+    console.log(`Sequence flow: ${flow.sequenceFlowId}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -4421,10 +5605,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessInstanceStatistics()
 
 ```ts
-getProcessInstanceStatistics(input, consistencyManagement): CancelablePromise<ProcessInstanceElementStatisticsQueryResult>;
+getProcessInstanceStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessInstanceElementStatisticsQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6629](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6629)
+Defined in: [gen/CamundaClient.ts:7379](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7379)
 
 Get element instance statistics
 
@@ -4442,9 +5629,32 @@ Get statistics about elements by the process instance key.
 
 [`getProcessInstanceStatisticsConsistency`](../type-aliases/getProcessInstanceStatisticsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceElementStatisticsQueryResult`](../type-aliases/ProcessInstanceElementStatisticsQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getProcessInstanceStatisticsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceStatistics(
+    { processInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Element ${stat.elementId}: active=${stat.active}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -4463,10 +5673,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessInstanceStatisticsByDefinition()
 
 ```ts
-getProcessInstanceStatisticsByDefinition(input, consistencyManagement): CancelablePromise<IncidentProcessInstanceStatisticsByDefinitionQueryResult>;
+getProcessInstanceStatisticsByDefinition(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<IncidentProcessInstanceStatisticsByDefinitionQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6695](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6695)
+Defined in: [gen/CamundaClient.ts:7449](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7449)
 
 Get process instance statistics by definition
 
@@ -4486,9 +5699,36 @@ provided as a filter in the request body.
 
 [`getProcessInstanceStatisticsByDefinitionConsistency`](../type-aliases/getProcessInstanceStatisticsByDefinitionConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`IncidentProcessInstanceStatisticsByDefinitionQueryResult`](../type-aliases/IncidentProcessInstanceStatisticsByDefinitionQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getProcessInstanceStatisticsByDefinitionExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceStatisticsByDefinition(
+    {
+      filter: {
+        errorHashCode: 12345,
+      },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(
+      `Definition ${stat.processDefinitionId}: ${stat.activeInstancesWithErrorCount} incidents`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -4507,10 +5747,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getProcessInstanceStatisticsByError()
 
 ```ts
-getProcessInstanceStatisticsByError(input, consistencyManagement): CancelablePromise<IncidentProcessInstanceStatisticsByErrorQueryResult>;
+getProcessInstanceStatisticsByError(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<IncidentProcessInstanceStatisticsByErrorQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6760](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6760)
+Defined in: [gen/CamundaClient.ts:7518](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7518)
 
 Get process instance statistics by error
 
@@ -4529,9 +5772,32 @@ grouped by incident error hash code.
 
 [`getProcessInstanceStatisticsByErrorConsistency`](../type-aliases/getProcessInstanceStatisticsByErrorConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`IncidentProcessInstanceStatisticsByErrorQueryResult`](../type-aliases/IncidentProcessInstanceStatisticsByErrorQueryResult.md)\>
+
+#### Example
+
+```ts
+async function getProcessInstanceStatisticsByErrorExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceStatisticsByError(
+    {},
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(
+      `Error: ${stat.errorMessage}, count: ${stat.activeInstancesWithErrorCount}`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -4550,10 +5816,10 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getResource()
 
 ```ts
-getResource(input): CancelablePromise<ResourceResult>;
+getResource(input, options?): CancelablePromise<ResourceResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6826](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6826)
+Defined in: [gen/CamundaClient.ts:7588](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7588)
 
 Get resource
 
@@ -4570,9 +5836,27 @@ Currently, this endpoint only supports RPA resources.
 
 [`getResourceInput`](../type-aliases/getResourceInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ResourceResult`](../type-aliases/ResourceResult.md)\>
+
+#### Example
+
+```ts
+async function getResourceExample(resourceKey: ProcessDefinitionKey) {
+  const camunda = createCamundaClient();
+
+  const resource = await camunda.getResource({
+    resourceKey,
+  });
+
+  console.log(`Resource: ${resource.resourceName} (${resource.resourceId})`);
+}
+```
 
 #### Operation Id
 
@@ -4587,10 +5871,10 @@ Resource
 ### getResourceContent()
 
 ```ts
-getResourceContent(input): CancelablePromise<Blob>;
+getResourceContent(input, options?): CancelablePromise<string>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6888](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6888)
+Defined in: [gen/CamundaClient.ts:7654](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7654)
 
 Get resource content
 
@@ -4607,9 +5891,27 @@ Currently, this endpoint only supports RPA resources.
 
 [`getResourceContentInput`](../type-aliases/getResourceContentInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`Blob`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>
+
+#### Example
+
+```ts
+async function getResourceContentExample(resourceKey: ProcessDefinitionKey) {
+  const camunda = createCamundaClient();
+
+  const content = await camunda.getResourceContent({
+    resourceKey,
+  });
+
+  console.log(`Content retrieved (type: ${typeof content})`);
+}
+```
 
 #### Operation Id
 
@@ -4624,10 +5926,13 @@ Resource
 ### getRole()
 
 ```ts
-getRole(input, consistencyManagement): CancelablePromise<RoleResult>;
+getRole(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<RoleResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:6947](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L6947)
+Defined in: [gen/CamundaClient.ts:7717](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7717)
 
 Get role
 
@@ -4645,9 +5950,28 @@ Get a role by its ID.
 
 [`getRoleConsistency`](../type-aliases/getRoleConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RoleResult`](../type-aliases/RoleResult.md)\>
+
+#### Example
+
+```ts
+async function getRoleExample() {
+  const camunda = createCamundaClient();
+
+  const role = await camunda.getRole(
+    { roleId: "process-admin" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Role: ${role.name}`);
+}
+```
 
 #### Operation Id
 
@@ -4666,20 +5990,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getStartProcessForm()
 
 ```ts
-getStartProcessForm(input, consistencyManagement): CancelablePromise<
-  | void
-  | {
-  formId?: FormId;
-  formKey?: FormKey;
-  schema?: {
-   [key: string]: unknown;
-  };
-  tenantId?: TenantId;
-  version?: number;
-}>;
+getStartProcessForm(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<void | FormResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7012](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7012)
+Defined in: [gen/CamundaClient.ts:7786](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7786)
 
 Get process start form
 
@@ -4698,19 +6015,32 @@ Note that this endpoint will only return linked forms. This endpoint does not su
 
 [`getStartProcessFormConsistency`](../type-aliases/getStartProcessFormConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<
-\| `void`
-\| \{
-`formId?`: [`FormId`](../type-aliases/FormId.md);
-`formKey?`: [`FormKey`](../type-aliases/FormKey.md);
-`schema?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-`tenantId?`: [`TenantId`](../type-aliases/TenantId.md);
-`version?`: `number`;
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void` \| [`FormResult`](../type-aliases/FormResult.md)\>
+
+#### Example
+
+```ts
+async function getStartProcessFormExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const form = await camunda.getStartProcessForm(
+    { processDefinitionKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  if (form) {
+    console.log(`Form key: ${form.formKey}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -4729,10 +6059,10 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getStatus()
 
 ```ts
-getStatus(): CancelablePromise<void>;
+getStatus(options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7074](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7074)
+Defined in: [gen/CamundaClient.ts:7852](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7852)
 
 Get cluster status
 
@@ -4740,9 +6070,27 @@ Checks the health status of the cluster by verifying if there's at least one par
 
 -
 
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function getStatusExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.getStatus();
+
+  console.log("Cluster is healthy");
+}
+```
 
 #### Operation Id
 
@@ -4754,13 +6102,66 @@ Cluster
 
 ---
 
+### getSystemConfiguration()
+
+```ts
+getSystemConfiguration(options?): CancelablePromise<SystemConfigurationResponse>;
+```
+
+Defined in: [gen/CamundaClient.ts:7909](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7909)
+
+System configuration (alpha)
+
+Returns the current system configuration. The response is an envelope
+that groups settings by feature area.
+
+This endpoint is an alpha feature and may be subject to change
+in future releases.
+
+-
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SystemConfigurationResponse`](../type-aliases/SystemConfigurationResponse.md)\>
+
+#### Example
+
+```ts
+async function getSystemConfigurationExample() {
+  const camunda = createCamundaClient();
+
+  const config = await camunda.getSystemConfiguration();
+
+  console.log(`Configuration loaded: ${JSON.stringify(config)}`);
+}
+```
+
+#### Operation Id
+
+getSystemConfiguration
+
+#### Tags
+
+System
+
+---
+
 ### getTenant()
 
 ```ts
-getTenant(input, consistencyManagement): CancelablePromise<TenantResult>;
+getTenant(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<TenantResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7124](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7124)
+Defined in: [gen/CamundaClient.ts:7962](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L7962)
 
 Get tenant
 
@@ -4778,9 +6179,28 @@ Retrieves a single tenant by tenant ID.
 
 [`getTenantConsistency`](../type-aliases/getTenantConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantResult`](../type-aliases/TenantResult.md)\>
+
+#### Example
+
+```ts
+async function getTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const tenant = await camunda.getTenant(
+    { tenantId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Tenant: ${tenant.name}`);
+}
+```
 
 #### Operation Id
 
@@ -4799,10 +6219,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getTenantClusterVariable()
 
 ```ts
-getTenantClusterVariable(input, consistencyManagement): CancelablePromise<ClusterVariableResult>;
+getTenantClusterVariable(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ClusterVariableResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7187](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7187)
+Defined in: [gen/CamundaClient.ts:8029](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8029)
 
 Get a tenant-scoped cluster variable
 
@@ -4820,9 +6243,31 @@ Get a tenant-scoped cluster variable.
 
 [`getTenantClusterVariableConsistency`](../type-aliases/getTenantClusterVariableConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterVariableResult`](../type-aliases/ClusterVariableResult.md)\>
+
+#### Example
+
+```ts
+async function getTenantClusterVariableExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const variable = await camunda.getTenantClusterVariable(
+    {
+      tenantId,
+      name: "config",
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`${variable.name} = ${variable.value}`);
+}
+```
 
 #### Operation Id
 
@@ -4841,16 +6286,22 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getTopology()
 
 ```ts
-getTopology(): CancelablePromise<TopologyResponse>;
+getTopology(options?): CancelablePromise<TopologyResponse>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7251](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7251)
+Defined in: [gen/CamundaClient.ts:8095](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8095)
 
 Get cluster topology
 
 Obtains the current topology of the cluster the gateway is part of.
 
 -
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
@@ -4885,10 +6336,13 @@ Cluster
 ### getUsageMetrics()
 
 ```ts
-getUsageMetrics(input, consistencyManagement): CancelablePromise<UsageMetricsResponse>;
+getUsageMetrics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<UsageMetricsResponse>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7301](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7301)
+Defined in: [gen/CamundaClient.ts:8148](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8148)
 
 Get usage metrics
 
@@ -4906,9 +6360,31 @@ Retrieve the usage metrics based on given criteria.
 
 [`getUsageMetricsConsistency`](../type-aliases/getUsageMetricsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UsageMetricsResponse`](../type-aliases/UsageMetricsResponse.md)\>
+
+#### Example
+
+```ts
+async function getUsageMetricsExample() {
+  const camunda = createCamundaClient();
+
+  const metrics = await camunda.getUsageMetrics(
+    {
+      startTime: "2025-01-01T00:00:00Z",
+      endTime: "2025-12-31T23:59:59Z",
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Usage metrics retrieved: ${JSON.stringify(metrics)}`);
+}
+```
 
 #### Operation Id
 
@@ -4927,10 +6403,17 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getUser()
 
 ```ts
-getUser(input, consistencyManagement): CancelablePromise<UserResult>;
+getUser(
+   input,
+   consistencyManagement,
+   options?): CancelablePromise<{
+  email: string | null;
+  name: string | null;
+  username: Username;
+}>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7364](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7364)
+Defined in: [gen/CamundaClient.ts:8215](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8215)
 
 Get user
 
@@ -4948,9 +6431,32 @@ Get a user by its username.
 
 [`getUserConsistency`](../type-aliases/getUserConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserResult`](../type-aliases/UserResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`email`: `string` \| `null`;
+`name`: `string` \| `null`;
+`username`: [`Username`](../type-aliases/Username.md);
+\}\>
+
+#### Example
+
+```ts
+async function getUserExample(username: Username) {
+  const camunda = createCamundaClient();
+
+  const user = await camunda.getUser(
+    { username },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`User: ${user.name} (${user.email})`);
+}
+```
 
 #### Operation Id
 
@@ -4969,37 +6475,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getUserTask()
 
 ```ts
-getUserTask(input, consistencyManagement): CancelablePromise<{
-  assignee?: string;
-  candidateGroups?: string[];
-  candidateUsers?: string[];
-  completionDate?: string;
-  creationDate?: string;
-  customHeaders?: {
-   [key: string]: string;
-  };
-  dueDate?: string;
-  elementId?: ElementId;
-  elementInstanceKey?: ElementInstanceKey;
-  externalFormReference?: string;
-  followUpDate?: string;
-  formKey?: FormKey;
-  name?: string;
-  priority?: number;
-  processDefinitionId?: ProcessDefinitionId;
-  processDefinitionKey?: ProcessDefinitionKey;
-  processDefinitionVersion?: number;
-  processInstanceKey?: ProcessInstanceKey;
-  processName?: string;
-  rootProcessInstanceKey?: ProcessInstanceKey;
-  state?: UserTaskStateEnum;
-  tags?: TagSet;
-  tenantId?: TenantId;
-  userTaskKey?: UserTaskKey;
-}>;
+getUserTask(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<UserTaskResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7427](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7427)
+Defined in: [gen/CamundaClient.ts:8282](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8282)
 
 Get user task
 
@@ -5017,36 +6499,28 @@ Get the user task by the user task key.
 
 [`getUserTaskConsistency`](../type-aliases/getUserTaskConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`assignee?`: `string`;
-`candidateGroups?`: `string`[];
-`candidateUsers?`: `string`[];
-`completionDate?`: `string`;
-`creationDate?`: `string`;
-`customHeaders?`: \{
-\[`key`: `string`\]: `string`;
-\};
-`dueDate?`: `string`;
-`elementId?`: [`ElementId`](../type-aliases/ElementId.md);
-`elementInstanceKey?`: [`ElementInstanceKey`](../type-aliases/ElementInstanceKey.md);
-`externalFormReference?`: `string`;
-`followUpDate?`: `string`;
-`formKey?`: [`FormKey`](../type-aliases/FormKey.md);
-`name?`: `string`;
-`priority?`: `number`;
-`processDefinitionId?`: [`ProcessDefinitionId`](../type-aliases/ProcessDefinitionId.md);
-`processDefinitionKey?`: [`ProcessDefinitionKey`](../type-aliases/ProcessDefinitionKey.md);
-`processDefinitionVersion?`: `number`;
-`processInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`processName?`: `string`;
-`rootProcessInstanceKey?`: [`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md);
-`state?`: [`UserTaskStateEnum`](../type-aliases/UserTaskStateEnum.md);
-`tags?`: [`TagSet`](../type-aliases/TagSet.md);
-`tenantId?`: [`TenantId`](../type-aliases/TenantId.md);
-`userTaskKey?`: [`UserTaskKey`](../type-aliases/UserTaskKey.md);
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserTaskResult`](../type-aliases/UserTaskResult.md)\>
+
+#### Example
+
+```ts
+async function getUserTaskExample(userTaskKey: UserTaskKey) {
+  const camunda = createCamundaClient();
+
+  const task = await camunda.getUserTask(
+    { userTaskKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Task: ${task.name} (${task.state})`);
+}
+```
 
 #### Operation Id
 
@@ -5065,20 +6539,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getUserTaskForm()
 
 ```ts
-getUserTaskForm(input, consistencyManagement): CancelablePromise<
-  | void
-  | {
-  formId?: FormId;
-  formKey?: FormKey;
-  schema?: {
-   [key: string]: unknown;
-  };
-  tenantId?: TenantId;
-  version?: number;
-}>;
+getUserTaskForm(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<void | FormResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7492](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7492)
+Defined in: [gen/CamundaClient.ts:8351](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8351)
 
 Get user task form
 
@@ -5097,19 +6564,30 @@ Note that this endpoint will only return linked forms. This endpoint does not su
 
 [`getUserTaskFormConsistency`](../type-aliases/getUserTaskFormConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<
-\| `void`
-\| \{
-`formId?`: [`FormId`](../type-aliases/FormId.md);
-`formKey?`: [`FormKey`](../type-aliases/FormKey.md);
-`schema?`: \{
-\[`key`: `string`\]: `unknown`;
-\};
-`tenantId?`: [`TenantId`](../type-aliases/TenantId.md);
-`version?`: `number`;
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void` \| [`FormResult`](../type-aliases/FormResult.md)\>
+
+#### Example
+
+```ts
+async function getUserTaskFormExample(userTaskKey: UserTaskKey) {
+  const camunda = createCamundaClient();
+
+  const form = await camunda.getUserTaskForm(
+    { userTaskKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  if (form) {
+    console.log(`Form key: ${form.formKey}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -5128,14 +6606,21 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getVariable()
 
 ```ts
-getVariable(input, consistencyManagement): CancelablePromise<object & object>;
+getVariable(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<VariableResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7555](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7555)
+Defined in: [gen/CamundaClient.ts:8422](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8422)
 
 Get variable
 
-Get the variable by the variable key.
+Get a variable by its key.
+
+This endpoint returns both process-level and local (element-scoped) variables.
+The variable's scopeKey indicates whether it's a process-level variable or scoped to a
+specific element instance.
 
 -
 
@@ -5149,9 +6634,28 @@ Get the variable by the variable key.
 
 [`getVariableConsistency`](../type-aliases/getVariableConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`object` & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`VariableResult`](../type-aliases/VariableResult.md)\>
+
+#### Example
+
+```ts
+async function getVariableExample(variableKey: VariableKey) {
+  const camunda = createCamundaClient();
+
+  const variable = await camunda.getVariable(
+    { variableKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`${variable.name} = ${variable.value}`);
+}
+```
 
 #### Operation Id
 
@@ -5173,7 +6677,7 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 getWorkers(): any[];
 ```
 
-Defined in: [gen/CamundaClient.ts:1552](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1552)
+Defined in: [gen/CamundaClient.ts:1569](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1569)
 
 Return a read-only snapshot of currently registered job workers.
 
@@ -5189,7 +6693,7 @@ Return a read-only snapshot of currently registered job workers.
 logger(scope?): Logger;
 ```
 
-Defined in: [gen/CamundaClient.ts:1449](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1449)
+Defined in: [gen/CamundaClient.ts:1453](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1453)
 
 Access a scoped logger (internal & future user emission).
 
@@ -5208,10 +6712,10 @@ Access a scoped logger (internal & future user emission).
 ### migrateProcessInstance()
 
 ```ts
-migrateProcessInstance(input): CancelablePromise<void>;
+migrateProcessInstance(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7624](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7624)
+Defined in: [gen/CamundaClient.ts:8495](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8495)
 
 Migrate process instance
 
@@ -5231,9 +6735,37 @@ latest process improvements.
 
 [`migrateProcessInstanceInput`](../type-aliases/migrateProcessInstanceInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function migrateProcessInstanceExample(
+  processInstanceKey: ProcessInstanceKey,
+  targetProcessDefinitionKey: ProcessDefinitionKey,
+  sourceElementId: ElementId,
+  targetElementId: ElementId
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.migrateProcessInstance({
+    processInstanceKey,
+    targetProcessDefinitionKey,
+    mappingInstructions: [
+      {
+        sourceElementId,
+        targetElementId,
+      },
+    ],
+  });
+}
+```
 
 #### Operation Id
 
@@ -5248,10 +6780,10 @@ Process instance
 ### migrateProcessInstancesBatchOperation()
 
 ```ts
-migrateProcessInstancesBatchOperation(input, consistencyManagement): CancelablePromise<BatchOperationCreatedResult>;
+migrateProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOperationCreatedResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7689](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7689)
+Defined in: [gen/CamundaClient.ts:8563](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8563)
 
 Migrate process instances (batch)
 
@@ -5266,29 +6798,45 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 ##### input
 
-###### filter
+[`ProcessInstanceMigrationBatchOperationRequest`](../type-aliases/ProcessInstanceMigrationBatchOperationRequest.md)
 
-[`ProcessInstanceFilter`](../type-aliases/ProcessInstanceFilter.md)
+##### options?
 
-The process instance filter.
-
-###### migrationPlan
-
-[`ProcessInstanceMigrationBatchOperationPlan`](../type-aliases/ProcessInstanceMigrationBatchOperationPlan.md)
-
-The migration plan.
-
-###### operationReference?
-
-`number`
-
-##### consistencyManagement
-
-[`migrateProcessInstancesBatchOperationConsistency`](../type-aliases/migrateProcessInstancesBatchOperationConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+```ts
+async function migrateProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey,
+  targetProcessDefinitionKey: ProcessDefinitionKey,
+  sourceElementId: ElementId,
+  targetElementId: ElementId
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.migrateProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+    migrationPlan: {
+      targetProcessDefinitionKey,
+      mappingInstructions: [
+        {
+          sourceElementId,
+          targetElementId,
+        },
+      ],
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
 
 #### Operation Id
 
@@ -5298,19 +6846,15 @@ migrateProcessInstancesBatchOperation
 
 Process instance
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### modifyProcessInstance()
 
 ```ts
-modifyProcessInstance(input): CancelablePromise<void>;
+modifyProcessInstance(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7757](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7757)
+Defined in: [gen/CamundaClient.ts:8631](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8631)
 
 Modify process instance
 
@@ -5329,9 +6873,31 @@ For example, because an external system is not available or doesn't respond as e
 
 [`modifyProcessInstanceInput`](../type-aliases/modifyProcessInstanceInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function modifyProcessInstanceExample(
+  processInstanceKey: ProcessInstanceKey,
+  elementId: ElementId,
+  elementInstanceKey: ElementInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.modifyProcessInstance({
+    processInstanceKey,
+    activateInstructions: [{ elementId }],
+    terminateInstructions: [{ elementInstanceKey }],
+  });
+}
+```
 
 #### Operation Id
 
@@ -5346,10 +6912,10 @@ Process instance
 ### modifyProcessInstancesBatchOperation()
 
 ```ts
-modifyProcessInstancesBatchOperation(input, consistencyManagement): CancelablePromise<BatchOperationCreatedResult>;
+modifyProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOperationCreatedResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7824](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7824)
+Defined in: [gen/CamundaClient.ts:8701](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8701)
 
 Modify process instances (batch)
 
@@ -5366,29 +6932,41 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 ##### input
 
-###### filter
+[`ProcessInstanceModificationBatchOperationRequest`](../type-aliases/ProcessInstanceModificationBatchOperationRequest.md)
 
-[`ProcessInstanceFilter`](../type-aliases/ProcessInstanceFilter.md)
+##### options?
 
-The process instance filter.
-
-###### moveInstructions
-
-[`ProcessInstanceModificationMoveBatchOperationInstruction`](../type-aliases/ProcessInstanceModificationMoveBatchOperationInstruction.md)[]
-
-Instructions for moving tokens between elements.
-
-###### operationReference?
-
-`number`
-
-##### consistencyManagement
-
-[`modifyProcessInstancesBatchOperationConsistency`](../type-aliases/modifyProcessInstancesBatchOperationConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+```ts
+async function modifyProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey,
+  sourceElementId: ElementId,
+  targetElementId: ElementId
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.modifyProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+    moveInstructions: [
+      {
+        sourceElementId,
+        targetElementId,
+      },
+    ],
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
 
 #### Operation Id
 
@@ -5398,10 +6976,6 @@ modifyProcessInstancesBatchOperation
 
 Process instance
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### onAuthHeaders()
@@ -5410,7 +6984,7 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 onAuthHeaders(h): void;
 ```
 
-Defined in: [gen/CamundaClient.ts:1441](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1441)
+Defined in: [gen/CamundaClient.ts:1445](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1445)
 
 #### Parameters
 
@@ -5429,10 +7003,10 @@ Defined in: [gen/CamundaClient.ts:1441](https://github.com/camunda/orchestration
 ### pinClock()
 
 ```ts
-pinClock(input): CancelablePromise<void>;
+pinClock(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7892](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7892)
+Defined in: [gen/CamundaClient.ts:8769](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8769)
 
 Pin internal clock (alpha)
 
@@ -5451,9 +7025,27 @@ in future releases.
 
 [`ClockPinRequest`](../type-aliases/ClockPinRequest.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function pinClockExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.pinClock({
+    timestamp: 1735689599000,
+  });
+
+  console.log("Clock pinned");
+}
+```
 
 #### Operation Id
 
@@ -5468,13 +7060,10 @@ Clock
 ### publishMessage()
 
 ```ts
-publishMessage(input): CancelablePromise<{
-  messageKey?: MessageKey;
-  tenantId?: TenantId;
-}>;
+publishMessage(input, options?): CancelablePromise<MessagePublicationResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:7957](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L7957)
+Defined in: [gen/CamundaClient.ts:8836](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8836)
 
 Publish message
 
@@ -5492,12 +7081,13 @@ Use the message correlation endpoint for such use cases.
 
 [`MessagePublicationRequest`](../type-aliases/MessagePublicationRequest.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`messageKey?`: [`MessageKey`](../type-aliases/MessageKey.md);
-`tenantId?`: [`TenantId`](../type-aliases/TenantId.md);
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`MessagePublicationResult`](../type-aliases/MessagePublicationResult.md)\>
 
 #### Example
 
@@ -5529,10 +7119,10 @@ Message
 ### resetClock()
 
 ```ts
-resetClock(): CancelablePromise<void>;
+resetClock(options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8025](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8025)
+Defined in: [gen/CamundaClient.ts:8908](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8908)
 
 Reset internal clock (alpha)
 
@@ -5545,9 +7135,27 @@ in future releases.
 
 -
 
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function resetClockExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.resetClock();
+
+  console.log("Clock reset");
+}
+```
 
 #### Operation Id
 
@@ -5562,10 +7170,10 @@ Clock
 ### resolveIncident()
 
 ```ts
-resolveIncident(input): CancelablePromise<void>;
+resolveIncident(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8078](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8078)
+Defined in: [gen/CamundaClient.ts:8962](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L8962)
 
 Resolve incident
 
@@ -5580,6 +7188,10 @@ to reset the job's retries, followed by this call.
 
 [`resolveIncidentInput`](../type-aliases/resolveIncidentInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
@@ -5587,10 +7199,8 @@ to reset the job's retries, followed by this call.
 #### Example
 
 ```ts
-async function resolveIncidentExample() {
+async function resolveIncidentExample(incidentKey: IncidentKey) {
   const camunda = createCamundaClient();
-
-  const incidentKey = IncidentKey.assumeExists("2251799813685249");
 
   await camunda.resolveIncident({ incidentKey });
 }
@@ -5609,10 +7219,10 @@ Incident
 ### resolveIncidentsBatchOperation()
 
 ```ts
-resolveIncidentsBatchOperation(input, consistencyManagement): CancelablePromise<BatchOperationCreatedResult>;
+resolveIncidentsBatchOperation(input, options?): CancelablePromise<BatchOperationCreatedResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8143](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8143)
+Defined in: [gen/CamundaClient.ts:9030](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9030)
 
 Resolve related incidents (batch)
 
@@ -5627,23 +7237,33 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 ##### input
 
-###### filter
+[`ProcessInstanceIncidentResolutionBatchOperationRequest`](../type-aliases/ProcessInstanceIncidentResolutionBatchOperationRequest.md)
 
-[`ProcessInstanceFilter`](../type-aliases/ProcessInstanceFilter.md)
+##### options?
 
-The process instance filter.
-
-###### operationReference?
-
-`number`
-
-##### consistencyManagement
-
-[`resolveIncidentsBatchOperationConsistency`](../type-aliases/resolveIncidentsBatchOperationConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+```ts
+async function resolveIncidentsBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.resolveIncidentsBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
 
 #### Operation Id
 
@@ -5653,19 +7273,15 @@ resolveIncidentsBatchOperation
 
 Process instance
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### resolveProcessInstanceIncidents()
 
 ```ts
-resolveProcessInstanceIncidents(input, consistencyManagement): CancelablePromise<BatchOperationCreatedResult>;
+resolveProcessInstanceIncidents(input, options?): CancelablePromise<BatchOperationCreatedResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8206](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8206)
+Defined in: [gen/CamundaClient.ts:9092](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9092)
 
 Resolve related incidents
 
@@ -5679,13 +7295,29 @@ Creates a batch operation to resolve multiple incidents of a process instance.
 
 [`resolveProcessInstanceIncidentsInput`](../type-aliases/resolveProcessInstanceIncidentsInput.md)
 
-##### consistencyManagement
+##### options?
 
-[`resolveProcessInstanceIncidentsConsistency`](../type-aliases/resolveProcessInstanceIncidentsConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+```ts
+async function resolveProcessInstanceIncidentsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.resolveProcessInstanceIncidents({
+    processInstanceKey,
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
 
 #### Operation Id
 
@@ -5695,19 +7327,15 @@ resolveProcessInstanceIncidents
 
 Process instance
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### resumeBatchOperation()
 
 ```ts
-resumeBatchOperation(input, consistencyManagement): CancelablePromise<void>;
+resumeBatchOperation(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8271](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8271)
+Defined in: [gen/CamundaClient.ts:9156](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9156)
 
 Resume Batch operation
 
@@ -5724,13 +7352,25 @@ This is done asynchronously, the progress can be tracked using the batch operati
 
 [`BatchOperationKey`](../type-aliases/BatchOperationKey.md)
 
-##### consistencyManagement
+##### options?
 
-[`resumeBatchOperationConsistency`](../type-aliases/resumeBatchOperationConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function resumeBatchOperationExample(
+  batchOperationKey: BatchOperationKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.resumeBatchOperation({ batchOperationKey });
+}
+```
 
 #### Operation Id
 
@@ -5740,19 +7380,18 @@ resumeBatchOperation
 
 Batch operation
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### searchAuditLogs()
 
 ```ts
-searchAuditLogs(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchAuditLogs(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AuditLogSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8336](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8336)
+Defined in: [gen/CamundaClient.ts:9221](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9221)
 
 Search audit logs
 
@@ -5770,9 +7409,32 @@ Search for audit logs based on given criteria.
 
 [`searchAuditLogsConsistency`](../type-aliases/searchAuditLogsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuditLogSearchQueryResult`](../type-aliases/AuditLogSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchAuditLogsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchAuditLogs(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const log of result.items ?? []) {
+    console.log(`${log.auditLogKey}: ${log.operationType}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -5791,10 +7453,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchAuthorizations()
 
 ```ts
-searchAuthorizations(input, consistencyManagement): CancelablePromise<AuthorizationSearchResult>;
+searchAuthorizations(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AuthorizationSearchResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8399](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8399)
+Defined in: [gen/CamundaClient.ts:9288](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9288)
 
 Search authorizations
 
@@ -5812,9 +7477,35 @@ Search for authorizations based on given criteria.
 
 [`searchAuthorizationsConsistency`](../type-aliases/searchAuthorizationsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuthorizationSearchResult`](../type-aliases/AuthorizationSearchResult.md)\>
+
+#### Example
+
+```ts
+async function searchAuthorizationsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchAuthorizations(
+    {
+      filter: { ownerType: "USER" },
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const auth of result.items ?? []) {
+    console.log(
+      `${auth.authorizationKey}: ${auth.ownerId} - ${auth.resourceType}`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -5833,10 +7524,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchBatchOperationItems()
 
 ```ts
-searchBatchOperationItems(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchBatchOperationItems(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<BatchOperationItemSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8462](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8462)
+Defined in: [gen/CamundaClient.ts:9355](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9355)
 
 Search batch operation items
 
@@ -5848,15 +7542,38 @@ Search for batch operation items based on given criteria.
 
 ##### input
 
-[`SearchQueryRequest`](../type-aliases/SearchQueryRequest.md) & `object`
+[`BatchOperationItemSearchQuery`](../type-aliases/BatchOperationItemSearchQuery.md)
 
 ##### consistencyManagement
 
 [`searchBatchOperationItemsConsistency`](../type-aliases/searchBatchOperationItemsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationItemSearchQueryResult`](../type-aliases/BatchOperationItemSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchBatchOperationItemsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchBatchOperationItems(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const item of result.items ?? []) {
+    console.log(`Item: ${item.itemKey} (${item.state})`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -5875,10 +7592,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchBatchOperations()
 
 ```ts
-searchBatchOperations(input, consistencyManagement): CancelablePromise<BatchOperationSearchQueryResult>;
+searchBatchOperations(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<BatchOperationSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8525](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8525)
+Defined in: [gen/CamundaClient.ts:9422](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9422)
 
 Search batch operations
 
@@ -5890,15 +7610,40 @@ Search for batch operations based on given criteria.
 
 ##### input
 
-[`SearchQueryRequest`](../type-aliases/SearchQueryRequest.md) & `object`
+[`BatchOperationSearchQuery`](../type-aliases/BatchOperationSearchQuery.md)
 
 ##### consistencyManagement
 
 [`searchBatchOperationsConsistency`](../type-aliases/searchBatchOperationsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationSearchQueryResult`](../type-aliases/BatchOperationSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchBatchOperationsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchBatchOperations(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const batch of result.items ?? []) {
+    console.log(
+      `${batch.batchOperationKey}: ${batch.batchOperationType} (${batch.state})`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -5917,10 +7662,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchClientsForGroup()
 
 ```ts
-searchClientsForGroup(input, consistencyManagement): CancelablePromise<TenantClientSearchResult>;
+searchClientsForGroup(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8588](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8588)
+Defined in: [gen/CamundaClient.ts:9489](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9489)
 
 Search group clients
 
@@ -5938,9 +7686,30 @@ Search clients assigned to a group.
 
 [`searchClientsForGroupConsistency`](../type-aliases/searchClientsForGroupConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantClientSearchResult`](../type-aliases/TenantClientSearchResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchClientsForGroupExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchClientsForGroup(
+    { groupId: "engineering-team" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const client of result.items ?? []) {
+    console.log(`Client: ${client.clientId}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -5959,10 +7728,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchClientsForRole()
 
 ```ts
-searchClientsForRole(input, consistencyManagement): CancelablePromise<TenantClientSearchResult>;
+searchClientsForRole(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8653](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8653)
+Defined in: [gen/CamundaClient.ts:9558](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9558)
 
 Search role clients
 
@@ -5980,9 +7752,30 @@ Search clients with assigned role.
 
 [`searchClientsForRoleConsistency`](../type-aliases/searchClientsForRoleConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantClientSearchResult`](../type-aliases/TenantClientSearchResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchClientsForRoleExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchClientsForRole(
+    { roleId: "process-admin" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const client of result.items ?? []) {
+    console.log(`Client: ${client.clientId}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6001,10 +7794,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchClientsForTenant()
 
 ```ts
-searchClientsForTenant(input, consistencyManagement): CancelablePromise<TenantClientSearchResult>;
+searchClientsForTenant(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8718](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8718)
+Defined in: [gen/CamundaClient.ts:9627](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9627)
 
 Search clients for tenant
 
@@ -6022,9 +7818,30 @@ Retrieves a filtered and sorted list of clients for a specified tenant.
 
 [`searchClientsForTenantConsistency`](../type-aliases/searchClientsForTenantConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantClientSearchResult`](../type-aliases/TenantClientSearchResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchClientsForTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchClientsForTenant(
+    { tenantId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const client of result.items ?? []) {
+    console.log(`Client: ${client.clientId}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6043,10 +7860,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchClusterVariables()
 
 ```ts
-searchClusterVariables(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchClusterVariables(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ClusterVariableSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8781](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8781)
+Defined in: [gen/CamundaClient.ts:9694](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9694)
 
 Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.
 
@@ -6062,9 +7882,32 @@ Search for cluster variables based on given criteria. By default, long variable 
 
 [`searchClusterVariablesConsistency`](../type-aliases/searchClusterVariablesConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterVariableSearchQueryResult`](../type-aliases/ClusterVariableSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchClusterVariablesExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchClusterVariables(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const variable of result.items ?? []) {
+    console.log(`${variable.name} = ${variable.value}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6083,10 +7926,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchCorrelatedMessageSubscriptions()
 
 ```ts
-searchCorrelatedMessageSubscriptions(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchCorrelatedMessageSubscriptions(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<CorrelatedMessageSubscriptionSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8846](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8846)
+Defined in: [gen/CamundaClient.ts:9763](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9763)
 
 Search correlated message subscriptions
 
@@ -6104,9 +7950,32 @@ Search correlated message subscriptions based on given criteria.
 
 [`searchCorrelatedMessageSubscriptionsConsistency`](../type-aliases/searchCorrelatedMessageSubscriptionsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`CorrelatedMessageSubscriptionSearchQueryResult`](../type-aliases/CorrelatedMessageSubscriptionSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchCorrelatedMessageSubscriptionsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchCorrelatedMessageSubscriptions(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const sub of result.items ?? []) {
+    console.log(`Correlated subscription: ${sub.messageName}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6125,10 +7994,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchDecisionDefinitions()
 
 ```ts
-searchDecisionDefinitions(input, consistencyManagement): CancelablePromise<DecisionDefinitionSearchQueryResult>;
+searchDecisionDefinitions(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<DecisionDefinitionSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8911](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8911)
+Defined in: [gen/CamundaClient.ts:9830](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9830)
 
 Search decision definitions
 
@@ -6146,6 +8018,10 @@ Search for decision definitions based on given criteria.
 
 [`searchDecisionDefinitionsConsistency`](../type-aliases/searchDecisionDefinitionsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionDefinitionSearchQueryResult`](../type-aliases/DecisionDefinitionSearchQueryResult.md)\>
@@ -6153,16 +8029,14 @@ Search for decision definitions based on given criteria.
 #### Example
 
 ```ts
-async function searchDecisionDefinitionsExample() {
+async function searchDecisionDefinitionsExample(
+  decisionDefinitionId: DecisionDefinitionId
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchDecisionDefinitions(
     {
-      filter: {
-        decisionDefinitionId: DecisionDefinitionId.assumeExists(
-          "invoice-classification"
-        ),
-      },
+      filter: { decisionDefinitionId },
     },
     { consistency: { waitUpToMs: 5000 } }
   );
@@ -6190,10 +8064,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchDecisionInstances()
 
 ```ts
-searchDecisionInstances(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchDecisionInstances(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<DecisionInstanceSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:8974](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L8974)
+Defined in: [gen/CamundaClient.ts:9897](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9897)
 
 Search decision instances
 
@@ -6205,15 +8082,40 @@ Search for decision instances based on given criteria.
 
 ##### input
 
-[`SearchQueryRequest`](../type-aliases/SearchQueryRequest.md) & `object`
+[`DecisionInstanceSearchQuery`](../type-aliases/DecisionInstanceSearchQuery.md)
 
 ##### consistencyManagement
 
 [`searchDecisionInstancesConsistency`](../type-aliases/searchDecisionInstancesConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionInstanceSearchQueryResult`](../type-aliases/DecisionInstanceSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchDecisionInstancesExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchDecisionInstances(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const instance of result.items ?? []) {
+    console.log(
+      `${instance.decisionEvaluationKey}: ${instance.decisionDefinitionId}`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -6232,10 +8134,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchDecisionRequirements()
 
 ```ts
-searchDecisionRequirements(input, consistencyManagement): CancelablePromise<DecisionRequirementsSearchQueryResult>;
+searchDecisionRequirements(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<DecisionRequirementsSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9037](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9037)
+Defined in: [gen/CamundaClient.ts:9964](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L9964)
 
 Search decision requirements
 
@@ -6253,9 +8158,34 @@ Search for decision requirements based on given criteria.
 
 [`searchDecisionRequirementsConsistency`](../type-aliases/searchDecisionRequirementsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionRequirementsSearchQueryResult`](../type-aliases/DecisionRequirementsSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchDecisionRequirementsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchDecisionRequirements(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const req of result.items ?? []) {
+    console.log(
+      `${req.decisionRequirementsKey}: ${req.decisionRequirementsId}`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -6274,10 +8204,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchElementInstanceIncidents()
 
 ```ts
-searchElementInstanceIncidents(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchElementInstanceIncidents(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<IncidentSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9107](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9107)
+Defined in: [gen/CamundaClient.ts:10038](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10038)
 
 Search for incidents of a specific element instance
 
@@ -6301,9 +8234,32 @@ to the root element itself.
 
 [`searchElementInstanceIncidentsConsistency`](../type-aliases/searchElementInstanceIncidentsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`IncidentSearchQueryResult`](../type-aliases/IncidentSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchElementInstanceIncidentsExample(
+  elementInstanceKey: ElementInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchElementInstanceIncidents(
+    { elementInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const incident of result.items ?? []) {
+    console.log(`Incident: ${incident.errorType}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6322,10 +8278,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchElementInstances()
 
 ```ts
-searchElementInstances(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchElementInstances(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ElementInstanceSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9172](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9172)
+Defined in: [gen/CamundaClient.ts:10107](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10107)
 
 Search element instances
 
@@ -6343,9 +8302,37 @@ Search for element instances based on given criteria.
 
 [`searchElementInstancesConsistency`](../type-aliases/searchElementInstancesConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ElementInstanceSearchQueryResult`](../type-aliases/ElementInstanceSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchElementInstancesExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchElementInstances(
+    {
+      filter: {
+        processInstanceKey,
+      },
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const element of result.items ?? []) {
+    console.log(`${element.elementId}: ${element.type} (${element.state})`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6361,13 +8348,84 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### searchGlobalTaskListeners()
+
+```ts
+searchGlobalTaskListeners(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<GlobalTaskListenerSearchQueryResult>;
+```
+
+Defined in: [gen/CamundaClient.ts:10174](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10174)
+
+Search global user task listeners
+
+Search for global user task listeners based on given criteria.
+
+-
+
+#### Parameters
+
+##### input
+
+[`GlobalTaskListenerSearchQueryRequest`](../type-aliases/GlobalTaskListenerSearchQueryRequest.md)
+
+##### consistencyManagement
+
+[`searchGlobalTaskListenersConsistency`](../type-aliases/searchGlobalTaskListenersConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GlobalTaskListenerSearchQueryResult`](../type-aliases/GlobalTaskListenerSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchGlobalTaskListenersExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchGlobalTaskListeners(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const listener of result.items ?? []) {
+    console.log(`${listener.id}: ${listener.type} (${listener.eventTypes})`);
+  }
+}
+```
+
+#### Operation Id
+
+searchGlobalTaskListeners
+
+#### Tags
+
+Global listener
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### searchGroupIdsForTenant()
 
 ```ts
-searchGroupIdsForTenant(input, consistencyManagement): CancelablePromise<TenantGroupSearchResult>;
+searchGroupIdsForTenant(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<TenantGroupSearchResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9235](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9235)
+Defined in: [gen/CamundaClient.ts:10241](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10241)
 
 Search groups for tenant
 
@@ -6385,9 +8443,30 @@ Retrieves a filtered and sorted list of groups for a specified tenant.
 
 [`searchGroupIdsForTenantConsistency`](../type-aliases/searchGroupIdsForTenantConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantGroupSearchResult`](../type-aliases/TenantGroupSearchResult.md)\>
+
+#### Example
+
+```ts
+async function searchGroupIdsForTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchGroupIdsForTenant(
+    { tenantId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const group of result.items ?? []) {
+    console.log(`Group: ${group.groupId}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6406,10 +8485,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchGroups()
 
 ```ts
-searchGroups(input, consistencyManagement): CancelablePromise<GroupSearchQueryResult>;
+searchGroups(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<GroupSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9300](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9300)
+Defined in: [gen/CamundaClient.ts:10310](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10310)
 
 Search groups
 
@@ -6427,9 +8509,32 @@ Search for groups based on given criteria.
 
 [`searchGroupsConsistency`](../type-aliases/searchGroupsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GroupSearchQueryResult`](../type-aliases/GroupSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchGroupsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchGroups(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const group of result.items ?? []) {
+    console.log(`${group.groupId}: ${group.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6448,10 +8553,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchGroupsForRole()
 
 ```ts
-searchGroupsForRole(input, consistencyManagement): CancelablePromise<RoleGroupSearchResult>;
+searchGroupsForRole(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<RoleGroupSearchResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9363](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9363)
+Defined in: [gen/CamundaClient.ts:10377](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10377)
 
 Search role groups
 
@@ -6469,9 +8577,30 @@ Search groups with assigned role.
 
 [`searchGroupsForRoleConsistency`](../type-aliases/searchGroupsForRoleConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RoleGroupSearchResult`](../type-aliases/RoleGroupSearchResult.md)\>
+
+#### Example
+
+```ts
+async function searchGroupsForRoleExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchGroupsForRole(
+    { roleId: "process-admin" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const group of result.items ?? []) {
+    console.log(`Group: ${group.groupId}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6490,10 +8619,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchIncidents()
 
 ```ts
-searchIncidents(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchIncidents(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<IncidentSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9431](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9431)
+Defined in: [gen/CamundaClient.ts:10447](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10447)
 
 Search incidents
 
@@ -6511,9 +8643,13 @@ Search for incidents based on given criteria.
 
 [`searchIncidentsConsistency`](../type-aliases/searchIncidentsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`IncidentSearchQueryResult`](../type-aliases/IncidentSearchQueryResult.md)\>
 
 #### Example
 
@@ -6556,10 +8692,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchJobs()
 
 ```ts
-searchJobs(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchJobs(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<JobSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9494](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9494)
+Defined in: [gen/CamundaClient.ts:10514](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10514)
 
 Search jobs
 
@@ -6577,9 +8716,33 @@ Search for jobs based on given criteria.
 
 [`searchJobsConsistency`](../type-aliases/searchJobsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`JobSearchQueryResult`](../type-aliases/JobSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchJobsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchJobs(
+    {
+      filter: { type: "payment-processing", state: "CREATED" },
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const job of result.items ?? []) {
+    console.log(`Job ${job.jobKey}: ${job.type} (${job.state})`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6598,10 +8761,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchMappingRule()
 
 ```ts
-searchMappingRule(input, consistencyManagement): CancelablePromise<MappingRuleSearchQueryResult>;
+searchMappingRule(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9558](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9558)
+Defined in: [gen/CamundaClient.ts:10582](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10582)
 
 Search mapping rules
 
@@ -6619,9 +8785,32 @@ Search for mapping rules based on given criteria.
 
 [`searchMappingRuleConsistency`](../type-aliases/searchMappingRuleConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`MappingRuleSearchQueryResult`](../type-aliases/MappingRuleSearchQueryResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchMappingRulesExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchMappingRule(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const rule of result.items ?? []) {
+    console.log(`${rule.mappingRuleId}: ${rule.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6640,10 +8829,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchMappingRulesForGroup()
 
 ```ts
-searchMappingRulesForGroup(input, consistencyManagement): CancelablePromise<SearchQueryResponse>;
+searchMappingRulesForGroup(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9621](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9621)
+Defined in: [gen/CamundaClient.ts:10649](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10649)
 
 Search group mapping rules
 
@@ -6661,9 +8853,30 @@ Search mapping rules assigned to a group.
 
 [`searchMappingRulesForGroupConsistency`](../type-aliases/searchMappingRulesForGroupConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchMappingRulesForGroupExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchMappingRulesForGroup(
+    { groupId: "engineering-team" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const rule of result.items ?? []) {
+    console.log(`Mapping rule: ${rule.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6682,10 +8895,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchMappingRulesForRole()
 
 ```ts
-searchMappingRulesForRole(input, consistencyManagement): CancelablePromise<SearchQueryResponse>;
+searchMappingRulesForRole(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9686](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9686)
+Defined in: [gen/CamundaClient.ts:10718](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10718)
 
 Search role mapping rules
 
@@ -6703,9 +8919,30 @@ Search mapping rules with assigned role.
 
 [`searchMappingRulesForRoleConsistency`](../type-aliases/searchMappingRulesForRoleConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchMappingRulesForRoleExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchMappingRulesForRole(
+    { roleId: "process-admin" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const rule of result.items ?? []) {
+    console.log(`Mapping rule: ${rule.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6724,10 +8961,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchMappingRulesForTenant()
 
 ```ts
-searchMappingRulesForTenant(input, consistencyManagement): CancelablePromise<SearchQueryResponse>;
+searchMappingRulesForTenant(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9751](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9751)
+Defined in: [gen/CamundaClient.ts:10787](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10787)
 
 Search mapping rules for tenant
 
@@ -6745,9 +8985,30 @@ Retrieves a filtered and sorted list of MappingRules for a specified tenant.
 
 [`searchMappingRulesForTenantConsistency`](../type-aliases/searchMappingRulesForTenantConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchMappingRulesForTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchMappingRulesForTenant(
+    { tenantId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const rule of result.items ?? []) {
+    console.log(`Mapping rule: ${rule.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6766,10 +9027,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchMessageSubscriptions()
 
 ```ts
-searchMessageSubscriptions(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchMessageSubscriptions(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<MessageSubscriptionSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9816](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9816)
+Defined in: [gen/CamundaClient.ts:10856](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10856)
 
 Search message subscriptions
 
@@ -6781,15 +9045,38 @@ Search for message subscriptions based on given criteria.
 
 ##### input
 
-[`SearchQueryRequest`](../type-aliases/SearchQueryRequest.md) & `object`
+[`MessageSubscriptionSearchQuery`](../type-aliases/MessageSubscriptionSearchQuery.md)
 
 ##### consistencyManagement
 
 [`searchMessageSubscriptionsConsistency`](../type-aliases/searchMessageSubscriptionsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`MessageSubscriptionSearchQueryResult`](../type-aliases/MessageSubscriptionSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchMessageSubscriptionsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchMessageSubscriptions(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const sub of result.items ?? []) {
+    console.log(`Subscription: ${sub.messageName}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6808,10 +9095,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchProcessDefinitions()
 
 ```ts
-searchProcessDefinitions(input, consistencyManagement): CancelablePromise<ProcessDefinitionSearchQueryResult>;
+searchProcessDefinitions(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessDefinitionSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9879](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9879)
+Defined in: [gen/CamundaClient.ts:10923](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10923)
 
 Search process definitions
 
@@ -6823,15 +9113,40 @@ Search for process definitions based on given criteria.
 
 ##### input
 
-[`SearchQueryRequest`](../type-aliases/SearchQueryRequest.md) & `object`
+[`ProcessDefinitionSearchQuery`](../type-aliases/ProcessDefinitionSearchQuery.md)
 
 ##### consistencyManagement
 
 [`searchProcessDefinitionsConsistency`](../type-aliases/searchProcessDefinitionsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionSearchQueryResult`](../type-aliases/ProcessDefinitionSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchProcessDefinitionsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchProcessDefinitions(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const def of result.items ?? []) {
+    console.log(
+      `${def.processDefinitionKey}: ${def.processDefinitionId} v${def.version}`
+    );
+  }
+}
+```
 
 #### Operation Id
 
@@ -6850,10 +9165,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchProcessInstanceIncidents()
 
 ```ts
-searchProcessInstanceIncidents(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchProcessInstanceIncidents(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<IncidentSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:9948](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L9948)
+Defined in: [gen/CamundaClient.ts:10996](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L10996)
 
 Search related incidents
 
@@ -6876,9 +9194,34 @@ subprocesses or called processes under the root instance while excluding inciden
 
 [`searchProcessInstanceIncidentsConsistency`](../type-aliases/searchProcessInstanceIncidentsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`IncidentSearchQueryResult`](../type-aliases/IncidentSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchProcessInstanceIncidentsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchProcessInstanceIncidents(
+    {
+      processInstanceKey,
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const incident of result.items ?? []) {
+    console.log(`Incident: ${incident.errorType} - ${incident.errorMessage}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -6897,10 +9240,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchProcessInstances()
 
 ```ts
-searchProcessInstances(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchProcessInstances(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessInstanceSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10015](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10015)
+Defined in: [gen/CamundaClient.ts:11065](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11065)
 
 Search process instances
 
@@ -6912,27 +9258,31 @@ Search for process instances based on given criteria.
 
 ##### input
 
-[`SearchQueryRequest`](../type-aliases/SearchQueryRequest.md) & `object`
+[`ProcessInstanceSearchQuery`](../type-aliases/ProcessInstanceSearchQuery.md)
 
 ##### consistencyManagement
 
 [`searchProcessInstancesConsistency`](../type-aliases/searchProcessInstancesConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceSearchQueryResult`](../type-aliases/ProcessInstanceSearchQueryResult.md)\>
 
 #### Example
 
 ```ts
-async function searchProcessInstancesExample() {
+async function searchProcessInstancesExample(
+  processDefinitionId: ProcessDefinitionId
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchProcessInstances(
     {
-      filter: {
-        processDefinitionId: ProcessDefinitionId.assumeExists("order-process"),
-      },
+      filter: { processDefinitionId },
       sort: [{ field: "startDate", order: "DESC" }],
       page: { limit: 10 },
     },
@@ -6963,10 +9313,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchRoles()
 
 ```ts
-searchRoles(input, consistencyManagement): CancelablePromise<RoleSearchQueryResult>;
+searchRoles(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<RoleSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10078](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10078)
+Defined in: [gen/CamundaClient.ts:11132](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11132)
 
 Search roles
 
@@ -6984,9 +9337,32 @@ Search for roles based on given criteria.
 
 [`searchRolesConsistency`](../type-aliases/searchRolesConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RoleSearchQueryResult`](../type-aliases/RoleSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchRolesExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchRoles(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const role of result.items ?? []) {
+    console.log(`${role.roleId}: ${role.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7005,10 +9381,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchRolesForGroup()
 
 ```ts
-searchRolesForGroup(input, consistencyManagement): CancelablePromise<SearchQueryResponse>;
+searchRolesForGroup(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10141](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10141)
+Defined in: [gen/CamundaClient.ts:11199](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11199)
 
 Search group roles
 
@@ -7026,9 +9405,30 @@ Search roles assigned to a group.
 
 [`searchRolesForGroupConsistency`](../type-aliases/searchRolesForGroupConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchRolesForGroupExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchRolesForGroup(
+    { groupId: "engineering-team" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const role of result.items ?? []) {
+    console.log(`Role: ${role.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7047,10 +9447,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchRolesForTenant()
 
 ```ts
-searchRolesForTenant(input, consistencyManagement): CancelablePromise<SearchQueryResponse>;
+searchRolesForTenant(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10206](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10206)
+Defined in: [gen/CamundaClient.ts:11268](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11268)
 
 Search roles for tenant
 
@@ -7068,9 +9471,30 @@ Retrieves a filtered and sorted list of roles for a specified tenant.
 
 [`searchRolesForTenantConsistency`](../type-aliases/searchRolesForTenantConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchRolesForTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchRolesForTenant(
+    { tenantId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const role of result.items ?? []) {
+    console.log(`Role: ${role.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7089,10 +9513,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchTenants()
 
 ```ts
-searchTenants(input, consistencyManagement): CancelablePromise<TenantSearchQueryResult>;
+searchTenants(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<TenantSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10271](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10271)
+Defined in: [gen/CamundaClient.ts:11337](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11337)
 
 Search tenants
 
@@ -7104,15 +9531,38 @@ Retrieves a filtered and sorted list of tenants.
 
 ##### input
 
-[`SearchQueryRequest`](../type-aliases/SearchQueryRequest.md) & `object`
+[`TenantSearchQueryRequest`](../type-aliases/TenantSearchQueryRequest.md)
 
 ##### consistencyManagement
 
 [`searchTenantsConsistency`](../type-aliases/searchTenantsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantSearchQueryResult`](../type-aliases/TenantSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchTenantsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchTenants(
+    {
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const tenant of result.items ?? []) {
+    console.log(`${tenant.tenantId}: ${tenant.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7131,10 +9581,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchUsers()
 
 ```ts
-searchUsers(input, consistencyManagement): CancelablePromise<UserSearchResult>;
+searchUsers(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10334](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10334)
+Defined in: [gen/CamundaClient.ts:11404](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11404)
 
 Search users
 
@@ -7146,15 +9599,39 @@ Search for users based on given criteria.
 
 ##### input
 
-[`SearchQueryRequest`](../type-aliases/SearchQueryRequest.md) & `object`
+[`UserSearchQueryRequest`](../type-aliases/UserSearchQueryRequest.md)
 
 ##### consistencyManagement
 
 [`searchUsersConsistency`](../type-aliases/searchUsersConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserSearchResult`](../type-aliases/UserSearchResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchUsersExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchUsers(
+    {
+      filter: {},
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const user of result.items ?? []) {
+    console.log(`${user.username}: ${user.name}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7173,10 +9650,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchUsersForGroup()
 
 ```ts
-searchUsersForGroup(input, consistencyManagement): CancelablePromise<TenantUserSearchResult>;
+searchUsersForGroup(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10397](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10397)
+Defined in: [gen/CamundaClient.ts:11471](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11471)
 
 Search group users
 
@@ -7194,9 +9674,30 @@ Search users assigned to a group.
 
 [`searchUsersForGroupConsistency`](../type-aliases/searchUsersForGroupConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantUserSearchResult`](../type-aliases/TenantUserSearchResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchUsersForGroupExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchUsersForGroup(
+    { groupId: "engineering-team" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const user of result.items ?? []) {
+    console.log(`Member: ${user.username}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7215,10 +9716,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchUsersForRole()
 
 ```ts
-searchUsersForRole(input, consistencyManagement): CancelablePromise<TenantUserSearchResult>;
+searchUsersForRole(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10462](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10462)
+Defined in: [gen/CamundaClient.ts:11540](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11540)
 
 Search role users
 
@@ -7236,9 +9740,30 @@ Search users with assigned role.
 
 [`searchUsersForRoleConsistency`](../type-aliases/searchUsersForRoleConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantUserSearchResult`](../type-aliases/TenantUserSearchResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchUsersForRoleExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchUsersForRole(
+    { roleId: "process-admin" },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const user of result.items ?? []) {
+    console.log(`User: ${user.username}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7257,10 +9782,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchUsersForTenant()
 
 ```ts
-searchUsersForTenant(input, consistencyManagement): CancelablePromise<TenantUserSearchResult>;
+searchUsersForTenant(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<SearchQueryResponse & object>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10527](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10527)
+Defined in: [gen/CamundaClient.ts:11609](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11609)
 
 Search users for tenant
 
@@ -7278,9 +9806,30 @@ Retrieves a filtered and sorted list of users for a specified tenant.
 
 [`searchUsersForTenantConsistency`](../type-aliases/searchUsersForTenantConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantUserSearchResult`](../type-aliases/TenantUserSearchResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+
+#### Example
+
+```ts
+async function searchUsersForTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchUsersForTenant(
+    { tenantId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const user of result.items ?? []) {
+    console.log(`Tenant member: ${user.username}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7299,10 +9848,13 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchUserTaskAuditLogs()
 
 ```ts
-searchUserTaskAuditLogs(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchUserTaskAuditLogs(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AuditLogSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10592](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10592)
+Defined in: [gen/CamundaClient.ts:11678](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11678)
 
 Search user task audit logs
 
@@ -7320,9 +9872,30 @@ Search for user task audit logs based on given criteria.
 
 [`searchUserTaskAuditLogsConsistency`](../type-aliases/searchUserTaskAuditLogsConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuditLogSearchQueryResult`](../type-aliases/AuditLogSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchUserTaskAuditLogsExample(userTaskKey: UserTaskKey) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchUserTaskAuditLogs(
+    { userTaskKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const log of result.items ?? []) {
+    console.log(`Audit: ${log.operationType} at ${log.timestamp}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7338,13 +9911,89 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### searchUserTaskEffectiveVariables()
+
+```ts
+searchUserTaskEffectiveVariables(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<VariableSearchQueryResult>;
+```
+
+Defined in: [gen/CamundaClient.ts:11753](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11753)
+
+Search user task effective variables
+
+Search for the effective variables of a user task. This endpoint returns deduplicated
+variables where each variable name appears at most once. When the same variable name exists
+at multiple scope levels in the scope hierarchy, the value from the innermost scope (closest
+to the user task) takes precedence. This is useful for retrieving the actual runtime state
+of variables as seen by the user task. By default, long variable values in the response are
+truncated.
+
+-
+
+#### Parameters
+
+##### input
+
+[`searchUserTaskEffectiveVariablesInput`](../type-aliases/searchUserTaskEffectiveVariablesInput.md)
+
+##### consistencyManagement
+
+[`searchUserTaskEffectiveVariablesConsistency`](../type-aliases/searchUserTaskEffectiveVariablesConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`VariableSearchQueryResult`](../type-aliases/VariableSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchUserTaskEffectiveVariablesExample(
+  userTaskKey: UserTaskKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchUserTaskEffectiveVariables(
+    { userTaskKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const variable of result.items ?? []) {
+    console.log(`${variable.name} = ${variable.value}`);
+  }
+}
+```
+
+#### Operation Id
+
+searchUserTaskEffectiveVariables
+
+#### Tags
+
+User task
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### searchUserTasks()
 
 ```ts
-searchUserTasks(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchUserTasks(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<UserTaskSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10659](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10659)
+Defined in: [gen/CamundaClient.ts:11824](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11824)
 
 Search user tasks
 
@@ -7356,15 +10005,19 @@ Search for user tasks based on given criteria.
 
 ##### input
 
-[`SearchQueryRequest`](../type-aliases/SearchQueryRequest.md) & `object`
+[`UserTaskSearchQuery`](../type-aliases/UserTaskSearchQuery.md)
 
 ##### consistencyManagement
 
 [`searchUserTasksConsistency`](../type-aliases/searchUserTasksConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserTaskSearchQueryResult`](../type-aliases/UserTaskSearchQueryResult.md)\>
 
 #### Example
 
@@ -7404,14 +10057,23 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchUserTaskVariables()
 
 ```ts
-searchUserTaskVariables(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchUserTaskVariables(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<VariableSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10722](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10722)
+Defined in: [gen/CamundaClient.ts:11898](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11898)
 
 Search user task variables
 
-Search for user task variables based on given criteria. By default, long variable values in the response are truncated.
+Search for user task variables based on given criteria. This endpoint returns all variable
+documents visible from the user task's scope, including variables from parent scopes in the
+scope hierarchy. If the same variable name exists at multiple scope levels, each scope's
+variable is returned as a separate result. Use the
+`/user-tasks/{userTaskKey}/effective-variables/search` endpoint to get deduplicated variables
+where the innermost scope takes precedence. By default, long variable values in the response
+are truncated.
 
 -
 
@@ -7425,9 +10087,30 @@ Search for user task variables based on given criteria. By default, long variabl
 
 [`searchUserTaskVariablesConsistency`](../type-aliases/searchUserTaskVariablesConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`VariableSearchQueryResult`](../type-aliases/VariableSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchUserTaskVariablesExample(userTaskKey: UserTaskKey) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchUserTaskVariables(
+    { userTaskKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const variable of result.items ?? []) {
+    console.log(`${variable.name} = ${variable.value}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7446,14 +10129,25 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### searchVariables()
 
 ```ts
-searchVariables(input, consistencyManagement): CancelablePromise<SearchQueryResponse & object>;
+searchVariables(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<VariableSearchQueryResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10789](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10789)
+Defined in: [gen/CamundaClient.ts:11977](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L11977)
 
 Search variables
 
-Search for process and local variables based on given criteria. By default, long variable values in the response are truncated.
+Search for variables based on given criteria.
+
+This endpoint returns variables that exist directly at the specified scopes - it does not
+include variables from parent scopes that would be visible through the scope hierarchy.
+
+Variables can be process-level (scoped to the process instance) or local (scoped to specific
+BPMN elements like tasks, subprocesses, etc.).
+
+By default, long variable values in the response are truncated.
 
 -
 
@@ -7467,9 +10161,35 @@ Search for process and local variables based on given criteria. By default, long
 
 [`searchVariablesConsistency`](../type-aliases/searchVariablesConsistency.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`VariableSearchQueryResult`](../type-aliases/VariableSearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchVariablesExample(processInstanceKey: ProcessInstanceKey) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchVariables(
+    {
+      filter: {
+        processInstanceKey,
+      },
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const variable of result.items ?? []) {
+    console.log(`${variable.name} = ${variable.value}`);
+  }
+}
+```
 
 #### Operation Id
 
@@ -7491,9 +10211,9 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 stopAllWorkers(): void;
 ```
 
-Defined in: [gen/CamundaClient.ts:1556](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1556)
+Defined in: [gen/CamundaClient.ts:1573](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1573)
 
-Stop all registered job workers (best-effort).
+Stop all registered job workers (best-effort) and terminate the shared thread pool.
 
 #### Returns
 
@@ -7504,10 +10224,10 @@ Stop all registered job workers (best-effort).
 ### suspendBatchOperation()
 
 ```ts
-suspendBatchOperation(input, consistencyManagement): CancelablePromise<void>;
+suspendBatchOperation(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10856](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10856)
+Defined in: [gen/CamundaClient.ts:12047](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12047)
 
 Suspend Batch operation
 
@@ -7524,13 +10244,25 @@ This is done asynchronously, the progress can be tracked using the batch operati
 
 [`BatchOperationKey`](../type-aliases/BatchOperationKey.md)
 
-##### consistencyManagement
+##### options?
 
-[`suspendBatchOperationConsistency`](../type-aliases/suspendBatchOperationConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function suspendBatchOperationExample(
+  batchOperationKey: BatchOperationKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.suspendBatchOperation({ batchOperationKey });
+}
+```
 
 #### Operation Id
 
@@ -7540,19 +10272,15 @@ suspendBatchOperation
 
 Batch operation
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### throwJobError()
 
 ```ts
-throwJobError(input): CancelablePromise<void>;
+throwJobError(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10921](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10921)
+Defined in: [gen/CamundaClient.ts:12112](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12112)
 
 Throw error for job
 
@@ -7566,9 +10294,27 @@ Reports a business error (i.e. non-technical) that occurs while processing a job
 
 [`throwJobErrorInput`](../type-aliases/throwJobErrorInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function throwJobErrorExample(jobKey: JobKey) {
+  const camunda = createCamundaClient();
+
+  await camunda.throwJobError({
+    jobKey,
+    errorCode: "PAYMENT_FAILED",
+    errorMessage: "Payment provider returned error",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7583,10 +10329,10 @@ Job
 ### unassignClientFromGroup()
 
 ```ts
-unassignClientFromGroup(input): CancelablePromise<void>;
+unassignClientFromGroup(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:10983](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L10983)
+Defined in: [gen/CamundaClient.ts:12178](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12178)
 
 Unassign a client from a group
 
@@ -7601,9 +10347,26 @@ The client is removed as a group member, with associated authorizations, roles, 
 
 [`unassignClientFromGroupInput`](../type-aliases/unassignClientFromGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignClientFromGroupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignClientFromGroup({
+    groupId: "engineering-team",
+    clientId: "my-service-account",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7618,10 +10381,10 @@ Group
 ### unassignClientFromTenant()
 
 ```ts
-unassignClientFromTenant(input): CancelablePromise<void>;
+unassignClientFromTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11043](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11043)
+Defined in: [gen/CamundaClient.ts:12242](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12242)
 
 Unassign a client from a tenant
 
@@ -7636,9 +10399,26 @@ The client can no longer access tenant data.
 
 [`unassignClientFromTenantInput`](../type-aliases/unassignClientFromTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignClientFromTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignClientFromTenant({
+    tenantId,
+    clientId: "my-service-account",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7653,10 +10433,10 @@ Tenant
 ### unassignGroupFromTenant()
 
 ```ts
-unassignGroupFromTenant(input): CancelablePromise<void>;
+unassignGroupFromTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11103](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11103)
+Defined in: [gen/CamundaClient.ts:12306](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12306)
 
 Unassign a group from a tenant
 
@@ -7671,9 +10451,26 @@ Members of the group (users, clients) will no longer have access to the tenant's
 
 [`unassignGroupFromTenantInput`](../type-aliases/unassignGroupFromTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignGroupFromTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignGroupFromTenant({
+    tenantId,
+    groupId: "engineering-team",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7688,10 +10485,10 @@ Tenant
 ### unassignMappingRuleFromGroup()
 
 ```ts
-unassignMappingRuleFromGroup(input): CancelablePromise<void>;
+unassignMappingRuleFromGroup(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11161](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11161)
+Defined in: [gen/CamundaClient.ts:12368](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12368)
 
 Unassign a mapping rule from a group
 
@@ -7705,9 +10502,26 @@ Unassigns a mapping rule from a group.
 
 [`unassignMappingRuleFromGroupInput`](../type-aliases/unassignMappingRuleFromGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignMappingRuleFromGroupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignMappingRuleFromGroup({
+    groupId: "engineering-team",
+    mappingRuleId: "rule-123",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7722,10 +10536,10 @@ Group
 ### unassignMappingRuleFromTenant()
 
 ```ts
-unassignMappingRuleFromTenant(input): CancelablePromise<void>;
+unassignMappingRuleFromTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11219](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11219)
+Defined in: [gen/CamundaClient.ts:12430](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12430)
 
 Unassign a mapping rule from a tenant
 
@@ -7739,9 +10553,26 @@ Unassigns a single mapping rule from a specified tenant without deleting the rul
 
 [`unassignMappingRuleFromTenantInput`](../type-aliases/unassignMappingRuleFromTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignMappingRuleFromTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignMappingRuleFromTenant({
+    tenantId,
+    mappingRuleId: "rule-123",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7756,10 +10587,10 @@ Tenant
 ### unassignRoleFromClient()
 
 ```ts
-unassignRoleFromClient(input): CancelablePromise<void>;
+unassignRoleFromClient(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11277](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11277)
+Defined in: [gen/CamundaClient.ts:12492](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12492)
 
 Unassign a role from a client
 
@@ -7773,9 +10604,26 @@ Unassigns the specified role from the client. The client will no longer inherit 
 
 [`unassignRoleFromClientInput`](../type-aliases/unassignRoleFromClientInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignRoleFromClientExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignRoleFromClient({
+    roleId: "process-admin",
+    clientId: "my-service-account",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7790,10 +10638,10 @@ Role
 ### unassignRoleFromGroup()
 
 ```ts
-unassignRoleFromGroup(input): CancelablePromise<void>;
+unassignRoleFromGroup(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11335](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11335)
+Defined in: [gen/CamundaClient.ts:12554](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12554)
 
 Unassign a role from a group
 
@@ -7807,9 +10655,26 @@ Unassigns the specified role from the group. All group members (user or client) 
 
 [`unassignRoleFromGroupInput`](../type-aliases/unassignRoleFromGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignRoleFromGroupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignRoleFromGroup({
+    roleId: "process-admin",
+    groupId: "engineering-team",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7824,10 +10689,10 @@ Role
 ### unassignRoleFromMappingRule()
 
 ```ts
-unassignRoleFromMappingRule(input): CancelablePromise<void>;
+unassignRoleFromMappingRule(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11393](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11393)
+Defined in: [gen/CamundaClient.ts:12616](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12616)
 
 Unassign a role from a mapping rule
 
@@ -7841,9 +10706,26 @@ Unassigns a role from a mapping rule.
 
 [`unassignRoleFromMappingRuleInput`](../type-aliases/unassignRoleFromMappingRuleInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignRoleFromMappingRuleExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignRoleFromMappingRule({
+    roleId: "process-admin",
+    mappingRuleId: "rule-123",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7858,10 +10740,10 @@ Role
 ### unassignRoleFromTenant()
 
 ```ts
-unassignRoleFromTenant(input): CancelablePromise<void>;
+unassignRoleFromTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11454](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11454)
+Defined in: [gen/CamundaClient.ts:12681](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12681)
 
 Unassign a role from a tenant
 
@@ -7877,9 +10759,26 @@ tenant's data - unless they are assigned directly to the tenant.
 
 [`unassignRoleFromTenantInput`](../type-aliases/unassignRoleFromTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignRoleFromTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignRoleFromTenant({
+    tenantId,
+    roleId: "process-admin",
+  });
+}
+```
 
 #### Operation Id
 
@@ -7894,10 +10793,10 @@ Tenant
 ### unassignRoleFromUser()
 
 ```ts
-unassignRoleFromUser(input): CancelablePromise<void>;
+unassignRoleFromUser(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11512](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11512)
+Defined in: [gen/CamundaClient.ts:12743](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12743)
 
 Unassign a role from a user
 
@@ -7911,9 +10810,26 @@ Unassigns a role from a user. The user will no longer inherit the authorizations
 
 [`unassignRoleFromUserInput`](../type-aliases/unassignRoleFromUserInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignRoleFromUserExample(username: Username) {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignRoleFromUser({
+    roleId: "process-admin",
+    username,
+  });
+}
+```
 
 #### Operation Id
 
@@ -7928,10 +10844,10 @@ Role
 ### unassignUserFromGroup()
 
 ```ts
-unassignUserFromGroup(input): CancelablePromise<void>;
+unassignUserFromGroup(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11572](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11572)
+Defined in: [gen/CamundaClient.ts:12807](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12807)
 
 Unassign a user from a group
 
@@ -7946,9 +10862,26 @@ The user is removed as a group member, with associated authorizations, roles, an
 
 [`unassignUserFromGroupInput`](../type-aliases/unassignUserFromGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignUserFromGroupExample(username: Username) {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignUserFromGroup({
+    groupId: "engineering-team",
+    username,
+  });
+}
+```
 
 #### Operation Id
 
@@ -7963,10 +10896,10 @@ Group
 ### unassignUserFromTenant()
 
 ```ts
-unassignUserFromTenant(input): CancelablePromise<void>;
+unassignUserFromTenant(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11632](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11632)
+Defined in: [gen/CamundaClient.ts:12871](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12871)
 
 Unassign a user from a tenant
 
@@ -7981,9 +10914,29 @@ The user can no longer access tenant data.
 
 [`unassignUserFromTenantInput`](../type-aliases/unassignUserFromTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function unassignUserFromTenantExample(
+  tenantId: TenantId,
+  username: Username
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.unassignUserFromTenant({
+    tenantId,
+    username,
+  });
+}
+```
 
 #### Operation Id
 
@@ -7998,14 +10951,14 @@ Tenant
 ### unassignUserTask()
 
 ```ts
-unassignUserTask(input): CancelablePromise<void>;
+unassignUserTask(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11692](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11692)
+Defined in: [gen/CamundaClient.ts:12934](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12934)
 
 Unassign user task
 
-Removes the assignee of a task with the given key.
+Removes the assignee of a task with the given key. Unassignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 -
 
@@ -8015,6 +10968,10 @@ Removes the assignee of a task with the given key.
 
 [`unassignUserTaskInput`](../type-aliases/unassignUserTaskInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
@@ -8022,10 +10979,8 @@ Removes the assignee of a task with the given key.
 #### Example
 
 ```ts
-async function unassignUserTaskExample() {
+async function unassignUserTaskExample(userTaskKey: UserTaskKey) {
   const camunda = createCamundaClient();
-
-  const userTaskKey = UserTaskKey.assumeExists("2251799813685249");
 
   await camunda.unassignUserTask({ userTaskKey });
 }
@@ -8044,10 +10999,10 @@ User task
 ### updateAuthorization()
 
 ```ts
-updateAuthorization(input): CancelablePromise<void>;
+updateAuthorization(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11750](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11750)
+Defined in: [gen/CamundaClient.ts:12996](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L12996)
 
 Update authorization
 
@@ -8061,9 +11016,34 @@ Update the authorization with the given key.
 
 [`updateAuthorizationInput`](../type-aliases/updateAuthorizationInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function updateAuthorizationExample(authorizationKey: AuthorizationKey) {
+  const camunda = createCamundaClient();
+
+  await camunda.updateAuthorization({
+    authorizationKey,
+    ownerId: "user-123",
+    ownerType: "USER",
+    resourceId: "order-process",
+    resourceType: "PROCESS_DEFINITION",
+    permissionTypes: [
+      "CREATE_PROCESS_INSTANCE",
+      "READ_PROCESS_INSTANCE",
+      "DELETE_PROCESS_INSTANCE",
+    ],
+  });
+}
+```
 
 #### Operation Id
 
@@ -8078,10 +11058,10 @@ Authorization
 ### updateGlobalClusterVariable()
 
 ```ts
-updateGlobalClusterVariable(input): CancelablePromise<ClusterVariableResult>;
+updateGlobalClusterVariable(input, options?): CancelablePromise<ClusterVariableResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11812](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11812)
+Defined in: [gen/CamundaClient.ts:13062](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13062)
 
 Update a global-scoped cluster variable
 
@@ -8096,9 +11076,26 @@ The variable must exist, otherwise a 404 error is returned.
 
 [`updateGlobalClusterVariableInput`](../type-aliases/updateGlobalClusterVariableInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterVariableResult`](../type-aliases/ClusterVariableResult.md)\>
+
+#### Example
+
+```ts
+async function updateGlobalClusterVariableExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.updateGlobalClusterVariable({
+    name: "feature-flags",
+    value: { darkMode: false },
+  });
+}
+```
 
 #### Operation Id
 
@@ -8110,13 +11107,65 @@ Cluster Variable
 
 ---
 
+### updateGlobalTaskListener()
+
+```ts
+updateGlobalTaskListener(input, options?): CancelablePromise<GlobalTaskListenerResult>;
+```
+
+Defined in: [gen/CamundaClient.ts:13126](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13126)
+
+Update global user task listener
+
+Updates a global user task listener.
+
+-
+
+#### Parameters
+
+##### input
+
+[`updateGlobalTaskListenerInput`](../type-aliases/updateGlobalTaskListenerInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GlobalTaskListenerResult`](../type-aliases/GlobalTaskListenerResult.md)\>
+
+#### Example
+
+```ts
+async function updateGlobalTaskListenerExample(id: GlobalListenerId) {
+  const camunda = createCamundaClient();
+
+  await camunda.updateGlobalTaskListener({
+    id,
+    eventTypes: ["completing"],
+    type: "updated-audit-listener",
+  });
+}
+```
+
+#### Operation Id
+
+updateGlobalTaskListener
+
+#### Tags
+
+Global listener
+
+---
+
 ### updateGroup()
 
 ```ts
-updateGroup(input): CancelablePromise<GroupUpdateResult>;
+updateGroup(input, options?): CancelablePromise<GroupUpdateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11872](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11872)
+Defined in: [gen/CamundaClient.ts:13190](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13190)
 
 Update group
 
@@ -8130,9 +11179,26 @@ Update a group with the given ID.
 
 [`updateGroupInput`](../type-aliases/updateGroupInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GroupUpdateResult`](../type-aliases/GroupUpdateResult.md)\>
+
+#### Example
+
+```ts
+async function updateGroupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.updateGroup({
+    groupId: "engineering-team",
+    name: "Engineering Team",
+  });
+}
+```
 
 #### Operation Id
 
@@ -8147,10 +11213,10 @@ Group
 ### updateJob()
 
 ```ts
-updateJob(input): CancelablePromise<void>;
+updateJob(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11932](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11932)
+Defined in: [gen/CamundaClient.ts:13254](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13254)
 
 Update job
 
@@ -8164,9 +11230,26 @@ Update a job with the given key.
 
 [`updateJobInput`](../type-aliases/updateJobInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function updateJobExample(jobKey: JobKey) {
+  const camunda = createCamundaClient();
+
+  await camunda.updateJob({
+    jobKey,
+    changeset: { retries: 5, timeout: 60000 },
+  });
+}
+```
 
 #### Operation Id
 
@@ -8181,10 +11264,10 @@ Job
 ### updateMappingRule()
 
 ```ts
-updateMappingRule(input): CancelablePromise<MappingRuleCreateUpdateResult>;
+updateMappingRule(input, options?): CancelablePromise<MappingRuleCreateUpdateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:11993](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L11993)
+Defined in: [gen/CamundaClient.ts:13319](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13319)
 
 Update mapping rule
 
@@ -8198,9 +11281,28 @@ Update a mapping rule.
 
 [`updateMappingRuleInput`](../type-aliases/updateMappingRuleInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`MappingRuleCreateUpdateResult`](../type-aliases/MappingRuleCreateUpdateResult.md)\>
+
+#### Example
+
+```ts
+async function updateMappingRuleExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.updateMappingRule({
+    mappingRuleId: "ldap-group-mapping",
+    name: "LDAP Group Mapping",
+    claimName: "groups",
+    claimValue: "engineering-team",
+  });
+}
+```
 
 #### Operation Id
 
@@ -8215,10 +11317,10 @@ Mapping rule
 ### updateRole()
 
 ```ts
-updateRole(input): CancelablePromise<RoleUpdateResult>;
+updateRole(input, options?): CancelablePromise<RoleUpdateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:12053](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L12053)
+Defined in: [gen/CamundaClient.ts:13383](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13383)
 
 Update role
 
@@ -8232,9 +11334,26 @@ Update a role with the given ID.
 
 [`updateRoleInput`](../type-aliases/updateRoleInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RoleUpdateResult`](../type-aliases/RoleUpdateResult.md)\>
+
+#### Example
+
+```ts
+async function updateRoleExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.updateRole({
+    roleId: "process-admin",
+    name: "Process Administrator",
+  });
+}
+```
 
 #### Operation Id
 
@@ -8249,10 +11368,10 @@ Role
 ### updateTenant()
 
 ```ts
-updateTenant(input): CancelablePromise<TenantUpdateResult>;
+updateTenant(input, options?): CancelablePromise<TenantUpdateResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:12113](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L12113)
+Defined in: [gen/CamundaClient.ts:13447](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13447)
 
 Update tenant
 
@@ -8266,9 +11385,26 @@ Updates an existing tenant.
 
 [`updateTenantInput`](../type-aliases/updateTenantInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantUpdateResult`](../type-aliases/TenantUpdateResult.md)\>
+
+#### Example
+
+```ts
+async function updateTenantExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.updateTenant({
+    tenantId,
+    name: "Customer Service Team",
+  });
+}
+```
 
 #### Operation Id
 
@@ -8283,10 +11419,10 @@ Tenant
 ### updateTenantClusterVariable()
 
 ```ts
-updateTenantClusterVariable(input): CancelablePromise<ClusterVariableResult>;
+updateTenantClusterVariable(input, options?): CancelablePromise<ClusterVariableResult>;
 ```
 
-Defined in: [gen/CamundaClient.ts:12175](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L12175)
+Defined in: [gen/CamundaClient.ts:13513](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13513)
 
 Update a tenant-scoped cluster variable
 
@@ -8301,9 +11437,27 @@ The variable must exist, otherwise a 404 error is returned.
 
 [`updateTenantClusterVariableInput`](../type-aliases/updateTenantClusterVariableInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterVariableResult`](../type-aliases/ClusterVariableResult.md)\>
+
+#### Example
+
+```ts
+async function updateTenantClusterVariableExample(tenantId: TenantId) {
+  const camunda = createCamundaClient();
+
+  await camunda.updateTenantClusterVariable({
+    tenantId,
+    name: "config",
+    value: { region: "eu-west-1" },
+  });
+}
+```
 
 #### Operation Id
 
@@ -8318,10 +11472,14 @@ Cluster Variable
 ### updateUser()
 
 ```ts
-updateUser(input, consistencyManagement): CancelablePromise<UserResult>;
+updateUser(input, options?): CancelablePromise<{
+  email: string | null;
+  name: string | null;
+  username: Username;
+}>;
 ```
 
-Defined in: [gen/CamundaClient.ts:12236](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L12236)
+Defined in: [gen/CamundaClient.ts:13577](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13577)
 
 Update user
 
@@ -8335,13 +11493,31 @@ Updates a user.
 
 [`updateUserInput`](../type-aliases/updateUserInput.md)
 
-##### consistencyManagement
+##### options?
 
-[`updateUserConsistency`](../type-aliases/updateUserConsistency.md)
+[`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserResult`](../type-aliases/UserResult.md)\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`email`: `string` \| `null`;
+`name`: `string` \| `null`;
+`username`: [`Username`](../type-aliases/Username.md);
+\}\>
+
+#### Example
+
+```ts
+async function updateUserExample(username: Username) {
+  const camunda = createCamundaClient();
+
+  await camunda.updateUser({
+    username,
+    name: "Alice Jones",
+    email: "alice.jones@example.com",
+  });
+}
+```
 
 #### Operation Id
 
@@ -8351,23 +11527,19 @@ updateUser
 
 User
 
-#### Consistency
-
-eventual - this endpoint is backed by data that is eventually consistent with the system state.
-
 ---
 
 ### updateUserTask()
 
 ```ts
-updateUserTask(input): CancelablePromise<void>;
+updateUserTask(input, options?): CancelablePromise<void>;
 ```
 
-Defined in: [gen/CamundaClient.ts:12300](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L12300)
+Defined in: [gen/CamundaClient.ts:13642](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L13642)
 
 Update user task
 
-Update a user task with the given key.
+Update a user task with the given key. Updates wait for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 -
 
@@ -8377,9 +11549,30 @@ Update a user task with the given key.
 
 [`updateUserTaskInput`](../type-aliases/updateUserTaskInput.md)
 
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+```ts
+async function updateUserTaskExample(userTaskKey: UserTaskKey) {
+  const camunda = createCamundaClient();
+
+  await camunda.updateUserTask({
+    userTaskKey,
+    changeset: {
+      candidateUsers: ["alice", "bob"],
+      dueDate: "2025-12-31T23:59:59Z",
+      priority: 80,
+    },
+  });
+}
+```
 
 #### Operation Id
 
@@ -8397,7 +11590,7 @@ User task
 withCorrelation<T>(id, fn): Promise<T>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1477](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1477)
+Defined in: [gen/CamundaClient.ts:1481](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1481)
 
 #### Type Parameters
 

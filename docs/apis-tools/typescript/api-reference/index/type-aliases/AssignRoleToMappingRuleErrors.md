@@ -11,7 +11,7 @@ mdx:
 type AssignRoleToMappingRuleErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:15171](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15171)
+Defined in: [gen/types.gen.ts:14457](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14457)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:15171](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15175](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15175)
+Defined in: [gen/types.gen.ts:14461](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14461)
 
 The provided data is not valid.
 
@@ -33,7 +33,7 @@ The provided data is not valid.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15179](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15179)
+Defined in: [gen/types.gen.ts:14465](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14465)
 
 Forbidden. The request is not allowed.
 
@@ -45,7 +45,7 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15183](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15183)
+Defined in: [gen/types.gen.ts:14469](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14469)
 
 The role or mapping rule with the given ID was not found.
 
@@ -57,7 +57,7 @@ The role or mapping rule with the given ID was not found.
 409: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15187](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15187)
+Defined in: [gen/types.gen.ts:14473](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14473)
 
 The role is already assigned to the mapping rule with the given ID.
 
@@ -69,7 +69,7 @@ The role is already assigned to the mapping rule with the given ID.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15191](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15191)
+Defined in: [gen/types.gen.ts:14477](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14477)
 
 An internal error occurred while processing the request.
 
@@ -81,6 +81,6 @@ An internal error occurred while processing the request.
 503: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:15196](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15196)
+Defined in: [gen/types.gen.ts:14482](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14482)
 
 The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .

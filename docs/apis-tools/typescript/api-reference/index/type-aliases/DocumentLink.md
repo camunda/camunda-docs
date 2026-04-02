@@ -11,28 +11,28 @@ mdx:
 type DocumentLink = object;
 ```
 
-Defined in: [gen/types.gen.ts:2362](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2362)
+Defined in: [gen/types.gen.ts:2501](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2501)
 
 ## Properties
 
-### expiresAt?
+### expiresAt
 
 ```ts
-optional expiresAt: string;
+expiresAt: string;
 ```
 
-Defined in: [gen/types.gen.ts:2370](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2370)
+Defined in: [gen/types.gen.ts:2509](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2509)
 
 The date and time when the link expires.
 
 ---
 
-### url?
+### url
 
 ```ts
-optional url: string;
+url: string;
 ```
 
-Defined in: [gen/types.gen.ts:2366](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2366)
+Defined in: [gen/types.gen.ts:2505](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2505)
 
 The link to the document.

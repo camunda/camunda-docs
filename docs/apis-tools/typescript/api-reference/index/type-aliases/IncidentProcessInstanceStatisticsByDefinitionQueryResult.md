@@ -12,14 +12,14 @@ type IncidentProcessInstanceStatisticsByDefinitionQueryResult =
   SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:3263](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3263)
+Defined in: [gen/types.gen.ts:3640](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3640)
 
 ## Type Declaration
 
-### items?
+### items
 
 ```ts
-optional items: IncidentProcessInstanceStatisticsByDefinitionResult[];
+items: IncidentProcessInstanceStatisticsByDefinitionResult[];
 ```
 
 Statistics of active process instances with incidents, grouped by process

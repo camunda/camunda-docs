@@ -11,14 +11,14 @@ mdx:
 type RoleClientSearchQueryRequest = SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:6350](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6350)
+Defined in: [gen/types.gen.ts:7063](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7063)
 
 ## Type Declaration
 
 ### sort?
 
 ```ts
-optional sort: RoleClientSearchQuerySortRequest[];
+optional sort?: RoleClientSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

@@ -11,7 +11,7 @@ mdx:
 type DecisionEvaluationByKey = object;
 ```
 
-Defined in: [gen/types.gen.ts:1542](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1542)
+Defined in: [gen/types.gen.ts:1573](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1573)
 
 Decision evaluation by key
 
@@ -23,17 +23,17 @@ Decision evaluation by key
 decisionDefinitionKey: DecisionDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:1543](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1543)
+Defined in: [gen/types.gen.ts:1574](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1574)
 
 ---
 
 ### tenantId?
 
 ```ts
-optional tenantId: TenantId;
+optional tenantId?: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:1553](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1553)
+Defined in: [gen/types.gen.ts:1584](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1584)
 
 The tenant ID of the decision.
 
@@ -42,12 +42,12 @@ The tenant ID of the decision.
 ### variables?
 
 ```ts
-optional variables: object;
+optional variables?: object;
 ```
 
-Defined in: [gen/types.gen.ts:1547](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1547)
+Defined in: [gen/types.gen.ts:1578](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1578)
 
-The message variables as JSON document.
+The decision evaluation variables as JSON document.
 
 #### Index Signature
 

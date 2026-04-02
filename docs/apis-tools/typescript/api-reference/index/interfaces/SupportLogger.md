@@ -7,7 +7,7 @@ mdx:
 
 # Interface: SupportLogger
 
-Defined in: [runtime/supportLogger.ts:10](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/supportLogger.ts#L10)
+Defined in: [runtime/supportLogger.ts:8](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/supportLogger.ts#L8)
 
 ## Methods
 
@@ -17,13 +17,13 @@ Defined in: [runtime/supportLogger.ts:10](https://github.com/camunda/orchestrati
 log(message, addTimestamp?): void;
 ```
 
-Defined in: [runtime/supportLogger.ts:11](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/supportLogger.ts#L11)
+Defined in: [runtime/supportLogger.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/supportLogger.ts#L9)
 
 #### Parameters
 
 ##### message
 
-`string` | `number` | `boolean` | `object`
+`string` \| `number` \| `boolean` \| `object`
 
 ##### addTimestamp?
 

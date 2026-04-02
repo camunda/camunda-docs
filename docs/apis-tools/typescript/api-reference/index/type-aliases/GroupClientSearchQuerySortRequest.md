@@ -11,7 +11,7 @@ mdx:
 type GroupClientSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:2951](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2951)
+Defined in: [gen/types.gen.ts:3298](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3298)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:2951](https://github.com/camunda/orchestration-clu
 field: "clientId";
 ```
 
-Defined in: [gen/types.gen.ts:2955](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2955)
+Defined in: [gen/types.gen.ts:3302](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3302)
 
 The field to sort by.
 
@@ -30,7 +30,7 @@ The field to sort by.
 ### order?
 
 ```ts
-optional order: SortOrderEnum;
+optional order?: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:2956](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2956)
+Defined in: [gen/types.gen.ts:3303](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3303)

@@ -11,97 +11,37 @@ mdx:
 type SearchBatchOperationItemsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8190](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8190)
+Defined in: [gen/types.gen.ts:8811](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8811)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: SearchQueryRequest & object;
+optional body?: BatchOperationItemSearchQuery;
 ```
 
-Defined in: [gen/types.gen.ts:8194](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8194)
-
-Batch operation item search request.
-
-#### Type Declaration
-
-##### filter?
-
-```ts
-optional filter: object;
-```
-
-Batch operation item filter request.
-
-###### filter.batchOperationKey?
-
-```ts
-optional batchOperationKey: BasicStringFilterProperty;
-```
-
-The key (or operate legacy ID) of the batch operation.
-
-###### filter.itemKey?
-
-```ts
-optional itemKey: BasicStringFilterProperty;
-```
-
-The key of the item, e.g. a process instance key.
-
-###### filter.operationType?
-
-```ts
-optional operationType: BatchOperationTypeFilterProperty;
-```
-
-The type of the batch operation.
-
-###### filter.processInstanceKey?
-
-```ts
-optional processInstanceKey: ProcessInstanceKeyFilterProperty;
-```
-
-The process instance key of the processed item.
-
-###### filter.state?
-
-```ts
-optional state: BatchOperationItemStateFilterProperty;
-```
-
-The state of the batch operation.
-
-##### sort?
-
-```ts
-optional sort: BatchOperationItemSearchQuerySortRequest[];
-```
-
-Sort field criteria.
+Defined in: [gen/types.gen.ts:8812](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8812)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8225](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8225)
+Defined in: [gen/types.gen.ts:8813](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8813)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8226](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8226)
+Defined in: [gen/types.gen.ts:8814](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8814)
 
 ---
 
@@ -111,4 +51,4 @@ Defined in: [gen/types.gen.ts:8226](https://github.com/camunda/orchestration-clu
 url: "/batch-operation-items/search";
 ```
 
-Defined in: [gen/types.gen.ts:8227](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8227)
+Defined in: [gen/types.gen.ts:8815](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8815)

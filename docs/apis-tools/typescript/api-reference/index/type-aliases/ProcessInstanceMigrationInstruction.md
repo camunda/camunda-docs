@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceMigrationInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:5925](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5925)
+Defined in: [gen/types.gen.ts:6638](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6638)
 
 The migration instructions describe how to migrate a process instance from one process definition to another.
 
@@ -23,7 +23,7 @@ The migration instructions describe how to migrate a process instance from one p
 mappingInstructions: MigrateProcessInstanceMappingInstruction[];
 ```
 
-Defined in: [gen/types.gen.ts:5933](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5933)
+Defined in: [gen/types.gen.ts:6646](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6646)
 
 Element mappings from the source process instance to the target process instance.
 
@@ -32,10 +32,10 @@ Element mappings from the source process instance to the target process instance
 ### operationReference?
 
 ```ts
-optional operationReference: OperationReference;
+optional operationReference?: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:5934](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5934)
+Defined in: [gen/types.gen.ts:6647](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6647)
 
 ---
 
@@ -45,6 +45,6 @@ Defined in: [gen/types.gen.ts:5934](https://github.com/camunda/orchestration-clu
 targetProcessDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5929](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5929)
+Defined in: [gen/types.gen.ts:6642](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6642)
 
 The key of process definition to migrate the process instance to.

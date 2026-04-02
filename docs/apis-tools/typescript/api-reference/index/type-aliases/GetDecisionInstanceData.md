@@ -11,17 +11,17 @@ mdx:
 type GetDecisionInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9536](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9536)
+Defined in: [gen/types.gen.ts:9804](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9804)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9537](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9537)
+Defined in: [gen/types.gen.ts:9805](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9805)
 
 ---
 
@@ -31,12 +31,12 @@ Defined in: [gen/types.gen.ts:9537](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:9538](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9538)
+Defined in: [gen/types.gen.ts:9806](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9806)
 
 #### decisionEvaluationInstanceKey
 
 ```ts
-decisionEvaluationInstanceKey: DecisionInstanceKey;
+decisionEvaluationInstanceKey: DecisionEvaluationInstanceKey;
 ```
 
 The assigned key of the decision instance, which acts as a unique identifier for this decision instance.
@@ -46,10 +46,10 @@ The assigned key of the decision instance, which acts as a unique identifier for
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9544](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9544)
+Defined in: [gen/types.gen.ts:9812](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9812)
 
 ---
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:9544](https://github.com/camunda/orchestration-clu
 url: "/decision-instances/{decisionEvaluationInstanceKey}";
 ```
 
-Defined in: [gen/types.gen.ts:9545](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9545)
+Defined in: [gen/types.gen.ts:9813](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9813)

@@ -11,7 +11,7 @@ mdx:
 type CreateDocumentErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:10032](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10032)
+Defined in: [gen/types.gen.ts:10126](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10126)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:10032](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10036](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10036)
+Defined in: [gen/types.gen.ts:10130](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10130)
 
 The provided data is not valid.
 
@@ -33,7 +33,7 @@ The provided data is not valid.
 415: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10042](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10042)
+Defined in: [gen/types.gen.ts:10136](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10136)
 
 The server cannot process the request because the media type (Content-Type) of the request payload is not supported
 by the server for the requested resource and method.
