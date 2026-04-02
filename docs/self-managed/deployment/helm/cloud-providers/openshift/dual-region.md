@@ -483,7 +483,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 </details>
 
-Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. You will be prompted to specify the number of Zeebe brokers (total number of Zeebe brokers in both Kubernetes clusters), for a dual-region setup we recommend `8`, resulting in four brokers per region:
+Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files:
 
 ```
 chmod +x generate-zeebe-helm-values.sh

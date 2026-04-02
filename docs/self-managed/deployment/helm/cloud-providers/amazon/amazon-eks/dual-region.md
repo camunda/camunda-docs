@@ -688,10 +688,6 @@ The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` re
 
 ```bash
 ./generate_zeebe_helm_values.sh
-
-# It will ask you to provide the following values
-# Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters):
-## For a dual-region setup we recommend eight, resulting in four brokers per region.
 ```
 
 <details>
@@ -703,12 +699,11 @@ For illustration purposes only. These values will not work in your environment.
 
 ```bash
 ./generate_zeebe_helm_values.sh
-Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters): 8
 
 Use the following to set the environment variable CAMUNDA_CLUSTER_INITIALCONTACTPOINTS in the base Camunda Helm chart values file for Zeebe:
 
 - name: CAMUNDA_CLUSTER_INITIALCONTACTPOINTS
-  value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
+  value: camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe.camunda-paris.svc.cluster.local:26502
 
 Use the following to set the environment variable CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe:
 
