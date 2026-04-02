@@ -24,4 +24,4 @@ To [create a dashboard](./creating-dashboards.md) or [report](./creating-reports
 
 ## User permissions
 
-For details about roles and access levels in collections (managers, editors, and viewers), see [User permissions](./user-permissions.md).
+For details about roles and access levels in collections (managers, editors, and viewers), see [user permissions](./user-permissions.md).
