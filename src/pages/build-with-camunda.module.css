@@ -242,12 +242,42 @@
 .startGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 4rem;
+  position: relative;
+}
+
+.orBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--page-bg);
+  border: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--muted-color);
+  opacity: 0.6;
+  z-index: 2;
 }
 
 @media (max-width: 768px) {
   .startGrid {
     grid-template-columns: 1fr;
+  }
+
+  .orBadge {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: -0.75rem auto;
   }
 }
 
@@ -258,6 +288,18 @@
   flex-direction: column;
   position: relative;
   z-index: 1;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+
+.startCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .startCard:hover {
+  box-shadow: 0 12px 32px rgba(120, 169, 255, 0.15);
 }
 
 .startCardSaas {

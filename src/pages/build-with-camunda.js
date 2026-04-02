@@ -354,6 +354,26 @@ function ArrowRight() {
   );
 }
 
+function ArrowDown() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      style={{ marginLeft: 6 }}
+    >
+      <path
+        d="M8 3v10M4 9l4 4 4-4"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /* ─── Reusable components ─── */
 
 function VersionBadge({ version = "Camunda 8.9+" }) {
@@ -462,6 +482,9 @@ function BuildWithCamunda() {
                 </div>
               </div>
 
+              {/* OR badge */}
+              <div className={styles.orBadge}>OR</div>
+
               {/* CLI card */}
               <div className={clsx(styles.startCard, styles.startCardCli)}>
                 <span className={styles.startCardIcon}>
@@ -509,7 +532,7 @@ function BuildWithCamunda() {
                     className={clsx(styles.ctaButton, styles.ctaButtonCli)}
                     to="#get-started"
                   >
-                    Install now <ArrowRight />
+                    Install now <ArrowDown />
                   </Link>
                   <span className={styles.ctaNote}>
                     ~2 minutes to a running engine
