@@ -16,7 +16,7 @@ Validate your process application in development before deploying it to testing,
 
 Use [Play mode](../validation/play-your-process.md) to validate your process application in development.
 
-1. Open the main process.
+1. Open the BPMN diagram in the process application that you want to validate.
 1. Select the **Play** tab to play the process application using your selected development cluster.
 1. Perform validation as required, for example, debug your process logic and test the process application.
 

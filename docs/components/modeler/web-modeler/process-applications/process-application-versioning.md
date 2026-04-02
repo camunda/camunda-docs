@@ -20,7 +20,7 @@ Process applications support versioning, allowing you to create distinct version
 To create a process application version:
 
 1. Open the [process application homepage](create-a-process-application.md#process-application-homepage) and click **Create version** in the **Versions** section.
-   <img src={CreateVersionMenuImg} alt="Create a version menu" style={{maxWidth: '560px', width: '100%'}} />
+   <img src={CreateVersionMenuImg} alt="Create version on the process application homepage" style={{maxWidth: '560px', width: '100%'}} />
 2. Enter a **Version tag** in the version creation modal.
    <img src={CreateVersionModalImg} alt="Create a version modal" style={{maxWidth: '560px', width: '100%'}} />
 3. Select the **Create** button.
