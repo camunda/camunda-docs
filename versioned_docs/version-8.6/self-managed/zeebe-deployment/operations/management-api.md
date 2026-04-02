@@ -24,8 +24,10 @@ Exporting API is used:
 - As a debugging tool.
 - When taking a backup of Camunda 8 (see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)).
 
-:::note
-The HTTP response status code for these endpoints is always `200`. To determine whether the operation succeeded, check the `status` field in the JSON response body: `204` indicates success, `500` indicates failure.
+:::warning
+This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
+
+If the request fails, verify that all brokers are running and retry.
 :::
 
 The operation requires a complete cluster topology. If a broker is unavailable, the request fails entirely — no partitions are paused or resumed. Retry when all brokers are available.
