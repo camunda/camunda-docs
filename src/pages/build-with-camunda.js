@@ -990,7 +990,9 @@ Available skills:
                 </svg>
               </div>
 
-              <div className={styles.archGroup}>
+              <div
+                className={clsx(styles.archGroup, styles.archGroupHighlight)}
+              >
                 <h3 className={styles.archGroupTitle}>Orchestration Cluster</h3>
                 <div className={styles.archRow}>
                   <Link

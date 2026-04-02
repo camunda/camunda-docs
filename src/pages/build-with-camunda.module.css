@@ -617,6 +617,18 @@
   margin-bottom: 1.5rem;
 }
 
+.archGroupHighlight {
+  border: 2px dashed var(--arch-connector-color);
+  border-radius: 14px;
+  padding: 0rem 1.5rem 3rem;
+  margin-top: 1.5rem;
+  background: rgba(120, 169, 255, 0.03);
+}
+
+[data-theme="dark"] .archGroupHighlight {
+  background: rgba(120, 169, 255, 0.04);
+}
+
 .archGroupTitle {
   font-size: 1.25rem;
   font-weight: 600;
