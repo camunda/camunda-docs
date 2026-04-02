@@ -51,7 +51,7 @@ If any resource fails to deploy, the whole deployment [fails](#deployment-errors
 
 You can also open the deployment modal from the details page of any deployable file in the process application. In that case, the modal includes an additional option to select the resources to deploy.
 
-<p><img src={DeployFileImg} alt="Deploy a process application" /></p>
+<p><img src={DeployFileImg} alt="Deploy process application modal from a file details page with options to select resources to deploy" /></p>
 
 ## Run your process application
 
