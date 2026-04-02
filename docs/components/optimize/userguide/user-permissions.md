@@ -38,7 +38,7 @@ Editors cannot:
 
 ### Viewers
 
-Those with read-only access (viewers) may:
+Viewers have read-only access. They can:
 
 - View the components contained within the collection.
 - Copy components.
