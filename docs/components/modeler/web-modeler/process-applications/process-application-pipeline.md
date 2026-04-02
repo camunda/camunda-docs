@@ -40,9 +40,8 @@ You can use the provided Web Modeler deployment pipeline to manage your applicat
 
 To define your deployment pipeline stages:
 
-1. Open the [main process](create-a-process-application.md#main-process).
-1. Select **Deploy** to open the **Deploy process application** modal.
-1. Select **Define stages** to open the **Define stages** modal.
+1. Open the [process application homepage](create-a-process-application.md#process-application-homepage).
+1. Select **Configure** in the **Connected clusters** section to open the **Define stages** modal.
    <p><img src={DeployStagesImg} alt="Define stage for deployment modal" /></p>
 1. Select and assign a cluster to each deployment stage that you want to use in your deployment pipeline.
 1. Select **Save** to save your changes and close the modal.

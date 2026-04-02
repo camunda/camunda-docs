@@ -51,10 +51,6 @@ Use this approach when:
 
 Keep each file within Web Modeler’s per‑resource size limit of **three MB**.
 
-:::info
-Web Modeler will treat the first BPMN file in the source list as the main process.
-:::
-
 ### Prepare packaged resources
 
 Use this approach when:
@@ -71,13 +67,6 @@ When preparing the packaged resources into a `.zip` file:
 - Keep each packaged file within Web Modeler’s per‑resource size limit of **three MB**.
 - Include at most one README file.
 - Note that the folder structure **will not** be imported into Web Modeler.
-
-#### Main process selection
-
-To control which BPMN file Web Modeler treats as the main process:
-
-- Name the BPMN file you want to be the main process to match the `.zip` filename. For example, `support-agent.bpmn` and `support-agent.zip`.
-- If no BPMN file matches the archive name, Web Modeler will choose the BPMN file whose filename comes first alphabetically as the main process.
 
 #### Content and security rules
 
