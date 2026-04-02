@@ -564,7 +564,7 @@ When running with H2 (or any other RDBMS) as secondary storage, Camunda is only 
 
 To continue using features exclusive to the V1 API, configure Camunda 8 Run with an external Elasticsearch instance and switch back to V1 mode.
 
-<p className="link-arrow">[Camunda 8 Run default secondary storage](/self-managed/quickstart/developer-quickstart/c8run.md#default-h2-camunda-8-run)</p>
+<p className="link-arrow">[Camunda 8 Run default secondary storage](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md#default-h2-camunda-8-run)</p>
 
 </div>
 </div>

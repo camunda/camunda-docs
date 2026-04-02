@@ -162,7 +162,7 @@ Camunda 8 Run now uses H2 as the default secondary data store.
 
 You can also configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2 (for example, PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
 
-<p class="link-arrow">[Configure Camunda 8 Run secondary storage](/self-managed/quickstart/developer-quickstart/c8run.md#configure-or-switch-secondary-storage-h2-or-elasticsearch)</p>
+<p class="link-arrow">[Configure Camunda 8 Run secondary storage](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md#configure-or-switch-secondary-storage-h2-or-elasticsearch)</p>
 
 ## Global user task listeners {#listeners}
 
