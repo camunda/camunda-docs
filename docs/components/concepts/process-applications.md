@@ -8,7 +8,7 @@ page_rank: 90
 
 import ProcessApplicationImg from './assets/process-applications/diagram-process-application-get-started.png'
 
-Solutions built with Camunda typically have a main BPMN process that represents the end-to-end use case, and additional resources the main process depends on, such as called supporting processes, DMN decisions, or forms.
+Solutions built with Camunda typically consist of multiple resources that represent the end-to-end use case, such as an entry point process, called supporting processes, DMN decisions, or forms.
 
 Bundled together, versioned together, and deployed together, these resources constitute a _process application_.
 
@@ -16,7 +16,7 @@ Bundled together, versioned together, and deployed together, these resources con
 
 For instance, a consumer loan approval process application might bundle:
 
-- A main BPMN process (for example, consumer-loan-application.bpmn) to define the workflow.
+- A BPMN process as entry point (for example, consumer-loan-application.bpmn) to define the workflow.
 - DMN decision tables (for example, interest-rate-calculation.dmn, credit-score-calculation.dmn) for business rules.
 - Forms (for example, loan-application-review.form) for user interactions.
 

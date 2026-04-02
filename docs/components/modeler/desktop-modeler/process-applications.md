@@ -99,4 +99,4 @@ Before starting a process instance, all process application files will be deploy
 
 For any process of a process application an instance can be started using the [start instance feature](./start-instance.md).
 
-<p><img src={StartInstanceImg} alt="Starting an instance of a main process" /></p>
+<p><img src={StartInstanceImg} alt="Starting an instance of a process" /></p>
