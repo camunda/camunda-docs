@@ -51,7 +51,14 @@ To install these components, use one of the supported methods:
 Download the required Camunda 8 artifacts from the following sources. Make sure that all artifacts use the same minor version to ensure compatibility.
 
 :::note Artifactory authentication
-Downloading artifacts from [Artifactory](https://artifacts.camunda.com) requires authentication. Use your Camunda Enterprise account credentials (Harbor registry credentials). When using `curl`, pass credentials via the `-u` flag: `curl -u "user:password" -fL <url>`.
+Downloading artifacts from [artifactory](https://artifacts.camunda.com) requires authentication. Use your Camunda Enterprise LDAP credentials.
+
+When using `curl`, pass your username with the `-u` flag and let `curl` prompt for the password:
+
+```sh
+curl -u "$CAMUNDA_DISTRO_USER" -fL <url>
+```
+
 :::
 
 Orchestration Cluster:
