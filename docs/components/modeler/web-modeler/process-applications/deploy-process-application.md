@@ -83,5 +83,5 @@ The message typically provides the name of the affected resource, the ID of the 
 
 ### Deployment of external resources
 
-You can link BPMN processes, DMN decisions, or forms that are not part of the process application itself (external
-resources) from any process inside a process application. When you deploy the process application, linked external resources are _not_ deployed with it. Deploy them separately.
+You can link BPMN processes, DMN decisions, or forms that are not part of the process application itself (external resources) from any process inside a process application.
+When you deploy the process application, linked resources located outside the process application are _not_ deployed along and you have to deploy them separately.

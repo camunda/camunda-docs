@@ -11,7 +11,7 @@ In Web Modeler a [process application](../../../concepts/process-applications.md
 
 <p><img src={ProcessApplicationImg} alt="Process application" /></p>
 
-For example, a process application for a consumer loan application might consist of a BPMN diagram as entry point and a number of additional supporting files, such as DMN diagrams and forms.
+For example, a process application for a consumer loan application might consist of a BPMN diagram as an entry point and a number of additional supporting files, such as DMN diagrams and forms.
 
 <p><img src={FileListImg} alt="Process application file list" /></p>
 
@@ -51,7 +51,6 @@ You should be aware of the following limitations when working with process appli
 ### Deployment limitations
 
 - Process applications can only be deployed to a Zeebe cluster in version 8.4.0 or higher.
-- You cannot deploy individual files that are part of a process application; the application is always deployed as a whole.
 - The overall size of the deployment bundle is limited due to a maximum [record](../../../zeebe/technical-concepts/internal-processing.md) size of 4 MB in Zeebe.
   - The limit is effectively between 2 and 3 MB, as Zeebe writes more data to the log stream than just the raw deployment.
   - If you exceed the limit, you are shown an [error message](deploy-process-application.md#deployment-errors):<br/>
