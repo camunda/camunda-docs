@@ -15,13 +15,13 @@ jobs:
       - name: Capture version configuration as environment variable
         run: echo "VERSION_CONFIG=$(jq -c . < .github/workflows/check-versions/version-config.json)" >> $GITHUB_ENV
 
-      - name: Capture changed files as environment variable
-        run: echo "CHANGED_FILES=$(git diff --name-only HEAD^ | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_ENV
+      - name: Capture changed files to temp file
+        run: git diff --name-only HEAD^ | jq -R -s -c 'split("\n")[:-1]' > "$RUNNER_TEMP/changed-files.json"
 
       - name: Identify missing changes
         id: identify-missing-changes
         run: |
-          OUTPUT=$(node .github/workflows/check-versions/identify-missing-changes.action.js)
+          OUTPUT=$(node .github/workflows/check-versions/identify-missing-changes.action.js "$RUNNER_TEMP/changed-files.json")
           echo "MISSING_CHANGES=$OUTPUT" >> $GITHUB_ENV
 
       - name: Build messages

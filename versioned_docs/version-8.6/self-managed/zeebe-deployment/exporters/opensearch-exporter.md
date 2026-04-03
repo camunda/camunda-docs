@@ -43,11 +43,14 @@ The exporter can be enabled by configuring it with the classpath in the broker s
 For example:
 
 ```yaml
-exporters:
-  opensearch:
-    className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
-    args:
-    # Refer to the table below for the available args options
+zeebe:
+  broker:
+    ...
+    exporters:
+      opensearch:
+        className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
+        args:
+        # Refer to the table below for the available args options
 ```
 
 The exporter can be configured by providing `args`. The table below explains all the different
@@ -192,78 +195,81 @@ Here is an example configuration of the exporter:
 
 ```yaml
 ---
-exporters:
-  opensearch:
-    # Opensearch Exporter ----------
-    # An example configuration for the opensearch exporter:
-    #
-    # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_OPENSEARCH_..."
+zeebe:
+  broker:
+    ...
+    exporters:
+      opensearch:
+        # Opensearch Exporter ----------
+        # An example configuration for the opensearch exporter:
+        #
+        # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_OPENSEARCH_..."
 
-    className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
+        className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
 
-    args:
-      # A comma separated list of URLs pointing to the Opensearch instances you wish to export to.
-      # For example, if you want to connect to multiple nodes for redundancy:
-      # url: http://localhost:9200,http://localhost:9201
-      url: http://localhost:9200
+        args:
+          # A comma separated list of URLs pointing to the Opensearch instances you wish to export to.
+          # For example, if you want to connect to multiple nodes for redundancy:
+          # url: http://localhost:9200,http://localhost:9201
+          url: http://localhost:9200
 
-      bulk:
-        delay: 5
-        size: 1000
-        memoryLimit: 10485760
+          bulk:
+            delay: 5
+            size: 1000
+            memoryLimit: 10485760
 
-      retention:
-        enabled: true
-        minimumAge: 30d
-        policyName: zeebe-records-retention-policy
-        policyDescription: Zeebe records retention policy
+          retention:
+            enabled: true
+            minimumAge: 30d
+            policyName: zeebe-records-retention-policy
+            policyDescription: Zeebe records retention policy
 
-      authentication:
-        username: opensearch
-        password: changeme
+          authentication:
+            username: opensearch
+            password: changeme
 
-      aws:
-        enabled: true
-        serviceName: es
-        region: eu-west-1
+          aws:
+            enabled: true
+            serviceName: es
+            region: eu-west-1
 
-      index:
-        prefix: zeebe-record
-        createTemplate: true
+          index:
+            prefix: zeebe-record
+            createTemplate: true
 
-        command: false
-        event: true
-        rejection: false
+            command: false
+            event: true
+            rejection: false
 
-        commandDistribution: true
-        decisionRequirements: true
-        decision: true
-        decisionEvaluation: true
-        deployment: true
-        deploymentDistribution: true
-        error: true
-        escalation: true
-        form: true
-        incident: true
-        job: true
-        jobBatch: false
-        message: true
-        messageStartSubscription: true
-        messageSubscription: true
-        process: true
-        processEvent: false
-        processInstance: true
-        processInstanceCreation: true
-        processInstanceMigration: true
-        processInstanceModification: true
-        processMessageSubscription: true
-        resourceDeletion: true
-        signal: true
-        signalSubscription: true
-        timer: true
-        userTask: true
-        variable: true
-        variableDocument: true
+            commandDistribution: true
+            decisionRequirements: true
+            decision: true
+            decisionEvaluation: true
+            deployment: true
+            deploymentDistribution: true
+            error: true
+            escalation: true
+            form: true
+            incident: true
+            job: true
+            jobBatch: false
+            message: true
+            messageStartSubscription: true
+            messageSubscription: true
+            process: true
+            processEvent: false
+            processInstance: true
+            processInstanceCreation: true
+            processInstanceMigration: true
+            processInstanceModification: true
+            processMessageSubscription: true
+            resourceDeletion: true
+            signal: true
+            signalSubscription: true
+            timer: true
+            userTask: true
+            variable: true
+            variableDocument: true
 ```
 
 ## Self-signed certificates
