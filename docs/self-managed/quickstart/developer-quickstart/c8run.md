@@ -14,7 +14,7 @@ For detailed steps, see the [manual installation](../../../deployment/manual/ins
 
 Camunda 8 Run is a local distribution of Camunda 8 that bundles the Camunda 8 runtime, core services, startup scripts, and a launcher application for Windows, macOS, and Linux.
 
-Camunda 8 Run enables you to run the [Orchestration Cluster](../../../../reference/glossary.md#orchestration-cluster) with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment.
+Camunda 8 Run enables you to run the [Orchestration Cluster](../../../reference/glossary.md#orchestration-cluster) with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment.
 
 Camunda 8 Run includes the following:
 
