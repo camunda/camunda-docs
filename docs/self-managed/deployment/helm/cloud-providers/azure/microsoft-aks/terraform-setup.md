@@ -68,7 +68,7 @@ This guide supports two secondary storage variants for the Orchestration Cluster
 For more details on secondary storage, see [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md).
 
 :::note
-Select a variant using the **Elasticsearch** / **RDBMS** tabs throughout this guide. All tabbed sections will switch together automatically.
+Select a variant using the **Elasticsearch**/**RDBMS** tabs throughout this guide. All tabbed sections will switch together automatically.
 :::
 
 #### How to choose
@@ -286,7 +286,7 @@ export AZURE_SP_ID=$(az account show --query user.name -o tsv)
 
 To configure your deployment, create a `terraform.tfvars` file in the root of the reference architecture folder (`aks-single-region` or `aks-single-region-rdbms`). This file defines critical environment-specific settings like your Azure subscription and the Service Principal used for authentication.
 
-Follow the below guide for getting the necessary values:
+Follow the guide below to get the necessary values:
 
 <Tabs groupId="domain" defaultValue="with-domain" queryString values={
 [
@@ -431,7 +431,7 @@ The modules deployed are:
 
 #### 2. AKS module
 
-This module exposes a customisable **kubernetes_version** value via the `locals` block:
+This module exposes a customizable **kubernetes_version** value via the `locals` block:
 
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/aks.tf#L1-L3
