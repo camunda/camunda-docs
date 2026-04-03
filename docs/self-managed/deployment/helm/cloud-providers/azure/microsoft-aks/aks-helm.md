@@ -333,7 +333,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 Before installing the Helm chart, create Kubernetes secrets to store the database authentication credentials.
 
-To create the secrets, run the following command:
+To create the secrets, run the following command for your selected variant:
 
 <Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
 {label: 'Elasticsearch', value: 'elasticsearch'},

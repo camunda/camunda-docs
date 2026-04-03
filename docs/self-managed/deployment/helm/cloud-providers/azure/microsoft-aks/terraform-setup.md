@@ -74,7 +74,7 @@ Select a variant using the **Elasticsearch** / **RDBMS** tabs throughout this gu
 #### How to choose
 
 - If you need **Optimize** for analytics or prefer the proven Elasticsearch-based setup, choose the **Elasticsearch** variant.
-- If you want a **lighter infrastructure** without managing an Elasticsearch cluster and do not need Optimize, choose the **RDBMS** variant. RDBMS secondary storage is supported since Camunda 8.9.
+- If you want a **lighter infrastructure** without managing an Elasticsearch cluster and do not need Optimize, choose the **RDBMS** variant. RDBMS secondary storage is available as of Camunda 8.9.
 
 #### Security
 
@@ -176,7 +176,7 @@ Due to Azure CNI, every pod will get assigned a real internal IP. While the defa
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture of the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/). Select the variant matching your [secondary storage choice](#variants). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
