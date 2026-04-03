@@ -379,7 +379,8 @@ Some components are not enabled by default in this deployment. For more informat
 
 Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
-- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **Elasticsearch** (this guide): Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **RDBMS** (alternative): Use a managed Azure Database for PostgreSQL or another supported RDBMS engine — see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
@@ -390,6 +391,10 @@ All commands in this guide assume you are at the **repository root** (the direct
 ##### Deploy Elasticsearch {#deploy-elasticsearch}
 
 If your organization does not want to use a managed Elasticsearch service, ECK Operator is an option. In this guide, we default to the ECK Operator deployment of Elasticsearch.
+
+:::note RDBMS alternative
+For those who prefer a relational database, RDBMS (for example, [Azure Database for PostgreSQL](https://azure.microsoft.com/products/postgresql)) is a supported alternative to Elasticsearch for the Orchestration Cluster's secondary storage. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines. To use RDBMS instead, skip this section and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+:::
 
 :::warning Production Elasticsearch recommendation
 For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option.

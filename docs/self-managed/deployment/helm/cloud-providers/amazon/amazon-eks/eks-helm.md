@@ -319,12 +319,19 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
 
-#### Use internal Elasticsearch instead of the managed OpenSearch
+#### Secondary storage options
 
-If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment. This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
+This guide includes a managed Amazon OpenSearch example path for secondary storage. Choose the backend that fits your requirements:
 
-:::tip Alternative: Operator-based Elasticsearch deployment
-Instead of using Bitnami subcharts for internal Elasticsearch, consider deploying [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
+- **Managed OpenSearch**: Use the managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
+- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+
+#### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
+
+For advanced deployments, you can disable managed OpenSearch and enable the Elasticsearch deployment from the Camunda Helm chart:
+
+:::caution Deprecated path
+The Helm-chart Elasticsearch deployment uses deprecated Bitnami subcharts. Prefer managed Elasticsearch/OpenSearch services for long-term deployments, or deploy [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) if you need operator-based Elasticsearch with automated scaling, upgrades, and built-in security.
 :::
 
 <details>

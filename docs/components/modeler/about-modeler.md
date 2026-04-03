@@ -7,22 +7,30 @@ keywords: ["process mapping tool"]
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Any executable process needs a **[Business Process Model and Notation (BPMN)](./bpmn/bpmn.md) diagram** designed and configured beforehand.
+Camunda provides modeling tools for designing and implementing executable diagrams with [BPMN](./bpmn/bpmn.md), [DMN](./dmn/dmn.md), and [Forms](./forms/camunda-forms-reference.md).
 
-A BPMN diagram is used to visually outline the structure and flow of a process. As a result, the process can be more easily understood by various stakeholders.
+Choose the modeler that best fits how you work:
 
-In tandem, different events and implementation details (such as the conditions within a gateway or the specifications of a service task) must be configured in the model so the workflow engine understands what must be executed once the process reaches a certain task.
+- [Web Modeler](./web-modeler/launch-web-modeler.md): Use Camunda's browser-based modeler to collaborate on diagrams in Camunda 8 SaaS or Self-Managed.
+- [Desktop Modeler](./desktop-modeler/index.md): Install the desktop application to model locally and integrate with your development environment.
 
-Camunda offers two tools to design and implement your diagrams:
+## Open Web Modeler
 
-- [Web Modeler](./web-modeler/launch-web-modeler.md): Integrate seamlessly with Camunda 8 SaaS and Self-Managed installations alongside [Console](../console/introduction-to-console.md).
-- [Desktop Modeler](./desktop-modeler/index.md): Design, view, and edit models using this desktop application. Install and use Desktop Modeler locally, all while integrating your local development environment.
+If you are logged in to Camunda 8 SaaS, open the **Camunda components** menu in the top-left corner and select **Web Modeler**. If you are already in [Console](../console/introduction-to-console.md) or another Camunda component, use the same menu to switch to Web Modeler.
+
+From the Web Modeler home page, create a new project or open an existing one to start working on diagrams. For a step-by-step walkthrough, see [launch Web Modeler](./web-modeler/launch-web-modeler.md).
+
+## Get Desktop Modeler
+
+If you want to model locally, work offline, or edit the underlying XML directly, download Desktop Modeler for macOS, Windows, or Linux from the [Camunda downloads page](https://camunda.com/download/modeler/).
+
+For installation details and features, see [Desktop Modeler](./desktop-modeler/index.md).
 
 :::note
-Interested in editing the underlying XML of [BPMN](./bpmn/bpmn.md) and [Decision Model and Notation (DMN)](./dmn/dmn.md) diagrams directly? Be sure to utilize Desktop Modeler, as it features an XML editor tab. The XML editor comes with its own history (undo or redo), search and replace functionality, and XML syntax highlighting.
+Desktop Modeler includes an XML editor for [BPMN](./bpmn/bpmn.md) and [Decision Model and Notation (DMN)](./dmn/dmn.md) diagrams, with its own undo and redo history, search and replace, and XML syntax highlighting.
 :::
 
-In this guide, we'll demonstrate modeling BPMN diagrams using both Web Modeler and Desktop Modeler.
+If you use both tools, see [using Web and Desktop Modeler together](./using-web-and-desktop-modeler-together.md).
 
 ## Next steps
 
