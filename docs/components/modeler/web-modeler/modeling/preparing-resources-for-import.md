@@ -15,7 +15,7 @@ This guide is intended for repository maintainers, blueprint authors, and soluti
 
 Prepare resources for import into Web Modeler in two main ways:
 
-1. [**Individual resources**](#prepare-individual-resources): Each resource, such us a BPMN or DMN file, a template, or a README, is accessible via its own public URL and can be imported one by one.
+1. [**Individual resources**](#prepare-individual-resources): Each resource, such as a BPMN or DMN file, a template, or a README, is accessible via its own public URL and can be imported one by one.
 2. [**Packaged resources**](#prepare-packaged-resources): Bundle all resources, such as an entire process application, into a single `.zip` file. This allows importing the full package from a single URL.
 
 ## Guidelines for importing

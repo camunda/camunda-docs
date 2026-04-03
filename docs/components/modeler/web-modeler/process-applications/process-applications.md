@@ -17,7 +17,7 @@ For example, a process application for a consumer loan application might consist
 
 ## Process application development lifecycle
 
-In Web Modeler your can quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
+In Web Modeler, you can quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
 
 - [Process application development lifecycle](process-application-pipeline.md)
 

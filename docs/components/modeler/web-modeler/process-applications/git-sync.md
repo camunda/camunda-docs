@@ -7,9 +7,9 @@ description: Connect Web Modeler to your Git repositories to keep your projects 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps, allowing users to keep their Web Modeler and Desktop Modeler projects in sync with their version control repositories.
 
-Once the connection is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
+Once the connection is configured by an organization owner or administrator, project administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
 
 ## Connect to a remote repository
 

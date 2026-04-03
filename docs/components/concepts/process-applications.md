@@ -16,7 +16,7 @@ Bundled together, versioned together, and deployed together, these resources con
 
 For instance, a consumer loan approval process application might bundle:
 
-- A BPMN process as entry point (for example, consumer-loan-application.bpmn) to define the workflow.
+- A BPMN process as an entry point (for example, consumer-loan-application.bpmn) to define the workflow.
 - DMN decision tables (for example, interest-rate-calculation.dmn, credit-score-calculation.dmn) for business rules.
 - Forms (for example, loan-application-review.form) for user interactions.
 

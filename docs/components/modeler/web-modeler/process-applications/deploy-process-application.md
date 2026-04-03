@@ -41,9 +41,9 @@ Once validation is complete, deploy your process application to cluster stages i
    - Managing the cluster. Select **Manage**.
 1. Select **Deploy** to deploy the process application to the selected cluster.
 
-All BPMN, DMN, and form files contained in the process application are deployed as a single bundle.
+When you deploy from the process application homepage, all BPMN, DMN, and form files in the process application are deployed as a single bundle.
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters).
+In Self-Managed, you can deploy your process application to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters).
 
 :::note
 If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a process application cannot be deployed incompletely or in an inconsistent state.
@@ -84,4 +84,4 @@ The message typically provides the name of the affected resource, the ID of the 
 ### Deployment of external resources
 
 You can link BPMN processes, DMN decisions, or forms that are not part of the process application itself (external resources) from any process inside a process application.
-When you deploy the process application, linked resources located outside the process application are _not_ deployed along and you have to deploy them separately.
+When you deploy the process application, linked resources located outside the process application are _not_ deployed with the process application, so you must deploy them separately.
