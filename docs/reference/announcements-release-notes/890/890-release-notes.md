@@ -168,6 +168,21 @@ Web Modeler now supports RPA scripts as a first-class file type, including visib
 
 <p class="link-arrow">[RPA getting started](/components/rpa/getting-started.md)</p>
 
+### Unified deployment experience across file types in Web Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/3252 -->
+
+Web Modeler now offers a unified deployment experience across BPMN, DMN, forms, and RPA scripts.
+
+- Deploy artifacts from their details view using a consistent interaction pattern across file types.
+- See more clearly which linked files are included when deploying within a process application.
+- Choose whether to deploy the current file or the applicable process application bundle, depending on context.
+
+This update reduces hidden deployment behavior, lowers cognitive load, and makes deployment workflows more predictable and extensible for future asset types.
+
+<p class="link-arrow">[Process applications in Web Modeler](/components/modeler/web-modeler/process-applications/process-applications.md)</p>
+<p class="link-arrow">[Validate and deploy your process application](/components/modeler/web-modeler/process-applications/deploy-process-application.md)</p>
+
 ## Operate
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
