@@ -42,30 +42,33 @@ Optimize can only use variable data at the **process level**.
 
 ### Example: Collect token usage
 
-In the AI Agent Chat Quick Start example, token usage data is not available at the process level, but in a nested scope. To surface those metrics, you can add a script task after the AI agent execution that copies those values into process variables.
+In the AI Agent Chat Quick Start example, token usage data is not available at the process level, but in a nested scope.
+How you extract it depends on your AI agent implementation. The important aspect is that the target variables exist at the **process level** when the instance finishes.
 
-How you extract these values depends on how your AI agent implementation exposes token usage. The important aspect is that the target variables exist at the **process level** when the instance finishes.
+:::note
+Getting the token usage from the agent context only works with the AI Agent Sub-process when the **Include agent context** option in the **Response** section is enabled.
+:::
 
-To do so:
+To surface this data, you can add a script task after the AI agent execution that copies the values into process variables as follows:
 
 1. Add a [script task](/components/modeler/bpmn/script-tasks/script-tasks.md).
-1. Configure its **Properties** as follows:
-   - In **General**, **Name**: Gather metrics.
-   - In **Implementation**, select **FEEL expression**.
-   - In **Script**,
-     - **Result variable**: `tokenUsage`.
-     - **FEEL expression**: `agent.context.metrics.tokenUsage.inputTokenCount`.
-   - In **Output mapping**, add two process variables:
+1. Configure its **Properties**:
+   - Set **Name** to `Gather metrics` under the **General** section.
+   - Select **FEEL expression** as **Implementation**.
+   - Under **Script**:
+     - Set **Result variable** to `tokenUsage`.
+     - Set **FEEL expression** to `agent.context.metrics.tokenUsage`.
+   - Under **Output mapping**, add two process variables:
      - `inputTokenUsage` with **Variable assignment value**: `agent.context.metrics.tokenUsage.inputTokenCount`.
      - `outputTokenUsage` with **Variable assignment value**: `agent.context.metrics.tokenUsage.outputTokenCount`.
 
-You should see something like the following:
+You should see something similar to the following:
 
 <img src={ScriptTask} alt="Script task configuration for collecting token usage"/>
 
 ## Step 2: Examine data in Optimize
 
-By leveraging data collected during process execution, you can use Optimize to examine it through reports and dashboards and identify areas for improvement in your AI agent processes.
+You can use Optimize reports and dashboards to examine data collected during process execution and identify areas for improvement in your AI agent processes.
 
 1. Open Optimize.
 1. Go to the **Dashboards** tab.
@@ -73,13 +76,11 @@ By leveraging data collected during process execution, you can use Optimize to e
 1. Verify that Optimize shows data for your executed process instances in the **Business Operations** section, including your AI agent process model diagram and other statistics below.
 1. Explore the other metrics shown below in the **Business Reporting** and **Process Improvement** sections.
 
-See the Optimize [getting started](/components/optimize/improve-processes-with-optimize.md) guide for more details on what you can do with Optimize for business intelligence.
+See [getting started](/components/optimize/improve-processes-with-optimize.md) with Optimize for more details on using Optimize for business intelligence.
 
 ## Step 3: Create reports for token usage
 
 You can create reports for token usage across process instances and over time.
-
-To do so:
 
 1. Go to the **Collections** tab.
 1. Select **Report** from the **Create new** dropdown.
@@ -100,9 +101,9 @@ You can create similar reports, targeting other goals and process variables, suc
 
 If you have a token budget, you can set a target in the report.
 
-1. Follow [the previous steps 1 through 6](#step-3-create-reports-for-token-usage).
-1. In the **Visualization** settings, click the gear icon, and then enable **Set target** to configure a target value, for example, a maximum token usage threshold.
-1. Set the target to less than 10,000 tokens.
+1. Complete steps 1–6 in [Step 3: Create reports for token usage](#step-3-create-reports-for-token-usage).
+1. In the **Visualization** settings, click the gear icon and enable **Set target** to configure a target value. For example, a maximum token usage threshold.
+1. Set the target threshold to match your budget. For example, select the **below** option and set it to 10,000 tokens.
 1. Save the report with a descriptive name. For example, **Token usage with threshold**.
 
 ## Step 4: Create reports for tool usage
@@ -118,12 +119,12 @@ Use a heatmap to understand how long your AI agent spends in each task.
 1. Select **Flow node** as the **View**.
 1. Select **Duration** as the **Measure**.
 1. (Optional) Filter the report by selecting **Flow node selection** in the **Filter flow nodes** dropdown. For example, select only tool tasks within the AI Agent connector.
-1. In the **Visualization** settings, select **Heatmap**. Then click the gear icon and enable the tooltip to show absolute values.
+1. In the **Visualization** settings, select **Heatmap**. Click the gear icon and enable the tooltip to show absolute values.
 1. Save the report with a descriptive name. For example, **Tool usage heatmap**.
 
-<p align="center">
-   <img src={Heatmap} alt="Tool usage heatmap" width="80%"/>
-</p>
+<img src={Heatmap} alt="Tool usage heatmap" width="80%"/>
+
+You can see from the heatmap that the **Search recipe**, **Jokes API**, and **Fetch URL** tools are the only ones that were called across all process executions, and that your AI agent spent the most time in **Search recipe**.
 
 ### Example: Create a report for tool call counts
 
@@ -137,9 +138,9 @@ Create a bar chart to see how many times each tool is called.
 1. In the **Visualization** settings, select **Bar chart** or **Pie chart**. Then click the gear icon and enable both tooltips to show absolute and relative values.
 1. Save the report with a descriptive name. For example, **Tool usage**.
 
-<p align="center">
-  <img src={PieChart} alt="Tool usage pie chart" width="50%"/>
-</p>
+<img src={PieChart} alt="Tool usage pie chart" width="50%"/>
+
+You can see from the pie chart that the AI agent called the Jokes API tool most often across all process executions.
 
 ### Example: Track trends over time
 
@@ -157,7 +158,6 @@ Use a timeline report to analyze trends over time. For example, you can see how 
 ## Step 5: Build a dashboard
 
 You can create a dashboard, which is a collection of reports that you can view together, for your AI agent process.
-To do so:
 
 1. Go to the **Collections** tab.
 1. Select **Dashboard** from the **Create new** dropdown.
@@ -166,9 +166,7 @@ To do so:
 1. Arrange the tiles to customize your dashboard layout.
 1. Save the dashboard with a descriptive name. For example, **AI Agent Chat Quick Start dashboard**.
 
-<p align="center">
-  <img src={Dashboard} alt="Dashboard overview" width="80%"/>
-</p>
+<img src={Dashboard} alt="Dashboard overview" width="80%"/>
 
 ## Next steps
 

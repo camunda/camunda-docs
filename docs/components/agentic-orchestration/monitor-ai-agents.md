@@ -42,7 +42,7 @@ This guide is a follow-up to [Build your first AI agent](../../guides/getting-st
 Run your process instance using a prompt to trigger the AI Agent connector.
 For example:
 
-1. Enter "Visit _docs.camunda.io_ and tell me about it" in the **How can I help you today?** field.
+1. Enter "Tell me a joke" in the **How can I help you today?** field.
 1. Click **Start instance**.
 
 ## Step 2: Open the process instance in Operate
@@ -61,15 +61,14 @@ With Operate, you can track the agent activity and see which tool tasks are call
 
 1. To show how many times each BPMN element is triggered, select **Execution count** in the **Instance History** section. For this particular prompt example, you can see:
    - The AI Agent connector was triggered once.
-   - Within it, the agent executed the **Fetch URL** tool. This aligns with your prompt example of extracting information from a website.
+   - Within it, the agent executed the **Jokes API** tool.
 
-2. Select the **Fetch URL** tool element:
+2. Select the **Jokes API** tool element:
    - In the bottom-left pane, you can see where the element belongs in the execution tree:
-     <img src={InstanceHistory} alt="Fetch URL element details"/>
+     <img src={InstanceHistory} alt="Jokes API execution tree" width="80%"/>
 
 - In the bottom-right pane, the element details are displayed, including the [**Variables**](components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
-  However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree.
-  <img src={Variables} alt="Fetch URL element details"/>
+  However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree. See [Step 4: Inspect tool calls](#step-4-inspect-tool-calls) for more details.
 
 ## Step 4: Inspect tool calls
 
@@ -78,28 +77,20 @@ Each tool execution produces an inner instance where you can find:
 - The inputs passed into the tool.
 - The results.
 
-To see the **Fetch URL** tool input and results:
+To see the **Jokes API** tool input and results:
 
-1. In the execution tree, select the **AI_Agent#innerInstance** parent element of the **Fetch URL** tool. You will see:
-   - The `toolCall` variable (the _input_). In its value field, you can see the URL you asked the agent to fetch information from.
+1. In the execution tree, select the **AI_Agent#innerInstance** parent element of the **Jokes API** tool. You will see:
+   - The `toolCall` variable (the _input_).
    - The `toolCallResult` variable (the _results_). See [Tool call responses](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-call-responses) for more details.
 
-2. To better inspect the results, click the pencil icon to enter edit mode for `toolCallResult`.
-3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value. The result is a reference to a document where the actual output is stored (you will learn more about this in [Step 6](#step-6-understand-how-agent-memory-is-stored)).
+  <img src={Variables} alt="Jokes API variable details"/>
 
-Here's the `toolCallResult` value:
+2. To better inspect the results, click the pencil icon to enter edit mode for `toolCallResult`.
+3. Click the two-arrow icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value:
 
 ```json
 {
-  "storeId": "gcp",
-  "documentId": "1aa0e4f6-7cee-4c19-ac2e-cebee3c7b151",
-  "contentHash": "649a8575bf8ced157fbbba7acc02ba33058bb2e3f40fb37b0f303730fb64fba0",
-  "metadata": {
-    "contentType": "text/html; charset=utf-8",
-    "size": 33722,
-    "fileName": "1aa0e4f6-7cee-4c19-ac2e-cebee3c7b151"
-  },
-  "camunda.document.type": "camunda"
+  "Java and C were telling jokes. It was C's turn, so he writes something on the wall, points to it and says \"Do you get the reference?\" But Java didn't."
 }
 ```
 
@@ -114,7 +105,7 @@ To view it:
 
 1. Select the **AI Agent** element in the execution tree.
 2. To better inspect the value, click the pencil icon to enter edit mode for the `agentContext` variable.
-3. Click the two-squares icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value.
+3. Click the two-arrow icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value.
 
 In the JSON payload, you can find information about:
 
@@ -124,18 +115,18 @@ In the JSON payload, you can find information about:
 - Tool call inputs and results.
 - Additional metadata, such as reasoning traces and token usage.
 
-Here's the example conversation stored in the agent's context:
+Here’s a snippet of the example conversation stored in the agent’s context:
 
 ```json
 "type": "in-process",
-"conversationId": "130bbad7-b316-4cac-9653-a77e37e11f8b",
+"conversationId": "3889288d-5904-485f-bdca-48ad1f1ef679",
 "messages": [
   {
     "role": "system",
     "content": [
       {
         "type": "text",
-        "text": "You are a helpful, generic chat agent which can answer a wide amount of questions based on your knowledge and an optional set of available tools.\n\nIf tools are provided, you should prefer them instead of guessing an answer. You can call the same tool multiple times by providing different input values. Don't guess any tools which were not explicitly configured. If no tool matches the request, try to generate an answer. If you're not able to find a good answer, return with a message stating why you're not able to.\n\nIf you are prompted to interact with a person, never guess contact details, but use available user/person lookup tools instead and return with an error if you're not able to look up appropriate data.\n\nThinking, step by step, before you execute your tools, you think using the template `<thinking><context></context><reflection></reflection></thinking>`"
+        "text": "You are a helpful, generic chat agent which can answer a wide amount of questions based on your knowledge and an optional set of available tools.\n\nIf tools are provided, you should prefer them instead of guessing an answer. You can call the same tool multiple times by providing different input values. Don't guess any tools which were not explicitely configured. If no tool matches the request, try to generate an answer. If you're not able to find a good answer, return with a message stating why you're not able to.\n\nIf you are prompted to interact with a person, never guess contact details, but use available user/person lookup tools instead and return with an error if you're not able to look up appropriate data.\n\nThinking, step by step, before you execute your tools, you think using the template `<thinking><context></context><reflection></reflection></thinking>`"
       }
     ]
   },
@@ -144,11 +135,11 @@ Here's the example conversation stored in the agent's context:
     "content": [
       {
         "type": "text",
-        "text": "Visit https://docs.camunda.io/ and tell me about it"
+        "text": "Tell me a joke"
       }
     ],
     "metadata": {
-      "timestamp": "2026-02-23T11:48:03.90923378Z"
+      "timestamp": "2026-04-06T09:53:19.224987296Z"
     }
   },
   {
@@ -156,16 +147,14 @@ Here's the example conversation stored in the agent's context:
     "content": [
       {
         "type": "text",
-        "text": "<thinking>\n<context>\nThe user wants me to visit a specific URL (https://docs.camunda.io/) and tell them about it. I have a tool called \"Fetch_URL\" that can fetch the contents of a given URL. This seems like a perfect match for the request.\n</context>\n<reflection>\nI should use the Fetch_URL tool to get the contents of https://docs.camunda.io/ and then analyze what I find to provide information about it to the user.\n</reflection>\n</thinking>"
+        "text": "<thinking>\n<context>\nThe user is asking for a joke. I have access to a Jokes_API function that can fetch a random joke from a REST API. This seems like the perfect tool to use for this request. The function doesn't require any parameters, so I can call it directly.\n</context>\n<reflection>\nThis is a straightforward request that matches exactly with one of my available tools. I should use the Jokes_API function to get a random joke for the user.\n</reflection>\n</thinking>"
       }
     ],
     "toolCalls": [
       {
-        "id": "tooluse_kBcf61pS50OS31KYQnRFzy",
-        "name": "Fetch_URL",
-        "arguments": {
-          "url": "https://docs.camunda.io/"
-        }
+        "id": "tooluse_x83f1Vaj62lgkT9PMo6oqB",
+        "name": "Jokes_API",
+        "arguments": {}
       }
     ],
 ```
@@ -200,7 +189,7 @@ In this case, the required action is to provide feedback on the agent results. T
 1. Select the **User Feedback** element.
 2. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md).
 3. Select the user feedback task and assign to yourself by clicking **Assign to me**.
-4. Analyze the result. You will see an overview of the website URL requested in the prompt.
+4. Analyze the result. You will see a joke, as requested in the prompt.
 5. You can follow up with more prompts to continue testing your AI agent.
 6. Select the **Are you satisfied with the result?** checkbox when you want to finish the process, then click **Complete task**.
 7. Go back to Operate. You will see the process instance is now completed, and the end event has been triggered.
