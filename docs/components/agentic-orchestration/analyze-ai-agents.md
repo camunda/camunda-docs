@@ -4,6 +4,7 @@ title: Analyze your AI agents with Optimize
 sidebar_label: Analyze your AI agents
 description: "Analyze and improve the performance of your AI agent executions using Optimize."
 keywords: ["agentic ai", "AI agents", "Optimize"]
+toc_max_heading_level: 2
 ---
 
 import ScriptTask from './img/script-task.png';
