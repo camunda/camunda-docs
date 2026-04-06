@@ -4,36 +4,39 @@ title: Test your AI agents with CPT
 sidebar_label: Test your AI agents
 description: "Test non-deterministic AI agent processes in Camunda 8 with Camunda Process Test."
 keywords: ["agentic ai", "AI agents", "Camunda Process Test"]
+toc_max_heading_level: 2
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Test non-deterministic AI agent processes in Camunda 8 with Camunda Process Test (CPT).
+Test your AI agent processes in Camunda 8 with [Camunda Process Test (CPT)](/apis-tools/testing/getting-started.md).
 
 ## About
+
+Traditional BPMN processes follow a predictable path: given the same input, they execute the same sequence of tasks and produce the same output. Tests can assert on specific tasks in a known order and compare variable values with exact equality checks.
+
+AI agent processes break both assumptions. A process that uses the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) lets the AI agent decide at runtime which tools to invoke and in what order. The same prompt may lead to different execution paths across runs. On top of that, the agent produces free-text output whose exact wording varies every time.
+
+This poses two challenges for testing:
+
+- **Non-deterministic execution order**: Standard CPT assertions are blocking, since they wait for a specific condition before the test continues. A test that blocks on one particular tool task will stall if the agent chooses a different tool first, or skips that tool entirely.
+- **Non-deterministic output content**: Equality-based variable assertions cannot reliably verify free-text responses. The agent may phrase the same correct answer differently on each run, causing exact-match checks to fail even when the response is valid.
+
+In practice, CPT addresses these issues with two complementary features:
+
+- Use [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior) to react to whichever tool or user tasks the agent activates, without hard-coding a single execution order.
+- Use [judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge) to check AI-generated output with a judge LLM. Instead of comparing exact wording, the judge scores whether the response satisfies a natural-language expectation, which makes assertions more robust for free-text output.
+
+:::note
+This guide provides an integration-test style setup: the AI agent process and its LLM interaction are real, while tool executions (such as REST connector calls) are mocked. This gives you broader coverage than a traditional mock-based unit test, because the test still validates prompting, orchestration, and semantic output quality end to end.
+:::
 
 In this guide, you will:
 
 - Run an integration test that keeps the AI agent and LLM interaction real while mocking external tool executions.
 - Handle non-deterministic execution paths in AI agent processes with conditional behavior, without hard-coding a single execution order.
 - Verify free-text agent output with judge assertions.
-
-Traditional BPMN processes follow a predictable path: given the same input, they execute the same sequence of tasks and produce the same output. Tests can assert on specific tasks in a known order and compare variable values with exact equality checks.
-
-AI agent processes break both of these assumptions. A process that uses the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) lets the AI agent decide at runtime which tools to invoke and in what order. The same prompt may lead to different execution paths across runs. On top of that, the agent produces free-text output whose exact wording varies every time.
-
-This creates two concrete problems for tests:
-
-- **Non-deterministic execution order.** Standard CPT assertions are blocking: they wait for a specific condition before the test continues. A test that blocks on one particular tool task will stall if the agent chooses a different tool first, or skips that tool entirely.
-- **Non-deterministic output content.** Equality-based variable assertions cannot reliably verify free-text responses. The agent may phrase the same correct answer differently on each run, causing exact-match checks to fail even when the response is valid.
-
-In practice, CPT addresses these two problems with two complementary features:
-
-- Use [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior) to react to whichever tool tasks or user tasks the agent activates, without hard-coding a single execution order.
-- Use [judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge) to check AI-generated output with a judge LLM. Instead of comparing exact wording, the judge scores whether the response satisfies a natural language expectation, which makes assertions more robust for free-text output.
-
-This guide focuses on an integration-test style setup: the AI agent process and its LLM interaction remain real, while tool executions such as REST connector calls are mocked. That gives you broader coverage than a traditional mock-based unit test, because the test still validates prompting, orchestration, and semantic output quality end to end.
 
 After completing this guide, you will be able to test AI agent processes whose control flow and outputs vary across runs.
 
@@ -42,10 +45,9 @@ After completing this guide, you will be able to test AI agent processes whose c
 - You use Camunda 8.9+.
 - You use the Camunda Process Test Spring Boot Starter.
 - You have [Camunda Process Test set up](/apis-tools/testing/getting-started.md).
-- You are familiar with the [Build your first AI agent](/guides/getting-started-agentic-orchestration.md) guide.
 
 :::important
-This guide uses the **AI Agent Chat With Tools** process from [Build your first AI agent](/guides/getting-started-agentic-orchestration.md). Therefore, the same [prerequisites apply](/guides/getting-started-agentic-orchestration.md#prerequisites). However, the same testing patterns also apply to other AI agent process implementations.
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process, **AI Agent Chat With Tools**. WCompleting that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
 :::
 
 [Judge assertions](#step-2-configure-the-llm-provider-and-connectors) require an LLM provider. CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured support for [several providers](/apis-tools/testing/configuration.md#judge-configuration). LangChain4j requires Java 17+.
