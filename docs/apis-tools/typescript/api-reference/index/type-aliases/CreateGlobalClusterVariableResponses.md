@@ -11,7 +11,7 @@ mdx:
 type CreateGlobalClusterVariableResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:8612](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8612)
+Defined in: [gen/types.gen.ts:9135](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9135)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:8612](https://github.com/camunda/orchestration-clu
 200: ClusterVariableResult;
 ```
 
-Defined in: [gen/types.gen.ts:8616](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8616)
+Defined in: [gen/types.gen.ts:9139](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9139)
 
 Cluster variable created

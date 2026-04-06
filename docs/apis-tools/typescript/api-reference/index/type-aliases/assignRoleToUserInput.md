@@ -11,7 +11,7 @@ mdx:
 type assignRoleToUserInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:95](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L95)
+Defined in: [gen/CamundaClient.ts:99](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L99)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/CamundaClient.ts:95](https://github.com/camunda/orchestration-c
 roleId: assignRoleToUserPathParam_roleId;
 ```
 
-Defined in: [gen/CamundaClient.ts:95](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L95)
+Defined in: [gen/CamundaClient.ts:99](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L99)
 
 ---
 
@@ -31,4 +31,4 @@ Defined in: [gen/CamundaClient.ts:95](https://github.com/camunda/orchestration-c
 username: assignRoleToUserPathParam_username;
 ```
 
-Defined in: [gen/CamundaClient.ts:95](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L95)
+Defined in: [gen/CamundaClient.ts:99](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L99)

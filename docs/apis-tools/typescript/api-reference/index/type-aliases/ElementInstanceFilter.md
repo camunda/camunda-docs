@@ -11,7 +11,7 @@ mdx:
 type ElementInstanceFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:2403](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2403)
+Defined in: [gen/types.gen.ts:2542](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2542)
 
 Element instance filter.
 
@@ -20,10 +20,10 @@ Element instance filter.
 ### elementId?
 
 ```ts
-optional elementId: ElementId;
+optional elementId?: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:2419](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2419)
+Defined in: [gen/types.gen.ts:2558](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2558)
 
 The element ID for this element instance.
 
@@ -32,10 +32,10 @@ The element ID for this element instance.
 ### elementInstanceKey?
 
 ```ts
-optional elementInstanceKey: ElementInstanceKey;
+optional elementInstanceKey?: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2433](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2433)
+Defined in: [gen/types.gen.ts:2572](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2572)
 
 The assigned key, which acts as a unique identifier for this element instance.
 
@@ -44,12 +44,12 @@ The assigned key, which acts as a unique identifier for this element instance.
 ### elementInstanceScopeKey?
 
 ```ts
-optional elementInstanceScopeKey:
+optional elementInstanceScopeKey?:
   | ElementInstanceKey
   | ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2458](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2458)
+Defined in: [gen/types.gen.ts:2597](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2597)
 
 The scope key of this element instance. If provided with a process instance key it will return element instances that are immediate children of the process instance. If provided with an element instance key it will return element instances that are immediate children of the element instance.
 
@@ -58,10 +58,10 @@ The scope key of this element instance. If provided with a process instance key 
 ### elementName?
 
 ```ts
-optional elementName: string;
+optional elementName?: string;
 ```
 
-Defined in: [gen/types.gen.ts:2424](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2424)
+Defined in: [gen/types.gen.ts:2563](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2563)
 
 The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
 
@@ -70,10 +70,10 @@ The element name. This only works for data created with 8.8 and onwards. Instanc
 ### endDate?
 
 ```ts
-optional endDate: DateTimeFilterProperty;
+optional endDate?: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:2453](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2453)
+Defined in: [gen/types.gen.ts:2592](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2592)
 
 The end date of this element instance.
 
@@ -82,10 +82,10 @@ The end date of this element instance.
 ### hasIncident?
 
 ```ts
-optional hasIncident: boolean;
+optional hasIncident?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:2428](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2428)
+Defined in: [gen/types.gen.ts:2567](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2567)
 
 Shows whether this element instance has an incident related to.
 
@@ -94,10 +94,10 @@ Shows whether this element instance has an incident related to.
 ### incidentKey?
 
 ```ts
-optional incidentKey: IncidentKey;
+optional incidentKey?: IncidentKey;
 ```
 
-Defined in: [gen/types.gen.ts:2445](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2445)
+Defined in: [gen/types.gen.ts:2584](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2584)
 
 The key of incident if field incident is true.
 
@@ -106,10 +106,10 @@ The key of incident if field incident is true.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId: ProcessDefinitionId;
+optional processDefinitionId?: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:2407](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2407)
+Defined in: [gen/types.gen.ts:2546](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2546)
 
 The process definition ID associated to this element instance.
 
@@ -118,10 +118,10 @@ The process definition ID associated to this element instance.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey: ProcessDefinitionKey;
+optional processDefinitionKey?: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:2441](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2441)
+Defined in: [gen/types.gen.ts:2580](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2580)
 
 The process definition key associated to this element instance.
 
@@ -130,10 +130,10 @@ The process definition key associated to this element instance.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey: ProcessInstanceKey;
+optional processInstanceKey?: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2437](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2437)
+Defined in: [gen/types.gen.ts:2576](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2576)
 
 The process instance key associated to this element instance.
 
@@ -142,10 +142,10 @@ The process instance key associated to this element instance.
 ### startDate?
 
 ```ts
-optional startDate: DateTimeFilterProperty;
+optional startDate?: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:2449](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2449)
+Defined in: [gen/types.gen.ts:2588](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2588)
 
 The start date of this element instance.
 
@@ -154,10 +154,10 @@ The start date of this element instance.
 ### state?
 
 ```ts
-optional state: ElementInstanceStateFilterProperty;
+optional state?: ElementInstanceStateFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:2411](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2411)
+Defined in: [gen/types.gen.ts:2550](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2550)
 
 State of element instance as defined set of values.
 
@@ -166,17 +166,17 @@ State of element instance as defined set of values.
 ### tenantId?
 
 ```ts
-optional tenantId: TenantId;
+optional tenantId?: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:2429](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2429)
+Defined in: [gen/types.gen.ts:2568](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2568)
 
 ---
 
 ### type?
 
 ```ts
-optional type:
+optional type?:
   | "UNSPECIFIED"
   | "PROCESS"
   | "SUB_PROCESS"
@@ -206,6 +206,6 @@ optional type:
   | "UNKNOWN";
 ```
 
-Defined in: [gen/types.gen.ts:2415](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2415)
+Defined in: [gen/types.gen.ts:2554](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2554)
 
 Type of element as defined set of values.

@@ -11,7 +11,7 @@ mdx:
 type ProcessDefinitionInstanceVersionStatisticsFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:5332](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5332)
+Defined in: [gen/types.gen.ts:5994](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5994)
 
 Process definition instance version statistics search filter.
 
@@ -23,7 +23,7 @@ Process definition instance version statistics search filter.
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:5336](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5336)
+Defined in: [gen/types.gen.ts:5998](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5998)
 
 The ID of the process definition to retrieve version statistics for.
 
@@ -32,9 +32,9 @@ The ID of the process definition to retrieve version statistics for.
 ### tenantId?
 
 ```ts
-optional tenantId: TenantId;
+optional tenantId?: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:5340](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5340)
+Defined in: [gen/types.gen.ts:6002](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6002)
 
 Tenant ID of this process definition.

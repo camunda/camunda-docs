@@ -11,7 +11,7 @@ mdx:
 type ProcessDefinitionInstanceVersionStatisticsResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5353](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5353)
+Defined in: [gen/types.gen.ts:6015](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6015)
 
 Process definition instance version statistics response.
 
@@ -23,7 +23,7 @@ Process definition instance version statistics response.
 activeInstancesWithIncidentCount: number;
 ```
 
-Defined in: [gen/types.gen.ts:5377](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5377)
+Defined in: [gen/types.gen.ts:6039](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6039)
 
 The number of active process instances for this version that currently have incidents.
 
@@ -35,7 +35,7 @@ The number of active process instances for this version that currently have inci
 activeInstancesWithoutIncidentCount: number;
 ```
 
-Defined in: [gen/types.gen.ts:5381](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5381)
+Defined in: [gen/types.gen.ts:6043](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6043)
 
 The number of active process instances for this version that do not have any incidents.
 
@@ -47,7 +47,7 @@ The number of active process instances for this version that do not have any inc
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:5357](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5357)
+Defined in: [gen/types.gen.ts:6019](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6019)
 
 The ID associated with the process definition.
 
@@ -59,7 +59,7 @@ The ID associated with the process definition.
 processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5361](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5361)
+Defined in: [gen/types.gen.ts:6023](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6023)
 
 The unique key of the process definition.
 
@@ -68,10 +68,10 @@ The unique key of the process definition.
 ### processDefinitionName
 
 ```ts
-processDefinitionName: string;
+processDefinitionName: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:5365](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5365)
+Defined in: [gen/types.gen.ts:6027](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6027)
 
 The name of the process definition.
 
@@ -83,7 +83,7 @@ The name of the process definition.
 processDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:5373](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5373)
+Defined in: [gen/types.gen.ts:6035](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6035)
 
 The version number of the process definition.
 
@@ -95,6 +95,6 @@ The version number of the process definition.
 tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:5369](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5369)
+Defined in: [gen/types.gen.ts:6031](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6031)
 
 The tenant ID associated with the process definition.

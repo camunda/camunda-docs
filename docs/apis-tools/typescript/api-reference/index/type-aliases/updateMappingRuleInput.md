@@ -11,7 +11,7 @@ mdx:
 type updateMappingRuleInput = updateMappingRuleBody & object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1073](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1073)
+Defined in: [gen/CamundaClient.ts:1072](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1072)
 
 ## Type Declaration
 

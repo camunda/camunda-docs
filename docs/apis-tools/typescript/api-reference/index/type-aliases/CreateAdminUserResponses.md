@@ -11,7 +11,7 @@ mdx:
 type CreateAdminUserResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:15402](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15402)
+Defined in: [gen/types.gen.ts:14695](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14695)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15402](https://github.com/camunda/orchestration-cl
 201: UserCreateResult;
 ```
 
-Defined in: [gen/types.gen.ts:15406](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15406)
+Defined in: [gen/types.gen.ts:14699](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14699)
 
 The admin user was created successfully.

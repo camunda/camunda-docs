@@ -11,7 +11,7 @@ mdx:
 type CreateMappingRuleErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:12216](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12216)
+Defined in: [gen/types.gen.ts:12290](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12290)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:12216](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12220](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12220)
+Defined in: [gen/types.gen.ts:12294](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12294)
 
 The provided data is not valid.
 
@@ -33,7 +33,7 @@ The provided data is not valid.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12226](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12226)
+Defined in: [gen/types.gen.ts:12300](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12300)
 
 The request to create a mapping rule was denied.
 More details are provided in the response body.
@@ -46,7 +46,7 @@ More details are provided in the response body.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12230](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12230)
+Defined in: [gen/types.gen.ts:12304](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12304)
 
 The request to create a mapping rule was denied.
 
@@ -58,6 +58,6 @@ The request to create a mapping rule was denied.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:12234](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12234)
+Defined in: [gen/types.gen.ts:12308](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12308)
 
 An internal error occurred while processing the request.

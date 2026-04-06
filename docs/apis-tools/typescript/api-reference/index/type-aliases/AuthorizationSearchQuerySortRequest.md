@@ -11,7 +11,7 @@ mdx:
 type AuthorizationSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:580](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L580)
+Defined in: [gen/types.gen.ts:593](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L593)
 
 ## Properties
 
@@ -26,7 +26,7 @@ field:
   | "resourceType";
 ```
 
-Defined in: [gen/types.gen.ts:584](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L584)
+Defined in: [gen/types.gen.ts:597](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L597)
 
 The field to sort by.
 
@@ -35,7 +35,7 @@ The field to sort by.
 ### order?
 
 ```ts
-optional order: SortOrderEnum;
+optional order?: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:585](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L585)
+Defined in: [gen/types.gen.ts:598](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L598)

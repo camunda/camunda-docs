@@ -11,7 +11,7 @@ mdx:
 type AdvancedOperationTypeFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:378](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L378)
+Defined in: [gen/types.gen.ts:391](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L391)
 
 Advanced filter
 
@@ -22,10 +22,10 @@ Advanced AuditLogOperationTypeEnum filter.
 ### $eq?
 
 ```ts
-optional $eq: AuditLogOperationTypeEnum;
+optional $eq?: AuditLogOperationTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:382](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L382)
+Defined in: [gen/types.gen.ts:395](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L395)
 
 Checks for equality with the provided value.
 
@@ -34,10 +34,10 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:390](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L390)
+Defined in: [gen/types.gen.ts:403](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L403)
 
 Checks if the current property exists.
 
@@ -46,10 +46,10 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: AuditLogOperationTypeEnum[];
+optional $in?: AuditLogOperationTypeEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:394](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L394)
+Defined in: [gen/types.gen.ts:407](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L407)
 
 Checks if the property matches any of the provided values.
 
@@ -58,19 +58,19 @@ Checks if the property matches any of the provided values.
 ### $like?
 
 ```ts
-optional $like: LikeFilter;
+optional $like?: LikeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:395](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L395)
+Defined in: [gen/types.gen.ts:408](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L408)
 
 ---
 
 ### $neq?
 
 ```ts
-optional $neq: AuditLogOperationTypeEnum;
+optional $neq?: AuditLogOperationTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:386](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L386)
+Defined in: [gen/types.gen.ts:399](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L399)
 
 Checks for inequality with the provided value.

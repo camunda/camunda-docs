@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceModificationTerminateByKeyInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:6148](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6148)
+Defined in: [gen/types.gen.ts:6861](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6861)
 
 Instruction providing the key of the element instance to terminate.
 
@@ -23,6 +23,6 @@ Instruction providing the key of the element instance to terminate.
 elementInstanceKey: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:6152](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6152)
+Defined in: [gen/types.gen.ts:6865](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6865)
 
 The key of the element instance to terminate.

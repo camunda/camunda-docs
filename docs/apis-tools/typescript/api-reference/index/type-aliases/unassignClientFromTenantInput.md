@@ -11,7 +11,7 @@ mdx:
 type unassignClientFromTenantInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1010](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1010)
+Defined in: [gen/CamundaClient.ts:1005](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1005)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/CamundaClient.ts:1010](https://github.com/camunda/orchestration
 clientId: unassignClientFromTenantPathParam_clientId;
 ```
 
-Defined in: [gen/CamundaClient.ts:1010](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1010)
+Defined in: [gen/CamundaClient.ts:1005](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1005)
 
 ---
 
@@ -31,4 +31,4 @@ Defined in: [gen/CamundaClient.ts:1010](https://github.com/camunda/orchestration
 tenantId: unassignClientFromTenantPathParam_tenantId;
 ```
 
-Defined in: [gen/CamundaClient.ts:1010](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1010)
+Defined in: [gen/CamundaClient.ts:1005](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1005)

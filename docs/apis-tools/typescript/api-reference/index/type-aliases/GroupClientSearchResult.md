@@ -11,14 +11,14 @@ mdx:
 type GroupClientSearchResult = SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:2937](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2937)
+Defined in: [gen/types.gen.ts:3270](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3270)
 
 ## Type Declaration
 
-### items?
+### items
 
 ```ts
-optional items: GroupClientResult[];
+items: GroupClientResult[];
 ```
 
 The matching client IDs.

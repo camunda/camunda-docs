@@ -11,17 +11,17 @@ mdx:
 type MessageCorrelationRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:4635](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4635)
+Defined in: [gen/types.gen.ts:5276](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5276)
 
 ## Properties
 
 ### correlationKey?
 
 ```ts
-optional correlationKey: string;
+optional correlationKey?: string;
 ```
 
-Defined in: [gen/types.gen.ts:4644](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4644)
+Defined in: [gen/types.gen.ts:5285](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5285)
 
 The correlation key of the message.
 
@@ -33,7 +33,7 @@ The correlation key of the message.
 name: string;
 ```
 
-Defined in: [gen/types.gen.ts:4640](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4640)
+Defined in: [gen/types.gen.ts:5281](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5281)
 
 The message name as defined in the BPMN process
 
@@ -42,10 +42,10 @@ The message name as defined in the BPMN process
 ### tenantId?
 
 ```ts
-optional tenantId: TenantId;
+optional tenantId?: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:4654](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4654)
+Defined in: [gen/types.gen.ts:5295](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5295)
 
 the tenant for which the message is published
 
@@ -54,10 +54,10 @@ the tenant for which the message is published
 ### variables?
 
 ```ts
-optional variables: object;
+optional variables?: object;
 ```
 
-Defined in: [gen/types.gen.ts:4648](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4648)
+Defined in: [gen/types.gen.ts:5289](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5289)
 
 The message variables as JSON document
 

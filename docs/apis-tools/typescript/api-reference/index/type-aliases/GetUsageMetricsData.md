@@ -11,27 +11,27 @@ mdx:
 type GetUsageMetricsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15472](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15472)
+Defined in: [gen/types.gen.ts:14765](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14765)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:15473](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15473)
+Defined in: [gen/types.gen.ts:14766](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14766)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:15474](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15474)
+Defined in: [gen/types.gen.ts:14767](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14767)
 
 ---
 
@@ -41,7 +41,7 @@ Defined in: [gen/types.gen.ts:15474](https://github.com/camunda/orchestration-cl
 query: object;
 ```
 
-Defined in: [gen/types.gen.ts:15475](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15475)
+Defined in: [gen/types.gen.ts:14768](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14768)
 
 #### endTime
 
@@ -62,7 +62,7 @@ The start date for usage metrics, including this date. Value in ISO 8601 format.
 #### tenantId?
 
 ```ts
-optional tenantId: TenantId;
+optional tenantId?: TenantId;
 ```
 
 Restrict results to a specific tenant ID. If not provided, results for all tenants are returned.
@@ -70,7 +70,7 @@ Restrict results to a specific tenant ID. If not provided, results for all tenan
 #### withTenants?
 
 ```ts
-optional withTenants: boolean;
+optional withTenants?: boolean;
 ```
 
 Whether to return tenant metrics in addition to the total metrics or not. Default false.
@@ -83,4 +83,4 @@ Whether to return tenant metrics in addition to the total metrics or not. Defaul
 url: "/system/usage-metrics";
 ```
 
-Defined in: [gen/types.gen.ts:15493](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15493)
+Defined in: [gen/types.gen.ts:14786](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14786)

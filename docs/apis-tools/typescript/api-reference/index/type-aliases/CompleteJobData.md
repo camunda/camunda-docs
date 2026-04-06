@@ -11,17 +11,17 @@ mdx:
 type CompleteJobData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11986](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11986)
+Defined in: [gen/types.gen.ts:11912](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11912)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: JobCompletionRequest;
+optional body?: JobCompletionRequest;
 ```
 
-Defined in: [gen/types.gen.ts:11987](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11987)
+Defined in: [gen/types.gen.ts:11913](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11913)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:11987](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:11988](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11988)
+Defined in: [gen/types.gen.ts:11914](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11914)
 
 #### jobKey
 
@@ -46,10 +46,10 @@ The key of the job to complete.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11994](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11994)
+Defined in: [gen/types.gen.ts:11920](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11920)
 
 ---
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:11994](https://github.com/camunda/orchestration-cl
 url: "/jobs/{jobKey}/completion";
 ```
 
-Defined in: [gen/types.gen.ts:11995](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11995)
+Defined in: [gen/types.gen.ts:11921](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11921)

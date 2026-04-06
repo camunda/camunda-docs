@@ -11,17 +11,17 @@ mdx:
 type DeleteDocumentData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10106](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10106)
+Defined in: [gen/types.gen.ts:10200](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10200)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10107](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10107)
+Defined in: [gen/types.gen.ts:10201](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10201)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10107](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10108](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10108)
+Defined in: [gen/types.gen.ts:10202](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10202)
 
 #### documentId
 
@@ -46,15 +46,15 @@ The ID of the document to delete.
 ### query?
 
 ```ts
-optional query: object;
+optional query?: object;
 ```
 
-Defined in: [gen/types.gen.ts:10114](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10114)
+Defined in: [gen/types.gen.ts:10208](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10208)
 
 #### storeId?
 
 ```ts
-optional storeId: string;
+optional storeId?: string;
 ```
 
 The ID of the document store to delete the document from.
@@ -67,4 +67,4 @@ The ID of the document store to delete the document from.
 url: "/documents/{documentId}";
 ```
 
-Defined in: [gen/types.gen.ts:10120](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10120)
+Defined in: [gen/types.gen.ts:10214](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10214)

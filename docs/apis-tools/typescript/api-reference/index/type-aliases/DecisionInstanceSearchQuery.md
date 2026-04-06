@@ -11,14 +11,14 @@ mdx:
 type DecisionInstanceSearchQuery = SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:1669](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1669)
+Defined in: [gen/types.gen.ts:1700](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1700)
 
 ## Type Declaration
 
 ### filter?
 
 ```ts
-optional filter: DecisionInstanceFilter;
+optional filter?: DecisionInstanceFilter;
 ```
 
 The decision instance search filters.
@@ -26,7 +26,7 @@ The decision instance search filters.
 ### sort?
 
 ```ts
-optional sort: DecisionInstanceSearchQuerySortRequest[];
+optional sort?: DecisionInstanceSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

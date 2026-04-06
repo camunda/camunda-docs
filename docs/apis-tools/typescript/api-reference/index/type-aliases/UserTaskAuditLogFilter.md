@@ -11,7 +11,7 @@ mdx:
 type UserTaskAuditLogFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:7107](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7107)
+Defined in: [gen/types.gen.ts:7914](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7914)
 
 The user task audit log search filters.
 
@@ -20,10 +20,10 @@ The user task audit log search filters.
 ### actorId?
 
 ```ts
-optional actorId: StringFilterProperty;
+optional actorId?: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7127](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7127)
+Defined in: [gen/types.gen.ts:7934](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7934)
 
 The actor ID search filter.
 
@@ -32,10 +32,10 @@ The actor ID search filter.
 ### actorType?
 
 ```ts
-optional actorType: AuditLogActorTypeFilterProperty;
+optional actorType?: AuditLogActorTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7123](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7123)
+Defined in: [gen/types.gen.ts:7930](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7930)
 
 The actor type search filter.
 
@@ -44,10 +44,10 @@ The actor type search filter.
 ### operationType?
 
 ```ts
-optional operationType: OperationTypeFilterProperty;
+optional operationType?: OperationTypeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7111](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7111)
+Defined in: [gen/types.gen.ts:7918](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7918)
 
 The audit log operation type search filter.
 
@@ -56,10 +56,10 @@ The audit log operation type search filter.
 ### result?
 
 ```ts
-optional result: AuditLogResultFilterProperty;
+optional result?: AuditLogResultFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7115](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7115)
+Defined in: [gen/types.gen.ts:7922](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7922)
 
 The audit log result search filter.
 
@@ -68,9 +68,9 @@ The audit log result search filter.
 ### timestamp?
 
 ```ts
-optional timestamp: DateTimeFilterProperty;
+optional timestamp?: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7119](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7119)
+Defined in: [gen/types.gen.ts:7926](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7926)
 
 The audit log timestamp filter.

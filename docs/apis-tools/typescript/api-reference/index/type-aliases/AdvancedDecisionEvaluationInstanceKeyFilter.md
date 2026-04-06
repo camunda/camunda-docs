@@ -11,7 +11,7 @@ mdx:
 type AdvancedDecisionEvaluationInstanceKeyFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4344](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4344)
+Defined in: [gen/types.gen.ts:4985](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4985)
 
 Advanced filter
 
@@ -22,10 +22,10 @@ Advanced DecisionEvaluationInstanceKey filter.
 ### $eq?
 
 ```ts
-optional $eq: DecisionEvaluationInstanceKey;
+optional $eq?: DecisionEvaluationInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:4348](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4348)
+Defined in: [gen/types.gen.ts:4989](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4989)
 
 Checks for equality with the provided value.
 
@@ -34,10 +34,10 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:4356](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4356)
+Defined in: [gen/types.gen.ts:4997](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4997)
 
 Checks if the current property exists.
 
@@ -46,10 +46,10 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: DecisionEvaluationInstanceKey[];
+optional $in?: DecisionEvaluationInstanceKey[];
 ```
 
-Defined in: [gen/types.gen.ts:4360](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4360)
+Defined in: [gen/types.gen.ts:5001](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5001)
 
 Checks if the property matches any of the provided values.
 
@@ -58,10 +58,10 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq: DecisionEvaluationInstanceKey;
+optional $neq?: DecisionEvaluationInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:4352](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4352)
+Defined in: [gen/types.gen.ts:4993](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4993)
 
 Checks for inequality with the provided value.
 
@@ -70,9 +70,9 @@ Checks for inequality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn: DecisionEvaluationInstanceKey[];
+optional $notIn?: DecisionEvaluationInstanceKey[];
 ```
 
-Defined in: [gen/types.gen.ts:4364](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4364)
+Defined in: [gen/types.gen.ts:5005](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5005)
 
 Checks if the property matches none of the provided values.

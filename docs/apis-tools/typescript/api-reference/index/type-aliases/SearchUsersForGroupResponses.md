@@ -11,16 +11,26 @@ mdx:
 type SearchUsersForGroupResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:11257](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11257)
+Defined in: [gen/types.gen.ts:11457](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11457)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: TenantUserSearchResult;
+200: SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:11261](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11261)
+Defined in: [gen/types.gen.ts:11461](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11461)
 
 The users assigned to the group.
+
+#### Type Declaration
+
+##### items
+
+```ts
+items: object[];
+```
+
+The matching members.

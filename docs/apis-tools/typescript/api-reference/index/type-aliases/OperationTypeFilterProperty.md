@@ -13,6 +13,6 @@ type OperationTypeFilterProperty =
   | AdvancedOperationTypeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:371](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L371)
+Defined in: [gen/types.gen.ts:384](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L384)
 
 AuditLogOperationTypeEnum property with full advanced search capabilities.

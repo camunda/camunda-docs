@@ -11,7 +11,7 @@ mdx:
 type getProcessInstanceStatisticsByDefinitionConsistency = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:499](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L499)
+Defined in: [gen/CamundaClient.ts:504](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L504)
 
 Management of eventual consistency \*
 
@@ -25,6 +25,6 @@ consistency: ConsistencyOptions<
 >;
 ```
 
-Defined in: [gen/CamundaClient.ts:501](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L501)
+Defined in: [gen/CamundaClient.ts:506](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L506)
 
 Management of eventual consistency tolerance. Set waitUpToMs to 0 to ignore eventual consistency. pollInterval is 500ms by default.
