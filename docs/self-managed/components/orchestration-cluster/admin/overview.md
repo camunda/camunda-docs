@@ -28,7 +28,7 @@ Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer-q
 4. An initial user with username/password: `demo` / `demo`
 5. An `admin` role with full permissions, applied to the `demo` user
 
-To modify the [initial configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
+To modify the [initial configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#enable-authentication-and-authorization) for details.
 
 :::note
 
