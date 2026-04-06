@@ -11,7 +11,7 @@ mdx:
 type DocumentMetadata = object;
 ```
 
-Defined in: [gen/types.gen.ts:2322](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2322)
+Defined in: [gen/types.gen.ts:2425](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2425)
 
 Information about the document.
 
@@ -20,10 +20,10 @@ Information about the document.
 ### contentType?
 
 ```ts
-optional contentType: string;
+optional contentType?: string;
 ```
 
-Defined in: [gen/types.gen.ts:2326](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2326)
+Defined in: [gen/types.gen.ts:2429](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2429)
 
 The content type of the document.
 
@@ -32,10 +32,10 @@ The content type of the document.
 ### customProperties?
 
 ```ts
-optional customProperties: object;
+optional customProperties?: object;
 ```
 
-Defined in: [gen/types.gen.ts:2350](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2350)
+Defined in: [gen/types.gen.ts:2453](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2453)
 
 Custom properties of the document.
 
@@ -50,10 +50,10 @@ Custom properties of the document.
 ### expiresAt?
 
 ```ts
-optional expiresAt: string;
+optional expiresAt?: string;
 ```
 
-Defined in: [gen/types.gen.ts:2334](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2334)
+Defined in: [gen/types.gen.ts:2437](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2437)
 
 The date and time when the document expires.
 
@@ -62,10 +62,10 @@ The date and time when the document expires.
 ### fileName?
 
 ```ts
-optional fileName: string;
+optional fileName?: string;
 ```
 
-Defined in: [gen/types.gen.ts:2330](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2330)
+Defined in: [gen/types.gen.ts:2433](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2433)
 
 The name of the file.
 
@@ -74,10 +74,10 @@ The name of the file.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId: ProcessDefinitionId;
+optional processDefinitionId?: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:2342](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2342)
+Defined in: [gen/types.gen.ts:2445](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2445)
 
 The ID of the process definition that created the document.
 
@@ -86,10 +86,10 @@ The ID of the process definition that created the document.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey: ProcessInstanceKey;
+optional processInstanceKey?: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2346](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2346)
+Defined in: [gen/types.gen.ts:2449](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2449)
 
 The key of the process instance that created the document.
 
@@ -98,9 +98,9 @@ The key of the process instance that created the document.
 ### size?
 
 ```ts
-optional size: number;
+optional size?: number;
 ```
 
-Defined in: [gen/types.gen.ts:2338](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2338)
+Defined in: [gen/types.gen.ts:2441](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2441)
 
 The size of the document in bytes.

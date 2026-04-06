@@ -11,7 +11,7 @@ mdx:
 type ProcessDefinitionInstanceVersionStatisticsQuery = object;
 ```
 
-Defined in: [gen/types.gen.ts:5314](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5314)
+Defined in: [gen/types.gen.ts:5976](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5976)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:5314](https://github.com/camunda/orchestration-clu
 filter: ProcessDefinitionInstanceVersionStatisticsFilter;
 ```
 
-Defined in: [gen/types.gen.ts:5326](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5326)
+Defined in: [gen/types.gen.ts:5988](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5988)
 
 The process definition instance version statistics search filters.
 
@@ -30,10 +30,10 @@ The process definition instance version statistics search filters.
 ### page?
 
 ```ts
-optional page: OffsetPagination;
+optional page?: OffsetPagination;
 ```
 
-Defined in: [gen/types.gen.ts:5318](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5318)
+Defined in: [gen/types.gen.ts:5980](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5980)
 
 Pagination criteria.
 
@@ -42,9 +42,9 @@ Pagination criteria.
 ### sort?
 
 ```ts
-optional sort: ProcessDefinitionInstanceVersionStatisticsQuerySortRequest[];
+optional sort?: ProcessDefinitionInstanceVersionStatisticsQuerySortRequest[];
 ```
 
-Defined in: [gen/types.gen.ts:5322](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5322)
+Defined in: [gen/types.gen.ts:5984](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5984)
 
 Sort field criteria.

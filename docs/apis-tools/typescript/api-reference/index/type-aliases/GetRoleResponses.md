@@ -11,7 +11,7 @@ mdx:
 type GetRoleResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:14676](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14676)
+Defined in: [gen/types.gen.ts:13958](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13958)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:14676](https://github.com/camunda/orchestration-cl
 200: RoleResult;
 ```
 
-Defined in: [gen/types.gen.ts:14680](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14680)
+Defined in: [gen/types.gen.ts:13962](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13962)
 
 The role is successfully returned.

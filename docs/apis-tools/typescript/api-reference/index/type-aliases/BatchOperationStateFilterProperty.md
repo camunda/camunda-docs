@@ -13,6 +13,6 @@ type BatchOperationStateFilterProperty =
   | AdvancedBatchOperationStateFilter;
 ```
 
-Defined in: [gen/types.gen.ts:1044](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1044)
+Defined in: [gen/types.gen.ts:1075](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1075)
 
 BatchOperationStateEnum property with full advanced search capabilities.

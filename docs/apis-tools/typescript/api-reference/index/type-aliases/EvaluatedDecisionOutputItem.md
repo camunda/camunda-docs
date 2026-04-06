@@ -11,56 +11,66 @@ mdx:
 type EvaluatedDecisionOutputItem = object;
 ```
 
-Defined in: [gen/types.gen.ts:1843](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1843)
+Defined in: [gen/types.gen.ts:1889](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1889)
 
 The evaluated decision outputs.
 
 ## Properties
 
-### outputId?
+### outputId
 
 ```ts
-optional outputId: string;
+outputId: string;
 ```
 
-Defined in: [gen/types.gen.ts:1844](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1844)
+Defined in: [gen/types.gen.ts:1893](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1893)
+
+The ID of the evaluated decison output item.
 
 ---
 
-### outputName?
+### outputName
 
 ```ts
-optional outputName: string;
+outputName: string;
 ```
 
-Defined in: [gen/types.gen.ts:1845](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1845)
+Defined in: [gen/types.gen.ts:1897](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1897)
+
+The name of the of the evaluated decison output item.
 
 ---
 
-### outputValue?
+### outputValue
 
 ```ts
-optional outputValue: string;
+outputValue: string;
 ```
 
-Defined in: [gen/types.gen.ts:1846](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1846)
+Defined in: [gen/types.gen.ts:1901](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1901)
+
+The value of the evaluated decison output item.
 
 ---
 
-### ruleId?
+### ruleId
 
 ```ts
-optional ruleId: string;
+ruleId: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:1847](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1847)
+Defined in: [gen/types.gen.ts:1905](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1905)
+
+The ID of the matched rule.
 
 ---
 
-### ruleIndex?
+### ruleIndex
 
 ```ts
-optional ruleIndex: number;
+ruleIndex: number | null;
 ```
 
-Defined in: [gen/types.gen.ts:1848](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1848)
+Defined in: [gen/types.gen.ts:1909](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1909)
+
+The index of the matched rule.

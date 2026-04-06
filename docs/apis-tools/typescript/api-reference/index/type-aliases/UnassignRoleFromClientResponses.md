@@ -11,7 +11,7 @@ mdx:
 type UnassignRoleFromClientResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:14831](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14831)
+Defined in: [gen/types.gen.ts:14123](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14123)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:14831](https://github.com/camunda/orchestration-cl
 204: void;
 ```
 
-Defined in: [gen/types.gen.ts:14835](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14835)
+Defined in: [gen/types.gen.ts:14127](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14127)
 
 The role was unassigned successfully from the client.

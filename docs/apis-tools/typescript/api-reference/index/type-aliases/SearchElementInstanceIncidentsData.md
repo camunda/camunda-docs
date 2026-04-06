@@ -11,7 +11,7 @@ mdx:
 type SearchElementInstanceIncidentsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10478](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10478)
+Defined in: [gen/types.gen.ts:10459](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10459)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:10478](https://github.com/camunda/orchestration-cl
 body: IncidentSearchQuery;
 ```
 
-Defined in: [gen/types.gen.ts:10479](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10479)
+Defined in: [gen/types.gen.ts:10460](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10460)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10479](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10480](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10480)
+Defined in: [gen/types.gen.ts:10461](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10461)
 
 #### elementInstanceKey
 
@@ -46,10 +46,10 @@ The unique key of the element instance to search incidents for.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10486](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10486)
+Defined in: [gen/types.gen.ts:10467](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10467)
 
 ---
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:10486](https://github.com/camunda/orchestration-cl
 url: "/element-instances/{elementInstanceKey}/incidents/search";
 ```
 
-Defined in: [gen/types.gen.ts:10487](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10487)
+Defined in: [gen/types.gen.ts:10468](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10468)

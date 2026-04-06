@@ -11,38 +11,38 @@ mdx:
 type TenantUpdateResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:6590](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6590)
+Defined in: [gen/types.gen.ts:7348](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7348)
 
 ## Properties
 
-### description?
+### description
 
 ```ts
-optional description: string;
+description: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:6599](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6599)
+Defined in: [gen/types.gen.ts:7357](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7357)
 
 The description of the tenant.
 
 ---
 
-### name?
+### name
 
 ```ts
-optional name: string;
+name: string;
 ```
 
-Defined in: [gen/types.gen.ts:6595](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6595)
+Defined in: [gen/types.gen.ts:7353](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7353)
 
 The name of the tenant.
 
 ---
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:6591](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6591)
+Defined in: [gen/types.gen.ts:7349](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7349)

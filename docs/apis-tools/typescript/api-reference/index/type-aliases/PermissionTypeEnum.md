@@ -12,7 +12,9 @@ type PermissionTypeEnum =
   | "ACCESS"
   | "CANCEL_PROCESS_INSTANCE"
   | "CLAIM"
+  | "CLAIM_USER_TASK"
   | "COMPLETE"
+  | "COMPLETE_USER_TASK"
   | "CREATE"
   | "CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE"
   | "CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION"
@@ -50,6 +52,6 @@ type PermissionTypeEnum =
   | "UPDATE_TASK_LISTENER";
 ```
 
-Defined in: [gen/types.gen.ts:667](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L667)
+Defined in: [gen/types.gen.ts:680](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L680)
 
 Specifies the type of permissions.

@@ -11,7 +11,7 @@ mdx:
 type GetProcessInstanceErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:13809](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13809)
+Defined in: [gen/types.gen.ts:13237](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13237)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:13809](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13813](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13813)
+Defined in: [gen/types.gen.ts:13241](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13241)
 
 The provided data is not valid.
 
@@ -33,7 +33,7 @@ The provided data is not valid.
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13817](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13817)
+Defined in: [gen/types.gen.ts:13245](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13245)
 
 The request lacks valid authentication credentials.
 
@@ -45,7 +45,7 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13821](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13821)
+Defined in: [gen/types.gen.ts:13249](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13249)
 
 Forbidden. The request is not allowed.
 
@@ -57,7 +57,7 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13825](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13825)
+Defined in: [gen/types.gen.ts:13253](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13253)
 
 The process instance with the given key was not found.
 
@@ -69,6 +69,6 @@ The process instance with the given key was not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13829](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13829)
+Defined in: [gen/types.gen.ts:13257](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13257)
 
 An internal error occurred while processing the request.

@@ -11,7 +11,7 @@ mdx:
 type ProcessDefinitionElementStatisticsQuery = object;
 ```
 
-Defined in: [gen/types.gen.ts:5186](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5186)
+Defined in: [gen/types.gen.ts:5842](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5842)
 
 Process definition element statistics request.
 
@@ -20,9 +20,9 @@ Process definition element statistics request.
 ### filter?
 
 ```ts
-optional filter: ProcessDefinitionStatisticsFilter;
+optional filter?: ProcessDefinitionStatisticsFilter;
 ```
 
-Defined in: [gen/types.gen.ts:5190](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5190)
+Defined in: [gen/types.gen.ts:5846](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5846)
 
 The process definition statistics search filters.

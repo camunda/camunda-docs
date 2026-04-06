@@ -11,7 +11,7 @@ mdx:
 type AdvancedProcessInstanceStateFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:6165](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6165)
+Defined in: [gen/types.gen.ts:6878](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6878)
 
 Advanced filter
 
@@ -22,10 +22,10 @@ Advanced ProcessInstanceStateEnum filter.
 ### $eq?
 
 ```ts
-optional $eq: ProcessInstanceStateEnum;
+optional $eq?: ProcessInstanceStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:6169](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6169)
+Defined in: [gen/types.gen.ts:6882](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6882)
 
 Checks for equality with the provided value.
 
@@ -34,10 +34,10 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:6177](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6177)
+Defined in: [gen/types.gen.ts:6890](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6890)
 
 Checks if the current property exists.
 
@@ -46,10 +46,10 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: ProcessInstanceStateEnum[];
+optional $in?: ProcessInstanceStateEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:6181](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6181)
+Defined in: [gen/types.gen.ts:6894](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6894)
 
 Checks if the property matches any of the provided values.
 
@@ -58,19 +58,19 @@ Checks if the property matches any of the provided values.
 ### $like?
 
 ```ts
-optional $like: LikeFilter;
+optional $like?: LikeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:6182](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6182)
+Defined in: [gen/types.gen.ts:6895](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6895)
 
 ---
 
 ### $neq?
 
 ```ts
-optional $neq: ProcessInstanceStateEnum;
+optional $neq?: ProcessInstanceStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:6173](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6173)
+Defined in: [gen/types.gen.ts:6886](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6886)
 
 Checks for inequality with the provided value.

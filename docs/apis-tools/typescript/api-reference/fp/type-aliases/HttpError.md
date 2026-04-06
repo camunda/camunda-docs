@@ -15,30 +15,30 @@ The Functional Programming API is a **technical preview**. Its surface may chang
 type HttpError = object & Record<string, any>;
 ```
 
-Defined in: [fp-ts.ts:20](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/fp-ts.ts#L20)
+Defined in: [fp-ts.ts:20](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/fp-ts.ts#L20)
 
 ## Type Declaration
 
 ### body?
 
 ```ts
-optional body: any;
+optional body?: any;
 ```
 
 ### message?
 
 ```ts
-optional message: string;
+optional message?: string;
 ```
 
 ### name?
 
 ```ts
-optional name: string;
+optional name?: string;
 ```
 
 ### status?
 
 ```ts
-optional status: number;
+optional status?: number;
 ```

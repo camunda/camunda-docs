@@ -11,7 +11,7 @@ mdx:
 type getUsageMetricsInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:559](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L559)
+Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/CamundaClient.ts:559](https://github.com/camunda/orchestration-
 endTime: getUsageMetricsQueryParam_endTime;
 ```
 
-Defined in: [gen/CamundaClient.ts:559](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L559)
+Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)
 
 ---
 
@@ -31,24 +31,24 @@ Defined in: [gen/CamundaClient.ts:559](https://github.com/camunda/orchestration-
 startTime: getUsageMetricsQueryParam_startTime;
 ```
 
-Defined in: [gen/CamundaClient.ts:559](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L559)
+Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)
 
 ---
 
 ### tenantId?
 
 ```ts
-optional tenantId: getUsageMetricsQueryParam_tenantId;
+optional tenantId?: getUsageMetricsQueryParam_tenantId;
 ```
 
-Defined in: [gen/CamundaClient.ts:559](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L559)
+Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)
 
 ---
 
 ### withTenants?
 
 ```ts
-optional withTenants: getUsageMetricsQueryParam_withTenants;
+optional withTenants?: getUsageMetricsQueryParam_withTenants;
 ```
 
-Defined in: [gen/CamundaClient.ts:559](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L559)
+Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)

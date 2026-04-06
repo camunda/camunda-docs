@@ -11,7 +11,7 @@ mdx:
 type VariableValueFilterProperty = object;
 ```
 
-Defined in: [gen/types.gen.ts:7361](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7361)
+Defined in: [gen/types.gen.ts:8187](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8187)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:7361](https://github.com/camunda/orchestration-clu
 name: string;
 ```
 
-Defined in: [gen/types.gen.ts:7365](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7365)
+Defined in: [gen/types.gen.ts:8191](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8191)
 
 Name of the variable.
 
@@ -33,6 +33,9 @@ Name of the variable.
 value: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7369](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7369)
+Defined in: [gen/types.gen.ts:8199](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8199)
 
 The value of the variable.
+Variable values in filters need to be in serialized JSON format. For example, a variable
+with string value `myValue` can be found with the filter value `"myValue"`. Consider
+appropriate escaping for special characters in JSON strings when constructing filter values.

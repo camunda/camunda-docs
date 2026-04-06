@@ -11,40 +11,40 @@ mdx:
 type GroupCreateResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2799](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2799)
+Defined in: [gen/types.gen.ts:3132](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3132)
 
 ## Properties
 
-### description?
+### description
 
 ```ts
-optional description: string;
+description: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:2811](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2811)
+Defined in: [gen/types.gen.ts:3144](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3144)
 
 The description of the created group.
 
 ---
 
-### groupId?
+### groupId
 
 ```ts
-optional groupId: string;
+groupId: string;
 ```
 
-Defined in: [gen/types.gen.ts:2803](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2803)
+Defined in: [gen/types.gen.ts:3136](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3136)
 
 The ID of the created group.
 
 ---
 
-### name?
+### name
 
 ```ts
-optional name: string;
+name: string;
 ```
 
-Defined in: [gen/types.gen.ts:2807](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2807)
+Defined in: [gen/types.gen.ts:3140](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3140)
 
 The display name of the created group.

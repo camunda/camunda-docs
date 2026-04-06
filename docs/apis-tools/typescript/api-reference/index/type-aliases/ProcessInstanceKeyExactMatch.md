@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceKeyExactMatch = ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:7542](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7542)
+Defined in: [gen/types.gen.ts:8388](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8388)
 
 Exact match
 

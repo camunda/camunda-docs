@@ -11,7 +11,7 @@ mdx:
 type GetUserTaskFormErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:17393](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17393)
+Defined in: [gen/types.gen.ts:16425](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16425)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:17393](https://github.com/camunda/orchestration-cl
 400: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:17397](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17397)
+Defined in: [gen/types.gen.ts:16429](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16429)
 
 The provided data is not valid.
 
@@ -33,7 +33,7 @@ The provided data is not valid.
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:17401](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17401)
+Defined in: [gen/types.gen.ts:16433](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16433)
 
 The request lacks valid authentication credentials.
 
@@ -45,7 +45,7 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:17405](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17405)
+Defined in: [gen/types.gen.ts:16437](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16437)
 
 Forbidden. The request is not allowed.
 
@@ -57,7 +57,7 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:17409](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17409)
+Defined in: [gen/types.gen.ts:16441](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16441)
 
 Not found
 
@@ -69,6 +69,6 @@ Not found
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:17413](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17413)
+Defined in: [gen/types.gen.ts:16445](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16445)
 
 An internal error occurred while processing the request.

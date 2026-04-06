@@ -11,7 +11,7 @@ mdx:
 type CreateAuthorizationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:7979](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7979)
+Defined in: [gen/types.gen.ts:8600](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8600)
 
 ## Properties
 
@@ -21,27 +21,27 @@ Defined in: [gen/types.gen.ts:7979](https://github.com/camunda/orchestration-clu
 body: AuthorizationRequest;
 ```
 
-Defined in: [gen/types.gen.ts:7980](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7980)
+Defined in: [gen/types.gen.ts:8601](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8601)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:7981](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7981)
+Defined in: [gen/types.gen.ts:8602](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8602)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:7982](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7982)
+Defined in: [gen/types.gen.ts:8603](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8603)
 
 ---
 
@@ -51,4 +51,4 @@ Defined in: [gen/types.gen.ts:7982](https://github.com/camunda/orchestration-clu
 url: "/authorizations";
 ```
 
-Defined in: [gen/types.gen.ts:7983](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7983)
+Defined in: [gen/types.gen.ts:8604](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8604)

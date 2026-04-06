@@ -7,7 +7,7 @@ mdx:
 
 # Interface: TelemetryHooks
 
-Defined in: [runtime/telemetry.ts:5](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/telemetry.ts#L5)
+Defined in: [runtime/telemetry.ts:5](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/telemetry.ts#L5)
 
 ## Methods
 
@@ -17,7 +17,7 @@ Defined in: [runtime/telemetry.ts:5](https://github.com/camunda/orchestration-cl
 optional afterResponse(e): void;
 ```
 
-Defined in: [runtime/telemetry.ts:7](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/telemetry.ts#L7)
+Defined in: [runtime/telemetry.ts:7](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/telemetry.ts#L7)
 
 #### Parameters
 
@@ -37,7 +37,7 @@ Defined in: [runtime/telemetry.ts:7](https://github.com/camunda/orchestration-cl
 optional authError(e): void;
 ```
 
-Defined in: [runtime/telemetry.ts:11](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/telemetry.ts#L11)
+Defined in: [runtime/telemetry.ts:11](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/telemetry.ts#L11)
 
 #### Parameters
 
@@ -57,7 +57,7 @@ Defined in: [runtime/telemetry.ts:11](https://github.com/camunda/orchestration-c
 optional authStart(e): void;
 ```
 
-Defined in: [runtime/telemetry.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/telemetry.ts#L9)
+Defined in: [runtime/telemetry.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/telemetry.ts#L9)
 
 #### Parameters
 
@@ -77,7 +77,7 @@ Defined in: [runtime/telemetry.ts:9](https://github.com/camunda/orchestration-cl
 optional authSuccess(e): void;
 ```
 
-Defined in: [runtime/telemetry.ts:10](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/telemetry.ts#L10)
+Defined in: [runtime/telemetry.ts:10](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/telemetry.ts#L10)
 
 #### Parameters
 
@@ -97,7 +97,7 @@ Defined in: [runtime/telemetry.ts:10](https://github.com/camunda/orchestration-c
 optional beforeRequest(e): void;
 ```
 
-Defined in: [runtime/telemetry.ts:6](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/telemetry.ts#L6)
+Defined in: [runtime/telemetry.ts:6](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/telemetry.ts#L6)
 
 #### Parameters
 
@@ -117,7 +117,7 @@ Defined in: [runtime/telemetry.ts:6](https://github.com/camunda/orchestration-cl
 optional requestError(e): void;
 ```
 
-Defined in: [runtime/telemetry.ts:8](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/telemetry.ts#L8)
+Defined in: [runtime/telemetry.ts:8](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/telemetry.ts#L8)
 
 #### Parameters
 
@@ -137,7 +137,7 @@ Defined in: [runtime/telemetry.ts:8](https://github.com/camunda/orchestration-cl
 optional retry(e): void;
 ```
 
-Defined in: [runtime/telemetry.ts:12](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/telemetry.ts#L12)
+Defined in: [runtime/telemetry.ts:12](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/telemetry.ts#L12)
 
 #### Parameters
 

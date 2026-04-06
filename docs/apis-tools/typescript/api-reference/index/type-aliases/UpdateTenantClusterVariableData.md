@@ -11,7 +11,7 @@ mdx:
 type UpdateTenantClusterVariableData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9009](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9009)
+Defined in: [gen/types.gen.ts:9466](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9466)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:9009](https://github.com/camunda/orchestration-clu
 body: UpdateClusterVariableRequest;
 ```
 
-Defined in: [gen/types.gen.ts:9010](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9010)
+Defined in: [gen/types.gen.ts:9467](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9467)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:9010](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:9011](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9011)
+Defined in: [gen/types.gen.ts:9468](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9468)
 
 #### name
 
@@ -54,10 +54,10 @@ The tenant ID
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9021](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9021)
+Defined in: [gen/types.gen.ts:9478](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9478)
 
 ---
 
@@ -67,4 +67,4 @@ Defined in: [gen/types.gen.ts:9021](https://github.com/camunda/orchestration-clu
 url: "/cluster-variables/tenants/{tenantId}/{name}";
 ```
 
-Defined in: [gen/types.gen.ts:9022](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9022)
+Defined in: [gen/types.gen.ts:9479](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9479)

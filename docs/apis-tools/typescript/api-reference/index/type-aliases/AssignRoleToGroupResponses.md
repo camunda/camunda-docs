@@ -11,7 +11,7 @@ mdx:
 type AssignRoleToGroupResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:15049](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15049)
+Defined in: [gen/types.gen.ts:14330](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14330)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:15049](https://github.com/camunda/orchestration-cl
 204: void;
 ```
 
-Defined in: [gen/types.gen.ts:15053](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15053)
+Defined in: [gen/types.gen.ts:14334](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14334)
 
 The role was assigned successfully to the group.

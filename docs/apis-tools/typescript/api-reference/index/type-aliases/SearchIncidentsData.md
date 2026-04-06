@@ -11,37 +11,37 @@ mdx:
 type SearchIncidentsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11372](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11372)
+Defined in: [gen/types.gen.ts:11579](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11579)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: IncidentSearchQuery;
+optional body?: IncidentSearchQuery;
 ```
 
-Defined in: [gen/types.gen.ts:11373](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11373)
+Defined in: [gen/types.gen.ts:11580](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11580)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11374](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11374)
+Defined in: [gen/types.gen.ts:11581](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11581)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11375](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11375)
+Defined in: [gen/types.gen.ts:11582](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11582)
 
 ---
 
@@ -51,4 +51,4 @@ Defined in: [gen/types.gen.ts:11375](https://github.com/camunda/orchestration-cl
 url: "/incidents/search";
 ```
 
-Defined in: [gen/types.gen.ts:11376](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11376)
+Defined in: [gen/types.gen.ts:11583](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11583)

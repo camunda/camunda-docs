@@ -11,7 +11,7 @@ mdx:
 type OffsetPagination = object;
 ```
 
-Defined in: [gen/types.gen.ts:6419](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6419)
+Defined in: [gen/types.gen.ts:7139](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7139)
 
 Offset-based pagination
 
@@ -20,10 +20,10 @@ Offset-based pagination
 ### from?
 
 ```ts
-optional from: number;
+optional from?: number;
 ```
 
-Defined in: [gen/types.gen.ts:6423](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6423)
+Defined in: [gen/types.gen.ts:7143](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7143)
 
 The index of items to start searching from.
 
@@ -32,9 +32,9 @@ The index of items to start searching from.
 ### limit?
 
 ```ts
-optional limit: number;
+optional limit?: number;
 ```
 
-Defined in: [gen/types.gen.ts:6427](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6427)
+Defined in: [gen/types.gen.ts:7147](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7147)
 
 The maximum number of items to return in one request.

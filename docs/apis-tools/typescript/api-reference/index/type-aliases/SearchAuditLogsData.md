@@ -11,37 +11,37 @@ mdx:
 type SearchAuditLogsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:7642](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7642)
+Defined in: [gen/types.gen.ts:8488](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8488)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: AuditLogSearchQueryRequest;
+optional body?: AuditLogSearchQueryRequest;
 ```
 
-Defined in: [gen/types.gen.ts:7643](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7643)
+Defined in: [gen/types.gen.ts:8489](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8489)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:7644](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7644)
+Defined in: [gen/types.gen.ts:8490](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8490)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:7645](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7645)
+Defined in: [gen/types.gen.ts:8491](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8491)
 
 ---
 
@@ -51,4 +51,4 @@ Defined in: [gen/types.gen.ts:7645](https://github.com/camunda/orchestration-clu
 url: "/audit-logs/search";
 ```
 
-Defined in: [gen/types.gen.ts:7646](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7646)
+Defined in: [gen/types.gen.ts:8492](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8492)

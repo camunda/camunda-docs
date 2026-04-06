@@ -11,7 +11,7 @@ mdx:
 type SearchGroupsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:10719](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10719)
+Defined in: [gen/types.gen.ts:10887](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10887)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:10719](https://github.com/camunda/orchestration-cl
 200: GroupSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:10723](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10723)
+Defined in: [gen/types.gen.ts:10891](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10891)
 
 The groups search result.
