@@ -18,33 +18,18 @@ When exporting, indexes are created as required and not recreated if they alread
 
 ## Configuration
 
-Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
+Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
 
-You can also configure the following properties using exporter `args`:
+:::info Helm values mapping
+The option names in the tabs below (for example, `rolloverInterval`) are exporter option names, not top-level Helm values keys.
 
-```
-zeebe:
-  brokers:
-    exporters:
-      # Camunda Exporter ----------
-      # An example configuration for the camunda exporter:
-      #
-      # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_..."
-      # To convert a YAML formatted variable to an environment variable, start with the top-level property and separate every nested property with an underscore (_).
-      # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
-      #
-      camundaexporter:
-        args:
+In Helm, configure these as Orchestration Cluster application properties using `orchestration.extraConfiguration` (or `orchestration.configuration`).
 
-```
+For example, set history rollover using:
 
-| Option       | Description                                                                                           | Default |
-| ------------ | ----------------------------------------------------------------------------------------------------- | ------- |
-| connect      | Connection configuration options. See [Connect](./camunda-exporter.md?configuration=connect#options). |         |
-| index        | Index configuration options. See [Index](./camunda-exporter.md?configuration=index#options).          |         |
-| bulk         | Bulk configuration options. See [Bulk](./camunda-exporter.md?configuration=bulk#options).             |         |
-| history      | Retention configuration options. See [History](./camunda-exporter.md?configuration=history#options).  |         |
-| createSchema | If `true`, checks schema readiness before exporting.                                                  | true    |
+- `camunda.data.secondary-storage.elasticsearch.history.rollover-interval`
+- `camunda.data.secondary-storage.opensearch.history.rollover-interval`
+  :::
 
 ### Options
 
@@ -52,6 +37,9 @@ zeebe:
 values={[{label: 'Connect', value: 'connect' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'History', value: 'history' },{label: 'Other', value: 'other' }]} >
 
 <TabItem value="connect">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
 
 :::note
 Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which
@@ -72,6 +60,9 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 <TabItem value="index">
 
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+
 | Option                | Description                                                                                                                                                                                 | Default |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | numberOfShards        | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each created index.                              | 1       |
@@ -83,6 +74,9 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 </TabItem>
 
 <TabItem value="bulk">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.bulk.`
 
 To avoid too many expensive requests to the Elasticsearch/OpenSearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
@@ -102,6 +96,9 @@ With the default configuration, the exporter will aggregate records and flush th
 </TabItem>
 
 <TabItem value="retention">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.retention.`
 
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified
@@ -126,6 +123,12 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 
 <TabItem value="history">
 
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.`
+
+For example, `rolloverInterval` maps to:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.rollover-interval`.
+
 To keep the main runtime index performant, documents are periodically moved into historical
 indices. The history can be configured as follows:
 
@@ -145,6 +148,9 @@ indices. The history can be configured as follows:
 </TabItem>
 
 <TabItem value="other">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.batch-operations.`
 
 Other miscellaneous properties:
 

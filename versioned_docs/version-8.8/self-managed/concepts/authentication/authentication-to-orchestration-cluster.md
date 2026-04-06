@@ -16,7 +16,7 @@ Orchestration Cluster authentication includes components such as [Zeebe](/compon
 
 The Orchestration Cluster supports two authentication methods:
 
-- [Basic Authentication](#basic-authentication)
+- [Basic authentication](#basic-authentication)
 - [OIDC](#oidc)
 
 ### Comparison of authentication methods
@@ -30,7 +30,7 @@ Additionally, an [Unprotected API mode](#unprotected-api-mode) is available for 
 
 ## Basic authentication
 
-With basic authentication, Orchestration Cluster components are protected with a username and password. User management is handled within the built-in Identity service.
+With Basic authentication, Orchestration Cluster components are protected with a username and password. User management is handled within the built-in Identity service.
 
 :::note
 This is the default authentication method for all installation options: [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deployment/helm/index.md), and [Manual installation](/self-managed/deployment/manual/install.md).
@@ -58,7 +58,7 @@ orchestration.security.authentication.method=basic
 
 ### Security considerations
 
-While basic authentication provides a simple layer of protection suitable for development or testing environments, it has several security limitations:
+While Basic authentication provides a simple layer of protection suitable for development or testing environments, it has several security limitations:
 
 - **No multi-factor authentication (MFA):** Basic authentication does not support MFA, increasing the risk of unauthorized access through credential stuffing attacks, where attackers use stolen credentials from other services.
 - **No account locking:** The system does not lock accounts after multiple failed login attempts, leaving it vulnerable to brute-force attacks where an attacker can try to guess passwords repeatedly without being blocked.
@@ -113,7 +113,7 @@ If OIDC authentication is enabled, additional configuration values must be set. 
 
 ## Unprotected API mode
 
-In this mode, API access is unprotected with no authentication required for APIs. This mode can be enabled with both Basic Authentication and OIDC.
+In this mode, API access is unprotected with no authentication required for APIs. This mode can be enabled with both Basic authentication and OIDC.
 
 By default, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) are configured in unprotected API mode for local development quick start.
 

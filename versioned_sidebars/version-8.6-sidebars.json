@@ -1638,9 +1638,7 @@
                     "type": "doc",
                     "id": "self-managed/setup/deploy/amazon/openshift/terraform-setup"
                   },
-                  "items": [
-                    "self-managed/setup/deploy/amazon/openshift/terraform-setup"
-                  ]
+                  "items": []
                 },
                 "self-managed/setup/deploy/amazon/aws-marketplace"
               ],
@@ -1762,6 +1760,9 @@
         "self-managed/concepts/exporters",
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"]
+        },
+        {
+          "Authentication": ["self-managed/concepts/authentication/m2m-tokens"]
         },
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/custom-users-and-clients",
@@ -1982,7 +1983,10 @@
                     "self-managed/modeler/web-modeler/configuration/identity",
                     "self-managed/modeler/web-modeler/configuration/logging",
                     "self-managed/modeler/web-modeler/configuration/ssl"
-                  ],
+                  ]
+                },
+                "self-managed/modeler/web-modeler/monitoring",
+                {
                   "Troubleshooting": [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",

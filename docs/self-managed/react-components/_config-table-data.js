@@ -1,4 +1,17 @@
 export const configs = [
+  // Section: Camunda (root)
+  {
+    name: "camunda.mode",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Camunda"],
+  },
+  {
+    name: "camunda.insecure",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Camunda"],
+  },
   // Section: System
   {
     name: "camunda.system.restore.validate-config",
@@ -11,6 +24,13 @@ export const configs = [
     legacy: ["zeebe.restore.ignoreFilesInTarget"],
     types: ["Direct mapping"],
     area: ["System"],
+  },
+  // Section: API
+  {
+    name: "camunda.mcp.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["API"],
   },
   // Section: Cluster
   {
@@ -921,6 +941,17 @@ export const configs = [
       "camunda.tasklist.opensearch.connectionTimeout",
       "camunda.operate.opensearch.connectionTimeout",
       "zeebe.broker.exporters.camundaexporter.args.connect.connectionTimeout",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.aws-enabled",
+    legacy: [
+      "camunda.database.awsEnabled",
+      "camunda.operate.opensearch.awsEnabled",
+      "camunda.tasklist.opensearch.awsEnabled",
+      "zeebe.broker.exporters.camundaexporter.args.connect.awsEnabled",
     ],
     types: ["Breaking change"],
     area: ["Data"],
@@ -2122,5 +2153,49 @@ export const configs = [
     ],
     types: ["Direct mapping"],
     area: ["Security"],
+  },
+  // Process instance creation
+  {
+    name: "camunda.process-instance-creation.business-id-uniqueness-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Process instance creation"],
+  },
+  // Webapps section
+  {
+    name: "camunda.webapps.operate.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.operate.ui-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.tasklist.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.tasklist.ui-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.identity.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
+  },
+  {
+    name: "camunda.webapps.identity.ui-enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Webapps"],
   },
 ];

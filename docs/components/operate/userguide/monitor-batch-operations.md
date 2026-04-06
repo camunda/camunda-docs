@@ -21,4 +21,5 @@ On the batch operation details page, expand a failed item row to view the failur
 
 ## Next steps
 
+- [Learn how to audit process instance operations](./audit-operations.md).
 - [Learn how to manage a batch operation](./manage-batch-operation.md).

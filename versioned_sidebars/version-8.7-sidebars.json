@@ -2314,7 +2314,10 @@
                     "self-managed/modeler/web-modeler/configuration/identity",
                     "self-managed/modeler/web-modeler/configuration/logging",
                     "self-managed/modeler/web-modeler/configuration/ssl"
-                  ],
+                  ]
+                },
+                "self-managed/modeler/web-modeler/monitoring",
+                {
                   "Troubleshooting": [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",

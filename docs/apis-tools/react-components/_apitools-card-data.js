@@ -7,6 +7,9 @@ import IconOptimizeImg from "../img/icon-optimize.png";
 import IconModelerImg from "../img/icon-modeler.png";
 import IconZeebeImg from "../img/icon-orchcluster.png";
 import IconMcpImg from "../img/icon-mcp.png";
+import IconCliImg from "../img/icon-cli.png";
+import IconPythonImg from "../img/icon-python.png";
+import IconCsharpImg from "../img/icon-csharp.png";
 
 export const apiCards = [
   {
@@ -85,6 +88,29 @@ export const clientCards = [
     image: IconTypescriptImg,
     description:
       "Build Camunda 8 applications using the Camunda TypeScript SDK.",
+    type: "",
+  },
+  {
+    link: "../c8ctl/getting-started/",
+    title: "c8ctl CLI",
+    image: IconCliImg,
+    description:
+      "Inspect clusters, deploy resources, and manage processes from the terminal. (Alpha)",
+    type: "",
+  },
+  {
+    link: "../python-sdk/",
+    title: "Python SDK",
+    image: IconPythonImg,
+    description: "Build Camunda 8 applications using the Camunda Python SDK.",
+    type: "",
+  },
+  {
+    link: "../csharp-sdk/",
+    title: "C# SDK",
+    image: IconCsharpImg,
+    description:
+      "Technical preview of the C# client SDK for the Camunda 8 Orchestration Cluster REST API.",
     type: "",
   },
 ];

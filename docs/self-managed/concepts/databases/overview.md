@@ -6,16 +6,27 @@ description: Learn how Camunda uses document and relational databases for second
 
 Camunda applications depend on a secondary storage backend to read workflow and decision data exported from the Zeebe engine.
 
-This storage layer can use either document databases or relational databases (RDBMS), depending on your requirements.
+This storage layer can use either a document-store backend or a relational database (RDBMS), depending on your requirements.
 
 For an architectural explanation of how secondary storage fits into Camunda 8, see the  
 [secondary storage overview](/self-managed/concepts/secondary-storage/index.md).
 
-## Document databases
+## App database support
 
-Camunda supports document-oriented backends such as Elasticsearch and OpenSearch.
+| App                   | RDBMS | Non-SQL |
+| --------------------- | ----- | ------- |
+| Orchestration Cluster | Yes   | Yes     |
+| Optimize              | No    | Yes     |
+| Web Modeler           | Yes   | No      |
+| Management Identity   | Yes   | No      |
 
-These systems are optimized for high-volume ingestion and flexible search queries, and they remain the default choice for most production deployments.
+Use this matrix as a compatibility summary for the main Camunda components and their supported database backends.
+
+## Document-store backends
+
+Camunda supports document-store backends such as Elasticsearch and OpenSearch.
+
+These systems are optimized for high-volume ingestion and flexible search queries.
 
 Related documentation:
 
@@ -26,7 +37,9 @@ Related documentation:
 
 ## Relational databases (RDBMS)
 
-Camunda also supports several relational databases for secondary storage, enabling Operate, Tasklist, Identity, and REST APIs to run without Elasticsearch or OpenSearch.
+Camunda also supports several relational databases for secondary storage, enabling the Orchestration Cluster API, Operate, Tasklist, and Admin to run without Elasticsearch or OpenSearch.
+
+RDBMS and document-store backends are both valid secondary storage options. Select based on your workload, operational model, and platform standards.
 
 A full list of supported vendors and versions, JDBC driver information, and component compatibility is published in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 

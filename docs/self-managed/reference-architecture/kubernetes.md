@@ -42,7 +42,7 @@ For common issues and mitigation strategies, refer to the [deployment troublesho
 
 The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) explains the distinction between these components:
 
-- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Identity) with tightly integrated components (Optimize, Connectors).
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin) with tightly integrated components (Optimize, Connectors).
 - **Web Modeler, Console, and Management Identity**: Management and design tools (Web Modeler, Console, Management Identity) for modeling and deploying diagrams, and monitoring the health of orchestration clusters.
 
 See the reference architecture for details on how these components communicate.
@@ -101,7 +101,7 @@ For high availability, we recommend a minimum of **four Kubernetes nodes** to en
 
 While Deployments and StatefulSets in Kubernetes can scale independently of physical hardware, four nodes are typically required to support:
 
-- The default three-node Orchestration Cluster (incl. Zeebe, Operate, Tasklist and Identity)
+- The default three-node Orchestration Cluster (incl. Zeebe, Operate, Tasklist and Admin)
 - Other Camunda 8 components (Web Modeler, Management Identity, Console, Optimize)
 
 Depending on your specific use case, you may need to scale **horizontally** (more nodes) or **vertically** (larger nodes) to meet resource requirements.
@@ -131,7 +131,7 @@ As shown in the [architecture diagram](#orchestration-cluster), the Orchestratio
 - [Zeebe](/components/zeebe/zeebe-overview.md) — workflow engine and broker
 - [Operate](/components/operate/operate-introduction.md) — visibility and troubleshooting UI
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) — UI for human tasks
-- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) — authentication and access control
+- [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) — authentication and access control
 
 Also included in this namespace are components that are tightly integrated with the cluster:
 
@@ -153,7 +153,7 @@ The choice of identity provider is highly specific to each organization's securi
 :::
 
 :::warning Identity separation
-Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity). This service is separate from the embedded Identity in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
+Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity). This service is separate from the embedded Admin in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
 :::
 
 For configuration details, see:
@@ -214,7 +214,7 @@ Database ports are not included here, as databases should be maintained outside 
 Typical defaults include:
 
 - `5432`: PostgreSQL
-- `9200`, `9300`, `9600`: Elasticsearch/OpenSearch
+- `9200`, `9300`, `9600`: Document-store secondary storage (Elasticsearch/OpenSearch)
   :::
 
 ##### Load balancer
@@ -246,10 +246,10 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-| Database                 | Requirement                                                                                        |
-| :----------------------- | :------------------------------------------------------------------------------------------------- |
-| Elasticsearch/OpenSearch | Required by Orchestration Cluster and Optimize.                                                    |
-| PostgreSQL               | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
+| Database                         | Requirement                                                                                        |
+| :------------------------------- | :------------------------------------------------------------------------------------------------- |
+| Document-store secondary storage | Required by Orchestration Cluster and Optimize in this topology (Elasticsearch/OpenSearch).        |
+| PostgreSQL                       | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.

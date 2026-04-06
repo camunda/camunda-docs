@@ -146,7 +146,7 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 ## Microsoft Teams app redirect for app store documentation link.
 
-RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
+RewriteRule ^docs/ms-teams/?$ /docs/next/components/camunda-integrations/ms-teams/ [R=301,L]
 
 ## Redirect update-guide introduction to new components-upgrade introduction
 
@@ -235,6 +235,8 @@ out-of-the-box-connectors/power-automate/?$ /docs/components/connectors/introduc
 RewriteRule ^docs/8.8/components/connectors/
 out-of-the-box-connectors/power-automate/?$ /docs/8.8/components/connectors/introduction/ [R=301,L]
 
+# Remove ES/OS page
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch/?$ /docs/next/self-managed/concepts/secondary-storage/configuring-secondary-storage/ [R=301,L]
 
 # Self-Managed upgrade guide restructuring
 RewriteRule ^docs/next/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/next/self-managed/upgrade/ [R=301,L]
@@ -272,6 +274,9 @@ RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-880-890/?$ /docs/next/self-managed/upgrade/helm/880-to-890/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/manual/upgrade/?$ /docs/next/self-managed/upgrade/manual/ [R=301,L]
 
+# Removed Camunda Exporter indices page
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices/?$ /docs/next/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+
 # Change ID of choose-right-model-agentic
 RewriteRule ^docs/next/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/next/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
 RewriteRule ^docs/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
@@ -296,6 +301,22 @@ RewriteRule ^docs/self-managed/deployment/helm/configure/authentication-and-auth
 RewriteRule ^docs/next/components/connectors/use-connectors/intrinsic-functions/?$ /docs/next/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 RewriteRule ^docs/components/connectors/use-connectors/intrinsic-functions/?$ /docs/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 RewriteRule ^docs/8.8/components/connectors/use-connectors/intrinsic-functions/?$ /docs/8.8/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
+
+# Rename identity to admin for orchestration-cluster (8.9)
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/next/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/next/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/next/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/next/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+
+# Move MCP Client from early access to Agentic AI connectors (8.9)
+RewriteRule ^docs/next/components/early-access/alpha/mcp-client/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+RewriteRule ^docs/next/components/early-access/alpha/mcp-client/(.+)$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
+
+# Will be activated with the switch: next -> current
+# RewriteRule ^docs/components/early-access/alpha/mcp-client/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+# RewriteRule ^docs/components/early-access/alpha/mcp-client/(.+)$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
 
 # Removal of 8.5 announcements/release notes
 RewriteRule ^docs/next/reference/announcements-release-notes/850/(.*)$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
@@ -410,7 +431,7 @@ RewriteRule ^docs/self-managed/setup/guides/?$ /docs/self-managed/installation-m
 RewriteRule ^docs/self-managed/setup/guides/installing-payment-app-example/?$ /docs/self-managed/installation-methods/manual/install/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/prefix-elasticsearch-indices/?$ /docs/self-managed/installation-methods/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/using-existing-postgres/?$ /docs/self-managed/installation-methods/helm/configure/database/postgresql/using-external-postgresql/ [R=301,L]
-RewriteRule ^docs/self-managed/tasklist-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/tasklist/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/install-and-start/?$ /docs/self-managed/deployment/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/configuration/logging/?$ /docs/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/zeebe-installation/?$ /docs/self-managed/components/orchestration-cluster/zeebe/overview/ [R=301,L]
 
@@ -468,6 +489,7 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-inst
 
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/getting-started/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 RewriteRule ^docs/apis-tools/java-client/zeebe-process-test/?$ /docs/apis-tools/testing/getting-started/ [R=301,L]
+RewriteRule ^docs/apis-tools/testing/test-scenario-dsl/?$ /docs/apis-tools/testing/json-test-cases/ [R=301,L]
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/configuration/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 
 RewriteRule ^docs/apis-tools/camunda-api-rest/camunda-api-rest-authentication/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
@@ -764,9 +786,6 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ d
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/deploy-resources/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-instance-variables/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables/ [R=301,L]
 
-# Remove Camunda exporter from 8.7 docs
-RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/install-zeebe-exporters/ [R=301,L]
-
 # Restructure Identity Docs (8.7)
 RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-external-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
@@ -984,6 +1003,7 @@ RewriteRule ^docs/guides/react-components/install-docker-compose/?$ /docs/guides
 RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/ [R=301,L]
 
 # Move logging from troubleshooting to monitoring
+RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 
@@ -1041,7 +1061,7 @@ RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-mana
 # remove tasklist API + Spring Zeebe tutorial
 RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
 
-# remove unsupported versions
+# remove unmaintained versions
 RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]

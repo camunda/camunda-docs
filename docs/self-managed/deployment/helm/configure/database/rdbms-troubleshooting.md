@@ -92,15 +92,46 @@ kubectl logs <pod-name> | grep -i liquibase
 
 ```yaml
 orchestration:
-  data:
-    secondaryStorage:
-      rdbms:
-        autoDDL: true # Confirm this is set
+  extraConfiguration:
+    - file: "manual-schema-management.yaml"
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              rdbms:
+                auto-ddl: false # Confirm this is set
 ```
 
 3. Test database user permissions (see [Schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#database-user-permissions)).
 
 **Fix:** Ensure database user has DDL permissions or disable autoDDL and apply schema manually. See [Schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md).
+
+## Liquibase lock after pod crash or restart
+
+**Symptom:** Pod startup appears stuck on Liquibase, or repeated restarts fail while waiting for `databasechangeloglock`.
+
+**Cause:** A previous pod may have been terminated while Liquibase was still running, leaving a lock row behind.
+
+**Behavior:** Camunda waits for a stale Liquibase DDL lock using `camunda.data.secondary-storage.rdbms.ddl-lock-wait-timeout` (default: `PT15M`).
+
+**Fix:**
+
+1. Increase the timeout for slow migrations (for example, large index creation):
+
+```yaml
+orchestration:
+  extraConfiguration:
+    - file: "rdbms-liquibase-lock-timeout.yaml"
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              rdbms:
+                ddl-lock-wait-timeout: PT30M
+```
+
+2. Avoid terminating Orchestration Cluster pods while Liquibase is actively applying migrations.
+3. Only release `databasechangeloglock` manually when you have verified no migration is still running.
 
 ## Slow data export
 
@@ -122,12 +153,16 @@ kubectl logs <pod-name> | grep -i flushinterval
 
 ```yaml
 orchestration:
-  data:
-    secondaryStorage:
-      rdbms:
-        flushInterval: PT1S # More frequent flushes
-        queueSize: 5000 # Larger queue for buffering
-        queueMemoryLimit: 50 # Increase if needed
+  extraConfiguration:
+    - file: "flush-interval.yaml"
+      content: |
+        camunda:
+          data:
+            secondary-storage:
+              rdbms:
+                flush-interval: PT1S # More frequent flushes
+                queue-size: 5000 # Larger queue for buffering
+                queue-memory-limit: 50 # Increase if needed
 ```
 
 - Smaller `flushInterval` → more frequent writes (increases DB load).

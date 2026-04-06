@@ -158,11 +158,17 @@ Add the section under `global.identity.auth` to the existing section you created
 
 #### Configure Web Modeler
 
-Web Modeler configures a second PostgreSQL instance.
+Web Modeler configures a second PostgreSQL instance and requires a redirect URL for OIDC authentication.
 
 Web Modeler component configuration:
 
 ```yaml
+global:
+  identity:
+    auth:
+      webModeler:
+        redirectUrl: "http://localhost:8070" # Change this when using a domain
+
 webModeler:
   enabled: true
   restapi:
@@ -177,6 +183,17 @@ webModelerPostgresql:
       adminPasswordKey: "webmodeler-postgresql-admin-password"
       userPasswordKey: "webmodeler-postgresql-user-password"
 ```
+
+:::important Redirect URL configuration
+The `redirectUrl` parameter is **required** for Web Modeler authentication. The default value is `http://localhost:8070`, which works for local port-forwarding setups.
+
+If you're using a domain or Ingress to expose Web Modeler, you **must** update this value to match your Web Modeler URL:
+
+- With Ingress: `https://your-domain.com/modeler` (if using a context path)
+- Without context path: `https://modeler.your-domain.com`
+
+Mismatched redirect URLs will cause authentication failures that are difficult to debug.
+:::
 
 You can update `webModeler.restapi.mail.fromAddress` with an address suitable for your environment.
 This address appears as the sender in emails sent by Web Modeler.
@@ -210,6 +227,10 @@ global:
         secret:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-optimize-client-token"
+      webModeler:
+        # Default: http://localhost:8070
+        # Update this when using a domain/Ingress, e.g., https://your-domain.com/modeler
+        redirectUrl: "http://localhost:8070"
   security:
     authentication:
       method: oidc
@@ -279,6 +300,8 @@ To review how each component is configured and which OIDC clients are used:
 
 ## Connect to the cluster
 
+### Local access with port forwarding
+
 After applying this configuration, use the following `kubectl port-forward` commands to access the APIs and UIs from your localhost:
 
 ```bash
@@ -310,9 +333,31 @@ Once port forwarding is active, access each component through `http://localhost:
 For example:
 
 - Keycloak: `http://localhost:18080`
+- Web Modeler: `http://localhost:8070`
 - Orchestration Cluster: `http://localhost:8080`
 
 Log in with username `demo` and the password you defined under `identity-firstuser-password`.
+
+:::note Default URLs and port forwarding
+The configuration shown above uses default `redirectUrl` values that match the port-forwarding setup (`http://localhost:8070` for Web Modeler, `http://localhost:18080` for Keycloak). These defaults work automatically when using `kubectl port-forward`.
+
+If you don't use port forwarding and instead expose components via Ingress or a domain, you **must** update the `redirectUrl` parameters under `global.identity.auth` to match your actual URLs. See [Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for domain-based configuration examples.
+:::
+
+### Domain-based access with Ingress
+
+If you're using Ingress to expose components via a domain (instead of port forwarding), update the redirect URLs in your Helm values:
+
+```yaml
+global:
+  identity:
+    auth:
+      webModeler:
+        redirectUrl: "https://your-domain.com/modeler" # Or https://modeler.your-domain.com
+      # Update other component URLs as needed
+```
+
+For complete Ingress configuration, see [Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
 
 ## External identity provider
 

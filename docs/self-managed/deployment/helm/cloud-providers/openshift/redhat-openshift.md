@@ -17,6 +17,8 @@ import NoDomainInfo from '../\_partials/\_no-domain-info.md'
 import HelmUpgradeNote from '../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../\_partials/\_port-forward-services.md'
+import DeployECKElasticsearch from '../\_partials/\_deploy-eck-elasticsearch.md'
+import SecondaryStorageOptionsNote from '../\_partials/\_secondary-storage-options-note.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -33,8 +35,10 @@ Additional information and a high-level overview of Kubernetes as the upstream p
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
-- A namespace to host the Camunda Platform.
+- A namespace to host Camunda.
 - Permissions to install Kubernetes operators (cluster-admin or equivalent) for deploying the infrastructure services (Elasticsearch, PostgreSQL, Keycloak). These operators can also be installed via the [OpenShift OperatorHub](https://docs.openshift.com/container-platform/latest/operators/understanding/olm-understanding-operatorhub.html), but this guide installs them directly from source for full control over versions and configuration.
+
+<SecondaryStorageOptionsNote />
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
@@ -42,12 +46,12 @@ For the tool versions used, check the [.tool-versions](https://github.com/camund
 
 This section installs Camunda 8 following the architecture described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md). The architecture includes the following core components:
 
-- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Admin)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
 Infrastructure components are deployed using **official Kubernetes operators** as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
-- **[Elasticsearch with ECK](#deploy-elasticsearch)**: Deployed via [Elastic Cloud on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) for secondary storage
+- **[Elasticsearch with ECK](#deploy-elasticsearch)**: Document-store example path used in this guide for secondary storage
 - **[PostgreSQL with CloudNativePG](#deploy-postgresql)**: Deployed via [CloudNativePG](https://cloudnative-pg.io/) for Identity and Web Modeler databases
 - **[Keycloak](#deploy-keycloak) (optional)**: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) as an identity provider for Single Sign-On (SSO)
 
@@ -296,7 +300,7 @@ If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](http
   <TabItem value="no-ingress" label="No Ingress">
 If you do not have a domain name or do not intend to use one for your Camunda 8 deployment, external access to Camunda 8 web endpoints from outside the OpenShift cluster will not be possible.
 
-However, you can use `kubectl port-forward` to access the Camunda platform without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+However, you can use `kubectl port-forward` to access Camunda without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Merge the no-domain overlay into your `values.yml` file:
 
@@ -392,9 +396,11 @@ Some components are not enabled by default in this deployment. For more informat
 
 Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch and PostgreSQL) is deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md). Keycloak can optionally be deployed as your OIDC provider:
 
-- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) — one option for secondary storage
 - **PostgreSQL**: Deployed via [CloudNativePG](https://cloudnative-pg.io/)
 - **Keycloak** _(optional)_: Deployed via the [Keycloak Operator](https://www.keycloak.org/operator/installation) — can be replaced with any OIDC-compatible IdP
+
+<SecondaryStorageOptionsNote />
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
@@ -404,24 +410,7 @@ All commands in this guide assume you are at the **repository root** (the direct
 
 #### Deploy Elasticsearch {#deploy-elasticsearch}
 
-Deploy Elasticsearch using the ECK operator:
-
-```bash
-(cd generic/kubernetes/operator-based/elasticsearch && ./deploy.sh)
-```
-
-This script installs the ECK operator, deploys an Elasticsearch cluster, and waits for readiness.
-
-<details>
-<summary>Review the Elasticsearch cluster configuration</summary>
-
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
-```
-
-</details>
-
-For more details on the Elasticsearch deployment, see [Elasticsearch deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment).
+<DeployECKElasticsearch />
 
 #### Deploy PostgreSQL {#deploy-postgresql}
 
@@ -675,7 +664,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
@@ -718,19 +707,19 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `https://${CAMUNDA_DOMAIN}/admin` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 </TabItem>
 
 <TabItem value="without" label="Without domain">
 
-Identity and the Orchestration cluster must be port-forwarded to be able to connect to the cluster. If using Keycloak via the Keycloak Operator, you also need to port-forward the Keycloak service.
+Admin and the Orchestration cluster must be port-forwarded to be able to connect to the cluster. If using Keycloak via the Keycloak Operator, you also need to port-forward the Keycloak service.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
@@ -759,13 +748,13 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `http://localhost:8080/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `http://localhost:8080/admin` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 <PortForwardServices />
 

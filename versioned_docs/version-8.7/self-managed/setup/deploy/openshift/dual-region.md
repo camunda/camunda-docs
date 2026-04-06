@@ -24,9 +24,6 @@ Please review our [dual-region concept documentation](./../../../concepts/multi-
 
 ## High Level Design
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
-
 _Infrastructure diagram for a OpenShift dual-region setup (click on the image to open the PDF version)_
 [![Infrastructure Diagram OpenShift Dual-Region](./assets/openshift-dual-region.jpg)](./assets/openshift-dual-region.pdf)
 
@@ -462,7 +459,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart on each cluster.
+- Installs (or upgrades) Camunda using the Helm chart on each cluster.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from the value file.
 

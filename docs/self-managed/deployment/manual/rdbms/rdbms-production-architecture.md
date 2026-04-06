@@ -64,9 +64,9 @@ graph TB
 
 - Processes are executed
 - State is flushed to RDBMS
-- Operate and Tasklist access the Orchestration Cluster v2 API and do not directly access secondary storage
+- Orchestration Cluster applications (Operate, Tasklist, and Identity) and API clients access data through the Orchestration Cluster interfaces; they do not directly access secondary storage
 
-## When Elasticsearch/OpenSearch is required
+## When document-store secondary storage is required
 
 Elasticsearch or OpenSearch is required **only for Optimize**. When Optimize is enabled:
 

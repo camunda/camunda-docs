@@ -5,15 +5,17 @@ sidebar_label: Microsoft 365
 description: Send and read Microsoft 365 emails from your BPMN process.
 ---
 
-The **Microsoft 365 connector** is an outbound connector that allows you to connect your BPMN service with [Microsoft 365](https://outlook.office.com/mail/) mail to send, read e-mails, and manage folders.
+The Microsoft 365 Connector is an outbound connector that allows you to connect your BPMN service with [Microsoft 365](https://outlook.office.com/mail/) mail to send, read e-mails, and manage folders.
 
 ## Prerequisites
 
-- To use the **Microsoft 365 connector**, you must have a [Microsoft 365](https://outlook.office.com/mail/) mail instance.
-- You might also need to have sufficient access rights at [Microsoft Entra](https://entra.microsoft.com) to create a new app;
-  set [Microsoft Graph](https://developer.microsoft.com/en-us/graph) permissions and assign an app to u user.
+- A [Microsoft 365](https://outlook.office.com/mail/) mail instance.
+- Sufficient permissions in [Microsoft Entra](https://entra.microsoft.com) to:
+  - Create a new app registration
+  - Configure [Microsoft Graph](https://developer.microsoft.com/en-us/graph) permissions
+  - Assign the app to a user
 
-Learn more about [creating, configuring, and authorizing Microsoft App](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
+Learn more about [creating, configuring, and authorizing a Microsoft app](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
 
 :::note
 Use Camunda secrets to avoid exposing your Microsoft credentials as plain text.
@@ -113,5 +115,5 @@ Related Microsoft Graph API: [user: sendMail](https://learn.microsoft.com/en-us/
 
 ## Handle connector response
 
-The **Microsoft 365 connector** is a protocol connector, meaning it is built on top of the **HTTP REST connector**, therefore
+The Microsoft 365 Connector is a protocol connector, meaning it is built on top of the **HTTP REST connector**, therefore
 [handling response is still applicable](/components/connectors/protocol/rest.md#response).

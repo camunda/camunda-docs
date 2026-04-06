@@ -412,6 +412,11 @@ This module is **enabled by default**. To opt out, you must:
 - Remove the `db.tf` file from the root
 - Manually provide credentials and PostgreSQL endpoints for the Helm chart
 
+:::tip Alternative: Operator-based PostgreSQL deployment
+If your organization does not want to use a managed Azure Database for PostgreSQL service, CloudNativePG is an option.
+For more details on the PostgreSQL deployment with CloudNativePG Operator, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
+:::
+
 ### Execution
 
 :::note Secret management
@@ -583,6 +588,6 @@ kubectl delete secret setup-db-secret --namespace "$CAMUNDA_NAMESPACE"
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
-## 2. Install Camunda 8 using the Helm chart
+## 3. Install Camunda 8 using the Helm chart
 
 Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on Kubernetes](./aks-helm.md) for detailed instructions on deploying the platform to your Kubernetes cluster.

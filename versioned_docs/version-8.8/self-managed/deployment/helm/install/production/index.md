@@ -21,6 +21,11 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. For step-by-step instructions, see the [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup) guide.
   - **Amazon OpenSearch**: The secondary datastore for the Orchestration Cluster, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
   - **Identity Provider (IdP)**: An OIDC-compatible identity provider for authentication. See [Authentication and authorization](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) for supported options.
+
+  :::tip No managed services available?
+  If managed PostgreSQL, Elasticsearch, or an external OIDC provider are not available in your organization, you can deploy these infrastructure components on Kubernetes using official operators. See [Deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions.
+  :::
+
 - **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket to store backup files of the Orchestration Cluster brokers.
@@ -49,9 +54,9 @@ kubectl create namespace management-and-modeling
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), [Optimize](/self-managed/components/optimize/overview.md), and the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
+- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), and the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
 
-- **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), and [Connectors](/self-managed/components/connectors/overview.md).
+- **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), [Connectors](/self-managed/components/connectors/overview.md) and [Optimize](/self-managed/components/optimize/overview.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
@@ -80,7 +85,7 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n o
 
 ### Ingress TLS setup
 
-In order to access the Camunda Platform through HTTPS with Ingress, TLS must be enabled. Enabling TLS requires the following:
+In order to access Camunda through HTTPS with Ingress, TLS must be enabled. Enabling TLS requires the following:
 
 1. **Domain name**: A public registered domain that has configurable DNS records. This guide will use `camunda.example.com` as the domain.
 2. **TLS certificate**: A TLS certificate created for your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. The certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure Ingress resources. Reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
@@ -343,7 +348,7 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
       maxUnavailable: 1
   ```
 
-- Version management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/870/870-release-notes.md) for security patches or critical updates.
+- Version management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for security patches or critical updates.
 - Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets when installing the Helm chart. In this scenario, the secrets are auto-generated. The following can be added to both Helm values files:
 
   ```yaml
@@ -524,8 +529,7 @@ prometheusServiceMonitor:
 orchestration:
   enabled: false
 optimize:
-  enabled: true
-  contextPath: /optimize
+  enabled: false
 connectors:
   enabled: false
 elasticsearch:
@@ -654,16 +658,16 @@ orchestration:
     enabled: true
     minimumAge: 30d
     policyName: zeebe-record-retention-policy
-  orchestration:
-    security:
-      authentication:
-        method: oidc
+  security:
+    authentication:
+      method: oidc
 
 connectors:
   contextPath: /connectors
 
 optimize:
-  enabled: false
+  enabled: true
+  contextPath: /optimize
 identity:
   enabled: false
 identityKeycloak:

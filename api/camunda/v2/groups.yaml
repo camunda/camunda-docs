@@ -65,7 +65,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
-          description: An internal error occurred while processing the request.
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
   /groups/{groupId}:
     get:
       tags:
@@ -576,7 +576,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+                $ref: "#/components/schemas/GroupMappingRuleSearchResult"
         "400":
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
@@ -622,7 +622,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+                $ref: "#/components/schemas/GroupRoleSearchResult"
         "400":
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
@@ -665,7 +665,12 @@ components:
           type: string
         description:
           description: The description of the created group.
+          nullable: true
           type: string
+      required:
+        - groupId
+        - name
+        - description
     GroupUpdateRequest:
       type: object
       properties:
@@ -688,7 +693,12 @@ components:
           description: The name of the group.
         description:
           type: string
+          nullable: true
           description: The description of the group.
+      required:
+        - groupId
+        - name
+        - description
     GroupResult:
       description: Group search response item.
       type: object
@@ -701,7 +711,12 @@ components:
           description: The group ID.
         description:
           type: string
+          nullable: true
           description: The group description.
+      required:
+        - name
+        - groupId
+        - description
     GroupSearchQuerySortRequest:
       type: object
       properties:
@@ -743,6 +758,8 @@ components:
           type: string
     GroupSearchQueryResult:
       description: Group search response.
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -757,7 +774,11 @@ components:
       properties:
         username:
           $ref: "identifiers.yaml#/components/schemas/Username"
+      required:
+        - username
     GroupUserSearchResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -795,7 +816,11 @@ components:
         clientId:
           description: The ID of the client.
           type: string
+      required:
+        - clientId
     GroupClientSearchResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -815,6 +840,30 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/GroupClientSearchQuerySortRequest"
+    GroupMappingRuleSearchResult:
+      required:
+        - items
+      type: object
+      allOf:
+        - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching mapping rules.
+          type: array
+          items:
+            $ref: "mapping-rules.yaml#/components/schemas/MappingRuleResult"
+    GroupRoleSearchResult:
+      required:
+        - items
+      type: object
+      allOf:
+        - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching roles.
+          type: array
+          items:
+            $ref: "roles.yaml#/components/schemas/RoleResult"
     GroupClientSearchQuerySortRequest:
       type: object
       properties:

@@ -44,6 +44,23 @@ In domain mode, you'll simulate a production-like environment locally with:
 mkcert requires [NSS](https://github.com/FiloSottile/mkcert#supported-root-stores) to work properly with Firefox. Without it, Firefox will display certificate errors. We recommend using **Chrome** or **Chromium-based browsers** for the best experience with domain mode.
 :::
 
+## Secondary storage options
+
+In addition to the deployment mode, you must choose a [secondary storage](/self-managed/concepts/secondary-storage/index.md) backend. The `SECONDARY_STORAGE` environment variable controls which backend the deployment scripts use. You must set it explicitly before running any deployment command — there is no default.
+
+| Value           | Operators deployed                    | Components                                                  |
+| --------------- | ------------------------------------- | ----------------------------------------------------------- |
+| `elasticsearch` | ECK, CloudNativePG, Keycloak Operator | Full platform including Optimize                            |
+| `postgres`      | CloudNativePG, Keycloak Operator      | All components except Optimize (uses PostgreSQL RDBMS mode) |
+
+The `postgres` option uses [RDBMS secondary storage](/self-managed/concepts/secondary-storage/index.md) (available since 8.9), which replaces Elasticsearch with PostgreSQL for Operate, Tasklist, and the Orchestration Cluster REST API. This results in a lighter deployment with fewer operators and lower resource consumption. Optimize is not available in this mode because it depends on Elasticsearch's aggregation API for analytics — this is an architectural constraint, not a temporary gap.
+
+Once you've chosen your backend, export the variable so all subsequent commands pick it up automatically:
+
+```bash
+export SECONDARY_STORAGE=postgres   # or: elasticsearch
+```
+
 ## Prerequisites
 
 Before you begin, you'll need:
@@ -71,7 +88,7 @@ By the end of this tutorial, you'll have:
 - An Ingress NGINX controller deployed for routing traffic (domain mode only).
 - TLS certificates configured with mkcert (domain mode only).
 - Prerequisite services deployed via Kubernetes operators:
-  - Elasticsearch (ECK)
+  - Elasticsearch via ECK (used as secondary storage in this guide; RDBMS is a supported alternative — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md))
   - PostgreSQL (CloudNativePG)
   - Keycloak (Keycloak Operator)
 - Camunda 8 Self-Managed fully deployed and accessible, connected to the operator-managed services.
@@ -93,10 +110,17 @@ You'll run all subsequent commands from `camunda-deployment-references/local/kub
 Before proceeding, take some time to explore the repository structure and understand the configuration files, scripts, and Helm values. This will help you understand what each step does and how to customize the deployment for your needs.
 
 :::tip Quick setup with Makefile
-The reference architecture includes a `Makefile` with useful commands to automate the entire deployment process. For a quick setup, you can use:
+The reference architecture includes a `Makefile` with useful commands to automate the entire deployment process. If you [exported `SECONDARY_STORAGE`](#secondary-storage-options) above, you can omit it from these commands. Otherwise, set it inline:
 
-- `make domain.init` — Full setup with TLS (requires mkcert)
-- `make no-domain.init` — Full setup without TLS (uses port-forward)
+```bash
+# PostgreSQL secondary storage (lighter, no Optimize)
+SECONDARY_STORAGE=postgres make domain.init      # With TLS (requires mkcert)
+SECONDARY_STORAGE=postgres make no-domain.init   # With port-forward
+
+# Elasticsearch secondary storage (full platform with Optimize)
+SECONDARY_STORAGE=elasticsearch make domain.init      # With TLS (requires mkcert)
+SECONDARY_STORAGE=elasticsearch make no-domain.init   # With port-forward
+```
 
 To clean up, use `make domain.clean` or `make no-domain.clean` respectively.
 
@@ -231,9 +255,13 @@ The certificate generation script:
 
 Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
-- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) — used as secondary storage in this guide.
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
+
+:::note Secondary storage alternatives
+This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) is a supported alternative for the Orchestration Cluster. To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+:::
 
 Run the operator deployment script, specifying the domain deployment mode:
 
@@ -241,17 +269,32 @@ Run the operator deployment script, specifying the domain deployment mode:
 CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
 ```
 
-This script installs each operator and its custom resources, then waits for all instances to be ready.
+This script installs each operator and its custom resources, then waits for all instances to be ready. When `SECONDARY_STORAGE=postgres`, the ECK operator and Elasticsearch cluster are skipped, and an additional PostgreSQL cluster (`pg-camunda`) is deployed for RDBMS secondary storage.
 
 <IdentitySecret />
 
 ### Deploy Camunda 8
 
-Deploy Camunda 8 with the domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external Elasticsearch, PostgreSQL, and Keycloak instances:
+Deploy Camunda 8 with the domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external PostgreSQL and Keycloak instances, and to the secondary storage backend you selected:
+
+```bash
+./procedure/camunda-deploy-domain.sh
+```
+
+The script selects the appropriate Helm values based on your [exported `SECONDARY_STORAGE`](#secondary-storage-options) value. With `elasticsearch`, it includes the Elasticsearch values overlay. With `postgres`, it includes the RDBMS values overlay and disables Elasticsearch and Optimize.
+
+<details>
+<summary>Deploy script source</summary>
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/camunda-deploy-domain.sh
 ```
+
+</details>
+
+:::note Using RDBMS instead of Elasticsearch
+If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
+:::
 
 This uses the following Helm values:
 
@@ -269,7 +312,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 
 The deployment script layers the following shared operator values before the kind-specific values:
 
-- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch.
+- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch (Elasticsearch secondary storage only).
+- [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
 - [`camunda-keycloak-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml): Connects Camunda to the operator-managed Keycloak (domain mode).
 - [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
 - [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
@@ -295,7 +339,7 @@ This section covers the simplified setup using port-forwarding without TLS.
 
 Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
-- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) — used as secondary storage in this guide
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
@@ -305,7 +349,7 @@ Run the operator deployment script, specifying the no-domain deployment mode:
 CAMUNDA_MODE=no-domain ./procedure/operators-deploy.sh
 ```
 
-This script installs each operator and its custom resources, then waits for all instances to be ready.
+This script installs each operator and its custom resources, then waits for all instances to be ready. When `SECONDARY_STORAGE=postgres`, the ECK operator and Elasticsearch cluster are skipped, and an additional PostgreSQL cluster (`pg-camunda`) is deployed for RDBMS secondary storage.
 
 ### Configure your hosts file for Keycloak
 
@@ -325,11 +369,26 @@ After adding this entry and deploying Camunda 8 in the next step, you'll be able
 
 ### Deploy Camunda 8
 
-Deploy Camunda 8 with the no-domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external Elasticsearch, PostgreSQL, and Keycloak instances:
+Deploy Camunda 8 with the no-domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external PostgreSQL and Keycloak instances, and to the secondary storage backend you selected:
+
+```bash
+./procedure/camunda-deploy-no-domain.sh
+```
+
+The script selects the appropriate Helm values based on your [exported `SECONDARY_STORAGE`](#secondary-storage-options) value. With `elasticsearch`, it includes the Elasticsearch values overlay. With `postgres`, it includes the RDBMS values overlay and disables Elasticsearch and Optimize.
+
+<details>
+<summary>Deploy script source</summary>
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/camunda-deploy-no-domain.sh
 ```
+  
+</details>
+
+:::note Using RDBMS instead of Elasticsearch
+If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
+:::
 
 This uses the following Helm values:
 
@@ -347,7 +406,8 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 
 The deployment script layers the following shared operator values before the kind-specific values:
 
-- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch.
+- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch (Elasticsearch secondary storage only).
+- [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
 - [`camunda-keycloak-no-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml): Connects Camunda to the operator-managed Keycloak (no-domain mode).
 - [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
 - [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
@@ -389,19 +449,27 @@ helm list -n camunda
 
 <TabItem value="domain">
 
-| Component           | URL                                            |
-| ------------------- | ---------------------------------------------- |
-| Operate             | https://camunda.example.com/operate            |
-| Tasklist            | https://camunda.example.com/tasklist           |
-| Identity            | https://camunda.example.com/identity           |
-| Management Identity | https://camunda.example.com/managementidentity |
-| Optimize            | https://camunda.example.com/optimize           |
-| Zeebe REST API      | https://camunda.example.com/                   |
-| Keycloak            | https://camunda.example.com/auth               |
+:::note
+Optimize is only available with Elasticsearch secondary storage. If you deployed with `SECONDARY_STORAGE=postgres`, Optimize is disabled.
+:::
+
+| Component                      | URL                                            | Availability                         |
+| ------------------------------ | ---------------------------------------------- | ------------------------------------ |
+| Operate                        | https://camunda.example.com/operate            | All                                  |
+| Tasklist                       | https://camunda.example.com/tasklist           | All                                  |
+| Identity                       | https://camunda.example.com/identity           | All                                  |
+| Management Identity            | https://camunda.example.com/managementidentity | All                                  |
+| Optimize                       | https://camunda.example.com/optimize           | Elasticsearch secondary storage only |
+| Orchestration Cluster REST API | https://camunda.example.com/                   | All                                  |
+| Keycloak                       | https://camunda.example.com/auth               | All                                  |
 
 </TabItem>
 
 <TabItem value="no-domain">
+
+:::note
+Optimize is only available with Elasticsearch secondary storage. If you deployed with `SECONDARY_STORAGE=postgres`, Optimize is disabled and its port-forward is skipped automatically.
+:::
 
 Start port-forwarding to access the services:
 
@@ -425,22 +493,22 @@ Now, you can reach services directly, for example:
 You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily, then restores the file when it exits.
 :::
 
-| Component            | URL                                |
-| -------------------- | ---------------------------------- |
-| Zeebe Gateway (gRPC) | localhost:26500                    |
-| Zeebe Gateway (HTTP) | http://localhost:8080/             |
-| Operate              | http://localhost:8080/operate      |
-| Tasklist             | http://localhost:8080/tasklist     |
-| Identity             | http://localhost:8080/identity     |
-| Management Identity  | http://localhost:8085              |
-| Optimize             | http://localhost:8083              |
-| Web Modeler          | http://localhost:8070              |
-| Console              | http://localhost:8087              |
-| Connectors           | http://localhost:8088              |
-| Keycloak             | http://keycloak-service:18080/auth |
+| Component            | URL                                | Availability                         |
+| -------------------- | ---------------------------------- | ------------------------------------ |
+| Zeebe Gateway (gRPC) | localhost:26500                    | All                                  |
+| Zeebe Gateway (HTTP) | http://localhost:8080/             | All                                  |
+| Operate              | http://localhost:8080/operate      | All                                  |
+| Tasklist             | http://localhost:8080/tasklist     | All                                  |
+| Identity             | http://localhost:8080/identity     | All                                  |
+| Management Identity  | http://localhost:8085              | All                                  |
+| Optimize             | http://localhost:8083              | Elasticsearch secondary storage only |
+| Web Modeler          | http://localhost:8070              | All                                  |
+| Console              | http://localhost:8087              | All                                  |
+| Connectors           | http://localhost:8088              | All                                  |
+| Keycloak             | http://keycloak-service:18080/auth | All                                  |
 
-:::tip Connecting to the workflow engine
-To interact with the Camunda workflow engine via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).
+:::tip Connecting to the Orchestration Cluster
+To interact with the Orchestration Cluster via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).
 :::
 
 At any time, run `kubectl get services -n camunda` to get a full list of deployed Camunda components and their network properties.

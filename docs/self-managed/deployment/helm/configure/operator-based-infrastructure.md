@@ -1,12 +1,13 @@
 ---
 id: operator-based-infrastructure
-sidebar_label: Operator-based infrastructure
-title: Deploy infrastructure with Kubernetes operators
-description: "Deploy Camunda 8 infrastructure components using official Kubernetes operators as an alternative to Bitnami subcharts."
+sidebar_label: Deploy required dependencies
+title: Deploy required dependencies with Kubernetes operators
+description: "Deploy the databases (PostgreSQL, Elasticsearch) and OIDC provider (Keycloak) required by Camunda 8 using official Kubernetes operators."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import MigrationTip from '../operational-tasks/migration-from-bitnami/\_partials/\_migration-tip.md'
 
 This guide explains how to deploy Camunda 8 infrastructure components using **official Kubernetes operators** as an alternative to the Bitnami subcharts. This approach provides production-grade, officially maintained deployment solutions for PostgreSQL, Elasticsearch, and Keycloak.
 
@@ -20,7 +21,7 @@ As outlined in [our strategy](https://camunda.com/blog/2025/08/changes-to-camund
 
 This guide demonstrates how to integrate these infrastructure components using official Kubernetes operators that don't depend on Bitnami subcharts. These operators are the recommended way to deploy and manage these services in production environments.
 
-:::caution Support scope
+:::warning Support scope
 PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they are not Camunda products, regardless of the deployment method used.
 
 - **Camunda support scope**: Camunda supports the **integration and configuration** of these components with the Camunda Helm chart. Camunda does not provide operational support for the infrastructure components themselves.
@@ -30,6 +31,8 @@ PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they a
 :::note Alternative: Bitnami Enterprise Images
 If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
 :::
+
+<MigrationTip />
 
 ## Why use Kubernetes operators?
 
@@ -52,7 +55,7 @@ Before proceeding with this guide, ensure you have:
 - **Cluster admin privileges**: Required to install Custom Resource Definitions (CRDs) and operators
 - **Command-line tools**:
   - `kubectl` configured to access your cluster
-  - `helm` CLI for deploying Camunda Platform
+  - `helm` CLI for deploying Camunda using the Helm chart
   - `openssl` for generating random passwords
   - `envsubst` command (part of `gettext` package) for environment variable substitution
 
@@ -136,7 +139,7 @@ Each infrastructure component should be deployed individually in the following o
 | 1     | **[PostgreSQL](#postgresql-deployment)**       | None         | Database clusters for Keycloak, Management Identity, and Web Modeler |
 | 2     | **[Elasticsearch](#elasticsearch-deployment)** | None         | Secondary storage for orchestration cluster components               |
 | 3     | **[Keycloak](#keycloak-deployment)**           | PostgreSQL   | Authentication and identity management                               |
-| 4     | **[Camunda Platform](#camunda-deployment)**    | All above    | Deploy using Helm with operator-managed infrastructure               |
+| 4     | **[Camunda](#camunda-deployment)**             | All above    | Deploy using Helm with operator-managed infrastructure               |
 
 :::tip Automation with GitOps
 While this guide demonstrates manual deployment using command-line tools, these same configurations can be automated using GitOps solutions like ArgoCD, Flux, or other Kubernetes deployment pipelines. All configuration files referenced in this guide are designed to work seamlessly with declarative deployment approaches.
@@ -511,7 +514,7 @@ With all infrastructure components deployed and configured, you can now deploy C
 
 ### Configuration files summary
 
-Before deploying Camunda Platform, ensure you have saved all required configuration files locally. The files are organized by deployment phase:
+Before deploying Camunda, ensure you have saved all required configuration files locally. The files are organized by deployment phase:
 
 #### Infrastructure deployment files (Custom Resources)
 
@@ -535,7 +538,7 @@ Before deploying Camunda Platform, ensure you have saved all required configurat
 
 ### Pre-deployment checklist
 
-Before deploying Camunda Platform:
+Before deploying Camunda, ensure you have completed the following:
 
 - [ ] All infrastructure components deployed (PostgreSQL, Elasticsearch, Keycloak)
 - [ ] Configuration files saved locally from previous sections
@@ -543,19 +546,20 @@ Before deploying Camunda Platform:
 
 ### Helm deployment
 
-Deploy Camunda Platform using the infrastructure configuration files you saved from previous sections:
+First, source the environment setup script to set `HELM_CHART_VERSION` and other required variables. See the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to choose the appropriate chart version for your deployment:
 
-```bash
-# Set the desired Helm chart version - see https://helm.camunda.io/camunda-platform/version-matrix/
-export HELM_CHART_VERSION=13.0.0  # Replace with your desired version
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
 ```
+
+Then, deploy Camunda using the infrastructure configuration files you saved from previous sections.
 
 For end-to-end configuration patterns (OIDC-enabled "Full Cluster" including Optimize, Web Modeler, Console, and Identity), see the Full Cluster section of our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md#full-cluster).
 
 <Tabs groupId="camunda-deployment">
   <TabItem value="with-domain" label="With external domain" default>
 
-Deploy Camunda Platform with external domain configuration:
+Deploy Camunda with external domain configuration:
 
 ```bash
 helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
@@ -564,14 +568,13 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   -f camunda-identity-values.yml \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-domain-values.yml \
-  -f camunda-values-identity-secrets.yml \
   -n "$CAMUNDA_NAMESPACE"
 ```
 
 </TabItem>
   <TabItem value="no-domain" label="Local development">
 
-Deploy Camunda Platform for local development:
+Deploy Camunda for local development:
 
 ```bash
 helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
@@ -580,7 +583,6 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   -f camunda-identity-values.yml \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-no-domain-values.yml \
-  -f camunda-values-identity-secrets.yml \
   -n "$CAMUNDA_NAMESPACE"
 ```
 
@@ -700,7 +702,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 ### Backup and disaster recovery
 
-- **Elasticsearch**: Perform backups using Camunda for Elastic (see [Camunda backup guide](/self-managed/operational-guides/backup-restore/backup.md)).
+- **Elasticsearch**: Perform backups using Camunda for Elastic (see [Camunda backup guide](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md)).
 - **PostgreSQL**: Configure automated backups using [CloudNativePG's backup capabilities](https://cloudnative-pg.io/docs/1.28/recovery)
 - **Keycloak**: Configure regular [exports of realm and user data](https://www.keycloak.org/server/importExport)
 - **Configuration**: Store all configuration files in version control

@@ -24,6 +24,11 @@ environment using Docker containers. This ensures consistent test results, simpl
 and allows integration with Camunda and other components without manual installation or complex dependencies.
 :::
 
+:::tip Shared runtime
+If you use the same runtime configuration for all test classes, then you can use a [shared runtime](#shared-runtime) to
+speed up the test execution.
+:::
+
 ### Prerequisites
 
 - A Docker-API compatible container runtime, such as Docker on Linux or Docker Desktop on Mac and Windows.
@@ -155,6 +160,83 @@ public class MyProcessTest {
 
 </Tabs>
 
+### Shared runtime
+
+By default, CPT creates a new runtime for each test class. You can change this behavior and use a shared Testcontainers
+runtime for all test classes to speed up the test execution. You can enable the shared runtime in the following way.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    # Switch from a managed to a shared runtime
+    runtime-mode: shared
+```
+
+All test classes using the shared runtime will use the same runtime configuration. You can't change the runtime
+configuration for individual test classes, such as enabling connectors or setting connector secrets. However, you can
+switch to a managed runtime for individual test classes and override the runtime configuration.
+
+```java
+
+@SpringBootTest(
+        properties = {
+                // Use a managed runtime for a different configuration
+                "camunda.process-test.runtime-mode=managed",
+                "camunda.process-test.connectors-enabled=true",
+        }
+)
+@CamundaSpringProcessTest
+public class MyProcessTest {
+    //
+}
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+# Switch from a managed to a shared runtime
+runtimeMode=shared
+```
+
+All test classes using the shared runtime will use the same runtime configuration. You can't change the runtime
+configuration for individual test classes, such as enabling connectors or setting connector secrets. However, you can
+switch to a managed runtime for individual test classes and override the runtime configuration.
+
+```java
+package com.example;
+
+import io.camunda.process.test.api.CamundaProcessTestExtension;
+import org.junit.jupiter.api.extension.RegisterExtension;
+
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+            new CamundaProcessTestExtension()
+                    // Use a managed runtime for a different configuration
+                    .withRuntimeMode(CamundaProcessTestRuntimeMode.MANAGED)
+                    .withConnectorsEnabled(true);
+}
+```
+
+</TabItem>
+
+</Tabs>
+
 ### Multi-tenancy
 
 Multi-tenancy is disabled by default. You can enable multi-tenancy in the following way:
@@ -181,6 +263,7 @@ By enabling multi-tenancy, the runtime enables Basic Auth security and creates a
 A process test using multi-tenancy could look like the following example:
 
 ```java
+
 @SpringBootTest
 @CamundaSpringProcessTest
 public class MyProcessTest {
@@ -286,6 +369,7 @@ By enabling multi-tenancy, the runtime enables Basic Auth security and creates a
 A process test using multi-tenancy could look like the following example:
 
 ```java
+
 @CamundaProcessTest
 public class MyProcessTest {
 
@@ -360,6 +444,147 @@ public class MyProcessTest {
 You should assign the default user (`demo`) to all tenants to ensure that the assertions can access all data.
 :::
 
+### Custom containers
+
+You can add custom containers to the managed or shared Testcontainers runtime, for example, to add a database, an MCP
+server, or a mock service.
+
+The CPT runtime manages the lifecycle of the custom containers and ensures that they are started before the tests and
+stopped after the tests. The custom containers are added to the same network as the Camunda and Connectors containers to
+allow communication between the containers.
+
+You can add a custom container in the following way.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+Implement a `CamundaProcessTestContainerProvider` bean that creates the custom container.
+
+In this example, we create a WireMock container to mock external HTTP calls in the tests.
+
+```java
+@Configuration
+public class TestConfig {
+
+    @Bean
+    public CamundaProcessTestContainerProvider wireMockProvider() {
+        return containerContext -> new WireMockContainer();
+    }
+
+    // A WireMock container to mock external HTTP calls in the tests
+    private static final class WireMockContainer extends GenericContainer<WireMockContainer> {
+        public WireMockContainer() {
+            // Configure the Docker image
+            super("wiremock/wiremock:3.13.0");
+            // Configure the network alias for communication between the containers
+            withNetworkAliases("wiremock");
+            // Configure the ports to expose
+            withExposedPorts(8080);
+            // Configure the logger
+            withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("tc.wiremock"), true));
+            // Configure the wait strategy to ensure that the container is ready before running the tests
+            waitingFor(
+                    Wait.forHttp("/__admin/mappings").forPort(8080).withMethod("GET").forStatusCode(200));
+            // Custom container-specific configuration
+            withCopyFileToContainer(
+                    // Copy the WireMock mapping file for the HTTP stubs to the container
+                    MountableFile.forClasspathResource("/wiremock/mapping.json"),
+                    "/home/wiremock/mappings/mapping.json");
+        }
+    }
+}
+```
+
+In the `application.yml` configuration, we use a connector secret to bind the connector task to the WireMock container
+using its network alias `wiremock` and the exposed port `8080`.
+
+```yaml
+camunda:
+  process-test:
+    connectors-enabled: true
+    connectors-secrets:
+      BASE_URL: http://wiremock:8080
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+Implement the `CamundaProcessTestContainerProvider` interface that creates the custom container.
+
+In this example, we create a WireMock container to mock external HTTP calls in the tests.
+
+```java
+public class WireMockContainerProvider implements CamundaProcessTestContainerProvider {
+
+    @Override
+    public GenericContainer<?> createContainer(final CamundaProcessTestContainerContext containerContext) {
+        return new WireMockContainer();
+    }
+
+    // A WireMock container to mock external HTTP calls in the tests
+    private static final class WireMockContainer extends GenericContainer<WireMockContainer> {
+        public WireMockContainer() {
+            // Configure the Docker image
+            super("wiremock/wiremock:3.13.0");
+            // Configure the network alias for communication between the containers
+            withNetworkAliases("wiremock");
+            // Configure the ports to expose
+            withExposedPorts(8080);
+            // Configure the logger
+            withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("tc.wiremock"), true));
+            // Configure the wait strategy to ensure that the container is ready before running the tests
+            waitingFor(
+                    Wait.forHttp("/__admin/mappings").forPort(8080).withMethod("GET").forStatusCode(200));
+            // Custom container-specific configuration
+            withCopyFileToContainer(
+                    // Copy the WireMock mapping file for the HTTP stubs to the container
+                    MountableFile.forClasspathResource("/wiremock/mapping.json"),
+                    "/home/wiremock/mappings/mapping.json");
+        }
+    }
+}
+```
+
+Register the container provider using the Java ServiceLoader mechanism by creating a file
+`io.camunda.process.test.api.runtime.CamundaProcessTestContainerProvider` in the `src/test/resources/META-INF/services`
+directory of your project and adding the fully qualified name of the container provider implementation:
+
+```
+com.example.WireMockContainerProvider
+```
+
+In the `/camunda-container-runtime.properties` configuration file, we use a connector secret to bind the connector task
+to the WireMock container using its network alias `wiremock` and the exposed port `8080`.
+
+```properties
+connectorsEnabled=true
+connectorsSecrets.BASE_URL=http://wiremock:8080
+```
+
+Alternatively, you can register the container provider on the JUnit extension using the fluent builder:
+
+```java
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+  @RegisterExtension
+  private static final CamundaProcessTestExtension EXTENSION =
+          new CamundaProcessTestExtension()
+                  .withContainerProvider(new WireMockContainerProvider())
+                  .withConnectorsEnabled(true)
+                  .withConnectorsSecret("BASE_URL", "http://wiremock:8080");
+}
+```
+
+</TabItem>
+
+</Tabs>
+
 ## Remote runtime
 
 Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a
@@ -382,7 +607,7 @@ tests. Keep in mind that CPT automatically deletes all data between test runs to
 - Expose the management API port (`9600`) to delete the data between test runs (by default for a local Camunda 8 Run)
 - Enable the management clock endpoint to allow clock manipulations
 
-You can [configure Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#configuration-options) by
+You can [configure Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#configuration-options) by
 defining a `application.yaml` file with:
 
 ```yaml
@@ -441,9 +666,9 @@ public class MyProcessTest {
 
     @RegisterExtension
     private static final CamundaProcessTestExtension EXTENSION =
-        new CamundaProcessTestExtension()
-            // Switch from a managed to a remote runtime
-            .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE);
+            new CamundaProcessTestExtension()
+                    // Switch from a managed to a remote runtime
+                    .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE);
 }
 ```
 
@@ -512,17 +737,17 @@ public class MyProcessTest {
 
     @RegisterExtension
     private static final CamundaProcessTestExtension EXTENSION =
-        new CamundaProcessTestExtension()
-            .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE)
-            // Change the connection (default: Camunda 8 Run)
-            .withRemoteCamundaClientBuilderFactory(() -> CamundaClient.newClientBuilder()
-                    .restAddress(URI.create("http://0.0.0.0:8080"))
-                    .grpcAddress(URI.create("http://0.0.0.0:26500"))
-            )
-            .withRemoteCamundaMonitoringApiAddress(URI.create("http://0.0.0.0:9600"))
-            .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"))
-            // Change the connection timeout (default: PT1M)
-            .withRemoteRuntimeConnectionTimeout(Duration.ofMinutes(1));
+            new CamundaProcessTestExtension()
+                    .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE)
+                    // Change the connection (default: Camunda 8 Run)
+                    .withRemoteCamundaClientBuilderFactory(() -> CamundaClient.newClientBuilder()
+                            .restAddress(URI.create("http://0.0.0.0:8080"))
+                            .grpcAddress(URI.create("http://0.0.0.0:26500"))
+                    )
+                    .withRemoteCamundaMonitoringApiAddress(URI.create("http://0.0.0.0:9600"))
+                    .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"))
+                    // Change the connection timeout (default: PT1M)
+                    .withRemoteRuntimeConnectionTimeout(Duration.ofMinutes(1));
 }
 ```
 

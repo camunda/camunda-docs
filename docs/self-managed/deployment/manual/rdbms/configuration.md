@@ -11,7 +11,7 @@ Configure RDBMS secondary storage drivers, connections, and initial schema for *
 
 - **Supported RDBMS**: See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 - **JDBC drivers**: PostgreSQL, MariaDB, SQL Server, and H2 are bundled. Oracle and MySQL must be user-supplied.
-- **Java 21+**: Required for Orchestration Cluster components (Zeebe, Operate, Tasklist). Management Identity remains Java 17+. See [supported environments](/reference/supported-environments.md).
+- **Java 21+**: Required for Orchestration Cluster components (Zeebe, Operate, Tasklist, Identity). Management Identity remains Java 17+. See [supported environments](/reference/supported-environments.md).
 - **Database user**: Needs DDL permissions (CREATE TABLE, ALTER TABLE, DROP TABLE) for schema initialization.
 
 ## JDBC driver management
@@ -95,19 +95,9 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_AUTO_DDL=false
 
 Then apply SQL/Liquibase scripts manually using your DBA tools. See [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
-## Orchestration Cluster configuration
+## Orchestration Cluster connection parameters
 
-The Orchestration Cluster uses a single RDBMS configuration shared across the orchestration services and the UIs that read from secondary storage.
-
-### Connection parameters
-
-All orchestration services and UIs share the same database connection:
-
-```bash
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda"
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME="camunda"
-export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
-```
+The Orchestration Cluster uses a single RDBMS configuration shared across orchestration services and UIs that read from secondary storage. Set the connection properties as shown in [Step 2: Configure connection](#step-2-configure-connection) above.
 
 ### Zeebe exporter configuration
 
@@ -128,7 +118,7 @@ Liquibase is the recommended approach for schema management. It is supported for
 
 When Liquibase runs successfully, you'll see this log entry at INFO level:
 
-```
+```text
 [INFO] io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS with global table trimmedPrefix ''.
 ```
 

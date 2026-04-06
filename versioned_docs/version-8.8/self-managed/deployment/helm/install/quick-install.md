@@ -33,7 +33,7 @@ By default, the Camunda Helm chart uses Bitnami open-source images. For producti
 
 ## Orchestration Cluster only
 
-By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
+By default, the Helm chart deploys the Camunda orchestration cluster with **Basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
 
 1. **Create a namespace to install the platform on Kubernetes:**
 
@@ -116,11 +116,11 @@ The following components run outside the orchestration cluster and are disabled 
 - Management Identity
 - Keycloak
 
-These components do not support basic authentication, so you must use any OIDC provider. In the following example, we use Keycloak as a locally running OIDC provider. The values file will deploy all Camunda 8 components.
+These components do not support Basic authentication, so you must use any OIDC provider. In the following example, we use Keycloak as a locally running OIDC provider. The values file will deploy all Camunda 8 components.
 
 <!-- TODO: Add a suitable link to explain what a values.yaml file is. -->
 
-Because the default configuration of the Helm chart uses basic authentication, you need to create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration to:
+Because the default configuration of the Helm chart uses Basic authentication, you need to create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration to:
 
 - Enable Keycloak to provide another method of authentication via OIDC.
 - Enable other Camunda components that run alongside the orchestration cluster.
@@ -250,7 +250,7 @@ Installing all components in a cluster requires downloading all related Docker i
 
    ```bash
    helm install camunda camunda-platform \
-     --version 13.0.0 \
+     --version 13 \
      --namespace camunda \
      -f camunda-values.yaml
    ```
@@ -439,7 +439,7 @@ This command lists all available chart versions and their corresponding applicat
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub or use a mirror registry.
 - **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation.md).
 - **Image sources**: By default, the Helm chart uses Bitnami open-source images for infrastructure dependencies (PostgreSQL, Elasticsearch, Keycloak). For production environments, Camunda recommends using Bitnami Premium images for enhanced security and timely maintenance, such as faster availability of security patches. These images remain third-party components and do not change Camunda's support scope. For detailed information about image types, CVE handling policies, and installation procedures, see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
-- **Infrastructure deployment alternatives**: For production deployments, consider using [operator-based infrastructure deployment methods](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) with official operators for PostgreSQL, Elasticsearch, and Keycloak.
+- **Infrastructure deployment alternatives**: For production deployments, consider [deploying required dependencies with official operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch, and Keycloak.
 
 ## Next steps
 
@@ -448,7 +448,7 @@ This command lists all available chart versions and their corresponding applicat
 ## Additional resources
 
 <!-- TODO: Add links to the following:
-- Basic auth guide
+- Basic authentication guide
 - Enable Keycloak guide
 - Enable OIDC guide
 - Explanation of management/orchestration cluster -->

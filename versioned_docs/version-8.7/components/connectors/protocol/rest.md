@@ -8,7 +8,7 @@ description: Make a request to a REST API and use the response in the next steps
 :::caution
 If you use the REST connector, ensure you do not have any instance variable named in the list below:
 
-- `body`, `url`, `method`, `headers`, `authentication`, `queryParameters`, `connectionTimeoutInSeconds`, `readTimeoutInSeconds`, `writeTimeoutInSeconds`
+- `body`, `url`, `method`, `headers`, `authentication`, `queryParameters`, `connectionTimeoutInSeconds`, `readTimeoutInSeconds`
 
 :::
 
@@ -151,7 +151,7 @@ We advise you to keep your **Password** safe and avoid exposing it in the BPMN `
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_BASIC_SECRET`) so you can reference it later in the connector.
 
-### Configure Basic Authentication
+### Configure Basic authentication
 
 Select the **REST connector** and fill out the following properties under the **Authentication** section:
 

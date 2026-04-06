@@ -8,7 +8,7 @@ description: Make a request to a REST API and use the response in the next steps
 :::caution
 If you use the REST connector, ensure you do not have any process variable named in the list below:
 
-- `body`, `url`, `method`, `headers`, `authentication`, `queryParameters`, `connectionTimeoutInSeconds`, `readTimeoutInSeconds`, `writeTimeoutInSeconds`
+- `body`, `url`, `method`, `headers`, `authentication`, `queryParameters`, `connectionTimeoutInSeconds`, `readTimeoutInSeconds`
 
 :::
 
@@ -30,85 +30,7 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 ### Configure a proxy server in Self-Managed
 
-In Camunda Self-Managed you can configure the connector to use an HTTP or HTTPS proxy server.
-
-Depending on how you want the proxy to be used, configure it using either JVM properties or environment variables.
-
-The difference between these two configuration types is the scope of the configuration:
-
-| Configuration type                                                                        | Scope                                                                                                                                                  | Example                                                                                                                                                                                  |
-| :---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [JVM properties](https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html) | JVM, **the whole runtime** will be affected. **Any HTTP client** used internally (for example, in a connector, or the Zeebe client) might be affected. | `-Dhttp.proxyHost=proxy -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=OTHER_DOMAIN`                                                          |
-| Environment variables                                                                     | connector, **only the connector (and REST-based connectors)** will be affected                                                                         | `CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;` |
-
-:::note
-To ensure Camunda can properly access Camunda components when using JVM properties, non-proxy hosts must contain `camunda-platform-zeebe|camunda-platform-keycloak`.
-:::
-
-#### HTTP/HTTPS properties
-
-Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS protocol handler. A target URL such as `http://example.com` will use the HTTP protocol handler, while a target URL such as `https://example.com` will use the HTTPS protocol handler.
-
-##### JVM properties
-
-You can set the following standard JVM properties for HTTP and HTTPS:
-
-| Property (HTTP target URL) | Property (HTTPS target URL)                         | Description                                                                                                                                                                                                                                                                                                                     |
-| :------------------------- | :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `http.proxyHost`           | `https.proxyHost`                                   | The host name of the proxy server.                                                                                                                                                                                                                                                                                              |
-| `http.proxyPort`           | `https.proxyPort`                                   | The port number (default is 80).                                                                                                                                                                                                                                                                                                |
-| `http.nonProxyHosts`       | `http.nonProxyHosts` (similar to the HTTP property) | <p> _(optional)_ A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>\|</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
-
-Some HTTP clients might offer more properties to configure the proxy. For example, the [Apache HTTP client](https://hc.apache.org/httpcomponents-client-5.6.x/current/httpclient5/apidocs/org/apache/hc/client5/http/impl/classic/HttpClientBuilder.html) used in the REST connector offers the following properties:
-
-| Property (HTTP target URL) | Property (HTTPS target URL) | Description                                       |
-| :------------------------- | :-------------------------- | :------------------------------------------------ |
-| `http.proxyUser`           | `https.proxyUser`           | _(optional)_ The username to log in to the proxy. |
-| `http.proxyPassword`       | `https.proxyPassword`       | _(optional)_ The password to log in to the proxy. |
-
-##### Environment variables
-
-As an alternative to using JVM properties, the proxy settings can also be set with environment variables:
-
-| Property (HTTP target URL)       | Property (HTTPS target URL)                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| :------------------------------- | :-------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CONNECTOR_HTTP_PROXY_HOST`      | `CONNECTOR_HTTPS_PROXY_HOST`                                    | The host name of the proxy server.                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `CONNECTOR_HTTP_PROXY_PORT`      | `CONNECTOR_HTTPS_PROXY_PORT`                                    | The port number (default is 80).                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `CONNECTOR_HTTP_NON_PROXY_HOSTS` | `CONNECTOR_HTTP_NON_PROXY_HOSTS` (similar to the HTTP property) | <p> _(optional)_ A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>\|</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul>The REST connector will also use the exception list provided by the `http.nonProxyHosts` JVM property if existing.</p> |
-| `CONNECTOR_HTTP_PROXY_USER`      | `CONNECTOR_HTTPS_PROXY_USER`                                    | _(optional)_ The username to log in to the proxy.                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `CONNECTOR_HTTP_PROXY_PASSWORD`  | `CONNECTOR_HTTPS_PROXY_PASSWORD`                                | _(optional)_ The password to log in to the proxy.                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `CONNECTOR_HTTP_PROXY_SCHEME`    | `CONNECTOR_HTTPS_PROXY_SCHEME`                                  | _(optional)_ The scheme of the proxy server. This allows you to the `https` protocol to contact your proxy. The default is `http`.                                                                                                                                                                                                                                                                                                                |
-
-:::note
-The HTTPS properties also use the `http.nonProxyHosts` or `CONNECTOR_HTTP_NON_PROXY_HOSTS` property to specify non-proxy hosts.
-:::
-
-#### Learn how the proxy configuration works
-
-The process consists of two main steps: configuration and request handling.
-
-##### Set your configuration
-
-First, define how the proxy should behave.
-These are the available configuration options:
-
-- Enable or disable proxying.
-- Define which URLs should skip the proxy, listed as `nonProxyHosts`.
-- Define which URLs require authentication.
-
-##### Handle incoming requests
-
-When a URL request comes in, it’s handled according to your previously set configuration:
-
-1. Check if the proxy is enabled:
-   1. Yes: Proceed with proxying.
-   1. No: Do not proxy; the request is handled directly.
-1. Check if the site is listed in `nonProxyHosts`:
-   1. Yes: Do not proxy; the request bypasses the proxy.
-   1. No: Proceed with proxying.
-1. Check if the site requires authentication:
-   1. Yes: The request is proxied only if authentication succeeds; otherwise, it returns an authentication error.
-   1. No: The request is proxied normally.
+In Self-Managed environments, you can configure the connector runtime to route HTTP requests through a proxy server using JVM properties or environment variables. See [HTTP proxy configuration](/self-managed/components/connectors/http-proxy-configuration.md) for details.
 
 ### Authentication
 

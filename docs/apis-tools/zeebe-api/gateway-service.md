@@ -502,6 +502,7 @@ Returned if:
 
 - The given variables argument is not a valid JSON document; it is expected to be a valid
   JSON document where the root node is an object.
+- The given `businessId` exceeds the maximum length of 256 characters.
 - If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
 - If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
   - The tenant ID is blank (empty string, null)

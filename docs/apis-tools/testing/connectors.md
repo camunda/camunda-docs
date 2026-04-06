@@ -15,7 +15,7 @@ by [completing connector jobs](utilities.md#mock-job-workers) with an expected r
 :::note
 The instructions on this page are based on the default Testcontainer runtime. If you are using a remote runtime, consult
 the relevant distribution documentation, such
-as [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#use-built-in-and-custom-connectors).
+as [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#use-built-in-and-custom-connectors).
 :::
 
 ## Enable connectors

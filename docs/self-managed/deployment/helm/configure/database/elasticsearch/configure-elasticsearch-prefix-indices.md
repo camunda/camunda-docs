@@ -52,7 +52,7 @@ Starting with Camunda 8.8, index prefixes are configured per exporter. Camunda u
 
 ### Camunda Exporter (default)
 
-The Camunda Exporter is enabled by default. It creates Orchestration Cluster indices used by the Orchestration Cluster (Operate and Tasklist).
+The Camunda Exporter is enabled by default. It creates Orchestration Cluster indices used by Orchestration Cluster applications and APIs, including Operate and Tasklist.
 
 - **Helm configuration**: `orchestration.index.prefix`
 - **Default value**: `""` (empty string, meaning no prefix)

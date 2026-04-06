@@ -35,7 +35,7 @@ To enter modification mode:
 
 1. On the **Processes** page, find the process instance you want to modify in the **Process Instances** table.
 2. Click the process instance key. This brings you to the instance detail page.
-3. In the header, click the modify icon.
+3. In the header, select **Modify**.
 4. In the modal, click **Continue**.
 
 The UI will change when you enter modification mode, including a blue banner at the top and two buttons for applying or discarding modifications at the bottom.
@@ -88,7 +88,7 @@ During modification mode it is not possible to edit existing variables in existi
 
 ## View summary of pending modifications
 
-To display the pending modifications, click **Apply Modifications** in the footer. A modal will be displayed where all modifications can be seen.
+To display the pending modifications, click **Review Modifications** in the footer. A modal will be displayed where all modifications can be seen.
 
 Within this modal, you can:
 
@@ -107,4 +107,5 @@ If you click the **Apply** button from the summary modal as described [here](#vi
 
 ## Next steps
 
+- [Learn how to audit process instance operations](./audit-operations.md).
 - [Learn how to move a batch of process instances](./process-instance-batch-modification.md)

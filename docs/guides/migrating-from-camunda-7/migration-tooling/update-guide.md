@@ -16,7 +16,8 @@ Migration Tooling follows [semantic versioning](https://semver.org/).
 Before you update:
 
 1. Check the [version compatibility matrix](version-compatibility.md) to confirm your Migration Tooling version is compatible with your Camunda 7 and Camunda 8 versions.
-2. Review the [Migration Tooling release notes](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases) for your target version.
+2. Apply database schema updates for the new version, if required. Check the release notes for details.
+3. Review the [Migration Tooling release notes](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases) for your target version.
 
 ## Breaking changes by version
 
@@ -24,8 +25,12 @@ Before you update:
 
 ### Version 0.2.x to 0.3.0
 
-**Release date:** TBD \
+**Release date:** 14th of April 2026 \
 **Camunda 8 compatibility:** 8.9.x
+
+#### Data Migrator: Database schema update
+
+Run the Data Migrator with `camunda.migrator.auto-ddl: true` configuration to update the schema.
 
 #### Data Migrator: Entity Interceptor API changes
 

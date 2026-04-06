@@ -1,10 +1,12 @@
 ---
 id: supported-environments
 title: "Supported environments"
-description: "Find out where to run Camunda 8 components for SaaS and Self-Managed."
+description: "Learn which browsers, operating systems, clients, deployment options, and component requirements are tested and supported for compatibility with Camunda 8."
 ---
 
-The following browsers, operating systems, clients, deployment options, and component requirements are tested and supported for compatibility with Camunda 8.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## About supported environments
 
@@ -15,7 +17,7 @@ You can:
 - [Raise a feature request](/reference/contact.md) that will be evaluated by our product teams to provide official support from Camunda.
 - [Make a help request](/reference/contact.md) to work with Camunda consulting services.
 
-Recommendations are denoted with [recommended], however, other listed options are also supported.
+Recommendations are denoted with [recommended]. Other listed options are also supported.
 
 :::note Minimum versions
 The versions listed on this page are the minimum version required if appended with a `+`.
@@ -47,7 +49,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Camunda 8 Self-Managed
 
-We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/setup/overview.md) for this. Please follow the [Installation Guide](/self-managed/setup/overview.md) to learn more about installation possibilities.
+We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm charts](/self-managed/setup/overview.md) for this. See the [installation guide](/self-managed/setup/overview.md) to learn more about the available installation options.
 
 ### Deployment options
 
@@ -91,7 +93,7 @@ If you want to use another NFS, it must meet these requirements:
 - Be POSIX-compliant.
 - Never reorder file operations.
 - Retry I/O operations across temporary network failures, instead of failing on timeout.
-- Doesn't surface network‑related failures in the client process.
+- Do not surface network-related failures in the client process.
 - **Only one container may mount the disk in write mode at a time.** Two containers mounting the same disk in write mode could cause data corruption.
 
 #### Performance
@@ -110,14 +112,14 @@ Camunda Helm chart version `14.x.x` works with Camunda version `8.9.x`. Check th
 
 Requirements for components are as follows:
 
-| Component                                                  | Java version | Other requirements                                                                                                                                                                                                                                                                                                                                                                      |
-| :--------------------------------------------------------- | :----------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21–25 | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li><li>For supported relational databases and versions when using an RDBMS (for example, as secondary storage), see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                       |
-| Optimize                                                   | OpenJDK 21–25 | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li></ul>                                                                                                                                                                                                                                                                       |
-| Connectors                                                 | OpenJDK 21–25 | –                                                                                                                                                                                                                                                                                                                                                                                       |
-| Management Identity                                        | OpenJDK 17+  | <ul><li>Keycloak 25.x, 26.x</li><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li><li>PostgreSQL is required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)</li></ul> |
-| Web Modeler                                                | –            | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                                                                                                                                                                                 |
-| Self-Managed Console                                       | –            | –                                                                                                                                                                                                                                                                                                                                                                                       |
+| Component                                                  | Java version  | Other requirements                                                                                                                                                                                                                                                                                                                                                                |
+| :--------------------------------------------------------- | :------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21–25 | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li><li>For supported relational databases and versions when using an RDBMS (for example, as secondary storage), see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                 |
+| Optimize                                                   | OpenJDK 21–25 | <ul><li>Elasticsearch 9.2+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.4+</li><li>OpenSearch 2.19+</li></ul>                                                                                                                                                                                                                                                                 |
+| Connectors                                                 | OpenJDK 21–25 | –                                                                                                                                                                                                                                                                                                                                                                                 |
+| Management Identity                                        | OpenJDK 17+   | <ul><li>Keycloak 26.x</li><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li><li>PostgreSQL is required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)</li></ul> |
+| Web Modeler                                                | –             | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                                                                                                                                                                           |
+| Self-Managed Console                                       | –             | –                                                                                                                                                                                                                                                                                                                                                                                 |
 
 :::info Optimize compatibility
 When running Optimize, make sure you use an [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) version that is compatible with your Optimize version.
@@ -139,9 +141,9 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 
 The following matrix shows which component versions work together. Components within the same column must share the same `minor` and `patch` version.
 
-| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                     |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
-| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                            | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x                                               | Web Modeler 8.9.x<br/>Desktop Modeler TBD |
+| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                    |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------- |
+| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x                                               | Web Modeler 8.9.x<br/>Desktop Modeler TBD |
 
 :::note
 You can use newer versions of Desktop and Web Modeler with older versions of the Orchestration Cluster.

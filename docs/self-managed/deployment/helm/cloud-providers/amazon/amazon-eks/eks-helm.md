@@ -30,7 +30,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
-- A namespace to host the Camunda Platform.
+- A namespace to host Camunda.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
@@ -52,7 +52,7 @@ In addition to the infrastructure diagram provided in the [Terraform setup guide
 
 The architecture includes the following core components:
 
-- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Admin)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
 To demonstrate how to deploy with a custom domain, the following stack is also included:
@@ -118,7 +118,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 If you do not have a domain name, external access to Camunda 8 web endpoints from outside the AWS VPC will not be possible. In this case, you may skip the DNS setup and proceed directly to [deploying Camunda 8 via Helm charts](#deploy-camunda-8-via-helm-charts).
 
-Alternatively, you can use `kubectl port-forward` to access the Camunda platform without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+Alternatively, you can use `kubectl port-forward` to access Camunda without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 Throughout the rest of this installation guide, we will refer to configurations as **"With domain"** or **"Without domain"** depending on whether the application is exposed via a domain.
 :::
@@ -225,7 +225,7 @@ If you're using an external Aurora PostgreSQL database, you must create the indi
 - **Terraform**: See [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) in the Terraform setup guide.
 - **eksctl**: See [Create the databases](./eksctl.md#create-the-databases) in the eksctl guide.
 
-Without this step, the Camunda components will fail to connect to their databases.
+Without this step, Management Identity and Web Modeler will fail to connect to their databases.
 :::
 
 <Tabs groupId="values">
@@ -319,12 +319,19 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
 
-#### Use internal Elasticsearch instead of the managed OpenSearch
+#### Secondary storage options
 
-If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment. This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
+This guide includes a managed Amazon OpenSearch example path for secondary storage. Choose the backend that fits your requirements:
 
-:::tip Alternative: Operator-based Elasticsearch deployment
-Instead of using Bitnami subcharts for internal Elasticsearch, consider deploying [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
+- **Managed OpenSearch**: Use the managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
+- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+
+#### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
+
+For advanced deployments, you can disable managed OpenSearch and enable the Elasticsearch deployment from the Camunda Helm chart:
+
+:::caution Deprecated path
+The Helm-chart Elasticsearch deployment uses deprecated Bitnami subcharts. Prefer managed Elasticsearch/OpenSearch services for long-term deployments, or deploy [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) if you need operator-based Elasticsearch with automated scaling, upgrades, and built-in security.
 :::
 
 <details>
@@ -408,7 +415,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
@@ -461,9 +468,9 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
   - Replace `OPENSEARCH_HOST` with your OpenSearch endpoint URL.
   - Replace `OPENSEARCH_ROLE_ARN` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
 
-  :::note Security of basic auth usage
+  :::note Security of Basic authentication usage
 
-  **This example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
+  **This example uses Basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
 
   :::
 
@@ -503,13 +510,13 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `https://${CAMUNDA_DOMAIN}/admin` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 </TabItem>
 
@@ -544,13 +551,13 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `http://localhost:8080/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `http://localhost:8080/admin` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 <PortForwardServices />
 

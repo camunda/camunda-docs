@@ -7,12 +7,6 @@ const configRefStrategies = {
   "camunda-spring-boot-starter": camundaSpringBootStarter,
 };
 
-const mapRegex = /java.util.Map<(.*),(.*)>/;
-
-const keyNames = {
-  "camunda.client.worker.override": "jobType",
-};
-
 const typeReplacements = {
   "java.lang.String": "string",
   "java.nio.file.Path": "file",
@@ -30,9 +24,11 @@ const typeReplacements = {
   "java.net.URL": "url",
   "org.springframework.boot.actuate.endpoint.Access":
     "enum[none, read_only, unrestricted]",
+  "io.camunda.client.api.command.enums.TenantFilter":
+    "enum[assigned, provided]",
 };
 
-const preserveGroups = ["camunda.client.worker.override"];
+const preserveGroups = [];
 const preserveDeprecatedGroups = [
   "camunda.client.zeebe.override",
   "zeebe.client.worker.override",
@@ -187,7 +183,7 @@ const preGenerateDocs = (config) => {
   );
   console.log(`Found ${complexProperties.length} complex properties`);
   complexProperties.forEach((property) => {
-    console.log(`Handling complex property ${JSON.stringify(property)}`);
+    console.log(`Handling complex property ${property.name}`);
     const properties = config.additionalProperties.properties?.filter(
       (p) => p.name === property.name
     )[0];
@@ -208,15 +204,37 @@ const preGenerateDocs = (config) => {
     });
   });
 
+  config.metadata.groups.forEach((group) => {
+    if (group.description) {
+      group.description = group.description
+        .replaceAll(/<p>/g, "\n\n")
+        .replaceAll(/<code> /g, "`")
+        .replaceAll(/<code>/g, "`")
+        .replaceAll(/ <\/code>/g, "`")
+        .replaceAll(/<\/code>/g, "`")
+        .replaceAll(/<br>/g, "\n");
+    }
+  });
+
   config.metadata.properties.forEach((property) => {
     if (property.type in typeReplacements) {
       property.type = typeReplacements[property.type];
     } else {
       console.log("No type replacement for " + property.type);
+      process.exit();
     }
     property.defaultValue = JSON.stringify(property.defaultValue);
     if (property.defaultValue === undefined) {
       property.defaultValue = "null";
+    }
+    if (property.description) {
+      property.description = property.description
+        .replaceAll(/<p>/g, "\n\n")
+        .replaceAll(/<code> /g, "`")
+        .replaceAll(/<code>/g, "`")
+        .replaceAll(/ <\/code>/g, "`")
+        .replaceAll(/<\/code>/g, "`")
+        .replaceAll(/<br>/g, "\n");
     }
     property.env = property.name
       .toUpperCase()
@@ -228,7 +246,8 @@ const preGenerateDocs = (config) => {
       .replaceAll(/\{/g, "")
       .replaceAll(/\}/g, "")
       .replaceAll(/\</g, "")
-      .replaceAll(/\>/g, "");
+      .replaceAll(/\>/g, "")
+      .replaceAll(/\|/g, "");
     if (property.deprecation && property.deprecation.replacement) {
       property.deprecation.replacementEnv = property.deprecation.replacement
         .toUpperCase()
@@ -240,7 +259,8 @@ const preGenerateDocs = (config) => {
         .replaceAll(/\{/g, "")
         .replaceAll(/\}/g, "")
         .replaceAll(/\</g, "")
-        .replaceAll(/\>/g, "");
+        .replaceAll(/\>/g, "")
+        .replaceAll(/\|/g, "");
     }
   });
 };

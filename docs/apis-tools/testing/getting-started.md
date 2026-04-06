@@ -63,6 +63,20 @@ Add the following dependency to your Maven project:
 </dependency>
 ```
 
+### Spring Boot 3 support
+
+If you use the [dedicated Spring Boot 3 starter](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules) (`camunda-spring-boot-3-starter`),
+you must also use the dedicated Spring Boot 3 test artifact:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-process-test-spring-boot-3</artifactId>
+  <version>${camunda.version}</version>
+  <scope>test</scope>
+</dependency>
+```
+
 </TabItem>
 
 <TabItem value='java-client'>
@@ -204,6 +218,11 @@ public class MyProcessTest {
 </TabItem>
 
 </Tabs>
+
+:::tip Shared runtime
+If you use the same runtime configuration for all test classes, you can use
+a [shared runtime](configuration.md#shared-runtime) to speed up the test execution.
+:::
 
 ### Deploy resources
 

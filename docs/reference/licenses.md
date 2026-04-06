@@ -1,10 +1,12 @@
 ---
 id: licenses
 title: "Licensing"
-description: "Licensing information for components of Camunda 8"
+description: "Licensing information for all Camunda 8 Components version 8.6 and higher."
 ---
 
-Licensing information for all Camunda 8 Components version 8.6 and higher.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Zeebe, Operate, Tasklist, Identity, and Optimize
 

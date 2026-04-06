@@ -4,7 +4,7 @@ title: "Core settings and features"
 description: "The central documentation hub for shared configuration and conceptual topics across the Camunda 8 Orchestration Cluster."
 ---
 
-Learn about unified configuration for the Camunda 8 Orchestration Cluster components Operate, Tasklist, Zeebe, and Identity.
+Learn about unified configuration for the Camunda 8 Orchestration Cluster components Operate, Tasklist, Zeebe, and Admin (formerly Orchestration Cluster Identity).
 
 ## About Orchestration Cluster configuration
 
@@ -26,6 +26,6 @@ This section includes:
 Only the first partial set of unified configuration properties is introduced in Camunda 8.8.
 
 - All remaining unified property changes will be completed by Camunda 8.9.
-- This remaining work will result in future breaking changes. For example, the secondary database properties will be unified into a secondary-storage properties section.
+- This remaining work will result in future breaking changes. For example, the secondary database properties will be unified into a secondary-storage properties section, and new application launch modes (`camunda.mode`) and webapps toggles (`camunda.webapps.*`) are part of the completed unified configuration.
 
 :::
