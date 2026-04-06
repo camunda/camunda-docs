@@ -35,6 +35,12 @@ export const fundamentalCards = [
     image: IconAoAgentImg,
     description: "Monitor your AI agents with Operate.",
   },
+  {
+    link: "../long-term-memory-ai-agents/",
+    title: "Add long-term memory",
+    image: IconAoAgentImg,
+    description: "Add long-term memory to your AI agents using RAG.",
+  },
 ];
 
 // Recommendation cards on introduction page

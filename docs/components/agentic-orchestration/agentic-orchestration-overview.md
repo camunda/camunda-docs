@@ -36,9 +36,9 @@ Get started with Camunda agentic orchestration by building and running your firs
 
 ## Learn the fundamentals
 
-Understand the fundamental concepts of Camunda agentic orchestration.
+Understand the fundamental concepts of Camunda agentic orchestration, learn how to extend your agents with long-term memory using RAG, and monitor and improve their performance over time.
 
-<AoGrid ao={fundamentalCards} columns={3}/>
+<AoGrid ao={fundamentalCards} columns={4}/>
 
 ## Explore further resources
 
