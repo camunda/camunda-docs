@@ -47,7 +47,7 @@ After completing this guide, you will be able to test AI agent processes whose c
 - You have [Camunda Process Test set up](/apis-tools/testing/getting-started.md).
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process, **AI Agent Chat With Tools**. WCompleting that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process, **AI Agent Chat With Tools**. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
 :::
 
 [Judge assertions](#step-2-configure-the-llm-provider-and-connectors) require an LLM provider. CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured support for [several providers](/apis-tools/testing/configuration.md#judge-configuration). LangChain4j requires Java 17+.
