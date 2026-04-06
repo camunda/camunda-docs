@@ -413,18 +413,6 @@ Retrieves the current authenticated user.
 
 **Returns:** `Task<CamundaUserResult>`
 
-**Example**
-
-```csharp
-private static async Task GetAuthenticationExample()
-{
-    using var client = CamundaClient.Create();
-
-    var user = await client.GetAuthenticationAsync();
-    Console.WriteLine($"Authenticated as: {user.Username}");
-}
-```
-
 #### GetLicenseAsync(CancellationToken)
 
 ```csharp
@@ -454,24 +442,6 @@ Obtains the current topology of the cluster the gateway is part of.
 | `ct`      | `CancellationToken` |             |
 
 **Returns:** `Task<TopologyResponse>`
-
-**Example**
-
-```csharp
-private static async Task GetTopologyExample()
-{
-    using var client = CamundaClient.Create();
-
-    var topology = await client.GetTopologyAsync();
-
-    Console.WriteLine($"Cluster size: {topology.ClusterSize}");
-    Console.WriteLine($"Partitions: {topology.PartitionsCount}");
-    foreach (var broker in topology.Brokers)
-    {
-        Console.WriteLine($"  Broker {broker.NodeId}: {broker.Host}:{broker.Port}");
-    }
-}
-```
 
 #### PinClockAsync(ClockPinRequest, CancellationToken)
 
@@ -533,25 +503,6 @@ and calls with the loaded content.
 | `ct`                | `CancellationToken` | Cancellation token.                                                    |
 
 **Returns:** `Task<ExtendedDeploymentResponse>` — An with typed access to deployed artifacts.
-
-**Example**
-
-```csharp
-private static async Task DeployResourcesFromFilesExample()
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.DeployResourcesFromFilesAsync(
-        new[] { "order-process.bpmn", "email-connector.bpmn" }
-    );
-
-    Console.WriteLine($"Deployment key: {result.DeploymentKey}");
-    foreach (var process in result.Processes)
-    {
-        Console.WriteLine($"  Process: {process.ProcessDefinitionId} v{process.ProcessDefinitionVersion}");
-    }
-}
-```
 
 #### DeleteResourceAsync(ResourceKey, DeleteResourceRequest, CancellationToken)
 
@@ -715,7 +666,7 @@ public Task<GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(DateTime
 ```
 
 Global job statistics
-Returns global aggregated counts for jobs. Optionally filter by the creation time window and/or jobType.
+Returns global aggregated counts for jobs. Filter by the creation time window (required) and optionally by jobType.
 
 | Parameter     | Type                                                 | Description |
 | ------------- | ---------------------------------------------------- | ----------- |
@@ -1965,6 +1916,30 @@ Search for user task audit logs based on given criteria.
 
 **Returns:** `Task<AuditLogSearchQueryResult>`
 
+#### SearchUserTaskEffectiveVariablesAsync(UserTaskKey, SearchUserTaskEffectiveVariablesRequest, bool?, ConsistencyOptions<VariableSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Search user task effective variables
+Search for the effective variables of a user task. This endpoint returns deduplicated
+variables where each variable name appears at most once. When the same variable name exists
+at multiple scope levels in the scope hierarchy, the value from the innermost scope (closest
+to the user task) takes precedence. This is useful for retrieving the actual runtime state
+of variables as seen by the user task. By default, long variable values in the response are
+truncated.
+
+| Parameter        | Type                                            | Description |
+| ---------------- | ----------------------------------------------- | ----------- |
+| `userTaskKey`    | `UserTaskKey`                                   |             |
+| `body`           | `SearchUserTaskEffectiveVariablesRequest`       |             |
+| `truncateValues` | `Nullable<Boolean>`                             |             |
+| `consistency`    | `ConsistencyOptions<VariableSearchQueryResult>` |             |
+| `ct`             | `CancellationToken`                             |             |
+
+**Returns:** `Task<VariableSearchQueryResult>`
+
 #### SearchUserTaskVariablesAsync(UserTaskKey, SearchUserTaskVariablesRequest, bool?, ConsistencyOptions<VariableSearchQueryResult>?, CancellationToken)
 
 ```csharp
@@ -1972,9 +1947,13 @@ public Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey 
 ```
 
 Search user task variables
-Search for user task variables based on given criteria. This endpoint returns all variables
-visible from the user task's scope, including variables from parent scopes in the scope
-hierarchy. By default, long variable values in the response are truncated.
+Search for user task variables based on given criteria. This endpoint returns all variable
+documents visible from the user task's scope, including variables from parent scopes in the
+scope hierarchy. If the same variable name exists at multiple scope levels, each scope's
+variable is returned as a separate result. Use the
+`/user-tasks/{userTaskKey}/effective-variables/search` endpoint to get deduplicated variables
+where the innermost scope takes precedence. By default, long variable values in the response
+are truncated.
 
 | Parameter        | Type                                            | Description |
 | ---------------- | ----------------------------------------------- | ----------- |
