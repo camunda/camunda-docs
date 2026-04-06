@@ -267,7 +267,7 @@ Choose **H2** for quick local development and **Elasticsearch** for production-l
 
 ## Operate limitations in 8.9
 
-Operate can run against the default H2 store, but some user-facing Operate features are intentionally limited in this alpha.
+Operate can run against the default H2 store, but some user-facing Operate features are intentionally limited:
 
 - Operate may not provide complete analytics, advanced search, or long-running query features when backed by H2.
 - Performance and scaling behavior when using H2 differs from Elasticsearch in production scenarios.
