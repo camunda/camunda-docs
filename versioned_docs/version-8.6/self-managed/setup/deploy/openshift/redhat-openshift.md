@@ -50,7 +50,7 @@ Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full 
 - [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
-- A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
+- A namespace to host Camunda, in this guide we will reference `camunda` as the target namespace.
 
 ## Deploy Camunda 8 via Helm charts
 
@@ -234,7 +234,7 @@ If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](http
   <TabItem value="no-ingress" label="No Ingress">
 If you do not have a domain name or do not intend to use one for your Camunda 8 deployment, external access to Camunda 8 web endpoints from outside the OpenShift cluster will not be possible.
 
-However, you can use `kubectl port-forward` to access the Camunda platform without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+However, you can use `kubectl port-forward` to access Camunda without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Update your `values.yml` file with the following:
 
@@ -318,7 +318,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 

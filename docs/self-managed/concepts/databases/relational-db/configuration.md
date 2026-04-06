@@ -241,6 +241,14 @@ camunda.data.secondary-storage.rdbms.history.*
 | `process-cache.max-size`         | Maximum number of process definitions held in the exporter cache | 1000    |
 | `batch-operation-cache.max-size` | Maximum number of cached batch operations                        | 1000    |
 
+## Multi-region support
+
+The RDBMS Exporter currently has no multi-region support. Only one RDBMS Exporter instance and one JDBC database connection can be configured per Orchestration Cluster.
+
+:::note
+Multi-region support for the RDBMS Exporter is not planned at this time. For multi-region setups, multi-region replication must be handled within the RDBMS itself, for example using a managed database service such as AWS Aurora.
+:::
+
 ## Usage with AWS Aurora PostgreSQL
 
 Camunda supports **PostgreSQL** as a secondary storage backend.  

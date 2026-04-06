@@ -23,7 +23,7 @@ You should **only** disable/run without secondary storage in limited scenarios, 
 - For Helm deployments, Optimize is also disabled by default when secondary storage is not configured.
 - For Docker or manual deployments, you must **explicitly disable Optimize** in your configuration, as it cannot function without secondary storage.
 
-This setup provides core process execution and orchestration capabilities through Zeebe, but excludes the full Camunda platform experience, such as analytics, search, and human-task management.
+This setup provides core process execution and orchestration capabilities through Zeebe, but excludes the full Camunda experience, such as analytics, search, and human-task management.
 
 ## Enable **no secondary storage** mode
 

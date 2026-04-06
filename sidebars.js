@@ -1111,6 +1111,7 @@ module.exports = {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
+            "components/console/job-dashboard/job-dashboard",
             "components/console/manage-clusters/cluster-connectors",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
@@ -1448,7 +1449,7 @@ module.exports = {
           label: "8.9",
           link: {
             type: "doc",
-            id: "reference/announcements-release-notes/890/890-announcements",
+            id: "reference/announcements-release-notes/890/whats-new-in-89",
           },
           items: [
             "reference/announcements-release-notes/890/whats-new-in-89",

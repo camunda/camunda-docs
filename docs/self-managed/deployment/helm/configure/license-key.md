@@ -15,13 +15,17 @@ Camunda 8 components consume enterprise license information through the followin
 
 ```yaml
 global:
+  ## License configuration.
+  ## @extra global.license
   license:
-    ## @param global.license.key if set, it will be exposed as "CAMUNDA_LICENSE_KEY" in all components, consumable as ENV_VAR.
-    key:
-    ## @param global.license.existingSecret you can provide an existing secret name for Camunda license secret.
-    existingSecret:
-    ## @param global.license.existingSecretKey you can provide the key within the existing secret object for Camunda license key.
-    existingSecretKey:
+    ## @extra global.license.secret configuration to provide the license secret.
+    secret:
+      ## @param global.license.secret.inlineSecret can be used to provide the license as a plain-text value for non-production usage.
+      inlineSecret: ""
+      ## @param global.license.secret.existingSecret can be used to reference an existing Kubernetes Secret containing the license.
+      existingSecret: ""
+      ## @param global.license.secret.existingSecretKey defines the key within the existing secret object.
+      existingSecretKey: ""
 ```
 
 ### Provide the key directly
@@ -31,10 +35,11 @@ Enter your license key directly in `global.license.key`.
 ```yaml
 global:
   license:
-    key: >-
-      --------------- BEGIN CAMUNDA LICENSE KEY ---------------
-      [...]
-      ---------------  END CAMUNDA LICENSE KEY  ---------------
+    secret:
+      inlineSecret: >-
+        --------------- BEGIN CAMUNDA LICENSE KEY ---------------
+        [...]
+        ---------------  END CAMUNDA LICENSE KEY  ---------------
 ```
 
 ### Provide the key with a secret
@@ -58,12 +63,13 @@ For more details on working with secrets, see [Secret management](/self-managed/
 
 2. Reference the secret in `values.yaml`:
 
-```yaml
-global:
-  license:
-    existingSecret: "camunda-license"
-    existingSecretKey: "key"
-```
+   ```yaml
+   global:
+     license:
+       secret:
+         existingSecret: "camunda-license"
+         existingSecretKey: "key"
+   ```
 
 :::note
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and log warnings. These warnings do not impact startup or functionality, except that Web Modeler is limited to five users.
