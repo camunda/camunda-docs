@@ -27,7 +27,7 @@ jobs:
         run: |
           OUTPUT=$(node .github/workflows/check-versions/build-messages.js "$RUNNER_TEMP/missing-changes.json")
           echo "MESSAGES<<EOF" >> $GITHUB_ENV
-          echo $OUTPUT >> $GITHUB_ENV
+          printf '%s\n' "$OUTPUT" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Comment on PR if version updates are potentially missing

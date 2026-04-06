@@ -9,8 +9,12 @@ const missingChangesRaw = missingChangesPath
   ? fs.readFileSync(missingChangesPath, "utf8")
   : process.env.MISSING_CHANGES || "";
 
+const missingChangesJson = missingChangesRaw.trim();
+
 /** @type {Array<import("./identify-missing-changes").SuggestedChanges>} */
-const missingChanges = JSON.parse(missingChangesRaw.trim());
+const missingChanges = JSON.parse(
+  missingChangesJson === "" ? "[]" : missingChangesJson
+);
 
 missingChanges.forEach((missingChange) => {
   console.log(`These files were changed only in *${

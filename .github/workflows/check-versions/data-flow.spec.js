@@ -189,8 +189,8 @@ describe("check-versions data flow (file-based)", () => {
       expect(messages).toContain("docs/");
       expect(messages).toContain("versioned_docs/version-8.8/");
 
-      // Verify the output JSON is large enough that it would have
-      // overflowed ARG_MAX (~2MB limit) if passed via env var.
+      // Verify the output JSON is large enough to exercise a realistic
+      // large-payload scenario if it were passed via an environment variable.
       const outputSize = Buffer.byteLength(identifyOutput, "utf8");
       expect(outputSize).toBeGreaterThan(100_000); // >100KB
     });
