@@ -80,6 +80,14 @@ jobs:
 
           echo "Copied $(find "$TARGET" -name '*.md' | wc -l) markdown files → ${{ steps.resolve.outputs.docs_root }}"
 
+      - name: Copy SDK examples for code samples
+        run: |
+          EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-js/examples"
+          rm -rf "$EXAMPLES_TARGET"
+          mkdir -p "$EXAMPLES_TARGET"
+          cp -R ts-sdk/examples/* "$EXAMPLES_TARGET/"
+          echo "Copied TypeScript SDK examples → .sdk-repos/"
+
       - name: Format generated docs with Prettier
         working-directory: docs
         run: |

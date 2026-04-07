@@ -9,9 +9,6 @@
 .cache-loader
 .vscode/*
 
-# SDK example repos (checked out by CI for sdkExamples)
-.sdk-repos/
-
 # Misc
 .DS_Store
 .env.local
