@@ -92,7 +92,7 @@ If your AI agent tools use different outbound connectors, adjust `CONNECTOR_OUTB
 
 ### Configure the LLM provider
 
-Configure the judge provider to match the model provider used by your AI agent process.
+Configure the LLM provider for the judge. The judge does not need the same provider or model as your AI agent — a lighter model often works well since the judge context is much smaller.
 
 <Tabs groupId="judge-provider" defaultValue="amazon-bedrock" queryString values={[
 {label: 'Amazon Bedrock', value: 'amazon-bedrock' },
