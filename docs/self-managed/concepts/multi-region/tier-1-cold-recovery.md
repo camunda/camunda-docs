@@ -12,13 +12,13 @@ Tier 1 is Camunda's lowest-cost multi-region resilience configuration. It provid
 
 Tier 1 is suited for development and staging environments, low-criticality production workloads, and deployments where recovery measured in hours is operationally acceptable.
 
-| Property | Value |
-|----------|-------|
-| **RTO** | ~2–8 hours (operator and environment dependent) |
-| **RPO** | 15 minutes – 4 hours (backup-interval dependent) |
-| **Failover mode** | Manual, human-initiated |
-| **Standing second region required** | No — restore into a newly provisioned region |
-| **Primary compliance fit** | Basic BCM requirements |
+| Property                            | Value                                                   |
+| ----------------------------------- | ------------------------------------------------------- |
+| **RTO**                             | ~1–4 hours (operator and environment dependent)         |
+| **RPO**                             | 15 minutes – 4 hours (backup-interval dependent)        |
+| **Failover mode**                   | Manual, human-initiated                                 |
+| **Standing second region required** | No — restore into a newly provisioned region            |
+| **Primary compliance fit**          | Basic Business Continuity Management (BCM) requirements |
 
 :::important
 Tier 1 RTO and RPO are **not engine-guaranteed**. Recovery time depends on data volume, backup frequency, operator familiarity with the restore procedure, and the speed at which a secondary region can be provisioned. Treat the ranges above as planning targets, not contractual commitments.
@@ -54,11 +54,11 @@ On primary-region failure, an operator provisions a new environment in the secon
 
 A complete Tier 1 backup covers two storage layers. Both must be backed up — and ideally aligned in time — to produce a consistent restore point.
 
-| Layer | Backup target | Backup mechanism |
-|-------|--------------|-----------------|
-| **Primary storage** (Zeebe log stream) | Zeebe partition snapshots | Zeebe Backup Management API |
-| **Secondary storage** (Elasticsearch) | Elasticsearch index snapshots | Elasticsearch Snapshot API |
-| **Secondary storage** (RDBMS) | Database dump or continuous backup | Database-native tools (`pg_dump`, Oracle RMAN, AWS RDS automated backup) |
+| Layer                                  | Backup target                      | Backup mechanism                                                         |
+| -------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------ |
+| **Primary storage** (Zeebe log stream) | Zeebe partition snapshots          | Zeebe Backup Management API                                              |
+| **Secondary storage** (Elasticsearch)  | Elasticsearch index snapshots      | Orchestration cluster backup API                                         |
+| **Secondary storage** (RDBMS)          | Database dump or continuous backup | Database-native tools (`pg_dump`, Oracle RMAN, AWS RDS automated backup) |
 
 :::note
 Restoring only Zeebe without the corresponding secondary storage backup (or vice versa) will produce an inconsistent cluster. The two backups are correlated by backup ID on the Elasticsearch path, or by timestamp alignment on the RDBMS path.
@@ -66,15 +66,15 @@ Restoring only Zeebe without the corresponding secondary storage backup (or vice
 
 ### Backup scope by component
 
-| Component | Included in Tier 1 backup | Notes |
-|-----------|--------------------------|-------|
-| **Zeebe** (primary storage) | Yes — partition snapshots | Required |
-| **Operate** | Yes — via Elasticsearch or RDBMS backup | State is stored in secondary storage |
-| **Tasklist** | Yes — via Elasticsearch or RDBMS backup | State is stored in secondary storage |
-| **Admin / Identity** | Yes — via Elasticsearch or RDBMS backup | Authentication and authorization configuration |
-| **Optimize** | Elasticsearch path only | Not supported with RDBMS secondary storage |
-| **Web Modeler** | Not included | Standalone component; back up independently |
-| **Connectors** | Not included | Stateless; redeploy from source |
+| Component                   | Included in Tier 1 backup               | Notes                                          |
+| --------------------------- | --------------------------------------- | ---------------------------------------------- |
+| **Zeebe** (primary storage) | Yes — partition snapshots               | Required                                       |
+| **Operate**                 | Yes — via Elasticsearch or RDBMS backup | State is stored in secondary storage           |
+| **Tasklist**                | Yes — via Elasticsearch or RDBMS backup | State is stored in secondary storage           |
+| **Admin / Identity**        | Yes — via Elasticsearch or RDBMS backup | Authentication and authorization configuration |
+| **Optimize**                | Elasticsearch path only                 | Not supported with RDBMS secondary storage     |
+| **Web Modeler**             | Not included                            | Standalone component; back up independently    |
+| **Connectors**              | Not included                            | Stateless; redeploy from source                |
 
 ## Backup configuration
 
@@ -126,35 +126,16 @@ zeebe:
     - name: ZEEBE_BROKER_DATA_BACKUP_S3_REGION
       value: "us-east-1"
     - name: ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT
-      value: ""  # leave empty for standard AWS S3
+      value: "" # leave empty for standard AWS S3
 ```
 
 See [Zeebe S3 backup configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3) for all available parameters.
 
 ### Backup schedule
 
-{TODO: Engineering — provide a recommended backup frequency, a Kubernetes CronJob example for triggering the Zeebe Backup API on a schedule, and coordination guidance for aligning Zeebe and Elasticsearch backup IDs.}
+/TODO: Engineering — provide a recommended backup frequency, a Kubernetes CronJob example for triggering the Zeebe Backup API on a schedule, and coordination guidance for aligning Zeebe and Elasticsearch backup IDs.}
 
 For reference, the Camunda community maintains a backup automation example at [camunda-consulting/c8-devops-workshop](https://github.com/camunda-consulting/c8-devops-workshop/tree/main/03%20-%20Lab%203%20-%20Backup%20and%20Restore).
-
-## RTO and RPO breakdown per component
-
-The following table provides per-component estimates. Values assume a 15-minute backup schedule and a data volume within normal production range. Your actual figures will vary.
-
-| Component | RPO | RTO contribution | Notes |
-|-----------|-----|-----------------|-------|
-| **Zeebe** (primary storage) | = backup interval (15 min – 4 h) | Snapshot download and restore time | RPO equals the age of the last completed Zeebe backup at the time of failure. |
-| **Operate** | = secondary storage backup interval | Included in ES / RDBMS restore | Operate state is stored in secondary storage; its RPO tracks the secondary storage backup frequency. |
-| **Tasklist** | = secondary storage backup interval | Included in ES / RDBMS restore | Same as Operate. |
-| **Admin / Identity** | = secondary storage backup interval | Included in ES / RDBMS restore | Auth configuration is lost if it changed after the last backup. |
-| **Infrastructure provisioning** | N/A | 20–60 minutes | Time to provision a Kubernetes / ECS cluster in the secondary region. Reduced to <10 minutes with a pre-provisioned, scaled-down cluster. |
-| **Backup download** | N/A | 10 min – 2 hours | Depends on snapshot size and cross-region bandwidth. |
-| **Restore and startup** | N/A | 10–30 minutes | Includes Zeebe restore API, ES index restore, and pod startup. |
-| **Total (typical)** | **15 min – 4 hours** | **~2–8 hours** | Wide range due to operator speed, data volume, and whether a secondary region is pre-provisioned. |
-
-:::tip Reduce RTO with a pre-provisioned secondary region
-Maintaining a scaled-down (but provisioned) Kubernetes cluster in the secondary region eliminates the infrastructure provisioning step and can reduce total RTO to the lower end of the 2–8 hour range.
-:::
 
 ## Restore procedure
 
@@ -177,7 +158,7 @@ terraform apply -target=module.eks_secondary
 kubectl --context secondary-region get nodes
 ```
 
-{TODO: Engineering — provide a reference Terraform / Helm values snippet for a minimal restore-ready Camunda environment.}
+/TODO: Engineering — provide a reference Terraform / Helm values snippet for a minimal restore-ready Camunda environment.}
 
 ### Step 2 — Configure backup store access
 
@@ -190,7 +171,7 @@ zeebe:
     - name: ZEEBE_BROKER_DATA_BACKUP_STORE
       value: S3
     - name: ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME
-      value: "camunda-backup-us-west-2"   # replica bucket
+      value: "camunda-backup-us-west-2" # replica bucket
     - name: ZEEBE_BROKER_DATA_BACKUP_S3_REGION
       value: "us-west-2"
 ```
@@ -267,7 +248,7 @@ pg_restore \
   --dbname=camunda \
   <backup-file>.dump
 
-# {TODO: Engineering — add Oracle RMAN restore example}
+# /TODO: Engineering — add Oracle RMAN restore example}
 ```
 
 See [RDBMS restore](/self-managed/operational-guides/backup-restore/rdbms/restore.md) for the full procedure.
@@ -303,7 +284,7 @@ curl -s http://localhost:9600/actuator/health | jq '.status'
 # Navigate to the Operate UI at the secondary region endpoint
 ```
 
-{TODO: Engineering — add a post-restore health verification checklist covering Zeebe partition status, Operate index freshness, and Identity configuration.}
+/TODO: Engineering — add a post-restore health verification checklist covering Zeebe partition status, Operate index freshness, and Identity configuration.}
 
 ### Step 8 — Redirect production traffic
 
@@ -339,21 +320,11 @@ Restore execution (non-production environment)
        [ ] OR: RDBMS restored and Camunda startup alignment confirmed
 [ ] Step 6: Orchestration Cluster deployed — all pods Running
 [ ] Step 7: Health checks passed
-       [ ] Zeebe gateway: UP
+       [ ] Zeebe engine: UP
        [ ] Operate: accessible, recent process instances visible
        [ ] Identity: authentication functional
 [ ] Step 8: DNS/load balancer redirect validated (test traffic only, not production)
 
-Measurement
-[ ] Total time from drill start to traffic live: _______ minutes
-[ ] Effective RPO (age of selected backup at time of drill): _______ minutes
-[ ] Steps that exceeded expected duration: _______________________
-[ ] Issues or gaps discovered: _______________________
-[ ] Follow-up actions required: _______________________
-
-Sign-off
-[ ] Drill completed by: _______________________ Date: _______________
-[ ] Results reviewed by: _______________________
 ```
 
 ## Related documentation
