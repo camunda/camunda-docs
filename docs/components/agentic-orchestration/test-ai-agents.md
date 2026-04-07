@@ -195,8 +195,8 @@ processTestContext
             JobSelectors.byElementId("ListUsers"),
             Map.of("toolCallResult",
                 List.of(
-                    Map.of("id", 1, "name", "Leanne Graham"),
-                    Map.of("id", 2, "name", "Ervin Howell")))));
+                    Map.of("id", 1, "name", "Leanne Graham", "username", "Bret"),
+                    Map.of("id", 2, "name", "Ervin Howell", "username", "Antonette")))));
 
 // given: complete LoadUserByID with Ervin's details
 processTestContext
@@ -210,21 +210,24 @@ processTestContext
             Map.of("toolCallResult",
                 Map.of("id", 2,
                     "name", "Ervin Howell",
-                    "email", "Shanna@melissa.tv"))));
+                    "username", "Antonette",
+                    "email", "123@abc.local"))));
 
 // given: complete Jokes_API with two different jokes
+String firstJoke = "Why did the workflow cross the road? To get to the happy path.";
+String secondJoke = "Why did the BPMN diagram apply for a job? It had excellent flow experience.";
+
 processTestContext
     .when(
-            () ->
-            assertThatProcessInstance(ProcessInstanceSelectors.byProcessId(PROCESS_ID))
-                .hasActiveElements("Jokes_API"))
+        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
+            .hasActiveElements("Jokes_API"))
     .as("complete jokes tool")
     .then(
         () -> processTestContext.completeJob(
-        byElementId("Jokes_API"), Map.of("toolCallResult", FIRST_JOKE)))
+            byElementId("Jokes_API"), Map.of("toolCallResult", firstJoke)))
     .then(
         () -> processTestContext.completeJob(
-        byElementId("Jokes_API"), Map.of("toolCallResult", SECOND_JOKE)));
+            byElementId("Jokes_API"), Map.of("toolCallResult", secondJoke)));
 ```
 
 ### Complete user tasks
