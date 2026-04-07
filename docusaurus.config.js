@@ -176,19 +176,19 @@ module.exports = {
                 lang: "TypeScript",
                 highlight: "typescript",
                 operationMapPath:
-                  "../orchestration-cluster-api-js/examples/operation-map.json",
+                  ".sdk-repos/orchestration-cluster-api-js/examples/operation-map.json",
               },
               {
                 lang: "Python",
                 highlight: "python",
                 operationMapPath:
-                  "../orchestration-cluster-api-python/examples/operation-map.json",
+                  ".sdk-repos/orchestration-cluster-api-python/examples/operation-map.json",
               },
               {
                 lang: "C#",
                 highlight: "csharp",
                 operationMapPath:
-                  "../orchestration-cluster-api-csharp/examples/operation-map.json",
+                  ".sdk-repos/orchestration-cluster-api-csharp/examples/operation-map.json",
               },
             ],
             version: "1",
