@@ -147,13 +147,20 @@ For the full property reference, see [judge configuration](/apis-tools/testing/c
 
 ## Step 3: Set up the test class
 
-Place the BPMN file for your AI agent process (for example, the **AI Agent Chat With Tools** blueprint) in `src/test/resources` so CPT can deploy it automatically.
+Place the BPMN file and any associated forms for your AI agent process in `src/test/resources` (for example, under `bpmn/` and `forms/` subdirectories).
 
-Create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`, and inject the `CamundaClient` and `CamundaProcessTestContext`:
+Create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`. Use `@TestDeployment` to declare which resources CPT should deploy before each test, and inject the `CamundaClient` and `CamundaProcessTestContext`:
 
 ```java
 @SpringBootTest
 @CamundaSpringProcessTest
+@TestDeployment(
+    resources = {
+        "bpmn/ai-agent-chat-with-tools.bpmn",
+        "forms/ai-agent-chat-initial-request.form",
+        "forms/ai-agent-chat-user-feedback.form",
+        "forms/ai-agent-chat-human-send-email-request.form"
+    })
 class AiAgentProcessTest {
 
     @Autowired
