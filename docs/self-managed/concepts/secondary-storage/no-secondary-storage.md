@@ -100,52 +100,12 @@ environment:
 </TabItem>
 </Tabs>
 
-## Authentication requirements
+## Authentication
 
-When running in **no secondary storage** mode, authentication is still supported, but with specific requirements.
+Authentication works with no secondary storage mode. OIDC authentication is configured the same way as with secondary storage enabled. For details, see [Orchestration Cluster authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
 
-### Supported authentication methods
-
-The following authentication methods are supported when `noSecondaryStorage` is enabled:
-
-| Authentication method       | Supported | Notes                                                                                                  |
-| --------------------------- | --------- | ------------------------------------------------------------------------------------------------------ |
-| **OIDC**                    | ✅ Yes    | Works as expected. Recommended for production-like setups.                                             |
-| **OIDC**                    |    Yes    | Works as expected. Recommended for production-like setups.                                             |
-| **Basic + unprotected API** |    Yes    | Requires Basic authentication with `unprotectedApi: true`. Intended for development environments only. |
-
-:::info
-For more information about authentication methods, see [Orchestration Cluster authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
-:::
-
-### Configuration examples
-
-<Tabs groupId="configuration" defaultValue="oidc" queryString values={[
-{label: 'OIDC (Recommended)', value: 'oidc' },
-{label: 'Basic + Unprotected API (Dev only)', value: 'basic-unprotected' },
-]}>
-
-<TabItem value="oidc">
-
-OIDC authentication works seamlessly with no secondary storage mode:
-
-```yaml
-global:
-  noSecondaryStorage: true
-
-orchestration:
-  security:
-    authentication:
-      method: oidc
-```
-
-You must also configure OIDC-specific settings for your identity provider. For details, see [supported OIDC configuration properties](../../components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration).
-
-</TabItem>
-
-<TabItem value="basic-unprotected">
-
-Basic authentication in no secondary storage mode requires the unprotected API mode to be enabled:
+:::note Basic authentication with no secondary storage
+If you use Basic authentication, you must also enable unprotected API mode because Basic auth requires access to user data in secondary storage.
 
 ```yaml
 global:
@@ -155,37 +115,13 @@ orchestration:
   security:
     authentication:
       method: basic
-      # Required: must be true, since basic auth cannot look up users without secondary storage
       unprotectedApi: true
       authorizations:
         enabled: false
 ```
 
-:::caution
-This configuration should **only be used for development** or testing environments. The unprotected API mode disables authentication checks on API endpoints.
+This configuration should **only be used for development** or testing environments, as the unprotected API mode disables authentication checks on API endpoints.
 :::
-
-</TabItem>
-
-</Tabs>
-
-### Technical constraint: Basic authentication and no secondary storage
-
-Basic authentication typically requires access to user data stored in secondary storage. When secondary storage is disabled, basic authentication cannot validate users against the database.
-
-To work around this limitation:
-
-- You must enable **unprotected API mode** (`unprotectedApi: true`) when using Basic authentication with no secondary storage.
-- This allows the API to be accessed without requiring user lookup from secondary storage.
-- The Helm chart automatically handles this by excluding the `consolidated-auth` Spring profile when both settings are combined.
-
-If you attempt to use Basic authentication with secondary storage disabled and `unprotectedApi: false`, the application will fail at startup with an error:
-
-```
-Error creating bean with name 'basicAuthenticationNoDbFailFastBean':
-Basic Authentication is not supported when secondary storage is disabled (camunda.database.type=none).
-Basic Authentication requires access to user data stored in secondary storage.
-```
 
 ## Components and features disabled
 

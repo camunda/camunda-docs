@@ -937,7 +937,7 @@ Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orc
 
 When enabled, Elasticsearch and OpenSearch subcharts must be disabled. Authentication is supported using OIDC (recommended) or Basic authentication with unprotected API mode for development environments.
 
-<p className="link-arrow">[Learn about authentication requirements for no secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#authentication-requirements)</p>
+<p className="link-arrow">[Learn about authentication with no secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#authentication)</p>
 
 </div>
 </div>

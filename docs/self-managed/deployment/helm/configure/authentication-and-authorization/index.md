@@ -20,7 +20,7 @@ By default, Camunda uses Basic authentication with predefined demo users. Altern
 | [External OIDC provider](./external-oidc-provider.md)                         | Integrates Camunda with an external identity provider, such as Microsoft Entra ID or Okta, via OpenID Connect.      | Organizations with an existing enterprise identity infrastructure.                         |
 
 :::note
-When running Camunda in **no secondary storage** mode, authentication requires special configuration. See [Authentication requirements for no secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#authentication-requirements) for details.
+When running Camunda in **no secondary storage** mode, authentication requires special configuration. See [Authentication with no secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#authentication) for details.
 :::
 
 ### Limitations of OIDC setups
