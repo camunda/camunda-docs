@@ -11,12 +11,9 @@ However, you can enable TLS-encrypted communication by following the steps below
 
 ### Configure the Identity base URL
 
-Provide a URL that starts with `https://` (e.g. `https://identity.example.com`) as the base URL of the Identity instance:
+For the `modeler-restapi` container, provide a URL that starts with `https://` (e.g. `https://identity.example.com`) as the base URL of the Identity instance via the environment variable `CAMUNDA_IDENTITY_BASEURL`.
 
-- For the `modeler-webapp` container, provide the URL via the environment variable `IDENTITY_BASE_URL`.
-- For the `modeler-restapi` container, provide the URL via the environment variable `RESTAPI_IDENTITY_BASE_URL`.
-
-## Configuring secure connections between Web Modeler components
+## Configuring secure connections for Web Modeler components
 
 ### Configure `restapi` SSL certificate
 
@@ -48,37 +45,6 @@ To use secure connections between the `restapi` and `websocket` components, prov
 RESTAPI_PUSHER_SSL_ENABLED=true
 ```
 
-### Configure `webapp` SSL certificate
-
-To configure SSL for the `webapp` component, provide the following environment variables (make sure that the provided certificate path is accessible from the container, e.g. via a mounted volume):
-
-```
-SERVER_URL=https://web-modeler.example.com
-
-SSL_ENABLED=true
-SSL_CERT=/full/path/to/certificate.pem
-SSL_KEY=/full/path/to/key.pem
-SSL_PASSPHRASE=your-passphrase
-```
-
-Additionally, you can configure SSL separately for the management routes of the `webapp` component:
-
-```
-MANAGEMENT_SSL_ENABLED=true
-MANAGEMENT_SSL_CERT=/full/path/to/certificate.pem
-MANAGEMENT_SSL_KEY=/full/path/to/key.pem
-MANAGEMENT_SSL_PASSPHRASE=your-passphrase
-```
-
-#### Use secure connections between the `webapp` and `restapi` components
-
-To use secure connections between the `webapp` and `restapi` components, provide the following environment variable:
-
-```
-RESTAPI_SSL_ENABLED=true
-RESTAPI_MANAGEMENT_SSL_ENABLED=true
-```
-
 ### Configure `websocket` SSL certificate
 
 SSL can be configured by setting the following environment variables (make sure that the provided certificate path is accessible from the container, e.g. via a mounted volume):
@@ -97,12 +63,8 @@ Currently, there is no option to configure SSL for the `websocket` management ro
 
 ## (Optional) Provide a custom certificate
 
-If you are using a custom (self-signed) TLS certificate for either `restapi`, `webapp` or Identity, you need to make Web Modeler accept the certificate:
+If you are using a custom (self-signed) TLS certificate for either the `restapi` or Identity, you need to make Web Modeler accept the certificate.
+For the `modeler-restapi` container:
 
-- For the `modeler-webapp` container, provide the path to the certificate file via the environment variable `NODE_EXTRA_CA_CERTS` (make sure that the provided path is accessible from the container, e.g. via a mounted volume):
-  ```sh
-  NODE_EXTRA_CA_CERTS=/path/to/certificate.crt
-  ```
-- For the `modeler-restapi` container:
-  - Add the certificate to a custom Java trust store (using the [`keytool`](https://docs.oracle.com/en/java/javase/21/docs/specs/man/keytool.html) utility).
-  - Configure the trust store as described in the [Zeebe connection troubleshooting guide](../troubleshooting/troubleshoot-zeebe-connection.md#provide-the-certificate-to-the-jvm-trust-store).
+- Add the certificate to a custom Java trust store (using the [`keytool`](https://docs.oracle.com/en/java/javase/21/docs/specs/man/keytool.html) utility).
+- Configure the trust store as described in the [Zeebe connection troubleshooting guide](../troubleshooting/troubleshoot-zeebe-connection.md#provide-the-certificate-to-the-jvm-trust-store).
