@@ -1,7 +1,7 @@
 ---
 id: tier-1-cold-recovery
-title: "Tier 1: Cold Recovery"
-sidebar_label: "Tier 1 — Cold Recovery"
+title: "Tier 1 Cold Recovery"
+sidebar_label: "Tier 1: Cold Recovery"
 description: "Cold backup-based disaster recovery for Camunda Self-Managed: backup scope, cross-region S3 configuration, restore procedure, per-component RTO/RPO breakdown, and DR drill checklist."
 ---
 
@@ -330,7 +330,7 @@ Restore execution (non-production environment)
 ## Related documentation
 
 - [Multi-region resilience tiers overview](./resilience-tiers.md)
-- [Tier 2 — Warm Standby](./tier-2-warm-standby.md)
+- [Tier 2 — Dual-Region](./dual-region.md)
 - [Camunda backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
 - [Zeebe backup management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
 - [Elasticsearch backup](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md)

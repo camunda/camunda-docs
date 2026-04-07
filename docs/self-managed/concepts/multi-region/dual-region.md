@@ -1,7 +1,7 @@
 ---
 id: dual-region
-title: "Dual-region"
-sidebar_label: "Dual-region"
+title: "Tier 2 Dual-region"
+sidebar_label: "Tier 2: Dual-region"
 description: "A dual-region setup allows you to run Camunda in two regions synchronously."
 ---
 
@@ -11,9 +11,13 @@ import DualRegion from "./img/dual-region.jpg";
 
 Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). This setup combines **active-active data replication** with **active-passive user traffic routing** (see [Active-active](#active-active)) to ensure high availability and disaster recovery.
 
-:::important
-**Both regions must be fully operational at all times.** The only distinction is traffic routing: one region serves user traffic (primary), the other processes data but doesn't serve user traffic (secondary).
-:::
+| Property                            | Value                                                    |
+| ----------------------------------- | -------------------------------------------------------- |
+| **RTO**                             | ~15 minutes                                              |
+| **RPO**                             | 0                                                        |
+| **Failover mode**                   | Manual, operator-initiated                               |
+| **Standing second region required** | Yes — full Orchestration Cluster running in both regions |
+| **Primary compliance fit**          | DORA, SR 11-7 (with documented runbook)                  |
 
 :::caution
 
@@ -146,6 +150,14 @@ The currently supported Camunda 8 Self-Managed components are:
 |                                       Operate | Active-passive (user traffic) (see [Active-active](#active-active)) | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Uncompleted batch operations if not submitted via v2 API</li></ul>                                                                                                                                         | Data loss possible if using v1 API as changes are isolated to the initiated region. |
 |                                      Tasklist | Active-passive (user traffic) (see [Active-active](#active-active)) | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Task assignments if not utilizing Tasklist v2 API</li></ul>                                                                                                                                                | Data loss possible if using v1 API as changes are isolated to the initiated region. |
 |         <p align="left">**Elasticsearch**</p> | Active-active                                                       | Both clusters must run                | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down                           |
+
+### Data flow and consistency behavior
+
+Under normal operation, Zeebe continuously exports events to the local Elasticsearch cluster in each region. The two clusters are independent — there is no direct cross-region Elasticsearch replication.
+
+**Export lag**: There is an inherent delay between a Zeebe event and its appearance in Elasticsearch, typically measured in seconds under normal load. Under sustained high throughput or network pressure, lag can grow.
+
+**Consistency on failover**: When the primary region fails, the secondary region's Elasticsearch cluster reflects Zeebe state up to the point of last successful export. Zeebe's Raft log in the surviving region contains a complete, consistent record of all committed process instances (RPO = 0). Secondary storage state catches up once Zeebe resumes exporting after the failover procedure completes.
 
 ## Requirements and limitations
 
@@ -307,7 +319,7 @@ The **RTO** can be considered for the **failover** and **failback** procedures, 
 During our automated tests, the reinstallation and reconfiguration of Camunda 8 takes 5 minutes. This can serve as a general guideline for the time required, though your experience may vary depending on your available resources and familiarity with the operational procedure.
 
 :::info
-The **Recovery Time Objective (RTO)** estimates are based on our internal tests and should be considered approximate. Actual times may vary depending on the specific manual steps and conditions during the recovery process.
+The **Recovery Time Objective (RTO)** estimates are based on our internal tests and should be considered approximate. Actual times may vary depending on your environment, network conditions, operator familiarity, and DNS TTL configuration.
 :::
 
 ## Further resources
