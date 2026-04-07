@@ -64,22 +64,32 @@ Perform a semantic search over the documents indexed in your knowledge base. The
 
 The connector returns the following fields:
 
-| Field             | Description                                                                                                                                                                                                                       |
-| :---------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `resultsDocument` | A [Camunda document](/components/document-handling/getting-started.md) containing the full retrieval results as JSON. Each result includes the matched text, a relevance score, the source location, and any associated metadata. |
-| `resultCount`     | The number of results returned.                                                                                                                                                                                                   |
-| `paginationToken` | A token for retrieving additional results in subsequent requests. This value is `null` if there are no more results.                                                                                                              |
+| Field             | Description                                                                                                          |
+| :---------------- | :------------------------------------------------------------------------------------------------------------------- |
+| `results`         | A list of retrieval results. Each result contains the fields described below.                                        |
+| `resultCount`     | The number of results returned.                                                                                      |
+| `paginationToken` | A token for retrieving additional results in subsequent requests. This value is `null` if there are no more results. |
+
+Each result in the `results` list contains:
+
+| Field               | Description                                                                                                                                                   |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `documentReference` | A [Camunda document](/components/document-handling/getting-started.md) reference containing the chunk text, for use with downstream connectors or processing. |
+| `content`           | The matched text passage from the knowledge base.                                                                                                             |
+| `score`             | A relevance score between 0 and 1 indicating how well the result matches the query.                                                                           |
+| `sourceUri`         | The S3 URI of the source document.                                                                                                                            |
+| `metadata`          | Key-value metadata associated with the source document.                                                                                                       |
 
 #### Output mapping
 
 1. Use **Result Variable** to store the response in a process variable. For example, `kbResult`.
 2. Use **Result Expression** to map specific fields from the response into process variables.
 
-For example, to extract the document and result count:
+For example, to extract just the text content from all results:
 
 ```feel
 = {
-  results: resultsDocument,
+  texts: results.content,
   count: resultCount
 }
 ```
@@ -101,12 +111,16 @@ When using the connector as a tool in an [AI Agent subprocess](/components/conne
 
 #### Example response
 
-The following is an example of the JSON content stored in the `resultsDocument` document:
+The following is an example of the connector response:
 
 ```json
 {
   "results": [
     {
+      "documentReference": {
+        "storeId": "in-memory",
+        "documentId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      },
       "content": "Comprehensive auto insurance covers damage to your vehicle from events other than collisions, including theft, vandalism, natural disasters, and falling objects.",
       "score": 0.92,
       "sourceUri": "s3://my-bucket/policies/auto-insurance.pdf",
@@ -116,6 +130,10 @@ The following is an example of the JSON content stored in the `resultsDocument` 
       }
     },
     {
+      "documentReference": {
+        "storeId": "in-memory",
+        "documentId": "b2c3d4e5-f6a7-8901-bcde-f12345678901"
+      },
       "content": "Liability coverage pays for bodily injury and property damage that you cause to others in an auto accident.",
       "score": 0.85,
       "sourceUri": "s3://my-bucket/policies/auto-insurance.pdf",
@@ -125,6 +143,7 @@ The following is an example of the JSON content stored in the `resultsDocument` 
       }
     }
   ],
-  "nextToken": null
+  "resultCount": 2,
+  "paginationToken": null
 }
 ```
