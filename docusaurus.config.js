@@ -45,7 +45,7 @@ module.exports = {
     "./static/plugins/bpmn-js",
     [
       // Operate API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-operate-openapi",
         docsPluginId: "default",
@@ -82,7 +82,7 @@ module.exports = {
     ],
     [
       // Tasklist REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-tasklist-openapi",
         docsPluginId: "default",
@@ -119,7 +119,7 @@ module.exports = {
     ],
     [
       // Administration Self-Managed REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-adminsm-openapi",
         docsPluginId: "default",
@@ -158,7 +158,7 @@ module.exports = {
     ],
     [
       // Orchestration Cluster REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-camunda-openapi",
         docsPluginId: "default",
@@ -171,6 +171,26 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            sdkExamples: [
+              {
+                lang: "TypeScript",
+                highlight: "typescript",
+                operationMapPath:
+                  "../orchestration-cluster-api-js/examples/operation-map.json",
+              },
+              {
+                lang: "Python",
+                highlight: "python",
+                operationMapPath:
+                  "../orchestration-cluster-api-python/examples/operation-map.json",
+              },
+              {
+                lang: "C#",
+                highlight: "csharp",
+                operationMapPath:
+                  "../orchestration-cluster-api-csharp/examples/operation-map.json",
+              },
+            ],
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
@@ -203,7 +223,7 @@ module.exports = {
     ],
     [
       // Zeebe REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-zeebe-openapi",
         docsPluginId: "default",
@@ -565,7 +585,7 @@ module.exports = {
     mermaid: true,
   },
   themes: [
-    "docusaurus-theme-openapi-docs",
+    "@camunda8/docusaurus-theme-openapi-docs",
     "@saucelabs/theme-github-codeblock",
     "@docusaurus/theme-mermaid",
   ],
