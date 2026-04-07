@@ -166,7 +166,7 @@ Register a behavior for each tool task the agent might invoke. In this integrati
 // given: complete ListUsers when the agent invokes it
 processTestContext
     .when(
-        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat"))
+        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
             .hasActiveElements("ListUsers"))
     .as("complete ListUsers")
     .then(
@@ -180,7 +180,7 @@ processTestContext
 // given: complete LoadUserByID with Ervin's details
 processTestContext
     .when(
-        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat"))
+        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
             .hasActiveElements("LoadUserByID"))
     .as("complete LoadUserByID")
     .then(
@@ -214,7 +214,7 @@ The `AskHumanToSendEmail` user task requires human approval. Register a behavior
 // given: auto-approve the email when the human review task appears
 processTestContext
     .when(
-        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat"))
+        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
             .hasActiveElements("AskHumanToSendEmail"))
     .as("approve email")
     .then(
@@ -236,7 +236,7 @@ In this example, the first feedback rejection sends the agent back with a follow
 // given: first reject, then approve in the feedback loop
 processTestContext
     .when(
-        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat"))
+        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
             .hasActiveElements("User_Feedback"))
     .as("feedback loop")
     // 1) first invocation: reject and ask for a better joke
@@ -266,7 +266,7 @@ void shouldSendErvinAJoke() {
 
     // when: start the process
     ProcessInstanceEvent processInstance = client.newCreateInstanceCommand()
-        .bpmnProcessId("ai-agent-chat")
+        .bpmnProcessId("ai-agent-chat-with-tools")
         .latestVersion()
         .variables(Map.of("inputText", "Send Ervin a joke"))
         .send()
