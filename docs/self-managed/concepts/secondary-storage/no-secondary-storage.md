@@ -111,7 +111,8 @@ The following authentication methods are supported when `noSecondaryStorage` is 
 | Authentication method       | Supported | Notes                                                                                                  |
 | --------------------------- | --------- | ------------------------------------------------------------------------------------------------------ |
 | **OIDC**                    | ✅ Yes    | Works as expected. Recommended for production-like setups.                                             |
-| **Basic + unprotected API** | ✅ Yes    | Requires Basic authentication with `unprotectedApi: true`. Intended for development environments only. |
+| **OIDC**                    |    Yes    | Works as expected. Recommended for production-like setups.                                             |
+| **Basic + unprotected API** |    Yes    | Requires Basic authentication with `unprotectedApi: true`. Intended for development environments only. |
 
 :::info
 For more information about authentication methods, see [Orchestration Cluster authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
