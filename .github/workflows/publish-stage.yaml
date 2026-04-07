@@ -15,6 +15,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Checkout JS SDK examples
+        uses: actions/checkout@v6
+        with:
+          repository: camunda/orchestration-cluster-api-js
+          path: ../orchestration-cluster-api-js
+          sparse-checkout: examples
+      - name: Checkout Python SDK examples
+        uses: actions/checkout@v6
+        with:
+          repository: camunda/orchestration-cluster-api-python
+          path: ../orchestration-cluster-api-python
+          sparse-checkout: examples
+      - name: Checkout C# SDK examples
+        uses: actions/checkout@v6
+        with:
+          repository: camunda/orchestration-cluster-api-csharp
+          path: ../orchestration-cluster-api-csharp
+          sparse-checkout: examples
       - uses: actions/setup-node@v6
         with:
           node-version: 24
