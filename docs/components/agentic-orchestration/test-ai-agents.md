@@ -105,16 +105,16 @@ Configure the judge provider to match the model provider used by your AI agent p
 camunda:
   process-test:
     connectors-secrets:
-      AWS_BEDROCK_ACCESS_KEY: ${AWS_BEDROCK_ACCESS_KEY}
-      AWS_BEDROCK_SECRET_KEY: ${AWS_BEDROCK_SECRET_KEY}
+      AWS_BEDROCK_ACCESS_KEY: ${AWS_LLM_BEDROCK_ACCESS_KEY}
+      AWS_BEDROCK_SECRET_KEY: ${AWS_LLM_BEDROCKSECRET_KEY}
     judge:
       chat-model:
         provider: "amazon-bedrock"
         model: "eu.anthropic.claude-haiku-4-5-20251001-v1:0"
         region: "eu-central-1"
         credentials:
-          access-key: ${AWS_BEDROCK_ACCESS_KEY}
-          secret-key: ${AWS_BEDROCK_SECRET_KEY}
+          access-key: ${AWS_LLM_BEDROCKACCESS_KEY}
+          secret-key: ${AWS_LLM_BEDROCKSECRET_KEY}
 ```
 
 </TabItem>
