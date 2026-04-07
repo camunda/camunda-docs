@@ -142,7 +142,28 @@ The AI agent can still interact with the configured LLM provider, while the test
 
 For the full property reference, see [judge configuration](/apis-tools/testing/configuration.md#judge-configuration).
 
-## Step 3: Handle non-deterministic flow paths
+## Step 3: Set up the test class
+
+Place the BPMN file for your AI agent process (for example, the **AI Agent Chat With Tools** blueprint) in `src/test/resources` so CPT can deploy it automatically.
+
+Create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`, and inject the `CamundaClient` and `CamundaProcessTestContext`:
+
+```java
+@SpringBootTest
+@CamundaSpringProcessTest
+class AiAgentProcessTest {
+
+    @Autowired
+    private CamundaClient client;
+
+    @Autowired
+    private CamundaProcessTestContext processTestContext;
+}
+```
+
+For the full setup including dependencies and project structure, see [Getting started with Camunda Process Test](/apis-tools/testing/getting-started.md).
+
+## Step 4: Handle non-deterministic flow paths
 
 [Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior) lets you register background reactions that monitor the process state and execute actions as conditions are met, without blocking the test thread. Register behaviors before starting the process, and they react independently as the process progresses.
 
@@ -244,7 +265,7 @@ processTestContext
 
 For the full conditional behavior API, see [Utilities](/apis-tools/testing/utilities.md#conditional-behavior).
 
-## Step 4: Verify agent output with judge assertions
+## Step 5: Verify agent output with judge assertions
 
 After the process completes, use a judge assertion to verify that the agent's output satisfies a natural language expectation. The following example checks the full "Send Ervin a joke" scenario, including tool usage, email content, and the feedback loop:
 
@@ -252,7 +273,7 @@ After the process completes, use a judge assertion to verify that the agent's ou
 @Test
 void shouldSendErvinAJoke() {
     // given: register conditional behaviors for tool tasks, email approval, and feedback
-    // ... (see Step 3 above)
+    // ... (see Step 4 above)
 
     // when: start the process
     ProcessInstanceEvent processInstance = client.newCreateInstanceCommand()
@@ -296,7 +317,7 @@ The LLM may return any value between these anchor points (for example, 0.6 or 0.
 
 If the assertion fails, for example because the agent never called `LoadUserByID` or sent the email to the wrong address, the judge returns a low score with an explanation of which parts of the expectation were not met. This gives you a clear, human-readable failure message instead of a generic assertion error.
 
-## Step 5: Tune the judge evaluation
+## Step 6: Tune the judge evaluation
 
 Use `withJudgeConfig` to set a stricter threshold for individual assertions:
 
