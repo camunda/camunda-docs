@@ -567,17 +567,17 @@ function BuildWithCamunda() {
           <TerminalWindow title="Terminal">
             {`$ npm install @camunda8/cli@alpha -g
 $ c8ctl cluster start
+...
+- Operate:                http://localhost:8080/operate
+...
 
-✔ Zeebe broker started on port 26500
-✔ Operate available at http://localhost:8081
-✔ Tasklist available at http://localhost:8082
-✔ Connectors runtime started
-
-Camunda is running. Deploy your first process:
+# Camunda is running. Deploy your first process:
 $ git clone https://github.com/camunda/camunda-8-get-started.git
 $ cd camunda-8-get-started/1-rocket-launch/
 $ c8ctl deploy .
-$ c8ctl run rocket-launch.bpmn`}
+$ c8ctl run rocket-launch.bpmn
+
+# Open Operate using the URL above and see your process instance running, login is demo:demo`}
           </TerminalWindow>
 
           <div className={styles.modelerNote}>
