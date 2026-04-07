@@ -38,5 +38,12 @@ The SDK uses environment variables for configuration, matching the [JS SDK](http
 | `CAMUNDA_SDK_HTTP_RETRY_MAX_DELAY_MS`  | HTTP retry max backoff cap (ms)                                 | `2000`               |
 | `CAMUNDA_SDK_EVENTUAL_POLL_DEFAULT_MS` | Default eventual consistency poll interval (ms)                 | `500`                |
 | `ZEEBE_REST_ADDRESS`                   | Alias for `CAMUNDA_REST_ADDRESS`                                | —                    |
+| `CAMUNDA_MTLS_CERT`                    | Inline PEM client certificate                                   | —                    |
+| `CAMUNDA_MTLS_KEY`                     | Inline PEM client private key                                   | —                    |
+| `CAMUNDA_MTLS_CA`                      | Inline PEM CA bundle                                            | —                    |
+| `CAMUNDA_MTLS_CERT_PATH`               | Path to client certificate (PEM)                                | —                    |
+| `CAMUNDA_MTLS_KEY_PATH`                | Path to client private key (PEM)                                | —                    |
+| `CAMUNDA_MTLS_CA_PATH`                 | Path to CA bundle (PEM)                                         | —                    |
+| `CAMUNDA_MTLS_KEY_PASSPHRASE`          | Passphrase for encrypted private key                            | —                    |
 
 For backpressure configuration variables, see [Global Backpressure](resilience.md#global-backpressure-adaptive-concurrency).

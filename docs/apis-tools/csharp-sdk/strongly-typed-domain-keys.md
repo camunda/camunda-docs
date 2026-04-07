@@ -2,7 +2,7 @@
 id: strongly-typed-domain-keys
 title: "Strongly-Typed Domain Keys"
 sidebar_label: "Strongly-Typed Domain Keys"
-sidebar_position: 9
+sidebar_position: 10
 mdx:
   format: md
 ---
@@ -15,7 +15,7 @@ The C# SDK is a **technical preview** available from Camunda 8.9. It will become
 
 All domain identifiers (process definition keys, job keys, user task keys, etc.) are `readonly record struct` types rather than plain strings. This prevents accidentally mixing different key types at compile time — the same pattern as the JS SDK's branded types.
 
-<!-- snippet:UsingDirective+DomainKeys -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DomainKeys -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
