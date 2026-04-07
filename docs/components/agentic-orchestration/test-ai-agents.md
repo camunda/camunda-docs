@@ -112,6 +112,9 @@ camunda:
         provider: "amazon-bedrock"
         model: "eu.anthropic.claude-haiku-4-5-20251001-v1:0"
         region: "eu-central-1"
+        credentials:
+          access-key: ${AWS_BEDROCK_ACCESS_KEY}
+          secret-key: ${AWS_BEDROCK_SECRET_KEY}
 ```
 
 </TabItem>
