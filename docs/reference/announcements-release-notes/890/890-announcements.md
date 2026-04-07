@@ -935,7 +935,9 @@ This simplifies initial deployment setup and enables reproducible, version-contr
 
 Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orchestration engine without any secondary storage (Elasticsearch, OpenSearch, or RDBMS). This is useful for lightweight testing or scenarios where only the core engine is needed.
 
-When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and Basic authentication is not supported.
+When enabled, Elasticsearch and OpenSearch subcharts must be disabled. Authentication is supported using OIDC (recommended) or Basic authentication with unprotected API mode for development environments.
+
+<p className="link-arrow">[Learn about authentication with no secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#authentication)</p>
 
 </div>
 </div>
