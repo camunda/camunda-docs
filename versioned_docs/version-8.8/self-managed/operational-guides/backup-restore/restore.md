@@ -449,6 +449,15 @@ orchestration:
 
 ### 4. Delete all indices
 
+:::warning
+Backups created with Camunda versions prior to 8.8.15 do not include dated usage metric indices. Restoring such a backup will result in the loss of usage metrics data.
+
+To avoid data loss, use one of the following workarounds:
+
+- **Preserve existing indices:** Do not delete the dated usage metric indices before restoring. After the restore completes, those indices will still be present.
+- **Back up manually:** Before starting the restore process, manually back up the dated usage metric indices so they can be reindexed afterward.
+:::
+
 Now that you have successfully restored the templates and stopped the components adding more indices, you must delete the existing indices to be able to successfully restore the snapshots (otherwise these will block a successful restore).
 
 <Tabs groupId="search-engine">
