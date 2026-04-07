@@ -77,7 +77,7 @@ For this testing style, configure both the connector runtime and the judge LLM f
 
 ### Configure the connector runtime
 
-Start with the connector runtime configuration in `application.yaml`:
+Add the connector runtime configuration to your test resource file (`src/test/resources/application.yaml`). For the full property reference, see the [CPT configuration docs](/apis-tools/testing/configuration.md).
 
 ```yaml
 camunda:
