@@ -768,6 +768,19 @@ identity:
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: `springImport` option for `extraConfiguration` entries
+
+Each `extraConfiguration` entry now supports an optional `springImport` field (default: `true`). Set `springImport: false` to mount configuration files (such as `log4j2.xml` or keystores) into the container without adding them to Spring Boot's `spring.config.import`. This applies to all components that support `extraConfiguration`: orchestration, identity, connectors, optimize, and web-modeler.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
