@@ -87,7 +87,7 @@ Public API components follow strict compatibility guarantees so you can upgrade 
 
 ### Clients and SDKs
 
-The Camunda Java client, Spring SDK, Node.js SDK, and Camunda Process Test (CPT) are both **forward-compatible** and **backward-compatible** with the Orchestration Cluster.
+The Camunda Java client, Spring SDK, Node.js SDK, and Camunda Process Test (CPT) are both **forward-compatible** with new releases of the Orchestration Cluster while being **backward-compatible** regarding application integration.
 
 - **Forward compatibility**: Your application can use an older client version and still work correctly against a newer cluster. For example, an application using Camunda Java client **8.8.3** works against an Orchestration Cluster running **8.9.1**. This allows you to upgrade the Orchestration Cluster first without immediately updating your client libraries.
 
@@ -95,7 +95,7 @@ The Camunda Java client, Spring SDK, Node.js SDK, and Camunda Process Test (CPT)
 
 ### Camunda Process Test (CPT)
 
-CPT is both forward-compatible and backward-compatible with the Orchestration Cluster and Connectors runtime:
+CPT is both forward-compatible with the Orchestration Cluster and Connectors runtime and backward-compatible regarding application integration:
 
 - **Forward-compatible**: You can change the version of the Orchestration Cluster/Connectors bundle in your tests to a newer version without any changes.
 - **Backward-compatible**: Upgrading the CPT dependency version does not require changes to your existing tests.

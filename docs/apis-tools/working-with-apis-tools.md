@@ -54,7 +54,7 @@ In addition to the core Camunda-maintained clients, there are a number of [commu
 
 ## Client and API compatibility
 
-Camunda clients and SDKs are **forward-compatible** and **backward-compatible** with the Orchestration Cluster, meaning you can upgrade the cluster and clients independently. The Orchestration Cluster REST API is backward-compatible, ensuring no breaking changes to existing endpoints across versions.
+Camunda clients and SDKs are **forward-compatible** with the Orchestration Cluster, meaning you can upgrade the cluster first and clients after. The Orchestration Cluster REST API is backward-compatible, ensuring no breaking changes to existing endpoints across versions.
 
 <p class="link-arrow">[Client and API compatibility guarantees](/reference/public-api.md#client-and-api-compatibility)</p>
 
