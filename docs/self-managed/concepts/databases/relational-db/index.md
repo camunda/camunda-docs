@@ -9,7 +9,7 @@ Relational database (RDBMS) support is a core capability of the Orchestration Cl
 
 RDBMS is a standard secondary storage option for Orchestration Cluster installations, alongside Elasticsearch and OpenSearch.
 
-With RDBMS secondary storage, data is exported to your relational database, and the Orchestration Cluster reads from it.
+With RDBMS secondary storage, the RDBMS exporter writes orchestration data to your relational database, and the Orchestration Cluster API queries it. Operate, Tasklist, and Admin use that API rather than querying the database directly.
 
 In this context:
 
@@ -17,6 +17,18 @@ In this context:
 - [Secondary storage](/reference/glossary.md#secondary-storage) is an external store used for indexing, querying, analytics, and retention.
 
 For a deeper conceptual comparison, see [understanding primary vs secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#about-this-mode).
+
+```mermaid
+graph LR
+    exporter["RDBMS Exporter"]
+    api["Orchestration Cluster API"]
+    rdbms["RDBMS\n(secondary storage)"]
+    exporter -->|"Write"| rdbms
+    api -->|"Query"| rdbms
+    style exporter fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style api fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
+```
 
 ## Start here
 

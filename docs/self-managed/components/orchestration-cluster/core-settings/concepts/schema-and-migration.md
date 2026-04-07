@@ -12,7 +12,7 @@ This page describes schema and migration behavior for document-store secondary s
 
 For document-store backends, cluster data is stored in indices governed by a schema version. Index names follow this pattern:
 
-```
+```text
 {cluster-index-prefix}-{legacy-prefix}-{datatype}-{schemaversion}_[{date}]
 ```
 
@@ -24,7 +24,7 @@ For document-store backends, cluster data is stored in indices governed by a sch
 
 > The version in the index name is specific to the schema and may differ from the cluster software version. See [data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md).
 
-For more information about the specific indices used by the orchestration cluster, refer to the [Index Diagrams](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices.md).
+For configuration details related to document-store secondary storage, see [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
 
 From 8.8 onwards, no schema migrations are required when upgrading the orchestration cluster.
 

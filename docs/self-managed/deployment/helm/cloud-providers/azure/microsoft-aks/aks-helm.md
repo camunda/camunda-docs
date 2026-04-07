@@ -26,7 +26,7 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
-- A namespace to host the Camunda Platform; in this guide we will reference `camunda` as the target namespace.
+- A namespace to host Camunda; in this guide we will reference `camunda` as the target namespace.
 - (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - (optional) Permissions to install Kubernetes operators (cluster-admin or equivalent) to deploy infrastructure services such as Elasticsearch, PostgreSQL, and Keycloak. This guide installs them directly from source to provide full control over versions and configuration.
   For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
@@ -84,7 +84,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 If you do not have a domain name, external access to Camunda 8 web endpoints from outside the Azure Virtual Network will not be possible. In this case, skip the DNS setup and proceed directly to [deploying Camunda 8 via Helm charts](#deploy-camunda-8-via-helm-charts).
 
-Alternatively, you can use `kubectl port-forward` to access the Camunda platform without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+Alternatively, you can use `kubectl port-forward` to access Camunda without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 Throughout the rest of this installation guide, we will refer to configurations as **"With domain"** or **"Without domain"** depending on whether the application is exposed via a domain.
 :::
@@ -257,9 +257,10 @@ Some components are not enabled by default in this deployment. For more informat
 
 ### 3. Deploy prerequisite services
 
-Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
+Before deploying Camunda, you need to deploy the infrastructure services it depends on. For secondary storage, you can choose between Elasticsearch/OpenSearch or RDBMS:
 
-- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **Elasticsearch** (this guide): Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **RDBMS** (alternative): Use a managed Azure Database for PostgreSQL or another supported RDBMS engine — see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
@@ -270,6 +271,10 @@ All commands in this guide assume you are at the **repository root** (the direct
 ##### Deploy Elasticsearch {#deploy-elasticsearch}
 
 If your organization does not want to use a managed Elasticsearch service, ECK Operator is an option. In this guide, we default to the ECK Operator deployment of Elasticsearch.
+
+:::note RDBMS alternative
+For those who prefer a relational database, RDBMS (for example, [Azure Database for PostgreSQL](https://azure.microsoft.com/products/postgresql)) is a supported alternative to Elasticsearch for the Orchestration Cluster's secondary storage. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines. To use RDBMS instead, skip this section and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+:::
 
 :::warning Production Elasticsearch recommendation
 For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option.
@@ -314,7 +319,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 This script:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 

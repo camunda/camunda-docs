@@ -917,9 +917,12 @@ Each exporter should be configured following this template:
 #### YAML snippet
 
 ```yaml
-exporters:
-  jarPath:
-  className:
+zeebe:
+  broker:
+    ...
+    exporters:
+      jarPath:
+      className:
 ```
 
 ### zeebe.broker.exporters.elasticsearch

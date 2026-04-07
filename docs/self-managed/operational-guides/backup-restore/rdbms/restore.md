@@ -87,7 +87,7 @@ There are four restore options. In all cases, the restore app reads the exporter
 | [Backup ID restore](#backup-id-restore)           | `--backupId=<id>`      | Escape hatch to restore from a specific backup ID. Use at your own risk.                       |
 
 :::note
-`--backupId` is mutually exclusive with `--from`/`--to`. Specifying both causes an error.
+`--backupId` is mutually exclusive with `--from`/`--to`. Specifying both will result in error.
 :::
 
 ---
