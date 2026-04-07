@@ -279,17 +279,15 @@ For the full conditional behavior API, see [Utilities](/apis-tools/testing/utili
 
 After the process completes, use a judge assertion to verify that the agent's output satisfies a natural language expectation. The following example checks the full "Send Ervin a joke" scenario, including tool usage, email content, and the feedback loop:
 
-:::tip Increase the assertion timeout for AI agent processes
-AI agent processes typically take longer than standard BPMN processes because they involve LLM interactions. Increase the assertion timeout to avoid premature failures:
-
 ```java
-CamundaAssert.setAssertionTimeout(Duration.ofMinutes(1));
-```
+@BeforeAll
+static void configureCamundaAssert() {
+    // AI agent processes involve LLM interactions and typically take longer
+    // than standard BPMN processes. Increase the assertion timeout to avoid
+    // premature failures.
+    CamundaAssert.setAssertionTimeout(Duration.ofMinutes(1));
+}
 
-Call this in a `@BeforeEach` method or at the start of your test.
-:::
-
-```java
 @Test
 void shouldSendErvinAJoke() {
     // given: register conditional behaviors for tool tasks, email approval, and feedback
