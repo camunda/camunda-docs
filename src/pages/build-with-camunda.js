@@ -574,7 +574,10 @@ $ c8ctl c8run start
 ✔ Connectors runtime started
 
 Camunda is running. Deploy your first process:
-$ c8ctl deploy ./my-process.bpmn`}
+$ git clone https://github.com/camunda/camunda-8-get-started.git
+$ cd camunda-8-get-started/1-rocket-launch/
+$ c8ctl deploy .
+$ c8ctl run rocket-launch.bpmn`}
           </TerminalWindow>
 
           <div className={styles.modelerNote}>
