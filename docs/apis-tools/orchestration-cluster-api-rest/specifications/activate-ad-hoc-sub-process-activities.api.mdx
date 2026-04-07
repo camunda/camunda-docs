@@ -1,7 +1,7 @@
 ---
 id: activate-ad-hoc-sub-process-activities
 title: "Activate activities within an ad-hoc sub-process"
-description: "[[CONSISTENCY:STRONG]]"
+description: "<MarkerStronglyConsistentExtension />"
 sidebar_label: "Activate activities within an ad-hoc sub-process"
 hide_title: true
 hide_table_of_contents: true
@@ -11,6 +11,8 @@ info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchest
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -35,7 +37,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-[[CONSISTENCY:STRONG]]
+<MarkerStronglyConsistentExtension />
 
 Activates selected activities within an ad-hoc sub-process identified by element ID.
 The provided element IDs must exist within the ad-hoc sub-process instance identified by the

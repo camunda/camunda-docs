@@ -1,7 +1,7 @@
 ---
 id: delete-group
 title: "Delete group"
-description: "[[CONSISTENCY:STRONG]]"
+description: "<MarkerStronglyConsistentExtension />"
 sidebar_label: "Delete group"
 hide_title: true
 hide_table_of_contents: true
@@ -11,6 +11,8 @@ info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchest
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,7 +35,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-[[CONSISTENCY:STRONG]]
+<MarkerStronglyConsistentExtension />
 
 Deletes the group with the given ID.
 

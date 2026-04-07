@@ -1,7 +1,7 @@
 ---
 id: resolve-incidents-batch-operation
 title: "Resolve related incidents (batch)"
-description: "[[CONSISTENCY:STRONG]]"
+description: "<MarkerStronglyConsistentExtension />"
 sidebar_label: "Resolve related incidents (batch)"
 hide_title: true
 hide_table_of_contents: true
@@ -11,6 +11,8 @@ info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchest
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,7 +35,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-[[CONSISTENCY:STRONG]]
+<MarkerStronglyConsistentExtension />
 
 Resolves multiple instances of process instances.
 Since only process instances with ACTIVE state can have unresolved incidents, any given
