@@ -64,11 +64,6 @@ The test scenario is "Send Ervin a joke." To fulfill this request the agent coul
 
 This test intentionally keeps the AI agent execution real, including the interaction with the configured LLM. At the same time, it mocks tool executions so the test does not depend on external systems such as REST endpoints behind connector-based tools. That balance makes the test more realistic than a unit test that mocks the whole agent interaction, while still keeping the execution stable and controlled.
 
-Before configuring CPT, check which chat model provider the **AI Agent Chat With Tools** blueprint uses:
-
-- If the blueprint still uses Amazon Bedrock, provide the Bedrock connector secrets for the AI agent runtime.
-- If you reconfigured the blueprint to use Ollama, those Bedrock connector secrets are not needed.
-
 ## Step 2: Configure the LLM provider and connectors
 
 Judge assertions send a process variable and a natural language expectation to a configured LLM, which scores how well they match. The assertion passes if the score meets a configurable threshold. This avoids brittle string-matching on free-text AI output.
@@ -98,10 +93,7 @@ If your AI agent tools use different outbound connectors, adjust `CONNECTOR_OUTB
 
 ### Configure the LLM provider
 
-Then configure the judge provider to match the model provider used by your **AI Agent Chat With Tools** blueprint process.
-
-If the blueprint still uses Amazon Bedrock, provide AWS connector secrets and configure the judge to use Amazon Bedrock as well.
-If you reconfigured the blueprint to use Ollama, you do not need the Bedrock connector secrets and can use the OpenAI-compatible judge provider instead.
+Configure the judge provider to match the model provider used by your AI agent process.
 
 <Tabs groupId="judge-provider" defaultValue="amazon-bedrock" queryString values={[
 {label: 'Amazon Bedrock', value: 'amazon-bedrock' },
@@ -110,22 +102,17 @@ If you reconfigured the blueprint to use Ollama, you do not need the Bedrock con
 
 <TabItem value='amazon-bedrock'>
 
-This example uses AWS credentials to match the Bedrock setup used elsewhere in the AI agent guides.
-
 ```yaml
 camunda:
   process-test:
     connectors-secrets:
-      AWS_BEDROCK_ACCESS_KEY: "your-access-key"
-      AWS_BEDROCK_SECRET_KEY: "your-secret-key"
+      AWS_BEDROCK_ACCESS_KEY: ${AWS_BEDROCK_ACCESS_KEY}
+      AWS_BEDROCK_SECRET_KEY: ${AWS_BEDROCK_SECRET_KEY}
     judge:
       chat-model:
         provider: "amazon-bedrock"
         model: "eu.anthropic.claude-haiku-4-5-20251001-v1:0"
         region: "eu-central-1"
-        credentials:
-          access-key: "your-access-key"
-          secret-key: "your-secret-key"
 ```
 
 </TabItem>
@@ -147,6 +134,10 @@ camunda:
 </TabItem>
 
 </Tabs>
+
+:::tip Manage secrets with environment variables
+Avoid committing credentials to your test configuration files. CPT properties support [Spring's external configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html), so you can inject secrets through environment variables or a separate profile. See the [CPT configuration reference](/apis-tools/testing/configuration.md) for details.
+:::
 
 The AI agent can still interact with the configured LLM provider, while the test controls the tool executions.
 
