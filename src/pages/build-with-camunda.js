@@ -566,7 +566,7 @@ function BuildWithCamunda() {
           </div>
           <TerminalWindow title="Terminal">
             {`$ npm install @camunda8/cli@alpha -g
-$ c8ctl c8run start
+$ c8ctl cluster start
 
 ✔ Zeebe broker started on port 26500
 ✔ Operate available at http://localhost:8081
