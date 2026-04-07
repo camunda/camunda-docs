@@ -83,7 +83,7 @@ For step-by-step restore instructions, see the [Backup and restore guides](/self
 
 - [Multi-region resilience tiers overview](./resilience-tiers.md)
 - [Tier 2 — Dual-Region](./dual-region.md)
-- [Backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
+- [Camunda backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
 - [Zeebe backup management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
 - [Elasticsearch backup](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md)
 - [Elasticsearch restore](/self-managed/operational-guides/backup-restore/elasticsearch/restore.md)

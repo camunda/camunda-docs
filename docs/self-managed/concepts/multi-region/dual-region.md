@@ -20,6 +20,14 @@ In Tier 2, a full Camunda Orchestration Cluster runs continuously in both a prim
 | **Failover mode**                   | Manual, operator-initiated                               |
 | **Standing second region required** | Yes — full Orchestration Cluster running in both regions |
 
+| Property                            | Value                                                    |
+| ----------------------------------- | -------------------------------------------------------- |
+| **RTO**                             | ~15 minutes                                              |
+| **RPO**                             | 0                                                        |
+| **Failover mode**                   | Manual, operator-initiated                               |
+| **Standing second region required** | Yes — full Orchestration Cluster running in both regions |
+| **Primary compliance fit**          | DORA, SR 11-7 (with documented runbook)                  |
+
 :::caution
 
 Before implementing a dual-region setup, ensure you understand the topic, the [limitations](#camunda-8-dual-region-limitations) of dual-region setup, and the general [considerations](#infrastructure-and-deployment-platform-considerations) of operating a dual-region setup.
@@ -160,6 +168,14 @@ The currently supported Camunda 8 Self-Managed components are:
 |                                       Operate | Active-active with v2 API (active-passive with v1)      | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Both regions serve users when using v2 API</li><li>**Region-specific data**: Uncompleted batch operations only when using v1 API</li></ul>                                                                                                                             | Data loss possible only if using v1 API, as changes are isolated to the initiated region. |
 |                                      Tasklist | Active-active with Tasklist V2 (active-passive with v1) | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Both regions serve users when using Tasklist V2</li><li>**Region-specific data**: Task assignments only when using v1 API</li></ul>                                                                                                                                    | Data loss possible only if using v1 API, as changes are isolated to the initiated region. |
 |         <p align="left">**Elasticsearch**</p> | Active-active                                           | Both clusters must run                | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down                                 |
+
+### Data flow and consistency behavior
+
+Under normal operation, Zeebe continuously exports events to the local Elasticsearch cluster in each region. The two clusters are independent — there is no direct cross-region Elasticsearch replication.
+
+**Export lag**: There is an inherent delay between a Zeebe event and its appearance in Elasticsearch, typically measured in seconds under normal load. Under sustained high throughput or network pressure, lag can grow.
+
+**Consistency on failover**: When the primary region fails, the secondary region's Elasticsearch cluster reflects Zeebe state up to the point of last successful export. Zeebe's Raft log in the surviving region contains a complete, consistent record of all committed process instances (RPO = 0). Secondary storage state catches up once Zeebe resumes exporting after the failover procedure completes.
 
 ## Requirements and limitations
 
@@ -317,7 +333,7 @@ The headline **~15 minute RTO** is the end-to-end planning target including DNS 
 The 5-minute baseline for reinstallation comes from automated test runs. Actual times depend on data volume, chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types), available resources, and operator familiarity with the runbook.
 
 :::info
-RTO estimates are based on internal tests and should be considered approximate. Actual times may vary depending on your environment, network conditions, operator familiarity, and DNS TTL configuration.
+The **Recovery Time Objective (RTO)** estimates are based on our internal tests and should be considered approximate. Actual times may vary depending on your environment, network conditions, operator familiarity, and DNS TTL configuration.
 :::
 
 ## Further resources
