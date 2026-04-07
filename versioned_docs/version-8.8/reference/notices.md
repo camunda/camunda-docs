@@ -32,6 +32,7 @@ Apr 7, 2026
 - Camunda Zeebe
 - Camunda Operate
 - Camunda Optimize
+- Camunda Web Modeler
 
 ### Impact
 
@@ -46,6 +47,7 @@ You are using:
 - Tasklist 8.7.21 - 8.7.25
 - Operate 8.7.22 - 8.7.25
 - Optimize 8.7.14 - 8.7.18 or 8.8.2 - 8.8.7
+- Web Modeler Self-Managed ≤ 8.6.26, ≤ 8.7.18, or ≤ 8.8.11
 
 ### Solution
 
@@ -56,6 +58,9 @@ Camunda has provided the following releases which contain the fix:
 - Tasklist 8.7.26
 - Operate 8.7.26
 - Optimize 8.7.19, 8.8.8
+- Web Modeler Self-Managed 8.6.27, 8.7.19, 8.8.12
+
+The fix was deployed to Web Modeler SaaS on March 23, 2026, 17:26 CET.
 
 ## Notice 42
 
