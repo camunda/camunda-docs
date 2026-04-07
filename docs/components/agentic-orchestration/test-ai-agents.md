@@ -188,6 +188,20 @@ processTestContext
                 Map.of("id", 2,
                     "name", "Ervin Howell",
                     "email", "Shanna@melissa.tv"))));
+
+// given: complete Jokes_API with two different jokes
+processTestContext
+    .when(
+            () ->
+            assertThatProcessInstance(ProcessInstanceSelectors.byProcessId(PROCESS_ID))
+                .hasActiveElements("Jokes_API"))
+    .as("complete jokes tool")
+    .then(
+        () -> processTestContext.completeJob(
+        byElementId("Jokes_API"), Map.of("toolCallResult", FIRST_JOKE)))
+    .then(
+        () -> processTestContext.completeJob(
+        byElementId("Jokes_API"), Map.of("toolCallResult", SECOND_JOKE)));
 ```
 
 ### Complete user tasks
@@ -252,7 +266,7 @@ void shouldSendErvinAJoke() {
     ProcessInstanceEvent processInstance = client.newCreateInstanceCommand()
         .bpmnProcessId("ai-agent-chat")
         .latestVersion()
-        .variables(Map.of("prompt", "Send Ervin a joke"))
+        .variables(Map.of("inputText", "Send Ervin a joke"))
         .send()
         .join();
 
