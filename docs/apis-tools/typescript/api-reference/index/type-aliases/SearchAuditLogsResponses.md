@@ -11,26 +11,16 @@ mdx:
 type SearchAuditLogsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:7670](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7670)
+Defined in: [gen/types.gen.ts:8516](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8516)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: AuditLogSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:7674](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7674)
+Defined in: [gen/types.gen.ts:8520](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8520)
 
-Audit log search response.
-
-#### Type Declaration
-
-##### items?
-
-```ts
-optional items: object[];
-```
-
-The matching audit logs.
+The audit logs search result.

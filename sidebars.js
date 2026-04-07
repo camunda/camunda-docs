@@ -1540,6 +1540,9 @@ module.exports = {
                 id: "self-managed/quickstart/developer-quickstart/c8run",
               },
               items: [
+                "self-managed/quickstart/developer-quickstart/c8run/install-start",
+                "self-managed/quickstart/developer-quickstart/c8run/configuration",
+                "self-managed/quickstart/developer-quickstart/c8run/secondary-storage",
                 "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
               ],
             },

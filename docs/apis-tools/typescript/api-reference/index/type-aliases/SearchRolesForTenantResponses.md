@@ -11,16 +11,26 @@ mdx:
 type SearchRolesForTenantResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:16174](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16174)
+Defined in: [gen/types.gen.ts:15482](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15482)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: SearchQueryResponse;
+200: SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:16178](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16178)
+Defined in: [gen/types.gen.ts:15486](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15486)
 
 The search result of roles for the tenant.
+
+#### Type Declaration
+
+##### items
+
+```ts
+items: RoleResult[];
+```
+
+The matching roles.

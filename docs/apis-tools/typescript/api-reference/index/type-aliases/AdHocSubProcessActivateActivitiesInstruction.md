@@ -11,17 +11,17 @@ mdx:
 type AdHocSubProcessActivateActivitiesInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:2559](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2559)
+Defined in: [gen/types.gen.ts:2704](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2704)
 
 ## Properties
 
 ### cancelRemainingInstances?
 
 ```ts
-optional cancelRemainingInstances: boolean;
+optional cancelRemainingInstances?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:2567](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2567)
+Defined in: [gen/types.gen.ts:2712](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2712)
 
 Whether to cancel remaining instances of the ad-hoc sub-process.
 
@@ -33,6 +33,6 @@ Whether to cancel remaining instances of the ad-hoc sub-process.
 elements: AdHocSubProcessActivateActivityReference[];
 ```
 
-Defined in: [gen/types.gen.ts:2563](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2563)
+Defined in: [gen/types.gen.ts:2708](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2708)
 
 Activities to activate.

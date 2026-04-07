@@ -11,7 +11,7 @@ mdx:
 type IncidentProcessInstanceStatisticsByErrorQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:3240](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3240)
+Defined in: [gen/types.gen.ts:3617](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3617)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:3240](https://github.com/camunda/orchestration-clu
 field: "errorMessage" | "activeInstancesWithErrorCount";
 ```
 
-Defined in: [gen/types.gen.ts:3244](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3244)
+Defined in: [gen/types.gen.ts:3621](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3621)
 
 The field to sort the incident error statistics by.
 
@@ -30,7 +30,7 @@ The field to sort the incident error statistics by.
 ### order?
 
 ```ts
-optional order: SortOrderEnum;
+optional order?: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3245](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3245)
+Defined in: [gen/types.gen.ts:3622](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3622)

@@ -11,7 +11,7 @@ mdx:
 type IncidentProcessInstanceStatisticsByDefinitionQuery = object;
 ```
 
-Defined in: [gen/types.gen.ts:3248](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3248)
+Defined in: [gen/types.gen.ts:3625](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3625)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:3248](https://github.com/camunda/orchestration-clu
 filter: IncidentProcessInstanceStatisticsByDefinitionFilter;
 ```
 
-Defined in: [gen/types.gen.ts:3252](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3252)
+Defined in: [gen/types.gen.ts:3629](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3629)
 
 Filter criteria for the aggregated process instance statistics.
 
@@ -30,10 +30,10 @@ Filter criteria for the aggregated process instance statistics.
 ### page?
 
 ```ts
-optional page: OffsetPagination;
+optional page?: OffsetPagination;
 ```
 
-Defined in: [gen/types.gen.ts:3256](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3256)
+Defined in: [gen/types.gen.ts:3633](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3633)
 
 Pagination parameters for the aggregated process instance statistics.
 
@@ -42,9 +42,9 @@ Pagination parameters for the aggregated process instance statistics.
 ### sort?
 
 ```ts
-optional sort: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest[];
+optional sort?: IncidentProcessInstanceStatisticsByDefinitionQuerySortRequest[];
 ```
 
-Defined in: [gen/types.gen.ts:3260](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3260)
+Defined in: [gen/types.gen.ts:3637](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3637)
 
 Sorting criteria for process instance statistics grouped by process definition.

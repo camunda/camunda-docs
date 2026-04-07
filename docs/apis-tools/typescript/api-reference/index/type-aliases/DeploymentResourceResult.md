@@ -11,58 +11,64 @@ mdx:
 type DeploymentResourceResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2124](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2124)
+Defined in: [gen/types.gen.ts:2218](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2218)
 
 A deployed Resource.
 
 ## Properties
 
-### resourceId?
+### resourceId
 
 ```ts
-optional resourceId: string;
+resourceId: string;
 ```
 
-Defined in: [gen/types.gen.ts:2125](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2125)
+Defined in: [gen/types.gen.ts:2222](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2222)
+
+The resource id of the deployed resource.
 
 ---
 
-### resourceKey?
+### resourceKey
 
 ```ts
-optional resourceKey: ResourceKey;
+resourceKey: ResourceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2132](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2132)
+Defined in: [gen/types.gen.ts:2235](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2235)
 
 The assigned key, which acts as a unique identifier for this Resource.
 
 ---
 
-### resourceName?
+### resourceName
 
 ```ts
-optional resourceName: string;
+resourceName: string;
 ```
 
-Defined in: [gen/types.gen.ts:2126](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2126)
+Defined in: [gen/types.gen.ts:2226](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2226)
+
+The name of the deployed resource.
 
 ---
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:2128](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2128)
+Defined in: [gen/types.gen.ts:2231](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2231)
 
 ---
 
-### version?
+### version
 
 ```ts
-optional version: number;
+version: number;
 ```
 
-Defined in: [gen/types.gen.ts:2127](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2127)
+Defined in: [gen/types.gen.ts:2230](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2230)
+
+The description of the deployed resource.

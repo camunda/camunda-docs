@@ -11,7 +11,7 @@ mdx:
 type CursorForwardPagination = object;
 ```
 
-Defined in: [gen/types.gen.ts:6433](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6433)
+Defined in: [gen/types.gen.ts:7153](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7153)
 
 Cursor-based forward pagination
 
@@ -23,7 +23,7 @@ Cursor-based forward pagination
 after: EndCursor;
 ```
 
-Defined in: [gen/types.gen.ts:6437](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6437)
+Defined in: [gen/types.gen.ts:7157](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7157)
 
 Use the `endCursor` value from the previous response to fetch the next page of results.
 
@@ -32,9 +32,9 @@ Use the `endCursor` value from the previous response to fetch the next page of r
 ### limit?
 
 ```ts
-optional limit: number;
+optional limit?: number;
 ```
 
-Defined in: [gen/types.gen.ts:6441](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6441)
+Defined in: [gen/types.gen.ts:7161](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7161)
 
 The maximum number of items to return in one request.

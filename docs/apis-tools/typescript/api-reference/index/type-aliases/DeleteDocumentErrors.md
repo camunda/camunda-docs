@@ -11,7 +11,7 @@ mdx:
 type DeleteDocumentErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:10123](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10123)
+Defined in: [gen/types.gen.ts:10217](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10217)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:10123](https://github.com/camunda/orchestration-cl
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10127](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10127)
+Defined in: [gen/types.gen.ts:10221](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10221)
 
 The document with the given ID was not found.
 
@@ -33,6 +33,6 @@ The document with the given ID was not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10131](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10131)
+Defined in: [gen/types.gen.ts:10225](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10225)
 
 An internal error occurred while processing the request.

@@ -7,7 +7,7 @@ mdx:
 
 # Class: CancelError
 
-Defined in: [gen/CamundaClient.ts:1111](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1111)
+Defined in: [gen/CamundaClient.ts:1106](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1106)
 
 ## Extends
 
@@ -21,7 +21,7 @@ Defined in: [gen/CamundaClient.ts:1111](https://github.com/camunda/orchestration
 new CancelError(): CancelError;
 ```
 
-Defined in: [gen/CamundaClient.ts:1112](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1112)
+Defined in: [gen/CamundaClient.ts:1107](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1107)
 
 #### Returns
 

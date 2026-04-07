@@ -69,6 +69,7 @@ components:
         result:
           description: The result value. Its type can vary.
           example: 30
+          nullable: true
         warnings:
           type: array
           description: List of warnings generated during expression evaluation

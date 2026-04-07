@@ -11,30 +11,30 @@ mdx:
 type MessagePublicationResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:4711](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4711)
+Defined in: [gen/types.gen.ts:5352](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5352)
 
 The message key of the published message.
 
 ## Properties
 
-### messageKey?
+### messageKey
 
 ```ts
-optional messageKey: MessageKey;
+messageKey: MessageKey;
 ```
 
-Defined in: [gen/types.gen.ts:4719](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4719)
+Defined in: [gen/types.gen.ts:5360](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5360)
 
 The key of the published message.
 
 ---
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:4715](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4715)
+Defined in: [gen/types.gen.ts:5356](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5356)
 
 The tenant ID of the message.

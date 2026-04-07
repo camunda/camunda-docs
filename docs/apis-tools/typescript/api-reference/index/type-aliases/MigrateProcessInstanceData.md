@@ -11,41 +11,17 @@ mdx:
 type MigrateProcessInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14163](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14163)
+Defined in: [gen/types.gen.ts:13514](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13514)
 
 ## Properties
 
 ### body
 
 ```ts
-body: object;
+body: ProcessInstanceMigrationInstruction;
 ```
 
-Defined in: [gen/types.gen.ts:14168](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14168)
-
-The migration instructions describe how to migrate a process instance from one process definition to another.
-
-#### mappingInstructions
-
-```ts
-mappingInstructions: MigrateProcessInstanceMappingInstruction[];
-```
-
-Element mappings from the source process instance to the target process instance.
-
-#### operationReference?
-
-```ts
-optional operationReference: OperationReference;
-```
-
-#### targetProcessDefinitionKey
-
-```ts
-targetProcessDefinitionKey: ProcessDefinitionKey;
-```
-
-The key of process definition to migrate the process instance to.
+Defined in: [gen/types.gen.ts:13515](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13515)
 
 ---
 
@@ -55,7 +31,7 @@ The key of process definition to migrate the process instance to.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:14179](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14179)
+Defined in: [gen/types.gen.ts:13516](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13516)
 
 #### processInstanceKey
 
@@ -70,10 +46,10 @@ The key of the process instance that should be migrated.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14185](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14185)
+Defined in: [gen/types.gen.ts:13522](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13522)
 
 ---
 
@@ -83,4 +59,4 @@ Defined in: [gen/types.gen.ts:14185](https://github.com/camunda/orchestration-cl
 url: "/process-instances/{processInstanceKey}/migration";
 ```
 
-Defined in: [gen/types.gen.ts:14186](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14186)
+Defined in: [gen/types.gen.ts:13523](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13523)

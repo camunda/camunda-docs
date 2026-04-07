@@ -11,35 +11,17 @@ mdx:
 type SearchUserTaskAuditLogsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:17175](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17175)
+Defined in: [gen/types.gen.ts:16263](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16263)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: SearchQueryRequest & object;
+optional body?: UserTaskAuditLogSearchQueryRequest;
 ```
 
-Defined in: [gen/types.gen.ts:17179](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17179)
-
-User task search query request.
-
-#### Type Declaration
-
-##### filter?
-
-```ts
-optional filter: UserTaskAuditLogFilter;
-```
-
-##### sort?
-
-```ts
-optional sort: AuditLogSearchQuerySortRequest[];
-```
-
-Sort field criteria.
+Defined in: [gen/types.gen.ts:16264](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16264)
 
 ---
 
@@ -49,7 +31,7 @@ Sort field criteria.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:17186](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17186)
+Defined in: [gen/types.gen.ts:16265](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16265)
 
 #### userTaskKey
 
@@ -64,10 +46,10 @@ The key of the user task.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:17192](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17192)
+Defined in: [gen/types.gen.ts:16271](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16271)
 
 ---
 
@@ -77,4 +59,4 @@ Defined in: [gen/types.gen.ts:17192](https://github.com/camunda/orchestration-cl
 url: "/user-tasks/{userTaskKey}/audit-logs/search";
 ```
 
-Defined in: [gen/types.gen.ts:17193](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17193)
+Defined in: [gen/types.gen.ts:16272](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16272)

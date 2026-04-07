@@ -40,9 +40,8 @@ You can use the provided Web Modeler deployment pipeline to manage your applicat
 
 To define your deployment pipeline stages:
 
-1. Open the [main process](create-a-process-application.md#main-process).
-1. Select **Deploy** to open the **Deploy process application** modal.
-1. Select **Define stages** to open the **Define stages** modal.
+1. Open the [process application homepage](create-a-process-application.md#process-application-homepage).
+1. Select **Configure** in the **Connected clusters** section to open the **Define stages** modal.
    <p><img src={DeployStagesImg} alt="Define stage for deployment modal" /></p>
 1. Select and assign a cluster to each deployment stage that you want to use in your deployment pipeline.
 1. Select **Save** to save your changes and close the modal.
@@ -75,7 +74,6 @@ After validation is complete, you can [create a new version of your process appl
 3. Reviewers can view the changes, comment, request changes, or approve the process application version.
 4. After a user has submitted their review, the process application version is marked as reviewed and the review status is shown in the version history.
    1. Any user with edit permissions can go back and edit the review at any point in time to update the assessment.
-   2. Any changes to the review status of a version are logged in the comment section of the main process diagram.
 5. If the reviewer has marked the version with "changes requested", you can address the feedback by performing the requested changes, creating a new version, and requesting a review for the new version.
 
 This review capability is most useful for reviews on a business level.
@@ -106,5 +104,5 @@ The Web Modeler development lifecycle provides the following process governance:
 
 | Governance         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Change control     | Reviews cannot be performed by the user who created the process application version unless the user is an organization administrator. Reviews can be edited, but changes will be logged in the comment thread of the main process.                                                                                                                                                                                                                                                                                |
+| Change control     | Reviews cannot be performed by the user who created the process application version unless the user is an organization administrator. Reviews can be edited.                                                                                                                                                                                                                                                                                                                                                      |
 | Deployment control | <p><ul><li><p>Deployments can only be made to the pre-defined set of approved clusters.</p></li><li>Only users with correct privileges can deploy. Depending on the [deployment settings](/components/modeler/web-modeler/web-modeler-settings.md#process-application-deployment), organization administrators can deploy to `prod` tagged clusters, or only approved versions can be deployed.</li><li>Each deployment action is logged with information on the user and stage it was deployed to.</li></ul></p> |

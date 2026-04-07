@@ -11,17 +11,17 @@ mdx:
 type GroupUpdateRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:2814](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2814)
+Defined in: [gen/types.gen.ts:3147](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3147)
 
 ## Properties
 
 ### description?
 
 ```ts
-optional description: string;
+optional description?: string;
 ```
 
-Defined in: [gen/types.gen.ts:2822](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2822)
+Defined in: [gen/types.gen.ts:3155](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3155)
 
 The new description of the group.
 
@@ -33,6 +33,6 @@ The new description of the group.
 name: string;
 ```
 
-Defined in: [gen/types.gen.ts:2818](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2818)
+Defined in: [gen/types.gen.ts:3151](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3151)
 
 The new name of the group.

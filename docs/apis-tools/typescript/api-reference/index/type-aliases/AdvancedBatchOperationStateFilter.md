@@ -11,7 +11,7 @@ mdx:
 type AdvancedBatchOperationStateFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:1051](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1051)
+Defined in: [gen/types.gen.ts:1082](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1082)
 
 Advanced filter
 
@@ -22,10 +22,10 @@ Advanced BatchOperationStateEnum filter.
 ### $eq?
 
 ```ts
-optional $eq: BatchOperationStateEnum;
+optional $eq?: BatchOperationStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:1055](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1055)
+Defined in: [gen/types.gen.ts:1086](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1086)
 
 Checks for equality with the provided value.
 
@@ -34,10 +34,10 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:1063](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1063)
+Defined in: [gen/types.gen.ts:1094](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1094)
 
 Checks if the current property exists.
 
@@ -46,10 +46,10 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: BatchOperationStateEnum[];
+optional $in?: BatchOperationStateEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:1067](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1067)
+Defined in: [gen/types.gen.ts:1098](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1098)
 
 Checks if the property matches any of the provided values.
 
@@ -58,19 +58,19 @@ Checks if the property matches any of the provided values.
 ### $like?
 
 ```ts
-optional $like: LikeFilter;
+optional $like?: LikeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:1068](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1068)
+Defined in: [gen/types.gen.ts:1099](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1099)
 
 ---
 
 ### $neq?
 
 ```ts
-optional $neq: BatchOperationStateEnum;
+optional $neq?: BatchOperationStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:1059](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1059)
+Defined in: [gen/types.gen.ts:1090](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1090)
 
 Checks for inequality with the provided value.

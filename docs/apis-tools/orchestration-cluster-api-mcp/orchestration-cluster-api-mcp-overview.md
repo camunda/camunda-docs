@@ -52,7 +52,7 @@ The MCP server uses the [Streamable HTTP](https://modelcontextprotocol.io/specif
 The MCP server is available from Camunda 8.9 onwards.
 :::
 
-If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), the MCP server is enabled by default. Connect any MCP client using this configuration:
+If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), the MCP server is enabled by default. Connect any MCP client using this configuration:
 
 ```json
 {

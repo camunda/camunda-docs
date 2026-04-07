@@ -11,7 +11,7 @@ mdx:
 type UpdateGroupResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:10851](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10851)
+Defined in: [gen/types.gen.ts:11019](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11019)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:10851](https://github.com/camunda/orchestration-cl
 200: GroupUpdateResult;
 ```
 
-Defined in: [gen/types.gen.ts:10855](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10855)
+Defined in: [gen/types.gen.ts:11023](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11023)
 
 The group was updated successfully.

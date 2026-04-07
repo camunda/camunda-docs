@@ -11,17 +11,17 @@ mdx:
 type IncidentProcessInstanceStatisticsByErrorQuery = object;
 ```
 
-Defined in: [gen/types.gen.ts:3204](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3204)
+Defined in: [gen/types.gen.ts:3581](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3581)
 
 ## Properties
 
 ### page?
 
 ```ts
-optional page: OffsetPagination;
+optional page?: OffsetPagination;
 ```
 
-Defined in: [gen/types.gen.ts:3209](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3209)
+Defined in: [gen/types.gen.ts:3586](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3586)
 
 Pagination parameters for process instance statistics grouped by incident error.
 
@@ -30,9 +30,9 @@ Pagination parameters for process instance statistics grouped by incident error.
 ### sort?
 
 ```ts
-optional sort: IncidentProcessInstanceStatisticsByErrorQuerySortRequest[];
+optional sort?: IncidentProcessInstanceStatisticsByErrorQuerySortRequest[];
 ```
 
-Defined in: [gen/types.gen.ts:3213](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3213)
+Defined in: [gen/types.gen.ts:3590](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3590)
 
 Sorting criteria for process instance statistics grouped by incident error.

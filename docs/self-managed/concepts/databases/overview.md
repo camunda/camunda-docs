@@ -20,7 +20,7 @@ For an architectural explanation of how secondary storage fits into Camunda 8, s
 | Web Modeler           | Yes   | No      |
 | Management Identity   | Yes   | No      |
 
-Use this matrix as a quick decision aid when planning your deployment topology.
+Use this matrix as a compatibility summary for the main Camunda components and their supported database backends.
 
 ## Document-store backends
 
@@ -37,7 +37,7 @@ Related documentation:
 
 ## Relational databases (RDBMS)
 
-Camunda also supports several relational databases for secondary storage, enabling Operate, Tasklist, Identity, and REST APIs to run without Elasticsearch or OpenSearch.
+Camunda also supports several relational databases for secondary storage, enabling the Orchestration Cluster API, Operate, Tasklist, and Admin to run without Elasticsearch or OpenSearch.
 
 RDBMS and document-store backends are both valid secondary storage options. Select based on your workload, operational model, and platform standards.
 

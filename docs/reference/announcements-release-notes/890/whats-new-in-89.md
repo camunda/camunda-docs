@@ -51,23 +51,23 @@ Important changes in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Audit log](#audit-log)</td>
-    <td>Access a record of operations, including who performed an operation, when it was performed, and on which entities the operation was performed.</td>
+    <td>Access a detailed record of operations.</td>
 </tr>
 <tr>
     <td>[Camunda 8 Run](#camunda8run)</td>
-    <td>Improved CLI and configuration experience, use H2 as the default secondary storage for your local/development setups.</td>
+    <td>Improved CLI/configuration experience and secondary storage enhancements.</td>
 </tr>
 <tr>
     <td>[Global user task listeners](#listeners)</td>
-    <td>Define configuration‑based, cluster‑wide user task listeners with consistent payloads for all user task events.</td>
+    <td>Define configuration‑based, cluster‑wide user task listeners.</td>
 </tr>
 <tr>
 <td>[Helm chart deployment](#helm-chart-deployment)</td>
-    <td>RDBMS and secondary storage type configuration, removal of deprecated secret keys, migration to new `*.secret.existingSecret` pattern, default REST port changed from 8090 to 8080, and Helm 4 support.</td>
+    <td>RDBMS and secondary storage configuration, `*.secret.existingSecret` pattern migration, default 8080 REST port, Helm 4 support, and more.</td>
 </tr>
 <tr>
 <td>[Migration from Camunda 7](#migration)</td>
-    <td>New migration tools include History Data Migrator and Identity Data Migrator.</td>
+    <td>New migration tools History Data Migrator and Identity Data Migrator.</td>
 </tr>
 <tr>
     <td>[Modeler](#modeler)</td>
@@ -75,11 +75,11 @@ Important changes in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Orchestration Cluster](#ocluster)</td>
-    <td>Identity renamed to Admin, Amazon ECS (EC2+Fargate) support, cluster variables for shared configuration, Cluster Metrics endpoint for SaaS clusters, and conifguration improvements and enhancements.</td>
+    <td>Identity renamed to Admin, Amazon ECS (EC2+Fargate) support, cluster variables, Cluster Metrics endpoint for SaaS clusters, and configuration improvements and enhancements.</td>
 </tr>
 <tr>
     <td>[RDBMS secondary storage](#rdbms)</td>
-    <td>Use relational databases as secondary storage for the Orchestration Cluster.</td>
+    <td>Relational database support as secondary storage for the Orchestration Cluster.</td>
 </tr>
 <tr>
     <td>[Supported environments](#environments)</td>
@@ -162,7 +162,7 @@ Camunda 8 Run now uses H2 as the default secondary data store.
 
 You can also configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2 (for example, PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
 
-<p class="link-arrow">[Configure Camunda 8 Run secondary storage](/self-managed/quickstart/developer-quickstart/c8run.md#configure-or-switch-secondary-storage-h2-or-elasticsearch)</p>
+<p class="link-arrow">[Configure Camunda 8 Run secondary storage](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md#configure-or-switch-secondary-storage-h2-or-elasticsearch)</p>
 
 ## Global user task listeners {#listeners}
 

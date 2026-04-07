@@ -11,7 +11,7 @@ mdx:
 type MappingRuleCreateUpdateRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:4521](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4521)
+Defined in: [gen/types.gen.ts:5162](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5162)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:4521](https://github.com/camunda/orchestration-clu
 claimName: string;
 ```
 
-Defined in: [gen/types.gen.ts:4525](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4525)
+Defined in: [gen/types.gen.ts:5166](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5166)
 
 The name of the claim to map.
 
@@ -33,7 +33,7 @@ The name of the claim to map.
 claimValue: string;
 ```
 
-Defined in: [gen/types.gen.ts:4529](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4529)
+Defined in: [gen/types.gen.ts:5170](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5170)
 
 The value of the claim to map.
 
@@ -45,6 +45,6 @@ The value of the claim to map.
 name: string;
 ```
 
-Defined in: [gen/types.gen.ts:4533](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4533)
+Defined in: [gen/types.gen.ts:5174](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5174)
 
 The name of the mapping rule.

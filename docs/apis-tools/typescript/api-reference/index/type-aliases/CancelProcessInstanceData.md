@@ -11,21 +11,21 @@ mdx:
 type CancelProcessInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13926](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13926)
+Defined in: [gen/types.gen.ts:13317](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13317)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body:
+optional body?:
   | {
   operationReference?: OperationReference;
 }
   | null;
 ```
 
-Defined in: [gen/types.gen.ts:13927](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13927)
+Defined in: [gen/types.gen.ts:13318](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13318)
 
 ---
 
@@ -35,7 +35,7 @@ Defined in: [gen/types.gen.ts:13927](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:13930](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13930)
+Defined in: [gen/types.gen.ts:13321](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13321)
 
 #### processInstanceKey
 
@@ -50,10 +50,10 @@ The key of the process instance to cancel.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:13936](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13936)
+Defined in: [gen/types.gen.ts:13327](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13327)
 
 ---
 
@@ -63,4 +63,4 @@ Defined in: [gen/types.gen.ts:13936](https://github.com/camunda/orchestration-cl
 url: "/process-instances/{processInstanceKey}/cancellation";
 ```
 
-Defined in: [gen/types.gen.ts:13937](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13937)
+Defined in: [gen/types.gen.ts:13328](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13328)

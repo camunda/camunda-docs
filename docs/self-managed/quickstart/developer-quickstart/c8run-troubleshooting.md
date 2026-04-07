@@ -21,7 +21,7 @@ If you configured external Elasticsearch, inspect that deployment's logs separat
 **Solution:**
 
 1. Check if the default ports are already occupied:
-   - `8080` – Camunda core (Operate, Tasklist, Identity, APIs)
+   - `8080` – Camunda core (Operate, Tasklist, Admin, APIs)
    - `8086` – Connectors API
    - `26500` – Zeebe gRPC gateway
    - `9600` – Prometheus metrics
@@ -110,8 +110,8 @@ Replace `21` in the examples with the version you installed (21–25), and open 
    ```
 
 3. Access components manually if the browser does not open automatically:
-   - Operate: http://localhost:8080/operate
-   - Tasklist: http://localhost:8080/tasklist
+   - Operate: [http://localhost:8080/operate](http://localhost:8080/operate)
+   - Tasklist: [http://localhost:8080/tasklist](http://localhost:8080/tasklist)
 
 ## Memory and performance issues
 
@@ -400,9 +400,9 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
 
 1. For non-Docker mode, export connector secrets as environment variables:
 
-```bash
-export MY_SECRET_KEY=secret_value
-```
+   ```bash
+   export MY_SECRET_KEY=secret_value
+   ```
 
 2. For Docker mode, add secrets to the `connector-secrets.txt` file located in the Docker Compose folder.
 3. Restart Camunda 8 Run after adding or modifying secrets.

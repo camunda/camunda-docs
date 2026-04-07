@@ -2,7 +2,7 @@
 id: creating-a-process-instance
 title: "Creating a Process Instance"
 sidebar_label: "Creating a Process Instance"
-sidebar_position: 11
+sidebar_position: 12
 mdx:
   format: md
 ---
@@ -15,7 +15,7 @@ The C# SDK is a **technical preview** available from Camunda 8.9. It will become
 
 The recommended pattern is to obtain keys from a prior API response (e.g. a deployment) and pass them directly — no manual conversion needed:
 
-<!-- snippet:UsingDirective+ReadmeCreateProcessInstance -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+ReadmeCreateProcessInstance -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -36,7 +36,7 @@ Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
 
 If you need to restore a key from external storage (database, message queue, config file), wrap the raw value with the domain key constructor:
 
-<!-- snippet:UsingDirective+CreateProcessFromStorage -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+CreateProcessFromStorage -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -55,12 +55,12 @@ Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
 
 You can also start a process instance by BPMN process ID (which uses the latest deployed version):
 
-<!-- snippet:CreateProcessById -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: CreateProcessById -->
 
 ```csharp
 var result = await client.CreateProcessInstanceAsync(
     new ProcessInstanceCreationInstructionById
     {
-        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
+        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("my-process-id"),
     });
 ```

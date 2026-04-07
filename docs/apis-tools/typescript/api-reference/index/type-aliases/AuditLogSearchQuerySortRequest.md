@@ -11,7 +11,7 @@ mdx:
 type AuditLogSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:125](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L125)
+Defined in: [gen/types.gen.ts:134](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L134)
 
 ## Properties
 
@@ -21,7 +21,6 @@ Defined in: [gen/types.gen.ts:125](https://github.com/camunda/orchestration-clus
 field:
   | "actorId"
   | "actorType"
-  | "annotation"
   | "auditLogKey"
   | "batchOperationKey"
   | "batchOperationType"
@@ -45,7 +44,7 @@ field:
   | "userTaskKey";
 ```
 
-Defined in: [gen/types.gen.ts:129](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L129)
+Defined in: [gen/types.gen.ts:138](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L138)
 
 The field to sort by.
 
@@ -54,7 +53,7 @@ The field to sort by.
 ### order?
 
 ```ts
-optional order: SortOrderEnum;
+optional order?: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:130](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L130)
+Defined in: [gen/types.gen.ts:139](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L139)

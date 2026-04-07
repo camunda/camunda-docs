@@ -11,17 +11,17 @@ mdx:
 type CorrelatedMessageSubscriptionResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:4847](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4847)
+Defined in: [gen/types.gen.ts:5494](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5494)
 
 ## Properties
 
 ### correlationKey
 
 ```ts
-correlationKey: string;
+correlationKey: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:4851](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4851)
+Defined in: [gen/types.gen.ts:5498](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5498)
 
 The correlation key of the message.
 
@@ -33,7 +33,7 @@ The correlation key of the message.
 correlationTime: string;
 ```
 
-Defined in: [gen/types.gen.ts:4855](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4855)
+Defined in: [gen/types.gen.ts:5502](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5502)
 
 The time when the message was correlated.
 
@@ -45,21 +45,22 @@ The time when the message was correlated.
 elementId: string;
 ```
 
-Defined in: [gen/types.gen.ts:4859](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4859)
+Defined in: [gen/types.gen.ts:5506](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5506)
 
 The element ID that received the message.
 
 ---
 
-### elementInstanceKey?
+### elementInstanceKey
 
 ```ts
-optional elementInstanceKey: ElementInstanceKey;
+elementInstanceKey: ElementInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:4863](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4863)
+Defined in: [gen/types.gen.ts:5512](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5512)
 
 The element instance key that received the message.
+It is `null` for start event subscriptions.
 
 ---
 
@@ -69,7 +70,7 @@ The element instance key that received the message.
 messageKey: MessageKey;
 ```
 
-Defined in: [gen/types.gen.ts:4867](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4867)
+Defined in: [gen/types.gen.ts:5516](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5516)
 
 The message key.
 
@@ -81,7 +82,7 @@ The message key.
 messageName: string;
 ```
 
-Defined in: [gen/types.gen.ts:4871](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4871)
+Defined in: [gen/types.gen.ts:5520](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5520)
 
 The name of the message.
 
@@ -93,7 +94,7 @@ The name of the message.
 partitionId: number;
 ```
 
-Defined in: [gen/types.gen.ts:4875](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4875)
+Defined in: [gen/types.gen.ts:5524](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5524)
 
 The partition ID that correlated the message.
 
@@ -105,19 +106,19 @@ The partition ID that correlated the message.
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:4879](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4879)
+Defined in: [gen/types.gen.ts:5528](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5528)
 
 The process definition ID associated with this correlated message subscription.
 
 ---
 
-### processDefinitionKey?
+### processDefinitionKey
 
 ```ts
-optional processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:4883](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4883)
+Defined in: [gen/types.gen.ts:5532](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5532)
 
 The process definition key associated with this correlated message subscription.
 
@@ -129,19 +130,23 @@ The process definition key associated with this correlated message subscription.
 processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:4887](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4887)
+Defined in: [gen/types.gen.ts:5536](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5536)
 
 The process instance key associated with this correlated message subscription.
 
 ---
 
-### rootProcessInstanceKey?
+### rootProcessInstanceKey
 
 ```ts
-optional rootProcessInstanceKey: RootProcessInstanceKey;
+rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:4888](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4888)
+Defined in: [gen/types.gen.ts:5543](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5543)
+
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy. This field is only present for data
+belonging to process instance hierarchies created in version 8.9 or later.
 
 ---
 
@@ -151,7 +156,7 @@ Defined in: [gen/types.gen.ts:4888](https://github.com/camunda/orchestration-clu
 subscriptionKey: MessageSubscriptionKey;
 ```
 
-Defined in: [gen/types.gen.ts:4892](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4892)
+Defined in: [gen/types.gen.ts:5547](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5547)
 
 The subscription key that received the message.
 
@@ -163,6 +168,6 @@ The subscription key that received the message.
 tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:4896](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4896)
+Defined in: [gen/types.gen.ts:5551](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5551)
 
 The tenant ID associated with this correlated message subscription.

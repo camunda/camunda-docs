@@ -11,14 +11,14 @@ mdx:
 type GroupUserResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2904](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2904)
+Defined in: [gen/types.gen.ts:3237](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3237)
 
 ## Properties
 
-### username?
+### username
 
 ```ts
-optional username: Username;
+username: Username;
 ```
 
-Defined in: [gen/types.gen.ts:2905](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2905)
+Defined in: [gen/types.gen.ts:3238](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3238)

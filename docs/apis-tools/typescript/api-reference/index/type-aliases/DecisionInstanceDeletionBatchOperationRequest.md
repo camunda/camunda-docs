@@ -11,7 +11,7 @@ mdx:
 type DecisionInstanceDeletionBatchOperationRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:893](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L893)
+Defined in: [gen/types.gen.ts:924](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L924)
 
 The decision instance filter that defines which decision instances should be deleted.
 
@@ -23,7 +23,7 @@ The decision instance filter that defines which decision instances should be del
 filter: DecisionInstanceFilter;
 ```
 
-Defined in: [gen/types.gen.ts:897](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L897)
+Defined in: [gen/types.gen.ts:928](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L928)
 
 The decision instance filter.
 
@@ -32,7 +32,7 @@ The decision instance filter.
 ### operationReference?
 
 ```ts
-optional operationReference: OperationReference;
+optional operationReference?: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:898](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L898)
+Defined in: [gen/types.gen.ts:929](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L929)

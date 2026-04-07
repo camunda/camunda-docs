@@ -2,7 +2,7 @@
 id: resilience
 title: "Resilience"
 sidebar_label: "Resilience"
-sidebar_position: 7
+sidebar_position: 8
 mdx:
   format: md
 ---
@@ -89,7 +89,7 @@ The `LEGACY` profile disables adaptive gating entirely — signals are still tra
 
 ### Inspecting State Programmatically
 
-<!-- snippet:BackpressureState -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: BackpressureState -->
 
 ```csharp
 var state = client.GetBackpressureState();
