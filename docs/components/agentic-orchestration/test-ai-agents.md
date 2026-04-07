@@ -45,7 +45,6 @@ After completing this guide, you will be able to test AI agent processes whose c
 - You use Camunda 8.9+.
 - You use the Camunda Process Test Spring Boot Starter.
 - You have [Camunda Process Test set up](/apis-tools/testing/getting-started.md).
-- You have an LLM provider configured for [judge assertions](#step-2-configure-the-llm-provider-and-connectors). CPT ships with preconfigured [LangChain4j](https://docs.langchain4j.dev/) support for [several providers](/apis-tools/testing/configuration.md#judge-configuration) (Java 17+).
 
 :::important
 This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process, **AI Agent Chat With Tools**. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
