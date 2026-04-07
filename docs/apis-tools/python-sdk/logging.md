@@ -2,7 +2,7 @@
 id: logging
 title: Logging
 sidebar_label: Logging
-sidebar_position: 12
+sidebar_position: 13
 mdx:
   format: md
 ---
@@ -25,8 +25,11 @@ Pass a `logger=` argument to `CamundaClient` or `CamundaAsyncClient`. The logger
 
 **stdlib `logging`:**
 
+<!-- snippet-source: examples/readme.py | regions: ReadmeStdlibLogger -->
+
 ```python
 import logging
+
 from camunda_orchestration_sdk import CamundaClient
 
 my_logger = logging.getLogger("my_app.camunda")
@@ -37,17 +40,22 @@ client = CamundaClient(logger=my_logger)
 
 **Custom logger object:**
 
+<!-- snippet-source: examples/readme.py | regions: ReadmeCustomLogger -->
+
 ```python
 from camunda_orchestration_sdk import CamundaClient
 
 class MyLogger:
-    def debug(self, msg, *args, **kwargs):
+    def debug(self, msg: object, *args: object, **kwargs: object) -> None:
         print(f"[DEBUG] {msg}")
-    def info(self, msg, *args, **kwargs):
+
+    def info(self, msg: object, *args: object, **kwargs: object) -> None:
         print(f"[INFO] {msg}")
-    def warning(self, msg, *args, **kwargs):
+
+    def warning(self, msg: object, *args: object, **kwargs: object) -> None:
         print(f"[WARN] {msg}")
-    def error(self, msg, *args, **kwargs):
+
+    def error(self, msg: object, *args: object, **kwargs: object) -> None:
         print(f"[ERROR] {msg}")
 
 client = CamundaClient(logger=MyLogger())
@@ -56,6 +64,8 @@ client = CamundaClient(logger=MyLogger())
 ## Disabling logging
 
 Pass an instance of `NullLogger` to silence all SDK output:
+
+<!-- snippet-source: examples/readme.py | regions: ReadmeDisableLogging -->
 
 ```python
 from camunda_orchestration_sdk import CamundaClient, NullLogger

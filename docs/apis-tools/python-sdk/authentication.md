@@ -49,6 +49,8 @@ CAMUNDA_BASIC_AUTH_PASSWORD=your-password
 
 Or programmatically:
 
+<!-- snippet-source: examples/readme.py | regions: ReadmeBasicAuth -->
+
 ```python
 from camunda_orchestration_sdk import CamundaClient
 
