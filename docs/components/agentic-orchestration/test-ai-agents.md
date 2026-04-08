@@ -16,8 +16,8 @@ Test your AI agent processes in Camunda 8 with [Camunda Process Test (CPT)](/api
 
 AI agent processes are non-deterministic: the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) decides at runtime which tools to invoke and in what order, and its free-text output varies across runs. This guide shows how to write integration tests that keep the AI agent and LLM interaction real while mocking external tool executions, using two CPT features:
 
-- **Non-deterministic execution order:** Use [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior) to react to whichever tool or user tasks the agent activates, instead of blocking on a single hard-coded execution order.
-- **Non-deterministic output content:** Use [judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge) to verify AI-generated output or tool execution results with a judge LLM. The judge scores whether a value satisfies a natural-language expectation, making assertions robust when exact-match checks are too brittle.
+- **[Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior)** reacts to whichever tasks the agent activates instead of blocking on a single hard-coded execution order, addressing the non-deterministic control flow.
+- **[Judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge)** verify AI-generated output or tool execution results with a judge LLM that scores whether a value satisfies a natural-language expectation, replacing brittle exact-match checks.
 
 ## Prerequisites
 
