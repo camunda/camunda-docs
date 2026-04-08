@@ -16,6 +16,7 @@ Troubleshooting information for common issues when running the Data Migrator.
 - Check database connectivity and credentials.
 - Ensure Camunda 8 is running and accessible.
 - Review your `configuration/application.yml` configuration.
+- Check that JDBC driver jar is deployed in the `configuration/userlib/` directory.
 
 ## Process instances are skipped
 
