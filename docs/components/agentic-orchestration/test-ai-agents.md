@@ -25,13 +25,17 @@ AI agent processes are non-deterministic: the [AI Agent connector](/components/c
 - You use the Camunda Process Test Spring Boot Starter.
 - You have [Camunda Process Test set up](/apis-tools/testing/getting-started.md).
 
+:::important
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process, **AI Agent Chat With Tools**. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
+:::
+
 :::note
 This guide focuses on the Spring-based setup because it is the most direct way to run this style of integration test with CPT. If you use CPT without Spring, review the [configuration reference](/apis-tools/testing/configuration.md) and adapt the same connector and judge settings for your test environment.
 :::
 
 ## Step 1: Prepare the example AI agent blueprint
 
-The examples in this guide test the **AI Agent Chat With Tools** process from the [Build your first AI agent](/guides/getting-started-agentic-orchestration.md) guide ([full process structure](/guides/getting-started-agentic-orchestration.md#about-the-example-ai-agent-process)). The test scenario is "Send Ervin a joke": the agent calls `ListUsers`, `LoadUserByID`, and `Jokes_API` in any order, presents an email for review via `AskHumanToSendEmail`, and collects feedback through `User_Feedback`.
+Place the BPMN file and any associated forms for your AI agent process in `src/test/resources` (for example, under `bpmn/` and `forms/` subdirectories). The examples in this guide use the **AI Agent Chat With Tools** process from the [Build your first AI agent](/guides/getting-started-agentic-orchestration.md) guide ([full process structure](/guides/getting-started-agentic-orchestration.md#about-the-example-ai-agent-process)).
 
 ## Step 2: Configure the LLM provider and connectors
 
@@ -117,8 +121,6 @@ For the full property reference, see [judge configuration](/apis-tools/testing/c
 
 ## Step 3: Set up the test class
 
-Place the BPMN file and any associated forms for your AI agent process in `src/test/resources` (for example, under `bpmn/` and `forms/` subdirectories).
-
 Create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`. Use `@TestDeployment` to declare which resources CPT should deploy before each test, and inject the `CamundaClient` and `CamundaProcessTestContext`:
 
 ```java
@@ -144,6 +146,8 @@ class AiAgentProcessTest {
 For the full setup including dependencies and project structure, see [Getting started with Camunda Process Test](/apis-tools/testing/getting-started.md).
 
 ## Step 4: Handle non-deterministic flow paths
+
+The test scenario is "Send Ervin a joke." The agent calls `ListUsers`, `LoadUserByID`, and `Jokes_API` in any order, presents an email for review via `AskHumanToSendEmail`, and collects feedback through `User_Feedback`.
 
 [Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior) lets you register background reactions that monitor the process state and execute actions as conditions are met, without blocking the test thread. Register behaviors before starting the process, and they react independently as the process progresses.
 
