@@ -340,6 +340,10 @@ assertThat(processInstance)
 
 For the full assertion API, see [Assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge).
 
+## Limitations
+
+Judge assertions evaluate the **serialized JSON string** of a process variable. The judge LLM receives this plain-text representation and reasons over it to produce a score. This works well for structured data and natural-language text, but the judge cannot reason about non-textual content such as [Camunda documents](/components/concepts/documents.md) or other embedded binaries. In these cases, the judge sees only metadata or encoded strings, not the actual content.
+
 ## Next steps
 
 Now that you know how to test your AI agents, you can:
