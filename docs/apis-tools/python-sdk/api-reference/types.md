@@ -52,6 +52,17 @@ def lift_batch_operation_key(value)
 - **Return type:**
   _BatchOperationKey_
 
+### lift_business_id()
+
+```python
+def lift_business_id(value)
+```
+
+- **Parameters:**
+  **value** (_Any_)
+- **Return type:**
+  _BusinessId_
+
 ### lift_conditional_evaluation_key()
 
 ```python
@@ -294,16 +305,16 @@ def lift_process_instance_key(value)
 - **Return type:**
   _ProcessInstanceKey_
 
-### lift_root_process_instance_key()
+### lift_resource_key()
 
 ```python
-def lift_root_process_instance_key(value)
+def lift_resource_key(value)
 ```
 
 - **Parameters:**
   **value** (_Any_)
 - **Return type:**
-  _RootProcessInstanceKey_
+  _ProcessDefinitionKey_ | _DecisionRequirementsKey_ | _FormKey_ | _DecisionDefinitionKey_
 
 ### lift_scope_key()
 
@@ -314,7 +325,7 @@ def lift_scope_key(value)
 - **Parameters:**
   **value** (_Any_)
 - **Return type:**
-  _ScopeKey_
+  _ProcessInstanceKey_ | _ElementInstanceKey_
 
 ### lift_signal_key()
 
@@ -436,6 +447,17 @@ def try_lift_batch_operation_key(value)
   **value** (_Any_)
 - **Return type:**
   _Tuple_[bool, *BatchOperationKey* | Exception]
+
+### try_lift_business_id()
+
+```python
+def try_lift_business_id(value)
+```
+
+- **Parameters:**
+  **value** (_Any_)
+- **Return type:**
+  _Tuple_[bool, *BusinessId* | Exception]
 
 ### try_lift_conditional_evaluation_key()
 
@@ -679,16 +701,16 @@ def try_lift_process_instance_key(value)
 - **Return type:**
   _Tuple_[bool, *ProcessInstanceKey* | Exception]
 
-### try_lift_root_process_instance_key()
+### try_lift_resource_key()
 
 ```python
-def try_lift_root_process_instance_key(value)
+def try_lift_resource_key(value)
 ```
 
 - **Parameters:**
   **value** (_Any_)
 - **Return type:**
-  _Tuple_[bool, *RootProcessInstanceKey* | Exception]
+  _Tuple_[bool, *ProcessDefinitionKey* | *DecisionRequirementsKey* | *FormKey* | *DecisionDefinitionKey* | Exception]
 
 ### try_lift_scope_key()
 
@@ -699,7 +721,7 @@ def try_lift_scope_key(value)
 - **Parameters:**
   **value** (_Any_)
 - **Return type:**
-  _Tuple_[bool, *ScopeKey* | Exception]
+  _Tuple_[bool, *ProcessInstanceKey* | *ElementInstanceKey* | Exception]
 
 ### try_lift_signal_key()
 

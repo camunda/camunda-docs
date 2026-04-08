@@ -11,28 +11,28 @@ mdx:
 type DocumentCreationBatchResponse = object;
 ```
 
-Defined in: [gen/types.gen.ts:2308](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2308)
+Defined in: [gen/types.gen.ts:2411](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2411)
 
 ## Properties
 
-### createdDocuments?
+### createdDocuments
 
 ```ts
-optional createdDocuments: DocumentReference[];
+createdDocuments: DocumentReference[];
 ```
 
-Defined in: [gen/types.gen.ts:2316](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2316)
+Defined in: [gen/types.gen.ts:2419](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2419)
 
 Documents that failed creation.
 
 ---
 
-### failedDocuments?
+### failedDocuments
 
 ```ts
-optional failedDocuments: DocumentCreationFailureDetail[];
+failedDocuments: DocumentCreationFailureDetail[];
 ```
 
-Defined in: [gen/types.gen.ts:2312](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2312)
+Defined in: [gen/types.gen.ts:2415](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2415)
 
 Documents that were successfully created.

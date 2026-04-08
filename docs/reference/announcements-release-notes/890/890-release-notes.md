@@ -105,7 +105,7 @@ You can now configure Camunda 8 Run to use any of the supported secondary storag
 
 This allows you to set up your local environment to match your production deployment, enabling deeper testing, faster debugging, and easier team onboarding.
 
-<p class="link-arrow">[Camunda 8 Run external relational database options](/self-managed/quickstart/developer-quickstart/c8run.md#external-relational-database-options)</p>
+<p class="link-arrow">[Camunda 8 Run external relational database options](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md#external-relational-database-options)</p>
 
 ### Console
 

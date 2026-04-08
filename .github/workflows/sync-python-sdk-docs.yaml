@@ -70,6 +70,14 @@ jobs:
           uv sync
           make generate-local
 
+      - name: Copy SDK examples for code samples
+        run: |
+          EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-python/examples"
+          rm -rf "$EXAMPLES_TARGET"
+          mkdir -p "$EXAMPLES_TARGET"
+          cp -R python-sdk/examples/* "$EXAMPLES_TARGET/"
+          echo "Copied Python SDK examples → .sdk-repos/"
+
       - name: Build markdown docs
         working-directory: python-sdk
         run: make docs-md
@@ -105,6 +113,16 @@ jobs:
           npm ci
           DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
           npx prettier --write "$DOCS_ROOT/apis-tools/python-sdk.md" "$DOCS_ROOT/apis-tools/python-sdk/"
+
+      - name: Regenerate Orchestration API docs with SDK examples
+        working-directory: docs
+        run: |
+          DOCS_VERSION="${{ github.event.inputs.docs_version }}"
+          if [ -n "$DOCS_VERSION" ]; then
+            npm run api:generate -- camunda "$DOCS_VERSION"
+          else
+            npm run api:generate -- camunda
+          fi
 
       - name: Check for changes
         id: check_changes

@@ -11,7 +11,7 @@ mdx:
 type UserTaskVariableSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:7026](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7026)
+Defined in: [gen/types.gen.ts:7812](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7812)
 
 ## Properties
 
@@ -27,7 +27,7 @@ field:
   | "processInstanceKey";
 ```
 
-Defined in: [gen/types.gen.ts:7030](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7030)
+Defined in: [gen/types.gen.ts:7816](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7816)
 
 The field to sort by.
 
@@ -36,7 +36,7 @@ The field to sort by.
 ### order?
 
 ```ts
-optional order: SortOrderEnum;
+optional order?: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:7031](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7031)
+Defined in: [gen/types.gen.ts:7817](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7817)

@@ -11,7 +11,7 @@ mdx:
 type CreateDeploymentData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9939](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9939)
+Defined in: [gen/types.gen.ts:10069](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10069)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:9939](https://github.com/camunda/orchestration-clu
 body: object;
 ```
 
-Defined in: [gen/types.gen.ts:9940](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9940)
+Defined in: [gen/types.gen.ts:10070](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10070)
 
 #### resources
 
@@ -34,7 +34,7 @@ The binary data to create the deployment resources. It is possible to have more 
 #### tenantId?
 
 ```ts
-optional tenantId: TenantId;
+optional tenantId?: TenantId;
 ```
 
 ---
@@ -42,20 +42,20 @@ optional tenantId: TenantId;
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9948](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9948)
+Defined in: [gen/types.gen.ts:10078](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10078)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9949](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9949)
+Defined in: [gen/types.gen.ts:10079](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10079)
 
 ---
 
@@ -65,4 +65,4 @@ Defined in: [gen/types.gen.ts:9949](https://github.com/camunda/orchestration-clu
 url: "/deployments";
 ```
 
-Defined in: [gen/types.gen.ts:9950](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9950)
+Defined in: [gen/types.gen.ts:10080](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10080)

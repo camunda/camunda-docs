@@ -11,17 +11,17 @@ mdx:
 type CreateDocumentLinkData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10189](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10189)
+Defined in: [gen/types.gen.ts:10283](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10283)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: DocumentLinkRequest;
+optional body?: DocumentLinkRequest;
 ```
 
-Defined in: [gen/types.gen.ts:10190](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10190)
+Defined in: [gen/types.gen.ts:10284](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10284)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10190](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10191](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10191)
+Defined in: [gen/types.gen.ts:10285](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10285)
 
 #### documentId
 
@@ -46,15 +46,15 @@ The ID of the document to link.
 ### query?
 
 ```ts
-optional query: object;
+optional query?: object;
 ```
 
-Defined in: [gen/types.gen.ts:10197](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10197)
+Defined in: [gen/types.gen.ts:10291](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10291)
 
 #### contentHash?
 
 ```ts
-optional contentHash: string;
+optional contentHash?: string;
 ```
 
 The hash of the document content that was computed by the document store during upload. The hash is part of the document reference that is returned when uploading a document. If the client fails to provide the correct hash, the request will be rejected.
@@ -62,7 +62,7 @@ The hash of the document content that was computed by the document store during 
 #### storeId?
 
 ```ts
-optional storeId: string;
+optional storeId?: string;
 ```
 
 The ID of the document store where the document is located.
@@ -75,4 +75,4 @@ The ID of the document store where the document is located.
 url: "/documents/{documentId}/links";
 ```
 
-Defined in: [gen/types.gen.ts:10208](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10208)
+Defined in: [gen/types.gen.ts:10302](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10302)

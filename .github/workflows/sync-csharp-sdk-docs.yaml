@@ -77,6 +77,14 @@ jobs:
         working-directory: csharp-sdk
         run: dotnet build src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj -c Release --no-restore
 
+      - name: Copy SDK examples for code samples
+        run: |
+          EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-csharp/examples"
+          rm -rf "$EXAMPLES_TARGET"
+          mkdir -p "$EXAMPLES_TARGET"
+          cp -R csharp-sdk/examples/* "$EXAMPLES_TARGET/"
+          echo "Copied C# SDK examples → .sdk-repos/"
+
       - name: Generate DocFX metadata
         working-directory: csharp-sdk
         run: dotnet docfx metadata docs/docfx.json
@@ -116,6 +124,15 @@ jobs:
           npm ci
           DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
           npx prettier --write "$DOCS_ROOT/apis-tools/csharp-sdk.md" "$DOCS_ROOT/apis-tools/csharp-sdk/"
+
+      - name: Regenerate Orchestration API docs with SDK examples
+        working-directory: docs
+        run: |
+          if [ -n "${{ github.event.inputs.docs_version }}" ]; then
+            npm run api:generate -- camunda "${{ github.event.inputs.docs_version }}"
+          else
+            npm run api:generate -- camunda
+          fi
 
       - name: Check for changes
         id: check_changes

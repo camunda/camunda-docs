@@ -11,16 +11,16 @@ mdx:
 type TenantGroupResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:6715](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6715)
+Defined in: [gen/types.gen.ts:7473](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7473)
 
 ## Properties
 
-### groupId?
+### groupId
 
 ```ts
-optional groupId: string;
+groupId: string;
 ```
 
-Defined in: [gen/types.gen.ts:6719](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6719)
+Defined in: [gen/types.gen.ts:7477](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7477)
 
 The groupId of the group.

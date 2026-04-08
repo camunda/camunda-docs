@@ -16,6 +16,8 @@ The SDK provides two clients with identical API surfaces:
 
 Both clients share the same method names and parameters — the only difference is calling convention:
 
+<!-- snippet-source: examples/readme.py | regions: ReadmeSyncClient -->
+
 ```python
 # Sync
 from camunda_orchestration_sdk import CamundaClient
@@ -24,12 +26,15 @@ with CamundaClient() as client:
     topology = client.get_topology()
 ```
 
+<!-- snippet-source: examples/readme.py | regions: ReadmeAsyncClient -->
+
 ```python
 # Async
 import asyncio
+
 from camunda_orchestration_sdk import CamundaAsyncClient
 
-async def main():
+async def main() -> None:
     async with CamundaAsyncClient() as client:
         topology = await client.get_topology()
 

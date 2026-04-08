@@ -11,17 +11,17 @@ mdx:
 type GetProcessInstanceSequenceFlowsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14282](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14282)
+Defined in: [gen/types.gen.ts:13605](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13605)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14283](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14283)
+Defined in: [gen/types.gen.ts:13606](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13606)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:14283](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:14284](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14284)
+Defined in: [gen/types.gen.ts:13607](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13607)
 
 #### processInstanceKey
 
@@ -46,10 +46,10 @@ The assigned key of the process instance, which acts as a unique identifier for 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14290](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14290)
+Defined in: [gen/types.gen.ts:13613](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13613)
 
 ---
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:14290](https://github.com/camunda/orchestration-cl
 url: "/process-instances/{processInstanceKey}/sequence-flows";
 ```
 
-Defined in: [gen/types.gen.ts:14291](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14291)
+Defined in: [gen/types.gen.ts:13614](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13614)

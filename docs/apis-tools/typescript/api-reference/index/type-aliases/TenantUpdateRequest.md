@@ -11,17 +11,17 @@ mdx:
 type TenantUpdateRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:6579](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6579)
+Defined in: [gen/types.gen.ts:7337](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7337)
 
 ## Properties
 
 ### description?
 
 ```ts
-optional description: string;
+optional description?: string;
 ```
 
-Defined in: [gen/types.gen.ts:6587](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6587)
+Defined in: [gen/types.gen.ts:7345](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7345)
 
 The new description of the tenant.
 
@@ -33,6 +33,6 @@ The new description of the tenant.
 name: string;
 ```
 
-Defined in: [gen/types.gen.ts:6583](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6583)
+Defined in: [gen/types.gen.ts:7341](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7341)
 
 The new name of the tenant.

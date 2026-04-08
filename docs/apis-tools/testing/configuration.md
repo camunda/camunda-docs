@@ -607,7 +607,7 @@ tests. Keep in mind that CPT automatically deletes all data between test runs to
 - Expose the management API port (`9600`) to delete the data between test runs (by default for a local Camunda 8 Run)
 - Enable the management clock endpoint to allow clock manipulations
 
-You can [configure Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#configuration-options) by
+You can [configure Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#configuration-options) by
 defining a `application.yaml` file with:
 
 ```yaml

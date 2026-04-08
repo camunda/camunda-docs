@@ -11,7 +11,7 @@ mdx:
 type SearchDecisionRequirementsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:9836](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9836)
+Defined in: [gen/types.gen.ts:9966](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9966)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:9836](https://github.com/camunda/orchestration-clu
 200: DecisionRequirementsSearchQueryResult;
 ```
 
-Defined in: [gen/types.gen.ts:9840](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9840)
+Defined in: [gen/types.gen.ts:9970](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9970)
 
 The decision requirements search result.

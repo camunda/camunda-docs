@@ -11,17 +11,21 @@ mdx:
 type DeleteDecisionInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9651](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9651)
+Defined in: [gen/types.gen.ts:9851](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9851)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: DeleteProcessInstanceRequest;
+optional body?:
+  | {
+  operationReference?: OperationReference;
+}
+  | null;
 ```
 
-Defined in: [gen/types.gen.ts:9652](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9652)
+Defined in: [gen/types.gen.ts:9852](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9852)
 
 ---
 
@@ -31,32 +35,32 @@ Defined in: [gen/types.gen.ts:9652](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:9653](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9653)
+Defined in: [gen/types.gen.ts:9855](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9855)
 
-#### decisionInstanceKey
+#### decisionEvaluationKey
 
 ```ts
-decisionInstanceKey: DecisionInstanceKey;
+decisionEvaluationKey: DecisionEvaluationKey;
 ```
 
-The key of the decision instance to delete.
+The key of the decision evaluation to delete.
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9659](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9659)
+Defined in: [gen/types.gen.ts:9861](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9861)
 
 ---
 
 ### url
 
 ```ts
-url: "/decision-instances/{decisionInstanceKey}/deletion";
+url: "/decision-instances/{decisionEvaluationKey}/deletion";
 ```
 
-Defined in: [gen/types.gen.ts:9660](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9660)
+Defined in: [gen/types.gen.ts:9862](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9862)

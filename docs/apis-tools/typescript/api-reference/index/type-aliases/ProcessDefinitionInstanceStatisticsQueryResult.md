@@ -12,14 +12,14 @@ type ProcessDefinitionInstanceStatisticsQueryResult = SearchQueryResponse &
   object;
 ```
 
-Defined in: [gen/types.gen.ts:5275](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5275)
+Defined in: [gen/types.gen.ts:5937](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5937)
 
 ## Type Declaration
 
-### items?
+### items
 
 ```ts
-optional items: ProcessDefinitionInstanceStatisticsResult[];
+items: ProcessDefinitionInstanceStatisticsResult[];
 ```
 
 The process definition instance statistics result.

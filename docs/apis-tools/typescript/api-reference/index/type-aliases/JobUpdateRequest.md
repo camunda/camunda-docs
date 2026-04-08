@@ -11,7 +11,7 @@ mdx:
 type JobUpdateRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:3873](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3873)
+Defined in: [gen/types.gen.ts:4518](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4518)
 
 ## Properties
 
@@ -21,14 +21,14 @@ Defined in: [gen/types.gen.ts:3873](https://github.com/camunda/orchestration-clu
 changeset: JobChangeset;
 ```
 
-Defined in: [gen/types.gen.ts:3874](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3874)
+Defined in: [gen/types.gen.ts:4519](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4519)
 
 ---
 
 ### operationReference?
 
 ```ts
-optional operationReference: OperationReference;
+optional operationReference?: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:3875](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3875)
+Defined in: [gen/types.gen.ts:4520](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4520)

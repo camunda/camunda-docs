@@ -11,7 +11,7 @@ mdx:
 type GetProcessInstanceStatisticsByDefinitionData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11585](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11585)
+Defined in: [gen/types.gen.ts:11711](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11711)
 
 ## Properties
 
@@ -21,27 +21,27 @@ Defined in: [gen/types.gen.ts:11585](https://github.com/camunda/orchestration-cl
 body: IncidentProcessInstanceStatisticsByDefinitionQuery;
 ```
 
-Defined in: [gen/types.gen.ts:11586](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11586)
+Defined in: [gen/types.gen.ts:11712](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11712)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11587](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11587)
+Defined in: [gen/types.gen.ts:11713](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11713)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11588](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11588)
+Defined in: [gen/types.gen.ts:11714](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11714)
 
 ---
 
@@ -51,4 +51,4 @@ Defined in: [gen/types.gen.ts:11588](https://github.com/camunda/orchestration-cl
 url: "/incidents/statistics/process-instances-by-definition";
 ```
 
-Defined in: [gen/types.gen.ts:11589](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11589)
+Defined in: [gen/types.gen.ts:11715](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11715)

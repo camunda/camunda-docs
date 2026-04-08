@@ -11,17 +11,17 @@ mdx:
 type GetDecisionDefinitionXmlData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9318](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9318)
+Defined in: [gen/types.gen.ts:9720](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9720)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9319](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9319)
+Defined in: [gen/types.gen.ts:9721](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9721)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:9319](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:9320](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9320)
+Defined in: [gen/types.gen.ts:9722](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9722)
 
 #### decisionDefinitionKey
 
@@ -46,10 +46,10 @@ The assigned key of the decision definition, which acts as a unique identifier f
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9326](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9326)
+Defined in: [gen/types.gen.ts:9728](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9728)
 
 ---
 
@@ -59,4 +59,4 @@ Defined in: [gen/types.gen.ts:9326](https://github.com/camunda/orchestration-clu
 url: "/decision-definitions/{decisionDefinitionKey}/xml";
 ```
 
-Defined in: [gen/types.gen.ts:9327](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9327)
+Defined in: [gen/types.gen.ts:9729](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9729)

@@ -11,7 +11,7 @@ mdx:
 type CreateRoleResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:14554](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14554)
+Defined in: [gen/types.gen.ts:13836](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13836)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:14554](https://github.com/camunda/orchestration-cl
 201: RoleCreateResult;
 ```
 
-Defined in: [gen/types.gen.ts:14558](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14558)
+Defined in: [gen/types.gen.ts:13840](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13840)
 
 The role was created successfully.

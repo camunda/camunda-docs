@@ -2,7 +2,7 @@
 id: logging
 title: "Logging"
 sidebar_label: "Logging"
-sidebar_position: 8
+sidebar_position: 9
 mdx:
   format: md
 ---
@@ -40,7 +40,7 @@ Output uses a tagged format matching the JS SDK:
 
 Pass an `ILoggerFactory` via `CamundaOptions` to integrate with your application's logging:
 
-<!-- snippet:UsingDirective+InjectLogger -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+InjectLogger -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -64,7 +64,7 @@ When an `ILoggerFactory` is provided, `CAMUNDA_SDK_LOG_LEVEL` is ignored — fil
 
 When using `AddCamundaClient()`, the SDK automatically resolves `ILoggerFactory` from the DI container — no manual wiring needed:
 
-<!-- snippet:UsingDirective+DILogging -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DILogging -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -82,11 +82,9 @@ All SDK log entries appear alongside your application logs with proper category 
 
 ## Serilog Integration
 
-```csharp
-using Camunda.Orchestration.Sdk;
-using Serilog;
-using Serilog.Extensions.Logging;
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: SerilogIntegration -->
 
+```csharp
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()

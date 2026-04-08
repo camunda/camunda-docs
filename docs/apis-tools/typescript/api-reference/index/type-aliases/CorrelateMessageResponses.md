@@ -11,7 +11,7 @@ mdx:
 type CorrelateMessageResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:12590](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12590)
+Defined in: [gen/types.gen.ts:12564](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12564)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:12590](https://github.com/camunda/orchestration-cl
 200: MessageCorrelationResult;
 ```
 
-Defined in: [gen/types.gen.ts:12594](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12594)
+Defined in: [gen/types.gen.ts:12568](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12568)
 
 The message is correlated to one or more process instances

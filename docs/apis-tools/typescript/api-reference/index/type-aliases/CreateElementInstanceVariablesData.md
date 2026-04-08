@@ -11,7 +11,7 @@ mdx:
 type CreateElementInstanceVariablesData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10570](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10570)
+Defined in: [gen/types.gen.ts:10505](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10505)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:10570](https://github.com/camunda/orchestration-cl
 body: SetVariableRequest;
 ```
 
-Defined in: [gen/types.gen.ts:10571](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10571)
+Defined in: [gen/types.gen.ts:10506](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10506)
 
 ---
 
@@ -31,7 +31,7 @@ Defined in: [gen/types.gen.ts:10571](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10572](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10572)
+Defined in: [gen/types.gen.ts:10507](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10507)
 
 #### elementInstanceKey
 
@@ -48,10 +48,10 @@ element, such as a service task (see the `elementInstanceKey` on the job message
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10581](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10581)
+Defined in: [gen/types.gen.ts:10516](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10516)
 
 ---
 
@@ -61,4 +61,4 @@ Defined in: [gen/types.gen.ts:10581](https://github.com/camunda/orchestration-cl
 url: "/element-instances/{elementInstanceKey}/variables";
 ```
 
-Defined in: [gen/types.gen.ts:10582](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10582)
+Defined in: [gen/types.gen.ts:10517](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10517)
