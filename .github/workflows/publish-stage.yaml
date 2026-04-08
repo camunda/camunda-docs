@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: gcp-core-2-default
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
