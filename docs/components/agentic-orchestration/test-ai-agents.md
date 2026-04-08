@@ -25,21 +25,13 @@ AI agent processes are non-deterministic: the [AI Agent connector](/components/c
 - You use the Camunda Process Test Spring Boot Starter.
 - You have [Camunda Process Test set up](/apis-tools/testing/getting-started.md).
 
-:::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process, **AI Agent Chat With Tools**. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
-:::
-
 :::note
 This guide focuses on the Spring-based setup because it is the most direct way to run this style of integration test with CPT. If you use CPT without Spring, review the [configuration reference](/apis-tools/testing/configuration.md) and adapt the same connector and judge settings for your test environment.
 :::
 
 ## Step 1: Prepare the example AI agent blueprint
 
-The examples in this guide test the **AI Agent Chat With Tools** process from the [Build your first AI agent](/guides/getting-started-agentic-orchestration.md) guide. See [About the example AI agent process](/guides/getting-started-agentic-orchestration.md#about-the-example-ai-agent-process) for the full process structure.
-
-The test scenario is "Send Ervin a joke." To fulfill this request the agent could call `ListUsers` and `LoadUserByID` to find Ervin's email address, or call `Jokes_API` to fetch a joke, and it can do so in any order. The agent then presents the email for human review via the `AskHumanToSendEmail` user task, and after it finishes a `User_Feedback` task lets the user accept or follow up.
-
-This test intentionally keeps the AI agent execution real, including the interaction with the configured LLM. At the same time, it mocks tool executions so the test does not depend on external systems such as REST endpoints behind connector-based tools. That balance makes the test more realistic than a unit test that mocks the whole agent interaction, while still keeping the execution stable and controlled.
+The examples in this guide test the **AI Agent Chat With Tools** process from the [Build your first AI agent](/guides/getting-started-agentic-orchestration.md) guide ([full process structure](/guides/getting-started-agentic-orchestration.md#about-the-example-ai-agent-process)). The test scenario is "Send Ervin a joke": the agent calls `ListUsers`, `LoadUserByID`, and `Jokes_API` in any order, presents an email for review via `AskHumanToSendEmail`, and collects feedback through `User_Feedback`.
 
 ## Step 2: Configure the LLM provider and connectors
 
