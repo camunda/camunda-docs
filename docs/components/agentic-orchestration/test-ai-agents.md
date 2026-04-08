@@ -24,6 +24,7 @@ AI agent processes are non-deterministic: the [AI Agent connector](/components/c
 - You use Camunda 8.9+.
 - You use the Camunda Process Test Spring Boot Starter.
 - You have [Camunda Process Test set up](/apis-tools/testing/getting-started.md).
+- You have downloaded the [AI Agent Chat With Tools](https://marketplace.camunda.com/en-US/apps/587865) process to your local machine.
 
 :::important
 This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process, **AI Agent Chat With Tools**. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
@@ -35,7 +36,7 @@ This guide focuses on the Spring-based setup because it is the most direct way t
 
 ## Step 1: Prepare the example AI agent blueprint
 
-Place the BPMN file and any associated forms for your AI agent process in `src/test/resources` (for example, under `bpmn/` and `forms/` subdirectories). The examples in this guide use the **AI Agent Chat With Tools** process from the [Build your first AI agent](/guides/getting-started-agentic-orchestration.md) guide ([full process structure](/guides/getting-started-agentic-orchestration.md#about-the-example-ai-agent-process)).
+Place the BPMN file and any associated forms for your AI agent process in `src/test/resources` (for example, under `bpmn/` and `forms/` subdirectories).
 
 ## Step 2: Configure the LLM provider and connectors
 
