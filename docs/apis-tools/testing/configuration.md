@@ -10,14 +10,30 @@ import TabItem from "@theme/TabItem";
 By default, CPT uses a runtime based on [Testcontainers](#testcontainers-runtime). You can customize the runtime to your
 needs, or replace it with a [Remote runtime](#remote-runtime), for example, if you can't install a Docker runtime.
 
-Configuration is provided through `application.yml` (or `application.properties`) when using the Camunda Spring Boot
-Starter, or through a `camunda-container-runtime.properties` file when using the Java client.
+## Configuration files
 
-:::tip Environment variable resolution (Java client)
-When using the Java client, properties in `camunda-container-runtime.properties` support automatic environment variable resolution. If a property is not explicitly set, it is resolved from an environment variable. The variable name is derived by prepending the `CAMUNDA_PROCESSTEST_` prefix, replacing dots with underscores, removing hyphens, and converting everything to uppercase.
+CPT properties can be set directly in a configuration file or resolved from environment variables. The file location and resolution mechanism depend on your setup:
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+Configure CPT in your `application.yml` (or `application.properties`). Properties also support [Spring's external configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html), so you can set them through environment variables, system properties, or additional profiles.
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+Configure CPT in a `camunda-container-runtime.properties` file. Properties support automatic environment variable resolution. If a property is not explicitly set, it is resolved from an environment variable by prepending `CAMUNDA_PROCESSTEST_`, replacing dots with underscores, removing hyphens, and converting to uppercase.
 
 For example, `judge.chatModel.apiKey` resolves to `CAMUNDA_PROCESSTEST_JUDGE_CHATMODEL_APIKEY`.
-:::
+
+</TabItem>
+
+</Tabs>
 
 ## Testcontainers runtime
 
