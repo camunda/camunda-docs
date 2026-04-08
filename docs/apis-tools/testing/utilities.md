@@ -293,6 +293,7 @@ void shouldCompleteTaskAutomatically() {
     // given: define a conditional behavior
     processTestContext
         .when(() -> assertThat(processInstance).hasActiveElements("approve_order"))
+        .as("approve order")
         .then(() -> processTestContext.completeUserTask("approve_order",
             Map.of("approved", true)));
 
@@ -312,6 +313,7 @@ If the same conditional behavior applies to multiple tests, you can define it in
 void setupBehaviors() {
     processTestContext
         .when(() -> assertThat(processInstance).hasActiveElements("send_notification"))
+        .as("complete send notification")
         .then(() -> processTestContext.completeJob("send-notification"));
 }
 
@@ -334,6 +336,7 @@ void shouldHandleRepeatedTask() {
     // given: define a conditional behavior with chained actions
     processTestContext
         .when(() -> assertThat(processInstance).hasActiveElements("review_document"))
+        .as("review document")
         .then(() -> processTestContext.completeUserTask("review_document",
             Map.of("approved", false, "comment", "Needs revision")))
         .then(() -> processTestContext.completeUserTask("review_document",
