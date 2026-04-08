@@ -13,8 +13,8 @@ For a general introduction, see [Camunda Copilot overview](copilot-overview.md).
 
 Each tool is governed by two layers of access control:
 
-- **Permission** (Read / Write): Based on your [project-level role](copilot-overview.md#project-level-permissions). Write tools are hidden from read-only users.
-- **Screen availability**: Camunda Copilot automatically disables tools that do not apply to your [current screen or mode](copilot-overview.md#screen-based-tool-availability). For example, BPMN editing tools are available on the Design and Implement screens but not in Play mode.
+- **Permission** (Read / Write): Based on your [project-level role](copilot-overview.md#permissions). Write tools are hidden from read-only users.
+- **Screen availability**: Camunda Copilot automatically disables tools that do not apply to your [current screen or mode](copilot-overview.md#where-copilot-is-available). For example, BPMN editing tools are available on the Design and Implement screens but not in Play mode.
 
 ## BPMN tools
 

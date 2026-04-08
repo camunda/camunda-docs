@@ -5,11 +5,11 @@ sidebar_label: Copilot overview
 description: "Camunda Copilot is an AI assistant integrated into Web Modeler that helps with BPMN process modeling, FEEL expressions, and Form building."
 ---
 
-<span class="badge badge--alpha">Alpha</span>
-<span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
-
 import CopilotBpmnGeneration from './img/copilot-bpmn-generation.png';
 import CopilotConversationHistory from './img/copilot-conversation-history.png';
+
+<span class="badge badge--alpha">Alpha</span>
+<span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
 Camunda Copilot is an AI assistant built into Web Modeler that helps you design, build, and refine your processes faster. Whether you're starting from scratch or improving an existing workflow, Copilot can help you get there with natural language prompts.
 
