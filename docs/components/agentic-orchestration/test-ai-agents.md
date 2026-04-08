@@ -118,7 +118,9 @@ For the full property reference, see [judge configuration](/apis-tools/testing/c
 
 ## Step 3: Set up the test class
 
-Create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`. Use `@TestDeployment` to declare which resources CPT should deploy before each test, and inject the `CamundaClient` and `CamundaProcessTestContext`:
+Create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`. Use `@TestDeployment` to declare which resources CPT should deploy before each test, and inject the `CamundaClient` and `CamundaProcessTestContext`.
+
+The `@BeforeAll` hook ensures that the default assertion timeout is increases, which is often necessary when introducing LLM interaction.
 
 ```java
 @SpringBootTest
@@ -137,6 +139,14 @@ class AiAgentProcessTest {
 
     @Autowired
     private CamundaProcessTestContext processTestContext;
+
+    @BeforeAll
+    static void configureCamundaAssert() {
+        // AI agent processes involve LLM interactions and typically take longer
+        // than standard BPMN processes. Increase the assertion timeout to avoid
+        // premature failures.
+        CamundaAssert.setAssertionTimeout(Duration.ofMinutes(1));
+    }
 }
 ```
 
@@ -254,14 +264,6 @@ For the full conditional behavior API, see [Utilities](/apis-tools/testing/utili
 After the process completes, use a judge assertion to verify that the agent's output satisfies a natural language expectation. The following example checks the full "Send Ervin a joke" scenario, including tool usage, email content, and the feedback loop:
 
 ```java
-@BeforeAll
-static void configureCamundaAssert() {
-    // AI agent processes involve LLM interactions and typically take longer
-    // than standard BPMN processes. Increase the assertion timeout to avoid
-    // premature failures.
-    CamundaAssert.setAssertionTimeout(Duration.ofMinutes(1));
-}
-
 @Test
 void shouldSendErvinAJoke() {
     // given: register conditional behaviors for tool tasks, email approval, and feedback
