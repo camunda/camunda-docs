@@ -394,7 +394,7 @@ assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> 
 
 ### hasVariableSatisfiesJudge
 
-Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The assertion
+Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The assertion
 fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
 
 ```java
@@ -457,7 +457,7 @@ assertThat(processInstance).hasLocalVariableSatisfies(
 ### hasLocalVariableSatisfiesJudge
 
 Assert that a local variable in the scope of a given element satisfies a natural language expectation using a configured LLM judge. Use the BPMN
-element ID or an [element selector](utilities.md#element-selector) to identify the element. The assertion
+element ID or an [element selector](utilities.md#element-selector) to identify the element. The expectation is evaluated only once. The assertion
 fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
 
 ```java
