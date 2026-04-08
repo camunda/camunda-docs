@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: gcp-core-8-default
+    runs-on: gcp-core-4-default
     container: node:24
     steps:
       - uses: actions/checkout@v6
@@ -32,7 +32,12 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=8192
           DOCS_SITE_URL: https://stage.docs.camunda.io
           DOCS_SITE_BASE_URL: /
-      - name: Add Github Actions IP to Security group so we can publish
+      - name: Install AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip -q awscliv2.zip
+          sudo ./aws/install
+      - name: Add self-hosted GitHub runner IPs to security group so we can publish
         run: |
           aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SECURITY_GROUP_NAME }} --ip-permissions 'IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges=[${{ secrets.PUBLISH_IPS }}]' --output off
         env:
@@ -49,7 +54,7 @@ jobs:
           remote_user: ${{ secrets.AWS_STAGE_PUBLISH_USER }}
           # vvvvv Intentionally missing the AWS_ prefix vvvvv
           remote_key: ${{ secrets.PUBLISH_STAGE_KEY }}
-      - name: Remove Github Actions IP from security group
+      - name: Remove self-hosted GitHub runner IPs from security group
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.AWS_SECURITY_GROUP_NAME }} --ip-permissions 'IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges=[${{ secrets.PUBLISH_IPS }}]' --output off
         env:
