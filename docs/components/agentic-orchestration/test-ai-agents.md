@@ -14,31 +14,10 @@ Test your AI agent processes in Camunda 8 with [Camunda Process Test (CPT)](/api
 
 ## About
 
-Traditional BPMN processes follow a predictable path: given the same input, they execute the same sequence of tasks and produce the same output. Tests can assert on specific tasks in a known order and compare variable values with exact equality checks.
+AI agent processes are non-deterministic: the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) decides at runtime which tools to invoke and in what order, and its free-text output varies across runs. This guide shows how to write integration tests that keep the AI agent and LLM interaction real while mocking external tool executions, using two CPT features:
 
-AI agent processes break both assumptions. A process that uses the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) lets the AI agent decide at runtime which tools to invoke and in what order. The same prompt may lead to different execution paths across runs. On top of that, the agent produces free-text output whose exact wording varies every time.
-
-This poses two challenges for testing:
-
-- **Non-deterministic execution order**: Standard CPT assertions are blocking, since they wait for a specific condition before the test continues. A test that blocks on one particular tool task will stall if the agent chooses a different tool first, or skips that tool entirely.
-- **Non-deterministic output content**: Equality-based variable assertions cannot reliably verify free-text responses. The agent may phrase the same correct answer differently on each run, causing exact-match checks to fail even when the response is valid.
-
-In practice, CPT addresses these issues with two complementary features:
-
-- Use [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior) to react to whichever tool or user tasks the agent activates, without hard-coding a single execution order.
-- Use [judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge) to check AI-generated output with a judge LLM. Instead of comparing exact wording, the judge scores whether the response satisfies a natural-language expectation, which makes assertions more robust for free-text output.
-
-:::note
-This guide provides an integration-test style setup: the AI agent process and its LLM interaction are real, while tool executions (such as REST connector calls) are mocked. This gives you broader coverage than a traditional mock-based unit test, because the test still validates prompting, orchestration, and semantic output quality end to end.
-:::
-
-In this guide, you will:
-
-- Run an integration test that keeps the AI agent and LLM interaction real while mocking external tool executions.
-- Handle non-deterministic execution paths in AI agent processes with conditional behavior, without hard-coding a single execution order.
-- Verify free-text agent output with judge assertions.
-
-After completing this guide, you will be able to test AI agent processes whose control flow and outputs vary across runs.
+- **Non-deterministic execution order:** Use [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior) to react to whichever tool or user tasks the agent activates, instead of blocking on a single hard-coded execution order.
+- **Non-deterministic output content:** Use [judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge) to verify AI-generated output or tool execution results with a judge LLM. The judge scores whether a value satisfies a natural-language expectation, making assertions robust when exact-match checks are too brittle.
 
 ## Prerequisites
 
@@ -91,7 +70,7 @@ If your AI agent tools use different outbound connectors, adjust `CONNECTOR_OUTB
 
 ### Configure the LLM provider
 
-Configure the LLM provider for the judge. The judge does not need the same provider or model as your AI agent — a lighter model often works well since the judge context is much smaller.
+Configure the LLM provider for the judge. The judge does not need the same provider or model as your AI agent. A lighter model often works well since the judge context is much smaller.
 
 <Tabs groupId="judge-provider" defaultValue="amazon-bedrock" queryString values={[
 {label: 'Amazon Bedrock', value: 'amazon-bedrock' },
