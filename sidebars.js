@@ -246,6 +246,7 @@ module.exports = {
           },
           items: [
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/camunda-provided-llm",
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/monitor-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
