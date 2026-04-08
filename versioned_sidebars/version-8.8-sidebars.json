@@ -510,7 +510,6 @@
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
-            "components/modeler/desktop-modeler/variables",
             {
               "Element templates": [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
