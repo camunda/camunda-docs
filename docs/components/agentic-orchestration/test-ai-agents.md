@@ -30,10 +30,6 @@ AI agent processes are non-deterministic: the [AI Agent connector](/components/c
 This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process, **AI Agent Chat With Tools**. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
 :::
 
-:::note
-This guide focuses on the Spring-based setup because it is the most direct way to run this style of integration test with CPT. If you use CPT without Spring, review the [configuration reference](/apis-tools/testing/configuration.md) and adapt the same connector and judge settings for your test environment.
-:::
-
 ## Step 1: Prepare the example AI agent blueprint
 
 Place the BPMN file and any associated forms for your AI agent process in `src/test/resources` (for example, under `bpmn/` and `forms/` subdirectories).
