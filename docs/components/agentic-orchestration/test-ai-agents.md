@@ -32,7 +32,7 @@ This guide is a follow-up to [Build your first AI agent](../../guides/getting-st
 
 ## Step 1: Prepare the example AI agent blueprint
 
-Place the BPMN file and any associated forms for your AI agent process in `src/test/resources` (for example, under `bpmn/` and `forms/` subdirectories).
+Place the BPMN file and any associated forms for your AI agent process in `src/main/resources` (for example, under `bpmn/` and `forms/` subdirectories).
 
 ## Step 2: Configure the LLM provider and connectors
 
