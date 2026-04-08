@@ -82,7 +82,7 @@ You can find the BPMN process ID in the properties panel, or in the first `<bpmn
 
 ![process ID in properties panel](../modeling/advanced-modeling/img/process-id-properties-panel.png)
 
-The `processId` should be shorter than 255 characters and not contain whitespace.
+The `processId` should stay within the supported identifier-length limits of the target environment and must not contain whitespace.
 
 :::note
 Play runs only the first executable process within the BPMN diagram. Make sure the process ID you link is the first executable process.
