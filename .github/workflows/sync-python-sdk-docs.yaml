@@ -114,6 +114,14 @@ jobs:
           DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
           npx prettier --write "$DOCS_ROOT/apis-tools/python-sdk.md" "$DOCS_ROOT/apis-tools/python-sdk/"
 
+      - name: Verify SDK examples don't break docs generation
+        working-directory: docs
+        run: |
+          npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
+          npx docusaurus gen-api-docs camunda -p api-camunda-openapi
+          # Discard generated MDX — this step only validates, not commits
+          git checkout -- docs/apis-tools/orchestration-cluster-api-rest/specifications/ || true
+
       - name: Check for changes
         id: check_changes
         working-directory: docs
