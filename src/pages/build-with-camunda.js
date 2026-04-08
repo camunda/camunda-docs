@@ -574,7 +574,7 @@ $ cd camunda-8-get-started/1-rocket-launch/
 $ c8ctl deploy .
 $ c8ctl run rocket-launch.bpmn
 
-# Open Operate at http://localhost:8080/operate and see your process instance running. Login with the credentials: \`demo/demo\`. `}
+# Open Operate at http://localhost:8080/operate to see your process instance running. Login with the credentials: demo/demo. `}
           </TerminalWindow>
 
           <div className={styles.modelerNote}>
