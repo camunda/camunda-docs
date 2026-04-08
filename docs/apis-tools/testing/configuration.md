@@ -931,6 +931,18 @@ agreement.
 | `judge.chat-model.timeout`     | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`). |
 | `judge.chat-model.temperature` | No       | `double`   | Temperature for response randomness (0.0 to 2.0).         |
 
+**Example:**
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      chat-model:
+        provider: "openai"
+        model: "gpt-4o"
+        api-key: ${OPENAI_API_KEY}
+```
+
 </TabItem>
 
 <TabItem value='anthropic'>
@@ -942,6 +954,18 @@ agreement.
 | `judge.chat-model.api-key`     | Yes      | `string`   | API key.                                                  |
 | `judge.chat-model.timeout`     | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`). |
 | `judge.chat-model.temperature` | No       | `double`   | Temperature for response randomness (0.0 to 2.0).         |
+
+**Example:**
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      chat-model:
+        provider: "anthropic"
+        model: "claude-sonnet-4-20250514"
+        api-key: ${ANTHROPIC_API_KEY}
+```
 
 </TabItem>
 
@@ -961,6 +985,21 @@ Supports Bedrock long-term API keys or AWS IAM credentials. Falls back to the
 | `judge.chat-model.timeout`                | No                             | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                                      |
 | `judge.chat-model.temperature`            | No                             | `double`   | Temperature for response randomness (0.0 to 2.0).                                              |
 
+**Example:**
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      chat-model:
+        provider: "amazon-bedrock"
+        model: "eu.anthropic.claude-haiku-4-5-20251001-v1:0"
+        region: "eu-central-1"
+        credentials:
+          access-key: ${AWS_BEDROCK_ACCESS_KEY}
+          secret-key: ${AWS_BEDROCK_SECRET_KEY}
+```
+
 </TabItem>
 
 <TabItem value='azure-openai'>
@@ -976,6 +1015,19 @@ Supports API key authentication. Falls back to
 | `judge.chat-model.api-key`     | No       | `string`   | API key. Optional; if omitted, falls back to `DefaultAzureCredential`.                                                     |
 | `judge.chat-model.timeout`     | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                                                                  |
 | `judge.chat-model.temperature` | No       | `double`   | Temperature for response randomness (0.0 to 2.0).                                                                          |
+
+**Example:**
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      chat-model:
+        provider: "azure-openai"
+        model: "my-gpt4o-deployment"
+        endpoint: "https://my-resource.openai.azure.com/"
+        api-key: ${AZURE_OPENAI_API_KEY}
+```
 
 </TabItem>
 
@@ -994,6 +1046,18 @@ For local models (such as [Ollama](https://ollama.com/)) or any third-party API 
 | `judge.chat-model.timeout`     | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                |
 | `judge.chat-model.temperature` | No       | `double`   | Temperature for response randomness (0.0 to 2.0).                        |
 
+**Example (Ollama):**
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      chat-model:
+        provider: "openai-compatible"
+        model: "llama3"
+        base-url: "http://localhost:11434/v1"
+```
+
 </TabItem>
 
 <TabItem value='custom'>
@@ -1008,6 +1072,19 @@ For providers not listed above, use a custom provider name and pass arbitrary pr
 | `judge.chat-model.custom-properties.*` | No       | `map`      | Arbitrary key-value pairs passed to SPI providers via `ProviderConfig.getCustomProperties()`. |
 | `judge.chat-model.timeout`             | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                                     |
 | `judge.chat-model.temperature`         | No       | `double`   | Temperature for response randomness (0.0 to 2.0).                                             |
+
+**Example:**
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      chat-model:
+        provider: "my-custom-provider"
+        model: "my-model"
+        custom-properties:
+          endpoint: "https://my-llm.example.com/v1"
+```
 
 </TabItem>
 
