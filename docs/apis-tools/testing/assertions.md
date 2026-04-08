@@ -104,6 +104,16 @@ static void configureAssertions() {
 }
 ```
 
+### Judge configuration
+
+Override the global [judge configuration](configuration.md#judge-configuration) for a single assertion chain using `withJudgeConfig`.
+
+```java
+assertThat(processInstance)
+    .withJudgeConfig(config -> config.withThreshold(0.9))
+    .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
+```
+
 ## Process instance assertions
 
 You can verify the process instance state and other properties using `CamundaAssert.assertThat()` or
@@ -466,20 +476,6 @@ assertThat(processInstance)
         ElementSelectors.byName("Greet Customer"), "output",
         "Contains a polite greeting addressed to the customer.");
 ```
-
-### withJudgeConfig
-
-Override the global judge configuration for a single assertion chain.
-
-```java
-assertThat(processInstance)
-    .withJudgeConfig(config -> config.withThreshold(0.9))
-    .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
-```
-
-:::tip
-For a complete walkthrough of testing AI agents with judge assertions and conditional behavior, see [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md).
-:::
 
 ## Process instance message assertions
 
