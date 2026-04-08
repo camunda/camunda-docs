@@ -357,13 +357,13 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
 
 **Solution:**
 
-1. Export connector secrets as environment variables:
+1. For non-Docker mode, export connector secrets as environment variables:
 
    ```bash
    export MY_SECRET_KEY=secret_value
    ```
 
-2. If you are running the separate Docker Compose distribution, use the `connector-secrets.txt` file described in the [developer quickstart with Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md#connector-secrets).
+2. For the Docker Compose setup, add secrets to the `connector-secrets.txt` file located in the Docker Compose folder.
 3. Restart Camunda 8 Run after adding or modifying secrets.
 
 ## Ubuntu-specific issues

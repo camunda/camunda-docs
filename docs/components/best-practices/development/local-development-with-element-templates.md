@@ -6,7 +6,7 @@ tags:
 description: "Learn how to use Camunda 8 Run with element templates in your local development environment."
 ---
 
-When working with [element templates](/components/concepts/element-templates.md) in your local development environment using [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), ensure all dependencies are provisioned before you start.
+When working with [element templates](/components/concepts/element-templates.md) in your local development environment using [Camunda 8 Run with Docker Compose](/self-managed/quickstart/developer-quickstart/c8run.md), ensure all dependencies are provisioned before you start.
 
 This guide explains how to set up element templates in your local environment.
 
@@ -20,10 +20,10 @@ This guide explains how to set up element templates in your local environment.
 
 If your element templates use secrets, you must provide these values to the connector runtime.
 
-When running Camunda 8 Run locally, export connector secrets as environment variables before startup:
+Add secrets to the `connector-secrets.txt` file in the root directory of your Camunda 8 Run setup. Use the following format, with one secret per line:
 
 ```
-export NAME=VALUE
+NAME=VALUE
 ```
 
 These secrets will then be available in the connector runtime using the format `secrets.NAME`.
@@ -38,7 +38,8 @@ AWS_KEY=keyValue
 
 In this case, the `MY_TOKEN` secret can be referenced as `secrets.MY_TOKEN`.
 
-If you run the separate Docker Compose distribution instead of Camunda 8 Run, use the `connector-secrets.txt` file described in the [developer quickstart with Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md#connector-secrets).
+This applies when custom connectors are deployed as part of the Camunda 8 Run Docker Compose setup.
+If you choose to run connectors differently, as described in the [custom connector hosting guide](/components/connectors/custom-built-connectors/host-custom-connector.md#wiring-your-connector-with-a-camunda-cluster), configure secrets as environment variables instead.
 
 ## Provisioning a custom connector runtime
 
@@ -55,20 +56,10 @@ This guide uses a generic [connector template](https://github.com/camunda/connec
 This command creates a file named `target/connector-template-0.1.0-SNAPSHOT-with-dependencies.jar`.
 
 2. Copy the `.jar` file into the `custom_connectors` directory.
-3. Start Camunda 8 Run. For example:
+3. Start Camunda 8 Run with Docker Compose. For example, from the Docker Compose directory in your Camunda 8 Run setup, run:
 
-```
-
-./c8run start
-
-```
-
-On Windows, use:
-
-```
-
-.\c8run.exe start
-
+```bash
+docker compose up -d
 ```
 
 4. Your connector is ready to execute jobs when a process references it.

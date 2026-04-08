@@ -136,8 +136,8 @@ For custom connectors:
 
 For connector secrets:
 
-- When running Camunda 8 Run locally, export secrets as environment variables.
-- When running the separate Docker Compose distribution, use the `connector-secrets.txt` file described in the [developer quickstart with Docker Compose](../docker-compose.md#connector-secrets).
+- In non-Docker mode, export secrets as environment variables.
+- In the Docker Compose setup, add secrets to the `connector-secrets.txt` file in the Docker Compose folder.
 
 For connector development and packaging details, see [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
 
