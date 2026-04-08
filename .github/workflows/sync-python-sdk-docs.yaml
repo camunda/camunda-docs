@@ -70,6 +70,14 @@ jobs:
           uv sync
           make generate-local
 
+      - name: Copy SDK examples for code samples
+        run: |
+          EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-python/examples"
+          rm -rf "$EXAMPLES_TARGET"
+          mkdir -p "$EXAMPLES_TARGET"
+          cp -R python-sdk/examples/* "$EXAMPLES_TARGET/"
+          echo "Copied Python SDK examples → .sdk-repos/"
+
       - name: Build markdown docs
         working-directory: python-sdk
         run: make docs-md
@@ -94,14 +102,6 @@ jobs:
           API_COUNT=$(find "$TARGET/api-reference" -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
           echo "Copied landing page + ${SECTION_COUNT} section pages + ${API_COUNT} API reference files → ${{ steps.resolve.outputs.docs_root }}"
 
-      - name: Copy SDK examples for code samples
-        run: |
-          EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-python/examples"
-          rm -rf "$EXAMPLES_TARGET"
-          mkdir -p "$EXAMPLES_TARGET"
-          cp -R python-sdk/examples/* "$EXAMPLES_TARGET/"
-          echo "Copied Python SDK examples → .sdk-repos/"
-
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
@@ -114,13 +114,9 @@ jobs:
           DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
           npx prettier --write "$DOCS_ROOT/apis-tools/python-sdk.md" "$DOCS_ROOT/apis-tools/python-sdk/"
 
-      - name: Verify SDK examples don't break docs generation
+      - name: Regenerate Orchestration API docs with SDK examples
         working-directory: docs
-        run: |
-          npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
-          npx docusaurus gen-api-docs camunda -p api-camunda-openapi
-          # Discard generated MDX — this step only validates, not commits
-          git checkout -- docs/apis-tools/orchestration-cluster-api-rest/specifications/ || true
+        run: node api/generate-api-docs.js camunda
 
       - name: Check for changes
         id: check_changes
