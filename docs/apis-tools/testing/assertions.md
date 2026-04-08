@@ -392,6 +392,16 @@ assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> 
 });
 ```
 
+### hasVariableSatisfiesJudge
+
+Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The assertion
+fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
+
+```java
+assertThat(processInstance)
+    .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
+```
+
 ### hasLocalVariableNames
 
 Assert that the process instance has the local variables in the scope of the given element. Use the BPMN element ID or a
@@ -444,20 +454,11 @@ assertThat(processInstance).hasLocalVariableSatisfies(
     });
 ```
 
-### hasVariableSatisfiesJudge
-
-Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The assertion
-fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
-
-```java
-assertThat(processInstance)
-    .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
-```
-
 ### hasLocalVariableSatisfiesJudge
 
-Assert that a local variable in the scope of a given element satisfies a natural language expectation. Use the BPMN
-element ID or an [element selector](utilities.md#element-selector) to identify the element.
+Assert that a local variable in the scope of a given element satisfies a natural language expectation using a configured LLM judge. Use the BPMN
+element ID or an [element selector](utilities.md#element-selector) to identify the element. The assertion
+fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
 
 ```java
 assertThat(processInstance)
