@@ -158,6 +158,10 @@ Each behavior watches for a specific element to become active and then completes
 Register a behavior for each tool task the agent might invoke. In this integration test, these behaviors stand in for external tool executions such as REST connector calls. The following two behaviors provide mock responses for the user lookup tools:
 
 ```java
+// Define records for tool call results
+record User(int id, String name, String username) {}
+record UserDetail(int id, String name, String username, String email) {}
+
 // given: complete ListUsers when the agent invokes it
 processTestContext
     .when(
@@ -169,8 +173,8 @@ processTestContext
             JobSelectors.byElementId("ListUsers"),
             Map.of("toolCallResult",
                 List.of(
-                    Map.of("id", 1, "name", "Leanne Graham", "username", "Bret"),
-                    Map.of("id", 2, "name", "Ervin Howell", "username", "Antonette")))));
+                    new User(1, "Leanne Graham", "Bret"),
+                    new User(2, "Ervin Howell", "Antonette")))));
 
 // given: complete LoadUserByID with Ervin's details
 processTestContext
@@ -182,10 +186,7 @@ processTestContext
         () -> processTestContext.completeJob(
             JobSelectors.byElementId("LoadUserByID"),
             Map.of("toolCallResult",
-                Map.of("id", 2,
-                    "name", "Ervin Howell",
-                    "username", "Antonette",
-                    "email", "123@abc.local"))));
+                new UserDetail(2, "Ervin Howell", "Antonette", "123@abc.local"))));
 
 // given: complete Jokes_API with two different jokes
 String firstJoke = "Why did the workflow cross the road? To get to the happy path.";
