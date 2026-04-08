@@ -337,6 +337,12 @@ RewriteRule ^docs/8.6/reference/announcements-release-notes/850/(.*)$ /docs/8.6/
 RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-announcements/?$ /docs/8.6/reference/announcements-release-notes/overview/ [R=301,L]
 RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-notes/?$ /docs/8.6/reference/announcements-release-notes/overview/ [R=301,L]
 
+# Removed Desktop Modeler variables page (8.9)
+RewriteRule ^docs/next/components/modeler/desktop-modeler/variables/?$ /docs/next/components/modeler/data-handling/ [R=301,L]
+RewriteRule ^docs/8.9/components/modeler/desktop-modeler/variables/?$ /docs/8.9/components/modeler/data-handling/ [R=301,L]
+RewriteRule ^docs/8.8/components/modeler/desktop-modeler/variables/?$ /docs/8.8/components/modeler/data-handling/ [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/variables/?$ /docs/components/modeler/data-handling/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
