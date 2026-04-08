@@ -47,6 +47,8 @@ Add the following connector runtime configuration to your test configuration, fo
 ```yaml
 camunda:
   process-test:
+    assertion:
+      timeout: PT1M
     connectors-enabled: true
     connectors-env-vars:
       CAMUNDA_CONNECTOR_POLLING_ENABLED: "false"
@@ -56,6 +58,7 @@ camunda:
 
 With this setup:
 
+- The assertion timeout is increased to one minute. AI agent processes involve LLM interactions and typically take longer than standard BPMN processes.
 - CPT starts the connector runtime needed by the AI agent process.
 - Outbound connector executions such as the HTTP JSON connector are disabled, so tool behavior can be controlled by the test with conditional behavior.
 
@@ -118,9 +121,7 @@ For the full property reference, see [judge configuration](/apis-tools/testing/c
 
 ## Step 3: Set up the test class
 
-Create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`. Use `@TestDeployment` to declare which resources CPT should deploy before each test, and inject the `CamundaClient` and `CamundaProcessTestContext`.
-
-The `@BeforeAll` hook ensures that the default assertion timeout is increases, which is often necessary when introducing LLM interaction.
+Create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`. Use `@TestDeployment` to declare which resources CPT should deploy before each test, and inject the `CamundaClient` and `CamundaProcessTestContext`:
 
 ```java
 @SpringBootTest
@@ -139,14 +140,6 @@ class AiAgentProcessTest {
 
     @Autowired
     private CamundaProcessTestContext processTestContext;
-
-    @BeforeAll
-    static void configureCamundaAssert() {
-        // AI agent processes involve LLM interactions and typically take longer
-        // than standard BPMN processes. Increase the assertion timeout to avoid
-        // premature failures.
-        CamundaAssert.setAssertionTimeout(Duration.ofMinutes(1));
-    }
 }
 ```
 
