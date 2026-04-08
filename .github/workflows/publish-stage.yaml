@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: gcp-core-2-default
+    runs-on: aws-arm-core-2-default
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
