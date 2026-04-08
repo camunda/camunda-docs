@@ -96,7 +96,12 @@ jobs:
 
       - name: Regenerate Orchestration API docs with SDK examples
         working-directory: docs
-        run: node api/generate-api-docs.js camunda
+        run: |
+          if [ -n "${{ github.event.inputs.docs_version }}" ]; then
+            npm run api:generate -- camunda "${{ github.event.inputs.docs_version }}"
+          else
+            npm run api:generate -- camunda
+          fi
 
       - name: Check for changes
         id: check_changes
