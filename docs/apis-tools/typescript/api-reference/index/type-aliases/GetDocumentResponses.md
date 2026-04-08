@@ -11,7 +11,7 @@ mdx:
 type GetDocumentResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:10180](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10180)
+Defined in: [gen/types.gen.ts:10274](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10274)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:10180](https://github.com/camunda/orchestration-cl
 200: Blob | File;
 ```
 
-Defined in: [gen/types.gen.ts:10184](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10184)
+Defined in: [gen/types.gen.ts:10278](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10278)
 
 The document was downloaded successfully.

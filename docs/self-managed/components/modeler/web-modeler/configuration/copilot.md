@@ -311,7 +311,7 @@ Provide exactly one of the following:
 For OpenAI‑compatible providers, you can authenticate with:
 
 - `RESTAPI_COPILOT_OPENAI_BEARER`.
-- `RESTAPI_COPILOT_OPENAI_USERNAME` and `RESTAPI_COPILOT_OPENAI_PASSWORD` (basic authentication).
+- `RESTAPI_COPILOT_OPENAI_USERNAME` and `RESTAPI_COPILOT_OPENAI_PASSWORD` (Basic authentication).
 - `RESTAPI_COPILOT_OPENAI_HEADERS` (custom authentication headers).
 
 When using the Bring your own model option in Self-Managed, results may vary depending on your chosen LLM’s capabilities.

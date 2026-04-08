@@ -21,10 +21,10 @@ For the complete list of configuration options per component, see the [Self-Mana
 
 ### Parameters
 
-| Key                                  | Type   | Description                                                                                                                                                                                                                                     |
-| ------------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<componentName>.extraConfiguration` | list   | **Recommended:** Additional configuration entries layered on top of the default configuration. Each entry has a `file` (filename) and `content` (file contents). See [how it works per component](#how-extraconfiguration-works-per-component). |
-| `<componentName>.configuration`      | string | **Advanced:** Full application configuration file content (for example, the full contents of `application.yaml`). Using this **replaces** the component's default application configuration.                                                    |
+| Key                                  | Type   | Description                                                                                                                                                                                                                                                                                           |
+| ------------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<componentName>.extraConfiguration` | list   | **Recommended:** Additional configuration entries layered on top of the default configuration. Each entry has a `file` (filename), `content` (file contents), and optionally `springImport` (boolean, default `true`). See [how it works per component](#how-extraconfiguration-works-per-component). |
+| `<componentName>.configuration`      | string | **Advanced:** Full application configuration file content (for example, the full contents of `application.yaml`). Using this **replaces** the component's default application configuration.                                                                                                          |
 
 ### Configuration options
 
@@ -160,6 +160,29 @@ identity:
 
 Both files are mounted and imported separately. No merging happens at Helm template time.
 
+##### Excluding files from `spring.config.import`
+
+By default, every `extraConfiguration` entry is added to Spring Boot's `spring.config.import` property. This works for Spring-compatible files (YAML, properties) but causes Spring Boot to fail on startup when non-Spring files (such as Log4j2 XML configs) are provided.
+
+To mount a file into the container **without** adding it to `spring.config.import`, set `springImport: false` on the entry:
+
+```yaml
+connectors:
+  extraConfiguration:
+    - file: log4j2.xml
+      springImport: false
+      content: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <Configuration status="WARN" monitorInterval="30">
+          ...
+        </Configuration>
+    - file: custom-application.yaml
+      content: |
+        my.custom.property: value
+```
+
+In this example, `log4j2.xml` is mounted in the config directory but not imported by Spring. `custom-application.yaml` is both mounted and imported (the default behavior when `springImport` is omitted or set to `true`).
+
 #### Node.js Components
 
 **Applies to:** Console
@@ -233,14 +256,14 @@ The `content` must be valid YAML. If invalid YAML is provided, Helm will fail du
 
 ### Summary
 
-| Component             | Runtime       | Config format | How `extraConfiguration` is applied                             |
-| --------------------- | ------------- | ------------- | --------------------------------------------------------------- |
-| Identity              | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
-| Connectors            | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
-| Orchestration Cluster | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
-| Web Modeler REST API  | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import`   |
-| Console               | Node.js       | YAML          | Merged at template time into single `application-override.yaml` |
-| Optimize              | Java (custom) | YAML          | Merged at template time into single `environment-config.yaml`   |
+| Component             | Runtime       | Config format | How `extraConfiguration` is applied                                                                      |
+| --------------------- | ------------- | ------------- | -------------------------------------------------------------------------------------------------------- |
+| Identity              | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
+| Connectors            | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
+| Orchestration Cluster | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
+| Web Modeler REST API  | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
+| Console               | Node.js       | YAML          | Merged at template time into single `application-override.yaml`                                          |
+| Optimize              | Java (custom) | YAML          | Merged at template time into single `environment-config.yaml`                                            |
 
 ## Practical example: migrating from environment variables to a configuration file
 

@@ -17,6 +17,6 @@ type OwnerTypeEnum =
   | "UNSPECIFIED";
 ```
 
-Defined in: [gen/types.gen.ts:677](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L677)
+Defined in: [gen/types.gen.ts:690](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L690)
 
 The type of the owner of permissions.

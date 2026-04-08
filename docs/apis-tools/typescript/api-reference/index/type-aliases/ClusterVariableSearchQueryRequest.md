@@ -11,7 +11,7 @@ mdx:
 type ClusterVariableSearchQueryRequest = SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:1174](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1174)
+Defined in: [gen/types.gen.ts:1205](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1205)
 
 Cluster variable search query request.
 
@@ -20,7 +20,7 @@ Cluster variable search query request.
 ### filter?
 
 ```ts
-optional filter: ClusterVariableSearchQueryFilterRequest;
+optional filter?: ClusterVariableSearchQueryFilterRequest;
 ```
 
 The cluster variable search filters.
@@ -28,7 +28,7 @@ The cluster variable search filters.
 ### sort?
 
 ```ts
-optional sort: ClusterVariableSearchQuerySortRequest[];
+optional sort?: ClusterVariableSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

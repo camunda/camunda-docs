@@ -11,6 +11,6 @@ mdx:
 type IntegerFilterProperty = number | AdvancedIntegerFilter;
 ```
 
-Defined in: [gen/types.gen.ts:2712](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2712)
+Defined in: [gen/types.gen.ts:2870](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2870)
 
 Integer property with advanced search capabilities.

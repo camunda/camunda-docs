@@ -11,7 +11,7 @@ mdx:
 type ClusterVariableResultBase = object;
 ```
 
-Defined in: [gen/types.gen.ts:1159](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1159)
+Defined in: [gen/types.gen.ts:1190](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1190)
 
 Cluster variable response item.
 
@@ -23,7 +23,7 @@ Cluster variable response item.
 name: string;
 ```
 
-Defined in: [gen/types.gen.ts:1163](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1163)
+Defined in: [gen/types.gen.ts:1194](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1194)
 
 The name of the cluster variable. Unique within its scope (global or tenant-specific).
 
@@ -35,16 +35,16 @@ The name of the cluster variable. Unique within its scope (global or tenant-spec
 scope: ClusterVariableScopeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:1164](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1164)
+Defined in: [gen/types.gen.ts:1195](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1195)
 
 ---
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: string;
+tenantId: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:1168](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1168)
+Defined in: [gen/types.gen.ts:1199](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1199)
 
-Only provided if the cluster variable scope is TENANT.
+Only provided if the cluster variable scope is TENANT. Null for global scope variables.

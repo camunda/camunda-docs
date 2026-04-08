@@ -11,17 +11,17 @@ mdx:
 type SearchUserTaskVariablesData = object;
 ```
 
-Defined in: [gen/types.gen.ts:17454](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17454)
+Defined in: [gen/types.gen.ts:16463](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16463)
 
 ## Properties
 
 ### body?
 
 ```ts
-optional body: SearchQueryRequest & object;
+optional body?: SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:17458](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17458)
+Defined in: [gen/types.gen.ts:16467](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16467)
 
 User task search query request.
 
@@ -30,23 +30,15 @@ User task search query request.
 ##### filter?
 
 ```ts
-optional filter: object;
+optional filter?: UserTaskVariableFilter;
 ```
 
 The user task variable search filters.
 
-###### filter.name?
-
-```ts
-optional name: StringFilterProperty;
-```
-
-Name of the variable.
-
 ##### sort?
 
 ```ts
-optional sort: object[];
+optional sort?: object[];
 ```
 
 Sort field criteria.
@@ -59,7 +51,7 @@ Sort field criteria.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:17479](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17479)
+Defined in: [gen/types.gen.ts:16483](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16483)
 
 #### userTaskKey
 
@@ -74,15 +66,15 @@ The key of the user task.
 ### query?
 
 ```ts
-optional query: object;
+optional query?: object;
 ```
 
-Defined in: [gen/types.gen.ts:17485](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17485)
+Defined in: [gen/types.gen.ts:16489](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16489)
 
 #### truncateValues?
 
 ```ts
-optional truncateValues: boolean;
+optional truncateValues?: boolean;
 ```
 
 When true (default), long variable values in the response are truncated. When false, full variable values are returned.
@@ -95,4 +87,4 @@ When true (default), long variable values in the response are truncated. When fa
 url: "/user-tasks/{userTaskKey}/variables/search";
 ```
 
-Defined in: [gen/types.gen.ts:17491](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17491)
+Defined in: [gen/types.gen.ts:16495](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16495)

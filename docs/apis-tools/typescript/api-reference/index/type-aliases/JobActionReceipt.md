@@ -11,6 +11,6 @@ mdx:
 type JobActionReceipt = "JOB_ACTION_RECEIPT";
 ```
 
-Defined in: [runtime/jobWorker.ts:11](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/jobWorker.ts#L11)
+Defined in: [runtime/jobWorker.ts:10](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L10)
 
 Unique receipt symbol returned by job action methods.

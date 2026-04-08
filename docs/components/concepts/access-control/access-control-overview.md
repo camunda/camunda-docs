@@ -24,8 +24,8 @@ These identities serve different purposes: one controls access to process execut
 
 <table className="table-callout">
 <tr>
-    <td width="30%">Orchestration Cluster Identity</td>
-    <td><p>Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API).</p><p>Identity governs access to process execution, task management, and related runtime resources.</p></td>
+    <td width="30%">Orchestration Cluster Admin (formerly Orchestration Cluster Identity)</td>
+    <td><p>Used for authenticating and authorizing users and systems that interact with the Orchestration Cluster (such as Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API).</p><p>Admin governs access to process execution, task management, and related runtime resources.</p></td>
 </tr>
 <tr style={{ backgroundColor: 'var(--ifm-table-background)'}}>
     <td width="30%">Management Identity</td>
@@ -37,14 +37,18 @@ These identities serve different purposes: one controls access to process execut
 Understanding which identity is required for a given action helps you apply the correct access control policies.
 :::
 
+:::note
+Identity object identifiers and names are limited to **256 characters**. This limit applies independently of the secondary storage backend used by the Orchestration Cluster.
+:::
+
 ## Identity provider (IdP) integration
 
-In production setups, both the Orchestration Cluster Identity and the Management Identity can integrate with an external OIDC IdP (such as Entra ID) for unified user management, single sign-on (SSO), and consistent security policies.
+In production setups, both the Orchestration Cluster Admin and the Management Identity can integrate with an external OIDC IdP (such as Entra ID) for unified user management, single sign-on (SSO), and consistent security policies.
 
-| Identity type                  | Description                                                                                                                                          | Default IdP              | External IdP support                  |
-| :----------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------- | :------------------------------------ |
-| Orchestration Cluster Identity | Built-in user management with support for external IdP integration via OIDC. Connects to enterprise IdPs such as Microsoft Entra ID, Okta, and more. | Built-in user management | OIDC integration with enterprise IdPs |
-| Management Identity            | Uses Keycloak by default, but can be configured with an external IdP via OIDC.                                                                       | Keycloak                 | OIDC integration with external IdPs   |
+| Identity type               | Description                                                                                                                                          | Default IdP              | External IdP support                  |
+| :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------- | :------------------------------------ |
+| Orchestration Cluster Admin | Built-in user management with support for external IdP integration via OIDC. Connects to enterprise IdPs such as Microsoft Entra ID, Okta, and more. | Built-in user management | OIDC integration with enterprise IdPs |
+| Management Identity         | Uses Keycloak by default, but can be configured with an external IdP via OIDC.                                                                       | Keycloak                 | OIDC integration with external IdPs   |
 
 ## Authentication vs. authorization
 
@@ -61,10 +65,10 @@ Authorization determines what an authenticated user or client is allowed to acce
 
 For example, a user's authorizations allow them to access Operate, view running or completed process instances, start new process instances, or claim and complete user tasks in Tasklist and through the Orchestration Cluster REST API.
 
-| Identity type                  | Authorization model              | Description                                                                                                                                                                      | Management interface                   |
-| :----------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
-| Orchestration Cluster Identity | Fine-grained permissions         | Controls access to applications, APIs, and runtime resources through specific permissions for each resource type and action (for example, `PROCESS_DEFINITION` and `USER_TASK`). | Camunda Identity UI or API             |
-| Management Identity            | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups to manage Console, Web Modeler, and Optimize.                                                                         | Keycloak admin console or external IdP |
+| Identity type               | Authorization model              | Description                                                                                                                                                                      | Management interface                   |
+| :-------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
+| Orchestration Cluster Admin | Fine-grained permissions         | Controls access to applications, APIs, and runtime resources through specific permissions for each resource type and action (for example, `PROCESS_DEFINITION` and `USER_TASK`). | Camunda Admin UI or API                |
+| Management Identity         | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups to manage Console, Web Modeler, and Optimize.                                                                         | Keycloak admin console or external IdP |
 
 ### How authentication and authorization work together
 
@@ -77,12 +81,12 @@ A user must be both authenticated and authorized to access protected resources.
 
 Camunda 8 supports multiple authentication methods depending on the environment:
 
-| Environment                                                                       | Authentication method    | Notes                                                                          |
-| --------------------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------ |
-| [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)           | None / Basic Auth / OIDC | No auth or basic auth only for local development. OIDC optional if configured. |
-| [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None / Basic Auth / OIDC | No auth or basic auth only for local development. OIDC optional if configured. |
-| [Helm Self-Managed](/self-managed/deployment/helm/install/index.md)               | Basic Auth / OIDC        | Basic Auth default, OIDC optional if configured.                               |
-| SaaS                                                                              | OIDC                     | OIDC required for all requests.                                                |
+| Environment                                                                       | Authentication method              | Notes                                                                                    |
+| --------------------------------------------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------- |
+| [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)           | None / Basic authentication / OIDC | No auth or Basic authentication only for local development. OIDC optional if configured. |
+| [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None / Basic authentication / OIDC | No auth or Basic authentication only for local development. OIDC optional if configured. |
+| [Helm Self-Managed](/self-managed/deployment/helm/install/index.md)               | Basic authentication / OIDC        | Basic authentication default, OIDC optional if configured.                               |
+| SaaS                                                                              | OIDC                               | OIDC required for all requests.                                                          |
 
 - No authentication: only for local development (Run, Docker Compose).
 - Basic authentication: simple to set up; not recommended for production.
@@ -98,12 +102,12 @@ Authentication for these APIs works the same way. See [Orchestration Cluster RES
 
 ### Users and clients
 
-Actions in an orchestration cluster can be executed by two kinds of authenticated entities (also known as principals): users and clients. [Users](/components/identity/user.md) typically interact with the cluster through a browser, while [clients](/components/identity/client.md) interact programmatically through the APIs.
+Actions in an orchestration cluster can be executed by two kinds of authenticated entities (also known as principals): users and clients. [Users](/components/admin/user.md) typically interact with the cluster through a browser, while [clients](/components/admin/client.md) interact programmatically through the APIs.
 
 Although both principal types can use web UIs and APIs, the distinction still matters. Users represent individuals who are granted access to an orchestration cluster, whereas clients represent systems or applications.
 
 :::note
-If you're using basic authentication to secure your cluster, both users and clients are treated as users. There is no dedicated client concept in this configuration.
+If you're using Basic authentication to secure your cluster, both users and clients are treated as users. There is no dedicated client concept in this configuration.
 :::
 
 Distinguishing between users and clients aligns your access management with how identities are modeled in your identity provider. They are usually authenticated differently (for example, username and password for users versus a client certificate for applications), have different authorization requirements (such as administrator access versus deployment permissions). Separating them simplifies auditing and operational clarity.
@@ -116,7 +120,7 @@ For environments using OIDC:
 2. Include the token in each API request as: `Authorization: Bearer <TOKEN>`.
 
 - [Generate a token (SaaS)](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
-- [Generate a token (Self-Managed)](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- [Generate a token (Self-Managed)](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md)
 
 Example request using a token:
 
@@ -133,7 +137,7 @@ Tokens expire according to the `expires_in` field returned by the IdP. After exp
 
 ### Orchestration Cluster authentication and authorization
 
-- [Set up OIDC-based authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- [Set up OIDC-based authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md)
 - [Orchestration Cluster authorization](./authorizations.md)
 
 ### Legacy API authentication (deprecated)

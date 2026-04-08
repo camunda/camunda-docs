@@ -11,7 +11,7 @@ mdx:
 type IncidentSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:3142](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3142)
+Defined in: [gen/types.gen.ts:3504](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3504)
 
 ## Properties
 
@@ -24,7 +24,6 @@ field:
   | "processDefinitionId"
   | "processInstanceKey"
   | "errorType"
-  | "errorMessage"
   | "elementId"
   | "elementInstanceKey"
   | "creationTime"
@@ -33,7 +32,7 @@ field:
   | "tenantId";
 ```
 
-Defined in: [gen/types.gen.ts:3146](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3146)
+Defined in: [gen/types.gen.ts:3508](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3508)
 
 The field to sort by.
 
@@ -42,7 +41,7 @@ The field to sort by.
 ### order?
 
 ```ts
-optional order: SortOrderEnum;
+optional order?: SortOrderEnum;
 ```
 
-Defined in: [gen/types.gen.ts:3147](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3147)
+Defined in: [gen/types.gen.ts:3509](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3509)

@@ -23,7 +23,7 @@ You should **only** disable/run without secondary storage in limited scenarios, 
 - For Helm deployments, Optimize is also disabled by default when secondary storage is not configured.
 - For Docker or manual deployments, you must **explicitly disable Optimize** in your configuration, as it cannot function without secondary storage.
 
-This setup provides core process execution and orchestration capabilities through Zeebe, but excludes the full Camunda platform experience, such as analytics, search, and human-task management.
+This setup provides core process execution and orchestration capabilities through Zeebe, but excludes the full Camunda experience, such as analytics, search, and human-task management.
 
 ## Enable **no secondary storage** mode
 
@@ -100,13 +100,38 @@ environment:
 </TabItem>
 </Tabs>
 
+## Authentication
+
+Authentication works with no secondary storage mode. OIDC authentication is configured the same way as with secondary storage enabled. For details, see [Orchestration Cluster authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
+
+:::note Basic authentication with no secondary storage
+If you use Basic authentication, you must also enable unprotected API mode because Basic auth requires access to user data in secondary storage.
+
+```yaml
+global:
+  noSecondaryStorage: true
+
+orchestration:
+  security:
+    authentication:
+      method: basic
+      unprotectedApi: true
+      authorizations:
+        enabled: false
+```
+
+This configuration should **only be used for development** or testing environments, as the unprotected API mode disables authentication checks on API endpoints.
+:::
+
 ## Components and features disabled
 
 If secondary storage is disabled, the following components and features are unavailable:
 
-- Web applications: Operate, Tasklist, Identity UI, Optimize, and Play (Modeler Play tab) are disabled.
-- APIs and services: Orchestration Cluster REST API search endpoints, batch operations, and usage metrics return `403 Forbidden`.
-- Data and storage: Secondary storage exporters, Schema Manager, and secondary storage backups are disabled.
+| Category         | Component or feature                                                               | Behavior               |
+| :--------------- | :--------------------------------------------------------------------------------- | :--------------------- |
+| Web applications | Operate, Tasklist, Admin UI, Optimize, Play (Modeler Play tab)                     | Disabled               |
+| APIs & services  | Orchestration Cluster REST API (search endpoints), batch operations, usage metrics | Return `403 Forbidden` |
+| Data & storage   | Secondary storage exporters, Schema Manager, secondary storage backups             | Disabled               |
 
 :::note
 

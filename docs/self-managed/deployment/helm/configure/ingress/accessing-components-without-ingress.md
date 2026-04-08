@@ -53,7 +53,7 @@ The Zeebe Gateway port-forward on port `8080` (shown in the [workflow engine sec
 To be able to use Web Modeler, create additional port-forward commands for Web Modeler itself, and if you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
 
 ```
-kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
+kubectl port-forward svc/camunda-web-modeler-restapi 8070:80
 
 kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 

@@ -11,14 +11,14 @@ mdx:
 type createDocumentLinkInput = createDocumentLinkBody & object;
 ```
 
-Defined in: [gen/CamundaClient.ts:167](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L167)
+Defined in: [gen/CamundaClient.ts:156](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L156)
 
 ## Type Declaration
 
 ### contentHash?
 
 ```ts
-optional contentHash: createDocumentLinkQueryParam_contentHash;
+optional contentHash?: createDocumentLinkQueryParam_contentHash;
 ```
 
 ### documentId
@@ -30,5 +30,5 @@ documentId: createDocumentLinkPathParam_documentId;
 ### storeId?
 
 ```ts
-optional storeId: createDocumentLinkQueryParam_storeId;
+optional storeId?: createDocumentLinkQueryParam_storeId;
 ```

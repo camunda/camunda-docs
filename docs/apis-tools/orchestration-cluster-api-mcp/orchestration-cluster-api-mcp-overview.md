@@ -18,7 +18,7 @@ The Orchestration Cluster MCP Server is an API surface of the Orchestration Clus
 Like the [Orchestration Cluster API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the MCP server is built into the Orchestration Cluster and shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model. It can be enabled independently.
 
 :::note
-This is the Orchestration Cluster MCP Server. If you are looking to connect an AI agent running in a BPMN process to an external MCP server, see the [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md).
+This is the Orchestration Cluster MCP Server. If you are looking to connect an AI agent running in a BPMN process to an external MCP server, see the [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
 :::
 
 ### Why use the Orchestration Cluster MCP Server
@@ -52,7 +52,7 @@ The MCP server uses the [Streamable HTTP](https://modelcontextprotocol.io/specif
 The MCP server is available from Camunda 8.9 onwards.
 :::
 
-If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), the MCP server is enabled by default. Connect any MCP client using this configuration:
+If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), the MCP server is enabled by default. Connect any MCP client using this configuration:
 
 ```json
 {

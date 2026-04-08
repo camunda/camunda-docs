@@ -11,7 +11,7 @@ mdx:
 type DeploymentResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:1993](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1993)
+Defined in: [gen/types.gen.ts:2054](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2054)
 
 ## Properties
 
@@ -21,7 +21,7 @@ Defined in: [gen/types.gen.ts:1993](https://github.com/camunda/orchestration-clu
 deploymentKey: DeploymentKey;
 ```
 
-Defined in: [gen/types.gen.ts:1997](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1997)
+Defined in: [gen/types.gen.ts:2058](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2058)
 
 The unique key identifying the deployment.
 
@@ -33,7 +33,7 @@ The unique key identifying the deployment.
 deployments: DeploymentMetadataResult[];
 ```
 
-Defined in: [gen/types.gen.ts:2005](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2005)
+Defined in: [gen/types.gen.ts:2066](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2066)
 
 Items deployed by the request.
 
@@ -45,6 +45,6 @@ Items deployed by the request.
 tenantId: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:2001](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2001)
+Defined in: [gen/types.gen.ts:2062](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2062)
 
 The tenant ID associated with the deployment.

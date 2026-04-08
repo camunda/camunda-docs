@@ -11,7 +11,7 @@ mdx:
 type ProcessInstanceModificationActivateInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:5971](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5971)
+Defined in: [gen/types.gen.ts:6684](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6684)
 
 Instruction describing an element to activate.
 
@@ -20,10 +20,10 @@ Instruction describing an element to activate.
 ### ancestorElementInstanceKey?
 
 ```ts
-optional ancestorElementInstanceKey: string | ElementInstanceKey;
+optional ancestorElementInstanceKey?: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:5987](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5987)
+Defined in: [gen/types.gen.ts:6700](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6700)
 
 The key of the ancestor scope the element instance should be created in.
 Set to -1 to create the new element instance within an existing element instance of the
@@ -38,7 +38,7 @@ specifically with this property by providing its key.
 elementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:5975](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5975)
+Defined in: [gen/types.gen.ts:6688](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6688)
 
 The id of the element to activate.
 
@@ -47,9 +47,9 @@ The id of the element to activate.
 ### variableInstructions?
 
 ```ts
-optional variableInstructions: ModifyProcessInstanceVariableInstruction[];
+optional variableInstructions?: ModifyProcessInstanceVariableInstruction[];
 ```
 
-Defined in: [gen/types.gen.ts:5979](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5979)
+Defined in: [gen/types.gen.ts:6692](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L6692)
 
 Instructions describing which variables to create or update.

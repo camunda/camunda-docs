@@ -80,13 +80,13 @@ These secrets are necessary when integrating Camunda with third-party services.
 
 ### Secrets using the new pattern (Camunda 8.8+)
 
-| **Secret**                                | **Chart values key**                         | **Purpose**                                                              |
-| ----------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------ |
-| **Identity External Database Password**   | `identity.externalDatabase.secret`           | Password for external PostgreSQL if using an external DB for Identity    |
-| **WebModeler External Database Password** | `webModeler.restapi.externalDatabase.secret` | Password for external PostgreSQL if using an external DB for Web Modeler |
-| **SMTP Password**                         | `webModeler.restapi.mail.secret`             | SMTP credentials for sending email notifications                         |
-| **External Elasticsearch Auth**           | `global.elasticsearch.auth.secret`           | Password for external Elasticsearch authentication (basic auth)          |
-| **External OpenSearch Auth**              | `global.opensearch.auth.secret`              | Password for external OpenSearch authentication (basic auth)             |
+| **Secret**                                | **Chart values key**                         | **Purpose**                                                               |
+| ----------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------- |
+| **Identity External Database Password**   | `identity.externalDatabase.secret`           | Password for external PostgreSQL if using an external DB for Identity     |
+| **WebModeler External Database Password** | `webModeler.restapi.externalDatabase.secret` | Password for external PostgreSQL if using an external DB for Web Modeler  |
+| **SMTP Password**                         | `webModeler.restapi.mail.secret`             | SMTP credentials for sending email notifications                          |
+| **External Elasticsearch Auth**           | `global.elasticsearch.auth.secret`           | Password for external Elasticsearch authentication (Basic authentication) |
+| **External OpenSearch Auth**              | `global.opensearch.auth.secret`              | Password for external OpenSearch authentication (Basic authentication)    |
 
 ## How to configure secrets
 

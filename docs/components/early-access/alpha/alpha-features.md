@@ -40,9 +40,15 @@ The following documented alpha features are currently available:
 items={[
 {
 type: 'link',
-href: '/docs/next/components/early-access/alpha/mcp-client/',
-label: 'MCP Client',
-docId: 'components/early-access/alpha/mcp-client/mcp-client',
+href: '/docs/next/components/early-access/alpha/bpmn-copilot/',
+label: 'BPMN Copilot',
+docId: 'components/early-access/alpha/bpmn-copilot/bpmn-copilot',
+},
+{
+type: 'link',
+href: '/docs/next/components/early-access/alpha/feel-copilot/',
+label: 'FEEL Copilot',
+docId: 'components/early-access/alpha/feel-copilot/feel-copilot',
 },
 {
 type: 'link',

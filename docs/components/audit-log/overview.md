@@ -25,20 +25,20 @@ Use the audit log to:
 
 ## Impact on secondary storage
 
-When the audit log is active, a record is written to [secondary storage](../../self-managed/concepts/secondary-storage/index.md) for every applicable operation instance. Because of this, you can expect an increase in disk usage by a factor of 1.5 to 2.0.
+When the audit log is active, a record is written to [secondary storage](../../self-managed/concepts/secondary-storage/index.md) for every applicable operation instance. By default, only user operations are tracked, not [client](../zeebe/technical-concepts/architecture.md#clients) operations. With this default behavior, you can expect a 3.5% increase in disk usage.
 
 :::warning
 The audit log is enabled by default. Because of the increase in resource usage on secondary storage, you may see increased costs associated with this feature.
 :::
 
-By default, only user operations are tracked, not [client](../zeebe/technical-concepts/architecture.md#clients) operations. You can configure the audit log to fine tune log thoroughness and resource usage according to your needs:
+You can configure the audit log to fine tune log thoroughness and resource usage according to your needs:
 
 - [SaaS](../console/manage-clusters/configure-audit-log.md)
 - [Self-Managed](../../self-managed/concepts/audit-log/configure.md)
 
 ## Get started
 
-Start auditing operations in Operate, Tasklist, and Identity.
+Start auditing operations in Operate, Tasklist, and Admin (formerly Orchestration Cluster Identity).
 
 <AoGrid ao={[
 {
@@ -54,10 +54,10 @@ image: PlayIcon,
 description: "Learn how to audit task history in Camunda 8 Tasklist.",
 },
 {
-link: "../../identity/audit-operations",
-title: "Audit operations in Identity",
+link: "../../admin/audit-operations",
+title: "Audit operations in Admin",
 image: PlayIcon,
-description: "Learn how to audit operations in Camunda 8 Identity.",
+description: "Learn how to audit operations in Camunda 8 Admin.",
 },
 ]} columns={3}/>
 

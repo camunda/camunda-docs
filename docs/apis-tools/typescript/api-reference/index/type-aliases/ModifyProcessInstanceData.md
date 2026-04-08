@@ -11,47 +11,17 @@ mdx:
 type ModifyProcessInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14225](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14225)
+Defined in: [gen/types.gen.ts:13562](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13562)
 
 ## Properties
 
 ### body
 
 ```ts
-body: object;
+body: ProcessInstanceModificationInstruction;
 ```
 
-Defined in: [gen/types.gen.ts:14226](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14226)
-
-#### activateInstructions?
-
-```ts
-optional activateInstructions: ProcessInstanceModificationActivateInstruction[];
-```
-
-Instructions describing which elements to activate in which scopes and which variables to create or update.
-
-#### moveInstructions?
-
-```ts
-optional moveInstructions: ProcessInstanceModificationMoveInstruction[];
-```
-
-Instructions describing which elements to move from one scope to another.
-
-#### operationReference?
-
-```ts
-optional operationReference: OperationReference;
-```
-
-#### terminateInstructions?
-
-```ts
-optional terminateInstructions: ProcessInstanceModificationTerminateInstruction[];
-```
-
-Instructions describing which elements to terminate.
+Defined in: [gen/types.gen.ts:13563](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13563)
 
 ---
 
@@ -61,7 +31,7 @@ Instructions describing which elements to terminate.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:14241](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14241)
+Defined in: [gen/types.gen.ts:13564](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13564)
 
 #### processInstanceKey
 
@@ -76,10 +46,10 @@ The key of the process instance that should be modified.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14247](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14247)
+Defined in: [gen/types.gen.ts:13570](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13570)
 
 ---
 
@@ -89,4 +59,4 @@ Defined in: [gen/types.gen.ts:14247](https://github.com/camunda/orchestration-cl
 url: "/process-instances/{processInstanceKey}/modification";
 ```
 
-Defined in: [gen/types.gen.ts:14248](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14248)
+Defined in: [gen/types.gen.ts:13571](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13571)

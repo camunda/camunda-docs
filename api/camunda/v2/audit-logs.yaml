@@ -91,7 +91,6 @@ components:
         - agentElementId
         - tenantId
         - result
-        - annotation
         - category
         - processDefinitionId
         - processDefinitionKey
@@ -156,10 +155,6 @@ components:
           nullable: true
         result:
           $ref: "#/components/schemas/AuditLogResultEnum"
-        annotation:
-          type: string
-          description: Additional notes about the operation.
-          nullable: true
         category:
           $ref: "#/components/schemas/AuditLogCategoryEnum"
         processDefinitionId:
@@ -268,7 +263,6 @@ components:
           enum:
             - actorId
             - actorType
-            - annotation
             - auditLogKey
             - batchOperationKey
             - batchOperationType

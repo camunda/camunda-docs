@@ -91,30 +91,40 @@ When this flag is set, all secondary-storage-dependent components are automatica
 
 <TabItem value="docker-compose">
 
-If you’re using Docker Compose, configure your environment variables within the relevant service definition:
+If you’re using Docker Compose, configure your environment variables within the relevant service definition. The examples below use the `CAMUNDA_DATA_SECONDARY_STORAGE_*` naming family consistently.
 
 ```yaml
 environment:
-  - CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=rdbms
-  - CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:h2:mem:camunda
-  - CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_USERNAME=sa
-  - CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_PASSWORD=
+  - CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=rdbms
+  - CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL=jdbc:postgresql://postgres:5432/camunda
+  - CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME=camunda
+  - CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD=camunda
 ```
 
 If you choose Elasticsearch as the secondary storage backend:
 
 ```yaml
 environment:
-  - CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=elasticsearch
-  - CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL=http://elasticsearch:9200
+  - CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=elasticsearch
+  - CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_URL=http://elasticsearch:9200
+```
+
+If you choose OpenSearch as the secondary storage backend:
+
+```yaml
+environment:
+  - CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=opensearch
+  - CAMUNDA_DATA_SECONDARY_STORAGE_OPENSEARCH_URL=http://opensearch:9200
 ```
 
 To disable secondary storage:
 
 ```yaml
 environment:
-  - CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=none
+  - CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=none
 ```
+
+For end-to-end backend-specific examples, including PostgreSQL, MariaDB, MySQL, Oracle, SQL Server, H2, Elasticsearch, and OpenSearch, see the [Docker Compose developer quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md).
 
 </TabItem>
 
@@ -151,6 +161,26 @@ data:
 - Local testing or Camunda 8 Run quickstart: H2 is fast, lightweight, and runs entirely in memory or file-based.
 - Production workloads: Use a supported RDBMS or document-store backend. Choose based on operational needs and validate with [benchmarking and sizing guidance](/components/best-practices/architecture/sizing-your-environment.md).
 - Debugging and troubleshooting: H2 or PostgreSQL are often easier to inspect and visualize.
+
+### H2 limitations
+
+Use H2 only for development, testing, and evaluation.
+
+- H2 is non-production only.
+- H2 in-memory mode does not persist data across restarts.
+- H2 file-based mode persists only to local node disk and is intended for local/dev usage.
+- H2 does not provide a shared database across brokers.
+- Multi-broker clusters with H2 are not a valid architecture; query results can be broker-local and incomplete.
+- H2 has limited concurrency and scalability compared to external production backends.
+
+For Helm deployments, if you choose H2 you must run a single broker (`clusterSize: 1`, `partitionCount: 1`, `replicationFactor: 1`). For multi-broker Helm clusters, use a shared external backend (for example, PostgreSQL).
+
+### Migration from invalid H2 setups
+
+If you currently run an invalid H2 topology, use one of these paths:
+
+1. Local/dev only: Move to file-based H2 with a single broker.
+2. Shared or clustered deployment: Move to an external persistent backend (for example, PostgreSQL, MariaDB, MySQL, Oracle, SQL Server, Elasticsearch, or OpenSearch according to support and architecture).
 
 :::note
 Starting in 8.9, H2 is the default secondary storage for lightweight Camunda 8 Run setups and quickstarts. H2 remains suitable for local testing, demos, and file-based setups, but it is not recommended for production workloads where persistence, scaling, and full analytics are required.

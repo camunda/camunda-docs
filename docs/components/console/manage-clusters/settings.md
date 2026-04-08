@@ -21,7 +21,7 @@ To manage your cluster settings:
 You can enable authorizations on a per-cluster basis to control the level of access users and clients have over Orchestration Cluster resources.
 
 - Enable this setting to use [authorizations](/components/concepts/access-control/authorizations.md) in the cluster.
-- Disable this setting if you do not want to use authorizations in the cluster. You can still configure authorizations in the Orchestration Cluster Identity, but they are only applied to cluster when you enable this setting.
+- Disable this setting if you do not want to use authorizations in the cluster. You can still configure authorizations in the Orchestration Cluster Admin, but they are only applied to cluster when you enable this setting.
 
 :::tip
 For more information, see [authorizations](/components/concepts/access-control/authorizations.md).

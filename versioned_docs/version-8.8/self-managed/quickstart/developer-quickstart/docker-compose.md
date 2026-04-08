@@ -24,6 +24,19 @@ The following prerequisites are required to run Camunda Self-Managed via Docker 
 | Docker Compose | Version 1.27.0 or later (supports the [latest Compose specification](https://docs.docker.com/compose/compose-file/)). |
 | Docker         | Version 20.10.16 or later.                                                                                            |
 
+:::tip Troubleshooting unsupported attributes
+If Docker Compose reports errors such as "unsupported attribute" when loading the Camunda Compose files:
+
+- Confirm you are using the Docker Compose v2 plugin:
+
+  ```shell
+  docker compose version
+  ```
+
+- Run the commands in this guide with `docker compose` (plugin syntax), not `docker-compose` (legacy standalone binary).
+- Upgrade Docker Desktop or Docker Engine/Compose plugin to a recent supported version, then retry.
+  :::
+
 ## Run Camunda 8 with Docker Compose
 
 To start a complete Camunda 8 Self-Managed environment locally:
@@ -69,7 +82,7 @@ The Orchestration Cluster is the core of Camunda 8, providing process automation
 | Orchestration Cluster gRPC API | `localhost:26500`                                                | gRPC API for high-performance process automation.                                                                                                                                                                          |
 
 :::note
-By default, the Orchestration Cluster uses [basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication). The full configuration uses Keycloak for [Management Identity authentication](/self-managed/concepts/authentication/authentication-to-management-components.md).
+By default, the Orchestration Cluster uses [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication). The full configuration uses Keycloak for [Management Identity authentication](/self-managed/concepts/authentication/authentication-to-management-components.md).
 :::
 
 #### Management and modeling components (full configuration only)

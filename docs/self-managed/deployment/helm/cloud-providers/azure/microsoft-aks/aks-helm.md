@@ -17,7 +17,7 @@ import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../../\_partials/\_port-forward-services.md'
 import DeployECKElasticsearch from '../../\_partials/\_deploy-eck-elasticsearch.md'
 
-This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, and confirmation it is working as intended.
+This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster and confirming that it is working as intended.
 
 ## Requirements
 
@@ -26,7 +26,7 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
-- A namespace to host the Camunda Platform; in this guide we will reference `camunda` as the target namespace.
+- A namespace to host Camunda; in this guide we will reference `camunda` as the target namespace.
 - (optional) Custom domain name/[DNS zone](https://learn.microsoft.com/en-us/azure/dns/dns-zones-records) in Azure DNS. This allows you to expose Camunda 8 endpoints and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - (optional) Permissions to install Kubernetes operators (cluster-admin or equivalent) to deploy infrastructure services such as Elasticsearch, PostgreSQL, and Keycloak. This guide installs them directly from source to provide full control over versions and configuration.
   For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
@@ -37,13 +37,13 @@ In addition to the infrastructure diagram provided in the [Terraform setup guide
 
 The architecture includes the following core components:
 
-- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Admin)
 - **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
 
 To demonstrate how to deploy with a custom domain, the following stack is also included:
 
 - **cert-manager**: Automates TLS certificate management with [Let's Encrypt](https://letsencrypt.org/)
-- **external-dns**: Manages DNS record in Route53 for domain ownership confirmation
+- **external-dns**: Manages DNS records in Azure DNS for domain ownership confirmation
 - **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
 
 <SingleNamespaceDeployment />
@@ -55,6 +55,19 @@ While this guide is primarily tailored for UNIX systems, it can also be run unde
 Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
 
 [Workload Identities](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview) offer a way to connect to Azure-managed PostgreSQL. This is not yet supported by Camunda.
+
+### Secondary storage
+
+This guide supports two [secondary storage](/self-managed/concepts/secondary-storage/index.md) backends. If you have not chosen a variant yet, refer to the [Terraform setup guide](./terraform-setup.md#variants) for details.
+
+| Variant           | Secondary storage                                                                                                      | Optimize      | Reference architecture    |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------- | ------------------------- |
+| **Elasticsearch** | [Elasticsearch via ECK](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#deploy-elasticsearch) | Supported     | `aks-single-region`       |
+| **RDBMS**         | [Azure Database for PostgreSQL](/self-managed/deployment/helm/configure/database/rdbms.md)                             | Not available | `aks-single-region-rdbms` |
+
+:::note
+Select a variant using the **Elasticsearch**/**RDBMS** tabs throughout this guide. All tabbed sections will switch together automatically.
+:::
 
 ## Export environment variables
 
@@ -74,9 +87,29 @@ When using standard authentication (username and password), specific environment
 
 Verify the configuration of your environment variables by running the following loop:
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/check-env-variables.sh
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant requires additional orchestration database variables (`DB_ORCHESTRATION_NAME`, `DB_ORCHESTRATION_USERNAME`, `DB_ORCHESTRATION_PASSWORD`) on top of the base configuration:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/check-env-variables.sh
+```
+
+</TabItem>
+</Tabs>
 
 ## (Optional) Ingress Setup
 
@@ -84,9 +117,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 If you do not have a domain name, external access to Camunda 8 web endpoints from outside the Azure Virtual Network will not be possible. In this case, skip the DNS setup and proceed directly to [deploying Camunda 8 via Helm charts](#deploy-camunda-8-via-helm-charts).
 
-Alternatively, you can use `kubectl port-forward` to access the Camunda platform without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+Alternatively, you can use `kubectl port-forward` to access Camunda without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
-Throughout the rest of this installation guide, we will refer to configurations as **"With domain"** or **"Without domain"** depending on whether the application is exposed via a domain.
+Throughout the rest of this guide, we refer to configurations as **"With domain"** or **"Without domain"**, depending on whether the application is exposed through a domain.
 :::
 
 In this section, we provide an optional setup guide for configuring an Ingress with TLS and DNS management, allowing you to access your application through a specified domain. If you haven't set up an Ingress, refer to the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) for more details. In Kubernetes, an Ingress is an API object that manages external access to services in a cluster, typically over HTTP, and can also handle TLS encryption for secure connections.
@@ -190,7 +223,7 @@ For easy and reproducible installations, we will use YAML files to configure the
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
 :::note Database initialization prerequisite
-If you're using an external Azure Database for PostgreSQL, you must create the management component databases (Management Identity and Web Modeler) before installing the Helm chart. This initialization step is covered in the [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) section of the Terraform setup guide.
+If you're using an external Azure Database for PostgreSQL, you must create the individual component databases (Identity and Web Modeler) before installing the Helm chart. This initialization step is covered in the [Configure the database and associated access](./terraform-setup.md#configure-the-database-and-associated-access) section of the Terraform setup guide.
 
 Without this step, Management Identity and Web Modeler will fail to connect to their databases.
 :::
@@ -204,9 +237,29 @@ The following makes use of the [combined Ingress setup](/self-managed/deployment
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
 :::
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-domain.yml
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS values file disables Elasticsearch and Optimize, and configures PostgreSQL as the secondary storage for the orchestration cluster:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/helm-values/values-domain.yml
+```
+
+</TabItem>
+</Tabs>
 
 :::danger Exposure of the Zeebe Gateway Service
 
@@ -222,17 +275,57 @@ Before installing the Helm chart, create Kubernetes secrets to store the databas
 
 To create the secrets, run the following commands:
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
 ```
 
 </TabItem>
 
+<TabItem value="rdbms">
+
+The RDBMS variant creates an additional `orchestration-postgres-secret` for the secondary storage database:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/create-external-db-secrets.sh
+```
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+
 <TabItem value="without-domain" label="Without domain">
+
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS values file disables Elasticsearch and Optimize, and configures PostgreSQL as the secondary storage for the orchestration cluster:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/helm-values/values-no-domain.yml
+```
+
+</TabItem>
+</Tabs>
 
 <NoDomainInfo />
 
@@ -240,11 +333,31 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 Before installing the Helm chart, create Kubernetes secrets to store the database authentication credentials.
 
-To create the secrets, run the following command:
+To create the secrets, run the following command for your selected variant:
+
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-external-db-secrets.sh
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant creates an additional `orchestration-postgres-secret` for the secondary storage database:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/create-external-db-secrets.sh
+```
+
+</TabItem>
+</Tabs>
 
 </TabItem>
 </Tabs>
@@ -257,9 +370,17 @@ Some components are not enabled by default in this deployment. For more informat
 
 ### 3. Deploy prerequisite services
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
-- **Elasticsearch**: Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **Elasticsearch** (this guide): Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- **RDBMS** (alternative): Use a managed Azure Database for PostgreSQL or another supported RDBMS engine — see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
@@ -270,6 +391,10 @@ All commands in this guide assume you are at the **repository root** (the direct
 ##### Deploy Elasticsearch {#deploy-elasticsearch}
 
 If your organization does not want to use a managed Elasticsearch service, ECK Operator is an option. In this guide, we default to the ECK Operator deployment of Elasticsearch.
+
+:::note RDBMS alternative
+For those who prefer a relational database, RDBMS (for example, [Azure Database for PostgreSQL](https://azure.microsoft.com/products/postgresql)) is a supported alternative to Elasticsearch for the Orchestration Cluster's secondary storage. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines. To use RDBMS instead, skip this section and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+:::
 
 :::warning Production Elasticsearch recommendation
 For production workloads, we recommend using an externally managed Elasticsearch service (for example, [Elastic Cloud on Azure](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure-pp)). Terraform support for Elastic Cloud on Azure can be restrictive but remains a viable option.
@@ -287,7 +412,18 @@ Merge the **Elasticsearch** overlay:
 yq '. *+ load("generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
 ```
 
-#### Fill your deployment with actual values
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant does **not** require Elasticsearch or the ECK Operator. The Helm values already configure PostgreSQL as the secondary storage, and Elasticsearch is disabled.
+
+Skip directly to [filling your deployment with actual values](#fill-your-deployment-with-actual-values).
+
+</TabItem>
+</Tabs>
+
+#### Fill your deployment with actual values {#fill-your-deployment-with-actual-values}
 
 Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
@@ -314,7 +450,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 This script:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
@@ -349,7 +485,7 @@ kubectl get secret identity-secret-for-components \
 ```
 
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
-4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Orchestration API** with "read" and "write" permission.
+4. Select the newly created application. Then select **Access to APIs > Assign permissions** and assign the **Orchestration API** "read" and "write" permissions.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell
@@ -357,13 +493,13 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `https://${CAMUNDA_DOMAIN}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `https://${CAMUNDA_DOMAIN}/admin` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 </TabItem>
 
@@ -390,7 +526,7 @@ kubectl get secret identity-secret-for-components \
 ```
 
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test".
-4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Orchestration API** with "read" and "write" permission.
+4. Select the newly created application. Then select **Access to APIs > Assign permissions** and assign the **Orchestration API** "read" and "write" permissions.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell
@@ -398,13 +534,13 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
-6. Open the Orchestration Cluster Identity in your browser at `http://localhost:8080/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
-7. In the Identity navigation menu, select **Roles**.
-8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+6. Open the Orchestration Cluster Admin in your browser at `http://localhost:8080/admin` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Admin navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/admin/role.md) with the appropriate permissions for your use case.
 9. In the selected role view, open the **Clients** tab and click **Assign client**.
 10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
 
-This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/admin/role.md#manage-clients).
 
 <PortForwardServices />
 
@@ -430,7 +566,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
   </TabItem>
   <TabItem value="without" label="Without domain">
 
-This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
+This requires port-forwarding the Zeebe Gateway to connect to the cluster.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
@@ -513,9 +649,11 @@ The following are some advanced configuration topics to consider for your cluste
 
 - [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md)
 - [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/azure/README.md)
+- [Configure RDBMS secondary storage](/self-managed/deployment/helm/configure/database/rdbms.md)
+- [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
 
 To get more familiar with our product stack, visit the following topics:
 
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Optimize](/components/optimize/what-is-optimize.md)
+- [Optimize](/components/optimize/what-is-optimize.md) (Elasticsearch variant only)

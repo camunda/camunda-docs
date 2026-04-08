@@ -151,7 +151,7 @@ kubectl create secret generic oidc-credentials \
 ```
 
 :::info
-The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md)programmatically.
+The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
 Next, create a secret with the remaining credentials for the Camunda Helm chart:
@@ -304,6 +304,14 @@ orchestration:
 | `usernameClaim` | Claim identifying users            | Default: `preferred_username`. Override if your provider uses `email`, `sub`, or another claim |
 | `clientIdClaim` | Claim identifying clients          | Default: `client_id`. Override if your provider uses `azp` or another claim                    |
 
+:::note Username display in Web Modeler (Helm)
+In Helm deployments, the default OIDC username claim is `preferred_username`, which often maps to an email address.
+
+If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
+
+For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#identity--keycloak-1).
+:::
+
 #### Default roles
 
 - `admin.users`: List of user claim values that should have admin access.
@@ -366,6 +374,10 @@ optimize:
 ### Configure Web Modeler
 
 Web Modeler requires two OIDC clients: one for the UI (public) and one for the API (confidential).
+
+:::note
+If your IdP provides user-friendly names in the `name` claim and you want Web Modeler to use that claim, configure the Web Modeler `restapi` environment variable `CAMUNDA_IDENTITY_USERNAMECLAIM=name`. Without this override, Helm defaults typically resolve usernames from `preferred_username`.
+:::
 
 ```yaml
 global:
@@ -600,7 +612,7 @@ kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 kubectl port-forward svc/camunda-optimize 8083:80
 
 # Web Modeler
-kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
+kubectl port-forward svc/camunda-web-modeler-restapi 8070:80
 kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 
 # Console

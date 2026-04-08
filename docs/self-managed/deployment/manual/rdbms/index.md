@@ -13,37 +13,49 @@ Manual installation is **not** supported for Kubernetes. If you run on Kubernete
 
 ## Secondary storage architecture
 
-The Orchestration Cluster reads from a single configured secondary storage type (RDBMS in this deployment). However, the Zeebe broker can export to multiple targets simultaneously. If you deploy Optimize, configure both the RDBMS exporter (for Orchestration Cluster operations) and a document-store exporter (Elasticsearch/OpenSearch) for Optimize.
+The Orchestration Cluster reads from a single configured secondary storage type (RDBMS in this deployment). However, the Zeebe broker can export to multiple targets simultaneously. If you deploy Optimize, configure both the RDBMS exporter (for Orchestration Cluster operations) and an Elasticsearch/OpenSearch exporter for Optimize.
 
 ```mermaid
 graph LR
     subgraph oc[Orchestration Cluster]
-        broker[Broker]
+        broker[Zeebe Broker]
+        rdbms_exporter[RDBMS Exporter]
+        doc_exporter["Elasticsearch/OpenSearch Exporter\n(for Optimize)"]
         api[Orchestration Cluster API]
+        apps[Operate · Tasklist · Admin]
     end
 
-    subgraph storage[Secondary Storage]
-        rdbms[RDBMS]
-        es[Elasticsearch/OpenSearch]
+    subgraph storage[Data Stores]
+        rdbms[RDBMS secondary storage]
+        es["Elasticsearch/OpenSearch for Optimize"]
     end
 
     opt[Optimize]
 
-    broker -->|Export| rdbms
-    broker -.->|Export| es
-    api -->|Read| rdbms
+    broker -->|Export orchestration data| rdbms_exporter
+    rdbms_exporter -->|Write| rdbms
+    apps -->|Use| api
+    broker -.->|Optional export for Optimize| doc_exporter
+    doc_exporter -.->|Optional write| es
+    api -->|Query| rdbms
     opt -->|Read/Write| es
 
-    style rdbms fill:#e1f5ff
-    style es fill:#fff3e0
-    style opt fill:#f3e5f5
+    style rdbms_exporter fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style doc_exporter fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style api fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style apps fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style es fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style opt fill:#e8fdf1,stroke:#10c95d,color:#14082c
+    style oc fill:#f0f5ff,stroke:#2272c9
+    style storage fill:#fff8f4,stroke:#fc5d0d
 ```
 
 **Key points:**
 
-- Requests to the Orchestration Cluster API read from the configured secondary storage (RDBMS).
+- Operate, Tasklist, and Admin use the Orchestration Cluster API, and that API reads from the configured secondary storage (RDBMS).
 - Optimize requires Elasticsearch or OpenSearch and reads and writes directly to it.
-- The Orchestration Cluster exports to multiple targets simultaneously to support this architecture.
+- The Zeebe broker can export to multiple targets simultaneously to support this architecture.
 
 ## Supported installation targets
 

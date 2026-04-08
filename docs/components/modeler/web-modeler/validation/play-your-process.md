@@ -24,7 +24,7 @@ In SaaS, Play uses connector secrets from your selected cluster. connector secre
 
 ## Authorizations
 
-If [authorizations](/components/identity/authorization.md) are enabled on the cluster where you will run Play, the following permissions are required for each action:
+If [authorizations](/components/admin/authorization.md) are enabled on the cluster where you will run Play, the following permissions are required for each action:
 
 | Resource Type       | Permission                                       | Allowed action                                                                                                  |
 | ------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |

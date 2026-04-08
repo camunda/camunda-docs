@@ -11,7 +11,7 @@ mdx:
 type AdvancedMessageSubscriptionStateFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4987](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4987)
+Defined in: [gen/types.gen.ts:5642](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5642)
 
 Advanced filter
 
@@ -22,10 +22,10 @@ Advanced MessageSubscriptionStateEnum filter
 ### $eq?
 
 ```ts
-optional $eq: MessageSubscriptionStateEnum;
+optional $eq?: MessageSubscriptionStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:4991](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4991)
+Defined in: [gen/types.gen.ts:5646](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5646)
 
 Checks for equality with the provided value.
 
@@ -34,10 +34,10 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:4999](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4999)
+Defined in: [gen/types.gen.ts:5654](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5654)
 
 Checks if the current property exists.
 
@@ -46,10 +46,10 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: MessageSubscriptionStateEnum[];
+optional $in?: MessageSubscriptionStateEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:5003](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5003)
+Defined in: [gen/types.gen.ts:5658](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5658)
 
 Checks if the property matches any of the provided values.
 
@@ -58,19 +58,19 @@ Checks if the property matches any of the provided values.
 ### $like?
 
 ```ts
-optional $like: LikeFilter;
+optional $like?: LikeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:5004](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5004)
+Defined in: [gen/types.gen.ts:5659](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5659)
 
 ---
 
 ### $neq?
 
 ```ts
-optional $neq: MessageSubscriptionStateEnum;
+optional $neq?: MessageSubscriptionStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:4995](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4995)
+Defined in: [gen/types.gen.ts:5650](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5650)
 
 Checks for inequality with the provided value.

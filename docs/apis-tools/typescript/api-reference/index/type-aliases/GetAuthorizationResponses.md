@@ -11,7 +11,7 @@ mdx:
 type GetAuthorizationResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:8138](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8138)
+Defined in: [gen/types.gen.ts:8759](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8759)
 
 ## Properties
 
@@ -21,6 +21,6 @@ Defined in: [gen/types.gen.ts:8138](https://github.com/camunda/orchestration-clu
 200: AuthorizationResult;
 ```
 
-Defined in: [gen/types.gen.ts:8142](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8142)
+Defined in: [gen/types.gen.ts:8763](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8763)
 
 The authorization was successfully returned.

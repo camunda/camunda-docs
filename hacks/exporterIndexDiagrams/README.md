@@ -1,7 +1,6 @@
 # What is this used for?
 
-There is a documentation [file](/self-managed/zeebe-deployment/exporters/camunda-exporter-indices.md) for
-Camunda Exporter indices that includes diagrams, currently these are generated manually using the script in this folder.
+The public Camunda Exporter indices page was removed because it was not actively maintained. These scripts are kept as internal tooling to generate index diagrams when needed.
 
 ## Using schema_to_mermaid.py
 

@@ -11,16 +11,26 @@ mdx:
 type SearchUsersResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:16537](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16537)
+Defined in: [gen/types.gen.ts:15842](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15842)
 
 ## Properties
 
 ### 200
 
 ```ts
-200: UserSearchResult;
+200: SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:16541](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16541)
+Defined in: [gen/types.gen.ts:15846](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15846)
 
 The user search result.
+
+#### Type Declaration
+
+##### items
+
+```ts
+items: object[];
+```
+
+The matching users.

@@ -5,9 +5,9 @@ sidebar_label: "User task authorization"
 description: Configure authorization for user tasks in Tasklist using process-level and task-level permissions.
 ---
 
-This page explains the recommended way to configure authorization for user tasks in Tasklist when authorization is enabled.
+This page explains the recommended way to configure authorization for user tasks in Tasklist V2 when authorization is enabled.
 
-It focuses on how authorization affects Tasklist behavior and which permissions are required to perform common user task operations.
+It describes how authorization affects Tasklist behavior and which permissions are required to perform common user task operations.
 
 ## When you need to configure user task authorization
 
@@ -16,6 +16,8 @@ Configure user task authorization if all of the following apply:
 - Authorization is enabled in your cluster
 - You use Tasklist V2
 - You want to control which users can view, claim, update, or complete user tasks
+
+If you run Tasklist in V1 API mode and rely on the legacy task visibility model, see [user task access restrictions](./user-task-access-restrictions.md).
 
 If authorization is disabled, Tasklist does not enforce permission checks for user task operations.
 
@@ -59,6 +61,12 @@ This lets typical task workers see, claim, and complete only the tasks they're r
 
 You can use this role as-is or create custom roles with similar property-based authorizations.
 
+:::note Upgrade behavior
+When you upgrade from Camunda 8.8 to 8.9, Identity creates only the default `task-worker` role automatically.
+
+Other roles are not created during upgrade. If needed, create additional roles in Identity and assign the appropriate permissions.
+:::
+
 ## User task operations and required permissions
 
 The following table shows which permissions are required to perform common user task operations in Tasklist.
@@ -75,6 +83,10 @@ The table reflects currently-implemented permissions that are enforced by Taskli
 | Assign task (override assignee)           | `UPDATE`               | `UPDATE_USER_TASK`                         |
 | Complete task (with or without variables) | `COMPLETE`             | `COMPLETE_USER_TASK` or `UPDATE_USER_TASK` |
 | Update user task                          | `UPDATE`               | `UPDATE_USER_TASK`                         |
+
+:::note
+Some operations listed in the table (for example, task reassignment) may not yet be available in the Tasklist UI.
+:::
 
 ## How Tasklist evaluates permissions
 

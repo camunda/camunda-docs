@@ -12,7 +12,7 @@ Enable the Orchestration Cluster MCP Server and configure MCP clients to connect
 
 ## Enable the Orchestration Cluster MCP Server
 
-The MCP server is opt-in and must be enabled before MCP clients can connect.
+The MCP server is enabled by default in [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md). For other deployment types, it must be explicitly enabled before MCP clients can connect.
 Depending on your deployment, enable it as follows:
 
 <Tabs groupId="deployment" defaultValue="c8run" queryString values={[
@@ -30,14 +30,7 @@ The MCP server is **enabled by default** in Camunda 8 Run. No additional configu
 
 <TabItem value="docker-compose">
 
-Set the `CAMUNDA_MCP_ENABLED` environment variable on the Orchestration Cluster container:
-
-```yaml
-services:
-  camunda:
-    environment:
-      CAMUNDA_MCP_ENABLED: "true"
-```
+The MCP server is **enabled by default** in the Docker Compose distribution. No additional configuration is needed.
 
 </TabItem>
 
@@ -156,7 +149,7 @@ For the full list of supported environment variables, see the [`c8ctl` documenta
 
 ### Use with the MCP Client connectors
 
-You can also connect to the MCP server from within a BPMN process using Camunda's [MCP Client connectors](/components/early-access/alpha/mcp-client/mcp-client.md). This allows an AI agent running in an agentic orchestration workflow to interact with Camunda's own operational data — for example, to query incidents or start processes as part of an automated workflow.
+You can also connect to the MCP server from within a BPMN process using Camunda's [MCP Client connectors](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md). This allows an AI agent running in an agentic orchestration workflow to interact with Camunda's own operational data — for example, to query incidents or start processes as part of an automated workflow.
 
 <Tabs groupId="mcp-connector" defaultValue="remote" queryString values={[
 {label: 'MCP Remote Client connector', value: 'remote' },
@@ -165,7 +158,7 @@ You can also connect to the MCP server from within a BPMN process using Camunda'
 
 <TabItem value="remote">
 
-The [MCP Remote Client connector](/components/early-access/alpha/mcp-client/mcp-remote-client-connector.md) connects to remote MCP servers over HTTP. Configure it in the properties panel with the following settings:
+The [MCP Remote Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector.md) connects to remote MCP servers over HTTP. Configure it in the properties panel with the following settings:
 
 - **Transport type**: Streamable HTTP.
 - **URL**: Your MCP endpoint URL (see [above](#mcp-endpoint-url)).
@@ -179,13 +172,13 @@ The [MCP Remote Client connector](/components/early-access/alpha/mcp-client/mcp-
 | Audience                 | The audience for your cluster API (`zeebe.camunda.io` for SaaS).                                                                               |
 | Client authentication    | Send client credentials in body.                                                                                                               |
 
-For more details, see [MCP Remote Client connector](/components/early-access/alpha/mcp-client/mcp-remote-client-connector.md).
+For more details, see [MCP Remote Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector.md).
 
 </TabItem>
 
 <TabItem value="client">
 
-The [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md) manages persistent MCP connections through the connector runtime. Configure the Camunda MCP server as a remote HTTP client in your connector runtime configuration (for example, `application.yml`):
+The [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-connector.md) manages persistent MCP connections through the connector runtime. Configure the Camunda MCP server as a remote HTTP client in your connector runtime configuration (for example, `application.yml`):
 
 ```yaml
 camunda:
@@ -211,7 +204,7 @@ camunda:
 
 The example above shows a SaaS configuration using the public endpoint. For clusters with **Secure connectivity (AWS PrivateLink)**, set `url` to the private MCP endpoint URL shown in Camunda Console instead of the public `zeebe.camunda.io` host (the path still ends with `/mcp/cluster`). For local unauthenticated setups, you can omit the `authentication` block and use `http://localhost:8080/mcp/cluster` as the URL.
 
-Reference the client ID `camunda-mcp` in the MCP Client connector element template in your BPMN process. For more details, see [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client-connector.md).
+Reference the client ID `camunda-mcp` in the MCP Client connector element template in your BPMN process. For more details, see [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-connector.md).
 
 </TabItem>
 

@@ -102,6 +102,519 @@ Create a new CamundaClient with the given options.
 
 ## Methods
 
+### Other
+
+#### Create(CamundaOptions?)
+
+```csharp
+public static CamundaClient Create(CamundaOptions? options = null)
+```
+
+Create a new CamundaClient.
+
+| Parameter | Type             | Description |
+| --------- | ---------------- | ----------- |
+| `options` | `CamundaOptions` |             |
+
+**Returns:** `CamundaClient`
+
+#### Dispose()
+
+```csharp
+public void Dispose()
+```
+
+Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+
+#### DisposeAsync()
+
+```csharp
+public ValueTask DisposeAsync()
+```
+
+Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources asynchronously.
+
+**Returns:** `ValueTask` — A task that represents the asynchronous dispose operation.
+
+#### CreateAdminUserAsync(UserRequest, CancellationToken)
+
+```csharp
+public Task<UserCreateResult> CreateAdminUserAsync(UserRequest body, CancellationToken ct = default)
+```
+
+Create admin user
+Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `body`    | `UserRequest`       |             |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<UserCreateResult>`
+
+**Example**
+
+```csharp
+public static async Task CreateAdminUserExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateAdminUserAsync(new UserRequest
+    {
+        Username = "admin",
+        Name = "Admin User",
+        Email = "admin@example.com",
+        Password = "admin-password",
+    });
+
+    Console.WriteLine($"Admin user key: {result.Username}");
+}
+```
+
+#### CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest, CancellationToken)
+
+```csharp
+public Task<GlobalTaskListenerResult> CreateGlobalTaskListenerAsync(CreateGlobalTaskListenerRequest body, CancellationToken ct = default)
+```
+
+Create global user task listener
+Create a new global user task listener.
+
+| Parameter | Type                              | Description |
+| --------- | --------------------------------- | ----------- |
+| `body`    | `CreateGlobalTaskListenerRequest` |             |
+| `ct`      | `CancellationToken`               |             |
+
+**Returns:** `Task<GlobalTaskListenerResult>`
+
+**Example**
+
+```csharp
+public static async Task CreateGlobalTaskListenerExample(GlobalListenerId id)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateGlobalTaskListenerAsync(
+        new CreateGlobalTaskListenerRequest
+        {
+            EventTypes = new List<GlobalTaskListenerEventTypeEnum> { GlobalTaskListenerEventTypeEnum.Completing },
+            Id = id,
+        });
+
+    Console.WriteLine($"Task listener: {result.Id}");
+}
+```
+
+#### CreateUserAsync(UserRequest, CancellationToken)
+
+```csharp
+public Task<UserCreateResult> CreateUserAsync(UserRequest body, CancellationToken ct = default)
+```
+
+Create user
+Create a new user.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `body`    | `UserRequest`       |             |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<UserCreateResult>`
+
+**Example**
+
+```csharp
+public static async Task CreateUserExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateUserAsync(new UserRequest
+    {
+        Username = "jdoe",
+        Name = "Jane Doe",
+        Email = "jdoe@example.com",
+        Password = "secure-password",
+    });
+
+    Console.WriteLine($"User key: {result.Username}");
+}
+```
+
+#### DeleteGlobalTaskListenerAsync(GlobalListenerId, CancellationToken)
+
+```csharp
+public Task DeleteGlobalTaskListenerAsync(GlobalListenerId id, CancellationToken ct = default)
+```
+
+Delete global user task listener
+Deletes a global user task listener.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `id`      | `GlobalListenerId`  |             |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task DeleteGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteGlobalTaskListenerAsync(
+        globalListenerId);
+}
+```
+
+#### DeleteUserAsync(Username, CancellationToken)
+
+```csharp
+public Task DeleteUserAsync(Username username, CancellationToken ct = default)
+```
+
+Delete user
+Deletes a user.
+
+| Parameter  | Type                | Description |
+| ---------- | ------------------- | ----------- |
+| `username` | `Username`          |             |
+| `ct`       | `CancellationToken` |             |
+
+**Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task DeleteUserExample(Username username)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteUserAsync(username);
+}
+```
+
+#### EvaluateConditionalsAsync(ConditionalEvaluationInstruction, CancellationToken)
+
+```csharp
+public Task<EvaluateConditionalResult> EvaluateConditionalsAsync(ConditionalEvaluationInstruction body, CancellationToken ct = default)
+```
+
+Evaluate root level conditional start events
+Evaluates root-level conditional start events for process definitions.
+If the evaluation is successful, it will return the keys of all created process instances, along with their associated process definition key.
+Multiple root-level conditional start events of the same process definition can trigger if their conditions evaluate to true.
+
+| Parameter | Type                               | Description |
+| --------- | ---------------------------------- | ----------- |
+| `body`    | `ConditionalEvaluationInstruction` |             |
+| `ct`      | `CancellationToken`                |             |
+
+**Returns:** `Task<EvaluateConditionalResult>`
+
+**Example**
+
+```csharp
+public static async Task EvaluateConditionalsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.EvaluateConditionalsAsync(
+        new ConditionalEvaluationInstruction());
+
+    Console.WriteLine($"Result: {result}");
+}
+```
+
+#### EvaluateExpressionAsync(ExpressionEvaluationRequest, CancellationToken)
+
+```csharp
+public Task<ExpressionEvaluationResult> EvaluateExpressionAsync(ExpressionEvaluationRequest body, CancellationToken ct = default)
+```
+
+Evaluate an expression
+Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
+
+| Parameter | Type                          | Description |
+| --------- | ----------------------------- | ----------- |
+| `body`    | `ExpressionEvaluationRequest` |             |
+| `ct`      | `CancellationToken`           |             |
+
+**Returns:** `Task<ExpressionEvaluationResult>`
+
+**Example**
+
+```csharp
+public static async Task EvaluateExpressionExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.EvaluateExpressionAsync(
+        new ExpressionEvaluationRequest
+        {
+            Expression = "= 1 + 2",
+        });
+
+    Console.WriteLine($"Result: {result.Result}");
+}
+```
+
+#### GetGlobalTaskListenerAsync(GlobalListenerId, ConsistencyOptions<GlobalTaskListenerResult>?, CancellationToken)
+
+```csharp
+public Task<GlobalTaskListenerResult> GetGlobalTaskListenerAsync(GlobalListenerId id, ConsistencyOptions<GlobalTaskListenerResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get global user task listener
+Get a global user task listener by its id.
+
+| Parameter     | Type                                           | Description |
+| ------------- | ---------------------------------------------- | ----------- |
+| `id`          | `GlobalListenerId`                             |             |
+| `consistency` | `ConsistencyOptions<GlobalTaskListenerResult>` |             |
+| `ct`          | `CancellationToken`                            |             |
+
+**Returns:** `Task<GlobalTaskListenerResult>`
+
+**Example**
+
+```csharp
+public static async Task GetGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetGlobalTaskListenerAsync(
+        globalListenerId);
+
+    Console.WriteLine($"Task listener: {result.EventTypes}");
+}
+```
+
+#### GetStatusAsync(CancellationToken)
+
+```csharp
+public Task GetStatusAsync(CancellationToken ct = default)
+```
+
+Get cluster status
+Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task GetStatusExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.GetStatusAsync();
+    Console.WriteLine("Cluster is healthy");
+}
+```
+
+#### GetSystemConfigurationAsync(CancellationToken)
+
+```csharp
+public Task<SystemConfigurationResponse> GetSystemConfigurationAsync(CancellationToken ct = default)
+```
+
+System configuration (alpha)
+Returns the current system configuration. The response is an envelope
+that groups settings by feature area.
+
+This endpoint is an alpha feature and may be subject to change
+in future releases.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<SystemConfigurationResponse>`
+
+**Example**
+
+```csharp
+public static async Task GetSystemConfigurationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetSystemConfigurationAsync();
+    Console.WriteLine($"System config: {result}");
+}
+```
+
+#### GetUserAsync(Username, ConsistencyOptions<GetUserResponse>?, CancellationToken)
+
+```csharp
+public Task<GetUserResponse> GetUserAsync(Username username, ConsistencyOptions<GetUserResponse>? consistency = null, CancellationToken ct = default)
+```
+
+Get user
+Get a user by its username.
+
+| Parameter     | Type                                  | Description |
+| ------------- | ------------------------------------- | ----------- |
+| `username`    | `Username`                            |             |
+| `consistency` | `ConsistencyOptions<GetUserResponse>` |             |
+| `ct`          | `CancellationToken`                   |             |
+
+**Returns:** `Task<GetUserResponse>`
+
+**Example**
+
+```csharp
+public static async Task GetUserExample(Username username)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetUserAsync(username);
+    Console.WriteLine($"User: {result.Username}");
+}
+```
+
+#### SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<GlobalTaskListenerSearchQueryResult> SearchGlobalTaskListenersAsync(GlobalTaskListenerSearchQueryRequest body, ConsistencyOptions<GlobalTaskListenerSearchQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Search global user task listeners
+Search for global user task listeners based on given criteria.
+
+| Parameter     | Type                                                      | Description |
+| ------------- | --------------------------------------------------------- | ----------- |
+| `body`        | `GlobalTaskListenerSearchQueryRequest`                    |             |
+| `consistency` | `ConsistencyOptions<GlobalTaskListenerSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                                       |             |
+
+**Returns:** `Task<GlobalTaskListenerSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchGlobalTaskListenersExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchGlobalTaskListenersAsync(
+        new GlobalTaskListenerSearchQueryRequest());
+
+    foreach (var listener in result.Items)
+    {
+        Console.WriteLine($"Listener: {listener.Id}");
+    }
+}
+```
+
+#### SearchUsersAsync(UserSearchQueryRequest, ConsistencyOptions<SearchUsersResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchUsersResponse> SearchUsersAsync(UserSearchQueryRequest body, ConsistencyOptions<SearchUsersResponse>? consistency = null, CancellationToken ct = default)
+```
+
+Search users
+Search for users based on given criteria.
+
+| Parameter     | Type                                      | Description |
+| ------------- | ----------------------------------------- | ----------- |
+| `body`        | `UserSearchQueryRequest`                  |             |
+| `consistency` | `ConsistencyOptions<SearchUsersResponse>` |             |
+| `ct`          | `CancellationToken`                       |             |
+
+**Returns:** `Task<SearchUsersResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchUsersExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchUsersAsync(new UserSearchQueryRequest());
+
+    foreach (var user in result.Items)
+    {
+        Console.WriteLine($"User: {user.Username}");
+    }
+}
+```
+
+#### UpdateGlobalTaskListenerAsync(GlobalListenerId, UpdateGlobalTaskListenerRequest, CancellationToken)
+
+```csharp
+public Task<GlobalTaskListenerResult> UpdateGlobalTaskListenerAsync(GlobalListenerId id, UpdateGlobalTaskListenerRequest body, CancellationToken ct = default)
+```
+
+Update global user task listener
+Updates a global user task listener.
+
+| Parameter | Type                              | Description |
+| --------- | --------------------------------- | ----------- |
+| `id`      | `GlobalListenerId`                |             |
+| `body`    | `UpdateGlobalTaskListenerRequest` |             |
+| `ct`      | `CancellationToken`               |             |
+
+**Returns:** `Task<GlobalTaskListenerResult>`
+
+**Example**
+
+```csharp
+public static async Task UpdateGlobalTaskListenerExample(GlobalListenerId globalListenerId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.UpdateGlobalTaskListenerAsync(
+        globalListenerId,
+        new UpdateGlobalTaskListenerRequest
+        {
+            EventTypes = new List<GlobalTaskListenerEventTypeEnum> { GlobalTaskListenerEventTypeEnum.Completing },
+            Type = "updated-task-listener",
+        });
+
+    Console.WriteLine($"Updated listener: {result.Id}");
+}
+```
+
+#### UpdateUserAsync(Username, UserUpdateRequest, CancellationToken)
+
+```csharp
+public Task<UpdateUserResponse> UpdateUserAsync(Username username, UserUpdateRequest body, CancellationToken ct = default)
+```
+
+Update user
+Updates a user.
+
+| Parameter  | Type                | Description |
+| ---------- | ------------------- | ----------- |
+| `username` | `Username`          |             |
+| `body`     | `UserUpdateRequest` |             |
+| `ct`       | `CancellationToken` |             |
+
+**Returns:** `Task<UpdateUserResponse>`
+
+**Example**
+
+```csharp
+public static async Task UpdateUserExample(Username username)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UpdateUserAsync(
+        username,
+        new UserUpdateRequest
+        {
+            Name = "Jane Smith",
+            Email = "jsmith@example.com",
+        });
+}
+```
+
 ### Cluster
 
 #### GetBackpressureState()
@@ -132,12 +645,12 @@ Retrieves the current authenticated user.
 **Example**
 
 ```csharp
-static async Task GetAuthenticationExample()
+public static async Task GetAuthenticationExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    var user = await client.GetAuthenticationAsync();
-    Console.WriteLine($"Authenticated as: {user.Username}");
+    var result = await client.GetAuthenticationAsync();
+    Console.WriteLine($"Authenticated user: {result.Username}");
 }
 ```
 
@@ -155,6 +668,18 @@ Obtains the status of the current Camunda license.
 | `ct`      | `CancellationToken` |             |
 
 **Returns:** `Task<LicenseResponse>`
+
+**Example**
+
+```csharp
+public static async Task GetLicenseExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetLicenseAsync();
+    Console.WriteLine($"License type: {result.LicenseType}");
+}
+```
 
 #### GetTopologyAsync(CancellationToken)
 
@@ -174,18 +699,12 @@ Obtains the current topology of the cluster the gateway is part of.
 **Example**
 
 ```csharp
-static async Task GetTopologyExample()
+public static async Task GetTopologyExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     var topology = await client.GetTopologyAsync();
-
     Console.WriteLine($"Cluster size: {topology.ClusterSize}");
-    Console.WriteLine($"Partitions: {topology.PartitionsCount}");
-    foreach (var broker in topology.Brokers)
-    {
-        Console.WriteLine($"  Broker {broker.NodeId}: {broker.Host}:{broker.Port}");
-    }
 }
 ```
 
@@ -210,6 +729,20 @@ in future releases.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task PinClockExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.PinClockAsync(new ClockPinRequest
+    {
+        Timestamp = 1700000000000,
+    });
+}
+```
+
 #### ResetClockAsync(CancellationToken)
 
 ```csharp
@@ -230,177 +763,16 @@ in future releases.
 
 **Returns:** `Task`
 
-### Other
-
-#### Dispose()
+**Example**
 
 ```csharp
-public void Dispose()
+public static async Task ResetClockExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.ResetClockAsync();
+}
 ```
-
-Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-
-#### DisposeAsync()
-
-```csharp
-public ValueTask DisposeAsync()
-```
-
-Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources asynchronously.
-
-**Returns:** `ValueTask` — A task that represents the asynchronous dispose operation.
-
-#### CreateAdminUserAsync(UserRequest, ConsistencyOptions<object>?, CancellationToken)
-
-```csharp
-public Task<object> CreateAdminUserAsync(UserRequest body, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
-```
-
-Create admin user
-Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
-
-| Parameter     | Type                         | Description |
-| ------------- | ---------------------------- | ----------- |
-| `body`        | `UserRequest`                |             |
-| `consistency` | `ConsistencyOptions<Object>` |             |
-| `ct`          | `CancellationToken`          |             |
-
-**Returns:** `Task<Object>`
-
-#### CreateUserAsync(UserRequest, ConsistencyOptions<UserCreateResult>?, CancellationToken)
-
-```csharp
-public Task<UserCreateResult> CreateUserAsync(UserRequest body, ConsistencyOptions<UserCreateResult>? consistency = null, CancellationToken ct = default)
-```
-
-Create user
-Create a new user.
-
-| Parameter     | Type                                   | Description |
-| ------------- | -------------------------------------- | ----------- |
-| `body`        | `UserRequest`                          |             |
-| `consistency` | `ConsistencyOptions<UserCreateResult>` |             |
-| `ct`          | `CancellationToken`                    |             |
-
-**Returns:** `Task<UserCreateResult>`
-
-#### DeleteUserAsync(Username, ConsistencyOptions<object>?, CancellationToken)
-
-```csharp
-public Task DeleteUserAsync(Username username, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
-```
-
-Delete user
-Deletes a user.
-
-| Parameter     | Type                         | Description |
-| ------------- | ---------------------------- | ----------- |
-| `username`    | `Username`                   |             |
-| `consistency` | `ConsistencyOptions<Object>` |             |
-| `ct`          | `CancellationToken`          |             |
-
-**Returns:** `Task`
-
-#### EvaluateConditionalsAsync(ConditionalEvaluationInstruction, CancellationToken)
-
-```csharp
-public Task<EvaluateConditionalResult> EvaluateConditionalsAsync(ConditionalEvaluationInstruction body, CancellationToken ct = default)
-```
-
-Evaluate root level conditional start events
-Evaluates root-level conditional start events for process definitions.
-If the evaluation is successful, it will return the keys of all created process instances, along with their associated process definition key.
-Multiple root-level conditional start events of the same process definition can trigger if their conditions evaluate to true.
-
-| Parameter | Type                               | Description |
-| --------- | ---------------------------------- | ----------- |
-| `body`    | `ConditionalEvaluationInstruction` |             |
-| `ct`      | `CancellationToken`                |             |
-
-**Returns:** `Task<EvaluateConditionalResult>`
-
-#### EvaluateExpressionAsync(ExpressionEvaluationRequest, CancellationToken)
-
-```csharp
-public Task<ExpressionEvaluationResult> EvaluateExpressionAsync(ExpressionEvaluationRequest body, CancellationToken ct = default)
-```
-
-Evaluate an expression
-Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
-
-| Parameter | Type                          | Description |
-| --------- | ----------------------------- | ----------- |
-| `body`    | `ExpressionEvaluationRequest` |             |
-| `ct`      | `CancellationToken`           |             |
-
-**Returns:** `Task<ExpressionEvaluationResult>`
-
-#### GetStatusAsync(CancellationToken)
-
-```csharp
-public Task GetStatusAsync(CancellationToken ct = default)
-```
-
-Get cluster status
-Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
-
-| Parameter | Type                | Description |
-| --------- | ------------------- | ----------- |
-| `ct`      | `CancellationToken` |             |
-
-**Returns:** `Task`
-
-#### GetUserAsync(Username, ConsistencyOptions<UserResult>?, CancellationToken)
-
-```csharp
-public Task<UserResult> GetUserAsync(Username username, ConsistencyOptions<UserResult>? consistency = null, CancellationToken ct = default)
-```
-
-Get user
-Get a user by its username.
-
-| Parameter     | Type                             | Description |
-| ------------- | -------------------------------- | ----------- |
-| `username`    | `Username`                       |             |
-| `consistency` | `ConsistencyOptions<UserResult>` |             |
-| `ct`          | `CancellationToken`              |             |
-
-**Returns:** `Task<UserResult>`
-
-#### SearchUsersAsync(SearchUsersRequest, ConsistencyOptions<UserSearchResult>?, CancellationToken)
-
-```csharp
-public Task<UserSearchResult> SearchUsersAsync(SearchUsersRequest body, ConsistencyOptions<UserSearchResult>? consistency = null, CancellationToken ct = default)
-```
-
-Search users
-Search for users based on given criteria.
-
-| Parameter     | Type                                   | Description |
-| ------------- | -------------------------------------- | ----------- |
-| `body`        | `SearchUsersRequest`                   |             |
-| `consistency` | `ConsistencyOptions<UserSearchResult>` |             |
-| `ct`          | `CancellationToken`                    |             |
-
-**Returns:** `Task<UserSearchResult>`
-
-#### UpdateUserAsync(Username, UserUpdateRequest, ConsistencyOptions<UserResult>?, CancellationToken)
-
-```csharp
-public Task<UserResult> UpdateUserAsync(Username username, UserUpdateRequest body, ConsistencyOptions<UserResult>? consistency = null, CancellationToken ct = default)
-```
-
-Update user
-Updates a user.
-
-| Parameter     | Type                             | Description |
-| ------------- | -------------------------------- | ----------- |
-| `username`    | `Username`                       |             |
-| `body`        | `UserUpdateRequest`              |             |
-| `consistency` | `ConsistencyOptions<UserResult>` |             |
-| `ct`          | `CancellationToken`              |             |
-
-**Returns:** `Task<UserResult>`
 
 ### Resources
 
@@ -421,25 +793,6 @@ and calls with the loaded content.
 | `ct`                | `CancellationToken` | Cancellation token.                                                    |
 
 **Returns:** `Task<ExtendedDeploymentResponse>` — An with typed access to deployed artifacts.
-
-**Example**
-
-```csharp
-static async Task DeployResourcesFromFilesExample()
-{
-    using var client = Camunda.CreateClient();
-
-    var result = await client.DeployResourcesFromFilesAsync(
-        new[] { "order-process.bpmn", "email-connector.bpmn" }
-    );
-
-    Console.WriteLine($"Deployment key: {result.DeploymentKey}");
-    foreach (var process in result.Processes)
-    {
-        Console.WriteLine($"  Process: {process.ProcessDefinitionId} v{process.ProcessDefinitionVersion}");
-    }
-}
-```
 
 #### DeleteResourceAsync(ResourceKey, DeleteResourceRequest, CancellationToken)
 
@@ -473,18 +826,13 @@ will be deleted.
 **Example**
 
 ```csharp
-static async Task DeleteResourceExample()
+public static async Task DeleteResourceExample(ResourceKey resourceKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Deploy a resource and get its key from the deployment response
-    var deployment = await client.DeployResourcesFromFilesAsync(
-        new[] { "order-process.bpmn" }
-    );
-    // ProcessDefinitionKey doubles as the resource key for deletion
-    var resourceKey = ResourceKey.AssumeExists(deployment.Processes[0].ProcessDefinitionKey.Value);
-
-    await client.DeleteResourceAsync(resourceKey, new DeleteResourceRequest());
+    await client.DeleteResourceAsync(
+        resourceKey,
+        new DeleteResourceRequest());
 }
 ```
 
@@ -507,6 +855,18 @@ Currently, this endpoint only supports RPA resources.
 
 **Returns:** `Task<ResourceResult>`
 
+**Example**
+
+```csharp
+public static async Task GetResourceExample(ResourceKey resourceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetResourceAsync(resourceKey);
+    Console.WriteLine($"Resource: {result.ResourceName}");
+}
+```
+
 #### GetResourceContentAsync(ResourceKey, CancellationToken)
 
 ```csharp
@@ -525,6 +885,18 @@ Currently, this endpoint only supports RPA resources.
 | `ct`          | `CancellationToken` |             |
 
 **Returns:** `Task<Object>`
+
+**Example**
+
+```csharp
+public static async Task GetResourceContentExample(ResourceKey resourceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetResourceContentAsync(resourceKey);
+    Console.WriteLine($"Content: {result}");
+}
+```
 
 ### Jobs
 
@@ -564,39 +936,10 @@ The job is auto-completed with no variables on success.
 
 **Returns:** `JobWorker`
 
-**Example**
-
-```csharp
-#pragma warning disable CS1998 // Async method lacks await (handler is simple for demo purposes)
-static async Task JobWorkerExample()
-{
-    await using var client = Camunda.CreateClient();
-
-    client.CreateJobWorker(
-        new JobWorkerConfig
-        {
-            JobType = "send-email",
-            JobTimeoutMs = 300_000, // 5 minutes
-            MaxConcurrentJobs = 5,
-            PollIntervalMs = 5_000
-        },
-        async (job, ct) =>
-        {
-            var recipient = job.GetVariables<Dictionary<string, string>>()?
-                .GetValueOrDefault("recipient");
-            Console.WriteLine($"Sending email to {recipient}");
-        });
-
-    // Run all registered workers until cancelled
-    using var cts = new CancellationTokenSource();
-    await client.RunWorkersAsync(ct: cts.Token);
-}
-```
-
 #### ActivateJobsAsync(JobActivationRequest, CancellationToken)
 
 ```csharp
-public Task<ActivateJobsResponse> ActivateJobsAsync(JobActivationRequest body, CancellationToken ct = default)
+public Task<JobActivationResult> ActivateJobsAsync(JobActivationRequest body, CancellationToken ct = default)
 ```
 
 Activate jobs
@@ -607,26 +950,26 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 | `body`    | `JobActivationRequest` |             |
 | `ct`      | `CancellationToken`    |             |
 
-**Returns:** `Task<ActivateJobsResponse>`
+**Returns:** `Task<JobActivationResult>`
 
 **Example**
 
 ```csharp
-static async Task ActivateJobsExample()
+public static async Task ActivateJobsExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    var response = await client.ActivateJobsAsync(new JobActivationRequest
+    var result = await client.ActivateJobsAsync(new JobActivationRequest
     {
-        Type = "send-email",
+        Type = "my-job-type",
         MaxJobsToActivate = 10,
-        Timeout = 300_000, // 5 minutes
-        Worker = "email-worker-1"
+        Timeout = 300000,
+        Worker = "my-worker",
     });
 
-    foreach (var job in response.Jobs)
+    foreach (var job in result.Jobs)
     {
-        Console.WriteLine($"Job {job.JobKey}: {job.Type}");
+        Console.WriteLine($"Job: {job.JobKey}");
     }
 }
 ```
@@ -651,27 +994,13 @@ Complete a job with the given payload, which allows completing the associated se
 **Example**
 
 ```csharp
-static async Task CompleteJobExample()
+public static async Task CompleteJobExample(JobKey jobKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Activate jobs and get a JobKey from the response
-    var activated = await client.ActivateJobsAsync(new JobActivationRequest
-    {
-        Type = "send-email",
-        MaxJobsToActivate = 1,
-        Timeout = 300_000,
-        Worker = "email-worker-1"
-    });
-    var jobKey = activated.Jobs[0].JobKey;
-
-    await client.CompleteJobAsync(jobKey, new JobCompletionRequest
-    {
-        Variables = new Dictionary<string, object>
-        {
-            ["emailSent"] = true
-        }
-    });
+    await client.CompleteJobAsync(
+        jobKey,
+        new JobCompletionRequest());
 }
 ```
 
@@ -695,26 +1024,18 @@ Mark the job as failed.
 **Example**
 
 ```csharp
-static async Task FailJobExample()
+public static async Task FailJobExample(JobKey jobKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Activate a job and get its JobKey from the response
-    var activated = await client.ActivateJobsAsync(new JobActivationRequest
-    {
-        Type = "send-email",
-        MaxJobsToActivate = 1,
-        Timeout = 300_000,
-        Worker = "email-worker-1"
-    });
-    var jobKey = activated.Jobs[0].JobKey;
-
-    await client.FailJobAsync(jobKey, new JobFailRequest
-    {
-        Retries = 2,
-        ErrorMessage = "SMTP server unreachable",
-        RetryBackOff = 30_000 // 30 seconds
-    });
+    await client.FailJobAsync(
+        jobKey,
+        new JobFailRequest
+        {
+            Retries = 3,
+            RetryBackOff = 5000,
+            ErrorMessage = "Something went wrong",
+        });
 }
 ```
 
@@ -725,7 +1046,7 @@ public Task<GlobalJobStatisticsQueryResult> GetGlobalJobStatisticsAsync(DateTime
 ```
 
 Global job statistics
-Returns global aggregated counts for jobs. Optionally filter by the creation time window and/or jobType.
+Returns global aggregated counts for jobs. Filter by the creation time window (required) and optionally by jobType.
 
 | Parameter     | Type                                                 | Description |
 | ------------- | ---------------------------------------------------- | ----------- |
@@ -737,35 +1058,188 @@ Returns global aggregated counts for jobs. Optionally filter by the creation tim
 
 **Returns:** `Task<GlobalJobStatisticsQueryResult>`
 
-#### SearchJobsAsync(JobSearchQuery, ConsistencyOptions<SearchJobsResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchJobsResponse> SearchJobsAsync(JobSearchQuery body, ConsistencyOptions<SearchJobsResponse>? consistency = null, CancellationToken ct = default)
+public static async Task GetGlobalJobStatisticsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetGlobalJobStatisticsAsync(
+        from: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+        to: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
+
+    Console.WriteLine($"Global job stats: {result}");
+}
+```
+
+#### GetJobErrorStatisticsAsync(JobErrorStatisticsQuery, ConsistencyOptions<JobErrorStatisticsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<JobErrorStatisticsQueryResult> GetJobErrorStatisticsAsync(JobErrorStatisticsQuery body, ConsistencyOptions<JobErrorStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get error metrics for a job type
+Returns aggregated metrics per error for the given jobType.
+
+| Parameter     | Type                                                | Description |
+| ------------- | --------------------------------------------------- | ----------- |
+| `body`        | `JobErrorStatisticsQuery`                           |             |
+| `consistency` | `ConsistencyOptions<JobErrorStatisticsQueryResult>` |             |
+| `ct`          | `CancellationToken`                                 |             |
+
+**Returns:** `Task<JobErrorStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetJobErrorStatisticsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetJobErrorStatisticsAsync(
+        new JobErrorStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Error: {stat.ErrorCode}");
+    }
+}
+```
+
+#### GetJobTimeSeriesStatisticsAsync(JobTimeSeriesStatisticsQuery, ConsistencyOptions<JobTimeSeriesStatisticsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<JobTimeSeriesStatisticsQueryResult> GetJobTimeSeriesStatisticsAsync(JobTimeSeriesStatisticsQuery body, ConsistencyOptions<JobTimeSeriesStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get time-series metrics for a job type
+Returns a list of time-bucketed metrics ordered ascending by time.
+The `from` and `to` fields select the time window of interest.
+Each item in the response corresponds to one time bucket of the requested resolution.
+
+| Parameter     | Type                                                     | Description |
+| ------------- | -------------------------------------------------------- | ----------- |
+| `body`        | `JobTimeSeriesStatisticsQuery`                           |             |
+| `consistency` | `ConsistencyOptions<JobTimeSeriesStatisticsQueryResult>` |             |
+| `ct`          | `CancellationToken`                                      |             |
+
+**Returns:** `Task<JobTimeSeriesStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetJobTimeSeriesStatisticsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetJobTimeSeriesStatisticsAsync(
+        new JobTimeSeriesStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Time series: {stat}");
+    }
+}
+```
+
+#### GetJobTypeStatisticsAsync(JobTypeStatisticsQuery, ConsistencyOptions<JobTypeStatisticsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<JobTypeStatisticsQueryResult> GetJobTypeStatisticsAsync(JobTypeStatisticsQuery body, ConsistencyOptions<JobTypeStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get job statistics by type
+Get statistics about jobs, grouped by job type.
+
+| Parameter     | Type                                               | Description |
+| ------------- | -------------------------------------------------- | ----------- |
+| `body`        | `JobTypeStatisticsQuery`                           |             |
+| `consistency` | `ConsistencyOptions<JobTypeStatisticsQueryResult>` |             |
+| `ct`          | `CancellationToken`                                |             |
+
+**Returns:** `Task<JobTypeStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetJobTypeStatisticsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetJobTypeStatisticsAsync(
+        new JobTypeStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Job type: {stat.JobType}");
+    }
+}
+```
+
+#### GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery, ConsistencyOptions<JobWorkerStatisticsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<JobWorkerStatisticsQueryResult> GetJobWorkerStatisticsAsync(JobWorkerStatisticsQuery body, ConsistencyOptions<JobWorkerStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get job statistics by worker
+Get statistics about jobs, grouped by worker, for a given job type.
+
+| Parameter     | Type                                                 | Description |
+| ------------- | ---------------------------------------------------- | ----------- |
+| `body`        | `JobWorkerStatisticsQuery`                           |             |
+| `consistency` | `ConsistencyOptions<JobWorkerStatisticsQueryResult>` |             |
+| `ct`          | `CancellationToken`                                  |             |
+
+**Returns:** `Task<JobWorkerStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetJobWorkerStatisticsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetJobWorkerStatisticsAsync(
+        new JobWorkerStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Worker: {stat.Worker}");
+    }
+}
+```
+
+#### SearchJobsAsync(JobSearchQuery, ConsistencyOptions<JobSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<JobSearchQueryResult> SearchJobsAsync(JobSearchQuery body, ConsistencyOptions<JobSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search jobs
 Search for jobs based on given criteria.
 
-| Parameter     | Type                                     | Description |
-| ------------- | ---------------------------------------- | ----------- |
-| `body`        | `JobSearchQuery`                         |             |
-| `consistency` | `ConsistencyOptions<SearchJobsResponse>` |             |
-| `ct`          | `CancellationToken`                      |             |
+| Parameter     | Type                                       | Description |
+| ------------- | ------------------------------------------ | ----------- |
+| `body`        | `JobSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<JobSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                        |             |
 
-**Returns:** `Task<SearchJobsResponse>`
+**Returns:** `Task<JobSearchQueryResult>`
 
 **Example**
 
 ```csharp
-static async Task SearchJobsExample()
+public static async Task SearchJobsExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     var result = await client.SearchJobsAsync(new JobSearchQuery());
 
-    foreach (var job in result.Items!)
+    foreach (var job in result.Items)
     {
-        Console.WriteLine($"Job {job.JobKey}: type={job.Type}, state={job.State}");
+        Console.WriteLine($"Job: {job.JobKey}");
     }
 }
 ```
@@ -790,25 +1264,17 @@ Reports a business error (i.e. non-technical) that occurs while processing a job
 **Example**
 
 ```csharp
-static async Task ThrowJobErrorExample()
+public static async Task ThrowJobErrorExample(JobKey jobKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Activate a job and get its JobKey from the response
-    var activated = await client.ActivateJobsAsync(new JobActivationRequest
-    {
-        Type = "send-email",
-        MaxJobsToActivate = 1,
-        Timeout = 300_000,
-        Worker = "email-worker-1"
-    });
-    var jobKey = activated.Jobs[0].JobKey;
-
-    await client.ThrowJobErrorAsync(jobKey, new JobErrorRequest
-    {
-        ErrorCode = "INVALID_ADDRESS",
-        ErrorMessage = "Recipient email address is invalid"
-    });
+    await client.ThrowJobErrorAsync(
+        jobKey,
+        new JobErrorRequest
+        {
+            ErrorCode = "VALIDATION_ERROR",
+            ErrorMessage = "Input validation failed",
+        });
 }
 ```
 
@@ -828,6 +1294,22 @@ Update a job with the given key.
 | `ct`      | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task UpdateJobExample(JobKey jobKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UpdateJobAsync(
+        jobKey,
+        new JobUpdateRequest
+        {
+            Changeset = new JobChangeset { Retries = 3 },
+        });
+}
+```
 
 ### Job Workers
 
@@ -894,39 +1376,83 @@ provided adHocSubProcessInstanceKey.
 
 **Returns:** `Task`
 
-#### GetElementInstanceAsync(ElementInstanceKey, ConsistencyOptions<GetElementInstanceResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<GetElementInstanceResponse> GetElementInstanceAsync(ElementInstanceKey elementInstanceKey, ConsistencyOptions<GetElementInstanceResponse>? consistency = null, CancellationToken ct = default)
+public static async Task ActivateAdHocSubProcessActivitiesExample(ElementInstanceKey elementInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.ActivateAdHocSubProcessActivitiesAsync(
+        elementInstanceKey,
+        new AdHocSubProcessActivateActivitiesInstruction());
+}
+```
+
+#### GetElementInstanceAsync(ElementInstanceKey, ConsistencyOptions<ElementInstanceResult>?, CancellationToken)
+
+```csharp
+public Task<ElementInstanceResult> GetElementInstanceAsync(ElementInstanceKey elementInstanceKey, ConsistencyOptions<ElementInstanceResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get element instance
 Returns element instance as JSON.
 
-| Parameter            | Type                                             | Description |
-| -------------------- | ------------------------------------------------ | ----------- |
-| `elementInstanceKey` | `ElementInstanceKey`                             |             |
-| `consistency`        | `ConsistencyOptions<GetElementInstanceResponse>` |             |
-| `ct`                 | `CancellationToken`                              |             |
+| Parameter            | Type                                        | Description |
+| -------------------- | ------------------------------------------- | ----------- |
+| `elementInstanceKey` | `ElementInstanceKey`                        |             |
+| `consistency`        | `ConsistencyOptions<ElementInstanceResult>` |             |
+| `ct`                 | `CancellationToken`                         |             |
 
-**Returns:** `Task<GetElementInstanceResponse>`
+**Returns:** `Task<ElementInstanceResult>`
 
-#### SearchElementInstancesAsync(ElementInstanceSearchQuery, ConsistencyOptions<SearchElementInstancesResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchElementInstancesResponse> SearchElementInstancesAsync(ElementInstanceSearchQuery body, ConsistencyOptions<SearchElementInstancesResponse>? consistency = null, CancellationToken ct = default)
+public static async Task GetElementInstanceExample(ElementInstanceKey elementInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetElementInstanceAsync(
+        elementInstanceKey);
+
+    Console.WriteLine($"Element: {result.ElementId}");
+}
+```
+
+#### SearchElementInstancesAsync(ElementInstanceSearchQuery, ConsistencyOptions<ElementInstanceSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ElementInstanceSearchQueryResult> SearchElementInstancesAsync(ElementInstanceSearchQuery body, ConsistencyOptions<ElementInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search element instances
 Search for element instances based on given criteria.
 
-| Parameter     | Type                                                 | Description |
-| ------------- | ---------------------------------------------------- | ----------- |
-| `body`        | `ElementInstanceSearchQuery`                         |             |
-| `consistency` | `ConsistencyOptions<SearchElementInstancesResponse>` |             |
-| `ct`          | `CancellationToken`                                  |             |
+| Parameter     | Type                                                   | Description |
+| ------------- | ------------------------------------------------------ | ----------- |
+| `body`        | `ElementInstanceSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<ElementInstanceSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                                    |             |
 
-**Returns:** `Task<SearchElementInstancesResponse>`
+**Returns:** `Task<ElementInstanceSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchElementInstancesExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchElementInstancesAsync(
+        new ElementInstanceSearchQuery());
+
+    foreach (var ei in result.Items)
+    {
+        Console.WriteLine($"Element instance: {ei.ElementInstanceKey}");
+    }
+}
+```
 
 ### Groups
 
@@ -948,6 +1474,17 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task AssignClientToGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignClientToGroupAsync("engineering", "my-service-account");
+}
+```
+
 #### AssignMappingRuleToGroupAsync(string, string, CancellationToken)
 
 ```csharp
@@ -964,6 +1501,17 @@ Assigns a mapping rule to a group.
 | `ct`            | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task AssignMappingRuleToGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignMappingRuleToGroupAsync("engineering", "rule-123");
+}
+```
 
 #### AssignUserToGroupAsync(string, Username, CancellationToken)
 
@@ -983,6 +1531,17 @@ Group members inherit the group authorizations, roles, and tenant assignments.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task AssignUserToGroupExample(Username username)
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignUserToGroupAsync("engineering", username);
+}
+```
+
 #### CreateGroupAsync(GroupCreateRequest, CancellationToken)
 
 ```csharp
@@ -999,6 +1558,23 @@ Create a new group.
 
 **Returns:** `Task<GroupCreateResult>`
 
+**Example**
+
+```csharp
+public static async Task CreateGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateGroupAsync(new GroupCreateRequest
+    {
+        GroupId = "engineering",
+        Name = "Engineering",
+    });
+
+    Console.WriteLine($"Group key: {result.GroupId}");
+}
+```
+
 #### DeleteGroupAsync(string, CancellationToken)
 
 ```csharp
@@ -1014,6 +1590,17 @@ Deletes the group with the given ID.
 | `ct`      | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task DeleteGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteGroupAsync("engineering");
+}
+```
 
 #### GetGroupAsync(string, ConsistencyOptions<GroupResult>?, CancellationToken)
 
@@ -1032,6 +1619,54 @@ Get a group by its ID.
 
 **Returns:** `Task<GroupResult>`
 
+**Example**
+
+```csharp
+public static async Task GetGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetGroupAsync("engineering");
+    Console.WriteLine($"Group: {result.Name}");
+}
+```
+
+#### SearchClientsForGroupAsync(string, SearchClientsForGroupRequest, ConsistencyOptions<SearchClientsForGroupResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchClientsForGroupResponse> SearchClientsForGroupAsync(string groupId, SearchClientsForGroupRequest body, ConsistencyOptions<SearchClientsForGroupResponse>? consistency = null, CancellationToken ct = default)
+```
+
+Search group clients
+Search clients assigned to a group.
+
+| Parameter     | Type                                                | Description |
+| ------------- | --------------------------------------------------- | ----------- |
+| `groupId`     | `String`                                            |             |
+| `body`        | `SearchClientsForGroupRequest`                      |             |
+| `consistency` | `ConsistencyOptions<SearchClientsForGroupResponse>` |             |
+| `ct`          | `CancellationToken`                                 |             |
+
+**Returns:** `Task<SearchClientsForGroupResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchClientsForGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchClientsForGroupAsync(
+        "engineering",
+        new SearchClientsForGroupRequest());
+
+    foreach (var c in result.Items)
+    {
+        Console.WriteLine($"Client: {c.ClientId}");
+    }
+}
+```
+
 #### SearchGroupsAsync(GroupSearchQueryRequest, ConsistencyOptions<GroupSearchQueryResult>?, CancellationToken)
 
 ```csharp
@@ -1049,23 +1684,93 @@ Search for groups based on given criteria.
 
 **Returns:** `Task<GroupSearchQueryResult>`
 
-#### SearchMappingRulesForGroupAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchQueryResponse> SearchMappingRulesForGroupAsync(string groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchGroupsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchGroupsAsync(new GroupSearchQueryRequest());
+
+    foreach (var group in result.Items)
+    {
+        Console.WriteLine($"Group: {group.Name}");
+    }
+}
+```
+
+#### SearchMappingRulesForGroupAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRulesForGroupResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchMappingRulesForGroupResponse> SearchMappingRulesForGroupAsync(string groupId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForGroupResponse>? consistency = null, CancellationToken ct = default)
 ```
 
 Search group mapping rules
 Search mapping rules assigned to a group.
 
-| Parameter     | Type                                      | Description |
-| ------------- | ----------------------------------------- | ----------- |
-| `groupId`     | `String`                                  |             |
-| `body`        | `MappingRuleSearchQueryRequest`           |             |
-| `consistency` | `ConsistencyOptions<SearchQueryResponse>` |             |
-| `ct`          | `CancellationToken`                       |             |
+| Parameter     | Type                                                     | Description |
+| ------------- | -------------------------------------------------------- | ----------- |
+| `groupId`     | `String`                                                 |             |
+| `body`        | `MappingRuleSearchQueryRequest`                          |             |
+| `consistency` | `ConsistencyOptions<SearchMappingRulesForGroupResponse>` |             |
+| `ct`          | `CancellationToken`                                      |             |
 
-**Returns:** `Task<SearchQueryResponse>`
+**Returns:** `Task<SearchMappingRulesForGroupResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchMappingRulesForGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchMappingRulesForGroupAsync(
+        "engineering",
+        new MappingRuleSearchQueryRequest());
+
+    foreach (var rule in result.Items)
+    {
+        Console.WriteLine($"Mapping rule: {rule.MappingRuleId}");
+    }
+}
+```
+
+#### SearchUsersForGroupAsync(string, SearchUsersForGroupRequest, ConsistencyOptions<SearchUsersForGroupResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchUsersForGroupResponse> SearchUsersForGroupAsync(string groupId, SearchUsersForGroupRequest body, ConsistencyOptions<SearchUsersForGroupResponse>? consistency = null, CancellationToken ct = default)
+```
+
+Search group users
+Search users assigned to a group.
+
+| Parameter     | Type                                              | Description |
+| ------------- | ------------------------------------------------- | ----------- |
+| `groupId`     | `String`                                          |             |
+| `body`        | `SearchUsersForGroupRequest`                      |             |
+| `consistency` | `ConsistencyOptions<SearchUsersForGroupResponse>` |             |
+| `ct`          | `CancellationToken`                               |             |
+
+**Returns:** `Task<SearchUsersForGroupResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchUsersForGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchUsersForGroupAsync(
+        "engineering",
+        new SearchUsersForGroupRequest());
+
+    foreach (var user in result.Items)
+    {
+        Console.WriteLine($"User: {user.Username}");
+    }
+}
+```
 
 #### UnassignClientFromGroupAsync(string, string, CancellationToken)
 
@@ -1085,6 +1790,17 @@ The client is removed as a group member, with associated authorizations, roles, 
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task UnassignClientFromGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignClientFromGroupAsync("engineering", "my-service-account");
+}
+```
+
 #### UnassignMappingRuleFromGroupAsync(string, string, CancellationToken)
 
 ```csharp
@@ -1101,6 +1817,17 @@ Unassigns a mapping rule from a group.
 | `ct`            | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task UnassignMappingRuleFromGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignMappingRuleFromGroupAsync("engineering", "rule-123");
+}
+```
 
 #### UnassignUserFromGroupAsync(string, Username, CancellationToken)
 
@@ -1120,6 +1847,17 @@ The user is removed as a group member, with associated authorizations, roles, an
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task UnassignUserFromGroupExample(Username username)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignUserFromGroupAsync("engineering", username);
+}
+```
+
 #### UpdateGroupAsync(string, GroupUpdateRequest, CancellationToken)
 
 ```csharp
@@ -1136,6 +1874,20 @@ Update a group with the given ID.
 | `ct`      | `CancellationToken`  |             |
 
 **Returns:** `Task<GroupUpdateResult>`
+
+**Example**
+
+```csharp
+public static async Task UpdateGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UpdateGroupAsync("engineering", new GroupUpdateRequest
+    {
+        Name = "engineering-team",
+    });
+}
+```
 
 ### Tenants
 
@@ -1157,6 +1909,19 @@ The client can then access tenant data and perform authorized actions.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task AssignClientToTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignClientToTenantAsync(
+        tenantId,
+        "my-service-account");
+}
+```
+
 #### AssignGroupToTenantAsync(TenantId, string, CancellationToken)
 
 ```csharp
@@ -1175,6 +1940,19 @@ Group members (users, clients) can then access tenant data and perform authorize
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task AssignGroupToTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignGroupToTenantAsync(
+        tenantId,
+        "engineering");
+}
+```
+
 #### AssignMappingRuleToTenantAsync(TenantId, string, CancellationToken)
 
 ```csharp
@@ -1191,6 +1969,19 @@ Assign a single mapping rule to a specified tenant.
 | `ct`            | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignMappingRuleToTenantAsync(
+        tenantId,
+        "rule-123");
+}
+```
 
 #### AssignRoleToTenantAsync(TenantId, string, CancellationToken)
 
@@ -1210,6 +2001,19 @@ Users, Clients or Groups, that have the role assigned, will get access to the te
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task AssignRoleToTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignRoleToTenantAsync(
+        tenantId,
+        "developer");
+}
+```
+
 #### AssignUserToTenantAsync(TenantId, Username, CancellationToken)
 
 ```csharp
@@ -1227,6 +2031,19 @@ Assign a single user to a specified tenant. The user can then access tenant data
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task AssignUserToTenantExample(TenantId tenantId, Username username)
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignUserToTenantAsync(
+        tenantId,
+        username);
+}
+```
+
 #### CreateTenantAsync(TenantCreateRequest, CancellationToken)
 
 ```csharp
@@ -1242,6 +2059,23 @@ Creates a new tenant.
 | `ct`      | `CancellationToken`   |             |
 
 **Returns:** `Task<TenantCreateResult>`
+
+**Example**
+
+```csharp
+public static async Task CreateTenantExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateTenantAsync(new TenantCreateRequest
+    {
+        TenantId = "acme-corp",
+        Name = "Acme Corporation",
+    });
+
+    Console.WriteLine($"Tenant key: {result.TenantId}");
+}
+```
 
 #### DeleteTenantAsync(TenantId, CancellationToken)
 
@@ -1259,6 +2093,17 @@ Deletes an existing tenant.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task DeleteTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteTenantAsync(tenantId);
+}
+```
+
 #### GetTenantAsync(TenantId, ConsistencyOptions<TenantResult>?, CancellationToken)
 
 ```csharp
@@ -1275,6 +2120,18 @@ Retrieves a single tenant by tenant ID.
 | `ct`          | `CancellationToken`                |             |
 
 **Returns:** `Task<TenantResult>`
+
+**Example**
+
+```csharp
+public static async Task GetTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetTenantAsync(tenantId);
+    Console.WriteLine($"Tenant: {result.Name}");
+}
+```
 
 #### GetUsageMetricsAsync(DateTimeOffset, DateTimeOffset, TenantId?, bool?, ConsistencyOptions<UsageMetricsResponse>?, CancellationToken)
 
@@ -1296,64 +2153,61 @@ Retrieve the usage metrics based on given criteria.
 
 **Returns:** `Task<UsageMetricsResponse>`
 
-#### SearchClientsForGroupAsync(string, SearchClientsForGroupRequest, ConsistencyOptions<TenantClientSearchResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<TenantClientSearchResult> SearchClientsForGroupAsync(string groupId, SearchClientsForGroupRequest body, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
+public static async Task GetUsageMetricsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetUsageMetricsAsync(
+        startTime: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero),
+        endTime: new DateTimeOffset(2024, 12, 31, 23, 59, 59, TimeSpan.Zero));
+
+    Console.WriteLine($"Metrics: {result}");
+}
 ```
 
-Search group clients
-Search clients assigned to a group.
-
-| Parameter     | Type                                           | Description |
-| ------------- | ---------------------------------------------- | ----------- |
-| `groupId`     | `String`                                       |             |
-| `body`        | `SearchClientsForGroupRequest`                 |             |
-| `consistency` | `ConsistencyOptions<TenantClientSearchResult>` |             |
-| `ct`          | `CancellationToken`                            |             |
-
-**Returns:** `Task<TenantClientSearchResult>`
-
-#### SearchClientsForRoleAsync(string, SearchClientsForRoleRequest, ConsistencyOptions<TenantClientSearchResult>?, CancellationToken)
+#### SearchClientsForTenantAsync(TenantId, SearchClientsForTenantRequest, ConsistencyOptions<SearchClientsForTenantResponse>?, CancellationToken)
 
 ```csharp
-public Task<TenantClientSearchResult> SearchClientsForRoleAsync(string roleId, SearchClientsForRoleRequest body, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
-```
-
-Search role clients
-Search clients with assigned role.
-
-| Parameter     | Type                                           | Description |
-| ------------- | ---------------------------------------------- | ----------- |
-| `roleId`      | `String`                                       |             |
-| `body`        | `SearchClientsForRoleRequest`                  |             |
-| `consistency` | `ConsistencyOptions<TenantClientSearchResult>` |             |
-| `ct`          | `CancellationToken`                            |             |
-
-**Returns:** `Task<TenantClientSearchResult>`
-
-#### SearchClientsForTenantAsync(TenantId, SearchClientsForTenantRequest, ConsistencyOptions<TenantClientSearchResult>?, CancellationToken)
-
-```csharp
-public Task<TenantClientSearchResult> SearchClientsForTenantAsync(TenantId tenantId, SearchClientsForTenantRequest body, ConsistencyOptions<TenantClientSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<SearchClientsForTenantResponse> SearchClientsForTenantAsync(TenantId tenantId, SearchClientsForTenantRequest body, ConsistencyOptions<SearchClientsForTenantResponse>? consistency = null, CancellationToken ct = default)
 ```
 
 Search clients for tenant
 Retrieves a filtered and sorted list of clients for a specified tenant.
 
-| Parameter     | Type                                           | Description |
-| ------------- | ---------------------------------------------- | ----------- |
-| `tenantId`    | `TenantId`                                     |             |
-| `body`        | `SearchClientsForTenantRequest`                |             |
-| `consistency` | `ConsistencyOptions<TenantClientSearchResult>` |             |
-| `ct`          | `CancellationToken`                            |             |
+| Parameter     | Type                                                 | Description |
+| ------------- | ---------------------------------------------------- | ----------- |
+| `tenantId`    | `TenantId`                                           |             |
+| `body`        | `SearchClientsForTenantRequest`                      |             |
+| `consistency` | `ConsistencyOptions<SearchClientsForTenantResponse>` |             |
+| `ct`          | `CancellationToken`                                  |             |
 
-**Returns:** `Task<TenantClientSearchResult>`
+**Returns:** `Task<SearchClientsForTenantResponse>`
 
-#### SearchGroupIdsForTenantAsync(TenantId, SearchGroupIdsForTenantRequest, ConsistencyOptions<TenantGroupSearchResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<TenantGroupSearchResult> SearchGroupIdsForTenantAsync(TenantId tenantId, SearchGroupIdsForTenantRequest body, ConsistencyOptions<TenantGroupSearchResult>? consistency = null, CancellationToken ct = default)
+public static async Task SearchClientsForTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchClientsForTenantAsync(
+        tenantId,
+        new SearchClientsForTenantRequest());
+
+    foreach (var c in result.Items)
+    {
+        Console.WriteLine($"Client: {c.ClientId}");
+    }
+}
+```
+
+#### SearchGroupIdsForTenantAsync(TenantId, TenantGroupSearchQueryRequest, ConsistencyOptions<TenantGroupSearchResult>?, CancellationToken)
+
+```csharp
+public Task<TenantGroupSearchResult> SearchGroupIdsForTenantAsync(TenantId tenantId, TenantGroupSearchQueryRequest body, ConsistencyOptions<TenantGroupSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search groups for tenant
@@ -1362,52 +2216,106 @@ Retrieves a filtered and sorted list of groups for a specified tenant.
 | Parameter     | Type                                          | Description |
 | ------------- | --------------------------------------------- | ----------- |
 | `tenantId`    | `TenantId`                                    |             |
-| `body`        | `SearchGroupIdsForTenantRequest`              |             |
+| `body`        | `TenantGroupSearchQueryRequest`               |             |
 | `consistency` | `ConsistencyOptions<TenantGroupSearchResult>` |             |
 | `ct`          | `CancellationToken`                           |             |
 
 **Returns:** `Task<TenantGroupSearchResult>`
 
-#### SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchQueryResponse> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchGroupIdsForTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchGroupIdsForTenantAsync(
+        tenantId,
+        new TenantGroupSearchQueryRequest());
+
+    foreach (var group in result.Items)
+    {
+        Console.WriteLine($"Group: {group.GroupId}");
+    }
+}
+```
+
+#### SearchMappingRulesForTenantAsync(TenantId, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRulesForTenantResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchMappingRulesForTenantResponse> SearchMappingRulesForTenantAsync(TenantId tenantId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForTenantResponse>? consistency = null, CancellationToken ct = default)
 ```
 
 Search mapping rules for tenant
 Retrieves a filtered and sorted list of MappingRules for a specified tenant.
 
-| Parameter     | Type                                      | Description |
-| ------------- | ----------------------------------------- | ----------- |
-| `tenantId`    | `TenantId`                                |             |
-| `body`        | `MappingRuleSearchQueryRequest`           |             |
-| `consistency` | `ConsistencyOptions<SearchQueryResponse>` |             |
-| `ct`          | `CancellationToken`                       |             |
+| Parameter     | Type                                                      | Description |
+| ------------- | --------------------------------------------------------- | ----------- |
+| `tenantId`    | `TenantId`                                                |             |
+| `body`        | `MappingRuleSearchQueryRequest`                           |             |
+| `consistency` | `ConsistencyOptions<SearchMappingRulesForTenantResponse>` |             |
+| `ct`          | `CancellationToken`                                       |             |
 
-**Returns:** `Task<SearchQueryResponse>`
+**Returns:** `Task<SearchMappingRulesForTenantResponse>`
 
-#### SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchQueryResponse> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchMappingRulesForTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchMappingRulesForTenantAsync(
+        tenantId,
+        new MappingRuleSearchQueryRequest());
+
+    foreach (var rule in result.Items)
+    {
+        Console.WriteLine($"Mapping rule: {rule.MappingRuleId}");
+    }
+}
+```
+
+#### SearchRolesForTenantAsync(TenantId, RoleSearchQueryRequest, ConsistencyOptions<SearchRolesForTenantResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchRolesForTenantResponse> SearchRolesForTenantAsync(TenantId tenantId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForTenantResponse>? consistency = null, CancellationToken ct = default)
 ```
 
 Search roles for tenant
 Retrieves a filtered and sorted list of roles for a specified tenant.
 
-| Parameter     | Type                                      | Description |
-| ------------- | ----------------------------------------- | ----------- |
-| `tenantId`    | `TenantId`                                |             |
-| `body`        | `RoleSearchQueryRequest`                  |             |
-| `consistency` | `ConsistencyOptions<SearchQueryResponse>` |             |
-| `ct`          | `CancellationToken`                       |             |
+| Parameter     | Type                                               | Description |
+| ------------- | -------------------------------------------------- | ----------- |
+| `tenantId`    | `TenantId`                                         |             |
+| `body`        | `RoleSearchQueryRequest`                           |             |
+| `consistency` | `ConsistencyOptions<SearchRolesForTenantResponse>` |             |
+| `ct`          | `CancellationToken`                                |             |
 
-**Returns:** `Task<SearchQueryResponse>`
+**Returns:** `Task<SearchRolesForTenantResponse>`
 
-#### SearchTenantsAsync(SearchTenantsRequest, ConsistencyOptions<TenantSearchQueryResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<TenantSearchQueryResult> SearchTenantsAsync(SearchTenantsRequest body, ConsistencyOptions<TenantSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public static async Task SearchRolesForTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchRolesForTenantAsync(
+        tenantId,
+        new RoleSearchQueryRequest());
+
+    foreach (var role in result.Items)
+    {
+        Console.WriteLine($"Role: {role.Name}");
+    }
+}
+```
+
+#### SearchTenantsAsync(TenantSearchQueryRequest, ConsistencyOptions<TenantSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<TenantSearchQueryResult> SearchTenantsAsync(TenantSearchQueryRequest body, ConsistencyOptions<TenantSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search tenants
@@ -1415,65 +2323,63 @@ Retrieves a filtered and sorted list of tenants.
 
 | Parameter     | Type                                          | Description |
 | ------------- | --------------------------------------------- | ----------- |
-| `body`        | `SearchTenantsRequest`                        |             |
+| `body`        | `TenantSearchQueryRequest`                    |             |
 | `consistency` | `ConsistencyOptions<TenantSearchQueryResult>` |             |
 | `ct`          | `CancellationToken`                           |             |
 
 **Returns:** `Task<TenantSearchQueryResult>`
 
-#### SearchUsersForGroupAsync(string, SearchUsersForGroupRequest, ConsistencyOptions<TenantUserSearchResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<TenantUserSearchResult> SearchUsersForGroupAsync(string groupId, SearchUsersForGroupRequest body, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
+public static async Task SearchTenantsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchTenantsAsync(new TenantSearchQueryRequest());
+
+    foreach (var tenant in result.Items)
+    {
+        Console.WriteLine($"Tenant: {tenant.Name}");
+    }
+}
 ```
 
-Search group users
-Search users assigned to a group.
-
-| Parameter     | Type                                         | Description |
-| ------------- | -------------------------------------------- | ----------- |
-| `groupId`     | `String`                                     |             |
-| `body`        | `SearchUsersForGroupRequest`                 |             |
-| `consistency` | `ConsistencyOptions<TenantUserSearchResult>` |             |
-| `ct`          | `CancellationToken`                          |             |
-
-**Returns:** `Task<TenantUserSearchResult>`
-
-#### SearchUsersForRoleAsync(string, SearchUsersForRoleRequest, ConsistencyOptions<TenantUserSearchResult>?, CancellationToken)
+#### SearchUsersForTenantAsync(TenantId, SearchUsersForTenantRequest, ConsistencyOptions<SearchUsersForTenantResponse>?, CancellationToken)
 
 ```csharp
-public Task<TenantUserSearchResult> SearchUsersForRoleAsync(string roleId, SearchUsersForRoleRequest body, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
-```
-
-Search role users
-Search users with assigned role.
-
-| Parameter     | Type                                         | Description |
-| ------------- | -------------------------------------------- | ----------- |
-| `roleId`      | `String`                                     |             |
-| `body`        | `SearchUsersForRoleRequest`                  |             |
-| `consistency` | `ConsistencyOptions<TenantUserSearchResult>` |             |
-| `ct`          | `CancellationToken`                          |             |
-
-**Returns:** `Task<TenantUserSearchResult>`
-
-#### SearchUsersForTenantAsync(TenantId, SearchUsersForTenantRequest, ConsistencyOptions<TenantUserSearchResult>?, CancellationToken)
-
-```csharp
-public Task<TenantUserSearchResult> SearchUsersForTenantAsync(TenantId tenantId, SearchUsersForTenantRequest body, ConsistencyOptions<TenantUserSearchResult>? consistency = null, CancellationToken ct = default)
+public Task<SearchUsersForTenantResponse> SearchUsersForTenantAsync(TenantId tenantId, SearchUsersForTenantRequest body, ConsistencyOptions<SearchUsersForTenantResponse>? consistency = null, CancellationToken ct = default)
 ```
 
 Search users for tenant
 Retrieves a filtered and sorted list of users for a specified tenant.
 
-| Parameter     | Type                                         | Description |
-| ------------- | -------------------------------------------- | ----------- |
-| `tenantId`    | `TenantId`                                   |             |
-| `body`        | `SearchUsersForTenantRequest`                |             |
-| `consistency` | `ConsistencyOptions<TenantUserSearchResult>` |             |
-| `ct`          | `CancellationToken`                          |             |
+| Parameter     | Type                                               | Description |
+| ------------- | -------------------------------------------------- | ----------- |
+| `tenantId`    | `TenantId`                                         |             |
+| `body`        | `SearchUsersForTenantRequest`                      |             |
+| `consistency` | `ConsistencyOptions<SearchUsersForTenantResponse>` |             |
+| `ct`          | `CancellationToken`                                |             |
 
-**Returns:** `Task<TenantUserSearchResult>`
+**Returns:** `Task<SearchUsersForTenantResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchUsersForTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchUsersForTenantAsync(
+        tenantId,
+        new SearchUsersForTenantRequest());
+
+    foreach (var user in result.Items)
+    {
+        Console.WriteLine($"User: {user.Username}");
+    }
+}
+```
 
 #### UnassignClientFromTenantAsync(TenantId, string, CancellationToken)
 
@@ -1493,6 +2399,19 @@ The client can no longer access tenant data.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task UnassignClientFromTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignClientFromTenantAsync(
+        tenantId,
+        "my-service-account");
+}
+```
+
 #### UnassignGroupFromTenantAsync(TenantId, string, CancellationToken)
 
 ```csharp
@@ -1511,6 +2430,19 @@ Members of the group (users, clients) will no longer have access to the tenant's
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task UnassignGroupFromTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignGroupFromTenantAsync(
+        tenantId,
+        "engineering");
+}
+```
+
 #### UnassignMappingRuleFromTenantAsync(TenantId, string, CancellationToken)
 
 ```csharp
@@ -1527,6 +2459,19 @@ Unassigns a single mapping rule from a specified tenant without deleting the rul
 | `ct`            | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignMappingRuleFromTenantAsync(
+        tenantId,
+        "rule-123");
+}
+```
 
 #### UnassignRoleFromTenantAsync(TenantId, string, CancellationToken)
 
@@ -1547,6 +2492,19 @@ tenant's data - unless they are assigned directly to the tenant.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task UnassignRoleFromTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignRoleFromTenantAsync(
+        tenantId,
+        "developer");
+}
+```
+
 #### UnassignUserFromTenantAsync(TenantId, Username, CancellationToken)
 
 ```csharp
@@ -1565,6 +2523,19 @@ The user can no longer access tenant data.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task UnassignUserFromTenantExample(TenantId tenantId, Username username)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignUserFromTenantAsync(
+        tenantId,
+        username);
+}
+```
+
 #### UpdateTenantAsync(TenantId, TenantUpdateRequest, CancellationToken)
 
 ```csharp
@@ -1581,6 +2552,22 @@ Updates an existing tenant.
 | `ct`       | `CancellationToken`   |             |
 
 **Returns:** `Task<TenantUpdateResult>`
+
+**Example**
+
+```csharp
+public static async Task UpdateTenantExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UpdateTenantAsync(
+        tenantId,
+        new TenantUpdateRequest
+        {
+            Name = "Acme Corp International",
+        });
+}
+```
 
 ### Roles
 
@@ -1601,6 +2588,17 @@ Assigns the specified role to the client. The client will inherit the authorizat
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task AssignRoleToClientExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignRoleToClientAsync("developer", "my-service-account");
+}
+```
+
 #### AssignRoleToGroupAsync(string, string, CancellationToken)
 
 ```csharp
@@ -1617,6 +2615,17 @@ Assigns the specified role to the group. Every member of the group (user or clie
 | `ct`      | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task AssignRoleToGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignRoleToGroupAsync("developer", "engineering");
+}
+```
 
 #### AssignRoleToMappingRuleAsync(string, string, CancellationToken)
 
@@ -1635,6 +2644,17 @@ Assigns a role to a mapping rule.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task AssignRoleToMappingRuleExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignRoleToMappingRuleAsync("developer", "rule-123");
+}
+```
+
 #### AssignRoleToUserAsync(string, Username, CancellationToken)
 
 ```csharp
@@ -1652,6 +2672,17 @@ Assigns the specified role to the user. The user will inherit the authorizations
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task AssignRoleToUserExample(Username username)
+{
+    using var client = CamundaClient.Create();
+
+    await client.AssignRoleToUserAsync("developer", username);
+}
+```
+
 #### CreateRoleAsync(RoleCreateRequest, CancellationToken)
 
 ```csharp
@@ -1668,6 +2699,22 @@ Create a new role.
 
 **Returns:** `Task<RoleCreateResult>`
 
+**Example**
+
+```csharp
+public static async Task CreateRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateRoleAsync(new RoleCreateRequest
+    {
+        Name = "developer",
+    });
+
+    Console.WriteLine($"Role key: {result.RoleId}");
+}
+```
+
 #### DeleteRoleAsync(string, CancellationToken)
 
 ```csharp
@@ -1683,6 +2730,17 @@ Deletes the role with the given ID.
 | `ct`      | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task DeleteRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteRoleAsync("developer");
+}
+```
 
 #### GetRoleAsync(string, ConsistencyOptions<RoleResult>?, CancellationToken)
 
@@ -1701,10 +2759,58 @@ Get a role by its ID.
 
 **Returns:** `Task<RoleResult>`
 
-#### SearchGroupsForRoleAsync(string, SearchGroupsForRoleRequest, ConsistencyOptions<RoleGroupSearchResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(string roleId, SearchGroupsForRoleRequest body, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
+public static async Task GetRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetRoleAsync("developer");
+    Console.WriteLine($"Role: {result.Name}");
+}
+```
+
+#### SearchClientsForRoleAsync(string, SearchClientsForRoleRequest, ConsistencyOptions<SearchClientsForRoleResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchClientsForRoleResponse> SearchClientsForRoleAsync(string roleId, SearchClientsForRoleRequest body, ConsistencyOptions<SearchClientsForRoleResponse>? consistency = null, CancellationToken ct = default)
+```
+
+Search role clients
+Search clients with assigned role.
+
+| Parameter     | Type                                               | Description |
+| ------------- | -------------------------------------------------- | ----------- |
+| `roleId`      | `String`                                           |             |
+| `body`        | `SearchClientsForRoleRequest`                      |             |
+| `consistency` | `ConsistencyOptions<SearchClientsForRoleResponse>` |             |
+| `ct`          | `CancellationToken`                                |             |
+
+**Returns:** `Task<SearchClientsForRoleResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchClientsForRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchClientsForRoleAsync(
+        "developer",
+        new SearchClientsForRoleRequest());
+
+    foreach (var c in result.Items)
+    {
+        Console.WriteLine($"Client: {c.ClientId}");
+    }
+}
+```
+
+#### SearchGroupsForRoleAsync(string, RoleGroupSearchQueryRequest, ConsistencyOptions<RoleGroupSearchResult>?, CancellationToken)
+
+```csharp
+public Task<RoleGroupSearchResult> SearchGroupsForRoleAsync(string roleId, RoleGroupSearchQueryRequest body, ConsistencyOptions<RoleGroupSearchResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search role groups
@@ -1713,29 +2819,65 @@ Search groups with assigned role.
 | Parameter     | Type                                        | Description |
 | ------------- | ------------------------------------------- | ----------- |
 | `roleId`      | `String`                                    |             |
-| `body`        | `SearchGroupsForRoleRequest`                |             |
+| `body`        | `RoleGroupSearchQueryRequest`               |             |
 | `consistency` | `ConsistencyOptions<RoleGroupSearchResult>` |             |
 | `ct`          | `CancellationToken`                         |             |
 
 **Returns:** `Task<RoleGroupSearchResult>`
 
-#### SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchQueryResponse> SearchMappingRulesForRoleAsync(string roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchGroupsForRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchGroupsForRoleAsync(
+        "developer",
+        new RoleGroupSearchQueryRequest());
+
+    foreach (var group in result.Items)
+    {
+        Console.WriteLine($"Group: {group.GroupId}");
+    }
+}
+```
+
+#### SearchMappingRulesForRoleAsync(string, MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRulesForRoleResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchMappingRulesForRoleResponse> SearchMappingRulesForRoleAsync(string roleId, MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRulesForRoleResponse>? consistency = null, CancellationToken ct = default)
 ```
 
 Search role mapping rules
 Search mapping rules with assigned role.
 
-| Parameter     | Type                                      | Description |
-| ------------- | ----------------------------------------- | ----------- |
-| `roleId`      | `String`                                  |             |
-| `body`        | `MappingRuleSearchQueryRequest`           |             |
-| `consistency` | `ConsistencyOptions<SearchQueryResponse>` |             |
-| `ct`          | `CancellationToken`                       |             |
+| Parameter     | Type                                                    | Description |
+| ------------- | ------------------------------------------------------- | ----------- |
+| `roleId`      | `String`                                                |             |
+| `body`        | `MappingRuleSearchQueryRequest`                         |             |
+| `consistency` | `ConsistencyOptions<SearchMappingRulesForRoleResponse>` |             |
+| `ct`          | `CancellationToken`                                     |             |
 
-**Returns:** `Task<SearchQueryResponse>`
+**Returns:** `Task<SearchMappingRulesForRoleResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchMappingRulesForRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchMappingRulesForRoleAsync(
+        "developer",
+        new MappingRuleSearchQueryRequest());
+
+    foreach (var rule in result.Items)
+    {
+        Console.WriteLine($"Mapping rule: {rule.MappingRuleId}");
+    }
+}
+```
 
 #### SearchRolesAsync(RoleSearchQueryRequest, ConsistencyOptions<RoleSearchQueryResult>?, CancellationToken)
 
@@ -1754,23 +2896,93 @@ Search for roles based on given criteria.
 
 **Returns:** `Task<RoleSearchQueryResult>`
 
-#### SearchRolesForGroupAsync(string, RoleSearchQueryRequest, ConsistencyOptions<SearchQueryResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchQueryResponse> SearchRolesForGroupAsync(string groupId, RoleSearchQueryRequest body, ConsistencyOptions<SearchQueryResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchRolesExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchRolesAsync(new RoleSearchQueryRequest());
+
+    foreach (var role in result.Items)
+    {
+        Console.WriteLine($"Role: {role.Name}");
+    }
+}
+```
+
+#### SearchRolesForGroupAsync(string, RoleSearchQueryRequest, ConsistencyOptions<SearchRolesForGroupResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchRolesForGroupResponse> SearchRolesForGroupAsync(string groupId, RoleSearchQueryRequest body, ConsistencyOptions<SearchRolesForGroupResponse>? consistency = null, CancellationToken ct = default)
 ```
 
 Search group roles
 Search roles assigned to a group.
 
-| Parameter     | Type                                      | Description |
-| ------------- | ----------------------------------------- | ----------- |
-| `groupId`     | `String`                                  |             |
-| `body`        | `RoleSearchQueryRequest`                  |             |
-| `consistency` | `ConsistencyOptions<SearchQueryResponse>` |             |
-| `ct`          | `CancellationToken`                       |             |
+| Parameter     | Type                                              | Description |
+| ------------- | ------------------------------------------------- | ----------- |
+| `groupId`     | `String`                                          |             |
+| `body`        | `RoleSearchQueryRequest`                          |             |
+| `consistency` | `ConsistencyOptions<SearchRolesForGroupResponse>` |             |
+| `ct`          | `CancellationToken`                               |             |
 
-**Returns:** `Task<SearchQueryResponse>`
+**Returns:** `Task<SearchRolesForGroupResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchRolesForGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchRolesForGroupAsync(
+        "engineering",
+        new RoleSearchQueryRequest());
+
+    foreach (var role in result.Items)
+    {
+        Console.WriteLine($"Role: {role.Name}");
+    }
+}
+```
+
+#### SearchUsersForRoleAsync(string, SearchUsersForRoleRequest, ConsistencyOptions<SearchUsersForRoleResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchUsersForRoleResponse> SearchUsersForRoleAsync(string roleId, SearchUsersForRoleRequest body, ConsistencyOptions<SearchUsersForRoleResponse>? consistency = null, CancellationToken ct = default)
+```
+
+Search role users
+Search users with assigned role.
+
+| Parameter     | Type                                             | Description |
+| ------------- | ------------------------------------------------ | ----------- |
+| `roleId`      | `String`                                         |             |
+| `body`        | `SearchUsersForRoleRequest`                      |             |
+| `consistency` | `ConsistencyOptions<SearchUsersForRoleResponse>` |             |
+| `ct`          | `CancellationToken`                              |             |
+
+**Returns:** `Task<SearchUsersForRoleResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchUsersForRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchUsersForRoleAsync(
+        "developer",
+        new SearchUsersForRoleRequest());
+
+    foreach (var user in result.Items)
+    {
+        Console.WriteLine($"User: {user.Username}");
+    }
+}
+```
 
 #### UnassignRoleFromClientAsync(string, string, CancellationToken)
 
@@ -1789,6 +3001,17 @@ Unassigns the specified role from the client. The client will no longer inherit 
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task UnassignRoleFromClientExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignRoleFromClientAsync("developer", "my-service-account");
+}
+```
+
 #### UnassignRoleFromGroupAsync(string, string, CancellationToken)
 
 ```csharp
@@ -1805,6 +3028,17 @@ Unassigns the specified role from the group. All group members (user or client) 
 | `ct`      | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task UnassignRoleFromGroupExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignRoleFromGroupAsync("developer", "engineering");
+}
+```
 
 #### UnassignRoleFromMappingRuleAsync(string, string, CancellationToken)
 
@@ -1823,6 +3057,17 @@ Unassigns a role from a mapping rule.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task UnassignRoleFromMappingRuleExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignRoleFromMappingRuleAsync("developer", "rule-123");
+}
+```
+
 #### UnassignRoleFromUserAsync(string, Username, CancellationToken)
 
 ```csharp
@@ -1839,6 +3084,17 @@ Unassigns a role from a user. The user will no longer inherit the authorizations
 | `ct`       | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task UnassignRoleFromUserExample(Username username)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UnassignRoleFromUserAsync("developer", username);
+}
+```
 
 #### UpdateRoleAsync(string, RoleUpdateRequest, CancellationToken)
 
@@ -1857,6 +3113,20 @@ Update a role with the given ID.
 
 **Returns:** `Task<RoleUpdateResult>`
 
+**Example**
+
+```csharp
+public static async Task UpdateRoleExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UpdateRoleAsync("developer", new RoleUpdateRequest
+    {
+        Name = "senior-developer",
+    });
+}
+```
+
 ### User Tasks
 
 #### AssignUserTaskAsync(UserTaskKey, UserTaskAssignmentRequest, CancellationToken)
@@ -1866,7 +3136,7 @@ public Task AssignUserTaskAsync(UserTaskKey userTaskKey, UserTaskAssignmentReque
 ```
 
 Assign user task
-Assigns a user task with the given key to the given assignee.
+Assigns a user task with the given key to the given assignee. Assignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 | Parameter     | Type                        | Description |
 | ------------- | --------------------------- | ----------- |
@@ -1879,18 +3149,16 @@ Assigns a user task with the given key to the given assignee.
 **Example**
 
 ```csharp
-static async Task AssignUserTaskExample()
+public static async Task AssignUserTaskExample(UserTaskKey userTaskKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Find a user task via search
-    var tasks = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
-    var userTaskKey = tasks.Items![0].UserTaskKey.Value;
-
-    await client.AssignUserTaskAsync(userTaskKey, new UserTaskAssignmentRequest
-    {
-        Assignee = "jane.doe"
-    });
+    await client.AssignUserTaskAsync(
+        userTaskKey,
+        new UserTaskAssignmentRequest
+        {
+            Assignee = "user@example.com",
+        });
 }
 ```
 
@@ -1901,7 +3169,7 @@ public Task CompleteUserTaskAsync(UserTaskKey userTaskKey, UserTaskCompletionReq
 ```
 
 Complete user task
-Completes a user task with the given key.
+Completes a user task with the given key. Completion waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 | Parameter     | Type                        | Description |
 | ------------- | --------------------------- | ----------- |
@@ -1914,126 +3182,207 @@ Completes a user task with the given key.
 **Example**
 
 ```csharp
-static async Task CompleteUserTaskExample()
+public static async Task CompleteUserTaskExample(UserTaskKey userTaskKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Find a user task via search
-    var tasks = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
-    var userTaskKey = tasks.Items![0].UserTaskKey.Value;
-
-    await client.CompleteUserTaskAsync(userTaskKey, new UserTaskCompletionRequest
-    {
-        Variables = new Dictionary<string, object>
-        {
-            ["approved"] = true,
-            ["comment"] = "Looks good"
-        }
-    });
+    await client.CompleteUserTaskAsync(
+        userTaskKey,
+        new UserTaskCompletionRequest());
 }
 ```
 
-#### GetUserTaskAsync(UserTaskKey, ConsistencyOptions<GetUserTaskResponse>?, CancellationToken)
+#### GetUserTaskAsync(UserTaskKey, ConsistencyOptions<UserTaskResult>?, CancellationToken)
 
 ```csharp
-public Task<GetUserTaskResponse> GetUserTaskAsync(UserTaskKey userTaskKey, ConsistencyOptions<GetUserTaskResponse>? consistency = null, CancellationToken ct = default)
+public Task<UserTaskResult> GetUserTaskAsync(UserTaskKey userTaskKey, ConsistencyOptions<UserTaskResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get user task
 Get the user task by the user task key.
 
-| Parameter     | Type                                      | Description |
-| ------------- | ----------------------------------------- | ----------- |
-| `userTaskKey` | `UserTaskKey`                             |             |
-| `consistency` | `ConsistencyOptions<GetUserTaskResponse>` |             |
-| `ct`          | `CancellationToken`                       |             |
+| Parameter     | Type                                 | Description |
+| ------------- | ------------------------------------ | ----------- |
+| `userTaskKey` | `UserTaskKey`                        |             |
+| `consistency` | `ConsistencyOptions<UserTaskResult>` |             |
+| `ct`          | `CancellationToken`                  |             |
 
-**Returns:** `Task<GetUserTaskResponse>`
+**Returns:** `Task<UserTaskResult>`
 
-#### GetUserTaskFormAsync(UserTaskKey, ConsistencyOptions<GetUserTaskFormResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<GetUserTaskFormResponse> GetUserTaskFormAsync(UserTaskKey userTaskKey, ConsistencyOptions<GetUserTaskFormResponse>? consistency = null, CancellationToken ct = default)
+public static async Task GetUserTaskExample(UserTaskKey userTaskKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetUserTaskAsync(userTaskKey);
+    Console.WriteLine($"User task: {result.UserTaskKey}");
+}
+```
+
+#### GetUserTaskFormAsync(UserTaskKey, ConsistencyOptions<FormResult>?, CancellationToken)
+
+```csharp
+public Task<FormResult> GetUserTaskFormAsync(UserTaskKey userTaskKey, ConsistencyOptions<FormResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get user task form
 Get the form of a user task.
 Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
 
-| Parameter     | Type                                          | Description |
-| ------------- | --------------------------------------------- | ----------- |
-| `userTaskKey` | `UserTaskKey`                                 |             |
-| `consistency` | `ConsistencyOptions<GetUserTaskFormResponse>` |             |
-| `ct`          | `CancellationToken`                           |             |
+| Parameter     | Type                             | Description |
+| ------------- | -------------------------------- | ----------- |
+| `userTaskKey` | `UserTaskKey`                    |             |
+| `consistency` | `ConsistencyOptions<FormResult>` |             |
+| `ct`          | `CancellationToken`              |             |
 
-**Returns:** `Task<GetUserTaskFormResponse>`
+**Returns:** `Task<FormResult>`
 
-#### SearchUserTaskAuditLogsAsync(UserTaskKey, SearchUserTaskAuditLogsRequest, ConsistencyOptions<SearchUserTaskAuditLogsResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchUserTaskAuditLogsResponse> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, SearchUserTaskAuditLogsRequest body, ConsistencyOptions<SearchUserTaskAuditLogsResponse>? consistency = null, CancellationToken ct = default)
+public static async Task GetUserTaskFormExample(UserTaskKey userTaskKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetUserTaskFormAsync(userTaskKey);
+    Console.WriteLine($"Form: {result.FormKey}");
+}
+```
+
+#### SearchUserTaskAuditLogsAsync(UserTaskKey, UserTaskAuditLogSearchQueryRequest, ConsistencyOptions<AuditLogSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<AuditLogSearchQueryResult> SearchUserTaskAuditLogsAsync(UserTaskKey userTaskKey, UserTaskAuditLogSearchQueryRequest body, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search user task audit logs
 Search for user task audit logs based on given criteria.
 
-| Parameter     | Type                                                  | Description |
-| ------------- | ----------------------------------------------------- | ----------- |
-| `userTaskKey` | `UserTaskKey`                                         |             |
-| `body`        | `SearchUserTaskAuditLogsRequest`                      |             |
-| `consistency` | `ConsistencyOptions<SearchUserTaskAuditLogsResponse>` |             |
-| `ct`          | `CancellationToken`                                   |             |
+| Parameter     | Type                                            | Description |
+| ------------- | ----------------------------------------------- | ----------- |
+| `userTaskKey` | `UserTaskKey`                                   |             |
+| `body`        | `UserTaskAuditLogSearchQueryRequest`            |             |
+| `consistency` | `ConsistencyOptions<AuditLogSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                             |             |
 
-**Returns:** `Task<SearchUserTaskAuditLogsResponse>`
+**Returns:** `Task<AuditLogSearchQueryResult>`
 
-#### SearchUserTaskVariablesAsync(UserTaskKey, SearchUserTaskVariablesRequest, bool?, ConsistencyOptions<SearchUserTaskVariablesResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchUserTaskVariablesResponse> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<SearchUserTaskVariablesResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchUserTaskAuditLogsExample(UserTaskKey userTaskKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchUserTaskAuditLogsAsync(
+        userTaskKey,
+        new UserTaskAuditLogSearchQueryRequest());
+
+    foreach (var log in result.Items)
+    {
+        Console.WriteLine($"Audit log: {log.AuditLogKey}");
+    }
+}
+```
+
+#### SearchUserTaskEffectiveVariablesAsync(UserTaskKey, SearchUserTaskEffectiveVariablesRequest, bool?, ConsistencyOptions<VariableSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<VariableSearchQueryResult> SearchUserTaskEffectiveVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskEffectiveVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Search user task effective variables
+Search for the effective variables of a user task. This endpoint returns deduplicated
+variables where each variable name appears at most once. When the same variable name exists
+at multiple scope levels in the scope hierarchy, the value from the innermost scope (closest
+to the user task) takes precedence. This is useful for retrieving the actual runtime state
+of variables as seen by the user task. By default, long variable values in the response are
+truncated.
+
+| Parameter        | Type                                            | Description |
+| ---------------- | ----------------------------------------------- | ----------- |
+| `userTaskKey`    | `UserTaskKey`                                   |             |
+| `body`           | `SearchUserTaskEffectiveVariablesRequest`       |             |
+| `truncateValues` | `Nullable<Boolean>`                             |             |
+| `consistency`    | `ConsistencyOptions<VariableSearchQueryResult>` |             |
+| `ct`             | `CancellationToken`                             |             |
+
+**Returns:** `Task<VariableSearchQueryResult>`
+
+#### SearchUserTaskVariablesAsync(UserTaskKey, SearchUserTaskVariablesRequest, bool?, ConsistencyOptions<VariableSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<VariableSearchQueryResult> SearchUserTaskVariablesAsync(UserTaskKey userTaskKey, SearchUserTaskVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search user task variables
-Search for user task variables based on given criteria. By default, long variable values in the response are truncated.
+Search for user task variables based on given criteria. This endpoint returns all variable
+documents visible from the user task's scope, including variables from parent scopes in the
+scope hierarchy. If the same variable name exists at multiple scope levels, each scope's
+variable is returned as a separate result. Use the
+`/user-tasks/{userTaskKey}/effective-variables/search` endpoint to get deduplicated variables
+where the innermost scope takes precedence. By default, long variable values in the response
+are truncated.
 
-| Parameter        | Type                                                  | Description |
-| ---------------- | ----------------------------------------------------- | ----------- |
-| `userTaskKey`    | `UserTaskKey`                                         |             |
-| `body`           | `SearchUserTaskVariablesRequest`                      |             |
-| `truncateValues` | `Nullable<Boolean>`                                   |             |
-| `consistency`    | `ConsistencyOptions<SearchUserTaskVariablesResponse>` |             |
-| `ct`             | `CancellationToken`                                   |             |
+| Parameter        | Type                                            | Description |
+| ---------------- | ----------------------------------------------- | ----------- |
+| `userTaskKey`    | `UserTaskKey`                                   |             |
+| `body`           | `SearchUserTaskVariablesRequest`                |             |
+| `truncateValues` | `Nullable<Boolean>`                             |             |
+| `consistency`    | `ConsistencyOptions<VariableSearchQueryResult>` |             |
+| `ct`             | `CancellationToken`                             |             |
 
-**Returns:** `Task<SearchUserTaskVariablesResponse>`
+**Returns:** `Task<VariableSearchQueryResult>`
 
-#### SearchUserTasksAsync(SearchUserTasksRequest, ConsistencyOptions<SearchUserTasksResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchUserTasksResponse> SearchUserTasksAsync(SearchUserTasksRequest body, ConsistencyOptions<SearchUserTasksResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchUserTaskVariablesExample(UserTaskKey userTaskKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchUserTaskVariablesAsync(
+        userTaskKey,
+        new SearchUserTaskVariablesRequest());
+
+    foreach (var variable in result.Items)
+    {
+        Console.WriteLine($"Variable: {variable.Name}");
+    }
+}
+```
+
+#### SearchUserTasksAsync(UserTaskSearchQuery, ConsistencyOptions<UserTaskSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<UserTaskSearchQueryResult> SearchUserTasksAsync(UserTaskSearchQuery body, ConsistencyOptions<UserTaskSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search user tasks
 Search for user tasks based on given criteria.
 
-| Parameter     | Type                                          | Description |
-| ------------- | --------------------------------------------- | ----------- |
-| `body`        | `SearchUserTasksRequest`                      |             |
-| `consistency` | `ConsistencyOptions<SearchUserTasksResponse>` |             |
-| `ct`          | `CancellationToken`                           |             |
+| Parameter     | Type                                            | Description |
+| ------------- | ----------------------------------------------- | ----------- |
+| `body`        | `UserTaskSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<UserTaskSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                             |             |
 
-**Returns:** `Task<SearchUserTasksResponse>`
+**Returns:** `Task<UserTaskSearchQueryResult>`
 
 **Example**
 
 ```csharp
-static async Task SearchUserTasksExample()
+public static async Task SearchUserTasksExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    var result = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
+    var result = await client.SearchUserTasksAsync(new UserTaskSearchQuery());
 
-    foreach (var task in result.Items!)
+    foreach (var task in result.Items)
     {
-        Console.WriteLine($"Task {task.UserTaskKey}: {task.State}, assignee={task.Assignee}");
+        Console.WriteLine($"User task: {task.UserTaskKey}");
     }
 }
 ```
@@ -2045,7 +3394,7 @@ public Task UnassignUserTaskAsync(UserTaskKey userTaskKey, CancellationToken ct 
 ```
 
 Unassign user task
-Removes the assignee of a task with the given key.
+Removes the assignee of a task with the given key. Unassignment waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 | Parameter     | Type                | Description |
 | ------------- | ------------------- | ----------- |
@@ -2057,13 +3406,9 @@ Removes the assignee of a task with the given key.
 **Example**
 
 ```csharp
-static async Task UnassignUserTaskExample()
+public static async Task UnassignUserTaskExample(UserTaskKey userTaskKey)
 {
-    using var client = Camunda.CreateClient();
-
-    // Find a user task via search
-    var tasks = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
-    var userTaskKey = tasks.Items![0].UserTaskKey.Value;
+    using var client = CamundaClient.Create();
 
     await client.UnassignUserTaskAsync(userTaskKey);
 }
@@ -2076,7 +3421,7 @@ public Task UpdateUserTaskAsync(UserTaskKey userTaskKey, UserTaskUpdateRequest b
 ```
 
 Update user task
-Update a user task with the given key.
+Update a user task with the given key. Updates wait for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 | Parameter     | Type                    | Description |
 | ------------- | ----------------------- | ----------- |
@@ -2089,22 +3434,13 @@ Update a user task with the given key.
 **Example**
 
 ```csharp
-static async Task UpdateUserTaskExample()
+public static async Task UpdateUserTaskExample(UserTaskKey userTaskKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Find a user task via search
-    var tasks = await client.SearchUserTasksAsync(new SearchUserTasksRequest());
-    var userTaskKey = tasks.Items![0].UserTaskKey.Value;
-
-    await client.UpdateUserTaskAsync(userTaskKey, new UserTaskUpdateRequest
-    {
-        Changeset = new Changeset
-        {
-            DueDate = DateTimeOffset.UtcNow.AddDays(3),
-            Priority = 80
-        }
-    });
+    await client.UpdateUserTaskAsync(
+        userTaskKey,
+        new UserTaskUpdateRequest());
 }
 ```
 
@@ -2129,17 +3465,13 @@ Broadcasts a signal.
 **Example**
 
 ```csharp
-static async Task BroadcastSignalExample()
+public static async Task BroadcastSignalExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     var result = await client.BroadcastSignalAsync(new SignalBroadcastRequest
     {
-        SignalName = "system-shutdown",
-        Variables = new Dictionary<string, object>
-        {
-            ["reason"] = "maintenance"
-        }
+        SignalName = "orderCancelled",
     });
 
     Console.WriteLine($"Signal key: {result.SignalKey}");
@@ -2148,23 +3480,33 @@ static async Task BroadcastSignalExample()
 
 ### Batch Operations
 
-#### CancelBatchOperationAsync(BatchOperationKey, ConsistencyOptions<object>?, CancellationToken)
+#### CancelBatchOperationAsync(BatchOperationKey, CancellationToken)
 
 ```csharp
-public Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+public Task CancelBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
 ```
 
 Cancel Batch operation
 Cancels a running batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-| Parameter           | Type                         | Description |
-| ------------------- | ---------------------------- | ----------- |
-| `batchOperationKey` | `BatchOperationKey`          |             |
-| `consistency`       | `ConsistencyOptions<Object>` |             |
-| `ct`                | `CancellationToken`          |             |
+| Parameter           | Type                | Description |
+| ------------------- | ------------------- | ----------- |
+| `batchOperationKey` | `BatchOperationKey` |             |
+| `ct`                | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task CancelBatchOperationExample(BatchOperationKey batchOperationKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.CancelBatchOperationAsync(batchOperationKey);
+}
+```
 
 #### GetBatchOperationAsync(BatchOperationKey, ConsistencyOptions<BatchOperationResponse>?, CancellationToken)
 
@@ -2183,45 +3525,86 @@ Get batch operation by key.
 
 **Returns:** `Task<BatchOperationResponse>`
 
-#### ResumeBatchOperationAsync(BatchOperationKey, ConsistencyOptions<object>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+public static async Task GetBatchOperationExample(BatchOperationKey batchOperationKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetBatchOperationAsync(
+        batchOperationKey);
+
+    Console.WriteLine($"Batch operation: {result.BatchOperationKey}");
+}
+```
+
+#### ResumeBatchOperationAsync(BatchOperationKey, CancellationToken)
+
+```csharp
+public Task ResumeBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
 ```
 
 Resume Batch operation
 Resumes a suspended batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-| Parameter           | Type                         | Description |
-| ------------------- | ---------------------------- | ----------- |
-| `batchOperationKey` | `BatchOperationKey`          |             |
-| `consistency`       | `ConsistencyOptions<Object>` |             |
-| `ct`                | `CancellationToken`          |             |
+| Parameter           | Type                | Description |
+| ------------------- | ------------------- | ----------- |
+| `batchOperationKey` | `BatchOperationKey` |             |
+| `ct`                | `CancellationToken` |             |
 
 **Returns:** `Task`
 
-#### SearchBatchOperationItemsAsync(SearchBatchOperationItemsRequest, ConsistencyOptions<SearchBatchOperationItemsResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchBatchOperationItemsResponse> SearchBatchOperationItemsAsync(SearchBatchOperationItemsRequest body, ConsistencyOptions<SearchBatchOperationItemsResponse>? consistency = null, CancellationToken ct = default)
+public static async Task ResumeBatchOperationExample(BatchOperationKey batchOperationKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.ResumeBatchOperationAsync(batchOperationKey);
+}
+```
+
+#### SearchBatchOperationItemsAsync(BatchOperationItemSearchQuery, ConsistencyOptions<BatchOperationItemSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<BatchOperationItemSearchQueryResult> SearchBatchOperationItemsAsync(BatchOperationItemSearchQuery body, ConsistencyOptions<BatchOperationItemSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search batch operation items
 Search for batch operation items based on given criteria.
 
-| Parameter     | Type                                                    | Description |
-| ------------- | ------------------------------------------------------- | ----------- |
-| `body`        | `SearchBatchOperationItemsRequest`                      |             |
-| `consistency` | `ConsistencyOptions<SearchBatchOperationItemsResponse>` |             |
-| `ct`          | `CancellationToken`                                     |             |
+| Parameter     | Type                                                      | Description |
+| ------------- | --------------------------------------------------------- | ----------- |
+| `body`        | `BatchOperationItemSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<BatchOperationItemSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                                       |             |
 
-**Returns:** `Task<SearchBatchOperationItemsResponse>`
+**Returns:** `Task<BatchOperationItemSearchQueryResult>`
 
-#### SearchBatchOperationsAsync(SearchBatchOperationsRequest, ConsistencyOptions<BatchOperationSearchQueryResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<BatchOperationSearchQueryResult> SearchBatchOperationsAsync(SearchBatchOperationsRequest body, ConsistencyOptions<BatchOperationSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public static async Task SearchBatchOperationItemsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchBatchOperationItemsAsync(
+        new BatchOperationItemSearchQuery());
+
+    foreach (var item in result.Items)
+    {
+        Console.WriteLine($"Item: {item.ItemKey}");
+    }
+}
+```
+
+#### SearchBatchOperationsAsync(BatchOperationSearchQuery, ConsistencyOptions<BatchOperationSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<BatchOperationSearchQueryResult> SearchBatchOperationsAsync(BatchOperationSearchQuery body, ConsistencyOptions<BatchOperationSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search batch operations
@@ -2229,29 +3612,56 @@ Search for batch operations based on given criteria.
 
 | Parameter     | Type                                                  | Description |
 | ------------- | ----------------------------------------------------- | ----------- |
-| `body`        | `SearchBatchOperationsRequest`                        |             |
+| `body`        | `BatchOperationSearchQuery`                           |             |
 | `consistency` | `ConsistencyOptions<BatchOperationSearchQueryResult>` |             |
 | `ct`          | `CancellationToken`                                   |             |
 
 **Returns:** `Task<BatchOperationSearchQueryResult>`
 
-#### SuspendBatchOperationAsync(BatchOperationKey, ConsistencyOptions<object>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+public static async Task SearchBatchOperationsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchBatchOperationsAsync(
+        new BatchOperationSearchQuery());
+
+    foreach (var op in result.Items)
+    {
+        Console.WriteLine($"Batch operation: {op.BatchOperationKey}");
+    }
+}
+```
+
+#### SuspendBatchOperationAsync(BatchOperationKey, CancellationToken)
+
+```csharp
+public Task SuspendBatchOperationAsync(BatchOperationKey batchOperationKey, CancellationToken ct = default)
 ```
 
 Suspend Batch operation
 Suspends a running batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-| Parameter           | Type                         | Description |
-| ------------------- | ---------------------------- | ----------- |
-| `batchOperationKey` | `BatchOperationKey`          |             |
-| `consistency`       | `ConsistencyOptions<Object>` |             |
-| `ct`                | `CancellationToken`          |             |
+| Parameter           | Type                | Description |
+| ------------------- | ------------------- | ----------- |
+| `batchOperationKey` | `BatchOperationKey` |             |
+| `ct`                | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task SuspendBatchOperationExample(BatchOperationKey batchOperationKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.SuspendBatchOperationAsync(batchOperationKey);
+}
+```
 
 ### Process Instances
 
@@ -2262,7 +3672,7 @@ public Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, Ca
 ```
 
 Cancel process instance
-Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted.
+Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
 
 | Parameter            | Type                           | Description |
 | -------------------- | ------------------------------ | ----------- |
@@ -2275,25 +3685,20 @@ Cancels a running process instance. As a cancellation includes more than just th
 **Example**
 
 ```csharp
-static async Task CancelProcessInstanceExample()
+public static async Task CancelProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Create a process instance and get its key from the response
-    var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
-    });
-
-    // Cancel the process instance using the key from the creation response
-    await client.CancelProcessInstanceAsync(created.ProcessInstanceKey, new CancelProcessInstanceRequest());
+    await client.CancelProcessInstanceAsync(
+        processInstanceKey,
+        new CancelProcessInstanceRequest());
 }
 ```
 
-#### CancelProcessInstancesBatchOperationAsync(CancelProcessInstancesBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
+#### CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, CancellationToken)
 
 ```csharp
-public Task<BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsync(CancelProcessInstancesBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+public Task<BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest body, CancellationToken ct = default)
 ```
 
 Cancel process instances (batch)
@@ -2302,13 +3707,26 @@ Since only ACTIVE root instances can be cancelled, any given filters for state a
 parentProcessInstanceKey are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-| Parameter     | Type                                              | Description |
-| ------------- | ------------------------------------------------- | ----------- |
-| `body`        | `CancelProcessInstancesBatchOperationRequest`     |             |
-| `consistency` | `ConsistencyOptions<BatchOperationCreatedResult>` |             |
-| `ct`          | `CancellationToken`                               |             |
+| Parameter | Type                                               | Description |
+| --------- | -------------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceCancellationBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                                |             |
 
 **Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task CancelProcessInstancesBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CancelProcessInstancesBatchOperationAsync(
+        new ProcessInstanceCancellationBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
 
 #### CreateProcessInstanceAsync(ProcessInstanceCreationInstruction, CancellationToken)
 
@@ -2331,51 +3749,10 @@ when awaitCompletion is enabled.
 
 **Returns:** `Task<CreateProcessInstanceResult>`
 
-**Example**
+#### DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, CancellationToken)
 
 ```csharp
-static async Task CreateProcessInstanceExample()
-{
-    using var client = Camunda.CreateClient();
-
-    // Deploy a process and retrieve its ProcessDefinitionId
-    var deployment = await client.DeployResourcesFromFilesAsync(
-        new[] { "order-process.bpmn" }
-    );
-    var processDefinitionId = deployment.Processes[0].ProcessDefinitionId;
-
-    // Start a new instance using the deployed process definition
-    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = processDefinitionId,
-    });
-
-    Console.WriteLine($"Started process instance: {result.ProcessInstanceKey}");
-}
-```
-
-#### DeleteDecisionInstanceAsync(DecisionInstanceKey, DeleteProcessInstanceRequest, ConsistencyOptions<object>?, CancellationToken)
-
-```csharp
-public Task DeleteDecisionInstanceAsync(DecisionInstanceKey decisionInstanceKey, DeleteProcessInstanceRequest body, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
-```
-
-Delete decision instance
-Delete all associated decision evaluations based on provided key.
-
-| Parameter             | Type                           | Description |
-| --------------------- | ------------------------------ | ----------- |
-| `decisionInstanceKey` | `DecisionInstanceKey`          |             |
-| `body`                | `DeleteProcessInstanceRequest` |             |
-| `consistency`         | `ConsistencyOptions<Object>`   |             |
-| `ct`                  | `CancellationToken`            |             |
-
-**Returns:** `Task`
-
-#### DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, ConsistencyOptions<object>?, CancellationToken)
-
-```csharp
-public Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+public Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, CancellationToken ct = default)
 ```
 
 Delete process instance
@@ -2385,15 +3762,27 @@ Deletes a process instance. Only instances that are completed or terminated can 
 | -------------------- | ------------------------------ | ----------- |
 | `processInstanceKey` | `ProcessInstanceKey`           |             |
 | `body`               | `DeleteProcessInstanceRequest` |             |
-| `consistency`        | `ConsistencyOptions<Object>`   |             |
 | `ct`                 | `CancellationToken`            |             |
 
 **Returns:** `Task`
 
-#### DeleteProcessInstancesBatchOperationAsync(DeleteProcessInstancesBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<BatchOperationCreatedResult> DeleteProcessInstancesBatchOperationAsync(DeleteProcessInstancesBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+public static async Task DeleteProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteProcessInstanceAsync(
+        processInstanceKey,
+        new DeleteProcessInstanceRequest());
+}
+```
+
+#### DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest body, CancellationToken ct = default)
 ```
 
 Delete process instances (batch)
@@ -2401,30 +3790,55 @@ Delete multiple process instances. This will delete the historic data from secon
 Only process instances in a final state (COMPLETED or TERMINATED) can be deleted.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-| Parameter     | Type                                              | Description |
-| ------------- | ------------------------------------------------- | ----------- |
-| `body`        | `DeleteProcessInstancesBatchOperationRequest`     |             |
-| `consistency` | `ConsistencyOptions<BatchOperationCreatedResult>` |             |
-| `ct`          | `CancellationToken`                               |             |
+| Parameter | Type                                           | Description |
+| --------- | ---------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceDeletionBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                            |             |
 
 **Returns:** `Task<BatchOperationCreatedResult>`
 
-#### GetProcessInstanceAsync(ProcessInstanceKey, ConsistencyOptions<GetProcessInstanceResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<GetProcessInstanceResponse> GetProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<GetProcessInstanceResponse>? consistency = null, CancellationToken ct = default)
+public static async Task DeleteProcessInstancesBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.DeleteProcessInstancesBatchOperationAsync(
+        new ProcessInstanceDeletionBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### GetProcessInstanceAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceResult> GetProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get process instance
 Get the process instance by the process instance key.
 
-| Parameter            | Type                                             | Description |
-| -------------------- | ------------------------------------------------ | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`                             |             |
-| `consistency`        | `ConsistencyOptions<GetProcessInstanceResponse>` |             |
-| `ct`                 | `CancellationToken`                              |             |
+| Parameter            | Type                                        | Description |
+| -------------------- | ------------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                        |             |
+| `consistency`        | `ConsistencyOptions<ProcessInstanceResult>` |             |
+| `ct`                 | `CancellationToken`                         |             |
 
-**Returns:** `Task<GetProcessInstanceResponse>`
+**Returns:** `Task<ProcessInstanceResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceAsync(processInstanceKey);
+    Console.WriteLine($"Process instance: {result.ProcessDefinitionId}");
+}
+```
 
 #### GetProcessInstanceCallHierarchyAsync(ProcessInstanceKey, ConsistencyOptions<object>?, CancellationToken)
 
@@ -2443,10 +3857,24 @@ Returns the call hierarchy for a given process instance, showing its ancestry up
 
 **Returns:** `Task<Object>`
 
-#### GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey, ConsistencyOptions<GetProcessInstanceSequenceFlowsResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<GetProcessInstanceSequenceFlowsResponse> GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<GetProcessInstanceSequenceFlowsResponse>? consistency = null, CancellationToken ct = default)
+public static async Task GetProcessInstanceCallHierarchyExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceCallHierarchyAsync(
+        processInstanceKey);
+
+    Console.WriteLine($"Call hierarchy: {result}");
+}
+```
+
+#### GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceSequenceFlowsQueryResult> GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get sequence flows
@@ -2455,10 +3883,27 @@ Get sequence flows taken by the process instance.
 | Parameter            | Type                                                          | Description |
 | -------------------- | ------------------------------------------------------------- | ----------- |
 | `processInstanceKey` | `ProcessInstanceKey`                                          |             |
-| `consistency`        | `ConsistencyOptions<GetProcessInstanceSequenceFlowsResponse>` |             |
+| `consistency`        | `ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>` |             |
 | `ct`                 | `CancellationToken`                                           |             |
 
-**Returns:** `Task<GetProcessInstanceSequenceFlowsResponse>`
+**Returns:** `Task<ProcessInstanceSequenceFlowsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceSequenceFlowsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceSequenceFlowsAsync(
+        processInstanceKey);
+
+    foreach (var flow in result.Items)
+    {
+        Console.WriteLine($"Sequence flow: {flow}");
+    }
+}
+```
 
 #### GetProcessInstanceStatisticsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>?, CancellationToken)
 
@@ -2476,6 +3921,23 @@ Get statistics about elements by the process instance key.
 | `ct`                 | `CancellationToken`                                               |             |
 
 **Returns:** `Task<ProcessInstanceElementStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceStatisticsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceStatisticsAsync(
+        processInstanceKey);
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Element: {stat.ElementId}");
+    }
+}
+```
 
 #### GetProcessInstanceStatisticsByDefinitionAsync(IncidentProcessInstanceStatisticsByDefinitionQuery, ConsistencyOptions<IncidentProcessInstanceStatisticsByDefinitionQueryResult>?, CancellationToken)
 
@@ -2496,6 +3958,23 @@ provided as a filter in the request body.
 
 **Returns:** `Task<IncidentProcessInstanceStatisticsByDefinitionQueryResult>`
 
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceStatisticsByDefinitionExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceStatisticsByDefinitionAsync(
+        new IncidentProcessInstanceStatisticsByDefinitionQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Definition: {stat.ProcessDefinitionKey}");
+    }
+}
+```
+
 #### GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>?, CancellationToken)
 
 ```csharp
@@ -2514,10 +3993,27 @@ grouped by incident error hash code.
 
 **Returns:** `Task<IncidentProcessInstanceStatisticsByErrorQueryResult>`
 
-#### MigrateProcessInstanceAsync(ProcessInstanceKey, MigrateProcessInstanceRequest, CancellationToken)
+**Example**
 
 ```csharp
-public Task MigrateProcessInstanceAsync(ProcessInstanceKey processInstanceKey, MigrateProcessInstanceRequest body, CancellationToken ct = default)
+public static async Task GetProcessInstanceStatisticsByErrorExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceStatisticsByErrorAsync(
+        new IncidentProcessInstanceStatisticsByErrorQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Error: {stat.ErrorMessage}");
+    }
+}
+```
+
+#### MigrateProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceMigrationInstruction, CancellationToken)
+
+```csharp
+public Task MigrateProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceMigrationInstruction body, CancellationToken ct = default)
 ```
 
 Migrate process instance
@@ -2529,52 +4025,34 @@ Use this to upgrade a process instance to a new version of a process or to
 a different process definition, e.g. to keep your running instances up-to-date with the
 latest process improvements.
 
-| Parameter            | Type                            | Description |
-| -------------------- | ------------------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`            |             |
-| `body`               | `MigrateProcessInstanceRequest` |             |
-| `ct`                 | `CancellationToken`             |             |
+| Parameter            | Type                                  | Description |
+| -------------------- | ------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                  |             |
+| `body`               | `ProcessInstanceMigrationInstruction` |             |
+| `ct`                 | `CancellationToken`                   |             |
 
 **Returns:** `Task`
 
 **Example**
 
 ```csharp
-static async Task MigrateProcessInstanceExample()
+public static async Task MigrateProcessInstanceExample(ProcessInstanceKey processInstanceKey, ProcessDefinitionKey targetProcessDefinitionKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Create an instance to migrate
-    var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
-    });
-
-    // Deploy the updated process version and get its ProcessDefinitionKey
-    var v2 = await client.DeployResourcesFromFilesAsync(
-        new[] { "order-process-v2.bpmn" }
-    );
-    var targetProcessDefinitionKey = v2.Processes[0].ProcessDefinitionKey;
-
-    await client.MigrateProcessInstanceAsync(created.ProcessInstanceKey, new MigrateProcessInstanceRequest
-    {
-        TargetProcessDefinitionKey = targetProcessDefinitionKey,
-        MappingInstructions = new List<MigrateProcessInstanceMappingInstruction>
+    await client.MigrateProcessInstanceAsync(
+        processInstanceKey,
+        new ProcessInstanceMigrationInstruction
         {
-            new()
-            {
-                SourceElementId = ElementId.AssumeExists("taskA"),
-                TargetElementId = ElementId.AssumeExists("taskB"),
-            }
-        }
-    });
+            TargetProcessDefinitionKey = targetProcessDefinitionKey,
+        });
 }
 ```
 
-#### MigrateProcessInstancesBatchOperationAsync(MigrateProcessInstancesBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
+#### MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, CancellationToken)
 
 ```csharp
-public Task<BatchOperationCreatedResult> MigrateProcessInstancesBatchOperationAsync(MigrateProcessInstancesBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+public Task<BatchOperationCreatedResult> MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest body, CancellationToken ct = default)
 ```
 
 Migrate process instances (batch)
@@ -2583,18 +4061,38 @@ Since only process instances with ACTIVE state can be migrated, any given
 filters for state are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-| Parameter     | Type                                              | Description |
-| ------------- | ------------------------------------------------- | ----------- |
-| `body`        | `MigrateProcessInstancesBatchOperationRequest`    |             |
-| `consistency` | `ConsistencyOptions<BatchOperationCreatedResult>` |             |
-| `ct`          | `CancellationToken`                               |             |
+| Parameter | Type                                            | Description |
+| --------- | ----------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceMigrationBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                             |             |
 
 **Returns:** `Task<BatchOperationCreatedResult>`
 
-#### ModifyProcessInstanceAsync(ProcessInstanceKey, ModifyProcessInstanceRequest, CancellationToken)
+**Example**
 
 ```csharp
-public Task ModifyProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ModifyProcessInstanceRequest body, CancellationToken ct = default)
+public static async Task MigrateProcessInstancesBatchOperationExample(ProcessDefinitionKey targetProcessDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.MigrateProcessInstancesBatchOperationAsync(
+        new ProcessInstanceMigrationBatchOperationRequest
+        {
+            Filter = new ProcessInstanceFilter(),
+            MigrationPlan = new ProcessInstanceMigrationBatchOperationPlan
+            {
+                TargetProcessDefinitionKey = targetProcessDefinitionKey,
+            },
+        });
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### ModifyProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceModificationInstruction, CancellationToken)
+
+```csharp
+public Task ModifyProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceModificationInstruction body, CancellationToken ct = default)
 ```
 
 Modify process instance
@@ -2605,41 +4103,31 @@ to terminate an active instance of an element.
 Use this to repair a process instance that is stuck on an element or took an unintended path.
 For example, because an external system is not available or doesn't respond as expected.
 
-| Parameter            | Type                           | Description |
-| -------------------- | ------------------------------ | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`           |             |
-| `body`               | `ModifyProcessInstanceRequest` |             |
-| `ct`                 | `CancellationToken`            |             |
+| Parameter            | Type                                     | Description |
+| -------------------- | ---------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                     |             |
+| `body`               | `ProcessInstanceModificationInstruction` |             |
+| `ct`                 | `CancellationToken`                      |             |
 
 **Returns:** `Task`
 
 **Example**
 
 ```csharp
-static async Task ModifyProcessInstanceExample()
+public static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Get a ProcessInstanceKey from the creation response
-    var created = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
-    });
-
-    await client.ModifyProcessInstanceAsync(created.ProcessInstanceKey, new ModifyProcessInstanceRequest
-    {
-        ActivateInstructions = new List<ProcessInstanceModificationActivateInstruction>
-        {
-            new() { ElementId = ElementId.AssumeExists("taskB") }
-        }
-    });
+    await client.ModifyProcessInstanceAsync(
+        processInstanceKey,
+        new ProcessInstanceModificationInstruction());
 }
 ```
 
-#### ModifyProcessInstancesBatchOperationAsync(ModifyProcessInstancesBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
+#### ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, CancellationToken)
 
 ```csharp
-public Task<BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsync(ModifyProcessInstancesBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+public Task<BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest body, CancellationToken ct = default)
 ```
 
 Modify process instances (batch)
@@ -2650,35 +4138,94 @@ In contrast to single modification operation, it is not possible to add variable
 It is only possible to use the element id of the source and target.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-| Parameter     | Type                                              | Description |
-| ------------- | ------------------------------------------------- | ----------- |
-| `body`        | `ModifyProcessInstancesBatchOperationRequest`     |             |
-| `consistency` | `ConsistencyOptions<BatchOperationCreatedResult>` |             |
-| `ct`          | `CancellationToken`                               |             |
+| Parameter | Type                                               | Description |
+| --------- | -------------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceModificationBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                                |             |
 
 **Returns:** `Task<BatchOperationCreatedResult>`
 
-#### ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+public static async Task ModifyProcessInstancesBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.ModifyProcessInstancesBatchOperationAsync(
+        new ProcessInstanceModificationBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest body, CancellationToken ct = default)
+```
+
+Resolve related incidents (batch)
+Resolves multiple instances of process instances.
+Since only process instances with ACTIVE state can have unresolved incidents, any given
+filters for state are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter | Type                                                     | Description |
+| --------- | -------------------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceIncidentResolutionBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                                      |             |
+
+**Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task ResolveIncidentsBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.ResolveIncidentsBatchOperationAsync(
+        new ProcessInstanceIncidentResolutionBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, CancellationToken ct = default)
 ```
 
 Resolve related incidents
 Creates a batch operation to resolve multiple incidents of a process instance.
 
-| Parameter            | Type                                              | Description |
-| -------------------- | ------------------------------------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`                              |             |
-| `consistency`        | `ConsistencyOptions<BatchOperationCreatedResult>` |             |
-| `ct`                 | `CancellationToken`                               |             |
+| Parameter            | Type                 | Description |
+| -------------------- | -------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey` |             |
+| `ct`                 | `CancellationToken`  |             |
 
 **Returns:** `Task<BatchOperationCreatedResult>`
 
-#### SearchProcessInstanceIncidentsAsync(ProcessInstanceKey, IncidentSearchQuery, ConsistencyOptions<SearchProcessInstanceIncidentsResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchProcessInstanceIncidentsResponse> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<SearchProcessInstanceIncidentsResponse>? consistency = null, CancellationToken ct = default)
+public static async Task ResolveProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.ResolveProcessInstanceIncidentsAsync(
+        processInstanceKey);
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### SearchProcessInstanceIncidentsAsync(ProcessInstanceKey, IncidentSearchQuery, ConsistencyOptions<IncidentSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search related incidents
@@ -2689,44 +4236,62 @@ you may also include a `processInstanceKey` within the filter object to narrow r
 child process instances. This is useful, for example, if you want to isolate incidents associated with
 subprocesses or called processes under the root instance while excluding incidents directly tied to the root.
 
-| Parameter            | Type                                                         | Description |
-| -------------------- | ------------------------------------------------------------ | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`                                         |             |
-| `body`               | `IncidentSearchQuery`                                        |             |
-| `consistency`        | `ConsistencyOptions<SearchProcessInstanceIncidentsResponse>` |             |
-| `ct`                 | `CancellationToken`                                          |             |
+| Parameter            | Type                                            | Description |
+| -------------------- | ----------------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                            |             |
+| `body`               | `IncidentSearchQuery`                           |             |
+| `consistency`        | `ConsistencyOptions<IncidentSearchQueryResult>` |             |
+| `ct`                 | `CancellationToken`                             |             |
 
-**Returns:** `Task<SearchProcessInstanceIncidentsResponse>`
+**Returns:** `Task<IncidentSearchQueryResult>`
 
-#### SearchProcessInstancesAsync(SearchProcessInstancesRequest, ConsistencyOptions<SearchProcessInstancesResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchProcessInstancesResponse> SearchProcessInstancesAsync(SearchProcessInstancesRequest body, ConsistencyOptions<SearchProcessInstancesResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchProcessInstanceIncidentsAsync(
+        processInstanceKey,
+        new IncidentSearchQuery());
+
+    foreach (var incident in result.Items)
+    {
+        Console.WriteLine($"Incident: {incident.IncidentKey}");
+    }
+}
+```
+
+#### SearchProcessInstancesAsync(ProcessInstanceSearchQuery, ConsistencyOptions<ProcessInstanceSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(ProcessInstanceSearchQuery body, ConsistencyOptions<ProcessInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search process instances
 Search for process instances based on given criteria.
 
-| Parameter     | Type                                                 | Description |
-| ------------- | ---------------------------------------------------- | ----------- |
-| `body`        | `SearchProcessInstancesRequest`                      |             |
-| `consistency` | `ConsistencyOptions<SearchProcessInstancesResponse>` |             |
-| `ct`          | `CancellationToken`                                  |             |
+| Parameter     | Type                                                   | Description |
+| ------------- | ------------------------------------------------------ | ----------- |
+| `body`        | `ProcessInstanceSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<ProcessInstanceSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                                    |             |
 
-**Returns:** `Task<SearchProcessInstancesResponse>`
+**Returns:** `Task<ProcessInstanceSearchQueryResult>`
 
 **Example**
 
 ```csharp
-static async Task SearchProcessInstancesExample()
+public static async Task SearchProcessInstancesExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    var result = await client.SearchProcessInstancesAsync(new SearchProcessInstancesRequest());
+    var result = await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
 
     foreach (var instance in result.Items)
     {
-        Console.WriteLine($"{instance.ProcessInstanceKey} — {instance.State}");
+        Console.WriteLine($"Process instance: {instance.ProcessInstanceKey}");
     }
 }
 ```
@@ -2755,19 +4320,14 @@ Use the publish message endpoint to send messages that can be buffered.
 **Example**
 
 ```csharp
-static async Task CorrelateMessageExample()
+public static async Task CorrelateMessageExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     var result = await client.CorrelateMessageAsync(new MessageCorrelationRequest
     {
-        Name = "payment-received",
-        CorrelationKey = "ORD-12345",
-        Variables = new Dictionary<string, object>
-        {
-            ["paymentId"] = "PAY-98765",
-            ["amount"] = 99.95
-        }
+        Name = "paymentReceived",
+        CorrelationKey = "order-123",
     });
 
     Console.WriteLine($"Message key: {result.MessageKey}");
@@ -2777,7 +4337,7 @@ static async Task CorrelateMessageExample()
 #### PublishMessageAsync(MessagePublicationRequest, CancellationToken)
 
 ```csharp
-public Task<PublishMessageResponse> PublishMessageAsync(MessagePublicationRequest body, CancellationToken ct = default)
+public Task<MessagePublicationResult> PublishMessageAsync(MessagePublicationRequest body, CancellationToken ct = default)
 ```
 
 Publish message
@@ -2792,61 +4352,93 @@ Use the message correlation endpoint for such use cases.
 | `body`    | `MessagePublicationRequest` |             |
 | `ct`      | `CancellationToken`         |             |
 
-**Returns:** `Task<PublishMessageResponse>`
+**Returns:** `Task<MessagePublicationResult>`
 
 **Example**
 
 ```csharp
-static async Task PublishMessageExample()
+public static async Task PublishMessageExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    await client.PublishMessageAsync(new MessagePublicationRequest
+    var result = await client.PublishMessageAsync(new MessagePublicationRequest
     {
-        Name = "order-placed",
-        CorrelationKey = "ORD-12345",
-        TimeToLive = 60_000, // 1 minute
-        Variables = new Dictionary<string, object>
-        {
-            ["orderId"] = "ORD-12345"
-        }
+        Name = "paymentReceived",
+        CorrelationKey = "order-123",
+        TimeToLive = 60000,
     });
+
+    Console.WriteLine($"Message key: {result.MessageKey}");
 }
 ```
 
-#### SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery, ConsistencyOptions<SearchCorrelatedMessageSubscriptionsResponse>?, CancellationToken)
+#### SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery, ConsistencyOptions<CorrelatedMessageSubscriptionSearchQueryResult>?, CancellationToken)
 
 ```csharp
-public Task<SearchCorrelatedMessageSubscriptionsResponse> SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery body, ConsistencyOptions<SearchCorrelatedMessageSubscriptionsResponse>? consistency = null, CancellationToken ct = default)
+public Task<CorrelatedMessageSubscriptionSearchQueryResult> SearchCorrelatedMessageSubscriptionsAsync(CorrelatedMessageSubscriptionSearchQuery body, ConsistencyOptions<CorrelatedMessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search correlated message subscriptions
 Search correlated message subscriptions based on given criteria.
 
-| Parameter     | Type                                                               | Description |
-| ------------- | ------------------------------------------------------------------ | ----------- |
-| `body`        | `CorrelatedMessageSubscriptionSearchQuery`                         |             |
-| `consistency` | `ConsistencyOptions<SearchCorrelatedMessageSubscriptionsResponse>` |             |
-| `ct`          | `CancellationToken`                                                |             |
+| Parameter     | Type                                                                 | Description |
+| ------------- | -------------------------------------------------------------------- | ----------- |
+| `body`        | `CorrelatedMessageSubscriptionSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<CorrelatedMessageSubscriptionSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                                                  |             |
 
-**Returns:** `Task<SearchCorrelatedMessageSubscriptionsResponse>`
+**Returns:** `Task<CorrelatedMessageSubscriptionSearchQueryResult>`
 
-#### SearchMessageSubscriptionsAsync(SearchMessageSubscriptionsRequest, ConsistencyOptions<SearchMessageSubscriptionsResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchMessageSubscriptionsResponse> SearchMessageSubscriptionsAsync(SearchMessageSubscriptionsRequest body, ConsistencyOptions<SearchMessageSubscriptionsResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchCorrelatedMessageSubscriptionsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchCorrelatedMessageSubscriptionsAsync(
+        new CorrelatedMessageSubscriptionSearchQuery());
+
+    foreach (var sub in result.Items)
+    {
+        Console.WriteLine($"Correlated subscription: {sub.MessageName}");
+    }
+}
+```
+
+#### SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery, ConsistencyOptions<MessageSubscriptionSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<MessageSubscriptionSearchQueryResult> SearchMessageSubscriptionsAsync(MessageSubscriptionSearchQuery body, ConsistencyOptions<MessageSubscriptionSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search message subscriptions
 Search for message subscriptions based on given criteria.
 
-| Parameter     | Type                                                     | Description |
-| ------------- | -------------------------------------------------------- | ----------- |
-| `body`        | `SearchMessageSubscriptionsRequest`                      |             |
-| `consistency` | `ConsistencyOptions<SearchMessageSubscriptionsResponse>` |             |
-| `ct`          | `CancellationToken`                                      |             |
+| Parameter     | Type                                                       | Description |
+| ------------- | ---------------------------------------------------------- | ----------- |
+| `body`        | `MessageSubscriptionSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<MessageSubscriptionSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                                        |             |
 
-**Returns:** `Task<SearchMessageSubscriptionsResponse>`
+**Returns:** `Task<MessageSubscriptionSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchMessageSubscriptionsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchMessageSubscriptionsAsync(
+        new MessageSubscriptionSearchQuery());
+
+    foreach (var sub in result.Items)
+    {
+        Console.WriteLine($"Subscription: {sub.MessageName}");
+    }
+}
+```
 
 ### Authorizations
 
@@ -2866,6 +4458,26 @@ Create the authorization.
 
 **Returns:** `Task<AuthorizationCreateResult>`
 
+**Example**
+
+```csharp
+public static async Task CreateAuthorizationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateAuthorizationAsync(new AuthorizationPropertyBasedRequest
+    {
+        ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+        PermissionTypes = new List<PermissionTypeEnum> { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE },
+        ResourcePropertyName = "my-process",
+        OwnerType = OwnerTypeEnum.USER,
+        OwnerId = "user@example.com",
+    });
+
+    Console.WriteLine($"Authorization key: {result.AuthorizationKey}");
+}
+```
+
 #### DeleteAuthorizationAsync(AuthorizationKey, CancellationToken)
 
 ```csharp
@@ -2881,6 +4493,17 @@ Deletes the authorization with the given key.
 | `ct`               | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task DeleteAuthorizationExample(AuthorizationKey authorizationKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteAuthorizationAsync(authorizationKey);
+}
+```
 
 #### GetAuthorizationAsync(AuthorizationKey, ConsistencyOptions<AuthorizationResult>?, CancellationToken)
 
@@ -2899,6 +4522,20 @@ Get authorization by the given key.
 
 **Returns:** `Task<AuthorizationResult>`
 
+**Example**
+
+```csharp
+public static async Task GetAuthorizationExample(AuthorizationKey authorizationKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetAuthorizationAsync(
+        authorizationKey);
+
+    Console.WriteLine($"Resource type: {result.ResourceType}");
+}
+```
+
 #### SearchAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions<AuthorizationSearchResult>?, CancellationToken)
 
 ```csharp
@@ -2915,6 +4552,23 @@ Search for authorizations based on given criteria.
 | `ct`          | `CancellationToken`                             |             |
 
 **Returns:** `Task<AuthorizationSearchResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchAuthorizationsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchAuthorizationsAsync(
+        new AuthorizationSearchQuery());
+
+    foreach (var auth in result.Items)
+    {
+        Console.WriteLine($"Authorization: {auth.AuthorizationKey}");
+    }
+}
+```
 
 #### UpdateAuthorizationAsync(AuthorizationKey, AuthorizationRequest, CancellationToken)
 
@@ -2933,12 +4587,32 @@ Update the authorization with the given key.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task UpdateAuthorizationExample(AuthorizationKey authorizationKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.UpdateAuthorizationAsync(
+        authorizationKey,
+        new AuthorizationPropertyBasedRequest
+        {
+            ResourceType = ResourceTypeEnum.PROCESSDEFINITION,
+            PermissionTypes = new List<PermissionTypeEnum> { PermissionTypeEnum.READ, PermissionTypeEnum.UPDATE, PermissionTypeEnum.DELETE },
+            ResourcePropertyName = "my-process",
+            OwnerType = OwnerTypeEnum.USER,
+            OwnerId = "user@example.com",
+        });
+}
+```
+
 ### Deployments
 
 #### CreateDeploymentAsync(MultipartFormDataContent, CancellationToken)
 
 ```csharp
-public Task<CreateDeploymentResponse> CreateDeploymentAsync(MultipartFormDataContent content, CancellationToken ct = default)
+public Task<DeploymentResult> CreateDeploymentAsync(MultipartFormDataContent content, CancellationToken ct = default)
 ```
 
 Deploy resources
@@ -2950,7 +4624,23 @@ This is an atomic call, i.e. either all resources are deployed or none of them a
 | `content` | `MultipartFormDataContent` |             |
 | `ct`      | `CancellationToken`        |             |
 
-**Returns:** `Task<CreateDeploymentResponse>`
+**Returns:** `Task<DeploymentResult>`
+
+**Example**
+
+```csharp
+public static async Task CreateDeploymentExample()
+{
+    using var client = CamundaClient.Create();
+
+    var content = new MultipartFormDataContent();
+    var fileContent = new ByteArrayContent(File.ReadAllBytes("process.bpmn"));
+    content.Add(fileContent, "resources", "process.bpmn");
+
+    var result = await client.CreateDeploymentAsync(content);
+    Console.WriteLine($"Deployment key: {result.DeploymentKey}");
+}
+```
 
 ### Documents
 
@@ -2994,6 +4684,21 @@ Note that this is currently supported for document stores of type: AWS, GCP
 | `ct`          | `CancellationToken`   |             |
 
 **Returns:** `Task<DocumentLink>`
+
+**Example**
+
+```csharp
+public static async Task CreateDocumentLinkExample(DocumentId documentId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateDocumentLinkAsync(
+        documentId,
+        new DocumentLinkRequest());
+
+    Console.WriteLine($"Document link: {result.Url}");
+}
+```
 
 #### CreateDocumentsAsync(MultipartFormDataContent, string?, CancellationToken)
 
@@ -3045,6 +4750,17 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task DeleteDocumentExample(DocumentId documentId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteDocumentAsync(documentId);
+}
+```
+
 #### GetDocumentAsync(DocumentId, string?, string?, CancellationToken)
 
 ```csharp
@@ -3076,6 +4792,10 @@ public Task CreateElementInstanceVariablesAsync(ElementInstanceKey elementInstan
 Update element instance variables
 Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.
 Specify the element instance in the `elementInstanceKey` parameter.
+Variable updates can be delayed by listener-related processing; if processing exceeds the
+request timeout, this endpoint can return 504. Other gateway timeout causes are also
+possible. Retry with backoff and inspect listener worker availability and logs when this
+repeats.
 
 | Parameter            | Type                 | Description |
 | -------------------- | -------------------- | ----------- |
@@ -3085,6 +4805,19 @@ Specify the element instance in the `elementInstanceKey` parameter.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task CreateElementInstanceVariablesExample(ElementInstanceKey elementInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.CreateElementInstanceVariablesAsync(
+        elementInstanceKey,
+        new SetVariableRequest());
+}
+```
+
 #### CreateGlobalClusterVariableAsync(CreateClusterVariableRequest, CancellationToken)
 
 ```csharp
@@ -3092,6 +4825,7 @@ public Task<ClusterVariableResult> CreateGlobalClusterVariableAsync(CreateCluste
 ```
 
 Create a global-scoped cluster variable
+Create a global-scoped cluster variable.
 
 | Parameter | Type                           | Description |
 | --------- | ------------------------------ | ----------- |
@@ -3100,6 +4834,24 @@ Create a global-scoped cluster variable
 
 **Returns:** `Task<ClusterVariableResult>`
 
+**Example**
+
+```csharp
+public static async Task CreateGlobalClusterVariableExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateGlobalClusterVariableAsync(
+        new CreateClusterVariableRequest
+        {
+            Name = "my-variable",
+            Value = "my-value",
+        });
+
+    Console.WriteLine($"Created variable: {result.Name}");
+}
+```
+
 #### CreateTenantClusterVariableAsync(TenantId, CreateClusterVariableRequest, CancellationToken)
 
 ```csharp
@@ -3107,6 +4859,7 @@ public Task<ClusterVariableResult> CreateTenantClusterVariableAsync(TenantId ten
 ```
 
 Create a tenant-scoped cluster variable
+Create a new cluster variable for the given tenant.
 
 | Parameter  | Type                           | Description |
 | ---------- | ------------------------------ | ----------- |
@@ -3116,6 +4869,25 @@ Create a tenant-scoped cluster variable
 
 **Returns:** `Task<ClusterVariableResult>`
 
+**Example**
+
+```csharp
+public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateTenantClusterVariableAsync(
+        tenantId,
+        new CreateClusterVariableRequest
+        {
+            Name = "my-variable",
+            Value = "tenant-value",
+        });
+
+    Console.WriteLine($"Created variable: {result.Name}");
+}
+```
+
 #### DeleteGlobalClusterVariableAsync(string, CancellationToken)
 
 ```csharp
@@ -3123,6 +4895,7 @@ public Task DeleteGlobalClusterVariableAsync(string name, CancellationToken ct =
 ```
 
 Delete a global-scoped cluster variable
+Delete a global-scoped cluster variable.
 
 | Parameter | Type                | Description |
 | --------- | ------------------- | ----------- |
@@ -3131,6 +4904,17 @@ Delete a global-scoped cluster variable
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task DeleteGlobalClusterVariableExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteGlobalClusterVariableAsync("my-variable");
+}
+```
+
 #### DeleteTenantClusterVariableAsync(TenantId, string, CancellationToken)
 
 ```csharp
@@ -3138,6 +4922,7 @@ public Task DeleteTenantClusterVariableAsync(TenantId tenantId, string name, Can
 ```
 
 Delete a tenant-scoped cluster variable
+Delete a tenant-scoped cluster variable.
 
 | Parameter  | Type                | Description |
 | ---------- | ------------------- | ----------- |
@@ -3147,6 +4932,19 @@ Delete a tenant-scoped cluster variable
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task DeleteTenantClusterVariableExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteTenantClusterVariableAsync(
+        tenantId,
+        "my-variable");
+}
+```
+
 #### GetGlobalClusterVariableAsync(string, ConsistencyOptions<ClusterVariableResult>?, CancellationToken)
 
 ```csharp
@@ -3154,6 +4952,7 @@ public Task<ClusterVariableResult> GetGlobalClusterVariableAsync(string name, Co
 ```
 
 Get a global-scoped cluster variable
+Get a global-scoped cluster variable.
 
 | Parameter     | Type                                        | Description |
 | ------------- | ------------------------------------------- | ----------- |
@@ -3163,6 +4962,18 @@ Get a global-scoped cluster variable
 
 **Returns:** `Task<ClusterVariableResult>`
 
+**Example**
+
+```csharp
+public static async Task GetGlobalClusterVariableExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetGlobalClusterVariableAsync("my-variable");
+    Console.WriteLine($"Variable: {result.Name} = {result.Value}");
+}
+```
+
 #### GetTenantClusterVariableAsync(TenantId, string, ConsistencyOptions<ClusterVariableResult>?, CancellationToken)
 
 ```csharp
@@ -3170,6 +4981,7 @@ public Task<ClusterVariableResult> GetTenantClusterVariableAsync(TenantId tenant
 ```
 
 Get a tenant-scoped cluster variable
+Get a tenant-scoped cluster variable.
 
 | Parameter     | Type                                        | Description |
 | ------------- | ------------------------------------------- | ----------- |
@@ -3180,22 +4992,53 @@ Get a tenant-scoped cluster variable
 
 **Returns:** `Task<ClusterVariableResult>`
 
-#### GetVariableAsync(VariableKey, ConsistencyOptions<GetVariableResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<GetVariableResponse> GetVariableAsync(VariableKey variableKey, ConsistencyOptions<GetVariableResponse>? consistency = null, CancellationToken ct = default)
+public static async Task GetTenantClusterVariableExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetTenantClusterVariableAsync(
+        tenantId,
+        "my-variable");
+
+    Console.WriteLine($"Variable: {result.Name} = {result.Value}");
+}
+```
+
+#### GetVariableAsync(VariableKey, ConsistencyOptions<VariableResult>?, CancellationToken)
+
+```csharp
+public Task<VariableResult> GetVariableAsync(VariableKey variableKey, ConsistencyOptions<VariableResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get variable
-Get the variable by the variable key.
+Get a variable by its key.
 
-| Parameter     | Type                                      | Description |
-| ------------- | ----------------------------------------- | ----------- |
-| `variableKey` | `VariableKey`                             |             |
-| `consistency` | `ConsistencyOptions<GetVariableResponse>` |             |
-| `ct`          | `CancellationToken`                       |             |
+This endpoint returns both process-level and local (element-scoped) variables.
+The variable's scopeKey indicates whether it's a process-level variable or scoped to a
+specific element instance.
 
-**Returns:** `Task<GetVariableResponse>`
+| Parameter     | Type                                 | Description |
+| ------------- | ------------------------------------ | ----------- |
+| `variableKey` | `VariableKey`                        |             |
+| `consistency` | `ConsistencyOptions<VariableResult>` |             |
+| `ct`          | `CancellationToken`                  |             |
+
+**Returns:** `Task<VariableResult>`
+
+**Example**
+
+```csharp
+public static async Task GetVariableExample(VariableKey variableKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetVariableAsync(variableKey);
+    Console.WriteLine($"Variable: {result.Name} = {result.Value}");
+}
+```
 
 #### SearchClusterVariablesAsync(ClusterVariableSearchQueryRequest, bool?, ConsistencyOptions<ClusterVariableSearchQueryResult>?, CancellationToken)
 
@@ -3214,23 +5057,64 @@ Search for cluster variables based on given criteria. By default, long variable 
 
 **Returns:** `Task<ClusterVariableSearchQueryResult>`
 
-#### SearchVariablesAsync(SearchVariablesRequest, bool?, ConsistencyOptions<SearchVariablesResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchVariablesResponse> SearchVariablesAsync(SearchVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<SearchVariablesResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchClusterVariablesExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchClusterVariablesAsync(
+        new ClusterVariableSearchQueryRequest());
+
+    foreach (var variable in result.Items)
+    {
+        Console.WriteLine($"Variable: {variable.Name}");
+    }
+}
+```
+
+#### SearchVariablesAsync(SearchVariablesRequest, bool?, ConsistencyOptions<VariableSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<VariableSearchQueryResult> SearchVariablesAsync(SearchVariablesRequest body, bool? truncateValues = null, ConsistencyOptions<VariableSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search variables
-Search for process and local variables based on given criteria. By default, long variable values in the response are truncated.
+Search for variables based on given criteria.
 
-| Parameter        | Type                                          | Description |
-| ---------------- | --------------------------------------------- | ----------- |
-| `body`           | `SearchVariablesRequest`                      |             |
-| `truncateValues` | `Nullable<Boolean>`                           |             |
-| `consistency`    | `ConsistencyOptions<SearchVariablesResponse>` |             |
-| `ct`             | `CancellationToken`                           |             |
+This endpoint returns variables that exist directly at the specified scopes - it does not
+include variables from parent scopes that would be visible through the scope hierarchy.
 
-**Returns:** `Task<SearchVariablesResponse>`
+Variables can be process-level (scoped to the process instance) or local (scoped to specific
+BPMN elements like tasks, subprocesses, etc.).
+
+By default, long variable values in the response are truncated.
+
+| Parameter        | Type                                            | Description |
+| ---------------- | ----------------------------------------------- | ----------- |
+| `body`           | `SearchVariablesRequest`                        |             |
+| `truncateValues` | `Nullable<Boolean>`                             |             |
+| `consistency`    | `ConsistencyOptions<VariableSearchQueryResult>` |             |
+| `ct`             | `CancellationToken`                             |             |
+
+**Returns:** `Task<VariableSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchVariablesExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchVariablesAsync(new SearchVariablesRequest());
+
+    foreach (var variable in result.Items)
+    {
+        Console.WriteLine($"Variable: {variable.Name}");
+    }
+}
+```
 
 #### UpdateGlobalClusterVariableAsync(string, UpdateClusterVariableRequest, CancellationToken)
 
@@ -3249,6 +5133,24 @@ The variable must exist, otherwise a 404 error is returned.
 | `ct`      | `CancellationToken`            |             |
 
 **Returns:** `Task<ClusterVariableResult>`
+
+**Example**
+
+```csharp
+public static async Task UpdateGlobalClusterVariableExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.UpdateGlobalClusterVariableAsync(
+        "my-variable",
+        new UpdateClusterVariableRequest
+        {
+            Value = "updated-value",
+        });
+
+    Console.WriteLine($"Updated variable: {result.Name}");
+}
+```
 
 #### UpdateTenantClusterVariableAsync(TenantId, string, UpdateClusterVariableRequest, CancellationToken)
 
@@ -3269,12 +5171,31 @@ The variable must exist, otherwise a 404 error is returned.
 
 **Returns:** `Task<ClusterVariableResult>`
 
+**Example**
+
+```csharp
+public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.UpdateTenantClusterVariableAsync(
+        tenantId,
+        "my-variable",
+        new UpdateClusterVariableRequest
+        {
+            Value = "updated-tenant-value",
+        });
+
+    Console.WriteLine($"Updated variable: {result.Name}");
+}
+```
+
 ### Mappings
 
 #### CreateMappingRuleAsync(MappingRuleCreateRequest, CancellationToken)
 
 ```csharp
-public Task<MappingRuleUpdateResult> CreateMappingRuleAsync(MappingRuleCreateRequest body, CancellationToken ct = default)
+public Task<CreateMappingRuleResponse> CreateMappingRuleAsync(MappingRuleCreateRequest body, CancellationToken ct = default)
 ```
 
 Create mapping rule
@@ -3285,7 +5206,25 @@ Create a new mapping rule
 | `body`    | `MappingRuleCreateRequest` |             |
 | `ct`      | `CancellationToken`        |             |
 
-**Returns:** `Task<MappingRuleUpdateResult>`
+**Returns:** `Task<CreateMappingRuleResponse>`
+
+**Example**
+
+```csharp
+public static async Task CreateMappingRuleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateMappingRuleAsync(new MappingRuleCreateRequest
+    {
+        ClaimName = "groups",
+        ClaimValue = "engineering",
+        Name = "Engineering Group Mapping",
+    });
+
+    Console.WriteLine($"Mapping rule: {result.MappingRuleId}");
+}
+```
 
 #### DeleteMappingRuleAsync(string, CancellationToken)
 
@@ -3302,6 +5241,17 @@ Deletes the mapping rule with the given ID.
 | `ct`            | `CancellationToken` |             |
 
 **Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task DeleteMappingRuleExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteMappingRuleAsync("rule-123");
+}
+```
 
 #### GetMappingRuleAsync(string, ConsistencyOptions<MappingRuleResult>?, CancellationToken)
 
@@ -3320,27 +5270,56 @@ Gets the mapping rule with the given ID.
 
 **Returns:** `Task<MappingRuleResult>`
 
-#### SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions<MappingRuleSearchQueryResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<MappingRuleSearchQueryResult> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<MappingRuleSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public static async Task GetMappingRuleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetMappingRuleAsync("rule-123");
+    Console.WriteLine($"Mapping rule: {result.Name}");
+}
+```
+
+#### SearchMappingRuleAsync(MappingRuleSearchQueryRequest, ConsistencyOptions<SearchMappingRuleResponse>?, CancellationToken)
+
+```csharp
+public Task<SearchMappingRuleResponse> SearchMappingRuleAsync(MappingRuleSearchQueryRequest body, ConsistencyOptions<SearchMappingRuleResponse>? consistency = null, CancellationToken ct = default)
 ```
 
 Search mapping rules
 Search for mapping rules based on given criteria.
 
-| Parameter     | Type                                               | Description |
-| ------------- | -------------------------------------------------- | ----------- |
-| `body`        | `MappingRuleSearchQueryRequest`                    |             |
-| `consistency` | `ConsistencyOptions<MappingRuleSearchQueryResult>` |             |
-| `ct`          | `CancellationToken`                                |             |
+| Parameter     | Type                                            | Description |
+| ------------- | ----------------------------------------------- | ----------- |
+| `body`        | `MappingRuleSearchQueryRequest`                 |             |
+| `consistency` | `ConsistencyOptions<SearchMappingRuleResponse>` |             |
+| `ct`          | `CancellationToken`                             |             |
 
-**Returns:** `Task<MappingRuleSearchQueryResult>`
+**Returns:** `Task<SearchMappingRuleResponse>`
+
+**Example**
+
+```csharp
+public static async Task SearchMappingRuleExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchMappingRuleAsync(
+        new MappingRuleSearchQueryRequest());
+
+    foreach (var rule in result.Items)
+    {
+        Console.WriteLine($"Mapping rule: {rule.Name}");
+    }
+}
+```
 
 #### UpdateMappingRuleAsync(string, MappingRuleUpdateRequest, CancellationToken)
 
 ```csharp
-public Task<MappingRuleUpdateResult> UpdateMappingRuleAsync(string mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
+public Task<UpdateMappingRuleResponse> UpdateMappingRuleAsync(string mappingRuleId, MappingRuleUpdateRequest body, CancellationToken ct = default)
 ```
 
 Update mapping rule
@@ -3352,61 +5331,151 @@ Update a mapping rule.
 | `body`          | `MappingRuleUpdateRequest` |             |
 | `ct`            | `CancellationToken`        |             |
 
-**Returns:** `Task<MappingRuleUpdateResult>`
+**Returns:** `Task<UpdateMappingRuleResponse>`
+
+**Example**
+
+```csharp
+public static async Task UpdateMappingRuleExample()
+{
+    using var client = CamundaClient.Create();
+
+    await client.UpdateMappingRuleAsync("rule-123", new MappingRuleUpdateRequest
+    {
+        ClaimName = "groups",
+        ClaimValue = "senior-engineering",
+        Name = "Senior Engineering Mapping",
+    });
+}
+```
 
 ### Decision Instances
 
-#### DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
+#### DeleteDecisionInstanceAsync(DecisionEvaluationKey, DeleteDecisionInstanceRequest, CancellationToken)
 
 ```csharp
-public Task<BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
+public Task DeleteDecisionInstanceAsync(DecisionEvaluationKey decisionEvaluationKey, DeleteDecisionInstanceRequest body, CancellationToken ct = default)
+```
+
+Delete decision instance
+Delete all associated decision evaluations based on provided key.
+
+| Parameter               | Type                            | Description |
+| ----------------------- | ------------------------------- | ----------- |
+| `decisionEvaluationKey` | `DecisionEvaluationKey`         |             |
+| `body`                  | `DeleteDecisionInstanceRequest` |             |
+| `ct`                    | `CancellationToken`             |             |
+
+**Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task DeleteDecisionInstanceExample(DecisionEvaluationKey decisionEvaluationKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteDecisionInstanceAsync(
+        decisionEvaluationKey,
+        new DeleteDecisionInstanceRequest());
+}
+```
+
+#### DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> DeleteDecisionInstancesBatchOperationAsync(DecisionInstanceDeletionBatchOperationRequest body, CancellationToken ct = default)
 ```
 
 Delete decision instances (batch)
 Delete multiple decision instances. This will delete the historic data from secondary storage.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
-| Parameter     | Type                                              | Description |
-| ------------- | ------------------------------------------------- | ----------- |
-| `body`        | `DecisionInstanceDeletionBatchOperationRequest`   |             |
-| `consistency` | `ConsistencyOptions<BatchOperationCreatedResult>` |             |
-| `ct`          | `CancellationToken`                               |             |
+| Parameter | Type                                            | Description |
+| --------- | ----------------------------------------------- | ----------- |
+| `body`    | `DecisionInstanceDeletionBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                             |             |
 
 **Returns:** `Task<BatchOperationCreatedResult>`
 
-#### GetDecisionInstanceAsync(DecisionInstanceKey, ConsistencyOptions<object>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<object> GetDecisionInstanceAsync(DecisionInstanceKey decisionEvaluationInstanceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+public static async Task DeleteDecisionInstancesBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.DeleteDecisionInstancesBatchOperationAsync(
+        new DecisionInstanceDeletionBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### GetDecisionInstanceAsync(DecisionEvaluationInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>?, CancellationToken)
+
+```csharp
+public Task<DecisionInstanceGetQueryResult> GetDecisionInstanceAsync(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey, ConsistencyOptions<DecisionInstanceGetQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get decision instance
 Returns a decision instance.
 
-| Parameter                       | Type                         | Description |
-| ------------------------------- | ---------------------------- | ----------- |
-| `decisionEvaluationInstanceKey` | `DecisionInstanceKey`        |             |
-| `consistency`                   | `ConsistencyOptions<Object>` |             |
-| `ct`                            | `CancellationToken`          |             |
+| Parameter                       | Type                                                 | Description |
+| ------------------------------- | ---------------------------------------------------- | ----------- |
+| `decisionEvaluationInstanceKey` | `DecisionEvaluationInstanceKey`                      |             |
+| `consistency`                   | `ConsistencyOptions<DecisionInstanceGetQueryResult>` |             |
+| `ct`                            | `CancellationToken`                                  |             |
 
-**Returns:** `Task<Object>`
+**Returns:** `Task<DecisionInstanceGetQueryResult>`
 
-#### SearchDecisionInstancesAsync(DecisionInstanceSearchQuery, ConsistencyOptions<SearchDecisionInstancesResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchDecisionInstancesResponse> SearchDecisionInstancesAsync(DecisionInstanceSearchQuery body, ConsistencyOptions<SearchDecisionInstancesResponse>? consistency = null, CancellationToken ct = default)
+public static async Task GetDecisionInstanceExample(DecisionEvaluationInstanceKey decisionEvaluationInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetDecisionInstanceAsync(
+        decisionEvaluationInstanceKey);
+
+    Console.WriteLine($"Decision instance: {result.DecisionDefinitionId}");
+}
+```
+
+#### SearchDecisionInstancesAsync(DecisionInstanceSearchQuery, ConsistencyOptions<DecisionInstanceSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<DecisionInstanceSearchQueryResult> SearchDecisionInstancesAsync(DecisionInstanceSearchQuery body, ConsistencyOptions<DecisionInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search decision instances
 Search for decision instances based on given criteria.
 
-| Parameter     | Type                                                  | Description |
-| ------------- | ----------------------------------------------------- | ----------- |
-| `body`        | `DecisionInstanceSearchQuery`                         |             |
-| `consistency` | `ConsistencyOptions<SearchDecisionInstancesResponse>` |             |
-| `ct`          | `CancellationToken`                                   |             |
+| Parameter     | Type                                                    | Description |
+| ------------- | ------------------------------------------------------- | ----------- |
+| `body`        | `DecisionInstanceSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<DecisionInstanceSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                                     |             |
 
-**Returns:** `Task<SearchDecisionInstancesResponse>`
+**Returns:** `Task<DecisionInstanceSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchDecisionInstancesExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchDecisionInstancesAsync(
+        new DecisionInstanceSearchQuery());
+
+    foreach (var di in result.Items)
+    {
+        Console.WriteLine($"Decision instance: {di.DecisionDefinitionId}");
+    }
+}
+```
 
 ### Decisions
 
@@ -3429,66 +5498,70 @@ version of the decision is used.
 
 **Returns:** `Task<EvaluateDecisionResult>`
 
-**Example**
-
-```csharp
-static async Task EvaluateDecisionExample()
-{
-    using var client = Camunda.CreateClient();
-
-    // Find the decision definition via search
-    var definitions = await client.SearchDecisionDefinitionsAsync(new DecisionDefinitionSearchQuery());
-    var decisionDefinitionId = definitions.Items![0].DecisionDefinitionId.Value;
-
-    var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
-    {
-        DecisionDefinitionId = decisionDefinitionId,
-        Variables = new Dictionary<string, object>
-        {
-            ["weight"] = 5.2,
-            ["destination"] = "DE"
-        }
-    });
-
-    Console.WriteLine($"Decision: {result.DecisionDefinitionId}");
-}
-```
-
 ### Audit Logs
 
-#### GetAuditLogAsync(AuditLogKey, ConsistencyOptions<GetAuditLogResponse>?, CancellationToken)
+#### GetAuditLogAsync(AuditLogKey, ConsistencyOptions<AuditLogResult>?, CancellationToken)
 
 ```csharp
-public Task<GetAuditLogResponse> GetAuditLogAsync(AuditLogKey auditLogKey, ConsistencyOptions<GetAuditLogResponse>? consistency = null, CancellationToken ct = default)
+public Task<AuditLogResult> GetAuditLogAsync(AuditLogKey auditLogKey, ConsistencyOptions<AuditLogResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get audit log
 Get an audit log entry by auditLogKey.
 
-| Parameter     | Type                                      | Description |
-| ------------- | ----------------------------------------- | ----------- |
-| `auditLogKey` | `AuditLogKey`                             |             |
-| `consistency` | `ConsistencyOptions<GetAuditLogResponse>` |             |
-| `ct`          | `CancellationToken`                       |             |
+| Parameter     | Type                                 | Description |
+| ------------- | ------------------------------------ | ----------- |
+| `auditLogKey` | `AuditLogKey`                        |             |
+| `consistency` | `ConsistencyOptions<AuditLogResult>` |             |
+| `ct`          | `CancellationToken`                  |             |
 
-**Returns:** `Task<GetAuditLogResponse>`
+**Returns:** `Task<AuditLogResult>`
 
-#### SearchAuditLogsAsync(AuditLogSearchQueryRequest, ConsistencyOptions<SearchAuditLogsResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchAuditLogsResponse> SearchAuditLogsAsync(AuditLogSearchQueryRequest body, ConsistencyOptions<SearchAuditLogsResponse>? consistency = null, CancellationToken ct = default)
+public static async Task GetAuditLogExample(AuditLogKey auditLogKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetAuditLogAsync(auditLogKey);
+    Console.WriteLine($"Audit log: {result.AuditLogKey}");
+}
+```
+
+#### SearchAuditLogsAsync(AuditLogSearchQueryRequest, ConsistencyOptions<AuditLogSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<AuditLogSearchQueryResult> SearchAuditLogsAsync(AuditLogSearchQueryRequest body, ConsistencyOptions<AuditLogSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search audit logs
 Search for audit logs based on given criteria.
 
-| Parameter     | Type                                          | Description |
-| ------------- | --------------------------------------------- | ----------- |
-| `body`        | `AuditLogSearchQueryRequest`                  |             |
-| `consistency` | `ConsistencyOptions<SearchAuditLogsResponse>` |             |
-| `ct`          | `CancellationToken`                           |             |
+| Parameter     | Type                                            | Description |
+| ------------- | ----------------------------------------------- | ----------- |
+| `body`        | `AuditLogSearchQueryRequest`                    |             |
+| `consistency` | `ConsistencyOptions<AuditLogSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                             |             |
 
-**Returns:** `Task<SearchAuditLogsResponse>`
+**Returns:** `Task<AuditLogSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchAuditLogsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchAuditLogsAsync(
+        new AuditLogSearchQueryRequest());
+
+    foreach (var log in result.Items)
+    {
+        Console.WriteLine($"Audit log: {log.AuditLogKey}");
+    }
+}
+```
 
 ### Decision Definitions
 
@@ -3509,6 +5582,20 @@ Returns a decision definition by key.
 
 **Returns:** `Task<DecisionDefinitionResult>`
 
+**Example**
+
+```csharp
+public static async Task GetDecisionDefinitionExample(DecisionDefinitionKey decisionDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetDecisionDefinitionAsync(
+        decisionDefinitionKey);
+
+    Console.WriteLine($"Decision definition: {result.Name}");
+}
+```
+
 #### GetDecisionDefinitionXmlAsync(DecisionDefinitionKey, ConsistencyOptions<object>?, CancellationToken)
 
 ```csharp
@@ -3525,6 +5612,20 @@ Returns decision definition as XML.
 | `ct`                    | `CancellationToken`          |             |
 
 **Returns:** `Task<Object>`
+
+**Example**
+
+```csharp
+public static async Task GetDecisionDefinitionXmlExample(DecisionDefinitionKey decisionDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetDecisionDefinitionXmlAsync(
+        decisionDefinitionKey);
+
+    Console.WriteLine($"XML: {result}");
+}
+```
 
 #### SearchDecisionDefinitionsAsync(DecisionDefinitionSearchQuery, ConsistencyOptions<DecisionDefinitionSearchQueryResult>?, CancellationToken)
 
@@ -3546,15 +5647,16 @@ Search for decision definitions based on given criteria.
 **Example**
 
 ```csharp
-static async Task SearchDecisionDefinitionsExample()
+public static async Task SearchDecisionDefinitionsExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    var result = await client.SearchDecisionDefinitionsAsync(new DecisionDefinitionSearchQuery());
+    var result = await client.SearchDecisionDefinitionsAsync(
+        new DecisionDefinitionSearchQuery());
 
-    foreach (var def in result.Items!)
+    foreach (var dd in result.Items)
     {
-        Console.WriteLine($"{def.DecisionDefinitionId} v{def.Version}");
+        Console.WriteLine($"Decision definition: {dd.Name}");
     }
 }
 ```
@@ -3578,6 +5680,20 @@ Returns Decision Requirements as JSON.
 
 **Returns:** `Task<DecisionRequirementsResult>`
 
+**Example**
+
+```csharp
+public static async Task GetDecisionRequirementsExample(DecisionRequirementsKey decisionRequirementsKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetDecisionRequirementsAsync(
+        decisionRequirementsKey);
+
+    Console.WriteLine($"DRD: {result.DecisionRequirementsName}");
+}
+```
+
 #### GetDecisionRequirementsXmlAsync(DecisionRequirementsKey, ConsistencyOptions<object>?, CancellationToken)
 
 ```csharp
@@ -3594,6 +5710,20 @@ Returns decision requirements as XML.
 | `ct`                      | `CancellationToken`          |             |
 
 **Returns:** `Task<Object>`
+
+**Example**
+
+```csharp
+public static async Task GetDecisionRequirementsXmlExample(DecisionRequirementsKey decisionRequirementsKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetDecisionRequirementsXmlAsync(
+        decisionRequirementsKey);
+
+    Console.WriteLine($"XML: {result}");
+}
+```
 
 #### SearchDecisionRequirementsAsync(DecisionRequirementsSearchQuery, ConsistencyOptions<DecisionRequirementsSearchQueryResult>?, CancellationToken)
 
@@ -3612,40 +5742,51 @@ Search for decision requirements based on given criteria.
 
 **Returns:** `Task<DecisionRequirementsSearchQueryResult>`
 
-### Incidents
-
-#### GetIncidentAsync(IncidentKey, ConsistencyOptions<GetIncidentResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<GetIncidentResponse> GetIncidentAsync(IncidentKey incidentKey, ConsistencyOptions<GetIncidentResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchDecisionRequirementsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchDecisionRequirementsAsync(
+        new DecisionRequirementsSearchQuery());
+
+    foreach (var drd in result.Items)
+    {
+        Console.WriteLine($"DRD: {drd.DecisionRequirementsName}");
+    }
+}
+```
+
+### Incidents
+
+#### GetIncidentAsync(IncidentKey, ConsistencyOptions<IncidentResult>?, CancellationToken)
+
+```csharp
+public Task<IncidentResult> GetIncidentAsync(IncidentKey incidentKey, ConsistencyOptions<IncidentResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get incident
 Returns incident as JSON.
 
-| Parameter     | Type                                      | Description |
-| ------------- | ----------------------------------------- | ----------- |
-| `incidentKey` | `IncidentKey`                             |             |
-| `consistency` | `ConsistencyOptions<GetIncidentResponse>` |             |
-| `ct`          | `CancellationToken`                       |             |
+| Parameter     | Type                                 | Description |
+| ------------- | ------------------------------------ | ----------- |
+| `incidentKey` | `IncidentKey`                        |             |
+| `consistency` | `ConsistencyOptions<IncidentResult>` |             |
+| `ct`          | `CancellationToken`                  |             |
 
-**Returns:** `Task<GetIncidentResponse>`
+**Returns:** `Task<IncidentResult>`
 
 **Example**
 
 ```csharp
-static async Task GetIncidentExample()
+public static async Task GetIncidentExample(IncidentKey incidentKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Find an incident via search
-    var incidents = await client.SearchIncidentsAsync(new IncidentSearchQuery());
-    var incidentKey = incidents.Items![0].IncidentKey.Value;
-
-    var incident = await client.GetIncidentAsync(incidentKey);
-
-    Console.WriteLine($"Incident {incident.IncidentKey}: {incident.ErrorType}");
-    Console.WriteLine($"Message: {incident.ErrorMessage}");
+    var result = await client.GetIncidentAsync(incidentKey);
+    Console.WriteLine($"Incident: {result.IncidentKey}");
 }
 ```
 
@@ -3670,42 +5811,20 @@ to reset the job's retries, followed by this call.
 **Example**
 
 ```csharp
-static async Task ResolveIncidentExample()
+public static async Task ResolveIncidentExample(IncidentKey incidentKey)
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
-    // Find an incident via search
-    var incidents = await client.SearchIncidentsAsync(new IncidentSearchQuery());
-    var incidentKey = incidents.Items![0].IncidentKey.Value;
-
-    await client.ResolveIncidentAsync(incidentKey, new IncidentResolutionRequest());
+    await client.ResolveIncidentAsync(
+        incidentKey,
+        new IncidentResolutionRequest());
 }
 ```
 
-#### ResolveIncidentsBatchOperationAsync(ResolveIncidentsBatchOperationRequest, ConsistencyOptions<BatchOperationCreatedResult>?, CancellationToken)
+#### SearchElementInstanceIncidentsAsync(ElementInstanceKey, IncidentSearchQuery, ConsistencyOptions<IncidentSearchQueryResult>?, CancellationToken)
 
 ```csharp
-public Task<BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(ResolveIncidentsBatchOperationRequest body, ConsistencyOptions<BatchOperationCreatedResult>? consistency = null, CancellationToken ct = default)
-```
-
-Resolve related incidents (batch)
-Resolves multiple instances of process instances.
-Since only process instances with ACTIVE state can have unresolved incidents, any given
-filters for state are ignored and overridden during this batch operation.
-This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
-
-| Parameter     | Type                                              | Description |
-| ------------- | ------------------------------------------------- | ----------- |
-| `body`        | `ResolveIncidentsBatchOperationRequest`           |             |
-| `consistency` | `ConsistencyOptions<BatchOperationCreatedResult>` |             |
-| `ct`          | `CancellationToken`                               |             |
-
-**Returns:** `Task<BatchOperationCreatedResult>`
-
-#### SearchElementInstanceIncidentsAsync(ElementInstanceKey, IncidentSearchQuery, ConsistencyOptions<SearchElementInstanceIncidentsResponse>?, CancellationToken)
-
-```csharp
-public Task<SearchElementInstanceIncidentsResponse> SearchElementInstanceIncidentsAsync(ElementInstanceKey elementInstanceKey, IncidentSearchQuery body, ConsistencyOptions<SearchElementInstanceIncidentsResponse>? consistency = null, CancellationToken ct = default)
+public Task<IncidentSearchQueryResult> SearchElementInstanceIncidentsAsync(ElementInstanceKey elementInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search for incidents of a specific element instance
@@ -3717,44 +5836,62 @@ child element instances. This is useful, for example, if you want to isolate inc
 nested or subordinate elements within the given element instance while excluding incidents directly tied
 to the root element itself.
 
-| Parameter            | Type                                                         | Description |
-| -------------------- | ------------------------------------------------------------ | ----------- |
-| `elementInstanceKey` | `ElementInstanceKey`                                         |             |
-| `body`               | `IncidentSearchQuery`                                        |             |
-| `consistency`        | `ConsistencyOptions<SearchElementInstanceIncidentsResponse>` |             |
-| `ct`                 | `CancellationToken`                                          |             |
+| Parameter            | Type                                            | Description |
+| -------------------- | ----------------------------------------------- | ----------- |
+| `elementInstanceKey` | `ElementInstanceKey`                            |             |
+| `body`               | `IncidentSearchQuery`                           |             |
+| `consistency`        | `ConsistencyOptions<IncidentSearchQueryResult>` |             |
+| `ct`                 | `CancellationToken`                             |             |
 
-**Returns:** `Task<SearchElementInstanceIncidentsResponse>`
+**Returns:** `Task<IncidentSearchQueryResult>`
 
-#### SearchIncidentsAsync(IncidentSearchQuery, ConsistencyOptions<SearchIncidentsResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<SearchIncidentsResponse> SearchIncidentsAsync(IncidentSearchQuery body, ConsistencyOptions<SearchIncidentsResponse>? consistency = null, CancellationToken ct = default)
+public static async Task SearchElementInstanceIncidentsExample(ElementInstanceKey elementInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchElementInstanceIncidentsAsync(
+        elementInstanceKey,
+        new IncidentSearchQuery());
+
+    foreach (var incident in result.Items)
+    {
+        Console.WriteLine($"Incident: {incident.IncidentKey}");
+    }
+}
+```
+
+#### SearchIncidentsAsync(IncidentSearchQuery, ConsistencyOptions<IncidentSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<IncidentSearchQueryResult> SearchIncidentsAsync(IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search incidents
 Search for incidents based on given criteria.
 
-| Parameter     | Type                                          | Description |
-| ------------- | --------------------------------------------- | ----------- |
-| `body`        | `IncidentSearchQuery`                         |             |
-| `consistency` | `ConsistencyOptions<SearchIncidentsResponse>` |             |
-| `ct`          | `CancellationToken`                           |             |
+| Parameter     | Type                                            | Description |
+| ------------- | ----------------------------------------------- | ----------- |
+| `body`        | `IncidentSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<IncidentSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                             |             |
 
-**Returns:** `Task<SearchIncidentsResponse>`
+**Returns:** `Task<IncidentSearchQueryResult>`
 
 **Example**
 
 ```csharp
-static async Task SearchIncidentsExample()
+public static async Task SearchIncidentsExample()
 {
-    using var client = Camunda.CreateClient();
+    using var client = CamundaClient.Create();
 
     var result = await client.SearchIncidentsAsync(new IncidentSearchQuery());
 
-    foreach (var incident in result.Items!)
+    foreach (var incident in result.Items)
     {
-        Console.WriteLine($"Incident {incident.IncidentKey}: {incident.ErrorType} — {incident.ErrorMessage}");
+        Console.WriteLine($"Incident: {incident.IncidentKey}");
     }
 }
 ```
@@ -3778,6 +5915,20 @@ Returns process definition as JSON.
 
 **Returns:** `Task<ProcessDefinitionResult>`
 
+**Example**
+
+```csharp
+public static async Task GetProcessDefinitionExample(ProcessDefinitionKey processDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessDefinitionAsync(
+        processDefinitionKey);
+
+    Console.WriteLine($"Process definition: {result.Name}");
+}
+```
+
 #### GetProcessDefinitionInstanceStatisticsAsync(ProcessDefinitionInstanceStatisticsQuery, ConsistencyOptions<ProcessDefinitionInstanceStatisticsQueryResult>?, CancellationToken)
 
 ```csharp
@@ -3794,6 +5945,23 @@ Get statistics about process instances, grouped by process definition and tenant
 | `ct`          | `CancellationToken`                                                  |             |
 
 **Returns:** `Task<ProcessDefinitionInstanceStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessDefinitionInstanceStatisticsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessDefinitionInstanceStatisticsAsync(
+        new ProcessDefinitionInstanceStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Definition: {stat.ProcessDefinitionId}");
+    }
+}
+```
 
 #### GetProcessDefinitionInstanceVersionStatisticsAsync(ProcessDefinitionInstanceVersionStatisticsQuery, ConsistencyOptions<ProcessDefinitionInstanceVersionStatisticsQueryResult>?, CancellationToken)
 
@@ -3813,6 +5981,29 @@ The process definition ID must be provided as a required field in the request bo
 
 **Returns:** `Task<ProcessDefinitionInstanceVersionStatisticsQueryResult>`
 
+**Example**
+
+```csharp
+public static async Task GetProcessDefinitionInstanceVersionStatisticsExample(ProcessDefinitionId processDefinitionId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessDefinitionInstanceVersionStatisticsAsync(
+        new ProcessDefinitionInstanceVersionStatisticsQuery
+        {
+            Filter = new ProcessDefinitionInstanceVersionStatisticsFilter
+            {
+                ProcessDefinitionId = processDefinitionId,
+            },
+        });
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Version: {stat.ProcessDefinitionVersion}");
+    }
+}
+```
+
 #### GetProcessDefinitionMessageSubscriptionStatisticsAsync(ProcessDefinitionMessageSubscriptionStatisticsQuery, ConsistencyOptions<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>?, CancellationToken)
 
 ```csharp
@@ -3830,10 +6021,27 @@ Get message subscription statistics, grouped by process definition.
 
 **Returns:** `Task<ProcessDefinitionMessageSubscriptionStatisticsQueryResult>`
 
-#### GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey, GetProcessDefinitionStatisticsRequest, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, GetProcessDefinitionStatisticsRequest body, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+public static async Task GetProcessDefinitionMessageSubscriptionStatisticsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessDefinitionMessageSubscriptionStatisticsAsync(
+        new ProcessDefinitionMessageSubscriptionStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Message subscriptions: {stat.ActiveSubscriptions}");
+    }
+}
+```
+
+#### GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey, ProcessDefinitionElementStatisticsQuery, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessDefinitionElementStatisticsQueryResult> GetProcessDefinitionStatisticsAsync(ProcessDefinitionKey processDefinitionKey, ProcessDefinitionElementStatisticsQuery body, ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get process definition statistics
@@ -3842,11 +6050,29 @@ Get statistics about elements in currently running process instances by process 
 | Parameter              | Type                                                                | Description |
 | ---------------------- | ------------------------------------------------------------------- | ----------- |
 | `processDefinitionKey` | `ProcessDefinitionKey`                                              |             |
-| `body`                 | `GetProcessDefinitionStatisticsRequest`                             |             |
+| `body`                 | `ProcessDefinitionElementStatisticsQuery`                           |             |
 | `consistency`          | `ConsistencyOptions<ProcessDefinitionElementStatisticsQueryResult>` |             |
 | `ct`                   | `CancellationToken`                                                 |             |
 
 **Returns:** `Task<ProcessDefinitionElementStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessDefinitionStatisticsExample(ProcessDefinitionKey processDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessDefinitionStatisticsAsync(
+        processDefinitionKey,
+        new ProcessDefinitionElementStatisticsQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Element: {stat.ElementId}");
+    }
+}
+```
 
 #### GetProcessDefinitionXmlAsync(ProcessDefinitionKey, ConsistencyOptions<object>?, CancellationToken)
 
@@ -3865,28 +6091,56 @@ Returns process definition as XML.
 
 **Returns:** `Task<Object>`
 
-#### GetStartProcessFormAsync(ProcessDefinitionKey, ConsistencyOptions<GetStartProcessFormResponse>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<GetStartProcessFormResponse> GetStartProcessFormAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<GetStartProcessFormResponse>? consistency = null, CancellationToken ct = default)
+public static async Task GetProcessDefinitionXmlExample(ProcessDefinitionKey processDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessDefinitionXmlAsync(
+        processDefinitionKey);
+
+    Console.WriteLine($"XML: {result}");
+}
+```
+
+#### GetStartProcessFormAsync(ProcessDefinitionKey, ConsistencyOptions<FormResult>?, CancellationToken)
+
+```csharp
+public Task<FormResult> GetStartProcessFormAsync(ProcessDefinitionKey processDefinitionKey, ConsistencyOptions<FormResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Get process start form
 Get the start form of a process.
 Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
 
-| Parameter              | Type                                              | Description |
-| ---------------------- | ------------------------------------------------- | ----------- |
-| `processDefinitionKey` | `ProcessDefinitionKey`                            |             |
-| `consistency`          | `ConsistencyOptions<GetStartProcessFormResponse>` |             |
-| `ct`                   | `CancellationToken`                               |             |
+| Parameter              | Type                             | Description |
+| ---------------------- | -------------------------------- | ----------- |
+| `processDefinitionKey` | `ProcessDefinitionKey`           |             |
+| `consistency`          | `ConsistencyOptions<FormResult>` |             |
+| `ct`                   | `CancellationToken`              |             |
 
-**Returns:** `Task<GetStartProcessFormResponse>`
+**Returns:** `Task<FormResult>`
 
-#### SearchProcessDefinitionsAsync(SearchProcessDefinitionsRequest, ConsistencyOptions<ProcessDefinitionSearchQueryResult>?, CancellationToken)
+**Example**
 
 ```csharp
-public Task<ProcessDefinitionSearchQueryResult> SearchProcessDefinitionsAsync(SearchProcessDefinitionsRequest body, ConsistencyOptions<ProcessDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+public static async Task GetStartProcessFormExample(ProcessDefinitionKey processDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetStartProcessFormAsync(
+        processDefinitionKey);
+
+    Console.WriteLine($"Form: {result.FormKey}");
+}
+```
+
+#### SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery, ConsistencyOptions<ProcessDefinitionSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessDefinitionSearchQueryResult> SearchProcessDefinitionsAsync(ProcessDefinitionSearchQuery body, ConsistencyOptions<ProcessDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
 ```
 
 Search process definitions
@@ -3894,8 +6148,25 @@ Search for process definitions based on given criteria.
 
 | Parameter     | Type                                                     | Description |
 | ------------- | -------------------------------------------------------- | ----------- |
-| `body`        | `SearchProcessDefinitionsRequest`                        |             |
+| `body`        | `ProcessDefinitionSearchQuery`                           |             |
 | `consistency` | `ConsistencyOptions<ProcessDefinitionSearchQueryResult>` |             |
 | `ct`          | `CancellationToken`                                      |             |
 
 **Returns:** `Task<ProcessDefinitionSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchProcessDefinitionsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchProcessDefinitionsAsync(
+        new ProcessDefinitionSearchQuery());
+
+    foreach (var pd in result.Items)
+    {
+        Console.WriteLine($"Process definition: {pd.Name}");
+    }
+}
+```

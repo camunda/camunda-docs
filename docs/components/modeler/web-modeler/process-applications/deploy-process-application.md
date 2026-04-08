@@ -4,9 +4,11 @@ title: Validate and deploy your process application
 description: Validate your process application in development before deploying it to testing, staging, or production.
 ---
 
-import DeployImg from './img/define-stages-deploy.png'
-import RunProcessApplicationImg from './img/run-process-application.png'
+import DeployImg from './img/deploy-process-application.png'
+import DeployFileImg from './img/deploy-file.png'
 import DeployErrorImg from './img/deploy-error.png'
+import ResourcesToDeployImg from './img/resources-to-deploy.png'
+import RunProcessApplicationImg from './img/run-process-application.png'
 
 Validate your process application in development before deploying it to testing, staging, or production.
 
@@ -14,7 +16,7 @@ Validate your process application in development before deploying it to testing,
 
 Use [Play mode](../validation/play-your-process.md) to validate your process application in development.
 
-1. Open the [main process](create-a-process-application.md#main-process).
+1. Open the BPMN diagram in the process application that you want to validate.
 1. Select the **Play** tab to play the process application using your selected development cluster.
 1. Perform validation as required, for example, debug your process logic and test the process application.
 
@@ -26,28 +28,30 @@ To learn more about using Play for validation, see [Play mode for rapid validati
 
 ### Before deploying a process application
 
-- If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
+- If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
 
 Once validation is complete, deploy your process application to cluster stages in your [development lifecycle](./process-application-pipeline.md), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
 
-1. Open the [main process](create-a-process-application.md#main-process).
-1. Select the **Implement** tab.
-1. Select **Deploy** to open the **Deploy process application** modal.
+1. Open the [process application homepage](create-a-process-application.md#process-application-homepage).
+1. Select the **Deploy latest changes** option from the **Deploy & run** combo button to open the **Deploy process application** modal.
    <p><img src={DeployImg} alt="Deploy a process application" /></p>
 1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) is provided.
 1. Perform any other actions as required, such as:
    - Unpausing the chosen cluster if it has been auto-paused. Select **Resume cluster** within the **Cluster Details**.
    - Managing the cluster. Select **Manage**.
-   - [Defining the stages](process-application-pipeline.md#deployment-pipeline-stages) of your deployment pipeline. Select **Define stages**.
 1. Select **Deploy** to deploy the process application to the selected cluster.
 
-All BPMN, DMN, and form files contained in the process application are deployed as a single bundle.
+When you deploy from the process application homepage, all BPMN, DMN, and form files in the process application are deployed as a single bundle.
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters).
+In Self-Managed, you can deploy your process application to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters).
 
 :::note
 If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a process application cannot be deployed incompletely or in an inconsistent state.
 :::
+
+You can also open the deployment modal from the details page of any deployable file in the process application. In that case, the modal includes an additional option to select the resources to deploy.
+
+<p><img src={DeployFileImg} alt="Deploy process application modal from a file details page with options to select resources to deploy" /></p>
 
 ## Run your process application
 
@@ -59,15 +63,15 @@ Use Play to validate your process application in a development cluster, and only
 
 To run your process application:
 
-1. Open the [main process](create-a-process-application.md#main-process).
-1. Select the **Implement** tab.
-1. Select **Run** to open the **Start instance** modal.
+1. Open the [process application homepage](create-a-process-application.md#process-application-homepage).
+1. Select **Deploy & run** to open the **Deploy & run process application** modal.
    <p><img src={RunProcessApplicationImg} alt="Run a process application" /></p>
-1. Select **Run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](../../../operate/operate-introduction.md). Open this link to monitor the process instance. If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:<ul><li>`READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type</li><li>`operate` permission to the `COMPONENT` resource type</li></ul></li></ul></p>
+1. Select the process for which you want to start a new instance in **Process to run**.
+1. Select **Deploy & run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](../../../operate/operate-introduction.md). Open this link to monitor the process instance. If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:<ul><li>`READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type</li><li>`operate` permission to the `COMPONENT` resource type</li></ul></li></ul></p>
 
-:::note
-Single-file deployment is not supported in a process application. If you select **Deploy** or **Run** in any diagram other than the main process, you are prompted to open the main process for deployment.
-:::
+You can also open the **Deploy & run** modal from the details page of any BPMN file in the process application. In that case, the current process is run and the modal includes an additional option to select the resources to deploy.
+
+<p><img src={ResourcesToDeployImg} alt="Resources to deploy" /></p>
 
 ## Deployment errors
 
@@ -79,10 +83,5 @@ The message typically provides the name of the affected resource, the ID of the 
 
 ### Deployment of external resources
 
-You can link BPMN processes, DMN decisions, or forms that are not part of the process application itself (external
-resources) from any process inside a process application.
-
-Note that when you deploy the process application:
-
-- Linked external forms are deployed together with the process application.
-- Linked external BPMN and DMN diagrams are _not_ deployed together. You must deploy these separately.
+You can link BPMN processes, DMN decisions, or forms that are not part of the process application itself (external resources) from any process inside a process application.
+When you deploy the process application, linked resources located outside the process application are _not_ deployed with the process application, so you must deploy them separately.

@@ -4,8 +4,6 @@ title: "Secondary storage"
 description: "Learn how secondary storage works in Camunda Self-Managed environments, how it interacts with the Zeebe engine, and how to configure or manage it effectively."
 ---
 
-import DataFlowImg from '../img/diagram-secondary-storage-data-flow.png';
-
 Camunda uses a layered storage model that separates workflow execution data from data used by web applications and APIs.
 
 ## About secondary storage
@@ -27,7 +25,7 @@ Camunda supports multiple secondary storage backends.
 For the latest list of supported database versions, see the  
 [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
-Both document-store and RDBMS backends are valid secondary storage choices in Self-Managed deployments. Support maturity can vary by product area and version (for example, Orchestration Cluster APIs, Operate, Tasklist, Identity, or Optimize), so confirm current compatibility details before choosing a backend.
+Both document-store and RDBMS backends are valid secondary storage choices in Self-Managed deployments. Support maturity can vary by product area and version (for example, the Orchestration Cluster API, Operate, Tasklist, Admin, or Optimize), so confirm current compatibility details before choosing a backend.
 
 | Database type          | Availability         | Use case                                                                                                                                                                                          |
 | :--------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -38,19 +36,50 @@ Both document-store and RDBMS backends are valid secondary storage choices in Se
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
 :::
 
+```mermaid
+graph TD
+    subgraph oc["Orchestration Cluster"]
+        broker["Zeebe Broker"]
+        exp_rdbms["RDBMS Exporter"]
+        exp_camunda["Camunda Exporter\n(for Orchestration Cluster on ES/OS)"]
+        exp_opt["Elasticsearch/OpenSearch Exporter\n(for Optimize)"]
+        api["Orchestration Cluster API"]
+        apps["Operate · Tasklist · Admin"]
+    end
+    rdbms["RDBMS\n(PostgreSQL, Oracle, MariaDB, MySQL)"]
+    es["Elasticsearch/OpenSearch"]
+    opt["Optimize\n(document-store required)"]
+    broker -->|"Enable for RDBMS backend"| exp_rdbms
+    broker -.->|"Enable for document-store backend"| exp_camunda
+    broker -.->|"Enable when Optimize is deployed"| exp_opt
+    exp_rdbms -->|"Write"| rdbms
+    exp_camunda -->|"Write"| es
+    exp_opt -.->|"Write"| es
+    apps -->|"Use"| api
+    api -->|"Query selected backend"| rdbms
+    api -.->|"Query selected backend"| es
+    opt -.->|"Read/Write (if deployed)"| es
+    style broker fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style exp_rdbms fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style exp_camunda fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style exp_opt fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style api fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style apps fill:#e4eef8,stroke:#2272c9,color:#14082c
+    style rdbms fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style es fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    style oc fill:#f0f5ff,stroke:#2272c9
+    style opt fill:#e8fdf1,stroke:#10c95d,color:#14082c
+```
+
 :::note
 Starting in 8.9, Camunda 8 Run and default lightweight installs use H2 as the default secondary storage. Elasticsearch remains a supported alternative in Camunda 8 Run. OpenSearch and RDBMS-based secondary storage are supported in Self-Managed deployments. Enable the backend you need explicitly when required.
+
+H2 is a convenience default for local development, testing, and evaluation. It is not a production reference architecture and is not a valid backend for multi-broker Helm clusters.
 :::
 
-### Data flow
-
-The following diagram shows how secondary storage fits into the Camunda data flow.
-
-<img src={DataFlowImg} alt="Camunda data flow showing secondary storage" class="img-noborder img-transparent"/>
-
 1. The Zeebe broker executes workflow instances and stores state in primary storage.
-1. The exporter, part of Zeebe, streams workflow and task data to secondary storage.
-1. Orchestration Cluster applications and APIs (for example, Operate, Tasklist, Identity, and the Orchestration Cluster REST API) read data from secondary storage.
+1. Exporters, running as part of Zeebe, write orchestration data to the configured secondary storage backend and can write to multiple targets when needed.
+1. Operate, Tasklist, and Admin use the Orchestration Cluster API, which reads data from the configured secondary storage backend.
 
 ## Choosing a secondary storage backend
 
@@ -58,7 +87,7 @@ Camunda supports multiple secondary storage backends, and the right choice depen
 
 For guidance on supported vendors, versions, and configuration, see:
 
-- [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
+- [Secondary storage configuration](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)
 - [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 

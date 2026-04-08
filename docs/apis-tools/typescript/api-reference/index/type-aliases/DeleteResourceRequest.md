@@ -14,9 +14,11 @@ type DeleteResourceRequest = {
 } | null;
 ```
 
-Defined in: [gen/types.gen.ts:2135](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2135)
+Defined in: [gen/types.gen.ts:2238](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2238)
 
-## Type Declaration
+## Union Members
+
+### Type Literal
 
 ```ts
 {
@@ -25,10 +27,10 @@ Defined in: [gen/types.gen.ts:2135](https://github.com/camunda/orchestration-clu
 }
 ```
 
-### deleteHistory?
+#### deleteHistory?
 
 ```ts
-optional deleteHistory: boolean;
+optional deleteHistory?: boolean;
 ```
 
 Indicates if the historic data of a process resource should be deleted via a
@@ -39,10 +41,12 @@ This flag is only effective for process resources. For other resource types
 will be deleted. In those cases, the `batchOperation` field in the response
 will not be populated.
 
-### operationReference?
+#### operationReference?
 
 ```ts
-optional operationReference: OperationReference;
+optional operationReference?: OperationReference;
 ```
+
+---
 
 `null`

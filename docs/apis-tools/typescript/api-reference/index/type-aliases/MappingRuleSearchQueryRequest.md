@@ -11,14 +11,14 @@ mdx:
 type MappingRuleSearchQueryRequest = SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:4602](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4602)
+Defined in: [gen/types.gen.ts:5243](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5243)
 
 ## Type Declaration
 
 ### filter?
 
 ```ts
-optional filter: MappingRuleFilter;
+optional filter?: MappingRuleFilter;
 ```
 
 The mapping rule search filters.
@@ -26,7 +26,7 @@ The mapping rule search filters.
 ### sort?
 
 ```ts
-optional sort: MappingRuleSearchQuerySortRequest[];
+optional sort?: MappingRuleSearchQuerySortRequest[];
 ```
 
 Sort field criteria.
