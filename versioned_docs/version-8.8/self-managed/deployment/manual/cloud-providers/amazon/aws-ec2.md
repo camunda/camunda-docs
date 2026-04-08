@@ -329,6 +329,8 @@ The `procedure` directory contains Bash scripts for installing and configuring C
 
 2. Configure script behavior using the following environment variables:
    - `CLOUDWATCH_ENABLED`: Defaults to `false`. Set to `true` to install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
+   - `CAMUNDA_DISTRO_USER`: Camunda Enterprise LDAP username for authenticating against `artifacts.camunda.com` (Artifactory). Required to download artifacts from `artifacts.camunda.com`.
+   - `CAMUNDA_DISTRO_PASSWORD`: Camunda Enterprise LDAP password for authenticating against `artifacts.camunda.com` (Artifactory). Required to download artifacts from `artifacts.camunda.com`.
 
 3. Override default versions in the `camunda-install.sh` script by modifying these variables:
    - `OPENJDK_VERSION`: The Temurin Java version to install.
