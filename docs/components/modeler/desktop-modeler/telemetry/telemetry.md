@@ -215,7 +215,7 @@ Example task testing finished event:
 
 ### Variables panel events
 
-Variables panel events are sent on different interactions with the [Variables](../variables.md) panel:
+**Variables** panel events are sent on different interactions with the [Variables](../variables.md) panel:
 
 - User filtered variables using the search input. The search term is **not** included in the event.
 - User expanded or collapsed a scope section.
