@@ -246,7 +246,7 @@ function ConnectorsIcon() {
   );
 }
 
-function IdentityIcon() {
+function AdminIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 501.65 607.67" fill="none">
       <path
@@ -1055,8 +1055,8 @@ Available skills:
                     )}
                     className={styles.archBox}
                   >
-                    <IdentityIcon />
-                    <strong>Identity</strong>
+                    <AdminIcon />
+                    <strong>Admin</strong>
                     <span>Authentication and authorization</span>
                   </Link>
                 </div>
