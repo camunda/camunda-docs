@@ -531,6 +531,7 @@
             "components/modeler/desktop-modeler/troubleshooting"
           ]
         },
+        "components/modeler/using-web-and-desktop-modeler-together",
         {
           "Camunda Forms": [
             "components/modeler/forms/camunda-forms-reference",
@@ -593,7 +594,6 @@
           ]
         },
         "components/modeler/data-handling",
-        "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/task-testing",
         {
           "Reference": [
