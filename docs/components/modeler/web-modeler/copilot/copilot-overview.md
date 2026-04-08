@@ -6,6 +6,7 @@ description: "Camunda Copilot is an AI assistant integrated into Web Modeler tha
 ---
 
 <span class="badge badge--alpha">Alpha</span>
+<span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
 import CopilotBpmnGeneration from './img/copilot-bpmn-generation.png';
 import CopilotConversationHistory from './img/copilot-conversation-history.png';
