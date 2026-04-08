@@ -109,7 +109,7 @@ camunda:
 </Tabs>
 
 :::tip Manage secrets safely
-Avoid committing credentials to your test configuration files. CPT properties support [Spring's external configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html), so you can inject secrets through environment variables, CI/CD secret stores, or a gitignored Spring profile. See the [CPT configuration reference](/apis-tools/testing/configuration.md) for details.
+Avoid committing credentials to your test configuration files. CPT properties support [Spring's external configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html), so you can inject secrets through environment variables, CI/CD secret stores, or other techniques. See the [CPT configuration reference](/apis-tools/testing/configuration.md) for details.
 :::
 
 The AI agent can still interact with the configured LLM provider, while the test controls the tool executions.
