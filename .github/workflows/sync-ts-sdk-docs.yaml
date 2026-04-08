@@ -94,13 +94,23 @@ jobs:
           npm ci
           npx prettier --write "${{ steps.resolve.outputs.docs_root }}/apis-tools/typescript/api-reference/"
 
-      - name: Regenerate Orchestration API docs with SDK examples
+      - name: Verify SDK examples don't break docs generation
         working-directory: docs
         run: |
-          if [ -n "${{ github.event.inputs.docs_version }}" ]; then
-            npm run api:generate -- camunda "${{ github.event.inputs.docs_version }}"
+          npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
+          npx docusaurus gen-api-docs camunda -p api-camunda-openapi
+          # Discard generated MDX — this step only validates, not commits
+          git checkout -- docs/apis-tools/orchestration-cluster-api-rest/specifications/ || true
+
+      - name: Check for SDK example changes
+        id: check_examples
+        working-directory: docs
+        run: |
+          if git diff --name-only | grep -q '.sdk-repos/'; then
+            echo "examples_changed=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::The SDK examples have changed. Run the Sync Camunda REST API workflow to pick up the changes for the OpenAPI documentation."
           else
-            npm run api:generate -- camunda
+            echo "examples_changed=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Check for changes
