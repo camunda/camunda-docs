@@ -42,7 +42,7 @@ jobs:
           args: >
             ec2 authorize-security-group-ingress
             --group-id ${{ secrets.AWS_SECURITY_GROUP_NAME }}
-            --ip-permissions 'IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges=[${{ secrets.PUBLISH_IPS }}]'
+            --ip-permissions IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges=[${{ secrets.PUBLISH_IPS }}]
             --output off
       - name: Publish
         uses: burnett01/rsync-deployments@5.2
@@ -64,6 +64,6 @@ jobs:
           args: >
             ec2 revoke-security-group-ingress
             --group-id ${{ secrets.AWS_SECURITY_GROUP_NAME }}
-            --ip-permissions 'IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges=[${{ secrets.PUBLISH_IPS }}]'
+            --ip-permissions IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges=[${{ secrets.PUBLISH_IPS }}]
             --output off
         if: always()
