@@ -121,18 +121,19 @@ For the full property reference, see [judge configuration](/apis-tools/testing/c
 
 ## Step 3: Set up the test class
 
-Create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`. Use `@TestDeployment` to declare which resources CPT should deploy before each test, and inject the `CamundaClient` and `CamundaProcessTestContext`:
+Add the `@Deployment` annotation to your Spring Boot application class to declare which resources CPT should deploy:
 
 ```java
-@SpringBootTest
+@SpringBootApplication
+@Deployment(resources = {"classpath*:/bpmn/**/*.bpmn", "classpath*:/forms/**/*.form"})
+public class MyApplication {}
+```
+
+Then create a test class annotated with `@SpringBootTest` and `@CamundaSpringProcessTest`, and inject the `CamundaClient` and `CamundaProcessTestContext`:
+
+```java
+@SpringBootTest(classes = MyApplication.class)
 @CamundaSpringProcessTest
-@TestDeployment(
-    resources = {
-        "bpmn/ai-agent-chat-with-tools.bpmn",
-        "forms/ai-agent-chat-initial-request.form",
-        "forms/ai-agent-chat-user-feedback.form",
-        "forms/ai-agent-chat-human-send-email-request.form"
-    })
 class AiAgentProcessTest {
 
     @Autowired
