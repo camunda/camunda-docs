@@ -287,10 +287,6 @@ void shouldMockDmnDecision() {
 
 The `when(condition).then(action)` API on `CamundaProcessTestContext` registers background behaviors that react to process state changes without blocking the test thread. This is useful for non-deterministic flows where the execution order is unknown. You can register multiple behaviors before starting the process, and they will react independently as the process progresses. Behaviors are cleared automatically after each test.
 
-:::tip
-For a guided walkthrough of using conditional behavior to test AI agents, see [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md).
-:::
-
 ```java
 @Test
 void shouldCompleteTaskAutomatically() {
