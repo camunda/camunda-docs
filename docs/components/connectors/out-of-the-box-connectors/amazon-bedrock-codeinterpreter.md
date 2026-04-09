@@ -5,9 +5,7 @@ title: Amazon Bedrock Code Interpreter connector
 description: Execute Python code in a secure AWS Bedrock AgentCore sandbox from your BPMN process.
 ---
 
-The **Amazon Bedrock Code Interpreter connector** is an outbound connector that allows you to execute Python code in a secure [Amazon Bedrock AgentCore Code Interpreter](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/code-interpreter-tool.html) sandbox from your BPMN process.
-
-Use this connector to run calculations, analyze data, generate visualizations, and process files within an isolated execution environment.
+With the **Amazon Bedrock Code Interpreter** outbound connector, you can execute Python code in a secure [Amazon Bedrock AgentCore Code Interpreter](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/code-interpreter-tool.html) sandbox from your BPMN process.
 
 ## Prerequisites
 
@@ -34,19 +32,25 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Authentication
 
-Select an authentication type from the **Authentication** dropdown.
+To authenticate, choose one of the methods from the **Authentication** dropdown. The supported options are:
 
-- **Credentials** (SaaS/Self-Managed): Select this option if you have a valid pair of access and secret keys provided by your AWS account administrator.
-
-- **Default Credentials Chain** (Hybrid/Self-Managed only): Select this option if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+- Use **Credentials** if you have a valid pair of access and secret keys provided by your AWS account administrator.
 
 :::note
-The **Default Credentials Chain** option is applicable only for Self-Managed or hybrid distributions.
+This option is applicable for both SaaS and Self-Managed users.
 :::
+
+- Use **Default Credentials Chain** if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+
+:::note
+This option is applicable only for Self-Managed or hybrid distributions.
+:::
+
+For more information on authentication and security in Amazon Bedrock, see [Amazon Bedrock security and privacy](https://aws.amazon.com/bedrock/security-compliance/).
 
 ## Configuration
 
-In the **Region** field, enter the AWS region where the Code Interpreter service is available (for example, `us-east-1`).
+In the **Region** field, enter the AWS region where the Code Interpreter service is available. For example, `us-east-1`.
 
 ## Code execution
 

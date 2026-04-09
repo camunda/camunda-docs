@@ -5,7 +5,7 @@ title: Amazon Bedrock Knowledge Base connector
 description: Perform semantic search over documents indexed in an Amazon Bedrock Knowledge Base from your BPMN process.
 ---
 
-With the **Amazon Bedrock Knowledge Base connector** outbound connector, you can perform semantic search over documents indexed in an [Amazon Bedrock Knowledge Base](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html) from your BPMN process.
+With the **Amazon Bedrock Knowledge Base** outbound connector, you can perform semantic search over documents indexed in an [Amazon Bedrock Knowledge Base](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html) from your BPMN process.
 
 ## Prerequisites
 
