@@ -554,18 +554,14 @@ module.exports = {
                   ],
                 },
                 {
-                  "AI features": [
-                    {
-                      type: "category",
-                      label: "Camunda Copilot",
-                      link: {
-                        type: "doc",
-                        id: "components/modeler/web-modeler/copilot/copilot-overview",
-                      },
-                      items: [
-                        "components/modeler/web-modeler/copilot/built-in-tools",
-                      ],
-                    },
+                  type: "category",
+                  label: "Camunda Copilot",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/copilot/copilot-overview",
+                  },
+                  items: [
+                    "components/modeler/web-modeler/copilot/built-in-tools",
                   ],
                 },
                 {
