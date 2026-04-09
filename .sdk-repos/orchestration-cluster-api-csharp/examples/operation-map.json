@@ -10,12 +10,12 @@
     {
       "file": "ProcessInstance.cs",
       "region": "CreateProcessInstanceById",
-      "label": "Create by process definition ID"
+      "label": "By ID"
     },
     {
       "file": "ProcessInstance.cs",
       "region": "CreateProcessInstanceByKey",
-      "label": "Create by process definition key"
+      "label": "By key"
     }
   ],
   "getProcessInstance": [
@@ -166,7 +166,11 @@
     }
   ],
   "getResource": [
-    { "file": "Admin.cs", "region": "GetResource", "label": "Get a resource" }
+    {
+      "file": "Admin.cs",
+      "region": "GetResource",
+      "label": "Get a resource"
+    }
   ],
   "getResourceContent": [
     {
@@ -179,12 +183,12 @@
     {
       "file": "Decision.cs",
       "region": "EvaluateDecisionById",
-      "label": "Evaluate by decision definition ID"
+      "label": "By ID"
     },
     {
       "file": "Decision.cs",
       "region": "EvaluateDecisionByKey",
-      "label": "Evaluate by decision definition key"
+      "label": "By key"
     }
   ],
   "getDecisionDefinition": [
@@ -321,10 +325,18 @@
     }
   ],
   "completeJob": [
-    { "file": "Job.cs", "region": "CompleteJob", "label": "Complete a job" }
+    {
+      "file": "Job.cs",
+      "region": "CompleteJob",
+      "label": "Complete a job"
+    }
   ],
   "failJob": [
-    { "file": "Job.cs", "region": "FailJob", "label": "Fail a job with retry" }
+    {
+      "file": "Job.cs",
+      "region": "FailJob",
+      "label": "Fail a job with retry"
+    }
   ],
   "throwJobError": [
     {
@@ -334,10 +346,18 @@
     }
   ],
   "updateJob": [
-    { "file": "Job.cs", "region": "UpdateJob", "label": "Update a job" }
+    {
+      "file": "Job.cs",
+      "region": "UpdateJob",
+      "label": "Update a job"
+    }
   ],
   "searchJobs": [
-    { "file": "Job.cs", "region": "SearchJobs", "label": "Search jobs" }
+    {
+      "file": "Job.cs",
+      "region": "SearchJobs",
+      "label": "Search jobs"
+    }
   ],
   "correlateMessage": [
     {
@@ -438,7 +458,11 @@
     }
   ],
   "createUser": [
-    { "file": "User.cs", "region": "CreateUser", "label": "Create a user" }
+    {
+      "file": "User.cs",
+      "region": "CreateUser",
+      "label": "Create a user"
+    }
   ],
   "createAdminUser": [
     {
@@ -448,31 +472,67 @@
     }
   ],
   "getUser": [
-    { "file": "User.cs", "region": "GetUser", "label": "Get a user" }
+    {
+      "file": "User.cs",
+      "region": "GetUser",
+      "label": "Get a user"
+    }
   ],
   "searchUsers": [
-    { "file": "User.cs", "region": "SearchUsers", "label": "Search users" }
+    {
+      "file": "User.cs",
+      "region": "SearchUsers",
+      "label": "Search users"
+    }
   ],
   "updateUser": [
-    { "file": "User.cs", "region": "UpdateUser", "label": "Update a user" }
+    {
+      "file": "User.cs",
+      "region": "UpdateUser",
+      "label": "Update a user"
+    }
   ],
   "deleteUser": [
-    { "file": "User.cs", "region": "DeleteUser", "label": "Delete a user" }
+    {
+      "file": "User.cs",
+      "region": "DeleteUser",
+      "label": "Delete a user"
+    }
   ],
   "createGroup": [
-    { "file": "Group.cs", "region": "CreateGroup", "label": "Create a group" }
+    {
+      "file": "Group.cs",
+      "region": "CreateGroup",
+      "label": "Create a group"
+    }
   ],
   "getGroup": [
-    { "file": "Group.cs", "region": "GetGroup", "label": "Get a group" }
+    {
+      "file": "Group.cs",
+      "region": "GetGroup",
+      "label": "Get a group"
+    }
   ],
   "searchGroups": [
-    { "file": "Group.cs", "region": "SearchGroups", "label": "Search groups" }
+    {
+      "file": "Group.cs",
+      "region": "SearchGroups",
+      "label": "Search groups"
+    }
   ],
   "updateGroup": [
-    { "file": "Group.cs", "region": "UpdateGroup", "label": "Update a group" }
+    {
+      "file": "Group.cs",
+      "region": "UpdateGroup",
+      "label": "Update a group"
+    }
   ],
   "deleteGroup": [
-    { "file": "Group.cs", "region": "DeleteGroup", "label": "Delete a group" }
+    {
+      "file": "Group.cs",
+      "region": "DeleteGroup",
+      "label": "Delete a group"
+    }
   ],
   "assignUserToGroup": [
     {
@@ -545,19 +605,39 @@
     }
   ],
   "createRole": [
-    { "file": "Role.cs", "region": "CreateRole", "label": "Create a role" }
+    {
+      "file": "Role.cs",
+      "region": "CreateRole",
+      "label": "Create a role"
+    }
   ],
   "getRole": [
-    { "file": "Role.cs", "region": "GetRole", "label": "Get a role" }
+    {
+      "file": "Role.cs",
+      "region": "GetRole",
+      "label": "Get a role"
+    }
   ],
   "searchRoles": [
-    { "file": "Role.cs", "region": "SearchRoles", "label": "Search roles" }
+    {
+      "file": "Role.cs",
+      "region": "SearchRoles",
+      "label": "Search roles"
+    }
   ],
   "updateRole": [
-    { "file": "Role.cs", "region": "UpdateRole", "label": "Update a role" }
+    {
+      "file": "Role.cs",
+      "region": "UpdateRole",
+      "label": "Update a role"
+    }
   ],
   "deleteRole": [
-    { "file": "Role.cs", "region": "DeleteRole", "label": "Delete a role" }
+    {
+      "file": "Role.cs",
+      "region": "DeleteRole",
+      "label": "Delete a role"
+    }
   ],
   "assignRoleToUser": [
     {
@@ -651,7 +731,11 @@
     }
   ],
   "getTenant": [
-    { "file": "Tenant.cs", "region": "GetTenant", "label": "Get a tenant" }
+    {
+      "file": "Tenant.cs",
+      "region": "GetTenant",
+      "label": "Get a tenant"
+    }
   ],
   "searchTenants": [
     {
