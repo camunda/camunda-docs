@@ -36,7 +36,7 @@ See [the interactive Operate API Explorer][operate-api-explorer] for specificati
 
 A Swagger UI is also available within a running instance of Operate, at `https://${base-url}/swagger-ui/index.html`.
 
-For SaaS: `https://${REGION}.api.camunda.io/${CLUSTER_ID}/operate/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
+For SaaS: `https://${REGION}.api.camunda.io/${CLUSTER_ID}/swagger`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
 :::note
 Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
