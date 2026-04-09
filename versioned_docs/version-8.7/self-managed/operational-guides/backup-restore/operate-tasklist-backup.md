@@ -8,6 +8,12 @@ keywords: ["backup", "backups"]
 
 Back up your Operate and Tasklist data using the Backup Management API.
 
+:::warning Breaking changes!
+In Camunda 8.5 and earlier, the backup API (`/actuator/backups`) was reachable on the application HTTP port by default (for example, `http://<host>:8080/actuator/backups`).
+
+As of the Camunda 8.6 release, the `/actuator` endpoints (including `/backups`) now default to port 9600. Ensure your `management.server.port` configuration parameter is correctly set before continuing.
+:::
+
 ## About this API
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
@@ -26,7 +32,7 @@ Operate provides an API to perform a backup and manage backups (list, check stat
 
 The backup API is exposed via the Spring Boot management (Actuator) port. In Camunda 8 web applications, we recommend using a dedicated management port that is different from the public application HTTP port. The default management port is 9600, but this can differ depending on your setup, and you can change it via the `management.server.port` configuration parameter.
 
-Do not configure the management API to use the same port as the main application HTTP port; this is not recommended and can lead to startup errors (for example, `Management-specific server address cannot be configured as the management server is not listening on a separate port`). When upgrading from 8.5 to 8.6 or later, update any backup scripts that previously called the application port so they target the management port URL instead (for example, `http://<host>:9600/actuator/backups`).
+Do not configure the management API to use the same port as the main application HTTP port; this is not recommended and can lead to startup errors (for example, `Management-specific server address cannot be configured as the management server is not listening on a separate port`). 
 
 :::warning
 Usage of this API requires the backup store to be configured for the component.
