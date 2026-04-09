@@ -1220,8 +1220,13 @@ module.exports = {
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {
-          "Optimize API": [
-            "apis-tools/optimize-api/overview",
+          type: "category",
+          label: "Optimize API",
+          link: {
+            type: "doc",
+            id: "apis-tools/optimize-api/overview",
+          },
+          items: [
             "apis-tools/optimize-api/optimize-api-authentication",
             "apis-tools/optimize-api/optimize-api-tutorial",
             {

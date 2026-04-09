@@ -1,13 +1,21 @@
 ---
 id: grpc
-title: "Overview"
+title: "Zeebe API (gRPC)"
 sidebar_position: 1
 slug: /apis-tools/zeebe-api/overview
-description: "Zeebe clients use gRPC to communicate with the cluster. Activate jobs, cancel and create process instances, and more."
+description: "Use the Zeebe API (gRPC) to manage and interact with Camunda 8 Orchestration Clusters."
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
-You can use [gRPC](https://grpc.io/) — a high-performance, cross-platform remote procedure call (RPC) framework — to communicate with the Orchestration Cluster.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+You can use the [gRPC](https://grpc.io/) high-performance, cross-platform remote procedure call (RPC) framework to communicate with the Orchestration Cluster.
+
+Zeebe clients use gRPC to communicate with the cluster. For example, you can use this API to activate jobs, cancel and create process instances, and more.
 
 ## Why use gRPC?
 

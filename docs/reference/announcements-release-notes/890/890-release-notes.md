@@ -2,20 +2,22 @@
 id: 890-release-notes
 title: "8.9 Release notes"
 sidebar_label: Release notes
-description: "Release notes for 8.9, including alphas"
+description: "Release notes for new features included in the 8.9 minor release, including alpha feature releases."
 keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
 page_rank: 90
 ---
 
-These release notes identify the main new features included in the 8.9 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
+import PageDescription from '@site/src/components/PageDescription';
 
-| Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Upgrade guides |
-| :----------------- | :--------------------------- | :-------------------------------------------------------------------------- | :------------- |
-| 14 April 2026      | 13 October 2028              | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | -              |
+<PageDescription />
+
+| Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Upgrade guides                                                                                     |
+| :----------------- | :--------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 13 October 2028              | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
-- See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) to learn more about supported environment changes and breaking changes or deprecations.
+- See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) to learn more about supported environment changes, breaking changes, and deprecations.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
 
 :::

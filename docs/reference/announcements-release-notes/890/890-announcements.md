@@ -2,17 +2,18 @@
 id: 890-announcements
 title: "8.9 Release announcements"
 sidebar_label: Release announcements
-description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release."
+description: "Supported environment changes, breaking changes, and deprecations in Camunda 8.9."
 toc_max_heading_level: 3
 ---
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release.
+<PageDescription />
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------- |
-| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | -              |
+| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
+| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
