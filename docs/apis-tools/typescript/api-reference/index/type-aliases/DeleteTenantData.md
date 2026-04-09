@@ -11,17 +11,13 @@ mdx:
 type DeleteTenantData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15631](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15631)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:15632](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15632)
 
 ---
 
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:15632](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:15633](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15633)
 
 #### tenantId
 
@@ -46,10 +40,8 @@ The unique identifier of the tenant.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:15639](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15639)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:15639](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/tenants/{tenantId}";
 ```
-
-Defined in: [gen/types.gen.ts:15640](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15640)

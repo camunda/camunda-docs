@@ -9,10 +9,10 @@ Each version of the Migration Tooling is bound to a specific version of Camunda 
 
 Camunda only recommends and supports these combinations:
 
-| Migration Tooling Version | Camunda 7 Version | Camunda 8 Version |
-| :------------------------ | :---------------- | :---------------- |
-| `0.1.x` \*                | `7.24.x`          | `8.8.x`           |
-| `0.2.x`                   | `7.24.x`          | `8.8.x`           |
-| `0.3.x`                   | `7.24.5+`         | `8.9.x`           |
+| Migration Tooling Version | Camunda 7 Version | Camunda 8 Version | Support Status           |
+| :------------------------ | :---------------- | :---------------- | :----------------------- |
+| `0.1.x` \*                | `7.24.x`          | `8.8.x`           | 🔴 **End of Life (EOL)** |
+| `0.2.x`                   | `7.24.x`          | `8.8.x`           | ✅ **Supported**         |
+| `0.3.x`                   | `7.24.6+`         | `8.9.x`           | ✅ **Supported**         |
 
 \* Data Migrator only. Code Conversion and Diagram Converter were added to the Migration Tooling in version 0.2.0.

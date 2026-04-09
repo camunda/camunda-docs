@@ -1,7 +1,7 @@
 ---
 id: send-document-to-external-system-via-connector
-title: Send a document to an external system via a connector
-description: "Learn more about outbound connectors that support document handling."
+title: Send documents with outbound connectors
+description: "Learn how to send documents from Camunda processes to external systems using outbound connectors that support document handling."
 keywords: ["document handling"]
 ---
 

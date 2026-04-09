@@ -222,7 +222,7 @@ You can adjust these values if your organization uses different claim mappings.
 For more information, see the [Orchestration Cluster OIDC configuration guide](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-1-configure-the-oidc-client-id-claim).
 
 :::note Username display in Web Modeler (Helm)
-With Helm defaults, usernames are typically resolved from `preferred_username`. If you want Web Modeler to use the `name` claim instead (for example, to show display names), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `webapp` environment.
+With Helm defaults, usernames are typically resolved from `preferred_username`. If you want Web Modeler to use the `name` claim instead (for example, to show display names), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
 
 See [Identity/Keycloak configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#identity--keycloak-1).
 :::
@@ -322,7 +322,7 @@ Replace `<OPTIMIZE_URL>` with the base URL of Optimize as it will be reachable f
 Add the following configuration for Web Modeler:
 
 :::note
-If you want Web Modeler to resolve usernames from the `name` claim instead of `preferred_username`, add `CAMUNDA_IDENTITY_USERNAMECLAIM=name` to the Web Modeler `webapp` environment configuration.
+If you want Web Modeler to resolve usernames from the `name` claim instead of `preferred_username`, add `CAMUNDA_IDENTITY_USERNAMECLAIM=name` to the Web Modeler `restapi` environment configuration.
 :::
 
 ```yaml
@@ -510,7 +510,7 @@ kubectl port-forward svc/camunda-connectors 8086:8080
 kubectl port-forward svc/camunda-optimize 8083:80
 
 # Web Modeler
-kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
+kubectl port-forward svc/camunda-web-modeler-restapi 8070:80
 kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 
 # Console

@@ -11,8 +11,6 @@ mdx:
 type DirectAncestorKeyInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:6091](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6091)
-
 Provides a concrete key to use as ancestor scope for the created element instance.
 
 ## Properties
@@ -20,10 +18,8 @@ Provides a concrete key to use as ancestor scope for the created element instanc
 ### ancestorElementInstanceKey
 
 ```ts
-ancestorElementInstanceKey: string | ElementInstanceKey;
+ancestorElementInstanceKey: ElementInstanceKey;
 ```
-
-Defined in: [gen/types.gen.ts:6103](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6103)
 
 The key of the ancestor scope the element instance should be created in.
 Set to -1 to create the new element instance within an existing element instance of the
@@ -37,7 +33,5 @@ specifically with this property by providing its key.
 ```ts
 ancestorScopeType: string;
 ```
-
-Defined in: [gen/types.gen.ts:6095](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6095)
 
 The type of ancestor scope instruction.

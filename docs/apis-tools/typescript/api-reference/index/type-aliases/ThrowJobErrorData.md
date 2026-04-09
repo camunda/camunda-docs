@@ -11,8 +11,6 @@ mdx:
 type ThrowJobErrorData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12034](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12034)
-
 ## Properties
 
 ### body
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:12034](https://github.com/camunda/orchestration-cl
 body: JobErrorRequest;
 ```
 
-Defined in: [gen/types.gen.ts:12035](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12035)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:12035](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:12036](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12036)
 
 #### jobKey
 
@@ -46,10 +40,8 @@ The key of the job.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:12042](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12042)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:12042](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/jobs/{jobKey}/error";
 ```
-
-Defined in: [gen/types.gen.ts:12043](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12043)

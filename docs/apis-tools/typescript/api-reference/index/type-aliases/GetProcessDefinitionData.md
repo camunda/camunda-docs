@@ -11,17 +11,13 @@ mdx:
 type GetProcessDefinitionData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12831](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12831)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:12832](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12832)
 
 ---
 
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:12832](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:12833](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12833)
 
 #### processDefinitionKey
 
@@ -46,10 +40,8 @@ The assigned key of the process definition, which acts as a unique identifier fo
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:12840](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12840)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:12840](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/process-definitions/{processDefinitionKey}";
 ```
-
-Defined in: [gen/types.gen.ts:12841](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12841)

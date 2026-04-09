@@ -33,7 +33,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.19 (previously 8.16+).
 
 - This aligns with the Elasticsearch 8 versions maintained by Elastic as of April 2025.
-- The default Elasticsearch version used by Camunda 8 Run, Docker Compose, and Helm templates has been updated to `8.19.9+` accordingly.
+- The default Elasticsearch version used by Docker Compose examples and Helm templates has been updated to `8.19.9+` accordingly.
 - Upgrade your Elasticsearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
 - For best results, Camunda recommends upgrading to the latest supported Elasticsearch 9.2+ to take advantage of new features and improvements.
 
@@ -147,6 +147,10 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 :::info 8.9 APIs & Tools migration guide
 Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using the [8.9 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-89.md).
+:::
+
+:::tip Client and API compatibility
+Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test are **forward-compatible** with the Orchestration Cluster, meaning you can upgrade the cluster and clients independently. For example, you can run a client on 8.8 against a cluster on 8.9, see [Client and API compatibility](/reference/public-api.md#client-and-api-compatibility).
 :::
 <br/>
 
@@ -444,6 +448,27 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removed: Web Modeler API milestone endpoints
+
+The Web Modeler API endpoints under `/api/v1/milestones` that were deprecated in Camunda 8.8 are now removed in 8.9.
+
+**Action:** Use the corresponding endpoints under `/api/v1/versions` instead.
+
+:::warning Web Modeler SaaS
+In Web Modeler SaaS, the endpoints will no longer be available as of April 14, 2026.
+:::
+
+<p className="link-arrow">[Web Modeler API](/apis-tools/web-modeler-api/index.md)</p>
+
+</div>
+</div>
+
 ## Connectors
 
 <div className="release-announcement-row">
@@ -527,6 +552,26 @@ For more information on optimizing connector performance with virtual threads, s
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Kafka consumer connector: auto-generated consumer group ID format changed
+
+When upgrading from Camunda 8.8 to 8.9, the auto-generated Kafka consumer group ID changes format. This affects Kafka consumer connectors only when no explicit consumer group ID is configured. The change is a side effect of a runtime improvement that enables cross-version connector deduplication.
+
+- **8.8 format:** `kafka-inbound-connector--<processDefinitionKey>-<elementId>` (numeric key)
+- **8.9 format:** `kafka-inbound-connector--<bpmnProcessId>-<hash>` (stable process ID)
+
+Because Kafka treats a changed group ID as a brand-new consumer group, affected connectors do not reuse their committed offsets after the upgrade and may reprocess messages.
+
+**Action required:** Before upgrading to 8.9, set an explicit **Consumer Group ID** in each Kafka consumer connector configuration to preserve the existing consumer group identity. You can [look up existing consumer groups](https://docs.confluent.io/kafka/operations-tools/manage-consumer-groups.html#list-groups-and-view-offsets) to find the current group ID in use. See the [Kafka connector documentation](/components/connectors/out-of-the-box-connectors/kafka.md?kafka=inbound) for details.
+
+</div>
+</div>
+
 ## Data
 
 <div className="release-announcement-row">
@@ -537,13 +582,13 @@ For more information on optimizing connector performance with virtual threads, s
 
 #### Camunda 8 Run with H2 as the default secondary data storage
 
-Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch.
+Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch. Elasticsearch is no longer bundled with Camunda 8 Run.
 
 When running with H2 (or any other RDBMS) as secondary storage, Camunda is only compatible with the V2 API. As a result, some features are not available in Operate and Tasklist. See [Migrate to the V2 Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
 
-To continue using features exclusive to the V1 API, you must run Camunda with Elasticsearch and switch back to V1 mode.
+To continue using features exclusive to the V1 API, configure Camunda 8 Run with an external Elasticsearch instance and switch back to V1 mode.
 
-<p className="link-arrow">[Camunda 8 Run default secondary storage](/self-managed/quickstart/developer-quickstart/c8run.md#default-h2-camunda-8-run)</p>
+<p className="link-arrow">[Camunda 8 Run default secondary storage](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md#default-h2-camunda-8-run)</p>
 
 </div>
 </div>
@@ -738,33 +783,6 @@ The configuration keys `global.secrets.autoGenerated`, `global.secrets.name`, an
 </div>
 <div className="release-announcement-content">
 
-#### Helm chart: TLS secret configuration pattern
-
-The legacy TLS secret configuration using `*.tls.existingSecret` is deprecated.
-
-Legacy keys still work in Camunda 8.9 but will cause deprecation warnings and are removed in a future version.
-
-Affected paths:
-
-| Deprecated path                           | New path                                         |
-| :---------------------------------------- | :----------------------------------------------- |
-| `global.elasticsearch.tls.existingSecret` | `global.elasticsearch.tls.secret.existingSecret` |
-| `global.opensearch.tls.existingSecret`    | `global.opensearch.tls.secret.existingSecret`    |
-| `console.tls.existingSecret`              | `console.tls.secret.existingSecret`              |
-
-**Action:** Migrate to the new pattern using `*.tls.secret.existingSecret`.
-
-<p className="link-arrow">[Secret management](/self-managed/deployment/helm/configure/secret-management.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
-
 #### Helm chart: Bitnami subcharts deprecated
 
 The four Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in Camunda 8.9 and will be removed in Camunda 8.10.
@@ -790,14 +808,39 @@ These options are not truly global, as only the Orchestration and Optimize compo
 
 Legacy keys continue to work in Camunda 8.9 with deprecation warnings. Existing deployments will continue to function without changes.
 
-**Action:**
-
-You should migrate to the new component-specific configuration:
+**Action:** You should migrate to the new component-specific configuration:
 
 | Component     | New configuration path                                                                                     |
 | :------------ | :--------------------------------------------------------------------------------------------------------- |
 | Orchestration | `orchestration.data.secondaryStorage.elasticsearch.*` / `orchestration.data.secondaryStorage.opensearch.*` |
 | Optimize      | `optimize.database.elasticsearch.*` / `optimize.database.opensearch.*`                                     |
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: TLS secret configuration pattern
+
+The legacy TLS secret configuration using `*.tls.existingSecret` is deprecated.
+
+Legacy keys still work in Camunda 8.9 but will cause deprecation warnings and are removed in a future version.
+
+This affects the following paths:
+
+| Deprecated path                           | New path                                         |
+| :---------------------------------------- | :----------------------------------------------- |
+| `global.elasticsearch.tls.existingSecret` | `global.elasticsearch.tls.secret.existingSecret` |
+| `global.opensearch.tls.existingSecret`    | `global.opensearch.tls.secret.existingSecret`    |
+| `console.tls.existingSecret`              | `console.tls.secret.existingSecret`              |
+
+**Action:** Migrate to the new pattern using `*.tls.secret.existingSecret`.
+
+<p className="link-arrow">[Secret management](/self-managed/deployment/helm/configure/secret-management.md)</p>
 
 </div>
 </div>
@@ -815,6 +858,23 @@ The orchestration profile `orchestration.profiles.identity` is deprecated and re
 If your `values.yaml` uses the `identity` profile key, the chart automatically migrates it to `admin` and prints a deprecation warning.
 
 **Action:** Update your values file to use `orchestration.profiles.admin`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Bitnami subcharts bundled
+
+The Bitnami subcharts (PostgreSQL, Keycloak, Elasticsearch, and Common) are bundled directly within the Camunda Helm chart instead of being fetched from external Bitnami repositories at install time.
+
+This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts.
+
+**Action:** No action is required. Existing deployments continue to work as before.
 
 </div>
 </div>
@@ -895,7 +955,9 @@ This simplifies initial deployment setup and enables reproducible, version-contr
 
 Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orchestration engine without any secondary storage (Elasticsearch, OpenSearch, or RDBMS). This is useful for lightweight testing or scenarios where only the core engine is needed.
 
-When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and Basic authentication is not supported.
+When enabled, Elasticsearch and OpenSearch subcharts must be disabled. Authentication is supported using OIDC (recommended) or Basic authentication with unprotected API mode for development environments.
+
+<p className="link-arrow">[Learn about authentication with no secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#authentication)</p>
 
 </div>
 </div>
@@ -963,6 +1025,30 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 </div>
 </div>
 
+## Identity
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster Identity renamed to Admin
+
+Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
+
+Admin is the cluster-level admin UI hosting identity management and other administrative features. Identity management functionality (users, groups, roles, authorizations, tenants, mapping rules, and clients) is unchanged, although some naming, paths, and config keys are updated as follows:
+
+- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9. The `identity` profile is deprecated and will be removed in a future version.
+- API paths change from `/identity/*` to `/admin/*`. The old paths redirect to the new paths but are deprecated.
+- Helm values change from `orchestration.identity.*` to `orchestration.admin.*`. The old values are deprecated.
+- Documentation paths are updated: `/components/identity/` is now `/components/admin/`.
+
+<p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
+
+</div>
+</div>
+
 ## Modeler
 
 <div className="release-announcement-row">
@@ -993,6 +1079,27 @@ Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded 
 This enhancement ensures consistency across environments and simplifies setup for administrators.
 
 <p class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Form deployment changes
+
+With Camunda 8.9, you can now deploy forms independently. This enhancement provides greater control over what is deployed and when, enabling more precise management of changes and updates across environments.
+
+As part of this improvement, we have removed the automatic deployment of [linked forms](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md). Forms must now be explicitly deployed, giving teams finer control over versioning, release timing, and deployment scope.
+
+This change supports more predictable deployments and helps teams manage updates with greater confidence and flexibility.
+
+:::info
+To learn more, see the [8.9.0-alpha5 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+:::
 
 </div>
 </div>
@@ -1060,54 +1167,6 @@ This enhancement ensures consistency across environments and simplifies setup fo
 Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
 This enhancement aligns Web Modeler's database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
-
-</div>
-</div>
-
-## Identity
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-### Orchestration Cluster Identity renamed to Admin
-
-Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
-
-Admin is the cluster-level admin UI that hosts identity management (users, groups, roles, authorizations, tenants, mapping rules, and clients) and other administrative features. The underlying identity management capabilities remain the same.
-
-What changed:
-
-- The component is now called **Admin** (previously Orchestration Cluster Identity).
-- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9; the `identity` profile is deprecated and will be removed in a future version.
-- API paths have changed from `/identity/*` to `/admin/*`. The old paths remain functional and redirect to new paths, but are deprecated.
-- Helm values have changed from `orchestration.identity.*` to `orchestration.admin.*`. The old values remain functional but are deprecated.
-- Documentation paths have been updated: `/components/identity/` is now `/components/admin/`.
-
-<p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Web Modeler: Form deployment changes
-
-With Camunda 8.9, you can now deploy forms independently. This enhancement provides greater control over what is deployed and when, enabling more precise management of changes and updates across environments.
-
-As part of this improvement, we have removed the automatic deployment of [linked forms](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md). Forms must now be explicitly deployed, giving teams finer control over versioning, release timing, and deployment scope.
-
-This change supports more predictable deployments and helps teams manage updates with greater confidence and flexibility.
-
-:::info
-To learn more, see the [8.9.0-alpha5 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
-:::
 
 </div>
 </div>

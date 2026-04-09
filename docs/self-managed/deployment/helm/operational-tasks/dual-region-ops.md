@@ -86,7 +86,7 @@ For the failback procedure, the recreated region must not include any active Cam
 
 :::info
 
-In the following examples, direct API calls are used because authentication methods may vary depending on your embedded Identity configuration.
+In the following examples, direct API calls are used because authentication methods may vary depending on your Admin configuration.
 
 The **Management API** (default port `9600`) is not secured by default.
 
@@ -145,7 +145,7 @@ echo "You have lost $CLUSTER_RECREATED, $CLUSTER_SURVIVING is still alive"
   </TabItem>
 </Tabs>
 
-The `camunda-zeebe-x` pod represents the new architecture that contains the Orchestration Cluster and its components. It includes the former Zeebe Gateway, Operate, Tasklist, the new embedded Identity, and the new Camunda Exporter.
+The `camunda-zeebe-x` pod represents the new architecture that contains the Orchestration Cluster and its components. It includes the former Zeebe Gateway, Operate, Tasklist, the new embedded Admin, and the new Camunda Exporter.
 
 <div style={{textAlign: 'center'}}>
   <img src={OC} alt="Orchestration Cluster" style={{border: 'none', width: '60%', transform: 'scale(1.3)'}} />

@@ -151,14 +151,15 @@ RDBMS configuration properties are defined under:
 camunda.data.secondary-storage.rdbms.*
 ```
 
-| Property             | Description                                                      | Default |
-| -------------------- | ---------------------------------------------------------------- | ------- |
-| `url`                | JDBC connection URL                                              | _empty_ |
-| `user`               | Username for the connection                                      | _empty_ |
-| `password`           | Password for the connection                                      | _empty_ |
-| `auto-ddl`           | Enables Liquibase schema management                              | `true`  |
-| `prefix`             | Optional table name prefix                                       | `""`    |
-| `database-vendor-id` | Manually override vendor detection (`postgres`, `mariadb`, etc.) | _empty_ |
+| Property                | Description                                                      | Default |
+| ----------------------- | ---------------------------------------------------------------- | ------- |
+| `url`                   | JDBC connection URL                                              | _empty_ |
+| `user`                  | Username for the connection                                      | _empty_ |
+| `password`              | Password for the connection                                      | _empty_ |
+| `auto-ddl`              | Enables Liquibase schema management                              | `true`  |
+| `prefix`                | Optional table name prefix                                       | `""`    |
+| `database-vendor-id`    | Manually override vendor detection (`postgres`, `mariadb`, etc.) | _empty_ |
+| `ddl-lock-wait-timeout` | Max time Liquibase can hold a lock on the database               | PT15M   |
 
 ## Connection pool configuration
 
@@ -167,7 +168,7 @@ Camunda uses HikariCP for JDBC connection pooling. The following properties can 
 | Property name                                                             | Description                                                               | Default |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------- |
 | `camunda.data.secondary-storage.rdbms.connection-pool.maximum-pool-size`  | Maximum number of simultaneous connections                                | 10      |
-| `camunda.data.secondary-storage.rdbms.connection-pool.minimum-idle`       | Minimum number of idle connections                                        | 10      |
+| `camunda.data.secondary-storage.rdbms.connection-pool.minimum-idle`       | Minimum number of idle connections                                        | 2       |
 | `camunda.data.secondary-storage.rdbms.connection-pool.idle-timeout`       | Timeout (ms) before closing an idle connection                            | 600000  |
 | `camunda.data.secondary-storage.rdbms.connection-pool.max-lifetime`       | Maximum lifetime (ms) of each connection before it is closed and replaced | 1800000 |
 | `camunda.data.secondary-storage.rdbms.connection-pool.connection-timeout` | Maximum time (ms) the application waits for a connection from the pool    | 30000   |
@@ -184,11 +185,16 @@ The following additional configuration options are available under `camunda.data
 
 ### Exporter performance settings
 
-| Property name        | Description                                                                                       | Default |
-| -------------------- | ------------------------------------------------------------------------------------------------- | ------- |
-| `flush-interval`     | Maximum time a record waits in the flush queue before being flushed and committed to the database | PT0.5S  |
-| `max-queue-size`     | Maximum number of records allowed in the flush queue before a forced flush                        | 1000    |
-| `queue-memory-limit` | Maximum memory usage (MB) allowed for queued records before a forced flush                        | 20      |
+| Property name                                     | Description                                                                                       | Default |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------- |
+| `flush-interval`                                  | Maximum time a record waits in the flush queue before being flushed and committed to the database | PT0.5S  |
+| `max-queue-size`                                  | Maximum number of records allowed in the flush queue before a forced flush                        | 1000    |
+| `queue-memory-limit`                              | Maximum memory usage (MB) allowed for queued records before a forced flush                        | 20      |
+| `export-batch-operation-items-on-creation`        | If due items should be exported at the beginning of a batch operation or only after processing    | true    |
+| `insert-batching.max-audit-log-insert-batch-size` | Maximum number of rows to batch into a single insert statement into the AUDIT_LOG table           | 50      |
+| `insert-batching.max-flow-node-insert-batch-size` | Maximum number of rows to batch into a single insert statement into the FLOW_NODE table           | 25      |
+| `insert-batching.max-job-insert-batch-size`       | Maximum number of rows to batch into a single insert statement into the JOB table                 | 25      |
+| `insert-batching.max-variable-insert-batch-size`  | Maximum number of rows to batch into a single insert statement into the VARIABLE table            | 25      |
 
 ## History cleanup
 
@@ -206,19 +212,27 @@ The RDBMS exporter provides automatic history cleanup, which works in two stages
 
 ### History cleanup configuration
 
-| Property name                                          | Description                                                             | Default |
-| ------------------------------------------------------ | ----------------------------------------------------------------------- | ------- |
-| `history.default-history-ttl`                          | TTL for finished process instances and related data (ISO-8601 duration) | P30D    |
-| `history.default-batch-operation-ttl`                  | TTL for batch operation history                                         | P5D     |
-| `history.batch-operation-cancel-process-instance-ttl`  | TTL for cancel-process-instance batch operations                        | P5D     |
-| `history.batch-operation-migrate-process-instance-ttl` | TTL for migrate-process-instance batch operations                       | P5D     |
-| `history.batch-operation-modify-process-instance-ttl`  | TTL for modify-process-instance batch operations                        | P5D     |
-| `history.batch-operation-resolve-incident-ttl`         | TTL for resolve-incident batch operations                               | P5D     |
-| `history.historyCleanupBatchSize`                      | Maximum number of entries deleted per cleanup run                       | 1000    |
-| `history.minHistoryCleanupInterval`                    | Minimum duration between cleanup runs (ISO-8601 duration)               | PT1M    |
-| `history.maxHistoryCleanupInterval`                    | Maximum duration between cleanup runs (ISO-8601 duration)               | PT60M   |
-| `history.usage-metrics-ttl`                            | TTL for usage metrics                                                   | P730D   |
-| `history.usage-metrics-cleanup`                        | Interval between usage metrics cleanup runs (ISO-8601 duration)         | PT24H   |
+RDBMS history configuration properties are defined under:
+
+```yaml
+camunda.data.secondary-storage.rdbms.history.*
+```
+
+| Property name                                  | Description                                                             | Default |
+| ---------------------------------------------- | ----------------------------------------------------------------------- | ------- |
+| `default-history-ttl`                          | TTL for finished process instances and related data (ISO-8601 duration) | P30D    |
+| `default-batch-operation-ttl`                  | TTL for batch operation history                                         | P5D     |
+| `batch-operation-cancel-process-instance-ttl`  | TTL for cancel-process-instance batch operations                        | P5D     |
+| `batch-operation-migrate-process-instance-ttl` | TTL for migrate-process-instance batch operations                       | P5D     |
+| `batch-operation-modify-process-instance-ttl`  | TTL for modify-process-instance batch operations                        | P5D     |
+| `batch-operation-resolve-incident-ttl`         | TTL for resolve-incident batch operations                               | P5D     |
+| `historyCleanupBatchSize`                      | Maximum number of entries deleted per cleanup run                       | 1000    |
+| `minHistoryCleanupInterval`                    | Minimum duration between cleanup runs (ISO-8601 duration)               | PT1M    |
+| `maxHistoryCleanupInterval`                    | Maximum duration between cleanup runs (ISO-8601 duration)               | PT60M   |
+| `history-cleanup-process-instance-batch-size`  | Number of process instances to be cleaned per cleanup run               | 500     |
+| `history-cleanup-batch-size`                   | Number of rows to be cleaned per cleanup run in each table              | 10000   |
+| `usage-metrics-ttl`                            | TTL for usage metrics                                                   | P730D   |
+| `usage-metrics-cleanup`                        | Interval between usage metrics cleanup runs (ISO-8601 duration)         | PT24H   |
 
 ## Exporter cache configuration
 
@@ -226,6 +240,14 @@ The RDBMS exporter provides automatic history cleanup, which works in two stages
 | -------------------------------- | ---------------------------------------------------------------- | ------- |
 | `process-cache.max-size`         | Maximum number of process definitions held in the exporter cache | 1000    |
 | `batch-operation-cache.max-size` | Maximum number of cached batch operations                        | 1000    |
+
+## Multi-region support
+
+The RDBMS Exporter currently has no multi-region support. Only one RDBMS Exporter instance and one JDBC database connection can be configured per Orchestration Cluster.
+
+:::note
+Multi-region support for the RDBMS Exporter is not planned at this time. For multi-region setups, multi-region replication must be handled within the RDBMS itself, for example using a managed database service such as AWS Aurora.
+:::
 
 ## Usage with AWS Aurora PostgreSQL
 

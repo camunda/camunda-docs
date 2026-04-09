@@ -11,17 +11,13 @@ mdx:
 type GetElementInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10376](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10376)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:10377](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10377)
 
 ---
 
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:10377](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:10378](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10378)
 
 #### elementInstanceKey
 
@@ -46,10 +40,8 @@ The assigned key of the element instance, which acts as a unique identifier for 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:10384](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10384)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:10384](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/element-instances/{elementInstanceKey}";
 ```
-
-Defined in: [gen/types.gen.ts:10385](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10385)

@@ -18,8 +18,6 @@ type Changeset = {
 } | null;
 ```
 
-Defined in: [gen/types.gen.ts:7002](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7002)
-
 JSON object with changed task attribute values.
 
 The following attributes can be adjusted with this endpoint, additional attributes
@@ -37,7 +35,9 @@ the persisted attribute's value.
 The assignee cannot be adjusted with this endpoint, use the Assign task endpoint.
 This ensures correct event emission for assignee changes.
 
-## Type Declaration
+## Union Members
+
+### Type Literal
 
 ```ts
 {
@@ -50,50 +50,52 @@ This ensures correct event emission for assignee changes.
 }
 ```
 
-## Index Signature
+### Index Signature
 
 ```ts
 [key: string]: unknown
 ```
 
-### candidateGroups?
+#### candidateGroups?
 
 ```ts
-optional candidateGroups: string[] | null;
+optional candidateGroups?: string[] | null;
 ```
 
 The list of candidate groups of the task. Reset by providing an empty list.
 
-### candidateUsers?
+#### candidateUsers?
 
 ```ts
-optional candidateUsers: string[] | null;
+optional candidateUsers?: string[] | null;
 ```
 
 The list of candidate users of the task. Reset by providing an empty list.
 
-### dueDate?
+#### dueDate?
 
 ```ts
-optional dueDate: string | null;
+optional dueDate?: string | null;
 ```
 
 The due date of the task. Reset by providing an empty String.
 
-### followUpDate?
+#### followUpDate?
 
 ```ts
-optional followUpDate: string | null;
+optional followUpDate?: string | null;
 ```
 
 The follow-up date of the task. Reset by providing an empty String.
 
-### priority?
+#### priority?
 
 ```ts
-optional priority: number | null;
+optional priority?: number | null;
 ```
 
 The priority of the task.
+
+---
 
 `null`

@@ -11,79 +11,38 @@ Prepare your Self-Managed environment for an upgrade to Camunda 8.9.
 
 Use this guide to confirm upgrade eligibility, understand platform-level changes, and identify actions you may need to take before running an upgrade.
 
-All Camunda upgrades must follow the required upgrade procedure: upgrade one minor version at a time and never skip minors. For best stability and fix coverage, use the latest available patch in each minor before and after the minor upgrade.
-
-See [version compatibility checks](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#required-upgrade-procedure).
+:::important
+All Camunda upgrades must follow the required upgrade procedure: upgrade one minor version at a time and never skip minors. For best stability and fix coverage, use the latest available patch in each minor before and after the minor upgrade. See [version compatibility checks](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#required-upgrade-procedure).
+:::
 
 ## Evaluate your current environment
 
 Before upgrading, verify that your current installation meets the minimum requirements.
 
-| Area                | What to check                                                                                                                                                                                                                                                                                                        |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version     | Direct upgrades to 8.9 are supported from 8.8.x. If you are running an earlier version, first upgrade to 8.8. For best stability and fix coverage, use the latest available 8.8.x patch before upgrading. See [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version). |
-| Environment support | Ensure your platform and dependencies are supported in 8.9. See [supported environments](/reference/supported-environments.md).                                                                                                                                                                                      |
-| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and secondary storage setup (for example, Elasticsearch/OpenSearch or RDBMS).                                                                                                                                  |
+| Area                | What to check                                                                                                                                                                                                                                                                                                                                                                     |
+| :------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda version     | <p><strong>Direct upgrades to 8.9 are only supported from 8.8.x.</strong></p><p><ul><li>If you are running an earlier version, first upgrade to 8.8.</li><li>For best stability and fix coverage, use the latest available 8.8.x patch before upgrading. See [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version).</li></ul></p> |
+| Environment support | Ensure your platform and dependencies are supported in 8.9. See [supported environments](/reference/supported-environments.md).                                                                                                                                                                                                                                                   |
+| Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and secondary storage setup (for example, Elasticsearch/OpenSearch or RDBMS).                                                                                                                                                                                               |
 
 ## Review pre-upgrade actions required for Camunda 8.9
 
 This section lists actions you must complete or review before upgrading to Camunda 8.9.
 
-<table className="table-callout">
-<tr>
-    <td style={{minWidth: "152px"}}>**Area**</td>
-    <td style={{minWidth: "152px"}}>**What's changed / Action required**</td>
-    <td style={{width: "160px"}}>**Impact**</td>
-</tr>
-<tr>
-    <td>Helm chart: Secret configuration</td>
-    <td><p>Deprecated secret keys removed in 8.9. If your `values.yaml` uses old key paths (for example, `global.license.key`, `*.existingSecret` at legacy paths), update them to the new `*.secret.existingSecret` pattern before upgrading.</p><p>Additionally, `global.secrets.autoGenerated` is removed. All secrets must be explicitly provided.</p><p>For details, see [Helm chart: Deprecated secret keys removed](/reference/announcements-release-notes/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) and [Secret management](/self-managed/deployment/helm/configure/secret-management.md).</p></td>
-    <td><span className="label-highlight red">Action required</span></td>
-</tr>
-<tr>
-    <td>Helm chart: document-store default</td>
-    <td><p>The Elasticsearch subchart is no longer enabled by default. If you use Elasticsearch, explicitly set `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` in your values file.</p><p>You must also set `orchestration.data.secondaryStorage.type` explicitly (no default), whether you use Elasticsearch, OpenSearch, or RDBMS.</p></td>
-    <td><span className="label-highlight red">Action required</span></td>
-</tr>
-<tr>
-    <td>Helm chart: REST port</td>
-    <td><p>The default HTTP port for the Orchestration Cluster changed from 8090 to 8080. If you have hardcoded port references in network policies, Ingress rules, or monitoring, update them.</p></td>
-    <td><span className="label-highlight yellow">Check</span></td>
-</tr>
-<tr>
-    <td>Web Modeler: Logging framework</td>
-    <td><p>Web Modeler `restapi` now uses Apache Log4j 2 instead of Logback. If you have a custom Logback configuration, migrate it before upgrading.</p><p>See the [Log4j migration guide](https://logging.apache.org/log4j/2.x/migrate-from-logback.html).</p></td>
-    <td><span className="label-highlight yellow">If customized</span></td>
-</tr>
-<tr>
-    <td>Web Modeler: Embedded web server</td>
-    <td><p>Web Modeler now uses Apache Tomcat instead of Undertow. If you have custom Undertow configuration (`server.undertow.*`), migrate it to Tomcat equivalents.</p><p>See the [component upgrade guide](./components/880-to-890.md#embedded-web-server) for a property mapping table.</p></td>
-    <td><span className="label-highlight yellow">If customized</span></td>
-</tr>
-<tr>
-    <td>Helm chart: TLS secret pattern</td>
-    <td><p>Legacy TLS secret configuration (`*.tls.existingSecret`) is deprecated. Migrate to `*.tls.secret.existingSecret`. The legacy keys still work in 8.9.</p></td>
-    <td><span className="label-highlight">Recommended</span></td>
-</tr>
-<tr>
-    <td>Helm chart: Bitnami subcharts</td>
-    <td><p>The Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in 8.9 and will be removed in 8.10. Plan migration to externally managed services.</p></td>
-    <td><span className="label-highlight">Recommended</span></td>
-</tr>
-<tr>
-    <td>Helm chart: secondary storage global config</td>
-    <td><p>`global.elasticsearch.*` and `global.opensearch.*` are deprecated in 8.9 and will be removed in 8.10. Migrate to `orchestration.data.secondaryStorage.elasticsearch/opensearch.*` and `optimize.database.elasticsearch/opensearch.*`. Legacy keys still work in 8.9.</p></td>
-    <td><span className="label-highlight">Recommended</span></td>
-</tr>
-<tr>
-    <td>Helm chart: Orchestration profile</td>
-    <td><p>`orchestration.profiles.identity` is deprecated and renamed to `orchestration.profiles.admin`. The chart auto-migrates the old key with a deprecation warning. Update your values file to use the new key.</p></td>
-    <td><span className="label-highlight">Recommended</span></td>
-</tr>
-</table>
+| Impact                                                                                       | Area                                        | What's changed / Action required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| :------------------------------------------------------------------------------------------- | :------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <span className="label-highlight red" style={{whiteSpace: "nowrap"}}>Action required</span>  | Helm chart: Secret configuration            | <p>Deprecated secret keys are removed in 8.9.</p><p><ul><li>If your `values.yaml` uses old key paths (for example, `global.license.key`, `*.existingSecret` at legacy paths), update them to the new `*.secret.existingSecret` pattern before upgrading.</li><li><p>Additionally, `global.secrets.autoGenerated` is removed. All secrets must be explicitly provided. See [Helm chart: Deprecated secret keys removed](/reference/announcements-release-notes/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) and [Secret management](/self-managed/deployment/helm/configure/secret-management.md).</p></li></ul></p> |
+| <span className="label-highlight red" style={{whiteSpace: "nowrap"}}>Action required</span>  | Helm chart: document-store default          | <p>The Elasticsearch subchart is no longer enabled by default.</p><p><ul><li>If you use Elasticsearch, explicitly set `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` in your values file.</li><li><p>You must also set `orchestration.data.secondaryStorage.type` explicitly (no default), whether you use Elasticsearch, OpenSearch, or RDBMS.</p></li></ul></p>                                                                                                                                                                                                                                                  |
+| <span className="label-highlight yellow" style={{whiteSpace: "nowrap"}}>Check</span>         | Helm chart: REST port                       | The default HTTP port for the Orchestration Cluster changed from 8090 to 8080. Check and update any hardcoded port references in network policies, Ingress rules, or monitoring.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| <span className="label-highlight yellow" style={{whiteSpace: "nowrap"}}>If customized</span> | Web Modeler: Logging framework              | Web Modeler `restapi` now uses Apache Log4j 2 instead of Logback. If you have a custom Logback configuration, migrate it before upgrading. See the [Log4j migration guide](https://logging.apache.org/log4j/2.x/migrate-from-logback.html).                                                                                                                                                                                                                                                                                                                                                                                                |
+| <span className="label-highlight yellow" style={{whiteSpace: "nowrap"}}>If customized</span> | Web Modeler: Embedded web server            | Web Modeler now uses Apache Tomcat instead of Undertow. If you have custom Undertow configuration (`server.undertow.*`), migrate it to Tomcat equivalents. See the [component upgrade guide](./components/880-to-890.md#embedded-web-server) for a property mapping table.                                                                                                                                                                                                                                                                                                                                                                 |
+| <span className="label-highlight" style={{whiteSpace: "nowrap"}}>Recommended</span>          | Helm chart: TLS secret pattern              | Legacy TLS secret configuration (`*.tls.existingSecret`) is deprecated. Migrate to `*.tls.secret.existingSecret`. The legacy keys still work in 8.9.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| <span className="label-highlight" style={{whiteSpace: "nowrap"}}>Recommended</span>          | Helm chart: Bitnami subcharts               | The Bitnami-based subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in 8.9 and will be removed in 8.10. Plan migration to externally managed services.                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| <span className="label-highlight" style={{whiteSpace: "nowrap"}}>Recommended</span>          | Helm chart: secondary storage global config | `global.elasticsearch.*` and `global.opensearch.*` are deprecated in 8.9 and will be removed in 8.10. Migrate to `orchestration.data.secondaryStorage.elasticsearch/opensearch.*` and `optimize.database.elasticsearch/opensearch.*`. Legacy keys still work in 8.9.                                                                                                                                                                                                                                                                                                                                                                       |
+| <span className="label-highlight" style={{whiteSpace: "nowrap"}}>Recommended</span>          | Helm chart: Orchestration profile           | `orchestration.profiles.identity` is deprecated and renamed to `orchestration.profiles.admin`. The chart auto-migrates the old key with a deprecation warning. Update your values file to use the new key.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 :::info
-For a complete list of changes, see [What's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md).
+For a full list of changes, see the [8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md) and [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
 ## Verify infrastructure compatibility

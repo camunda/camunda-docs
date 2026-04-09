@@ -2,7 +2,7 @@
 id: typed-variables-with-dtos
 title: "Typed Variables with DTOs"
 sidebar_label: "Typed Variables with DTOs"
-sidebar_position: 12
+sidebar_position: 13
 mdx:
   format: md
 ---
@@ -19,7 +19,7 @@ Camunda API operations use dynamic `variables` and `customHeaders` payloads. By 
 
 Assign any DTO or dictionary to the `Variables` property — `System.Text.Json` serializes the runtime type automatically:
 
-<!-- snippet:UsingDirective+SendingVariables+SendingVariablesBody -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+SendingVariables+SendingVariablesBody -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -30,7 +30,7 @@ public record OrderInput(string OrderId, decimal Amount);
 // Assign the DTO directly
 await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
 {
-    ProcessDefinitionId = ProcessDefinitionId.AssumeExists("order-process"),
+    ProcessDefinitionId = processDefinitionId,
     Variables = new OrderInput("ord-123", 99.99m),
 });
 
@@ -45,7 +45,7 @@ await client.CompleteJobAsync(jobKey, new JobCompletionRequest
 
 Use `DeserializeAs<T>()` to extract typed DTOs from API responses:
 
-<!-- snippet:UsingDirective+ReceivingVariables+ReceivingVariablesBody -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+ReceivingVariables+ReceivingVariablesBody -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -56,7 +56,7 @@ public record OrderResult(bool Processed, string InvoiceNumber);
 var result = await client.CreateProcessInstanceAsync(
     new ProcessInstanceCreationInstructionById
     {
-        ProcessDefinitionId = ProcessDefinitionId.AssumeExists("test"),
+        ProcessDefinitionId = processDefinitionId,
     });
 var output = result.Variables.DeserializeAs<OrderResult>();
 // output.Processed, output.InvoiceNumber — fully typed

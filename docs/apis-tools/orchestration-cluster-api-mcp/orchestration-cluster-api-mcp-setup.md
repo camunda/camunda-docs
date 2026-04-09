@@ -12,7 +12,7 @@ Enable the Orchestration Cluster MCP Server and configure MCP clients to connect
 
 ## Enable the Orchestration Cluster MCP Server
 
-The MCP server is opt-in and must be enabled before MCP clients can connect.
+The MCP server is enabled by default in [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md). For other deployment types, it must be explicitly enabled before MCP clients can connect.
 Depending on your deployment, enable it as follows:
 
 <Tabs groupId="deployment" defaultValue="c8run" queryString values={[
@@ -30,14 +30,7 @@ The MCP server is **enabled by default** in Camunda 8 Run. No additional configu
 
 <TabItem value="docker-compose">
 
-Set the `CAMUNDA_MCP_ENABLED` environment variable on the Orchestration Cluster container:
-
-```yaml
-services:
-  camunda:
-    environment:
-      CAMUNDA_MCP_ENABLED: "true"
-```
+The MCP server is **enabled by default** in the Docker Compose distribution. No additional configuration is needed.
 
 </TabItem>
 

@@ -11,8 +11,6 @@ mdx:
 type SignalBroadcastResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:6508](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6508)
-
 ## Properties
 
 ### signalKey
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:6508](https://github.com/camunda/orchestration-clu
 ```ts
 signalKey: SignalKey;
 ```
-
-Defined in: [gen/types.gen.ts:6516](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6516)
 
 The key of the broadcasted signal.
 
@@ -32,7 +28,5 @@ The key of the broadcasted signal.
 ```ts
 tenantId: TenantId;
 ```
-
-Defined in: [gen/types.gen.ts:6512](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6512)
 
 The tenant ID of the signal that was broadcast.

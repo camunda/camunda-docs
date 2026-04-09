@@ -14,6 +14,10 @@ A job has the following properties:
 This is a case-sensitive field, if supported by the underlying operating system. For example, `orderProcess` refers to a different worker than `OrderProcess`.
 :::
 
+:::note
+Job worker types are subject to backend-dependent length limits: up to **32,768 characters** with Elasticsearch/OpenSearch-backed secondary storage and up to **256 characters** with RDBMS-backed secondary storage. If you use RDBMS, or might migrate to it later, keep job types within the 256-character limit.
+:::
+
 - **Custom headers**: Additional static metadata that is defined in the process. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header.)
 - **Key**: Unique key to identify a job. The key is used to hand in the results of a job execution, or to report failures during job execution.
 - **Variables**: The contextual/business data of the process instance required by the worker to do its work.

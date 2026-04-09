@@ -483,7 +483,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 </details>
 
-Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. You will be prompted to specify the number of Zeebe brokers (total number of Zeebe brokers in both Kubernetes clusters), for a dual-region setup we recommend `8`, resulting in four brokers per region:
+Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. The script derives the Zeebe broker count from your Helm values. For a dual-region setup, the default is `8` (four brokers per region):
 
 ```
 chmod +x generate-zeebe-helm-values.sh
@@ -566,7 +566,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart on each cluster.
+- Installs (or upgrades) Camunda using the Helm chart on each cluster.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from the value file.
 

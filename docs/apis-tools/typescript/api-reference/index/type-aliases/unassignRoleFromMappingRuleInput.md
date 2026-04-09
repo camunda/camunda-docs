@@ -11,8 +11,6 @@ mdx:
 type unassignRoleFromMappingRuleInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1034](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1034)
-
 ## Properties
 
 ### mappingRuleId
@@ -21,8 +19,6 @@ Defined in: [gen/CamundaClient.ts:1034](https://github.com/camunda/orchestration
 mappingRuleId: unassignRoleFromMappingRulePathParam_mappingRuleId;
 ```
 
-Defined in: [gen/CamundaClient.ts:1034](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1034)
-
 ---
 
 ### roleId
@@ -30,5 +26,3 @@ Defined in: [gen/CamundaClient.ts:1034](https://github.com/camunda/orchestration
 ```ts
 roleId: unassignRoleFromMappingRulePathParam_roleId;
 ```
-
-Defined in: [gen/CamundaClient.ts:1034](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1034)

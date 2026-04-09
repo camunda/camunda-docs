@@ -11,17 +11,13 @@ mdx:
 type SuspendBatchOperationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8473](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8473)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: unknown;
+optional body?: unknown;
 ```
-
-Defined in: [gen/types.gen.ts:8474](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8474)
 
 ---
 
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:8474](https://github.com/camunda/orchestration-clu
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:8475](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8475)
 
 #### batchOperationKey
 
@@ -46,10 +40,8 @@ The key (or operate legacy ID) of the batch operation.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:8481](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8481)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:8481](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/batch-operations/{batchOperationKey}/suspension";
 ```
-
-Defined in: [gen/types.gen.ts:8482](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8482)

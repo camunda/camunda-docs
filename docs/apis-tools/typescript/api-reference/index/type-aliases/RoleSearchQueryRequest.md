@@ -11,8 +11,6 @@ mdx:
 type RoleSearchQueryRequest = SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:6275](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6275)
-
 Role search request.
 
 ## Type Declaration
@@ -20,7 +18,7 @@ Role search request.
 ### filter?
 
 ```ts
-optional filter: RoleFilter;
+optional filter?: RoleFilter;
 ```
 
 The role search filters.
@@ -28,7 +26,7 @@ The role search filters.
 ### sort?
 
 ```ts
-optional sort: RoleSearchQuerySortRequest[];
+optional sort?: RoleSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

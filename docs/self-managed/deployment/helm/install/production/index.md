@@ -92,7 +92,7 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n o
 
 ### Ingress TLS setup
 
-In order to access the Camunda Platform through HTTPS with Ingress, TLS must be enabled. Enabling TLS requires the following:
+In order to access Camunda through HTTPS with Ingress, TLS must be enabled. Enabling TLS requires the following:
 
 1. **Domain name**: A public registered domain that has configurable DNS records. This guide will use `camunda.example.com` as the domain.
 2. **TLS certificate**: A TLS certificate created for your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. The certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure Ingress resources. Reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
@@ -566,12 +566,12 @@ console:
                   url: https://management-and-modeling-host.com/identity
                   readiness: http://camunda-identity.oidc:82/actuator/health
                   metrics: http://camunda-identity.oidc:82/actuator/prometheus
-                - name: WebModeler WebApp
+                - name: WebModeler
                   id: webModelerWebApp
                   version: 8.9.x
                   url: https://management-and-modeling-host.com/modeler
-                  readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
-                  metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
+                  readiness: http://camunda-web-modeler-restapi.oidc:8091/health/readiness
+                  metrics: http://camunda-web-modeler-restapi.oidc:8091/metrics
             - name: camunda
               namespace: orchestration
               version: 14.x

@@ -11,8 +11,6 @@ mdx:
 type VariableFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:7269](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7269)
-
 Variable filter request.
 
 ## Properties
@@ -20,10 +18,8 @@ Variable filter request.
 ### isTruncated?
 
 ```ts
-optional isTruncated: boolean;
+optional isTruncated?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:7285](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7285)
 
 Whether the value is truncated or not.
 
@@ -32,10 +28,8 @@ Whether the value is truncated or not.
 ### name?
 
 ```ts
-optional name: StringFilterProperty;
+optional name?: StringFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7273](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7273)
 
 Name of the variable.
 
@@ -44,10 +38,8 @@ Name of the variable.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey: ProcessInstanceKeyFilterProperty;
+optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7297](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7297)
 
 The key of the process instance of this variable.
 
@@ -56,22 +48,22 @@ The key of the process instance of this variable.
 ### scopeKey?
 
 ```ts
-optional scopeKey: ScopeKeyFilterProperty;
+optional scopeKey?: ScopeKeyFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7293](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7293)
-
-The key of the scope of this variable.
+The key of the scope that defines where this variable is directly defined. This can be a
+process instance key (for process-level variables) or an element instance key (for local
+variables scoped to tasks, subprocesses, gateways, events, etc.). Use this filter to
+find variables directly defined in specific scopes. Note that this does not include
+variables from parent scopes that would be visible through the scope hierarchy.
 
 ---
 
 ### tenantId?
 
 ```ts
-optional tenantId: TenantId;
+optional tenantId?: TenantId;
 ```
-
-Defined in: [gen/types.gen.ts:7281](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7281)
 
 Tenant ID of this variable.
 
@@ -80,21 +72,20 @@ Tenant ID of this variable.
 ### value?
 
 ```ts
-optional value: StringFilterProperty;
+optional value?: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7277](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7277)
-
 The value of the variable.
+Variable values in filters need to be in serialized JSON format. For example, a variable
+with string value `myValue` can be found with the filter value `"myValue"`. Consider
+appropriate escaping for special characters in JSON strings when constructing filter values.
 
 ---
 
 ### variableKey?
 
 ```ts
-optional variableKey: VariableKeyFilterProperty;
+optional variableKey?: VariableKeyFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7289](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L7289)
 
 The key for this variable.

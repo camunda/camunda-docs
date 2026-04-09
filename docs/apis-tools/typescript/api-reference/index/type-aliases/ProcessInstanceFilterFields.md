@@ -11,8 +11,6 @@ mdx:
 type ProcessInstanceFilterFields = BaseProcessInstanceFilterFields & object;
 ```
 
-Defined in: [gen/types.gen.ts:5735](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5735)
-
 Process instance search filter.
 
 ## Type Declaration
@@ -20,7 +18,7 @@ Process instance search filter.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId: StringFilterProperty;
+optional processDefinitionId?: StringFilterProperty;
 ```
 
 The process definition id.
@@ -28,7 +26,7 @@ The process definition id.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey: ProcessDefinitionKeyFilterProperty;
+optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The process definition key.
@@ -36,7 +34,7 @@ The process definition key.
 ### processDefinitionName?
 
 ```ts
-optional processDefinitionName: StringFilterProperty;
+optional processDefinitionName?: StringFilterProperty;
 ```
 
 The process definition name.
@@ -44,7 +42,7 @@ The process definition name.
 ### processDefinitionVersion?
 
 ```ts
-optional processDefinitionVersion: IntegerFilterProperty;
+optional processDefinitionVersion?: IntegerFilterProperty;
 ```
 
 The process definition version.
@@ -52,7 +50,7 @@ The process definition version.
 ### processDefinitionVersionTag?
 
 ```ts
-optional processDefinitionVersionTag: StringFilterProperty;
+optional processDefinitionVersionTag?: StringFilterProperty;
 ```
 
 The process definition version tag.

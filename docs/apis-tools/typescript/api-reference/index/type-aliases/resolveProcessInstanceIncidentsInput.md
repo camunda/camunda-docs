@@ -11,8 +11,6 @@ mdx:
 type resolveProcessInstanceIncidentsInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:643](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L643)
-
 ## Properties
 
 ### processInstanceKey
@@ -20,5 +18,3 @@ Defined in: [gen/CamundaClient.ts:643](https://github.com/camunda/orchestration-
 ```ts
 processInstanceKey: resolveProcessInstanceIncidentsPathParam_processInstanceKey;
 ```
-
-Defined in: [gen/CamundaClient.ts:643](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L643)
