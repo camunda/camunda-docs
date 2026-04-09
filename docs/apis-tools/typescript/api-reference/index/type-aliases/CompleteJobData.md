@@ -11,8 +11,6 @@ mdx:
 type CompleteJobData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11912](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11912)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:11912](https://github.com/camunda/orchestration-cl
 optional body?: JobCompletionRequest;
 ```
 
-Defined in: [gen/types.gen.ts:11913](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11913)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:11913](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:11914](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11914)
 
 #### jobKey
 
@@ -49,8 +43,6 @@ The key of the job to complete.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11920](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11920)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:11920](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/jobs/{jobKey}/completion";
 ```
-
-Defined in: [gen/types.gen.ts:11921](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11921)

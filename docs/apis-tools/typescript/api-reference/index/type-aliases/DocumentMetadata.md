@@ -11,8 +11,6 @@ mdx:
 type DocumentMetadata = object;
 ```
 
-Defined in: [gen/types.gen.ts:2425](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2425)
-
 Information about the document.
 
 ## Properties
@@ -23,8 +21,6 @@ Information about the document.
 optional contentType?: string;
 ```
 
-Defined in: [gen/types.gen.ts:2429](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2429)
-
 The content type of the document.
 
 ---
@@ -34,8 +30,6 @@ The content type of the document.
 ```ts
 optional customProperties?: object;
 ```
-
-Defined in: [gen/types.gen.ts:2453](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2453)
 
 Custom properties of the document.
 
@@ -53,8 +47,6 @@ Custom properties of the document.
 optional expiresAt?: string;
 ```
 
-Defined in: [gen/types.gen.ts:2437](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2437)
-
 The date and time when the document expires.
 
 ---
@@ -64,8 +56,6 @@ The date and time when the document expires.
 ```ts
 optional fileName?: string;
 ```
-
-Defined in: [gen/types.gen.ts:2433](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2433)
 
 The name of the file.
 
@@ -77,8 +67,6 @@ The name of the file.
 optional processDefinitionId?: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:2445](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2445)
-
 The ID of the process definition that created the document.
 
 ---
@@ -89,8 +77,6 @@ The ID of the process definition that created the document.
 optional processInstanceKey?: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2449](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2449)
-
 The key of the process instance that created the document.
 
 ---
@@ -100,7 +86,5 @@ The key of the process instance that created the document.
 ```ts
 optional size?: number;
 ```
-
-Defined in: [gen/types.gen.ts:2441](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2441)
 
 The size of the document in bytes.

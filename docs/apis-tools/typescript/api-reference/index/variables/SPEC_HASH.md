@@ -8,7 +8,5 @@ mdx:
 # Variable: SPEC_HASH
 
 ```ts
-const SPEC_HASH: "sha256:ce28935d7c5d940ac3249eca6c65a20aaa50286c20c365ad00deb315534d2a16";
+const SPEC_HASH: "sha256:5de81e6b2d3f152265e6f6f042a776f0bc2ca73572e9f5a8c54eee460f5c6161";
 ```
-
-Defined in: [gen/specHash.ts:3](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/specHash.ts#L3)

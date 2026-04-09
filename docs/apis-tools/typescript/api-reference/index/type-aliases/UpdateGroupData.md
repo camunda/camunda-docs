@@ -11,8 +11,6 @@ mdx:
 type UpdateGroupData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10981](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10981)
-
 ## Properties
 
 ### body
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:10981](https://github.com/camunda/orchestration-cl
 body: GroupUpdateRequest;
 ```
 
-Defined in: [gen/types.gen.ts:10982](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10982)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:10982](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:10983](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10983)
 
 #### groupId
 
@@ -49,8 +43,6 @@ The group ID.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10989](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10989)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:10989](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/groups/{groupId}";
 ```
-
-Defined in: [gen/types.gen.ts:10990](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10990)

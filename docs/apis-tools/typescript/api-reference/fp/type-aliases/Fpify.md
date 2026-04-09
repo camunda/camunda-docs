@@ -19,8 +19,6 @@ type Fpify<C> = {
 } & object & { [K in Exclude<keyof C, FnKeys<C>>]: C[K] };
 ```
 
-Defined in: [fp-ts.ts:73](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/fp-ts.ts#L73)
-
 ## Type Declaration
 
 ### inner

@@ -11,8 +11,6 @@ mdx:
 type DeleteDecisionInstancesBatchOperationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9900](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9900)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:9900](https://github.com/camunda/orchestration-clu
 ```ts
 body: DecisionInstanceDeletionBatchOperationRequest;
 ```
-
-Defined in: [gen/types.gen.ts:9901](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9901)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:9901](https://github.com/camunda/orchestration-clu
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9902](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9902)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:9902](https://github.com/camunda/orchestration-clu
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9903](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9903)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:9903](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/decision-instances/deletion";
 ```
-
-Defined in: [gen/types.gen.ts:9904](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9904)
