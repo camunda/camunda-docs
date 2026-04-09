@@ -11,8 +11,6 @@ mdx:
 type CreateElementInstanceVariablesData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10505](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10505)
-
 ## Properties
 
 ### body
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:10505](https://github.com/camunda/orchestration-cl
 body: SetVariableRequest;
 ```
 
-Defined in: [gen/types.gen.ts:10506](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10506)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:10506](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:10507](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10507)
 
 #### elementInstanceKey
 
@@ -51,8 +45,6 @@ element, such as a service task (see the `elementInstanceKey` on the job message
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10516](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10516)
-
 ---
 
 ### url
@@ -60,5 +52,3 @@ Defined in: [gen/types.gen.ts:10516](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/element-instances/{elementInstanceKey}/variables";
 ```
-
-Defined in: [gen/types.gen.ts:10517](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10517)

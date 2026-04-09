@@ -11,8 +11,6 @@ mdx:
 type SearchJobsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11827](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11827)
-
 ## Properties
 
 ### body?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:11827](https://github.com/camunda/orchestration-cl
 ```ts
 optional body?: JobSearchQuery;
 ```
-
-Defined in: [gen/types.gen.ts:11828](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11828)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:11828](https://github.com/camunda/orchestration-cl
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11829](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11829)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:11829](https://github.com/camunda/orchestration-cl
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11830](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11830)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:11830](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/jobs/search";
 ```
-
-Defined in: [gen/types.gen.ts:11831](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11831)

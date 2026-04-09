@@ -11,8 +11,6 @@ mdx:
 type DeleteMappingRuleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12364](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12364)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:12364](https://github.com/camunda/orchestration-cl
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:12365](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12365)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:12365](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:12366](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12366)
 
 #### mappingRuleId
 
@@ -49,8 +43,6 @@ The ID of the mapping rule to delete.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:12372](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12372)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:12372](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/mapping-rules/{mappingRuleId}";
 ```
-
-Defined in: [gen/types.gen.ts:12373](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12373)

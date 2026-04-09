@@ -11,8 +11,6 @@ mdx:
 type ActivateAdHocSubProcessActivitiesData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10323](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10323)
-
 ## Properties
 
 ### body
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:10323](https://github.com/camunda/orchestration-cl
 body: AdHocSubProcessActivateActivitiesInstruction;
 ```
 
-Defined in: [gen/types.gen.ts:10324](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10324)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:10324](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:10325](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10325)
 
 #### adHocSubProcessInstanceKey
 
@@ -49,8 +43,6 @@ The key of the ad-hoc sub-process instance that contains the activities.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10331](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10331)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:10331](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation";
 ```
-
-Defined in: [gen/types.gen.ts:10332](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10332)

@@ -11,8 +11,6 @@ mdx:
 type DeleteRoleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13882](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13882)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:13882](https://github.com/camunda/orchestration-cl
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:13883](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13883)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:13883](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:13884](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13884)
 
 #### roleId
 
@@ -49,8 +43,6 @@ The role ID.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:13890](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13890)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:13890](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/roles/{roleId}";
 ```
-
-Defined in: [gen/types.gen.ts:13891](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13891)
