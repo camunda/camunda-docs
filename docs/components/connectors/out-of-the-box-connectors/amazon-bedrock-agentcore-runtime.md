@@ -5,7 +5,7 @@ title: Amazon Bedrock AgentCore Runtime connector
 description: Invoke external agents deployed on AWS Bedrock AgentCore Runtime from your BPMN process.
 ---
 
-The **Amazon Bedrock AgentCore Runtime connector** is an outbound connector that allows you to invoke external agents deployed on [Amazon Bedrock AgentCore Runtime](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agents-tools-runtime.html) from your BPMN process.
+With the **Amazon Bedrock AgentCore Runtime** outbound connector, you can invoke external agents deployed on [Amazon Bedrock AgentCore Runtime](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agents-tools-runtime.html) from your BPMN process.
 
 Use this connector to delegate complex reasoning tasks to specialized AI agents hosted on AWS, such as fraud detection, risk analysis, or document processing agents built with frameworks like Strands, LangGraph, or CrewAI.
 
@@ -31,19 +31,25 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Authentication
 
-Select an authentication type from the **Authentication** dropdown.
+To authenticate, choose one of the methods from the **Authentication** dropdown. The supported options are:
 
-- **Credentials** (SaaS/Self-Managed): Select this option if you have a valid pair of access and secret keys provided by your AWS account administrator.
-
-- **Default Credentials Chain** (Hybrid/Self-Managed only): Select this option if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+- Use **Credentials** if you have a valid pair of access and secret keys provided by your AWS account administrator.
 
 :::note
-The **Default Credentials Chain** option is applicable only for Self-Managed or hybrid distributions.
+This option is applicable for both SaaS and Self-Managed users.
 :::
+
+- Use **Default Credentials Chain** if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+
+:::note
+This option is applicable only for Self-Managed or hybrid distributions.
+:::
+
+For more information on authentication and security in Amazon Bedrock, see [Amazon Bedrock security and privacy](https://aws.amazon.com/bedrock/security-compliance/).
 
 ## Configuration
 
-In the **Region** field, enter the AWS region where your agent is deployed (for example, `us-east-1`).
+In the **Region** field, enter the AWS region where your agent is deployed. For example, `us-east-1`.
 
 ## Agent configuration
 
@@ -101,5 +107,5 @@ For example, to extract the agent's response:
 To maintain context across multiple interactions with the same agent, pass the `sessionId` from the previous response into the **Session ID** field of the next call. This allows the agent to remember prior messages and maintain state.
 
 :::note
-When using the connector as a tool in an [AI Agent subprocess](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), use the `fromAi()` function for the **Prompt** field to let the orchestrating agent compose the message dynamically based on the user's request.
+When using the connector as a tool in an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), use the `fromAi()` function for the **Prompt** field to let the orchestrating agent compose the message dynamically based on the user's request.
 :::
