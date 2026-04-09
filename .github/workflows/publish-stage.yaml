@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: gcp-core-4-default
+    runs-on: gcp-core-8-default
     container: node:24
     steps:
       - uses: actions/checkout@v6
