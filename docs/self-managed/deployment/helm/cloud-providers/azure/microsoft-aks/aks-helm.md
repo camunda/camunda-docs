@@ -253,7 +253,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable Web Modeler, Console, and Management Identity in an OIDC-enabled full cluster, refer to [deploy required dependencies with Kubernetes operators – Camunda deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
 ### 3. Deploy prerequisite services
 
