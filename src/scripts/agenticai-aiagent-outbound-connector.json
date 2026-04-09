@@ -1,0 +1,1755 @@
+{
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "AI Agent Task",
+  "id": "io.camunda.connectors.agenticai.aiagent.v1",
+  "description": "Execute a single AI-powered action with tool calling capabilities",
+  "metadata": {
+    "keywords": ["AI", "AI Agent", "agentic orchestration"]
+  },
+  "documentationRef": "https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task/",
+  "version": 7,
+  "category": {
+    "id": "connectors",
+    "name": "Connectors"
+  },
+  "appliesTo": ["bpmn:Task"],
+  "elementType": {
+    "value": "bpmn:ServiceTask"
+  },
+  "engines": {
+    "camunda": "^8.9"
+  },
+  "groups": [
+    {
+      "id": "provider",
+      "label": "Model provider",
+      "openByDefault": false
+    },
+    {
+      "id": "model",
+      "label": "Model",
+      "openByDefault": false
+    },
+    {
+      "id": "systemPrompt",
+      "label": "System prompt",
+      "tooltip": "A system prompt is a set of foundational instructions given to a model before any user interaction begins. It defines the AI agent’s role, behavior, tone, and communication style, ensuring that responses remain consistent and aligned with the AI agent’s intended purpose. These instructions help shape how the model interprets and responds to user input throughout the conversation.",
+      "openByDefault": false
+    },
+    {
+      "id": "userPrompt",
+      "label": "User prompt",
+      "tooltip": "A user prompt is the message or question you give to the AI to start or continue a conversation. It tells the AI what you need, whether it's information, help with a task, or just a chat. The AI uses your prompt to understand how to respond.",
+      "openByDefault": false
+    },
+    {
+      "id": "tools",
+      "label": "Tools",
+      "tooltip": "Tools are optional features the AI Agent can use to perform specific tasks. Configure this if the agent should participate in a tools feedback loop.",
+      "openByDefault": false
+    },
+    {
+      "id": "memory",
+      "label": "Memory",
+      "tooltip": "Configuration of the Agent's short-term/conversational memory.",
+      "openByDefault": false
+    },
+    {
+      "id": "limits",
+      "label": "Limits",
+      "openByDefault": false
+    },
+    {
+      "id": "response",
+      "label": "Response",
+      "tooltip": "Configuration of the model response format and how to map the model response to the connector result.<br><br>Depending on the selection, the model response will be available as <code>response.responseText</code> or <code>response.responseJson</code>.<br><br>See <a href=\"https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task/#response\">documentation</a> for details.",
+      "openByDefault": false
+    },
+    {
+      "id": "connector",
+      "label": "Connector"
+    },
+    {
+      "id": "output",
+      "label": "Output mapping"
+    },
+    {
+      "id": "error",
+      "label": "Error handling"
+    },
+    {
+      "id": "retries",
+      "label": "Retries"
+    }
+  ],
+  "properties": [
+    {
+      "value": "io.camunda.agenticai:aiagent:1",
+      "binding": {
+        "property": "type",
+        "type": "zeebe:taskDefinition"
+      },
+      "type": "Hidden"
+    },
+    {
+      "id": "provider.type",
+      "label": "Provider",
+      "description": "Specify the LLM provider to use.",
+      "value": "anthropic",
+      "group": "provider",
+      "binding": {
+        "name": "provider.type",
+        "type": "zeebe:input"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "Anthropic",
+          "value": "anthropic"
+        },
+        {
+          "name": "AWS Bedrock",
+          "value": "bedrock"
+        },
+        {
+          "name": "Azure OpenAI",
+          "value": "azureOpenAi"
+        },
+        {
+          "name": "Google Vertex AI",
+          "value": "google-vertex-ai"
+        },
+        {
+          "name": "OpenAI",
+          "value": "openai"
+        },
+        {
+          "name": "OpenAI Compatible",
+          "value": "openaiCompatible"
+        }
+      ]
+    },
+    {
+      "id": "provider.anthropic.endpoint",
+      "label": "Endpoint",
+      "description": "Optional custom API endpoint",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.anthropic.endpoint",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.anthropic.authentication.apiKey",
+      "label": "Anthropic API key",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.anthropic.authentication.apiKey",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.anthropic.timeouts.timeout",
+      "label": "Timeout",
+      "description": "Timeout specification for API calls to the model provider defined as ISO-8601 duration (example: <code>PT60S</code>).",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.anthropic.timeouts.timeout",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.bedrock.region",
+      "label": "Region",
+      "description": "Specify the AWS region (example: <code>eu-west-1</code>)",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.bedrock.region",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.bedrock.endpoint",
+      "label": "Endpoint",
+      "description": "Optional custom API endpoint",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.bedrock.endpoint",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.bedrock.authentication.type",
+      "label": "Authentication",
+      "description": "Specify the AWS authentication strategy. Learn more at the <a href=\"https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/#authentication\" target=\"_blank\">documentation page</a>",
+      "value": "credentials",
+      "group": "provider",
+      "binding": {
+        "name": "provider.bedrock.authentication.type",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "Credentials",
+          "value": "credentials"
+        },
+        {
+          "name": "API Key",
+          "value": "apiKey"
+        },
+        {
+          "name": "Default Credentials Chain (Hybrid/Self-Managed only)",
+          "value": "defaultCredentialsChain"
+        }
+      ]
+    },
+    {
+      "id": "provider.bedrock.authentication.accessKey",
+      "label": "Access key",
+      "description": "Provide an IAM access key tailored to a user, equipped with the necessary permissions",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.bedrock.authentication.accessKey",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.bedrock.authentication.type",
+            "equals": "credentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "bedrock",
+            "type": "simple"
+          }
+        ]
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.bedrock.authentication.secretKey",
+      "label": "Secret key",
+      "description": "Provide a secret key of a user with permissions to invoke specified AWS Lambda function",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.bedrock.authentication.secretKey",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.bedrock.authentication.type",
+            "equals": "credentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "bedrock",
+            "type": "simple"
+          }
+        ]
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.bedrock.authentication.apiKey",
+      "label": "API Key",
+      "description": "Provide an API Key with permissions to interact with your AWS Bedrock Instance",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.bedrock.authentication.apiKey",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.bedrock.authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "bedrock",
+            "type": "simple"
+          }
+        ]
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.bedrock.timeouts.timeout",
+      "label": "Timeout",
+      "description": "Timeout specification for API calls to the model provider defined as ISO-8601 duration (example: <code>PT60S</code>).",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.bedrock.timeouts.timeout",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.azureOpenAi.endpoint",
+      "label": "Endpoint",
+      "description": "Specify Azure OpenAI endpoint. Details in the <a href=\"https://learn.microsoft.com/en-us/azure/ai-foundry/openai/reference\" target=\"_blank\">documentation</a>.",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.azureOpenAi.endpoint",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "azureOpenAi",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.azureOpenAi.authentication.type",
+      "label": "Authentication",
+      "description": "Specify the Azure OpenAI authentication strategy.",
+      "value": "apiKey",
+      "group": "provider",
+      "binding": {
+        "name": "provider.azureOpenAi.authentication.type",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "azureOpenAi",
+        "type": "simple"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "API key",
+          "value": "apiKey"
+        },
+        {
+          "name": "Client credentials",
+          "value": "clientCredentials"
+        }
+      ]
+    },
+    {
+      "id": "provider.azureOpenAi.authentication.apiKey",
+      "label": "API key",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.azureOpenAi.authentication.apiKey",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.azureOpenAi.authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "azureOpenAi",
+            "type": "simple"
+          }
+        ]
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.azureOpenAi.authentication.clientId",
+      "label": "Client ID",
+      "description": "ID of a Microsoft Entra application",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.azureOpenAi.authentication.clientId",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.azureOpenAi.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "azureOpenAi",
+            "type": "simple"
+          }
+        ]
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.azureOpenAi.authentication.clientSecret",
+      "label": "Client secret",
+      "description": "Secret of a Microsoft Entra application",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.azureOpenAi.authentication.clientSecret",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.azureOpenAi.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "azureOpenAi",
+            "type": "simple"
+          }
+        ]
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.azureOpenAi.authentication.tenantId",
+      "label": "Tenant ID",
+      "description": "ID of a Microsoft Entra tenant. Details in the <a href=\"https://learn.microsoft.com/en-us/entra/fundamentals/how-to-find-tenant\" target=\"_blank\">documentation</a>.",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.azureOpenAi.authentication.tenantId",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.azureOpenAi.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "azureOpenAi",
+            "type": "simple"
+          }
+        ]
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.azureOpenAi.authentication.authorityHost",
+      "label": "Authority host",
+      "description": "Authority host URL for the Microsoft Entra application. Defaults to <code>https://login.microsoftonline.com</code>. This can also contain an OAuth 2.0 token endpoint.",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.azureOpenAi.authentication.authorityHost",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.azureOpenAi.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "azureOpenAi",
+            "type": "simple"
+          }
+        ]
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.azureOpenAi.timeouts.timeout",
+      "label": "Timeout",
+      "description": "Timeout specification for API calls to the model provider defined as ISO-8601 duration (example: <code>PT60S</code>).",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.azureOpenAi.timeouts.timeout",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "azureOpenAi",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.googleVertexAi.projectId",
+      "label": "Project ID",
+      "description": "Specify Google Cloud project ID",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.googleVertexAi.projectId",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-vertex-ai",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.googleVertexAi.region",
+      "label": "Region",
+      "description": "Specify the region where AI inference should take place",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.googleVertexAi.region",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-vertex-ai",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.googleVertexAi.authentication.type",
+      "label": "Authentication",
+      "description": "Specify the Google Vertex AI authentication strategy.",
+      "value": "serviceAccountCredentials",
+      "group": "provider",
+      "binding": {
+        "name": "provider.googleVertexAi.authentication.type",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-vertex-ai",
+        "type": "simple"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "Service account credentials",
+          "value": "serviceAccountCredentials"
+        },
+        {
+          "name": "Application default credentials (Hybrid/Self-Managed only)",
+          "value": "applicationDefaultCredentials"
+        }
+      ]
+    },
+    {
+      "id": "provider.googleVertexAi.authentication.jsonKey",
+      "label": "JSON key of the service account",
+      "description": "This is the key of the service account in JSON format.",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.googleVertexAi.authentication.jsonKey",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.googleVertexAi.authentication.type",
+            "equals": "serviceAccountCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "google-vertex-ai",
+            "type": "simple"
+          }
+        ]
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.openai.authentication.apiKey",
+      "label": "OpenAI API key",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.openai.authentication.apiKey",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.openai.authentication.organizationId",
+      "label": "Organization ID",
+      "description": "For members of multiple organizations. Details in the <a href=\"https://platform.openai.com/docs/api-reference/authentication\" target=\"_blank\">documentation</a>.",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.openai.authentication.organizationId",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.openai.authentication.projectId",
+      "label": "Project ID",
+      "description": "For accounts with multiple projects. Details in the <a href=\"https://platform.openai.com/docs/api-reference/authentication\" target=\"_blank\">documentation</a>.",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.openai.authentication.projectId",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.openai.timeouts.timeout",
+      "label": "Timeout",
+      "description": "Timeout specification for API calls to the model provider defined as ISO-8601 duration (example: <code>PT60S</code>).",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.openai.timeouts.timeout",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.openaiCompatible.endpoint",
+      "label": "API endpoint",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.openaiCompatible.endpoint",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "tooltip": "Specify an endpoint to use the connector with an OpenAI compatible API. ",
+      "type": "String"
+    },
+    {
+      "id": "provider.openaiCompatible.authentication.apiKey",
+      "label": "API key",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.openaiCompatible.authentication.apiKey",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "tooltip": "Leave blank if using HTTP headers for authentication.<br>If an Authorization header is specified in the headers, then the API key is ignored.",
+      "type": "String"
+    },
+    {
+      "id": "provider.openaiCompatible.headers",
+      "label": "Headers",
+      "description": "Map of HTTP headers to add to the request.",
+      "optional": true,
+      "feel": "required",
+      "group": "provider",
+      "binding": {
+        "name": "provider.openaiCompatible.headers",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.openaiCompatible.queryParameters",
+      "label": "Query Parameters",
+      "description": "Map of query parameters to add to the request URL.",
+      "optional": true,
+      "feel": "required",
+      "group": "provider",
+      "binding": {
+        "name": "provider.openaiCompatible.queryParameters",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.openaiCompatible.timeouts.timeout",
+      "label": "Timeout",
+      "description": "Timeout specification for API calls to the model provider defined as ISO-8601 duration (example: <code>PT60S</code>).",
+      "optional": true,
+      "feel": "optional",
+      "group": "provider",
+      "binding": {
+        "name": "provider.openaiCompatible.timeouts.timeout",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.anthropic.model.model",
+      "label": "Model",
+      "description": "Specify the model ID. Details in the <a href=\"https://docs.anthropic.com/en/docs/about-claude/models/all-models\" target=\"_blank\">documentation</a>.",
+      "optional": false,
+      "value": "claude-3-5-sonnet-20240620",
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "model",
+      "binding": {
+        "name": "provider.anthropic.model.model",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.anthropic.model.parameters.maxTokens",
+      "label": "Maximum tokens",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.anthropic.model.parameters.maxTokens",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "tooltip": "The maximum number of tokens per request to generate before stopping. <br><br>Details in the <a href=\"https://docs.anthropic.com/en/api/messages#body-max-tokens\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.anthropic.model.parameters.temperature",
+      "label": "Temperature",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.anthropic.model.parameters.temperature",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "tooltip": "Floating point number between 0 and 1. The higher the number, the more randomness will be injected into the response. <br><br>Details in the <a href=\"https://docs.anthropic.com/en/api/messages#body-temperature\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.anthropic.model.parameters.topP",
+      "label": "top P",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.anthropic.model.parameters.topP",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "tooltip": "Floating point number between 0 and 1. Recommended for advanced use cases only (you usually only need to use temperature). <br><br>Details in the <a href=\"https://docs.anthropic.com/en/api/messages#body-top-p\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.anthropic.model.parameters.topK",
+      "label": "top K",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.anthropic.model.parameters.topK",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "tooltip": "Integer greater than 0. Recommended for advanced use cases only (you usually only need to use temperature). <br><br>Details in the <a href=\"https://docs.anthropic.com/en/api/messages#body-top-k\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.bedrock.model.model",
+      "label": "Model",
+      "description": "Specify the model ID. Details in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html\" target=\"_blank\">documentation</a>.",
+      "optional": false,
+      "value": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "model",
+      "binding": {
+        "name": "provider.bedrock.model.model",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.bedrock.model.parameters.maxTokens",
+      "label": "Maximum tokens",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.bedrock.model.parameters.maxTokens",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "tooltip": "The maximum number of tokens per request to allow in the generated response. <br><br>Details in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InferenceConfiguration.html\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.bedrock.model.parameters.temperature",
+      "label": "Temperature",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.bedrock.model.parameters.temperature",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "tooltip": "Floating point number between 0 and 1. The higher the number, the more randomness will be injected into the response. <br><br>Details in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InferenceConfiguration.html\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.bedrock.model.parameters.topP",
+      "label": "top P",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.bedrock.model.parameters.topP",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "tooltip": "Floating point number between 0 and 1. Recommended for advanced use cases only (you usually only need to use temperature). <br><br>Details in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InferenceConfiguration.html\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.azureOpenAi.model.deploymentName",
+      "label": "Model deployment name",
+      "description": "Specify the model deployment name. Details in the <a href=\"https://learn.microsoft.com/en-us/azure/ai-foundry/openai/reference\" target=\"_blank\">documentation</a>.",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "model",
+      "binding": {
+        "name": "provider.azureOpenAi.model.deploymentName",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "azureOpenAi",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.azureOpenAi.model.parameters.maxTokens",
+      "label": "Maximum tokens",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.azureOpenAi.model.parameters.maxTokens",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "azureOpenAi",
+        "type": "simple"
+      },
+      "tooltip": "The maximum number of tokens per request to generate before stopping. <br><br>Details in the <a href=\"https://learn.microsoft.com/en-us/azure/ai-foundry/openai/reference#request-body\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.azureOpenAi.model.parameters.temperature",
+      "label": "Temperature",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.azureOpenAi.model.parameters.temperature",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "azureOpenAi",
+        "type": "simple"
+      },
+      "tooltip": "Floating point number between 0 and 2. The higher the number, the more randomness will be injected into the response. <br><br>Details in the <a href=\"https://learn.microsoft.com/en-us/azure/ai-foundry/openai/reference#request-body\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.azureOpenAi.model.parameters.topP",
+      "label": "top P",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.azureOpenAi.model.parameters.topP",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "azureOpenAi",
+        "type": "simple"
+      },
+      "tooltip": "Recommended for advanced use cases only (you usually only need to use temperature). <br><br>Details in the <a href=\"https://learn.microsoft.com/en-us/azure/ai-foundry/openai/reference#request-body\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.googleVertexAi.model.model",
+      "label": "Model",
+      "description": "Specify the model ID. Details in the <a href=\"https://cloud.google.com/vertex-ai/docs/generative-ai/models\" target=\"_blank\">documentation</a>.",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "model",
+      "binding": {
+        "name": "provider.googleVertexAi.model.model",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-vertex-ai",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.googleVertexAi.model.parameters.maxOutputTokens",
+      "label": "Maximum output tokens",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.googleVertexAi.model.parameters.maxOutputTokens",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-vertex-ai",
+        "type": "simple"
+      },
+      "tooltip": "Maximum number of tokens that can be generated in the response. <br><br>Details in the <a href=\"https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.googleVertexAi.model.parameters.temperature",
+      "label": "Temperature",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.googleVertexAi.model.parameters.temperature",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-vertex-ai",
+        "type": "simple"
+      },
+      "tooltip": "Controls the degree of randomness in token selection. <br><br>Details in the <a href=\"https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.googleVertexAi.model.parameters.topP",
+      "label": "top P",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.googleVertexAi.model.parameters.topP",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-vertex-ai",
+        "type": "simple"
+      },
+      "tooltip": "Floating point number between 0 and 1. Recommended for advanced use cases only (you usually only need to use temperature). <br><br>Details in the <a href=\"https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.googleVertexAi.model.parameters.topK",
+      "label": "top K",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.googleVertexAi.model.parameters.topK",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-vertex-ai",
+        "type": "simple"
+      },
+      "tooltip": "Integer greater than 0. Recommended for advanced use cases only (you usually only need to use temperature). <br><br>Details in the <a href=\"https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/inference\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.openai.model.model",
+      "label": "Model",
+      "description": "Specify the model ID. Details in the <a href=\"https://platform.openai.com/docs/models\" target=\"_blank\">documentation</a>.",
+      "optional": false,
+      "value": "gpt-4o",
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "model",
+      "binding": {
+        "name": "provider.openai.model.model",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.openai.model.parameters.maxCompletionTokens",
+      "label": "Maximum completion tokens",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.openai.model.parameters.maxCompletionTokens",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "tooltip": "The maximum number of tokens per request to generate before stopping. <br><br>Details in the <a href=\"https://platform.openai.com/docs/api-reference/chat/create#chat-create-max_completion_tokens\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.openai.model.parameters.temperature",
+      "label": "Temperature",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.openai.model.parameters.temperature",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "tooltip": "Floating point number between 0 and 2. The higher the number, the more randomness will be injected into the response. <br><br>Details in the <a href=\"https://platform.openai.com/docs/api-reference/chat/create#chat-create-temperature\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.openai.model.parameters.topP",
+      "label": "top P",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.openai.model.parameters.topP",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "tooltip": "Recommended for advanced use cases only (you usually only need to use temperature). <br><br>Details in the <a href=\"https://platform.openai.com/docs/api-reference/chat/create#chat-create-top_p\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.openaiCompatible.model.model",
+      "label": "Model",
+      "description": "Specify the model ID. Details in the <a href=\"https://platform.openai.com/docs/models\" target=\"_blank\">documentation</a>.",
+      "optional": false,
+      "value": "gpt-4o",
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "model",
+      "binding": {
+        "name": "provider.openaiCompatible.model.model",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "provider.openaiCompatible.model.parameters.maxCompletionTokens",
+      "label": "Maximum completion tokens",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.openaiCompatible.model.parameters.maxCompletionTokens",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "tooltip": "The maximum number of tokens per request to generate before stopping. <br><br>Details in the <a href=\"https://platform.openai.com/docs/api-reference/chat/create#chat-create-max_completion_tokens\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.openaiCompatible.model.parameters.temperature",
+      "label": "Temperature",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.openaiCompatible.model.parameters.temperature",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "tooltip": "Floating point number between 0 and 2. The higher the number, the more randomness will be injected into the response. <br><br>Details in the <a href=\"https://platform.openai.com/docs/api-reference/chat/create#chat-create-temperature\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.openaiCompatible.model.parameters.topP",
+      "label": "top P",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.openaiCompatible.model.parameters.topP",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "tooltip": "Recommended for advanced use cases only (you usually only need to use temperature). <br><br>Details in the <a href=\"https://platform.openai.com/docs/api-reference/chat/create#chat-create-top_p\" target=\"_blank\">documentation</a>.",
+      "type": "Number"
+    },
+    {
+      "id": "provider.openaiCompatible.model.parameters.customParameters",
+      "label": "Custom parameters",
+      "description": "Map of additional request parameters to include.",
+      "optional": true,
+      "feel": "required",
+      "group": "model",
+      "binding": {
+        "name": "provider.openaiCompatible.model.parameters.customParameters",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "provider.type",
+        "equals": "openaiCompatible",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "data.systemPrompt.prompt",
+      "label": "System prompt",
+      "optional": false,
+      "value": "=\"You are **TaskAgent**, a helpful, generic chat agent that can handle a wide variety of customer requests using your own domain knowledge **and** any tools explicitly provided to you at runtime.\n\nIf tools are provided, you should prefer them instead of guessing an answer. You can call the same tool multiple times by providing different input values. Don't guess any tools which were not explicitly configured. If no tool matches the request, try to generate an answer. If you're not able to find a good answer, return with a message stating why you're not able to.\n\nWrap minimal, inspectable reasoning in *exactly* this XML template:\n\n<thinking>\n<context>…briefly state the customer’s need and current state…</context>\n<reflection>…list candidate tools, justify which you will call next and why…</reflection>\n</thinking>\n\nReveal **no** additional private reasoning outside these tags.\"",
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "required",
+      "group": "systemPrompt",
+      "binding": {
+        "name": "data.systemPrompt.prompt",
+        "type": "zeebe:input"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "data.userPrompt.prompt",
+      "label": "User prompt",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "required",
+      "group": "userPrompt",
+      "binding": {
+        "name": "data.userPrompt.prompt",
+        "type": "zeebe:input"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "data.userPrompt.documents",
+      "label": "Documents",
+      "description": "Documents to be included in the user prompt.",
+      "optional": true,
+      "feel": "required",
+      "group": "userPrompt",
+      "binding": {
+        "name": "data.userPrompt.documents",
+        "type": "zeebe:input"
+      },
+      "tooltip": "Referenced documents will be automatically added to the user prompt. <a href=\"https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task/\" target=\"_blank\">See documentation</a> for details and supported file types.",
+      "type": "String"
+    },
+    {
+      "id": "data.tools.containerElementId",
+      "label": "Ad-hoc sub-process ID",
+      "description": "ID of the sub-process that contains the tools the AI agent can use.",
+      "optional": true,
+      "feel": "optional",
+      "group": "tools",
+      "binding": {
+        "name": "data.tools.containerElementId",
+        "type": "zeebe:input"
+      },
+      "tooltip": "Add an ad-hoc sub-process ID to attach the AI agent to the tools. Ensure your process includes a tools feedback loop routing into the ad-hoc sub-process and back to the AI agent connector. <a href=\"https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task/\" target=\"_blank\">See documentation</a> for details.",
+      "type": "String"
+    },
+    {
+      "id": "data.tools.toolCallResults",
+      "label": "Tool call results",
+      "description": "Tool call results as returned by the sub-process.",
+      "optional": true,
+      "feel": "required",
+      "group": "tools",
+      "binding": {
+        "name": "data.tools.toolCallResults",
+        "type": "zeebe:input"
+      },
+      "tooltip": "This defines where to handle tool call results returned by the ad-hoc sub-process. Model this as part of your process and route it into the tools feedback loop. <a href=\"https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task/\" target=\"_blank\">See documentation</a> for details.",
+      "type": "Text"
+    },
+    {
+      "id": "data.agentContext",
+      "label": "Agent context",
+      "description": "Avoid reusing context variables across agents to prevent issues with stale data or tool access.",
+      "optional": false,
+      "value": "=agent.context",
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "required",
+      "group": "memory",
+      "binding": {
+        "name": "data.context",
+        "type": "zeebe:input"
+      },
+      "tooltip": "The agent context variable containing all relevant data for the agent to support the feedback loop between user requests, tool calls and LLM responses. Make sure this variable points to the <code>context</code> variable which is returned from the agent response. <a href=\"https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task/\" target=\"_blank\">See documentation</a> for details.",
+      "type": "Text"
+    },
+    {
+      "id": "data.memory.storage.type",
+      "label": "Memory storage type",
+      "description": "Specify how to store the conversation memory.",
+      "value": "in-process",
+      "group": "memory",
+      "binding": {
+        "name": "data.memory.storage.type",
+        "type": "zeebe:input"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "In Process (part of agent context)",
+          "value": "in-process"
+        },
+        {
+          "name": "Camunda Document Storage",
+          "value": "camunda-document"
+        },
+        {
+          "name": "Custom Implementation (Hybrid/Self-Managed only)",
+          "value": "custom"
+        }
+      ]
+    },
+    {
+      "id": "data.memory.storage.timeToLive",
+      "label": "Document TTL",
+      "description": "How long to retain the conversation document as ISO-8601 duration (example: <code>P14D</code>).",
+      "optional": true,
+      "feel": "optional",
+      "group": "memory",
+      "binding": {
+        "name": "data.memory.storage.timeToLive",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "camunda-document",
+        "type": "simple"
+      },
+      "tooltip": "Will use the cluster default TTL (time-to-live) if not specified. Make sure to set this value to a reasonable duration matching your process lifecycle.",
+      "type": "String"
+    },
+    {
+      "id": "data.memory.storage.customProperties",
+      "label": "Custom document properties",
+      "description": "An optional map of custom properties to be stored with the conversation document.",
+      "optional": true,
+      "feel": "required",
+      "group": "memory",
+      "binding": {
+        "name": "data.memory.storage.customProperties",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "camunda-document",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "data.memory.storage.storeType",
+      "label": "Implementation type",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "memory",
+      "binding": {
+        "name": "data.memory.storage.storeType",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "custom",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "data.memory.storage.parameters",
+      "label": "Parameters",
+      "description": "Parameters for the custom memory storage implementation.",
+      "optional": true,
+      "feel": "required",
+      "group": "memory",
+      "binding": {
+        "name": "data.memory.storage.parameters",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "custom",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "data.memory.contextWindowSize",
+      "label": "Context window size",
+      "description": "Maximum number of recent conversation messages which are passed to the model.",
+      "optional": false,
+      "value": 20,
+      "feel": "static",
+      "group": "memory",
+      "binding": {
+        "name": "data.memory.contextWindowSize",
+        "type": "zeebe:input"
+      },
+      "tooltip": "Use this to limit the number of messages which are sent to the model. The agent will only send the most recent messages up to the configured limit to the LLM. Older messages will be kept in the conversation store, but not sent to the model. <a href=\"https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task/\" target=\"_blank\">See documentation</a> for details.",
+      "type": "Number"
+    },
+    {
+      "id": "data.limits.maxModelCalls",
+      "label": "Maximum model calls",
+      "description": "Maximum number of calls to the model as a safety limit to prevent infinite loops.",
+      "optional": false,
+      "value": 10,
+      "feel": "static",
+      "group": "limits",
+      "binding": {
+        "name": "data.limits.maxModelCalls",
+        "type": "zeebe:input"
+      },
+      "type": "Number"
+    },
+    {
+      "id": "data.response.format.type",
+      "label": "Response format",
+      "description": "Specify the response format. Support for JSON mode varies by provider.",
+      "value": "text",
+      "group": "response",
+      "binding": {
+        "name": "data.response.format.type",
+        "type": "zeebe:input"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "Text",
+          "value": "text"
+        },
+        {
+          "name": "JSON",
+          "value": "json"
+        }
+      ]
+    },
+    {
+      "id": "data.response.format.parseJson",
+      "label": "Parse text as JSON",
+      "description": "Tries to parse the LLM response text as JSON object.",
+      "optional": true,
+      "feel": "static",
+      "group": "response",
+      "binding": {
+        "name": "data.response.format.parseJson",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "data.response.format.type",
+        "equals": "text",
+        "type": "simple"
+      },
+      "tooltip": "Use this option in combination with models which don't support native JSON mode/structured tool calling (e.g. Anthropic). Make sure to instruct the model to return valid JSON in the system prompt. The parsed JSON will be available as <code>response.responseJson</code>.<br><br>If parsing fails, <code>null</code> will be returned as JSON response, but the text content will still be available as <code>response.responseText</code>.",
+      "type": "Boolean"
+    },
+    {
+      "id": "data.response.format.schema",
+      "label": "Response JSON schema",
+      "description": "An optional response <a href=\"https://json-schema.org/\" target=\"_blank\">JSON Schema</a> to instruct the model how to structure the JSON output.",
+      "optional": true,
+      "feel": "required",
+      "group": "response",
+      "binding": {
+        "name": "data.response.format.schema",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "data.response.format.type",
+        "equals": "json",
+        "type": "simple"
+      },
+      "tooltip": "If supported by the model, the response will be structured according to the provided schema. A parsed version of the response will be available as <code>response.responseJson</code>.",
+      "type": "String"
+    },
+    {
+      "id": "data.response.format.schemaName",
+      "label": "Response JSON schema name",
+      "description": "An optional name for the response JSON Schema to make the model aware of the expected output.",
+      "optional": true,
+      "value": "Response",
+      "feel": "optional",
+      "group": "response",
+      "binding": {
+        "name": "data.response.format.schemaName",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "data.response.format.type",
+        "equals": "json",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "data.response.includeAssistantMessage",
+      "label": "Include assistant message",
+      "description": "Include the full assistant message as part of the result object.",
+      "optional": true,
+      "feel": "static",
+      "group": "response",
+      "binding": {
+        "name": "data.response.includeAssistantMessage",
+        "type": "zeebe:input"
+      },
+      "tooltip": "In addition to the text content, the assistant message may include multiple additional content blocks and metadata (such as token usage). The message will be available as <code>response.responseMessage</code>.",
+      "type": "Boolean"
+    },
+    {
+      "id": "version",
+      "label": "Version",
+      "description": "Version of the element template",
+      "value": "7",
+      "group": "connector",
+      "binding": {
+        "key": "elementTemplateVersion",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "Hidden"
+    },
+    {
+      "id": "id",
+      "label": "ID",
+      "description": "ID of the element template",
+      "value": "io.camunda.connectors.agenticai.aiagent.v1",
+      "group": "connector",
+      "binding": {
+        "key": "elementTemplateId",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "Hidden"
+    },
+    {
+      "id": "resultVariable",
+      "label": "Result variable",
+      "description": "Name of variable to store the response in",
+      "value": "agent",
+      "group": "output",
+      "binding": {
+        "key": "resultVariable",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "String"
+    },
+    {
+      "id": "resultExpression",
+      "label": "Result expression",
+      "description": "Expression to map the response into process variables",
+      "feel": "required",
+      "group": "output",
+      "binding": {
+        "key": "resultExpression",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "errorExpression",
+      "label": "Error expression",
+      "description": "Expression to handle errors. Details in the <a href=\"https://docs.camunda.io/docs/components/connectors/use-connectors/\" target=\"_blank\">documentation</a>.",
+      "feel": "required",
+      "group": "error",
+      "binding": {
+        "key": "errorExpression",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "retryCount",
+      "label": "Retries",
+      "description": "Number of retries",
+      "value": "3",
+      "feel": "optional",
+      "group": "retries",
+      "binding": {
+        "property": "retries",
+        "type": "zeebe:taskDefinition"
+      },
+      "type": "String"
+    },
+    {
+      "id": "retryBackoff",
+      "label": "Retry backoff",
+      "description": "ISO-8601 duration to wait between retries",
+      "value": "PT0S",
+      "group": "retries",
+      "binding": {
+        "key": "retryBackoff",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "String"
+    }
+  ],
+  "icon": {
+    "contents": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNBNTZFRkYiLz4KPG1hc2sgaWQ9InBhdGgtMi1vdXRzaWRlLTFfMTg1XzYiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjQiIHk9IjQiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iYmxhY2siPgo8cmVjdCBmaWxsPSJ3aGl0ZSIgeD0iNCIgeT0iNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAuMDEwNSAxMi4wOTg3QzE4LjQ5IDEwLjU4OTQgMTcuMTU5NCA4LjEwODE0IDE2LjE3OTkgNi4wMTEwM0MxNi4xNTIgNi4wMDQ1MSAxNi4xMTc2IDYgMTYuMDc5NCA2QzE2LjA0MTEgNiAxNi4wMDY2IDYuMDA0NTEgMTUuOTc4OCA2LjAxMTA0QzE0Ljk5OTQgOC4xMDgxNCAxMy42Njk3IDEwLjU4ODkgMTIuMTQ4MSAxMi4wOTgxQzEwLjYyNjkgMTMuNjA3MSA4LjEyNTY4IDE0LjkyNjQgNi4wMTE1NyAxNS44OTgxQzYuMDA0NzQgMTUuOTI2MSA2IDE1Ljk2MTEgNiAxNkM2IDE2LjAzODcgNi4wMDQ2OCAxNi4wNzM2IDYuMDExNDQgMTYuMTAxNEM4LjEyNTE5IDE3LjA3MjkgMTAuNjI2MiAxOC4zOTE5IDEyLjE0NzcgMTkuOTAxNkMxMy42Njk3IDIxLjQxMDcgMTQuOTk5NiAyMy44OTIgMTUuOTc5MSAyNS45ODlDMTYuMDA2OCAyNS45OTU2IDE2LjA0MTEgMjYgMTYuMDc5MyAyNkMxNi4xMTc1IDI2IDE2LjE1MTkgMjUuOTk1NCAxNi4xNzk2IDI1Ljk4OUMxNy4xNTkxIDIzLjg5MiAxOC40ODg4IDIxLjQxMSAyMC4wMDk5IDE5LjkwMjFNMjAuMDA5OSAxOS45MDIxQzIxLjUyNTMgMTguMzk4NyAyMy45NDY1IDE3LjA2NjkgMjUuOTkxNSAxNi4wODI0QzI1Ljk5NjUgMTYuMDU5MyAyNiAxNi4wMzEgMjYgMTUuOTk5N0MyNiAxNS45Njg0IDI1Ljk5NjUgMTUuOTQwMyAyNS45OTE1IDE1LjkxNzFDMjMuOTQ3NCAxNC45MzI3IDIxLjUyNTkgMTMuNjAxIDIwLjAxMDUgMTIuMDk4NyIvPgo8L21hc2s+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAuMDEwNSAxMi4wOTg3QzE4LjQ5IDEwLjU4OTQgMTcuMTU5NCA4LjEwODE0IDE2LjE3OTkgNi4wMTEwM0MxNi4xNTIgNi4wMDQ1MSAxNi4xMTc2IDYgMTYuMDc5NCA2QzE2LjA0MTEgNiAxNi4wMDY2IDYuMDA0NTEgMTUuOTc4OCA2LjAxMTA0QzE0Ljk5OTQgOC4xMDgxNCAxMy42Njk3IDEwLjU4ODkgMTIuMTQ4MSAxMi4wOTgxQzEwLjYyNjkgMTMuNjA3MSA4LjEyNTY4IDE0LjkyNjQgNi4wMTE1NyAxNS44OTgxQzYuMDA0NzQgMTUuOTI2MSA2IDE1Ljk2MTEgNiAxNkM2IDE2LjAzODcgNi4wMDQ2OCAxNi4wNzM2IDYuMDExNDQgMTYuMTAxNEM4LjEyNTE5IDE3LjA3MjkgMTAuNjI2MiAxOC4zOTE5IDEyLjE0NzcgMTkuOTAxNkMxMy42Njk3IDIxLjQxMDcgMTQuOTk5NiAyMy44OTIgMTUuOTc5MSAyNS45ODlDMTYuMDA2OCAyNS45OTU2IDE2LjA0MTEgMjYgMTYuMDc5MyAyNkMxNi4xMTc1IDI2IDE2LjE1MTkgMjUuOTk1NCAxNi4xNzk2IDI1Ljk4OUMxNy4xNTkxIDIzLjg5MiAxOC40ODg4IDIxLjQxMSAyMC4wMDk5IDE5LjkwMjFNMjAuMDA5OSAxOS45MDIxQzIxLjUyNTMgMTguMzk4NyAyMy45NDY1IDE3LjA2NjkgMjUuOTkxNSAxNi4wODI0QzI1Ljk5NjUgMTYuMDU5MyAyNiAxNi4wMzEgMjYgMTUuOTk5N0MyNiAxNS45Njg0IDI1Ljk5NjUgMTUuOTQwMyAyNS45OTE1IDE1LjkxNzFDMjMuOTQ3NCAxNC45MzI3IDIxLjUyNTkgMTMuNjAxIDIwLjAxMDUgMTIuMDk4NyIgZmlsbD0id2hpdGUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMC4wMTA1IDEyLjA5ODdDMTguNDkgMTAuNTg5NCAxNy4xNTk0IDguMTA4MTQgMTYuMTc5OSA2LjAxMTAzQzE2LjE1MiA2LjAwNDUxIDE2LjExNzYgNiAxNi4wNzk0IDZDMTYuMDQxMSA2IDE2LjAwNjYgNi4wMDQ1MSAxNS45Nzg4IDYuMDExMDRDMTQuOTk5NCA4LjEwODE0IDEzLjY2OTcgMTAuNTg4OSAxMi4xNDgxIDEyLjA5ODFDMTAuNjI2OSAxMy42MDcxIDguMTI1NjggMTQuOTI2NCA2LjAxMTU3IDE1Ljg5ODFDNi4wMDQ3NCAxNS45MjYxIDYgMTUuOTYxMSA2IDE2QzYgMTYuMDM4NyA2LjAwNDY4IDE2LjA3MzYgNi4wMTE0NCAxNi4xMDE0QzguMTI1MTkgMTcuMDcyOSAxMC42MjYyIDE4LjM5MTkgMTIuMTQ3NyAxOS45MDE2QzEzLjY2OTcgMjEuNDEwNyAxNC45OTk2IDIzLjg5MiAxNS45NzkxIDI1Ljk4OUMxNi4wMDY4IDI1Ljk5NTYgMTYuMDQxMSAyNiAxNi4wNzkzIDI2QzE2LjExNzUgMjYgMTYuMTUxOSAyNS45OTU0IDE2LjE3OTYgMjUuOTg5QzE3LjE1OTEgMjMuODkyIDE4LjQ4ODggMjEuNDExIDIwLjAwOTkgMTkuOTAyMU0yMC4wMDk5IDE5LjkwMjFDMjEuNTI1MyAxOC4zOTg3IDIzLjk0NjUgMTcuMDY2OSAyNS45OTE1IDE2LjA4MjRDMjUuOTk2NSAxNi4wNTkzIDI2IDE2LjAzMSAyNiAxNS45OTk3QzI2IDE1Ljk2ODQgMjUuOTk2NSAxNS45NDAzIDI1Ljk5MTUgMTUuOTE3MUMyMy45NDc0IDE0LjkzMjcgMjEuNTI1OSAxMy42MDEgMjAuMDEwNSAxMi4wOTg3IiBzdHJva2U9IiM0OTFEOEIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgbWFzaz0idXJsKCNwYXRoLTItb3V0c2lkZS0xXzE4NV82KSIvPgo8L3N2Zz4K"
+  }
+}

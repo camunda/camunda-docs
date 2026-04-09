@@ -5,19 +5,7 @@ title: AI Agent Sub-process connector
 description: AI agent connector implementation based on ad-hoc sub-processes.
 ---
 
-import ConfigurationModelProvider from './agentic-ai/aiagent/configuration/\_model-provider.md';
-import ConfigurationModel from './agentic-ai/aiagent/configuration/\_model.md';
-import ConfigurationSystemPrompt from './agentic-ai/aiagent/configuration/\_system-prompt.md';
-import ConfigurationUserPrompt from './agentic-ai/aiagent/configuration/\_user-prompt.md';
-import ConfigurationTools from './agentic-ai/aiagent/configuration/\_tools.md';
-import ConfigurationMemoryProcess from './agentic-ai/aiagent/configuration/\_memory-process.md';
-import ConfigurationLimits from './agentic-ai/aiagent/configuration/\_limits.md';
-import ConfigurationEventHandling from './agentic-ai/aiagent/configuration/\_event-handling.md';
-import ConfigurationResponse from './agentic-ai/aiagent/configuration/\_response.md';
-import ConfigurationOutputMappingProcess from './agentic-ai/aiagent/configuration/\_output-mapping-process.md';
-import ConfigurationErrorHandling from './agentic-ai/aiagent/configuration/\_error-handling.md';
-import ConfigurationRetries from './agentic-ai/aiagent/configuration/\_retries.md';
-import ConfigurationExecutionListeners from './agentic-ai/aiagent/configuration/\_execution-listeners.md';
+import MDRef from './generated_reference_partials/agenticai-aiagent-outbound-connector.md';
 import AgentProcessImg from '../img/ai-agent-subprocess.png';
 
 Implement an AI agent using an ad-hoc sub-process with an applied AI Agent connector template.
@@ -35,17 +23,37 @@ This connector implementation creates an implicit feedback loop for tool calls a
 
 <img src={AgentProcessImg} alt="AI Agent Sub-process" class="img-700"/>
 
-## Configuration
+## Configuration reference
 
-<ConfigurationModelProvider />
-<ConfigurationModel />
-<ConfigurationSystemPrompt />
-<ConfigurationUserPrompt />
-<ConfigurationMemoryProcess />
-<ConfigurationLimits />
-<ConfigurationEventHandling />
-<ConfigurationResponse type="process" />
-<ConfigurationOutputMappingProcess />
-<ConfigurationErrorHandling type="process" />
-<ConfigurationRetries />
-<ConfigurationExecutionListeners />
+<!-- <AgenticaiAiagentOutboundConnectorReference>
+
+<Before section="provider">
+:::note
+
+- Different setup/authentication fields are shown depending on the provider you select.
+- Use [connector secrets](/components/console/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly from the process.
+
+:::
+
+#### Timeout handling
+
+The default timeout for model API calls is set to three minutes by the runtime. Self-managed Spring connector runtime instances allow you to override this value by setting the `camunda.connector.agenticai.aiagent.chat-model.api.default-timeout` property in the Spring application properties file.
+
+You can also specify a custom timeout per provider in the **Timeout** field below. This value takes precedence over the default timeout.
+
+All values must be provided in the [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout.
+
+For more details, see the individual provider sections below, especially for any provider-specific limitations.
+
+:::important
+The timeout setting must not exceed the job worker timeout; otherwise, the job may be reassigned by the engine while the model call is still in progress.
+:::
+</Before>
+
+<After section="provider">
+    Some content after the section...
+</After>
+
+</AgenticaiAiagentOutboundConnectorReference> -->
+
+<MDRef />
