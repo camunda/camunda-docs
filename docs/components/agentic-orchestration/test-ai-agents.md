@@ -18,7 +18,7 @@ AI agent processes are non-deterministic: the [AI Agent connector](/components/c
 
 In this guide, you will write integration tests that keep the AI agent and LLM interaction real while mocking external tool executions, using two CPT features:
 
-- **[Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior)** reacts to whichever tasks the agent activates. instead of blocking on a single hard-coded execution order. This addresses the non-deterministic control flow.
+- **[Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior)** reacts to whichever tasks the agent activates, instead of blocking on a single hard-coded execution order. This addresses the non-deterministic control flow.
 - **[Judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge)** verify AI-generated output or tool execution results with a judge LLM that scores whether a value satisfies a natural-language expectation, replacing brittle exact-match checks.
 
 After completing this guide, you will be able to test your AI agents using CPT.
@@ -31,7 +31,7 @@ After completing this guide, you will be able to test your AI agents using CPT.
 - You have downloaded the [AI Agent Chat With Tools](https://marketplace.camunda.com/en-US/apps/587865) process to your local machine.
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process, **AI Agent Chat With Tools**. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
 :::
 
 ## Step 1: Prepare the example AI agent blueprint
@@ -42,7 +42,7 @@ Place the BPMN file and any associated forms for your AI agent process in `src/m
 
 Judge assertions send a process variable and a natural language expectation to a configured LLM, which scores how well they match. The assertion passes if the score meets a configurable threshold. This avoids brittle string-matching on free-text AI output.
 
-For this testing style, configure both the connector runtime and the judge LLM first. The goal is to keep the AI agent and LLM interaction real, while disabling outbound connector execution for the tool calls you want to control in the test.
+For this testing style, first configure both the connector runtime and the judge LLM. The goal is to keep the AI agent and LLM interaction real while disabling outbound connector execution for the tool calls you want to control in the test.
 
 ### Configure the connector runtime
 
@@ -64,7 +64,7 @@ With this setup:
 
 - The assertion timeout is increased to one minute. AI agent processes involve LLM interactions and typically take longer than standard BPMN processes.
 - CPT starts the connector runtime needed by the AI agent process.
-- Outbound connector executions such as the HTTP JSON connector are disabled, so tool behavior can be controlled by the test with conditional behavior.
+- Outbound connector executions, such as the HTTP JSON connector, are disabled so tool behavior can be controlled by the test with conditional behavior.
 
 If your AI agent tools use different outbound connectors, adjust `CONNECTOR_OUTBOUND_DISABLED` accordingly.
 
@@ -154,7 +154,7 @@ For the full setup including dependencies and project structure, see [Getting st
 
 The test scenario is "Send Ervin a joke." The agent calls `ListUsers`, `LoadUserByID`, and `Jokes_API` in any order, presents an email for review via `AskHumanToSendEmail`, and collects feedback through `User_Feedback`.
 
-[Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior) lets you register background reactions that monitor the process state and execute actions as conditions are met, without blocking the test thread. Register behaviors before starting the process, and they react independently as the process progresses.
+With [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior), you can register background reactions that monitor the process state and execute actions as conditions are met, without blocking the test thread. Register behaviors before starting the process; they then react independently as the process progresses.
 
 Each behavior watches for a specific element to become active and then completes it with test data. If the agent never activates that element, the behavior simply never triggers and the test does not stall.
 
@@ -355,5 +355,4 @@ Now that you know how to test your AI agents, you can:
 - Learn more about [Camunda Process Test assertions](/apis-tools/testing/assertions.md), including all judge assertion methods.
 - Review [judge configuration](/apis-tools/testing/configuration.md#judge-configuration) for the full property reference and chat model provider settings.
 - Explore [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior), including chained actions and lifecycle details.
-- [Monitor your AI agents](/components/agentic-orchestration/monitor-ai-agents.md) in Operate and Optimize.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).

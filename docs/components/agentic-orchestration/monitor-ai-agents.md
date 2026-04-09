@@ -34,7 +34,7 @@ After completing this guide, you will be able to inspect, debug, and monitor AI 
 - You have the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint deployed in [Modeler](/components/modeler/about-modeler.md).
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. It is recommended going through that guide first. However, it can be applied to other AI agent process implementations.
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. Completing that guide first is recommended. However, it can be applied to other AI agent process implementations.
 :::
 
 ## Step 1: Run your AI agent process
