@@ -20,7 +20,7 @@ For example, if a template does not contain a property object with the binding t
 the template user will not be able to define an input mapping for the element once the template is applied.
 
 :::info
-Some properties &mdash; such as execution listeners, task listeners, element documentation, and multi-instance configurations &mdash; cannot be set by element templates.
+Some properties &mdash; such as element documentation and multi-instance configurations &mdash; cannot be set by element templates.
 They are situational and require knowledge of the process context to be used.
 As they are never part of any element template, users can configure them independently of an applied template.
 :::
@@ -37,20 +37,20 @@ The property object keys are divided into required and optional keys:
 ### Optional keys
 
 - [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`](#setting-the-input-type-type): Defines the input type in the properties panel.
-- [`value : String | Number | Boolean`](#setting-a-default-value-value): A default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
-- [`generatedValue : Object`](#generating-a-value-generatedvalue): A configuration to generate a value when the property is applied to an element.
+- [`value : String | Number | Boolean`](#setting-a-default-value-value): The default value used if the bound property is not yet set by the user or if the type is `Hidden`.
+- [`generatedValue : Object`](#generating-a-value-generatedvalue): Configuration used to generate a value when the property is applied to an element.
 - [`placeholder : String`](#setting-a-text-placeholder-placeholder): Placeholder text shown in the input field when it is empty.
 - [`feel : "required" | "optional" | "static"`](#adding-feel-editor-support-feel): Defines whether the property supports FEEL expressions.
-- `label : String`: Label text above the property input.
+- `label : String`: Label text shown above the property input.
 - `tooltip : String`: Tooltip text shown when hovering over the label.
-- `description : String`: Description text below the property input.
-- [`optional : Boolean`](#preventing-persisting-empty-values-optional): Setting this key's value determines whether properties persist empty values in the underlying BPMN 2.0 XML.
-- [`constraints : Object`](#validating-user-input-constraints): A list of editing constraints to apply to the value of the property.
+- `description : String`: Description text shown below the property input.
+- [`optional : Boolean`](#preventing-persisting-empty-values-optional): Controls whether properties persist empty values in the underlying BPMN 2.0 XML.
+- [`constraints : Object`](#validating-user-input-constraints): A list of editing constraints applied to the property value.
 - [`group : String`](#grouping-fields-group): The group that the property belongs to.
-- [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when the property is active and visible.
-- `id : String`: An identifier that can be used to reference the property in conditional properties.
-- [`editable: Boolean`](#preventing-edits-editable): Setting this key's value determines whether properties are read-only or editable in the properties panel.
-- [`entriesVisible: Boolean`](#displaying-all-entries-entriesvisible): Setting this key's value determines whether all entries of a dropdown property are visible without opening the dropdown.
+- [`condition : Object`](#showing-properties-conditionally-condition): A condition that controls when the property is active and visible.
+- `id : String`: An identifier used to reference the property in conditional properties.
+- [`editable : Boolean`](#preventing-edits-editable): Controls whether the property is editable in the properties panel.
+- [`entriesVisible : Boolean | Object`](#control-visibility-of-default-properties-panel-entries-entriesvisible): Controls whether default properties are shown alongside properties defined in the element template.
 
 Not all keys and values are compatible with each other.
 Some keys or values require other keys to be set to a certain value, even if the key is marked as optional above.
@@ -285,7 +285,7 @@ Each page on an element contains a description of its properties and an example 
 
 :::info
 If a property cannot be set via any of the bindings described below, it cannot be set by an element template.
-For example, execution listeners and multi-instance configurations cannot be set by an element template.
+For example, multi-instance configurations cannot be set by an element template.
 :::
 
 :::warning
@@ -337,6 +337,12 @@ Configures an [output mapping](../../../concepts/variables/#output-mappings).
   }
 }
 ```
+
+:::tip Dynamic output mappings
+You can let template users create their own output mappings by setting [`entriesVisible.outputs`](#control-specific-entry-visibility) to `true`. This shows the standard output mapping section in the properties panel, where users can add, edit, and remove output mappings.
+
+You can't combine template-defined `zeebe:output` bindings with `entriesVisible.outputs = true`. Defining `zeebe:output` bindings in a template with dynamic output mappings enabled is restricted.
+:::
 
 ### Header: `zeebe:taskHeader`
 
@@ -585,19 +591,80 @@ Only one of `timeDate`, `timeCycle`, or `timeDuration` can be defined per templa
 
 :::
 
+### Conditional event definition property: `bpmn:ConditionalEventDefinition#property`
+
+| **Binding `type`**         | `bpmn:ConditionalEventDefinition#property`                                                                        |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`                                                                                |
+| **Binding parameters**     | `name`: The name of the property.<br/>Supported property: `condition`.                                            |
+| **Mapping result**         | `<bpmn:conditionalEventDefinition><bpmn:condition>[userInput]</bpmn:condition></bpmn:conditionalEventDefinition>` |
+
+The `bpmn:ConditionalEventDefinition#property` binding allows you to configure the condition expression for [conditional events](../../bpmn/conditional-events/).
+This binding is only valid for templates of events with `bpmn:ConditionalEventDefinition` set via `elementType.eventDefinition`.
+
+```json
+{
+  "label": "Condition Expression",
+  "type": "String",
+  "value": "=orderTotal > 100",
+  "feel": "required",
+  "binding": {
+    "type": "bpmn:ConditionalEventDefinition#property",
+    "name": "condition"
+  }
+}
+```
+
+:::note
+The `condition` property requires a FEEL expression. When using `String` or `Text` input types, set `feel` to `required`.
+:::
+
+### Conditional filter: `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property`
+
+| **Binding `type`**         | `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property`            |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`                                            |
+| **Binding parameters**     | `name`: The name of the property.<br/>Supported properties: `variableEvents`. |
+| **Mapping result**         | `<zeebe:conditionalFilter [name]="[userInput]" />`                            |
+
+The `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` binding allows you to configure the conditional filter for [conditional events](../bpmn/conditional-events/conditional-events.md). The conditional filter controls which variable changes trigger the condition evaluation.
+
+```json
+[
+  {
+    "label": "Variable Events",
+    "type": "String",
+    "value": "create,update",
+    "binding": {
+      "type": "bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property",
+      "name": "variableEvents"
+    }
+  }
+]
+```
+
+:::note
+
+**Property descriptions:**
+
+- **`variableEvents`**: A comma-separated list of variable events (`create`, `update`) that trigger condition evaluation.
+
+When `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` is used, `bpmn:ConditionalEventDefinition#property` with `condition` should also be set on the same element.
+
+:::
+
 ### Called element: `zeebe:calledElement`
 
-| **Binding `type`**         | `zeebe:calledElement`                                                                                          |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                                                             |
-| **Binding parameters**     | `property`: The name of the property.<br/> Supported properties: `processId`, `bindingType`, and `versionTag`. |
-| **Mapping result**         | `<zeebe:calledElement [property]="[userInput]" />`                                                             |
+| **Binding `type`**         | `zeebe:calledElement`                                                                                                                                                   |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean` (only for the `propagateAllParentVariables` and `propagateAllChildVariables` properties)              |
+| **Binding parameters**     | `property`: The name of the property.<br/> Supported properties: `processId`, `bindingType`, `versionTag`, `propagateAllParentVariables`, `propagateAllChildVariables`. |
+| **Mapping result**         | `<zeebe:calledElement [property]="[userInput]" />`                                                                                                                      |
 
 The `zeebe:calledElement` binding allows you to configure a process called by a call activity.
 
 You can set the value of the property `bindingType` to control the [resource binding type](../../../best-practices/modeling/choosing-the-resource-binding-type).
-We recommend setting the property `bindingType` to the value `"versionTag"` and setting the property `versionTag`
-to the value of the version tag of the process you want to call.
+We recommend setting the property `bindingType` to the value `"versionTag"` and setting the property `versionTag` to the value of the version tag of the process you want to call.
 
 ```json
 [
@@ -629,11 +696,36 @@ to the value of the version tag of the process you want to call.
 ]
 ```
 
-:::note
+#### Variable propagation
 
-For `zeebe:calledElement` bindings, variable propagation is not supported. To provide or retrieve variables, use `zeebe:input` and `zeebe:output` bindings.
+You can control automatic variable propagation between the parent process and the called process by using the `propagateAllParentVariables` and `propagateAllChildVariables` properties. These properties support only the `Boolean` and `Hidden` types and do not support FEEL expressions.
 
-:::
+- `propagateAllParentVariables`: When you set this property to `true`, the engine copies all variables from the parent process to the called process.
+- `propagateAllChildVariables`: When you set this property to `true`, the engine copies all variables from the called process back to the parent process when the called process completes.
+
+```json
+[
+  {
+    ...,
+    "type": "Boolean",
+    "value": true,
+    "binding": {
+      "type": "zeebe:calledElement",
+      "property": "propagateAllParentVariables"
+    }
+  },
+  {
+    ...,
+    "type": "Hidden",
+    "value": "false",
+    "binding": {
+      "type": "zeebe:calledElement",
+      "property": "propagateAllChildVariables"
+    }
+  },
+  ...
+]
+```
 
 ### User task implementation: `zeebe:userTask`
 
@@ -983,6 +1075,94 @@ The `zeebe:adHoc` binding can only be used with elements of type `bpmn:AdHocSubP
 The `outputCollection` property defines where ad-hoc execution results are collected, while `outputElement` specifies the structure of each result item.
 :::
 
+### Execution listener: `zeebe:executionListener`
+
+| **Binding `type`**         | `zeebe:executionListener`                                                                                                                          |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `Hidden`                                                                                                                                           |
+| **Binding parameters**     | `eventType`: The event type of the listener. Supported values: `start`, `end`.<br />`retries`_(Optional)_: The number of retries for the listener. |
+| **Mapping result**         | `<zeebe:executionListener eventType="[eventType]" type="[value]" retries="[retries]" />`                                                           |
+
+With the `zeebe:executionListener` binding, you can configure [execution listeners](/components/concepts/execution-listeners.md) on any BPMN element that supports them.
+The `value` (or `generatedValue`) of the property sets the listener job type.
+
+```json
+{
+  ...,
+  "entriesVisible": {
+    "executionListeners": false
+  },
+  "properties": [
+    {
+      "type": "Hidden",
+      "value": "my-start-listener-type",
+      "binding": {
+        "type": "zeebe:executionListener",
+        "eventType": "start"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "my-end-listener-type",
+      "binding": {
+        "type": "zeebe:executionListener",
+        "eventType": "end",
+        "retries": "3"
+      }
+    }
+  ]
+}
+```
+
+:::note
+This binding only supports property `type` set to `Hidden`. You can't configure listeners through the properties panel; the template must fully define them.
+
+When using this binding, set `entriesVisible` with `executionListeners` to `false`. Combining user-defined and template-defined execution listeners isn't supported.
+:::
+
+### Task listener: `zeebe:taskListener`
+
+| **Binding `type`**         | `zeebe:taskListener`                                                                                                                                                                               |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `Hidden`                                                                                                                                                                                           |
+| **Binding parameters**     | `eventType`: The event type of the listener. Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.<br />`retries`_(Optional)_: The number of retries for the listener. |
+| **Mapping result**         | `<zeebe:taskListener eventType="[eventType]" type="[value]" retries="[retries]" />`                                                                                                                |
+
+With the `zeebe:taskListener` binding, you can configure [task listeners](/components/concepts/user-task-listeners.md) on user tasks.
+The `value` (or `generatedValue`) of the property sets the listener job type.
+
+```json
+{
+  ...,
+  "appliesTo": [ "bpmn:UserTask" ],
+  "properties": [
+    {
+      "type": "Hidden",
+      "value": "my-completing-listener-type",
+      "binding": {
+        "type": "zeebe:taskListener",
+        "eventType": "completing"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "my-creating-listener-type",
+      "binding": {
+        "type": "zeebe:taskListener",
+        "eventType": "creating",
+        "retries": "3"
+      }
+    }
+  ]
+}
+```
+
+:::note
+This binding only applies to elements of type `bpmn:UserTask`.
+
+This binding only supports property `type` set to `Hidden`. You can't configure listeners through the properties panel; the template must fully define them.
+:::
+
 ## Setting a task implementation
 
 The following tasks support multiple implementation types:
@@ -1228,12 +1408,44 @@ You can prevent edits by setting the `editable` property to `false`. The propert
 }
 ```
 
-## Displaying all entries: `entriesVisible`
+## Control visibility of default properties panel entries: `entriesVisible`
 
-By default, the element template defines the visible entries in the properties panel. All other property controls are hidden.
-To bring all the default entries back, use the `entriesVisible` property.
-If this key is set to `true`, the default properties will be listed below the element template properties in the properties panel.
-You should generally avoid using this configuration, as it removes the abstraction introduced by the template.
+By default, an applied element template causes most properties panel sections to be hidden — element template-defined bindings take precedence over standard groups and entries.
+This behavior can be customized through the `entriesVisible` property.
+
+### Control specific entry visibility
+
+By passing an object to `entriesVisible`, you can override the default display of certain properties panel sections. The key of that object is the ID of a section, the value is a boolean that defines the visibility status. The table below lists what entries may be customized and their default visibility status:
+
+| Key                  | Description                 | Default visible |
+| :------------------- | :-------------------------- | :-------------- |
+| `outputs`            | Output mapping section      | `false`         |
+| `executionListeners` | Execution listeners section | `true`          |
+| `taskListeners`      | Task listeners section      | `false`         |
+
+To show the standard output mapping section, configure your template as shown below:
+
+```json
+[
+  {
+    "name": "Template 1",
+    "id": "sometemplate",
+    "entriesVisible": {
+      "outputs": true
+    },
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "properties": [
+      ...
+    ]
+  }
+]
+```
+
+### Displaying all entries
+
+To show all standard properties panel entries, set `entriesVisible=true`:
 
 ```json
 [
@@ -1251,4 +1463,6 @@ You should generally avoid using this configuration, as it removes the abstracti
 ]
 ```
 
-![Display default entries](./img/entries-visible.png)
+:::warning
+As an element template author, you are responsible for ensuring the default sections opened do not conflict with any bindings defined by the element template.
+:::

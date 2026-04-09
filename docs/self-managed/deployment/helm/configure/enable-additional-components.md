@@ -5,13 +5,13 @@ title: Enable additional Camunda components
 description: Enable optional components like Management Identity, Web Modeler, Console, and Optimize in the Camunda Helm chart.
 ---
 
-Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeebe, Zeebe Gateway, Operate, and Tasklist are consolidated into a single [Orchestration Cluster](/reference/glossary.md#orchestration-cluster). As a result, the default deployment includes only the Orchestration Cluster, and Connectors. This page explains how to enable additional components you may need.
+Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeebe, Zeebe Gateway, Operate, Tasklist, and Admin (formerly Orchestration Cluster Identity) are consolidated into a single [Orchestration Cluster](/reference/glossary.md#orchestration-cluster). As a result, the default deployment includes only the Orchestration Cluster and Connectors. This page explains how to enable additional components you may need.
 
 ## Default vs. additional components
 
 ### Enabled by default (8.8+)
 
-- Orchestration Cluster (Zeebe, Zeebe Gateway, Operate, Tasklist)
+- Orchestration Cluster (Zeebe, Zeebe Gateway, Operate, Tasklist, Orchestration Cluster Admin)
 - Connectors
 
 ### Additional components (must be explicitly enabled)
@@ -29,14 +29,14 @@ Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeeb
 :::note Upgrading from 8.7?
 In Camunda 8.7, more components were enabled by default. If you're upgrading from 8.7 and used any of the components listed above, you must explicitly enable them in your 8.8 `values.yaml`.
 
-See the [8.7 to 8.8 upgrade guide](/self-managed/deployment/helm/upgrade/helm-870-880.md#ensure-required-components) for upgrade-specific instructions.
+See the [8.7 to 8.8 upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/helm/870-to-880.md#ensure-required-components) for upgrade-specific instructions.
 :::
 
 ## Management Identity
 
 In Camunda 8.8, identity management is split into two distinct scopes:
 
-- **Orchestration Cluster Identity** - Manages authentication and authorization for core orchestration components (Zeebe, Operate, Tasklist) and their APIs. This is built into the Orchestration Cluster and does not require Management Identity.
+- **Orchestration Cluster Admin** - Manages authentication and authorization for core orchestration components (Zeebe, Operate, Tasklist) and their APIs. This is built into the Orchestration Cluster and does not require Management Identity.
 - **Management Identity** - Controls access for management and modeling components (Web Modeler, Console, Optimize). This is a separate component that must be explicitly enabled.
 
 Management Identity must be enabled if you want to use any of the following components:
@@ -48,7 +48,7 @@ Management Identity must be enabled if you want to use any of the following comp
 Check the [authentication and authorization](./authentication-and-authorization/index.md) guide for detailed steps on enabling and configuring Management Identity.
 
 :::info
-If you enable Web Modeler, Console, or Optimize without enabling Management Identity, these components will not function properly as they require authentication. The Orchestration Cluster (Zeebe, Operate, Tasklist) does not depend on Management Identity.
+If you enable Web Modeler, Console, or Optimize without enabling Management Identity, these components will not function properly as they require authentication. The Orchestration Cluster (Zeebe, Operate, Tasklist, and Orchestration Cluster Admin) does not depend on Management Identity.
 :::
 
 ## Web Modeler
@@ -123,13 +123,11 @@ console:
 For a full list of options, see the [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console requires the Identity component for authentication. The Camunda Helm chart installs Identity by default. If you log in to Console using port-forward, you must also port-forward the Keycloak service:
+Console requires the Identity component for authentication. The Camunda Helm chart installs Identity by default. If you log in to Console using port-forward and use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), you must also port-forward the Keycloak service:
 
 ```
-kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80
+kubectl port-forward svc/keycloak-service 18080:18080
 ```
-
-If you're using Keycloak deployed via the Keycloak Operator (such as in the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md)), use `kubectl port-forward svc/keycloak-service 18080:8080` instead.
 
 Alternatively, configure Identity with Ingress. See the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
 

@@ -9,6 +9,10 @@ description: "Deploy Red Hat OpenShift on AWS using a Terraform module for a qui
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
+import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
+import RosaHcpAuth from '../../\_partials/\_rosa-hcp-auth.md'
+
 This guide provides a detailed tutorial for deploying a [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/architecture/index.html) capabilities. It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
 We recommend this guide for building a robust and sustainable infrastructure. However, if you are looking for a quicker trial or proof of concept, or if your needs aren't fully met by our module, consider following the official [ROSA Quickstart Guide](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/getting_started/rosa-quickstart-guide-ui.html).
@@ -26,6 +30,10 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - A [Red Hat Account](https://www.redhat.com/) to create the Red Hat OpenShift cluster.
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create any resources within AWS.
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
+- [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) _(only applies to [ROSA](https://www.redhat.com/en/technologies/cloud-computing/openshift/aws) or OpenShift deployed on AWS)_
+  - Ensure at least **3 Elastic IPs** (one per availability zone).
+  - Verify quotas for **VPCs, EC2 instances, and storage**.
+  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)); costs apply only to resources used.
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [ROSA CLI](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/getting_started/rosa-quickstart-guide-ui.html) to interact with the cluster.
@@ -40,7 +48,7 @@ This setup provides a foundational starting point for working with Camunda 8, th
 
 Terraform can initially appear complex. If you're new to it, you might want to start by considering trying out the [Red Hat OpenShift on AWS UI-based tutorial](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/getting_started/rosa-getting-started.html). This guide will show you what resources are created and how they interact with each other.
 
-If you require managed services for PostgreSQL Aurora or OpenSearch, you can refer to the definitions provided in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide. However, please note that these configurations may need adjustments to fit your specific requirements and have not been tested. By default, this guide assumes that the database services (PostgreSQL and Elasticsearch) integrated into the default chart will be used.
+If you require managed services for PostgreSQL Aurora or OpenSearch, you can refer to the definitions provided in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide. However, please note that these configurations may need adjustments to fit your specific requirements and have not been tested. This guide uses integrated Helm chart database services in its example path (PostgreSQL and Elasticsearch), but you can choose another supported secondary storage backend for the Orchestration Cluster, including RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 
 For testing Camunda 8 or developing against it, you might consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have a Red Hat OpenShift cluster on AWS, you can skip ahead to the [Helm setup guide](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md).
 
@@ -85,95 +93,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
 
-### Terraform prerequisites
+<TerraformAwsAuth />
 
-To manage the infrastructure for Camunda 8 on AWS using Terraform, we need to set up Terraform's backend to store the state file remotely in an S3 bucket. This ensures secure and persistent storage of the state file.
-
-:::note
-Advanced users may want to handle this part differently and use a different backend. The backend setup provided is an example for new users.
-:::
-
-#### Set up AWS authentication
-
-The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. Before you can use the provider, you must authenticate it using your AWS credentials.
-
-:::caution Ownership of the created resources
-
-A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters created. It is recommended to create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) for Terraform purposes, ensuring that the resources are managed and owned by that user.
-
-:::
-
-You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods:
-
-- For development or testing purposes you can use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). If you have configured your AWS CLI, Terraform will automatically detect and use those credentials.
-  To configure the AWS CLI:
-
-  ```bash
-  aws configure
-  ```
-
-  Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format. These can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-
-- For production environments, we recommend the use of a dedicated IAM user. Create [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console, and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
-
-#### Create an S3 bucket for Terraform state management
-
-Before setting up Terraform, you need to create an S3 bucket that will store the state file. This is important for collaboration and to prevent issues like state file corruption.
-
-To start, set the region as an environment variable upfront to avoid repeating it in each command:
-
-```bash
-export AWS_REGION=<your-region>
-```
-
-Replace `<your-region>` with your chosen AWS region (for example, `eu-central-1`).
-
-Now, follow these steps to create the S3 bucket with versioning enabled:
-
-1. Open your terminal and ensure the AWS CLI is installed and configured.
-
-2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
-
-   ```bash
-   # Replace "my-rosa-tf-state" with your unique bucket name
-   export S3_TF_BUCKET_NAME="my-rosa-tf-state"
-   export S3_TF_BUCKET_REGION="<your-region>"
-
-   aws s3api create-bucket --bucket "$S3_TF_BUCKET_NAME" --region "$S3_TF_BUCKET_REGION" \
-     --create-bucket-configuration LocationConstraint="$S3_TF_BUCKET_REGION"
-   ```
-
-Replace `<your-region>` with the AWS region where you want to create the S3 bucket (e.g., `us-east-2`).
-
-:::note Region of the bucket's state
-
-This region can be different from the regions used for other resources, but it requires to be set explicitly in the backend configuration using the flag: `-backend-config="region=<your-region>"`.
-
-For clarity, this guide explicitly sets the bucket region in all relevant commands.
-:::
-
-Steps to create the S3 bucket with versioning enabled:
-
-1. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
-
-   ```bash
-   aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region "$S3_TF_BUCKET_REGION"
-   ```
-
-2. Secure the bucket by blocking public access:
-
-   ```bash
-   aws s3api put-public-access-block --bucket "$S3_TF_BUCKET_NAME" --public-access-block-configuration \
-     "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region "$S3_TF_BUCKET_REGION"
-   ```
-
-3. Verify versioning is enabled on the bucket:
-
-   ```bash
-   aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region "$S3_TF_BUCKET_REGION"
-   ```
-
-This S3 bucket will now securely store your Terraform state files with versioning enabled.
+<TerraformS3Bucket />
 
 ### OpenShift cluster module setup
 
@@ -190,76 +112,17 @@ This module is based on the official [ROSA HCP Terraform module documentation](h
 
 :::
 
-#### Set up ROSA authentication
+<RosaHcpAuth />
 
-To set up a ROSA cluster, certain prerequisites must be configured on your AWS account. Below is an excerpt from the [official ROSA planning prerequisites checklist](https://docs.openshift.com/rosa/rosa_planning/rosa-cloud-expert-prereq-checklist.html):
-
-1. Verify that your AWS account is correctly configured:
-
-   ```bash
-   aws sts get-caller-identity
-   ```
-
-2. Check if the ELB service role exists, as if you have never created a load balancer in your AWS account, the role for Elastic Load Balancing (ELB) might not exist yet:
-
-   ```bash
-   aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing"
-   ```
-
-   If it doesn't exist, create it:
-
-   ```bash
-   aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com"
-   ```
-
-3. Create a Red Hat Hybrid Cloud Console account if you don’t already have one: [Red Hat Hybrid Cloud Console](https://console.redhat.com/).
-
-4. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
-
-5. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
-   - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
-   - Choose **Get started**.
-   - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
-   - Choose **Enable ROSA**.
-
-   **Note**: Only a single AWS account can be associated with a Red Hat account for service billing.
-
-6. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
-
-7. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
-
-   ```bash
-   export RHCS_TOKEN="<yourToken>"
-   rosa login --token="$RHCS_TOKEN"
-
-   # Verify the login
-   rosa whoami
-   ```
-
-8. Verify your AWS quotas:
-
-   ```bash
-   rosa verify quota --region="$AWS_REGION"
-   ```
-
-   **Note**: This may fail due to organizational policies.
-
-9. Create the required account roles:
-
-   ```bash
-   rosa create account-roles --mode auto
-   ```
-
-10. Verify your AWS quotas, and if quotas are insufficient, consult the following:
-
-- [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
-- [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas)
-
-11. Ensure the `oc` CLI is installed. If it’s not already installed, follow the [official ROSA oc installation guide](https://docs.openshift.com/rosa/cli_reference/openshift_cli/getting-started-cli.html#cli-getting-started):
+Verify your AWS quotas:
 
 ```bash
-rosa verify openshift-client
+rosa verify quota --region="$AWS_REGION"
 ```
+
+:::note
+This may fail due to organizational policies.
+:::
 
 #### Set up the ROSA cluster module
 

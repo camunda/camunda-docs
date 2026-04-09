@@ -29,7 +29,7 @@ For more details on the configuration keys, refer to the [localization configura
 Custom locales can be added by creating a locale file under `./config/localization/` and adding it to the `availableLocales` configuration.
 
 :::note
-Configuring a custom locale means you have to maintain it yourself and update it in the context of an Optimize update.
+Configuring a custom locale means you have to maintain it yourself and update it in the context of an Optimize upgrade.
 
 There is currently no changelog of new localization entries available, and it is required that each localization file contains an entry for each key used by Optimize.
 :::

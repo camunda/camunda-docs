@@ -7,9 +7,9 @@ description: Connect Web Modeler to your Git repositories to keep your projects 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps, allowing users to keep their Web Modeler and Desktop Modeler projects in sync with their version control repositories.
 
-Once the connection is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
+Once the connection is configured by an organization owner or administrator, project administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
 
 ## Connect to a remote repository
 
@@ -78,10 +78,6 @@ Click **Create GitHub App** to finish.
 
 5. Click **Save Configuration**.
 
-:::note
-When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
-:::
-
 When successful, your project will display a new **Sync with GitHub** button.
 
 ![The Sync with GitHub within Web Modeler](../img/git-sync.png)
@@ -134,10 +130,6 @@ To generate a project access token, follow the [GitLab documentation](https://do
 
 5. Click **Save Configuration**.
 
-:::note
-If you're syncing for the first time with a remote repository that already contains commits, make sure Web Modeler has assigned the correct main process.
-:::
-
 Once connected successfully, your project will display a **Sync with GitLab** button.
 
 </TabItem>
@@ -189,10 +181,6 @@ If you're using a self-hosted Azure DevOps Server instance, see [Self-Managed Gi
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
 5. Click **Save Configuration**.
-
-:::note
-When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
-:::
 
 When successful, your project will display a new **Sync with Azure** button.
 
@@ -259,10 +247,6 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
 
 5. Click **Save Configuration**.
 
-:::note
-When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
-:::
-
 Once successful, your project will display a new **Sync with Bitbucket** button.
 
 </TabItem>
@@ -305,17 +289,13 @@ Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbuckets
      Refer to [Bitbucket documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris) for more information.
      :::
 
-   - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path.
+   - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path. For personal repositories, use `~{user}` as the project ID (for example, `projects/~alice/repos/example-repo`).
    - **Branch name:** The branch to use for merging and managing changes.
    - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the specified branch and optional path will open in a new tab.
 
 5. Click **Save Configuration**.
-
-:::note
-When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
-:::
 
 Once successful, your project will display a new **Sync with Bitbucket** button.
 </TabItem>
@@ -326,12 +306,12 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
 1. In your connected process application, click **Sync with _GitProvider_** button.
-2. Enter a [version number](process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
+2. Enter a [version number](process-applications.md#process-application-versioning) to create a new version for your process application. The new version will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
 
-Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created milestone is now accessible via the **View milestone** button in the success notification.
+Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created version is now accessible via the **View version** button in the success notification.
 
 ## Manage existing configurations
 
@@ -381,10 +361,11 @@ Refer to [Configuration of the restapi component](../../../../self-managed/compo
 
 ## Troubleshooting
 
-### File names
+### File and folder names
 
-- Duplicate file names are not allowed for the same file type.
-- Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch or file names.
+- Duplicate file names of the same file type are not allowed within the same folder.
+- Duplicate folder names are not allowed within the same parent folder.
+- Characters with special meaning in Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch, file, or folder names.
 
 ### File extensions
 
@@ -393,7 +374,6 @@ Refer to [Configuration of the restapi component](../../../../self-managed/compo
 
 ### Synchronization
 
-- When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
 - Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler configuration part for your [git host](#connect-to-a-remote-repository) and available [environment variables](#self-managed-environment-variables) for more details.

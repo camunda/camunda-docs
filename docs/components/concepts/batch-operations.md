@@ -24,7 +24,7 @@ Example use cases include:
 
 ## Types
 
-There are four types of batch operations:
+Here are the types of available batch operations:
 
 | Type                      | Description                                                                                        |
 | ------------------------- | -------------------------------------------------------------------------------------------------- |
@@ -32,7 +32,8 @@ There are four types of batch operations:
 | Modify process instances  | [Moves](./process-instance-modification.md) a batch of process instances from one node to another. |
 | Migrate process instances | [Migrates](./process-instance-migration.md) a batch of process instances to a new process version. |
 | Cancel process instances  | Cancels a batch of process instances.                                                              |
-| Delete process instances  | Deletes a batch of process instances.                                                              |
+| Delete process instances  | [Deletes](./process-instance-deletion.md) a batch of process instances.                            |
+| Delete decision instances | [Deletes](./decision-instance-deletion.md) a batch of decision instances.                          |
 
 Furthermore, depending on the status of the batch operation, you may be able to suspend, cancel, or resume the operation.
 
@@ -72,7 +73,7 @@ To suspend, resume, or cancel an operation, you only need the relevant batch ope
 The system stores authorization claims with the batch operation and uses them throughout its lifecycle.
 
 :::info
-Read more about [authorizations](/components/concepts/access-control/authorizations.md) and [how to create them in the Identity UI](/components/identity/authorization.md).
+Read more about [authorizations](/components/concepts/access-control/authorizations.md) and [how to create them in the Admin UI](/components/admin/authorization.md).
 :::
 
 ## Next steps
@@ -86,3 +87,4 @@ Read more about [authorizations](/components/concepts/access-control/authorizati
   - [Migrate process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instances-batch-operation.api.mdx).
   - [Modify process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instances-batch-operation.api.mdx).
   - [Delete process instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instances-batch-operation.api.mdx).
+  - [Delete decision instances (batch)](/apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instances-batch-operation.api.mdx).

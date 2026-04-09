@@ -18,8 +18,10 @@ This page guides you through the manual installation of Camunda 8 on a local mac
   - Java Virtual Machine. See [supported environments](/reference/supported-environments.md) for version details.
   - Configure the web applications to use an available port. By default, the Orchestration Cluster listens on port 8080.
 - Secondary storage
-  - Elasticsearch or Amazon OpenSearch. See [supported environments](/reference/supported-environments.md) for version details.
-    - For Elasticsearch deployment options, see the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/deploy).
+  - Choose a supported secondary storage backend for your installation path.
+  - **Document-store backend (Elasticsearch or OpenSearch)**: See [supported environments](/reference/supported-environments.md).
+    - For deployment options, see the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/deploy).
+  - **RDBMS**: See [RDBMS production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) and [manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) for supported databases and setup details.
 
 For suggested minimum hardware requirements and networking, see the [manual reference architecture requirements](/self-managed/reference-architecture/manual.md#requirements).
 
@@ -47,6 +49,17 @@ To install these components, use one of the supported methods:
 ## Download artifacts
 
 Download the required Camunda 8 artifacts from the following sources. Make sure that all artifacts use the same minor version to ensure compatibility.
+
+:::note Artifactory authentication
+Downloading artifacts from [artifactory](https://artifacts.camunda.com) requires authentication. Use your Camunda Enterprise LDAP credentials.
+
+When using `curl`, pass your username with the `-u` flag and let `curl` prompt for the password:
+
+```sh
+curl -u "$CAMUNDA_DISTRO_USER" -fL <url>
+```
+
+:::
 
 Orchestration Cluster:
 
@@ -78,7 +91,7 @@ Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free
 Review the following reference architectures for deployment guidance:
 
 - [Manual reference architecture](/self-managed/reference-architecture/manual.md) - Provides an overview of the environment and requirements.
-- [Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on Amazon Web Services (AWS) using Elastic Compute Cloud (EC2) with Ubuntu, and Amazon OpenSearch as the secondary storage.
+- [Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on Amazon Web Services (AWS) using Elastic Compute Cloud (EC2) with Ubuntu, and Amazon OpenSearch as the document-store secondary storage example.
 
 ## Orchestration Cluster
 
@@ -88,7 +101,9 @@ For configuration details, see the [Orchestration Cluster components](/self-mana
 
 ### Configure the Orchestration Cluster
 
-By default, the configuration uses a single-node orchestration cluster with a local Elasticsearch instance as the secondary storage. If this setup matches your environment, no additional configuration is required.
+This guide uses a single-node orchestration cluster with a local Elasticsearch instance as the document-store secondary storage example. If this setup matches your environment, no additional configuration is required.
+
+If you want to use RDBMS as secondary storage instead, follow [manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md).
 
 If you plan to:
 
@@ -109,12 +124,12 @@ Configuration is being unified across components. Some changes will only take ef
 
 #### Configure the secondary storage
 
-Set the secondary storage type value to `elasticsearch` or `opensearch`. Remove fields that do not apply to your selection.
+Set the secondary storage type value to `elasticsearch` or `opensearch` for this configuration path. Remove fields that do not apply to your selection.
 
 If your security settings require authentication for the secondary storage, configure both `username` and `password`.
 Omit these fields if authentication is not required.
 
-The following configuration defines how the Orchestration Cluster connects to secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Identity, and Camunda Exporter.
+The following configuration defines how the Orchestration Cluster connects to document-store secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Admin, and Camunda Exporter.
 
 For detailed configuration options, see the [Orchestration Cluster configuration](/self-managed/components/orchestration-cluster/core-settings/overview.md)
 
@@ -193,11 +208,11 @@ camunda:
 
 #### Configure Connectors authentication
 
-Connectors require authentication to use their full capabilities. By default, the Orchestration Cluster uses basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
+Connectors require authentication to use their full capabilities. By default, the Orchestration Cluster uses Basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
 
-If you don’t configure a user at startup, create one manually in the Identity UI after deployment.
+If you don’t configure a user at startup, create one manually in the Admin UI after deployment.
 
-For more details, see [Identity configuration overview](/self-managed/components/orchestration-cluster/identity/overview.md).
+For more details, see [Admin configuration overview](/self-managed/components/orchestration-cluster/admin/overview.md).
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
@@ -274,7 +289,7 @@ Once you've downloaded the Orchestration Cluster distribution, extract it into a
 3. Update the configuration in `config/application.yaml`, or export the environment variables.
 4. Navigate to `bin` folder.
 5. Run `camunda.sh` (Linux/macOS) or `camunda.bat` (Windows).
-6. Open [http://localhost:8080](http://localhost:8080). On first access, you’ll be asked to create an admin user unless [Identity](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) is configured with OIDC or a similar option.
+6. Open [http://localhost:8080](http://localhost:8080). On first access, you'll be asked to create an admin user unless [Admin](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) is configured with OIDC or a similar option.
 
 :::note
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Web Modeler is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
@@ -616,6 +631,6 @@ curl localhost:9090/actuator/health
 
 After setting up your cluster, many users typically do the following:
 
-- [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
+- [Connect to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
 - [Secure cluster communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication.md) – protect traffic between cluster nodes.
 - [Secure client communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-client-communication.md) – ensure secure communication between clients and the cluster.

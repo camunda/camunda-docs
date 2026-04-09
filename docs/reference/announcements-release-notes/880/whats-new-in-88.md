@@ -93,7 +93,7 @@ Use the following new features to build and integrate AI agents into your proces
     <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
 </tr>
 <tr>
-    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</td>
     <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
 </tr>
 <tr>
@@ -178,15 +178,13 @@ Only the first partial set of unified configuration properties is introduced in 
 
 The Orchestration Cluster Identity component UI handles authentication and authorization for the Orchestration Cluster components and its resources.
 
-<p><a href="../../../../components/identity/identity-introduction/" class="link-arrow">Introduction to Identity</a></p>
-
 :::note
 With this 8.8 change, the source of truth for Identity and Access Management for the Orchestration Cluster (including Zeebe, Operate, Tasklist, and its APIs) is now the Orchestration Cluster itself. This removes the reliance on the separate [Management Identity](/self-managed/components/management-identity/overview.md) (formerly "Identity") component.
 :::
 
 ### Identity and Management Identity
 
-In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-introduction.md) and [Management Identity](/self-managed/components/management-identity/overview.md) are two separate components used for Identity management, each with distinct areas of responsibility.
+In Camunda 8.8, Orchestration Cluster [Identity](/versioned_docs/version-8.8/components/identity/identity-introduction.md) and [Management Identity](/self-managed/components/management-identity/overview.md) are two separate components used for Identity management, each with distinct areas of responsibility.
 
 <table>
     <thead>
@@ -250,15 +248,15 @@ In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-i
 ### Tenant interceptors
 
 Tenant interceptors are **not supported in Camunda 8.8**.
-If you are using tenant interceptors in Camunda 8.7, you must migrate to the new Orchestration Cluster Identity [tenant management](/components/identity/tenant.md).
+If you are using tenant interceptors in Camunda 8.7, you must migrate to the new Orchestration Cluster Identity [tenant management](/versioned_docs/version-8.8/components/identity/tenant.md).
 
 Administrators must:
 
-- Migrate tenants into the cluster using either the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) or the [Orchestration Identity UI](/components/identity/tenant.md#create-a-tenant).
+- Migrate tenants into the cluster using either the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) or the [Orchestration Identity UI](/versioned_docs/version-8.8/components/identity/tenant.md#create-a-tenant).
 - Assign tenants by:
-  - Direct assignment to [users](/components/identity/tenant.md#assign-users-to-a-tenant)
-  - Direct assignment to [clients](/components/identity/tenant.md#assign-clients-to-a-tenant)
-  - Using [mapping rules](/components/identity/tenant.md#assign-mapping-rules-to-a-tenant)
+  - Direct assignment to [users](/versioned_docs/version-8.8/components/identity/tenant.md#assign-users-to-a-tenant)
+  - Direct assignment to [clients](/versioned_docs/version-8.8/components/identity/tenant.md#assign-clients-to-a-tenant)
+  - Using [mapping rules](/versioned_docs/version-8.8/components/identity/tenant.md#assign-mapping-rules-to-a-tenant)
 
 ### Are you affected by 8.8 Identity changes?
 
@@ -327,7 +325,7 @@ After you deploy all Camunda 8 components in a Self-Managed environment, you wil
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
 - Authorization checks are enabled by default for any migrated cluster using the Helm chart. The automated migration ensures that your users and clients can access the UIs and APIs like before.
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
-  - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method.
+  - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic authentication method.
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
 
 The following table summarizes where Orchestration Cluster Identity entities are managed in Camunda 8.8 Self-Managed:
@@ -344,22 +342,22 @@ The following table summarizes where Orchestration Cluster Identity entities are
 
 #### Camunda 8 Self-Managed - Basic Authentication
 
-If you are using built-in user management (Basic Authentication), Tasklist and Operate specific built-in user management (using Elasticsearch/OpenSearch secondary storage) is no longer supported.
+If you are using built-in user management (Basic authentication), Tasklist and Operate specific built-in user management (using Elasticsearch/OpenSearch secondary storage) is no longer supported.
 
 - Administrators must migrate their users manually into the Orchestration Cluster.
 - You must ensure that **usernames are identical**, otherwise users will not be able to see their assigned tasks.
 
-In a Basic Authentication setup, the Orchestration Cluster provides full functionality:
+In a Basic authentication setup, the Orchestration Cluster provides full functionality:
 
 | Entity type    | Managed via                                   |
 | :------------- | :-------------------------------------------- |
 | Users          | Orchestration Cluster Identity                |
-| Clients        | n/a (not applicable for Basic Authentication) |
+| Clients        | n/a (not applicable for Basic authentication) |
 | Roles          | Orchestration Cluster Identity                |
 | Groups         | Orchestration Cluster Identity                |
 | Authorizations | Orchestration Cluster Identity                |
 | Tenants        | Orchestration Cluster Identity                |
-| Mapping Rules  | n/a (not applicable for Basic Authentication) |
+| Mapping Rules  | n/a (not applicable for Basic authentication) |
 
 ## APIs & tools {#apis-and-tools}
 
@@ -401,7 +399,7 @@ Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are sum
 </table>
 
 :::info
-To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](/apis-tools/migration-manuals/index.md).
+To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/index.md).
 :::
 
 ## Upgrade guides {#upgrade-guides}
@@ -417,12 +415,12 @@ The following guides provide detailed information on how you can upgrade to Camu
     <td>**Who is this guide for?**</td>
 </tr>
 <tr>
-    <td>[Self-Managed upgrade guide](/self-managed/update/administrators/overview.md)</td>
+    <td>[Self-Managed upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/index.md)</td>
     <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
 <tr>
-    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)</td>
+    <td>[APIs & tools upgrade guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/index.md)</td>
     <td>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and tools transitions.</td>
     <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
 </tr>

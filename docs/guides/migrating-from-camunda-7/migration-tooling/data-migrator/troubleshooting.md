@@ -5,6 +5,9 @@ sidebar_label: Troubleshooting
 description: "Common issues and solutions when running the Data Migrator."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Troubleshooting information for common issues when running the Data Migrator.
 
 ## Migration fails to start
@@ -13,6 +16,7 @@ Troubleshooting information for common issues when running the Data Migrator.
 - Check database connectivity and credentials.
 - Ensure Camunda 8 is running and accessible.
 - Review your `configuration/application.yml` configuration.
+- Check that JDBC driver jar is added to the `configuration/userlib/` directory.
 
 ## Process instances are skipped
 
@@ -23,10 +27,30 @@ Troubleshooting information for common issues when running the Data Migrator.
 
 List and retry skipped instances:
 
+<Tabs groupId="os" defaultValue="maclinux" values={[
+{ label: 'Mac OS + Linux', value: 'maclinux' },
+{ label: 'Windows', value: 'windows' }
+]}>
+
+<TabItem value="maclinux">
+
 ```bash
 ./start.sh --runtime --list-skipped
 ./start.sh --runtime --retry-skipped
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+```bash
+start.bat --runtime --list-skipped
+start.bat --runtime --retry-skipped
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Performance issues
 

@@ -11,6 +11,7 @@ Install the Data Migrator and run your first data migration.
 
 - Java 21+
 - Running Camunda 8 (SaaS or self-managed)
+- Camunda 7 has been stopped
 - Access to Camunda 7 database
 - Models migrated and deployed to C8
 

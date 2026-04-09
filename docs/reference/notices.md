@@ -1,14 +1,16 @@
 ---
 id: notices
 title: "Security notices"
-description: "Let's take a closer look at security notices, reporting vulnerabilities, and additional security information."
+description: "Read the latest Camunda security notices published after fixes are made available."
 toc_max_heading_level: 2
 ---
 
-Camunda publishes security notices after fixes are available.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 :::tip Subscribe to security notices
-Stay informed about security updates by subscribing to our [RSS feed](pathname:///rss/security/notices.xml). Get automatic notifications when new security notices are published.
+Subscribe to the [RSS feed](pathname:///rss/security/notices.xml) for security updates and get automatic notifications when new security notices are published.
 :::
 
 ## Report a security issue or vulnerability
@@ -18,6 +20,159 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 :::info
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
+
+## Notice 43
+
+### Publication date
+
+Apr 7, 2026
+
+### Products affected
+
+- Management Identity
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Optimize
+- Camunda Web Modeler
+
+### Impact
+
+When applications specify HTTP response headers for servlet applications using Spring Security, there is the possibility that the HTTP headers will not be written. This is related to [CVE-2026-22732](https://nvd.nist.gov/vuln/detail/CVE-2026-22732).
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity 8.7.4 - 8.7.10, 8.7.12 - 8.7.16, 8.8.0 - 8.8.2, or 8.8.5 - 8.8.9
+- Zeebe 8.7.21 - 8.7.25
+- Tasklist 8.7.21 - 8.7.25
+- Operate 8.7.22 - 8.7.25
+- Optimize 8.7.14 - 8.7.18 or 8.8.2 - 8.8.7
+- Web Modeler Self-Managed ≤ 8.6.26, ≤ 8.7.18, or ≤ 8.8.11
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Management Identity 8.7.17, 8.8.10
+- Zeebe 8.7.26
+- Tasklist 8.7.26
+- Operate 8.7.26
+- Optimize 8.7.19, 8.8.8
+- Web Modeler Self-Managed 8.6.27, 8.7.19, 8.8.12
+
+The fix was deployed to Web Modeler SaaS on March 23, 2026, 17:26 CET.
+
+## Notice 42
+
+### Publication date
+
+Mar 09, 2026
+
+### Products affected
+
+- Management Identity
+
+### Impact
+
+The application was vulnerable to [CVE-2026-24734](https://nvd.nist.gov/vuln/detail/CVE-2026-24734), which allowed an attacker to bypass revocation checks of client SSL certificates if a certain server configuration was used.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity ≤ 8.8.7, ≤ 8.7.14, or ≤ 8.6.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Management Identity 8.8.8, 8.7.15, 8.6.28
+
+## Notice 41
+
+### Publication date
+
+Mar 9, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `fast-xml-parser` used by Camunda Web Modeler was affected by [CVE-2026-26278](https://nvd.nist.gov/vuln/detail/CVE-2026-26278), a vulnerability which could be exploited as a vector for denial of service attacks by forcing the parser to do an unlimited amount of entity expansions.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.8, ≤ 8.7.16, or ≤ 8.6.25
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.9, 8.7.17, 8.6.26
+
+This issue does not affect Web Modeler SaaS.
+
+## Notice 40
+
+### Publication date
+
+Feb 23, 2026
+
+### Products affected
+
+C7 to C8 Migration Tooling
+
+### Impact
+
+The version of Tomcat used by the Diagram Converter Webapp was affected by:
+
+- [CVE-2025-66614](https://nvd.nist.gov/vuln/detail/CVE-2025-66614)
+- [CVE-2026-24734](https://nvd.nist.gov/vuln/detail/CVE-2026-24734)
+
+### How to determine if the installation is affected
+
+You are using:
+
+- C7 to C8 Migration Tooling 0.2.0 **AND**
+- the Diagram Converter Webapp
+
+### Solution
+
+Camunda has released the **C7 to C8 Migration Tooling 0.2.1**, which includes the fix.
+
+## Notice 39
+
+### Publication date
+
+Feb 10, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `fast-xml-parser` used by Camunda Web Modeler was affected by [CVE-2026-25128](https://nvd.nist.gov/vuln/detail/CVE-2026-25128), a RangeError vulnerability that could crash any application that processes untrusted XML input.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.6, ≤ 8.7.15, or ≤ 8.6.24
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.7, 8.7.16, 8.6.25
+
+The fix was deployed to Web Modeler SaaS on February 2, 2026, 15:15 CET.
 
 ## Notice 38
 

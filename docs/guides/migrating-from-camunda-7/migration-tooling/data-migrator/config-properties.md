@@ -15,28 +15,44 @@ Prefix: `camunda.client`
 Read more about Camunda Client [configuration options](/apis-tools/camunda-spring-boot-starter/configuration.md).
 :::
 
-| Property        | Type     | Description                                                                                         |
-| :-------------- | :------- | :-------------------------------------------------------------------------------------------------- |
-| `.mode`         | `string` | Operation mode of the Camunda 8 client. Options: `self-managed` or `cloud`. Default: `self-managed` |
-| `.grpc-address` | `string` | The gRPC API endpoint for Camunda 8 Platform. Default: `http://localhost:26500`                     |
-| `.rest-address` | `string` | The REST API endpoint for Camunda 8 Platform. Default: `http://localhost:8088`                      |
+| Property        | Type     | Description                                                                                        |
+| :-------------- | :------- | :------------------------------------------------------------------------------------------------- |
+| `.mode`         | `string` | Operation mode of the Camunda 8 client. Options: `self-managed` or `saas`. Default: `self-managed` |
+| `.grpc-address` | `string` | The gRPC API endpoint for Camunda 8 Platform. Default: `http://localhost:26500`                    |
+| `.rest-address` | `string` | The REST API endpoint for Camunda 8 Platform. Default: `http://localhost:8080`                     |
 
 ## `camunda.migrator`
 
 Prefix: `camunda.migrator`
 
-| Property               | Type      | Description                                                                                                                                                                                                                                                                                                                      |
-| :--------------------- | :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.page-size`           | `number`  | Number of records to process in each page. Default: `100`.                                                                                                                                                                                                                                                                       |
-| `.job-type`            | `string`  | Job type for actual job activation. Default: `migrator`.                                                                                                                                                                                                                                                                         |
-| `.validation-job-type` | `string`  | Job type for validation purposes. Optional: falls back to `job-type` if not defined. Set to `DISABLED` to disable job type execution listener validation entirely.                                                                                                                                                               |
-| `.auto-ddl`            | `boolean` | Automatically create/update migrator database schema. Default: `false`.                                                                                                                                                                                                                                                          |
-| `.table-prefix`        | `string`  | Optional prefix for migrator database tables. Default: _(empty)_.                                                                                                                                                                                                                                                                |
-| `.data-source`         | `string`  | Choose if the migrator schema is created in the `C7` or `C8` data source. **Should not be changed during migration**, as it can lead to duplicate data migration. Default: `C7`                                                                                                                                                  |
-| `.tenant-ids`          | `string`  | Comma-separated list of tenant ids for which process instances should be migrated during runtime migration. For more information, read [Tenant in Runtime](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime.md#tenants). Default: _(empty)_ (migrate only process instances without assigned tenant id). |
-| `.database-vendor`     | `string`  | Database vendor for migrator schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                                                                                                                                                                                     |
-| `.interceptors`        | `array`   | List of variable interceptors (built-in and custom) to configure during migration.                                                                                                                                                                                                                                               |
-| `.save-skip-reason`    | `boolean` | Whether to persist skip reasons for entities that could not be migrated. Required when using the Cockpit plugin. Default: `false`.                                                                                                                                                                                               |
+| Property                       | Type      | Description                                                                                                                                                                                                                                                                                                                                                                         |
+| :----------------------------- | :-------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.page-size`                   | `number`  | Number of records processed per page. Default: `100`.                                                                                                                                                                                                                                                                                                                               |
+| `.job-type`                    | `string`  | Job type used for job activation. Default: `migrator`.                                                                                                                                                                                                                                                                                                                              |
+| `.validation-job-type`         | `string`  | Job type for validation purposes. Optional: falls back to `job-type` if not defined. Set to `DISABLED` to disable job type execution listener validation entirely.                                                                                                                                                                                                                  |
+| `.auto-ddl`                    | `boolean` | Automatically create/update migrator database schema. Default: `false`.                                                                                                                                                                                                                                                                                                             |
+| `.table-prefix`                | `string`  | Optional prefix for migrator database tables. Default: _(empty)_.                                                                                                                                                                                                                                                                                                                   |
+| `.tenant-ids`                  | `string`  | Comma-separated list of tenant ids for which process instances should be migrated during runtime migration. For more information, read [tenant in runtime](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime.md#tenants). Default: _(empty)_ (migrate only process instances without assigned tenant id).                                                    |
+| `.database-vendor`             | `string`  | Database vendor for migrator schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                                                                                                                                                                                                                                        |
+| `.interceptors`                | `array`   | List of variable interceptors (built-in and custom) to configure during migration.                                                                                                                                                                                                                                                                                                  |
+| `.save-skip-reason`            | `boolean` | Whether to persist skip reasons for entities that could not be migrated. Required when using the Cockpit plugin. Default: `false`.                                                                                                                                                                                                                                                  |
+| `.history.partition-count`     | `number`  | Number of partitions to use for distributing history data. When set, this value takes precedence over querying the topology from the Camunda REST API, so the migrator does not require REST connectivity to a running Camunda 8 cluster (but still requires access to the Camunda 8 database). If not set, the partition count is automatically fetched from the Camunda REST API. |
+| `.history.auto-cancel.cleanup` | `object`  | Configuration for history auto-cancel cleanup behavior. See [camunda.migrator.history.auto-cancel.cleanup](#camundamigratorhistoryauto-cancelcleanup) for details.                                                                                                                                                                                                                  |
+| `.identity.skip-users`         | `boolean` | Skip the migration of users (enable when IdP is configured for users). Default: `false`.                                                                                                                                                                                                                                                                                            |
+| `.identity.skip-groups`        | `boolean` | Skip the migration of groups (enable when IdP is configured for groups). Default: `false`.                                                                                                                                                                                                                                                                                          |
+| `.identity.sync.timeout`       | `number`  | Timeout for identity sync operations in millis. Default: `3000`.                                                                                                                                                                                                                                                                                                                    |
+| `.identity.sync.poll-interval` | `number`  | Polling interval for identity sync operations in millis. Default: `250`.                                                                                                                                                                                                                                                                                                            |
+
+## `camunda.migrator.history.auto-cancel.cleanup`
+
+Prefix: `camunda.migrator.history.auto-cancel.cleanup`
+
+Configuration for history cleanup of auto-canceled instances.
+
+| Property   | Type      | Description                                                                                                                                                                                                                       |
+| :--------- | :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.enabled` | `boolean` | Whether to populate cleanup dates for auto-canceled entities. When `false`, history cleanup dates are set to `null` for all auto-canceled instances. Default: `true`.                                                             |
+| `.ttl`     | `period`  | Time-to-live for auto-canceled history records. The cleanup date is calculated as `end_date + ttl`. Accepts ISO-8601 duration format (e.g., `P6M` for 6 months, `P1Y` for 1 year, `P90D` for 90 days). Default: `P6M` (6 months). |
 
 ## `camunda.migrator.interceptors.[n]`
 
@@ -44,8 +60,8 @@ Prefix: `camunda.migrator.interceptors.[n]`
 
 There are two types of interceptors:
 
-- **VariableInterceptors** for [Runtime migration](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables.md#transformation)
-- **EntityInterceptors** for [History migration](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
+- **VariableInterceptors** for [runtime migration](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables.md#transformation)
+- **EntityInterceptors** for [history migration](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md#entity-transformation)
 
 The configuration is the same for both types.
 
@@ -68,12 +84,25 @@ The following built-in interceptors are available and can be disabled:
 **Transformers (convert supported types):**
 
 - `io.camunda.migration.data.impl.interceptor.PrimitiveVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.StringVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.NullVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.DateVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.ObjectJsonVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.ObjectXmlVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.SpinJsonVariableTransformer`
 - `io.camunda.migration.data.impl.interceptor.SpinXmlVariableTransformer`
+
+**Entity transformers:**
+
+- `io.camunda.migration.data.impl.interceptor.history.entity.ProcessInstanceTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.ProcessDefinitionTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.FlowNodeTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.UserTaskTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.IncidentTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.VariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.DecisionInstanceTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.DecisionDefinitionTransformer`
+- `io.camunda.migration.data.impl.interceptor.history.entity.DecisionRequirementsDefinitionTransformer`
 
 ## `camunda.migrator.c7.data-source`
 
@@ -103,10 +132,6 @@ Prefix: `camunda.migrator.c8`
 Prefix: `camunda.migrator.c8.data-source`
 
 If the `c8.data-source` configuration is absent, the RDBMS history data migrator is disabled.
-
-:::info
-**Heads-up:** History Data Migrator is experimental.
-:::
 
 | Property             | Type      | Description                                                                                                                                               |
 | :------------------- | :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |

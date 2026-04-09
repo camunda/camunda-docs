@@ -81,7 +81,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Cancels a running batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -121,7 +121,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Suspends a running batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -163,7 +163,7 @@ paths:
       description: |
 
 
-        [[CONSISTENCY:EVENTUAL]]
+        [[CONSISTENCY:STRONG]]
 
         Resumes a suspended batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
@@ -232,6 +232,9 @@ paths:
 components:
   schemas:
     BatchOperationCreatedResult:
+      required:
+        - batchOperationKey
+        - batchOperationType
       description: The created batch operation.
       type: object
       properties:
@@ -293,7 +296,7 @@ components:
         actorType:
           description: The type of the actor who performed the operation.
           allOf:
-            - $ref: "#/components/schemas/BatchOperationActorTypeEnum"
+            - $ref: "audit-logs.yaml#/components/schemas/AuditLogActorTypeEnum"
         actorId:
           description: The ID of the actor who performed the operation.
           allOf:
@@ -301,6 +304,8 @@ components:
     BatchOperationSearchQueryResult:
       description: The batch operation search query result.
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -310,6 +315,18 @@ components:
           items:
             $ref: "#/components/schemas/BatchOperationResponse"
     BatchOperationResponse:
+      required:
+        - batchOperationKey
+        - batchOperationType
+        - state
+        - operationsCompletedCount
+        - operationsFailedCount
+        - operationsTotalCount
+        - actorType
+        - actorId
+        - errors
+        - endDate
+        - startDate
       type: object
       properties:
         batchOperationKey:
@@ -322,17 +339,30 @@ components:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
         startDate:
           type: string
-          description: The start date of the batch operation.
+          description: |
+            The start date of the batch operation.
+            This is `null` if the batch operation has not yet started.
           format: date-time
+          nullable: true
         endDate:
           type: string
-          description: The end date of the batch operation.
+          description: |
+            The end date of the batch operation.
+            This is `null` if the batch operation is still running.
           format: date-time
+          nullable: true
         actorType:
-          $ref: "#/components/schemas/BatchOperationActorTypeEnum"
+          description: |
+            The type of the actor who performed the operation.
+            This is `null` if the batch operation was created before 8.9,
+            or if the actor information is not available.
+          nullable: true
+          allOf:
+            - $ref: "audit-logs.yaml#/components/schemas/AuditLogActorTypeEnum"
         actorId:
           type: string
           description: The ID of the actor who performed the operation. Available for batch operations created since 8.9.
+          nullable: true
         operationsTotalCount:
           type: integer
           description: The total number of items contained in this batch operation.
@@ -351,6 +381,10 @@ components:
           items:
             $ref: "#/components/schemas/BatchOperationError"
     BatchOperationError:
+      required:
+        - message
+        - partitionId
+        - type
       type: object
       properties:
         partitionId:
@@ -424,6 +458,8 @@ components:
             - $ref: "#/components/schemas/BatchOperationTypeFilterProperty"
     BatchOperationItemSearchQueryResult:
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -434,6 +470,15 @@ components:
             $ref: "#/components/schemas/BatchOperationItemResponse"
     BatchOperationItemResponse:
       type: object
+      required:
+        - rootProcessInstanceKey
+        - batchOperationKey
+        - errorMessage
+        - itemKey
+        - operationType
+        - processedDate
+        - processInstanceKey
+        - state
       properties:
         operationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
@@ -448,6 +493,14 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: the process instance key of the processed item.
+        rootProcessInstanceKey:
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy. This field is only present for data
+            belonging to process instance hierarchies created in version 8.9 or later.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         state:
           description: State of the item.
           type: string
@@ -458,12 +511,28 @@ components:
             - CANCELED
             - FAILED
         processedDate:
-          description: the date this item was processed.
+          description: |
+            The date this item was processed.
+            This is `null` if the item has not yet been processed.
+          nullable: true
           type: string
           format: date-time
         errorMessage:
-          description: the error message from the engine in case of a failed operation.
+          description: The error message from the engine in case of a failed operation.
+          nullable: true
           type: string
+    DecisionInstanceDeletionBatchOperationRequest:
+      type: object
+      description: The decision instance filter that defines which decision instances should be deleted.
+      properties:
+        filter:
+          allOf:
+            - $ref: "decision-instances.yaml#/components/schemas/DecisionInstanceFilter"
+          description: The decision instance filter.
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
+      required:
+        - filter
     ProcessInstanceCancellationBatchOperationRequest:
       type: object
       description: The process instance filter that defines which process instances should be canceled.
@@ -598,21 +667,15 @@ components:
         - ADD_VARIABLE
         - CANCEL_PROCESS_INSTANCE
         - DELETE_DECISION_DEFINITION
+        - DELETE_DECISION_INSTANCE
         - DELETE_PROCESS_DEFINITION
         - DELETE_PROCESS_INSTANCE
         - MIGRATE_PROCESS_INSTANCE
         - MODIFY_PROCESS_INSTANCE
         - RESOLVE_INCIDENT
         - UPDATE_VARIABLE
-    BatchOperationActorTypeEnum:
-      description: The type of the actor. Available for batch operations created since 8.9.
-      type: string
-      enum:
-        - CLIENT
-        - USER
     BatchOperationTypeFilterProperty:
       description: BatchOperationTypeEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -645,7 +708,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     BatchOperationStateFilterProperty:
       description: BatchOperationStateEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -678,7 +740,6 @@ components:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
     BatchOperationItemStateFilterProperty:
       description: BatchOperationItemStateEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match

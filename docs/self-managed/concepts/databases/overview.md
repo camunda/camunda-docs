@@ -6,16 +6,27 @@ description: Learn how Camunda uses document and relational databases for second
 
 Camunda applications depend on a secondary storage backend to read workflow and decision data exported from the Zeebe engine.
 
-This storage layer can use either document databases or relational databases (RDBMS), depending on your requirements.
+This storage layer can use either a document-store backend or a relational database (RDBMS), depending on your requirements.
 
 For an architectural explanation of how secondary storage fits into Camunda 8, see the  
 [secondary storage overview](/self-managed/concepts/secondary-storage/index.md).
 
-## Document databases
+## App database support
 
-Camunda supports document-oriented backends such as Elasticsearch and OpenSearch.
+| App                   | RDBMS | Non-SQL |
+| --------------------- | ----- | ------- |
+| Orchestration Cluster | Yes   | Yes     |
+| Optimize              | No    | Yes     |
+| Web Modeler           | Yes   | No      |
+| Management Identity   | Yes   | No      |
 
-These systems are optimized for high-volume ingestion and flexible search queries, and they remain the default choice for most production deployments.
+Use this matrix as a compatibility summary for the main Camunda components and their supported database backends.
+
+## Document-store backends
+
+Camunda supports document-store backends such as Elasticsearch and OpenSearch.
+
+These systems are optimized for high-volume ingestion and flexible search queries.
 
 Related documentation:
 
@@ -26,9 +37,11 @@ Related documentation:
 
 ## Relational databases (RDBMS)
 
-Camunda also supports several relational databases for secondary storage, enabling Operate, Tasklist, Identity, and REST APIs to run without Elasticsearch or OpenSearch.
+Camunda also supports several relational databases for secondary storage, enabling the Orchestration Cluster API, Operate, Tasklist, and Admin to run without Elasticsearch or OpenSearch.
 
-A full list of supported vendors and versions is published in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+RDBMS and document-store backends are both valid secondary storage options. Select based on your workload, operational model, and platform standards.
+
+A full list of supported vendors and versions, JDBC driver information, and component compatibility is published in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
 For configuration details in Helm deployments, see the [RDBMS configuration guide](/self-managed/deployment/helm/configure/database/rdbms.md).
 
@@ -36,11 +49,38 @@ For configuration details in Helm deployments, see the [RDBMS configuration guid
 
 When using an RDBMS as secondary storage, keep the following limitations in mind:
 
-- **ID size limits:** Identifiers such as process definition IDs, decision IDs, and usernames are limited to 255 characters. Storing values significantly longer may result in errors. (This behavior will change once [this issue](https://github.com/camunda/camunda/issues/36717) is complete.)
+- **Length limits for user-defined values:** Most user-defined strings that are exported to secondary storage or stored in identity management are length-limited. See [string length limits for user-defined values](#string-length-limits-for-user-defined-values).
 
 - **Variable comparisons:** For String and JSON variables, comparison operators (`equals`, `notEquals`, `in`, `notIn`) only consider the first 8191 characters (or 4000 characters with Oracle). `LIKE` comparisons are not affected.
 
 - **Sorting may differ by vendor:** Because collation behavior varies across database vendors, results sorted by string fields may differ between systems.
+
+#### String length limits for user-defined values
+
+Camunda limits most user-defined strings before they are exported to secondary storage or stored in identity management.
+
+| Scope                                      | Limit                 | Notes                                                                                                |
+| ------------------------------------------ | --------------------- | ---------------------------------------------------------------------------------------------------- |
+| Elasticsearch/OpenSearch secondary storage | **32,768 characters** | This matches the practical limit for the relevant Elasticsearch / OpenSearch string fields.          |
+| RDBMS secondary storage                    | **256 characters**    | This limit is chosen to align exported field lengths with the supported RDBMS schema.                |
+| Identity objects                           | **256 characters**    | This limit applies independently of the secondary storage backend used by the Orchestration Cluster. |
+
+These limits are enforced using Java string length semantics rather than raw UTF-8 byte counts. In practice, most common Latin, CJK, and Arabic characters count as one character, while characters represented as surrogate pairs in Java count as two. Because of that, the effective visible-character limit can be lower for some inputs.
+
+The limits apply to the following user-defined fields:
+
+- BPMN element IDs and names
+- DMN element IDs and names
+- Job worker types in task definitions
+- Variable names
+- Resource names of deployed BPMN, DMN, and form files
+- Form IDs
+- Message names and correlation keys
+- Identity object identifiers and names
+
+Special case for DMN on RDBMS: if a rule does not define its own ID, Camunda generates one from the decision ID, decision version, and rule index. In that case, keep the decision ID at **235 characters or fewer** so the generated rule ID stays within the RDBMS limit.
+
+These limits are currently not configurable. In particular, the RDBMS-backed limits are tied to the database schema and do not increase automatically if you change application configuration.
 
 #### Working with variables
 

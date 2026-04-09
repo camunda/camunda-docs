@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 Migrate from Camunda V1 component REST APIs to the V2 Orchestration Cluster REST API.
 
-## About this guide
+## About
 
 This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), and what to consider when migrating. It covers all public endpoints in the component REST APIs and their Orchestration Cluster API counterparts or required migration changes.
 
@@ -234,6 +234,8 @@ Response structure changes as outlined in [general changes][].
 | `previewValue`     | Renamed         | Now `value` (always represents variable value, may be truncated).        |
 | `isValueTruncated` | Renamed         | Now `isTruncated` (see get variable endpoint for full value if needed).  |
 | `draft`            | Removed         | Draft variables not supported in V2 (see save draft variables endpoint). |
+
+For completed tasks, the V1 API returned snapshot variable values as they existed at completion time. The V2 API always returns the current runtime value of variables.
 
 </TabItem>
 </Tabs>

@@ -169,9 +169,9 @@ Changing the scope of ad-hoc subprocesses during migration is not possible.
 
 You can migrate user tasks with a job worker implementation to Camunda user tasks by providing mapping instructions between the source and target user tasks.
 
-The target Camunda user task preserves `candidate groups`, `candidate users`, `due date`, `follow-up date`, and the `form id` or `form key` from the source task.
+The target Camunda user task preserves `candidate groups`, `candidate users`, `due date`, `follow-up date`, and the `form id` or `form key` from the source task, as well as `customHeaders` set in the job.
 
-The target user task uses the priority defined in the target user task definition, or a default value if none is defined.
+The target user task uses the [priority](../../tasklist/userguide/defining-task-priorities) defined in the target user task definition, or a default value of 50 if none is defined.
 
 :::important
 When you migrate a job worker user task to a Camunda user task:
@@ -452,6 +452,7 @@ In the following cases, the process instance can't apply the migration plan and 
 - Multi-instance body limitations:
   - Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
   - It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
+- Mapping instructions can only change the user task implementation from a job-worker user task to a Camunda user task, but not vice versa.
 
 The following limitations exist that may be supported in future versions:
 
@@ -460,7 +461,6 @@ The following limitations exist that may be supported in future versions:
   - An element that becomes nested in a newly added subprocess
   - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
-- Mapping instructions can only change the user task implementation from a job-worker user task to a Camunda user task, but not vice-versa
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance.
 
 A full overview of error codes can be found in the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance.api.mdx).
@@ -585,6 +585,12 @@ import EscalationBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/esca
 import EscalationBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/escalation-boundary-event-non-interrupting.svg'
 
 import CompensationBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/compensation-boundary-event.svg'
+
+import ConditionalEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-event-subprocess.svg'
+import ConditionalEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-event-subprocess-non-interrupting.svg'
+import ConditionalCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-catch-event.svg'
+import ConditionalBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-boundary-event.svg'
+import ConditionalBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/conditional-boundary-event-non-interrupting.svg'
 
 <table className="bpmn-coverage-event-table">
   <thead>
@@ -750,6 +756,36 @@ import CompensationBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/co
             </a>
         </td>
         <td></td>
+    </tr>
+    <tr>
+        <td>
+            Conditional
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalCatchEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/conditional-events/">
+                <ConditionalBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
     </tr>
 
   </tbody>

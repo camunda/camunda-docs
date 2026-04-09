@@ -164,7 +164,7 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Cluster variable",
+      label: "Cluster Variable",
       items: [
         {
           type: "doc",
@@ -177,6 +177,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-cluster-variable",
           label: "Get a global-scoped cluster variable",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-global-cluster-variable",
+          label: "Update a global-scoped cluster variable",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -201,6 +207,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-tenant-cluster-variable",
           label: "Get a tenant-scoped cluster variable",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-tenant-cluster-variable",
+          label: "Update a tenant-scoped cluster variable",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -267,6 +279,18 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance",
           label: "Get decision instance",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instance",
+          label: "Delete decision instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-decision-instances-batch-operation",
+          label: "Delete decision instances (batch)",
+          className: "api-method post",
         },
       ],
     },
@@ -368,6 +392,42 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/evaluate-expression",
           label: "Evaluate an expression",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Global listener",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-global-task-listener",
+          label: "Create global user task listener",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-task-listener",
+          label: "Get global user task listener",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-global-task-listener",
+          label: "Update global user task listener",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-global-task-listener",
+          label: "Delete global user task listener",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-global-task-listeners",
+          label: "Search global user task listeners",
           className: "api-method post",
         },
       ],
@@ -542,6 +602,36 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/fail-job",
           label: "Fail job",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-job-statistics",
+          label: "Global job statistics",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-job-type-statistics",
+          label: "Get job statistics by type",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-job-worker-statistics",
+          label: "Get job statistics by worker",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-job-time-series-statistics",
+          label: "Get time-series metrics for a job type",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-job-error-statistics",
+          label: "Get error metrics for a job type",
           className: "api-method post",
         },
       ],
@@ -964,6 +1054,12 @@ const sidebar: SidebarsConfig = {
           label: "Get usage metrics",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-system-configuration",
+          label: "System configuration (alpha)",
+          className: "api-method get",
+        },
       ],
     },
     {
@@ -1164,8 +1260,20 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-task-audit-logs",
+          label: "Search user task audit logs",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task",
           label: "Complete user task",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-task-effective-variables",
+          label: "Search user task effective variables",
           className: "api-method post",
         },
         {

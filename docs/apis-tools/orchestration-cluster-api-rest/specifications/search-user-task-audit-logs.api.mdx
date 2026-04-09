@@ -1,0 +1,1507 @@
+---
+id: search-user-task-audit-logs
+title: "Search user task audit logs"
+description: "<MarkerEventuallyConsistentExtension />"
+sidebar_label: "Search user task audit logs"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search user task audit logs"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/{userTaskKey}/audit-logs/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Search for user task audit logs based on given criteria.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task.",
+      schema: {
+        type: "string",
+        format: "string<UserTaskKey>",
+        description: "System-generated key for a user task.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          required: ["after"],
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          required: ["before"],
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          description: "User task search query request.",
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "actorId",
+                      "actorType",
+                      "auditLogKey",
+                      "batchOperationKey",
+                      "batchOperationType",
+                      "category",
+                      "decisionDefinitionId",
+                      "decisionDefinitionKey",
+                      "decisionEvaluationKey",
+                      "decisionRequirementsId",
+                      "decisionRequirementsKey",
+                      "elementInstanceKey",
+                      "entityKey",
+                      "entityType",
+                      "jobKey",
+                      "operationType",
+                      "processDefinitionId",
+                      "processDefinitionKey",
+                      "processInstanceKey",
+                      "result",
+                      "tenantId",
+                      "timestamp",
+                      "userTaskKey",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "AuditLogSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The user task audit log search filters.",
+              type: "object",
+              properties: {
+                operationType: {
+                  allOf: [
+                    {
+                      description:
+                        "AuditLogOperationTypeEnum property with full advanced search capabilities.",
+                      oneOf: [
+                        {
+                          type: "string",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                          allOf: [
+                            {
+                              type: "string",
+                              description: "The type of operation performed.",
+                              enum: [
+                                "ASSIGN",
+                                "CANCEL",
+                                "COMPLETE",
+                                "CREATE",
+                                "DELETE",
+                                "EVALUATE",
+                                "MIGRATE",
+                                "MODIFY",
+                                "RESOLVE",
+                                "RESUME",
+                                "SUSPEND",
+                                "UNASSIGN",
+                                "UNKNOWN",
+                                "UPDATE",
+                              ],
+                              title: "AuditLogOperationTypeEnum",
+                            },
+                          ],
+                        },
+                        {
+                          title: "Advanced filter",
+                          description:
+                            "Advanced AuditLogOperationTypeEnum filter.",
+                          type: "object",
+                          properties: {
+                            $eq: {
+                              description:
+                                "Checks for equality with the provided value.",
+                              allOf: [
+                                {
+                                  type: "string",
+                                  description:
+                                    "The type of operation performed.",
+                                  enum: [
+                                    "ASSIGN",
+                                    "CANCEL",
+                                    "COMPLETE",
+                                    "CREATE",
+                                    "DELETE",
+                                    "EVALUATE",
+                                    "MIGRATE",
+                                    "MODIFY",
+                                    "RESOLVE",
+                                    "RESUME",
+                                    "SUSPEND",
+                                    "UNASSIGN",
+                                    "UNKNOWN",
+                                    "UPDATE",
+                                  ],
+                                  title: "AuditLogOperationTypeEnum",
+                                },
+                              ],
+                            },
+                            $neq: {
+                              description:
+                                "Checks for inequality with the provided value.",
+                              allOf: [
+                                {
+                                  type: "string",
+                                  description:
+                                    "The type of operation performed.",
+                                  enum: [
+                                    "ASSIGN",
+                                    "CANCEL",
+                                    "COMPLETE",
+                                    "CREATE",
+                                    "DELETE",
+                                    "EVALUATE",
+                                    "MIGRATE",
+                                    "MODIFY",
+                                    "RESOLVE",
+                                    "RESUME",
+                                    "SUSPEND",
+                                    "UNASSIGN",
+                                    "UNKNOWN",
+                                    "UPDATE",
+                                  ],
+                                  title: "AuditLogOperationTypeEnum",
+                                },
+                              ],
+                            },
+                            $exists: {
+                              description:
+                                "Checks if the current property exists.",
+                              type: "boolean",
+                            },
+                            $in: {
+                              description:
+                                "Checks if the property matches any of the provided values.",
+                              type: "array",
+                              items: {
+                                type: "string",
+                                description: "The type of operation performed.",
+                                enum: [
+                                  "ASSIGN",
+                                  "CANCEL",
+                                  "COMPLETE",
+                                  "CREATE",
+                                  "DELETE",
+                                  "EVALUATE",
+                                  "MIGRATE",
+                                  "MODIFY",
+                                  "RESOLVE",
+                                  "RESUME",
+                                  "SUSPEND",
+                                  "UNASSIGN",
+                                  "UNKNOWN",
+                                  "UPDATE",
+                                ],
+                                title: "AuditLogOperationTypeEnum",
+                              },
+                            },
+                            $like: {
+                              type: "string",
+                              description:
+                                "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                              title: "LikeFilter",
+                            },
+                          },
+                        },
+                      ],
+                      title: "OperationTypeFilterProperty",
+                    },
+                  ],
+                  description: "The audit log operation type search filter.",
+                },
+                result: {
+                  allOf: [
+                    {
+                      description:
+                        "AuditLogResultEnum property with full advanced search capabilities.",
+                      oneOf: [
+                        {
+                          type: "string",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                          allOf: [
+                            {
+                              type: "string",
+                              description:
+                                "The result status of the operation.",
+                              enum: ["FAIL", "SUCCESS"],
+                              title: "AuditLogResultEnum",
+                            },
+                          ],
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Advanced AuditLogResultEnum filter.",
+                          type: "object",
+                          properties: {
+                            $eq: {
+                              description:
+                                "Checks for equality with the provided value.",
+                              allOf: [
+                                {
+                                  type: "string",
+                                  description:
+                                    "The result status of the operation.",
+                                  enum: ["FAIL", "SUCCESS"],
+                                  title: "AuditLogResultEnum",
+                                },
+                              ],
+                            },
+                            $neq: {
+                              description:
+                                "Checks for inequality with the provided value.",
+                              allOf: [
+                                {
+                                  type: "string",
+                                  description:
+                                    "The result status of the operation.",
+                                  enum: ["FAIL", "SUCCESS"],
+                                  title: "AuditLogResultEnum",
+                                },
+                              ],
+                            },
+                            $exists: {
+                              description:
+                                "Checks if the current property exists.",
+                              type: "boolean",
+                            },
+                            $in: {
+                              description:
+                                "Checks if the property matches any of the provided values.",
+                              type: "array",
+                              items: {
+                                type: "string",
+                                description:
+                                  "The result status of the operation.",
+                                enum: ["FAIL", "SUCCESS"],
+                                title: "AuditLogResultEnum",
+                              },
+                            },
+                            $like: {
+                              type: "string",
+                              description:
+                                "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                              title: "LikeFilter",
+                            },
+                          },
+                        },
+                      ],
+                      title: "AuditLogResultFilterProperty",
+                    },
+                  ],
+                  description: "The audit log result search filter.",
+                },
+                timestamp: {
+                  allOf: [
+                    {
+                      description:
+                        "Date-time property with full advanced search capabilities.",
+                      oneOf: [
+                        {
+                          type: "string",
+                          format: "date-time",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Advanced date-time filter.",
+                          type: "object",
+                          properties: {
+                            $eq: {
+                              description:
+                                "Checks for equality with the provided value.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            $neq: {
+                              description:
+                                "Checks for inequality with the provided value.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            $exists: {
+                              description:
+                                "Checks if the current property exists.",
+                              type: "boolean",
+                            },
+                            $gt: {
+                              description:
+                                "Greater than comparison with the provided value.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            $gte: {
+                              description:
+                                "Greater than or equal comparison with the provided value.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            $lt: {
+                              description:
+                                "Lower than comparison with the provided value.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            $lte: {
+                              description:
+                                "Lower than or equal comparison with the provided value.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            $in: {
+                              description:
+                                "Checks if the property matches any of the provided values.",
+                              type: "array",
+                              items: { type: "string", format: "date-time" },
+                            },
+                          },
+                        },
+                      ],
+                      title: "DateTimeFilterProperty",
+                    },
+                  ],
+                  description: "The audit log timestamp filter.",
+                },
+                actorType: {
+                  allOf: [
+                    {
+                      description:
+                        "AuditLogActorTypeEnum property with full advanced search capabilities.",
+                      oneOf: [
+                        {
+                          type: "string",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                          allOf: [
+                            {
+                              type: "string",
+                              description:
+                                "The type of actor who performed the operation.",
+                              enum: ["ANONYMOUS", "CLIENT", "UNKNOWN", "USER"],
+                              title: "AuditLogActorTypeEnum",
+                            },
+                          ],
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Advanced AuditLogActorTypeEnum filter.",
+                          type: "object",
+                          properties: {
+                            $eq: {
+                              description:
+                                "Checks for equality with the provided value.",
+                              allOf: [
+                                {
+                                  type: "string",
+                                  description:
+                                    "The type of actor who performed the operation.",
+                                  enum: [
+                                    "ANONYMOUS",
+                                    "CLIENT",
+                                    "UNKNOWN",
+                                    "USER",
+                                  ],
+                                  title: "AuditLogActorTypeEnum",
+                                },
+                              ],
+                            },
+                            $neq: {
+                              description:
+                                "Checks for inequality with the provided value.",
+                              allOf: [
+                                {
+                                  type: "string",
+                                  description:
+                                    "The type of actor who performed the operation.",
+                                  enum: [
+                                    "ANONYMOUS",
+                                    "CLIENT",
+                                    "UNKNOWN",
+                                    "USER",
+                                  ],
+                                  title: "AuditLogActorTypeEnum",
+                                },
+                              ],
+                            },
+                            $exists: {
+                              description:
+                                "Checks if the current property exists.",
+                              type: "boolean",
+                            },
+                            $in: {
+                              description:
+                                "Checks if the property matches any of the provided values.",
+                              type: "array",
+                              items: {
+                                type: "string",
+                                description:
+                                  "The type of actor who performed the operation.",
+                                enum: [
+                                  "ANONYMOUS",
+                                  "CLIENT",
+                                  "UNKNOWN",
+                                  "USER",
+                                ],
+                                title: "AuditLogActorTypeEnum",
+                              },
+                            },
+                            $like: {
+                              type: "string",
+                              description:
+                                "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                              title: "LikeFilter",
+                            },
+                          },
+                        },
+                      ],
+                      title: "AuditLogActorTypeFilterProperty",
+                    },
+                  ],
+                  description: "The actor type search filter.",
+                },
+                actorId: {
+                  allOf: [
+                    {
+                      description:
+                        "String property with full advanced search capabilities.",
+                      oneOf: [
+                        {
+                          type: "string",
+                          title: "Exact match",
+                          description: "Matches the value exactly.",
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Advanced string filter.",
+                          allOf: [
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                            {
+                              type: "object",
+                              properties: {
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      ],
+                      title: "StringFilterProperty",
+                    },
+                  ],
+                  description: "The actor ID search filter.",
+                },
+              },
+              title: "UserTaskAuditLogFilter",
+            },
+          },
+          title: "UserTaskAuditLogSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user task audit log search result.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Audit log search response.",
+            type: "object",
+            required: ["items"],
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching audit logs.",
+                type: "array",
+                items: {
+                  description: "Audit log item.",
+                  type: "object",
+                  required: [
+                    "auditLogKey",
+                    "entityKey",
+                    "entityType",
+                    "operationType",
+                    "batchOperationKey",
+                    "batchOperationType",
+                    "timestamp",
+                    "actorId",
+                    "actorType",
+                    "agentElementId",
+                    "tenantId",
+                    "result",
+                    "category",
+                    "processDefinitionId",
+                    "processDefinitionKey",
+                    "processInstanceKey",
+                    "rootProcessInstanceKey",
+                    "elementInstanceKey",
+                    "jobKey",
+                    "userTaskKey",
+                    "decisionRequirementsId",
+                    "decisionRequirementsKey",
+                    "decisionDefinitionId",
+                    "decisionDefinitionKey",
+                    "decisionEvaluationKey",
+                    "deploymentKey",
+                    "formKey",
+                    "resourceKey",
+                    "relatedEntityKey",
+                    "relatedEntityType",
+                    "entityDescription",
+                  ],
+                  properties: {
+                    auditLogKey: {
+                      allOf: [
+                        {
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          description:
+                            "System-generated key for an audit log entry.",
+                          format: "AuditLogKey",
+                          example: "22517998136843567",
+                          type: "string",
+                          title: "AuditLogKey",
+                        },
+                      ],
+                      description: "The unique key of the audit log entry.",
+                    },
+                    entityKey: {
+                      description:
+                        "System-generated entity key for an audit log entry.",
+                      format: "AuditLogEntityKey",
+                      example: "22517998136843567",
+                      type: "string",
+                      title: "AuditLogEntityKey",
+                    },
+                    entityType: {
+                      type: "string",
+                      description:
+                        "The type of entity affected by the operation.",
+                      enum: [
+                        "AUTHORIZATION",
+                        "BATCH",
+                        "DECISION",
+                        "GROUP",
+                        "INCIDENT",
+                        "JOB",
+                        "MAPPING_RULE",
+                        "PROCESS_INSTANCE",
+                        "RESOURCE",
+                        "ROLE",
+                        "TENANT",
+                        "USER",
+                        "USER_TASK",
+                        "VARIABLE",
+                        "CLIENT",
+                      ],
+                      title: "AuditLogEntityTypeEnum",
+                    },
+                    operationType: {
+                      type: "string",
+                      description: "The type of operation performed.",
+                      enum: [
+                        "ASSIGN",
+                        "CANCEL",
+                        "COMPLETE",
+                        "CREATE",
+                        "DELETE",
+                        "EVALUATE",
+                        "MIGRATE",
+                        "MODIFY",
+                        "RESOLVE",
+                        "RESUME",
+                        "SUSPEND",
+                        "UNASSIGN",
+                        "UNKNOWN",
+                        "UPDATE",
+                      ],
+                      title: "AuditLogOperationTypeEnum",
+                    },
+                    batchOperationKey: {
+                      allOf: [
+                        {
+                          format: "BatchOperationKey | uuid",
+                          type: "string",
+                          description:
+                            "System-generated key for an batch operation.",
+                          example: "2251799813684321",
+                          title: "BatchOperationKey",
+                        },
+                      ],
+                      description: "Key of the batch operation.",
+                      nullable: true,
+                    },
+                    batchOperationType: {
+                      allOf: [
+                        {
+                          description: "The type of the batch operation.",
+                          type: "string",
+                          enum: [
+                            "ADD_VARIABLE",
+                            "CANCEL_PROCESS_INSTANCE",
+                            "DELETE_DECISION_DEFINITION",
+                            "DELETE_DECISION_INSTANCE",
+                            "DELETE_PROCESS_DEFINITION",
+                            "DELETE_PROCESS_INSTANCE",
+                            "MIGRATE_PROCESS_INSTANCE",
+                            "MODIFY_PROCESS_INSTANCE",
+                            "RESOLVE_INCIDENT",
+                            "UPDATE_VARIABLE",
+                          ],
+                          title: "BatchOperationTypeEnum",
+                        },
+                      ],
+                      description:
+                        "The type of batch operation performed, if this is part of a batch.",
+                      nullable: true,
+                    },
+                    timestamp: {
+                      type: "string",
+                      description: "The timestamp when the operation occurred.",
+                      format: "date-time",
+                    },
+                    actorId: {
+                      type: "string",
+                      description:
+                        "The ID of the actor who performed the operation.",
+                      nullable: true,
+                    },
+                    actorType: {
+                      allOf: [
+                        {
+                          type: "string",
+                          description:
+                            "The type of actor who performed the operation.",
+                          enum: ["ANONYMOUS", "CLIENT", "UNKNOWN", "USER"],
+                          title: "AuditLogActorTypeEnum",
+                        },
+                      ],
+                      description:
+                        "The type of the actor who performed the operation.",
+                      nullable: true,
+                    },
+                    agentElementId: {
+                      type: "string",
+                      description:
+                        "The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID).",
+                      nullable: true,
+                    },
+                    tenantId: {
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                      description: "The tenant ID of the audit log.",
+                      nullable: true,
+                    },
+                    result: {
+                      type: "string",
+                      description: "The result status of the operation.",
+                      enum: ["FAIL", "SUCCESS"],
+                      title: "AuditLogResultEnum",
+                    },
+                    category: {
+                      type: "string",
+                      description: "The category of the audit log operation.",
+                      enum: ["ADMIN", "DEPLOYED_RESOURCES", "USER_TASKS"],
+                      title: "AuditLogCategoryEnum",
+                    },
+                    processDefinitionId: {
+                      allOf: [
+                        {
+                          description:
+                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                          format: "ProcessDefinitionId",
+                          type: "string",
+                          example: "new-account-onboarding-workflow",
+                          title: "ProcessDefinitionId",
+                        },
+                      ],
+                      description: "The process definition ID.",
+                      nullable: true,
+                    },
+                    processDefinitionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                      description: "The key of the process definition.",
+                      nullable: true,
+                    },
+                    processInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a process instance.",
+                          format: "ProcessInstanceKey",
+                          example: "2251799813690746",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessInstanceKey",
+                        },
+                      ],
+                      description: "The key of the process instance.",
+                      nullable: true,
+                    },
+                    rootProcessInstanceKey: {
+                      description:
+                        "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
+                      nullable: true,
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a process instance.",
+                          format: "ProcessInstanceKey",
+                          example: "2251799813690746",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessInstanceKey",
+                        },
+                      ],
+                    },
+                    elementInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a element instance.",
+                          format: "ElementInstanceKey",
+                          example: "2251799813686789",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ElementInstanceKey",
+                        },
+                      ],
+                      description: "The key of the element instance.",
+                      nullable: true,
+                    },
+                    jobKey: {
+                      allOf: [
+                        {
+                          description: "System-generated key for a job.",
+                          format: "JobKey",
+                          example: "2251799813653498",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "JobKey",
+                        },
+                      ],
+                      description: "The key of the job.",
+                      nullable: true,
+                    },
+                    userTaskKey: {
+                      allOf: [
+                        {
+                          description: "System-generated key for a user task.",
+                          format: "UserTaskKey",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "UserTaskKey",
+                        },
+                      ],
+                      description: "The key of the user task.",
+                      nullable: true,
+                    },
+                    decisionRequirementsId: {
+                      type: "string",
+                      description: "The decision requirements ID.",
+                      nullable: true,
+                    },
+                    decisionRequirementsKey: {
+                      allOf: [
+                        {
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          description:
+                            "System-generated key for a deployed decision requirements definition.",
+                          format: "DecisionRequirementsKey",
+                          example: "2251799813683346",
+                          type: "string",
+                          title: "DecisionRequirementsKey",
+                        },
+                      ],
+                      description:
+                        "The assigned key of the decision requirements.",
+                      nullable: true,
+                    },
+                    decisionDefinitionId: {
+                      allOf: [
+                        {
+                          description:
+                            "Id of a decision definition, from the model. Only ids of decision definitions that are deployed are useful.",
+                          format: "DecisionDefinitionId",
+                          type: "string",
+                          example: "new-hire-onboarding-workflow",
+                          title: "DecisionDefinitionId",
+                        },
+                      ],
+                      description: "The decision definition ID.",
+                      nullable: true,
+                    },
+                    decisionDefinitionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a decision definition.",
+                          format: "DecisionDefinitionKey",
+                          example: "2251799813326547",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "DecisionDefinitionKey",
+                        },
+                      ],
+                      description: "The key of the decision definition.",
+                      nullable: true,
+                    },
+                    decisionEvaluationKey: {
+                      allOf: [
+                        {
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          description:
+                            "System-generated key for a decision evaluation.",
+                          format: "DecisionEvaluationKey",
+                          example: "2251792362345323",
+                          type: "string",
+                          title: "DecisionEvaluationKey",
+                        },
+                      ],
+                      description: "The key of the decision evaluation.",
+                      nullable: true,
+                    },
+                    deploymentKey: {
+                      allOf: [
+                        {
+                          description: "Key for a deployment.",
+                          format: "DeploymentKey",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "DeploymentKey",
+                        },
+                      ],
+                      description: "The key of the deployment.",
+                      nullable: true,
+                    },
+                    formKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed form.",
+                          format: "FormKey",
+                          example: "2251799813684365",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "FormKey",
+                        },
+                      ],
+                      description: "The key of the form.",
+                      nullable: true,
+                    },
+                    resourceKey: {
+                      allOf: [
+                        {
+                          type: "string",
+                          oneOf: [
+                            {
+                              description:
+                                "System-generated key for a deployed process definition.",
+                              format: "ProcessDefinitionKey",
+                              example: "2251799813686749",
+                              type: "string",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "ProcessDefinitionKey",
+                            },
+                            {
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              description:
+                                "System-generated key for a deployed decision requirements definition.",
+                              format: "DecisionRequirementsKey",
+                              example: "2251799813683346",
+                              type: "string",
+                              title: "DecisionRequirementsKey",
+                            },
+                            {
+                              description:
+                                "System-generated key for a deployed form.",
+                              format: "FormKey",
+                              example: "2251799813684365",
+                              type: "string",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "FormKey",
+                            },
+                            {
+                              description:
+                                "System-generated key for a decision definition.",
+                              format: "DecisionDefinitionKey",
+                              example: "2251799813326547",
+                              type: "string",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "DecisionDefinitionKey",
+                            },
+                          ],
+                          description:
+                            "The system-assigned key for this resource.",
+                          format: "ResourceKey",
+                          title: "ResourceKey",
+                        },
+                      ],
+                      description: "The system-assigned key for this resource.",
+                      nullable: true,
+                    },
+                    relatedEntityKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated entity key for an audit log entry.",
+                          format: "AuditLogEntityKey",
+                          example: "22517998136843567",
+                          type: "string",
+                          title: "AuditLogEntityKey",
+                        },
+                      ],
+                      description:
+                        "The key of the related entity. The content depends on the operation type and entity type.\nFor example, for authorization operations, this will contain the ID of the owner (e.g., user or group) the authorization belongs to.\n",
+                      nullable: true,
+                    },
+                    relatedEntityType: {
+                      allOf: [
+                        {
+                          type: "string",
+                          description:
+                            "The type of entity affected by the operation.",
+                          enum: [
+                            "AUTHORIZATION",
+                            "BATCH",
+                            "DECISION",
+                            "GROUP",
+                            "INCIDENT",
+                            "JOB",
+                            "MAPPING_RULE",
+                            "PROCESS_INSTANCE",
+                            "RESOURCE",
+                            "ROLE",
+                            "TENANT",
+                            "USER",
+                            "USER_TASK",
+                            "VARIABLE",
+                            "CLIENT",
+                          ],
+                          title: "AuditLogEntityTypeEnum",
+                        },
+                      ],
+                      description:
+                        "The type of the related entity. The content depends on the operation type and entity type.\nFor example, for authorization operations, this will contain the type of the owner (e.g., USER or GROUP) the authorization belongs to.\n",
+                      nullable: true,
+                    },
+                    entityDescription: {
+                      type: "string",
+                      description:
+                        "Additional description of the entity affected by the operation.\nFor example, for variable operations, this will contain the variable name.\n",
+                      nullable: true,
+                    },
+                  },
+                  title: "AuditLogResult",
+                },
+              },
+            },
+            title: "AuditLogSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

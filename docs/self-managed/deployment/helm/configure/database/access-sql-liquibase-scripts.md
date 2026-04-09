@@ -6,6 +6,13 @@ description: Learn where to obtain Camunda 8 SQL and Liquibase scripts, how to d
 
 Access and safely use the SQL and Liquibase scripts provided with Camunda 8 for supported databases. These scripts can be used for provisioning, upgrading, or managing database schemas in your environment.
 
+:::note Related pages
+
+- **[Configure RDBMS](rdbms.md)** - Configuration reference and Helm values.
+- **[Schema management](rdbms-schema-management.md)** - Schema creation, permissions, and auto-DDL configuration.
+- **[JDBC driver management](rdbms-jdbc-drivers.md)** - Managing custom database drivers.
+  :::
+
 ## Where the scripts are published
 
 The scripts are included in the **Camunda 8 Run distribution** and in each **Camunda GitHub release** as a versioned ZIP file:
@@ -70,6 +77,7 @@ camunda:
 - **SQL vs. Liquibase**
   - Do not mix SQL upgrade scripts with Liquibase-managed schema.
   - Liquibase changelogs are **forward-only**. Rollbacks are not supported.
+- **Liquibase lock recovery:** If a pod is interrupted during Liquibase execution, Camunda waits for stale DDL locks using `camunda.data.secondary-storage.rdbms.ddl-lock-wait-timeout` (default: `PT15M`). Increase this timeout for long-running migrations and only release `databasechangeloglock` manually after confirming no migration is running. See [RDBMS troubleshooting](rdbms-troubleshooting.md#liquibase-lock-after-pod-crash-or-restart).
 - **Backup first:** Always [back up](/self-managed/operational-guides/backup-restore/backup-and-restore.md) your database before applying scripts manually.
 
 ## Optional

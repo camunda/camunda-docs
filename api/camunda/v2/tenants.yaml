@@ -73,6 +73,10 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
   /tenants/{tenantId}:
@@ -576,7 +580,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+                $ref: "#/components/schemas/TenantRoleSearchResult"
   /tenants/{tenantId}/roles/{roleId}:
     put:
       tags:
@@ -777,7 +781,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+                $ref: "#/components/schemas/TenantMappingRuleSearchResult"
 components:
   schemas:
     TenantCreateRequest:
@@ -810,7 +814,12 @@ components:
         description:
           type: string
           description: The description of the tenant.
+          nullable: true
           example: Customer Service department business processes
+      required:
+        - tenantId
+        - name
+        - description
     TenantUpdateRequest:
       type: object
       properties:
@@ -822,7 +831,6 @@ components:
           description: The new description of the tenant.
       required:
         - name
-        - description
     TenantUpdateResult:
       type: object
       properties:
@@ -833,7 +841,12 @@ components:
           description: The name of the tenant.
         description:
           type: string
+          nullable: true
           description: The description of the tenant.
+      required:
+        - tenantId
+        - name
+        - description
     TenantResult:
       description: Tenant search response item.
       type: object
@@ -847,7 +860,12 @@ components:
         description:
           type: string
           description: The tenant description.
+          nullable: true
           example: Customer Service department business processes
+      required:
+        - tenantId
+        - name
+        - description
     TenantSearchQuerySortRequest:
       type: object
       properties:
@@ -888,6 +906,8 @@ components:
           description: The name of the tenant.
     TenantSearchQueryResult:
       description: Tenant search response.
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -902,7 +922,11 @@ components:
       properties:
         username:
           $ref: "identifiers.yaml#/components/schemas/Username"
+      required:
+        - username
     TenantUserSearchResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -940,7 +964,11 @@ components:
         clientId:
           description: The ID of the client.
           type: string
+      required:
+        - clientId
     TenantClientSearchResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -978,8 +1006,12 @@ components:
         groupId:
           description: The groupId of the group.
           type: string
+      required:
+        - groupId
     TenantGroupSearchResult:
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -998,6 +1030,30 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/TenantGroupSearchQuerySortRequest"
+    TenantRoleSearchResult:
+      required:
+        - items
+      type: object
+      allOf:
+        - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching roles.
+          type: array
+          items:
+            $ref: "roles.yaml#/components/schemas/RoleResult"
+    TenantMappingRuleSearchResult:
+      required:
+        - items
+      type: object
+      allOf:
+        - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching mapping rules.
+          type: array
+          items:
+            $ref: "mapping-rules.yaml#/components/schemas/MappingRuleResult"
     TenantGroupSearchQuerySortRequest:
       type: object
       properties:

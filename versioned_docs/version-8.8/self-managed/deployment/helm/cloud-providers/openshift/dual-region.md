@@ -467,7 +467,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart on each cluster.
+- Installs (or upgrades) Camunda using the Helm chart on each cluster.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from the value file.
 
@@ -475,7 +475,7 @@ This command:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/deployment/helm/upgrade/index.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/upgrade/helm/index.md) or any other component upgrades.
 
 :::
 
@@ -525,7 +525,7 @@ chmod +x check-deployment-ready.sh
 
 :::info Authentication changes in 8.8+
 
-Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by basic authentication using `demo:demo` as the default username and password.
+Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by Basic authentication using `demo:demo` as the default username and password.
 
 :::
 
@@ -552,4 +552,4 @@ Consult the generic [dual-region failover procedure](/self-managed/deployment/he
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](self-managed/operational-guides/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).

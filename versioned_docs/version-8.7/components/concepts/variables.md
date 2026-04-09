@@ -22,6 +22,7 @@ Restrictions of a variable name:
 - It may not contain **whitespaces** (e.g. `order number` is not allowed; you can use `orderNumber` instead).
 - It may not contain an **operator** (e.g. `+`, `-`, `*`, `/`, `=`, `>`, `?`, `.`).
 - It may not be a **literal** (e.g. `null`, `true`, `false`) or a **keyword** (e.g. `function`, `if`, `then`, `else`, `for`, `between`, `instance`, `of`, `not`).
+- It may not be longer than 492 characters (UTF-8 encoded).
 
 ## Variable values
 
@@ -34,9 +35,22 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 - Object (e.g. `{ "orderNumber": "A12BH98", "date": "2020-10-15", "amount": 185.34}`)
 - Null (`null`)
 
+:::note
+Numbers are subject to the following numeric limits:
+
+- Integer numbers are effectively limited to the 64‑bit integer range.
+- Non‑integer numbers are stored as IEEE‑754 double‑precision values, which provide roughly 15–17 significant decimal digits rather than arbitrary BigDecimal precision.
+
+If you need arbitrary-precision or very large numbers, consider storing them as strings or in an external data store instead of process variables.
+:::
+
 ## Variable size limitation
 
-Generally, there is a limit of 4 MB for the payload of a process instance. This 4 MB includes the variables and the workflow engine internal data, which means there is slightly less memory available for variables. The exact limitation depends on a few factors, but you can consider 3 MB as being safe. If in doubt, run a quick test case.
+The payload of a process instance is limited to 4 MB. This limit includes both process variables and workflow engine–internal data, so less than 4 MB is available for variables alone.
+
+The effective limit depends on the operation. As a rule of thumb, ~1.5 MB is considered safe for commands or events that include variables, such as starting a process instance or completing a job. In these cases, the engine may append follow-up records that temporarily duplicate the variable payload within the same batch.
+
+To avoid production issues, leave headroom below the limit—for example, target ≤1 MB—and validate with a production-like test case. If the payload size is uncertain, run a quick test to confirm behavior.
 
 :::note
 Regardless, we don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).

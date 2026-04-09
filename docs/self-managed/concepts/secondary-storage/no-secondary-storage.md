@@ -10,12 +10,12 @@ import TabItem from "@theme/TabItem";
 Use **no secondary storage** mode to run Zeebe clusters with only the process engine and its primary storage layer.
 
 :::warning
-Disabling secondary storage removes key Camunda 8 capabilities, including Operate, Tasklist, and search-based REST endpoints. This mode is suitable only for lightweight development, testing, or specialized technical use cases.
+Disabling secondary storage removes key Orchestration Cluster capabilities, including Operate, Tasklist, Identity, and search-based REST endpoints. This mode is suitable only for lightweight development, testing, or specialized technical use cases.
 :::
 
 ## About this mode
 
-Typically, you should use secondary storage in nearly all production environments to enable monitoring, analytics, querying, and human-task management through Operate, Tasklist, and other applications.
+Typically, you should use secondary storage in nearly all production environments to enable monitoring, analytics, querying, and human-task management through Orchestration Cluster applications.
 
 You should **only** disable/run without secondary storage in limited scenarios, such as lightweight development environments, specialized technical use cases, or resource-constrained deployments.
 
@@ -23,7 +23,7 @@ You should **only** disable/run without secondary storage in limited scenarios, 
 - For Helm deployments, Optimize is also disabled by default when secondary storage is not configured.
 - For Docker or manual deployments, you must **explicitly disable Optimize** in your configuration, as it cannot function without secondary storage.
 
-This setup provides core process execution and orchestration capabilities through Zeebe, but excludes the full Camunda platform experience, such as analytics, search, and human-task management.
+This setup provides core process execution and orchestration capabilities through Zeebe, but excludes the full Camunda experience, such as analytics, search, and human-task management.
 
 ## Enable **no secondary storage** mode
 
@@ -100,15 +100,38 @@ environment:
 </TabItem>
 </Tabs>
 
+## Authentication
+
+Authentication works with no secondary storage mode. OIDC authentication is configured the same way as with secondary storage enabled. For details, see [Orchestration Cluster authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
+
+:::note Basic authentication with no secondary storage
+If you use Basic authentication, you must also enable unprotected API mode because Basic auth requires access to user data in secondary storage.
+
+```yaml
+global:
+  noSecondaryStorage: true
+
+orchestration:
+  security:
+    authentication:
+      method: basic
+      unprotectedApi: true
+      authorizations:
+        enabled: false
+```
+
+This configuration should **only be used for development** or testing environments, as the unprotected API mode disables authentication checks on API endpoints.
+:::
+
 ## Components and features disabled
 
 If secondary storage is disabled, the following components and features are unavailable:
 
 | Category         | Component or feature                                                               | Behavior               |
 | :--------------- | :--------------------------------------------------------------------------------- | :--------------------- |
-| Web applications | Operate, Tasklist, Identity UI, Optimize, Play (Modeler Play tab)                  | Disabled               |
+| Web applications | Operate, Tasklist, Admin UI, Optimize, Play (Modeler Play tab)                     | Disabled               |
 | APIs & services  | Orchestration Cluster REST API (search endpoints), batch operations, usage metrics | Return `403 Forbidden` |
-| Data & storage   | Elasticsearch/OpenSearch exporters, Schema Manager, secondary storage backups      | Disabled               |
+| Data & storage   | Secondary storage exporters, Schema Manager, secondary storage backups             | Disabled               |
 
 :::note
 
@@ -139,8 +162,8 @@ For example:
 Using this mode significantly reduces Camunda’s capabilities:
 
 | Limitation                      | Impact                                                         |
-| :------------------------------ | :------------------------------------------------------------- |
-| No visual monitoring            | Operate and Tasklist are unavailable.                          |
+| ------------------------------- | -------------------------------------------------------------- |
+| No visual monitoring            | Operate, Tasklist, and the Identity UI are unavailable.        |
 | No historical data or analytics | Optimize, dashboards, and audit records cannot be accessed.    |
 | Limited API access              | Most search and query endpoints return `403 Forbidden`.        |
 | Reduced observability           | Built-in metrics and secondary storage exporters are disabled. |

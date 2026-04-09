@@ -5,6 +5,12 @@ paths:
       tags:
         - Cluster Variable
       summary: Create a global-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Create a global-scoped cluster variable.
       requestBody:
         required: true
         content:
@@ -26,13 +32,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:STRONG]]"
   /cluster-variables/tenants/{tenantId}:
     post:
       operationId: createTenantClusterVariable
       tags:
         - Cluster Variable
       summary: Create a tenant-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Create a new cluster variable for the given tenant.
       parameters:
         - name: tenantId
           in: path
@@ -61,7 +72,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:STRONG]]"
   /cluster-variables/search:
     post:
       tags:
@@ -107,6 +117,12 @@ paths:
       tags:
         - Cluster Variable
       summary: Get a global-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get a global-scoped cluster variable.
       parameters:
         - name: name
           in: path
@@ -135,12 +151,63 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:EVENTUAL]]"
+    put:
+      operationId: updateGlobalClusterVariable
+      tags:
+        - Cluster Variable
+      summary: Update a global-scoped cluster variable
+      description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Updates the value of an existing global cluster variable.
+        The variable must exist, otherwise a 404 error is returned.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the cluster variable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateClusterVariableRequest"
+      responses:
+        "200":
+          description: Cluster variable updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClusterVariableResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: Cluster variable not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
     delete:
       operationId: deleteGlobalClusterVariable
       tags:
         - Cluster Variable
       summary: Delete a global-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Delete a global-scoped cluster variable.
       parameters:
         - name: name
           in: path
@@ -165,13 +232,18 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:STRONG]]"
   /cluster-variables/tenants/{tenantId}/{name}:
     get:
       operationId: getTenantClusterVariable
       tags:
         - Cluster Variable
       summary: Get a tenant-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get a tenant-scoped cluster variable.
       parameters:
         - name: tenantId
           in: path
@@ -206,12 +278,69 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:EVENTUAL]]"
+    put:
+      operationId: updateTenantClusterVariable
+      tags:
+        - Cluster Variable
+      summary: Update a tenant-scoped cluster variable
+      description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Updates the value of an existing tenant-scoped cluster variable.
+        The variable must exist, otherwise a 404 error is returned.
+      parameters:
+        - name: tenantId
+          in: path
+          required: true
+          schema:
+            $ref: "identifiers.yaml#/components/schemas/TenantId"
+          description: The tenant ID
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the cluster variable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateClusterVariableRequest"
+      responses:
+        "200":
+          description: Cluster variable updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClusterVariableResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: Cluster variable not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
     delete:
       operationId: deleteTenantClusterVariable
       tags:
         - Cluster Variable
       summary: Delete a tenant-scoped cluster variable
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Delete a tenant-scoped cluster variable.
       parameters:
         - name: tenantId
           in: path
@@ -242,7 +371,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      description: "[[CONSISTENCY:STRONG]]"
 components:
   schemas:
     ClusterVariableScopeEnum:
@@ -263,8 +391,18 @@ components:
         value:
           type: object
           description: The value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
+    UpdateClusterVariableRequest:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: object
+          description: The new value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
     ClusterVariableResult:
       type: object
+      required:
+        - value
       allOf:
         - $ref: "#/components/schemas/ClusterVariableResultBase"
       properties:
@@ -274,6 +412,9 @@ components:
     ClusterVariableSearchResult:
       description: Cluster variable search response item.
       type: object
+      required:
+        - value
+        - isTruncated
       allOf:
         - $ref: "#/components/schemas/ClusterVariableResultBase"
       properties:
@@ -288,8 +429,8 @@ components:
       type: object
       required:
         - name
-        - value
         - scope
+        - tenantId
       properties:
         name:
           type: string
@@ -298,7 +439,8 @@ components:
           $ref: "#/components/schemas/ClusterVariableScopeEnum"
         tenantId:
           type: string
-          description: Only provided if the cluster variable scope is TENANT.
+          nullable: true
+          description: Only provided if the cluster variable scope is TENANT. Null for global scope variables.
     ClusterVariableSearchQueryRequest:
       description: Cluster variable search query request.
       type: object
@@ -355,7 +497,6 @@ components:
           type: boolean
     ClusterVariableScopeFilterProperty:
       description: ClusterVariableScopeEnum property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -389,11 +530,14 @@ components:
     ClusterVariableSearchQueryResult:
       description: Cluster variable search query response.
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
         items:
           description: The matching cluster variables.
           type: array
+          default: []
           items:
             $ref: "#/components/schemas/ClusterVariableSearchResult"

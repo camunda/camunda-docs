@@ -20,82 +20,41 @@ They are particularly useful for:
 - Enforcing governance rules and validations. For example, pre-completion checks.
 - Consistently applying due date and priority policies.
 
-## Configure global user task listeners
+## Global listener definition
 
-You configure global user task listeners at the cluster level in the [Unified Configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
+Each listener is defined by the following properties:
 
-Configuration path: `camunda.cluster.global-listeners.user-task`
+| Property         | Required               | Description                                                                                                                                                                                                                                                     |
+| :--------------- | :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`             | Yes                    | User-provided unique identifier for the listener. This identifier is used to interact with the global listener through API                                                                                                                                      |
+| `eventTypes`     | Yes                    | <p>List of user task event types that trigger the listener.</p><p>Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.</p><p>The shorthand `all` value is also available if the listener should react to all lifecycle events.</p> |
+| `type`           | Yes                    | <p>The name of the job type.</p><p>Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.</p>                                                                                                   |
+| `retries`        | No                     | Number of retries for the user task listener job. Defaults to `3` if not set.                                                                                                                                                                                   |
+| `afterNonGlobal` | No                     | Boolean indicating whether the listener should run after model-level listeners. Defaults to `false` (runs before model-level listeners).                                                                                                                        |
+| `priority`       | No                     | The priority of the listener. Higher priority listeners are executed before lower priority ones. It must be an integer between 0 and 100. Defaults to `50` if not set.                                                                                          |
+| `source`         | No (automatically set) | <p>Indicates how the listener was defined, either through configuration or API.</p><p>Supported values: `CONFIGURATION` and `API`.</p><p>This property is automatically set by the system and cannot be modified by users.</p>                                  |
 
-Each listener entry can be configured with the following properties:
+You have to use a different `id` for each configured listener, since this property is used to uniquely identify the listener and interact with it through the Orchestration Cluster API, for example, to update or delete the listener.
 
-| Property           | Required | Description                                                                                                                                                                                                                                                     |
-|:-------------------| :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `event-types`      | Yes      | <p>List of user task event types that trigger the listener.</p><p>Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.</p><p>The shorthand `all` value is also available if the listener should react to all lifecycle events.</p> |
-| `type`             | Yes      | <p>The name of the job type.</p><p>Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.</p>                                                                                                   |
-| `retries`          | No       | Number of retries for the user task listener job. Defaults to `3` if not set.                                                                                                                                                                                   |
-| `after-non-global` | No       | Boolean indicating whether the listener should run after model-level listeners. Defaults to `false` (runs before model-level listeners).                                                                                                                        |
+You can use the same `type` value for multiple listeners if they should be handled by the same job workers.
 
-### How the configuration is validated
+The `source` property only distinguishes how the listener was defined, but it has no practical effect in how the global listeners are executed.
 
-On startup, the configuration is validated according to the following rules. The system attempts to correct issues where possible instead of failing the startup:
+You can configure global user task listeners in multiple ways, as described in [configure global user task listeners](./global-user-task-listeners/configuration.md):
 
-- Invalid event types are removed and ignored.
-- Listeners missing information about event types or job type are removed and ignored.
-  - This also includes listeners for which only invalid event types are defined.
-- If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to include only `all`.
-- Listeners with invalid retry values, i.e., non-numeric or negative, are removed and ignored.
-
-In all cases, a suitable warning is reported in the orchestration cluster startup log, identifying the problem and its location in the configuration.
-
-### Example configuration
-
-The following is an example YAML configuration and environment variables:
-
-```yaml
-camunda:
-  cluster:
-    global-listeners:
-      user-task:
-        - type: "validate-task"
-          event-types:
-            - creating
-        - type: "audit-generic"
-          event-types: all
-          retries: 5
-        - type: "notify-assignee"
-          event-types:
-            - assigning
-            - updating
-            - canceling
-          after-non-global: true
-```
-
-```
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_TYPE=validate-task
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_EVENT_TYPES_0=creating
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_1_TYPE=audit-generic
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_1_EVENT_TYPES_0=all
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_1_RETRIES=5
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_TYPE=notify-assignee
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_EVENT_TYPES_0=assigning
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_EVENT_TYPES_1=updating
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_EVENT_TYPES_2=canceling
-CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_AFTER_NON_GLOBAL=true
-```
-
-### Apply changes
-
-Configuration changes take effect after you restart the cluster. Use rolling restarts to avoid downtime.
-
-After the restart, the new configuration applies to new lifecycle events for both running and new instances, without requiring you to redeploy models.
+- Through the Unified Configuration.
+- Via the Orchestration Cluster API.
+- Via the Admin UI.
 
 ## Execution order
 
 For a given event on a task instance:
 
-- Global listeners run in the order defined in the configuration.
+- Global listeners run in the order defined by the `priority` property of each listener.
+  - Listeners with a higher priority are executed first.
+  - Listeners with the same priority are sorted by their `id` in lexicographical order to ensure a deterministic execution order.
 - Model-level listeners run next, in the order defined in the BPMN model.
-- Global listeners marked with `after-non-global: true` run after model-level listeners.
+- Global listeners marked with `after-non-global: true` (Unified Configuration) or `afterNonGlobal: true` (API) run after model-level listeners.
 
 ## Supported features
 
@@ -120,9 +79,4 @@ The [same limitations as model-level user task listeners](/components/concepts/u
 In addition to the above:
 
 - **No tenant-specific configuration**: Configuration is cluster-wide, not per tenant. Payloads include `tenantId` for downstream handling.
-- **Restart required**: Configuration changes take effect only after a cluster restart.
-
-## See also
-
-- [Global listener configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
-- [Configure properties through Helm charts](/self-managed/deployment/helm/configure/application-configs.md).
+- **Restart required**: Changes made through Unified Configuration take effect only after a cluster restart. This limitation does not apply when you manage listeners through the Orchestration Cluster API.

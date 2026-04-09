@@ -42,7 +42,6 @@ The following images must be available in your air-gapped environment:
 
 - [Web Modeler images](/self-managed/deployment/docker/docker.md#component-images):
   - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
-  - [camunda/web-modeler-webapp](https://hub.docker.com/r/camunda/web-modeler-webapp)
   - [camunda/web-modeler-websockets](https://hub.docker.com/r/camunda/web-modeler-websockets)
 - [Console images](/self-managed/deployment/docker/docker.md#component-images):
   - `console/console-sm`
@@ -85,10 +84,10 @@ For detailed configuration and installation instructions, see [Install Bitnami e
 
 Camunda provides custom [Keycloak images](https://github.com/camunda/keycloak) that include the AWS JDBC wrapper and Camunda Identity theme. These images follow Bitnami's environment variable conventions.
 
-| Variant     | Registry                                                                | Tag prefix     | Availability        |
-| ----------- | ----------------------------------------------------------------------- | -------------- | ------------------- |
-| Open-source | [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) | `bitnami-*`    | Public (Docker Hub) |
-| Enterprise  | `registry.camunda.cloud/keycloak-ee/keycloak`                           | `bitnami-ee-*` | Licensed customers  |
+| Variant     | Registry                                                                | Tag prefix     | Availability                 |
+| ----------- | ----------------------------------------------------------------------- | -------------- | ---------------------------- |
+| Open-source | [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) | `bitnami-*`    | Public (Docker Hub)          |
+| Enterprise  | `registry.camunda.cloud/keycloak-ee/keycloak`                           | `bitnami-ee-*` | Camunda Enterprise customers |
 
 For backward compatibility, both variants are also available without the prefix in their respective registries.
 
@@ -290,9 +289,6 @@ webModeler:
   restapi:
     image:
       repository: camunda/web-modeler-restapi
-  webapp:
-    image:
-      repository: camunda/web-modeler-webapp
   websockets:
     image:
       repository: camunda/web-modeler-websockets

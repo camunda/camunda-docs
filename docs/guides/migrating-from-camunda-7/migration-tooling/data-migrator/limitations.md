@@ -7,6 +7,32 @@ description: "Data Migrator limitations."
 
 An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator, covering general limitations as well as specific limitations related to variables and BPMN elements.
 
+## Identity
+
+The following requirements and limitations apply:
+
+- Identity migration includes the migration of:
+  - Users, groups, tenants and their associated memberships.
+  - Supported authorizations (detailed in the [Authorizations](identity.md#authorizations) section).
+- Once migration has been triggered, it's strongly recommended not to create new identity data on Camunda 7. Even if migration is attempted again, the new data might not be migrated.
+- In order for authorizations to work correctly after migration, process definitions, forms, DRD and decision definitions need to have the same IDs in Camunda 8 as in Camunda 7. This should be the case if you have already migrated runtime and history data.
+- Tenant memberships are migrated as part of their respective tenants and are not tracked individually.
+  - If a tenant is migrated, all its memberships are migrated as well. If a tenant is skipped, its memberships are also skipped.
+  - If the migration of an individual tenant membership fails (for example, due to a missing user), it cannot be retried.
+  - The `--list-skipped` and `--list-migrated` options do not list individual tenant memberships.
+  - This is also true for groups and group memberships.
+- For security reasons, passwords for users cannot be migrated. For this reason, users are migrated with a generated secure password that needs to be reset by an administrator after migration.
+
+### Supported entities
+
+| Identity type      | Migration supported |
+| ------------------ | ------------------- |
+| Users              | Yes                 |
+| Groups             | Yes                 |
+| Group Memberships  | Yes                 |
+| Tenants            | Yes                 |
+| Tenant Memberships | Yes                 |
+
 ## Runtime
 
 The runtime migration has the following limitations.
@@ -36,13 +62,22 @@ The runtime migration has the following limitations.
 To learn more about variable migration, see [variables](../variables).
 :::
 
+### Incidents
+
+Due to the [limitation regarding async before/after wait states](#async-beforeafter-wait-states), incident data from instances currently waiting due to failed jobs causing active incidents will not be migrated during runtime migration. We recommend to resolve incidents prior to runtime migration.
+
 ### BPMN elements
 
 Some BPMN elements and configurations supported in Camunda 7 are not supported in Camunda 8 or have specific limitations during migration. Below is an overview of these limitations and recommendations to address them.
 
 #### Elements supported in Camunda 7 but not supported in Camunda 8
 
-See the [BPMN documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) for more details on element support in Camunda 8, and adjust your models accordingly before migration.
+Some BPMN elements available in Camunda 7 are not supported in Camunda 8. Before migration, compare the BPMN coverage of both platforms and adjust your models accordingly:
+
+- [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/7.24/reference/bpmn20/)
+- [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md)
+
+When converting diagrams, the Diagram Converter also helps identify unsupported elements interactively.
 
 #### Start events
 
@@ -162,25 +197,84 @@ The history migration has the following limitations.
 
 ### General
 
+- All migrated data is assigned `partitionId=1` so that the RDBMS exporter on partition 1 can perform history cleanup for migrated data.
+- Migrated data has partition ID 4095 encoded in their keys to avoid key collisions with Zeebe produced data.
+  - Due to this, migrated process instances cannot be deleted via C8 API or in Operate since Zeebe cannot delegate the operation to a partition.
+    - See https://github.com/camunda/camunda/issues/47927
+  - Please use [RDBMS History Cleanup](/self-managed/concepts/databases/relational-db/configuration.md#history-cleanup-1) to delete the migrated data.
+- The minimum required history level in Camunda 7 is `FULL` to ensure that sufficient data is available for migration.
 - To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
   - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
-
-### Process instance
-
-- Process instance migration doesn't populate the `parentElementInstanceKey` and `tree` fields.
-- This means that the history of subprocesses and call activities is not linked to their parent
-  process instance.
-- As a result, you cannot query for the history of a subprocess or call activity using the
-  parent process instance key.
-- See https://github.com/camunda/camunda-bpm-platform/issues/5359
+  - These migrated definitions are visible in Camunda 8 Tasklist but cannot be started. To start new instances, you need to use the [Diagram Converter](../diagram-converter.md) to migrate your legacy processes to Camunda 8 compatible versions and deploy them to Camunda 8 as described in the [preparation step for runtime migration](runtime.md#1-preparation).
+    - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1000
+- Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
+- During migration, some entities may be skipped due to unresolved dependencies (for example, when a parent entity has not yet been migrated).
+  - After the initial migration completes, the migrator automatically retries skipped entities to resolve cross-entity dependencies.
+  - Automatic retries run in multiple passes until no further progress can be made.
+  - Entities that remain skipped after all automatic retries are logged as warnings, along with their skip reasons.
+  - After fixing underlying issues, you can manually retry remaining skipped entities using the `--retry-skipped` flag.
+  - Examples of temporary skip reasons include:
+    - Flow node instances whose parent flow node (scope) has not yet been migrated.
+    - Child process instances called from parent call activities, where the parent flow node has not yet been migrated.
+- The History Data Migrator does not support the following Camunda 7 entity types:
+  - **CMMN entities**: CMMN user tasks and CMMN variables are not supported and are skipped during migration.
+  - **Standalone user tasks**: User tasks that are not associated with a process instance are not supported and are skipped during migration.
+- Camunda 7 does not store audit data of asyncBefore wait state for flow nodes. Migration of flow nodes is executed in all other cases.
+- The History Data Migrator does not support the following Camunda 8 entities or properties:
+  - Sequence flow: Sequence flows cannot be highlighted in Operate.
+  - Message subscription and correlated message subscription: These entities are not available in Camunda 7.
+  - Batch operation entity and batch operation item: Camunda 7 does not retain sufficient information about processed instances.
+  - User metrics: Not available in Camunda 7.
+  - Exporter position: This entity does not exist in Camunda 7.
+- Please note that if any Camunda 7 process instances progress in their state in between multiple runs of the History Data Migrator, data consistency might be affected: for example, if a process instance is completed in Camunda 7 after the first run but before the second run, the History Data Migrator would migrate it as canceled in the first and as completed in the second run. As a result, in Operate you may see that a process instance was canceled in a Flow Node that chronologically precedes the end event in your model, where the instance will be marked as completed. To avoid such situations, ensure that Camunda 7 data remains unchanged between History Data Migrator runs.
 
 ### DMN
 
-- The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
-- Decision instance `inputs` and `outputs` are not yet migrated.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5364
-- Decision instance `state` and `type` are not yet migrated.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5370
+The History Data Migrator supports migration of DMN entities, but with the following limitations:
+
+- DMN models version 1.1 are not supported by Operate, decision definition data will be migrated but the decision model itself will not be visible in Operate.
+
+### Forms
+
+The History Data Migrator supports migration of Camunda Forms, but with the following limitations:
+
+- Only [Camunda Forms](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) are migrated. Other form types are not supported:
+  - Embedded forms (HTML/JSF)
+  - External forms (URL-based forms)
+  - Generated forms (from form data definitions)
+- Supported form bindings:
+  - `deployment` - Form version deployed together with the process definition
+  - `latest` - Latest version of the form definition
+  - `version` - Specific version of the form definition
+- Unsupported form bindings:
+  - Expression-based bindings (for example, `${formKey}`)
+
+### Jobs
+
+The History Data Migrator migrates only jobs of type [asynchronous continuation](https://docs.camunda.org/manual/7.24/user-guide/process-engine/transactions-in-processes/#configure-asynchronous-continuations).
+
+- The jobs associated with multi-instance activities will be skipped. (https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1103)
+
+### Incidents
+
+The History Data Migrator supports migration of DMN entities, but with the following limitations:
+
+- The incidents are migrated in `resolved` state. Operate does not visualize resolved incidents,
+  therefore incidents of migrated process instances will not be visible in Operate.
+  Audit data related to incidents can be observed by querying APIs.
+- When there's a failing start timer in Camunda 7, the incident cannot be migrated (as there's no process instance history) and will be skipped.
+- The incidents associated with multi-instance activities will be skipped. (https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1103)
+
+### Audit logs
+
+The following limitations apply:
+
+- Audit log entries are migrated only for user tasks, process definitions, process instances, variables, decisions, users, groups, and authorizations.
+- Audit log entries are not migrated for batch operations, identity links, attachments, job definitions, jobs, external tasks, metrics, operation logs, filters, comments, and properties.
+
+### Data coverage
+
+For a detailed overview of which Camunda 8 entities and properties are migrated by the History Data Migrator, see the [History migration coverage](history-coverage.md) page.
 
 ## Cockpit plugin
 

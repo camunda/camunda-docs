@@ -24,7 +24,7 @@ In SaaS, Play uses connector secrets from your selected cluster. connector secre
 
 ## Authorizations
 
-If [authorizations](/components/identity/authorization.md) are enabled on the cluster where you will run Play, the following permissions are required for each action:
+If [authorizations](/components/admin/authorization.md) are enabled on the cluster where you will run Play, the following permissions are required for each action:
 
 | Resource Type       | Permission                                       | Allowed action                                                                                                  |
 | ------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
@@ -107,7 +107,7 @@ After completing part of your process, you can **rewind** to a previous element 
 Play's rewind operation currently does not support the following elements:
 
 - Call activities
-- Timer events that complete without being skipped
+- Timer events
 
 #### Additional limitations
 
@@ -205,8 +205,7 @@ Rewinding a process instance that has modifications applied to is currently not 
   - Boundary events
   - Events attached to event-based gateways
 - **Move tokens from** modification is not possible for a subprocess itself.
-- **Add token**/**Move tokens to** modifications are currently not possible for elements with multiple running scopes.
-- All tokens of a multi-instance element are moved or canceled at the same time.
+- **Add token** modifications are not currently supported for elements with multiple running scopes. However, **Move tokens** modifications are supported for elements inside multi-instance subprocesses. The move operation terminates the specific element instance and activates the target element in the same instance of the multi-instance subprocess.
 
 ## Rapid iteration
 
@@ -238,8 +237,6 @@ For more information about terms, refer to our [licensing and terms page](https:
 
 **Version compatibility:** Although Play is compatible with cluster versions 8.5.1 and above, Camunda fully supports and recommends using versions 8.6.0 or higher.
 
-**Execution listeners:** Play does not currently support [execution listeners](/components/concepts/execution-listeners.md). As a workaround, you can skip the element using [modifications](#modify-a-process-instance).
-
 ### Camunda 8 SaaS
 
 In Camunda 8 SaaS, Play is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
@@ -265,7 +262,6 @@ After selecting the **Play** tab in Self-Managed, you are prompted to select fro
 
 ### Limitations {#self-managed-limitations}
 
-- Play does not work with a custom OIDC provider.
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
 - Play cannot check the presence of connector secrets in Self-Managed setups.
   If a secret is missing, Play will show an incident at runtime.
@@ -276,13 +272,5 @@ After selecting the **Play** tab in Self-Managed, you are prompted to select fro
 The use of Play may result in additional charges depending on your organization's plan and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
 
 - **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, contact your Customer Success Manager.
-- **Starter/Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. Starter plan users have one development cluster with free execution for development included in their plan. For Professional Plans, you may need to purchase a development cluster.
+- **Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. For Professional Plans, you may need to purchase a development cluster.
 - **Trial Plans:** You can use any cluster.
-
-:::caution Starter plans
-The Starter plan is no longer available.
-
-- Existing customers using a Starter plan will need to either upgrade to the Enterprise plan, or move to the Free plan.
-- To compare plan features and contact Camunda for advice and an Enterprise plan quote, refer to [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
-
-:::

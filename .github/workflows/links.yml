@@ -35,7 +35,7 @@ jobs:
             cache-lychee-
 
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v2.7.0
+        uses: lycheeverse/lychee-action@v2.8.0
         id: link-checker
         with:
           fail: false
@@ -57,9 +57,9 @@ jobs:
           exit 1
 
       - name: Create Issue From File
-        if: failure() && github.event_name == 'schedule' && steps.link-checker.outputs.exit_code != 0
+        if: ${{ failure() && github.event_name == 'schedule' && steps.link-checker.outputs.exit_code != 0 }}
         uses: peter-evans/create-issue-from-file@v6
         with:
           title: Link Checker Report
           content-filepath: ./lychee/out.md
-          labels: report, automated issue
+          labels: report, automated issue, kind/bug, dx

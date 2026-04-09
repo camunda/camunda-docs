@@ -12,6 +12,7 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 
 - Partition count can only be increased and not decreased.
 - Backups are disallowed during partition scaling but can be taken before or after. A backup taken before scaling can only be restored to a cluster with the same partition count. After restoring, you can request scaling again to the desired partition count.
+- When scaling up the number of partitions, consider the resulting RocksDB size per partition. Allocate **at least 32 MB of RocksDB memory per partition** after scaling. For details, see the [resource planning guide](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md).
   :::
 
 ## Considerations
@@ -80,7 +81,7 @@ Run the following to send the request to the Zeebe Gateway:
 
 ```
 curl -X 'PATCH' \
-   'http://localhost:9600/actuator/cluster' \
+   'http://localhost:9600/orchestration/actuator/cluster' \
    -H 'accept: application/json' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -98,7 +99,7 @@ Run the following to send the request to the Zeebe Gateway to add 3 new brokers 
 
 ```
 curl -X 'PATCH' \
-   'http://localhost:9600/actuator/cluster' \
+   'http://localhost:9600/orchestration/actuator/cluster' \
    -H 'accept: application/json' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -118,7 +119,7 @@ If you don't intend to add new brokers to the cluster, you can skip the `"broker
 
 ```
 curl -X 'PATCH' \
-   'http://localhost:9600/actuator/cluster' \
+   'http://localhost:9600/orchestration/actuator/cluster' \
    -H 'accept: application/json' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -200,7 +201,7 @@ The response includes a `changeId`, `currentTopology`, planned changes, and the 
 The scaling operation can take a while because data needs to be moved to the newly-added brokers. Therefore, you have to monitor the status by querying Zeebe and sending the following GET request to the Zeebe Gateway:
 
 ```
-curl --request GET 'http://localhost:9600/actuator/cluster'
+curl --request GET 'http://localhost:9600/orchestration/actuator/cluster'
 ```
 
 When the scaling has completed, the `changeId` from the previous response will be marked as completed:
@@ -230,10 +231,12 @@ Port-forward to access the Zeebe Gateway if required:
 kubectl port-forward svc/camunda-gateway 8080:8080
 ```
 
-Run the following command to see the current status of the cluster:
+Run the following command to see the current status of the cluster.
+
+If security is enabled, first obtain an access token from your identity provider and export it as `ACCESS_TOKEN`, then include it as a Bearer token in the request header.
 
 ```
-curl -L 'http://localhost:8080/v2/topology' \
+curl -L 'http://localhost:8080/orchestration/v2/topology' \
 -H 'Accept: application/json'
 ```
 
@@ -414,7 +417,7 @@ kubectl port-forward svc/camunda-zeebe-gateway 9600:9600
 
 ```
 curl -X 'PATCH' \
-   'http://localhost:9600/actuator/cluster' \
+   'http://localhost:9600/orchestration/actuator/cluster' \
    -H 'accept: application/json' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -429,7 +432,7 @@ Similar to scaling up, the response to this request would contain a `changeId`, 
 ### 2. Query the Zeebe Gateway to monitor progress of scaling
 
 ```
-curl --request GET 'http://localhost:9600/actuator/cluster'
+curl --request GET 'http://localhost:9600/orchestration/actuator/cluster'
 ```
 
 When the scaling has completed, the changeId from the previous response will be marked as completed:
@@ -453,10 +456,12 @@ When the scaling has completed, the changeId from the previous response will be 
 
 This step is optional, but it is useful when you are testing to see if scaling worked as expected.
 
-Run the following command to see the current status of the cluster:
+Run the following command to see the current status of the cluster.
+
+If security is enabled, first obtain an access token from your identity provider and export it as `ACCESS_TOKEN`, then include it as a Bearer token in the request header.
 
 ```
-curl -L 'http://localhost:8080/v2/topology' \
+curl -L 'http://localhost:8080/orchestration/v2/topology' \
 -H 'Accept: application/json'
 ```
 
@@ -669,7 +674,7 @@ PATCH actuator/cluster
 
 ```
 curl -X 'PATCH' \
-   'http://localhost:9600/actuator/cluster' \
+   'http://localhost:9600/orchestration/actuator/cluster' \
    -H 'accept: application/json' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -707,7 +712,7 @@ Example request:
 
 ```
 curl -X 'PATCH' \
-   'http://localhost:9600/actuator/cluster?force=true' \
+   'http://localhost:9600/orchestration/actuator/cluster?force=true' \
    -H 'accept: application/json' \
    -H 'Content-Type: application/json' \
    -d '{
@@ -746,7 +751,7 @@ The input is a list of _all_ broker ids that will be in the final cluster after 
   <summary>Example request</summary>
 
 ```
-curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
+curl --request POST 'http://localhost:9600/orchestration/actuator/cluster/brokers' \
 -H 'Content-Type: application/json' \
 -d '[0, 1, 2, 3]'
 ```
@@ -758,7 +763,7 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
 You can also do a dry run without actually executing the scaling by specifying the request parameter `dryRun` to `true` as follows. By default, `dryRun` is set to false:
 
 ```
-curl --request POST 'http://localhost:9600/actuator/cluster/brokers?dryRun=true' \
+curl --request POST 'http://localhost:9600/orchestration/actuator/cluster/brokers?dryRun=true' \
 -H 'Content-Type: application/json' \
 -d '[0, 1, 2, 3]'
 ```
@@ -770,7 +775,7 @@ The replication factor for all partitions can be changed with the `replicationFa
 The new replicas are assigned to the brokers based on the round robin partition distribution strategy.
 
 ```
-curl --request POST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' \
+curl --request POST 'http://localhost:9600/orchestration/actuator/cluster/brokers?replicationFactor=4' \
 -H 'Content-Type: application/json' \
 -d '[0, 1, 2, 3]'
 ```
@@ -792,7 +797,7 @@ Do not send more than one force request at a time.
 The following request force removes all brokers that are _not_ provided in the request body:
 
 ```
-curl --request POST 'http://localhost:9600/actuator/cluster/brokers?force=true' \
+curl --request POST 'http://localhost:9600/orchestration/actuator/cluster/brokers?force=true' \
 -H 'Content-Type: application/json' \
 -d '[0, 1, 2]'
 ```

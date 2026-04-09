@@ -45,12 +45,15 @@ components:
       allOf:
         - $ref: "#/components/schemas/LongKey"
     ScopeKey:
-      description: System-generated key for a scope.
+      description: |
+        System-generated key for a scope. A scope can hold variables and represents either an
+        element instance in a BPMN process or the process instance itself.
+      type: string
       format: ScopeKey
       example: "2251799813683890"
-      type: string
-      allOf:
-        - $ref: "#/components/schemas/LongKey"
+      oneOf:
+        - $ref: "#/components/schemas/ProcessInstanceKey"
+        - $ref: "#/components/schemas/ElementInstanceKey"
     IncidentKey:
       description: System-generated key for a incident.
       format: IncidentKey
@@ -121,7 +124,6 @@ components:
       type: string
     ProcessDefinitionKeyFilterProperty:
       description: ProcessDefinitionKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -157,7 +159,6 @@ components:
             $ref: "#/components/schemas/ProcessDefinitionKey"
     ProcessInstanceKeyFilterProperty:
       description: ProcessInstanceKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -193,7 +194,6 @@ components:
             $ref: "#/components/schemas/ProcessInstanceKey"
     ElementInstanceKeyFilterProperty:
       description: ElementInstanceKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -229,7 +229,6 @@ components:
             $ref: "#/components/schemas/ElementInstanceKey"
     JobKeyFilterProperty:
       description: JobKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -265,7 +264,6 @@ components:
             $ref: "#/components/schemas/JobKey"
     DecisionDefinitionKeyFilterProperty:
       description: DecisionDefinitionKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -300,8 +298,9 @@ components:
           items:
             $ref: "#/components/schemas/DecisionDefinitionKey"
     ScopeKeyFilterProperty:
-      description: ScopeKey property with full advanced search capabilities.
-      type: object
+      description: |
+        ScopeKey property with full advanced search capabilities. Filter by the key of the
+        element instance or process instance that defines the scope of a variable.
       oneOf:
         - type: string
           title: Exact match
@@ -337,7 +336,6 @@ components:
             $ref: "#/components/schemas/ScopeKey"
     VariableKeyFilterProperty:
       description: VariableKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -373,7 +371,6 @@ components:
             $ref: "#/components/schemas/VariableKey"
     DecisionEvaluationInstanceKeyFilterProperty:
       description: DecisionEvaluationInstanceKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -409,7 +406,6 @@ components:
             $ref: "#/components/schemas/DecisionEvaluationInstanceKey"
     AuditLogKeyFilterProperty:
       description: AuditLogKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -443,3 +439,108 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/AuditLogKey"
+    FormKeyFilterProperty:
+      description: FormKey property with full advanced search capabilities.
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/FormKey"
+        - $ref: "#/components/schemas/AdvancedFormKeyFilter"
+    AdvancedFormKeyFilter:
+      title: Advanced filter
+      description: Advanced FormKey filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/FormKey"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/FormKey"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/FormKey"
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/FormKey"
+    DecisionEvaluationKeyFilterProperty:
+      description: DecisionEvaluationKey property with full advanced search capabilities.
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/DecisionEvaluationKey"
+        - $ref: "#/components/schemas/AdvancedDecisionEvaluationKeyFilter"
+    AdvancedDecisionEvaluationKeyFilter:
+      title: Advanced filter
+      description: Advanced DecisionEvaluationKey filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/DecisionEvaluationKey"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/DecisionEvaluationKey"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/DecisionEvaluationKey"
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/DecisionEvaluationKey"
+    DecisionRequirementsKeyFilterProperty:
+      description: DecisionRequirementsKey property with full advanced search capabilities.
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/DecisionRequirementsKey"
+        - $ref: "#/components/schemas/AdvancedDecisionRequirementsKeyFilter"
+    AdvancedDecisionRequirementsKeyFilter:
+      title: Advanced filter
+      description: Advanced DecisionRequirementsKey filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/DecisionRequirementsKey"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/DecisionRequirementsKey"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/DecisionRequirementsKey"
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/DecisionRequirementsKey"

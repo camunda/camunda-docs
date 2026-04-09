@@ -9,6 +9,8 @@ With **Diagram Converter**, you'll get an initial understanding of the migration
 
 In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces and renames XML properties, if needed.
 
+All BPMN elements supported by Camunda 8 can be transformed. For the full list see the [BPMN coverage page](../../../components/modeler/bpmn/bpmn-coverage.md).
+
 You can use the Diagram Converter in the following ways:
 
 - **Web Interface**: A wizard-like UI built with Java (Spring Boot) and React. Available versions:
@@ -186,8 +188,8 @@ Key options for `engine` mode:
 | Option                   | Description                                                    |
 | ------------------------ | -------------------------------------------------------------- |
 | `--platform-version`     | Semantic version of the target platform (defaults to latest)   |
-| `-u, --username`         | Username for basic auth                                        |
-| `-p, --password`         | Password for basic auth                                        |
+| `-u, --username`         | Username for Basic authentication                              |
+| `-p, --password`         | Password for Basic authentication                              |
 | `-t, --target-directory` | Directory to save the .bpmn files (default: current directory) |
 | `--csv`                  | Create a CSV file with analysis results                        |
 | `--xlsx`                 | Create an XLSX file with analysis results                      |

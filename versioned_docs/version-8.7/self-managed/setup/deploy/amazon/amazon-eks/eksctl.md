@@ -46,7 +46,7 @@ This guide results in the following:
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
-- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform..
+- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda.
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured and [Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
@@ -184,7 +184,7 @@ kind: ClusterConfig
 kubernetesNetworkConfig:
   ipFamily: IPv4
 managedNodeGroups:
-  - amiFamily: AmazonLinux2
+  - amiFamily: AmazonLinux2023
     desiredCapacity: ${NODE_COUNT:-4} # number of default nodes spawned if no cluster autoscaler is used
     disableIMDSv1: true
     iam:
@@ -363,6 +363,10 @@ In the remainder of the guide, we reference the `CAMUNDA_NAMESPACE` variable as 
 ### Check existing StorageClasses
 
 We recommend using **gp3** volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)). It may be necessary to create the `gp3` StorageClass, as the default configuration only includes **gp2**. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
+
+:::danger Reclaim policy
+Using `reclaimPolicy: Delete` can cause **permanent data loss** if a PVC is deleted. Consider using `Retain` for production. See [troubleshooting](/self-managed/operational-guides/troubleshooting/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) for details.
+:::
 
 To see the available StorageClasses in your Kubernetes cluster, including which one is set as default, use the following command:
 
@@ -836,7 +840,7 @@ We will also use this step to verify connectivity to the database from the creat
 
 Creating an OpenSearch domain can be accomplished through various methods, such as using the AWS Management Console or the AWS CLI. This guide focuses on providing a reproducible setup using the CLI. For information on creating an OpenSearch domain using the UI, refer to the [AWS OpenSearch documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/create-managed-domain.html).
 
-The resulting OpenSearch domain is intended for use with the Camunda platform, the following components utilize OpenSearch:
+The resulting OpenSearch domain is intended for use with the Camunda, the following components utilize OpenSearch:
 
 - Operate
 - Optimize

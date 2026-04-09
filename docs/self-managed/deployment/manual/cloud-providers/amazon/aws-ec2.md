@@ -233,7 +233,7 @@ If you choose not to use this module, you must provide your own Elasticsearch or
 Additionally, be sure to delete the `opensearch.tf` file in your reference copy—otherwise, the resources defined in it will still be created.
 :::
 
-The OpenSearch module provisions an OpenSearch domain for use with the Camunda platform. OpenSearch is a powerful alternative to Elasticsearch.
+The OpenSearch module provisions an OpenSearch domain for use with Camunda. OpenSearch is a powerful alternative to Elasticsearch.
 
 :::note Migration to OpenSearch is not supported
 
@@ -329,6 +329,8 @@ The `procedure` directory contains Bash scripts for installing and configuring C
 
 2. Configure script behavior using the following environment variables:
    - `CLOUDWATCH_ENABLED`: Defaults to `false`. Set to `true` to install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
+   - `CAMUNDA_DISTRO_USER`: Camunda Enterprise LDAP username for authenticating against `artifacts.camunda.com` (Artifactory). Required to download artifacts from `artifacts.camunda.com`.
+   - `CAMUNDA_DISTRO_PASSWORD`: Camunda Enterprise LDAP password for authenticating against `artifacts.camunda.com` (Artifactory). Required to download artifacts from `artifacts.camunda.com`.
 
 3. Override default versions in the `camunda-install.sh` script by modifying these variables:
    - `OPENJDK_VERSION`: The Temurin Java version to install.
@@ -406,7 +408,7 @@ Follow the example in the [Orchestration Cluster REST API documentation](/apis-t
 Upgrading directly from Camunda 8.7 to 8.8 is not supported and cannot be performed.
 :::
 
-For manual installations, see the [upgrade guide](/self-managed/deployment/manual/upgrade.md) for detailed instructions.
+For manual installations, see the [upgrade guide](/self-managed/upgrade/manual/index.md) for detailed instructions.
 
 ### Monitoring
 
@@ -428,6 +430,6 @@ For troubleshooting assistance, consult the [operational guides troubleshooting 
 
 After setting up your cluster, many users typically do the following:
 
-- [Connect to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
+- [Connect to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) – integrate with an external identity system for authentication.
 - [Secure cluster communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication.md) – protect traffic between cluster nodes.
 - [Secure client communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-client-communication.md) – ensure secure communication between clients and the cluster.

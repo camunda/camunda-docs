@@ -24,7 +24,7 @@ Multi-tenancy provides cost efficiency by allowing multiple tenants to share the
 
 ## Efficient administration
 
-Administrators can manage all tenants centrally using [Identity](../identity/tenant.md).
+Administrators can manage all tenants centrally using [Admin](../admin/tenant.md).
 This unified management interface simplifies monitoring, configuration, and maintenance tasks across tenant environments.
 
 :::note

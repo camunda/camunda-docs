@@ -169,14 +169,14 @@ const SearchableTable = () => {
                   onClick={() => handleSort("name")}
                   style={{ cursor: "pointer" }}
                 >
-                  New property (8.8){getSortIcon("name")}
+                  New property (8.9){getSortIcon("name")}
                 </th>
                 <th
                   className="sortable-header"
                   onClick={() => handleSort("legacy")}
                   style={{ cursor: "pointer" }}
                 >
-                  Legacy properties (8.7 and earlier){getSortIcon("legacy")}
+                  Legacy properties (8.8 and earlier){getSortIcon("legacy")}
                 </th>
                 <th
                   className="sortable-header"

@@ -52,10 +52,10 @@ To ensure a consistent backup, you must follow the process outlined in this guid
 
 Following the documented procedure results in a hot backup, meaning that:
 
-- Zeebe continues to process and export data.
+- Zeebe continues to process and export data. During the backup window, exporting runs in a soft-pause mode: Zeebe keeps exporting records but temporarily does not advance the exporter position, which prevents log compaction and can increase broker disk usage until exporting is resumed.
 - WebApps (Operate, Tasklist, Optimize) remain fully operational during the backup process.
 
-This ensures high availability while preserving the integrity of the data snapshot.
+This ensures high availability while preserving the integrity of the data snapshot. For details on runtime behavior and disk space implications, see [Behavior during a Zeebe hot backup](./backup.md).
 
 ## Prerequisites
 

@@ -24,13 +24,10 @@ Proxy settings must be correctly configured for Web Modeler to route outgoing re
 
 ## Resolution
 
-Ensure correct proxy configuration for both `webapp` and `restapi` components.
+Ensure a correct proxy configuration for the `restapi` component.
 
-- For the `webapp` component, proxy configuration is handled via the environment variables `http_proxy`, `https_proxy` and `no_proxy`.
-  ```properties
-  http_proxy=http://proxy.example.com:8080 https_proxy=https://secureproxy.example.com:443 no_proxy=localhost,127.0.0.1,.example.com
-  ```
-- For the `restapi` component, the proxy configuration is handled via JVM settings passed as the value of the environment variable `JAVA_TOOL_OPTIONS`.
-  ```properties
-  JAVA_TOOL_OPTIONS=-Dhttp.proxyHost=<host> -Dhttps.proxyPort=<port>
-  ```
+The proxy is configured with standard JVM system properties passed via the environment variable `JAVA_TOOL_OPTIONS`:
+
+```properties
+JAVA_TOOL_OPTIONS=-Dhttps.proxyHost=<host> -Dhttps.proxyPort=<port>
+```

@@ -8,16 +8,7 @@ page_rank: 80
 
 import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
 
-:::note
-The `13.0.0-alpha4.1` Helm chart released with Camunda 8.8.0-alpha4 introduces a new default setup to support the 8.8 [Identity management updates](/reference/announcements-release-notes/880/880-release-notes.md#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
-
-- The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration Cluster Identity)
-- Connectors
-
-This limitation will be resolved in a future alpha release.
-:::
-
-We recommend using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production environments.
+Camunda recommends using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production environments.
 
 There are many ways to provision and configure a Kubernetes cluster, and several architectural decisions to consider. For example, will your workers run inside the Kubernetes cluster or externally? You'll need to configure the cluster accordingly and tailor the setup to your architecture.
 
@@ -46,3 +37,5 @@ To see which application versions are included in a specific Helm chart, see the
 ## Get started
 
 To install Camunda with the default orchestration cluster, see [Install Camunda with Helm](/self-managed/deployment/helm/install/quick-install.md).
+
+If managed databases or an external OIDC provider are not available in your organization, see [Deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) to set up PostgreSQL, Elasticsearch, and Keycloak on Kubernetes using official operators.

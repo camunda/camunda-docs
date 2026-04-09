@@ -23,6 +23,7 @@ The runtime migration has the following limitations.
 - Data changed via user operations
   - Data set via user operations like setting a due date to a user task cannot be migrated currently.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5182
+- Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). The History Data Migrator migrates active process instances as canceled, and if these Camunda 7 instances are completed after the first History Data Migrator run, their state will be migrated a second time as completed, leading to a process instance history in Operate where the same instance was first canceled, then completed.
 
 ### Variables
 
@@ -42,7 +43,12 @@ Some BPMN elements and configurations supported in Camunda 7 are not supported i
 
 #### Elements supported in Camunda 7 but not supported in Camunda 8
 
-See the [BPMN documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) for more details on element support in Camunda 8, and adjust your models accordingly before migration.
+Some BPMN elements available in Camunda 7 are not supported in Camunda 8. Before migration, compare the BPMN coverage of both platforms and adjust your models accordingly:
+
+- [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/7.24/reference/bpmn20/)
+- [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md)
+
+When converting diagrams, the Diagram Converter also helps identify unsupported elements interactively.
 
 #### Start events
 
@@ -159,6 +165,10 @@ Process instances with active joining parallel gateways cannot currently be migr
 ## History
 
 The history migration has the following limitations.
+
+### General
+
+- The minimum required history level in Camunda 7 is `FULL` to ensure that sufficient data is available for migration.
 
 ### Process instance
 

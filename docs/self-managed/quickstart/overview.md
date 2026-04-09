@@ -32,7 +32,7 @@ If you're an administrator exploring how Camunda 8 runs in a Kubernetes-like env
 - Using **Kind** to simulate a Kubernetes cluster locally.
 - Deploying the full Camunda 8 stack using Helm charts.
 
-[Get started with the administrator quickstart](./administrator-quickstart.md)
+[Get started with the administrator quickstart](/self-managed/deployment/helm/cloud-providers/kind.md)
 
 ## What you’ll learn
 
@@ -40,7 +40,7 @@ In each quickstart, you will:
 
 - Spin up a local environment with the core Camunda 8 components.
 - Deploy a sample process definition.
-- Interact with the platform using Operate and Tasklist.
+- Interact with the Orchestration Cluster web applications (Operate and Tasklist).
 - Understand the responsibilities associated with your chosen role (developer or administrator).
 
 ## Prerequisites

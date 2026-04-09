@@ -8,7 +8,7 @@ description: "Analyze how to configure the Zeebe Gateway, including byte sizes, 
 The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/camunda/blob/8.8.0/dist/src/main/config/gateway.yaml.template).
 
 :::info Configure an embedded gateway
-If you're configuring a gateway that is embedded inside a broker (i.e. you've set [`zeebe.broker.gateway.enable`](./broker.md#zeebebrokergateway)), then you must use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any of the configuration options below. For environment variables this means you must use `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*`.
+When you deploy with Helm (Camunda 8.8+), the gateway runs embedded in the broker by default. In that case, use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any configuration options below, and `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*` for environment variables. For a standalone gateway, keep using the `zeebe.gateway.*` / `ZEEBE_GATEWAY_*` prefix.
 :::
 
 ## Conventions
@@ -34,16 +34,27 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ## Configuration
 
-We provide tables with environment variables, application properties, a description, and corresponding default values in the following sections. We also describe a few use cases for each type of configuration.
+The following sections describe Zeebe Gateway configuration options.
 
-Configuration names are noted as the **header** of each documented section, while the **field** values represent properties to set the configuration.
+Each section includes a table with:
 
-For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda 8, we will explain some configuration options here as well. Find more information about possible Zeebe Gateway Helm chart [configurations](https://artifacthub.io/packages/helm/camunda/camunda-platform#zeebe-gateway-parameters).
+- Environment variables
+- Application properties
+- A description
+- Default values
+
+The configuration name appears as the section header. Table fields show the property used to set the configuration.
+
+For deployments, environment variables are typically easier to use. Table entries use the standalone prefix (`ZEEBE_GATEWAY_*`). For an embedded gateway, replace this prefix with `ZEEBE_BROKER_GATEWAY_*` as described earlier.
+
+If you deploy Camunda 8 with Helm (the recommended approach), you can configure the gateway using Helm chart parameters. See the [Zeebe Gateway Helm chart configuration options](https://artifacthub.io/packages/helm/camunda/camunda-platform#zeebe-gateway-parameters).
 
 :::note
-The Zeebe Gateway is a Spring Boot application. As such, [many common Spring Boot properties will work out of the box](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html).
+The Zeebe Gateway is a Spring Boot application.
 
-Additionally, its REST server is a reactive Spring Boot server (powered by WebFlux), and can be configured using the standard `server.*` properties, as well as the usual WebFlux properties. Its management server (for example, where actuator endpoints live) is configured as a child application context, and is also a reactive WebFlux server. It can be configured via `management.server.*` properties.
+In addition to the configuration options documented here, you can use standard Spring Boot properties. For example, the REST server can be configured using `server.*` properties, and the management server (for actuator endpoints) using `management.server.*`.
+
+See the [Spring Boot application properties reference](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html).
 :::
 
 ### server
@@ -85,17 +96,17 @@ server:
     certificate-private-key: /path/to/my/private.key
 ```
 
-### spring.webflux
+### server.servlet
 
-| Field     | Description                                                                                                                                                                                                                                                     | Example value |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| base-path | The context path prefix for all REST API requests. For example, if you configure `/zeebe`, then the client's REST address would be `http://localhost:8080/zeebe`. This setting can also be overridden using the environment variable `SPRING_WEBFLUX_BASEPATH`. | `/`           |
+| Field        | Description                                                                                                                                                                                                                                                        | Example value |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| context-path | The context path prefix for all REST API requests. For example, if you configure `/zeebe`, then the client's REST address would be `http://localhost:8080/zeebe`. This setting can also be overridden using the environment variable `SERVER_SERVLET_CONTEXTPATH`. | `/`           |
 
 #### YAML snippet
 
 ```yaml
-spring.webflux:
-  base-path: /
+server.servlet:
+  context-path: /
 ```
 
 ### management.server

@@ -7,9 +7,7 @@ description: "Step through authentication options for accessing the Orchestratio
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes the available authentication methods for accessing the Orchestration Cluster REST API. It explains when to use each method and how to configure your API requests for secure and appropriate access.
-
-The Orchestration Cluster REST API supports three authentication methods depending on your environment and configuration: none, basic, and OIDC-based.
+This page explains how to authenticate requests to the Orchestration Cluster REST API across different deployment environments.
 
 ## Authentication support matrix
 
@@ -19,6 +17,12 @@ The Orchestration Cluster REST API supports three authentication methods dependi
 | [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
 | [Helm](/self-managed/deployment/helm/install/quick-install.md)                    | Basic Auth             | ✅ (when auth disabled) | ✅ (default)       | ✅ (when configured)    |
 | SaaS                                                                              | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
+
+:::info Authentication vs. authorization
+Authentication establishes who is calling the Orchestration Cluster REST API (for example, using basic authentication or an OIDC access token). Authorization determines what that caller can do, based on authorizations configured in Admin.
+
+To learn more about authorization resources, permissions, and precedence (including user task permissions), see [Orchestration Cluster authorization](../../components/concepts/access-control/authorizations.md).
+:::
 
 ## Authenticate API calls
 
@@ -35,7 +39,7 @@ curl http://localhost:8080/v2/topology
 Basic Authentication uses username and password credentials.
 
 **For Camunda 8 Run:**  
-Enable Basic Auth by configuring authentication in your `application.yaml`. See [Camunda 8 Run documentation](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
+Enable Basic Auth by configuring authentication in your `application.yaml`. See [Camunda 8 Run documentation](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#enable-authentication-and-authorization) for details.
 
 **For Helm:**  
 Basic Auth is enabled by default for the Orchestration Cluster API.
@@ -54,7 +58,7 @@ See [Camunda components troubleshooting](/self-managed/operational-guides/troubl
 
 ## Using a token (OIDC/JWT)
 
-OIDC-based Authentication is recommended for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
+OIDC-based authentication is recommended for production and required for SaaS. Obtain an access token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request. The token's subject (user or client) must also have the required authorizations. Otherwise, requests fail with `403 Forbidden` even if authentication succeeds.
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={[
 {label: 'SaaS', value: 'saas' },
@@ -88,7 +92,7 @@ curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
 
 **Prerequisites for OIDC-based authentication**
 
-- Your Orchestration Cluster must already be configured with your Identity Provider. See [Set up OIDC-based Authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+- Your Orchestration Cluster must already be configured with your Identity Provider. See [Set up OIDC-based Authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md).
 - You must have a registered client in your IdP with a **client ID**, **client secret**, and authorization endpoint.
 - Note the configured **audience** and **scope** for token requests (variables `OC_AUDIENCE` and `SCOPE`). Depends on IdP configuration.
 
@@ -142,3 +146,4 @@ Official Camunda clients (Java client or Spring Boot Starter) handle token acqui
 
 - [Camunda Java client authentication and token management](../java-client/getting-started.md)
 - [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](../camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection)
+- [Orchestration Cluster authorization: Resources, permissions, and configuration](../../components/concepts/access-control/authorizations.md)
