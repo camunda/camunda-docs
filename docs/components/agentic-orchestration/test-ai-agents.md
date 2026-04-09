@@ -2,7 +2,7 @@
 id: test-ai-agents
 title: Test your AI agents with CPT
 sidebar_label: Test your AI agents
-description: "Test non-deterministic AI agent processes in Camunda 8 with Camunda Process Test."
+description: "Test your AI agent processes in Camunda 8 with Camunda Process Test (CPT)."
 keywords: ["agentic ai", "AI agents", "Camunda Process Test"]
 toc_max_heading_level: 2
 ---
@@ -14,10 +14,14 @@ Test your AI agent processes in Camunda 8 with [Camunda Process Test (CPT)](/api
 
 ## About
 
-AI agent processes are non-deterministic: the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) decides at runtime which tools to invoke and in what order, and its free-text output varies across runs. This guide shows how to write integration tests that keep the AI agent and LLM interaction real while mocking external tool executions, using two CPT features:
+AI agent processes are non-deterministic: the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) decides at runtime which tools to invoke and in what order, and its free-text output varies across runs.
 
-- **[Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior)** reacts to whichever tasks the agent activates instead of blocking on a single hard-coded execution order, addressing the non-deterministic control flow.
+In this guide, you will write integration tests that keep the AI agent and LLM interaction real while mocking external tool executions, using two CPT features:
+
+- **[Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior)** reacts to whichever tasks the agent activates. instead of blocking on a single hard-coded execution order. This addresses the non-deterministic control flow.
 - **[Judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge)** verify AI-generated output or tool execution results with a judge LLM that scores whether a value satisfies a natural-language expectation, replacing brittle exact-match checks.
+
+After completing this guide, you will be able to test your AI agents using CPT.
 
 ## Prerequisites
 
