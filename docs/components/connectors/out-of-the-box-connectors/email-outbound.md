@@ -1,19 +1,14 @@
 ---
-id: email
+id: email-outbound
 title: Email connector
-sidebar_label: Email
-description: The Email connector allows you to connect your BPMN service with different email protocols such as SMTP, POP3 or IMAP.
+sidebar_label: Email outbound
+description: Connect your BPMN service to email using SMTP, POP3, or IMAP, and send, receive, or manage emails.
 ---
 
-import Tabs from "@theme/Tabs"; import TabItem from "@theme/TabItem";
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
 
-<Tabs groupId="email" defaultValue="outbound" queryString
-values={[{label: 'Email Outbound connector', value: 'outbound' }, {label: 'Email Inbound connector', value: 'inbound' }]}>
-
-<TabItem value='outbound'>
-
-The **Email connector** is an outbound connector that allows you to connect your BPMN service with any email POP3, IMAP
-or SMTP server.
+The **Email outbound connector** allows your BPMN service to send and receive emails via an email server. It supports multiple email protocols, including SMTP for sending emails, and POP3 and IMAP for receiving and managing emails.
 
 ## Prerequisites
 
@@ -23,6 +18,8 @@ To use the **Email connector**, you must have an SMTP, POP3 or IMAP server avail
 Use Camunda secrets to avoid exposing your sensitive data as plain text.
 See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
+
+<OutboundConnectorBasics />
 
 ## Authentication
 
@@ -669,197 +666,4 @@ The example below shows the expected JSON response after an email has been succe
 }
 ```
 
-</TabItem>
-
-<TabItem value='inbound'>
-
-The Email Inbound connector is an inbound connector that allows you to connect your BPMN service with any email IMAP
-server.
-
-:::caution
-This inbound connector only supports working with IMAP server.
-:::
-
-## Prerequisites
-
-To use the **Email Inbound connector**, you must have an IMAP server available to connect to.
-
-:::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text.
-See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
-:::
-
-## Authentication
-
-You can authenticate to a mail server as follows.
-
-### Simple Authentication
-
-This method allows the user to connect to any IMAP server using an email address and password.
-
-#### Parameters
-
-| Parameter  | Description                                                                                                                                                                |
-| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
-| `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
-
-## Listener information
-
-This inbound connector creates a new process each time a new email is received.
-
-| Parameter               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :---------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Folder`                | <p>(Optional) Define the folder the inbound connector will monitor.</p><p><ul><li>If not specified, the default folder is set to `INBOX`.</li><li>For subfolders, use `.` or `/` separated path (for example, `inside/folder` or `inside.folder`)</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `Polling Wait Time`     | Set the interval between each polling operation. See [timer events](/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for more information on time duration and correct format.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `Polling Configuration` | <p>This section contains settings related to the polling behavior of the connector.</p><p><ul><li><code>Poll All Emails</code>: Poll every email found in the specified folder.<ul><li><p><code>Move to Another Folder After Processing</code>: Move processed emails to a specific folder.</p><ul><li><p><code>Folder</code>: Specify the target folder to move processed emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</p></li></ul></li><li><p><code>Delete After Processing</code>: Permanently delete each email after processing.</p></li></ul></li></ul><ul><li>`Poll Unseen Emails`: Poll only emails not marked as read in the specified folder.<ul><li><p>`Move to Another Folder After Processing`: Move processed unseen emails to a specific folder.</p><ul><li>`Folder`: Specify the target folder to move processed unseen emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</li></ul></li><li><p>`Delete After Processing`: Permanently delete unseen emails from the folder after processing.</p></li><li><p>`Mark as Read After Processing`: Mark each unseen email as read after it is processed.</p></li></ul></li></ul></p> |
-
-## Response Structure
-
-The task returns a JSON object containing detailed information about the email:
-
-- `messageId`: The unique identifier of the email message.
-- `fromAddress`: The email addresses of the sender.
-- `headers` : A list of the email headers.
-- `subject`: The subject line of the email.
-- `size`: The size of the email (in bytes).
-- `plainTextBody`: The plain text version of the email content.
-- `htmlBody`: The HTML version of the email content, if it exists.
-- `attachments` A list of document reference
-- `receivedDateTime`: The date and time the email was received.
-
-:::note
-As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from the `messageId`.
-:::
-
-#### Example Response
-
-The following example JSON response shows the data structure produced when an email triggers the creation of a process
-instance:
-
-```json
-{
-  "messageId": "messageId",
-  "fromAddress": "example@camunda.com",
-  "subject": "Urgent Test",
-  "size": 65646,
-  "plainTextBody": "Hey how are you?\r\n",
-  "htmlBody": "<html>Hello</html>",
-  "headers": [
-    {
-      "key": "header1",
-      "value": "example"
-    },
-    {
-      "key": "header2",
-      "value": "test"
-    }
-  ],
-  "attachments": [
-    {
-      "storeId": "in-memory",
-      "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
-      "metadata": {
-        "contentType": "image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
-        "size": 311032,
-        "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
-      },
-      "documentType": "camunda"
-    }
-  ],
-  "receivedDateTime": "2024-08-19T06:54:28Z"
-}
-```
-
-This response includes essential email details such as the `messageId`, sender addresses, subject, size, and the content
-of the email both in plain text and HTML format. This information can be used by the process for various workflows, such
-as prioritizing tasks, content analysis, and automated responses.
-
-## Activation condition
-
-The optional **Activation condition** field allows you to specify a Friendly Enough Expression
-Language ([FEEL](/components/modeler/feel/what-is-feel.md)) expression to control when this connector should trigger a
-process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are
-met by the incoming email.
-
-For example, the FEEL expression `subject = "urgent"` ensures that the process is only triggered if the
-subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email
-received by the connector.
-
-## Correlation
-
-The **Correlation** section allows you to configure the message correlation parameters.
-
-### Correlation key
-
-- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This
-  corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
-- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This
-  expression is evaluated in the connector Runtime and the result is used to correlate the message.
-
-For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming email
-message contains `value:{correlationKey:myValue}`, your correlation key settings will look like this:
-
-- **Correlation key (process)**: `=myCorrelationKey`
-- **Correlation key (payload)**: `=message.plainTextBody.correlationKey`
-
-You can also use the key of the message to accomplish this in the **Correlation key (payload)** field with `=key`.
-
-:::info
-To learn more about correlation keys, see [messages](../../../concepts/messages).
-:::
-
-### Message ID expression
-
-The optional **Message ID expression** field allows you to extract the message ID from the incoming message.
-
-- The message ID serves as a unique identifier for the message and is used for message correlation.
-- This expression is evaluated in the connector Runtime and the result used to correlate the message.
-
-In most cases, you do not need to configure the **Message ID expression**. However, it is useful if you want to ensure
-message deduplication or achieve a specific message correlation behavior.
-
-:::info
-To learn more about how message IDs influence message correlation,
-see [messages](../../../concepts/messages#message-correlation-overview).
-:::
-
-For example, if you want to set the message ID to the value of the `messageId` field in the incoming message, you can
-configure the **Message ID expression** as follows:
-
-```
-= message.messageId
-```
-
-### Message TTL
-
-The optional **Message TTL** field allows you to set the time-to-live (TTL) for the correlated messages.
-
-- TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it
-  cannot be correlated immediately).
-- The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour.
-
-:::info
-To learn more about TTL in Zeebe, see [message correlation](../../../concepts/messages#message-buffering).
-:::
-
-## Deduplication
-
-The **Deduplication** section allows you to configure the connector deduplication parameters.
-
-- **Connector deduplication** is a mechanism in the connector Runtime that determines how many email listeners are
-  created if there are multiple occurrences of the **Email Listener connector** in a BPMN diagram. This is different to
-  **message deduplication**.
-
-- By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription
-  properties only result in one subscription.
-
-To customize the deduplication behavior, select the **Manual mode** checkbox and configure the custom deduplication ID.
-
-:::info
-To learn more about deduplication, see [deduplication](../advanced-topics/deduplication.md).
-:::
-
-</TabItem>
-
-</Tabs>
+<ErrorHandling />
