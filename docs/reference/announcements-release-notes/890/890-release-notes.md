@@ -3,6 +3,8 @@ id: 890-release-notes
 title: "8.9 Release notes"
 sidebar_label: Release notes
 description: "Release notes for 8.9, including alphas"
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
 page_rank: 90
 ---
@@ -30,7 +32,22 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 </details>
 
-## APIs and tools
+## Agentic orchestration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+
+### Agentic orchestration onboarding in Camunda 8 Run
+
+<!-- https://github.com/camunda/product-hub/issues/3330 -->
+
+Camunda 8 Run now includes an "I don't have credentials" path so you can deploy and run agents without first configuring external LLM provider credentials.
+
+It also adds a local LLM quick start, helping self-managed and enterprise-constrained teams try agentic orchestration without external provider setup.
+
+<p class="link-arrow">[MCP docs](/reference/mcp-docs/mcp-docs.md)</p>
+<p class="link-arrow">[Get started with agentic orchestration](/guides/getting-started-agentic-orchestration.md)</p>
+
+## APIs & tools
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
 
@@ -74,21 +91,6 @@ Camunda Process Test now adds dedicated support for AI agent testing, making it 
 - Conditional behavior helps you model reactive test behavior for agent-driven flows by watching process state changes and completing tasks as they appear, without blocking the test on a predefined path.
 
 <!-- <p class="link-arrow">[Testing agentic processes](/apis-tools/testing/testing-agentic-processes.md)</p> -->
-
-## Camunda 8 Run
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
-
-### Agentic orchestration onboarding in c8run
-
-<!-- https://github.com/camunda/product-hub/issues/3330 -->
-
-Camunda 8 Run now includes an "I don't have credentials" path so you can deploy and run agents without first configuring external LLM provider credentials.
-
-It also adds a local LLM quick start, helping self-managed and enterprise-constrained teams try agentic orchestration without external provider setup.
-
-<p class="link-arrow">[MCP docs](/reference/mcp-docs/mcp-docs.md)</p>
-<p class="link-arrow">[Get started with agentic orchestration](/guides/getting-started-agentic-orchestration.md)</p>
 
 ## Connectivity
 
@@ -156,9 +158,9 @@ Data Migrator now supports migrating historic audit data from Camunda 7 to Camun
 
 <p class="link-arrow">[History Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md)</p>
 
-## Modeler
+## Robotic Process Automation (RPA)
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects RPA">RPA</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects RPA">RPA</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 ### RPA support in Web Modeler
 
@@ -167,6 +169,10 @@ Data Migrator now supports migrating historic audit data from Camunda 7 to Camun
 Web Modeler now supports RPA scripts as a first-class file type, including visibility, project management, and deployment workflows without relying on Desktop Modeler.
 
 <p class="link-arrow">[RPA getting started](/components/rpa/getting-started.md)</p>
+
+## Web Modeler
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 ### Unified deployment experience across file types in Web Modeler
 
@@ -408,7 +414,7 @@ You can now choose the text extraction engine on a per-template basis, allowing 
 - Select a high-accuracy OCR engine for scanned or image-based documents.
 - Bypass text extraction entirely to let multimodal LLMs natively interpret document content.
 
-### Microsoft Teams app
+### Integrations
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
 
@@ -955,7 +961,7 @@ New documentation shows you how to:
 - Install Camunda 8 Run with H2 as the default secondary storage.
 - Seamlessly switch from H2 to Elasticsearch or OpenSearch when required.
 
-### Cluster Metrics endpoint
+### Console
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
 <!-- https://github.com/camunda/product-hub/issues/2229 -->
@@ -1244,7 +1250,7 @@ Self-Managed environment usage metrics now support per-tenant reporting and alig
 This feature is already available in the Camunda 8.8 release for Camunda 8 SaaS.
 :::
 
-### Database and data storage
+### RDBMS secondary storage
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
 
@@ -1338,7 +1344,9 @@ A new `/meta/ip-ranges` REST API endpoint allows you to monitor SaaS Web Modeler
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 13 November 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha1)</li></ul> | -    |
 
-### JDBC driver management for RDBMS integrations
+### RDBMS secondary storage
+
+#### JDBC driver management for RDBMS integrations
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span></div>
 
@@ -1352,7 +1360,7 @@ Camunda 8.9 introduces a standardized approach to JDBC driver management for RDB
 
 This change simplifies compliance and setup for RDBMS environments, ensuring consistent connectivity across PostgreSQL, Oracle, MariaDB, and H2.
 
-### MySQL and Microsoft SQL Server secondary storage
+#### MySQL and Microsoft SQL Server secondary storage
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span></div>
 
@@ -1367,7 +1375,7 @@ Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL S
 This alpha release introduces foundational support only. External configuration and Operate integration follows in upcoming alpha releases.
 :::
 
-### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
+#### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span></div>
 
@@ -1388,7 +1396,9 @@ Key highlights:
 This alpha release introduces support for H2 in Camunda 8 Run only. Operate and external RDBMS configuration follows in upcoming alpha releases.
 :::
 
-### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
+### Web Modeler
+
+#### RDBMS support (H2, MariaDB, MySQL)
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Data">Data</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
