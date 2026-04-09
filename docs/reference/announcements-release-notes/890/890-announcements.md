@@ -1057,6 +1057,24 @@ Admin is the cluster-level admin UI hosting identity management and other admini
 </div>
 <div className="release-announcement-content">
 
+#### Web Modeler: `webapp` component removed
+
+The Web Modeler system architecture has been simplified to enable easier and smoother installation and configuration of Web Modeler in a Self-Managed deployment.
+The separate `webapp` component has been removed and its functionality is now completely integrated into the `restapi` component.
+
+This change might require updates to your application configuration.
+
+<p class="link-arrow">[Migrate configuration](/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Web Modeler: Default logging format changed
 
 By default, Web Modeler's `restapi` component now logs in a simple, readable format to the console instead of `JSON`.
