@@ -27,7 +27,7 @@ This is a basic setup to get started with Camunda 8 but does not reflect a high 
 We refer to this architecture as the **standard installation**, which can be set up with or without a **domain** ([Ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 The standard installation utilizes a username and password connection for the Camunda components (or simply relies on network isolation for certain components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
 
-**Secondary storage options:** This guide provisions a managed OpenSearch domain by default. The Orchestration Cluster is fully supported with RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) as an alternative secondary storage backend. If you prefer to use RDBMS instead of OpenSearch, you can configure this during the Helm installation step. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+**Secondary storage options:** This guide includes a managed OpenSearch example path. RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) is also a supported secondary storage backend for the Orchestration Cluster. If you prefer to use RDBMS instead of OpenSearch, you can configure this during the Helm installation step. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
 
 To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/), or if you already have an Amazon EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
 
@@ -48,7 +48,7 @@ This guide results in the following:
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 17.x](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
-- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured as a secondary storage option for the Camunda platform.
+- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured as a secondary storage option for Camunda.
   Note: This guide’s example provisions a managed OpenSearch domain. Depending on the components you run and your requirements, you can instead configure an RDBMS-based secondary storage backend for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured and [Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
@@ -845,17 +845,20 @@ We will also use this step to verify connectivity to the database from the creat
 
 Creating an OpenSearch domain can be accomplished through various methods, such as using the AWS Management Console or the AWS CLI. This guide focuses on providing a reproducible setup using the CLI. For information on creating an OpenSearch domain using the UI, refer to the [AWS OpenSearch documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/create-managed-domain.html).
 
-The resulting OpenSearch domain is intended for use with the Camunda platform, the following components utilize OpenSearch:
+The resulting OpenSearch domain is intended for use with Camunda, the following components utilize OpenSearch:
 
 - Orchestration Cluster (Zeebe, Operate, Tasklist, Identity)
 - Optimize
 
 :::info Optional service
 
-If you don't want to use the Amazon OpenSearch managed service for OpenSearch, you can skip this section.
+If you don't want to use the Amazon OpenSearch managed service, you can skip this section.
 However, note that you may need to adjust the following instructions to remove references to it.
 
-If you choose not to use this service, you'll need to either provide a managed OpenSearch or Elasticsearch service or use the internal deployment by the Camunda Helm chart in Kubernetes.
+If you choose not to use this service, you can either:
+
+- Provide a managed OpenSearch or Elasticsearch service, or use the internal deployment by the Camunda Helm chart in Kubernetes.
+- Use RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
 
 :::
 

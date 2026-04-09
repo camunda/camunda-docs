@@ -11,9 +11,8 @@ mdx:
 type DecisionDefinitionTypeEnum =
   | "DECISION_TABLE"
   | "LITERAL_EXPRESSION"
+  | "UNSPECIFIED"
   | "UNKNOWN";
 ```
 
-Defined in: [gen/types.gen.ts:1872](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1872)
-
-The type of the decision.
+The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10

@@ -11,8 +11,6 @@ mdx:
 type CreateTenantClusterVariableData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8867](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8867)
-
 ## Properties
 
 ### body
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:8867](https://github.com/camunda/orchestration-clu
 body: CreateClusterVariableRequest;
 ```
 
-Defined in: [gen/types.gen.ts:8868](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8868)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:8868](https://github.com/camunda/orchestration-clu
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:8869](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8869)
 
 #### tenantId
 
@@ -46,10 +40,8 @@ The tenant ID
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:8875](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8875)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:8875](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/cluster-variables/tenants/{tenantId}";
 ```
-
-Defined in: [gen/types.gen.ts:8876](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8876)

@@ -11,8 +11,6 @@ mdx:
 type unassignMappingRuleFromGroupInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1018](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1018)
-
 ## Properties
 
 ### groupId
@@ -21,8 +19,6 @@ Defined in: [gen/CamundaClient.ts:1018](https://github.com/camunda/orchestration
 groupId: unassignMappingRuleFromGroupPathParam_groupId;
 ```
 
-Defined in: [gen/CamundaClient.ts:1018](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1018)
-
 ---
 
 ### mappingRuleId
@@ -30,5 +26,3 @@ Defined in: [gen/CamundaClient.ts:1018](https://github.com/camunda/orchestration
 ```ts
 mappingRuleId: unassignMappingRuleFromGroupPathParam_mappingRuleId;
 ```
-
-Defined in: [gen/CamundaClient.ts:1018](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L1018)

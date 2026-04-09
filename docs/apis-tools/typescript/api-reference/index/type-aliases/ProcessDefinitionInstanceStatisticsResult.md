@@ -11,74 +11,60 @@ mdx:
 type ProcessDefinitionInstanceStatisticsResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5285](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5285)
-
 Process definition instance statistics response.
 
 ## Properties
 
-### activeInstancesWithIncidentCount?
+### activeInstancesWithIncidentCount
 
 ```ts
-optional activeInstancesWithIncidentCount: number;
+activeInstancesWithIncidentCount: number;
 ```
-
-Defined in: [gen/types.gen.ts:5303](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5303)
 
 Total number of currently active process instances of this definition that have at least one incident.
 
 ---
 
-### activeInstancesWithoutIncidentCount?
+### activeInstancesWithoutIncidentCount
 
 ```ts
-optional activeInstancesWithoutIncidentCount: number;
+activeInstancesWithoutIncidentCount: number;
 ```
-
-Defined in: [gen/types.gen.ts:5299](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5299)
 
 Total number of currently active process instances of this definition that do not have incidents.
 
 ---
 
-### hasMultipleVersions?
+### hasMultipleVersions
 
 ```ts
-optional hasMultipleVersions: boolean;
+hasMultipleVersions: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:5295](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5295)
 
 Indicates whether multiple versions of this process definition instance are deployed.
 
 ---
 
-### latestProcessDefinitionName?
+### latestProcessDefinitionName
 
 ```ts
-optional latestProcessDefinitionName: string;
+latestProcessDefinitionName: string | null;
 ```
-
-Defined in: [gen/types.gen.ts:5291](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5291)
 
 Name of the latest deployed process definition instance version.
 
 ---
 
-### processDefinitionId?
+### processDefinitionId
 
 ```ts
-optional processDefinitionId: ProcessDefinitionId;
+processDefinitionId: ProcessDefinitionId;
 ```
-
-Defined in: [gen/types.gen.ts:5286](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5286)
 
 ---
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId;
 ```
-
-Defined in: [gen/types.gen.ts:5287](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5287)

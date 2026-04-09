@@ -11,14 +11,12 @@ mdx:
 type DecisionRequirementsSearchQueryResult = SearchQueryResponse & object;
 ```
 
-Defined in: [gen/types.gen.ts:1959](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1959)
-
 ## Type Declaration
 
-### items?
+### items
 
 ```ts
-optional items: DecisionRequirementsResult[];
+items: DecisionRequirementsResult[];
 ```
 
 The matching decision requirements.

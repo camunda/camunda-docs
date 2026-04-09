@@ -270,3 +270,10 @@ To use it:
 The dashboard provides insights into key data layer components for Camunda versions `>= 8.8`, with a focus on the Camunda exporter through which all data flows.
 
 ![Example panels](assets/example-panels-data-layer.png)
+
+## Configure metrics
+
+Configure metrics for each Camunda 8 component as follows:
+
+- [Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/concepts/monitoring.md)
+- [Web Modeler](/self-managed/components/modeler/web-modeler/monitoring.md)

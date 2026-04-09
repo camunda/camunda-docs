@@ -22,10 +22,10 @@ Restrictions of a variable name:
 - It may not contain **whitespaces** (e.g. `order number` is not allowed; you can use `orderNumber` instead).
 - It may not contain an **operator** (e.g. `+`, `-`, `*`, `/`, `=`, `>`, `?`, `.`).
 - It may not be a **literal** (e.g. `null`, `true`, `false`) or a **keyword** (e.g. `function`, `if`, `then`, `else`, `for`, `between`, `instance`, `of`, `not`).
-- It may not be longer than 492 characters (UTF-8 encoded).
+- It must stay within the length limits of the target backend: up to **32,768 characters** with Elasticsearch/OpenSearch-backed secondary storage and up to **256 characters** with RDBMS-backed secondary storage.
 
 :::note
-The character limit might be higher on [RDBMS secondary storage backends](/self-managed/concepts/databases/overview.md).
+Length is enforced using Java string length semantics rather than raw UTF-8 byte counts. Most common characters count as one character, while characters represented as surrogate pairs in Java count as two. Because of that, the effective visible-character limit can be lower for some inputs.
 :::
 
 ## Variable values

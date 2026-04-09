@@ -11,8 +11,6 @@ mdx:
 type ProcessInstanceFilter = ProcessInstanceFilterFields & object;
 ```
 
-Defined in: [gen/types.gen.ts:5761](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5761)
-
 Process instance search filter.
 
 ## Type Declaration
@@ -20,7 +18,7 @@ Process instance search filter.
 ### $or?
 
 ```ts
-optional $or: ProcessInstanceFilterFields[];
+optional $or?: ProcessInstanceFilterFields[];
 ```
 
 Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.

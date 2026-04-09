@@ -21,9 +21,10 @@ Semantic types make these identifiers **distinct at the type level**. Pyright (a
 
 Treat semantic types as **opaque identifiers** — receive them from API responses and pass them to subsequent API calls without inspecting or transforming the underlying value:
 
+<!-- snippet-source: examples/readme.py | regions: ReadmeSemanticTypes -->
+
 ```python
-from camunda_orchestration_sdk import CamundaClient
-from camunda_orchestration_sdk.models.process_creation_by_key import ProcessCreationByKey
+from camunda_orchestration_sdk import CamundaClient, ProcessCreationByKey
 
 client = CamundaClient()
 
@@ -44,6 +45,8 @@ client.cancel_process_instance(process_instance_key=instance_key)
 ## Serialising in and out of the type system
 
 Semantic types are `NewType` wrappers over `str`, so they serialise transparently:
+
+<!-- snippet-exempt: uses hypothetical db.save/db.load pseudo-code -->
 
 ```python
 from camunda_orchestration_sdk import ProcessDefinitionKey, ProcessInstanceKey

@@ -11,17 +11,13 @@ mdx:
 type AssignGroupToTenantData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15988](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15988)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:15989](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15989)
 
 ---
 
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:15989](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:15990](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L15990)
 
 #### groupId
 
@@ -54,10 +48,8 @@ The unique identifier of the tenant.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:16000](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16000)
 
 ---
 
@@ -66,5 +58,3 @@ Defined in: [gen/types.gen.ts:16000](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/tenants/{tenantId}/groups/{groupId}";
 ```
-
-Defined in: [gen/types.gen.ts:16001](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16001)

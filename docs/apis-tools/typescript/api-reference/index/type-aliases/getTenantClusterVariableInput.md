@@ -11,8 +11,6 @@ mdx:
 type getTenantClusterVariableInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:546](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L546)
-
 ## Properties
 
 ### name
@@ -21,8 +19,6 @@ Defined in: [gen/CamundaClient.ts:546](https://github.com/camunda/orchestration-
 name: getTenantClusterVariablePathParam_name;
 ```
 
-Defined in: [gen/CamundaClient.ts:546](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L546)
-
 ---
 
 ### tenantId
@@ -30,5 +26,3 @@ Defined in: [gen/CamundaClient.ts:546](https://github.com/camunda/orchestration-
 ```ts
 tenantId: getTenantClusterVariablePathParam_tenantId;
 ```
-
-Defined in: [gen/CamundaClient.ts:546](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L546)

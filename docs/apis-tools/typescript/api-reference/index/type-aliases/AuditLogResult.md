@@ -11,367 +11,309 @@ mdx:
 type AuditLogResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:13](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13)
-
 Audit log item.
 
 ## Properties
 
-### actorId?
+### actorId
 
 ```ts
-optional actorId: string;
+actorId: string | null;
 ```
-
-Defined in: [gen/types.gen.ts:36](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L36)
 
 The ID of the actor who performed the operation.
 
 ---
 
-### actorType?
+### actorType
 
 ```ts
-optional actorType: AuditLogActorTypeEnum;
+actorType: AuditLogActorTypeEnum | null;
 ```
 
-Defined in: [gen/types.gen.ts:37](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L37)
+The type of the actor who performed the operation.
 
 ---
 
-### annotation?
+### agentElementId
 
 ```ts
-optional annotation: string;
+agentElementId: string | null;
 ```
 
-Defined in: [gen/types.gen.ts:46](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L46)
-
-Additional notes about the operation.
+The element ID of the agent that performed the operation (e.g. ad-hoc subprocess element ID).
 
 ---
 
-### auditLogKey?
+### auditLogKey
 
 ```ts
-optional auditLogKey: AuditLogKey;
+auditLogKey: AuditLogKey;
 ```
-
-Defined in: [gen/types.gen.ts:17](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L17)
 
 The unique key of the audit log entry.
 
 ---
 
-### batchOperationKey?
+### batchOperationKey
 
 ```ts
-optional batchOperationKey: BatchOperationKey;
+batchOperationKey: BatchOperationKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:24](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L24)
 
 Key of the batch operation.
 
 ---
 
-### batchOperationType?
+### batchOperationType
 
 ```ts
-optional batchOperationType: BatchOperationTypeEnum;
+batchOperationType: BatchOperationTypeEnum | null;
 ```
-
-Defined in: [gen/types.gen.ts:28](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L28)
 
 The type of batch operation performed, if this is part of a batch.
 
 ---
 
-### category?
+### category
 
 ```ts
-optional category: AuditLogCategoryEnum;
+category: AuditLogCategoryEnum;
 ```
-
-Defined in: [gen/types.gen.ts:47](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L47)
 
 ---
 
-### decisionDefinitionId?
+### decisionDefinitionId
 
 ```ts
-optional decisionDefinitionId: DecisionDefinitionId;
+decisionDefinitionId: DecisionDefinitionId | null;
 ```
-
-Defined in: [gen/types.gen.ts:84](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L84)
 
 The decision definition ID.
 
 ---
 
-### decisionDefinitionKey?
+### decisionDefinitionKey
 
 ```ts
-optional decisionDefinitionKey: DecisionDefinitionKey;
+decisionDefinitionKey: DecisionDefinitionKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:88](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L88)
 
 The key of the decision definition.
 
 ---
 
-### decisionEvaluationKey?
+### decisionEvaluationKey
 
 ```ts
-optional decisionEvaluationKey: DecisionEvaluationKey;
+decisionEvaluationKey: DecisionEvaluationKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:92](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L92)
 
 The key of the decision evaluation.
 
 ---
 
-### decisionRequirementsId?
+### decisionRequirementsId
 
 ```ts
-optional decisionRequirementsId: string;
+decisionRequirementsId: string | null;
 ```
-
-Defined in: [gen/types.gen.ts:76](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L76)
 
 The decision requirements ID.
 
 ---
 
-### decisionRequirementsKey?
+### decisionRequirementsKey
 
 ```ts
-optional decisionRequirementsKey: DecisionRequirementsKey;
+decisionRequirementsKey: DecisionRequirementsKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:80](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L80)
 
 The assigned key of the decision requirements.
 
 ---
 
-### deploymentKey?
+### deploymentKey
 
 ```ts
-optional deploymentKey: DeploymentKey;
+deploymentKey: DeploymentKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:96](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L96)
 
 The key of the deployment.
 
 ---
 
-### elementInstanceKey?
+### elementInstanceKey
 
 ```ts
-optional elementInstanceKey: ElementInstanceKey;
+elementInstanceKey: ElementInstanceKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:64](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L64)
 
 The key of the element instance.
 
 ---
 
-### entityDescription?
+### entityDescription
 
 ```ts
-optional entityDescription: string;
+entityDescription: string | null;
 ```
-
-Defined in: [gen/types.gen.ts:122](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L122)
 
 Additional description of the entity affected by the operation.
 For example, for variable operations, this will contain the variable name.
 
 ---
 
-### entityKey?
+### entityKey
 
 ```ts
-optional entityKey: AuditLogEntityKey;
+entityKey: AuditLogEntityKey;
 ```
-
-Defined in: [gen/types.gen.ts:18](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L18)
 
 ---
 
-### entityType?
+### entityType
 
 ```ts
-optional entityType: AuditLogEntityTypeEnum;
+entityType: AuditLogEntityTypeEnum;
 ```
-
-Defined in: [gen/types.gen.ts:19](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L19)
 
 ---
 
-### formKey?
+### formKey
 
 ```ts
-optional formKey: FormKey;
+formKey: FormKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:100](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L100)
 
 The key of the form.
 
 ---
 
-### jobKey?
+### jobKey
 
 ```ts
-optional jobKey: JobKey;
+jobKey: JobKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:68](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L68)
 
 The key of the job.
 
 ---
 
-### operationType?
+### operationType
 
 ```ts
-optional operationType: AuditLogOperationTypeEnum;
+operationType: AuditLogOperationTypeEnum;
 ```
-
-Defined in: [gen/types.gen.ts:20](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L20)
 
 ---
 
-### processDefinitionId?
+### processDefinitionId
 
 ```ts
-optional processDefinitionId: ProcessDefinitionId;
+processDefinitionId: ProcessDefinitionId | null;
 ```
-
-Defined in: [gen/types.gen.ts:51](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L51)
 
 The process definition ID.
 
 ---
 
-### processDefinitionKey?
+### processDefinitionKey
 
 ```ts
-optional processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:55](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L55)
 
 The key of the process definition.
 
 ---
 
-### processInstanceKey?
+### processInstanceKey
 
 ```ts
-optional processInstanceKey: ProcessInstanceKey;
+processInstanceKey: ProcessInstanceKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:59](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L59)
 
 The key of the process instance.
 
 ---
 
-### relatedEntityKey?
+### relatedEntityKey
 
 ```ts
-optional relatedEntityKey: AuditLogEntityKey;
+relatedEntityKey: AuditLogEntityKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:110](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L110)
 
 The key of the related entity. The content depends on the operation type and entity type.
 For example, for authorization operations, this will contain the ID of the owner (e.g., user or group) the authorization belongs to.
 
 ---
 
-### relatedEntityType?
+### relatedEntityType
 
 ```ts
-optional relatedEntityType: AuditLogEntityTypeEnum;
+relatedEntityType: AuditLogEntityTypeEnum | null;
 ```
-
-Defined in: [gen/types.gen.ts:116](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L116)
 
 The type of the related entity. The content depends on the operation type and entity type.
 For example, for authorization operations, this will contain the type of the owner (e.g., USER or GROUP) the authorization belongs to.
 
 ---
 
-### resourceKey?
+### resourceKey
 
 ```ts
-optional resourceKey: ResourceKey;
+resourceKey: ResourceKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:104](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L104)
 
 The system-assigned key for this resource.
 
 ---
 
-### result?
+### result
 
 ```ts
-optional result: AuditLogResultEnum;
+result: AuditLogResultEnum;
 ```
-
-Defined in: [gen/types.gen.ts:42](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L42)
 
 ---
 
-### rootProcessInstanceKey?
+### rootProcessInstanceKey
 
 ```ts
-optional rootProcessInstanceKey: RootProcessInstanceKey;
+rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:60](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L60)
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy. This field is only present for data
+belonging to process instance hierarchies created in version 8.9 or later.
 
 ---
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId | null;
 ```
-
-Defined in: [gen/types.gen.ts:41](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L41)
 
 The tenant ID of the audit log.
 
 ---
 
-### timestamp?
+### timestamp
 
 ```ts
-optional timestamp: string;
+timestamp: string;
 ```
-
-Defined in: [gen/types.gen.ts:32](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L32)
 
 The timestamp when the operation occurred.
 
 ---
 
-### userTaskKey?
+### userTaskKey
 
 ```ts
-optional userTaskKey: UserTaskKey;
+userTaskKey: UserTaskKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:72](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L72)
 
 The key of the user task.

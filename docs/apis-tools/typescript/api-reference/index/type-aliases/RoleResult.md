@@ -11,42 +11,34 @@ mdx:
 type RoleResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:6249](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6249)
-
 Role search response item.
 
 ## Properties
 
-### description?
+### description
 
 ```ts
-optional description: string;
+description: string | null;
 ```
-
-Defined in: [gen/types.gen.ts:6261](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6261)
 
 The description of the role.
 
 ---
 
-### name?
+### name
 
 ```ts
-optional name: string;
+name: string;
 ```
-
-Defined in: [gen/types.gen.ts:6253](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6253)
 
 The role name.
 
 ---
 
-### roleId?
+### roleId
 
 ```ts
-optional roleId: string;
+roleId: string;
 ```
-
-Defined in: [gen/types.gen.ts:6257](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L6257)
 
 The role id.

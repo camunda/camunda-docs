@@ -11,8 +11,6 @@ mdx:
 type DeleteDecisionInstanceErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:9663](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9663)
-
 ## Properties
 
 ### 401
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:9663](https://github.com/camunda/orchestration-clu
 ```ts
 401: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:9667](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9667)
 
 The request lacks valid authentication credentials.
 
@@ -33,8 +29,6 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9671](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9671)
-
 Forbidden. The request is not allowed.
 
 ---
@@ -44,8 +38,6 @@ Forbidden. The request is not allowed.
 ```ts
 404: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:9675](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9675)
 
 The decision instance is not found.
 
@@ -57,8 +49,6 @@ The decision instance is not found.
 500: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9679](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9679)
-
 An internal error occurred while processing the request.
 
 ---
@@ -68,7 +58,5 @@ An internal error occurred while processing the request.
 ```ts
 503: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:9684](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9684)
 
 The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .

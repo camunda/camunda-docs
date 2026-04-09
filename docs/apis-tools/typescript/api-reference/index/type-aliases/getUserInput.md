@@ -11,8 +11,6 @@ mdx:
 type getUserInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:567](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L567)
-
 ## Properties
 
 ### username
@@ -20,5 +18,3 @@ Defined in: [gen/CamundaClient.ts:567](https://github.com/camunda/orchestration-
 ```ts
 username: getUserPathParam_username;
 ```
-
-Defined in: [gen/CamundaClient.ts:567](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/CamundaClient.ts#L567)

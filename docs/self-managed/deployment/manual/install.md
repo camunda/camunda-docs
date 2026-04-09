@@ -50,6 +50,17 @@ To install these components, use one of the supported methods:
 
 Download the required Camunda 8 artifacts from the following sources. Make sure that all artifacts use the same minor version to ensure compatibility.
 
+:::note Artifactory authentication
+Downloading artifacts from [artifactory](https://artifacts.camunda.com) requires authentication. Use your Camunda Enterprise LDAP credentials.
+
+When using `curl`, pass your username with the `-u` flag and let `curl` prompt for the password:
+
+```sh
+curl -u "$CAMUNDA_DISTRO_USER" -fL <url>
+```
+
+:::
+
 Orchestration Cluster:
 
 - File names follow the pattern `camunda-zeebe-x.y.z.(zip|tar.gz)`.
@@ -118,7 +129,7 @@ Set the secondary storage type value to `elasticsearch` or `opensearch` for this
 If your security settings require authentication for the secondary storage, configure both `username` and `password`.
 Omit these fields if authentication is not required.
 
-The following configuration defines how the Orchestration Cluster connects to document-store secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Identity, and Camunda Exporter.
+The following configuration defines how the Orchestration Cluster connects to document-store secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Admin, and Camunda Exporter.
 
 For detailed configuration options, see the [Orchestration Cluster configuration](/self-managed/components/orchestration-cluster/core-settings/overview.md)
 
@@ -278,7 +289,7 @@ Once you've downloaded the Orchestration Cluster distribution, extract it into a
 3. Update the configuration in `config/application.yaml`, or export the environment variables.
 4. Navigate to `bin` folder.
 5. Run `camunda.sh` (Linux/macOS) or `camunda.bat` (Windows).
-6. Open [http://localhost:8080](http://localhost:8080). On first access, you’ll be asked to create an admin user unless [Identity](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) is configured with OIDC or a similar option.
+6. Open [http://localhost:8080](http://localhost:8080). On first access, you'll be asked to create an admin user unless [Admin](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) is configured with OIDC or a similar option.
 
 :::note
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Web Modeler is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).

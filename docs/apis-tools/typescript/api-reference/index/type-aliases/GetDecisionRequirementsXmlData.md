@@ -11,17 +11,13 @@ mdx:
 type GetDecisionRequirementsXmlData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9892](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9892)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:9893](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9893)
 
 ---
 
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:9893](https://github.com/camunda/orchestration-clu
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:9894](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9894)
 
 #### decisionRequirementsKey
 
@@ -46,10 +40,8 @@ The assigned key of the decision requirements, which acts as a unique identifier
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:9900](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9900)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:9900](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/decision-requirements/{decisionRequirementsKey}/xml";
 ```
-
-Defined in: [gen/types.gen.ts:9901](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9901)

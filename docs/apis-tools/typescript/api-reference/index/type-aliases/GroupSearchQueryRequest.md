@@ -11,8 +11,6 @@ mdx:
 type GroupSearchQueryRequest = SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:2869](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2869)
-
 Group search request.
 
 ## Type Declaration
@@ -20,7 +18,7 @@ Group search request.
 ### filter?
 
 ```ts
-optional filter: GroupFilter;
+optional filter?: GroupFilter;
 ```
 
 The group search filters.
@@ -28,7 +26,7 @@ The group search filters.
 ### sort?
 
 ```ts
-optional sort: GroupSearchQuerySortRequest[];
+optional sort?: GroupSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

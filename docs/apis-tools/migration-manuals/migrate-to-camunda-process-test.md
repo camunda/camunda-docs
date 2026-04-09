@@ -112,7 +112,7 @@ In this mode, CPT connects to a remote runtime, such as a local Camunda 8 Run ru
 Prepare your remote runtime:
 
 1. **Install Camunda 8 Run**  
-   Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run) on your machine.
+   Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#install-and-start-camunda-8-run) on your machine.
 
 2. **Enable the management clock endpoint**  
    See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1):

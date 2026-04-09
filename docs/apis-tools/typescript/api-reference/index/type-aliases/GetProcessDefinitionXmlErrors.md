@@ -11,8 +11,6 @@ mdx:
 type GetProcessDefinitionXmlErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:13116](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13116)
-
 ## Properties
 
 ### 400
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:13116](https://github.com/camunda/orchestration-cl
 ```ts
 400: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:13120](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13120)
 
 The provided data is not valid.
 
@@ -33,8 +29,6 @@ The provided data is not valid.
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13124](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13124)
-
 The request lacks valid authentication credentials.
 
 ---
@@ -44,8 +38,6 @@ The request lacks valid authentication credentials.
 ```ts
 403: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:13128](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13128)
 
 Forbidden. The request is not allowed.
 
@@ -57,8 +49,6 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:13134](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13134)
-
 The process definition with the given key was not found.
 More details are provided in the response body.
 
@@ -69,7 +59,5 @@ More details are provided in the response body.
 ```ts
 500: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:13138](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13138)
 
 An internal error occurred while processing the request.

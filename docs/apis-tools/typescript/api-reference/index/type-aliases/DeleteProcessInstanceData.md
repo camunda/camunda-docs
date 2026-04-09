@@ -11,21 +11,17 @@ mdx:
 type DeleteProcessInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13971](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13971)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body:
+optional body?:
   | {
   operationReference?: OperationReference;
 }
   | null;
 ```
-
-Defined in: [gen/types.gen.ts:13972](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13972)
 
 ---
 
@@ -34,8 +30,6 @@ Defined in: [gen/types.gen.ts:13972](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:13975](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13975)
 
 #### processInstanceKey
 
@@ -50,10 +44,8 @@ The key of the process instance to delete.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:13981](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13981)
 
 ---
 
@@ -62,5 +54,3 @@ Defined in: [gen/types.gen.ts:13981](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/process-instances/{processInstanceKey}/deletion";
 ```
-
-Defined in: [gen/types.gen.ts:13982](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L13982)

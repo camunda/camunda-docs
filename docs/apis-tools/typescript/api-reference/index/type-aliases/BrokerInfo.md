@@ -11,8 +11,6 @@ mdx:
 type BrokerInfo = object;
 ```
 
-Defined in: [gen/types.gen.ts:1297](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1297)
-
 Provides information on a broker node.
 
 ## Properties
@@ -22,8 +20,6 @@ Provides information on a broker node.
 ```ts
 host: string;
 ```
-
-Defined in: [gen/types.gen.ts:1305](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1305)
 
 The hostname for reaching the broker.
 
@@ -35,8 +31,6 @@ The hostname for reaching the broker.
 nodeId: number;
 ```
 
-Defined in: [gen/types.gen.ts:1301](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1301)
-
 The unique (within a cluster) node ID for the broker.
 
 ---
@@ -46,8 +40,6 @@ The unique (within a cluster) node ID for the broker.
 ```ts
 partitions: Partition[];
 ```
-
-Defined in: [gen/types.gen.ts:1313](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1313)
 
 A list of partitions managed or replicated on this broker.
 
@@ -59,8 +51,6 @@ A list of partitions managed or replicated on this broker.
 port: number;
 ```
 
-Defined in: [gen/types.gen.ts:1309](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1309)
-
 The port for reaching the broker.
 
 ---
@@ -70,7 +60,5 @@ The port for reaching the broker.
 ```ts
 version: string;
 ```
-
-Defined in: [gen/types.gen.ts:1317](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1317)
 
 The broker version.

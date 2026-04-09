@@ -23,8 +23,6 @@ type CamundaResultClient = object & {
 };
 ```
 
-Defined in: [resultClient.ts:48](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/resultClient.ts#L48)
-
 ## Type Declaration
 
 ### inner

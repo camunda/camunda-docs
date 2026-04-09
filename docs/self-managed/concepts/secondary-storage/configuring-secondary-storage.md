@@ -91,30 +91,40 @@ When this flag is set, all secondary-storage-dependent components are automatica
 
 <TabItem value="docker-compose">
 
-If you’re using Docker Compose, configure your environment variables within the relevant service definition:
+If you’re using Docker Compose, configure your environment variables within the relevant service definition. The examples below use the `CAMUNDA_DATA_SECONDARY_STORAGE_*` naming family consistently.
 
 ```yaml
 environment:
-  - CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=rdbms
-  - CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:h2:mem:camunda
-  - CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_USERNAME=sa
-  - CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_PASSWORD=
+  - CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=rdbms
+  - CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL=jdbc:postgresql://postgres:5432/camunda
+  - CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME=camunda
+  - CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD=camunda
 ```
 
 If you choose Elasticsearch as the secondary storage backend:
 
 ```yaml
 environment:
-  - CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=elasticsearch
-  - CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL=http://elasticsearch:9200
+  - CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=elasticsearch
+  - CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_URL=http://elasticsearch:9200
+```
+
+If you choose OpenSearch as the secondary storage backend:
+
+```yaml
+environment:
+  - CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=opensearch
+  - CAMUNDA_DATA_SECONDARY_STORAGE_OPENSEARCH_URL=http://opensearch:9200
 ```
 
 To disable secondary storage:
 
 ```yaml
 environment:
-  - CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=none
+  - CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=none
 ```
+
+For end-to-end backend-specific examples, including PostgreSQL, MariaDB, MySQL, Oracle, SQL Server, H2, Elasticsearch, and OpenSearch, see the [Docker Compose developer quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md).
 
 </TabItem>
 

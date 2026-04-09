@@ -11,37 +11,29 @@ mdx:
 type CreateRoleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14521](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14521)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: RoleCreateRequest;
+optional body?: RoleCreateRequest;
 ```
-
-Defined in: [gen/types.gen.ts:14522](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14522)
 
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
-
-Defined in: [gen/types.gen.ts:14523](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14523)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:14524](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14524)
 
 ---
 
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:14524](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/roles";
 ```
-
-Defined in: [gen/types.gen.ts:14525](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14525)

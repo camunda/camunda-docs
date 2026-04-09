@@ -135,7 +135,18 @@ module.exports = {
                 id: "components/concepts/user-task-listeners",
               },
               items: [
-                "components/concepts/global-user-task-listeners",
+                {
+                  type: "category",
+                  label: "Global user task listeners",
+                  link: {
+                    type: "doc",
+                    id: "components/concepts/global-user-task-listeners",
+                  },
+                  items: [
+                    "components/concepts/global-user-task-listeners/configuration",
+                    "components/concepts/global-user-task-listeners/access-control",
+                  ],
+                },
                 "components/concepts/listen-to-user-tasks",
               ],
             },
@@ -173,7 +184,19 @@ module.exports = {
           ],
           Architecture: [
             "components/best-practices/architecture/deciding-about-your-stack",
-            "components/best-practices/architecture/sizing-your-environment",
+            {
+              type: "category",
+              label: "Size your environment",
+              link: {
+                type: "doc",
+                id: "components/best-practices/architecture/sizing-your-environment",
+              },
+              items: [
+                "components/best-practices/architecture/sizing-saas",
+                "components/best-practices/architecture/sizing-self-managed",
+                "components/best-practices/architecture/sizing-benchmarks",
+              ],
+            },
             "components/best-practices/architecture/understanding-human-tasks-management",
           ],
           Development: [
@@ -225,6 +248,7 @@ module.exports = {
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/monitor-ai-agents",
+            "components/agentic-orchestration/analyze-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -392,6 +416,7 @@ module.exports = {
               items: [
                 "components/camunda-integrations/servicenow/prerequisites",
                 "components/camunda-integrations/servicenow/setup-and-configuration",
+                "components/camunda-integrations/servicenow/camunda-spoke",
                 {
                   type: "category",
                   label: "Connectors",
@@ -1088,6 +1113,7 @@ module.exports = {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
+            "components/console/job-dashboard/job-dashboard",
             "components/console/manage-clusters/cluster-connectors",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
@@ -1425,7 +1451,7 @@ module.exports = {
           label: "8.9",
           link: {
             type: "doc",
-            id: "reference/announcements-release-notes/890/890-announcements",
+            id: "reference/announcements-release-notes/890/whats-new-in-89",
           },
           items: [
             "reference/announcements-release-notes/890/whats-new-in-89",
@@ -1517,6 +1543,9 @@ module.exports = {
                 id: "self-managed/quickstart/developer-quickstart/c8run",
               },
               items: [
+                "self-managed/quickstart/developer-quickstart/c8run/install-start",
+                "self-managed/quickstart/developer-quickstart/c8run/configuration",
+                "self-managed/quickstart/developer-quickstart/c8run/secondary-storage",
                 "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
               ],
             },
@@ -2117,7 +2146,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
-                    "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices",
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter",
                   ],
@@ -2182,6 +2211,7 @@ module.exports = {
                     "self-managed/components/modeler/web-modeler/configuration/copilot",
                   ],
                 },
+                "self-managed/components/modeler/web-modeler/monitoring",
                 {
                   type: "category",
                   label: "Troubleshooting",

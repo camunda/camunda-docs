@@ -52,6 +52,12 @@ Camunda provides the following official clients to simplify API usage and speed 
 In addition to the core Camunda-maintained clients, there are a number of [community-maintained component clients](/apis-tools/community-clients/index.md).
 :::
 
+## Client and API compatibility
+
+Camunda clients and SDKs are **forward-compatible** with the Orchestration Cluster, meaning you can upgrade the cluster first and clients after. The Orchestration Cluster REST API is backward-compatible, ensuring no breaking changes to existing endpoints across versions.
+
+<p class="link-arrow">[Client and API compatibility guarantees](/reference/public-api.md#client-and-api-compatibility)</p>
+
 ## Testing
 
 Use Camunda Process Test to test your process definitions and automations with a dedicated testing framework.

@@ -11,8 +11,6 @@ mdx:
 type AdvancedBatchOperationTypeFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:1021](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1021)
-
 Advanced filter
 
 Advanced BatchOperationTypeEnum filter.
@@ -22,10 +20,8 @@ Advanced BatchOperationTypeEnum filter.
 ### $eq?
 
 ```ts
-optional $eq: BatchOperationTypeEnum;
+optional $eq?: BatchOperationTypeEnum;
 ```
-
-Defined in: [gen/types.gen.ts:1025](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1025)
 
 Checks for equality with the provided value.
 
@@ -34,10 +30,8 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:1033](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1033)
 
 Checks if the current property exists.
 
@@ -46,10 +40,8 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: BatchOperationTypeEnum[];
+optional $in?: BatchOperationTypeEnum[];
 ```
-
-Defined in: [gen/types.gen.ts:1037](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1037)
 
 Checks if the property matches any of the provided values.
 
@@ -58,19 +50,15 @@ Checks if the property matches any of the provided values.
 ### $like?
 
 ```ts
-optional $like: LikeFilter;
+optional $like?: LikeFilter;
 ```
-
-Defined in: [gen/types.gen.ts:1038](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1038)
 
 ---
 
 ### $neq?
 
 ```ts
-optional $neq: BatchOperationTypeEnum;
+optional $neq?: BatchOperationTypeEnum;
 ```
-
-Defined in: [gen/types.gen.ts:1029](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L1029)
 
 Checks for inequality with the provided value.
