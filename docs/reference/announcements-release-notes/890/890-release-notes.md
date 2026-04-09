@@ -101,6 +101,8 @@ You can now create a process instance with a Business ID.
 
 <!-- https://github.com/camunda/product-hub/issues/3128 -->
 
+Camunda 8 Run now ships with H2 as its bundled secondary storage. Elasticsearch is no longer bundled.
+
 You can now configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2 (for example, PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
 
 This allows you to set up your local environment to match your production deployment, enabling deeper testing, faster debugging, and easier team onboarding.
@@ -533,6 +535,8 @@ In addition, the **Tools** panel in the element template is replaced by dedicate
 
 <!-- https://github.com/camunda/product-hub/issues/3128 -->
 
+Camunda 8 Run now ships with H2 as its bundled secondary storage. Elasticsearch is no longer bundled.
+
 You can now configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2.
 
 This allows you to set up your local environment to match your production deployments, enabling deeper testing, faster debugging, and easier team onboarding.
@@ -543,7 +547,7 @@ This allows you to set up your local environment to match your production deploy
 
 Camunda 8 Run is now easier to use with improved setup and configuration.
 
-The CLI includes a helpful usage page, clearer error messages, especially for Elasticsearch startup, and prominently displays connection properties and credential information.
+The CLI includes a helpful usage page, clearer error messages, especially for secondary storage configuration, and prominently displays connection properties and credential information.
 
 A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
 
@@ -758,7 +762,7 @@ The OpenAI compatible model configuration now allows configuration of query para
 
 Camunda 8 Run is now easier to use with improved setup and configuration.
 
-The CLI includes a helpful usage page, clearer error messages, especially for Elasticsearch startup, and prominently displays connection properties and credential information.
+The CLI includes a helpful usage page, clearer error messages, especially for secondary storage configuration, and prominently displays connection properties and credential information.
 
 A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
 
@@ -768,7 +772,7 @@ A revamped Java detection guided setup, log cleanup options, and better defaults
 
 <!-- https://github.com/camunda/product-hub/issues/2832, https://github.com/camunda/product-hub/issues/2656 -->
 
-Camunda 8 Run now includes H2 as the default secondary data store, providing:
+Camunda 8 Run now includes H2 as the default and only bundled secondary data store. Elasticsearch is no longer bundled. This provides:
 
 - A lighter, simpler local development experience.
 - Lower memory usage.
@@ -777,7 +781,7 @@ Camunda 8 Run now includes H2 as the default secondary data store, providing:
 New documentation shows you how to:
 
 - Install Camunda 8 Run with H2 as the default secondary storage.
-- Seamlessly switch from H2 to Elasticsearch or OpenSearch when required.
+- Configure an external Elasticsearch or OpenSearch instance when you need Elasticsearch-based secondary storage features.
 
 ### Cluster Metrics endpoint
 
