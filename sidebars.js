@@ -1965,8 +1965,9 @@ module.exports = {
                   },
                   items: [
                     "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
-                    "self-managed/concepts/databases/relational-db/rdbms-support-policy",
                     "self-managed/concepts/databases/relational-db/database-configuration",
+                    "self-managed/concepts/databases/relational-db/rdbms-support-policy",
+                    "self-managed/concepts/secondary-storage/rdbms-benchmark-results",
                   ],
                 },
               ],
