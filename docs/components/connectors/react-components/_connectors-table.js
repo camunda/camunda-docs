@@ -228,14 +228,14 @@ const SearchableTable = () => {
       description:
         "Connect your BPMN service to an email POP3, IMAP or SMTP server.",
       type: "Outbound",
-      link: "../email/?email=outbound",
+      link: "../out-of-the-box-connectors/email-outbound",
       image: EmailImg,
     },
     {
       name: "Email",
       description: "Connect your BPMN service to an email IMAP server.",
       type: "Inbound",
-      link: "../email/?email=inbound",
+      link: "../out-of-the-box-connectors/email-inbound",
       image: EmailImg,
     },
     {
