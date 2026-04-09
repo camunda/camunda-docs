@@ -24,8 +24,9 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
 
 - By using **external cloud file bucket storages**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storages are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
-  - [**AWS S3**](https://aws.amazon.com/s3/).
-  - Configuring these buckets is supported in [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), and [Helm](/self-managed/deployment/helm/install/quick-install.md).
+  - [**AWS S3**](https://aws.amazon.com/s3/)
+  - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
+  - Configuring these storages is supported in [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), and [Helm](/self-managed/deployment/helm/install/quick-install.md).
 - **Local storage** can be configured for a cluster to store documents in a local folder.
   - It can be used only for local development with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
   - Local storage is not suitable for production use, as pods and file paths are not shared across components. This prevents components like Tasklist and Zeebe from accessing the same data. Files are stored locally, and their retention must be managed manually.
