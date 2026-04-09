@@ -152,7 +152,7 @@ For the full setup including dependencies and project structure, see [Getting st
 
 ## Step 4: Handle non-deterministic flow paths
 
-The test scenario is "Send Ervin a joke." The agent calls `ListUsers`, `LoadUserByID`, and `Jokes_API` in any order, presents an email for review via `AskHumanToSendEmail`, and collects feedback through `User_Feedback`.
+The test uses the prompt `"Send Ervin a joke"` (the same prompt from [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md)). The agent calls `ListUsers`, `LoadUserByID`, and `Jokes_API` in any order, presents an email for review via `AskHumanToSendEmail`, and collects feedback through `User_Feedback`.
 
 With [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior), you can register background reactions that monitor the process state and execute actions as conditions are met, without blocking the test thread. Register behaviors before starting the process; they then react independently as the process progresses.
 
