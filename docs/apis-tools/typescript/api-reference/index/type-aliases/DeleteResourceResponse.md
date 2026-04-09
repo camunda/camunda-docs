@@ -11,8 +11,6 @@ mdx:
 type DeleteResourceResponse = object;
 ```
 
-Defined in: [gen/types.gen.ts:2253](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2253)
-
 ## Properties
 
 ### batchOperation
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:2253](https://github.com/camunda/orchestration-clu
 ```ts
 batchOperation: BatchOperationCreatedResult | null;
 ```
-
-Defined in: [gen/types.gen.ts:2266](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2266)
 
 The batch operation created for asynchronously deleting the historic data.
 
@@ -36,7 +32,5 @@ this field will be `null`.
 ```ts
 resourceKey: ResourceKey;
 ```
-
-Defined in: [gen/types.gen.ts:2257](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L2257)
 
 The system-assigned key for this resource, requested to be deleted.

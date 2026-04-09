@@ -11,8 +11,6 @@ mdx:
 type SearchGroupsForRoleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14187](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14187)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:14187](https://github.com/camunda/orchestration-cl
 optional body?: RoleGroupSearchQueryRequest;
 ```
 
-Defined in: [gen/types.gen.ts:14188](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14188)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:14188](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:14189](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14189)
 
 #### roleId
 
@@ -49,8 +43,6 @@ The role ID.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14195](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14195)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:14195](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/roles/{roleId}/groups/search";
 ```
-
-Defined in: [gen/types.gen.ts:14196](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14196)

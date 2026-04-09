@@ -11,8 +11,6 @@ mdx:
 type getUsageMetricsInput = object;
 ```
 
-Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)
-
 ## Properties
 
 ### endTime
@@ -20,8 +18,6 @@ Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-
 ```ts
 endTime: getUsageMetricsQueryParam_endTime;
 ```
-
-Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-
 startTime: getUsageMetricsQueryParam_startTime;
 ```
 
-Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)
-
 ---
 
 ### tenantId?
@@ -41,8 +35,6 @@ Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-
 optional tenantId?: getUsageMetricsQueryParam_tenantId;
 ```
 
-Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)
-
 ---
 
 ### withTenants?
@@ -50,5 +42,3 @@ Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-
 ```ts
 optional withTenants?: getUsageMetricsQueryParam_withTenants;
 ```
-
-Defined in: [gen/CamundaClient.ts:566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L566)
