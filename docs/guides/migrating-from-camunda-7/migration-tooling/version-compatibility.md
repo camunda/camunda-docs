@@ -13,6 +13,6 @@ Camunda only recommends and supports these combinations:
 | :------------------------ | :---------------- | :---------------- | :----------------------- |
 | `0.1.x` \*                | `7.24.x`          | `8.8.x`           | 🔴 **End of Life (EOL)** |
 | `0.2.x`                   | `7.24.x`          | `8.8.x`           | ✅ **Supported**         |
-| `0.3.x`                   | `7.24.6+`         | `8.9.x`           | ✅ **Supported**         |
+| `0.3.x`                   | `7.24.x`         | `8.9.x`           | ✅ **Supported**         |
 
 \* Data Migrator only. Code Conversion and Diagram Converter were added to the Migration Tooling in version 0.2.0.
