@@ -16,8 +16,8 @@ This is a topology change in SaaS only and does not affect Self-Managed deployme
 
 What's new:
 
-- [Unified API domain for Orchestration Clusters](#unified-api-domain-for-orchestration-clusters). Legacy hostnames are deprecated and will remain accessible until 8.10.
-- [New client credentials use new API URLs.](#client-credentials-and-legacy-hostnames)
+- [Unified API domain for Orchestration Clusters](#unified-api-domain-for-orchestration-clusters). Legacy hostnames are deprecated but will remain available throughout 8.9 and are scheduled for removal in 8.10.
+- [Client credentials for new clusters use unified API URLs.](#client-credentials-and-legacy-hostnames)
 - [Cluster Metrics endpoint: `service` labels have changed on Orchestration Cluster metrics.](#service-label-changes)
 
 What didn't change:
@@ -69,7 +69,7 @@ Monitoring dashboards, alerting rules, or queries that filter or group by the `s
 
 ### Action required
 
-After your cluster is upgraded to 8.9, review your dashboards and alerting rules and verify the `service` label values metrics are returning. Update any Prometheus queries or alert definitions that no longer match.
+After your cluster is upgraded to 8.9, review your dashboards and alerting rules and verify which `service` label values your metrics return. Update any Prometheus queries or alert definitions that no longer match.
 
 ## Upgrade behavior and expected downtime
 
