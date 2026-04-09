@@ -2,10 +2,10 @@
 id: amazon-bedrock-knowledgebase
 sidebar_label: Amazon Bedrock Knowledge Base
 title: Amazon Bedrock Knowledge Base connector
-description: Retrieve relevant documents from an AWS Bedrock Knowledge Base from your BPMN process.
+description: Perform semantic search over documents indexed in an Amazon Bedrock Knowledge Base from your BPMN process.
 ---
 
-The **Amazon Bedrock Knowledge Base connector** is an outbound connector that allows you to perform semantic search over documents indexed in an [Amazon Bedrock Knowledge Base](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html) from your BPMN process.
+With the **Amazon Bedrock Knowledge Base connector** outbound connector, you can perform semantic search over documents indexed in an [Amazon Bedrock Knowledge Base](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html) from your BPMN process.
 
 ## Prerequisites
 
@@ -29,25 +29,31 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Authentication
 
-Select an authentication type from the **Authentication** dropdown.
+To authenticate, choose one of the methods from the **Authentication** dropdown. The supported options are:
 
-- **Credentials** (SaaS/Self-Managed): Select this option if you have a valid pair of access and secret keys provided by your AWS account administrator. The access key must have permissions to the Bedrock Knowledge Base `Retrieve` action.
-
-- **Default Credentials Chain** (Hybrid/Self-Managed only): Select this option if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+- Use **Credentials** if you have a valid pair of access and secret keys provided by your AWS account administrator. The access key must have permissions to the Bedrock Knowledge Base `Retrieve` action.
 
 :::note
-The **Default Credentials Chain** option is applicable only for Self-Managed or hybrid distributions.
+This option is applicable for both SaaS and Self-Managed users.
 :::
+
+- Use **Default Credentials Chain** if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+
+:::note
+This option is applicable only for Self-Managed or hybrid distributions.
+:::
+
+For more information on authentication and security in Amazon Bedrock, see [Amazon Bedrock security and privacy](https://aws.amazon.com/bedrock/security-compliance/).
 
 ## Configuration
 
-In the **Region** field, enter the AWS region where your knowledge base is deployed (for example, `us-east-1`).
+In the **Region** field, enter the AWS region where your knowledge base is deployed. For example, `us-east-1`.
 
 In the **Knowledge Base ID** field, enter the ID of the Bedrock Knowledge Base you want to query. You can find this ID in the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/).
 
 ## Operation
 
-The **Amazon Bedrock Knowledge Base connector** supports the following operation:
+The **Amazon Bedrock Knowledge Base connector** supports the following operation.
 
 ### Retrieve from Knowledge Base
 
@@ -58,7 +64,7 @@ Perform a semantic search over the documents indexed in your knowledge base. The
 | Parameter             | Required | Description                                                                                                                   |
 | :-------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
 | **Query**             | Yes      | A natural language query to search the knowledge base. Supports [FEEL](/components/modeler/feel/what-is-feel.md) expressions. |
-| **Number of results** | No       | The maximum number of results to return (1–100). Defaults to five.                                                            |
+| **Number of results** | No       | The maximum number of results to return (1-100). Defaults to five.                                                            |
 
 #### Response
 
@@ -102,11 +108,11 @@ For best results, use specific, descriptive queries rather than short keywords:
 | :--------------------------------------------------------------- | :------ | :------------------------------------------------ |
 | "What does the auto insurance policy cover for stolen vehicles?" | Good    | Specific topic with clear intent.                 |
 | "What are the exclusions for water damage in home insurance?"    | Good    | Targets a specific section and policy type.       |
-| "coverage"                                                       | Poor    | Too broad — returns many loosely related results. |
-| "Tell me everything about insurance"                             | Poor    | Too vague — no specific topic to match against.   |
+| "Coverage"                                                       | Poor    | Too broad. It may return loosely related results. |
+| "Tell me everything about insurance"                             | Poor    | Too vague. No specific topic to match against.    |
 
 :::tip
-When using the connector as a tool in an [AI Agent subprocess](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), the agent composes the query automatically based on the user's request. Use the `fromAi()` function to let the agent generate targeted queries.
+When using the connector as a tool in an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), the agent composes the query automatically based on the user's request. Use the `fromAi()` function to let the agent generate targeted queries.
 :::
 
 #### Example response
