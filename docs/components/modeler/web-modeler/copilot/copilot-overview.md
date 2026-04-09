@@ -1,8 +1,8 @@
 ---
 id: copilot-overview
 title: Camunda Copilot
-sidebar_label: Copilot overview
-description: "Camunda Copilot is an AI assistant integrated into Web Modeler that helps with BPMN process modeling, FEEL expressions, and Form building."
+sidebar_label: Copilot Copilot
+description: "Create and refine BPMN processes, FEEL expressions and Camunda Forms faster using natural-language prompts with Camunda Copilot, an AI assistant in Web Modeler."
 ---
 
 import CopilotBpmnGeneration from './img/copilot-bpmn-generation.png';
@@ -11,15 +11,15 @@ import CopilotConversationHistory from './img/copilot-conversation-history.png';
 <span class="badge badge--alpha">Alpha</span>
 <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
-Camunda Copilot is an AI assistant built into Web Modeler that helps you design, build, and refine your processes faster. Whether you're starting from scratch or improving an existing workflow, Copilot can help you get there with natural language prompts.
+Create and refine BPMN processes, FEEL expressions and Camunda Forms faster using natural-language prompts with Camunda Copilot, an AI assistant in Web Modeler.
 
-:::note
+:::important
 Camunda Copilot is an [**alpha feature**](/components/early-access/alpha/alpha-features.md) that must be enabled by an organization admin before use.
 :::
 
-## What can Copilot help you with?
+## What can Copilot help you with
 
-Camunda Copilot assists with three core areas of process automation:
+With Camunda Copilot, you can get assistance when designing BPMN processes, FEEL expressions, and Camunda Forms.
 
 ### Design and build BPMN processes
 
@@ -53,14 +53,14 @@ Create user-facing forms that integrate with your processes:
 1. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
 2. Open an existing BPMN diagram or form, or create a new one via **New project > Create new > BPMN diagram** or **Form**.
 3. Click the Camunda Copilot icon in the top-right corner of the editor header to open the Copilot panel.
-4. Type a prompt describing what you need and press Enter.
+4. Enter a prompt based on your needs. See [example prompts](#example-prompts).
 5. Review the response. For changes to your diagram or form, Copilot applies them automatically and you can undo if needed.
 
 :::tip
 For best results, use clear and specific prompts. Break complex requests into smaller steps rather than asking for everything at once.
 :::
 
-## Example prompts
+### Example prompts
 
 Here are some prompts to help you get started:
 

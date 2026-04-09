@@ -1,13 +1,11 @@
 ---
 id: built-in-tools
-title: Built-in tools
+title: Camunda Copilot’s built-in tools
 sidebar_label: Built-in tools
-description: "Overview of the built-in tool capabilities available to Camunda Copilot."
+description: "Use Camunda Copilot’s built-in specialized tools to interact with your BPMN diagrams, forms, and other artifacts."
 ---
 
-Camunda Copilot uses specialized tools to interact with your BPMN diagrams, forms, and other artifacts. This page provides a high-level overview of what Copilot can do through its built-in tools.
-
-For a general introduction, see [Camunda Copilot overview](copilot-overview.md).
+Use Camunda Copilot’s specialized tools to interact with your BPMN diagrams, forms, and other artifacts.
 
 ## Access control
 
@@ -47,7 +45,7 @@ Camunda Copilot can connect to external services:
 
 - **Documentation search**: Search Camunda documentation and knowledge base for product, modeling, and best-practice guidance.
 
-:::note
+:::important
 
 - Documentation search via Kapa AI is only available in SaaS deployments.
 - Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
