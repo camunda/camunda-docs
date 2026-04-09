@@ -17,12 +17,12 @@
     {
       "file": "deployment.py",
       "region": "DeployResources",
-      "label": "Deploy resources from files"
+      "label": "From files"
     },
     {
       "file": "deployment.py",
       "region": "DeployResourcesWithTenant",
-      "label": "Deploy resources with tenant ID"
+      "label": "With tenant ID"
     }
   ],
   "delete_resource": [
@@ -36,17 +36,17 @@
     {
       "file": "process_instance.py",
       "region": "CreateProcessInstanceByKey",
-      "label": "Create by process definition key"
+      "label": "By key"
     },
     {
       "file": "process_instance.py",
       "region": "CreateProcessInstanceByKeyFromStorage",
-      "label": "Create from a stored key"
+      "label": "By stored key"
     },
     {
       "file": "process_instance.py",
       "region": "CreateProcessInstanceById",
-      "label": "Create by process definition ID"
+      "label": "By ID"
     }
   ],
   "cancel_process_instance": [
@@ -67,7 +67,8 @@
     {
       "file": "job.py",
       "region": "ActivateJobs",
-      "label": "Activate and process jobs"
+      "label": "Activate and process jobs",
+      "imports": "from camunda_orchestration_sdk import CamundaAsyncClient"
     }
   ],
   "complete_job": [
@@ -88,12 +89,12 @@
     {
       "file": "decision.py",
       "region": "EvaluateDecisionByKey",
-      "label": "Evaluate by decision definition key"
+      "label": "By key"
     },
     {
       "file": "decision.py",
       "region": "EvaluateDecisionById",
-      "label": "Evaluate by decision definition ID"
+      "label": "By ID"
     }
   ],
   "get_decision_definition": [
