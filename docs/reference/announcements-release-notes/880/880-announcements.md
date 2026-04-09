@@ -68,6 +68,15 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 ## Key changes
 
+### 8.8.x patch releases
+
+The following key changes were also released as part of an 8.8.x patch release.
+
+| Patch release                                                  | Type            | Key change                                                                                                                                            |
+| :------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+
 ### APIs & tools
 
 <div className="release-announcement-row">
@@ -103,6 +112,73 @@ io.camunda.zeebe.client.api.command.MalformedResponseException:
 **Required action**
 
 You must update your clients to at least 8.7.16, as this contains the fix for this issue. Alternatively, you can opt out of using `preferRestOverGrpc=true` before upgrading your cluster.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Webhook alerts JSON format
+
+In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/console/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
+
+In 8.8.9, the `processVersion` field reverts to returning an integer value representing the process version only. A new `processVersionTag` field is introduced to include the process version tag when available.
+
+**Example JSON format change**
+
+Before 8.8.9:
+
+```json
+{
+  "processVersion": "v2.1.0" // String - could be tag or number
+}
+```
+
+After 8.8.9:
+
+```json
+{
+  "processVersion": 3, // Integer - always the version number
+  "processVersionTag": "v2.1.0" // String - the version tag (if exists)
+}
+```
+
+**Action required**
+
+Adapt any webhook-dependent integrations you have created for 8.8.x to handle the updated JSON structure:
+
+1. Update your integration to read `processVersion` as an integer value representing the process version number.
+2. If you need the process version tag, use the new `processVersionTag` field that contains the string value of the version tag (if one exists).
+3. Ensure your integration handles cases where `processVersionTag` might be null or absent (for processes without version tags).
+4. Test your webhook consumers to verify they correctly parse both the integer `processVersion` and string `processVersionTag` fields.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Bug fix: `FormResult.schema` type corrected from object to string
+
+The `schema` property in the `FormResult` response was incorrectly specified as `type: object` in the OpenAPI contract, but the server has always returned it as a JSON `string`. This specification bug is now fixed.
+
+This is a bug fix that aligns the OpenAPI contract with actual server behavior, improving correctness for typed client integrations. Applications already handling the runtime `string` value are unaffected.
+
+The Camunda Java client is also affected: `io.camunda.client.api.search.response.Form::getSchema()` now returns `String` instead of `Object`. If your Java code casts or processes the return value as `Object`, update it to use `String`.
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Java client users: update calls to `Form::getSchema()` to handle the `String` return type instead of `Object`.
+- Generated-client users: regenerate your client. If your generated code relied on the incorrect `object` typing, update it to handle `string`.
+- Handwritten integrations: no change needed if you were already handling the actual `string` response.
 
 </div>
 </div>
@@ -378,11 +454,50 @@ The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compat
 - The new Camunda Spring Boot Starter provides the `CamundaClient` when requested.
 - The `CamundaClient` uses REST as the default communication protocol, while the deprecated `ZeebeClient` still prefers gRPC.
 - If you want to continue using gRPC by default with the `CamundaClient`, you must explicitly set `camunda.client.prefer-rest-over-grpc: false` in your Spring configuration.
+- The new `CredentialsProvider` bean creation fails if there is a misconfiguration instead of falling back to a non-operational credentials provider
 
 :::
 :::info
 To learn more about migrating to the Camunda Java client, see the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md).
 :::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test
+
+With the 8.8.9 patch release, dedicated Spring Boot 4.0 based modules are released for the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md#spring-boot-40-support) and [Camunda Process Test Spring](../../../apis-tools/testing/getting-started.md?client=spring-sdk#spring-boot-40-support) as drop-in replacements for the default Spring Boot 3.5.x-based modules.
+
+You must use these if you want to migrate your application to Spring Boot 4.0.
+
+:::note
+With Camunda 8.9, the default Spring Boot version for the Camunda Spring Boot Starter and Camunda Process Test Spring changes to 4.0.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### The Node.js SDK is now the TypeScript SDK
+
+With the Camunda 8.8 release, the Node.js SDK now becomes the TypeScript SDK.
+
+- The **TypeScript SDK** provides clients for all Camunda 8 APIs. Use it in Node.js environments.
+
+- The **Orchestration Cluster API TypeScript client** is a lightweight client for the Camunda 8.8+ Orchestration Cluster REST API. Use it in Node.js or in the browser.
+
+To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md) documentation.
 
 </div>
 </div>
@@ -489,6 +604,28 @@ These changes do not introduce new fields or richer context, but instead ensure 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch and OpenSearch: Index prefixes must differ
+
+When upgrading to Camunda 8.8 or setting up 8.8 for the first time, if you run both the Elasticsearch/OpenSearch Exporter and Camunda Exporter on the same Elasticsearch/OpenSearch cluster, their index prefixes must not match, nor be contained within the other.
+
+Do not reuse the same prefix for:
+
+- Elasticsearch/OpenSearch Exporter indices (legacy exporter): `zeebe.broker.exporters.{elasticsearch|opensearch}.args.index.prefix`
+- Orchestration Cluster indices: `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+
+If these prefixes are identical, or if one prefix includes the other (for example, `custom` and `custom-zeebe`), ILM/ISM policies and wildcard patterns such as `custom*` can target more indices than intended, which may lead to unexpected data loss.
+
+For configuration examples and details, see [Helm chart Elasticsearch/OpenSearch indices prefix](../../../self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -524,7 +661,7 @@ To revert to 0 replicas, set:
 - Environment variable: `CAMUNDA_DATABASE_INDEX_NUMBER_OF_REPLICAS=0`
 
 :::info
-To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self-managed/components/components-upgrade/870-to-880.md#elasticsearch).
+To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/versioned_docs/version-8.8/self-managed/upgrade/components/870-to-880.md#elasticsearch).
 :::
 
 </div>
@@ -538,7 +675,7 @@ To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self
 
 #### Camunda Exporter
 
-Previously, Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
+Previously, Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by Elasticsearch or OpenSearch (secondary storage) exporters — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
 ![87-orchestration-cluster-state](../../img/87-orchestration-cluster-state.png)
 
@@ -549,7 +686,7 @@ With the Camunda 8.8 release, a new Camunda Exporter is introduced:
 
 ![brown-field-without-optimize](../../img/brown-field-orchestration-cluster-without-optimize.png)
 
-The new Camunda Exporter helps Camunda achieve a more streamlined architecture, better performance, and improved stability (especially concerning ES/OS).
+The new Camunda Exporter helps Camunda achieve a more streamlined architecture, better performance, and improved stability (especially concerning Elasticsearch/OpenSearch secondary storage).
 
 :::info
 To learn more, see the blog post [One Exporter to Rule Them All: Exploring Camunda Exporter](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
@@ -587,6 +724,25 @@ Only the combined Ingress configuration is officially supported. See the [Ingres
 
 :::caution
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Helm chart: Custom users and clients for Management Identity
+
+You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
+
+See [adding users and clients](/self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients.md) for details on configuring custom users and clients on Management Identity during initial Helm install.
+
+:::caution
+Additional upgrade considerations are required for deployments that use custom environment variables, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, remove the environment variables that reference users or clients and use the configuration method described in the guide linked above.
 :::
 
 </div>
@@ -694,7 +850,7 @@ With the Camunda 8.8 release, the default ID token claim that Web Modeler uses t
 With the Camunda 8.8 release, the Camunda Helm charts are updated to use the new Bitnami Docker repository.
 
 :::info
-See [Bitnami Docker repository migration](/self-managed/deployment/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/upgrade/helm/index.md#bitnami-docker-repository-migration) for migration details.
 :::
 
 </div>
@@ -733,7 +889,22 @@ Full setup instructions are available in the [installation guide](/self-managed/
   
 #### Helm chart: Alternative infrastructure methods
 
-For production environments, use managed or external services first. If not available, prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use. See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md).
+For production environments, use managed or external services first. If not available, prefer [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Bitnami subcharts bundled
+
+The Bitnami subcharts (PostgreSQL, Keycloak, Elasticsearch, and Common) are bundled directly within the Camunda Helm chart instead of being fetched from external Bitnami repositories at install time.
+
+This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts. No action is required — existing deployments will continue to work as before when applying the next patch release.
 
 </div>
 </div>
@@ -798,7 +969,7 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 
 With the 8.8 release, Camunda announces the removal of tenant-providing interceptors.
 
-It is superseded by built-in [tenant management](/components/identity/tenant.md).
+It is superseded by built-in [tenant management](/versioned_docs/version-8.8/components/identity/tenant.md).
 
 </div>
 </div>
@@ -813,7 +984,7 @@ It is superseded by built-in [tenant management](/components/identity/tenant.md)
 
 With the Camunda 8.8 release, user storage in Elasticsearch/OpenSearch for Operate or Tasklist is no longer supported.
 
-You must transition to using [Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
+You must transition to using [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
 
 </div>
 </div>
@@ -828,7 +999,7 @@ You must transition to using [Basic Authentication](/self-managed/concepts/authe
 
 With the Camunda 8.8 release, LDAP authentication for Operate or Tasklist is no longer supported.
 
-You must transition to use [OIDC or Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
+You must transition to use [OIDC or Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
 
 </div>
 </div>
@@ -863,7 +1034,7 @@ For future use, refer to the [new AWS Marketplace listing](https://aws.amazon.co
 
 With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are no longer supported.
 
-For more information on how to migrate, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#cluster-configuration).
+For more information on how to migrate, see the [upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/components/870-to-880.md#cluster-configuration).
 
 </div>
 </div>
@@ -879,7 +1050,7 @@ For more information on how to migrate, see the [upgrade guide](/self-managed/co
 The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) now depend on the version of the cluster.
 For version 8.8 and above, [new configuration options](/self-managed/components/modeler/web-modeler/configuration/configuration.md#additional-configuration-for-cluster-versions--88) are required.
 
-For more information on how to modify your existing configuration, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#changed-configuration-options).
+For more information on how to modify your existing configuration, see the [upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/components/870-to-880.md#changed-configuration-options).
 
 </div>
 </div>

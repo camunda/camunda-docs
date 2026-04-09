@@ -14,6 +14,10 @@ A message is not sent to a process instance directly. Instead, the message corre
 
 A subscription is opened when a process instance awaits a message; for example, when entering a message catch event. The message name is defined either statically in the process (e.g. `Money collected`) or dynamically as an expression. The correlation key is defined dynamically as an expression (for example, `= orderId`). The expressions are evaluated on activating the message catch event. The results of the evaluations are used as message name and as correlation key of the subscription (e.g. `"order-123"`).
 
+:::note
+Message names and correlation keys are subject to backend-dependent length limits. They support up to **32,768 characters** with Elasticsearch/OpenSearch-backed secondary storage and up to **256 characters** with RDBMS-backed secondary storage. Length is enforced using Java string length semantics, so the effective visible-character limit can be lower for characters represented as surrogate pairs in Java.
+:::
+
 When a message is published and the message name and correlation key match to a subscription, the message is correlated to the corresponding process instance. If no proper subscription is opened, the message is discarded.
 
 A subscription is closed when the corresponding element (e.g. the message catch event), or its scope is left. After a subscription is opened, it is not updated (for example, when the referenced process variable is changed.)
@@ -160,6 +164,8 @@ When the instance ends and messages with the same correlation key are not correl
 :::note
 You may also use TTL to wait for messages that may arrive earlier when combining [start events and intermediate catch events](/components/modeler/bpmn/events.md).
 :::
+
+Learn more in our [message aggregation guide](./message-aggregation.md).
 
 ### Single instance
 

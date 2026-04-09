@@ -135,16 +135,16 @@ DOCUMENT_DEFAULT_STORE_ID=inmemory
 
 <TabItem value='local'>
 
-| Store variable               | Required | Description                                                                                                                                 |
-| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_LOCAL_CLASS` | Yes      | The class for instantiating the local store. This must always be `io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider` |
-| `DOCUMENT_STORE_LOCAL_PATH`  | Yes      | The path to the directory which will host the uploaded files.                                                                               |
+| Store variable               | Required | Description                                                                                                                                                                |
+| ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_LOCAL_CLASS` | Yes      | The class for instantiating the local store. This must always be `io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider`                                |
+| `DOCUMENT_STORE_LOCAL_PATH`  | Yes      | The path to the directory which will host the uploaded files. **Use `/usr/local/camunda/documents` as it is pre-created with the right permissions for the process user.** |
 
 **Example:**
 
 ```
 DOCUMENT_STORE_LOCAL_CLASS=io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider
-DOCUMENT_STORE_LOCAL_PATH=/usr/local/camunda
+DOCUMENT_STORE_LOCAL_PATH=/usr/local/camunda/documents
 DOCUMENT_DEFAULT_STORE_ID=local
 ```
 

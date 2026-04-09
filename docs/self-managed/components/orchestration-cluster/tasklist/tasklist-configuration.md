@@ -24,9 +24,9 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md).
 
-## Elasticsearch or OpenSearch
+## Secondary storage
 
-Review the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md) and [secondary storage documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
+Review the [secondary storage documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage) and [secondary storage configuration](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md).
 
 ## Intra-cluster secure connection
 
@@ -51,51 +51,14 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md).
 
-## Clustering
-
-### Distributed user sessions
-
-If more than one Camunda Tasklist instance is accessible by users for a failover scenario, for example, persistent sessions must be configured for all instances. This enables distributed sessions among all instances and users do not lose their session when being routed to another instance.
-
-| Name                                         | Description                                                | Default value |
-| :------------------------------------------- | :--------------------------------------------------------- | :------------ |
-| camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch. | false         |
-
-## Cross-site request forgery protection
-
-Cross-site request forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they are currently authenticated. To mitigate this risk, Camunda provides CSRF protection that can be enabled in the Tasklist web application.
-
-### Enabling CSRF protection
-
-CSRF protection is enabled by default on Camunda Self-Managed. To explicitly define this, set the configuration variable `camunda.tasklist.csrfPreventionEnabled` to `true`. This is the recommended setting for production environments to enhance security.
-
-```yaml
-camunda:
-  tasklist:
-    csrfPreventionEnabled: true
-```
-
-When CSRF protection is enabled, the Tasklist web application requires a valid `X-CSRF-Token` header to be present in all state-changing HTTP requests (POST, PUT, DELETE, etc.)
-
-### Disabling CSRF protection
-
-To disable CSRF protection, set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`. This setting is not recommended for production environments as it may expose the application to CSRF attacks.
-
-```yaml
-camunda:
-  tasklist:
-    csrfPreventionEnabled: false
-```
-
 ## Allow non-self assignment
 
-:::info
-The `allow-non-self-assignment` flag controls the behavior of the deprecated [Tasklist API](/apis-tools/tasklist-api-rest/specifications/assign-task.api.mdx).
-It has no implication on the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/tutorial.md). Please refer to [access control](/components/concepts/access-control/authorizations.md#available-resources) to manage what operations can be performed by a given user or application.
-:::
-
 :::danger
-This disables an intentional security mechanism and should only be used in development environments with no Identity installed.
+The `allow-non-self-assignment` flag controls the behavior of the deprecated [Tasklist API](/apis-tools/tasklist-api-rest/specifications/assign-task.api.mdx) used in Tasklist V1 only.
+
+It has no effect when Tasklist runs in V2 mode and does not apply to the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/tutorial.md). In V2, use [authorization-based access control](/components/concepts/access-control/authorizations.md#available-resources) to manage which users and applications can assign or update user tasks. For an overview of Tasklist V1 versus V2 behavior, see [Tasklist API versions](/components/tasklist/api-versions.md).
+
+Enabling this flag disables an intentional security mechanism and should only be done in development environments that still rely on Tasklist V1, typically with no Identity installed. Do not enable it in production or when using Tasklist V2.
 :::
 
 To allow users to assign other users to tasks, set the configuration property `camunda.tasklist.feature-flag.allow-non-self-assignment` to `true`.
@@ -109,7 +72,7 @@ camunda:
 
 ## Tasklist UI mode configuration
 
-Starting with Camunda 8.8, Tasklist can operate in two modes: V1 (legacy) and V2 (recommended). The V2 mode uses the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and is enabled by default.
+Starting with Camunda 8.8, Tasklist can operate in two modes: V1 (legacy) and V2 (recommended). The V2 mode uses the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and is enabled by default.
 
 :::warning Deprecation notice
 Tasklist V1 mode is deprecated and will be removed in Camunda 8.10. We recommend migrating to V2 mode for all new projects and planning migration for existing applications.
@@ -133,22 +96,21 @@ camunda:
     V2ModeEnabled: false
 ```
 
-| Name                           | Description                                                                                                                     | Default value |
-| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| camunda.tasklist.V2ModeEnabled | Enables Tasklist V2 mode using the Orchestration Cluster API. Set to `false` to use the legacy V1 mode during migration period. | true          |
+| Name                           | Description                                                                                                                          | Default value |
+| :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| camunda.tasklist.V2ModeEnabled | Enables Tasklist V2 mode using the Orchestration Cluster REST API. Set to `false` to use the legacy V1 mode during migration period. | true          |
 
 ### When to use V1 mode
 
-Use V1 mode only during the migration period if your application relies on features that are not available in V2:
+Use V1 mode only during the migration period if your application relies on legacy features that are not
+available in V2:
 
-- User task access restrictions
+- User task access restrictions (Tasklist V1-only feature; in V2, use authorization-based access control and task-level permissions instead)
+- Job worker-based user tasks
 - Draft variables
 - Public start forms
-- Advanced process filtering by name
-
-:::tip
-For a complete comparison of features and migration guidance, see [Tasklist API versions](/components/tasklist/api-versions.md).
-:::
+- Advanced process filtering (beyond searching by process definition ID)
+- Task context description
 
 ## Backups
 

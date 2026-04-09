@@ -34,7 +34,7 @@ You can access the **Billing** page by selecting **Organization Management** in 
 
 Some Enterprise agreements require the following indices from Elasticsearch for at least 18 months:
 
-For Operate and Tasklist, the metrics are stored in the `operate-metric-1.0.0_` and `tasklist-metric-1.0.0_` indices respectively.
+For Operate and Tasklist, the metrics are stored in the `operate-metric-8.3.0_` and `tasklist-metric-8.3.0_` indices respectively.
 :::
 
 On Camunda 8 Self-Managed, you can get the usage metrics in Operate and Tasklist.

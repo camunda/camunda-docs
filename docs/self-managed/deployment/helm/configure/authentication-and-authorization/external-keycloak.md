@@ -5,6 +5,10 @@ title: Set up the Helm chart with an external Keycloak instance
 description: Learn how to connect the Camunda Helm chart to an external Keycloak instance.
 ---
 
+:::caution Admin access required
+The external Keycloak setup requires administrative access to the Keycloak server.
+:::
+
 The Camunda Helm chart can connect to an external Keycloak instance that acts as the identity management service for authentication and authorization.  
 With minimal configuration for administrative access, the Management Identity component can automatically configure the Keycloak realm and required entities on startup—simplifying setup and reducing the learning curve.
 
@@ -85,9 +89,11 @@ This secret includes the following keys:
 - `literal=webmodeler-postgresql-admin-password`: Password for the administrative account of the PostgreSQL instance used by Web Modeler (username `postgres`).
 - `webmodeler-postgresql-user-password` Password non-privileged user account of the PostgreSQL instance used by Web Modeler (username `web-modeler`).
 
+For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
+
 ### Prepare global configuration
 
-Start with the following global configuration, which provides defaults for all components:
+Start with the following global configuration, which provides shared defaults across the deployment:
 
 ```yaml
 global:
@@ -164,7 +170,7 @@ For additional Keycloak-specific variables you can define under `identity.env`, 
 
 ### Configure components using OIDC
 
-To configure individual components in your Camunda cluster, follow the steps in the [Configure components using OIDC section of the internal Keycloak setup guide](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md#configure-components-using-oidc).
+To configure Orchestration Cluster and management components with OIDC, follow the steps in the [Configure components using OIDC section of the internal Keycloak setup guide](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md#configure-components-using-oidc).
 
 ### Full configuration example
 
@@ -182,10 +188,6 @@ global:
       jwksUrl: <KEYCLOAK_URL>/realms/<realm>/protocol/openid-connect/certs
       identity:
         clientId: <identity_client_id>
-      console:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-console-client-token"
       optimize:
         secret:
           existingSecret: "camunda-credentials"
@@ -278,7 +280,7 @@ kubectl port-forward svc/camunda-connectors 8086:8080
 kubectl port-forward svc/camunda-optimize 8083:80
 
 # Web Modeler
-kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
+kubectl port-forward svc/camunda-web-modeler-restapi 8070:80
 kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 
 # Console

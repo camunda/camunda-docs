@@ -19,30 +19,28 @@ The Orchestration Cluster REST API lets you interact programmatically with proce
 
 This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience, while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/concepts/access-control/authorizations.md).
 
-**Key capabilities include**
+Key capabilities include:
 
-- **Full process lifecycle management** – Deploy, start, and monitor BPMN processes
-- **User task operations** – Assign, complete, and manage human tasks
-- **Variable management** – Read and update process variables
-- **Incident resolution** – Handle and resolve process incidents
-- **Advanced search and filtering** – Query process data with powerful search capabilities
+- Full process lifecycle management – Deploy, start, and monitor BPMN processes.
+- User task operations – Claim, complete, and manage human tasks.
+- Variable management – Read and update process variables.
+- Incident resolution – Handle and resolve process incidents.
+- Advanced search and filtering – Query process data with powerful search capabilities.
 
 This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints). You can rely on backward compatibility for production use.
 
 To learn more about the Orchestration Cluster, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
 
-Ready to get started? Follow the steps below to make your first API call.
-
 ## Getting started
 
-This section helps you get up and running in minutes. To begin using the Orchestration Cluster REST API, you'll need the following:
+This section helps you get up and running in minutes.
 
 ### Prerequisites
 
 - **A Camunda 8 Orchestration Cluster**
   - For local development, use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), which expose the API without requiring credentials or tokens by default.
   - For production or advanced development, use [Helm/Kubernetes](/self-managed/deployment/helm/install/quick-install.md) or [manual installation](/self-managed/deployment/manual/install.md).
-  - Alternatively, sign up for a free [Camunda 8 SaaS trial](https://camunda.com/try-camunda-cloud/) to get a managed cluster with the API enabled.
+  - Alternatively, sign up for a free [Camunda 8 SaaS trial](https://accounts.camunda.io/signup) to get a managed cluster with the API enabled.
 
 - **A client to send API requests**
   - Quick testing: Use the [Swagger](../orchestration-cluster-api-rest-swagger) interface
@@ -71,16 +69,31 @@ For detailed authentication setup, follow the step-by-step guide in [Authenticat
 
 Once you're set up, verify your connection works by making your first API call:
 
-**Using curl:**
+#### Using curl
+
+Local (Camunda 8 Run / Docker Compose):
 
 ```bash
 curl http://localhost:8080/v2/topology
 ```
 
-> Replace `http://localhost:8080/v2` with your actual `${BASE_URL}` if not running in a C8 Run or Docker-Compose.
-> See [Base URLs](#base-urls) below for details on SaaS and custom setups.
+SaaS, public connectivity:
 
-**Using Postman**  
+```bash
+curl https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/topology
+```
+
+SaaS, secure connectivity (AWS PrivateLink):
+
+```bash
+curl https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/topology
+```
+
+Replace the placeholders with the values for your environment.
+See [Base URLs](#base-urls) for details on SaaS (public and secure connectivity) and self-managed setups.
+
+#### Using Postman
+
 Try the [get cluster topology](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) request or browse the full collection.
 
 This request returns information about your cluster topology, confirming that your setup is working correctly.
@@ -108,8 +121,15 @@ This section covers the technical details and conventions you need to understand
 
 #### SaaS
 
-In the Camunda Console, go to your cluster, and in the **Cluster Details**, find your **Region Id** and **Cluster Id**. Use this pattern as your `${BASE_URL}`:
-`https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/`
+In the Camunda Console, go to your cluster, and in the Cluster Details, find your **Region Id** and **Cluster Id**.
+
+- For public connectivity (default), use this pattern as your `${BASE_URL}`: `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/v2/`
+
+- For secure connectivity (AWS PrivateLink), use the private base URL shown in Console. For the Orchestration Cluster REST API, the pattern is:
+
+  `${BASE_URL} = https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/api/v2/`
+
+  For example: `https://b4102386-6818-43c6-a880-d21c968a883f.ork-1.privateconnectivity.camunda.io/api/v2/topology`
 
 #### Self-Managed
 

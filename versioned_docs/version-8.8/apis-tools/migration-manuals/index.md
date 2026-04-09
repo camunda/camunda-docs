@@ -5,7 +5,7 @@ description: "Plan and execute an update from Camunda 8.7 to 8.8. Includes archi
 
 Learn about important API & tools changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
 
-## About this guide
+## About
 
 This guide focuses on the API and SDK transitions required in an upgrade from Camunda 8.7 to Camunda 8.8.
 
@@ -129,6 +129,17 @@ Check the Orchestration Cluster API on User Tasks for more information on how to
 
 Ready to upgrade and migrate? Complete the following steps:
 
-1. **Coordinate your platform and development teams**: Ensure your Orchestration Cluster is upgraded to 8.8 before upgrading your application clients.
+1. Coordinate your platform and development teams:
+   - For Self-Managed environments, ensure your Orchestration Cluster is upgraded before upgrading your application clients.
+   - Start with the [Self-Managed upgrade overview](/self-managed/upgrade/index.md) to plan the upgrade.
+   - Review the relevant component and deployment upgrade guides as part of the cluster upgrade process:
+     - [Components upgrade guides](/self-managed/upgrade/components/index.md)
+     - [Helm upgrade guides](/self-managed/upgrade/helm/index.md)
 
-2. **Review migration guides**: Coming soon: Links to detailed guides on each component migration.
+2. Review the migration guides relevant to your setup:
+   - [Migrate from V1 APIs to the Orchestration Cluster API](./migrate-to-camunda-api/)
+   - [Migrate from gRPC to the Orchestration Cluster API](./migrate-from-grpc-to-orchestration-cluster-api/)
+   - [Migrate to the Camunda Java Client](./migrate-to-camunda-java-client/)
+   - [Migrate to Camunda Spring Boot Starter](./migrate-to-camunda-spring-boot-starter/)
+   - [Migrate to Camunda Process Test](./migrate-to-camunda-process-test/)
+   - [Migrate to Camunda user tasks](./migrate-to-camunda-user-tasks/)

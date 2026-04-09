@@ -56,7 +56,7 @@ You can also run this setup using a single AWS EC2 instance. However, in the eve
 
 - An AWS account to provision resources.
   - At a high level, permissions are needed for **ec2**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **es** services.
-  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/stable/8.8/aws/ec2/example/policy.json).
+  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/compute/ec2-single-region/example/policy.json).
 - Terraform (v1.7 or later)
 - A Unix-based operating system with `ssh` and `sftp`
   - Windows may be used with [Cygwin](https://www.cygwin.com/) or [Windows WSL](https://learn.microsoft.com/en-us/windows/wsl/install), though these configurations have not been tested.
@@ -233,7 +233,7 @@ If you choose not to use this module, you must provide your own Elasticsearch or
 Additionally, be sure to delete the `opensearch.tf` file in your reference copy—otherwise, the resources defined in it will still be created.
 :::
 
-The OpenSearch module provisions an OpenSearch domain for use with the Camunda platform. OpenSearch is a powerful alternative to Elasticsearch.
+The OpenSearch module provisions an OpenSearch domain for use with Camunda. OpenSearch is a powerful alternative to Elasticsearch.
 
 :::note Migration to OpenSearch is not supported
 
@@ -329,6 +329,8 @@ The `procedure` directory contains Bash scripts for installing and configuring C
 
 2. Configure script behavior using the following environment variables:
    - `CLOUDWATCH_ENABLED`: Defaults to `false`. Set to `true` to install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
+   - `CAMUNDA_DISTRO_USER`: Camunda Enterprise LDAP username for authenticating against `artifacts.camunda.com` (Artifactory). Required to download artifacts from `artifacts.camunda.com`.
+   - `CAMUNDA_DISTRO_PASSWORD`: Camunda Enterprise LDAP password for authenticating against `artifacts.camunda.com` (Artifactory). Required to download artifacts from `artifacts.camunda.com`.
 
 3. Override default versions in the `camunda-install.sh` script by modifying these variables:
    - `OPENJDK_VERSION`: The Temurin Java version to install.
@@ -406,7 +408,7 @@ Follow the example in the [Orchestration Cluster REST API documentation](/apis-t
 Upgrading directly from Camunda 8.7 to 8.8 is not supported and cannot be performed.
 :::
 
-For manual installations, see the [upgrade guide](/self-managed/deployment/manual/upgrade.md) for detailed instructions.
+For manual installations, see the [upgrade guide](/self-managed/upgrade/manual/index.md) for detailed instructions.
 
 ### Monitoring
 

@@ -29,7 +29,7 @@ Several BPMN start events can be used to start a new process instance.
 | ----------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 |                         | ![none start](/img/bpmn-elements/none-start.svg)                              | ![message start](/img/bpmn-elements/message-start.svg)                  | ![timer start](/img/bpmn-elements/timer-start.svg)                     | ![signal start](/img/bpmn-elements/signal-start.svg)                  | ![conditional start](/img/bpmn-elements/conditional-start.svg)                   |
 | Use when                | You have only **one start event** or a start event which is clearly standard. | You have to differentiate **several start events**.                     | You want to automatically start process instances **time controlled**. | You need to start **several process instances** at once. Rarely used. | When a specific **condition** is met, a process instance is created.             |
-| Supported for Execution | ✔                                                                            | ✔                                                                      | ✔                                                                     | ✔                                                                    | Determine occurrence of condition externally yourself and use the message event. |
+| Supported for Execution | ✔                                                                             | ✔                                                                       | ✔                                                                      | ✔                                                                     | Determine occurrence of condition externally yourself and use the message event. |
 |                         | [Learn more](/components/modeler/bpmn/none-events/none-events.md)             | [Learn more](/components/modeler/bpmn/message-events/message-events.md) | [Learn more](/components/modeler/bpmn/timer-events/timer-events.md)    | [Learn more](/components/modeler/bpmn/signal-events/signal-events.md) |                                                                                  |
 
 <div bpmn="best-practices/routing-events-to-processes-assets/start-events.bpmn" callouts="NoneStartEvent,MessageStartEvent1,MessageStartEvent2" />
@@ -53,8 +53,8 @@ Several BPMN intermediate events (and the receive task) can be used to make a pr
 |                         | Message Event                                                                | Receive Task                                                                            | Timer Event                                                                    | Signal Event                                                              | Conditional Event                                                            |
 | ----------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 |                         | ![message intermediate](/img/bpmn-elements/message-intermediate.svg)         | ![task receive](/img/bpmn-elements/task-receive.svg)                                    | ![timer intermediate](/img/bpmn-elements/timer-intermediate.svg)               | ![signal intermediate](/img/bpmn-elements/signal-intermediate.svg)        | ![conditional intermediate](/img/bpmn-elements/conditional-intermediate.svg) |
-| Use when                | You route an incoming **message** to a specific and unique process instance. | As alternative to message events (to leverage BPMN boundary events, e.g. for timeouts). | You want to make your process instance wait for a certain (point in) **time**. | You route an incoming **signal** to all process instances waiting for it. | When a specific **condition** is met, the waiting process instance moves on. |
-| Supported for Execution | ✔                                                                           | ✔                                                                                      | ✔                                                                             | ✔                                                                        | Not yet supported in Camunda 8                                               |
+| Use when                | You route an incoming **message** to a specific and unique process instance. | As alternative to message events (to leverage BPMN boundary events, for example, for timeouts). | You want to make your process instance wait for a certain (point in) **time**. | You route an incoming **signal** to all process instances waiting for it. | When a specific **condition** is met, the waiting process instance moves on. |
+| Supported for Execution | ✔                                                                            | ✔                                                                                       | ✔                                                                              | ✔                                                                         | Not yet supported in Camunda 8                                               |
 |                         | [Learn more](/components/modeler/bpmn/message-events/message-events.md)      | [Learn more](/components/modeler/bpmn/receive-tasks/receive-tasks.md)                   | [Learn more](/components/modeler/bpmn/timer-events/timer-events.md)            | [Learn more](/components/modeler/bpmn/signal-events/signal-events.md)     |                                                                              |
 
 Consider this example:
@@ -87,11 +87,7 @@ This could end with a successful income confirmation. However, it could also end
 
 <span className="callout">3</span>
 
-In this case, a **conditional event** watching this data (e.g. a process variable changed by the user task) triggers and causes the process to reconsider the consequences of the new findings.
-
-:::caution Camunda 8
-Camunda 8 does not yet [support a **conditional event**](/components/modeler/bpmn/bpmn-coverage.md).
-:::
+In this case, a **conditional event** watching this data (for example, a process variable changed by the user task) triggers and causes the process to reconsider the consequences of the new findings.
 
 A conditional event's condition expression is evaluated at it's "scope" creation time, too, and not just when variable data changes. For our example of a boundary conditional event, that means that the activity it is attached to could principally be left immediately via the boundary event. However, our process example evaluates the data via the exclusive gateway - therefore such a scenario is semantically impossible.
 
@@ -178,9 +174,7 @@ The message name for start events should be unique for the whole workflow engine
 
 ## Technology examples for messages sent by external systems
 
-In this section, we give examples for _technical messages_, which are received from
-other systems, typically by leveraging technologies like e.g. SOAP, REST, JMS or
-other.
+In this section, we give examples for _technical messages_, which are received from other systems, typically by leveraging technologies like SOAP, REST, JMS, and others.
 
 <div bpmn="best-practices/routing-events-to-processes-assets/invoice-external-system.bpmn" callouts="start_event_invoice_received" />
 
@@ -192,7 +186,7 @@ API examples for REST, AMQP, and Kafka are shown in [connecting the workflow eng
 
 ## Using the Camunda BPMN framework
 
-If you use the **Camunda BPMN Framework** as described in the book ["Real Life BPMN"](https://www.amazon.de/dp/B07XC6R17R/) you will typically have message start events (even if you only have a single start event) to connect the surrounding human flows to the technical flow via messages:
+If you use the **Camunda BPMN Framework** as described in the book ["Real Life BPMN"](https://page.camunda.com/wp-real-life-bpmn-book-excerpt) you will typically have message start events (even if you only have a single start event) to connect the surrounding human flows to the technical flow via messages:
 
 <div bpmn="best-practices/routing-events-to-processes-assets/collaboration.bpmn" callouts="MessageStartEvent1" />
 
@@ -210,7 +204,7 @@ If messages are exchanged between different processes deployed in the workflow e
 
 <span className="callout">1</span>
 
-Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN ID in Java:
+Use some simple code on the sending side to route the message to a new process instance, for example by starting a new process instance by the BPMN ID in Java:
 
 ```java
 @JobWorker(type="routeInput")

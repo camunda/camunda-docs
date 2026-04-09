@@ -165,10 +165,10 @@ zeebeGateway:
 elasticsearch:
   image:
     registry: example.jfrog.io
-    repository: bitnamilegacy/os-shell
+    repository: bitnamilegacy/elasticsearch
   sysctlImage:
     registry: example.jfrog.io
-    repository: bitnamilegacy/elasticsearch
+    repository: bitnamilegacy/os-shell
 identity:
   image:
     repository: camunda/identity

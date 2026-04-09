@@ -41,7 +41,7 @@ In Self-Managed, you can deploy your diagram to the cluster defined in your Web 
 
 ### Before deploying a process
 
-- If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
+- If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](modeling/fix-problems-in-your-diagram.md).
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](modeling/advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
   If you are using [`versionTag` binding](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
@@ -71,7 +71,7 @@ Running a process means that you execute the process as a process instance on Ca
 
 ### Before running a process
 
-- If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure that the users running the process are assigned to both the `CREATE_PROCESS_INSTANCE` permission to the `PROCESS_DEFINITION` resource type and `CREATE` permission to the `RESOURCE` resource type.
+- If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the users running the process are assigned to both the `CREATE_PROCESS_INSTANCE` permission to the `PROCESS_DEFINITION` resource type and `CREATE` permission to the `RESOURCE` resource type.
 
 ### Test run using Play mode
 
@@ -97,7 +97,7 @@ You can also test your process thoroughly on a development cluster to observe ho
 
 4. Click on **Run** to confirm. This will start a process instance on the selected cluster. If required, it (re-)deploys the process beforehand on the cluster.
 
-After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to observe the progress of the process instance and interact with it if required. If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:
+After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to observe the progress of the process instance and interact with it if required. If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:
 
 - `READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type
 - `operate` permission to the `COMPONENT` resource type
@@ -160,6 +160,7 @@ You have the following options to publish a process:
   - [Listen to message or signal events](#listen-to-message-or-signal-events)
   - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
   - [Missing client credentials](#missing-client-credentials)
+  - [Incorrect authorizations](#incorrect-authorizations)
 
 ### Deploy to run programmatically
 
@@ -254,3 +255,11 @@ When working on Camunda 8 Self-Managed, you can define access permissions on a p
 When you deploy a process requiring client credentials, a warning appears in the **Deploy diagram** dialog.
 The warning offers a link to manage the missing or misconfigured credentials.
 Client credentials with access to the Orchestration Cluster API are required when at least one of the following elements is used in the process: `service tasks`, `messages`, `signals`, and elements with a `non-connector` task definition.
+
+### Incorrect authorizations
+
+When using Modeler to deploy a process model or start a process instance, you may encounter issues related to [resource authorizations](/components/concepts/access-control/authorizations.md).
+
+Verify that the credentials you are using have the required authorizations to deploy a process model or start a process instance on the selected cluster and tenant.
+
+If you're using Web Modeler, note that deployments and process starts are performed **as your logged-in user**, so the necessary authorizations must be assigned to your user account.

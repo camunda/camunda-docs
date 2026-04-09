@@ -5,6 +5,10 @@ title: Set up the Helm chart with an external Keycloak instance
 description: Learn how to connect the Camunda Helm chart to an external Keycloak instance.
 ---
 
+:::caution Admin access required
+The external Keycloak setup requires administrative access to the Keycloak server.
+:::
+
 The Camunda Helm chart can connect to an external Keycloak instance that acts as the identity management service for authentication and authorization.  
 With minimal configuration for administrative access, the Management Identity component can automatically configure the Keycloak realm and required entities on startup—simplifying setup and reducing the learning curve.
 
@@ -84,6 +88,8 @@ This secret includes the following keys:
 - `identity-orchestration-client-token`: Client secret of the Keycloak OIDC client `orchestration` used by the Orchestration Cluster.
 - `literal=webmodeler-postgresql-admin-password`: Password for the administrative account of the PostgreSQL instance used by Web Modeler (username `postgres`).
 - `webmodeler-postgresql-user-password` Password non-privileged user account of the PostgreSQL instance used by Web Modeler (username `web-modeler`).
+
+For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
 
 ### Prepare global configuration
 
@@ -182,10 +188,6 @@ global:
       jwksUrl: <KEYCLOAK_URL>/realms/<realm>/protocol/openid-connect/certs
       identity:
         clientId: <identity_client_id>
-      console:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-console-client-token"
       optimize:
         secret:
           existingSecret: "camunda-credentials"

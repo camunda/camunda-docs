@@ -43,10 +43,10 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 </div>
 </div>
 
-:::info Upgrading to Camunda 8.8
+:::info Upgrade to Camunda 8.9
 
-- Existing customers can upgrade their Self-Managed deployment to 8.8 using the [upgrade to 8.8 guide](/self-managed/update/administrators/overview.md).
-- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
+- Existing customer? Upgrade your Self-Managed deployment to 8.9 using the [upgrade to 8.9 guide](/self-managed/upgrade/index.md).
+- See [what's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md), [release announcements](/reference/announcements-release-notes/890/890-announcements.md), and [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 
 :::
 

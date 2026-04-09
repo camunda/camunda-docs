@@ -5,7 +5,11 @@ sidebar_label: "Configure Management Identity"
 description: "Learn more about how Management Identity plays together with Keycloak and other OIDC IdP applications to provide authentication services"
 ---
 
-Configure Management Identity for your Camunda 8 Self-Managed deployment.
+Configure Management Identity for your Camunda 8 Self-Managed deployment. This guide covers application-level configuration, including environment variables and IdP settings.
+
+:::info Deploying with Helm?
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Management Identity:
+:::
 
 ## Configure Management Identity IdP
 

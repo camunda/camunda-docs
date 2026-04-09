@@ -22,13 +22,13 @@ Additional informational and high-level overview based on Kubernetes as upstream
 - [Helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
-- [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
+- [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
 - [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
   - Ensure at least **3 Elastic IPs** (one per availability zone).
   - Verify quotas for **VPCs, EC2 instances, and storage**.
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
-- A namespace to host the Camunda Platform.
+- A namespace to host Camunda.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/.tool-versions) file in the repository. It contains an up-to-date list of versions that Camunda also uses for testing.
 
@@ -125,7 +125,6 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
 
 1. **Zeebe Gateway:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
-
    - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`.
 
      In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
@@ -142,15 +141,13 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
 
    </details>
-
    - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
-     To configure a Zeebe cluster securely, it's essential to set up a secure communication configuration between pods:
+   To configure a Zeebe cluster securely, it's essential to set up a secure communication configuration between pods:
+   - We enable gRPC ingress for the ZeebeGateway pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
 
-     - We enable gRPC ingress for the ZeebeGateway pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
-
-     - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
-       Finally, we mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe Gateway Pod and the Zeebe Pod to configure both [broker security](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetworksecurity) and gateway security.
+   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
+     Finally, we mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe Gateway Pod and the Zeebe Pod to configure both [broker security](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetworksecurity) and gateway security.
 
    Update your `values.yml` file with the following:
 
@@ -221,7 +218,7 @@ If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](http
   <TabItem value="no-ingress" label="No Ingress">
 If you do not have a domain name or do not intend to use one for your Camunda 8 deployment, external access to Camunda 8 web endpoints from outside the OpenShift cluster will not be possible.
 
-However, you can use `kubectl port-forward` to access the Camunda platform without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+However, you can use `kubectl port-forward` to access Camunda without a domain name or Ingress configuration. For more information, refer to the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Update your `values.yml` file with the following:
 
@@ -308,7 +305,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 

@@ -11,7 +11,7 @@ import AgentTaskFeedbackImg from '../img/ai-agent-task-feedback-loop.png';
 import AgentTaskFeedbackApprovalImg from '../img/ai-agent-task-user-feedback-loop.png';
 import AgentTaskFeedbackAdvancedImg from '../img/ai-agent-task-feedback-loop-advanced.png';
 
-Use the **AI Agent** connector to integrate Large Language Models (LLMs) with AI agents to build solutions using [agentic orchestration](../../agentic-orchestration/agentic-orchestration.md).
+Use the **AI Agent** connector to integrate Large Language Models (LLMs) with AI agents to build solutions using [agentic orchestration](../../agentic-orchestration/agentic-orchestration-overview.md).
 
 ## About this connector
 
@@ -79,7 +79,7 @@ A basic AI Agent sub-process might look similar to the following example.
 <img src={AgentSubprocessImg} alt="AI Agent Sub-process" class="img-700"/>
 
 - The connector is configured so the AI Agent resolves available tools and activates them as needed to complete it's goal.
-- Handling of event sub-processes within the ad-hoc sub-process is supported (See [Event Handling](#event-handling)). The AI Agent Task implementation does not support this.
+- Handling of event sub-processes within the ad-hoc sub-process is supported (See [Event Handling](./agentic-ai-aiagent-subprocess.md#event-handling)). The AI Agent Task implementation does not support this.
 
 This pattern can also be combined with a user feedback loop for verification or follow-up interactions. For example, instead of the showcased user task, this could also be another LLM acting as a judge, or any other task that validates the agent's response.
 
@@ -120,6 +120,34 @@ If you need more control over the feedback loop, you can model pre-/post-process
 <img src={AgentTaskFeedbackAdvancedImg} alt="AI Agent Task with user feedback loop" class="img-600"/>
 
 ## Concepts
+
+### System prompt, user prompt, and tool descriptions
+
+Reliable agent behavior depends on three inputs working together:
+
+- **System prompt**: Defines the agent's role, boundaries, priorities, and success criteria.
+- **User prompt**: Carries the current request and immediate context.
+- **Tool/task descriptions**: Define which actions are available in the ad-hoc sub-process and how each should be used.
+
+At runtime, the connector passes this combined context to the LLM. The model then selects which tools to call (if any), along with parameters.
+
+#### How task descriptions are used for tools
+
+When using an ad-hoc sub-process, each activity can be exposed as a tool. For best results, document each tool with:
+
+- A clear task name that describes intent.
+- A behavior-oriented description that includes when to use it, when not to use it, and the expected outcome.
+
+This makes tool selection more predictable and reduces repeated or incorrect calls.
+
+### Execution responsibility split
+
+The decision and execution loop is shared between the LLM and Camunda:
+
+- **LLM decides**: Which tool to call next, in what order, and with which parameters.
+- **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
+
+This means tools can be called in different orders, repeated, run in parallel, or skipped entirely, while execution remains constrained by the modeled process boundaries.
 
 ### Feedback loop
 

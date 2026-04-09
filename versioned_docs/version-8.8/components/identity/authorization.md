@@ -12,7 +12,7 @@ Create and manage your Orchestration Cluster authorizations.
 
 An authorization grants an **owner** access to a **resource** and defines the specific **permissions** they have.
 
-- **Owner**: The entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](mapping-rules.md).
+- **Owner**: The entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](mapping-rules.md). For [user](user.md) entity in SaaS deployments, the username field refers to the email address of the user. For [user](user.md) entity in Self-Managed deployments, the username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 - **Resource**: The object that the permissions apply to, such as a process definition, decision definition, or system. See the full list of [available resources](/components/concepts/access-control/authorizations.md#available-resources).
 
 Each authorization specifies which permissions the owner has for the resource (for example, `READ`, `UPDATE`, `DELETE`).
@@ -31,7 +31,7 @@ To create a new authorization:
 2. Select a resource type from the list on the left, and click **Create authorization**.
 3. Enter the following information:
    - **Owner type**: The entity to which you want to assign permissions, such as a User, Group, Role, Client, or Mapping rule.
-   - **Owner ID**: The unique ID of the owner.
+   - **Owner ID**: The unique ID of the owner. For users and groups, this value is case-sensitive and must exactly match the username or group ID from Identity or your identity provider. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
    - **Resource type**: The selected resource type.
    - **Resource ID**: The ID of the resource. Use `*` to grant permissions for all resources of the selected type.
 4. Select the permissions you want to grant.
@@ -40,6 +40,10 @@ To create a new authorization:
 The authorization is created, and the owner is granted the specified permissions.
 
 <img src={AuthImg} alt="Create authorization tab" class="img-700"/>
+
+:::tip
+Partial wildcard matching, for example `my-resource*`, is not supported.
+:::
 
 ## Update an authorization
 

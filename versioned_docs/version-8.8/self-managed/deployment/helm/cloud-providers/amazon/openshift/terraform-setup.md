@@ -8,10 +8,11 @@ description: "Deploy Red Hat OpenShift on AWS using a Terraform module for a qui
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import RosaHcpAuth from '../../\_partials/\_rosa-hcp-auth.md'
 
-This guide provides a detailed tutorial for deploying a [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html-single/architecture/index#architecture-overview) capabilities. It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
+This guide provides a detailed tutorial for deploying a [Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/architecture/index.html) capabilities. It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
-We recommend this guide for building a robust and sustainable infrastructure. However, if you are looking for a quicker trial or proof of concept, or if your needs aren't fully met by our module, consider following the official [ROSA Quickstart Guide](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html/getting_started/rosa-quickstart-guide-ui#rosa-quickstart-guide-ui).
+We recommend this guide for building a robust and sustainable infrastructure. However, if you are looking for a quicker trial or proof of concept, or if your needs aren't fully met by our module, consider following the official [ROSA Quickstart Guide](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/getting_started/rosa-quickstart-guide-ui.html).
 
 This guide aims to help you leverage IaC to streamline and reproduce your cloud infrastructure setup. While it covers the essentials for deploying an ROSA HCP cluster, for more advanced use cases, please refer to the official [Red Hat OpenShift on AWS Documentation](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4).
 
@@ -28,17 +29,17 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [ROSA CLI](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html/getting_started/rosa-quickstart-guide-ui#rosa-getting-started-environment-setup_rosa-quickstart-guide-ui) to interact with the cluster.
+- [ROSA CLI](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/getting_started/rosa-quickstart-guide-ui.html) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
 - This guide uses GNU/Bash for all the shell commands listed.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
 This setup provides a foundational starting point for working with Camunda 8, though it is not optimized for peak performance. It serves as a solid initial step in preparing a production environment by leveraging [Infrastructure as Code (IaC) tools](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
 
-Terraform can initially appear complex. If you're new to it, you might want to start by considering trying out the [Red Hat OpenShift on AWS UI-based tutorial](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html/tutorials/getting-started-with-rosa#creating-account-wide-roles). This guide will show you what resources are created and how they interact with each other.
+Terraform can initially appear complex. If you're new to it, you might want to start by considering trying out the [Red Hat OpenShift on AWS UI-based tutorial](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws_classic_architecture/4/html/getting_started/rosa-getting-started.html). This guide will show you what resources are created and how they interact with each other.
 
 If you require managed services for PostgreSQL Aurora or OpenSearch, you can refer to the definitions provided in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide. However, please note that these configurations may need adjustments to fit your specific requirements and have not been tested. By default, this guide assumes that the database services (PostgreSQL and Elasticsearch) integrated into the default chart will be used.
 
@@ -190,76 +191,17 @@ This module is based on the official [ROSA HCP Terraform module documentation](h
 
 :::
 
-#### Set up ROSA authentication
+<RosaHcpAuth />
 
-To set up a ROSA cluster, certain prerequisites must be configured on your AWS account. Below is an excerpt from the [official ROSA planning prerequisites checklist](https://docs.openshift.com/rosa/rosa_planning/rosa-cloud-expert-prereq-checklist.html):
-
-1. Verify that your AWS account is correctly configured:
-
-   ```bash
-   aws sts get-caller-identity
-   ```
-
-2. Check if the ELB service role exists, as if you have never created a load balancer in your AWS account, the role for Elastic Load Balancing (ELB) might not exist yet:
-
-   ```bash
-   aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing"
-   ```
-
-   If it doesn't exist, create it:
-
-   ```bash
-   aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com"
-   ```
-
-3. Create a Red Hat Hybrid Cloud Console account if you don’t already have one: [Red Hat Hybrid Cloud Console](https://console.redhat.com/).
-
-4. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
-
-5. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
-   - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
-   - Choose **Get started**.
-   - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
-   - Choose **Enable ROSA**.
-
-   **Note**: Only a single AWS account can be associated with a Red Hat account for service billing.
-
-6. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
-
-7. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
-
-   ```bash
-   export RHCS_TOKEN="<yourToken>"
-   rosa login --token="$RHCS_TOKEN"
-
-   # Verify the login
-   rosa whoami
-   ```
-
-8. Verify your AWS quotas:
-
-   ```bash
-   rosa verify quota --region="$AWS_REGION"
-   ```
-
-   **Note**: This may fail due to organizational policies.
-
-9. Create the required account roles:
-
-   ```bash
-   rosa create account-roles --mode auto
-   ```
-
-10. Verify your AWS quotas, and if quotas are insufficient, consult the following:
-
-- [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
-- [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas)
-
-11. Ensure the `oc` CLI is installed. If it’s not already installed, follow the [official ROSA oc installation guide](https://docs.openshift.com/rosa/cli_reference/openshift_cli/getting-started-cli.html#cli-getting-started):
+Verify your AWS quotas:
 
 ```bash
-rosa verify openshift-client
+rosa verify quota --region="$AWS_REGION"
 ```
+
+:::note
+This may fail due to organizational policies.
+:::
 
 #### Set up the ROSA cluster module
 

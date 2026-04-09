@@ -20,9 +20,20 @@ When exporting, indexes are created as required and not recreated if they alread
 
 Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
 
+:::info Helm values mapping
+The option names in the tabs below (for example, `rolloverInterval`) are exporter option names, not top-level Helm values keys.
+
+In Helm, configure these as Orchestration Cluster application properties using `orchestration.extraConfiguration` (or `orchestration.configuration`).
+
+For example, set history rollover using:
+
+- `camunda.data.secondary-storage.elasticsearch.history.rollover-interval`
+- `camunda.data.secondary-storage.opensearch.history.rollover-interval`
+  :::
+
 You can also configure the following properties using exporter `args`:
 
-```
+```yaml
 zeebe:
   brokers:
     exporters:
@@ -35,7 +46,6 @@ zeebe:
       #
       camundaexporter:
         args:
-
 ```
 
 | Option       | Description                                                                                           | Default |
@@ -52,6 +62,9 @@ zeebe:
 values={[{label: 'Connect', value: 'connect' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'History', value: 'history' },{label: 'Other', value: 'other' }]} >
 
 <TabItem value="connect">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
 
 :::note
 Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which
@@ -72,6 +85,9 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 <TabItem value="index">
 
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+
 | Option                | Description                                                                                                                                                                                 | Default |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | numberOfShards        | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each created index.                              | 1       |
@@ -83,6 +99,9 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 </TabItem>
 
 <TabItem value="bulk">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.bulk.`
 
 To avoid too many expensive requests to the Elasticsearch/OpenSearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
@@ -103,18 +122,21 @@ With the default configuration, the exporter will aggregate records and flush th
 
 <TabItem value="retention">
 
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.retention.`
+
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified
 `minimumAge`.
 All index templates created by this exporter apply the created ILM Policy.
 
-| Option                 | Description                                                                                                                                                          | Default                                  |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                              | `false`                                  |
-| minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                        | `30d`                                    |
-| policyName             | The name of the created and applied ILM policy.                                                                                                                      | `camunda-retention-policy`               |
-| usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric` and `camunda-usage-metric-tu` indices. | `730d`                                   |
-| usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                        | `camunda-usage-metrics-retention-policy` |
+| Option                 | Description                                                                                                                                                                        | Default                                  |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                                            | `false`                                  |
+| minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                                      | `30d`                                    |
+| policyName             | The name of the created and applied ILM policy.                                                                                                                                    | `camunda-retention-policy`               |
+| usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric-8.8.0_` and `camunda-usage-metric-tu-8.8.0_` indices. | `730d`                                   |
+| usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                                      | `camunda-usage-metrics-retention-policy` |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds
@@ -124,6 +146,12 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 </TabItem>
 
 <TabItem value="history">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.`
+
+For example, `rolloverInterval` maps to:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.rollover-interval`.
 
 To keep the main runtime index performant, documents are periodically moved into historical
 indices. The history can be configured as follows:
@@ -143,6 +171,9 @@ indices. The history can be configured as follows:
 </TabItem>
 
 <TabItem value="other">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.batch-operations.`
 
 Other miscellaneous properties:
 

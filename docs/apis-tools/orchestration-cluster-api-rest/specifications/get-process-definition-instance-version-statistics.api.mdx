@@ -1,0 +1,542 @@
+---
+id: get-process-definition-instance-version-statistics
+title: "Get process instance statistics by version"
+description: "<MarkerEventuallyConsistentExtension />"
+sidebar_label: "Get process instance statistics by version"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get process instance statistics by version"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-definitions/statistics/process-instances-by-version"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Get statistics about process instances, grouped by version for a given process definition.
+The process definition ID must be provided as a required field in the request body filter.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            page: {
+              description: "Pagination criteria.",
+              allOf: [
+                {
+                  type: "object",
+                  title: "Offset-based pagination",
+                  properties: {
+                    from: {
+                      description:
+                        "The index of items to start searching from.",
+                      type: "integer",
+                      format: "int32",
+                      minimum: 0,
+                    },
+                    limit: {
+                      description:
+                        "The maximum number of items to return in one request.",
+                      type: "integer",
+                      format: "int32",
+                      default: 100,
+                      minimum: 1,
+                    },
+                  },
+                },
+              ],
+            },
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "processDefinitionId",
+                      "processDefinitionKey",
+                      "processDefinitionName",
+                      "processDefinitionVersion",
+                      "activeInstancesWithIncidentCount",
+                      "activeInstancesWithoutIncidentCount",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title:
+                  "ProcessDefinitionInstanceVersionStatisticsQuerySortRequest",
+              },
+            },
+            filter: {
+              description:
+                "The process definition instance version statistics search filters.",
+              allOf: [
+                {
+                  description:
+                    "Process definition instance version statistics search filter.",
+                  type: "object",
+                  properties: {
+                    processDefinitionId: {
+                      allOf: [
+                        {
+                          description:
+                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                          format: "ProcessDefinitionId",
+                          type: "string",
+                          example: "new-account-onboarding-workflow",
+                          title: "ProcessDefinitionId",
+                        },
+                      ],
+                      description:
+                        "The ID of the process definition to retrieve version statistics for.",
+                    },
+                    tenantId: {
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                      description: "Tenant ID of this process definition.",
+                    },
+                  },
+                  required: ["processDefinitionId"],
+                  title: "ProcessDefinitionInstanceVersionStatisticsFilter",
+                },
+              ],
+            },
+          },
+          required: ["filter"],
+          title: "ProcessDefinitionInstanceVersionStatisticsQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The process definition instance version statistic result.",
+      content: {
+        "application/json": {
+          schema: {
+            required: ["items"],
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description:
+                  "The process definition instance version statistics result.",
+                type: "array",
+                items: {
+                  description:
+                    "Process definition instance version statistics response.",
+                  type: "object",
+                  properties: {
+                    processDefinitionId: {
+                      description:
+                        "The ID associated with the process definition.",
+                      allOf: [
+                        {
+                          description:
+                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                          format: "ProcessDefinitionId",
+                          type: "string",
+                          example: "new-account-onboarding-workflow",
+                          title: "ProcessDefinitionId",
+                        },
+                      ],
+                    },
+                    processDefinitionKey: {
+                      description: "The unique key of the process definition.",
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                    },
+                    processDefinitionName: {
+                      description: "The name of the process definition.",
+                      nullable: true,
+                      type: "string",
+                    },
+                    tenantId: {
+                      description:
+                        "The tenant ID associated with the process definition.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                    processDefinitionVersion: {
+                      description:
+                        "The version number of the process definition.",
+                      type: "integer",
+                      format: "int32",
+                    },
+                    activeInstancesWithIncidentCount: {
+                      description:
+                        "The number of active process instances for this version that currently have incidents.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    activeInstancesWithoutIncidentCount: {
+                      description:
+                        "The number of active process instances for this version that do not have any incidents.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                  },
+                  required: [
+                    "processDefinitionId",
+                    "processDefinitionKey",
+                    "tenantId",
+                    "processDefinitionName",
+                    "processDefinitionVersion",
+                    "activeInstancesWithIncidentCount",
+                    "activeInstancesWithoutIncidentCount",
+                  ],
+                  title: "ProcessDefinitionInstanceVersionStatisticsResult",
+                },
+              },
+            },
+            title: "ProcessDefinitionInstanceVersionStatisticsQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

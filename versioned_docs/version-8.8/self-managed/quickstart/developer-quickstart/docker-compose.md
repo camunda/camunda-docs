@@ -24,6 +24,19 @@ The following prerequisites are required to run Camunda Self-Managed via Docker 
 | Docker Compose | Version 1.27.0 or later (supports the [latest Compose specification](https://docs.docker.com/compose/compose-file/)). |
 | Docker         | Version 20.10.16 or later.                                                                                            |
 
+:::tip Troubleshooting unsupported attributes
+If Docker Compose reports errors such as "unsupported attribute" when loading the Camunda Compose files:
+
+- Confirm you are using the Docker Compose v2 plugin:
+
+  ```shell
+  docker compose version
+  ```
+
+- Run the commands in this guide with `docker compose` (plugin syntax), not `docker-compose` (legacy standalone binary).
+- Upgrade Docker Desktop or Docker Engine/Compose plugin to a recent supported version, then retry.
+  :::
+
 ## Run Camunda 8 with Docker Compose
 
 To start a complete Camunda 8 Self-Managed environment locally:
@@ -69,7 +82,7 @@ The Orchestration Cluster is the core of Camunda 8, providing process automation
 | Orchestration Cluster gRPC API | `localhost:26500`                                                | gRPC API for high-performance process automation.                                                                                                                                                                          |
 
 :::note
-By default, the Orchestration Cluster uses [basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication). The full configuration uses Keycloak for [Management Identity authentication](/self-managed/concepts/authentication/authentication-to-management-components.md).
+By default, the Orchestration Cluster uses [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication). The full configuration uses Keycloak for [Management Identity authentication](/self-managed/concepts/authentication/authentication-to-management-components.md).
 :::
 
 #### Management and modeling components (full configuration only)
@@ -146,7 +159,7 @@ The `-v` flag deletes all volumes, removing all data (process instances, users, 
 
 ## Connectors
 
-Both the lightweight and full Docker Compose configurations include Camunda Connectors for integrating with external systems. The connector runtime executes both outbound connectors (called from BPMN processes) and inbound connectors (triggering process instances from external events).
+Both the lightweight and full Docker Compose configurations include built-in connectors for integrating with external systems. The connector runtime executes both outbound connectors (called from BPMN processes) and inbound connectors (triggering process instances from external events).
 
 For details on available connectors and how to use them, see:
 
@@ -199,7 +212,7 @@ To deploy from Desktop Modeler to the lightweight configuration:
 1. Open Desktop Modeler and click the deployment icon (rocket symbol).
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint**: `http://localhost:26500`
+   - **Cluster endpoint**: `http://localhost:8088/v2`
    - **Authentication**: Select **None** (no authentication required by default)
 1. Click **Deploy**.
 
@@ -212,7 +225,7 @@ To deploy from Desktop Modeler to the full configuration:
 1. Open Desktop Modeler and click the deployment icon.
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint**: `http://localhost:26500`
+   - **Cluster endpoint**: `http://localhost:8088/v2`
    - **Authentication**: Select **OAuth**
    - **OAuth URL**: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
    - **Client ID**: `orchestration` (from `.env` file: `ORCHESTRATION_CLIENT_ID`)

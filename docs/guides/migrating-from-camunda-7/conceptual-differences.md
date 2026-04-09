@@ -46,7 +46,7 @@ Camunda 7 uses [Java Unified Expression Language (JUEL)](https://docs.camunda.or
 
 Camunda 8 uses [Friendly-Enough Expression Language (FEEL)](/components/modeler/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
-Most expressions can be converted (see [this code in the diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/blob/d6fda97d00f27b23fc87fd741134225a527f3de1/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java#L4) as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda 7).
+Most expressions can be converted (see [this code in the diagram converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/5e66012c2ef5f301ab6e61b6a3120b13c9c26459/diagram-converter/core/src/main/java/io/camunda/migration/diagram/converter/expression/ExpressionTransformer.java#L21) as a starting point), but you may need to completely rewrite others. Some expressions might even require an additional service task to prepare necessary data that may have been calculated on the fly in Camunda 7.
 
 <!-- TODO extensive docs for the diagram converter -->
 
@@ -106,7 +106,7 @@ The packaging of a process solution is the same with Camunda 7 and Camunda 8. Yo
 Process solution definition is taken from [Practical Process Automation](https://processautomationbook.com/).
 :::
 
-You can find a complete Java Spring Boot example, showing the Camunda 7 process solution alongside the comparable Camunda 8 process solution in the [Camunda 7 to Camunda 8 migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/example).
+You can find a complete Java Spring Boot example, showing the Camunda 7 process solution alongside the comparable Camunda 8 process solution in the [Camunda 7 to Camunda 8 migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration).
 
 ## Programming model
 
@@ -126,7 +126,7 @@ public void retrievePayment(ActivatedJob job) {
 :::info
 
 - You can find more information on the programming model in Camunda 8 in this blog post on [how to write glue code without Java Delegates in Camunda Cloud](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
-- You can check out [code conversion patterns](../code-conversion/) for more details.
+- Check out [code conversion patterns](../migration-tooling/code-conversion/) for more details.
 
 :::
 

@@ -10,13 +10,17 @@ import TabItem from "@theme/TabItem";
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
 
-Connect Management Identity to an OpenID Connect (OIDC) authentication provider for integration with your existing system.
+Configure Management Identity for your Camunda 8 Self-Managed deployment. This guide covers application-level configuration, including environment variables and IdP settings.
 
 :::note
 
 - A full list of supported and unsupported features when using an OIDC provider is available in the [OIDC features table](#supported-and-unsupported-oidc-features).
 - To connect to a Keycloak authentication provider, see [connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
 
+:::
+
+:::info Deploying with Helm?
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Management Identity.
 :::
 
 ## Prerequisites
@@ -28,6 +32,7 @@ Connect Management Identity to an OpenID Connect (OIDC) authentication provider 
   - Client secrets
   - Audience
 - A [claim name and value](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to use for initial access.
+- Your OIDC provider must issue access tokens that contain an `aud` (audience) claim matching the configured audience, as Camunda validates this claim for auth flows. Providers that are not configured to emit, or do not emit, the `aud` claim in their access tokens are not supported. Configure your identity provider to emit this claim if supported. See [known limitations](#oidc-provider-known-limitations) for details.
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -65,7 +70,29 @@ configuration](#component-specific-configuration) to ensure the components are c
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml'},{label: 'Environment variables', value: 'env' }]} >
+<TabItem value="yaml">
+
+```yaml
+camunda:
+  identity:
+    type: "GENERIC"
+    baseUrl: <IDENTITY_URL>
+    authUrl: <AUTH_URL_ENDPOINT>
+    tokenUrl: <TOKEN_URL_ENDPOINT>
+    jwksUrl: <JWKS_URL>
+    clientId: <Client ID from Step 3>
+    clientSecret: <Client secret from Step 3>
+    audience: <Audience from Step 3>
+identity:
+  initialClaimName: <Initial claim name if not using the default "oid">
+  initialClaimValue: <Initial claim value>
+spring:
+  profiles:
+    active: oidc
+```
+
+</TabItem>
 <TabItem value="env">
 
 ```
@@ -82,52 +109,6 @@ You can connect to your OIDC provider through either environment variables or He
 ```
 
 </TabItem>
-<TabItem value="helm">
-
-```yaml
-global:
-  identity:
-    auth:
-      issuer: <URL_OF_ISSUER>
-      # this is used for container to container communication
-      issuerBackendUrl: <URL_OF_ISSUER>
-      tokenUrl: <TOKEN_URL_ENDPOINT>
-      jwksUrl: <JWKS_URL>
-      type: "GENERIC"
-      identity:
-        clientId: <Client ID from Step 3>
-        existingSecret: <Client secret from Step 3>
-        audience: <Audience from Step 3>
-        initialClaimName: <Initial claim name if not using the default "oid">
-        initialClaimValue: <Initial claim value>
-      operate:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-        existingSecret: <Client secret from Step 3>
-      tasklist:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-        existingSecret: <Client secret from Step 3>
-      optimize:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-        existingSecret: <Client secret from Step 3>
-      zeebe:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-        existingSecret: <Client secret from Step 3>
-      webModeler:
-        clientId: <Client ID of Web Modeler's UI from Step 3>
-        clientApiAudience: <Audience of Web Modeler's UI from Step 3>
-        publicApiAudience: <Audience of Web Modeler's API from Step 3>
-      console:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-```
-
-You can also [store the client secrets in a Kubernetes secret](/self-managed/deployment/helm/install/quick-install.md#create-identity-secrets) and reference this in the Helm values.
-
-</TabItem>
 </Tabs>
 
 :::note
@@ -137,6 +118,22 @@ Once set, you cannot update your initial claim name and value using environment 
 <h3>Additional considerations</h3>
 
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, and `profile`.
+
+:::tip Optional scopes
+The `offline_access` scope is optional.
+
+If this scope is included, your OIDC provider issues a refresh token to Management Identity on user login. Management Identity uses the refresh token to renew the user's access token when it expires, so that sessions remain active without requiring the user to log in again.
+
+If `offline_access` is not included, users will be redirected to the OIDC provider for re-authentication whenever their access token expires. For more information, see the [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
+
+If your organization restricts this scope for security reasons, you can adjust the scopes with:
+
+```
+CAMUNDA_IDENTITY_AUTH_SCOPES="openid profile email"
+```
+
+This configuration allows login without the `offline_access` scope.
+:::
 
 </TabItem>
 <TabItem value="microsoftEntraId">
@@ -169,7 +166,28 @@ Ensure you register a new application for each component.
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' },{label: 'Environment variables', value: 'env' }]} >
+<TabItem value="yaml">
+
+```yaml
+camunda:
+  identity:
+    type: "MICROSOFT"
+    baseUrl: <IDENTITY_URL>
+    authUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+    tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+    clientId: <Client ID from Step 2>
+    clientSecret: <Client secret from Step 5>
+    audience: <Client ID from Step 2>
+identity:
+  initialClaimName: <Initial claim name if not using the default "oid">
+  initialClaimValue: <Initial claim value>
+spring:
+  profiles:
+    active: oidc
+```
+
+</TabItem>
 <TabItem value="env">
 
 ```
@@ -183,62 +201,6 @@ You can connect to your OIDC provider through either environment variables or He
     IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
     IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
     SPRING_PROFILES_ACTIVE=oidc
-```
-
-</TabItem>
-<TabItem value="helm">
-
-```yaml
-global:
-  identity:
-    auth:
-      issuer: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-      # this is used for container to container communication
-      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/discovery/v2.0/keys
-      type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-      identity:
-        clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        audience: <Audience from Step 2>
-        # This is the object ID of the first user. A role mapping in Identity will automatically be generated for this user.
-        initialClaimValue: <Initial claim value>
-        redirectUrl: <See the Helm value in the table below>
-      operate:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        redirectUrl: <See the Helm value in the table below>
-      tasklist:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        redirectUrl: <See the Helm value in the table below>
-      optimize:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        redirectUrl: <See the Helm value in the table below>
-      zeebe:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        tokenScope: "<Client ID from Step 2>/.default"
-      webModeler:
-        clientId: <Client ID of Web Modeler's UI from Step 2>
-        clientApiAudience: <Client ID of Web Modeler's UI from Step 2>
-        publicApiAudience: <Client ID of Web Modeler's API from Step 2>
-        redirectUrl: <See the Helm value in the table below>
-      console:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        redirectUrl: <See the Helm value in the table below>
-        wellKnown: <Found in the "Endpoints" section of the app registrations page>
-      connectors:
-        clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
 ```
 
 </TabItem>
@@ -281,7 +243,6 @@ Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entr
 | Optimize            | **Microsoft Entra ID:** <br/> `https://<OPTIMIZE_URL>/api/authentication/callback` <br/><br/> **Helm:** <br/> `https://<OPTIMIZE_URL>` | There is a fallback if you use the existing environment variables to configure your authentication provider. If you use a custom `yaml`, update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following Optimize features are not currently available: <br/>- The **User permissions** tab in collections<br/>- The **Alerts** tab in collections<br/>- Digests<br/>- Accessible usernames for owners of resources (the `sub` claim value is displayed instead).                                                                                                                                                                                                                                                |
 | Web Modeler         | **Microsoft Entra ID:** <br/> `https://<WEB_MODELER_URL>/login-callback` <br/><br/> **Helm:** <br/> `https://<WEB_MODELER_URL>`        | Web Modeler requires two clients: one for the UI, and one for the API. <br/><br/> Required configuration variables for the `webapp` component:<br/> `OAUTH2_CLIENT_ID=[ui-client-id]`<br/> `OAUTH2_JWKS_URL=[provider-jwks-url]`<br/> `OAUTH2_TOKEN_AUDIENCE=[ui-audience]`<br/> `OAUTH2_TOKEN_ISSUER=[provider-issuer]`<br/> `OAUTH2_TYPE=[provider-type]`<br/><br/> Required configuration variables for the `restapi` component:<br/> `CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[ui-audience]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[api-audience]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]`. |
 | Console             | **Microsoft Entra ID:** <br/> `https://<CONSOLE_URL>` <br/><br/> **Helm:** <br/> `https://<CONSOLE_URL>`                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Connectors          |                                                                                                                                        | Connectors act as a client in the OIDC flow. <br/><br/> For outbound-only mode (when `CAMUNDA_CONNECTOR_POLLING_ENABLED` is `false`), only Zeebe client properties are required: <br/> `ZEEBE_CLIENT_ID=[client-id]`<br/> `ZEEBE_CLIENT_SECRET=[client-secret]`<br/> `ZEEBE_AUTHORIZATION_SERVER_URL=[provider-issuer]`<br/> `ZEEBE_TOKEN_AUDIENCE=[Zeebe audience]`<br/> `ZEEBE_TOKEN_SCOPE=[Zeebe scope]` (optional)<br/><br/> For inbound mode, Operate client properties are required:<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_IDENTITY_AUDIENCE=[Operate audience]`<br/> `CAMUNDA_IDENTITY_CLIENT_ID=[client-id]`<br/> `CAMUNDA_IDENTITY_CLIENT_SECRET=[client-secret]`<br/> `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=[provider-issuer]`       |
 
 ## Supported and unsupported OIDC features
 
@@ -299,3 +260,15 @@ When using [Management Identity](/self-managed/components/management-identity/ov
 | User profile management                                  | Fetches user details from the UserInfo endpoint after authentication to personalize the user experience.                                                                                                                                                                                                                             | <img src={CrossImg} class="table-tick" alt="Unavailable" width="15px"/> |
 
 To request a missing feature, please [contact us](/reference/contact.md).
+
+## OIDC provider known limitations
+
+Camunda requires the `aud` (audience) claim in JWT access tokens for authentication, including machine-to-machine (M2M) flows. The claim must match the configured audience (see [RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3)).
+
+OIDC providers that do not include the `aud` claim in access tokens issued via the OAuth 2.0 Client Credentials flow are not compatible with Camunda for M2M authentication.
+
+### AWS Cognito
+
+AWS Cognito does not include the `aud` claim in Client Credentials access tokens, using `client_id` instead. Camunda rejects these tokens with errors such as `Token audiences are [], expected at least one of [...]`, resulting in `UNAUTHENTICATED` errors for Connectors and other M2M clients. Cognito is not currently supported for M2M authentication.
+
+For tracking and updates, see [camunda/camunda#44650](https://github.com/camunda/camunda/issues/44650).

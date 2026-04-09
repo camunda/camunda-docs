@@ -207,7 +207,7 @@ If an immediate cluster upgrade to a fixed version is not possible, the followin
 
 ## Anomaly detection scripts
 
-The [c8-sm-checks](https://github.com/camunda/c8-sm-checks) project introduces a set of scripts to aid detection of Camunda deployment anomalies.
+The [c8-sm-checks](https://github.com/camunda/c8-sm-checks/) project introduces a set of scripts to aid detection of Camunda deployment anomalies.
 
 These scripts perform health checks on various aspects of the Kubernetes installation and Zeebe components, providing insights into potential issues that may affect the performance or stability.
 
@@ -217,7 +217,7 @@ Each script in the `c8-sm-checks` project can be executed independently, allowin
 
 To utilize these scripts effectively, ensure you have the necessary permissions and access to your Kubernetes cluster. Additionally, make sure you have the required dependencies installed on your system, such as `kubectl`, `helm`, `curl`, and `grpcurl`.
 
-For detailed documentation and usage instructions for each script, refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks).
+For detailed documentation and usage instructions for each script, refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks/).
 Additionally, you can use the `-h` option with each script to display help information directly from the command line.
 
 Before using it, clone the `c8-sm-checks` repository to your local environment by running the following command:
@@ -225,7 +225,7 @@ Before using it, clone the `c8-sm-checks` repository to your local environment b
 ```bash
 git clone https://github.com/camunda/c8-sm-checks.git
 cd c8-sm-checks
-git checkout v1.2.2
+git checkout v1.3.0
 ```
 
 ### Kubernetes connectivity scripts
@@ -267,7 +267,7 @@ These scripts focus on verifying the connectivity and health of Zeebe components
 This script verifies connectivity to a Zeebe instance using HTTP/2 and gRPC protocols, providing insights into the health and status of your Zeebe deployment.
 
 ```bash
-./checks/zeebe/connectivity.sh -a https://local.distro.example.com/auth/realms/camunda-platform/protocol/openid-connect/token -i myclientid -s 0Rn28VrQxGNxowrCWe6wbujwFghO4990 -u zeebe.distro.example.com -H zeebe.local.distro.example.com:443
+./checks/zeebe/connectivity.sh -a https://local.distro.example.com/auth/realms/camunda-platform/protocol/openid-connect/token -i myclientid -s 0Rn28VrQxGNxowrCWe6wbujwFghO4990 -u orchestration-api -H zeebe.local.distro.example.com:443
 ```
 
 Find more information on [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-process-application/kube/README.md#4-generating-an-m2m-token-for-our-application).
@@ -306,10 +306,10 @@ The error message suggests adjusting the Ingress configuration to include the re
 Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the Ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
 :::
 
-## Basic Authentication Performance
+## Basic authentication Performance
 
-Throughput when using Basic Authentication is very limited, supporting only a few API requests per second.
-Workloads greater than that which can be supported by Basic Authentication may cause request processing to stall,
+Throughput when using Basic authentication is very limited, supporting only a few API requests per second.
+Workloads greater than that which can be supported by Basic authentication may cause request processing to stall,
 as queued requests can time out before they are processed.
 
 Development and testing scenarios that are performance-sensitive may
@@ -329,3 +329,64 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe
 skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
 skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
+
+## Incorrect authorizations when deploying resources from Modeler
+
+If you encounter missing or invalid authorizations when deploying resources or starting process instances from Web Modeler or Desktop Modeler, review which credentials are being used:
+
+- **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/identity/user.md) has the required permissions.
+- **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/identity/client.md) has the required permissions.
+
+## Zeebe data loss after PVC deletion
+
+If all Zeebe data is lost after a PersistentVolumeClaim (PVC) was deleted, the likely cause is that your StorageClass uses the `Delete` reclaim policy instead of `Retain`.
+
+### Symptoms
+
+- All process definitions and instances are gone
+- Zeebe brokers start fresh with no historical data
+- Elasticsearch/OpenSearch still has data, but Zeebe does not
+
+### Root cause
+
+- Your StorageClass has `reclaimPolicy: Delete` (the default in most Kubernetes distributions)
+- A PVC was deleted (manually, by automation, or during cluster maintenance)
+- Kubernetes automatically deleted the underlying PersistentVolume and all its data
+
+### How to check your current configuration
+
+```bash
+# Check your StorageClass reclaim policy
+kubectl get storageclass
+
+# Look for the RECLAIMPOLICY column - it should show "Retain" for production workloads
+NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE
+gp3             ebs.csi.aws.com         Delete          WaitForFirstConsumer   # ❌ Problem
+ebs-sc          ebs.csi.aws.com         Retain          WaitForFirstConsumer   # ✅ Correct
+```
+
+### Solution
+
+1. **Create a new StorageClass with `Retain` policy** before deploying Camunda:
+
+   ```yaml
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: camunda-storage
+   provisioner: <your-provisioner> # e.g., ebs.csi.aws.com, disk.csi.azure.com
+   reclaimPolicy: Retain
+   volumeBindingMode: WaitForFirstConsumer
+   ```
+
+2. **For existing PersistentVolumes**, you can patch them to use `Retain`:
+
+   ```bash
+   kubectl patch pv <pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+   ```
+
+### Why this matters
+
+For stateful applications like Zeebe that store critical business data, the `Retain` policy is the industry-standard best practice. This ensures that even if a PVC is accidentally deleted, the underlying data remains intact and can be recovered.
+
+For more information, see the official Kubernetes documentation on [changing the reclaim policy of a PersistentVolume](https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/#why-change-reclaim-policy-of-a-persistentvolume).

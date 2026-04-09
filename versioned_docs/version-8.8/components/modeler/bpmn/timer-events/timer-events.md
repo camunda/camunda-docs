@@ -59,6 +59,8 @@ import ISO8601DateTime from '../assets/react-components/iso-8601-date-time.md'
 
 <ISO8601DateTime/>
 
+If the date is in the past at the time of deployment, the timer fires immediately.
+
 ### Time duration
 
 A duration is defined as a ISO 8601 durations format, which defines the amount of intervening time in a time interval and are represented by the format `P(n)Y(n)M(n)DT(n)H(n)M(n)S`. Note that the `n` is replaced by the value for each of the date and time elements that follow the `n`.
@@ -96,6 +98,8 @@ It's possible to define a start time. By doing this, the timer triggers for the 
 
 - `R3/2022-04-27T17:20:00Z/P1D`: Every day up to three times, starting from April 27, 2022 at 5:20 p.m. UTC
 - `R/2022-01-01T10:00:00+02:00[Europe/Berlin]/P1D`: Every day infinitely, starting from January 1, 2022 at 10 a.m. UTC plus 2 hours
+
+If the start time is in the past at the time of deployment, the timer fires immediately upon deployment, and then continues with the regular interval from that point on.
 
 Additionally, you can specify a time cycle using cron expressions. Refer to the [CronExpression Tutorial](https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions) for additional information about using cron expressions.
 

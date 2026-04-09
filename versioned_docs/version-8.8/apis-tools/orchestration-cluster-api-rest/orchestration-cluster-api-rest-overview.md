@@ -42,7 +42,7 @@ This section helps you get up and running in minutes. To begin using the Orchest
 - **A Camunda 8 Orchestration Cluster**
   - For local development, use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), which expose the API without requiring credentials or tokens by default.
   - For production or advanced development, use [Helm/Kubernetes](/self-managed/deployment/helm/install/quick-install.md) or [manual installation](/self-managed/deployment/manual/install.md).
-  - Alternatively, sign up for a free [Camunda 8 SaaS trial](https://camunda.com/try-camunda-cloud/) to get a managed cluster with the API enabled.
+  - Alternatively, sign up for a free [Camunda 8 SaaS trial](https://accounts.camunda.io/signup) to get a managed cluster with the API enabled.
 
 - **A client to send API requests**
   - Quick testing: Use the [Swagger](../orchestration-cluster-api-rest-swagger) interface
@@ -80,7 +80,7 @@ curl http://localhost:8080/v2/topology
 > Replace `http://localhost:8080/v2` with your actual `${BASE_URL}` if not running in a C8 Run or Docker-Compose.
 > See [Base URLs](#base-urls) below for details on SaaS and custom setups.
 
-**Using Postman**  
+**Using Postman**
 Try the [get cluster topology](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) request or browse the full collection.
 
 This request returns information about your cluster topology, confirming that your setup is working correctly.

@@ -5,6 +5,8 @@ sidebar_label: "Quick reference"
 description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more."
 ---
 
+import JavadocImg from './assets/javadoc-86.png';
+
 ## Dependencies
 
 To use the Java client library, declare the following Maven dependency in your project:
@@ -96,7 +98,15 @@ Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `sche
 
 ## Javadoc
 
-The official Java client library API documentation can be found [here](https://javadoc.io/doc/io.camunda/zeebe-client-java). These are standard Javadocs, so your favorite JVM IDE will be able to install them locally as well.
+Refer to the official Java client library API documentation at [javadoc.io/doc/io.camunda/zeebe-client-java](https://javadoc.io/doc/io.camunda/zeebe-client-java/8.7.17).
+
+Select the relevant Javadoc version as the latest version is shown by default at this URL. For example:
+
+<img src={JavadocImg} alt="Example Javadoc version" class="img-500"/>
+
+:::tip
+As these are standard Javadocs, your favorite JVM IDE can install them locally.
+:::
 
 ## Next steps
 

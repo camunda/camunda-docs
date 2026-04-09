@@ -2,7 +2,7 @@
 id: c8run
 title: "Developer quickstart – Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster using Camunda 8 Run."
+description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -10,10 +10,15 @@ import TabItem from "@theme/TabItem";
 import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
-Camunda 8 Run is not supported for production use.
+Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use.
+
+For production deployments, install the Orchestration Cluster manually as a Java application.
+For detailed steps, see the [manual installation](../../../deployment/manual/install) guide.
 :::
 
-Camunda 8 Run enables you to run [Orchestration cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
+Camunda 8 Run is a local distribution of Camunda 8 that bundles the Camunda 8 runtime, core services, startup scripts, and a launcher application for Windows, macOS, and Linux.
+
+Camunda 8 Run enables you to run the [Orchestration Cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
 
 Camunda 8 Run includes the following:
 
@@ -40,20 +45,63 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the `.tgz` file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
-3. Start Camunda 8 Run by running one of the following in your terminal:
+3. Start Camunda 8 Run by following the steps below, depending on your operating system.
 
-- On Mac and Linux:
-  - Run the helper script: `./start.sh`
-  - Or use the CLI command: `./c8run start`
-- On Windows:
-  - Use the CLI command: `.\c8run.exe start`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+Run the helper script:
+
+```bash
+./start.sh
+```
+
+Or use the CLI command:
+
+```bash
+./c8run start
+```
+
+</TabItem>
+<TabItem value="windows">
+
+Use the CLI command:
+
+```bash
+.\c8run.exe start
+```
+
+</TabItem>
+</Tabs>
 
 If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate).
 
-To start Camunda 8 in Docker Compose using C8Run you can use the following option. It is equivalent of running `docker compose up -d` :
+To start Camunda 8 in Docker Compose using C8Run you can use the following option. It is equivalent of running `docker compose up -d`:
 
-- On Mac and Linux: `./start.sh --docker`
-- On Windows: `.\c8run.exe start --docker`
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
+```bash
+./start.sh --docker
+```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe start --docker
+```
+
+</TabItem>
+</Tabs>
 
 When started with Docker, Operate will be available at [http://localhost:8088/operate](http://localhost:8088/operate).
 
@@ -83,7 +131,7 @@ For more advanced or permanent configuration, modify the default `configuration/
 
 ### Access Camunda components
 
-Camunda 8 Run uses basic authentication with demo/demo for all web interfaces. OIDC/Keycloak is not included in this distribution.
+Camunda 8 Run uses Basic authentication with demo/demo for all web interfaces. OIDC/Keycloak is not included in this distribution.
 You can log in to all web interfaces using with the default credentials:
 
 - **Username:** `demo`
@@ -116,7 +164,7 @@ Make sure you have installed [Desktop Modeler](/components/modeler/desktop-model
 To [deploy diagrams](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, use the following configuration:
 
 - **Target:** Self-Managed
-- **Cluster endpoint:** `http://localhost:26500` (Zeebe Gateway)
+- **Cluster endpoint:** `http://localhost:8080/v2`
 - **Authentication:** None
 
 A success notification will display when complete. [Start a new process instance](/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
@@ -203,12 +251,26 @@ camunda:
 
 To shut down (non-Docker) Camunda 8 Run and end all running processes, run the following command from the `c8run` directory:
 
+<Tabs groupId="os" defaultValue="maclinux" values={
+[
+{ label: 'Mac OS + Linux', value: 'maclinux', },
+{ label: 'Windows', value: 'windows', },
+] }>
+<TabItem value="maclinux">
+
 ```bash
 ./shutdown.sh
-
-# Windows:
-# .\c8run.exe stop
 ```
+
+</TabItem>
+<TabItem value="windows">
+
+```bash
+.\c8run.exe stop
+```
+
+</TabItem>
+</Tabs>
 
 If you started Camunda 8 Run with Docker `./start.sh --docker`, run the following command instead:
 
@@ -233,8 +295,14 @@ docker ps
 
 ### Enable TLS
 
-TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.
+TLS can be enabled by providing a local keystore file using the [`--keystore` and `--keystorePassword` configuration options](#configuration-options) at startup. Camunda 8 Run accepts `.jks` certificate files.
 Although C8Run supports TLS, this is intended only for testing.
+
+:::note
+If you use a proxy together with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may block communication between components such as Zeebe, Operate, Identity, or the connector runtime. Add these services to your `nonProxyHosts` configuration.
+
+For details, see [configure a proxy server in Self-Managed](../../../../components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+:::
 
 ### Access metrics
 
@@ -286,4 +354,5 @@ The following advanced configuration options can be provided via environment var
 
 ## Next steps
 
-Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.
+- Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.
+- Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md).

@@ -128,10 +128,42 @@ For example, if you want to set the message ID to the value of the `transactionI
 The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
 The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
+### XML payloads
+
+You can send XML to the webhook or return XML using the response expression, but XML content is treated as a plain string. It will not be parsed or extracted into process variables.
+
+If you need to use correlation keys with XML payloads, send the correlation key in a request header and retrieve it using the **Correlation key (payload)** property. For example:
+
+```feel
+=request.headers["x-correlation-id"]
+```
+
+### Response mode
+
+**Response mode** controls whether the webhook waits for the correlation to complete (synchronous) or returns immediately (asynchronous).
+
+Use synchronous mode only when the caller requires the process result:
+
+- **Start event**: Creates a new process instance and returns its result.
+- **Message start event** (and other message-based events): Correlates the message and returns the matched process instance key.
+
+In asynchronous mode:
+
+- **Start event**: Returns the process instance key of the newly created process.
+- **Message-based events**: Publishes the message and returns the message key.
+
 ## Activate the HTTP Webhook connector by deploying your diagram
 
 Once you click the **Deploy** button, your HTTP Webhook will be activated and publicly available.
 You can trigger it by making a POST request to the generated URL.
+
+:::warning Webhook endpoints and process versions
+When you deploy a new process version that uses the same webhook endpoint as an existing version, the new version won’t become active until no process instances are running on the older version. Webhook endpoints can’t be shared across multiple active process versions.
+
+To activate the new version, complete all process instances on the older version or migrate them using [process instance migration](/components/concepts/process-instance-migration.md). If you need both versions active, use a different webhook endpoint path in the new version.
+
+For related behavior across versions, see [Cross-version deduplication](../advanced-topics/deduplication.md#cross-version-deduplication).
+:::
 
 URLs of the exposed HTTP Webhooks adhere to the following pattern:
 
@@ -270,34 +302,123 @@ Below, find several ways to return data from your Webhook connector.
 
 ### Verification expression
 
-Verification expression is used whenever a webhook needs to return response data **without** starting a process.
-A common use-case may be a [one-time verification challenge](https://webhooks.fyi/security/one-time-verification-challenge).
+The verification expression allows you to return a custom HTTP response without triggering process correlation. This feature supports multiple scenarios beyond one-time verification challenges, including:
+
+- **One-time verification challenges**: Respond to webhook provider verification requests (e.g., Slack, GitHub).
+- **Request validation**: Reject invalid or malformed requests before a process instance is created.
+- **Conditional responses**: Return different responses based on request content.
+
+#### How it works
+
+When the verification expression evaluates to a **non-null** value:
+
+1. The webhook returns the specified response immediately.
+2. Process correlation does not occur.
+3. Activation conditions, HMAC validation, and the rest of the webhook pipeline are skipped.
+
+When the verification expression evaluates to **null**:
+
+1. The webhook continues with normal processing.
+2. Activation conditions are evaluated.
+3. HMAC validation (if configured) is performed.
+4. Process correlation proceeds as usual.
+
+#### Response format
+
+Use the following references to access incoming request data:
+
+- Body: `request.body.`
+- Headers: `request.headers.`
+- URL parameters: `request.params.`
+
+To construct a response, use these fields in the returned object:
+
+- **`body`** – for example:  
+  `{"body": {"challenge": request.body.challenge}}`
+- **`statusCode`** – for example:  
+  `{"statusCode": 201, "body": {"result": "ok"}}`  
+  If omitted, the default status code is **200**.
+- **`headers`** – for example:  
+  `{"headers": {"Content-Type": "application/json"}, "body": {"result": "ok"}}`
+
+Use FEEL expressions to build and transform the response content as needed.
+
+#### Example: One-time verification challenge
+
+A common use-case is a [one-time verification challenge](https://webhooks.fyi/security/one-time-verification-challenge).
 
 For example, consider the following verification challenge from [Slack](https://slack.com/):
 
-`{"token": "Jhj5dZrVaK7ZwHHjRyZWjbDl","challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P","type": "url_verification"}`
+```json
+{
+  "token": "Jhj5dZrVaK7ZwHHjRyZWjbDl",
+  "challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P",
+  "type": "url_verification"
+}
+```
 
 To confirm the Slack events subscription, you must return the following response:
 
-`HTTP 200 OK Content-type: application/json {"challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"}`
+```
+HTTP 200 OK
+Content-type: application/json
+{"challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"}
+```
 
 To do so, the **Verification expression** field may look like:
 
-`=if request.body.type = "url_verification" then {"body": {"challenge": request.body.challenge}, "statusCode": 200} else null`.
+```feel
+=if request.body.type = "url_verification"
+then {"body": {"challenge": request.body.challenge}, "statusCode": 200}
+else null
+```
 
-When working with `request` data, use the following references to access data:
+#### Example: Request validation
 
-- Body: `request.body.`.
-- Headers: `request.headers.`.
-- URL parameters: `request.params.`.
+You can validate incoming requests and reject invalid payloads before creating a process instance:
 
-When working with response, you can use the following placeholders:
+```feel
+=if request.body.requiredField = null
+then {"body": {"error": "Missing required field"}, "statusCode": 400}
+else null
+```
 
-- Body: `"body"`, for example `{"body": {"challenge": request.body.challenge}}`.
-- Status code: `statusCode`, for example `{"statusCode": 201, "body": {"challenge": request.body.challenge}}`.
-- Headers: `headers`, for example `{"headers": {"X-Challenge": request.body.challenge}, "body": {"challenge": request.body.challenge}}`.
+This expression checks if `requiredField` is missing and returns a `400 Bad Request` status with an error message. If the field is present, it returns `null`, allowing normal webhook processing to continue.
 
-You can also use FEEL expressions to modify the data you return.
+#### Example: Custom status codes
+
+You can return any HTTP status code, including non-standard or conflict codes:
+
+```feel
+=if request.body.challenge != null
+then {"body": {"challenge": request.body.challenge}, "statusCode": 409}
+else null
+```
+
+#### Example: Custom headers
+
+You can include custom headers in your response:
+
+```feel
+=if request.body.challenge != null
+then {
+  "body": {"challenge": request.body.challenge},
+  "headers": {"Content-Type": "application/camunda-bin"}
+}
+else null
+```
+
+#### Example: Nested body structure
+
+You can access and respond to nested data structures in the request:
+
+```feel
+=if request.body.event_type = "verification"
+then {"body": {"challenge": request.body.event.challenge}}
+else null
+```
+
+This example extracts the challenge from a nested `event` object and returns it in the response.
 
 ### Response expression
 
@@ -362,7 +483,78 @@ In addition to the `request` object you have access to the `correlation` result.
 
 The data available via the `correlation` object depends on the type of BPMN element you are using the Webhook connector with.
 
-A start event with a message definition uses message publishing internally to correlate an incoming request with Zeebe. A successful correlation will therefore lead to a published message and the `correlation` object will contain the following properties:
+The following overview summarizes the different data points available when using the Webhook connector with different element types and configuration options.
+
+**`correlation` payload by response mode**
+
+The table below shows which `correlation` result type is produced for each supported BPMN element type and response mode.
+
+The result type determines what is available in the **response expression** context (`correlation` property) and in the HTTP response returned to the caller.
+
+<table>
+<tr>
+  <td>*Element Type*</td>
+  <td>Response mode: **Synchronous**</td>
+  <td>Response mode: **Asynchronous**</td>
+</tr>
+<tr>
+  <td>**Start Event**</td>
+  <td> 
+  ```
+  { 
+    "processInstanceKey": 123,
+    "tenantId": "abc", 
+    "variables": {...}
+  }
+```
+The `variables` contain the result of the process execution.
+</td>
+<td>
+  ```
+  { 
+    "processInstanceKey": 123,
+    "tenantId": "abc"
+  }
+```
+The result of the process execution is not available, but it can be fetched via the API using the `processInstanceKey`.
+</td>
+</tr>
+<tr>
+  <td>
+    **Message Start Event**
+
+    **Intermediate Catch Event**
+
+    **Boundary Event**
+
+    **Receive Task**
+
+  </td>
+  <td> 
+  ```
+  { 
+    "processInstanceKey": 123,
+    "messageKey": 123,
+    "tenantId": "abc"
+  }
+```
+The `processInstanceKey` contains the first process instance key with which the message correlated.
+</td>
+<td>
+  ```
+  { 
+    "messageKey": 123,
+    "tenantId": "abc"
+  }
+```
+The message is buffered and only the `messageKey` is returned. Correlation to a subscription happens asynchronously in the engine.
+</td>
+</tr>
+</table>
+
+A start event with a message definition uses message publishing internally to correlate an incoming request with Zeebe.
+
+A successful correlation therefore publishes a message, and the `correlation` object contains the following properties when using the `asynchronous` response mode:
 
 ```json
 {
@@ -371,15 +563,24 @@ A start event with a message definition uses message publishing internally to co
 }
 ```
 
-If a Webhook request is processed more than once using the same _Message ID_ (because of a retry for example) the `correlation` object will be empty.
+If a Webhook request is processed more than once using the same _Message ID_ (for example, because of a retry), the `correlation` object is empty.
 
-A start event without a message will create a new process instance. You therefore have access to the
-newly create process instance key when accessing the `correlation` object:
+A start event without a message creates a new process instance. You therefore have access to the newly created process instance key when accessing the `correlation` object:
 
 ```json
 {
   "processInstanceKey": 6755399441144562,
   "tenantId": "<default>"
+}
+```
+
+If the `synchronous` response mode is selected, the response also contains the result `variables` from the execution.
+
+```json
+{
+  "processInstanceKey": 6755399441144562,
+  "tenantId": "<default>",
+  "variables": {...}
 }
 ```
 

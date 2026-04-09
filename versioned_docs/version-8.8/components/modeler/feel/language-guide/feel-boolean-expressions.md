@@ -42,31 +42,31 @@ Both values must be of the same type. Otherwise, the result is `null`.
   <tr>
     <td>&lt;</td>
     <td>less than</td>
-    <td>number, date, time, date-time, duration</td>
+    <td>number, string, date, time, date-time, duration</td>
   </tr>
 
   <tr>
     <td>&lt;=</td>
     <td>less than or equal to</td>
-    <td>number, date, time, date-time, duration</td>
+    <td>number, string, date, time, date-time, duration</td>
   </tr>
 
   <tr>
     <td>&gt;</td>
     <td>greater than</td>
-    <td>number, date, time, date-time, duration</td>
+    <td>number, string, date, time, date-time, duration</td>
   </tr>
 
   <tr>
     <td>&gt;=</td>
     <td>greater than or equal</td>
-    <td>number, date, time, date-time, duration</td>
+    <td>number, string, date, time, date-time, duration</td>
   </tr>
 
   <tr>
     <td>between [x] and [y]</td>
     <td>same as (_ &gt;= x and _ &lt;= y)</td>
-    <td>number, date, time, date-time, duration</td>
+    <td>number, string, date, time, date-time, duration</td>
   </tr>
 
 </table>

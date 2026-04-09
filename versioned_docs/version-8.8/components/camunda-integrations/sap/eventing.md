@@ -65,7 +65,7 @@ The host portion of the URL (`https://<region>.connectors.camunda.io`) is used w
 ### Authentication
 
 In the REST consumer configuration, set up authentication from AEM to the Camunda webhook endpoint.  
-The credentials configured in the **Authorization** section of the Camunda connector must match the **authentication scheme** used in AEM.
+The credentials configured in the **Authorization** section of the built-in connector must match the **authentication scheme** used in AEM.
 
 ![Camunda and AEM credentials](./img/eventing-authorization.png)
 

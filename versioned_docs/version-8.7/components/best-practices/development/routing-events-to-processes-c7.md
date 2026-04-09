@@ -370,7 +370,7 @@ If you have an ESB in your architecture, you may want to start process instances
 
 ## Using the Camunda BPMN framework
 
-If you use the **Camunda BPMN Framework** as described in the book ["Real Life BPMN"](https://www.amazon.de/dp/B07XC6R17R/) you will typically have message start events (even if you only have a single start event) to connect the surrounding human flows to the technical flow via messages:
+If you use the **Camunda BPMN Framework** as described in the book ["Real Life BPMN"](https://page.camunda.com/wp-real-life-bpmn-book-excerpt) you will typically have message start events (even if you only have a single start event) to connect the surrounding human flows to the technical flow via messages:
 
 <div bpmn="best-practices/routing-events-to-processes-assets/collaboration.bpmn" callouts="MessageStartEvent1" />
 

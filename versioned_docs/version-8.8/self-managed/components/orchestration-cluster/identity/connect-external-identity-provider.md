@@ -7,7 +7,11 @@ description: Learn how to connect Camunda 8 Orchestration Cluster Identity to an
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Configure Identity to use an external identity provider (IdP) via OpenID Connect (OIDC).
+Configure Identity to use an external identity provider (IdP) via OpenID Connect (OIDC) at the application level, including claims and mapping rules.
+
+:::info Deploying with Helm?
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Identity.
+:::
 
 ## About Authentication and authorization
 
@@ -48,7 +52,7 @@ For most IdPs, the default claim for the username is `sub` (subject). If you wan
 
 ### Step 2: Choose your deployment and configuration method
 
-You can configure OIDC using `application.yaml`, environment variables, or Helm values.
+You can configure OIDC using `application.yaml` or environment variables.
 
 Select the option that best fits your deployment approach.
 
@@ -56,7 +60,7 @@ Select the option that best fits your deployment approach.
 
 Set the authentication method to OIDC using the following settings:
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
 
 ```yaml
@@ -69,18 +73,13 @@ camunda.security.authentication.method: oidc
 CAMUNDA_SECURITY_AUTHENTICATION_METHOD=oidc
 ```
 </TabItem>
-<TabItem value="helm">
-```
-orchestration.security.authentication.method: oidc
-```
-</TabItem>
 </Tabs>
 
 ### Step 4: Configure the OIDC connection details
 
 Set the following properties using the respective values from your IdP:
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
 
 ```yaml
@@ -105,20 +104,46 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES=<YOUR_CLIENTID>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 ```
 </TabItem>
-<TabItem value="helm">
-```yaml
-orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-orchestration.security.authentication.oidc.issuerUri: <YOUR_ISSUERURI>
-orchestration.security.authentication.oidc.redirectUri: <YOUR_REDIRECTURI>
-orchestration.security.authentication.oidc.usernameClaim: <YOUR_USERNAMECLAIM>
-orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.scope: ["openid"]
-```
-</TabItem>
 </Tabs>
 
-- **Redirect URI**: By default, the redirect URI is `http://localhost:8080/sso-callback`. Update this if your deployment uses a different hostname or port.
+:::tip
+If your OIDC provider needs to be reached using different URLs from the browser and backend (for example, when running in Docker or behind a reverse proxy), you can configure separate URIs instead of a single `issuer-uri`. See [use separate OIDC provider URIs for browser and backend](./special-oidc-cases.md#use-separate-oidc-provider-uris-for-browser-and-backend) for details.
+:::
+
+## Redirect URI
+
+Use the redirect URI to define where the Identity Provider (IdP) sends users back after successful authentication.
+
+By default, the redirect URI is:
+
+`{baseUrl}/sso-callback`
+
+At runtime, `{baseUrl}` resolves to the URL used to access your Orchestration Cluster deployment. In most cases, you do not need to change this value.
+
+You may need to customize the redirect URI in advanced scenarios, such as:
+
+- When your deployment is accessed through reverse proxies or load balancers
+- When you need to pass context information while configuring multiple OIDC providers
+
+Regardless of customization, the redirect URI must always point to the `/sso-callback` endpoint of your Orchestration Cluster deployment.
+
+Most Identity Providers require you to explicitly configure allowed redirect URIs for security reasons. Ensure the value configured in your IdP exactly matches the redirect URI used here, whether it is static or dynamically resolved using `{baseUrl}`.
+
+:::note
+
+`{baseUrl}` is dynamically resolved for each request based on the URL used to access the Orchestration Cluster instance. It is composed of the following parts:
+
+- `{scheme}`: The transport scheme (`http` or `https`)
+- `{host}`: The hostname used to connect to the instance
+- `{port}`: The port number, if specified (omitted if not used)
+- `{contextPath}`: The context path of the Orchestration Cluster instance, if configured (omitted if none)
+
+For example:
+
+- Accessing the instance via `https://camunda.acme.com/identity` resolves `{baseUrl}` to `https://camunda.acme.com`
+- Accessing the instance via `https://services.acme.com:18080/camunda/` resolves `{baseUrl}` to `https://services.acme.com:18080/camunda`
+
+:::
 
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
 
@@ -130,29 +155,29 @@ To do so, include the Web Modeler UI's token audience in the configured list of 
 
 #### Example IdP configuration
 
-The following examples use HELM values notation. You can also apply these using application.yaml or environment variables shown above.
+The following examples show typical OIDC settings in `application.yaml`. Adapt the values to your environment and IdP configuration.
 
 <Tabs groupId="idpExamples" defaultValue="entraid">
 <TabItem value="entraid" label="Microsoft EntraID">
 ```yaml
-orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-orchestration.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
-orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
-orchestration.security.authentication.oidc.usernameClaim: "oid"
-orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
+camunda.security.authentication.oidc.client-id: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.client-secret: <YOUR_CLIENTSECRET>
+camunda.security.authentication.oidc.issuer-uri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
+camunda.security.authentication.oidc.redirect-uri: "http://localhost:8080/sso-callback"
+camunda.security.authentication.oidc.username-claim: "oid"
+camunda.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.scope: ["openid", "profile", "<YOUR_CLIENTID>/.default"]
 ```
 </TabItem>
 <TabItem value="keycloak" label="Keycloak">
 ```yaml
-orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-orchestration.security.authentication.oidc.issuerUri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
-orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
-orchestration.security.authentication.oidc.usernameClaim: "preferred_username"
-orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.scope: ["openid", "profile", "email"]
+camunda.security.authentication.oidc.client-id: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.client-secret: <YOUR_CLIENTSECRET>
+camunda.security.authentication.oidc.issuer-uri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
+camunda.security.authentication.oidc.redirect-uri: "http://localhost:8080/sso-callback"
+camunda.security.authentication.oidc.username-claim: "preferred_username"
+camunda.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.scope: ["openid", "profile", "email"]
 ```
 </TabItem>
 </Tabs>
@@ -175,7 +200,7 @@ If login is successful, you will see that you are not authorized to access the O
 
 To allow users to access the Orchestration Cluster UI, you can assign the "Admin" role to a user from your IdP:
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
 
 ```yaml
@@ -186,11 +211,6 @@ camunda.security.initialization.defaultRoles.admin.users: [<YOUR_USERNAME>]
 <TabItem value="env">      
 ```
 CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS_0=<YOUR_USERNAME>
-```
-</TabItem>
-<TabItem value="helm">
-```yaml
-orchestration.security.initialization.defaultRoles.admin.users: [ <YOUR_USERNAME> ]
 ```
 </TabItem>
 </Tabs>
@@ -212,7 +232,7 @@ You can manage groups in the Orchestration Cluster or bring groups that you have
 
 You can then use these groups for role and authorization assignment, and tenant assignment.
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
 
 ```yaml
@@ -223,11 +243,6 @@ camunda.security.authentication.oidc.groups-claim: <YOUR_GROUPSCLAIM>
 <TabItem value="env">
 ```
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM=<YOUR_GROUPSCLAIM>
-```
-</TabItem>
-<TabItem value="helm">
-```yaml
-orchestration.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
 ```
 </TabItem>
 </Tabs>
@@ -249,7 +264,7 @@ Configure job workers, connectors, or custom client applications to use the Orch
 
 When it receives a request with an access token, the Orchestration Cluster needs to identify the client based on a claim in the token's payload. You can determine this claim by applying the following setting to the Orchestration Cluster:
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
 
 ```yaml
@@ -260,11 +275,6 @@ camunda.security.authentication.oidc.client-id-claim: <YOUR_CLIENTIDCLAIM>
 <TabItem value="env">
 ```
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTIDCLAIM=<YOUR_CLIENTIDCLAIM>
-```
-</TabItem>
-<TabItem value="helm">
-```yaml
-orchestration.security.authentication.oidc.clientIdClaim: <YOUR_CLIENTIDCLAIM>
 ```
 </TabItem>
 </Tabs>
@@ -377,7 +387,7 @@ As per default authorizations are enabled, your application will only be able to
 
 </TabItem>
 <TabItem value="springclient" label="Camunda Spring Boot Starter">
-1) Add the dependency to your Java Project:
+1. Add the dependency to your Java Project:
 
 ```xml
 <dependency>
@@ -499,3 +509,4 @@ private static final String clusterRestLocal = "http://localhost:8080";
 - [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)
 - [OpenID Connect (OIDC) overview](https://openid.net/connect/)
 - [Camunda authentication and authorization](../../../../components/concepts/access-control/authorizations.md)
+- [Helm chart authentication and authorization configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md)

@@ -300,7 +300,7 @@ Refer to the [Bitbucket documentation](https://developer.atlassian.com/server/bi
 3. Fill in the **Configure Bitbucket** modal with the following information:
    - **Access token:** The user access token you generated.
    - **Bitbucket API Base URL:** (optional - _**SaaS only**_, configured globally for SM) The base URL of your Bitbucket installation's REST API (e.g., `https://bitbucket.example.com/rest/api/latest`, see [documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris)). Only necessary for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
-   - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path.
+   - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path. For personal repositories, use `~{user}` as the project ID (for example, `projects/~alice/repos/example-repo`).
    - **Branch name:** The branch to use for merging and managing changes.
    - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
 
@@ -321,12 +321,12 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
 1. In your connected process application, click **Sync with _GitProvider_** button.
-2. Enter a [version number](process-applications/process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
+2. Enter a [version number](process-applications/process-applications.md#process-application-versioning) to create a new version for your process application. The new version will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
 
-Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created milestone is now accessible via the **View milestone** button in the success notification.
+Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created version is now accessible via the **View version** button in the success notification.
 
 ## Manage existing configurations
 

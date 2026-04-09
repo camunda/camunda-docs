@@ -81,6 +81,12 @@ For example, a `Process Definition` resource has a `CREATE_PROCESS_INSTANCE` per
 
 The following table lists all resources that support authorization in the **Orchestration Cluster** (Zeebe, Operate, Tasklist, **Orchestration Cluster** APIs), as well as the available permissions per resource.
 
+:::tip
+The wildcard character `*` matches all resources of the selected type.
+
+Partial wildcard matching, for example `my-resource*`, is not supported.
+:::
+
 | Resource type                        | Resource key example                   | Resource key type                    | Supported permissions                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | :----------------------------------- | :------------------------------------- | :----------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Authorization**                    | `*`                                    | All authorizations                   | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -162,7 +168,9 @@ These permissions should be strictly limited to trusted system administrators wh
 
 ### No validation of owner and resource IDs
 
-When you create an authorization, the Orchestration Cluster does not validate if the owner or the resource exists at that point in time.
+When you create an authorization, the Orchestration Cluster validates the owner depending on the `ownerType`. For `USER`, `ROLE`, `GROUP`, and `MAPPING_RULE`, the owner must exist in Identity. For `CLIENT`, the owner is not validated.
+
+The Orchestration Cluster does not validate whether the resource exists when creating an authorization.
 
 - This behavior provides flexibility to create authorizations for entities outside of the system (for example OIDC users) or for entities that will be created in the future (for example creating process definition authorizations before the process is deployed).
 
@@ -172,18 +180,20 @@ When you create an authorization, the Orchestration Cluster does not validate if
 
 Camunda provides predefined roles to simplify access management:
 
-| Role ID          | Purpose                                                                             | Typical authorizations                                                                                                                                                                              |
-| ---------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `admin`          | Full control over all **Orchestration Cluster** resources and components.           | All permissions for all resources: `READ`, `CREATE`, `UPDATE`, `DELETE`, including `ACCESS` to all web components.                                                                                  |
-| `readonly-admin` | Audit-focused users who need read-only access across the **Orchestration Cluster**. | `READ` for all resources, including `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, etc.                                                                                      |
-| `connectors`     | Technical role for executing connector calls.                                       | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `CREATE` on **Message** (`*`), `CREATE`, `READ`, and `DELETE` on **Document** |
-| `rpa`            | Role for RPA workers.                                                               | `READ` on **Resource** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`)                                                                                                             |
+| Role ID            | Purpose                                                                             | Typical authorizations                                                                                                                                                                                                                                                  |
+| ------------------ | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `admin`            | Full control over all **Orchestration Cluster** resources and components.           | All permissions for all resources: `READ`, `CREATE`, `UPDATE`, `DELETE`, including `ACCESS` to all web components.                                                                                                                                                      |
+| `app-integrations` | Technical role for executing app integration calls.                                 | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_INSTANCE`, `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `READ_USER_TASK`, `UPDATE_USER_TASK` on **Process Definition** (`*`) `CREATE` on **Document** |
+| `connectors`       | Technical role for executing connector calls.                                       | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `CREATE` on **Message** (`*`), `CREATE`, `READ`, and `DELETE` on **Document**                                                                     |
+| `readonly-admin`   | Audit-focused users who need read-only access across the **Orchestration Cluster**. | `READ` for all resources, including `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, etc.                                                                                                                                                          |
+| `rpa`              | Role for RPA workers.                                                               | `READ` on **Resource** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`)                                                                                                                                                                                 |
 
 ### Role assignment in SaaS
 
-- **admin**: Automatically assigned to Organization Owner and Admin
-- **connectors**: Automatically assigned to Connectors Runtime in Cluster deployment
-- **readonly-admin**: Automatically assigned to Camunda Support Agents for support cases
+- **admin**: Automatically assigned to organization owner and admin.
+- **connectors**: Automatically assigned to Connector Runtime in cluster deployment.
+- **app-integrations**: Automatically assigned to app integration clients in cluster deployment.
+- **readonly-admin**: Automatically assigned to Camunda Support agents for support cases.
 
 ## Common use cases
 
@@ -219,4 +229,4 @@ Within components, users need additional permissions for specific resources, for
 When implementing your own integrations (for example, using a Camunda client), you should consider the following:
 
 - **Job workers**: Resource type `processDefinition`
-  - `UPDATE_PROCESS_INSTANCE` to complete jobs for the specific process definitions
+  - `UPDATE_PROCESS_INSTANCE` to activate or complete jobs for the specific process definitions

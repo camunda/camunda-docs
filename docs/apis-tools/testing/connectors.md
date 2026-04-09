@@ -15,7 +15,7 @@ by [completing connector jobs](utilities.md#mock-job-workers) with an expected r
 :::note
 The instructions on this page are based on the default Testcontainer runtime. If you are using a remote runtime, consult
 the relevant distribution documentation, such
-as [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#use-built-in-and-custom-connectors).
+as [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#use-built-in-and-custom-connectors).
 :::
 
 ## Enable connectors
@@ -338,7 +338,7 @@ tests, for example, setting the URL expression to `"{{secrets.BASE_URL}}" + "/te
 
 ## Custom connectors
 
-By default, the runtime uses the Camunda connectors bundle in the same version as the Maven module. You can change the
+By default, the runtime uses the built-in connectors bundle in the same version as the Maven module. You can change the
 version or use a custom connectors bundle in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={

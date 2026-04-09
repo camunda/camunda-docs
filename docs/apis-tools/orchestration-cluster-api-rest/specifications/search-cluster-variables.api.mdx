@@ -1,0 +1,854 @@
+---
+id: search-cluster-variables
+title: "searchClusterVariables"
+description: "<MarkerEventuallyConsistentExtension />"
+sidebar_label: "searchClusterVariables"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"searchClusterVariables"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/cluster-variables/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "truncateValues",
+      in: "query",
+      required: false,
+      description:
+        "When true (default), long variable values in the response are truncated. When false, full variable values are returned.",
+      schema: { type: "boolean" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description: "Cluster variable search query request.",
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          required: ["after"],
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          required: ["before"],
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["name", "value", "tenantId", "scope"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "ClusterVariableSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The cluster variable search filters.",
+              allOf: [
+                {
+                  description: "Cluster variable filter request.",
+                  type: "object",
+                  properties: {
+                    name: {
+                      description: "Name of the cluster variable.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    value: {
+                      description: "The value of the cluster variable.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    scope: {
+                      description: "The scope filter for cluster variables.",
+                      allOf: [
+                        {
+                          description:
+                            "ClusterVariableScopeEnum property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  type: "string",
+                                  enum: ["GLOBAL", "TENANT"],
+                                  description:
+                                    "The scope of a cluster variable.",
+                                  title: "ClusterVariableScopeEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ClusterVariableScopeEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      type: "string",
+                                      enum: ["GLOBAL", "TENANT"],
+                                      description:
+                                        "The scope of a cluster variable.",
+                                      title: "ClusterVariableScopeEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      type: "string",
+                                      enum: ["GLOBAL", "TENANT"],
+                                      description:
+                                        "The scope of a cluster variable.",
+                                      title: "ClusterVariableScopeEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    enum: ["GLOBAL", "TENANT"],
+                                    description:
+                                      "The scope of a cluster variable.",
+                                    title: "ClusterVariableScopeEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "ClusterVariableScopeFilterProperty",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      description: "Tenant ID of this variable.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    isTruncated: {
+                      description:
+                        "Filter cluster variables by truncation status of their stored values. When true, returns only variables whose stored values are truncated (i.e., the value exceeds the storage size limit and is truncated in storage). When false, returns only variables with non-truncated stored values. This filter is based on the underlying storage characteristic, not the response format.\n",
+                      type: "boolean",
+                    },
+                  },
+                  title: "ClusterVariableSearchQueryFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "ClusterVariableSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The cluster variable search result.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Cluster variable search query response.",
+            type: "object",
+            required: ["items"],
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching cluster variables.",
+                type: "array",
+                default: [],
+                items: {
+                  description: "Cluster variable search response item.",
+                  type: "object",
+                  required: ["value", "isTruncated"],
+                  allOf: [
+                    {
+                      description: "Cluster variable response item.",
+                      type: "object",
+                      required: ["name", "scope", "tenantId"],
+                      properties: {
+                        name: {
+                          type: "string",
+                          description:
+                            "The name of the cluster variable. Unique within its scope (global or tenant-specific).",
+                        },
+                        scope: {
+                          type: "string",
+                          enum: ["GLOBAL", "TENANT"],
+                          description: "The scope of a cluster variable.",
+                          title: "ClusterVariableScopeEnum",
+                        },
+                        tenantId: {
+                          type: "string",
+                          nullable: true,
+                          description:
+                            "Only provided if the cluster variable scope is TENANT. Null for global scope variables.",
+                        },
+                      },
+                      title: "ClusterVariableResultBase",
+                    },
+                  ],
+                  properties: {
+                    value: {
+                      description:
+                        "Value of this cluster variable. Can be truncated.",
+                      type: "string",
+                    },
+                    isTruncated: {
+                      description: "Whether the value is truncated or not.",
+                      type: "boolean",
+                    },
+                  },
+                  title: "ClusterVariableSearchResult",
+                },
+              },
+            },
+            title: "ClusterVariableSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

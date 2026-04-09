@@ -23,7 +23,7 @@ Ensure you have the following prerequisites before setting up the Camunda–Serv
 
 - Camunda Spoke: Available on the [ServiceNow Store](https://store.servicenow.com/store/app/aac1b64fc3803290ef46d0af050131d0).
 
-- User account: A technical or administrator account with permissions to access target tables and Flow Designer. This account will be used in Camunda connectors to authenticate and interact with ServiceNow.
+- User account: A technical or administrator account with permissions to access target tables and Flow Designer. This account will be used in built-in connectors to authenticate and interact with ServiceNow.
 
 - Optional plugins (required only for starting ServiceNow flows from Camunda using the Flow Starter connector):
   - Integration Hub Enterprise Pack

@@ -5,6 +5,8 @@ sidebar_label: Alpha features
 description: "Use alpha features to learn about upcoming changes, try them out, and share feedback."
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 You can use alpha features to learn about upcoming changes, try them out, and share feedback.
 
 :::info
@@ -29,6 +31,39 @@ Limitations of alpha features and components include:
 - Released outside the standard [release policy](/reference/announcements-release-notes/release-policy.md).
 
 To learn more about using alpha features, see [enabling alpha features](/components/console/manage-organization/enable-alpha-features.md).
+
+## Available alpha features
+
+The following documented alpha features are currently available:
+
+<DocCardList
+items={[
+{
+type: 'link',
+href: '/docs/next/components/early-access/alpha/bpmn-copilot/',
+label: 'BPMN Copilot',
+docId: 'components/early-access/alpha/bpmn-copilot/bpmn-copilot',
+},
+{
+type: 'link',
+href: '/docs/next/components/early-access/alpha/feel-copilot/',
+label: 'FEEL Copilot',
+docId: 'components/early-access/alpha/feel-copilot/feel-copilot',
+},
+{
+type: 'link',
+href: '/docs/next/components/early-access/alpha/a2a-client/',
+label: 'A2A Client',
+docId: 'components/early-access/alpha/a2a-client/a2a-client',
+},
+{
+type: 'link',
+href: '/docs/next/apis-tools/c8ctl/getting-started/',
+label: 'c8ctl CLI',
+docId: 'apis-tools/c8ctl/getting-started',
+},
+]}
+/>
 
 :::note
 

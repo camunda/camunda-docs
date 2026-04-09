@@ -22,6 +22,11 @@ Restrictions of a variable name:
 - It may not contain **whitespaces** (e.g. `order number` is not allowed; you can use `orderNumber` instead).
 - It may not contain an **operator** (e.g. `+`, `-`, `*`, `/`, `=`, `>`, `?`, `.`).
 - It may not be a **literal** (e.g. `null`, `true`, `false`) or a **keyword** (e.g. `function`, `if`, `then`, `else`, `for`, `between`, `instance`, `of`, `not`).
+- It must stay within the length limits of the target backend: up to **32,768 characters** with Elasticsearch/OpenSearch-backed secondary storage and up to **256 characters** with RDBMS-backed secondary storage.
+
+:::note
+Length is enforced using Java string length semantics rather than raw UTF-8 byte counts. Most common characters count as one character, while characters represented as surrogate pairs in Java count as two. Because of that, the effective visible-character limit can be lower for some inputs.
+:::
 
 ## Variable values
 
@@ -34,9 +39,22 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 - Object (e.g. `{ "orderNumber": "A12BH98", "date": "2020-10-15", "amount": 185.34}`)
 - Null (`null`)
 
+:::note
+Numbers are subject to the following numeric limits:
+
+- Integer numbers are effectively limited to the 64‑bit integer range.
+- Non‑integer numbers are stored as IEEE‑754 double‑precision values, which provide roughly 15–17 significant decimal digits rather than arbitrary BigDecimal precision.
+
+If you need arbitrary-precision or very large numbers, consider storing them as strings or in an external data store instead of process variables.
+:::
+
 ## Variable size limitation
 
-Generally, there is a limit of 4 MB for the payload of a process instance. This 4 MB includes the variables and the workflow engine internal data, which means there is slightly less memory available for variables. The exact limitation depends on a few factors, but you can consider 3 MB as being safe. If in doubt, run a quick test case.
+The payload of a process instance is limited to 4 MB. This limit includes both process variables and workflow engine–internal data, so less than 4 MB is available for variables alone.
+
+The effective limit depends on the operation. As a rule of thumb, ~1.5 MB is considered safe for commands or events that include variables, such as starting a process instance or completing a job. In these cases, the engine may append follow-up records that temporarily duplicate the variable payload within the same batch.
+
+To avoid production issues, leave headroom below the limit—for example, target ≤1 MB—and validate with a production-like test case. If the payload size is uncertain, run a quick test to confirm behavior.
 
 :::note
 Regardless, we don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes.md).
@@ -84,7 +102,7 @@ Input/output variable mappings can be used to create new variables or customize 
 
 Variable mappings are defined in the process as extension elements under `ioMapping`. Every variable mapping has a `source` and a `target` expression.
 
-The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the process instance that holds the value. If the variable or the nested property doesn't exist, it uses `null` as the value.
+The `source` expression defines the **value** of the mapping. It usually [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the process instance that holds the value. If the variable or nested property doesn't exist, the value resolves to `null`. The same applies if you do not provide a `source`.
 
 The `target` expression defines **where** the value of the `source` expression is stored. It can reference a variable by its name or a nested property of a variable. If the variable or the nested property doesn't exist, it's created.
 
@@ -113,7 +131,7 @@ Input mappings can be used to create new variables. They can be defined on [serv
 
 When an input mapping is applied, it creates a new [**local variable**](#local-variables) in the scope where the mapping is defined.
 
-You can use [expressions](./expressions.md) or static values for input mappings.
+You can use [expressions](./expressions.md) or static values for input mappings. You can leave the `source` empty to map the `target` variable to `null`.
 
 For string literals containing escaped characters (e.g., a newline character `\n`), the string is returned in its original form as expected (no double escaping is applied).
 
@@ -125,6 +143,7 @@ Examples:
 | `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
 | `customer: "John"`<br/>`iban: "DE456"` | **source:** `=customer`<br/> **target:** `sender.name`<br/>**source:** `=iban`<br/>**target:** `sender.iban` | `sender: {"name": "John", "iban": "DE456"}` |
 | -                                      | **source:** `"Peter"`<br/>**target:** `sender`                                                               | `sender: "Peter"`                           |
+| `customer:{"name": "John"}`            | **source:** (not provided)<br/>**target:** `customer`                                                        | `customer: null`                            |
 
 ### Output mappings
 
@@ -150,12 +169,19 @@ Examples:
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
 | `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
-| `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |
+
+:::note
+Avoid using output mappings or result variables that contain a period (for example, `customer.name`). Using a period is discouraged because it updates a property of an existing process variable within the task scope, which can lead to confusing behavior or unexpected results in the process flow.
+:::
 
 ### Context variable
 
 A context variable is a reserved variable that describes the context of a task. It can group variables together to provide a detailed description of the task or offer more descriptive data about it.
 The reserved variable name for a context variable is `taskContextDisplayName`. This name is reserved exclusively for this purpose and should not be used for other variables.
+
+:::warning
+Context variables are not supported in Tasklist V2. See [migration from V1 to V2](../tasklist/api-versions.md#migration-from-v1-to-v2).
+:::
 
 Example:
 
@@ -169,4 +195,5 @@ The data from the variable will be shown on the task tile, as shown in the examp
 
 ## Next steps
 
-- [Access variables](/components/modeler/feel/language-guide/feel-variables.md#access-variable)
+- Understand how to [access variables](/components/modeler/feel/language-guide/feel-variables.md).
+- Explore how to centrally manage cluster configuration with [cluster variables](../../components/modeler/feel/cluster-variable/overview.md).

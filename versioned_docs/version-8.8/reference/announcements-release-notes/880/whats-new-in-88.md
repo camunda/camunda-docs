@@ -79,7 +79,7 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 
 Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Agentic orchestration</a></p>
+<p><a href="../../../../components/agentic-orchestration/agentic-orchestration-overview" class="link-arrow">Agentic orchestration</a></p>
 
 Use the following new features to build and integrate AI agents into your processes:
 
@@ -151,7 +151,7 @@ Camunda 8.8 introduces a new unified Camunda Exporter that directly populates da
 
 In Camunda 8.7 and earlier, dedicated importers/exporters were used for data flows between components (such as Elasticsearch import/export).
 
-<p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/" class="link-arrow">Camunda Exporter</a></p>
+<p class="link-arrow">[Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)</p>
 
 :::info
 Learn more about the unified Camunda Exporter in the blog post [One Exporter to Rule Them All: Exploring Camunda Exporter](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
@@ -206,8 +206,8 @@ In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-i
                     <li>
                         <p><strong>Authentication:</strong> Supports three authentication modes:</p>
                         <ul>
-                             <li><p><strong>No Authentication:</strong> No authentication required for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
-                            <li><p><strong>Basic Authentication:</strong> Basic authentication for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
+                             <li><p><strong>No authentication:</strong> No authentication required for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
+                            <li><p><strong>Basic authentication:</strong> Basic authentication for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
                             <li><p><strong>OIDC:</strong> OpenID Connect with any compatible Identity Provider (for example, Keycloak, Microsoft EntraID, Okta).</p></li>
                         </ul>
                     </li>
@@ -327,7 +327,7 @@ After you deploy all Camunda 8 components in a Self-Managed environment, you wil
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
 - Authorization checks are enabled by default for any migrated cluster using the Helm chart. The automated migration ensures that your users and clients can access the UIs and APIs like before.
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
-  - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method.
+  - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic authentication method.
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
 
 The following table summarizes where Orchestration Cluster Identity entities are managed in Camunda 8.8 Self-Managed:
@@ -342,24 +342,24 @@ The following table summarizes where Orchestration Cluster Identity entities are
 | Tenants        | Orchestration Cluster Identity |
 | Mapping Rules  | Orchestration Cluster Identity |
 
-#### Camunda 8 Self-Managed - Basic Authentication
+#### Camunda 8 Self-Managed - Basic authentication
 
-If you are using built-in user management (Basic Authentication), Tasklist and Operate specific built-in user management (using ES/OS as storage) is no longer supported.
+If you are using built-in user management (Basic authentication), Tasklist and Operate specific built-in user management (using ES/OS as storage) is no longer supported.
 
 - Administrators must migrate their users manually into the Orchestration Cluster.
 - You must ensure that **usernames are identical**, otherwise users will not be able to see their assigned tasks.
 
-In a Basic Authentication setup, the Orchestration Cluster provides full functionality:
+In a Basic authentication setup, the Orchestration Cluster provides full functionality:
 
 | Entity type    | Managed via                                   |
 | :------------- | :-------------------------------------------- |
 | Users          | Orchestration Cluster Identity                |
-| Clients        | n/a (not applicable for Basic Authentication) |
+| Clients        | n/a (not applicable for Basic authentication) |
 | Roles          | Orchestration Cluster Identity                |
 | Groups         | Orchestration Cluster Identity                |
 | Authorizations | Orchestration Cluster Identity                |
 | Tenants        | Orchestration Cluster Identity                |
-| Mapping Rules  | n/a (not applicable for Basic Authentication) |
+| Mapping Rules  | n/a (not applicable for Basic authentication) |
 
 ## APIs & tools {#apis-and-tools}
 
@@ -417,7 +417,7 @@ The following guides provide detailed information on how you can upgrade to Camu
     <td>**Who is this guide for?**</td>
 </tr>
 <tr>
-    <td>[Self-Managed upgrade guide](/self-managed/update/administrators/overview.md)</td>
+    <td>[Self-Managed upgrade guide](/self-managed/upgrade/index.md)</td>
     <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
@@ -438,15 +438,15 @@ Camunda 8.8 includes new tools and enhancements to help you migrate from Camunda
     <td>**Description**</td>
 </tr>
 <tr>
-    <td>[Data migration tool](/guides/migrating-from-camunda-7/data-migrator/index.md)</td>
+    <td>[Data migration tool](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/index.md)</td>
     <td>Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.</td>
 </tr>
 <tr>
-    <td>[Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter)</td>
+    <td>[Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling/diagram-converter.md)</td>
     <td>Analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration. It can also automatically convert these files from Camunda 7 format to Camunda 8 format.</td>
 </tr>
 <tr>
-    <td>[Code conversion](/guides/migrating-from-camunda-7/code-conversion.md)</td>
+    <td>[Code conversion](/guides/migrating-from-camunda-7/migration-tooling/code-conversion.md)</td>
     <td>Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.</td>
 </tr>
 </table>

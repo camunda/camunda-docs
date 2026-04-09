@@ -453,8 +453,10 @@ public class MyProcessTest {
 
 ### Change the connection
 
-By default, CPT connects to a remote Camunda 8 Run running on your local machine. You can change the connection in the
-following way.
+By default, CPT connects to a remote Camunda 8 Run running on your local machine. CPT checks if the remote runtime is
+available and ready, before running the tests. It waits up to 1 minute for the remote runtime to become ready.
+
+You can change the connection to the remote runtime and the connection time in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -473,6 +475,8 @@ camunda:
     remote:
       camunda-monitoring-api-address: http://0.0.0.0:9600
       connectors-rest-api-address: http://0.0.0.0:8085
+      # The connection timeout in ISO-8601 duration format (default: PT1M)
+      runtime-connection-timeout: PT1M
       client:
         rest-address: http://0.0.0.0:8080
         grpc-address: http://0.0.0.0:26500
@@ -491,6 +495,8 @@ remote.camundaMonitoringApiAddress=http://0.0.0.0:9600
 remote.connectorsRestApiAddress=http://0.0.0.0:8085
 remote.client.grpcAddress=http://0.0.0.0:26500
 remote.client.restAddress=http://0.0.0.0:8080
+# The connection timeout in ISO-8601 duration format (default: PT1M)
+remote.runtimeConnectionTimeout=PT1M
 ```
 
 Alternatively, register the JUnit extension manually and use the fluent builder:
@@ -514,7 +520,9 @@ public class MyProcessTest {
                     .grpcAddress(URI.create("http://0.0.0.0:26500"))
             )
             .withRemoteCamundaMonitoringApiAddress(URI.create("http://0.0.0.0:9600"))
-            .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"));
+            .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"))
+            // Change the connection timeout (default: PT1M)
+            .withRemoteRuntimeConnectionTimeout(Duration.ofMinutes(1));
 }
 ```
 

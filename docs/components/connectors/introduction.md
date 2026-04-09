@@ -15,14 +15,14 @@ import ConnectorsGrid from './react-components/\_connectors-card';
 import ConnectorsGridSml from './react-components/\_connectors-card-sml';
 import { gettingStartedCards, customConnectorCards, latestConnectorCards, latestConnectorCardsSml, popularConnectorCards, popularConnectorCardsSml } from './react-components/\_connectors-card-data';
 
-<p><a title="Find a Camunda connector" href="../out-of-the-box-connectors/available-connectors-overview"><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}} className="fade-in-top-image"/></a>Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
+<p><a title="Find a built-in connector" href="../out-of-the-box-connectors/available-connectors-overview"><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}} className="fade-in-top-image"/></a>Built-in connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
 
 - Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
 - In microservices orchestration, use a [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) connector to add real-time messaging to your automated processes.
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
-<a class="button button--outline button--secondary button--md button--hero get-started" title="Find a Camunda connector" href="../out-of-the-box-connectors/available-connectors-overview" style={{marginBottom: '40px'}}>Find a Camunda connector</a>
+<a class="button button--outline button--secondary button--md button--hero get-started" title="Find a built-in connector" href="../out-of-the-box-connectors/available-connectors-overview" style={{marginBottom: '40px'}}>Find a built-in connector</a>
 
 ## Get started
 

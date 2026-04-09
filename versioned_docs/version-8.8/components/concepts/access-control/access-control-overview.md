@@ -50,13 +50,14 @@ Authentication and authorization are the two fundamental concepts for access con
 
 ### Authentication
 
-Authentication verifies **who** a user or system is.  
+Authentication verifies **who** a user or client is.
 Example: Logging in with a username/password or via SSO.
 
 ### Authorization
 
-Authorization determines **what** an authenticated user or system is allowed to do.  
-Example: Accessing Operate data, starting a process instance, or managing tasks.
+Authorization determines what an authenticated user or client is allowed to access, and what that user or client is permitted to do with that access.
+
+Example: Access **Operate**, view running or completed process instances, start new process instances, or manage tasks.
 
 | Identity type                  | Authorization model              | Description                                                                                                          | Management interface                   |
 | :----------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
@@ -78,12 +79,12 @@ To learn more about authorization and how to configure permissions, see [Orchest
 
 Camunda 8 supports multiple authentication methods depending on the environment:
 
-| Environment                                                                       | Authentication method    | Notes                                                                          |
-| --------------------------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------ |
-| [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)           | None / Basic Auth / OIDC | No auth or basic auth only for local development. OIDC optional if configured. |
-| [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None / Basic Auth / OIDC | No auth or basic auth only for local development. OIDC optional if configured. |
-| [Helm Self-Managed](/self-managed/deployment/helm/install/index.md)               | Basic Auth / OIDC        | Basic Auth default, OIDC optional if configured.                               |
-| SaaS                                                                              | OIDC                     | OIDC required for all requests.                                                |
+| Environment                                                                       | Authentication method              | Notes                                                                                    |
+| --------------------------------------------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------- |
+| [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)           | None / Basic authentication / OIDC | No auth or Basic authentication only for local development. OIDC optional if configured. |
+| [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None / Basic authentication / OIDC | No auth or Basic authentication only for local development. OIDC optional if configured. |
+| [Helm Self-Managed](/self-managed/deployment/helm/install/index.md)               | Basic authentication / OIDC        | Basic authentication default, OIDC optional if configured.                               |
+| SaaS                                                                              | OIDC                               | OIDC required for all requests.                                                          |
 
 - **No authentication:** only for local development (Run, Docker Compose).
 - **Basic authentication:** simple to set up; not recommended for production.
@@ -98,6 +99,18 @@ The Operate, Tasklist, and Zeebe REST APIs are **deprecated**. While they contin
 
 Authentication for all these APIs works the same way; see the [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) page for details.
 :::
+
+### Users and clients
+
+Actions in an orchestration cluster can be executed by two kinds of authenticated entities (also known as principals): **users** and **clients**. [Users](/components/identity/user.md) typically interact with the cluster through a browser, while [clients](/components/identity/client.md) interact programmatically through the APIs.
+
+Although either principal type can use both Web UIs and APIs, the distinction matters. Users represent **individuals** who are granted access to an orchestration cluster, whereas clients represent **systems or applications**.
+
+:::note
+If you're using Basic authentication to secure your cluster, both users and clients are treated as users. There is no dedicated client concept in this configuration.
+:::
+
+Distinguishing between users and clients aligns your access management with how identities are modeled in your identity provider. They are usually authenticated differently (for example, username and password for users versus a client certificate for applications), have different authorization requirements (such as administrator access versus deployment permissions), and separating them simplifies auditing and operational clarity.
 
 ## How to obtain tokens
 

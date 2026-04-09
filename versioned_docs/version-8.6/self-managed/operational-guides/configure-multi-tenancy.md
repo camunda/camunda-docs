@@ -21,6 +21,26 @@ Multi-tenancy must be enabled for each required component. Using the single glob
 When using Helm charts, you can enable multi-tenancy globally with the flag `global.multitenancy.enabled`.
 Visit [the Helm chart configuration](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters) for additional details.
 
+The memory limit for Identity is generally suitable for most multi-tenant deployments. If the tenancy model becomes more complex with many tenants, you might encounter memory pressure on the heap.
+
+If you anticipate higher memory usage, consider increasing the memory limit for Identity:
+
+```yaml
+identity:
+  resources:
+    limits:
+      memory: 4Gi
+```
+
+As an additional safeguard, you can increase the JVM heap allocation by setting:
+
+```yaml
+identity:
+  env:
+    - name: JAVA_TOOL_OPTIONS
+      value: -XX:MaxRAMPercentage=50.0
+```
+
 ## Environment variables
 
 Without Helm charts, multi-tenancy can be enabled using environment variables. This feature **must** be

@@ -209,13 +209,6 @@ const SearchableTable = () => {
       image: BoxImg,
     },
     {
-      name: "Camunda Operate",
-      description: "Fetch process execution data from Camunda Operate.",
-      type: "Outbound",
-      link: "../operate/",
-      image: CamundaImg,
-    },
-    {
       name: "CSV",
       description: "Read and write CSV documents.",
       type: "Outbound",
@@ -355,10 +348,18 @@ const SearchableTable = () => {
       image: MessageSendImg,
     },
     {
-      name: "Microsoft 365",
-      description: "Interactions with Microsoft 365 mail from your processes.",
+      name: "Microsoft 365 Email outbound",
+      description: "Send Outlook emails from Microsoft 365 in your processes.",
       type: "Outbound",
       link: "../microsoft-o365-mail/",
+      image: Microsoft365Img,
+    },
+    {
+      name: "Microsoft 365 Email inbound",
+      description:
+        "Consume Outlook emails from Microsoft 365 mailboxes and trigger processes.",
+      type: "Inbound",
+      link: "../microsoft-o365-mail-inbound/",
       image: Microsoft365Img,
     },
     {
@@ -525,7 +526,7 @@ const SearchableTable = () => {
     <div className="connector-input">
       <input
         type="text"
-        placeholder="Find a Camunda connector"
+        placeholder="Find a built-in connector"
         value={searchTerm}
         onChange={handleSearch}
         className="connector-input-box"

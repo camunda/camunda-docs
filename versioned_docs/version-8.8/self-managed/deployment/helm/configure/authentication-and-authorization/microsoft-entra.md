@@ -31,6 +31,14 @@ See the [full configuration example](#full-configuration-example) for the comple
 For authentication, the Camunda components use the following scopes:
 `email`, `openid`, `offline_access`, `profile`, and `<CLIENT_UUID>/.default`.
 
+:::tip Optional scopes
+The `offline_access` scope is optional.
+
+If this scope is included, your OIDC provider issues a refresh token to Camunda components on user login. The components use the refresh token to renew the user's access token when it expires, so that sessions remain active without requiring the user to log in again.
+
+If `offline_access` is not included, users will be redirected to the OIDC provider for re-authentication whenever their access token expires. For more information, see the [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
+:::
+
 To allow users to successfully authenticate with Entra ID, you must either configure an [admin consent workflow](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow) or grant consent on behalf of your users using [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent).
 
 The applications you configure in this guide must support the following `grant_type` values:
@@ -138,6 +146,8 @@ This secret includes the following keys:
 - `literal=webmodeler-postgresql-admin-password`: Password for the administrative PostgreSQL account used by Web Modeler (`postgres`).
 - `webmodeler-postgresql-user-password` Password for the non-privileged PostgreSQL account used by Web Modeler (`web-modeler`).
 
+For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
+
 ### Configure components using OIDC
 
 With the OIDC clients and cluster secrets in place, configure OAuth and OIDC for the components. You can skip components you don’t plan to run. Keep in mind that the Orchestration Cluster and Connectors are enabled by default, so you must explicitly disable them if not needed.
@@ -211,6 +221,12 @@ By default:
 You can adjust these values if your organization uses different claim mappings.
 For more information, see the [Orchestration Cluster OIDC configuration guide](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-1-configure-the-oidc-client-id-claim).
 
+:::note Username display in Web Modeler (Helm)
+With Helm defaults, usernames are typically resolved from `preferred_username`. If you want Web Modeler to use the `name` claim instead (for example, to show display names), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `webapp` environment.
+
+See [Identity/Keycloak configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#identity--keycloak-1).
+:::
+
 #### Configure Connectors
 
 Add the following configuration for Connectors:
@@ -241,7 +257,6 @@ global:
         audience: "<mgmt-identity-app-id>"
         initialClaimName: preferred_username
         initialClaimValue: "<the email address of your initial admin user>"
-        redirectUrl: "<IDENTITY_URL>"
         secret:
           existingSecret: "entra-credentials"
           existingSecretKey: "identity-client-secret"
@@ -305,6 +320,10 @@ Replace `<OPTIMIZE_URL>` with the base URL of Optimize as it will be reachable f
 #### Configure Web Modeler
 
 Add the following configuration for Web Modeler:
+
+:::note
+If you want Web Modeler to resolve usernames from the `name` claim instead of `preferred_username`, add `CAMUNDA_IDENTITY_USERNAMECLAIM=name` to the Web Modeler `webapp` environment configuration.
+:::
 
 ```yaml
 global:
@@ -374,7 +393,6 @@ global:
         audience: "<mgmt-identity-app-id>"
         initialClaimName: preferred_username
         initialClaimValue: "<the email address of your initial admin user>"
-        redirectUrl: "<IDENTITY_URL>"
         secret:
           existingSecret: "entra-credentials"
           existingSecretKey: "identity-client-secret"

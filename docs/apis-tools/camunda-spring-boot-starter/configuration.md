@@ -103,7 +103,7 @@ Define address of the [Orchestration Cluster REST API](/apis-tools/orchestration
 ```yaml
 camunda:
   client:
-    rest-address: http://localhost:8088
+    rest-address: http://localhost:8080
 ```
 
 :::note
@@ -234,6 +234,14 @@ This will load this preset:
 ```yaml reference referenceLinkText="Source" title="OIDC authentication"
 https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/oidc.yaml
 ```
+
+:::note
+There are three ways to define the token URL. They're prioritized as follows:
+
+1. Provide the `camunda.client.auth.token-url`.
+2. Provide the issuer's well-known configuration URL `camunda.client.auth.well-known-configuration-url`. This extracts the token URL from the `token_url` field in the loaded configuration.
+3. Provide the issuer's URL `camunda.client.auth.issuer-url`. This generates the well-known configuration URL and extracts the token URL from the `token_url` field in the loaded configuration.
+   :::
 
 #### Credentials cache path
 
@@ -407,6 +415,8 @@ public void handleJobFoo(final JobClient jobClient) {
 
 #### `ActivatedJob` parameter
 
+The `ActivatedJob` is also part of the native `JobHandler` functional interface.
+
 This will **prevent** the implicit variable fetching detection as you can retrieve variables in a programmatic way now:
 
 ```java
@@ -454,7 +464,7 @@ You can also use your own class into which the process variables are mapped to (
 
 ```java
 @JobWorker(type = "foo")
-public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables){
+public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables) {
   // do whatever you need to do
   variables.getMyAttributeX();
   variables.setMyAttributeY(42);
@@ -489,8 +499,8 @@ On top, you can directly retrieve the document content as `InputStream` or `byte
 You can use the `@CustomHeaders` annotation for a `Map<String, String>` parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
 
 ```java
-@JobWorker(type = "foo")
-public void handleFoo(@CustomHeaders Map<String, String> headers){
+@JobWorker
+public void handleFoo(@CustomHeaders Map<String, String> headers) {
   // do whatever you need to do
 }
 ```
@@ -498,6 +508,22 @@ public void handleFoo(@CustomHeaders Map<String, String> headers){
 :::note
 This will not have any effect on the variable fetching behavior.
 :::
+
+#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey`
+
+You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
+
+```java
+@JobWorker
+public void handleFoo(
+  @ProcessInstanceKey String processInstanceKey,
+  @ElementInstanceKey long elementInstanceKey,
+  @JobKey Long jobKey,
+  @ProcessDefinitionKey String processDefinitionKey,
+  @RootProcessInstanceKey long rootProcessInstanceKey) {
+  // do whatever you need to do
+}
+```
 
 ### Completing jobs
 
@@ -628,11 +654,11 @@ This registers a callback to be executed when the command on the workflow engine
 When completing jobs programmatically, you must specify `autoComplete = false`. Otherwise, there is a race condition between your programmatic job completion and the Spring integration job completion, and this can lead to unpredictable results.
 :::
 
-### Reacting on problems
+### React to problems
 
-#### Throwing `BpmnError`s
+#### Throw a `BpmnError`
 
-Whenever your code hits a problem that should lead to a [BPMN error](/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `BpmnError` to provide the error code used in BPMN:
+If your code encounters a problem that should trigger a [BPMN error](/components/modeler/bpmn/error-events/error-events.md), throw a `BpmnError` and provide the error code defined in BPMN:
 
 ```java
 @JobWorker(type = "foo")
@@ -646,7 +672,7 @@ public void handleJobFoo() {
 }
 ```
 
-#### Failing jobs in a controlled way
+#### Fail jobs in a controlled way
 
 Whenever you want a job to fail in a controlled way, you can throw a `JobError` and provide parameters like `variables`, `retries` and `retryBackoff`:
 
@@ -655,10 +681,14 @@ Whenever you want a job to fail in a controlled way, you can throw a `JobError` 
 public void handleJobFoo() {
   try {
    // some work
-  } catch(Exception e) {
-   // problem shall be indicated to the process:
-   throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
-   // this is a static function that returns an instance of JobError
+  } catch(DynamicRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, this::calculateRetryBackoff, e);
+    // this is a static function that returns an instance of JobError with a dynamic retry backoff
+  } catch(StaticRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
+    // this is a static function that returns an instance of JobError with a static retry backoff
   }
 }
 ```
@@ -668,7 +698,7 @@ The JobError takes 5 parameters:
 - `errorMessage`: String
 - `variables`: Object _(optional)_, default `null`
 - `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
-- `retryBackoff`: Duration _(optional)_, defaults to `PT0S`
+- `retryBackoff`: Duration _or_ Function (Integer -> Duration) _(optional)_, defaults to the configured retry backoff, function input are the retries that will be submitted
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
@@ -735,7 +765,7 @@ camunda:
 
 #### Configure jobs in flight
 
-Number of jobs that are polled from the broker to be worked on in this client and thread pool size to handle the jobs:
+Number of jobs for a worker that are polled from the broker to be worked on in this client:
 
 ```java
 @JobWorker(maxJobsActive = 64)
@@ -801,9 +831,45 @@ camunda:
 
 #### Control tenant usage
 
-Generally, the [client default `tenant-id`](#multi-tenancy) is used for all job worker activations.
+Job workers can be configured to work on jobs from specific [tenants](#multi-tenancy) using either [specific tenant IDs](#filtering-by-provided-tenant-IDs) or the [assigned tenants in the engine](#filtering-by-assigned-tenants).
 
-Configure global worker defaults for additional `tenant-ids` to be used by all workers:
+##### Filter by assigned tenants
+
+You can configure a job worker to use the tenants assigned to it in the engine, rather than providing explicit tenant IDs. Use the `tenantFilter` annotation property with `TenantFilter.ASSIGNED`:
+
+```java
+@JobWorker(tenantFilter = TenantFilter.ASSIGNED)
+public void foo() {
+  // worker's code
+}
+```
+
+When `TenantFilter.ASSIGNED` is set, any `tenant-ids` configured via the annotation or YAML are ignored.
+
+You can also override the tenant filter for a specific worker:
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          tenant-filter: ASSIGNED
+```
+
+To configure a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        tenant-filter: ASSIGNED
+```
+
+##### Filter by provided tenant IDs
+
+The default behaviour is `TenantFilter.PROVIDED`, where the worker retrieves jobs for the tenant IDs explicitly configured. Configure global worker defaults for additional `tenant-ids` to be used by all workers:
 
 ```yaml
 camunda:
@@ -869,7 +935,39 @@ camunda:
         timeout: PT1M
 ```
 
-## Deploying resources on start-up
+#### Configure the retry backoff
+
+If you want to apply a retry backoff that should be applied if a job fails without a job error, you can set the annotation (`long` in milliseconds):
+
+```java
+@JobWorker(retryBackoff=10000L)
+public void work() {
+  // worker's code
+}
+```
+
+Moreover, you can override the retry backoff for the worker (as ISO 8601 duration expression):
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          retry-backoff: PT10S
+```
+
+You can also set a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        retry-backoff: PT10S
+```
+
+## Deploy resources on start-up
 
 To deploy process models on application start-up, use the `@Deployment` annotation:
 
@@ -880,7 +978,9 @@ public class MyRandomBean {
 }
 ```
 
-This annotation internally uses [the Spring resource loader](https://docs.spring.io/spring-framework/reference/core/resources.html) mechanism. This is powerful, and can also deploy multiple files at once, for example:
+### Specify resources to deploy
+
+This annotation uses the [Spring resource loader](https://docs.spring.io/springframework/reference/core/resources.html) and can deploy multiple files at once. For example:
 
 ```java
 @Deployment(resources = {"classpath:demoProcess.bpmn" , "classpath:demoProcess2.bpmn"})
@@ -892,6 +992,36 @@ Or, define wildcard patterns:
 @Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
 ```
 
+The resource loader automatically searches the entire classpath, including dependency JARs. To deploy only the resources packaged with the annotated class, use:
+
+```java
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn", ownJarOnly = true)
+```
+
+You can also set this globally:
+
+```yaml
+camunda:
+  client:
+    deployment:
+      own-jar-only: true
+```
+
+### Specify the tenant to deploy to
+
+To adjust the tenant to deploy to, set the `tenantId` property of the `@Deployment` annotation:
+
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn", tenantId = "myTenant")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
+
+By default, the starter uses the `tenantId` from `camunda.client.tenant-id`.
+
+### Disable deployment
+
 To disable the deployment of annotations, you can set:
 
 ```yaml
@@ -901,19 +1031,19 @@ camunda:
       enabled: false
 ```
 
-## Reacting on events
+## React to events
 
-The Camunda Spring Boot Starter is integrated with the Spring events and offers its own.
+The Camunda Spring Boot Starter integrates with Spring events and also publishes its own events.
 
 ### Camunda client lifecycle events
 
-#### Camunda client created event
+#### Camunda client created
 
-To react on the creation of the Camunda client, you can do this:
+To react when the Camunda client is created, add an event listener:
 
 ```java
 @EventListener
-public void onCamundaClientCreated(CamundaClientCreatedEvent event){
+public void onCamundaClientCreated(CamundaClientCreatedEvent event) {
   // do what you need to do
 }
 ```
@@ -924,7 +1054,7 @@ To react on the closing of the Camunda client, you can do this:
 
 ```java
 @EventListener
-public void onCamundaClientClosing(CamundaClientClosingEvent event){
+public void onCamundaClientClosing(CamundaClientClosingEvent event) {
   // do what you need to do
 }
 ```
@@ -948,7 +1078,20 @@ public class CamundaLifecycleListener implements CamundaClientLifecycleAware {
 }
 ```
 
-## Observing metrics
+### Post deployment event
+
+To react on the creation of [deployments on start-up](#deploying-resources-on-start-up), you can do this:
+
+```java
+@EventListener
+public void onDeploymentCreated(CamundaPostDeploymentEvent event) {
+  // do what you need to do
+}
+```
+
+The event will grant you access to a list of deployments that have been created.
+
+## Observe metrics
 
 The Camunda Spring Boot Starter provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
 

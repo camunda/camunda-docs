@@ -8,15 +8,20 @@ Camunda 8 Self-Managed supports multiple authentication methods for securing acc
 
 ## Overview
 
-By default, Camunda uses basic authentication with predefined demo users. Alternatively, you can configure OpenID Connect (OIDC) authentication, either through an internal Keycloak instance deployed with Camunda or an external OIDC provider.
+By default, Camunda uses Basic authentication with predefined demo users. Alternatively, you can configure OpenID Connect (OIDC) authentication, either through an internal Keycloak instance deployed with Camunda or an external OIDC provider.
 
 ### Authentication options
 
-| Method                                                | Description                                                                                         | Recommended for                                                           |
-| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [Basic authentication](./basic-authentication.md)     | Default authentication with preconfigured demo users. No external identity provider (IdP) required. | Local development and testing, as well as smaller scale production setups |
-| [Internal Keycloak](./internal-keycloak.md)           | Deploys a Keycloak pod with the Helm release, preconfigured by Management Identity.                 | Small teams or self-contained environments                                |
-| [External OIDC provider](./external-oidc-provider.md) | Integrates Camunda with external IdPs such as Microsoft Entra ID or Okta via OpenID Connect.        | Existing enterprise identity infrastructure                               |
+| Method                                                                        | Description                                                                                                         | Recommended for                                                                            |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| [Basic authentication](./basic-authentication.md)                             | Authentication using preconfigured demo users. No external identity provider (IdP) required.                        | Local development and testing, as well as smaller-scale production setups.                 |
+| [Internal Keycloak](./internal-keycloak.md)                                   | Deploys an internal Keycloak instance with the Helm release, preconfigured by Management Identity.                  | Small teams or self-contained environments.                                                |
+| [External IdP via Internal Keycloak](./external-idp-via-internal-keycloak.md) | Uses the internal Keycloak as an identity broker, delegating authentication to an external identity provider (IdP). | Organizations with existing identity infrastructure that want to retain Keycloak features. |
+| [External OIDC provider](./external-oidc-provider.md)                         | Integrates Camunda with an external identity provider, such as Microsoft Entra ID or Okta, via OpenID Connect.      | Organizations with an existing enterprise identity infrastructure.                         |
+
+:::note
+When running Camunda in **no secondary storage** mode, authentication requires special configuration. See [Authentication with no secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#authentication) for details.
+:::
 
 ### Limitations of OIDC setups
 
@@ -27,6 +32,7 @@ front channel single sign out is not supported. This means that when a user logs
 
 - [Basic authentication guide](./basic-authentication.md)
 - [Internal Keycloak guide](./internal-keycloak.md)
+- [External IdP via Internal Keycloak guide](./external-idp-via-internal-keycloak.md)
 - [External Keycloak guide](./external-keycloak.md)
 - [Microsoft Entra guide](./microsoft-entra.md)
 - [Generic OIDC provider](./generic-oidc-provider.md)

@@ -1,0 +1,534 @@
+---
+id: update-global-task-listener
+title: "Update global user task listener"
+description: "<MarkerStronglyConsistentExtension />"
+sidebar_label: "Update global user task listener"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update global user task listener"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/global-task-listeners/{id}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Updates a global user task listener.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "id",
+      in: "path",
+      required: true,
+      description: "The id of the global user task listener to update.",
+      schema: {
+        description: "The user-defined id for the global listener",
+        type: "string",
+        format: "GlobalListenerId",
+        example: "GlobalListener_1",
+        title: "GlobalListenerId",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          required: ["type", "eventTypes"],
+          allOf: [
+            {
+              type: "object",
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    type: {
+                      description:
+                        "The name of the job type, used as a reference to specify which job workers request the respective listener job.",
+                      type: "string",
+                      example: "order-items",
+                    },
+                    retries: {
+                      description: "Number of retries for the listener job.",
+                      type: "integer",
+                    },
+                    afterNonGlobal: {
+                      description:
+                        "Whether the listener should run after model-level listeners.",
+                      type: "boolean",
+                    },
+                    priority: {
+                      description:
+                        "The priority of the listener. Higher priority listeners are executed before lower priority ones.",
+                      type: "integer",
+                    },
+                  },
+                  title: "GlobalListenerBase",
+                },
+              ],
+              properties: {
+                eventTypes: {
+                  description:
+                    "List of user task event types that trigger the listener.",
+                  type: "array",
+                  items: {
+                    type: "string",
+                    enum: [
+                      "all",
+                      "creating",
+                      "assigning",
+                      "updating",
+                      "completing",
+                      "canceling",
+                    ],
+                    description:
+                      "The event type that triggers the user task listener.",
+                    title: "GlobalTaskListenerEventTypeEnum",
+                  },
+                  title: "GlobalTaskListenerEventTypes",
+                },
+              },
+              title: "GlobalTaskListenerBase",
+            },
+          ],
+          title: "UpdateGlobalTaskListenerRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The global listener was updated successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: [
+              "id",
+              "type",
+              "retries",
+              "eventTypes",
+              "afterNonGlobal",
+              "priority",
+              "source",
+            ],
+            allOf: [
+              {
+                type: "object",
+                allOf: [
+                  {
+                    type: "object",
+                    properties: {
+                      type: {
+                        description:
+                          "The name of the job type, used as a reference to specify which job workers request the respective listener job.",
+                        type: "string",
+                        example: "order-items",
+                      },
+                      retries: {
+                        description: "Number of retries for the listener job.",
+                        type: "integer",
+                      },
+                      afterNonGlobal: {
+                        description:
+                          "Whether the listener should run after model-level listeners.",
+                        type: "boolean",
+                      },
+                      priority: {
+                        description:
+                          "The priority of the listener. Higher priority listeners are executed before lower priority ones.",
+                        type: "integer",
+                      },
+                    },
+                    title: "GlobalListenerBase",
+                  },
+                ],
+                properties: {
+                  eventTypes: {
+                    description:
+                      "List of user task event types that trigger the listener.",
+                    type: "array",
+                    items: {
+                      type: "string",
+                      enum: [
+                        "all",
+                        "creating",
+                        "assigning",
+                        "updating",
+                        "completing",
+                        "canceling",
+                      ],
+                      description:
+                        "The event type that triggers the user task listener.",
+                      title: "GlobalTaskListenerEventTypeEnum",
+                    },
+                    title: "GlobalTaskListenerEventTypes",
+                  },
+                },
+                title: "GlobalTaskListenerBase",
+              },
+            ],
+            properties: {
+              id: {
+                description: "The user-defined id for the global listener",
+                type: "string",
+                format: "GlobalListenerId",
+                example: "GlobalListener_1",
+                title: "GlobalListenerId",
+              },
+              source: {
+                type: "string",
+                enum: ["CONFIGURATION", "API"],
+                description: "How the global listener was defined.",
+                title: "GlobalListenerSourceEnum",
+              },
+            },
+            title: "GlobalTaskListenerResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The global user task listener was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

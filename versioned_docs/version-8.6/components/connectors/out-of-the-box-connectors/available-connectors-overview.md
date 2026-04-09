@@ -83,7 +83,7 @@ import TabItem from "@theme/TabItem";
 
 - [GraphQL Connector](/components/connectors/protocol/graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
 - [HTTP Webhook Connector](/components/connectors/protocol/http-webhook.md) - Start a process instance with your custom webhook configuration.
-- [Polling Connector](/components/connectors/protocol/polling.md) - The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.
+- [HTTP Polling Connector](/components/connectors/protocol/polling.md) - The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.
 - [REST Connector](/components/connectors/protocol/rest.md) - Make a request to a REST API and use the response in the next steps of your process.
 - [SOAP Connector](/components/connectors/protocol/soap.md) - Connect your BPMN process with Simple Object Access Protocol ([SOAP](https://en.wikipedia.org/wiki/SOAP)) services and interact with SOAP service endpoints.
 

@@ -9,6 +9,8 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release are summarized below.
 
+This release focuses primarily on consolidation and deprecation work to simplify APIs, align clients and SDKs, and prepare for upcoming features in 8.8 and later releases. While there are fewer net-new features in this release, these changes reduce long-term maintenance and improve consistency across Camunda components.
+
 | Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                            |
 | :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
 | 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
@@ -30,7 +32,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ### Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/components/components-upgrade/860-to-870.md#identity).
+Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](versioned_docs/version-8.7/self-managed/operational-guides/update-guide/860-to-870.md#identity).
 
 ### Spring Zeebe SDK now requires Spring Boot 3.4.x <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -41,6 +43,8 @@ The Spring Zeebe SDK 8.7 now requires Spring Boot 3.4.x. For more information on
 Following the end-of-life of macOS 12, support for Desktop Modeler on macOS 12 has been removed.
 
 ## Key changes
+
+Collectively, these changes consolidate overlapping functionality, align configuration and client behavior across components, and establish clearer upgrade paths for upcoming releases.
 
 ### Deprecation of Self-Managed AWS Marketplace offering
 
@@ -114,6 +118,16 @@ The Spring Zeebe SDK will not be developed further and will only receive bug fix
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
+#### Helm chart: Custom users and clients for Identity
+
+You can now configure custom users and OAuth2 clients for Identity during Helm installation.
+
+See [adding users and clients](/self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients.md) for more information on configuring custom users and clients on Management Identity during initial Helm install.
+
+:::caution
+Additional upgrade considerations are required for deployments that use custom environment variables, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, remove the environment variables that reference users or clients and migrate to the configuration method described in the guide linked above.
+:::
+
 ##### ExtraVolumeClaimTemplates
 
 You can now add custom `extraVolumeClaimTemplates` to the Zeebe/Core StatefulSet by supplying an array of templates in your Helm values file. This allows you to attach additional persistent volumes to each Zeebe/Core pod for use cases such as custom storage or log directories.
@@ -136,7 +150,13 @@ The configuration for the external database used by the Web Modeler REST API has
 ##### Bitnami Docker repository migration
 
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
-See [Bitnami Docker repository migration](/self-managed/deployment/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/upgrade/helm/index.md#bitnami-docker-repository-migration) for migration details.
+
+##### Helm chart: Bitnami subcharts bundled
+
+The Bitnami subcharts (PostgreSQL, Keycloak, Elasticsearch, and Common) are bundled directly within the Camunda Helm chart instead of being fetched from external Bitnami repositories at install time.
+
+This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts. No action is required — existing deployments will continue to work as before when applying the next patch release.
 
 #### Adjustments
 
@@ -156,4 +176,4 @@ Although the official SDK is largely compatible with the community library, some
 
 We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/camunda-spring-boot-starter/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
 
-For more information, see the [update guide](/self-managed/components/components-upgrade/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/components/connectors/connectors-configuration.md).
+For more information, see the [update guide](versioned_docs/version-8.7/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/components/connectors/connectors-configuration.md).

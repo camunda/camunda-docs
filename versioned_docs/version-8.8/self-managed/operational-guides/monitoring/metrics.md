@@ -247,16 +247,14 @@ To enable export of execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_E
 ### Zeebe
 
 Zeebe comes with a pre-built dashboard, available in the repository:
-[monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/zeebe.json).
+[monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/stable/8.8/monitor/grafana/zeebe.json).
 
 - [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) the dashboard into your Grafana instance and select the correct Prometheus data source (if you have more than one).
 - The dashboard displays a healthy cluster topology, general throughput metrics, handled requests, exported events per second, disk and memory usage, and more.
 
-![Grafana dashboard](assets/grafana-preview.png)
+The following image shows an example of the Zeebe Grafana dashboard after import.
 
-:::tip
-You can also try out an [interactive dashboard](https://snapshots.raintank.io/dashboard/snapshot/Vbu3EHQMTI5Onh5RKuiS5J7QSMd7Sp5V) to learn about each panel and get an understanding of available data.
-:::
+![Example Zeebe Grafana dashboard](assets/grafana-preview.png)
 
 ### Data layer
 

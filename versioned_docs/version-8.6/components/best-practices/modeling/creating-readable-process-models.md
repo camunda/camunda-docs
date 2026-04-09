@@ -99,7 +99,7 @@ You observe a throwing link event here, which...
 
 ...directly links to a catching link event just as if the sequence flow would have been connected.
 
-Avoid excessive use of link events. The example above serves to show the possible usage, but at the same time, it is too small to satisfy the usage of link events in real-world sceanrio!
+Avoid excessive use of link events. The example above serves to show the possible usage, but at the same time, it is too small to satisfy the usage of link events in real-world scenario!
 
 ### Modeling explicitly
 

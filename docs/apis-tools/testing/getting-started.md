@@ -63,6 +63,20 @@ Add the following dependency to your Maven project:
 </dependency>
 ```
 
+### Spring Boot 3 support
+
+If you use the [dedicated Spring Boot 3 starter](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules) (`camunda-spring-boot-3-starter`),
+you must also use the dedicated Spring Boot 3 test artifact:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-process-test-spring-boot-3</artifactId>
+  <version>${camunda.version}</version>
+  <scope>test</scope>
+</dependency>
+```
+
 </TabItem>
 
 <TabItem value='java-client'>
@@ -205,6 +219,25 @@ public class MyProcessTest {
 
 </Tabs>
 
+:::tip Shared runtime
+If you use the same runtime configuration for all test classes, you can use
+a [shared runtime](configuration.md#shared-runtime) to speed up the test execution.
+:::
+
+### Deploy resources
+
+You can deploy additional BPMN processes and other resources by adding the annotation `@TestDeployment` on the test
+class or the method. An annotation on the test method takes precedence over an annotation on the test class. The
+resources are loaded from the root classpath of the test.
+
+```java
+@Test
+@TestDeployment(resources = "my-process.bpmn")
+void shouldCreateProcessInstance() {
+  // the given resources are deployed before running the test
+}
+```
+
 ## Test lifecycle
 
 CPT performs the following actions during the JUnit 5 lifecycle when running a test class:
@@ -219,9 +252,10 @@ CPT performs the following actions during the JUnit 5 lifecycle when running a t
 - `beforeAll` (test methods)
   - Start the test runtime
 - `beforeEach` (test method)
-  - Inject the `CamundaClient` and the `CamundaProcessTestContext`
+  - Inject the `CamundaClient`, the `CamundaProcessTestContext`, and the `TestScenarioRunner`
   - Publish the client created event for the Spring Boot process application to trigger the deployment and start job
     workers
+  - Deploy resources defined via `@TestDeployment`
 - `afterEach` (test method)
   - Collect the data for the coverage report
   - Print the created process instances if the test failed
@@ -282,7 +316,8 @@ public class TestProcessApplication {}
 - `beforeAll` (test methods)
   - Start the test runtime
 - `beforeEach` (test method)
-  - Inject the `CamundaClient` and the `CamundaProcessTestContext`
+  - Inject the `CamundaClient`, the `CamundaProcessTestContext`, and the `TestScenarioRunner`
+  - Deploy resources defined via `@TestDeployment`
 - `afterEach` (test method)
   - Collect the data for the coverage report
   - Print the created process instances if the test failed

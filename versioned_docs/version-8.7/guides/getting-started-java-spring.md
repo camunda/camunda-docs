@@ -27,10 +27,6 @@ For example, in this guide we will outline a BPMN model to receive a payment req
 
 ![example BPMN model to receive a payment request, prepare a transaction, charge a credit card, and execute a payment](./img/prepare-transaction-example.png)
 
-:::note
-While stepping through this guide, you can visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code to check your work.
-:::
-
 ## Prerequisites
 
 Before getting started, ensure you have the following in your local environment:
@@ -175,10 +171,6 @@ public class ChargeCreditCardWorker {
 }
 ```
 
-:::note
-To check your work, visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code.
-:::
-
 In your terminal, run `mvn spring-boot:run`, where you should see the `charging credit card` output. In Operate, refresh if needed, and note the payment has executed.
 
 Since the application is now running a worker subscribed to the workflow engine, it will not exit until you hit `Ctrl+C`.
@@ -236,10 +228,6 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 		LOG.info("started a process instance: {}", event.getProcessInstanceKey());
 	}
 ```
-
-:::note
-To check your work, visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ProcessPaymentsApplication.java) with the completed code.
-:::
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run, and note the instance history in Operate.
 

@@ -7,12 +7,6 @@ const configRefStrategies = {
   "camunda-spring-boot-starter": camundaSpringBootStarter,
 };
 
-const mapRegex = /java.util.Map<(.*),(.*)>/;
-
-const keyNames = {
-  "camunda.client.worker.override": "jobType",
-};
-
 const typeReplacements = {
   "java.lang.String": "string",
   "java.nio.file.Path": "file",
@@ -28,9 +22,13 @@ const typeReplacements = {
     "enum[self-managed, saas]",
   "java.util.List<java.lang.String>": "array[string]",
   "java.net.URL": "url",
+  "org.springframework.boot.actuate.endpoint.Access":
+    "enum[none, read_only, unrestricted]",
+  "io.camunda.client.api.command.enums.TenantFilter":
+    "enum[assigned, provided]",
 };
 
-const preserveGroups = ["camunda.client.worker.override"];
+const preserveGroups = [];
 const preserveDeprecatedGroups = [
   "camunda.client.zeebe.override",
   "zeebe.client.worker.override",
@@ -185,23 +183,37 @@ const preGenerateDocs = (config) => {
   );
   console.log(`Found ${complexProperties.length} complex properties`);
   complexProperties.forEach((property) => {
+    console.log(`Handling complex property ${property.name}`);
+    const properties = config.additionalProperties.properties?.filter(
+      (p) => p.name === property.name
+    )[0];
+    if (typeof properties === "undefined") {
+      console.log(`No additional properties found for ${property.name}`);
+      return;
+    }
     config.metadata.properties.splice(
       config.metadata.properties.indexOf(property),
       1
     );
-    const properties = config.additionalProperties.filter(
-      (p) => p.name === property.name
-    )[0];
-    console.log(...properties.properties);
     config.metadata.properties.push(...properties.properties);
-    console.log(config.metadata.properties);
     config.metadata.groups.push({
-      name: properties.placeHolderName,
+      name: properties.name,
       type: properties.sourceType,
       description: property.description,
       sourceType: property.sourceType,
     });
-    console.log(config.metadata.groups);
+  });
+
+  config.metadata.groups.forEach((group) => {
+    if (group.description) {
+      group.description = group.description
+        .replaceAll(/<p>/g, "\n\n")
+        .replaceAll(/<code> /g, "`")
+        .replaceAll(/<code>/g, "`")
+        .replaceAll(/ <\/code>/g, "`")
+        .replaceAll(/<\/code>/g, "`")
+        .replaceAll(/<br>/g, "\n");
+    }
   });
 
   config.metadata.properties.forEach((property) => {
@@ -209,10 +221,20 @@ const preGenerateDocs = (config) => {
       property.type = typeReplacements[property.type];
     } else {
       console.log("No type replacement for " + property.type);
+      process.exit();
     }
     property.defaultValue = JSON.stringify(property.defaultValue);
     if (property.defaultValue === undefined) {
       property.defaultValue = "null";
+    }
+    if (property.description) {
+      property.description = property.description
+        .replaceAll(/<p>/g, "\n\n")
+        .replaceAll(/<code> /g, "`")
+        .replaceAll(/<code>/g, "`")
+        .replaceAll(/ <\/code>/g, "`")
+        .replaceAll(/<\/code>/g, "`")
+        .replaceAll(/<br>/g, "\n");
     }
     property.env = property.name
       .toUpperCase()
@@ -222,7 +244,10 @@ const preGenerateDocs = (config) => {
       .replaceAll(/\./g, "")
       .replaceAll(/-/g, "")
       .replaceAll(/\{/g, "")
-      .replaceAll(/\}/g, "");
+      .replaceAll(/\}/g, "")
+      .replaceAll(/\</g, "")
+      .replaceAll(/\>/g, "")
+      .replaceAll(/\|/g, "");
     if (property.deprecation && property.deprecation.replacement) {
       property.deprecation.replacementEnv = property.deprecation.replacement
         .toUpperCase()
@@ -232,7 +257,10 @@ const preGenerateDocs = (config) => {
         .replaceAll(/\./g, "")
         .replaceAll(/-/g, "")
         .replaceAll(/\{/g, "")
-        .replaceAll(/\}/g, "");
+        .replaceAll(/\}/g, "")
+        .replaceAll(/\</g, "")
+        .replaceAll(/\>/g, "")
+        .replaceAll(/\|/g, "");
     }
   });
 };

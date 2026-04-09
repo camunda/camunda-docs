@@ -39,12 +39,9 @@ attributes can be specified simultaneously:
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
 :::info
-The assignee attribute must adhere to the userId field’s case-sensitivity requirements.
-Note that in SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
-:::
+Usernames and group IDs in the Orchestration Cluster are case-sensitive. When you set `assignee`, `candidateUsers`, or `candidateGroups`, always use the exact value from your identity provider or Identity user record, including case. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
 
-:::info
-Assignment resources can also be used to set [user task restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md), where users will see only the tasks they have authorization to work on.
+You can also use assignment resources to configure [user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md) when using Tasklist V1, so that only the assignee, candidate users, and members of candidate groups can see and work on a task. In Tasklist V2, candidate users and candidate groups are interpreted through authorization-based access control: they affect task visibility and assignment only when the user has matching task or process authorizations.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
@@ -57,7 +54,7 @@ the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
 
 - Camunda 8 (login with email, Google, GitHub): `email`
-- Default Basic Auth (Elasticsearch): `username`
+- Default Basic authentication (Elasticsearch): `username`
 - IAM: `username`
 
 These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed.

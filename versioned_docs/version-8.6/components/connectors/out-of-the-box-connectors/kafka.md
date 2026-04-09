@@ -60,7 +60,7 @@ The [appendix](#appendix-and-faq) provides more information about:
 - [Inline schema](#inline-schema) and [Schema registry](#schema-registry).
 - [Pre-configured producer configuration values](#what-are-default-kafka-producer-client-properties) for this Connector.
 
-Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/documentation/#producerconfigs).
+Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/41/configuration/producer-configs/).
 
 :::
 
@@ -82,7 +82,7 @@ When using a schema strategy, each message is serialized according to a specific
 
 To learn more about Schema strategies, refer to the official documentation:
 
-- [Inline Avro serialization](https://kafka.apache.org/documentation/#serialization) and [official Apache Avro documentation](https://avro.apache.org/docs/).
+- [Inline Avro serialization](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html) and [official Apache Avro documentation](https://avro.apache.org/docs/).
 - [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) (Avro, and JSON schemas).
 
 :::
@@ -165,7 +165,7 @@ The following fields are available in the `response` variable:
 - `topic`: The topic name.
 
 :::info
-For more information on these fields, refer to the [official Kafka documentation](https://kafka.apache.org/documentation/#intro_concepts_and_terms).
+For more information on these fields, refer to the [official Kafka documentation](https://kafka.apache.org/41/getting-started/introduction/).
 :::
 
 You can use an output mapping to map the response:
@@ -290,7 +290,7 @@ In the **Kafka** section, you can configure the following properties:
   - Select **Schema registry** If you have a Confluent Schema Registry.
 - **Bootstrap servers**: Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
 - **Topic**: Set the topic name.
-- **Additional properties**: Set producer configuration values.
+- **Additional properties**: Set consumer configuration values.
 - **Offsets**: Set the offsets for the partition. The number of offsets specified should match the number of partitions on the current topic.
 - **Auto offset reset**: Set the strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
 
@@ -298,7 +298,7 @@ In the **Kafka** section, you can configure the following properties:
 
 The [appendix](#appendix-and-faq-1) provides more information about [pre-configured consumer configuration values](#what-are-default-kafka-consumer-client-properties) for this Connector.
 
-Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/documentation/#consumerconfigs).
+Additionally, to learn more about supported consumer configurations, see the [official Kafka documentation](https://kafka.apache.org/41/configuration/consumer-configs/).
 
 :::
 

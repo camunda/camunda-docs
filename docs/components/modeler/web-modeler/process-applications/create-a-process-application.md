@@ -5,8 +5,8 @@ description: Create a process application and select a development cluster to de
 ---
 
 import EmptyProjectImg from './img/empty-project.png'
-import ReassignMainProcessImg from './img/reassign-main-process.png'
 import FileListImg from './img/file-list.png'
+import HomepageImg from './img/homepage.png'
 
 Create a process application in your project to work on and deploy a set of related files.
 
@@ -35,26 +35,27 @@ When you create a process application, you must select a development cluster to 
 
 :::
 
-### Main process
+### Process application homepage
 
-After you have created a process application, a new BPMN diagram is created and labeled as the main process.
+After creating the process application, you land on the process application homepage. From there, you can manage and explore files, preview the README if it exists, create and manage versions, set up and sync with a Git repository, connect clusters to the process application, and deploy or run the process application.
 
-- The main process diagram is named using the process application name. You can rename the main process diagram any time.
-- A process application must have a main process. You cannot delete or move the main process diagram out of the process application.
-- You can assign another BPMN diagram as the main process using the **Reassign main process** option in the action menu.
+:::note
+You may not see some of these options depending on your project permissions.
+:::
+
   <p>
-  <img src={ReassignMainProcessImg} alt="Reassign the main process" />
+  <img src={HomepageImg} alt="Process application homepage" />
   </p>
 
 ### Add files to a process application
 
-To add more files to the process application, either:
+When you create a process application, a new BPMN diagram is automatically created. To add more files to the process application, either:
 
 - Select the **Create new** dropdown on the process application page to create and add a new file.
 - Drag and drop files from your local computer.
 - Move an existing file into the process application from a different location in Web Modeler.
 
-The main process is always displayed at the top of the file list, regardless of the sort order.
+You can also create subfolders to organize files within the process application.
 
 <p><img src={FileListImg} alt="Process application file list" /></p>
 

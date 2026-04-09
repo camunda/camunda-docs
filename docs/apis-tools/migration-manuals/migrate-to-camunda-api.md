@@ -10,7 +10,11 @@ import TabItem from "@theme/TabItem";
 
 Migrate from Camunda V1 component REST APIs to the V2 Orchestration Cluster REST API.
 
-## About this guide
+:::note Have you already migrated?
+You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
+:::
+
+## About
 
 This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), and what to consider when migrating. It covers all public endpoints in the component REST APIs and their Orchestration Cluster API counterparts or required migration changes.
 
@@ -47,6 +51,7 @@ To successfully migrate to the V2 Orchestration Cluster API, perform the followi
 
 - The new API can be found at `<cluster>/v2/…>` instead of `<cluster>/v1/…>`.
 - All endpoints are no longer separated by component concerns and all endpoints receive similar support. For example, process definitions, user tasks, and user authorizations were previously spread across separate Tasklist, Operate, and Identity APIs.
+- All endpoints support the [authorization-based access control model](../../components/concepts/access-control/authorizations.md). Component endpoints only support the configuration of full (wildcard) access or no access.
 - Naming, response codes, and type handling have been streamlined for all endpoints to provide a consistent UX.
 - Endpoints with similar concerns (variable search, for example) have been consolidated into single endpoints.
 - The request and response payload of every new endpoint might contain new attributes that are not necessarily needed for a migration from a V1 endpoint to V2 but might still be useful. Please consult the V2 API guides for access to all new attributes.
@@ -233,6 +238,8 @@ Response structure changes as outlined in [general changes][].
 | `previewValue`     | Renamed         | Now `value` (always represents variable value, may be truncated).        |
 | `isValueTruncated` | Renamed         | Now `isTruncated` (see get variable endpoint for full value if needed).  |
 | `draft`            | Removed         | Draft variables not supported in V2 (see save draft variables endpoint). |
+
+For completed tasks, the V1 API returned snapshot variable values as they existed at completion time. The V2 API always returns the current runtime value of variables.
 
 </TabItem>
 </Tabs>

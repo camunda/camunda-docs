@@ -36,9 +36,11 @@ To make the **AWS Lambda Connector** executable, fill out the mandatory fields h
 The **AWS Lambda Connector** returns the HTTP status code, executed version, and payload (the response from the function, or an error object).
 The following fields are available in the response variable:
 
-- `statusCode` - HTTP status code.
+- `statusCode` - HTTP status code returned by the AWS Lambda Invoke API. This shows whether AWS Lambda accepted and handled the invocation request. It does not indicate whether the Lambda function itself returned a successful result.
 - `executedVersion` - Executed version of the Lambda function.
-- `payload` - The response from the function, or an error object.
+- `payload` - The response returned by the Lambda function, or an error object. If your function returns its own `statusCode` in the payload, that value describes the function result and is separate from the top-level connector `statusCode`.
+
+If your Lambda function includes a `statusCode` in its response body, access it with `response.payload.statusCode` rather than `response.statusCode`.
 
 You can use an output mapping to map the response:
 

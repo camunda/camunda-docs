@@ -1,9 +1,15 @@
 ---
 id: dependencies
 title: "Source code and third-party dependencies"
-description: "Dependencies and third-party libraries for all Camunda 8 components."
+description: "Learn about dependencies and third-party libraries for all Camunda 8 components."
 keywords: ["dependencies", "third-party", "third-party libraries"]
 ---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
 
 Camunda provides users and customers with source code access as part of its [written offer](https://legal.camunda.com/licensing-and-other-legal-terms#written-offer-source-code), as well as CycloneDX SBOMs listing all direct and transitive third-party dependencies and their respective licenses.
 
@@ -45,3 +51,10 @@ Learn more about CycloneDX SBOMs (International Standard for Bill of Materials) 
 | :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Dependencies | <p>Download reports listing all direct and transitive third-party dependencies and their respective licenses from the public portal:</p><ul><li>Frontend SBOM: [CycloneDX](https://portal.fossa.com/p/camunda/release/4951/latest)</li><li>Frontend Attribution: [TXT](https://portal.fossa.com/p/camunda/release/4950/latest)</li><li>Backend SBOM: [CycloneDX](https://portal.fossa.com/p/camunda/release/4949/latest)</li><li>Backend Attribution: [TXT](https://portal.fossa.com/p/camunda/release/4948/latest)</li></ul> |
 | Source code  | Access to source code is provided [on demand](mailto:dependency-request@camunda.com).                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+## Management Identity
+
+| Type         | Description                                                                                                                                                                                                                                                                                                            |
+| :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dependencies | <p>Download reports listing all direct and transitive third-party dependencies and their respective licenses from the public portal:</p><ul><li>SBOM: [CycloneDX](https://portal.fossa.com/p/camunda/release/5086/latest)</li><li>Attribution: [TXT](https://portal.fossa.com/p/camunda/release/5085/latest)</li></ul> |
+| Source code  | Access to source code is provided [on demand](mailto:dependency-request@camunda.com).                                                                                                                                                                                                                                  |

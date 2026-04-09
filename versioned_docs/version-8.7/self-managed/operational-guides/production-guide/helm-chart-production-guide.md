@@ -80,11 +80,15 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n o
 
 ### Ingress TLS setup
 
-In order to access the Camunda Platform through HTTPS with Ingress, TLS must be enabled. Enabling TLS requires the following:
+In order to access Camunda through HTTPS with Ingress, TLS must be enabled. Enabling TLS requires the following:
 
 1. **Domain name**: A public registered domain that has configurable DNS records. This guide will use `camunda.example.com` as the domain.
 2. **TLS certificate**: A TLS certificate created for your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. The certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure Ingress resources. Reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
 3. **TLS secret**: A TLS secret created from your TLS certificate. This guide will use a secret called `camunda-platform`. For more information, see the Kubernetes documentation on how to create a [TLS secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets).
+
+:::note Multiple ingress controller support
+Multiple ingress controllers are supported. Specify `ingress.className` or `ingress.grpc.className` to assign the ingress to the desired ingress controller.
+:::
 
 The following is an example `values.yaml` configuration using the example Ingress domain and TLS secret:
 
@@ -184,9 +188,6 @@ global:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-console
-        existingSecretKey: certificate-secret-data
         redirectUrl: https://management-host.com
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
@@ -294,7 +295,7 @@ zeebe:
     policyName: zeebe-record-retention-policy
 ```
 
-For more information on configuring ILM policy, refer to the configuration guide on the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters//opensearch-exporter.md#configuration).
+For more information on configuring ILM policy, refer to the configuration guide on the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md#configuration).
 
 ### Configure backups
 
@@ -411,9 +412,6 @@ The following resources and configuration options are important to keep in mind 
           mountPath: /mount
   ```
 
-<!-- This seems very specific to the application. I might remove this: -->
-<!-- - Mount Secrets as volumes, not environment variables -->
-
 - It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-Level Quotas apply limits to all workloads within a namespace. It ensures aggregate resource consumption by all pods in the namespace do not exceed your desired resource limits.
 
 ### Security
@@ -448,7 +446,6 @@ The following resources and configuration options are important to keep in mind 
   :::
 
 - [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) can be enabled with Camunda Helm charts if needed by your infrastructure requirements.
-<!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
 - It is possible to have a pod security standard that is suited to your security constraints. This is enabled by modifying the Pod Security Admission. See the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation for more information.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information, see the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/).
@@ -567,13 +564,7 @@ global:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-console
-        existingSecretKey: certificate-secret-data
         redirectUrl: https://management-host.com
-        existingSecret:
-          name: camunda-credentials
-        existingSecretKey: identity-console-client-password
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
         audience: "00000000-0000-0000-0000-000000000000"
@@ -593,7 +584,6 @@ identity:
     database: identity_db
     existingSecret: identity-db-secret
     existingSecretPasswordKey: database-password
-
 
 webModeler:
   enabled: true
@@ -691,7 +681,6 @@ console:
                   version: 8.7.x
                   readiness: http://camunda-zeebe.orchestration:9600/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/actuator/prometheus
-
 ```
 
 ### Example orchestration configuration

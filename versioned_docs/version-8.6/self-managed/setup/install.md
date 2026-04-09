@@ -107,7 +107,6 @@ data:
   tasklist-secret: VmVyeUxvbmdTdHJpbmc=
   optimize-secret: VmVyeUxvbmdTdHJpbmc=
   connectors-secret: VmVyeUxvbmdTdHJpbmc=
-  console-secret: VmVyeUxvbmdTdHJpbmc=
   keycloak-secret: VmVyeUxvbmdTdHJpbmc=
   zeebe-secret: VmVyeUxvbmdTdHJpbmc=
 ```
@@ -131,9 +130,6 @@ global:
         existingSecret:
           name: identity-secret-for-components
       connectors:
-        existingSecret:
-          name: identity-secret-for-components
-      console:
         existingSecret:
           name: identity-secret-for-components
       zeebe:
@@ -267,6 +263,10 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 ```
 
 This will deploy Camunda 8 with Bitnami secure images, recommended for secure and stable production environments.
+
+:::info
+This command references `values-enterprise.yaml` from the `main` branch, which always contains the latest tested image versions. For details on image versioning and how to pin to a specific chart release, see [install Bitnami enterprise images](/self-managed/setup/guides/install-bitnami-enterprise-images.md).
+:::
 
 ### Accessing Camunda services
 
@@ -442,7 +442,7 @@ For upgrading the Camunda Helm chart from one release to another, perform a [Hel
 
 ## Production installation
 
-For production installation, see the [Camunda production installation guide with Kubernetes and Helm](/versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md), available starting with version 8.7.
+For production installation, see the Camunda production installation guide with Kubernetes and Helm, available starting with version 8.7.
 
 ## General notes
 

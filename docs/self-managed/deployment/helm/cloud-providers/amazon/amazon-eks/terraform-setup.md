@@ -9,6 +9,9 @@ description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
+import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
+
 This guide explains how to provision an [Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) using Terraform, a widely used Infrastructure as Code (IaC) tool.  
 The EKS cluster serves as the infrastructure foundation for running Camunda 8.
 
@@ -93,7 +96,7 @@ We support two variants of this architecture:
 
 #### How to choose
 
-- If you prefer a simpler setup with basic authentication or network isolation, and your security needs are moderate, the **standard installation** is a suitable choice.
+- If you prefer a simpler setup with Basic authentication or network isolation, and your security needs are moderate, the **standard installation** is a suitable choice.
 - If you require enhanced security, dynamic role-based access management, and want to leverage AWS’s identity services for fine-grained control, the **IRSA** variant is the better option.
 
 Both can be set up with or without a **Domain** ([Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)).
@@ -111,7 +114,7 @@ After completing this guide, you will have:
 - An Amazon EKS Kubernetes cluster running with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), installed and configured. This is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - (Optional) A managed [Aurora PostgreSQL](https://aws.amazon.com/rds/postgresql/) instance for Camunda.
-- (Optional) A managed [Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service/) domain created and configured for use with the Camunda platform.
+- (Optional) A managed [Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service/) domain created and configured for use with Camunda.
 - (Optional) [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) configured so Kubernetes workloads can assume IAM roles without stored credentials.
 
 ## 1. Configure AWS and initialize Terraform
@@ -141,78 +144,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
 
-### Terraform prerequisites
+<TerraformAwsAuth />
 
-To manage the infrastructure for Camunda 8 on AWS using Terraform, we need to set up Terraform's backend to store the state file remotely in an S3 bucket. This ensures secure and persistent storage of the state file.
-
-:::note
-Advanced users may want to handle this part differently and use a different backend. The backend setup provided is an example for new users.
-:::
-
-#### Set up AWS authentication
-
-The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. Before you can use the provider, you must authenticate it using your AWS credentials.
-
-:::caution Ownership of the created resources
-
-A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters created. It is recommended to create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) for Terraform purposes, ensuring that the resources are managed and owned by that user.
-
-:::
-
-You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods:
-
-- For development or testing purposes you can use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). If you have configured your AWS CLI, Terraform will automatically detect and use those credentials.
-  To configure the AWS CLI:
-
-  ```bash
-  aws configure
-  ```
-
-  Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format. These can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-
-- For production environments, we recommend the use of a dedicated IAM user. Create [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console, and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
-
-#### Create an S3 bucket for Terraform state management
-
-Before setting up Terraform, you need to create an S3 bucket that will store the state file. This is important for collaboration and to prevent issues like state file corruption.
-
-To start, set the region as an environment variable upfront to avoid repeating it in each command:
-
-```bash
-export AWS_REGION=<your-region>
-```
-
-Replace `<your-region>` with your chosen AWS region (for example, `eu-central-1`).
-
-Now, follow these steps to create the S3 bucket with versioning enabled:
-
-1. Open your terminal and ensure the AWS CLI is installed and configured.
-
-2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
-   ```
-
-3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
-   ```
-
-4. Secure the bucket by blocking public access:
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-private.sh
-   ```
-
-5. Verify versioning is enabled on the bucket:
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
-   ```
-
-This S3 bucket will now securely store your Terraform state files with versioning enabled.
+<TerraformS3Bucket />
 
 #### Initialize Terraform
 
@@ -338,7 +272,7 @@ If you choose not to use this module, you must either provide a managed PostgreS
 Additionally, you must delete the `db.tf` file in the `terraform/cluster` directory of your chosen reference. Otherwise, it will create the resources.
 :::
 
-In the [reference architecture](/self-managed/reference-architecture/reference-architecture.md), PostgreSQL database is required for Web Modeler and Keycloak (used here as an OIDC provider example). These components require persistent storage for user data, configuration, and authentication information.
+In the [reference architecture](/self-managed/reference-architecture/reference-architecture.md), PostgreSQL database is required for Web Modeler and Management Identity. These components require persistent storage for user data, configuration, and authentication information. If you deploy Keycloak inside the cluster (for example, via the Keycloak Operator), it also needs a PostgreSQL database.
 
 :::note Management Identity and multi-tenancy
 Management Identity also requires PostgreSQL, but only when multi-tenancy is enabled, which is not used in this reference architecture. For more information, see [Multi-tenancy](/components/concepts/multi-tenancy.md).
@@ -405,14 +339,19 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
 
 If you don't want to use this module, you can skip this section. However, you may need to adjust the remaining instructions to remove references to this module.
 
-If you choose not to use this module, you'll need to either provide a managed Elasticsearch or OpenSearch service or use the internal deployment by the Camunda Helm chart in Kubernetes.
+If you choose not to use this module, you can either:
+
+- Provide a managed Elasticsearch or OpenSearch service, or deploy Elasticsearch in your cluster via ECK.
+- Use RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
 
 Additionally, you must delete the `opensearch.tf` file within the `terraform/cluster` directory of your chosen reference as it will otherwise create the resources.
 :::
 
-The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
+The OpenSearch module creates an OpenSearch domain intended for Camunda. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
 
-The OpenSearch or Elasticsearch database is required to support the Orchestration Cluster components described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md): Zeebe (workflow data), Operate (monitoring), Tasklist (human tasks), Optimize (analytics), and Identity (user management, sessions, OIDC mappings).
+:::note
+Secondary storage is configurable. Depending on the components you run and your requirements, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for configuration guidance and limitations.
+:::
 
 :::note Migration to OpenSearch is not supported
 

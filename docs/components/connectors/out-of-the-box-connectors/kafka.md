@@ -60,7 +60,7 @@ The [appendix](#appendix-and-faq) provides more information about:
 - [Inline schema](#inline-schema) and [Schema registry](#schema-registry).
 - [Pre-configured producer configuration values](#what-are-default-kafka-producer-client-properties) for this connector.
 
-Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/documentation/#producerconfigs).
+Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/41/configuration/producer-configs/).
 
 :::
 
@@ -82,7 +82,7 @@ When using a schema strategy, each message is serialized according to a specific
 
 To learn more about Schema strategies, refer to the official documentation:
 
-- [Inline Avro serialization](https://kafka.apache.org/documentation/#serialization) and [official Apache Avro documentation](https://avro.apache.org/docs/).
+- [Inline Avro serialization](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html) and [official Apache Avro documentation](https://avro.apache.org/docs/).
 - [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) (Avro, and JSON schemas).
 
 :::
@@ -171,7 +171,7 @@ The following fields are available in the `response` variable:
 - `topic`: The topic name.
 
 :::info
-For more information on these fields, refer to the [official Kafka documentation](https://kafka.apache.org/documentation/#intro_concepts_and_terms).
+For more information on these fields, refer to the [official Kafka documentation](https://kafka.apache.org/41/getting-started/introduction/).
 :::
 
 You can use an output mapping to map the response:
@@ -291,12 +291,13 @@ In the **Authentication** section, select the **Authentication type**. If you se
 
 In the **Kafka** section, you can configure the following properties:
 
+- **Consumer Group ID**: Set the consumer group ID for this connector. Always provide an explicit, stable value that identifies the logical consumer group (for example, `my-app-order-processor`). If you leave this field empty, the connector auto-generates an ID from its internal deduplication key. That generated ID can change across connector upgrades, including from 8.8 to 8.9, causing Kafka to treat the connector as a new consumer group and potentially replay already processed messages.
 - **Schema strategy**: Select the schema strategy for your messages.
   - Select **No schema**, **Inline schema** for Avro serialization.
   - Select **Schema registry** If you have a Confluent Schema Registry.
 - **Bootstrap servers**: Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
 - **Topic**: Set the topic name.
-- **Additional properties**: Set producer configuration values.
+- **Additional properties**: Set consumer configuration values.
 - **Offsets**: Set the offsets for the partition. The number of offsets specified should match the number of partitions on the current topic.
 - **Auto offset reset**: Set the strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
 
@@ -304,7 +305,7 @@ In the **Kafka** section, you can configure the following properties:
 
 The [appendix](#appendix-and-faq-1) provides more information about [pre-configured consumer configuration values](#what-are-default-kafka-consumer-client-properties) for this connector.
 
-Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/documentation/#consumerconfigs).
+Additionally, to learn more about supported consumer configurations, see the [official Kafka documentation](https://kafka.apache.org/41/configuration/consumer-configs/).
 
 :::
 
@@ -461,7 +462,7 @@ The **Deduplication** section allows you to configure the connector deduplicatio
 By default, the connector runtime deduplicates connectors based on properties, so that elements with the same subscription properties only result in one subscription.
 
 :::info
-To learn more about deduplication, see [deduplication](../use-connectors/inbound.md#connector-deduplication).
+To learn more about deduplication, see [deduplication](../advanced-topics/deduplication.md).
 :::
 
 To customize the deduplication behavior, select the **Manual mode** checkbox, and configure the custom deduplication ID.
@@ -537,6 +538,10 @@ If any of the field is not populated, you must configure your security method fo
   group.id=kafka-inbound-connector-{{bpmnProcessId}}
   enable.auto.commit=false
   ```
+
+:::caution
+The `group.id` value above is auto-generated when no explicit **Consumer Group ID** is configured in the connector. This generated ID is derived from the connector's internal deduplication key and can change across connector upgrades, including from 8.8 to 8.9. When the group ID changes, Kafka treats the connector as a new consumer group, which means committed offsets are not reused and messages may be replayed. To avoid this, always set an explicit **Consumer Group ID**. You can [look up existing consumer groups](https://docs.confluent.io/kafka/operations-tools/manage-consumer-groups.html#list-groups-and-view-offsets) to find the current group ID in use.
+:::
 
 ### What is the precedence of client properties loading?
 

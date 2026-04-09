@@ -5,6 +5,19 @@ import TabItem from '@theme/TabItem';
 
 Review [secondary storage management](/self-managed/concepts/secondary-storage-management.md) for guidance on best practices, ensuring data integrity and performance optimization.
 
+:::warning
+When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, they must use different index prefixes. One prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both). Do not use `operate`, `tasklist`, or `camunda` as the full exporter prefix, and do not use `zeebe-record` as the Orchestration Cluster index prefix, as `zeebe-record` is the default prefix for Elasticsearch/OpenSearch Exporter indices.
+
+The Orchestration Cluster prefix is configured via:
+
+- Application property: `camunda.data.secondary-storage.{elasticsearch|opensearch}.index-prefix`
+- Environment variable: `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`
+- Helm value: `orchestration.index.prefix`
+
+For detailed requirements, configuration examples, and common mistakes, see
+[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
+:::
+
 ### Connection
 
 <Tabs>
@@ -22,7 +35,7 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 | `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_VERIFYHOSTNAME`<br/><br/>`CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_VERIFYHOSTNAME`   | Whether the hostname in the certificate must match the endpoint. Disable only for troubleshooting.                                                                                                                                                                                 | `true`                  |
 | `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_SECURITY_SELFSIGNED`<br/><br/>`CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_SECURITY_SELFSIGNED`           | Indicates the certificate is self-signed (enables relaxed trust handling when supported).                                                                                                                                                                                          | `false`                 |
 | `CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX`<br/><br/>`CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX`                           | Optional prefix for secondary storage index names.                                                                                                                                                                                                                                 | `-`                     |
-| `CAMUNDA_DATABASE_AWSENABLED`                                                                                                                       | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                 |
+| `CAMUNDA_DATABASE_AWSENABLED`                                                                                                                       | <p>Use Basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use Basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                 |
 
   </TabItem>
   <TabItem value="secondary-storage-yaml" label="application.yaml">
@@ -39,7 +52,7 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 | `camunda.data.secondary-storage.elasticsearch.security.verifyHostname`<br/><br/>`camunda.data.secondary-storage.opensearch.security.verifyHostname`   | Whether the hostname in the certificate must match the endpoint. Disable only for troubleshooting.                                                                                                                                                                                 | `true`                  |
 | `camunda.data.secondary-storage.elasticsearch.security.selfSigned`<br/><br/>`camunda.data.secondary-storage.opensearch.security.selfSigned`           | Indicates the certificate is self-signed (enables relaxed trust handling when supported).                                                                                                                                                                                          | `false`                 |
 | `camunda.data.secondary-storage.elasticsearch.indexPrefix`<br/><br/>`camunda.data.secondary-storage.opensearch.indexPrefix`                           | Optional prefix for secondary storage index names.                                                                                                                                                                                                                                 | `-`                     |
-| `camunda.database.aws-enabled`                                                                                                                        | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                 |
+| `camunda.database.aws-enabled`                                                                                                                        | <p>Use Basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use Basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                 |
 
   </TabItem>
   <TabItem value="secondary-storage-helm" label="Helm values">
@@ -50,7 +63,7 @@ Review [secondary storage management](/self-managed/concepts/secondary-storage-m
 | `global.elasticsearch.auth.username`<br/><br/>`global.opensearch.auth.username` | Username for accessing the secondary storage cluster (leave blank if not secured).                                                                                                                                                                                                 | `-`                                                  |
 | `global.elasticsearch.auth.password`<br/><br/>`global.opensearch.auth.password` | Password for accessing the secondary storage cluster (use secret-based authentication if available).                                                                                                                                                                               | `-`                                                  |
 | `orchestration.index.prefix`                                                    | Optional prefix for indices created in the secondary storage cluster.                                                                                                                                                                                                              | `-`                                                  |
-| `global.opensearch.aws.enabled`                                                 | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                                              |
+| `global.opensearch.aws.enabled`                                                 | <p>Use Basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use Basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | `false`                                              |
 
 :::note
 Enable exactly one of `global.elasticsearch.enabled` or `global.opensearch.enabled`.  
@@ -62,7 +75,7 @@ Do **not** set both providers to `true` simultaneously.
 </Tabs>
 
 :::note
-Set `indexPrefix` only if you need to separate secondary storage indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
+Set `indexPrefix` only if you need to separate Orchestration Cluster indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
 :::
 
 #### Secure connection (HTTPS / TLS)
@@ -84,7 +97,7 @@ For Kubernetes-based deployments, mount a trust store and point `certificatePath
 
 ### Index & retention settings
 
-The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for secondary storage indices.
+The following properties control index creation characteristics (shards, replicas, template priority) and retention/lifecycle policies for Orchestration Cluster indices.
 
 <Tabs>
   <TabItem value="db-env" label="Environment variables" default>

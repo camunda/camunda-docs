@@ -22,7 +22,7 @@ The data purge feature can be used to:
 
 ## Purge data
 
-You will need access to the Cluster API as described in the [Cluster scaling guide](self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) to perform the purge.
+You will need access to the Cluster API as described in the [Cluster scaling guide](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) to perform the purge.
 
 :::danger
 The purge operation is irreversible. It will delete the runtime data in the cluster and the historical data in the exporters! Make sure to back up your data before proceeding.
@@ -126,7 +126,7 @@ The response is a [JSON object](https://github.com/camunda/camunda/blob/main/dis
 - `changeId`: The ID of the changes initiated to scale the cluster. This can be used to monitor the progress of the scaling operation. The ID typically increases, so new requests have a higher ID than previous requests.
 - `currentTopology`: A list of current brokers and the partition distribution.
 - `plannedChanges`: A sequence of operations that has to be executed to achieve scaling.
-- `expectedToplogy`: The expected list of brokers and the partition distribution once the scaling is completed. For the purge feature, the expected topology will be the same as the current topology.
+- `expectedTopology`: The expected list of brokers and the partition distribution once the scaling is completed. For the purge feature, the expected topology will be the same as the current topology.
 
 <details>
   <summary>Example response</summary>
@@ -246,15 +246,7 @@ When the scaling has completed, the `changeId` from the previous response will b
 
 ## Considerations
 
-### 1. Use the `--dry-run` flag
-
-You can use the `--dry-run` flag to simulate the purge operation without deleting any data. This can be useful to understand the impact of the operation before proceeding.
-
-```sh
-curl -X POST 'http://localhost:9600/actuator/cluster/purge?dry-run=true'
-```
-
-### 2. Don't perform the purge operation during other cluster operations
+### Don't perform the purge operation during other cluster operations
 
 You cannot perform the purge operation if another cluster operation is already in progress (for example, scaling).
 

@@ -33,6 +33,7 @@ https://docs.camunda.io/docs/components/concepts/variables/?utm_source=modeler&u
 https://docs.camunda.io/docs/components/modeler/desktop-modeler/troubleshooting/#i-cannot-connect-to-zeebe
 https://docs.camunda.io/docs/components/modeler/forms/form-element-library/forms-element-library-text/
 https://docs.camunda.io/docs/components/modeler/forms/configuration/forms-config-templating-syntax/
+https://docs.camunda.io/docs/components/modeler/desktop-modeler/connect-to-camunda-8/
 
 # Modeling Guidance
 
@@ -42,7 +43,6 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/error-reference/
 https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/escalation-reference/
 https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/feel/
-https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/history-time-to-live/
 https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/message-reference/
 
 
@@ -51,20 +51,23 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
  https://docs.camunda.io/docs/ms-teams/
 
 # Console
-#   updated at 2025-10-17T08:35:10.319Z
+#   updated at 2025-11-18T05:46:18.806Z
 
 https://docs.camunda.io
+https://docs.camunda.io/
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/configuration/
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/getting-started/
 https://docs.camunda.io/docs/components/
 https://docs.camunda.io/docs/components/concepts/clusters/#auto-pause
+https://docs.camunda.io/docs/components/concepts/multi-tenancy
 https://docs.camunda.io/docs/components/concepts/resource-authorizations/
 https://docs.camunda.io/docs/components/console/manage-clusters/create-cluster/
 https://docs.camunda.io/docs/components/console/manage-plan/available-plans/
 https://docs.camunda.io/docs/components/console/manage-plan/cancel-starter-subscription/
-https://docs.camunda.io/docs/components/console/manage-plan/cancel-starter-subscription/
 https://docs.camunda.io/docs/components/saas/backups/
-https://docs.camunda.io/docs/guides/
+https://docs.camunda.io/docs/components/saas/byok/aws-external-encryption-setup/
+https://docs.camunda.io/docs/components/saas/byok/aws-external-encryption-setup/#option-a-create-the-key-using-aws-cli
+https://docs.camunda.io/docs/components/saas/byok/aws-external-encryption-setup/#option-b-manual-key-creation-in-aws-console
 https://docs.camunda.io/docs/guides/
 https://docs.camunda.io/docs/next/apis-tools/administration-api/administration-api-reference/
 https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-swagger/
@@ -76,9 +79,30 @@ https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-aler
 https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-api-clients/
 https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-ip-allowlists/
 https://docs.camunda.io/docs/next/components/early-access/overview/
-https://docs.camunda.io/docs/next/components/identity/identity-introduction/
-https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/
-https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/#option-a-create-the-key-using-aws-cli
-https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/#option-b-manual-key-creation-in-aws-console
+https://docs.camunda.io/docs/next/components/admin/admin-introduction/
 https://docs.camunda.io/docs/next/components/tasklist/api-versions/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
+
+# Orchestration Cluster Admin
+
+https://docs.camunda.io/docs/next/components/admin/audit-operations/
+https://docs.camunda.io/docs/next/components/admin/authorization/
+https://docs.camunda.io/docs/next/components/admin/authorization/#about-authorizations
+https://docs.camunda.io/docs/next/components/admin/client/
+https://docs.camunda.io/docs/next/components/admin/group/
+https://docs.camunda.io/docs/next/components/admin/group/#assign-users-to-a-group
+https://docs.camunda.io/docs/next/components/admin/mapping-rules/
+https://docs.camunda.io/docs/next/components/admin/role/
+https://docs.camunda.io/docs/next/components/admin/role/#assign-users-to-a-role
+https://docs.camunda.io/docs/next/components/admin/tenant/
+https://docs.camunda.io/docs/next/components/admin/tenant/#assign-users-to-a-tenant
+https://docs.camunda.io/docs/next/components/admin/user/
+https://docs.camunda.io/docs/next/components/concepts/access-control/authorizations/
+https://docs.camunda.io/docs/next/components/concepts/access-control/authorizations/#available-resources
+https://docs.camunda.io/docs/next/components/concepts/global-user-task-listeners/
+https://docs.camunda.io/docs/next/components/modeler/feel/cluster-variable/cluster-variable-overview/
+
+# Management Identity
+
+https://docs.camunda.io/docs/8.7/self-managed/identity/access-management/resource-authorizations
+https://docs.camunda.io/docs/next/components/whats-new-in-88/#identity-and-management-identity

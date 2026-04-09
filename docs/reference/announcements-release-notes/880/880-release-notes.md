@@ -23,13 +23,24 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 :::
 
+### Technical Changelogs for all 8.8.x releases
+
+<details className="changelog-dropdown">
+  <summary>View GitHub changelogs for all patch releases</summary>
+
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+<ul><li>[Camunda 8.8.21 (30.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.21)</li><li>[Camunda 8.8.20 (30.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.20)</li><li>[Camunda 8.8.19 (23.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.19)</li><li>[Camunda 8.8.18 (20.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.18)</li><li>[Camunda 8.8.17 (17.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.17)</li><li>[Camunda 8.8.16 (09.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.16)</li><li>[Camunda 8.8.15 (04.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.15)</li><li>[Camunda 8.8.14 (20.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.14)</li><li>[Camunda 8.8.13 (18.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.13)</li><li>[Camunda 8.8.12 (17.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.12)</li><li>[Camunda 8.8.11 (05.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.11)</li><li>[Camunda 8.8.10 (04.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.10)</li><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.10 (30.03.2026)](https://github.com/camunda/connectors/releases/tag/8.8.10)</li><li>[Connectors 8.8.9 (26.03.2026)](https://github.com/camunda/connectors/releases/tag/8.8.9)</li><li>[Connectors 8.8.8 (26.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.8)</li><li>[Connectors 8.8.7 (02.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.7)</li><li>[Connectors 8.8.6 (27.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.6)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+
+</details>
+
 ## Agentic orchestration
 
 <div class="release"><span class="badge badge--medium" title="This feature affects agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects ai agents">AI agents</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
 Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Camunda Agentic orchestration</a></p>
+<p><a href="../../../../components/agentic-orchestration/agentic-orchestration-overview/" class="link-arrow">Camunda Agentic orchestration</a></p>
 
 Use the following new features to build and integrate AI agents into your processes:
 
@@ -43,7 +54,7 @@ Use the following new features to build and integrate AI agents into your proces
     <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
 </tr>
 <tr>
-    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</td>
     <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
 </tr>
 <tr>
@@ -187,7 +198,7 @@ Connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your H
 
 Enable Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 
-<p><a href="../../../../components/early-access/alpha/mcp-client/" class="link-arrow">MCP client connector</a></p>
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/" class="link-arrow">MCP client connector</a></p>
 
 ### Vector database connector
 
@@ -217,7 +228,7 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 - The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
 - If not provided, the whole document is returned as a JSON object.
 
-<p><a href="../../../../components/connectors/use-connectors/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
+<p><a href="../../../../components/connectors/advanced-topics/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
 
 ### Job header binding
 
@@ -382,7 +393,7 @@ The app integration allows you to:
 - Start processes from a channel, chat, or the app **Home** tab.
 - Fill out start forms in Microsoft Teams and submit them to kick off workflows, with optional links to Operate for monitoring.
 
-<p><a href="../../../../components/early-access/alpha/ms-teams/" class="link-arrow">Camunda for Microsoft Teams app</a></p>
+<p><a href="../../../../components/camunda-integrations/ms-teams/" class="link-arrow">Camunda for Microsoft Teams app</a></p>
 
 :::note
 The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
@@ -450,21 +461,21 @@ Use the Data Migrator to copy running process instances from Camunda 7 to Camund
 - Handle problematic instances gracefully with retry options.
 - Write custom code to intercept variable migration.
 
-<p><a href="../../../../guides/migrating-from-camunda-7/data-migrator" class="link-arrow">Data Migrator</a></p>
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/data-migrator" class="link-arrow">Data Migrator</a></p>
 
-### Migration Analyzer & Diagram Converter
+### Diagram Converter
 
-The Migration Analyzer & Diagram Converter helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
+The Diagram Converter helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
 
 It can also automatically convert these files from Camunda 7 format to Camunda 8 format (updating namespaces, XML structures/properties, and simple expression transforms), with a web UI and CLI that outputs XLSX/CSV reports, for prioritization and batch conversion.
 
-<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling#migration-analyzer--diagram-converter" class="link-arrow">Migration Analyzer & Diagram Converter</a></p>
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/diagram-converter" class="link-arrow">Diagram Converter</a></p>
 
 ### Code conversion
 
 Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.
 
-<p><a href="../../../../guides/migrating-from-camunda-7/code-conversion" class="link-arrow">Code conversion</a></p>
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/code-conversion" class="link-arrow">Code conversion</a></p>
 
 ## Optimize
 
@@ -643,7 +654,7 @@ Key updates include:
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
 
-In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use Basic authentication for cluster access.
 
 - Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to the cluster.
@@ -741,17 +752,6 @@ Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNA
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
 <p><a href="../../../../components/modeler/web-modeler/modeling/versions" class="link-arrow">Web Modeler versioning</a></p>
-
-### Technical Changelogs for all 8.8.x releases
-
-<details className="changelog-dropdown">
-  <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
-
-<!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
-<!-- RELEASE_LINKS_PLACEHOLDER -->
-
-</details>
 
 ## 8.8.0-alpha8
 
@@ -875,7 +875,7 @@ The deprecated APIs remain functional in this release but will no longer receive
 
 - Create and manage users, groups, roles, and memberships directly in Identity’s database
 - Integrate external providers like Keycloak or Microsoft Entra via OIDC
-- Assign resource-level permissions using RBAC
+- Assign resource-based authorizations using RBAC
 - Map users, groups, and roles to resources using token claims and application/client mappings
 - Simplify migration with built-in tools
 
@@ -888,7 +888,7 @@ The deprecated APIs remain functional in this release but will no longer receive
 
 <!-- https://github.com/camunda/product-hub/issues/2226 -->
 
-Add Zeebe partitions to a running cluster in SaaS to increase capacity without downtime:
+Add Zeebe partitions to a running cluster in Self-Managed to increase capacity without downtime:
 
 - New partitions start processing tasks immediately
 - Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
@@ -1005,7 +1005,7 @@ To learn more, see [Google Cloud storage connector](/components/connectors/out-o
 
 Use the new MCP Client connector to allow Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 
-To learn more, see [MCP client](../../../components/early-access/alpha/mcp-client/mcp-client.md).
+To learn more, see [MCP client](../../../components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
 
 :::note
 The MCP Client connector is released as an [early access alpha feature](/components/early-access/alpha/alpha-features.md) to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
@@ -1147,7 +1147,7 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 - The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
 - If not provided, the whole document is returned as a JSON object.
 
-To learn more, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
+To learn more, see [intrinsic functions](/components/connectors/advanced-topics/intrinsic-functions.md).
 
 ### Dynamic partition scaling <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
 
@@ -1257,11 +1257,11 @@ The new [Public API](/reference/public-api.md) documentation outlines what’s i
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
 | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
-| 10 June 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha5)</li></ul> | [Release blog](https://camunda.com/blog/2025/05/camunda-alpha-release-june-2025/) |
+| 10 June 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha5)</li></ul> | [Release blog](https://camunda.com/blog/2025/06/camunda-alpha-release-june-2025/) |
 
 ### Agentic orchestration
 
-The following [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) features are available in this alpha release:
+The following [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) features are available in this alpha release:
 
 #### AI Agent connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
 
@@ -1320,14 +1320,14 @@ Camunda’s new Identity service enhances authentication and authorization for S
 | Self-Managed Identity management  | Admins can create and manage users, groups, roles, and memberships directly in the Identity database.                                                                                                                                                                   |
 | OIDC integration                  | Integrate external identity providers (IdP) such as Keycloak and Microsoft Entra.                                                                                                                                                                                       |
 | Role-based access control (RBAC)  | Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more. |
-| Flexible mapping                  | Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.                                                                                                   |
+| Flexible mapping                  | In Self-Managed environments, map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.                                                                     |
 | Migration support                 | Simplified migration tools make it easy for existing customers to transition to the new service.                                                                                                                                                                        |
 | Organizational Identity           | In SaaS environments, integrate your own IdP to manage organizational users and assign resources cluster-by-cluster.                                                                                                                                                    |
 | Cluster-specific Roles and Groups | In SaaS environments, manage distinct roles, groups, and authorizations for each cluster independently.                                                                                                                                                                 |
 
 #### Identity management for SaaS clusters <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
-[Orchestration Cluster Identity](/components/identity/identity-introduction.md) is now available for SaaS clusters. Starting with this alpha version, you can manage groups, roles, and authorizations at the cluster level.
+[Orchestration Cluster Identity](/versioned_docs/version-8.8/components/identity/identity-introduction.md) is now available for SaaS clusters. Starting with this alpha version, you can manage groups, roles, and authorizations at the cluster level.
 
 The following known limitations apply for this alpha version release:
 
@@ -1339,7 +1339,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/deployment/helm/install/quick-install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration Cluster Identity](/versioned_docs/version-8.8/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/deployment/helm/install/quick-install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
@@ -1440,7 +1440,7 @@ The new **Settings** window in Desktop Modeler allows you to configure the appli
 
 To learn more about these settings, see [Desktop Modeler settings](/components/modeler/desktop-modeler/settings/settings.md).
 
-### Version description<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+#### Version description<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 <!-- https://github.com/camunda/web-modeler/issues/12057 -->
 
@@ -1448,16 +1448,16 @@ Use the version **Description** field to track changes alongside the version tag
 
 To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/modeling/versions.md).
 
-### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+### Web Modeler cluster Basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
 
-As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use Basic authentication for cluster access.
 
-- To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
+- To use Basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to the cluster.
 
-To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
+To learn more about Basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
 ## 8.8.0-alpha3
 
@@ -1522,9 +1522,9 @@ To learn more about this feature, see the [Camunda Spring Boot Starter](/apis-to
 
 ### Camunda 8 Run authentication updates
 
-Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using basic authentication, and to test authorizations and permissions.
+Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using Basic authentication, and to test authorizations and permissions.
 
-To learn more about this feature, see the [API documentation](/self-managed/quickstart/developer-quickstart/c8run.md#use-camunda-apis) for Camunda 8 Run.
+To learn more about this feature, see the [API documentation](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#use-camunda-apis) for Camunda 8 Run.
 
 <!-- https://github.com/camunda/camunda-docs/pull/5145 -->
 
@@ -1545,12 +1545,12 @@ Built-in Keycloak integration in Self-Managed is removed, allowing customers to 
 - Keycloak remains fully supported as an external option. For cluster-level identity management it must be connected as an external OIDC provider moving forward.
 - OpenID Connect (OIDC) remains the standard for seamless integration with chosen IdPs.
 
-#### Resource-based permissions
+#### Resource-based authorizations
 
-Resource-level permissions are introduced to control read and write permissions per specific resource.
+Resource-based authorizations control read and write permissions per specific resource. See [manage users](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
 
 - Admin users retain full access, but regular users must be granted specific permissions to perform operations or view resources.
-- For organizations that build custom front-ends and access Camunda via API, users or Clients with API permissions can still access data through the V2 API, respecting their resource permissions.
+- For organizations that build custom front-ends and access Camunda via API, users or clients with API permissions can still access data through the V2 API, respecting their resource permissions.
 
 <!-- :::info
 Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.8.

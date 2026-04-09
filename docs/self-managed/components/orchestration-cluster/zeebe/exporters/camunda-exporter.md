@@ -18,33 +18,18 @@ When exporting, indexes are created as required and not recreated if they alread
 
 ## Configuration
 
-Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
+Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
 
-You can also configure the following properties using exporter `args`:
+:::info Helm values mapping
+The option names in the tabs below (for example, `rolloverInterval`) are exporter option names, not top-level Helm values keys.
 
-```
-zeebe:
-  brokers:
-    exporters:
-      # Camunda Exporter ----------
-      # An example configuration for the camunda exporter:
-      #
-      # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_..."
-      # To convert a YAML formatted variable to an environment variable, start with the top-level property and separate every nested property with an underscore (_).
-      # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
-      #
-      camundaexporter:
-        args:
+In Helm, configure these as Orchestration Cluster application properties using `orchestration.extraConfiguration` (or `orchestration.configuration`).
 
-```
+For example, set history rollover using:
 
-| Option       | Description                                                                                           | Default |
-| ------------ | ----------------------------------------------------------------------------------------------------- | ------- |
-| connect      | Connection configuration options. See [Connect](./camunda-exporter.md?configuration=connect#options). |         |
-| index        | Index configuration options. See [Index](./camunda-exporter.md?configuration=index#options).          |         |
-| bulk         | Bulk configuration options. See [Bulk](./camunda-exporter.md?configuration=bulk#options).             |         |
-| history      | Retention configuration options. See [History](./camunda-exporter.md?configuration=history#options).  |         |
-| createSchema | If `true`, checks schema readiness before exporting.                                                  | true    |
+- `camunda.data.secondary-storage.elasticsearch.history.rollover-interval`
+- `camunda.data.secondary-storage.opensearch.history.rollover-interval`
+  :::
 
 ### Options
 
@@ -52,6 +37,9 @@ zeebe:
 values={[{label: 'Connect', value: 'connect' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'History', value: 'history' },{label: 'Other', value: 'other' }]} >
 
 <TabItem value="connect">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
 
 :::note
 Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which
@@ -72,6 +60,9 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 <TabItem value="index">
 
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+
 | Option                | Description                                                                                                                                                                                 | Default |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | numberOfShards        | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each created index.                              | 1       |
@@ -84,38 +75,44 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 <TabItem value="bulk">
 
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.bulk.`
+
 To avoid too many expensive requests to the Elasticsearch/OpenSearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
 size) can be controlled by configuration.
 
 | Option | Description                                                                                                                                                    | Default |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| delay  | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `5`     |
+| delay  | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `1`     |
 | size   | The amount of records a batch should have before we flush the batch.                                                                                           | `1000`  |
 
 With the default configuration, the exporter will aggregate records and flush them to Elasticsearch/OpenSearch:
 
 1. When it has aggregated 1000 records.
-2. Five seconds have elapsed since the last flush (regardless of how many
+2. One seconds have elapsed since the last flush (regardless of how many
    records were aggregated).
 
 </TabItem>
 
 <TabItem value="retention">
 
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.retention.`
+
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified
 `minimumAge`.
 All index templates created by this exporter apply the created ILM Policy.
 
-| Option                 | Description                                                                                                                                                          | Default                                  |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                              | `false`                                  |
-| minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                        | `30d`                                    |
-| policyName             | The name of the created and applied ILM policy.                                                                                                                      | `camunda-retention-policy`               |
-| usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric` and `camunda-usage-metric-tu` indices. | `730d`                                   |
-| usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                        | `camunda-usage-metrics-retention-policy` |
-| applyPolicyJobInterval | The interval at which the ILM policy is periodically applied to all historical indices (starting from version 8.8.1).                                                | `PT1H`                                   |
+| Option                 | Description                                                                                                                                                                        | Default                                  |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                                            | `false`                                  |
+| minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                                      | `30d`                                    |
+| policyName             | The name of the created and applied ILM policy.                                                                                                                                    | `camunda-retention-policy`               |
+| usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric-8.8.0_` and `camunda-usage-metric-tu-8.8.0_` indices. | `730d`                                   |
+| usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                                      | `camunda-usage-metrics-retention-policy` |
+| applyPolicyJobInterval | The interval at which the ILM policy is periodically applied to all historical indices (starting from version 8.8.1).                                                              | `PT1H`                                   |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds
@@ -126,24 +123,34 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 
 <TabItem value="history">
 
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.`
+
+For example, `rolloverInterval` maps to:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.history.rollover-interval`.
+
 To keep the main runtime index performant, documents are periodically moved into historical
 indices. The history can be configured as follows:
 
-| Option                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Default |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| elsRolloverDateFormat        | Defines how date values are formatted for historical indices using Java DateTimeFormatter syntax. If no format is specified, the first date format defined in the field mapping is used.                                                                                                                                                                                                                                                                                                                                                                                                                                     | `date`  |
-| rolloverInterval             | The rollover period before an active index is rolled over. This means that `rolloveInterval` is the time gap between updates of historical indexes, therfore for a index `index-abc` and a `rolloverInterval` of 7 days (`7d`) we will have the historical indexes `index-abc-2025-01-01`, `index-abc-2025-01-08` and so on. The `elsRolloverDateFormat` must have sufficient resolution to compute the `rolloverInterval`. For example, if the `rolloverInterval` is `1h`, then the `elsRolloverDateFormat` should be `yyyy-MM-dd-HH`. Additionally, `rolloverInterval` cannot use seconds (`s`) or minutes (`m`) as units. | `1d`    |
-| usageMetricsRolloverInterval | The rollover period for usage metric indices before an active index is rolled over. Behaves the same way as the `rolloveInterval` but applies only to `usage-metric`, `usage-metric-tu` indices and only values of `1-4w` and `1M` are allowed.                                                                                                                                                                                                                                                                                                                                                                              | `1M`    |
-| rolloverBatchSize            | The maximum number of instances per batch to be archived.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `100`   |
-| waitPeriodBeforeArchiving    | Grace period during which completed process instances are excluded from archiving. For example, with a value of `1h`, any process instances completed within the last hour will not be archived.                                                                                                                                                                                                                                                                                                                                                                                                                             | `1h`    |
-| delayBetweenRuns             | Time in milliseconds between archiving runs for completed process instances.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `2000`  |
-| maxDelayBetweenRuns          | The maximum delay between archive runs when using an exponential backoff strategy in case of unsuccessful archiving attempts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `60000` |
-| processInstanceEnabled       | If `true`, enables the archiving of the completed process instances and their related objects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `true`  |
-| retention                    | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for retention configuration options.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
+| Option                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Default        |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| elsRolloverDateFormat        | Defines how date values are formatted for historical indices using Java DateTimeFormatter syntax. If no format is specified, the first date format defined in the field mapping is used.                                                                                                                                                                                                                                                                                                                                                                                                                                          | `date`         |
+| rolloverInterval             | The rollover period before an active index is rolled over. This means that `rolloverInterval` is the time gap between updates of historical indexes, therefore for an index `index-abc` and a `rolloverInterval` of 7 days (`7d`), we will have the historical indexes `index-abc-2025-01-01`, `index-abc-2025-01-08`, and so on. The `elsRolloverDateFormat` must have sufficient resolution to compute the `rolloverInterval`. For example, if the `rolloverInterval` is `1h`, then the `elsRolloverDateFormat` should be `yyyy-MM-dd-HH`. Additionally, `rolloverInterval` cannot use seconds (`s`) or minutes (`m`) as units. | `1d`           |
+| usageMetricsRolloverInterval | The rollover period for usage metric indices before an active index is rolled over. Behaves the same way as the `rolloverInterval` but applies only to `usage-metric`, `usage-metric-tu` indices and only values of `1-4w` and `1M` are allowed.                                                                                                                                                                                                                                                                                                                                                                                  | `1M`           |
+| rolloverBatchSize            | The maximum number of instances per batch to be archived.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `100`          |
+| waitPeriodBeforeArchiving    | Grace period during which completed process instances are excluded from archiving. For example, with a value of `1h`, any process instances completed within the last hour will not be archived.                                                                                                                                                                                                                                                                                                                                                                                                                                  | `1h`           |
+| delayBetweenRuns             | Time in milliseconds between archiving runs for completed process instances.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `2000`         |
+| maxDelayBetweenRuns          | The maximum delay between archive runs when using an exponential backoff strategy in case of unsuccessful archiving attempts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `60000`        |
+| processInstanceEnabled       | If `true`, enables the archiving of the completed process instances and their related objects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `true`         |
+| processInstanceRetentionMode | Controls the retention behavior for process instance data in secondary storage. Allowed values: `PI_HIERARCHY`, `PI_HIERARCHY_IGNORE_LEGACY`, `PI`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `PI_HIERARCHY` |
+| retention                    | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for retention configuration options.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                |
 
 </TabItem>
 
 <TabItem value="other">
+
+Helm property path prefix for these options:
+`camunda.data.secondary-storage.{elasticsearch|opensearch}.batch-operations.`
 
 Other miscellaneous properties:
 

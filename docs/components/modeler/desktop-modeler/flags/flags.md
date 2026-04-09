@@ -66,7 +66,6 @@ Flags passed as command line arguments take precedence over those configured via
 | ------------------------------------------------------------- | ----------------------------------- |
 | ["disable-plugins"](#disable-plug-ins)                        | false                               |
 | "disable-adjust-origin"                                       | false                               |
-| "disable-cmmn"                                                | true                                |
 | "disable-dmn"                                                 | false                               |
 | "disable-form"                                                | false                               |
 | "disable-rpa"                                                 | false                               |
@@ -92,7 +91,7 @@ Start the modeler without activating installed plug-ins. This is useful to debug
 
 ### BPMN-only mode
 
-To disable the CMMN and DMN editing capabilities of the App, configure your `flags.json` like this:
+To disable the DMN, Form, and RPA script editing capabilities of the App, configure your `flags.json` like this:
 
 ```js
 {

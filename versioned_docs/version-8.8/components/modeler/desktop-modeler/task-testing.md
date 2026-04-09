@@ -4,16 +4,16 @@ title: Task testing
 description: "Test implementation of a single BPMN task in Desktop Modeler."
 ---
 
-[Test a single task](../../concepts/task-testing.md) in Desktop Modeler to quickly verify task logic, variable mappings, and configuration—without running the entire process.
+[Test a single task](../task-testing.md) in Desktop Modeler to quickly verify task logic, variable mappings, and configuration—without running the entire process.
 
 Task testing deploys the process and executes the selected task on the engine, as if it would be executed in a process flow. You control the context (process variables) that can verify if the outputs match your expectation.
 
 ## Prerequisites
 
-Task testing requires a **REST connection** to a Camunda 8.8 or higher cluster.  
+Task testing requires a **REST connection** to a Camunda 8.8.0+ cluster.
 gRPC connections are not supported.
 
-When configuring a connection, make sure to **remember credentials**; otherwise, task testing won’t be able to deploy the process.
+You can set up a connection by following the [Connect to Camunda 8](./connect-to-camunda-8.md) guide.
 
 ## Testing a single activity
 
@@ -63,5 +63,6 @@ If the task execution fails due to an error, the response message is displayed.
 
 ## Related
 
-- [Test a task in Web Modeler](/components/modeler/web-modeler/task-testing.md)
-- [Learn about task testing concepts](../../concepts/task-testing.md)
+- [Test a task in Web Modeler](../web-modeler/task-testing.md)
+- [Learn about task testing concepts](../task-testing.md)
+- [Working with variables](../../concepts/variables.md)

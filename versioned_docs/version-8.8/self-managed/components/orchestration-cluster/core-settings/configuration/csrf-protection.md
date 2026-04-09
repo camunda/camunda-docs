@@ -14,7 +14,7 @@ browser into making unwanted requests to a web application where the victim is a
 For a comprehensive understanding of CSRF attacks and prevention methods, refer to the
 [MDN Web Docs on CSRF](https://developer.mozilla.org/en-US/docs/Glossary/CSRF).
 
-Review the configuration details in the [properties documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#csrf-protection).
+Review the configuration details in the [properties documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecuritycsrf).
 
 :::caution
 Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.

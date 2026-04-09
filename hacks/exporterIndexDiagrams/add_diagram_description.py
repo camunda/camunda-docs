@@ -53,7 +53,7 @@ def prepend_to_file(file_path, text_to_prepend):
 
 # Main execution
 if __name__ == "__main__":
-    diagram_directory = "camunda-docs/docs/self-managed/zeebe-deployment/exporters/index-diagrams/"
+    diagram_directory = "camunda-docs/docs/self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/"
 
     prepend_to_file(diagram_directory + "tasklist-diagrams.md",tasklist_header_text())
     prepend_to_file(diagram_directory + "operate-diagrams.md",operate_header_text())

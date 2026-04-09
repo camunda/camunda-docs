@@ -1,7 +1,7 @@
 ---
 id: getting-started-example
-title: "Run your first local Camunda 8 project"
-sidebar_label: Run your first local project
+title: "Run your first Spring Boot or Node.js project with Camunda 8"
+sidebar_label: Run your first Spring Boot or Node.js project
 description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot or Node.js."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-This guide is tailored for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
+This guide is tailored for developers who want to implement process automation solutions using Java (Spring) or JavaScript (Node.js). You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
 ## Get started with an example project
 
@@ -63,11 +63,11 @@ All of these components are included in the starter package. You do not need to 
 
 ## Example project
 
-The example project, located in the `camunda-8-get-started` directory, contains a BPMN process model that represents a simple e-commerce flow with three service tasks.
+The example project, located in the `camunda-8-get-started/2-order-process-with-service-workers` directory, contains a BPMN process model that represents a simple e-commerce flow with three service tasks.
 
 ![Example business process](./img/getting-started-guide-example-process.png)
 
-The service tasks in the process are executed by job workers. The `java` and `nodejs` directories contain code for job workers that correspond to this process model.
+The service tasks in the process are executed by job workers. The `java` and `nodejs` directories inside `2-order-process-with-service-workers` contain code for job workers that correspond to this process model.
 
 ## Instructions
 
@@ -85,12 +85,12 @@ The service tasks in the process are executed by job workers. The `java` and `no
 ] }>
 <TabItem value="maclinux">
     ```bash
-./1-camunda-starter.sh
+./camunda-start.sh
 ```
 </TabItem>
 <TabItem value="windows">
 ```bash
-.\1-camunda-starter.bat
+.\camunda-start.bat
 ```
 </TabItem>
 </Tabs>
@@ -104,12 +104,12 @@ The service tasks in the process are executed by job workers. The `java` and `no
     In Camunda Modeler, use:
     <pre><code>File &gt; Open File...</code></pre>
     to open the file:
-    <pre><code>camunda-8-get-started/bpmn/diagram_1.bpmn</code></pre>
+    <pre><code>camunda-8-get-started/2-order-process-with-service-workers/bpmn/order-process.bpmn</code></pre>
   </li>
 
   <li>
     Click the "Rocket" icon to connect to your Camunda 8 Run instance and deploy the model.
-    Select `Camunda 8 Self-Managed` and use `http://localhost:26500` as the cluster endpoint.
+    Select `Camunda 8 Self-Managed` and use `http://localhost:8080/v2` as the cluster endpoint.
 
     ![Connect to Cluster and deploy model](./img/get-started-example-deploy.png)
 
@@ -160,8 +160,7 @@ Next, start the job workers to allow them to perform the work for the service ta
 Change into the Spring SDK directory:
 
 ```bash
-cd camunda-8-get-started
-cd java
+cd camunda-8-get-started/2-order-process-with-service-workers/java
 ```
 
       </li>
@@ -185,8 +184,7 @@ mvn spring-boot:run
       <li>
         Change into the Node.js SDK directory:
 ```bash
-cd camunda-8-get-started
-cd nodejs
+cd camunda-8-get-started/2-order-process-with-service-workers/nodejs
 ```
       </li>
       <li>
@@ -244,7 +242,7 @@ You have completed your first process instance by:
 
 For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
 
-Find more examples on the [Developer Portal](https://developers.camunda.com/developer-resources/orchestration-use-cases/).
+Find more examples on the [Developer Portal](https://camunda.com/developers/).
 
 ## Teardown
 
@@ -259,14 +257,14 @@ You can stop Camunda 8 Run by executing:
 <TabItem value="maclinux">
 
 ```bash
-cd c8run && ./c8run stop
+./camunda-stop.sh
 
 ```
 
 </TabItem>
 <TabItem value="windows">
 ```bash
-cd c8run && .\c8run.exe stop
+./camunda-stop.bat
 ````
 
 </TabItem>

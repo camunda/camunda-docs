@@ -54,6 +54,28 @@ Following this guide will incur costs on your Azure account, including charges f
 
 :::
 
+### Variants
+
+This guide supports two secondary storage variants for the Orchestration Cluster. Choose the one that fits your requirements:
+
+| Aspect                 | Elasticsearch                                                                                                                   | RDBMS (PostgreSQL)                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Secondary storage      | [Elasticsearch via ECK Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#deploy-elasticsearch) | [Azure Database for PostgreSQL](/self-managed/deployment/helm/configure/database/rdbms.md) |
+| Optimize               | Supported                                                                                                                       | Not available (requires Elasticsearch)                                                     |
+| Infrastructure         | AKS + PostgreSQL + Elasticsearch cluster                                                                                        | AKS + PostgreSQL only (lighter footprint)                                                  |
+| Orchestration database | Not required                                                                                                                    | Additional `camunda_orchestration` database                                                |
+
+For more details on secondary storage, see [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md).
+
+:::note
+Select a variant using the **Elasticsearch**/**RDBMS** tabs throughout this guide. All tabbed sections will switch together automatically.
+:::
+
+#### How to choose
+
+- If you need **Optimize** for analytics or prefer the proven Elasticsearch-based setup, choose the **Elasticsearch** variant.
+- If you want a **lighter infrastructure** without managing an Elasticsearch cluster and do not need Optimize, choose the **RDBMS** variant. RDBMS secondary storage is available as of Camunda 8.9.
+
 #### Security
 
 The following security considerations were relaxed to streamline adoption and development. These should be reassessed and hardened before deploying to production. The following items were identified using [Trivy](https://trivy.dev/) and can be looked up in the [Aqua vulnerability database](https://avd.aquasec.com/).
@@ -154,13 +176,31 @@ Due to Azure CNI, every pod will get assigned a real internal IP. While the defa
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture of the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/). Select the variant matching your [secondary storage choice](#variants). This material will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
+
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/get-your-copy.sh
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/get-your-copy.sh
+```
+
+</TabItem>
+</Tabs>
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
 
@@ -244,9 +284,9 @@ export AZURE_SP_ID=$(az account show --query user.name -o tsv)
 
 #### Creating terraform.tfvars
 
-To configure your deployment, create a `terraform.tfvars` file in the root of the `aks-single-region` folder. This file defines critical environment-specific settings like your Azure subscription and the Service Principal used for authentication.
+To configure your deployment, create a `terraform.tfvars` file in the root of the reference architecture folder (`aks-single-region` or `aks-single-region-rdbms`). This file defines critical environment-specific settings like your Azure subscription and the Service Principal used for authentication.
 
-Follow the below guide for getting the necessary values:
+Follow the guide below to get the necessary values:
 
 <Tabs groupId="domain" defaultValue="with-domain" queryString values={
 [
@@ -391,7 +431,7 @@ The modules deployed are:
 
 #### 2. AKS module
 
-This module exposes a customisable **kubernetes_version** value via the `locals` block:
+This module exposes a customizable **kubernetes_version** value via the `locals` block:
 
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/aks.tf#L1-L3
@@ -401,16 +441,46 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 This module exposes several **customizable values** via the `locals` block:
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/db.tf#L1-L18
 ```
 
 These values control database user setup, naming, and passwords. Sensitive values are used by downstream provisioning jobs and Helm secrets.
 
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant extends the base PostgreSQL configuration with an additional **orchestration database** used as the secondary storage for Operate, Tasklist, and the Orchestration Cluster REST API:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/db.tf#L1-L26
+```
+
+In addition to the Identity and Web Modeler databases, this variant creates:
+
+- A `camunda_orchestration` database for RDBMS secondary storage
+- A dedicated `orchestration_db` user with a randomly generated password
+
+</TabItem>
+</Tabs>
+
 This module is **enabled by default**. To opt out, you must:
 
 - Remove the `db.tf` file from the root
 - Manually provide credentials and PostgreSQL endpoints for the Helm chart
+
+:::tip Alternative: Operator-based PostgreSQL deployment
+If your organization does not want to use a managed Azure Database for PostgreSQL service, CloudNativePG is an option.
+For more details on the PostgreSQL deployment with CloudNativePG Operator, see [PostgreSQL deployment in the operator-based infrastructure guide](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
+:::
 
 ### Execution
 
@@ -477,10 +547,14 @@ In the remainder of the guide, we reference the `camunda` namespace to create so
 
 Camunda 8 requires high IOPS for performance-critical components like **Zeebe**, so it is important to use Azure **PremiumV2** disks rather than the default `Standard_LRS`.
 
+:::danger Reclaim policy
+Using `reclaimPolicy: Delete` can cause **permanent data loss** if a PVC is deleted. Consider using `Retain` for production. See [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) for details.
+:::
+
 This step defines a custom `StorageClass` that:
 
 - Uses **PremiumV2_LRS** Azure Managed Disks
-- Sets a **`Retain`** reclaim policy
+- Sets a **`Retain`** reclaim policy to prevent data loss
 - Uses `WaitForFirstConsumer` volume binding
 - Becomes the default StorageClass for the cluster
 
@@ -517,17 +591,57 @@ Due to the tight NSG rules in this example, the only way to access the database 
 
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/vars-create-db.sh
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant exports additional environment variables for the orchestration database:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/vars-create-db.sh
+```
+
+</TabItem>
+</Tabs>
 
 A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the users and assign them the correct roles and privileges.
 
 2. Create a secret that references the environment variables:
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/create-setup-db-secret.sh
 ```
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant includes additional orchestration database credentials in the secret:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/procedure/create-setup-db-secret.sh
+```
+
+</TabItem>
+</Tabs>
 
 This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
 
@@ -545,6 +659,13 @@ This should display the secret with the base64 encoded values.
 kubectl apply -f ./manifests/setup-postgres-create-db.yml --namespace "$CAMUNDA_NAMESPACE"
 ```
 
+<Tabs groupId="secondary-storage" defaultValue="elasticsearch" queryString values={[
+{label: 'Elasticsearch', value: 'elasticsearch'},
+{label: 'RDBMS', value: 'rdbms'},
+]}>
+
+<TabItem value="elasticsearch">
+
 <details>
 <summary>Show manifest <code>setup-postgres-create-db.yml</code></summary>
 
@@ -553,6 +674,24 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 ```
 
 </details>
+
+</TabItem>
+
+<TabItem value="rdbms">
+
+The RDBMS variant manifest creates an additional `camunda_orchestration` database and user for the secondary storage:
+
+<details>
+<summary>Show manifest <code>setup-postgres-create-db.yml</code></summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region-rdbms/manifests/setup-postgres-create-db.yml
+```
+
+</details>
+
+</TabItem>
+</Tabs>
 
 Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
@@ -579,6 +718,6 @@ kubectl delete secret setup-db-secret --namespace "$CAMUNDA_NAMESPACE"
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
-## 2. Install Camunda 8 using the Helm chart
+## 3. Install Camunda 8 using the Helm chart
 
 Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on Kubernetes](./aks-helm.md) for detailed instructions on deploying the platform to your Kubernetes cluster.

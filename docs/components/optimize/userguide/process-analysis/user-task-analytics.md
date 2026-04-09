@@ -71,7 +71,7 @@ Evaluation on assignee level is only possible in Camunda 7 and Camunda 8 Self-Ma
 
 In user task duration reports, you have the opportunity to select which part of the user task's lifecycle you want to see in the report:
 
-- **Unassigned:** View how long each user task was considered assigned (not claimed by an assignee/user) during its execution.
+- **Unassigned:** View how long each user task was considered unassigned (not claimed by an assignee/user) during its execution.
 - **Assigned:** View how long each user task was considered to be assigned to assignees/users (claimed by an assignee/user) during its execution.
 - **Total:** View how long each user task took to complete.
 

@@ -4,6 +4,7 @@ title: Collaborate with your team
 description: Collaboration features and access rights for Web Modeler.
 ---
 
+import BulkAddUserImg from '../img/invite-all-organization-members.png';
 import SuperUserModeImg from '../img/super-user-mode.png';
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -25,7 +26,7 @@ Users can have various levels of access to a project in Web Modeler, outlined in
 After creating a project, you can invite members of your Camunda 8 organization to collaborate in Web Modeler.
 There are four roles with different levels of access rights that can be assigned to each user:
 
-- **Project Admin**: The user can edit the project itself, all folders and diagrams within the project, and invite more users to collaborate.
+- **Project Admin**: The user can edit the project itself, all folders, and diagrams within the project, and invite more users to collaborate.
 - **Editor**: The user can edit all folders and diagrams within the project.
 - **Commenter**: The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
@@ -74,11 +75,19 @@ Refer to the documentation pages about [assigning roles](../../../../self-manage
 
 </Tabs>
 
-### Inviting users to projects
+### Add users to projects
 
 :::note
 Users without email addresses will not receive any kind of notification about project invitations.
 :::
+
+<Tabs groupId="addingUsers" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
 
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
 
@@ -94,15 +103,65 @@ On the right side of a project, view a list of your collaborators and invite mor
 4. Write a message to your new collaborator about their invitation to the project.
    ![invite type message](img/web-modeler-collaborator-invite-type-message.png)
 
-5. Click **Send** and your new collaborator will receive an email with the invitation.
-   ![invite sent](img/web-modeler-collaborator-invite-sent.png)
+5. Click **Add collaborator**. Your new collaborator will be added to the project and notified via email.
+   ![invite added](img/web-modeler-collaborator-invite-added.png)
    ![invite email](img/web-modeler-collaborator-invite-email.png)
+
+If the individual is not a member of your organization, they will first receive an organization invitation.
+After accepting the invitation and logging into Web Modeler, they will be added to the project.
+They will appear as "invited" in the collaborator list until they accept.
+
+![invite sent](img/web-modeler-collaborator-invite-sent.png)
+
+#### Invite the entire organization
+
+You can invite all existing members of your Camunda 8 organization to the project at once by using the **All users in the organization** option.
+
+<img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+On the right side of a project, view a list of your collaborators and invite more by following the steps below:
+
+1. Click **Add user**.
+   ![invite user](img/web-modeler-collaborator-invite-modal-opened.png)
+
+2. Choose a role for your new collaborator.
+   ![invite choose role](img/web-modeler-collaborator-invite-choose-role.png)
+
+3. Begin typing the individual's name or email. Web Modeler will suggest members who have already logged into Web Modeler at least once and whom you can invite to the project.
+   ![invite suggestions](img/web-modeler-collaborator-invite-suggestions.png)
+
+4. Write a message to your new collaborator about their invitation to the project.
+   ![invite type message](img/web-modeler-collaborator-invite-type-message.png)
+
+5. Click **Add collaborator**. Your new collaborator will be added to the project and notified via email.
+   ![invite added](img/web-modeler-collaborator-invite-added.png)
+   ![invite email](img/web-modeler-collaborator-invite-email.png)
+
+If the member has not logged into Web Modeler before, they will not appear in the suggestions, but you can still invite them by typing their full email address.
+They will appear as "invited" in the collaborator list until they log into Web Modeler for the first time.
+After logging in, they will be added to the project.
+
+![invite sent](img/web-modeler-collaborator-invite-sent.png)
+
+#### Invite the entire organization
+
+You can invite all members who logged into Web Modeler at least once to the project at once by using the **All users in the organization** option.
+
+<img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
 
 :::info Self-Managed license restrictions
 For Self-Managed non-production installations, the number of collaborators per project is limited to **five**, including the project administrator.
 
 For more information, refer to the [licensing documentation](/reference/licenses.md#web-modeler).
 :::
+
+</TabItem>
+
+</Tabs>
 
 ### Folders
 
@@ -166,6 +225,28 @@ Users without email addresses will not receive any kind of notification about be
 
 When others are opening the same diagram as you, the updates on the diagram are sent in real time. You can also note who is in the diagram with you.
 ![real time collaboration](../img/real-time-collaboration.png)
+
+### Canvas lock
+
+To prevent conflicts and broken sessions when multiple people open the same diagram, Web Modeler automatically locks the canvas.
+
+When a user with edit permissions starts editing a diagram, the canvas is automatically locked. While the lock is active, no other users can modify the diagram — this prevents conflicting edits.
+
+Other collaborators can still do the following:
+
+- Open and view the diagram in real time
+- Switch [modes](./collaborate-with-modes.md)
+- Navigate the canvas
+- Drill down into subprocesses
+- Inspect properties and linked assets
+- Add comments (if they have permission)
+
+#### Take over editing
+
+If another user with edit permissions needs to continue working, they can take control by clicking the **Take over** button in the canvas lock bar.
+This releases the current lock and immediately assigns edit control to the new user.
+
+This approach enables predictable handovers and prevents conflicting edits while keeping the diagram accessible to all viewers.
 
 ### Undo/redo management limitations
 

@@ -4,6 +4,9 @@ title: Use connectors in hybrid mode
 description: "Learn how to run connectors in hybrid mode."
 ---
 
+<span className="badge badge--active--outbound">Outbound</span>
+<span className="badge badge--active--inbound">Inbound</span>
+
 :::note
 Hybrid mode is supported as of the connectors `0.23.0` release.
 :::

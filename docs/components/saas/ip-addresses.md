@@ -9,8 +9,16 @@ description: "Details on the network configuration for Camunda 8 SaaS clusters."
 
 Camunda 8 SaaS hostnames and IP addresses for inbound and outbound connections.
 
-:::warning
-Inbound and outbound connection IP addresses can change at any time. Camunda does not recommend using an IP allowlist strategy based on trusted IP addresses or ranges, as their stability is not guaranteed.
+## Static outbound IP addresses
+
+Camunda SaaS uses static IP addresses for some of its services. These addresses can be retrieved using the [Camunda Management API `/meta/ip-ranges` endpoint](https://console.cloud.camunda.io/customer-api/openapi/docs/#/default/GetMeta).
+
+Although changes to these IP addresses are infrequent, they may occur from time to time. Any change will be published through the API at least 24 hours in advance. If you rely on these IP addresses for your network configuration, it is strongly recommended fetching the latest version at least once every 24 hours.
+
+:::note
+
+Typically, any changes to these IP addresses are communicated in advance. However, in exceptional cases, it may not be possible to provide prior notice.
+
 :::
 
 ## Inbound connections

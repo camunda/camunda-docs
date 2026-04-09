@@ -4,9 +4,13 @@ title: "Usage metrics"
 description: "Learn about the three main usage metrics that impact Camunda 8 pricing."
 ---
 
-There are three main usage metrics that have an impact on Camunda 8 pricing.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 ## Definition of metrics
+
+There are three main usage metrics that have an impact on Camunda 8 pricing.
 
 It is important to understand these definitions, their impact on billing, and how to retrieve them.
 
@@ -36,7 +40,7 @@ You can access the **Billing** page by selecting **Organization Management** in 
 
 Some Enterprise agreements require the following indices from Elasticsearch for at least 18 months:
 
-Usage metrics are stored in the `camunda-usage-metric` and `camunda-usage-metric-tu` indices.
+Usage metrics are stored in the `camunda-usage-metric-8.8.0_` and `camunda-usage-metric-tu-8.8.0_` indices.
 :::
 
 On Camunda 8 Self-Managed, you can get the usage metrics via the [Get usage metrics system API][].

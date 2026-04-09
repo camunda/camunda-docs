@@ -13,13 +13,17 @@ You need to keep `port-forward` running all the time to communicate with the rem
 
 ## Accessing workflow engine
 
-To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md) using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
+To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md) using a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as follows:
 
 ```
+# gRPC
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
+
+# REST API
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 ```
 
-Now, you can connect and execute operations against your new Zeebe cluster.
+Now, you can connect and execute operations against your new Zeebe cluster. Port `26500` provides gRPC access, and port `8080` provides [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) access.
 
 :::note
 Accessing the Zeebe cluster directly using `kubectl port-forward` is recommended for development purposes.
@@ -31,53 +35,49 @@ To interact with Camunda web applications like Operate, Tasklist, and Optimize, 
 
 :::note
 To use the web applications without Camunda Identity, you can set `global.identity.auth.enabled: false` in the values file to disable the authentication mechanism.
-Do _not_ disable it if you like to use Web Modeler, as it requires Camunda Identity and Keycloak.
+Do _not_ disable it if you want to use Web Modeler, as it requires Camunda Identity and Keycloak.
 :::
 
 First, port-forward for each application service:
 
 ```shell
-kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
-
 kubectl port-forward svc/camunda-optimize 8083:80
 
 kubectl port-forward svc/camunda-connectors 8086:8080
 ```
 
-To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself and Keycloak (assuming that Keycloak is installed as part of the Helm release):
+:::note
+The Zeebe Gateway port-forward on port `8080` (shown in the [workflow engine section](#accessing-workflow-engine) above) also serves the Orchestration web interface.
+:::
+
+To be able to use Web Modeler, create additional port-forward commands for Web Modeler itself, and if you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
 
 ```
-kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
+kubectl port-forward svc/camunda-web-modeler-restapi 8070:80
 
 kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 
-kubectl port-forward svc/camunda-keycloak 18080:80
+# Only if using Keycloak Operator
+kubectl port-forward svc/keycloak-service 18080:18080
 ```
 
-To use Console, create additional port-forwardings for Console and Keycloak (assuming Keycloak is installed as part of the Helm release):
+To use Console, create additional port-forward commands for Console. If you use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), also port-forward the Keycloak service:
 
 ```
 kubectl port-forward svc/camunda-console 8087:80
 
-kubectl port-forward svc/camunda-keycloak 18080:80
+# Only if using Keycloak Operator
+kubectl port-forward svc/keycloak-service 18080:18080
 ```
-
-:::note
-The name of the Keycloak service will be truncated after 20 characters if Keycloak 16 is used, for example: `svc/long-release-name-ke`
-:::
-
-:::note Keycloak Operator deployment
-If you're using Keycloak deployed via the Keycloak Operator (such as in the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md)), use `kubectl port-forward svc/keycloak-service 18080:8080` instead.
-:::
 
 Finally, you can access each app pointing your browser at:
 
-- Orcestration: [http://localhost:8080](http://localhost:8080)
+- Orchestration: [http://localhost:8080](http://localhost:8080)
 - Optimize: [http://localhost:8083](http://localhost:8083)
 - Web Modeler: [http://localhost:8070](http://localhost:8070)
 - Console: [http://localhost:8087](http://localhost:8087)
 
-Log in to these services using the first user `demo`/`demo` credentials.
+Log in to these services using the default first user credentials `demo`/`demo`. These defaults come from the Helm chart value `orchestration.security.initialization.users` (which seeds the `demo` user with password `demo` for the orchestration cluster). If you have overridden these values or use a custom identity provider, use the credentials you configured instead.
 
 <details>
   <summary>Operate and Tasklist Login</summary>

@@ -25,3 +25,7 @@ node_modules
 /test-results/
 /playwright-report/
 /playwright/.cache/
+/python-sdk
+
+camunda-deployment-references
+camunda-deployment-references/**
