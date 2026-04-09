@@ -1,13 +1,15 @@
 ---
 id: using-external-opensearch
 sidebar_label: Amazon OpenSearch Service
-title: Use Amazon OpenSearch Service with the Helm chart
-description: Learn how to connect a Camunda 8 Self-Managed Helm chart deployment to an external Amazon OpenSearch Service instance.
+title: Use Amazon OpenSearch Service for Orchestration Cluster with Helm
+description: Learn how to connect the Orchestration Cluster in a Camunda 8 Self-Managed Helm deployment to an external Amazon OpenSearch Service instance.
 ---
 
-Configure Camunda 8 Self-Managed to use Amazon OpenSearch Service as a secondary storage backend when deploying with the Helm chart. OpenSearch is used for indexing and querying operational data consumed by multiple Camunda components. For a canonical definition, see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+Configure the Orchestration Cluster in Camunda 8 Self-Managed to use Amazon OpenSearch Service as a secondary storage backend when deploying with the Helm chart. OpenSearch is used for indexing and querying operational data consumed by Orchestration Cluster applications and APIs. For a canonical definition, see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
 Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. You can configure the Helm chart to connect to an external Amazon OpenSearch Service instance as an alternative secondary storage backend.
+
+This page applies to the Orchestration Cluster only. If you also deploy Optimize, configure Optimize separately using [use external OpenSearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-opensearch.md).
 
 Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms). For the [quick-install](/self-managed/deployment/helm/install/quick-install.md) scenario, RDBMS with embedded H2 is used instead.
 
@@ -44,24 +46,6 @@ To connect to OpenSearch using Basic authentication, follow the configuration be
 | `orchestration.data.secondaryStorage.opensearch.tls.secret.existingSecretKey`  | string | `""`    | Key within the existing Kubernetes Secret for the TLS trust store.                              |
 | `orchestration.index.prefix`                                                   | string | `""`    | Index prefix in OpenSearch for the new Camunda exporter and the Orchestration Cluster.          |
 
-#### Optimize database
-
-| Parameter                                                    | Type    | Default          | Description                                                                                                                                                                                                     |
-| ------------------------------------------------------------ | ------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `optimize.database.opensearch.enabled`                       | boolean | `false`          | Enable external OpenSearch.                                                                                                                                                                                     |
-| `optimize.database.opensearch.aws.enabled`                   | boolean | `false`          | Enable AWS IRSA integration.                                                                                                                                                                                    |
-| `optimize.database.opensearch.auth.username`                 | string  | `""`             | Username for external OpenSearch authentication.                                                                                                                                                                |
-| `optimize.database.opensearch.auth.secret.inlineSecret`      | string  | `""`             | OpenSearch password as a plain-text value (non-production only).                                                                                                                                                |
-| `optimize.database.opensearch.auth.secret.existingSecret`    | string  | `""`             | Reference to an existing Kubernetes Secret containing the password.                                                                                                                                             |
-| `optimize.database.opensearch.auth.secret.existingSecretKey` | string  | `""`             | Key within the existing Kubernetes Secret containing the password.                                                                                                                                              |
-| `optimize.database.opensearch.prefix`                        | string  | `zeebe-record`   | Index prefix for `zeebe-record` indices. See [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md). |
-| `optimize.database.opensearch.tls.enabled`                   | boolean | `false`          | Enable TLS for external OpenSearch.                                                                                                                                                                             |
-| `optimize.database.opensearch.tls.secret.existingSecret`     | string  | `""`             | Name of the Kubernetes Secret containing a TLS certificate.                                                                                                                                                     |
-| `optimize.database.opensearch.tls.secret.existingSecretKey`  | string  | `externaldb.jks` | Key within the secret containing the TLS certificate.                                                                                                                                                           |
-| `optimize.database.opensearch.url.protocol`                  | string  | `""`             | Access protocol for OpenSearch. Possible values are `http` and `https`.                                                                                                                                         |
-| `optimize.database.opensearch.url.host`                      | string  | `""`             | OpenSearch host, ideally the service name within the namespace.                                                                                                                                                 |
-| `optimize.database.opensearch.url.port`                      | integer | `0`              | Port used to access OpenSearch.                                                                                                                                                                                 |
-
 ### Example usage
 
 ```yaml
@@ -79,26 +63,9 @@ orchestration:
             # For production (recommended):
             # existingSecret: "opensearch-secret"
             # existingSecretKey: "password"
-
-optimize:
-  database:
-    opensearch:
-      enabled: true
-      auth:
-        username: user
-        secret:
-          # For non-production environments only:
-          inlineSecret: "your-password-here"
-          # For production (recommended):
-          # existingSecret: "opensearch-secret"
-          # existingSecretKey: "password"
-      url:
-        protocol: https
-        host: opensearch.example.com
-        port: 443
 ```
 
-This configuration connects Camunda to an external Amazon OpenSearch Service instance. The Orchestration Cluster uses OpenSearch as its secondary storage backend, and Optimize is configured to query the same OpenSearch instance.
+This configuration connects the Orchestration Cluster to an external Amazon OpenSearch Service instance as its secondary storage backend.
 
 To avoid storing the username and password in plaintext in your `values.yaml`, reference a Kubernetes secret.
 For details and examples, see [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md).
@@ -120,34 +87,19 @@ orchestration:
             inlineSecret: pass
   index:
     prefix: my-env-camunda # Prefix for Orchestration Cluster indices
-
-optimize:
-  database:
-    opensearch:
-      enabled: true
-      prefix: my-env-zeebe # Prefix for zeebe-record indices
-      auth:
-        username: admin
-        secret:
-          inlineSecret: pass
-      url:
-        protocol: https
-        host: opensearch.example.com
-        port: 443
 ```
 
 For more details about index prefix configuration and Optimize-specific settings, see [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
 
 ### Component configuration
 
-Camunda components use the same configuration keys for both Elasticsearch and OpenSearch.
+Orchestration Cluster components use the same configuration keys for both Elasticsearch and OpenSearch.
 To switch, replace the `elasticsearch` prefix with `opensearch` and provide the corresponding values.
 
 For example:
 
 - **Operate**: `CAMUNDA_OPERATE_ELASTICSEARCH_URL` → `CAMUNDA_OPERATE_OPENSEARCH_URL`
 - **Tasklist**: `CAMUNDA_TASKLIST_ELASTICSEARCH_URL` → `CAMUNDA_TASKLIST_OPENSEARCH_URL`
-- **Optimize**: `OPTIMIZE_ELASTICSEARCH_HTTP_PORT` → `CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT`
 
 For **Zeebe**, configure the [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md).
 
@@ -155,12 +107,12 @@ For full parameter details, see:
 
 - [Operate configuration](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#settings-for-opensearch)
 - [Tasklist configuration](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#elasticsearch-or-opensearch)
-- [Optimize configuration](/self-managed/components/optimize/configuration/system-configuration.md#opensearch)
 
 ## References
 
 - [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md)
 - [IAM roles for service accounts](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
 - [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)
+- [Use external OpenSearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-opensearch.md)
 - [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md)
 - [Deploy Camunda 8](/self-managed/setup/overview.md)
