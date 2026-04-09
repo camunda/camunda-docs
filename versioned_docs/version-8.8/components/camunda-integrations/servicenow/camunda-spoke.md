@@ -1,16 +1,16 @@
 ---
 id: camunda-spoke
-title: Camunda Spoke
+title: Camunda Spoke for ServiceNow
 description: "Use the Camunda Spoke in ServiceNow to start and interact with Camunda process instances from ServiceNow flows."
 ---
 
-The **Camunda Spoke for ServiceNow** lets you orchestrate workflows between Camunda and ServiceNow, empowering your organization to automate cross-system workflows end to end.
+The Camunda Spoke for ServiceNow lets you orchestrate workflows between Camunda and ServiceNow, empowering your organization to automate cross-system workflows end to end.
 
-With the Spoke installed on the ServiceNow side, you can initiate, signal, correlate or cancel Camunda process instances directly from the Flow Designer.
+With the Spoke installed in ServiceNow, you can start, signal, correlate, or cancel Camunda process instances directly from Flow Designer.
 
 ## Spoke actions in detail
 
-### Start Process
+### Start process
 
 Start a Camunda process from ServiceNow.
 
@@ -27,7 +27,7 @@ Supported inputs
 **Variables:** (Optional) Process variables passed to Camunda as key-value pairs in JSON format.
  Example: `{ "invoiceId": "12345", "amount": 250 }`
 
-#### Code Example:
+#### Code example
 
 ```javascript
 const returnObject = {
@@ -38,7 +38,7 @@ return JSON.stringify(returnObject);
 ```
 
 :::tip
-When adding the JSON payload as a code snippet, convert ServiceNow types to a JSON-compatible format. In the example above, `sys_id` is a ServiceNow GUID, but needs to be a string for the JSON payload - thus the explicit conversion via `fd_data.trigger.request_item.sys_id.toString()`
+When you add the JSON payload as a code snippet, convert ServiceNow types to a JSON-compatible format. In the example above, `sys_id` is a ServiceNow GUID, but it must be converted to a string for the JSON payload. That is why the example uses `fd_data.trigger.request_item.sys_id.toString()`.
 :::
 
 **Tenant ID:** (Optional) The tenant identifier for multi-tenant Camunda setups. Leave empty for single-tenant setups.
@@ -49,10 +49,10 @@ Example: `camID`
 
 **Wait for completion:** (Optional) Whether the flow waits until the Camunda process completes.
 
-### Send Signal
+### Send signal
 
-Broadcast BPMN signals to one or many Camunda process instances
-![Start Process action](./img/spoke-action-send.png)
+Broadcast BPMN signals to one or more Camunda process instances
+![Send Signal action](./img/spoke-action-send.png)
 
 Supported inputs
 
@@ -65,7 +65,7 @@ Supported inputs
 **Tenant ID:** (Optional) The tenant identifier for multi-tenant Camunda setups. Leave empty for single-tenant setups. 
  Example: `hr-emea`
 
-### Correlate Message
+### Correlate message
 
 Correlate a running Camunda process instance from ServiceNow.
 
@@ -79,7 +79,7 @@ Supported inputs
 **Correlation key:** The process variable value used to match the message to a specific process instance.
  Example: `approvalID`
 
-### Cancel Process
+### Cancel process
 
 Cancel a Camunda process instance from ServiceNow when needed.
 ![Cancel Process Action](./img/spoke-action-cancel.png)
@@ -92,11 +92,11 @@ Supported inputs
 **Operation Reference:** (Optional) A user-defined reference key available in Camunda for tracking the operation.
 Example: `camID`
 
-### Starting a ServiceNow process from Camunda
+### Start a ServiceNow process from Camunda
 
 Camunda can trigger a ServiceNow flow by calling a REST API as the trigger endpoint in ServiceNow.
 
-![Cancel Process Action](./img/rest-api-trigger.png)
+![REST API trigger configuration](./img/rest-api-trigger.png)
 
 Supported inputs
 
@@ -104,7 +104,7 @@ Supported inputs
  Example: `POST`
 
 **Path:** A custom URL path suffix for the trigger endpoint used by the ServiceNow Flow Starter Connector.  
-Example: `/api/camun/my_flow_name`
+Example: `/api/camunda/my_flow_name`
 
 **Requires authentication:** Whether incoming requests must include a valid ServiceNow authentication header. Enable this for production integrations.
 
