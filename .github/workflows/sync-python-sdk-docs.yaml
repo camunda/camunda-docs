@@ -117,20 +117,25 @@ jobs:
       - name: Verify SDK examples don't break docs generation
         working-directory: docs
         run: |
-          npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
-          npx docusaurus gen-api-docs camunda -p api-camunda-openapi
+          DOCS_VERSION="${{ steps.resolve.outputs.version_label }}"
+          DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
+
+          if [ "$DOCS_VERSION" = "next" ]; then
+            npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs camunda -p api-camunda-openapi
+          else
+            npx docusaurus clean-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi
+          fi
+
           # Discard generated MDX — this step only validates, not commits
-          git checkout -- docs/apis-tools/orchestration-cluster-api-rest/specifications/ || true
+          git checkout -- "$DOCS_ROOT/apis-tools/orchestration-cluster-api-rest/specifications/" || true
 
       - name: Check for SDK example changes
-        id: check_examples
         working-directory: docs
         run: |
           if git diff --name-only | grep -q '.sdk-repos/'; then
-            echo "examples_changed=true" >> "$GITHUB_OUTPUT"
             echo "::notice::The SDK examples have changed. Run the Sync Camunda REST API workflow to pick up the changes for the OpenAPI documentation."
-          else
-            echo "examples_changed=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Check for changes
