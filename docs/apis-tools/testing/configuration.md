@@ -858,19 +858,19 @@ custom `ChatModelAdapter` instead (see [Custom ChatModelAdapter](#custom-chatmod
 For a guided walkthrough of setting up and testing AI agents, see [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md).
 :::
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
+<Tabs groupId="client" defaultValue="spring-sdk-pre" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk-pre' },
+{label: 'Java client', value: 'java-client-pre' },
 ]}>
 
-<TabItem value='spring-sdk'>
+<TabItem value='spring-sdk-pre'>
 
 Camunda Process Test Spring includes the LangChain4j providers as a transitive dependency. No additional
 dependency is needed.
 
 </TabItem>
 
-<TabItem value='java-client'>
+<TabItem value='java-client-pre'>
 
 Add the `camunda-process-test-langchain4j` dependency to your project:
 
@@ -918,7 +918,7 @@ agreement.
 {label: 'Amazon Bedrock', value: 'amazon-bedrock' },
 {label: 'Azure OpenAI', value: 'azure-openai' },
 {label: 'OpenAI-compatible', value: 'openai-compatible' },
-{label: 'Custom/SPI', value: 'custom' }
+{label: 'Custom/SPI', value: 'custom' },
 ]}>
 
 <TabItem value='openai'>
@@ -1100,12 +1100,12 @@ By default, CPT uses an internal prompt that instructs the model to act as an im
 value against the natural language expectation, apply the documented scoring rubric, and return the result in the
 expected JSON structure.
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
+<Tabs groupId="client" defaultValue="spring-sdk-custom" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk-custom' },
+{label: 'Java client', value: 'java-client-custom' },
 ]}>
 
-<TabItem value='spring-sdk'>
+<TabItem value='spring-sdk-custom'>
 
 ```yaml
 camunda:
@@ -1116,7 +1116,7 @@ camunda:
 
 </TabItem>
 
-<TabItem value='java-client'>
+<TabItem value='java-client-custom'>
 
 ```properties
 judge.customPrompt=You are a domain expert evaluating financial data accuracy.
@@ -1147,12 +1147,12 @@ assertThat(processInstance)
 You can provide your own `ChatModelAdapter` implementation without depending on the `camunda-process-test-langchain4j`
 module. A `ChatModelAdapter` is a functional interface that takes a prompt string and returns a response string.
 
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
+<Tabs groupId="client" defaultValue="spring-sdk-chat" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk-chat' },
+{label: 'Java client', value: 'java-client-chat' },
 ]}>
 
-<TabItem value='spring-sdk'>
+<TabItem value='spring-sdk-chat'>
 
 If you have a single `ChatModelAdapter` bean and no `provider` property is set, CPT auto-detects and uses it:
 
@@ -1211,7 +1211,7 @@ CamundaAssert.setJudgeConfig(
 
 </TabItem>
 
-<TabItem value='java-client'>
+<TabItem value='java-client-chat'>
 
 Implement `ChatModelAdapterProvider` and register it through `META-INF/services`:
 

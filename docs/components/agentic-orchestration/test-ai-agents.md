@@ -36,7 +36,9 @@ This guide is a follow-up to [Build your first AI agent](../../guides/getting-st
 
 ## Step 1: Prepare the example AI agent blueprint
 
-Place the BPMN file and any associated forms for your AI agent process in the `src/main/resources` directory of your Spring Boot project. Create it if it does not already exist. You can organize files into subdirectories such as `bpmn/` and `forms/`.
+Place the BPMN file and any associated forms for your AI agent process in the `src/main/resources` directory of your Spring Boot project. Create it if it does not already exist.
+
+You can organize files into subdirectories such as `bpmn/` and `forms/`.
 
 ## Step 2: Configure the LLM provider and connectors
 
@@ -152,7 +154,11 @@ For the full setup including dependencies and project structure, see [Getting st
 
 ## Step 4: Handle non-deterministic flow paths
 
-The test uses the prompt `"Send Ervin a joke"` (the same prompt from [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md)). The agent calls `ListUsers`, `LoadUserByID`, and `Jokes_API` in any order, presents an email for review via `AskHumanToSendEmail`, and collects feedback through `User_Feedback`.
+The test uses the prompt `"Send Ervin a joke"`. In response, the agent:
+
+- Calls `ListUsers`, `LoadUserByID`, and `Jokes_API` in any order.
+- Presents an email for review via `AskHumanToSendEmail`.
+- Collects feedback through `User_Feedback`.
 
 With [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior), you can register background reactions that monitor the process state and execute actions as conditions are met, without blocking the test thread. Register behaviors before starting the process; they then react independently as the process progresses.
 
