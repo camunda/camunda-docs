@@ -572,7 +572,7 @@ $ c8ctl cluster start
 $ git clone https://github.com/camunda/camunda-8-get-started.git
 $ cd camunda-8-get-started/1-rocket-launch/
 $ c8ctl deploy .
-$ c8ctl run rocket-launch.bpmn
+$ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
 
 # Open Operate at http://localhost:8080/operate to see your process instance running. Log in with the credentials \`demo/demo\`. `}
           </TerminalWindow>
@@ -706,17 +706,17 @@ $ c8ctl c8run stop
             <div className={styles.commandCard}>
               <h4>Deploy and start processes</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl deploy ./payment.bpmn
-$ c8ctl create pi --id=payment
+                {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn
+$ c8ctl create pi --id=rocket-launch --variables='{"fuelLevel":90}'
 $ c8ctl list pi`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
               <h4>Interact with processes</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8 list jobs --type=email-service
-$ c8ctl activate jobs email-service
-$ c8ctl complete job 2251799813685252'`}
+                {`$ c8ctl list jobs --type=launch-approval
+$ c8ctl activate jobs launch-approval
+$ c8ctl complete job 2251799813685252`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
@@ -724,7 +724,7 @@ $ c8ctl complete job 2251799813685252'`}
               <TerminalWindow title="Terminal">
                 {`$ c8ctl list inc --state=ACTIVE
 $ c8ctl get inc 2251799813685251
-$ c8 resolve inc 2251799813685251`}
+$ c8ctl resolve inc 2251799813685251`}
               </TerminalWindow>
             </div>
           </div>
