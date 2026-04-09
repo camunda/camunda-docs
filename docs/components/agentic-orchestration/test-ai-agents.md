@@ -36,7 +36,7 @@ This guide is a follow-up to [Build your first AI agent](../../guides/getting-st
 
 ## Step 1: Prepare the example AI agent blueprint
 
-Place the BPMN file and any associated forms for your AI agent process in `src/main/resources` (for example, under `bpmn/` and `forms/` subdirectories).
+Place the BPMN file and any associated forms for your AI agent process in the `src/main/resources` directory of your Spring Boot project. Create it if it does not already exist. You can organize files into subdirectories such as `bpmn/` and `forms/`.
 
 ## Step 2: Configure the LLM provider and connectors
 
@@ -160,14 +160,18 @@ Each behavior watches for a specific element to become active and then completes
 
 ### Complete tool tasks
 
-Register a behavior for each tool task the agent might invoke. In this integration test, these behaviors stand in for external tool executions such as REST connector calls. The following two behaviors provide mock responses for the user lookup tools:
+Register a behavior for each tool task the agent might invoke. In this integration test, these behaviors stand in for external tool executions such as REST connector calls.
+
+First, define records for the tool call results:
 
 ```java
-// Define records for tool call results
 record User(int id, String name, String username) {}
 record UserDetail(int id, String name, String username, String email) {}
+```
 
-// given: complete ListUsers when the agent invokes it
+Register a behavior that completes the `ListUsers` tool with a mock user list when the agent invokes it:
+
+```java
 processTestContext
     .when(
         () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
@@ -180,8 +184,11 @@ processTestContext
                 List.of(
                     new User(1, "Leanne Graham", "Bret"),
                     new User(2, "Ervin Howell", "Antonette")))));
+```
 
-// given: complete LoadUserByID with Ervin's details
+Register a behavior that completes the `LoadUserByID` tool with Ervin's details:
+
+```java
 processTestContext
     .when(
         () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
@@ -192,8 +199,11 @@ processTestContext
             JobSelectors.byElementId("LoadUserByID"),
             Map.of("toolCallResult",
                 new UserDetail(2, "Ervin Howell", "Antonette", "123@abc.local"))));
+```
 
-// given: complete Jokes_API with two different jokes
+Register a behavior that completes the `Jokes_API` tool. This behavior uses chained `.then()` calls to return different jokes on repeated invocations:
+
+```java
 String firstJoke = "Why did the workflow cross the road? To get to the happy path.";
 String secondJoke = "Why did the BPMN diagram apply for a job? It had excellent flow experience.";
 
@@ -215,7 +225,6 @@ processTestContext
 The `AskHumanToSendEmail` user task requires human approval. Register a behavior that auto-approves the email when the task appears:
 
 ```java
-// given: auto-approve the email when the human review task appears
 processTestContext
     .when(
         () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
@@ -237,20 +246,17 @@ Use chained `.then()` calls when a behavior should produce different results on 
 In this example, the first feedback rejection sends the agent back with a follow-up request, and the second feedback loop approves the result:
 
 ```java
-// given: first reject, then approve in the feedback loop
 processTestContext
     .when(
         () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
             .hasActiveElements("User_Feedback"))
     .as("feedback loop")
-    // 1) first invocation: reject and ask for a better joke
     .then(
         () -> processTestContext.completeUserTask(
             "User_Feedback",
             Map.of(
                 "userSatisfied", false,
                 "followUpInput", "This joke is bad, send Ervin a better joke")))
-    // 2) subsequent invocations: approve
     .then(
         () -> processTestContext.completeUserTask(
             "User_Feedback", Map.of("userSatisfied", true)));
@@ -260,15 +266,11 @@ For the full conditional behavior API, see [Utilities](/apis-tools/testing/utili
 
 ## Step 5: Verify agent output with judge assertions
 
-After the process completes, use a judge assertion to verify that the agent's output satisfies a natural language expectation. The following example checks the full "Send Ervin a joke" scenario, including tool usage, email content, and the feedback loop:
+After the process completes, use a judge assertion to verify that the agent's output satisfies a natural language expectation. The following example puts the full test together: it registers the conditional behaviors from Step 4, starts the process with the prompt `"Send Ervin a joke"`, and then asserts that the agent completed the scenario correctly:
 
 ```java
 @Test
 void shouldSendErvinAJoke() {
-    // given: register conditional behaviors for tool tasks, email approval, and feedback
-    // ... (see Step 4 above)
-
-    // when: start the process
     ProcessInstanceEvent processInstance = client.newCreateInstanceCommand()
         .bpmnProcessId("ai-agent-chat-with-tools")
         .latestVersion()
@@ -276,7 +278,6 @@ void shouldSendErvinAJoke() {
         .send()
         .join();
 
-    // then: the agent completed the full scenario correctly
     assertThat(processInstance).isCompleted();
     assertThat(processInstance)
         .hasVariableSatisfiesJudge(
