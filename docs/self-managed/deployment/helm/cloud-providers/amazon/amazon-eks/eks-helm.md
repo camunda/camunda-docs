@@ -317,7 +317,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 #### Enable Enterprise components
 
-To enable these enterprise components in an OIDC-enabled full cluster, first deploy the required infrastructure (PostgreSQL, Elasticsearch/OpenSearch, and an IdP, such as Keycloak) using the official operators, then apply the Helm values examples shown in [deploy required dependencies with operators](/self-managed/deployment/helm/configure/operator-based-infrastructure/).
+To enable these enterprise components in an OIDC-enabled full cluster, first deploy the required infrastructure (PostgreSQL, Elasticsearch/OpenSearch, and an IdP, such as Keycloak) using the official operators, then apply the Helm values examples shown in [deploy required dependencies with operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
 #### Secondary storage options
 
