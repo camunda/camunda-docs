@@ -38,7 +38,7 @@ Camunda 8.9 introduces a unified API domain for Orchestration Clusters. All serv
 
 Legacy hostnames (`*.zeebe.<camunda-domain>`, `*.operate.<camunda-domain>`, `*.tasklist.<camunda-domain>`, and `*.identity.<camunda-domain>`) continue to work in 8.9 and are internally routed to the unified service, but are deprecated and scheduled for removal in 8.10.
 
-After the 8.10 release, only the Zeebe gRPC endpoint and the unified `*.api.*` Ingress will remain.
+After the 8.10 release, only the Zeebe gRPC endpoint and the unified `*.api.*` endpoints will remain.
 
 ### Deprecation
 
@@ -77,7 +77,7 @@ When a Camunda 8 SaaS Orchestration Cluster is upgraded from 8.8 to 8.9:
 
 1. The existing Operate and Tasklist components are shut down.
 2. The unified orchestration service starts in their place.
-3. Ingress routes are updated so legacy hostnames continue to resolve while the new `*.api.*` endpoints become active.
+3. Endpoint routing is updated so legacy hostnames continue to resolve while the new `*.api.*` endpoints become active.
 
 ### Impact during upgrade
 
