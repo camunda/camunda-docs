@@ -1417,8 +1417,13 @@ module.exports = {
     {
       Testing: [
         {
-          "Camunda Process Test": [
-            "apis-tools/testing/getting-started",
+          type: "category",
+          label: "Camunda Process Test",
+          link: {
+            type: "doc",
+            id: "apis-tools/testing/getting-started",
+          },
+          items: [
             "apis-tools/testing/configuration",
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
