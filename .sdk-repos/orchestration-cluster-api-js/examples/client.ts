@@ -102,7 +102,7 @@ async function customFetchExample() {
 //#region Config
 function configExample() {
   const camunda = createCamundaClient({
-    config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2' },
+    config: { CAMUNDA_REST_ADDRESS: "http://localhost:8080/v2" },
   });
 
   const config = camunda.config;
@@ -126,7 +126,7 @@ async function configureExample() {
   // Reconfigure the client with new overrides
   camunda.configure({
     config: {
-      CAMUNDA_REST_ADDRESS: 'http://new-host:8080/v2',
+      CAMUNDA_REST_ADDRESS: "http://new-host:8080/v2",
     },
   });
 
@@ -170,7 +170,7 @@ async function withCorrelationExample() {
   const camunda = createCamundaClient();
 
   // Run operations with a correlation ID for tracing
-  await camunda.withCorrelation('request-123', async () => {
+  await camunda.withCorrelation("request-123", async () => {
     const topology = await camunda.getTopology();
     console.log(`Cluster size: ${topology.clusterSize}`);
   });
