@@ -7,6 +7,16 @@ description: "Use Camunda Copilot’s built-in specialized tools to interact wit
 
 Use Camunda Copilot’s specialized tools to interact with your BPMN diagrams, forms, and other artifacts.
 
+## How Copilot works
+
+Copilot uses specialized AI agents to handle different types of requests:
+
+- **BPMN agent**: Creates and modifies process diagrams.
+- **FEEL agent**: Generates and debugs expressions.
+- **Form agent**: Builds and validates forms.
+
+Copilot automatically routes your request to the right agent based on what you're asking for, so you don't need to specify which agent to use.
+
 ## Access control
 
 Each tool is governed by two layers of access control:
