@@ -33,7 +33,7 @@ These instructions apply to all Copilot interactions in this repository, includi
 
 - Use **sentence case** for all titles and headers: capitalize only the first word and proper nouns. Do not use title case.
 - Do not include a colon at the end of a Markdown header.
-- Make titles and headers **descriptive and action-oriented** (for example, "Modifying process instances" not "Process instance modification"). Avoid bare "Overview" titles.
+- Make titles and headers **descriptive and action-oriented** (for example, "Modify process instances" not "Process instance modification"). Avoid bare "Overview" titles.
 - **Bold** UI element names and button labels (for example, `Click **Save**`). Do not use italics or quotation marks for them.
 - Use the `>` arrow to separate sequential UI navigation steps (for example, `**File > New > BPMN Diagram**`).
 - Use **italics** only for emphasis on a specific word, not for UI elements or filenames.
@@ -89,7 +89,11 @@ These instructions apply to all Copilot interactions in this repository, includi
   - Keep the commit message header between 72–120 characters.
   - Write the description in present tense (for example, "Add start event to BPMN symbol support matrix").
 
-## 8. Review checklist
+## 8. Examples
+
+For style guide examples, see the **Example/Use column** in the [style guide](https://github.com/camunda/camunda-docs/blob/main/howtos/technical-writing-styleguide.md).
+
+## 9. Review checklist
 
 When reviewing a documentation PR, verify each of the following:
 
