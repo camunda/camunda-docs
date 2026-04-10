@@ -2,12 +2,13 @@
 id: administrator-quickstart
 title: "Administrator quickstart"
 sidebar_label: "For Administrators"
-description: "Get started with Camunda 8 Self-Managed as an administrator."
+description: "Learn how to deploy Camunda 8 Self-Managed as an administrator. Choose your deployment approach."
 ---
 
 import DocCardList from '@theme/DocCardList';
+import PageDescription from '@site/src/components/PageDescription';
 
-With this guide, you'll learn how to deploy Camunda 8 Self-Managed as an administrator. Select the deployment approach that best fits your needs:
+<PageDescription />
 
 <DocCardList items={[
 {

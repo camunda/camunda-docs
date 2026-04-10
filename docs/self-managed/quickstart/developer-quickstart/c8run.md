@@ -1,16 +1,20 @@
 ---
 id: c8run
-title: "Developer quickstart – Camunda 8 Run"
+title: "Developer quickstart with Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components."
+description: "Deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run."
 ---
 
-:::note
-Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use.
+import PageDescription from '@site/src/components/PageDescription';
 
-For production deployments, install the Orchestration Cluster manually as a Java application.
-For detailed steps, see the [manual installation](../../../deployment/manual/install) guide.
+<PageDescription />
+
+:::note
+Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping. It is not intended for production use. For production deployments, install the Orchestration Cluster manually as a Java application.
+For detailed steps, see [Camunda manual installation](../../../deployment/manual/install).
 :::
+
+## About
 
 Camunda 8 Run is a local distribution of Camunda 8 that bundles the Camunda 8 runtime, core services, startup scripts, and a launcher application for Windows, macOS, and Linux.
 

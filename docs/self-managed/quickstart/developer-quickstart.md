@@ -2,12 +2,13 @@
 id: developer-quickstart
 title: "Developer quickstart"
 sidebar_label: "For Developers"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster"
+description: "Choose how you want to deploy Camunda 8 Self-Managed to a local Orchestration Cluster."
 ---
 
 import DocCardList from '@theme/DocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+import PageDescription from '@site/src/components/PageDescription';
 
-This quickstart guides application engineers through deploying **Camunda 8 Self-Managed** to a local developer environment.
+<PageDescription />
 
 <DocCardList queryString items={useCurrentSidebarCategory().items}/>

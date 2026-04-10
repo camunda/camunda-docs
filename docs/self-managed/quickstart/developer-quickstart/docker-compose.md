@@ -2,14 +2,23 @@
 id: docker-compose
 title: "Developer quickstart with Docker Compose"
 sidebar_label: "Docker Compose"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster on Docker Compose"
+description: "Deploy Camunda 8 Self-Managed to a local Orchestration Cluster with Docker Compose."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {DockerCompose} from "@site/src/components/CamundaDistributions";
+import PageDescription from '@site/src/components/PageDescription';
 
-Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster (Zeebe, Operate, and Tasklist consolidated), Orchestration Cluster Admin (formerly Orchestration Cluster Identity), Connectors, and Elasticsearch. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL. You can also switch the Orchestration Cluster secondary storage to a supported relational database or OpenSearch for local development and evaluation. Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
+<PageDescription />
+
+## About
+
+The default lightweight configuration includes the Orchestration Cluster (Zeebe, Operate, and Tasklist consolidated), Orchestration Cluster Admin (formerly Orchestration Cluster Identity), Connectors, and Elasticsearch.
+
+The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL. You can also switch the Orchestration Cluster secondary storage to a supported relational database or OpenSearch for local development and evaluation.
+
+Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
 The [Docker images](/self-managed/deployment/docker/docker.md) are supported for production usage; however, the Docker Compose files are intended for developers to run an environment locally and are **not** designed for production. For production deployments, use [Kubernetes with Helm](/self-managed/deployment/helm/install/index.md).

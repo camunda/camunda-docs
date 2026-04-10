@@ -1564,6 +1564,8 @@ module.exports = {
             {
               type: "category",
               label: "Camunda 8 Run",
+              description:
+                "Deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components.",
               link: {
                 type: "doc",
                 id: "self-managed/quickstart/developer-quickstart/c8run",
