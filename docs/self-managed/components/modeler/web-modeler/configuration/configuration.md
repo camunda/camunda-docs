@@ -42,7 +42,7 @@ The examples below show configuration in two formats:
 - **`application.yml`** – the native Spring Boot configuration file format.
 
 :::tip Passing JVM options
-When running the `restapi` component in a **container** (Docker / Kubernetes), use the `JAVA_TOOL_OPTIONS` environment variable to pass JVM arguments (e.g. trust store settings, proxy configuration). This is a standard JVM mechanism that is automatically picked up by all Java processes.
+When running the `restapi` component in a **container** (Docker / Kubernetes), use the `JAVA_TOOL_OPTIONS` environment variable to pass JVM arguments (for example, trust store settings, proxy configuration). This is a standard JVM mechanism that is automatically picked up by all Java processes.
 :::
 
 ### General
@@ -84,7 +84,7 @@ Clusters must be configured using the following options to access the cluster fr
 
 The Camunda 8 [Helm](/self-managed/deployment/helm/install/quick-install.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
 
-To add additional clusters, increment the `0` value for each entry (e.g. `clusters[1]` or `CAMUNDA_MODELER_CLUSTERS_1_NAME`).
+To add additional clusters, increment the `0` value for each entry (for example `clusters[1]` or `CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 
 :::info Cluster version
 The available configuration options depend on the version of the cluster:
@@ -288,8 +288,8 @@ spring:
     password: "***" # optional
     properties:
       mail.smtp.auth: true # set to true if user and password are provided
-      mail.smtp.starttls.enable: # set to true to enable STARTTLS encryption
-      mail.smtp.starttls.required: # set to true to enforce STARTTLS encryption (recommended)
+      mail.smtp.starttls.enable: true # set to true to enable STARTTLS encryption
+      mail.smtp.starttls.required: true # set to true to enforce STARTTLS encryption (recommended)
 ```
 
 </TabItem>
@@ -468,7 +468,7 @@ For more details, [see the Zeebe connection troubleshooting section](/self-manag
 | `CAMUNDA_MODELER_LOG_LEVEL`         | [optional]<br/>Defines the log level for the Web Modeler components. | `DEBUG`                                       | `INFO`        |
 | `CAMUNDA_LOG_FILE_APPENDER_ENABLED` | [optional]<br/>To enable logging to a file.                          | `true`                                        | `false`       |
 | `CAMUNDA_MODELER_LOG_APPENDER`      | [optional]<br/>Defines which appender to use for logging.            | `Stackdriver`                                 | `Console`     |
-| `LOG_LEVEL_CLIENT`                  | [optional]<br/>Log level for the client.                             | `DEBUG`                                       | `INFO`        |
+| `LOG_LEVEL_CLIENT`                  | [optional]<br/>Log level for the client.                             | `DEBUG`                                       | `WARN`        |
 
 </TabItem>
 

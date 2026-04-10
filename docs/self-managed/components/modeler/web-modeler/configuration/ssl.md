@@ -14,7 +14,7 @@ However, you can enable TLS-encrypted communication by following the steps below
 
 ### Configure the Identity base URL
 
-For the `modeler-restapi` container, provide a URL that starts with `https://` (e.g. `https://identity.example.com`) as the base URL of the Identity instance.
+For the `modeler-restapi` container, provide a URL that starts with `https://` (for example `https://identity.example.com`) as the base URL of the Identity instance.
 
 <Tabs groupId="ssl-identity" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
@@ -43,7 +43,7 @@ camunda.identity.base-url: https://identity.example.com
 
 ### Configure `restapi` SSL certificate
 
-SSL can be configured declaratively by setting the respective properties offered by Spring Boot (make sure that the provided certificate path is accessible from the container, e.g. via a mounted volume):
+SSL can be configured declaratively by setting the respective properties offered by Spring Boot (make sure that the provided certificate path is accessible from the container, for example via a mounted volume):
 
 <Tabs groupId="ssl-restapi" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
