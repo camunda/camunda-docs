@@ -3,6 +3,8 @@ id: 890-release-notes
 title: "8.9 Release notes"
 sidebar_label: Release notes
 description: "Release notes for new features included in the 8.9 minor release, including alpha feature releases."
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
 page_rank: 90
 ---
@@ -17,6 +19,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 :::info 8.9 resources
 
+- See [What's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md) for important changes to consider when planning your upgrade from Camunda 8.8.
 - See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) to learn more about supported environment changes, breaking changes, and deprecations.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
 
@@ -29,9 +32,421 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
-<!-- RELEASE_LINKS_PLACEHOLDER -->
-
 </details>
+
+## Agentic orchestration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+
+### Agentic orchestration onboarding in Camunda 8 Run
+
+<!-- https://github.com/camunda/product-hub/issues/3330 -->
+
+Camunda 8 Run now includes an "I don't have credentials" path so you can deploy and run agents without first configuring external LLM provider credentials. A new local LLM quick start also helps self-managed and enterprise-constrained teams try agentic orchestration without external provider setup.
+
+<ul>
+  <li><span class="link-arrow">[MCP docs](/reference/mcp-docs/mcp-docs.md)</span></li>
+  <li><span class="link-arrow">[Get started with agentic orchestration](/guides/getting-started-agentic-orchestration.md)</span></li>
+</ul>
+
+### Orchestration Cluster MCP Server
+
+The Orchestration Cluster now includes a built-in MCP server so AI agents and MCP-compatible clients can discover and invoke Camunda tools using a standardized interface. Improvements to the MCP client include OAuth, API key, and custom-header authentication, streamable HTTP transport, and dedicated operation filters in Standalone mode.
+
+<ul>
+  <li><span class="link-arrow">[Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md)</span></li>
+  <li><span class="link-arrow">[MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md)</span></li>
+</ul>
+
+### A2A Client connectors
+
+Camunda 8.9 introduces A2A Client connectors for multi-agent collaboration scenarios, including polling and webhook-based response handling. These connectors let agents discover remote agents, exchange messages, and receive responses through multiple retrieval patterns.
+
+<p class="link-arrow">[A2A Client connectors](/components/early-access/alpha/a2a-client/a2a-client.md)</p>
+
+### Model provider configuration improvements
+
+AI agent model configuration in 8.9 adds AWS Bedrock API key authentication, model timeout settings, and query-parameter support for OpenAI-compatible endpoints. These updates make it easier to connect to enterprise-managed or custom model endpoints with stricter networking and authentication requirements.
+
+<p class="link-arrow">[AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</p>
+
+## APIs & tools
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+
+### Camunda c8ctl CLI
+
+<!-- https://github.com/camunda/product-hub/issues/2638 -->
+
+Use the new command-line interface to interact with the Orchestration Cluster REST API directly from the terminal.
+
+Camunda c8ctl CLI is the successor to zbctl, providing a unified way to authenticate, manage processes, and query cluster resources for development, testing, and automation workflows.
+
+- Authenticate and connect to clusters, then run common actions directly from your terminal.
+- Supports core process management and query endpoints, including process instances, user tasks, and workers.
+
+<p class="link-arrow">[Camunda c8ctl CLI](/apis-tools/c8ctl/getting-started.md)</p>
+
+### Camunda Process Test
+
+<!-- https://github.com/camunda/product-hub/issues/3195 -->
+
+You can now write and run JSON test cases with Camunda Process Test.
+
+- Define process tests in JSON instead of implementing test logic in Java.
+- Execute JSON test cases as part of standard JUnit 5 runs in local and CI/CD environments.
+
+Camunda Process Test also introduces a shared runtime mode as an alternative to managed runtime. Shared runtime uses one runtime across multiple test classes, which can significantly reduce overall test execution time. Camunda recommends enabling it in the configuration.
+
+<ul>
+  <li><span class="link-arrow">[JSON test cases](/apis-tools/testing/json-test-cases.md)</span></li>
+  <li><span class="link-arrow">[Shared runtime configuration](/apis-tools/testing/configuration.md#shared-runtime)</span></li>
+</ul>
+
+#### AI agent testing
+
+<!-- https://github.com/camunda/product-hub/issues/3315 -->
+
+Camunda Process Test now adds dedicated support for AI agent testing, making it easier to test processes where agents choose different actions at runtime and produce non-deterministic output.
+
+- Judge assertions use a configured LLM to assess whether AI-generated output satisfies a natural-language expectation, so you can verify response quality and intent.
+- Conditional behavior helps you model reactive test behavior for agent-driven flows by watching process state changes and completing tasks as they appear, without blocking the test on a predefined path.
+
+<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/test-ai-agents.md)</p>
+
+### Camunda Docs MCP server
+
+Camunda 8.9 adds a documentation-focused MCP server so IDEs and AI tools can query the latest official Camunda documentation directly. This gives developers a lightweight way to bring product documentation into coding and support workflows without leaving their editor.
+
+<p class="link-arrow">[Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)</p>
+
+## Camunda 8 Run
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
+
+### Streamlined local setup and configuration
+
+Camunda 8 Run is easier to use in 8.9 with clearer CLI guidance, improved Elasticsearch startup errors, guided Java detection, clean-state support, and more visible connection and credential details. The 8.9 release also includes the unified configuration file and expanded documentation for local development workflows.
+
+<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
+
+### Flexible local secondary storage
+
+Camunda 8 Run now uses H2 as the default secondary store for simpler local development, while also supporting the full set of relational secondary storage options such as PostgreSQL, MariaDB, MySQL, Oracle, and Microsoft SQL Server. This makes it easier to start small locally and still mirror production-like database choices when needed.
+
+<p class="link-arrow">[Camunda 8 Run secondary storage](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md)</p>
+
+## Connectivity
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects networking">Networking</span></div>
+
+### Secure connectivity with AWS inbound PrivateLink
+
+<!-- https://github.com/camunda/product-hub/issues/2601 -->
+
+You can now connect to Camunda SaaS Orchestration clusters from AWS VPCs using AWS PrivateLink.
+
+Inbound traffic stays on private AWS networking instead of traversing the public internet, so job workers and inbound connectors can run inside customer VPCs with stronger network isolation and compliance alignment.
+
+<p class="link-arrow">[Secure connectivity (AWS PrivateLink)](/components/saas/secure-connectivity/index.md)</p>
+
+## Connectors
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+### Connector runtime and inbound activation improvements
+
+In 8.9, the connectors runtime adopts virtual threads by default for better scalability, and inbound connectors can now stay active for older process versions that still have running instances. Together, these changes improve throughput while avoiding situations where active instances of earlier versions cannot complete.
+
+### Connector authentication and usability updates
+
+Connector improvements in 8.9 include Amazon Textract usability updates, OAuth 2.0 support for the Azure Blob Storage connector, and `noAuth` SMTP mode for the Email connector. These additions reduce custom setup work across common document, storage, and messaging integrations.
+
+<ul>
+  <li><span class="link-arrow">[Amazon Textract connector](/components/connectors/out-of-the-box-connectors/amazon-textract.md)</span></li>
+  <li><span class="link-arrow">[Azure Blob Storage connector](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md)</span></li>
+  <li><span class="link-arrow">[Email connector](/components/connectors/out-of-the-box-connectors/email-outbound.md)</span></li>
+</ul>
+
+## Console
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+
+### Cluster monitoring and backup operations
+
+Console includes a new Cluster Metrics endpoint for SaaS clusters and reduces the backup cooldown between scheduled and manual backups to 15 minutes. This makes it easier to integrate cluster monitoring into existing observability stacks while running more frequent backup routines safely.
+
+<ul>
+  <li><span class="link-arrow">[Cluster Metrics endpoint](/components/saas/monitoring/cluster-metrics-endpoint/index.md)</span></li>
+  <li><span class="link-arrow">[SaaS backups](/components/saas/backups.md)</span></li>
+</ul>
+
+### Secrets, descriptions, and usage reporting
+
+Camunda 8.9 adds bulk secret import from `.env` files, cluster-to-cluster secret import and export, editable cluster descriptions, and per-tenant usage metrics for Self-Managed environments. Console also adds a new AWS US East region to expand regional deployment choices for SaaS clusters.
+
+<ul>
+  <li><span class="link-arrow">[Connector secrets](/components/console/manage-clusters/manage-secrets.md)</span></li>
+  <li><span class="link-arrow">[Create a cluster](/components/console/manage-clusters/create-cluster.md)</span></li>
+  <li><span class="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</span></li>
+</ul>
+
+## Desktop Modeler
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+### Connection management
+
+Desktop Modeler now lets you save and manage Camunda connections directly in the application, including credentials and deployment targets. This reduces deployment friction by letting you reuse saved connections instead of re-entering cluster details for each deployment.
+
+### Clipboard and autosave improvements
+
+Desktop Modeler now supports shared clipboard behavior across BPMN tools together with quick duplication via keyboard shortcuts, and it automatically saves changes when you switch tabs or the app loses focus. These improvements make editing faster while reducing the risk of unsaved work.
+
+## Helm chart deployment
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Alternative infrastructure services for Self-Managed
+
+<!-- https://github.com/camunda/product-hub/issues/3098 -->
+
+Camunda 8.9 continues to move away from bundled Bitnami infrastructure in Self-Managed Helm deployments.
+
+- In 8.9, PostgreSQL, Elasticsearch, and Keycloak sub-charts are disabled by default.
+- Reference architectures now use external managed services or vendor-supported operators.
+
+This update describes infrastructure deployment patterns in reference architectures, not customer data migration.
+
+<ul>
+  <li><span class="link-arrow">[EKS dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)</span></li>
+  <li><span class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)</span></li>
+  <li><span class="link-arrow">[Dual-region operational tasks](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md)</span></li>
+</ul>
+
+### Migration from Bitnami subcharts
+
+<!-- https://github.com/camunda/product-hub/issues/3221 -->
+
+Camunda 8.9 adds migration guidance for customers moving Self-Managed Helm deployments away from deprecated Bitnami subcharts.
+
+- Use the migration guides to move PostgreSQL, Elasticsearch, and Keycloak from Bitnami subcharts to independent infrastructure services.
+- Follow the documented migration phases to plan backup, cutover, validation, and cleanup with minimal disruption.
+
+<p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
+
+### Gateway API, templating, and Helm 4 support
+
+The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm 4 adoption. These updates make it easier to modernize Ingress, reuse dynamic values across environments, and prepare for Helm 3 end of life.
+
+<ul>
+  <li><span class="link-arrow">[Gateway API setup](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md)</span></li>
+  <li><span class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</span></li>
+  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+</ul>
+
+### Secondary storage and authorization defaults
+
+Helm deployments in 8.9 now support fully integrated RDBMS secondary storage, expose the Orchestration Cluster REST port on 8080 by default, and allow authorization rules to be initialized directly from `values.yaml`. This reduces post-install manual setup and makes Helm-based deployments align more closely with current platform defaults.
+
+<p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)</p>
+
+## Intelligent document processing (IDP)
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
+
+### Classification templates and extraction engine choices
+
+Camunda 8.9 adds IDP document classification templates and lets you choose a text extraction engine per template. This gives teams more control over how different document types are categorized and processed, whether they need lightweight parsing, OCR, or multimodal LLM interpretation.
+
+## Integrations
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
+
+### Microsoft Teams app for Self-Managed
+
+The Camunda for Microsoft Teams app is now available for Self-Managed environments as well as SaaS. This lets teams claim and complete Camunda tasks directly in Microsoft Teams across more deployment models.
+
+<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
+
+## Migration from Camunda 7 to Camunda 8
+
+### Conditional events support in Migration Analyzer and Diagram Converter
+
+<!-- https://github.com/camunda/product-hub/issues/3262 -->
+
+Migration Analyzer and Diagram Converter now detect and convert Camunda 7 conditional events (start, intermediate catch, and boundary events) into Camunda 8-compatible BPMN.
+
+The migration report also flags conditional-event follow-up tasks so teams can plan manual review where needed.
+
+<ul>
+  <li><span class="link-arrow">[Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling/diagram-converter.md)</span></li>
+  <li><span class="link-arrow">[Convert expressions](/guides/migrating-from-camunda-7/migration-tooling/diagram-converter.md#convert-expressions)</span></li>
+</ul>
+
+### History Data Migrator
+
+<!-- https://github.com/camunda/product-hub/issues/3083 -->
+
+Data Migrator now supports migrating historic audit data from Camunda 7 to Camunda 8.
+
+<p class="link-arrow">[History Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history.md)</p>
+
+### Audit log migration coverage
+
+Camunda 8.9 expands migration support by converting Camunda 7 `UserOperationLog` entries into the Camunda 8 audit log format. This helps preserve user-operation history for compliance and operational review as part of a broader migration program.
+
+<p class="link-arrow">[History migration coverage](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations.md#camunda-8-history-migration-coverage)</p>
+
+### Camunda 8 conditional events support
+
+Camunda 8.9 adds support for BPMN conditional events in the platform itself, complementing the new migration-tooling support for detecting and converting them. This makes migration planning easier because the modeled behavior and the migration path are both available in the same minor release.
+
+<p class="link-arrow">[Conditional events](/components/modeler/bpmn/conditional-events/conditional-events.md)</p>
+
+## Operate
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+### Unified, context-aware process instance view
+
+<!-- https://github.com/camunda/product-hub/issues/3255 -->
+
+Operate now unifies process instance information into a single, context-aware view.
+
+Instead of switching between diagram, instance history, popovers, and bottom panels, you can inspect incidents, variables, executions, and modeling properties in one overview-to-detail flow.
+
+### Batch operations monitoring
+
+Operate now includes a dedicated Batch Operations view backed by the Orchestration Cluster API. This gives operators a centralized way to track progress, review item-level results, and control running batch operations.
+
+<p class="link-arrow">[Monitor batch operations](/components/operate/userguide/monitor-batch-operations.md)</p>
+
+## Orchestration Cluster
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects jobs">Jobs</span></div>
+
+### Job Dashboard
+
+<!-- https://github.com/camunda/product-hub/issues/2787 -->
+
+The Job Dashboard provides a unified view of jobs and associated workers across the cluster, including Connectors and RPA.
+
+Use it to monitor job creation, completion trends, failures, and worker activity for faster troubleshooting without custom-built monitoring dashboards.
+
+### Cluster variables and process governance
+
+Camunda 8.9 adds cluster variables, Business ID support for process instances, and broader task and listener management capabilities. These additions make it easier to centralize runtime configuration, enforce idempotent process starts, manage global user task listeners, and apply finer-grained task permissions.
+
+<ul>
+  <li><span class="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</span></li>
+  <li><span class="link-arrow">[Global user task listeners](/components/concepts/global-user-task-listeners.md)</span></li>
+</ul>
+
+### Platform configuration and deployment model updates
+
+The Orchestration Cluster continues its 8.9 consolidation work with completed unified configuration property changes, gateway-served application profiles for Operate, Tasklist, and Identity, and declarative preconfiguration support for Identity entities. Self-Managed deployments also gain support for Amazon ECS and improved dynamic tenant access for machine clients.
+
+<ul>
+  <li><span class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</span></li>
+  <li><span class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</span></li>
+</ul>
+
+### Storage, backup, and runtime improvements
+
+Orchestration Cluster enhancements in 8.9 include scheduled backups, Elasticsearch 9 support, Amazon Aurora as secondary storage, per-broker RocksDB memory sizing, and the unified RocksDB cache model introduced in the first alpha. Together, these changes improve backup automation, storage flexibility, and operational tuning for Self-Managed deployments.
+
+<ul>
+  <li><span class="link-arrow">[Scheduled backup](/self-managed/operational-guides/backup-restore/rdbms/backup.md#scheduled-backup)</span></li>
+  <li><span class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</span></li>
+</ul>
+
+### Process and data management improvements
+
+Camunda 8.9 adds support for deleting process and decision data, retaining hierarchy data until root-instance deletion, modifying elements inside multi-instance ad-hoc subprocesses, and updating cluster variables directly in the UI. The release also introduces a centralized user operations audit log and expands audit log access across platform APIs and applications.
+
+<ul>
+  <li><span class="link-arrow">[Process instance modification](/components/concepts/process-instance-modification.md)</span></li>
+  <li><span class="link-arrow">[Audit log](/components/audit-log/overview.md)</span></li>
+</ul>
+
+## RDBMS secondary storage
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
+
+### Expanded database coverage and driver handling
+
+Across the 8.9 release cycle, RDBMS secondary storage expands from early support for H2, PostgreSQL, Oracle, and MariaDB to include MySQL, Microsoft SQL Server, and Amazon Aurora. Camunda 8.9 also introduces standardized JDBC driver handling for manual installations so teams can separate bundled and customer-supplied drivers more cleanly.
+
+<p class="link-arrow">[RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+### Helm, manual, and production deployment guidance
+
+Camunda 8.9 adds end-to-end deployment guidance for RDBMS-backed environments, including Helm configuration, manual installation, production installation guides, SQL and Liquibase scripts, and a dedicated setup guide spanning the Orchestration Cluster and Web Modeler. Web Modeler also gains relational database support that aligns with the broader Orchestration Cluster options.
+
+<ul>
+  <li><span class="link-arrow">[RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)</span></li>
+  <li><span class="link-arrow">[Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md)</span></li>
+  <li><span class="link-arrow">[RDBMS Helm deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)</span></li>
+</ul>
+
+### Backup, restore, and analytics patterns
+
+When using RDBMS secondary storage, Camunda 8.9 adds continuous backup and restore support and documents how to combine an RDBMS-backed Orchestration Cluster with Optimize when analytics require Elasticsearch or OpenSearch. This gives teams a clearer path for disaster recovery and mixed operational versus analytics storage strategies.
+
+<p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
+
+## Robotic Process Automation (RPA)
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects RPA">RPA</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+### RPA support in Web Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/2703 -->
+
+Web Modeler now supports RPA scripts as a first-class file type, including visibility, project management, and deployment workflows without relying on Desktop Modeler.
+
+<p class="link-arrow">[Get started with RPA](/components/rpa/getting-started.md)</p>
+
+## Web Modeler
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+### Unified deployment experience across file types in Web Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/3252 -->
+
+Web Modeler now offers a unified deployment experience across BPMN, DMN, forms, and RPA scripts.
+
+- Deploy artifacts from their details view using a consistent interaction pattern across file types.
+- See more clearly which linked files are included when deploying within a process application.
+- Choose whether to deploy the current file or the applicable process application bundle, depending on context.
+
+This update reduces hidden deployment behavior, lowers cognitive load, and makes deployment workflows more predictable and extensible for future asset types.
+
+<ul>
+  <li><span class="link-arrow">[Process applications in Web Modeler](/components/modeler/web-modeler/process-applications/process-applications.md)</span></li>
+  <li><span class="link-arrow">[Validate and deploy your process application](/components/modeler/web-modeler/process-applications/deploy-process-application.md)</span></li>
+</ul>
+
+### Collaboration and import improvements
+
+Web Modeler in 8.9 adds more reliable live collaboration with canvas locking and takeover behavior, and it supports importing large process applications with up to 100 supported files in a single step. These changes improve shared editing workflows and make it easier to bring existing assets into Modeler.
+
+<ul>
+  <li><span class="link-arrow">[Collaborate in Web Modeler](/components/modeler/web-modeler/collaboration/collaboration.md)</span></li>
+  <li><span class="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</span></li>
+</ul>
+
+### Modeling and administration improvements
+
+Camunda 8.9 expands Web Modeler with broader event template support, email-based project invitations for all supported OIDC providers, and a simpler Self-Managed system architecture by folding the former `webapp` component into `restapi`. Additional 8.9 updates include embedded Tomcat for Self-Managed deployments and a SaaS endpoint for monitoring Web Modeler egress IP ranges.
+
+<ul>
+  <li><span class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</span></li>
+  <li><span class="link-arrow">[Add users to projects](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects)</span></li>
+  <li><span class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
+</ul>
 
 ## 8.9.0-alpha5
 
@@ -234,7 +649,7 @@ You can now choose the text extraction engine on a per-template basis, allowing 
 - Select a high-accuracy OCR engine for scanned or image-based documents.
 - Bypass text extraction entirely to let multimodal LLMs natively interpret document content.
 
-### Microsoft Teams app
+### Integrations
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
 
@@ -781,7 +1196,7 @@ New documentation shows you how to:
 - Install Camunda 8 Run with H2 as the default secondary storage.
 - Seamlessly switch from H2 to Elasticsearch or OpenSearch when required.
 
-### Cluster Metrics endpoint
+### Console
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
 <!-- https://github.com/camunda/product-hub/issues/2229 -->
@@ -1070,7 +1485,7 @@ Self-Managed environment usage metrics now support per-tenant reporting and alig
 This feature is already available in the Camunda 8.8 release for Camunda 8 SaaS.
 :::
 
-### Database and data storage
+### RDBMS secondary storage
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
 
@@ -1164,7 +1579,9 @@ A new `/meta/ip-ranges` REST API endpoint allows you to monitor SaaS Web Modeler
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 13 November 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha1)</li></ul> | -    |
 
-### JDBC driver management for RDBMS integrations
+### RDBMS secondary storage
+
+#### JDBC driver management for RDBMS integrations
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span></div>
 
@@ -1178,7 +1595,7 @@ Camunda 8.9 introduces a standardized approach to JDBC driver management for RDB
 
 This change simplifies compliance and setup for RDBMS environments, ensuring consistent connectivity across PostgreSQL, Oracle, MariaDB, and H2.
 
-### MySQL and Microsoft SQL Server secondary storage
+#### MySQL and Microsoft SQL Server secondary storage
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span></div>
 
@@ -1193,7 +1610,7 @@ Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL S
 This alpha release introduces foundational support only. External configuration and Operate integration follows in upcoming alpha releases.
 :::
 
-### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
+#### RDBMS secondary storage (H2, PostgreSQL, Oracle, MariaDB)
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span></div>
 
@@ -1214,7 +1631,9 @@ Key highlights:
 This alpha release introduces support for H2 in Camunda 8 Run only. Operate and external RDBMS configuration follows in upcoming alpha releases.
 :::
 
-### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
+### Web Modeler
+
+#### RDBMS support (H2, MariaDB, MySQL)
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Data">Data</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
