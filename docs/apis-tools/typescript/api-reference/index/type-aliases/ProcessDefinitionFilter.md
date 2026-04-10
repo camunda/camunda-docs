@@ -11,8 +11,6 @@ mdx:
 type ProcessDefinitionFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:5754](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5754)
-
 Process definition search filter.
 
 ## Properties
@@ -23,8 +21,6 @@ Process definition search filter.
 optional hasStartForm?: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:5794](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5794)
-
 Indicates whether the start event of the process has an associated Form Key.
 
 ---
@@ -34,8 +30,6 @@ Indicates whether the start event of the process has an associated Form Key.
 ```ts
 optional isLatestVersion?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:5766](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5766)
 
 Whether to only return the latest version of each process definition.
 When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.
@@ -50,8 +44,6 @@ When using this filter, sorting is limited to `processDefinitionId` and `tenantI
 optional name?: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:5758](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5758)
-
 Name of this process definition.
 
 ---
@@ -61,8 +53,6 @@ Name of this process definition.
 ```ts
 optional processDefinitionId?: StringFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:5782](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5782)
 
 Process definition ID of this process definition.
 
@@ -74,8 +64,6 @@ Process definition ID of this process definition.
 optional processDefinitionKey?: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5790](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5790)
-
 The key for this process definition.
 
 ---
@@ -85,8 +73,6 @@ The key for this process definition.
 ```ts
 optional resourceName?: string;
 ```
-
-Defined in: [gen/types.gen.ts:5770](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5770)
 
 Resource name of this process definition.
 
@@ -98,8 +84,6 @@ Resource name of this process definition.
 optional tenantId?: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:5786](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5786)
-
 Tenant ID of this process definition.
 
 ---
@@ -110,8 +94,6 @@ Tenant ID of this process definition.
 optional version?: number;
 ```
 
-Defined in: [gen/types.gen.ts:5774](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5774)
-
 Version of this process definition.
 
 ---
@@ -121,7 +103,5 @@ Version of this process definition.
 ```ts
 optional versionTag?: string;
 ```
-
-Defined in: [gen/types.gen.ts:5778](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5778)
 
 Version tag of this process definition.

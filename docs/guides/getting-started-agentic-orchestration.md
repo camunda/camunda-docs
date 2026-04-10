@@ -314,6 +314,7 @@ For example:
 - Update the system prompt to adjust the AI agent's behavior.
 - Experiment with different model providers and configurations in the AI Agent connector.
 - [Monitor your AI agents](/components/agentic-orchestration/monitor-ai-agents.md).
+- [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md) with Camunda Process Test, including handling non-deterministic flows and verifying agent output with AI-powered assertions.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
 :::info Camunda Academy

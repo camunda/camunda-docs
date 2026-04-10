@@ -11,8 +11,6 @@ mdx:
 type CancelProcessInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13317](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13317)
-
 ## Properties
 
 ### body?
@@ -25,8 +23,6 @@ optional body?:
   | null;
 ```
 
-Defined in: [gen/types.gen.ts:13318](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13318)
-
 ---
 
 ### path
@@ -34,8 +30,6 @@ Defined in: [gen/types.gen.ts:13318](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:13321](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13321)
 
 #### processInstanceKey
 
@@ -53,8 +47,6 @@ The key of the process instance to cancel.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:13327](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13327)
-
 ---
 
 ### url
@@ -62,5 +54,3 @@ Defined in: [gen/types.gen.ts:13327](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/process-instances/{processInstanceKey}/cancellation";
 ```
-
-Defined in: [gen/types.gen.ts:13328](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13328)

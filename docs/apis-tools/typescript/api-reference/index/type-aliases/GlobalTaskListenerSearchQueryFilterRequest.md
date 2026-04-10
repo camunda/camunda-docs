@@ -11,8 +11,6 @@ mdx:
 type GlobalTaskListenerSearchQueryFilterRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:3016](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3016)
-
 Global listener filter request.
 
 ## Properties
@@ -22,8 +20,6 @@ Global listener filter request.
 ```ts
 optional afterNonGlobal?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:3036](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3036)
 
 Whether the listener runs after model-level listeners.
 
@@ -35,8 +31,6 @@ Whether the listener runs after model-level listeners.
 optional eventTypes?: GlobalTaskListenerEventTypeFilterProperty[];
 ```
 
-Defined in: [gen/types.gen.ts:3032](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3032)
-
 Event types of the global listener.
 
 ---
@@ -46,8 +40,6 @@ Event types of the global listener.
 ```ts
 optional id?: StringFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:3020](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3020)
 
 Id of the global listener.
 
@@ -59,8 +51,6 @@ Id of the global listener.
 optional priority?: IntegerFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3040](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3040)
-
 Priority of the global listener.
 
 ---
@@ -70,8 +60,6 @@ Priority of the global listener.
 ```ts
 optional retries?: IntegerFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:3028](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3028)
 
 Number of retries of the global listener.
 
@@ -83,8 +71,6 @@ Number of retries of the global listener.
 optional source?: GlobalListenerSourceFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:3044](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3044)
-
 How the global listener was defined.
 
 ---
@@ -94,7 +80,5 @@ How the global listener was defined.
 ```ts
 optional type?: StringFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:3024](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3024)
 
 Job type of the global listener.

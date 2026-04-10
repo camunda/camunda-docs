@@ -7,8 +7,6 @@ mdx:
 
 # Class: EventualConsistencyTimeoutError
 
-Defined in: [runtime/errors.ts:159](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/errors.ts#L159)
-
 ## Extends
 
 - `Error`
@@ -20,8 +18,6 @@ Defined in: [runtime/errors.ts:159](https://github.com/camunda/orchestration-clu
 ```ts
 new EventualConsistencyTimeoutError(params): EventualConsistencyTimeoutError;
 ```
-
-Defined in: [runtime/errors.ts:166](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/errors.ts#L166)
 
 #### Parameters
 
@@ -69,8 +65,6 @@ Error.constructor;
 attempts: number;
 ```
 
-Defined in: [runtime/errors.ts:161](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/errors.ts#L161)
-
 ---
 
 ### code
@@ -78,8 +72,6 @@ Defined in: [runtime/errors.ts:161](https://github.com/camunda/orchestration-clu
 ```ts
 code: string = "CAMUNDA_SDK_EVENTUAL_TIMEOUT";
 ```
-
-Defined in: [runtime/errors.ts:160](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/errors.ts#L160)
 
 ---
 
@@ -89,8 +81,6 @@ Defined in: [runtime/errors.ts:160](https://github.com/camunda/orchestration-clu
 elapsedMs: number;
 ```
 
-Defined in: [runtime/errors.ts:162](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/errors.ts#L162)
-
 ---
 
 ### lastResponseSnippet?
@@ -98,8 +88,6 @@ Defined in: [runtime/errors.ts:162](https://github.com/camunda/orchestration-clu
 ```ts
 optional lastResponseSnippet?: string;
 ```
-
-Defined in: [runtime/errors.ts:164](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/errors.ts#L164)
 
 ---
 
@@ -109,8 +97,6 @@ Defined in: [runtime/errors.ts:164](https://github.com/camunda/orchestration-clu
 optional lastStatus?: number;
 ```
 
-Defined in: [runtime/errors.ts:163](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/errors.ts#L163)
-
 ---
 
 ### operationId?
@@ -118,5 +104,3 @@ Defined in: [runtime/errors.ts:163](https://github.com/camunda/orchestration-clu
 ```ts
 optional operationId?: string;
 ```
-
-Defined in: [runtime/errors.ts:165](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/errors.ts#L165)

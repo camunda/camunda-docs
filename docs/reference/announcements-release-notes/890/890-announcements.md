@@ -552,6 +552,26 @@ For more information on optimizing connector performance with virtual threads, s
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Kafka consumer connector: auto-generated consumer group ID format changed
+
+When upgrading from Camunda 8.8 to 8.9, the auto-generated Kafka consumer group ID changes format. This affects Kafka consumer connectors only when no explicit consumer group ID is configured. The change is a side effect of a runtime improvement that enables cross-version connector deduplication.
+
+- **8.8 format:** `kafka-inbound-connector--<processDefinitionKey>-<elementId>` (numeric key)
+- **8.9 format:** `kafka-inbound-connector--<bpmnProcessId>-<hash>` (stable process ID)
+
+Because Kafka treats a changed group ID as a brand-new consumer group, affected connectors do not reuse their committed offsets after the upgrade and may reprocess messages.
+
+**Action required:** Before upgrading to 8.9, set an explicit **Consumer Group ID** in each Kafka consumer connector configuration to preserve the existing consumer group identity. You can [look up existing consumer groups](https://docs.confluent.io/kafka/operations-tools/manage-consumer-groups.html#list-groups-and-view-offsets) to find the current group ID in use. See the [Kafka connector documentation](/components/connectors/out-of-the-box-connectors/kafka.md?kafka=inbound) for details.
+
+</div>
+</div>
+
 ## Data
 
 <div className="release-announcement-row">
@@ -935,7 +955,9 @@ This simplifies initial deployment setup and enables reproducible, version-contr
 
 Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orchestration engine without any secondary storage (Elasticsearch, OpenSearch, or RDBMS). This is useful for lightweight testing or scenarios where only the core engine is needed.
 
-When enabled, Elasticsearch and OpenSearch subcharts must be disabled, and Basic authentication is not supported.
+When enabled, Elasticsearch and OpenSearch subcharts must be disabled. Authentication is supported using OIDC (recommended) or Basic authentication with unprotected API mode for development environments.
+
+<p className="link-arrow">[Learn about authentication with no secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#authentication)</p>
 
 </div>
 </div>

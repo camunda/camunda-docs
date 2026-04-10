@@ -5,23 +5,23 @@ import IconDataImg from "../../img/icon-orchcluster.png";
 
 export const gsCards = [
   {
-    link: "../camunda8-sdk/",
-    title: "TypeScript SDK",
-    image: IconTypescriptImg,
-    description:
-      "The TypeScript SDK provides clients for all Camunda 8 APIs. Use it in Node.js environments.",
-    ctaLabel: "@camunda8/sdk",
-    ctaLink: "https://www.npmjs.com/package/@camunda8/sdk",
-  },
-  {
     link: "../oca-client/",
     title: "Orchestration Cluster API TypeScript client",
     image: IconTypescriptImg,
     description:
-      "A lightweight client for the Camunda 8.8+ Orchestration Cluster REST API. Use it in Node.js or in the browser.",
+      "The enhanced client for the Camunda 8.8+ Orchestration Cluster REST API. Use it in Node.js or in the browser.",
     ctaLabel: "@camunda8/orchestration-cluster-api",
     ctaLink:
       "https://www.npmjs.com/package/@camunda8/orchestration-cluster-api",
+  },
+  {
+    link: "../camunda8-sdk/",
+    title: "TypeScript Node.js SDK",
+    image: IconTypescriptImg,
+    description:
+      "The TypeScript SDK provides clients for v1 and v2 Camunda 8 APIs, including gRPC. Only supports Node.js environments.",
+    ctaLabel: "@camunda8/sdk",
+    ctaLink: "https://www.npmjs.com/package/@camunda8/sdk",
   },
 ];
 

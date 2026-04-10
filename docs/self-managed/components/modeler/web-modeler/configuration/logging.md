@@ -106,7 +106,7 @@ The default `log4j2-spring.xml` used by Web Modeler's `restapi` component is as 
 This is a simplified example. The actual `log4j2.xml` may include additional appenders, use different file paths, or have slightly different patterns.  
 :::
 
-## Environment variables
+### Environment variables
 
 | Purpose               | Variable                    | Component(s) | Example / Notes               |
 | --------------------- | --------------------------- | ------------ | ----------------------------- |
@@ -121,7 +121,7 @@ This is a simplified example. The actual `log4j2.xml` may include additional app
 | Stackdriver (JSON) | JSON output for Google Cloud / Stackdriver.          | `CAMUNDA_MODELER_LOG_APPENDER=Stackdriver`                                            |
 | RollingFile        | Writes logs to a rotating file, disabled by default. | `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true` + `CAMUNDA_MODELER_LOG_APPENDER=RollingFile` |
 
-### JSON structure
+#### JSON structure
 
 When using the `Stackdriver` appender, this is the structure of the entries :
 
@@ -185,21 +185,10 @@ The default layout displays **time only**, thread name, MDC context, log level, 
 | Newline after level | No                                 |
 | Tab before logger   | No                                 |
 
-## Logging configuration for the `webapp` component
+### Client log level
 
-By default, the `webapp` component logs to the Docker container's standard output.
-
-### Logging to a file
-
-To enable additional log output to a file, adjust the following environment variable:
-
-```properties
-LOG_FILE_PATH=/full/path/to/log/file.log
-```
-
-### Configuring log levels
-
-To control the verbosity of the logs, adjust the environment variables `LOG_LEVEL_CLIENT` (browser client) and `LOG_LEVEL_WEBAPP` (Node.js server).
+The `restapi` component also serves the client application running in the browser.
+To control the verbosity of the client logs, adjust the environment variable `LOG_LEVEL_CLIENT`.
 
 ```properties
 LOG_LEVEL_CLIENT=DEBUG

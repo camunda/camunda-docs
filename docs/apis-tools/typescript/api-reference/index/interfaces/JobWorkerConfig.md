@@ -7,8 +7,6 @@ mdx:
 
 # Interface: JobWorkerConfig\<In, Out, Headers\>
 
-Defined in: [runtime/jobWorker.ts:13](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L13)
-
 ## Type Parameters
 
 ### In
@@ -31,8 +29,6 @@ Defined in: [runtime/jobWorker.ts:13](https://github.com/camunda/orchestration-c
 optional autoStart?: boolean;
 ```
 
-Defined in: [runtime/jobWorker.ts:28](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L28)
-
 Immediately start polling for work - default `true`
 
 ---
@@ -42,8 +38,6 @@ Immediately start polling for work - default `true`
 ```ts
 optional customHeadersSchema?: Headers;
 ```
-
-Defined in: [runtime/jobWorker.ts:23](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L23)
 
 Zod schema for custom headers in the activated job
 
@@ -55,8 +49,6 @@ Zod schema for custom headers in the activated job
 optional fetchVariables?: In extends ZodType<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
 ```
 
-Defined in: [runtime/jobWorker.ts:43](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L43)
-
 Optional list of variable names to fetch during activation
 
 ---
@@ -67,8 +59,6 @@ Optional list of variable names to fetch during activation
 optional inputSchema?: In;
 ```
 
-Defined in: [runtime/jobWorker.ts:19](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L19)
-
 Zod schema for variables in the activated job
 
 ---
@@ -78,8 +68,6 @@ Zod schema for variables in the activated job
 ```ts
 jobHandler: (job) => "JOB_ACTION_RECEIPT" | Promise<"JOB_ACTION_RECEIPT">;
 ```
-
-Defined in: [runtime/jobWorker.ts:26](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L26)
 
 #### Parameters
 
@@ -99,8 +87,6 @@ Defined in: [runtime/jobWorker.ts:26](https://github.com/camunda/orchestration-c
 optional jobTimeoutMs?: number;
 ```
 
-Defined in: [runtime/jobWorker.ts:39](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L39)
-
 Job activation timeout — falls back to CAMUNDA_WORKER_TIMEOUT env var
 
 ---
@@ -111,8 +97,6 @@ Job activation timeout — falls back to CAMUNDA_WORKER_TIMEOUT env var
 jobType: string;
 ```
 
-Defined in: [runtime/jobWorker.ts:41](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L41)
-
 Zeebe job type
 
 ---
@@ -122,8 +106,6 @@ Zeebe job type
 ```ts
 optional maxBackoffTimeMs?: number;
 ```
-
-Defined in: [runtime/jobWorker.ts:45](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L45)
 
 #### Deprecated
 
@@ -137,8 +119,6 @@ Not used; pacing handled by long polling + client backpressure. Present only for
 optional maxParallelJobs?: number;
 ```
 
-Defined in: [runtime/jobWorker.ts:30](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L30)
-
 concurrency limit — falls back to CAMUNDA_WORKER_MAX_CONCURRENT_JOBS env var
 
 ---
@@ -148,8 +128,6 @@ concurrency limit — falls back to CAMUNDA_WORKER_MAX_CONCURRENT_JOBS env var
 ```ts
 optional outputSchema?: Out;
 ```
-
-Defined in: [runtime/jobWorker.ts:21](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L21)
 
 Zod schema for variables in the complete command
 
@@ -161,8 +139,6 @@ Zod schema for variables in the complete command
 optional pollIntervalMs?: number;
 ```
 
-Defined in: [runtime/jobWorker.ts:25](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L25)
-
 Backoff between polls - default 1ms
 
 ---
@@ -172,8 +148,6 @@ Backoff between polls - default 1ms
 ```ts
 optional pollTimeoutMs?: number;
 ```
-
-Defined in: [runtime/jobWorker.ts:37](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L37)
 
 The request will be completed when at least one job is activated or after the requestTimeout.
 If the requestTimeout = 0, the request will be completed after a default configured timeout in the broker.
@@ -186,8 +160,6 @@ To immediately complete the request when no job is activated set the requestTime
 ```ts
 optional startupJitterMaxSeconds?: number;
 ```
-
-Defined in: [runtime/jobWorker.ts:54](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L54)
 
 Maximum random delay (in seconds) before the worker starts polling.
 When multiple application instances restart simultaneously, this spreads out
@@ -202,8 +174,6 @@ initial activation requests to avoid saturating the server.
 optional validateSchemas?: boolean;
 ```
 
-Defined in: [runtime/jobWorker.ts:59](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L59)
-
 Validate any provided input, output, customheader schema
 default: false
 
@@ -214,7 +184,5 @@ default: false
 ```ts
 optional workerName?: string;
 ```
-
-Defined in: [runtime/jobWorker.ts:47](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L47)
 
 Optional explicit name

@@ -11,8 +11,6 @@ mdx:
 type JobTimeSeriesStatisticsQuery = object;
 ```
 
-Defined in: [gen/types.gen.ts:3834](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3834)
-
 Job time-series statistics query.
 
 ## Properties
@@ -23,8 +21,6 @@ Job time-series statistics query.
 filter: JobTimeSeriesStatisticsFilter;
 ```
 
-Defined in: [gen/types.gen.ts:3835](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3835)
-
 ---
 
 ### page?
@@ -32,7 +28,5 @@ Defined in: [gen/types.gen.ts:3835](https://github.com/camunda/orchestration-clu
 ```ts
 optional page?: CursorForwardPagination;
 ```
-
-Defined in: [gen/types.gen.ts:3839](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3839)
 
 Search cursor pagination.
