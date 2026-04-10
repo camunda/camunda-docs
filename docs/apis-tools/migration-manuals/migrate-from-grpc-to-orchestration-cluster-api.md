@@ -2,13 +2,14 @@
 id: migrate-from-grpc-to-orchestration-cluster-api
 title: Migrate from gRPC to the Orchestration Cluster API
 sidebar_label: "gRPC to Orchestration Cluster API"
-description: "Migrate from gRPC to the Orchestration Cluster REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
+description: "Learn how to migrate from gRPC to the Orchestration Cluster REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-Migrate from gRPC to the Orchestration Cluster REST API.
+<PageDescription />
 
 :::note Have you already migrated?
 You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
