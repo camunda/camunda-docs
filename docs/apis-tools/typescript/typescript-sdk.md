@@ -1,14 +1,15 @@
 ---
 id: typescript-sdk
 title: TypeScript SDK
-description: Camunda 8 TypeScript SDK overview.
+description: Use the TypeScript SDK and Orchestration Cluster API TypeScript client to build Camunda 8 applications.
 ---
 
 import "./react-components/\_ts-card.css";
 import ApiGrid from './react-components/\_ts-card';
 import { gsCards, frCards } from './react-components/\_ts-card-data';
+import PageDescription from '@site/src/components/PageDescription';
 
-Build Camunda 8 applications using the Camunda TypeScript SDK and Orchestration Cluster API TypeScript client.
+<PageDescription />
 
 ## Get started
 
