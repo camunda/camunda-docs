@@ -26,7 +26,9 @@ Copilot supports the following LLM providers:
 
 ## Configuration
 
-To enable Copilot, set the AI feature flag to `true`. Then configure the default LLM provider for BPMN, FEEL, and form copilots. Each provider has its own configuration options described below.
+To enable Copilot, set the AI feature flag (`FEATURE_AI_ENABLED` / `camunda.modeler.feature.ai-enabled`) to `true`.
+Then configure the default LLM provider for BPMN, FEEL, and form copilots.
+Each provider has its own configuration options described below.
 
 <Tabs groupId="copilot-general" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
@@ -49,8 +51,7 @@ To enable Copilot, set the AI feature flag to `true`. Then configure the default
 
 ```yaml
 camunda.modeler:
-  feature:
-    ai-enabled: true
+  feature.ai-enabled: true
 
   copilot:
     default-bpmn-copilot-llm-provider: BEDROCK
