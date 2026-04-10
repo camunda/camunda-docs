@@ -26,7 +26,7 @@ Copilot supports the following LLM providers:
 
 ## Configuration
 
-To enable Copilot, set the AI feature flag to `true`. Then configure the default LLM provider for BPMN, FEEL and form copilots. Each provider has its own configuration options, described below.
+To enable Copilot, set the AI feature flag to `true`. Then configure the default LLM provider for BPMN, FEEL, and form copilots. Each provider has its own configuration options described below.
 
 <Tabs groupId="copilot-general" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
