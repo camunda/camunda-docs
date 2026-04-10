@@ -114,14 +114,28 @@ jobs:
           DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
           npx prettier --write "$DOCS_ROOT/apis-tools/python-sdk.md" "$DOCS_ROOT/apis-tools/python-sdk/"
 
-      - name: Regenerate Orchestration API docs with SDK examples
+      - name: Verify SDK examples don't break docs generation
         working-directory: docs
         run: |
-          DOCS_VERSION="${{ github.event.inputs.docs_version }}"
-          if [ -n "$DOCS_VERSION" ]; then
-            npm run api:generate -- camunda "$DOCS_VERSION"
+          DOCS_VERSION="${{ steps.resolve.outputs.version_label }}"
+          DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
+
+          if [ "$DOCS_VERSION" = "next" ]; then
+            npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs camunda -p api-camunda-openapi
           else
-            npm run api:generate -- camunda
+            npx docusaurus clean-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi
+          fi
+
+          # Discard generated MDX — this step only validates, not commits
+          git checkout -- "$DOCS_ROOT/apis-tools/orchestration-cluster-api-rest/specifications/" || true
+
+      - name: Check for SDK example changes
+        working-directory: docs
+        run: |
+          if git diff --name-only | grep -q '.sdk-repos/'; then
+            echo "::notice::The SDK examples have changed. Run the Sync Camunda REST API workflow to pick up the changes for the OpenAPI documentation."
           fi
 
       - name: Check for changes

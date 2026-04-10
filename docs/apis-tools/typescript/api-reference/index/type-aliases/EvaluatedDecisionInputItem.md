@@ -11,8 +11,6 @@ mdx:
 type EvaluatedDecisionInputItem = object;
 ```
 
-Defined in: [gen/types.gen.ts:1871](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1871)
-
 A decision input that was evaluated within this decision evaluation.
 
 ## Properties
@@ -22,8 +20,6 @@ A decision input that was evaluated within this decision evaluation.
 ```ts
 inputId: string;
 ```
-
-Defined in: [gen/types.gen.ts:1875](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1875)
 
 The identifier of the decision input.
 
@@ -35,8 +31,6 @@ The identifier of the decision input.
 inputName: string;
 ```
 
-Defined in: [gen/types.gen.ts:1879](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1879)
-
 The name of the decision input.
 
 ---
@@ -46,7 +40,5 @@ The name of the decision input.
 ```ts
 inputValue: string;
 ```
-
-Defined in: [gen/types.gen.ts:1883](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1883)
 
 The value of the decision input.

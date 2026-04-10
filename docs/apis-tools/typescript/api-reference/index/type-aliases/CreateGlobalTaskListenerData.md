@@ -11,8 +11,6 @@ mdx:
 type CreateGlobalTaskListenerData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10590](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10590)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:10590](https://github.com/camunda/orchestration-cl
 ```ts
 body: CreateGlobalTaskListenerRequest;
 ```
-
-Defined in: [gen/types.gen.ts:10591](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10591)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:10591](https://github.com/camunda/orchestration-cl
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10592](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10592)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:10592](https://github.com/camunda/orchestration-cl
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10593](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10593)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:10593](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/global-task-listeners";
 ```
-
-Defined in: [gen/types.gen.ts:10594](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10594)

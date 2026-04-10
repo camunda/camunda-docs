@@ -11,8 +11,6 @@ mdx:
 type GetUsageMetricsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14765](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14765)
-
 ## Properties
 
 ### body?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:14765](https://github.com/camunda/orchestration-cl
 ```ts
 optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:14766](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14766)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:14766](https://github.com/camunda/orchestration-cl
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14767](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14767)
-
 ---
 
 ### query
@@ -40,8 +34,6 @@ Defined in: [gen/types.gen.ts:14767](https://github.com/camunda/orchestration-cl
 ```ts
 query: object;
 ```
-
-Defined in: [gen/types.gen.ts:14768](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14768)
 
 #### endTime
 
@@ -82,5 +74,3 @@ Whether to return tenant metrics in addition to the total metrics or not. Defaul
 ```ts
 url: "/system/usage-metrics";
 ```
-
-Defined in: [gen/types.gen.ts:14786](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14786)

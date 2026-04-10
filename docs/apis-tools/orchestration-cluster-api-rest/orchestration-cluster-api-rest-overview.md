@@ -1,35 +1,47 @@
 ---
 id: orchestration-cluster-api-rest-overview
-title: "Overview"
-description: "Interact with Camunda 8 clusters programmatically. Start processes, complete user tasks, and manage process instances at scale."
+title: "Orchestration Cluster REST API"
+description: "Use the Orchestration Cluster API to manage and interact with Camunda 8 Orchestration Clusters."
 ---
 
 import ApiGrid from './react-components/\_api-card';
 import { apiExplorationCards } from './react-components/\_api-card-data';
+import PageDescription from '@site/src/components/PageDescription';
 
-The Orchestration Cluster REST API lets you interact programmatically with process orchestration capabilities in Camunda 8. You can use it to start, manage, and query process instances. It also lets you complete user tasks, resolve incidents, and manage variables, at scale and with confidence.
+<PageDescription />
 
-**You can use this API to**
+## About
 
-- **Build process-driven applications** – Create applications that orchestrate business processes and integrate with your existing systems.
-- **Integrate user tasks into custom UIs** – Build custom task management interfaces that connect to Camunda's user task engine.
-- **Start and monitor processes from external systems** – Trigger process instances and track their progress from any application or service.
+You can use the Orchestration Cluster REST API to interact programmatically with process orchestration capabilities in Camunda 8. For example, you can start, manage, and query process instances, complete user tasks, resolve incidents, and manage variables.
+
+Use this API to:
+
+| Use case                                    | Description                                                                       |
+| :------------------------------------------ | :-------------------------------------------------------------------------------- |
+| Build process-driven applications           | Create applications to orchestrate processes and integrate with existing systems. |
+| Integrate user tasks into custom UIs        | Build task management interfaces that connect to Camunda's user task engine.      |
+| Start and monitor external system processes | Trigger process instances and track progress from any application or service.     |
 
 ## Key features
 
 This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience, while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/concepts/access-control/authorizations.md).
 
-Key capabilities include:
+Key features include:
 
-- Full process lifecycle management – Deploy, start, and monitor BPMN processes.
-- User task operations – Claim, complete, and manage human tasks.
-- Variable management – Read and update process variables.
-- Incident resolution – Handle and resolve process incidents.
-- Advanced search and filtering – Query process data with powerful search capabilities.
+| Feature                           | Description                                           |
+| :-------------------------------- | :---------------------------------------------------- |
+| Full process lifecycle management | Deploy, start, and monitor BPMN processes.            |
+| User task operations              | Claim, complete, and manage human tasks.              |
+| Variable management               | Read and update process variables.                    |
+| Incident resolution               | Handle and resolve process incidents.                 |
+| Advanced search and filtering     | Query process data with powerful search capabilities. |
 
-This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints). You can rely on backward compatibility for production use.
+:::info
 
-To learn more about the Orchestration Cluster, see [What is the Orchestration Cluster?](/components/orchestration-cluster.md).
+- This API is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for clearly marked alpha endpoints). You can rely on backward compatibility for production use.
+- To learn more about the Orchestration Cluster, see [Orchestration Cluster](/components/orchestration-cluster.md).
+
+:::
 
 ## Getting started
 

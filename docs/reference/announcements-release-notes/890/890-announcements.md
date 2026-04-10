@@ -2,17 +2,18 @@
 id: 890-announcements
 title: "8.9 Release announcements"
 sidebar_label: Release announcements
-description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release."
+description: "Supported environment changes, breaking changes, and deprecations in Camunda 8.9."
 toc_max_heading_level: 3
 ---
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release.
+<PageDescription />
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------- |
-| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | -              |
+| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
+| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -548,6 +549,26 @@ For more information, see the [Webhook connector](/components/connectors/protoco
 Camunda 8.9 provides support for virtual threads in the connector runtime. Virtual threads are enabled by default for outbound connectors.
 
 For more information on optimizing connector performance with virtual threads, see [connector runtime performance](/self-managed/components/connectors/performance.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Kafka consumer connector: auto-generated consumer group ID format changed
+
+When upgrading from Camunda 8.8 to 8.9, the auto-generated Kafka consumer group ID changes format. This affects Kafka consumer connectors only when no explicit consumer group ID is configured. The change is a side effect of a runtime improvement that enables cross-version connector deduplication.
+
+- **8.8 format:** `kafka-inbound-connector--<processDefinitionKey>-<elementId>` (numeric key)
+- **8.9 format:** `kafka-inbound-connector--<bpmnProcessId>-<hash>` (stable process ID)
+
+Because Kafka treats a changed group ID as a brand-new consumer group, affected connectors do not reuse their committed offsets after the upgrade and may reprocess messages.
+
+**Action required:** Before upgrading to 8.9, set an explicit **Consumer Group ID** in each Kafka consumer connector configuration to preserve the existing consumer group identity. You can [look up existing consumer groups](https://docs.confluent.io/kafka/operations-tools/manage-consumer-groups.html#list-groups-and-view-offsets) to find the current group ID in use. See the [Kafka connector documentation](/components/connectors/out-of-the-box-connectors/kafka.md?kafka=inbound) for details.
 
 </div>
 </div>

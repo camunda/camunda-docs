@@ -11,8 +11,6 @@ mdx:
 type BroadcastSignalData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14704](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14704)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:14704](https://github.com/camunda/orchestration-cl
 ```ts
 body: SignalBroadcastRequest;
 ```
-
-Defined in: [gen/types.gen.ts:14705](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14705)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:14705](https://github.com/camunda/orchestration-cl
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14706](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14706)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:14706](https://github.com/camunda/orchestration-cl
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14707](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14707)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:14707](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/signals/broadcast";
 ```
-
-Defined in: [gen/types.gen.ts:14708](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14708)

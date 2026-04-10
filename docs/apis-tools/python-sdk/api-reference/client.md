@@ -1181,7 +1181,7 @@ This is an atomic call, i.e. either all resources are deployed or none of them a
 
 #### Examples
 
-**Deploy resources from files:**
+**From files:**
 
 ```python
 def deploy_resources_example() -> None:
@@ -1200,7 +1200,7 @@ def deploy_resources_example() -> None:
         print(f"  Decision: {decision.decision_definition_id}")
 ```
 
-**Deploy resources with tenant ID:**
+**With tenant ID:**
 
 ```python
 def deploy_resources_with_tenant_example() -> None:
@@ -1644,7 +1644,7 @@ when awaitCompletion is enabled.
 
 #### Examples
 
-**Create by process definition key:**
+**By key:**
 
 ```python
 def create_process_instance_by_key_example() -> None:
@@ -1664,7 +1664,7 @@ def create_process_instance_by_key_example() -> None:
     print(f"Process instance key: {result.process_instance_key}")
 ```
 
-**Create from a stored key:**
+**By stored key:**
 
 ```python
 def create_process_instance_by_key_from_storage_example() -> None:
@@ -1682,7 +1682,7 @@ def create_process_instance_by_key_from_storage_example() -> None:
     print(f"Process instance key: {result.process_instance_key}")
 ```
 
-**Create by process definition ID:**
+**By ID:**
 
 ```python
 def create_process_instance_by_id_example(process_definition_id: ProcessDefinitionId) -> None:
@@ -2596,7 +2596,7 @@ version of the decision is used.
 
 #### Examples
 
-**Evaluate by decision definition key:**
+**By key:**
 
 ```python
 def evaluate_decision_by_key_example(decision_definition_key: DecisionDefinitionKey) -> None:
@@ -2611,7 +2611,7 @@ def evaluate_decision_by_key_example(decision_definition_key: DecisionDefinition
     print(f"Decision key: {result.decision_definition_key}")
 ```
 
-**Evaluate by decision definition ID:**
+**By ID:**
 
 ```python
 def evaluate_decision_by_id_example(decision_definition_id: DecisionDefinitionId) -> None:

@@ -104,6 +104,16 @@ static void configureAssertions() {
 }
 ```
 
+### Judge configuration
+
+Override the global [judge configuration](configuration.md#judge-configuration) for a single assertion chain using `withJudgeConfig`.
+
+```java
+assertThat(processInstance)
+    .withJudgeConfig(config -> config.withThreshold(0.9))
+    .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
+```
+
 ## Process instance assertions
 
 You can verify the process instance state and other properties using `CamundaAssert.assertThat()` or
@@ -392,6 +402,16 @@ assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> 
 });
 ```
 
+### hasVariableSatisfiesJudge
+
+Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The assertion
+fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
+
+```java
+assertThat(processInstance)
+    .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
+```
+
 ### hasLocalVariableNames
 
 Assert that the process instance has the local variables in the scope of the given element. Use the BPMN element ID or a
@@ -442,6 +462,19 @@ assertThat(processInstance).hasLocalVariableSatisfies(
         Assertions.assertThat(emailTo.name()).isEqualTo("Zee");
         Assertions.assertThat(emailTo.email()).isEqualTo("zee@camunda.com");
     });
+```
+
+### hasLocalVariableSatisfiesJudge
+
+Assert that a local variable in the scope of a given element satisfies a natural language expectation using a configured LLM judge. Use the BPMN
+element ID or an [element selector](utilities.md#element-selector) to identify the element. The expectation is evaluated only once. The assertion
+fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
+
+```java
+assertThat(processInstance)
+    .hasLocalVariableSatisfiesJudge(
+        ElementSelectors.byName("Greet Customer"), "output",
+        "Contains a polite greeting addressed to the customer.");
 ```
 
 ## Process instance message assertions

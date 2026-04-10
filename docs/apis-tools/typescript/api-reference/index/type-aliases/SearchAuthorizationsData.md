@@ -11,8 +11,6 @@ mdx:
 type SearchAuthorizationsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8646](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8646)
-
 ## Properties
 
 ### body?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:8646](https://github.com/camunda/orchestration-clu
 ```ts
 optional body?: AuthorizationSearchQuery;
 ```
-
-Defined in: [gen/types.gen.ts:8647](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8647)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:8647](https://github.com/camunda/orchestration-clu
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8648](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8648)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:8648](https://github.com/camunda/orchestration-clu
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8649](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8649)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:8649](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/authorizations/search";
 ```
-
-Defined in: [gen/types.gen.ts:8650](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8650)

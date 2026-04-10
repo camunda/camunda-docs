@@ -11,8 +11,6 @@ mdx:
 type AssignRoleToUserData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14611](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14611)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:14611](https://github.com/camunda/orchestration-cl
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14612](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14612)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:14612](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:14613](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14613)
 
 #### roleId
 
@@ -57,8 +51,6 @@ The user username.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14623](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14623)
-
 ---
 
 ### url
@@ -66,5 +58,3 @@ Defined in: [gen/types.gen.ts:14623](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/roles/{roleId}/users/{username}";
 ```
-
-Defined in: [gen/types.gen.ts:14624](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14624)

@@ -11,8 +11,6 @@ mdx:
 type UpdateAuthorizationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8768](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8768)
-
 ## Properties
 
 ### body
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:8768](https://github.com/camunda/orchestration-clu
 body: AuthorizationRequest;
 ```
 
-Defined in: [gen/types.gen.ts:8769](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8769)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:8769](https://github.com/camunda/orchestration-clu
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:8770](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8770)
 
 #### authorizationKey
 
@@ -49,8 +43,6 @@ The key of the authorization to delete.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8776](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8776)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:8776](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/authorizations/{authorizationKey}";
 ```
-
-Defined in: [gen/types.gen.ts:8777](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8777)

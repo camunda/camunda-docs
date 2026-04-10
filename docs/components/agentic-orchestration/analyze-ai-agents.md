@@ -30,7 +30,7 @@ After completing this guide, you will be able to analyze AI agent executions in 
 - You have deployed and run the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint. This is needed for Optimize to fetch execution data to analyze. Consider running it using different prompts to trigger various AI agent tools.
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process. We recommend completing that guide first. However, you can also apply this guide to other AI agent process implementations.
+This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
 :::
 
 ## Step 1: Make your data available

@@ -11,8 +11,6 @@ mdx:
 type CreateGlobalClusterVariableData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9107](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9107)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:9107](https://github.com/camunda/orchestration-clu
 ```ts
 body: CreateClusterVariableRequest;
 ```
-
-Defined in: [gen/types.gen.ts:9108](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9108)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:9108](https://github.com/camunda/orchestration-clu
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9109](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9109)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:9109](https://github.com/camunda/orchestration-clu
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9110](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9110)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:9110](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/cluster-variables/global";
 ```
-
-Defined in: [gen/types.gen.ts:9111](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9111)

@@ -11,8 +11,6 @@ mdx:
 type SearchIncidentsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11579](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11579)
-
 ## Properties
 
 ### body?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:11579](https://github.com/camunda/orchestration-cl
 ```ts
 optional body?: IncidentSearchQuery;
 ```
-
-Defined in: [gen/types.gen.ts:11580](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11580)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:11580](https://github.com/camunda/orchestration-cl
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11581](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11581)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:11581](https://github.com/camunda/orchestration-cl
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11582](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11582)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:11582](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/incidents/search";
 ```
-
-Defined in: [gen/types.gen.ts:11583](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11583)

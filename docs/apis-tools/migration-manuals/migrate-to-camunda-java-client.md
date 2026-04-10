@@ -2,13 +2,14 @@
 id: migrate-to-camunda-java-client
 title: Migrate to the Camunda Java Client
 sidebar_label: "Camunda Java Client"
-description: "Migrate from Zeebe Java Client to the Camunda Java Client. This guide provides an overview of the migration process."
+description: "Learn how to migrate from the Zeebe Java Client to the Camunda Java Client."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import PageDescription from '@site/src/components/PageDescription';
 
-Migrate to the Camunda Java Client from the Zeebe Java Client.
+<PageDescription />
 
 :::note Have you already migrated?
 You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).

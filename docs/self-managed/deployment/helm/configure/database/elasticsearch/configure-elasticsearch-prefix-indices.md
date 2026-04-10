@@ -10,6 +10,8 @@ import TabItem from "@theme/TabItem";
 
 Camunda components store operational data in Elasticsearch or OpenSearch indices. By default, Camunda uses the standard index names created by each exporter.
 
+This page applies to both the Orchestration Cluster and Optimize when they use Elasticsearch or OpenSearch in Helm deployments.
+
 Configure an index prefix when you need to:
 
 - Organize indices by grouping related indices under a consistent naming pattern.

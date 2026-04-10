@@ -11,8 +11,6 @@ mdx:
 type UpdateRoleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:13967](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13967)
-
 ## Properties
 
 ### body
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:13967](https://github.com/camunda/orchestration-cl
 body: RoleUpdateRequest;
 ```
 
-Defined in: [gen/types.gen.ts:13968](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13968)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:13968](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:13969](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13969)
 
 #### roleId
 
@@ -49,8 +43,6 @@ The role ID.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:13975](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13975)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:13975](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/roles/{roleId}";
 ```
-
-Defined in: [gen/types.gen.ts:13976](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L13976)
