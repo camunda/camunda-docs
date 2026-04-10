@@ -135,6 +135,21 @@ Camunda 8 Run now uses H2 as the default secondary store for simpler local devel
 
 <p class="link-arrow">[Camunda 8 Run secondary storage](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md)</p>
 
+## Connectivity
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects networking">Networking</span></div>
+
+### Secure connectivity with AWS inbound PrivateLink
+
+<!-- https://github.com/camunda/product-hub/issues/2601 -->
+
+You can now connect to Camunda SaaS Orchestration clusters from AWS VPCs using AWS PrivateLink.
+
+Inbound traffic stays on private AWS networking instead of traversing the public internet, so job workers and inbound connectors can run inside customer VPCs with stronger network isolation and compliance alignment.
+
+<p class="link-arrow">[Secure connectivity overview](/components/saas/secure-connectivity/index.md)</p>
+<p class="link-arrow">[Set up secure connectivity in Console](/components/saas/secure-connectivity/console-setup.md)</p>
+
 ## Connectors
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
@@ -150,21 +165,6 @@ Connector improvements in 8.9 include Amazon Textract usability updates, OAuth 2
 <p class="link-arrow">[Amazon Textract connector](/components/connectors/out-of-the-box-connectors/amazon-textract.md)</p>
 <p class="link-arrow">[Azure Blob Storage connector](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md)</p>
 <p class="link-arrow">[Email connector](/components/connectors/out-of-the-box-connectors/email-outbound.md)</p>
-
-## Connectivity
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects networking">Networking</span></div>
-
-### Secure connectivity with AWS inbound PrivateLink
-
-<!-- https://github.com/camunda/product-hub/issues/2601 -->
-
-You can now connect to Camunda SaaS Orchestration clusters from AWS VPCs using AWS PrivateLink.
-
-Inbound traffic stays on private AWS networking instead of traversing the public internet, so job workers and inbound connectors can run inside customer VPCs with stronger network isolation and compliance alignment.
-
-<p class="link-arrow">[Secure connectivity overview](/components/saas/secure-connectivity/index.md)</p>
-<p class="link-arrow">[Set up secure connectivity in Console](/components/saas/secure-connectivity/console-setup.md)</p>
 
 ## Console
 
@@ -249,6 +249,16 @@ Helm deployments in 8.9 now support fully integrated RDBMS secondary storage, ex
 
 Camunda 8.9 adds IDP document classification templates and lets you choose a text extraction engine per template. This gives teams more control over how different document types are categorized and processed, whether they need lightweight parsing, OCR, or multimodal LLM interpretation.
 
+## Integrations
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
+
+### Microsoft Teams app for Self-Managed
+
+The Camunda for Microsoft Teams app is now available for Self-Managed environments as well as SaaS. This lets teams claim and complete Camunda tasks directly in Microsoft Teams across more deployment models.
+
+<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
+
 ## Migration from Camunda 7 to Camunda 8
 
 ### Conditional events support in Migration Analyzer and Diagram Converter
@@ -281,62 +291,6 @@ Camunda 8.9 expands migration support by converting Camunda 7 `UserOperationLog`
 Camunda 8.9 adds support for BPMN conditional events in the platform itself, complementing the new migration-tooling support for detecting and converting them. This makes migration planning easier because the modeled behavior and the migration path are both available in the same minor release.
 
 <p class="link-arrow">[Conditional events](/components/modeler/bpmn/conditional-events/conditional-events.md)</p>
-
-## Integrations
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
-
-### Microsoft Teams app for Self-Managed
-
-The Camunda for Microsoft Teams app is now available for Self-Managed environments as well as SaaS. This lets teams claim and complete Camunda tasks directly in Microsoft Teams across more deployment models.
-
-<p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
-
-## Robotic Process Automation (RPA)
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects RPA">RPA</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-### RPA support in Web Modeler
-
-<!-- https://github.com/camunda/product-hub/issues/2703 -->
-
-Web Modeler now supports RPA scripts as a first-class file type, including visibility, project management, and deployment workflows without relying on Desktop Modeler.
-
-<p class="link-arrow">[RPA getting started](/components/rpa/getting-started.md)</p>
-
-## Web Modeler
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-### Unified deployment experience across file types in Web Modeler
-
-<!-- https://github.com/camunda/product-hub/issues/3252 -->
-
-Web Modeler now offers a unified deployment experience across BPMN, DMN, forms, and RPA scripts.
-
-- Deploy artifacts from their details view using a consistent interaction pattern across file types.
-- See more clearly which linked files are included when deploying within a process application.
-- Choose whether to deploy the current file or the applicable process application bundle, depending on context.
-
-This update reduces hidden deployment behavior, lowers cognitive load, and makes deployment workflows more predictable and extensible for future asset types.
-
-<p class="link-arrow">[Process applications in Web Modeler](/components/modeler/web-modeler/process-applications/process-applications.md)</p>
-<p class="link-arrow">[Validate and deploy your process application](/components/modeler/web-modeler/process-applications/deploy-process-application.md)</p>
-
-### Collaboration and import improvements
-
-Web Modeler in 8.9 adds more reliable live collaboration with canvas locking and takeover behavior, and it supports importing large process applications with up to 100 supported files in a single step. These changes improve shared editing workflows and make it easier to bring existing assets into Modeler.
-
-<p class="link-arrow">[Collaborate in Web Modeler](/components/modeler/web-modeler/collaboration/collaboration.md)</p>
-<p class="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</p>
-
-### Modeling and administration improvements
-
-Camunda 8.9 expands Web Modeler with broader event template support, email-based project invitations for all supported OIDC providers, and a simpler Self-Managed system architecture by folding the former `webapp` component into `restapi`. Additional 8.9 updates include embedded Tomcat for Self-Managed deployments and a SaaS endpoint for monitoring Web Modeler egress IP ranges.
-
-<p class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</p>
-<p class="link-arrow">[Add users to projects](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects)</p>
-<p class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
 
 ## Operate
 
@@ -419,6 +373,52 @@ Camunda 8.9 adds end-to-end deployment guidance for RDBMS-backed environments, i
 When using RDBMS secondary storage, Camunda 8.9 adds continuous backup and restore support and documents how to combine an RDBMS-backed Orchestration Cluster with Optimize when analytics require Elasticsearch or OpenSearch. This gives teams a clearer path for disaster recovery and mixed operational versus analytics storage strategies.
 
 <p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
+
+## Robotic Process Automation (RPA)
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects RPA">RPA</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+### RPA support in Web Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/2703 -->
+
+Web Modeler now supports RPA scripts as a first-class file type, including visibility, project management, and deployment workflows without relying on Desktop Modeler.
+
+<p class="link-arrow">[RPA getting started](/components/rpa/getting-started.md)</p>
+
+## Web Modeler
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+### Unified deployment experience across file types in Web Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/3252 -->
+
+Web Modeler now offers a unified deployment experience across BPMN, DMN, forms, and RPA scripts.
+
+- Deploy artifacts from their details view using a consistent interaction pattern across file types.
+- See more clearly which linked files are included when deploying within a process application.
+- Choose whether to deploy the current file or the applicable process application bundle, depending on context.
+
+This update reduces hidden deployment behavior, lowers cognitive load, and makes deployment workflows more predictable and extensible for future asset types.
+
+<p class="link-arrow">[Process applications in Web Modeler](/components/modeler/web-modeler/process-applications/process-applications.md)</p>
+<p class="link-arrow">[Validate and deploy your process application](/components/modeler/web-modeler/process-applications/deploy-process-application.md)</p>
+
+### Collaboration and import improvements
+
+Web Modeler in 8.9 adds more reliable live collaboration with canvas locking and takeover behavior, and it supports importing large process applications with up to 100 supported files in a single step. These changes improve shared editing workflows and make it easier to bring existing assets into Modeler.
+
+<p class="link-arrow">[Collaborate in Web Modeler](/components/modeler/web-modeler/collaboration/collaboration.md)</p>
+<p class="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</p>
+
+### Modeling and administration improvements
+
+Camunda 8.9 expands Web Modeler with broader event template support, email-based project invitations for all supported OIDC providers, and a simpler Self-Managed system architecture by folding the former `webapp` component into `restapi`. Additional 8.9 updates include embedded Tomcat for Self-Managed deployments and a SaaS endpoint for monitoring Web Modeler egress IP ranges.
+
+<p class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</p>
+<p class="link-arrow">[Add users to projects](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+<p class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
 
 ## 8.9.0-alpha5
 
