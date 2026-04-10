@@ -249,7 +249,9 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/azure/k
 
 #### Enable Web Modeller and Console services
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable Web Modeler, Console, and Management Identity in an OIDC-enabled full cluster, refer to [deploy required dependencies with Kubernetes operators – Camunda deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
+Web Modeler, Console, and Management Identity are not enabled by default in this deployment.
+
+To enable these enterprise components in an OIDC-enabled full cluster, first deploy the required infrastructure (PostgreSQL, Elasticsearch/OpenSearch, and an IdP, such as Keycloak) using the official operators, then apply the Helm values examples shown in [deploy required dependencies with operators](/self-managed/deployment/helm/configure/operator-based-infrastructure/).
 
 #### Elasticsearch options
 

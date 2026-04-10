@@ -328,7 +328,7 @@ This constraint does not apply when a proper domain and Ingress are configured (
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable Web Modeler, Console, and Management Identity in an OIDC-enabled full cluster, refer to [deploy required dependencies with Kubernetes operators – Camunda deployment](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
+To enable these enterprise components in an OIDC-enabled full cluster, first deploy the required infrastructure (PostgreSQL, Elasticsearch/OpenSearch, and an IdP, such as Keycloak) using the official operators, then apply the Helm values examples shown in [deploy required dependencies with operators](/self-managed/deployment/helm/configure/operator-based-infrastructure/).
 
 #### Use internal Elasticsearch instead of the managed OpenSearch
 
