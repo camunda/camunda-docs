@@ -6,9 +6,11 @@ description: "Configure Camunda Copilot in Web Modeler with a custom LLM provide
 
 <span class="badge badge--alpha">Alpha</span>
 
-Web Modeler supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms. Camunda Copilot uses a multi-agent architecture with a Supervisor Agent that routes requests to specialized sub-agents (BPMN, FEEL, Form). You can configure the LLM provider and parameters for each agent.
+Web Modeler supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms.
 
-For an overview of Camunda Copilot features and usage, see [Camunda Copilot overview](/components/modeler/web-modeler/copilot/copilot-overview.md).
+Camunda Copilot uses a multi-agent architecture with a Supervisor Agent that routes requests to specialized sub-agents (BPMN, FEEL, Form). You can configure the LLM provider and parameters for each agent.
+
+For an overview of Camunda Copilot features and usage, see [Camunda Copilot](/components/modeler/web-modeler/copilot/copilot-overview.md).
 
 Copilot supports the following LLM providers:
 
@@ -42,27 +44,27 @@ To enable Copilot, set the `FEATURE_AI_ENABLED` environment variable to `true`. 
 
 Camunda Copilot supports connecting to your own AI provider and model in Self-Managed deployments. This allows you to:
 
-- Use your organization's existing AI infrastructure
-- Maintain data sovereignty by keeping all AI interactions within your network
-- Fine-tune models for your specific use cases
-- Control costs by using your own API keys and quotas
+- Use your organization's existing AI infrastructure.
+- Maintain data sovereignty by keeping all AI interactions within your network.
+- Fine-tune models for your specific use cases.
+- Control costs by using your own API keys and quotas.
 
 ### Supported approaches
 
 There are two main approaches to bring your own model:
 
 1. **OpenAI-compatible providers**: Any provider that implements the OpenAI `/chat/completions` API endpoint, including:
-   - Local LLM proxies (LiteLLM, vLLM, LocalAI)
-   - Self-hosted models behind an OpenAI-compatible gateway
-   - Third-party providers with OpenAI-compatible APIs
+   - Local LLM proxies (LiteLLM, vLLM, LocalAI).
+   - Self-hosted models behind an OpenAI-compatible gateway.
+   - Third-party providers with OpenAI-compatible APIs.
 
 2. **Native provider integrations**: Direct integrations with major cloud providers:
-   - AWS Bedrock
-   - Azure OpenAI / Azure AI
-   - Google Vertex AI
-   - Anthropic
-   - Ollama (for local models)
-   - Hugging Face
+   - AWS Bedrock.
+   - Azure OpenAI / Azure AI.
+   - Google Vertex AI.
+   - Anthropic.
+   - Ollama (for local models).
+   - Hugging Face.
 
 ### Model recommendations
 
@@ -72,13 +74,13 @@ Camunda recommends using GPT-5 class models or comparable (Claude 4.5 Sonnet, Ge
 
 Copilot's BPMN generation requires models with strong reasoning and structured output capabilities. When using weaker or smaller models:
 
-- The model may fail to generate valid BPMN XML
-- Copilot automatically attempts repair up to three times
-- If repair fails, an empty XML is returned with an error message
+- The model may fail to generate valid BPMN XML.
+- Copilot automatically attempts repair up to three times.
+- If repair fails, an empty XML is returned with an error message.
 
 ### Example configurations
 
-#### Using OpenAI directly
+#### Use OpenAI directly
 
 ```yaml
 FEATURE_AI_ENABLED: "true"
@@ -89,7 +91,7 @@ RESTAPI_COPILOT_OPEN_AI_DEFAULT_MODEL_ID: "gpt-4o"
 RESTAPI_FEELCOPILOT_API_KEY: "sk-your-api-key"
 ```
 
-#### Using a local LLM proxy (LiteLLM, vLLM)
+#### Use a local LLM proxy (LiteLLM, vLLM)
 
 ```yaml
 FEATURE_AI_ENABLED: "true"
@@ -101,7 +103,7 @@ RESTAPI_COPILOT_OPENAI_ENDPOINT: "http://localhost:8000/v1"
 RESTAPI_COPILOT_OPENAI_BEARER: "your-proxy-api-key"
 ```
 
-#### Using Ollama for local models
+#### Use Ollama for local models
 
 ```yaml
 FEATURE_AI_ENABLED: "true"
@@ -112,7 +114,7 @@ RESTAPI_COPILOT_OLLAMA_DEFAULT_MODEL_ID: "llama3.1:70b"
 RESTAPI_COPILOT_OLLAMA_BASE_URL: "http://localhost:11434"
 ```
 
-#### Using AWS Bedrock with Claude
+#### Use AWS Bedrock with Claude
 
 ```yaml
 FEATURE_AI_ENABLED: "true"
@@ -125,7 +127,7 @@ RESTAPI_BPMNCOPILOT_ACCESS_KEY_ID: "AKIA..."
 RESTAPI_BPMNCOPILOT_SECRET_ACCESS_KEY: "your-secret-key"
 ```
 
-### Troubleshooting BYOM
+### Troubleshoot BYOM
 
 #### Enable request/response logging
 
