@@ -2,15 +2,12 @@
 id: overview
 title: "Quickstart"
 sidebar_label: "Quickstart"
-description: ""
+description: "Get Camunda 8 up and running quickly in your local environment, whether you're a developer building process solutions or an administrator responsible for deploying and running Camunda clusters."
 ---
 
-Welcome to the **Quickstart** section for Camunda 8 Self-Managed. This guide is designed to help you get up and running quickly with Camunda 8 in a local environment—whether you're a developer building process solutions or an administrator responsible for deploying and running Camunda clusters.
+import PageDescription from '@site/src/components/PageDescription';
 
-You’ll find two tailored quickstart paths:
-
-- A **developer quickstart** using lightweight tools like **Camunda 8 Run** and **Docker Compose**.
-- An **administrator quickstart** using **Kind (Kubernetes in Docker)** to simulate real-world infrastructure.
+<PageDescription />
 
 :::note
 These quickstarts are intended for local testing and learning purposes only. They are not designed for production deployments.
@@ -18,21 +15,21 @@ These quickstarts are intended for local testing and learning purposes only. The
 
 ## Quickstart for developers
 
-If you're a developer looking to evaluate or build process solutions with Camunda 8, this path is for you. It focuses on getting a minimal setup running quickly using:
+Are you a developer looking to evaluate or build process solutions with Camunda 8? Get a minimal setup running quickly using:
 
 - **Camunda 8 Run**: A lightweight distribution of the Camunda engine.
 - **Docker Compose**: For spinning up required services like Zeebe, Operate, and Tasklist.
 
-[Get started with the developer quickstart](./developer-quickstart.md)
+<p class="link-arrow">[Quickstart for developers](./developer-quickstart.md)</p>
 
 ## Quickstart for administrators
 
-If you're an administrator exploring how Camunda 8 runs in a Kubernetes-like environment, this guide walks you through:
+Are you an administrator wanting to explore how Camunda 8 runs in a Kubernetes-like environment? Learn how you can:
 
-- Using **Kind** to simulate a Kubernetes cluster locally.
-- Deploying the full Camunda 8 stack using Helm charts.
+- Use **Kind** to simulate a Kubernetes cluster locally.
+- Deploy the full Camunda 8 stack using Helm charts.
 
-[Get started with the administrator quickstart](/self-managed/deployment/helm/cloud-providers/kind.md)
+<p class="link-arrow">[Quickstart for administrators](/self-managed/deployment/helm/cloud-providers/kind.md)</p>
 
 ## What you’ll learn
 
