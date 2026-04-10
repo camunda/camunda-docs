@@ -284,7 +284,7 @@ connectors:
     ...
 webModeler:
   image:
-    # registry and tag will be used for all three Web Modeler images
+    # registry and tag will be used for both Web Modeler images
     tag: latest
   restapi:
     image:

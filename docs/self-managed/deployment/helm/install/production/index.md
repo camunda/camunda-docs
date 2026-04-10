@@ -44,7 +44,9 @@ Ensure all prerequisites are in place to avoid issues during installation or whe
 
 This is the high-level architecture diagram for our production setup, as illustrated below:
 
-![Architecture Diagram](./img/architecture.png)
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764665925646201&cot=14 -->
+
+![Architecture Diagram](./img/architecture.jpg)
 
 For more information refer to the Camunda 8 [Kubernetes reference architectures](/docs/self-managed/reference-architecture/kubernetes/#kubernetes).
 
