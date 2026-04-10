@@ -30,15 +30,15 @@ For SaaS clusters, Swagger UI is accessible through your cluster's dedicated end
 
 1. In the Camunda Console, go to your cluster
 2. In **Cluster Details**, find your **Region ID** and **Cluster ID**
-3. Use this URL format: `https://${REGION_ID}.operate.camunda.io/${CLUSTER_ID}/swagger`
+3. Use this URL format: `https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/swagger`
 
 :::note
 Swagger UI is protected with CSRF. If you are logged into the Camunda Console, you can access Swagger UI directly. If not, you may need to log in first.
 :::
 
-**Example:**  
+**Example:**
 If your Region ID is `bru-2` and Cluster ID is `abc123-def456-ghi789`, your Swagger UI URL would be:
-`https://bru-2.operate.camunda.io/abc123-def456-ghi789/swagger`
+`https://bru-2.api.camunda.io/abc123-def456-ghi789/swagger`
 
 ### Self-Managed
 

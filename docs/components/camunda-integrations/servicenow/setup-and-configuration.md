@@ -70,7 +70,7 @@ Install and configure the Camunda Spoke in ServiceNow, set up ServiceNow connect
 | Domain              | `Global`                                                           |
 | Connection alias ID | `x_camun_camunda.Camunda`                                          |
 | URL Builder         | Enabled                                                            |
-| Host                | Camunda cluster Region ID (e.g., `lhr-1.zeebe.camunda.io`)         |
+| Host                | Camunda cluster Region ID (e.g., `lhr-1.api.camunda.io`)           |
 | Protocol            | `https`                                                            |
 | Base path           | Camunda Cluster ID (e.g., `/6b6b3969-a65c-4bdd-905e-c29102eebded`) |
 
