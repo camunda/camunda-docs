@@ -5,6 +5,7 @@ import IconAoLlmImg from "../assets/icon-llm.png";
 import IconOptimize from "../assets/icon-optimize.png";
 import IconConnectorImg from "../connectors/img/icon-connectors.png";
 import IconOperate from "../assets/icon-operate.png";
+import IconTest from "../modeler/web-modeler/idp/img/icon-prereqs.png";
 
 // Get started cards on introduction page
 export const getStartedCards = [
@@ -46,6 +47,12 @@ export const fundamentalCards_monitoring = [
     title: "Analyze your AI agents",
     image: IconOptimize,
     description: "Analyze your AI agents with Optimize.",
+  },
+  {
+    link: "../test-ai-agents/",
+    title: "Test your AI agents",
+    image: IconTest,
+    description: "Test your AI agents with Camunda Process Test.",
   },
 ];
 
