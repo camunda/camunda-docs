@@ -39,7 +39,7 @@ If you configured external Elasticsearch, inspect that deployment's logs separat
    ./c8run start --port 8081
    ```
 
-3. If using Docker mode, ensure no containers are using these ports:
+3. If you also run the Docker Compose quickstart or other local containers, ensure they are not using these ports:
 
    ```bash
    docker ps
@@ -262,41 +262,6 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
    Invoke-WebRequest -Uri http://localhost:8080/v2/topology -Headers @{Authorization="Basic $base64"}
    ```
 
-## Docker-specific issues
-
-### Docker Compose fails to start
-
-**Problem:** Running Camunda 8 Run with the `--docker` option fails.
-
-**Solution:**
-
-1. Ensure Docker is running:
-
-   ```bash
-   docker --version
-   docker ps
-   ```
-
-2. Verify that Docker has sufficient resources allocated (recommended: 4 CPU cores, 8 GB RAM).
-3. Check for conflicting containers:
-
-   ```bash
-   docker ps -a
-   docker rm <container-name>
-   ```
-
-4. Pull the latest images:
-
-   ```bash
-   docker compose -f docker-compose-8.8/docker-compose.yaml pull
-   ```
-
-5. If you suspect data corruption, remove old volumes before restarting:
-
-   ```bash
-   docker compose -f docker-compose-8.8/docker-compose.yaml down -v
-   ```
-
 ## Configuration issues
 
 ### Custom configuration not loading
@@ -360,13 +325,7 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
            url: jdbc:h2:file:./camunda-data/h2db
    ```
 
-2. In Docker mode, avoid using the `-v` flag when stopping containers, as it removes all volumes and deletes persisted data:
-
-   ```bash
-   docker compose -f docker-compose-8.8/docker-compose.yaml down
-   ```
-
-3. Check that the application has permission to write to the data directory (for example, `camunda-data/` or any configured mount path).
+2. Check that the application has permission to write to the data directory (for example, `camunda-data/` or any configured mount path).
 
 ## Connector issues
 
@@ -404,7 +363,7 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
    export MY_SECRET_KEY=secret_value
    ```
 
-2. For Docker mode, add secrets to the `connector-secrets.txt` file located in the Docker Compose folder.
+2. For the Docker Compose setup, add secrets to the `connector-secrets.txt` file located in the Docker Compose folder.
 3. Restart Camunda 8 Run after adding or modifying secrets.
 
 ## Ubuntu-specific issues
