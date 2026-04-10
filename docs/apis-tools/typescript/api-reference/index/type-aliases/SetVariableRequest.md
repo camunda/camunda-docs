@@ -11,8 +11,6 @@ mdx:
 type SetVariableRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:8202](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8202)
-
 ## Properties
 
 ### local?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:8202](https://github.com/camunda/orchestration-clu
 ```ts
 optional local?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:8225](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8225)
 
 If set to `true`, the variables are merged strictly into the local scope (as specified
 by the `elementInstanceKey`). Otherwise, the variables are propagated to upper scopes
@@ -46,8 +42,6 @@ default, with local set to `false`, scope '1' will be { "foo": 5 } and scope '2'
 optional operationReference?: OperationReference;
 ```
 
-Defined in: [gen/types.gen.ts:8226](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8226)
-
 ---
 
 ### variables
@@ -55,8 +49,6 @@ Defined in: [gen/types.gen.ts:8226](https://github.com/camunda/orchestration-clu
 ```ts
 variables: object;
 ```
-
-Defined in: [gen/types.gen.ts:8206](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8206)
 
 JSON object representing the variables to set in the element’s scope.
 

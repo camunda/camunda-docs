@@ -11,8 +11,6 @@ mdx:
 type UnassignRoleFromGroupData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14233](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14233)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:14233](https://github.com/camunda/orchestration-cl
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14234](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14234)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:14234](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:14235](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14235)
 
 #### groupId
 
@@ -57,8 +51,6 @@ The role ID.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14245](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14245)
-
 ---
 
 ### url
@@ -66,5 +58,3 @@ Defined in: [gen/types.gen.ts:14245](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/roles/{roleId}/groups/{groupId}";
 ```
-
-Defined in: [gen/types.gen.ts:14246](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14246)

@@ -416,6 +416,7 @@ module.exports = {
               items: [
                 "components/camunda-integrations/servicenow/prerequisites",
                 "components/camunda-integrations/servicenow/setup-and-configuration",
+                "components/camunda-integrations/servicenow/camunda-spoke",
                 {
                   type: "category",
                   label: "Connectors",
@@ -943,7 +944,12 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            "components/connectors/out-of-the-box-connectors/email",
+            {
+              Email: [
+                "components/connectors/out-of-the-box-connectors/email-inbound",
+                "components/connectors/out-of-the-box-connectors/email-outbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
@@ -1648,39 +1654,69 @@ module.exports = {
                   items: [
                     {
                       type: "category",
-                      label: "RDBMS",
-                      link: {
-                        type: "doc",
-                        id: "self-managed/deployment/helm/configure/database/rdbms",
-                      },
+                      label: "Orchestration Cluster",
                       items: [
                         {
-                          type: "doc",
-                          id: "self-managed/deployment/helm/install/helm-with-rdbms",
-                          label: "RDBMS example deployment",
+                          type: "category",
+                          label: "RDBMS",
+                          link: {
+                            type: "doc",
+                            id: "self-managed/deployment/helm/configure/database/rdbms",
+                          },
+                          items: [
+                            {
+                              type: "doc",
+                              id: "self-managed/deployment/helm/install/helm-with-rdbms",
+                              label: "RDBMS example deployment",
+                            },
+                            "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
+                            "self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits",
+                            "self-managed/deployment/helm/configure/database/rdbms-schema-management",
+                            "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
+                            "self-managed/deployment/helm/configure/database/validate-rdbms",
+                            "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                          ],
                         },
-                        "self-managed/deployment/helm/configure/database/using-existing-postgres",
-                        "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
-                        "self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits",
-                        "self-managed/deployment/helm/configure/database/rdbms-schema-management",
-                        "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
-                        "self-managed/deployment/helm/configure/database/validate-rdbms",
-                        "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                        {
+                          type: "category",
+                          label: "Elasticsearch / OpenSearch",
+                          link: {
+                            type: "doc",
+                            id: "self-managed/deployment/helm/configure/database/non-sql",
+                          },
+                          items: [
+                            "self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch",
+                            "self-managed/deployment/helm/configure/database/using-external-opensearch",
+                            {
+                              type: "category",
+                              label: "Shared Elasticsearch/OpenSearch tasks",
+                              items: [
+                                "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
+                                "self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
+                              ],
+                            },
+                            "self-managed/deployment/helm/configure/database/all-shards-failed",
+                          ],
+                        },
                       ],
                     },
                     {
                       type: "category",
-                      label: "Non-SQL",
+                      label: "Management Identity and Web Modeler",
+                      items: [
+                        "self-managed/deployment/helm/configure/database/using-existing-postgres",
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "Optimize",
                       link: {
                         type: "doc",
-                        id: "self-managed/deployment/helm/configure/database/non-sql",
+                        id: "self-managed/deployment/helm/configure/database/optimize/index",
                       },
                       items: [
-                        "self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch",
-                        "self-managed/deployment/helm/configure/database/using-external-opensearch",
-                        "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
-                        "self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
-                        "self-managed/deployment/helm/configure/database/all-shards-failed",
+                        "self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch",
+                        "self-managed/deployment/helm/configure/database/optimize/using-external-opensearch",
                       ],
                     },
                   ],
@@ -1968,8 +2004,9 @@ module.exports = {
                   },
                   items: [
                     "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
-                    "self-managed/concepts/databases/relational-db/rdbms-support-policy",
                     "self-managed/concepts/databases/relational-db/database-configuration",
+                    "self-managed/concepts/databases/relational-db/rdbms-support-policy",
+                    "self-managed/concepts/secondary-storage/rdbms-benchmark-results",
                   ],
                 },
               ],

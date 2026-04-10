@@ -7,8 +7,6 @@ mdx:
 
 # Interface: CamundaOptions
 
-Defined in: [gen/CamundaClient.ts:1155](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1155)
-
 ## Properties
 
 ### config?
@@ -68,8 +66,6 @@ optional config?: Partial<{
 }>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1157](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1157)
-
 ---
 
 ### env?
@@ -78,8 +74,6 @@ Defined in: [gen/CamundaClient.ts:1157](https://github.com/camunda/orchestration
 optional env?: Record<string, string | undefined>;
 ```
 
-Defined in: [gen/CamundaClient.ts:1161](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1161)
-
 ---
 
 ### fetch?
@@ -87,8 +81,6 @@ Defined in: [gen/CamundaClient.ts:1161](https://github.com/camunda/orchestration
 ```ts
 optional fetch?: (input, init?) => Promise<Response>;
 ```
-
-Defined in: [gen/CamundaClient.ts:1159](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1159)
 
 #### Parameters
 
@@ -112,8 +104,6 @@ Defined in: [gen/CamundaClient.ts:1159](https://github.com/camunda/orchestration
 optional log?: object;
 ```
 
-Defined in: [gen/CamundaClient.ts:1163](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1163)
-
 #### level?
 
 ```ts
@@ -134,8 +124,6 @@ optional transport?: LogTransport;
 optional supportLogger?: SupportLogger;
 ```
 
-Defined in: [gen/CamundaClient.ts:1174](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1174)
-
 ---
 
 ### telemetry?
@@ -143,8 +131,6 @@ Defined in: [gen/CamundaClient.ts:1174](https://github.com/camunda/orchestration
 ```ts
 optional telemetry?: object;
 ```
-
-Defined in: [gen/CamundaClient.ts:1165](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1165)
 
 #### correlation?
 
@@ -171,5 +157,3 @@ optional mirrorToLog?: boolean;
 ```ts
 optional throwOnError?: boolean;
 ```
-
-Defined in: [gen/CamundaClient.ts:1172](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/CamundaClient.ts#L1172)

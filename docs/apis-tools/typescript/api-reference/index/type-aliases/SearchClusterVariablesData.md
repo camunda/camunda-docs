@@ -11,8 +11,6 @@ mdx:
 type SearchClusterVariablesData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9282](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9282)
-
 ## Properties
 
 ### body?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:9282](https://github.com/camunda/orchestration-clu
 ```ts
 optional body?: ClusterVariableSearchQueryRequest;
 ```
-
-Defined in: [gen/types.gen.ts:9283](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9283)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:9283](https://github.com/camunda/orchestration-clu
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9284](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9284)
-
 ---
 
 ### query?
@@ -40,8 +34,6 @@ Defined in: [gen/types.gen.ts:9284](https://github.com/camunda/orchestration-clu
 ```ts
 optional query?: object;
 ```
-
-Defined in: [gen/types.gen.ts:9285](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9285)
 
 #### truncateValues?
 
@@ -58,5 +50,3 @@ When true (default), long variable values in the response are truncated. When fa
 ```ts
 url: "/cluster-variables/search";
 ```
-
-Defined in: [gen/types.gen.ts:9291](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9291)

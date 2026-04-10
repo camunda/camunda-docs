@@ -11,8 +11,6 @@ mdx:
 type PinClockData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9043](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9043)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:9043](https://github.com/camunda/orchestration-clu
 ```ts
 body: ClockPinRequest;
 ```
-
-Defined in: [gen/types.gen.ts:9044](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9044)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:9044](https://github.com/camunda/orchestration-clu
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9045](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9045)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:9045](https://github.com/camunda/orchestration-clu
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9046](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9046)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:9046](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/clock";
 ```
-
-Defined in: [gen/types.gen.ts:9047](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9047)

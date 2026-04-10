@@ -11,8 +11,6 @@ mdx:
 type SearchClusterVariablesErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:9294](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9294)
-
 ## Properties
 
 ### 400
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:9294](https://github.com/camunda/orchestration-clu
 ```ts
 400: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:9298](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9298)
 
 The provided data is not valid.
 
@@ -33,8 +29,6 @@ The provided data is not valid.
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9302](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9302)
-
 The request lacks valid authentication credentials.
 
 ---
@@ -45,8 +39,6 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:9306](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9306)
-
 Forbidden. The request is not allowed.
 
 ---
@@ -56,7 +48,5 @@ Forbidden. The request is not allowed.
 ```ts
 500: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:9310](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9310)
 
 An internal error occurred while processing the request.

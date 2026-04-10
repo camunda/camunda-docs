@@ -11,8 +11,6 @@ mdx:
 type JobCompletionRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:4395](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4395)
-
 ## Properties
 
 ### result?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:4395](https://github.com/camunda/orchestration-clu
 ```ts
 optional result?: JobResult;
 ```
-
-Defined in: [gen/types.gen.ts:4402](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4402)
 
 ---
 
@@ -34,7 +30,5 @@ optional variables?:
 }
   | null;
 ```
-
-Defined in: [gen/types.gen.ts:4399](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4399)
 
 The variables to complete the job with.

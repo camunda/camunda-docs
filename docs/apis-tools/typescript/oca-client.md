@@ -9,7 +9,7 @@ Use the Orchestration Cluster API TypeScript client to connect to Camunda 8, dep
 
 ## About this client
 
-This lightweight package provides focused support for the Orchestration Cluster REST API.
+The `@camunda8/orchestration-cluster-api` package provides focused support for the Orchestration Cluster REST API.
 
 ### When to use this package
 

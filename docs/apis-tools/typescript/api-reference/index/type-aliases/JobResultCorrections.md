@@ -18,8 +18,6 @@ type JobResultCorrections = {
 } | null;
 ```
 
-Defined in: [gen/types.gen.ts:4452](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4452)
-
 JSON object with attributes that were corrected by the worker.
 
 The following attributes can be corrected, additional attributes will be ignored:

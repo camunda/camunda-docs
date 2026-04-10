@@ -11,8 +11,6 @@ mdx:
 type SearchUserTaskEffectiveVariablesData = object;
 ```
 
-Defined in: [gen/types.gen.ts:16351](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16351)
-
 ## Properties
 
 ### body?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:16351](https://github.com/camunda/orchestration-cl
 ```ts
 optional body?: object;
 ```
-
-Defined in: [gen/types.gen.ts:16356](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16356)
 
 User task effective variable search query request. Uses offset-based pagination only.
 
@@ -57,8 +53,6 @@ Sort field criteria.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:16376](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16376)
-
 #### userTaskKey
 
 ```ts
@@ -75,8 +69,6 @@ The key of the user task.
 optional query?: object;
 ```
 
-Defined in: [gen/types.gen.ts:16382](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16382)
-
 #### truncateValues?
 
 ```ts
@@ -92,5 +84,3 @@ When true (default), long variable values in the response are truncated. When fa
 ```ts
 url: "/user-tasks/{userTaskKey}/effective-variables/search";
 ```
-
-Defined in: [gen/types.gen.ts:16388](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L16388)

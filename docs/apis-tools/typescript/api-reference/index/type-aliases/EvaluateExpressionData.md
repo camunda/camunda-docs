@@ -11,8 +11,6 @@ mdx:
 type EvaluateExpressionData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10553](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10553)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:10553](https://github.com/camunda/orchestration-cl
 ```ts
 body: ExpressionEvaluationRequest;
 ```
-
-Defined in: [gen/types.gen.ts:10554](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10554)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:10554](https://github.com/camunda/orchestration-cl
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10555](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10555)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:10555](https://github.com/camunda/orchestration-cl
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10556](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10556)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:10556](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/expression/evaluation";
 ```
-
-Defined in: [gen/types.gen.ts:10557](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10557)
