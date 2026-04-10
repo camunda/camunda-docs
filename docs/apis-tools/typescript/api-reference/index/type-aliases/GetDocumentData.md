@@ -11,8 +11,6 @@ mdx:
 type GetDocumentData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10239](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10239)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:10239](https://github.com/camunda/orchestration-cl
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10240](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10240)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:10240](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:10241](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10241)
 
 #### documentId
 
@@ -48,8 +42,6 @@ The ID of the document to download.
 ```ts
 optional query?: object;
 ```
-
-Defined in: [gen/types.gen.ts:10247](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10247)
 
 #### contentHash?
 
@@ -74,5 +66,3 @@ The ID of the document store to download the document from.
 ```ts
 url: "/documents/{documentId}";
 ```
-
-Defined in: [gen/types.gen.ts:10258](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10258)

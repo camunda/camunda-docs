@@ -11,7 +11,7 @@ Based on a set of lint rules, Web Modeler continuously validates implementation 
 ![error panel](../img/diagram-errors/error-panel.png)
 
 :::note
-An error is shown if any process ID, decision ID, or form ID is more than 255 characters in length. To resolve this error, check and shorten any IDs that exceed this character limit.
+An error is shown if any process ID, decision ID, or form ID exceeds the supported length for the target environment. To avoid backend-specific deployment problems, keep those IDs short and consistent with the limits of the cluster you plan to deploy to.
 :::
 
 ### Camunda version selection

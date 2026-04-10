@@ -11,8 +11,6 @@ mdx:
 type GetElementInstanceErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:10423](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10423)
-
 ## Properties
 
 ### 400
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:10423](https://github.com/camunda/orchestration-cl
 ```ts
 400: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:10427](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10427)
 
 The provided data is not valid.
 
@@ -33,8 +29,6 @@ The provided data is not valid.
 401: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10431](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10431)
-
 The request lacks valid authentication credentials.
 
 ---
@@ -44,8 +38,6 @@ The request lacks valid authentication credentials.
 ```ts
 403: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:10435](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10435)
 
 Forbidden. The request is not allowed.
 
@@ -57,8 +49,6 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:10441](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10441)
-
 The element instance with the given key was not found.
 More details are provided in the response body.
 
@@ -69,7 +59,5 @@ More details are provided in the response body.
 ```ts
 500: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:10445](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10445)
 
 An internal error occurred while processing the request.

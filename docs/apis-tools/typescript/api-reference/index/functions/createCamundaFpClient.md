@@ -11,8 +11,6 @@ mdx:
 function createCamundaFpClient(options?): CamundaFpClient;
 ```
 
-Defined in: [fp-ts.ts:91](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/fp-ts.ts#L91)
-
 **`Experimental`**
 
 This feature under development and is not guaranteed to be fully tested or stable.

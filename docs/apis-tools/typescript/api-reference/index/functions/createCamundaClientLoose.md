@@ -11,8 +11,6 @@ mdx:
 function createCamundaClientLoose(...args): object;
 ```
 
-Defined in: [loose.ts:42](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/loose.ts#L42)
-
 Create a client where all branded key types are widened to string.
 Use when integrating with external systems or when dynamic string keys are common and brand friction is unwanted.
 For maximum type safety prefer the strict createCamundaClient.

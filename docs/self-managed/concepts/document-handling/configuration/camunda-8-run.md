@@ -17,7 +17,7 @@ If no storage configuration is provided, the default document storage is **in-me
 
 To change this to a different storage method, use the environment variables in the sections below. No additional configuration is required for the **in-memory** storage.
 
-To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `inmemory`, `gcp` (for Google Cloud Platform), and `local` (for local storage).
+To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `inmemory`, `gcp` (for Google Cloud Platform), `azure` (for Azure Blob Storage), and `local` (for local storage).
 
 ## Storage options
 
@@ -25,6 +25,7 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 [
 {label: 'AWS', value: 'aws' },
 {label: 'GCP', value: 'gcp' },
+{label: 'Azure', value: 'azure' },
 {label: 'In-memory', value: 'in-memory' },
 {label: 'Local', value: 'local' },
 ]}>
@@ -106,6 +107,50 @@ To ensure seamless integration and functionality of document handling with GCP s
 | `storage.objects.update`       | This permission enables the API client to update contents and metadata of existing objects within a bucket.                                                                                                    |
 | `storage.objects.delete`       | This permission grants the API client the ability to delete objects from a bucket.                                                                                                                             |
 | `iam.serviceAccounts.signBlob` | This permission allows the service account to sign data as part of the process to create secure, signed URLs for accessing uploaded documents.                                                                 |
+
+</TabItem>
+
+<TabItem value='azure'>
+
+By using **external cloud file bucket storage** with [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs), documents can be stored in a secure and scalable way.
+
+Azure Blob Storage supports two authentication methods: connection string and DefaultAzureCredential (Managed Identity).
+
+#### Prerequisites
+
+- An Azure Storage account with a Blob container.
+- For connection string authentication: The connection string from the Azure portal (**Settings > Access keys**).
+- For Managed Identity/DefaultAzureCredential authentication: The `Storage Blob Data Contributor` RBAC role assigned on the storage account.
+
+| Store variable                           | Required    | Description                                                                                                                             |
+| ---------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_AZURE_CLASS`             | Yes         | `io.camunda.document.store.azure.AzureBlobDocumentStoreProvider`                                                                        |
+| `DOCUMENT_STORE_AZURE_CONTAINER`         | Yes         | Name of the Azure Blob Storage container.                                                                                               |
+| `DOCUMENT_STORE_AZURE_CONNECTION_STRING` | Conditional | Azure Storage connection string. Required unless using DefaultAzureCredential.                                                          |
+| `DOCUMENT_STORE_AZURE_ENDPOINT`          | Conditional | Storage account endpoint (e.g. `https://myaccount.blob.core.windows.net`). Required when using DefaultAzureCredential/Managed Identity. |
+| `DOCUMENT_STORE_AZURE_CONTAINER_PATH`    | No          | Optional path/prefix within the container.                                                                                              |
+
+**Example (connection string):**
+
+```
+DOCUMENT_STORE_AZURE_CLASS=io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
+DOCUMENT_STORE_AZURE_CONTAINER=my-container
+DOCUMENT_STORE_AZURE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=...;EndpointSuffix=core.windows.net
+DOCUMENT_DEFAULT_STORE_ID=azure
+```
+
+**Example (DefaultAzureCredential/Managed Identity):**
+
+```
+DOCUMENT_STORE_AZURE_CLASS=io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
+DOCUMENT_STORE_AZURE_CONTAINER=my-container
+DOCUMENT_STORE_AZURE_ENDPOINT=https://myaccount.blob.core.windows.net
+DOCUMENT_DEFAULT_STORE_ID=azure
+```
+
+## Azure API client permission requirements
+
+To ensure seamless integration and functionality of document handling with Azure Blob Storage, the identity used must be assigned the `Storage Blob Data Contributor` RBAC role on the storage account.
 
 </TabItem>
 

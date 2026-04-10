@@ -11,8 +11,6 @@ mdx:
 type DecisionDefinitionFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:1453](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1453)
-
 Decision definition search filter.
 
 ## Properties
@@ -22,8 +20,6 @@ Decision definition search filter.
 ```ts
 optional decisionDefinitionId?: DecisionDefinitionId;
 ```
-
-Defined in: [gen/types.gen.ts:1457](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1457)
 
 The DMN ID of the decision definition.
 
@@ -35,8 +31,6 @@ The DMN ID of the decision definition.
 optional decisionDefinitionKey?: DecisionDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:1484](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1484)
-
 The assigned key, which acts as a unique identifier for this decision definition.
 
 ---
@@ -46,8 +40,6 @@ The assigned key, which acts as a unique identifier for this decision definition
 ```ts
 optional decisionRequirementsId?: string;
 ```
-
-Defined in: [gen/types.gen.ts:1476](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1476)
 
 the DMN ID of the decision requirements graph that the decision definition is part of.
 
@@ -59,8 +51,6 @@ the DMN ID of the decision requirements graph that the decision definition is pa
 optional decisionRequirementsKey?: DecisionRequirementsKey;
 ```
 
-Defined in: [gen/types.gen.ts:1488](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1488)
-
 The assigned key of the decision requirements graph that the decision definition is part of.
 
 ---
@@ -70,8 +60,6 @@ The assigned key of the decision requirements graph that the decision definition
 ```ts
 optional decisionRequirementsName?: string;
 ```
-
-Defined in: [gen/types.gen.ts:1492](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1492)
 
 The DMN name of the decision requirements that the decision definition is part of.
 
@@ -83,8 +71,6 @@ The DMN name of the decision requirements that the decision definition is part o
 optional decisionRequirementsVersion?: number;
 ```
 
-Defined in: [gen/types.gen.ts:1496](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1496)
-
 The assigned version of the decision requirements that the decision definition is part of.
 
 ---
@@ -94,8 +80,6 @@ The assigned version of the decision requirements that the decision definition i
 ```ts
 optional isLatestVersion?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:1468](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1468)
 
 Whether to only return the latest version of each decision definition.
 When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.
@@ -109,8 +93,6 @@ The response contains no `startCursor` in the `page`, and requests ignore the `f
 optional name?: string;
 ```
 
-Defined in: [gen/types.gen.ts:1461](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1461)
-
 The DMN name of the decision definition.
 
 ---
@@ -121,8 +103,6 @@ The DMN name of the decision definition.
 optional tenantId?: TenantId;
 ```
 
-Defined in: [gen/types.gen.ts:1480](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1480)
-
 The tenant ID of the decision definition.
 
 ---
@@ -132,7 +112,5 @@ The tenant ID of the decision definition.
 ```ts
 optional version?: number;
 ```
-
-Defined in: [gen/types.gen.ts:1472](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L1472)
 
 The assigned version of the decision definition.

@@ -11,8 +11,6 @@ mdx:
 type AssignRoleToTenantData = object;
 ```
 
-Defined in: [gen/types.gen.ts:15547](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15547)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:15547](https://github.com/camunda/orchestration-cl
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:15548](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15548)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:15548](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:15549](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15549)
 
 #### roleId
 
@@ -57,8 +51,6 @@ The unique identifier of the tenant.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:15559](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15559)
-
 ---
 
 ### url
@@ -66,5 +58,3 @@ Defined in: [gen/types.gen.ts:15559](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/tenants/{tenantId}/roles/{roleId}";
 ```
-
-Defined in: [gen/types.gen.ts:15560](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L15560)

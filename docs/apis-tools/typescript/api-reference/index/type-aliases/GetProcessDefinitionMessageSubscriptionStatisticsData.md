@@ -11,8 +11,6 @@ mdx:
 type GetProcessDefinitionMessageSubscriptionStatisticsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12644](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12644)
-
 ## Properties
 
 ### body?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:12644](https://github.com/camunda/orchestration-cl
 ```ts
 optional body?: ProcessDefinitionMessageSubscriptionStatisticsQuery;
 ```
-
-Defined in: [gen/types.gen.ts:12645](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12645)
 
 ---
 
@@ -31,8 +27,6 @@ Defined in: [gen/types.gen.ts:12645](https://github.com/camunda/orchestration-cl
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:12646](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12646)
-
 ---
 
 ### query?
@@ -41,8 +35,6 @@ Defined in: [gen/types.gen.ts:12646](https://github.com/camunda/orchestration-cl
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:12647](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12647)
-
 ---
 
 ### url
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:12647](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/process-definitions/statistics/message-subscriptions";
 ```
-
-Defined in: [gen/types.gen.ts:12648](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L12648)

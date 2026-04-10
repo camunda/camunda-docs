@@ -20,7 +20,7 @@ For example, if a template does not contain a property object with the binding t
 the template user will not be able to define an input mapping for the element once the template is applied.
 
 :::info
-Some properties &mdash; such as execution listeners, task listeners, element documentation, and multi-instance configurations &mdash; cannot be set by element templates.
+Some properties &mdash; such as element documentation and multi-instance configurations &mdash; cannot be set by element templates.
 They are situational and require knowledge of the process context to be used.
 As they are never part of any element template, users can configure them independently of an applied template.
 :::
@@ -50,7 +50,7 @@ The property object keys are divided into required and optional keys:
 - [`condition : Object`](#showing-properties-conditionally-condition): A condition that controls when the property is active and visible.
 - `id : String`: An identifier used to reference the property in conditional properties.
 - [`editable : Boolean`](#preventing-edits-editable): Controls whether the property is editable in the properties panel.
-- [`entriesVisible : Boolean`](#displaying-all-entries-entriesvisible): Controls whether default properties are shown alongside properties defined in the element template.
+- [`entriesVisible : Boolean | Object`](#control-visibility-of-default-properties-panel-entries-entriesvisible): Controls whether default properties are shown alongside properties defined in the element template.
 
 Not all keys and values are compatible with each other.
 Some keys or values require other keys to be set to a certain value, even if the key is marked as optional above.
@@ -285,7 +285,7 @@ Each page on an element contains a description of its properties and an example 
 
 :::info
 If a property cannot be set via any of the bindings described below, it cannot be set by an element template.
-For example, execution listeners and multi-instance configurations cannot be set by an element template.
+For example, multi-instance configurations cannot be set by an element template.
 :::
 
 :::warning
@@ -337,6 +337,12 @@ Configures an [output mapping](../../../concepts/variables/#output-mappings).
   }
 }
 ```
+
+:::tip Dynamic output mappings
+You can let template users create their own output mappings by setting [`entriesVisible.outputs`](#control-specific-entry-visibility) to `true`. This shows the standard output mapping section in the properties panel, where users can add, edit, and remove output mappings.
+
+You can't combine template-defined `zeebe:output` bindings with `entriesVisible.outputs = true`. Defining `zeebe:output` bindings in a template with dynamic output mappings enabled is restricted.
+:::
 
 ### Header: `zeebe:taskHeader`
 
@@ -1069,6 +1075,94 @@ The `zeebe:adHoc` binding can only be used with elements of type `bpmn:AdHocSubP
 The `outputCollection` property defines where ad-hoc execution results are collected, while `outputElement` specifies the structure of each result item.
 :::
 
+### Execution listener: `zeebe:executionListener`
+
+| **Binding `type`**         | `zeebe:executionListener`                                                                                                                          |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `Hidden`                                                                                                                                           |
+| **Binding parameters**     | `eventType`: The event type of the listener. Supported values: `start`, `end`.<br />`retries`_(Optional)_: The number of retries for the listener. |
+| **Mapping result**         | `<zeebe:executionListener eventType="[eventType]" type="[value]" retries="[retries]" />`                                                           |
+
+With the `zeebe:executionListener` binding, you can configure [execution listeners](/components/concepts/execution-listeners.md) on any BPMN element that supports them.
+The `value` (or `generatedValue`) of the property sets the listener job type.
+
+```json
+{
+  ...,
+  "entriesVisible": {
+    "executionListeners": false
+  },
+  "properties": [
+    {
+      "type": "Hidden",
+      "value": "my-start-listener-type",
+      "binding": {
+        "type": "zeebe:executionListener",
+        "eventType": "start"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "my-end-listener-type",
+      "binding": {
+        "type": "zeebe:executionListener",
+        "eventType": "end",
+        "retries": "3"
+      }
+    }
+  ]
+}
+```
+
+:::note
+This binding only supports property `type` set to `Hidden`. You can't configure listeners through the properties panel; the template must fully define them.
+
+When using this binding, set `entriesVisible` with `executionListeners` to `false`. Combining user-defined and template-defined execution listeners isn't supported.
+:::
+
+### Task listener: `zeebe:taskListener`
+
+| **Binding `type`**         | `zeebe:taskListener`                                                                                                                                                                               |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Valid property `type`s** | `Hidden`                                                                                                                                                                                           |
+| **Binding parameters**     | `eventType`: The event type of the listener. Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.<br />`retries`_(Optional)_: The number of retries for the listener. |
+| **Mapping result**         | `<zeebe:taskListener eventType="[eventType]" type="[value]" retries="[retries]" />`                                                                                                                |
+
+With the `zeebe:taskListener` binding, you can configure [task listeners](/components/concepts/user-task-listeners.md) on user tasks.
+The `value` (or `generatedValue`) of the property sets the listener job type.
+
+```json
+{
+  ...,
+  "appliesTo": [ "bpmn:UserTask" ],
+  "properties": [
+    {
+      "type": "Hidden",
+      "value": "my-completing-listener-type",
+      "binding": {
+        "type": "zeebe:taskListener",
+        "eventType": "completing"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "my-creating-listener-type",
+      "binding": {
+        "type": "zeebe:taskListener",
+        "eventType": "creating",
+        "retries": "3"
+      }
+    }
+  ]
+}
+```
+
+:::note
+This binding only applies to elements of type `bpmn:UserTask`.
+
+This binding only supports property `type` set to `Hidden`. You can't configure listeners through the properties panel; the template must fully define them.
+:::
+
 ## Setting a task implementation
 
 The following tasks support multiple implementation types:
@@ -1314,12 +1408,44 @@ You can prevent edits by setting the `editable` property to `false`. The propert
 }
 ```
 
-## Displaying all entries: `entriesVisible`
+## Control visibility of default properties panel entries: `entriesVisible`
 
-By default, the element template defines the visible entries in the properties panel. All other property controls are hidden.
-To bring all the default entries back, use the `entriesVisible` property.
-If this key is set to `true`, the default properties will be listed below the element template properties in the properties panel.
-You should generally avoid using this configuration, as it removes the abstraction introduced by the template.
+By default, an applied element template causes most properties panel sections to be hidden — element template-defined bindings take precedence over standard groups and entries.
+This behavior can be customized through the `entriesVisible` property.
+
+### Control specific entry visibility
+
+By passing an object to `entriesVisible`, you can override the default display of certain properties panel sections. The key of that object is the ID of a section, the value is a boolean that defines the visibility status. The table below lists what entries may be customized and their default visibility status:
+
+| Key                  | Description                 | Default visible |
+| :------------------- | :-------------------------- | :-------------- |
+| `outputs`            | Output mapping section      | `false`         |
+| `executionListeners` | Execution listeners section | `true`          |
+| `taskListeners`      | Task listeners section      | `false`         |
+
+To show the standard output mapping section, configure your template as shown below:
+
+```json
+[
+  {
+    "name": "Template 1",
+    "id": "sometemplate",
+    "entriesVisible": {
+      "outputs": true
+    },
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "properties": [
+      ...
+    ]
+  }
+]
+```
+
+### Displaying all entries
+
+To show all standard properties panel entries, set `entriesVisible=true`:
 
 ```json
 [
@@ -1337,4 +1463,6 @@ You should generally avoid using this configuration, as it removes the abstracti
 ]
 ```
 
-![Display default entries](./img/entries-visible.png)
+:::warning
+As an element template author, you are responsible for ensuring the default sections opened do not conflict with any bindings defined by the element template.
+:::

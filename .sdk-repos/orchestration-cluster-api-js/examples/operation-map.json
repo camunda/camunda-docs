@@ -10,12 +10,12 @@
     {
       "file": "process-instance.ts",
       "region": "CreateProcessInstanceById",
-      "label": "Create by process definition ID"
+      "label": "By ID"
     },
     {
       "file": "process-instance.ts",
       "region": "CreateProcessInstanceByKey",
-      "label": "Create by process definition key"
+      "label": "By key"
     }
   ],
   "cancelProcessInstance": [
@@ -42,8 +42,8 @@
   "createDeployment": [
     {
       "file": "deployment.ts",
-      "region": "CreateDeployment",
-      "label": "Deploy resources"
+      "region": "DeployResourcesFromFiles",
+      "label": "Deploy resources from files"
     }
   ],
   "deleteResource": [
@@ -57,12 +57,12 @@
     {
       "file": "decision.ts",
       "region": "EvaluateDecisionById",
-      "label": "Evaluate by decision definition ID"
+      "label": "By ID"
     },
     {
       "file": "decision.ts",
       "region": "EvaluateDecisionByKey",
-      "label": "Evaluate by decision definition key"
+      "label": "By key"
     }
   ],
   "getDecisionDefinition": [
@@ -115,10 +115,18 @@
     }
   ],
   "completeJob": [
-    { "file": "job.ts", "region": "CompleteJob", "label": "Complete a job" }
+    {
+      "file": "job.ts",
+      "region": "CompleteJob",
+      "label": "Complete a job"
+    }
   ],
   "failJob": [
-    { "file": "job.ts", "region": "FailJob", "label": "Fail a job with retry" }
+    {
+      "file": "job.ts",
+      "region": "FailJob",
+      "label": "Fail a job with retry"
+    }
   ],
   "correlateMessage": [
     {
@@ -198,7 +206,11 @@
     }
   ],
   "createUser": [
-    { "file": "user.ts", "region": "CreateUser", "label": "Create a user" }
+    {
+      "file": "user.ts",
+      "region": "CreateUser",
+      "label": "Create a user"
+    }
   ],
   "createAdminUser": [
     {
@@ -208,31 +220,67 @@
     }
   ],
   "getUser": [
-    { "file": "user.ts", "region": "GetUser", "label": "Get a user" }
+    {
+      "file": "user.ts",
+      "region": "GetUser",
+      "label": "Get a user"
+    }
   ],
   "searchUsers": [
-    { "file": "user.ts", "region": "SearchUsers", "label": "Search users" }
+    {
+      "file": "user.ts",
+      "region": "SearchUsers",
+      "label": "Search users"
+    }
   ],
   "updateUser": [
-    { "file": "user.ts", "region": "UpdateUser", "label": "Update a user" }
+    {
+      "file": "user.ts",
+      "region": "UpdateUser",
+      "label": "Update a user"
+    }
   ],
   "deleteUser": [
-    { "file": "user.ts", "region": "DeleteUser", "label": "Delete a user" }
+    {
+      "file": "user.ts",
+      "region": "DeleteUser",
+      "label": "Delete a user"
+    }
   ],
   "createGroup": [
-    { "file": "group.ts", "region": "CreateGroup", "label": "Create a group" }
+    {
+      "file": "group.ts",
+      "region": "CreateGroup",
+      "label": "Create a group"
+    }
   ],
   "getGroup": [
-    { "file": "group.ts", "region": "GetGroup", "label": "Get a group" }
+    {
+      "file": "group.ts",
+      "region": "GetGroup",
+      "label": "Get a group"
+    }
   ],
   "searchGroups": [
-    { "file": "group.ts", "region": "SearchGroups", "label": "Search groups" }
+    {
+      "file": "group.ts",
+      "region": "SearchGroups",
+      "label": "Search groups"
+    }
   ],
   "updateGroup": [
-    { "file": "group.ts", "region": "UpdateGroup", "label": "Update a group" }
+    {
+      "file": "group.ts",
+      "region": "UpdateGroup",
+      "label": "Update a group"
+    }
   ],
   "deleteGroup": [
-    { "file": "group.ts", "region": "DeleteGroup", "label": "Delete a group" }
+    {
+      "file": "group.ts",
+      "region": "DeleteGroup",
+      "label": "Delete a group"
+    }
   ],
   "assignUserToGroup": [
     {
@@ -305,19 +353,39 @@
     }
   ],
   "createRole": [
-    { "file": "role.ts", "region": "CreateRole", "label": "Create a role" }
+    {
+      "file": "role.ts",
+      "region": "CreateRole",
+      "label": "Create a role"
+    }
   ],
   "getRole": [
-    { "file": "role.ts", "region": "GetRole", "label": "Get a role" }
+    {
+      "file": "role.ts",
+      "region": "GetRole",
+      "label": "Get a role"
+    }
   ],
   "searchRoles": [
-    { "file": "role.ts", "region": "SearchRoles", "label": "Search roles" }
+    {
+      "file": "role.ts",
+      "region": "SearchRoles",
+      "label": "Search roles"
+    }
   ],
   "updateRole": [
-    { "file": "role.ts", "region": "UpdateRole", "label": "Update a role" }
+    {
+      "file": "role.ts",
+      "region": "UpdateRole",
+      "label": "Update a role"
+    }
   ],
   "deleteRole": [
-    { "file": "role.ts", "region": "DeleteRole", "label": "Delete a role" }
+    {
+      "file": "role.ts",
+      "region": "DeleteRole",
+      "label": "Delete a role"
+    }
   ],
   "assignRoleToUser": [
     {
@@ -411,7 +479,11 @@
     }
   ],
   "getTenant": [
-    { "file": "tenant.ts", "region": "GetTenant", "label": "Get a tenant" }
+    {
+      "file": "tenant.ts",
+      "region": "GetTenant",
+      "label": "Get a tenant"
+    }
   ],
   "searchTenants": [
     {

@@ -1013,7 +1013,7 @@ The Azure Blob Storage connector now supports OAuth2.0 authentication with Micro
 
 The Email connector now supports `noAuth` authentication mode for SMTP. This feature is useful for customers running local mail servers without authentication requirements.
 
-<p class="link-arrow">[Email connector](/components/connectors/out-of-the-box-connectors/email.md)</p>
+<p class="link-arrow">[Email connector](/components/connectors/out-of-the-box-connectors/email-outbound.md)</p>
 
 #### Runtime performance improvements with virtual threads executor (Self-Managed)
 

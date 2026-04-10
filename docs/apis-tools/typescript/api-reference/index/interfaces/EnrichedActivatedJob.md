@@ -7,8 +7,6 @@ mdx:
 
 # Interface: EnrichedActivatedJob
 
-Defined in: [runtime/jobActions.ts:9](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L9)
-
 Enriched job type with convenience methods.
 
 ## Extends
@@ -23,8 +21,6 @@ Enriched job type with convenience methods.
 optional acknowledged?: boolean;
 ```
 
-Defined in: [runtime/jobActions.ts:22](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L22)
-
 Set true once any acknowledgement method is invoked.
 
 ---
@@ -34,8 +30,6 @@ Set true once any acknowledgement method is invoked.
 ```ts
 customHeaders: object;
 ```
-
-Defined in: [gen/types.gen.ts:4028](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4028)
 
 A set of custom headers defined during modelling; returned as a serialized JSON document.
 
@@ -59,8 +53,6 @@ ActivatedJobResult.customHeaders;
 deadline: number;
 ```
 
-Defined in: [gen/types.gen.ts:4042](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4042)
-
 When the job can be activated again, sent as a UNIX epoch timestamp.
 
 #### Inherited from
@@ -76,8 +68,6 @@ ActivatedJobResult.deadline;
 ```ts
 elementId: ElementId;
 ```
-
-Defined in: [gen/types.gen.ts:4024](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4024)
 
 The associated task element ID.
 
@@ -95,8 +85,6 @@ ActivatedJobResult.elementId;
 elementInstanceKey: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:4068](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4068)
-
 The element instance key of the task.
 
 #### Inherited from
@@ -112,8 +100,6 @@ ActivatedJobResult.elementInstanceKey;
 ```ts
 jobKey: JobKey;
 ```
-
-Defined in: [gen/types.gen.ts:4056](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4056)
 
 The key, a unique identifier for the job.
 
@@ -131,8 +117,6 @@ ActivatedJobResult.jobKey;
 kind: JobKindEnum;
 ```
 
-Defined in: [gen/types.gen.ts:4069](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4069)
-
 #### Inherited from
 
 ```ts
@@ -146,8 +130,6 @@ ActivatedJobResult.kind;
 ```ts
 listenerEventType: JobListenerEventTypeEnum;
 ```
-
-Defined in: [gen/types.gen.ts:4070](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4070)
 
 #### Inherited from
 
@@ -163,8 +145,6 @@ ActivatedJobResult.listenerEventType;
 log: Logger;
 ```
 
-Defined in: [runtime/jobActions.ts:20](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L20)
-
 ---
 
 ### modifyJobTimeout
@@ -172,8 +152,6 @@ Defined in: [runtime/jobActions.ts:20](https://github.com/camunda/orchestration-
 ```ts
 modifyJobTimeout: (__namedParameters) => Promise<void>;
 ```
-
-Defined in: [runtime/jobActions.ts:18](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L18)
 
 Extend the timeout for the job by setting a new timeout
 
@@ -197,8 +175,6 @@ Extend the timeout for the job by setting a new timeout
 modifyRetries: (__namedParameters) => Promise<void>;
 ```
 
-Defined in: [runtime/jobActions.ts:19](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L19)
-
 #### Parameters
 
 ##### \_\_namedParameters
@@ -219,8 +195,6 @@ Defined in: [runtime/jobActions.ts:19](https://github.com/camunda/orchestration-
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:4016](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4016)
-
 The bpmn process ID of the job's process definition.
 
 #### Inherited from
@@ -236,8 +210,6 @@ ActivatedJobResult.processDefinitionId;
 ```ts
 processDefinitionKey: ProcessDefinitionKey;
 ```
-
-Defined in: [gen/types.gen.ts:4064](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4064)
 
 The key of the job's process definition.
 
@@ -255,8 +227,6 @@ ActivatedJobResult.processDefinitionKey;
 processDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:4020](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4020)
-
 The version of the job's process definition.
 
 #### Inherited from
@@ -272,8 +242,6 @@ ActivatedJobResult.processDefinitionVersion;
 ```ts
 processInstanceKey: ProcessInstanceKey;
 ```
-
-Defined in: [gen/types.gen.ts:4060](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4060)
 
 The job's process instance key.
 
@@ -291,8 +259,6 @@ ActivatedJobResult.processInstanceKey;
 retries: number;
 ```
 
-Defined in: [gen/types.gen.ts:4038](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4038)
-
 The amount of retries left to this job (should always be positive).
 
 #### Inherited from
@@ -308,8 +274,6 @@ ActivatedJobResult.retries;
 ```ts
 rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:4084](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4084)
 
 The key of the root process instance. The root process instance is the top-level
 ancestor in the process instance hierarchy. This field is only present for data
@@ -329,8 +293,6 @@ ActivatedJobResult.rootProcessInstanceKey;
 tags: TagSet;
 ```
 
-Defined in: [gen/types.gen.ts:4077](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4077)
-
 #### Inherited from
 
 ```ts
@@ -344,8 +306,6 @@ ActivatedJobResult.tags;
 ```ts
 tenantId: TenantId;
 ```
-
-Defined in: [gen/types.gen.ts:4052](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4052)
 
 The ID of the tenant that owns the job.
 
@@ -363,8 +323,6 @@ ActivatedJobResult.tenantId;
 type: string;
 ```
 
-Defined in: [gen/types.gen.ts:4012](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4012)
-
 The type of the job (should match what was requested).
 
 #### Inherited from
@@ -380,8 +338,6 @@ ActivatedJobResult.type;
 ```ts
 userTask: UserTaskProperties | null;
 ```
-
-Defined in: [gen/types.gen.ts:4076](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4076)
 
 User task properties, if the job is a user task.
 This is `null` if the job is not a user task.
@@ -399,8 +355,6 @@ ActivatedJobResult.userTask;
 ```ts
 variables: object;
 ```
-
-Defined in: [gen/types.gen.ts:4046](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4046)
 
 All variables visible to the task scope, computed at activation time.
 
@@ -424,8 +378,6 @@ ActivatedJobResult.variables;
 worker: string;
 ```
 
-Defined in: [gen/types.gen.ts:4034](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4034)
-
 The name of the worker which activated this job.
 
 #### Inherited from
@@ -442,8 +394,6 @@ ActivatedJobResult.worker;
 cancelWorkflow(): Promise<"JOB_ACTION_RECEIPT">;
 ```
 
-Defined in: [runtime/jobActions.ts:13](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L13)
-
 #### Returns
 
 `Promise`\<`"JOB_ACTION_RECEIPT"`\>
@@ -455,8 +405,6 @@ Defined in: [runtime/jobActions.ts:13](https://github.com/camunda/orchestration-
 ```ts
 complete(variables?, result?): Promise<"JOB_ACTION_RECEIPT">;
 ```
-
-Defined in: [runtime/jobActions.ts:10](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L10)
 
 #### Parameters
 
@@ -478,8 +426,6 @@ Defined in: [runtime/jobActions.ts:10](https://github.com/camunda/orchestration-
 error(error): Promise<"JOB_ACTION_RECEIPT">;
 ```
 
-Defined in: [runtime/jobActions.ts:12](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L12)
-
 #### Parameters
 
 ##### error
@@ -498,8 +444,6 @@ Defined in: [runtime/jobActions.ts:12](https://github.com/camunda/orchestration-
 fail(body): Promise<"JOB_ACTION_RECEIPT">;
 ```
 
-Defined in: [runtime/jobActions.ts:11](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L11)
-
 #### Parameters
 
 ##### body
@@ -517,8 +461,6 @@ Defined in: [runtime/jobActions.ts:11](https://github.com/camunda/orchestration-
 ```ts
 ignore(): Promise<"JOB_ACTION_RECEIPT">;
 ```
-
-Defined in: [runtime/jobActions.ts:14](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobActions.ts#L14)
 
 #### Returns
 

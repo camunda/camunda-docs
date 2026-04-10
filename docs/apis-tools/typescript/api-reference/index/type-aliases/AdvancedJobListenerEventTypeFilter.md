@@ -11,8 +11,6 @@ mdx:
 type AdvancedJobListenerEventTypeFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4598](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4598)
-
 Advanced filter
 
 Advanced JobListenerEventTypeEnum filter.
@@ -25,8 +23,6 @@ Advanced JobListenerEventTypeEnum filter.
 optional $eq?: JobListenerEventTypeEnum;
 ```
 
-Defined in: [gen/types.gen.ts:4602](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4602)
-
 Checks for equality with the provided value.
 
 ---
@@ -36,8 +32,6 @@ Checks for equality with the provided value.
 ```ts
 optional $exists?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:4610](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4610)
 
 Checks if the current property exists.
 
@@ -49,8 +43,6 @@ Checks if the current property exists.
 optional $in?: JobListenerEventTypeEnum[];
 ```
 
-Defined in: [gen/types.gen.ts:4614](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4614)
-
 Checks if the property matches any of the provided values.
 
 ---
@@ -61,8 +53,6 @@ Checks if the property matches any of the provided values.
 optional $like?: LikeFilter;
 ```
 
-Defined in: [gen/types.gen.ts:4615](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4615)
-
 ---
 
 ### $neq?
@@ -70,7 +60,5 @@ Defined in: [gen/types.gen.ts:4615](https://github.com/camunda/orchestration-clu
 ```ts
 optional $neq?: JobListenerEventTypeEnum;
 ```
-
-Defined in: [gen/types.gen.ts:4606](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4606)
 
 Checks for inequality with the provided value.

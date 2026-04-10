@@ -11,8 +11,6 @@ mdx:
 type SearchUsersForGroupData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11409](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11409)
-
 ## Properties
 
 ### body?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:11409](https://github.com/camunda/orchestration-cl
 ```ts
 optional body?: SearchQueryRequest & object;
 ```
-
-Defined in: [gen/types.gen.ts:11410](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11410)
 
 #### Type Declaration
 
@@ -41,8 +37,6 @@ Sort field criteria.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:11422](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11422)
-
 #### groupId
 
 ```ts
@@ -59,8 +53,6 @@ The group ID.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:11428](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11428)
-
 ---
 
 ### url
@@ -68,5 +60,3 @@ Defined in: [gen/types.gen.ts:11428](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/groups/{groupId}/users/search";
 ```
-
-Defined in: [gen/types.gen.ts:11429](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L11429)
