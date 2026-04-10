@@ -76,6 +76,30 @@ async def async_client_example() -> None:
 # endregion AsyncClient
 
 
+# region Close
+def close_example() -> None:
+    client = CamundaClient()
+
+    topology = client.get_topology()
+    print(f"Cluster size: {topology.cluster_size}")
+
+    # Explicitly close the underlying HTTP client when not using a context manager
+    client.close()
+# endregion Close
+
+
+# region Aclose
+async def aclose_example() -> None:
+    client = CamundaAsyncClient()
+
+    topology = await client.get_topology()
+    print(f"Cluster size: {topology.cluster_size}")
+
+    # Explicitly close the underlying async HTTP client
+    await client.aclose()
+# endregion Aclose
+
+
 # region CustomLogger
 def custom_logger_example() -> None:
     my_logger = logging.getLogger("my_app.camunda")
