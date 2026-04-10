@@ -2,13 +2,14 @@
 id: migrate-component-apis
 title: Migrate Component V1 APIs
 sidebar_label: "Component V1 APIs"
-description: "Making necessary changes to continue using Camunda's V1 component REST APIs."
+description: "Learn about the changes required to continue using Camunda's V1 component REST APIs."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-Learn about the changes required to continue using Camunda's V1 component REST APIs.
+<PageDescription />
 
 :::note Have you already migrated?
 You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
