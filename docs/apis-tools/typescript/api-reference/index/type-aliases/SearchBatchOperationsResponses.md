@@ -11,8 +11,6 @@ mdx:
 type SearchBatchOperationsResponses = object;
 ```
 
-Defined in: [gen/types.gen.ts:8860](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8860)
-
 ## Properties
 
 ### 200
@@ -20,7 +18,5 @@ Defined in: [gen/types.gen.ts:8860](https://github.com/camunda/orchestration-clu
 ```ts
 200: BatchOperationSearchQueryResult;
 ```
-
-Defined in: [gen/types.gen.ts:8864](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8864)
 
 The batch operation search result.

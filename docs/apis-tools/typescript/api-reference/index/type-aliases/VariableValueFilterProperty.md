@@ -11,8 +11,6 @@ mdx:
 type VariableValueFilterProperty = object;
 ```
 
-Defined in: [gen/types.gen.ts:8187](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8187)
-
 ## Properties
 
 ### name
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:8187](https://github.com/camunda/orchestration-clu
 ```ts
 name: string;
 ```
-
-Defined in: [gen/types.gen.ts:8191](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8191)
 
 Name of the variable.
 
@@ -32,8 +28,6 @@ Name of the variable.
 ```ts
 value: StringFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:8199](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8199)
 
 The value of the variable.
 Variable values in filters need to be in serialized JSON format. For example, a variable

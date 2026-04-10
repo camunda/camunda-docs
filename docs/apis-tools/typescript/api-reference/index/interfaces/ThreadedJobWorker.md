@@ -7,8 +7,6 @@ mdx:
 
 # Interface: ThreadedJobWorker
 
-Defined in: [runtime/threadedJobWorker.ts:106](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L106)
-
 A job worker that runs handler logic in a shared pool of worker_threads,
 keeping the main Node.js event loop free for polling and I/O.
 
@@ -26,8 +24,6 @@ and threads cache loaded handlers by module path.
 get activeJobs(): number;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:148](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L148)
-
 ##### Returns
 
 `number`
@@ -41,8 +37,6 @@ Defined in: [runtime/threadedJobWorker.ts:148](https://github.com/camunda/orches
 ```ts
 get busyThreads(): number;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:159](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L159)
 
 Number of threads currently processing a job (across all workers).
 
@@ -60,8 +54,6 @@ Number of threads currently processing a job (across all workers).
 get name(): string;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:145](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L145)
-
 ##### Returns
 
 `string`
@@ -75,8 +67,6 @@ Defined in: [runtime/threadedJobWorker.ts:145](https://github.com/camunda/orches
 ```ts
 get poolSize(): number;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:155](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L155)
 
 Number of threads in the shared pool.
 
@@ -94,8 +84,6 @@ Number of threads in the shared pool.
 get ready(): Promise<void>;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:163](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L163)
-
 Resolves when the shared thread pool has finished initialising.
 
 ##### Returns
@@ -112,8 +100,6 @@ Resolves when the shared thread pool has finished initialising.
 get stopped(): boolean;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:151](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L151)
-
 ##### Returns
 
 `boolean`
@@ -126,8 +112,6 @@ Defined in: [runtime/threadedJobWorker.ts:151](https://github.com/camunda/orches
 start(): void;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:167](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L167)
-
 #### Returns
 
 `void`
@@ -139,8 +123,6 @@ Defined in: [runtime/threadedJobWorker.ts:167](https://github.com/camunda/orches
 ```ts
 stop(): void;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:181](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L181)
 
 #### Returns
 
@@ -156,8 +138,6 @@ stopGracefully(opts?): Promise<{
   timedOut: boolean;
 }>;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:195](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L195)
 
 #### Parameters
 

@@ -11,8 +11,6 @@ mdx:
 type CreateDocumentsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10150](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10150)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:10150](https://github.com/camunda/orchestration-cl
 ```ts
 body: object;
 ```
-
-Defined in: [gen/types.gen.ts:10151](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10151)
 
 #### files
 
@@ -47,8 +43,6 @@ Optional JSON array of metadata object whose index aligns with each file entry. 
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10162](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10162)
-
 ---
 
 ### query?
@@ -56,8 +50,6 @@ Defined in: [gen/types.gen.ts:10162](https://github.com/camunda/orchestration-cl
 ```ts
 optional query?: object;
 ```
-
-Defined in: [gen/types.gen.ts:10163](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10163)
 
 #### storeId?
 
@@ -74,5 +66,3 @@ The ID of the document store to upload the documents to. Currently, only a singl
 ```ts
 url: "/documents/batch";
 ```
-
-Defined in: [gen/types.gen.ts:10169](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10169)

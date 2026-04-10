@@ -37,6 +37,10 @@ These identities serve different purposes: one controls access to process execut
 Understanding which identity is required for a given action helps you apply the correct access control policies.
 :::
 
+:::note
+Identity object identifiers and names are limited to **256 characters**. This limit applies independently of the secondary storage backend used by the Orchestration Cluster.
+:::
+
 ## Identity provider (IdP) integration
 
 In production setups, both the Orchestration Cluster Admin and the Management Identity can integrate with an external OIDC IdP (such as Entra ID) for unified user management, single sign-on (SSO), and consistent security policies.

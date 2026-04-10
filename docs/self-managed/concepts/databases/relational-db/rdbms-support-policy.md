@@ -173,7 +173,13 @@ When using RDBMS (including as secondary storage), be aware of the following lim
 
 ### ID size limits
 
-Identifiers such as process definition IDs, decision IDs, and usernames are limited to **255 characters**. Storing significantly longer values may result in errors. This behavior may change in future releases (tracked in [#36717](https://github.com/camunda/camunda/issues/36717)).
+Most user-defined strings exported to RDBMS-backed secondary storage are limited to **256 characters**. This includes BPMN and DMN IDs and names, job worker types, variable names, resource names, form IDs, and message names or correlation keys.
+
+If a DMN rule does not define its own ID, Camunda generates one from the decision ID, decision version, and rule index. In that case, keep the decision ID at **235 characters or fewer** so the generated rule ID stays within the RDBMS limit.
+
+Identity objects are also limited to **256 characters**, regardless of which secondary storage backend the Orchestration Cluster uses.
+
+For the full backend comparison, including the Elasticsearch/OpenSearch limit of 32,768 characters and details on how length is counted, see [string length limits for user-defined values](/self-managed/concepts/databases/overview.md#string-length-limits-for-user-defined-values).
 
 ### Variable comparison limits
 

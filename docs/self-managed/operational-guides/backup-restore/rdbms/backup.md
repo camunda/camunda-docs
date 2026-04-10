@@ -24,12 +24,6 @@ import TabItem from '@theme/TabItem';
 
 Back up your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, and Tasklist) when using a relational database management system (RDBMS) as secondary storage.
 
-:::note
-This procedure is part of the **first phase of Decoupled Continuous Backups** and covers only Orchestration cluster components: **Zeebe**, **Operate** and **Tasklist**. It does **not** support backup or restore of **Optimize** records.
-
-If you are using Optimize, you must continue to use the [standard Camunda backup and restore procedure](../backup-and-restore.md) for Orchestration cluster data. Failing to do so may result in data loss or inconsistency for Optimize.
-:::
-
 ## Prerequisites
 
 The following prerequisites are required before you can create a backup.

@@ -220,6 +220,7 @@
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/monitor-ai-agents",
+            "components/agentic-orchestration/analyze-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"
           ]
@@ -328,6 +329,7 @@
               "items": [
                 "components/camunda-integrations/servicenow/prerequisites",
                 "components/camunda-integrations/servicenow/setup-and-configuration",
+                "components/camunda-integrations/servicenow/camunda-spoke",
                 {
                   "type": "category",
                   "label": "Connectors",

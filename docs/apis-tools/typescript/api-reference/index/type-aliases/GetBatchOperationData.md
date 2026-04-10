@@ -11,8 +11,6 @@ mdx:
 type GetBatchOperationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8869](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8869)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:8869](https://github.com/camunda/orchestration-clu
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8870](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8870)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:8870](https://github.com/camunda/orchestration-clu
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:8871](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8871)
 
 #### batchOperationKey
 
@@ -49,8 +43,6 @@ The key (or operate legacy ID) of the batch operation.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8877](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8877)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:8877](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/batch-operations/{batchOperationKey}";
 ```
-
-Defined in: [gen/types.gen.ts:8878](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8878)

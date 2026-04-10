@@ -11,8 +11,6 @@ mdx:
 type GetAuditLogData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8525](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8525)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:8525](https://github.com/camunda/orchestration-clu
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8526](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8526)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:8526](https://github.com/camunda/orchestration-clu
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:8527](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8527)
 
 #### auditLogKey
 
@@ -49,8 +43,6 @@ The audit log key.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8533](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8533)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:8533](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/audit-logs/{auditLogKey}";
 ```
-
-Defined in: [gen/types.gen.ts:8534](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8534)
