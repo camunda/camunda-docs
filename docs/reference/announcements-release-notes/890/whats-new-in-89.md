@@ -285,7 +285,7 @@ The following usability improvements simplify collaboration and help teams keep 
 ### Improved Self-Managed installation
 
 The Web Modeler system architecture has been simplified to enable easier and smoother installation and configuration of Web Modeler in a Self-Managed deployment.
-The separate `webapp` component has been removed and its functionality is now completely integrated into the `restapi` component.
+The separate `webapp` component has been removed, and its functionality is now completely integrated into the `restapi` component.
 
 This change might require updates to your application configuration.
 
