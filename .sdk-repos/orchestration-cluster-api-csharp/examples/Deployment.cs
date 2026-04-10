@@ -59,4 +59,18 @@ public static class DeploymentExamples
     }
     // </GetResourceContent>
     #endregion GetResourceContent
+
+    #region DeployResourcesFromFiles
+
+    // <DeployResourcesFromFiles>
+    public static async Task DeployResourcesFromFilesExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.DeployResourcesFromFilesAsync(
+            ["process.bpmn", "decision.dmn"]);
+        Console.WriteLine($"Deployment key: {result.DeploymentKey}");
+    }
+    // </DeployResourcesFromFiles>
+    #endregion DeployResourcesFromFiles
 }
