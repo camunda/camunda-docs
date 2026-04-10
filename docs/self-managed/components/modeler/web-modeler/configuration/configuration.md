@@ -412,7 +412,7 @@ In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so 
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
-### Camunda Client
+### Camunda client
 
 Web Modeler uses the [Camunda Java client](/apis-tools/java-client/getting-started.md) to connect to Zeebe.
 To customize the client configuration, you can provide optional properties.
@@ -687,7 +687,7 @@ camunda.modeler:
 
 </Tabs>
 
-### Feature Flags
+### Feature flags
 
 <Tabs groupId="restapi-feature-flags" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
