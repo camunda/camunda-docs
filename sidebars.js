@@ -1328,15 +1328,25 @@ module.exports = {
     {
       "API Clients": [
         {
-          "Java client": [
-            "apis-tools/java-client/getting-started",
+          type: "category",
+          label: "Java client",
+          link: {
+            type: "doc",
+            id: "apis-tools/java-client/getting-started",
+          },
+          items: [
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/logging",
           ],
         },
         {
-          "Camunda Spring Boot Starter": [
-            "apis-tools/camunda-spring-boot-starter/getting-started",
+          type: "category",
+          label: "Camunda Spring Boot Starter",
+          link: {
+            type: "doc",
+            id: "apis-tools/camunda-spring-boot-starter/getting-started",
+          },
+          items: [
             "apis-tools/camunda-spring-boot-starter/configuration",
             "apis-tools/camunda-spring-boot-starter/properties-reference",
           ],
