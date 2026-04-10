@@ -42,9 +42,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <!-- https://github.com/camunda/product-hub/issues/3330 -->
 
-Camunda 8 Run now includes an "I don't have credentials" path so you can deploy and run agents without first configuring external LLM provider credentials.
-
-It also adds a local LLM quick start, helping self-managed and enterprise-constrained teams try agentic orchestration without external provider setup.
+Camunda 8 Run now includes an "I don't have credentials" path so you can deploy and run agents without first configuring external LLM provider credentials. A new local LLM quick start also helps self-managed and enterprise-constrained teams try agentic orchestration without external provider setup.
 
 <ul>
   <li><span class="link-arrow">[MCP docs](/reference/mcp-docs/mcp-docs.md)</span></li>
@@ -53,7 +51,7 @@ It also adds a local LLM quick start, helping self-managed and enterprise-constr
 
 ### Orchestration Cluster MCP Server
 
-The Orchestration Cluster now includes a built-in MCP server so AI agents and MCP-compatible clients can discover and invoke Camunda tools over a standardized interface. In 8.9, this also includes MCP client improvements such as OAuth, API key, and custom-header authentication, streamable HTTP transport, and dedicated operation filters in Standalone mode.
+The Orchestration Cluster now includes a built-in MCP server so AI agents and MCP-compatible clients can discover and invoke Camunda tools using a standardized interface. Improvements to the MCP client include OAuth, API key, and custom-header authentication, streamable HTTP transport, and dedicated operation filters in Standalone mode.
 
 <ul>
   <li><span class="link-arrow">[Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md)</span></li>
@@ -80,7 +78,7 @@ AI agent model configuration in 8.9 adds AWS Bedrock API key authentication, mod
 
 <!-- https://github.com/camunda/product-hub/issues/2638 -->
 
-We're announcing a new command-line interface for interacting with the Orchestration Cluster REST API directly from the terminal.
+Use the new command-line interface to interact with the Orchestration Cluster REST API directly from the terminal.
 
 Camunda c8ctl CLI is the successor to zbctl, providing a unified way to authenticate, manage processes, and query cluster resources for development, testing, and automation workflows.
 
@@ -98,7 +96,7 @@ You can now write and run JSON test cases with Camunda Process Test.
 - Define process tests in JSON instead of implementing test logic in Java.
 - Execute JSON test cases as part of standard JUnit 5 runs in local and CI/CD environments.
 
-Camunda Process Test also introduces a shared runtime mode as an alternative to managed runtime. Shared runtime uses one runtime across multiple test classes, which can significantly reduce overall test execution time. We recommend enabling it in the configuration.
+Camunda Process Test also introduces a shared runtime mode as an alternative to managed runtime. Shared runtime uses one runtime across multiple test classes, which can significantly reduce overall test execution time. Camunda recommends enabling it in the configuration.
 
 <ul>
   <li><span class="link-arrow">[JSON test cases](/apis-tools/testing/json-test-cases.md)</span></li>
@@ -114,11 +112,11 @@ Camunda Process Test now adds dedicated support for AI agent testing, making it 
 - Judge assertions use a configured LLM to assess whether AI-generated output satisfies a natural-language expectation, so you can verify response quality and intent.
 - Conditional behavior helps you model reactive test behavior for agent-driven flows by watching process state changes and completing tasks as they appear, without blocking the test on a predefined path.
 
-<p class="link-arrow">[Testing agentic processes](/components/agentic-orchestration/test-ai-agents.md)</p>
+<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/test-ai-agents.md)</p>
 
 ### Camunda Docs MCP server
 
-Camunda 8.9 adds a documentation-focused MCP server so IDEs and AI tools can query the latest official Camunda docs directly. This gives developers a lightweight way to bring product documentation into coding and support workflows without leaving their editor.
+Camunda 8.9 adds a documentation-focused MCP server so IDEs and AI tools can query the latest official Camunda documentation directly. This gives developers a lightweight way to bring product documentation into coding and support workflows without leaving their editor.
 
 <p class="link-arrow">[Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)</p>
 
@@ -128,7 +126,7 @@ Camunda 8.9 adds a documentation-focused MCP server so IDEs and AI tools can que
 
 ### Streamlined local setup and configuration
 
-Camunda 8 Run is easier to use in 8.9 with clearer CLI guidance, better Elasticsearch startup errors, guided Java detection, clean-state support, and more visible connection and credential details. The 8.9 release also includes the unified configuration file and expanded documentation for local development workflows.
+Camunda 8 Run is easier to use in 8.9 with clearer CLI guidance, improved Elasticsearch startup errors, guided Java detection, clean-state support, and more visible connection and credential details. The 8.9 release also includes the unified configuration file and expanded documentation for local development workflows.
 
 <p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
@@ -176,7 +174,7 @@ Connector improvements in 8.9 include Amazon Textract usability updates, OAuth 2
 
 ### Cluster monitoring and backup operations
 
-Console gains a Cluster Metrics endpoint for SaaS clusters and reduces the backup cooldown between scheduled and manual backups to 15 minutes. This makes it easier to integrate cluster monitoring into existing observability stacks while running more frequent backup routines safely.
+Console includes a new Cluster Metrics endpoint for SaaS clusters and reduces the backup cooldown between scheduled and manual backups to 15 minutes. This makes it easier to integrate cluster monitoring into existing observability stacks while running more frequent backup routines safely.
 
 <ul>
   <li><span class="link-arrow">[Cluster Metrics endpoint](/components/saas/monitoring/cluster-metrics-endpoint/index.md)</span></li>
@@ -213,7 +211,7 @@ Desktop Modeler now supports shared clipboard behavior across BPMN tools togethe
 
 <!-- https://github.com/camunda/product-hub/issues/3098 -->
 
-Camunda 8.9 continues the shift away from bundled Bitnami infrastructure in Self-Managed Helm deployments.
+Camunda 8.9 continues to move away from bundled Bitnami infrastructure in Self-Managed Helm deployments.
 
 - In 8.9, PostgreSQL, Elasticsearch, and Keycloak sub-charts are disabled by default.
 - Reference architectures now use external managed services or vendor-supported operators.
