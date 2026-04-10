@@ -11,16 +11,16 @@ import TabItem from "@theme/TabItem";
 Web Modeler Self-Managed consists of two components: [`restapi`](#configuration-of-the-restapi-component) and [`websocket`](#configuration-of-the-websocket-component).
 Each component is configured separately as described below.
 
-- The `restapi` component is a **Spring Boot** application. Its configuration is stored in a YAML file (`application.yml`) by default. All Web Modeler-specific settings are prefixed with `camunda.modeler`.
-- The `websocket` (PHP/Laravel) component is configured via **environment variables**.
+- The `restapi` component is a Spring Boot application. Its configuration is stored in a YAML file (`application.yml`) by default. All Web Modeler-specific settings are prefixed with `camunda.modeler`.
+- The `websocket` (PHP/Laravel) component is configured via environment variables.
 
 :::note Configuration methods
-The two components support configuration through **environment variables**.
+The two components support configuration through environment variables.
 For the `restapi` component, environment variables can be used as an alternative to `application.yml` following [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables): convert the property to uppercase, remove any dashes, and replace any delimiters (`.`) with `_`.
 
 For example, the property `camunda.modeler.clusters[0].name` is represented by the environment variable `CAMUNDA_MODELER_CLUSTERS_0_NAME`.
 
-If you are using the Camunda 8 **Helm chart**, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
+If you are using the Camunda 8 Helm chart, read more about the different configuration options in the chart's [Helm chart values documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 You can pass environment variables to each component via `webModeler.restapi.env` and `webModeler.websocket.env` in your `values.yaml`.
 :::
 
@@ -42,7 +42,7 @@ The examples below show configuration in two formats:
 - **`application.yml`** – the native Spring Boot configuration file format.
 
 :::tip Passing JVM options
-When running the `restapi` component in a **container** (Docker / Kubernetes), use the `JAVA_TOOL_OPTIONS` environment variable to pass JVM arguments (for example, trust store settings, proxy configuration). This is a standard JVM mechanism that is automatically picked up by all Java processes.
+When running the `restapi` component in a container (Docker / Kubernetes), use the `JAVA_TOOL_OPTIONS` environment variable to pass JVM arguments (for example, trust store settings, proxy configuration). This is a standard JVM mechanism that is automatically picked up by all Java processes.
 :::
 
 ### General
