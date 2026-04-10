@@ -1,10 +1,12 @@
 ---
 id: overview
 title: "Release announcements and release notes"
-description: "Important announcements and release notes for upcoming and past Camunda 8 releases that customers should be aware of."
+description: "Announcements and release notes for currently maintained Camunda documentation versions."
 ---
 
-Announcements and release notes for supported versions of the Camunda documentation.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 <table className="table-callout" width="100%">
 <tr>
@@ -53,7 +55,7 @@ Release announcements include:
 
 :::info
 
-- See [upgrade guides](/self-managed/upgrade/components/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
+- See [upgrade to Camunda 8.9](/self-managed/upgrade/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
 - See [supported environments](/reference/supported-environments.md) for environments and technologies supported by Camunda 8.
 
 :::
@@ -62,7 +64,7 @@ Release announcements include:
 
 Release notes include details of new product features and enhancements.
 
-Release notes are separated by minor release pages and include alphas released during the development cycle.
+Release notes are provided for each minor release and include alphas released during the development cycle.
 
 ## Changelogs
 

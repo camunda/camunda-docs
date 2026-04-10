@@ -1226,8 +1226,13 @@ module.exports = {
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {
-          "Optimize API": [
-            "apis-tools/optimize-api/overview",
+          type: "category",
+          label: "Optimize API",
+          link: {
+            type: "doc",
+            id: "apis-tools/optimize-api/overview",
+          },
+          items: [
             "apis-tools/optimize-api/optimize-api-authentication",
             "apis-tools/optimize-api/optimize-api-tutorial",
             {
@@ -1329,15 +1334,25 @@ module.exports = {
     {
       "API Clients": [
         {
-          "Java client": [
-            "apis-tools/java-client/getting-started",
+          type: "category",
+          label: "Java client",
+          link: {
+            type: "doc",
+            id: "apis-tools/java-client/getting-started",
+          },
+          items: [
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/logging",
           ],
         },
         {
-          "Camunda Spring Boot Starter": [
-            "apis-tools/camunda-spring-boot-starter/getting-started",
+          type: "category",
+          label: "Camunda Spring Boot Starter",
+          link: {
+            type: "doc",
+            id: "apis-tools/camunda-spring-boot-starter/getting-started",
+          },
+          items: [
             "apis-tools/camunda-spring-boot-starter/configuration",
             "apis-tools/camunda-spring-boot-starter/properties-reference",
           ],
@@ -1408,8 +1423,13 @@ module.exports = {
     {
       Testing: [
         {
-          "Camunda Process Test": [
-            "apis-tools/testing/getting-started",
+          type: "category",
+          label: "Camunda Process Test",
+          link: {
+            type: "doc",
+            id: "apis-tools/testing/getting-started",
+          },
+          items: [
             "apis-tools/testing/configuration",
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",

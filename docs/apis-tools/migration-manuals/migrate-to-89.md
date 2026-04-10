@@ -2,18 +2,19 @@
 id: migrate-to-89
 title: "Camunda 8.9 APIs & Tools migration guide"
 sidebar_label: "Upgrade to Camunda 8.9"
-description: "Migrate your API integrations, SDKs, and generated clients to Camunda 8.9. Covers breaking changes, deprecations, and step-by-step migration actions."
+description: "Learn how to migrate your API integrations, SDKs, and generated clients to Camunda 8.9."
 toc_max_heading_level: 2
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-Migrate your API integrations, SDKs, and generated clients to Camunda 8.9.
+<PageDescription />
 
-## About this guide
+## About
 
-This guide details the API and SDK changes introduced in Camunda 8.9 that require customer action.
+This guide details the API and SDK changes introduced in Camunda 8.9 that require customer action, including breaking changes, deprecations, and step-by-step migration actions.
 
 Details are provided for each integration type, including what changed, why, and what action you must take.
 

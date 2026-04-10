@@ -1,13 +1,18 @@
 ---
 id: getting-started
-title: Getting started
-description: "Integrate Camunda 8 APIs (gRPC and REST) into your Spring Boot project for orchestration, automation, and data processing."
+title: Camunda Spring Boot Starter
+description: "Use the Camunda Spring Boot Starter to integrate Camunda 8 APIs (gRPC and REST) into your Spring Boot project for orchestration, automation, and data processing."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-The Camunda Spring Boot Starter is the official way to integrate Camunda 8 APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)) into your Spring Boot project. It enables you to orchestrate microservices, manage human tasks, and interact with process data using idiomatic Spring Boot patterns.
+<PageDescription />
+
+## About
+
+The Camunda Spring Boot Starter is the official way to integrate Camunda 8 APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)) into your Spring Boot project. You can use it to orchestrate microservices, manage human tasks, and interact with process data using idiomatic Spring Boot patterns.
 
 :::info Public API
 The Camunda Spring Boot Starter is part of the Camunda 8 [public API](/reference/public-api.md) and follows [Semantic Versioning](https://semver.org/) (except for alpha features). Minor and patch releases will not introduce breaking changes.
