@@ -256,8 +256,6 @@ curl -X POST 'http://localhost:9600/actuator/cluster/purge?dryRun=true'
 
 ### 2. Don't perform the purge operation during other cluster operations
 
-### Don't perform the purge operation during other cluster operations
-
 You cannot perform the purge operation if another cluster operation is already in progress (for example, scaling).
 
 Similarly, you cannot perform other cluster operations while the purge operation is in progress.
