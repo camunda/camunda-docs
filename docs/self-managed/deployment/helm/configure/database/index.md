@@ -17,9 +17,12 @@ Use the [secondary storage overview](/self-managed/concepts/secondary-storage/in
 
 Use this section to configure database layers for Helm deployments.
 
-This section is organized into two tracks:
+This section is organized by component:
 
-- [RDBMS](/self-managed/deployment/helm/configure/database/rdbms.md): Configure relational database backends and related operational settings.
-- [Non-SQL](/self-managed/deployment/helm/configure/database/non-sql.md): Configure Elasticsearch/OpenSearch-based backends and related troubleshooting.
+- [Orchestration Cluster](/self-managed/deployment/helm/configure/database/non-sql.md): Configure Elasticsearch or OpenSearch as secondary storage, or use [RDBMS](/self-managed/deployment/helm/configure/database/rdbms.md).
+- [Management Identity and Web Modeler](/self-managed/deployment/helm/configure/database/using-existing-postgres.md): Configure PostgreSQL for management components.
+- [Optimize](/self-managed/deployment/helm/configure/database/optimize/index.md): Configure Elasticsearch or OpenSearch for Optimize.
+
+Some Elasticsearch/OpenSearch tasks, such as custom headers and index prefixes, apply to both the Orchestration Cluster and Optimize. Those shared pages call that out explicitly.
 
 <DocCardList />

@@ -15,4 +15,4 @@ The C# SDK is a **technical preview** available from Camunda 8.9. It will become
 
 This is a technical preview of the C# client that will become fully supported in Camunda 8.10.0.
 
-Prior to Camunda 8.10.0, this client will undergo changes as we stabilise the code and incorporate feedback from early adopters. We endeavor to keep disruption to a minimum, but there may be breaking changes.
+The Technical Preview gives you a stable foundation to build on now, with a clear path to full support. We don't anticipate major changes — and [your feedback](https://github.com/camunda/orchestration-cluster-api-csharp/issues) between now and 8.10 is what closes that gap.

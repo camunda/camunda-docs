@@ -12,8 +12,6 @@ type ProcessDefinitionStatisticsFilter = BaseProcessInstanceFilterFields &
   object;
 ```
 
-Defined in: [gen/types.gen.ts:5695](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5695)
-
 Process definition statistics search filter.
 
 ## Type Declaration
@@ -21,7 +19,7 @@ Process definition statistics search filter.
 ### $or?
 
 ```ts
-optional $or: BaseProcessInstanceFilterFields[];
+optional $or?: BaseProcessInstanceFilterFields[];
 ```
 
 Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.

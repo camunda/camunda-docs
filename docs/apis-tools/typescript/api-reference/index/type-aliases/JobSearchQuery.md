@@ -11,8 +11,6 @@ mdx:
 type JobSearchQuery = SearchQueryRequest & object;
 ```
 
-Defined in: [gen/types.gen.ts:3499](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3499)
-
 Job search request.
 
 ## Type Declaration
@@ -20,7 +18,7 @@ Job search request.
 ### filter?
 
 ```ts
-optional filter: JobFilter;
+optional filter?: JobFilter;
 ```
 
 The job search filters.
@@ -28,7 +26,7 @@ The job search filters.
 ### sort?
 
 ```ts
-optional sort: JobSearchQuerySortRequest[];
+optional sort?: JobSearchQuerySortRequest[];
 ```
 
 Sort field criteria.

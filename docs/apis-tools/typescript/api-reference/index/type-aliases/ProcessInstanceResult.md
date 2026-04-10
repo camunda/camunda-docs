@@ -11,19 +11,27 @@ mdx:
 type ProcessInstanceResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5811](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5811)
-
 Process instance search response item.
 
 ## Properties
 
-### endDate?
+### businessId
 
 ```ts
-optional endDate: string;
+businessId: BusinessId | null;
 ```
 
-Defined in: [gen/types.gen.ts:5823](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5823)
+The business id associated with this process instance.
+
+---
+
+### endDate
+
+```ts
+endDate: string | null;
+```
+
+The completion or termination time of the process instance.
 
 ---
 
@@ -33,31 +41,25 @@ Defined in: [gen/types.gen.ts:5823](https://github.com/camunda/orchestration-clu
 hasIncident: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:5828](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5828)
-
 Whether this process instance has a related incident or not.
 
 ---
 
-### parentElementInstanceKey?
+### parentElementInstanceKey
 
 ```ts
-optional parentElementInstanceKey: ElementInstanceKey;
+parentElementInstanceKey: ElementInstanceKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:5845](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5845)
 
 The parent element instance key.
 
 ---
 
-### parentProcessInstanceKey?
+### parentProcessInstanceKey
 
 ```ts
-optional parentProcessInstanceKey: ProcessInstanceKey;
+parentProcessInstanceKey: ProcessInstanceKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:5841](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5841)
 
 The parent process instance key.
 
@@ -69,8 +71,6 @@ The parent process instance key.
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:5812](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5812)
-
 ---
 
 ### processDefinitionKey
@@ -79,8 +79,6 @@ Defined in: [gen/types.gen.ts:5812](https://github.com/camunda/orchestration-clu
 processDefinitionKey: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5837](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5837)
-
 The process definition key.
 
 ---
@@ -88,10 +86,8 @@ The process definition key.
 ### processDefinitionName
 
 ```ts
-processDefinitionName: string;
+processDefinitionName: string | null;
 ```
-
-Defined in: [gen/types.gen.ts:5816](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5816)
 
 The process definition name.
 
@@ -103,17 +99,15 @@ The process definition name.
 processDefinitionVersion: number;
 ```
 
-Defined in: [gen/types.gen.ts:5817](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5817)
+The process definition version.
 
 ---
 
-### processDefinitionVersionTag?
+### processDefinitionVersionTag
 
 ```ts
-optional processDefinitionVersionTag: string;
+processDefinitionVersionTag: string | null;
 ```
-
-Defined in: [gen/types.gen.ts:5821](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5821)
 
 The process definition version tag.
 
@@ -125,19 +119,19 @@ The process definition version tag.
 processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:5833](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5833)
-
 The key of this process instance.
 
 ---
 
-### rootProcessInstanceKey?
+### rootProcessInstanceKey
 
 ```ts
-optional rootProcessInstanceKey: RootProcessInstanceKey;
+rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:5846](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5846)
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy. This field is only present for data
+belonging to process instance hierarchies created in version 8.9 or later.
 
 ---
 
@@ -147,7 +141,7 @@ Defined in: [gen/types.gen.ts:5846](https://github.com/camunda/orchestration-clu
 startDate: string;
 ```
 
-Defined in: [gen/types.gen.ts:5822](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5822)
+The start time of the process instance.
 
 ---
 
@@ -157,17 +151,13 @@ Defined in: [gen/types.gen.ts:5822](https://github.com/camunda/orchestration-clu
 state: ProcessInstanceStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:5824](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5824)
-
 ---
 
-### tags?
+### tags
 
 ```ts
-optional tags: TagSet;
+tags: TagSet;
 ```
-
-Defined in: [gen/types.gen.ts:5847](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5847)
 
 ---
 
@@ -176,5 +166,3 @@ Defined in: [gen/types.gen.ts:5847](https://github.com/camunda/orchestration-clu
 ```ts
 tenantId: TenantId;
 ```
-
-Defined in: [gen/types.gen.ts:5829](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5829)

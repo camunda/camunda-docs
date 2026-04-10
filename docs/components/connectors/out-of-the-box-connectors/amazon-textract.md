@@ -121,8 +121,6 @@ For example, to get the response, when using asynchronous execution, use a timer
 
 <img src={AsyncImg} alt="Example process using asynchronous execution" class="img-500"/>
 
-## Troubleshooting
-
 <ErrorHandling />
 
 ## Further Resources

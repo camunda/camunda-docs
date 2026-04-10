@@ -2,23 +2,25 @@
 id: 890-release-notes
 title: "8.9 Release notes"
 sidebar_label: Release notes
-description: "Release notes for 8.9, including alphas"
+description: "Release notes for new features included in the 8.9 minor release, including alpha feature releases."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
 page_rank: 90
 ---
 
-These release notes identify the main new features included in the 8.9 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
+import PageDescription from '@site/src/components/PageDescription';
 
-| Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Upgrade guides |
-| :----------------- | :--------------------------- | :-------------------------------------------------------------------------- | :------------- |
-| 14 April 2026      | 13 October 2028              | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | -              |
+<PageDescription />
+
+| Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Upgrade guides                                                                                     |
+| :----------------- | :--------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 13 October 2028              | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
-- See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) to learn more about supported environment changes and breaking changes or deprecations.
 - See [What's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md) for important changes to consider when planning your upgrade from Camunda 8.8.
+- See [release announcements](/reference/announcements-release-notes/890/890-announcements.md) to learn more about supported environment changes, breaking changes, and deprecations.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
 
 :::
@@ -287,7 +289,7 @@ You can now configure Camunda 8 Run to use any of the supported secondary storag
 
 This allows you to set up your local environment to match your production deployment, enabling deeper testing, faster debugging, and easier team onboarding.
 
-<p class="link-arrow">[Camunda 8 Run external relational database options](/self-managed/quickstart/developer-quickstart/c8run.md#external-relational-database-options)</p>
+<p class="link-arrow">[Camunda 8 Run external relational database options](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md#external-relational-database-options)</p>
 
 ### Console
 
@@ -1195,7 +1197,7 @@ The Azure Blob Storage connector now supports OAuth2.0 authentication with Micro
 
 The Email connector now supports `noAuth` authentication mode for SMTP. This feature is useful for customers running local mail servers without authentication requirements.
 
-<p class="link-arrow">[Email connector](/components/connectors/out-of-the-box-connectors/email.md)</p>
+<p class="link-arrow">[Email connector](/components/connectors/out-of-the-box-connectors/email-outbound.md)</p>
 
 #### Runtime performance improvements with virtual threads executor (Self-Managed)
 

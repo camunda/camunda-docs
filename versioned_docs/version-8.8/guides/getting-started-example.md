@@ -63,11 +63,11 @@ All of these components are included in the starter package. You do not need to 
 
 ## Example project
 
-The example project, located in the `camunda-8-get-started` directory, contains a BPMN process model that represents a simple e-commerce flow with three service tasks.
+The example project, located in the `camunda-8-get-started/2-order-process-with-service-workers` directory, contains a BPMN process model that represents a simple e-commerce flow with three service tasks.
 
 ![Example business process](./img/getting-started-guide-example-process.png)
 
-The service tasks in the process are executed by job workers. The `java` and `nodejs` directories contain code for job workers that correspond to this process model.
+The service tasks in the process are executed by job workers. The `java` and `nodejs` directories inside `2-order-process-with-service-workers` contain code for job workers that correspond to this process model.
 
 ## Instructions
 
@@ -104,7 +104,7 @@ The service tasks in the process are executed by job workers. The `java` and `no
     In Camunda Modeler, use:
     <pre><code>File &gt; Open File...</code></pre>
     to open the file:
-    <pre><code>camunda-8-get-started/bpmn/diagram_1.bpmn</code></pre>
+    <pre><code>camunda-8-get-started/2-order-process-with-service-workers/bpmn/order-process.bpmn</code></pre>
   </li>
 
   <li>
@@ -160,8 +160,7 @@ Next, start the job workers to allow them to perform the work for the service ta
 Change into the Spring SDK directory:
 
 ```bash
-cd camunda-8-get-started
-cd java
+cd camunda-8-get-started/2-order-process-with-service-workers/java
 ```
 
       </li>
@@ -185,8 +184,7 @@ mvn spring-boot:run
       <li>
         Change into the Node.js SDK directory:
 ```bash
-cd camunda-8-get-started
-cd nodejs
+cd camunda-8-get-started/2-order-process-with-service-workers/nodejs
 ```
       </li>
       <li>

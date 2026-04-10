@@ -11,70 +11,64 @@ mdx:
 type DeploymentDecisionRequirementsResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2086](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2086)
-
 Deployed decision requirements.
 
 ## Properties
 
-### decisionRequirementsId?
+### decisionRequirementsId
 
 ```ts
-optional decisionRequirementsId: string;
+decisionRequirementsId: string;
 ```
 
-Defined in: [gen/types.gen.ts:2087](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2087)
+The id of the deployed decision requirements.
 
 ---
 
-### decisionRequirementsKey?
+### decisionRequirementsKey
 
 ```ts
-optional decisionRequirementsKey: DecisionRequirementsKey;
+decisionRequirementsKey: DecisionRequirementsKey;
 ```
-
-Defined in: [gen/types.gen.ts:2099](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2099)
 
 The assigned decision requirements key, which acts as a unique identifier for this decision requirements.
 
 ---
 
-### decisionRequirementsName?
+### decisionRequirementsName
 
 ```ts
-optional decisionRequirementsName: string;
+decisionRequirementsName: string;
 ```
 
-Defined in: [gen/types.gen.ts:2088](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2088)
+The name of the deployed decision requirements.
 
 ---
 
-### resourceName?
+### resourceName
 
 ```ts
-optional resourceName: string;
+resourceName: string;
 ```
 
-Defined in: [gen/types.gen.ts:2090](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2090)
+The name of the resource.
 
 ---
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId;
 ```
-
-Defined in: [gen/types.gen.ts:2094](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2094)
 
 The tenant ID of the deployed decision requirements.
 
 ---
 
-### version?
+### version
 
 ```ts
-optional version: number;
+version: number;
 ```
 
-Defined in: [gen/types.gen.ts:2089](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2089)
+The version of the deployed decision requirements.

@@ -14,6 +14,7 @@ type AuditLogEntityTypeEnum =
   | "DECISION"
   | "GROUP"
   | "INCIDENT"
+  | "JOB"
   | "MAPPING_RULE"
   | "PROCESS_INSTANCE"
   | "RESOURCE"
@@ -24,7 +25,5 @@ type AuditLogEntityTypeEnum =
   | "VARIABLE"
   | "CLIENT";
 ```
-
-Defined in: [gen/types.gen.ts:283](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L283)
 
 The type of entity affected by the operation.

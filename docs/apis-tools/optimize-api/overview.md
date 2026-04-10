@@ -1,10 +1,16 @@
 ---
 id: overview
-title: "Overview"
-description: "Manage and analyze reports and dashboards with the Optimize API, including sharing, exporting, and more."
+title: "Optimize API"
+description: "Use the Optimize API to manage and analyze reports and dashboards in Camunda Optimize."
 ---
 
-The Optimize API lets you programmatically manage and analyze reports and dashboards in Camunda Optimize. Use it to:
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+You can use the Optimize API to:
 
 - Retrieve, create, update, and delete reports and dashboards
 - Export dashboards and reports for sharing or backup

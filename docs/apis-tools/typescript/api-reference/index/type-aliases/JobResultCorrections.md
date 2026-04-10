@@ -18,8 +18,6 @@ type JobResultCorrections = {
 } | null;
 ```
 
-Defined in: [gen/types.gen.ts:3807](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3807)
-
 JSON object with attributes that were corrected by the worker.
 
 The following attributes can be corrected, additional attributes will be ignored:
@@ -34,7 +32,9 @@ The following attributes can be corrected, additional attributes will be ignored
 Providing any of those attributes with a `null` value or omitting it preserves
 the persisted attribute's value.
 
-## Type Declaration
+## Union Members
+
+### Type Literal
 
 ```ts
 {
@@ -47,52 +47,54 @@ the persisted attribute's value.
 }
 ```
 
-### assignee?
+#### assignee?
 
 ```ts
-optional assignee: string | null;
+optional assignee?: string | null;
 ```
 
 Assignee of the task.
 
-### candidateGroups?
+#### candidateGroups?
 
 ```ts
-optional candidateGroups: string[] | null;
+optional candidateGroups?: string[] | null;
 ```
 
 The list of candidate groups of the task.
 
-### candidateUsers?
+#### candidateUsers?
 
 ```ts
-optional candidateUsers: string[] | null;
+optional candidateUsers?: string[] | null;
 ```
 
 The list of candidate users of the task.
 
-### dueDate?
+#### dueDate?
 
 ```ts
-optional dueDate: string | null;
+optional dueDate?: string | null;
 ```
 
 The due date of the task.
 
-### followUpDate?
+#### followUpDate?
 
 ```ts
-optional followUpDate: string | null;
+optional followUpDate?: string | null;
 ```
 
 The follow-up date of the task.
 
-### priority?
+#### priority?
 
 ```ts
-optional priority: number | null;
+optional priority?: number | null;
 ```
 
 The priority of the task.
+
+---
 
 `null`

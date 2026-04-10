@@ -11,8 +11,6 @@ mdx:
 type ElementInstanceResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:2498](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2498)
-
 ## Properties
 
 ### elementId
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:2498](https://github.com/camunda/orchestration-clu
 ```ts
 elementId: ElementId;
 ```
-
-Defined in: [gen/types.gen.ts:2514](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2514)
 
 The element ID for this element instance.
 
@@ -33,8 +29,6 @@ The element ID for this element instance.
 elementInstanceKey: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2538](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2538)
-
 The assigned key, which acts as a unique identifier for this element instance.
 
 ---
@@ -45,19 +39,15 @@ The assigned key, which acts as a unique identifier for this element instance.
 elementName: string;
 ```
 
-Defined in: [gen/types.gen.ts:2518](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2518)
-
 The element name for this element instance.
 
 ---
 
-### endDate?
+### endDate
 
 ```ts
-optional endDate: string;
+endDate: string | null;
 ```
-
-Defined in: [gen/types.gen.ts:2510](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2510)
 
 Date when element instance finished.
 
@@ -69,19 +59,15 @@ Date when element instance finished.
 hasIncident: boolean;
 ```
 
-Defined in: [gen/types.gen.ts:2530](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2530)
-
 Shows whether this element instance has an incident. If true also an incidentKey is provided.
 
 ---
 
-### incidentKey?
+### incidentKey
 
 ```ts
-optional incidentKey: IncidentKey;
+incidentKey: IncidentKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:2551](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2551)
 
 Incident key associated with this element instance.
 
@@ -93,8 +79,6 @@ Incident key associated with this element instance.
 processDefinitionId: ProcessDefinitionId;
 ```
 
-Defined in: [gen/types.gen.ts:2502](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2502)
-
 The process definition ID associated to this element instance.
 
 ---
@@ -104,8 +88,6 @@ The process definition ID associated to this element instance.
 ```ts
 processDefinitionKey: ProcessDefinitionKey;
 ```
-
-Defined in: [gen/types.gen.ts:2547](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2547)
 
 The process definition key associated to this element instance.
 
@@ -117,19 +99,19 @@ The process definition key associated to this element instance.
 processInstanceKey: ProcessInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:2542](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2542)
-
 The process instance key associated to this element instance.
 
 ---
 
-### rootProcessInstanceKey?
+### rootProcessInstanceKey
 
 ```ts
-optional rootProcessInstanceKey: RootProcessInstanceKey;
+rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:2543](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2543)
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy. This field is only present for data
+belonging to process instance hierarchies created in version 8.9 or later.
 
 ---
 
@@ -138,8 +120,6 @@ Defined in: [gen/types.gen.ts:2543](https://github.com/camunda/orchestration-clu
 ```ts
 startDate: string;
 ```
-
-Defined in: [gen/types.gen.ts:2506](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2506)
 
 Date when element instance started.
 
@@ -151,8 +131,6 @@ Date when element instance started.
 state: ElementInstanceStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:2526](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2526)
-
 State of element instance as defined set of values.
 
 ---
@@ -162,8 +140,6 @@ State of element instance as defined set of values.
 ```ts
 tenantId: TenantId;
 ```
-
-Defined in: [gen/types.gen.ts:2534](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2534)
 
 The tenant ID of the incident.
 
@@ -201,7 +177,5 @@ type:
   | "SEND_TASK"
   | "UNKNOWN";
 ```
-
-Defined in: [gen/types.gen.ts:2522](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L2522)
 
 Type of element as defined set of values.

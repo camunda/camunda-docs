@@ -11,8 +11,6 @@ mdx:
 type GetAuthorizationErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:8117](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8117)
-
 ## Properties
 
 ### 401
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:8117](https://github.com/camunda/orchestration-clu
 ```ts
 401: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:8121](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8121)
 
 The request lacks valid authentication credentials.
 
@@ -33,8 +29,6 @@ The request lacks valid authentication credentials.
 403: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8125](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8125)
-
 Forbidden. The request is not allowed.
 
 ---
@@ -45,8 +39,6 @@ Forbidden. The request is not allowed.
 404: ProblemDetail;
 ```
 
-Defined in: [gen/types.gen.ts:8129](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8129)
-
 The authorization with the given key was not found.
 
 ---
@@ -56,7 +48,5 @@ The authorization with the given key was not found.
 ```ts
 500: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:8133](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8133)
 
 An internal error occurred while processing the request.

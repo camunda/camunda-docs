@@ -11,8 +11,6 @@ mdx:
 type AdvancedFormKeyFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4410](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4410)
-
 Advanced filter
 
 Advanced FormKey filter.
@@ -22,10 +20,8 @@ Advanced FormKey filter.
 ### $eq?
 
 ```ts
-optional $eq: FormKey;
+optional $eq?: FormKey;
 ```
-
-Defined in: [gen/types.gen.ts:4414](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4414)
 
 Checks for equality with the provided value.
 
@@ -34,10 +30,8 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:4422](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4422)
 
 Checks if the current property exists.
 
@@ -46,10 +40,8 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: FormKey[];
+optional $in?: FormKey[];
 ```
-
-Defined in: [gen/types.gen.ts:4426](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4426)
 
 Checks if the property matches any of the provided values.
 
@@ -58,10 +50,8 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq: FormKey;
+optional $neq?: FormKey;
 ```
-
-Defined in: [gen/types.gen.ts:4418](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4418)
 
 Checks for inequality with the provided value.
 
@@ -70,9 +60,7 @@ Checks for inequality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn: FormKey[];
+optional $notIn?: FormKey[];
 ```
-
-Defined in: [gen/types.gen.ts:4430](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4430)
 
 Checks if the property matches none of the provided values.

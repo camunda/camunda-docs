@@ -72,7 +72,6 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/aws
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/azure-open-ai
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/blueprism
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/easy-post
-https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/email
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/github
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/github-webhook
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/github/?github=inbound

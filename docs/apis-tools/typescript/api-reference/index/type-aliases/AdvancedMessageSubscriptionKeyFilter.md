@@ -11,8 +11,6 @@ mdx:
 type AdvancedMessageSubscriptionKeyFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:5012](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5012)
-
 Advanced filter
 
 Advanced MessageSubscriptionKey filter.
@@ -22,10 +20,8 @@ Advanced MessageSubscriptionKey filter.
 ### $eq?
 
 ```ts
-optional $eq: MessageSubscriptionKey;
+optional $eq?: MessageSubscriptionKey;
 ```
-
-Defined in: [gen/types.gen.ts:5016](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5016)
 
 Checks for equality with the provided value.
 
@@ -34,10 +30,8 @@ Checks for equality with the provided value.
 ### $exists?
 
 ```ts
-optional $exists: boolean;
+optional $exists?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:5024](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5024)
 
 Checks if the current property exists.
 
@@ -46,10 +40,8 @@ Checks if the current property exists.
 ### $in?
 
 ```ts
-optional $in: MessageSubscriptionKey[];
+optional $in?: MessageSubscriptionKey[];
 ```
-
-Defined in: [gen/types.gen.ts:5028](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5028)
 
 Checks if the property matches any of the provided values.
 
@@ -58,10 +50,8 @@ Checks if the property matches any of the provided values.
 ### $neq?
 
 ```ts
-optional $neq: MessageSubscriptionKey;
+optional $neq?: MessageSubscriptionKey;
 ```
-
-Defined in: [gen/types.gen.ts:5020](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5020)
 
 Checks for equality with the provided value.
 
@@ -70,9 +60,7 @@ Checks for equality with the provided value.
 ### $notIn?
 
 ```ts
-optional $notIn: MessageSubscriptionKey[];
+optional $notIn?: MessageSubscriptionKey[];
 ```
-
-Defined in: [gen/types.gen.ts:5032](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5032)
 
 Checks if the property matches none of the provided values.

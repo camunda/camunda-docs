@@ -11,8 +11,6 @@ mdx:
 type PublishMessageData = object;
 ```
 
-Defined in: [gen/types.gen.ts:12599](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12599)
-
 ## Properties
 
 ### body
@@ -21,27 +19,21 @@ Defined in: [gen/types.gen.ts:12599](https://github.com/camunda/orchestration-cl
 body: MessagePublicationRequest;
 ```
 
-Defined in: [gen/types.gen.ts:12600](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12600)
-
 ---
 
 ### path?
 
 ```ts
-optional path: never;
+optional path?: never;
 ```
-
-Defined in: [gen/types.gen.ts:12601](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12601)
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:12602](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12602)
 
 ---
 
@@ -50,5 +42,3 @@ Defined in: [gen/types.gen.ts:12602](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/messages/publication";
 ```
-
-Defined in: [gen/types.gen.ts:12603](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L12603)

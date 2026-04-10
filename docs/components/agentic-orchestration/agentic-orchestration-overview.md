@@ -7,7 +7,7 @@ keywords: ["agentic orchestration"]
 
 import OverviewImg from './img/ao-overview-hero.png';
 import AoGrid from '../react-components/\_ao-card';
-import { getStartedCards, fundamentalCards, recommendationCards } from '../react-components/\_ao-card-data';
+import { getStartedCards, fundamentalCards, fundamentalCards_monitoring, recommendationCards } from '../react-components/\_ao-card-data';
 
 <h3 class="subheading">Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.</h3>
 
@@ -38,7 +38,11 @@ Get started with Camunda agentic orchestration by building and running your firs
 
 Understand the fundamental concepts of Camunda agentic orchestration.
 
-<AoGrid ao={fundamentalCards} columns={3}/>
+<AoGrid ao={fundamentalCards} columns={2}/>
+
+Learn how to monitor your AI agents in real time with Operate, improve performance over time with Optimize, and test them using Camunda Process Test.
+
+<AoGrid ao={fundamentalCards_monitoring} columns={3}/>
 
 ## Explore further resources
 

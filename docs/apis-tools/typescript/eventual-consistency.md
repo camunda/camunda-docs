@@ -18,9 +18,9 @@ Data in Camunda 8 is [eventually consistent](/apis-tools/orchestration-cluster-a
 For example, if you search for a process instance immediately after you create it, the response may contain the new instance. If the data is not yet available, the search may return an empty result or a 404 error.
 
 ```typescript
-import { Camunda8 } from "@camunda8/sdk";
+import { createCamundaClient } from "@camunda8/orchestration-cluster-api";
 
-const camunda = new Camunda8().getOrchestrationClusterApiClient();
+const camunda = createCamundaClient();
 
 async function main() {
   const deploymentResponse = await camunda.deployResourcesFromFile([

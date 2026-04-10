@@ -16,11 +16,11 @@ type JobResultAdHocSubProcess = {
 } | null;
 ```
 
-Defined in: [gen/types.gen.ts:3838](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3838)
-
 Job result details for an ad‑hoc sub‑process, including elements to activate and flags indicating completion or cancellation behavior.
 
-## Type Declaration
+## Union Members
+
+### Type Literal
 
 ```ts
 {
@@ -31,36 +31,38 @@ Job result details for an ad‑hoc sub‑process, including elements to activate
 }
 ```
 
-### activateElements?
+#### activateElements?
 
 ```ts
-optional activateElements: JobResultActivateElement[];
+optional activateElements?: JobResultActivateElement[];
 ```
 
 Indicates which elements need to be activated in the ad-hoc subprocess.
 
-### isCancelRemainingInstances?
+#### isCancelRemainingInstances?
 
 ```ts
-optional isCancelRemainingInstances: boolean;
+optional isCancelRemainingInstances?: boolean;
 ```
 
 Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.
 
-### isCompletionConditionFulfilled?
+#### isCompletionConditionFulfilled?
 
 ```ts
-optional isCompletionConditionFulfilled: boolean;
+optional isCompletionConditionFulfilled?: boolean;
 ```
 
 Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.
 
-### type?
+#### type?
 
 ```ts
-optional type: string;
+optional type?: string;
 ```
 
 Used to distinguish between different types of job results.
+
+---
 
 `null`

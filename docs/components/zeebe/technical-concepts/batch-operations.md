@@ -381,9 +381,12 @@ For very large batches (100,000+ items), enabling this option causes a temporary
 
 ```yaml
 # In your broker configuration file (for example, broker.yaml)
-exporters:
-  camundaexporter:
-    args:
-      batchOperation:
-        exportItemsOnCreation: false
+zeebe:
+  broker:
+    ...
+    exporters:
+      camundaexporter:
+        args:
+          batchOperation:
+            exportItemsOnCreation: false
 ```

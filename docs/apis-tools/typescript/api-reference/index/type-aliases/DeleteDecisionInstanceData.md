@@ -11,17 +11,17 @@ mdx:
 type DeleteDecisionInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9651](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9651)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: DeleteProcessInstanceRequest;
+optional body?:
+  | {
+  operationReference?: OperationReference;
+}
+  | null;
 ```
-
-Defined in: [gen/types.gen.ts:9652](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9652)
 
 ---
 
@@ -31,32 +31,26 @@ Defined in: [gen/types.gen.ts:9652](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:9653](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9653)
-
-#### decisionInstanceKey
+#### decisionEvaluationKey
 
 ```ts
-decisionInstanceKey: DecisionInstanceKey;
+decisionEvaluationKey: DecisionEvaluationKey;
 ```
 
-The key of the decision instance to delete.
+The key of the decision evaluation to delete.
 
 ---
 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:9659](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9659)
 
 ---
 
 ### url
 
 ```ts
-url: "/decision-instances/{decisionInstanceKey}/deletion";
+url: "/decision-instances/{decisionEvaluationKey}/deletion";
 ```
-
-Defined in: [gen/types.gen.ts:9660](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9660)

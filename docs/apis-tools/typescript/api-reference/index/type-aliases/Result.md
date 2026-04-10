@@ -19,8 +19,6 @@ type Result<T, E> =
     };
 ```
 
-Defined in: [resultClient.ts:4](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/resultClient.ts#L4)
-
 ## Type Parameters
 
 ### T
