@@ -864,7 +864,7 @@ Example:
 {
   "type": "COMPLETE_JOB_AD_HOC_SUB_PROCESS",
   "jobSelector": {
-    "jobType": "conduct-experiment"
+    "elementId": "conduct-experiment"
   },
   "variables": {
     "experimentResult": "success"
