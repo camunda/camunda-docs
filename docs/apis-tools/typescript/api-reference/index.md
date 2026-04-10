@@ -58,6 +58,104 @@ In the vast majority of use-cases, this will not be an issue; but you should be 
 - Check the [CHANGELOG](https://github.com/camunda/orchestration-cluster-api-js/releases).
 - As a sanity check during server version upgrade, rebuild applications with the matching SDK major version to identify any affected runtime surfaces.
 
+## Migrating from 8.8
+
+SDK 9.x (for Camunda 8.9) introduces two categories of breaking type changes relative to SDK 8.x (for Camunda 8.8). Neither change affects runtime behavior — existing code that compiled against 8.x will run identically — but the compiler will flag type mismatches until you update.
+
+### Search results: optional → required fields
+
+The search result types changed several fields from **optional** to **required**:
+
+**`SearchQueryPageResponse` (page metadata)**
+
+| Field               | SDK 8.x (Camunda 8.8)         | SDK 9.x (Camunda 8.9)              |
+| ------------------- | ----------------------------- | ---------------------------------- |
+| `totalItems`        | `totalItems?: number`         | `totalItems: number`               |
+| `hasMoreTotalItems` | `hasMoreTotalItems?: boolean` | `hasMoreTotalItems: boolean`       |
+| `endCursor`         | `endCursor?: EndCursor`       | `endCursor: EndCursor \| null`     |
+| `startCursor`       | `startCursor?: StartCursor`   | `startCursor: StartCursor \| null` |
+
+**`*SearchQueryResult` types (result containers)**
+
+| Field   | SDK 8.x (Camunda 8.8)            | SDK 9.x (Camunda 8.9)           |
+| ------- | -------------------------------- | ------------------------------- |
+| `items` | `items?: T[]`                    | `items: T[]`                    |
+| `page`  | `page?: SearchQueryPageResponse` | `page: SearchQueryPageResponse` |
+
+This reflects upstream OpenAPI spec changes where these fields are now always present in the response, with `null` indicating "no value" for cursors rather than being absent.
+
+**What to change**: Update code that checks for these fields using optional chaining or `undefined` comparisons. The `items` array and `page` object are now always present, so optional chaining on them is unnecessary:
+
+<!-- snippet-exempt: migration example showing before/after patterns -->
+
+```ts
+// Before (8.x) — checking for undefined
+if (result.page?.endCursor !== undefined) {
+  nextPage(result.page.endCursor);
+}
+const count = result.items?.length ?? 0;
+
+// After (9.x) — page and items are always present; check cursors for null
+if (result.page.endCursor !== null) {
+  nextPage(result.page.endCursor);
+}
+const count = result.items.length;
+```
+
+If you have a custom `PagedResponse` type, update its `page` shape to match:
+
+<!-- snippet-exempt: migration example showing type definition update -->
+
+```ts
+// Before (8.x)
+type PagedResponse<T> = {
+  items?: T[];
+  page?: {
+    totalItems?: number;
+    endCursor?: string;
+    startCursor?: string;
+    hasMoreTotalItems?: boolean;
+  };
+};
+
+// After (9.x)
+type PagedResponse<T> = {
+  items: T[];
+  page: {
+    totalItems: number;
+    endCursor: EndCursor | null;
+    startCursor: StartCursor | null;
+    hasMoreTotalItems: boolean;
+  };
+};
+```
+
+### Branded key types for `tenantId`
+
+The `tenantId` field on request types (e.g. `CreateDeploymentData`) changed from `string` to the branded `TenantId` type. A plain `string` is no longer assignable:
+
+<!-- snippet-exempt: migration example showing branded type usage -->
+
+```ts
+import { TenantId } from "@camunda8/orchestration-cluster-api";
+
+// Before (8.x) — plain string worked
+await camunda.createDeployment({
+  tenantId: "my-tenant",
+  resources: [file],
+});
+
+// After (9.x) — use the branded type helper
+await camunda.createDeployment({
+  tenantId: TenantId.assumeExists("my-tenant"),
+  resources: [file],
+});
+```
+
+`TenantId.assumeExists()` validates the string against the tenant ID pattern and brands it at zero runtime cost. See [Branded Keys](#branded-keys) for more on this pattern.
+
+> **Tip**: If your tenant ID comes from a validated source (environment variable, config file), call `TenantId.assumeExists()` once at startup and pass the branded value throughout your application.
+
 ## Quick Start (Zero‑Config – Recommended)
 
 Keep configuration out of application code. Let the factory read `CAMUNDA_*` variables from the environment (12‑factor style). This makes rotation, secret management, and environment promotion safer & simpler.
@@ -167,6 +265,8 @@ Behavior:
 - `warn` - emit warning on invalid shape
 - `strict` - fail on type mismatch or missing required fields
 - `fanatical` - fail on type mismatch, missing required fields, or unknown additional fields
+
+> **Note on `int64` fields**: The upstream OpenAPI spec declares some fields (e.g. `totalItems`, `timeout`, `timestamp`) as `integer` with `format: int64`. The TypeScript types map these to `number`. JSON responses also deserialize as `number` (with precision loss beyond `Number.MAX_SAFE_INTEGER`). The Zod schemas use `z.coerce.number().int()` for these fields, preserving the integer constraint while keeping the runtime type aligned with TypeScript. All validation modes (`none`, `warn`, `strict`, `fanatical`) return `number`.
 
 ## Per-Method Retry Override
 

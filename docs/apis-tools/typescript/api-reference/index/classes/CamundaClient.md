@@ -1422,23 +1422,16 @@ Enriched deployment result with typed arrays (processes, decisions, decisionRequ
 #### Example
 
 ```ts
-async function createDeploymentExample() {
+async function deployResourcesFromFilesExample() {
   const camunda = createCamundaClient();
 
-  const file = new File(["<xml/>"], "order-process.bpmn", {
-    type: "application/xml",
-  });
-
-  const result = await camunda.createDeployment({
-    resources: [file],
-  });
+  // Node.js only: deploy directly from file paths
+  const result = await camunda.deployResourcesFromFiles([
+    "./process.bpmn",
+    "./decision.dmn",
+  ]);
 
   console.log(`Deployment key: ${result.deploymentKey}`);
-  for (const process of result.processes ?? []) {
-    console.log(
-      `  Process: ${process.processDefinitionId} v${process.processDefinitionVersion}`
-    );
-  }
 }
 ```
 
