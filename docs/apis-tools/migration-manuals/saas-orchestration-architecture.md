@@ -29,12 +29,12 @@ What didn't change:
 
 Camunda 8.9 introduces a unified API domain for Orchestration Clusters. All services are now accessible under a single base URL:
 
-| Service             | Unified URL (8.9)                                            |
-| :------------------ | :----------------------------------------------------------- |
-| Base / REST API     | `https://<region>.api.<camunda-domain>/<clusterId>`          |
-| Operate UI          | `https://<region>.api.<camunda-domain>/<clusterId>/operate`  |
-| Tasklist UI         | `https://<region>.api.<camunda-domain>/<clusterId>/tasklist` |
-| Admin (Identity) UI | `https://<region>.api.<camunda-domain>/<clusterId>/admin`    |
+| Service             | Unified URL (8.9)                                             |
+| :------------------ | :------------------------------------------------------------ |
+| Base / REST API     | `https://<region>.api.<camunda-domain>/<cluster-id>`          |
+| Operate UI          | `https://<region>.api.<camunda-domain>/<cluster-id>/operate`  |
+| Tasklist UI         | `https://<region>.api.<camunda-domain>/<cluster-id>/tasklist` |
+| Admin (Identity) UI | `https://<region>.api.<camunda-domain>/<cluster-id>/admin`    |
 
 Legacy hostnames (`*.zeebe.<camunda-domain>`, `*.operate.<camunda-domain>`, `*.tasklist.<camunda-domain>`, and `*.identity.<camunda-domain>`) continue to work in 8.9 and are internally routed to the unified service, but are deprecated and scheduled for removal in 8.10.
 
@@ -52,7 +52,13 @@ Existing client credentials downloaded from Console for pre-8.9 clusters may ref
 
 For long-lived automation and CI/CD systems, Camunda recommends updating credentials to use the new unified `*.api.*` URLs and corresponding token audience values before 8.10. You have two options:
 
-- **Update existing credentials manually:** Edit the hostnames and token audience values in your existing credential configuration to reference the new unified URLs.
+- **Update existing credentials manually:** Edit the hostnames and token audience values in your existing credential configuration to reference the new unified URLs. For example:
+  - **Legacy (pre-8.9):**
+    - **Base URL:** `https://bru-2.operate.camunda.io/abc123-def456-ghi789`
+    - **Audience:** `operate.camunda.io`
+  - **New (from 8.9):**
+    - **Base URL:** `https://bru-2.api.camunda.io/abc123-def456-ghi789/operate`
+    - **Audience:** `api.camunda.io`
 - **Create new credentials:** Create a fresh set of client credentials in Camunda Console, which will be generated with the unified API URLs and correct audience values by default.
 
 ## Service label changes
