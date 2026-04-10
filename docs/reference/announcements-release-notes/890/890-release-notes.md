@@ -111,7 +111,7 @@ Camunda Process Test now adds dedicated support for AI agent testing, making it 
 - Judge assertions use a configured LLM to assess whether AI-generated output satisfies a natural-language expectation, so you can verify response quality and intent.
 - Conditional behavior helps you model reactive test behavior for agent-driven flows by watching process state changes and completing tasks as they appear, without blocking the test on a predefined path.
 
-<p class="link-arrow">[Testing agentic processes](/apis-tools/testing/testing-agentic-processes.md)</p>
+<p class="link-arrow">[Testing agentic processes](/components/agentic-orchestration/test-ai-agents.md)</p>
 
 ### Camunda Docs MCP server
 
