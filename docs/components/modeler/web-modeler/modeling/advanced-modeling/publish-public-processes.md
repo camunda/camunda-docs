@@ -102,7 +102,9 @@ Unfortunately, currently you can not define granular permissions for shared proc
 
 Check the link URL. It should follow this pattern:
 
-`https://<region-identifier>.api.camunda.io/<cluster-uuid>/new/<process-ID>`
+`https://<region-identifier>.api.camunda.io/<cluster-uuid>/tasklist/new/<process-ID>`
+
+Public start forms are only available in [Tasklist V1](/components/tasklist/api-versions.md).
 
 ### Are public links indexed by search engines?
 
