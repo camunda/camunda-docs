@@ -229,7 +229,7 @@ Camunda 8.9 adds migration guidance for customers moving Self-Managed Helm deplo
 
 ### Gateway API, templating, and Helm 4 support
 
-The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm 4 adoption. These updates make it easier to modernize ingress, reuse dynamic values across environments, and prepare for Helm 3 end of life.
+The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm 4 adoption. These updates make it easier to modernize Ingress, reuse dynamic values across environments, and prepare for Helm 3 end of life.
 
 <p class="link-arrow">[Gateway API setup](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md)</p>
 <p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
