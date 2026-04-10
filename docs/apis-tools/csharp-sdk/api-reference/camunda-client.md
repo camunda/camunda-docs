@@ -627,6 +627,18 @@ Current backpressure state snapshot.
 
 **Returns:** `BackpressureState`
 
+**Example**
+
+```csharp
+public static void GetBackpressureStateExample()
+{
+    using var client = CamundaClient.Create();
+
+    var state = client.GetBackpressureState();
+    Console.WriteLine($"Severity: {state.Severity}, Permits: {state.PermitsMax}");
+}
+```
+
 #### GetAuthenticationAsync(CancellationToken)
 
 ```csharp
@@ -794,6 +806,19 @@ and calls with the loaded content.
 
 **Returns:** `Task<ExtendedDeploymentResponse>` — An with typed access to deployed artifacts.
 
+**Example**
+
+```csharp
+public static async Task DeployResourcesFromFilesExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.DeployResourcesFromFilesAsync(
+        ["process.bpmn", "decision.dmn"]);
+    Console.WriteLine($"Deployment key: {result.DeploymentKey}");
+}
+```
+
 #### DeleteResourceAsync(ResourceKey, DeleteResourceRequest, CancellationToken)
 
 ```csharp
@@ -920,6 +945,23 @@ to auto-fail with retries - 1.
 
 **Returns:** `JobWorker` — The running instance.
 
+**Example**
+
+```csharp
+public static void CreateJobWorkerExample()
+{
+    using var client = CamundaClient.Create();
+
+    var worker = client.CreateJobWorker(
+        new JobWorkerConfig { JobType = "payment-service" },
+        async (job, ct) =>
+        {
+            Console.WriteLine($"Processing job {job.JobKey}");
+            return new { Success = true };
+        });
+}
+```
+
 #### CreateJobWorker(JobWorkerConfig, Func<ActivatedJob, CancellationToken, Task>)
 
 ```csharp
@@ -935,6 +977,23 @@ The job is auto-completed with no variables on success.
 | `handler` | `Func<Task>`      |             |
 
 **Returns:** `JobWorker`
+
+**Example**
+
+```csharp
+public static void CreateJobWorkerExample()
+{
+    using var client = CamundaClient.Create();
+
+    var worker = client.CreateJobWorker(
+        new JobWorkerConfig { JobType = "payment-service" },
+        async (job, ct) =>
+        {
+            Console.WriteLine($"Processing job {job.JobKey}");
+            return new { Success = true };
+        });
+}
+```
 
 #### ActivateJobsAsync(JobActivationRequest, CancellationToken)
 
@@ -1331,6 +1390,25 @@ When the token is cancelled, all workers are stopped gracefully.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task RunWorkersExample(CancellationToken ct)
+{
+    using var client = CamundaClient.Create();
+
+    client.CreateJobWorker(
+        new JobWorkerConfig { JobType = "payment-service" },
+        async (job, jobCt) =>
+        {
+            Console.WriteLine($"Processing job {job.JobKey}");
+            return null;
+        });
+
+    await client.RunWorkersAsync(gracePeriod: TimeSpan.FromSeconds(10), ct);
+}
+```
+
 #### StopAllWorkersAsync(TimeSpan?)
 
 ```csharp
@@ -1345,6 +1423,25 @@ Stop all registered workers and wait for in-flight jobs to drain.
 
 **Returns:** `Task`
 
+**Example**
+
+```csharp
+public static async Task StopAllWorkersExample()
+{
+    using var client = CamundaClient.Create();
+
+    client.CreateJobWorker(
+        new JobWorkerConfig { JobType = "payment-service" },
+        async (job, ct) =>
+        {
+            Console.WriteLine($"Processing job {job.JobKey}");
+            return null;
+        });
+
+    await client.StopAllWorkersAsync(gracePeriod: TimeSpan.FromSeconds(5));
+}
+```
+
 #### GetWorkers()
 
 ```csharp
@@ -1354,6 +1451,29 @@ public IReadOnlyList<JobWorker> GetWorkers()
 Returns a snapshot of all registered workers.
 
 **Returns:** `IReadOnlyList<JobWorker>`
+
+**Example**
+
+```csharp
+public static void GetWorkersExample()
+{
+    using var client = CamundaClient.Create();
+
+    client.CreateJobWorker(
+        new JobWorkerConfig { JobType = "payment-service" },
+        async (job, ct) =>
+        {
+            Console.WriteLine($"Processing job {job.JobKey}");
+            return null;
+        });
+
+    var workers = client.GetWorkers();
+    foreach (var worker in workers)
+    {
+        Console.WriteLine($"Worker: {worker.Name}, Active: {worker.ActiveJobs}");
+    }
+}
+```
 
 ### Elements
 
@@ -3311,6 +3431,24 @@ truncated.
 
 **Returns:** `Task<VariableSearchQueryResult>`
 
+**Example**
+
+```csharp
+public static async Task SearchUserTaskEffectiveVariablesExample(UserTaskKey userTaskKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchUserTaskEffectiveVariablesAsync(
+        userTaskKey,
+        new SearchUserTaskEffectiveVariablesRequest());
+
+    foreach (var variable in result.Items)
+    {
+        Console.WriteLine($"Variable: {variable.Name}");
+    }
+}
+```
+
 #### SearchUserTaskVariablesAsync(UserTaskKey, SearchUserTaskVariablesRequest, bool?, ConsistencyOptions<VariableSearchQueryResult>?, CancellationToken)
 
 ```csharp
@@ -3748,6 +3886,34 @@ when awaitCompletion is enabled.
 | `ct`      | `CancellationToken`                  |             |
 
 **Returns:** `Task<CreateProcessInstanceResult>`
+
+**Example**
+
+```csharp
+public static async Task CreateProcessInstanceByIdExample(ProcessDefinitionId processDefinitionId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
+    {
+        ProcessDefinitionId = processDefinitionId,
+    });
+
+    Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+}
+
+public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey processDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
+    {
+        ProcessDefinitionKey = processDefinitionKey,
+    });
+
+    Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+}
+```
 
 #### DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, CancellationToken)
 
@@ -4664,6 +4830,22 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 
 **Returns:** `Task<DocumentReference>`
 
+**Example**
+
+```csharp
+public static async Task CreateDocumentExample()
+{
+    using var client = CamundaClient.Create();
+
+    using var content = new MultipartFormDataContent();
+    content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes("Hello, world!")), "file", "hello.txt");
+
+    var result = await client.CreateDocumentAsync(content);
+
+    Console.WriteLine($"Document ID: {result.DocumentId}");
+}
+```
+
 #### CreateDocumentLinkAsync(DocumentId, DocumentLinkRequest, string?, string?, CancellationToken)
 
 ```csharp
@@ -4731,6 +4913,26 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 
 **Returns:** `Task<DocumentCreationBatchResponse>`
 
+**Example**
+
+```csharp
+public static async Task CreateDocumentsExample()
+{
+    using var client = CamundaClient.Create();
+
+    using var content = new MultipartFormDataContent();
+    content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes("File one")), "files", "one.txt");
+    content.Add(new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes("File two")), "files", "two.txt");
+
+    var result = await client.CreateDocumentsAsync(content);
+
+    foreach (var doc in result.CreatedDocuments)
+    {
+        Console.WriteLine($"Created: {doc.DocumentId}");
+    }
+}
+```
+
 #### DeleteDocumentAsync(DocumentId, string?, CancellationToken)
 
 ```csharp
@@ -4780,6 +4982,19 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 | `ct`          | `CancellationToken` |             |
 
 **Returns:** `Task<Object>`
+
+**Example**
+
+```csharp
+public static async Task GetDocumentExample(DocumentId documentId)
+{
+    using var client = CamundaClient.Create();
+
+    var content = await client.GetDocumentAsync(documentId);
+
+    Console.WriteLine($"Downloaded document: {documentId}");
+}
+```
 
 ### Variables
 
@@ -5497,6 +5712,34 @@ version of the decision is used.
 | `ct`      | `CancellationToken`             |             |
 
 **Returns:** `Task<EvaluateDecisionResult>`
+
+**Example**
+
+```csharp
+public static async Task EvaluateDecisionByIdExample(DecisionDefinitionId decisionDefinitionId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.EvaluateDecisionAsync(new DecisionEvaluationById
+    {
+        DecisionDefinitionId = decisionDefinitionId,
+    });
+
+    Console.WriteLine($"Decision output: {result.Output}");
+}
+
+public static async Task EvaluateDecisionByKeyExample(DecisionDefinitionKey decisionDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.EvaluateDecisionAsync(new DecisionEvaluationByKey
+    {
+        DecisionDefinitionKey = decisionDefinitionKey,
+    });
+
+    Console.WriteLine($"Decision output: {result.Output}");
+}
+```
 
 ### Audit Logs
 
