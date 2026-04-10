@@ -75,7 +75,7 @@ Important changes in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Web Modeler](#web-modeler)</td>
-    <td>Simplified architecture and installation, move to Log4j2 and Tomcat, adds RDBMS support, event templates, and email invitations.</td>
+    <td>Simplified architecture and installation, migration to Log4j2 and Tomcat, RDBMS support, event templates, and email invitations.</td>
 </tr>
 <tr>
     <td>[Orchestration Cluster](#ocluster)</td>
