@@ -448,6 +448,28 @@ Camunda 8.9 introduces a new built-in Identity role, `task-worker`. Use this rol
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Default secret provider prefix change
+
+Starting with Camunda 8.9, the environment-based connector secret provider uses `SECRET_` as the default prefix. Unprefixed environment variables are no longer resolved as connector secrets unless you explicitly configure an empty prefix or a different custom prefix.
+
+**Action:** Choose one of the following options before or during your upgrade:
+
+- Update your secret environment variables to use the `SECRET_` prefix.
+- Configure a custom prefix via `camunda.connector.secret-provider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_PREFIX`.
+- Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
+
+<p className="link-arrow">[connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md#secrets)</p>
+<p className="link-arrow">[Upgrade 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md#default-secret-provider-prefix-change-breaking)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">

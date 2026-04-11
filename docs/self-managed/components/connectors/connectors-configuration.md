@@ -288,7 +288,7 @@ Starting with Camunda 8.9, the environment-based secret provider applies the pre
 
 This improves security by preventing all environment variables from being exposed as connector secrets. Existing secrets that do not use the configured prefix will no longer resolve until you update either the environment variables or the prefix configuration.
 
-#### Configuring a custom prefix
+#### Configure a custom prefix
 
 To use a custom prefix, configure it via the Java property or environment variable and name your secrets accordingly:
 
@@ -297,7 +297,7 @@ export CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
 export SUPER_SECRETS_MY_SECRET='foo'   # Resolved via {{ secrets.MY_SECRET }}
 ```
 
-#### Restoring the previous behavior (unsafe)
+#### Restore the previous behavior (unsafe)
 
 To restore the previous behavior where all environment variables can be used as connector secrets, set the prefix to an empty value:
 
@@ -305,8 +305,8 @@ To restore the previous behavior where all environment variables can be used as 
 camunda.connector.secret-provider.environment.prefix=
 ```
 
-:::caution
-When no prefix is configured, the connector runtime logs a warning that this mode is unsafe because all environment variables are exposed as connector secrets. This is not recommended for production.
+:::warning
+When no prefix is configured, the connector runtime logs a warning that this mode is unsafe because all environment variables are exposed as connector secrets. Camunda does not recommend this mode for production environments.
 :::
 
 The following environment variables can be used to configure the default secret provider:
