@@ -42,7 +42,7 @@ The examples below show configuration in two formats:
 - **`application.yml`** – the native Spring Boot configuration file format.
 
 :::tip Passing JVM options
-When running the `restapi` component in a container (Docker / Kubernetes), use the `JAVA_TOOL_OPTIONS` environment variable to pass JVM arguments (for example, trust store settings, proxy configuration). This is a standard JVM mechanism that is automatically picked up by all Java processes.
+When running the `restapi` component in a container (Docker / Kubernetes), use the `JAVA_OPTS` environment variable to pass JVM arguments, for example for trust store settings or proxy configuration.
 :::
 
 ### General
@@ -58,7 +58,7 @@ When running the `restapi` component in a container (Docker / Kubernetes), use t
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------- |
 | `RESTAPI_SERVER_URL`         | URL at which users access Web Modeler in the browser (used to construct redirect URLs in the client-side login flow as well as links in notification emails). | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
 | `SERVER_SERVLET_CONTEXTPATH` | [optional]<br/>Context path of the URL. Must be set if `RESTAPI_SERVER_URL` does not point to the root path of a (sub-)domain.                                | `/modeler`                                                       | -             |
-| `SERVER_HTTPS_ONLY`          | [optional]<br/>Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                        | `true`                                                           | `false`       |
+| `SERVER_HTTPS_ONLY`          | [optional]<br/>Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                        | `true`                                                           | `true`        |
 
 </TabItem>
 
@@ -67,7 +67,7 @@ When running the `restapi` component in a container (Docker / Kubernetes), use t
 ```yaml
 camunda.modeler.server:
   url: https://modeler.example.com # or https://example.com/modeler
-  https-only: true # optional, default: false
+  https-only: true # optional, default: true
 
 server:
   servlet:
@@ -276,7 +276,6 @@ Web Modeler requires an SMTP server to send notification emails to users.
 
 ```yaml
 camunda.modeler.mail:
-  enable-tls: true # default: true
   from-address: noreply@example.com
   from-name: Camunda # optional, default: Camunda
 
@@ -288,8 +287,8 @@ spring:
     password: "***" # optional
     properties:
       mail.smtp.auth: true # set to true if user and password are provided
-      mail.smtp.starttls.enable: true # set to true to enable STARTTLS encryption
-      mail.smtp.starttls.required: true # set to true to enforce STARTTLS encryption (recommended)
+      mail.smtp.starttls.enable: true # default: true; set to false to disable STARTTLS encryption
+      mail.smtp.starttls.required: true # default: true; set to false to avoid enforcing STARTTLS
 ```
 
 </TabItem>
@@ -318,7 +317,6 @@ This enables features like real-time notifications and immediate UI updates.
 | `CLIENT_PUSHER_HOST`      | [External](#notes-on-host-names-and-port-numbers) host name on which the Web Modeler client accesses the WebSocket server from the browser.   | `ws.example.com`     | -             |
 | `CLIENT_PUSHER_PORT`      | [External](#notes-on-host-names-and-port-numbers) port number on which the Web Modeler client accesses the WebSocket server from the browser. | `443`                | `80`          |
 | `CLIENT_PUSHER_PATH`      | [optional]<br/>_must be the same as_ [`PUSHER_APP_PATH`](#configuration-of-the-websocket-component)                                           | `/modeler-ws`        | `/`           |
-| `CLIENT_PUSHER_KEY`       | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*               | -             |
 | `CLIENT_PUSHER_FORCE_TLS` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`               | `false`       |
 
 </TabItem>
@@ -333,12 +331,10 @@ camunda.modeler:
     app-id: web-modeler
     key: "***"
     secret: "***"
-  client:
-    pusher:
+    client:
       host: ws.example.com
       port: 443 # default: 80
       path: /modeler-ws # optional, default: /
-      key: "***"
       force-tls: true # default: false
 ```
 
@@ -378,11 +374,12 @@ Web Modeler uses Keycloak as the default authentication provider (using OAuth 2.
 camunda:
   identity:
     base-url: http://identity:8080
-    issuer-backend-url: http://keycloak:18080/auth/realms/camunda-platform # optional
 
   modeler:
     security:
       jwt:
+        issuer:
+          backend-url: http://keycloak:18080/auth/realms/camunda-platform # optional
         audience:
           internal-api: web-modeler-api # default: web-modeler-api
           public-api: web-modeler-public-api # default: web-modeler-public-api
@@ -532,8 +529,7 @@ management:
 
 camunda.modeler:
   pusher:
-    ssl:
-      enabled: true # optional, default: false – enables SSL to the websocket component
+    ssl-enabled: true # optional, default: false; enables SSL to the websocket component
 ```
 
 </TabItem>
@@ -651,16 +647,17 @@ Web Modeler supports syncing files via [Git Sync](../../../../../components/mode
 
 <TabItem value="envVars">
 
-| Provider      | Environment variable                                | Description                                                                                                                   | Default value                                |
-| ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `50`                                         |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                        |
-| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                     |
-| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                  |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL`             | The base URL of your self-hosted Azure DevOps Server instance.                                                                | `https://dev.azure.com`                      |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_API_VERSION`         | The Azure DevOps API versions to use.                                                                                         | `7.1`                                        |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`          |
-| Bitbucket     | `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL`         | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories` |
+| Provider      | Environment variable                                | Description                                                                                                                   | Default value                                   |
+| ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `50`                                            |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                           |
+| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                        |
+| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                     |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL`             | The base URL of your self-hosted Azure DevOps Server instance.                                                                | `https://dev.azure.com`                         |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_API_VERSION`         | The Azure DevOps API versions to use.                                                                                         | `7.1`                                           |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`             |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_SCOPE`               | OAuth scope requested for Azure DevOps authentication.                                                                        | `499b84ac-1321-427f-aa17-267ca6975798/.default` |
+| Bitbucket     | `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL`         | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories`    |
 
 </TabItem>
 
@@ -679,6 +676,7 @@ camunda.modeler:
       base-url: https://dev.azure.com # default
       api-version: "7.1" # default
       authority-base-path: https://login.microsoftonline.com # default
+      scope: 499b84ac-1321-427f-aa17-267ca6975798/.default # default
     bitbucket:
       base-url: https://api.bitbucket.org/2.0/repositories # default
 ```
@@ -753,7 +751,7 @@ camunda.modeler.resource-import.allow-private-ip-address: true # default: false;
 
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
-The `websocket` component is a PHP/Laravel application configured via environment variables.
+The `websocket` component is configured via environment variables.
 When using the Camunda Helm chart, you can pass these variables via `webModeler.websocket.env` in your `values.yaml`.
 See the [Helm chart values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters) for all available configuration options.
 
