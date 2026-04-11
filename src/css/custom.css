@@ -26,7 +26,9 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto,
     oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
   --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
-  --ifm-alert-border-radius: 0;
+  --ifm-alert-border-radius: 8px;
+  --ifm-alert-border-width: 1px;
+  --ifm-alert-border-left-width: 1px;
   --ifm-breadcrumb-padding-horizontal: 0rem;
   --kapa-button-text: #fff;
   --kapa-button-bg: #fff;
@@ -38,6 +40,20 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     #78a9ff,
     #78a9ff
   );
+  /* Two-level navbar: accommodate both rows */
+  --ifm-navbar-height: 6rem;
+}
+
+/* Two-level navbar layout */
+.navbar {
+  flex-direction: column;
+  height: auto;
+}
+
+@media (max-width: 996px) {
+  :root {
+    --ifm-navbar-height: 3.75rem;
+  }
 }
 
 /* Show only Ask AI and Search on smaller screens */
@@ -188,9 +204,27 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 }
 
 .DocSearch-Button {
-  background-color: #ebebee !important;
-  border-radius: 20px !important;
-  height: 32px !important;
+  background-color: #f4f4f4 !important;
+  border: 1px solid #d0d0d0 !important;
+  border-radius: 8px !important;
+  height: 36px !important;
+  width: 300px !important;
+  max-width: 300px !important;
+  padding: 0 12px !important;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.DocSearch-Button:hover {
+  border-color: #a0a0a0 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.DocSearch-Button-Placeholder {
+  display: inline !important;
+  font-size: 0.875rem;
+  color: #8c8c8c;
 }
 .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-title {
   color: white !important;
@@ -216,6 +250,19 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   border: 2px solid #ad452a !important;
 }
 /* Search bar general */
+
+/* Replace Home icon with "Home" text in breadcrumbs */
+.breadcrumbs {
+  padding-top: 10px;
+}
+
+.breadcrumbs__item:first-child .breadcrumbs__link svg {
+  display: none;
+}
+
+.breadcrumbs__item:first-child .breadcrumbs__link::after {
+  content: "Home";
+}
 
 /* As we now show the breadcrumbs with full path,
 we make it less bold compared to the search keyword */
@@ -249,7 +296,29 @@ we make it less bold compared to the search keyword */
 }
 
 .DocSearch-Button-Keys {
-  display: none !important;
+  display: flex !important;
+  gap: 0px;
+  margin-left: auto;
+}
+
+.DocSearch-Button-Key {
+  background: transparent !important;
+  border: 1px solid #c0c0c0 !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  color: #8c8c8c !important;
+  font-size: 0.75rem !important;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
+  padding: 0 4px !important;
+  min-width: 1.4em !important;
+  height: 1.4em !important;
+  line-height: 1.4em !important;
+  text-align: center;
+}
+
+[data-theme="dark"] .DocSearch-Button-Key {
+  border-color: #555 !important;
+  color: #888 !important;
 }
 
 .homeSearch .DocSearch-Button-Placeholder::after {
@@ -289,10 +358,7 @@ we make it less bold compared to the search keyword */
   padding-left: 20px;
 }
 
-/* Search border */
-.DocSearch-Button {
-  border: 1px solid transparent !important;
-}
+/* Search border — overridden by the main .DocSearch-Button rule above */
 
 /* Adjust size of menu caret to be smaller (previously 2rem) */
 .menu__caret:before,
@@ -332,7 +398,17 @@ a {
 }
 
 [data-theme="dark"] .DocSearch-Button {
+  background-color: #262626 !important;
   border: 1px solid #48484a !important;
+}
+
+[data-theme="dark"] .DocSearch-Button:hover {
+  border-color: #6a6a6a !important;
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .DocSearch-Button-Placeholder {
+  color: #8c8c8c;
 }
 
 [data-theme="dark"] .hero__subtitle {
@@ -459,7 +535,7 @@ a {
   text-decoration: none;
 }
 [data-theme="dark"] .menu__link--active:not(.menu__link--sublist) {
-  font-weight: 600;
+  font-weight: 500;
 }
 [data-theme="dark"] .table-of-contents__link {
   text-decoration: none;
@@ -594,9 +670,37 @@ body {
     sans-serif;
 }
 
+/* Mintlify-style admonitions */
+.alert {
+  border: 1px solid var(--ifm-alert-border-color);
+  border-radius: 8px;
+  color: var(--ifm-font-color-base);
+}
+
+.alert
+  .admonitionHeading_node_modules-\@docusaurus-theme-classic-lib-next-theme-Admonition-Layout-styles-module {
+  color: var(--ifm-alert-foreground-color, var(--ifm-alert-border-color));
+}
+
 .alert a {
   text-decoration: underline;
   text-decoration-color: var(--ifm-alert-border-color);
+}
+
+/* Subtle, compact version banner */
+.theme-doc-version-banner {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  margin-top: 15px;
+  background-color: #f6f8fa;
+  border: 1px solid #d0d7de;
+  color: #656d76;
+}
+
+[data-theme="dark"] .theme-doc-version-banner {
+  background-color: #1c1f24;
+  border-color: #3d444d;
+  color: #8b949e;
 }
 
 .alert--primary {
@@ -1519,6 +1623,11 @@ ul ol {
   margin-top: 0.35rem;
   margin-bottom: 0.35rem;
 }
+/* Add spacing above sidebar menu */
+.menu {
+  padding-top: 1rem !important;
+}
+
 /* Reduce weight of menu items */
 .menu__link {
   font-weight: var(--ifm-font-weight-normal);
@@ -1554,10 +1663,7 @@ ul ol {
 /* Style any active page (including categories) with blue text */
 .menu__link--active {
   color: var(--ifm-menu-color-active); /* Blue text color */
-  font-weight: 600; /* Bold font weight */
-  border-left: 4px solid var(--ifm-link-color);
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  font-weight: 500; /* Bold font weight */
 }
 
 /* Only reset styling for parent categories that aren't the current page */
@@ -1657,6 +1763,10 @@ ul ol {
 }
 
 /* Mini TOC styling */
+
+ul.table-of-contents {
+  padding-top: 15px;
+}
 
 ul.table-of-contents:before {
   content: "On this page";

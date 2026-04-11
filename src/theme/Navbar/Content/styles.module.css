@@ -1,0 +1,105 @@
+/**
+ * Two-level navbar layout styles.
+ * Swizzled from version 3.8.0
+ */
+
+/* ---- Top row: Logo + Version | Search | Actions ---- */
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+}
+
+.topRowLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding-left: var(--ifm-navbar-item-padding-horizontal);
+}
+
+/* Prepend "Version:" inside the version dropdown button */
+.topRowLeft :global(.dropdown__link),
+.topRowLeft :global(.navbar__link) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.topRowLeft :global(.dropdown > .navbar__link)::before {
+  content: "Version:";
+  font-weight: 500;
+}
+
+.topRowRight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Tighten spacing between search bar and Ask AI button */
+.topRowRight :global(.navbarSearchContainer) {
+  padding-right: 0;
+}
+
+.topRowRight :global(.navbar__search + .navbar__item) {
+  padding-left: 0;
+}
+
+/* ---- Bottom row: Navigation links ---- */
+
+.bottomRow {
+  width: 100%;
+  padding-top: 0.8rem;
+  padding-bottom: 0;
+  margin-bottom: calc(-1 * var(--ifm-navbar-padding-vertical));
+}
+
+.bottomRow :global(.navbar__item) {
+  padding-top: 0.25rem;
+  padding-bottom: 0;
+}
+
+.bottomRow :global(.navbar__link) {
+  padding-top: 0;
+  padding-bottom: calc(var(--ifm-navbar-padding-vertical) + 0.4rem);
+  line-height: 1;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.bottomRow :global(.navbar__link--active) {
+  border-bottom: 2px solid var(--ifm-color-primary);
+}
+
+/* ---- Responsive ---- */
+
+/* Hide color mode toggle on small viewports */
+@media (max-width: 996px) {
+  .colorModeToggle {
+    display: none;
+  }
+
+  /* Collapse to single row on mobile — links go to sidebar */
+  .bottomRow {
+    display: none;
+  }
+
+  .topRow {
+    display: flex;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .topRowLeft {
+    flex: 1;
+  }
+
+  .topRowRight {
+    flex-shrink: 0;
+  }
+}
