@@ -4,8 +4,7 @@ on: pull_request
 
 jobs:
   build-docs:
-    runs-on: gcp-core-16-default
-    container: node:24
+    runs-on: ubuntu-latest
     env:
       temporary_link_path: .github/workflows/validate-links
     steps:
@@ -22,10 +21,10 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-      - name: Install hyperlink
-        run: npm install -g @untitaker/hyperlink
       - name: Check internal links
-        run: hyperlink --github-actions build/
+        uses: untitaker/hyperlink@0.2.0
+        with:
+          args: build/
       - name: Remove https redirect
         run: |
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
