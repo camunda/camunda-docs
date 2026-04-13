@@ -69,7 +69,7 @@ For a full reference of MCP configuration properties, see [Property reference](/
 Once the MCP server is enabled, you can connect any MCP-compliant client. The approach depends on your client's capabilities and authentication requirements.
 
 :::important
-When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page. You can also copy a ready-to-use [`c8ctl`](#use-c8ctl-mcp-proxy) configuration snippet directly from the **MCP** tab on the credentials screen.
+When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page.
 :::
 
 ### MCP endpoint URL
@@ -144,6 +144,10 @@ Add the following to your MCP client configuration (for example, `.vscode/mcp.js
 | `CAMUNDA_CLIENT_SECRET`  | OAuth client secret from your API client credentials.                                                                                                                                                          |
 | `CAMUNDA_OAUTH_URL`      | OAuth token endpoint URL.                                                                                                                                                                                      |
 | `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                                                                                                                                                              |
+
+:::tip Where to find these values
+When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are displayed on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet directly from the **MCP** tab on the credentials screen.
+:::
 
 For the full list of supported environment variables, see the [`c8ctl` documentation](https://github.com/camunda/c8ctl).
 
