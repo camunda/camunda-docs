@@ -129,6 +129,14 @@ If you click the **Apply** button from the summary modal as described [here](#vi
 
 ![applied-modifications](../../../images/operate/modifications/applied-modifications.png)
 
+## Maximum token modification limit
+
+When **canceling or moving** all tokens within one flow node instance—for flow nodes nested within a multi-instance body—a maximum of **500 tokens will be affected** due to technical limitations in this version. The modification can be repeated on the flow node instance until all tokens have been handled. To modify specific element instances instead, use the single instance modification by selecting the specific instances in the instance history, or use the [Camunda 8 REST API](../../../apis-tools/camunda-api-rest/specifications/modify-process-instance.api.mdx) where you can specify a custom filter.
+
+In this example, canceling or moving all instances would result in only 500 instances being canceled or moved:
+
+![large-multi-instance-modification](../../../images/operate/modifications/large-multi-instance-modification.png)
+
 ## Non-supported modifications
 
 Some elements do not support specific modifications:
