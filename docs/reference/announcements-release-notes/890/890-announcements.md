@@ -768,19 +768,6 @@ identity:
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Helm chart: `springImport` option for `extraConfiguration` entries
-
-Each `extraConfiguration` entry now supports an optional `springImport` field (default: `true`). Set `springImport: false` to mount configuration files (such as `log4j2.xml` or keystores) into the container without adding them to Spring Boot's `spring.config.import`. This applies to all components that support `extraConfiguration`: orchestration, identity, connectors, optimize, and web-modeler.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
@@ -900,6 +887,26 @@ If your `values.yaml` uses the `identity` profile key, the chart automatically m
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Keycloak auth secret configuration
+
+The legacy Keycloak auth secret configuration using `global.identity.keycloak.auth.existingSecret` and `global.identity.keycloak.auth.existingSecretKey` is deprecated in Camunda 8.9.
+
+**Action:** Migrate to the new standard secret pattern:
+
+- `global.identity.keycloak.auth.existingSecret` → `global.identity.keycloak.auth.secret.existingSecret`
+- `global.identity.keycloak.auth.existingSecretKey` → `global.identity.keycloak.auth.secret.existingSecretKey`
+
+Legacy keys continue to work in 8.9 via normalizers, but produce deprecation warnings and will be removed in a future version. See [Secret management](/self-managed/deployment/helm/configure/secret-management.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -917,21 +924,39 @@ This change reduces the risk of unexpected breaking changes from upstream Bitnam
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Secure connectivity (AWS PrivateLink) for SaaS
+#### Helm chart: Headless service exposes public API ports
 
-Camunda 8.9 introduces Secure connectivity for AWS-hosted Orchestration Clusters in Camunda 8 SaaS.
+The Orchestration component's headless service now includes gRPC and HTTP ports, enabling client-side load balancing for applications that connect directly to individual cluster members.
 
-Secure connectivity enables private inbound access from your AWS VPC to your cluster using AWS PrivateLink, without routing traffic over the public internet.
+</div>
+</div>
 
-- Applies per cluster.
-- Supports inbound connectivity only.
-- Public connectivity remains enabled.
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
 
-<p className="link-arrow">[Secure connectivity (AWS PrivateLink)](../../../components/saas/secure-connectivity/index.md)</p>
+#### Helm chart: Connectors OIDC issuer URI preferred over token URL
+
+The Connectors component now uses the OIDC issuer URI by preference, making `tokenUrl` optional when `issuerUri` is configured. This simplifies OIDC integration by allowing the token endpoint to be discovered automatically.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Persistent web sessions enabled for RDBMS mode
+
+When using RDBMS as the secondary storage type, web sessions now persist across pod restarts. Previously, sessions were discarded, requiring users to re-authenticate after each restart.
 
 </div>
 </div>
@@ -942,31 +967,13 @@ Secure connectivity enables private inbound access from your AWS VPC to your clu
 </div>
 <div className="release-announcement-content">
 
-#### Cluster variable support
+#### Helm chart: `springImport` option for `extraConfiguration` entries
 
-Camunda 8.9 introduces cluster variables, allowing you to centrally manage configuration across your cluster.
+Each `extraConfiguration` entry now supports an optional `springImport` field (default: `true`).
 
-<p className="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</p>
+**Action:** Set `springImport: false` to mount configuration files (such as `log4j2.xml` or keystores) into the container without adding them to Spring Boot's `spring.config.import`.
 
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
-
-#### Helm chart: Keycloak auth secret configuration
-
-The legacy Keycloak auth secret configuration using `global.identity.keycloak.auth.existingSecret` and `global.identity.keycloak.auth.existingSecretKey` is deprecated in Camunda 8.9.
-
-Migrate to the new standard secret pattern:
-
-- `global.identity.keycloak.auth.existingSecret` → `global.identity.keycloak.auth.secret.existingSecret`
-- `global.identity.keycloak.auth.existingSecretKey` → `global.identity.keycloak.auth.secret.existingSecretKey`
-
-Legacy keys continue to work in 8.9 via normalizers, but produce deprecation warnings and will be removed in a future version. See [Secret management](/self-managed/deployment/helm/configure/secret-management.md).
+This applies to all components that support `extraConfiguration`: orchestration, identity, connectors, optimize, and web-modeler.
 
 </div>
 </div>
@@ -1043,40 +1050,9 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 </div>
 <div className="release-announcement-content">
 
-#### MySQL and Microsoft SQL Server secondary storage
+#### Helm chart: New restore options
 
-Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### RDBMS secondary storage
-
-Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
-
-This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Standardized JDBC driver management for RDBMS
-
-Camunda 8.9 adds a standardized JDBC driver management system for manual installations.
-
-- A new `/driver-lib` directory separates Camunda-bundled drivers from customer-supplied ones.
-- Customers can add and configure their own drivers (for example, Oracle JDBC), while maintaining full compliance and version control.
+Camunda 8.9 adds new configuration options for backup restore operations in the Helm chart, giving operators more control over restore behavior via `values.yaml`.
 
 </div>
 </div>
@@ -1092,43 +1068,6 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 Camunda 8.9 adds support for the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) as an alternative to Ingress for routing external traffic to Camunda components.
 
 Setting `global.gateway.enabled: true` provisions `Gateway`, `HTTPRoute`, and `GRPCRoute` resources. Configure the gateway class, listeners, and per-component route options under `global.gateway.*` in your `values.yaml`.
-
-</div>
-</div>
-
-## Identity
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Orchestration Cluster Identity renamed to Admin
-
-Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
-
-Admin is the cluster-level admin UI hosting identity management and other administrative features. Identity management functionality (users, groups, roles, authorizations, tenants, mapping rules, and clients) is unchanged, although some naming, paths, and config keys are updated as follows:
-
-- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9. The `identity` profile is deprecated and will be removed in a future version.
-- API paths change from `/identity/*` to `/admin/*`. The old paths redirect to the new paths but are deprecated.
-- Helm values change from `orchestration.identity.*` to `orchestration.admin.*`. The old values are deprecated.
-- Documentation paths are updated: `/components/identity/` is now `/components/admin/`.
-
-<p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Helm chart: New restore options
-
-Camunda 8.9 adds new configuration options for backup restore operations in the Helm chart, giving operators more control over restore behavior via `values.yaml`.
 
 </div>
 </div>
@@ -1174,39 +1113,104 @@ Camunda 8.9 adds configuration options for the App Integrations exporter in the 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--updated">Updated</span>
+<span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
 
-#### Helm chart: Headless service exposes public API ports
+#### Secure connectivity (AWS PrivateLink) for SaaS
 
-The Orchestration component's headless service now includes gRPC and HTTP ports, enabling client-side load balancing for applications that connect directly to individual cluster members.
+Camunda 8.9 introduces Secure connectivity for AWS-hosted Orchestration Clusters in Camunda 8 SaaS.
+
+Secure connectivity enables private inbound access from your AWS VPC to your cluster using AWS PrivateLink, without routing traffic over the public internet.
+
+- Applies per cluster.
+- Supports inbound connectivity only.
+- Public connectivity remains enabled.
+
+<p className="link-arrow">[Secure connectivity (AWS PrivateLink)](../../../components/saas/secure-connectivity/index.md)</p>
 
 </div>
 </div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--updated">Updated</span>
+<span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
 
-#### Helm chart: Connectors OIDC issuer URI preferred over token URL
+#### Cluster variable support
 
-The Connectors component now uses the OIDC issuer URI by preference, making `tokenUrl` optional when `issuerUri` is configured. This simplifies OIDC integration by allowing the token endpoint to be discovered automatically.
+Camunda 8.9 introduces cluster variables, allowing you to centrally manage configuration across your cluster.
+
+<p className="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</p>
 
 </div>
 </div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--updated">Updated</span>
+<span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
 
-#### Helm chart: Persistent web sessions enabled for RDBMS mode
+#### MySQL and Microsoft SQL Server secondary storage
 
-When using RDBMS as the secondary storage type, web sessions now persist across pod restarts. Previously, sessions were discarded, requiring users to re-authenticate after each restart.
+Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### RDBMS secondary storage
+
+Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
+
+This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Standardized JDBC driver management for RDBMS
+
+Camunda 8.9 adds a standardized JDBC driver management system for manual installations.
+
+- A new `/driver-lib` directory separates Camunda-bundled drivers from customer-supplied ones.
+- Customers can add and configure their own drivers (for example, Oracle JDBC), while maintaining full compliance and version control.
+
+</div>
+</div>
+
+## Identity
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration Cluster Identity renamed to Admin
+
+Starting with Camunda 8.9, the Orchestration Cluster Identity component has been renamed to **Admin** (also referred to as Orchestration Cluster Admin).
+
+Admin is the cluster-level admin UI hosting identity management and other administrative features. Identity management functionality (users, groups, roles, authorizations, tenants, mapping rules, and clients) is unchanged, although some naming, paths, and config keys are updated as follows:
+
+- The `admin` Spring profile replaces the `identity` profile. Both profiles work interchangeably in 8.9. The `identity` profile is deprecated and will be removed in a future version.
+- API paths change from `/identity/*` to `/admin/*`. The old paths redirect to the new paths but are deprecated.
+- Helm values change from `orchestration.identity.*` to `orchestration.admin.*`. The old values are deprecated.
+- Documentation paths are updated: `/components/identity/` is now `/components/admin/`.
+
+<p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
 
 </div>
 </div>
