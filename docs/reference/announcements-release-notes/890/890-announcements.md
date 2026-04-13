@@ -603,9 +603,26 @@ Because Kafka treats a changed group ID as a brand-new consumer group, affected 
 </div>
 <div className="release-announcement-content">
 
+#### Camunda 8 Run: Docker Compose support removed
+
+The `--docker` flag and bundled Docker Compose files have been removed from Camunda 8 Run in 8.9. Camunda 8 Run and Docker Compose are now separate distribution artifacts.
+
+**Action:** If you previously started Docker Compose via `./c8run start --docker`, download the standalone [Docker Compose distribution](/self-managed/quickstart/developer-quickstart/docker-compose.md) from GitHub releases or the Camunda Download Center and run it independently.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Camunda 8 Run with H2 as the default secondary data storage
 
 Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch. Elasticsearch is no longer bundled with Camunda 8 Run.
+
+The `--disable-elasticsearch` flag is also removed, as Elasticsearch is no longer bundled. To use Elasticsearch as secondary storage, configure an external instance via `--config` and the `application.yaml`.
 
 When running with H2 (or any other RDBMS) as secondary storage, Camunda is only compatible with the V2 API. As a result, some features are not available in Operate and Tasklist. See [Migrate to the V2 Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
 
