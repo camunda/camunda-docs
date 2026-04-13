@@ -9,7 +9,7 @@ mdx:
 
 # Semantic Types
 
-The SDK uses Python `NewType` wrappers for identifiers like `ProcessDefinitionKey`, `ProcessInstanceKey`, `JobKey`, `TenantId`, etc. These are defined in `camunda_orchestration_sdk.semantic_types` and re-exported from the top-level package.
+The SDK uses distinct types for identifiers like `ProcessDefinitionKey`, `ProcessInstanceKey`, `JobKey`, `TenantId`, etc., defined in `camunda_orchestration_sdk.semantic_types` and re-exported from the top-level package. These types inherit from `str`, so they serialize transparently to/from JSON and are compatible with any code expecting a string.
 
 ## Why they exist
 
@@ -44,7 +44,7 @@ client.cancel_process_instance(process_instance_key=instance_key)
 
 ## Serialising in and out of the type system
 
-Semantic types are `NewType` wrappers over `str`, so they serialise transparently:
+Semantic types inherit from `str` and validate on construction, so they work transparently:
 
 <!-- snippet-exempt: uses hypothetical db.save/db.load pseudo-code -->
 
@@ -52,15 +52,15 @@ Semantic types are `NewType` wrappers over `str`, so they serialise transparentl
 from camunda_orchestration_sdk import ProcessDefinitionKey, ProcessInstanceKey
 
 # --- Serialising out (to storage / JSON / message queue) ---
-# A semantic type IS a str at runtime, so str()/json.dumps()/ORM columns just work:
+# A semantic type IS a str, so it works directly with any str API:
 process_key: ProcessDefinitionKey = deployment.processes[0].process_definition_key
 db.save("process_key", process_key)   # stores the raw string
 json.dumps({"key": process_key})      # "2251799813685249"
 
 # --- Deserialising in (from storage / external input) ---
-# Wrap the raw string with the type constructor:
+# Wrap the raw string with the type constructor (validates automatically):
 raw = db.load("process_key")           # returns a plain str
-typed_key = ProcessDefinitionKey(raw)  # re-enters the type system
+typed_key = ProcessDefinitionKey(raw)  # validates and wraps the value
 
 result = client.create_process_instance(
     data=ProcessCreationByKey(process_definition_key=typed_key)

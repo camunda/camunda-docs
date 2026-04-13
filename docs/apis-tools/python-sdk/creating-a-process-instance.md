@@ -28,7 +28,7 @@ with CamundaClient() as client:
     print(f"Process instance key: {result.process_instance_key}")
 ```
 
-If you need to restore a key from external storage (database, message queue, config file), wrap the raw string with the semantic type constructor:
+If you need to restore a key from external storage (database, message queue, config file), use the semantic type constructor. Validation runs automatically:
 
 <!-- snippet-source: examples/readme.py | regions: ReadmeCreateFromStorage -->
 
@@ -42,3 +42,5 @@ with CamundaClient() as client:
     )
     print(f"Process instance key: {result.process_instance_key}")
 ```
+
+**Migrating from pre-release versions:** Early pre-release builds exported `lift_*` helper functions (e.g., `lift_process_definition_key`). These have been removed — use the type constructor directly instead: `ProcessDefinitionKey(value)`. The constructor performs the same validation and is the single API surface for semantic types.

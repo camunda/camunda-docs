@@ -8,302 +8,447 @@ mdx:
 
 # Semantic Types
 
-### lift_audit_log_entity_key()
+## AuditLogEntityKey
 
 ```python
-def lift_audit_log_entity_key(value)
+class AuditLogEntityKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _AuditLogEntityKey_
+Bases: `str`
 
-### lift_audit_log_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [AuditLogEntityKey](#auditlogentitykey)
+
+## AuditLogKey
 
 ```python
-def lift_audit_log_key(value)
+class AuditLogKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _AuditLogKey_
+Bases: `str`
 
-### lift_authorization_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [AuditLogKey](#auditlogkey)
+
+## AuthorizationKey
 
 ```python
-def lift_authorization_key(value)
+class AuthorizationKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _AuthorizationKey_
+Bases: `str`
 
-### lift_batch_operation_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [AuthorizationKey](#authorizationkey)
+
+## BatchOperationKey
 
 ```python
-def lift_batch_operation_key(value)
+class BatchOperationKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _BatchOperationKey_
+Bases: `str`
 
-### lift_business_id()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [BatchOperationKey](#batchoperationkey)
+
+## BusinessId
 
 ```python
-def lift_business_id(value)
+class BusinessId(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _BusinessId_
+Bases: `str`
 
-### lift_conditional_evaluation_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [BusinessId](#businessid)
+
+## ConditionalEvaluationKey
 
 ```python
-def lift_conditional_evaluation_key(value)
+class ConditionalEvaluationKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ConditionalEvaluationKey_
+Bases: `str`
 
-### lift_decision_definition_id()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [ConditionalEvaluationKey](#conditionalevaluationkey)
+
+## DecisionDefinitionId
 
 ```python
-def lift_decision_definition_id(value)
+class DecisionDefinitionId(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionDefinitionId_
+Bases: `str`
 
-### lift_decision_definition_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [DecisionDefinitionId](#decisiondefinitionid)
+
+## DecisionDefinitionKey
 
 ```python
-def lift_decision_definition_key(value)
+class DecisionDefinitionKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionDefinitionKey_
+Bases: `str`
 
-### lift_decision_evaluation_instance_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [DecisionDefinitionKey](#decisiondefinitionkey)
+
+## DecisionEvaluationInstanceKey
 
 ```python
-def lift_decision_evaluation_instance_key(value)
+class DecisionEvaluationInstanceKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionEvaluationInstanceKey_
+Bases: `str`
 
-### lift_decision_evaluation_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [DecisionEvaluationInstanceKey](#decisionevaluationinstancekey)
+
+## DecisionEvaluationKey
 
 ```python
-def lift_decision_evaluation_key(value)
+class DecisionEvaluationKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionEvaluationKey_
+Bases: `str`
 
-### lift_decision_instance_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [DecisionEvaluationKey](#decisionevaluationkey)
+
+## DecisionInstanceKey
 
 ```python
-def lift_decision_instance_key(value)
+class DecisionInstanceKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionInstanceKey_
+Bases: `str`
 
-### lift_decision_requirements_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [DecisionInstanceKey](#decisioninstancekey)
+
+## DecisionRequirementsKey
 
 ```python
-def lift_decision_requirements_key(value)
+class DecisionRequirementsKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DecisionRequirementsKey_
+Bases: `str`
 
-### lift_deployment_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [DecisionRequirementsKey](#decisionrequirementskey)
+
+## DeploymentKey
 
 ```python
-def lift_deployment_key(value)
+class DeploymentKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DeploymentKey_
+Bases: `str`
 
-### lift_document_id()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [DeploymentKey](#deploymentkey)
+
+## DocumentId
 
 ```python
-def lift_document_id(value)
+class DocumentId(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _DocumentId_
+Bases: `str`
 
-### lift_element_id()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [DocumentId](#documentid)
+
+## ElementId
 
 ```python
-def lift_element_id(value)
+class ElementId(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ElementId_
+Bases: `str`
 
-### lift_element_instance_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [ElementId](#elementid)
+
+## ElementInstanceKey
 
 ```python
-def lift_element_instance_key(value)
+class ElementInstanceKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ElementInstanceKey_
+Bases: `str`
 
-### lift_end_cursor()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [ElementInstanceKey](#elementinstancekey)
+
+## EndCursor
 
 ```python
-def lift_end_cursor(value)
+class EndCursor(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _EndCursor_
+Bases: `str`
 
-### lift_form_id()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [EndCursor](#endcursor)
+
+## FormId
 
 ```python
-def lift_form_id(value)
+class FormId(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _FormId_
+Bases: `str`
 
-### lift_form_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [FormId](#formid)
+
+## FormKey
 
 ```python
-def lift_form_key(value)
+class FormKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _FormKey_
+Bases: `str`
 
-### lift_global_listener_id()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [FormKey](#formkey)
+
+## GlobalListenerId
 
 ```python
-def lift_global_listener_id(value)
+class GlobalListenerId(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _GlobalListenerId_
+Bases: `str`
 
-### lift_incident_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [GlobalListenerId](#globallistenerid)
+
+## IncidentKey
 
 ```python
-def lift_incident_key(value)
+class IncidentKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _IncidentKey_
+Bases: `str`
 
-### lift_job_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [IncidentKey](#incidentkey)
+
+## JobKey
 
 ```python
-def lift_job_key(value)
+class JobKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _JobKey_
+Bases: `str`
 
-### lift_message_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [JobKey](#jobkey)
+
+## MessageKey
 
 ```python
-def lift_message_key(value)
+class MessageKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _MessageKey_
+Bases: `str`
 
-### lift_message_subscription_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [MessageKey](#messagekey)
+
+## MessageSubscriptionKey
 
 ```python
-def lift_message_subscription_key(value)
+class MessageSubscriptionKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _MessageSubscriptionKey_
+Bases: `str`
 
-### lift_process_definition_id()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [MessageSubscriptionKey](#messagesubscriptionkey)
+
+## ProcessDefinitionId
 
 ```python
-def lift_process_definition_id(value)
+class ProcessDefinitionId(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ProcessDefinitionId_
+Bases: `str`
 
-### lift_process_definition_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [ProcessDefinitionId](#processdefinitionid)
+
+## ProcessDefinitionKey
 
 ```python
-def lift_process_definition_key(value)
+class ProcessDefinitionKey(value)
 ```
 
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _ProcessDefinitionKey_
+Bases: `str`
 
-### lift_process_instance_key()
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [ProcessDefinitionKey](#processdefinitionkey)
+
+## ProcessInstanceKey
 
 ```python
-def lift_process_instance_key(value)
+class ProcessInstanceKey(value)
 ```
 
+Bases: `str`
+
 - **Parameters:**
-  **value** (_Any_)
+  **value** (_str_)
 - **Return type:**
-  _ProcessInstanceKey_
+  [ProcessInstanceKey](#processinstancekey)
+
+## SignalKey
+
+```python
+class SignalKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [SignalKey](#signalkey)
+
+## StartCursor
+
+```python
+class StartCursor(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [StartCursor](#startcursor)
+
+## Tag
+
+```python
+class Tag(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [Tag](#tag)
+
+## TenantId
+
+```python
+class TenantId(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [TenantId](#tenantid)
+
+## UserTaskKey
+
+```python
+class UserTaskKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [UserTaskKey](#usertaskkey)
+
+## Username
+
+```python
+class Username(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [Username](#username)
+
+## VariableKey
+
+```python
+class VariableKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [VariableKey](#variablekey)
 
 ### lift_resource_key()
 
@@ -314,7 +459,7 @@ def lift_resource_key(value)
 - **Parameters:**
   **value** (_Any_)
 - **Return type:**
-  _ProcessDefinitionKey_ | _DecisionRequirementsKey_ | _FormKey_ | _DecisionDefinitionKey_
+  [_ProcessDefinitionKey_](#processdefinitionkey) | [_DecisionRequirementsKey_](#decisionrequirementskey) | [_FormKey_](#formkey) | [_DecisionDefinitionKey_](#decisiondefinitionkey)
 
 ### lift_scope_key()
 
@@ -325,381 +470,7 @@ def lift_scope_key(value)
 - **Parameters:**
   **value** (_Any_)
 - **Return type:**
-  _ProcessInstanceKey_ | _ElementInstanceKey_
-
-### lift_signal_key()
-
-```python
-def lift_signal_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _SignalKey_
-
-### lift_start_cursor()
-
-```python
-def lift_start_cursor(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _StartCursor_
-
-### lift_tag()
-
-```python
-def lift_tag(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tag_
-
-### lift_tenant_id()
-
-```python
-def lift_tenant_id(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _TenantId_
-
-### lift_user_task_key()
-
-```python
-def lift_user_task_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _UserTaskKey_
-
-### lift_username()
-
-```python
-def lift_username(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Username_
-
-### lift_variable_key()
-
-```python
-def lift_variable_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _VariableKey_
-
-### try_lift_audit_log_entity_key()
-
-```python
-def try_lift_audit_log_entity_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *AuditLogEntityKey* | Exception]
-
-### try_lift_audit_log_key()
-
-```python
-def try_lift_audit_log_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *AuditLogKey* | Exception]
-
-### try_lift_authorization_key()
-
-```python
-def try_lift_authorization_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *AuthorizationKey* | Exception]
-
-### try_lift_batch_operation_key()
-
-```python
-def try_lift_batch_operation_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *BatchOperationKey* | Exception]
-
-### try_lift_business_id()
-
-```python
-def try_lift_business_id(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *BusinessId* | Exception]
-
-### try_lift_conditional_evaluation_key()
-
-```python
-def try_lift_conditional_evaluation_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ConditionalEvaluationKey* | Exception]
-
-### try_lift_decision_definition_id()
-
-```python
-def try_lift_decision_definition_id(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionDefinitionId* | Exception]
-
-### try_lift_decision_definition_key()
-
-```python
-def try_lift_decision_definition_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionDefinitionKey* | Exception]
-
-### try_lift_decision_evaluation_instance_key()
-
-```python
-def try_lift_decision_evaluation_instance_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionEvaluationInstanceKey* | Exception]
-
-### try_lift_decision_evaluation_key()
-
-```python
-def try_lift_decision_evaluation_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionEvaluationKey* | Exception]
-
-### try_lift_decision_instance_key()
-
-```python
-def try_lift_decision_instance_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionInstanceKey* | Exception]
-
-### try_lift_decision_requirements_key()
-
-```python
-def try_lift_decision_requirements_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DecisionRequirementsKey* | Exception]
-
-### try_lift_deployment_key()
-
-```python
-def try_lift_deployment_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DeploymentKey* | Exception]
-
-### try_lift_document_id()
-
-```python
-def try_lift_document_id(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *DocumentId* | Exception]
-
-### try_lift_element_id()
-
-```python
-def try_lift_element_id(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ElementId* | Exception]
-
-### try_lift_element_instance_key()
-
-```python
-def try_lift_element_instance_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ElementInstanceKey* | Exception]
-
-### try_lift_end_cursor()
-
-```python
-def try_lift_end_cursor(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *EndCursor* | Exception]
-
-### try_lift_form_id()
-
-```python
-def try_lift_form_id(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *FormId* | Exception]
-
-### try_lift_form_key()
-
-```python
-def try_lift_form_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *FormKey* | Exception]
-
-### try_lift_global_listener_id()
-
-```python
-def try_lift_global_listener_id(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *GlobalListenerId* | Exception]
-
-### try_lift_incident_key()
-
-```python
-def try_lift_incident_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *IncidentKey* | Exception]
-
-### try_lift_job_key()
-
-```python
-def try_lift_job_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *JobKey* | Exception]
-
-### try_lift_message_key()
-
-```python
-def try_lift_message_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *MessageKey* | Exception]
-
-### try_lift_message_subscription_key()
-
-```python
-def try_lift_message_subscription_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *MessageSubscriptionKey* | Exception]
-
-### try_lift_process_definition_id()
-
-```python
-def try_lift_process_definition_id(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ProcessDefinitionId* | Exception]
-
-### try_lift_process_definition_key()
-
-```python
-def try_lift_process_definition_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ProcessDefinitionKey* | Exception]
-
-### try_lift_process_instance_key()
-
-```python
-def try_lift_process_instance_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *ProcessInstanceKey* | Exception]
+  [_ProcessInstanceKey_](#processinstancekey) | [_ElementInstanceKey_](#elementinstancekey)
 
 ### try_lift_resource_key()
 
@@ -710,7 +481,7 @@ def try_lift_resource_key(value)
 - **Parameters:**
   **value** (_Any_)
 - **Return type:**
-  _Tuple_[bool, *ProcessDefinitionKey* | *DecisionRequirementsKey* | *FormKey* | *DecisionDefinitionKey* | Exception]
+  _Tuple_[bool, [_ProcessDefinitionKey_](#processdefinitionkey) | [_DecisionRequirementsKey_](#decisionrequirementskey) | [_FormKey_](#formkey) | [_DecisionDefinitionKey_](#decisiondefinitionkey) | Exception]
 
 ### try_lift_scope_key()
 
@@ -721,81 +492,4 @@ def try_lift_scope_key(value)
 - **Parameters:**
   **value** (_Any_)
 - **Return type:**
-  _Tuple_[bool, *ProcessInstanceKey* | *ElementInstanceKey* | Exception]
-
-### try_lift_signal_key()
-
-```python
-def try_lift_signal_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *SignalKey* | Exception]
-
-### try_lift_start_cursor()
-
-```python
-def try_lift_start_cursor(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *StartCursor* | Exception]
-
-### try_lift_tag()
-
-```python
-def try_lift_tag(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *Tag* | Exception]
-
-### try_lift_tenant_id()
-
-```python
-def try_lift_tenant_id(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *TenantId* | Exception]
-
-### try_lift_user_task_key()
-
-```python
-def try_lift_user_task_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *UserTaskKey* | Exception]
-
-### try_lift_username()
-
-```python
-def try_lift_username(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *Username* | Exception]
-
-### try_lift_variable_key()
-
-```python
-def try_lift_variable_key(value)
-```
-
-- **Parameters:**
-  **value** (_Any_)
-- **Return type:**
-  _Tuple_[bool, *VariableKey* | Exception]
+  _Tuple_[bool, [_ProcessInstanceKey_](#processinstancekey) | [_ElementInstanceKey_](#elementinstancekey) | Exception]
