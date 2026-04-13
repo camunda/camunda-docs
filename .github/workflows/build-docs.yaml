@@ -4,14 +4,10 @@ on: pull_request
 
 jobs:
   build-docs:
-    runs-on: ubuntu-latest
-    env:
-      temporary_link_path: .github/workflows/validate-links
+    runs-on: gcp-core-16-default
+    container: node:24
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
       - name: Install Dependencies
         run: npm ci
       # Removed because it's causing build issues
@@ -21,6 +17,28 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-build
+          path: build
+  validate-links:
+    runs-on: gcp-core-16-default
+    needs: build-docs
+    env:
+      temporary_link_path: .github/workflows/validate-links
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: docs-build
+          path: build
+      - name: Install hyperlink
+        run: npm install -g @untitaker/hyperlink
       - name: Check internal links
         uses: untitaker/hyperlink@0.2.0
         with:
@@ -38,7 +56,6 @@ jobs:
         uses: nev7n/wait_for_response@v1
         with:
           url: ${{ env.domain_to_test }}
-
       - name: Download sitemap from production
         run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' > sitemap.prod.txt
       - name: Remove known broken anchors.
