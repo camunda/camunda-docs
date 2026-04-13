@@ -225,6 +225,9 @@ RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/u
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
 
+# APIs & tools migration guide root
+RewriteRule ^docs/apis-tools/migration-manuals/?$ /docs/apis-tools/migration-manuals/migrate-to-89/ [R=301,L]
+
 # Remove ES/OS page
 RewriteRule ^docs/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch/?$ /docs/self-managed/concepts/secondary-storage/configuring-secondary-storage/ [R=301,L]
 RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch/?$ /docs/8.9/self-managed/concepts/secondary-storage/configuring-secondary-storage/ [R=301,L]
