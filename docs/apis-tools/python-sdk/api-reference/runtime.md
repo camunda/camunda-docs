@@ -408,33 +408,39 @@ prefix on each message.
 ### debug()
 
 ```python
-def debug(msg)
+def debug(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
-  **msg** (_str_)
+  - **msg** (_str_)
+  - **args** (_Any_)
+  - **kwargs** (_Any_)
 - **Return type:**
   None
 
 ### error()
 
 ```python
-def error(msg)
+def error(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
-  **msg** (_str_)
+  - **msg** (_str_)
+  - **args** (_Any_)
+  - **kwargs** (_Any_)
 - **Return type:**
   None
 
 ### info()
 
 ```python
-def info(msg)
+def info(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
-  **msg** (_str_)
+  - **msg** (_str_)
+  - **args** (_Any_)
+  - **kwargs** (_Any_)
 - **Return type:**
   None
 
@@ -452,11 +458,13 @@ def trace(msg)
 ### warning()
 
 ```python
-def warning(msg)
+def warning(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
-  **msg** (_str_)
+  - **msg** (_str_)
+  - **args** (_Any_)
+  - **kwargs** (_Any_)
 - **Return type:**
   None
 
@@ -500,24 +508,24 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 
 - **Parameters:**
   - **type\_** (_str_)
-  - **process_definition_id** (_ProcessDefinitionId_)
+  - **process_definition_id** ([_ProcessDefinitionId_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionId))
   - **process_definition_version** (_int_)
-  - **element_id** (_ElementId_)
+  - **element_id** ([_ElementId_](types.md#camunda_orchestration_sdk.semantic_types.ElementId))
   - **custom_headers** (_ActivatedJobResultCustomHeaders_)
   - **worker** (_str_)
   - **retries** (_int_)
   - **deadline** (_int_)
   - **variables** (_ActivatedJobResultVariables_)
-  - **tenant_id** (_TenantId_)
-  - **job_key** (_JobKey_)
-  - **process_instance_key** (_ProcessInstanceKey_)
-  - **process_definition_key** (_ProcessDefinitionKey_)
-  - **element_instance_key** (_ElementInstanceKey_)
+  - **tenant_id** ([_TenantId_](types.md#camunda_orchestration_sdk.semantic_types.TenantId))
+  - **job_key** ([_JobKey_](types.md#camunda_orchestration_sdk.semantic_types.JobKey))
+  - **process_instance_key** ([_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **process_definition_key** ([_ProcessDefinitionKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionKey))
+  - **element_instance_key** ([_ElementInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ElementInstanceKey))
   - **kind** (_JobKindEnum_)
   - **listener_event_type** (_JobListenerEventTypeEnum_)
   - **user_task** (_ActivatedJobResultUserTask_ _|_ _None_)
   - **tags** (_list_ _[\*\*str_ _]_)
-  - **root_process_instance_key** (_None_ _|_ _ProcessInstanceKey_)
+  - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **log** ([_SdkLogger_](#sdklogger))
   - **client** ([_CamundaAsyncClient_](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
 
@@ -548,24 +556,24 @@ Read-only context for a job execution.
 
 - **Parameters:**
   - **type\_** (_str_)
-  - **process_definition_id** (_ProcessDefinitionId_)
+  - **process_definition_id** ([_ProcessDefinitionId_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionId))
   - **process_definition_version** (_int_)
-  - **element_id** (_ElementId_)
+  - **element_id** ([_ElementId_](types.md#camunda_orchestration_sdk.semantic_types.ElementId))
   - **custom_headers** (_ActivatedJobResultCustomHeaders_)
   - **worker** (_str_)
   - **retries** (_int_)
   - **deadline** (_int_)
   - **variables** (_ActivatedJobResultVariables_)
-  - **tenant_id** (_TenantId_)
-  - **job_key** (_JobKey_)
-  - **process_instance_key** (_ProcessInstanceKey_)
-  - **process_definition_key** (_ProcessDefinitionKey_)
-  - **element_instance_key** (_ElementInstanceKey_)
+  - **tenant_id** ([_TenantId_](types.md#camunda_orchestration_sdk.semantic_types.TenantId))
+  - **job_key** ([_JobKey_](types.md#camunda_orchestration_sdk.semantic_types.JobKey))
+  - **process_instance_key** ([_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **process_definition_key** ([_ProcessDefinitionKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionKey))
+  - **element_instance_key** ([_ElementInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ElementInstanceKey))
   - **kind** (_JobKindEnum_)
   - **listener_event_type** (_JobListenerEventTypeEnum_)
   - **user_task** (_ActivatedJobResultUserTask_ _|_ _None_)
   - **tags** (_list_ _[\*\*str_ _]_)
-  - **root_process_instance_key** (_None_ _|_ _ProcessInstanceKey_)
+  - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **log** ([_SdkLogger_](#sdklogger))
 
 ### log
@@ -668,24 +676,24 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
 
 - **Parameters:**
   - **type\_** (_str_)
-  - **process_definition_id** (_ProcessDefinitionId_)
+  - **process_definition_id** ([_ProcessDefinitionId_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionId))
   - **process_definition_version** (_int_)
-  - **element_id** (_ElementId_)
+  - **element_id** ([_ElementId_](types.md#camunda_orchestration_sdk.semantic_types.ElementId))
   - **custom_headers** (_ActivatedJobResultCustomHeaders_)
   - **worker** (_str_)
   - **retries** (_int_)
   - **deadline** (_int_)
   - **variables** (_ActivatedJobResultVariables_)
-  - **tenant_id** (_TenantId_)
-  - **job_key** (_JobKey_)
-  - **process_instance_key** (_ProcessInstanceKey_)
-  - **process_definition_key** (_ProcessDefinitionKey_)
-  - **element_instance_key** (_ElementInstanceKey_)
+  - **tenant_id** ([_TenantId_](types.md#camunda_orchestration_sdk.semantic_types.TenantId))
+  - **job_key** ([_JobKey_](types.md#camunda_orchestration_sdk.semantic_types.JobKey))
+  - **process_instance_key** ([_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **process_definition_key** ([_ProcessDefinitionKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionKey))
+  - **element_instance_key** ([_ElementInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ElementInstanceKey))
   - **kind** (_JobKindEnum_)
   - **listener_event_type** (_JobListenerEventTypeEnum_)
   - **user_task** (_ActivatedJobResultUserTask_ _|_ _None_)
   - **tags** (_list_ _[\*\*str_ _]_)
-  - **root_process_instance_key** (_None_ _|_ _ProcessInstanceKey_)
+  - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **log** ([_SdkLogger_](#sdklogger))
   - **client** ([_CamundaClient_](client.md#camunda_orchestration_sdk.CamundaClient))
 
@@ -938,7 +946,7 @@ CAMUNDA_TOKEN_CACHE_DIR: str
 ### CAMUNDA_TOKEN_DISK_CACHE_DISABLE
 
 ```python
-CAMUNDA_TOKEN_DISK_CACHE_DISABLE: bool
+CAMUNDA_TOKEN_DISK_CACHE_DISABLE: str
 ```
 
 ### CAMUNDA_WORKER_MAX_CONCURRENT_JOBS
