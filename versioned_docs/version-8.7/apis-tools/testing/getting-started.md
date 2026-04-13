@@ -69,6 +69,10 @@ you must also use the dedicated Spring Boot 4.0 test artifact:
 </dependency>
 ```
 
+:::note
+`camunda-process-test-spring-boot-4` is available from the 8.7.27 patch release. For the 8.7.24–8.7.26 patch releases, the artifact was named `camunda-process-test-spring-4`.
+:::
+
 </TabItem>
 
 <TabItem value='java-client'>

@@ -76,14 +76,18 @@ you must also use the dedicated Spring Boot 4.0 test artifact:
 </dependency>
 ```
 
-The 8.8.9 release of `camunda-process-test-spring-boot-4` still contained `camunda-spring-boot-starter` as a dependency, potentially causing runtime issues.
+:::note
+`camunda-process-test-spring-boot-4` is available from the 8.8.22 patch release. For the 8.8.9–8.8.21 patch releases, the artifact was named `camunda-process-test-spring-4`.
+:::
+
+The 8.8.9 release of `camunda-process-test-spring-4` still contained `camunda-spring-boot-starter` as a dependency, potentially causing runtime issues.
 
 As a workaround until this is fixed with 8.8.10, you must exclude it:
 
 ```xml
 <dependency>
   <groupId>io.camunda</groupId>
-  <artifactId>camunda-process-test-spring-boot-4</artifactId>
+  <artifactId>camunda-process-test-spring-4</artifactId>
   <version>${camunda.version}</version>
   <scope>test</scope>
   <exclusions>
