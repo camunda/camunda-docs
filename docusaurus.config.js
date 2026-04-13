@@ -380,7 +380,7 @@ module.exports = {
             '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
         },
         {
-          to: "https://camunda.com/download?utm_source=docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",
+          to: "https://docs.camunda.io/build-with-camunda/",
           position: "right",
           className: "button button--primary button--md try-free",
           label: "Try Free",
@@ -402,7 +402,7 @@ module.exports = {
           items: [
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              href: "https://docs.camunda.io/build-with-camunda/",
             },
             {
               label: "Support and feedback",
