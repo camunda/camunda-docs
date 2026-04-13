@@ -3,11 +3,12 @@ id: long-term-memory-ai-agents
 title: Add long-term memory to your AI agents
 sidebar_label: Add long-term memory
 description: "Add long-term memory to your AI agents using RAG and the vector database connector."
-keywords: ["agentic ai", "AI agents", "RAG", "vector database", "long-term memory"]
+keywords:
+  ["agentic ai", "AI agents", "RAG", "vector database", "long-term memory"]
 toc_max_heading_level: 2
 ---
 
-Add long-term memory to your AI agents using Retrieval-Augmented Generation (RAG) and the [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md).
+Add long-term memory to your AI agents using Retrieval-Augmented Generation (RAG) and the [Vector Database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md).
 
 ## About
 
