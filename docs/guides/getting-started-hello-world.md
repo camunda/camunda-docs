@@ -13,7 +13,9 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--short">30 minutes</span>
 
-This guide walks you through deploying and running a fully automated BPMN process — no code, no workers, no forms. You supply variables, and the Camunda engine does all the work using script tasks, gateways, a timer, and a DMN decision table.
+This guide walks you through deploying and running a fully automated BPMN process — no code, no workers, no forms required. You supply a couple of variables, and the Camunda engine handles everything else using script tasks, gateways, a timer, and a DMN decision table.
+
+If you're new to Camunda or BPMN, don't worry — you don't need any background knowledge. Just follow the steps and you'll have a running process in about 30 minutes.
 
 ## What you'll build
 
@@ -38,6 +40,8 @@ Different inputs produce different outcomes:
 
 ## What you'll learn
 
+These are the BPMN and Camunda concepts you'll see in action. You don't need to know any of them in advance — this guide introduces each one in context.
+
 | Concept                            | Where you'll see it                                                   |
 | ---------------------------------- | --------------------------------------------------------------------- |
 | **Script tasks with FEEL**         | Five tasks that compute values inline — no external worker needed     |
@@ -51,7 +55,7 @@ Different inputs produce different outcomes:
 
 ## Prerequisites
 
-- [JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/)
+- [JDK 21–25](https://www.oracle.com/de/java/technologies/downloads/) – required by Camunda 8 Run to start the engine locally.
 
 ## Download the Camunda 8 starter package
 
@@ -105,18 +109,18 @@ All of these components are included in the starter package. You do not need to 
   </li>
 
   <li>
-    Click the "Rocket" icon to connect to your Camunda 8 Run instance and deploy the model.
-    Select <code>Camunda 8 Self-Managed</code> and use <code>http://localhost:8080/v2</code> as the cluster endpoint.
+    Click the "Rocket" icon in the bottom toolbar of Camunda Modeler to open the deployment dialog.
+    Select <code>Camunda 8 Self-Managed</code> and enter <code>http://localhost:8080/v2</code> as the cluster endpoint, then click <strong>Deploy</strong>.
   </li>
 
   <li>
-    Go back to Camunda Modeler and open the DMN decision table:
+    Switch back to Camunda Modeler and open the DMN decision table:
     <pre><code>camunda-8-get-started/1-rocket-launch/plot-destination.dmn</code></pre>
-    Deploy this file using the same "Rocket" icon and cluster endpoint.
+    Deploy this file using the same "Rocket" icon, cluster endpoint, and <strong>Deploy</strong> button.
   </li>
 
   <li>
-    Go back to the <code>rocket-launch.bpmn</code> tab in Modeler and click the "Play" icon on the bottom toolbar to deploy and start an instance of the process.
+    Switch back to the <code>rocket-launch.bpmn</code> tab in Modeler and click the "Play" icon on the bottom toolbar to start a new process instance.
 
 Set the following variables to start a mission:
 
@@ -160,7 +164,7 @@ Compare the paths of successful and cancelled instances in Operate.
 
 ## How it works
 
-The process uses no external code. All logic is expressed using **FEEL expressions** in script tasks and a **DMN decision table**:
+The process uses no external code. All logic is expressed using **FEEL expressions** in script tasks and a **DMN decision table**. You don't need to write or edit these expressions to complete this guide — this section is just a reference if you're curious what's happening under the hood.
 
 | Task             | FEEL expression                                                                                                    | Output variable  |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------- |
@@ -173,7 +177,7 @@ The process uses no external code. All logic is expressed using **FEEL expressio
 
 ## Complete!
 
-Navigate back to Operate and verify that your process instances have completed successfully (or cancelled, depending on the fuel level).
+Navigate back to Operate and verify that your process instances have completed successfully (or were cancelled, depending on the fuel level). Congratulations — you've just deployed and run your first Camunda 8 process!
 
 ## Summary
 
