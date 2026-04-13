@@ -4,7 +4,7 @@ on: pull_request
 
 jobs:
   build-docs:
-    runs-on: gcp-core-16-default
+    runs-on: gcp-core-32-release
     container: node:24
     steps:
       - uses: actions/checkout@v6
