@@ -128,6 +128,8 @@ Camunda 8.9 adds a documentation-focused MCP server so IDEs and AI tools can que
 
 Camunda 8 Run is easier to use in 8.9 with clearer CLI guidance, improved Elasticsearch startup errors, guided Java detection, clean-state support, and more visible connection and credential details. The 8.9 release also includes the unified configuration file and expanded documentation for local development workflows.
 
+The `--docker` flag and bundled Docker Compose files have been removed. Docker Compose is now a standalone distribution artifact. C8Run now opens Operate on startup instead of the quickstart documentation page.
+
 <p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
 ### Flexible local secondary storage
