@@ -6,7 +6,7 @@ description: "Understand and decide on the architecture of your task application
 
 A typical task application architecture consists of a task application frontend, a backend-for-frontend, and one or more data sources or services that contain business data relevant for the application users to perform their work. The backend implements Camunda Zeebe and Tasklist clients to retrieve and interact with tasks via Camunda APIs. For historical process instance data, Operate is also required.
 
-Depending on the user task implementation type (job worker-based vs Camunda user task) you use in your processes, you need to run either the Tasklist or Zeebe client to run operations on tasks. Task, form, and variable retrieval happens via the API. Learn more about the differences of the task implementation types in the [migration guide for Camunda user tasks](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md).
+Depending on the user task implementation type (job worker-based vs Camunda user task) you use in your processes, you need to run either the Tasklist or Zeebe client to run operations on tasks. Task, form, and variable retrieval happens via the API. Learn more about the differences of the task implementation types in the [migration guide for Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md).
 
 :::tip
 Starting a new project? Use Camunda user tasks to simplify your implementation.

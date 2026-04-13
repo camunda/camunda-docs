@@ -156,6 +156,10 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 # 3. Specific content moves
 ##################################################################################
 
+#---------------------------------------------------------------------------------
+#   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
+#---------------------------------------------------------------------------------
+
 # Fix broken links from camunda-platform-get-started README
 
 # Get started with Optimize
@@ -222,7 +226,8 @@ RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/u
 #---------------------------------------------------------------------------------
 
 # Remove ES/OS page
-RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch/?$ /docs/next/self-managed/concepts/secondary-storage/configuring-secondary-storage/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch/?$ /docs/self-managed/concepts/secondary-storage/configuring-secondary-storage/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch/?$ /docs/8.9/self-managed/concepts/secondary-storage/configuring-secondary-storage/ [R=301,L]
 
 # Self-Managed upgrade guide restructuring
 RewriteRule ^docs/next/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/next/self-managed/upgrade/ [R=301,L]
@@ -234,7 +239,8 @@ RewriteRule ^docs/next/self-managed/components/components-upgrade/840-to-850/?$ 
 RewriteRule ^docs/next/self-managed/components/components-upgrade/850-to-860/?$ /docs/8.7/self-managed/operational-guides/update-guide/850-to-860/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/components-upgrade/860-to-870/?$ /docs/8.7/self-managed/operational-guides/update-guide/860-to-870/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/components-upgrade/870-to-880/?$ /docs/self-managed/upgrade/components/870-to-880/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/components-upgrade/880-to-890/?$ /docs/next/self-managed/upgrade/components/880-to-890/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/880-to-890/?$ /docs/self-managed/upgrade/components/880-to-890/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/components-upgrade/880-to-890/?$ /docs/8.9/self-managed/upgrade/components/880-to-890/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/components-upgrade/keycloak/keycloak-update/?$ /docs/next/self-managed/upgrade/components/keycloak/keycloak-compatibility/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/components-upgrade/elasticsearch/7-to-8/?$ /docs/next/self-managed/upgrade/components/database/changes-in-elasticsearch-8/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3/ [R=301,L]
@@ -261,22 +267,23 @@ RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-880-890/?
 RewriteRule ^docs/next/self-managed/deployment/manual/upgrade/?$ /docs/next/self-managed/upgrade/manual/ [R=301,L]
 
 # Removed Camunda Exporter indices page
-RewriteRule ^docs/next/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices/?$ /docs/next/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices/?$ /docs/8.9/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
 
 # Change ID of choose-right-model-agentic
-RewriteRule ^docs/next/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/next/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
+RewriteRule ^docs/8.9/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/8.9/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
 RewriteRule ^docs/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
 
 # Remove Node.js SDK and redirect to TypeScript SDK
-RewriteRule ^docs/next/apis-tools/node-js-sdk/$ /docs/next/apis-tools/typescript/typescript-sdk/ [R=301,L]
+RewriteRule ^docs/8.9/apis-tools/node-js-sdk/$ /docs/8.9/apis-tools/typescript/typescript-sdk/ [R=301,L]
 RewriteRule ^docs/apis-tools/node-js-sdk/$ /docs/apis-tools/typescript/typescript-sdk/ [R=301,L]
 
 # Removed Web Modeler Task testing page
-RewriteRule ^docs/next/components/concepts/task-testing/?$ /docs/next/components/modeler/task-testing/ [R=301,L]
+RewriteRule ^docs/8.9/components/concepts/task-testing/?$ /docs/8.9/components/modeler/task-testing/ [R=301,L]
 RewriteRule ^docs/components/concepts/task-testing/?$ /docs/components/modeler/task-testing/ [R=301,L]
 
 # Removal of refactoring suggestions
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/about-modeler/ [R=301,L]
+RewriteRule ^docs/8.9/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/8.9/components/modeler/about-modeler/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/components/modeler/about-modeler/ [R=301,L]
 
 
@@ -284,25 +291,23 @@ RewriteRule ^docs/self-managed/deployment/helm/configure/authentication-and-auth
 RewriteRule ^docs/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider/?$ /docs/self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider/ [R=301,L]
 
 # Move intrinsic-functions to advanced-topics (8.9)
-RewriteRule ^docs/next/components/connectors/use-connectors/intrinsic-functions/?$ /docs/next/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
+RewriteRule ^docs/8.9/components/connectors/use-connectors/intrinsic-functions/?$ /docs/8.9/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 RewriteRule ^docs/components/connectors/use-connectors/intrinsic-functions/?$ /docs/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 RewriteRule ^docs/8.8/components/connectors/use-connectors/intrinsic-functions/?$ /docs/8.8/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 
 # Rename identity to admin for orchestration-cluster (8.9)
-RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/next/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/next/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/next/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/next/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/8.9/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/8.9/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/8.9/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
 
 # Move MCP Client from early access to Agentic AI connectors (8.9)
-RewriteRule ^docs/next/components/early-access/alpha/mcp-client/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
-RewriteRule ^docs/next/components/early-access/alpha/mcp-client/(.+)$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
-
-# Will be activated with the switch: next -> current
-# RewriteRule ^docs/components/early-access/alpha/mcp-client/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
-# RewriteRule ^docs/components/early-access/alpha/mcp-client/(.+)$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
+RewriteRule ^docs/components/early-access/alpha/mcp-client/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+RewriteRule ^docs/components/early-access/alpha/mcp-client/(.+)$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
+RewriteRule ^docs/8.9/components/early-access/alpha/mcp-client/?$ /docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+RewriteRule ^docs/8.9/components/early-access/alpha/mcp-client/(.+)$ /docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
 
 # Removal of 8.5 announcements/release notes
 RewriteRule ^docs/next/reference/announcements-release-notes/850/(.*)$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]

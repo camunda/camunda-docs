@@ -89,7 +89,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 
 The Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with Camunda 8.8 if you are running:
 
-- Either the [Zeebe Java Client &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/java-client/index.md) OR the [Spring Zeebe SDK &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc),
+- Either the [Zeebe Java Client &lt;=8.7.15](/versioned_docs/version-8.7/apis-tools/java-client/index.md) OR the [Spring Zeebe SDK &lt;=8.7.15](/versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc),
 - AND you opted into preferring REST over gRPC (setting `preferRestOverGrpc=true` explicitly on client setup).
 
 In this scenario, you will be affected by the following issue [Camunda 8.7 REST client fails on unknown response properties on job activate (#39675)](https://github.com/camunda/camunda/issues/39675).
