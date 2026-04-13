@@ -62,6 +62,10 @@ The migration follows a five-phase approach designed to minimize downtime:
 
 The main downtime driver is the Elasticsearch reindex duration. With the **warm reindex** strategy, Elasticsearch data is pre-copied during Phase 2 (no downtime), reducing Phase 3 to a fast delta sync. See [downtime estimation](./bitnami-to-operators.md#downtime-estimation) for benchmarked timings.
 
+### Migration scripts
+
+The migration phases above are automated by shell scripts maintained in the [Camunda deployment references](https://github.com/camunda/camunda-deployment-references) repository. Each migration guide includes instructions to [clone the repository](./bitnami-to-operators.md#clone-the-deployment-references-repository) and configure the scripts for your environment. The scripts also support [migration hooks](#migration-hooks) for custom logic at each phase boundary.
+
 ## Precautions (all paths) {#precautions}
 
 Regardless of the migration path you choose, review the following precautions **before starting** the migration.
@@ -113,7 +117,7 @@ All migration paths require an explicit decision for authentication and connecti
 
 ### Migration hooks {#migration-hooks}
 
-The migration scripts support **hooks** — custom shell scripts that run before or after each migration phase. Place executable scripts in the `hooks/` directory of the migration repository:
+The migration scripts support **hooks** — custom shell scripts that run before or after each migration phase. Place executable scripts in the [`hooks/`](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/migration/hooks) directory after [cloning the deployment references repository](./bitnami-to-operators.md#clone-the-deployment-references-repository):
 
 | Hook               | Trigger                                 |
 | ------------------ | --------------------------------------- |

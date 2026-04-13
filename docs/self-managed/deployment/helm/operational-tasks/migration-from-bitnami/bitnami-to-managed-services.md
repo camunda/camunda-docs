@@ -85,7 +85,7 @@ If your target architecture requires OpenSearch, treat that as a separate replat
 
 This step assumes your managed PostgreSQL and Elasticsearch services are already provisioned and accessible from the Kubernetes cluster. You need the endpoint, port, database names, usernames, and credentials for each service.
 
-<details>
+<details id="provisioning-reference">
 <summary>Provisioning reference</summary>
 
 If you haven't provisioned your managed services yet, use your cloud provider's official documentation:
@@ -371,97 +371,7 @@ When `ES_WARM_REINDEX=true` is set in `env.sh`, the migration scripts **automati
 Your managed Elasticsearch target must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami ES service. This is required for the `_reindex` API to work across clusters. Consult your managed Elasticsearch provider's documentation for how to configure this setting.
 :::
 
-If you cannot configure `reindex.remote.whitelist` on the managed target, or prefer a manual approach, you can leave `ES_WARM_REINDEX=false` (default) and transfer data manually using one of the options below:
-
-<Tabs groupId="es-migration" queryString>
-
-<TabItem value="elasticdump" label="elasticdump">
-
-Use the [`elasticdump`](https://github.com/elasticsearch-dump/elasticsearch-dump) npm tool to transfer indices from source to target. For example:
-
-```bash
-# Install elasticdump
-npm install -g elasticdump
-
-# Get source ES password
-SOURCE_ES_PWD=$(kubectl get secret ${CAMUNDA_RELEASE_NAME}-elasticsearch \
-  -n ${NAMESPACE} -o jsonpath='{.data.elasticsearch-password}' | base64 -d)
-
-# Port-forward source ES
-kubectl port-forward svc/${CAMUNDA_RELEASE_NAME}-elasticsearch -n ${NAMESPACE} 9200:9200 &
-
-# Dump and restore each index pattern
-for pattern in zeebe operate tasklist optimize connectors camunda; do
-  elasticdump \
-    --input="http://elastic:${SOURCE_ES_PWD}@localhost:9200/${pattern}-*" \
-    --output="https://elastic:<password>@your-elastic-endpoint.example.com:443/${pattern}-*" \
-    --type=data \
-    --limit=1000
-done
-```
-
-</TabItem>
-
-<TabItem value="s3-snapshot" label="S3 snapshot repository">
-
-If both source and target elasticsearch support Amazon S3 snapshot repositories, you can use a shared S3 bucket. For example:
-
-```bash
-# Register an S3 snapshot repository on the source Bitnami Elasticsearch, and create a snapshot
-curl -X PUT "localhost:9200/_snapshot/s3_backup" \
-  -H 'Content-Type: application/json' \
-  -d '{"type":"s3","settings":{"bucket":"my-migration-bucket","region":"us-east-1"}}'
-
-curl -X PUT "localhost:9200/_snapshot/s3_backup/migration?wait_for_completion=true" \
-  -H 'Content-Type: application/json' \
-  -d '{"indices":"*","ignore_unavailable":true}'
-
-# Register the same S3 repository on the target managed Elasticsearch, and restore the snapshot
-curl -X PUT "https://target-endpoint/_snapshot/s3_backup" \
-  -H 'Content-Type: application/json' \
-  -d '{"type":"s3","settings":{"bucket":"my-migration-bucket","region":"us-east-1"}}'
-
-curl -X POST "https://target-endpoint/_snapshot/s3_backup/migration/_restore" \
-  -H 'Content-Type: application/json' \
-  -d '{"indices":"*","ignore_unavailable":true}'
-```
-
-</TabItem>
-
-<TabItem value="reindex" label="Reindex API">
-
-Use the Elasticsearch [reindex API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html) to copy data from the source to the target. This requires the target to allowlist the source as a remote.
-
-Reindex each concrete Camunda index individually rather than using a single wildcard destination. To stay aligned with the migration scripts, include `zeebe-*`, `operate-*`, `tasklist-*`, `optimize-*`, `connectors-*`, and `camunda-*` indices. For example:
-
-```bash
-# On the target, add source to reindex.remote.allowlist.
-# Then iterate over every Camunda index you want to copy.
-for idx in $(curl -s -u "elastic:<password>" \
-  "http://source-es:9200/_cat/indices/zeebe-*,operate-*,tasklist-*,optimize-*,connectors-*,camunda-*?h=index"); do
-  curl -X POST "https://target-endpoint/_reindex?wait_for_completion=true" \
-    -H 'Content-Type: application/json' \
-    -d '{
-      "source": {
-        "remote": {
-          "host": "http://source-es:9200",
-          "username": "elastic",
-          "password": "<password>"
-        },
-        "index": "'${idx}'"
-      },
-      "dest": {
-        "index": "'${idx}'"
-      }
-    }'
-done
-```
-
-Review the source index list before running the loop. If your deployment uses custom index prefixes, include those prefixes in the `_cat/indices` query.
-
-</TabItem>
-
-</Tabs>
+If you cannot configure `reindex.remote.whitelist` on the managed target, or prefer a manual approach, you can leave `ES_WARM_REINDEX=false` (default) and transfer data manually. See [Alternative: manual Elasticsearch migration](#alternative-manual-elasticsearch-migration) below.
 
 ### Phase 4: Validate (no downtime)
 
@@ -591,3 +501,105 @@ After completing the migration, monitor the following for at least 48 hours:
 - **Camunda component logs**: look for connection timeouts, SSL/TLS handshake errors, or authentication failures.
 - **Process instance completion**: verify that in-flight process instances continue to execute correctly.
 - **Zeebe export lag**: confirm that Zeebe exporters are writing to the external Elasticsearch target without delays.
+
+## Alternative: manual Elasticsearch migration {#alternative-manual-elasticsearch-migration}
+
+If you cannot use the automated migration scripts (for example, because `reindex.remote.whitelist` cannot be configured on the managed target), you can transfer Elasticsearch data manually using one of the methods below.
+
+:::warning Manual methods transfer indices only
+These methods do **not** migrate index aliases or index templates, which Camunda components (notably Zeebe) rely on. Missing aliases and templates can prevent components from applying their schema, causing pod startup failures. The automated migration scripts in the [deployment references repository](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/migration) handle aliases, templates, and indices together. Only fall back to a manual method if the automated path is not feasible for your environment.
+:::
+
+:::info Custom index prefixes
+The examples below search for the default Camunda index prefixes (`zeebe-*`, `operate-*`, `tasklist-*`, `optimize-*`, `connectors-*`, `camunda-*`). If your installation uses [custom index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration), replace these patterns with your actual prefixes.
+:::
+
+<Tabs groupId="es-migration" queryString>
+
+<TabItem value="elasticdump" label="elasticdump">
+
+Use the [`elasticdump`](https://github.com/elasticsearch-dump/elasticsearch-dump) npm tool to transfer indices from source to target. For example:
+
+```bash
+# Install elasticdump
+npm install -g elasticdump
+
+# Get source ES password
+SOURCE_ES_PWD=$(kubectl get secret ${CAMUNDA_RELEASE_NAME}-elasticsearch \
+  -n ${NAMESPACE} -o jsonpath='{.data.elasticsearch-password}' | base64 -d)
+
+# Port-forward source ES
+kubectl port-forward svc/${CAMUNDA_RELEASE_NAME}-elasticsearch -n ${NAMESPACE} 9200:9200 &
+
+# Dump and restore each index pattern
+for pattern in zeebe operate tasklist optimize connectors camunda; do
+  elasticdump \
+    --input="http://elastic:${SOURCE_ES_PWD}@localhost:9200/${pattern}-*" \
+    --output="https://elastic:<password>@your-elastic-endpoint.example.com:443/${pattern}-*" \
+    --type=data \
+    --limit=1000
+done
+```
+
+</TabItem>
+
+<TabItem value="s3-snapshot" label="S3 snapshot repository">
+
+If both source and target elasticsearch support Amazon S3 snapshot repositories, you can use a shared S3 bucket. For example:
+
+```bash
+# Register an S3 snapshot repository on the source Bitnami Elasticsearch, and create a snapshot
+curl -X PUT "localhost:9200/_snapshot/s3_backup" \
+  -H 'Content-Type: application/json' \
+  -d '{"type":"s3","settings":{"bucket":"my-migration-bucket","region":"us-east-1"}}'
+
+curl -X PUT "localhost:9200/_snapshot/s3_backup/migration?wait_for_completion=true" \
+  -H 'Content-Type: application/json' \
+  -d '{"indices":"*","ignore_unavailable":true}'
+
+# Register the same S3 repository on the target managed Elasticsearch, and restore the snapshot
+curl -X PUT "https://target-endpoint/_snapshot/s3_backup" \
+  -H 'Content-Type: application/json' \
+  -d '{"type":"s3","settings":{"bucket":"my-migration-bucket","region":"us-east-1"}}'
+
+curl -X POST "https://target-endpoint/_snapshot/s3_backup/migration/_restore" \
+  -H 'Content-Type: application/json' \
+  -d '{"indices":"*","ignore_unavailable":true}'
+```
+
+</TabItem>
+
+<TabItem value="reindex" label="Reindex API">
+
+Use the Elasticsearch [reindex API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html) to copy data from the source to the target. This requires the target to allowlist the source as a remote.
+
+Reindex each concrete Camunda index individually rather than using a single wildcard destination. To stay aligned with the migration scripts, include `zeebe-*`, `operate-*`, `tasklist-*`, `optimize-*`, `connectors-*`, and `camunda-*` indices. For example:
+
+```bash
+# On the target, add source to reindex.remote.allowlist.
+# Then iterate over every Camunda index you want to copy.
+for idx in $(curl -s -u "elastic:<password>" \
+  "http://source-es:9200/_cat/indices/zeebe-*,operate-*,tasklist-*,optimize-*,connectors-*,camunda-*?h=index"); do
+  curl -X POST "https://target-endpoint/_reindex?wait_for_completion=true" \
+    -H 'Content-Type: application/json' \
+    -d '{
+      "source": {
+        "remote": {
+          "host": "http://source-es:9200",
+          "username": "elastic",
+          "password": "<password>"
+        },
+        "index": "'${idx}'"
+      },
+      "dest": {
+        "index": "'${idx}'"
+      }
+    }'
+done
+```
+
+Review the source index list before running the loop. If your deployment uses custom index prefixes, include those prefixes in the `_cat/indices` query.
+
+</TabItem>
+
+</Tabs>
