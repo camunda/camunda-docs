@@ -22,6 +22,7 @@ jobs:
         with:
           name: docs-build
           path: build
+          include-hidden-files: true
   validate-links:
     runs-on: gcp-core-16-default
     needs: build-docs
