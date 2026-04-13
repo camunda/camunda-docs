@@ -9,10 +9,7 @@ mdx:
 
 ```ts
 type DecisionInstanceStateEnum =
-  | "EVALUATED"
-  | "FAILED"
-  | "UNSPECIFIED"
-  | "UNKNOWN";
+  (typeof DecisionInstanceStateEnum)[keyof typeof DecisionInstanceStateEnum];
 ```
 
 The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10

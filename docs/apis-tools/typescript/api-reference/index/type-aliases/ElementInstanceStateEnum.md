@@ -8,7 +8,8 @@ mdx:
 # Type Alias: ElementInstanceStateEnum
 
 ```ts
-type ElementInstanceStateEnum = "ACTIVE" | "COMPLETED" | "TERMINATED";
+type ElementInstanceStateEnum =
+  (typeof ElementInstanceStateEnum)[keyof typeof ElementInstanceStateEnum];
 ```
 
 Element states

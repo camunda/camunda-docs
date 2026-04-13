@@ -9,20 +9,7 @@ mdx:
 
 ```ts
 type AuditLogOperationTypeEnum =
-  | "ASSIGN"
-  | "CANCEL"
-  | "COMPLETE"
-  | "CREATE"
-  | "DELETE"
-  | "EVALUATE"
-  | "MIGRATE"
-  | "MODIFY"
-  | "RESOLVE"
-  | "RESUME"
-  | "SUSPEND"
-  | "UNASSIGN"
-  | "UNKNOWN"
-  | "UPDATE";
+  (typeof AuditLogOperationTypeEnum)[keyof typeof AuditLogOperationTypeEnum];
 ```
 
 The type of operation performed.

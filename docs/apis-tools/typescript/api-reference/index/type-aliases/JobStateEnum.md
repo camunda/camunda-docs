@@ -8,15 +8,7 @@ mdx:
 # Type Alias: JobStateEnum
 
 ```ts
-type JobStateEnum =
-  | "CANCELED"
-  | "COMPLETED"
-  | "CREATED"
-  | "ERROR_THROWN"
-  | "FAILED"
-  | "MIGRATED"
-  | "RETRIES_UPDATED"
-  | "TIMED_OUT";
+type JobStateEnum = (typeof JobStateEnum)[keyof typeof JobStateEnum];
 ```
 
 The state of the job.

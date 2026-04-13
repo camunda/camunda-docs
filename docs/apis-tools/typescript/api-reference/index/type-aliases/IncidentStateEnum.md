@@ -9,11 +9,7 @@ mdx:
 
 ```ts
 type IncidentStateEnum =
-  | "ACTIVE"
-  | "MIGRATED"
-  | "PENDING"
-  | "RESOLVED"
-  | "UNKNOWN";
+  (typeof IncidentStateEnum)[keyof typeof IncidentStateEnum];
 ```
 
 Incident states with a defined set of values.

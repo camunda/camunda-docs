@@ -9,14 +9,7 @@ mdx:
 
 ```ts
 type JobListenerEventTypeEnum =
-  | "ASSIGNING"
-  | "CANCELING"
-  | "COMPLETING"
-  | "CREATING"
-  | "END"
-  | "START"
-  | "UNSPECIFIED"
-  | "UPDATING";
+  (typeof JobListenerEventTypeEnum)[keyof typeof JobListenerEventTypeEnum];
 ```
 
 The listener event type of the job.
