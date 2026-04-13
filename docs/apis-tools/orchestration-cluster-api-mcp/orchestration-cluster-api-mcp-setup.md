@@ -68,6 +68,10 @@ For a full reference of MCP configuration properties, see [Property reference](/
 
 Once the MCP server is enabled, you can connect any MCP-compliant client. The approach depends on your client's capabilities and authentication requirements.
 
+:::important
+When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page. You can also copy a ready-to-use [`c8ctl`](#use-c8ctl-mcp-proxy) configuration snippet directly from the **MCP** tab on the credentials screen.
+:::
+
 ### MCP endpoint URL
 
 The MCP server is served at `/mcp/cluster` on the Orchestration Cluster. The full endpoint URL depends on your deployment type:
@@ -141,15 +145,11 @@ Add the following to your MCP client configuration (for example, `.vscode/mcp.js
 | `CAMUNDA_OAUTH_URL`      | OAuth token endpoint URL.                                                                                                                                                                                      |
 | `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                                                                                                                                                              |
 
-:::tip Where to find these values
-When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet directly from the **MCP** tab on the credentials screen.
-:::
-
 For the full list of supported environment variables, see the [`c8ctl` documentation](https://github.com/camunda/c8ctl).
 
 ### Use with the MCP Client connectors
 
-You can also connect to the MCP server from within a BPMN process using Camunda's [MCP Client connectors](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md). This allows an AI agent running in an agentic orchestration workflow to interact with Camunda's own operational data — for example, to query incidents or start processes as part of an automated workflow.
+You can also connect to the MCP server from within a BPMN process using Camunda's [MCP Client connectors](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md). This allows an AI agent running in an agentic orchestration workflow to interact with Camunda's own operational data. For example, you can query incidents or start processes as part of an automated workflow.
 
 <Tabs groupId="mcp-connector" defaultValue="remote" queryString values={[
 {label: 'MCP Remote Client connector', value: 'remote' },
