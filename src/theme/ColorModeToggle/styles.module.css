@@ -1,0 +1,86 @@
+/**
+ * Vue.js-style slider toggle for dark/light mode.
+ */
+
+.slider {
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 56px;
+  height: 30px;
+  padding: 0 5px;
+  border: 1px solid #c7c7c7;
+  border-radius: 15px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  appearance: none;
+  outline: none;
+}
+
+.slider:hover {
+  border-color: #999;
+}
+
+.slider:focus-visible {
+  box-shadow: 0 0 0 2px var(--ifm-color-primary);
+}
+
+/* Dark state */
+.sliderDark {
+  background-color: #2c2c2c;
+  border-color: #555;
+}
+
+.sliderDark:hover {
+  border-color: #888;
+}
+
+/* Thumb / knob */
+.thumb {
+  position: absolute;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.sliderDark .thumb {
+  transform: translateX(26px);
+  background-color: #e0e0e0;
+}
+
+/* Icons */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.sunIcon {
+  color: #8b8b8b;
+  margin-right: auto;
+}
+
+.moonIcon {
+  color: #8b8b8b;
+  margin-left: auto;
+}
+
+.sliderDark .sunIcon {
+  color: #8b8b8b;
+}
+
+.sliderDark .moonIcon {
+  color: #c8c8c8;
+}

@@ -12,6 +12,8 @@ import {
   splitNavbarItems,
   useNavbarMobileSidebar,
 } from "@docusaurus/theme-common/internal";
+import { useDocsVersionCandidates } from "@docusaurus/plugin-content-docs/client";
+import Link from "@docusaurus/Link";
 import NavbarItem from "@theme/NavbarItem";
 import NavbarColorModeToggle from "@theme/Navbar/ColorModeToggle";
 import SearchBar from "@theme/SearchBar";
@@ -21,6 +23,34 @@ import styles from "./styles.module.css";
 
 function useNavbarItems() {
   return useThemeConfig().navbar.items;
+}
+
+function WhatsNewBadge() {
+  const versionCandidates = useDocsVersionCandidates();
+  const version = versionCandidates[0];
+  const versionLabel = version.label.replace(/\s*\(.*\)/, "");
+
+  // Check if a "What's new in X.Y" doc exists for this version
+  const versionMatch = versionLabel.match(/(\d+)\.(\d+)/);
+  let href: string;
+  if (versionMatch) {
+    const [, major, minor] = versionMatch;
+    const docId = `whats-new-in-${major}${minor}`;
+    const hasWhatsNew = version.docs?.some((d) => d.id.endsWith(docId));
+    if (hasWhatsNew) {
+      href = `${version.path}/reference/announcements-release-notes/${major}${minor}0/${docId}/`;
+    } else {
+      href = `${version.path}/reference/announcements-release-notes/overview/`;
+    }
+  } else {
+    href = `${version.path}/reference/announcements-release-notes/overview/`;
+  }
+
+  return (
+    <Link to={href} className={styles.whatsNewBadge}>
+      What's new in {versionLabel}
+    </Link>
+  );
 }
 
 export default function NavbarContent(): JSX.Element {
@@ -54,6 +84,7 @@ export default function NavbarContent(): JSX.Element {
               <NavbarItem {...item} />
             </ErrorCauseBoundary>
           ))}
+          <WhatsNewBadge />
         </div>
 
         <div className={styles.topRowRight}>
