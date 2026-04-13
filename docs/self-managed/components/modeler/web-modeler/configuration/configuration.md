@@ -42,7 +42,7 @@ The examples below show configuration in two formats:
 - **`application.yml`** – the native Spring Boot configuration file format.
 
 :::tip Passing JVM options
-When running the `restapi` component in a container (Docker / Kubernetes), use the `JAVA_OPTS` environment variable to pass JVM arguments, for example for trust store settings or proxy configuration.
+When running the `restapi` component in a container (Docker / Kubernetes), use the `JAVA_TOOL_OPTIONS` environment variable to pass JVM arguments, for example for trust store settings or proxy configuration.
 :::
 
 ### General
