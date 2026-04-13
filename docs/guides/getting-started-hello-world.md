@@ -194,7 +194,7 @@ You deployed and ran a fully automated BPMN process by:
 - **Change the timer** — edit `PT10S` to `PT30S` and watch the countdown in real time.
 - **Add a new parallel branch** — try adding a third task inside the parallel block.
 - **Add a user task** — insert a manual approval step before launch.
-- **Run the order process example** — see [Run your first Spring Boot or Node.js project](getting-started-example.md) for a guide using service workers.
+- **Run the order process example** — see [Run your first Spring Boot or Node.js project](./getting-started-example.md) for a guide using service workers.
 
 ## Teardown
 
