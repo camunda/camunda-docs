@@ -13,6 +13,18 @@ keywords:
 
 These release notes identify the new features included in 8.7, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
 
+## 8.7.24
+
+### Spring Zeebe SDK and Camunda Process Test - Spring Boot 4.0 support
+
+With the 8.7.24 patch release, dedicated Spring Boot 4.0 based modules are available for the [Spring Zeebe SDK](../../../../versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/getting-started.md#spring-boot-40-support) and [Camunda Process Test Spring](../../../../versioned_docs/version-8.7/apis-tools/testing/getting-started.md?client=spring-sdk#spring-boot-40-support) as drop-in replacements for the default Spring Boot 3.x-based modules.
+
+Use these if you want to migrate your application to Spring Boot 4.0.
+
+:::note
+With Camunda 8.9, the default Spring Boot version for the Camunda Spring Boot Starter and Camunda Process Test Spring changes to 4.0.
+:::
+
 ## 8.7.17
 
 ### Spring Zeebe SDK - Spring-Boot 3.5 support
