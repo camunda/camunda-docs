@@ -110,4 +110,3 @@ When reviewing a documentation PR, verify each of the following:
 - [ ] "Process" terminology preferred over "workflow" (with noted exceptions).
 - [ ] All images have alt text; no personal information visible in screenshots.
 - [ ] Short paragraphs (max four to five sentences) and short, clear sentences.
-- [ ] Prettier formatting passes (`npm run format`).
