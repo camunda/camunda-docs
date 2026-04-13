@@ -24,7 +24,7 @@ A **Rocket Launch** process where you play mission control. You provide fuel lev
 3. Decide whether systems are **GO** or **NO-GO**.
 4. If **GO**: wait for a countdown, plot the destination via a DMN decision, then run two tasks in parallel (burn stage 1 and run experiments).
 5. Generate a mission report and complete the mission.
-6. If **NO-GO**: abort the mission and end the process.
+6. If **NO-GO**: cancel the mission and end the process.
 
 Different inputs produce different outcomes:
 
@@ -34,7 +34,7 @@ Different inputs produce different outcomes:
 | `76 – 89`   | Launch proceeds — destination set to **Mars** (5 experiments)  |
 | `75`        | Launch proceeds — destination set to **Mars** (3 experiments)  |
 | `50 – 74`   | Launch proceeds — destination set to **Moon** (3 experiments)  |
-| `< 50`      | **Mission aborted** — process ends on the abort path           |
+| `< 50`      | **Mission cancelled** — process ends on the cancellation path  |
 
 ## What you'll learn
 
@@ -47,7 +47,7 @@ Different inputs produce different outcomes:
 | **Parallel gateway**               | Engine and experiment tasks run simultaneously                        |
 | **Default sequence flow**          | The NO-GO path fires when no condition matches                        |
 | **Process variables**              | `fuelLevel`, `destination`, `missionResult`, and more                 |
-| **Multiple end events**            | Success or abort — different outcomes in the same process             |
+| **Multiple end events**            | Success or cancellation — different outcomes in the same process      |
 
 ## Prerequisites
 
@@ -140,7 +140,7 @@ Data needs to sync to Operate, so the process instance may not be visible immedi
 **Things to look for:**
 
 - **Timer waiting** — the token pauses at "Countdown T-10" for 10 seconds. You can see it live.
-- **Different paths** — compare a successful vs. aborted instance.
+- **Different paths** — compare a successful vs. cancelled instance.
 - **DMN decision** — destination is set by `plot-destination` based on `fuelLevel`.
 - **Parallel execution** — both "Burn stage 1" and "Run experiments" complete independently.
 - **Variables** — click an instance and inspect `destination`, `fuelAfterBurn`, `missionResult`.
@@ -154,9 +154,9 @@ Go back to Modeler and start additional process instances with different fuel le
 | Venus   | `{"fuelLevel": 95}` | Destination: Venus, 5 experiments |
 | Mars    | `{"fuelLevel": 80}` | Destination: Mars, 5 experiments  |
 | Moon    | `{"fuelLevel": 60}` | Destination: Moon, 3 experiments  |
-| Abort   | `{"fuelLevel": 30}` | Mission aborted                   |
+| Cancel  | `{"fuelLevel": 30}` | Mission cancelled                 |
 
-Compare the paths of successful and aborted instances in Operate.
+Compare the paths of successful and cancelled instances in Operate.
 
 ## How it works
 
@@ -164,8 +164,8 @@ The process uses no external code. All logic is expressed using **FEEL expressio
 
 | Task             | FEEL expression                                                                                                    | Output variable  |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| Pre-flight check | `if fuelLevel >= 50 then "ALL SYSTEMS GO" else "ABORT"`                                                            | `systemStatus`   |
-| Abort mission    | `"Mission " + missionName + " scrubbed — not enough fuel (" + string(fuelLevel) + "%)"`                            | `missionResult`  |
+| Pre-flight check | `if fuelLevel >= 50 then "ALL SYSTEMS GO" else ...` (sets status to cancel)                                        | `systemStatus`   |
+| Cancel mission   | `"Mission " + missionName + " scrubbed — not enough fuel (" + string(fuelLevel) + "%)"`                            | `missionResult`  |
 | Plot destination | DMN table: `>= 90` → Venus, `>= 75` → Mars, `>= 50` → Moon                                                         | `destination`    |
 | Burn stage 1     | `fuelLevel - 25`                                                                                                   | `fuelAfterBurn`  |
 | Run experiments  | `if fuelLevel > 75 then 5 else 3`                                                                                  | `experimentsRun` |
@@ -173,7 +173,7 @@ The process uses no external code. All logic is expressed using **FEEL expressio
 
 ## Complete!
 
-Navigate back to Operate and verify that your process instances have completed successfully (or aborted, depending on the fuel level).
+Navigate back to Operate and verify that your process instances have completed successfully (or cancelled, depending on the fuel level).
 
 ## Summary
 
