@@ -72,6 +72,14 @@ Configure the AWS region for this connector.
 
 Analyze documents using Textract. Different input parameters are available depending on the **Execution type** you select.
 
+#### Execution types
+
+The connector supports three execution types:
+
+- **Real-time**: For small files requiring immediate text extraction. Only single-page PDFs are supported when using S3.
+- **Polling**: Starts analysis and polls every five seconds until the result is available.
+- **Asynchronous**: For large or complex documents processed in the background.
+
 #### Input parameters
 
 | Property          | Type     | Required               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example           |
