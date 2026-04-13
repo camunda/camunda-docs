@@ -16,7 +16,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NODE_OPTIONS: --max_old_space_size=8192
+          NODE_OPTIONS: --max-old-space-size=49152
       - name: Upload build
         uses: actions/upload-artifact@v4
         with:
