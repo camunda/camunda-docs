@@ -11,7 +11,7 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Request and response model classes (540 types).
+Request and response model classes (544 types).
 
 ## Quick Reference
 
@@ -470,6 +470,7 @@ Request and response model classes (540 types).
 - [SearchQueryResponse](#searchqueryresponse) — SearchQueryResponse
 - [SearchRolesForGroupResponse](#searchrolesforgroupresponse) — SearchRolesForGroupResponse
 - [SearchRolesForTenantResponse](#searchrolesfortenantresponse) — SearchRolesForTenantResponse
+- [SearchUserTaskEffectiveVariablesRequest](#searchusertaskeffectivevariablesrequest) — User task effective variable search query request
 - [SearchUserTaskVariablesRequest](#searchusertaskvariablesrequest) — User task search query request
 - [SearchUsersForGroupRequest](#searchusersforgrouprequest) — SearchUsersForGroupRequest
 - [SearchUsersForGroupResponse](#searchusersforgroupresponse) — SearchUsersForGroupResponse
@@ -515,6 +516,7 @@ Request and response model classes (540 types).
 - [TenantUserSearchQueryRequest](#tenantusersearchqueryrequest) — TenantUserSearchQueryRequest
 - [TenantUserSearchQuerySortRequest](#tenantusersearchquerysortrequest) — TenantUserSearchQuerySortRequest
 - [TenantUserSearchResult](#tenantusersearchresult) — TenantUserSearchResult
+- [TlsConfig](#tlsconfig) — TLS / mTLS configuration for custom certificates
 - [TopologyResponse](#topologyresponse) — The response of a topology request
 - [TypedVariables](#typedvariables) — Extension methods for deserializing Camunda variable and custom header payloads
   from untyped object properties into strongly-typed DTOs
@@ -536,6 +538,7 @@ Request and response model classes (540 types).
 - [UserTaskAuditLogFilter](#usertaskauditlogfilter) — The user task audit log search filters
 - [UserTaskAuditLogSearchQueryRequest](#usertaskauditlogsearchqueryrequest) — User task search query request
 - [UserTaskCompletionRequest](#usertaskcompletionrequest) — UserTaskCompletionRequest
+- [UserTaskEffectiveVariableSearchQueryRequest](#usertaskeffectivevariablesearchqueryrequest) — User task effective variable search query request
 - [UserTaskFilter](#usertaskfilter) — User task filter request
 - [UserTaskProperties](#usertaskproperties) — Contains properties of a user task
 - [UserTaskResult](#usertaskresult) — UserTaskResult
@@ -561,6 +564,7 @@ Request and response model classes (540 types).
 - [VariableSearchQuerySortRequest](#variablesearchquerysortrequest) — VariableSearchQuerySortRequest
 - [VariableSearchResult](#variablesearchresult) — Variable search response item
 - [VariableValueFilterProperty](#variablevaluefilterproperty) — VariableValueFilterProperty
+- [WorkerDefaultsConfig](#workerdefaultsconfig)
 
 ---
 
@@ -1329,6 +1333,14 @@ AuditLogActorTypeEnum property with full advanced search capabilities.
 public sealed class AuditLogActorTypeFilterProperty
 ```
 
+| Property | Type                              | Description                                                                                                                                                                                                                                                |
+| -------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<AuditLogActorTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<AuditLogActorTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`               | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<AuditLogActorTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## AuditLogEntityKeyExactMatch
 
 Matches the value exactly.
@@ -1348,6 +1360,14 @@ EntityKey property with full advanced search capabilities.
 ```csharp
 public sealed class AuditLogEntityKeyFilterProperty
 ```
+
+| Property | Type                          | Description                                                 |
+| -------- | ----------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<AuditLogEntityKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<AuditLogEntityKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`           | Checks if the current property exists.                      |
+| `In`     | `List<AuditLogEntityKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<AuditLogEntityKey>`     | Checks if the property matches none of the provided values. |
 
 ## AuditLogFilter
 
@@ -1408,6 +1428,14 @@ AuditLogKey property with full advanced search capabilities.
 ```csharp
 public sealed class AuditLogKeyFilterProperty
 ```
+
+| Property | Type                    | Description                                                 |
+| -------- | ----------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<AuditLogKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<AuditLogKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`     | Checks if the current property exists.                      |
+| `In`     | `List<AuditLogKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<AuditLogKey>`     | Checks if the property matches none of the provided values. |
 
 ## AuditLogResult
 
@@ -1470,6 +1498,14 @@ AuditLogResultEnum property with full advanced search capabilities.
 ```csharp
 public sealed class AuditLogResultFilterProperty
 ```
+
+| Property | Type                           | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<AuditLogResultEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<AuditLogResultEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`            | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<AuditLogResultEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`         | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AuditLogSearchQueryRequest
 
@@ -1704,6 +1740,14 @@ String property with basic advanced search capabilities.
 public sealed class BasicStringFilterProperty
 ```
 
+| Property | Type                | Description                                                 |
+| -------- | ------------------- | ----------------------------------------------------------- |
+| `Eq`     | `String`            | Checks for equality with the provided value.                |
+| `Neq`    | `String`            | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>` | Checks if the current property exists.                      |
+| `In`     | `List<String>`      | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<String>`      | Checks if the property matches none of the provided values. |
+
 ## BatchOperationCreatedResult
 
 The created batch operation.
@@ -1842,6 +1886,14 @@ BatchOperationItemStateEnum property with full advanced search capabilities.
 public sealed class BatchOperationItemStateFilterProperty
 ```
 
+| Property | Type                                    | Description                                                                                                                                                                                                                                                |
+| -------- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<BatchOperationItemStateEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<BatchOperationItemStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                     | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<BatchOperationItemStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## BatchOperationResponse
 
 BatchOperationResponse
@@ -1924,6 +1976,14 @@ BatchOperationStateEnum property with full advanced search capabilities.
 public sealed class BatchOperationStateFilterProperty
 ```
 
+| Property | Type                                | Description                                                                                                                                                                                                                                                |
+| -------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<BatchOperationStateEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<BatchOperationStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                 | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<BatchOperationStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## BatchOperationTypeExactMatch
 
 Matches the value exactly.
@@ -1943,6 +2003,14 @@ BatchOperationTypeEnum property with full advanced search capabilities.
 ```csharp
 public sealed class BatchOperationTypeFilterProperty
 ```
+
+| Property | Type                               | Description                                                                                                                                                                                                                                                |
+| -------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<BatchOperationTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<BatchOperationTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<BatchOperationTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## BpmnErrorException
 
@@ -2064,7 +2132,7 @@ public sealed class CamundaUserResult
 
 | Property               | Type                 | Description                                                   |
 | ---------------------- | -------------------- | ------------------------------------------------------------- |
-| `Username`             | `Nullable<Username>` | The username of the user.                                     |
+| `Username`             | `Username`           | The username of the user.                                     |
 | `DisplayName`          | `String`             | The display name of the user.                                 |
 | `Email`                | `String`             | The email of the user.                                        |
 | `AuthorizedComponents` | `List<String>`       | The web components the user is authorized to use.             |
@@ -2114,6 +2182,14 @@ AuditLogCategoryEnum property with full advanced search capabilities.
 ```csharp
 public sealed class CategoryFilterProperty
 ```
+
+| Property | Type                             | Description                                                                                                                                                                                                                                                |
+| -------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<AuditLogCategoryEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<AuditLogCategoryEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`              | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<AuditLogCategoryEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`           | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## Changeset
 
@@ -2206,6 +2282,14 @@ ClusterVariableScopeEnum property with full advanced search capabilities.
 ```csharp
 public sealed class ClusterVariableScopeFilterProperty
 ```
+
+| Property | Type                                 | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<ClusterVariableScopeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<ClusterVariableScopeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<ClusterVariableScopeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## ClusterVariableSearchQueryFilterRequest
 
@@ -2488,6 +2572,17 @@ Date-time property with full advanced search capabilities.
 public sealed class DateTimeFilterProperty
 ```
 
+| Property | Type                       | Description                                                |
+| -------- | -------------------------- | ---------------------------------------------------------- |
+| `Eq`     | `Nullable<DateTimeOffset>` | Checks for equality with the provided value.               |
+| `Neq`    | `Nullable<DateTimeOffset>` | Checks for inequality with the provided value.             |
+| `Exists` | `Nullable<Boolean>`        | Checks if the current property exists.                     |
+| `Gt`     | `Nullable<DateTimeOffset>` | Greater than comparison with the provided value.           |
+| `Gte`    | `Nullable<DateTimeOffset>` | Greater than or equal comparison with the provided value.  |
+| `Lt`     | `Nullable<DateTimeOffset>` | Lower than comparison with the provided value.             |
+| `Lte`    | `Nullable<DateTimeOffset>` | Lower than or equal comparison with the provided value.    |
+| `In`     | `List<DateTimeOffset>`     | Checks if the property matches any of the provided values. |
+
 ## DecisionDefinitionFilter
 
 Decision definition search filter.
@@ -2540,6 +2635,14 @@ DecisionDefinitionKey property with full advanced search capabilities.
 ```csharp
 public sealed class DecisionDefinitionKeyFilterProperty
 ```
+
+| Property | Type                              | Description                                                 |
+| -------- | --------------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<DecisionDefinitionKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<DecisionDefinitionKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`               | Checks if the current property exists.                      |
+| `In`     | `List<DecisionDefinitionKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<DecisionDefinitionKey>`     | Checks if the property matches none of the provided values. |
 
 ## DecisionDefinitionResult
 
@@ -2612,7 +2715,7 @@ public sealed class DecisionEvaluationById : DecisionEvaluationInstruction, ITen
 | Property               | Type                   | Description                                                                                                              |
 | ---------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `DecisionDefinitionId` | `DecisionDefinitionId` | The ID of the decision to be evaluated. When using the decision ID, the latest deployed version of the decision is used. |
-| `Variables`            | `Object`               | The message variables as JSON document.                                                                                  |
+| `Variables`            | `Object`               | The decision evaluation variables as JSON document.                                                                      |
 | `TenantId`             | `Nullable<TenantId>`   | The tenant ID of the decision.                                                                                           |
 
 ## DecisionEvaluationByKey
@@ -2623,11 +2726,11 @@ DecisionEvaluationByKey
 public sealed class DecisionEvaluationByKey : DecisionEvaluationInstruction, ITenantIdSettable
 ```
 
-| Property                | Type                    | Description                                     |
-| ----------------------- | ----------------------- | ----------------------------------------------- |
-| `DecisionDefinitionKey` | `DecisionDefinitionKey` | System-generated key for a decision definition. |
-| `Variables`             | `Object`                | The message variables as JSON document.         |
-| `TenantId`              | `Nullable<TenantId>`    | The tenant ID of the decision.                  |
+| Property                | Type                    | Description                                         |
+| ----------------------- | ----------------------- | --------------------------------------------------- |
+| `DecisionDefinitionKey` | `DecisionDefinitionKey` | System-generated key for a decision definition.     |
+| `Variables`             | `Object`                | The decision evaluation variables as JSON document. |
+| `TenantId`              | `Nullable<TenantId>`    | The tenant ID of the decision.                      |
 
 ## DecisionEvaluationInstanceKeyExactMatch
 
@@ -2648,6 +2751,14 @@ DecisionEvaluationInstanceKey property with full advanced search capabilities.
 ```csharp
 public sealed class DecisionEvaluationInstanceKeyFilterProperty
 ```
+
+| Property | Type                                      | Description                                                 |
+| -------- | ----------------------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<DecisionEvaluationInstanceKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<DecisionEvaluationInstanceKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`                       | Checks if the current property exists.                      |
+| `In`     | `List<DecisionEvaluationInstanceKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<DecisionEvaluationInstanceKey>`     | Checks if the property matches none of the provided values. |
 
 ## DecisionEvaluationInstruction
 
@@ -2676,6 +2787,14 @@ DecisionEvaluationKey property with full advanced search capabilities.
 ```csharp
 public sealed class DecisionEvaluationKeyFilterProperty
 ```
+
+| Property | Type                              | Description                                                 |
+| -------- | --------------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<DecisionEvaluationKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<DecisionEvaluationKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`               | Checks if the current property exists.                      |
+| `In`     | `List<DecisionEvaluationKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<DecisionEvaluationKey>`     | Checks if the property matches none of the provided values. |
 
 ## DecisionInstanceDeletionBatchOperationRequest
 
@@ -2835,6 +2954,15 @@ DecisionInstanceStateEnum property with full advanced search capabilities.
 public sealed class DecisionInstanceStateFilterProperty
 ```
 
+| Property | Type                                  | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<DecisionInstanceStateEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<DecisionInstanceStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                   | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<DecisionInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `NotIn`  | `List<DecisionInstanceStateEnum>`     | Checks if the property matches none of the provided values.                                                                                                                                                                                                |
+| `Like`   | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## DecisionRequirementsFilter
 
 Decision requirements search filter.
@@ -2871,6 +2999,14 @@ DecisionRequirementsKey property with full advanced search capabilities.
 ```csharp
 public sealed class DecisionRequirementsKeyFilterProperty
 ```
+
+| Property | Type                                | Description                                                 |
+| -------- | ----------------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<DecisionRequirementsKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<DecisionRequirementsKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`                 | Checks if the current property exists.                      |
+| `In`     | `List<DecisionRequirementsKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<DecisionRequirementsKey>`     | Checks if the property matches none of the provided values. |
 
 ## DecisionRequirementsResult
 
@@ -3050,6 +3186,14 @@ DeploymentKey property with full advanced search capabilities.
 public sealed class DeploymentKeyFilterProperty
 ```
 
+| Property | Type                      | Description                                                 |
+| -------- | ------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<DeploymentKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<DeploymentKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`       | Checks if the current property exists.                      |
+| `In`     | `List<DeploymentKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<DeploymentKey>`     | Checks if the property matches none of the provided values. |
+
 ## DeploymentMetadataResult
 
 DeploymentMetadataResult
@@ -3122,7 +3266,6 @@ public sealed class DirectAncestorKeyInstruction : AncestorScopeInstruction
 
 | Property                     | Type     | Description                                                                                                                                                                                                                                                                                                   |
 | ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AncestorScopeType`          | `String` | The type of ancestor scope instruction.                                                                                                                                                                                                                                                                       |
 | `AncestorElementInstanceKey` | `Object` | The key of the ancestor scope the element instance should be created in. Set to -1 to create the new element instance within an existing element instance of the flow scope. If multiple instances of the target element's flow scope exist, choose one specifically with this property by providing its key. |
 
 ## DocumentCreationBatchResponse
@@ -3299,6 +3442,14 @@ ElementInstanceKey property with full advanced search capabilities.
 public sealed class ElementInstanceKeyFilterProperty
 ```
 
+| Property | Type                           | Description                                                 |
+| -------- | ------------------------------ | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<ElementInstanceKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<ElementInstanceKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`            | Checks if the current property exists.                      |
+| `In`     | `List<ElementInstanceKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<ElementInstanceKey>`     | Checks if the property matches none of the provided values. |
+
 ## ElementInstanceResult
 
 ElementInstanceResult
@@ -3384,6 +3535,14 @@ ElementInstanceStateEnum property with full advanced search capabilities.
 public sealed class ElementInstanceStateFilterProperty
 ```
 
+| Property | Type                                 | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<ElementInstanceStateEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<ElementInstanceStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<ElementInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## EndCursor
 
 The end cursor in a search query result set.
@@ -3415,6 +3574,14 @@ AuditLogEntityTypeEnum property with full advanced search capabilities.
 ```csharp
 public sealed class EntityTypeFilterProperty
 ```
+
+| Property | Type                               | Description                                                                                                                                                                                                                                                |
+| -------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<AuditLogEntityTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<AuditLogEntityTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<AuditLogEntityTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## EvaluateConditionalResult
 
@@ -3610,6 +3777,14 @@ FormKey property with full advanced search capabilities.
 public sealed class FormKeyFilterProperty
 ```
 
+| Property | Type                | Description                                                 |
+| -------- | ------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<FormKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<FormKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>` | Checks if the current property exists.                      |
+| `In`     | `List<FormKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<FormKey>`     | Checks if the property matches none of the provided values. |
+
 ## FormResult
 
 FormResult
@@ -3702,6 +3877,14 @@ Global listener source property with full advanced search capabilities.
 public sealed class GlobalListenerSourceFilterProperty
 ```
 
+| Property | Type                                 | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<GlobalListenerSourceEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<GlobalListenerSourceEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<GlobalListenerSourceEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## GlobalTaskListenerBase
 
 GlobalTaskListenerBase
@@ -3737,6 +3920,14 @@ Global listener event type property with full advanced search capabilities.
 ```csharp
 public sealed class GlobalTaskListenerEventTypeFilterProperty
 ```
+
+| Property | Type                                        | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<GlobalTaskListenerEventTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<GlobalTaskListenerEventTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                         | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<GlobalTaskListenerEventTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`                      | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## GlobalTaskListenerResult
 
@@ -4135,6 +4326,15 @@ IncidentErrorTypeEnum with full advanced search capabilities.
 public sealed class IncidentErrorTypeFilterProperty
 ```
 
+| Property | Type                              | Description                                                                                                                                                                                                                                                |
+| -------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<IncidentErrorTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<IncidentErrorTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`               | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<IncidentErrorTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `NotIn`  | `List<IncidentErrorTypeEnum>`     | Checks if the property does not match any of the provided values.                                                                                                                                                                                          |
+| `Like`   | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## IncidentFilter
 
 Incident search filter.
@@ -4376,6 +4576,15 @@ IncidentStateEnum with full advanced search capabilities.
 public sealed class IncidentStateFilterProperty
 ```
 
+| Property | Type                          | Description                                                                                                                                                                                                                                                |
+| -------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<IncidentStateEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<IncidentStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<IncidentStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `NotIn`  | `List<IncidentStateEnum>`     | Checks if the property does not match any of the provided values.                                                                                                                                                                                          |
+| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## InferredAncestorKeyInstruction
 
 Instructs the engine to derive the ancestor scope key from the source element's hierarchy. The engine traverses the source element's ancestry to find an instance that matches one of the target element's flow scopes, ensuring the target is activated in the correct scope.
@@ -4384,10 +4593,6 @@ Instructs the engine to derive the ancestor scope key from the source element's 
 public sealed class InferredAncestorKeyInstruction : AncestorScopeInstruction
 ```
 
-| Property            | Type     | Description                             |
-| ------------------- | -------- | --------------------------------------- |
-| `AncestorScopeType` | `String` | The type of ancestor scope instruction. |
-
 ## IntegerFilterProperty
 
 Integer property with advanced search capabilities.
@@ -4395,6 +4600,17 @@ Integer property with advanced search capabilities.
 ```csharp
 public sealed class IntegerFilterProperty
 ```
+
+| Property | Type                | Description                                                |
+| -------- | ------------------- | ---------------------------------------------------------- |
+| `Eq`     | `Nullable<Int32>`   | Checks for equality with the provided value.               |
+| `Neq`    | `Nullable<Int32>`   | Checks for inequality with the provided value.             |
+| `Exists` | `Nullable<Boolean>` | Checks if the current property exists.                     |
+| `Gt`     | `Nullable<Int32>`   | Greater than comparison with the provided value.           |
+| `Gte`    | `Nullable<Int32>`   | Greater than or equal comparison with the provided value.  |
+| `Lt`     | `Nullable<Int32>`   | Lower than comparison with the provided value.             |
+| `Lte`    | `Nullable<Int32>`   | Lower than or equal comparison with the provided value.    |
+| `In`     | `List<Int32>`       | Checks if the property matches any of the provided values. |
 
 ## JobActivationRequest
 
@@ -4588,6 +4804,8 @@ public sealed class JobFilter
 
 Delegate for job handler functions. Return the output variables to complete the
 job with, or null to complete with no output variables.
+Return a to send a structured completion
+(e.g. with job corrections or a task denial).
 
 To signal a BPMN error, throw .
 To explicitly fail a job with custom retries, throw .
@@ -4617,6 +4835,14 @@ JobKey property with full advanced search capabilities.
 public sealed class JobKeyFilterProperty
 ```
 
+| Property | Type                | Description                                                 |
+| -------- | ------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<JobKey>`  | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<JobKey>`  | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>` | Checks if the current property exists.                      |
+| `In`     | `List<JobKey>`      | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<JobKey>`      | Checks if the property matches none of the provided values. |
+
 ## JobKindExactMatch
 
 Matches the value exactly.
@@ -4637,6 +4863,14 @@ JobKindEnum property with full advanced search capabilities.
 public sealed class JobKindFilterProperty
 ```
 
+| Property | Type                    | Description                                                                                                                                                                                                                                                |
+| -------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<JobKindEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<JobKindEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`     | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<JobKindEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`  | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## JobListenerEventTypeExactMatch
 
 Matches the value exactly.
@@ -4656,6 +4890,14 @@ JobListenerEventTypeEnum property with full advanced search capabilities.
 ```csharp
 public sealed class JobListenerEventTypeFilterProperty
 ```
+
+| Property | Type                                 | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<JobListenerEventTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<JobListenerEventTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<JobListenerEventTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## JobMetricsConfigurationResponse
 
@@ -4708,7 +4950,6 @@ public sealed class JobResultAdHocSubProcess : JobResult
 | `ActivateElements`               | `List<JobResultActivateElement>` | Indicates which elements need to be activated in the ad-hoc subprocess.                |
 | `IsCompletionConditionFulfilled` | `Nullable<Boolean>`              | Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.      |
 | `IsCancelRemainingInstances`     | `Nullable<Boolean>`              | Indicates whether the remaining instances of the ad-hoc subprocess should be canceled. |
-| `Type`                           | `String`                         | Used to distinguish between different types of job results.                            |
 
 ## JobResultCorrections
 
@@ -4752,7 +4993,6 @@ public sealed class JobResultUserTask : JobResult
 | `Denied`       | `Nullable<Boolean>`    | Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.                                                                                                                                                                                            |
 | `DeniedReason` | `String`               | The reason provided by the user task listener for denying the work.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `Corrections`  | `JobResultCorrections` | JSON object with attributes that were corrected by the worker. The following attributes can be corrected, additional attributes will be ignored: _ `assignee` - clear by providing an empty String _ `dueDate` - clear by providing an empty String _ `followUpDate` - clear by providing an empty String _ `candidateGroups` - clear by providing an empty list _ `candidateUsers` - clear by providing an empty list _ `priority` - minimum 0, maximum 100, default 50 Providing any of those attributes with a `null` value or omitting it preserves the persisted attribute's value. |
-| `Type`         | `String`               | Used to distinguish between different types of job results.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 ## JobSearchQuery
 
@@ -4848,6 +5088,14 @@ JobStateEnum property with full advanced search capabilities.
 ```csharp
 public sealed class JobStateFilterProperty
 ```
+
+| Property | Type                     | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<JobStateEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<JobStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`      | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<JobStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`   | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## JobTimeSeriesStatisticsFilter
 
@@ -5371,6 +5619,14 @@ MessageSubscriptionKey property with full advanced search capabilities.
 public sealed class MessageSubscriptionKeyFilterProperty
 ```
 
+| Property | Type                               | Description                                                 |
+| -------- | ---------------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<MessageSubscriptionKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<MessageSubscriptionKey>` | Checks for equality with the provided value.                |
+| `Exists` | `Nullable<Boolean>`                | Checks if the current property exists.                      |
+| `In`     | `List<MessageSubscriptionKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<MessageSubscriptionKey>`     | Checks if the property matches none of the provided values. |
+
 ## MessageSubscriptionResult
 
 MessageSubscriptionResult
@@ -5454,6 +5710,14 @@ MessageSubscriptionStateEnum with full advanced search capabilities.
 public sealed class MessageSubscriptionStateFilterProperty
 ```
 
+| Property | Type                                     | Description                                                                                                                                                                                                                                                |
+| -------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<MessageSubscriptionStateEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<MessageSubscriptionStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                      | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<MessageSubscriptionStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`                   | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## MigrateProcessInstanceMappingInstruction
 
 The mapping instructions describe how to map elements from the source process definition to the target process definition.
@@ -5525,6 +5789,14 @@ AuditLogOperationTypeEnum property with full advanced search capabilities.
 ```csharp
 public sealed class OperationTypeFilterProperty
 ```
+
+| Property | Type                                  | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<AuditLogOperationTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<AuditLogOperationTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                   | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<AuditLogOperationTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## Partition
 
@@ -5758,6 +6030,14 @@ ProcessDefinitionKey property with full advanced search capabilities.
 ```csharp
 public sealed class ProcessDefinitionKeyFilterProperty
 ```
+
+| Property | Type                             | Description                                                 |
+| -------- | -------------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<ProcessDefinitionKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<ProcessDefinitionKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`              | Checks if the current property exists.                      |
+| `In`     | `List<ProcessDefinitionKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<ProcessDefinitionKey>`     | Checks if the property matches none of the provided values. |
 
 ## ProcessDefinitionMessageSubscriptionStatisticsQuery
 
@@ -6019,7 +6299,6 @@ public sealed class ProcessInstanceCreationTerminateInstruction : ProcessInstanc
 
 | Property         | Type        | Description                                                                                        |
 | ---------------- | ----------- | -------------------------------------------------------------------------------------------------- |
-| `Type`           | `String`    | The type of the runtime instruction                                                                |
 | `AfterElementId` | `ElementId` | The id of the element that, once completed or terminated, will cause the process to be terminated. |
 
 ## ProcessInstanceDeletionBatchOperationRequest
@@ -6131,6 +6410,14 @@ ProcessInstanceKey property with full advanced search capabilities.
 ```csharp
 public sealed class ProcessInstanceKeyFilterProperty
 ```
+
+| Property | Type                           | Description                                                 |
+| -------- | ------------------------------ | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<ProcessInstanceKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<ProcessInstanceKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`            | Checks if the current property exists.                      |
+| `In`     | `List<ProcessInstanceKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<ProcessInstanceKey>`     | Checks if the property matches none of the provided values. |
 
 ## ProcessInstanceMigrationBatchOperationPlan
 
@@ -6414,6 +6701,14 @@ ProcessInstanceStateEnum property with full advanced search capabilities.
 public sealed class ProcessInstanceStateFilterProperty
 ```
 
+| Property | Type                                 | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<ProcessInstanceStateEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<ProcessInstanceStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<ProcessInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## ResourceKeyExactMatch
 
 Matches the value exactly.
@@ -6433,6 +6728,14 @@ ResourceKey property with full advanced search capabilities.
 ```csharp
 public sealed class ResourceKeyFilterProperty
 ```
+
+| Property | Type                    | Description                                                 |
+| -------- | ----------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<ResourceKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<ResourceKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`     | Checks if the current property exists.                      |
+| `In`     | `List<ResourceKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<ResourceKey>`     | Checks if the property matches none of the provided values. |
 
 ## ResourceResult
 
@@ -6771,6 +7074,14 @@ element instance or process instance that defines the scope of a variable.
 public sealed class ScopeKeyFilterProperty
 ```
 
+| Property | Type                 | Description                                                 |
+| -------- | -------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<ScopeKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<ScopeKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`  | Checks if the current property exists.                      |
+| `In`     | `List<ScopeKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<ScopeKey>`     | Checks if the property matches none of the provided values. |
+
 ## SearchClientsForGroupRequest
 
 SearchClientsForGroupRequest
@@ -6974,6 +7285,20 @@ public sealed class SearchRolesForTenantResponse
 | `Items`  | `List<RoleResult>`        | The matching roles.                              |
 | `Page`   | `SearchQueryPageResponse` | Pagination information about the search results. |
 
+## SearchUserTaskEffectiveVariablesRequest
+
+User task effective variable search query request. Uses offset-based pagination only.
+
+```csharp
+public sealed class SearchUserTaskEffectiveVariablesRequest
+```
+
+| Property | Type                                   | Description                            |
+| -------- | -------------------------------------- | -------------------------------------- |
+| `Page`   | `OffsetPagination`                     | Pagination parameters.                 |
+| `Sort`   | `List<AuditLogSearchQuerySortRequest>` | Sort field criteria.                   |
+| `Filter` | `UserTaskVariableFilter`               | The user task variable search filters. |
+
 ## SearchUserTaskVariablesRequest
 
 User task search query request.
@@ -7146,7 +7471,6 @@ public sealed class SourceElementIdInstruction : SourceElementInstruction
 
 | Property          | Type        | Description                                            |
 | ----------------- | ----------- | ------------------------------------------------------ |
-| `SourceType`      | `String`    | The type of source element instruction.                |
 | `SourceElementId` | `ElementId` | The id of the source element for the move instruction. |
 
 ## SourceElementInstanceKeyInstruction
@@ -7160,7 +7484,6 @@ public sealed class SourceElementInstanceKeyInstruction : SourceElementInstructi
 
 | Property                   | Type                 | Description                                               |
 | -------------------------- | -------------------- | --------------------------------------------------------- |
-| `SourceType`               | `String`             | The type of source element instruction.                   |
 | `SourceElementInstanceKey` | `ElementInstanceKey` | The source element instance key for the move instruction. |
 
 ## SourceElementInstruction
@@ -7216,6 +7539,15 @@ String property with full advanced search capabilities.
 ```csharp
 public sealed class StringFilterProperty
 ```
+
+| Property | Type                   | Description                                                                                                                                                                                                                                                |
+| -------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `String`               | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `String`               | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`    | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<String>`         | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `NotIn`  | `List<String>`         | Checks if the property matches none of the provided values.                                                                                                                                                                                                |
+| `Like`   | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## SystemConfigurationResponse
 
@@ -7555,6 +7887,24 @@ public sealed class TenantUserSearchResult
 | `Items`  | `List<TenantUserResult>`  | The matching users.                              |
 | `Page`   | `SearchQueryPageResponse` | Pagination information about the search results. |
 
+## TlsConfig
+
+TLS / mTLS configuration for custom certificates.
+
+```csharp
+public sealed class TlsConfig
+```
+
+| Property        | Type     | Description                                         |
+| --------------- | -------- | --------------------------------------------------- |
+| `Cert`          | `String` | Inline PEM client certificate (overrides CertPath). |
+| `CertPath`      | `String` | Path to PEM client certificate file.                |
+| `Key`           | `String` | Inline PEM client private key (overrides KeyPath).  |
+| `KeyPath`       | `String` | Path to PEM client private key file.                |
+| `Ca`            | `String` | Inline PEM CA bundle (overrides CaPath).            |
+| `CaPath`        | `String` | Path to PEM CA certificate bundle file.             |
+| `KeyPassphrase` | `String` | Passphrase for an encrypted private key.            |
+
 ## TopologyResponse
 
 The response of a topology request.
@@ -7700,10 +8050,6 @@ Instructs the engine to use the source's direct parent key as the ancestor scope
 ```csharp
 public sealed class UseSourceParentKeyInstruction : AncestorScopeInstruction
 ```
-
-| Property            | Type     | Description                             |
-| ------------------- | -------- | --------------------------------------- |
-| `AncestorScopeType` | `String` | The type of ancestor scope instruction. |
 
 ## UserCreateResult
 
@@ -7859,6 +8205,20 @@ public sealed class UserTaskCompletionRequest
 | `Variables` | `Object` | The variables to complete the user task with.                                                                                                                |
 | `Action`    | `String` | A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "complete". |
 
+## UserTaskEffectiveVariableSearchQueryRequest
+
+User task effective variable search query request. Uses offset-based pagination only.
+
+```csharp
+public sealed class UserTaskEffectiveVariableSearchQueryRequest
+```
+
+| Property | Type                                           | Description                            |
+| -------- | ---------------------------------------------- | -------------------------------------- |
+| `Page`   | `OffsetPagination`                             | Pagination parameters.                 |
+| `Sort`   | `List<UserTaskVariableSearchQuerySortRequest>` | Sort field criteria.                   |
+| `Filter` | `UserTaskVariableFilter`                       | The user task variable search filters. |
+
 ## UserTaskFilter
 
 User task filter request.
@@ -8006,6 +8366,14 @@ UserTaskStateEnum property with full advanced search capabilities.
 public sealed class UserTaskStateFilterProperty
 ```
 
+| Property | Type                          | Description                                                                                                                                                                                                                                                |
+| -------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<UserTaskStateEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<UserTaskStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<UserTaskStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
 ## UserTaskUpdateRequest
 
 UserTaskUpdateRequest
@@ -8136,6 +8504,14 @@ VariableKey property with full advanced search capabilities.
 public sealed class VariableKeyFilterProperty
 ```
 
+| Property | Type                    | Description                                                 |
+| -------- | ----------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<VariableKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<VariableKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`     | Checks if the current property exists.                      |
+| `In`     | `List<VariableKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<VariableKey>`     | Checks if the property matches none of the provided values. |
+
 ## VariableResult
 
 Variable search response item.
@@ -8242,3 +8618,17 @@ public sealed class VariableValueFilterProperty
 | -------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Name`   | `String`               | Name of the variable.                                                                                                                                                                                                                                                                                 |
 | `Value`  | `StringFilterProperty` | The value of the variable. Variable values in filters need to be in serialized JSON format. For example, a variable with string value `myValue` can be found with the filter value `"myValue"`. Consider appropriate escaping for special characters in JSON strings when constructing filter values. |
+
+## WorkerDefaultsConfig
+
+```csharp
+public sealed class WorkerDefaultsConfig
+```
+
+| Property                  | Type               | Description |
+| ------------------------- | ------------------ | ----------- |
+| `JobTimeoutMs`            | `Nullable<Int64>`  |             |
+| `MaxConcurrentJobs`       | `Nullable<Int32>`  |             |
+| `PollTimeoutMs`           | `Nullable<Int64>`  |             |
+| `WorkerName`              | `String`           |             |
+| `StartupJitterMaxSeconds` | `Nullable<Double>` |             |

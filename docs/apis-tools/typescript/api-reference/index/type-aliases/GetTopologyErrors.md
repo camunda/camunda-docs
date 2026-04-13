@@ -11,8 +11,6 @@ mdx:
 type GetTopologyErrors = object;
 ```
 
-Defined in: [gen/types.gen.ts:16426](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16426)
-
 ## Properties
 
 ### 401
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:16426](https://github.com/camunda/orchestration-cl
 ```ts
 401: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:16430](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16430)
 
 The request lacks valid authentication credentials.
 
@@ -32,7 +28,5 @@ The request lacks valid authentication credentials.
 ```ts
 500: ProblemDetail;
 ```
-
-Defined in: [gen/types.gen.ts:16434](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16434)
 
 An internal error occurred while processing the request.

@@ -2,7 +2,7 @@
 id: creating-a-process-instance
 title: Creating a Process Instance
 sidebar_label: Creating a Process Instance
-sidebar_position: 9
+sidebar_position: 10
 mdx:
   format: md
 ---
@@ -11,9 +11,10 @@ mdx:
 
 The recommended pattern is to obtain keys from a prior API response (e.g. a deployment) and pass them directly — no manual lifting needed:
 
+<!-- snippet-source: examples/readme.py | regions: ReadmeCreateProcessInstance -->
+
 ```python
-from camunda_orchestration_sdk import CamundaClient
-from camunda_orchestration_sdk.models.process_creation_by_key import ProcessCreationByKey
+from camunda_orchestration_sdk import CamundaClient, ProcessCreationByKey
 
 with CamundaClient() as client:
     # Deploy and capture the typed key
@@ -27,11 +28,12 @@ with CamundaClient() as client:
     print(f"Process instance key: {result.process_instance_key}")
 ```
 
-If you need to restore a key from external storage (database, message queue, config file), wrap the raw string with the semantic type constructor:
+If you need to restore a key from external storage (database, message queue, config file), use the semantic type constructor. Validation runs automatically:
+
+<!-- snippet-source: examples/readme.py | regions: ReadmeCreateFromStorage -->
 
 ```python
-from camunda_orchestration_sdk import CamundaClient, ProcessDefinitionKey
-from camunda_orchestration_sdk.models.process_creation_by_key import ProcessCreationByKey
+from camunda_orchestration_sdk import CamundaClient, ProcessCreationByKey, ProcessDefinitionKey
 
 with CamundaClient() as client:
     stored_key = "2251799813685249"  # from a DB row or config
@@ -40,3 +42,5 @@ with CamundaClient() as client:
     )
     print(f"Process instance key: {result.process_instance_key}")
 ```
+
+**Migrating from pre-release versions:** Early pre-release builds exported `lift_*` helper functions (e.g., `lift_process_definition_key`). These have been removed — use the type constructor directly instead: `ProcessDefinitionKey(value)`. The constructor performs the same validation and is the single API surface for semantic types.

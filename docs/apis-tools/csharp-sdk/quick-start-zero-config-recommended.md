@@ -15,7 +15,7 @@ The C# SDK is a **technical preview** available from Camunda 8.9. It will become
 
 Keep configuration out of application code. Let the factory read `CAMUNDA_*` variables from the environment (12-factor style). This makes rotation, secret management, and environment promotion safer and simpler.
 
-<!-- snippet:UsingDirective+QuickStart -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+QuickStart -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -54,7 +54,7 @@ CAMUNDA_DEFAULT_TENANT_ID=<default>            # optional: override default tena
 
 Use only when you must supply or mutate configuration dynamically (e.g. multi-tenant routing, tests, ephemeral preview environments). Keys mirror their `CAMUNDA_*` env names:
 
-<!-- snippet:UsingDirective+ProgrammaticOverrides -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+ProgrammaticOverrides -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -98,7 +98,7 @@ The SDK can read configuration from any `IConfiguration` source (appsettings.jso
 
 Pass the section to the client:
 
-<!-- snippet:UsingDirective+AppSettingsConfig -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+AppSettingsConfig -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -177,7 +177,7 @@ For ASP.NET Core and other DI-based applications, use the `AddCamundaClient()` e
 
 **Zero-config** (environment variables only):
 
-<!-- snippet:UsingDirective+DIZeroConfig -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DIZeroConfig -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -188,7 +188,7 @@ builder.Services.AddCamundaClient();
 
 **With `appsettings.json`**:
 
-<!-- snippet:UsingDirective+DIAppSettings -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DIAppSettings -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -199,7 +199,7 @@ builder.Services.AddCamundaClient(builder.Configuration.GetSection("Camunda"));
 
 **With options callback** (full control):
 
-<!-- snippet:UsingDirective+DIOptionsCallback -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DIOptionsCallback -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;
@@ -213,7 +213,7 @@ builder.Services.AddCamundaClient(options =>
 
 Inject the client anywhere via constructor injection:
 
-<!-- snippet:DIControllerInjection -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: DIControllerInjection -->
 
 ```csharp
 public class OrderController(CamundaClient camunda) : ControllerBase
@@ -233,7 +233,7 @@ public class OrderController(CamundaClient camunda) : ControllerBase
 
 ## Custom HttpClient
 
-<!-- snippet:UsingDirective+CustomHttpClient -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+CustomHttpClient -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;

@@ -13,8 +13,10 @@ Keep configuration out of application code. Let the client read `CAMUNDA_*` vari
 
 If no configuration is present, the SDK defaults to a local Camunda 8 Run-style endpoint at `http://localhost:8080/v2`.
 
+<!-- snippet-source: examples/readme.py | regions: ReadmeZeroConfig -->
+
 ```python
-from camunda_orchestration_sdk import CamundaClient, CamundaAsyncClient
+from camunda_orchestration_sdk import CamundaAsyncClient, CamundaClient
 
 # Zero-config construction: reads CAMUNDA_* from the environment
 client = CamundaClient()
@@ -63,6 +65,8 @@ python your_script.py
 ```
 
 You can also enable it via the explicit configuration dict:
+
+<!-- snippet-source: examples/readme.py | regions: ReadmeEnvFileLoading -->
 
 ```python
 from camunda_orchestration_sdk import CamundaClient

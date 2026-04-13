@@ -59,6 +59,8 @@ This unified architecture ensures seamless communication, consistent state manag
 
 #### Web Modeler and Console
 
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764667245523380&cot=14 -->
+
 ![Web Modeler and Console](./img/management-cluster.jpg)
 
 Web Modeler and Console are designed to interact with multiple orchestration clusters:

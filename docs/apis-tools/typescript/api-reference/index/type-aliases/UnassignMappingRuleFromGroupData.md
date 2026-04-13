@@ -11,17 +11,13 @@ mdx:
 type UnassignMappingRuleFromGroupData = object;
 ```
 
-Defined in: [gen/types.gen.ts:11063](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11063)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:11064](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11064)
 
 ---
 
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:11064](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:11065](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11065)
 
 #### groupId
 
@@ -54,10 +48,8 @@ The mapping rule ID.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:11075](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11075)
 
 ---
 
@@ -66,5 +58,3 @@ Defined in: [gen/types.gen.ts:11075](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/groups/{groupId}/mapping-rules/{mappingRuleId}";
 ```
-
-Defined in: [gen/types.gen.ts:11076](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L11076)

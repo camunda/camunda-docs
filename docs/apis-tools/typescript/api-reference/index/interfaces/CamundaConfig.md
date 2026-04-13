@@ -7,8 +7,6 @@ mdx:
 
 # Interface: CamundaConfig
 
-Defined in: [runtime/unifiedConfiguration.ts:66](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L66)
-
 ## Properties
 
 ### \_\_raw
@@ -16,8 +14,6 @@ Defined in: [runtime/unifiedConfiguration.ts:66](https://github.com/camunda/orch
 ```ts
 __raw: Record<string, string | undefined>;
 ```
-
-Defined in: [runtime/unifiedConfiguration.ts:118](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L118)
 
 ---
 
@@ -27,24 +23,22 @@ Defined in: [runtime/unifiedConfiguration.ts:118](https://github.com/camunda/orc
 auth: object;
 ```
 
-Defined in: [runtime/unifiedConfiguration.ts:94](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L94)
-
 #### basic?
 
 ```ts
-optional basic: object;
+optional basic?: object;
 ```
 
 ##### basic.password?
 
 ```ts
-optional password: string;
+optional password?: string;
 ```
 
 ##### basic.username?
 
 ```ts
-optional username: string;
+optional username?: string;
 ```
 
 #### strategy
@@ -60,8 +54,6 @@ strategy: AuthStrategy;
 ```ts
 backpressure: object;
 ```
-
-Defined in: [runtime/unifiedConfiguration.ts:71](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L71)
 
 #### decayQuietMs
 
@@ -81,10 +73,22 @@ enabled: boolean;
 floor: number;
 ```
 
+#### healthyRecoveryMultiplier
+
+```ts
+healthyRecoveryMultiplier: number;
+```
+
 #### initialMax
 
 ```ts
 initialMax: number;
+```
+
+#### maxWaiters
+
+```ts
+maxWaiters: number;
 ```
 
 #### observeOnly
@@ -129,6 +133,12 @@ severeThreshold: number;
 softFactor: number;
 ```
 
+#### unlimitedAfterHealthyMs
+
+```ts
+unlimitedAfterHealthyMs: number;
+```
+
 ---
 
 ### defaultTenantId
@@ -137,17 +147,13 @@ softFactor: number;
 defaultTenantId: string;
 ```
 
-Defined in: [runtime/unifiedConfiguration.ts:69](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L69)
-
 ---
 
 ### eventual?
 
 ```ts
-optional eventual: object;
+optional eventual?: object;
 ```
-
-Defined in: [runtime/unifiedConfiguration.ts:104](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L104)
 
 #### pollDefaultMs
 
@@ -162,8 +168,6 @@ pollDefaultMs: number;
 ```ts
 httpRetry: object;
 ```
-
-Defined in: [runtime/unifiedConfiguration.ts:70](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L70)
 
 #### baseDelayMs
 
@@ -191,58 +195,54 @@ maxDelayMs: number;
 logLevel: "trace" | "error" | "silent" | "warn" | "info" | "debug";
 ```
 
-Defined in: [runtime/unifiedConfiguration.ts:103](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L103)
-
 ---
 
 ### mtls?
 
 ```ts
-optional mtls: object;
+optional mtls?: object;
 ```
-
-Defined in: [runtime/unifiedConfiguration.ts:106](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L106)
 
 #### ca?
 
 ```ts
-optional ca: string;
+optional ca?: string;
 ```
 
 #### caPath?
 
 ```ts
-optional caPath: string;
+optional caPath?: string;
 ```
 
 #### cert?
 
 ```ts
-optional cert: string;
+optional cert?: string;
 ```
 
 #### certPath?
 
 ```ts
-optional certPath: string;
+optional certPath?: string;
 ```
 
 #### key?
 
 ```ts
-optional key: string;
+optional key?: string;
 ```
 
 #### keyPassphrase?
 
 ```ts
-optional keyPassphrase: string;
+optional keyPassphrase?: string;
 ```
 
 #### keyPath?
 
 ```ts
-optional keyPath: string;
+optional keyPath?: string;
 ```
 
 ---
@@ -253,24 +253,22 @@ optional keyPath: string;
 oauth: object;
 ```
 
-Defined in: [runtime/unifiedConfiguration.ts:84](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L84)
-
 #### cacheDir?
 
 ```ts
-optional cacheDir: string;
+optional cacheDir?: string;
 ```
 
 #### clientId?
 
 ```ts
-optional clientId: string;
+optional clientId?: string;
 ```
 
 #### clientSecret?
 
 ```ts
-optional clientSecret: string;
+optional clientSecret?: string;
 ```
 
 #### grantType
@@ -306,7 +304,7 @@ max: number;
 #### scope?
 
 ```ts
-optional scope: string;
+optional scope?: string;
 ```
 
 #### timeoutMs
@@ -323,17 +321,13 @@ timeoutMs: number;
 restAddress: string;
 ```
 
-Defined in: [runtime/unifiedConfiguration.ts:67](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L67)
-
 ---
 
 ### supportLog?
 
 ```ts
-optional supportLog: object;
+optional supportLog?: object;
 ```
-
-Defined in: [runtime/unifiedConfiguration.ts:116](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L116)
 
 #### enabled
 
@@ -352,10 +346,8 @@ filePath: string;
 ### telemetry?
 
 ```ts
-optional telemetry: object;
+optional telemetry?: object;
 ```
-
-Defined in: [runtime/unifiedConfiguration.ts:115](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L115)
 
 #### correlation
 
@@ -377,8 +369,6 @@ log: boolean;
 tokenAudience: string;
 ```
 
-Defined in: [runtime/unifiedConfiguration.ts:68](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L68)
-
 ---
 
 ### validation
@@ -386,8 +376,6 @@ Defined in: [runtime/unifiedConfiguration.ts:68](https://github.com/camunda/orch
 ```ts
 validation: object;
 ```
-
-Defined in: [runtime/unifiedConfiguration.ts:98](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/runtime/unifiedConfiguration.ts#L98)
 
 #### raw
 
@@ -405,4 +393,42 @@ req: ValidationMode;
 
 ```ts
 res: ValidationMode;
+```
+
+---
+
+### workerDefaults?
+
+```ts
+optional workerDefaults?: object;
+```
+
+#### jobTimeoutMs?
+
+```ts
+optional jobTimeoutMs?: number;
+```
+
+#### maxParallelJobs?
+
+```ts
+optional maxParallelJobs?: number;
+```
+
+#### pollTimeoutMs?
+
+```ts
+optional pollTimeoutMs?: number;
+```
+
+#### startupJitterMaxSeconds?
+
+```ts
+optional startupJitterMaxSeconds?: number;
+```
+
+#### workerName?
+
+```ts
+optional workerName?: string;
 ```

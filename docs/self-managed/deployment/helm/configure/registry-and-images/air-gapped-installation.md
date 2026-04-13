@@ -42,7 +42,6 @@ The following images must be available in your air-gapped environment:
 
 - [Web Modeler images](/self-managed/deployment/docker/docker.md#component-images):
   - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
-  - [camunda/web-modeler-webapp](https://hub.docker.com/r/camunda/web-modeler-webapp)
   - [camunda/web-modeler-websockets](https://hub.docker.com/r/camunda/web-modeler-websockets)
 - [Console images](/self-managed/deployment/docker/docker.md#component-images):
   - `console/console-sm`
@@ -285,14 +284,11 @@ connectors:
     ...
 webModeler:
   image:
-    # registry and tag will be used for all three Web Modeler images
+    # registry and tag will be used for both Web Modeler images
     tag: latest
   restapi:
     image:
       repository: camunda/web-modeler-restapi
-  webapp:
-    image:
-      repository: camunda/web-modeler-webapp
   websockets:
     image:
       repository: camunda/web-modeler-websockets

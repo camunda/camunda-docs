@@ -205,3 +205,5 @@ Now that you understand the factors that influence sizing:
 - **SaaS customers:** [Size your SaaS cluster](sizing-saas.md) to select the right cluster size.
 - **Self-Managed admins:** Provision your Kubernetes cluster using these [baseline resource settings](sizing-self-managed.md).
 - **Validate sizing:** [Run your own benchmarks](sizing-benchmarks.md) to test your specific workload.
+
+For current secondary storage benchmarks, see [RDBMS benchmark results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md).

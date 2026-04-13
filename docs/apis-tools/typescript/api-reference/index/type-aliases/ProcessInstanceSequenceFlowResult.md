@@ -11,86 +11,74 @@ mdx:
 type ProcessInstanceSequenceFlowResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5886](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5886)
-
 Process instance sequence flow result.
 
 ## Properties
 
-### elementId?
+### elementId
 
 ```ts
-optional elementId: ElementId;
+elementId: ElementId;
 ```
-
-Defined in: [gen/types.gen.ts:5907](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5907)
 
 The element id for this sequence flow, as provided in the BPMN process.
 
 ---
 
-### processDefinitionId?
+### processDefinitionId
 
 ```ts
-optional processDefinitionId: ProcessDefinitionId;
+processDefinitionId: ProcessDefinitionId;
 ```
-
-Defined in: [gen/types.gen.ts:5903](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5903)
 
 The process definition id.
 
 ---
 
-### processDefinitionKey?
+### processDefinitionKey
 
 ```ts
-optional processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKey;
 ```
-
-Defined in: [gen/types.gen.ts:5899](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5899)
 
 The process definition key.
 
 ---
 
-### processInstanceKey?
+### processInstanceKey
 
 ```ts
-optional processInstanceKey: ProcessInstanceKey;
+processInstanceKey: ProcessInstanceKey;
 ```
-
-Defined in: [gen/types.gen.ts:5894](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5894)
 
 The key of this process instance.
 
 ---
 
-### rootProcessInstanceKey?
+### rootProcessInstanceKey
 
 ```ts
-optional rootProcessInstanceKey: RootProcessInstanceKey;
+rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:5895](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5895)
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy. This field is only present for data
+belonging to process instance hierarchies created in version 8.9 or later.
 
 ---
 
-### sequenceFlowId?
+### sequenceFlowId
 
 ```ts
-optional sequenceFlowId: string;
+sequenceFlowId: string;
 ```
-
-Defined in: [gen/types.gen.ts:5890](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5890)
 
 The sequence flow id.
 
 ---
 
-### tenantId?
+### tenantId
 
 ```ts
-optional tenantId: TenantId;
+tenantId: TenantId;
 ```
-
-Defined in: [gen/types.gen.ts:5908](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5908)

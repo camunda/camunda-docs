@@ -2,13 +2,14 @@
 id: migrate-to-camunda-process-test
 title: Migrate to Camunda Process Test
 sidebar_label: "Camunda Process Test"
-description: "Learn how to migrate from Zeebe Process Test to Camunda Process Test"
+description: "Learn how to migrate from Zeebe Process Test to Camunda Process Test."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-Learn how to migrate from Zeebe Process Test to Camunda Process Test
+<PageDescription />
 
 :::note Have you already migrated?
 You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
@@ -112,7 +113,7 @@ In this mode, CPT connects to a remote runtime, such as a local Camunda 8 Run ru
 Prepare your remote runtime:
 
 1. **Install Camunda 8 Run**  
-   Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run) on your machine.
+   Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#install-and-start-camunda-8-run) on your machine.
 
 2. **Enable the management clock endpoint**  
    See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1):

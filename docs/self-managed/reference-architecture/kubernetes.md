@@ -81,6 +81,8 @@ The Orchestration Cluster exposes two services:
 
 #### Web Modeler and Console
 
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764667246920582&cot=14 -->
+
 ![Web Modeler and Console](./img/k8s-cluster-view-managing.jpg)
 
 Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
@@ -196,7 +198,7 @@ Networking is largely managed through services and load balancers. The following
   - `80`: Web UI (Console, Management Identity, Web Modeler, and IdP if co-located)
   - `82`: Metrics (Management Identity)
   - `8080`: REST/Web UI (Connectors, Orchestration Cluster)
-  - `8071`, `8091`: Management (Web Modeler)
+  - `8091`: Management (Web Modeler)
   - `8092`: Management (Optimize)
   - `9100`: Management (Console)
   - `9600`: Management (Orchestration Cluster)

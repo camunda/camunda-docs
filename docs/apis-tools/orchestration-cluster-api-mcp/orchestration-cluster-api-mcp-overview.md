@@ -2,33 +2,38 @@
 id: orchestration-cluster-api-mcp-overview
 title: "Orchestration Cluster MCP Server"
 sidebar_label: "Overview"
-description: "Enable AI agents and LLM-powered applications to interact with Camunda 8 through the Model Context Protocol (MCP)."
+description: "Enable AI agents and LLM-powered applications to interact with Camunda via Model Context Protocol (MCP)."
 ---
 
-Enable AI agents and LLM-powered applications to interact with Camunda 8 through the Model Context Protocol (MCP).
+import PageDescription from '@site/src/components/PageDescription';
 
-:::important
-The Orchestration Cluster MCP Server is not part of the public API. See the [public API documentation](/reference/public-api.md) for more information.
-:::
+<PageDescription />
 
 ## About
 
-The Orchestration Cluster MCP Server is an API surface of the Orchestration Cluster that exposes Camunda's operational capabilities through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP). It enables AI agents and LLM-powered applications to discover and invoke Camunda tools using a standardized interface, without custom API integration code.
+The Orchestration Cluster MCP Server is an API surface of the Orchestration Cluster that exposes Camunda's operational capabilities through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP).
 
-Like the [Orchestration Cluster API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the MCP server is built into the Orchestration Cluster and shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model. It can be enabled independently.
+- It enables AI agents and LLM-powered applications to discover and invoke Camunda tools using a standardized interface, without custom API integration code.
+- Similar to the [Orchestration Cluster API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the MCP server is built into the Orchestration Cluster and shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model. It can be enabled independently.
 
-:::note
-This is the Orchestration Cluster MCP Server. If you are looking to connect an AI agent running in a BPMN process to an external MCP server, see the [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
+:::important Camunda 8 public API
+The Orchestration Cluster MCP Server is not part of the [Camunda 8 public API](/reference/public-api.md).
 :::
 
-### Why use the Orchestration Cluster MCP Server
+:::note
+This is the Orchestration Cluster MCP Server documentation. If you want to connect an AI agent running in a BPMN process to an external MCP server, see [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
+:::
+
+### Key features
 
 Building AI-powered applications that interact with Camunda traditionally requires writing custom client code to call REST APIs, handle authentication, parse responses, and format data for AI consumption. The MCP server removes this by providing:
 
-- **Standardized access**: AI agents discover and invoke Camunda capabilities through the MCP protocol, without bespoke integration code.
-- **Tool discovery**: MCP clients automatically discover available tools and their schemas at runtime.
-- **Broad compatibility**: Works with any MCP-compliant client, including VS Code (GitHub Copilot), Claude Code, Cursor, and custom AI applications.
-- **Consistent security**: Inherits the same authentication and authorization model as the REST API.
+| Benefit             | Description                                                                                                               |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------ |
+| Standardized access | AI agents discover and invoke Camunda capabilities through the MCP protocol, without bespoke integration code.            |
+| Tool discovery      | MCP clients automatically discover available tools and their schemas at runtime.                                          |
+| Broad compatibility | Works with any MCP-compliant client, including VS Code (GitHub Copilot), Claude Code, Cursor, and custom AI applications. |
+| Consistent security | Inherits the same authentication and authorization model as the REST API.                                                 |
 
 ### Authentication
 
@@ -48,11 +53,11 @@ The MCP server uses the [Streamable HTTP](https://modelcontextprotocol.io/specif
 
 ## Get started
 
-:::important
-The MCP server is available from Camunda 8.9 onwards.
+:::important Camunda 8.9
+The MCP server is only available from Camunda 8.9 onwards.
 :::
 
-If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), the MCP server is enabled by default. Connect any MCP client using this configuration:
+If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), the MCP server is enabled by default. Connect any MCP client using this configuration:
 
 ```json
 {
@@ -67,7 +72,7 @@ If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-man
 
 For production environments and other deployment types, the MCP server must be explicitly enabled on your cluster before use. See [Enable and connect](./orchestration-cluster-api-mcp-setup.md) for more details.
 
-## Available capabilities
+## Available tools
 
 The MCP server exposes tools across the following domains:
 

@@ -12,7 +12,7 @@ Enable the Orchestration Cluster MCP Server and configure MCP clients to connect
 
 ## Enable the Orchestration Cluster MCP Server
 
-The MCP server is opt-in and must be enabled before MCP clients can connect.
+The MCP server is enabled by default in [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md). For other deployment types, it must be explicitly enabled before MCP clients can connect.
 Depending on your deployment, enable it as follows:
 
 <Tabs groupId="deployment" defaultValue="c8run" queryString values={[
@@ -30,14 +30,7 @@ The MCP server is **enabled by default** in Camunda 8 Run. No additional configu
 
 <TabItem value="docker-compose">
 
-Set the `CAMUNDA_MCP_ENABLED` environment variable on the Orchestration Cluster container:
-
-```yaml
-services:
-  camunda:
-    environment:
-      CAMUNDA_MCP_ENABLED: "true"
-```
+The MCP server is **enabled by default** in the Docker Compose distribution. No additional configuration is needed.
 
 </TabItem>
 
@@ -75,6 +68,10 @@ For a full reference of MCP configuration properties, see [Property reference](/
 
 Once the MCP server is enabled, you can connect any MCP-compliant client. The approach depends on your client's capabilities and authentication requirements.
 
+:::important
+When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page.
+:::
+
 ### MCP endpoint URL
 
 The MCP server is served at `/mcp/cluster` on the Orchestration Cluster. The full endpoint URL depends on your deployment type:
@@ -83,7 +80,7 @@ The MCP server is served at `/mcp/cluster` on the Orchestration Cluster. The ful
 | :------------------------- | :------------------------------------------------------------------------------ |
 | Camunda 8 Run              | `http://localhost:8080/mcp/cluster`                                             |
 | Docker Compose             | `http://localhost:8080/mcp/cluster`                                             |
-| SaaS – public connectivity | `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/mcp/cluster`               |
+| SaaS – public connectivity | `https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/mcp/cluster`                 |
 | SaaS – secure connectivity | `https://${CLUSTER_ID}.${REGION_ID}.privateconnectivity.camunda.io/mcp/cluster` |
 | Self-Managed (custom)      | `https://<your-host>/mcp/cluster`                                               |
 
@@ -140,23 +137,23 @@ Add the following to your MCP client configuration (for example, `.vscode/mcp.js
 }
 ```
 
-| Variable                 | Description                                                                                                                                                                                                      |
-| :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CAMUNDA_BASE_URL`       | Base URL of your Orchestration Cluster, **without** the `/mcp/cluster` path (for example, the public `zeebe.camunda.io` URL or the private `privateconnectivity.camunda.io` URL when using Secure connectivity). |
-| `CAMUNDA_CLIENT_ID`      | OAuth client ID from your API client credentials.                                                                                                                                                                |
-| `CAMUNDA_CLIENT_SECRET`  | OAuth client secret from your API client credentials.                                                                                                                                                            |
-| `CAMUNDA_OAUTH_URL`      | OAuth token endpoint URL.                                                                                                                                                                                        |
-| `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                                                                                                                                                                |
+| Variable                 | Description                                                                                                                                                                                                    |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CAMUNDA_BASE_URL`       | Base URL of your Orchestration Cluster, **without** the `/mcp/cluster` path (for example, the public `api.camunda.io` URL or the private `privateconnectivity.camunda.io` URL when using Secure connectivity). |
+| `CAMUNDA_CLIENT_ID`      | OAuth client ID from your API client credentials.                                                                                                                                                              |
+| `CAMUNDA_CLIENT_SECRET`  | OAuth client secret from your API client credentials.                                                                                                                                                          |
+| `CAMUNDA_OAUTH_URL`      | OAuth token endpoint URL.                                                                                                                                                                                      |
+| `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                                                                                                                                                              |
 
 :::tip Where to find these values
-When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet directly from the **MCP** tab on the credentials screen.
+When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are displayed on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet directly from the **MCP** tab on the credentials screen.
 :::
 
 For the full list of supported environment variables, see the [`c8ctl` documentation](https://github.com/camunda/c8ctl).
 
 ### Use with the MCP Client connectors
 
-You can also connect to the MCP server from within a BPMN process using Camunda's [MCP Client connectors](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md). This allows an AI agent running in an agentic orchestration workflow to interact with Camunda's own operational data — for example, to query incidents or start processes as part of an automated workflow.
+You can also connect to the MCP server from within a BPMN process using Camunda's [MCP Client connectors](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md). This allows an AI agent running in an agentic orchestration workflow to interact with Camunda's own operational data. For example, you can query incidents or start processes as part of an automated workflow.
 
 <Tabs groupId="mcp-connector" defaultValue="remote" queryString values={[
 {label: 'MCP Remote Client connector', value: 'remote' },
@@ -198,7 +195,7 @@ camunda:
             camunda-mcp:
               type: http
               http:
-                url: https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/mcp/cluster
+                url: https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/mcp/cluster
                 authentication:
                   type: oauth
                   oauth:

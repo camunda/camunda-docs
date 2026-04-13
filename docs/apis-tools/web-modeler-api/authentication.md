@@ -1,5 +1,5 @@
 ---
-id: index
+id: authentication
 title: "Authentication"
 slug: /apis-tools/web-modeler-api/authentication
 sidebar_position: 2

@@ -11,8 +11,6 @@ mdx:
 type JobSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:3510](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3510)
-
 ## Properties
 
 ### field
@@ -41,8 +39,6 @@ field:
   | "worker";
 ```
 
-Defined in: [gen/types.gen.ts:3514](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3514)
-
 The field to sort by.
 
 ---
@@ -50,7 +46,5 @@ The field to sort by.
 ### order?
 
 ```ts
-optional order: SortOrderEnum;
+optional order?: SortOrderEnum;
 ```
-
-Defined in: [gen/types.gen.ts:3515](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L3515)

@@ -11,17 +11,13 @@ mdx:
 type GetProcessInstanceStatisticsData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14352](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14352)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:14353](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14353)
 
 ---
 
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:14353](https://github.com/camunda/orchestration-cl
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:14354](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14354)
 
 #### processInstanceKey
 
@@ -46,10 +40,8 @@ The assigned key of the process instance, which acts as a unique identifier for 
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:14360](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14360)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:14360](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/process-instances/{processInstanceKey}/statistics/element-instances";
 ```
-
-Defined in: [gen/types.gen.ts:14361](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L14361)

@@ -2,13 +2,20 @@
 id: getting-started
 title: "Java client"
 sidebar_label: "Getting started"
-description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more."
+description: "Use the official Camunda Java Client to build and integrate process applications with Camunda 8."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-The Camunda Java Client is the official Java library for building process applications that integrate with Camunda 8. Whether you are orchestrating microservices, managing human tasks, or visualizing process data, this client provides everything needed to interact with the Orchestration Cluster programmatically.
+<PageDescription />
+
+## About
+
+The Camunda Java Client is the official Java library for building process applications that integrate with Camunda 8.
+
+This client provides everything needed to interact with the Orchestration Cluster programmatically, such as orchestrating microservices, managing human tasks, or visualizing process data, and so on. For example, you can use it to build a job worker that handles polling for available jobs, use SLF4J for logging useful notes.
 
 :::info Public API
 The Camunda Java Client is part of the Camunda 8 [public API](/reference/public-api.md) and follows [Semantic Versioning](https://semver.org/) (except for alpha features). Minor and patch releases will not introduce breaking changes.

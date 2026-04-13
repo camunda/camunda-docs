@@ -13,7 +13,7 @@ mdx:
 ## AsyncAuthProvider
 
 ```python
-class AsyncAuthProvider(\*args, \*\*kwargs)
+class AsyncAuthProvider(*args, **kwargs)
 ```
 
 Bases: `Protocol`
@@ -93,7 +93,7 @@ call `aget_headers` to fetch a fresh token).
 ## AuthProvider
 
 ```python
-class AuthProvider(\*args, \*\*kwargs)
+class AuthProvider(*args, **kwargs)
 ```
 
 Bases: `Protocol`
@@ -233,7 +233,7 @@ silently disabled.
 ## CamundaLogger
 
 ```python
-class CamundaLogger(\*args, \*\*kwargs)
+class CamundaLogger(*args, **kwargs)
 ```
 
 Bases: `Protocol`
@@ -246,7 +246,7 @@ object that exposes these four methods.
 ### debug()
 
 ```python
-def debug(msg, \*args, \*\*kwargs)
+def debug(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
@@ -259,7 +259,7 @@ def debug(msg, \*args, \*\*kwargs)
 ### error()
 
 ```python
-def error(msg, \*args, \*\*kwargs)
+def error(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
@@ -272,7 +272,7 @@ def error(msg, \*args, \*\*kwargs)
 ### info()
 
 ```python
-def info(msg, \*args, \*\*kwargs)
+def info(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
@@ -285,7 +285,7 @@ def info(msg, \*args, \*\*kwargs)
 ### warning()
 
 ```python
-def warning(msg, \*args, \*\*kwargs)
+def warning(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
@@ -308,7 +308,7 @@ Logger that silently discards all messages.
 ### debug()
 
 ```python
-def debug(msg, \*args, \*\*kwargs)
+def debug(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
@@ -321,7 +321,7 @@ def debug(msg, \*args, \*\*kwargs)
 ### error()
 
 ```python
-def error(msg, \*args, \*\*kwargs)
+def error(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
@@ -334,7 +334,7 @@ def error(msg, \*args, \*\*kwargs)
 ### info()
 
 ```python
-def info(msg, \*args, \*\*kwargs)
+def info(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
@@ -347,7 +347,7 @@ def info(msg, \*args, \*\*kwargs)
 ### trace()
 
 ```python
-def trace(msg, \*args, \*\*kwargs)
+def trace(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
@@ -360,7 +360,7 @@ def trace(msg, \*args, \*\*kwargs)
 ### warning()
 
 ```python
-def warning(msg, \*args, \*\*kwargs)
+def warning(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
@@ -391,7 +391,7 @@ otherwise prepends a `[key=value ...]` prefix to messages).
 ### bind()
 
 ```python
-def bind(\*\*kwargs)
+def bind(**kwargs)
 ```
 
 Create a child logger with additional context.
@@ -408,33 +408,39 @@ prefix on each message.
 ### debug()
 
 ```python
-def debug(msg)
+def debug(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
-  **msg** (_str_)
+  - **msg** (_str_)
+  - **args** (_Any_)
+  - **kwargs** (_Any_)
 - **Return type:**
   None
 
 ### error()
 
 ```python
-def error(msg)
+def error(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
-  **msg** (_str_)
+  - **msg** (_str_)
+  - **args** (_Any_)
+  - **kwargs** (_Any_)
 - **Return type:**
   None
 
 ### info()
 
 ```python
-def info(msg)
+def info(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
-  **msg** (_str_)
+  - **msg** (_str_)
+  - **args** (_Any_)
+  - **kwargs** (_Any_)
 - **Return type:**
   None
 
@@ -452,11 +458,13 @@ def trace(msg)
 ### warning()
 
 ```python
-def warning(msg)
+def warning(msg, *args, **kwargs)
 ```
 
 - **Parameters:**
-  **msg** (_str_)
+  - **msg** (_str_)
+  - **args** (_Any_)
+  - **kwargs** (_Any_)
 - **Return type:**
   None
 
@@ -476,42 +484,70 @@ Create an [`SdkLogger`](#sdklogger).
 
 ## Job Worker
 
-## ExecutionHint
+### AsyncJobContext
+
+alias of [`ConnectedJobContext`](#connectedjobcontext)
+
+## ConnectedJobContext
 
 ```python
-class ExecutionHint
+class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, log=NOTHING, , client)
 ```
 
-Bases: `object`
+Bases: [`JobContext`](#jobcontext)
 
-Decorators for users to hint at their workload execution potential
+Context for **async** handlers — includes an async client reference.
 
-### _static_ permit(strategy)
+Extends [`JobContext`](#jobcontext) with a `client` attribute that provides
+access to the Camunda API from within an async job handler. Use
+`await job.client.method(...)` to call API methods.
+
+This context is provided when the execution strategy is `"async"`.
+For `"thread"` handlers, see [`SyncJobContext`](#syncjobcontext).
+For `"process"` handlers, see [`JobContext`](#jobcontext).
 
 - **Parameters:**
-  **strategy** (_Literal_ _[_ _'thread'_ _,_ _'process'_ _,_ _'async'_ _]_)
-- **Return type:**
-  _Callable_[[*Callable*[[…], *Any*]], [_HintedCallable_](#hintedcallable)]
+  - **type\_** (_str_)
+  - **process_definition_id** ([_ProcessDefinitionId_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionId))
+  - **process_definition_version** (_int_)
+  - **element_id** ([_ElementId_](types.md#camunda_orchestration_sdk.semantic_types.ElementId))
+  - **custom_headers** (_ActivatedJobResultCustomHeaders_)
+  - **worker** (_str_)
+  - **retries** (_int_)
+  - **deadline** (_int_)
+  - **variables** (_ActivatedJobResultVariables_)
+  - **tenant_id** ([_TenantId_](types.md#camunda_orchestration_sdk.semantic_types.TenantId))
+  - **job_key** ([_JobKey_](types.md#camunda_orchestration_sdk.semantic_types.JobKey))
+  - **process_instance_key** ([_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **process_definition_key** ([_ProcessDefinitionKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionKey))
+  - **element_instance_key** ([_ElementInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ElementInstanceKey))
+  - **kind** (_JobKindEnum_)
+  - **listener_event_type** (_JobListenerEventTypeEnum_)
+  - **user_task** (_ActivatedJobResultUserTask_ _|_ _None_)
+  - **tags** (_list_ _[\*\*str_ _]_)
+  - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **log** ([_SdkLogger_](#sdklogger))
+  - **client** ([_CamundaAsyncClient_](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
 
-### _static_ prefer(strategy)
-
-- **Parameters:**
-  **strategy** (_Literal_ _[_ _'thread'_ _,_ _'process'_ _,_ _'async'_ _]_)
-- **Return type:**
-  _Callable_[[*Callable*[[…], *Any*]], [_HintedCallable_](#hintedcallable)]
-
-## HintedCallable
+### client
 
 ```python
-class HintedCallable(\*args, \*\*kwargs)
+client: [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient)
 ```
 
-Bases: `Protocol`
+### _classmethod_ create(job, client, logger=None)
+
+- **Parameters:**
+  - **job** (_ActivatedJobResult_)
+  - **client** ([_CamundaAsyncClient_](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
+  - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
+- **Return type:**
+  [ConnectedJobContext](#connectedjobcontext)
 
 ## JobContext
 
 ```python
-class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task=<camunda_orchestration_sdk.types.Unset object>, tags=<camunda_orchestration_sdk.types.Unset object>, log=NOTHING)
+class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, log=NOTHING)
 ```
 
 Bases: `ActivatedJobResult`
@@ -520,23 +556,24 @@ Read-only context for a job execution.
 
 - **Parameters:**
   - **type\_** (_str_)
-  - **process_definition_id** (_ProcessDefinitionId_)
+  - **process_definition_id** ([_ProcessDefinitionId_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionId))
   - **process_definition_version** (_int_)
-  - **element_id** (_ElementId_)
+  - **element_id** ([_ElementId_](types.md#camunda_orchestration_sdk.semantic_types.ElementId))
   - **custom_headers** (_ActivatedJobResultCustomHeaders_)
   - **worker** (_str_)
   - **retries** (_int_)
   - **deadline** (_int_)
   - **variables** (_ActivatedJobResultVariables_)
-  - **tenant_id** (_TenantId_)
-  - **job_key** (_JobKey_)
-  - **process_instance_key** (_ProcessInstanceKey_)
-  - **process_definition_key** (_ProcessDefinitionKey_)
-  - **element_instance_key** (_ElementInstanceKey_)
+  - **tenant_id** ([_TenantId_](types.md#camunda_orchestration_sdk.semantic_types.TenantId))
+  - **job_key** ([_JobKey_](types.md#camunda_orchestration_sdk.semantic_types.JobKey))
+  - **process_instance_key** ([_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **process_definition_key** ([_ProcessDefinitionKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionKey))
+  - **element_instance_key** ([_ElementInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ElementInstanceKey))
   - **kind** (_JobKindEnum_)
   - **listener_event_type** (_JobListenerEventTypeEnum_)
-  - **user_task** (_UserTaskProperties_ _|_ _Unset_)
-  - **tags** (_list_ _[\*\*str_ _]_ _|_ _Unset_)
+  - **user_task** (_ActivatedJobResultUserTask_ _|_ _None_)
+  - **tags** (_list_ _[\*\*str_ _]_)
+  - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **log** ([_SdkLogger_](#sdklogger))
 
 ### log
@@ -586,7 +623,7 @@ Raise this exception to explicitly fail a job with custom retries/backoff.
 ## JobWorker
 
 ```python
-class JobWorker(client, callback, config, logger=None)
+class JobWorker(client, callback, config, logger=None, execution_strategy='auto', startup_jitter_max_seconds=0)
 ```
 
 Bases: `object`
@@ -596,6 +633,8 @@ Bases: `object`
   - **callback** (_JobHandler_)
   - **config** ([_WorkerConfig_](#workerconfig))
   - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
+  - **execution_strategy** (_EXECUTION_STRATEGY_)
+  - **startup_jitter_max_seconds** (_float_)
 
 ### poll_loop()
 
@@ -617,30 +656,83 @@ def start()
 def stop()
 ```
 
+## SyncJobContext
+
+```python
+class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, log=NOTHING, , client)
+```
+
+Bases: [`JobContext`](#jobcontext)
+
+Context for **thread** handlers — includes a sync client reference.
+
+Extends [`JobContext`](#jobcontext) with a `client` attribute that provides
+access to the Camunda API from within a synchronous (thread) handler.
+Call `job.client.method(...)` directly — no `await` needed.
+
+This context is provided when the execution strategy is `"thread"`.
+For `"async"` handlers, see [`ConnectedJobContext`](#connectedjobcontext).
+For `"process"` handlers, see [`JobContext`](#jobcontext).
+
+- **Parameters:**
+  - **type\_** (_str_)
+  - **process_definition_id** ([_ProcessDefinitionId_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionId))
+  - **process_definition_version** (_int_)
+  - **element_id** ([_ElementId_](types.md#camunda_orchestration_sdk.semantic_types.ElementId))
+  - **custom_headers** (_ActivatedJobResultCustomHeaders_)
+  - **worker** (_str_)
+  - **retries** (_int_)
+  - **deadline** (_int_)
+  - **variables** (_ActivatedJobResultVariables_)
+  - **tenant_id** ([_TenantId_](types.md#camunda_orchestration_sdk.semantic_types.TenantId))
+  - **job_key** ([_JobKey_](types.md#camunda_orchestration_sdk.semantic_types.JobKey))
+  - **process_instance_key** ([_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **process_definition_key** ([_ProcessDefinitionKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionKey))
+  - **element_instance_key** ([_ElementInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ElementInstanceKey))
+  - **kind** (_JobKindEnum_)
+  - **listener_event_type** (_JobListenerEventTypeEnum_)
+  - **user_task** (_ActivatedJobResultUserTask_ _|_ _None_)
+  - **tags** (_list_ _[\*\*str_ _]_)
+  - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **log** ([_SdkLogger_](#sdklogger))
+  - **client** ([_CamundaClient_](client.md#camunda_orchestration_sdk.CamundaClient))
+
+### client
+
+```python
+client: [CamundaClient](client.md#camunda_orchestration_sdk.CamundaClient)
+```
+
+### _classmethod_ create(job, client, logger=None)
+
+- **Parameters:**
+  - **job** (_ActivatedJobResult_)
+  - **client** ([_CamundaClient_](client.md#camunda_orchestration_sdk.CamundaClient))
+  - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
+- **Return type:**
+  [SyncJobContext](#syncjobcontext)
+
 ## WorkerConfig
 
 ```python
-class WorkerConfig(job_type, job_timeout_milliseconds, request_timeout_milliseconds=0, max_concurrent_jobs=10, execution_strategy='auto', fetch_variables=None, worker_name='camunda-python-sdk-worker')
+class WorkerConfig(job_type, job_timeout_milliseconds=None, request_timeout_milliseconds=None, max_concurrent_jobs=None, fetch_variables=None, worker_name=None)
 ```
 
 Bases: `object`
 
-User-facing configuration
+User-facing configuration.
+
+Fields left as `None` inherit the global default from
+`CAMUNDA_WORKER_*` environment variables (or the client constructor),
+falling back to the hardcoded SDK default when neither is set.
 
 - **Parameters:**
   - **job_type** (_str_)
-  - **job_timeout_milliseconds** (_int_)
-  - **request_timeout_milliseconds** (_int_)
-  - **max_concurrent_jobs** (_int_)
-  - **execution_strategy** (_Literal_ _[_ _'thread'_ _,_ _'process'_ _,_ _'async'_ _,_ _'auto'_ _]_)
+  - **job_timeout_milliseconds** (_int_ _|_ _None_)
+  - **request_timeout_milliseconds** (_int_ _|_ _None_)
+  - **max_concurrent_jobs** (_int_ _|_ _None_)
   - **fetch_variables** (_list_ _[\*\*str_ _]_ _|_ _None_)
-  - **worker_name** (_str_)
-
-### execution_strategy
-
-```python
-execution_strategy: Literal['thread', 'process', 'async', 'auto']* *= 'auto'
-```
+  - **worker_name** (_str_ _|_ _None_)
 
 ### fetch_variables
 
@@ -651,10 +743,11 @@ fetch_variables: list[str] | None* *= None
 ### job_timeout_milliseconds
 
 ```python
-job_timeout_milliseconds: int
+job_timeout_milliseconds: int | None* *= None
 ```
 
-Long-poll request timeout in milliseconds. Defaults to 0, which allows the server to set the request timeout
+How long the job is reserved for this worker only. Falls back to
+`CAMUNDA_WORKER_TIMEOUT` env var if not set.
 
 ### job_type
 
@@ -662,25 +755,51 @@ Long-poll request timeout in milliseconds. Defaults to 0, which allows the serve
 job_type: str
 ```
 
-How long the job is reserved for this worker only
+Job type to activate and process.
 
 ### max_concurrent_jobs
 
 ```python
-max_concurrent_jobs: int* *= 10
+max_concurrent_jobs: int | None* *= None
 ```
+
+Max jobs executing at once. Falls back to
+`CAMUNDA_WORKER_MAX_CONCURRENT_JOBS` env var, then `10`.
 
 ### request_timeout_milliseconds
 
 ```python
-request_timeout_milliseconds: int* *= 0
+request_timeout_milliseconds: int | None* *= None
 ```
+
+Long-poll request timeout in milliseconds. Falls back to
+`CAMUNDA_WORKER_REQUEST_TIMEOUT` env var, then `0`.
 
 ### worker_name
 
 ```python
-worker_name: str* *= 'camunda-python-sdk-worker'
+worker_name: str | None* *= None
 ```
+
+Worker identifier. Falls back to `CAMUNDA_WORKER_NAME` env var,
+then `"camunda-python-sdk-worker"`.
+
+### resolve_worker_config()
+
+```python
+def resolve_worker_config(config, configuration)
+```
+
+Return a new WorkerConfig with `None` fields filled from _configuration_.
+
+Precedence: explicit field value > `CAMUNDA_WORKER_*` config > hardcoded default.
+Raises `ValueError` if `job_timeout_milliseconds` is still unset after merging.
+
+- **Parameters:**
+  - **config** ([_WorkerConfig_](#workerconfig))
+  - **configuration** (_Any_)
+- **Return type:**
+  [_WorkerConfig_](#workerconfig)
 
 ## Configuration Resolver
 
@@ -740,6 +859,48 @@ CAMUNDA_CLIENT_SECRET: str
 CAMUNDA_LOAD_ENVFILE: str
 ```
 
+### CAMUNDA_MTLS_CA
+
+```python
+CAMUNDA_MTLS_CA: str
+```
+
+### CAMUNDA_MTLS_CA_PATH
+
+```python
+CAMUNDA_MTLS_CA_PATH: str
+```
+
+### CAMUNDA_MTLS_CERT
+
+```python
+CAMUNDA_MTLS_CERT: str
+```
+
+### CAMUNDA_MTLS_CERT_PATH
+
+```python
+CAMUNDA_MTLS_CERT_PATH: str
+```
+
+### CAMUNDA_MTLS_KEY
+
+```python
+CAMUNDA_MTLS_KEY: str
+```
+
+### CAMUNDA_MTLS_KEY_PASSPHRASE
+
+```python
+CAMUNDA_MTLS_KEY_PASSPHRASE: str
+```
+
+### CAMUNDA_MTLS_KEY_PATH
+
+```python
+CAMUNDA_MTLS_KEY_PATH: str
+```
+
 ### CAMUNDA_OAUTH_URL
 
 ```python
@@ -752,10 +913,22 @@ CAMUNDA_OAUTH_URL: str
 CAMUNDA_REST_ADDRESS: str
 ```
 
+### CAMUNDA_SDK_BACKPRESSURE_PROFILE
+
+```python
+CAMUNDA_SDK_BACKPRESSURE_PROFILE: str
+```
+
 ### CAMUNDA_SDK_LOG_LEVEL
 
 ```python
 CAMUNDA_SDK_LOG_LEVEL: Literal['silent', 'error', 'warn', 'info', 'debug', 'trace', 'silly']
+```
+
+### CAMUNDA_TENANT_ID
+
+```python
+CAMUNDA_TENANT_ID: str
 ```
 
 ### CAMUNDA_TOKEN_AUDIENCE
@@ -773,7 +946,37 @@ CAMUNDA_TOKEN_CACHE_DIR: str
 ### CAMUNDA_TOKEN_DISK_CACHE_DISABLE
 
 ```python
-CAMUNDA_TOKEN_DISK_CACHE_DISABLE: bool
+CAMUNDA_TOKEN_DISK_CACHE_DISABLE: str
+```
+
+### CAMUNDA_WORKER_MAX_CONCURRENT_JOBS
+
+```python
+CAMUNDA_WORKER_MAX_CONCURRENT_JOBS: str
+```
+
+### CAMUNDA_WORKER_NAME
+
+```python
+CAMUNDA_WORKER_NAME: str
+```
+
+### CAMUNDA_WORKER_REQUEST_TIMEOUT
+
+```python
+CAMUNDA_WORKER_REQUEST_TIMEOUT: str
+```
+
+### CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS
+
+```python
+CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS: str
+```
+
+### CAMUNDA_WORKER_TIMEOUT
+
+```python
+CAMUNDA_WORKER_TIMEOUT: str
 ```
 
 ### ZEEBE_REST_ADDRESS
@@ -785,7 +988,7 @@ ZEEBE_REST_ADDRESS: str
 ## CamundaSdkConfiguration
 
 ```python
-class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False)
+class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
 ```
 
 Bases: `BaseModel`
@@ -805,6 +1008,20 @@ Bases: `BaseModel`
   - **CAMUNDA_SDK_LOG_LEVEL** (_Literal_ _[_ _'silent'_ _,_ _'error'_ _,_ _'warn'_ _,_ _'info'_ _,_ _'debug'_ _,_ _'trace'_ _,_ _'silly'_ _]_)
   - **CAMUNDA_TOKEN_CACHE_DIR** (_str_ _|_ _None_)
   - **CAMUNDA_TOKEN_DISK_CACHE_DISABLE** (_bool_)
+  - **CAMUNDA_SDK_BACKPRESSURE_PROFILE** (_Literal_ _[_ _'BALANCED'_ _,_ _'LEGACY'_ _]_)
+  - **CAMUNDA_TENANT_ID** (_str_ _|_ _None_)
+  - **CAMUNDA_WORKER_TIMEOUT** (_int_ _|_ _None_)
+  - **CAMUNDA_WORKER_MAX_CONCURRENT_JOBS** (_int_ _|_ _None_)
+  - **CAMUNDA_WORKER_REQUEST_TIMEOUT** (_int_ _|_ _None_)
+  - **CAMUNDA_WORKER_NAME** (_str_ _|_ _None_)
+  - **CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS** (_float_ _|_ _None_)
+  - **CAMUNDA_MTLS_CERT_PATH** (_str_ _|_ _None_)
+  - **CAMUNDA_MTLS_KEY_PATH** (_str_ _|_ _None_)
+  - **CAMUNDA_MTLS_CA_PATH** (_str_ _|_ _None_)
+  - **CAMUNDA_MTLS_CERT** (_str_ _|_ _None_)
+  - **CAMUNDA_MTLS_KEY** (_str_ _|_ _None_)
+  - **CAMUNDA_MTLS_CA** (_str_ _|_ _None_)
+  - **CAMUNDA_MTLS_KEY_PASSPHRASE** (_str_ _|_ _None_)
 
 ### CAMUNDA_AUTH_STRATEGY
 
@@ -848,6 +1065,48 @@ CAMUNDA_CLIENT_ID: str | None
 CAMUNDA_CLIENT_SECRET: str | None
 ```
 
+### CAMUNDA_MTLS_CA
+
+```python
+CAMUNDA_MTLS_CA: str | None
+```
+
+### CAMUNDA_MTLS_CA_PATH
+
+```python
+CAMUNDA_MTLS_CA_PATH: str | None
+```
+
+### CAMUNDA_MTLS_CERT
+
+```python
+CAMUNDA_MTLS_CERT: str | None
+```
+
+### CAMUNDA_MTLS_CERT_PATH
+
+```python
+CAMUNDA_MTLS_CERT_PATH: str | None
+```
+
+### CAMUNDA_MTLS_KEY
+
+```python
+CAMUNDA_MTLS_KEY: str | None
+```
+
+### CAMUNDA_MTLS_KEY_PASSPHRASE
+
+```python
+CAMUNDA_MTLS_KEY_PASSPHRASE: str | None
+```
+
+### CAMUNDA_MTLS_KEY_PATH
+
+```python
+CAMUNDA_MTLS_KEY_PATH: str | None
+```
+
 ### CAMUNDA_OAUTH_URL
 
 ```python
@@ -860,10 +1119,22 @@ CAMUNDA_OAUTH_URL: str
 CAMUNDA_REST_ADDRESS: str
 ```
 
+### CAMUNDA_SDK_BACKPRESSURE_PROFILE
+
+```python
+CAMUNDA_SDK_BACKPRESSURE_PROFILE: CamundaBackpressureProfile
+```
+
 ### CAMUNDA_SDK_LOG_LEVEL
 
 ```python
 CAMUNDA_SDK_LOG_LEVEL: CamundaSdkLogLevel
+```
+
+### CAMUNDA_TENANT_ID
+
+```python
+CAMUNDA_TENANT_ID: str | None
 ```
 
 ### CAMUNDA_TOKEN_AUDIENCE
@@ -884,13 +1155,43 @@ CAMUNDA_TOKEN_CACHE_DIR: str | None
 CAMUNDA_TOKEN_DISK_CACHE_DISABLE: bool
 ```
 
+### CAMUNDA_WORKER_MAX_CONCURRENT_JOBS
+
+```python
+CAMUNDA_WORKER_MAX_CONCURRENT_JOBS: int | None
+```
+
+### CAMUNDA_WORKER_NAME
+
+```python
+CAMUNDA_WORKER_NAME: str | None
+```
+
+### CAMUNDA_WORKER_REQUEST_TIMEOUT
+
+```python
+CAMUNDA_WORKER_REQUEST_TIMEOUT: int | None
+```
+
+### CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS
+
+```python
+CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS: float | None
+```
+
+### CAMUNDA_WORKER_TIMEOUT
+
+```python
+CAMUNDA_WORKER_TIMEOUT: int | None
+```
+
 ### ZEEBE_REST_ADDRESS
 
 ```python
 ZEEBE_REST_ADDRESS: str
 ```
 
-### model_config _= {'extra': 'forbid'}_
+### model*config *= {'extra': 'forbid'}\_
 
 Configuration for the model, should be a dictionary conforming to [ConfigDict][pydantic.config.ConfigDict].
 

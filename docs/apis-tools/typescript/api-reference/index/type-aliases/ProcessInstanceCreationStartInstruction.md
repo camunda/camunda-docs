@@ -11,8 +11,6 @@ mdx:
 type ProcessInstanceCreationStartInstruction = object;
 ```
 
-Defined in: [gen/types.gen.ts:5531](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5531)
-
 ## Properties
 
 ### elementId
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:5531](https://github.com/camunda/orchestration-clu
 ```ts
 elementId: ElementId;
 ```
-
-Defined in: [gen/types.gen.ts:5540](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L5540)
 
 Future extensions might include:
 
