@@ -374,6 +374,7 @@ Web Modeler uses Keycloak as the default authentication provider (using OAuth 2.
 camunda:
   identity:
     base-url: http://identity:8080
+    issuer-backend-url: http://keycloak:18080/auth/realms/camunda-platform # optional
 
   modeler:
     security:
@@ -647,17 +648,17 @@ Web Modeler supports syncing files via [Git Sync](../../../../../components/mode
 
 <TabItem value="envVars">
 
-| Provider      | Environment variable                                | Description                                                                                                                   | Default value                                   |
-| ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `50`                                            |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                           |
-| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                        |
-| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                     |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL`             | The base URL of your self-hosted Azure DevOps Server instance.                                                                | `https://dev.azure.com`                         |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_API_VERSION`         | The Azure DevOps API versions to use.                                                                                         | `7.1`                                           |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`             |
-| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_SCOPE`               | OAuth scope requested for Azure DevOps authentication.                                                                        | `499b84ac-1321-427f-aa17-267ca6975798/.default` |
-| Bitbucket     | `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL`         | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories`    |
+| Provider      | Environment variable                                | Description                                                                                                                   | Default value                                 |
+| ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `50`                                          |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                         |
+| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                      |
+| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                   |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL`             | The base URL of your self-hosted Azure DevOps Server instance.                                                                | `https://dev.azure.com`                       |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_API_VERSION`         | The Azure DevOps API versions to use.                                                                                         | `7.1`                                         |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`           |
+| Azure DevOps  | `CAMUNDA_MODELER_GITSYNC_AZURE_SCOPE`               | OAuth scope requested for Azure DevOps authentication.                                                                        | `https://app.vssps.visualstudio.com/.default` |
+| Bitbucket     | `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL`         | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories`  |
 
 </TabItem>
 
@@ -676,7 +677,7 @@ camunda.modeler:
       base-url: https://dev.azure.com # default
       api-version: "7.1" # default
       authority-base-path: https://login.microsoftonline.com # default
-      scope: 499b84ac-1321-427f-aa17-267ca6975798/.default # default
+      scope: https://app.vssps.visualstudio.com/.default # default
     bitbucket:
       base-url: https://api.bitbucket.org/2.0/repositories # default
 ```
