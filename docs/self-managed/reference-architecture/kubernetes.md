@@ -81,6 +81,8 @@ The Orchestration Cluster exposes two services:
 
 #### Web Modeler and Console
 
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764667246920582&cot=14 -->
+
 ![Web Modeler and Console](./img/k8s-cluster-view-managing.jpg)
 
 Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
