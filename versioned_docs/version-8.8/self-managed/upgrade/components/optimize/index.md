@@ -32,6 +32,6 @@ Optimize upgrades must be performed sequentially. If your Optimize deployment is
 - <a href="/docs/8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4/" target="_blank" rel="noopener noreferrer">Optimize upgrade notes (8.3/3.11 to 8.4/3.12)</a>
 - <a href="/docs/8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3/" target="_blank" rel="noopener noreferrer">Optimize upgrade notes (3.10 to 8.3/3.11)</a>
 - <a href="/docs/8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10/" target="_blank" rel="noopener noreferrer">Optimize upgrade notes (3.9.x to 3.10)</a>
-- <a href="/docs/8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-to-3.9/" target="_blank" rel="noopener noreferrer">Optimize upgrade notes (3.9-preview-x to 3.9.x)</a>
-- <a href="/docs/8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview/" target="_blank" rel="noopener noreferrer">Optimize upgrade notes (3.8.x to 3.9.x-preview-1)</a>
+- <a href="/docs/8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9/" target="_blank" rel="noopener noreferrer">Optimize upgrade notes (3.9-preview-x to 3.9.x)</a>
+- <a href="/docs/8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1/" target="_blank" rel="noopener noreferrer">Optimize upgrade notes (3.8.x to 3.9.x-preview-1)</a>
 - <a href="/docs/8.6/self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8/" target="_blank" rel="noopener noreferrer">Optimize upgrade notes (3.7.x to 3.8.x)</a>
