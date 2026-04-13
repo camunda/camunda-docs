@@ -9,13 +9,7 @@ mdx:
 
 ```ts
 type BatchOperationStateEnum =
-  | "ACTIVE"
-  | "CANCELED"
-  | "COMPLETED"
-  | "CREATED"
-  | "FAILED"
-  | "PARTIALLY_COMPLETED"
-  | "SUSPENDED";
+  (typeof BatchOperationStateEnum)[keyof typeof BatchOperationStateEnum];
 ```
 
 The batch operation state.

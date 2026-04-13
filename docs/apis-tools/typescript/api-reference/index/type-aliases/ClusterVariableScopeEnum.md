@@ -8,7 +8,8 @@ mdx:
 # Type Alias: ClusterVariableScopeEnum
 
 ```ts
-type ClusterVariableScopeEnum = "GLOBAL" | "TENANT";
+type ClusterVariableScopeEnum =
+  (typeof ClusterVariableScopeEnum)[keyof typeof ClusterVariableScopeEnum];
 ```
 
 The scope of a cluster variable.

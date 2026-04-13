@@ -8,7 +8,8 @@ mdx:
 # Type Alias: AuditLogCategoryEnum
 
 ```ts
-type AuditLogCategoryEnum = "ADMIN" | "DEPLOYED_RESOURCES" | "USER_TASKS";
+type AuditLogCategoryEnum =
+  (typeof AuditLogCategoryEnum)[keyof typeof AuditLogCategoryEnum];
 ```
 
 The category of the audit log operation.

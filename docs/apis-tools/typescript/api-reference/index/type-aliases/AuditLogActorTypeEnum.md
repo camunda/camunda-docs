@@ -8,7 +8,8 @@ mdx:
 # Type Alias: AuditLogActorTypeEnum
 
 ```ts
-type AuditLogActorTypeEnum = "ANONYMOUS" | "CLIENT" | "UNKNOWN" | "USER";
+type AuditLogActorTypeEnum =
+  (typeof AuditLogActorTypeEnum)[keyof typeof AuditLogActorTypeEnum];
 ```
 
 The type of actor who performed the operation.

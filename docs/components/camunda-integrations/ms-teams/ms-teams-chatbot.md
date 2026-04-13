@@ -66,6 +66,41 @@ If your cluster is sleeping, the bot shows a **Wake up cluster** button to wake 
 
 When a form is too complex to display inside a chat card, the bot opens a pop-up dialog with the full form interface, giving you the same rich experience as the [tabs](./ms-teams-tabs.md).
 
+#### When a form opens in a pop-up dialog
+
+Forms open in a pop-up dialog when they contain unsupported element types or [FEEL expressions](/components/modeler/feel/what-is-feel.md) in supported properties.
+
+##### Unsupported element types
+
+Adaptive Cards support only a subset of Camunda form elements. Forms with any of the following element types open in a pop-up dialog:
+
+- Group
+- Table
+- Dynamic list
+- iframe
+- HTML viewer
+- Button
+- Expression field
+- Document preview
+
+##### FEEL expressions
+
+Forms also open in a pop-up dialog if any field uses a FEEL expression, meaning a value starting with `=`, in one of the following properties:
+
+- **Label**
+- **Date label**
+- **Read only**
+- **Default value**
+- **Text**
+- **Source**
+- **Alt text**
+- **Accept**
+- **Multiple**
+
+:::note
+Static values and process variables are supported in Adaptive Cards. Dynamic FEEL expressions are not.
+:::
+
 ## Notifications
 
 Once set up, the bot proactively sends messages to keep you informed.

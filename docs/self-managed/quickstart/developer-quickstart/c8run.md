@@ -44,7 +44,8 @@ If you are looking for a specific task from the previous single-page guide, use 
 
 ## Install and start Camunda 8 Run {#install-and-start-camunda-8-run}
 
-For prerequisites, local startup, Docker mode, and shutdown steps, see [install and start Camunda 8 Run](./c8run/install-start.md).
+For prerequisites, local startup, and shutdown steps, see [install and start Camunda 8 Run](./c8run/install-start.md).
+For container-based local deployment, see the [developer quickstart with Docker Compose](./docker-compose.md).
 
 ### Configuration options {#configuration-options}
 
@@ -76,7 +77,7 @@ For PostgreSQL, MariaDB, MySQL, Oracle, and Microsoft SQL Server examples, see [
 
 ## Shut down Camunda 8 Run {#shut-down-camunda-8-run}
 
-For local and Docker shutdown commands, see [shut down Camunda 8 Run](./c8run/install-start.md#shut-down-camunda-8-run).
+For local shutdown commands, see [shut down Camunda 8 Run](./c8run/install-start.md#shut-down-camunda-8-run).
 
 ## Next steps
 

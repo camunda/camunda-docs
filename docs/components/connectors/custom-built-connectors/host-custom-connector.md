@@ -33,7 +33,7 @@ docker run --rm --name=CustomConnectorInSaaS \
     -e CAMUNDA_CLIENT_CLOUD_CLIENT-ID='<YOUR_CLIENT_ID>' \
     -e CAMUNDA_CLIENT_CLOUD_CLIENT-SECRET='<YOUR_CLIENT_SECRET>' \
     -e CAMUNDA_CLIENT_CLOUD_REGION='<YOUR_CLUSTER_REGION>' \
-    -e CAMUNDA_OPERATE_CLIENT_URL='https://<region>.operate.camunda.io/<cluster-id>' \
+    -e CAMUNDA_OPERATE_CLIENT_URL='https://<region>.api.camunda.io/<cluster-id>' \
         camunda/connectors-bundle:<desired-version>
 ```
 

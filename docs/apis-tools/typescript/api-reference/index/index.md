@@ -1806,7 +1806,34 @@ mdx:
 
 ## Variables
 
+- [AuditLogActorTypeEnum](variables/AuditLogActorTypeEnum.md)
+- [AuditLogCategoryEnum](variables/AuditLogCategoryEnum.md)
+- [AuditLogEntityTypeEnum](variables/AuditLogEntityTypeEnum.md)
+- [AuditLogOperationTypeEnum](variables/AuditLogOperationTypeEnum.md)
+- [AuditLogResultEnum](variables/AuditLogResultEnum.md)
+- [BatchOperationItemStateEnum](variables/BatchOperationItemStateEnum.md)
+- [BatchOperationStateEnum](variables/BatchOperationStateEnum.md)
+- [BatchOperationTypeEnum](variables/BatchOperationTypeEnum.md)
+- [ClusterVariableScopeEnum](variables/ClusterVariableScopeEnum.md)
+- [DecisionDefinitionTypeEnum](variables/DecisionDefinitionTypeEnum.md)
+- [DecisionInstanceStateEnum](variables/DecisionInstanceStateEnum.md)
+- [ElementInstanceStateEnum](variables/ElementInstanceStateEnum.md)
+- [GlobalListenerSourceEnum](variables/GlobalListenerSourceEnum.md)
+- [GlobalTaskListenerEventTypeEnum](variables/GlobalTaskListenerEventTypeEnum.md)
+- [IncidentErrorTypeEnum](variables/IncidentErrorTypeEnum.md)
+- [IncidentStateEnum](variables/IncidentStateEnum.md)
+- [JobKindEnum](variables/JobKindEnum.md)
+- [JobListenerEventTypeEnum](variables/JobListenerEventTypeEnum.md)
+- [JobStateEnum](variables/JobStateEnum.md)
+- [MessageSubscriptionStateEnum](variables/MessageSubscriptionStateEnum.md)
+- [OwnerTypeEnum](variables/OwnerTypeEnum.md)
+- [PermissionTypeEnum](variables/PermissionTypeEnum.md)
+- [ProcessInstanceStateEnum](variables/ProcessInstanceStateEnum.md)
+- [ResourceTypeEnum](variables/ResourceTypeEnum.md)
+- [SortOrderEnum](variables/SortOrderEnum.md)
 - [SPEC_HASH](variables/SPEC_HASH.md)
+- [TenantFilterEnum](variables/TenantFilterEnum.md)
+- [UserTaskStateEnum](variables/UserTaskStateEnum.md)
 
 ## Functions
 

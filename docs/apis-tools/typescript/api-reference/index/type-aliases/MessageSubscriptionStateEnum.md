@@ -9,10 +9,7 @@ mdx:
 
 ```ts
 type MessageSubscriptionStateEnum =
-  | "CORRELATED"
-  | "CREATED"
-  | "DELETED"
-  | "MIGRATED";
+  (typeof MessageSubscriptionStateEnum)[keyof typeof MessageSubscriptionStateEnum];
 ```
 
 The state of message subscription.

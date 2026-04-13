@@ -9,10 +9,7 @@ mdx:
 
 ```ts
 type DecisionDefinitionTypeEnum =
-  | "DECISION_TABLE"
-  | "LITERAL_EXPRESSION"
-  | "UNSPECIFIED"
-  | "UNKNOWN";
+  (typeof DecisionDefinitionTypeEnum)[keyof typeof DecisionDefinitionTypeEnum];
 ```
 
 The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10

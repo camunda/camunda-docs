@@ -1458,6 +1458,7 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
+        "apis-tools/migration-manuals/saas-orchestration-architecture",
       ],
     },
   ],
