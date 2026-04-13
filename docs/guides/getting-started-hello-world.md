@@ -36,7 +36,7 @@ Different inputs produce different outcomes:
 | `76 – 89`   | Launch proceeds — destination set to **Mars** (5 experiments)  |
 | `75`        | Launch proceeds — destination set to **Mars** (3 experiments)  |
 | `50 – 74`   | Launch proceeds — destination set to **Moon** (3 experiments)  |
-| `< 50`      | **Mission cancelled** — process ends on the cancellation path  |
+| `< 50`      | **Mission canceled** — process ends on the cancellation path   |
 
 ## What you'll learn
 
@@ -144,7 +144,7 @@ Data needs to sync to Operate, so the process instance may not be visible immedi
 **Things to look for:**
 
 - **Timer waiting** — the token pauses at "Countdown T-10" for 10 seconds. You can see it live.
-- **Different paths** — compare a successful vs. cancelled instance.
+- **Different paths** — compare a successful vs. canceled instance.
 - **DMN decision** — destination is set by `plot-destination` based on `fuelLevel`.
 - **Parallel execution** — both "Burn stage 1" and "Run experiments" complete independently.
 - **Variables** — click an instance and inspect `destination`, `fuelAfterBurn`, `missionResult`.
@@ -158,9 +158,9 @@ Go back to Modeler and start additional process instances with different fuel le
 | Venus   | `{"fuelLevel": 95}` | Destination: Venus, 5 experiments |
 | Mars    | `{"fuelLevel": 80}` | Destination: Mars, 5 experiments  |
 | Moon    | `{"fuelLevel": 60}` | Destination: Moon, 3 experiments  |
-| Cancel  | `{"fuelLevel": 30}` | Mission cancelled                 |
+| Cancel  | `{"fuelLevel": 30}` | Mission canceled                  |
 
-Compare the paths of successful and cancelled instances in Operate.
+Compare the paths of successful and canceled instances in Operate.
 
 ## How it works
 
@@ -177,7 +177,7 @@ The process uses no external code. All logic is expressed using **FEEL expressio
 
 ## Complete!
 
-Navigate back to Operate and verify that your process instances have completed successfully (or were cancelled, depending on the fuel level). Congratulations — you've just deployed and run your first Camunda 8 process!
+Navigate back to Operate and verify that your process instances have completed successfully (or were canceled, depending on the fuel level). Congratulations — you've just deployed and run your first Camunda 8 process!
 
 ## Summary
 
