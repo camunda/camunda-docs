@@ -4,7 +4,8 @@ on: pull_request
 
 jobs:
   build-docs:
-    runs-on: ubuntu-latest
+    runs-on: gcp-core-16-default
+    container: node:24
     env:
       temporary_link_path: .github/workflows/validate-links
     steps:
