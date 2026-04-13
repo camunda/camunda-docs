@@ -64,7 +64,7 @@ you must also use the dedicated Spring Boot 4.0 test artifact:
 ```xml
 <dependency>
   <groupId>io.camunda</groupId>
-  <artifactId>camunda-process-test-spring-4</artifactId>
+  <artifactId>camunda-process-test-spring-boot-4</artifactId>
   <scope>test</scope>
 </dependency>
 ```
