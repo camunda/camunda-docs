@@ -8,11 +8,7 @@ mdx:
 # Type Alias: JobKindEnum
 
 ```ts
-type JobKindEnum =
-  | "BPMN_ELEMENT"
-  | "EXECUTION_LISTENER"
-  | "TASK_LISTENER"
-  | "AD_HOC_SUB_PROCESS";
+type JobKindEnum = (typeof JobKindEnum)[keyof typeof JobKindEnum];
 ```
 
 The job kind.

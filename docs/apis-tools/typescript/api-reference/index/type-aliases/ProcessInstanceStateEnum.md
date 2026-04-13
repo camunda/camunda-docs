@@ -8,7 +8,8 @@ mdx:
 # Type Alias: ProcessInstanceStateEnum
 
 ```ts
-type ProcessInstanceStateEnum = "ACTIVE" | "COMPLETED" | "TERMINATED";
+type ProcessInstanceStateEnum =
+  (typeof ProcessInstanceStateEnum)[keyof typeof ProcessInstanceStateEnum];
 ```
 
 Process instance states

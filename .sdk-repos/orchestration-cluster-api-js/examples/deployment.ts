@@ -39,10 +39,7 @@ async function deployResourcesFromFilesExample() {
   const camunda = createCamundaClient();
 
   // Node.js only: deploy directly from file paths
-  const result = await camunda.deployResourcesFromFiles([
-    "./process.bpmn",
-    "./decision.dmn",
-  ]);
+  const result = await camunda.deployResourcesFromFiles(['./process.bpmn', './decision.dmn']);
 
   console.log(`Deployment key: ${result.deploymentKey}`);
 }

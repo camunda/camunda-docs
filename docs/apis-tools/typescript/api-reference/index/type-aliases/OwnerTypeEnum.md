@@ -8,13 +8,7 @@ mdx:
 # Type Alias: OwnerTypeEnum
 
 ```ts
-type OwnerTypeEnum =
-  | "USER"
-  | "CLIENT"
-  | "ROLE"
-  | "GROUP"
-  | "MAPPING_RULE"
-  | "UNSPECIFIED";
+type OwnerTypeEnum = (typeof OwnerTypeEnum)[keyof typeof OwnerTypeEnum];
 ```
 
 The type of the owner of permissions.

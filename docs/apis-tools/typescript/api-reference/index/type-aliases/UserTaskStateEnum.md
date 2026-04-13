@@ -9,15 +9,7 @@ mdx:
 
 ```ts
 type UserTaskStateEnum =
-  | "CREATING"
-  | "CREATED"
-  | "ASSIGNING"
-  | "UPDATING"
-  | "COMPLETING"
-  | "COMPLETED"
-  | "CANCELING"
-  | "CANCELED"
-  | "FAILED";
+  (typeof UserTaskStateEnum)[keyof typeof UserTaskStateEnum];
 ```
 
 The state of the user task.

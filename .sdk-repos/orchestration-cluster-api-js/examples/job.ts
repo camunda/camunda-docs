@@ -125,8 +125,8 @@ async function createThreadedJobWorkerExample() {
   const camunda = createCamundaClient();
 
   const _worker = camunda.createThreadedJobWorker({
-    jobType: "cpu-heavy-task",
-    handlerModule: "./my-handler.js",
+    jobType: 'cpu-heavy-task',
+    handlerModule: './my-handler.js',
     maxParallelJobs: 32,
     jobTimeoutMs: 30000,
   });
@@ -138,7 +138,7 @@ function getWorkersExample() {
   const camunda = createCamundaClient();
 
   camunda.createJobWorker({
-    jobType: "payment-processing",
+    jobType: 'payment-processing',
     jobHandler: async (job): Promise<JobActionReceipt> => job.complete(),
   });
 
@@ -152,7 +152,7 @@ function stopAllWorkersExample() {
   const camunda = createCamundaClient();
 
   camunda.createJobWorker({
-    jobType: "payment-processing",
+    jobType: 'payment-processing',
     jobHandler: async (job): Promise<JobActionReceipt> => job.complete(),
   });
 

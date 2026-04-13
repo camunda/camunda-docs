@@ -8,7 +8,7 @@ mdx:
 # Type Alias: SortOrderEnum
 
 ```ts
-type SortOrderEnum = "ASC" | "DESC";
+type SortOrderEnum = (typeof SortOrderEnum)[keyof typeof SortOrderEnum];
 ```
 
 The order in which to sort the related field.

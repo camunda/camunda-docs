@@ -9,12 +9,7 @@ mdx:
 
 ```ts
 type GlobalTaskListenerEventTypeEnum =
-  | "all"
-  | "creating"
-  | "assigning"
-  | "updating"
-  | "completing"
-  | "canceling";
+  (typeof GlobalTaskListenerEventTypeEnum)[keyof typeof GlobalTaskListenerEventTypeEnum];
 ```
 
 The event type that triggers the user task listener.

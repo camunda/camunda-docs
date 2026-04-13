@@ -8,7 +8,8 @@ mdx:
 # Type Alias: GlobalListenerSourceEnum
 
 ```ts
-type GlobalListenerSourceEnum = "CONFIGURATION" | "API";
+type GlobalListenerSourceEnum =
+  (typeof GlobalListenerSourceEnum)[keyof typeof GlobalListenerSourceEnum];
 ```
 
 How the global listener was defined.
