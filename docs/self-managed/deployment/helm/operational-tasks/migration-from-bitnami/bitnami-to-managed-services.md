@@ -371,7 +371,7 @@ When `ES_WARM_REINDEX=true` is set in `env.sh`, the migration scripts **automati
 Your managed Elasticsearch target must have `reindex.remote.whitelist` configured to allow pulling data from the source Bitnami ES service. This is required for the `_reindex` API to work across clusters. Consult your managed Elasticsearch provider's documentation for how to configure this setting.
 :::
 
-If you cannot configure `reindex.remote.whitelist` on the managed target, or prefer a manual approach, you can leave `ES_WARM_REINDEX=false` (default) and transfer data manually. See [Alternative: manual Elasticsearch migration](#alternative-manual-elasticsearch-migration) below.
+If you cannot configure `reindex.remote.whitelist` on the managed target, or prefer a manual approach, you can leave `ES_WARM_REINDEX=false` (default) and transfer data manually. See [alternative: manual Elasticsearch migration](#alternative-manual-elasticsearch-migration) below.
 
 ### Phase 4: Validate (no downtime)
 
