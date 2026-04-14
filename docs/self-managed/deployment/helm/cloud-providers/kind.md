@@ -85,7 +85,7 @@ You can also use [asdf](https://asdf-vm.com/) to install the tools, with the ver
 By the end of this tutorial, you'll have:
 
 - A local Kubernetes cluster running with kind. This includes one control plane and two worker nodes.
-- An Ingress NGINX controller deployed for routing traffic (domain mode only).
+- A Contour Ingress controller deployed for routing traffic (domain mode only).
 - TLS certificates configured with mkcert (domain mode only).
 - Prerequisite services deployed via Kubernetes operators:
   - Elasticsearch via ECK (used as secondary storage in this guide; RDBMS is a supported alternative — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md))
@@ -169,22 +169,22 @@ If you'd prefer a simpler setup without domain configuration, skip to [No-domain
 
 ### Deploy the Ingress controller
 
-Deploy the [Ingress NGINX controller](https://kubernetes.github.io/ingress-nginx/) to handle incoming traffic:
+Deploy the [Contour Ingress controller](https://projectcontour.io/) to handle incoming traffic:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/ingress-nginx-deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/contour-deploy.sh
 ```
 
 This script:
 
-1. Installs Ingress NGINX via Helm.
-2. Configures it to run on the control plane node with `hostNetwork: true`.
-3. Waits until the controller is ready.
+1. Installs Contour via Helm.
+2. Configures Envoy to run on the control plane node with `hostNetwork: true`.
+3. Waits until the Envoy deployment is ready.
 
 Verify the Ingress controller is running:
 
 ```bash
-kubectl get pods -n ingress-nginx
+kubectl get pods -n projectcontour
 ```
 
 ### Configure DNS resolution
@@ -195,13 +195,13 @@ For pods inside the cluster to resolve `camunda.example.com`, configure CoreDNS 
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/coredns-config.sh
 ```
 
-This configuration rewrites DNS queries for `camunda.example.com` and `zeebe-camunda.example.com` to the Ingress NGINX controller service (`ingress-nginx-controller.ingress-nginx.svc.cluster.local`), allowing pods to reach Camunda services using the same domain names as external clients.
+This configuration rewrites DNS queries for `camunda.example.com` and `zeebe-camunda.example.com` to the Contour Envoy service (`contour-envoy.projectcontour.svc.cluster.local`), allowing pods to reach Camunda services using the same domain names as external clients.
 
 <details>
 <summary>Review the CoreDNS configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/configs/coredns-configmap.yaml
+https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/configs/coredns-configmap-contour.yaml
 ```
 
 </details>
@@ -601,7 +601,7 @@ kubectl rollout restart deployment -n camunda
 Check the Ingress controller status:
 
 ```bash
-kubectl get pods -n ingress-nginx
+kubectl get pods -n projectcontour
 kubectl get ingress -n camunda
 ```
 

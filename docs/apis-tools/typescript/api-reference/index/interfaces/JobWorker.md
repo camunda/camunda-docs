@@ -7,8 +7,6 @@ mdx:
 
 # Interface: JobWorker
 
-Defined in: [runtime/jobWorker.ts:78](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L78)
-
 ## Accessors
 
 ### activeJobs
@@ -18,8 +16,6 @@ Defined in: [runtime/jobWorker.ts:78](https://github.com/camunda/orchestration-c
 ```ts
 get activeJobs(): number;
 ```
-
-Defined in: [runtime/jobWorker.ts:119](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L119)
 
 ##### Returns
 
@@ -35,8 +31,6 @@ Defined in: [runtime/jobWorker.ts:119](https://github.com/camunda/orchestration-
 get name(): string;
 ```
 
-Defined in: [runtime/jobWorker.ts:116](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L116)
-
 ##### Returns
 
 `string`
@@ -51,8 +45,6 @@ Defined in: [runtime/jobWorker.ts:116](https://github.com/camunda/orchestration-
 get stopped(): boolean;
 ```
 
-Defined in: [runtime/jobWorker.ts:122](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L122)
-
 ##### Returns
 
 `boolean`
@@ -65,8 +57,6 @@ Defined in: [runtime/jobWorker.ts:122](https://github.com/camunda/orchestration-
 start(): void;
 ```
 
-Defined in: [runtime/jobWorker.ts:126](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L126)
-
 #### Returns
 
 `void`
@@ -78,8 +68,6 @@ Defined in: [runtime/jobWorker.ts:126](https://github.com/camunda/orchestration-
 ```ts
 stop(): void;
 ```
-
-Defined in: [runtime/jobWorker.ts:140](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L140)
 
 #### Returns
 
@@ -95,8 +83,6 @@ stopGracefully(opts?): Promise<{
   timedOut: boolean;
 }>;
 ```
-
-Defined in: [runtime/jobWorker.ts:159](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/jobWorker.ts#L159)
 
 Gracefully stop the worker: prevent new polls, allow any in-flight activation to finish
 without cancellation, and wait for currently active jobs to drain (be acknowledged) up to waitUpToMs.

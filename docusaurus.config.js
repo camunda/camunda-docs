@@ -177,18 +177,23 @@ module.exports = {
                 highlight: "typescript",
                 operationMapPath:
                   ".sdk-repos/orchestration-cluster-api-js/examples/operation-map.json",
+                defaultImports:
+                  "import { createCamundaClient } from '@camunda8/orchestration-cluster-api';",
               },
               {
                 lang: "Python",
                 highlight: "python",
                 operationMapPath:
                   ".sdk-repos/orchestration-cluster-api-python/examples/operation-map.json",
+                defaultImports:
+                  "from camunda_orchestration_sdk import CamundaClient",
               },
               {
                 lang: "C#",
                 highlight: "csharp",
                 operationMapPath:
                   ".sdk-repos/orchestration-cluster-api-csharp/examples/operation-map.json",
+                defaultImports: "using Camunda.Orchestration.Sdk;",
               },
             ],
             version: "1",

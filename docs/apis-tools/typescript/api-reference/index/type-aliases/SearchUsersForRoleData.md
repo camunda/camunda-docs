@@ -11,8 +11,6 @@ mdx:
 type SearchUsersForRoleData = object;
 ```
 
-Defined in: [gen/types.gen.ts:14496](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14496)
-
 ## Properties
 
 ### body?
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:14496](https://github.com/camunda/orchestration-cl
 ```ts
 optional body?: SearchQueryRequest & object;
 ```
-
-Defined in: [gen/types.gen.ts:14497](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14497)
 
 #### Type Declaration
 
@@ -41,8 +37,6 @@ Sort field criteria.
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:14509](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14509)
-
 #### roleId
 
 ```ts
@@ -59,8 +53,6 @@ The role ID.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:14515](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14515)
-
 ---
 
 ### url
@@ -68,5 +60,3 @@ Defined in: [gen/types.gen.ts:14515](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/roles/{roleId}/users/search";
 ```
-
-Defined in: [gen/types.gen.ts:14516](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L14516)

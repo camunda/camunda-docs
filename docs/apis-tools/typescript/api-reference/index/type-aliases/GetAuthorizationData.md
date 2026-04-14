@@ -11,8 +11,6 @@ mdx:
 type GetAuthorizationData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8726](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8726)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:8726](https://github.com/camunda/orchestration-clu
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8727](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8727)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:8727](https://github.com/camunda/orchestration-clu
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:8728](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8728)
 
 #### authorizationKey
 
@@ -49,8 +43,6 @@ The key of the authorization to get.
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:8734](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8734)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:8734](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/authorizations/{authorizationKey}";
 ```
-
-Defined in: [gen/types.gen.ts:8735](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L8735)

@@ -11,8 +11,6 @@ mdx:
 type UserTaskFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:7541](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7541)
-
 User task filter request.
 
 ## Properties
@@ -22,8 +20,6 @@ User task filter request.
 ```ts
 optional assignee?: StringFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7549](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7549)
 
 The assignee of the user task.
 
@@ -35,8 +31,6 @@ The assignee of the user task.
 optional candidateGroup?: StringFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7566](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7566)
-
 The candidate group for this user task.
 
 ---
@@ -46,8 +40,6 @@ The candidate group for this user task.
 ```ts
 optional candidateUser?: StringFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7570](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7570)
 
 The candidate user for this user task.
 
@@ -59,8 +51,6 @@ The candidate user for this user task.
 optional completionDate?: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7586](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7586)
-
 The user task completion date.
 
 ---
@@ -70,8 +60,6 @@ The user task completion date.
 ```ts
 optional creationDate?: DateTimeFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7582](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7582)
 
 The user task creation date.
 
@@ -83,8 +71,6 @@ The user task creation date.
 optional dueDate?: DateTimeFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7594](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7594)
-
 The user task due date.
 
 ---
@@ -94,8 +80,6 @@ The user task due date.
 ```ts
 optional elementId?: ElementId;
 ```
-
-Defined in: [gen/types.gen.ts:7557](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7557)
 
 The element ID of the user task.
 
@@ -107,8 +91,6 @@ The element ID of the user task.
 optional elementInstanceKey?: ElementInstanceKey;
 ```
 
-Defined in: [gen/types.gen.ts:7618](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7618)
-
 The key of the element instance.
 
 ---
@@ -118,8 +100,6 @@ The key of the element instance.
 ```ts
 optional followUpDate?: DateTimeFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7590](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7590)
 
 The user task follow-up date.
 
@@ -131,8 +111,6 @@ The user task follow-up date.
 optional localVariables?: VariableValueFilterProperty[];
 ```
 
-Defined in: [gen/types.gen.ts:7602](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7602)
-
 The local variables of the user task.
 
 ---
@@ -142,8 +120,6 @@ The local variables of the user task.
 ```ts
 optional name?: StringFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7562](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7562)
 
 The task name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
 
@@ -155,8 +131,6 @@ The task name. This only works for data created with 8.8 and onwards. Instances 
 optional priority?: IntegerFilterProperty;
 ```
 
-Defined in: [gen/types.gen.ts:7553](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7553)
-
 The priority of the user task.
 
 ---
@@ -166,8 +140,6 @@ The priority of the user task.
 ```ts
 optional processDefinitionId?: ProcessDefinitionId;
 ```
-
-Defined in: [gen/types.gen.ts:7578](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7578)
 
 The ID of the process definition.
 
@@ -179,8 +151,6 @@ The ID of the process definition.
 optional processDefinitionKey?: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:7610](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7610)
-
 The key of the process definition.
 
 ---
@@ -190,8 +160,6 @@ The key of the process definition.
 ```ts
 optional processInstanceKey?: ProcessInstanceKey;
 ```
-
-Defined in: [gen/types.gen.ts:7614](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7614)
 
 The key of the process instance.
 
@@ -203,8 +171,6 @@ The key of the process instance.
 optional processInstanceVariables?: VariableValueFilterProperty[];
 ```
 
-Defined in: [gen/types.gen.ts:7598](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7598)
-
 The variables of the process instance.
 
 ---
@@ -214,8 +180,6 @@ The variables of the process instance.
 ```ts
 optional state?: UserTaskStateFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7545](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7545)
 
 The user task state.
 
@@ -227,8 +191,6 @@ The user task state.
 optional tags?: TagSet;
 ```
 
-Defined in: [gen/types.gen.ts:7619](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7619)
-
 ---
 
 ### tenantId?
@@ -236,8 +198,6 @@ Defined in: [gen/types.gen.ts:7619](https://github.com/camunda/orchestration-clu
 ```ts
 optional tenantId?: StringFilterProperty;
 ```
-
-Defined in: [gen/types.gen.ts:7574](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7574)
 
 Tenant ID of this user task.
 
@@ -248,7 +208,5 @@ Tenant ID of this user task.
 ```ts
 optional userTaskKey?: UserTaskKey;
 ```
-
-Defined in: [gen/types.gen.ts:7606](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7606)
 
 The key for this user task.

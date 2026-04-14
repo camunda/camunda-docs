@@ -11,8 +11,6 @@ mdx:
 type CreateDeploymentData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10069](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10069)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:10069](https://github.com/camunda/orchestration-cl
 ```ts
 body: object;
 ```
-
-Defined in: [gen/types.gen.ts:10070](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10070)
 
 #### resources
 
@@ -45,8 +41,6 @@ optional tenantId?: TenantId;
 optional path?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10078](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10078)
-
 ---
 
 ### query?
@@ -55,8 +49,6 @@ Defined in: [gen/types.gen.ts:10078](https://github.com/camunda/orchestration-cl
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:10079](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10079)
-
 ---
 
 ### url
@@ -64,5 +56,3 @@ Defined in: [gen/types.gen.ts:10079](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/deployments";
 ```
-
-Defined in: [gen/types.gen.ts:10080](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L10080)

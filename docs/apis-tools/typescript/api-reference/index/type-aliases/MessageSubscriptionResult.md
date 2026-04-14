@@ -11,8 +11,6 @@ mdx:
 type MessageSubscriptionResult = object;
 ```
 
-Defined in: [gen/types.gen.ts:5370](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5370)
-
 ## Properties
 
 ### correlationKey
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:5370](https://github.com/camunda/orchestration-clu
 ```ts
 correlationKey: string | null;
 ```
-
-Defined in: [gen/types.gen.ts:5414](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5414)
 
 The correlation key of the message subscription.
 
@@ -33,8 +29,6 @@ The correlation key of the message subscription.
 elementId: ElementId;
 ```
 
-Defined in: [gen/types.gen.ts:5397](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5397)
-
 The element ID associated with this message subscription.
 
 ---
@@ -44,8 +38,6 @@ The element ID associated with this message subscription.
 ```ts
 elementInstanceKey: ElementInstanceKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:5401](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5401)
 
 The element instance key associated with this message subscription.
 
@@ -57,8 +49,6 @@ The element instance key associated with this message subscription.
 lastUpdatedDate: string;
 ```
 
-Defined in: [gen/types.gen.ts:5406](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5406)
-
 The last updated date of the message subscription.
 
 ---
@@ -68,8 +58,6 @@ The last updated date of the message subscription.
 ```ts
 messageName: string;
 ```
-
-Defined in: [gen/types.gen.ts:5410](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5410)
 
 The name of the message associated with the message subscription.
 
@@ -81,8 +69,6 @@ The name of the message associated with the message subscription.
 messageSubscriptionKey: MessageSubscriptionKey;
 ```
 
-Defined in: [gen/types.gen.ts:5374](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5374)
-
 The message subscription key associated with this message subscription.
 
 ---
@@ -93,8 +79,6 @@ The message subscription key associated with this message subscription.
 messageSubscriptionState: MessageSubscriptionStateEnum;
 ```
 
-Defined in: [gen/types.gen.ts:5402](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5402)
-
 ---
 
 ### processDefinitionId
@@ -102,8 +86,6 @@ Defined in: [gen/types.gen.ts:5402](https://github.com/camunda/orchestration-clu
 ```ts
 processDefinitionId: ProcessDefinitionId;
 ```
-
-Defined in: [gen/types.gen.ts:5378](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5378)
 
 The process definition ID associated with this message subscription.
 
@@ -115,8 +97,6 @@ The process definition ID associated with this message subscription.
 processDefinitionKey: ProcessDefinitionKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:5382](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5382)
-
 The process definition key associated with this message subscription.
 
 ---
@@ -127,8 +107,6 @@ The process definition key associated with this message subscription.
 processInstanceKey: ProcessInstanceKey | null;
 ```
 
-Defined in: [gen/types.gen.ts:5386](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5386)
-
 The process instance key associated with this message subscription.
 
 ---
@@ -138,8 +116,6 @@ The process instance key associated with this message subscription.
 ```ts
 rootProcessInstanceKey: ProcessInstanceKey | null;
 ```
-
-Defined in: [gen/types.gen.ts:5393](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5393)
 
 The key of the root process instance. The root process instance is the top-level
 ancestor in the process instance hierarchy. This field is only present for data
@@ -152,5 +128,3 @@ belonging to process instance hierarchies created in version 8.9 or later.
 ```ts
 tenantId: TenantId;
 ```
-
-Defined in: [gen/types.gen.ts:5415](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L5415)

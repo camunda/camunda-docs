@@ -11,8 +11,6 @@ mdx:
 type GetDecisionInstanceData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9804](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9804)
-
 ## Properties
 
 ### body?
@@ -21,8 +19,6 @@ Defined in: [gen/types.gen.ts:9804](https://github.com/camunda/orchestration-clu
 optional body?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9805](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9805)
-
 ---
 
 ### path
@@ -30,8 +26,6 @@ Defined in: [gen/types.gen.ts:9805](https://github.com/camunda/orchestration-clu
 ```ts
 path: object;
 ```
-
-Defined in: [gen/types.gen.ts:9806](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9806)
 
 #### decisionEvaluationInstanceKey
 
@@ -49,8 +43,6 @@ The assigned key of the decision instance, which acts as a unique identifier for
 optional query?: never;
 ```
 
-Defined in: [gen/types.gen.ts:9812](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9812)
-
 ---
 
 ### url
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:9812](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/decision-instances/{decisionEvaluationInstanceKey}";
 ```
-
-Defined in: [gen/types.gen.ts:9813](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L9813)

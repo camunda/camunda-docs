@@ -7,8 +7,6 @@ mdx:
 
 # Interface: ThreadedJobWorkerConfig\<In, Out, Headers\>
 
-Defined in: [runtime/threadedJobWorker.ts:40](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L40)
-
 Configuration for a threaded job worker.
 Same as JobWorkerConfig but replaces `jobHandler` with `handlerModule`.
 
@@ -34,8 +32,6 @@ Same as JobWorkerConfig but replaces `jobHandler` with `handlerModule`.
 optional autoStart?: boolean;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:57](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L57)
-
 Immediately start polling for work - default `true`
 
 ---
@@ -45,8 +41,6 @@ Immediately start polling for work - default `true`
 ```ts
 optional customHeadersSchema?: Headers;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:53](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L53)
 
 Zod schema for custom headers in the activated job
 
@@ -58,8 +52,6 @@ Zod schema for custom headers in the activated job
 optional fetchVariables?: In extends ZodType<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:71](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L71)
-
 Optional list of variable names to fetch during activation
 
 ---
@@ -69,8 +61,6 @@ Optional list of variable names to fetch during activation
 ```ts
 handlerModule: string;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:47](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L47)
 
 Absolute or relative path to a JS/TS module that exports a default handler function.
 The function signature must be: `(job, client) => Promise<JobActionReceipt>`
@@ -83,8 +73,6 @@ The function signature must be: `(job, client) => Promise<JobActionReceipt>`
 optional inputSchema?: In;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:49](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L49)
-
 Zod schema for variables in the activated job
 
 ---
@@ -94,8 +82,6 @@ Zod schema for variables in the activated job
 ```ts
 optional jobTimeoutMs?: number;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:67](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L67)
 
 Job activation timeout
 
@@ -107,8 +93,6 @@ Job activation timeout
 jobType: string;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:69](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L69)
-
 Zeebe job type
 
 ---
@@ -118,8 +102,6 @@ Zeebe job type
 ```ts
 optional maxParallelJobs?: number;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:59](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L59)
 
 concurrency limit
 
@@ -131,8 +113,6 @@ concurrency limit
 optional outputSchema?: Out;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:51](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L51)
-
 Zod schema for variables in the complete command
 
 ---
@@ -143,8 +123,6 @@ Zod schema for variables in the complete command
 optional pollIntervalMs?: number;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:55](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L55)
-
 Backoff between polls - default 1ms
 
 ---
@@ -154,8 +132,6 @@ Backoff between polls - default 1ms
 ```ts
 optional pollTimeoutMs?: number;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:65](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L65)
 
 The request will be completed when at least one job is activated or after the requestTimeout.
 If the requestTimeout = 0, the request will be completed after a default configured timeout in the broker.
@@ -168,8 +144,6 @@ To immediately complete the request when no job is activated set the requestTime
 ```ts
 optional startupJitterMaxSeconds?: number;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:80](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L80)
 
 Maximum random delay (in seconds) before the worker starts polling.
 When multiple application instances restart simultaneously, this spreads out
@@ -184,8 +158,6 @@ initial activation requests to avoid saturating the server.
 optional threadPoolSize?: number;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:91](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L91)
-
 Number of threads in the shared pool (used only when the pool is first created;
 subsequent workers share the existing pool).
 Default: number of CPU cores available to the process.
@@ -198,8 +170,6 @@ Default: number of CPU cores available to the process.
 optional validateSchemas?: boolean;
 ```
 
-Defined in: [runtime/threadedJobWorker.ts:85](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L85)
-
 Validate any provided input, output, customheader schema
 default: false
 
@@ -210,7 +180,5 @@ default: false
 ```ts
 optional workerName?: string;
 ```
-
-Defined in: [runtime/threadedJobWorker.ts:73](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/runtime/threadedJobWorker.ts#L73)
 
 Optional explicit name

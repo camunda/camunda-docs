@@ -11,8 +11,6 @@ mdx:
 type JobTimeSeriesStatisticsItem = object;
 ```
 
-Defined in: [gen/types.gen.ts:3882](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3882)
-
 Aggregated job metrics for a single time bucket.
 
 ## Properties
@@ -23,8 +21,6 @@ Aggregated job metrics for a single time bucket.
 completed: StatusMetric;
 ```
 
-Defined in: [gen/types.gen.ts:3888](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3888)
-
 ---
 
 ### created
@@ -32,8 +28,6 @@ Defined in: [gen/types.gen.ts:3888](https://github.com/camunda/orchestration-clu
 ```ts
 created: StatusMetric;
 ```
-
-Defined in: [gen/types.gen.ts:3887](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3887)
 
 ---
 
@@ -43,8 +37,6 @@ Defined in: [gen/types.gen.ts:3887](https://github.com/camunda/orchestration-clu
 failed: StatusMetric;
 ```
 
-Defined in: [gen/types.gen.ts:3889](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3889)
-
 ---
 
 ### time
@@ -52,7 +44,5 @@ Defined in: [gen/types.gen.ts:3889](https://github.com/camunda/orchestration-clu
 ```ts
 time: string;
 ```
-
-Defined in: [gen/types.gen.ts:3886](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L3886)
 
 ISO 8601 timestamp representing the start of this time bucket.

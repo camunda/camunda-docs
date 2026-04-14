@@ -11,8 +11,6 @@ mdx:
 type AdvancedProcessDefinitionKeyFilter = object;
 ```
 
-Defined in: [gen/types.gen.ts:4752](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4752)
-
 Advanced filter
 
 Advanced ProcessDefinitionKey filter.
@@ -25,8 +23,6 @@ Advanced ProcessDefinitionKey filter.
 optional $eq?: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:4756](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4756)
-
 Checks for equality with the provided value.
 
 ---
@@ -36,8 +32,6 @@ Checks for equality with the provided value.
 ```ts
 optional $exists?: boolean;
 ```
-
-Defined in: [gen/types.gen.ts:4764](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4764)
 
 Checks if the current property exists.
 
@@ -49,8 +43,6 @@ Checks if the current property exists.
 optional $in?: ProcessDefinitionKey[];
 ```
 
-Defined in: [gen/types.gen.ts:4768](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4768)
-
 Checks if the property matches any of the provided values.
 
 ---
@@ -61,8 +53,6 @@ Checks if the property matches any of the provided values.
 optional $neq?: ProcessDefinitionKey;
 ```
 
-Defined in: [gen/types.gen.ts:4760](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4760)
-
 Checks for inequality with the provided value.
 
 ---
@@ -72,7 +62,5 @@ Checks for inequality with the provided value.
 ```ts
 optional $notIn?: ProcessDefinitionKey[];
 ```
-
-Defined in: [gen/types.gen.ts:4772](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L4772)
 
 Checks if the property matches none of the provided values.

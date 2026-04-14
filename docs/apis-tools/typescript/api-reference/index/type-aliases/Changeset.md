@@ -18,8 +18,6 @@ type Changeset = {
 } | null;
 ```
 
-Defined in: [gen/types.gen.ts:7788](https://github.com/camunda/orchestration-cluster-api-js/blob/2d7928a5d3d0489482db52bc887c3dae115de89a/src/gen/types.gen.ts#L7788)
-
 JSON object with changed task attribute values.
 
 The following attributes can be adjusted with this endpoint, additional attributes
