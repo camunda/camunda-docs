@@ -577,6 +577,107 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
 # Open Operate at http://localhost:8080/operate to see your process instance running. Log in with the credentials \`demo/demo\`. `}
           </TerminalWindow>
 
+          {/* c8run direct download */}
+          <div className={styles.modelerNote}>
+            <p>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                style={{ marginRight: "0.4rem", verticalAlign: "middle" }}
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              No npm? Download c8run directly and start a local Camunda cluster
+              without the CLI.
+            </p>
+            <details className={styles.collapsible}>
+              <summary>Download c8run</summary>
+              <div className={styles.collapsibleContent}>
+                <p style={{ marginBottom: "0.75rem" }}>
+                  Requires{" "}
+                  <a
+                    href="https://adoptium.net/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    OpenJDK 21–25
+                  </a>
+                  . Extract the archive and run:
+                </p>
+                <TerminalWindow title="Terminal">
+                  {`# macOS / Linux
+./start.sh
+
+# Windows
+.\\c8run.exe start`}
+                </TerminalWindow>
+                <div
+                  className={styles.downloadButtons}
+                  style={{ marginTop: "1rem" }}
+                >
+                  <a
+                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-aarch64.zip"
+                    className={styles.downloadButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    macOS (Apple Silicon)
+                  </a>
+                  <a
+                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-x86_64.zip"
+                    className={styles.downloadButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    macOS (Intel)
+                  </a>
+                  <a
+                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-linux-x86_64.tar.gz"
+                    className={styles.downloadButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Linux
+                  </a>
+                  <a
+                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-windows-x86_64.zip"
+                    className={styles.downloadButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Windows
+                  </a>
+                </div>
+                <p className={styles.downloadMeta}>
+                  <Link
+                    to={useBaseUrl(
+                      "docs/next/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+                    )}
+                  >
+                    Installation guide
+                  </Link>
+                </p>
+              </div>
+            </details>
+          </div>
+
+          {/* Desktop Modeler download */}
           <div className={styles.modelerNote}>
             <p>
               <svg
