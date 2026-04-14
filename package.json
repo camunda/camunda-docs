@@ -41,8 +41,8 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
     "@bpmn-io/form-js": "^1.15.2",
-    "@camunda8/docusaurus-plugin-openapi-docs": "^4.6.2",
-    "@camunda8/docusaurus-theme-openapi-docs": "^4.6.2",
+    "@camunda8/docusaurus-plugin-openapi-docs": "^4.6.5",
+    "@camunda8/docusaurus-theme-openapi-docs": "^4.6.5",
     "@docusaurus/core": "^3.8.0",
     "@docusaurus/faster": "^3.8.0",
     "@docusaurus/preset-classic": "^3.8.0",
@@ -78,7 +78,7 @@
     "jest": "^30.0.0",
     "lint-staged": "^16.0.0",
     "playwright": "^1.52.0",
-    "prettier": "3.8.1"
+    "prettier": "3.8.2"
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"

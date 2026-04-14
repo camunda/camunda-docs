@@ -565,7 +565,7 @@ function BuildWithCamunda() {
             </p>
           </div>
           <TerminalWindow title="Terminal">
-            {`$ npm install @camunda8/cli@alpha -g
+            {`$ npm install @camunda8/cli -g
 $ c8ctl cluster start
 
 # Camunda is now running! Deploy your first process:

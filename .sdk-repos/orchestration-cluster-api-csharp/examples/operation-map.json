@@ -154,8 +154,8 @@
   "createDeployment": [
     {
       "file": "Deployment.cs",
-      "region": "CreateDeployment",
-      "label": "Deploy resources"
+      "region": "DeployResourcesFromFiles",
+      "label": "Deploy resources from files"
     }
   ],
   "deleteResource": [

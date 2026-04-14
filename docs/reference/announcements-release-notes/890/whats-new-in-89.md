@@ -70,8 +70,12 @@ Important changes in Camunda 8.9 are summarized as follows:
     <td>New migration tools History Data Migrator and Identity Data Migrator.</td>
 </tr>
 <tr>
-    <td>[Modeler](#modeler)</td>
-    <td>Web Modeler moves to Log4j2 and Tomcat, adds RDBMS support, event templates, and email invitations, and Desktop Modeler adds cluster connection management.</td>
+    <td>[Desktop Modeler](#desktop-modeler)</td>
+    <td>New cluster connection management.</td>
+</tr>
+<tr>
+    <td>[Web Modeler](#web-modeler)</td>
+    <td>Simplified architecture and installation, migration to Log4j2 and Tomcat, RDBMS support, event templates, and email invitations.</td>
 </tr>
 <tr>
     <td>[Orchestration Cluster](#ocluster)</td>
@@ -149,6 +153,10 @@ The Camunda 8 Run CLI and configuration is enhanced to:
 - Ship a fully documented unified configuration file by default.
 
 These changes reduce friction when setting up Camunda 8 Run for the first time, debugging local setup issues, and switching between different configurations or environments.
+
+:::info Breaking change
+The `--docker` flag and bundled Docker Compose files have been removed from Camunda 8 Run. Docker Compose is now a standalone distribution artifact. See [release announcements](/reference/announcements-release-notes/890/890-announcements.md#camunda-8-run-docker-compose-support-removed) for migration details.
+:::
 
 <p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
@@ -253,11 +261,9 @@ The Identity Data Migrator migrates authorizations that control access to resour
 
 <p class="link-arrow">[Identity Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity.md)</p>
 
-## Modeler {#modeler}
+## Desktop Modeler {#desktop-modeler}
 
-Camunda 8.9 introduces enhancements and changes to both Desktop Modeler and Web Modeler.
-
-### Manage Camunda connections in Desktop Modeler
+### Manage Camunda connections
 
 You can now manage multiple Camunda connections in Desktop Modeler:
 
@@ -267,7 +273,11 @@ You can now manage multiple Camunda connections in Desktop Modeler:
 
 <p class="link-arrow">[Connect to Camunda 8 in Desktop Modeler](/components/modeler/desktop-modeler/connect-to-camunda-8.md)</p>
 
-### Web Modeler event templates and email invitations
+## Web Modeler {#web-modeler}
+
+Camunda 8.9 introduces the following enhancements and changes in Web Modeler.
+
+### Event templates and email invitations
 
 The following usability improvements simplify collaboration and help teams keep event configurations consistent.
 
@@ -276,7 +286,16 @@ The following usability improvements simplify collaboration and help teams keep 
 | [Element templates](/components/modeler/element-templates/defining-templates.md)                          | Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.               |
 | [Email invitations](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
 
-### Web Modeler Log4j2 and Tomcat changes
+### Improved Self-Managed installation
+
+The Web Modeler system architecture has been simplified to enable easier and smoother installation and configuration of Web Modeler in a Self-Managed deployment.
+The separate `webapp` component has been removed, and its functionality is now completely integrated into the `restapi` component.
+
+This change might require updates to your application configuration.
+
+<p class="link-arrow">[Migrate configuration](/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
+
+### Log4j2 and Tomcat changes
 
 | Feature                                             | Description                                                                                                                                                                                                  |
 | :-------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
