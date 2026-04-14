@@ -1,0 +1,53 @@
+module.exports = {
+  "FEEL expressions": [
+    "components/modeler/feel/what-is-feel",
+    "components/modeler/feel/language-guide/feel-data-types",
+    "components/modeler/feel/language-guide/feel-unary-tests",
+    "components/modeler/feel/feel-playground",
+    {
+      Expressions: [
+        "components/modeler/feel/language-guide/feel-expressions-introduction",
+        "components/modeler/feel/language-guide/feel-boolean-expressions",
+        "components/modeler/feel/language-guide/feel-context-expressions",
+        "components/modeler/feel/language-guide/feel-control-flow",
+        "components/modeler/feel/language-guide/feel-error-handling",
+        "components/modeler/feel/language-guide/feel-functions",
+        "components/modeler/feel/language-guide/feel-list-expressions",
+        "components/modeler/feel/language-guide/feel-numeric-expressions",
+        "components/modeler/feel/language-guide/feel-string-expressions",
+        "components/modeler/feel/language-guide/feel-temporal-expressions",
+        "components/modeler/feel/language-guide/feel-variables",
+      ],
+    },
+    {
+      "Built-in functions": [
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-introduction",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-boolean",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-context",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-conversion",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-list",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-numeric",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-range",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-string",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-temporal",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous",
+      ],
+    },
+    {
+      type: "category",
+      label: "Cluster variables",
+      link: {
+        type: "doc",
+        id: "components/modeler/feel/cluster-variable/cluster-variable-overview",
+      },
+      items: [
+        "components/modeler/feel/cluster-variable/cluster-variable-get-started",
+        "components/modeler/feel/cluster-variable/cluster-variable-use",
+        "components/modeler/feel/cluster-variable/cluster-variable-scope-priority",
+        "components/modeler/feel/cluster-variable/cluster-variable-namespace-collisions",
+        "components/modeler/feel/cluster-variable/cluster-variable-data-types",
+        "components/modeler/feel/cluster-variable/cluster-variable-examples",
+      ],
+    },
+  ],
+};
