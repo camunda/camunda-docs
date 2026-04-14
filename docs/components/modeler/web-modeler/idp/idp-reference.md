@@ -65,7 +65,7 @@ IDP currently only supports data extraction from the following uploaded document
 
 IDP supports data extraction and processing of documents in multiple languages.
 
-IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. This ensures that the extracted text can be accurately mapped to process variables and used within your workflows, regardless of document language.
+Language support depends on the [text extraction engine](#extraction-engines) used. For example, when using the AWS provider, IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. Other extraction engines (Azure Document Intelligence, GCP Document AI) also support multiple languages — refer to the respective provider documentation for details.
 
 :::note
 At the time of the 8.7 release (April 2025), Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for current information on supported languages.
@@ -89,7 +89,11 @@ You can specify the following extraction field data types.
 
 ## Extraction models {#extraction-models}
 
-You can choose from the following supported LLM extraction models during [data extraction](idp-unstructured-extraction.md#extract-fields).
+You can choose from the following supported LLM extraction models during [data extraction](idp-unstructured-extraction.md#extract-fields). The available models depend on the cloud provider configured for your document extraction template.
+
+### AWS extraction models
+
+The following models are available when using the AWS provider with Amazon Bedrock:
 
 | Extraction model     | Model provider                             | Documentation                                                                                           |
 | :------------------- | :----------------------------------------- | :------------------------------------------------------------------------------------------------------ |
@@ -113,11 +117,43 @@ For current regional support information, refer to [supported foundation models 
 
 :::
 
+### Azure, GCP, and OpenAI Compatible extraction models
+
+When using Azure, GCP, or an OpenAI Compatible provider, the available extraction models depend on the models deployed and accessible through your provider configuration:
+
+- **Azure**: Models available through your [Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/) deployment, including Azure OpenAI models if configured. See [Azure connector secrets](idp-configuration.md#azure-secrets).
+- **GCP**: Models available through your [Google Cloud Vertex AI](https://cloud.google.com/vertex-ai/docs) deployment. See [GCP connector secrets](idp-configuration.md#gcp-secrets).
+- **OpenAI Compatible**: Any model accessible through your OpenAI Compatible API endpoint. The **Extraction model** field accepts custom model IDs, allowing you to specify the exact model to use. See [OpenAI Compatible connector secrets](idp-configuration.md#openai-compatible-secrets).
+
+## Text extraction engines {#extraction-engines}
+
+Text extraction engines determine how text is extracted from your documents before the LLM processes the content. You can [select an extraction engine](idp-unstructured-extraction.md#extract-data) per unstructured extraction template to optimize for accuracy, performance, and cost based on your document type.
+
+| Extraction engine           | Provider     | Best for                                        | Description                                                                                                                                                                             |
+| :-------------------------- | :----------- | :---------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fast Extract                | Built-in     | Digitally generated PDFs                        | A lightweight, built-in PDF text parser. Faster and lower cost than OCR-based engines, but does not support scanned or image-based documents.                                           |
+| Multimodal                  | Provider LLM | Documents where the LLM has vision capabilities | Sends the document directly to the LLM for native interpretation, bypassing a separate text extraction step. Useful when the LLM supports multimodal (text and image) input.            |
+| AWS Textract                | AWS          | Scanned or image-based documents                | Uses [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md) OCR for high-accuracy text extraction. Requires AWS provider configuration.                 |
+| Azure Document Intelligence | Azure        | Scanned or image-based documents                | Uses [Azure AI Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/) for OCR-based text extraction. Requires Azure provider configuration. |
+| GCP Document AI             | GCP          | Scanned or image-based documents                | Uses [Google Cloud Document AI](https://cloud.google.com/document-ai/docs) for OCR-based text extraction. Requires GCP provider configuration.                                          |
+
+:::note
+The available extraction engines depend on the cloud provider configured for your document extraction template. For example, AWS Textract is only available when using the AWS provider. See [configuring IDP](idp-configuration.md) for provider setup details.
+:::
+
 ## Optical Character Recognition (OCR) {#ocr}
 
-Optical Character Recognition (OCR) technology is used to detect and extract text and layout from scanned or digital documents.
+Optical Character Recognition (OCR) technology is used by several [text extraction engines](#extraction-engines) to detect and extract text and layout from scanned or digital documents.
 
-Structured data extraction currently uses Amazon Textract:
+The following OCR-based extraction engines are available:
+
+- **AWS Textract**: Used for both structured and unstructured extraction with the AWS provider.
+- **Azure Document Intelligence**: Used for unstructured extraction with the Azure provider.
+- **GCP Document AI**: Used for both structured and unstructured extraction with the GCP provider.
+
+### AWS Textract OCR capabilities
+
+Structured data extraction with the AWS provider uses Amazon Textract:
 
 - Extracts text, layout, and key-value pairs.
 - Supports horizontal text only.

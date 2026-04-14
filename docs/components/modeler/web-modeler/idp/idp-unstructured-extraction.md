@@ -17,6 +17,7 @@ import IdpVersionsImg from './img/idp-versions.png';
 import IdpExtractionModelImg from './img/idp-extraction-model.png';
 import IdpVersionsLinkImg from './img/idp-versions-link.png';
 import IdpModelSelectionImg from './img/idp-model-selection.png';
+import IdpExtractionEngineSelectionImg from './img/idp-extraction-engines.png';
 
 Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
 
@@ -85,7 +86,23 @@ You can edit and delete extraction fields at any time. Click the three vertical 
 
 ### Extract data and save as test case {#extract-data}
 
-Once you have added your extraction fields, select an LLM model and test the data extraction.
+Once you have added your extraction fields, select a text extraction engine and LLM model, and test the data extraction.
+
+#### Extraction engine selection
+
+The **Extraction engine** dropdown allows you to choose how text is extracted from your documents before the LLM processes the content. Select the engine that best matches your document type and processing needs:
+
+<img src={IdpExtractionEngineSelectionImg} alt="Extraction engine selection dropdown" width="380px" style={{marginTop: '0'}} />
+
+- **Fast Extract**: A lightweight, built-in PDF text parser for digitally generated PDFs. This option is faster and lower cost, but does not support scanned or image-based documents.
+- **Multimodal**: Sends the document directly to the LLM for native interpretation, bypassing a separate text extraction step. Useful when the LLM supports vision/multimodal capabilities.
+- **AWS Textract**: Uses Amazon Textract OCR for high-accuracy text extraction from scanned or image-based documents.
+- **Azure Document Intelligence**: Uses Azure AI Document Intelligence for OCR-based text extraction from scanned or image-based documents.
+- **GCP Document AI**: Uses Google Cloud Document AI for OCR-based text extraction from scanned or image-based documents.
+
+:::note
+The available extraction engines depend on the cloud provider configured for your document extraction template. For example, AWS Textract is only available when using the AWS provider.
+:::
 
 #### Model selection
 
@@ -98,8 +115,7 @@ The **Extraction model** field is both a dropdown and an input field, giving you
 
 #### Extract and test
 
-<img src={IdpExtractionModelImg} alt="Extraction model" width="700px" style={{marginTop: '0'}} />
-
+1. **Extraction engine**: Select the text extraction engine you want to use.
 1. **Extraction model**: Select the LLM model you want to use.
 1. Select the document you want to test the data extraction against.
 1. Click **Extract document**.
@@ -117,21 +133,20 @@ The **Extraction model** field is both a dropdown and an input field, giving you
 :::note
 
 - Running an extraction creates a "test" process instance. You can view this in [Operate](/components/operate/operate-introduction.md).
-- You will achieve different results using different [extraction models](idp-reference.md#extraction-models). Test different models until you find the one that best suits your budget and accuracy requirements.
+- You will achieve different results using different [extraction models](idp-reference.md#extraction-models) and extraction engines. Test different combinations until you find the one that best suits your document type, budget, and accuracy requirements.
 - You can save and overwrite a test case at any time with your latest results.
 
 :::
 
 ## Step 3: Validate extraction {#validate-extraction}
 
-On the **Validate extraction** tab, test and validate the configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by the selected LLM extraction model using your extraction fields and prompts.
-
-<img src={IdpValidationResultsImg} alt="Validate extraction screen" style={{marginTop: '0'}} />
+On the **Validate extraction** tab, test and validate the configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by the selected extraction engine and LLM extraction model using your extraction fields and prompts.
 
 ### Validate extraction
 
 To validate the data extraction:
 
+1. Select the **Extraction engine** you want to use for validation.
 1. Select the **Project extraction model** you want to use for validation.
 1. Click **Test documents** to run the extraction validation against your uploaded sample documents.
 1. The extraction validation results are shown in the **Test Case Results** column.
@@ -141,10 +156,11 @@ To validate the data extraction:
    - A **Field extraction summary** shows a summary percentage value for the overall extraction accuracy to allow you to quickly compare extraction accuracy between different LLM extraction models.
      <img src={IdpValidationResultsSummaryImg} alt="Extraction results summary" />
 1. Perform any actions required due to the validation results such as saving missing test cases or reviewing documents. If your validation results remain unsatisfactory, try the following before rerunning the validation:
+   - Change the extraction engine to try a different text extraction approach (for example, switch from PDF Parser to an OCR-based engine for scanned documents).
    - Change the extraction model to try and obtain more accurate results with a different model.
    - Edit your extraction field prompts. Select the three vertical dots on a field to open the actions menu, and select **Edit**.
    - Go back to a previous step and edit your data extraction configuration, or upload more sample documents.
-1. Once you are satisfied with the extraction accuracy and extraction model, publish the document extraction template.
+1. Once you are satisfied with the extraction accuracy, extraction engine, and extraction model, publish the document extraction template.
 
 ### Publish document extraction template {#publish-template}
 
@@ -155,7 +171,7 @@ Publish the document extraction template to make it available for [integration i
    - **Publish to organization**: The document extraction template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
-   <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" style={{marginTop: '0'}} />
+   - **Extraction engine**: Select the text extraction engine to use for the published document extraction template.
    - **Version name**: Enter a version for the published document extraction template.
    - **Version description**: Enter a description for the published document extraction template version.
    - **Extraction model**: Select the extraction model you want to use for the published document extraction template.
@@ -164,7 +180,7 @@ Publish the document extraction template to make it available for [integration i
 
 :::note
 
-- The most recent **Field extraction summary** results are shown for your chosen **Extraction model**.
+- The most recent **Field extraction summary** results are shown for your chosen **Extraction engine** and **Extraction model** combination.
 
 :::
 
