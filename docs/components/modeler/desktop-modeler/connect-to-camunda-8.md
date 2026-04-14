@@ -35,7 +35,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
 5. Select the connection you just created to use it for [deployment](./deploy-diagram.md), [starting a new process instance](./start-instance.md), or [task testing](./task-testing.md).
 
-   ![New connection selected in connection manager](./img/connection-selector-new-connection.png)
+   ![New connection selected in connection manager](./img/connection-selector-dev-connection.png)
    :::note
    As a next step, [deploy your diagram](./deploy-diagram.md).
    :::
