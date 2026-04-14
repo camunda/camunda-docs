@@ -1,0 +1,628 @@
+---
+id: complete-job
+title: "Complete job"
+description: "<MarkerStronglyConsistentExtension />"
+sidebar_label: "Complete job"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Complete job"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/{jobKey}/completion"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Complete a job with the given payload, which allows completing the associated service task.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "jobKey",
+      in: "path",
+      required: true,
+      description: "The key of the job to complete.",
+      schema: {
+        type: "string",
+        format: "string<JobKey>",
+        example: "2251799813653498",
+        description: "System-generated key for a job.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variables: {
+              additionalProperties: true,
+              description: "The variables to complete the job with.",
+              type: "object",
+              nullable: true,
+            },
+            result: {
+              description:
+                "The result of the completed job as determined by the worker.\n",
+              discriminator: {
+                propertyName: "type",
+                mapping: {
+                  userTask: {
+                    description:
+                      "Job result details for a user task completion, optionally including a denial reason and corrected task properties.\n",
+                    type: "object",
+                    nullable: true,
+                    properties: {
+                      denied: {
+                        type: "boolean",
+                        description:
+                          "Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.\n",
+                        nullable: true,
+                      },
+                      deniedReason: {
+                        type: "string",
+                        description:
+                          "The reason provided by the user task listener for denying the work.",
+                        nullable: true,
+                      },
+                      corrections: {
+                        type: "object",
+                        description:
+                          "JSON object with attributes that were corrected by the worker.\n\nThe following attributes can be corrected, additional attributes will be ignored:\n\n* `assignee` - clear by providing an empty String\n* `dueDate` - clear by providing an empty String\n* `followUpDate` - clear by providing an empty String\n* `candidateGroups` - clear by providing an empty list\n* `candidateUsers` - clear by providing an empty list\n* `priority` - minimum 0, maximum 100, default 50\n\nProviding any of those attributes with a `null` value or omitting it preserves\nthe persisted attribute's value.\n",
+                        nullable: true,
+                        properties: {
+                          assignee: {
+                            type: "string",
+                            description: "Assignee of the task.",
+                            nullable: true,
+                          },
+                          dueDate: {
+                            type: "string",
+                            format: "date-time",
+                            description: "The due date of the task.",
+                            nullable: true,
+                          },
+                          followUpDate: {
+                            type: "string",
+                            format: "date-time",
+                            description: "The follow-up date of the task.",
+                            nullable: true,
+                          },
+                          candidateUsers: {
+                            type: "array",
+                            description:
+                              "The list of candidate users of the task.",
+                            items: { type: "string" },
+                            nullable: true,
+                          },
+                          candidateGroups: {
+                            type: "array",
+                            description:
+                              "The list of candidate groups of the task.",
+                            items: { type: "string" },
+                            nullable: true,
+                          },
+                          priority: {
+                            type: "integer",
+                            format: "int32",
+                            description: "The priority of the task.",
+                            minimum: 0,
+                            maximum: 100,
+                            nullable: true,
+                          },
+                        },
+                        title: "JobResultCorrections",
+                      },
+                      type: {
+                        description:
+                          "Used to distinguish between different types of job results.",
+                        type: "string",
+                        example: "userTask",
+                      },
+                    },
+                    title: "JobResultUserTask",
+                  },
+                  adHocSubProcess: {
+                    description:
+                      "Job result details for an ad‑hoc sub‑process, including elements to activate and flags indicating completion or cancellation behavior.\n",
+                    type: "object",
+                    nullable: true,
+                    properties: {
+                      activateElements: {
+                        type: "array",
+                        description:
+                          "Indicates which elements need to be activated in the ad-hoc subprocess.",
+                        items: {
+                          description:
+                            "Instruction to activate a single BPMN element within an ad‑hoc sub‑process, optionally providing variables scoped to that element.",
+                          type: "object",
+                          properties: {
+                            elementId: {
+                              allOf: [
+                                {
+                                  description:
+                                    "The model-defined id of an element.",
+                                  format: "ElementId",
+                                  type: "string",
+                                  example: "Activity_106kosb",
+                                  title: "ElementId",
+                                },
+                              ],
+                              description: "The element ID to activate.",
+                            },
+                            variables: {
+                              type: "object",
+                              additionalProperties: true,
+                              description: "Variables for the element.",
+                              nullable: true,
+                            },
+                          },
+                          title: "JobResultActivateElement",
+                        },
+                      },
+                      isCompletionConditionFulfilled: {
+                        type: "boolean",
+                        description:
+                          "Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.",
+                        default: false,
+                        nullable: false,
+                      },
+                      isCancelRemainingInstances: {
+                        type: "boolean",
+                        description:
+                          "Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.",
+                        default: false,
+                        nullable: false,
+                      },
+                      type: {
+                        description:
+                          "Used to distinguish between different types of job results.",
+                        type: "string",
+                        example: "adHocSubProcess",
+                      },
+                    },
+                    title: "JobResultAdHocSubProcess",
+                  },
+                },
+              },
+              oneOf: [
+                {
+                  description:
+                    "Job result details for a user task completion, optionally including a denial reason and corrected task properties.\n",
+                  type: "object",
+                  nullable: true,
+                  properties: {
+                    denied: {
+                      type: "boolean",
+                      description:
+                        "Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.\n",
+                      nullable: true,
+                    },
+                    deniedReason: {
+                      type: "string",
+                      description:
+                        "The reason provided by the user task listener for denying the work.",
+                      nullable: true,
+                    },
+                    corrections: {
+                      type: "object",
+                      description:
+                        "JSON object with attributes that were corrected by the worker.\n\nThe following attributes can be corrected, additional attributes will be ignored:\n\n* `assignee` - clear by providing an empty String\n* `dueDate` - clear by providing an empty String\n* `followUpDate` - clear by providing an empty String\n* `candidateGroups` - clear by providing an empty list\n* `candidateUsers` - clear by providing an empty list\n* `priority` - minimum 0, maximum 100, default 50\n\nProviding any of those attributes with a `null` value or omitting it preserves\nthe persisted attribute's value.\n",
+                      nullable: true,
+                      properties: {
+                        assignee: {
+                          type: "string",
+                          description: "Assignee of the task.",
+                          nullable: true,
+                        },
+                        dueDate: {
+                          type: "string",
+                          format: "date-time",
+                          description: "The due date of the task.",
+                          nullable: true,
+                        },
+                        followUpDate: {
+                          type: "string",
+                          format: "date-time",
+                          description: "The follow-up date of the task.",
+                          nullable: true,
+                        },
+                        candidateUsers: {
+                          type: "array",
+                          description:
+                            "The list of candidate users of the task.",
+                          items: { type: "string" },
+                          nullable: true,
+                        },
+                        candidateGroups: {
+                          type: "array",
+                          description:
+                            "The list of candidate groups of the task.",
+                          items: { type: "string" },
+                          nullable: true,
+                        },
+                        priority: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The priority of the task.",
+                          minimum: 0,
+                          maximum: 100,
+                          nullable: true,
+                        },
+                      },
+                      title: "JobResultCorrections",
+                    },
+                    type: {
+                      description:
+                        "Used to distinguish between different types of job results.",
+                      type: "string",
+                      example: "userTask",
+                    },
+                  },
+                  title: "JobResultUserTask",
+                },
+                {
+                  description:
+                    "Job result details for an ad‑hoc sub‑process, including elements to activate and flags indicating completion or cancellation behavior.\n",
+                  type: "object",
+                  nullable: true,
+                  properties: {
+                    activateElements: {
+                      type: "array",
+                      description:
+                        "Indicates which elements need to be activated in the ad-hoc subprocess.",
+                      items: {
+                        description:
+                          "Instruction to activate a single BPMN element within an ad‑hoc sub‑process, optionally providing variables scoped to that element.",
+                        type: "object",
+                        properties: {
+                          elementId: {
+                            allOf: [
+                              {
+                                description:
+                                  "The model-defined id of an element.",
+                                format: "ElementId",
+                                type: "string",
+                                example: "Activity_106kosb",
+                                title: "ElementId",
+                              },
+                            ],
+                            description: "The element ID to activate.",
+                          },
+                          variables: {
+                            type: "object",
+                            additionalProperties: true,
+                            description: "Variables for the element.",
+                            nullable: true,
+                          },
+                        },
+                        title: "JobResultActivateElement",
+                      },
+                    },
+                    isCompletionConditionFulfilled: {
+                      type: "boolean",
+                      description:
+                        "Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.",
+                      default: false,
+                      nullable: false,
+                    },
+                    isCancelRemainingInstances: {
+                      type: "boolean",
+                      description:
+                        "Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.",
+                      default: false,
+                      nullable: false,
+                    },
+                    type: {
+                      description:
+                        "Used to distinguish between different types of job results.",
+                      type: "string",
+                      example: "adHocSubProcess",
+                    },
+                  },
+                  title: "JobResultAdHocSubProcess",
+                },
+              ],
+              title: "JobResult",
+            },
+          },
+          title: "JobCompletionRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The job was completed successfully." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The job with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The job with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

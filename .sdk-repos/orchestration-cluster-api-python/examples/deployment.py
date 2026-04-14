@@ -37,6 +37,21 @@ def deploy_resources_with_tenant_example() -> None:
 # endregion DeployResourcesWithTenant
 
 
+# region DeployResourcesFromFiles
+def deploy_resources_from_files_example() -> None:
+    client = CamundaClient()
+
+    # Convenience method that reads files from disk and deploys them
+    result = client.deploy_resources_from_files(
+        ["order-process.bpmn", "decision.dmn"]
+    )
+
+    print(f"Deployment key: {result.deployment_key}")
+    for process in result.processes:
+        print(f"  Process: {process.process_definition_id}")
+# endregion DeployResourcesFromFiles
+
+
 # region DeleteResource
 def delete_resource_example() -> None:
     client = CamundaClient()

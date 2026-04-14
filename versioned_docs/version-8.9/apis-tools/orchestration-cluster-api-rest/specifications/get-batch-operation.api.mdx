@@ -1,0 +1,370 @@
+---
+id: get-batch-operation
+title: "Get batch operation"
+description: "<MarkerEventuallyConsistentExtension />"
+sidebar_label: "Get batch operation"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get batch operation"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/batch-operations/{batchOperationKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Get batch operation by key.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "batchOperationKey",
+      in: "path",
+      required: true,
+      description: "The key (or operate legacy ID) of the batch operation.",
+      schema: {
+        format: "BatchOperationKey | uuid",
+        type: "string",
+        description: "System-generated key for an batch operation.",
+        example: "2251799813684321",
+        title: "BatchOperationKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The batch operation was found.",
+      content: {
+        "application/json": {
+          schema: {
+            required: [
+              "batchOperationKey",
+              "batchOperationType",
+              "state",
+              "operationsCompletedCount",
+              "operationsFailedCount",
+              "operationsTotalCount",
+              "actorType",
+              "actorId",
+              "errors",
+              "endDate",
+              "startDate",
+            ],
+            type: "object",
+            properties: {
+              batchOperationKey: {
+                allOf: [
+                  {
+                    format: "BatchOperationKey | uuid",
+                    type: "string",
+                    description: "System-generated key for an batch operation.",
+                    example: "2251799813684321",
+                    title: "BatchOperationKey",
+                  },
+                ],
+                description:
+                  "Key or (Operate Legacy ID = UUID) of the batch operation.",
+              },
+              state: {
+                description: "The batch operation state.",
+                type: "string",
+                enum: [
+                  "ACTIVE",
+                  "CANCELED",
+                  "COMPLETED",
+                  "CREATED",
+                  "FAILED",
+                  "PARTIALLY_COMPLETED",
+                  "SUSPENDED",
+                ],
+                title: "BatchOperationStateEnum",
+              },
+              batchOperationType: {
+                description: "The type of the batch operation.",
+                type: "string",
+                enum: [
+                  "ADD_VARIABLE",
+                  "CANCEL_PROCESS_INSTANCE",
+                  "DELETE_DECISION_DEFINITION",
+                  "DELETE_DECISION_INSTANCE",
+                  "DELETE_PROCESS_DEFINITION",
+                  "DELETE_PROCESS_INSTANCE",
+                  "MIGRATE_PROCESS_INSTANCE",
+                  "MODIFY_PROCESS_INSTANCE",
+                  "RESOLVE_INCIDENT",
+                  "UPDATE_VARIABLE",
+                ],
+                title: "BatchOperationTypeEnum",
+              },
+              startDate: {
+                type: "string",
+                description:
+                  "The start date of the batch operation.\nThis is `null` if the batch operation has not yet started.\n",
+                format: "date-time",
+                nullable: true,
+              },
+              endDate: {
+                type: "string",
+                description:
+                  "The end date of the batch operation.\nThis is `null` if the batch operation is still running.\n",
+                format: "date-time",
+                nullable: true,
+              },
+              actorType: {
+                description:
+                  "The type of the actor who performed the operation.\nThis is `null` if the batch operation was created before 8.9,\nor if the actor information is not available.\n",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "string",
+                    description:
+                      "The type of actor who performed the operation.",
+                    enum: ["ANONYMOUS", "CLIENT", "UNKNOWN", "USER"],
+                    title: "AuditLogActorTypeEnum",
+                  },
+                ],
+              },
+              actorId: {
+                type: "string",
+                description:
+                  "The ID of the actor who performed the operation. Available for batch operations created since 8.9.",
+                nullable: true,
+              },
+              operationsTotalCount: {
+                type: "integer",
+                description:
+                  "The total number of items contained in this batch operation.",
+                format: "int32",
+              },
+              operationsFailedCount: {
+                type: "integer",
+                description:
+                  "The number of items which failed during execution of the batch operation. (e.g. because they are rejected by the Zeebe engine).",
+                format: "int32",
+              },
+              operationsCompletedCount: {
+                type: "integer",
+                description: "The number of successfully completed tasks.",
+                format: "int32",
+              },
+              errors: {
+                description:
+                  "The errors that occurred per partition during the batch operation.",
+                type: "array",
+                items: {
+                  required: ["message", "partitionId", "type"],
+                  type: "object",
+                  properties: {
+                    partitionId: {
+                      description: "The partition ID where the error occurred.",
+                      type: "integer",
+                      format: "int32",
+                    },
+                    type: {
+                      description:
+                        "The type of the error that occurred during the batch operation.",
+                      type: "string",
+                      enum: ["QUERY_FAILED", "RESULT_BUFFER_SIZE_EXCEEDED"],
+                    },
+                    message: {
+                      description:
+                        "The error message that occurred during the batch operation.",
+                      type: "string",
+                    },
+                  },
+                  title: "BatchOperationError",
+                },
+              },
+            },
+            title: "BatchOperationResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The batch operation is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

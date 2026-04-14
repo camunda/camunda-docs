@@ -99,6 +99,84 @@ async function customFetchExample() {
 }
 //#endregion CustomFetch
 
+//#region Config
+function configExample() {
+  const camunda = createCamundaClient({
+    config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2' },
+  });
+
+  const config = camunda.config;
+  console.log(`REST address: ${config.restAddress}`);
+}
+//#endregion Config
+
+//#region GetConfig
+function getConfigExample() {
+  const camunda = createCamundaClient();
+
+  const config = camunda.getConfig();
+  console.log(`Auth strategy: ${config.auth.strategy}`);
+}
+//#endregion GetConfig
+
+//#region Configure
+async function configureExample() {
+  const camunda = createCamundaClient();
+
+  // Reconfigure the client with new overrides
+  camunda.configure({
+    config: {
+      CAMUNDA_REST_ADDRESS: 'http://new-host:8080/v2',
+    },
+  });
+
+  const topology = await camunda.getTopology();
+  console.log(`Cluster size: ${topology.clusterSize}`);
+}
+//#endregion Configure
+
+//#region GetAuthHeaders
+async function getAuthHeadersExample() {
+  const camunda = createCamundaClient();
+
+  const headers = await camunda.getAuthHeaders();
+  console.log(`Auth headers: ${JSON.stringify(headers)}`);
+}
+//#endregion GetAuthHeaders
+
+//#region ForceAuthRefresh
+async function forceAuthRefreshExample() {
+  const camunda = createCamundaClient();
+
+  // Force a fresh token exchange, bypassing any cached token
+  await camunda.forceAuthRefresh();
+}
+//#endregion ForceAuthRefresh
+
+//#region ClearAuthCache
+function clearAuthCacheExample() {
+  const camunda = createCamundaClient();
+
+  // Clear all cached auth tokens
+  camunda.clearAuthCache();
+
+  // Or selectively clear
+  camunda.clearAuthCache({ memory: true, disk: false });
+}
+//#endregion ClearAuthCache
+
+//#region WithCorrelation
+async function withCorrelationExample() {
+  const camunda = createCamundaClient();
+
+  // Run operations with a correlation ID for tracing
+  await camunda.withCorrelation('request-123', async () => {
+    const topology = await camunda.getTopology();
+    console.log(`Cluster size: ${topology.clusterSize}`);
+  });
+}
+//#endregion WithCorrelation
+
 // Suppress "declared but never read" — these are compile-only examples
 void createClientExample;
 void createClientWithConfigExample;
@@ -106,3 +184,10 @@ void createClientOAuthExample;
 void getTopologyExample;
 void resultClientExample;
 void customFetchExample;
+void configExample;
+void getConfigExample;
+void configureExample;
+void getAuthHeadersExample;
+void forceAuthRefreshExample;
+void clearAuthCacheExample;
+void withCorrelationExample;

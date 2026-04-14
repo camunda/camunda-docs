@@ -1,0 +1,88 @@
+---
+id: date-filter-input
+title: DateFilter
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+Filter using a date range
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "from": string(date-time),
+    "to": string(date-time)
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "from": "2023-03-29T18:38:10.491Z",
+  "to": "2023-03-29T18:38:10.491Z"
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>DateFilter.<b>from</b></code>](#)<Bullet />`string(date-time)` <Badge class="secondary" text="non-null"/>
+
+> Start date range to search from in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard
+
+#### [<code style={{ fontWeight: 'normal' }}>DateFilter.<b>to</b></code>](#)<Bullet />`string(date-time)` <Badge class="secondary" text="non-null"/>
+
+> End date range to search to in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard
+
+### Member of
+
+[`TaskSearchRequest`](../requests/task-search-request.mdx) <Badge class="secondary" text="object"/>
