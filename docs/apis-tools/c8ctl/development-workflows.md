@@ -20,6 +20,8 @@ c8 run ./order.bpmn --profile=prod
 c8 watch --profile=local
 ```
 
+:::
+
 ## Deploy
 
 Deploy BPMN, DMN, and form resources to the active cluster.
