@@ -66,7 +66,7 @@ Free Trial clusters are automatically paused after a period of inactivity. Auto-
 You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume a cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
 
 - Clusters tagged as `dev` (or untagged) auto-pause eight hours after the cluster is created or resumed from a paused state.
-- Clusters tagged as `test`, `stage`, or `prod` auto-pause if there is no cluster activity for 48 hours.
+- Clusters auto-pause if there is no cluster activity for 48 hours.
 - Cluster disk space is cleared when a trial cluster is paused.
   - You will need to redeploy processes to the cluster once it is resumed from a paused state.
   - Cluster configuration settings (for example, API Clients, connector secrets, and IP allowlists) are saved so you can easily resume a cluster.

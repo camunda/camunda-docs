@@ -1,0 +1,1324 @@
+---
+id: delete-decision-instances-batch-operation
+title: "Delete decision instances (batch)"
+description: "<MarkerStronglyConsistentExtension />"
+sidebar_label: "Delete decision instances (batch)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete decision instances (batch)"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/decision-instances/deletion"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Delete multiple decision instances. This will delete the historic data from secondary storage.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/\{batchOperationKey\}).
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          description:
+            "The decision instance filter that defines which decision instances should be deleted.",
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  description: "Decision instance search filter.",
+                  type: "object",
+                  properties: {
+                    decisionEvaluationInstanceKey: {
+                      description:
+                        "The key of the decision evaluation instance.",
+                      allOf: [
+                        {
+                          description:
+                            "DecisionEvaluationInstanceKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a decision evaluation instance.",
+                                  format: "DecisionEvaluationInstanceKey",
+                                  example: "2251799813684367",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "DecisionEvaluationInstanceKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced DecisionEvaluationInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a decision evaluation instance.",
+                                      format: "DecisionEvaluationInstanceKey",
+                                      example: "2251799813684367",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "DecisionEvaluationInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a decision evaluation instance.",
+                                      format: "DecisionEvaluationInstanceKey",
+                                      example: "2251799813684367",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "DecisionEvaluationInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a decision evaluation instance.",
+                                    format: "DecisionEvaluationInstanceKey",
+                                    example: "2251799813684367",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "DecisionEvaluationInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a decision evaluation instance.",
+                                    format: "DecisionEvaluationInstanceKey",
+                                    example: "2251799813684367",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "DecisionEvaluationInstanceKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DecisionEvaluationInstanceKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    state: {
+                      description: "The state of the decision instance.",
+                      allOf: [
+                        {
+                          description:
+                            "DecisionInstanceStateEnum property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10",
+                                  type: "string",
+                                  enum: [
+                                    "EVALUATED",
+                                    "FAILED",
+                                    "UNSPECIFIED",
+                                    "UNKNOWN",
+                                  ],
+                                  title: "DecisionInstanceStateEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced DecisionInstanceStateEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10",
+                                      type: "string",
+                                      enum: [
+                                        "EVALUATED",
+                                        "FAILED",
+                                        "UNSPECIFIED",
+                                        "UNKNOWN",
+                                      ],
+                                      title: "DecisionInstanceStateEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10",
+                                      type: "string",
+                                      enum: [
+                                        "EVALUATED",
+                                        "FAILED",
+                                        "UNSPECIFIED",
+                                        "UNKNOWN",
+                                      ],
+                                      title: "DecisionInstanceStateEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10",
+                                    type: "string",
+                                    enum: [
+                                      "EVALUATED",
+                                      "FAILED",
+                                      "UNSPECIFIED",
+                                      "UNKNOWN",
+                                    ],
+                                    title: "DecisionInstanceStateEnum",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10",
+                                    type: "string",
+                                    enum: [
+                                      "EVALUATED",
+                                      "FAILED",
+                                      "UNSPECIFIED",
+                                      "UNKNOWN",
+                                    ],
+                                    title: "DecisionInstanceStateEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "DecisionInstanceStateFilterProperty",
+                        },
+                      ],
+                    },
+                    evaluationFailure: {
+                      type: "string",
+                      description:
+                        "The evaluation failure of the decision instance.",
+                    },
+                    evaluationDate: {
+                      description:
+                        "The evaluation date of the decision instance.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    decisionDefinitionId: {
+                      allOf: [
+                        {
+                          description:
+                            "Id of a decision definition, from the model. Only ids of decision definitions that are deployed are useful.",
+                          format: "DecisionDefinitionId",
+                          type: "string",
+                          example: "new-hire-onboarding-workflow",
+                          title: "DecisionDefinitionId",
+                        },
+                      ],
+                      description: "The ID of the DMN decision.",
+                    },
+                    decisionDefinitionName: {
+                      type: "string",
+                      description: "The name of the DMN decision.",
+                    },
+                    decisionDefinitionVersion: {
+                      type: "integer",
+                      format: "int32",
+                      description: "The version of the decision.",
+                    },
+                    decisionDefinitionType: {
+                      description:
+                        "The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10",
+                      type: "string",
+                      enum: [
+                        "DECISION_TABLE",
+                        "LITERAL_EXPRESSION",
+                        "UNSPECIFIED",
+                        "UNKNOWN",
+                      ],
+                      title: "DecisionDefinitionTypeEnum",
+                    },
+                    tenantId: {
+                      description: "The tenant ID of the decision instance.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                    decisionEvaluationKey: {
+                      allOf: [
+                        {
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          description:
+                            "System-generated key for a decision evaluation.",
+                          format: "DecisionEvaluationKey",
+                          example: "2251792362345323",
+                          type: "string",
+                          title: "DecisionEvaluationKey",
+                        },
+                      ],
+                      description:
+                        "The key of the parent decision evaluation. Note that this is not the identifier of an individual decision instance; the `decisionEvaluationInstanceKey` is the identifier for a decision instance.\n",
+                    },
+                    processDefinitionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a process instance.",
+                          format: "ProcessInstanceKey",
+                          example: "2251799813690746",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessInstanceKey",
+                        },
+                      ],
+                      description: "The key of the process instance.",
+                    },
+                    decisionDefinitionKey: {
+                      description: "The key of the decision.",
+                      allOf: [
+                        {
+                          description:
+                            "DecisionDefinitionKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a decision definition.",
+                                  format: "DecisionDefinitionKey",
+                                  example: "2251799813326547",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "DecisionDefinitionKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced DecisionDefinitionKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a decision definition.",
+                                      format: "DecisionDefinitionKey",
+                                      example: "2251799813326547",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "DecisionDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a decision definition.",
+                                      format: "DecisionDefinitionKey",
+                                      example: "2251799813326547",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "DecisionDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a decision definition.",
+                                    format: "DecisionDefinitionKey",
+                                    example: "2251799813326547",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "DecisionDefinitionKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a decision definition.",
+                                    format: "DecisionDefinitionKey",
+                                    example: "2251799813326547",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "DecisionDefinitionKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DecisionDefinitionKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    elementInstanceKey: {
+                      description:
+                        "The key of the element instance this decision instance is linked to.",
+                      allOf: [
+                        {
+                          description:
+                            "ElementInstanceKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ElementInstanceKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ElementInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a element instance.",
+                                      format: "ElementInstanceKey",
+                                      example: "2251799813686789",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ElementInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a element instance.",
+                                      format: "ElementInstanceKey",
+                                      example: "2251799813686789",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ElementInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ElementInstanceKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    rootDecisionDefinitionKey: {
+                      description: "The key of the root decision definition.",
+                      allOf: [
+                        {
+                          description:
+                            "DecisionDefinitionKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a decision definition.",
+                                  format: "DecisionDefinitionKey",
+                                  example: "2251799813326547",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "DecisionDefinitionKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced DecisionDefinitionKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a decision definition.",
+                                      format: "DecisionDefinitionKey",
+                                      example: "2251799813326547",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "DecisionDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a decision definition.",
+                                      format: "DecisionDefinitionKey",
+                                      example: "2251799813326547",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "DecisionDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a decision definition.",
+                                    format: "DecisionDefinitionKey",
+                                    example: "2251799813326547",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "DecisionDefinitionKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a decision definition.",
+                                    format: "DecisionDefinitionKey",
+                                    example: "2251799813326547",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "DecisionDefinitionKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DecisionDefinitionKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    decisionRequirementsKey: {
+                      description:
+                        "The key of the decision requirements definition.",
+                      allOf: [
+                        {
+                          description:
+                            "DecisionRequirementsKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  description:
+                                    "System-generated key for a deployed decision requirements definition.",
+                                  format: "DecisionRequirementsKey",
+                                  example: "2251799813683346",
+                                  type: "string",
+                                  title: "DecisionRequirementsKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced DecisionRequirementsKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      description:
+                                        "System-generated key for a deployed decision requirements definition.",
+                                      format: "DecisionRequirementsKey",
+                                      example: "2251799813683346",
+                                      type: "string",
+                                      title: "DecisionRequirementsKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      description:
+                                        "System-generated key for a deployed decision requirements definition.",
+                                      format: "DecisionRequirementsKey",
+                                      example: "2251799813683346",
+                                      type: "string",
+                                      title: "DecisionRequirementsKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    description:
+                                      "System-generated key for a deployed decision requirements definition.",
+                                    format: "DecisionRequirementsKey",
+                                    example: "2251799813683346",
+                                    type: "string",
+                                    title: "DecisionRequirementsKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    description:
+                                      "System-generated key for a deployed decision requirements definition.",
+                                    format: "DecisionRequirementsKey",
+                                    example: "2251799813683346",
+                                    type: "string",
+                                    title: "DecisionRequirementsKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DecisionRequirementsKeyFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "DecisionInstanceFilter",
+                },
+              ],
+              description: "The decision instance filter.",
+            },
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+          },
+          required: ["filter"],
+          title: "DecisionInstanceDeletionBatchOperationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The batch operation request was created.",
+      content: {
+        "application/json": {
+          schema: {
+            required: ["batchOperationKey", "batchOperationType"],
+            description: "The created batch operation.",
+            type: "object",
+            properties: {
+              batchOperationKey: {
+                allOf: [
+                  {
+                    format: "BatchOperationKey | uuid",
+                    type: "string",
+                    description: "System-generated key for an batch operation.",
+                    example: "2251799813684321",
+                    title: "BatchOperationKey",
+                  },
+                ],
+                description: "Key of the batch operation.",
+              },
+              batchOperationType: {
+                description: "The type of the batch operation.",
+                type: "string",
+                enum: [
+                  "ADD_VARIABLE",
+                  "CANCEL_PROCESS_INSTANCE",
+                  "DELETE_DECISION_DEFINITION",
+                  "DELETE_DECISION_INSTANCE",
+                  "DELETE_PROCESS_DEFINITION",
+                  "DELETE_PROCESS_INSTANCE",
+                  "MIGRATE_PROCESS_INSTANCE",
+                  "MODIFY_PROCESS_INSTANCE",
+                  "RESOLVE_INCIDENT",
+                  "UPDATE_VARIABLE",
+                ],
+                title: "BatchOperationTypeEnum",
+              },
+            },
+            title: "BatchOperationCreatedResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The decision instance batch operation failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
