@@ -575,7 +575,7 @@ Reindex each concrete Camunda index individually rather than using a single wild
 
 ```bash
 # On the target, add source to reindex.remote.allowlist.
-# Then iterate over every Camunda index you want to copy.
+# Then, iterate over each Camunda index you want to copy.
 for idx in $(curl -s -u "elastic:<password>" \
   "http://source-es:9200/_cat/indices/zeebe-*,operate-*,tasklist-*,optimize-*,connectors-*,camunda-*?h=index"); do
   curl -X POST "https://target-endpoint/_reindex?wait_for_completion=true" \
