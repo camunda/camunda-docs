@@ -565,7 +565,7 @@ function BuildWithCamunda() {
             </p>
           </div>
           <TerminalWindow title="Terminal">
-            {`$ npm install @camunda8/cli@alpha -g
+            {`$ npm install @camunda8/cli -g
 $ c8ctl cluster start
 
 # Camunda is now running! Deploy your first process:
@@ -697,8 +697,8 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
             <div className={styles.commandCard}>
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl c8run start 8.9.0-alpha5
-$ c8ctl c8run stop
+                {`$ c8ctl cluster start 8.9.0-alpha5
+$ c8ctl cluster stop
 
 `}
               </TerminalWindow>
