@@ -474,6 +474,28 @@ In Web Modeler SaaS, the endpoints will no longer be available as of April 14, 2
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Default secret provider prefix change
+
+Starting with Camunda 8.9, the environment-based connector secret provider uses `SECRET_` as the default prefix. Unprefixed environment variables are no longer resolved as connector secrets unless you explicitly configure an empty prefix or a different custom prefix.
+
+**Action:** Choose one of the following options before or during your upgrade:
+
+- Update your secret environment variables to use the `SECRET_` prefix.
+- Configure a custom prefix via `camunda.connector.secret-provider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_PREFIX`.
+- Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
+
+<p className="link-arrow">[connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md#secrets)</p>
+<p className="link-arrow">[Upgrade 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md#default-secret-provider-prefix-change-breaking)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
@@ -581,9 +603,26 @@ Because Kafka treats a changed group ID as a brand-new consumer group, affected 
 </div>
 <div className="release-announcement-content">
 
+#### Camunda 8 Run: Docker Compose support removed
+
+The `--docker` flag and bundled Docker Compose files have been removed from Camunda 8 Run in 8.9. Camunda 8 Run and Docker Compose are now separate distribution artifacts.
+
+**Action:** If you previously started Docker Compose via `./c8run start --docker`, download the standalone [Docker Compose distribution](/self-managed/quickstart/developer-quickstart/docker-compose.md) from GitHub releases or the Camunda Download Center and run it independently.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Camunda 8 Run with H2 as the default secondary data storage
 
 Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elasticsearch. Elasticsearch is no longer bundled with Camunda 8 Run.
+
+The `--disable-elasticsearch` flag is also removed, as Elasticsearch is no longer bundled. To use Elasticsearch as secondary storage, configure an external instance via `--config` and the `application.yaml`.
 
 When running with H2 (or any other RDBMS) as secondary storage, Camunda is only compatible with the V2 API. As a result, some features are not available in Operate and Tasklist. See [Migrate to the V2 Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
 
@@ -865,6 +904,26 @@ If your `values.yaml` uses the `identity` profile key, the chart automatically m
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Keycloak auth secret configuration
+
+The legacy Keycloak auth secret configuration using `global.identity.keycloak.auth.existingSecret` and `global.identity.keycloak.auth.existingSecretKey` is deprecated in Camunda 8.9.
+
+**Action:** Migrate to the new standard secret pattern:
+
+- `global.identity.keycloak.auth.existingSecret` → `global.identity.keycloak.auth.secret.existingSecret`
+- `global.identity.keycloak.auth.existingSecretKey` → `global.identity.keycloak.auth.secret.existingSecretKey`
+
+Legacy keys continue to work in 8.9 via normalizers, but produce deprecation warnings and will be removed in a future version. See [Secret management](/self-managed/deployment/helm/configure/secret-management.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -882,21 +941,39 @@ This change reduces the risk of unexpected breaking changes from upstream Bitnam
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Secure connectivity (AWS PrivateLink) for SaaS
+#### Helm chart: Headless service exposes public API ports
 
-Camunda 8.9 introduces Secure connectivity for AWS-hosted Orchestration Clusters in Camunda 8 SaaS.
+The Orchestration component's headless service now includes gRPC and HTTP ports, enabling client-side load balancing for applications that connect directly to individual cluster members.
 
-Secure connectivity enables private inbound access from your AWS VPC to your cluster using AWS PrivateLink, without routing traffic over the public internet.
+</div>
+</div>
 
-- Applies per cluster.
-- Supports inbound connectivity only.
-- Public connectivity remains enabled.
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
 
-<p className="link-arrow">[Secure connectivity (AWS PrivateLink)](../../../components/saas/secure-connectivity/index.md)</p>
+#### Helm chart: Connectors OIDC issuer URI preferred over token URL
+
+The Connectors component now uses the OIDC issuer URI by preference, making `tokenUrl` optional when `issuerUri` is configured. This simplifies OIDC integration by allowing the token endpoint to be discovered automatically.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Persistent web sessions enabled for RDBMS mode
+
+When using RDBMS as the secondary storage type, web sessions now persist across pod restarts. Previously, sessions were discarded, requiring users to re-authenticate after each restart.
 
 </div>
 </div>
@@ -907,11 +984,13 @@ Secure connectivity enables private inbound access from your AWS VPC to your clu
 </div>
 <div className="release-announcement-content">
 
-#### Cluster variable support
+#### Helm chart: `springImport` option for `extraConfiguration` entries
 
-Camunda 8.9 introduces cluster variables, allowing you to centrally manage configuration across your cluster.
+Each `extraConfiguration` entry now supports an optional `springImport` field (default: `true`).
 
-<p className="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</p>
+**Action:** Set `springImport: false` to mount configuration files (such as `log4j2.xml` or keystores) into the container without adding them to Spring Boot's `spring.config.import`.
+
+This applies to all components that support `extraConfiguration`: orchestration, identity, connectors, optimize, and web-modeler.
 
 </div>
 </div>
@@ -988,6 +1067,109 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 </div>
 <div className="release-announcement-content">
 
+#### Helm chart: New restore options
+
+Camunda 8.9 adds new configuration options for backup restore operations in the Helm chart, giving operators more control over restore behavior via `values.yaml`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Kubernetes Gateway API support
+
+Camunda 8.9 adds support for the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) as an alternative to Ingress for routing external traffic to Camunda components.
+
+Setting `global.gateway.enabled: true` provisions `Gateway`, `HTTPRoute`, and `GRPCRoute` resources. Configure the gateway class, listeners, and per-component route options under `global.gateway.*` in your `values.yaml`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: TLS JKS keystore password configuration
+
+Camunda 8.9 adds `global.elasticsearch.tls.jks.password` and `global.opensearch.tls.jks.password` fields, allowing you to set the JKS keystore password directly in `values.yaml` instead of using workarounds.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: App Integrations exporter configuration
+
+Camunda 8.9 adds configuration options for the App Integrations exporter in the Helm chart's `values.yaml`, allowing you to configure how process data is exported for application integrations.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Helm template support for pod labels, annotations, and Ingress host
+
+`podLabels`, `podAnnotations`, and `global.ingress.host` now support Go template expressions (`tpl`). This enables dynamic configurations such as DataDog APM integration labels and environment-driven GitOps Ingress hostnames.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Secure connectivity (AWS PrivateLink) for SaaS
+
+Camunda 8.9 introduces Secure connectivity for AWS-hosted Orchestration Clusters in Camunda 8 SaaS.
+
+Secure connectivity enables private inbound access from your AWS VPC to your cluster using AWS PrivateLink, without routing traffic over the public internet.
+
+- Applies per cluster.
+- Supports inbound connectivity only.
+- Public connectivity remains enabled.
+
+<p className="link-arrow">[Secure connectivity (AWS PrivateLink)](../../../components/saas/secure-connectivity/index.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Cluster variable support
+
+Camunda 8.9 introduces cluster variables, allowing you to centrally manage configuration across your cluster.
+
+<p className="link-arrow">[Cluster variables](/components/modeler/feel/cluster-variable/overview.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
 #### MySQL and Microsoft SQL Server secondary storage
 
 Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
@@ -1051,6 +1233,24 @@ Admin is the cluster-level admin UI hosting identity management and other admini
 </div>
 
 ## Modeler
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: `webapp` component removed
+
+The Web Modeler system architecture has been simplified to enable easier and smoother installation and configuration of Web Modeler in a Self-Managed deployment.
+The separate `webapp` component has been removed and its functionality is now completely integrated into the `restapi` component.
+
+This change might require updates to your application configuration.
+
+<p class="link-arrow">[Migrate configuration](/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">

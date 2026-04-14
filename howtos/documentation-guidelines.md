@@ -33,10 +33,10 @@ In the spirit of "Always Progress," if you are confident you know what change ne
 
 Different versions are sourced from different paths:
 
-| Instance | Version(s)         | Source path                                       |
-| -------- | ------------------ | ------------------------------------------------- |
-| `docs`   | Next               | [/docs/](../docs/)                                |
-| `docs`   | 8.8, 8.7, 8.6, ... | [/versioned_docs/version-\*/](../versioned_docs/) |
+| Instance | Version(s)              | Source path                                       |
+| -------- | ----------------------- | ------------------------------------------------- |
+| `docs`   | Next                    | [/docs/](../docs/)                                |
+| `docs`   | 8.9, 8.8, 8.7, 8.6, ... | [/versioned_docs/version-\*/](../versioned_docs/) |
 
 When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
