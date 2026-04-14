@@ -510,9 +510,7 @@ If you cannot use the automated migration scripts (for example, because `reindex
 Many manual Elasticsearch migration methods copy index data by default, but do **not automatically preserve or recreate** everything Camunda components rely on, especially index aliases and index templates. Whether aliases or templates are migrated depends on the method and options used. For example, snapshot/restore typically restores index aliases, while templates generally require restoring global state, which may have additional side effects. Missing aliases or templates can prevent components from applying their schema, causing pod startup failures. The automated migration scripts in the [deployment references repository](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/migration) handle aliases, templates, and indices together. Only fall back to a manual method if the automated path is not feasible for your environment, and verify that aliases and templates are handled explicitly.
 :::
 
-:::info Custom index prefixes
 The examples below search for the default Camunda index prefixes (`zeebe-*`, `operate-*`, `tasklist-*`, `optimize-*`, `connectors-*`, `camunda-*`). If your installation uses [custom index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration), replace these patterns with your actual prefixes.
-:::
 
 <Tabs groupId="es-migration" queryString>
 
