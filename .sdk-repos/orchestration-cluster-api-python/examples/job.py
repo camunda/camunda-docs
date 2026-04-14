@@ -131,3 +131,22 @@ async def sync_job_worker_callback_example() -> None:
         client.create_job_worker(config=config, callback=handler)
         await client.run_workers()
 # endregion SyncJobWorkerCallback
+
+
+# region RunWorkers
+async def run_workers_example() -> None:
+    async with CamundaAsyncClient() as client:
+        config = WorkerConfig(
+            job_type="order-processing",
+            job_timeout_milliseconds=30_000,
+        )
+
+        async def handler(job: ConnectedJobContext) -> dict[str, object]:
+            return {"processed": True}
+
+        client.create_job_worker(config=config, callback=handler)
+
+        # run_workers() blocks until the program is cancelled,
+        # keeping all registered workers polling for jobs
+        await client.run_workers()
+# endregion RunWorkers

@@ -120,6 +120,56 @@ async function jobWorkerWithErrorHandlingExample() {
 }
 //#endregion JobWorkerWithErrorHandling
 
+//#region CreateThreadedJobWorker
+async function createThreadedJobWorkerExample() {
+  const camunda = createCamundaClient();
+
+  const _worker = camunda.createThreadedJobWorker({
+    jobType: 'cpu-heavy-task',
+    handlerModule: './my-handler.js',
+    maxParallelJobs: 32,
+    jobTimeoutMs: 30000,
+  });
+}
+//#endregion CreateThreadedJobWorker
+
+//#region GetWorkers
+function getWorkersExample() {
+  const camunda = createCamundaClient();
+
+  camunda.createJobWorker({
+    jobType: 'payment-processing',
+    jobHandler: async (job): Promise<JobActionReceipt> => job.complete(),
+  });
+
+  const workers = camunda.getWorkers();
+  console.log(`Active workers: ${workers.length}`);
+}
+//#endregion GetWorkers
+
+//#region StopAllWorkers
+function stopAllWorkersExample() {
+  const camunda = createCamundaClient();
+
+  camunda.createJobWorker({
+    jobType: 'payment-processing',
+    jobHandler: async (job): Promise<JobActionReceipt> => job.complete(),
+  });
+
+  // Stop all workers and terminate thread pool
+  camunda.stopAllWorkers();
+}
+//#endregion StopAllWorkers
+
+//#region GetBackpressureState
+function getBackpressureStateExample() {
+  const camunda = createCamundaClient();
+
+  const state = camunda.getBackpressureState();
+  console.log(`Severity: ${state.severity}, Permits: ${state.permitsMax}`);
+}
+//#endregion GetBackpressureState
+
 // Suppress "declared but never read"
 void activateJobsExample;
 void completeJobExample;
@@ -127,3 +177,7 @@ void failJobExample;
 void createJobWorkerExample;
 void jobWorkerExample;
 void jobWorkerWithErrorHandlingExample;
+void createThreadedJobWorkerExample;
+void getWorkersExample;
+void stopAllWorkersExample;
+void getBackpressureStateExample;
