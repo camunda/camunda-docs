@@ -247,7 +247,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/azure/k
 
 ### 2. Configure your deployment
 
-#### Enable Web Modeller and Console services
+#### Enable Web Modeler and Console services
 
 Web Modeler, Console, and Management Identity are not enabled by default in this deployment.
 
