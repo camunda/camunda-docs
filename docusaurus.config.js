@@ -374,6 +374,25 @@ module.exports = {
           position: "left",
         },
         {
+          type: "dropdown",
+          label: "Help",
+          position: "right",
+          items: [
+            {
+              label: "Support",
+              href: "https://camunda.com/services/enterprise-support-guide/",
+            },
+            {
+              label: "Community",
+              href: "https://forum.camunda.io/",
+            },
+            {
+              label: "Roadmap",
+              href: "https://roadmap.camunda.com/",
+            },
+          ],
+        },
+        {
           type: "html",
           position: "right",
           value:

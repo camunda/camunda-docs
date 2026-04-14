@@ -66,6 +66,17 @@ export default function NavbarContent(): JSX.Element {
     (i) => (i as any).type !== "docsVersionDropdown"
   );
 
+  // Separate Help dropdown and Try Free button for custom ordering
+  const helpItems = rightItems.filter(
+    (i) => (i as any).type === "dropdown"
+  );
+  const tryFreeItems = rightItems.filter(
+    (i) => (i as any).type !== "dropdown" && (i as any).className?.includes("try-free")
+  );
+  const otherRightItems = rightItems.filter(
+    (i) => (i as any).type !== "dropdown" && !(i as any).className?.includes("try-free")
+  );
+
   return (
     <>
       {/* ---- Top row ---- */}
@@ -89,12 +100,36 @@ export default function NavbarContent(): JSX.Element {
 
         <div className={styles.topRowRight}>
           <SearchBar />
-          {rightItems.map((item, i) => (
+          {otherRightItems.map((item, i) => (
             <ErrorCauseBoundary
               key={i}
               onError={(error) =>
                 new Error(
                   `A theme navbar item failed to render. This may be a bug in the theme, or a broken custom configuration.\n${JSON.stringify(item)}`
+                )
+              }
+            >
+              <NavbarItem {...item} />
+            </ErrorCauseBoundary>
+          ))}
+          {tryFreeItems.map((item, i) => (
+            <ErrorCauseBoundary
+              key={i}
+              onError={(error) =>
+                new Error(
+                  `A theme navbar item failed to render.\n${JSON.stringify(item)}`
+                )
+              }
+            >
+              <NavbarItem {...item} />
+            </ErrorCauseBoundary>
+          ))}
+          {helpItems.map((item, i) => (
+            <ErrorCauseBoundary
+              key={i}
+              onError={(error) =>
+                new Error(
+                  `A theme navbar item failed to render.\n${JSON.stringify(item)}`
                 )
               }
             >
@@ -107,18 +142,20 @@ export default function NavbarContent(): JSX.Element {
 
       {/* ---- Bottom row ---- */}
       <div className={styles.bottomRow}>
-        {navLinkItems.map((item, i) => (
-          <ErrorCauseBoundary
-            key={i}
-            onError={(error) =>
-              new Error(
-                `A theme navbar item failed to render.\n${JSON.stringify(item)}`
-              )
-            }
-          >
-            <NavbarItem {...item} />
-          </ErrorCauseBoundary>
-        ))}
+        <div className={styles.bottomRowLeft}>
+          {navLinkItems.map((item, i) => (
+            <ErrorCauseBoundary
+              key={i}
+              onError={(error) =>
+                new Error(
+                  `A theme navbar item failed to render.\n${JSON.stringify(item)}`
+                )
+              }
+            >
+              <NavbarItem {...item} />
+            </ErrorCauseBoundary>
+          ))}
+        </div>
       </div>
 
       {/* Mobile sidebar toggle */}
