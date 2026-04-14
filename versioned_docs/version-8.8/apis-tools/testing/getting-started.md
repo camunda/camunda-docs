@@ -338,6 +338,8 @@ You can dive deeper into the library and read more about:
 - How to [configure the runtime](configuration.md)
 - Best practices for [writing process tests](/components/best-practices/development/testing-process-definitions.md)
 
+Additionally, you can explore the [full Javadoc reference](https://javadoc.io/doc/io.camunda/camunda-process-test-java/latest/io/camunda/process/test/api/package-summary.html) for more information.
+
 ## Examples
 
 Take a look at the example project on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example). This demonstrates the usage of the library for a demo Spring Boot process application.
