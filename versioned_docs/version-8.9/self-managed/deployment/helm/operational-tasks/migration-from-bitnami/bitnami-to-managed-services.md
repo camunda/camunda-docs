@@ -506,8 +506,8 @@ After completing the migration, monitor the following for at least 48 hours:
 
 If you cannot use the automated migration scripts (for example, because `reindex.remote.whitelist` cannot be configured on the managed target), you can transfer Elasticsearch data manually using one of the methods below.
 
-:::warning Manual methods transfer indices only
-These methods do **not** migrate index aliases or index templates, which Camunda components (notably Zeebe) rely on. Missing aliases and templates can prevent components from applying their schema, causing pod startup failures. The automated migration scripts in the [deployment references repository](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/migration) handle aliases, templates, and indices together. Only fall back to a manual method if the automated path is not feasible for your environment.
+:::warning Verify that aliases and templates are migrated
+Many manual Elasticsearch migration methods copy index data by default, but do **not automatically preserve or recreate** everything Camunda components rely on, especially index aliases and index templates. Whether aliases or templates are migrated depends on the method and options used. For example, snapshot/restore typically restores index aliases, while templates generally require restoring global state, which may have additional side effects. Missing aliases or templates can prevent components from applying their schema, causing pod startup failures. The automated migration scripts in the [deployment references repository](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/migration) handle aliases, templates, and indices together. Only fall back to a manual method if the automated path is not feasible for your environment, and verify that aliases and templates are handled explicitly.
 :::
 
 :::info Custom index prefixes
