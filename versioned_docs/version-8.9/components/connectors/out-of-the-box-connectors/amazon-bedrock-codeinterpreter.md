@@ -63,7 +63,7 @@ The **Amazon Bedrock Code Interpreter connector** supports the following action.
 | Parameter                     | Required | Description                                                                                                       |
 | :---------------------------- | :------- | :---------------------------------------------------------------------------------------------------------------- |
 | **Code**                      | Yes      | The Python code to execute in the sandbox. Supports [FEEL](/components/modeler/feel/what-is-feel.md) expressions. |
-| **Session timeout (seconds)** | No       | How long the sandbox session stays alive, in seconds (60–28,800). Defaults to 300.                                |
+| **Session timeout (seconds)** | No       | How long the sandbox session stays alive, in seconds (60-28,800). Defaults to 300.                                |
 
 :::note
 The session timeout controls how long the sandbox environment remains available, not how long the code takes to execute. Code execution typically completes in seconds.
