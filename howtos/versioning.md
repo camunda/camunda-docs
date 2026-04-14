@@ -6,10 +6,10 @@ Our documentation is versioned. All sections are versioned together, this includ
 
 Depending on the version, location of source files and sidebar navigation definition varies:
 
-| Instance | Version(s)         | Source path                                       | Sidebars path                                                         |
-| -------- | ------------------ | ------------------------------------------------- | --------------------------------------------------------------------- |
-| `docs`   | Next               | [/docs/](../docs/)                                | [sidebars.js](../sidebars.js)                                         |
-| `docs`   | 8.8, 8.7, 8.6, ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
+| Instance | Version(s)              | Source path                                       | Sidebars path                                                         |
+| -------- | ----------------------- | ------------------------------------------------- | --------------------------------------------------------------------- |
+| `docs`   | Next                    | [/docs/](../docs/)                                | [sidebars.js](../sidebars.js)                                         |
+| `docs`   | 8.9, 8.8, 8.7, 8.6, ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
 
 ## Create new version
 

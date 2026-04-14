@@ -11,7 +11,7 @@ Web Modeler Self-Managed consists of three components (`restapi`, `webapp`, and 
 ### `restapi`
 
 The `restapi` component is a Spring Boot application that includes the [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready), providing health check and metrics endpoints out of the box.
-These endpoints are served on a separate management port (default: `8091`, configurable via [`RESTAPI_MANAGEMENT_PORT`](./configuration/configuration.md#general)).
+These endpoints are served on a separate management port (default: `8091`).
 
 | Endpoint                         | Description        |
 | -------------------------------- | ------------------ |

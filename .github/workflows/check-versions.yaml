@@ -20,16 +20,14 @@ jobs:
 
       - name: Identify missing changes
         id: identify-missing-changes
-        run: |
-          OUTPUT=$(node .github/workflows/check-versions/identify-missing-changes.action.js "$RUNNER_TEMP/changed-files.json")
-          echo "MISSING_CHANGES=$OUTPUT" >> $GITHUB_ENV
+        run: node .github/workflows/check-versions/identify-missing-changes.action.js "$RUNNER_TEMP/changed-files.json" > "$RUNNER_TEMP/missing-changes.json"
 
       - name: Build messages
         id: build-messages
         run: |
-          OUTPUT=$(node .github/workflows/check-versions/build-messages.js)
+          OUTPUT=$(node .github/workflows/check-versions/build-messages.js "$RUNNER_TEMP/missing-changes.json")
           echo "MESSAGES<<EOF" >> $GITHUB_ENV
-          echo $OUTPUT >> $GITHUB_ENV
+          printf '%s\n' "$OUTPUT" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Comment on PR if version updates are potentially missing

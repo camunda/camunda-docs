@@ -45,7 +45,7 @@ module.exports = {
     "./static/plugins/bpmn-js",
     [
       // Operate API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-operate-openapi",
         docsPluginId: "default",
@@ -82,7 +82,7 @@ module.exports = {
     ],
     [
       // Tasklist REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-tasklist-openapi",
         docsPluginId: "default",
@@ -119,7 +119,7 @@ module.exports = {
     ],
     [
       // Administration Self-Managed REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-adminsm-openapi",
         docsPluginId: "default",
@@ -158,7 +158,7 @@ module.exports = {
     ],
     [
       // Orchestration Cluster REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-camunda-openapi",
         docsPluginId: "default",
@@ -171,6 +171,34 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            sdkExamples: [
+              {
+                lang: "TypeScript",
+                highlight: "typescript",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-js/examples/operation-map.json",
+                autoImports: true,
+                defaultImports:
+                  "import { createCamundaClient } from '@camunda8/orchestration-cluster-api';",
+              },
+              {
+                lang: "Python",
+                highlight: "python",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-python/examples/operation-map.json",
+                autoImports: true,
+                defaultImports:
+                  "from camunda_orchestration_sdk import CamundaClient",
+              },
+              {
+                lang: "C#",
+                highlight: "csharp",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-csharp/examples/operation-map.json",
+                autoImports: true,
+                defaultImports: "using Camunda.Orchestration.Sdk;",
+              },
+            ],
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
@@ -203,7 +231,7 @@ module.exports = {
     ],
     [
       // Zeebe REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-zeebe-openapi",
         docsPluginId: "default",
@@ -532,7 +560,10 @@ module.exports = {
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
             current: {
-              label: "8.9 (unreleased)",
+              label: "8.10 (unreleased)",
+            },
+            8.8: {
+              banner: "none",
             },
             8.7: {
               banner: "none",
@@ -556,6 +587,7 @@ module.exports = {
             "/docs/next/**",
             "/docs/8.6/**",
             "/docs/8.7/**",
+            "/docs/8.8/**",
           ],
         },
       },
@@ -565,7 +597,7 @@ module.exports = {
     mermaid: true,
   },
   themes: [
-    "docusaurus-theme-openapi-docs",
+    "@camunda8/docusaurus-theme-openapi-docs",
     "@saucelabs/theme-github-codeblock",
     "@docusaurus/theme-mermaid",
   ],

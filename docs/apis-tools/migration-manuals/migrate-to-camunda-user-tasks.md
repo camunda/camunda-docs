@@ -14,14 +14,17 @@ import userTaskMigrationDecisionHelperForm from "../tasklist-api-rest/assets/for
 import "../tasklist-api-rest/assets/css/condensedTable.module.css";
 import styles from "../tasklist-api-rest/assets/css/cleanImages.module.css";
 import CamundaUserTaskSelectionImg from '../tasklist-api-rest/assets/img/camunda-user-task-selection.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Camunda 8.7 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task ([formerly named Zeebe user task](/reference/announcements-release-notes/870/870-release-notes.md#zeebe-user-tasks-modeling-migration-support-saasself-managedmodeler)).
+<PageDescription />
 
 :::note Have you already migrated?
 You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
 :::
 
 ## About
+
+Camunda 8.7 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task ([formerly named Zeebe user task](/reference/announcements-release-notes/870/870-release-notes.md#zeebe-user-tasks-modeling-migration-support-saasself-managedmodeler)).
 
 Camunda user tasks have several benefits compared to Job worked-based user tasks, including:
 
