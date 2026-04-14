@@ -1,20 +1,14 @@
 ---
 id: copilot-overview
 title: Camunda Copilot
-sidebar_label: Copilot Copilot
+sidebar_label: Copilot overview
 description: "Create and refine BPMN processes, FEEL expressions and Camunda Forms faster using natural-language prompts with Camunda Copilot, an AI assistant in Web Modeler."
 ---
-
-import CopilotBpmnGeneration from './img/copilot-bpmn-generation.png';
-import CopilotConversationHistory from './img/copilot-conversation-history.png';
-
-<span class="badge badge--alpha">Alpha</span>
-<span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
 Create and refine BPMN processes, FEEL expressions and Camunda Forms faster using natural-language prompts with Camunda Copilot, an AI assistant in Web Modeler.
 
 :::important
-Camunda Copilot is an [**alpha feature**](/components/early-access/alpha/alpha-features.md) that must be enabled by an organization admin before use.
+Camunda Copilot must be enabled by an organization admin before use.
 :::
 
 ## What can Copilot help you with
@@ -45,8 +39,6 @@ Create user-facing forms that integrate with your processes:
 - **Generate forms**: Describe the data you need to collect and Copilot creates the form structure.
 - **Link forms to tasks**: Copilot can bind forms to user tasks in your process automatically.
 - **Validate and refine**: Ask Copilot to check your form for issues or suggest improvements.
-
-<img src={CopilotBpmnGeneration} alt="Camunda Copilot generating a mortgage approval workflow" />
 
 ## Get started
 
@@ -104,8 +96,6 @@ Copilot saves your conversations so you can pick up where you left off:
 - Click any past conversation to continue it
 - Rename conversations for easy reference
 - Delete conversations you no longer need
-
-<img src={CopilotConversationHistory} alt="Conversation history panel with rename and delete options" />
 
 ## How Copilot works
 

@@ -4,8 +4,6 @@ title: "Camunda Copilot"
 description: "Configure Camunda Copilot in Web Modeler with a custom LLM provider."
 ---
 
-<span class="badge badge--alpha">Alpha</span>
-
 Web Modeler supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms. Camunda Copilot uses a multi-agent architecture with a Supervisor Agent that routes requests to specialized sub-agents (BPMN, FEEL, Form). You can configure the LLM provider and parameters for each agent.
 
 For an overview of Camunda Copilot features and usage, see [Camunda Copilot overview](/components/modeler/web-modeler/copilot/copilot-overview.md).
