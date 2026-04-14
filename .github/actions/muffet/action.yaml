@@ -19,6 +19,11 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Configure Muffet paths
+      shell: bash
+      run: |
+        echo "MUFFET_DIR=${{ runner.temp }}/muffet/${{ inputs.muffet_version }}" >> "$GITHUB_ENV"
+        echo "MUFFET_ARCHIVE=${{ runner.temp }}/muffet/${{ inputs.muffet_version }}/muffet_linux_amd64.tar.gz" >> "$GITHUB_ENV"
     - name: Echo inputs
       shell: bash
       run: |
@@ -30,16 +35,21 @@ runs:
       uses: actions/cache@v5
       id: tool-cache-muffet
       with:
-        path: /usr/local/bin/muffet
+        path: ${{ runner.temp }}/muffet/${{ inputs.muffet_version }}/muffet
         key: ${{ runner.os }}-tool-cache-muffet-${{ inputs.muffet_version }}
     - name: Setup Muffet
       shell: bash
       if: ${{ steps.tool-cache-muffet.outputs.cache-hit != 'true' }}
       run: |-
-        curl -sSL -o /usr/local/bin/muffet_linux_amd64.tar.gz https://github.com/raviqqe/muffet/releases/download/${{ inputs.muffet_version }}/muffet_linux_amd64.tar.gz
-        tar -xvf /usr/local/bin/muffet_linux_amd64.tar.gz -C /usr/local/bin
-        chmod +x /usr/local/bin/muffet
-        muffet --version
+        mkdir -p "$MUFFET_DIR"
+        curl -sSL -o "$MUFFET_ARCHIVE" https://github.com/raviqqe/muffet/releases/download/${{ inputs.muffet_version }}/muffet_linux_amd64.tar.gz
+        tar -xvf "$MUFFET_ARCHIVE" -C "$MUFFET_DIR"
+        chmod +x "$MUFFET_DIR/muffet"
+        "$MUFFET_DIR/muffet" --version
+    - name: Add Muffet to PATH
+      shell: bash
+      run: |
+        echo "$MUFFET_DIR" >> "$GITHUB_PATH"
     - name: Validate URLs
       shell: bash
       run: |-

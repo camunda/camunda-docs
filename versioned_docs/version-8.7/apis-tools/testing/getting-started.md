@@ -56,6 +56,19 @@ Add the following dependency to your Maven project:
 </dependency>
 ```
 
+### Spring Boot 4.0 support
+
+If you use the [dedicated Spring Boot 4.0 starter available with 8.7.24](../../apis-tools/spring-zeebe-sdk/getting-started.md#spring-boot-40-support),
+you must also use the dedicated Spring Boot 4.0 test artifact:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-process-test-spring-4</artifactId>
+  <scope>test</scope>
+</dependency>
+```
+
 </TabItem>
 
 <TabItem value='java-client'>

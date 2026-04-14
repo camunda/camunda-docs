@@ -25,8 +25,6 @@ When using [Git sync](/components/modeler/web-modeler/process-applications/git-s
 | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | A process application is represented as a folder containing a `.process-application` file. | A process application is represented as a [type folder](/components/modeler/web-modeler/process-applications/process-applications.md). |
 
-Using a single folder structure to represent process applications makes it easier to work across both tools.
-
 :::tip
 Camunda recommends always structuring your projects as process applications. This ensures consistent behavior across both Web Modeler and Desktop Modeler with minimal adjustments.
 :::

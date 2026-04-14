@@ -37,6 +37,7 @@ You cannot create a template for the [undefined task type](../../bpmn/undefined-
 - Message events
 - Signal events
 - Timer events
+- Conditional events
 
 ## Save a template in Web Modeler
 

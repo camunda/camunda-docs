@@ -31,18 +31,21 @@ components:
     CamundaUserResult:
       type: object
       required:
+        - authorizedComponents
         - tenants
         - groups
         - roles
         - salesPlanType
         - c8Links
         - canLogout
+        - displayName
+        - email
+        - username
       properties:
         username:
           description: The username of the user.
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/Username"
-          nullable: true
         displayName:
           description: The display name of the user.
           type: string
@@ -81,6 +84,7 @@ components:
             type: string
         salesPlanType:
           description: The plan of the user.
+          nullable: true
           type: string
           example: ""
         c8Links:

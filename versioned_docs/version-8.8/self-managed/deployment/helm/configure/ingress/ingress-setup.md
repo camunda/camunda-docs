@@ -195,4 +195,4 @@ helm install -f ingress_nginx_values.yml \
 
 ## Troubleshooting
 
-If Ingress is not working as expected, see [Camunda components troubleshooting](self-managed/operational-guides/troubleshooting.md).
+If Ingress is not working as expected, see [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md).

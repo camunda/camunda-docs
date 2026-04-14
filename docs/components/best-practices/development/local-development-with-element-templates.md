@@ -38,7 +38,7 @@ AWS_KEY=keyValue
 
 In this case, the `MY_TOKEN` secret can be referenced as `secrets.MY_TOKEN`.
 
-This applies when custom connectors are deployed as part of the Camunda 8 Run Docker Compose setup.  
+This applies when custom connectors are deployed as part of the Camunda 8 Run Docker Compose setup.
 If you choose to run connectors differently, as described in the [custom connector hosting guide](/components/connectors/custom-built-connectors/host-custom-connector.md#wiring-your-connector-with-a-camunda-cluster), configure secrets as environment variables instead.
 
 ## Provisioning a custom connector runtime
@@ -56,20 +56,10 @@ This guide uses a generic [connector template](https://github.com/camunda/connec
 This command creates a file named `target/connector-template-0.1.0-SNAPSHOT-with-dependencies.jar`.
 
 2. Copy the `.jar` file into the `custom_connectors` directory.
-3. Start Camunda 8 Run with Docker Compose. For example:
+3. Start Camunda 8 Run with Docker Compose. For example, from the Docker Compose directory in your Camunda 8 Run setup, run:
 
-```
-
-./start.sh --docker
-
-```
-
-On Windows, use:
-
-```
-
-.\c8run.exe start -docker
-
+```bash
+docker compose up -d
 ```
 
 4. Your connector is ready to execute jobs when a process references it.

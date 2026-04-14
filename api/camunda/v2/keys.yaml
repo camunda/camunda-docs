@@ -10,16 +10,6 @@ components:
       type: string
       allOf:
         - $ref: "#/components/schemas/LongKey"
-    RootProcessInstanceKey:
-      description: |
-        The key of the root process instance. The root process instance is the top-level
-        ancestor in the process instance hierarchy. This field is only present for data
-        belonging to process instance hierarchies created in version 8.9 or later.
-      format: ProcessInstanceKey
-      example: "2251799813690746"
-      type: string
-      allOf:
-        - $ref: "#/components/schemas/LongKey"
     ProcessDefinitionKey:
       description: System-generated key for a deployed process definition.
       format: ProcessDefinitionKey
@@ -55,12 +45,15 @@ components:
       allOf:
         - $ref: "#/components/schemas/LongKey"
     ScopeKey:
-      description: System-generated key for a scope.
+      description: |
+        System-generated key for a scope. A scope can hold variables and represents either an
+        element instance in a BPMN process or the process instance itself.
+      type: string
       format: ScopeKey
       example: "2251799813683890"
-      type: string
-      allOf:
-        - $ref: "#/components/schemas/LongKey"
+      oneOf:
+        - $ref: "#/components/schemas/ProcessInstanceKey"
+        - $ref: "#/components/schemas/ElementInstanceKey"
     IncidentKey:
       description: System-generated key for a incident.
       format: IncidentKey
@@ -131,7 +124,6 @@ components:
       type: string
     ProcessDefinitionKeyFilterProperty:
       description: ProcessDefinitionKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -167,7 +159,6 @@ components:
             $ref: "#/components/schemas/ProcessDefinitionKey"
     ProcessInstanceKeyFilterProperty:
       description: ProcessInstanceKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -203,7 +194,6 @@ components:
             $ref: "#/components/schemas/ProcessInstanceKey"
     ElementInstanceKeyFilterProperty:
       description: ElementInstanceKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -239,7 +229,6 @@ components:
             $ref: "#/components/schemas/ElementInstanceKey"
     JobKeyFilterProperty:
       description: JobKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -275,7 +264,6 @@ components:
             $ref: "#/components/schemas/JobKey"
     DecisionDefinitionKeyFilterProperty:
       description: DecisionDefinitionKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -310,8 +298,9 @@ components:
           items:
             $ref: "#/components/schemas/DecisionDefinitionKey"
     ScopeKeyFilterProperty:
-      description: ScopeKey property with full advanced search capabilities.
-      type: object
+      description: |
+        ScopeKey property with full advanced search capabilities. Filter by the key of the
+        element instance or process instance that defines the scope of a variable.
       oneOf:
         - type: string
           title: Exact match
@@ -347,7 +336,6 @@ components:
             $ref: "#/components/schemas/ScopeKey"
     VariableKeyFilterProperty:
       description: VariableKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -383,7 +371,6 @@ components:
             $ref: "#/components/schemas/VariableKey"
     DecisionEvaluationInstanceKeyFilterProperty:
       description: DecisionEvaluationInstanceKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -419,7 +406,6 @@ components:
             $ref: "#/components/schemas/DecisionEvaluationInstanceKey"
     AuditLogKeyFilterProperty:
       description: AuditLogKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -455,7 +441,6 @@ components:
             $ref: "#/components/schemas/AuditLogKey"
     FormKeyFilterProperty:
       description: FormKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -491,7 +476,6 @@ components:
             $ref: "#/components/schemas/FormKey"
     DecisionEvaluationKeyFilterProperty:
       description: DecisionEvaluationKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match
@@ -527,7 +511,6 @@ components:
             $ref: "#/components/schemas/DecisionEvaluationKey"
     DecisionRequirementsKeyFilterProperty:
       description: DecisionRequirementsKey property with full advanced search capabilities.
-      type: object
       oneOf:
         - type: string
           title: Exact match

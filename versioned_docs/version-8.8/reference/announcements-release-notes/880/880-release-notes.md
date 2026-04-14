@@ -29,7 +29,7 @@ These release notes identify the main new features included in the 8.8 minor rel
   <summary>View GitHub changelogs for all patch releases</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
+<ul><li>[Camunda 8.8.21 (30.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.21)</li><li>[Camunda 8.8.20 (30.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.20)</li><li>[Camunda 8.8.19 (23.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.19)</li><li>[Camunda 8.8.18 (20.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.18)</li><li>[Camunda 8.8.17 (17.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.17)</li><li>[Camunda 8.8.16 (09.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.16)</li><li>[Camunda 8.8.15 (04.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.15)</li><li>[Camunda 8.8.14 (20.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.14)</li><li>[Camunda 8.8.13 (18.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.13)</li><li>[Camunda 8.8.12 (17.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.12)</li><li>[Camunda 8.8.11 (05.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.11)</li><li>[Camunda 8.8.10 (04.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.10)</li><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.10 (30.03.2026)](https://github.com/camunda/connectors/releases/tag/8.8.10)</li><li>[Connectors 8.8.9 (26.03.2026)](https://github.com/camunda/connectors/releases/tag/8.8.9)</li><li>[Connectors 8.8.8 (26.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.8)</li><li>[Connectors 8.8.7 (02.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.7)</li><li>[Connectors 8.8.6 (27.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.6)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -654,7 +654,7 @@ Key updates include:
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
 
-In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use Basic authentication for cluster access.
 
 - Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to the cluster.
@@ -1448,16 +1448,16 @@ Use the version **Description** field to track changes alongside the version tag
 
 To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/versions.md).
 
-### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+### Web Modeler cluster Basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
 
-As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use Basic authentication for cluster access.
 
-- To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
+- To use Basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to the cluster.
 
-To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
+To learn more about Basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
 ## 8.8.0-alpha3
 
@@ -1522,7 +1522,7 @@ To learn more about this feature, see the [Camunda Spring Boot Starter](/apis-to
 
 ### Camunda 8 Run authentication updates
 
-Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using basic authentication, and to test authorizations and permissions.
+Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using Basic authentication, and to test authorizations and permissions.
 
 To learn more about this feature, see the [API documentation](/self-managed/quickstart/developer-quickstart/c8run.md#use-camunda-apis) for Camunda 8 Run.
 
