@@ -13,10 +13,10 @@ This page describes the runtime architecture of Camunda 8.8+: what the major com
 
 Camunda 8 separates concerns into two independently deployable clusters:
 
-| Cluster | Purpose |
-|---|---|
-| [Orchestration Cluster](#orchestration-cluster) | Process execution, task management, monitoring, and authorization. |
-| [Management Cluster](#management-cluster) | Process design (Web Modeler) and multi-cluster administration (Console). |
+| Cluster                                         | Purpose                                                                  |
+| ----------------------------------------------- | ------------------------------------------------------------------------ |
+| [Orchestration Cluster](#orchestration-cluster) | Process execution, task management, monitoring, and authorization.       |
+| [Management Cluster](#management-cluster)       | Process design (Web Modeler) and multi-cluster administration (Console). |
 
 The clusters communicate via the Camunda API and share an [identity provider](#identity-provider) for authentication, but they are deployed and scaled independently.
 
@@ -82,12 +82,12 @@ The Management Cluster uses its own Identity deployment (previously called Manag
 
 Client libraries embed in application code to interact with the Orchestration Cluster via the Camunda API:
 
-| Client | Language | Job worker support |
-|---|---|---|
-| [Java SDK](/apis-tools/java-client/getting-started.md) | Java | Yes (job push and pull) |
-| [TypeScript SDK](/apis-tools/typescript/camunda8-sdk.md) | JavaScript / TypeScript | Yes (job push and pull) |
-| [Go client](/apis-tools/community-clients/index.md) | Go | Yes (job push and pull) |
-| [Community clients](/apis-tools/community-clients/index.md) | Python, .NET, Rust, others | Varies |
+| Client                                                      | Language                   | Job worker support      |
+| ----------------------------------------------------------- | -------------------------- | ----------------------- |
+| [Java SDK](/apis-tools/java-client/getting-started.md)      | Java                       | Yes (job push and pull) |
+| [TypeScript SDK](/apis-tools/typescript/camunda8-sdk.md)    | JavaScript / TypeScript    | Yes (job push and pull) |
+| [Go client](/apis-tools/community-clients/index.md)         | Go                         | Yes (job push and pull) |
+| [Community clients](/apis-tools/community-clients/index.md) | Python, .NET, Rust, others | Varies                  |
 
 **Job workers** are the primary pattern for executing business logic: the worker polls or receives pushed jobs, runs application logic, then completes or fails the job. Workers and the Orchestration Cluster scale independently.
 
@@ -104,18 +104,13 @@ Connectors are pre-built integration components that run alongside the Orchestra
 
 Connectors interact with the Orchestration Cluster through the Camunda API, the same path as any other client.
 
-See [Introduction to Connectors](/components/connectors/introduction.md).
+See [Introduction to Connectors](/components/connectors/introduction.md) and the [full list of built-in connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 
 ---
 
 ## Identity provider
 
-Both clusters delegate authentication to an external **OIDC/OAuth2 identity provider**:
-
-- **Keycloak** — the default bundled provider for self-managed deployments.
-- **Auth0** and other OIDC-compatible providers — supported for both clusters.
-
-The embedded Identity component in the Orchestration Cluster acts as the **authorization enforcement layer** (defining what authenticated users may do), while the external provider handles **token issuance and validation**.
+Both clusters delegate authentication to an external **OIDC/OAuth2 identity provider** for token issuance and validation. The embedded Identity component in the Orchestration Cluster acts as the **authorization enforcement layer** (defining what authenticated users may do).
 
 ---
 
@@ -123,13 +118,13 @@ The embedded Identity component in the Orchestration Cluster acts as the **autho
 
 Exporters write all indexed data from the Orchestration Cluster to a secondary storage backend. Operate, Tasklist, and the REST Query API read exclusively from this store (eventually consistent). See [Configuring secondary storage](/self-managed/concepts/secondary-storage/index.md) for setup details.
 
-| Backend | Notes |
-|---|---|
-| **Elasticsearch** | Default for most deployments. Supports ILM for automated data lifecycle management. |
-| **OpenSearch** | Alternative to Elasticsearch. Supports ISM policies. |
-| **RDBMS** (PostgreSQL, MySQL, MariaDB, …) | SQL-based deployments, enabled via the RDBMS Exporter. |
+| Backend                                   | Notes                                                                               |
+| ----------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Elasticsearch**                         | Default for most deployments. Supports ILM for automated data lifecycle management. |
+| **OpenSearch**                            | Alternative to Elasticsearch. Supports ISM policies.                                |
+| **RDBMS** (PostgreSQL, MySQL, MariaDB, …) | SQL-based deployments, enabled via the RDBMS Exporter.                              |
 
-Only one backend is active per Orchestration Cluster. Optimize can share the same Elasticsearch or OpenSearch instance.
+Only one backend is active per Orchestration Cluster.
 
 ---
 
@@ -137,7 +132,7 @@ Only one backend is active per Orchestration Cluster. Optimize can share the sam
 
 Cluster backups are written to object storage, decoupled from the cluster itself:
 
-- **Amazon S3** (and S3-compatible stores such as MinIO).
+- **Amazon S3** (and S3-compatible stores).
 - **Azure Blob Storage**.
 
 Backups are initiated via the [Management API](#management-api) and stored independently of primary and secondary storage. See [Zeebe backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md) for configuration details.
@@ -146,8 +141,6 @@ Backups are initiated via the [Management API](#management-api) and stored indep
 
 ## Optimize
 
-Optimize is an analytics component deployed separately from the Orchestration Cluster. It reads historical execution data from the shared secondary storage (Elasticsearch or OpenSearch) to produce reports, dashboards, and KPI alerts.
+Optimize is an analytics component deployed separately from the Orchestration Cluster. It reads historical execution data from secondary storage to produce reports, dashboards, and KPI alerts. Optimize connects to the **Management Cluster Identity** for authentication and has its own frontend, backend, and importer process.
 
-Optimize connects to the **Management Cluster Identity** for authentication and has its own frontend, backend, and importer process.
-
-See [Optimize](/components/optimize/what-is-optimize.md).
+See [What is Optimize](/components/optimize/what-is-optimize.md) for supported storage backends and configuration details.
