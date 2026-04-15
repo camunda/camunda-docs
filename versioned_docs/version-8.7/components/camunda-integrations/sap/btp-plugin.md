@@ -187,8 +187,8 @@ For each form step:
 1. Create the task for the step.
 2. Set **Implementation type** to `Job worker`.
 3. Configure the form in one of the following ways:
-    - Use **Form type** `Camunda Form (linked)` and provide the form ID.
-    - Use **Form type** `Camunda Form (embedded)` and paste the form JSON directly into the task configuration.
+   - Use **Form type** `Camunda Form (linked)` and provide the form ID.
+   - Use **Form type** `Camunda Form (embedded)` and paste the form JSON directly into the task configuration.
 
 To end the form flow, add a final Camunda User Task that represents the outcome of the flow.
 
