@@ -502,9 +502,7 @@ function BuildWithCamunda() {
                 <p className={styles.startCardDesc}>
                   Use the{" "}
                   <Link
-                    to={useBaseUrl(
-                      "docs/next/apis-tools/c8ctl/getting-started/"
-                    )}
+                    to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}
                   >
                     <CodeBlock>c8ctl</CodeBlock>
                   </Link>
@@ -555,9 +553,7 @@ function BuildWithCamunda() {
             </h2>
             <p className={styles.sectionSub}>
               Install{" "}
-              <Link
-                to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
-              >
+              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
                 <CodeBlock>c8ctl</CodeBlock>
               </Link>{" "}
               from npm and spin up a Self-Managed Camunda cluster on your
@@ -603,11 +599,11 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
                 />
                 <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
               </svg>
-              No npm? Download c8run directly and start a local Camunda cluster
-              without the CLI.
+              No npm? Download Camunda 8 Run directly and start a local Camunda
+              cluster without the CLI.
             </p>
             <details className={styles.collapsible}>
-              <summary>Download c8run</summary>
+              <summary>Download Camunda 8 Run</summary>
               <div className={styles.collapsibleContent}>
                 <p style={{ marginBottom: "0.75rem" }}>
                   Requires{" "}
@@ -667,7 +663,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
                 <p className={styles.downloadMeta}>
                   <Link
                     to={useBaseUrl(
-                      "docs/next/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+                      "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
                     )}
                   >
                     Installation guide
@@ -767,7 +763,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
                   Version 5.45 ·{" "}
                   <Link
                     to={useBaseUrl(
-                      "docs/next/components/modeler/desktop-modeler/install-the-modeler/"
+                      "docs/components/modeler/desktop-modeler/install-the-modeler/"
                     )}
                   >
                     Installation guide
@@ -785,9 +781,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
               Everything from your terminal <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
-              <Link
-                to={useBaseUrl("docs/next/apis-tools/c8ctl/getting-started/")}
-              >
+              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
                 <CodeBlock>c8ctl</CodeBlock>
               </Link>{" "}
               gives you a single CLI for the full Camunda lifecycle with no
@@ -896,7 +890,7 @@ Available skills:
                 >
                   <Link
                     to={useBaseUrl(
-                      "docs/next/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/"
+                      "docs/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/"
                     )}
                     style={{ fontWeight: 400, fontSize: "0.85rem" }}
                   >
@@ -912,7 +906,7 @@ Available skills:
                     |
                   </span>
                   <Link
-                    to={useBaseUrl("docs/next/reference/mcp-docs/")}
+                    to={useBaseUrl("docs/reference/mcp-docs/")}
                     style={{ fontWeight: 400, fontSize: "0.85rem" }}
                   >
                     Docs MCP
@@ -973,7 +967,7 @@ Available skills:
             <div className={styles.waysGrid}>
               <Link
                 to={useBaseUrl(
-                  "docs/next/self-managed/quickstart/developer-quickstart/docker-compose/"
+                  "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
                 )}
                 className={styles.wayCard}
               >
@@ -986,7 +980,7 @@ Available skills:
               </Link>
               <Link
                 to={useBaseUrl(
-                  "docs/next/self-managed/deployment/helm/install/quick-install/"
+                  "docs/self-managed/deployment/helm/install/quick-install/"
                 )}
                 className={styles.wayCard}
               >
@@ -1015,7 +1009,7 @@ Available skills:
             <div className={styles.deployGrid}>
               <Link
                 to={useBaseUrl(
-                  "docs/next/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/"
+                  "docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/"
                 )}
                 className={styles.deployCard}
               >
@@ -1025,7 +1019,7 @@ Available skills:
               </Link>
               <Link
                 to={useBaseUrl(
-                  "docs/next/self-managed/deployment/helm/cloud-providers/gcp/google-gke/"
+                  "docs/self-managed/deployment/helm/cloud-providers/gcp/google-gke/"
                 )}
                 className={styles.deployCard}
               >
@@ -1035,7 +1029,7 @@ Available skills:
               </Link>
               <Link
                 to={useBaseUrl(
-                  "docs/next/self-managed/deployment/helm/install/quick-install/"
+                  "docs/self-managed/deployment/helm/install/quick-install/"
                 )}
                 className={styles.deployCard}
               >
@@ -1062,9 +1056,7 @@ Available skills:
                 <h3 className={styles.archGroupTitle}>Design and manage</h3>
                 <div className={styles.archRow}>
                   <Link
-                    to={useBaseUrl(
-                      "docs/next/components/modeler/about-modeler/"
-                    )}
+                    to={useBaseUrl("docs/components/modeler/about-modeler/")}
                     className={styles.archBox}
                   >
                     <ModelerIcon />
@@ -1073,7 +1065,7 @@ Available skills:
                   </Link>
                   <Link
                     to={useBaseUrl(
-                      "docs/next/components/console/introduction-to-console/"
+                      "docs/components/console/introduction-to-console/"
                     )}
                     className={styles.archBox}
                   >
@@ -1083,7 +1075,7 @@ Available skills:
                   </Link>
                   <Link
                     to={useBaseUrl(
-                      "docs/next/components/optimize/what-is-optimize/"
+                      "docs/components/optimize/what-is-optimize/"
                     )}
                     className={styles.archBox}
                   >
@@ -1121,9 +1113,7 @@ Available skills:
                 <h3 className={styles.archGroupTitle}>Orchestration Cluster</h3>
                 <div className={styles.archRow}>
                   <Link
-                    to={useBaseUrl(
-                      "docs/next/components/zeebe/zeebe-overview/"
-                    )}
+                    to={useBaseUrl("docs/components/zeebe/zeebe-overview/")}
                     className={clsx(styles.archBox, styles.archBoxPrimary)}
                   >
                     <ZeebeIcon />
@@ -1132,7 +1122,7 @@ Available skills:
                   </Link>
                   <Link
                     to={useBaseUrl(
-                      "docs/next/components/tasklist/introduction-to-tasklist/"
+                      "docs/components/tasklist/introduction-to-tasklist/"
                     )}
                     className={styles.archBox}
                   >
@@ -1142,7 +1132,7 @@ Available skills:
                   </Link>
                   <Link
                     to={useBaseUrl(
-                      "docs/next/components/operate/operate-introduction/"
+                      "docs/components/operate/operate-introduction/"
                     )}
                     className={styles.archBox}
                   >
@@ -1152,7 +1142,7 @@ Available skills:
                   </Link>
                   <Link
                     to={useBaseUrl(
-                      "docs/next/components/concepts/access-control/access-control-overview/"
+                      "docs/components/concepts/access-control/access-control-overview/"
                     )}
                     className={styles.archBox}
                   >
@@ -1189,7 +1179,7 @@ Available skills:
                 <div className={styles.archRow}>
                   <Link
                     to={useBaseUrl(
-                      "docs/next/components/connectors/introduction-to-connectors/"
+                      "docs/components/connectors/introduction-to-connectors/"
                     )}
                     className={styles.archBox}
                   >
@@ -1198,9 +1188,7 @@ Available skills:
                     <span>Integrate external systems</span>
                   </Link>
                   <Link
-                    to={useBaseUrl(
-                      "docs/next/apis-tools/working-with-apis-tools/"
-                    )}
+                    to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
                     className={styles.archBox}
                   >
                     <ClientsIcon />
@@ -1209,7 +1197,7 @@ Available skills:
                   </Link>
                   <Link
                     to={useBaseUrl(
-                      "docs/next/apis-tools/working-with-apis-tools/#api-clients"
+                      "docs/apis-tools/working-with-apis-tools/#api-clients"
                     )}
                     className={styles.archBox}
                   >
@@ -1236,7 +1224,7 @@ Available skills:
           <div className={styles.agenticGrid}>
             <Link
               to={useBaseUrl(
-                "docs/next/guides/getting-started-agentic-orchestration/"
+                "docs/guides/getting-started-agentic-orchestration/"
               )}
               className={styles.agenticCard}
             >
@@ -1255,7 +1243,7 @@ Available skills:
             </Link>
             <Link
               to={useBaseUrl(
-                "docs/next/components/agentic-orchestration/agentic-orchestration-overview/"
+                "docs/components/agentic-orchestration/agentic-orchestration-overview/"
               )}
               className={styles.agenticCard}
             >
@@ -1277,7 +1265,7 @@ Available skills:
             </Link>
             <Link
               to={useBaseUrl(
-                "docs/next/components/agentic-orchestration/ai-agents/"
+                "docs/components/agentic-orchestration/ai-agents/"
               )}
               className={styles.agenticCard}
             >
@@ -1311,7 +1299,7 @@ Available skills:
             </div>
             <div className={styles.exploreGrid}>
               <Link
-                to={useBaseUrl("docs/next/guides/")}
+                to={useBaseUrl("docs/guides/")}
                 className={styles.exploreCard}
               >
                 <h3>Get started</h3>
@@ -1321,21 +1309,21 @@ Available skills:
                 </p>
               </Link>
               <Link
-                to={useBaseUrl("docs/next/components/")}
+                to={useBaseUrl("docs/components/")}
                 className={styles.exploreCard}
               >
                 <h3>Using Camunda</h3>
                 <p>Learn about Modeler, Zeebe, Operate, Tasklist, and more.</p>
               </Link>
               <Link
-                to={useBaseUrl("docs/next/self-managed/about-self-managed/")}
+                to={useBaseUrl("docs/self-managed/about-self-managed/")}
                 className={styles.exploreCard}
               >
                 <h3>Self-Managed</h3>
                 <p>Host and operate Camunda on your own infrastructure.</p>
               </Link>
               <Link
-                to={useBaseUrl("docs/next/apis-tools/working-with-apis-tools/")}
+                to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
                 className={styles.exploreCard}
               >
                 <h3>APIs and tools</h3>
@@ -1343,7 +1331,7 @@ Available skills:
               </Link>
               <Link
                 to={useBaseUrl(
-                  "docs/next/components/best-practices/best-practices-overview/"
+                  "docs/components/best-practices/best-practices-overview/"
                 )}
                 className={styles.exploreCard}
               >
@@ -1353,7 +1341,7 @@ Available skills:
                 </p>
               </Link>
               <Link
-                to={useBaseUrl("docs/next/reference/")}
+                to={useBaseUrl("docs/reference/")}
                 className={styles.exploreCard}
               >
                 <h3>Reference</h3>
