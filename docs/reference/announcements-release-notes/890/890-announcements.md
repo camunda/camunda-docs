@@ -1371,3 +1371,33 @@ This enhancement aligns Web Modeler's database configuration with the Orchestrat
 
 </div>
 </div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Process applications no longer contain a main process
+
+Starting with Camunda 8.9, process applications no longer contain a main process.
+This aligns the process application concept with the Desktop Modeler and removes all limitations and constraints introduced by the main process concept.
+As a result, process applications can now be more easily synced with Git.
+Additionally, users have the freedom to deploy and run any process within a process application, allowing them to design solutions with more than one primary entry point.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Users now have full control over version tags in process applications
+
+Starting with Camunda 8.9, users have full control over the `versionTag` attribute across all resource types in a process application. The `versionTag` is no longer automatically set on the main process XML when creating a process application version.
+Instead, users can set the `versionTag` manually through the properties panel on BPMNs, DMNs, forms, and RPA scripts, allowing the user to pick a `versionTag` for each resource as they see fit.
+
+</div>
+</div>
