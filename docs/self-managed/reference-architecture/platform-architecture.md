@@ -42,7 +42,7 @@ The Camunda API is the single external entry point into the Orchestration Cluste
 - **REST API** (`/v2`) — queries, searches, and state-changing commands over HTTP/JSON.
 - **gRPC API** — high-throughput job activation and bidirectional streaming for job workers.
 
-Both transports are protected by an **authentication layer** that supports OIDC tokens (from the configured [identity provider](#identity-provider)) and BASIC credentials. Internal paths (for example, from Operate to the broker) can bypass authentication.
+Both transports are protected by an **authentication layer** that supports OIDC tokens (from the configured [identity provider](#identity-provider)) and BASIC credentials.
 
 ### Primary storage — partitions
 
