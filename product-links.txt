@@ -84,8 +84,7 @@ https://docs.camunda.io/docs/next/components/tasklist/api-versions/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
 https://docs.camunda.io/docs
 https://docs.camunda.io/docs/components/concepts/job-workers/
-https://docs.camunda.io/docs/components/connectors/manage-connectors/
-https://docs.camunda.io/docs/components/early-access/alpha/llm-access/
+https://docs.camunda.io/docs/components/console/manage-connectors/
 https://docs.camunda.io/docs/components/identity/identity-introduction/
 https://docs.camunda.io/docs/components/identity/role/
 https://docs.camunda.io/docs/components/saas/monitoring/cluster-metrics-endpoint/
@@ -93,7 +92,7 @@ https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-mcp/orche
 https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup/#use-c8ctl-mcp-proxy
 https://docs.camunda.io/docs/next/components/audit-log/overview/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/880-announcements/#apis--tools
-https://docs.camunda.io/components/saas/secure-connectivity/
+https://docs.camunda.io/docs/components/saas/secure-connectivity/secure-connectivity-AWS/
 
 # Orchestration Cluster Admin
 
