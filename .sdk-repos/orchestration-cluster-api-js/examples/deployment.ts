@@ -34,6 +34,18 @@ async function deleteResourceExample(resourceKey: ProcessDefinitionKey) {
 }
 //#endregion DeleteResource
 
+//#region DeployResourcesFromFiles
+async function deployResourcesFromFilesExample() {
+  const camunda = createCamundaClient();
+
+  // Node.js only: deploy directly from file paths
+  const result = await camunda.deployResourcesFromFiles(['./process.bpmn', './decision.dmn']);
+
+  console.log(`Deployment key: ${result.deploymentKey}`);
+}
+//#endregion DeployResourcesFromFiles
+
 // Suppress "declared but never read"
 void createDeploymentExample;
 void deleteResourceExample;
+void deployResourcesFromFilesExample;
