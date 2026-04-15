@@ -81,12 +81,13 @@
   padding-left: 0;
 }
 
-/* Match Help dropdown height to Ask AI button and color mode toggle */
+/* Match Help dropdown height to Try Free button */
 .topRowRight :global(.dropdown) {
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 1rem;
-  line-height: 1.5;
+  padding: 0.25rem 1rem;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 /* Offset the Help dropdown menu so it doesn't cover the buttons */
@@ -137,8 +138,8 @@
 .bottomRowLeft :global(.navbar__link)::before {
   content: "";
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
   background-color: currentColor;
   -webkit-mask-size: contain;
