@@ -141,9 +141,9 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 
 The following matrix shows which component versions work together. Components within the same column must share the same `minor` and `patch` version.
 
-| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                    |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------- |
-| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x                                               | Web Modeler 8.9.x<br/>Desktop Modeler TBD |
+| [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                      |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x                                               | Web Modeler 8.9.x<br/>Desktop Modeler 5.46+ |
 
 :::note
 You can use newer versions of Desktop and Web Modeler with older versions of the Orchestration Cluster.
