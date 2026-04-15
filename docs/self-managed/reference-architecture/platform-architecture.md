@@ -26,9 +26,9 @@ The clusters communicate via the Camunda API and share an [identity provider](#i
 
 The Orchestration Cluster is the runtime core of Camunda 8. Since 8.8 it ships as a single deployable artifact containing:
 
-- **Zeebe** — distributed workflow and decision engine.
-- **Operate** — process monitoring and incident management UI.
-- **Tasklist** — user task assignment and completion UI.
+- **[Zeebe](/components/zeebe/technical-concepts/architecture.md)** — distributed workflow and decision engine.
+- **[Operate](/components/operate/operate-introduction.md)** — process monitoring and incident management UI.
+- **[Tasklist](/components/tasklist/introduction-to-tasklist.md)** — user task assignment and completion UI.
 - **Identity** — embedded authorization service for all cluster APIs and UIs.
 
 ### Frontends
@@ -39,22 +39,22 @@ Operate, Tasklist, and the Identity management UI are served from within the Orc
 
 The Camunda API is the single external entry point into the Orchestration Cluster. It provides:
 
-- **REST API** (`/v2`) — queries, searches, and state-changing commands over HTTP/JSON.
-- **gRPC API** — high-throughput job activation and bidirectional streaming for job workers.
+- **[REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)** (`/v2`) — queries, searches, and state-changing commands over HTTP/JSON.
+- **[gRPC API](/apis-tools/zeebe-api/grpc.md)** — high-throughput job activation and bidirectional streaming for job workers.
 
 Both transports are protected by an **authentication layer** that supports OIDC tokens (from the configured [identity provider](#identity-provider)) and BASIC credentials.
 
 ### Primary storage — partitions
 
-State inside the Orchestration Cluster is managed in one or more **partitions**. Each partition contains:
+State inside the Orchestration Cluster is managed in one or more **[partitions](/components/zeebe/technical-concepts/partitions.md)**. Each partition contains:
 
-- **RAFT** — consensus protocol that replicates the event log across partition replicas and persists snapshots to local disk. Ensures durability and fault tolerance without an external database.
+- **[RAFT](/components/zeebe/technical-concepts/clustering.md)** — consensus protocol that replicates the event log across partition replicas and persists snapshots to local disk. Ensures durability and fault tolerance without an external database.
 - **Processing Engine** — single-threaded, event-sourced state machine that executes BPMN processes and DMN decisions. Contains the DMN engine, FEEL expression engine, and authorization enforcement logic.
 - **Exporter** — reads the event log and writes indexed records to [secondary storage](#secondary-storage). The Camunda Exporter (Elasticsearch/OpenSearch path) and RDBMS Exporter (SQL path) both run here.
 
 ### Management API
 
-The Management API exposes cluster-level operational endpoints:
+The [Management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) exposes cluster-level operational endpoints:
 
 - **Rebalance** — redistribute partition leadership across brokers.
 - **Backup** — initiate and manage backups written to [object storage](#object-storage).
@@ -66,9 +66,9 @@ The Management API exposes cluster-level operational endpoints:
 
 The Management Cluster provides tooling for process designers and platform administrators. It is intentionally separate from the Orchestration Cluster to allow independent scaling and multi-cluster management:
 
-- **Console** — monitors and manages Orchestration Cluster deployments.
-- **Web Modeler** — browser-based BPMN/DMN editor. Deploys process models directly to any connected Orchestration Cluster.
-- **Identity backend** — standalone identity service for Management Cluster components. Distinct from the embedded Identity inside the Orchestration Cluster.
+- **[Console](/components/console/introduction-to-console.md)** — monitors and manages Orchestration Cluster deployments.
+- **[Web Modeler](/components/modeler/web-modeler/index.md)** — browser-based BPMN/DMN editor. Deploys process models directly to any connected Orchestration Cluster.
+- **[Identity backend](/self-managed/components/management-identity/overview.md)** — standalone identity service for Management Cluster components. Distinct from the embedded Identity inside the Orchestration Cluster.
 
 The Management Cluster persists its own data in **PostgreSQL** (Web Modeler state, identity records).
 
@@ -84,10 +84,10 @@ Client libraries embed in application code to interact with the Orchestration Cl
 
 | Client | Language | Job worker support |
 |---|---|---|
-| [Java SDK](/apis-tools/java-client/index.md) | Java | Yes (job push and pull) |
-| Node.js SDK | JavaScript / TypeScript | Yes (job push and pull) |
-| Go client | Go | Yes (job push and pull) |
-| Community clients | Python, .NET, Rust, others | Varies |
+| [Java SDK](/apis-tools/java-client/getting-started.md) | Java | Yes (job push and pull) |
+| [TypeScript SDK](/apis-tools/typescript/camunda8-sdk.md) | JavaScript / TypeScript | Yes (job push and pull) |
+| [Go client](/apis-tools/community-clients/index.md) | Go | Yes (job push and pull) |
+| [Community clients](/apis-tools/community-clients/index.md) | Python, .NET, Rust, others | Varies |
 
 **Job workers** are the primary pattern for executing business logic: the worker polls or receives pushed jobs, runs application logic, then completes or fails the job. Workers and the Orchestration Cluster scale independently.
 
@@ -121,7 +121,7 @@ The embedded Identity component in the Orchestration Cluster acts as the **autho
 
 ## Secondary storage
 
-Exporters write all indexed data from the Orchestration Cluster to a secondary storage backend. Operate, Tasklist, and the REST Query API read exclusively from this store (eventually consistent):
+Exporters write all indexed data from the Orchestration Cluster to a secondary storage backend. Operate, Tasklist, and the REST Query API read exclusively from this store (eventually consistent). See [Configuring secondary storage](/self-managed/concepts/secondary-storage/index.md) for setup details.
 
 | Backend | Notes |
 |---|---|
@@ -140,7 +140,7 @@ Cluster backups are written to object storage, decoupled from the cluster itself
 - **Amazon S3** (and S3-compatible stores such as MinIO).
 - **Azure Blob Storage**.
 
-Backups are initiated via the [Management API](#management-api) and stored independently of primary and secondary storage.
+Backups are initiated via the [Management API](#management-api) and stored independently of primary and secondary storage. See [Zeebe backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md) for configuration details.
 
 ---
 
