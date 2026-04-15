@@ -1,11 +1,9 @@
 ---
 id: about-modeler
-title: About Modeler
+title: Process modeling
 description: "Camunda offers Web Modeler and Desktop Modeler to design and implement any executable process using BPMN."
 keywords: ["process mapping tool"]
 ---
-
-<span class="badge badge--cloud">Camunda 8 only</span>
 
 Camunda provides modeling tools for designing and implementing executable diagrams with [BPMN](./bpmn/bpmn.md), [DMN](./dmn/dmn.md), and [Forms](./forms/camunda-forms-reference.md).
 
