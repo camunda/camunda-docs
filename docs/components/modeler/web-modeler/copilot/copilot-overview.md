@@ -103,8 +103,6 @@ Copilot saves your conversations so you can pick up where you left off:
 Conversations are retained for 90 days.
 :::
 
-<img src={CopilotConversationHistory} alt="Conversation history panel with rename and delete options" />
-
 ### Permissions
 
 Copilot respects your project permissions:
