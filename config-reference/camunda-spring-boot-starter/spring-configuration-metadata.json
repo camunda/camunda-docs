@@ -228,6 +228,12 @@
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
+      "name": "camunda.client.auth.proactive-token-refresh-threshold",
+      "type": "java.time.Duration",
+      "description": "The lead time before actual token expiry at which a background refresh is triggered. The token is still considered valid inside this window; this is a policy knob for how early refresh kicks in so callers don't have to block on a synchronous refresh at the cliff edge. Must be strictly larger than the internal expiry grace period.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
       "name": "camunda.client.auth.read-timeout",
       "type": "java.time.Duration",
       "description": "The data read timeout for requests to the OAuth credentials provider.",
@@ -421,6 +427,13 @@
       "description": "The tenant ID used for tenant-aware commands when no tenant ID is set.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "<default>"
+    },
+    {
+      "name": "camunda.client.use-client-side-load-balancing",
+      "type": "java.lang.Boolean",
+      "description": "If <code>true<\/code>, enables client-side load balancing by using DNS-based resolution and distributing requests across all resolved addresses. Useful for setups without an external load balancer, such as Docker Compose, Testcontainers, or Kubernetes headless services.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "defaultValue": false
     },
     {
       "name": "camunda.client.worker.defaults.auto-complete",
