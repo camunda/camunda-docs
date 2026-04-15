@@ -1,0 +1,396 @@
+---
+id: update-tenant-cluster-variable
+title: "Update a tenant-scoped cluster variable"
+description: "<MarkerStronglyConsistentExtension />"
+sidebar_label: "Update a tenant-scoped cluster variable"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update a tenant-scoped cluster variable"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/cluster-variables/tenants/{tenantId}/{name}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Updates the value of an existing tenant-scoped cluster variable.
+The variable must exist, otherwise a 404 error is returned.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      schema: {
+        example: "customer-service",
+        description: "The unique identifier of the tenant.",
+        format: "TenantId",
+        type: "string",
+        title: "TenantId",
+      },
+      description: "The tenant ID",
+    },
+    {
+      name: "name",
+      in: "path",
+      required: true,
+      schema: { type: "string" },
+      description: "The name of the cluster variable",
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          required: ["value"],
+          properties: {
+            value: {
+              type: "object",
+              description:
+                "The new value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.",
+            },
+          },
+          title: "UpdateClusterVariableRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Cluster variable updated successfully",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["value"],
+            allOf: [
+              {
+                description: "Cluster variable response item.",
+                type: "object",
+                required: ["name", "scope", "tenantId"],
+                properties: {
+                  name: {
+                    type: "string",
+                    description:
+                      "The name of the cluster variable. Unique within its scope (global or tenant-specific).",
+                  },
+                  scope: {
+                    type: "string",
+                    enum: ["GLOBAL", "TENANT"],
+                    description: "The scope of a cluster variable.",
+                    title: "ClusterVariableScopeEnum",
+                  },
+                  tenantId: {
+                    type: "string",
+                    nullable: true,
+                    description:
+                      "Only provided if the cluster variable scope is TENANT. Null for global scope variables.",
+                  },
+                },
+                title: "ClusterVariableResultBase",
+              },
+            ],
+            properties: {
+              value: {
+                description: "Full value of this cluster variable.",
+                type: "string",
+              },
+            },
+            title: "ClusterVariableResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Cluster variable not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

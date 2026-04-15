@@ -549,7 +549,10 @@ function BuildWithCamunda() {
           className={clsx("container", styles.section)}
           style={{ scrollMarginTop: "5rem" }}
         >
-          <div className={styles.sectionHeader}>
+          <div
+            className={styles.sectionHeader}
+            style={{ marginBottom: "1rem" }}
+          >
             <h2 className={styles.sectionTitle}>
               Get started with c8ctl <VersionBadge />
             </h2>
@@ -564,8 +567,48 @@ function BuildWithCamunda() {
               machine.
             </p>
           </div>
+          <div
+            className={styles.modelerNote}
+            style={{ marginTop: "0", marginBottom: "1.5rem" }}
+          >
+            <p>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                style={{ marginRight: "0.4rem", verticalAlign: "middle" }}
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              <code>c8ctl</code> uses c8run, which requires{" "}
+              <Link
+                to={useBaseUrl(
+                  "docs/next/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+                )}
+              >
+                OpenJDK 21–25
+              </Link>{" "}
+              .
+            </p>
+          </div>
+
           <TerminalWindow title="Terminal">
-            {`$ npm install @camunda8/cli@alpha -g
+            {`$ npm install @camunda8/cli -g
 $ c8ctl cluster start
 
 # Camunda is now running! Deploy your first process:
@@ -697,8 +740,8 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
             <div className={styles.commandCard}>
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl c8run start 8.9.0-alpha5
-$ c8ctl c8run stop
+                {`$ c8ctl cluster start 8.9.0-alpha5
+$ c8ctl cluster stop
 
 `}
               </TerminalWindow>
