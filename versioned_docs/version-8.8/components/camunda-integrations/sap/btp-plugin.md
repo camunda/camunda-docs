@@ -216,8 +216,8 @@ For each form step:
 2. Set **Implementation type** to `Camunda user task`.
 3. Link the task to the corresponding Camunda Form.
 4. Add a task listener with:
-    - **Event type**: `Creating`
-    - **Listener type**: `sap-tl-creating`
+   - **Event type**: `Creating`
+   - **Listener type**: `sap-tl-creating`
 
 Use this configuration for every user task the BTP plugin should display. If you model a form step without the `Camunda user task` implementation type, or if the `sap-tl-creating` listener is missing, the BTP plugin can't prepare and manage the task as expected.
 
