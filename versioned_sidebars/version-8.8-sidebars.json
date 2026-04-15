@@ -156,7 +156,19 @@
           ],
           "Architecture": [
             "components/best-practices/architecture/deciding-about-your-stack",
-            "components/best-practices/architecture/sizing-your-environment",
+            {
+              "type": "category",
+              "label": "Size your environment",
+              "link": {
+                "type": "doc",
+                "id": "components/best-practices/architecture/sizing-your-environment"
+              },
+              "items": [
+                "components/best-practices/architecture/sizing-saas",
+                "components/best-practices/architecture/sizing-self-managed",
+                "components/best-practices/architecture/sizing-benchmarks"
+              ]
+            },
             "components/best-practices/architecture/understanding-human-tasks-management"
           ],
           "Development": [
@@ -208,6 +220,7 @@
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/monitor-ai-agents",
+            "components/agentic-orchestration/analyze-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"
           ]
@@ -316,6 +329,7 @@
               "items": [
                 "components/camunda-integrations/servicenow/prerequisites",
                 "components/camunda-integrations/servicenow/setup-and-configuration",
+                "components/camunda-integrations/servicenow/camunda-spoke",
                 {
                   "type": "category",
                   "label": "Connectors",
@@ -2898,7 +2912,8 @@
               },
               "items": [
                 "self-managed/deployment/helm/install/quick-install",
-                "self-managed/deployment/helm/install/production/index"
+                "self-managed/deployment/helm/install/production/index",
+                "self-managed/deployment/helm/configure/operator-based-infrastructure"
               ]
             },
             "self-managed/deployment/helm/chart-parameters",
@@ -2911,7 +2926,6 @@
               },
               "items": [
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -3362,6 +3376,7 @@
                     "self-managed/components/modeler/web-modeler/configuration/copilot"
                   ]
                 },
+                "self-managed/components/modeler/web-modeler/monitoring",
                 {
                   "type": "category",
                   "label": "Troubleshooting",

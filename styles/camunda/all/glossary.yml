@@ -9,6 +9,10 @@ swap:
   AzureAD: Azure AD
   back-pressure: backpressure
   back pressure: backpressure
+  basic auth: Basic authentication
+  Basic auth: Basic authentication
+  Basic Auth: Basic authentication
+  basic authentication: Basic authentication
   Camunda Cloud: Camunda 8
   Chat GPT: ChatGPT
   Configmap: ConfigMap

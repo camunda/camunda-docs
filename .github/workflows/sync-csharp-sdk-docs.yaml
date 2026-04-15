@@ -42,34 +42,48 @@ jobs:
           fi
 
       - name: Checkout camunda-docs
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout C# SDK
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/orchestration-cluster-api-csharp
           ref: ${{ steps.resolve.outputs.sdk_ref }}
           path: csharp-sdk
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "9.0.x"
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.14"
 
       - name: Install Python dependencies
         run: pip install pyyaml
 
+      - name: Restore tools and dependencies
+        working-directory: csharp-sdk
+        run: |
+          dotnet tool restore
+          dotnet restore src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj
+
       - name: Build SDK
         working-directory: csharp-sdk
-        run: dotnet build src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj -c Release
+        run: dotnet build src/Camunda.Orchestration.Sdk/Camunda.Orchestration.Sdk.csproj -c Release --no-restore
+
+      - name: Copy SDK examples for code samples
+        run: |
+          EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-csharp/examples"
+          rm -rf "$EXAMPLES_TARGET"
+          mkdir -p "$EXAMPLES_TARGET"
+          cp -R csharp-sdk/examples/* "$EXAMPLES_TARGET/"
+          echo "Copied C# SDK examples → .sdk-repos/"
 
       - name: Generate DocFX metadata
         working-directory: csharp-sdk
@@ -81,16 +95,59 @@ jobs:
 
       - name: Copy docs into camunda-docs
         run: |
-          TARGET="docs/${{ steps.resolve.outputs.docs_root }}/apis-tools/csharp-sdk/api-reference"
+          DOCS_ROOT="docs/${{ steps.resolve.outputs.docs_root }}"
+          TARGET="$DOCS_ROOT/apis-tools/csharp-sdk"
 
           # Clean previous generated docs
           rm -rf "$TARGET"
+          rm -f "$DOCS_ROOT/apis-tools/csharp-sdk.md"
           mkdir -p "$TARGET"
 
-          # Copy generated markdown and sidebar
-          cp -R csharp-sdk/docs-md/api-reference/* "$TARGET/"
+          # Copy landing page (sibling of the directory)
+          cp csharp-sdk/docs-md/csharp-sdk.md "$DOCS_ROOT/apis-tools/csharp-sdk.md"
 
-          echo "Copied $(find "$TARGET" -name '*.md' | wc -l) markdown files → ${{ steps.resolve.outputs.docs_root }}"
+          # Copy section pages + api-reference
+          cp -R csharp-sdk/docs-md/csharp-sdk/* "$TARGET/"
+
+          SECTION_COUNT=$(find "$TARGET" -maxdepth 1 -name '*.md' | wc -l | tr -d ' ')
+          API_COUNT=$(find "$TARGET/api-reference" -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
+          echo "Copied landing page + ${SECTION_COUNT} section pages + ${API_COUNT} API reference files → ${{ steps.resolve.outputs.docs_root }}"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Format generated docs with Prettier
+        working-directory: docs
+        run: |
+          npm ci
+          DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
+          npx prettier --write "$DOCS_ROOT/apis-tools/csharp-sdk.md" "$DOCS_ROOT/apis-tools/csharp-sdk/"
+
+      - name: Verify SDK examples don't break docs generation
+        working-directory: docs
+        run: |
+          DOCS_VERSION="${{ steps.resolve.outputs.version_label }}"
+          DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
+
+          if [ "$DOCS_VERSION" = "next" ]; then
+            npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs camunda -p api-camunda-openapi
+          else
+            npx docusaurus clean-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi
+          fi
+
+          # Discard generated MDX — this step only validates, not commits
+          git checkout -- "$DOCS_ROOT/apis-tools/orchestration-cluster-api-rest/specifications/" || true
+
+      - name: Check for SDK example changes
+        working-directory: docs
+        run: |
+          if git diff --name-only | grep -q '.sdk-repos/'; then
+            echo "::notice::The SDK examples have changed. Run the Sync Camunda REST API workflow to pick up the changes for the OpenAPI documentation."
+          fi
 
       - name: Check for changes
         id: check_changes
@@ -107,14 +164,14 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
           private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs

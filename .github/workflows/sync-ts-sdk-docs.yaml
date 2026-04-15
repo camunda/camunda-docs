@@ -42,26 +42,34 @@ jobs:
           fi
 
       - name: Checkout camunda-docs
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout TypeScript SDK
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: camunda/orchestration-cluster-api-js
           ref: ${{ steps.resolve.outputs.sdk_ref }}
           path: ts-sdk
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Install dependencies
         working-directory: ts-sdk
         run: npm ci
+
+      - name: Copy SDK examples for code samples
+        run: |
+          EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-js/examples"
+          rm -rf "$EXAMPLES_TARGET"
+          mkdir -p "$EXAMPLES_TARGET"
+          cp -R ts-sdk/examples/* "$EXAMPLES_TARGET/"
+          echo "Copied TypeScript SDK examples → .sdk-repos/"
 
       - name: Build markdown docs
         working-directory: ts-sdk
@@ -80,6 +88,36 @@ jobs:
 
           echo "Copied $(find "$TARGET" -name '*.md' | wc -l) markdown files → ${{ steps.resolve.outputs.docs_root }}"
 
+      - name: Format generated docs with Prettier
+        working-directory: docs
+        run: |
+          npm ci
+          npx prettier --write "${{ steps.resolve.outputs.docs_root }}/apis-tools/typescript/api-reference/"
+
+      - name: Verify SDK examples don't break docs generation
+        working-directory: docs
+        run: |
+          DOCS_VERSION="${{ steps.resolve.outputs.version_label }}"
+          DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
+
+          if [ "$DOCS_VERSION" = "next" ]; then
+            npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs camunda -p api-camunda-openapi
+          else
+            npx docusaurus clean-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi
+          fi
+
+          # Discard generated MDX — this step only validates, not commits
+          git checkout -- "$DOCS_ROOT/apis-tools/orchestration-cluster-api-rest/specifications/" || true
+
+      - name: Check for SDK example changes
+        working-directory: docs
+        run: |
+          if git diff --name-only | grep -q '.sdk-repos/'; then
+            echo "::notice::The SDK examples have changed. Run the Sync Camunda REST API workflow to pick up the changes for the OpenAPI documentation."
+          fi
+
       - name: Check for changes
         id: check_changes
         working-directory: docs
@@ -95,14 +133,14 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
           private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs

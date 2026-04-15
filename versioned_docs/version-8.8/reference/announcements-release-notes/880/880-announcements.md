@@ -161,6 +161,30 @@ Adapt any webhook-dependent integrations you have created for 8.8.x to handle th
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Bug fix: `FormResult.schema` type corrected from object to string
+
+The `schema` property in the `FormResult` response was incorrectly specified as `type: object` in the OpenAPI contract, but the server has always returned it as a JSON `string`. This specification bug is now fixed.
+
+This is a bug fix that aligns the OpenAPI contract with actual server behavior, improving correctness for typed client integrations. Applications already handling the runtime `string` value are unaffected.
+
+The Camunda Java client is also affected: `io.camunda.client.api.search.response.Form::getSchema()` now returns `String` instead of `Object`. If your Java code casts or processes the return value as `Object`, update it to use `String`.
+
+What to do:
+
+- Official SDK users: update to the latest SDK version.
+- Java client users: update calls to `Form::getSchema()` to handle the `String` return type instead of `Object`.
+- Generated-client users: regenerate your client. If your generated code relied on the incorrect `object` typing, update it to handle `string`.
+- Handwritten integrations: no change needed if you were already handling the actual `string` response.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
@@ -871,6 +895,21 @@ For production environments, use managed or external services first. If not avai
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart: Bitnami subcharts bundled
+
+The Bitnami subcharts (PostgreSQL, Keycloak, Elasticsearch, and Common) are bundled directly within the Camunda Helm chart instead of being fetched from external Bitnami repositories at install time.
+
+This change reduces the risk of unexpected breaking changes from upstream Bitnami chart updates and gives Camunda full control over the lifecycle of these subcharts. No action is required — existing deployments will continue to work as before when applying the next patch release.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
@@ -944,7 +983,7 @@ It is superseded by built-in [tenant management](/components/identity/tenant.md)
 
 With the Camunda 8.8 release, user storage in Elasticsearch/OpenSearch for Operate or Tasklist is no longer supported.
 
-You must transition to using [Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
+You must transition to using [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
 
 </div>
 </div>
@@ -959,7 +998,7 @@ You must transition to using [Basic Authentication](/self-managed/concepts/authe
 
 With the Camunda 8.8 release, LDAP authentication for Operate or Tasklist is no longer supported.
 
-You must transition to use [OIDC or Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
+You must transition to use [OIDC or Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
 
 </div>
 </div>

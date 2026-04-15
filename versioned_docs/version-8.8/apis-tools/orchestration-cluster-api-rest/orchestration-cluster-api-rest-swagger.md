@@ -76,13 +76,13 @@ Click the **Authorize** button in Swagger UI to manually configure authenticatio
 - **SaaS**: Follow the [OIDC-based Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for SaaS
 - **Self-Managed**: Follow the [OIDC-based Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for Self-Managed
 
-#### Basic Authentication
+#### Basic authentication
 
 1. Click **Authorize** in Swagger UI
 2. In the **Basic** section, enter your username and password
 3. Click **Authorize** to apply
 
-**Note:** Basic Authentication is only available for Self-Managed deployments.
+**Note:** Basic authentication is only available for Self-Managed deployments.
 
 For detailed authentication setup instructions, see the [Authentication guide](./orchestration-cluster-api-rest-authentication.md).
 

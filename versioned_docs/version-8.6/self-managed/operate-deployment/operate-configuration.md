@@ -94,7 +94,7 @@ As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https:
 
 ### Settings to connect
 
-Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch and OpenSearch
+Operate supports [Basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch and OpenSearch
 
 Set the appropriate username/password combination in the configuration to use it.
 
@@ -177,7 +177,7 @@ camunda.operate:
 To connect to a secured (https) OpenSearch instance, you normally need to only set the URL protocol
 part to `https` instead of `http`. A secured OpenSearch instance also needs `username` and `password`.
 
-To use AWS credentials instead of basic auth when connecting to Amazon OpenSearch Services, `awsEnabled` must be set.
+To use AWS credentials instead of Basic authentication when connecting to Amazon OpenSearch Services, `awsEnabled` must be set.
 
 The other SSL settings should only be used in case of connection problems; for example, in disabling host verification.
 
@@ -511,7 +511,7 @@ You must configure the following on your chosen database:
 Operate is configured with the snapshot repository name to trigger database snapshots. This is important for coherent backups.
 
 :::info
-Learn more about the procedure and the need to trigger it through Camunda components in the [backup guide](/versioned_docs/version-8.6/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+Learn more about the procedure and the need to trigger it through Camunda components in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 :::
 
 Operate must be configured with the repository name:

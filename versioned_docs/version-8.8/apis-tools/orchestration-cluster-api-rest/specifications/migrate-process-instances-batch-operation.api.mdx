@@ -1,18 +1,18 @@
 ---
 id: migrate-process-instances-batch-operation
 title: "Create a batch operation to migrate process instances"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "<MarkerStronglyConsistentExtension />"
 sidebar_label: "Create a batch operation to migrate process instances"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -21,6 +21,7 @@ import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
 
 <Heading
   as={"h1"}
@@ -34,20 +35,16 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+<MarkerStronglyConsistentExtension />
 
 Migrate multiple instances of process instances.
 Since only process instances with ACTIVE state can be migrated, any given
 filters for state are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/\{batchOperationKey\}).
 
-<Heading
-  id={"request"}
-  as={"h2"}
-  className={"openapi-tabs__heading"}
-  children={"Request"}
-></Heading>
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
 
 <ParamsDetails parameters={undefined}></ParamsDetails>
 
@@ -888,7 +885,8 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                           ],
                         },
                         batchOperationId: {
-                          description: "The batch operation ID.",
+                          description:
+                            "The batch operation id.\n**Deprecated**: Use `batchOperationKey` instead. This field will be removed in a future release. If both `batchOperationId` and `batchOperationKey` are provided, the request will be rejected with a 400 error.\n",
                           allOf: [
                             {
                               description:
@@ -956,6 +954,77 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                               title: "StringFilterProperty",
                             },
                           ],
+                          deprecated: true,
+                        },
+                        batchOperationKey: {
+                          allOf: [
+                            {
+                              description:
+                                "String property with full advanced search capabilities.",
+                              type: "object",
+                              oneOf: [
+                                {
+                                  type: "string",
+                                  title: "Exact match",
+                                  description: "Matches the value exactly.",
+                                },
+                                {
+                                  title: "Advanced filter",
+                                  description: "Advanced string filter.",
+                                  allOf: [
+                                    {
+                                      title: "Advanced filter",
+                                      description:
+                                        "Basic advanced string filter.",
+                                      type: "object",
+                                      properties: {
+                                        $eq: {
+                                          description:
+                                            "Checks for equality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $neq: {
+                                          description:
+                                            "Checks for inequality with the provided value.",
+                                          type: "string",
+                                        },
+                                        $exists: {
+                                          description:
+                                            "Checks if the current property exists.",
+                                          type: "boolean",
+                                        },
+                                        $in: {
+                                          description:
+                                            "Checks if the property matches any of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                        $notIn: {
+                                          description:
+                                            "Checks if the property matches none of the provided values.",
+                                          type: "array",
+                                          items: { type: "string" },
+                                        },
+                                      },
+                                    },
+                                    {
+                                      type: "object",
+                                      properties: {
+                                        $like: {
+                                          type: "string",
+                                          description:
+                                            "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                          title: "LikeFilter",
+                                        },
+                                      },
+                                    },
+                                  ],
+                                },
+                              ],
+                              title: "StringFilterProperty",
+                            },
+                          ],
+                          description: "The batch operation key.",
                         },
                         errorMessage: {
                           description:
@@ -2572,7 +2641,8 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                 ],
                               },
                               batchOperationId: {
-                                description: "The batch operation ID.",
+                                description:
+                                  "The batch operation id.\n**Deprecated**: Use `batchOperationKey` instead. This field will be removed in a future release. If both `batchOperationId` and `batchOperationKey` are provided, the request will be rejected with a 400 error.\n",
                                 allOf: [
                                   {
                                     description:
@@ -2641,6 +2711,78 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     title: "StringFilterProperty",
                                   },
                                 ],
+                                deprecated: true,
+                              },
+                              batchOperationKey: {
+                                allOf: [
+                                  {
+                                    description:
+                                      "String property with full advanced search capabilities.",
+                                    type: "object",
+                                    oneOf: [
+                                      {
+                                        type: "string",
+                                        title: "Exact match",
+                                        description:
+                                          "Matches the value exactly.",
+                                      },
+                                      {
+                                        title: "Advanced filter",
+                                        description: "Advanced string filter.",
+                                        allOf: [
+                                          {
+                                            title: "Advanced filter",
+                                            description:
+                                              "Basic advanced string filter.",
+                                            type: "object",
+                                            properties: {
+                                              $eq: {
+                                                description:
+                                                  "Checks for equality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $neq: {
+                                                description:
+                                                  "Checks for inequality with the provided value.",
+                                                type: "string",
+                                              },
+                                              $exists: {
+                                                description:
+                                                  "Checks if the current property exists.",
+                                                type: "boolean",
+                                              },
+                                              $in: {
+                                                description:
+                                                  "Checks if the property matches any of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                              $notIn: {
+                                                description:
+                                                  "Checks if the property matches none of the provided values.",
+                                                type: "array",
+                                                items: { type: "string" },
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: "object",
+                                            properties: {
+                                              $like: {
+                                                type: "string",
+                                                description:
+                                                  "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                                title: "LikeFilter",
+                                              },
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                    title: "StringFilterProperty",
+                                  },
+                                ],
+                                description: "The batch operation key.",
                               },
                               errorMessage: {
                                 description:

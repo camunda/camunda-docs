@@ -1,0 +1,188 @@
+---
+id: by-key-4
+title: "Get flow node instance by key"
+description: "Get flow node instance by key"
+sidebar_label: "Get flow node instance by key"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlV1tv2zYU/isCn7ZOjdM2HQq9KTbTanFkT5KTFYFh0NJxzEYmVZJKZgj678OhLrFjp5fHoS+2yHPhuXyH+lQRw+408W7JRS4fhcwgENowkQKZu0QWoJjhUgQZ8chyewnbxRlxScEU24ABhZYVEWwDxCP3sCUu4YJ4pGBmTVySgU4VL9AD8cglbB25clbtQQ7vTnKJgq8lV5ARz6gSXKLTNWwY8SpitgX65sLAHSjikpVUG2aarT/PSF3P0VwXUmjQaPH29BT/9s+OyzQFrYlLUikMCIMqrChyntoEB1806lWHJ8vlF0gNJq2wHIY3p2CyPxKetcOju7pe/qzhCFZccAzyx021YcqMmIEdfW0UF3coBZG9KMPuhAiD7Jvi0Lb8iAIXKc9AmB+PtVF57gqjLDcIzFkYT+kwuAjoiLhkGk2GNI6JS+LZ+eJpRa9pmCz29+LEj5KFlRCXBGFCoys6CvyELoZ+Mvx0XJR8iiY3veh8MgtHfvS536DhqH+OaXQdDOki8eNL4pKIDmlw3S9nMY265ys/nPnjbtX+0X+G41mMFh/9hN74n20oh3tTP/LHYzre2WrSPfdjOtrZjenfMxoO6eJiPLnBU2fjJFgEYZz4uHs+GaHW0B+PF/4wCa6DBNfnszgIaRwvotm4Dz4eRsE06VeYdZdWeBlObkIyb3B2DEdPzbPHUDx0cjUd08T2EIsdhD4u5juQ2fGzlDIHJiw8QDBhjsIRpdzkuHXRwba7U+oaxWfH7oJAPLCcZw5eOqDNy3dCoeQyh80fP3s3YFVK/V34v3uL+W1Aa3b30jC12RwTHp+b3aJQpaTqK/HusBIXUi15loHYr8Grwav/f7pnh+lGTcMBW69lqVJwhDTOSpYi+zVQ8P7YPPjTwNlJ2AFr8AvUAy8wSEvFzdbymCUwBeq1fbXfzmu3IqmU9xzsav6cznwEY7mMs0dmnOXWaYjQBsxaIm+6A1sMpEQeGTy8GXQM6HVnpAfVPWxrgvGoh45WlSonHqma+tbeYFCtpTa1VxVSGVR+YIqzZd6UF2VNb1eszLGYuUxZbrefh56swUEBEjekZGYNDqKgOf3Ekg+pnrn7cPrh9KgnVH3ByxM2nvysjSmO+mmUj3qyLK/rVYx6TdJdf/p+s4Jf2uq3nHQypZGf0NcxjeNgEnb8tLWr3b2e917aEG1A9nVklUinfdHB9a+bxEKLi5W05i3EJpY3gzMtlzlPMZXDhKXDLCV1WGr4AzhMZE4qN0UOeEG13K+HFT45nduVVM5GCm4kgttaGiVLRMJaStO8gXF6WWp72AAJk9LeYPD4+HiSsk0pMnaSyg0WIecpCG3r2NZt3O64z4wzmeremku7HihYgQKRwqB1pAfoFYHcJPvm5PTktEGVNhsmdg763hTtVa1vkIF/zaDIGbcUwYZYtRN2Sx7ekIao7s8YcYmHPuduOyu3pKqWTMNM5XWN219LUHb0n0bLDmLGNT5nxFuxXMNBUP1FSX6L2g+Z351vfO0cTaIDsNjayc5LXBG3+dCwvzWSpTWwDJQNq5H4aQqF2bE5+KrB2ekvo48UiSsrsVRPdGsf39b70XiqqtFI5D2Iuu7DM7jGAOv6P9J4yV4=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get flow node instance by key"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/flownode-instances/{key}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get flow node instance by key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of flownode instance",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              key: { type: "integer", format: "int64" },
+              processInstanceKey: { type: "integer", format: "int64" },
+              processDefinitionKey: { type: "integer", format: "int64" },
+              startDate: { type: "string" },
+              endDate: { type: "string" },
+              flowNodeId: { type: "string" },
+              flowNodeName: { type: "string" },
+              incidentKey: { type: "integer", format: "int64" },
+              type: {
+                type: "string",
+                enum: [
+                  "UNSPECIFIED",
+                  "PROCESS",
+                  "SUB_PROCESS",
+                  "EVENT_SUB_PROCESS",
+                  "START_EVENT",
+                  "INTERMEDIATE_CATCH_EVENT",
+                  "INTERMEDIATE_THROW_EVENT",
+                  "BOUNDARY_EVENT",
+                  "END_EVENT",
+                  "SERVICE_TASK",
+                  "RECEIVE_TASK",
+                  "USER_TASK",
+                  "MANUAL_TASK",
+                  "TASK",
+                  "EXCLUSIVE_GATEWAY",
+                  "INCLUSIVE_GATEWAY",
+                  "PARALLEL_GATEWAY",
+                  "EVENT_BASED_GATEWAY",
+                  "SEQUENCE_FLOW",
+                  "MULTI_INSTANCE_BODY",
+                  "CALL_ACTIVITY",
+                  "BUSINESS_RULE_TASK",
+                  "SCRIPT_TASK",
+                  "SEND_TASK",
+                  "UNKNOWN",
+                ],
+              },
+              state: {
+                type: "string",
+                enum: ["ACTIVE", "COMPLETED", "TERMINATED"],
+              },
+              incident: { type: "boolean" },
+              tenantId: { type: "string" },
+            },
+            title: "FlowNodeInstance",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

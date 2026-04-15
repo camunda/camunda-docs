@@ -400,6 +400,12 @@ This will continue exporting records, but not delete those records (log compacti
 curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
 ```
 
+:::warning
+This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
+
+If the request fails, verify that all brokers are running and retry.
+:::
+
    <details>
       <summary>Example output</summary>
       <summary>
@@ -419,6 +425,17 @@ curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
       </summary>
 
    </details>
+
+#### Behavior during a Zeebe hot backup
+
+During a hot backup, the Zeebe cluster remains fully operational:
+
+- Zeebe continues to accept new client requests (for example, starting process instances) and to process existing workflow instances.
+- Job workers and other external workers continue to receive and complete jobs.
+- Exporters continue to export records. While soft pause is active, Zeebe temporarily does not advance the exporter position, which prevents log compaction and increases broker disk usage for the duration of the backup window. Ensure broker disks have enough free space.
+- If a broker restarts while soft pause is active, some already-exported records may be exported again after the restart. This is expected, because exporting always resumes from the last acknowledged exporter position.
+
+The `/actuator/backupRuntime` API then creates a consistent backup of each partition while processing continues. The “wait for backup to complete” steps in this guide only poll backup status and do not introduce any additional pause in processing beyond the initial soft export pause.
 
 ### 2. Create a backup `x` of the exported Zeebe indices in Elasticsearch/OpenSearch
 
@@ -738,6 +755,12 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
       ```bash
       curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/resume"
       ```
+
+:::warning
+This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
+
+If the request fails, verify that all brokers are running and retry.
+:::
 
       <details>
          <summary>Example output</summary>

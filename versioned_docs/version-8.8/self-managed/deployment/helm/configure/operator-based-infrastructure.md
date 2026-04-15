@@ -1,8 +1,8 @@
 ---
 id: operator-based-infrastructure
-sidebar_label: Operator-based infrastructure
-title: Deploy infrastructure with Kubernetes operators
-description: "Deploy Camunda 8 infrastructure components using official Kubernetes operators as an alternative to Bitnami subcharts."
+sidebar_label: Deploy required dependencies
+title: Deploy required dependencies with Kubernetes operators
+description: "Deploy the databases (PostgreSQL, Elasticsearch) and OIDC provider (Keycloak) required by Camunda 8 using official Kubernetes operators."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -20,7 +20,7 @@ As outlined in [our strategy](https://camunda.com/blog/2025/08/changes-to-camund
 
 This guide demonstrates how to integrate these infrastructure components using official Kubernetes operators that don't depend on Bitnami subcharts. These operators are the recommended way to deploy and manage these services in production environments.
 
-:::caution Support scope
+:::warning Support scope
 PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they are not Camunda products, regardless of the deployment method used.
 
 - **Camunda support scope**: Camunda supports the **integration and configuration** of these components with the Camunda Helm chart. Camunda does not provide operational support for the infrastructure components themselves.
@@ -52,7 +52,7 @@ Before proceeding with this guide, ensure you have:
 - **Cluster admin privileges**: Required to install Custom Resource Definitions (CRDs) and operators
 - **Command-line tools**:
   - `kubectl` configured to access your cluster
-  - `helm` CLI for deploying Camunda Platform
+  - `helm` CLI for deploying Camunda using the Helm chart
   - `openssl` for generating random passwords
   - `envsubst` command (part of `gettext` package) for environment variable substitution
 
@@ -85,7 +85,7 @@ All configuration files, deployment scripts, and automation tools referenced in 
 <summary><strong>Quick deployment commands</strong></summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/camunda-deployment-references/generic/kubernetes/operator-based/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/operator-based/get-your-copy.sh
 ```
 
 Then execute:
@@ -136,7 +136,7 @@ Each infrastructure component should be deployed individually in the following o
 | 1     | **[PostgreSQL](#postgresql-deployment)**       | None         | Database clusters for Keycloak, Management Identity, and Web Modeler |
 | 2     | **[Elasticsearch](#elasticsearch-deployment)** | None         | Secondary storage for orchestration cluster components               |
 | 3     | **[Keycloak](#keycloak-deployment)**           | PostgreSQL   | Authentication and identity management                               |
-| 4     | **[Camunda Platform](#camunda-deployment)**    | All above    | Deploy using Helm with operator-managed infrastructure               |
+| 4     | **[Camunda](#camunda-deployment)**             | All above    | Deploy using Helm with operator-managed infrastructure               |
 
 :::tip Automation with GitOps
 While this guide demonstrates manual deployment using command-line tools, these same configurations can be automated using GitOps solutions like ArgoCD, Flux, or other Kubernetes deployment pipelines. All configuration files referenced in this guide are designed to work seamlessly with declarative deployment approaches.
@@ -525,7 +525,7 @@ With all infrastructure components deployed and configured, you can now deploy C
 
 ### Configuration files summary
 
-Before deploying Camunda Platform, ensure you have saved all required configuration files locally. The files are organized by deployment phase:
+Before deploying Camunda, ensure you have saved all required configuration files locally. The files are organized by deployment phase:
 
 #### Infrastructure deployment files (Custom Resources)
 
@@ -549,7 +549,7 @@ Before deploying Camunda Platform, ensure you have saved all required configurat
 
 ### Pre-deployment checklist
 
-Before deploying Camunda Platform:
+Before deploying Camunda, ensure you have completed the following:
 
 - [ ] All infrastructure components deployed (PostgreSQL, Elasticsearch, Keycloak)
 - [ ] Configuration files saved locally from previous sections
@@ -557,11 +557,10 @@ Before deploying Camunda Platform:
 
 ### Helm deployment
 
-Deploy Camunda Platform using the infrastructure configuration files you saved from previous sections:
+Deploy Camunda using the infrastructure configuration files you saved from previous sections:
 
-```bash
-# Set the desired Helm chart version - see https://helm.camunda.io/camunda-platform/version-matrix/
-export HELM_CHART_VERSION=13.0.0  # Replace with your desired version
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/operator-based/0-set-environment.sh
 ```
 
 For end-to-end configuration patterns (OIDC-enabled "Full Cluster" including Optimize, Web Modeler, Console, and Identity), see the Full Cluster section of our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md#full-cluster).
@@ -569,7 +568,7 @@ For end-to-end configuration patterns (OIDC-enabled "Full Cluster" including Opt
 <Tabs groupId="camunda-deployment">
   <TabItem value="with-domain" label="With external domain" default>
 
-Deploy Camunda Platform with external domain configuration:
+Deploy Camunda with external domain configuration:
 
 ```bash
 helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
@@ -578,14 +577,13 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   -f camunda-identity-values.yml \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-domain-values.yml \
-  -f camunda-values-identity-secrets.yml \
   -n "$CAMUNDA_NAMESPACE"
 ```
 
 </TabItem>
   <TabItem value="no-domain" label="Local development">
 
-Deploy Camunda Platform for local development:
+Deploy Camunda for local development:
 
 ```bash
 helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
@@ -594,7 +592,6 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   -f camunda-identity-values.yml \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-no-domain-values.yml \
-  -f camunda-values-identity-secrets.yml \
   -n "$CAMUNDA_NAMESPACE"
 ```
 
