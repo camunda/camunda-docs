@@ -8,156 +8,117 @@ keywords:
 toc_max_heading_level: 2
 ---
 
-Add long-term memory to your AI agents using Retrieval-Augmented Generation (RAG) and the [Vector Database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md).
+Use Retrieval-Augmented Generation (RAG) with the [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) to give your AI agents access to persistent, domain-specific knowledge that grows over time.
 
-## About
+## When to use long-term memory
 
-In this guide, you will:
+A standard AI agent operates within a fixed context window. This works well for many tasks, but becomes limiting when the agent needs access to large or frequently updated knowledge — such as company policies, product catalogs, compliance documentation, or support histories.
 
-- Add a vector database query tool to an AI agent so it can search for relevant information using natural language.
-- Add a human-in-the-loop tool that allows a clerk to answer questions the agent cannot resolve on its own.
-- Store clerk-provided answers in long-term memory using the vector database connector, gated by human approval.
-- Verify that the agent learns over time by answering previously unknown questions from memory.
+Long-term memory solves this by storing knowledge outside the agent in a vector database and retrieving only the most relevant fragments at runtime. Common use cases include:
 
-After completing this guide, your AI agent will be able to query a vector database for policy or product-specific information, escalate to a human when needed, and grow its knowledge base over time.
+- **Policy and procedure lookup**: The agent answers questions about internal rules or processes by retrieving the relevant document sections on demand.
+- **Product and catalog search**: The agent finds product details, specifications, or pricing from a large catalog without loading it all into context.
+- **Support knowledge base**: Answers to previously resolved questions are stored and surfaced automatically when similar questions arise in the future.
+- **Compliance and audit**: The agent retrieves the exact policy text needed to justify or explain a decision, making its reasoning traceable.
 
-## Prerequisites
+## How it works
 
-- You have access to [Modeler](/components/modeler/about-modeler.md) and [Operate](/components/operate/operate-introduction.md).
-- You have a deployed AI agent process, such as the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint.
-- You have access to a supported [vector database](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) and a supported [embedding model](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models).
+The vector database connector supports two operations that together implement long-term memory:
 
-:::important
-This guide builds on [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md). We recommend completing that guide first. However, you can also apply the concepts here to other AI agent process implementations.
-:::
+- **Retrieve document** — performs a semantic similarity search and returns the most relevant results from a vector index. Use this to let the agent query its knowledge base.
+- **Embed document** — converts text into a vector embedding and stores it in the vector index. Use this to add new knowledge to the agent's memory.
 
-## Why use a vector database for long-term memory
+The LLM is responsible for generating natural language queries when retrieving, and for deciding what content is worth storing. The actual vector operations — encoding, indexing, and searching — are handled by the connector and the underlying vector store.
 
-A vector database is ideal for giving an AI agent access to large amounts of domain-specific data — such as company policies, product catalogs, or internal procedures — without loading all of that data into the agent's context window.
+To configure either operation, you need:
 
-Using the [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md), the agent can query the database in natural language and retrieve only the most relevant results. This is known as **Retrieval-Augmented Generation (RAG)**.
+- A supported [vector store](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) and connection credentials.
+- A supported [embedding model](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) and its provider credentials.
+- An index name that identifies the collection to read from or write to.
 
-Key benefits include:
+## Add a vector database query tool
 
-- **Scalability**: The agent can access a large knowledge base without exceeding context window limits.
-- **Dynamic knowledge**: The knowledge base can grow over time as new information is stored.
-- **Natural language queries**: The LLM generates search queries automatically, so no structured query language is needed.
+To let an agent query a vector database, add a [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) task inside the AI Agent's [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) with no incoming sequence flows. Tasks with no incoming flows are treated as available [tools](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) by the AI Agent connector.
 
-## Step 1: Add a vector database query tool
+Configure the task as follows:
 
-Add a [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) as a new tool inside the AI Agent's [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md). This tool allows the agent to search for relevant information stored in the vector database.
+- Set **Operation** to **Retrieve document**.
+- Set **Search query** using the [`fromAi()`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) function so the LLM generates the query dynamically at runtime:
 
-1. Open your AI agent process in [Modeler](/components/modeler/about-modeler.md).
-1. Inside the AI Agent connector's ad-hoc sub-process, add a new **vector database connector** task. Ensure it has **no incoming flows** so the AI Agent recognizes it as an available [tool](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
-1. Set the task **Name** to something descriptive, for example `Query policy`.
-1. Set the **Element documentation** to describe when the agent should use this tool. For example:
+  ```feel
+  fromAi(toolCall.query, "The query you're making to the vector database.")
+  ```
 
-   > Use this tool to get any information on policy or product-specific questions you might have.
+- Set **Max results** to control how many matching documents are returned. The default is `5`. If the agent doesn't find what it needs on the first attempt, it can re-invoke the tool with a different query.
+- Configure the [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) with your provider credentials.
+- Configure the [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with your database connection details and **index name**.
+- Set the output **Result variable** to `toolCallResult`.
 
-   :::note
-   The element documentation is passed to the LLM as the [tool description](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions). Be as descriptive as possible to help the LLM select the right tool.
-   :::
-
-1. Configure the connector **Properties**:
-   - Set **Operation** to **Retrieve document**.
-   - Set **Search query** to use the [`fromAi()`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) function so the LLM generates the query dynamically:
-
-     ```feel
-     fromAi(toolCall.query, "The query you're making to the vector database.")
-     ```
-
-   - Set **Max results** to `5` (the default). The agent can re-trigger the tool with different query parameters if it doesn't find what it needs on the first attempt.
-   - Configure the [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) with your provider credentials.
-   - Configure the [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with your database connection details and **index name**.
-   - Set the output **Result variable** to `toolCallResult`.
-
-1. Add an **error boundary event** to handle cases where the index is not found:
-   - Attach an error boundary event to the vector database connector task.
-   - Set the error code to match an `index not found` error.
-   - In the error boundary event's output, set `toolCallResult` to `"Nothing was found"` so the agent is informed gracefully.
+Give the task a clear **Name** and write a descriptive **Element documentation** to help the LLM understand when to use this tool. The element documentation is passed to the LLM as the [tool description](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions).
 
 :::note
-The **index name** identifies where your data is stored in the vector database. You can use different indexes for different types of data. The index could even be set dynamically using `fromAi()` if the agent needs to choose between multiple knowledge bases.
+The index name identifies the collection of documents the agent searches. You can use different indexes for different knowledge domains and, if needed, make the index name dynamic using `fromAi()` so the agent selects the appropriate knowledge base for each query.
 :::
 
-## Step 2: Test the query tool
+### Handle missing or empty results
 
-Deploy and run your process to verify that the agent can query the vector database.
+Add an **error boundary event** to the vector database connector task to handle cases where the index does not exist or the query returns no results:
 
-1. Click **Deploy and run**.
-1. Enter a prompt that requires information from your vector database. For example: `I would like an iPhone. Can I get a student discount?`
-1. Open [Operate](/components/operate/operate-introduction.md) and locate the process instance.
-1. Observe the execution flow:
-   - The agent queries its existing tools (for example, a product list).
-   - The agent triggers the **Query policy** tool to search the vector database for relevant policies.
-   - If the vector database contains relevant data (for example, a student discount policy), the agent combines both sources of information in its response.
-1. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md) and review the agent's answer to verify it includes information retrieved from the vector database.
+- Set the error code to match an `index not found` error.
+- In the boundary event output, set `toolCallResult` to a value such as `"Nothing was found"` so the agent receives a clear, graceful response instead of an unhandled error.
 
-:::note
-If the vector database does not contain relevant information for the query, the agent will inform the user that it couldn't find an answer. This is expected before populating the database with data. The next steps show how to populate it.
-:::
+This prevents process failures when the knowledge base is empty or when an index has not yet been created.
 
-## Step 3: Add a human-in-the-loop tool
+## Populate the vector database
 
-For questions the agent cannot answer from its existing tools or the vector database, add a **user task** tool that escalates to a human clerk.
+Knowledge can be loaded into the vector database in two ways:
 
-1. Inside the AI Agent's ad-hoc sub-process, add a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md). Ensure it has **no incoming flows**.
-1. Set the task **Name** to `Ask clerk`.
-1. Set the **Element documentation** to:
+- **Batch import**: Documents are embedded and stored before the agent starts processing, typically as part of a data preparation process. Use a vector database connector task configured with **Operation: Embed document** in a separate BPMN process or script.
+- **Runtime ingestion**: New knowledge is added to the vector database as the agent encounters it — for example, when a human provides an answer that did not previously exist in the database.
 
-   > Use this tool to answer any questions you have about the company or the product on offer.
+For both approaches, configure the embed task as follows:
 
-1. Create and link a [form](/components/modeler/forms/camunda-forms-reference.md) with the following fields:
-   - **Question for clerk** (text, read-only) — displays the agent's question to the clerk.
-   - **Answer to question** (text, editable) — the clerk's answer.
-   - **Store in memory** (checkbox) — lets the clerk decide whether this answer should be saved for future use.
+- Set **Operation** to **Embed document**.
+- Set **Document source** to **Plain text** (or another supported source type).
+- Provide the text to embed — this can be a process variable, a form output, or any string value.
+- Configure the same [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) and [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) settings used by the retrieval tool so both operations target the same index.
 
-1. Configure the task **Input mappings** to populate the question field using `fromAi()`:
+## Gate memory writes with human approval
 
-   ```feel
-   fromAi(toolCall.questionForClerk, "The question for the human clerk to answer. Format in markdown.")
-   ```
+Allowing an agent to write to its own knowledge base without human oversight can lead to incorrect or irrelevant data being stored, which degrades future retrieval quality. It is recommended to involve a human in the decision to store new information.
 
-1. Configure the **Output mappings**:
-   - Set `toolCallResult` to the clerk's answer variable (for example, `answerToQuestion`).
-   - Set a local variable `storeInMemory` to the value of the **Store in memory** checkbox.
+A common pattern is to use a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) that presents the proposed content to a reviewer, who can approve or reject storing it. To implement this:
 
-## Step 4: Store answers in long-term memory
+1. After the content to be stored is available as a process variable, add a user task with a [form](/components/modeler/forms/camunda-forms-reference.md) that displays the content and includes a checkbox or approval field.
+1. Add an [exclusive gateway](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md) after the user task with two outgoing paths:
+   - **Approved** — routes to a vector database connector task with **Operation: Embed document**.
+   - **Rejected** — skips the embed step and continues the process.
+1. Use the reviewer's output variable as the gateway condition.
 
-After the clerk answers a question, use an exclusive gateway to decide whether to store the answer in the vector database for future use.
+This pattern ensures a human remains in the loop for all knowledge base updates, keeping the agent's memory accurate and trustworthy over time.
 
-1. After the **Ask clerk** user task, add an [exclusive gateway](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md).
-1. Add two outgoing sequence flows:
-   - **Yes** (condition: `storeInMemory = true`) — routes to a vector database connector task.
-   - **No** (condition: `storeInMemory = false`) — continues without storing.
-1. On the **Yes** path, add a [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) task:
-   - Set **Operation** to **Embed document**.
-   - Set **Document source** to **Plain text**.
-   - Set the text to embed to the clerk's answer, for example: `toolCallResult.answerToQuestion`.
-   - Configure the [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) and [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with the same settings used in [Step 1](#step-1-add-a-vector-database-query-tool).
-1. Join both paths after the gateway and connect them to continue the process flow.
+## Human escalation as a memory source
 
-:::important
-It is recommended to always involve a human when storing data in long-term memory. Allowing an agent to both query and populate its own knowledge base without oversight can lead to irrelevant or incorrect data being stored, which degrades the quality of future answers.
-:::
+A particularly effective pattern for building long-term memory is to combine a human escalation tool with runtime knowledge ingestion. When the agent cannot find an answer in the vector database, it escalates to a human via a user task. The human's response is returned to the agent as `toolCallResult`, and — if the reviewer decides it is worth keeping — it is also stored in the vector database for future queries.
 
-## Step 5: Verify the learning loop
+Over time, this creates a self-improving knowledge base: as humans answer previously unknown questions, the agent's ability to resolve those questions autonomously increases and the rate of human escalations decreases.
 
-Run the same query again to verify that the agent can now answer from long-term memory without escalating to the clerk.
+To implement this pattern:
 
-1. Click **Deploy and run**.
-1. Enter the same prompt as before, for example: `I would like a Samsung phone. I live in Berlin. Can I get it delivered today?`
-1. Open [Operate](/components/operate/operate-introduction.md) and observe the execution flow:
-   - On the **first run**, the agent cannot find the answer in the vector database. It escalates to the clerk via the **Ask clerk** tool. The clerk provides an answer and checks **Store in memory**.
-   - On the **second run** with the same or similar query, the agent finds the answer in the vector database and responds directly, **without** involving the clerk.
+- Add a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) with **no incoming flows** inside the ad-hoc sub-process. The agent will invoke it as a tool when it cannot resolve a query from its existing knowledge.
+- Configure the task's **Input mappings** to pass the agent's question to the form using `fromAi()`:
 
-This demonstrates the learning pattern: as the agent encounters new questions and clerks store relevant answers, the agent's knowledge base grows, and human escalations decrease over time.
+  ```feel
+  fromAi(toolCall.question, "The question the agent needs a human to answer.")
+  ```
+
+- The task form should capture the human's answer and a decision about whether to store it in long-term memory.
+- Use the human's answer as `toolCallResult` so it is returned directly to the agent.
+- After the user task completes, apply the [gated memory write](#gate-memory-writes-with-human-approval) pattern described above to conditionally store the answer in the vector database.
 
 ## Next steps
 
-Now that you know how to add long-term memory to your AI agents, you can:
-
 - [Monitor your AI agents](./monitor-ai-agents.md) with Operate.
-- [Analyze your AI agents](./analyze-ai-agents.md) with Optimize — measure KPIs such as clerk contact frequency over time to track whether long-term memory is reducing human escalations.
+- [Analyze your AI agents](./analyze-ai-agents.md) with Optimize — measure KPIs such as human escalation frequency to track whether long-term memory is reducing the need for human involvement.
 - Learn more about the [vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) and [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
