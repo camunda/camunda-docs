@@ -288,6 +288,22 @@ Type: <code>string</code>
   <code>&quot;&lt;default&gt;&quot;</code>
 </td>
 </tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.use-client-side-load-balancing" env="CAMUNDA_CLIENT_USECLIENTSIDELOADBALANCING"/><a href="#camundaclientuseclientsideloadbalancing" id="camundaclientuseclientsideloadbalancing" class="hash-link"/>
+</td>
+
+<td>
+
+If `true`, enables client-side load balancing by using DNS-based resolution and distributing requests across all resolved addresses. Useful for setups without an external load balancer, such as Docker Compose, Testcontainers, or Kubernetes headless services.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>false</code>
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -474,6 +490,22 @@ Type: <code>enum[none, basic, oidc]</code>
 The password to be use for basic authentication. A default is set by `camunda.client.auth.method: basic`.
 
 Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.proactive-token-refresh-threshold" env="CAMUNDA_CLIENT_AUTH_PROACTIVETOKENREFRESHTHRESHOLD"/><a href="#camundaclientauthproactivetokenrefreshthreshold" id="camundaclientauthproactivetokenrefreshthreshold" class="hash-link"/>
+</td>
+
+<td>
+
+The lead time before actual token expiry at which a background refresh is triggered. The token is still considered valid inside this window; this is a policy knob for how early refresh kicks in so callers don't have to block on a synchronous refresh at the cliff edge. Must be strictly larger than the internal expiry grace period.
+
+Type: <code>duration</code>
 
 </td>
 <td>
