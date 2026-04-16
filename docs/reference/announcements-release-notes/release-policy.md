@@ -150,7 +150,7 @@ The update policy covers the Spring Framework and Security versions, as well as 
 
 The Camunda Orchestration Cluster leverages Spring Boot to implement core functionality, like application configuration, REST infrastructure (including security), and other production-ready features.
 
-Camunda ensures that **the latest available patch releases make use of a Spring version within an active support window**. Therefore, Orchestration Cluster patch releases **may contain updates to newer Spring Boot minor versions**. In cases where a Spring major version's OSS support ends before Camunda's own support window, Camunda may utilize Spring enterprise support artifacts to ensure continued maintenance and security coverage for the Orchestration Cluster components.
+Camunda ensures that **the latest available patch releases make use of a Spring version within an active support window**. Therefore, Orchestration Cluster patch releases **may contain updates to newer Spring Boot minor versions**. In cases where a Spring major version's OSS support ends before Camunda's own support window, Camunda may utilize Spring enterprise support artifacts from a vendor determined on a case-by-case basis to ensure continued maintenance and security coverage for the Orchestration Cluster components.
 
 #### Client libraries and SDKs
 
