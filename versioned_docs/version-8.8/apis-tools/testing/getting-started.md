@@ -331,14 +331,15 @@ public class TestProcessApplication {}
 
 ## Next steps
 
-You can dive deeper into the library and read more about:
+Learn more about the following topics:
 
 - `CamundaAssert` and [assertions](assertions.md)
 - `CamundaProcessTestContext` and [utilities](utilities.md)
 - How to [configure the runtime](configuration.md)
+- How to [test AI agent processes](/components/agentic-orchestration/test-ai-agents.md)
 - Best practices for [writing process tests](/components/best-practices/development/testing-process-definitions.md)
 
-Additionally, you can explore the [full Javadoc reference](https://javadoc.io/doc/io.camunda/camunda-process-test-java/latest/io/camunda/process/test/api/package-summary.html) for more information.
+Refer to the [API documentation](https://javadoc.io/doc/io.camunda/camunda-process-test-java/latest/io/camunda/process/test/api/package-summary.html) for details.
 
 ## Examples
 
