@@ -72,5 +72,3 @@ applyTo: "**/*.md"
 - Do not capitalize general terms like "cluster", "process instance", or "task" unless they start a sentence.
 - Write "Elasticsearch" as one word (not "ElasticSearch" or "Elastic search").
 - Write "GitHub" with a capital H (not "Github").
-
-
