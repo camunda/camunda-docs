@@ -14,7 +14,7 @@ With 8.7, "milestone" was renamed to "version". To learn more about this change,
 :::
 
 :::note
-With 8.9, the "main process" concept was removed from process applications. As a result, the `versionTag` is no longer set automatically on the main process XML.
+With 8.9, the main process label has been removed from process applications in Web Modeler. As a result, the `versionTag` is no longer set automatically on the main process XML. See [the related announcement](/reference/announcements-release-notes/890/890-announcements.md#web-modeler-the-main-process-label-has-been-removed-from-process-applications) for details.
 :::
 
 Process applications support versioning, allowing you to create distinct versions for the entire application. You can use versioning to save a single snapshot of all the process application files in one action. This helps you track a process application throughout its development lifecycle and ensures the correct version is referenced.

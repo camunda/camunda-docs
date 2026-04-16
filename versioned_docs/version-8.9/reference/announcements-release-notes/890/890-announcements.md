@@ -1361,10 +1361,10 @@ This enhancement aligns Web Modeler's database configuration with the Orchestrat
 </div>
 <div className="release-announcement-content">
 
-#### Web Modeler: Process applications no longer contain a main process
+#### Web Modeler: The main process label has been removed from process applications
 
-Starting with Camunda 8.9, process applications no longer contain a main process.
-This aligns the process application concept with the Desktop Modeler and removes all limitations and constraints introduced by the main process concept.
+Starting with Camunda 8.9, the main process label has been removed from process applications in Web Modeler.
+This removes all restrictions previously tied to the main process label, aligning the Web Modeler process application experience with the Desktop Modeler.
 As a result, process applications can now be more easily synced with Git.
 Additionally, users have the freedom to deploy and run any process within a process application, allowing them to design solutions with more than one primary entry point.
 
