@@ -77,7 +77,7 @@ Before you begin, you'll need:
 - [mkcert](https://github.com/FiloSottile/mkcert#installation) (Domain mode only)
 
 :::tip
-You can also use [asdf](https://asdf-vm.com/) to install the tools, with the versions defined in [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions).
+You can also use [asdf](https://asdf-vm.com/) to install the tools, with the versions defined in [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/.tool-versions).
 :::
 
 ## Outcome
@@ -102,7 +102,7 @@ With this guide, you deploy the full Camunda 8 platform with all components. For
 Download the reference architecture files you'll use throughout this guide:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/get-your-copy.sh
 ```
 
 You'll run all subsequent commands from `camunda-deployment-references/local/kubernetes/kind-single-region/`.
@@ -124,7 +124,7 @@ SECONDARY_STORAGE=elasticsearch make no-domain.init   # With port-forward
 
 To clean up, use `make domain.clean` or `make no-domain.clean` respectively.
 
-Run `make help` to see all available targets, or consult the [Makefile](https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/Makefile) directly.
+Run `make help` to see all available targets, or consult the [Makefile](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/Makefile) directly.
 
 The following sections detail each step if you prefer to run them manually or want to understand the process. If you've used the quick setup commands above, you can skip ahead to [Accessing Camunda 8](#accessing-camunda-8).
 :::
@@ -134,7 +134,7 @@ The following sections detail each step if you prefer to run them manually or wa
 First, run the cluster creation script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/cluster-create.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/cluster-create.sh
 ```
 
 This script:
@@ -151,7 +151,7 @@ In the output, you should see three nodes in `Ready` state.
 The cluster includes one control plane node and two worker nodes with HTTP (80) and HTTPS (443) port mappings for Ingress:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/configs/kind-cluster-config.yaml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/configs/kind-cluster-config.yaml
 ```
 
 </details>
@@ -172,7 +172,7 @@ If you'd prefer a simpler setup without domain configuration, skip to [No-domain
 Deploy the [Contour Ingress controller](https://projectcontour.io/) to handle incoming traffic:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/contour-deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/contour-deploy.sh
 ```
 
 This script:
@@ -192,7 +192,7 @@ kubectl get pods -n projectcontour
 For pods inside the cluster to resolve `camunda.example.com`, configure CoreDNS to rewrite DNS queries:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/coredns-config.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/coredns-config.sh
 ```
 
 This configuration rewrites DNS queries for `camunda.example.com` and `zeebe-camunda.example.com` to the Contour Envoy service (`contour-envoy.projectcontour.svc.cluster.local`), allowing pods to reach Camunda services using the same domain names as external clients.
@@ -201,7 +201,7 @@ This configuration rewrites DNS queries for `camunda.example.com` and `zeebe-cam
 <summary>Review the CoreDNS configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/configs/coredns-configmap-contour.yaml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/configs/coredns-configmap-contour.yaml
 ```
 
 </details>
@@ -211,7 +211,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 Run the hosts file configuration script to resolve `camunda.example.com` locally. The script requires `sudo` privileges, so you'll need to provide your password:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/hosts-add.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/hosts-add.sh
 ```
 
 This adds the following entries to your `/etc/hosts` file:
@@ -226,7 +226,7 @@ This adds the following entries to your `/etc/hosts` file:
 Generate locally-trusted TLS certificates, using [mkcert](https://github.com/FiloSottile/mkcert):
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/certs-generate.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/certs-generate.sh
 ```
 
 Using certificates from real certificate authorities (CAs) for local development can be dangerous or impossible, for hosts like `localhost` or `127.0.0.1`, and self-signed certificates cause trust errors. mkcert solves this by automatically creating and installing a local CA in the system root store and generating locally-trusted certificates.
@@ -242,13 +242,13 @@ The certificate generation script:
 1. Create the TLS secret in Kubernetes. The Ingress controller will use this to serve HTTPS traffic for `camunda.example.com`. This also creates a `camunda-keycloak-tls` secret for the Keycloak Ingress:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/certs-create-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/certs-create-secret.sh
    ```
 
 2. Then, create a ConfigMap with the CA certificate for pods that need to trust it:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/certs-create-ca-configmap.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/certs-create-ca-configmap.sh
    ```
 
 ### Deploy prerequisite services
@@ -275,7 +275,7 @@ This script installs each operator and its custom resources, then waits for all 
 
 ### Deploy Camunda 8
 
-Deploy Camunda 8 with the domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external PostgreSQL and Keycloak instances, and to the secondary storage backend you selected:
+Deploy Camunda 8 with the domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/generic/kubernetes/operator-based) to connect Camunda to the external PostgreSQL and Keycloak instances, and to the secondary storage backend you selected:
 
 ```bash
 ./procedure/camunda-deploy-domain.sh
@@ -287,7 +287,7 @@ The script selects the appropriate Helm values based on your [exported `SECONDAR
 <summary>Deploy script source</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/camunda-deploy-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/camunda-deploy-domain.sh
 ```
 
 </details>
@@ -302,7 +302,7 @@ This uses the following Helm values:
 <summary>Domain mode Helm values (kind-specific)</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/helm-values/values-domain.yml
 ```
 
 </details>
@@ -312,11 +312,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 
 The deployment script layers the following shared operator values before the kind-specific values:
 
-- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch (Elasticsearch secondary storage only).
-- [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
-- [`camunda-keycloak-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml): Connects Camunda to the operator-managed Keycloak (domain mode).
-- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
-- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
+- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch (Elasticsearch secondary storage only).
+- [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
+- [`camunda-keycloak-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml): Connects Camunda to the operator-managed Keycloak (domain mode).
+- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
+- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
 
 </details>
 
@@ -324,7 +324,7 @@ The deployment script layers the following shared operator values before the kin
 <summary>mkcert CA trust configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/helm-values/values-mkcert.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/helm-values/values-mkcert.yml
 ```
 
 </details>
@@ -369,7 +369,7 @@ After adding this entry and deploying Camunda 8 in the next step, you'll be able
 
 ### Deploy Camunda 8
 
-Deploy Camunda 8 with the no-domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based) to connect Camunda to the external PostgreSQL and Keycloak instances, and to the secondary storage backend you selected:
+Deploy Camunda 8 with the no-domain mode Helm values. The deployment script layers the [operator-based Helm values](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/generic/kubernetes/operator-based) to connect Camunda to the external PostgreSQL and Keycloak instances, and to the secondary storage backend you selected:
 
 ```bash
 ./procedure/camunda-deploy-no-domain.sh
@@ -381,7 +381,7 @@ The script selects the appropriate Helm values based on your [exported `SECONDAR
 <summary>Deploy script source</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/camunda-deploy-no-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/camunda-deploy-no-domain.sh
 ```
 
 </details>
@@ -396,7 +396,7 @@ This uses the following Helm values:
 <summary>No-domain mode Helm values (kind-specific)</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/helm-values/values-no-domain.yml
 ```
 
 </details>
@@ -406,11 +406,11 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 
 The deployment script layers the following shared operator values before the kind-specific values:
 
-- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch (Elasticsearch secondary storage only).
-- [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
-- [`camunda-keycloak-no-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml): Connects Camunda to the operator-managed Keycloak (no-domain mode).
-- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
-- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
+- [`camunda-elastic-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml): Connects Camunda to the ECK-managed Elasticsearch (Elasticsearch secondary storage only).
+- [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
+- [`camunda-keycloak-no-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml): Connects Camunda to the operator-managed Keycloak (no-domain mode).
+- [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
+- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
 
 </details>
 
@@ -431,7 +431,7 @@ export CAMUNDA_NAMESPACE=camunda
 ```
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 Finally, verify the Helm release:
@@ -474,7 +474,7 @@ Optimize is only available with Elasticsearch secondary storage. If you deployed
 Start port-forwarding to access the services:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/port-forward.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/port-forward.sh
 ```
 
 :::tip Localhost development with kubefwd
@@ -525,7 +525,7 @@ At any time, run `kubectl get services -n camunda` to get a full list of deploye
 - **Password**: Run the following script
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/get-password.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/get-password.sh
 ```
 
 #### Keycloak admin
@@ -533,7 +533,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 The Keycloak operator generates a separate set of admin credentials stored in the `keycloak-initial-admin` secret. These credentials are different from the Camunda admin credentials and are used to access the Keycloak administration console.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/get-keycloak-password.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/get-keycloak-password.sh
 ```
 
 ## Cleanup
