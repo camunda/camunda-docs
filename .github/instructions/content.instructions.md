@@ -73,20 +73,4 @@ applyTo: "**/*.md"
 - Write "Elasticsearch" as one word (not "ElasticSearch" or "Elastic search").
 - Write "GitHub" with a capital H (not "Github").
 
-## 6. Review checklist
 
-When reviewing a documentation PR, verify each of the following:
-
-- [ ] American English spelling and grammar throughout.
-- [ ] Second person ("you", "your") and active voice used consistently.
-- [ ] Oxford comma used in all lists.
-- [ ] Sentence case in all titles and headers; no colons at the end of headers.
-- [ ] Bold for UI element names and button labels; inline code for filenames and code identifiers; no quotation marks for UI items.
-- [ ] Descriptive link text with `.md` extension on internal links; no `/docs/` prefix on internal links.
-- [ ] Links point to the most relevant section anchor, not just the top of a page.
-- [ ] Admonitions limited to `:::warning`, `:::note`, `:::tip`; not stacked; no required steps inside admonitions.
-- [ ] Numbered lists for sequential steps; bulleted lists (with `-`) for unordered items.
-- [ ] No Latin abbreviations (e.g., i.e.); no "please" in instructions.
-- [ ] "Process" terminology preferred over "workflow" (with noted exceptions).
-- [ ] All images have alt text; no personal information visible in screenshots.
-- [ ] Short paragraphs (max four to five sentences) and short, clear sentences.
