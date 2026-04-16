@@ -13,6 +13,11 @@ jobs:
       # Removed because it's causing build issues
       # - name: Cache Docusaurus
       #   uses: ./.github/actions/docusaurus-cache
+      - name: Check Node heap limit
+        run: |
+          node -e "console.log('heap limit MB =', require('v8').getHeapStatistics().heap_size_limit / 1024 / 1024)"
+        env:
+          NODE_OPTIONS: --max-old-space-size=49152
       - name: Build
         run: npm run build
         env:
