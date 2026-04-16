@@ -21,22 +21,14 @@ applyTo: "**"
 
 ## 3. PR workflow
 
-All changes must be done in a separate branch with a PR. See `/howtos/documentation-guidelines.md` for the full process.
-
 - Keep the PR in **draft** while actively working on it. Removing draft status signals it is ready for review.
 - Use **labels** to communicate the component, version, and priority. PRs without labels may be triaged slowly.
 - Add the **`deploy` label** to trigger a preview site deployment — recommended for large or complex changes.
-- A separate issue is not required if you know exactly what change needs to be made.
 
-## 4. Review process
-
-Most PRs require two reviews: a **technical writing review** and a **review from the relevant engineering team**. Assign reviewers based on the PR template, or tag `@camunda/tech-writers` for writing review. See the full reviewer/DRI list in `/howtos/documentation-guidelines.md#review-process`.
-
-## 5. Code formatting and commits
+## 4. Code formatting and commits
 
 - Code formatting is validated by **Prettier**. Run `npm run format` locally before submitting a PR.
 - Commit messages must follow the format: `{type}(scope): {description}`.
   - Valid types: `build`, `ci`, `deps`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`, `chore`.
   - Keep the commit message header between 72–120 characters.
   - Write the description in present tense (for example, "Add start event to BPMN symbol support matrix").
-
