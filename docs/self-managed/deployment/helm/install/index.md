@@ -21,7 +21,9 @@ Install Camunda 8 Self-Managed on Kubernetes using Helm charts. Choose the path 
 - Use **install with RDBMS** if your organization standardizes on relational databases.
 - Use **production install** if you need security, scalability, and operational features.
 - If you don’t have required infrastructure, see [deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
-  :::
+
+<!-- prettier-ignore -->
+:::
 
 ## Installation guides
 

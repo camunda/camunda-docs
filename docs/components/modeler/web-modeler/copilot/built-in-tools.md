@@ -59,4 +59,6 @@ Camunda Copilot can connect to external services:
 
 - Documentation search via Kapa AI is only available in SaaS deployments.
 - Self-Managed users can configure their own LLM provider but do not have access to the Camunda documentation knowledge base.
-  :::
+
+<!-- prettier-ignore -->
+:::
