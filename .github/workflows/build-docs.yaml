@@ -17,11 +17,11 @@ jobs:
         run: |
           node -e "console.log('heap limit MB =', require('v8').getHeapStatistics().heap_size_limit / 1024 / 1024)"
         env:
-          NODE_OPTIONS: --max-old-space-size=49152
+          NODE_OPTIONS: --max_old_space_size=30720
       - name: Build
         run: npm run build
         env:
-          NODE_OPTIONS: --max_old_space_size=8192
+          NODE_OPTIONS: --max_old_space_size=30720
       - name: Upload build
         uses: actions/upload-artifact@v4
         with:
