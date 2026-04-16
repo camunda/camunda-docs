@@ -9,24 +9,15 @@ import DocsIcon from "@site/docs/components/assets/icon-docs.png";
 import PlayIcon from "@site/docs/components/assets/icon-play.png";
 import AoGrid from '../react-components/\_ao-card';
 
-Scale agentic processes with strong governance, reusable assets, operational insight, and managed environments.
+Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
 
 ## About Camunda Hub
 
-Scaling your portfolio of agentic business processes demands a proactive approach to maintenance costs, operational risk, and governance complexity. Otherwise, fragmented tools, duplicated assets, and inconsistent environments make it harder to keep automations reliable, compliant, and clearly tied to business value.
+Camunda Hub is a unified platform that provides governance, observability, and delivery capabilities—all in one place:
 
-Teams responsible for establishing standards, infrastructure, and guardrails for automation at scale need tools for:
-
-- Managing organizational, infrastructural, and collaborative resources
-- Governing the use of reusable assets
-- Monitoring operations and assessing business value
-
-Additionally, teams responsible for building and delivering processes need tools for:
-
-- Using approved reusable assets
-- Modeling and deploying business processes
-
-Camunda Hub is a single platform that provides these tools—and more—to empower you to operate efficiently, scale safely, and build with confidence.
+- **Governance:** Manage your organization and infrastructure, and approve reusable assets to provide builders the environment and tools they need to succeed.
+- **Observability:** Monitor operations across all your clusters, and assess business value, so you can make informed decisions about where to spend your resources.
+- **Delivery:** Collaborate in managed workspaces, discover and use approved, reusable assets, and model and deploy business processes to be executed in the Orchestration Cluster.
 
 ## Manage organizational resources
 
