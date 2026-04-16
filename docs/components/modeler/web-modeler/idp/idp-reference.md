@@ -65,7 +65,7 @@ IDP currently only supports data extraction from the following uploaded document
 
 IDP supports data extraction and processing of documents in multiple languages.
 
-Language support depends on the [text extraction engine](#extraction-engines) used. For example, when using the AWS provider, IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. Other extraction engines (Azure Document Intelligence, GCP Document AI) also support multiple languages — refer to the respective provider documentation for details.
+Language support depends on the [text extraction engine](#extraction-engines) you use. For example, with the AWS provider, IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and can detect and extract text in multiple languages. Other extraction engines (Azure Document Intelligence, GCP Document AI) also support multiple languages. Refer to the respective provider documentation for details.
 
 :::note
 At the time of the 8.7 release (April 2025), Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for current information on supported languages.
@@ -89,11 +89,11 @@ You can specify the following extraction field data types.
 
 ## Extraction models {#extraction-models}
 
-You can choose from the following supported LLM extraction models during [data extraction](idp-unstructured-extraction.md#extract-fields). The available models depend on the cloud provider configured for your document extraction template.
+You can choose from the following supported LLM extraction models during [data extraction](idp-unstructured-extraction.md#extract-fields). The available models depend on the cloud provider you configure for your document extraction template.
 
 ### AWS extraction models
 
-The following models are available when using the AWS provider with Amazon Bedrock:
+The following models are available when you use the AWS provider with Amazon Bedrock:
 
 | Extraction model     | Model provider                             | Documentation                                                                                           |
 | :------------------- | :----------------------------------------- | :------------------------------------------------------------------------------------------------------ |
@@ -138,14 +138,14 @@ Text extraction engines determine how text is extracted from your documents befo
 | GCP Document AI             | GCP          | Scanned or image-based documents                | Uses [Google Cloud Document AI](https://cloud.google.com/document-ai/docs) for OCR-based text extraction. Requires GCP provider configuration.                                          |
 
 :::note
-The available extraction engines depend on the cloud provider configured for your document extraction template. For example, AWS Textract is only available when using the AWS provider. See [configuring IDP](idp-configuration.md) for provider setup details.
+The available extraction engines depend on the cloud provider you configure for your document extraction template. For example, AWS Textract is only available when using the AWS provider. See [configuring IDP](idp-configuration.md) for provider setup details.
 :::
 
 ## Optical Character Recognition (OCR) {#ocr}
 
 Optical Character Recognition (OCR) technology is used by several [text extraction engines](#extraction-engines) to detect and extract text and layout from scanned or digital documents.
 
-The following OCR-based extraction engines are available:
+You can use the following OCR-based extraction engines:
 
 - **AWS Textract**: Used for both structured and unstructured extraction with the AWS provider.
 - **Azure Document Intelligence**: Used for unstructured extraction with the Azure provider.

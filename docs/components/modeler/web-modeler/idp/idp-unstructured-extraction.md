@@ -90,7 +90,7 @@ Once you have added your extraction fields, select a text extraction engine and 
 
 #### Extraction engine selection
 
-The **Extraction engine** dropdown allows you to choose how text is extracted from your documents before the LLM processes the content. Select the engine that best matches your document type and processing needs:
+With the **Extraction engine** dropdown, you can choose how text is extracted from your documents before the LLM processes the content. Select the engine that best matches your document type and processing needs:
 
 <img src={IdpExtractionEngineSelectionImg} alt="Extraction engine selection dropdown" width="380px" style={{marginTop: '0'}} />
 
@@ -101,7 +101,7 @@ The **Extraction engine** dropdown allows you to choose how text is extracted fr
 - **GCP Document AI**: Uses Google Cloud Document AI for OCR-based text extraction from scanned or image-based documents.
 
 :::note
-The available extraction engines depend on the cloud provider configured for your document extraction template. For example, AWS Textract is only available when using the AWS provider.
+The available extraction engines depend on the cloud provider you configure for your document extraction template. For example, AWS Textract is only available when using the AWS provider.
 :::
 
 #### Model selection

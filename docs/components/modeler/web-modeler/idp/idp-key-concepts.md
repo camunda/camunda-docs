@@ -95,7 +95,7 @@ A text extraction engine determines how text is extracted from a document before
 - **OCR-based extraction** (AWS Textract, Azure Document Intelligence, GCP Document AI): For scanned or image-based documents, OCR engines provide high-accuracy text recognition from images.
 - **Multimodal**: For LLMs that support vision capabilities, the document can be sent directly to the model for native interpretation, bypassing a separate text extraction step entirely.
 
-You can select the extraction engine per unstructured extraction template during [extraction testing](idp-unstructured-extraction.md#extract-data), [validation](idp-unstructured-extraction.md#validate-extraction), and [publishing](idp-unstructured-extraction.md#publish-template). This allows you to optimize for accuracy, performance, and cost for each document type.
+You can select the extraction engine per unstructured extraction template during [extraction testing](idp-unstructured-extraction.md#extract-data), [validation](idp-unstructured-extraction.md#validate-extraction), and [publishing](idp-unstructured-extraction.md#publish-template), to optimize accuracy, performance, and cost for each document type.
 
 :::info
 For a full list of available extraction engines, see [text extraction engines](idp-reference.md#extraction-engines).
