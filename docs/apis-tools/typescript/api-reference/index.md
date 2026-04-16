@@ -8,6 +8,11 @@ mdx:
 
 # Camunda 8 Orchestration Cluster TypeScript SDK
 
+[![npm](https://img.shields.io/npm/v/@camunda8/orchestration-cluster-api)](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api)
+[![npm downloads](https://img.shields.io/npm/dw/@camunda8/orchestration-cluster-api)](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/camunda/orchestration-cluster-api-js/blob/main/LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/camunda/orchestration-cluster-api-js)](https://github.com/camunda/orchestration-cluster-api-js/releases)
+
 <!-- WARNING: The content and specific structure of this file drives Docusaurus generation in camunda-docs. Also, code examples are injected during build. Please refer to MAINTAINER.md before editing. -->
 
 Type‑safe, promise‑based client for the Camunda 8 Orchestration Cluster REST API.

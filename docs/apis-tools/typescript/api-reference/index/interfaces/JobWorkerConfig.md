@@ -87,7 +87,7 @@ jobHandler: (job) => "JOB_ACTION_RECEIPT" | Promise<"JOB_ACTION_RECEIPT">;
 optional jobTimeoutMs?: number;
 ```
 
-Job activation timeout — falls back to CAMUNDA_WORKER_TIMEOUT env var
+Job activation timeout in ms — default `60000`. Overridden by CAMUNDA_WORKER_TIMEOUT env var.
 
 ---
 
@@ -119,7 +119,7 @@ Not used; pacing handled by long polling + client backpressure. Present only for
 optional maxParallelJobs?: number;
 ```
 
-concurrency limit — falls back to CAMUNDA_WORKER_MAX_CONCURRENT_JOBS env var
+Concurrency limit — default `10`. Overridden by CAMUNDA_WORKER_MAX_CONCURRENT_JOBS env var.
 
 ---
 
