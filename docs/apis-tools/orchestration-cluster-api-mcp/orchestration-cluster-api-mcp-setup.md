@@ -120,7 +120,7 @@ Add the following to your MCP client configuration (for example, `.vscode/mcp.js
 
 ```json
 {
-  "servers": {
+  "mcpServers": {
     "camunda-mcp": {
       "type": "stdio",
       "command": "npx",
