@@ -2,266 +2,338 @@
 id: tier-2-dual-region
 title: "Tier 2: Dual-Region"
 sidebar_label: "Tier 2 — Dual-Region"
-description: "Dual-region for Camunda Self-Managed: reference architecture, exporter configuration, failover runbook, Elasticsearch vs. RDBMS comparison."
+description: "Conceptual overview of Tier 2 dual-region active-passive for Camunda Self-Managed: reference architecture, data consistency, failover flow, and secondary storage comparison."
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+Tier 2 formalizes Camunda's production-proven dual-region configuration — the dual-region architecture that enterprise customers already operate — with published RTO/RPO targets, a certified reference architecture, and a documented failover runbook.
 
-Tier 2 formalizes Camunda's production-proven dual-region configuration — the warm standby architecture that enterprise customers already operate — with published RTO/RPO targets, a certified reference architecture, and a documented failover runbook.
+In Tier 2, a full Camunda Orchestration Cluster runs continuously in both a primary and a secondary region. Zeebe replicates its log stream across both regions using the Raft protocol, and secondary storage (Elasticsearch) is populated independently in each region via the Camunda Exporter. Under normal operation, user traffic is routed exclusively to the primary region. On primary-region failure, an operator executes the failover runbook to restore service from the secondary region.
 
-In Tier 2, a full Camunda Orchestration Cluster runs continuously in both a primary and a secondary region. Zeebe replicates its log stream across both regions using the Raft protocol, and secondary storage Elasticsearch is populated independently in each region via the Camunda Exporter. Under normal operation, user traffic is routed exclusively to the primary region. On primary-region failure, an operator executes the failover runbook to restore service from the secondary region.
+import DualRegion from "./img/dual-region.jpg";
 
-| Property                            | Value                                                       |
-| ----------------------------------- | ----------------------------------------------------------- |
-| **RTO**                             | ~15 minutes                                                 |
-| **RPO**                             | ~5 minutes (secondary storage); 0 for Zeebe primary storage |
-| **Failover mode**                   | Manual, operator-initiated                                  |
-| **Standing second region required** | Yes — full Orchestration Cluster running in both regions    |
+Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). This setup combines **active-active data replication** with **active-passive user traffic routing** (see [Active-active](#active-active)) to ensure high availability and disaster recovery.
 
-:::note Existing dual-region operators
-If you are already running a dual-region Elasticsearch configuration, your setup is now formally documented as Tier 2 with published RTO/RPO targets and this runbook. No infrastructure changes are required. Update your operational documentation to reference these pages as the authoritative Camunda guidance.
+| Property                            | Value                                                    |
+| ----------------------------------- | -------------------------------------------------------- |
+| **RTO**                             | ~15 minutes                                              |
+| **RPO**                             | 0                                                        |
+| **Failover mode**                   | Manual, operator-initiated                               |
+| **Standing second region required** | Yes — full Orchestration Cluster running in both regions |
+| **Primary compliance fit**          | DORA, SR 11-7 (with documented runbook)                  |
+
+:::caution
+
+Before implementing a dual-region setup, ensure you understand the topic, the [limitations](#camunda-8-dual-region-limitations) of dual-region setup, and the general [considerations](#platform-considerations) of operating a dual-region setup.
+
 :::
 
-## Reference architecture
+## Architecture overview
 
-Tier 2 uses the Camunda dual-region architecture described in the [dual-region concept page](/self-managed/concepts/multi-region/dual-region.md). Both regions run a full Orchestration Cluster. Zeebe uses active-active Raft-based log replication across brokers distributed across both regions. Secondary storage is populated independently in each region by the Camunda Exporter — the two Elasticsearch clusters do not communicate directly; data consistency is maintained at the Zeebe exporter layer.
+The dual-region setup is a hybrid active-active/active-passive architecture:
 
-```
-┌──────────────────────────────────────┐       ┌──────────────────────────────────────┐
-│ Region 0 — Primary                    │       │ Region 1 — Secondary                  │
-│ (serves user traffic)                 │       │ (no user traffic under normal ops)    │
-│                                       │       │                                       │
-│  ┌─────────────────────────────┐      │       │  ┌─────────────────────────────┐      │
-│  │ Orchestration Cluster        │◄────►│       │  │ Orchestration Cluster        │      │
-│  │  Zeebe brokers (even IDs)    │ Raft │       │  │  Zeebe brokers (odd IDs)     │      │
-│  │  Operate  │  Tasklist        │      │       │  │  Operate  │  Tasklist        │      │
-│  │  Admin                       │      │       │  │  Admin                       │      │
-│  └──────────────┬──────────────┘      │       │  └──────────────┬──────────────┘      │
-│                 │ Camunda Exporter     │       │                 │ Camunda Exporter     │
-│                 ▼                     │       │                 ▼                     │
-│  ┌──────────────────────────┐         │       │  ┌──────────────────────────┐         │
-│  │ Elasticsearch (Region 0)  │         │       │  │ Elasticsearch (Region 1)  │         │
-│  └──────────────────────────┘         │       │  └──────────────────────────┘         │
-└──────────────────────────────────────┘       └──────────────────────────────────────┘
+|                                 **Component** | **Mode**                                             | **Both Regions Running** | **User Traffic**          | **RPO** |
+| --------------------------------------------: | ---------------------------------------------------- | ------------------------ | ------------------------- | ------- |
+| <p align="left">**Orchestration Cluster**</p> |                                                      | ✅ Required              |                           |         |
+|                                         Zeebe | Active-active                                        | ✅ Required              | Both regions process data | 0       |
+|                                         Admin | Active-active                                        | ✅ Required              | Cluster-level identity    | 0       |
+|                                       Operate | Active-passive (see [Active-active](#active-active)) | ✅ Required              | One region serves users   | 0       |
+|                                      Tasklist | Active-passive (see [Active-active](#active-active)) | ✅ Required              | One region serves users   | 0       |
+|         <p align="left">**Elasticsearch**</p> | Active-active                                        | ✅ Required              | Data replicated to both   | 0       |
 
-       ▲ User traffic (primary region only under normal operation)
-       └── DNS / load balancer
-```
+:::important
 
-For full architecture details including network requirements and component requirements, see the [dual-region concept page](/self-managed/concepts/multi-region/dual-region.md).
+**All components in both regions must be fully operational at all times.** "Passive" refers only to user traffic routing, not system operation. Both regions actively participate in data processing and replication.
 
-### Component behavior
-
-| Component         | Replication mode                                     | User traffic                      | RPO |
-| ----------------- | ---------------------------------------------------- | --------------------------------- | --- |
-| **Zeebe**         | Active-active (Raft across both regions)             | Both regions process data         | 0   |
-| **Admin**         | Active-active (embedded in Orchestration Cluster)    | Cluster-level identity management | 0   |
-| **Operate**       | Data replicated; user traffic to primary only        | Primary region only               | 0   |
-| **Tasklist**      | Data replicated; user traffic to primary only        | Primary region only               | 0   |
-| **Elasticsearch** | Independent per-region (populated by Zeebe Exporter) | No direct user traffic            | 0   |
-
-If you are using Camunda v1 APIs for batch operations or task assignments, some state is **region-specific** and will be lost on primary-region failure. Migrate to the v2 REST API and Tasklist v2 mode to eliminate this category of data loss. See [active-active mode](/self-managed/concepts/multi-region/dual-region.md#active-active).
 :::
 
-### Network requirements
+## Traffic routing and terminology
 
-- Maximum network round-trip time (RTT) between regions: **≤ 100 ms**
-- Required open ports between regions:
-  - **9200** — Elasticsearch (cross-region data pushed by Zeebe Exporter)
-  - **26500** — Zeebe Gateway (client/worker communication)
-  - **26501–26502** — Zeebe broker-to-broker and broker-to-gateway communication
-- Kubernetes pod and service CIDRs must not overlap across the two clusters
-- AWS EKS: VPC peering and DNS chaining are required — see [Amazon EKS dual-region setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)
+### Primary and secondary regions
 
-## Exporter configuration
+To avoid confusion with traditional "active-passive" terminology, we distinguish between:
 
-The Camunda Exporter writes process data from Zeebe to secondary storage. In a Tier 2 setup, each region's Zeebe brokers export independently to their local Elasticsearch cluster. Do not configure cross-region Elasticsearch endpoints in the exporter.
+- **Primary region**: Serves user traffic (UI access, API calls).
+- **Secondary region**: Fully operational but does not serve user traffic under normal conditions.
 
-```yaml
-# Helm chart values.yaml — Camunda Exporter (applied in both regions independently)
-zeebe:
-  env:
-    - name: ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_CLASSNAME
-      value: io.camunda.exporter.CamundaExporter
-    - name: ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_URL
-      value: "http://elasticsearch:9200" # local-region Elasticsearch endpoint only
-```
+Both regions are operationally active with all components running, but only the primary region handles user interactions.
 
-### Zeebe cluster sizing requirements
+### User traffic management
 
-Both regions must use compatible Zeebe cluster configurations. The following constraints apply to ensure even partition distribution across regions.
+You must route user traffic exclusively to the primary region [(\*)](#active-active). Methods include:
 
-| Parameter           | Requirement              | Reason                                                                                                                      |
-| ------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| `clusterSize`       | Multiple of 2, minimum 4 | Ensures equal broker count in each region                                                                                   |
-| `replicationFactor` | 4                        | Ensures partitions are replicated across both regions                                                                       |
-| `partitionCount`    | Unrestricted             | Choose based on workload; see [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) |
+- DNS configuration
+- Load balancer settings
+- Network routing policies
 
-Zeebe assigns even-numbered brokers (0, 2, 4, …) to one region and odd-numbered brokers (1, 3, 5, …) to the other. This round-robin assignment ensures partitions have leaders and followers in both regions, meeting quorum requirements even under region pressure.
+If the primary region fails, traffic must be redirected manually to the secondary region.
 
-## Data flow and consistency behavior
+## Active-active vs active-passive comparison
+
+- **Active-active** setups distribute user traffic across multiple regions simultaneously, with all regions processing requests.
+
+- **Active-passive** setups designate one region for user traffic while keeping backup regions on standby.
+
+- **Camunda's hybrid approach** combines both:
+  - **Data layer**: Active-active replication ensures zero data loss (RPO = 0).
+  - **User interface layer**: Active-passive routing prevents conflicts and ensures consistency.
+
+## Disclaimer
+
+:::caution
+
+Running dual-region setups requires developing, testing, and executing custom [operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) matching your environments. This page outlines key points to consider.
+
+:::
+
+:::info Active-Active <a id="active-active"></a>
+
+Starting in Camunda 8.8, the **v2 REST API** and **Tasklist V2** remove previous region-specific limitations. By using the v2 REST API for batch operations and enabling [Tasklist V2 mode](/components/tasklist/api-versions.md), you can avoid regional data loss, as data is replicated through the Camunda Exporter rather than confined to the region where the operation originated.
+
+These improvements also make a user-facing **active-active** setup feasible. Starting with version 8.9, this configuration will become the default for dual-region deployments. This note serves as an early indication that **active-active** functionality is already supported.
+
+:::
+
+## Dual-region architecture
+
+<img src={DualRegion} alt="Camunda dual-region architecture" style={{border: 'none'}} />
+
+The dual-region architecture consists of two regions in a Kubernetes-based installation. Each region has a Kubernetes cluster with all Camunda 8 components fully operational.
+
+- **Region 0** is the primary region serving user traffic.
+- **Region 1** is the secondary region, fully operational but not serving user traffic.
+
+Both regions actively participate in data processing and replication.
+
+:::note
+The visual representation shows both regions as operational. Any grayed-out appearance in the diagram represents user traffic routing, not system operational status. All components in both regions must be running and operational.
+:::
+
+The Orchestration Cluster consists of multiple components:
+
+- Zeebe stretches across regions using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing communication and data replication between all brokers.
+- Zeebe exports data to Elasticsearch instances in both regions using the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
+- Using the new exporters ensures that Operate and Tasklist data is the same in both regions besides some v1 API related operations that are still region specific. See [active-active](#active-active).
+- Admin is embedded in the Orchestration Cluster and provides cluster-level identity management.
+
+### User traffic
+
+The system uses active-passive user traffic routing. You must designate one region as the primary and route all user traffic to it. The secondary region remains fully operational but does not serve user requests (see [Active-active](#active-active)).
+
+Traffic management responsibilities:
+
+- Configure DNS to route to primary region.
+- Implement health checks and failover procedures.
+- Manually redirect traffic during primary region failure in combination with the [operational failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover).
+
+:::warning Operation requirement
+
+Traffic redirection must be performed as part of the complete failover procedure. Redirecting traffic without following the operational procedure can lead to system inconsistencies and data issues.
+
+:::
+
+### Components
+
+The currently supported Camunda 8 Self-Managed components are:
+
+- Orchestration Cluster
+  - Zeebe (process automation engine)
+  - Admin
+  - Operate
+  - Tasklist
+- Elasticsearch (database)
+
+#### Component requirements
+
+|                                     Component | Mode                                                                | Requirement                           | Function                                                                                                                                                                                                                                                                                                                             | Data loss risk                                                                      |
+| --------------------------------------------: | ------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| <p align="left">**Orchestration Cluster**</p> |                                                                     |                                       |                                                                                                                                                                                                                                                                                                                                      |                                                                                     |
+|                                         Zeebe | Active-active                                                       | All brokers in both regions must run  | <ul><li>Leaders and followers distributed across regions</li><li>Continuous replication via Raft protocol</li><li>Both regions required for quorum maintenance</li></ul>                                                                                                                                                             | Can handle region failure without data loss when properly configured                |
+|                                         Admin | Active-active                                                       | Embedded in the Orchestration cluster | <ul><li>Admin provides unified, cluster-level identity management and authorization</li></ul>                                                                                                                                                                                                                                        | Can handle region failure without data loss                                         |
+|                                       Operate | Active-passive (user traffic) (see [Active-active](#active-active)) | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Uncompleted batch operations if not submitted via v2 API</li></ul>                                                                                                                                         | Data loss possible if using v1 API as changes are isolated to the initiated region. |
+|                                      Tasklist | Active-passive (user traffic) (see [Active-active](#active-active)) | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Task assignments if not utilizing Tasklist v2 API</li></ul>                                                                                                                                                | Data loss possible if using v1 API as changes are isolated to the initiated region. |
+|         <p align="left">**Elasticsearch**</p> | Active-active                                                       | Both clusters must run                | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down                           |
+
+### Data flow and consistency behavior
 
 Under normal operation, Zeebe continuously exports events to the local Elasticsearch cluster in each region. The two clusters are independent — there is no direct cross-region Elasticsearch replication.
 
 **Export lag**: There is an inherent delay between a Zeebe event and its appearance in Elasticsearch, typically measured in seconds under normal load. Under sustained high throughput or network pressure, lag can grow.
 
-**Consistency on failover**: When the primary region fails, the secondary region's Elasticsearch cluster reflects Zeebe state up to the point of last successful export — typically within the ~5-minute RPO window. Zeebe's Raft log in the surviving region contains a complete, consistent record of all committed process instances (RPO = 0). Secondary storage state catches up once Zeebe resumes exporting after the failover procedure completes.
+**Consistency on failover**: When the primary region fails, the secondary region's Elasticsearch cluster reflects Zeebe state up to the point of last successful export. Zeebe's Raft log in the surviving region contains a complete, consistent record of all committed process instances (RPO = 0). Secondary storage state catches up once Zeebe resumes exporting after the failover procedure completes.
 
-## Failover runbook
+## Requirements and limitations
 
-This runbook describes the manual procedure to restore service after total primary-region loss. It is based on the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) with Tier 2 RTO context added. For full step-by-step instructions including illustrated diagrams, refer to that page.
+### Installation environment
 
-### Prerequisites
+Two Kubernetes clusters are required for the Helm chart installation.
 
-- A healthy dual-region Camunda deployment before the incident.
-- `kubectl` access to both region clusters configured (for example, contexts named `primary-region` and `secondary-region`).
-- DNS management access to redirect user traffic.
-- Familiarity with the [dual-region concept page](/self-managed/concepts/multi-region/dual-region.md), including limitations and recovery implications.
-
-### Before you trigger failover
-
-:::warning
-Confirm the primary region is genuinely unavailable before initiating failover. Triggering a failover procedure during a transient network event can cause data inconsistencies. Zeebe can tolerate temporary region connectivity loss without data loss, provided sufficient disk space exists; processing halts during the outage but resumes automatically on reconnection.
+:::note
+OpenSearch is **not supported** in dual-region configurations.
 :::
 
-### Failover phase — restore service from secondary region
+#### Network requirements
 
-**Target RTO: ~15 minutes**
+- Kubernetes clusters, services, and pods must not have overlapping CIDRs. Each cluster must use distinct CIDRs that do not conflict or overlap with those of any other cluster to avoid routing issues.
+- The regions (for example, two Kubernetes clusters) must be able to communicate with each other (for example, via VPC peering). See [example implementation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md) for AWS EKS.
+  - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
+    - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md).
+    - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Refer to the [OpenShift dual-region setup guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
+- Maximum network round trip time (**RTT**) between regions should not exceed **100 ms**.
+- Required open ports between the two regions:
+  - **9200** for Elasticsearch (for cross-region data pushed by Zeebe).
+  - **26500** for communication to the Zeebe Gateway from clients/workers.
+  - **26501** and **26502** for communication between Zeebe brokers and the Zeebe Gateway.
 
-**Phase 1 — Confirm region loss and quorum state (0–3 minutes)**
+### Zeebe cluster configuration
 
-1. Confirm primary-region services are unreachable from external health checks.
-2. Confirm the secondary region's Zeebe cluster has lost quorum (processing halted due to broker loss in the primary region).
+The following Zeebe brokers and replication configuration are supported:
 
-```bash
-# Check Zeebe health on the surviving secondary region
-kubectl --context secondary-region -n camunda \
-  port-forward svc/camunda-zeebe-gateway 9600:9600 &
+- `clusterSize` must be a multiple of **2** and at least **4** to evenly distribute brokers across the two regions.
+- `replicationFactor` must be **4** to ensure even partition distribution across regions.
+- `partitionCount` is unrestricted but should be chosen based on workload requirements. See [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior). For more details on partition distribution, see [documentation on partitions](../../../components/zeebe/technical-concepts/partitions.md).
 
-curl -s http://localhost:9600/actuator/health | jq '.status'
-# Expected during quorum loss: "DOWN" or timeout
-```
+Zeebe creates partitions in a [round-robin fashion](/components/zeebe/technical-concepts/partitions.md#partition-distribution). The Helm charts ensures that all brokers with even numbers (0, 2, 4, 6, ...) are created in the same region. The brokers with uneven numbers (1, 3, 5, 7, ...) are created in the other region.
 
-**Phase 2 — Restore Zeebe quorum in the surviving region (< 5 minutes)**
+This numbering and the round-robin partition distribution assures the even replication across the two regions.
 
-Remove the lost-region brokers from the Raft group and restore quorum with the surviving brokers. Follow the [failover phase procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover-phase) for the exact broker removal API commands.
+#### Scaling Zeebe cluster
 
-```bash
-# Example: remove lost brokers via the Zeebe Gateway topology API
-# /TODO: Engineering — add exact broker removal command with example broker IDs for a clusterSize=4 setup}
-```
+Follow the [Cluster Scaling steps](../../components/orchestration-cluster/zeebe/operations/cluster-scaling.md) respecting the [Zeebe cluster configuration](#zeebe-cluster-configuration).
 
-Wait for Zeebe to confirm quorum is restored:
+- The cluster should be evenly scaled, keeping the regions balanced with the same number of brokers.
 
-```bash
-curl -s http://localhost:9600/actuator/health | jq '.status'
-# Expected: "UP"
-```
+### Camunda 8 dual-region limitations
 
-**Phase 3 — Redirect user traffic to secondary region (< 5 minutes)**
+| **Aspect**                  | **Details**                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| :-------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Installation methods        | <p><ul><li>For Kubernetes we recommend using a dual-region Kubernetes setup with the [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md) installed in two Kubernetes clusters.</li><li>For other platforms, using alternative installation methods (for example, docker-compose) is not covered by our guides.</li></ul></p>                                                                                                                       |
+| Traffic Management          | <p>Hybrid active-active/active-passive architecture:</p><p><ul><li>**Data Layer**: Active-active replication with zero RPO.</li><li>**User Traffic**: Active-passive routing to prevent conflicts.</li><li>**All Components**: Must be operational in both regions.</li></ul></p>                                                                                                                                                                                           |
+| Management Identity Support | Management Identity, including multi-tenancy and role-based access control (RBAC), is currently unavailable in this setup. Multi-tenancy and RBAC are supported using the Orchestration Cluster level Admin.                                                                                                                                                                                                                                                                |
+| Optimize Support            | Not supported (requires Management Identity with specific configuration).                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Connectors Deployment       | Connectors can be deployed in a dual-region setup, but attention to [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) is required to avoid event duplication. In a dual-region setup, you'll have two connector deployments, so using message idempotency is critical.                                                                                                                                                   |
+| Connectors                  | If you are running Connectors and have a process with an inbound connector deployed in a dual-region setup, consider the following: <ul><li> when you want to delete the process deployment, delete it via Operate, otherwise the inbound connector won't deregister.</li><li>if you have multiple Operate instances running, then perform the delete operation in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).</li></ul> |
+| Zeebe Cluster Scaling       | Supported. See [Zeebe cluster configuration](#zeebe-cluster-configuration)                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Web Modeler                 | Web Modeler is a standalone component that is not covered in this guide. Modelling applications can operate independently outside of the orchestration clusters. Web Modeler also has a dependency on Management Identity.                                                                                                                                                                                                                                                  |
 
-Update DNS or load balancer configuration to route all user traffic to the secondary region.
+### Infrastructure and deployment platform considerations
 
-```bash
-# AWS Route 53 example — update alias record to secondary region ALB
-aws route53 change-resource-record-sets \
-  --hosted-zone-id <ZONE_ID> \
-  --change-batch file://failover-dns-changeset.json
+Multi-region setups come with inherent complexities, and it is essential to fully understand these challenges before selecting a dual-region configuration.
 
-# Verify DNS propagation (allow for TTL)
-dig <your-camunda-hostname> @8.8.8.8
-```
+The following areas must be managed independently, and are not controlled by Camunda or covered by our guides:
 
-**Phase 4 — Verify service restoration (1–2 minutes)**
+- **Kubernetes cluster management**: Managing multiple Kubernetes clusters and their deployments across regions
+- **Monitoring and alerting**: Dual-region monitoring and alerting with cross-region correlation
+- **Cost implications**: Increased costs of multiple clusters and cross-region traffic
+- **Network reliability**: Data consistency and synchronization challenges (for example, brought in by the increased latency)
+  - Bursts of increased latency can already have an impact
+- **Traffic management**: Managing DNS and incoming traffic routing
+- **Security**: Ensuring consistent security policies and network controls across regions
+- **Backup and disaster recovery**: Coordinating backup strategies across regions
 
-```bash
-# Zeebe health
-curl -s http://localhost:9600/actuator/health | jq '.status'
-# Expected: "UP"
+:::tip Operational Readiness
+Before implementing dual-region, ensure your organization has:
 
-# Navigate to the Operate UI at the secondary region URL
-# Confirm active process instances are visible
-```
+- Experience managing multi-cluster Kubernetes environments
+- Established procedures for cross-region networking and security
+- Monitoring and alerting systems capable of cross-region correlation
+- Defined RTO/RPO requirements and tested recovery procedures
+  :::
 
-**Phase 5 — Address region-specific data loss (if applicable)**
+### Upgrade considerations
 
-If your deployment uses Camunda v1 APIs:
+Follow the upgrade recommendations provided in the [Camunda Helm chart](/self-managed/upgrade/helm/index.md) and the [component-specific upgrade guides](/self-managed/upgrade/components/index.md).
 
-1. Identify uncompleted batch operations that originated in the primary region.
-2. Recreate them in Operate in the secondary region.
-3. Reassign any task assignments that were region-specific in Tasklist.
+The general procedure outlined in the [upgrade overview](/self-managed/upgrade/index.md) also applies. Before starting, always create a [Camunda-supported backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
-:::tip Eliminate this step
-Migrate to the v2 REST API and Tasklist v2 mode to eliminate region-specific data loss entirely. See [active-active mode](/self-managed/concepts/multi-region/dual-region.md#active-active).
+For dual-region setups, use a **staged upgrade approach**: upgrade one region at a time.
+Upgrading both regions simultaneously can cause a **loss of quorum** in Zeebe partitions if brokers in both regions are upgraded at once. To prevent this, complete the upgrade in one region before proceeding with the other, ensuring that only one Zeebe broker is updated during each phase.
+
+However, for certain **minor version upgrades**, simultaneous upgrades of both regions may be required to complete migration steps successfully. Always consult the release notes and migration instructions for your specific version before proceeding.
+
+## Region loss
+
+In a dual-region setup, loss of either region affects Camunda 8's processing capability due to quorum requirements.
+
+When a region becomes unavailable, the Zeebe cluster loses quorum (half of brokers unreachable) and **immediately stops processing** new data. This affects all components as they cannot update or process new processes until the failover procedure completes.
+
+:::warning Immediate Impact
+Region failure results in **immediate service interruption**:
+
+- No new process instances can start
+- Running process instances are suspended
+- User interfaces become unavailable if primary region is lost
+  :::
+
+See the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) for recovery steps from region loss and re-establishment procedures.
+
+:::caution
+You must monitor for region failures and execute the necessary [operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) to ensure smooth recovery and failover.
 :::
 
-### Failback phase — restore dual-region setup
+### Primary region loss
 
-After failover, your deployment runs in a degraded single-region configuration. Follow the [failback phase procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback-phase) to restore a full dual-region setup with a new or repaired primary region.
+If the primary region is lost:
 
-Expected time: **5 minutes + Elasticsearch restore time** (dependent on data volume and backup type — see [dual-region disaster recovery](/self-managed/concepts/multi-region/dual-region.md#disaster-recovery)).
+- **Service disruption**: User traffic is unavailable
+- **Zeebe halt**: Processing stops due to quorum loss
+- **Data loss**: Region-specific data such as batch operations and task assignments is lost (see [Active-active](#active-active))
 
-### RTO summary
+#### Recovery steps for primary region loss
 
-| Phase                                    | Expected duration                  |
-| ---------------------------------------- | ---------------------------------- |
-| Detection and quorum-loss confirmation   | 0–3 minutes                        |
-| Zeebe quorum restoration                 | < 5 minutes                        |
-| DNS traffic redirect                     | < 5 minutes (plus TTL propagation) |
-| Health verification                      | 1–2 minutes                        |
-| **Total — failover to functional state** | **~15 minutes**                    |
+1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the process automation engine (zeebe).
+2. **Traffic rerouting:** Redirect user traffic to the secondary region (now primary).
+3. **Data and task management**:
+   - Reassign uncompleted tasks lost from the previous primary region.
+   - Recreate batch operations in Operate.
+4. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback-phase) to create a new secondary region.
+
+### Secondary region loss
+
+If the secondary region is lost:
+
+- **Zeebe halt**: Processing stops due to quorum loss.
+- **No user impact**: Traffic continues to be served by the primary region during recovery.
+
+#### Recovery steps for secondary region loss
+
+1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover) to temporarily recover and restore processing.
+2. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback) to create a new secondary region.
+
+:::note
+Unlike primary region loss, no user-facing data is lost and no traffic rerouting is necessary.
+:::
+
+### Disaster recovery
+
+Based on all the limitations and requirements outlined in this article, you can consider the **Recovery Point Objective (RPO)** and **Recovery Time Objective (RTO)** in case of a disaster recovery to help with the risk assessment.
+
+The **RPO** is the maximum tolerable data loss measured in time.
+
+The **RTO** is the time to restore services to a functional state.
+
+For Operate, Tasklist, and Zeebe, the **RPO** is **0**.
+
+The **RTO** can be considered for the **failover** and **failback** procedures, both of which result in a functional state.
+
+- **failover** has an **RTO** of **< 1** minute to restore a functional state, excluding DNS reconfiguration and Networking considerations.
+- **failback** has an **RTO** of **5 + X** minutes to restore a functional state, where X is the time it takes to back up and restore Elasticsearch. This timing is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
+
+During our automated tests, the reinstallation and reconfiguration of Camunda 8 takes 5 minutes. This can serve as a general guideline for the time required, though your experience may vary depending on your available resources and familiarity with the operational procedure.
 
 :::info
-RTO estimates are based on Camunda internal operational tests. Actual times vary depending on your environment, network conditions, operator familiarity, and DNS TTL configuration.
+The **Recovery Time Objective (RTO)** estimates are based on our internal tests and should be considered approximate. Actual times may vary depending on your environment, network conditions, operator familiarity, and DNS TTL configuration.
 :::
 
-## Elasticsearch vs. RDBMS secondary storage in Tier 2
+## Further resources
 
-Tier 2 supports both Elasticsearch and RDBMS as secondary storage backends. Choose the backend that matches your existing infrastructure and operational practices.
-
-|                                        | Elasticsearch                                                                      | RDBMS (PostgreSQL / Oracle)                                                                                                                              |
-| -------------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Maturity in Tier 2**                 | Production-proven; the original dual-region backend                                | Supported as of Camunda 8.8                                                                                                                              |
-| **Optimize support**                   | Yes                                                                                | No — use the Elasticsearch path if Optimize is required                                                                                                  |
-| **Backup coordination**                | Zeebe and Elasticsearch must use the same backup ID; coordinated snapshot required | Decoupled — Camunda aligns Zeebe and RDBMS state automatically at restore time                                                                           |
-| **Continuous / scheduled backups**     | Not supported                                                                      | Supported — point-in-time restore available (AWS RDS automated backups, pg_basebackup)                                                                   |
-| **Cross-region replication in Tier 2** | Not required — each region is populated independently by the Zeebe Exporter        | /TODO: Engineering — confirm cross-region RDBMS replication behavior in Tier 2 and whether a standby RDBMS instance is required in the secondary region} |
-| **Infrastructure**                     | Separate Elasticsearch clusters in both regions                                    | Managed database service (Amazon RDS, Amazon Aurora)                                                                                                     |
-| **Upgrade path to Tier 3**             | Must migrate to RDBMS secondary storage before upgrading to Tier 3                 | Direct upgrade path available                                                                                                                            |
-| **Typical fit**                        | Organizations already running Elasticsearch on-prem or in AWS                      | Organizations standardizing on relational databases; BFSI with existing RDS / Aurora investments                                                         |
-
-:::note OpenSearch
-OpenSearch is **not supported** in dual-region configurations. If you use OpenSearch for single-region deployments, you must use the Elasticsearch path or migrate to an RDBMS backend before configuring Tier 2.
-:::
-
-:::note Elasticsearch-to-RDBMS migration within Tier 2
-If you want to switch secondary storage from Elasticsearch to RDBMS while remaining on Tier 2 (without upgrading to Tier 3), a migration path exists. /TODO: Engineering — add or link Elasticsearch-to-RDBMS migration guide.}
-:::
-
-## Upgrade path to Tier 3
-
-Tier 3 — Active-Active — adds engine-level RDBMS failover detection and automatic reconciliation after region loss, delivering near-zero RTO and RPO for mission-critical workloads. Tier 3 is targeted for General Availability in Camunda 8.10 (October 2026).
-
-Upgrading from Tier 2 requires the following infrastructure and configuration changes:
-
-1. **Switch to RDBMS secondary storage (if not already using it)** — Tier 3 requires a relational database as secondary storage. If you currently use Elasticsearch, migrate to RDBMS first. /TODO: Engineering — add link to Elasticsearch-to-RDBMS migration guide.}
-
-2. **Provision a globally distributed RDBMS** — Configure Amazon Aurora Global Database (PostgreSQL) or Oracle with cross-region replication as the Tier 3 secondary storage target. /TODO: Engineering — add Aurora Global DB provisioning guide and Oracle cross-region replication reference.}
-
-3. **Enable engine-level RDBMS failover detection** — Configure Zeebe to detect RDBMS failover events and trigger automatic reconciliation across the surviving region. /TODO: Engineering — add configuration reference once Tier 3 engine capabilities reach GA in 8.10.}
-
-4. **Validate using the Cluster Restore API** — Run a DR drill using the Cluster Restore API to confirm near-zero RTO behavior before certifying the Tier 3 posture. /TODO: Engineering — add Cluster Restore API documentation link.}
-
-:::info Tier 3 availability
-Tier 3 engine capabilities (RDBMS failover detection, automatic reconciliation, ECS broker identity management, and the Cluster Restore API) are tracked in a companion engineering epic and targeted for General Availability in Camunda 8.10 (October 2026). Tier 3 documentation will be published as Early Access ahead of GA.
-:::
+- Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS that utilizes the managed EKS and VPC peering for a dual-region setup with Terraform.
+  - The concepts in the guide are mainly cloud-agnostic, and the guide can be adopted by other cloud providers.
+- Familiarize yourself with the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.
 
 ## Related documentation
 
 - [Multi-region resilience tiers overview](./resilience-tiers.md)
 - [Tier 1 — Cold Recovery](./tier-1-cold-recovery.md)
-- [Dual-region concept](/self-managed/concepts/multi-region/dual-region.md)
 - [Dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md)
 - [Amazon EKS dual-region setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)
 - [Camunda backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md)

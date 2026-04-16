@@ -2044,7 +2044,7 @@ module.exports = {
           },
           items: [
             "self-managed/concepts/multi-region/tier-1-cold-recovery",
-            "self-managed/concepts/multi-region/dual-region",
+            "self-managed/concepts/multi-region/tier-2-dual-region",
           ],
         },
         "self-managed/operational-guides/data-purge",
