@@ -119,14 +119,14 @@ Compare the paths of successful and canceled instances in Operate.
 
 The process uses no external code. All logic is expressed using [FEEL expressions](/components/modeler/feel/what-is-feel.md) in script tasks and a [DMN decision table](/components/modeler/dmn/decision-table.md).
 
-| Task             | FEEL expression                                                                                                    | Output variable  |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| Pre-flight check | `if fuelLevel >= 50 then "ALL SYSTEMS GO" else ...` (sets status to cancel)                                        | `systemStatus`   |
-| Cancel mission   | `"Mission " + missionName + " scrubbed — not enough fuel (" + string(fuelLevel) + "%)"`                            | `missionResult`  |
-| Plot destination | DMN table: `>= 90` → Venus, `>= 75` → Mars, `>= 50` → Moon                                                         | `destination`    |
-| Burn stage 1     | `fuelLevel - 25`                                                                                                   | `fuelAfterBurn`  |
-| Run experiments  | `if fuelLevel > 75 then 5 else 3`                                                                                  | `experimentsRun` |
-| Mission report   | `"Crew reached " + destination + "! Fuel: " + string(fuelAfterBurn) + "%. Experiments: " + string(experimentsRun)` | `missionResult`  |
+| Task             | FEEL expression                                                                                                                        | Output variable  |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| Pre-flight check | `if fuelLevel >= 50 then "ALL SYSTEMS GO" else ...` (sets status to cancel)                                                            | `systemStatus`   |
+| Cancel mission   | `"Mission " + missionName + " scrubbed — not enough fuel (" + string(fuelLevel) + "%)"`                                                | `missionResult`  |
+| Plot destination | DMN table: `>= 90` → Venus, `>= 75` → Mars, `>= 50` → Moon                                                                             | `destination`    |
+| Burn stage 1     | `fuelLevel - 25`                                                                                                                       | `fuelAfterBurn`  |
+| Run experiments  | `if fuelLevel > 75 then 5 else 3`                                                                                                      | `experimentsRun` |
+| Mission report   | `"Crew " + missionName + " reached " + destination + "! Fuel: " + string(fuelAfterBurn) + "%. Experiments: " + string(experimentsRun)` | `missionResult`  |
 
 ## Step 6: Clean up
 
