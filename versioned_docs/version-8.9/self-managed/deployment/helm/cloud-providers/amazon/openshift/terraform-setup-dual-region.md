@@ -160,18 +160,18 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
    https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/clusters/config.tf
    ```
 
-5. Review the file named `cluster_region_1.tf` in the same directory.
-   This file describes the cluster of the region 1, you may want to customize the `locals` variables with parameters of your choice, those are described in the next steps.
+5. Review the file named `cluster_region_0.tf` in the same directory.
+   This file describes the cluster of the region 0, you may want to customize the `locals` variables with parameters of your choice, those are described in the next steps.
+
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_0.tf
+   ```
+
+6. Do the same review with `cluster_region_1.tf` and adjust it to your needs.
+   This file describes the cluster of the region 1:
 
    ```hcl reference
    https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
-   ```
-
-6. Do the same review with `cluster_region_2.tf` and adjust it to your needs.
-   This file describes the cluster of the region 2:
-
-   ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_2.tf
    ```
 
 7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
