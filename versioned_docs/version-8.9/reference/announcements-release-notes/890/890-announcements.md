@@ -364,6 +364,27 @@ Previously, only the first conversion error was returned. This fix improves cons
 </div>
 <div className="release-announcement-content">
 
+#### Streamlined SaaS orchestration architecture
+
+Camunda 8.9 introduces the streamlined SaaS orchestration architecture. As part of this change, the primary cluster endpoints have moved to the unified `*.api.camunda.io` domain.
+
+The previous component-specific endpoints (for example, `*.zeebe.camunda.io`, `*.operate.camunda.io`, `*.tasklist.camunda.io`) remain available for backward compatibility in 8.9, but are **deprecated** and planned for **removal in Camunda 8.10**.
+
+**Impact:** If you use custom applications, scripts, SDKs, or tooling that construct or store cluster URLs (including deployment endpoints), update them to the new unified endpoints to avoid issues when the legacy endpoints are removed.
+
+**Action:** Update your integrations to use the new endpoint format and review the streamlined architecture documentation for details.
+
+<p className="link-arrow">[Streamlined SaaS orchestration architecture](../../../apis-tools/migration-manuals/saas-orchestration-architecture.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Type-safe pagination model in the Camunda Java client
 
 Starting with 8.9.0, the Camunda Java client uses type-safe pagination interfaces (`AnyPage`, `OffsetPage`, `CursorForwardPage`, `CursorBackwardPage`) instead of the previous `SearchRequestPage` class. Each search or statistics endpoint now exposes only the pagination methods it actually supports.
