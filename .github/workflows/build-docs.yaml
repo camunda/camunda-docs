@@ -1,14 +1,6 @@
 name: build-docs
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened, labeled]
-
-# If the workflow is triggered while an instance is already running,
-# cancel the in-progress instance.
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+on: pull_request
 
 jobs:
   build-docs:
@@ -24,14 +16,13 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NODE_OPTIONS: --max-old-space-size=30720
+          NODE_OPTIONS: --max_old_space_size=8192
       - name: Upload build
         uses: actions/upload-artifact@v4
         with:
           name: docs-build
           path: build
           include-hidden-files: true
-
   validate-links:
     runs-on: gcp-core-16-default
     needs: build-docs
@@ -102,116 +93,3 @@ jobs:
         uses: ./.github/actions/muffet
         with:
           url_to_validate: http://localhost:8081/connectors-element-template-links.html
-
-  deploy-preview:
-    # If the 'deploy' label is applied to an open PR, deploy the artifacts
-    # to the preview environment. In this job, we reuse the build from the
-    # build-docs job to avoid unnecessary rebuilds.
-    name: deploy-preview-env
-    runs-on: ubuntu-24.04
-    needs: build-docs
-    if: >
-      github.event.pull_request.state != 'closed' &&
-      contains(github.event.pull_request.labels.*.name, 'deploy')
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-
-      - name: Import secrets from Vault
-        id: secrets
-        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
-        with:
-          url: ${{ secrets.VAULT_ADDR }}
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
-          secrets: |
-            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
-            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
-
-      - name: Upsert comment with build status
-        uses: mshick/add-pr-comment@v3
-        with:
-          refresh-message-position: true
-          message: |
-            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 8-10 minutes.
-
-      - name: Download build
-        uses: actions/download-artifact@v4
-        with:
-          name: docs-build
-          path: build
-
-      - name: Authenticate with Google Cloud
-        uses: google-github-actions/auth@v3
-        with:
-          credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_GCLOUD_SA_KEY }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v3
-
-      - name: Start Deployment
-        uses: bobheadxi/deployments@v1
-        id: deployment
-        with:
-          step: start
-          token: ${{ github.token }}
-          env: ${{ github.event.repository.name }}
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Update comment with upload status
-        uses: mshick/add-pr-comment@v3
-        with:
-          refresh-message-position: true
-          message: |
-            :arrow_up: The preview environment build results for commit ${{ github.sha }} are being uploaded. This usually takes 3-4 minutes.
-
-      - name: Upload files to Google bucket
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
-        run: |
-          gsutil -m rsync -d -r build gs://$BUCKET_NAME/pr-${{ github.event.number }}
-
-      - uses: bobheadxi/deployments@v1
-        with:
-          step: finish
-          token: ${{ github.token }}
-          status: ${{ job.status }}
-          env: ${{ steps.deployment.outputs.env }}
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
-
-      - name: Update comment with deployment status
-        uses: mshick/add-pr-comment@v3
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
-        with:
-          refresh-message-position: true
-          message: |
-            The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/)
-
-  retry-shutdowns:
-    # Because we run these jobs on preemptible runners, they can be shut down
-    # automatically at any time. Instead of requiring a manual rerun every time
-    # this happens, use the reusable action developed by the infra team to retry.
-    runs-on: ubuntu-latest
-    needs:
-      - build-docs
-      - validate-links
-      - deploy-preview
-    if: failure() && fromJSON(github.run_attempt) < 3
-    steps:
-      - name: Retry job
-        uses: camunda/infra-global-github-actions/rerun-failed-run@main
-        with:
-          error-messages: |
-            The runner has received a shutdown signal.
-            The operation was canceled.
-          run-id: ${{ github.run_id }}
-          repository: ${{ github.repository }}
-          vault-addr: ${{ secrets.VAULT_ADDR }}
-          vault-role-id: ${{ secrets.VAULT_ROLE_ID }}
-          vault-secret-id: ${{ secrets.VAULT_SECRET_ID }}
