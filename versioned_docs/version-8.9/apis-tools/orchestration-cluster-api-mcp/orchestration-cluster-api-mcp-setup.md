@@ -116,7 +116,8 @@ The proxy authenticates to the MCP server using OAuth 2.0 client credentials, an
 
 #### Configuration
 
-Add the following to your MCP client configuration (for example, `.vscode/mcp.json` for VS Code, or `claude_desktop_config.json` for Claude Code):
+Add the following to your MCP client configuration.
+For example, use the following in `claude_desktop_config.json` for Claude Code:
 
 ```json
 {
