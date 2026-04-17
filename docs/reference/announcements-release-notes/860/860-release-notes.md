@@ -17,7 +17,7 @@ These release notes identify the new features included in 8.6, including [alpha 
 
 ### Spring Zeebe SDK - Spring-Boot 3.5 support
 
-As the [Spring-Boot OSS Support](https://spring.io/projects/spring-boot#support) for the bundled Spring-Boot version 3.4 ends in in 2025-12, [Spring-Boot 3.5.x compatibility](../../../../versioned_docs/version-8.6/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verfied since the `8.6.30` patch onward.
+As the [Spring-Boot OSS Support](https://spring.io/projects/spring-boot#support) for the bundled Spring-Boot version 3.4 ends in in 2025-12, [Spring-Boot 3.5.x compatibility](../../../../versioned_docs/version-8.6/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified since the `8.6.30` patch onward.
 
 ## 8.6.7
 

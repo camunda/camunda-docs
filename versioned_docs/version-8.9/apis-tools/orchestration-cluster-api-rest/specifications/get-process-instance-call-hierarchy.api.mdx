@@ -1,0 +1,390 @@
+---
+id: get-process-instance-call-hierarchy
+title: "Get call hierarchy"
+description: "<MarkerEventuallyConsistentExtension />"
+sidebar_label: "Get call hierarchy"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get call hierarchy"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/process-instances/{processInstanceKey}/call-hierarchy"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The key of the process instance to fetch the hierarchy for.",
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        example: "2251799813690746",
+        description: "System-generated key for a process instance.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The call hierarchy is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              type: "object",
+              required: [
+                "processInstanceKey",
+                "processDefinitionKey",
+                "processDefinitionName",
+              ],
+              properties: {
+                processInstanceKey: {
+                  allOf: [
+                    {
+                      description:
+                        "System-generated key for a process instance.",
+                      format: "ProcessInstanceKey",
+                      example: "2251799813690746",
+                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ProcessInstanceKey",
+                    },
+                  ],
+                  description: "The key of the process instance.",
+                },
+                processDefinitionKey: {
+                  allOf: [
+                    {
+                      description:
+                        "System-generated key for a deployed process definition.",
+                      format: "ProcessDefinitionKey",
+                      example: "2251799813686749",
+                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ProcessDefinitionKey",
+                    },
+                  ],
+                  description: "The key of the process definition.",
+                },
+                processDefinitionName: {
+                  type: "string",
+                  description:
+                    "The name of the process definition (fall backs to the process definition id if not available).",
+                },
+              },
+              title: "ProcessInstanceCallHierarchyEntry",
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

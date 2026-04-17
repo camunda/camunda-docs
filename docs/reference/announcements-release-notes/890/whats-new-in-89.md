@@ -154,6 +154,10 @@ The Camunda 8 Run CLI and configuration is enhanced to:
 
 These changes reduce friction when setting up Camunda 8 Run for the first time, debugging local setup issues, and switching between different configurations or environments.
 
+:::info Breaking change
+The `--docker` flag and bundled Docker Compose files have been removed from Camunda 8 Run. Docker Compose is now a standalone distribution artifact. See [release announcements](/reference/announcements-release-notes/890/890-announcements.md#camunda-8-run-docker-compose-support-removed) for migration details.
+:::
+
 <p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
 ### Secondary storage
