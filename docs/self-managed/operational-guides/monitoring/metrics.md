@@ -276,10 +276,10 @@ Optimize records report evaluation latency with the following labels:
 - `REPORT_NAME`
 - `REPORT_ID`
 
-To enable this metric, set `optimize.metrics.report-latency.enabled` to:
+To enable this metric, set `optimize.metrics.report-latency.enabled` to one of the following values:
 
-- `true` – Report latency metrics are emitted.
-- `false` – Report latency metrics are not emitted.
+- `true` – Emits report latency metrics.
+- `false` – Does not emit report latency metrics.
 
 ## Grafana
 

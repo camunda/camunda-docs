@@ -57,7 +57,7 @@ camunda:
 
 **Environment variables:**
 
-Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_...` (for example,, `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_URL`).
+Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_...` (for example, `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_URL`).
 
 **Helm:**
 
@@ -219,7 +219,7 @@ camunda:
 Behavior overview:
 
 - If `export-local-variables` is set to `false`, no local variables are exported.
-- If all `*-root` and `*-local` lists are empty, only the global filters (`variable-name-*` and `variable-value-type-*`) apply. This preserves the behavior from earlier versions.
+- If all `*-root` and `*-local` lists are empty, only the global filters (`variable-name-*` and `variable-value-type-*`) apply. This preserves behavior from earlier versions.
 - If any root-specific or local-specific list is non-empty, that scope uses both the global filters and the scope-specific filters.
 - Exclusion filters take precedence over inclusion filters.
 
