@@ -12,7 +12,6 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--short">30 minutes</span>
 
 Run your first fully-automated BPMN process locally with Camunda 8.
 
@@ -82,7 +81,7 @@ The starter package includes the following components:
 { "missionName": "Odyssey", "fuelLevel": 95 }
 ```
 
-## Step 3: Monitor your process in Operate
+## Step 3: Explore your process in Operate
 
 1. Navigate to Operate at [http://localhost:8080/operate](http://localhost:8080/operate) and log in using the `demo` / `demo` credentials.
 1. Find the **Rocket Launch** process and click your running instance.
@@ -91,17 +90,13 @@ The starter package includes the following components:
 Data needs to sync to Operate, so your process instance may not be visible immediately.
 :::
 
-### What to inspect
+### Watch the timer
 
-- **Timer waiting**: The token pauses at "Countdown T-10" for 10 seconds. You can see it live.
-- **Different paths**: Compare a successful vs. canceled instance.
-- **DMN decision**: Destination is set by `plot-destination` based on `fuelLevel`.
-- **Parallel execution**: Both "Burn stage 1" and "Run experiments" complete independently.
-- **Variables**: Examine the `destination`, `fuelAfterBurn`, `missionResult` variables.
+Your process instance pauses at the "Countdown T-10" task for 10 seconds. Open the instance in Operate and watch the token move through the countdown in real time.
 
-## Step 4: Try different scenarios
+### Try different fuel levels
 
-Go back to Modeler and start additional process instances with different fuel levels to explore the different paths.
+Go back to Camunda Modeler and start additional process instances with different `fuelLevel` values. Then switch to Operate to compare how each instance takes a different path.
 
 Here’s what happens based on your `fuelLevel` input:
 
@@ -113,9 +108,11 @@ Here’s what happens based on your `fuelLevel` input:
 | `50 – 74`   | Launch proceeds — destination set to **Moon** (3 experiments)    |
 | `< 50`      | **Mission canceled** — the process ends on the cancellation path |
 
-Compare the paths of successful and canceled instances in Operate.
+### Inspect variables
 
-## Step 5: Understand how it works
+Click on a completed instance in Operate and open the **Variables** panel. You can see the variables the process created, such as `destination`, `fuelAfterBurn`, and `missionResult`. Compare the variables between a successful launch and a canceled mission to see how the process logic sets different values.
+
+## Step 4: Understand how it works
 
 The process uses no external code. All logic is expressed using [FEEL expressions](/components/modeler/feel/what-is-feel.md) in script tasks and a [DMN decision table](/components/modeler/dmn/decision-table.md).
 
@@ -128,7 +125,7 @@ The process uses no external code. All logic is expressed using [FEEL expression
 | Run experiments  | `if fuelLevel > 75 then 5 else 3`                                                                                                      | `experimentsRun` |
 | Mission report   | `"Crew " + missionName + " reached " + destination + "! Fuel: " + string(fuelAfterBurn) + "%. Experiments: " + string(experimentsRun)` | `missionResult`  |
 
-## Step 6: Clean up
+## Step 5: Clean up
 
 Navigate back to Operate and verify that your process instances have completed successfully (or were canceled, depending on the fuel level).
 
@@ -157,15 +154,10 @@ You can now stop your Camunda 8 Run local environment by executing the following
 
 ## Next steps
 
-Now that you've run your first BPMN process in Camunda 8, you can tailor it further.
-For example:
+Now that you've run your first BPMN process in Camunda 8, explore more of the platform:
 
-- Tune fuel thresholds by editing the FEEL and DMN logic.
-- Experiment with the timer and watch the countdown in real time.
-- Try adding a third task inside the parallel block.
-- Insert a manual approval step before launch using a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md).
-
-You can also:
-
-- [Build your first AI agent](./getting-started-agentic-orchestration.md).
-- [Run your first BPMN process using service workers](./getting-started-example.md).
+- [Build your first AI agent](./getting-started-agentic-orchestration.md)
+- [Run your first Spring Boot or Node.js project with service workers](./getting-started-example.md)
+- [Learn about BPMN elements supported in Camunda](/components/modeler/bpmn/bpmn-coverage.md)
+- [Learn about FEEL expressions](/components/modeler/feel/what-is-feel.md)
+- [Learn about DMN decision tables](/components/modeler/dmn/decision-table.md)
