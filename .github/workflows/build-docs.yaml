@@ -1,6 +1,14 @@
 name: build-docs
 
-on: pull_request
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+
+# If the workflow is triggered while an instance is already running,
+# cancel the in-progress instance.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-docs:
