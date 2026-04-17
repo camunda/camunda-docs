@@ -8,44 +8,31 @@ description: "After you've created a BPMN diagram, you can start modeling it."
 
 After you've created a BPMN diagram, you can start modeling it.
 
-We've preconfigured a diagram consisting of a start event. To convert it to something meaningful, append a **Task** to it, and afterwards append an **EndEvent**:
+A new diagram contains a single start event, the starting point of every process. From here, you can add elements to build out your process.
 
-![add task](../img/web-modeler-add-task.png)
-![add task](../img/web-modeler-add-endevent.png)
+![Initial diagram](./img/model-your-first-diagram/model-1.png)
 
-Each element has adjustable attributes. Use the properties panel on the right side of the page.
+Using the plus icon of the **context pad**, append your first element, such as a task.
 
-Elements supporting different types can be reconfigured by clicking on the corresponding icon. In the following screenshot, a task has been added to the diagram. It can be converted to a service task, for example.
+![Append menu](./img/model-your-first-diagram/model-2.png)
 
-![task configuration](../img/web-modeler-new-diagram-with-configuration.png)
+To change the type of an element, use the replace icon in the context pad. For example, you can turn a generic task into a user task.
 
-To revert or reapply changes, you can use the **undo** and **redo** buttons located below the elements palette.
+![Replace menu](./img/model-your-first-diagram/model-3.png)
 
-![undo and redo buttons](../img/undo-redo.png)
+You can also use the context pad to link resources, such as forms, to an element.
+
+![Properties panel](./img/model-your-first-diagram/model-4.png)
+
+Use the **properties panel** on the right side to inspect and edit the technical properties of each element.
+
+![Properties panel](./img/model-your-first-diagram/model-5.png)
+
+To revert or reapply changes, use the **undo** and **redo** buttons on the canvas.
 
 :::info
 See undo/redo management limitations when [Collaborating](../collaboration/collaboration.md#undoredo-management-limitations) and [Importing](import-diagram.md#undoredo-management-limitations).
 :::
-
-Use the canvas tools in the bottom right corner to interact with your diagram.
-
-1. Zoom in.
-   ![zoom in](../img/zoom-in.png)
-
-2. Zoom out.
-   ![zoom in](../img/zoom-out.png)
-
-3. Reset viewport if you get lost on the canvas.
-   ![reset view port](../img/reset-viewport.png)
-
-4. Open the minimap to navigate complex diagrams.
-   ![mini map](../img/minimap.png)
-
-5. Enter the fullscreen mode for distraction-free modeling.
-   ![full screen](../img/fullscreen.png)
-
-6. Drop an attention point and use it as a laser pointer in your presentations.
-   ![attention grabber](../img/attention-grabber.png)
 
 ## Additional resources
 
