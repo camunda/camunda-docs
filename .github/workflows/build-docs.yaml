@@ -193,6 +193,7 @@ jobs:
     needs:
       - build-docs
       - validate-links
+      - deploy-preview
     if: failure() && fromJSON(github.run_attempt) < 3
     steps:
       - name: Retry job
