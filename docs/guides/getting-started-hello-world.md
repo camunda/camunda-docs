@@ -92,12 +92,17 @@ Data needs to sync to Operate, so your process instance may not be visible immed
 
 ### Watch the timer
 
-Your process instance pauses at the "Countdown T-10" task for 10 seconds. Open the instance in Operate and watch the token move through the countdown in real time.
+Your process instance pauses at the **Countdown T-10** task for 10 seconds. Open the instance in Operate and watch the token move through the countdown in real time.
 
-### Try different fuel levels
+### Inspect variables
 
-Go back to Camunda Modeler and start additional process instances with different `fuelLevel` values. Then switch to Operate to compare how each instance takes a different path.
+Click a completed instance in Operate and open the **Variables** panel. You can see the variables the process created, such as `destination`, `fuelAfterBurn`, and `missionResult`.
 
+Compare the variables between a successful launch and a canceled mission to see how the process logic sets different values.
+
+## Step 4: Try different scenarios
+
+Start additional process instances in Modeler with different `fuelLevel` values.
 Here’s what happens based on your `fuelLevel` input:
 
 | `fuelLevel` | What happens                                                     |
@@ -108,11 +113,11 @@ Here’s what happens based on your `fuelLevel` input:
 | `50 – 74`   | Launch proceeds — destination set to **Moon** (3 experiments)    |
 | `< 50`      | **Mission canceled** — the process ends on the cancellation path |
 
-### Inspect variables
+:::tip
+Go to Operate to compare how each process instance takes a different path.
+:::
 
-Click on a completed instance in Operate and open the **Variables** panel. You can see the variables the process created, such as `destination`, `fuelAfterBurn`, and `missionResult`. Compare the variables between a successful launch and a canceled mission to see how the process logic sets different values.
-
-## Step 4: Understand how it works
+## Step 5: Understand how it works
 
 The process uses no external code. All logic is expressed using [FEEL expressions](/components/modeler/feel/what-is-feel.md) in script tasks and a [DMN decision table](/components/modeler/dmn/decision-table.md).
 
@@ -125,7 +130,7 @@ The process uses no external code. All logic is expressed using [FEEL expression
 | Run experiments  | `if fuelLevel > 75 then 5 else 3`                                                                                                      | `experimentsRun` |
 | Mission report   | `"Crew " + missionName + " reached " + destination + "! Fuel: " + string(fuelAfterBurn) + "%. Experiments: " + string(experimentsRun)` | `missionResult`  |
 
-## Step 5: Clean up
+## Step 6: Clean up
 
 Navigate back to Operate and verify that your process instances have completed successfully (or were canceled, depending on the fuel level).
 
@@ -156,8 +161,6 @@ You can now stop your Camunda 8 Run local environment by executing the following
 
 Now that you've run your first BPMN process in Camunda 8, explore more of the platform:
 
-- [Build your first AI agent](./getting-started-agentic-orchestration.md)
-- [Run your first Spring Boot or Node.js project with service workers](./getting-started-example.md)
-- [Learn about BPMN elements supported in Camunda](/components/modeler/bpmn/bpmn-coverage.md)
-- [Learn about FEEL expressions](/components/modeler/feel/what-is-feel.md)
-- [Learn about DMN decision tables](/components/modeler/dmn/decision-table.md)
+- [Build your first AI agent](./getting-started-agentic-orchestration.md).
+- [Run your first Spring Boot or Node.js project with service workers](./getting-started-example.md).
+- [Learn more about the BPMN, DMN, and FEEL elements supported in Camunda](docs/components/concepts/bpmn-dmn-feel.md).
