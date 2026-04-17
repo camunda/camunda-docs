@@ -432,6 +432,29 @@ Previously, customers had to handle both empty string and absent/null to determi
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Process Test: Connectors port changed from 8085 to 8086
+
+Starting with Camunda 8.9.1, the default Connectors REST API port for Camunda Process Test remote runtime has changed from 8085 to 8086.
+
+This change aligns with Camunda 8 Run, which exposes Connectors on port 8086 as of version 8.9.1. The previous default port 8085 would break inbound connector invocations when running tests against Camunda 8 Run.
+
+**Action:** If you use Camunda Process Test with remote runtime configuration:
+
+- Update your `connectors-rest-api-address` configuration to use port 8086 instead of 8085.
+- If you explicitly configured port 8085 in your test configuration, update it to 8086.
+- If you rely on the default configuration, no action is needed—the default is now 8086.
+
+<p className="link-arrow">[Camunda Process Test configuration](/apis-tools/testing/configuration.md#remote-runtime)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">

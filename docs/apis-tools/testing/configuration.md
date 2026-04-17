@@ -724,7 +724,7 @@ camunda:
     # Change the connection (default: Camunda 8 Run)
     remote:
       camunda-monitoring-api-address: http://0.0.0.0:9600
-      connectors-rest-api-address: http://0.0.0.0:8085
+      connectors-rest-api-address: http://0.0.0.0:8086
       # The connection timeout in ISO-8601 duration format (default: PT1M)
       runtime-connection-timeout: PT1M
       client:
@@ -742,7 +742,7 @@ In your `/camunda-container-runtime.properties` file:
 runtimeMode=remote
 # Change the connection (default: Camunda 8 Run)
 remote.camundaMonitoringApiAddress=http://0.0.0.0:9600
-remote.connectorsRestApiAddress=http://0.0.0.0:8085
+remote.connectorsRestApiAddress=http://0.0.0.0:8086
 remote.client.grpcAddress=http://0.0.0.0:26500
 remote.client.restAddress=http://0.0.0.0:8080
 # The connection timeout in ISO-8601 duration format (default: PT1M)
@@ -770,7 +770,7 @@ public class MyProcessTest {
                             .grpcAddress(URI.create("http://0.0.0.0:26500"))
                     )
                     .withRemoteCamundaMonitoringApiAddress(URI.create("http://0.0.0.0:9600"))
-                    .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"))
+                    .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8086"))
                     // Change the connection timeout (default: PT1M)
                     .withRemoteRuntimeConnectionTimeout(Duration.ofMinutes(1));
 }
