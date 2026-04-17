@@ -9,38 +9,24 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-For supported Elasticsearch versions in Camunda 8 Self-Managed, see
-[supported environments](/reference/supported-environments.md#camunda-8-self-managed).
+For supported Elasticsearch versions in Camunda 8 Self-Managed, see [supported environments](/reference/supported-environments.md#camunda-8-self-managed).
 
-Starting with Camunda 8.8, Camunda uses the
-[Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)
-to consume new records. Records from 8.7 and earlier are consumed only during migration.
+Starting with Camunda 8.8, Camunda uses the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) to consume new records. Records from 8.7 and earlier are consumed only during migration.
 
-The Elasticsearch and OpenSearch exporters remain fully usable after migration
-(for example, for existing setups, Optimize, or other custom use cases).
-Their functionality is not limited to the migration period.
+The Elasticsearch and OpenSearch exporters remain fully usable after migration (for example, for existing setups, Optimize, or other custom use cases). Their functionality is not limited to the migration period.
 
-From 8.9 onward, the Elasticsearch exporter also supports Optimize-focused
-export filters (for example, variable-name filters, variable-type filters,
-BPMN process include/exclude, and an Optimize mode flag).
+From 8.9 onward, the Elasticsearch exporter also supports Optimize-focused export filters (for example, variable-name filters, variable-type filters, BPMN process include/exclude, and an Optimize mode flag).
 
-For Optimize-specific guidance and recommended settings, see
-[Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
+For Optimize-specific guidance and recommended settings, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 :::
 
-The Zeebe Elasticsearch exporter acts as a bridge between
-[Zeebe](https://zeebe.io/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch) by
-exporting records written to Zeebe streams as documents into several indices.
+The Zeebe Elasticsearch exporter acts as a bridge between [Zeebe](https://zeebe.io/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch) by exporting records written to Zeebe streams as documents into several indices.
 
 ## Concept
 
-The exporter operates on the idea that it should perform as little as possible on the Zeebe side of
-things. In other words, you can think of the indexes into which the records are exported as a
-staging data warehouse. Any enrichment or transformation on the exported data should be performed by
-your own ETL jobs.
+The exporter operates on the idea that it should perform as little as possible on the Zeebe side of things. In other words, you can think of the indexes into which the records are exported as a staging data warehouse. Any enrichment or transformation on the exported data should be performed by your own ETL jobs.
 
-When configured to do so, the exporter will automatically create an index per record value type (see the value type in the Zeebe protocol). Each of these indexes has a
-corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find
+When configured to do so, the exporter will automatically create an index per record value type (see the value type in the Zeebe protocol). Each of these indexes has a corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find
 those as templates in [the resources folder of the exporter's source code](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter/src/main/resources).
 
 :::note
@@ -99,10 +85,7 @@ options, and the default values for these options:
 
 <TabItem value="index">
 
-In most cases, you will not be interested in exporting every single record produced by a Zeebe
-cluster, but rather only a subset of them. This can also be configured to limit the kinds of records
-being exported (e.g. only events, no commands), and the value type of these records (e.g. only job
-and process values).
+In most cases, you will not be interested in exporting every single record produced by a Zeebe cluster, but rather only a subset of them. This can also be configured to limit the kinds of records being exported (e.g. only events, no commands), and the value type of these records (e.g. only job and process values).
 
 | Option                           | Description                                                                                                                                                                                                                                                                                                                                                        | Default         |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
@@ -172,8 +155,7 @@ For details on how this interacts with Optimize, see [Camunda 8 system configura
 
 ### Variable-type filters
 
-Variable-type filters let you restrict exported variables by their inferred JSON type,
-such as `String`, `Number`, `Boolean`, `Object` or `Null`.
+Variable-type filters let you restrict exported variables by their inferred JSON type, such as `String`, `Number`, `Boolean`, `Object` or `Null`.
 The exporter first matches variable types against inclusion rules (if present), then against exclusion rules. If a variable type matches both, the exclusion wins.
 Configuration:
 
@@ -191,8 +173,81 @@ camunda:
               - Object
 ```
 
-Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
-[Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
+Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
+
+### Scope-aware variable export
+
+The Elasticsearch exporter can filter root and local variables differently.
+
+- Root variables are created in the process-instance scope and are visible throughout the process instance.
+- Local variables are created in a child scope, such as a subprocess, call activity, or task, and are visible only in that scope and its children.
+
+Configure these options under `index`:
+
+```yaml
+camunda:
+  data:
+    exporters:
+      elasticsearch:
+        args:
+          index:
+            export-local-variables: true
+
+            # Root variable name filters
+            variable-name-inclusion-exact-root: []
+            variable-name-inclusion-start-with-root: []
+            variable-name-inclusion-end-with-root: []
+            variable-name-exclusion-exact-root: []
+            variable-name-exclusion-start-with-root: []
+            variable-name-exclusion-end-with-root: []
+
+            # Local variable name filters
+            variable-name-inclusion-exact-local: []
+            variable-name-inclusion-start-with-local: []
+            variable-name-inclusion-end-with-local: []
+            variable-name-exclusion-exact-local: []
+            variable-name-exclusion-start-with-local: []
+            variable-name-exclusion-end-with-local: []
+
+            # Root variable type filters
+            variable-value-type-inclusion-root: []
+            variable-value-type-exclusion-root: []
+
+            # Local variable type filters
+            variable-value-type-inclusion-local: []
+            variable-value-type-exclusion-local: []
+```
+
+Behavior overview:
+
+- If `export-local-variables` is set to `false`, no local variables are exported.
+- If all `*-root` and `*-local` lists are empty, only the global filters (`variable-name-*` and `variable-value-type-*`) apply. This preserves the behavior from earlier versions.
+- If any root-specific or local-specific list is non-empty, that scope uses both the global filters and the scope-specific filters.
+- Exclusion filters take precedence over inclusion filters.
+
+#### Example configuration
+
+Export only selected root variables and exclude temporary local variables:
+
+```yaml
+index:
+  export-local-variables: true
+
+  # Include only specific root variables
+  variable-name-inclusion-exact-root: ["customerId", "orderId"]
+
+  # Exclude local variables used for temporary processing
+  variable-name-exclusion-start-with-local: ["tmp_", "debug_"]
+
+  # Export only simple root variable types
+  variable-value-type-inclusion-root: ["String", "Long"]
+```
+
+In this example:
+
+- Only `customerId` and `orderId` root variables are exported.
+- Local variables starting with `tmp_` or `debug_` are excluded.
+- Only root variables of type `String` and `Long` are exported.
 
 ### BPMN process filters
 
@@ -241,9 +296,7 @@ Use this flag only if the exporter indices are dedicated to Optimize. For SaaS a
 
 <TabItem value="bulk">
 
-To avoid too many expensive requests to the Elasticsearch cluster, the exporter performs batch
-updates by default. The size of the batch, along with how often it should be flushed (regardless of
-size) can be controlled by configuration.
+To avoid too many expensive requests to the Elasticsearch cluster, the exporter performs batch updates by default. The size of the batch, along with how often it should be flushed (regardless of size) can be controlled by configuration.
 
 | Option       | Description                                                                                                                                                    | Default            |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
@@ -372,8 +425,7 @@ camunda:
 The Zeebe Elasticsearch exporter does not [currently support](https://github.com/camunda/camunda/issues/9839) connecting to Elasticsearch using self-signed certificates.
 If you must use self-signed certificates, it is possible to build your own trust store and have the application use it.
 
-In this case, it is recommended to create a new custom trust store based on the default one. This way, it will also be able to verify certificates
-signed using trusted root certificate authorities.
+In this case, it is recommended to create a new custom trust store based on the default one. This way, it will also be able to verify certificates signed using trusted root certificate authorities.
 
 1.  First, create a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, find the
     location of the default `cacerts` trust store:
@@ -419,9 +471,7 @@ signed using trusted root certificate authorities.
     ```
 
 :::warning
-If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on
-your deployment method (e.g. Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies
-the environment variable.
+If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on your deployment method (e.g. Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies the environment variable.
 :::
 
 ## Legacy Zeebe records and Optimize filters
