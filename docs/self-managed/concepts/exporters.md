@@ -366,7 +366,7 @@ Camunda‑maintained exporters for Elasticsearch and OpenSearch include built‑
 - Restrict exported variables (by name pattern or inferred value type).
 - Include or exclude whole processes (based on `bpmnProcessId`).
 - Enable an Optimize mode that exports only the record types and intents Optimize actually consumes.
-- Control variable scope (root vs. local), including an option to drop all local variables or apply different filters for root and local variables.
+- Control variable scope for root and local variables, including options to drop all local variables or apply different filters to each scope.
 
 For concrete arguments, examples, and version details, see:
 

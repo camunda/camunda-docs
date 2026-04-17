@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 :::note
 For supported Elasticsearch versions in Camunda 8 Self-Managed, see [supported environments](/reference/supported-environments.md#camunda-8-self-managed).
 
-Starting with Camunda 8.8, Camunda uses the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) to consume new records. Records from 8.7 and earlier are consumed only during migration.
+Starting with Camunda 8.8, Camunda uses the [Camunda exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) to consume new records. Records from 8.7 and earlier are consumed only during migration.
 
 The Elasticsearch and OpenSearch exporters remain fully usable after migration (for example, for existing setups, Optimize, or other custom use cases). Their functionality is not limited to the migration period.
 
@@ -20,7 +20,7 @@ From 8.9 onward, the Elasticsearch exporter also supports Optimize-focused expor
 For Optimize-specific guidance and recommended settings, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 :::
 
-The Zeebe Elasticsearch exporter acts as a bridge between [Zeebe](https://zeebe.io/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch) by exporting records written to Zeebe streams as documents into several indices.
+The Zeebe Elasticsearch exporter acts as a bridge between [Zeebe](https://camunda.com/platform/zeebe/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch) by exporting records written to Zeebe streams as documents into several indices.
 
 ## Concept
 
@@ -58,7 +58,7 @@ camunda:
 
 **Environment variables:**
 
-Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_...` (e.g., `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_URL`).
+Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_...` (for example,, `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_URL`).
 
 **Helm:**
 
@@ -85,7 +85,7 @@ options, and the default values for these options:
 
 <TabItem value="index">
 
-In most cases, you will not be interested in exporting every single record produced by a Zeebe cluster, but rather only a subset of them. This can also be configured to limit the kinds of records being exported (e.g. only events, no commands), and the value type of these records (e.g. only job and process values).
+In most cases, you will not be interested in exporting every single record produced by a Zeebe cluster, but rather only a subset of them. This can also be configured to limit the kinds of records being exported (for example, only events, no commands), and the value type of these records (for example, only job and process values).
 
 | Option                           | Description                                                                                                                                                                                                                                                                                                                                                        | Default         |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
@@ -179,8 +179,8 @@ Use this filter to drop large object or array payloads at export time. Type infe
 
 The Elasticsearch exporter can filter root and local variables differently.
 
-- Root variables are created in the process-instance scope and are visible throughout the process instance.
-- Local variables are created in a child scope, such as a subprocess, call activity, or task, and are visible only in that scope and its children.
+- Root variables are created in the process instance scope and are visible throughout the process instance.
+- Local variables are created in a child scope, such as a sub-process, call activity, or task. They are visible only in that scope and its children.
 
 Configure these options under `index`:
 
@@ -240,14 +240,14 @@ index:
   variable-name-exclusion-start-with-local: ["tmp_", "debug_"]
 
   # Export only simple root variable types
-  variable-value-type-inclusion-root: ["String", "Long"]
+  variable-value-type-inclusion-root: ["String", "Number"]
 ```
 
 In this example:
 
 - Only `customerId` and `orderId` root variables are exported.
 - Local variables starting with `tmp_` or `debug_` are excluded.
-- Only root variables of type `String` and `Long` are exported.
+- Only root variables of type `String` and `Number` are exported.
 
 ### BPMN process filters
 
@@ -344,7 +344,7 @@ Providing these authentication options will enable Basic authentication on the e
 
 ## Example
 
-Here is an example configuration of the exporter:
+The following is an example configuration of the exporter:
 
 ```yaml
 ---
@@ -352,7 +352,7 @@ camunda:
   data:
     exporters:
       elasticsearch:
-        # Elasticsearch Exporter ----------
+        # Elasticsearch exporter ----------
         # An example configuration for the elasticsearch exporter:
         #
         # These settings can also be overridden using environment variables "CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_..."
@@ -432,7 +432,7 @@ In this case, it is recommended to create a new custom trust store based on the 
     - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`.
     - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
 
-    Once you have the right location, e.g. `$JAVA_HOME/lib/security/cacerts`, run the following to create a new trust store:
+    Once you have the right location, for example, `$JAVA_HOME/lib/security/cacerts`, run the following to create a new trust store:
 
     ```sh
     keytool -importkeystore -srckeystore $JAVA_HOME/lib/security/cacerts -destkeystore zeebeTrustStore.jks -srcstoretype PKCS12 -deststoretype JKS
@@ -471,12 +471,12 @@ In this case, it is recommended to create a new custom trust store based on the 
     ```
 
 :::warning
-If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on your deployment method (e.g. Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies the environment variable.
+If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on your deployment method (for example, Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies the environment variable.
 :::
 
 ## Legacy Zeebe records and Optimize filters
 
-With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
+With the introduction of the Camunda exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
 Instead, they will emit only the record value types and intents required by Optimize.
 
 To export additional record types, enable the [`include-enabled-records`](#configuration) configuration property.

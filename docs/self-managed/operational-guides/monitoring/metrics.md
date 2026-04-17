@@ -252,15 +252,17 @@ Optimize exposes a counter metric for tracking errors by type.
 
 The `ERROR_TYPE` label can have the following values:
 
-- `too_many_buckets` – Aggregation bucket limit exceeded during report evaluation.
-- `version_conflict` – Document version conflict on write (for example, during imports or updates).
-- `index_not_found` – Required index is missing (for example, in metadata queries or scrollers).
-- `search_context_missing` – Search context expired during pagination (for example, JSON export).
-- `nested_limit_exceeded` – Nested document limit exceeded in complex queries.
-- `elasticsearch_error` – Generic Elasticsearch error that does not match a more specific type.
-- `opensearch_error` – Generic OpenSearch error that does not match a more specific type.
+| Value                    | Description                                                                 |
+| ------------------------ | --------------------------------------------------------------------------- |
+| `too_many_buckets`       | Aggregation bucket limit exceeded during report evaluation.                 |
+| `version_conflict`       | Document version conflict on write, for example, during imports or updates. |
+| `index_not_found`        | Required index is missing, for example, in metadata queries or scrollers.   |
+| `search_context_missing` | Search context expired during pagination, for example, JSON export.         |
+| `nested_limit_exceeded`  | Nested document limit exceeded in complex queries.                          |
+| `elasticsearch_error`    | Generic Elasticsearch error that does not match a more specific type.       |
+| `opensearch_error`       | Generic OpenSearch error that does not match a more specific type.          |
 
-Each time series uses the same metric name and differs only by the `ERROR_TYPE` label. For example:
+Each time series uses the same metric name and differs only by the `ERROR_TYPE` label value. For example:
 
 ```
 optimize_error_total{ERROR_TYPE="too_many_buckets"} 5
@@ -274,7 +276,7 @@ Optimize records report evaluation latency with the following labels:
 - `REPORT_NAME`
 - `REPORT_ID`
 
-Enable this metric using the `optimize.metrics.report-latency.enabled` configuration:
+To enable this metric, set `optimize.metrics.report-latency.enabled` to:
 
 - `true` – Report latency metrics are emitted.
 - `false` – Report latency metrics are not emitted.
