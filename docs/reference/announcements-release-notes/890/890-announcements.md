@@ -1208,6 +1208,78 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: Operator-based infrastructure
+
+All Self-Managed [reference architectures](https://github.com/camunda/camunda-deployment-references) now use Kubernetes operators (CloudNativePG, ECK, Keycloak operator) instead of embedded Bitnami subcharts for infrastructure services. This applies to AKS, EKS, OpenShift, and Kind deployments.
+
+**Action:** If you follow a reference architecture and currently use Bitnami-managed infrastructure, use the [migration tooling](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) to transition to operator-managed services.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: Generic OIDC replaces Keycloak as default
+
+Reference architectures now use auth overlays with generic OIDC instead of Keycloak by default, enabling flexible identity provider integration.
+
+**Action:** If you deploy using a reference architecture with the default identity provider configuration, review the updated auth overlay settings.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: Amazon ECS on Fargate
+
+A new container-based reference architecture is available for deploying Camunda on AWS ECS with Fargate, without requiring Kubernetes.
+
+<p className="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: AKS RDBMS variant and Kind local development
+
+- A lighter Azure AKS reference architecture using PostgreSQL as secondary storage (no Elasticsearch) with PostgreSQL 17 support is now available.
+- A Kind (Kubernetes in Docker) reference architecture is available for local development and testing.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: OpenShift dual-region with ECK
+
+OpenShift dual-region reference architecture now supports ECK (Elastic Cloud on Kubernetes) operator for Elasticsearch. EKS dual-region also uses the ECK operator, and headless service DNS is now used for initial contact points.
+
+</div>
+</div>
+
 ## Identity
 
 <div className="release-announcement-row">
