@@ -600,9 +600,12 @@ script-src-attr 'none'.
 
 ### `orchestration.security.initialization`
 
-| Property                                      | Description                                                              | Default value |
-| --------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
-| `orchestration.security.initialization.users` | List of users to initialize (each with username, password, name, email). |               |
+| Property                                               | Description                                                                                           | Default value |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------- |
+| `orchestration.security.initialization.users`          | List of users to initialize (each with username, password, name, email).                              |               |
+| `orchestration.security.initialization.defaultRoles`   | Dictionary of role names assigning initial users, clients, or mapping rules to default roles.         |               |
+| `orchestration.security.initialization.mappingRules`   | List of mapping rules to initialize when using OIDC (each with mappingRuleId, claimName, claimValue). |               |
+| `orchestration.security.initialization.authorizations` | List of authorizations to initialize.                                                                 |               |
 
 ### `orchestration.security.multiTenancy`
 
