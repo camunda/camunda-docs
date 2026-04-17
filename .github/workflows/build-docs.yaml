@@ -132,13 +132,6 @@ jobs:
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
 
-      - name: Upsert comment with build status
-        uses: mshick/add-pr-comment@v3
-        with:
-          refresh-message-position: true
-          message: |
-            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 8-10 minutes.
-
       - name: Download build
         uses: actions/download-artifact@v4
         with:
@@ -162,7 +155,7 @@ jobs:
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Update comment with upload status
+      - name: Upsert comment with upload status
         uses: mshick/add-pr-comment@v3
         with:
           refresh-message-position: true
