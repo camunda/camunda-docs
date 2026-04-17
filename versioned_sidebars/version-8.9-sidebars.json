@@ -462,7 +462,6 @@
             {
               "Modeling": [
                 "components/modeler/web-modeler/modeling/model-your-first-diagram",
-                "components/modeler/web-modeler/modeling/context-pad",
                 "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
                 "components/modeler/web-modeler/modeling/versions",
                 "components/modeler/web-modeler/modeling/file-download",

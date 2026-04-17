@@ -758,7 +758,6 @@ module.exports = {
                     "components/modeler/web-modeler/modeling/model-your-first-diagram",
                     "components/modeler/web-modeler/run-or-publish-your-process",
                     "components/modeler/web-modeler/process-landscape-visualization",
-                    "components/modeler/web-modeler/modeling/context-pad",
                     "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
                     "components/modeler/web-modeler/modeling/versions",
                     "components/modeler/web-modeler/modeling/file-download",
@@ -845,7 +844,6 @@ module.exports = {
         "components/modeler/desktop-modeler/start-instance",
         "components/modeler/desktop-modeler/process-applications",
         "components/modeler/desktop-modeler/use-connectors",
-        "components/modeler/desktop-modeler/variables",
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
