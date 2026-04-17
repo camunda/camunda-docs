@@ -2,7 +2,7 @@ name: build-docs
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, labeled]
+    types: [opened, synchronize, reopened]
 
 # If the workflow is triggered while an instance is already running,
 # cancel the in-progress instance.
@@ -201,7 +201,7 @@ jobs:
     needs:
       - build-docs
       - validate-links
-      - deploy-preview
+      # - deploy-preview
     if: failure() && fromJSON(github.run_attempt) < 3
     steps:
       - name: Retry job
