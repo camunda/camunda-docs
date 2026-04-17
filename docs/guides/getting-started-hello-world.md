@@ -163,4 +163,4 @@ Now that you've run your first BPMN process in Camunda 8, explore more of the pl
 
 - [Build your first AI agent](./getting-started-agentic-orchestration.md).
 - [Run your first Spring Boot or Node.js project with service workers](./getting-started-example.md).
-- [Learn more about the BPMN, DMN, and FEEL elements supported in Camunda](docs/components/concepts/bpmn-dmn-feel.md).
+- [Learn more about the BPMN, DMN, and FEEL elements supported in Camunda](/components/concepts/bpmn-dmn-feel.md).
