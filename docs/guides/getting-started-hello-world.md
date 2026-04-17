@@ -74,11 +74,9 @@ The starter package includes the following components:
 
 3. Open Camunda Modeler from the starter package.
 4. Click **File**, then **Open File** to open the process model `camunda-8-get-started/1-rocket-launch/rocket-launch.bpmn`.
-5. Deploy your model by clicking the rocket icon in the bottom toolbar. Select **Camunda 8 Self-Managed**, enter `http://localhost:8080/v2` as the cluster endpoint, and click **Deploy**.
-6. Open the DMN decision table: `camunda-8-get-started/1-rocket-launch/plot-destination.dmn`.
-7. Deploy this file using the same steps as before.
-8. Switch back to the **rocket-launch.bpmn** tab in Modeler and click **Play** in the bottom toolbar to start a new process instance.
-9. Run your first model instance by setting the input mission variables. For example:
+5. Deploy your model by clicking the rocket icon in the bottom toolbar. You can use the pre-configured **c8run (local)** connection and click **Deploy**. This automatically deploys all resources in the project, including the DMN decision table.
+6. Click **Play** in the bottom toolbar to start a new process instance.
+7. Run your first model instance by setting the input mission variables. For example:
 
 ```json
 { "missionName": "Odyssey", "fuelLevel": 95 }
