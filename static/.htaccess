@@ -220,6 +220,8 @@ RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-r
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?$ /docs/self-managed/upgrade/helm/870-to-880/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/upgrade/manual/ [R=301,L]
 
+# Agentic orchestration base path redirect
+RewriteRule ^docs/components/agentic-orchestration/?$ /docs/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
