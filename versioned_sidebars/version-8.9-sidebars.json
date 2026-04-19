@@ -276,6 +276,7 @@
                 "components/modeler/web-modeler/idp/idp-structured-extraction"
               ]
             },
+            "components/modeler/web-modeler/idp/idp-document-classification",
             {
               "type": "category",
               "label": "Integrate IDP into your processes",

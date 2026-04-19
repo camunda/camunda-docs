@@ -9,7 +9,9 @@ keywords:
     "intelligent document processing",
     "document automation",
     "document extraction",
+    "document classification",
     extraction,
+    classification,
   ]
 ---
 
@@ -52,6 +54,7 @@ Learn about key [IDP concepts](idp/idp-key-concepts.md) and terms, such as the d
 
 - [Structured and unstructured documents](idp/idp-key-concepts.md#documents)
 - [Document classification](idp/idp-key-concepts.md#classification)
+- [Preconfigured document types](idp/idp-key-concepts.md#preconfigured-types)
 - [Extraction model/Large Language Models (LLM)](idp/idp-key-concepts.md#llms)
 - [Extraction fields](idp/idp-key-concepts.md#fields)
 

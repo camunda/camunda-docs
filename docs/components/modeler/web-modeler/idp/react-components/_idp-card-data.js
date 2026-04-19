@@ -37,7 +37,7 @@ export const gettingStartedCards = [
     title: "IDP applications",
     image: IconIdpApplication,
     description:
-      "Start by creating an IDP application in which to store and manage your IDP document extraction templates.",
+      "Start by creating an IDP application in which to store and manage your IDP templates.",
   },
   {
     link: "./idp-document-extraction",
@@ -47,10 +47,17 @@ export const gettingStartedCards = [
       "Publish a document extraction template for each type of document you want to extract data from.",
   },
   {
+    link: "./idp-document-classification",
+    title: "Document classification",
+    image: IconIdpExtraction,
+    description:
+      "Publish a document classification template to automatically classify documents by type.",
+  },
+  {
     link: "./idp-integrate",
     title: "IDP integration",
     image: IconIdpIntegrate,
     description:
-      "Integrate your published document extraction templates into your end-to-end processes.",
+      "Integrate your published extraction and classification templates into your end-to-end processes.",
   },
 ];
