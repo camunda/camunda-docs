@@ -1,7 +1,7 @@
 ---
 id: camunda-hub
 title: Camunda Hub
-description: "Learn how to audit operations."
+description: "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub."
 ---
 
 import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
