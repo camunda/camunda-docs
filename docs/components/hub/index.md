@@ -20,22 +20,28 @@ Camunda Hub is the unified platform where:
 
 ## Manage organizational resources
 
-Manage organizational resources, including clusters and workspaces, govern the use of reusable assets, monitor operations, and assess business value:
+Manage organizational resources, including clusters and workspaces, and govern the use of reusable assets:
 
 <AoGrid ao={[
 {
 link: "../console/manage-clusters/manage-cluster",
 title: "Manage clusters",
 image: DocsIcon,
-description: "Rename, resume, update, resize, or delete clusters.",
+description: "Create, monitor, and assign clusters for seamless execution across all rollout stages.",
+},
+{
+link: "../console/manage-organization/manage-users",
+title: "Manage members",
+image: DocsIcon,
+description: "Manage the users, user groups, and roles in your organization.",
 },
 {
 link: "../console/manage-organization/organization-settings",
 title: "Manage organization",
 image: DocsIcon,
-description: "Manage organizational resources, like members and API clients, and view usage alerts and history.",
+description: "Manage organizational settings, and view usage alerts and history.",
 },
-]} columns={2}/>
+]} columns={3}/>
 
 ## Build within a workspace
 

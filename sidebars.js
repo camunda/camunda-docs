@@ -679,10 +679,14 @@ module.exports = {
               ],
             },
             {
-              "Manage the organization": [
-                "components/console/manage-organization/organization-settings",
+              "Manage members": [
                 "components/console/manage-organization/manage-users",
                 "components/console/manage-organization/manage-user-groups",
+              ],
+            },
+            {
+              "Manage the organization": [
+                "components/console/manage-organization/organization-settings",
                 "components/console/manage-organization/external-sso",
                 "components/console/manage-organization/view-organization-activity",
                 "components/console/manage-organization/enable-alpha-features",
