@@ -665,6 +665,20 @@ module.exports = {
         {
           Organization: [
             {
+              "Manage clusters": [
+                "components/console/manage-clusters/create-cluster",
+                "components/console/manage-clusters/manage-cluster",
+                "components/console/manage-clusters/cluster-connectors",
+                "components/console/manage-clusters/manage-api-clients",
+                "components/console/manage-clusters/manage-secrets",
+                "components/console/manage-clusters/manage-alerts",
+                "components/console/manage-clusters/manage-ip-allowlists",
+                "components/console/manage-clusters/create-backups",
+                "components/console/manage-clusters/settings",
+                "components/console/manage-clusters/cluster-capacity",
+              ],
+            },
+            {
               "Manage the organization": [
                 "components/console/manage-organization/organization-settings",
                 "components/console/manage-organization/manage-users",
@@ -685,20 +699,6 @@ module.exports = {
                     "components/console/manage-plan/update-billing-reservations",
                   ],
                 },
-              ],
-            },
-            {
-              "Manage clusters": [
-                "components/console/manage-clusters/create-cluster",
-                "components/console/manage-clusters/manage-cluster",
-                "components/console/manage-clusters/cluster-connectors",
-                "components/console/manage-clusters/manage-api-clients",
-                "components/console/manage-clusters/manage-secrets",
-                "components/console/manage-clusters/manage-alerts",
-                "components/console/manage-clusters/manage-ip-allowlists",
-                "components/console/manage-clusters/create-backups",
-                "components/console/manage-clusters/settings",
-                "components/console/manage-clusters/cluster-capacity",
               ],
             },
           ],

@@ -25,16 +25,16 @@ Manage organizational resources, including clusters and workspaces, govern the u
 
 <AoGrid ao={[
 {
-link: "../console/manage-organization/organization-settings",
-title: "Manage organization",
-image: DocsIcon,
-description: "Manage organizational resources, like members and API clients, and view usage alerts and history.",
-},
-{
 link: "../console/manage-clusters/manage-cluster",
 title: "Manage clusters",
 image: DocsIcon,
 description: "Rename, resume, update, resize, or delete clusters.",
+},
+{
+link: "../console/manage-organization/organization-settings",
+title: "Manage organization",
+image: DocsIcon,
+description: "Manage organizational resources, like members and API clients, and view usage alerts and history.",
 },
 ]} columns={2}/>
 
