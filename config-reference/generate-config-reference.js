@@ -17,7 +17,7 @@ const typeReplacements = {
   "java.lang.Boolean": "boolean",
   "java.lang.Integer": "integer",
   "java.lang.Double": "double",
-  "java.lang.Long": "integer",
+  "java.lang.Long": "long",
   "org.springframework.util.unit.DataSize": "dataSize",
   "io.camunda.client.spring.properties.CamundaClientProperties$ClientMode":
     "enum[self-managed, saas]",
