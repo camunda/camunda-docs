@@ -2,6 +2,7 @@
 id: idp-document-classification
 title: Document classification
 description: "Document classification templates use LLMs to automatically classify documents by type, such as invoices, contracts, or identity documents."
+toc_max_heading_level: 3
 ---
 
 import IdpClassificationCreateModalImg from './img/idp-create-classification-modal.png';
@@ -14,13 +15,13 @@ Automatically classify documents by type using LLM-powered classification templa
 
 ## About document classification
 
-Document classification templates use [LLM foundation models](idp-key-concepts.md#llms) to analyze and categorize documents into defined types based on their content. For example, incoming documents can be classified as invoices, contracts, identity documents, or any custom type you define.
+Document classification templates use [LLM foundation models](./idp-key-concepts.md#llms) to analyze and categorize documents into defined types based on their content. For example, incoming documents can be classified as invoices, contracts, identity documents, or any custom type you define.
 
-- Create a document classification template to categorize documents before routing them to the appropriate process step or [document extraction](idp-document-extraction.md) template.
-- Classification templates are published as connector templates that can be [integrated into your processes](idp-integrate.md), enabling you to route different document types to the correct downstream automation.
+- Create a document classification template to categorize documents before routing them to the appropriate process step or [document extraction](./idp-document-extraction.md) template.
+- Classification templates are published as connector templates that can be [integrated into your processes](./idp-integrate.md), enabling you to route different document types to the correct downstream automation.
 - Choose and test different LLM models to find the model that best suits your budget and accuracy requirements.
 
-:::note
+:::important
 Document classification templates require cluster version 8.9-alpha5 or later.
 :::
 
@@ -28,37 +29,33 @@ Document classification templates require cluster version 8.9-alpha5 or later.
 
 To create a new document classification template:
 
-1. In your [IDP application](idp-applications.md), click **Create new** and select **Classification template**.
+1. In your [IDP application](./idp-applications.md), click **Create new** and select **Classification template**.
 
-<img src={IdpClassificationCreateModalImg} alt="Create a classification template modal" width="700px" style={{marginTop: '0'}} />
+<img src={IdpClassificationCreateModalImg} alt="Create a classification template modal" width="80%" />
 
 2. **Name**: Enter a descriptive name for the classification template, such as "Incoming document classifier".
 3. **Description**: Enter a description to provide more information about what types of documents this template classifies.
-4. **Provider**: Select the cloud provider you want to use for classification. The available providers depend on the [connector secrets](idp-configuration.md) configured for your cluster.
+4. **Provider**: Select the cloud provider you want to use for classification. The available providers depend on the [connector secrets](./idp-configuration.md) configured for your cluster.
 
 5. Click **Create** to create and open the new classification template.
 
-## Classification steps
+## Configure a classification template
 
-Complete the following steps to configure and publish a document classification template:
+Complete the following steps to configure and publish a document classification template.
 
-1. [Define document types](#define-document-types): Configure the document types you want to classify.
-2. [Test classification](#test-classification): Upload sample documents and test classification with different LLM models.
-3. [Publish](#publish-template): Publish the classification template for use in your processes.
-
-## Step 1: Define document types {#define-document-types}
+### Step 1: Define document types {#define-document-types}
 
 On the **Define classifications** tab, configure the document types that the LLM uses to classify incoming documents.
 
-<img src={IdpClassificationDocTypesImg} alt="Define classification document types" style={{marginTop: '0'}} />
+<img src={IdpClassificationDocTypesImg} alt="Define classification document types" width="80%" />
 
-### Add document types
+#### Add document types
 
 You must define at least two document types before you can publish a classification template.
 
 You can add document types from preconfigured types or create custom types:
 
-#### Add preconfigured document types
+##### Add preconfigured document types
 
 IDP provides a set of preconfigured document types (such as invoice, contract, identity document) to help you get started quickly.
 
@@ -66,7 +63,7 @@ IDP provides a set of preconfigured document types (such as invoice, contract, i
 2. Browse or search the list of available preconfigured document types.
 3. Select the document types you want to add.
 
-#### Create custom document types
+##### Create custom document types
 
 Create your own document types for document categories specific to your business.
 
@@ -75,7 +72,7 @@ Create your own document types for document categories specific to your business
 3. **Description**: Enter a description to help the LLM understand the characteristics of this document type.
 4. **Classification instructions**: Provide specific instructions to guide the LLM in recognizing this document type. For example, describe key features, typical content, or distinguishing characteristics.
 
-### Edit document types
+#### Edit document types
 
 You can edit all aspects of a document type at any time, including:
 
@@ -86,7 +83,7 @@ You can edit all aspects of a document type at any time, including:
 
 To edit a document type, select it from the list and modify the fields as needed.
 
-### Remove document types
+#### Remove document types
 
 To remove a document type, select the document type and use the actions menu to delete it.
 
@@ -94,38 +91,38 @@ To remove a document type, select the document type and use the actions menu to 
 You must have at least two document types defined to publish a classification template.
 :::
 
-### Configure fallback behavior {#fallback}
+#### Configure fallback behavior {#fallback}
 
-You can configure the **fallback output value** — the value returned when a document cannot be classified as any of the defined types. By default, this value is `unclassified-document`.
+You can configure the **fallback output value**, which is the value returned when a document cannot be classified as any of the defined types. By default, this value is `unclassified-document`.
 
 You can customize this value to align with your process routing logic.
 
-## Step 2: Test classification {#test-classification}
+### Step 2: Test classification {#test-classification}
 
 On the **Test template** tab, upload sample documents and evaluate the classification results using different LLM models.
 
-<img src={IdpClassificationTestImg} alt="Test classification template" style={{marginTop: '0'}} />
+<img src={IdpClassificationTestImg} alt="Test classification template" width="80%" />
 
-### Upload test documents
+#### Upload test documents
 
 Upload sample documents that represent the types of documents you expect to classify.
 
 1. Click **Upload documents** to browse for and upload your sample documents. Batch upload is supported.
 2. For each upload batch, assign an **expected document type** to enable validation of classification results. The available document types are those you defined in [Step 1](#define-document-types).
 
-### Run classification tests {#run-tests}
+#### Run classification tests {#run-tests}
 
 Select an extraction engine and LLM model, then run classification tests against your uploaded documents.
 
-1. **Extraction engine**: Select the [text extraction engine](idp-key-concepts.md#extraction-engines) to use for text extraction before classification.
+1. **Extraction engine**: Select the [text extraction engine](./idp-key-concepts.md#extraction-engines) to use for text extraction before classification.
 2. **Extraction model**: Select the LLM model to use for classification.
 3. Click **Classify documents** to run the classification.
 
-### Review classification results {#review-results}
+#### Review classification results {#review-results}
 
 After running a classification test, the results are displayed for each document:
 
-<img src={IdpClassificationResultsImg} alt="Classification results" style={{marginTop: '0'}} />
+<img src={IdpClassificationResultsImg} alt="Classification results" width="80%" />
 
 - **Classified document type**: The document type assigned by the LLM.
 - **Reasoning**: The LLM's explanation for why it chose this document type.
@@ -140,11 +137,11 @@ A **summary** of the classification results is shown, allowing you to quickly co
 Test different combinations of extraction engines and LLM models to find the combination that best suits your document types, budget, and accuracy requirements.
 :::
 
-## Step 3: Publish classification template {#publish-template}
+### Step 3: Publish classification template {#publish-template}
 
 Publish the classification template to make it available for [integration into your processes](idp-integrate.md).
 
-<img src={IdpClassificationPublishImg} alt="Publish classification template" style={{marginTop: '0'}} />
+<img src={IdpClassificationPublishImg} alt="Publish classification template" width="80%" />
 
 1. Click **Publish** and select either:
    - **Publish to project**: Only users in the Web Modeler project can access the classification template.
@@ -156,13 +153,13 @@ Publish the classification template to make it available for [integration into y
    - **Version name**: Enter a version name for the published classification template.
    - **Version description**: Enter a description for this version.
 
-3. Click **Publish** to make the classification template available for [integration into your processes](idp-integrate.md).
+3. Click **Publish** to make the classification template available for [integration into your processes](./idp-integrate.md).
 
 :::note
 You must have at least two document types defined before you can publish a classification template.
 :::
 
-## Versions {#versions}
+## Manage versions {#versions}
 
 Click **Versions** to view and manage your published classification template versions.
 
