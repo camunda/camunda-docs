@@ -583,7 +583,7 @@ Type: <code>double</code>
 
 <td>
 
-The initial backoff duration applied between token fetch retry attempts. Subsequent delays grow geometrically by {@link #tokenFetchBackoffMultiplier}.
+The initial backoff duration applied between token fetch retry attempts. Subsequent delays grow geometrically by `token-fetch-backoff-multiplier`.
 
 Type: <code>duration</code>
 

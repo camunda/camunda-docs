@@ -233,6 +233,11 @@ const preGenerateDocs = (config) => {
       property.description = property.description
         .replaceAll(/<p>/g, "\n\n")
         .replaceAll(/<code> /g, "`")
+        .replaceAll(
+          /\{@link #([^}]+)\}/g,
+          (_, prop) =>
+            "`" + prop.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase() + "`"
+        )
         .replaceAll(/<code>/g, "`")
         .replaceAll(/ <\/code>/g, "`")
         .replaceAll(/<\/code>/g, "`")
