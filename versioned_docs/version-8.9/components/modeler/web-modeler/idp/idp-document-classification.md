@@ -55,7 +55,7 @@ You must define at least two document types before you can publish a classificat
 
 You can add document types from preconfigured types or create custom types:
 
-##### Add preconfigured document types
+**Add preconfigured document types**
 
 IDP provides a set of preconfigured document types (such as invoice, contract, identity document) to help you get started quickly.
 
@@ -63,7 +63,7 @@ IDP provides a set of preconfigured document types (such as invoice, contract, i
 2. Browse or search the list of available preconfigured document types.
 3. Select the document types you want to add.
 
-##### Create custom document types
+**Create custom document types**
 
 Create your own document types for document categories specific to your business.
 
