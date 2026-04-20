@@ -16,6 +16,7 @@ const typeReplacements = {
   "java.net.URI": "url",
   "java.lang.Boolean": "boolean",
   "java.lang.Integer": "integer",
+  "java.lang.Double": "double",
   "java.lang.Long": "integer",
   "org.springframework.util.unit.DataSize": "dataSize",
   "io.camunda.client.spring.properties.CamundaClientProperties$ClientMode":
@@ -26,6 +27,7 @@ const typeReplacements = {
     "enum[none, read_only, unrestricted]",
   "io.camunda.client.api.command.enums.TenantFilter":
     "enum[assigned, provided]",
+  "java.util.Set<java.lang.Integer>": "array[integer]",
 };
 
 const preserveGroups = [];
@@ -221,7 +223,7 @@ const preGenerateDocs = (config) => {
       property.type = typeReplacements[property.type];
     } else {
       console.log("No type replacement for " + property.type);
-      process.exit();
+      process.exit(1);
     }
     property.defaultValue = JSON.stringify(property.defaultValue);
     if (property.defaultValue === undefined) {
