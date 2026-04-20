@@ -784,15 +784,19 @@ public class MyProcessTest {
 }
 ```
 
-:::note
-The method `withRemoteCamundaClientBuilderFactory` is deprecated. Use `withCamundaClientBuilderFactory` instead.
-:::
-
 </TabItem>
 
 </Tabs>
 
-### Client configuration
+### Debugging of test cases
+
+You can use a remote runtime to debug your test cases on your local machine. Set breakpoints in your test case and run
+the test in debug mode from your IDE.
+
+When the test execution stops at a breakpoint, you can inspect the process instance state using Operate and the user
+task state using Tasklist. You can also use the Camunda client to interact with the runtime from the debugger console.
+
+## Client configuration
 
 CPT configures the Camunda client automatically based on the runtime mode. You can customize the client
 configuration beyond the connection addresses, for example, to set up authentication.
@@ -816,6 +820,23 @@ camunda:
       method: basic
       username: demo
       password: demo
+```
+
+For full flexibility, provide a `CamundaClientBuilderFactory` bean:
+
+```java
+@Bean
+public CamundaClientBuilderFactory customClientBuilderFactory() {
+  return () ->
+      CamundaClient.newClientBuilder()
+          .restAddress(URI.create("http://0.0.0.0:8080"))
+          .grpcAddress(URI.create("http://0.0.0.0:26500"))
+          .credentialsProvider(
+              CredentialsProvider.newBasicAuthCredentialsProviderBuilder()
+                  .username("demo")
+                  .password("demo")
+                  .build());
+}
 ```
 
 </TabItem>
@@ -865,14 +886,6 @@ private static final CamundaProcessTestExtension EXTENSION =
 </TabItem>
 
 </Tabs>
-
-### Debugging of test cases
-
-You can use a remote runtime to debug your test cases on your local machine. Set breakpoints in your test case and run
-the test in debug mode from your IDE.
-
-When the test execution stops at a breakpoint, you can inspect the process instance state using Operate and the user
-task state using Tasklist. You can also use the Camunda client to interact with the runtime from the debugger console.
 
 ## Process Test Coverage
 

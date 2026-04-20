@@ -483,7 +483,7 @@ camunda:
 ```
 
 :::note
-The properties `camunda.process-test.remote.client.rest-address` and `camunda.process-test.remote.client.grpc-address` are deprecated. Use `camunda.client.rest-address` and `camunda.client.grpc-address` instead. Available from version 8.8.23.
+Since version 8.8.23, the properties `camunda.process-test.remote.client.rest-address` and `camunda.process-test.remote.client.grpc-address` are deprecated. Use `camunda.client.rest-address` and `camunda.client.grpc-address` instead.
 :::
 
 </TabItem>
@@ -504,7 +504,7 @@ remote.runtimeConnectionTimeout=PT1M
 ```
 
 :::note
-The properties `remote.client.grpcAddress` and `remote.client.restAddress` are deprecated. Use `camunda.client.gateway.grpc.address` and `camunda.client.gateway.rest.address` instead. Available from version 8.8.23.
+Since version 8.8.23, the properties `remote.client.grpcAddress` and `remote.client.restAddress` are deprecated. Use `camunda.client.gateway.grpc.address` and `camunda.client.gateway.rest.address` instead.
 :::
 
 Alternatively, register the JUnit extension manually and use the fluent builder:
@@ -534,15 +534,19 @@ public class MyProcessTest {
 }
 ```
 
-:::note
-The method `withRemoteCamundaClientBuilderFactory` is deprecated. Use `withCamundaClientBuilderFactory` instead. Available from version 8.8.23.
-:::
-
 </TabItem>
 
 </Tabs>
 
-### Client configuration
+### Debugging of test cases
+
+You can use a remote runtime to debug your test cases on your local machine. Set breakpoints in your test case and run
+the test in debug mode from your IDE.
+
+When the test execution stops at a breakpoint, you can inspect the process instance state using Operate and the user
+task state using Tasklist. You can also use the Camunda client to interact with the runtime from the debugger console.
+
+## Client configuration
 
 :::note
 The client configuration described in this section is available from version 8.8.23.
@@ -570,6 +574,23 @@ camunda:
       method: basic
       username: demo
       password: demo
+```
+
+For full flexibility, provide a `CamundaClientBuilderFactory` bean:
+
+```java
+@Bean
+public CamundaClientBuilderFactory customClientBuilderFactory() {
+  return () ->
+      CamundaClient.newClientBuilder()
+          .restAddress(URI.create("http://0.0.0.0:8080"))
+          .grpcAddress(URI.create("http://0.0.0.0:26500"))
+          .credentialsProvider(
+              CredentialsProvider.newBasicAuthCredentialsProviderBuilder()
+                  .username("demo")
+                  .password("demo")
+                  .build());
+}
 ```
 
 </TabItem>
@@ -619,14 +640,6 @@ private static final CamundaProcessTestExtension EXTENSION =
 </TabItem>
 
 </Tabs>
-
-### Debugging of test cases
-
-You can use a remote runtime to debug your test cases on your local machine. Set breakpoints in your test case and run
-the test in debug mode from your IDE.
-
-When the test execution stops at a breakpoint, you can inspect the process instance state using Operate and the user
-task state using Tasklist. You can also use the Camunda client to interact with the runtime from the debugger console.
 
 ## Process Test Coverage
 
