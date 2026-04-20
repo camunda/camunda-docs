@@ -599,7 +599,7 @@ Type: <code>duration</code>
 
 <td>
 
-The maximum number of attempts (including the initial one) when fetching a token from the OAuth authorization server. Retries are only attempted on IOException or HTTP status codes configured via {@code tokenFetchRetryableStatusCodes}.
+The maximum number of attempts (including the initial one) when fetching a token from the OAuth authorization server. Retries are only attempted on IOException or HTTP status codes configured via `token-fetch-retryable-status-codes`.
 
 Type: <code>integer</code>
 
