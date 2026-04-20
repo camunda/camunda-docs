@@ -264,6 +264,7 @@
           "items": [
             "components/modeler/web-modeler/idp/idp-configuration",
             "components/modeler/web-modeler/idp/idp-applications",
+            "components/modeler/web-modeler/idp/idp-document-classification",
             {
               "type": "category",
               "label": "Document extraction",
@@ -276,7 +277,6 @@
                 "components/modeler/web-modeler/idp/idp-structured-extraction"
               ]
             },
-            "components/modeler/web-modeler/idp/idp-document-classification",
             {
               "type": "category",
               "label": "Integrate IDP into your processes",
