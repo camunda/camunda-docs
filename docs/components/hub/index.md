@@ -13,11 +13,10 @@ Manage organizational resources, analyze operations and business value, and deli
 
 ## About Camunda Hub
 
-Camunda Hub is a unified platform that provides governance, observability, and delivery capabilities—all in one place:
+Camunda Hub is the unified platform where:
 
-- **Governance:** Manage your organization and infrastructure, and approve reusable assets to provide builders the environment and tools they need to succeed.
-- **Observability:** Monitor operations across all your clusters, and assess business value, so you can make informed decisions about where to spend your resources.
-- **Delivery:** Collaborate in managed workspaces, discover and use approved, reusable assets, and model and deploy business processes to be executed in the Orchestration Cluster.
+- **Center of excellence teams** manage infrastructure, member access, and workspaces, so delivery teams have the environments and tools they need to ship process solutions at scale.
+- **Delivery teams** collaborate in managed workspaces, discover and use approved catalog assets, and model and deploy business processes.
 
 ## Manage organizational resources
 
