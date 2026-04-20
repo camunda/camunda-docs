@@ -296,6 +296,10 @@ or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes prec
 
 ## Job worker configuration options
 
+:::note
+Overriding workers `camunda.client.worker.override.` works by _job type_ and _worker name_.
+:::
+
 ### Job type
 
 You can configure the job type via the `JobWorker` annotation:
