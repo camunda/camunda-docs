@@ -563,7 +563,7 @@ configuration beyond the connection addresses, for example, to set up authentica
 <TabItem value='spring-sdk'>
 
 CPT applies all [Camunda client configurations](/apis-tools/camunda-spring-boot-starter/configuration.md) from your
-`application.yml`. For example, to configure basic authentication for a remote runtime:
+`application.yml`. For example, to configure Basic authentication for a remote runtime:
 
 ```yaml
 camunda:
