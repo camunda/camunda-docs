@@ -329,7 +329,7 @@ After you deploy all Camunda 8 components in a Self-Managed environment, you wil
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
   - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic authentication method.
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
-- For OIDC-based Self-Managed deployments, you can reuse groups from your identity provider for authorization, role, and tenant assignment. See [bring your own groups](../../../self-managed/components/orchestration-cluster/admin/bring-your-groups.md).
+- For OIDC-based Self-Managed deployments, you can reuse groups from your identity provider for authorization, role, and tenant assignment. See [bring your own groups](../../../self-managed/components/orchestration-cluster/identity/bring-your-groups.md).
 
 The following table summarizes where Orchestration Cluster Identity entities are managed in Camunda 8.8 Self-Managed:
 

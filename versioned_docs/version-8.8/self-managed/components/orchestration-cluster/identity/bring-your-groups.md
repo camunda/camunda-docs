@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 When Camunda 8 Self-Managed is configured with OpenID Connect (OIDC), the Orchestration Cluster can read a configurable claim from each token and treat its values as Camunda group IDs. This lets you use groups that already exist in your identity provider (IdP) as the basis for Camunda's authorization, role, and tenant assignment.
 
-:::note 
+:::note
 This feature is Self-Managed only. Bring your own groups (external IdP groups) is not available in Camunda 8 SaaS.
 :::
 
@@ -72,7 +72,7 @@ Grant authorizations directly to IdP groups to control access to Camunda resourc
 
 ### Tenant assignment
 
-Add IdP groups to tenants so that every member of that group gains access to the tenant. See [tenants](../../../../components/admin/tenant.md).
+Add IdP groups to tenants so that every member of that group gains access to the tenant. See [tenants](../../../../components/identity/tenant.md).
 
 ## Limitations and behavior
 
