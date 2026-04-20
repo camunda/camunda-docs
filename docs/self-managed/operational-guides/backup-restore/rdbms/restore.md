@@ -368,6 +368,12 @@ After both primary and secondary storage are restored, start all Camunda compone
 After starting the components, monitor the logs for any errors or warnings. Components will reconcile their state with the restored data, which may take some time depending on the size of the data. When using RDBMS-aware or time range restore, Zeebe re-exports events from the backup's checkpoint position up to its current state, bringing the RDBMS up to date.
 :::
 
+## (Optional) Restore Optimize data {#restore-optimize-data}
+
+If you previously backed up Optimize data, restore it independently using the standalone Optimize restore procedure. Optimize can be restored while the Orchestration Cluster restore is in progress or after it completes — the two are independent.
+
+See [back up and restore Optimize (standalone)](../optimize-backup-and-restore.md#restore-a-backup) for the complete procedure.
+
 ## (Optional) Restore Web Modeler data
 
 If you previously backed up Web Modeler data, restore it using the same RDBMS restore tools.

@@ -1,21 +1,44 @@
 ---
 id: optimize-backup-and-restore
-sidebar_label: "Optimize (standalone)"
-title: "Back up and restore Optimize (standalone)"
-description: "Learn how to back up and restore Optimize when deployed as a standalone application, independent of other Camunda components."
-keywords: ["backup", "backups", "restore", "optimize", "standalone"]
+sidebar_label: "Optimize — independent backup"
+title: "Back up and restore Optimize independently"
+description: "Learn how to back up and restore Optimize independently of the Orchestration Cluster, including when the Orchestration Cluster uses RDBMS as secondary storage."
+keywords:
+  [
+    "backup",
+    "backups",
+    "restore",
+    "optimize",
+    "standalone",
+    "rdbms",
+    "independent",
+  ]
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Back up and restore Optimize when it is deployed as a standalone application, independent of other Camunda components.
+Back up and restore Optimize independently of the Orchestration Cluster.
 
 ## About this guide
 
-Optimize stores its data across multiple indices in Elasticsearch or OpenSearch. Because of this, a consistent backup requires coordination through Optimize's built-in Backup Management API rather than taking an ad-hoc datastore snapshot.
+Optimize always stores its data in Elasticsearch or OpenSearch, regardless of what the Orchestration Cluster uses as secondary storage. Which backup procedure to follow depends on what secondary storage the Orchestration Cluster uses:
 
-A backup of Optimize consists of two Elasticsearch/OpenSearch snapshots. For example, a backup with ID `123456` produces the following snapshots:
+| Orchestration Cluster secondary storage | How to back up Optimize                                                                                                                                                                                                                                                                                                              |
+| :-------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Elasticsearch / OpenSearch**          | Optimize shares the same ES/OS instance with the Orchestration Cluster. Backup must be **coordinated**: all components use a single shared backup ID within the same backup window. Optimize cannot be backed up independently in this configuration — use the [Elasticsearch / OpenSearch backup guide](./elasticsearch/backup.md). |
+| **RDBMS**                               | Optimize uses a **dedicated ES/OS instance** separate from the Orchestration Cluster's storage. There is no shared state to keep consistent. Optimize can be backed up on its own schedule with its own backup IDs — use this guide.                                                                                                 |
+
+:::warning
+When the Orchestration Cluster uses Elasticsearch or OpenSearch, backing up Optimize with a different backup ID or at a different time than the other components produces an **inconsistent restore point**: Optimize analytics data will describe a state that no longer matches the underlying process data in Operate and Zeebe.
+:::
+
+This guide covers:
+
+- **Optimize alongside an RDBMS-backed Orchestration Cluster**: Optimize must be backed up and restored separately from the Orchestration Cluster. The two are fully independent.
+- **Optimize as a fully standalone application**: Optimize deployed without other Camunda components.
+
+Optimize stores its data across multiple indices in Elasticsearch or OpenSearch. A backup consists of two snapshots that must be taken through the Backup Management API to ensure consistency across indices. For example, a backup with ID `123456` produces:
 
 ```
 camunda_optimize_123456_8.8.0_part_1_of_2
@@ -23,10 +46,6 @@ camunda_optimize_123456_8.8.0_part_2_of_2
 ```
 
 Backups are created asynchronously while Optimize continues running, and are restored using the standard Elasticsearch/OpenSearch snapshot restore API.
-
-:::note
-This guide covers Optimize running as a **standalone application**. If you run Optimize as part of a full Camunda cluster, all components must be backed up together using the same backup ID. See the [Elasticsearch / OpenSearch backup guide](./elasticsearch/backup.md) for the full cluster procedure.
-:::
 
 ## Prerequisites
 
