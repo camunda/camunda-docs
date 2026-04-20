@@ -457,7 +457,7 @@ Optimize is only available with Elasticsearch secondary storage. If you deployed
 | ------------------------------ | ---------------------------------------------- | ------------------------------------ |
 | Operate                        | https://camunda.example.com/operate            | All                                  |
 | Tasklist                       | https://camunda.example.com/tasklist           | All                                  |
-| Identity                       | https://camunda.example.com/identity           | All                                  |
+| Admin                          | https://camunda.example.com/admin              | All                                  |
 | Management Identity            | https://camunda.example.com/managementidentity | All                                  |
 | Optimize                       | https://camunda.example.com/optimize           | Elasticsearch secondary storage only |
 | Orchestration Cluster REST API | https://camunda.example.com/                   | All                                  |
@@ -486,7 +486,7 @@ sudo kubefwd services -n "camunda"
 
 Now, you can reach services directly, for example:
 
-- **Identity**: `http://camunda-identity/managementidentity`
+- **Management Identity**: `http://camunda-identity/managementidentity`
 - **Keycloak**: `http://keycloak-service:18080/auth`
 - **Zeebe Gateway gRPC**: `camunda-zeebe-gateway:26500`
 
@@ -499,7 +499,7 @@ You can still use localhost ports if you prefer traditional port-forwarding. Sto
 | Zeebe Gateway (HTTP) | http://localhost:8080/             | All                                  |
 | Operate              | http://localhost:8080/operate      | All                                  |
 | Tasklist             | http://localhost:8080/tasklist     | All                                  |
-| Identity             | http://localhost:8080/identity     | All                                  |
+| Admin                | http://localhost:8080/admin        | All                                  |
 | Management Identity  | http://localhost:8085              | All                                  |
 | Optimize             | http://localhost:8083              | Elasticsearch secondary storage only |
 | Web Modeler          | http://localhost:8070              | All                                  |
