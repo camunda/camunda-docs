@@ -1,8 +1,8 @@
-#!/bin/bash   
+#!/bin/bash
 set -e # exit at first error
 
 # Before running this script make sure this version is correct!
-ARCHIVED_VERSION="8.3"
+ARCHIVED_VERSION="8.6"
 
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -64,7 +64,7 @@ if [[ "$script_index" == 8 || -z "$script_index" ]]; then
 fi
 
 notify "Automated steps are complete! For ease of review, consider PR'ing the deletion commits separate from the rest of the changes."
-notify "Manual steps that remain: 
+notify "Manual steps that remain:
 9. Fix htaccess rules
 10. Fix links
 "
