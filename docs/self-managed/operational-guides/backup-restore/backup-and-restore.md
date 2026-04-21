@@ -43,6 +43,10 @@ This guide covers two backup paths depending on your secondary storage. Choose t
 The RDBMS backup path covers Orchestration Cluster components only (Zeebe, Operate, and Tasklist). Optimize always stores its data in Elasticsearch or OpenSearch, regardless of the Orchestration Cluster's secondary storage. If you use Optimize alongside an RDBMS-backed Orchestration Cluster, back up and restore Optimize independently using the [standalone Optimize backup procedure](./optimize-backup-and-restore.md). You do not need to switch the Orchestration Cluster to the Elasticsearch / OpenSearch backup path.
 :::
 
+:::warning
+Because Optimize and an RDBMS-backed Orchestration Cluster are backed up independently on separate schedules, they may be restored to **different points in time**. This means Optimize analytics data — dashboards, reports, and historical process data — may not be consistent with the restored state of the Orchestration Cluster.
+:::
+
 ### Elasticsearch / OpenSearch
 
 Covers all Orchestration Cluster components and Optimize. Back up and restore with no downtime using coordinated Elasticsearch or OpenSearch snapshots. All components must use the same backup ID to ensure consistency.
