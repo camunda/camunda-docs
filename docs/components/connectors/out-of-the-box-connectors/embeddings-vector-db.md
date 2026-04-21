@@ -8,19 +8,19 @@ description: Embed, store, and retrieve LLM embeddings and store them in vector 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The **vector database connector** allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction.
+The **Vector Database connector** allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction.
 
 :::note
-The **vector database connector** uses the [LangChain4j](https://docs.langchain4j.dev/) library. Data models and possible implementations are limited
+The **Vector Database connector** uses the [LangChain4j](https://docs.langchain4j.dev/) library. Data models and possible implementations are limited
 to the latest stable released LangChain4j library.
 :::
 
 ## Prerequisites
 
-Before using the **vector database connector**, ensure you understand the
+Before using the **Vector Database connector**, ensure you understand the
 [concept of LLM embeddings](https://huggingface.co/spaces/hesamation/primer-llm-embedding).
 
-To start using the **vector database connector**, ensure you have access to a supported LLM embeddings API to convert document content into vectorized embedding form. You will also need to have write access to a supported database.
+To start using the **Vector Database connector**, ensure you have access to a supported LLM embeddings API to convert document content into vectorized embedding form. You will also need to have write access to a supported database.
 
 ## Create a connector task
 
@@ -133,7 +133,7 @@ Camunda document reference metadata, similarity score, and the actual text conte
 
 <TabItem value='bedrock'>
 
-The **vector database connector** supports [Amazon Titan V1 and V2 models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).  
+The **Vector Database connector** supports [Amazon Titan V1 and V2 models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).  
 You can also specify any custom model that supports text embedding and is available in your Amazon Bedrock account.
 
 To use Amazon Bedrock as an embedding model, provide:
@@ -363,9 +363,9 @@ Learn more about splitting in the [LangChain4j documentation](https://docs.langc
 
 ## HTTP proxy configuration
 
-In Self-Managed environments, the vector database connector supports routing HTTP requests through an HTTP proxy. This applies to both embedding model API calls and vector store connections.
+In Self-Managed environments, the Vector Database connector supports routing HTTP requests through an HTTP proxy. This applies to both embedding model API calls and vector store connections.
 
-The vector database connector supports [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md#plain-proxy-variables) in addition to the standard connector proxy variables. Refer to the [HTTP proxy configuration](/self-managed/components/connectors/http-proxy-configuration.md) page for the full list of environment variables and configuration options.
+The Vector Database connector supports [plain proxy variables](/self-managed/components/connectors/http-proxy-configuration.md#plain-proxy-variables) in addition to the standard connector proxy variables. Refer to the [HTTP proxy configuration](/self-managed/components/connectors/http-proxy-configuration.md) page for the full list of environment variables and configuration options.
 
 The following providers do not support connector proxy variables, but respect standard [JVM proxy properties](/self-managed/components/connectors/http-proxy-configuration.md#jvm-properties):
 

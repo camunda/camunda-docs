@@ -48,4 +48,4 @@ Learn how to monitor your AI agents in real time with Operate, improve performan
 
 Read our guidelines and recommendations for using Camunda AI agents.
 
-<AoGrid ao={recommendationCards} columns={2} />
+<AoGrid ao={recommendationCards} columns={3} />
