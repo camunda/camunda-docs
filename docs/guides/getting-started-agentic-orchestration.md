@@ -10,7 +10,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
 import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
-import AiAgentPropertiesPanelImg from './img/ai-agent-example-properties-panel.png';
+import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
@@ -36,8 +36,8 @@ After completing it, you will have an example AI agent running in Camunda 8.
 
 To build your first AI agent, see the prerequisites below depending on:
 
-- Your [working environment](#camunda-8-environment).
-- Your [chosen model](#supported-models).
+- Your working environment.
+- Your chosen model.
 
 ### Camunda 8 environment
 
@@ -163,12 +163,11 @@ See [Amazon Bedrock model provider](../components/connectors/out-of-the-box-conn
 
 #### Configure properties
 
-In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task.
-See [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) for more details.
+In the blueprint BPMN diagram, the AI agent is implemented using the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md).
 
 You can keep the default configuration or adjust it to test other setups. To do so, use the properties panel:
 
-<img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
+<img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel" width="50%"/>
 
 </TabItem>
 
@@ -272,12 +271,15 @@ You can observe this dynamic behavior in real-time through Operate, where you'll
 
 You can customize your AI agent by adding tools. To do so, you typically follow these steps:
 
-1. Add a BPMN activity inside the ad-hoc sub-process.
-1. Configure the task implementation, including the connector, service task, user task, and DMN.
+1. Add and configure a [BPMN task](/components/modeler/bpmn/tasks.md) inside the ad-hoc sub-process.
 1. Add a precise tool name and description, and define explicit input and output variables so the LLM can select and call the tool correctly.
 1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) for typed inputs, and return `toolCallResult` in the outputs.
 
-As an example, you will now add a service task called **Get order status** inside the AI Agent ad-hoc sub-process.
+As an example, you will now add a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md), named **Get order status**, inside the AI Agent ad-hoc sub-process.
+
+:::important
+At runtime, a service task is only executed if something is available to handle its jobs. Set up a [job worker](/components/concepts/job-workers.md) for the service task.
+:::
 
 1. Use `fromAi()` in the tool's input mapping so the LLM can provide structured inputs:
 
