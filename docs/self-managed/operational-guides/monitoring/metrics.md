@@ -273,9 +273,9 @@ optimize_error_total{ERROR_TYPE="version_conflict"} 12
 
 Optimize exposes a timer metric for tracking how long report evaluations take.
 
-| Metric name                       | Type  | Description                                   | Labels                     |
-| --------------------------------- | ----- | --------------------------------------------- | -------------------------- |
-| `optimize_report_reportLatency_*` | Timer | Duration of report and dashboard evaluations. | `REPORT_NAME`, `REPORT_ID` |
+| Metric name                       | Type  | Description                    | Labels                     |
+| --------------------------------- | ----- | ------------------------------ | -------------------------- |
+| `optimize_report_reportLatency_*` | Timer | Duration of report evaluation. | `REPORT_NAME`, `REPORT_ID` |
 
 The `REPORT_NAME` and `REPORT_ID` labels identify the evaluated report or dashboard.
 
