@@ -253,6 +253,36 @@
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
+      "name": "camunda.client.auth.token-fetch-backoff-multiplier",
+      "type": "java.lang.Double",
+      "description": "The multiplier applied to the backoff duration between successive token fetch retry attempts. Must be greater than or equal to 1.0.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-initial-backoff",
+      "type": "java.time.Duration",
+      "description": "The initial backoff duration applied between token fetch retry attempts. Subsequent delays grow geometrically by {@link #tokenFetchBackoffMultiplier}.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of attempts (including the initial one) when fetching a token from the OAuth authorization server. Retries are only attempted on IOException or HTTP status codes configured via {@code tokenFetchRetryableStatusCodes}.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-non-retryable-cooldown",
+      "type": "java.time.Duration",
+      "description": "Duration for which token fetches fail fast after the token endpoint returns a non-retryable response. After the cooldown elapses, the next call retries; if it fails again non-retryably, the latch re-arms with a new cooldown. Set to Duration.ZERO to disable the cooldown entirely.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-retryable-status-codes",
+      "type": "java.util.Set<java.lang.Integer>",
+      "description": "The set of HTTP status codes from the token endpoint that should be retried with backoff. Any non-200 status code outside this set trips a non-retryable failure latch that fails fast for the duration of tokenFetchNonRetryableCooldown.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
       "name": "camunda.client.auth.token-url",
       "type": "java.net.URI",
       "description": "The authorization server URL from which to request the access token. A default is set by <code> camunda.client.mode: saas<\/code>.",

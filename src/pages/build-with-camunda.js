@@ -605,7 +605,7 @@ function BuildWithCamunda() {
 
           <TerminalWindow title="Terminal">
             {`$ npm install @camunda8/cli -g
-$ c8ctl cluster start
+$ c8ctl cluster start 8.9
 
 # Camunda is now running! Deploy your first process:
 $ git clone https://github.com/camunda/camunda-8-get-started.git
