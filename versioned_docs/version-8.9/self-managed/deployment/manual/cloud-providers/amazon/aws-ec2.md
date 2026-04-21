@@ -322,7 +322,7 @@ The following example uses scripts from the Terraform installation to deploy and
 1. Navigate to the procedure directory:
 
 ```sh
-cd camunda-deployment-references/aws/ec2/procedure
+cd camunda-deployment-references/aws/compute/ec2-single-region/procedure
 ```
 
 The `procedure` directory contains Bash scripts for installing and configuring Camunda 8.
