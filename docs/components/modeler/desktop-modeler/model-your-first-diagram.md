@@ -32,6 +32,6 @@ You can also [orchestrate human tasks](/guides/getting-started-orchestrate-human
 
 For example, you might name your element and give it an ID under the **General** section.
 
-1. Save the diagram using **File > Save**, **File > Save As**, or the `Cmd/Ctrl + S` shortcut. Desktop Modeler saves the file to the location you choose on your local file system; it does not store diagrams in a separate internal workspace. To find the file again, reopen it from that folder or from the recent files list on the Desktop Modeler start screen.
+1. Save the diagram using **File > Save**, **File > Save As**, or the keyboard shortcut (`Cmd + S` on macOS or `Ctrl + S` on Windows and Linux). Desktop Modeler saves the file to the location you choose on your local file system; it does not store diagrams in a separate internal workspace. To find the file again, reopen it from that folder or from the recent files list on the Desktop Modeler start screen.
 
 1. Once you finish modeling and configuring your diagram, you can deploy it to a [Camunda 8 cluster](./connect-to-camunda-8.md).
