@@ -19,6 +19,70 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 45
+
+### Publication date
+
+Apr 23, 2026
+
+### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+
+### Impact
+
+The application was vulnerable to [CVE-2026-5588](https://nvd.nist.gov/vuln/detail/CVE-2026-5588), where the PKIX CompositeVerifier in the embedded Bouncy Castle cryptography library could accept an empty signature sequence as valid, weakening certificate signature verification and potentially allowing acceptance of improperly signed certificates.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Tasklist 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+- Camunda Zeebe 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+- Camunda Operate 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Tasklist 8.9.1, 8.8.23, 8.7.28
+- Camunda Zeebe 8.9.1, 8.8.23, 8.7.28
+- Camunda Operate 8.9.1, 8.8.23, 8.7.28
+
+## Notice 44
+
+### Publication date
+
+Apr 23, 2026
+
+### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+
+### Impact
+
+The application was vulnerable to [CVE-2025-14813](https://nvd.nist.gov/vuln/detail/CVE-2025-14813), where the GOSTCTR implementation in the embedded Bouncy Castle cryptography library used an incorrect one-byte counter and could not securely encrypt or decrypt more than 255 blocks, potentially compromising the confidentiality and integrity of data encrypted with this algorithm.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Tasklist 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+- Camunda Zeebe 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+- Camunda Operate 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Tasklist 8.9.1, 8.8.23, 8.7.28
+- Camunda Zeebe 8.9.1, 8.8.23, 8.7.28
+- Camunda Operate 8.9.1, 8.8.23, 8.7.28
+
 ## Notice 43
 
 ### Publication date
