@@ -697,7 +697,7 @@ bash 4-validate.sh
 ```
 
 :::warning Wait before cleanup
-Do not clean up immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [rollback](#rollback-if-needed)).
+Do not clean up immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) to confirm stability. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` before cleanup (see below).
 :::
 
 ### Rollback (if needed)
@@ -747,7 +747,7 @@ The script checks whether each resource exists before attempting deletion, so it
 <summary>Show details: Cleanup script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/5-cleanup-bitnami.sh
 ```
 
 </details>
@@ -777,6 +777,16 @@ Before starting the migration in production:
 - **Check cluster resources**: ensure the cluster has enough CPU, memory, and storage to run both old and new infrastructure simultaneously — they coexist for the entire replication phase.
 - **Review `env.sh`**: double-check all variables, especially `NAMESPACE`, `CAMUNDA_RELEASE_NAME`, and target cluster names.
 - **Prepare monitoring**: set up dashboards for PostgreSQL replication lag, Elasticsearch sync status, pod health, and storage capacity.
+
+### Production dry-run
+
+Although the zero-downtime migration does not use `3-cutover.sh`, you can still validate Phase 1 (target deployment) with the `--dry-run` flag:
+
+```bash
+bash 1-deploy-targets.sh --dry-run
+```
+
+Review the output to confirm that operator installations, target cluster manifests, and namespace settings match your expectations before deploying real resources.
 
 ### Post-migration monitoring
 

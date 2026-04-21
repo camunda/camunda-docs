@@ -182,6 +182,10 @@ Depending on the `Content-Type`, the file will be uploaded as a binary or a JSON
   ![connectors-rest-upload](../../../images/connectors/connectors-rest-upload.png)
 - **JSON**: The file will be uploaded as a JSON object. The `Content-Type` header **must** be set to `application/json` (this is the default). The body must be a map, where the key is the name of the file field and the value is a document reference, similar to the binary upload. The file will be **base64 encoded** and included in the JSON object.
 
+### Allow redirects
+
+- **Follow redirects**: When enabled, the connector automatically follows HTTP 3xx redirect responses, resolving the final destination URL. When disabled (default), the connector returns the original 3xx response including the `Location` header, leaving redirect handling to your process logic.
+
 ### Encoding
 
 In certain scenarios, such as when working with APIs that require pre-encoded URL elements, the REST connector's default behavior may inadvertently modify encoded segments.

@@ -34,9 +34,9 @@ You can create a new version either from your diagram or the versions list.
 
   ![versions create via icon](img/versions/web-modeler-version-create-via-icon-highlight.png)
 
-:::note
+:::caution
 
-A new version is also automatically created when dragging and dropping a file into the diagram view, or when you select the **Replace via upload** option from the breadcrumb menu.
+Prior to 8.8, dragging a file into the diagram view or selecting **Replace via upload** from the breadcrumb menu would automatically create a version of the previous content. This is no longer the case. The previous content is replaced and cannot be restored. If you want to preserve it, create a version manually before uploading.
 
 :::
 

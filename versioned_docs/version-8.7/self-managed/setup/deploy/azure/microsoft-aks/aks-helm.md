@@ -211,7 +211,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/azure/k
 
 ### 2. Configure your deployment
 
-#### Enable Web Modeller and Console services
+#### Enable Web Modeler and Console services
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](../../../install.md#configuring-web-modeler-console-and-connectors).
 

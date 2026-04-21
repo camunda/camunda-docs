@@ -16,7 +16,8 @@ const typeReplacements = {
   "java.net.URI": "url",
   "java.lang.Boolean": "boolean",
   "java.lang.Integer": "integer",
-  "java.lang.Long": "integer",
+  "java.lang.Double": "double",
+  "java.lang.Long": "long",
   "org.springframework.util.unit.DataSize": "dataSize",
   "io.camunda.client.spring.properties.CamundaClientProperties$ClientMode":
     "enum[self-managed, saas]",
@@ -26,6 +27,7 @@ const typeReplacements = {
     "enum[none, read_only, unrestricted]",
   "io.camunda.client.api.command.enums.TenantFilter":
     "enum[assigned, provided]",
+  "java.util.Set<java.lang.Integer>": "array[integer]",
 };
 
 const preserveGroups = [];
@@ -221,7 +223,7 @@ const preGenerateDocs = (config) => {
       property.type = typeReplacements[property.type];
     } else {
       console.log("No type replacement for " + property.type);
-      process.exit();
+      process.exit(1);
     }
     property.defaultValue = JSON.stringify(property.defaultValue);
     if (property.defaultValue === undefined) {
@@ -231,6 +233,11 @@ const preGenerateDocs = (config) => {
       property.description = property.description
         .replaceAll(/<p>/g, "\n\n")
         .replaceAll(/<code> /g, "`")
+        .replaceAll(
+          /\{@(?:link #|code )([^}]+)\}/g,
+          (_, prop) =>
+            "`" + prop.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase() + "`"
+        )
         .replaceAll(/<code>/g, "`")
         .replaceAll(/ <\/code>/g, "`")
         .replaceAll(/<\/code>/g, "`")
