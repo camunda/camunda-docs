@@ -228,7 +228,7 @@ Restoring Optimize requires downtime. Optimize must be stopped before restoring 
 | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Optimize stopped    | Optimize must not be running while restoring the datastore.                                                                                                |
 | Clean state         | Elasticsearch or OpenSearch must have no existing Optimize indices — all data will be restored from the snapshots.                                         |
-| Camunda version     | The backup must be restored using the **same Optimize version** it was created with. The version is embedded in the snapshot names (for example, `8.8.0`). |
+| Optimize version     | The backup must be restored using the **same Optimize version** it was created with. The version is embedded in the snapshot names (for example, `8.8.0`). |
 | Snapshot repository | Elasticsearch or OpenSearch must be configured with the same snapshot repository used during backup.                                                       |
 
 :::warning
