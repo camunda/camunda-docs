@@ -34,7 +34,7 @@ jobs:
               echo "::error::docs_version must be in X.Y format (e.g. '8.9'), got: '$VERSION'"
               exit 1
             fi
-            echo "sdk_ref=stable/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "sdk_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
             echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
             echo "pr_branch=update-python-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
