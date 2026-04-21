@@ -1218,7 +1218,7 @@ As you can see in the example above, the properties `bindingType` and `versionTa
 This is because these properties should generally not be changed by the user, unless the template author has very good reasons to allow this.
 Should an update to the resource be necessary, you can create a new version of the template that uses a different version tag.
 
-For further information, see the section on [element templates with dependencies](./element-template-with-dependencies.md).
+For further information, see the section on [element templates with dependencies](./element-templates-with-dependencies.md).
 
 ## Preventing persisting empty values: `optional`
 
