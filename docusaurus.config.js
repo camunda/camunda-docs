@@ -1,7 +1,8 @@
 const { unmaintainedVersions } = require("./src/versions");
 const { currentVersion } = require("./src/versions");
 
-const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
+const docsSiteUrl =
+  process.env.DOCS_SITE_URL || "https://unsupported.docs.camunda.io";
 const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
 
@@ -343,10 +344,10 @@ module.exports = {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign up</a></b> for a free account to start orchestrating your business processes today.',
-      backgroundColor: "#14D890",
-      textColor: "#000",
-      isCloseable: true,
+        '🚨 This version of Camunda 8 is no longer actively maintained. For up-to-date documentation, see <b><a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io">the latest version</a></b>.',
+      backgroundColor: "#FFC600",
+      textColor: "#434343",
+      isCloseable: false,
     },
 
     prism: {
@@ -363,23 +364,8 @@ module.exports = {
       },
       items: [
         {
-          type: "docsVersionDropdown",
+          type: "docsVersion",
           position: "left",
-          dropdownItemsAfter: [
-            {
-              type: "html",
-              value: '<hr class="dropdown-separator">',
-            },
-            {
-              type: "html",
-              className: "dropdown-unmaintained-versions",
-              value: "<b>Unmaintained versions</b>",
-            },
-            ...unmaintainedVersions.map((version) => ({
-              label: version.label,
-              href: `https://unsupported.docs.camunda.io/${version.urlSuffix}/`,
-            })),
-          ],
         },
         {
           type: "doc",
@@ -418,7 +404,7 @@ module.exports = {
             '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
         },
         {
-          to: "https://camunda.com/download?utm_source=docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",
+          to: "https://camunda.com/download?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",
           position: "right",
           className: "button button--primary button--md try-free",
           label: "Try Free",
@@ -440,7 +426,7 @@ module.exports = {
           items: [
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              href: "https://signup.camunda.com/accounts?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Support and feedback",
@@ -456,7 +442,7 @@ module.exports = {
           title: "Community",
           items: [
             {
-              html: `<a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
+              html: `<a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/8.6/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/8.6/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
             },
             {
               label: "Forum",
@@ -520,13 +506,6 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Camunda`,
     },
-    algolia: {
-      // These keys are for our new standalone algolia instance!
-      apiKey: "68db7725a8410eace68419c29385ad1e",
-      appId: "6KYF3VMCXZ",
-      indexName: "camunda-v2",
-      placeholder: "Search Camunda 8 docs",
-    },
     languageTabs: [
       {
         highlight: "bash",
@@ -588,42 +567,25 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           lastVersion: currentVersion,
-          // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
+          includeCurrentVersion: false,
           versions: {
-            current: {
-              label: "8.10 (unreleased)",
-            },
-            8.8: {
-              banner: "none",
-            },
-            8.7: {
-              banner: "none",
-            },
             8.6: {
-              banner: "none",
+              label: "8.6",
+              path: "/",
+              noIndex: true,
+              banner: "unmaintained",
             },
           },
-          docItemComponent: "@theme/ApiItem",
         },
+
         blog: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
         sitemap: {
-          changefreq: "weekly",
-          priority: 0.5,
-          ignorePatterns: [
-            "/docs/**/assets/**",
-            "/docs/**/tags/**",
-            "/docs/next/**",
-            "/docs/8.6/**",
-            "/docs/8.7/**",
-            "/docs/8.8/**",
-          ],
+          // exclude everything from sitemap
+          ignorePatterns: ["**"],
         },
       },
     ],
