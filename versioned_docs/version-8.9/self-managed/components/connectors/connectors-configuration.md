@@ -344,7 +344,7 @@ Connector secrets can be used in Helm charts, for example by referencing a [Kube
 connectors:
   envFrom:
     - secretRef:
-      name: camunda-connector-secrets
+        name: camunda-connector-secrets
 ```
 
 ```

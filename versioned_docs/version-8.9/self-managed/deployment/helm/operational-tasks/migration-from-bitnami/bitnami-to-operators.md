@@ -47,7 +47,7 @@ Additionally, the migration scripts require:
 - [`yq`](https://github.com/mikefarah/yq) installed (for selective CloudNativePG cluster deployment)
 - `base64` and `openssl` available (used for credential management)
 
-For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
+For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/.tool-versions) file.
 
 ## Precautions
 
@@ -77,7 +77,7 @@ Edit `env.sh` to match your current Camunda installation:
 <summary>Show details: `env.sh` reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/env.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/env.sh
 ```
 
 </details>
@@ -155,7 +155,7 @@ Review the CloudNativePG (CNPG) cluster specifications in `operator-based/postgr
 <summary>Show details: CloudNativePG manifest reference</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
 ```
 
 </details>
@@ -172,7 +172,7 @@ The migration patches the reference ECK cluster manifest from `operator-based/el
 <summary>Show details: Elasticsearch manifest reference</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
 ```
 
 </details>
@@ -181,9 +181,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 Review the Keycloak Custom Resource in `operator-based/keycloak/`. For the broader deployment context and Helm values layering, see [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment). Choose the appropriate variant:
 
-- [`keycloak-instance-domain-nginx.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml) — if you have a domain with nginx Ingress
-- [`keycloak-instance-domain-openshift.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml) — for OpenShift deployments with Routes
-- [`keycloak-instance-no-domain.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml) — for port-forward setups
+- [`keycloak-instance-domain-nginx.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml) — if you have a domain with nginx Ingress
+- [`keycloak-instance-domain-openshift.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml) — for OpenShift deployments with Routes
+- [`keycloak-instance-no-domain.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml) — for port-forward setups
 
 Key settings to verify:
 
@@ -225,7 +225,7 @@ All targets are created empty; no traffic is routed to them yet.
 <summary>Show details: Phase 1 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/1-deploy-targets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/1-deploy-targets.sh
 ```
 
 </details>
@@ -279,7 +279,7 @@ Reference templates used in this phase:
 <summary>Show details: PostgreSQL backup job template</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/pg-backup.job.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/jobs/pg-backup.job.yml
 ```
 
 </details>
@@ -288,7 +288,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 <summary>Show details: Elasticsearch verification job template</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/es-backup.job.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/jobs/es-backup.job.yml
 ```
 
 </details>
@@ -297,7 +297,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 <summary>Show details: Phase 2 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/2-backup.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/2-backup.sh
 ```
 
 </details>
@@ -379,7 +379,7 @@ Reference templates used in this phase:
 <summary>Show details: PostgreSQL restore job template</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/pg-restore.job.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/jobs/pg-restore.job.yml
 ```
 
 </details>
@@ -388,7 +388,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 <summary>Show details: Elasticsearch restore job template</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/es-restore.job.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/jobs/es-restore.job.yml
 ```
 
 </details>
@@ -397,7 +397,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 <summary>Show details: Phase 3 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/3-cutover.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/3-cutover.sh
 ```
 
 </details>
@@ -422,7 +422,7 @@ This phase verifies all components are healthy:
 <summary>Show details: Phase 4 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/4-validate.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/4-validate.sh
 ```
 
 </details>
@@ -468,7 +468,7 @@ The script checks whether each resource exists before attempting deletion, so it
 <summary>Show details: Phase 5 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/5-cleanup-bitnami.sh
 ```
 
 </details>
@@ -491,7 +491,7 @@ This restores the previous Helm values (re-enabling Bitnami subcharts) and resta
 <summary>Show details: Rollback script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/rollback.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/rollback.sh
 ```
 
 </details>
@@ -583,63 +583,6 @@ With `ES_WARM_REINDEX=true`, the bulk of the Elasticsearch data transfer happens
 
 <MeasureEstimate />
 
-## Troubleshooting
-
-### A migration job fails
-
-Check the job logs for details:
-
-```bash
-# List migration jobs
-kubectl get jobs -n ${NAMESPACE} -l migration.camunda.io/type
-
-# View logs for a specific job
-kubectl logs -n ${NAMESPACE} job/<job-name>
-
-# Describe the job for events
-kubectl describe job <job-name> -n ${NAMESPACE}
-```
-
-Each phase is idempotent; you can rerun it after fixing the issue.
-
-### PostgreSQL restore fails with permission errors
-
-When restoring to CNPG, the `pg_restore` command uses `--no-owner --no-privileges` flags to avoid permission mismatches. If you see errors related to ownership, verify that the target database user has the correct permissions:
-
-```bash
-kubectl exec -it <cnpg-primary-pod> -n ${NAMESPACE} -- psql -U postgres -c "\\du"
-```
-
-### Elasticsearch reindex fails
-
-The ES restore uses the `_reindex` API to pull data from the source Bitnami Elasticsearch to the target ECK cluster. Both clusters must be reachable within the same namespace. Check that the source ES is still running and accessible:
-
-```bash
-# Check if source ES is reachable from the target
-kubectl exec -it <eck-pod> -n ${NAMESPACE} -- \
-  curl -s http://${CAMUNDA_RELEASE_NAME}-elasticsearch:9200/_cluster/health
-```
-
-If the reindex fails for specific indices, check the job logs for mapping conflicts or timeout errors. You can delete the problematic indices on the target and rerun Phase 3.
-
-### Migration status check
-
-View the current migration progress:
-
-```bash
-bash 1-deploy-targets.sh --status
-```
-
-This shows which phases have been completed and their timestamps.
-
-### State tracking
-
-The scripts maintain migration state in `.state/migration.env`, a plain key-value file that records phase completion timestamps and deployment decisions. Each run appends to `.state/migration-YYYY-MM-DD.log`. The `.state/` directory is local and gitignored. To reset state and start over, run:
-
-```bash
-rm -rf .state/
-```
-
 ## Operational readiness
 
 Before running this migration in production, use the checklist below to reduce risk and confirm the cutover plan is ready.
@@ -698,3 +641,60 @@ After completing the migration, monitor the following for at least 48 hours:
 - **Camunda component logs**: check for connection errors, authentication failures, or data inconsistencies.
 - **Process instance completion**: verify that in-flight process instances continue to execute correctly.
 - **Zeebe export lag**: confirm that Zeebe exporters are writing to the new Elasticsearch without delays.
+
+## Troubleshooting
+
+### A migration job fails
+
+Check the job logs for details:
+
+```bash
+# List migration jobs
+kubectl get jobs -n ${NAMESPACE} -l migration.camunda.io/type
+
+# View logs for a specific job
+kubectl logs -n ${NAMESPACE} job/<job-name>
+
+# Describe the job for events
+kubectl describe job <job-name> -n ${NAMESPACE}
+```
+
+Each phase is idempotent; you can rerun it after fixing the issue.
+
+### PostgreSQL restore fails with permission errors
+
+When restoring to CNPG, the `pg_restore` command uses `--no-owner --no-privileges` flags to avoid permission mismatches. If you see errors related to ownership, verify that the target database user has the correct permissions:
+
+```bash
+kubectl exec -it <cnpg-primary-pod> -n ${NAMESPACE} -- psql -U postgres -c "\\du"
+```
+
+### Elasticsearch reindex fails
+
+The ES restore uses the `_reindex` API to pull data from the source Bitnami Elasticsearch to the target ECK cluster. Both clusters must be reachable within the same namespace. Check that the source ES is still running and accessible:
+
+```bash
+# Check if source ES is reachable from the target
+kubectl exec -it <eck-pod> -n ${NAMESPACE} -- \
+  curl -s http://${CAMUNDA_RELEASE_NAME}-elasticsearch:9200/_cluster/health
+```
+
+If the reindex fails for specific indices, check the job logs for mapping conflicts or timeout errors. You can delete the problematic indices on the target and rerun Phase 3.
+
+### Migration status check
+
+View the current migration progress:
+
+```bash
+bash 1-deploy-targets.sh --status
+```
+
+This shows which phases have been completed and their timestamps.
+
+### State tracking
+
+The scripts maintain migration state in `.state/migration.env`, a plain key-value file that records phase completion timestamps and deployment decisions. Each run appends to `.state/migration-YYYY-MM-DD.log`. The `.state/` directory is local and gitignored. To reset state and start over, run:
+
+```bash
+rm -rf .state/
+```

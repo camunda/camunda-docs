@@ -18,7 +18,7 @@ jobs:
         env:
           NODE_OPTIONS: --max_old_space_size=8192
       - name: Upload build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: docs-build
           path: build
@@ -29,12 +29,12 @@ jobs:
     env:
       temporary_link_path: .github/workflows/validate-links
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: 24
       - name: Download build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: docs-build
           path: build
