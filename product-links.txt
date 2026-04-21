@@ -84,7 +84,7 @@ https://docs.camunda.io/docs/next/components/tasklist/api-versions/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
 https://docs.camunda.io/docs
 https://docs.camunda.io/docs/components/concepts/job-workers/
-https://docs.camunda.io/docs/components/console/manage-connectors/cluster-connectors/
+https://docs.camunda.io/docs/components/console/manage-clusters/cluster-connectors/
 https://docs.camunda.io/docs/components/identity/identity-introduction/
 https://docs.camunda.io/docs/components/identity/role/
 https://docs.camunda.io/docs/components/saas/monitoring/cluster-metrics-endpoint/
