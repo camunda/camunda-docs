@@ -43,13 +43,13 @@ Failure to follow this procedure results in an unsupported upgrade path. The bro
 
 The examples below show representative compatible and incompatible paths. Patch versions can vary as long as minor-version rules are followed.
 
-| Scenario                         | Example               | Compatibility                                              |
-| -------------------------------- | --------------------- | ---------------------------------------------------------- |
-| Patch upgrade                    | 8.8.1 → 8.8.3         | Compatible                                                 |
-| Minor upgrade (single step)      | 8.7.2 → 8.8.1         | Compatible                                                 |
-| Minor upgrade (skipping a minor) | 8.6.9 → 8.8.3         | Incompatible                                               |
-| Patch downgrade                  | 8.8.3 → 8.8.1         | Incompatible (broker); secondary storage skips (see below) |
-| Minor downgrade                  | 8.8.3 → 8.7.5         | Incompatible (broker); secondary storage skips (see below) |
+| Scenario                         | Example              | Compatibility                                              |
+| -------------------------------- | -------------------- | ---------------------------------------------------------- |
+| Patch upgrade                    | 8.8.1 → 8.8.3        | Compatible                                                 |
+| Minor upgrade (single step)      | 8.7.2 → 8.8.1        | Compatible                                                 |
+| Minor upgrade (skipping a minor) | 8.6.9 → 8.8.3        | Incompatible                                               |
+| Patch downgrade                  | 8.8.3 → 8.8.1        | Incompatible (broker); secondary storage skips (see below) |
+| Minor downgrade                  | 8.8.3 → 8.7.5        | Incompatible (broker); secondary storage skips (see below) |
 | Major change                     | 8.x ↔ 9.x            | Incompatible                                               |
 | Alpha build involved             | 8.8.0-alpha1 ↔ 8.8.0 | Incompatible                                               |
 
@@ -107,7 +107,7 @@ id = "schema-version"
 ```
 
 The document value reflects the last successfully applied version (for example, `8.8.3`).
-This value is updated only after a successful schema upgrade.  
+This value is updated only after a successful schema upgrade.
 If the document or index is missing (for example, if you upgraded from an older patch that didn’t write it), the system treats the startup as a fresh baseline and writes it after initialization.
 
 ### Failure behavior
@@ -120,7 +120,7 @@ Because schema upgrades are backward compatible from 8.8 onward, a temporary mix
 
 ## Pre-release (alpha) builds
 
-Alpha builds (`-alpha*`) are for evaluation and are **not** valid sources or targets for a supported production upgrade path.  
+Alpha builds (`-alpha*`) are for evaluation and are **not** valid sources or targets for a supported production upgrade path.
 Always upgrade between stable releases.
 
 ## Recommended operational steps

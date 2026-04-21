@@ -1,7 +1,7 @@
 ---
 id: copilot
-title: "Copilot"
-description: "Configure Copilot in Web Modeler with a custom LLM provider."
+title: "Camunda Copilot"
+description: "Configure Camunda Copilot in Web Modeler with a custom LLM provider."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -9,7 +9,9 @@ import TabItem from "@theme/TabItem";
 
 <span class="badge badge--alpha">Alpha</span>
 
-Web Modeler supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms. You can configure the default LLM provider for BPMN, FEEL, and form copilots.
+Web Modeler supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms. Camunda Copilot uses a multi-agent architecture with a Supervisor Agent that routes requests to specialized sub-agents (BPMN, FEEL, Form). You can configure the LLM provider and parameters for each agent.
+
+For an overview of Camunda Copilot features and usage, see [Camunda Copilot](/components/modeler/web-modeler/copilot/copilot-overview.md).
 
 Copilot supports the following LLM providers:
 
@@ -37,13 +39,234 @@ Each provider has its own configuration options described below.
 
 <TabItem value="envVars">
 
-| Environment variable                        | Description                                                                    | Example value | Default value |
-| ------------------------------------------- | ------------------------------------------------------------------------------ | ------------- | ------------- |
-| `FEATURE_AI_ENABLED`                        | Enables Copilot.                                                               | `true`        | `false`       |
-| `RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER` | Default provider for BPMN Copilot.                                             | `BEDROCK`     | –             |
-| `RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER` | Default provider for FEEL Copilot.                                             | `OPENAI`      | –             |
-| `RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER` | Default provider for form Copilot.                                             | `VERTEX_AI`   | –             |
-| `RESTAPI_COPILOT_REQUEST_TIMEOUT`           | [optional] Overall request timeout in milliseconds for Copilot requests in UI. | `200000`      | `300000`      |
+| Environment variable                              | Description                                                                                                            | Example value | Default value |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `FEATURE_AI_ENABLED`                              | Enables Copilot.                                                                                                       | `true`        | `false`       |
+| `FEATURE_ONE_COPILOT_ENABLED`                     | Enables the unified agentic Copilot endpoint.                                                                          | `true`        | `false`       |
+| `FEATURE_CAMUNDA_COPILOT_USE_JSON_SCHEMA_ENABLED` | Enables JSON schema usage for Copilot.                                                                                 | `true`        | `false`       |
+| `RESTAPI_COPILOT_AGENT_DEFAULT_LLM_PROVIDER`      | Default LLM provider for the agent architecture. Falls back to `RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER` if not set. | `OPENAI`      | –             |
+| `RESTAPI_COPILOT_AGENT_DEFAULT_MODEL_ID`          | Default model ID for all agents. Falls back to `RESTAPI_COPILOT_VERTEX_AI_DEFAULT_MODEL_ID` if not set.                | `gpt-4o`      | –             |
+| `RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER`       | Default provider for BPMN Copilot.                                                                                     | `BEDROCK`     | –             |
+| `RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER`       | Default provider for FEEL Copilot.                                                                                     | `OPENAI`      | –             |
+| `RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER`       | Default provider for form Copilot.                                                                                     | `VERTEX_AI`   | –             |
+
+## Bring your own model (BYOM)
+
+Camunda Copilot supports connecting to your own AI provider and model in Self-Managed deployments. This allows you to:
+
+- Use your organization's existing AI infrastructure.
+- Maintain data sovereignty by keeping all AI interactions within your network.
+- Fine-tune models for your specific use cases.
+- Control costs by using your own API keys and quotas.
+
+### Supported approaches
+
+There are two main approaches to bring your own model:
+
+1. **OpenAI-compatible providers**: Any provider that implements the OpenAI `/chat/completions` API endpoint, including:
+   - Local LLM proxies (LiteLLM, vLLM, LocalAI).
+   - Self-hosted models behind an OpenAI-compatible gateway.
+   - Third-party providers with OpenAI-compatible APIs.
+
+2. **Native provider integrations**: Direct integrations with major cloud providers:
+   - AWS Bedrock.
+   - Azure OpenAI / Azure AI.
+   - Google Vertex AI.
+   - Anthropic.
+   - Ollama (for local models).
+   - Hugging Face.
+
+### Model recommendations
+
+:::tip
+Camunda recommends using GPT-5 class models or comparable (Claude 4.5 Sonnet, Gemini 2.5 Pro) for reliable BPMN generation.
+:::
+
+Copilot's BPMN generation requires models with strong reasoning and structured output capabilities. When using weaker or smaller models:
+
+- The model may fail to generate valid BPMN XML.
+- Copilot automatically attempts repair up to three times.
+- If repair fails, an empty XML is returned with an error message.
+
+### Example configurations
+
+#### Use OpenAI directly
+
+```yaml
+FEATURE_AI_ENABLED: "true"
+RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER: "OPENAI"
+RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER: "OPENAI"
+RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER: "OPENAI"
+RESTAPI_COPILOT_OPEN_AI_DEFAULT_MODEL_ID: "gpt-4o"
+RESTAPI_FEELCOPILOT_API_KEY: "sk-your-api-key"
+```
+
+#### Use a local LLM proxy (LiteLLM, vLLM)
+
+```yaml
+FEATURE_AI_ENABLED: "true"
+RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER: "OPENAI"
+RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER: "OPENAI"
+RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER: "OPENAI"
+RESTAPI_COPILOT_OPEN_AI_DEFAULT_MODEL_ID: "gpt-4"
+RESTAPI_COPILOT_OPENAI_ENDPOINT: "http://localhost:8000/v1"
+RESTAPI_COPILOT_OPENAI_BEARER: "your-proxy-api-key"
+```
+
+#### Use Ollama for local models
+
+```yaml
+FEATURE_AI_ENABLED: "true"
+RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER: "OLLAMA"
+RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER: "OLLAMA"
+RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER: "OLLAMA"
+RESTAPI_COPILOT_OLLAMA_DEFAULT_MODEL_ID: "llama3.1:70b"
+RESTAPI_COPILOT_OLLAMA_BASE_URL: "http://localhost:11434"
+```
+
+#### Use AWS Bedrock with Claude
+
+```yaml
+FEATURE_AI_ENABLED: "true"
+RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER: "BEDROCK"
+RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER: "BEDROCK"
+RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER: "BEDROCK"
+RESTAPI_COPILOT_AWS_DEFAULT_MODEL_ID: "anthropic.claude-3-5-sonnet-20240620-v1:0"
+RESTAPI_COPILOT_AWS_REGION: "us-east-1"
+RESTAPI_BPMNCOPILOT_ACCESS_KEY_ID: "AKIA..."
+RESTAPI_BPMNCOPILOT_SECRET_ACCESS_KEY: "your-secret-key"
+```
+
+### Troubleshoot BYOM
+
+#### Enable request/response logging
+
+For debugging issues with your model, enable logging (not recommended for production):
+
+```yaml
+RESTAPI_COPILOT_AGENT_SUPERVISOR_LOG_REQUEST: "true"
+RESTAPI_COPILOT_AGENT_SUPERVISOR_LOG_RESPONSE: "true"
+RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_LOG_REQUEST: "true"
+RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_LOG_RESPONSE: "true"
+```
+
+#### Adjust timeouts for slower models
+
+Local or self-hosted models may require longer timeouts:
+
+```yaml
+RESTAPI_COPILOT_AGENT_SUPERVISOR_TIMEOUT: "120s"
+RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_TIMEOUT: "120s"
+RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_TIMEOUT: "120s"
+RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_TIMEOUT: "120s"
+```
+
+#### Common issues
+
+| Issue                 | Possible cause                           | Solution                                      |
+| --------------------- | ---------------------------------------- | --------------------------------------------- |
+| Empty BPMN output     | Model too weak for structured generation | Use a stronger model (GPT-4 class or better)  |
+| Timeout errors        | Model response too slow                  | Increase timeout values                       |
+| Authentication errors | Invalid credentials                      | Verify API keys and endpoint URLs             |
+| Connection refused    | Endpoint not reachable                   | Check network connectivity and firewall rules |
+
+## Conversation configuration
+
+Configure conversation state caching, pagination, and retention settings.
+
+| Environment variable                                           | Description                                                | Example value | Default value |
+| -------------------------------------------------------------- | ---------------------------------------------------------- | ------------- | ------------- |
+| `RESTAPI_COPILOT_CONVERSATION_STATE_CACHE_MAX_SIZE`            | Maximum number of conversation states to cache.            | `5000`        | `10000`       |
+| `RESTAPI_COPILOT_CONVERSATION_STATE_CACHE_EXPIRE_AFTER_ACCESS` | Time after which inactive conversations expire from cache. | `30m`         | `1h`          |
+| `RESTAPI_COPILOT_CONVERSATION_PAGINATION_DEFAULT_PAGE_SIZE`    | Default page size for conversation message pagination.     | `50`          | `20`          |
+| `RESTAPI_COPILOT_CONVERSATION_RETENTION_ENABLED`               | Enable automatic cleanup of old conversations.             | `false`       | `true`        |
+| `RESTAPI_COPILOT_CONVERSATION_RETENTION_PERIOD`                | How long to retain conversations before cleanup.           | `60d`         | `90d`         |
+| `RESTAPI_COPILOT_CONVERSATION_CLEANUP_CRON`                    | Cron expression for the cleanup schedule.                  | `0 0 3 * * ?` | `0 0 2 * * ?` |
+| `RESTAPI_COPILOT_CONVERSATION_CLEANUP_BATCH_SIZE`              | Number of conversations to delete per cleanup batch.       | `500`         | `1000`        |
+| `RESTAPI_COPILOT_CONVERSATION_RETENTION_LOCK_AT_MOST_FOR`      | Maximum lock duration for the cleanup job.                 | `PT2H`        | `PT1H`        |
+| `RESTAPI_COPILOT_CONVERSATION_RETENTION_LOCK_AT_LEAST_FOR`     | Minimum lock duration for the cleanup job.                 | `PT10M`       | `PT5M`        |
+
+## Agent configuration
+
+Copilot uses a multi-agent architecture. You can configure LLM parameters separately for the Supervisor Agent and each sub-agent.
+
+### Supervisor Agent
+
+The Supervisor Agent routes user requests to the appropriate sub-agent.
+
+| Environment variable                                              | Description                                                               | Example value        | Default value |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_MODEL_ID`                       | [optional] Override the model ID for the Supervisor Agent.                | `gpt-4o`             | –             |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_TEMPERATURE`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_TOP_K`                          | [optional] Top-K sampling.                                                | `100`                | `64`          |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_MAX_TOKENS`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `300s`        |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `RESTAPI_COPILOT_AGENT_SUPERVISOR_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `300s`        |
+
+### BPMN Sub-Agent
+
+| Environment variable                                                 | Description                                                               | Example value        | Default value |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_TEMPERATURE`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_TOP_K`                          | [optional] Top-K sampling.                                                | `100`                | `64`          |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_MAX_TOKENS`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `300s`        |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `RESTAPI_COPILOT_AGENT_BPMN_SUBAGENT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `300s`        |
+
+### FEEL Sub-Agent
+
+| Environment variable                                                 | Description                                                               | Example value        | Default value |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_TEMPERATURE`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_TOP_K`                          | [optional] Top-K sampling.                                                | `100`                | `64`          |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_MAX_TOKENS`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `300s`        |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `RESTAPI_COPILOT_AGENT_FEEL_SUBAGENT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `300s`        |
+
+### Form Sub-Agent
+
+| Environment variable                                                 | Description                                                               | Example value        | Default value |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_TEMPERATURE`                    | [optional] Sampling temperature.                                          | `0.2`                | `0.3`         |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_TOP_K`                          | [optional] Top-K sampling.                                                | `100`                | `64`          |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_MAX_TOKENS`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `300s`        |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
+| `RESTAPI_COPILOT_AGENT_FORM_SUBAGENT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `300s`        |
+
+### Agent client cache
+
+| Environment variable                                     | Description                                              | Example value | Default value |
+| -------------------------------------------------------- | -------------------------------------------------------- | ------------- | ------------- |
+| `RESTAPI_COPILOT_AGENT_CLIENT_CACHE_MAX_SIZE`            | Maximum number of agent client instances to cache.       | `20`          | `10`          |
+| `RESTAPI_COPILOT_AGENT_CLIENT_CACHE_EXPIRE_AFTER_ACCESS` | Time after which unused agent clients expire from cache. | `30m`         | `1h`          |
+
+## Legacy Copilot configuration
+
+The following sections configure the legacy (non-agent) Copilot endpoints. These settings are still used for backward compatibility.
 
 </TabItem>
 
@@ -79,13 +302,13 @@ camunda.modeler:
 | `RESTAPI_BPMN_COPILOT_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
 | `RESTAPI_BPMN_COPILOT_TOP_K`                          | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
 | `RESTAPI_BPMN_COPILOT_MAX_TOKENS`                     | [optional] Maximum new tokens per responses.                              | `4096`               | `8192`        |
-| `RESTAPI_BPMN_COPILOT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
+| `RESTAPI_BPMN_COPILOT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `300s`        |
 | `RESTAPI_BPMN_COPILOT_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
 | `RESTAPI_BPMN_COPILOT_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
 | `RESTAPI_BPMN_COPILOT_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
 | `RESTAPI_BPMN_COPILOT_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
 | `RESTAPI_BPMN_COPILOT_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
-| `RESTAPI_BPMN_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
+| `RESTAPI_BPMN_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `300s`        |
 
 </TabItem>
 
@@ -125,13 +348,13 @@ camunda.modeler.default-bpmn-copilot-llm-configuration:
 | `RESTAPI_FEEL_COPILOT_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
 | `RESTAPI_FEEL_COPILOT_TOP_K`                          | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
 | `RESTAPI_FEEL_COPILOT_MAX_TOKENS`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
-| `RESTAPI_FEEL_COPILOT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
+| `RESTAPI_FEEL_COPILOT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `300s`        |
 | `RESTAPI_FEEL_COPILOT_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
 | `RESTAPI_FEEL_COPILOT_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
 | `RESTAPI_FEEL_COPILOT_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
 | `RESTAPI_FEEL_COPILOT_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
 | `RESTAPI_FEEL_COPILOT_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
-| `RESTAPI_FEEL_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
+| `RESTAPI_FEEL_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `300s`        |
 
 </TabItem>
 
@@ -171,13 +394,17 @@ camunda.modeler.default-feel-copilot-llm-configuration:
 | `RESTAPI_FORM_COPILOT_TOP_P`                          | [optional] Nucleus sampling probability.                                  | `0.90`               | `0.95`        |
 | `RESTAPI_FORM_COPILOT_TOP_K`                          | [optional] Top-K sampling (if supported by the model).                    | `100`                | `64`          |
 | `RESTAPI_FORM_COPILOT_MAX_TOKENS`                     | [optional] Maximum new tokens per response.                               | `4096`               | `8192`        |
-| `RESTAPI_FORM_COPILOT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `60s`         |
+| `RESTAPI_FORM_COPILOT_TIMEOUT`                        | [optional] Overall request timeout.                                       | `45s`                | `300s`        |
 | `RESTAPI_FORM_COPILOT_LOG_REQUEST`                    | [optional] Log raw requests (not recommended in production).              | `true`               | `false`       |
 | `RESTAPI_FORM_COPILOT_LOG_RESPONSE`                   | [optional] Log raw responses (not recommended in production).             | `true`               | `false`       |
 | `RESTAPI_FORM_COPILOT_CONNECTION_ACQUISITION_TIMEOUT` | [optional] Connection pool acquisition timeout.                           | `10s`                | `30s`         |
 | `RESTAPI_FORM_COPILOT_LOGIT_BIAS`                     | [optional] JSON object mapping token IDs to bias values (model-specific). | `{"123":-2,"456":3}` | `{}`          |
 | `RESTAPI_FORM_COPILOT_MAX_CONNECTIONS`                | [optional] Maximum HTTP connections.                                      | `300`                | `200`         |
-| `RESTAPI_FORM_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `60s`         |
+| `RESTAPI_FORM_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request.                                      | `120s`               | `300s`        |
+
+## LLM providers
+
+The following sections describe the configuration options for each supported LLM provider.
 
 </TabItem>
 

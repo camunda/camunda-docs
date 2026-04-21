@@ -359,7 +359,11 @@ RewriteRule ^docs/next/components/modeler/web-modeler/versions/?$ /docs/next/com
 ## Web Modeler folder restructure - moved to modeling/advanced-modeling/
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/modeler/web-modeler/copilot/copilot-overview/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/modeler/web-modeler/copilot/copilot-overview/ [R=301,L]
+RewriteRule ^docs/next/components/early-access/alpha/bpmn-copilot/bpmn-copilot/?$ /docs/next/components/modeler/web-modeler/copilot/copilot-overview/ [R=301,L]
+RewriteRule ^docs/next/components/early-access/alpha/feel-copilot/feel-copilot/?$ /docs/next/components/modeler/web-modeler/copilot/copilot-overview/ [R=301,L]
+
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]

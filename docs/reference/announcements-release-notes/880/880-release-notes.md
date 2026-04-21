@@ -700,7 +700,7 @@ Element template management is now more flexible for developers and DevOps teams
 
 Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Web Modeler.
 
-<p><a href="../../../../components/early-access/alpha/feel-copilot/" class="link-arrow">FEEL Copilot</a></p>
+<p><a href="../../../../components/modeler/web-modeler/copilot/copilot-overview/" class="link-arrow">Camunda Copilot</a></p>
 
 ### FEEL Playground
 
@@ -1295,7 +1295,7 @@ Camunda now supports [an integration with Azure DevOps](/components/modeler/web-
 
 Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Web Modeler.
 
-To learn more about this feature, see [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md).
+To learn more about this feature, see [Camunda Copilot](/components/modeler/web-modeler/copilot/copilot-overview.md).
 
 :::note
 The FEEL Copilot is released as an [early access alpha feature](/components/early-access/alpha/alpha-features.md) to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
