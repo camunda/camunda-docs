@@ -8,7 +8,7 @@
  * @property {string} urlSuffix
  */
 
-const currentVersion = "8.9";
+const currentVersion = "8.6";
 
 /** @type {Array<UnmaintainedVersion>} */
 const unmaintainedVersions = [
