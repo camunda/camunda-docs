@@ -82,13 +82,13 @@ This approach uses three operator-managed infrastructure components, each mainta
 
 All configuration files, deployment scripts, and automation tools referenced in this guide are available in the Camunda deployment references repository:
 
-**Repository**: [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based)
+**Repository**: [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/generic/kubernetes/operator-based)
 
 <details>
 <summary><strong>Quick deployment commands</strong></summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/get-your-copy.sh
 ```
 
 Then execute:
@@ -123,7 +123,7 @@ The deployment scripts (`deploy.sh`) contain all the necessary steps to install 
 All deployment scripts require environment variables to be set. This is a prerequisite for all subsequent steps:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/0-set-environment.sh
 ```
 
 :::note
@@ -172,7 +172,7 @@ If you don't plan to use certain components (for example, Web Modeler), you can 
 The PostgreSQL deployment follows these steps, automated via the `postgresql/deploy.sh` script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/deploy.sh
 ```
 
 **Deployment steps performed by the script:**
@@ -193,7 +193,7 @@ This configuration creates three dedicated PostgreSQL clusters, each optimized f
 **Save as** `postgresql-clusters.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
 ```
 
 **Use cases:**
@@ -231,7 +231,7 @@ Configure Camunda Identity to use the PostgreSQL cluster.
 **Save as** `camunda-identity-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml
 ```
 
 **Installation**: Add `-f camunda-identity-values.yml` to your Helm install command.
@@ -244,7 +244,7 @@ Configure Web Modeler to use the PostgreSQL cluster.
 **Save as** `camunda-webmodeler-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
 ```
 
 **Installation**: Add `-f camunda-webmodeler-values.yml` to your Helm install command.
@@ -288,7 +288,7 @@ Elasticsearch serves as the secondary storage for Camunda 8 orchestration cluste
 The Elasticsearch deployment follows these steps, automated via the `elasticsearch/deploy.sh` script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 ```
 
 **Deployment steps performed by the script:**
@@ -308,7 +308,7 @@ This configuration creates a production-ready Elasticsearch cluster with securit
 **Save as** `elasticsearch-cluster.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
 ```
 
 </TabItem>
@@ -336,7 +336,7 @@ Configure Camunda components to use the ECK-managed Elasticsearch.
 **Save as** `camunda-elastic-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml
 ```
 
 **Use case**: External Elasticsearch connection for all orchestration cluster components (Zeebe, Operate, Tasklist, Optimize).
@@ -384,7 +384,7 @@ The dedicated Ingress configuration is integrated directly within the operator m
 The Keycloak deployment follows these steps, automated via the `keycloak/deploy.sh` script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/deploy.sh
 ```
 
 **Deployment steps performed by the script:**
@@ -404,7 +404,7 @@ Basic Keycloak instance for local development.
 **Save as** `keycloak-instance-no-domain.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml
 ```
 
 **Use case**: Local development and testing without external domain.
@@ -421,7 +421,7 @@ Production Keycloak instance with nginx-ingress.
 **Save as** `keycloak-instance-domain-nginx.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
 ```
 
 **Use case**: Production deployment with external domain using [nginx-ingress controller](https://kubernetes.github.io/ingress-nginx/).
@@ -434,7 +434,7 @@ Keycloak instance configured for OpenShift Routes.
 **Save as** `keycloak-instance-domain-openshift.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml
 ```
 
 **Use case**: [OpenShift](https://docs.redhat.com/en/documentation/openshift_container_platform/4.11/html/networking/configuring-routes) deployment using native Route resources.
@@ -466,7 +466,7 @@ Configure Camunda to use Keycloak for local development.
 **Save as** `camunda-keycloak-no-domain-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml
 ```
 
 **Use case**: Local development setup with port-forwarding access.
@@ -481,7 +481,7 @@ Configure Camunda to use Keycloak with external domain.
 **Save as** `camunda-keycloak-domain-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
 ```
 
 :::note Domain configuration step
@@ -549,7 +549,7 @@ Before deploying Camunda, ensure you have completed the following:
 First, source the environment setup script to set `HELM_CHART_VERSION` and other required variables. See the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to choose the appropriate chart version for your deployment:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/0-set-environment.sh
 ```
 
 Then, deploy Camunda using the infrastructure configuration files you saved from previous sections.
