@@ -46,6 +46,19 @@ If users are managed within the Orchestration Cluster (that is, without an exter
 - Using the [Setup endpoint of the Orchestration Cluster REST API](#option-2-setup-rest-api)
 - Using the [configuration](#option-3-configuration)
 
+:::info Production and no-clickops setups
+For production environments, prefer **Option 3: configuration** so your admin bootstrap, role assignments, and authentication settings are defined declaratively in `application.yaml`, environment variables, or Helm-managed application configuration.
+
+The UI and Setup API options are useful for manual bootstrap, but they are not the best fit for repeatable, Git-managed deployments.
+
+Typical production next steps are:
+
+- Define initial users and role assignments with the configuration examples on this page.
+- Enable API authentication and authorizations in configuration.
+- If you deploy with Helm, provide these settings through [application configs](/self-managed/deployment/helm/configure/application-configs.md) and the [Helm authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md).
+- If you use an external Identity Provider, continue with [connect Admin to an identity provider](./connect-external-identity-provider.md).
+  :::
+
 :::warning
 After completing the initial setup, ensure at least one user remains assigned to the `admin` role.  
 If no admin user exists, a third party could create a new admin account and gain full access.
@@ -77,6 +90,8 @@ with the following JSON request body:
 ```
 
 This endpoint is only available if **no user is assigned to the `admin` role**.
+
+This option is convenient for scripted bootstrap, but for long-lived production environments we recommend keeping the desired state in configuration.
 
 ### Option 3: Define initial users via the configuration{#option-3-configuration}
 
