@@ -4,6 +4,7 @@ title: Install Desktop Modeler
 sidebar_label: Installation
 description: "Learn how to install Camunda Desktop Modeler, a desktop application for modeling BPMN, DMN, and Forms and support building executable diagrams with Camunda."
 ---
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
@@ -27,15 +28,19 @@ To install [Desktop Modeler](./index.md) for Windows, macOS, and Linux, visit th
 Ensure the installation is owned by `root` and accessible to all users of the machine by following the steps below.
 
 1. Unpack the zip archive using the `tar` command:
+
 ```shell
 cd /usr/bin
 sudo tar xvfz ~/Downloads/camunda-modeler-5.41.0-linux-x64.tar.gz
 ```
+
 2. Ensure the access permissions of the `chrome-sandbox` file are correct and create a link to this version:
+
 ```shell
 sudo chmod 4755 camunda-modeler-5.41.0-linux-x64/chrome-sandbox
 sudo ln -s camunda-modeler-5.41.0-linux-x64/camunda-modeler camunda-modeler
 ```
+
 </TabItem>
 
 ## Wire file associations
