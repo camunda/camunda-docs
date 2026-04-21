@@ -302,7 +302,7 @@ This example shows how to run the Orchestration Cluster as a [`systemd`](https:/
 1. Create a `systemd` service file named `camunda.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda.service`.
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/camunda.service
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/compute/debian/configs/camunda.service
    ```
 
 2. Change the permissions on `/etc/systemd/system/camunda.service` to `644`:
@@ -531,7 +531,7 @@ The example uses a file with environment variables, but you can adapt it to use 
 1. Create a `systemd` service file named `camunda-connectors.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda-connectors.service`.
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/generic/compute/debian/configs/camunda-connectors.service
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/compute/debian/configs/camunda-connectors.service
    ```
 
 2. Change the permissions on `/etc/systemd/system/camunda-connectors.service` to `644`:
