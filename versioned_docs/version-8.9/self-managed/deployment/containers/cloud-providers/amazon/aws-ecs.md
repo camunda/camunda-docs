@@ -508,7 +508,7 @@ Without these additions, information is transmitted in plaintext and is therefor
 1. Navigate to the Terraform folder:
 
 ```sh
-cd camunda-deployment-references/aws/containers/ecs-single-region-fargate/terraform
+cd terraform
 ```
 
 2. Retrieve the Application Load Balancer output:
