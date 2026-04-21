@@ -31,13 +31,13 @@ You sign in using your organization's Microsoft account, and then link it to you
 
 ### Key features
 
-| Feature             | Description                                                         |
-| :------------------ | :------------------------------------------------------------------ |
-| Task management     | View, claim, assign, and complete user tasks directly in Teams.     |
-| Start processes     | Browse process definitions and start new instances from Teams.      |
-| Incident monitoring | View incidents, retry failed jobs, and open them in Operate.        |
-| Notifications       | Receive personal and channel alerts for new or assigned user tasks. |
-| Cluster management  | View cluster health and wake up suspended clusters.                 |
+| Feature                                      | Description                                                                                  |
+| :------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| Task management                              | View, claim, assign, and complete user tasks directly in Teams.                              |
+| Start processes                              | Browse process definitions and start new instances from Teams.                               |
+| Incident monitoring                          | View incidents, retry failed jobs, and open them in Operate.                                 |
+| [Notifications](./ms-teams-notifications.md) | Receive personal and channel alerts for user tasks based on configurable notification rules. |
+| Cluster management                           | View cluster health and wake up suspended clusters.                                          |
 
 ## Process variable: `appContext`
 

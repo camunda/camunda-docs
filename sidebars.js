@@ -355,6 +355,7 @@ module.exports = {
                 "components/camunda-integrations/ms-teams/ms-teams-troubleshoot",
                 "components/camunda-integrations/ms-teams/ms-teams-chatbot",
                 "components/camunda-integrations/ms-teams/ms-teams-tabs",
+                "components/camunda-integrations/ms-teams/ms-teams-notifications",
               ],
             },
             {

@@ -15,17 +15,19 @@ The Camunda bot is available in your personal chat, group chats, and channels. Y
 
 The following commands are recognized by the bot:
 
-| Command                                                 | What it does                                                                                                                  |
-| :------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------- |
-| **Hi** (or hey, hello, greetings, and similar messages) | The bot greets you. If you haven't connected your Camunda account yet, it shows you how to get started.                       |
-| **Help** (or ?, support, commands)                      | Shows a help card with available commands and setup information.                                                              |
-| **Switch context**                                      | Enables you to change your active organization and cluster.                                                                   |
-| **Start a process**                                     | Walks you through selecting and starting a Camunda process. If no cluster is selected yet, it asks you to pick one first.     |
-| **Set up notifications**                                | Subscribes the current channel or chat to receive notifications about new user tasks for a selected organization and cluster. |
-| **Reset notifications**                                 | Shows the active notification subscriptions for the current channel and lets you remove them.                                 |
+| Command                                                 | What it does                                                                                                              |
+| :------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------ |
+| **Hi** (or hey, hello, greetings, and similar messages) | The bot greets you. If you haven't connected your Camunda account yet, it shows you how to get started.                   |
+| **Help** (or ?, support, commands)                      | Shows a help card with available commands and setup information.                                                          |
+| **Switch context**                                      | Enables you to change your active organization and cluster.                                                               |
+| **Start a process**                                     | Walks you through selecting and starting a Camunda process. If no cluster is selected yet, it asks you to pick one first. |
 
 :::important
 If you type an unrecognized command, the bot notifies you and suggests using **Help**.
+:::
+
+:::note
+Notification subscriptions are configured from the [Notification rules](./ms-teams-notifications.md) page rather than through bot commands.
 :::
 
 ## Interactive card actions
@@ -103,21 +105,17 @@ Static values and process variables are supported in Adaptive Cards. Dynamic FEE
 
 ## Notifications
 
-Once set up, the bot proactively sends messages to keep you informed.
+Once configured, the bot proactively sends messages to keep you informed. Notifications are driven by [notification rules](./ms-teams-notifications.md), which determine exactly which user task events reach a given channel or personal chat.
 
 ### Personal notifications
 
-Receive a message in your personal chat when a task is assigned to you.
+Receive a message in your personal chat when a user task matches one of your personal notification rules — for example, when a task is assigned to you.
 
 ### Channel notifications
 
-A subscribed channel receives messages about new unassigned tasks, so your team can coordinate on who picks them up.
+A channel receives messages about user tasks that match the rules configured on that channel, so your team can coordinate on who picks them up.
 
-To enable channel notifications:
-
-1. In any Microsoft Teams channel, enter the command: `@Camunda Set up notifications`.
-2. Follow the on-screen instructions to configure the notifications the channel should receive.
-3. Once complete, the selected channel will automatically receive alerts for new tasks.
+To configure notifications, see [Notification rules](./ms-teams-notifications.md).
 
 ### Notification behavior
 
