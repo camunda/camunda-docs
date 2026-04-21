@@ -87,6 +87,20 @@ LLM Foundation models are large-scale, pre-trained AI models that can be adapted
 
 - See [extraction models](idp-reference.md#extraction-models) for a list of currently supported LLM extraction models.
 
+## Text extraction engines {#extraction-engines}
+
+A text extraction engine determines how text is extracted from a document before the LLM processes its content. Different document types and quality levels benefit from different extraction approaches.
+
+- **Lightweight parsing** (Fast Extract): For digitally generated PDFs where text is already embedded, a fast built-in parser can extract text without OCR, reducing processing time and cost.
+- **OCR-based extraction** (AWS Textract, Azure Document Intelligence, GCP Document AI): For scanned or image-based documents, OCR engines provide high-accuracy text recognition from images.
+- **Multimodal**: For LLMs that support vision capabilities, the document can be sent directly to the model for native interpretation, bypassing a separate text extraction step entirely.
+
+You can select the extraction engine per unstructured extraction template during [extraction testing](idp-unstructured-extraction.md#extract-data), [validation](idp-unstructured-extraction.md#validate-extraction), and [publishing](idp-unstructured-extraction.md#publish-template), to optimize accuracy, performance, and cost for each document type.
+
+:::info
+For a full list of available extraction engines, see [text extraction engines](idp-reference.md#extraction-engines).
+:::
+
 ## Extraction fields {#fields}
 
 Extraction fields are the data fields you want to extract from a document, such as an invoice ID, date, customer name, and so on.

@@ -36,7 +36,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - [jq](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
 - This guide uses GNU/Bash for all the shell commands listed.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
@@ -72,10 +72,10 @@ Following this tutorial and steps will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/procedure/get-your-copy.sh
 ```
 
 With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
@@ -90,7 +90,7 @@ This module sets up the foundational configuration for ROSA HCP and Terraform us
 
 We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, simplifying infrastructure management.
 
-The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/main/aws/openshift/rosa-hcp-dual-region/) is publicly available and serves as a starting point for deploying Red Hat OpenShift clusters on AWS using a Hosted Control Plane.
+The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/aws/openshift/rosa-hcp-dual-region/) is publicly available and serves as a starting point for deploying Red Hat OpenShift clusters on AWS using a Hosted Control Plane.
 It is highly recommended to review this module before implementation to understand its structure and capabilities.
 
 Please note that this module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html).
@@ -100,19 +100,19 @@ It is presented as an example for running Camunda 8 in ROSA.
 
 <RosaHcpAuth />
 
-Configure `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
+Configure `CLUSTER_0_REGION` and `CLUSTER_1_REGION` with the target regions respectively.
 
 ```bash
 # Set the region, adjust as needed
-export CLUSTER_1_REGION="us-east-1"
-export CLUSTER_2_REGION="us-east-2"
+export CLUSTER_0_REGION="us-east-1"
+export CLUSTER_1_REGION="us-east-2"
 ```
 
 Verify your AWS quotas for each region:
 
 ```bash
+rosa verify quota --region="$CLUSTER_0_REGION"
 rosa verify quota --region="$CLUSTER_1_REGION"
-rosa verify quota --region="$CLUSTER_2_REGION"
 ```
 
 :::note
@@ -135,12 +135,12 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
    cd clusters
    ```
 
-2. Configure your topology deployment, as you will use multiple regions, specify `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
+2. Configure your topology deployment, as you will use multiple regions, specify `CLUSTER_0_REGION` and `CLUSTER_1_REGION` with the target regions respectively.
 
    ```bash
    # set the region, adjust to your needs
-   export CLUSTER_1_REGION="us-east-1"
-   export CLUSTER_2_REGION="us-east-2"
+   export CLUSTER_0_REGION="us-east-1"
+   export CLUSTER_1_REGION="us-east-2"
 
    # ensure bucket variables are set
    export S3_TF_BUCKET_REGION="<your-region>"
@@ -157,21 +157,21 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
    This configuration will use the previously created S3 bucket for storing the Terraform state file:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/clusters/config.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/clusters/config.tf
    ```
 
-5. Review the file named `cluster_region_1.tf` in the same directory.
-   This file describes the cluster of the region 1, you may want to customize the `locals` variables with parameters of your choice, those are described in the next steps.
+5. Review the file named `cluster_region_0.tf` in the same directory.
+   This file describes the cluster of the region 0, you may want to customize the `locals` variables with parameters of your choice, those are described in the next steps.
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_0.tf
    ```
 
-6. Do the same review with `cluster_region_2.tf` and adjust it to your needs.
-   This file describes the cluster of the region 2:
+6. Do the same review with `cluster_region_1.tf` and adjust it to your needs.
+   This file describes the cluster of the region 1:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_2.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
    ```
 
 7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
@@ -203,13 +203,13 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
 
 1. Configure user access to the clusters. By default, the user who creates an OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster will be created.
 
-1. Customize the clusters setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/rosa-hcp/README.md).
+1. Customize the clusters setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/modules/rosa-hcp/README.md).
 
 :::caution Camunda Terraform module
 
 This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
 
-Consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/rosa-hcp/README.md) for more information.
+Consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/modules/rosa-hcp/README.md) for more information.
 
 :::
 
@@ -226,8 +226,8 @@ Each module that you have previously set up contains an output definition at the
     ```bash
     # describes what will be created
     terraform plan -out clusters.plan \
-        -var cluster_1_region="$CLUSTER_1_REGION" \
-        -var cluster_2_region="$CLUSTER_2_REGION"
+        -var cluster_0_region="$CLUSTER_0_REGION" \
+        -var cluster_1_region="$CLUSTER_1_REGION"
     ```
 
 1.  After reviewing the plan, you can confirm and apply the changes.
@@ -265,11 +265,11 @@ To create the peering between each cluster’s VPC, you need to gather some info
 1. Then for each cluster, save the associated [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc):
 
    ```bash
+   export CLUSTER_0_VPC_ID="$(terraform output -raw cluster_0_vpc_id)"
+   echo "CLUSTER_0_VPC_ID=$CLUSTER_0_VPC_ID"
+
    export CLUSTER_1_VPC_ID="$(terraform output -raw cluster_1_vpc_id)"
    echo "CLUSTER_1_VPC_ID=$CLUSTER_1_VPC_ID"
-
-   export CLUSTER_2_VPC_ID="$(terraform output -raw cluster_2_vpc_id)"
-   echo "CLUSTER_2_VPC_ID=$CLUSTER_2_VPC_ID"
    ```
 
 #### Set up the peering module
@@ -281,7 +281,7 @@ We'll re-use the previously configured S3 bucket to store the state of the peeri
 Begin by reviewing up the `config.tf` that configures S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/peering/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/peering/config.tf
 ```
 
 Alongside the `config.tf` file, review the file called `peering.tf` used to reference the peering configuration:
@@ -290,7 +290,7 @@ Alongside the `config.tf` file, review the file called `peering.tf` used to refe
 <summary>Show peering.tf reference</summary>
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/peering/peering.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/peering/peering.tf
 ```
 
 </details>
@@ -325,10 +325,10 @@ This command connects Terraform to the S3 bucket for managing the state file, en
 
    ```bash
    terraform plan -out peering.plan \
+        -var cluster_0_region="$CLUSTER_0_REGION" \
+        -var cluster_0_vpc_id="$CLUSTER_0_VPC_ID" \
         -var cluster_1_region="$CLUSTER_1_REGION" \
-        -var cluster_1_vpc_id="$CLUSTER_1_VPC_ID" \
-        -var cluster_2_region="$CLUSTER_2_REGION" \
-        -var cluster_2_vpc_id="$CLUSTER_2_VPC_ID"
+        -var cluster_1_vpc_id="$CLUSTER_1_VPC_ID"
    ```
 
 1. After reviewing the execution plan, apply the configuration to create the VPC peering connection:
@@ -365,13 +365,13 @@ We'll re-use the previously configured S3 bucket to store the state of the backu
 Begin by reviewing the `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/backup_bucket/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/backup_bucket/config.tf
 ```
 
 Finally, review the file called `backup_bucket.tf`, that describes the elastic backup bucket configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/backup_bucket/backup_bucket.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/terraform/backup_bucket/backup_bucket.tf
 ```
 
 This bucket configuration follows [multiple best practices](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html).  
@@ -436,7 +436,7 @@ The `BACKUP_BUCKET_REGION` will define the region of the bucket, you can pick on
 
 ### Reference files
 
-You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/main/aws/openshift/rosa-hcp-dual-region/)
+You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/aws/openshift/rosa-hcp-dual-region/)
 
 ## 2. Preparation for Camunda 8 installation
 
@@ -456,39 +456,39 @@ You can now access the created OpenShift clusters.
 1.  Set up the required environment variables from the OpenShift terraform module:
 
     ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/procedure/gather-cluster-login-id.sh
+    https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/procedure/gather-cluster-login-id.sh
     ```
 
 1.  Give cluster administrator role to the created user for each cluster:
 
     ```bash
     # Cluster 1
-    rosa grant user cluster-admin --cluster="$CLUSTER_1_NAME" --user="$CLUSTER_1_ADMIN_USERNAME"
+    rosa grant user cluster-admin --cluster="$CLUSTER_0_NAME" --user="$CLUSTER_0_ADMIN_USERNAME"
 
     # Cluster 2
-    rosa grant user cluster-admin --cluster="$CLUSTER_2_NAME" --user="$CLUSTER_2_ADMIN_USERNAME"
+    rosa grant user cluster-admin --cluster="$CLUSTER_1_NAME" --user="$CLUSTER_1_ADMIN_USERNAME"
     ```
 
 1.  Log in to the OpenShift clusters and configure the kubeconfig contexts:
 
     ```bash
     # Cluster 1
+    oc config delete-context "$CLUSTER_0_NAME" || true
+
+    oc login -u "$CLUSTER_0_ADMIN_USERNAME" "$CLUSTER_0_API_URL" -p "$CLUSTER_0_ADMIN_PASSWORD"
+    oc config rename-context $(oc config current-context) "$CLUSTER_0_NAME"
+
+    # Cluster 2
     oc config delete-context "$CLUSTER_1_NAME" || true
 
     oc login -u "$CLUSTER_1_ADMIN_USERNAME" "$CLUSTER_1_API_URL" -p "$CLUSTER_1_ADMIN_PASSWORD"
     oc config rename-context $(oc config current-context) "$CLUSTER_1_NAME"
-
-    # Cluster 2
-    oc config delete-context "$CLUSTER_2_NAME" || true
-
-    oc login -u "$CLUSTER_2_ADMIN_USERNAME" "$CLUSTER_2_API_URL" -p "$CLUSTER_2_ADMIN_PASSWORD"
-    oc config rename-context $(oc config current-context) "$CLUSTER_2_NAME"
     ```
 
 1.  Verify your connection to the clusters with `oc`:
 
     ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/procedure/verify-cluster-nodes.sh
+    https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/openshift/rosa-hcp-dual-region/procedure/verify-cluster-nodes.sh
     ```
 
 In the remainder of the guide, different namespaces will be created following the needs of the dual-region architecture.
@@ -515,12 +515,12 @@ To delete the module, follow these steps:
 
 1. Before proceeding with the deletion of the VPC peering module, ensure that the necessary variables, which were provided during the module creation, are still available. To verify that the required variables are correctly defined, repeat the steps from the [retrieve the VPC peering cluster variables](#retrieve-the-peering-cluster-variables) section.
 
-1. Ensure that the `CLUSTER_1_REGION` and `CLUSTER_2_REGION` variables are defined correctly:
+1. Ensure that the `CLUSTER_0_REGION` and `CLUSTER_1_REGION` variables are defined correctly:
 
    ```bash
    # set the region, adjust to your needs
-   export CLUSTER_1_REGION="us-east-1"
-   export CLUSTER_2_REGION="us-east-2"
+   export CLUSTER_0_REGION="us-east-1"
+   export CLUSTER_1_REGION="us-east-2"
    ```
 
 1. Navigate to the VPC peering module directory `peering` where the VPC peering module configuration is located.
@@ -529,10 +529,10 @@ To delete the module, follow these steps:
 
    ```bash
    terraform plan -destroy \
+     -var cluster_0_region="$CLUSTER_0_REGION" \
+     -var cluster_0_vpc_id="$CLUSTER_0_VPC_ID" \
      -var cluster_1_region="$CLUSTER_1_REGION" \
      -var cluster_1_vpc_id="$CLUSTER_1_VPC_ID" \
-     -var cluster_2_region="$CLUSTER_2_REGION" \
-     -var cluster_2_vpc_id="$CLUSTER_2_VPC_ID" \
      -out destroy-peering.plan
    ```
 
@@ -558,8 +558,8 @@ The clusters can be deleted once they are no longer in use and have no dependenc
 
    ```bash
    terraform plan -destroy \
+     -var cluster_0_region="$CLUSTER_0_REGION" \
      -var cluster_1_region="$CLUSTER_1_REGION" \
-     -var cluster_2_region="$CLUSTER_2_REGION" \
      -out destroy-clusters.plan
    ```
 
