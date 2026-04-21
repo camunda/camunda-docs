@@ -24,10 +24,8 @@ Back up and restore Optimize independently of the Orchestration Cluster.
 
 Optimize always stores its data in Elasticsearch or OpenSearch, regardless of what the Orchestration Cluster uses as secondary storage. Which backup procedure to follow depends on what secondary storage the Orchestration Cluster uses:
 
-| Orchestration Cluster secondary storage | How to back up Optimize                                                                                                                                                                                                                                                                                                              |
-| :-------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Elasticsearch / OpenSearch**          | Optimize shares the same ES/OS instance with the Orchestration Cluster. Backup must be **coordinated**: all components use a single shared backup ID within the same backup window. Optimize cannot be backed up independently in this configuration — use the [Elasticsearch / OpenSearch backup guide](./elasticsearch/backup.md). |
-| **RDBMS**                               | Optimize uses a **dedicated ES/OS instance** separate from the Orchestration Cluster's storage. There is no shared state to keep consistent. Optimize can be backed up on its own schedule with its own backup IDs — use this guide.                                                                                                 |
+- **Elasticsearch / OpenSearch**: Optimize shares the same ES/OS instance with the Orchestration Cluster. Backup must be **coordinated**: all components use a single shared backup ID within the same backup window. Optimize cannot be backed up independently in this configuration. Use the [Elasticsearch / OpenSearch backup guide](./elasticsearch/backup.md).
+- **RDBMS**: Optimize stores its data in Elasticsearch or OpenSearch independently of the Orchestration Cluster's RDBMS storage. There is no shared backup boundary to keep consistent. Optimize can be backed up on its own schedule with its own backup IDs. Use this guide.
 
 :::warning
 When the Orchestration Cluster uses Elasticsearch or OpenSearch, backing up Optimize with a different backup ID or at a different time than the other components produces an **inconsistent restore point**: Optimize analytics data will describe a state that no longer matches the underlying process data in Operate and Zeebe.
@@ -35,14 +33,14 @@ When the Orchestration Cluster uses Elasticsearch or OpenSearch, backing up Opti
 
 This guide covers:
 
-- **Optimize alongside an RDBMS-backed Orchestration Cluster**: Optimize must be backed up and restored separately from the Orchestration Cluster. The two are fully independent.
+- **Optimize alongside an RDBMS-backed Orchestration Cluster**: Optimize must be backed up and restored separately from the Orchestration Cluster. The backup and restore procedures are independent.
 - **Optimize as a fully standalone application**: Optimize deployed without other Camunda components.
 
 Optimize stores its data across multiple indices in Elasticsearch or OpenSearch. A backup consists of two snapshots that must be taken through the Backup Management API to ensure consistency across indices. For example, a backup with ID `123456` produces:
 
-```
-camunda_optimize_123456_8.8.0_part_1_of_2
-camunda_optimize_123456_8.8.0_part_2_of_2
+```text
+camunda_optimize_123456_<optimize-version>_part_1_of_2
+camunda_optimize_123456_<optimize-version>_part_2_of_2
 ```
 
 Backups are created asynchronously while Optimize continues running, and are restored using the standard Elasticsearch/OpenSearch snapshot restore API.
@@ -183,13 +181,13 @@ curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
   "state": "COMPLETE",
   "details": [
     {
-      "snapshotName": "camunda_optimize_1748937221_8.8.0_part_1_of_2",
+      "snapshotName": "camunda_optimize_1748937221_<optimize-version>_part_1_of_2",
       "state": "SUCCESS",
       "startTime": "2025-06-03T07:53:54.389+0000",
       "failures": []
     },
     {
-      "snapshotName": "camunda_optimize_1748937221_8.8.0_part_2_of_2",
+      "snapshotName": "camunda_optimize_1748937221_<optimize-version>_part_2_of_2",
       "state": "SUCCESS",
       "startTime": "2025-06-03T07:53:54.389+0000",
       "failures": []
@@ -224,12 +222,10 @@ Restoring Optimize requires downtime. Optimize must be stopped before restoring 
 
 ### Prerequisites
 
-| Prerequisite        | Description                                                                                                                                                |
-| :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Optimize stopped    | Optimize must not be running while restoring the datastore.                                                                                                |
-| Clean state         | Elasticsearch or OpenSearch must have no existing Optimize indices — all data will be restored from the snapshots.                                         |
-| Camunda version     | The backup must be restored using the **same Optimize version** it was created with. The version is embedded in the snapshot names (for example, `8.8.0`). |
-| Snapshot repository | Elasticsearch or OpenSearch must be configured with the same snapshot repository used during backup.                                                       |
+- **Optimize stopped**: Optimize must not be running while restoring the datastore.
+- **Clean state**: Elasticsearch or OpenSearch must have no existing Optimize indices. All data will be restored from the snapshots.
+- **Optimize version**: The backup must be restored using the **same Optimize version** it was created with. The version is embedded in the snapshot names, for example as `camunda_optimize_123456_<optimize-version>_part_1_of_2`.
+- **Snapshot repository**: Elasticsearch or OpenSearch must be configured with the same snapshot repository used during backup.
 
 :::warning
 Do not start Optimize against a partially restored datastore. Ensure all snapshots are fully restored before starting Optimize.
@@ -283,16 +279,16 @@ curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups"
 [
   {
     "backupId": 1748937221,
-    "state": "COMPLETED",
+    "state": "COMPLETE",
     "details": [
       {
-        "snapshotName": "camunda_optimize_1748937221_8.8.0_part_1_of_2",
+        "snapshotName": "camunda_optimize_1748937221_<optimize-version>_part_1_of_2",
         "state": "SUCCESS",
         "startTime": "2025-06-03T07:53:54.389+0000",
         "failures": []
       },
       {
-        "snapshotName": "camunda_optimize_1748937221_8.8.0_part_2_of_2",
+        "snapshotName": "camunda_optimize_1748937221_<optimize-version>_part_2_of_2",
         "state": "SUCCESS",
         "startTime": "2025-06-03T07:53:54.389+0000",
         "failures": []
@@ -319,10 +315,10 @@ curl -s "$ELASTIC_ENDPOINT/_snapshot/$ELASTIC_SNAPSHOT_REPOSITORY/_all" \
   <summary>Example output</summary>
 
 ```
-camunda_optimize_1748937221_8.8.0_part_1_of_2
-camunda_optimize_1748937221_8.8.0_part_2_of_2
-camunda_optimize_1749130104_8.8.0_part_1_of_2
-camunda_optimize_1749130104_8.8.0_part_2_of_2
+camunda_optimize_1748937221_<optimize-version>_part_1_of_2
+camunda_optimize_1748937221_<optimize-version>_part_2_of_2
+camunda_optimize_1749130104_<optimize-version>_part_1_of_2
+camunda_optimize_1749130104_<optimize-version>_part_2_of_2
 ```
 
 </details>
@@ -340,10 +336,10 @@ curl -s "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/_all" \
   <summary>Example output</summary>
 
 ```
-camunda_optimize_1748937221_8.8.0_part_1_of_2
-camunda_optimize_1748937221_8.8.0_part_2_of_2
-camunda_optimize_1749130104_8.8.0_part_1_of_2
-camunda_optimize_1749130104_8.8.0_part_2_of_2
+camunda_optimize_1748937221_<optimize-version>_part_1_of_2
+camunda_optimize_1748937221_<optimize-version>_part_2_of_2
+camunda_optimize_1749130104_<optimize-version>_part_1_of_2
+camunda_optimize_1749130104_<optimize-version>_part_2_of_2
 ```
 
 </details>
@@ -404,11 +400,11 @@ done
 
 ### Step 5: Restore the Optimize snapshots
 
-Although the backup order was important so far to ensure consistent backups, you can restore the backed up Optimize indices in any order.
+Although backup creation order matters for consistency, you can restore the backed-up Optimize snapshots in any order.
 
-As the Optimize do not have an endpoint to restore the backup in Elasticsearch, you will need to restore it yourself directly in your selected datastore.
+Optimize does not provide an API endpoint to restore these backups. Restore them directly in your Elasticsearch or OpenSearch datastore.
 
-Based on your chosen backup ID in [find available backup IDs](#2-find-available-backup-ids), you can now restore the snapshots in Elasticsearch/OpenSearch for each available backup under the same backup ID.
+Based on your chosen backup ID in [find available backup IDs](#step-2-find-available-backup-ids), you can now restore the snapshots in Elasticsearch/OpenSearch for each available backup under the same backup ID.
 
 <Tabs groupId="search-engine">
    <TabItem value="elasticsearch" label="Elasticsearch" default>
@@ -431,13 +427,13 @@ curl -XPOST "$OPENSEARCH_ENDPOINT/_snapshot/$OPENSEARCH_SNAPSHOT_REPOSITORY/$SNA
    </TabItem>
 </Tabs>
 
-Where `$SNAPSHOT_NAME` would be any of the following based on our example in [find available backups IDs](#2-find-available-backup-ids).
+Where `$SNAPSHOT_NAME` would be any of the following based on our example in [find available backup IDs](#step-2-find-available-backup-ids).
 
-Ensure that all your backups correspond to the same backup ID and that each one is restored one-by-one.
+Ensure that all snapshots correspond to the same backup ID and restore them one by one.
 
 ```bash
-camunda_optimize_1748937221_8.8.0_part_1_of_2
-camunda_optimize_1748937221_8.8.0_part_2_of_2
+camunda_optimize_1748937221_<optimize-version>_part_1_of_2
+camunda_optimize_1748937221_<optimize-version>_part_2_of_2
 ```
 
 ### Step 6: Start Optimize
