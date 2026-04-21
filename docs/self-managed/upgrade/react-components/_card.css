@@ -1,4 +1,0 @@
-/* override the css as there are only two cards in this section */
-.zeebe-grid {
-  grid-template-columns: repeat(2, 1fr);
-}
