@@ -47,7 +47,7 @@ Additionally, the migration scripts require:
 - [`yq`](https://github.com/mikefarah/yq) installed (for selective CloudNativePG cluster deployment)
 - `base64` and `openssl` available (used for credential management)
 
-For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file.
+For the tool versions used and tested, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/.tool-versions) file.
 
 ## Precautions
 
@@ -77,7 +77,7 @@ Edit `env.sh` to match your current Camunda installation:
 <summary>Show details: `env.sh` reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/env.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/env.sh
 ```
 
 </details>
@@ -155,7 +155,7 @@ Review the CloudNativePG (CNPG) cluster specifications in `operator-based/postgr
 <summary>Show details: CloudNativePG manifest reference</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
 ```
 
 </details>
@@ -172,7 +172,7 @@ The migration patches the reference ECK cluster manifest from `operator-based/el
 <summary>Show details: Elasticsearch manifest reference</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
 ```
 
 </details>
@@ -181,9 +181,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 Review the Keycloak Custom Resource in `operator-based/keycloak/`. For the broader deployment context and Helm values layering, see [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment). Choose the appropriate variant:
 
-- [`keycloak-instance-domain-nginx.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml) — if you have a domain with nginx Ingress
-- [`keycloak-instance-domain-openshift.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml) — for OpenShift deployments with Routes
-- [`keycloak-instance-no-domain.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml) — for port-forward setups
+- [`keycloak-instance-domain-nginx.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml) — if you have a domain with nginx Ingress
+- [`keycloak-instance-domain-openshift.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml) — for OpenShift deployments with Routes
+- [`keycloak-instance-no-domain.yml`](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml) — for port-forward setups
 
 Key settings to verify:
 
@@ -225,7 +225,7 @@ All targets are created empty; no traffic is routed to them yet.
 <summary>Show details: Phase 1 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/1-deploy-targets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/1-deploy-targets.sh
 ```
 
 </details>
@@ -279,7 +279,7 @@ Reference templates used in this phase:
 <summary>Show details: PostgreSQL backup job template</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/pg-backup.job.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/jobs/pg-backup.job.yml
 ```
 
 </details>
@@ -288,7 +288,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 <summary>Show details: Elasticsearch verification job template</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/es-backup.job.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/jobs/es-backup.job.yml
 ```
 
 </details>
@@ -297,7 +297,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 <summary>Show details: Phase 2 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/2-backup.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/2-backup.sh
 ```
 
 </details>
@@ -379,7 +379,7 @@ Reference templates used in this phase:
 <summary>Show details: PostgreSQL restore job template</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/pg-restore.job.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/jobs/pg-restore.job.yml
 ```
 
 </details>
@@ -388,7 +388,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 <summary>Show details: Elasticsearch restore job template</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/jobs/es-restore.job.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/jobs/es-restore.job.yml
 ```
 
 </details>
@@ -397,7 +397,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 <summary>Show details: Phase 3 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/3-cutover.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/3-cutover.sh
 ```
 
 </details>
@@ -422,7 +422,7 @@ This phase verifies all components are healthy:
 <summary>Show details: Phase 4 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/4-validate.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/4-validate.sh
 ```
 
 </details>
@@ -468,7 +468,7 @@ The script checks whether each resource exists before attempting deletion, so it
 <summary>Show details: Phase 5 script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/5-cleanup-bitnami.sh
 ```
 
 </details>
@@ -491,7 +491,7 @@ This restores the previous Helm values (re-enabling Bitnami subcharts) and resta
 <summary>Show details: Rollback script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/rollback.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/rollback.sh
 ```
 
 </details>

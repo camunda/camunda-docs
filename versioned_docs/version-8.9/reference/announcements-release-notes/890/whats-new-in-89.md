@@ -237,6 +237,31 @@ You are affected if your `values.yaml` uses any of the legacy secret keys (such 
 
 See the [release announcements](/reference/announcements-release-notes/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) for the full list of removed keys.
 
+## Reference architectures {#reference-architectures}
+
+Camunda 8.9 introduces major changes to the [deployment references](https://github.com/camunda/camunda-deployment-references) used by Self-Managed reference architectures.
+
+### Operator-based infrastructure replaces Bitnami
+
+All reference architectures (AKS, EKS, OpenShift, Kind) now use Kubernetes operators — CloudNativePG, ECK, and Keycloak operator — instead of embedded Bitnami subcharts for infrastructure services.
+
+If you follow a reference architecture, your next deployment will use operator-managed PostgreSQL, Elasticsearch, and Keycloak. Existing deployments can migrate using the new [migration tooling](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
+
+#### Are you affected?
+
+You are affected if you deploy Self-Managed using a reference architecture from the `camunda-deployment-references` repository and rely on Bitnami-managed infrastructure. Follow the migration guide to transition to operator-managed services.
+
+### New deployment options
+
+- **Amazon ECS on Fargate** is now available as a container-based deployment without Kubernetes.
+- **AKS RDBMS variant** provides a lighter Azure deployment using PostgreSQL as secondary storage (no Elasticsearch).
+- **Kind local development** reference architecture is available for local testing with Makefile-based commands.
+
+### Dual-region changes
+
+- EKS and OpenShift dual-region now use the ECK operator for Elasticsearch.
+- Headless service DNS is used for initial contact points, improving cross-region connectivity.
+
 ## Migration from Camunda 7 to Camunda 8 {#migration}
 
 Camunda 8.9 introduces the following additional tools and features to help you migrate from Camunda 7 to Camunda 8.
