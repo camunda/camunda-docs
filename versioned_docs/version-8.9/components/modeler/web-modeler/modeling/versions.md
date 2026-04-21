@@ -34,12 +34,6 @@ You can create a new version either from your diagram or the versions list.
 
   ![versions create via icon](../img/versions/web-modeler-version-create-via-icon-highlight.png)
 
-:::note
-
-A new version is also automatically created when dragging and dropping a file into the diagram view, or when you select the **Replace via upload** option from the breadcrumb menu.
-
-:::
-
 ## Compare versions
 
 You can compare the change history between two versions, either visually as a diagram or as code in an XML diff layout.

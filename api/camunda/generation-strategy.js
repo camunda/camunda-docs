@@ -11,7 +11,7 @@ function pick(apiConfig) {
     case "next":
       return next;
 
-    case parseFloat(version) > 8.8:
+    case "8.9":
       return next;
 
     case "8.8":
