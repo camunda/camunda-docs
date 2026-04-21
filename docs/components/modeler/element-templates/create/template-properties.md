@@ -155,7 +155,7 @@ The `Dropdown` type allows users to select from a number of pre-defined options 
 
 The resulting properties panel control looks like this:
 
-![properties panel drop down](./img/field-dropdown.png)
+![properties panel drop down](../img/field-dropdown.png)
 
 ## Setting a default value: `value`
 

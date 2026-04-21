@@ -502,7 +502,7 @@ Web Modeler in 8.9 adds more reliable live collaboration with canvas locking and
 Camunda 8.9 expands Web Modeler with broader event template support, email-based project invitations for all supported OIDC providers, and a simpler Self-Managed system architecture by folding the former `webapp` component into `restapi`. Additional 8.9 updates include embedded Tomcat for Self-Managed deployments and a SaaS endpoint for monitoring Web Modeler egress IP ranges.
 
 <ul>
-  <li><span class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</span></li>
+  <li><span class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/create/defining-templates.md)</span></li>
   <li><span class="link-arrow">[Add users to projects](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects)</span></li>
   <li><span class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
 </ul>
