@@ -304,7 +304,7 @@ Square brackets, `[]`, are used to indicate what the binding parameters are mapp
 | **Binding parameters**     | `name`: The name of the input parameter                                          |
 | **Mapping result**         | `<zeebe:input target="[name]" source="[userInput] />`                            |
 
-Configures an [input mapping](../../../concepts/variables/#input-mappings).
+Configures an [input mapping](/components/concepts/variables.md#input-mappings).
 
 ```json
 {
@@ -325,7 +325,7 @@ Configures an [input mapping](../../../concepts/variables/#input-mappings).
 | **Binding parameters**     | `source`: The source of the output parameter                                     |
 | **Mapping result**         | `<zeebe:output target="[userInput]" source="[source] />`                         |
 
-Configures an [output mapping](../../../concepts/variables/#output-mappings).
+Configures an [output mapping](/components/concepts/variables.md#output-mappings).
 
 ```json
 {
@@ -352,7 +352,7 @@ You can't combine template-defined `zeebe:output` bindings with `entriesVisible.
 | **Binding parameters**     | `key`: The key of the task header                   |
 | **Mapping result**         | `<zeebe:header key="[key]" value="[userInput]" />`  |
 
-Configures a [task header](../../bpmn/service-tasks/#task-headers).
+Configures a [task header](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers).
 
 ```json
 {
@@ -373,7 +373,7 @@ Configures a [task header](../../bpmn/service-tasks/#task-headers).
 | **Binding parameters**     | `property`: The name of the task definition property. Can be `type` or `retries`. |
 | **Mapping result**         | `<zeebe:taskDefinition [property]="[userInput]" />`                               |
 
-Configures the [task](../../bpmn/service-tasks/#task-definition) for a service or user task.
+Configures the [task](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) for a service or user task.
 
 ```json
 [
@@ -409,7 +409,7 @@ Configures the [task](../../bpmn/service-tasks/#task-definition) for a service o
 | **Binding parameters**     |                                                     |
 | **Mapping result**         | `<zeebe:taskDefinition type="[userInput]" />`       |
 
-Configures the [task type](../../bpmn/service-tasks/#task-definition) for a service or user task.
+Configures the [task type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition) for a service or user task.
 
 ```json
 {
@@ -563,7 +563,7 @@ This binding is only valid for templates of events with `bpmn:SignalEventDefinit
 | **Binding parameters**     | `name`: The name of the property.<br/>Supported properties: `timeDate`, `timeCycle`, and `timeDuration`. |
 | **Mapping result**         | `<bpmn:timerEventDefinition><bpmn:[name]>[userInput]</bpmn:[name]></bpmn:timerEventDefinition>`          |
 
-The `bpmn:TimerEventDefinition#property` binding allows you to configure [timer event definitions](../../bpmn/timer-events/) for timer events.
+The `bpmn:TimerEventDefinition#property` binding allows you to configure [timer event definitions](/components/modeler/bpmn/timer-events/timer-events.md) for timer events.
 This binding is only valid for templates of events with `bpmn:TimerEventDefinition` set via `elementType.eventDefinition`.
 
 Only one of `timeDate`, `timeCycle`, or `timeDuration` can be defined per template.
@@ -599,7 +599,7 @@ Only one of `timeDate`, `timeCycle`, or `timeDuration` can be defined per templa
 | **Binding parameters**     | `name`: The name of the property.<br/>Supported property: `condition`.                                            |
 | **Mapping result**         | `<bpmn:conditionalEventDefinition><bpmn:condition>[userInput]</bpmn:condition></bpmn:conditionalEventDefinition>` |
 
-The `bpmn:ConditionalEventDefinition#property` binding allows you to configure the condition expression for [conditional events](../../bpmn/conditional-events/).
+The `bpmn:ConditionalEventDefinition#property` binding allows you to configure the condition expression for [conditional events](/components/modeler/bpmn/conditional-events/conditional-events.md).
 This binding is only valid for templates of events with `bpmn:ConditionalEventDefinition` set via `elementType.eventDefinition`.
 
 ```json
@@ -627,7 +627,7 @@ The `condition` property requires a FEEL expression. When using `String` or `Tex
 | **Binding parameters**     | `name`: The name of the property.<br/>Supported properties: `variableEvents`. |
 | **Mapping result**         | `<zeebe:conditionalFilter [name]="[userInput]" />`                            |
 
-The `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` binding allows you to configure the conditional filter for [conditional events](../../bpmn/conditional-events/conditional-events.md). The conditional filter controls which variable changes trigger the condition evaluation.
+The `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` binding allows you to configure the conditional filter for [conditional events](/components/modeler/bpmn/conditional-events/conditional-events.md). The conditional filter controls which variable changes trigger the condition evaluation.
 
 ```json
 [
@@ -663,7 +663,7 @@ When `bpmn:ConditionalEventDefinition#zeebe:conditionalFilter#property` is used,
 
 The `zeebe:calledElement` binding allows you to configure a process called by a call activity.
 
-You can set the value of the property `bindingType` to control the [resource binding type](../../../best-practices/modeling/choosing-the-resource-binding-type).
+You can set the value of the property `bindingType` to control the [resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 We recommend setting the property `bindingType` to the value `"versionTag"` and setting the property `versionTag` to the value of the version tag of the process you want to call.
 
 ```json
@@ -754,9 +754,9 @@ The `zeebe:userTask` binding allows you to configure the implementation type for
 | **Binding parameters**     | `property`: The name of the property. <br/> Supported properties: `formId`, `externalReference`, `bindingType`, and `versionTag`. |
 | **Mapping result**         | `<zeebe:formDefinition [property]="[userInput]" />`                                                                               |
 
-The `zeebe:formDefinition` binding allows you to configure the [user task form](../../bpmn/user-tasks/#user-task-forms) used by a user task.
+The `zeebe:formDefinition` binding allows you to configure the [user task form](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) used by a user task.
 
-When setting the `formId` property, you can set the value of the property `bindingType` to control the [resource binding type](../../../best-practices/modeling/choosing-the-resource-binding-type).
+When setting the `formId` property, you can set the value of the property `bindingType` to control the [resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 We recommend setting the property `bindingType` to the value `"versionTag"` and setting the property `versionTag`
 to the value of the version tag of the form you want to link.
 
@@ -806,7 +806,7 @@ The property `externalReference` cannot be used together with `bindingType`.
 | **Binding parameters**     | `property`: The name of the property. <br/> Supported properties: `assignee`, `candidateGroups`, and `candidateUsers`. |
 | **Mapping result**         | `<zeebe:assignmentDefinition [property]="[userInput]" />`                                                              |
 
-The `zeebe:assignmentDefinition` binding allows you to configure the [user task assignment](../../bpmn/user-tasks/#assignments).
+The `zeebe:assignmentDefinition` binding allows you to configure the [user task assignment](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments).
 
 ```json
 [
@@ -852,7 +852,7 @@ When `zeebe:assignmentDefinition` is used, [`zeebe:userTask`](#user-task-impleme
 | **Binding parameters**     | `property`: The name of the property.<br/>Supported properties: `dueDate` and `followUpDate`. |
 | **Mapping result**         | `<zeebe:taskSchedule [property]="[userInput]" />`                                             |
 
-The `zeebe:taskSchedule` binding allows you to configure the [user task scheduling](../../bpmn/user-tasks/#scheduling).
+The `zeebe:taskSchedule` binding allows you to configure the [user task scheduling](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling).
 
 ```json
 [
@@ -889,7 +889,7 @@ If the template sets a static `value` for `dueDate` or `followUpDate`, it must b
 | **Binding parameters**     | `property`: The name of the property.<br/>Supported property: `priority`.                                                              |
 | **Mapping result**         | `<zeebe:priorityDefinition [property]="[userInput]" />`                                                                                |
 
-The `zeebe:priorityDefinition` binding allows you to configure the [user task priority](../../bpmn/user-tasks/#define-user-task-priority).
+The `zeebe:priorityDefinition` binding allows you to configure the [user task priority](/components/modeler/bpmn/user-tasks/user-tasks.md#define-user-task-priority).
 
 ```json
 
@@ -918,9 +918,9 @@ If the template sets a static `value` for `priority`, it must be between 0 and 1
 | **Binding parameters**     | `property`: The name of the property.<br/> Supported properties: `decisionId`, `resultVariable`, `bindingType`, and `versionTag`. |
 | **Mapping result**         | `<zeebe:calledDecision [property]="[userInput]" />`                                                                               |
 
-The `zeebe:calledDecision` binding allows you to configure the [called decision](../../bpmn/business-rule-tasks/#defining-a-task) used by a business rule task.
+The `zeebe:calledDecision` binding allows you to configure the [called decision](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-task) used by a business rule task.
 
-You can set the value of the property `bindingType` to control the [resource binding type](../../../best-practices/modeling/choosing-the-resource-binding-type).
+You can set the value of the property `bindingType` to control the [resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 We recommend setting the property `bindingType` to the value `"versionTag"` and setting the property `versionTag`
 to the value of the version tag of the decision you want to call.
 
@@ -974,7 +974,7 @@ When `zeebe:calledDecision` is used, `zeebe:taskDefinition` cannot be used on th
 | **Binding parameters**     | `property`: The name of the property. <br />Supported properties: `expression` and `resultVariable`. |
 | **Mapping result**         | `<zeebe:script [property]="[userInput]" />`                                                          |
 
-The `zeebe:script` binding allows you to configure the [FEEL expression](../../bpmn/script-tasks/#defining-a-task) used by a script task.
+The `zeebe:script` binding allows you to configure the [FEEL expression](/components/modeler/bpmn/script-tasks/script-tasks.md#defining-a-task) used by a script task.
 
 ```json
 [
