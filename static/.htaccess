@@ -175,7 +175,7 @@ RewriteRule ^docs/next/guides/getting-started/?$ /docs/components/saas/ [R=301,L
 RewriteRule ^docs/guides/create-cluster/?$ /docs/components/console/manage-clusters/create-cluster/ [R=301,L]
 
 # Service task (microservice orchestration)
-RewriteRule ^docs/next/guides/orchestrate-microservices/?$ /docs/8.6/guides/orchestrate-microservices/ [R=301,L]
+RewriteRule ^docs/next/guides/orchestrate-microservices/?$ /docs/guides/orchestrate-microservices/ [R=301,L]
 
 # Connect to a mail provider
 RewriteRule ^docs/next/guides/configuring-out-of-the-box-connectors/?$ /docs/components/connectors/use-connectors/configuring-out-of-the-box-connectors/ [R=301,L]
@@ -214,7 +214,7 @@ RewriteRule ^docs/self-managed/deployment/helm/upgrade/?$ /docs/self-managed/upg
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-820-830/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-830-840/?$ https://unsupported.docs.camunda.io/8.4/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-840-850/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/setup/upgrade/ [R=301,L]
-RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ /docs/8.6/self-managed/setup/upgrade [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ /docs/self-managed/setup/upgrade [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-860-870/?$ /docs/8.7/self-managed/setup/upgrade [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region/?$ /docs/self-managed/upgrade/helm/870-to-880-dual-region/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?$ /docs/self-managed/upgrade/helm/870-to-880/ [R=301,L]
@@ -273,7 +273,7 @@ RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/?$ /docs/next/self-m
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-820-830/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-830-840/?$ https://unsupported.docs.camunda.io/8.4/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-840-850/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/setup/upgrade/ [R=301,L]
-RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ /docs/8.6/self-managed/setup/upgrade [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ /docs/self-managed/setup/upgrade [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-860-870/?$ /docs/8.7/self-managed/setup/upgrade [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region/?$ /docs/self-managed/upgrade/helm/870-to-880-dual-region/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?$ /docs/self-managed/upgrade/helm/870-to-880/ [R=301,L]
@@ -333,9 +333,9 @@ RewriteRule ^docs/reference/announcements-release-notes/850/(.*)$ /docs/referenc
 RewriteRule ^docs/8.7/reference/announcements-release-notes/850/(.*)$ /docs/8.7/reference/announcements-release-notes/overview/$1 [R=301,L]
 RewriteRule ^docs/8.7/reference/announcements-release-notes/850/850-announcements/?$ /docs/8.7/reference/announcements-release-notes/overview/ [R=301,L]
 RewriteRule ^docs/8.7/reference/announcements-release-notes/850/850-release-notes/?$ /docs/8.7/reference/announcements-release-notes/overview/ [R=301,L]
-RewriteRule ^docs/8.6/reference/announcements-release-notes/850/(.*)$ /docs/8.6/reference/announcements-release-notes/overview/$1 [R=301,L]
-RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-announcements/?$ /docs/8.6/reference/announcements-release-notes/overview/ [R=301,L]
-RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-notes/?$ /docs/8.6/reference/announcements-release-notes/overview/ [R=301,L]
+RewriteRule ^docs/8.6/reference/announcements-release-notes/850/(.*)$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-announcements/?$ /docs/reference/announcements-release-notes/overview/ [R=301,L]
+RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-notes/?$ /docs/reference/announcements-release-notes/overview/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
@@ -718,7 +718,7 @@ RewriteRule ^docs/8.7/self-managed/document-handling/(.*)$ /docs/8.7/self-manage
 
 # Remove Starter Plan
 RewriteRule ^docs/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
-RewriteRule ^docs/8.6/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/8.6/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
+RewriteRule ^docs/8.6/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
 
 RewriteRule ^docs/components/console/manage-plan/migrate-from-prof-to-starter/?$ /docs/components/console/manage-plan/available-plans/ [R=301,L]
 RewriteRule ^docs/8.6/components/console/manage-plan/migrate-from-prof-to-starter/?$ /docs/components/console/manage-plan/available-plans/ [R=301,L]
@@ -805,7 +805,7 @@ RewriteRule ^docs/8.7/self-managed/operational-guides/update-guide/820-to-830/(.
 # Rename indices page
 RewriteRule ^docs/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
 RewriteRule ^docs/8.7/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/8.7/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/8.6/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
 
 # Remove Tasklist GraphQL API in 8.8
 RewriteRule ^docs/apis-tools/tasklist-api/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
@@ -873,36 +873,36 @@ RewriteRule ^docs/self-managed/components/management-identity/install-identity/?
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
 # Restructure Identity Docs (8.6)
-RewriteRule ^docs/8.6/self-managed/setup/guides/using-existing-keycloak/?$ /docs/8.6/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/8.6/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/access-control/applications/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/access-control/resource-authorizations/?$ /docs/8.6/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/access-control/user-task-access-restrictions/?$ /docs/8.6/self-managed/components/tasklist/user-task-access-restrictions/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/mapping-rules/?$ /docs/8.6/self-managed/components/management-identity/mapping-rules/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/getting-started/install-identity/?$ /docs/8.6/self-managed/components/management-identity/install-identity/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/making-identity-production-ready/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/making-identity-production-ready/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/configure-external-identity-provider/?$ /docs/8.6/self-managed/components/management-identity/configuration/configure-external-identity-provider/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/configure-logging/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/configure-logging/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/connect-to-an-existing-keycloak/?$ /docs/8.6/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-roles/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/manage-roles/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-permissions/?$ /docs/8.6/self-managed/components/management-identity/access-management/manage-permissions/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-groups/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-users-roles-to-group/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/authorizations/managing-resource-authorizations/?$ /docs/8.6/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/authorizations/managing-user-access/?$ /docs/8.6/self-managed/components/management-identity/access-management/manage-permissions/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/authorizations/generating-m2m-tokens/?$ /docs/8.6/self-managed/components/management-identity/authentication/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/tenants/managing-tenants/?$ /docs/8.6/self-managed/components/management-identity/manage-tenants/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/mapping-rules/managing-mapping-rules/?$ /docs/8.6/self-managed/components/management-identity/mapping-rules/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/additional-features/adding-an-api/?$ /docs/8.6/self-managed/components/management-identity/access-management/access-management-overview/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/additional-features/incorporate-applications/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/configuration-variables/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/configuration-variables/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/application-monitoring/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/application-monitoring/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/starting-configuration-for-identity/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/starting-configuration/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/resource-management/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/resource-management/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/troubleshooting/troubleshoot-identity/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/troubleshoot-identity/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/access-control/apis/?$ /docs/8.6/self-managed/components/management-identity/access-management/access-management-overview [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/install-identity/?$ /docs/8.6/self-managed/components/management-identity/identity-first-steps/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/8.6/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/access-control/applications/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/access-control/resource-authorizations/?$ /docs/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/access-control/user-task-access-restrictions/?$ /docs/self-managed/components/tasklist/user-task-access-restrictions/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/mapping-rules/?$ /docs/self-managed/components/management-identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/getting-started/install-identity/?$ /docs/self-managed/components/management-identity/install-identity/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/making-identity-production-ready/?$ /docs/self-managed/components/management-identity/miscellaneous/making-identity-production-ready/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/configure-external-identity-provider/?$ /docs/self-managed/components/management-identity/configuration/configure-external-identity-provider/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/configure-logging/?$ /docs/self-managed/components/management-identity/miscellaneous/configure-logging/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/connect-to-an-existing-keycloak/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-roles/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/manage-roles/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-permissions/?$ /docs/self-managed/components/management-identity/access-management/manage-permissions/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-groups/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-users-roles-to-group/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/authorizations/managing-resource-authorizations/?$ /docs/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/authorizations/managing-user-access/?$ /docs/self-managed/components/management-identity/access-management/manage-permissions/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/authorizations/generating-m2m-tokens/?$ /docs/self-managed/components/management-identity/authentication/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/tenants/managing-tenants/?$ /docs/self-managed/components/management-identity/manage-tenants/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/mapping-rules/managing-mapping-rules/?$ /docs/self-managed/components/management-identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/additional-features/adding-an-api/?$ /docs/self-managed/components/management-identity/access-management/access-management-overview/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/additional-features/incorporate-applications/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/configuration-variables/?$ /docs/self-managed/components/management-identity/miscellaneous/configuration-variables/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/application-monitoring/?$ /docs/self-managed/components/management-identity/miscellaneous/application-monitoring/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/starting-configuration-for-identity/?$ /docs/self-managed/components/management-identity/miscellaneous/starting-configuration/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/resource-management/?$ /docs/self-managed/components/management-identity/miscellaneous/resource-management/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/troubleshooting/troubleshoot-identity/?$ /docs/self-managed/components/management-identity/miscellaneous/troubleshoot-identity/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/concepts/access-control/apis/?$ /docs/self-managed/components/management-identity/access-management/access-management-overview [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/install-identity/?$ /docs/self-managed/components/management-identity/identity-first-steps/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
 # Remove V2 REST user search API from 8.7 and 8.8 docs
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api/ [R=301,L]
@@ -923,7 +923,7 @@ RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai
 # Restructure Backup and restore guide
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/8.6/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 
 # Restructure Using Camunda section and content moves
 RewriteRule ^docs/components/whats-new-in-88/?$ /docs/reference/announcements-release-notes/880/whats-new-in-88/ [R=301,L]
@@ -943,16 +943,16 @@ RewriteRule ^docs/reference/saas-ip-addresses/?$ /docs/components/saas/saas-ip-a
 # Identity user guide "manage" pages
 
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/roles/add-assign-permission/?$ /docs/self-managed/components/management-identity/user-guide/roles/manage-permissions/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/add-assign-permission/?$ /docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-permissions/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/add-assign-permission/?$ /docs/self-managed/components/management-identity/user-guide/roles/manage-permissions/ [R=301,L]
 
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/groups/create-group/?$ /docs/self-managed/components/management-identity/user-guide/groups/manage-groups/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/create-group/?$ /docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-groups/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/create-group/?$ /docs/self-managed/components/management-identity/user-guide/groups/manage-groups/ [R=301,L]
 
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/self-managed/components/management-identity/user-guide/groups/manage-users-roles-to-group/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-users-roles-to-group/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/self-managed/components/management-identity/user-guide/groups/manage-users-roles-to-group/ [R=301,L]
 
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/roles/add-assign-role/?$ /docs/self-managed/components/management-identity/user-guide/roles/manage-roles/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/add-assign-role/?$ /docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-roles/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/add-assign-role/?$ /docs/self-managed/components/management-identity/user-guide/roles/manage-roles/ [R=301,L]
 
 # Remove go and zbctl pages, redirect to CCH
 RewriteRule ^docs/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
@@ -1028,7 +1028,7 @@ RewriteRule ^docs/apis-tools/administration-sm-api/specifications/sm-admin(istra
 
 # Move migrating to Zeebe user tasks
 RewriteRule ^docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/ [R=301,L]
-RewriteRule ^docs/8.6/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/8.6/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/ [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/ [R=301,L]
 RewriteRule ^docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/ [R=301,L]
 
 # Remove community clients
@@ -1058,11 +1058,11 @@ RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/ [R=301
 
 # Move logging from troubleshooting to monitoring
 RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
-RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 
 # Move metrics from zeebe-deployment to monitoring
-RewriteRule ^docs/8.6/self-managed/components/orchestration-cluster/zeebe/operations/metrics/?$ /docs/8.6/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/components/orchestration-cluster/zeebe/operations/metrics/?$ /docs/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
 RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/operations/metrics/?$ /docs/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
 
 # Move alpha features to components
