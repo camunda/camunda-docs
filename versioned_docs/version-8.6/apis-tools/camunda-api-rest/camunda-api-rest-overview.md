@@ -34,7 +34,7 @@ You can also directly [download the OpenAPI specification](https://github.com/ca
 
 You can change the `maxMessageSize` default value of 4MB in the [Gateway](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
 
-If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/deploy-resources.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
+If you do change this value, it is recommended that you also configure the Deploy resources REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
 
 You can adjust this configuration via the following properties:
 

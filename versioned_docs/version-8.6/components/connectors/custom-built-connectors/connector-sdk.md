@@ -594,9 +594,9 @@ public class MyConnectorRequest {
 ```
 
 The Jakarta Bean Validation API comes with a long list of
-[supported constraints](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#builtinconstraints).
+supported constraints.
 It also allows to
-[validate entire object graphs](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#constraintdeclarationvalidationprocess-validationroutine-graphvalidation)
+validate entire object graphs
 using the `@Valid` annotation. Thus, the `authentication` object will also be validated.
 
 ```java
@@ -617,7 +617,7 @@ Using this approach, you can validate your whole input data structure with one i
 the central Connector function.
 
 Beyond that, the Jakarta Bean Validation API supports more advanced constructs like
-[groups](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#constraintdeclarationvalidationprocess-groupsequence)
+groups
 for conditional validation and constraints on different types, i.e., attributes, methods, and classes,
 to enable [cross-parameter validation](https://www.baeldung.com/javax-validation-method-constraints).
 You can use the built-in constraints and create custom ones to define requirements exactly as
@@ -664,7 +664,7 @@ cover each of the options in more detail.
 
 ###### Custom constraint
 
-The [Bean Validation guide](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#constraintsdefinitionimplementation)
+The Bean Validation guide
 covers defining **custom constraints** extensively. For the use case described above, you could
 write a custom constraint like the following:
 
@@ -726,7 +726,7 @@ following approaches might lead to more maintainable results that require less c
 ###### Manual validation method
 
 The Jakarta Bean Validation API comes with an
-[AssertTrue](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#builtinconstraints-asserttrue)
+AssertTrue
 constraint that you can use to ensure boolean attributes are enabled.
 
 The nature of the bean validation API allows to also use this annotation on methods; those are usually better methods for boolean attributes. However, there doesn't have to be a related boolean
@@ -757,7 +757,7 @@ and does not justify creating more complex, reusable interfaces and validators.
 ###### Dynamic validation groups
 
 The Jakarta Bean Validation API allows to statically define validation
-[groups](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#constraintdeclarationvalidationprocess-groupsequence)
+groups
 for conditional constraint evaluation. However, to use those groups you have to define the
 group to validate statically when starting the validation. To dynamically define the groups to
 validate, you can use Hibernate Validator's
