@@ -192,34 +192,31 @@ camunda:
             export-local-variables: true
 
             # Root variable name filters
-            variable-name-inclusion-exact-root: []
-            variable-name-inclusion-start-with-root: []
-            variable-name-inclusion-end-with-root: []
-            variable-name-exclusion-exact-root: []
-            variable-name-exclusion-start-with-root: []
-            variable-name-exclusion-end-with-root: []
-
+            root-variable-name-inclusion-exact: []
+            root-variable-name-inclusion-start-with: []
+            root-variable-name-inclusion-end-with: []
+            root-variable-name-exclusion-exact: []
+            root-variable-name-exclusion-start-with: []
+            root-variable-name-exclusion-end-with: []
             # Local variable name filters
-            variable-name-inclusion-exact-local: []
-            variable-name-inclusion-start-with-local: []
-            variable-name-inclusion-end-with-local: []
-            variable-name-exclusion-exact-local: []
-            variable-name-exclusion-start-with-local: []
-            variable-name-exclusion-end-with-local: []
-
+            local-variable-name-inclusion-exact: []
+            local-variable-name-inclusion-start-with: []
+            local-variable-name-inclusion-end-with: []
+            local-variable-name-exclusion-exact: []
+            local-variable-name-exclusion-start-with: []
+            local-variable-name-exclusion-end-with: []
             # Root variable type filters
-            variable-value-type-inclusion-root: []
-            variable-value-type-exclusion-root: []
-
+            root-variable-value-type-inclusion: []
+            root-variable-value-type-exclusion: []
             # Local variable type filters
-            variable-value-type-inclusion-local: []
-            variable-value-type-exclusion-local: []
+            local-variable-value-type-inclusion: []
+            local-variable-value-type-exclusion: []
 ```
 
 Behavior overview:
 
 - If `export-local-variables` is set to `false`, no local variables are exported.
-- If all `*-root` and `*-local` lists are empty, only the global filters (`variable-name-*` and `variable-value-type-*`) apply. This preserves behavior from earlier versions.
+- If all `root-*` and `local-*` lists are empty, only the global filters (`variable-name-*` and `variable-value-type-*`) apply. This preserves behavior from earlier versions.
 - If any root-specific or local-specific list is non-empty, that scope uses both the global filters and the scope-specific filters.
 - Exclusion filters take precedence over inclusion filters.
 
@@ -232,13 +229,11 @@ index:
   export-local-variables: true
 
   # Include only specific root variables
-  variable-name-inclusion-exact-root: ["customerId", "orderId"]
-
+  root-variable-name-inclusion-exact: ["customerId", "orderId"]
   # Exclude local variables used for temporary processing
-  variable-name-exclusion-start-with-local: ["tmp_", "debug_"]
-
+  local-variable-name-exclusion-start-with: ["tmp_", "debug_"]
   # Export only simple root variable types
-  variable-value-type-inclusion-root: ["String", "Number"]
+  root-variable-value-type-inclusion: ["String", "Number"]
 ```
 
 In this example:

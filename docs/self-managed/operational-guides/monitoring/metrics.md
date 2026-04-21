@@ -269,17 +269,17 @@ optimize_error_total{ERROR_TYPE="too_many_buckets"} 5
 optimize_error_total{ERROR_TYPE="version_conflict"} 12
 ```
 
-## Optimize report latency metric
+## Optimize report latency metrics
 
-Optimize records report evaluation latency with the following labels:
+Optimize exposes a timer metric for tracking how long report evaluations take.
 
-- `REPORT_NAME`
-- `REPORT_ID`
+| Metric name       | Type  | Description                                   | Labels                     |
+| ----------------- | ----- | --------------------------------------------- | -------------------------- |
+| `optimize.report` | Timer | Duration of report and dashboard evaluations. | `REPORT_NAME`, `REPORT_ID` |
 
-To enable this metric, set `optimize.metrics.report-latency.enabled` to one of the following values:
+The `REPORT_NAME` and `REPORT_ID` labels identify the evaluated report or dashboard.
 
-- `true` – Emits report latency metrics.
-- `false` – Does not emit report latency metrics.
+Report latency metrics are controlled by the `optimize.metrics.report-latency.enabled=true` configuration property. Set the property to `false` to disable report latency metrics.
 
 ## Grafana
 
