@@ -204,55 +204,6 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
-              8.9: {
-                specPath: "api/camunda/version-8.9/camunda-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.9/apis-tools/orchestration-cluster-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-                sdkExamples: [
-                  {
-                    lang: "TypeScript",
-                    highlight: "typescript",
-                    operationMapPath:
-                      ".sdk-repos/version-8.9/orchestration-cluster-api-js/examples/operation-map.json",
-                    autoImports: true,
-                    defaultImports:
-                      "import { createCamundaClient } from '@camunda8/orchestration-cluster-api';",
-                  },
-                  {
-                    lang: "Python",
-                    highlight: "python",
-                    operationMapPath:
-                      ".sdk-repos/version-8.9/orchestration-cluster-api-python/examples/operation-map.json",
-                    autoImports: true,
-                    defaultImports:
-                      "from camunda_orchestration_sdk import CamundaClient",
-                  },
-                  {
-                    lang: "C#",
-                    highlight: "csharp",
-                    operationMapPath:
-                      ".sdk-repos/version-8.9/orchestration-cluster-api-csharp/examples/operation-map.json",
-                    autoImports: true,
-                    defaultImports: "using Camunda.Orchestration.Sdk;",
-                  },
-                ],
-              },
-              8.8: {
-                specPath: "api/camunda/version-8.8/camunda-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.7: {
-                specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
               8.6: {
                 specPath: "api/camunda/version-8.6/camunda-openapi.yaml",
                 outputDir:
@@ -396,12 +347,6 @@ module.exports = {
           docId: "reference/overview",
           label: "Reference",
           position: "left",
-        },
-        {
-          type: "html",
-          position: "right",
-          value:
-            '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
         },
         {
           to: "https://camunda.com/download?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",
