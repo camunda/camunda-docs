@@ -14,15 +14,15 @@ Because there is no formal schema, the modeler infers the available variables by
 
 The modeler scans the process diagram and collects variables from the definitions it finds, such as:
 
-- **Input and output mappings** defined on elements (the `target` expressions create variables).
-- **Result variables and result expressions** on [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), [business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md), and [script tasks](/components/modeler/bpmn/script-tasks/script-tasks.md).
-- **Form field bindings** on [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) linked to [Camunda Forms](/components/modeler/forms/camunda-forms-reference.md).
-- **Example data** added to elements (see [Defining example data](#defining-example-data) below).
+- Input and output mappings defined on elements (the `target` expressions create variables).
+- Result variables and result expressions on [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), [business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md), and [script tasks](/components/modeler/bpmn/script-tasks/script-tasks.md).
+- Form field bindings on [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) linked to [Camunda Forms](/components/modeler/forms/camunda-forms-reference.md).
+- Example data added to elements (see [Defining example data](#defining-example-data) below).
 
-The discovered variables are then used for:
+The discovered variables are used in the following places:
 
-- **FEEL editor suggestions** — when writing [expressions](/components/concepts/expressions.md), the FEEL editor suggests variables that are in scope of the current element.
-- **The Variables panel** — an overview of all variables found in the diagram (see [Inspecting variables](#inspecting-variables) below).
+- FEEL editor suggestions — when writing [expressions](/components/concepts/expressions.md), the FEEL editor suggests variables in scope for the current element.
+- The **Variables** panel — an overview of all variables found in the diagram (see [Inspecting variables](#inspecting-variables)).
 
 :::note
 The modeler can only discover variables that are explicitly defined in the diagram. Variables created at runtime — for example, by [job workers](/components/concepts/job-workers.md), passed as process start variables, or set through the API — are **not** visible in the modeler unless you define them explicitly using [example data](#defining-example-data).
@@ -36,7 +36,7 @@ The **Variables** panel helps you explore the variables in your process. Use it 
 
 ### Selecting elements
 
-The list of variables shown in the panel depends on the element or elements you have selected on the canvas. When you select one or more elements, the panel displays all variables in the scope of those elements, including variables from parent scopes (for example, a subprocess scope or the process scope).
+The list of variables shown in the panel depends on the element or elements you have selected on the canvas. When you select one or more elements, the panel displays all variables in the scope of those elements, including variables from parent scopes (for example, a sub-process scope or the process scope).
 
 If no element is selected, the panel shows variables at the process level.
 
