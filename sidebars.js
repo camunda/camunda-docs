@@ -664,7 +664,13 @@ module.exports = {
       },
       items: [
         {
-          Organization: [
+          type: "category",
+          label: "Organization",
+          link: {
+            type: "doc",
+            id: "components/hub/organization/organization",
+          },
+          items: [
             {
               "Manage clusters": [
                 "components/console/manage-clusters/create-cluster",
@@ -709,7 +715,13 @@ module.exports = {
           ],
         },
         {
-          Workspace: [
+          type: "category",
+          label: "Workspace",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/workspace",
+          },
+          items: [
             {
               type: "category",
               label: "Manage projects",

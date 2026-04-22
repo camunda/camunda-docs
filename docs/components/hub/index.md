@@ -4,9 +4,7 @@ title: Camunda Hub
 description: "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub."
 ---
 
-import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import DocsIcon from "@site/docs/components/assets/icon-docs.png";
-import PlayIcon from "@site/docs/components/assets/icon-play.png";
 import AoGrid from '../react-components/\_ao-card';
 
 Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
