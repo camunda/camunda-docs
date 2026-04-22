@@ -4,6 +4,7 @@ title: "Build your first AI agent"
 sidebar_label: Build your first AI agent
 description: "Get started with Camunda agentic orchestration by running your first AI agent."
 keywords: [agentic orchestration, ai agent]
+toc_max_heading_level: 2
 ---
 
 import Tabs from "@theme/Tabs";
