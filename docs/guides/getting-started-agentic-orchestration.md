@@ -269,24 +269,24 @@ You can observe this dynamic behavior in real-time through Operate, where you'll
 
 ## Step 4: Add your first tool
 
-You can customize your AI agent by adding tools. In this example, you will add a [REST connector](/components/connectors/protocol/rest.md) task that calls a real weather API, so your agent can answer questions like _"What's the weather in Berlin?"_.
-
-The [Open-Meteo API](https://open-meteo.com/) is free, requires no API key, and returns current weather data for any location.
+You can customize your AI agent by adding tools. In this section, you will add a tool that fetches weather conditions for a given location using the [Open-Meteo API](https://open-meteo.com/).
 
 ### Add a REST connector task
 
-1. Inside the ad-hoc sub-process, add a new task element.
-1. Change the task type to **REST Outbound Connector** using the **Change element** menu.
-1. Name the task `Get current weather`. This name is visible to the LLM as the tool name.
+1. Inside the AI agent sub-process, add a new task element.
+1. Change the task type to [**REST Outbound Connector**](/components/connectors/protocol/rest.md) using the **Change element** menu.
+1. Name the task. For example, `Get current weather`. This name is visible to the LLM as the tool name.
 
 ### Write a tool description
 
-The LLM selects tools based on their description. Open the **Documentation** field in the properties panel and add a clear description of what the tool does and when to use it:
+The LLM selects tools based on their description. Open the **Documentation** field in the properties panel and add a clear description of what the tool does and when to use it. For example:
 
-> Fetches current weather conditions for a given location. Use this tool when the user asks about weather, temperature, wind, or climate conditions for a city or place. Returns temperature in Celsius, wind speed, and a weather description.
+```
+Fetches current weather conditions for a given location. Use this tool when the user asks about weather, temperature, wind, or climate conditions for a city or place. Returns temperature in Celsius, wind speed, and a weather description.
+```
 
 :::tip
-Provide as much context as possible in tool descriptions to help the LLM select the right tool and generate proper inputs. See [Anthropic's best practices for tool definitions](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/implement-tool-use#example-of-a-good-tool-description) for guidance.
+Provide as much context as possible in tool descriptions to help the LLM select the right tool and generate proper inputs.
 :::
 
 ### Configure the REST connector
@@ -296,7 +296,7 @@ Set up the HTTP request in the properties panel:
 1. In the **Authentication** section, select **None**.
 1. In the **HTTP Endpoint** section:
    - Set **Method** to **GET**.
-   - Set **URL** to the following [FEEL expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md) (click the `fx` icon first):
+   - Set **URL** to the following [FEEL expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md) by clicking the `fx` icon:
 
      ```feel
      "https://api.open-meteo.com/v1/forecast"
@@ -304,21 +304,21 @@ Set up the HTTP request in the properties panel:
 
    - Set **Query parameters** to:
 
-     ```feel
-     {
-         latitude: fromAi(toolCall.latitude, "Latitude of the location to check weather for", "string"),
-         longitude: fromAi(toolCall.longitude, "Longitude of the location to check weather for", "string"),
-         current: "temperature_2m,wind_speed_10m,weather_code"
-     }
-     ```
+   ```feel
+   {
+       latitude: fromAi(toolCall.latitude, "Latitude of the location to check weather for", "string"),
+       longitude: fromAi(toolCall.longitude, "Longitude of the location to check weather for", "string"),
+       current: "temperature_2m,wind_speed_10m,weather_code"
+   }
+   ```
 
-The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request (for example, `52.52` and `13.41` for Berlin), while the `current` parameter is a fixed value that selects which weather fields to return.
+The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request, while the `current` parameter is a fixed value that selects which weather fields to return.
 
 ### Map the response to `toolCallResult`
 
-Each tool in the ad-hoc sub-process must return its result in a `toolCallResult` variable so the AI Agent connector can pass it back to the LLM.
+Each tool within the AI agent sub-process must return its result in a `toolCallResult` variable so the AI Agent connector can pass it back to the LLM.
 
-In the **Output Mapping** section, set the **Result Expression** to:
+In the **Output Mapping** section, set **Result Expression** to:
 
 ```feel
 {
@@ -332,7 +332,7 @@ In the **Output Mapping** section, set the **Result Expression** to:
 }
 ```
 
-This extracts the relevant fields from the [Open-Meteo API response](https://open-meteo.com/en/docs) and returns them in a structure the LLM can interpret and summarize for the user.
+This extracts the relevant fields from the Open-Meteo API response and returns them in a structure the LLM can interpret and summarize for the user.
 
 ### Test the new tool
 
@@ -342,7 +342,7 @@ Deploy the updated process and start a new instance. Try prompts like:
 - _"Is it windy in Tokyo?"_
 - _"Tell me the temperature in New York"_
 
-The LLM will recognize these as weather requests, select the **Get current weather** tool, provide the appropriate latitude and longitude, and summarize the response in natural language.
+The LLM will recognize these as weather requests, select the **Get current weather** tool, provide the appropriate latitude and longitude values, and summarize the response in natural language.
 
 ### Add your own tools
 
@@ -355,20 +355,20 @@ To add more tools to your agent, follow the same pattern:
 
 At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
 
+:::tip
 For more examples, review the tasks already available in this blueprint and the [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) documentation.
+:::
 
 ## Next steps
 
-Now that you’ve built your first Camunda AI agent, why not tailor it further?
-
+Now that you’ve built your first Camunda AI agent, you can tailor it further.
 For example:
 
-- Add and configure more tools in the ad-hoc sub-process that the AI agent can use.
+- Add and configure more tools.
 - Update the system prompt to adjust the AI agent's behavior.
 - Experiment with different model providers and configurations in the AI Agent connector.
-- [Monitor your AI agents](/components/agentic-orchestration/monitor-ai-agents.md).
-- [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md) with Camunda Process Test, including handling non-deterministic flows and verifying agent output with AI-powered assertions.
-- Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
 :::info Camunda Academy
 Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.
