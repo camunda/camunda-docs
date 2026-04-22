@@ -349,12 +349,6 @@ module.exports = {
           position: "left",
         },
         {
-          type: "html",
-          position: "right",
-          value:
-            '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
-        },
-        {
           to: "https://camunda.com/download?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",
           position: "right",
           className: "button button--primary button--md try-free",

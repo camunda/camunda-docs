@@ -24,13 +24,9 @@ Find your **region Id** and **cluster Id** under **Connection information** in y
 For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Operate component.
 :::
 
-## API Explorer
+## Swagger UI
 
-See [the interactive Operate API Explorer][operate-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Operate API.
-
-### Swagger UI
-
-A Swagger UI is also available within a running instance of Operate, at `https://${base-url}/swagger-ui/index.html`.
+A Swagger UI is available within a running instance of Operate, at `https://${base-url}/swagger-ui/index.html`.
 
 For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
@@ -58,8 +54,6 @@ All Operate endpoints for which tenant assignment is relevant will:
 - Return `tenantId` field in response
 - Provide `tenantId` search parameter
 
-Review [the Operate API Explorer][operate-api-explorer] for the exact request and response structure.
-
 ## Search
 
 Every object has a search `/v1/<object>/search` endpoint which can be requested by `POST` and a given query request.
@@ -80,7 +74,6 @@ The query request consists of components for **filter**, **size**, **sort**, and
 #### Filter
 
 Specifies which fields should match. Only items that match the given fields will be returned.
-Review [the Operate API Explorer][operate-api-explorer] for the available fields on each object.
 
 ##### Filter strings, numbers, and booleans
 

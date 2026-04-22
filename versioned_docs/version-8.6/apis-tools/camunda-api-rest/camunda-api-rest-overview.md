@@ -24,11 +24,9 @@ The context path should match the host and path defined in your Zeebe Gateway [c
 
 Example path: `http://localhost:8080/v2/`
 
-## API Explorer
+## OpenAPI specification
 
-See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Camunda 8 REST API.
-
-You can also directly [download the OpenAPI specification](https://github.com/camunda/camunda-docs/blob/main/api/camunda/version-8.6/camunda-openapi.yaml) to generate your own client.
+You can directly [download the OpenAPI specification](https://github.com/camunda/camunda-docs/blob/main/api/camunda/version-8.6/camunda-openapi.yaml) to generate your own client.
 
 ### Deployment API
 
@@ -64,12 +62,12 @@ For the latest defaults and detailed behavior, refer to the [Tomcat documentatio
 ### Query API
 
 :::danger
-Query API endpoints do not currently support [resource authorizations][], and can be used to expand user access to restricted resources. If you use resource permissions, allowing public access to those endpoints is not recommended.
+Query API endpoints do not currently support resource authorizations, and can be used to expand user access to restricted resources. If you use resource permissions, allowing public access to those endpoints is not recommended.
 :::
 
 All Query API endpoints contain an `(alpha)` declaration. Those endpoints are not accessible by default in Camunda 8 clusters.
 
-You can enable the [alpha feature][] search endpoints by setting either the configuration property `camunda.rest.query.enabled` to `true`,
+You can enable the alpha feature search endpoints by setting either the configuration property `camunda.rest.query.enabled` to `true`,
 or the environment variable `CAMUNDA_REST_QUERY_ENABLED` to `true`.
 
 ## API Key Attributes
@@ -117,8 +115,6 @@ The naming of the new objects containing key attributes as `string` is defined a
   - Other payloads: `*Instruction`. For instance:
     - `EvaluateDecisionRequest` with `integer (int64)` keys.
     - `DecisionEvaluationInstruction` with `string` keys.
-
-See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for more details.
 
 [resource authorizations]: /self-managed/identity/access-management/resource-authorizations.md
 [alpha feature]: /reference/alpha-features.md

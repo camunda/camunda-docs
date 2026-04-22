@@ -29,13 +29,9 @@ Find your **region Id** and **cluster Id** under **Connection information** in y
 For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Tasklist component.
 :::
 
-## API Explorer
+## Swagger UI
 
-See [the interactive Tasklist REST API Explorer][tasklist-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Tasklist REST API.
-
-### Swagger UI
-
-A detailed API description is also available as a Swagger UI at `https://${base-url}/swagger-ui/index.html`.
+A detailed API description is available as a Swagger UI at `https://${base-url}/swagger-ui/index.html`.
 
 For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/swagger-ui/index.html`, and for Self-Managed installations: [`http://localhost:8080/swagger-ui/index.html`](http://localhost:8080/swagger-ui/index.html).
 
