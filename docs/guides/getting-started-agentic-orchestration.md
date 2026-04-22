@@ -48,8 +48,8 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 
 ### Supported models
 
-The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API.
-See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
+The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers. It can also connect to any additional LLM that exposes an OpenAI-compatible API.
+See [all supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
 
 In this guide, you can try two use cases:
 
@@ -154,7 +154,7 @@ Configure the secrets using the [Console](../components/console/manage-clusters/
 
 <TabItem value="self-managed">
 Export the secrets as environment variables before starting the distribution.
-See [Connector secrets](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md#connector-secrets-not-working) for details.
+See [Connector secrets](/self-managed/components/connectors/connectors-configuration.md#secrets) for details.
 
 </TabItem>
 </Tabs>
@@ -278,7 +278,7 @@ You can customize your AI agent by adding tools. To do so, you typically follow 
 As an example, you will now add a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md), named **Get order status**, inside the AI Agent ad-hoc sub-process.
 
 :::important
-At runtime, a service task is only executed if something is available to handle its jobs. Set up a [job worker](/components/concepts/job-workers.md) for the service task.
+To execute this service task at runtime, set up a [job worker](/components/concepts/job-workers.md) or a [connector](/components/connectors/introduction.md) to handle its jobs.
 :::
 
 1. Use `fromAi()` in the tool's input mapping so the LLM can provide structured inputs:
