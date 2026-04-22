@@ -197,7 +197,6 @@ components:
           type: string
         resourceType:
           description: The type of resource to add permissions to.
-          type: string
           allOf:
             - $ref: "#/components/schemas/ResourceTypeEnum"
         permissionTypes:
@@ -225,7 +224,6 @@ components:
           type: string
         resourceType:
           description: The type of resource to add permissions to.
-          type: string
           allOf:
             - $ref: "#/components/schemas/ResourceTypeEnum"
         permissionTypes:
@@ -299,10 +297,17 @@ components:
             type: string
         resourceType:
           description: The type of resource to search permissions for.
-          type: string
           allOf:
             - $ref: "#/components/schemas/ResourceTypeEnum"
     AuthorizationResult:
+      required:
+        - ownerId
+        - ownerType
+        - resourceType
+        - resourceId
+        - resourcePropertyName
+        - permissionTypes
+        - authorizationKey
       type: object
       properties:
         ownerId:
@@ -312,14 +317,15 @@ components:
           $ref: "#/components/schemas/OwnerTypeEnum"
         resourceType:
           description: The type of resource that the permissions relate to.
-          type: string
           allOf:
             - $ref: "#/components/schemas/ResourceTypeEnum"
         resourceId:
           description: ID of the resource the permission relates to (mutually exclusive with `resourcePropertyName`).
+          nullable: true
           type: string
         resourcePropertyName:
           description: The name of the resource property the permission relates to (mutually exclusive with `resourceId`).
+          nullable: true
           type: string
         permissionTypes:
           description: Specifies the types of the permissions.
@@ -332,6 +338,8 @@ components:
           description: The key of the authorization.
     AuthorizationSearchResult:
       type: object
+      required:
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -347,6 +355,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/AuthorizationKey"
           description: The key of the created authorization.
+      required:
+        - authorizationKey
     PermissionTypeEnum:
       description: Specifies the type of permissions.
       type: string
@@ -354,7 +364,9 @@ components:
         - ACCESS
         - CANCEL_PROCESS_INSTANCE
         - CLAIM
+        - CLAIM_USER_TASK
         - COMPLETE
+        - COMPLETE_USER_TASK
         - CREATE
         - CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE
         - CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION

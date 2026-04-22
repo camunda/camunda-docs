@@ -188,10 +188,10 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/880/whats-new-in-88/"
+                  "docs/reference/announcements-release-notes/890/whats-new-in-89/"
                 )}
               >
-                What's new in 8.8
+                What's new in 8.9
               </Link>
               <Link
                 className={clsx(
@@ -199,10 +199,10 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/880/880-release-notes/"
+                  "docs/reference/announcements-release-notes/890/890-release-notes/"
                 )}
               >
-                8.8 release notes
+                8.9 release notes
               </Link>
               <Link
                 className={clsx(

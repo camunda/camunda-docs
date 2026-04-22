@@ -33,6 +33,8 @@ not(null)
 Checks if a given value is not `null`. If the value is `null` then the function returns `false`.
 Otherwise, the function returns `true`.
 
+The function requires one argument. Calling `is defined()` without an argument is invalid.
+
 **Function signature**
 
 ```feel
@@ -53,6 +55,9 @@ is defined(x)
 
 is defined(x.y)
 // false - if no variable "x" exists or it doesn't have a property "y"
+
+is defined()
+// error - expected one argument
 ```
 
 :::caution Breaking change

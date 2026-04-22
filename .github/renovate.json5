@@ -60,5 +60,18 @@
       groupName: "node",
       automerge: true,
     },
+    {
+      // Only allow patch updates for camunda-spring-boot-starter
+      matchManagers: ["maven"],
+      matchPackageNames: ["io.camunda:camunda-spring-boot-starter"],
+      matchUpdateTypes: ["minor", "major"],
+      enabled: false,
+    },
+    {
+      // Automerge minor and patch updates of Maven/Java dependencies
+      matchManagers: ["maven"],
+      matchUpdateTypes: ["patch", "minor"],
+      automerge: true,
+    },
   ],
 }

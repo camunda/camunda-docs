@@ -54,10 +54,10 @@ RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 
 ##################################################################################
 
 # Numbered aliases for vNext. These are temporary, until this version becomes current.
-RewriteRule ^docs/8.9/(.*)$ /docs/next/$1 [R=302,L]
+RewriteRule ^docs/8.10/(.*)$ /docs/next/$1 [R=302,L]
 
 # For linking from our apps - redirect URLs with the current version to URLs with no version
-RewriteRule ^docs/8.8/(.*)$ /docs/$1 [R=302,L]
+RewriteRule ^docs/8.9/(.*)$ /docs/$1 [R=302,L]
 
 ## Archived versions. Note that the URL is adjusted to staging in the publish-stage workflow.
 RewriteRule ^docs/0.25/(.*)$ https://unsupported.docs.camunda.io/0.25/docs/$1 [R=301,L]
@@ -120,7 +120,7 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/http-webhook/?
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/automation-anywhere/? /docs/components/connectors/out-of-the-box-connectors/automation-anywhere/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
-RewriteRule ^/docs/next/components/connectors/out-of-the-box-connectors/operate/? /docs/next/reference/announcements-release-notes/890/890-announcements/#removal-of-the-operator-connector [R=301,L]
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/operate/?$ /docs/next/reference/announcements-release-notes/890/890-announcements/ [R=301,L]
 
 
 ## Reabsorbed Optimize docs
@@ -146,7 +146,7 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 ## Microsoft Teams app redirect for app store documentation link.
 
-RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
+RewriteRule ^docs/ms-teams/?$ /docs/next/components/camunda-integrations/ms-teams/ [R=301,L]
 
 ## Redirect update-guide introduction to new components-upgrade introduction
 
@@ -155,6 +155,10 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
+
+#---------------------------------------------------------------------------------
+#   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
+#---------------------------------------------------------------------------------
 
 # Fix broken links from camunda-platform-get-started README
 
@@ -221,6 +225,22 @@ RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/u
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
 
+# APIs & tools migration guide root
+RewriteRule ^docs/apis-tools/migration-manuals/?$ /docs/apis-tools/migration-manuals/migrate-to-89/ [R=301,L]
+
+# 8.8 upgrade content now lives only in versioned 8.8 docs
+RewriteRule ^docs/self-managed/upgrade/components/870-to-880/?$ /docs/8.8/self-managed/upgrade/components/870-to-880/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/components/importer/?$ /docs/8.8/self-managed/upgrade/components/importer/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/components/optimize/?$ /docs/8.8/self-managed/upgrade/components/optimize/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/components/optimize/870-to-880/?$ /docs/8.8/self-managed/upgrade/components/optimize/870-to-880/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/components/optimize/changes-in-88/?$ /docs/8.8/self-managed/upgrade/components/optimize/changes-in-88/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/helm/870-to-880-dual-region/?$ /docs/8.8/self-managed/upgrade/helm/870-to-880-dual-region/ [R=301,L]
+RewriteRule ^docs/self-managed/upgrade/helm/870-to-880/?$ /docs/8.8/self-managed/upgrade/helm/870-to-880/ [R=301,L]
+
+# Remove ES/OS page
+RewriteRule ^docs/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch/?$ /docs/self-managed/concepts/secondary-storage/configuring-secondary-storage/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch/?$ /docs/8.9/self-managed/concepts/secondary-storage/configuring-secondary-storage/ [R=301,L]
+
 # Self-Managed upgrade guide restructuring
 RewriteRule ^docs/next/self-managed/update/administrators/admin-upgrade-overview/?$ /docs/next/self-managed/upgrade/ [R=301,L]
 RewriteRule ^docs/next/self-managed/update/administrators/prepare-for-admin-upgrade/?$ /docs/next/self-managed/upgrade/prepare-for-upgrade/ [R=301,L]
@@ -231,7 +251,8 @@ RewriteRule ^docs/next/self-managed/components/components-upgrade/840-to-850/?$ 
 RewriteRule ^docs/next/self-managed/components/components-upgrade/850-to-860/?$ /docs/8.7/self-managed/operational-guides/update-guide/850-to-860/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/components-upgrade/860-to-870/?$ /docs/8.7/self-managed/operational-guides/update-guide/860-to-870/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/components-upgrade/870-to-880/?$ /docs/self-managed/upgrade/components/870-to-880/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/components-upgrade/880-to-890/?$ /docs/next/self-managed/upgrade/components/880-to-890/ [R=301,L]
+RewriteRule ^docs/self-managed/components/components-upgrade/880-to-890/?$ /docs/self-managed/upgrade/components/880-to-890/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/components-upgrade/880-to-890/?$ /docs/8.9/self-managed/upgrade/components/880-to-890/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/components-upgrade/keycloak/keycloak-update/?$ /docs/next/self-managed/upgrade/components/keycloak/keycloak-compatibility/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/components-upgrade/elasticsearch/7-to-8/?$ /docs/next/self-managed/upgrade/components/database/changes-in-elasticsearch-8/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3/?$ /docs/8.7/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3/ [R=301,L]
@@ -257,20 +278,24 @@ RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-880-890/?$ /docs/next/self-managed/upgrade/helm/880-to-890/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/manual/upgrade/?$ /docs/next/self-managed/upgrade/manual/ [R=301,L]
 
+# Removed Camunda Exporter indices page
+RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices/?$ /docs/8.9/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+
 # Change ID of choose-right-model-agentic
-RewriteRule ^docs/next/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/next/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
+RewriteRule ^docs/8.9/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/8.9/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
 RewriteRule ^docs/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
 
 # Remove Node.js SDK and redirect to TypeScript SDK
-RewriteRule ^docs/next/apis-tools/node-js-sdk/$ /docs/next/apis-tools/typescript/typescript-sdk/ [R=301,L]
+RewriteRule ^docs/8.9/apis-tools/node-js-sdk/$ /docs/8.9/apis-tools/typescript/typescript-sdk/ [R=301,L]
 RewriteRule ^docs/apis-tools/node-js-sdk/$ /docs/apis-tools/typescript/typescript-sdk/ [R=301,L]
 
 # Removed Web Modeler Task testing page
-RewriteRule ^docs/next/components/concepts/task-testing/?$ /docs/next/components/modeler/task-testing/ [R=301,L]
+RewriteRule ^docs/8.9/components/concepts/task-testing/?$ /docs/8.9/components/modeler/task-testing/ [R=301,L]
 RewriteRule ^docs/components/concepts/task-testing/?$ /docs/components/modeler/task-testing/ [R=301,L]
 
 # Removal of refactoring suggestions
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/about-modeler/ [R=301,L]
+RewriteRule ^docs/8.9/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/8.9/components/modeler/about-modeler/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/components/modeler/about-modeler/ [R=301,L]
 
 
@@ -278,9 +303,23 @@ RewriteRule ^docs/self-managed/deployment/helm/configure/authentication-and-auth
 RewriteRule ^docs/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider/?$ /docs/self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider/ [R=301,L]
 
 # Move intrinsic-functions to advanced-topics (8.9)
-RewriteRule ^docs/next/components/connectors/use-connectors/intrinsic-functions/?$ /docs/next/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
+RewriteRule ^docs/8.9/components/connectors/use-connectors/intrinsic-functions/?$ /docs/8.9/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 RewriteRule ^docs/components/connectors/use-connectors/intrinsic-functions/?$ /docs/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
 RewriteRule ^docs/8.8/components/connectors/use-connectors/intrinsic-functions/?$ /docs/8.8/components/connectors/advanced-topics/intrinsic-functions/ [R=301,L]
+
+# Rename identity to admin for orchestration-cluster (8.9)
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/8.9/self-managed/components/orchestration-cluster/admin/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/identity/special-oidc-cases/?$ /docs/8.9/self-managed/components/orchestration-cluster/admin/special-oidc-cases/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code/?$ /docs/8.9/self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code/ [R=301,L]
+
+# Move MCP Client from early access to Agentic AI connectors (8.9)
+RewriteRule ^docs/components/early-access/alpha/mcp-client/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+RewriteRule ^docs/components/early-access/alpha/mcp-client/(.+)$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
+RewriteRule ^docs/8.9/components/early-access/alpha/mcp-client/?$ /docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client/ [R=301,L]
+RewriteRule ^docs/8.9/components/early-access/alpha/mcp-client/(.+)$ /docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-$1 [R=301,L]
 
 # Removal of 8.5 announcements/release notes
 RewriteRule ^docs/next/reference/announcements-release-notes/850/(.*)$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
@@ -336,6 +375,55 @@ RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/com
 
 ## Web Modeler folder restructure - moved to collaboration/
 RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
+
+## Current Web Modeler folder restructure
+RewriteRule ^docs/components/modeler/web-modeler/camunda-marketplace/?$ /docs/components/modeler/web-modeler/modeling/camunda-marketplace/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/context-pad/?$ /docs/components/modeler/web-modeler/modeling/context-pad/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/file-download/?$ /docs/components/modeler/web-modeler/modeling/file-download/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/components/modeler/web-modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/import-diagram/?$ /docs/components/modeler/web-modeler/modeling/import-diagram/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/model-your-first-diagram/?$ /docs/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/versions/?$ /docs/components/modeler/web-modeler/modeling/versions/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/components/modeler/web-modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/components/modeler/web-modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/task-testing/?$ /docs/components/modeler/web-modeler/validation/task-testing/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/components/modeler/web-modeler/validation/test-scenario-files/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/token-simulation/?$ /docs/components/modeler/web-modeler/validation/token-simulation/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/git-sync/?$ /docs/components/modeler/web-modeler/process-applications/git-sync/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
+
+## Current component moves and removals
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/email/?$ /docs/components/connectors/out-of-the-box-connectors/email-outbound/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/operate/?$ /docs/reference/announcements-release-notes/890/890-announcements/ [R=301,L]
+RewriteRule ^docs/components/early-access/alpha/ms-teams/?$ /docs/components/camunda-integrations/ms-teams/ms-teams/ [R=301,L]
+RewriteRule ^docs/components/identity/access-control/?$ /docs/components/admin/access-control/ [R=301,L]
+RewriteRule ^docs/components/identity/authorization/?$ /docs/components/admin/authorization/ [R=301,L]
+RewriteRule ^docs/components/identity/client/?$ /docs/components/admin/client/ [R=301,L]
+RewriteRule ^docs/components/identity/group/?$ /docs/components/admin/group/ [R=301,L]
+RewriteRule ^docs/components/identity/identity-introduction/?$ /docs/components/admin/admin-introduction/ [R=301,L]
+RewriteRule ^docs/components/identity/mapping-rules/?$ /docs/components/admin/mapping-rules/ [R=301,L]
+RewriteRule ^docs/components/identity/role/?$ /docs/components/admin/role/ [R=301,L]
+RewriteRule ^docs/components/identity/tenant/?$ /docs/components/admin/tenant/ [R=301,L]
+RewriteRule ^docs/components/identity/user/?$ /docs/components/admin/user/ [R=301,L]
+RewriteRule ^docs/components/operate/userguide/access-control/?$ /docs/components/operate/overview/access-control/ [R=301,L]
+RewriteRule ^docs/components/operate/userguide/monitor-operation-status/?$ /docs/components/operate/userguide/monitor-batch-operations/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider/?$ /docs/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/debugging-authentication/?$ /docs/self-managed/components/orchestration-cluster/admin/debugging-authentication/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-identity/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-operate/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-tasklist/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/elasticsearch-privileges/?$ /docs/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/elasticsearch-without-cluster-privileges/?$ /docs/self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/no-secondary-storage/?$ /docs/self-managed/concepts/secondary-storage/no-secondary-storage/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/opensearch-privileges/?$ /docs/self-managed/concepts/databases/elasticsearch/opensearch-privileges/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/secondary-storage-management/?$ /docs/self-managed/concepts/secondary-storage/managing-secondary-storage/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/backup/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 
 # Removed power automate
 
@@ -395,7 +483,7 @@ RewriteRule ^docs/self-managed/setup/guides/?$ /docs/self-managed/installation-m
 RewriteRule ^docs/self-managed/setup/guides/installing-payment-app-example/?$ /docs/self-managed/installation-methods/manual/install/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/prefix-elasticsearch-indices/?$ /docs/self-managed/installation-methods/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/using-existing-postgres/?$ /docs/self-managed/installation-methods/helm/configure/database/postgresql/using-external-postgresql/ [R=301,L]
-RewriteRule ^docs/self-managed/tasklist-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/tasklist/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/install-and-start/?$ /docs/self-managed/deployment/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/configuration/logging/?$ /docs/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/self-managed/zeebe-deployment/zeebe-installation/?$ /docs/self-managed/components/orchestration-cluster/zeebe/overview/ [R=301,L]
 
@@ -453,6 +541,7 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-inst
 
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/getting-started/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 RewriteRule ^docs/apis-tools/java-client/zeebe-process-test/?$ /docs/apis-tools/testing/getting-started/ [R=301,L]
+RewriteRule ^docs/apis-tools/testing/test-scenario-dsl/?$ /docs/apis-tools/testing/json-test-cases/ [R=301,L]
 RewriteRule ^docs/apis-tools/spring-zeebe-sdk/configuration/?$ /docs/apis-tools/camunda-spring-boot-starter/getting-started/ [R=301,L]
 
 RewriteRule ^docs/apis-tools/camunda-api-rest/camunda-api-rest-authentication/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
@@ -749,9 +838,6 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ d
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/deploy-resources/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-instance-variables/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables/ [R=301,L]
 
-# Remove Camunda exporter from 8.7 docs
-RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/install-zeebe-exporters/ [R=301,L]
-
 # Restructure Identity Docs (8.7)
 RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-external-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
@@ -969,6 +1055,7 @@ RewriteRule ^docs/guides/react-components/install-docker-compose/?$ /docs/guides
 RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/ [R=301,L]
 
 # Move logging from troubleshooting to monitoring
+RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 
@@ -1026,7 +1113,7 @@ RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-mana
 # remove tasklist API + Spring Zeebe tutorial
 RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
 
-# remove unsupported versions
+# remove unmaintained versions
 RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]

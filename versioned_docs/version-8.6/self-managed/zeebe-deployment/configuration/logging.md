@@ -8,7 +8,7 @@ in `config/log4j2.xml`.
 
 ## Default logging configuration
 
-You can find the default log4j2.xml used by the application in the [GitHub repository](https://github.com/camunda/camunda/blob/stable/8.7/dist/src/main/config/log4j2.xml).
+You can find the default log4j2.xml used by the application in the [GitHub repository](https://github.com/camunda/camunda/blob/stable/8.6/dist/src/main/config/log4j2.xml).
 
 It configures the [log level](https://logging.apache.org/log4j/2.x/manual/customloglevels.html) to `WARN` by default, and sets the following exceptions to `INFO`:
 

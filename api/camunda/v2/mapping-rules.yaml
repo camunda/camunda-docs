@@ -239,6 +239,11 @@ components:
         mappingRuleId:
           type: string
           description: The unique ID of the mapping rule.
+      required:
+        - claimName
+        - claimValue
+        - name
+        - mappingRuleId
     MappingRuleCreateResult:
       type: object
       allOf:
@@ -248,6 +253,8 @@ components:
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateResult"
     MappingRuleSearchQueryResult:
+      required:
+        - items
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
@@ -272,6 +279,11 @@ components:
         mappingRuleId:
           type: string
           description: The ID of the mapping rule.
+      required:
+        - claimName
+        - claimValue
+        - name
+        - mappingRuleId
     MappingRuleSearchQuerySortRequest:
       type: object
       properties:
