@@ -62,7 +62,7 @@ Start broad and narrow down. If you are not sure which filters you need, create 
 
 ## Create a rule
 
-1. Open the [notification rules page](#open-the-notification-rules-page).
+1. Open the [notification rules page](#access-the-notification-rules-page).
 2. Click **Create rule** in the page header.
 3. Select an **organization** and **cluster** if they are not pre-selected.
 4. (Optional) Choose a **process definition**. To target specific tasks, select them on the BPMN diagram.

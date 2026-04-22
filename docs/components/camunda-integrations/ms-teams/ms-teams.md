@@ -125,7 +125,7 @@ The Self-Managed setup first requires installation and configuration by your org
 :::
 
 1. Open **Microsoft Teams**.
-2. Open **Apps** and search for **Camunda** in the **Built for your org** organization.
+2. Open **Apps** and search for **Camunda** in the **Built for your org** section.
 
 :::note
 Your administrator may have renamed the app. Contact them if you cannot find it.
