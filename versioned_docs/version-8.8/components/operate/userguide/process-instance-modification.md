@@ -131,7 +131,7 @@ If you click the **Apply** button from the summary modal as described [here](#vi
 
 ## Maximum token modification limit
 
-When **canceling or moving** all tokens within one flow node instance—for flow nodes nested within a multi-instance body—a maximum of **500 tokens will be affected** due to technical limitations in this version. The modification can be repeated on the flow node instance until all tokens have been handled. To modify specific element instances instead, use the single instance modification by selecting the specific instances in the instance history, or use the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instance.api.mdx) where you can specify a custom filter.
+When **canceling or moving** all tokens within a single flow node instance nested in a multi-instance body, a maximum of **500 tokens can be affected** due to technical limitations in this version. You can repeat the modification on the same flow node instance until all tokens have been handled. To modify individual element instances instead, use the single-instance modification by selecting the relevant instances in the instance history, or use the [Orchestration Cluster API](../../../apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instance.api.mdx), where you can specify a custom filter.
 
 In this example, canceling or moving all instances would result in only 500 instances being canceled or moved:
 
