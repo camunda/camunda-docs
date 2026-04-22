@@ -30,7 +30,7 @@ Get hands-on with [Camunda 8](https://camunda.io) with our getting started guide
 
 ## Run your first BPMN process with Camunda 8
 
-Launch a fully-automated Rocket Launch process on your local machine — no code required. Provide a fuel level, and watch Camunda 8 run pre-flight checks, plot a destination with DMN, and generate a mission report using only FEEL expressions.
+Launch a fully-automated Rocket Launch process on your local machine with no code required. Provide a fuel level, and let Camunda 8 run pre-flight checks, plot a destination with DMN, and generate a mission report using only FEEL expressions.
 
 <p><a href="./getting-started-hello-world/" class="link-arrow">Run your first BPMN process</a></p>
 
