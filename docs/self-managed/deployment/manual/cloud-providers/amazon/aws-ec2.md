@@ -322,7 +322,7 @@ The following example uses scripts from the Terraform installation to deploy and
 1. Navigate to the procedure directory:
 
 ```sh
-cd camunda-deployment-references-main/aws/ec2/procedure
+cd procedure
 ```
 
 The `procedure` directory contains Bash scripts for installing and configuring Camunda 8.
@@ -387,7 +387,7 @@ Using Terraform, you can obtain the HTTP endpoint of the Application Load Balanc
 1. Navigate to the Terraform folder:
 
 ```sh
-cd camunda-deployment-references-main/aws/ec2/terraform
+cd terraform
 ```
 
 2. Retrieve the Application Load Balancer output:
