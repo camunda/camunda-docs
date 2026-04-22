@@ -269,42 +269,93 @@ You can observe this dynamic behavior in real-time through Operate, where you'll
 
 ## Step 4: Add your first tool
 
-You can customize your AI agent by adding tools. To do so, you typically follow these steps:
+You can customize your AI agent by adding tools. In this example, you will add a [REST connector](/components/connectors/protocol/rest.md) task that calls a real weather API, so your agent can answer questions like _"What's the weather in Berlin?"_.
 
-1. Add and configure a [BPMN task](/components/modeler/bpmn/tasks.md) inside the ad-hoc sub-process.
-1. Add a precise tool name and description, and define explicit input and output variables so the LLM can select and call the tool correctly.
-1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) for typed inputs, and return `toolCallResult` in the outputs.
+The [Open-Meteo API](https://open-meteo.com/) is free, requires no API key, and returns current weather data for any location.
 
-As an example, you will now add a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md), named **Get order status**, inside the AI Agent ad-hoc sub-process.
+### Add a REST connector task
 
-:::important
-To execute this service task at runtime, set up a [job worker](/components/concepts/job-workers.md) or a [connector](/components/connectors/introduction.md) to handle its jobs.
+1. Inside the ad-hoc sub-process, add a new task element.
+1. Change the task type to **REST Outbound Connector** using the **Change element** menu.
+1. Name the task `Get current weather`. This name is visible to the LLM as the tool name.
+
+### Write a tool description
+
+The LLM selects tools based on their description. Open the **Documentation** field in the properties panel and add a clear description of what the tool does and when to use it:
+
+> Fetches current weather conditions for a given location. Use this tool when the user asks about weather, temperature, wind, or climate conditions for a city or place. Returns temperature in Celsius, wind speed, and a weather description.
+
+:::tip
+Provide as much context as possible in tool descriptions to help the LLM select the right tool and generate proper inputs. See [Anthropic's best practices for tool definitions](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/implement-tool-use#example-of-a-good-tool-description) for guidance.
 :::
 
-1. Use `fromAi()` in the tool's input mapping so the LLM can provide structured inputs:
+### Configure the REST connector
+
+Set up the HTTP request in the properties panel:
+
+1. In the **Authentication** section, select **None**.
+1. In the **HTTP Endpoint** section:
+   - Set **Method** to **GET**.
+   - Set **URL** to the following [FEEL expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md) (click the `fx` icon first):
+
+     ```feel
+     "https://api.open-meteo.com/v1/forecast"
+     ```
+
+   - Set **Query parameters** to:
+
+     ```feel
+     {
+         latitude: fromAi(toolCall.latitude, "Latitude of the location to check weather for", "string"),
+         longitude: fromAi(toolCall.longitude, "Longitude of the location to check weather for", "string"),
+         current: "temperature_2m,wind_speed_10m,weather_code"
+     }
+     ```
+
+The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request (for example, `52.52` and `13.41` for Berlin), while the `current` parameter is a fixed value that selects which weather fields to return.
+
+### Map the response to `toolCallResult`
+
+Each tool in the ad-hoc sub-process must return its result in a `toolCallResult` variable so the AI Agent connector can pass it back to the LLM.
+
+In the **Output Mapping** section, set the **Result Expression** to:
 
 ```feel
-= {
-    customerEmail: fromAi(toolCall.customerEmail, "Customer email used to find the order", "string"),
-    orderId: fromAi(toolCall.orderId, "Order identifier to look up", "integer")
-}
-```
-
-2. Return the tool response by setting `toolCallResult` in the result expression or output mapping:
-
-```feel
-= {
+{
     toolCallResult: {
-        orderId: orderId,
-        status: orderStatus,
-        message: "Order status retrieved successfully"
+        latitude: response.body.latitude,
+        longitude: response.body.longitude,
+        temperature_celsius: response.body.current.temperature_2m,
+        wind_speed_kmh: response.body.current.wind_speed_10m,
+        weather_code: response.body.current.weather_code
     }
 }
 ```
 
+This extracts the relevant fields from the [Open-Meteo API response](https://open-meteo.com/en/docs) and returns them in a structure the LLM can interpret and summarize for the user.
+
+### Test the new tool
+
+Deploy the updated process and start a new instance. Try prompts like:
+
+- _"What's the weather in Paris right now?"_
+- _"Is it windy in Tokyo?"_
+- _"Tell me the temperature in New York"_
+
+The LLM will recognize these as weather requests, select the **Get current weather** tool, provide the appropriate latitude and longitude, and summarize the response in natural language.
+
+### Add your own tools
+
+To add more tools to your agent, follow the same pattern:
+
+1. Add a task inside the ad-hoc sub-process and apply a [connector](/components/connectors/introduction.md) or configure a [job worker](/components/concepts/job-workers.md).
+1. Write a clear tool name and **Documentation** description so the LLM knows when to use it.
+1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in input mappings to define the parameters the LLM must provide.
+1. Return `toolCallResult` in the result expression or output mapping.
+
 At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
 
-For your own tools, review the tasks already available to the agent in this blueprint and apply a similar pattern for `fromAi()` inputs and `toolCallResult` and `toolCallResults` outputs.
+For more examples, review the tasks already available in this blueprint and the [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) documentation.
 
 ## Next steps
 
