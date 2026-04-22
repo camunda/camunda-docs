@@ -364,6 +364,27 @@ Previously, only the first conversion error was returned. This fix improves cons
 </div>
 <div className="release-announcement-content">
 
+#### Streamlined SaaS orchestration architecture
+
+Camunda 8.9 introduces the streamlined SaaS orchestration architecture. As part of this change, the primary cluster endpoints have moved to the unified `*.api.camunda.io` domain.
+
+The previous component-specific endpoints (for example, `*.zeebe.camunda.io`, `*.operate.camunda.io`, `*.tasklist.camunda.io`) remain available for backward compatibility in 8.9, but are **deprecated** and planned for **removal in Camunda 8.10**.
+
+**Impact:** If you use custom applications, scripts, SDKs, or tooling that construct or store cluster URLs (including deployment endpoints), update them to the new unified endpoints to avoid issues when the legacy endpoints are removed.
+
+**Action:** Update your integrations to use the new endpoint format and review the streamlined architecture documentation for details.
+
+<p className="link-arrow">[Streamlined SaaS orchestration architecture](../../../apis-tools/migration-manuals/saas-orchestration-architecture.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Type-safe pagination model in the Camunda Java client
 
 Starting with 8.9.0, the Camunda Java client uses type-safe pagination interfaces (`AnyPage`, `OffsetPage`, `CursorForwardPage`, `CursorBackwardPage`) instead of the previous `SearchRequestPage` class. Each search or statistics endpoint now exposes only the pagination methods it actually supports.
@@ -1191,6 +1212,78 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: Operator-based infrastructure
+
+All Self-Managed [reference architectures](https://github.com/camunda/camunda-deployment-references) now use Kubernetes operators (CloudNativePG, ECK, Keycloak operator) instead of embedded Bitnami subcharts for infrastructure services. This applies to AKS, EKS, OpenShift, and Kind deployments.
+
+**Action:** If you follow a reference architecture and currently use Bitnami-managed infrastructure, use the [migration tooling](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) to transition to operator-managed services.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: Generic OIDC replaces Keycloak as default
+
+Reference architectures now use auth overlays with generic OIDC instead of Keycloak by default, enabling flexible identity provider integration.
+
+**Action:** If you deploy using a reference architecture with the default identity provider configuration, review the updated auth overlay settings.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: Amazon ECS on Fargate
+
+A new container-based reference architecture is available for deploying Camunda on AWS ECS with Fargate, without requiring Kubernetes.
+
+<p className="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: AKS RDBMS variant and Kind local development
+
+- A lighter Azure AKS reference architecture using PostgreSQL as secondary storage (no Elasticsearch) with PostgreSQL 17 support is now available.
+- A Kind (Kubernetes in Docker) reference architecture is available for local development and testing.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: OpenShift dual-region with ECK
+
+OpenShift dual-region reference architecture now supports ECK (Elastic Cloud on Kubernetes) operator for Elasticsearch. EKS dual-region also uses the ECK operator, and headless service DNS is now used for initial contact points.
+
+</div>
+</div>
+
 ## Identity
 
 <div className="release-announcement-row">
@@ -1351,6 +1444,36 @@ This enhancement ensures consistency across environments and simplifies setup fo
 Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
 This enhancement aligns Web Modeler's database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: The main process label has been removed from process applications
+
+Starting with Camunda 8.9, the main process label has been removed from process applications in Web Modeler.
+This removes all restrictions previously tied to the main process label, aligning the Web Modeler process application experience with the Desktop Modeler.
+As a result, process applications can now be synced with Git more easily.
+Additionally, users have the freedom to deploy and run any process within a process application, allowing them to design solutions with more than one primary entry point.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Users now have full control over version tags in process applications
+
+Starting with Camunda 8.9, users have full control over the `versionTag` attribute across all resource types in a process application. The `versionTag` is no longer automatically set on the main process XML when creating a process application version.
+Instead, users can set the `versionTag` manually in the properties panel for BPMN, DMN, form, and RPA files, allowing them to choose a `versionTag` for each resource independently.
 
 </div>
 </div>

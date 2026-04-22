@@ -8,6 +8,7 @@
         "id": "guides/introduction-to-camunda"
       },
       "items": [
+        "guides/getting-started-hello-world",
         "guides/getting-started-example",
         "guides/getting-started-agentic-orchestration",
         "guides/orchestrate-human-tasks",
