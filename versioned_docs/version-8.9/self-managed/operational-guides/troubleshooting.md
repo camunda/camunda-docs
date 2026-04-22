@@ -222,12 +222,10 @@ Additionally, you can use the `-h` option with each script to display help infor
 
 Before using it, clone the `c8-sm-checks` repository to your local environment by running the following command:
 
-<!-- TODO: [release-duty]:  -- Update version tag once a new version is released -->
-
 ```bash
 git clone https://github.com/camunda/c8-sm-checks.git
 cd c8-sm-checks
-git checkout v1.3.0
+git checkout v1.4.0
 ```
 
 ### Kubernetes connectivity scripts
