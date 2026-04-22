@@ -125,7 +125,7 @@ Use a heatmap to understand how long your AI agent spends in each task.
 
 <img src={Heatmap} alt="Tool usage heatmap" width="80%"/>
 
-You can see from the heatmap that the **Search recipe**, **Jokes API**, and **Fetch URL** tools are the only ones that were called across all process executions, and that your AI agent spent the most time in **Search recipe**.
+You can see from the heatmap that the **Search recipe**, **Jokes API**, and **Get list of Tech Stuff** tools are the only ones that were called across all process executions, and that your AI agent spent the most time in **Get list of Tech Stuff**.
 
 ### Example: Create a report for tool call counts
 
