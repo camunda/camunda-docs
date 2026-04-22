@@ -25,7 +25,7 @@ image: DocsIcon,
 description: "Create a process application in your project to work on and deploy a set of related files.",
 },
 {
-link: "../../modeler/web-modeler/process-applications/deploy-process-application",
+link: "../../modeler/web-modeler",
 title: "Deploy a project",
 image: DocsIcon,
 description: "Validate your process application in development before deploying it to testing, staging, or production.",
