@@ -2,7 +2,7 @@
 applyTo: "**"
 ---
 
-**When to use:** All files. Read this before any change to understand repo structure, PR workflow, and commit conventions. The full guidelines live at `/howtos/documentation-guidelines.md`.
+**When to use:** All files. Read this before any change to understand repo structure, PR workflow, and commit conventions. Read the full guidelines at `/howtos/documentation-guidelines.md`.
 
 ## 1. File and repo structure
 

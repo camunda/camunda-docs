@@ -7,13 +7,13 @@ applyTo: "**/*.md"
 ## 1. Language and grammar
 
 - Default to **American English** (US spelling: "analyze" not "analyse", "color" not "colour", "capitalize" not "capitalise").
-- Write umlauted letters in full: "ue", "ae", "oe" instead of ü, ä, ö (for example, "Bernd Ruecker" not "Bernd Rücker").
+- Write umlauted letters in full: "ue", "ae", "oe" instead of ü, ä, ö.
 - Use **second person** ("you", "your") and **active voice** throughout. Avoid "I", "me", "my".
 - Use **common contractions** (you'll, don't, it's, we're) to maintain a natural, conversational tone.
 - Write whole numbers **one through nine** in full; use numerals for **10 and above**.
 - Write large numbers as numerals with a unit (for example, "1 million" not "1,000,000").
 - Write percentages as numerals with % (for example, 10%).
-- Avoid Latin abbreviations (e.g., i.e.); write "for example" or "that is" instead.
+- Avoid Latin abbreviations (e.g., i.e.); write "for example", or "that is," instead.
 - Use **gender-neutral language**: use "they" for a user, not "he/she".
 - Avoid unclear pronoun references. Replace vague "it", "this", "that" with the specific noun when the referent is ambiguous.
 - Avoid overuse of "that" — remove it when the sentence reads correctly without it.
@@ -27,6 +27,7 @@ applyTo: "**/*.md"
 - Use the **Oxford comma** in all lists (for example, "GitHub, Google Analytics, and Slack").
 - Default to **American punctuation** rules.
 - Use **em dashes** (—) for parenthetical information; **en dashes** (–) for date and time ranges; **hyphens** (-) only for compound adjectives.
+- Avoid excessive use of em dashes. Use shorter, more concise sentences instead.
 - Do **not** use quotation marks for UI elements, button names, or section names. Use **bold** instead.
 - Use double quotation marks only for direct speech or quoted text.
 - Omit hyphens in prefixed words (reactivate, undo, deactivate, unhappy) unless the result looks incorrect.
@@ -37,6 +38,7 @@ applyTo: "**/*.md"
 - Do not include a colon at the end of a Markdown header.
 - Make titles and headers **descriptive and action-oriented** (for example, "Modify process instances" not "Process instance modification"). Avoid bare "Overview" titles.
 - **Bold** UI element names and button labels (for example, `Click **Save**`). Do not use italics or quotation marks for them.
+  Do not use **bold** for emphasis.
 - Use the `>` arrow to separate sequential UI navigation steps (for example, `**File > New > BPMN Diagram**`).
 - Use **italics** only for emphasis on a specific word, not for UI elements or filenames.
 - Place **filenames** and **code identifiers** inside inline code backticks (for example, `values.yaml`, `taskId`).
