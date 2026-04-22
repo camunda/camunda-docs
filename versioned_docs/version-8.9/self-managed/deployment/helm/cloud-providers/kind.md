@@ -73,6 +73,7 @@ Before you begin, you'll need:
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [Helm](https://helm.sh/docs/intro/install/)
+- [`yq`](https://github.com/mikefarah/yq) (the Go-based implementation from Mike Farah, required by the operator deployment scripts)
 - [envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) (Domain mode only; part of the `gettext` package)
 - [mkcert](https://github.com/FiloSottile/mkcert#installation) (Domain mode only)
 
@@ -265,6 +266,8 @@ This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS 
 
 Run the operator deployment script, specifying the domain deployment mode:
 
+Make sure the Go-based version of `yq` is available before you run this script. The Python-based `yq` package is not supported and can fail when the script deploys filtered CloudNativePG clusters.
+
 ```bash
 CAMUNDA_MODE=domain ./procedure/operators-deploy.sh
 ```
@@ -344,6 +347,8 @@ Before deploying Camunda, you need to deploy the external services it depends on
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
 Run the operator deployment script, specifying the no-domain deployment mode:
+
+Make sure the Go-based version of `yq` is available before you run this script. The Python-based `yq` package is not supported and can fail when the script deploys filtered CloudNativePG clusters.
 
 ```bash
 CAMUNDA_MODE=no-domain ./procedure/operators-deploy.sh
