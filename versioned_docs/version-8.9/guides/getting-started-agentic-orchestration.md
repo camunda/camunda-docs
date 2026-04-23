@@ -248,7 +248,7 @@ Instead of using **Play**, you can also test the process within the **Implement*
 1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
 1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
-1. Select the **Tasks** tab in Tasklist. When the AI agent finishes processing, you should see either a `User Feedback` or a `Ask human to send email` task waiting for you to complete.
+1. Select the **Tasks** tab in Tasklist. When the AI agent finishes processing, you should see a `User Feedback` task waiting for you to complete.
 1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md). Open it in your browser at http://localhost:8080/operate.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish the process.
 
