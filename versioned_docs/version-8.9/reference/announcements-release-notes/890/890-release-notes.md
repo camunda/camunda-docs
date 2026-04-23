@@ -365,6 +365,10 @@ Camunda 8.9 adds support for BPMN conditional events in the platform itself, com
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
+### Dashboard focuses on active processes
+
+The Operate dashboard now only displays processes that have active instances. Processes with no running or incident instances are no longer shown, providing a clean view of what is currently running in your cluster.
+
 ### Unified, context-aware process instance view
 
 <!-- https://github.com/camunda/product-hub/issues/3255 -->
@@ -817,6 +821,7 @@ Camunda 8 now supports Elasticsearch 9 as a secondary data store, allowing you t
 Granular task-level authorization is now integrated into the Tasklist UI and the Orchestration Cluster REST API.
 
 - Property-based task permissions:
+
   - Grant users permission to view or work on a task, based on task properties.
   - Permissions apply when the assignee matches the current user, or when the user belongs to a candidate group (or is listed as a candidate user). This ensures all relevant users have appropriate access, whether directly assigned or eligible to claim the task.
   - Permissions apply consistently across both the Tasklist UI and the orchestration cluster REST API.
