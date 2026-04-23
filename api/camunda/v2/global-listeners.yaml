@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:STRONG]]
 
         Create a new global user task listener.
@@ -49,6 +51,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get a global user task listener by its id.
@@ -85,6 +89,8 @@ paths:
       summary: Update global user task listener
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -133,6 +139,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:STRONG]]
 
         Deletes a global user task listener.
@@ -170,6 +178,8 @@ paths:
       summary: Search global user task listeners
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 

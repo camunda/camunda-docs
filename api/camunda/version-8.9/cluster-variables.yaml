@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:STRONG]]
 
         Create a global-scoped cluster variable.
@@ -40,6 +42,8 @@ paths:
       summary: Create a tenant-scoped cluster variable
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -86,6 +90,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.
@@ -126,6 +132,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get a global-scoped cluster variable.
@@ -162,8 +170,10 @@ paths:
       tags:
         - Cluster Variable
       summary: Update a global-scoped cluster variable
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -211,6 +221,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:STRONG]]
 
         Delete a global-scoped cluster variable.
@@ -246,6 +258,8 @@ paths:
       summary: Get a tenant-scoped cluster variable
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -289,8 +303,10 @@ paths:
       tags:
         - Cluster Variable
       summary: Update a tenant-scoped cluster variable
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -343,6 +359,8 @@ paths:
       summary: Delete a tenant-scoped cluster variable
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
