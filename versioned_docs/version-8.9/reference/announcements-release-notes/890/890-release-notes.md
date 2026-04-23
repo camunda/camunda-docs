@@ -367,7 +367,7 @@ Camunda 8.9 adds support for BPMN conditional events in the platform itself, com
 
 ### Dashboard focuses on active processes
 
-The Operate dashboard now only displays processes that have active instances. Processes with no running or incident instances are no longer shown, providing a clean view of what is currently running in your cluster.
+The Operate dashboard now only displays processes with active instances. Processes without running or incident instances are no longer shown, providing a clean view of what is currently running in your cluster.
 
 ### Unified, context-aware process instance view
 
