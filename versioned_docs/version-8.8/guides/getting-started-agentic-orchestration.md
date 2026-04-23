@@ -4,13 +4,14 @@ title: "Build your first AI agent"
 sidebar_label: Build your first AI agent
 description: "Get started with Camunda agentic orchestration by running your first AI agent."
 keywords: [agentic orchestration, ai agent]
+toc_max_heading_level: 2
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
 import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
-import AiAgentPropertiesPanelImg from './img/ai-agent-example-properties-panel.png';
+import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
@@ -36,8 +37,8 @@ After completing it, you will have an example AI agent running in Camunda 8.
 
 To build your first AI agent, see the prerequisites below depending on:
 
-- Your [working environment](#camunda-8-environment).
-- Your [chosen model](#supported-models).
+- Your working environment.
+- Your chosen model.
 
 ### Camunda 8 environment
 
@@ -48,8 +49,8 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 
 ### Supported models
 
-The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API.
-See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
+The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers. It can also connect to any additional LLM that exposes an OpenAI-compatible API.
+See [all supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
 
 In this guide, you can try two use cases:
 
@@ -154,7 +155,7 @@ Configure the secrets using the [Console](../components/console/manage-clusters/
 
 <TabItem value="self-managed">
 Export the secrets as environment variables before starting the distribution.
-See [Connector secrets](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md#connector-secrets-not-working) for details.
+See [Connector secrets](/self-managed/components/connectors/connectors-configuration.md#secrets) for details.
 
 </TabItem>
 </Tabs>
@@ -163,12 +164,11 @@ See [Amazon Bedrock model provider](../components/connectors/out-of-the-box-conn
 
 #### Configure properties
 
-In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task.
-See [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) for more details.
+In the blueprint BPMN diagram, the AI agent is implemented using the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md).
 
 You can keep the default configuration or adjust it to test other setups. To do so, use the properties panel:
 
-<img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
+<img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel" width="50%"/>
 
 </TabItem>
 
@@ -229,7 +229,7 @@ Depending on your working environment, test your agent by following the correspo
 <TabItem value="saas">
 
 1. Open [Web Modeler](/components/modeler/web-modeler/index.md).
-1. Select the [**Play**](/components/modeler/web-modeler/collaboration/play-your-process.md) tab.
+1. Select the [**Play**](/components/modeler/web-modeler/collaboration/play-your-process.md) tab
 1. Select the cluster you want to deploy and play the process on.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
@@ -270,51 +270,106 @@ You can observe this dynamic behavior in real-time through Operate, where you'll
 
 ## Step 4: Add your first tool
 
-You can customize your AI agent by adding tools. To do so, you typically follow these steps:
+You can customize your AI agent by adding tools. In this section, you will add a tool that fetches weather conditions for a given location using the [Open-Meteo API](https://open-meteo.com/).
 
-1. Add a BPMN activity inside the ad-hoc sub-process.
-1. Configure the task implementation, including the connector, service task, user task, and DMN.
-1. Add a precise tool name and description, and define explicit input and output variables so the LLM can select and call the tool correctly.
-1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) for typed inputs, and return `toolCallResult` in the outputs.
+### Add a REST connector task
 
-As an example, you will now add a service task called **Get order status** inside the AI Agent ad-hoc sub-process.
+1. Inside the AI agent sub-process, add a new task element.
+1. Change the task type to [**REST Outbound Connector**](/components/connectors/protocol/rest.md) using the **Change element** menu.
+1. Name the task. For example, `Get current weather`. This name is visible to the LLM as the tool name.
 
-1. Use `fromAi()` in the tool's input mapping so the LLM can provide structured inputs:
+### Write a tool description
 
-```feel
-= {
-    customerEmail: fromAi(toolCall.customerEmail, "Customer email used to find the order", "string"),
-    orderId: fromAi(toolCall.orderId, "Order identifier to look up", "integer")
-}
+The LLM selects tools based on their description. Open the **Documentation** field in the properties panel and add a clear description of what the tool does and when to use it. For example:
+
+```
+Fetches current weather conditions for a given location. Use this tool when the user asks about weather, temperature, wind, or climate conditions for a city or place. Returns temperature in Celsius, wind speed, and a weather description.
 ```
 
-2. Return the tool response by setting `toolCallResult` in the result expression or output mapping:
+:::tip
+Provide as much context as possible in tool descriptions to help the LLM select the right tool and generate proper inputs.
+:::
+
+### Configure the REST connector
+
+Set up the HTTP request in the properties panel:
+
+1. In the **Authentication** section, select **None**.
+1. In the **HTTP Endpoint** section:
+   - Set **Method** to **GET**.
+   - Set **URL** to the following [FEEL expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md) by clicking the `fx` icon:
+
+     ```feel
+     "https://api.open-meteo.com/v1/forecast"
+     ```
+
+   - Set **Query parameters** to:
+
+   ```feel
+   {
+       latitude: fromAi(toolCall.latitude, "Latitude of the location to check weather for", "string"),
+       longitude: fromAi(toolCall.longitude, "Longitude of the location to check weather for", "string"),
+       current: "temperature_2m,wind_speed_10m,weather_code"
+   }
+   ```
+
+The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request, while the `current` parameter is a fixed value that selects which weather fields to return.
+
+### Map the response to `toolCallResult`
+
+Each tool within the AI agent sub-process must return its result in a `toolCallResult` variable so the AI Agent connector can pass it back to the LLM.
+
+In the **Output Mapping** section, set **Result Expression** to:
 
 ```feel
-= {
+{
     toolCallResult: {
-        orderId: orderId,
-        status: orderStatus,
-        message: "Order status retrieved successfully"
+        latitude: response.body.latitude,
+        longitude: response.body.longitude,
+        temperature_celsius: response.body.current.temperature_2m,
+        wind_speed_kmh: response.body.current.wind_speed_10m,
+        weather_code: response.body.current.weather_code
     }
 }
 ```
 
+This extracts the relevant fields from the Open-Meteo API response and returns them in a structure the LLM can interpret and summarize for the user.
+
+### Test the new tool
+
+Deploy the updated process and start a new instance. Try prompts like:
+
+- _"What's the weather in Paris right now?"_
+- _"Is it windy in Tokyo?"_
+- _"Tell me the temperature in New York"_
+
+The LLM will recognize these as weather requests, select the **Get current weather** tool, provide the appropriate latitude and longitude values, and summarize the response in natural language.
+
+### Add your own tools
+
+To add more tools to your agent, follow the same pattern:
+
+1. Add a task inside the ad-hoc sub-process and apply a [connector](/components/connectors/introduction.md) or configure a [job worker](/components/concepts/job-workers.md).
+1. Write a clear tool name and **Documentation** description so the LLM knows when to use it.
+1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in input mappings to define the parameters the LLM must provide.
+1. Return `toolCallResult` in the result expression or output mapping.
+
 At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
 
-For your own tools, review the tasks already available to the agent in this blueprint and apply a similar pattern for `fromAi()` inputs and `toolCallResult` and `toolCallResults` outputs.
+:::tip
+For more examples, review the tasks already available in this blueprint and the [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) documentation.
+:::
 
 ## Next steps
 
-Now that you’ve built your first Camunda AI agent, why not tailor it further?
-
+Now that you’ve built your first Camunda AI agent, you can tailor it further.
 For example:
 
-- Add and configure more tools in the ad-hoc sub-process that the AI agent can use.
+- Add and configure more tools.
 - Update the system prompt to adjust the AI agent's behavior.
 - Experiment with different model providers and configurations in the AI Agent connector.
-- [Monitor your AI agents](/components/agentic-orchestration/monitor-ai-agents.md).
-- Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
 :::info Camunda Academy
 Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.

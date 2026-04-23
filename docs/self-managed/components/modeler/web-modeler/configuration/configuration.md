@@ -1,7 +1,7 @@
 ---
 id: configuration
-title: "Configuration"
-sidebar_label: "Overview"
+title: "Web Modeler Configuration"
+sidebar_label: "Web Modeler Configuration"
 description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, and WebSocket."
 ---
 
