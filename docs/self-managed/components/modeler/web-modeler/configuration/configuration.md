@@ -364,6 +364,7 @@ Web Modeler uses Keycloak as the default authentication provider (using OAuth 2.
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI`    | [optional] URL of the JWK Set endpoint (used for JWT validation). Only necessary if URL cannot be derived from the OIDC configuration endpoint.                                                                                                                                         | `https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs` | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWS_ALGORITHMS` | [optional] List of trusted JWS algorithms used for JWT validation. Only necessary if the algorithms cannot be derived from the JWK Set response.                                                                                                                                        | `ES256`                                                                                   | -                        |
 | `OAUTH2_CLIENT_ID`                                         | Client ID of the Web Modeler application configured in Identity.                                                                                                                                                                                                                        | `web-modeler`                                                                             | -                        |
+| `OAUTH2_CLIENT_SCOPE`                                      | [optional]<br/>OIDC scopes requested during authentication, determining what user information is included in the token.                                                                                                                                                                 | `full`                                                                                    | `openid email profile`   |
 | `OAUTH2_CLIENT_FETCH_REQUEST_CREDENTIALS`                  | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies.                     | `include`                                                                                 | -                        |
 
 </TabItem>
@@ -386,7 +387,9 @@ camunda:
           public-api: web-modeler-public-api # default: web-modeler-public-api
     oauth2:
       client-id: web-modeler
-      client.fetch-request-credentials: include # optional
+      client:
+        fetch-request-credentials: include # optional
+        scope: openid email profile # optional
       token.username-claim: name # optional, default: name
 
 spring:
