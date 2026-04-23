@@ -116,7 +116,6 @@ module.exports = {
             require("./docs/components/modeler/forms/sidebar-schema"),
             require("./docs/components/modeler/element-templates/sidebar-schema"),
             "components/modeler/data-handling",
-            "components/modeler/using-web-and-desktop-modeler-together",
             "components/modeler/task-testing",
             require("./docs/components/modeler/reference/sidebar-schema"),
           ],
@@ -807,7 +806,13 @@ module.exports = {
                   ],
                 },
                 {
-                  Collaborate: [
+                  type: "category",
+                  label: "Collaborate",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/collaboration/collaboration",
+                  },
+                  items: [
                     "components/modeler/web-modeler/collaboration/collaborate-with-modes",
                     "components/modeler/web-modeler/collaboration/design-your-process",
                     "components/modeler/web-modeler/collaboration/implement-your-process",
@@ -843,6 +848,7 @@ module.exports = {
         "components/modeler/desktop-modeler/deploy-diagram",
         "components/modeler/desktop-modeler/start-instance",
         "components/modeler/desktop-modeler/process-applications",
+        "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/desktop-modeler/use-connectors",
         {
           "Element templates": [

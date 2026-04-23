@@ -31,7 +31,7 @@ Use the **properties panel** on the right side to inspect and edit the technical
 To revert or reapply changes, use the **Undo** and **Redo** buttons on the canvas.
 
 :::note
-Undo and redo behavior has limitations when collaborating and [importing a diagram](import-diagram.md#undoredo-management-limitations).
+Undo and redo behavior has limitations when [collaborating](../collaboration/collaboration.md#undoredo-management-limitations) and [importing a diagram](import-diagram.md#undoredo-management-limitations).
 :::
 
 ## Additional resources
