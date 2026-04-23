@@ -26,7 +26,7 @@ Zeebe loads exporters only if they are configured in the main Zeebe YAML configu
 
 Exporters receive only records produced after they are configured.
 
-Camunda 8 Self-Managed ships several built-in exporters, including the [Camunda Exporter](../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md), [Elasticsearch](../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md), [OpenSearch](../components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md), and the RDBMS exporter (see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md)). Use a custom exporter only when you need a different target system or behavior.
+Camunda 8 Self-Managed ships several built-in exporters, including the [Camunda exporter](../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md), [Elasticsearch](../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md), [OpenSearch](../components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md), and the RDBMS exporter (see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md)). Use a custom exporter only when you need a different target system or behavior.
 
 Zeebe manages data deletion through two distinct mechanisms to reduce disk usage:
 
@@ -366,6 +366,7 @@ Camunda‑maintained exporters for Elasticsearch and OpenSearch include built‑
 - Restrict exported variables (by name pattern or inferred value type).
 - Include or exclude whole processes (based on `bpmnProcessId`).
 - Enable an Optimize mode that exports only the record types and intents Optimize actually consumes.
+- Control variable scope for root and local variables, including options to drop all local variables or apply different filters to each scope.
 
 For concrete arguments, examples, and version details, see:
 

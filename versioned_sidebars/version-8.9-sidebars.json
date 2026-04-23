@@ -462,7 +462,6 @@
             {
               "Modeling": [
                 "components/modeler/web-modeler/modeling/model-your-first-diagram",
-                "components/modeler/web-modeler/modeling/context-pad",
                 "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
                 "components/modeler/web-modeler/modeling/versions",
                 "components/modeler/web-modeler/modeling/file-download",
@@ -588,7 +587,6 @@
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
-            "components/modeler/desktop-modeler/variables",
             {
               "Element templates": [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
@@ -609,6 +607,7 @@
             "components/modeler/desktop-modeler/troubleshooting"
           ]
         },
+        "components/modeler/using-web-and-desktop-modeler-together",
         {
           "Camunda Forms": [
             "components/modeler/forms/camunda-forms-reference",
@@ -671,7 +670,6 @@
           ]
         },
         "components/modeler/data-handling",
-        "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/task-testing",
         {
           "Reference": [
@@ -1038,6 +1036,8 @@
             {
               "Amazon AWS": [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock-codeinterpreter",
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase",
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
