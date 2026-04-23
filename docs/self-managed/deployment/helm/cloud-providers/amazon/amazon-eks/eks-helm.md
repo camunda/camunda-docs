@@ -317,7 +317,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
+Web Modeler, Console, and Management Identity are not enabled by default in this deployment.
+
+To enable these enterprise components in an OIDC-enabled full cluster, first deploy the required infrastructure (PostgreSQL, Elasticsearch/OpenSearch, and an IdP, such as Keycloak) using the official operators, then apply the Helm values examples shown in [deploy required dependencies with operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
 #### Secondary storage options
 
@@ -461,7 +463,7 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
   Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
 
   ```bash reference
-  https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml#L28-L42
+  https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml#L28-L48
   ```
 
   - Replace `OPENSEARCH_MASTER_USERNAME` and `OPENSEARCH_MASTER_PASSWORD` with your OpenSearch domain admin credentials.

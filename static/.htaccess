@@ -220,6 +220,8 @@ RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-r
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?$ /docs/self-managed/upgrade/helm/870-to-880/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/upgrade/manual/ [R=301,L]
 
+# Agentic orchestration base path redirect
+RewriteRule ^docs/components/agentic-orchestration/?$ /docs/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
@@ -335,6 +337,18 @@ RewriteRule ^docs/8.6/reference/announcements-release-notes/850/(.*)$ /docs/8.6/
 RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-announcements/?$ /docs/8.6/reference/announcements-release-notes/overview/ [R=301,L]
 RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-notes/?$ /docs/8.6/reference/announcements-release-notes/overview/ [R=301,L]
 
+# Removed Desktop Modeler variables page (8.9)
+RewriteRule ^docs/next/components/modeler/desktop-modeler/variables/?$ /docs/next/components/modeler/data-handling/ [R=301,L]
+RewriteRule ^docs/8.9/components/modeler/desktop-modeler/variables/?$ /docs/8.9/components/modeler/data-handling/ [R=301,L]
+RewriteRule ^docs/8.8/components/modeler/desktop-modeler/variables/?$ /docs/8.8/components/modeler/data-handling/ [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/variables/?$ /docs/components/modeler/data-handling/ [R=301,L]
+
+# Removed Web Modeler context pad page, merged into model-your-first-diagram (8.9)
+RewriteRule ^docs/next/components/modeler/web-modeler/modeling/context-pad/?$ /docs/next/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/8.9/components/modeler/web-modeler/modeling/context-pad/?$ /docs/8.9/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/8.8/components/modeler/web-modeler/modeling/context-pad/?$ /docs/8.8/components/modeler/web-modeler/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/modeling/context-pad/?$ /docs/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
@@ -347,7 +361,7 @@ RewriteRule ^docs/self-managed/deployment/helm/configure/vendor-supported-infras
 # Restructure Web Modeler Docs (8.8)
 ## Web Modeler folder restructure - moved to modeling/
 RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/modeler/web-modeler/modeling/camunda-marketplace/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/context-pad/?$ /docs/next/components/modeler/web-modeler/modeling/context-pad/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/context-pad/?$ /docs/next/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/file-download/?$ /docs/next/components/modeler/web-modeler/modeling/file-download/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/import-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/import-diagram/ [R=301,L]
@@ -1118,8 +1132,8 @@ RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /do
 RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
-# redirect new-context-pad to context-pad
-RewriteRule ^docs/components/modeler/web-modeler/new-context-pad/?$ /docs/components/modeler/web-modeler/context-pad/$1 [R=301,L]
+# redirect new-context-pad to model-your-first-diagram (context-pad was merged)
+RewriteRule ^docs/components/modeler/web-modeler/new-context-pad/?$ /docs/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
 
 # Remove Cawemo
 RewriteRule ^docs/guides/migrating-from-cawemo/?$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]

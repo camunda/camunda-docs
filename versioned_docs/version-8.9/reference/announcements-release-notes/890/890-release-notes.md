@@ -15,7 +15,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 | Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Upgrade guides                                                                                     |
 | :----------------- | :--------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2028              | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| 14 April 2026      | 13 October 2027              | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -251,6 +251,63 @@ Helm deployments in 8.9 now support fully integrated RDBMS secondary storage, ex
 
 <p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)</p>
 
+## Reference architectures
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects deployment references">Deployment references</span></div>
+
+Camunda 8.9 brings significant updates to the [deployment references](https://github.com/camunda/camunda-deployment-references) used by Self-Managed reference architectures. Key changes since 8.8 include new deployment options, an operator-based infrastructure model, and migration tooling.
+
+### Operator-based infrastructure
+
+All reference architectures now use Kubernetes operators instead of embedded Bitnami subcharts for infrastructure services:
+
+- **CloudNativePG operator** replaces Bitnami PostgreSQL.
+- **ECK (Elastic Cloud on Kubernetes) operator** replaces Bitnami Elasticsearch.
+- **Keycloak operator** replaces the Bitnami Keycloak Helm subchart.
+
+This applies to AKS, EKS, OpenShift, and Kind reference architectures.
+
+<ul>
+  <li><span class="link-arrow">[AKS reference architecture](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/aks-helm.md)</span></li>
+  <li><span class="link-arrow">[OpenShift reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md)</span></li>
+</ul>
+
+### Migration from Bitnami to operators
+
+A new migration tooling set is available to move existing Self-Managed deployments from Bitnami-managed infrastructure to operator-managed infrastructure. The migration follows a 5-phase process (deploy targets, backup, cutover, validation, cleanup) with typical downtime of 5–40 minutes during the cutover phase.
+
+<p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
+
+### New reference architectures
+
+- **Amazon ECS on Fargate**: A new container-based deployment option on AWS without Kubernetes, using Elastic File System (EFS) for shared storage and restore init containers for backup/restore.
+- **AKS RDBMS variant**: A lighter Azure AKS reference architecture using PostgreSQL as secondary storage instead of Elasticsearch, with PostgreSQL 17 support.
+- **Kind local development**: A local Kubernetes-in-Docker reference architecture for development and testing, with Makefile-based commands and support for both PostgreSQL and Elasticsearch secondary storage variants.
+
+<ul>
+  <li><span class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</span></li>
+</ul>
+
+### Dual-region improvements
+
+- EKS and OpenShift dual-region reference architectures now use the ECK operator for Elasticsearch.
+- Headless service DNS is now used for initial contact points in dual-region setups, improving cross-region connectivity reliability.
+- OpenShift dual-region with ECK is now available.
+
+<ul>
+  <li><span class="link-arrow">[EKS dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)</span></li>
+  <li><span class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)</span></li>
+</ul>
+
+### Additional improvements
+
+- **Generic OIDC support**: Reference architectures now use auth overlays with generic OIDC instead of Keycloak by default, enabling flexible identity provider integration.
+- **Ingress migration**: Kind reference architecture migrated from NGINX Ingress to Contour.
+- **Storage encryption**: Storage classes now support encryption by default.
+- **Configurable Elasticsearch index prefixes**: Custom `ES_INDEX_PREFIXES` can now be set for multi-tenant or isolated deployments.
+- **Helm deprecation checks**: All reference architecture CI workflows now include Helm deprecation detection for unknown keys in deployed values.
+- **Security**: NGINX Ingress patched to address CVEs; Artifactory authentication added for EC2 artifact downloads.
+
 ## Intelligent document processing (IDP)
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
@@ -307,6 +364,10 @@ Camunda 8.9 adds support for BPMN conditional events in the platform itself, com
 ## Operate
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+### Dashboard focuses on active processes
+
+The Operate dashboard now only displays processes with active instances. Processes without running or incident instances are no longer shown, providing a clean view of what is currently running in your cluster.
 
 ### Unified, context-aware process instance view
 
@@ -416,9 +477,10 @@ Web Modeler now supports RPA scripts as a first-class file type, including visib
 
 <!-- https://github.com/camunda/product-hub/issues/3252 -->
 
-Web Modeler now offers a unified deployment experience across BPMN, DMN, forms, and RPA scripts.
+Web Modeler now offers a unified deployment experience across BPMN, DMN, forms, and RPA scripts in process applications.
 
-- Deploy artifacts from their details view using a consistent interaction pattern across file types.
+- Deploy any BPMN, DMN, form or RPA script inside a process application directly from its canvas view.
+- Deploy and run any BPMN file directly with full flexibility, as the main process label and its restrictions have been removed.
 - See more clearly which linked files are included when deploying within a process application.
 - Choose whether to deploy the current file or the applicable process application bundle, depending on context.
 
