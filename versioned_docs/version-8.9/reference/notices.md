@@ -25,7 +25,7 @@ To learn more about security at Camunda, including our security policy, security
 
 ### Publication date
 
-Apr 23, 2026
+April 24, 2026
 
 ### Products affected
 
@@ -57,7 +57,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-Apr 23, 2026
+April 24, 2026
 
 ### Products affected
 
