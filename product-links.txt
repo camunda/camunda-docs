@@ -51,7 +51,7 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
  https://docs.camunda.io/docs/ms-teams/
 
 # Console
-#   updated at 2025-11-18T05:46:18.806Z
+#   updated at 2026-04-08T10:54:18.806Z
 
 https://docs.camunda.io
 https://docs.camunda.io/
@@ -82,6 +82,17 @@ https://docs.camunda.io/docs/next/components/early-access/overview/
 https://docs.camunda.io/docs/next/components/admin/admin-introduction/
 https://docs.camunda.io/docs/next/components/tasklist/api-versions/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
+https://docs.camunda.io/docs
+https://docs.camunda.io/docs/components/concepts/job-workers/
+https://docs.camunda.io/docs/components/console/manage-clusters/cluster-connectors/
+https://docs.camunda.io/docs/components/identity/identity-introduction/
+https://docs.camunda.io/docs/components/identity/role/
+https://docs.camunda.io/docs/components/saas/monitoring/cluster-metrics-endpoint/
+https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/
+https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup/#use-c8ctl-mcp-proxy
+https://docs.camunda.io/docs/next/components/audit-log/overview/
+https://docs.camunda.io/docs/reference/announcements-release-notes/880/880-announcements/#apis--tools
+https://docs.camunda.io/docs/components/saas/secure-connectivity/
 
 # Orchestration Cluster Admin
 
