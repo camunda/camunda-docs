@@ -578,7 +578,7 @@
     {
       "name": "camunda.client.worker.override",
       "type": "java.util.Map<java.lang.String,io.camunda.client.spring.properties.CamundaClientJobWorkerProperties>",
-      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type.",
+      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type or worker name.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties"
     },
     {
