@@ -350,6 +350,11 @@ RewriteRule ^docs/8.7/reference/announcements-release-notes/860/860-announcement
 RewriteRule ^docs/reference/release-notes/860/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
 RewriteRule ^docs/reference/announcements/announcements-860/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
 
+# Support 8.6 connectors element template links
+RewriteRule ^docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-sagemaker/?$ https://unsupported.docs.camunda.io/8.6/docs/components/connectors/out-of-the-box-connectors/amazon-sagemaker/ [R=301,L]
+RewriteRule ^docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-textract/?$ https://unsupported.docs.camunda.io/8.6/docs/components/connectors/out-of-the-box-connectors/amazon-textract/ [R=301,L]
+RewriteRule ^docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/sql/(.*)$ https://unsupported.docs.camunda.io/8.6/docs/components/connectors/out-of-the-box-connectors/sql/$1 [R=301,L]
+
 # Removed Desktop Modeler variables page (8.9)
 RewriteRule ^docs/next/components/modeler/desktop-modeler/variables/?$ /docs/next/components/modeler/data-handling/ [R=301,L]
 RewriteRule ^docs/8.9/components/modeler/desktop-modeler/variables/?$ /docs/8.9/components/modeler/data-handling/ [R=301,L]
