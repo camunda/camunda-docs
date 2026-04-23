@@ -357,7 +357,7 @@ Process instances left traces, often referred to as "history data". These are au
 
 It is important to note, that audit data can exist for ended processes from the past, but is also available for currently still running process instances, as those process instances also left traces up to the current wait state.
 
-If you need to preserve audit data and want to transfer it to Camunda 8, you can also use the [Data Migrator](./migration-tooling/index.md). Migrating audit **data comes with limitations** (most prominently that you need to run Camunda 8 with **RDBMS**, a feature that is planned to be introduced with 8.9).
+If you need to preserve audit data and want to transfer it to Camunda 8, you can also use the [Data Migrator](./migration-tooling/index.md). Migrating audit **data comes with limitations** (most prominently that you need to run [Camunda 8 with **RDBMS**](/self-managed/concepts/secondary-storage/index.md), a feature introduced with 8.9).
 
 <!-- TODO use a deep link here as well -->
 
