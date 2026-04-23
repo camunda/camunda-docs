@@ -24,7 +24,7 @@ c8 watch --profile=local
 
 ## Deploy
 
-Deploy BPMN, DMN, and form resources to the active cluster.
+Deploy resources to the active cluster.
 
 ### Deploy a single file
 
@@ -50,7 +50,15 @@ c8 deploy
 c8 deploy ./my-project
 ```
 
-`c8ctl` recursively traverses the directory for `.bpmn`, `.dmn`, and `.form` files.
+When scanning directories, `c8ctl` includes files with the following extensions by default:
+
+`.bpmn`, `.dmn`, `.form`, `.md`, `.txt`, `.xml`, `.rpa`, `.json`, `.config`, `.yml`, `.yaml`
+
+Use `--force` to deploy files with any extension:
+
+```bash
+c8 deploy ./custom-resource.unsupported --force
+```
 
 ### Building blocks and process applications
 
@@ -122,27 +130,37 @@ Place the `.c8ignore` file in the root of the directory you pass to `c8 deploy` 
 
 ## Run
 
-The `run` command deploys a BPMN file and immediately creates a process instance in a single step:
+The `run` command deploys a file and immediately creates a process instance in a single step:
 
 ```bash
 c8 run ./order-process.bpmn
 
 # With variables
 c8 run ./order-process.bpmn --variables='{"orderId":"12345","amount":100}'
+
+# Deploy a file with an unsupported extension
+c8 run ./process.xml --force
 ```
 
 ## Watch
 
-Watch a directory for changes to `.bpmn`, `.dmn`, and `.form` files, and auto-redeploy on save:
+Watch a directory for file changes and auto-redeploy on save:
 
 ```bash
 c8 watch
 
 # Watch a specific directory
 c8 watch ./my-project
+
+# Monitor only specific file extensions
+c8 watch --extensions=.bpmn,.dmn,.form
+
+# continue watching current directory
+# even when deployment fails
+c8 watch --force
 ```
 
-`c8ctl` applies a cooldown between redeploys to prevent rapid successive deployments while you are actively editing files.
+By default, `c8ctl` monitors the same extensions used by `deploy`. Use `--extensions` to override. Use `--force` to continue watching after deployment errors.
 
 ### Continue watching after deployment errors
 

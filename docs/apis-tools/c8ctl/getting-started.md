@@ -320,9 +320,35 @@ Open the `c8ctl` GitHub issue tracker directly from the CLI:
 c8 feedback
 ```
 
+## Send feedback
+
+```bash
+c8 feedback
+```
+
+Opens the GitHub issues page in your browser to report bugs or request features.
+
+## Update notifications
+
+`c8ctl` checks for newer versions in the background and displays a one-time notification when an update is available. This check is suppressed in CI environments, JSON output mode, and development versions.
+
 ## Shell completion
 
-`c8ctl` supports shell completion for bash, zsh, and fish.
+The recommended way to set up shell completion is with the `install` subcommand:
+
+```bash
+c8 completion install
+```
+
+This auto-detects your shell, writes the completion file, and wires it into your shell configuration. To specify a shell explicitly:
+
+```bash
+c8 completion install --shell zsh
+```
+
+Completions auto-refresh when the CLI is upgraded.
+
+Alternatively, generate the completion script manually:
 
 <Tabs>
   <TabItem value="bash" label="Bash">
