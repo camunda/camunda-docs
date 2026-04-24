@@ -11,8 +11,6 @@
         "guides/getting-started-hello-world",
         "guides/getting-started-example",
         "guides/getting-started-agentic-orchestration",
-        "guides/build-camunda-with-ai",
-        "guides/integrate-ai-into-your-processes",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis"
       ]
