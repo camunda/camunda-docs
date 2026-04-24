@@ -137,7 +137,7 @@
 /* Nav link icons via ::before pseudo-elements (mask-image for currentColor) */
 .bottomRowLeft :global(.navbar__link)::before {
   content: "";
-  display: inline-block;
+  display: none;
   width: 14px;
   height: 14px;
   flex-shrink: 0;
