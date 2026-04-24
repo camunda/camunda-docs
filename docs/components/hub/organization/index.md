@@ -13,6 +13,12 @@ Manage organizational resources, including clusters and workspaces, and govern t
 
 With Camunda Hub, you'll manage your infrastructure, member access, and workspaces, so your delivery teams have the environments and tools they need to ship process solutions at scale. This governance happens at the organization level.
 
+## Manage workspaces
+
+Create and manage workspaces within your organization:
+
+<span class="link-arrow">[Get started](./manage-workspaces/index.md)</span>
+
 ## Manage clusters
 
 Create, monitor, and assign clusters for seamless execution across all rollout stages:
@@ -31,6 +37,12 @@ image: DocsIcon,
 description: "Learn how to rename, resume, update, resize, or delete your cluster.",
 },
 ]} columns={2}/>
+
+## Manage the catalog
+
+Establish a git repository with catalog assets, upload the assets in a CI/CD pipeline, and approve them for use within your organization:
+
+<span class="link-arrow">[Get started](./manage-catalog/index.md)</span>
 
 ## Manage members
 
