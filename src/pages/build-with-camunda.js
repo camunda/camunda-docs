@@ -1391,7 +1391,7 @@ Available skills:
                 <p>Release notes, supported environments, and licenses.</p>
               </Link>
               <Link
-                to={useBaseUrl("docs/guides/build-camunda-with-ai/")}
+                to={useBaseUrl("docs/next/guides/build-camunda-with-ai/")}
                 className={styles.exploreCard}
               >
                 <h3>Build Camunda with AI</h3>

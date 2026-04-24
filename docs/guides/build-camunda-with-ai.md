@@ -35,7 +35,7 @@ Start with [Build your first AI agent](./getting-started-agentic-orchestration.m
 
 ## Design processes with Camunda Copilot
 
-[Camunda Copilot](/components/modeler/web-modeler/copilot/copilot-overview.md) is an AI assistant built into Web Modeler that helps you design and iterate on processes faster.
+Camunda Copilot is an AI assistant built into Web Modeler that helps you design and iterate on processes faster.
 
 With Copilot you can:
 
@@ -45,7 +45,7 @@ With Copilot you can:
 - **Convert legacy artifacts** — paste BPEL, Java, or Python code and let Copilot transform it into BPMN.
 - **Search documentation** — Copilot can query the Camunda knowledge base to give context-aware guidance directly inside Web Modeler (SaaS only).
 
-Copilot is available in Web Modeler for SaaS clusters. Self-Managed deployments can configure their own LLM provider. See [Camunda Copilot overview](/components/modeler/web-modeler/copilot/copilot-overview.md) to get started.
+Copilot is available in Web Modeler for SaaS clusters. Self-Managed deployments can configure their own LLM provider.
 
 ## Integrate the Orchestration Cluster MCP Server
 
@@ -117,7 +117,7 @@ Include your runtime context in prompts, such as SaaS versus Self-Managed, Camun
 ## Next steps
 
 - Start with [Build your first AI agent](./getting-started-agentic-orchestration.md).
-- Design processes faster with [Camunda Copilot](/components/modeler/web-modeler/copilot/copilot-overview.md).
+- Design processes faster with Camunda Copilot.
 - Connect runtime context via [Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md).
 - Connect documentation context via [Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md).
 - Apply best practices with [Integrate AI into your processes](./integrate-ai-into-your-processes.md).

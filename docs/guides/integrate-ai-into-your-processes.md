@@ -151,7 +151,7 @@ With both connected, your AI assistant can generate code that matches your actua
 
 ## Use Camunda Copilot to scaffold agents
 
-[Camunda Copilot](/components/modeler/web-modeler/copilot/copilot-overview.md) in Web Modeler can generate the initial structure of an AI agent process from a natural-language description. Use it to:
+Camunda Copilot in Web Modeler can generate the initial structure of an AI agent process from a natural-language description. Use it to:
 
 - Scaffold an ad-hoc sub-process with starter tools.
 - Generate FEEL expressions for `fromAi()` input parameters.

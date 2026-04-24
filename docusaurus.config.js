@@ -412,7 +412,7 @@ module.exports = {
           position: "left",
         },
         {
-          to: "/docs/guides/build-camunda-with-ai/",
+          to: "/docs/next/guides/build-camunda-with-ai/",
           position: "right",
           className: "button button--primary button--md build-with-ai",
           label: "Build with AI",
