@@ -12,7 +12,7 @@ This is the first iteration. It focuses on the currently available tooling and p
 
 ## Set up your AI development environment
 
-The [Build with Camunda](https://docs.camunda.io/build-with-camunda/) page is the starting point for AI development with Camunda. From there, you can explore quickstarts, download the CLI, and connect AI tooling to a running cluster.
+The [Build with Camunda](/build-with-camunda/) page is the starting point for AI development with Camunda. From there, you can explore quickstarts, download the CLI, and connect AI tooling to a running cluster.
 
 Once you have a cluster running, connect your AI tools:
 
