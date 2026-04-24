@@ -4,7 +4,7 @@ const sidebar: SidebarsConfig = {
   apisidebar: [
     {
       type: "doc",
-      id: "version-8.6/apis-tools/operate-api/specifications/operate-public-api",
+      id: "version-8.6/apis-tools/operate-api/specifications/operate-api",
     },
     {
       type: "category",
