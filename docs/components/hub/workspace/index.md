@@ -11,7 +11,7 @@ Discover and use approved reusable assets, manage projects, and deliver business
 
 ## About the workspace
 
-With Camunda Hub, you'll collaborate in managed workspaces, discover and use approved catalog assets, and model and deploy business processes. The space for building and collaborating on projects is called a _workspace_.
+With Camunda Hub, you'll collaborate in managed workspaces, discover and use approved catalog assets, and model and deploy business processes.
 
 ## Manage projects
 
@@ -31,6 +31,12 @@ image: DocsIcon,
 description: "Validate your process application in development before deploying it to testing, staging, or production.",
 },
 ]} columns={2}/>
+
+## Manage workspace settings
+
+Manage your workspace's members, clusters, and general information:
+
+<span class="link-arrow">[Get started](./manage-workspace/index.md)</span>
 
 ## Model business processes
 
