@@ -63,7 +63,7 @@ description: "User groups are a way to organize users within your organization."
 },
 ]} columns={2}/>
 
-## Manage organization
+## Manage organization settings
 
 Manage organizational settings, and view usage alerts and history:
 
