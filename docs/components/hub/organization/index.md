@@ -34,7 +34,7 @@ description: "Learn how to rename, resume, update, resize, or delete your cluste
 
 ## Manage members
 
-Manage the users, user groups, and roles in your organization.
+Manage the users, user groups, and roles in your organization:
 
 <AoGrid ao={[
 {
@@ -53,7 +53,7 @@ description: "User groups are a way to organize users within your organization."
 
 ## Manage organization
 
-Manage organizational settings, and view usage alerts and history.
+Manage organizational settings, and view usage alerts and history:
 
 <AoGrid ao={[
 {
