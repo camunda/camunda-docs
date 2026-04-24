@@ -672,6 +672,10 @@ module.exports = {
           },
           items: [
             {
+              type: "doc",
+              id: "components/hub/organization/manage-workspaces/manage-workspaces",
+            },
+            {
               type: "category",
               label: "Manage clusters",
               link: {
@@ -689,6 +693,10 @@ module.exports = {
                 "components/console/manage-clusters/settings",
                 "components/console/manage-clusters/cluster-capacity",
               ],
+            },
+            {
+              type: "doc",
+              id: "components/hub/organization/manage-catalog/manage-catalog",
             },
             {
               type: "category",
@@ -771,6 +779,10 @@ module.exports = {
                   id: "components/modeler/web-modeler/process-applications/git-sync",
                 },
               ],
+            },
+            {
+              type: "doc",
+              id: "components/hub/workspace/manage-workspace/manage-workspace",
             },
             {
               type: "category",
