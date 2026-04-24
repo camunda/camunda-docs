@@ -71,8 +71,9 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     margin-right: 2rem;
   }
 
-  /* Show Try-Free button in hamburger menu */
-  .navbar-sidebar .try-free {
+  /* Show Try-Free and Build with AI buttons in hamburger menu */
+  .navbar-sidebar .try-free,
+  .navbar-sidebar .build-with-ai {
     display: inline-block !important;
     color: #ffffff !important;
     font-weight: 600;
@@ -104,8 +105,9 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     margin-right: 7rem;
   }
 
-  /* Show Try-Free button in hamburger menu */
-  .navbar-sidebar .try-free {
+  /* Show Try-Free and Build with AI buttons in hamburger menu */
+  .navbar-sidebar .try-free,
+  .navbar-sidebar .build-with-ai {
     display: inline-block !important;
     color: #ffffff !important;
     font-weight: 600;
