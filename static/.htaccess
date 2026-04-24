@@ -76,6 +76,7 @@ RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optim
 RewriteRule ^docs/8.3/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/$1 [R=301,L]
 RewriteRule ^docs/8.4/(.*)$ https://unsupported.docs.camunda.io/8.4/docs/$1 [R=301,L]
 RewriteRule ^docs/8.5/(.*)$ https://unsupported.docs.camunda.io/8.5/docs/$1 [R=301,L]
+RewriteRule ^docs/8.6/(.*)$ https://unsupported.docs.camunda.io/8.6/docs/$1 [R=301,L]
 
 # Timeless classics.
 # rules required after update to docusaurus 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
