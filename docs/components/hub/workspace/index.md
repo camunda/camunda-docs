@@ -15,7 +15,7 @@ With Camunda Hub, you'll collaborate in managed workspaces, discover and use app
 
 ## Manage projects
 
-Develop and progress project releases through the stages of a typical development lifecycle.
+Develop and progress project releases through the stages of a typical development lifecycle:
 
 <AoGrid ao={[
 {
@@ -25,7 +25,7 @@ image: DocsIcon,
 description: "Create a process application in your project to work on and deploy a set of related files.",
 },
 {
-link: "../../modeler/web-modeler",
+link: "../../modeler/web-modeler/process-applications/deploy-process-application",
 title: "Deploy a project",
 image: DocsIcon,
 description: "Validate your process application in development before deploying it to testing, staging, or production.",
@@ -34,7 +34,7 @@ description: "Validate your process application in development before deploying 
 
 ## Model business processes
 
-Collaboratively design executable processes as the foundation for scalable IT and business automation.
+Collaboratively design executable processes as the foundation for scalable IT and business automation:
 
 <AoGrid ao={[
 {

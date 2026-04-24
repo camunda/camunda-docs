@@ -670,9 +670,14 @@ module.exports = {
           },
           items: [
             {
-              "Manage clusters": [
+              type: "category",
+              label: "Manage clusters",
+              link: {
+                type: "doc",
+                id: "components/console/manage-clusters/manage-cluster",
+              },
+              items: [
                 "components/console/manage-clusters/create-cluster",
-                "components/console/manage-clusters/manage-cluster",
                 "components/console/manage-clusters/cluster-connectors",
                 "components/console/manage-clusters/manage-api-clients",
                 "components/console/manage-clusters/manage-secrets",
@@ -684,14 +689,24 @@ module.exports = {
               ],
             },
             {
-              "Manage members": [
-                "components/console/manage-organization/manage-users",
+              type: "category",
+              label: "Manage members",
+              link: {
+                type: "doc",
+                id: "components/console/manage-organization/manage-users",
+              },
+              items: [
                 "components/console/manage-organization/manage-user-groups",
               ],
             },
             {
-              "Manage the organization": [
-                "components/console/manage-organization/organization-settings",
+              type: "category",
+              label: "Manage organization settings",
+              link: {
+                type: "doc",
+                id: "components/console/manage-organization/organization-settings",
+              },
+              items: [
                 "components/console/manage-organization/external-sso",
                 "components/console/manage-organization/view-organization-activity",
                 "components/console/manage-organization/enable-alpha-features",
