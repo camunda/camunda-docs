@@ -20,16 +20,18 @@ Another use case is local development, where a cluster might be recreated regula
 After Identity creates an entity, changing its configuration does not update the existing entity.
 Identity checks only the ID to decide whether an entity already exists.
 
+When you deploy with Helm, the most reliable approach is to provide Identity as Code settings through [application configs](/self-managed/deployment/helm/configure/application-configs.md) using `orchestration.extraConfiguration`. The Helm examples below use this pattern so you can apply the same approach consistently across all entity types.
+
 ## Configure authorizations
 
 <Tabs groupId="config-method">
 <TabItem value="env" label="Environment variables">
 
 ```bash
-CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNERTYPE=USER
-CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNERID=john.doe
-CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCETYPE=RESOURCE
-CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCEID=*
+CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_TYPE=USER
+CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_ID=john.doe
+CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_TYPE=RESOURCE
+CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_ID=*
 CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_PERMISSIONS=CREATE,READ
 ```
 
@@ -38,16 +40,20 @@ CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_PERMISSIONS=CREATE,READ
 
 ```yaml
 orchestration:
-  security:
-    initialization:
-      authorizations:
-        - ownerType: USER
-          ownerId: john.doe
-          resourceType: RESOURCE
-          resourceId: "*"
-          permissions:
-            - CREATE
-            - READ
+  extraConfiguration:
+    - file: identity-as-code.yaml
+      content: |
+        camunda:
+          security:
+            initialization:
+              authorizations:
+                - ownerType: USER
+                  ownerId: john.doe
+                  resourceType: RESOURCE
+                  resourceId: "*"
+                  permissions:
+                    - CREATE
+                    - READ
 ```
 
 </TabItem>
@@ -72,19 +78,28 @@ CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_USERS="UserA,UserB,UserC"
 
 ```yaml
 orchestration:
-  env:
-    - name: CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_GROUP_ID
-      value: "test-group"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_NAME
-      value: "Test Group"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_DESCRIPTION
-      value: "A cool test group!"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_CLIENTS
-      value: "ClientA,ClientB,ClientC"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_MAPPING_RULES
-      value: "RuleA,RuleB,RuleC"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_GROUPS_0_USERS
-      value: "UserA,UserB,UserC"
+  extraConfiguration:
+    - file: identity-as-code.yaml
+      content: |
+        camunda:
+          security:
+            initialization:
+              groups:
+                - groupId: test-group
+                  name: Test Group
+                  description: A cool test group!
+                  clients:
+                    - ClientA
+                    - ClientB
+                    - ClientC
+                  mappingRules:
+                    - RuleA
+                    - RuleB
+                    - RuleC
+                  users:
+                    - UserA
+                    - UserB
+                    - UserC
 ```
 
 </TabItem>
@@ -106,12 +121,16 @@ CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_MAPPINGRULEID=my-mapping-rule
 
 ```yaml
 orchestration:
-  security:
-    initialization:
-      mappingRules:
-        - claimName: isAllowedToDoStuff
-          claimValue: "true"
-          mappingRuleId: my-mapping-rule
+  extraConfiguration:
+    - file: identity-as-code.yaml
+      content: |
+        camunda:
+          security:
+            initialization:
+              mappingRules:
+                - claimName: isAllowedToDoStuff
+                  claimValue: "true"
+                  mappingRuleId: my-mapping-rule
 ```
 
 </TabItem>
@@ -137,21 +156,29 @@ CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_USERS="UserA,UserB,UserC"
 
 ```yaml
 orchestration:
-  env:
-    - name: CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_ROLE_ID
-      value: "test-role"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_NAME
-      value: "Test Role"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_DESCRIPTION
-      value: "A cool test role!"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_CLIENTS
-      value: "client1,client2"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_GROUPS
-      value: "group1,group2"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_MAPPING_RULES
-      value: "m1,m2"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_ROLES_0_USERS
-      value: "UserA,UserB,UserC"
+  extraConfiguration:
+    - file: identity-as-code.yaml
+      content: |
+        camunda:
+          security:
+            initialization:
+              roles:
+                - roleId: test-role
+                  name: Test Role
+                  description: A cool test role!
+                  clients:
+                    - client1
+                    - client2
+                  groups:
+                    - group1
+                    - group2
+                  mappingRules:
+                    - m1
+                    - m2
+                  users:
+                    - UserA
+                    - UserB
+                    - UserC
 ```
 
 </TabItem>
@@ -165,7 +192,7 @@ orchestration:
 ```bash
 CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_TENANT_ID=tenantId
 CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_NAME="test tenant"
-CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_DESCRIPTION="test tenant descriptioon"
+CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_DESCRIPTION="test tenant description"
 CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_CLIENTS='R1,R2,R3,R4'
 CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_GROUPS='R1,R2,R3,R4'
 CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_MAPPING_RULES='R1,R2,R3,R4'
@@ -178,23 +205,40 @@ CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_USERS='UserA,UserB,UserC'
 
 ```yaml
 orchestration:
-  env:
-    - name: CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_TENANT_ID
-      value: "tenantId"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_NAME
-      value: "test tenant"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_DESCRIPTION
-      value: "test tenant descriptioon"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_CLIENTS
-      value: "R1,R2,R3,R4"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_GROUPS
-      value: "R1,R2,R3,R4"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_MAPPING_RULES
-      value: "R1,R2,R3,R4"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_ROLES
-      value: "R1,R2,R3,R4"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_TENANTS_0_USERS
-      value: "UserA,UserB,UserC"
+  extraConfiguration:
+    - file: identity-as-code.yaml
+      content: |
+        camunda:
+          security:
+            initialization:
+              tenants:
+                - tenantId: tenantId
+                  name: test tenant
+                  description: test tenant description
+                  clients:
+                    - R1
+                    - R2
+                    - R3
+                    - R4
+                  groups:
+                    - R1
+                    - R2
+                    - R3
+                    - R4
+                  mappingRules:
+                    - R1
+                    - R2
+                    - R3
+                    - R4
+                  roles:
+                    - R1
+                    - R2
+                    - R3
+                    - R4
+                  users:
+                    - UserA
+                    - UserB
+                    - UserC
 ```
 
 </TabItem>
@@ -219,13 +263,17 @@ CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME=john.doe
 
 ```yaml
 orchestration:
-  security:
-    initialization:
-      users:
-        - email: john.doe@example.com
-          name: john doe
-          password: "*****"
-          username: john.doe
+  extraConfiguration:
+    - file: identity-as-code.yaml
+      content: |
+        camunda:
+          security:
+            initialization:
+              users:
+                - email: john.doe@example.com
+                  name: John Doe
+                  password: "*****"
+                  username: john.doe
 ```
 
 </TabItem>
