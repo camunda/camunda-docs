@@ -116,7 +116,6 @@ module.exports = {
             require("./docs/components/modeler/forms/sidebar-schema"),
             require("./docs/components/modeler/element-templates/sidebar-schema"),
             "components/modeler/data-handling",
-            "components/modeler/using-web-and-desktop-modeler-together",
             "components/modeler/task-testing",
             require("./docs/components/modeler/reference/sidebar-schema"),
           ],
@@ -758,7 +757,6 @@ module.exports = {
                     "components/modeler/web-modeler/modeling/model-your-first-diagram",
                     "components/modeler/web-modeler/run-or-publish-your-process",
                     "components/modeler/web-modeler/process-landscape-visualization",
-                    "components/modeler/web-modeler/modeling/context-pad",
                     "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
                     "components/modeler/web-modeler/modeling/versions",
                     "components/modeler/web-modeler/modeling/file-download",
@@ -808,7 +806,13 @@ module.exports = {
                   ],
                 },
                 {
-                  Collaborate: [
+                  type: "category",
+                  label: "Collaborate",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/collaboration/collaboration",
+                  },
+                  items: [
                     "components/modeler/web-modeler/collaboration/collaborate-with-modes",
                     "components/modeler/web-modeler/collaboration/design-your-process",
                     "components/modeler/web-modeler/collaboration/implement-your-process",
@@ -844,8 +848,8 @@ module.exports = {
         "components/modeler/desktop-modeler/deploy-diagram",
         "components/modeler/desktop-modeler/start-instance",
         "components/modeler/desktop-modeler/process-applications",
+        "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/desktop-modeler/use-connectors",
-        "components/modeler/desktop-modeler/variables",
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
@@ -963,9 +967,10 @@ module.exports = {
             {
               "Amazon AWS": [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-long-term-memory",
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime",
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock-codeinterpreter",
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase",
-                "components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
