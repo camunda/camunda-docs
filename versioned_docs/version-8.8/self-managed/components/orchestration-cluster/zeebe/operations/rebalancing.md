@@ -57,9 +57,9 @@ This becomes more likely under high load or with increased network latency betwe
 
 ### Caveats
 
-Rebalancing causes every partition leader to step down simultaneously, triggering a new leader election for each partition.
-
 :::note
+
+Rebalancing causes every partition leader to step down simultaneously, triggering a new leader election for each partition.
 
 If the desired leader for a partition (aka the node with the highest priority) is _already_ the leader, rebalancing is a no-op for this partition. This means that if a cluster is already perfectly balanced, a rebalancing call is a no-op.
 
@@ -93,7 +93,13 @@ If you're using the Zeebe Grafana dashboard, you can already visualize this in t
 
 Once you have confirmed that rebalancing is likely to succeed, consider the trade-off: rebalancing can improve long-term cluster performance by achieving an optimal leader distribution, but it causes a temporary performance impact and potential unavailability window. You must decide whether the long-term benefit outweighs the short-term disruption for your situation.
 
-We recommend rebalancing only when the cluster is under low load. To determine this, identify what "low load" means for your specific scenario. For example, you can consider the cluster idle if the total leader append rate across all partitions is low, such as below 64 KB/s. At this level of activity, the impact of a rebalance on your users and applications is minimal.
+:::warn
+
+We recommend rebalancing only when the cluster is under low load. To determine this, identify what "low load" means for your specific scenario. What constitutes low load, and whether rebalancing is appropriate at all in a given situation, is ultimately your decision.
+
+:::
+
+For example, you could consider the cluster idle if the total leader append rate across all partitions is low, such as below 64 KB/s. At this level of activity, the impact of a rebalance on your users and applications is minimal.
 
 :::note
 
@@ -108,5 +114,3 @@ This returns the replication rate in bytes per second of a cluster.
 You can find this in the Zeebe Grafana dashboard under the `Raft` section, visualized as a graph named `Leader append data rate`.
 
 :::
-
-What constitutes low load, and whether rebalancing is appropriate at all in a given situation, is ultimately your decision.
