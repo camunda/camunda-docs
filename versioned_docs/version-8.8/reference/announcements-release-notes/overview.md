@@ -28,13 +28,6 @@ Announcements and release notes for supported versions of the Camunda documentat
 <td>[8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md)</td>
 <td>13 October 2026</td>
 </tr>
-<tr>
-<td>8.6</td>
-<td>8 October 2024</td>
-<td>[8.6 release announcements](/reference/announcements-release-notes/860/860-announcements.md)</td>
-<td>[8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md)</td>
-<td>14 April 2026</td>
-</tr>
 </table>
 
 :::info Camunda 8.8
