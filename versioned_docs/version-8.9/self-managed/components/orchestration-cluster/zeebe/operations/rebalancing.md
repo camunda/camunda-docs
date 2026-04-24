@@ -25,9 +25,9 @@ During the rebalancing, partitions might become unhealthy and can't make progres
 
 ### Limitations
 
-Manual rebalancing is done on a best-effort basis.
+Manual rebalancing is not guaranteed to succeed in all cases.
 
-Due to the nature of distributed systems, Zeebe can never guarantee a particular distribution and rebalancing cannot avoid that.
+Rebalancing is only supported under specific configurations, and even when supported, the resulting distribution cannot be guaranteed due to the nature of distributed systems.
 
 There are two configurations where manual rebalancing is supported:
 
