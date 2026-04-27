@@ -217,7 +217,7 @@ module.exports = {
           label: "Build with AI",
           link: {
             type: "doc",
-            id: "components/best-practices/build-camunda-with-ai",
+            id: "components/best-practices/build-with-ai",
           },
           items: ["components/best-practices/integrate-ai-into-your-processes"],
         },

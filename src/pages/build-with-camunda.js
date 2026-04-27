@@ -1390,13 +1390,6 @@ Available skills:
                 <h3>Reference</h3>
                 <p>Release notes, supported environments, and licenses.</p>
               </Link>
-              <Link
-                to={useBaseUrl("docs/next/guides/build-camunda-with-ai/")}
-                className={styles.exploreCard}
-              >
-                <h3>Build Camunda with AI</h3>
-                <p>Set up an AI-ready development workflow within Camunda.</p>
-              </Link>
             </div>
           </div>
           <br />

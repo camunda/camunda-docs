@@ -1,5 +1,5 @@
 ---
-id: build-camunda-with-ai
+id: build-with-ai
 title: "Build with AI"
 sidebar_label: Build with AI
 description: "Set up an AI-ready development workflow for Camunda with MCP, docs context, and practical troubleshooting guidance."

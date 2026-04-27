@@ -22,7 +22,7 @@ type:"link", href:"/docs/next/components/best-practices/architecture/understandi
 
 ## Build with AI
 
-<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/build-camunda-with-ai/", label: "Build with AI", docId:"components/best-practices/build-camunda-with-ai"},
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/build-with-ai/", label: "Build with AI", docId:"components/best-practices/build-with-ai"},
 {
 type:"link", href:"/docs/next/components/best-practices/integrate-ai-into-your-processes/", label: "Integrate AI into your processes", docId:"components/best-practices/integrate-ai-into-your-processes"
 }
