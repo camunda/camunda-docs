@@ -24,7 +24,7 @@ The CLI supports the following SAP integration modules:
 3. **BTP plugin**: Enables rendering task forms in Fiori and provides BTP integration.
 4. **All modules**: Configures all available modules.
 
-As of March 5, 2026, `csap` downloads the OData and RFC connectors from the separate [sap-connectors](https://github.com/camunda/sap-connectors) repository. To support this change, the underlying Git repository reference and several placeholders used for these modules were updated in `csap`. The CSAP CLI source code is available in the [sap-csap-cli](https://github.com/camunda/sap-csap-cli) repository.
+As of version 1.2.3 `csap` downloads the OData and RFC connectors from the separate [sap-connectors](https://github.com/camunda/sap-connectors) repository. To support this change, the underlying Git repository reference and several placeholders used for these modules were updated in `csap`. The CSAP CLI source code is available in the [sap-csap-cli](https://github.com/camunda/sap-csap-cli) repository.
 
 ## Installation
 
