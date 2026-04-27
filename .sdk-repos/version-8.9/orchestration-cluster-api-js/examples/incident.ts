@@ -1,10 +1,7 @@
 // Compilable usage examples for incident operations.
 // These examples are type-checked during build to guard against API regressions.
 
-import {
-  createCamundaClient,
-  type IncidentKey,
-} from "@camunda8/orchestration-cluster-api";
+import { createCamundaClient, type IncidentKey } from '@camunda8/orchestration-cluster-api';
 
 //#region GetIncident
 async function getIncidentExample(incidentKey: IncidentKey) {
@@ -35,17 +32,15 @@ async function searchIncidentsExample() {
 
   const result = await camunda.searchIncidents(
     {
-      filter: { state: "ACTIVE" },
-      sort: [{ field: "creationTime", order: "DESC" }],
+      filter: { state: 'ACTIVE' },
+      sort: [{ field: 'creationTime', order: 'DESC' }],
       page: { limit: 20 },
     },
     { consistency: { waitUpToMs: 5000 } }
   );
 
   for (const incident of result.items ?? []) {
-    console.log(
-      `${incident.incidentKey}: ${incident.errorType} — ${incident.errorMessage}`
-    );
+    console.log(`${incident.incidentKey}: ${incident.errorType} — ${incident.errorMessage}`);
   }
   console.log(`Total active incidents: ${result.page.totalItems}`);
 }

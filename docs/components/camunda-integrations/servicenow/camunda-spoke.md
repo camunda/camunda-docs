@@ -19,20 +19,20 @@ Start a Camunda process from ServiceNow.
 Supported inputs
 
 **Process ID:** The ID of the deployed BPMN process to start.
-Example: `handle_incident`
+ Example: `handle_incident`
 
 **Process Version:** (Optional) The version of the process to start. If empty, the latest deployed version is used.
-Example: `5`
+ Example: `5`
 
 **Variables:** (Optional) Process variables passed to Camunda as key-value pairs in JSON format.
-Example: `{ "invoiceId": "12345", "amount": 250 }`
+ Example: `{ "invoiceId": "12345", "amount": 250 }`
 
 #### Code example
 
 ```javascript
 const returnObject = {
-  request_item_number: fd_data.trigger.request_item.number.toString() || "",
-  request_sys_id: fd_data.trigger.request_item.sys_id.toString() || "",
+    "request_item_number": fd_data.trigger.request_item.number.toString() || "",
+    "request_sys_id": fd_data.trigger.request_item.sys_id.toString() || ""
 };
 return JSON.stringify(returnObject);
 ```
@@ -42,7 +42,7 @@ When you add the JSON payload as a code snippet, convert ServiceNow types to a J
 :::
 
 **Tenant ID:** (Optional) The tenant identifier for multi-tenant Camunda setups. Leave empty for single-tenant setups.
-Example: `hr-emea`
+ Example: `hr-emea`
 
 **Operation Reference:** (Optional) A user-defined reference key available in Camunda for tracking the operation.
 Example: `camID`
@@ -56,14 +56,14 @@ Broadcast BPMN signals to one or more Camunda process instances
 
 Supported inputs
 
-**Signal name:** The name of the BPMN signal to send. Must match the signal name defined in the process model.
-Example: `sla_limit_exceeded`
+**Signal name:** The name of the BPMN signal to send. Must match the signal name defined in the process model. 
+ Example: `sla_limit_exceeded`
 
 **Variables:** (Optional) Process variables passed to Camunda as key-value pairs in JSON format.
-Example: `{ "invoiceId": "12345", "amount": 250 }`
+ Example: `{ "invoiceId": "12345", "amount": 250 }`
 
-**Tenant ID:** (Optional) The tenant identifier for multi-tenant Camunda setups. Leave empty for single-tenant setups.
-Example: `hr-emea`
+**Tenant ID:** (Optional) The tenant identifier for multi-tenant Camunda setups. Leave empty for single-tenant setups. 
+ Example: `hr-emea`
 
 ### Correlate message
 
@@ -74,10 +74,10 @@ Correlate a running Camunda process instance from ServiceNow.
 Supported inputs
 
 **Message name:** The name of the BPMN message to correlate with.
-Example: `managerApprovalDone`
+ Example: `managerApprovalDone`
 
 **Correlation key:** The process variable value used to match the message to a specific process instance.
-Example: `approvalID`
+ Example: `approvalID`
 
 ### Cancel process
 

@@ -4,15 +4,13 @@
 import {
   createCamundaClient,
   type ProcessDefinitionKey,
-} from "@camunda8/orchestration-cluster-api";
+} from '@camunda8/orchestration-cluster-api';
 
 //#region CreateDeployment
 async function createDeploymentExample() {
   const camunda = createCamundaClient();
 
-  const file = new File(["<xml/>"], "order-process.bpmn", {
-    type: "application/xml",
-  });
+  const file = new File(['<xml/>'], 'order-process.bpmn', { type: 'application/xml' });
 
   const result = await camunda.createDeployment({
     resources: [file],
@@ -20,9 +18,7 @@ async function createDeploymentExample() {
 
   console.log(`Deployment key: ${result.deploymentKey}`);
   for (const process of result.processes ?? []) {
-    console.log(
-      `  Process: ${process.processDefinitionId} v${process.processDefinitionVersion}`
-    );
+    console.log(`  Process: ${process.processDefinitionId} v${process.processDefinitionVersion}`);
   }
 }
 //#endregion CreateDeployment
@@ -43,10 +39,7 @@ async function deployResourcesFromFilesExample() {
   const camunda = createCamundaClient();
 
   // Node.js only: deploy directly from file paths
-  const result = await camunda.deployResourcesFromFiles([
-    "./process.bpmn",
-    "./decision.dmn",
-  ]);
+  const result = await camunda.deployResourcesFromFiles(['./process.bpmn', './decision.dmn']);
 
   console.log(`Deployment key: ${result.deploymentKey}`);
 }

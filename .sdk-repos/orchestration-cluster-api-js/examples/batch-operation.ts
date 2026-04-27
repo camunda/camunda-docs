@@ -6,7 +6,7 @@ import {
   createCamundaClient,
   type ElementId,
   type ProcessDefinitionKey,
-} from "@camunda8/orchestration-cluster-api";
+} from '@camunda8/orchestration-cluster-api';
 
 //#region GetBatchOperation
 async function getBatchOperationExample(batchOperationKey: BatchOperationKey) {
@@ -33,9 +33,7 @@ async function searchBatchOperationsExample() {
   );
 
   for (const batch of result.items ?? []) {
-    console.log(
-      `${batch.batchOperationKey}: ${batch.batchOperationType} (${batch.state})`
-    );
+    console.log(`${batch.batchOperationKey}: ${batch.batchOperationType} (${batch.state})`);
   }
 }
 //#endregion SearchBatchOperations
@@ -58,9 +56,7 @@ async function searchBatchOperationItemsExample() {
 //#endregion SearchBatchOperationItems
 
 //#region CancelBatchOperation
-async function cancelBatchOperationExample(
-  batchOperationKey: BatchOperationKey
-) {
+async function cancelBatchOperationExample(batchOperationKey: BatchOperationKey) {
   const camunda = createCamundaClient();
 
   await camunda.cancelBatchOperation({ batchOperationKey });
@@ -68,9 +64,7 @@ async function cancelBatchOperationExample(
 //#endregion CancelBatchOperation
 
 //#region SuspendBatchOperation
-async function suspendBatchOperationExample(
-  batchOperationKey: BatchOperationKey
-) {
+async function suspendBatchOperationExample(batchOperationKey: BatchOperationKey) {
   const camunda = createCamundaClient();
 
   await camunda.suspendBatchOperation({ batchOperationKey });
@@ -78,9 +72,7 @@ async function suspendBatchOperationExample(
 //#endregion SuspendBatchOperation
 
 //#region ResumeBatchOperation
-async function resumeBatchOperationExample(
-  batchOperationKey: BatchOperationKey
-) {
+async function resumeBatchOperationExample(batchOperationKey: BatchOperationKey) {
   const camunda = createCamundaClient();
 
   await camunda.resumeBatchOperation({ batchOperationKey });
@@ -172,9 +164,7 @@ async function modifyProcessInstancesBatchOperationExample(
 //#endregion ModifyProcessInstancesBatchOperation
 
 //#region ResolveIncidentsBatchOperation
-async function resolveIncidentsBatchOperationExample(
-  processDefinitionKey: ProcessDefinitionKey
-) {
+async function resolveIncidentsBatchOperationExample(processDefinitionKey: ProcessDefinitionKey) {
   const camunda = createCamundaClient();
 
   const result = await camunda.resolveIncidentsBatchOperation({

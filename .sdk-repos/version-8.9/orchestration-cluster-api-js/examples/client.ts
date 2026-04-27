@@ -6,7 +6,7 @@ import {
   createCamundaResultClient,
   isErr,
   isOk,
-} from "@camunda8/orchestration-cluster-api";
+} from '@camunda8/orchestration-cluster-api';
 
 //#region CreateClient
 async function createClientExample() {
@@ -22,10 +22,10 @@ async function createClientExample() {
 async function createClientWithConfigExample() {
   const camunda = createCamundaClient({
     config: {
-      CAMUNDA_REST_ADDRESS: "http://localhost:8080/v2",
-      CAMUNDA_AUTH_STRATEGY: "BASIC",
-      CAMUNDA_BASIC_AUTH_USERNAME: "demo",
-      CAMUNDA_BASIC_AUTH_PASSWORD: "demo",
+      CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2',
+      CAMUNDA_AUTH_STRATEGY: 'BASIC',
+      CAMUNDA_BASIC_AUTH_USERNAME: 'demo',
+      CAMUNDA_BASIC_AUTH_PASSWORD: 'demo',
     },
   });
 
@@ -38,12 +38,12 @@ async function createClientWithConfigExample() {
 async function createClientOAuthExample() {
   const camunda = createCamundaClient({
     config: {
-      CAMUNDA_REST_ADDRESS: "https://cluster.example/v2",
-      CAMUNDA_AUTH_STRATEGY: "OAUTH",
-      CAMUNDA_CLIENT_ID: "my-client-id",
-      CAMUNDA_CLIENT_SECRET: "my-client-secret",
-      CAMUNDA_OAUTH_URL: "https://login.cloud.camunda.io/oauth/token",
-      CAMUNDA_TOKEN_AUDIENCE: "zeebe.camunda.io",
+      CAMUNDA_REST_ADDRESS: 'https://cluster.example/v2',
+      CAMUNDA_AUTH_STRATEGY: 'OAUTH',
+      CAMUNDA_CLIENT_ID: 'my-client-id',
+      CAMUNDA_CLIENT_SECRET: 'my-client-secret',
+      CAMUNDA_OAUTH_URL: 'https://login.cloud.camunda.io/oauth/token',
+      CAMUNDA_TOKEN_AUDIENCE: 'zeebe.camunda.io',
     },
   });
 
@@ -69,7 +69,7 @@ async function getTopologyExample() {
 //#region ResultClient
 async function resultClientExample() {
   const camunda = createCamundaResultClient({
-    config: { CAMUNDA_REST_ADDRESS: "http://localhost:8080/v2" },
+    config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2' },
   });
 
   const result = await camunda.getTopology();
@@ -86,7 +86,7 @@ async function resultClientExample() {
 //#region CustomFetch
 async function customFetchExample() {
   const camunda = createCamundaClient({
-    config: { CAMUNDA_REST_ADDRESS: "http://localhost:8080/v2" },
+    config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2' },
     fetch: async (input: RequestInfo | URL, init?: RequestInit) => {
       // Add custom headers or logging
       const response = await globalThis.fetch(input, init);
@@ -102,7 +102,7 @@ async function customFetchExample() {
 //#region Config
 function configExample() {
   const camunda = createCamundaClient({
-    config: { CAMUNDA_REST_ADDRESS: "http://localhost:8080/v2" },
+    config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080/v2' },
   });
 
   const config = camunda.config;
@@ -126,7 +126,7 @@ async function configureExample() {
   // Reconfigure the client with new overrides
   camunda.configure({
     config: {
-      CAMUNDA_REST_ADDRESS: "http://new-host:8080/v2",
+      CAMUNDA_REST_ADDRESS: 'http://new-host:8080/v2',
     },
   });
 
@@ -170,7 +170,7 @@ async function withCorrelationExample() {
   const camunda = createCamundaClient();
 
   // Run operations with a correlation ID for tracing
-  await camunda.withCorrelation("request-123", async () => {
+  await camunda.withCorrelation('request-123', async () => {
     const topology = await camunda.getTopology();
     console.log(`Cluster size: ${topology.clusterSize}`);
   });

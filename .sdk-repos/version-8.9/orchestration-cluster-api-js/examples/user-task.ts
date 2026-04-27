@@ -1,10 +1,7 @@
 // Compilable usage examples for user task operations.
 // These examples are type-checked during build to guard against API regressions.
 
-import {
-  createCamundaClient,
-  type UserTaskKey,
-} from "@camunda8/orchestration-cluster-api";
+import { createCamundaClient, type UserTaskKey } from '@camunda8/orchestration-cluster-api';
 
 //#region AssignUserTask
 async function assignUserTaskExample(userTaskKey: UserTaskKey) {
@@ -12,7 +9,7 @@ async function assignUserTaskExample(userTaskKey: UserTaskKey) {
 
   await camunda.assignUserTask({
     userTaskKey,
-    assignee: "alice",
+    assignee: 'alice',
     allowOverride: true,
   });
 }
@@ -26,7 +23,7 @@ async function completeUserTaskExample(userTaskKey: UserTaskKey) {
     userTaskKey,
     variables: {
       approved: true,
-      comment: "Looks good",
+      comment: 'Looks good',
     },
   });
 }
@@ -46,8 +43,8 @@ async function searchUserTasksExample() {
 
   const result = await camunda.searchUserTasks(
     {
-      filter: { assignee: "alice", state: "CREATED" },
-      sort: [{ field: "creationDate", order: "DESC" }],
+      filter: { assignee: 'alice', state: 'CREATED' },
+      sort: [{ field: 'creationDate', order: 'DESC' }],
       page: { limit: 10 },
     },
     { consistency: { waitUpToMs: 5000 } }

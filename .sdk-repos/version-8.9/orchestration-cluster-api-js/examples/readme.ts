@@ -2,8 +2,8 @@
 // These snippets are synced into README.md by scripts/sync-readme-snippets.ts.
 // They are type-checked during build (via tsc --noEmit) to guard against API drift.
 
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import createCamundaClient, {
   createCamundaResultClient,
   isOk,
@@ -14,8 +14,8 @@ import createCamundaClient, {
   type ProcessDefinitionId,
   ProcessDefinitionKey,
   type ProcessInstanceKey,
-} from "@camunda8/orchestration-cluster-api";
-import { z } from "zod";
+} from '@camunda8/orchestration-cluster-api';
+import { z } from 'zod';
 
 // ---------------------------------------------------------------------------
 // Quick Start
@@ -27,7 +27,7 @@ async function _readmeQuickStart() {
   const camunda = createCamundaClient();
 
   const topology = await camunda.getTopology();
-  console.log("Brokers:", topology.brokers?.length ?? 0);
+  console.log('Brokers:', topology.brokers?.length ?? 0);
   //#endregion ReadmeQuickStart
 }
 
@@ -39,10 +39,10 @@ async function _readmeOverrides() {
   //#region ReadmeOverrides
   const camunda = createCamundaClient({
     config: {
-      CAMUNDA_REST_ADDRESS: "https://cluster.example",
-      CAMUNDA_AUTH_STRATEGY: "BASIC",
-      CAMUNDA_BASIC_AUTH_USERNAME: "alice",
-      CAMUNDA_BASIC_AUTH_PASSWORD: "secret",
+      CAMUNDA_REST_ADDRESS: 'https://cluster.example',
+      CAMUNDA_AUTH_STRATEGY: 'BASIC',
+      CAMUNDA_BASIC_AUTH_USERNAME: 'alice',
+      CAMUNDA_BASIC_AUTH_PASSWORD: 'secret',
     },
   });
   //#endregion ReadmeOverrides
@@ -108,12 +108,12 @@ async function _readmeJobWorkerMinimal() {
   const Output = z.object({ processed: z.boolean() });
 
   const worker = client.createJobWorker({
-    jobType: "process-order",
+    jobType: 'process-order',
     maxParallelJobs: 10,
     jobTimeoutMs: 15_000, // long‑poll timeout (server side requestTimeout)
     pollIntervalMs: 100, // delay between polls when no jobs / at capacity
     // Optional: only fetch specific variables during activation
-    fetchVariables: ["orderId"],
+    fetchVariables: ['orderId'],
     inputSchema: Input, // validates incoming variables if validateSchemas true
     outputSchema: Output, // validates variables passed to complete(...)
     validateSchemas: true, // set false for max throughput (skip Zod)
@@ -129,7 +129,7 @@ async function _readmeJobWorkerMinimal() {
   });
 
   // Later, on shutdown:
-  process.on("SIGINT", () => {
+  process.on('SIGINT', () => {
     worker.stop();
   });
   //#endregion ReadmeJobWorkerMinimal
@@ -144,12 +144,12 @@ async function _readmeJobWorkerInference() {
   //#region ReadmeJobWorkerInference
   const Input = z.object({ orderId: z.string(), amount: z.number() });
   client.createJobWorker({
-    jobType: "process-order",
+    jobType: 'process-order',
     maxParallelJobs: 5,
     jobTimeoutMs: 30_000,
     inputSchema: Input,
     // Only allows 'orderId' | 'amount' here at compile-time
-    fetchVariables: ["orderId", "amount"],
+    fetchVariables: ['orderId', 'amount'],
     jobHandler: async (job) => job.complete(),
   });
   //#endregion ReadmeJobWorkerInference
@@ -163,7 +163,7 @@ async function _readmeJobWorkerJitter() {
   const client = createCamundaClient();
   //#region ReadmeJobWorkerJitter
   client.createJobWorker({
-    jobType: "process-order",
+    jobType: 'process-order',
     maxParallelJobs: 10,
     jobTimeoutMs: 30_000,
     startupJitterMaxSeconds: 5, // each instance delays 0–5s before first poll
@@ -179,7 +179,7 @@ async function _readmeJobWorkerJitter() {
 async function _readmeJobWorkerGraceful() {
   const client = createCamundaClient();
   const worker = client.createJobWorker({
-    jobType: "process-order",
+    jobType: 'process-order',
     maxParallelJobs: 5,
     jobTimeoutMs: 30_000,
     jobHandler: async (job) => job.complete(),
@@ -187,11 +187,9 @@ async function _readmeJobWorkerGraceful() {
 
   //#region ReadmeJobWorkerGraceful
   // Attempt graceful drain for up to 8 seconds
-  const { remainingJobs, timedOut } = await worker.stopGracefully({
-    waitUpToMs: 8000,
-  });
+  const { remainingJobs, timedOut } = await worker.stopGracefully({ waitUpToMs: 8000 });
   if (timedOut) {
-    console.warn("Graceful stop timed out; remaining jobs:", remainingJobs);
+    console.warn('Graceful stop timed out; remaining jobs:', remainingJobs);
   }
   //#endregion ReadmeJobWorkerGraceful
 }
@@ -203,7 +201,7 @@ async function _readmeJobWorkerGraceful() {
 async function _readmeReceipt() {
   const client = createCamundaClient();
   const worker = client.createJobWorker({
-    jobType: "process-order",
+    jobType: 'process-order',
     maxParallelJobs: 5,
     jobTimeoutMs: 30_000,
     jobHandler: async (job) => {
@@ -224,14 +222,14 @@ async function _readmeJobCorrections() {
   const client = createCamundaClient();
   //#region ReadmeJobCorrections
   const worker = client.createJobWorker({
-    jobType: "io.camunda:userTaskListener",
+    jobType: 'io.camunda:userTaskListener',
     jobTimeoutMs: 30_000,
     maxParallelJobs: 5,
     jobHandler: async (job) => {
       const result: JobResult = {
-        type: "userTask",
+        type: 'userTask',
         corrections: {
-          assignee: "corrected-user",
+          assignee: 'corrected-user',
           priority: 80,
         },
       };
@@ -245,7 +243,7 @@ async function _readmeJobCorrections() {
 async function _readmeJobCorrectionsDenial() {
   const client = createCamundaClient();
   const worker = client.createJobWorker({
-    jobType: "io.camunda:userTaskListener",
+    jobType: 'io.camunda:userTaskListener',
     jobTimeoutMs: 30_000,
     maxParallelJobs: 5,
     jobHandler: async (job) => {
@@ -253,9 +251,9 @@ async function _readmeJobCorrectionsDenial() {
       return job.complete(
         {},
         {
-          type: "userTask",
+          type: 'userTask',
           denied: true,
-          deniedReason: "Insufficient documentation",
+          deniedReason: 'Insufficient documentation',
         }
       );
       //#endregion ReadmeJobCorrectionsDenial
@@ -281,11 +279,8 @@ async function _readmeThreadedWorker() {
   const client = createCamundaClient();
 
   const worker = client.createThreadedJobWorker({
-    jobType: "cpu-heavy-task",
-    handlerModule: path.join(
-      path.dirname(fileURLToPath(import.meta.url)),
-      "my-handler.js"
-    ),
+    jobType: 'cpu-heavy-task',
+    handlerModule: path.join(path.dirname(fileURLToPath(import.meta.url)), 'my-handler.js'),
     maxParallelJobs: 32,
     jobTimeoutMs: 30_000,
   });
@@ -299,7 +294,7 @@ async function _readmeThreadedWorker() {
 
 function _readmeBrandedKeys() {
   //#region ReadmeBrandedKeys
-  const defKey = ProcessDefinitionKey.assumeExists("2251799813686749");
+  const defKey = ProcessDefinitionKey.assumeExists('2251799813686749');
   // @ts-expect-error – cannot assign def key to instance key
   const bad: ProcessInstanceKey = defKey;
   //#endregion ReadmeBrandedKeys
@@ -321,8 +316,8 @@ async function _readmeCancelable(defKey: ProcessDefinitionKey) {
   try {
     await p; // resolves if not cancelled
   } catch (e) {
-    if (isSdkError(e) && e.name === "CancelSdkError") {
-      console.log("Operation cancelled");
+    if (isSdkError(e) && e.name === 'CancelSdkError') {
+      console.log('Operation cancelled');
     } else throw e;
   }
   //#endregion ReadmeCancelable
@@ -337,15 +332,14 @@ async function _readmeEventualConsistency() {
   //#region ReadmeEventualConsistency
   const jobs = await camunda.searchJobs(
     {
-      filter: { type: "payment" },
+      filter: { type: 'payment' },
     },
     {
       consistency: {
         waitUpToMs: 5000,
         pollIntervalMs: 200,
         trace: true,
-        predicate: (r) =>
-          Array.isArray(r.items) && r.items.some((j) => j.state === "CREATED"),
+        predicate: (r) => Array.isArray(r.items) && r.items.some((j) => j.state === 'CREATED'),
       },
     }
   );
@@ -361,7 +355,7 @@ async function _readmeLogging() {
   //#region ReadmeLogging
   const client = createCamundaClient({
     log: {
-      level: "info",
+      level: 'info',
       transport: (evt) => {
         // evt: { level, scope, ts, args, code?, data? }
         console.log(JSON.stringify(evt));
@@ -369,9 +363,9 @@ async function _readmeLogging() {
     },
   });
 
-  const log = client.logger("worker");
-  log.debug(() => ["expensive detail only if enabled", { meta: 1 }]);
-  log.code("info", "WORK_START", "Starting work loop", { pid: process.pid });
+  const log = client.logger('worker');
+  log.debug(() => ['expensive detail only if enabled', { meta: 1 }]);
+  log.code('info', 'WORK_START', 'Starting work loop', { pid: process.pid });
   //#endregion ReadmeLogging
 }
 
@@ -388,20 +382,20 @@ async function _readmeErrorHandling() {
   } catch (e) {
     if (isSdkError(e)) {
       switch (e.name) {
-        case "HttpSdkError":
-          console.error("HTTP failure", e.status, e.operationId);
+        case 'HttpSdkError':
+          console.error('HTTP failure', e.status, e.operationId);
           break;
-        case "ValidationSdkError":
-          console.error("Validation issue on", e.operationId, e.side, e.issues);
+        case 'ValidationSdkError':
+          console.error('Validation issue on', e.operationId, e.side, e.issues);
           break;
-        case "AuthSdkError":
-          console.error("Auth problem", e.message, e.status);
+        case 'AuthSdkError':
+          console.error('Auth problem', e.message, e.status);
           break;
-        case "CancelSdkError":
-          console.error("Operation cancelled", e.operationId);
+        case 'CancelSdkError':
+          console.error('Operation cancelled', e.operationId);
           break;
-        case "NetworkSdkError":
-          console.error("Network layer error", e.message);
+        case 'NetworkSdkError':
+          console.error('Network layer error', e.message);
           break;
       }
       return;
@@ -417,16 +411,14 @@ async function _readmeErrorHandling() {
 // ---------------------------------------------------------------------------
 
 async function _readmeResultClient() {
-  const file = new File(["<xml/>"], "process.bpmn", {
-    type: "application/xml",
-  });
+  const file = new File(['<xml/>'], 'process.bpmn', { type: 'application/xml' });
   //#region ReadmeResultClient
   const camundaR = createCamundaResultClient();
   const res = await camundaR.createDeployment({ resources: [file] });
   if (isOk(res)) {
-    console.log("Deployment key", res.value.deploymentKey);
+    console.log('Deployment key', res.value.deploymentKey);
   } else {
-    console.error("Deployment failed", res.error);
+    console.error('Deployment failed', res.error);
   }
   //#endregion ReadmeResultClient
 }
@@ -439,9 +431,7 @@ async function _readmeDeployBrowser() {
   const camunda = createCamundaClient();
   //#region ReadmeDeployBrowser
   const bpmnXml = `<definitions id="process" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">...</definitions>`;
-  const file = new File([bpmnXml], "order-process.bpmn", {
-    type: "application/xml",
-  });
+  const file = new File([bpmnXml], 'order-process.bpmn', { type: 'application/xml' });
   const result = await camunda.createDeployment({ resources: [file] });
   console.log(result.deployments.length);
   //#endregion ReadmeDeployBrowser
@@ -455,9 +445,9 @@ async function _readmeDeployNode() {
   const camunda = createCamundaClient();
   //#region ReadmeDeployNode
   const result = await camunda.deployResourcesFromFiles([
-    "./bpmn/order-process.bpmn",
-    "./dmn/discount.dmn",
-    "./forms/order.form",
+    './bpmn/order-process.bpmn',
+    './dmn/discount.dmn',
+    './forms/order.form',
   ]);
 
   console.log(result.processes.map((p) => p.processDefinitionId));
@@ -472,10 +462,7 @@ async function _readmeDeployNode() {
 async function _readmeTestingClient() {
   //#region ReadmeTestingClient
   const client = createCamundaClient({
-    config: {
-      CAMUNDA_REST_ADDRESS: "http://localhost:8080",
-      CAMUNDA_AUTH_STRATEGY: "NONE",
-    },
+    config: { CAMUNDA_REST_ADDRESS: 'http://localhost:8080', CAMUNDA_AUTH_STRATEGY: 'NONE' },
   });
   //#endregion ReadmeTestingClient
   void client;
@@ -484,8 +471,7 @@ async function _readmeTestingClient() {
 async function _readmeTestingMock() {
   //#region ReadmeTestingMock
   const client = createCamundaClient({
-    fetch: async (_input, _init) =>
-      new Response(JSON.stringify({ ok: true }), { status: 200 }),
+    fetch: async (_input, _init) => new Response(JSON.stringify({ ok: true }), { status: 200 }),
   });
   //#endregion ReadmeTestingMock
   void client;
@@ -502,18 +488,18 @@ async function _readmeWorkerDefaultsEnv() {
   //#region ReadmeWorkerDefaultsEnv
   // Workers inherit timeout, concurrency, and name from environment
   const w1 = client.createJobWorker({
-    jobType: "validate-order",
+    jobType: 'validate-order',
     jobHandler: async (job) => job.complete(),
   });
 
   const w2 = client.createJobWorker({
-    jobType: "ship-order",
+    jobType: 'ship-order',
     jobHandler: async (job) => job.complete(),
   });
 
   // Per-worker override: this worker uses 32 concurrent jobs instead of the global 8
   const w3 = client.createJobWorker({
-    jobType: "bulk-import",
+    jobType: 'bulk-import',
     maxParallelJobs: 32,
     jobHandler: async (job) => job.complete(),
   });
@@ -543,7 +529,7 @@ async function _readmeWorkerDefaultsClient() {
 async function _readmeJobCompletionPatterns() {
   const client = createCamundaClient();
   const worker = client.createJobWorker({
-    jobType: "example",
+    jobType: 'example',
     maxParallelJobs: 1,
     jobTimeoutMs: 30_000,
     jobHandler: async (job) => {
@@ -601,16 +587,14 @@ async function _readmeThreadedLifecycle() {
 async function _readmeThreadedGraceful() {
   const client = createCamundaClient();
   const worker = client.createJobWorker({
-    jobType: "example",
+    jobType: 'example',
     maxParallelJobs: 1,
     jobTimeoutMs: 30_000,
     jobHandler: async (job) => job.complete(),
   });
   //#region ReadmeThreadedGraceful
   // Graceful shutdown (waits for in-flight jobs to finish)
-  const { timedOut, remainingJobs } = await worker.stopGracefully({
-    waitUpToMs: 10_000,
-  });
+  const { timedOut, remainingJobs } = await worker.stopGracefully({ waitUpToMs: 10_000 });
   //#endregion ReadmeThreadedGraceful
   void timedOut;
   void remainingJobs;
@@ -619,8 +603,8 @@ async function _readmeThreadedGraceful() {
 function _readmePoolStats() {
   const client = createCamundaClient();
   const worker = client.createThreadedJobWorker({
-    jobType: "example",
-    handlerModule: "./handler.js",
+    jobType: 'example',
+    handlerModule: './handler.js',
     maxParallelJobs: 1,
     jobTimeoutMs: 30_000,
   });

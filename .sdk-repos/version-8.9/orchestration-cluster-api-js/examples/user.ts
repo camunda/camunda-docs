@@ -1,10 +1,7 @@
 // Compilable usage examples for user management operations.
 // These examples are type-checked during build to guard against API regressions.
 
-import {
-  createCamundaClient,
-  type Username,
-} from "@camunda8/orchestration-cluster-api";
+import { createCamundaClient, type Username } from '@camunda8/orchestration-cluster-api';
 
 //#region CreateUser
 async function createUserExample(username: Username) {
@@ -12,9 +9,9 @@ async function createUserExample(username: Username) {
 
   const result = await camunda.createUser({
     username,
-    name: "Alice Smith",
-    email: "alice@example.com",
-    password: "secure-password-123",
+    name: 'Alice Smith',
+    email: 'alice@example.com',
+    password: 'secure-password-123',
   });
 
   console.log(`Created user: ${result.username}`);
@@ -27,9 +24,9 @@ async function createAdminUserExample(username: Username) {
 
   const result = await camunda.createAdminUser({
     username,
-    name: "Admin User",
-    email: "admin@example.com",
-    password: "admin-password-123",
+    name: 'Admin User',
+    email: 'admin@example.com',
+    password: 'admin-password-123',
   });
 
   console.log(`Created admin user: ${result.username}`);
@@ -40,10 +37,7 @@ async function createAdminUserExample(username: Username) {
 async function getUserExample(username: Username) {
   const camunda = createCamundaClient();
 
-  const user = await camunda.getUser(
-    { username },
-    { consistency: { waitUpToMs: 5000 } }
-  );
+  const user = await camunda.getUser({ username }, { consistency: { waitUpToMs: 5000 } });
 
   console.log(`User: ${user.name} (${user.email})`);
 }
@@ -73,8 +67,8 @@ async function updateUserExample(username: Username) {
 
   await camunda.updateUser({
     username,
-    name: "Alice Jones",
-    email: "alice.jones@example.com",
+    name: 'Alice Jones',
+    email: 'alice.jones@example.com',
   });
 }
 //#endregion UpdateUser

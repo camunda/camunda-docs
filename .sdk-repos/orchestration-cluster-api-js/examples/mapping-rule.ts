@@ -1,17 +1,17 @@
 // Compilable usage examples for mapping rule operations.
 // These examples are type-checked during build to guard against API regressions.
 
-import { createCamundaClient } from "@camunda8/orchestration-cluster-api";
+import { createCamundaClient } from '@camunda8/orchestration-cluster-api';
 
 //#region CreateMappingRule
 async function createMappingRuleExample() {
   const camunda = createCamundaClient();
 
   const result = await camunda.createMappingRule({
-    mappingRuleId: "ldap-group-mapping",
-    name: "LDAP Group Mapping",
-    claimName: "groups",
-    claimValue: "engineering",
+    mappingRuleId: 'ldap-group-mapping',
+    name: 'LDAP Group Mapping',
+    claimName: 'groups',
+    claimValue: 'engineering',
   });
 
   console.log(`Created mapping rule: ${result.mappingRuleId}`);
@@ -23,7 +23,7 @@ async function getMappingRuleExample() {
   const camunda = createCamundaClient();
 
   const rule = await camunda.getMappingRule(
-    { mappingRuleId: "ldap-group-mapping" },
+    { mappingRuleId: 'ldap-group-mapping' },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -53,10 +53,10 @@ async function updateMappingRuleExample() {
   const camunda = createCamundaClient();
 
   await camunda.updateMappingRule({
-    mappingRuleId: "ldap-group-mapping",
-    name: "LDAP Group Mapping",
-    claimName: "groups",
-    claimValue: "engineering-team",
+    mappingRuleId: 'ldap-group-mapping',
+    name: 'LDAP Group Mapping',
+    claimName: 'groups',
+    claimValue: 'engineering-team',
   });
 }
 //#endregion UpdateMappingRule
@@ -65,7 +65,7 @@ async function updateMappingRuleExample() {
 async function deleteMappingRuleExample() {
   const camunda = createCamundaClient();
 
-  await camunda.deleteMappingRule({ mappingRuleId: "ldap-group-mapping" });
+  await camunda.deleteMappingRule({ mappingRuleId: 'ldap-group-mapping' });
 }
 //#endregion DeleteMappingRule
 

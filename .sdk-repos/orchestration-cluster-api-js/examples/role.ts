@@ -1,18 +1,15 @@
 // Compilable usage examples for role management operations.
 // These examples are type-checked during build to guard against API regressions.
 
-import {
-  createCamundaClient,
-  type Username,
-} from "@camunda8/orchestration-cluster-api";
+import { createCamundaClient, type Username } from '@camunda8/orchestration-cluster-api';
 
 //#region CreateRole
 async function createRoleExample() {
   const camunda = createCamundaClient();
 
   const result = await camunda.createRole({
-    roleId: "process-admin",
-    name: "Process Admin",
+    roleId: 'process-admin',
+    name: 'Process Admin',
   });
 
   console.log(`Created role: ${result.roleId}`);
@@ -24,7 +21,7 @@ async function getRoleExample() {
   const camunda = createCamundaClient();
 
   const role = await camunda.getRole(
-    { roleId: "process-admin" },
+    { roleId: 'process-admin' },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -54,8 +51,8 @@ async function updateRoleExample() {
   const camunda = createCamundaClient();
 
   await camunda.updateRole({
-    roleId: "process-admin",
-    name: "Process Administrator",
+    roleId: 'process-admin',
+    name: 'Process Administrator',
   });
 }
 //#endregion UpdateRole
@@ -64,7 +61,7 @@ async function updateRoleExample() {
 async function deleteRoleExample() {
   const camunda = createCamundaClient();
 
-  await camunda.deleteRole({ roleId: "process-admin" });
+  await camunda.deleteRole({ roleId: 'process-admin' });
 }
 //#endregion DeleteRole
 
@@ -73,7 +70,7 @@ async function assignRoleToUserExample(username: Username) {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToUser({
-    roleId: "process-admin",
+    roleId: 'process-admin',
     username,
   });
 }
@@ -84,7 +81,7 @@ async function unassignRoleFromUserExample(username: Username) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromUser({
-    roleId: "process-admin",
+    roleId: 'process-admin',
     username,
   });
 }
@@ -95,8 +92,8 @@ async function assignRoleToGroupExample() {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToGroup({
-    roleId: "process-admin",
-    groupId: "engineering-team",
+    roleId: 'process-admin',
+    groupId: 'engineering-team',
   });
 }
 //#endregion AssignRoleToGroup
@@ -106,8 +103,8 @@ async function unassignRoleFromGroupExample() {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromGroup({
-    roleId: "process-admin",
-    groupId: "engineering-team",
+    roleId: 'process-admin',
+    groupId: 'engineering-team',
   });
 }
 //#endregion UnassignRoleFromGroup
@@ -117,8 +114,8 @@ async function assignRoleToClientExample() {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToClient({
-    roleId: "process-admin",
-    clientId: "my-service-account",
+    roleId: 'process-admin',
+    clientId: 'my-service-account',
   });
 }
 //#endregion AssignRoleToClient
@@ -128,8 +125,8 @@ async function unassignRoleFromClientExample() {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromClient({
-    roleId: "process-admin",
-    clientId: "my-service-account",
+    roleId: 'process-admin',
+    clientId: 'my-service-account',
   });
 }
 //#endregion UnassignRoleFromClient
@@ -139,8 +136,8 @@ async function assignRoleToMappingRuleExample() {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToMappingRule({
-    roleId: "process-admin",
-    mappingRuleId: "rule-123",
+    roleId: 'process-admin',
+    mappingRuleId: 'rule-123',
   });
 }
 //#endregion AssignRoleToMappingRule
@@ -150,8 +147,8 @@ async function unassignRoleFromMappingRuleExample() {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromMappingRule({
-    roleId: "process-admin",
-    mappingRuleId: "rule-123",
+    roleId: 'process-admin',
+    mappingRuleId: 'rule-123',
   });
 }
 //#endregion UnassignRoleFromMappingRule
@@ -161,7 +158,7 @@ async function searchUsersForRoleExample() {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchUsersForRole(
-    { roleId: "process-admin" },
+    { roleId: 'process-admin' },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -176,7 +173,7 @@ async function searchGroupsForRoleExample() {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchGroupsForRole(
-    { roleId: "process-admin" },
+    { roleId: 'process-admin' },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -191,7 +188,7 @@ async function searchClientsForRoleExample() {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchClientsForRole(
-    { roleId: "process-admin" },
+    { roleId: 'process-admin' },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -206,7 +203,7 @@ async function searchMappingRulesForRoleExample() {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchMappingRulesForRole(
-    { roleId: "process-admin" },
+    { roleId: 'process-admin' },
     { consistency: { waitUpToMs: 5000 } }
   );
 
