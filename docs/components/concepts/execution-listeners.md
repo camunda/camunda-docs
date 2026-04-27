@@ -26,18 +26,19 @@ An execution listener is a blocking operation, meaning that the workflow executi
 
 You can configure execution listeners for individual BPMN elements, such as tasks, events, and gateways, as well as for the overall process and subprocesses.
 
-There are two types of execution listener:
+There are three types of execution listener:
 
+- **Before all** (multi-instance body only, available from Camunda 8.10): Invoked _once_ on the multi-instance body, _before_ the `inputCollection` / loop cardinality is evaluated and any inner instances are created. See [Multi-instance execution listeners (engine)](#multi-instance-execution-listeners-engine).
 - **Start:** Invoked _before_ the element is processed. Useful for setting variables or executing preconditions.
 - **End:** Invoked _after_ the element is processed. Useful for executing cleanup or post-processing tasks.
 
 Each listener has three properties:
 
-| Property    | Description                                                  |
-| :---------- | :----------------------------------------------------------- |
-| `eventType` | Specifies when the listener is triggered (`start` or `end`). |
-| `type`      | The name of the job type.                                    |
-| `retries`   | The number of job retries.                                   |
+| Property    | Description                                                                                                                            |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| `eventType` | Specifies when the listener is triggered (`start`, `end`, or `beforeAll`). `beforeAll` is only valid on a multi-instance body element. |
+| `type`      | The name of the job type.                                                                                                              |
+| `retries`   | The number of job retries.                                                                                                             |
 
 :::note
 If multiple listeners of the same `eventType` (such as multiple start listeners) are defined on the same activity, they are executed sequentially, one after the other, in the order defined in the BPMN model.
@@ -91,6 +92,83 @@ End listeners are invoked after applying the variable output mappings and before
 - If an end listener completes the job with variables, those variables are propagated to the element's parent scope, like
   variables from the output mappings. Subsequent listeners can access these variables.
 
+## Multi-instance execution listeners
+
+Starting with Camunda 8.10 (alpha1), execution listeners can be attached to a [multi-instance](/components/modeler/bpmn/multi-instance/multi-instance.md) activity's **body** in addition to its **inner activity**. A new `beforeAll` event type runs once on the body, before the multi-instance is evaluated.
+
+:::note Engine/API scope
+This section documents engine/API semantics only. Modeling support (Modeler / Canvas property panel) and Camunda 7 → 8 migration tooling for multi-instance execution listeners will be documented separately when available.
+:::
+
+### Concept
+
+A multi-instance activity is composed of two execution-level parts:
+
+- The **multi-instance body**, the container that evaluates `inputCollection` / loop cardinality and creates inner instances.
+- The **inner activity**, which is executed once per element of the collection (sequentially or in parallel).
+
+Execution listeners can be attached to either part:
+
+| Attached to         | Supported event types | Invocation                                                                                         |
+| :------------------ | :-------------------- | :------------------------------------------------------------------------------------------------- |
+| Multi-instance body | `beforeAll` (alpha1)  | Once per body activation, before `inputCollection` / loop cardinality is evaluated.                |
+| Inner activity      | `start`, `end`        | Per inner instance, with the standard [Start](#start-listeners) / [End](#end-listeners) semantics. |
+
+### Lifecycle
+
+When a multi-instance activity is entered, the engine processes the body and inner-activity listeners in the following order:
+
+1. Variable **input mappings** of the multi-instance body are applied (if any).
+2. All `beforeAll` body listeners are executed sequentially, in the order defined in the BPMN model.
+3. The body's `inputCollection` expression (or `loopCardinality`) is evaluated.
+4. Inner instances are created (sequentially or in parallel, depending on the multi-instance configuration).
+5. For each inner instance, the existing [Start listeners](#start-listeners) and [End listeners](#end-listeners) of the inner activity are invoked as usual.
+
+If a `beforeAll` listener job fails, retries and incident handling follow the same rules as other execution listeners (see [Incident recovery](#incident-recovery)). The `inputCollection` is not evaluated and no inner instances are created until all `beforeAll` listeners complete successfully.
+
+### Variables
+
+Variables produced by completing a `beforeAll` listener job are propagated to the multi-instance body's scope. As a result:
+
+- They are visible to the body's `inputCollection`, `loopCardinality`, and `completionCondition` expressions.
+- They are visible to the inner activity (and any inner-activity `start` / `end` listeners) through normal variable scoping.
+- Subsequent `beforeAll` listeners on the same body can read variables written by earlier ones.
+
+This is consistent with the variable semantics described in [Variables in an execution listener](#variables-in-an-execution-listener).
+
+### Example
+
+The following snippet attaches a `beforeAll` listener to a multi-instance service task. The job worker for `resolve-items` is expected to compute and return an `items` variable that the multi-instance body then iterates over.
+
+```xml
+<bpmn:serviceTask id="process-items" name="Process items">
+  <bpmn:extensionElements>
+    <zeebe:taskDefinition type="process-item" />
+    <zeebe:executionListeners>
+      <zeebe:executionListener eventType="beforeAll" type="resolve-items" />
+    </zeebe:executionListeners>
+  </bpmn:extensionElements>
+  <bpmn:multiInstanceLoopCharacteristics>
+    <bpmn:extensionElements>
+      <zeebe:loopCharacteristics inputCollection="=items" inputElement="item" />
+    </bpmn:extensionElements>
+  </bpmn:multiInstanceLoopCharacteristics>
+</bpmn:serviceTask>
+```
+
+### Use cases
+
+Typical engine-centric use cases for `beforeAll` body listeners include:
+
+- **Dynamically computing the collection or loop cardinality** just before multi-instance evaluation, based on current process state or external data.
+- **Resolving identifiers (IDs) into concrete items** and writing them into a collection variable that the multi-instance activity iterates over.
+- **Pre-initializing shared context or helper variables** used by multi-instance expressions and the body's `completionCondition`.
+
+### Limitations (alpha1)
+
+- Only the `beforeAll` event type is introduced for multi-instance bodies in this iteration. There is no dedicated end-of-body (e.g. `afterAll`) listener.
+- The feature is available starting from Camunda 8.10. Earlier versions do not support the `beforeAll` event type and will reject deployments that use it.
+
 ## Incident recovery
 
 During execution listener processing, issues can arise that lead to [incidents](/components/concepts/incidents.md). For example, these incidents can occur due to job execution failures or problems during expression evaluation.
@@ -112,6 +190,7 @@ If this happens, all listeners of the same event type (`start` or `end`) that we
 Execution listeners have the following limitations:
 
 - **Unsupported elements**: The following elements do not support `start` or `end` listeners due to their processing nature:
+
   - Start events (start ELs): Use `start` listeners of process instances or subprocesses to cover the missing `start` listeners for specific start events.
   - Boundary events (start ELs): Place the start logic in the `start` ELs of the main activity to which the boundary event is attached.
   - Gateways (end ELs): Use `start` ELs on the element following the gateway to execute the required logic. This allows handling of any post-execution tasks in a dedicated element.
@@ -125,6 +204,8 @@ Execution listeners have the following limitations:
 
 - **Throwing a BPMN error**: This operation is not supported for execution listener jobs.
 
+- **Multi-instance (alpha1)**: Only `beforeAll` body listeners are supported on multi-instance activities in Camunda 8.10 alpha1; there is no end-of-body listener event type yet, and Modeler/Canvas UI support and Camunda 7 → 8 migration tooling are not yet available. See [Multi-instance execution listeners (engine)](#multi-instance-execution-listeners-engine).
+
 ## Related resources
 
 - [Variables](/components/concepts/variables.md)
@@ -132,3 +213,4 @@ Execution listeners have the following limitations:
 - [Incidents](/components/concepts/incidents.md)
 - [Job workers (basics)](/components/concepts/job-workers.md)
 - [Job workers (Java client)](/apis-tools/java-client/job-worker.md)
+- [Multi-instance activities](/components/modeler/bpmn/multi-instance/multi-instance.md)
