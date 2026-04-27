@@ -1,7 +1,7 @@
 ---
 id: build-camunda-with-ai
-title: "Build Camunda solutions with AI"
-sidebar_label: Build Camunda with AI
+title: "Build with AI"
+sidebar_label: Build with AI
 description: "Set up an AI-ready development workflow for Camunda with MCP, docs context, and practical troubleshooting guidance."
 keywords: [ai, mcp, claude, copilot, cursor, agentic]
 ---

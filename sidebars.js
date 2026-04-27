@@ -194,23 +194,6 @@ module.exports = {
       },
       items: [
         {
-          "Project management": [
-            "components/best-practices/management/following-the-customer-success-path",
-            "components/best-practices/management/doing-a-proper-poc",
-          ],
-          "Build with AI": [
-            {
-              type: "category",
-              label: "Build Camunda with AI",
-              link: {
-                type: "doc",
-                id: "components/best-practices/build-camunda-with-ai",
-              },
-              items: [
-                "components/best-practices/integrate-ai-into-your-processes",
-              ],
-            },
-          ],
           Architecture: [
             "components/best-practices/architecture/deciding-about-your-stack",
             {
@@ -227,6 +210,20 @@ module.exports = {
               ],
             },
             "components/best-practices/architecture/understanding-human-tasks-management",
+          ],
+        },
+        {
+          type: "category",
+          label: "Build with AI",
+          link: {
+            type: "doc",
+            id: "components/best-practices/build-camunda-with-ai",
+          },
+          items: ["components/best-practices/integrate-ai-into-your-processes"],
+        },
+        {
+          "CI/CD guidelines": [
+            "components/best-practices/cicd-guidelines/element-templates-at-scale",
           ],
           Development: [
             "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
@@ -252,8 +249,9 @@ module.exports = {
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
           ],
-          "CI/CD guidelines": [
-            "components/best-practices/cicd-guidelines/element-templates-at-scale",
+          "Project management": [
+            "components/best-practices/management/following-the-customer-success-path",
+            "components/best-practices/management/doing-a-proper-poc",
           ],
         },
       ],
