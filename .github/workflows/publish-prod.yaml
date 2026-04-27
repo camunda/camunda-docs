@@ -41,7 +41,7 @@ jobs:
           DOCS_SITE_URL: https://docs.camunda.io
           DOCS_SITE_BASE_URL: /
       - name: Add self-hosted GitHub runner IPs to security group so we can publish
-        uses: docker://amazon/aws-cli:2.34.32
+        uses: docker://amazon/aws-cli:2.34.37
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -64,7 +64,7 @@ jobs:
           # vvvvv Intentionally missing the AWS_ prefix vvvvv
           remote_key: ${{ secrets.PUBLISH_PROD_KEY }}
       - name: Remove self-hosted GitHub runner IPs from security group
-        uses: docker://amazon/aws-cli:2.34.32
+        uses: docker://amazon/aws-cli:2.34.37
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
