@@ -4,9 +4,6 @@ title: "User task lifecycle"
 description: "Understand and decide on the lifecycle of user tasks in your application."
 ---
 
-import GHIcon from "@site/src/mdx/GitHubInlineIcon";
-import TaskLifecycleUI from "./img/task-lifecycle-ui.png";
-
 The user task lifecycle in Camunda defines how users interact with tasks and perform work. Define it before implementing your application logic and user interface.
 
 ## Define your task lifecycle
@@ -17,7 +14,7 @@ Use the following task lifecycle as a starting point.
 
 ## Task lifecycle example
 
-[Tasklist](/components/tasklist/introduction-to-tasklist.md) implements a lifecycle optimized for tracking work on individual tasks using [forms](../03-forms/01-introduction-to-forms.md). It separates assignment from task state to support collaborative workflows.
+[Tasklist](/components/tasklist/introduction-to-tasklist.md) implements a lifecycle optimized for tracking work on individual tasks using [forms](../03-forms/01-introduction-to-forms.md). It separates assignment from task state to support collaborative processes.
 
 In a typical flow, users can:
 
@@ -99,7 +96,7 @@ Define validation logic that matches your use case.
 
 ## Lifecycle events
 
-Camunda emits lifecycle events that align with REST API operations. User task listeners react to them to execute custom logic. For details, see [user task listeners](/components/concepts/user-task-listeners/).
+Camunda emits lifecycle events that can be triggered by REST API operations. User task listeners react to them to execute custom logic. For details, see [user task listeners](/components/concepts/user-task-listeners.md).
 
 Supported events:
 
