@@ -626,19 +626,14 @@ body {
 
 .sign-up {
   background-color: #fc5d0d;
+  border-color: #fc5d0d;
   color: #fff !important;
-  border: 1px solid #fc5d0d;
-  border-radius: 20px !important;
-  margin: 1em;
-  transition: all 0.3s ease;
 }
 
 .sign-up:hover {
-  background-color: #171c29;
-  color: #ffffff !important;
-  border: 1px solid #171c29;
-  transform: translateY(-2px);
-  transition: all 0.3s ease;
+  background-color: #e04e00;
+  border-color: #e04e00;
+  color: #fff !important;
 }
 
 .hero--secondary {

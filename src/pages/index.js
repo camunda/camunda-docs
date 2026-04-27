@@ -140,7 +140,7 @@ function Home() {
             <div className={clsx("", styles.buttons)}>
               <Link
                 className={clsx(
-                  "button button--outline button--secondary button--lg sign-up",
+                  "button button--outline button--secondary button--lg button--hero sign-up",
                   styles.getStarted
                 )}
                 to={useBaseUrl("/build-with-camunda/")}
