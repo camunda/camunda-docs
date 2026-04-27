@@ -55,27 +55,27 @@ Even when a rebalancing request is handled successfully by all leaders, the resu
 Followers that are not fully caught up with the leader cannot be elected as leader.
 This becomes more likely under high load or with increased network latency between leader and follower.
 
-### Caveats
+### Rebalancing impact
 
 :::note
 
 Rebalancing causes every partition leader to step down simultaneously, triggering a new leader election for each partition.
 
-If the desired leader for a partition (aka the node with the highest priority) is _already_ the leader, rebalancing is a no-op for this partition. This means that if a cluster is already perfectly balanced, a rebalancing call is a no-op.
+If the desired leader for a partition (the node with the highest priority) is _already_ the leader, rebalancing is a no-op for this partition. If a cluster is already perfectly balanced, a rebalancing call is a no-op.
 
 :::
 
-During the election period, the affected partition has no leader. While leaderless, a partition cannot process or export, and cannot accept new commands. In the worst case — when all partitions are rebalancing at the same time — this means the entire cluster is temporarily unavailable: no workflow engine processing occurs, no new data becomes visible in the web applications, and no client requests are accepted.
+During the election period, the affected partition has no leader. While leaderless, a partition cannot process, export, or accept new commands. In the worst case, when all partitions rebalance at the same time, the entire cluster is temporarily unavailable: no workflow engine processing occurs, no new data becomes visible in the web applications, and no client requests are accepted.
 
 This is typically observed externally as:
 
-- **Increased error rates** from clients, as requests are rejected while no leader is available
-- **Increased processing latency**, for example, service tasks complete later and process instances progress more slowly
-- **Increased exporting latency**, for example, new data appears in Operate later than expected
+- Increased error rates from clients, as requests are rejected while no leader is available
+- Increased processing latency, as service tasks complete later and process instances progress more slowly
+- Increased exporting latency, as new data appears in Operate later than expected
 
 ### When to rebalance
 
-Before triggering a rebalance, verify that it is likely to succeed. As described in [Limitations](#limitations), rebalancing only works if the desired leader for each partition is not lagging behind the current leader. You can verify this using the `atomix_non_replicated_entries` metric, filtering by the `partition` and `follower` labels to see how far behind a given replica is for a given partition. The closer this value is to `0`, the more likely rebalancing is to succeed. If the desired leader has a significant lag, triggering a rebalance will cause a temporary performance drop without achieving a better distribution.
+Before triggering a rebalance, verify that it is likely to succeed. As described in [Limitations](#limitations), rebalancing only works if the desired leader for each partition is not lagging behind the current leader. You can verify this using the `atomix_non_replicated_entries` metric, filtering by the `partition` and `follower` labels to determine how far a replica lags behind. The closer this value is to `0`, the more likely rebalancing is to succeed. If the desired leader has a significant lag, triggering a rebalance will cause a temporary performance drop without achieving a better distribution.
 
 :::note
 
@@ -91,11 +91,11 @@ If you're using the Zeebe Grafana dashboard, you can already visualize this in t
 
 :::
 
-Once you have confirmed that rebalancing is likely to succeed, consider the trade-off: rebalancing can improve long-term cluster performance by achieving an optimal leader distribution, but it causes a temporary performance impact and potential unavailability window. You must decide whether the long-term benefit outweighs the short-term disruption for your situation.
+Once you have confirmed that rebalancing is likely to succeed, consider the trade-off: rebalancing can improve long-term cluster performance by achieving an optimal leader distribution, but it causes a temporary performance impact and potential unavailability window. Decide whether the long-term benefit outweighs the short-term disruption.
 
 :::warn
 
-We recommend rebalancing only when the cluster is under low load. To determine this, identify what "low load" means for your specific scenario. What constitutes low load, and whether rebalancing is appropriate at all in a given situation, is ultimately your decision.
+Rebalance only when the cluster is under low load. To determine this, identify what low load means for your specific scenario. What constitutes low load, and whether rebalancing is appropriate at all in a given situation, is ultimately your decision.
 
 :::
 
@@ -109,7 +109,7 @@ If you are using Prometheus, you can query the total replication rate across all
 sum(rate(atomix_append_entries_data_rate_total[1m]))
 ```
 
-This returns the replication rate in bytes per second of a cluster.
+This returns the cluster replication rate in bytes per second.
 
 You can find this in the Zeebe Grafana dashboard under the `Raft` section, visualized as a graph named `Leader append data rate`.
 
