@@ -198,7 +198,7 @@ module.exports = {
             "components/best-practices/management/following-the-customer-success-path",
             "components/best-practices/management/doing-a-proper-poc",
           ],
-          "AI development": [
+          "Build with AI": [
             {
               type: "category",
               label: "Build Camunda with AI",

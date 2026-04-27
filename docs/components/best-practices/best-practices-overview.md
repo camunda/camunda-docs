@@ -9,6 +9,14 @@ The Camunda Best Practices distill our experience with BPMN and DMN on the Camun
 
 Please note that, like the core product, Camunda extends the same guarantee to Best Practices. However, we cannot ensure the absolute accuracy or timeliness of the information provided, and any liability for damages resulting from the application of these recommendations is disclaimed.
 
+## Build with AI
+
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/build-camunda-with-ai/", label: "Build Camunda solutions with AI", docId:"components/best-practices/build-camunda-with-ai"},
+{
+type:"link", href:"/docs/next/components/best-practices/integrate-ai-into-your-processes/", label: "Integrate AI into your processes", docId:"components/best-practices/integrate-ai-into-your-processes"
+}
+]}/>
+
 ## Project management Best Practices
 
 <DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/management/following-the-customer-success-path/", label: "The Customer Success Path", docId:"components/best-practices/management/following-the-customer-success-path"},

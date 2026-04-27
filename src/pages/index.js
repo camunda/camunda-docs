@@ -144,9 +144,9 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl("/build-with-camunda/")}
-                title="Sign up for Camunda 8 SaaS"
+                title="Build with Camunda"
               >
-                Sign up
+                Build with Camunda
               </Link>
             </div>
           </div>
