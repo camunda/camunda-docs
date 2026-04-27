@@ -170,7 +170,34 @@ Make a `POST` http call to `https://<btpRoute>/backend/inbound` with this define
 
 When modeling a process for the BTP plugin, choose one of the following variants.
 
-### Variant 1: Job worker (deprecated)
+### Variant 1: Camunda User Task (recommended)
+
+:::note
+User task listeners are available from **Camunda 8.8** onwards. They were briefly included in 8.7.0-alpha2 but were not available in the 8.7.0 GA release. Use Camunda 8.8 or higher for this variant.
+:::
+
+Model the user interaction steps as Camunda User Tasks and link each task to a Camunda Form. The BTP plugin detects these tasks and renders them in the Fiori UI.
+
+In Camunda Modeler, configure every form step in the process as a separate Camunda User Task. This ensures the BTP plugin can recognize the task as a user interaction step and render the linked form in the Fiori UI.
+
+For each form step:
+
+1. Create a user task for the step.
+2. Set **Implementation type** to `Camunda user task`.
+3. Link the task to the corresponding Camunda Form.
+4. Add a task listener with:
+   - **Event type**: `Creating`
+   - **Listener type**: `sap-tl-creating`
+
+Use this configuration for every user task the BTP plugin should display. If you model a form step without the `Camunda user task` implementation type, or if the `sap-tl-creating` listener is missing, the BTP plugin can't prepare and manage the task as expected.
+
+The `Creating` task listener is triggered when the user task is created. With the `sap-tl-creating` listener type, the BTP plugin can initialize the task so the corresponding form step is available in the guided Fiori flow.
+
+![Task listener configuration for sap-tl-creating](./img/task-listener-sap-tl-creating.png)
+
+If your process contains multiple form steps, repeat the same setup for each task. This keeps the process model explicit and allows the BTP plugin to render each step in sequence.
+
+### Variant 2: Job worker (deprecated)
 
 :::note
 
@@ -200,33 +227,6 @@ For the final task:
 4. Set the header value to `success` for the successful end of the form flow, or to `fail` for the failed end of the form flow.
 
 This final task marks the end of the form flow for the BTP plugin and determines whether the flow completed successfully or failed.
-
-### Variant 2: Camunda User Task (recommended)
-
-:::note
-User task listeners are available from **Camunda 8.8** onwards. They were briefly included in 8.7.0-alpha2 but were not available in the 8.7.0 GA release. Use Camunda 8.8 or higher for this variant.
-:::
-
-Model the user interaction steps as Camunda User Tasks and link each task to a Camunda Form. The BTP plugin detects these tasks and renders them in the Fiori UI.
-
-In Camunda Modeler, configure every form step in the process as a separate Camunda User Task. This ensures the BTP plugin can recognize the task as a user interaction step and render the linked form in the Fiori UI.
-
-For each form step:
-
-1. Create a user task for the step.
-2. Set **Implementation type** to `Camunda user task`.
-3. Link the task to the corresponding Camunda Form.
-4. Add a task listener with:
-   - **Event type**: `Creating`
-   - **Listener type**: `sap-tl-creating`
-
-Use this configuration for every user task the BTP plugin should display. If you model a form step without the `Camunda user task` implementation type, or if the `sap-tl-creating` listener is missing, the BTP plugin can't prepare and manage the task as expected.
-
-The `Creating` task listener is triggered when the user task is created. With the `sap-tl-creating` listener type, the BTP plugin can initialize the task so the corresponding form step is available in the guided Fiori flow.
-
-![Task listener configuration for sap-tl-creating](./img/task-listener-sap-tl-creating.png)
-
-If your process contains multiple form steps, repeat the same setup for each task. This keeps the process model explicit and allows the BTP plugin to render each step in sequence.
 
 #### Completing the form flow
 
