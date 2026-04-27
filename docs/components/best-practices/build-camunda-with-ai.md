@@ -16,8 +16,8 @@ The [Build with Camunda](/build-with-camunda/) page is the starting point for AI
 
 Once you have a cluster running, connect your AI tools:
 
-- Set up Camunda locally with [Camunda 8 Run and `c8ctl`](./getting-started-example.md), or [run your solution in Camunda 8 SaaS](/components/saas/saas.md).
-- If you are building agentic use cases, complete [Build your first AI agent](./getting-started-agentic-orchestration.md).
+- Set up Camunda locally with [Camunda 8 Run and `c8ctl`](/guides/getting-started-example.md), or [run your solution in Camunda 8 SaaS](/components/saas/saas.md).
+- If you are building agentic use cases, complete [Build your first AI agent](/guides/getting-started-agentic-orchestration.md).
 - Use an MCP-capable AI tool, such as VS Code with Copilot, Claude Code, or Cursor.
 - Store configuration in source-controlled tool config files where possible, and keep secrets in environment variables or your platform's secret manager.
 
@@ -31,7 +31,7 @@ In the agentic orchestration section you'll find:
 - **Monitoring and testing** — observe agent decisions in real time with Operate, analyze performance with Optimize, and validate behavior with Camunda Process Test.
 - **Model recommendations** — guidelines for choosing an LLM provider and model for your use case.
 
-Start with [Build your first AI agent](./getting-started-agentic-orchestration.md) to see the end-to-end pattern in action.
+Start with [Build your first AI agent](/guides/getting-started-agentic-orchestration.md) to see the end-to-end pattern in action.
 
 ## Design processes with Camunda Copilot
 
@@ -72,52 +72,12 @@ The AI Dev Kit, including Claude Skills guidance, is upcoming and not yet releas
 
 For now, use this guide together with:
 
-- [Build your first AI agent](./getting-started-agentic-orchestration.md)
+- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
 - [Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md)
 - [Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)
 
 This section will be updated with concrete setup and usage steps when the AI Dev Kit is available.
 
-## Example repository
-
-Use the [camunda-8-get-started repository](https://github.com/camunda/camunda-8-get-started) as a baseline for local development workflows, deployment flows, and worker implementation patterns.
-
-Pair it with MCP-enabled AI tooling so your assistant can:
-
-- Generate and refine BPMN, DMN, and form artifacts.
-- Suggest worker implementation patterns.
-- Help debug incidents with runtime context.
-
 ## Best practices for integrating AI
 
 See [Integrate AI into your processes](./integrate-ai-into-your-processes.md) for guidance on how to apply AI patterns effectively inside Camunda: when to use the AI Agent connector instead of a hand-rolled LLM loop, how to compose multi-step tools inside ad-hoc sub-processes, and how to structure prompts for predictable results.
-
-## FAQs and troubleshooting
-
-### My AI client does not show Camunda tools
-
-Check that:
-
-- You configured the correct MCP endpoint URL.
-- Your client supports the transport required by the target server.
-- For authenticated clusters, you use `c8ctl mcp-proxy` and valid API client credentials.
-
-### Authentication fails when connecting to the Orchestration Cluster MCP Server
-
-Verify your OAuth token endpoint, client ID, client secret, and audience values. Then verify the API client has the required scope for the Orchestration Cluster API.
-
-### Answers are generic or outdated
-
-Confirm the Docs MCP server is configured and active, then ask the AI tool to cite relevant Camunda docs pages in its response.
-
-### Generated examples do not match my environment
-
-Include your runtime context in prompts, such as SaaS versus Self-Managed, Camunda version, SDK language, and deployment model.
-
-## Next steps
-
-- Start with [Build your first AI agent](./getting-started-agentic-orchestration.md).
-- Design processes faster with Camunda Copilot.
-- Connect runtime context via [Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md).
-- Connect documentation context via [Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md).
-- Apply best practices with [Integrate AI into your processes](./integrate-ai-into-your-processes.md).

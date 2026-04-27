@@ -158,11 +158,3 @@ Camunda Copilot in Web Modeler can generate the initial structure of an AI agent
 - Add error handling sub-processes to an existing agent.
 
 Review Copilot's output before deploying, and iterate with follow-up prompts to refine the result.
-
-## Next steps
-
-- [Build your first AI agent](./getting-started-agentic-orchestration.md)
-- [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)
-- [Ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md)
-- [Agentic orchestration overview](/components/agentic-orchestration/agentic-orchestration-overview.md)
-- [Build Camunda solutions with AI](./build-camunda-with-ai.md)

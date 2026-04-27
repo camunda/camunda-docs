@@ -11,8 +11,6 @@ module.exports = {
         "guides/getting-started-hello-world",
         "guides/getting-started-example",
         "guides/getting-started-agentic-orchestration",
-        "guides/build-camunda-with-ai",
-        "guides/integrate-ai-into-your-processes",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
       ],
@@ -199,6 +197,19 @@ module.exports = {
           "Project management": [
             "components/best-practices/management/following-the-customer-success-path",
             "components/best-practices/management/doing-a-proper-poc",
+          ],
+          "AI development": [
+            {
+              type: "category",
+              label: "Build Camunda with AI",
+              link: {
+                type: "doc",
+                id: "components/best-practices/build-camunda-with-ai",
+              },
+              items: [
+                "components/best-practices/integrate-ai-into-your-processes",
+              ],
+            },
           ],
           Architecture: [
             "components/best-practices/architecture/deciding-about-your-stack",

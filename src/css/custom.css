@@ -71,9 +71,8 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     margin-right: 2rem;
   }
 
-  /* Show Try-Free and Build with AI buttons in hamburger menu */
-  .navbar-sidebar .try-free,
-  .navbar-sidebar .build-with-ai {
+  /* Show Build with AI button in hamburger menu */
+  .navbar-sidebar .try-free {
     display: inline-block !important;
     color: #ffffff !important;
     font-weight: 600;
@@ -105,9 +104,8 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     margin-right: 7rem;
   }
 
-  /* Show Try-Free and Build with AI buttons in hamburger menu */
-  .navbar-sidebar .try-free,
-  .navbar-sidebar .build-with-ai {
+  /* Show Build with AI button in hamburger menu */
+  .navbar-sidebar .try-free {
     display: inline-block !important;
     color: #ffffff !important;
     font-weight: 600;
@@ -646,8 +644,7 @@ body {
   color: #000;
 }
 
-.try-free,
-.build-with-ai {
+.try-free {
   background-color: #fc5d0d;
   font-family: "IBM Plex Sans", Sans-serif;
   font-size: 14px;
@@ -660,8 +657,7 @@ body {
   transition: all 0.3s ease;
 }
 
-.try-free:hover,
-.build-with-ai:hover {
+.try-free:hover {
   background-color: #171c29;
   color: #ffffff;
   border: 1px solid #171c29;
@@ -704,8 +700,7 @@ body {
   border-color: #6967ff;
 }
 
-[data-theme="dark"] .try-free,
-[data-theme="dark"] .build-with-ai {
+[data-theme="dark"] .try-free {
   border-color: rgb(255, 255, 255);
   transition: 0.3s ease;
   color: rgb(255, 255, 255);
@@ -713,8 +708,7 @@ body {
   border: 1px solid white;
 }
 
-[data-theme="dark"] .try-free:hover,
-[data-theme="dark"] .build-with-ai:hover {
+[data-theme="dark"] .try-free:hover {
   background-color: #ffffff;
   color: var(--ifm-color-black);
   border: 1px solid #171c29;
@@ -1003,8 +997,7 @@ h3 .badge:nth-of-type(1) {
     font-size: 0.9em;
   }
 
-  .try-free,
-  .build-with-ai {
+  .try-free {
     font-size: 0.9em !important;
     padding-left: 12px !important;
     padding-right: 12px !important;
@@ -1017,9 +1010,8 @@ h3 .badge:nth-of-type(1) {
 }
 
 @media screen and (max-width: 1200px) {
-  /* Hide Try-Free and Build with AI from navbar only, not from hamburger menu */
-  .navbar__items--right .try-free,
-  .navbar__items--right .build-with-ai {
+  /* Hide Build with AI from navbar only, not from hamburger menu */
+  .navbar__items--right .try-free {
     display: none;
   }
 }
