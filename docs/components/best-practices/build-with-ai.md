@@ -8,8 +8,6 @@ keywords: [ai, mcp, claude, copilot, cursor, agentic]
 
 Use this guide to set up a practical AI-assisted development workflow for Camunda-based solutions.
 
-This is the first iteration. It focuses on the currently available tooling and patterns. As the AI Dev Kit becomes available, this guide will expand.
-
 ## Set up your AI development environment
 
 The [Build with Camunda](/build-with-camunda/) page is the starting point for AI development with Camunda. From there, you can explore quickstarts, download the CLI, and connect AI tooling to a running cluster.
@@ -66,17 +64,9 @@ Use the Docs MCP server so your AI assistant can retrieve up-to-date Camunda doc
 
 Using both MCP servers gives your AI tool runtime context and documentation context in the same workflow.
 
-## Use Claude Skills (AI Dev Kit)
+## [TBD] Use the AI Dev Kit
 
 The AI Dev Kit, including Claude Skills guidance, is upcoming and not yet released.
-
-For now, use this guide together with:
-
-- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
-- [Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md)
-- [Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)
-
-This section will be updated with concrete setup and usage steps when the AI Dev Kit is available.
 
 ## Best practices for integrating AI
 
