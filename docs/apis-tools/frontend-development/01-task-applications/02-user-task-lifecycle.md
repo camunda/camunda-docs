@@ -21,7 +21,7 @@ In a typical flow, users can:
 - `start` a task to indicate that they are working on it.
 - `complete` the task when the work is done.
 - When they cannot continue work, they can `pause` it and `resume` it later.
-- The data entered up to this point is preserved. If they are unable to continue, they can `return` a task to the queue for someone else to pick it up, which resets the task data.
+- While a task is paused, the data entered up to this point is preserved. If users are unable to continue, they can `return` a task to the queue for someone else to pick up, which resets the task data.
 
 ```mermaid
 stateDiagram-v2
@@ -54,7 +54,7 @@ stateDiagram-v2
     class canceling listenerEvent
 ```
 
-The engine derives the task state using a CQRS pattern. [Zeebe](/components/zeebe/zeebe-overview.md), Camunda's process execution engine, manages a stream of events. There is no single status attribute in tasks. Instead, tasks derive their status from these events.
+The engine derives the task state using a CQRS pattern. [Zeebe](/components/zeebe/zeebe-overview.md), Camunda's process execution engine, manages a stream of events. There is no single status attribute on tasks. Instead, the task status is derived from these events.
 
 User task listeners run in a blocking manner. The lifecycle transition pauses until all listeners complete.
 
@@ -81,7 +81,7 @@ flowchart
 
 The execution engine does not validate user authorization. Your application must enforce access control.
 
-Tasklist allows only the assigned user or an admin to update and complete a task. You can implement different rules in your application, such as allowing a user to complete a task on behalf of another user.
+Tasklist allows only the assigned user, an admin, or a manager to update and complete a task. You can implement different rules in your application, such as allowing a user to complete a task on behalf of another user.
 
 The following best practices are implemented in Tasklist:
 
@@ -89,7 +89,7 @@ The following best practices are implemented in Tasklist:
 - Users can only see tasks assigned to them and tasks assigned to their candidate groups.
 - When a task is returned to the queue (i.e. the assignee is cleared), its data and status are reset to `open`.
 - Only admins or managers can reassign tasks.
-- Users can return tasks, but must provide a comment as to why they are doing so.
+- Users can return tasks, but they must provide a comment explaining why.
 - Users can mark tasks with a follow-up date. These then disappear from their individual task list until the follow-up date is reached. The `open` status is preserved, or the task is moved to the `paused` status if it has already been processed. The task remains assigned to the user.
 
 Define validation logic that matches your use case.
@@ -114,7 +114,7 @@ The `creating` event is emitted when a task instance is created. If the `creatin
 
 ### `assigning`
 
-The engine emits the `assigning` event when task assignment changes. This includes actions such as `claim`, `assign`, `return`, or `unassign`.
+The engine emits the `assigning` event when a task assignment changes. This includes actions such as `claim`, `assign`, `return`, or `unassign`.
 
 ### `updating`
 
