@@ -140,13 +140,11 @@ function Home() {
             <div className={clsx("", styles.buttons)}>
               <Link
                 className={clsx(
-                  "button button--outline button--secondary button--lg sign-up",
+                  "button button--outline button--secondary button--lg button--hero sign-up",
                   styles.getStarted
                 )}
-                to={useBaseUrl(
-                  "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
-                )}
-                title="Sign up for Camunda 8 SaaS"
+                to={useBaseUrl("/build-with-camunda/")}
+                title="Sign up"
               >
                 Sign up
               </Link>

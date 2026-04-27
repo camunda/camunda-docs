@@ -71,7 +71,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     margin-right: 2rem;
   }
 
-  /* Show Try-Free button in hamburger menu */
+  /* Show Build with AI button in hamburger menu */
   .navbar-sidebar .try-free {
     display: inline-block !important;
     color: #ffffff !important;
@@ -104,7 +104,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     margin-right: 7rem;
   }
 
-  /* Show Try-Free button in hamburger menu */
+  /* Show Build with AI button in hamburger menu */
   .navbar-sidebar .try-free {
     display: inline-block !important;
     color: #ffffff !important;
@@ -625,17 +625,15 @@ body {
 }
 
 .sign-up {
+  background-color: #fc5d0d;
+  border-color: #fc5d0d;
   color: #fff !important;
-  border-color: #fff;
-  margin: 1em;
-  transition: all 0.3s;
 }
 
 .sign-up:hover {
-  color: #000 !important;
-  background-color: #fff;
-  transform: translateY(-4px);
-  transition: all 0.3s ease;
+  background-color: #e04e00;
+  border-color: #e04e00;
+  color: #fff !important;
 }
 
 .hero--secondary {
@@ -701,16 +699,15 @@ body {
 }
 
 [data-theme="dark"] .try-free {
-  border-color: rgb(255, 255, 255);
-  transition: 0.3s ease;
-  color: rgb(255, 255, 255);
-  background-color: transparent;
-  border: 1px solid white;
+  background-color: #fc5d0d;
+  color: #ffffff;
+  border: 1px solid #fc5d0d;
+  transition: all 0.3s ease;
 }
 
 [data-theme="dark"] .try-free:hover {
-  background-color: #ffffff;
-  color: var(--ifm-color-black);
+  background-color: #171c29;
+  color: #ffffff;
   border: 1px solid #171c29;
   transform: translateY(-2px);
 }
@@ -1010,7 +1007,7 @@ h3 .badge:nth-of-type(1) {
 }
 
 @media screen and (max-width: 1200px) {
-  /* Hide Try-Free from navbar only, not from hamburger menu */
+  /* Hide Build with AI from navbar only, not from hamburger menu */
   .navbar__items--right .try-free {
     display: none;
   }
