@@ -39,7 +39,6 @@ You can assign two types of entities with mapping rules:
    :::note
 
    The operator option is used to define how we evaluate the rules against your tokens. The options are:
-
    - **Contains**: Used for array-based claims, such as a list of roles.
    - **Equals**: Used for string-based claims, such as a string ID.
 

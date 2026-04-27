@@ -60,7 +60,6 @@ To create the new versions:
 6. Switch back to the original branch, e.g. `release-8.8-all-steps`.
 
 7. Make manual updates for the new version:
-
    1. Ensure the "unmaintained" banner does not appear for supported versions. We currently support all versions of Camunda 8 since none are older than 18 months.
 
       ```javascript
@@ -89,7 +88,6 @@ To create the new versions:
 8. Fix cross-version links.
 
    Cross-version linking will often break when a new version is cut. All but the first in this need to be corrected:
-
    - Links that are intentionally crossing versions.
    - Links that are accidentally crossing versions, i.e. markdown paths that mistakenly begin with `docs/` or browser paths that mistakenly lack a .md file extension.
    - DocCardList links, which currently require a browser path.
@@ -97,7 +95,6 @@ To create the new versions:
 9. Correct redirects.
 
    Adjust the .htaccess file to account for URL changes due to modifying vCurrent.
-
    - Remove the `/next` version from redirects located in the new current version's section.
    - Add redirects for content that was moved in vNext prior to this release but not accounted for in the .htaccess.
    - Add a banner for the next version at the top of [section 3]https://github.com/camunda/camunda-docs/blob/b44afbafd9948fba501be2daf82b3b6d7df8f01c/static/.htaccess#L144-L150), to guide authors to locate their vNext redirects correctly.

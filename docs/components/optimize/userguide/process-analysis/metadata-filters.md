@@ -49,7 +49,6 @@ This filter has different behavior depending on where it was [defined](./filters
 This filter has a different behavior depending on where it was [defined](./filters.md#filter-behavior):
 
 - As an `instance filter`: This filter will retrieve only those process instances that contain open, resolved, or no incidents (depending on your selection). Here are some examples where this filter can be useful:
-
   - Creating reports that contain no incidents since the instances that have incidents have very long durations and are influencing your data.
 
   - To monitor all the instances from multiple engines that have open incidents.

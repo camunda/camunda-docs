@@ -10,10 +10,12 @@ import {
   type DocumentId,
   type JobKey,
   type UserTaskKey,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region GetDecisionDefinitionXml
-async function getDecisionDefinitionXmlExample(decisionDefinitionKey: DecisionDefinitionKey) {
+async function getDecisionDefinitionXmlExample(
+  decisionDefinitionKey: DecisionDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   const xml = await camunda.getDecisionDefinitionXml(
@@ -52,13 +54,17 @@ async function searchDecisionInstancesExample() {
   );
 
   for (const instance of result.items ?? []) {
-    console.log(`${instance.decisionEvaluationKey}: ${instance.decisionDefinitionId}`);
+    console.log(
+      `${instance.decisionEvaluationKey}: ${instance.decisionDefinitionId}`
+    );
   }
 }
 //#endregion SearchDecisionInstances
 
 //#region DeleteDecisionInstance
-async function deleteDecisionInstanceExample(decisionEvaluationKey: DecisionEvaluationKey) {
+async function deleteDecisionInstanceExample(
+  decisionEvaluationKey: DecisionEvaluationKey
+) {
   const camunda = createCamundaClient();
 
   await camunda.deleteDecisionInstance({ decisionEvaluationKey });
@@ -66,7 +72,9 @@ async function deleteDecisionInstanceExample(decisionEvaluationKey: DecisionEval
 //#endregion DeleteDecisionInstance
 
 //#region GetDecisionRequirements
-async function getDecisionRequirementsExample(decisionRequirementsKey: DecisionRequirementsKey) {
+async function getDecisionRequirementsExample(
+  decisionRequirementsKey: DecisionRequirementsKey
+) {
   const camunda = createCamundaClient();
 
   const requirements = await camunda.getDecisionRequirements(
@@ -79,7 +87,9 @@ async function getDecisionRequirementsExample(decisionRequirementsKey: DecisionR
 //#endregion GetDecisionRequirements
 
 //#region GetDecisionRequirementsXml
-async function getDecisionRequirementsXmlExample(decisionRequirementsKey: DecisionRequirementsKey) {
+async function getDecisionRequirementsXmlExample(
+  decisionRequirementsKey: DecisionRequirementsKey
+) {
   const camunda = createCamundaClient();
 
   const xml = await camunda.getDecisionRequirementsXml(
@@ -103,7 +113,9 @@ async function searchDecisionRequirementsExample() {
   );
 
   for (const req of result.items ?? []) {
-    console.log(`${req.decisionRequirementsKey}: ${req.decisionRequirementsId}`);
+    console.log(
+      `${req.decisionRequirementsKey}: ${req.decisionRequirementsId}`
+    );
   }
 }
 //#endregion SearchDecisionRequirements
@@ -135,8 +147,8 @@ async function throwJobErrorExample(jobKey: JobKey) {
 
   await camunda.throwJobError({
     jobKey,
-    errorCode: 'PAYMENT_FAILED',
-    errorMessage: 'Payment provider returned error',
+    errorCode: "PAYMENT_FAILED",
+    errorMessage: "Payment provider returned error",
   });
 }
 //#endregion ThrowJobError
@@ -158,7 +170,7 @@ async function searchJobsExample() {
 
   const result = await camunda.searchJobs(
     {
-      filter: { type: 'payment-processing', state: 'CREATED' },
+      filter: { type: "payment-processing", state: "CREATED" },
       page: { limit: 10 },
     },
     { consistency: { waitUpToMs: 5000 } }
@@ -174,7 +186,10 @@ async function searchJobsExample() {
 async function getUserTaskExample(userTaskKey: UserTaskKey) {
   const camunda = createCamundaClient();
 
-  const task = await camunda.getUserTask({ userTaskKey }, { consistency: { waitUpToMs: 5000 } });
+  const task = await camunda.getUserTask(
+    { userTaskKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
 
   console.log(`Task: ${task.name} (${task.state})`);
 }
@@ -187,8 +202,8 @@ async function updateUserTaskExample(userTaskKey: UserTaskKey) {
   await camunda.updateUserTask({
     userTaskKey,
     changeset: {
-      candidateUsers: ['alice', 'bob'],
-      dueDate: '2025-12-31T23:59:59Z',
+      candidateUsers: ["alice", "bob"],
+      dueDate: "2025-12-31T23:59:59Z",
       priority: 80,
     },
   });
@@ -244,11 +259,11 @@ async function searchUserTaskAuditLogsExample(userTaskKey: UserTaskKey) {
 async function createDocumentExample() {
   const camunda = createCamundaClient();
 
-  const file = new Blob(['Hello, world!'], { type: 'text/plain' });
+  const file = new Blob(["Hello, world!"], { type: "text/plain" });
 
   const result = await camunda.createDocument({
     file,
-    metadata: { fileName: 'hello.txt' },
+    metadata: { fileName: "hello.txt" },
   });
 
   console.log(`Document ID: ${result.documentId}`);
@@ -259,12 +274,12 @@ async function createDocumentExample() {
 async function createDocumentsExample() {
   const camunda = createCamundaClient();
 
-  const file1 = new Blob(['File one'], { type: 'text/plain' });
-  const file2 = new Blob(['File two'], { type: 'text/plain' });
+  const file1 = new Blob(["File one"], { type: "text/plain" });
+  const file2 = new Blob(["File two"], { type: "text/plain" });
 
   const result = await camunda.createDocuments({
     files: [file1, file2],
-    metadataList: [{ fileName: 'one.txt' }, { fileName: 'two.txt' }],
+    metadataList: [{ fileName: "one.txt" }, { fileName: "two.txt" }],
   });
 
   for (const doc of result.createdDocuments ?? []) {
@@ -284,7 +299,9 @@ async function getDocumentExample(documentId: DocumentId) {
 //#endregion GetDocument
 
 //#region SearchUserTaskEffectiveVariables
-async function searchUserTaskEffectiveVariablesExample(userTaskKey: UserTaskKey) {
+async function searchUserTaskEffectiveVariablesExample(
+  userTaskKey: UserTaskKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchUserTaskEffectiveVariables(

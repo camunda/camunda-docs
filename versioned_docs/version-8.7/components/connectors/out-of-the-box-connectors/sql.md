@@ -77,7 +77,6 @@ Use **[variables](#variables)** as much as possible to prevent SQL injection att
 #### Return results
 
 - When `false`, the response (see the [output](#what-is-the-output-format-of-the-sql-connector) section) will consist of an object containing an integer (`modifiedRows`) representing the number of modified rows. This is applicable for:
-
   - `INSERT`
   - `UPDATE`
   - `DELETE`

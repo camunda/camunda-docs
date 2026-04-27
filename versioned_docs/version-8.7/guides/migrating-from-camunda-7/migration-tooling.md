@@ -7,15 +7,20 @@ description: "Learn about the available migration tools."
 
 Camunda currently invests in tooling to help support and ease your migration from Camunda 7 to Camunda 8.
 
+The migration tools are available as **ready-to-use builds** from GitHub releases pages. You can download different versions as needed for your migration:
+
+- **Diagram Converter**: [Download releases](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/releases)
+- **Data Migrator**: [Download releases](https://github.com/camunda/c7-data-migrator/releases)
+
 ## Migration tools
 
 Camunda provides the following migration tools:
 
-| Migration tool                                                                       | Description                                                                                                                                                                     | GitHub link                                                                                                     |
-| :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| **[Migration Analyzer & Diagram Converter](#migration-analyzer--diagram-converter)** | Gain an initial understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://diagram-converter.camunda.io/). | [camunda-7-to-8-migration-analyzer](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer) |
-| **[Data Migrator](#data-migrator)**                                                  | Copies active Camunda 7 runtime instances to Camunda 8. Planned to be extended to also copy existing audit trail data (history).                                                | [c7-data-migrator](https://github.com/camunda/c7-data-migrator)                                                 |
-| **[Code conversion utilities](./code-conversion.md)**                                | Mixture of code _mapping tables_, code conversion _patterns_, and automatable _refactoring recipes_.                                                                            | [camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion/)      |
+| Migration tool                                                                       | Description                                                                                                                                                                     | Download / GitHub                                                                                                                                                                                     |
+| :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Migration Analyzer & Diagram Converter](#migration-analyzer--diagram-converter)** | Gain an initial understanding of migration tasks. Available for local installation (Java or Docker) or [hosted as a free SaaS offering](https://diagram-converter.camunda.io/). | [Download releases](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer/releases) \| [Source code](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer) |
+| **[Data Migrator](#data-migrator)**                                                  | Copies active Camunda 7 runtime instances to Camunda 8. Planned to be extended to also copy existing audit trail data (history).                                                | [Download releases](https://github.com/camunda/c7-data-migrator/releases) \| [Source code](https://github.com/camunda/c7-data-migrator)                                                               |
+| **[Code conversion utilities](./code-conversion.md)**                                | Mixture of code _mapping tables_, code conversion _patterns_, and automatable _refactoring recipes_.                                                                            | [Source code](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion/)                                                                                                               |
 
 ## Examples
 

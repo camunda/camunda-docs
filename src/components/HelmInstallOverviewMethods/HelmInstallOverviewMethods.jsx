@@ -37,7 +37,8 @@ const HelmInstallOverviewMethods = () => {
   return (
     <div className="sm-helm-install-overview">
       <p>
-        There are two main ways to install Camunda Helm Charts, depending on your requirements.
+        There are two main ways to install Camunda Helm Charts, depending on
+        your requirements.
       </p>
       <div className="sm-grid-2">
         {helmInstallOverviewCards.map((item, index) => (
