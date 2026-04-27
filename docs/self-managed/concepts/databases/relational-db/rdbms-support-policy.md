@@ -196,16 +196,6 @@ The `LIKE` comparison operator is not affected by this limitation.
 
 Because collation behavior varies across database vendors, results sorted by string fields may differ between systems. Ensure your application accounts for potential sorting variations when migrating between different RDBMS vendors.
 
-### Operate with RDBMS
-
-Operate has partial support for RDBMS as secondary storage in Camunda 8.9-alpha3, and is under active development. Most core features work, but the following functionality is not yet available:
-
-- Dashboard statistics (process statistics, incident statistics by error message)
-- Batch operation monitoring and batch move operations
-- Variable panel in process instance details
-- Process instance modification
-- Deleting process definitions, process instances, or decision definitions
-
 ## Installation and deployment guides
 
 For hands-on instructions to deploy Camunda with RDBMS, start with:

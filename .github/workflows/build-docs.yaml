@@ -2,10 +2,24 @@ name: build-docs
 
 on: pull_request
 
+# If the workflow is triggered while an instance is already running,
+# cancel the in-progress instance.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-docs:
+    # Use self-hosted runner with more resources
     runs-on: gcp-core-16-default
+
+    # The execution of a job shares the same container and resources as the runner agent
+    # that communicates with GitHub. Excessive and intensive consumption of resources
+    # by a job steps may starve the runner agent to the point where communication is lost,
+    # forcing GitHub to consider it offline. To prevent this, we can use a separate container
+    # with its own resources for the job execution.
     container: node:24
+
     steps:
       - uses: actions/checkout@v6
       - name: Install Dependencies
@@ -16,25 +30,26 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NODE_OPTIONS: --max_old_space_size=8192
+          NODE_OPTIONS: --max-old-space-size=30720
       - name: Upload build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: docs-build
           path: build
           include-hidden-files: true
+
   validate-links:
     runs-on: gcp-core-16-default
     needs: build-docs
     env:
       temporary_link_path: .github/workflows/validate-links
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: 24
       - name: Download build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: docs-build
           path: build
@@ -93,3 +108,25 @@ jobs:
         uses: ./.github/actions/muffet
         with:
           url_to_validate: http://localhost:8081/connectors-element-template-links.html
+
+  retry-shutdowns:
+    # Because we run these jobs on preemptible runners, they can be shut down
+    # automatically at any time. Instead of requiring a manual rerun every time
+    # this happens, use the reusable action developed by the infra team to retry.
+    runs-on: ubuntu-latest
+    needs:
+      - build-docs
+      - validate-links
+    if: failure() && fromJSON(github.run_attempt) < 3
+    steps:
+      - name: Retry job
+        uses: camunda/infra-global-github-actions/rerun-failed-run@main
+        with:
+          error-messages: |
+            The runner has received a shutdown signal.
+            The operation was canceled.
+          run-id: ${{ github.run_id }}
+          repository: ${{ github.repository }}
+          vault-addr: ${{ secrets.VAULT_ADDR }}
+          vault-role-id: ${{ secrets.VAULT_ROLE_ID }}
+          vault-secret-id: ${{ secrets.VAULT_SECRET_ID }}

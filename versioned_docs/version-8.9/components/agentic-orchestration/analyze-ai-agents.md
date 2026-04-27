@@ -123,9 +123,9 @@ Use a heatmap to understand how long your AI agent spends in each task.
 1. In the **Visualization** settings, select **Heatmap**. Click the gear icon and enable the tooltip to show absolute values.
 1. Save the report with a descriptive name. For example, **Tool usage heatmap**.
 
-<img src={Heatmap} alt="Tool usage heatmap" width="80%"/>
+<img src={Heatmap} alt="Tool usage heatmap" width="50%"/>
 
-You can see from the heatmap that the **Search recipe**, **Jokes API**, and **Fetch URL** tools are the only ones that were called across all process executions, and that your AI agent spent the most time in **Search recipe**.
+You can see from the heatmap that the **Search recipe**, **Jokes API**, and **Get list of Tech Stuff** tools are the only ones that were called across all process executions, and that your AI agent spent the most time in **Get list of Tech Stuff**.
 
 ### Example: Create a report for tool call counts
 
@@ -138,8 +138,6 @@ Create a bar chart to see how many times each tool is called.
 1. (Optional) Filter the report by selecting **Flow node selection** in the **Filter flow nodes** dropdown. For example, select only tool tasks within the AI Agent connector.
 1. In the **Visualization** settings, select **Bar chart** or **Pie chart**. Then click the gear icon and enable both tooltips to show absolute and relative values.
 1. Save the report with a descriptive name. For example, **Tool usage**.
-
-<img src={PieChart} alt="Tool usage pie chart" width="50%"/>
 
 You can see from the pie chart that the AI agent called the Jokes API tool most often across all process executions.
 
