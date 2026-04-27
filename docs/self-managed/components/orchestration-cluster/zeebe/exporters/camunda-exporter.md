@@ -20,6 +20,10 @@ When exporting, indexes are created as required and not recreated if they alread
 
 Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
 
+To connect to an external Elasticsearch or OpenSearch cluster, configure the secondary storage endpoint with `camunda.data.secondary-storage.elasticsearch.url` or `camunda.data.secondary-storage.elasticsearch.urls`. If you're using OpenSearch, use `camunda.data.secondary-storage.opensearch.url` or `camunda.data.secondary-storage.opensearch.urls` instead. The Camunda Exporter reuses that secondary storage connection automatically.
+
+If you're deploying with Helm, configure the external cluster in your Elasticsearch or OpenSearch values, then set the secondary storage type for Orchestration Cluster. For a complete Helm example, see [configure secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md#configuration-options) and [using external Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
+
 :::info Helm values mapping
 The option names in the tabs below (for example, `rolloverInterval`) are exporter option names, not top-level Helm values keys.
 
@@ -40,6 +44,8 @@ values={[{label: 'Connect', value: 'connect' },{label: 'Index', value: 'index' }
 
 Helm property path prefix for these options:
 `camunda.data.secondary-storage.{elasticsearch|opensearch}.`
+
+Use `url` or `urls` to define the Elasticsearch or OpenSearch endpoint. The `connect` options in this section only fine-tune how Camunda connects to the secondary storage cluster after you configure the endpoint.
 
 :::note
 Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which
