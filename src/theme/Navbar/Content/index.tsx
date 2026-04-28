@@ -12,7 +12,6 @@ import {
   splitNavbarItems,
   useNavbarMobileSidebar,
 } from "@docusaurus/theme-common/internal";
-import { useDocsVersionCandidates } from "@docusaurus/plugin-content-docs/client";
 import Link from "@docusaurus/Link";
 import NavbarItem from "@theme/NavbarItem";
 import NavbarColorModeToggle from "@theme/Navbar/ColorModeToggle";
@@ -26,28 +25,8 @@ function useNavbarItems() {
 }
 
 function WhatsNewBadge() {
-  const versionCandidates = useDocsVersionCandidates();
-  const version = versionCandidates[0];
-  const versionLabel = version.label.replace(/\s*\(.*\)/, "");
-
-  // Check if a "What's new in X.Y" doc exists for this version
-  const versionMatch = versionLabel.match(/(\d+)\.(\d+)/);
-  let href: string;
-  if (versionMatch) {
-    const [, major, minor] = versionMatch;
-    const docId = `whats-new-in-${major}${minor}`;
-    const hasWhatsNew = version.docs?.some((d) => d.id.endsWith(docId));
-    if (hasWhatsNew) {
-      href = `${version.path}/reference/announcements-release-notes/${major}${minor}0/${docId}/`;
-    } else {
-      href = `${version.path}/reference/announcements-release-notes/overview/`;
-    }
-  } else {
-    href = `${version.path}/reference/announcements-release-notes/overview/`;
-  }
-
   return (
-    <Link to={href} className={styles.whatsNewBadge}>
+    <Link to="/build-with-camunda" className={styles.whatsNewBadge}>
       <svg
         className={styles.rocketIcon}
         viewBox="0 0 24 24"
@@ -65,7 +44,7 @@ function WhatsNewBadge() {
         <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
         <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
       </svg>
-      What's new in {versionLabel}
+      Build with Camunda 8.9
     </Link>
   );
 }
