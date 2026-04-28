@@ -70,7 +70,9 @@ export default function NavbarContent(): JSX.Element {
       (i as any).className?.includes("try-free")
   );
   const otherRightItems = rightItems.filter(
-    (i) => (i as any).type !== "dropdown" && !(i as any).className?.includes("try-free")
+    (i) =>
+      (i as any).type !== "dropdown" &&
+      !(i as any).className?.includes("try-free")
   );
 
   return (
