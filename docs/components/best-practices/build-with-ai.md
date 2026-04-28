@@ -45,28 +45,13 @@ With Copilot you can:
 
 Copilot is available in Web Modeler for SaaS clusters. Self-Managed deployments can configure their own LLM provider.
 
-## Integrate the Orchestration Cluster MCP Server
+## Integrate via MCP
 
-Use the Orchestration Cluster MCP Server to let your AI assistant interact with Camunda runtime and management capabilities.
+Use the [Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md) to let your AI assistant interact with Camunda runtime and management capabilities.
 
-1. Review [Orchestration Cluster MCP Server overview](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md).
-1. Follow the [steps to enable and connect the MCP server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup.md).
-1. For authenticated environments, use [`c8ctl mcp-proxy`](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup.md#use-c8ctl-mcp-proxy).
-1. Validate your setup by listing tools in your AI client, then run a safe read-only query before using write operations.
-
-## Integrate the Camunda Docs MCP server
-
-Use the Docs MCP server so your AI assistant can retrieve up-to-date Camunda documentation while generating code or guidance.
-
-1. Follow the [Camunda Docs MCP server installation steps](/reference/mcp-docs/mcp-docs.md) for your AI tool.
-1. Add the server URL `https://camunda-docs.mcp.kapa.ai` to your MCP configuration.
-1. Test with a focused documentation prompt to confirm the connection works.
+Use the [Docs MCP server](/reference/mcp-docs/mcp-docs.md) so your AI assistant can retrieve up-to-date Camunda documentation while generating code or guidance.
 
 Using both MCP servers gives your AI tool runtime context and documentation context in the same workflow.
-
-## [TBD] Use the AI Dev Kit
-
-The AI Dev Kit, including Claude Skills guidance, is upcoming and not yet released.
 
 ## Best practices for integrating AI
 
