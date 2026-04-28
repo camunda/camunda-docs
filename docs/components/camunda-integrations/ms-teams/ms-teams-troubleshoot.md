@@ -64,7 +64,7 @@ Troubleshoot Camunda for Microsoft Teams to fix common setup and connectivity is
 ### Tasks not displayed
 
 - Check you are connected to the correct Camunda cluster.
-- If notifications are not shown, check Microsoft Teams notifications are enabled, or re-run `@Camunda Set up notifications` in the channel.
+- If notifications are not shown, ensure Microsoft Teams notifications are enabled and verify that the relevant [notification rules](./ms-teams-notifications.md) are configured for the channel or personal chat.
 - This could be due to an expired Camunda session or missing permissions. Sign out and sign in again.
 
 ## Get help
