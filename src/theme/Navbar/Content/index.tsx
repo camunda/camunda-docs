@@ -162,8 +162,6 @@ export default function NavbarContent(): JSX.Element {
           ))}
         </div>
       </div>
-
-
     </>
   );
 }
