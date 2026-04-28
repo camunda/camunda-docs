@@ -38,32 +38,50 @@
 .whatsNewBadge {
   display: inline-flex;
   align-items: center;
+  gap: 0.35rem;
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 1;
   padding: 0.28rem 0.65rem;
   border-radius: 15px;
-  background-color: var(--ifm-color-primary);
-  color: #fff;
+  border: 1px solid #d0d0d0;
+  background-color: transparent;
+  color: var(--ifm-navbar-link-color);
   text-decoration: none;
   white-space: nowrap;
-  transition: opacity 0.2s ease;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .whatsNewBadge:hover {
-  opacity: 0.85;
-  color: #fff;
+  color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
   text-decoration: none;
 }
 
 [data-theme="dark"] .whatsNewBadge {
-  background-color: var(--ifm-color-primary);
-  color: #fff;
+  color: var(--ifm-navbar-link-color);
+  border-color: #555;
 }
 
 [data-theme="dark"] .whatsNewBadge:hover {
-  opacity: 0.85;
-  color: #fff;
+  color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+
+.rocketIcon {
+  color: #8b8b8b;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.whatsNewBadge:hover .rocketIcon {
+  color: var(--ifm-color-primary);
+}
+
+[data-theme="dark"] .rocketIcon {
+  color: #999;
 }
 
 .topRowRight {
