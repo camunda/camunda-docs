@@ -1,13 +1,13 @@
 ---
 id: enable-alpha-features
 title: Enable alpha features
-description: "Learn how admin users can manage access to alpha features in Console and Modeler. "
+description: "Learn how admin users can manage access to alpha features in Camunda Hub."
 keywords: [alpha-features, alpha, admin, pre-release]
 ---
 
 :::note
 Opting-in to Camunda alpha terms currently only applies to Enterprise SaaS subscriptions.
-Customers in other subscriptions can still turn on/off these settings directly from Console.  
+Customers in other subscriptions can still turn on/off these settings directly from Camunda Hub.  
 :::
 
 If you aren't already familiar with accessing **alpha features**, learn more in our [alpha feature documentation](/components/early-access/alpha/alpha-features.md).
@@ -24,7 +24,7 @@ Enabling alpha features is limited to [admin users and owners](/components/conso
 
 To accept alpha terms for Camunda products, follow the steps below:
 
-1. Log in to Camunda Console and click the **Organization** tab to view the overview for **Organization Management**.
+1. Log in to Camunda Hub, and click the **Organization** tab to view the overview for **Organization Management**.
 2. Under the **Settings** tab, click **Opt-in** under the **Alpha features** box.
 3. Note the **Alpha Terms** modal. As the admin accepting the alpha terms, you must scroll and read through the terms before accepting.
 4. Once you have read the terms and scrolled through the modal, tick the box at the bottom reading **"I understand and agree to Alpha Terms"**.

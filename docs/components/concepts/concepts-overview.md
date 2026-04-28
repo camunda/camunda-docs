@@ -80,7 +80,7 @@ Camunda 8 is designed to operate on a very large scale. To achieve this, it prov
 
 ### Modeler
 
-Design fully-executable process and decision models that reduce misalignment and handoff friction while giving engineers the freedom they need to build the right solution. Camunda Modeler gives business users an intuitive way to model processes and decisions using the BPMN and DMN standards so their intent is clear, structured, and directly usable by developers. Developers can take the model as-is and build scalable, flexible solutions without worrying about losing alignment with business intent. Available via [web and desktop app](/components/modeler/about-modeler.md).
+Design fully-executable process and decision models that reduce misalignment and handoff friction while giving engineers the freedom they need to build the right solution. Camunda Modeler gives business users an intuitive way to model processes and decisions using the BPMN and DMN standards so their intent is clear, structured, and directly usable by developers. Developers can take the model as-is and build scalable, flexible solutions without worrying about losing alignment with business intent. Available via [Camunda Hub](/components/modeler/web-modeler/index.md) and a dedicated [desktop app](/components/modeler/desktop-modeler/index.md).
 
 #### Connectors
 
@@ -110,9 +110,9 @@ With [Operate](/components/operate/operate-introduction.md), teams can monitor r
 
 [Optimize](/components/optimize/what-is-optimize.md) leverages process execution data to continuously [provide actionable insights](/components/optimize/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
 
-### Console
+### Camunda Hub
 
-With [Console](/components/console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments, from development to production. Console offers control over organizational settings such as user and role management, and provides insights into usage metrics.
+With [Camunda Hub](/components/hub/index.md), you'll manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
 
 ## How does Camunda 8 compare to other solutions?
 

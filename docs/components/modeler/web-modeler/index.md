@@ -31,7 +31,7 @@ It enables teams to collaboratively design executable processes as the foundatio
 
 ## Access Web Modeler
 
-Access Web Modeler through the [Camunda 8 Console](../../console/introduction-to-console.md) or [launch it directly](./launch-web-modeler.md). No installation is required.
+Access the modeler in [Camunda Hub](/components/hub/index.md). No installation is required.
 
 ## Get started
 
