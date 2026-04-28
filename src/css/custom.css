@@ -211,7 +211,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   height: 30px !important;
   width: 300px !important;
   max-width: 300px !important;
-  padding: 0 12px !important;
+  padding: 0 10px !important;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
