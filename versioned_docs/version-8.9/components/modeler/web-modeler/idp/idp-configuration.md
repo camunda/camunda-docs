@@ -55,9 +55,9 @@ When using an OpenAI Compatible provider, you can bring your own model (BYOM) fo
 
 The following prerequisites apply regardless of your cloud provider:
 
-| Prerequisite                                                         | Description                                                                                                                                                                                                                                              |
-| :------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) | <ul><li><p>Web Modeler is required to create, manage, publish, and integrate [IDP applications](idp-applications.md) and [document extraction](idp-document-extraction.md) templates.</p></li><li><p>IDP does not support Desktop Modeler.</p></li></ul> |
+| Prerequisite                                                         | Description                                                                                                                                                                                                                                                                                                                    |
+| :------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) | <ul><li><p>Web Modeler is required to create, manage, publish, and integrate [IDP applications](idp-applications.md), [document extraction](idp-document-extraction.md) templates, and [document classification](idp-document-classification.md) templates.</p></li><li><p>IDP does not support Desktop Modeler.</p></li></ul> |
 
 ## Cluster requirements {#cluster-requirements}
 
