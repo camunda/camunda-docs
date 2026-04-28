@@ -3,7 +3,7 @@
 
 To deploy and run your process, you must create a [cluster](/components/concepts/clusters.md) in Camunda 8.
 
-1. To create a cluster, navigate to **Console**, click the **Clusters** tab, and click **Create new cluster**.
+1. To create a cluster, navigate to **Camunda Hub**, click the **Clusters** tab, and click **Create new cluster**.
 1. Name your cluster.
 1. Select a [cluster type](/components/concepts/clusters.md#cluster-type) and [cluster size](/components/concepts/clusters.md#cluster-size).
 1. Assign a cluster tag to indicate what type of cluster it is.

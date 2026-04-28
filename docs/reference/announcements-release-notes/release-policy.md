@@ -80,9 +80,8 @@ You can use the **Alpha** channel to access [alpha features](/components/early-a
 
 Non-cluster components include:
 
-- [Modeler (Web)](/components/modeler/web-modeler/launch-web-modeler.md)
-- [Connectors](/components/console/introduction-to-console.md)
-- [Console](/components/console/introduction-to-console.md)
+- [Camunda Hub](/components/hub/index.md)
+- [Connectors](/docs/components/connectors/introduction.md)
 
 Non-cluster component versions are released continuously.
 
@@ -93,9 +92,9 @@ Non-cluster component versions are released continuously.
 
 When a new Camunda 8 version is released, we try to provide the new version on our managed service at the same time.
 
-An **Update available** notification is shown in Console, recommending that you update to the latest version.
+An **Update available** notification is shown in Camunda Hub, recommending that you update to the latest version.
 
-![Console with notice to update the cluster in Camunda 8 SaaS](../img/update-console.png)
+![Camunda Hub with notice to update the cluster in Camunda 8 SaaS](../img/update-console.png)
 
 #### Generation names
 

@@ -16,7 +16,7 @@ If you are using the Orchestration Cluster with [Basic authentication](/self-man
 
 ## Manage clients in SaaS
 
-In Camunda 8 SaaS, client credentials are created and managed in [Console](../console/introduction-to-console.md).
+In Camunda 8 SaaS, client credentials are created and managed in [Camunda Hub](../hub/index.md).
 
 ### Step 1: Create client credentials in Console
 

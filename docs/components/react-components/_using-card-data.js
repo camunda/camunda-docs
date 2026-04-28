@@ -88,10 +88,11 @@ export const usingCamundaCards = [
       "Business intelligence and analytics for enterprise customers.",
   },
   {
-    link: "./console/introduction-to-console/",
-    title: "Console",
+    link: "./hub/index.md",
+    title: "Camunda Hub",
     image: IconConsoleImg,
-    description: "Manage Camunda components, clusters, and your organization.",
+    description:
+      "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.",
   },
 ];
 

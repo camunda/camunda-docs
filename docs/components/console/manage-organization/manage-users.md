@@ -20,7 +20,7 @@ The admin role has full access to the platform, process resources, and clusters,
 
 The following roles are additionally available, providing dedicated rights for specific elements in Camunda 8:
 
-- **Modeler**: Access to Web Modeler for creating and collaborating on projects, except permissions to deploy and run processes. Read-only access to Console.
+- **Modeler**: Access to Web Modeler for creating and collaborating on projects, except permissions to deploy and run processes. Read-only access to Camunda Hub.
 - **Analyst**: Includes Modeler permissions and has full access to Optimize to build process dashboards and reports.
 
 Starting with version 8.8, user access to clusters is managed independently. To control what a user can access, define their authorizations in the cluster's Admin. Learn more [here](/components/admin/authorization.md).

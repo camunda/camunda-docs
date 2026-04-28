@@ -14,9 +14,7 @@ Choose the modeler that best fits how you work:
 
 ## Open Web Modeler
 
-If you are logged in to Camunda 8 SaaS, open the **Camunda components** menu in the top-left corner and select **Web Modeler**. If you are already in [Console](../console/introduction-to-console.md) or another Camunda component, use the same menu to switch to Web Modeler.
-
-From the Web Modeler home page, create a new project or open an existing one to start working on diagrams. For a step-by-step walkthrough, see [launch Web Modeler](./web-modeler/launch-web-modeler.md).
+If you are logged in to Camunda 8 SaaS, open the **Camunda components** menu in the top-left corner, and select **Camunda Hub**. Navigate to your workspace, then, in your project, select the file you want to edit.
 
 ## Get Desktop Modeler
 

@@ -4,7 +4,7 @@ title: Advanced search
 description: "Use the search bar to navigate through Camunda applications and locate necessary resources and documentation."
 ---
 
-To ease navigation throughout Console, utilize the **search functionality** available in Camunda 8 SaaS under the **Console** component.
+To ease navigation throughout Camunda Hub, utilize the **search functionality** available in Camunda 8 SaaS under the **Camunda Hub** component.
 
 This search functionality allows users to:
 
@@ -20,7 +20,7 @@ Press `Ctrl+K`, `⌘+K`, or click the magnifier in the top navigation bar to ope
 
 ## Tips
 
-- Type `>` to execute an action in Console. By using `#` as a prefix, you search only in docs.
+- Type `>` to execute an action in Camunda Hub. By using `#` as a prefix, you search only in docs.
 - Use the keyboard arrows (◀ ▲ ▼ ▶) to navigate through results.
 - If you observe a ▶ symbol on the right-hand side, click to reveal more information.
 - To select a result, press **Enter**.

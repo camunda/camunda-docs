@@ -57,20 +57,19 @@ Tightly integrated with the Orchestration Cluster:
 
 This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
 
-#### Web Modeler and Console
+#### Camunda Hub
 
 <!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764667245523380&cot=14 -->
 
-![Web Modeler and Console](./img/management-cluster.jpg)
+![Camunda Hub](./img/management-cluster.jpg)
 
-Web Modeler and Console are designed to interact with multiple orchestration clusters:
+Camunda Hub is designed to interact with multiple orchestration clusters:
 
-- [Console](/components/console/introduction-to-console.md): Central management interface for monitoring and managing multiple orchestration clusters.
-- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md): Web-based tool for designing and deploying workflow models to any available orchestration cluster.
+- [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
 - [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
 
 :::note Admin separation
-Web Modeler and Console use a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
+Camunda Hub uses a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
 :::
 
 :::tip New in Camunda 8.8

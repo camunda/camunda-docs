@@ -36,7 +36,7 @@ Camunda provides [Modeler](/components/modeler/about-modeler.md), a free and ope
 
 Camunda offers two Modeler tools to design and implement your diagrams:
 
-- [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md): Integrate seamlessly with Camunda 8 SaaS and Self-Managed installations alongside [Console](../console/introduction-to-console.md).
+- [Camunda Hub](/components/modeler/web-modeler/index.md): Integrate seamlessly with Camunda 8 SaaS and Self-Managed installations.
 - [Desktop Modeler](/components/modeler/desktop-modeler/index.md): Design, view, and edit models using this desktop application. Install and use Desktop Modeler locally, all while integrating your local development environment.
 
 :::note
