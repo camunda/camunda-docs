@@ -48,6 +48,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 .navbar {
   flex-direction: column;
   height: auto;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
 }
 
 @media (max-width: 996px) {
