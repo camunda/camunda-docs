@@ -162,13 +162,9 @@ Memory usage is determined by the Java heap size (by default, [25% of the maximu
 
 Zeebe supports multiple RocksDB memory allocation strategies, configured via the `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYALLOCATIONSTRATEGY` setting in the broker configuration:
 
-- `PARTITION` (default): Total RocksDB memory equals the configured number of partitions multiplied by the configured memory limit (`ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT`).
+- `PARTITION` (default): Total RocksDB memory equals the actual number of partitions per broker (from the cluster topology) multiplied by the configured memory limit (`ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYLIMIT`).
 - `BROKER`: Total RocksDB memory equals the configured memory limit, regardless of the number of partitions.
 - `FRACTION`: RocksDB memory is allocated as a fraction of total available memory.
-
-:::note
-When using the `PARTITION` strategy, the calculation is based on the configured number of partitions, not necessarily the current number of partitions in the cluster. These values can differ when using dynamic partition scaling. If you use the `PARTITION` strategy together with dynamic scaling, update the configured number of partitions after scaling operations.
-:::
 
 When using the `FRACTION` strategy, configure the fraction using `ZEEBE_BROKER_EXPERIMENTAL_ROCKSDB_MEMORYFRACTION` (range `[0,1]`). The default is `0.1` (10% of total memory).
 
