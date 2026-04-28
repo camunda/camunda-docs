@@ -210,9 +210,20 @@
 
 /* ---- Responsive ---- */
 
-/* Hide color mode toggle on small viewports */
+/* Hide What's New badge and Help menu on narrower screens */
+@media (max-width: 1200px) {
+  .hideOnMobile {
+    display: none;
+  }
+}
+
+/* Hide elements on small viewports */
 @media (max-width: 996px) {
   .colorModeToggle {
+    display: none;
+  }
+
+  .hideOnMobile {
     display: none;
   }
 
@@ -233,5 +244,37 @@
 
   .topRowRight {
     flex-shrink: 0;
+  }
+
+  /* Shrink the search bar on smaller screens */
+  .topRowRight :global(.DocSearch-Button) {
+    width: 180px !important;
+    max-width: 180px !important;
+  }
+
+  /* Keep Ask AI button visible next to search on mobile */
+  .topRowRight :global(.navbar__item:has(.kapa-open)) {
+    display: flex !important;
+  }
+
+  .topRowRight :global(.kapa-open) {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .topRowRight :global(.DocSearch-Button) {
+    width: 100px !important;
+    max-width: 100px !important;
+  }
+
+  .topRowRight :global(.DocSearch-Button-Keys) {
+    display: none !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .topRowRight :global(.DocSearch-Button) {
+    display: none !important;
   }
 }

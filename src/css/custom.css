@@ -57,85 +57,8 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   }
 }
 
-/* Show only Ask AI and Search on smaller screens */
-@media screen and (max-width: 800px) {
-  /* Hide all navbar items except search and AI button */
-  .navbar__items--right
-    > .navbar__item:not(:has(.DocSearch-Button)):not(:has(.kapa-open)) {
-    display: none !important;
-  }
-
-  /* Reorder navbar items - AI button first, then search */
-  .navbar__items--right {
-    display: flex !important;
-    flex-direction: row-reverse !important;
-  }
-
-  /* Ensure Search and AI button remain visible */
-  .navbar__items--right > .navbar__item:has(.DocSearch-Button),
-  .navbar__items--right > .navbar__item:has(.kapa-open) {
-    display: flex !important;
-  }
-
-  /* Keep the actual buttons visible */
-  .DocSearch-Button,
-  .kapa-open {
-    display: inline-flex !important;
-  }
-
-  /* Add some spacing between buttons */
-  .navbar__item:has(.kapa-open) {
-    margin-right: 2rem;
-  }
-
-  /* Show Try-Free button in hamburger menu */
-  .navbar-sidebar .try-free {
-    display: inline-block !important;
-    color: #ffffff !important;
-    font-weight: 600;
-  }
-}
-
-/* Show only Ask AI and Search on screens between 801px and 996px */
-@media screen and (min-width: 801px) and (max-width: 996px) {
-  /* Hide all navbar items except search and AI button */
-  .navbar__items--right
-    > .navbar__item:not(:has(.DocSearch-Button)):not(:has(.kapa-open)) {
-    display: none !important;
-  }
-
-  /* Ensure Search and AI button remain visible */
-  .navbar__items--right > .navbar__item:has(.DocSearch-Button),
-  .navbar__items--right > .navbar__item:has(.kapa-open) {
-    display: flex !important;
-  }
-
-  /* Keep the actual buttons visible */
-  .DocSearch-Button,
-  .kapa-open {
-    display: inline-flex !important;
-  }
-
-  /* Add some spacing between buttons */
-  .navbar__item:has(.kapa-open) {
-    margin-right: 7rem;
-  }
-
-  /* Show Try-Free button in hamburger menu */
-  .navbar-sidebar .try-free {
-    display: inline-block !important;
-    color: #ffffff !important;
-    font-weight: 600;
-  }
-}
-
-/* Adjust Ask AI button spacing on screens between 769px and 800px */
-@media screen and (min-width: 769px) and (max-width: 800px) {
-  /* Add some spacing between buttons */
-  .navbar__item:has(.kapa-open) {
-    margin-right: 7rem;
-  }
-}
+/* ---- Responsive navbar overrides (handled by swizzled Navbar/Content) ---- */
+/* Legacy rules removed — responsive hiding is now in Navbar/Content/styles.module.css */
 
 .markdown {
   --ifm-h1-vertical-rhythm-top: 4;
@@ -1081,25 +1004,6 @@ h3 .badge:nth-of-type(1) {
 
 .badge--patch {
   background-color: var(--openapi-code-orange);
-}
-
-/* Between mobile and desktop sizes, the nav bar gets a little scrunchy. Scale things down a bit to make more space. */
-@media screen and (min-width: 990px) and (max-width: 1275px) {
-  .navbar .navbar__title,
-  .navbar .navbar__link {
-    font-size: 0.9em;
-  }
-
-  .try-free {
-    font-size: 0.9em !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  .navbar .navbar__item {
-    padding: var(--ifm-navbar-item-padding-vertical)
-      calc(0.4 * var(--ifm-navbar-item-padding-horizontal));
-  }
 }
 
 @media screen and (max-width: 1200px) {

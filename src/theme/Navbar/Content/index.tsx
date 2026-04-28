@@ -99,6 +99,7 @@ export default function NavbarContent(): JSX.Element {
       {/* ---- Top row ---- */}
       <div className={styles.topRow}>
         <div className={styles.topRowLeft}>
+          {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
           <NavbarLogo />
           {versionItems.map((item, i) => (
             <ErrorCauseBoundary
@@ -112,7 +113,9 @@ export default function NavbarContent(): JSX.Element {
               <NavbarItem {...item} />
             </ErrorCauseBoundary>
           ))}
-          <WhatsNewBadge />
+          <span className={styles.hideOnMobile}>
+            <WhatsNewBadge />
+          </span>
         </div>
 
         <div className={styles.topRowRight}>
@@ -138,21 +141,25 @@ export default function NavbarContent(): JSX.Element {
                 )
               }
             >
-              <NavbarItem {...item} />
+              <span className={styles.hideOnMobile}>
+                <NavbarItem {...item} />
+              </span>
             </ErrorCauseBoundary>
           ))}
-          {helpItems.map((item, i) => (
-            <ErrorCauseBoundary
-              key={i}
-              onError={(error) =>
-                new Error(
-                  `A theme navbar item failed to render.\n${JSON.stringify(item)}`
-                )
-              }
-            >
-              <NavbarItem {...item} />
-            </ErrorCauseBoundary>
-          ))}
+          <span className={styles.hideOnMobile}>
+            {helpItems.map((item, i) => (
+              <ErrorCauseBoundary
+                key={i}
+                onError={(error) =>
+                  new Error(
+                    `A theme navbar item failed to render.\n${JSON.stringify(item)}`
+                  )
+                }
+              >
+                <NavbarItem {...item} />
+              </ErrorCauseBoundary>
+            ))}
+          </span>
           <NavbarColorModeToggle className={styles.colorModeToggle} />
         </div>
       </div>
@@ -175,8 +182,7 @@ export default function NavbarContent(): JSX.Element {
         </div>
       </div>
 
-      {/* Mobile sidebar toggle */}
-      {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
+
     </>
   );
 }
