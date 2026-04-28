@@ -5,44 +5,40 @@ sidebar_label: Chatbot
 description: "Interact with Camunda using a conversational bot in Microsoft Teams personal chats, group chats, and channels."
 ---
 
-Interact with Camunda using a conversational bot in Microsoft Teams personal chats, group chats, and channels.
+Use the Camunda bot in personal chats, group chats, and channels to run commands or interact through buttons on interactive cards.
 
-## About
+## Commands
 
-The Camunda bot is available in your personal chat, group chats, and channels. You can interact with it by typing commands or by pressing buttons on the interactive cards it sends.
+You can interact with the bot by typing commands in chat.
 
-## Available commands
-
-The following commands are recognized by the bot:
-
-| Command                                                 | What it does                                                                                                                  |
-| :------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------- |
-| **Hi** (or hey, hello, greetings, and similar messages) | The bot greets you. If you haven't connected your Camunda account yet, it shows you how to get started.                       |
-| **Help** (or ?, support, commands)                      | Shows a help card with available commands and setup information.                                                              |
-| **Switch context**                                      | Enables you to change your active organization and cluster.                                                                   |
-| **Start a process**                                     | Walks you through selecting and starting a Camunda process. If no cluster is selected yet, it asks you to pick one first.     |
-| **Set up notifications**                                | Subscribes the current channel or chat to receive notifications about new user tasks for a selected organization and cluster. |
-| **Reset notifications**                                 | Shows the active notification subscriptions for the current channel and lets you remove them.                                 |
+| Command                                                 | What it does                                                                                                         |
+| :------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------- |
+| **Hi** (or hey, hello, greetings, and similar messages) | The bot greets you. If you have not connected your Camunda account yet, it shows you how to get started.             |
+| **Help** (or ?, support, commands)                      | Shows a help card with available commands and setup information.                                                     |
+| **Switch context**                                      | Changes your active organization and cluster.                                                                        |
+| **Start a process**                                     | Walks you through selecting and starting a Camunda process. If no cluster is selected, it prompts you to choose one. |
 
 :::important
 If you type an unrecognized command, the bot notifies you and suggests using **Help**.
 :::
 
-## Interactive card actions
+Configure notification subscriptions on the [notification rules](./ms-teams-notifications.md) page.
 
-The bot sends interactive cards with buttons you can click. These cards support the following actions.
+## Interactive cards
+
+In addition to commands, the bot sends interactive cards with buttons you can use to perform actions directly in chat.
+
+:::note
+When you trigger actions through the bot, such as starting processes or completing tasks, it automatically adds an [`appContext`](./ms-teams.md#process-variable-appcontext) variable. This variable captures who triggered the action and from which surface (`"message"` or `"channel"`).
+:::
 
 ### Select an organization and cluster
 
-Pick your organization from a dropdown, then select a cluster. The bot remembers your choice for future interactions.
+Select your organization from a dropdown, then choose a cluster. The bot remembers your selection for future interactions.
 
 ### Start processes
 
-Choose a process definition from the list and fill in the start form or provide variables. The bot confirms when the process has started successfully, or shows an error if something went wrong.
-
-:::note
-When a process is started through the bot, an [`appContext`](./ms-teams.md#process-variable-appcontext) variable is automatically included in the process variables, capturing who triggered it and from which surface (`"message"` or `"channel"`).
-:::
+Select a process definition and complete the start form or provide variables. The bot confirms when the process starts successfully or shows an error.
 
 ### Work with tasks
 
@@ -52,27 +48,22 @@ When a process is started through the bot, an [`appContext`](./ms-teams.md#proce
 | **Unassign**      | Release a task so others can pick it up.                                                                             |
 | **Fill in form**  | Open the task completion form directly in the chat card.                                                             |
 | **Complete task** | Submit the form and mark the task as done.                                                                           |
-| **Reset form**    | Discard your form input and go back to the task overview.                                                            |
+| **Reset form**    | Discard your form input and return to the task overview.                                                             |
 
-:::note
-When a task is completed through the bot, an [`appContext`](./ms-teams.md#process-variable-appcontext) variable is automatically included in the task variables, capturing who completed it and from which surface (`"message"` or `"channel"`).
-:::
+### Manage clusters
 
-### Cluster management
+If your cluster is sleeping, the bot shows a **Wake up cluster** button.
 
-If your cluster is sleeping, the bot shows a **Wake up cluster** button to wake it up.
+### Use pop-up dialogs
 
-### Pop-up dialog
+The bot opens forms in a pop-up dialog when they:
 
-When a form is too complex to display inside a chat card, the bot opens a pop-up dialog with the full form interface, giving you the same rich experience as the [tabs](./ms-teams-tabs.md).
+- Contain unsupported element types
+- Use FEEL expressions (values starting with `=`) in supported properties
 
-#### When a form opens in a pop-up dialog
+#### Unsupported element types
 
-Forms open in a pop-up dialog when they contain unsupported element types or [FEEL expressions](/components/modeler/feel/what-is-feel.md) in supported properties.
-
-##### Unsupported element types
-
-Adaptive Cards support only a subset of Camunda form elements. Forms with any of the following element types open in a pop-up dialog:
+Adaptive Cards support only a subset of Camunda form elements. Forms that include any of the following elements open in a pop-up dialog:
 
 - Group
 - Table
@@ -83,9 +74,9 @@ Adaptive Cards support only a subset of Camunda form elements. Forms with any of
 - Expression field
 - Document preview
 
-##### FEEL expressions
+#### FEEL expressions
 
-Forms also open in a pop-up dialog if any field uses a FEEL expression, meaning a value starting with `=`, in one of the following properties:
+Forms also open in a pop-up dialog if any field uses a FEEL expression in one of the following properties:
 
 - **Label**
 - **Date label**
@@ -103,35 +94,31 @@ Static values and process variables are supported in Adaptive Cards. Dynamic FEE
 
 ## Notifications
 
-Once set up, the bot proactively sends messages to keep you informed.
+The bot sends notifications based on your [notification rules](./ms-teams-notifications.md).
 
 ### Personal notifications
 
-Receive a message in your personal chat when a task is assigned to you.
+Receive a message in your personal chat when a user task matches one of your notification rules. For example, when a task is assigned to you.
 
 ### Channel notifications
 
-A subscribed channel receives messages about new unassigned tasks, so your team can coordinate on who picks them up.
+A channel receives notifications for user tasks that match its configured rules. This allows your team to coordinate who picks them up.
 
-To enable channel notifications:
-
-1. In any Microsoft Teams channel, enter the command: `@Camunda Set up notifications`.
-2. Follow the on-screen instructions to configure the notifications the channel should receive.
-3. Once complete, the selected channel will automatically receive alerts for new tasks.
+To configure notifications, see [notification rules](./ms-teams-notifications.md).
 
 ### Notification behavior
 
-Cards sent by notifications are interactive. You can assign, complete, or manage tasks directly from the notification card.
+Notification cards are interactive. You can assign, complete, or manage tasks directly from the card.
 
-Notification cards update automatically to reflect the latest task state. For example, when someone else completes or assigns the task.
+Cards update automatically to reflect the latest task state. For example, when someone else completes or assigns the task.
 
 ## Error handling
 
 The bot provides clear feedback when something goes wrong:
 
-| Error                   | Behavior                                                                         |
-| :---------------------- | :------------------------------------------------------------------------------- |
-| **Cluster is sleeping** | Shows a card with a button to wake it up, then retry your action.                |
-| **Task not found**      | Lets you know the task no longer exists (for example, it was already completed). |
-| **Access denied**       | Informs you that you don't have permission for the requested action.             |
-| **Unexpected errors**   | Shows a message suggesting you retry or contact support.                         |
+| Error                   | Behavior                                                             |
+| :---------------------- | :------------------------------------------------------------------- |
+| **Cluster is sleeping** | Shows a card with a button to wake it up, then retry your action.    |
+| **Task not found**      | Indicates the task no longer exists.                                 |
+| **Access denied**       | Informs you that you don't have permission for the requested action. |
+| **Unexpected errors**   | Shows a message suggesting you retry or contact support.             |

@@ -13,7 +13,7 @@ While both task testing and Play let you validate your BPMN models, they serve d
 
 | Feature / capability | Task testing (Implement mode)     | Play (Play mode)                  |
 | -------------------- | --------------------------------- | --------------------------------- |
-| Test scope           | Single task                       | Process segment or full diagram   |
+| Test scope           | Single task or sub-process        | Process segment or full diagram   |
 | Best for             | Quick implementation checks       | End-to-end test validation        |
 | Data type            | Live data only                    | Live or mocked data               |
 | Saves test scenarios | No                                | Yes                               |
@@ -46,6 +46,10 @@ To test a task in Web Modeler:
 4. Click **Test task** to execute the task.
 
 Web Modeler automatically deploys the process before running the test. The task executes on the connected cluster using your defined input data.
+
+During execution, the log displays each step in real time, including any states where the test is waiting for an external action to complete.
+
+![Task test showing waiting state](./img/task-testing/task-testing-waiting-state.png)
 
 ## View results
 

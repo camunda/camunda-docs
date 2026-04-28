@@ -7,7 +7,7 @@ description: "Desktop Modeler can directly connect to Camunda 8 Self-Managed clu
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to a Camunda 8 Orchestration Cluster. Follow the steps below to set up a connection.
+To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to a Camunda 8 Orchestration Cluster. Follow the steps below to set up a connection. To connect to **Camunda 8 SaaS**, visit the [Camunda 8 SaaS guide](../../../../components/modeler/desktop-modeler/connect-to-camunda-8.md).
 
 1. Click the **Connection manager**. For new installations, this will show **No connection**. If you have previously selected a connection, it will show the name of that connection.
 
