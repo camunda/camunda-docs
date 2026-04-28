@@ -1557,7 +1557,20 @@ module.exports = {
                 "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
               ],
             },
-            "self-managed/quickstart/developer-quickstart/docker-compose",
+            {
+              type: "category",
+              label: "Docker Compose",
+              link: {
+                type: "doc",
+                id: "self-managed/quickstart/developer-quickstart/docker-compose",
+              },
+              items: [
+                "self-managed/quickstart/developer-quickstart/docker-compose/install-start",
+                "self-managed/quickstart/developer-quickstart/docker-compose/configuration",
+                "self-managed/quickstart/developer-quickstart/docker-compose/secondary-storage",
+                "self-managed/quickstart/developer-quickstart/docker-compose/connectors-and-modeling",
+              ],
+            },
           ],
         },
         "self-managed/quickstart/administrator-quickstart",
