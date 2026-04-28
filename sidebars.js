@@ -670,8 +670,15 @@ module.exports = {
           },
           items: [
             {
-              type: "doc",
-              id: "components/hub/organization/manage-workspaces/manage-workspaces",
+              type: "category",
+              label: "Manage workspaces",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-workspaces/manage-workspaces",
+              },
+              items: [
+                "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+              ],
             },
             {
               type: "category",
@@ -855,7 +862,6 @@ module.exports = {
                     "components/modeler/web-modeler/collaboration/collaborate-with-modes",
                     "components/modeler/web-modeler/collaboration/design-your-process",
                     "components/modeler/web-modeler/collaboration/implement-your-process",
-                    "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
                     "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
                   ],
                 },

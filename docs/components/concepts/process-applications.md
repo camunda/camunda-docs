@@ -21,7 +21,7 @@ For instance, a consumer loan approval process application might bundle:
 - Forms (for example, loan-application-review.form) for user interactions.
 
 :::tip
-We recommend you use a process application for all your non-trivial automation projects.
+We recommend you use a process application for all your non-trivial automation solutions.
 :::
 
 Our [Modeler](../modeler/about-modeler.md) applications support you as you develop a process application by different means:
