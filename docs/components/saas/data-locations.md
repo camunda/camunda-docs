@@ -8,15 +8,11 @@ Learn more about where your Camunda 8 SaaS data is located and how data is handl
 
 ## About Camunda 8 SaaS data locations
 
-- Console and the Web Modeler are hosted in the EU.
+- Camunda Hub is hosted in the EU.
 - You can create Camunda Orchestration Clusters on AWS (Amazon Web Services) or GCP (Google Cloud Platform) in the [region](regions.md) of your choice.
 
 :::caution Processing personal data
 Unless specifically mentioned, Camunda does not process personal data on behalf of its customers. It is the responsibility of you as the customer to decide whether to use Camunda for processing personal data.
-:::
-
-:::note planned changes from GCP to AWS
-Some components are changing from GCP to AWS as part of planned improvements to Camunda 8 SaaS. For example, Console and connector secrets are planned to change to AWS hosting in December 2025.
 :::
 
 ## Alerts
@@ -33,7 +29,7 @@ Camunda 8 Alerts are optional. This information only applies if you use Alerts.
 
 ## Connector secrets (credentials)
 
-This only applies if you want to create [connector secrets](/components/console/manage-clusters/manage-secrets.md) and are using the Camunda-hosted connector version. Connector secrets are configured and referenced via Console.
+This only applies if you want to create [connector secrets](/components/console/manage-clusters/manage-secrets.md) and are using the Camunda-hosted connector version. Connector secrets are configured and referenced via Camunda Hub.
 
 - If you want to control the location where the secrets are stored, you can also [host your own connector runtime](/components/connectors/custom-built-connectors/host-custom-connector.md).
 - If you want to use your own secret management solution, see [Secrets (Self‑Managed)](/self-managed/components/connectors/connectors-configuration.md).
@@ -46,13 +42,16 @@ This only applies if you want to create [connector secrets](/components/console/
 Connector secrets are optional. This information only applies if you use connector secrets.
 :::
 
-## Console
+## Camunda Hub
 
-The Camunda‑hosted [Console](/components/console/introduction-to-console.md) admin UI is used for cluster and organization management.
+[Camunda Hub](/components/hub/index.md) is used for cluster and organization management as well as hosting the browser-based modeler.
 
-| Host location                                                        | Data handled                                      | Personal data processing                                                                                                                                                        |
-| :------------------------------------------------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <p>Belgium, EU (GCP)</p><p>From December 2025: Germany, EU (AWS)</p> | Only stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
+| Host location            | Data handled                                 | Personal data processing                                                                                                                                                        |
+| :----------------------- | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <p>Germany, EU (AWS)</p> | Stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
+| Belgium, EU (GCP)        | Stores process models (diagrams/designs).    | Not intended for personal data processing.                                                                                                                                      |
+
+You can use Camunda Hub and/or the [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda Self‑Managed if you want to control the hosting location.
 
 ## Admin
 
@@ -80,7 +79,7 @@ You can choose a [region](regions.md) in **GCP** or **AWS**. Each [Orchestration
 :::info Learn More
 
 - [Backups](/components/saas/backups.md)
-- [Console backups](/components/console/manage-clusters/cluster-backups.md)
+- [Cluster backups](/components/console/manage-clusters/cluster-backups.md)
 
 :::
 
@@ -97,11 +96,3 @@ As a customer, you can either use the Camunda‑hosted REST connector, or [host 
 :::note optional
 Use of the REST connector is optional. This information only applies if you use the REST connector.
 :::
-
-## Web Modeler
-
-You can use the Camunda‑hosted [Web Modeler](/components/modeler/web-modeler/index.md) in the EU, or [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda Self‑Managed if you want to control the hosting location.
-
-| Host location     | Data handled                                   | Personal data processing                   |
-| :---------------- | :--------------------------------------------- | :----------------------------------------- |
-| Belgium, EU (GCP) | Only stores process models (diagrams/designs). | Not intended for personal data processing. |

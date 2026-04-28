@@ -10,7 +10,7 @@ Manage your cluster settings using authorizations, automatic cluster updates, an
 
 To manage your cluster settings:
 
-1. Navigate to **Console**, and select the **Clusters** tab.
+1. Navigate to **Camunda Hub**, and select the **Clusters** tab.
 2. Select the cluster you want to manage, and select the **Settings** tab.
 3. Enable/disable cluster settings as required, or delete the cluster.
 
