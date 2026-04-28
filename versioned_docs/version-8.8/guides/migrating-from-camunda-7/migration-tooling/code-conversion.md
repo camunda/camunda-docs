@@ -7,6 +7,10 @@ description: "Understand patterns to convert your code written for Camunda 7 to 
 
 As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (BPMN and DMN) and some of your code to work with the Orchestration Cluster REST API.
 
+:::tip Easiest path: use the Camunda migration agent skill
+If you have access to an agentic AI coding tool such as Claude Code, GitHub Copilot, or Cursor, you can run an interactive end-to-end migration with the official [Camunda migration agent skill](#camunda-migration-agent-skill) instead of running each tool on this page manually. See [Leveraging AI for refactoring](#leveraging-ai-for-refactoring) for details.
+:::
+
 ## Overview
 
 You must especially rewrite code that does the following:
@@ -294,7 +298,43 @@ Find the diagram conversion tooling and its documentation in the [Migration Tool
 
 ## Leveraging AI for refactoring
 
-You can use AI tools such as ChatGPT, GitHub Copilot, or other AI assistants to help with refactoring tasks. In testing, simple prompts often produce correct results, although you may need several iterations to ensure the refactored code aligns with your target architecture.
+You can use AI to migrate code in two ways — pick whichever fits your tooling and access:
+
+- **Use the [Camunda migration agent skill](#camunda-migration-agent-skill)** with an agentic AI coding tool such as Claude Code, GitHub Copilot, or Cursor. This is the easiest option if you have access to such a tool: the skill drives an interactive end-to-end migration (assessment, OpenRewrite, AI cleanup, validation).
+- **Drive AI yourself with [example prompts](#example-prompts)**. This works with any AI tool, including standalone chat assistants such as ChatGPT or Claude.ai. Copy a prompt, paste your code, and apply the results manually.
+
+### Camunda migration agent skill
+
+For the fastest path, use the official Camunda migration [Agent Skill](https://agentskills.io/). It packages assessment, OpenRewrite, AI cleanup, and validation into an interactive workflow that runs inside your AI coding agent.
+
+**Install with Claude Code:**
+
+```bash
+claude plugin marketplace add camunda/camunda-7-to-8-migration-tooling
+claude plugin install camunda-migration
+```
+
+**Other agents** — the skill follows the open [Agent Skills](https://agentskills.io/) format and works with any compatible agent. See the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/agentic-migration-skills) for manual installation.
+
+**Run** from your Camunda 7 project directory:
+
+```
+/camunda-migration:migrate-c7-to-c8
+```
+
+The skill asks for your project path and migration approach, then guides you through:
+
+| Approach                             | What it does                                                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| **OpenRewrite + AI** _(recommended)_ | Runs OpenRewrite recipes for bulk transforms, then AI resolves remaining TODOs, configuration, and test code |
+| **AI only**                          | AI migrates everything directly — for non-Maven/Gradle builds or when you want to review every change        |
+| **Assessment only**                  | Scans the codebase and reports files, complexity, and effort estimate — no code changes                      |
+
+The skill fetches the latest [pattern catalog](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md) at runtime, so it always reflects current migration guidance.
+
+### Example prompts
+
+If you do not have access to an agentic coding tool, you can drive any AI tool — including standalone chat assistants such as ChatGPT or GitHub Copilot — with prompts. In testing, simple prompts often produce correct results, although you may need several iterations to ensure the refactored code aligns with your target architecture.
 
 In the [migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases), we used ChatGPT to rewrite test cases with the following sample prompt:
 
