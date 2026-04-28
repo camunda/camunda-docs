@@ -63,9 +63,7 @@ export default function NavbarContent(): JSX.Element {
   );
 
   // Separate Help dropdown and Try Free button for custom ordering
-  const helpItems = rightItems.filter(
-    (i) => (i as any).type === "dropdown"
-  );
+  const helpItems = rightItems.filter((i) => (i as any).type === "dropdown");
   const tryFreeItems = rightItems.filter(
     (i) => (i as any).type !== "dropdown" && (i as any).className?.includes("try-free")
   );
