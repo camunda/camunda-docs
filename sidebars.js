@@ -280,6 +280,7 @@ module.exports = {
           items: [
             "components/modeler/web-modeler/idp/idp-configuration",
             "components/modeler/web-modeler/idp/idp-applications",
+            "components/modeler/web-modeler/idp/idp-document-classification",
             {
               type: "category",
               label: "Document extraction",

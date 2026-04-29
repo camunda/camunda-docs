@@ -21,7 +21,7 @@ Document extraction templates form the basis for using IDP in your end-to-end pr
 
 To create a new document extraction template:
 
-1. In your [IDP application](idp-applications.md), click **Create extraction project** to open the Create new project modal.
+1. In your [IDP application](idp-applications.md), click **Create new** and select **Extraction template** to open the Create new project modal.
    <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="700px" style={{marginTop: '0'}} />
 1. Select the **Extraction method** depending on whether your documents contain structured or unstructured data.
    - **Unstructured data extraction**: Extract data from unstructured documents.
