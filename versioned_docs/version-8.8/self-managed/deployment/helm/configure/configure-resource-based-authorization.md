@@ -5,7 +5,7 @@ title: Configure resource-based authorization in Helm chart
 description: "Learn how to configure resource-based authorization (RBA) in Camunda 8 Self-Managed using a single global Helm value."
 ---
 
-Resource-based authorization (RBA) lets administrators grant access to specific Orchestration Cluster resources — process definitions, decisions, forms, and so on — instead of relying solely on tenant-wide permissions. For the underlying authorization model, see [Orchestration Cluster authorization](/components/concepts/access-control/authorizations.md); for managing authorizations at runtime, see [Authorizations in Admin](/components/admin/authorization.md).
+Resource-based authorization (RBA) lets administrators grant access to specific Orchestration Cluster resources — process definitions, decisions, forms, and so on — instead of relying solely on tenant-wide permissions. For the underlying authorization model, see [Orchestration Cluster authorization](/components/concepts/access-control/authorizations.md).
 
 This page explains how to enable RBA from the Camunda 8 Helm chart using the single `global.rba.enabled` value, the constraints you need to be aware of, and the upgrade behavior for users who previously configured RBA manually.
 

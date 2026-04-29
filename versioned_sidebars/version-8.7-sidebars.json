@@ -1989,6 +1989,7 @@
           ]
         },
         "self-managed/operational-guides/configure-multi-tenancy",
+        "self-managed/operational-guides/configure-resource-based-authorization",
         {
           "type": "category",
           "label": "Production guides",
