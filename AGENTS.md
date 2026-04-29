@@ -29,6 +29,91 @@ This repository contains the public Camunda 8 documentation published at <https:
 | `.github/instructions/`     | Condensed instructions for AI tooling. Always read before editing.                                        |
 | `spec/`                     | Playwright regression specs.                                                                              |
 
+## Where each Camunda component is documented
+
+Camunda 8 is a suite of components. Use this map to find the right folder before editing. Paths are shown for the Next docs (`/docs/`); the same structure exists under each `versioned_docs/version-*/`.
+
+### Top-level documentation areas
+
+| Area                | Path                 | What lives here                                                                                                                    |
+| ------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Components          | `docs/components/`   | User-facing docs for each Camunda component (Operate, Tasklist, Modeler, Connectors, etc.) and shared concepts.                    |
+| Self-Managed        | `docs/self-managed/` | Installation, deployment, and operations for customers running Camunda 8 themselves (Helm, Docker, manual, upgrade, architecture). |
+| APIs and tools      | `docs/apis-tools/`   | REST APIs, gRPC, SDKs, clients, CLIs, and developer tooling.                                                                       |
+| Guides              | `docs/guides/`       | End-to-end getting-started and migration tutorials.                                                                                |
+| Reference           | `docs/reference/`    | Release notes, supported environments, glossary, legal, announcements.                                                             |
+| Versioned snapshots | `versioned_docs/`    | Frozen copies of all of the above per released minor version.                                                                      |
+
+### Components area (`docs/components/`)
+
+| Camunda component               | Path                                                       | Notes                                                                                                            |
+| ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Orchestration cluster (Zeebe)   | `components/zeebe/`, `components/orchestration-cluster.md` | Workflow engine internals, deployment concepts, exporters. Zeebe is the engine inside the orchestration cluster. |
+| Operate                         | `components/operate/`                                      | Monitoring and troubleshooting running process instances.                                                        |
+| Tasklist                        | `components/tasklist/`                                     | Human task list UI for end users.                                                                                |
+| Optimize                        | `components/optimize/`                                     | Process analytics, dashboards, KPIs.                                                                             |
+| Web Modeler and Desktop Modeler | `components/modeler/`                                      | BPMN, DMN, and Forms authoring. Includes element templates and Play.                                             |
+| Connectors                      | `components/connectors/`                                   | Out-of-the-box connectors and custom connector authoring.                                                        |
+| Console                         | `components/console/`                                      | SaaS and Self-Managed administration UI.                                                                         |
+| Identity / Admin                | `components/admin/`                                        | User management, authorizations, tenants, identity federation.                                                   |
+| Agentic orchestration           | `components/agentic-orchestration/`                        | AI agent orchestration features.                                                                                 |
+| RPA                             | `components/rpa/`                                          | Robotic process automation.                                                                                      |
+| Document handling               | `components/document-handling/`                            | Document store and document references in processes.                                                             |
+| Audit log                       | `components/audit-log/`                                    | Audit trail features.                                                                                            |
+| Hub                             | `components/hub/`                                          | Camunda Hub (shared assets, marketplace).                                                                        |
+| Camunda integrations            | `components/camunda-integrations/`                         | First-party integrations (Slack, Microsoft 365, Salesforce, etc.).                                               |
+| Concepts                        | `components/concepts/`                                     | Cross-component concepts: BPMN/DMN/FEEL, expressions, incidents, batch operations, access control.               |
+| Best practices                  | `components/best-practices/`                               | Modeling and operational best practices.                                                                         |
+| Early access                    | `components/early-access/`                                 | Alpha/beta features not yet GA.                                                                                  |
+| SaaS specifics                  | `components/saas/`                                         | SaaS-only topics: regions, BYOK, IP addresses, auto-updates, monitoring, secure connectivity.                    |
+
+### Self-Managed area (`docs/self-managed/`)
+
+| Topic                        | Path                                                                                                                                                         | Notes                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Setup overview               | `self-managed/setup/`                                                                                                                                        | Pre-install planning and the deploy entry point.                                                       |
+| Deployment                   | `self-managed/deployment/helm/`, `.../docker/`, `.../containers/`, `.../manual/`                                                                             | How to install Camunda 8 with each method.                                                             |
+| Reference architecture       | `self-managed/reference-architecture/`                                                                                                                       | Sizing, topology, networking, storage recommendations.                                                 |
+| Component-specific SM topics | `self-managed/components/orchestration-cluster/`, `.../management-identity/`, `.../console/`, `.../modeler/`, `.../connectors/`, `.../optimize/`, `.../hub/` | Self-Managed-only configuration, secrets, networking, exporters, and upgrade notes for each component. |
+| Components upgrade           | `self-managed/components/components-upgrade/`                                                                                                                | Per-component upgrade guides (do not confuse with the top-level `upgrade/` area).                      |
+| Operational guides           | `self-managed/operational-guides/`                                                                                                                           | Backups, monitoring, troubleshooting, license rotation.                                                |
+| Upgrade                      | `self-managed/upgrade/`                                                                                                                                      | Cross-cutting upgrade procedures across versions.                                                      |
+| Quickstart                   | `self-managed/quickstart/`                                                                                                                                   | Fastest local install path.                                                                            |
+
+### APIs and tools area (`docs/apis-tools/`)
+
+| API or tool                     | Path                                                                         | Notes                                                                    |
+| ------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Orchestration Cluster REST API  | `apis-tools/orchestration-cluster-api-rest/`                                 | Primary unified REST API for the cluster. Largely OpenAPI-generated.     |
+| Orchestration Cluster API (MCP) | `apis-tools/orchestration-cluster-api-mcp/`                                  | Model Context Protocol server for the cluster API.                       |
+| Zeebe API (gRPC and REST)       | `apis-tools/zeebe-api/`, `apis-tools/zeebe-api-rest/`                        | Engine-level APIs (legacy gRPC and the REST surface).                    |
+| Operate API                     | `apis-tools/operate-api/`                                                    | Operate REST API.                                                        |
+| Tasklist API                    | `apis-tools/tasklist-api-rest/`                                              | Tasklist REST API.                                                       |
+| Optimize API                    | `apis-tools/optimize-api/`                                                   | Optimize public API.                                                     |
+| Administration APIs (SaaS / SM) | `apis-tools/administration-api/`, `apis-tools/administration-sm-api/`        | SaaS console API and Self-Managed administration API.                    |
+| Web Modeler API                 | `apis-tools/web-modeler-api/`                                                | Web Modeler programmatic API.                                            |
+| Java client                     | `apis-tools/java-client/`                                                    | Official Java client.                                                    |
+| Spring Boot starter             | `apis-tools/camunda-spring-boot-starter/`                                    | Java/Spring integration. Reference is generated via `config-reference/`. |
+| C# / Python / TypeScript SDKs   | `apis-tools/csharp-sdk/`, `apis-tools/python-sdk/`, `apis-tools/typescript/` | Official SDKs.                                                           |
+| `c8ctl` CLI                     | `apis-tools/c8ctl/`                                                          | Camunda 8 CLI.                                                           |
+| Community clients               | `apis-tools/community-clients/`                                              | Community-maintained clients.                                            |
+| Migration manuals               | `apis-tools/migration-manuals/`                                              | API and SDK migration between versions.                                  |
+| Frontend development            | `apis-tools/frontend-development/`                                           | Embedding and extending Camunda UIs.                                     |
+| Testing                         | `apis-tools/testing/`                                                        | Process testing tooling.                                                 |
+
+### Guides and reference
+
+| Path              | Audience and content                                                                                                                   |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `docs/guides/`    | Hello-world, getting-started flows (APIs, human tasks, agentic orchestration), Camunda 7 migration.                                    |
+| `docs/reference/` | Release notes (`announcements-release-notes/`), `glossary.md`, `supported-environments.md`, legal, MCP docs index, public API summary. |
+
+### Generated content (do not hand-edit)
+
+- `api/` — OpenAPI specs and generation scripts. Edit specs here, not the generated pages.
+- `config-reference/` — Spring Boot starter configuration metadata. Regenerate via the `config-reference:*` npm scripts.
+- API reference pages under `docs/apis-tools/*-api*/` for the REST APIs are largely produced by the `api:generate:*` scripts.
+
 ## Required reading before changes
 
 Read these in order before editing — they are authoritative:
