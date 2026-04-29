@@ -42,31 +42,49 @@ To let an agent query a vector database, add a Vector Database connector task in
 
 Configure the task as follows:
 
-1. Set **Operation** to **Retrieve document**.
-2. Set **Search query** using the [`fromAi()`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) function so the LLM generates the query dynamically at runtime:
+1. Give the task a clear **Name** and write a descriptive **Element documentation** to help the LLM understand when to use this tool. The element documentation is passed to the LLM as the [tool description](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions).
+2. Set **Operation** to **Retrieve document**.
+3. Set **Search query** using the [`fromAi()`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) function so the LLM generates the query dynamically at runtime:
 
 ```feel
 fromAi(toolCall.query, "The query you're making to the vector database.")
 ```
 
-3. Set **Max results** to control how many matching documents are returned (the default is five). If the agent doesn't find what it needs on the first attempt, it can re-invoke the tool with a different query.
-4. Configure the [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) with your provider credentials.
-5. Configure the [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with your database connection details and **index name**.
-6. Set the output **Result variable** to `toolCallResult`.
-7. Give the task a clear **Name** and write a descriptive **Element documentation** to help the LLM understand when to use this tool. The element documentation is passed to the LLM as the [tool description](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions).
+4. Set **Max results** to control the maximum number of documents returned. For example, set it to five.
+5. Configure the [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) with your provider credentials.
+6. Configure the [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with your database connection details and **index name**. The index name identifies the collection of documents the agent searches. You can use different indexes for different knowledge domains.
 
-:::note
-The index name identifies the collection of documents the agent searches. You can use different indexes for different knowledge domains and, if needed, make the index name dynamic using `fromAi()` so the agent selects the appropriate knowledge base for each query.
+:::tip
+You can make the index name dynamic using `fromAi()` so the agent selects the appropriate knowledge base for each query. For example:
+
+```
+**Index name**: fromAi("indexName", "The name of the knowledge base index to search, e.g. 'support-kb' or 'product-docs'")
+```
+
 :::
+
+7. In the **Output mapping** section, set the output **Result variable** to `toolCallResult`.
 
 ### Handle missing or empty results
 
-Add an [**error boundary event**](/components/modeler/bpmn/call-activities/call-activities.md#boundary-events) to the Vector Database connector task to handle cases where the index does not exist or the query returns no results:
+To prevent process failures when no results are retrieved, you can set an error handler to inform the agent as follows.
 
-- Set the error code to match an `index not found` error.
-- In the boundary event output, set `toolCallResult` to a value such as `"Nothing was found"` so the agent receives a clear, graceful response instead of an unhandled error.
+1. In the **Error handling** section, set the **Error expression** to handle these scenarios. For example:
 
-This prevents process failures when the knowledge base is empty or when an index has not yet been created.
+```
+if contains(error.message, "index_not_found") then bpmnError("index_not_found", "The index does not exist") else null
+```
+
+2. Add an [**error boundary event**](/components/modeler/bpmn/call-activities/call-activities.md#boundary-events) to the Vector Database connector:
+3. In the boundary event's **Output mapping** section, add an output variable as follows:
+
+- Set **Process variable name** to `toolCallResult`.
+- Set **Variable assignment value** to:
+  ```
+  {
+    "searchResult": "Nothing was found"
+  }
+  ```
 
 ## Populate the vector database
 
