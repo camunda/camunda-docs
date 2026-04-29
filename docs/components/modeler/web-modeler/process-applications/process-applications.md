@@ -17,7 +17,7 @@ For example, a project for a consumer loan application might consist of a BPMN d
 
 ## Project development lifecycle
 
-In Web Modeler, you can quickly develop project releases through the stages of a typical development lifecycle.
+In Camunda Hub, you can quickly develop project releases through the stages of a typical development lifecycle.
 
 - [Project development lifecycle](process-application-pipeline.md)
 
