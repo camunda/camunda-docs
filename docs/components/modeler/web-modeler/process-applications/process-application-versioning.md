@@ -1,7 +1,7 @@
 ---
 id: process-application-versioning
-title: Process application versioning
-description: Process applications allow you to create distinct versions for the entire application.
+title: Project versioning
+description: Projects allow you to create distinct versions for the entire application.
 ---
 
 import CreateVersionMenuImg from '../img/versions/web-modeler-versions.png'
@@ -9,22 +9,14 @@ import CreateVersionModalImg from '../img/versions/web-modeler-version-create-pr
 import VersionActionsImg from '../img/versions/web-modeler-version-actions.png'
 import VersionListImg from '../img/versions/web-modeler-version-view-process-application-version.png'
 
-:::note
-With 8.7, "milestone" was renamed to "version". To learn more about this change, see [the related release note](/reference/announcements-release-notes/870/870-release-notes.md#web-modeler-milestones-renamed-to-versions).
-:::
-
-:::note
-With 8.9, the main process label has been removed from process applications in Web Modeler. As a result, creating a process application version no longer sets the `versionTag` automatically on the main process XML. This does not affect the process application version tag you enter in the version creation modal. To set `versionTag` values on BPMN, DMN, form, and RPA files, edit them manually in the properties panel. See the related announcements on [main process label removal](/reference/announcements-release-notes/890/890-announcements.md#web-modeler-the-main-process-label-has-been-removed-from-process-applications) and [version tag control](/reference/announcements-release-notes/890/890-announcements.md#web-modeler-users-now-have-full-control-over-version-tags-in-process-applications).
-:::
-
-Process applications support versioning, allowing you to create distinct versions for the entire application. You can use versioning to save a single snapshot of all the process application files in one action. This helps you track a process application throughout its development lifecycle and ensures the correct version is referenced.
+Projects support versioning, allowing you to create distinct versions for the entire project. You can use versioning to save a single snapshot of all the project files in one action. This helps you track a project throughout its development lifecycle and ensures the correct version is referenced.
 
 ## Version creation
 
-To create a process application version:
+To create a project version:
 
-1. Open the [process application homepage](create-a-process-application.md#process-application-homepage) and click **Create version** in the **Versions** section.
-   <img src={CreateVersionMenuImg} alt="Create version on the process application homepage" style={{maxWidth: '560px', width: '100%'}} />
+1. Open the [project homepage](create-a-process-application.md#process-application-homepage) and click **Create version** in the **Versions** section.
+   <img src={CreateVersionMenuImg} alt="Create version on the project homepage" style={{maxWidth: '560px', width: '100%'}} />
 2. Enter a **Version tag** in the version creation modal.
    <img src={CreateVersionModalImg} alt="Create a version modal" style={{maxWidth: '560px', width: '100%'}} />
 3. Select the **Create** button.
@@ -35,7 +27,7 @@ On the versions page, which you open with **See full list**, you can use the fil
 
 ## Version actions
 
-You can perform the following actions on a process application version:
+You can perform the following actions on a project version:
 
 1. View details, which opens the version details page so you can review the contents of all files in the version.
 1. Restore as latest, which is useful for reverting changes, making further edits, [git syncing](git-sync.md), downloading, or using Play.
@@ -43,6 +35,6 @@ You can perform the following actions on a process application version:
 1. Deploy, especially after the version has been [reviewed](./process-application-pipeline.md#review).
 1. Download
 1. Delete
-1. Copy, which creates a new process application with the files from the version.
+1. Copy, which creates a new project with the files from the version.
 
 <img src={VersionActionsImg} alt="Version actions" style={{maxWidth: '560px', width: '100%'}} />

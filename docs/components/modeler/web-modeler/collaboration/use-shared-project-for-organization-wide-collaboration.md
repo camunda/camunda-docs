@@ -50,7 +50,7 @@ If you previously invited collaborators to your organization _and_ workspace in 
 
 ## Share resources within a workspace
 
-You can publish a specific [version](/components/modeler/web-modeler/modeling/versions.md) of a file or process application within the workspace.
+You can publish a specific [version](/components/modeler/web-modeler/modeling/versions.md) of a file or project within the workspace.
 
 1. From the BPMN diagram, select the **Versions** dropdown in the top right corner.
 2. Select the three vertical dots on the right side of the version labeled **Browse version actions**.
@@ -72,14 +72,14 @@ You can open the process landscape view by clicking **View landscape** from any 
 
 - Workspace view
 - Folder view
-- [Process application](/components/modeler/web-modeler/process-applications/process-applications.md) view
+- [Project](/components/modeler/web-modeler/process-applications/process-applications.md) view
 
 ### Landscape view interaction
 
 1. **Select a BPMN file:** Click on any node to see the BPMN file’s information including the latest version of the process on the sidebar.
 
    :::note
-   For process applications, version tags represent a unified "versioned" snapshot of all process application files rather than separate versions for each file as with simple BPMN files.
+   For projects, version tags represent a unified "versioned" snapshot of all project files rather than separate versions for each file as with simple BPMN files.
    :::
    ![selected node information](../img/process-landscape-node-information.png)
 
@@ -98,13 +98,13 @@ To access the associated README file for a process within the workspace:
 
 ## Next steps
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced:
+Organization owners and administrators can connect their Web Modeler projects to GitHub and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced:
 
 ![process org landscape architecture](../img/process-org-landscape-architecture.png)
 
 To keep your process landscape up to date with all changes in production, take the following steps:
 
-1. Sync the process application to the feature branch of a subfolder in a repository.
+1. Sync the project to the feature branch of a subfolder in a repository.
 2. Merge the feature branch to main.
 3. Begin the [CI/CD pipeline](/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd.md).
 4. Sync your main branch to the workspace as part of the CI/CD pipeline.

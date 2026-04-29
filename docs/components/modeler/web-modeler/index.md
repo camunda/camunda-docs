@@ -23,8 +23,8 @@ It enables teams to collaboratively design executable processes as the foundatio
 | [Collaboration](./collaboration/collaboration.md)                             | Work with team members to speed up the process development cycle.                               |
 | [Play mode](validation/play-your-process.md)                                  | Test and validate processes during development.                                                 |
 | [Camunda Marketplace](./modeling/camunda-marketplace.md)                      | Extend Web Modeler with prebuilt blueprints and connectors.                                     |
-| [Process applications](./process-applications/process-applications.md)        | Work with sets of files and deploy them in a single bundle.                                     |
-| [Git synchronization](process-applications/git-sync.md)                       | Connect process applications to Git repositories for version control.                           |
+| [Projects](./process-applications/process-applications.md)                    | Work with sets of files and deploy them in a single bundle.                                     |
+| [Git synchronization](process-applications/git-sync.md)                       | Connect projects to Git repositories for version control.                                       |
 | [Process landscape visualization](./process-landscape-visualization.md)       | View dependencies and interactions between processes at a glance.                               |
 | [Intelligent Document Processing (IDP)](./intelligent-document-processing.md) | Extract and process data from documents to accelerate process automation.                       |
 | [AI-powered assistance](modeling/advanced-modeling/camunda-docs-ai.md)        | Get intelligent modeling suggestions and automation support.                                    |

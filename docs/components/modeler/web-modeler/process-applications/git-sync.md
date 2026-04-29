@@ -7,7 +7,7 @@ description: Connect Web Modeler to your Git repositories to keep your projects 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps, allowing users to keep their Web Modeler and Desktop Modeler projects in sync with their version control repositories.
+Organization owners and administrators can connect their Web Modeler projects to GitHub, GitLab, and Azure DevOps, allowing users to keep their Web Modeler and Desktop Modeler projects in sync with their version control repositories.
 
 Once the connection is configured by an organization owner or administrator, project administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
 
@@ -54,7 +54,7 @@ Click **Create GitHub App** to finish.
 
 <h3> Configure GitHub in Web Modeler </h3>
 
-1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect repository**.
+1. Within Web Modeler, navigate to the project you would like to connect to GitHub, and click **Connect repository**.
 
 2. Select the **GitHub** tile (if not already selected), located at the top of the modal.
 
@@ -72,7 +72,7 @@ Click **Create GitHub App** to finish.
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
    - **Repository URL:** The base URL of the repository you want to sync with, for example `https://github.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
    - **Branch name:** The branch name to use for merging and managing changes.
-   - **Repository path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Repository path:** (optional) The path to the folder containing your project files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -109,7 +109,7 @@ To generate a project access token, follow the [GitLab documentation](https://do
 
 <h3> Configure GitLab in Web Modeler </h3>
 
-1. In Web Modeler, navigate to the process application you want to connect to GitLab, and click **Connect repository**.
+1. In Web Modeler, navigate to the project you want to connect to GitLab, and click **Connect repository**.
 
 2. In the modal, select the **GitLab** tile at the top.
 
@@ -124,7 +124,7 @@ To generate a project access token, follow the [GitLab documentation](https://do
 
    - **Repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
    - **Branch:** The name of the branch to use for merging and managing changes.
-   - **Repository path:** (optional) The folder path that contains your process application files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
+   - **Repository path:** (optional) The folder path that contains your project files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
 
 4. Click **Open repository** to test the configuration. The repository for the selected branch and optional path will open in a new browser tab.
 
@@ -165,7 +165,7 @@ Ensure the following:
 If you're using a self-hosted Azure DevOps Server instance, see [Self-Managed Git sync](/self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for configuration details.
 :::
 
-1. Within Web Modeler, navigate to the process application you would like to connect to Azure, and select **Connect repository**.
+1. Within Web Modeler, navigate to the project you would like to connect to Azure, and select **Connect repository**.
 
 2. Select the **Azure** tile, located at the top of the modal.
 
@@ -176,7 +176,7 @@ If you're using a self-hosted Azure DevOps Server instance, see [Self-Managed Gi
    - **Certificate:** The certificate used to register the application in PEM format.
    - **Repository URL:** The base URL of the repository you want to sync with, for example `https://dev.azure.com/camunda/my-project/_git/example-repo`. The URL cannot contain the `.git` extension or a folder path. By default, the first repository you create will have the same name as the project and the URL won't explicitly have the project name in it, for example `https://dev.azure.com/camunda/_git/example-repo`.
    - **Branch:** The name of the branch to use for merging and managing changes.
-   - **Repository path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Repository path:** (optional) The path to the folder containing your project files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -232,7 +232,7 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
 
 <h3>Configure Bitbucket Cloud in Web Modeler</h3>
 
-1. In Web Modeler, navigate to the process application you want to connect to Bitbucket Cloud, and click **Connect repository**.
+1. In Web Modeler, navigate to the project you want to connect to Bitbucket Cloud, and click **Connect repository**.
 
 2. Select the **Bitbucket** tile at the top of the modal.
 
@@ -241,7 +241,7 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
    - **Bitbucket API Base URL:** Leave empty. Only required for [Bitbucket Data Center](./git-sync.md?platform=bitbucket-data-center) instances.
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda/example-repo`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
-   - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
+   - **Repository path:** (optional) The folder path containing your project files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the specified branch and optional path will open in a new tab.
 
@@ -275,7 +275,7 @@ Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbuckets
 
 <h3>Configure Bitbucket Data Center in Web Modeler</h3>
 
-1. In Web Modeler, navigate to the process application you want to connect to Bitbucket Data Center, and click **Connect repository**.
+1. In Web Modeler, navigate to the project you want to connect to Bitbucket Data Center, and click **Connect repository**.
 
 2. Select the **Bitbucket** tile at the top of the modal.
 
@@ -291,7 +291,7 @@ Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbuckets
 
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path. For personal repositories, use `~{user}` as the project ID (for example, `projects/~alice/repos/example-repo`).
    - **Branch name:** The branch to use for merging and managing changes.
-   - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
+   - **Repository path:** (optional) The folder path containing your project files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the specified branch and optional path will open in a new tab.
 
@@ -305,8 +305,8 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
-1. In your connected process application, click **Sync with _GitProvider_** button.
-2. Enter a [version number](process-applications.md#process-application-versioning) to create a new version for your process application. The new version will be created prior to pushing your changes to the central repository.
+1. In your connected project, click **Sync with _GitProvider_** button.
+2. Enter a [version number](process-applications.md#process-application-versioning) to create a new version for your project. The new version will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
@@ -340,19 +340,19 @@ If you are using Git sync to work with monorepos, you should pull changes regula
 
 ### Parallel feature development
 
-Git sync supports parallel feature development by allowing multiple process applications to be connected to different feature branches. This allows teams to work on multiple features simultaneously without interfering with each other's work.
+Git sync supports parallel feature development by allowing multiple projects to be connected to different feature branches. This allows teams to work on multiple features simultaneously without interfering with each other's work.
 
 To use Git sync for parallel feature development:
 
-1. Create a new [process application](create-a-process-application.md) in Modeler for each active feature branch you want to develop.
+1. Create a new [project](create-a-process-application.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
 3. Work on your feature in Modeler, using **Sync with _GitProvider_** to pull and push changes as needed.
-4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.
+4. Once the feature is complete and merged into the main branch, you can delete the project associated with the feature branch.
 
-To perform hotfixes or patches of production or production-bound processes, sync a copy of the process application to the `main` branch.
+To perform hotfixes or patches of production or production-bound processes, sync a copy of the project to the `main` branch.
 
 :::caution
-Creating multiple copies of a process application can complicate navigation and deployment if you have multiple files with the same ID in a project. To avoid this, you can create copies of the process application in different projects.
+Creating multiple copies of a project can complicate navigation and deployment if you have multiple files with the same ID in a project. To avoid this, you can create copies of the project in different projects.
 :::
 
 ## Self-Managed environment variables
