@@ -36,9 +36,17 @@ To configure either operation, you need:
 - A supported [embedding model](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) and its provider credentials.
 - An index name that identifies the collection to read from or write to.
 
-## Add a vector database query tool
+## Retrieve context from the vector database
 
-To let an agent query a vector database, add a Vector Database connector task inside the AI Agent's [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) with no incoming sequence flows. Tasks with no incoming flows are treated as available [tools](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) by the AI Agent connector.
+To perform a semantic search from a vector database, you can use one of the following two approaches.
+
+### Add a vector database query tool
+
+To let an agent query a vector database, add a **Vector Database connector task** with no incoming sequence flows inside the AI Agent's [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+
+:::note
+Tasks with no incoming flows are treated as available [tools](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) by the AI Agent connector.
+:::
 
 Configure the task as follows:
 
@@ -53,19 +61,9 @@ fromAi(toolCall.query, "The query you're making to the vector database.")
 4. Set **Max results** to control the maximum number of documents returned. For example, set it to five.
 5. Configure the [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) with your provider credentials.
 6. Configure the [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with your database connection details and **index name**. The index name identifies the collection of documents the agent searches. You can use different indexes for different knowledge domains.
-
-:::tip
-You can make the index name dynamic using `fromAi()` so the agent selects the appropriate knowledge base for each query. For example:
-
-```
-**Index name**: fromAi("indexName", "The name of the knowledge base index to search, e.g. 'support-kb' or 'product-docs'")
-```
-
-:::
-
 7. In the **Output mapping** section, set the output **Result variable** to `toolCallResult`.
 
-### Handle missing or empty results
+#### Handle missing or empty results
 
 To prevent process failures when no results are retrieved, you can set an error handler to inform the agent as follows.
 
@@ -86,12 +84,77 @@ if contains(error.message, "index_not_found") then bpmnError("index_not_found", 
   }
   ```
 
+### Prefetch context with a vector database retrieval
+
+Instead of letting the agent decide when to query the vector database via a tool, you can retrieve relevant context **before** the agent runs and pass it directly as part of the user message. This ensures the agent always has access to relevant knowledge from the first interaction, without requiring a tool call.
+
+This pattern is useful when:
+
+- The user's query is predictable enough to retrieve meaningful context upfront.
+- You want to reduce the number of tool calls and agent reasoning steps.
+- The agent should ground its first response in domain-specific knowledge without deciding whether to search.
+
+#### Configure the retrieval task
+
+1. Add a **Vector Database connector task** in your process, sequenced before the AI Agent connector task.
+2. Set **Operation** to **Retrieve document**.
+3. Set **Search query** to the user's input. For example, if the user query is stored in a process variable:
+
+```feel
+userQuery
+```
+
+4. Set **Max results** to control the maximum number of documents returned. For example, set it to five.
+5. Configure the [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) with your provider credentials.
+6. Configure the [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with your database connection details and **index name**. The index name identifies the collection of documents the agent searches. You can use different indexes for different knowledge domains.
+7. In the **Output mapping** section, set the output **Result variable** to `retrievalResult`.
+
+### Pass retrieved context to the agent
+
+Once the retrieval task completes, include its results in the AI Agent's user message. There are two approaches:
+
+#### Concatenate as text
+
+Build the user message by appending the retrieved text to the original query:
+
+```feel
+userQuery + "
+
+Use the following context to inform your answer:
+" + " ".join(retrievalResult.searchResult)
+```
+
+This works well when the retrieved content is short and you want the agent to treat it as inline context.
+
+#### Attach as documents
+
+If the Vector Database connector returns structured document objects, you can add them to the user message's document list. This keeps the user query and the supporting documents separate, which can help the LLM distinguish between the question and the reference material.
+
+Refer to the [AI Agent connector documentation](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) for details on how to structure the message input with documents.
+
+### Prefetch vs. tool-based approach
+
+| Consideration      | Prefetch                                             | Tool-based retrieval                                       |
+| ------------------ | ---------------------------------------------------- | ---------------------------------------------------------- |
+| **Agent autonomy** | Agent does not choose when to search                 | Agent decides if and when to search                        |
+| **Latency**        | Retrieval runs once before the agent starts          | Retrieval adds a tool-call round trip                      |
+| **Query control**  | Uses the raw user query directly                     | LLM reformulates the query dynamically                     |
+| **Relevance**      | Best when the user query maps well to stored content | Best when the agent needs to refine or decompose the query |
+
+:::tip
+You can combine both patterns: prefetch broad context to prime the agent, and still expose a retrieval tool for follow-up searches the agent initiates on its own.
+:::
+
 ## Populate the vector database
 
 Knowledge can be loaded into the vector database in two ways:
 
 - **Batch import**: Documents are embedded and stored before the agent starts processing, typically as part of a data preparation process. Use a Vector Database connector task configured with **Operation: Embed document** in a separate BPMN process or script.
 - **Runtime ingestion**: New knowledge is added to the vector database as the agent encounters it. For example, when a human provides an answer that did not previously exist in the database.
+
+:::important
+Re-embedding the same document is **not idempotent**: if you store it again without deleting the existing chunks first, you’ll create **duplicate chunks** in the vector database.
+:::
 
 For both approaches, configure the embed task as follows:
 
