@@ -11,9 +11,11 @@ const IdpCard = ({ link, title, image, description }) => {
   );
 };
 
-const IdpGrid = ({ idp }) => {
+const IdpGrid = ({ idp, className, columns = 3 }) => {
+  // allow override via className and/or columns prop
+  const colsClass = `ts-grid-cols-${columns}`;
   return (
-    <div className="idp-grid">
+    <div className={`ts-grid ${colsClass} ${className || ""}`.trim()}>
       {idp.map((idp, index) => (
         <IdpCard
           key={index}
