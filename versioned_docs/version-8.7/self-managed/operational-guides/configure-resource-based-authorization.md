@@ -34,11 +34,11 @@ global:
 
 When this value is `true`, the chart sets the following environment variables across the relevant components:
 
-| Component | Environment variable                                  |
-| --------- | ----------------------------------------------------- |
+| Component | Environment variable                                     |
+| --------- | -------------------------------------------------------- |
 | Tasklist  | `CAMUNDA_TASKLIST_IDENTITY_RESOURCE_PERMISSIONS_ENABLED` |
 | Operate   | `CAMUNDA_OPERATE_IDENTITY_RESOURCEPERMISSIONSENABLED`    |
-| Identity  | `RESOURCE_PERMISSIONS_ENABLED`                        |
+| Identity  | `RESOURCE_PERMISSIONS_ENABLED`                           |
 
 ## Environment variables
 

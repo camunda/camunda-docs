@@ -22,9 +22,9 @@ RBA and [multi-tenancy](configure-multi-tenancy.md) cannot be enabled at the sam
 
 A single global value enables RBA across all applicable components. The chart wires the corresponding environment variables into Tasklist, Operate (or the unified Orchestration deployment in 8.8+), and Management Identity automatically:
 
-| values.yaml option   | type    | default | description                                                                                |
-| -------------------- | ------- | ------- | ------------------------------------------------------------------------------------------ |
-| `global.rba.enabled` | boolean | `false` | Enables resource-based authorization in Tasklist, Operate, and Management Identity.        |
+| values.yaml option   | type    | default | description                                                                         |
+| -------------------- | ------- | ------- | ----------------------------------------------------------------------------------- |
+| `global.rba.enabled` | boolean | `false` | Enables resource-based authorization in Tasklist, Operate, and Management Identity. |
 
 ### Example usage
 
@@ -38,11 +38,11 @@ global:
 
 When this value is `true`, the chart sets the following environment variables:
 
-| Component                               | Environment variable                                  |
-| --------------------------------------- | ----------------------------------------------------- |
+| Component                                | Environment variable                                     |
+| ---------------------------------------- | -------------------------------------------------------- |
 | Tasklist (or unified Orchestration 8.8+) | `CAMUNDA_TASKLIST_IDENTITY_RESOURCE_PERMISSIONS_ENABLED` |
-| Operate (or unified Orchestration 8.8+) | `CAMUNDA_OPERATE_IDENTITY_RESOURCEPERMISSIONSENABLED`    |
-| Management Identity                     | `RESOURCE_PERMISSIONS_ENABLED`                        |
+| Operate (or unified Orchestration 8.8+)  | `CAMUNDA_OPERATE_IDENTITY_RESOURCEPERMISSIONSENABLED`    |
+| Management Identity                      | `RESOURCE_PERMISSIONS_ENABLED`                           |
 
 ## Upgrade compatibility
 
