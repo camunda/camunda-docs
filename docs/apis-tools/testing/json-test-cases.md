@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 You can write your process tests in JSON format instead of coding the test logic in Java. The JSON file describes test cases with instructions that align with CPT's assertions and utilities.
 
-CPT's JSON test cases use the same schema as Web Modeler/Play [test scenario files](/components/modeler/web-modeler/validation/test-scenario-files.md), so the same files can be edited in Play and executed by CPT.
+CPT's JSON test cases use the same schema as [test scenario files in Play](/components/modeler/web-modeler/validation/test-scenario-files.md), so you can edit the same files in Play and execute them with CPT.
 
 ## Write a JSON test case
 

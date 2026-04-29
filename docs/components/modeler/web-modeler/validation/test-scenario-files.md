@@ -8,7 +8,7 @@ description: Define shareable, low-code tests for your BPMN processes
 
 Test scenario files let you define shareable, low-code tests for your BPMN processes.
 
-They are stored in JSON format and follow the [Camunda Process Test (CPT) JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json), so the same files can be executed in Web Modeler/Play and as part of an automated CPT test suite. You can create, edit, and manage them directly in Web Modeler. You can also download these files or synchronize them with your Git repository using Git Sync.
+They are stored in JSON format and follow the [Camunda Process Test (CPT) JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json), so you can use the same files in Play and in an automated CPT test suite. You can create, edit, and manage them directly in Web Modeler. You can also download these files or synchronize them with your Git repository using Git Sync.
 
 ## Create a test scenario file
 
@@ -20,7 +20,7 @@ You can also manage scenarios and update failing scenarios from Play.
 
 ### Test case structure
 
-Test scenario files follow the [CPT JSON test cases schema](/apis-tools/testing/json-test-cases.md). Play adds two optional fields on top of the schema — `processId` and `metadata` — to link the file to a BPMN process and to track scenario coverage.
+Test scenario files follow the [CPT JSON test cases schema](/apis-tools/testing/json-test-cases.md). Play adds two optional fields to that schema, `processId` and `metadata`, to link the file to a BPMN process and track scenario coverage.
 
 ```json
 {
@@ -94,7 +94,7 @@ Play runs only the first executable process within the BPMN diagram. Make sure t
 :::
 
 :::caution
-If the BPMN diagram's process ID changes (or another process ID is added earlier in the BPMN file), the file's scenarios will not be used in the process's Play scenarios tab.
+If the BPMN diagram's process ID changes, or if another process ID is added earlier in the BPMN file, the file's scenarios won't appear in the process's Play scenarios tab.
 :::
 
 ### Unlink a process
@@ -246,7 +246,7 @@ Resolves an incident that was created due to a job failure or another process is
 
 ## Usage tips
 
-- Always use meaningful selector values (such as `elementId`, or `processDefinitionId`) that match your BPMN diagram.
+- Always use meaningful selector values, such as `elementId` or `processDefinitionId`, that match your BPMN diagram.
 - Give test cases descriptive names to clearly indicate the scenario being tested.
 - Include error scenarios along with happy path tests.
 - Use optional `variables` fields to test different data conditions.
