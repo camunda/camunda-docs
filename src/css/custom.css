@@ -633,6 +633,28 @@ body {
   color: #8b949e;
 }
 
+/* Unreleased version banner — caution/warning style */
+.theme-doc-version-banner.alert--warning {
+  background-color: #fff8e1;
+  border-color: #f5a623;
+  color: #6a4f00;
+}
+
+.theme-doc-version-banner.alert--warning a {
+  color: #b45309;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .theme-doc-version-banner.alert--warning {
+  background-color: #3b2e00;
+  border-color: #f5a623;
+  color: #fcd34d;
+}
+
+[data-theme="dark"] .theme-doc-version-banner.alert--warning a {
+  color: #fbbf24;
+}
+
 .alert--primary {
   background-color: #14d890;
 }
