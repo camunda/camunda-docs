@@ -54,7 +54,7 @@ jobs:
             --ip-permissions IpProtocol=tcp,FromPort=22,ToPort=22,IpRanges=[${{ secrets.PUBLISH_IPS }}]
             --output off
       - name: Publish
-        uses: burnett01/rsync-deployments@5.2
+        uses: burnett01/rsync-deployments@8.0.5
         with:
           switches: -avzr --delete
           path: build/
