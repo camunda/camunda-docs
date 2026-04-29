@@ -49,6 +49,10 @@ The `http.nonProxyHosts` property applies to both HTTP and HTTPS target URLs:
 To ensure Camunda can properly access Camunda components when using JVM properties, non-proxy hosts must contain `camunda-platform-zeebe|camunda-platform-keycloak`.
 :::
 
+:::important
+The Connectors runtime uses internal HTTP calls between pods (for example, for `/connectors/inbound-instances`) by resolving the headless service name to pod IPs. These internal calls use the resolved IP (for example, `10.7.108.230`), not the original service hostname. If you configure JVM-wide proxies using `-Dhttp.proxyHost` or `-Dhttps.proxyHost`, make sure `http.nonProxyHosts` (and/or `CONNECTOR_HTTP_NON_PROXY_HOSTS`) also includes patterns for your cluster CIDRs (for example, `10.*` or `10.244.*`), not only service DNS names like `*.svc.cluster.local`. Otherwise, internal pod-to-pod traffic may be routed through your corporate proxy and fail with 403 or TLS parsing errors.
+:::
+
 ### Environment variables
 
 As an alternative to using JVM properties, the proxy settings can also be set with environment variables:
