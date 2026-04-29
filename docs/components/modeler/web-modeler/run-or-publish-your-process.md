@@ -46,7 +46,7 @@ In Self-Managed, you can deploy your diagram to the cluster defined in your Web 
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](modeling/advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
   If you are using [`versionTag` binding](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
   :::tip
-  Consider using a [process application](process-applications/process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
+  Consider using a [project](process-applications/process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
   :::
 - Implement and run your [job workers](../../concepts/job-workers.md) if you use tasks such as service or send tasks.
 - Ensure there are no missing secrets or misconfigured clients required for the process to run.

@@ -21,16 +21,16 @@ With README support in Web Modeler, you can:
 
 ## What you can document
 
-- Project goals, scope, and stakeholders
+- Workspace goals, scope, and stakeholders
 - Links to related assets
-- Go-live dates, status updates, and project health
+- Go-live dates, status updates, and workspace health
 - Requirements, process owners, and change logs
 
 ## Where READMEs appear
 
-- In every project, process application, and folder (each can have its own README)
-  ![process application with readme](img/process-application-with-readme.png)
-  > Git-connected process applications sync README content just like any other file
+- In every workspace, project, and folder (each can have its own README)
+  ![project with readme](img/process-application-with-readme.png)
+  > Git-connected projects sync README content just like any other file
 - In the [process landscape view](../../process-landscape-visualization.md) as context for a node or the entire app
   ![process landscape with readme](img/process-landscape-with-readme.png)
 
@@ -40,7 +40,7 @@ Each README is unique to its folder and can’t be moved through the UI. However
 
 ## Writing a README
 
-README files use standard [Markdown](https://www.markdownguide.org/), a lightweight markup language. A README should provide a snapshot of what your project, process application, or folder is about. Consider including:
+README files use standard [Markdown](https://www.markdownguide.org/), a lightweight markup language. A README should provide a snapshot of what your workspace, project, or folder is about. Consider including:
 
 - What this project, application, or folder is for
 - Who owns or maintains it
@@ -67,5 +67,5 @@ To see the final result of a README file, select the **Preview** tab:
 
 ## Related resources
 
-- [Process applications](../../process-applications/process-applications.md)
+- [Projects](../../process-applications/process-applications.md)
 - [Process landscape visualization](../../process-landscape-visualization.md)
