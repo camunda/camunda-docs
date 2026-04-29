@@ -132,8 +132,8 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   border: 1px solid #d0d0d0 !important;
   border-radius: 8px !important;
   height: 30px !important;
-  width: 300px !important;
-  max-width: 300px !important;
+  width: 170px !important;
+  max-width: 170px !important;
   padding: 0 10px !important;
   transition:
     border-color 0.2s ease,
