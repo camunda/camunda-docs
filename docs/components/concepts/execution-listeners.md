@@ -26,11 +26,11 @@ An execution listener is a blocking operation, meaning that the workflow executi
 
 You can configure execution listeners for individual BPMN elements, such as tasks, events, and gateways, as well as for the overall process and subprocesses.
 
-There are three types of execution listener:
+There are three types of execution listeners:
 
 - **Before all**: Invoked only on the [multi-instance](/components/modeler/bpmn/multi-instance/multi-instance.md) body, _before_ any inner instances are created. Useful for initializing variables such as the `inputCollection`.
-- **Start:** Invoked _before_ the element is processed. Useful for setting variables or executing preconditions.
-- **End:** Invoked _after_ the element is processed. Useful for executing cleanup or post-processing tasks.
+- **Start**: Invoked _before_ the element is processed. Useful for setting variables or executing preconditions.
+- **End**: Invoked _after_ the element is processed. Useful for executing cleanup or post-processing tasks.
 
 Each listener has three properties:
 
@@ -65,11 +65,11 @@ Similar to regular job workers, a listener can read variables of the process ins
 
 An execution listener can define an arbitrary number of `taskHeaders`; they are static metadata handed to workers along with the job. The headers can be used as configuration parameters for the worker.
 
-The job worker will receive the listener headers, as well as the headers set for the BPMN element on which the listener is defined as custom headers. If the BPMN element and listener both define the same header key, the value set by the listener is used.
+The job worker receives the listener headers, as well as the custom headers defined for the BPMN element on which the listener is configured. If the BPMN element and the listener both define the same header key, the listener value is used.
 
-### BeforeAll listeners
+### `beforeAll` listeners
 
-BeforeAll listeners are only supported on the [multi-instance](/components/modeler/bpmn/multi-instance/multi-instance.md) body. They are invoked once per multi-instance body activation, before the `inputCollection` is evaluated and inner instances are created.
+`beforeAll` listeners are supported only on the [multi-instance](/components/modeler/bpmn/multi-instance/multi-instance.md) body. They are invoked once per multi-instance body activation, before the `inputCollection` is evaluated and inner instances are created.
 
 When a multi-instance activity is entered, the engine processes the body and inner-activity listeners in the following order:
 
@@ -139,11 +139,11 @@ Execution listeners have the following limitations:
   - Error end event (end ELs): Place the ELs on the related error catch event.
   - Compensation boundary events: Place the ELs on the compensation handler.
 
-- **BeforeAll**: Supported only for multi-instance activities.
+- **`beforeAll`**: Supported only for multi-instance activities.
   - Earlier versions do not support the `beforeAll` event type and will reject deployments that use it.
 
 - **Duplicate listeners**: Execution listeners must have unique combinations of `eventType` and `type`.
-  Defining multiple listeners with the same `eventType` and `type` results in a validation error. However, you can define listeners with the same `type` if they are associated with different `eventType` values.
+  Defining multiple listeners with the same `eventType` and `type` results in a validation error. However, you can define listeners with the same `type` if they use different `eventType` values.
 
 - **Interrupting escalation events**: For intermediate throw and end events with an interrupting escalation event, `end` listeners are not executed. The escalation event terminates the element's processing immediately upon activation, bypassing any defined `end` listeners.
 
