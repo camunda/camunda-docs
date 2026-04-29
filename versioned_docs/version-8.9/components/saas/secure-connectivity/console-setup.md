@@ -135,7 +135,10 @@ After activating the PrivateLink endpoint service in Console:
 
 1. Copy the **Service name** from the **Service details** section.
 2. In your AWS account, create a VPC interface endpoint that connects to this service.
-3. Configure subnets, security groups, and optional private DNS according to your AWS requirements.
+3. In the Amazon VPC console, open the **Create endpoint** wizard, then select:
+   - **Select a category** > **PrivateLink Ready partner services**.
+   - Do not select **AWS services**. Otherwise, the Camunda service will not appear.
+4. Configure subnets, security groups, and optional private DNS according to your AWS requirements.
 
 AWS-side provisioning must follow the standard AWS PrivateLink process.
 
