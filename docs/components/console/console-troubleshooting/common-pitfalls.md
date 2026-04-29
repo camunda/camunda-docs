@@ -4,7 +4,7 @@ title: Common pitfalls
 description: "Let's take a closer look at common issues and resolutions."
 ---
 
-Let's take a closer look at common issues and resolutions within Console.
+Let's take a closer look at common issues and resolutions within Camunda Hub.
 
 ## The button to create new clusters is disabled
 

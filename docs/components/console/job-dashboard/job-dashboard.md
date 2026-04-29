@@ -1,34 +1,38 @@
 ---
 id: job-dashboard
 title: Job dashboard
-description: "Use the job dashboard in Console to see active job types, track created, completed and failed jobs, spot trends over time, and drill into job worker errors."
+description: "Use the job dashboard in Camunda Hub to see active job types, track created, completed and failed jobs, spot trends over time, and drill into job worker errors."
 ---
 
 Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved.
 
 ## Availability and permissions
 
-The job dashboard is available in Console for clusters running Camunda 8.9+.
+The job dashboard is available for clusters running Camunda 8.9+.
 
 For Software as a Service (SaaS):
 
 - Available for clusters running Camunda 8.9+.
 - Camunda manages the underlying job metrics configuration for you.
-- If the **Jobs** card is missing or shows **Access restricted**, check that your user has permission to view job metrics in Console. If the issue persists, contact your organization owner or Camunda Support.
+- If the **Jobs** card is missing or shows **Access restricted**, check that your user has permission to view job metrics in Camunda Hub. If the issue persists, contact your organization owner or Camunda Support.
 
 For Self-Managed:
 
-- Requires Camunda 8.9+ (Zeebe and Console).
+- Requires Camunda 8.9+ (Zeebe and Camunda Hub).
 - Configure job metrics in the engine configuration (`camunda.monitoring.metrics.job-metrics.*`). These options and their default values are available in the auto-generated `defaults.yaml` file and the Helm values.
 - If the **Jobs** card is missing or shows **Access restricted**, verify that:
   - The cluster is running Camunda 8.9+.
   - Job metrics are enabled in the engine configuration.
-  - Console can connect to the cluster.
+  - Camunda Hub can connect to the cluster.
   - Your user has permission to view job metrics.
+
+:::info
+Camunda Hub is introduced in 8.10. If you're using 8.9, refer to [that version's documentation, which uses Camunda 8 Console](/versioned_docs/version-8.9/components/console/job-dashboard/job-dashboard.md).
+:::
 
 Access control:
 
-- The global `READ_JOB_METRICS` permission is the only Console permission required to use the job dashboard.
+- The global `READ_JOB_METRICS` permission is the only Camunda Hub permission required to use the job dashboard.
 - Operate permissions are still required to view underlying instances when you click **View errors**.
 
 ## When to use the job dashboard
@@ -44,7 +48,7 @@ With the job dashboard, you can:
 
 ### 1. Open the Jobs overview
 
-1. In Console, go to **Clusters**.
+1. In Camunda Hub, go to **Clusters**.
 2. Select a cluster.
 3. On the **Overview** tab, locate the **Jobs** card.
 4. Click **View jobs** to open the **Job types** page.
@@ -70,7 +74,7 @@ Key elements:
   - **Not completed jobs**
   - **Last completed**
 
-If the selected date range hits internal limits, Console shows a warning that not all data is displayed. Narrow the time range to see a more complete view.
+If the selected date range hits internal limits, Camunda Hub shows a warning that not all data is displayed. Narrow the time range to see a more complete view.
 
 Job metrics are stored internally in the engine and exported in batches every five minutes. As a result, metrics in the UI can be delayed by up to five minutes.
 
@@ -166,7 +170,7 @@ In this case, contact your organization owner or admin to request the necessary 
 
 ## SaaS vs Self-Managed
 
-The Console UI and flows are the same in SaaS and Self-Managed.
+The Camunda Hub UI and flows are the same in SaaS and Self-Managed.
 
 - **SaaS:** The job dashboard is available for Camunda 8.9+ clusters. Camunda manages the underlying job metrics configuration.
 - **Self-Managed:** You enable and configure job metrics in the engine and Helm charts. For details on available options and defaults, see the job metrics [configuration reference](../../../self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
