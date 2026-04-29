@@ -11,16 +11,16 @@ Set up and manage the Cluster Metrics endpoint for a Camunda 8 SaaS Orchestratio
 Before enabling the Cluster Metrics endpoint, ensure that:
 
 - You are using Camunda 8 SaaS.
-- You have access to Console and have permission to manage cluster-level settings.
+- You have access to Camunda Hub and have permission to manage cluster-level settings.
 - If allowlisting is configured for your cluster, the monitoring system’s source IP addresses are added to the cluster IP allowlist.
 
 ## Enable Cluster Metrics endpoint
 
-Enable the Cluster Metrics endpoint per Orchestration cluster via either the Camunda Console or API. When the endpoint is enabled, Camunda provisions a secure, cluster-scoped metrics endpoint for external scraping.
+Enable the Cluster Metrics endpoint per Orchestration cluster via either Camunda Hub or the API. When the endpoint is enabled, Camunda provisions a secure, cluster-scoped metrics endpoint for external scraping.
 
 To activate the endpoint:
 
-1. Sign in to Camunda Console.
+1. Sign in to Camunda Hub.
 1. Navigate to **Clusters**.
 1. Select an existing cluster, or create a new one.
 1. Open the **Monitoring** tab for the cluster.
@@ -30,7 +30,7 @@ To activate the endpoint:
 
 ### Capture connection details
 
-When the Cluster Metrics endpoint is activated, the Console displays a dialog containing the authentication credentials.
+When the Cluster Metrics endpoint is activated, Camunda Hub displays a dialog containing the authentication credentials.
 
 1. Copy and store the password securely.
 1. Click **Got it** to close the dialog.
@@ -49,7 +49,7 @@ The following information is required to connect your monitoring system:
 
 ## Manage authentication credentials
 
-Authentication credentials are created and managed in Camunda Console.
+Authentication credentials are created and managed in Camunda Hub.
 
 ### Create additional credentials
 

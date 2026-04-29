@@ -23,7 +23,7 @@ In Camunda 7 and Camunda 8 Self-Managed, you must configure the email service to
 :::
 
 :::note
-Only known users in Console (SaaS) and Identity (Self-Managed) can receive Optimize alert emails.
+Only known users in Camunda Hub (SaaS) and Identity (Self-Managed) can receive Optimize alert emails.
 :::
 
 Note that alerts can only be created for reports which are visualized as a single number and are in the same collection as the alert. Visit the [reports section](../creating-reports.md) on how to define single-number reports.

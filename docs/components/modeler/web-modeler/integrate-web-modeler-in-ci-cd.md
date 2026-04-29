@@ -68,7 +68,7 @@ Disable manual deployments for any user by configuring environment variables `ZE
 </TabItem>
 <TabItem value="saas">
 
-Users without **Admin** roles in Console can deploy only on `dev`, `test`, or `stage` clusters. To restrict their deployment permissions remove the **Developer** role from users in Console.
+Users without **Admin** roles in Camunda Hub can deploy only on `dev`, `test`, or `stage` clusters. To restrict their deployment permissions remove the **Developer** role from users in Camunda Hub.
 
 :::info
 Only organization owners or users with the **Admin** role can deploy from Web Modeler to `prod` clusters.
