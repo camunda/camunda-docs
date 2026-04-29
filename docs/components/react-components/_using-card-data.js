@@ -57,8 +57,7 @@ export const usingCamundaCards = [
     link: "./modeler/about-modeler/",
     title: "Modeler",
     image: IconModelerImg,
-    description:
-      "Use Web Modeler and Desktop Modeler to model your BPMN diagrams.",
+    description: "Model your BPMN diagrams.",
   },
   {
     link: "./concepts/bpmn-dmn-feel/",

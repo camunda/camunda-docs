@@ -12,7 +12,7 @@ When creating custom-built element templates, consider the best practices outlin
 
 ## Generate a BPMN element template
 
-1. Select the Web Modeler project where you want to create the template. Camunda recommends storing element templates in root project folders, not process applications, to simplify template management and avoid unnecessary versioning overhead.
+1. Select the Web Modeler project where you want to create the template. Camunda recommends storing element templates in root project folders, not projects, to simplify template management and avoid unnecessary versioning overhead.
 2. Click **Create new**, then select **Element template** to open the **Create new element template** screen.  
    ![Create the new element template](./img/element-template-generator/configure-element-template-details.png)
 
@@ -33,7 +33,7 @@ You can start from a blank template or import an existing API definition such as
 
 To generate a connector template:
 
-1. Select the Web Modeler project where you want to create the template. Camunda recommends storing element templates in root project folders, not process applications, to simplify template management and avoid unnecessary versioning overhead.
+1. Select the Web Modeler project where you want to create the template. Camunda recommends storing element templates in root project folders, not projects, to simplify template management and avoid unnecessary versioning overhead.
 2. Click **Create new**, select **Element template**, and then choose the **Connector** tab.  
    ![Create the new element template](../../../connectors/custom-built-connectors/img/configure-connector-template-details.png)
 

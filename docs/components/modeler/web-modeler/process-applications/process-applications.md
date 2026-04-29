@@ -1,48 +1,48 @@
 ---
 id: process-applications
-title: Process applications
-description: In Web Modeler a process application is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
+title: Projects
+description: In Camunda Hub, a project is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
 ---
 
 import ProcessApplicationImg from './img/diagram-process-application-get-started.png'
 import FileListImg from './img/file-list.png'
 
-In Web Modeler a [process application](../../../concepts/process-applications.md) is a type of folder that contains a set of related files you can work on and [deploy](deploy-process-application.md) as a single bundle.
+In Camunda Hub, a [project](../../../concepts/process-applications.md) is a type of folder that contains a set of related files you can work on and [deploy](deploy-process-application.md) as a single bundle.
 
-<p><img src={ProcessApplicationImg} alt="Process application" /></p>
+<p><img src={ProcessApplicationImg} alt="Project" /></p>
 
-For example, a process application for a consumer loan application might consist of a BPMN diagram as an entry point and a number of additional supporting files, such as DMN diagrams and forms.
+For example, a project for a consumer loan application might consist of a BPMN diagram as an entry point and a number of additional supporting files, such as DMN diagrams and forms.
 
-<p><img src={FileListImg} alt="Process application file list" /></p>
+<p><img src={FileListImg} alt="Project file list" /></p>
 
-## Process application development lifecycle
+## Project development lifecycle
 
-In Web Modeler, you can quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
+In Camunda Hub, you can quickly develop and progress low-risk project releases through the stages of a typical development lifecycle.
 
-- [Process application development lifecycle](process-application-pipeline.md)
+- [Project development lifecycle](process-application-pipeline.md)
 
-## Create a process application
+## Create a project
 
-Get started by creating a new process application.
+Get started by creating a new project.
 
-- When you [create a process application](./create-a-process-application.md), you must select a cluster to use for deployment during development.
-- You can [add files](./create-a-process-application.md#add-files-to-a-process-application) to the process application as required.
+- When you [create a project](./create-a-process-application.md), you must select a cluster to use for deployment during development.
+- You can [add files](./create-a-process-application.md#add-files-to-a-process-application) to the project as required.
 
-## Validate and deploy your process application
+## Validate and deploy your project
 
-Validate your process application in development before deploying it to testing, staging, or production.
+Validate your project in development before deploying it to testing, staging, or production.
 
-- [Validate and deploy your process application](deploy-process-application.md)
+- [Validate and deploy your project](deploy-process-application.md)
 
-## Process application versioning
+## Project versioning
 
-Use versioning to save a single snapshot of all the process application files in one action.
+Use versioning to save a single snapshot of all the project files in one action.
 
-- [Process application versioning](process-application-versioning.md)
+- [Project versioning](process-application-versioning.md)
 
 ## Known limitations
 
-You should be aware of the following limitations when working with process applications.
+You should be aware of the following limitations when working with projects.
 
 ### General limitations
 
@@ -50,7 +50,7 @@ You should be aware of the following limitations when working with process appli
 
 ### Deployment limitations
 
-- Process applications can only be deployed to a Zeebe cluster in version 8.4.0 or higher.
+- Projects can only be deployed to a Zeebe cluster in version 8.4.0 or higher.
 - The overall size of the deployment bundle is limited due to a maximum [record](../../../zeebe/technical-concepts/internal-processing.md) size of 4 MB in Zeebe.
   - The limit is effectively between 2 and 3 MB, as Zeebe writes more data to the log stream than just the raw deployment.
   - If you exceed the limit, you are shown an [error message](deploy-process-application.md#deployment-errors):<br/>
