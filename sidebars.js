@@ -1467,6 +1467,19 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "8.10",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/8100/whats-new-in-810",
+          },
+          items: [
+            "reference/announcements-release-notes/8100/whats-new-in-810",
+            "reference/announcements-release-notes/8100/8100-announcements",
+            "reference/announcements-release-notes/8100/8100-release-notes",
+          ],
+        },
+        {
+          type: "category",
           label: "8.9",
           link: {
             type: "doc",

@@ -1,11 +1,11 @@
 ---
-id: 890-release-notes
-title: "8.9 Release notes"
+id: 8100-release-notes
+title: "8.10 Release notes"
 sidebar_label: Release notes
-description: "Release notes for new features included in the 8.9 minor release, including alpha feature releases."
+description: "Release notes for new features included in the 8.10 minor release, including alpha feature releases."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
-keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
+keywords: ["8.10 release notes", "release notes for 8.10", "release notes"]
 page_rank: 90
 ---
 
@@ -17,9 +17,9 @@ import PageDescription from '@site/src/components/PageDescription';
 | :----------------- | :--------------------------- | :--------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
 | 12 October 2026    | ?                            | [Patch Releases and Changelogs](#technical-changelogs-for-all-810x-releases) | [8.10 upgrade guides](/reference/announcements-release-notes/8100/whats-new-in-810.md#upgrade-guides) |
 
-:::info 8.9 resources
+:::info 8.10 resources
 
-- See [What's new in Camunda 8.9](/reference/announcements-release-notes/8100/whats-new-in-810.md) for important changes to consider when planning your upgrade from Camunda 8.8.
+- See [What's new in Camunda 8.10](/reference/announcements-release-notes/8100/whats-new-in-810.md) for important changes to consider when planning your upgrade from Camunda 8.8.
 - See [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) to learn more about supported environment changes, breaking changes, and deprecations.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
 
@@ -78,8 +78,6 @@ Camunda now supports the **2025 enterprise license model** in Console and Accoun
 - For organizations with `licensing_model = 2025`, Usage and Billing views show **only Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer rendered. Legacy organizations continue to see the existing metric set.
 - For enterprise (`salesplantype = enterprise`) organizations, the licensing model is visible in the organization details and can be edited via a modal action that lets admins select **legacy** or **2025**.
 - The enterprise onboarding wizard now includes a license selection step, defaulting to **2025**, and the `ExternalOnboardingRouter` accepts an optional licensing model parameter (defaulting to **2025** when not provided).
-
-### Camunda Hub
 
 #### Cluster version selection for SaaS orchestration clusters
 

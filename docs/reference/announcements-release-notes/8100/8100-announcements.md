@@ -1,5 +1,5 @@
 ---
-id: 890-announcements
+id: 8100-announcements
 title: "8.10 Release announcements"
 sidebar_label: Release announcements
 description: "Supported environment changes, breaking changes, and deprecations in Camunda 8.10."
@@ -72,7 +72,7 @@ Agentic orchestration change 1 description.
 ## APIs & tools
 
 :::info 8.10 APIs & Tools migration guide
-Migrate your API integrations, SDKs, and generated clients to Camunda 8.10 using the [8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md).
+Migrate your API integrations, SDKs, and generated clients to Camunda 8.10 using the [8.10 APIs & Tools migration guide](/).
 :::
 
 :::tip Client and API compatibility
