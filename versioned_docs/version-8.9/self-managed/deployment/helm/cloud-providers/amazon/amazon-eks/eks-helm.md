@@ -22,6 +22,8 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
+If you use Amazon Aurora PostgreSQL or another relational database (RDBMS) as the Orchestration Cluster secondary storage, use this page for the AWS EKS infrastructure and Helm deployment flow, then complete the RDBMS-specific Helm steps in [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md). If you use Amazon OpenSearch Service for secondary storage, continue with the default path in this guide.
+
 ## Requirements
 
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
@@ -326,7 +328,9 @@ To enable these enterprise components in an OIDC-enabled full cluster, first dep
 This guide includes a managed Amazon OpenSearch example path for secondary storage. Choose the backend that fits your requirements:
 
 - **Managed OpenSearch**: Use the managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
-- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster. Follow this EKS guide for the cluster, networking, ingress, and optional AWS services, then continue with [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) for the Helm workflow and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for the values reference.
+
+If you choose RDBMS for the Orchestration Cluster, do not follow the managed OpenSearch configuration path in this guide unless you also deploy Optimize. Optimize still requires Elasticsearch or OpenSearch.
 
 #### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
 

@@ -9,6 +9,8 @@ This guide is a focused walkthrough for teams using an external relational datab
 
 Use [production install](/self-managed/deployment/helm/install/production/index.md) as the primary installation guide. Use this page when you want additional RDBMS-specific examples for that flow.
 
+If you deploy on AWS EKS, use [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) for the cluster, ingress, and AWS-managed service setup, then return to this page for the RDBMS-specific Helm configuration and installation steps.
+
 Related guides:
 
 - [Production install](/self-managed/deployment/helm/install/production/index.md)
@@ -95,6 +97,12 @@ The user needs DDL permissions only if you enable auto-schema creation (`autoDDL
 ```bash
 helm repo add camunda https://camunda.github.io/camunda-platform-helm
 helm repo update
+```
+
+If you install a prerelease chart version, such as an alpha or release candidate, include `--devel` when you search, install, or upgrade the chart. For example:
+
+```bash
+helm search repo camunda/camunda-platform --devel
 ```
 
 ### Step 4: Create a values file
@@ -223,6 +231,8 @@ helm install camunda camunda/camunda-platform \
   --namespace camunda \
   -f values-rdbms.yaml
 ```
+
+For a prerelease chart version, include `--devel` in the install command.
 
 Monitor the installation:
 
