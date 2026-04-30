@@ -1,0 +1,126 @@
+name: Sync c8ctl CLI Command Reference
+
+on:
+  schedule:
+    - cron: "30 16 * * 4" # Runs every Thursday at 4:30 PM UTC (30 min after TS SDK sync)
+  workflow_dispatch:
+    inputs:
+      docs_version:
+        description: "Docs version to update (e.g. '8.8'). Leave empty for next (docs/)."
+        required: false
+        default: ""
+      c8ctl_ref:
+        description: "Git ref of the c8ctl repo. Ignored when docs_version is set (uses stable/<version>)."
+        required: false
+        default: "main"
+      dry_run:
+        description: "Dry run — generate docs but skip PR creation"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  sync-c8ctl-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve refs and paths
+        id: resolve
+        run: |
+          VERSION="${{ github.event.inputs.docs_version }}"
+          if [ -n "$VERSION" ]; then
+            if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+$'; then
+              echo "::error::docs_version must be in X.Y format (e.g. '8.9'), got: '$VERSION'"
+              exit 1
+            fi
+            echo "c8ctl_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
+            echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-c8ctl-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
+          else
+            echo "c8ctl_ref=${{ github.event.inputs.c8ctl_ref || 'main' }}" >> "$GITHUB_OUTPUT"
+            echo "docs_root=docs" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-c8ctl-docs" >> "$GITHUB_OUTPUT"
+            echo "version_label=next" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout camunda-docs
+        uses: actions/checkout@v6
+        with:
+          repository: camunda/camunda-docs
+          path: docs
+
+      - name: Checkout c8ctl
+        uses: actions/checkout@v6
+        with:
+          repository: camunda/c8ctl
+          ref: ${{ steps.resolve.outputs.c8ctl_ref }}
+          path: c8ctl
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Install c8ctl dependencies
+        working-directory: c8ctl
+        run: npm ci
+
+      - name: Generate command reference
+        working-directory: c8ctl
+        run: npm run sync:docs
+
+      - name: Copy command reference into camunda-docs
+        run: |
+          TARGET="docs/${{ steps.resolve.outputs.docs_root }}/apis-tools/c8ctl"
+          mkdir -p "$TARGET"
+          cp c8ctl/docs/command-reference.md "$TARGET/command-reference.md"
+          echo "Copied command-reference.md → $TARGET/"
+
+      - name: Check for changes
+        id: check_changes
+        working-directory: docs
+        run: |
+          if git diff-index --quiet HEAD; then
+            echo "No changes to commit."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected."
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate token
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        id: generate_token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
+          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: "${{ steps.generate_token.outputs.token }}"
+          path: docs
+          title: "docs: update c8ctl CLI command reference (${{ steps.resolve.outputs.version_label }})"
+          body: |
+            ## Description
+
+            Auto-generated PR from the [sync c8ctl docs workflow](https://github.com/camunda/camunda-docs/tree/main/.github/workflows/sync-c8ctl-docs.yaml).
+
+            Updates the c8ctl CLI command reference from [`c8ctl@${{ steps.resolve.outputs.c8ctl_ref }}`](https://github.com/camunda/c8ctl/tree/${{ steps.resolve.outputs.c8ctl_ref }}).
+
+            **Target:** `${{ steps.resolve.outputs.docs_root }}/apis-tools/c8ctl/command-reference.md`
+
+            ## When should this change go live?
+
+            - There is **no urgency** with this change and can be released at any time.
+
+            ## PR Checklist
+
+            - My changes are in `/${{ steps.resolve.outputs.docs_root }}`.
+          commit-message: "docs: update c8ctl CLI command reference (${{ steps.resolve.outputs.version_label }})"
+          branch: ${{ steps.resolve.outputs.pr_branch }}
+          delete-branch: true
+          base: main
+          labels: deploy

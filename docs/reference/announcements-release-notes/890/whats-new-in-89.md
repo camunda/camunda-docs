@@ -154,6 +154,10 @@ The Camunda 8 Run CLI and configuration is enhanced to:
 
 These changes reduce friction when setting up Camunda 8 Run for the first time, debugging local setup issues, and switching between different configurations or environments.
 
+:::info Breaking change
+The `--docker` flag and bundled Docker Compose files have been removed from Camunda 8 Run. Docker Compose is now a standalone distribution artifact. See [release announcements](/reference/announcements-release-notes/890/890-announcements.md#camunda-8-run-docker-compose-support-removed) for migration details.
+:::
+
 <p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
 ### Secondary storage
@@ -236,6 +240,31 @@ All secret configuration must now use the new standardized pattern:
 You are affected if your `values.yaml` uses any of the legacy secret keys (such as `global.elasticsearch.auth.existingSecret`, `identity.firstUser.password`, `connectors.security.authentication.oidc.existingSecret`, or similar).
 
 See the [release announcements](/reference/announcements-release-notes/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) for the full list of removed keys.
+
+## Reference architectures {#reference-architectures}
+
+Camunda 8.9 introduces major changes to the [deployment references](https://github.com/camunda/camunda-deployment-references) used by Self-Managed reference architectures.
+
+### Operator-based infrastructure replaces Bitnami
+
+All reference architectures (AKS, EKS, OpenShift, Kind) now use Kubernetes operators — CloudNativePG, ECK, and Keycloak operator — instead of embedded Bitnami subcharts for infrastructure services.
+
+If you follow a reference architecture, your next deployment will use operator-managed PostgreSQL, Elasticsearch, and Keycloak. Existing deployments can migrate using the new [migration tooling](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
+
+#### Are you affected?
+
+You are affected if you deploy Self-Managed using a reference architecture from the `camunda-deployment-references` repository and rely on Bitnami-managed infrastructure. Follow the migration guide to transition to operator-managed services.
+
+### New deployment options
+
+- **Amazon ECS on Fargate** is now available as a container-based deployment without Kubernetes.
+- **AKS RDBMS variant** provides a lighter Azure deployment using PostgreSQL as secondary storage (no Elasticsearch).
+- **Kind local development** reference architecture is available for local testing with Makefile-based commands.
+
+### Dual-region changes
+
+- EKS and OpenShift dual-region now use the ECK operator for Elasticsearch.
+- Headless service DNS is used for initial contact points, improving cross-region connectivity.
 
 ## Migration from Camunda 7 to Camunda 8 {#migration}
 

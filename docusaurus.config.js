@@ -68,13 +68,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.6: {
-                specPath: "api/operate/version-8.6/operate-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/operate-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -102,13 +95,6 @@ module.exports = {
                 specPath: "api/tasklist/version-8.7/tasklist-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.7/apis-tools/tasklist-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.6: {
-                specPath: "api/tasklist/version-8.6/tasklist-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/tasklist-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -143,14 +129,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.6: {
-                specPath:
-                  "api/administration-sm/version-8.6/administration-sm-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/administration-sm-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -177,6 +155,7 @@ module.exports = {
                 highlight: "typescript",
                 operationMapPath:
                   ".sdk-repos/orchestration-cluster-api-js/examples/operation-map.json",
+                autoImports: true,
                 defaultImports:
                   "import { createCamundaClient } from '@camunda8/orchestration-cluster-api';",
               },
@@ -185,6 +164,7 @@ module.exports = {
                 highlight: "python",
                 operationMapPath:
                   ".sdk-repos/orchestration-cluster-api-python/examples/operation-map.json",
+                autoImports: true,
                 defaultImports:
                   "from camunda_orchestration_sdk import CamundaClient",
               },
@@ -193,6 +173,7 @@ module.exports = {
                 highlight: "csharp",
                 operationMapPath:
                   ".sdk-repos/orchestration-cluster-api-csharp/examples/operation-map.json",
+                autoImports: true,
                 defaultImports: "using Camunda.Orchestration.Sdk;",
               },
             ],
@@ -200,6 +181,41 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.9: {
+                specPath: "api/camunda/version-8.9/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.9/apis-tools/orchestration-cluster-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+                sdkExamples: [
+                  {
+                    lang: "TypeScript",
+                    highlight: "typescript",
+                    operationMapPath:
+                      ".sdk-repos/version-8.9/orchestration-cluster-api-js/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports:
+                      "import { createCamundaClient } from '@camunda8/orchestration-cluster-api';",
+                  },
+                  {
+                    lang: "Python",
+                    highlight: "python",
+                    operationMapPath:
+                      ".sdk-repos/version-8.9/orchestration-cluster-api-python/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports:
+                      "from camunda_orchestration_sdk import CamundaClient",
+                  },
+                  {
+                    lang: "C#",
+                    highlight: "csharp",
+                    operationMapPath:
+                      ".sdk-repos/version-8.9/orchestration-cluster-api-csharp/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports: "using Camunda.Orchestration.Sdk;",
+                  },
+                ],
+              },
               8.8: {
                 specPath: "api/camunda/version-8.8/camunda-openapi.yaml",
                 outputDir:
@@ -211,13 +227,6 @@ module.exports = {
                 specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.6: {
-                specPath: "api/camunda/version-8.6/camunda-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -248,13 +257,6 @@ module.exports = {
                 specPath: "api/zeebe/version-8.7/zeebe-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.7/apis-tools/zeebe-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.6: {
-                specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -588,12 +590,12 @@ module.exports = {
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
             current: {
-              label: "8.9 (unreleased)",
+              label: "8.10 (unreleased)",
             },
-            8.7: {
+            8.8: {
               banner: "none",
             },
-            8.6: {
+            8.7: {
               banner: "none",
             },
           },
@@ -610,8 +612,8 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.6/**",
             "/docs/8.7/**",
+            "/docs/8.8/**",
           ],
         },
       },

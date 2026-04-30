@@ -1,0 +1,227 @@
+---
+id: search-2
+title: "Search process definitions"
+description: "Search process definitions"
+sidebar_label: "Search process definitions"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlWFFz2zYM/is8vGTrFMtOmzbVm5emd912TVZ720Oa29ESbLGlSJWkkno6/fcdSFmWbTVNdnvZ+maRAAh+AD6ArsHxlYXkGq6MTtHaV7gUSjihFdxEoEs0nD7eZJCARW7S/M8TiMDgpwqt+1Fna0hqyNCmRpReLYGZl2P4mRelRAsRpFo5VI5EeVlKkXqj8QdL8jXYNMeC0y+3LhES0IsPmDqIoDTkghNoaXcppEPzdbmPuO4JCeVwhQYiWGpTcBeWnj+DJgLFC+yJWmeEWtHGLRorgnf3mnl60pOe89WgsUVZqBZfAnJAwqHiyg1u0q5wkpYOY9REYMVf+EA3QwCny10QuTF8DREIh4U9BJccsNq4h2schg3l8LW1yXZcaXciQFUVlJXT2TlE8Opidg43fSRm5FDTX/m1QrMeBKjLw6SGqZSH+TqVkpVBkwllHVcpWvZdhkteSccIYCYsm4y/hwhuuawIbzp7Rjt6yQy6yijMmBTWfbEeDo/gKmt1vSaZ8oed9s5p43vqz2vD8AjzFDm2WDOf6H2r3tR1FxxoBdqIeOCbm82hwVSbaA87PQpHkzCqTKjVxotwVdtCN3TV6Kve+YTYc6/kq8e41wem02cGbSWd3UZixN4rNtdshY65HJnCzy6Iprpc+yXvPmkckc3f6cseMaGcZke9ijsKgqP3yrtsS0zFsmVCZnNdyYwV3KW5N9pT3BX9R3iFaO4RwDWccykxY23VQAQnJ6eTFy9fnk2ePj97cXI2CUX32tPuNp0OUW4lFmvWMuFO7u3SX8//LZ93dDvpGO10PHCvfVP76dp4TjBoS61sKPmT8XggLaq0vfK/1Jr2qfCRFPkNday2nYQ6eVwbctpx+SCcei68CyU95AmJPRtKj1fccSbULZci+3KOlEYvJBY/PDZXrOOusg8MVIHWtsx2EIMNmw0HyC/cF5wLY7TpYHg6UNbaLESWodrF4En85L9/3WeH132rHXutK5X97657OpTk06s3rJfODL3CN5DtfhJOKyPc2jeXBXKD5thz8PVNE9WQav1RoP+6ie6fKLKOUKibFOhyTY2q1NZDwV0OCcS3k7hVOO4pxKEfA/ljiJG9O5WRkEAd8G2SOK5zbV2T1KU2rvH90wi+aCda2gux9dMqJCB1ymUezt91fZ4jow0/8+ilHzQoC8LpI8Kx7EbMjbmz8dl40BKJfsHKNje2dnLnykE7QXjQUhOGlhCrGcmFS2/is20epfgZqXuE9giXVxfvpvOL49nFbPbm8i21FTqu1aMG14t5Z6V10TtE30EINtKvN+n60x9zn1pUCu+2L+GL8NDYnWz8CePOse6F07Xr8W4z3krs9eDtxrb19gogDE3j/Rmv9gjuj1Gdqb35iWBaao9IWzWX/h8AZFfVQoqUonMYQ824n6YYT524DdN0qgkKh9nAu0QotjG71IYVWgmnySGv6YyuKLlzrV1wkgiJpz4tQ21QnGwSx3d3d6OUF5XK+CjVBcEgRYrK+hi0iP/SrkR7yplObacttP+ODS7RoEoxbg3ZeGe2gsloPBqHQrGu4Kp30L3EsANZl3AOP7u4lFz4h6r3r2454xpuJ4FL91kDNjGmf2hC+V9DXS+4xd+MbBpa/kSvYeKvLVsEboMceRYyI6QmnAe6P56TS91wfjgMEy8GjWmaYunulb3pUeHV5WxO6dz+V1TojHQMv6P/kfgdJECJWIa7JXVYq0Fytap8L4BgkyqOV4RNh99egfpbbRhBrXse1nWQmOuPqBoi0XAVR9/h5fA3aASGpg==
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search process definitions"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/process-definitions/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search process definitions
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    description: "Search examples",
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            filter: {
+              type: "object",
+              properties: {
+                key: { type: "integer", format: "int64" },
+                name: { type: "string" },
+                version: { type: "integer", format: "int32" },
+                versionTag: { type: "string" },
+                bpmnProcessId: { type: "string" },
+                tenantId: { type: "string" },
+              },
+              title: "ProcessDefinition",
+            },
+            size: { type: "integer", format: "int32" },
+            searchAfter: { type: "array", items: { type: "object" } },
+            sort: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: { type: "string" },
+                  order: { type: "string", enum: ["ASC", "DESC"] },
+                },
+                title: "Sort",
+              },
+            },
+          },
+          title: "QueryProcessDefinition",
+        },
+        examples: {
+          All: {
+            description: "All process instances (default size is 10)",
+            value: {},
+          },
+          "Size of returned list": {
+            description: "Search process instances and return list of size 5",
+            value: { size: 5 },
+          },
+          Sort: {
+            description: "Search process instances and sort by name",
+            value: { sort: [{ field: "name", order: "ASC" }] },
+          },
+          "Sort and size": {
+            description:
+              "Search process instances, sort descending by name list size of 5",
+            value: { size: 5, sort: [{ field: "name", order: "DESC" }] },
+          },
+          "Sort and page": {
+            description:
+              "Search process instances,sort by name and page results of size 5. \n To get the next page copy the value of 'sortValues' into 'searchAfter' value.\nSort specification should match the searchAfter specification",
+            value: {
+              size: 5,
+              sort: [{ field: "name", order: "ASC" }],
+              searchAfter: ["Called Process", "2251799813687281"],
+            },
+          },
+          "Filter and sort ": {
+            description: "Filter by version and sort by bpmnProcessId",
+            value: {
+              filter: { version: 1 },
+              size: 50,
+              sort: [{ field: "bpmnProcessId", order: "ASC" }],
+            },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    key: { type: "integer", format: "int64" },
+                    name: { type: "string" },
+                    version: { type: "integer", format: "int32" },
+                    versionTag: { type: "string" },
+                    bpmnProcessId: { type: "string" },
+                    tenantId: { type: "string" },
+                  },
+                  title: "ProcessDefinition",
+                },
+              },
+              sortValues: { type: "array", items: { type: "object" } },
+              total: { type: "integer", format: "int64" },
+            },
+            title: "ResultsProcessDefinition",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Data invalid",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not Found",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

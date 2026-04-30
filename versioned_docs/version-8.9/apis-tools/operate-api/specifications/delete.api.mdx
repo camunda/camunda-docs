@@ -1,0 +1,146 @@
+---
+id: delete
+title: "Delete process instance and all dependant data by key"
+description: "Delete process instance and all dependant data by key"
+sidebar_label: "Delete process instance and all dependant data by key"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVktv4zYQ/ivEnNqtYjm7abHQLeh6AXcXTRC76CHwgabGFjcSqSVHTg1B/70YUlL8Sl+3Yk8SyXl+/GaGLZDcesge4d5Zhd7PjSdpFMIqAVujk6StmeeQQY4lEkICtXSyQkLHei0YWSFk8IR7SEAbyKCWVEACOXrldM0GIINPuBd2I+roRujBTwIOvzbaYQ4ZuQYT8KrASkLWAu1rNq0N4RYdJLCxrpIUt366ga5bsbqvrfHoWePtdMqfY9eLRrFPSEBZQ2iIRWRdl1qF9NIvnuXac892/QUVcc6OwSAdvVTovdzigaAnp80WuqSHKf9n4SdAmkoW+rmQZosLktR46Do+urmUy9zsZKlzwaChp9dzqp1dl1j98G9z8zGEvwv/3VtO9q+AGG/40mHcODs4AGTmnHUjEu/Okfho3VrnOZpjDN6kb/7/6d6cp/sQLxz56r1tnEJhLImNbUz+bbDgx0v1cHs/FwcJCwwK3wAeXQIeVeM07UMbXqN06K64DWePqy5pQVn7pDGsVqfd+EPoUmfdWEiTC1mWIscaTS4NiVySFOu9iP29QirsyTSgAjJId9dpb+1qsObT9gn3HXCkbjfMi8aVkEEbke+yNG0L66nL2to6YuGddFquywg8n8Vb38imZJhLq2QZtk+TWhYo+IAnEs8aKlAwP6L3CSPMPo7NvZ++n160xKKvWHlhzYudgqi+aCcKX7QU5tdwiwuWi0kPNzcyQdb6U8C/H7Z397OH2+XsajFbLOZ3vw6Dt9frkiM2jFb6EENAvI5CMEh/HIj8y+/LQDptNjao9+S7C+8BFPfNutSKUzlP2AoZhq2QivQuEkrZqg5D8Yxv/CcGsxvrRGWNJsu0D5rkbMNMKKwlLoVY11KFO4xE4qR8lqbPz88TJavG5HKibMUglFqh8QHHHrfP/U5yopxb5UdtbcM6dbhBh0Zh2hvyKVtlIsdkryfTyTSyylMlzYGj/1pfR2iOF0f4B6V1KbVhbyH0ti+8R9hdx251XHqQQMYmV0lfQo/Qtmvp8TdXdh1vf23QhV7xUnGhPnPt+T+HbCNLj2cxjZ0VvnvoX27fi9dfdxdTGGht9qHey4ZXkIRHZHxKdqsugQJlji5EFU9ulcKaDnTOXnFcUWOT+jD7PFvOIAHZMFYjnifEDw4uhtS2UWJpn9B03Rgh8Zpj7Lo/ASPU3Wc=
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete process instance and all dependant data by key"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/process-instances/{key}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Delete process instance and all dependant data by key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of process instance",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              message: { type: "string" },
+              deleted: { type: "integer", format: "int64" },
+            },
+            title: "ChangeStatus",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

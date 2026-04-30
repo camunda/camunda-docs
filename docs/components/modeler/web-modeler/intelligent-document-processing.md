@@ -9,7 +9,9 @@ keywords:
     "intelligent document processing",
     "document automation",
     "document extraction",
+    "document classification",
     extraction,
+    classification,
   ]
 ---
 
@@ -38,13 +40,7 @@ For example, use IDP to extract and use data from invoices and other document ty
 
 Once initial [configuration](idp/idp-configuration.md#configure-idp) is complete, get started with IDP.
 
-<IdpGrid idp={gettingStartedCards} />
-
-<!-- 1. Create and publish your IDP projects in your IDP application folder:
-
-   - Create a [document extraction](idp/idp-document-extraction.md) project to identify and extract data from a single type of document (for example, an invoice).
-
-   - Create a [document automation](idp/idp-document-automation.md) project to automatically extract data from larger, more complex documents (for example, a multi-page PDF document made up of many types of documents and data). This project type is based on and requires one or more linked document extraction project(s). -->
+<IdpGrid idp={gettingStartedCards} columns={2}/>
 
 ## IDP concepts
 
@@ -52,6 +48,7 @@ Learn about key [IDP concepts](idp/idp-key-concepts.md) and terms, such as the d
 
 - [Structured and unstructured documents](idp/idp-key-concepts.md#documents)
 - [Document classification](idp/idp-key-concepts.md#classification)
+- [Preconfigured document types](idp/idp-key-concepts.md#preconfigured-types)
 - [Extraction model/Large Language Models (LLM)](idp/idp-key-concepts.md#llms)
 - [Extraction fields](idp/idp-key-concepts.md#fields)
 

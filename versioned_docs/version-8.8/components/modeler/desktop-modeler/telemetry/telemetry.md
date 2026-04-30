@@ -194,7 +194,7 @@ Example event:
 }
 ```
 
-## Task testing events
+### Task testing events
 
 Task testing events are sent when using the [task testing](../task-testing.md) feature:
 
@@ -215,12 +215,37 @@ Example task testing finished event:
 
 ### Variables panel events
 
-Variables panel events are sent on different interactions with the **[Variables](../variables.md)** panel:
+Variables panel events are sent on different interactions with the [Variables](../../data-handling.md#inspecting-variables) panel:
 
-- User filtered variables using the search input. The search term is **not** included in the event.
+- User filtered variables using the search input. The search term is not included in the event.
 - User expanded or collapsed a scope section.
 - User expanded or collapsed a variable row.
 - User copied a variable name via the copy button.
 - User copied a variable path or value via the context menu.
 
 These events do not include any additional payload data.
+
+### Connection event
+
+The `Connection Event` is sent in the following situations:
+
+- Desktop Modeler fails to connect to a cluster configured through the [connection manager](../connect-to-camunda-8.md).
+- Desktop Modeler connects to a configured cluster.
+
+The `Connection Event` includes the following properties:
+
+- `success`: `true` or `false`
+- `targetType`: `SaaS` or `Self-Managed`
+- `isLocal`: `true` or `false`
+- `reason`: An error reason, or `null`
+
+Example connection event:
+
+```json
+{
+  "success": true,
+  "targetType": "Self-Managed",
+  "isLocal": true,
+  "reason": null
+}
+```

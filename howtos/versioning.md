@@ -6,10 +6,10 @@ Our documentation is versioned. All sections are versioned together, this includ
 
 Depending on the version, location of source files and sidebar navigation definition varies:
 
-| Instance | Version(s)         | Source path                                       | Sidebars path                                                         |
-| -------- | ------------------ | ------------------------------------------------- | --------------------------------------------------------------------- |
-| `docs`   | Next               | [/docs/](../docs/)                                | [sidebars.js](../sidebars.js)                                         |
-| `docs`   | 8.8, 8.7, 8.6, ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
+| Instance | Version(s)              | Source path                                       | Sidebars path                                                         |
+| -------- | ----------------------- | ------------------------------------------------- | --------------------------------------------------------------------- |
+| `docs`   | Next                    | [/docs/](../docs/)                                | [sidebars.js](../sidebars.js)                                         |
+| `docs`   | 8.9, 8.8, 8.7, 8.6, ... | [/versioned_docs/version-\*/](../versioned_docs/) | [versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
 
 ## Create new version
 
@@ -25,9 +25,17 @@ When a version is archived, it is removed from the main docs, isolated on a bran
 
 ### Archival steps
 
-Examples: See [this 8.3 archival issue](https://github.com/camunda/camunda-docs/issues/5564) and [this 8.4 archival issue](https://github.com/camunda/camunda-docs/issues/6628) for an example of all required steps.
+Examples:
 
-Video: You can also view a video of the archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival).
+See the following previous issues for examples of all the steps required/completed.
+
+- [8.5 archival](https://github.com/camunda/camunda-docs/issues/7077)
+- [8.4 archival](https://github.com/camunda/camunda-docs/issues/6628)
+- [8.3 archival](https://github.com/camunda/camunda-docs/issues/5564)
+
+You should first create a new issue for the archival, using these previous issues as a template.
+
+Video: You can also view a video of the archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival > Archival steps).
 
 #### Step 1: Make sure the new archive version is not published in main
 
