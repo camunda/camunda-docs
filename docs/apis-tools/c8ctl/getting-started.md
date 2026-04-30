@@ -41,14 +41,114 @@ npm install @camunda8/cli -g
 
 After installation, both `c8ctl` and `c8` are available as commands in your terminal.
 
+## Quick start with a local cluster
+
+`c8ctl` includes a built-in `cluster` command that downloads and manages a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) instance. This is the fastest way to get a cluster running for development.
+
+### Start a cluster
+
+```bash
+# Start with the latest stable version (default)
+c8 cluster start
+
+# Start with a specific version
+c8 cluster start 8.9.0-alpha5
+
+# Start using a version alias
+c8 cluster start stable
+c8 cluster start alpha
+
+# Start with a major.minor version (rolling release)
+c8 cluster start 8.8
+```
+
+`c8ctl` automatically downloads the correct binary for your platform, caches it locally, launches the cluster in the background, and waits for it to become healthy.
+
+### Stop the cluster
+
+```bash
+c8 cluster stop
+```
+
+### Check cluster status
+
+```bash
+c8 cluster status
+```
+
+Reports whether a cluster is running, including connection details.
+
+### View cluster logs
+
+```bash
+c8 cluster logs
+```
+
+Streams log output from the running cluster.
+
+### Manage cached versions
+
+```bash
+# List locally cached versions and available aliases
+c8 cluster list
+
+# List all versions available on the remote download server
+c8 cluster list-remote
+
+# Download a version without starting it
+c8 cluster install 8.8
+
+# Remove a locally cached version
+c8 cluster delete 8.8
+```
+
+### Version aliases
+
+The `stable` and `alpha` aliases are resolved dynamically from the [Camunda Download Center](https://downloads.camunda.cloud/release/camunda/c8run/):
+
+| Alias    | Resolves to                                              |
+| :------- | :------------------------------------------------------- |
+| `stable` | Highest minor release that is GA (for example, 8.9)      |
+| `alpha`  | Highest minor release overall (for example, 8.10-alpha0) |
+
+When no version is specified, `c8 cluster start` defaults to `stable`.
+
+A `<major>.<minor>` version like `8.8` is treated as a rolling release — the download server directory is updated in-place with new patch releases. `c8 cluster start` uses the local version if available, while `c8 cluster install` always checks for a newer version.
+
+### Debug output
+
+Stream raw c8run logs during startup:
+
+```bash
+c8 cluster start --debug
+```
+
+### Supported platforms
+
+- macOS (x86_64, aarch64)
+- Linux (x86_64, aarch64)
+- Windows (x86_64)
+
+Cache locations:
+
+| Platform | Path                          |
+| :------- | :---------------------------- |
+| macOS    | `~/Library/Caches/c8run/`     |
+| Linux    | `~/.cache/c8run/`             |
+| Windows  | `%LOCALAPPDATA%\c8run\cache\` |
+
+Override the cache directory with the `C8RUN_CACHE_DIR` environment variable.
+
 ## Credential resolution
 
 `c8ctl` resolves credentials in the following order:
 
 1. **`--profile` flag** — one-off override for a single command.
 2. **Active profile** — set with `c8 use profile <name>`.
-3. **Environment variables** — standard `CAMUNDA_*` variables.
-4. **Localhost fallback** — `http://localhost:8080/v2`.
+3. **Environment variables** — standard `CAMUNDA_*` variables (take precedence over the default profile).
+4. **Default `local` profile** — `http://localhost:8080/v2`.
+
+When no profile has been explicitly set, `c8ctl` defaults to a built-in `local` profile that points to `http://localhost:8080/v2`. This means you can start a local cluster with `c8 cluster start` and immediately run commands without any configuration. If the connection fails, `c8ctl` shows a hint with the URL it tried to connect to.
 
 ### Use environment variables
 
@@ -208,13 +308,47 @@ c8ctl --version           # print version
 Run any verb without a resource to see what resources are available:
 
 ```bash
-c8 list                   # shows: pi, pd, ut, inc, jobs, profiles, plugins
-c8 search                 # shows: pi, pd, ut, inc, jobs, variables
+c8 list                   # shows: pi, pd, ut, inc, jobs, profiles, plugins, users, roles, groups, tenants, auth, mr
+c8 search                 # shows: pi, pd, ut, inc, jobs, variables, users, roles, groups, tenants, auth, mr
 ```
+
+## Send feedback
+
+Open the `c8ctl` GitHub issue tracker directly from the CLI:
+
+```bash
+c8 feedback
+```
+
+## Send feedback
+
+```bash
+c8 feedback
+```
+
+Opens the GitHub issues page in your browser to report bugs or request features.
+
+## Update notifications
+
+`c8ctl` checks for newer versions in the background and displays a one-time notification when an update is available. This check is suppressed in CI environments, JSON output mode, and development versions.
 
 ## Shell completion
 
-`c8ctl` supports shell completion for bash, zsh, and fish.
+The recommended way to set up shell completion is with the `install` subcommand:
+
+```bash
+c8 completion install
+```
+
+This auto-detects your shell, writes the completion file, and wires it into your shell configuration. To specify a shell explicitly:
+
+```bash
+c8 completion install --shell zsh
+```
+
+Completions auto-refresh when the CLI is upgraded.
+
+Alternatively, generate the completion script manually:
 
 <Tabs>
   <TabItem value="bash" label="Bash">
