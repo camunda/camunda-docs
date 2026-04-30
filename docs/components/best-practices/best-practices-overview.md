@@ -9,15 +9,7 @@ The Camunda Best Practices distill our experience with BPMN and DMN on the Camun
 
 Please note that, like the core product, Camunda extends the same guarantee to Best Practices. However, we cannot ensure the absolute accuracy or timeliness of the information provided, and any liability for damages resulting from the application of these recommendations is disclaimed.
 
-## Project management Best Practices
-
-<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/management/following-the-customer-success-path/", label: "The Customer Success Path", docId:"components/best-practices/management/following-the-customer-success-path"},
-{
-type:"link", href:"/docs/next/components/best-practices/management/doing-a-proper-poc/", label: "Proper POC Execution", docId:"components/best-practices/management/doing-a-proper-poc"
-}
-]}/>
-
-## Architecture Best Practices
+## Architecture best practices
 
 <DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/architecture/deciding-about-your-stack/", label: "Choosing Your Tech Stack", docId:"components/best-practices/architecture/deciding-about-your-stack"},
 {
@@ -28,7 +20,15 @@ type:"link", href:"/docs/next/components/best-practices/architecture/understandi
 }
 ]}/>
 
-## Development Best Practices
+## Build with AI
+
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/build-with-ai/", label: "Build with AI", docId:"components/best-practices/build-with-ai"},
+{
+type:"link", href:"/docs/next/components/best-practices/integrate-ai-into-your-processes/", label: "Integrate AI into your processes", docId:"components/best-practices/integrate-ai-into-your-processes"
+}
+]}/>
+
+## Development best practices
 
 <DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/development/connecting-the-workflow-engine-with-your-world/", label: "Workflow Engine Integration", docId:"components/best-practices/development/connecting-the-workflow-engine-with-your-world"},
 {
@@ -54,7 +54,7 @@ type:"link", href:"/docs/next/components/best-practices/development/local-develo
 }
 ]}/>
 
-## Modeling Best Practices
+## Modeling best practices
 
 <DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/modeling/creating-readable-process-models/", label: "Readable Process Models", docId:"components/best-practices/modeling/creating-readable-process-models"},
 {
@@ -77,10 +77,18 @@ type:"link", href:"/docs/next/components/best-practices/modeling/choosing-the-dm
 }
 ]}/>
 
-## Operations Best Practices
+## Operations best practices
 
 <DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/operations/versioning-process-definitions/", label: "Versioning Process Definitions", docId:"components/best-practices/operations/versioning-process-definitions"},
 {
 type:"link", href:"/docs/next/components/best-practices/operations/reporting-about-processes/", label: "Process Reporting", docId:"components/best-practices/operations/reporting-about-processes"
+}
+]}/>
+
+## Project management best practices
+
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/management/following-the-customer-success-path/", label: "The Customer Success Path", docId:"components/best-practices/management/following-the-customer-success-path"},
+{
+type:"link", href:"/docs/next/components/best-practices/management/doing-a-proper-poc/", label: "Proper POC Execution", docId:"components/best-practices/management/doing-a-proper-poc"
 }
 ]}/>
