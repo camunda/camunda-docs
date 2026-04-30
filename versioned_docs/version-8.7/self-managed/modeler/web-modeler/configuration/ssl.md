@@ -14,7 +14,7 @@ However, you can enable TLS-encrypted communication by following the steps below
 Provide a URL that starts with `https://` (e.g. `https://identity.example.com`) as the base URL of the Identity instance:
 
 - For the `modeler-webapp` container, provide the URL via the environment variable `IDENTITY_BASE_URL`.
-- For the `modeler-restapi` container, provide the URL via the environment variable `RESTAPI_IDENTITY_BASE_URL`.
+- For the `modeler-restapi` container, provide the URL via the environment variable `CAMUNDA_IDENTITY_BASEURL` (or the legacy variable `RESTAPI_IDENTITY_BASE_URL`).
 
 ## Configuring secure connections between Web Modeler components
 
