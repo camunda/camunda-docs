@@ -87,7 +87,7 @@ You can use variables for the following use cases:
 | Resolving identifiers into items | Resolve IDs into concrete items and write them into the collection variable that the multi-instance activity iterates over. |
 | Pre-initializing shared context  | Set helper variables used by multi-instance expressions and the body's `completionCondition`.                               |
 
-### Start listeners
+### `start` listeners
 
 Start listeners are invoked after applying the variable input mappings, and before subscribing to events, evaluating the element's expressions, and executing the element's behavior.
 
@@ -103,7 +103,7 @@ You can use variables for the following use cases:
 | Gateways                  | <p> [Inclusive](/components/modeler/bpmn/inclusive-gateways/inclusive-gateways.md), [exclusive](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md), [event-based gateways](/components/modeler/bpmn/event-based-gateways/event-based-gateways.md): Use ELs to calculate and set variables that determine the outgoing path from these gateways. The custom logic executed by ELs can evaluate current data and set the necessary variables to guide the process flow correctly.</p>                                                                                                                                                                                                                                                          |
 | Intermediate catch events | <p><ul><li><p>[Message events](/components/modeler/bpmn/message-events/message-events.md#intermediate-message-catch-events): Variables set by ELs can be used to define the message correlation key, ensuring the correct message is matched with the event.</p></li><li><p>[Timer events](/components/modeler/bpmn/timer-events/timer-events.md#intermediate-timer-catch-events): ELs can define timer expressions based on the calculated variables, enabling dynamic timer configurations.</p></li><li><p>[Signal events](/components/modeler/bpmn/signal-events/signal-events.md#signal-intermediate-catch-events): Variables can determine the signal name, allowing for flexible signal handling based on the current process state.</p></li></ul></p> |
 
-### End listeners
+### `end` listeners
 
 End listeners are invoked after applying the variable output mappings and before leaving the element.
 
