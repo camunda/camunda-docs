@@ -18,8 +18,9 @@ description: "Use c8ctl to list, search, and manage process instances, user task
 | `user-task(s)`          | `ut`  |
 | `incident(s)`           | `inc` |
 | `message`               | `msg` |
+| `variable(s)`           | `vars`, `var` |
 
-Available verbs: `list`, `search`, `get`, `create`, `cancel`, `complete`, `fail`, `activate`, `resolve`, `publish`, `correlate`.
+Available verbs: `list`, `search`, `get`, `create`, `cancel`, `complete`, `fail`, `activate`, `resolve`, `publish`, `correlate`, `set`.
 
 :::tip
 All commands respect the active profile and tenant. Pass `--profile` to override the profile for a single command:
@@ -387,6 +388,22 @@ c8 search variables --name=orderPayload --fullValue
 ```
 
 By default, long variable values are truncated. Truncated values show a `✓` in the "Truncated" column. Use `--fullValue` to see complete values.
+
+### Set variables
+
+Set variables on a process instance or a specific flow element scope using its element instance key:
+
+```bash
+# Set variables on a process instance (propagated to the outermost scope by default)
+c8 set variable 2251799813685249 --variables='{"status":"approved","amount":100}'
+
+# Set variables in the local scope only (not propagated to the parent scope)
+c8 set variable 2251799813685249 --variables='{"localCounter":1}' --local
+```
+
+The `--variables` flag accepts a JSON object. Use `--local` to restrict the update to the specified element instance scope instead of propagating to the outermost scope.
+
+The element instance key is the key of the process instance or the specific flow element scope you want to update. You can retrieve these keys from `c8 get pi` or `c8 search pi`.
 
 ## Messages
 
