@@ -5,7 +5,7 @@ sidebar_label: "User task access restrictions (V1)"
 description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
 ---
 
-User task access restrictions are the legacy task visibility model used by Tasklist V1. They ensure that only assigned or candidate [users](components/console/manage-organization/manage-users.md) and [groups](components/console/manage-organization/manage-user-groups.md) can access user tasks in [Tasklist](./introduction-to-tasklist.md).
+User task access restrictions are the legacy task visibility model used by Tasklist V1. They ensure that only assigned or candidate [users](components/hub/organization/manage-members/manage-users.md) and [groups](components/hub/organization/manage-members/manage-user-groups.md) can access user tasks in [Tasklist](./introduction-to-tasklist.md).
 
 These restrictions are based on the `candidateUsers` and `candidateGroups` defined in the BPMN process.
 

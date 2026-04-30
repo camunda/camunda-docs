@@ -90,7 +90,7 @@ A client can have one or multiple permissions from the following groups:
 - **Web Modeler API**: Interact with the [Web Modeler API](/apis-tools/web-modeler-api/index.md).
 - **IP allowlist**: Configure [IP allowlist](/components/hub/organization/manage-clusters/manage-ip-allowlists.md) rules.
 - **Connector Secrets**: [Manage secrets](/components/hub/organization/manage-clusters/manage-secrets.md) of your clusters.
-- **Members**: [Manage members](/components/console/manage-organization/manage-users.md) of your organization.
+- **Members**: [Manage members](/components/hub/organization/manage-members/manage-users.md) of your organization.
 - **Backups**: Manage [backups](/components/saas/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
 
 The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).

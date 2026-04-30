@@ -73,7 +73,7 @@ Users without **Admin** roles in Camunda Hub can deploy only on `dev`, `test`, o
 Only organization owners or users with the **Admin** role can deploy from Web Modeler to `prod` clusters.
 :::
 
-Read more in the [user roles documentation](/components/console/manage-organization/manage-users.md).
+Read more in the [user roles documentation](/components/hub/organization/manage-members/manage-users.md).
 
 </TabItem>
 </Tabs>

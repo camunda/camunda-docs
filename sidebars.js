@@ -708,10 +708,10 @@ module.exports = {
               label: "Manage members",
               link: {
                 type: "doc",
-                id: "components/console/manage-organization/manage-users",
+                id: "components/hub/organization/manage-members/manage-users",
               },
               items: [
-                "components/console/manage-organization/manage-user-groups",
+                "components/hub/organization/manage-members/manage-user-groups",
               ],
             },
             {
