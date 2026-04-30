@@ -9,7 +9,7 @@ Learn how to import resources into Web Modeler, how automatic handling works for
 
 ## Supported import resources
 
-Using Web Modeler, you can import the following resource types into a project or process application:
+Using Web Modeler, you can import the following resource types into a project:
 
 - BPMN process models.
 - Forms.
@@ -33,7 +33,7 @@ To import via a URL hosted on your Web Modeler, see [Prepare resources](./prepar
 
 :::important
 
-- **Import** and **Browse blueprints**: If the imported resources include at least **one BPMN**, Web Modeler treats them as a **process application** and groups them accordingly.
+- **Import** and **Browse blueprints**: If the imported resources include at least **one BPMN**, Web Modeler treats them as a **project** and groups them accordingly.
 - **Upload files** and **Discover connectors**: Always treats files as **independent files**, regardless of whether BPMN files are present.
   :::
 
@@ -48,7 +48,7 @@ You can resolve template conflicts using one of these two options:
 1. Save as copy: It creates a new file with a new, auto-generated ID.
 
 :::note
-This option is not available when importing process applications.
+This option is not available when importing projects.
 :::
 
 2. [Replace an existing template](#replace-a-template).
@@ -69,7 +69,7 @@ This behavior ensures consistency for processes that already use the template, b
 
 ## Ignore templates
 
-Web Modeler ignores a template if it detects a **functionally equivalent** template already exists in your project or organization. This ensures that importing the process application doesn’t break your existing setup.
+Web Modeler ignores a template if it detects a **functionally equivalent** template already exists in your project or organization. This ensures that importing the project doesn’t break your existing setup.
 
 A template is considered functionally equivalent when, after minifying the JSON, the following fields are equal:
 
@@ -83,7 +83,7 @@ A template is considered functionally equivalent when, after minifying the JSON,
 When a template is ignored:
 
 - The imported template is not added as a new resource.
-- The process application uses the existing template definition instead.
+- The project uses the existing template definition instead.
 - There may be small differences in:
   - Display name.
   - Documentation URL.
@@ -99,14 +99,14 @@ These are common reasons:
 - **Existing template**: A newer or equal version of the same template ID already exists, and the incoming template's contents are not available in your project.
 - **Invalid file**: The file does not conform to the expected schema. For example, malformed element template JSON.
 - **Network error**: Web Modeler could not download the file from the given URL.
-- **Only one README file allowed**: You cannot add additional README files because each project or process application allows only a single README.
+- **Only one README file allowed**: You cannot add additional README files because each project allows only a single README.
 - **Too large**: The file exceeds Web Modeler’s per‑file size limit.
 - **Unknown error**: A generic error for unexpected failures.
 - **Unrecognized file**: The file type is not supported by this version of Web Modeler.
 
 ### Manually upgrade a conflicting template
 
-If a process application depends on a template that is being ignored or differs from your existing template, you can manually upgrade it following these steps:
+If a project depends on a template that is being ignored or differs from your existing template, you can manually upgrade it following these steps:
 
 1. Copy the desired template contents:
    - Open the template JSON file from the import source.

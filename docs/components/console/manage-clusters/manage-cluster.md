@@ -18,7 +18,7 @@ A cluster can be renamed at any time. To rename your cluster, follow the steps b
 
 ## Resume a cluster
 
-You can resume your paused cluster during deployment, or from the **Console** at any time.
+You can resume your paused cluster during deployment, or from Camunda Hub at any time.
 
 ### Resume during deployment
 
@@ -29,14 +29,14 @@ During deployment, you can resume the selected cluster if it is paused.
 1. Select your paused cluster during deployment.
 1. Select **Resume** in the paused cluster notification.
 
-### Resume from Console
+### Resume from Camunda Hub
 
-You can resume your paused cluster from the **Console** at any time.
+You can resume your paused cluster from Camunda Hub at any time.
 
-![Resume a paused cluster from the Console](./img/cluster-resume-console.png)
+![Resume a paused cluster from Camunda Hub](./img/cluster-resume-console.png)
 
-1. Navigate to **Console**, and select the **Clusters** tab.
-1. The cluster **Status** shows “Paused” if a cluster is paused. Select the cluster that you want to resume.
+1. In Camunda Hub, select the **Clusters** tab.
+1. The cluster **Status** shows "Paused" if a cluster is paused. Select the cluster that you want to resume.
 1. On the cluster **Overview** tab, select **Resume cluster** in the **Status** row of the **Cluster Details**.
 
 ## Update a cluster
@@ -48,7 +48,7 @@ Updating a cluster is permanent. Updated clusters cannot be reverted to the prev
 You can manually or automatically update a cluster to a new Camunda 8 version.
 
 - If a cluster can be updated, a **Review Update** button is shown.
-- Currently, updates do not automatically trigger backups. You can start a manual backup via the Console **Backups** tab.
+- Currently, updates do not automatically trigger backups. You can start a manual backup via the Camunda Hub **Backups** tab.
 
 ### Minor updates
 

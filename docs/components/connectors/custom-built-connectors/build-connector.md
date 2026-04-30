@@ -77,7 +77,7 @@ and how it can be configured by process developers. Connector templates are a sp
     <a href="../../manage-connector-templates/" class="connector-card" title="Manage connector templates">
     <img src={IconConnectorManageImg} alt="Manage connector templates"/>
     <h3>Manage connector templates</h3>
-    <p>Create and manage connector templates in a Web Modeler project.</p>
+    <p>Create and manage connector templates in a workspace.</p>
   </a>
 </div>
 

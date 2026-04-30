@@ -29,7 +29,7 @@ To understand how cluster load is calculated, see [how cluster load is calculate
 
 ## View cluster load
 
-If your cluster supports load monitoring, the cluster load percentage is shown in the **Load** column on the Console **Clusters** tab.
+If your cluster supports load monitoring, the cluster load percentage is shown in the **Load** column on the Camunda Hub **Clusters** tab.
 
 <img src={CapacityPercentImg} alt="Example cluster load percentage" />
 

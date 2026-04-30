@@ -18,6 +18,6 @@ Once signed up for the **Enterprise plan**, you have access to the **Billing** p
 
 Reservations control how many clusters you can deploy. Increasing the number of reservations allows you to deploy more clusters, while decreasing the number of reservations allows you to deploy fewer clusters.
 
-You can access the **Billing** page by selecting **Organization management** in the Camunda Console navigation bar.
+You can access the **Billing** page by selecting **Organization management** in the Camunda Hub navigation bar.
 
 ![billing-overview](./img/billing-overview.png)

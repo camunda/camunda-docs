@@ -7,7 +7,7 @@ description: "Learn how to provision element templates at runtime and make them 
 To effectively manage large libraries of reusable building blocks ([element templates](/components/concepts/element-templates.md)), you can create a pipeline that:
 
 - Provisions the [dependencies of element templates](/components/modeler/element-templates/element-template-with-dependencies.md) to required clusters.
-- Makes templates available at design time to multiple Web Modeler [shared projects](/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md) within an organization.
+- Makes templates available at design time to multiple [workspaces](/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md) within an organization.
 
 ![Pipeline goal](./img/pipeline-goal.png)
 
@@ -17,18 +17,18 @@ This guide covers conceptually what your pipeline needs to do, from obtaining cr
 
 Before building your pipeline, ensure you have the following:
 
-| Prerequisite                                                                                                                    | Purpose                                                                                                                                                                                                                                                       |
-| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Git Repository](https://en.wikipedia.org/wiki/Git)                                                                             | Store all element templates                                                                                                                                                                                                                                   |
-| Template state management                                                                                                       | Maintain an authoritative inventory (for example, via Git or an IaC tool like Terraform) that defines which templates are applied to each cluster and which projects depend on them. This source acts as the single source of truth for template deployments. |
-| [Web Modeler API token](/apis-tools/web-modeler-api/authentication.md)                                                          | Access Web Modeler programmatically                                                                                                                                                                                                                           |
-| [Orchestration Cluster API client](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) | Provision dependencies to clusters                                                                                                                                                                                                                            |
+| Prerequisite                                                                                                                    | Purpose                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Git Repository](https://en.wikipedia.org/wiki/Git)                                                                             | Store all element templates                                                                                                                                                                                                                                     |
+| Template state management                                                                                                       | Maintain an authoritative inventory (for example, via Git or an IaC tool like Terraform) that defines which templates are applied to each cluster and which workspaces depend on them. This source acts as the single source of truth for template deployments. |
+| [Web Modeler API token](/apis-tools/web-modeler-api/authentication.md)                                                          | Access Web Modeler programmatically                                                                                                                                                                                                                             |
+| [Orchestration Cluster API client](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) | Provision dependencies to clusters                                                                                                                                                                                                                              |
 
 For simplicity, this guide assumes:
 
 - One organization
 - One cluster
-- One Web Modeler project
+- One [workspace](/docs/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md)
 - A pipeline handling runtime provisioning and template syncing
 
 ## Runtime provisioning
@@ -39,7 +39,7 @@ You can use sensitive information in your element templates without exposing it 
 
 These guides show you how to configure them depending on the environment you are using:
 
-- **SaaS**: Use the [Administration API](/apis-tools/administration-api/administration-api-reference.md) or [Console UI](/components/console/manage-clusters/manage-secrets.md) to configure secrets.
+- **SaaS**: Use the [Administration API](/apis-tools/administration-api/administration-api-reference.md) or [Camunda Hub UI](/components/console/manage-clusters/manage-secrets.md) to configure secrets.
 - **Self-Managed/local development**: Configure secrets outside the pipeline. See [connector secrets](/self-managed/components/connectors/connectors-configuration.md#secrets).
 
 ### Job Workers

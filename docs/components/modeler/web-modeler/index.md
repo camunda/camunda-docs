@@ -19,19 +19,19 @@ It enables teams to collaboratively design executable processes as the foundatio
 | Feature                                                                       | Description                                                                                     |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | [BPMN, DMN, and Forms modeling](../bpmn/bpmn.md)                              | Create and edit BPMN diagrams, DMN decision tables, and Camunda Forms directly in your browser. |
-| [Element templates](./element-templates/using-templates.md)                   | Reuse building blocks to standardize modeling across teams and projects.                        |
+| [Element templates](./element-templates/using-templates.md)                   | Reuse building blocks to standardize modeling across teams and workspaces.                      |
 | [Collaboration](./collaboration/collaboration.md)                             | Work with team members to speed up the process development cycle.                               |
 | [Play mode](validation/play-your-process.md)                                  | Test and validate processes during development.                                                 |
 | [Camunda Marketplace](./modeling/camunda-marketplace.md)                      | Extend Web Modeler with prebuilt blueprints and connectors.                                     |
-| [Process applications](./process-applications/process-applications.md)        | Work with sets of files and deploy them in a single bundle.                                     |
-| [Git synchronization](process-applications/git-sync.md)                       | Connect process applications to Git repositories for version control.                           |
+| [Projects](./process-applications/process-applications.md)                    | Work with sets of files and deploy them in a single bundle.                                     |
+| [Git synchronization](process-applications/git-sync.md)                       | Connect projects to Git repositories for version control.                                       |
 | [Process landscape visualization](./process-landscape-visualization.md)       | View dependencies and interactions between processes at a glance.                               |
 | [Intelligent Document Processing (IDP)](./intelligent-document-processing.md) | Extract and process data from documents to accelerate process automation.                       |
 | [AI-powered assistance](modeling/advanced-modeling/camunda-docs-ai.md)        | Get intelligent modeling suggestions and automation support.                                    |
 
 ## Access Web Modeler
 
-Access Web Modeler through the [Camunda 8 Console](../../console/introduction-to-console.md) or [launch it directly](./launch-web-modeler.md). No installation is required.
+Access the modeler in [Camunda Hub](/components/hub/index.md). No installation is required.
 
 ## Get started
 

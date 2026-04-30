@@ -51,7 +51,7 @@ You own and manage resources in your AWS VPC, including:
 - Routing and DNS configuration.
 - AWS permissions and quotas.
 
-For step-by-step Console instructions, see [Enable secure connectivity for a cluster](./console-setup.md).
+For step-by-step Camunda Hub instructions, see [Enable secure connectivity for a cluster](./console-setup.md).
 
 ## Security and isolation
 

@@ -1,9 +1,8 @@
 ---
 id: integrate-web-modeler-in-ci-cd
 title: Integrate Web Modeler into CI/CD
-description: Empower DevOps with Web Modeler and integrate into CI/CD pipelines to streamline deployments of process applications.
-keywords:
-  [CI/CD, devops, modeler, processops, process applications, integration guide]
+description: Empower DevOps with Web Modeler and integrate into CI/CD pipelines to streamline deployments of projects.
+keywords: [CI/CD, devops, modeler, processops, projects, integration guide]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -12,15 +11,15 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--intermediate">Intermediate</span>
 <span class="badge badge--medium">Time estimate: 1 hour</span>
 
-[Web Modeler](/components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
+[Web Modeler](/components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and projects. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
-- For low-risk processes, you can use Web Modeler [process application development pipeline](/components/modeler/web-modeler/process-applications/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Version comparison](/components/modeler/web-modeler/modeling/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#review), and [Git Sync](/components/modeler/web-modeler/process-applications/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
+- For low-risk processes, you can use Web Modeler [project development pipeline](/components/modeler/web-modeler/process-applications/process-application-pipeline.md) to quickly develop and progress project releases through the stages of a standard development lifecycle. [Version comparison](/components/modeler/web-modeler/modeling/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#review), and [Git Sync](/components/modeler/web-modeler/process-applications/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
 
 - For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can integrate Web Modeler into your CI/CD pipelines.
 
 Continuous integration and deployment are pivotal for rapid and reliable software development, testing, and delivery. These practices automate the building, testing, and deployment processes, leading to shorter development cycles, enhanced collaboration, and higher-quality releases.
 
-Integrating Web Modeler into your CI/CD pipelines can significantly enhance process application development and deployment workflows. By automating process application deployment, changes can be promptly and accurately reflected in the production environment. This agility empowers teams to swiftly respond to evolving business needs, fostering a flexible and adaptable process orchestration approach.
+Integrating Web Modeler into your CI/CD pipelines can significantly enhance project development and deployment workflows. By automating project deployment, changes can be promptly and accurately reflected in the production environment. This agility empowers teams to swiftly respond to evolving business needs, fostering a flexible and adaptable process orchestration approach.
 
 ## Prerequisites
 
@@ -41,10 +40,10 @@ This blueprint provides a ready-to-use proof of concept for a CI/CD pipeline for
 
 :::
 
-While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
+While a pipeline for project integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
 - Web Modeler uses [versions](/components/modeler/web-modeler/modeling/versions.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
-- A process application comprises diverse resources, such as processes, subprocesses, forms, DMN decision models, connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
+- A project comprises diverse resources, such as processes, subprocesses, forms, DMN decision models, connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
 ![Sample CI/CD setup with Web Modeler](img/modeler-ci-cd.png)
@@ -68,7 +67,7 @@ Disable manual deployments for any user by configuring environment variables `ZE
 </TabItem>
 <TabItem value="saas">
 
-Users without **Admin** roles in Console can deploy only on `dev`, `test`, or `stage` clusters. To restrict their deployment permissions remove the **Developer** role from users in Console.
+Users without **Admin** roles in Camunda Hub can deploy only on `dev`, `test`, or `stage` clusters. To restrict their deployment permissions remove the **Developer** role from users in Camunda Hub.
 
 :::info
 Only organization owners or users with the **Admin** role can deploy from Web Modeler to `prod` clusters.
@@ -245,7 +244,7 @@ The following process diagram demonstrates an example flow of how to run a previ
 
 <iframe src="https://modeler.cloud.ultrawombat.com/embed/35868bd2-a690-48de-a069-aa8ae6b3a846" style={{width: "100%", height: "500px", border: "1px solid #ccc"}} allowfullscreen></iframe>
 
-#### Review a running process application
+#### Review a running project
 
 If deployed in a review environment, processes/applications can be shared with peers for interactive review. For comprehensive review, full clusters inclusive of Operate and Tasklist can be used for process execution. This closely simulates the final experience. To integrate the preview environment with custom applications, leverage the Operate and Tasklist APIs and deploy them within the review environment.
 

@@ -16,17 +16,17 @@ If you are using the Orchestration Cluster with [Basic authentication](/self-man
 
 ## Manage clients in SaaS
 
-In Camunda 8 SaaS, client credentials are created and managed in [Console](../console/introduction-to-console.md).
+In Camunda 8 SaaS, client credentials are created and managed in [Camunda Hub](../hub/index.md).
 
-### Step 1: Create client credentials in Console
+### Step 1: Create client credentials in Camunda Hub
 
-Follow the [guide for creating client credentials in Console](../console/manage-clusters/manage-api-clients.md#create-a-client).
+Follow the [guide for creating client credentials in Camunda Hub](../console/manage-clusters/manage-api-clients.md#create-a-client).
 
 Copy the **client id** shown in the variables after you have created your client as this is required in the next step.
 
 ### Step 2: Configure authorizations in Admin
 
-If you have enabled [authorizations](/components/concepts/access-control/authorizations.md) on your cluster, the new client has no permissions by default, even after assigning scopes in Console. You must grant fine-grained permissions in Admin:
+If you have enabled [authorizations](/components/concepts/access-control/authorizations.md) on your cluster, the new client has no permissions by default, even after assigning scopes in Camunda Hub. You must grant fine-grained permissions in Admin:
 
 1.  Open the **Admin** application for your cluster.
 2.  Open the **Authorizations** tab.

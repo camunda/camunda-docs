@@ -22,13 +22,13 @@ Develop and progress project releases through the stages of a typical developmen
 link: "../../modeler/web-modeler/process-applications",
 title: "Create a project",
 image: DocsIcon,
-description: "Create a process application in your project to work on and deploy a set of related files.",
+description: "Create a project in your workspace to work on and deploy a set of related files.",
 },
 {
 link: "../../modeler/web-modeler/process-applications/deploy-process-application",
 title: "Deploy a project",
 image: DocsIcon,
-description: "Validate your process application in development before deploying it to testing, staging, or production.",
+description: "Validate your project in development before deploying it to testing, staging, or production.",
 },
 ]} columns={2}/>
 

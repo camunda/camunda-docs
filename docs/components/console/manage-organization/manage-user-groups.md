@@ -9,7 +9,7 @@ User groups are a way to organize users within your organization.
 
 ## Creating a group
 
-To create a group, navigate to the **Organization** section of Console and click on the **Groups** tab.
+To create a group, navigate to the **Organization** section of Camunda Hub and click on the **Groups** tab.
 
 ![Groups Management](./img/group-management.png)
 
@@ -19,7 +19,7 @@ Click **Create a group** and enter the name of the group.
 
 ## Adding users to a group
 
-To add users to a group, navigate to the **Organization** section of Console and click **Users > Assign members**.
+To add users to a group, navigate to the **Organization** section of Camunda Hub and click **Users > Assign members**.
 
 ![Groups Members](./img/group-members.png)
 
