@@ -24,6 +24,8 @@ The CLI supports the following SAP integration modules:
 3. **BTP plugin**: Enables rendering task forms in Fiori and provides BTP integration.
 4. **All modules**: Configures all available modules.
 
+As of version 1.2.3 `csap` downloads the OData and RFC connectors from the separate [sap-connectors](https://github.com/camunda/sap-connectors) repository. To support this change, the underlying Git repository reference and several placeholders used for these modules were updated in `csap`. The CSAP CLI source code is available in the [sap-csap-cli](https://github.com/camunda/sap-csap-cli) repository.
+
 ## Installation
 
 To use the CLI, download the binary matching your operating system and architecture from the [releases](https://github.com/camunda/sap-csap-cli/releases) section of its repository:
@@ -85,6 +87,34 @@ Linux/macOS (bash)
 export GH_TOKEN=$(gh auth token)
 ```
 
+If you want to validate GitHub Actions locally before pushing changes, you can also run workflows with [`act`](https://nektosact.com/).
+
+1. Install `act`.
+1. Run the workflow locally with `act`.
+
+`act` itself does not require a GitHub token. Only provide `GITHUB_TOKEN`, `GH_TOKEN`, or other secrets if the workflow or one of its tools requires them. For example, `csap` needs a GitHub token only when it must authenticate GitHub API requests.
+
+Example:
+
+```shell
+act pull_request \
+  -W .github/workflows/pr.yml \
+  -j your-job
+```
+
+If your workflow does require a GitHub token, export it first and pass it explicitly as a secret:
+
+```shell
+export GH_TOKEN=$(gh auth token)
+act pull_request \
+  -W .github/workflows/pr.yml \
+  -j your-job \
+  -s GITHUB_TOKEN="$GH_TOKEN" \
+  -s GH_TOKEN="$GH_TOKEN"
+```
+
+If you are using Apple Silicon, you may also need to add `--container-architecture linux/amd64` depending on the workflow image and action dependencies.
+
 #### CI/CD use
 
 If your CI/CD environment isn't GitHub, like [local use](#local-use) an access token from GitHub must be obtained to authenticate requests to the GitHub API from `csap`.
@@ -129,9 +159,10 @@ csap setup [options]
 | Option           | Type   | Description                                                                                           | Default value                                          |
 | ---------------- | ------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
 | `--for`          | string | Specifies the SAP integration module to set up. Choices: `btp-plugin`, `odata`, `rfc`, `all`.         | `odata`                                                |
-| `--camunda`      | string | Specifies the Camunda version. Choices: `8.7`, `8.6`, `8.5`.                                          | `8.7`                                                  |
+| `--camunda`      | string | Specifies the Camunda version. Choices: `8.9`, `8.8`, `8.7`, `8.6`                                    | `8.9`                                                  |
 | `--deployment`   | string | Specifies the Camunda deployment option. Choices: `SaaS`. (`SM` for self managed currently disabled.) | `SaaS`                                                 |
 | `--btpRoute`     | string | (For `btp-plugin` or `all`) Specifies the BTP route to reach the plugin. This is SAP/BTP specific.    | `camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com` |
+| `--btpPluginBranch` | string | (Optional, for `btp-plugin` or `all`) Specifies the Git branch to clone the BTP plugin from. Useful for testing and PR development scenarios. | `main`                                                 |
 | `--clusterId`    | string | Specifies the Camunda cluster ID.                                                                     | (Prompted if not provided)                             |
 | `--region`       | string | Specifies the Camunda cluster region.                                                                 | `bru-2`                                                |
 | `--clientId`     | string | Specifies the Camunda API client OAuth2 client ID.                                                    | (Prompted if not provided)                             |
