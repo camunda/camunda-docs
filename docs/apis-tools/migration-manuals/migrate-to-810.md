@@ -20,13 +20,13 @@ Details are provided for each integration type, including what changed, why, and
 
 | Integration type       | Description                                               |
 | :--------------------- | :-------------------------------------------------------- |
-| Official SDK users     | Java client, TypeScript SDK, Python SDK, C# SDK.          |
+| Official SDK users     | Java client, TypeScript SDK, Python SDK, and C# SDK.      |
 | Generated-client users | Clients generated from the Camunda OpenAPI specification. |
 | Custom integrations    | Custom code that calls the Camunda REST API directly.     |
 
-:::info
+<!--- >:::info
 For a full list of changes, see the [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md).
-:::
+::: --->
 
 ## Upgrade steps
 
@@ -53,15 +53,15 @@ Review actions required for the following breaking changes:
 
 #### Change
 
-The search filter criteria for `processDefinitionKey`, `processInstanceKey` and `bpmnProcessId` in `UserTaskFilter` has been converted into advanced search filters.
+The search filter criteria for `processDefinitionKey`, `processInstanceKey`, and `bpmnProcessId` in `UserTaskFilter` have been converted into advanced search filters.
 
 #### Why
 
-As a result of the V1 API removal, advanced process filtering for user tasks were no longer supported. The change to these variables allows users to once again use advanced process filters in conjunction with the V2 User Tasks API.
+As a result of the V1 API removal, advanced process filtering for user tasks was no longer supported. These changes let you use advanced process filters with the V2 User Tasks API again.
 
 #### Impact
 
-This impacts the Java client as `io.camunda.client.api.search.filter.UserTaskFilter` now accepts advanced filters for `processDefinitionKey`, `processInstanceKey` and `bpmnProcessId`.
+This affects the Java client because `io.camunda.client.api.search.filter.UserTaskFilter` now accepts advanced filters for `processDefinitionKey`, `processInstanceKey`, and `bpmnProcessId`.
 
 #### Action
 
@@ -73,7 +73,7 @@ This impacts the Java client as `io.camunda.client.api.search.filter.UserTaskFil
 
 <TabItem value='sdk'>
 
-Update to the latest SDK version. The new SDK version contains advanced filters for `processDefinitionKey`, `processInstanceKey` and `bpmnProcessId` in `UserTaskFilter`.
+Update to the latest SDK version. The new SDK version includes advanced filters for `processDefinitionKey`, `processInstanceKey`, and `bpmnProcessId` in `UserTaskFilter`.
 
 </TabItem>
 <TabItem value='generated'>
@@ -83,7 +83,7 @@ Regenerate your client.
 </TabItem>
 <TabItem value='custom'>
 
-No change needed if your code was already using the exact matching filters for `processDefinitionKey`, `processInstanceKey` and `bpmnProcessId` in `UserTaskFilter`.
+No change is needed if your code already uses the exact-match filters for `processDefinitionKey`, `processInstanceKey`, and `bpmnProcessId` in `UserTaskFilter`.
 
 </TabItem>
 </Tabs>
@@ -93,4 +93,4 @@ No change needed if your code was already using the exact matching filters for `
 Once you have completed the [upgrade steps](#upgrade-steps) in this guide, you should:
 
 1. Re-compile and run your test suite against the 8.10 API.
-1. Review [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) for additional context on each change.
+<!--- 1. Review [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) for additional context on each change. --->
