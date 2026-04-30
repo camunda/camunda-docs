@@ -24,19 +24,19 @@ import PageDescription from '@site/src/components/PageDescription';
 
 Upgrading to Camunda 8.10 delivers significant benefits and keeps your installation aligned and ready for future releases.
 
-<div className="list-tick">
+<!-- <div className="list-tick">
 
 - **Feature 1**: Description
 
 - **Feature 2**: Description
 
-</div>
+</div> -->
 
 ## Summary of important changes
 
 Important changes in Camunda 8.10 are summarized as follows:
 
-<table className="table-callout">
+<!-- <table className="table-callout">
 <tr>
     <td width="30%">**What's new/changed**</td>
     <td>**Summary**</td>
@@ -57,7 +57,7 @@ Important changes in Camunda 8.10 are summarized as follows:
     <td>Feature 4</td>
     <td>Description</td>
 </tr>
-</table>
+</table> -->
 
 :::info learn more and upgrade
 
@@ -66,7 +66,7 @@ Important changes in Camunda 8.10 are summarized as follows:
 
 :::
 
-## Feature 1
+<!-- ## Feature 1
 
 Description for feature 1.
 
@@ -76,19 +76,7 @@ Description for feature 1 details 1.
 
 ### Feature 1 details 2
 
-Description for feature 1 details 2.
-
-## Feature 2
-
-Description for feature 2.
-
-### Feature 2 details 1
-
-Description for feature 2 details 1.
-
-### Feature 2 details 2
-
-Description for feature 2 details 2.
+Description for feature 1 details 2. -->
 
 ## Upgrade guides {#upgrade-guides}
 

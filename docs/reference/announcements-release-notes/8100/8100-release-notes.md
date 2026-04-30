@@ -15,7 +15,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 | Minor release date | Scheduled end of maintenance | Changelog(s)                                                                 | Upgrade guides                                                                                        |
 | :----------------- | :--------------------------- | :--------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| 12 October 2026    | ?                            | [Patch Releases and Changelogs](#technical-changelogs-for-all-810x-releases) | [8.10 upgrade guides](/reference/announcements-release-notes/8100/whats-new-in-810.md#upgrade-guides) |
+| 13 October 2026    | 11 April 2028                | [Patch Releases and Changelogs](#technical-changelogs-for-all-810x-releases) | [8.10 upgrade guides](/reference/announcements-release-notes/8100/whats-new-in-810.md#upgrade-guides) |
 
 :::info 8.10 resources
 
@@ -48,14 +48,13 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <!-- https://github.com/camunda/product-hub/issues/3464 -->
 
-Camunda 8.10 introduces an update to the JSON display functionality.
+Camunda 8.10 introduces an update to the JSON display functionality in Operate (SaaS).
+
+You can now:
 
 - Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
-
 - View JSON values with consistent, easier to understand formatting.
-
 - Copy full JSON variable values to the clipboard.
-
 - Use the improved in-line variables display.
 
 This change helps navigate more complex data during operations and troubleshooting.
@@ -66,13 +65,13 @@ This change helps navigate more complex data during operations and troubleshooti
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Camunda Hub now provides a single, unified navigation with persistent breadcrumbs and a context-aware sidebar across organization, workspace/project, and orchestration-cluster views.
+Camunda Hub provides a single, unified navigation with persistent breadcrumbs and a context-aware sidebar across your organization, workspace/project, and Orchestration Cluster views.
 
 #### Usage & billing metrics for 2025 enterprise license model
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Camunda now supports the **2025 enterprise license model** in Console and Accounts.
+Camunda now supports the **2025 enterprise license model** in Camunda Hub and Accounts.
 
 - A new `licensing_model` attribute on `OrganizationMetaData` identifies whether an enterprise organization is on the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
 - For organizations with `licensing_model = 2025`, Usage and Billing views show **only Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer rendered. Legacy organizations continue to see the existing metric set.
@@ -83,20 +82,20 @@ Camunda now supports the **2025 enterprise license model** in Console and Accoun
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda Hub now lets you create new SaaS orchestration clusters on specific supported Camunda 8 minor and patch versions, including:
+You can now create new SaaS Orchestration Clusters on specific supported Camunda 8 minor and patch versions, including:
 
 - The latest recommended versions (latest patch of each active minor)
 - Other still-supported versions that you already run on existing clusters in the same organization.
 
-## Intelligent document processing (IDP)
+### Intelligent document processing (IDP)
 
 #### Support for ABBYY as an IDP Provider
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
 
-Camunda IDP now supports ABBYY as a document extraction provider.
+Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
 
-## Modeler
+### Modeler
 
 #### Support for configurable headers for execution listeners
 
