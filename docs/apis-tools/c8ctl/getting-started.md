@@ -11,7 +11,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See see [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
+`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
 :::
 
 ## About
@@ -314,14 +314,6 @@ c8 search                 # shows: pi, pd, ut, inc, jobs, variables, users, role
 
 ## Send feedback
 
-Open the `c8ctl` GitHub issue tracker directly from the CLI:
-
-```bash
-c8 feedback
-```
-
-## Send feedback
-
 ```bash
 c8 feedback
 ```
@@ -379,7 +371,7 @@ c8ctl completion fish > ~/.config/fish/completions/c8ctl.fish
 
 Fish loads the completion automatically on the next shell start.
 
-</TabItem> 
+</TabItem>
 </Tabs>
 
 ## Output modes

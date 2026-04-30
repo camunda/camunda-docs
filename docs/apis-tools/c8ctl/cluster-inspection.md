@@ -436,7 +436,7 @@ c8 delete role my-role
 c8 list groups
 c8 search groups --name=developers
 c8 get group developers
-c8 create group --name=developers
+c8 create group --groupId=developers --name=Developers
 c8 delete group developers
 ```
 

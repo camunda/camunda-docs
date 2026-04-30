@@ -11,7 +11,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See see [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
+`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
 :::
 
 ## About
@@ -208,8 +208,8 @@ c8ctl --version           # print version
 Run any verb without a resource to see what resources are available:
 
 ```bash
-c8 list                   # shows: pi, pd, ut, inc, jobs, profiles, plugins
-c8 search                 # shows: pi, pd, ut, inc, jobs, variables
+c8 list                   # shows: pi, pd, ut, inc, jobs, profiles, plugins, users, roles, groups, tenants, auth, mr
+c8 search                 # shows: pi, pd, ut, inc, jobs, variables, users, roles, groups, tenants, auth, mr
 ```
 
 ## Send feedback
@@ -271,7 +271,7 @@ c8ctl completion fish > ~/.config/fish/completions/c8ctl.fish
 
 Fish loads the completion automatically on the next shell start.
 
-</TabItem> 
+</TabItem>
 </Tabs>
 
 ## Output modes

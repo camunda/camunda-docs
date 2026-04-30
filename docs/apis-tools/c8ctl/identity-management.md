@@ -233,13 +233,13 @@ c8 unassign role admin --from-user=john
 ### Assign a user to a group
 
 ```bash
-c8 assign group developers --to-user=john
+c8 assign user john --to-group=developers
 ```
 
 ### Unassign a user from a group
 
 ```bash
-c8 unassign group developers --from-user=john
+c8 unassign user john --from-group=developers
 ```
 
 ### Assign a group to a tenant
