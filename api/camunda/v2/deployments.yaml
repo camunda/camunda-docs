@@ -5,8 +5,10 @@ paths:
         - Resource
       operationId: createDeployment
       summary: Deploy resources
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -47,10 +49,12 @@ paths:
         - Resource
       operationId: getResource
       summary: Get resource
-      description: |
+      description: |-
 
 
-        [[CONSISTENCY:STRONG]]
+        [[ADDED_IN_VERSION:8.7]]
+
+        [[CONSISTENCY:EVENTUAL]]
 
         Returns a deployed resource.
         :::info
@@ -84,10 +88,12 @@ paths:
         - Resource
       operationId: getResourceContent
       summary: Get resource content
-      description: |
+      description: |-
 
 
-        [[CONSISTENCY:STRONG]]
+        [[ADDED_IN_VERSION:8.7]]
+
+        [[CONSISTENCY:EVENTUAL]]
 
         Returns the content of a deployed resource.
         :::info
@@ -104,9 +110,10 @@ paths:
         "200":
           description: The resource content is successfully returned.
           content:
-            application/json:
+            application/octet-stream:
               schema:
                 type: string
+                format: binary
         "404":
           description: A resource with the given key was not found.
           content:
@@ -123,6 +130,8 @@ paths:
       summary: Delete resource
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 

@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieve the usage metrics based on given criteria.
@@ -85,8 +87,10 @@ paths:
         - System
       operationId: getSystemConfiguration
       summary: System configuration (alpha)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 

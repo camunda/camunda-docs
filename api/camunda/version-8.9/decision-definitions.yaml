@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.6]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for decision definitions based on given criteria.
@@ -40,6 +42,8 @@ paths:
       summary: Get decision definition
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -85,6 +89,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.6]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Returns decision definition as XML.
@@ -126,8 +132,10 @@ paths:
         - Decision definition
       operationId: evaluateDecision
       summary: Evaluate decision
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 

@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:STRONG]]
 
         Creates a new tenant.
@@ -49,6 +51,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of tenants.
@@ -88,6 +92,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a single tenant by tenant ID.
@@ -126,6 +132,8 @@ paths:
       summary: Update tenant
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -172,6 +180,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:STRONG]]
 
         Deletes an existing tenant.
@@ -207,6 +217,8 @@ paths:
       summary: Assign a user to a tenant
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -246,8 +258,10 @@ paths:
         - Tenant
       operationId: unassignUserFromTenant
       summary: Unassign a user from a tenant
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -292,6 +306,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of users for a specified tenant.
@@ -321,8 +337,10 @@ paths:
         - Tenant
       operationId: assignClientToTenant
       summary: Assign a client to a tenant
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -363,8 +381,10 @@ paths:
         - Tenant
       operationId: unassignClientFromTenant
       summary: Unassign a client from a tenant
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -409,6 +429,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of clients for a specified tenant.
@@ -438,8 +460,10 @@ paths:
         - Tenant
       operationId: assignGroupToTenant
       summary: Assign a group to a tenant
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -480,8 +504,10 @@ paths:
         - Tenant
       operationId: unassignGroupFromTenant
       summary: Unassign a group from a tenant
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -526,6 +552,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of groups for a specified tenant.
@@ -558,6 +586,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of roles for a specified tenant.
@@ -587,8 +617,10 @@ paths:
         - Tenant
       operationId: assignRoleToTenant
       summary: Assign a role to a tenant
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -629,8 +661,10 @@ paths:
         - Tenant
       operationId: unassignRoleFromTenant
       summary: Unassign a role from a tenant
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -676,6 +710,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:STRONG]]
 
         Assign a single mapping rule to a specified tenant.
@@ -716,6 +752,8 @@ paths:
       summary: Unassign a mapping rule from a tenant
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -758,6 +796,8 @@ paths:
       summary: Search mapping rules for tenant
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 

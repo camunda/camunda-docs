@@ -5,8 +5,10 @@ paths:
         - User task
       operationId: completeUserTask
       summary: Complete user task
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -56,8 +58,10 @@ paths:
         - User task
       operationId: assignUserTask
       summary: Assign user task
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -110,6 +114,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get the user task by the user task key.
@@ -148,8 +154,10 @@ paths:
         - User task
       operationId: updateUserTask
       summary: Update user task
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -199,8 +207,10 @@ paths:
         - User task
       operationId: getUserTaskForm
       summary: Get user task form
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -244,8 +254,10 @@ paths:
         - User task
       operationId: unassignUserTask
       summary: Unassign user task
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -292,6 +304,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.6]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for user tasks based on given criteria.
@@ -322,8 +336,10 @@ paths:
         - User task
       operationId: searchUserTaskVariables
       summary: Search user task variables
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -372,8 +388,10 @@ paths:
         - User task
       operationId: searchUserTaskEffectiveVariables
       summary: Search user task effective variables
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -423,6 +441,8 @@ paths:
       summary: Search user task audit logs
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 

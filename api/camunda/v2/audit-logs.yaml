@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for audit logs based on given criteria.
@@ -40,6 +42,8 @@ paths:
       summary: Get audit log
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 

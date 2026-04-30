@@ -5,8 +5,10 @@ paths:
         - Mapping rule
       operationId: createMappingRule
       summary: Create mapping rule
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -47,8 +49,10 @@ paths:
         - Mapping rule
       operationId: updateMappingRule
       summary: Update mapping rule
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -97,8 +101,10 @@ paths:
         - Mapping rule
       operationId: deleteMappingRule
       summary: Delete a mapping rule
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -130,8 +136,10 @@ paths:
         - Mapping rule
       operationId: getMappingRule
       summary: Get a mapping rule
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -166,8 +174,10 @@ paths:
         - Mapping rule
       operationId: searchMappingRule
       summary: Search mapping rules
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 

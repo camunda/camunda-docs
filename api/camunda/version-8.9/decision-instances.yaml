@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.6]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for decision instances based on given criteria.
@@ -40,6 +42,8 @@ paths:
       summary: Get decision instance
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -85,6 +89,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:STRONG]]
 
         Delete all associated decision evaluations based on provided key.
@@ -127,8 +133,10 @@ paths:
         - Decision instance
       operationId: deleteDecisionInstancesBatchOperation
       summary: Delete decision instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 

@@ -5,8 +5,10 @@ paths:
         - Process instance
       operationId: createProcessInstance
       summary: Create process instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -76,6 +78,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get the process instance by the process instance key.
@@ -119,6 +123,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get sequence flows taken by the process instance.
@@ -155,6 +161,8 @@ paths:
       summary: Get element instance statistics
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -193,6 +201,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.6]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for process instances based on given criteria.
@@ -223,8 +233,10 @@ paths:
         - Process instance
       operationId: searchProcessInstanceIncidents
       summary: Search related incidents
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -280,6 +292,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:STRONG]]
 
         Creates a batch operation to resolve multiple incidents of a process instance.
@@ -320,8 +334,10 @@ paths:
         - Process instance
       operationId: cancelProcessInstance
       summary: Cancel process instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -365,8 +381,10 @@ paths:
         - Process instance
       operationId: cancelProcessInstancesBatchOperation
       summary: Cancel process instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -406,8 +424,10 @@ paths:
         - Process instance
       operationId: resolveIncidentsBatchOperation
       summary: Resolve related incidents (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -447,8 +467,10 @@ paths:
         - Process instance
       operationId: migrateProcessInstancesBatchOperation
       summary: Migrate process instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -488,8 +510,10 @@ paths:
         - Process instance
       operationId: modifyProcessInstancesBatchOperation
       summary: Modify process instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -533,6 +557,8 @@ paths:
       summary: Delete process instance
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -582,8 +608,10 @@ paths:
         - Process instance
       operationId: deleteProcessInstancesBatchOperation
       summary: Delete process instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -622,8 +650,10 @@ paths:
         - Process instance
       operationId: migrateProcessInstance
       summary: Migrate process instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -678,8 +708,10 @@ paths:
         - Process instance
       operationId: modifyProcessInstance
       summary: Modify process instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -728,6 +760,8 @@ paths:
       summary: Get call hierarchy
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
