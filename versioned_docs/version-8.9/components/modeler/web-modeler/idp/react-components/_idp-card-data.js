@@ -54,6 +54,20 @@ export const gettingStartedCards = [
       "Publish a document extraction template for each type of document you want to extract data from.",
   },
   {
+    link: "./idp-document-classification",
+    title: "Document classification",
+    image: IconIdpExtraction,
+    description:
+      "Publish a document classification template to automatically classify documents by type.",
+  },
+  {
+    link: "./idp-document-extraction",
+    title: "Document extraction",
+    image: IconIdpExtraction,
+    description:
+      "Publish a document extraction template for each type of document you want to extract data from.",
+  },
+  {
     link: "./idp-integrate",
     title: "IDP integration",
     image: IconIdpIntegrate,
