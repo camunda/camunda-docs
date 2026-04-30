@@ -69,6 +69,19 @@ fromAi(toolCall.query, "The query you're making to the vector database.")
 
 <img src={QueryTool} alt="Search query tool" width="60%"/>
 
+### Isolate content with dynamic index names
+
+When multiple agents, tenants, or conversations share the same vector database, you can isolate their content by using **dynamic index names**. Instead of hardcoding a single index, construct the index name at runtime using process variables. For example, by appending a tenant ID or conversation ID:
+
+```feel
+"knowledge-base-" + tenantId
+```
+
+This ensures each scope reads and writes only its own documents, without requiring metadata-based filtering at query time.
+
+Because indexes are created on demand when documents are first embedded, a retrieval task may run before any documents have been stored for a given scope. This may result in an `index_not_found` error.
+See how to [handle missing or empty results](#handle-missing-or-empty-results).
+
 #### Handle missing or empty results
 
 To prevent process failures when no results are retrieved, you can set an error handler to inform the agent as follows.
