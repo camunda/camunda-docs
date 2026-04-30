@@ -5,8 +5,10 @@ paths:
         - Resource
       operationId: createDeployment
       summary: Deploy resources
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -47,8 +49,10 @@ paths:
         - Resource
       operationId: getResource
       summary: Get resource
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -84,8 +88,10 @@ paths:
         - Resource
       operationId: getResourceContent
       summary: Get resource content
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -123,6 +129,8 @@ paths:
       summary: Delete resource
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 

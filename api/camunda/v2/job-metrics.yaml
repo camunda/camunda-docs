@@ -5,8 +5,10 @@ paths:
         - Job
       operationId: getGlobalJobStatistics
       summary: Global job statistics
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -58,8 +60,10 @@ paths:
         - Job
       operationId: getJobTypeStatistics
       summary: Get job statistics by type
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -91,8 +95,10 @@ paths:
         - Job
       operationId: getJobWorkerStatistics
       summary: Get job statistics by worker
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -124,8 +130,10 @@ paths:
         - Job
       operationId: getJobTimeSeriesStatistics
       summary: Get time-series metrics for a job type
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -159,8 +167,10 @@ paths:
         - Job
       operationId: getJobErrorStatistics
       summary: Get error metrics for a job type
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 

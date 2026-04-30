@@ -5,8 +5,10 @@ paths:
         - Document
       operationId: createDocument
       summary: Upload document
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -61,8 +63,10 @@ paths:
         - Document
       operationId: createDocuments
       summary: Upload multiple documents
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -140,8 +144,10 @@ paths:
         - Document
       operationId: getDocument
       summary: Download document
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -189,8 +195,10 @@ paths:
         - Document
       operationId: deleteDocument
       summary: Delete document
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -227,8 +235,10 @@ paths:
         - Document
       operationId: createDocumentLink
       summary: Create document link
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 

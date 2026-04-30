@@ -5,8 +5,10 @@ paths:
         - Conditional
       operationId: evaluateConditionals
       summary: Evaluate root level conditional start events
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
