@@ -33,6 +33,22 @@ helm search repo camunda/camunda-platform --versions
 
 ## Upgrade notes
 
+### Web Modeler PVC name fix (chart 14.0.2+)
+
+:::warning Web Modeler persistence workaround migration
+Helm chart versions 14.0.0 and 14.0.1 contain a bug where the Web Modeler restapi deployment references a PersistentVolumeClaim named `<release>-webModeler-data` (capital M), while the PVC template creates it as `<release>-webmodeler-data` (lowercase). This mismatch causes the restapi pod to remain `Pending` when `webModeler.persistence.enabled=true`.
+
+**Chart 14.0.2+ fixes this issue.** No action is required in most cases because:
+
+- If you never enabled `webModeler.persistence`, you are not affected.
+- If you enabled it and the pod was stuck `Pending`, upgrading to chart 14.0.2+ resolves the issue automatically — the existing PVC (created with the correct lowercase name) will be mounted.
+
+**Action required only if** you manually created a PVC named `<release>-webModeler-data` (capital M) as a workaround for the bug. In this case, after upgrading to chart 14.0.2+, the deployment will look for the lowercase name and will not find your manually-created PVC. To resolve this:
+
+- Set `webModeler.persistence.existingClaim` to the name of your manually-created PVC, **or**
+- Migrate your data from the manually-created PVC to the correctly-named PVC (`<release>-webmodeler-data`).
+:::
+
 ### Bitnami Docker repository migration
 
 On August 28, 2025, Bitnami migrated its container images from [bitnami](https://hub.docker.com/u/bitnami) to [bitnamilegacy](https://hub.docker.com/u/bitnamilegacy). The Camunda Helm charts have been updated to use the new repository.
