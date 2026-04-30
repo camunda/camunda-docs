@@ -234,7 +234,7 @@ After applying both steps, the auto-generated Route for the Zeebe gRPC Ingress w
 
 Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
 
-1. **Zeebe cluster:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
+1. **Zeebe cluster:** at least one [TLS secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) is required for the Zeebe Gateway **service**; a second TLS secret for the **route** is optional and depends on your OpenShift flavor:
 
 - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also used in the other components such as Operate, Tasklist.
 
@@ -253,7 +253,7 @@ PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header 
 
 </details>
 
-- The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
+- The second TLS secret is **optional** and applies only to the exposed Route. By default, `orchestration-route.yml` ships with `orchestration.ingress.grpc.tls.secretName: '-'`, which lets the OpenShift Ingress Operator manage the Route TLS certificate automatically using the cluster's default wildcard. This is the recommended setup on self-managed OpenShift. If you want to terminate the Route with your own custom certificate (for example, the same TLS secret used for Ingress), set `orchestration.ingress.grpc.tls.secretName` to the name of a TLS secret in the Camunda namespace; the Zeebe Gateway Ingress is configured as a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration) in either case. On ROSA HCP, an explicit per-Route certificate is **required** for ALPN h2 to work — see the _ROSA HCP — additional steps for ALPN h2_ section above.
 
 To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
 
