@@ -52,6 +52,24 @@ Follow these principles when designing your agentic orchestration solution:
 
 - **Prompt versioning**: Version every prompt, so you can revert to using a previous prompt when required.
 
+### AI gateway and model routing
+
+In production agentic systems, model routing and fallback — switching between LLM providers when one is unavailable, rate-limited, or non-compliant — is a common need. This capability belongs to the **AI gateway layer**, not the orchestration layer. Dedicated AI gateways (such as LiteLLM or OpenRouter) handle concerns like:
+
+- Routing requests to a preferred model or provider.
+- Falling back to an alternative model when the primary is unavailable or rate-limited.
+- Enforcing provider-level policies (for example, data residency or cost caps).
+
+Camunda operates at the **orchestration layer**, complementing these gateways by providing production-level visibility and control over the outcomes of routing decisions:
+
+- **Observability**: Track which model and provider handled each agent interaction through process variables and [Operate](/components/operate/operate-introduction.md). When your gateway routes to a fallback model, Camunda can capture this context — including the model used, the provider, and the reason for fallback — making every decision auditable at the process level.
+- **Process-level reasoning**: Use gateway-reported metadata (for example, `model_used`, `fallback_reason`) in downstream process logic. For example, a BPMN gateway can route to a human review step when a fallback model was used, or flag the instance for compliance review.
+- **Resilience patterns**: Combine Camunda's built-in retry and incident handling with your gateway's routing logic. If all providers fail, Camunda can escalate to a human task or trigger an alternative process path rather than silently failing.
+
+:::tip
+When connecting your AI agent to an LLM through an AI gateway, configure the gateway to return routing metadata (such as which model served the request and why). Store this metadata in process variables so you can observe and act on it in your BPMN process.
+:::
+
 ### How execution works in an AI agent
 
 In Camunda agentic orchestration, decision-making and orchestration are intentionally split:
