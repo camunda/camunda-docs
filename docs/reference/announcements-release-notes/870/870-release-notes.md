@@ -551,7 +551,7 @@ You can export activity logs as JSON or CSV files from the Console UI or API.
 - **UI:** On the Organization management **Activity** tab, click **Export activity**.
 - **API:** Send a GET request to the Management API `GetJson` or `GetCsv` endpoint.
 
-To learn more about this feature, see [view organization activity](/components/console/manage-organization/view-organization-activity.md).
+To learn more about this feature, see [view organization activity](/components/hub/organization/manage-organization-settings/view-organization-activity.md).
 
 <!-- https://github.com/camunda/camunda/issues/24374, https://github.com/camunda/camunda/issues/24385, https://github.com/camunda/camunda/issues/24377 -->
 

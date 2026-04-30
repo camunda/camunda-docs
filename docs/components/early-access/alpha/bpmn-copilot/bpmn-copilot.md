@@ -25,7 +25,7 @@ Creating a BPMN process diagram with the BPMN Copilot will overwrite existing wo
 
 To use the BPMN Copilot in Web Modeler, take the following steps:
 
-1. If you have not already done so, [opt in](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
+1. If you have not already done so, [opt in](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
 2. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
 3. Click **New project > Create new > BPMN diagram** to open the Camunda Copilot chat window.
 

@@ -28,4 +28,4 @@ You can integrate an IdP with both Admin (for the Orchestration Cluster) and Man
 
 Camunda 8 SaaS currently only supports external IdP integration using **SAML** or **Azure Active Directory (EntraID)**.
 
-- [Connect to an identity provider](../../console/manage-organization/external-sso.md)
+- [Connect to an identity provider](../../hub/organization/manage-organization-settings/external-sso.md)

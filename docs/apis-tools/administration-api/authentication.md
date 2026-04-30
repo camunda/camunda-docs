@@ -81,7 +81,7 @@ Client credentials are created for an organization, and therefore can access all
 
 Scopes define the access for client credentials. A client can have one or multiple of the following permissions:
 
-![createConsoleApiClient](../../components/console/manage-organization/img/create-console-api-client.png)
+![createConsoleApiClient](../../components/hub/organization/manage-organization-settings/img/create-console-api-client.png)
 
 A client can have one or multiple permissions from the following groups:
 
