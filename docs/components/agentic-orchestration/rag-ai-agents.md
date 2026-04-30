@@ -8,6 +8,8 @@ keywords:
 toc_max_heading_level: 2
 ---
 
+import QueryTool from './img/search-query-tool.png';
+
 Use Retrieval-Augmented Generation (RAG) with the [Vector Database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) to give your AI agents access to persistent, domain-specific knowledge that grows over time.
 
 ## When to use long-term memory
@@ -62,6 +64,8 @@ fromAi(toolCall.query, "The query you're making to the vector database.")
 5. Configure the [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) with your provider credentials.
 6. Configure the [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with your database connection details and **index name**. The index name identifies the collection of documents the agent searches. You can use different indexes for different knowledge domains.
 7. In the **Output mapping** section, set the output **Result variable** to `toolCallResult`.
+
+<img src={QueryTool} alt="Search query tool" width="70%"/>
 
 #### Handle missing or empty results
 
