@@ -41,9 +41,9 @@ Complete the following steps in this guide:
 
 Review the actions required for the following 8.10 changes:
 
-| Type                                                         | Change                                                                                                              |
-| :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
-| <span className="label-highlight red">Breaking change</span> | [Search filters: `UserTaskFilter` process filters converted into advanced search filters] (#usertask-process-filter)|
+| Type                                                         | Change                                                                                                               |
+| :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| <span className="label-highlight red">Breaking change</span> | [Search filters: `UserTaskFilter` process filters converted into advanced search filters] (#usertask-process-filter) |
 
 ## Breaking changes
 
@@ -61,7 +61,7 @@ As a result of the V1 API removal, advanced process filtering for user tasks wer
 
 #### Impact
 
-This impacts the Java client as `io.camunda.client.api.search.filter.UserTaskFilter` now accepts advanced filters for  `processDefinitionKey`, `processInstanceKey` and `bpmnProcessId`.
+This impacts the Java client as `io.camunda.client.api.search.filter.UserTaskFilter` now accepts advanced filters for `processDefinitionKey`, `processInstanceKey` and `bpmnProcessId`.
 
 #### Action
 
