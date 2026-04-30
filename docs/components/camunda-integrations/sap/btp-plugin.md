@@ -13,7 +13,7 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 
 ## Prerequisites
 
-- **Camunda API Client**: [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+- **Camunda API Client**: [Create an API client](/components/hub/organization/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
 - Locally, for configuring via `csap` only (see below): [Node.js >= 20 LTS](https://nodejs.org/en/about/previous-releases)
 - **On SAP BTP**:
   - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
@@ -33,7 +33,6 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 ![Camunda Forms in Fiori](./img/forms-fiori.png)
 
 - Equip the last user task with a custom header `final-user-task` and the value:
-
   - `success` to display the last user task on the "happy path".
   - `fail` to use that user task to communicate a failed process to the user.
 
@@ -102,7 +101,7 @@ Either walk yourself through the prompts or provide all information to the CLI:
 
 - `csap setup` will guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for btp-plugin \

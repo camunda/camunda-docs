@@ -33,7 +33,7 @@ The audit log is enabled by default. Because of the increase in resource usage o
 
 You can configure the audit log to fine tune log thoroughness and resource usage according to your needs:
 
-- [SaaS](../console/manage-clusters/configure-audit-log.md)
+- [SaaS](../hub/organization/manage-clusters/configure-audit-log.md)
 - [Self-Managed](../../self-managed/concepts/audit-log/configure.md)
 
 ## Get started

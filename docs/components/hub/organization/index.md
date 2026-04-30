@@ -25,13 +25,13 @@ Create, monitor, and assign clusters for seamless execution across all rollout s
 
 <AoGrid ao={[
 {
-link: "../../console/manage-clusters/create-cluster",
+link: "../../hub/organization/manage-clusters/create-cluster",
 title: "Create a cluster",
 image: DocsIcon,
 description: "To deploy and run your process, you must create a cluster in Camunda 8.",
 },
 {
-link: "../../console/manage-clusters/manage-cluster",
+link: "../../hub/organization/manage-clusters/manage-cluster",
 title: "Manage your cluster",
 image: DocsIcon,
 description: "Learn how to rename, resume, update, resize, or delete your cluster.",
@@ -50,13 +50,13 @@ Manage the users, user groups, and roles in your organization:
 
 <AoGrid ao={[
 {
-link: "../../console/manage-organization/manage-users",
+link: "../../hub/organization/manage-organization-settings/manage-users",
 title: "Manage users",
 image: DocsIcon,
 description: "Manage users of your organization.",
 },
 {
-link: "../../console/manage-organization/manage-user-groups",
+link: "../../hub/organization/manage-organization-settings/manage-user-groups",
 title: "Manage user groups",
 image: DocsIcon,
 description: "User groups are a way to organize users within your organization.",
@@ -69,13 +69,13 @@ Manage organizational settings, and view usage alerts and history:
 
 <AoGrid ao={[
 {
-link: "../../console/manage-organization/usage-history",
+link: "../../hub/organization/manage-organization-settings/usage-history",
 title: "View usage history",
 image: DocsIcon,
 description: "Monitor the number of started process instances, decision instances, and the number of task users.",
 },
 {
-link: "../../console/manage-organization/view-organization-activity",
+link: "../../hub/organization/manage-organization-settings/view-organization-activity",
 title: "View organization activity",
 image: DocsIcon,
 description: "View details of all activity within an organization, such as cluster creation, deletion, updates, and user invitations.",

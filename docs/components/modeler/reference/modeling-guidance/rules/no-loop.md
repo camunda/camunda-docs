@@ -11,7 +11,7 @@ This error occurs when a BPMN model contains an automated loop (without human in
 This may result in:
 
 - Endless execution
-- [Excessive resource usage](../../../../../components/console/manage-clusters/cluster-capacity.md)
+- [Excessive resource usage](../../../../../components/hub/organization/manage-clusters/cluster-capacity.md)
 
 To fix this problem, add a timer, user task, or external event (e.g., message catch) to break the straight-through loop and ensure controlled execution.
 

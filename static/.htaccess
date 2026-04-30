@@ -161,6 +161,12 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# Redirects associated with Camunda Hub
+RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-members/manage-user-groups [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-members/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/$1 [R=301,L]
+
 # Fix broken links from camunda-platform-get-started README
 
 # Get started with Optimize

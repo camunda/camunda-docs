@@ -22,19 +22,19 @@ Manage organizational resources, including clusters and workspaces, and govern t
 
 <AoGrid ao={[
 {
-link: "../console/manage-clusters/manage-cluster",
+link: "../hub/organization/manage-clusters/manage-cluster",
 title: "Manage clusters",
 image: DocsIcon,
 description: "Create, monitor, and assign clusters for seamless execution across all rollout stages.",
 },
 {
-link: "../console/manage-organization/manage-users",
+link: "../hub/organization/manage-members/manage-users",
 title: "Manage members",
 image: DocsIcon,
 description: "Manage the users, user groups, and roles in your organization.",
 },
 {
-link: "../console/manage-organization/organization-settings",
+link: "../hub/organization/manage-organization-settings/organization-settings",
 title: "Manage organization",
 image: DocsIcon,
 description: "Manage organizational settings, and view usage alerts and history.",

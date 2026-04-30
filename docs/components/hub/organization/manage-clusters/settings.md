@@ -35,7 +35,7 @@ You can set the cluster to automatically update to newer versions of Camunda 8 w
 - Disable this setting if you do not want the cluster to automatically update. You must manually update the cluster.
 
 :::tip
-For more information on updating clusters, see [update your cluster](/components/console/manage-clusters/manage-cluster.md#update-a-cluster).
+For more information on updating clusters, see [update your cluster](/components/hub/organization/manage-clusters/manage-cluster.md#update-a-cluster).
 :::
 
 ## Enforce user task restrictions
@@ -47,7 +47,7 @@ User task access restrictions are supported only by the Tasklist V1 API and are 
 
 To continue using user task access restrictions, see [switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes) to enable Tasklist V1 mode.
 
-In Tasklist V2, task visibility is controlled by authorization-based access control rather than user task access restrictions. For a conceptual overview of how authorizations control access to user tasks, see [authorization-based access control](../../concepts/access-control/authorizations.md).
+In Tasklist V2, task visibility is controlled by authorization-based access control rather than user task access restrictions. For a conceptual overview of how authorizations control access to user tasks, see [authorization-based access control](../../../concepts/access-control/authorizations.md).
 :::
 
 - Enable this setting to use user task access restrictions in the cluster when Tasklist V1 is enabled. Tasks assigned to users or candidate groups are only visible to assigned users or respective group members.
@@ -61,7 +61,7 @@ For more information on user task access restrictions, see [user task access res
 
 ## Delete this cluster
 
-You can _permanently_ delete the selected cluster. See [delete your cluster](/components/console/manage-clusters/manage-cluster.md#delete-a-cluster).
+You can _permanently_ delete the selected cluster. See [delete your cluster](/components/hub/organization/manage-clusters/manage-cluster.md#delete-a-cluster).
 
 :::caution
 Deleting a cluster is permanent. You cannot reuse a cluster after it has been deleted.

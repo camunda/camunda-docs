@@ -24,7 +24,7 @@ To use the **GitHub connector**, you must have a GitHub instance and an [access 
 
 :::note
 Use Camunda secrets to avoid exposing your GitHub access token credentials as plain text.
-Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a GitHub connector task
@@ -50,7 +50,7 @@ If you select **PAT**, provide the following:
 
 If you select **GitHub App**, provide the following:
 
-- **Private key**: The private key of your GitHub App. It is recommended to use [secrets](/components/console/manage-clusters/manage-secrets.md) to store this value securely.
+- **Private key**: The private key of your GitHub App. It is recommended to use [secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to store this value securely.
 - **App ID**: The ID of your GitHub App.
 - **Installation ID**: The installation ID of your GitHub App. Refer to the [GitHub documentation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation#generating-an-installation-access-token) for more information on how to obtain the installation ID.
 

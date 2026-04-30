@@ -37,7 +37,7 @@ In Camunda Modeler, select **ServiceNow Flow Starter** from the connector templa
 | Authentication        | ServiceNow credentials (username and password).                                                                                      |
 
 :::tip
-Store ServiceNow credentials securely as [Camunda secrets](/components/console/manage-clusters/manage-secrets.md) and reference them in the connector configuration (e.g., `{{secrets.snUser}}`).
+Store ServiceNow credentials securely as [Camunda secrets](/components/hub/organization/manage-clusters/manage-secrets.md) and reference them in the connector configuration (e.g., `{{secrets.snUser}}`).
 :::
 
 ![Configuration of the Flow Starter connector in Camunda Modeler.](../img/flow-starter.png)

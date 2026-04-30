@@ -53,7 +53,7 @@ While a pipeline for project integration and deployment resembles general softwa
 Before getting started, obtain API clients and tokens for integrating Web Modeler and accessing the process engine via API:
 
 - [Obtain an API token for Web Modeler](/apis-tools/web-modeler-api/authentication.md)
-- [Obtain an API client for Zeebe](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
+- [Obtain an API client for Zeebe](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client)
 
 ### Disable manual deployments from Web Modeler
 
@@ -73,7 +73,7 @@ Users without **Admin** roles in Camunda Hub can deploy only on `dev`, `test`, o
 Only organization owners or users with the **Admin** role can deploy from Web Modeler to `prod` clusters.
 :::
 
-Read more in the [user roles documentation](/components/console/manage-organization/manage-users.md).
+Read more in the [user roles documentation](/components/hub/organization/manage-members/manage-users.md).
 
 </TabItem>
 </Tabs>

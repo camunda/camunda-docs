@@ -15,7 +15,7 @@ or the registered application in the [Azure Active Directory](https://aad.portal
 the relevant [Microsoft Graph API permissions](https://learn.microsoft.com/en-us/graph/permissions-reference).
 
 :::note
-Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a Microsoft Teams connector task

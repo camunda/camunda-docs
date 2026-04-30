@@ -685,18 +685,18 @@ module.exports = {
               label: "Manage clusters",
               link: {
                 type: "doc",
-                id: "components/console/manage-clusters/manage-cluster",
+                id: "components/hub/organization/manage-clusters/manage-cluster",
               },
               items: [
-                "components/console/manage-clusters/create-cluster",
-                "components/console/manage-clusters/cluster-connectors",
-                "components/console/manage-clusters/manage-api-clients",
-                "components/console/manage-clusters/manage-secrets",
-                "components/console/manage-clusters/manage-alerts",
-                "components/console/manage-clusters/manage-ip-allowlists",
-                "components/console/manage-clusters/create-backups",
-                "components/console/manage-clusters/settings",
-                "components/console/manage-clusters/cluster-capacity",
+                "components/hub/organization/manage-clusters/create-cluster",
+                "components/hub/organization/manage-clusters/cluster-connectors",
+                "components/hub/organization/manage-clusters/manage-api-clients",
+                "components/hub/organization/manage-clusters/manage-secrets",
+                "components/hub/organization/manage-clusters/manage-alerts",
+                "components/hub/organization/manage-clusters/manage-ip-allowlists",
+                "components/hub/organization/manage-clusters/create-backups",
+                "components/hub/organization/manage-clusters/settings",
+                "components/hub/organization/manage-clusters/cluster-capacity",
               ],
             },
             {
@@ -708,10 +708,10 @@ module.exports = {
               label: "Manage members",
               link: {
                 type: "doc",
-                id: "components/console/manage-organization/manage-users",
+                id: "components/hub/organization/manage-members/manage-users",
               },
               items: [
-                "components/console/manage-organization/manage-user-groups",
+                "components/hub/organization/manage-members/manage-user-groups",
               ],
             },
             {
@@ -719,17 +719,17 @@ module.exports = {
               label: "Manage organization settings",
               link: {
                 type: "doc",
-                id: "components/console/manage-organization/organization-settings",
+                id: "components/hub/organization/manage-organization-settings/organization-settings",
               },
               items: [
-                "components/console/manage-organization/external-sso",
-                "components/console/manage-organization/view-organization-activity",
-                "components/console/manage-organization/enable-alpha-features",
-                "components/console/manage-organization/usage-history",
-                "components/console/manage-organization/usage-alerts",
-                "components/console/manage-organization/advanced-search",
-                "components/console/manage-organization/switch-organization",
-                "components/console/manage-organization/delete-account",
+                "components/hub/organization/manage-organization-settings/external-sso",
+                "components/hub/organization/manage-organization-settings/view-organization-activity",
+                "components/hub/organization/manage-organization-settings/enable-alpha-features",
+                "components/hub/organization/manage-organization-settings/usage-history",
+                "components/hub/organization/manage-organization-settings/usage-alerts",
+                "components/hub/organization/manage-organization-settings/advanced-search",
+                "components/hub/organization/manage-organization-settings/switch-organization",
+                "components/hub/organization/manage-organization-settings/delete-account",
                 {
                   "Manage plan": [
                     "components/console/manage-plan/create-account",

@@ -8,7 +8,7 @@ Create secrets and reference them in your connectors without exposing sensitive 
 
 :::caution
 **Connector secrets** are managed at the cluster level, so ensure you deploy your processes to the cluster that contains the necessary secrets.
-If you deploy and the secret is missing, [Operate](../../operate/operate-introduction.md) will show an incident.
+If you deploy and the secret is missing, [Operate](../../../operate/operate-introduction.md) will show an incident.
 :::
 
 To create a new secret, go to your cluster and take the following steps:

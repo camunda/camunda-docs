@@ -17,7 +17,7 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 ## Alerts
 
-Camunda 8 [Alerts](/components/console/manage-clusters/manage-alerts.md) can notify you when process instances stop with an error.
+Camunda 8 [Alerts](/components/hub/organization/manage-clusters/manage-alerts.md) can notify you when process instances stop with an error.
 
 | Host location     | Data handled                                          | Personal data processing |
 | :---------------- | :---------------------------------------------------- | :----------------------- |
@@ -29,7 +29,7 @@ Camunda 8 Alerts are optional. This information only applies if you use Alerts.
 
 ## Connector secrets (credentials)
 
-This only applies if you want to create [connector secrets](/components/console/manage-clusters/manage-secrets.md) and are using the Camunda-hosted connector version. Connector secrets are configured and referenced via Camunda Hub.
+This only applies if you want to create [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) and are using the Camunda-hosted connector version. Connector secrets are configured and referenced via Camunda Hub.
 
 - If you want to control the location where the secrets are stored, you can also [host your own connector runtime](/components/connectors/custom-built-connectors/host-custom-connector.md).
 - If you want to use your own secret management solution, see [Secrets (Self‑Managed)](/self-managed/components/connectors/connectors-configuration.md).
@@ -64,7 +64,7 @@ You can use Camunda Hub and/or the [Desktop Modeler](/components/modeler/desktop
 :::info Learn more
 
 - [Admin](/components/admin/admin-introduction.md)
-- [Connect to an identity provider](/components/console/manage-organization/external-sso.md)
+- [Connect to an identity provider](/components/hub/organization/manage-organization-settings/external-sso.md)
 
 :::
 
@@ -79,7 +79,7 @@ You can choose a [region](regions.md) in **GCP** or **AWS**. Each [Orchestration
 :::info Learn More
 
 - [Backups](/components/saas/backups.md)
-- [Cluster backups](/components/console/manage-clusters/cluster-backups.md)
+- [Cluster backups](/components/hub/organization/manage-clusters/cluster-backups.md)
 
 :::
 
