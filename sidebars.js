@@ -1456,6 +1456,11 @@ module.exports = {
         "apis-tools/migration-manuals/saas-orchestration-architecture",
       ],
     },
+    {
+      type: "category",
+      label: "Upgrade to Camunda 8.10",
+      items: ["apis-tools/migration-manuals/migrate-to-810"],
+    },
   ],
   Reference: [
     "reference/overview",
