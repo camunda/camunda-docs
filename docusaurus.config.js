@@ -383,6 +383,10 @@ module.exports = {
               href: "https://camunda.com/services/enterprise-support-guide/",
             },
             {
+              label: "Developers",
+              href: "https://developers.camunda.com/",
+            },
+            {
               label: "Academy",
               href: "https://academy.camunda.com/",
             },
