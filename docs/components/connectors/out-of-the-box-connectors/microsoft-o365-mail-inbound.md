@@ -20,7 +20,7 @@ The **Microsoft 365 Email Inbound connector** allows you to consume emails by mo
 Learn more about [creating, configuring, and authorizing Microsoft Apps](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
 
 :::note
-Use Camunda secrets to avoid exposing your Microsoft credentials as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your Microsoft credentials as plain text. Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Security considerations
@@ -134,7 +134,7 @@ The simple filter provides the following options:
 For more complex filtering, use the **Advanced Configuration** section to provide an [OData filter query](https://learn.microsoft.com/en-us/graph/query-parameters#filter-parameter).
 
 :::note
-OData filter queries are evaluated at deployment time and can only use static values or [Camunda secrets](/components/console/manage-clusters/manage-secrets.md). They cannot reference process variables. If you need dynamic filtering based on runtime data, use the [Activation Condition](#activation-condition) section instead.
+OData filter queries are evaluated at deployment time and can only use static values or [Camunda secrets](/components/hub/organization/manage-clusters/manage-secrets.md). They cannot reference process variables. If you need dynamic filtering based on runtime data, use the [Activation Condition](#activation-condition) section instead.
 :::
 
 Examples of filters not supported by the simple filter:

@@ -255,7 +255,7 @@ The SQL connector now supports Oracle Database connections.
 
 Connector manage and run in Console now supports management of multiple connector runtime instances.
 
-<p><a href="../../../../components/console/manage-clusters/cluster-connectors" class="link-arrow">Manage your connectors</a></p>
+<p><a href="../../../../components/hub/organization/manage-clusters/cluster-connectors" class="link-arrow">Manage your connectors</a></p>
 
 ### Docker distribution
 
@@ -1397,7 +1397,7 @@ To learn more about Camunda Process Test, see [Camunda Process Test](/apis-tools
 
 Connector manage and run in Console now supports management of multiple connector runtime instances.
 
-To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
+To learn more about this feature, see [manage your connectors](/components/hub/organization/manage-clusters/manage-connectors.md).
 
 ### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha4}
 

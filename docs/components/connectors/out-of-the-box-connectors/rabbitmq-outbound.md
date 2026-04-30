@@ -114,7 +114,7 @@ You can use an output mapping to map the response:
 
 ### How do I store secrets for my connector?
 
-Use Camunda secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 </TabItem>
 
@@ -263,7 +263,7 @@ The **Output mapping** section allows you to configure the mapping of the Rabbit
 
 ### How do I store secrets for my connector?
 
-Use Camunda secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ### What is the output format of the RabbitMQ connector?
 

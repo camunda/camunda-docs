@@ -20,7 +20,7 @@ To use the **Amazon Bedrock AgentCore Runtime connector**, you need the followin
 Learn more about AgentCore Runtime in the [official documentation](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agents-tools-runtime.html).
 
 :::note
-Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon Bedrock AgentCore Runtime connector task

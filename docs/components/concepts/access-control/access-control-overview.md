@@ -119,7 +119,7 @@ For environments using OIDC:
 1. Generate a JSON Web Token (JWT).
 2. Include the token in each API request as: `Authorization: Bearer <TOKEN>`.
 
-- [Generate a token (SaaS)](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
+- [Generate a token (SaaS)](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client)
 - [Generate a token (Self-Managed)](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md)
 
 Example request using a token:

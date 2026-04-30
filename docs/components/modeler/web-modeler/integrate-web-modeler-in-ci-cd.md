@@ -53,7 +53,7 @@ While a pipeline for project integration and deployment resembles general softwa
 Before getting started, obtain API clients and tokens for integrating Web Modeler and accessing the process engine via API:
 
 - [Obtain an API token for Web Modeler](/apis-tools/web-modeler-api/authentication.md)
-- [Obtain an API client for Zeebe](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
+- [Obtain an API client for Zeebe](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client)
 
 ### Disable manual deployments from Web Modeler
 

@@ -124,7 +124,7 @@ You must update your clients to at least 8.7.16, as this contains the fix for th
 
 #### Webhook alerts JSON format
 
-In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/console/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
+In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/hub/organization/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
 
 In 8.8.9, the `processVersion` field reverts to returning an integer value representing the process version only. A new `processVersionTag` field is introduced to include the process version tag when available.
 
@@ -544,7 +544,7 @@ DocumentReference
   
 #### Connector SDK: Changes to activity logging in inbound connectors
 
-The Connector SDK 8.8 introduces a new way to [log activities](/components/console/manage-clusters/manage-connectors.md#activity-log) in inbound connectors.
+The Connector SDK 8.8 introduces a new way to [log activities](/components/hub/organization/manage-clusters/manage-connectors.md#activity-log) in inbound connectors.
 
 Objects of the `InboundConnectorContext` class now provide a new overloaded method:
 

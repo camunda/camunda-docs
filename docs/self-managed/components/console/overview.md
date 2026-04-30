@@ -23,7 +23,7 @@ Console delivers real-time insights into orchestration clusters and reduces the 
 
 ## Connector management
 
-You can [manage your connectors](/components/console/manage-clusters/manage-connectors.md) in Console. This lets Console connect securely over HTTPS to remote Camunda orchestration clusters.
+You can [manage your connectors](/components/hub/organization/manage-clusters/manage-connectors.md) in Console. This lets Console connect securely over HTTPS to remote Camunda orchestration clusters.
 
 - Monitor inbound connector webhooks, message queue subscriptions, and polling subscriptions.
 - Check connector health, including which connectors are running or failing.
