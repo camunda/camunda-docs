@@ -1,11 +1,13 @@
 ---
-id: dual-region
-title: "Tier 2 Dual-region"
-sidebar_label: "Tier 2: Dual-region"
-description: "A dual-region setup allows you to run Camunda in two regions synchronously."
+id: tier-2-dual-region
+title: "Tier 2: Dual-Region"
+sidebar_label: "Tier 2 — Dual-Region"
+description: "Conceptual overview of Tier 2 dual-region active-passive for Camunda Self-Managed: reference architecture, data consistency, failover flow, and secondary storage comparison."
 ---
 
-<!-- Image source: https://docs.google.com/presentation/d/1mbEIc0KuumQCYeg1YMpvdVR8AEUcbTWqlesX-IxVIjY/edit?usp=sharing -->
+Tier 2 formalizes Camunda's production-proven dual-region configuration — the dual-region architecture that enterprise customers already operate — with published RTO/RPO targets, a certified reference architecture, and a documented failover runbook.
+
+In Tier 2, a full Camunda Orchestration Cluster runs continuously in both a primary and a secondary region. Zeebe replicates its log stream across both regions using the Raft protocol, and secondary storage (Elasticsearch) is populated independently in each region via the Camunda Exporter. Under normal operation, user traffic is routed exclusively to the primary region. On primary-region failure, an operator executes the failover runbook to restore service from the secondary region.
 
 import DualRegion from "./img/dual-region.jpg";
 
@@ -169,10 +171,6 @@ Two Kubernetes clusters are required for the Helm chart installation.
 OpenSearch is **not supported** in dual-region configurations.
 :::
 
-:::note
-RDBMS (relational database) secondary storage is **not supported** in dual-region configurations.
-:::
-
 #### Network requirements
 
 - Kubernetes clusters, services, and pods must not have overlapping CIDRs. Each cluster must use distinct CIDRs that do not conflict or overlap with those of any other cluster to avoid routing issues.
@@ -331,3 +329,11 @@ The **Recovery Time Objective (RTO)** estimates are based on our internal tests 
 - Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS that utilizes the managed EKS and VPC peering for a dual-region setup with Terraform.
   - The concepts in the guide are mainly cloud-agnostic, and the guide can be adopted by other cloud providers.
 - Familiarize yourself with the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.
+
+## Related documentation
+
+- [Multi-region resilience tiers overview](./resilience-tiers.md)
+- [Tier 1 — Cold Recovery](./tier-1-cold-recovery.md)
+- [Dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md)
+- [Amazon EKS dual-region setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)
+- [Camunda backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
