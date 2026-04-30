@@ -30,7 +30,7 @@ Organization admins can configure the deployment policy for projects in the Web 
 
 <TabItem value='saas'>
 
-By default, only [organization administrators](/components/console/manage-organization/manage-users.md) can deploy projects to clusters marked as
+By default, only [organization administrators](/components/hub/organization/manage-members/manage-users.md) can deploy projects to clusters marked as
 [production stages](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#deployment-pipeline-stages) from Web Modeler.
 
 You can change this in the **Project deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Project deployment**.

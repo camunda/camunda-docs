@@ -44,7 +44,7 @@ For Self-Managed installations, the bulk invitation only works for users who hav
 
 ## Assign workspace and organization roles to collaborators
 
-To understand what permissions each role has, review [access rights and permissions](/components/modeler/web-modeler/collaboration/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/console/manage-organization/manage-users.md).
+To understand what permissions each role has, review [access rights and permissions](/components/modeler/web-modeler/collaboration/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/hub/organization/manage-members/manage-users.md).
 
 If you previously invited collaborators to your organization _and_ workspace in the section prior, select the three vertical dots to the right of the users' name and select **Edit user**. Check which roles the user should be assigned and select **Confirm**.
 

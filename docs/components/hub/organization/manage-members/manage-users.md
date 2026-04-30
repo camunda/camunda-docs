@@ -62,7 +62,7 @@ to enable Tasklist V1 mode.
 
 In Tasklist V2, task visibility is controlled by authorization-based access control rather than
 user task access restrictions. For a conceptual overview of how authorizations control access to
-user tasks, see [authorization-based access control](../../concepts/access-control/authorizations.md).
+user tasks, see [authorization-based access control](../../../concepts/access-control/authorizations.md).
 :::
 
 You can [restrict user access](components/tasklist/user-task-access-restrictions.md) to user tasks in Tasklist V1.
