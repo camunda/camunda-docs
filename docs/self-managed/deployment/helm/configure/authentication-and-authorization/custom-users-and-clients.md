@@ -7,6 +7,17 @@ description: Configure users and OAuth2 clients for Management Identity in Camun
 
 When connected to Keycloak, the Camunda Helm chart allows you to configure Management Identity users and OAuth2 clients through the `identity` section in your Helm values file. This page explains how to define users and clients with YAML examples and descriptions of common fields.
 
+:::note Keycloak permissions alone are not enough for Camunda API access
+
+Adding a client via `identity.clients` grants Keycloak-level permissions (JWT `resource_access`
+claims). When authorization enforcement is enabled, Camunda also requires entries in its own
+**authorization DB** before the client can call Camunda APIs.
+
+See [Granting API permissions to machine clients](./machine-client-authorization.md) for how to
+provision those entries via `orchestration.security.initialization.authorizations`.
+
+:::
+
 ## Add OAuth2 clients
 
 Define custom OAuth2 clients under the `identity.clients` list.
