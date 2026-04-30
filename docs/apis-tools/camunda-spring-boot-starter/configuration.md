@@ -1093,7 +1093,11 @@ The event will grant you access to a list of deployments that have been created.
 
 ## Observe metrics
 
-The Camunda Spring Boot Starter provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
+The Camunda Spring Boot Starter provides some out-of-the-box integrations with [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, these features can be enabled.
+
+### Observing metrics
+
+The Camunda Spring Boot Starter provides some out-of-the-box metrics:
 
 - `camunda.job.invocations`: Number of invocations of job workers (tagging the job type)
 
@@ -1115,3 +1119,60 @@ management:
 ```
 
 Access them via [http://localhost:8080/actuator/metrics/](http://localhost:8080/actuator/metrics/).
+
+### Managing job workers
+
+The Camunda Spring Boot Starter provides a custom actuator `jobworkers` for managing job workers at runtime.
+
+In a default setup, you can enable this actuator to be served via http:
+
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: jobworkers
+```
+
+It contains the following features.
+
+#### Get a job worker
+
+Use this endpoint to fetch information about one specific job worker.
+
+```
+GET /jobworkers/:job-type
+```
+
+**Request**
+
+Path Parameters:
+
+- `job-type` string: The original job type of the job worker, returned as `typeSelector` in the response
+
+**Response**
+
+Schema:
+
+- `typeSelector` `string`: The type by which the job worker is selected
+- `type` `string`: The job type
+- `name` `string`: The name
+- `fetchVariables` `array[string]`: The variables the job worker is fetching, only effective if `forceFetchAllVariables` is false
+- `timeout` `duration`: The job worker timeout
+- `enabled` `boolean`: whether the job worker is enabled
+- `forceFetchAllVariables` `boolean`: Whether all variables are fetched, regardless of the `fetchVariables`
+- `tenantIds` `array[string]`: The tenants the job worker is working on, only effective if `tenantFilter` is set to `PROVIDED`
+- `maxJobsActive` `integer`: The max amount of jobs the job worker is activating at a time
+- `requestTimeout` `duration`: The async response timeout for activating new jobs
+- `pollInterval` `duration`: The waiting time between polling for jobs
+- `streamEnabled` `boolean`: Whether jobs are streamed as well
+- `streamTimeout` `duration`: The timeout for a job stream
+- `maxRetries` `integer`: The maximum amount of times a response command (complete, fail, bpmnError) will be sent
+- `retryBackoff` `duration`: The waiting time between the attempts to send a response command
+- `tenantFilter` `enum[PROVIDED, ASSIGNED]`: How jobs will be activated for different tenants: `PROVIDED` will make use of the `tenantIds` while `ASSIGNED` uses the tenants the authenticated principal is authorized for in Camunda
+
+#### Get all job workers
+
+#### Update one job worker
+
+#### Update all job workers
