@@ -87,7 +87,7 @@ export const usingCamundaCards = [
       "Business intelligence and analytics for enterprise customers.",
   },
   {
-    link: "./hub/index.md",
+    link: "./hub/",
     title: "Camunda Hub",
     image: IconConsoleImg,
     description:
