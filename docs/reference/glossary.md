@@ -104,6 +104,12 @@ Camunda can integrate with SAP BTP to orchestrate business processes across SAP 
 
 ## C
 
+### Catalog
+
+A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization-level in Camunda Hub, and used by delivery teams across workspaces and projects.
+
+- [Catalog](/components/hub/organization/manage-catalog/index.md)
+
 ### Client
 
 See [Zeebe Client](#zeebe-client).
@@ -458,6 +464,12 @@ A process variable represents the execution state (i.e data) of a process instan
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
 
+### Project
+
+A collection of related files in a Camunda Hub workspace you can work on and deploy as a single bundle. A workspace may contain multiple projects.
+
+- [Project](/components/modeler/web-modeler/process-applications/process-applications.md)
+
 ### Prompt
 
 A prompt is the input provided to a [generative AI model](#generative-ai). Prompt engineering refers to the practice of crafting effective instructions to achieve desired results from the AI.
@@ -636,6 +648,12 @@ See [process instance](#process-instance).
 ### Workflow instance variable
 
 See [process variable](#process-variable).
+
+### Workspace
+
+A collaboration environment within an organization, representing a team or business domain. A workspace is assigned members, roles, projects, and clusters, so all related work happens in one shared space.
+
+- [Workspace](/components/hub/workspace/index.md)
 
 ## Z
 
