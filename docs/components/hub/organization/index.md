@@ -25,13 +25,13 @@ Create, monitor, and assign clusters for seamless execution across all rollout s
 
 <AoGrid ao={[
 {
-link: "../../console/manage-clusters/create-cluster",
+link: "../../hub/organization/manage-clusters/create-cluster",
 title: "Create a cluster",
 image: DocsIcon,
 description: "To deploy and run your process, you must create a cluster in Camunda 8.",
 },
 {
-link: "../../console/manage-clusters/manage-cluster",
+link: "../../hub/organization/manage-clusters/manage-cluster",
 title: "Manage your cluster",
 image: DocsIcon,
 description: "Learn how to rename, resume, update, resize, or delete your cluster.",

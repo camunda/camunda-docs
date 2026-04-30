@@ -25,7 +25,7 @@ For more information, refer to the [Amazon EventBridge documentation](https://do
 Before using the **Amazon EventBridge connector**, ensure you have the necessary permissions in your AWS account to send events to EventBridge. You will need an access key and secret key of a user with the appropriate permissions. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
 
 :::note
-Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon EventBridge connector task
@@ -128,7 +128,6 @@ The Amazon EventBridge Webhook connector supports four types of authorization:
 - **None (without authorization)**: No authentication is required for the webhook. Anyone can trigger the webhook without any credentials.
 
 - **JWT (JSON Web Token)**: This authorization type requires the following properties to be filled:
-
   - **JWK URL**: A link to the JSON Web Key (JWK) Set containing the public keys used to verify the JWT signature. [Learn more about JWK](https://datatracker.ietf.org/doc/html/rfc7517).
   - **JWT Role Property Expression** (optional): An expression to extract the roles from the JWT token. These roles will be used to check against the **Required Roles** property. For example, the expression could be:
 
@@ -143,7 +142,6 @@ The Amazon EventBridge Webhook connector supports four types of authorization:
   ```
 
 - **Basic**: This authorization type requires the following properties to be filled:
-
   - **Username**: The username to authenticate the webhook.
   - **Password**: The password associated with the provided username.
 

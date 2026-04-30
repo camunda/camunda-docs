@@ -69,7 +69,7 @@ For a full reference of MCP configuration properties, see [Property reference](/
 Once the MCP server is enabled, you can connect any MCP-compliant client. The approach depends on your client's capabilities and authentication requirements.
 
 :::important
-When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page.
+When you [create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details — including the base URL, OAuth endpoint, client ID, and audience — are displayed on the credentials page.
 :::
 
 ### MCP endpoint URL
@@ -112,7 +112,7 @@ The proxy authenticates to the MCP server using OAuth 2.0 client credentials, an
 #### Prerequisites
 
 - [Node.js](https://nodejs.org/) 18 or later.
-- [Client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your Camunda cluster with the **Orchestration Cluster API** scope enabled.
+- [Client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) for your Camunda cluster with the **Orchestration Cluster API** scope enabled.
 
 #### Configuration
 
@@ -147,7 +147,7 @@ For example, use the following in `claude_desktop_config.json` for Claude Code:
 | `CAMUNDA_TOKEN_AUDIENCE` | Token audience for the Orchestration Cluster API.                                                                                                                                                              |
 
 :::tip Where to find these values
-When you [create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are displayed on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet directly from the **MCP** tab on the credentials screen.
+When you [create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console, all required connection details are displayed on the credentials page. You can also copy a ready-to-use `c8ctl` configuration snippet directly from the **MCP** tab on the credentials screen.
 :::
 
 For the full list of supported environment variables, see the [`c8ctl` documentation](https://github.com/camunda/c8ctl).
@@ -169,13 +169,13 @@ The [MCP Remote Client connector](/components/connectors/out-of-the-box-connecto
 - **URL**: Your MCP endpoint URL (see [above](#mcp-endpoint-url)).
 - **Authentication**: OAuth 2.0.
 
-| Field                    | Value                                                                                                                                          |
-| :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
-| OAuth 2.0 token endpoint | Your OAuth token endpoint (`https://login.cloud.camunda.io/oauth/token` for SaaS).                                                             |
-| Client ID                | Your OAuth client ID.                                                                                                                          |
-| Client secret            | Your OAuth client secret. Use [secrets](/components/console/manage-clusters/manage-secrets.md) (for example, `{{secrets.MCP_CLIENT_SECRET}}`). |
-| Audience                 | The audience for your cluster API (`zeebe.camunda.io` for SaaS).                                                                               |
-| Client authentication    | Send client credentials in body.                                                                                                               |
+| Field                    | Value                                                                                                                                                   |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| OAuth 2.0 token endpoint | Your OAuth token endpoint (`https://login.cloud.camunda.io/oauth/token` for SaaS).                                                                      |
+| Client ID                | Your OAuth client ID.                                                                                                                                   |
+| Client secret            | Your OAuth client secret. Use [secrets](/components/hub/organization/manage-clusters/manage-secrets.md) (for example, `{{secrets.MCP_CLIENT_SECRET}}`). |
+| Audience                 | The audience for your cluster API (`zeebe.camunda.io` for SaaS).                                                                                        |
+| Client authentication    | Send client credentials in body.                                                                                                                        |
 
 For more details, see [MCP Remote Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector.md).
 

@@ -71,7 +71,7 @@ The recommended configuration is via the zero-configuration constructor, with al
 **The environment variables you must set are outlined below. Replace these with your secrets and URLs.**
 
 :::info
-To configure a client and capture these values when creating the client, see [setting up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
+To configure a client and capture these values when creating the client, see [setting up client connection credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client).
 :::
 
 ### Self-managed configuration

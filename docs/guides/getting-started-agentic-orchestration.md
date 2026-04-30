@@ -150,7 +150,7 @@ You will configure these secrets differently depending on your working environme
 ]}>
 
 <TabItem value="saas">
-Configure the secrets using the [Console](../components/console/manage-clusters/manage-secrets.md).
+Configure the secrets using the [Console](../components/hub/organization/manage-clusters/manage-secrets.md).
 </TabItem>
 
 <TabItem value="self-managed">

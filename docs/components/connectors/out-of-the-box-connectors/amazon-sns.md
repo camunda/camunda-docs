@@ -84,7 +84,7 @@ Example of a valid message attribute as a FEEL value:
 
 ### How do I store AWS IAM secrets for my SNS connector?
 
-Use Camunda secrets to avoid exposing your AWS IAM credentials. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your AWS IAM credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ### AWS authentication types
 

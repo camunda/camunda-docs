@@ -34,7 +34,7 @@ User task access restrictions are enabled by default on SaaS clusters that run T
 :::
 
 You can enable or disable user task access restrictions for Tasklist V1 from the
-[cluster settings in Camunda Hub](components/console/manage-clusters/settings.md#enforce-user-task-restrictions).
+[cluster settings in Camunda Hub](components/hub/organization/manage-clusters/settings.md#enforce-user-task-restrictions).
 
 When activated, tasks are visible only to:
 

@@ -23,7 +23,7 @@ The necessary endpoints must be deployed beforehand and point to the operational
 Learn more on how to deploy real-time and asynchronous models in the [official SageMaker documentation](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-deployment.html).
 
 :::note
-Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon SageMaker connector task

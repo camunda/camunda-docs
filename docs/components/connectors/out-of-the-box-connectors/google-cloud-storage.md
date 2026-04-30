@@ -31,7 +31,7 @@ The service account must be granted access to the bucket:
 
 To keep your **JSON key** secure, avoid including it directly in the BPMN XML. Instead, create a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (e.g., `GOOGLE_SERVICE_ACCOUNT_KEY`) for reference in the connector configuration.
 
 ## Operation

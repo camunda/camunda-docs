@@ -20,7 +20,7 @@ If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart guide for co
 - A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/latest/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak
 
 :::note
-Clients in Camunda 8 SaaS and applications in Camunda 8 Self-Managed serve a similar purpose. One key difference is that for Camunda 8 SaaS, you can set up specific [client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client), whereas in Management Identity, an application is created with credentials automatically assigned.
+Clients in Camunda 8 SaaS and applications in Camunda 8 Self-Managed serve a similar purpose. One key difference is that for Camunda 8 SaaS, you can set up specific [client connection credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client), whereas in Management Identity, an application is created with credentials automatically assigned.
 :::
 
 ## Steps

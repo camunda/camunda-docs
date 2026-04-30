@@ -92,7 +92,7 @@ Once you have completed all the required prerequisites, configure IDP in a suita
 
 If you are using AWS as your cloud provider, add the following AWS connector secrets required for IDP.
 
-- **SaaS:** Create and configure as [connector secrets](/components/console/manage-clusters/manage-secrets.md).
+- **SaaS:** Create and configure as [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 - **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/deployment/helm/configure/secret-management.md) and [secrets in manual installations](/self-managed/components/connectors/connectors-configuration.md#secrets).
 
 | Connector secret Key  | Required | Description                                                                                                                                                                                               |

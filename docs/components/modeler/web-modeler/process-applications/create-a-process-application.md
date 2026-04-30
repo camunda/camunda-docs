@@ -24,7 +24,7 @@ To create a project:
 When you create a project, you must select a development cluster to deploy to.
 
 - If you have already created a cluster, turn on the toggle next to the cluster name in **Select a development cluster**.
-- If you have not yet [created a cluster](/components/console/manage-clusters/create-cluster.md), or if **No Cluster has been created yet** is shown, select **Create new dev cluster**. The Camunda Hub **Clusters** tab opens so you can create a new cluster.
+- If you have not yet [created a cluster](/components/hub/organization/manage-clusters/create-cluster.md), or if **No Cluster has been created yet** is shown, select **Create new dev cluster**. The Camunda Hub **Clusters** tab opens so you can create a new cluster.
 
 :::note
 

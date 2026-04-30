@@ -35,7 +35,7 @@ The document extraction template integrates with Camunda document handling conne
 
 :::note
 
-- You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster. See [configuring IDP](idp-configuration.md).
+- You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/hub/organization/manage-clusters/manage-secrets.md) to your cluster. See [configuring IDP](idp-configuration.md).
 
 :::
 
