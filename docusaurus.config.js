@@ -376,6 +376,37 @@ module.exports = {
           position: "left",
         },
         {
+          type: "dropdown",
+          label: "Help",
+          position: "right",
+          items: [
+            {
+              label: "Support",
+              href: "https://camunda.com/services/enterprise-support-guide/",
+            },
+            {
+              label: "Developers",
+              href: "https://developers.camunda.com/",
+            },
+            {
+              label: "Academy",
+              href: "https://academy.camunda.com/",
+            },
+            {
+              label: "Community",
+              href: "https://forum.camunda.io/",
+            },
+            {
+              label: "Blog",
+              href: "https://camunda.com/blog/",
+            },
+            {
+              label: "Roadmap",
+              href: "https://roadmap.camunda.com/",
+            },
+          ],
+        },
+        {
           type: "html",
           position: "right",
           value:

@@ -138,12 +138,17 @@ function DocVersionBannerEnabled({
   const latestVersionSuggestedDoc =
     latestDocSuggestion ?? getVersionMainDoc(latestVersionSuggestion);
 
+  const alertClass =
+    versionMetadata.banner === "unreleased"
+      ? "alert alert--warning margin-bottom--md"
+      : "alert alert--info margin-bottom--md";
+
   return (
     <div
       className={clsx(
         className,
         ThemeClassNames.docs.docVersionBanner,
-        "alert alert--info margin-bottom--md"
+        alertClass
       )}
       role="alert"
     >
