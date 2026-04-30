@@ -63,11 +63,15 @@ This change helps navigate more complex data during operations and troubleshooti
 
 #### Unified navigation and context-aware sidebar
 
+<!-- https://github.com/camunda/product-hub/issues/3382 (moved to alpha2, delete?)-->
+
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
 Camunda Hub provides a single, unified navigation with persistent breadcrumbs and a context-aware sidebar across your organization, workspace/project, and Orchestration Cluster views.
 
 #### Usage & billing metrics for 2025 enterprise license model
+
+<!-- https://github.com/camunda/product-hub/issues/3571 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
@@ -80,6 +84,8 @@ Camunda now supports the **2025 enterprise license model** in Camunda Hub and Ac
 
 #### Cluster version selection for SaaS orchestration clusters
 
+<!-- https://github.com/camunda/product-hub/issues/3582 -->
+
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 You can now create new SaaS Orchestration Clusters on specific supported Camunda 8 minor and patch versions, including:
@@ -91,6 +97,8 @@ You can now create new SaaS Orchestration Clusters on specific supported Camunda
 
 #### Support for ABBYY as an IDP Provider
 
+<!-- https://github.com/camunda/product-hub/issues/3492 -->
+
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
 
 Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
@@ -98,6 +106,8 @@ Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extractio
 ### Modeler
 
 #### Support for configurable headers for execution listeners
+
+<!-- https://github.com/camunda/product-hub/issues/3450 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
