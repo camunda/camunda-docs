@@ -719,17 +719,17 @@ module.exports = {
               label: "Manage organization settings",
               link: {
                 type: "doc",
-                id: "components/console/manage-organization/organization-settings",
+                id: "components/hub/organization/manage-organization-settings/organization-settings",
               },
               items: [
-                "components/console/manage-organization/external-sso",
-                "components/console/manage-organization/view-organization-activity",
-                "components/console/manage-organization/enable-alpha-features",
-                "components/console/manage-organization/usage-history",
-                "components/console/manage-organization/usage-alerts",
-                "components/console/manage-organization/advanced-search",
-                "components/console/manage-organization/switch-organization",
-                "components/console/manage-organization/delete-account",
+                "components/hub/organization/manage-organization-settings/external-sso",
+                "components/hub/organization/manage-organization-settings/view-organization-activity",
+                "components/hub/organization/manage-organization-settings/enable-alpha-features",
+                "components/hub/organization/manage-organization-settings/usage-history",
+                "components/hub/organization/manage-organization-settings/usage-alerts",
+                "components/hub/organization/manage-organization-settings/advanced-search",
+                "components/hub/organization/manage-organization-settings/switch-organization",
+                "components/hub/organization/manage-organization-settings/delete-account",
                 {
                   "Manage plan": [
                     "components/console/manage-plan/create-account",

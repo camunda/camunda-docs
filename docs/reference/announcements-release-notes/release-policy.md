@@ -86,7 +86,7 @@ Non-cluster components include:
 Non-cluster component versions are released continuously.
 
 - Customers are automatically updated to the latest component version when it is ready for release.
-- Admins can [enable alpha features](/components/console/manage-organization/enable-alpha-features.md) for non-cluster components in organization settings.
+- Admins can [enable alpha features](/components/hub/organization/manage-organization-settings/enable-alpha-features.md) for non-cluster components in organization settings.
 
 ### New Camunda 8 versions
 

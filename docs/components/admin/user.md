@@ -8,7 +8,7 @@ Users are individuals who are granted with access to an orchestration cluster an
 
 ## SaaS
 
-In a SaaS environment, user management is handled through [Camunda Hub](/components/hub/organization/manage-members/manage-users.md). From Camunda Hub, you can invite new users to your organization and manage their roles. For more advanced user management, you can configure [single sign-on (SSO)](/components/console/manage-organization/external-sso.md) to integrate with your own identity provider.
+In a SaaS environment, user management is handled through [Camunda Hub](/components/hub/organization/manage-members/manage-users.md). From Camunda Hub, you can invite new users to your organization and manage their roles. For more advanced user management, you can configure [single sign-on (SSO)](/components/hub/organization/manage-organization-settings/external-sso.md) to integrate with your own identity provider.
 
 ## Self-Managed
 

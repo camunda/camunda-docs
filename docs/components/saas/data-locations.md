@@ -64,7 +64,7 @@ You can use Camunda Hub and/or the [Desktop Modeler](/components/modeler/desktop
 :::info Learn more
 
 - [Admin](/components/admin/admin-introduction.md)
-- [Connect to an identity provider](/components/console/manage-organization/external-sso.md)
+- [Connect to an identity provider](/components/hub/organization/manage-organization-settings/external-sso.md)
 
 :::
 
