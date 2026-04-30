@@ -8,6 +8,8 @@ keywords:
 toc_max_heading_level: 2
 ---
 
+import ErrorHandler from './img/error-handler.png';
+import HumanGate from './img/human-gateway.png';
 import QueryTool from './img/search-query-tool.png';
 
 Use Retrieval-Augmented Generation (RAG) with the [Vector Database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md) to give your AI agents access to persistent, domain-specific knowledge that grows over time.
@@ -38,7 +40,7 @@ To configure either operation, you need:
 - A supported [embedding model](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) and its provider credentials.
 - An index name that identifies the collection to read from or write to.
 
-## Retrieve context from the vector database
+## Retrieve from the vector database
 
 To perform a semantic search from a vector database, you can use one of the following two approaches.
 
@@ -65,7 +67,7 @@ fromAi(toolCall.query, "The query you're making to the vector database.")
 6. Configure the [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with your database connection details and **index name**. The index name identifies the collection of documents the agent searches. You can use different indexes for different knowledge domains.
 7. In the **Output mapping** section, set the output **Result variable** to `toolCallResult`.
 
-<img src={QueryTool} alt="Search query tool" width="70%"/>
+<img src={QueryTool} alt="Search query tool" width="60%"/>
 
 #### Handle missing or empty results
 
@@ -87,6 +89,8 @@ if contains(error.message, "index_not_found") then bpmnError("index_not_found", 
     "searchResult": "Nothing was found"
   }
   ```
+
+<img src={ErrorHandler} alt="Handle empty results" width="60%"/>
 
 ### Prefetch context with a vector database retrieval
 
@@ -149,21 +153,21 @@ Refer to the [AI Agent connector documentation](/components/connectors/out-of-th
 You can combine both patterns: prefetch broad context to prime the agent, and still expose a retrieval tool for follow-up searches the agent initiates on its own.
 :::
 
-## Populate the vector database
+## Store in the vector database
 
-Knowledge can be loaded into the vector database in two ways:
+You can store knowledge in the vector database in two ways:
 
-- **Batch import**: Documents are embedded and stored before the agent starts processing, typically as part of a data preparation process. Use a Vector Database connector task configured with **Operation: Embed document** in a separate BPMN process or script.
+- **Batch import**: Documents are embedded and stored before the agent starts processing, typically as part of a data preparation process. Use a Vector Database connector task in a separate BPMN process or script.
 - **Runtime ingestion**: New knowledge is added to the vector database as the agent encounters it. For example, when a human provides an answer that did not previously exist in the database.
 
 :::note
 Re-embedding the same document is **not idempotent**: if you store it again without deleting the existing chunks first, you’ll create **duplicate chunks** in the vector database.
 :::
 
-For both approaches, configure the embed task as follows:
+For both approaches, add a **Vector Database connector task** and configure it as follows:
 
 1. Set **Operation** to **Embed document**.
-1. Set **Document source** to **Plain text** (or another supported source type).
+1. Set **Document source** to **Plain text**.
 1. Provide the text to embed. This can be a process variable, a form output, or any string value.
 1. Configure the same [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) and [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) settings used by the retrieval method so both operations target the same index.
 
@@ -173,37 +177,27 @@ Make sure the embedding model configuration, including vector dimensions, matche
 
 ## Gate memory writes with human approval
 
-Allowing an agent to write to its own knowledge base without human oversight can lead to incorrect or irrelevant data being stored, which degrades future retrieval quality.
+Allowing an agent to write to its own knowledge database without human oversight can lead to incorrect
+or irrelevant data being stored.
 
-:::tip
-It is recommended to involve a human in the decision to store new information.
-:::
-
-A common pattern is to use a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) that presents the proposed content to a reviewer, who can approve or reject storing it. To implement this:
-
-1. After the content to be stored is available as a process variable, add a user task with a [form](/components/modeler/forms/camunda-forms-reference.md) that displays the content and includes a checkbox or approval field.
-1. Add an [exclusive gateway](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md) after the user task with two outgoing paths:
-   - **Approved**: Routes to a vector database connector task with **Operation: Embed document**.
-   - **Rejected**: Skips the embed step and continues the process.
-1. Use the reviewer's output variable as the gateway condition.
-
-This pattern ensures a human remains in the loop for all knowledge base updates, keeping the agent's memory accurate and trustworthy over time.
-
-## Human escalation as a memory source
-
-A particularly effective pattern for building long-term memory is to combine a human escalation tool with runtime knowledge ingestion. When the agent cannot find an answer in the vector database, it escalates to a human via a user task. The human's response is returned to the agent as `toolCallResult`, and if the reviewer decides it’s worth keeping, it’s also stored in the vector database for future queries.
+Besides, an effective pattern for building long-term memory is to combine a human escalation tool with runtime knowledge ingestion. When the agent can’t find an answer in the vector database, it escalates to a human. The human responds to the agent and decides whether it’s worth storing the answer in the vector database for future queries.
 
 Over time, this creates a self-improving knowledge base: as humans answer previously unknown questions, the agent's ability to resolve those questions autonomously increases and the rate of human escalations decreases.
 
 To implement this pattern:
 
-1. Add a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) with **no incoming flows** inside the ad-hoc sub-process. The agent will invoke it as a tool when it cannot resolve a query from its existing knowledge.
-2. Configure the task's **Input mappings** to pass the agent's question to the form using `fromAi()`:
+1. Add a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) inside the AI Agent's ad-hoc sub-process. The agent will invoke it as a tool when it cannot resolve a query from its existing knowledge.
+2. Configure the user task's **Input mapping** to pass the agent's question to the form using `fromAi()`. For example:
 
 ```feel
 fromAi(toolCall.question, "The question the agent needs a human to answer.")
 ```
 
-3. The task form should capture the human's answer and a decision about whether to store it in long-term memory.
-4. Use the human's answer as `toolCallResult` so it is returned directly to the agent.
-5. After the user task completes, apply the [gated memory write](#gate-memory-writes-with-human-approval) pattern described above to conditionally store the answer in the vector database.
+3. Add a [form](/components/modeler/forms/camunda-forms-reference.md) to the user task. It should capture the human's answer and include a decision checkbox for whether to store it in long-term memory.
+4. Configure the user task's **Output mapping** to set the human's answer as `toolCallResult` so it is returned directly to the agent.
+5. Add an [exclusive gateway](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md) after the user task with two outgoing paths:
+   - **Approved**: [Store in the vector database](#store-in-the-vector-database).
+   - **Rejected**: Do not store.
+6. Use the human's output variable as the gateway condition.
+
+<img src={HumanGate} alt="Human approval" width="60%"/>
