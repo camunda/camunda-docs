@@ -1,7 +1,7 @@
----
 id: camunda-spoke
 title: Camunda Spoke for ServiceNow
 description: "Use the Camunda Spoke in ServiceNow to start and interact with Camunda process instances from ServiceNow flows."
+
 ---
 
 The Camunda Spoke for ServiceNow lets you orchestrate workflows between Camunda and ServiceNow, empowering your organization to automate cross-system workflows end to end.
@@ -10,7 +10,7 @@ With the Spoke installed in ServiceNow, you can start, signal, correlate, or can
 
 ## Spoke actions
 
-### Start rocess
+### Start process
 
 Start a Camunda process from ServiceNow.
 
