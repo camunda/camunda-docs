@@ -199,7 +199,7 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 <details>
    <summary>ROSA HCP — additional steps for ALPN h2</summary>
 
-These steps are only required on **Red Hat OpenShift Service on AWS – Hosted Control Planes (ROSA HCP)** managed clusters. Self-managed OpenShift clusters where the cluster-wide `default-enable-http2=true` annotation is honored do **not** need this workaround.
+These steps are only required on **Red Hat OpenShift Service on AWS – Hosted Control Planes (ROSA HCP)** managed clusters. Self-managed OpenShift clusters where the cluster-wide `ingress.operator.openshift.io/default-enable-http2=true` annotation is honored do **not** need this workaround.
 
 On ROSA HCP, the `ingress-config-validation.managed.openshift.io` admission webhook denies the cluster-wide annotation, and the per-`IngressController` annotation alone does not make HAProxy advertise ALPN `h2` on the default certificate path. As a result, gRPC clients (Zeebe) fail with `No ALPN negotiated`.
 
@@ -219,12 +219,14 @@ To fix this, copy the router default wildcard TLS Secret from `openshift-ingress
    ./generic/openshift/single-region/procedure/copy-router-tls-secret.sh
    ```
 
-2. Override `orchestration.ingress.grpc.tls.secretName` in `orchestration-route.yml` (the default value `'-'` lets the Ingress Operator manage the cert automatically; on ROSA HCP, replace it with the Secret you just created):
+2. After you have merged the OpenShift overlay into your local `values.yml` (see the _Configure Route TLS_ section below), override `orchestration.ingress.grpc.tls.secretName` in that `values.yml`. The default value `'-'` lets the Ingress Operator manage the certificate automatically; on ROSA HCP, replace it with the Secret you just created:
 
    ```bash
    yq -i ".orchestration.ingress.grpc.tls.secretName = \"$CAMUNDA_PLATFORM_ROUTER_TLS_SECRET\"" \
-       generic/openshift/single-region/helm-values/orchestration-route.yml
+       values.yml
    ```
+
+   This keeps the upstream `orchestration-route.yml` overlay file untouched so future updates can be pulled cleanly.
 
 After applying both steps, the auto-generated Route for the Zeebe gRPC Ingress will carry an inlined `spec.tls.certificate`, HAProxy will emit a per-SNI `[alpn h2,http/1.1]` `crt-list` entry, and gRPC clients will negotiate `h2` successfully.
 
