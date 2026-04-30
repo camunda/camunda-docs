@@ -4,6 +4,9 @@ on:
   schedule:
     # Run nightly at 2 AM UTC
     - cron: "0 2 * * *"
+  push:
+    branches:
+      - "release-links"
   workflow_dispatch: # Allow manual triggering
 
 permissions:
