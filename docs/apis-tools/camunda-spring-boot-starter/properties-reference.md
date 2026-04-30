@@ -1253,7 +1253,7 @@ Type: <code>duration</code>
 
 ### `camunda.client.worker.override`
 
-Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type.
+Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type or worker name.
 
 <table>
 <thead>
