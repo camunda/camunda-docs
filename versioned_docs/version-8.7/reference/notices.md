@@ -19,6 +19,44 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 46
+
+### Publication date
+
+May 12, 2026
+
+### Products affected
+
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Optimize
+
+### Impact
+
+The application was vulnerable to [CVE-2026-40973](https://nvd.nist.gov/vuln/detail/CVE-2026-40973), where a local attacker could take control of the embedded Spring Boot `ApplicationTemp` directory. If `server.servlet.session.persistent` is set to `true`, this could allow session hijacking or arbitrary code execution. Default Camunda 8 deployments are not affected.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Identity ≤ 8.9.1, ≤ 8.8.11, or ≤ 8.7.18
+- Camunda Zeebe ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Tasklist ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Operate ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Optimize ≤ 8.9.1, ≤ 8.8.8, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Identity 8.9.2, 8.8.12, 8.7.19
+- Camunda Zeebe 8.9.2, 8.8.24, 8.7.29
+- Camunda Tasklist 8.9.2, 8.8.24, 8.7.29
+- Camunda Operate 8.9.2, 8.8.24, 8.7.29
+- Camunda Optimize 8.9.2, 8.8.24, 8.7.21
+
 ## Notice 45
 
 ### Publication date
