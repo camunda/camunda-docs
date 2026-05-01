@@ -349,7 +349,7 @@ The skill fetches the latest [pattern catalog](https://github.com/camunda/camund
 
 ### Drive an AI agent yourself
 
-If you do not have access to an agentic coding tool, or want full control over each step, you can drive any AI tool, including standalone chat assistants, with the prompts below.
+If you do not use the Camunda migration agent skill, you can drive any AI tool, including standalone chat assistants, with the prompts below.
 
 You can use AI in three ways:
 

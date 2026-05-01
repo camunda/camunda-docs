@@ -336,7 +336,7 @@ The skill fetches the latest [pattern catalog](https://github.com/camunda/camund
 
 ### Example prompts
 
-If you do not have access to an agentic coding tool, you can drive any AI tool — including standalone chat assistants such as ChatGPT or GitHub Copilot — with prompts. In testing, simple prompts often produce correct results, although you may need several iterations to ensure the refactored code aligns with your target architecture.
+If you do not use the Camunda migration agent skill, you can drive any AI tool, including standalone chat assistants such as ChatGPT or GitHub Copilot, with prompts. In testing, simple prompts often produce correct results, although you may need several iterations to ensure the refactored code aligns with your target architecture.
 
 In the [migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases), we used ChatGPT to rewrite test cases with the following sample prompt:
 
