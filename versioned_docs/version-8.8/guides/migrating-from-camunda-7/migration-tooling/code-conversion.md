@@ -8,7 +8,7 @@ description: "Understand patterns to convert your code written for Camunda 7 to 
 As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (BPMN and DMN) and some of your code to work with the Orchestration Cluster REST API.
 
 :::tip Easiest path: use the Camunda migration agent skill
-If you have access to an agentic AI coding tool such as Claude Code, GitHub Copilot, or Cursor, you can run an interactive end-to-end migration with the official [Camunda migration agent skill](#camunda-migration-agent-skill) instead of running each tool on this page manually. See [Leveraging AI for refactoring](#leveraging-ai-for-refactoring) for details.
+If you use an [Agent Skills](https://agentskills.io/)-compatible AI coding agent (such as Claude Code), you can run an interactive end-to-end migration with the [Camunda migration agent skill](#camunda-migration-agent-skill). See [Leverage AI for refactoring](#leverage-ai-for-refactoring) for details.
 :::
 
 ## Overview
@@ -31,7 +31,7 @@ This guide covers three main tools to help with code conversion:
 Additionally, you will find information about:
 
 - [Diagram Converter](#diagram-converter) for BPMN and DMN model conversion
-- [Leveraging AI](#leveraging-ai-for-refactoring) to assist with refactoring tasks
+- [Leverage AI](#leverage-ai-for-refactoring) to assist with refactoring tasks
 - [Complete migration example](#example-adjusting-a-spring-boot-application) showing all tools in action
 
 ## API mapping guide
@@ -296,27 +296,29 @@ The [Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tool
 
 Find the diagram conversion tooling and its documentation in the [Migration Tooling – Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter).
 
-## Leveraging AI for refactoring
+## Leverage AI for refactoring
 
-You can use AI to migrate code in two ways — pick whichever fits your tooling and access:
+You can use AI to migrate code in two ways:
 
 - **Use the [Camunda migration agent skill](#camunda-migration-agent-skill)** with an agentic AI coding tool such as Claude Code, GitHub Copilot, or Cursor. This is the easiest option if you have access to such a tool: the skill drives an interactive end-to-end migration (assessment, OpenRewrite, AI cleanup, validation).
 - **Drive AI yourself with [example prompts](#example-prompts)**. This works with any AI tool, including standalone chat assistants such as ChatGPT or Claude.ai. Copy a prompt, paste your code, and apply the results manually.
 
 ### Camunda migration agent skill
 
-For the fastest path, use the official Camunda migration [Agent Skill](https://agentskills.io/). It packages assessment, OpenRewrite, AI cleanup, and validation into an interactive workflow that runs inside your AI coding agent.
+Use the official Camunda migration [Agent Skill](https://agentskills.io/). It packages everything, including assessment, OpenRewrite, AI cleanup, and validation, into an interactive workflow that runs inside your AI coding agent.
 
-**Install with Claude Code:**
+1. Install it. You can use Claude Code:
 
 ```bash
 claude plugin marketplace add camunda/camunda-7-to-8-migration-tooling
 claude plugin install camunda-migration
 ```
 
-**Other agents** — the skill follows the open [Agent Skills](https://agentskills.io/) format and works with any compatible agent. See the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/agentic-migration-skills) for manual installation.
+:::note Install with other agents
+The skill follows the open [Agent Skills](https://agentskills.io/) format and works with any compatible agent. See the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/agentic-migration-skills) for manual installation.
+:::
 
-**Run** from your Camunda 7 project directory:
+2. Run from your Camunda 7 project directory:
 
 ```
 /camunda-migration:migrate-c7-to-c8-code
