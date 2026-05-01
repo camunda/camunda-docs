@@ -107,7 +107,7 @@ if contains(error.message, "index_not_found") then bpmnError("index_not_found", 
 
 ### Prefetch context with a vector database retrieval
 
-Instead of letting the agent decide when to query the vector database via a tool, you can retrieve relevant context **before** the agent runs and pass it directly as part of the user message. This ensures the agent always has access to relevant knowledge from the first interaction, without requiring a tool call.
+Instead of letting the agent decide when to query the vector database via a tool, you can retrieve relevant context **before** the agent runs. This ensures the agent always has access to relevant knowledge from the first interaction, without requiring a tool call.
 
 This pattern is useful when:
 
@@ -128,7 +128,7 @@ userQuery
 4. Set **Max results** to control the maximum number of documents returned. For example, set it to five.
 5. Configure the [**Embedding model**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#embedding-models) with your provider credentials.
 6. Configure the [**Vector store**](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md#vector-stores) with your database connection details and **index name**. The index name identifies the collection of documents the agent searches. You can use different indexes for different knowledge domains.
-7. In the **Output mapping** section, set the output **Result variable** to `retrievalResult`.
+7. In the **Output mapping** section, set the output **Result variable**. For example, `retrievalResult`.
 
 ### Pass retrieved context to the agent
 
