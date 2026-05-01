@@ -6,12 +6,23 @@ applyTo: "**"
 
 ## 1. File and repo structure
 
+This is a **Docusaurus 3** documentation site for **Camunda 8**, published at [docs.camunda.io](https://docs.camunda.io).
+
+| Path                        | Contents                                                            |
+| --------------------------- | ------------------------------------------------------------------- |
+| `docs/`                     | "Next" (unreleased) documentation                                   |
+| `versioned_docs/version-*/` | Versioned documentation snapshots                                   |
+| `static/`                   | Static assets served at site root (images, BPMN files, `.htaccess`) |
+| `sidebars.js`               | Sidebar navigation for "Next" docs                                  |
+| `versioned_sidebars/`       | Sidebar navigation for versioned docs                               |
+| `src/`                      | Custom React components, pages, and CSS                             |
+| `api/`                      | OpenAPI spec generation scripts                                     |
+| `howtos/`                   | Internal contributor guides and style guide                         |
+
 - Name Markdown files in **kebab-case** matching the page title (for example, `introduction-to-camunda-8.md`). Avoid non-alphanumeric characters in file names.
 - Place static images in `static/img/`. Place version-sensitive images in an `img/` subdirectory alongside the doc file.
 - Place BPMN files in `static/bpmn/<section>/`.
-- The "Next" (unreleased) docs live in `/docs/`. Versioned docs live in `/versioned_docs/version-*/`.
-- Sidebar navigation is managed in `sidebars.js` (Next) and `versioned_sidebars/version-*-sidebars.json` (versioned).
-- When edits apply to the current version and beyond, make them in both the most recent versioned folder **and** the Next (`/docs/`) folder.
+- **Do not** modify `package-lock.json`, generated API docs in `docs/apis-tools/*/specifications/`, or versioned docs unless explicitly asked to.
 
 ## 2. Adding, moving, or removing pages
 
@@ -23,7 +34,7 @@ applyTo: "**"
 
 - Keep the PR in **draft** while actively working on it. Removing draft status signals it is ready for review.
 - Use **labels** to communicate the component, version, and priority. PRs without labels may be triaged slowly.
-- Add the **`deploy` label** to trigger a preview site deployment — recommended for large or complex changes.
+- Add the **`deploy` label** to trigger a preview site deployment. Recommended for large or complex changes.
 
 ## 4. Code formatting and commits
 
@@ -32,3 +43,18 @@ applyTo: "**"
   - Valid types: `build`, `ci`, `deps`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`, `chore`.
   - Keep the commit message header between 72–120 characters.
   - Write the description in present tense (for example, "Add start event to BPMN symbol support matrix").
+
+## 5. Build and validation
+
+- `npm install`: Install dependencies.
+- `npm run start`: Start local dev server.
+- `npm run build`: Generate a static build.
+- `npm run format`: Validate Prettier formatting.
+
+Always run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors.
+
+## 6. Versioning
+
+- The "Next" (unreleased) docs live in `/docs/`. Versioned docs live in `/versioned_docs/version-*/`.
+- Sidebar navigation is managed in `sidebars.js` (Next) and `versioned_sidebars/version-*-sidebars.json` (versioned).
+- When edits apply to the current version and beyond, make them in both the most recent versioned folder **and** the Next (`/docs/`) folder.
