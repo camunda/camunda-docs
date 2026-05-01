@@ -2126,3 +2126,71 @@ h3 + .release-announcement-row {
 .sidebar-cta > .menu__link.menu__link--active {
   overflow: visible;
 }
+
+/* ---- Version switch toast notification ---- */
+.version-switch-toast {
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.75rem;
+  border-radius: 10px;
+  background: var(--ifm-heading-color);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.version-switch-toast--visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.version-switch-toast--hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-2rem);
+}
+
+.version-switch-toast__icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.version-switch-toast__text {
+  white-space: nowrap;
+}
+
+.version-switch-toast__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  padding: 0.2rem;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.version-switch-toast__close:hover {
+  opacity: 1;
+}
+
+[data-theme="dark"] .version-switch-toast {
+  background: var(--ifm-color-info-contrast-foreground);
+  color: var(--ifm-color-info-contrast-background);
+  border: 1px solid var(--ifm-color-info);
+  box-shadow: 0 4px 20px rgba(84, 199, 236, 0.2);
+}
