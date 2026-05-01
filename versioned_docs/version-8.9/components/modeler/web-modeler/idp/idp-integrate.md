@@ -6,15 +6,19 @@ description: "Integrate intelligent document processing (IDP) into your end-to-e
 
 import IdpElementImg from './img/idp-diagram-element.png';
 
-Integrate your published document extraction templates into your end-to-end processes in Web Modeler.
+Integrate your published document extraction and classification templates into your end-to-end processes in Web Modeler.
 
 :::tip
 New to IDP integration? See the [example IDP integration](idp-example.md) for a worked example of a simple IDP process.
 :::
 
+## About IDP integration
+
+When you publish a [document extraction](idp-document-extraction.md) or [document classification](idp-document-classification.md) template, IDP generates a connector template that you can apply to tasks in your BPMN diagrams. Each published template appears as a selectable element template in Web Modeler.
+
 ## Create and configure an IDP task
 
-You can apply a published document extraction template to a task or event via the append menu. For example:
+You can apply a published IDP template to a task or event via the append menu. For example:
 
 <img src={IdpElementImg} class="img-900" alt="An overview of intelligent document processing" />
 

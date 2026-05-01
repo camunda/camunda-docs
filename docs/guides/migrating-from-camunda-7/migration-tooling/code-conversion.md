@@ -23,7 +23,7 @@ This guide covers tools and approaches to help with code conversion:
 1. [API Mapping Guide](#api-mapping-guide): Understand how Camunda 7 REST API endpoints map to Camunda 8
 2. [OpenRewrite Recipes](#refactoring-recipes-using-openrewrite): Automatically refactor Java code with configurable recipes
 3. [Code Conversion Patterns](#code-conversion-patterns): Detailed technical reference for manual migration
-4. [AI-Assisted Code Migration](#leveraging-ai-for-code-migration): Use AI coding agents for interactive and agentic migration
+4. [AI-Assisted Code Migration](#leverage-ai-for-code-migration): Use AI coding agents for interactive and agentic migration
 
 Additionally, you will find information about:
 

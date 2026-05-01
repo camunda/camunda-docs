@@ -12,6 +12,7 @@ module.exports = [
       "apis-tools/c8ctl/cluster-inspection",
       "apis-tools/c8ctl/development-workflows",
       "apis-tools/c8ctl/plugins",
+      "apis-tools/c8ctl/command-reference",
     ],
   },
 ];

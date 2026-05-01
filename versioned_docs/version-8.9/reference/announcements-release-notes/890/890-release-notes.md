@@ -365,6 +365,10 @@ Camunda 8.9 adds support for BPMN conditional events in the platform itself, com
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
+### Dashboard focuses on active processes
+
+The Operate dashboard now only displays processes with active instances. Processes without running or incident instances are no longer shown, providing a clean view of what is currently running in your cluster.
+
 ### Unified, context-aware process instance view
 
 <!-- https://github.com/camunda/product-hub/issues/3255 -->
@@ -473,9 +477,10 @@ Web Modeler now supports RPA scripts as a first-class file type, including visib
 
 <!-- https://github.com/camunda/product-hub/issues/3252 -->
 
-Web Modeler now offers a unified deployment experience across BPMN, DMN, forms, and RPA scripts.
+Web Modeler now offers a unified deployment experience across BPMN, DMN, forms, and RPA scripts in process applications.
 
-- Deploy artifacts from their details view using a consistent interaction pattern across file types.
+- Deploy any BPMN, DMN, form or RPA script inside a process application directly from its canvas view.
+- Deploy and run any BPMN file directly with full flexibility, as the main process label and its restrictions have been removed.
 - See more clearly which linked files are included when deploying within a process application.
 - Choose whether to deploy the current file or the applicable process application bundle, depending on context.
 

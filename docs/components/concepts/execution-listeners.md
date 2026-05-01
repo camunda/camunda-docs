@@ -60,6 +60,12 @@ See the [job worker documentation](/apis-tools/java-client/job-worker.md) for ex
 
 Similar to regular job workers, a listener can read variables of the process instance and set new variables by completing the job with variables. The scope of variables and the effect of the job variables depend on the listener event type.
 
+## Task headers
+
+An execution listener can define an arbitrary number of `taskHeaders`; they are static metadata handed to workers along with the job. The headers can be used as configuration parameters for the worker.
+
+The job worker will receive the listener headers, as well as the headers set for the BPMN element on which the listener is defined as custom headers. If the BPMN element and listener both define the same header key, the value set by the listener is used.
+
 ### Start listeners
 
 Start listeners are invoked after applying the variable input mappings, and before subscribing to events, evaluating the element's expressions, and executing the element's behavior.

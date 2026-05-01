@@ -11,8 +11,7 @@ import TabItem from "@theme/TabItem";
 :::note
 For supported OpenSearch versions in Camunda 8 Self-Managed, see [Supported Environments](../../../../../reference/supported-environments.md#camunda-8-self-managed).
 
-Starting with Camunda 8.8, Camunda uses the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)
-to consume new records. Records from 8.7 and earlier are consumed only during migration.
+Starting with Camunda 8.8, Camunda uses the [Camunda exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) to consume new records. Records from 8.7 and earlier are consumed only during migration.
 
 The Elasticsearch and OpenSearch exporters remain fully usable after migration (for example, for existing setups, Optimize, or other custom use cases). Their functionality is not limited to the migration period.
 
@@ -21,21 +20,14 @@ From 8.9 onward, the OpenSearch exporter also supports Optimize-focused export f
 For Optimize-specific guidance and recommended settings, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 :::
 
-The Zeebe OpenSearch Exporter acts as a bridge between
-[Zeebe](https://camunda.com/platform/zeebe/) and [OpenSearch](https://opensearch.org) by
+The Zeebe OpenSearch exporter acts as a bridge between [Zeebe](https://camunda.com/platform/zeebe/) and [OpenSearch](https://opensearch.org) by
 exporting records written to Zeebe streams as documents into several indices.
 
 ## Concept
 
-The exporter operates on the idea that it should perform as little as possible on the Zeebe side of
-things. In other words, you can think of the indexes into which the records are exported as a
-staging data warehouse. Any enrichment or transformation on the exported data should be performed by
-your own ETL jobs.
+The exporter operates on the idea that it should perform as little as possible on the Zeebe side of things. In other words, you can think of the indexes into which the records are exported as a staging data warehouse. Any enrichment or transformation on the exported data should be performed by your own ETL jobs.
 
-When configured to do so, the exporter will automatically create an index per
-record value type (see the value type in the Zeebe protocol). Each of these indexes has a
-corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find
-those as templates in this module's resources folder.
+When configured to do so, the exporter will automatically create an index per record value type (see the value type in the Zeebe protocol). Each of these indexes has a corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find those as templates in this module's resources folder.
 
 :::note
 The indexes are created as required, and will not be created twice if they already exist. However, once disabled, they will not be deleted (that is up to the administrator). Similarly, data is never deleted by the exporter, and must be deleted by the administrator when it is safe to do so.
@@ -65,7 +57,7 @@ camunda:
 
 **Environment variables:**
 
-Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_...` (e.g., `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_URL`).
+Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_...` (for example, `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_URL`).
 
 **Helm:**
 
@@ -75,8 +67,7 @@ Add the same configuration under `orchestration.configuration` in your `values.y
 Do not configure both legacy (`zeebe.broker.exporters.*`) and unified (`camunda.data.exporters.*`) exporter properties at the same time. Exporter properties are a breaking-change mapping in unified configuration, and the application fails to start until legacy properties are removed.
 :::
 
-The exporter can be configured by providing `args`. The table below explains all the different
-options, and the default values for these options:
+The exporter can be configured by providing `args`. The table below explains all the different options, and the default values for these options:
 
 | Option                  | Description                                                                                                                                                                                      | Default                 |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
@@ -93,9 +84,7 @@ options, and the default values for these options:
 
 <TabItem value="index">
 
-In most cases, you will not be interested in exporting every single record produced by a Zeebe
-cluster, but rather only a subset of them. This can also be configured to limit the kinds of records exported (e.g. only events, no commands), and the value type of these records (e.g. only job
-and process values).
+In most cases, you will not be interested in exporting every single record produced by a Zeebe cluster, but rather only a subset of them. This can also be configured to limit the kinds of records exported (for example, only events, no commands), and the value type of these records (for example, only job and process values).
 
 | Option                           | Description                                                                                                                                                                                                | Default      |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
@@ -164,8 +153,7 @@ For details on how this interacts with Optimize, see [Camunda 8 system configura
 
 ### Variable-type filters
 
-Variable-type filters let you restrict exported variables by their inferred JSON type,
-such as `String`, `Number`, `Boolean`, `Object` or `Null`.
+Variable-type filters let you restrict exported variables by their inferred JSON type, such as `String`, `Number`, `Boolean`, `Object` or `Null`.
 
 Configuration:
 
@@ -183,8 +171,76 @@ camunda:
               - Object
 ```
 
-Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
-[Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
+Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
+
+### Scope-aware variable export
+
+The OpenSearch exporter can filter root and local variables differently.
+
+- Root variables are created in the process instance scope and are visible throughout the process instance.
+- Local variables are created in a child scope, such as a sub-process, call activity, or task. They are visible only in that scope and its children.
+
+Configure these options under `index`:
+
+```yaml
+camunda:
+  data:
+    exporters:
+      opensearch:
+        args:
+          index:
+            export-local-variables-enabled: true
+
+            # Root variable name filters
+            root-variable-name-inclusion-exact: []
+            root-variable-name-inclusion-start-with: []
+            root-variable-name-inclusion-end-with: []
+            root-variable-name-exclusion-exact: []
+            root-variable-name-exclusion-start-with: []
+            root-variable-name-exclusion-end-with: []
+            # Local variable name filters
+            local-variable-name-inclusion-exact: []
+            local-variable-name-inclusion-start-with: []
+            local-variable-name-inclusion-end-with: []
+            local-variable-name-exclusion-exact: []
+            local-variable-name-exclusion-start-with: []
+            local-variable-name-exclusion-end-with: []
+            # Root variable type filters
+            root-variable-value-type-inclusion: []
+            root-variable-value-type-exclusion: []
+            # Local variable type filters
+            local-variable-value-type-inclusion: []
+            local-variable-value-type-exclusion: []
+```
+
+Behavior overview:
+
+- If `export-local-variables-enabled` is set to `false`, no local variables are exported.
+- If all `root-*` and `local-*` lists are empty, only the global filters (`variable-name-*` and `variable-value-type-*`) apply. This preserves behavior from earlier versions.
+- If any root-specific or local-specific list is non-empty, that scope uses both the global filters and the scope-specific filters.
+- Exclusion filters take precedence over inclusion filters.
+
+#### Example configuration
+
+Export only selected root variables and exclude temporary local variables:
+
+```yaml
+index:
+  export-local-variables-enabled: true
+
+  # Include only specific root variables
+  root-variable-name-inclusion-exact: ["customerId", "orderId"]
+  # Exclude local variables used for temporary processing
+  local-variable-name-exclusion-start-with: ["tmp_", "debug_"]
+  # Export only simple root variable types
+  root-variable-value-type-inclusion: ["String", "Number"]
+```
+
+In this example:
+
+- Only `customerId` and `orderId` root variables are exported.
+- Local variables starting with `tmp_` or `debug_` are excluded.
+- Only root variables of type `String` and `Number` are exported.
 
 ### BPMN process filters
 
@@ -229,9 +285,7 @@ Use this flag only if the exporter indices are dedicated to Optimize. For SaaS a
 
 <TabItem value="bulk">
 
-To avoid too many expensive requests to the OpenSearch cluster, the exporter performs batch
-updates by default. The size of the batch, along with how often it should be flushed (regardless of
-size) can be controlled by configuration.
+To avoid too many expensive requests to the OpenSearch cluster, the exporter performs batch updates by default. The size of the batch, along with how often it should be flushed (regardless of size) can be controlled by configuration.
 
 | Option       | Description                                                                                                                                                    | Default            |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
@@ -239,8 +293,7 @@ size) can be controlled by configuration.
 | size         | The amount of records a batch should have before we flush the batch.                                                                                           | `1000`             |
 | memory-limit | The size of the batch, in bytes, before we flush the batch.                                                                                                    | `10485760` (10 MB) |
 
-With the default configuration, the exporter would aggregate records and flush them to OpenSearch
-either:
+With the default configuration, the exporter would aggregate records and flush them to OpenSearch either:
 
 1. When it has aggregated 1000 records.
 2. When the batch memory size exceeds 10 MB.
@@ -251,8 +304,7 @@ either:
 <TabItem value="retention">
 
 A retention policy can be set up to delete old data.
-When enabled, this creates an Index State Management (ISM) policy that deletes the data after the
-specified `minimumAge`. All index templates created by this exporter apply the created ISM policy.
+When enabled, this creates an Index State Management (ISM) policy that deletes the data after the specified `minimumAge`. All index templates created by this exporter apply the created ISM policy.
 
 | Option             | Description                                                                   | Default                         |
 | ------------------ | ----------------------------------------------------------------------------- | ------------------------------- |
@@ -281,13 +333,9 @@ Providing these authentication options will enable Basic authentication on the e
 
 <TabItem value="aws">
 
-When running OpenSearch in AWS, you may require requests to be signed. By enabling AWS in the
-configurations, a request interceptor will be added to the exporter. This interceptor will take care
-of signing the requests.
+When running OpenSearch in AWS, you may require requests to be signed. By enabling AWS in the configuration, a request interceptor will be added to the exporter. This interceptor will take care of signing the requests.
 
-Signing requests requires credentials. These credentials are not directly configurable in the
-exporter. Instead, they are resolved by following the
-[Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
+Signing requests requires credentials. These credentials are not directly configurable in the exporter. Instead, they are resolved by following the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
 
 | Option       | Description                                                                             | Default                                            |
 | ------------ | --------------------------------------------------------------------------------------- | -------------------------------------------------- |
@@ -300,7 +348,7 @@ exporter. Instead, they are resolved by following the
 
 ## Example
 
-Here is an example configuration of the exporter:
+The following is an example configuration of the exporter:
 
 ```yaml
 ---
@@ -308,7 +356,7 @@ camunda:
   data:
     exporters:
       opensearch:
-        # Opensearch Exporter ----------
+        # Opensearch exporter ----------
         # An example configuration for the opensearch exporter:
         #
         # These settings can also be overridden using environment variables "CAMUNDA_DATA_EXPORTERS_OPENSEARCH_..."
@@ -384,15 +432,14 @@ camunda:
 The Zeebe OpenSearch exporter does not [currently support](https://github.com/camunda/camunda/issues/9839) connecting to OpenSearch using self-signed certificates.
 If you must use self-signed certificates, it is possible to build your own trust store and have the application use it.
 
-In this case, it is recommended to create a new custom trust store based on the default one. This way, it will also be able to verify certificates
-signed using trusted root certificate authorities.
+In this case, it is recommended to create a new custom trust store based on the default one. This way, it will also be able to verify certificates signed using trusted root certificate authorities.
 
 1.  First, create a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, find the
     location of the default `cacerts` trust store:
     - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`.
     - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
 
-    Once you have the right location, e.g. `$JAVA_HOME/lib/security/cacerts`, run the following to create a new trust store:
+    Once you have the right location, for example, `$JAVA_HOME/lib/security/cacerts`, run the following to create a new trust store:
 
     ```sh
     keytool -importkeystore -srckeystore $JAVA_HOME/lib/security/cacerts -destkeystore zeebeTrustStore.jks -srcstoretype PKCS12 -deststoretype JKS
@@ -431,14 +478,12 @@ signed using trusted root certificate authorities.
     ```
 
 :::warning
-If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on
-your deployment method (e.g. Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies
-the environment variable.
+If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on your deployment method (for example, Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies the environment variable.
 :::
 
 ## Legacy Zeebe records and Optimize filters
 
-With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
+With the introduction of the Camunda exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
 By default, they emit only the record value types and intents required by Optimize.
 
 To export additional record types, enable the [`include-enabled-records`](#configuration) configuration property.

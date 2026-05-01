@@ -68,14 +68,19 @@ Example unstructured documents include:
 
 ## Document classification {#classification}
 
-Document classification is performed as part of document automation.
+Document classification uses an [LLM foundation model](#llms) to analyze, categorize, and assign a document type to incoming documents based on their content.
 
-<!-- Document classification is performed as part of [document automation](idp-document-automation.md). -->
+- Create a [document classification template](idp-document-classification.md) to define the document types you want to classify (such as invoices, contracts, or identity documents), test classification accuracy, and publish the template for use in your processes.
+- Classification enables you to route different document types to the correct downstream process step or [document extraction](idp-document-extraction.md) template.
+- Classification accuracy is improved with well-defined document types (including clear descriptions and classification instructions) and a set of test documents that accurately represents each type of document you want to process.
 
-- Documents are analyzed, classified, and assigned to the relevant [document extraction](idp-document-extraction.md) template, based on the document content.
+### Fallback output value {#fallback}
 
-- Classification ensures that documents processed through IDP are organized into the correct type, so that extracted data is assigned/mapped to the correct property.
-- Classification accuracy is improved with a well-defined taxonomy (set of extraction fields) and a set of example documents that accurately represents each type of document you want to process.
+The fallback output value is the value returned when a document cannot be classified as any of the defined types. By default, this value is `unclassified-document`, but you can customize it to align with your process routing logic.
+
+### Preconfigured document types {#preconfigured-types}
+
+IDP provides a set of preconfigured document types (such as invoice, contract, identity document) to help you get started quickly when creating a [classification template](idp-document-classification.md#define-document-types). You can also create custom document types for categories specific to your business.
 
 ## Extraction model/Large Language Models (LLM) {#llms}
 

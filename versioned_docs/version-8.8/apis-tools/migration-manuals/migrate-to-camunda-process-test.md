@@ -585,9 +585,10 @@ Congratulations! Your process tests should now be fully migrated to CPT and runn
 
 When you’re ready, take the next steps to continue your journey:
 
-- Explore new [assertions](/apis-tools/testing/assertions.md)
-- Simplify your tests with new [utilities](/apis-tools/testing/utilities.md)
-- Generate [process test coverage reports](/apis-tools/testing/getting-started.md#process-test-coverage)
+- Explore new [assertions](/apis-tools/testing/assertions.md).
+- Simplify your tests with new [utilities](/apis-tools/testing/utilities.md).
+- Generate [process test coverage reports](/apis-tools/testing/getting-started.md#process-test-coverage).
+- Refer to the [API documentation](https://javadoc.io/doc/io.camunda/camunda-process-test-java/latest/io/camunda/process/test/api/package-summary.html) for details.
 
 ## Troubleshooting
 

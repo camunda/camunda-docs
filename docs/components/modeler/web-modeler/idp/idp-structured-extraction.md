@@ -38,7 +38,7 @@ Complete the following steps to configure and publish a structured data extracti
 
 ## Step 1: Create template and upload sample document {#upload}
 
-In the IDP application, click **Create document template**, select **Structured form extraction**, and enter a name, description, and select the provider.
+In the IDP application, click **Create new**, select **Extraction template**, then select **Structured form extraction**, and enter a name, description, and select the provider.
 
 :::note
 After publishing, the template name and description is shown in the element selector when used in a process diagram. Use a clear name and concise description to help other users find and understand when to use the template.

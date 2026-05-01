@@ -947,6 +947,24 @@ h3 .badge:nth-of-type(1) {
   border: 1px solid #009d9a;
 }
 
+.badge--added-in-version {
+  background-color: #0072c3;
+  color: #ffffff;
+  margin-bottom: 0 !important;
+  margin-left: 0.75rem !important;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  vertical-align: baseline;
+  position: relative;
+  top: -5px;
+}
+
+[data-theme="dark"] .badge--added-in-version {
+  background-color: #00539a;
+  color: #d0e2ff;
+  border: 1px solid #4589ff;
+}
+
 /* HTTP Method badges */
 .badge--get,
 .badge--post,

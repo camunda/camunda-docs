@@ -9,6 +9,8 @@ This guide is a focused walkthrough for teams using an external relational datab
 
 Use [production install](/self-managed/deployment/helm/install/production/index.md) as the primary installation guide. Use this page when you want additional RDBMS-specific examples for that flow.
 
+If you deploy on AWS EKS, use [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) for the cluster, Ingress, and AWS-managed service setup, then return to this page for the RDBMS-specific Helm configuration and installation steps.
+
 Related guides:
 
 - [Production install](/self-managed/deployment/helm/install/production/index.md)
@@ -69,6 +71,10 @@ Before you begin:
 - Managed services widely available on AWS (RDS), Azure, GCP.
 
 ### Step 2: Prepare your database
+
+:::note On Amazon Aurora PostgreSQL
+Skip the local `createdb` and `createuser` commands. Connect to your Aurora writer endpoint with `psql`, and prefer IAM database authentication over a static password. See [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) and the [Aurora Terraform module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/aws/modules/aurora).
+:::
 
 Create a database and user. For example, in PostgreSQL:
 

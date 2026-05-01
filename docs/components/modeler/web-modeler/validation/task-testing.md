@@ -13,7 +13,7 @@ While both task testing and Play let you validate your BPMN models, they serve d
 
 | Feature / capability | Task testing (Implement mode)     | Play (Play mode)                  |
 | -------------------- | --------------------------------- | --------------------------------- |
-| Test scope           | Single task                       | Process segment or full diagram   |
+| Test scope           | Single task or sub-process        | Process segment or full diagram   |
 | Best for             | Quick implementation checks       | End-to-end test validation        |
 | Data type            | Live data only                    | Live or mocked data               |
 | Saves test scenarios | No                                | Yes                               |
@@ -47,6 +47,10 @@ To test a task in Web Modeler:
 
 Web Modeler automatically deploys the process before running the test. The task executes on the connected cluster using your defined input data.
 
+During execution, the log displays each step in real time, including any states where the test is waiting for an external action to complete.
+
+![Task test showing waiting state](./img/task-testing/task-testing-waiting-state.png)
+
 ## View results
 
 After the test completes, results appear in the output panel:
@@ -55,19 +59,19 @@ After the test completes, results appear in the output panel:
 
 If the task runs successfully, the output panel displays the resulting process variables and any updates.
 
-![Successful task test showing resulting process variables](../img/task-testing/task-testing-success.png)
+![Successful task test showing resulting process variables](./img/task-testing/task-testing-success.png)
 
 ### Incident during execution
 
 If the task encounters an incident, details are shown along with the relevant variable context to help diagnose the issue.
 
-![Incident details shown for a failed task execution, including incident message and variable context](../img/task-testing/task-testing-incident.png)
+![Incident details shown for a failed task execution, including incident message and variable context](./img/task-testing/task-testing-incident.png)
 
 ### Execution error
 
 If the task fails due to an error (for example, a network or configuration issue), the error message and response details are displayed.
 
-![Execution error message shown after a task test fails due to a configuration or network issue](../img/task-testing/task-testing-error.png)
+![Execution error message shown after a task test fails due to a configuration or network issue](./img/task-testing/task-testing-error.png)
 
 ## Related documentation
 

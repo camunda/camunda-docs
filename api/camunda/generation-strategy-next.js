@@ -65,6 +65,7 @@ function processModularSpec(mainSpecPath, specDir, version) {
     // Only process files that have paths (where operations live)
     if (content.includes("paths:")) {
       addEventualConsistencyAdmonition(filePath);
+      addAddedInVersionAnnotation(filePath);
     }
   }
 
@@ -251,6 +252,7 @@ function processSingleFileSpec(specFilePath, version) {
 
   fs.writeFileSync(specFilePath, updatedSpec);
   addEventualConsistencyAdmonition(specFilePath);
+  addAddedInVersionAnnotation(specFilePath);
   removeVendorExtensions(specFilePath);
 }
 
@@ -262,6 +264,9 @@ function postGenerateDocs(config) {
   // Replace consistency marker tokens with MDX components and add imports
   replaceConsistencyMarkersWithComponents(config.outputDir);
   console.log(`✅ Replaced consistency markers in generated MDX files`);
+  // Replace added-in-version marker tokens with MDX components and add imports
+  replaceAddedInVersionMarkersWithComponents(config.outputDir);
+  console.log(`✅ Replaced added-in-version markers in generated MDX files`);
 }
 
 function addDisclaimer(originalSpec) {
@@ -656,6 +661,87 @@ function addEventualConsistencyAdmonition(specFilePath) {
   }
 }
 
+/**
+ * Add a version badge token for endpoints annotated with x-added-in-version.
+ */
+function addAddedInVersionAnnotation(specFilePath) {
+  const ADDED_IN_VERSION_EXTENSION = "x-added-in-version";
+  try {
+    const fileContents = fs.readFileSync(specFilePath, "utf8");
+    const spec = yaml.load(fileContents);
+
+    if (!spec || !spec.paths) {
+      return;
+    }
+
+    let annotationsAdded = 0;
+    Object.keys(spec.paths).forEach((pathKey) => {
+      const pathItem = spec.paths[pathKey];
+
+      Object.keys(pathItem).forEach((method) => {
+        const operation = pathItem[method];
+
+        if (
+          !operation ||
+          typeof operation !== "object" ||
+          ![
+            "get",
+            "post",
+            "put",
+            "patch",
+            "delete",
+            "options",
+            "head",
+            "trace",
+          ].includes(method)
+        ) {
+          return;
+        }
+
+        const addedInVersion = operation[ADDED_IN_VERSION_EXTENSION];
+        if (addedInVersion) {
+          const token = `\n\n[[ADDED_IN_VERSION:${addedInVersion}]]\n\n`;
+          const currentDescription =
+            typeof operation.description === "string"
+              ? operation.description
+              : "";
+          const cleanedDescription = currentDescription
+            .replace(/\n*\[\[ADDED_IN_VERSION:[^\]]+\]\]\n*/g, "\n\n")
+            .trim();
+          const updatedDescription = cleanedDescription
+            ? token + cleanedDescription
+            : token.trim();
+
+          if (operation.description !== updatedDescription) {
+            operation.description = updatedDescription;
+            annotationsAdded++;
+          }
+        }
+      });
+    });
+
+    const updatedYaml = yaml.dump(spec, {
+      lineWidth: -1,
+      noRefs: true,
+      quotingType: '"',
+      forceQuotes: false,
+      sortKeys: false,
+    });
+    fs.writeFileSync(specFilePath, forceQuoteRefs(updatedYaml), "utf8");
+
+    if (annotationsAdded > 0) {
+      console.log(
+        `  ✅ Added ${annotationsAdded} added-in-version markers to ${path.basename(specFilePath)}`
+      );
+    }
+  } catch (error) {
+    console.error(
+      `  ❌ Error processing added-in-version in ${path.basename(specFilePath)}:`,
+      error.message
+    );
+  }
+}
+
 // Remove all vendor extensions recursively (x-eventually-consistent, x-semantic-type, etc.)
 function removeVendorExtensions(specFilePath) {
   function recursivelyRemoveVendorExtension(obj) {
@@ -811,6 +897,83 @@ function replaceConsistencyMarkersWithComponents(outputDir) {
     }
   } catch (err) {
     console.error("❌ Error replacing consistency markers in output MDX:", err);
+  }
+}
+
+function replaceAddedInVersionMarkersWithComponents(outputDir) {
+  try {
+    const tokenPattern = /\[\[ADDED_IN_VERSION:([\d.]+)\]\]/g;
+    const importLine =
+      "import MarkerAddedInVersion from '@site/src/mdx/MarkerAddedInVersion';";
+
+    const files = listFilesRecursive(outputDir).filter((f) =>
+      f.endsWith(".mdx")
+    );
+    for (const file of files) {
+      let content = fs.readFileSync(file, "utf8");
+      if (!tokenPattern.test(content)) continue;
+      // Reset lastIndex after test()
+      tokenPattern.lastIndex = 0;
+
+      let updated = content;
+
+      // Extract version from token before removing it
+      const versionMatch = tokenPattern.exec(updated);
+      tokenPattern.lastIndex = 0;
+      const version = versionMatch ? versionMatch[1] : null;
+
+      // Add import after frontmatter if not already present
+      if (!updated.includes(importLine)) {
+        const lines = updated.split("\n");
+        let insertIdx = 0;
+        if (lines[0] && lines[0].startsWith("---")) {
+          const endIdx = lines.indexOf("---", 1);
+          insertIdx = endIdx >= 0 ? endIdx + 1 : 0;
+        }
+        lines.splice(insertIdx, 0, importLine, "");
+        updated = lines.join("\n");
+      }
+
+      // Remove all tokens from the content (they were in descriptions)
+      updated = updated.replace(tokenPattern, "").replace(/\n{3,}/g, "\n\n");
+
+      // Place badge inline with the h1 title
+      if (version) {
+        updated = updated.replace(
+          /(<Heading[\s\S]*?as=\{"h1"\}[\s\S]*?)children=\{("(?:[^"\\]|\\.)*")\}\s*>\s*<\/Heading>/,
+          (_, before, titleStr) => {
+            return `${before}>\n  {${titleStr}} <MarkerAddedInVersion version="${version}" />\n</Heading>`;
+          }
+        );
+      }
+
+      // Clean component tags from frontmatter description (they leak via spec description)
+      const fmEnd = updated.indexOf("\n---", 1);
+      if (fmEnd > 0) {
+        const frontmatter = updated.substring(0, fmEnd);
+        const rest = updated.substring(fmEnd);
+        const cleanedFm = frontmatter.replace(
+          /^(description:\s*)(.*)$/m,
+          (_, prefix, val) => {
+            const cleaned = val
+              .replace(/<MarkerAddedInVersion version="[\d.]+" \/>/g, "")
+              .replace(/^["'\s]+|["'\s]+$/g, "")
+              .trim();
+            if (!cleaned) return ""; // remove line entirely
+            return `${prefix}"${cleaned}"`;
+          }
+        );
+        // Remove any blank lines left by removing description
+        updated = cleanedFm.replace(/\n{2,}/g, "\n") + rest;
+      }
+
+      if (updated !== content) fs.writeFileSync(file, updated, "utf8");
+    }
+  } catch (err) {
+    console.error(
+      "❌ Error replacing added-in-version markers in output MDX:",
+      err
+    );
   }
 }
 
