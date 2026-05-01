@@ -311,10 +311,13 @@ Find the diagram conversion tooling and its documentation in the [Migration Tool
 
 AI can accelerate code migration by applying the [code conversion patterns](#code-conversion-patterns) interactively. This is especially valuable for code that OpenRewrite recipes cannot handle automatically, such as custom superclasses, complex test cases, or configuration files.
 
-Use one of the two following approaches:
+You can use AI in three ways:
 
-- **Use the [Camunda migration agent skill](#camunda-migration-agent-skill)** with an agentic AI coding tool such as Claude Code, GitHub Copilot, or Cursor. This is the easiest option if you have access to such a tool: the skill drives the full end-to-end workflow (assessment, OpenRewrite, AI cleanup, validation) interactively.
-- **[Drive AI yourself](#drive-an-ai-agent-yourself)**. This works with any AI tool, including standalone chat assistants such as ChatGPT or Claude.ai. Copy the prompts, paste your code, and apply the results manually.
+1. **Standalone**: Give the AI agent your Camunda 7 code and the conversion patterns, and let it produce Camunda 8 equivalents.
+2. **Post-OpenRewrite cleanup**: Run OpenRewrite first, then use AI to fix remaining TODOs and compilation errors.
+3. **Full agentic migration**: Let an AI agent assess your codebase, run OpenRewrite, and handle all remaining migration tasks.
+
+The fastest path is the [Camunda migration agent skill](#camunda-migration-agent-skill) — it packages all three approaches into an interactive workflow inside your AI coding agent. The rest of this section describes the underlying pattern catalog and prompts the skill uses, which you can also apply manually with any AI coding agent or chat assistant.
 
 ### Camunda migration agent skill
 
@@ -346,16 +349,6 @@ The skill asks for your project path and migration approach, then guides you thr
 | **Assessment only**                  | Scans the codebase and reports files, complexity, and effort estimate — no code changes                      |
 
 The skill fetches the latest [pattern catalog](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md) at runtime, so it always reflects current migration guidance.
-
-### Drive an AI agent yourself
-
-If you do not use the Camunda migration agent skill, you can drive any AI tool, including standalone chat assistants, with the prompts below.
-
-You can use AI in three ways:
-
-1. **Standalone**: Give the AI agent your Camunda 7 code and the conversion patterns, and let it produce Camunda 8 equivalents.
-2. **Post-OpenRewrite cleanup**: Run OpenRewrite first, then use AI to fix remaining TODOs and compilation errors.
-3. **Full agentic migration**: Let an AI agent assess your codebase, run OpenRewrite, and handle all remaining migration tasks.
 
 ### Recommended combined workflow
 
