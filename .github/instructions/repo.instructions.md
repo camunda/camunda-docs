@@ -46,12 +46,15 @@ This is a **Docusaurus 3** documentation site for **Camunda 8**, published at [d
 
 ## 5. Build and validation
 
+These are the main commands for working with the repo:
+
 - `npm install`: Install dependencies.
 - `npm run start`: Start local dev server.
 - `npm run build`: Generate a static build.
 - `npm run format`: Validate Prettier formatting.
 
-Always run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors.
+- Always run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors.
+- **Do not** run `npm run build` speculatively during exploration. It is slow. Use it only to validate final changes.
 
 ## 6. Versioning
 

@@ -6,7 +6,6 @@ Read and follow [`AGENTS.md`](AGENTS.md): It contains all repository structure, 
 
 ## Claude-specific notes
 
-- **Do not** run `npm run build` speculatively during exploration. It is slow. Use it only to validate final changes.
 - When asked to edit documentation content, always read `.github/instructions/content.instructions.md` first for style rules.
 - When creating or moving files, always read `.github/instructions/repo.instructions.md` first for naming and sidebar conventions.
 - This is a documentation repo. All Markdown content follows the [Camunda style guide](howtos/technical-writing-styleguide.md). Prioritize clarity, correctness, and consistency with existing pages over creativity.
