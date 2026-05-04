@@ -22,6 +22,10 @@ The number of evaluated **decision instances** (DI). A **decision instance** is 
 
 The number of **task users** (TU) that have served as assignees.
 
+### Tenant
+
+The number of active tenants in the selected period. A tenant is a logically isolated partition of a Camunda 8 cluster, identified by a tenant ID (for example, a business unit, department, or customer).
+
 ## Retrieve metrics in SaaS
 
 In Camunda 8 SaaS an **Owner** or **Admin** of an organization can retrieve the information from the **Billing** page.
