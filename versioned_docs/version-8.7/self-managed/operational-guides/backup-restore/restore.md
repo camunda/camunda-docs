@@ -771,7 +771,7 @@ It's important that the backup is configured for Zeebe to be able to restore fro
 Look at the note below the example to see how it can be achieved with an older Camund Helm chart version.
 
 :::tip
-The following example is possible starting from the Camunda Helm chart version `12.1.0`.
+This example requires Camunda Helm chart `12.1.0` or later.
 :::
 
 ```yaml
@@ -788,7 +788,7 @@ zeebe:
       value: "S3" # just as an example
     ...
 
-# Assuming you use Elasticsearch from the embedded Helm chart, otherwise should be set to false.
+# If you use Elasticsearch from the embedded Helm chart, set this to true. Otherwise, set it to false.
 elasticsearch:
   enabled: true
 connectors:
@@ -805,7 +805,7 @@ zeebeGateway:
 
 :::note Alternative overwrite
 
-For Camunda Helm chart below `12.1.0`, the environment variable `ZEEBE_RESTORE` has no effect, and the restore requires overriding the Zeebe brokers command.
+For Camunda Helm chart versions earlier than `12.1.0`, the `ZEEBE_RESTORE` environment variable has no effect. To restore Zeebe, override the Zeebe brokers command.
 
 ```yaml
 zeebe:

@@ -694,7 +694,7 @@ orchestration:
       value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
     ...
 
-# Assuming you use Elasticsearch from the embedded Helm chart, otherwise should be set to false.
+# If you use Elasticsearch from the embedded Helm chart, set this to true. Otherwise, set it to false.
 elasticsearch:
   enabled: true
 connectors:
@@ -705,7 +705,7 @@ optimize:
 
 :::note Alternative overwrite
 
-Alternative approach to start Zeebe partitions restore:
+Use this alternative approach to restore Zeebe partitions:
 
 ```yaml
 orchestration:
