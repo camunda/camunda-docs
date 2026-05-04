@@ -81,7 +81,7 @@ You can use the **Alpha** channel to access [alpha features](/components/early-a
 Non-cluster components include:
 
 - [Camunda Hub](/components/hub/index.md)
-- [Connectors](/docs/components/connectors/introduction.md)
+- [Connectors](/components/connectors/introduction.md)
 
 Non-cluster component versions are released continuously.
 
