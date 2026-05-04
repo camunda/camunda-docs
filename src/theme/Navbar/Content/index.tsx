@@ -12,6 +12,10 @@ import {
   splitNavbarItems,
   useNavbarMobileSidebar,
 } from "@docusaurus/theme-common/internal";
+import {
+  useActiveVersion,
+  useDocsPreferredVersion,
+} from "@docusaurus/plugin-content-docs/client";
 import Link from "@docusaurus/Link";
 import NavbarItem from "@theme/NavbarItem";
 import NavbarColorModeToggle from "@theme/Navbar/ColorModeToggle";
@@ -24,9 +28,49 @@ function useNavbarItems() {
   return useThemeConfig().navbar.items;
 }
 
+// Maps each Docusaurus version name (from versions.json) to its "What's new" page.
+const WHATS_NEW: Record<string, { label: string; docPath: string }> = {
+  current: {
+    label: "8.10",
+    docPath: "reference/announcements-release-notes/8100/whats-new-in-810",
+  },
+  "8.9": {
+    label: "8.9",
+    docPath: "reference/announcements-release-notes/890/whats-new-in-89",
+  },
+  "8.8": {
+    label: "8.8",
+    docPath: "reference/announcements-release-notes/880/whats-new-in-88",
+  },
+  "8.7": {
+    label: "8.7",
+    docPath: "reference/announcements-release-notes/870/870-announcements",
+  },
+};
+
+const WHATS_NEW_LATEST = WHATS_NEW["8.9"];
+
 function WhatsNewBadge() {
+  const activeVersion = useActiveVersion(undefined);
+  const { preferredVersion } = useDocsPreferredVersion();
+
+  // On a docs page: use the active version.
+  // On a non-docs page (homepage etc.): fall back to the user's last-selected version.
+  // If neither is set: fall back to the latest release.
+  const resolvedVersion = activeVersion ?? preferredVersion ?? null;
+
+  const page =
+    resolvedVersion?.name && WHATS_NEW[resolvedVersion.name]
+      ? WHATS_NEW[resolvedVersion.name]
+      : WHATS_NEW_LATEST;
+
+  const basePath =
+    resolvedVersion?.path && WHATS_NEW[resolvedVersion.name]
+      ? resolvedVersion.path
+      : "/docs";
+
   return (
-    <Link to="/build-with-camunda" className={styles.whatsNewBadge}>
+    <Link to={`${basePath}/${page.docPath}/`} className={styles.whatsNewBadge}>
       <svg
         className={styles.rocketIcon}
         viewBox="0 0 24 24"
@@ -44,7 +88,7 @@ function WhatsNewBadge() {
         <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
         <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
       </svg>
-      Build with Camunda 8.9
+      What's new in {page.label}
     </Link>
   );
 }
@@ -122,9 +166,7 @@ export default function NavbarContent(): JSX.Element {
                 )
               }
             >
-              <span className={styles.hideOnMobile}>
-                <NavbarItem {...item} />
-              </span>
+              <NavbarItem {...item} />
             </ErrorCauseBoundary>
           ))}
           <span className={styles.hideOnMobile}>

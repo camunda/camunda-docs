@@ -260,12 +260,37 @@
   .topRowRight :global(.kapa-open) {
     display: inline-flex !important;
   }
+
+  /* Keep Try Free button visible on mobile */
+  .topRowRight :global(.try-free) {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .topRowRight :global(.try-free) {
+    display: none !important;
+  }
+}
+
+/* Compact Try Free and shrink search at mid-size screens */
+@media (max-width: 640px) {
+  .topRowRight :global(.try-free) {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+    font-size: 0.8rem;
+  }
+
+  .topRowRight :global(.DocSearch-Button) {
+    width: 130px !important;
+    max-width: 130px !important;
+  }
 }
 
 @media (max-width: 560px) {
   .topRowRight :global(.DocSearch-Button) {
-    width: 100px !important;
-    max-width: 100px !important;
+    width: 80px !important;
+    max-width: 80px !important;
   }
 
   .topRowRight :global(.DocSearch-Button-Keys) {
@@ -273,7 +298,8 @@
   }
 }
 
-@media (max-width: 460px) {
+/* Hide search entirely on very small screens — Try Free + Ask AI still visible */
+@media (max-width: 400px) {
   .topRowRight :global(.DocSearch-Button) {
     display: none !important;
   }

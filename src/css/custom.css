@@ -793,6 +793,33 @@ body {
   padding-bottom: 60px;
 }
 
+/* Match Try Free and Ask AI buttons in mobile sidebar to their navbar appearance */
+
+/* Shared wrapper reset — zero out the navbar__item container padding and
+   replace with a uniform margin so both buttons sit at the same left edge */
+.navbar-sidebar .navbar__item:has(.try-free),
+.navbar-sidebar .navbar__item:has(.kapa-open) {
+  padding: 0 !important;
+  margin: 0.5rem var(--ifm-navbar-item-padding-horizontal) !important;
+}
+
+.navbar-sidebar .try-free {
+  display: inline-flex !important;
+  align-items: center;
+  width: auto !important;
+  background-color: var(--ifm-color-primary) !important;
+  color: #fff !important;
+  border-radius: var(--ifm-button-border-radius);
+  font-size: var(--ifm-button-font-size);
+  font-weight: var(--ifm-button-font-weight);
+  text-decoration: none !important;
+}
+
+.navbar-sidebar .try-free:hover {
+  background-color: var(--ifm-color-primary-dark) !important;
+  color: #fff !important;
+}
+
 /* style PushFeedback widget */
 .feedback-widget {
   padding-top: 2rem;

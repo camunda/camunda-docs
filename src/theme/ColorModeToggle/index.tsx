@@ -1,5 +1,5 @@
 /**
- * Swizzled ColorModeToggle – Vue.js-style slider switch.
+ * Swizzled ColorModeToggle – shows current mode icon with current-mode label as hover text.
  * Based on @docusaurus/theme-classic 3.8.0
  */
 
@@ -35,32 +35,22 @@ function getColorModeLabel(colorMode: ColorMode | null): string {
   switch (colorMode) {
     case null:
       return translate({
-        message: "system mode",
+        message: "System mode",
         id: "theme.colorToggle.ariaLabel.mode.system",
       });
     case "light":
       return translate({
-        message: "light mode",
+        message: "Light mode",
         id: "theme.colorToggle.ariaLabel.mode.light",
       });
     case "dark":
       return translate({
-        message: "dark mode",
+        message: "Dark mode",
         id: "theme.colorToggle.ariaLabel.mode.dark",
       });
     default:
       throw new Error(`unexpected color mode ${colorMode}`);
   }
-}
-
-function getColorModeAriaLabel(colorMode: ColorMode | null) {
-  return translate(
-    {
-      message: "Switch between dark and light mode (currently {mode})",
-      id: "theme.colorToggle.ariaLabel",
-    },
-    { mode: getColorModeLabel(colorMode) }
-  );
 }
 
 function ColorModeToggle({
@@ -71,6 +61,7 @@ function ColorModeToggle({
 }: Props): ReactNode {
   const isBrowser = useIsBrowser();
   const isDark = value === "dark";
+  const label = getColorModeLabel(value);
 
   return (
     <button
@@ -80,10 +71,10 @@ function ColorModeToggle({
         onChange(getNextColorMode(value, respectPrefersColorScheme))
       }
       disabled={!isBrowser}
-      title={getColorModeLabel(value)}
-      aria-label={getColorModeAriaLabel(value)}
+      title={label}
+      aria-label={label}
     >
-      {/* Moon icon – shown in light mode */}
+      {/* Sun icon – shown in light mode */}
       <svg
         className={clsx(styles.icon, !isDark && styles.iconVisible)}
         viewBox="0 0 24 24"
@@ -92,27 +83,28 @@ function ColorModeToggle({
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        width="20"
-        height="20"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+      </svg>
+
+      {/* Moon icon – shown in dark mode */}
+      <svg
+        className={clsx(styles.icon, isDark && styles.iconVisible)}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        width="16"
+        height="16"
         aria-hidden="true"
       >
         <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-      </svg>
-
-      {/* Sun icon – shown in dark mode */}
-      <svg
-        className={clsx(styles.icon, isDark && styles.iconVisible)}
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        width="20"
-        height="20"
-        aria-hidden="true"
-      >
-        <path
-          fillRule="evenodd"
-          d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-          clipRule="evenodd"
-        />
       </svg>
     </button>
   );

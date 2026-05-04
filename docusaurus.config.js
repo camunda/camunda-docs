@@ -394,6 +394,10 @@ module.exports = {
             },
             {
               label: "Community",
+              href: "https://community.camunda.com/",
+            },
+            {
+              label: "Forum",
               href: "https://forum.camunda.io/",
             },
             {
