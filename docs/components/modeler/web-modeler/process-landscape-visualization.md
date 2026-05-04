@@ -20,7 +20,7 @@ Process landscape view provides a visual map of BPMN files in a project and inte
 To open the process landscape view, click **View landscape** from any of the following views:
 
 - Folder view
-- [Project](/components/modeler/web-modeler/process-applications/process-applications.md) view
+- [Project](/components/hub/workspace/manage-projects/manage-projects.md) view
 
 ![process landscape visualization button](img/process-landscape-view-button.png)
 

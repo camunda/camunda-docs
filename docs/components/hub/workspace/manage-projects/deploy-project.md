@@ -1,5 +1,5 @@
 ---
-id: deploy-process-application
+id: deploy-project
 title: Validate and deploy your project
 description: Validate your project in development before deploying it to testing, staging, or production.
 ---
@@ -14,14 +14,14 @@ Validate your project in development before deploying it to testing, staging, or
 
 ## Validate your project
 
-Use [Play mode](../validation/play-your-process.md) to validate your project in development.
+Use [Play mode](/components/modeler/web-modeler/validation/play-your-process.md) to validate your project in development.
 
 1. Open the BPMN diagram in the project that you want to validate.
 1. Select the **Play** tab to play the project using your selected development cluster.
 1. Perform validation as required, for example, debug your process logic and test the project.
 
 :::info
-To learn more about using Play for validation, see [Play mode for rapid validation](../validation/play-your-process.md)
+To learn more about using Play for validation, see [Play mode for rapid validation](/components/modeler/web-modeler/validation/play-your-process.md)
 :::
 
 ## Deploy your project
@@ -30,9 +30,9 @@ To learn more about using Play for validation, see [Play mode for rapid validati
 
 - If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
 
-Once validation is complete, deploy your project to cluster stages in your [development lifecycle](./process-application-pipeline.md), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
+Once validation is complete, deploy your project to cluster stages in your [development lifecycle](./project-pipeline.md), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
 
-1. Open the [project homepage](create-a-process-application.md#process-application-homepage).
+1. Open the [project homepage](create-a-project.md#project-homepage).
 1. Select the **Deploy latest changes** option from the **Deploy & run** combo button to open the **Deploy & run** modal.
    <p><img src={DeployImg} alt="Deploy a project" /></p>
 1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) is provided.
@@ -63,11 +63,11 @@ Use Play to validate your project in a development cluster, and only use Run whe
 
 To run your project:
 
-1. Open the [project homepage](create-a-process-application.md#process-application-homepage).
+1. Open the [project homepage](create-a-project.md#project-homepage).
 1. Select **Deploy & run** to open the **Deploy & run** modal.
    <p><img src={RunProcessApplicationImg} alt="Run a project" /></p>
 1. Select the process for which you want to start a new instance in **Process to run**.
-1. Select **Deploy & run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](../../../operate/operate-introduction.md). Open this link to monitor the process instance. If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:<ul><li>`READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type</li><li>`operate` permission to the `COMPONENT` resource type</li></ul></li></ul></p>
+1. Select **Deploy & run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](/components/operate/operate-introduction.md). Open this link to monitor the process instance. If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:<ul><li>`READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type</li><li>`operate` permission to the `COMPONENT` resource type</li></ul></li></ul></p>
 
 You can also open the **Deploy & run** modal from the details page of any BPMN file in the project. In that case, the current process is run and the modal includes an additional option to select the resources to deploy.
 

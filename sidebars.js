@@ -700,6 +700,7 @@ module.exports = {
                 "components/hub/organization/manage-clusters/create-backups",
                 "components/hub/organization/manage-clusters/settings",
                 "components/hub/organization/manage-clusters/cluster-capacity",
+                "components/hub/organization/manage-clusters/troubleshoot-clusters",
               ],
             },
             {
@@ -769,33 +770,33 @@ module.exports = {
               label: "Manage projects",
               link: {
                 type: "doc",
-                id: "components/modeler/web-modeler/process-applications/process-applications",
+                id: "components/hub/workspace/manage-projects/manage-projects",
               },
               items: [
                 {
                   type: "doc",
                   label: "Lifecycle",
-                  id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
+                  id: "components/hub/workspace/manage-projects/project-pipeline",
                 },
                 {
                   type: "doc",
                   label: "Creation",
-                  id: "components/modeler/web-modeler/process-applications/create-a-process-application",
+                  id: "components/hub/workspace/manage-projects/create-a-project",
                 },
                 {
                   type: "doc",
                   label: "Deployment",
-                  id: "components/modeler/web-modeler/process-applications/deploy-process-application",
+                  id: "components/hub/workspace/manage-projects/deploy-project",
                 },
                 {
                   type: "doc",
                   label: "Versioning",
-                  id: "components/modeler/web-modeler/process-applications/process-application-versioning",
+                  id: "components/hub/workspace/manage-projects/project-versioning",
                 },
                 {
                   type: "doc",
                   label: "Git Sync",
-                  id: "components/modeler/web-modeler/process-applications/git-sync",
+                  id: "components/hub/workspace/manage-projects/git-sync",
                 },
               ],
             },

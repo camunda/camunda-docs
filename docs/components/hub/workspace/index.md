@@ -19,13 +19,13 @@ Develop project releases through the stages of a typical development lifecycle:
 
 <AoGrid ao={[
 {
-link: "../../modeler/web-modeler/process-applications",
+link: "./manage-projects/create-a-project",
 title: "Create a project",
 image: DocsIcon,
 description: "Create a project in your workspace to work on and deploy a set of related files.",
 },
 {
-link: "../../modeler/web-modeler/process-applications/deploy-process-application",
+link: "./manage-projects/deploy-project",
 title: "Deploy a project",
 image: DocsIcon,
 description: "Validate your project in development before deploying it to testing, staging, or production.",

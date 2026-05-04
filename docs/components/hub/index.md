@@ -22,19 +22,19 @@ Manage organizational resources, including clusters and workspaces, and govern t
 
 <AoGrid ao={[
 {
-link: "../hub/organization/manage-clusters/manage-cluster",
+link: "./organization/manage-clusters/manage-cluster",
 title: "Manage clusters",
 image: DocsIcon,
 description: "Create, monitor, and assign clusters for seamless execution across all rollout stages.",
 },
 {
-link: "../hub/organization/manage-members/manage-users",
+link: "./organization/manage-members/manage-users",
 title: "Manage members",
 image: DocsIcon,
 description: "Manage the users, user groups, and roles in your organization.",
 },
 {
-link: "../hub/organization/manage-organization-settings/organization-settings",
+link: "./organization/manage-organization-settings/organization-settings",
 title: "Manage organization",
 image: DocsIcon,
 description: "Manage organizational settings, and view usage alerts and history.",
@@ -47,7 +47,7 @@ Discover and use approved reusable assets, manage projects, and deliver business
 
 <AoGrid ao={[
 {
-link: "../modeler/web-modeler/process-applications",
+link: "./workspace/manage-projects",
 title: "Manage projects",
 image: DocsIcon,
 description: "Develop project releases through the stages of a typical development lifecycle.",

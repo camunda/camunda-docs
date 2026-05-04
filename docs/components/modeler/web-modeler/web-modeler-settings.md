@@ -31,13 +31,13 @@ Organization admins can configure the deployment policy for projects in the Web 
 <TabItem value='saas'>
 
 By default, only [organization administrators](/components/hub/organization/manage-members/manage-users.md) can deploy projects to clusters marked as
-[production stages](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#deployment-pipeline-stages) from Web Modeler.
+[production stages](/components/hub/workspace/manage-projects/project-pipeline.md#deployment-pipeline-stages) from Web Modeler.
 
 You can change this in the **Project deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Project deployment**.
 
 Here, you can permit non-admin users with deployment permissions to deploy project versions to production stage clusters
 after a collaborator has reviewed and approved the project version using the
-[project review](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#review) feature.
+[project review](/components/hub/workspace/manage-projects/project-pipeline.md#review) feature.
 This setting can only be configured by organization admins and applies to all projects in the organization.
 
 </TabItem>
@@ -45,13 +45,13 @@ This setting can only be configured by organization admins and applies to all pr
 <TabItem value='self-managed'>
 
 By default, only users with the **Web Modeler Admin** role can deploy projects to
-clusters marked as [production stages](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#deployment-pipeline-stages) from Web Modeler.
+clusters marked as [production stages](/components/hub/workspace/manage-projects/project-pipeline.md#deployment-pipeline-stages) from Web Modeler.
 
 You can change this in the **Project deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Project deployment**.
 
 Here, you can permit non-admin users with deployment permissions to deploy project versions to production stage clusters
 after a collaborator has reviewed and approved the project version using the
-[project review](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#review) feature.
+[project review](/components/hub/workspace/manage-projects/project-pipeline.md#review) feature.
 This setting can only be configured by users with the **Web Modeler Admin** role and applies to all projects.
 
 If the **Web Modeler Admin** role is not pre-existing, it can be created with the following permissions:

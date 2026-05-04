@@ -29,7 +29,7 @@ With README support in Web Modeler, you can:
 ## Where READMEs appear
 
 - In every workspace, project, and folder (each can have its own README)
-  ![project with readme](img/process-application-with-readme.png)
+  ![project with readme](img/project-with-readme.png)
   > Git-connected projects sync README content just like any other file
 - In the [process landscape view](../../process-landscape-visualization.md) as context for a node or the entire app
   ![process landscape with readme](img/process-landscape-with-readme.png)
@@ -67,5 +67,5 @@ To see the final result of a README file, select the **Preview** tab:
 
 ## Related resources
 
-- [Projects](../../process-applications/process-applications.md)
+- [Projects](/components/hub/workspace/manage-projects/manage-projects.md)
 - [Process landscape visualization](../../process-landscape-visualization.md)

@@ -17,13 +17,13 @@ Using both tools together allows you to combine the best of both worlds:
 
 This workflow bridges the gap between business users and developers, ensuring smooth handoffs and better alignment across the team.
 
-When using [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md) to keep your project in sync between a Camunda Hub workspace and your local environment, there are a few considerations to ensure both modelers interpret the project (and its `.process-application` file) consistently.
+When using [Git sync](/components/hub/workspace/manage-projects/git-sync.md) to keep your project in sync between a Camunda Hub workspace and your local environment, there are a few considerations to ensure both modelers interpret the project (and its `.project` file) consistently.
 
 ## Process applications
 
-| Desktop Modeler                                                                            | Web Modeler                                                                                                                            |
-| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| A process application is represented as a folder containing a `.process-application` file. | A process application is represented as a [type folder](/components/modeler/web-modeler/process-applications/process-applications.md). |
+| Desktop Modeler                                                                            | Web Modeler                                                                                                            |
+| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| A process application is represented as a folder containing a `.process-application` file. | A process application is represented as a [type folder](/components/hub/workspace/manage-projects/manage-projects.md). |
 
 :::tip
 Camunda recommends always structuring your projects as process applications. This ensures consistent behavior across both Web Modeler and Desktop Modeler with minimal adjustments.

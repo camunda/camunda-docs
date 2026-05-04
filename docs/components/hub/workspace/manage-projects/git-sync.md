@@ -80,7 +80,7 @@ Click **Create GitHub App** to finish.
 
 When successful, your project will display a new **Sync with GitHub** button.
 
-![The Sync with GitHub within Web Modeler](../img/git-sync.png)
+![The Sync with GitHub within Web Modeler](./img/git-sync.png)
 
 </TabItem>
 <TabItem value='gitlab'>
@@ -306,7 +306,7 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
 1. In your connected project, click **Sync with _GitProvider_** button.
-2. Enter a [version number](process-applications.md#process-application-versioning) to create a new version for your project. The new version will be created prior to pushing your changes to the central repository.
+2. Enter a [version number](manage-projects.md#project-versioning) to create a new version for your project. The new version will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
@@ -344,7 +344,7 @@ Git sync supports parallel feature development by allowing multiple projects to 
 
 To use Git sync for parallel feature development:
 
-1. Create a new [project](create-a-process-application.md) in Modeler for each active feature branch you want to develop.
+1. Create a new [project](create-a-project.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
 3. Work on your feature in Modeler, using **Sync with _GitProvider_** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the project associated with the feature branch.
@@ -357,7 +357,7 @@ Creating multiple copies of a project can complicate navigation and deployment i
 
 ## Self-Managed environment variables
 
-Refer to [Configuration of the restapi component](../../../../self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
+Refer to [Configuration of the restapi component](/self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
 
 ## Troubleshooting
 

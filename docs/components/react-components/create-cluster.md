@@ -13,3 +13,10 @@ Even while the cluster shows a status **Creating**, you can still proceed to beg
 :::note
 Zeebe must show a status of **Healthy** to properly deploy your model.
 :::
+
+## Troubleshooting
+
+If **Create new cluster** is disabled, consider these explanations:
+
+- Your organization is on a trial plan and you have already created a cluster. In this case, you cannot create another cluster, because only one cluster is included in the trial plan.
+- Your billing reservations do not allow any more clusters. You must increase the [reservations](/components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations.md) to create more clusters. If you do not have the necessary rights, contact an admin or the owner of the organization.

@@ -72,7 +72,7 @@ You can open the process landscape view by clicking **View landscape** from any 
 
 - Workspace view
 - Folder view
-- [Project](/components/modeler/web-modeler/process-applications/process-applications.md) view
+- [Project](/components/hub/workspace/manage-projects/manage-projects.md) view
 
 ### Landscape view interaction
 
@@ -113,4 +113,4 @@ Alternatively, you can trigger a quick automation like a GitHub Action to keep y
 
 Once the basic integration is configured by an organization owner or organization administrator, workspace administrators and editors can use the built-in button to pull changes from GitHub, integrate contributions from Desktop Modeler users, and merge their own work.
 
-Learn more in Camunda's [Git sync documentation](/components/modeler/web-modeler/process-applications/git-sync.md).
+Learn more in Camunda's [Git sync documentation](/components/hub/workspace/manage-projects/git-sync.md).

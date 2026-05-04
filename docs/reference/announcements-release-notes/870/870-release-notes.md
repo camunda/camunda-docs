@@ -120,7 +120,7 @@ We have enabled developers to manage and work with multi-file BPMN projects dire
 
 ### Process application versioning, README, and review <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/modeler/web-modeler/process-applications/process-application-versioning.md), and [readable for everyone](/components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#review) and approved.
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/hub/workspace/manage-projects/project-versioning.md), and [readable for everyone](/components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/hub/workspace/manage-projects/project-pipeline.md#review) and approved.
 
 <!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
 
@@ -132,7 +132,7 @@ Create and append tasks with resources available in the current project and proc
 
 ### Unified deployment experience from Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-[Authenticate deployments](/components/modeler/web-modeler/process-applications/process-application-versioning.md) with your existing user tokens, rather than entering shared secrets. This further simplifies the deployment process beyond our 8.6 release.
+[Authenticate deployments](/components/hub/workspace/manage-projects/project-versioning.md) with your existing user tokens, rather than entering shared secrets. This further simplifies the deployment process beyond our 8.6 release.
 
 <!--- https://github.com/camunda/product-hub/issues/2073 --->
 
@@ -258,7 +258,7 @@ Web Modeler now supports stronger governance and change control. This ensures sa
 - Reviews cannot be performed by the user who created the process application version, and the reviewer is logged in the version history of a process application.
 - Admins can enable production deployments for reviewed process applications as an alternative to using their own deployment pipeline.
 
-To learn more about this feature, see [process governance](/components/modeler/web-modeler/process-applications/process-application-pipeline.md).
+To learn more about this feature, see [process governance](/components/hub/workspace/manage-projects/project-pipeline.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2583 -->
 
@@ -366,7 +366,7 @@ Web Modeler now supports native integration between a process application and a 
 
 Non-technical users in orgs running GitLab can now easily access the files in their source of truth, collaborate cross-platform with Desktop Modeler users, and contribute changes to a feature branch that can be easily merged and deployed.
 
-To learn more about this feature, see [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md).
+To learn more about this feature, see [Git sync](/components/hub/workspace/manage-projects/git-sync.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2502 -->
 
@@ -651,7 +651,7 @@ When configuring Git sync in Web Modeler, define the optional `/path` option to 
 - Sync with your main branch to perform visual diffing, collaboration, and manual testing in Web Modeler. Remember not to make any changes in this branch.
 - Edit the `/path` for multiple process applications to integrate Web Modeler with your existing monorepo and code assets.
 
-To learn more about configuring Git sync, see [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md).
+To learn more about configuring Git sync, see [Git sync](/components/hub/workspace/manage-projects/git-sync.md).
 
 ### Resize clusters on SaaS <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span>
 

@@ -1,5 +1,5 @@
 ---
-id: create-a-process-application
+id: create-a-project
 title: Create a project
 description: Create a project and select a development cluster to deploy to.
 ---

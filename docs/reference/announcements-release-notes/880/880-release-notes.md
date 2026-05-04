@@ -717,7 +717,7 @@ Use the FEEL Playground to validate and troubleshoot your FEEL expressions when 
 
 In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket.
 
-<p><a href="../../../../components/modeler/web-modeler/process-applications/git-sync" class="link-arrow">Git sync</a></p>
+<p><a href="../../../../components/hub/workspace/manage-projects/git-sync" class="link-arrow">Git sync</a></p>
 
 ### Low-code process testing
 
@@ -1113,7 +1113,7 @@ Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitb
 - This helps customers who use Jira for their development processes.
 - Organization owners and administrators can connect their Web Modeler process applications to Bitbucket Cloud, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
-To learn more, see [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md?platform=bitbucket).
+To learn more, see [Git sync](/components/hub/workspace/manage-projects/git-sync.md?platform=bitbucket).
 
 ### Camunda 8 REST API renamed to Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
 
@@ -1287,7 +1287,7 @@ To learn more about this connector, see [vector database connector](/components/
 
 ### Azure DevOps integration for Git sync <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-Camunda now supports [an integration with Azure DevOps](/components/modeler/web-modeler/process-applications/git-sync.md) that allows for direct syncing with Azure repositories.
+Camunda now supports [an integration with Azure DevOps](/components/hub/workspace/manage-projects/git-sync.md) that allows for direct syncing with Azure repositories.
 
 <!-- https://github.com/camunda/product-hub/issues/2580 -->
 

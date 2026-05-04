@@ -468,7 +468,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 A collection of related files in a Camunda Hub workspace you can work on and deploy as a single bundle. A workspace may contain multiple projects.
 
-- [Project](/components/modeler/web-modeler/process-applications/process-applications.md)
+- [Project](/components/hub/workspace/manage-projects/manage-projects.md)
 
 ### Prompt
 

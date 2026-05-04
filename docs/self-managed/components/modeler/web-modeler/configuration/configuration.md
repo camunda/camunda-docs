@@ -642,7 +642,7 @@ For more details, including Kubernetes probe configuration examples and `websock
 
 ### Git Sync
 
-Web Modeler supports syncing files via [Git Sync](../../../../../components/modeler/web-modeler/process-applications/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
+Web Modeler supports syncing files via [Git Sync](/components/hub/workspace/manage-projects/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
 
 <Tabs groupId="git-sync" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },

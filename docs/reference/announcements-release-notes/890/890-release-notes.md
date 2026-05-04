@@ -489,8 +489,8 @@ Web Modeler now offers a unified deployment experience across BPMN, DMN, forms, 
 This update reduces hidden deployment behavior, lowers cognitive load, and makes deployment workflows more predictable and extensible for future asset types.
 
 <ul>
-  <li><span class="link-arrow">[Process applications in Web Modeler](/components/modeler/web-modeler/process-applications/process-applications.md)</span></li>
-  <li><span class="link-arrow">[Validate and deploy your process application](/components/modeler/web-modeler/process-applications/deploy-process-application.md)</span></li>
+  <li><span class="link-arrow">[Process applications in Web Modeler](/components/hub/workspace/manage-projects/manage-projects.md)</span></li>
+  <li><span class="link-arrow">[Validate and deploy your process application](/components/hub/workspace/manage-projects/deploy-project.md)</span></li>
 </ul>
 
 ### Collaboration and import improvements
