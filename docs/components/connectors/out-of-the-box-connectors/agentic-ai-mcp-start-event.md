@@ -1,0 +1,49 @@
+---
+id: agentic-ai-mcp-start-event
+title: MCP start event
+sidebar_label: MCP start event
+description: "Reference for the MCP start event element template, which registers a BPMN process as a callable MCP tool in the Processes MCP Server."
+---
+
+The **MCP start event** is an element template (category: **AI Tools**) applied to a BPMN message start event. When deployed, it registers the process as an MCP tool in the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
+
+It is not a connector and is not handled by the connector runtime. The element template configures the start event metadata that the Processes MCP Server uses to expose the process as a tool to MCP clients.
+
+## Apply the template
+
+1. Open your BPMN process in Web Modeler.
+2. Select a start event (or add a new one).
+3. In the properties panel, click the element template picker.
+4. Select **MCP start event** from the **AI Tools** category.
+
+![MCP start event properties panel in Web Modeler](agentic-ai/img/mcp-start-event-properties.png)
+
+## Properties
+
+| Property                  | Required | Description                                                                                                                                                         |
+| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Name**                  | Yes      | The MCP tool identifier. Alphanumeric characters, hyphens (`-`), underscores (`_`), and dots (`.`) only; max 100 characters. Used by MCP clients to call this tool. |
+| **What it does**          | Yes      | A plain-language description of the process function. Shown to LLMs as tool metadata.                                                                               |
+| **Which inputs it needs** | Yes      | A plain-language description of required and optional input parameters, their types, and any constraints. Shown to LLMs as tool metadata.                           |
+| **When to use**           | No       | Specific situations or user intents that should trigger this tool.                                                                                                  |
+| **When not to use**       | No       | Conditions or situations where this tool should not be invoked.                                                                                                     |
+| **What the tool returns** | No       | The outcomes, results, and variable names the process produces on completion.                                                                                       |
+
+A hidden `messageNameUuid` property is auto-generated and binds the start event to its BPMN message name. No user action is required for this property.
+
+## How it works
+
+When the process is deployed:
+
+1. The Processes MCP Server reads the element template metadata and registers the process as an MCP tool.
+2. MCP clients can discover the tool by name and call it.
+3. Each tool invocation starts a new process instance with the tool call arguments mapped as process variables.
+4. When the process instance completes, the Processes MCP Server returns the output variables to the MCP client as the tool result.
+
+Only the latest deployed version of a process is exposed. See [Version binding](/apis-tools/processes-mcp/processes-mcp-version-binding.md).
+
+## Related
+
+- [Expose a process as an MCP tool](/components/agentic-orchestration/expose-process-as-mcp-tool.md) — step-by-step guide
+- [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) — server overview
+- [Version binding](/apis-tools/processes-mcp/processes-mcp-version-binding.md) — how redeployments affect MCP clients

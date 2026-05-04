@@ -1,0 +1,57 @@
+---
+id: processes-mcp-overview
+title: "Processes MCP Server"
+sidebar_label: "Overview"
+description: "Enable AI agents to discover and call your deployed BPMN processes as MCP tools."
+---
+
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+The Processes MCP Server is a capability of the Orchestration Cluster that exposes your deployed BPMN processes as callable tools through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP).
+
+- Any process equipped with an [MCP start event](../../components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) element template is automatically registered as an MCP tool when deployed.
+- MCP clients discover these tools at runtime and invoke them by name. Each invocation starts a new process instance and returns the result when the process completes.
+- The server shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model as the Orchestration Cluster REST API.
+
+:::note
+This is the Processes MCP Server documentation. If you are looking to:
+
+- Give AI agents access to Camunda's operational capabilities (incidents, user tasks, process instances…), see the [Orchestration Cluster MCP Server](../orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md).
+- Connect an AI agent running inside a BPMN process to an external MCP server, see the [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
+  :::
+
+:::important Camunda 8 public API
+The Processes MCP Server is not part of the [Camunda 8 public API](/reference/public-api.md).
+:::
+
+### Key features
+
+| Feature                   | Description                                                                                                                                                   |
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Process tool registration | Processes with an MCP start event are automatically registered as MCP tools on deployment.                                                                    |
+| Tool discovery            | MCP clients discover available process tools and their schemas at runtime.                                                                                    |
+| Static tools              | The server also exposes a set of [static tools](#static-tools) for inspecting running process instances.                                                      |
+| Version binding           | Only the latest deployed version of a process is exposed. See [Version binding](./processes-mcp-version-binding.md).                                          |
+| Standard transport        | Uses [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) — compatible with any MCP-compliant client. |
+
+### Authentication
+
+The Processes MCP Server uses the same authentication model as the [Orchestration Cluster REST API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md). OAuth tokens obtained for the REST API work without changes.
+
+For the full authentication reference, including SaaS and Self-Managed setup, see [Authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+
+### Transport
+
+The Processes MCP Server uses [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) and is served at the `/mcp/processes` endpoint on the Orchestration Cluster. It is stateless; no session management is required.
+
+## Get started
+
+To expose a process as an MCP tool and connect an MCP client to the Processes MCP Server, see [Expose a process as an MCP tool](/components/agentic-orchestration/expose-process-as-mcp-tool.md).
+
+## Static tools
+
+In addition to dynamically registered process tools, the Processes MCP Server always exposes a set of static tools for inspecting the process instances it starts. See [Static tools](./processes-mcp-static-tools.md).
