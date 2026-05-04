@@ -28,7 +28,7 @@ For simplicity, this guide assumes:
 
 - One organization
 - One cluster
-- One [workspace](/docs/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md)
+- One [workspace](/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md)
 - A pipeline handling runtime provisioning and template syncing
 
 ## Runtime provisioning
