@@ -53,7 +53,7 @@ Manage the users, user groups, and roles in your organization:
 link: "../../console/manage-organization/manage-users",
 title: "Manage users",
 image: DocsIcon,
-description: "Manage users of your organization.",
+description: "Manage users in your organization.",
 },
 {
 link: "../../console/manage-organization/manage-user-groups",
