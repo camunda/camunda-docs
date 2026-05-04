@@ -163,6 +163,9 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 
 # Fix broken links from camunda-platform-get-started README
 
+# Redirect old console intro
+RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
+
 # Get started with Optimize
 RewriteRule ^docs/next/guides/improve-processes-with-optimize/?$ /docs/next/components/optimize/improve-processes-with-optimize/ [R=301,L]
 
