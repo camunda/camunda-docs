@@ -59,7 +59,7 @@ description: "Manage users in your organization.",
 link: "../../console/manage-organization/manage-user-groups",
 title: "Manage user groups",
 image: DocsIcon,
-description: "User groups are a way to organize users within your organization.",
+description: "Organize users into groups within your organization.",
 },
 ]} columns={2}/>
 
