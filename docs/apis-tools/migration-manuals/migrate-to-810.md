@@ -44,7 +44,7 @@ Review the actions required for the following 8.10 changes:
 | Type                                                         | Change                                                                                                               |
 | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
 | <span className="label-highlight red">Breaking change</span> | [Search filters: `UserTaskFilter` process filters converted into advanced search filters] (#usertask-process-filter) |
-| <span className="label-highlight red">Breaking change</span> | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type) |
+| <span className="label-highlight red">Breaking change</span> | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)              |
 
 ## Breaking changes
 
@@ -103,9 +103,9 @@ This change provides complete visibility into all active message subscriptions f
 
 Each result includes a new `messageSubscriptionType` enum field:
 
-| Value | Description |
-| :---- | :---------- |
-| `START_EVENT` | A start event message subscription. |
+| Value           | Description                                       |
+| :-------------- | :------------------------------------------------ |
+| `START_EVENT`   | A start event message subscription.               |
 | `PROCESS_EVENT` | An intermediate catch event message subscription. |
 
 In existing legacy data, this field is `NULL`.
