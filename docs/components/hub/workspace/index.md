@@ -53,6 +53,6 @@ description: "Start modeling your first BPMN diagram.",
 link: "../../modeler/web-modeler/run-or-publish-your-process",
 title: "Run or publish your process",
 image: DocsIcon,
-description: "Flexible options to run or publish a process in any environment and to any audience.",
+description: "Run or publish a process in any environment and for any audience.",
 },
 ]} columns={2}/>
