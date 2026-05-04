@@ -50,7 +50,7 @@ Discover and use approved reusable assets, manage projects, and deliver business
 link: "../modeler/web-modeler/process-applications",
 title: "Manage projects",
 image: DocsIcon,
-description: "Develop and progress project releases through the stages of a typical development lifecycle.",
+description: "Develop project releases through the stages of a typical development lifecycle.",
 },
 {
 link: "../modeler/web-modeler",

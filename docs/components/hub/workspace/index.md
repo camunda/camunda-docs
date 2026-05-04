@@ -15,7 +15,7 @@ With Camunda Hub, you'll collaborate in managed workspaces, discover and use app
 
 ## Manage projects
 
-Develop and progress project releases through the stages of a typical development lifecycle:
+Develop project releases through the stages of a typical development lifecycle:
 
 <AoGrid ao={[
 {
