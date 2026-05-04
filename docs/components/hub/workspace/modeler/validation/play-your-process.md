@@ -175,25 +175,25 @@ You can run scenarios on the process definition page by clicking either the **Ru
 - Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
 - Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
-- Play scenarios are compatible with the [CPT JSON instruction format](/apis-tools/testing/json-test-cases.md), but the following instructions are not supported and will be skipped during execution:
-  - [`ASSERT_DECISION`](/apis-tools/testing/json-test-cases.md#assert_decision)
-  - [`ASSERT_ELEMENT_INSTANCE`](/apis-tools/testing/json-test-cases.md#assert_element_instance)
-  - [`ASSERT_ELEMENT_INSTANCES`](/apis-tools/testing/json-test-cases.md#assert_element_instances)
-  - [`ASSERT_PROCESS_INSTANCE`](/apis-tools/testing/json-test-cases.md#assert_process_instance)
-  - [`ASSERT_PROCESS_INSTANCE_MESSAGE_SUBSCRIPTION`](/apis-tools/testing/json-test-cases.md#assert_process_instance_message_subscription)
-  - [`ASSERT_USER_TASK`](/apis-tools/testing/json-test-cases.md#assert_user_task)
-  - [`ASSERT_VARIABLES`](/apis-tools/testing/json-test-cases.md#assert_variables)
-  - [`COMPLETE_JOB_AD_HOC_SUB_PROCESS`](/apis-tools/testing/json-test-cases.md#complete_job_ad_hoc_sub_process)
-  - [`COMPLETE_JOB_USER_TASK_LISTENER`](/apis-tools/testing/json-test-cases.md#complete_job_user_task_listener)
-  - [`CORRELATE_MESSAGE`](/apis-tools/testing/json-test-cases.md#correlate_message)
-  - [`EVALUATE_CONDITIONAL_START_EVENT`](/apis-tools/testing/json-test-cases.md#evaluate_conditional_start_event)
-  - [`EVALUATE_DECISION`](/apis-tools/testing/json-test-cases.md#evaluate_decision)
-  - [`INCREASE_TIME`](/apis-tools/testing/json-test-cases.md#increase_time)
-  - [`MOCK_CHILD_PROCESS`](/apis-tools/testing/json-test-cases.md#mock_child_process)
-  - [`MOCK_DMN_DECISION`](/apis-tools/testing/json-test-cases.md#mock_dmn_decision)
-  - [`MOCK_JOB_WORKER_COMPLETE_JOB`](/apis-tools/testing/json-test-cases.md#mock_job_worker_complete_job)
-  - [`MOCK_JOB_WORKER_THROW_BPMN_ERROR`](/apis-tools/testing/json-test-cases.md#mock_job_worker_throw_bpmn_error)
-  - [`SET_TIME`](/apis-tools/testing/json-test-cases.md#set_time)
+- Play scenarios are compatible with the [CPT JSON instruction format](/apis-tools/testing/json-test-cases.md), but the following [instructions](/apis-tools/testing/json-test-cases.md#reference-instructions) are not supported and will be skipped during execution:
+  - `ASSERT_DECISION`
+  - `ASSERT_ELEMENT_INSTANCE`
+  - `ASSERT_ELEMENT_INSTANCES`
+  - `ASSERT_PROCESS_INSTANCE`
+  - `ASSERT_PROCESS_INSTANCE_MESSAGE_SUBSCRIPTION`
+  - `ASSERT_USER_TASK`
+  - `ASSERT_VARIABLES`
+  - `COMPLETE_JOB_AD_HOC_SUB_PROCESS`
+  - `COMPLETE_JOB_USER_TASK_LISTENER`
+  - `CORRELATE_MESSAGE`
+  - `EVALUATE_CONDITIONAL_START_EVENT`
+  - `EVALUATE_DECISION`
+  - `INCREASE_TIME`
+  - `MOCK_CHILD_PROCESS`
+  - `MOCK_DMN_DECISION`
+  - `MOCK_JOB_WORKER_COMPLETE_JOB`
+  - `MOCK_JOB_WORKER_THROW_BPMN_ERROR`
+  - `SET_TIME`
 
 ## Modify a process instance
 
