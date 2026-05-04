@@ -735,10 +735,10 @@ module.exports = {
                 "components/hub/organization/manage-organization-settings/delete-account",
                 {
                   "Manage plan": [
-                    "components/console/manage-plan/create-account",
-                    "components/console/manage-plan/available-plans",
-                    "components/console/manage-plan/upgrade-to-enterprise-plan",
-                    "components/console/manage-plan/update-billing-reservations",
+                    "components/hub/organization/manage-organization-settings/manage-plan/create-account",
+                    "components/hub/organization/manage-organization-settings/manage-plan/available-plans",
+                    "components/hub/organization/manage-organization-settings/manage-plan/upgrade-to-enterprise-plan",
+                    "components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations",
                   ],
                 },
               ],

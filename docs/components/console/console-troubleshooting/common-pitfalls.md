@@ -10,7 +10,7 @@ Let's take a closer look at common issues and resolutions within Camunda Hub.
 
 - Your organization is on a trial plan and you have already created a cluster. In this case, you cannot create another cluster, because only one cluster is included in the trial plan.
 
-- Your billing reservations do not allow any more clusters. You must increase the [reservations](../manage-plan/update-billing-reservations.md) to create more clusters. If you do not have the necessary rights, contact an admin or the owner of the organization.
+- Your billing reservations do not allow any more clusters. You must increase the [reservations](/components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations.md) to create more clusters. If you do not have the necessary rights, contact an admin or the owner of the organization.
 
 ## I cannot connect to Zeebe
 

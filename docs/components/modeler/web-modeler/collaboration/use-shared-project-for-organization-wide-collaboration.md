@@ -24,7 +24,7 @@ Teams can use workspaces to:
 
 ## Create a workspace and invite collaborators
 
-If you have not yet already, [create a Camunda 8 account](/components/console/manage-plan/create-account.md)
+If you have not yet already, [create a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md)
 
 To create a workspace as a space for your organization's resources:
 
