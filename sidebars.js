@@ -664,11 +664,26 @@ module.exports = {
       },
       items: [
         {
-          Organization: [
+          type: "category",
+          label: "Organization",
+          link: {
+            type: "doc",
+            id: "components/hub/organization/organization",
+          },
+          items: [
             {
-              "Manage clusters": [
+              type: "doc",
+              id: "components/hub/organization/manage-workspaces/manage-workspaces",
+            },
+            {
+              type: "category",
+              label: "Manage clusters",
+              link: {
+                type: "doc",
+                id: "components/console/manage-clusters/manage-cluster",
+              },
+              items: [
                 "components/console/manage-clusters/create-cluster",
-                "components/console/manage-clusters/manage-cluster",
                 "components/console/manage-clusters/cluster-connectors",
                 "components/console/manage-clusters/manage-api-clients",
                 "components/console/manage-clusters/manage-secrets",
@@ -680,14 +695,28 @@ module.exports = {
               ],
             },
             {
-              "Manage members": [
-                "components/console/manage-organization/manage-users",
+              type: "doc",
+              id: "components/hub/organization/manage-catalog/manage-catalog",
+            },
+            {
+              type: "category",
+              label: "Manage members",
+              link: {
+                type: "doc",
+                id: "components/console/manage-organization/manage-users",
+              },
+              items: [
                 "components/console/manage-organization/manage-user-groups",
               ],
             },
             {
-              "Manage the organization": [
-                "components/console/manage-organization/organization-settings",
+              type: "category",
+              label: "Manage organization settings",
+              link: {
+                type: "doc",
+                id: "components/console/manage-organization/organization-settings",
+              },
+              items: [
                 "components/console/manage-organization/external-sso",
                 "components/console/manage-organization/view-organization-activity",
                 "components/console/manage-organization/enable-alpha-features",
@@ -709,7 +738,13 @@ module.exports = {
           ],
         },
         {
-          Workspace: [
+          type: "category",
+          label: "Workspace",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/workspace",
+          },
+          items: [
             {
               type: "category",
               label: "Manage projects",
@@ -744,6 +779,10 @@ module.exports = {
                   id: "components/modeler/web-modeler/process-applications/git-sync",
                 },
               ],
+            },
+            {
+              type: "doc",
+              id: "components/hub/workspace/manage-workspace/manage-workspace",
             },
             {
               type: "category",
