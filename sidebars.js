@@ -743,6 +743,17 @@ module.exports = {
                 },
               ],
             },
+            {
+              type: "category",
+              label: "Analyze operations",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/analyze-operations/analyze-operations",
+              },
+              items: [
+                "components/hub/organization/analyze-operations/job-dashboard",
+              ],
+            },
           ],
         },
         {
