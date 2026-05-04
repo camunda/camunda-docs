@@ -88,7 +88,7 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 
 #### `POST /v2/message-subscriptions/search` now returns start event subscriptions
 
-Starting with 8.10, the `POST /v2/message-subscriptions/search` endpoint returns both **start event** and **intermediate event** message subscriptions. Previously, only intermediate event subscriptions were returned.
+Starting with 8.10, the `POST /v2/message-subscriptions/search` endpoint returns both start event and intermediate event message subscriptions. Previously, only intermediate event subscriptions were returned.
 
 A new `messageSubscriptionType` enum field is included in each result. Existing (legacy) data has `NULL` for this field.
 
