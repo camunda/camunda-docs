@@ -59,7 +59,7 @@ This unified architecture ensures seamless communication, consistent state manag
 
 #### Camunda Hub
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764667245523380&cot=14 -->
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
 
 ![Camunda Hub](./img/management-cluster.jpg)
 
