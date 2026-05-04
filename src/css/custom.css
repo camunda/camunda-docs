@@ -1790,6 +1790,93 @@ ul ul .table-of-contents__link--active {
   opacity: 0.5;
   cursor: default;
 }
+
+.glossary-term {
+  display: inline-flex;
+  position: relative;
+}
+
+.glossary-term__link {
+  text-decoration-style: dotted;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+.glossary-term__tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.5rem);
+  z-index: 40;
+  width: min(20rem, 80vw);
+  padding: 0.75rem 0.875rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.5rem;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.18);
+  color: var(--ifm-font-color-base);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(0.25rem);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.glossary-term__tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-right: 1px solid var(--ifm-color-emphasis-300);
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.glossary-term__tooltip-title {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--ifm-heading-color);
+  font-weight: 600;
+}
+
+.glossary-term:focus-within .glossary-term__tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .glossary-term:hover .glossary-term__tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .glossary-term__tooltip {
+    left: 0;
+    transform: translateY(0.25rem);
+  }
+
+  .glossary-term__tooltip::after {
+    left: 1.5rem;
+    transform: rotate(45deg);
+  }
+
+  .glossary-term:focus-within .glossary-term__tooltip {
+    transform: translateY(0);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .glossary-term:hover .glossary-term__tooltip {
+      transform: translateY(0);
+    }
+  }
+}
 /* Style for custom Detail collapsbiles - for example used in /docs/reference/announcements-release-notes/860/860-release-notes.md */
 .changelog-dropdown {
   border: none !important;
