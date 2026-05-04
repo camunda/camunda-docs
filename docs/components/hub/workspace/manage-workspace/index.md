@@ -1,10 +1,10 @@
 ---
 id: manage-workspace
 title: Manage workspace settings
-description: "Manage your workspace's members, clusters, and general information."
+description: "Manage workspace members, clusters, and general information."
 ---
 
-Manage your workspace's members, clusters, and general information.
+Manage workspace members, clusters, and general information.
 
 ## About workspaces
 

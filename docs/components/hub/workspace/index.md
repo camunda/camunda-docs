@@ -34,7 +34,7 @@ description: "Validate your process application in development before deploying 
 
 ## Manage workspace settings
 
-Manage your workspace's members, clusters, and general information:
+Manage workspace members, clusters, and general information:
 
 <span class="link-arrow">[Get started](./manage-workspace/index.md)</span>
 
