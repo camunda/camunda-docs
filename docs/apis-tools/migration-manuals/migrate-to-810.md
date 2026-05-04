@@ -101,14 +101,14 @@ This change provides complete visibility into all active message subscriptions f
 
 #### New field
 
-A new `messageSubscriptionType` enum field is included in each result:
+Each result includes a new `messageSubscriptionType` enum field:
 
 | Value | Description |
 | :---- | :---------- |
 | `START_EVENT` | A start event message subscription. |
 | `PROCESS_EVENT` | An intermediate catch event message subscription. |
 
-Existing (legacy) data has `NULL` for this field.
+In existing legacy data, this field is `NULL`.
 
 #### Impact
 
@@ -129,7 +129,7 @@ Update to the latest SDK version. If your code relies on the endpoint returning 
 </TabItem>
 <TabItem value='generated'>
 
-Regenerate your client from the 8.10 OpenAPI specification to include the new `messageSubscriptionType` field. If your code expects only intermediate event subscriptions, add the filter shown in the custom integrations tab to your request payload.
+Regenerate your client from the 8.10 OpenAPI specification to include the new `messageSubscriptionType` field. If your code expects only intermediate event subscriptions, add the filter shown in the **Custom integrations** tab to your request payload.
 
 </TabItem>
 <TabItem value='custom'>
