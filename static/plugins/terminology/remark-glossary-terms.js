@@ -129,6 +129,12 @@ function getDocsRoot(sourceFilePath) {
   return path.join(process.cwd(), "docs");
 }
 
+function normalizeGlossaryRoute(targetPath) {
+  return targetPath
+    .replace(/^\/docs\/(?:next|\d+\.\d+)\//, "/")
+    .replace(/\/$/, "");
+}
+
 function resolveGlossaryTarget(sourceFilePath, url) {
   if (!url || url.startsWith("#") || /^(https?:)?\/\//.test(url)) {
     return null;
@@ -141,19 +147,23 @@ function resolveGlossaryTarget(sourceFilePath, url) {
   }
 
   const docsRoot = getDocsRoot(sourceFilePath);
+  const normalizedTargetPath = normalizeGlossaryRoute(targetPath);
   let absolutePath;
 
-  if (targetPath.startsWith("/")) {
-    absolutePath = path.join(docsRoot, targetPath.replace(/^\//, ""));
+  if (normalizedTargetPath.startsWith("/")) {
+    absolutePath = path.join(docsRoot, normalizedTargetPath.replace(/^\//, ""));
   } else {
-    absolutePath = path.resolve(path.dirname(sourceFilePath), targetPath);
+    absolutePath = path.resolve(
+      path.dirname(sourceFilePath),
+      normalizedTargetPath
+    );
   }
 
   if (!path.extname(absolutePath)) {
-    absolutePath = `${absolutePath}.md`;
+    absolutePath = `${absolutePath.replace(/\/$/, "")}.md`;
   }
 
-  if (path.basename(absolutePath) !== "glossary.md") {
+  if (path.basename(absolutePath, path.extname(absolutePath)) !== "glossary") {
     return null;
   }
 
