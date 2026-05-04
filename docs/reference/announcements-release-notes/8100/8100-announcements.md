@@ -86,11 +86,23 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 </div>
 <div className="release-announcement-content">
 
-#### APIs & tools change 1
+#### `POST /v2/message-subscriptions/search` now returns start event subscriptions
 
-APIs & tools change 1 description.
+Starting with 8.10, the `POST /v2/message-subscriptions/search` endpoint returns both **start event** and **intermediate event** message subscriptions. Previously, only intermediate event subscriptions were returned.
 
-**Action:** Description.
+A new `messageSubscriptionType` enum field is included in each result. Existing (legacy) data has `NULL` for this field.
+
+**Action:** If your integration expects the endpoint to return only intermediate event subscriptions, add the following filter to restore the previous behavior:
+
+```json
+{
+  "filter": {
+    "messageSubscriptionType": { "$neq": "START_EVENT" }
+  }
+}
+```
+
+<p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#message-subscription-type)</p>
 
 </div>
 </div>
