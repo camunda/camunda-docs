@@ -1792,14 +1792,19 @@ ul ul .table-of-contents__link--active {
 }
 
 .glossary-term {
-  display: inline-flex;
+  display: inline;
   position: relative;
 }
 
 .glossary-term__link {
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-decoration-line: underline;
   text-decoration-style: dotted;
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.18em;
+  text-decoration-color: var(--ifm-color-warning-dark);
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.12em;
 }
 
 .glossary-term__tooltip {
@@ -1807,9 +1812,9 @@ ul ul .table-of-contents__link--active {
   left: 50%;
   bottom: calc(100% + 0.5rem);
   z-index: 40;
-  width: min(20rem, 80vw);
+  width: min(22rem, calc(100vw - 2rem));
   padding: 0.75rem 0.875rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: 1px solid var(--ifm-color-warning-dark);
   border-radius: 0.5rem;
   background: var(--ifm-background-surface-color);
   box-shadow: 0 10px 28px rgba(17, 24, 39, 0.18);
@@ -1831,8 +1836,8 @@ ul ul .table-of-contents__link--active {
   left: 50%;
   width: 0.75rem;
   height: 0.75rem;
-  border-right: 1px solid var(--ifm-color-emphasis-300);
-  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  border-right: 1px solid var(--ifm-color-warning-dark);
+  border-bottom: 1px solid var(--ifm-color-warning-dark);
   background: var(--ifm-background-surface-color);
   transform: translateX(-50%) rotate(45deg);
 }
@@ -1840,7 +1845,7 @@ ul ul .table-of-contents__link--active {
 .glossary-term__tooltip-title {
   display: block;
   margin-bottom: 0.25rem;
-  color: var(--ifm-heading-color);
+  color: var(--ifm-color-warning-darkest);
   font-weight: 600;
 }
 
@@ -1856,14 +1861,14 @@ ul ul .table-of-contents__link--active {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .glossary-term__tooltip {
-    left: 0;
+    left: max(-0.5rem, calc(50% - 10rem));
     transform: translateY(0.25rem);
   }
 
   .glossary-term__tooltip::after {
-    left: 1.5rem;
+    left: clamp(1.5rem, 50%, 10rem);
     transform: rotate(45deg);
   }
 
