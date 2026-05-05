@@ -21,7 +21,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 - See [What's new in Camunda 8.10](/reference/announcements-release-notes/8100/whats-new-in-810.md) for important changes to consider when planning your upgrade from Camunda 8.8.
 - See [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) to learn more about supported environment changes, breaking changes, and deprecations.
-- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/23) for an overview of known bugs by component and severity.
 
 :::
 
@@ -40,26 +40,7 @@ import PageDescription from '@site/src/components/PageDescription';
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 12 May 2026  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.10.0-alpha1)</li></ul> | -    |
 
-### Operate
-
-#### JSON display in Operate
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3464 -->
-
-Camunda 8.10 introduces an update to the JSON display functionality in Operate (SaaS).
-
-You can now:
-
-- Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
-- View JSON values with consistent, easier to understand formatting.
-- Copy full JSON variable values to the clipboard.
-- Use the improved in-line variables display.
-
-This change helps navigate more complex data during operations and troubleshooting.
-
-### Camunda Hu
+### Camunda Hub
 
 #### Usage & billing metrics for 2025 enterprise license model
 
@@ -67,12 +48,12 @@ This change helps navigate more complex data during operations and troubleshooti
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Camunda now supports the **2025 enterprise license model** in Camunda Hub and Accounts.
+Camunda Hub and Accounts now support the **2025 enterprise license model**.
 
-- A new `licensing_model` attribute on `OrganizationMetaData` identifies whether an enterprise organization is on the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
-- For organizations with `licensing_model = 2025`, Usage and Billing views show **only Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer rendered. Legacy organizations continue to see the existing metric set.
-- For enterprise (`salesplantype = enterprise`) organizations, the licensing model is visible in the organization details and can be edited via a modal action that lets admins select **legacy** or **2025**.
-- The enterprise onboarding wizard now includes a license selection step, defaulting to **2025**, and the `ExternalOnboardingRouter` accepts an optional licensing model parameter (defaulting to **2025** when not provided).
+- A new `licensing_model` attribute on `OrganizationMetaData` identifies if an enterprise organization is using the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
+- If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
+- For enterprise (`salesplantype = enterprise`) organizations, the licensing model is shown in the organization details. Admins can edit this by selecting either **legacy** or **2025** via a modal action.
+- The enterprise onboarding wizard now includes a license selection step (defaults to **2025**). The `ExternalOnboardingRouter` accepts an optional licensing model parameter (defaulting to **2025** if not provided).
 
 #### Cluster version selection for SaaS orchestration clusters
 
@@ -106,5 +87,24 @@ Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extractio
 Execution listeners now support configurable headers, aligned with service task job headers.
 
 - In BPMN, execution listeners can define `<zeebe:taskHeaders>`. The headers are passed to the listener’s job worker alongside any base-element headers, with listener headers overriding on key conflicts.
-- Modeler lets you configure execution listener headers visually (name/value pairs) without editing BPMN XML.
+- In Modeler, you can configure execution listener headers visually (name/value pairs) without editing BPMN XML.
 - Listener workers can consume these headers as metadata and configuration parameters using the same patterns as service task job workers.
+
+### Operate
+
+#### JSON display in Operate
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3464 -->
+
+Camunda 8.10 introduces an update to the JSON display functionality in Operate (SaaS).
+
+You can now:
+
+- Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
+- View JSON values with consistent, easier to understand formatting.
+- Copy full JSON variable values to the clipboard.
+- Use the improved in-line variables display.
+
+This change helps navigate more complex data during operations and troubleshooting.
