@@ -3,8 +3,6 @@ id: 8100-release-notes
 title: "8.10 Release notes"
 sidebar_label: Release notes
 description: "Release notes for new features included in the 8.10 minor release, including alpha feature releases."
-toc_min_heading_level: 2
-toc_max_heading_level: 2
 keywords: ["8.10 release notes", "release notes for 8.10", "release notes"]
 page_rank: 90
 ---
