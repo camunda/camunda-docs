@@ -314,10 +314,14 @@ AI can accelerate code migration by applying the [code conversion patterns](#cod
 You can use AI in three ways:
 
 1. **Standalone**: Give the AI agent your Camunda 7 code and the conversion patterns, and let it produce Camunda 8 equivalents.
-2. **Post-OpenRewrite cleanup**: Run OpenRewrite first, then use AI to fix remaining TODOs and compilation errors.
+2. **Post-OpenRewrite cleanup**: Run OpenRewrite first, then use AI to handle the remaining tasks and compilation errors.
 3. **Full agentic migration**: Let an AI agent assess your codebase, run OpenRewrite, and handle all remaining migration tasks.
 
-The fastest path is the [Camunda migration agent skill](#camunda-migration-agent-skill) — it packages all three approaches into an interactive workflow inside your AI coding agent. The rest of this section describes the underlying pattern catalog and prompts the skill uses, which you can also apply manually with any AI coding agent or chat assistant.
+:::tip
+The fastest path is the [Camunda migration agent skill](#camunda-migration-agent-skill): it packages all three approaches into an interactive workflow inside your AI coding agent.
+:::
+
+The rest of this section describes the underlying pattern catalog and prompts the Camunda migration agent skill uses, which you can also apply manually with any AI coding agent or chat assistant.
 
 ### Camunda migration agent skill
 
