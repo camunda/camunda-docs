@@ -48,7 +48,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Camunda Hub and Accounts now support the **2025 enterprise license model**.
+Camunda Hub and Accounts now support the 2025 enterprise license model.
 
 - A new `licensing_model` attribute on `OrganizationMetaData` identifies if an enterprise organization is using the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
 - If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
