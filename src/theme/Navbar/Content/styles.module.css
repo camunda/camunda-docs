@@ -248,6 +248,25 @@
   }
 }
 
+/* Icon-only square search button on very small screens */
+@media (max-width: 460px) {
+  .topRowRight :global(.DocSearch-Button) {
+    width: 32px !important;
+    max-width: 32px !important;
+    min-width: 32px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+
+  .topRowRight :global(.DocSearch-Button-Placeholder) {
+    display: none !important;
+  }
+
+  .topRowRight :global(.DocSearch-Button-Keys) {
+    display: none !important;
+  }
+}
+
 /* Hide search entirely on very small screens — Try Free + Ask AI still visible */
 @media (max-width: 400px) {
   .topRowRight :global(.DocSearch-Button) {
