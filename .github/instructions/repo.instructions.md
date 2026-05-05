@@ -6,7 +6,9 @@ applyTo: "**"
 
 ## 1. File and repo structure
 
-This is a **Docusaurus 3** documentation site for **Camunda 8**, published at [docs.camunda.io](https://docs.camunda.io).
+This is a **Docusaurus 3** documentation site for **Camunda 8**, published at https://docs.camunda.io.
+
+To determine the exact Docusaurus version used by this site, check the `@docusaurus/core` dependency in the repo's `package.json`.
 
 | Path                        | Contents                                                            |
 | --------------------------- | ------------------------------------------------------------------- |
