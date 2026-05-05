@@ -59,15 +59,7 @@ You can now:
 
 This change helps navigate more complex data during operations and troubleshooting.
 
-### Camunda Hub
-
-#### Unified navigation and context-aware sidebar
-
-<!-- https://github.com/camunda/product-hub/issues/3382 (moved to alpha2, delete?)-->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-Camunda Hub provides a single, unified navigation with persistent breadcrumbs and a context-aware sidebar across your organization, workspace/project, and Orchestration Cluster views.
+### Camunda Hu
 
 #### Usage & billing metrics for 2025 enterprise license model
 
