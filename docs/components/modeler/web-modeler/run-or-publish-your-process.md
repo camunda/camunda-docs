@@ -1,7 +1,7 @@
 ---
 id: run-or-publish-your-process
 title: Run or publish your process
-description: "Flexible options to run or publish a process in any environment and to any audience."
+description: "Run or publish a process in any environment and for any audience."
 ---
 
 import Tabs from "@theme/Tabs";
