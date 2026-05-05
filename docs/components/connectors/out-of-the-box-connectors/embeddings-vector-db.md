@@ -1,7 +1,7 @@
 ---
 id: embeddings-vector-db
-title: Vector database connector
-sidebar_label: Vector database
+title: Vector Database connector
+sidebar_label: Vector Database
 description: Embed, store, and retrieve LLM embeddings and store them in vector databases.
 ---
 
