@@ -429,7 +429,10 @@ optimize:
             httpPort: 9200
 ```
 
-For `optimize.extraConfiguration`, a common use case is a custom `environment-logback.xml` (not `log4j2.xml`):
+In Camunda **8.8 and earlier**, Optimize does **not** load any additional configuration files. The Helm chart renders `optimize.extraConfiguration` entries as separate files and imports them into the **Spring** environment, but these files are **not consumed by Optimize's configuration loader**.
+
+As a result, `optimize.extraConfiguration` affects Spring/Identity behavior, but it **cannot be used to set Optimize-native options** in these versions. To change Optimize configuration, override `environment-config.yaml` directly using `optimize.configuration` or by editing the Optimize ConfigMap.
+
 
 ```yaml
 optimize:
@@ -439,6 +442,10 @@ optimize:
         ...
       </configuration>
 ```
+
+:::note
+Starting with Camunda 8.9, Optimize can load additional configuration files referenced via Spring's `spring.config.import` / `spring.config.location` and therefore supports `optimize.extraConfiguration` for Optimize-native settings. See the [8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/application-configs/) for details.
+:::
 
 For the full list of Optimize configuration options, see [Optimize system configuration](/self-managed/components/optimize/configuration/system-configuration.md).
 
