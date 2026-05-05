@@ -4,9 +4,7 @@ title: Camunda Hub
 description: "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub."
 ---
 
-import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import DocsIcon from "@site/docs/components/assets/icon-docs.png";
-import PlayIcon from "@site/docs/components/assets/icon-play.png";
 import AoGrid from '../react-components/\_ao-card';
 
 Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
@@ -52,7 +50,7 @@ Discover and use approved reusable assets, manage projects, and deliver business
 link: "../modeler/web-modeler/process-applications",
 title: "Manage projects",
 image: DocsIcon,
-description: "Develop and progress project releases through the stages of a typical development lifecycle.",
+description: "Develop project releases through the stages of a typical development lifecycle.",
 },
 {
 link: "../modeler/web-modeler",
