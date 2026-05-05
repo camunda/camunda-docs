@@ -807,7 +807,8 @@ body {
   display: inline-flex !important;
   align-items: center;
   width: auto !important;
-  background-color: var(--ifm-color-primary) !important;
+  background-color: #fc5d0d !important;
+  border: 1px solid #fc5d0d !important;
   color: #fff !important;
   border-radius: var(--ifm-button-border-radius);
   font-size: var(--ifm-button-font-size);
@@ -816,8 +817,20 @@ body {
 }
 
 .navbar-sidebar .try-free:hover {
-  background-color: var(--ifm-color-primary-dark) !important;
+  background-color: #171c29 !important;
+  border-color: #171c29 !important;
   color: #fff !important;
+}
+
+[data-theme="dark"] .navbar-sidebar .try-free {
+  background-color: transparent !important;
+  border: 1px solid #fff !important;
+  color: #fff !important;
+}
+
+[data-theme="dark"] .navbar-sidebar .try-free:hover {
+  background-color: #fff !important;
+  color: var(--ifm-color-black) !important;
 }
 
 /* style PushFeedback widget */
