@@ -2196,6 +2196,19 @@ h3 + .release-announcement-row {
   white-space: nowrap;
 }
 
+@media (max-width: 680px) {
+  .version-switch-toast {
+    font-size: 0.85rem;
+    padding: 0.75rem 1.1rem;
+    gap: 0.5rem;
+    width: min(380px, calc(100vw - 2rem));
+  }
+
+  .version-switch-toast__text {
+    white-space: normal;
+  }
+}
+
 .version-switch-toast__close {
   display: flex;
   align-items: center;
