@@ -7,7 +7,7 @@ description: "Learn how to provision element templates at runtime and make them 
 To effectively manage large libraries of reusable building blocks ([element templates](/components/concepts/element-templates.md)), you can create a pipeline that:
 
 - Provisions the [dependencies of element templates](/components/modeler/element-templates/element-template-with-dependencies.md) to required clusters.
-- Makes templates available at design time to multiple [workspaces](/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md) within an organization.
+- Makes templates available at design time to multiple [workspaces](/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md) within an organization.
 
 ![Pipeline goal](./img/pipeline-goal.png)
 
@@ -28,7 +28,7 @@ For simplicity, this guide assumes:
 
 - One organization
 - One cluster
-- One [workspace](/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md)
+- One [workspace](/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md)
 - A pipeline handling runtime provisioning and template syncing
 
 ## Runtime provisioning
@@ -144,4 +144,4 @@ If you are the template creator/maintainer, include a `README` file in your repo
 
 ## Next steps
 
-Refer to [Integrate Web Modeler in CI/CD](/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd.md) for additional CI/CD-related guidance.
+Refer to [Integrate Web Modeler in CI/CD](/components/hub/workspace/modeler/integrate-modeler-in-ci-cd.md) for additional CI/CD-related guidance.

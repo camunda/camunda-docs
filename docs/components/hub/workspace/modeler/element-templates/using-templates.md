@@ -1,5 +1,5 @@
 ---
-id: using-templates-in-web-modeler
+id: using-templates-in-modeler
 title: Using templates
 description: "Learn how to apply, remove, update, and replace templates."
 ---
@@ -15,7 +15,7 @@ selected element.
 
 ![Popup Menu](./img/modal.png)
 
-You can also click the **blue shop icon** in the upper right of the popup to open the [Camunda Marketplace](/components/modeler/web-modeler/modeling/camunda-marketplace.md).
+You can also click the **blue shop icon** in the upper right of the popup to open the [Camunda Marketplace](/components/hub/workspace/modeler/modeling/camunda-marketplace.md).
 
 ![Marketplace Menu](./img/marketplace.png)
 
@@ -78,6 +78,6 @@ If a diagram element supports being used as a template, a _Save as_ link will be
 
 The template can be further customized by [editing it](/components/connectors/manage-connector-templates.md).
 
-To use the template, you first need to [publish it to the project or organization](/components/modeler/web-modeler/element-templates/manage-element-templates.md#publish-an-element-template).
+To use the template, you first need to [publish it to the project or organization](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#publish-an-element-template).
 
 Learn more about [saving elements as templates](./save-as-element-templates.md).

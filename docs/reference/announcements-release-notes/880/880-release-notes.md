@@ -435,7 +435,7 @@ Supported providers are:
 - **GCP**: Google Cloud Platform with Vertex AI and Document AI (supports both structured and unstructured extraction).
 - **OpenAI compatible**: Supports OpenAI and any provider implementing the OpenAI `/chat/completions` API (unstructured extraction only).
 
-<p><a href="../../../../components/modeler/web-modeler/idp/idp-document-extraction/" class="link-arrow">Document extraction</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/idp/idp-document-extraction/" class="link-arrow">Document extraction</a></p>
 
 ### Structured data form extraction
 
@@ -446,7 +446,7 @@ You can use form-based structured document extraction to capture data from struc
 - For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
 - Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
 
-<p><a href="../../../../components/modeler/web-modeler/idp/idp-structured-extraction" class="link-arrow">Extract structured data</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/idp/idp-structured-extraction" class="link-arrow">Extract structured data</a></p>
 
 ## Migration from Camunda 7 to Camunda 8
 
@@ -668,7 +668,7 @@ In addition to bearer token authentication, you can now configure Web Modeler in
 Web Modeler now provides a low-coder friendly UX for creating building blocks.
 Whether you create an element template from scratch or from a task, you can quickly set and narrow down the properties so process developers using these templates can quickly and confidently wire building blocks together into an E2E process.
 
-<p><a href="../../../../components/modeler/web-modeler/element-templates/element-template-generator" class="link-arrow">Generate an element template</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/element-templates/element-template-generator" class="link-arrow">Generate an element template</a></p>
 
 ### Element template support for all tasks
 
@@ -680,7 +680,7 @@ You can now save any configured task as a reusable element template directly fro
 - Edit templates to adjust input/output bindings, validation rules, categories, and more.
 - Publish templates to your project or organization for reuse.
 
-<p><a href="../../../../components/modeler/web-modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
 
 ### Unlock element template fields
 
@@ -692,7 +692,7 @@ Element template management is now more flexible for developers and DevOps teams
 - Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
 - Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
 
-<p><a href="../../../../components/modeler/web-modeler/element-templates/manage-element-templates/" class="link-arrow">Manage element templates</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/element-templates/manage-element-templates/" class="link-arrow">Manage element templates</a></p>
 
 ### FEEL Copilot
 
@@ -729,7 +729,7 @@ You can now save and rerun versioned test scenarios in Web Modeler:
 - Ideal for process developers and CoEs
 - Enables behavior-driven development with Camunda Process Test
 
-<p><a href="../../../../components/modeler/web-modeler/validation/play-your-process/" class="link-arrow">Scenarios</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/validation/play-your-process/" class="link-arrow">Scenarios</a></p>
 
 ### RDBMS support for Oracle and MS SQL in Self-Managed
 
@@ -751,7 +751,7 @@ Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNA
 
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
-<p><a href="../../../../components/modeler/web-modeler/modeling/versions" class="link-arrow">Web Modeler versioning</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/modeling/versions" class="link-arrow">Web Modeler versioning</a></p>
 
 ## 8.8.0-alpha8
 
@@ -838,7 +838,7 @@ You can now save any configured task as a reusable element template directly fro
 - Edit templates to adjust input/output bindings, validation rules, categories, and more
 - Publish templates to your project or organization for reuse
 
-See [save tasks as element templates](/components/modeler/web-modeler/element-templates/save-as-element-templates.md) for details.
+See [save tasks as element templates](/components/hub/workspace/modeler/element-templates/save-as-element-templates.md) for details.
 
 Additional support includes:
 
@@ -1055,7 +1055,7 @@ You can use form-based structured document extraction to capture data from struc
 - For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
 - Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
 
-To learn more, see [extract structured data](/components/modeler/web-modeler/idp/idp-structured-extraction.md).
+To learn more, see [extract structured data](/components/hub/workspace/modeler/idp/idp-structured-extraction.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2707 -->
 
@@ -1446,7 +1446,7 @@ To learn more about these settings, see [Desktop Modeler settings](/components/m
 
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
-To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/modeling/versions.md).
+To learn more about versioning your diagrams, see [versions](components/hub/workspace/modeler/modeling/versions.md).
 
 ### Web Modeler cluster Basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 

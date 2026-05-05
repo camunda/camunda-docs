@@ -110,7 +110,7 @@ Use intelligent document processing (IDP) to integrate automated document proces
 - IDP uses artificial intelligence (AI) and machine learning (ML) to identify, extract, and organize data from your structured and unstructured documents into a structured format you can use in your processes.
 - For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
 
-To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
+To learn more about this feature, see [intelligent document processing](/components/hub/workspace/modeler/intelligent-document-processing.md).
 
 ### Process applications in Desktop Modeler <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
 
@@ -120,7 +120,7 @@ We have enabled developers to manage and work with multi-file BPMN projects dire
 
 ### Process application versioning, README, and review <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/hub/workspace/manage-projects/project-versioning.md), and [readable for everyone](/components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/hub/workspace/manage-projects/project-pipeline.md#review) and approved.
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/hub/workspace/manage-projects/project-versioning.md), and [readable for everyone](/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/hub/workspace/manage-projects/project-pipeline.md#review) and approved.
 
 <!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
 
@@ -217,10 +217,10 @@ Use intelligent document processing (IDP) to integrate automated document proces
 - For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
 
 :::note
-IDP only offers support for Camunda 8 Self-Managed development deployment via Docker with the 8.7.0-alpha5 release (see [example deployment](/components/modeler/web-modeler/idp/idp-configuration.md#idp-docker-example)). Full production support for Camunda 8 SaaS and Camunda 8 Self-Managed is planned for delivery with the 8.7 release. Camunda 8 Run is not supported as IDP requires Web Modeler.
+IDP only offers support for Camunda 8 Self-Managed development deployment via Docker with the 8.7.0-alpha5 release (see [example deployment](/components/hub/workspace/modeler/idp/idp-configuration.md#idp-docker-example)). Full production support for Camunda 8 SaaS and Camunda 8 Self-Managed is planned for delivery with the 8.7 release. Camunda 8 Run is not supported as IDP requires Web Modeler.
 :::
 
-To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
+To learn more about this feature, see [intelligent document processing](/components/hub/workspace/modeler/intelligent-document-processing.md).
 
 <!-- https://github.com/camunda/camunda-docs/issues/4575, https://github.com/camunda/product-hub/issues/2521 -->
 
@@ -237,7 +237,7 @@ Process landscape visualization provides a comprehensive, hierarchical view of a
 - Visualize the entire process landscape of a project in a single, interactive interface.
 - Drill down from high-level processes to detailed sub-processes and activities.
 
-To learn more about this feature, see [process landscape visualization](/components/modeler/web-modeler/process-landscape-visualization.md).
+To learn more about this feature, see [process landscape visualization](/components/hub/workspace/modeler/process-landscape-visualization.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2432 -->
 
@@ -397,7 +397,7 @@ For example, you can validate your process by creating and rerunning scenarios f
 - As you save completed instances as scenarios, Play calculates the percent of elements covered by the scenario suite.
 - This is the first step towards bringing automated testing into Web Modeler, and enabling business and IT to collaborate on automated tests.
 
-To learn more about this feature, see [Play scenarios](/components/modeler/web-modeler/validation/play-your-process.md#scenarios).
+To learn more about this feature, see [Play scenarios](/components/hub/workspace/modeler/validation/play-your-process.md#scenarios).
 
 <!-- https://github.com/camunda/product-hub/issues/2073 -->
 
@@ -639,7 +639,7 @@ You can now configure and automatically generate a custom connector template in 
 - You can start from a blank template or import an existing API definition such as an OpenAPI specification, Swagger specification, or a Postman collection.
 - For example, download a Postman collection as a YAML file, import this into the generator, and choose which methods to include in the generated template.
 
-To learn more about generating connector templates, see [generate a connector template](/components/modeler/web-modeler/element-templates/element-template-generator.md).
+To learn more about generating connector templates, see [generate a connector template](/components/hub/workspace/modeler/element-templates/element-template-generator.md).
 
 ### Monorepo Git sync <span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 

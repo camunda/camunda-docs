@@ -44,13 +44,13 @@ Collaboratively design executable processes as the foundation for scalable IT an
 
 <AoGrid ao={[
 {
-link: "../../modeler/web-modeler/modeling/model-your-first-diagram",
+link: "./modeler/modeling/model-your-first-diagram",
 title: "Model your first diagram",
 image: DocsIcon,
 description: "Start modeling your first BPMN diagram.",
 },
 {
-link: "../../modeler/web-modeler/run-or-publish-your-process",
+link: "./modeler/run-or-publish-your-process",
 title: "Run or publish your process",
 image: DocsIcon,
 description: "Run or publish a process in any environment and for any audience.",

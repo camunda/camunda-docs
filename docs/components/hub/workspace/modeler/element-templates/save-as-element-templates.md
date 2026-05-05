@@ -32,7 +32,7 @@ The **Save as template** feature is available for the following BPMN element typ
 - Manual task
 - Call activity
 
-You cannot create a template for the [undefined task type](../../../bpmn/undefined-tasks).
+You cannot create a template for the [undefined task type](../../../../modeler/bpmn/undefined-tasks/undefined-tasks.mdx).
 
 **Events**
 

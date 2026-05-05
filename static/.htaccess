@@ -167,10 +167,23 @@ RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups
 RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-members/ [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/process-applications/$ /docs/next/components/hub/workspace/manage-projects/manage-projects [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)$ /docs/next/components/hub/workspace/manage-projects/$1 [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/next/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
 RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
+
+# Process applications - specific renamed files
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/process-applications/$ /docs/next/components/hub/workspace/manage-projects/manage-projects [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/next/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
+
+# Process applications - general redirect
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)$ /docs/next/components/hub/workspace/manage-projects/$1 [R=301,L]
+
+# Web Modeler moved to Hub Workspace Modeler - specific renamed files
+RewriteRule ^docs/next/components/modeler/web-modeler/launch-web-modeler/?$ /docs/next/components/hub/workspace/modeler/launch-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/web-modeler-settings/?$ /docs/next/components/hub/workspace/modeler/modeler-settings/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/?$ /docs/next/components/hub/workspace/modeler/integrate-modeler-in-ci-cd/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/element-templates/using-templates-in-web-modeler/?$ /docs/next/components/hub/workspace/modeler/element-templates/using-templates-in-modeler/ [R=301,L]
+
+# Web Modeler moved to Hub Workspace Modeler - general redirect
+RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
 
 # Fix broken links from camunda-platform-get-started README
 

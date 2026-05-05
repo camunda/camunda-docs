@@ -21,7 +21,7 @@ To create a project version:
    <img src={CreateVersionModalImg} alt="Create a version modal" style={{maxWidth: '560px', width: '100%'}} />
 3. Select the **Create** button.
 
-On the versions page, which you open with **See full list**, you can use the file navigation header buttons to switch between files and view their content. See also [compare versions](/components/modeler/web-modeler/modeling/versions.md#compare-versions).
+On the versions page, which you open with **See full list**, you can use the file navigation header buttons to switch between files and view their content. See also [compare versions](/components/hub/workspace/modeler/modeling/versions.md#compare-versions).
 
 <img src={VersionListImg} alt="Versions list with file navigation header buttons highlighted" style={{maxWidth: '560px', width: '100%'}} />
 

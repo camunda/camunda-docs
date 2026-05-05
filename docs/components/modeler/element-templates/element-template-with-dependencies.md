@@ -29,7 +29,7 @@ To make a template available for use, complete two key steps:
 ## Next steps
 
 - [Defining element templates](./defining-templates.md)
-- [Publishing an element template in Web Modeler](/components/modeler/web-modeler/element-templates/manage-element-templates.md#publish-an-element-template)
-- [Using element templates in Web Modeler](/components/modeler/web-modeler/element-templates/using-templates.md)
+- [Publishing an element template in Web Modeler](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#publish-an-element-template)
+- [Using element templates in Web Modeler](/components/hub/workspace/modeler/element-templates/using-templates.md)
 - [Configuring element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md)
 - [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)

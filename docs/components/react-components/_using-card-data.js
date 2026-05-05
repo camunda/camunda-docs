@@ -20,7 +20,7 @@ export const featuresCards = [
       "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
   },
   {
-    link: "./modeler/web-modeler/idp/",
+    link: "./hub/workspace/modeler/idp/",
     title: "Intelligent document processing (IDP)",
     image: IconIdpImg,
     description: "Integrate automated document processing into your processes.",
@@ -104,7 +104,7 @@ export const featuresPageCards = [
       "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
   },
   {
-    link: "../modeler/web-modeler/idp/",
+    link: "../hub/workspace/modeler/idp/",
     title: "Intelligent document processing (IDP)",
     image: IconIdpImg,
     description: "Integrate automated document processing into your processes.",

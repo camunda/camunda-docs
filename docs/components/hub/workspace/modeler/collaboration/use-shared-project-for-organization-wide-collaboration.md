@@ -9,7 +9,7 @@ import BulkAddUserImg from '../img/invite-all-organization-members.png';
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Organizations often manage process documentation across multiple layers, from high-level strategic models to detailed operational workflows. [Process landscape visualization](/components/modeler/web-modeler/process-landscape-visualization.md) streamlines this complexity by supporting different levels of abstraction, enabling seamless collaboration across teams, and providing tailored insights for various stakeholders.
+Organizations often manage process documentation across multiple layers, from high-level strategic models to detailed operational workflows. [Process landscape visualization](/components/hub/workspace/modeler/process-landscape-visualization.md) streamlines this complexity by supporting different levels of abstraction, enabling seamless collaboration across teams, and providing tailored insights for various stakeholders.
 
 ## About this guide
 
@@ -28,7 +28,7 @@ If you have not yet already, [create a Camunda 8 account](/components/hub/organi
 
 To create a workspace as a space for your organization's resources:
 
-1. Open [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and select **Create new project** (if you do not have any existing workspaces) or **New project** (if you already have existing workspaces).
+1. Open [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) and select **Create new project** (if you do not have any existing workspaces) or **New project** (if you already have existing workspaces).
 2. Name your workspace accordingly.
    ![web modeler empty home](../img/web-modeler-new-user-home.png)
 3. On the right side of the page under **Collaborators**, select **Add user**.
@@ -44,13 +44,13 @@ For Self-Managed installations, the bulk invitation only works for users who hav
 
 ## Assign workspace and organization roles to collaborators
 
-To understand what permissions each role has, review [access rights and permissions](/components/modeler/web-modeler/collaboration/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/hub/organization/manage-members/manage-users.md).
+To understand what permissions each role has, review [access rights and permissions](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/hub/organization/manage-members/manage-users.md).
 
 If you previously invited collaborators to your organization _and_ workspace in the section prior, select the three vertical dots to the right of the users' name and select **Edit user**. Check which roles the user should be assigned and select **Confirm**.
 
 ## Share resources within a workspace
 
-You can publish a specific [version](/components/modeler/web-modeler/modeling/versions.md) of a file or project within the workspace.
+You can publish a specific [version](/components/hub/workspace/modeler/modeling/versions.md) of a file or project within the workspace.
 
 1. From the BPMN diagram, select the **Versions** dropdown in the top right corner.
 2. Select the three vertical dots on the right side of the version labeled **Browse version actions**.
@@ -66,7 +66,7 @@ Users can also reuse published resources by copying them into their own workspac
 
 ## Browse the process landscape of shared organization resources
 
-The [process landscape view](/components/modeler/web-modeler/process-landscape-visualization.md) offers a visual map of BPMN files and their interfile connections (such as call activities).
+The [process landscape view](/components/hub/workspace/modeler/process-landscape-visualization.md) offers a visual map of BPMN files and their interfile connections (such as call activities).
 
 You can open the process landscape view by clicking **View landscape** from any of the following views:
 
@@ -106,7 +106,7 @@ To keep your process landscape up to date with all changes in production, take t
 
 1. Sync the project to the feature branch of a subfolder in a repository.
 2. Merge the feature branch to main.
-3. Begin the [CI/CD pipeline](/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd.md).
+3. Begin the [CI/CD pipeline](/components/hub/workspace/modeler/integrate-modeler-in-ci-cd.md).
 4. Sync your main branch to the workspace as part of the CI/CD pipeline.
 
 Alternatively, you can trigger a quick automation like a GitHub Action to keep your process landscape updated.

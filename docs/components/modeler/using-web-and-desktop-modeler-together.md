@@ -4,7 +4,7 @@ title: Using Web and Desktop Modeler together
 description: "Understand the implications of using Web Modeler and Desktop Modeler for modeling process diagrams."
 ---
 
-[Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md) are both tools for designing [BPMN](/components/modeler/bpmn/bpmn.md) diagrams, but they serve different purposes and shine in different scenarios.
+[Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md) are both tools for designing [BPMN](/components/modeler/bpmn/bpmn.md) diagrams, but they serve different purposes and shine in different scenarios.
 
 Web Modeler is great for collaborative, cloud-based process modeling. It allows teams to work together in real-time, manage versions, and store models centrally. It's especially useful when working in distributed teams or when you need tight integration with a remotely hosted Camunda 8 cluster — whether it's Camunda SaaS or your own self-managed environment.
 

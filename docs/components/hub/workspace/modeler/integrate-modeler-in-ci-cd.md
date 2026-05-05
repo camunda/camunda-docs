@@ -1,5 +1,5 @@
 ---
-id: integrate-web-modeler-in-ci-cd
+id: integrate-modeler-in-ci-cd
 title: Integrate Web Modeler into CI/CD
 description: Empower DevOps with Web Modeler and integrate into CI/CD pipelines to streamline deployments of projects.
 keywords: [CI/CD, devops, modeler, processops, projects, integration guide]
@@ -13,7 +13,7 @@ import TabItem from "@theme/TabItem";
 
 [Web Modeler](/components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and projects. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
-- For low-risk processes, you can use Web Modeler [project development pipeline](/components/hub/workspace/manage-projects/project-pipeline.md) to quickly develop and progress project releases through the stages of a standard development lifecycle. [Version comparison](/components/modeler/web-modeler/modeling/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/hub/workspace/manage-projects/project-pipeline.md#review), and [Git Sync](/components/hub/workspace/manage-projects/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
+- For low-risk processes, you can use Web Modeler [project development pipeline](/components/hub/workspace/manage-projects/project-pipeline.md) to quickly develop and progress project releases through the stages of a standard development lifecycle. [Version comparison](/components/hub/workspace/modeler/modeling/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/hub/workspace/manage-projects/project-pipeline.md#review), and [Git Sync](/components/hub/workspace/manage-projects/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
 
 - For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can integrate Web Modeler into your CI/CD pipelines.
 
@@ -42,7 +42,7 @@ This blueprint provides a ready-to-use proof of concept for a CI/CD pipeline for
 
 While a pipeline for project integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
-- Web Modeler uses [versions](/components/modeler/web-modeler/modeling/versions.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
+- Web Modeler uses [versions](/components/hub/workspace/modeler/modeling/versions.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
 - A project comprises diverse resources, such as processes, subprocesses, forms, DMN decision models, connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
@@ -109,7 +109,7 @@ To listen to changes in Web Modeler, you currently need to implement a polling a
 Pagination is enforced for all listed `search` endpoints. Ensure you obtain all relevant pages.
 :::
 
-Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [versions](/components/modeler/web-modeler/modeling/versions.md).
+Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [versions](/components/hub/workspace/modeler/modeling/versions.md).
 
 #### Listening to version creation
 
@@ -248,7 +248,7 @@ The following process diagram demonstrates an example flow of how to run a previ
 
 If deployed in a review environment, processes/applications can be shared with peers for interactive review. For comprehensive review, full clusters inclusive of Operate and Tasklist can be used for process execution. This closely simulates the final experience. To integrate the preview environment with custom applications, leverage the Operate and Tasklist APIs and deploy them within the review environment.
 
-In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Play mode](/components/modeler/web-modeler/validation/play-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
+In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Play mode](/components/hub/workspace/modeler/validation/play-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
 
 ### Publish stage
 

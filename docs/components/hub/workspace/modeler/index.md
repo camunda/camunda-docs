@@ -18,7 +18,7 @@ It enables teams to collaboratively design executable processes as the foundatio
 
 | Feature                                                                       | Description                                                                                     |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [BPMN, DMN, and Forms modeling](../bpmn/bpmn.md)                              | Create and edit BPMN diagrams, DMN decision tables, and Camunda Forms directly in your browser. |
+| [BPMN, DMN, and Forms modeling](../../../modeler/bpmn/bpmn.md)                | Create and edit BPMN diagrams, DMN decision tables, and Camunda Forms directly in your browser. |
 | [Element templates](./element-templates/using-templates.md)                   | Reuse building blocks to standardize modeling across teams and workspaces.                      |
 | [Collaboration](./collaboration/collaboration.md)                             | Work with team members to speed up the process development cycle.                               |
 | [Play mode](validation/play-your-process.md)                                  | Test and validate processes during development.                                                 |
@@ -35,12 +35,12 @@ Access the modeler in [Camunda Hub](/components/hub/index.md). No installation i
 
 ## Get started
 
-<DocCardList items={[{type:"link", href:"/docs/next/components/modeler/web-modeler/modeling/model-your-first-diagram/", label: "Model your first diagram", docId:"components/modeler/web-modeler/modeling/model-your-first-diagram"},
+<DocCardList items={[{type:"link", href:"/docs/next/components/hub/workspace/modeler/modeling/model-your-first-diagram/", label: "Model your first diagram", docId:"components/hub/workspace/modeler/modeling/model-your-first-diagram"},
 {
-type:"link", href:"/docs/next/components/modeler/web-modeler/collaboration/", label: "Collaborate with your team", docId:"components/modeler/web-modeler/collaboration/collaboration",
+type:"link", href:"/docs/next/components/hub/workspace/modeler/collaboration/", label: "Collaborate with your team", docId:"components/hub/workspace/modeler/collaboration/collaboration",
 },
 {
-type:"link", href:"/docs/next/components/modeler/web-modeler/run-or-publish-your-process/", label: "Run or publish your processes", docId:"components/modeler/web-modeler/run-or-publish-your-process"
+type:"link", href:"/docs/next/components/hub/workspace/modeler/run-or-publish-your-process/", label: "Run or publish your processes", docId:"components/hub/workspace/modeler/run-or-publish-your-process"
 },
 {
 type:"link", href:"/docs/next/guides/orchestrate-human-tasks/", label: "Orchestrate human tasks", docId:"guides/orchestrate-human-tasks"
@@ -49,4 +49,4 @@ type:"link", href:"/docs/next/guides/orchestrate-human-tasks/", label: "Orchestr
 
 ## Additional resources
 
-- [Self-Managed configuration & troubleshooting](../../../self-managed/components/modeler/web-modeler/overview.md)
+- [Self-Managed configuration & troubleshooting](../../../../self-managed/components/modeler/web-modeler/overview.md)

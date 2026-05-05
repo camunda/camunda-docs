@@ -75,7 +75,7 @@ If the task fails due to an error (for example, a network or configuration issue
 
 ## Related documentation
 
-- [Test a task in Desktop Modeler](../../desktop-modeler/task-testing.md)
-- [Learn about task testing concepts](../../task-testing.md)
-- [Working with variables](../../../concepts/variables.md)
+- [Test a task in Desktop Modeler](../../../../modeler/desktop-modeler/task-testing.md)
+- [Learn about task testing concepts](../../../../modeler/task-testing.md)
+- [Working with variables](../../../../concepts/variables.md)
 - [Using Play mode](play-your-process.md)

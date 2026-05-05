@@ -1,5 +1,5 @@
 ---
-id: web-modeler-settings
+id: modeler-settings
 title: Web Modeler settings
 description: Configure email notifications and project deployment policies in the Web Modeler settings.
 ---
@@ -61,7 +61,7 @@ If the **Web Modeler Admin** role is not pre-existing, it can be created with th
 - Web Modeler Internal API - `admin:*`
 - Camunda Identity Resource Server - `read:users`
 
-Refer to the documentation pages about [assigning roles](../../../self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
+Refer to the documentation pages about [assigning roles](../../../../self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
 
 </TabItem>
 

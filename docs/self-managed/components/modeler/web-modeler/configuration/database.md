@@ -241,7 +241,7 @@ To enable case sensitivity, set the database collation to a case-sensitive one s
 
 :::note
 If a case-insensitive collation is used, you may encounter unexpected behavior.  
-For example, in [IDP extraction](/components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields),  
+For example, in [IDP extraction](/components/hub/workspace/modeler/idp/idp-unstructured-extraction.md#extract-fields),  
 a field named `amount` and another named `Amount` would be treated as identical because the database does not distinguish between them.
 :::
 
@@ -305,7 +305,7 @@ MSSQL is case-insensitive by default.
 To enable case sensitivity, set the database collation to a case-sensitive one such as `Latin1_General_CS_AS`.
 
 Otherwise, you may encounter unexpected behavior.  
-The only current restriction is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.  
+The only current restriction is that extraction fields in [IDP extraction](../../../../../components/hub/workspace/modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.  
 This means that if you have a field named `amount`, you cannot create another field named `Amount`, because the database treats them as the same identifier.
 
 #### Custom schema
@@ -402,7 +402,7 @@ MySQL usually uses **case-insensitive** collations by default.
 To enable case sensitivity, set the database collation to a case-sensitive one such as `utf8mb4_0900_as_cs`.
 
 Otherwise, you may encounter unexpected behavior.  
-The only current restriction is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.  
+The only current restriction is that extraction fields in [IDP extraction](../../../../../components/hub/workspace/modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.  
 This means that if you have a field named `amount`, you cannot create another field named `Amount`, because the database treats them as the same identifier.
 
 ### Oracle

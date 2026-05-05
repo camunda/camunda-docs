@@ -53,7 +53,7 @@ image: DocsIcon,
 description: "Develop project releases through the stages of a typical development lifecycle.",
 },
 {
-link: "../modeler/web-modeler",
+link: "./workspace/modeler",
 title: "Model business processes",
 image: DocsIcon,
 description: "Collaboratively design executable processes as the foundation for scalable IT and business automation.",

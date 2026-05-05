@@ -498,8 +498,8 @@ This update reduces hidden deployment behavior, lowers cognitive load, and makes
 Web Modeler in 8.9 adds more reliable live collaboration with canvas locking and takeover behavior, and it supports importing large process applications with up to 100 supported files in a single step. These changes improve shared editing workflows and make it easier to bring existing assets into Modeler.
 
 <ul>
-  <li><span class="link-arrow">[Collaborate in Web Modeler](/components/modeler/web-modeler/collaboration/collaboration.md)</span></li>
-  <li><span class="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</span></li>
+  <li><span class="link-arrow">[Collaborate in Web Modeler](/components/hub/workspace/modeler/collaboration/collaboration.md)</span></li>
+  <li><span class="link-arrow">[Import resources into Web Modeler](/components/hub/workspace/modeler/modeling/importing-resources.md)</span></li>
 </ul>
 
 ### Modeling and administration improvements
@@ -508,7 +508,7 @@ Camunda 8.9 expands Web Modeler with broader event template support, email-based
 
 <ul>
   <li><span class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</span></li>
-  <li><span class="link-arrow">[Add users to projects](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects)</span></li>
+  <li><span class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</span></li>
   <li><span class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
 </ul>
 
@@ -1085,7 +1085,7 @@ Once you start editing a diagram, the canvas locks so only you can continue maki
 
 This improvement creates a restricted but controlled collaborative environment, and helps prevent conflicts and broken sessions caused by multiple users editing the same diagram.
 
-<p className="link-arrow">[Collaborate in Web Modeler](/components/modeler/web-modeler/collaboration/collaboration.md)</p>
+<p className="link-arrow">[Collaborate in Web Modeler](/components/hub/workspace/modeler/collaboration/collaboration.md)</p>
 
 #### Import large process applications into Web Modeler
 
@@ -1093,7 +1093,7 @@ This improvement creates a restricted but controlled collaborative environment, 
 
 You can now import large process applications (containing a maximum of 100 supported files such as BPMN, DMN, forms, connector templates, and documentation) in a single step in Web Modeler or via direct import links in Self-Managed environments.
 
-<p className="link-arrow">[Import resources into Web Modeler](/components/modeler/web-modeler/modeling/importing-resources.md)</p>
+<p className="link-arrow">[Import resources into Web Modeler](/components/hub/workspace/modeler/modeling/importing-resources.md)</p>
 
 #### Shared global clipboard and duplicate elements
 
@@ -1328,7 +1328,7 @@ As a Self-Managed administrator, you can now invite users to Web Modeler project
 
 This enables faster project provisioning and a consistent administrator experience across identity providers.
 
-<p class="link-arrow">[Add users to projects](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+<p class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</p>
 
 ### Orchestration Cluster
 
