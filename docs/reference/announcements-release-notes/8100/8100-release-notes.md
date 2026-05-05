@@ -94,7 +94,7 @@ Execution listeners now support configurable headers, aligned with service task 
 
 #### JSON display in Operate
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3464 -->
 
