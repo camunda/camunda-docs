@@ -26,7 +26,7 @@ Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Mes
 | Anthropic API key | Yes      | Your Anthropic account API key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages). |
 
 :::tip
-You can also use this provider for Anthropic Claude models deployed on [Azure AI Foundry](https://azure.microsoft.com/en-us/products/ai-foundry) with API key authentication. Set the endpoint to your Foundry URL with the `/anthropic/v1` path appended (for example, `https://<your-resource>.services.ai.azure.com/anthropic/v1`).
+You can also use this provider for Anthropic Claude models deployed on [Azure AI Foundry](https://azure.microsoft.com/en-us/products/ai-foundry) with API key authentication. Set the endpoint to your Foundry URL with the `/anthropic/v1` path appended, for example, `https://<your-resource>.services.ai.azure.com/anthropic/v1`.
 :::
 
 :::info

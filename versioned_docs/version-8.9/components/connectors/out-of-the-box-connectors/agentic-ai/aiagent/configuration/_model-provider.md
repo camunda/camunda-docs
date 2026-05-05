@@ -40,7 +40,7 @@ Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Mes
 | **Timeout**           | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout. If left unspecified, system defaults are used. |
 
 :::tip
-You can also use this provider for Anthropic Claude models deployed on [Azure AI Foundry](https://azure.microsoft.com/en-us/products/ai-foundry) with API key authentication. Set the endpoint to your Foundry URL with the `/anthropic/v1` path appended (for example, `https://<your-resource>.services.ai.azure.com/anthropic/v1`).
+You can also use this provider for Anthropic Claude models deployed on [Azure AI Foundry](https://azure.microsoft.com/en-us/products/ai-foundry) with API key authentication. Set the endpoint to your Foundry URL with the `/anthropic/v1` path appended, for example, `https://<your-resource>.services.ai.azure.com/anthropic/v1`.
 :::
 
 :::info
