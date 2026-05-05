@@ -1,16 +1,16 @@
 ---
 id: usage-metrics
 title: "Usage metrics"
-description: "Learn about the three main usage metrics that impact Camunda 8 pricing."
+description: "Learn about the main usage metrics that impact Camunda 8 pricing."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-## Definition of metrics
+# Definition of metrics
 
-There are three main usage metrics that have an impact on Camunda 8 pricing.
+There are four main usage metrics that have an impact on Camunda 8 pricing. The specific metrics that apply to billing may vary depending on your contractual agreement with Camunda.
 
 It is important to understand these definitions, their impact on billing, and how to retrieve them.
 
@@ -28,7 +28,8 @@ The number of **task users** (TU) that have served as assignees.
 
 ### Tenant
 
-The number of active tenants in the selected period. A tenant is a logically isolated partition of a Camunda 8 cluster, identified by a tenant ID (for example, a business unit, department, or customer).
+A tenant is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions.
+Usage metrics can report how many tenants were active in a period and, when available, a per-tenant breakdown of process, decision, and task-user usage.
 
 ## Retrieve metrics in SaaS
 
