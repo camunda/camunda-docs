@@ -433,7 +433,6 @@ In Camunda **8.8 and earlier**, Optimize does **not** load any additional config
 
 As a result, `optimize.extraConfiguration` affects Spring/Identity behavior, but it **cannot be used to set Optimize-native options** in these versions. To change Optimize configuration, override `environment-config.yaml` directly using `optimize.configuration` or by editing the Optimize ConfigMap.
 
-
 ```yaml
 optimize:
   extraConfiguration:
@@ -444,7 +443,7 @@ optimize:
 ```
 
 :::note
-Starting with Camunda 8.9, Optimize can load additional configuration files referenced via Spring's `spring.config.import` / `spring.config.location` and therefore supports `optimize.extraConfiguration` for Optimize-native settings. See the [8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/application-configs/) for details.
+Starting with Camunda 8.9, Optimize can load additional configuration files referenced via Spring's `spring.config.import` / `spring.config.location` and therefore supports `optimize.extraConfiguration` for Optimize-native settings. See the [8.9 documentation](/versioned_docs/version-8.9/self-managed/deployment/helm/configure/application-configs.md#custom-configuration-loading) for details.
 :::
 
 For the full list of Optimize configuration options, see [Optimize system configuration](/self-managed/components/optimize/configuration/system-configuration.md).
