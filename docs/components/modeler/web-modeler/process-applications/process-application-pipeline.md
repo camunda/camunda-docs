@@ -1,7 +1,7 @@
 ---
 id: process-application-pipeline
 title: Process application development lifecycle
-description: You can use Web Modeler to quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
+description: You can use Web Modeler to quickly develop project releases through the stages of a typical development lifecycle.
 ---
 
 import DeployProcessApplicationDiagramImg from './img/diagram-process-application-pipeline.png'
@@ -9,7 +9,7 @@ import DeployStagesImg from './img/define-stages.png'
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-You can use Web Modeler to quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
+You can use Web Modeler to quickly develop project releases through the stages of a typical development lifecycle.
 
 <p><img src={DeployProcessApplicationDiagramImg} alt="Process application file list" /></p>
 

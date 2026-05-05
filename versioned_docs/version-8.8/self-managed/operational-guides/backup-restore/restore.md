@@ -458,7 +458,7 @@ To avoid data loss:
 
 - **Preserve existing indices:** Do not delete dated usage metric indices before restoring. After the restore completes, the indices remain available.
 - **Back up manually:** Back up dated usage metric indices before restoring so you can restore them afterward.
-:::
+  :::
 
 Now that you have successfully restored the templates and stopped the components adding more indices, you must delete the existing indices to be able to successfully restore the snapshots (otherwise these will block a successful restore).
 
@@ -678,50 +678,51 @@ It's important that the backup is configured for Zeebe to be able to restore fro
 
 ```yaml
 orchestration:
-   enabled: true
-   env:
-   # Environment variables to overwrite the Zeebe startup behavior
-   - name: SPRING_PROFILES_ACTIVE
-     value: "restore"
-   - name: ZEEBE_RESTORE
-     value: "true"
-   - name: ZEEBE_RESTORE_FROM_BACKUP_ID
-     value: "$BACKUP_ID" # Change the $BACKUP_ID to your actual value
-   # all the envs related to the backup store as outlined in the prerequisites
-   - name: CAMUNDA_DATA_BACKUP_STORE
-     value: "S3" # just as an example
-   - name: CAMUNDA_DATA_BACKUP_REPOSITORYNAME
-     value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
-   ...
+  enabled: true
+  env:
+    # Environment variables to overwrite the Zeebe startup behavior
+    - name: SPRING_PROFILES_ACTIVE
+      value: "restore"
+    - name: ZEEBE_RESTORE
+      value: "true"
+    - name: ZEEBE_RESTORE_FROM_BACKUP_ID
+      value: "$BACKUP_ID" # Change the $BACKUP_ID to your actual value
+    # all the envs related to the backup store as outlined in the prerequisites
+    - name: CAMUNDA_DATA_BACKUP_STORE
+      value: "S3" # just as an example
+    - name: CAMUNDA_DATA_BACKUP_REPOSITORYNAME
+      value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
+    ...
 
-# assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
+# If you use Elasticsearch from the embedded Helm chart, set this to true. Otherwise, set it to false.
 elasticsearch:
-   enabled: true
-
+  enabled: true
 connectors:
-   enabled: false
+  enabled: false
 optimize:
-   enabled: false
+  enabled: false
 ```
 
 :::note Alternative overwrite
 
-Alternative approach to overwriting the startup behaviour to restore the partitions.
+Use this alternative approach to restore Zeebe partitions:
 
 ```yaml
 orchestration:
-   enabled: true
-   command: ["/usr/local/camunda/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
-   env:
-      - name: SPRING_PROFILES_ACTIVE
-        value: "restore"
-   # all the envs related to the backup store as outlined in the prerequisites
-   ...
+  enabled: true
+  command:
+    - "/usr/local/camunda/bin/restore"
+    - "--backupId=$BACKUP_ID" # Change the $BACKUP_ID to your actual value.
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: "restore"
+  # All the envs related to the backup store as outlined in the prerequisites
+  ...
 ```
 
-:::
-
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
+
+:::
 
 The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 
