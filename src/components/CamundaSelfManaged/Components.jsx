@@ -47,24 +47,32 @@ const Components = () => {
         "Business intelligence and analytics for enterprise customers.",
       link: "/self-managed/components/optimize/overview",
     },
-    {
-      title: "Web Modeler",
-      icon: ModelerIcon,
-      description:
-        "Use Web Modeler and Desktop Modeler to model your BPMN diagrams.",
-      link: isNextVersion
-        ? "/self-managed/components/hub/modeler-overview"
-        : "/self-managed/components/modeler/web-modeler/overview",
-    },
-    {
-      title: "Console",
-      icon: ConsoleIcon,
-      description:
-        "Manage and monitor your Camunda 8 Self-Managed deployments.",
-      link: isNextVersion
-        ? "/self-managed/components/hub/overview"
-        : "/self-managed/components/console/overview",
-    },
+    ...(isNextVersion
+      ? [
+          {
+            title: "Camunda Hub",
+            icon: ConsoleIcon,
+            description:
+              "Manage deployments and model your BPMN diagrams in one place.",
+            link: "/self-managed/components/hub",
+          },
+        ]
+      : [
+          {
+            title: "Web Modeler",
+            icon: ModelerIcon,
+            description:
+              "Use Web Modeler and Desktop Modeler to model your BPMN diagrams.",
+            link: "/self-managed/components/modeler/web-modeler/overview",
+          },
+          {
+            title: "Console",
+            icon: ConsoleIcon,
+            description:
+              "Manage and monitor your Camunda 8 Self-Managed deployments.",
+            link: "/self-managed/components/console/overview",
+          },
+        ]),
     {
       title: "Management Identity",
       icon: IdentityIcon,
