@@ -46,7 +46,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 <h3>Steps</h3>
 
-1. Identify what management and modeling components you need to use in Camunda 8: [Web Modeler](../../hub/modeler-overview.md), [Console](../../hub/overview.md), [Optimize](../../optimize/overview.md).
+1. Identify what management and modeling components you need to use in Camunda 8: [Camunda Hub](../../hub/index.md) and [Optimize](../../optimize/overview.md).
 2. In your OIDC provider, **create an application for each of the management and modeling components you want to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
    - The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
      :::note
@@ -144,7 +144,7 @@ This configuration allows login without the `offline_access` scope.
 Ensure you register a new application for each component.
 :::
 
-1. Identify what management and modeling components you need to use in Camunda 8: [Web Modeler](../../hub/modeler-overview.md), [Console](../../hub/overview.md), [Optimize](../../optimize/overview.md).
+1. Identify what management and modeling components you need to use in Camunda 8: [Camunda Hub](../../hub/index.md) and [Optimize](../../optimize/overview.md).
 2. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each component you would like to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
 3. Navigate to the new application's **Overview** page, and make note of the **Client ID**. This will also be used as the audience ID.
 4. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
