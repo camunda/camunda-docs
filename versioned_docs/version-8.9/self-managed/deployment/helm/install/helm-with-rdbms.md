@@ -161,7 +161,7 @@ If you're using Oracle, MySQL, or a database version not covered by bundled driv
 For detailed information about JDBC driver strategies, security configurations, and validation, see [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
 :::
 
-**Option A: Init container (recommended for production)**
+#### Option A: Init container (recommended for production)
 
 Update your `values-rdbms.yaml`:
 
@@ -192,7 +192,7 @@ orchestration:
 
 For other driver sources (e.g., private repositories), adjust the `wget` command or use a private container registry for pre-built images.
 
-**Option B: ConfigMap (GitOps-friendly)**
+#### Option B: ConfigMap (GitOps-friendly)
 
 Store the driver JAR in a ConfigMap and mount it:
 
@@ -308,7 +308,7 @@ orchestration:
 
 In production, separate the Orchestration Cluster from management components (WebModeler, Console, Identity, Optimize):
 
-**Namespace 1: Orchestration + Connectors**
+#### Namespace 1: Orchestration + Connectors
 
 ```yaml
 orchestration:
@@ -334,7 +334,7 @@ identity:
   enabled: false
 ```
 
-**Namespace 2: Management components (with document-store secondary storage)**
+#### Namespace 2: Management components (with document-store secondary storage)
 
 ```yaml
 orchestration:
