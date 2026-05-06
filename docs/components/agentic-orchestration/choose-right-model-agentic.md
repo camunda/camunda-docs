@@ -22,21 +22,11 @@ Consider the following aspects regarding your model requirements and setup const
 
 ## Models available in Camunda Provided LLM
 
-Camunda-provided LLM provides access to a set of LLMs from multiple providers. This is provied for experimentation and evaluation purposes, allowing you to test different models without needing to set up your own LLM provider.
+Camunda-provided LLM gives you access to multiple models for experimentation and evaluation, so you can test different options without setting up your own provider.
 
 Camunda-provided LLM is only available in Camunda 8 SaaS. It is not available in Camunda 8 Self-Managed.
 
-When configuring your agent to use Camunda-provided LLM, you can select from the available models provided by Camunda. The specific models available may change over time as new models are added or removed, but typically include popular general-purpose models from major providers, such as:
-
-- **Anthropic models**: `us.anthropic.claude-3-7-sonnet-20250219-v1:0` is a versatile model suitable for a wide range of agentic orchestration tasks, with strong reasoning and language capabilities.
-
-- **OpenAI models**: `gpt-5.2` is a powerful model with advanced reasoning, coding, and language skills, ideal for complex workflows requiring high accuracy.
-
-- **Google models**: `gemini-3-pro` is a strong performer in reasoning and language tasks, making it a good choice for customer support and content generation workflows.
-
-When selecting a model from Camunda-provided LLM, consider the specific requirements of your agentic process, such as the need for advanced reasoning, coding capabilities, or language understanding. You can also benchmark different models using the LiveBench metrics to see which one performs best for your use case.
-
-Learn more about [Camunda-provided LLM](./camunda-provided-llm.md).
+For the current model list, model names, and values to use in the connector, see [Supported models in Camunda-provided LLM](./camunda-provided-llm.md#supported-models).
 
 ## Measure agent performance
 

@@ -33,7 +33,7 @@ See [Trial vs. enterprise budgets](#trial-vs-enterprise-budgets) for more detail
 
 Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as cluster secrets.
 
-- If you are using an AI agent blueprint, no additional configuration is needed, since most AI agent blueprints default to use Camunda-provided LLM. Explore selected AI agent blueprints in the [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
+- If you are using an AI agent blueprint, no additional configuration is needed in most cases. Explore selected AI agent blueprints in the [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
 - If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your AI agent connector with the following parameters:
   - **Provider**: `OpenAI Compatible`.
   - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
@@ -44,29 +44,16 @@ Once Camunda-provided LLM is available in your organization, its credentials are
 
 Camunda-provided LLM supports multiple Bedrock-backed models. In the AI Agent connector, set the **Model** field to one of the following values:
 
-| Provider  | Model             | Value to set in **Model**                     |
-| :-------- | :---------------- | :-------------------------------------------- |
-| Anthropic | Claude Sonnet 4.6 | `eu.anthropic.claude-sonnet-4-6`              |
-| Anthropic | Claude Haiku 4.5  | `eu.anthropic.claude-haiku-4-5-20251001-v1:0` |
-| Anthropic | Claude Opus 4.5   | `eu.anthropic.claude-opus-4-5-20251101-v1:0`  |
-| Amazon    | Nova Pro v1       | `eu.amazon.nova-pro-v1:0`                     |
-| DeepSeek  | DeepSeek v3.2     | `deepseek.v3.2`                               |
-| OpenAI    | GPT-OSS 20B       | `openai.gpt-oss-20b-1:0`                      |
-| OpenAI    | GPT-OSS 120B      | `openai.gpt-oss-120b-1:0`                     |
-| Qwen      | Qwen3 235B A22B   | `qwen.qwen3-235b-a22b-2507-v1:0`              |
-
-### Recommended defaults for AI blueprints
-
-For AI blueprints such as `ai-agent-chat-with-tools.bpmn`, use the following guidance:
-
-- **Recommended default**: `eu.amazon.nova-pro-v1:0`.
-  This is the best quality and cost balance for SaaS onboarding.
-- **Premium quality option**: `eu.anthropic.claude-sonnet-4-6`.
-  Use this when task quality matters more than cost.
-- **Cost-optimized advanced option**: `openai.gpt-oss-120b-1:0`.
-  Use this for strong quality at lower cost than premium Anthropic models.
-- **Budget option**: `openai.gpt-oss-20b-1:0`.
-  Use this for cheaper experimentation, not as the primary default.
+| Model                       | Value to set in **Model**     | What it's good for                                                                                                    |
+| :-------------------------- | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| Amazon Nova Pro v1          | `amazon.nova-pro-v1`          | Best for balanced quality and cost across general-purpose AI agent scenarios.                                         |
+| Anthropic Claude Haiku 4.5  | `anthropic.claude-haiku-4-5`  | Best for lightweight assistants, short interactions, and lower-cost tasks that still need good instruction following. |
+| Anthropic Claude Opus 4.5   | `anthropic.claude-opus-4-5`   | Best for advanced analysis and challenging multi-step tasks where maximum quality is the priority.                    |
+| Anthropic Claude Sonnet 4.6 | `anthropic.claude-sonnet-4-6` | Best for complex, high-stakes agent tasks where strong reasoning and reliable tool use matter most.                   |
+| DeepSeek v3.2               | `deepseek.v3.2`               | Best for technical and coding-heavy workflows that need strong reasoning at moderate cost.                            |
+| OpenAI GPT-OSS 120B         | `openai.gpt-oss-120b`         | Best for higher-quality results than small open models while still controlling cost.                                  |
+| OpenAI GPT-OSS 20B          | `openai.gpt-oss-20b`          | Best for budget-conscious experimentation and simpler automations with lower complexity.                              |
+| Qwen Qwen3 235B             | `qwen.qwen3-235b`             | Best for advanced reasoning and coding use cases where you want strong performance with good cost efficiency.         |
 
 When selecting a model, consider your process requirements, expected usage volume, and token budget. For a broader model selection framework, see [Choose the right LLM](./choose-right-model-agentic.md).
 
