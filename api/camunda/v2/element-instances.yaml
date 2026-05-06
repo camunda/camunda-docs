@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for element instances based on given criteria.
@@ -40,6 +42,8 @@ paths:
       summary: Get element instance
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -83,8 +87,10 @@ paths:
         - Element instance
       operationId: createElementInstanceVariables
       summary: Update element instance variables
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -130,8 +136,10 @@ paths:
         - Element instance
       operationId: searchElementInstanceIncidents
       summary: Search for incidents of a specific element instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -185,8 +193,10 @@ paths:
         - Ad-hoc sub-process
       operationId: activateAdHocSubProcessActivities
       summary: Activate activities within an ad-hoc sub-process
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 

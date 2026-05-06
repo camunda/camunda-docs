@@ -5,6 +5,7 @@ import IconAoLlmImg from "../assets/icon-llm.png";
 import IconOptimize from "../assets/icon-optimize.png";
 import IconConnectorImg from "../connectors/img/icon-connectors.png";
 import IconOperate from "../assets/icon-operate.png";
+import IconRAG from "../assets/icon-long-term-memory.png";
 
 // Get started cards on introduction page
 export const getStartedCards = [
@@ -52,17 +53,21 @@ export const fundamentalCards_monitoring = [
 // Recommendation cards on introduction page
 export const recommendationCards = [
   {
+    link: "../rag-ai-agents/",
+    title: "Add long-term memory",
+    image: IconRAG,
+    description: "Add long-term memory to your AI agents.",
+  },
+  {
     link: "../choose-right-model-agentic/",
     title: "Choose the right LLM",
     image: IconAoLlmImg,
-    description:
-      "Learn how to choose the right Large Language Model (LLM) for AI agents.",
+    description: "Choose the right Large Language Model (LLM) for AI agents.",
   },
   {
     link: "../model-recommendations-agentic/",
     title: "LLM recommendations",
     image: IconAoLlmImg,
-    description:
-      "Recommendations and best practices for working with models and prompts.",
+    description: "Best practices for working with models and prompts.",
   },
 ];

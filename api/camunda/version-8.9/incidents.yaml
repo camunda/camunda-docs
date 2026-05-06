@@ -5,8 +5,10 @@ paths:
         - Incident
       operationId: searchIncidents
       summary: Search incidents
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -38,8 +40,10 @@ paths:
         - Incident
       operationId: getIncident
       summary: Get incident
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -81,8 +85,10 @@ paths:
         - Incident
       operationId: resolveIncident
       summary: Resolve incident
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -133,8 +139,10 @@ paths:
         - Incident
       operationId: getProcessInstanceStatisticsByError
       summary: Get process instance statistics by error
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -169,8 +177,10 @@ paths:
         - Incident
       operationId: getProcessInstanceStatisticsByDefinition
       summary: Get process instance statistics by definition
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
