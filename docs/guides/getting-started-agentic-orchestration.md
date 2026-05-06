@@ -53,6 +53,8 @@ The AI Agent connector makes it easy to integrate LLMs into your process workflo
 
 If you're using Camunda 8 SaaS, you can also use [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) to run the model without additional LLM provider setup.
 
+Camunda-provided LLM is only available in Camunda 8 SaaS. It is not available in Camunda 8 Self-Managed.
+
 See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
 
 In this guide, you can try three use cases:

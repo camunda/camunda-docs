@@ -12,6 +12,8 @@ Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.
 
 Camunda-provided LLM is a Camunda-managed LLM provider option that comes with automatically configured credentials. With it, you can run AI agents in your processes right away without additional setup.
 
+Camunda-provided LLM is only available in Camunda 8 SaaS. It is not available in Camunda 8 Self-Managed.
+
 :::info
 Camunda-provided LLM is free to use within the provided budget, and is intended for testing and experimentation. When you're ready for production or need more control, switch to a customer-managed provider.
 :::
@@ -33,21 +35,40 @@ Once Camunda-provided LLM is available in your organization, its credentials are
 
 - If you are using an AI agent blueprint, no additional configuration is needed, since most AI agent blueprints default to use Camunda-provided LLM. Explore selected AI agent blueprints in the [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
 - If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your AI agent connector with the following parameters:
-  - **Provider**: `OpenaAI Compatible`.
+  - **Provider**: `OpenAI Compatible`.
   - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
   - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`.
-  - **Model**: Select a model from the [list of supported models](#supported-models). For example `us.anthropic.claude-3-7-sonnet-20250219-v1:0`.
+  - **Model**: Select a model from the [list of supported models](#supported-models). For example `eu.amazon.nova-pro-v1:0`.
 
 ## Supported models
 
-Camunda-provided LLM supports LLMs from multiple providers. The available models available may change over time, but typically include popular general-purpose models from major providers:
+Camunda-provided LLM supports multiple Bedrock-backed models. In the AI Agent connector, set the **Model** field to one of the following values:
 
-- **Anthropic models**: `us.anthropic.claude-3-7-sonnet-20250219-v1:0` is a versatile model suitable for a wide range of agentic orchestration tasks, with strong reasoning and language capabilities.
-- **OpenAI models**: `gpt-5.2` is a powerful model with advanced reasoning, coding, and language skills, ideal for complex workflows requiring high accuracy.
-- **Google models**: `gemini-3-pro` is a strong performer in reasoning and language tasks, making it a good choice for customer support and content generation workflows.
+| Provider  | Model             | Value to set in **Model**                     |
+| :-------- | :---------------- | :-------------------------------------------- |
+| Anthropic | Claude Sonnet 4.6 | `eu.anthropic.claude-sonnet-4-6`              |
+| Anthropic | Claude Haiku 4.5  | `eu.anthropic.claude-haiku-4-5-20251001-v1:0` |
+| Anthropic | Claude Opus 4.5   | `eu.anthropic.claude-opus-4-5-20251101-v1:0`  |
+| Amazon    | Nova Pro v1       | `eu.amazon.nova-pro-v1:0`                     |
+| DeepSeek  | DeepSeek v3.2     | `deepseek.v3.2`                               |
+| OpenAI    | GPT-OSS 20B       | `openai.gpt-oss-20b-1:0`                      |
+| OpenAI    | GPT-OSS 120B      | `openai.gpt-oss-120b-1:0`                     |
+| Qwen      | Qwen3 235B A22B   | `qwen.qwen3-235b-a22b-2507-v1:0`              |
 
-When selecting a model, consider your agentic process requirements, such as advanced reasoning, coding capabilities, or language understanding.
-You can also benchmark different models to find the best fit. See [Choose the right LLM](./choose-right-model-agentic.md) for more details.
+### Recommended defaults for AI blueprints
+
+For AI blueprints such as `ai-agent-chat-with-tools.bpmn`, use the following guidance:
+
+- **Recommended default**: `eu.amazon.nova-pro-v1:0`.
+  This is the best quality and cost balance for SaaS onboarding.
+- **Premium quality option**: `eu.anthropic.claude-sonnet-4-6`.
+  Use this when task quality matters more than cost.
+- **Cost-optimized advanced option**: `openai.gpt-oss-120b-1:0`.
+  Use this for strong quality at lower cost than premium Anthropic models.
+- **Budget option**: `openai.gpt-oss-20b-1:0`.
+  Use this for cheaper experimentation, not as the primary default.
+
+When selecting a model, consider your process requirements, expected usage volume, and token budget. For a broader model selection framework, see [Choose the right LLM](./choose-right-model-agentic.md).
 
 ## Trial vs. enterprise budgets
 
