@@ -15,10 +15,10 @@ This page describes the runtime architecture of Camunda 8.8+: what the major com
 
 Camunda 8 separates concerns into two independently deployable deployments:
 
-| Deployment                                              | Purpose                                                                  |
-| ------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [Orchestration Cluster](#orchestration-cluster)         | Process execution, task management, monitoring, and authorization.       |
-| [Web Modeler and Console](#web-modeler-and-console)     | Process design (Web Modeler) and multi-cluster administration (Console). |
+| Deployment                                          | Purpose                                                                  |
+| --------------------------------------------------- | ------------------------------------------------------------------------ |
+| [Orchestration Cluster](#orchestration-cluster)     | Process execution, task management, monitoring, and authorization.       |
+| [Web Modeler and Console](#web-modeler-and-console) | Process design (Web Modeler) and multi-cluster administration (Console). |
 
 The two deployments communicate via the Camunda API and share an [identity provider](#identity-provider) for authentication, but they are deployed and scaled independently.
 
@@ -84,13 +84,13 @@ Web Modeler and Console use a separate **Management Identity** deployment, disti
 
 Client libraries embed in application code to interact with the Orchestration Cluster via the Camunda API:
 
-| Client                                                                             | Language                   | Support   | Job workers             |
-| ---------------------------------------------------------------------------------- | -------------------------- | --------- | ----------------------- |
-| [Java SDK](/apis-tools/java-client/getting-started.md)                             | Java                       | Official  | Yes (job push and pull) |
+| Client                                                                            | Language                   | Support   | Job workers             |
+| --------------------------------------------------------------------------------- | -------------------------- | --------- | ----------------------- |
+| [Java SDK](/apis-tools/java-client/getting-started.md)                            | Java                       | Official  | Yes (job push and pull) |
 | [Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) | Java                       | Official  | Yes (job push and pull) |
-| [TypeScript SDK](/apis-tools/typescript/camunda8-sdk.md)                           | JavaScript / TypeScript    | Official  | Yes (job push and pull) |
-| [Go client](/apis-tools/community-clients/index.md)                                | Go                         | Community | Yes (job push and pull) |
-| [Community clients](/apis-tools/community-clients/index.md)                        | Python, .NET, Rust, others | Community | Varies                  |
+| [TypeScript SDK](/apis-tools/typescript/camunda8-sdk.md)                          | JavaScript / TypeScript    | Official  | Yes (job push and pull) |
+| [Go client](/apis-tools/community-clients/index.md)                               | Go                         | Community | Yes (job push and pull) |
+| [Community clients](/apis-tools/community-clients/index.md)                       | Python, .NET, Rust, others | Community | Varies                  |
 
 **Job workers** are the primary pattern for executing business logic: the worker polls or receives pushed jobs, runs application logic, then completes or fails the job. Workers and the Orchestration Cluster scale independently.
 
