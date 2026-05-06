@@ -8,7 +8,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-# Definition of metrics
+## Definition of metrics
 
 There are four main usage metrics that have an impact on Camunda 8 pricing. The specific metrics that apply to billing may vary depending on your contractual agreement with Camunda.
 
