@@ -49,4 +49,4 @@ type:"link", href:"/docs/next/guides/orchestrate-human-tasks/", label: "Orchestr
 
 ## Additional resources
 
-- [Self-Managed configuration & troubleshooting](../../../../self-managed/components/modeler/web-modeler/overview.md)
+- [Self-Managed configuration & troubleshooting](../../../../self-managed/components/hub/modeler-overview.md)

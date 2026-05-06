@@ -1,5 +1,5 @@
 ---
-id: ssl
+id: modeler-ssl
 title: SSL
 description: "Read details on additional SSL configuration for Web Modeler."
 ---

@@ -338,7 +338,7 @@ You should:
 - Update any tooling that relies on old log formats or server behavior.
 - Validate the new setup in a staging environment before upgrading production.
 
-<p class="link-arrow">[Web Modeler logging](/self-managed/components/modeler/web-modeler/configuration/logging.md)</p>
+<p class="link-arrow">[Web Modeler logging](/self-managed/components/hub/configuration/logging.md)</p>
 
 ## Orchestration Cluster {#ocluster}
 

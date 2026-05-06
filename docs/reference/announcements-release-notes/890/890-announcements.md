@@ -1430,7 +1430,7 @@ When using JSON as the output for the logs the structure has slightly changed:
 - `logger`: This field is now renamed to `loggerName`.
 - `thread`: Previously represented the name of the thread. Now we have an object named `threadContext` with a field `name` that has this value.
 
-See [Logging documentation](/self-managed/components/modeler/web-modeler/configuration/logging.md#json-structure) for more information.
+See [Logging documentation](/self-managed/components/hub/configuration/logging.md#json-structure) for more information.
 
 </div>
 </div>

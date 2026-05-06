@@ -1,5 +1,5 @@
 ---
-id: configuration
+id: modeler-configuration
 title: "Web Modeler Configuration"
 sidebar_label: "Web Modeler Configuration"
 description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, and WebSocket."
@@ -28,7 +28,7 @@ For a working example configuration showing how the components are correctly wir
 
 ## Licensing
 
-import Licensing from '../../../../../self-managed/react-components/licensing.md'
+import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 
@@ -452,7 +452,7 @@ camunda:
 
 </Tabs>
 
-For more details, [see the Zeebe connection troubleshooting section](/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection.md).
+For more details, [see the Zeebe connection troubleshooting section](/self-managed/components/hub/troubleshooting/troubleshoot-zeebe-connection.md).
 
 ### Logging
 
@@ -540,7 +540,7 @@ camunda.modeler:
 
 </Tabs>
 
-Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
+Refer to the [advanced SSL configuration guide](./modeler-ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
 ### Monitoring and health probes {#monitoring}
 
@@ -698,12 +698,12 @@ camunda.modeler:
 
 <TabItem value="envVars">
 
-| Environment variable            | Description                                                                                                                                                                                                                                                                               | Example value | Default value |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
-| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
-| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |
+| Environment variable            | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
+| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
+| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
+| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |
 
 </TabItem>
 
@@ -782,7 +782,7 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 | `PUSHER_SSL_KEY`        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate. | `/full/path/to/key.pem`         | -             |
 | `PUSHER_SSL_PASSPHRASE` | [optional]<br/>Passphrase for the private key file.                            | `change-me`                     | -             |
 
-Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
+Refer to the [advanced SSL configuration guide](./modeler-ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
 ## Notes on host names and port numbers
 

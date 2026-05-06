@@ -7,7 +7,7 @@ description: "Learn how to configure Web Modeler to connect securely to supporte
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes advanced database connection configuration for Web Modeler. For a general setup guide, visit the [configuration overview](configuration.md#database).
+This page describes advanced database connection configuration for Web Modeler. For a general setup guide, visit the [configuration overview](modeler-configuration.md#database).
 
 :::tip Need end-to-end guidance?
 For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
@@ -305,7 +305,7 @@ MSSQL is case-insensitive by default.
 To enable case sensitivity, set the database collation to a case-sensitive one such as `Latin1_General_CS_AS`.
 
 Otherwise, you may encounter unexpected behavior.  
-The only current restriction is that extraction fields in [IDP extraction](../../../../../components/hub/workspace/modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.  
+The only current restriction is that extraction fields in [IDP extraction](../../../../components/hub/workspace/modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.  
 This means that if you have a field named `amount`, you cannot create another field named `Amount`, because the database treats them as the same identifier.
 
 #### Custom schema
@@ -402,7 +402,7 @@ MySQL usually uses **case-insensitive** collations by default.
 To enable case sensitivity, set the database collation to a case-sensitive one such as `utf8mb4_0900_as_cs`.
 
 Otherwise, you may encounter unexpected behavior.  
-The only current restriction is that extraction fields in [IDP extraction](../../../../../components/hub/workspace/modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.  
+The only current restriction is that extraction fields in [IDP extraction](../../../../components/hub/workspace/modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.  
 This means that if you have a field named `amount`, you cannot create another field named `Amount`, because the database treats them as the same identifier.
 
 ### Oracle

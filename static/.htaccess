@@ -185,6 +185,26 @@ RewriteRule ^docs/next/components/modeler/web-modeler/element-templates/using-te
 # Web Modeler moved to Hub Workspace Modeler - general redirect
 RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
 
+# Move Console and Web Modeler docs to Camunda Hub (next version)
+RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/usage-metrics/?$ /docs/next/self-managed/components/hub/usage-metrics/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/telemetry/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/overview/?$ /docs/next/self-managed/components/hub/modeler-overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/monitoring/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/modeler-configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/database/?$ /docs/next/self-managed/components/hub/configuration/database/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/identity/?$ /docs/next/self-managed/components/hub/configuration/identity/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/logging/?$ /docs/next/self-managed/components/hub/configuration/logging/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/modeler-ssl/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/copilot/?$ /docs/next/self-managed/components/hub/configuration/copilot/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-database-connection/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-zeebe-connection/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-missing-data/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-proxy-configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
+
 # Fix broken links from camunda-platform-get-started README
 
 # Get started with Optimize
