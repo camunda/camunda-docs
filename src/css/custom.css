@@ -1794,15 +1794,16 @@ ul ul .table-of-contents__link--active {
 .glossary-term {
   display: inline;
   position: relative;
+  --glossary-term-accent: var(--ifm-color-primary);
 }
 
 .glossary-term__link {
-  color: inherit;
+  color: var(--glossary-term-accent);
   font: inherit;
   line-height: inherit;
   text-decoration-line: underline;
   text-decoration-style: dotted;
-  text-decoration-color: var(--ifm-color-warning-dark);
+  text-decoration-color: currentColor;
   text-decoration-thickness: 0.07em;
   text-underline-offset: 0.12em;
 }
@@ -1814,7 +1815,7 @@ ul ul .table-of-contents__link--active {
   z-index: 40;
   width: min(22rem, calc(100vw - 2rem));
   padding: 0.75rem 0.875rem;
-  border: 1px solid var(--ifm-color-warning-dark);
+  border: 1px solid var(--glossary-term-accent);
   border-radius: 0.5rem;
   background: var(--ifm-background-surface-color);
   box-shadow: 0 10px 28px rgba(17, 24, 39, 0.18);
@@ -1836,8 +1837,8 @@ ul ul .table-of-contents__link--active {
   left: 50%;
   width: 0.75rem;
   height: 0.75rem;
-  border-right: 1px solid var(--ifm-color-warning-dark);
-  border-bottom: 1px solid var(--ifm-color-warning-dark);
+  border-right: 1px solid var(--glossary-term-accent);
+  border-bottom: 1px solid var(--glossary-term-accent);
   background: var(--ifm-background-surface-color);
   transform: translateX(-50%) rotate(45deg);
 }
@@ -1845,8 +1846,18 @@ ul ul .table-of-contents__link--active {
 .glossary-term__tooltip-title {
   display: block;
   margin-bottom: 0.25rem;
-  color: var(--ifm-color-warning-darkest);
+  color: var(--glossary-term-accent);
   font-weight: 600;
+}
+
+[data-theme="dark"] .glossary-term {
+  --glossary-term-accent: #f3f3f3;
+}
+
+[data-theme="dark"] .glossary-term__link {
+  font-weight: 600;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
 }
 
 .glossary-term:focus-within .glossary-term__tooltip {
