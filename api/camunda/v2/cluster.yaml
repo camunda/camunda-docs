@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.5]]
+
         [[CONSISTENCY:STRONG]]
 
         Obtains the current topology of the cluster the gateway is part of.
@@ -30,6 +32,8 @@ paths:
       summary: Get cluster status
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
