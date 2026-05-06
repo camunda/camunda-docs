@@ -99,9 +99,10 @@ With the **Extraction engine** dropdown, you can choose how text is extracted fr
 - **AWS Textract**: Uses Amazon Textract OCR for high-accuracy text extraction from scanned or image-based documents.
 - **Azure Document Intelligence**: Uses Azure AI Document Intelligence for OCR-based text extraction from scanned or image-based documents.
 - **GCP Document AI**: Uses Google Cloud Document AI for OCR-based text extraction from scanned or image-based documents.
+- **ABBYY Vantage**: Uses [ABBYY Vantage](https://www.abbyy.com/vantage/) OCR for text extraction. Unlike provider-specific engines, ABBYY Vantage is available across all cloud providers once its [connector secrets](idp-configuration.md#abbyy-secrets) are configured for your cluster.
 
 :::note
-The available extraction engines depend on the cloud provider you configure for your document extraction template. For example, AWS Textract is only available when using the AWS provider.
+The available extraction engines depend on your cluster configuration and the cloud provider you select for your document extraction template. AWS Textract, Azure Document Intelligence, and GCP Document AI are only available when using their respective provider, while ABBYY Vantage is available across all providers when its connector secrets are configured.
 :::
 
 #### Model selection
