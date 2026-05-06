@@ -25,14 +25,13 @@ During the rebalancing, partitions might become unhealthy and can't make progres
 
 ### Limitations
 
-Manual rebalancing is done on a best-effort basis.
+Manual rebalancing is not guaranteed to succeed in all cases.
 
-Due to the nature of distributed systems, Zeebe can never guarantee a particular distribution and rebalancing cannot avoid that.
+Rebalancing is only supported under specific configurations, and even when supported, the resulting distribution cannot be guaranteed due to the nature of distributed systems.
 
 There are two configurations where manual rebalancing is supported:
 
 - **Priority election** with **round-robin distribution**
-
   - Priority election and round-robin distribution are enabled by default.
   - As long as you have not manually disabled priority election or set a fixed distribution, rebalancing is supported.
   - Brokers are automatically assigned as primary partition leaders during startup, based on cluster size and replication factor.
@@ -56,4 +55,62 @@ Even when a rebalancing request is handled successfully by all leaders, the resu
 Followers that are not fully caught up with the leader cannot be elected as leader.
 This becomes more likely under high load or with increased network latency between leader and follower.
 
-We recommend requesting rebalancing only under low load.
+### Rebalancing impact
+
+:::note
+
+Rebalancing causes every partition leader to step down simultaneously, triggering a new leader election for each partition.
+
+If the desired leader for a partition (the node with the highest priority) is _already_ the leader, rebalancing is a no-op for this partition. If a cluster is already perfectly balanced, a rebalancing call is a no-op.
+
+:::
+
+During the election period, the affected partition has no leader. While leaderless, a partition cannot process, export, or accept new commands. In the worst case, when all partitions rebalance at the same time, the entire cluster is temporarily unavailable: no workflow engine processing occurs, no new data becomes visible in the web applications, and no client requests are accepted.
+
+This is typically observed externally as:
+
+- Increased error rates from clients, as requests are rejected while no leader is available
+- Increased processing latency, as service tasks complete later and process instances progress more slowly
+- Increased exporting latency, as new data appears in Operate later than expected
+
+### When to rebalance
+
+Before triggering a rebalance, verify that it is likely to succeed. As described in [Limitations](#limitations), rebalancing only works if the desired leader for each partition is not lagging behind the current leader. You can verify this using the `atomix_non_replicated_entries` metric, filtering by the `partition` and `follower` labels to determine how far a replica lags behind. The closer this value is to `0`, the more likely rebalancing is to succeed. If the desired leader has a significant lag, triggering a rebalance will cause a temporary performance drop without achieving a better distribution.
+
+:::note
+
+If you are using Prometheus, you can query the replication lag for a given partition and desired leader with:
+
+```promql
+sum(atomix_non_replicated_entries{partition=~"$partition", follower=~"$follower"}) by (partition, follower)
+```
+
+Replace `$partition` and `$follower` by the desired combination.
+
+If you're using the Zeebe Grafana dashboard, you can already visualize this in the `Raft` section, in a graph named `Non replicated records`.
+
+:::
+
+Once you have confirmed that rebalancing is likely to succeed, consider the trade-off: rebalancing can improve long-term cluster performance by achieving an optimal leader distribution, but it causes a temporary performance impact and potential unavailability window. Decide whether the long-term benefit outweighs the short-term disruption.
+
+:::warn
+
+Rebalance only when the cluster is under low load. To determine this, identify what low load means for your specific scenario. What constitutes low load, and whether rebalancing is appropriate at all in a given situation, is ultimately your decision.
+
+:::
+
+For example, you could consider the cluster idle if the total leader append rate across all partitions is low, such as below 64 KB/s. At this level of activity, the impact of a rebalance on your users and applications is minimal.
+
+:::note
+
+If you are using Prometheus, you can query the total replication rate across all partitions with:
+
+```promql
+sum(rate(atomix_append_entries_data_rate_total[1m]))
+```
+
+This returns the cluster replication rate in bytes per second.
+
+You can find this in the Zeebe Grafana dashboard under the `Raft` section, visualized as a graph named `Leader append data rate`.
+
+:::
