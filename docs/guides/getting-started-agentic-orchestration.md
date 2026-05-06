@@ -51,7 +51,7 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 
 The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API.
 
-If you're using Camunda 8 SaaS, you can also use [EasyLLM](/components/agentic-orchestration/easy-llm.md) to run the model without additional LLM provider setup.
+If you're using Camunda 8 SaaS, you can also use [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) to run the model without additional LLM provider setup.
 
 See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
 
@@ -131,14 +131,14 @@ Depending on your model choice, configure the AI Agent connector accordingly.
 With Camunda-provided LLM in SaaS, you do not need additional LLM setup.
 :::
 
-<Tabs groupId="setup" defaultValue="easyllm" values={
+<Tabs groupId="setup" defaultValue="camunda-provided-llm" values={
 [
-{ label: 'Camunda-provided LLM', value: 'easyllm', },
+{ label: 'Camunda-provided LLM', value: 'camunda-provided-llm', },
 { label: 'AWS Bedrock', value: 'aws', },
 { label: 'Ollama', value: 'local', },
 ]}>
 
-<TabItem value="easyllm">
+<TabItem value="camunda-provided-llm">
 
 1. Verify your organization has **AI features enabled**. Camunda-provided LLM is available automatically when AI features are enabled.
 1. Keep the AI Agent connector's default settings from the blueprint.
