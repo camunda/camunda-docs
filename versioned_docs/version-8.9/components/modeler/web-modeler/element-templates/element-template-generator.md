@@ -6,7 +6,13 @@ description: Learn how to generate element or connector templates for easier cre
 
 You can configure and automatically generate a custom element template in Web Modeler.
 
-### Best practices
+Use this page for both BPMN element templates and connector templates:
+
+- To create a BPMN element template, go to [generate a BPMN element template](#generate-a-bpmn-element-template).
+- To create a connector template, go to [generate a connector template](#generate-a-connector-template).
+- To customize a generated connector template after creation, see [connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
+
+## Best practices
 
 When creating custom-built element templates, consider the best practices outlined in [Best practices for custom-built element templates](best-practices.md) to ensure they are effective, user-friendly, and maintainable.
 
@@ -25,9 +31,11 @@ When creating custom-built element templates, consider the best practices outlin
    - **Blank**: Start from a blank template.
      A blank template includes only the basic properties shared by all BPMN elements and allows you to customize the template from scratch.
 
-Continue with [**Step 4**](#configure-the-template-details) in the Configure the template details section below.
+Continue with [**configure the template details**](#configure-the-template-details) below.
 
 ## Generate a connector template
+
+Use this section if you want to create a connector template in Web Modeler.
 
 You can start from a blank template or import an existing API definition such as an [OpenAPI specification](https://swagger.io/resources/open-api/), [Swagger specification](https://swagger.io/resources/open-api/), or a [Postman collection](https://www.postman.com/collection/). For example, download a Postman collection as a YAML file, import it into the generator, and choose which methods to include in the generated template.
 
@@ -41,11 +49,11 @@ To generate a connector template:
    - **From API definition**: Import an existing API definition file as a starting point. The **Import data source** section will appear below the template details.
    - **From blank**: Start from a blank template.
 
-Continue with [**Step 4**](#configure-the-template-details) in the Configure the template details section below.
+Continue with [**configure the template details**](#configure-the-template-details) below.
 
 ## Configure the template details
 
-4. In the **Configure template details** section, provide the following information:
+1. In the **Configure template details** section, provide the following information:
    - **Name:** Enter a clear and descriptive name for the template. For example, include the brand name if the template connects to a service, or indicate its main feature.
    - **Description:** Describe the template’s main features and benefits.
    - **Icon:** Use a default BPMN symbol or upload a custom icon. Supported formats: SVG, PNG, JPEG. Maximum file size: 8 KB. Minimum dimensions: 512 × 512 pixels.
@@ -56,9 +64,9 @@ Continue with [**Step 4**](#configure-the-template-details) in the Configure the
    If you do not configure template details at this stage, a default name and BPMN symbol are assigned. You can edit them later.
    :::
 
-#### Only for connector templates: Import an API definition
+### Only for connector templates: Import an API definition
 
-5. If you selected **From API definition**, the **Import data source** section appears.
+1. If you selected **From API definition**, the **Import data source** section appears.
    1. Select the format to import (OpenAPI or Postman) and click **Import file**.
    2. Import the API definition:
       - **Import file from URL:** Enter the API definition URL and click **Import icon**.
@@ -71,4 +79,4 @@ Continue with [**Step 4**](#configure-the-template-details) in the Configure the
    For more information on working with and configuring connector templates, see [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
    :::
 
-6. Click **Create template** to generate the new template and open it in the [element template editor](/components/connectors/manage-connector-templates.md).
+2. Click **Create template** to generate the new template and open it in the [element template editor](/components/connectors/manage-connector-templates.md).
