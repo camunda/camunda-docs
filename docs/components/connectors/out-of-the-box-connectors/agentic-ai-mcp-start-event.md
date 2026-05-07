@@ -13,7 +13,7 @@ The MCP start event is not handled by the Connector Runtime like other Connector
 
 ## Apply the template
 
-1. Open your BPMN process in Web Modeler.
+1. Open your BPMN process in Web Modeler or Desktop Modeler.
 2. Select a start event (or add a new one).
 3. In the properties panel, click the element template picker.
 4. Select **MCP start event** from the **AI Tools** category.

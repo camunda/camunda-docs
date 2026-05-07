@@ -1,6 +1,6 @@
 ---
 id: mcp-processes
-title: MCP Processes
+title: MCP processes
 sidebar_label: MCP Processes
 description: "Monitor which processes are registered as MCP tools in the Orchestration Cluster admin UI."
 ---

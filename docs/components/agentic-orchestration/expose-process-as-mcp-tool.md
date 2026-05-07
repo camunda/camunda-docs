@@ -29,7 +29,7 @@ The [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) 
 
 The MCP start event is an element template from the **AI Tools** category applied to a BPMN message start event. It registers the process as an MCP tool when deployed.
 
-1. Open your BPMN process in Web Modeler.
+1. Open your BPMN process in Web Modeler or Desktop Modeler.
 2. Select the start event (or add a new one).
 3. In the properties panel, click the element template picker and select **MCP start event** from the **AI Tools** category.
 
