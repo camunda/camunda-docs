@@ -31,6 +31,7 @@ import PageDescription from '@site/src/components/PageDescription';
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
+<!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
 
