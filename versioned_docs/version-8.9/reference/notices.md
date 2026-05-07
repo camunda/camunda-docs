@@ -21,6 +21,32 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 46
+
+### Publication date
+
+May 7, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `axios` used by Camunda Web Modeler was affected by [CVE-2026-42264](https://github.com/advisories/GHSA-q8qp-cvcw-x6jj), a prototype pollution vulnerability in the HTTP adapter that could allow credential injection and request hijacking when `Object.prototype` is polluted by another dependency in the same process.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.13, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.14, 8.7.21
+
 ## Notice 45
 
 ### Publication date
