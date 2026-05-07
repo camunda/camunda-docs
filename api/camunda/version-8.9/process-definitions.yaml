@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for process definitions based on given criteria.
@@ -40,6 +42,8 @@ paths:
       summary: Get process definition
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -85,6 +89,8 @@ paths:
       summary: Get process definition XML
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -135,8 +141,10 @@ paths:
         - Process definition
       operationId: getStartProcessForm
       summary: Get process start form
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -184,6 +192,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get statistics about elements in currently running process instances by process definition key and search filter.
@@ -224,8 +234,10 @@ paths:
         - Process definition
       operationId: getProcessDefinitionMessageSubscriptionStatistics
       summary: Get message subscription statistics
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -257,8 +269,10 @@ paths:
         - Process definition
       operationId: getProcessDefinitionInstanceStatistics
       summary: Get process instance statistics
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -290,8 +304,10 @@ paths:
         - Process definition
       operationId: getProcessDefinitionInstanceVersionStatistics
       summary: Get process instance statistics by version
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 

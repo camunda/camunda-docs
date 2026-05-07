@@ -132,16 +132,17 @@ When using Azure, GCP, or an OpenAI Compatible provider, the available extractio
 
 Text extraction engines determine how text is extracted from your documents before the LLM processes the content. You can [select an extraction engine](idp-unstructured-extraction.md#extract-data) per unstructured extraction template to optimize for accuracy, performance, and cost based on your document type.
 
-| Extraction engine           | Provider     | Best for                                        | Description                                                                                                                                                                             |
-| :-------------------------- | :----------- | :---------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Fast Extract                | Built-in     | Digitally generated PDFs                        | A lightweight, built-in PDF text parser. Faster and lower cost than OCR-based engines, but does not support scanned or image-based documents.                                           |
-| Multimodal                  | Provider LLM | Documents where the LLM has vision capabilities | Sends the document directly to the LLM for native interpretation, bypassing a separate text extraction step. Useful when the LLM supports multimodal (text and image) input.            |
-| AWS Textract                | AWS          | Scanned or image-based documents                | Uses [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md) OCR for high-accuracy text extraction. Requires AWS provider configuration.                 |
-| Azure Document Intelligence | Azure        | Scanned or image-based documents                | Uses [Azure AI Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/) for OCR-based text extraction. Requires Azure provider configuration. |
-| GCP Document AI             | GCP          | Scanned or image-based documents                | Uses [Google Cloud Document AI](https://cloud.google.com/document-ai/docs) for OCR-based text extraction. Requires GCP provider configuration.                                          |
+| Extraction engine           | Provider            | Best for                                        | Description                                                                                                                                                                                                            |
+| :-------------------------- | :------------------ | :---------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fast Extract                | Built-in            | Digitally generated PDFs                        | A lightweight, built-in PDF text parser. Faster and lower cost than OCR-based engines, but does not support scanned or image-based documents.                                                                          |
+| Multimodal                  | Provider LLM        | Documents where the LLM has vision capabilities | Sends the document directly to the LLM for native interpretation, bypassing a separate text extraction step. Useful when the LLM supports multimodal (text and image) input.                                           |
+| AWS Textract                | AWS                 | Scanned or image-based documents                | Uses [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md) OCR for high-accuracy text extraction. Requires AWS provider configuration.                                                |
+| Azure Document Intelligence | Azure               | Scanned or image-based documents                | Uses [Azure AI Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/) for OCR-based text extraction. Requires Azure provider configuration.                                |
+| GCP Document AI             | GCP                 | Scanned or image-based documents                | Uses [Google Cloud Document AI](https://cloud.google.com/document-ai/docs) for OCR-based text extraction. Requires GCP provider configuration.                                                                         |
+| ABBYY Vantage               | ABBYY (third-party) | Scanned or image-based documents                | Uses [ABBYY Vantage](https://www.abbyy.com/vantage/) OCR for text extraction. Available across all cloud providers when [ABBYY connector secrets](idp-configuration.md#abbyy-secrets) are configured for your cluster. |
 
 :::note
-The available extraction engines depend on the cloud provider you configure for your document extraction template. For example, AWS Textract is only available when using the AWS provider. See [configuring IDP](idp-configuration.md) for provider setup details.
+The available extraction engines depend on the configuration of your cluster and the cloud provider selected for your document extraction template. For example, AWS Textract is only available when using the AWS provider, while ABBYY Vantage is available across all providers once its connector secrets are configured. See [configuring IDP](idp-configuration.md) for setup details.
 :::
 
 ## Optical Character Recognition (OCR) {#ocr}
@@ -153,6 +154,7 @@ You can use the following OCR-based extraction engines:
 - **AWS Textract**: Used for both structured and unstructured extraction with the AWS provider.
 - **Azure Document Intelligence**: Used for unstructured extraction with the Azure provider.
 - **GCP Document AI**: Used for both structured and unstructured extraction with the GCP provider.
+- **ABBYY Vantage**: A third-party OCR engine available for unstructured extraction and document classification across all cloud providers. Requires the [ABBYY connector secrets](idp-configuration.md#abbyy-secrets) to be configured for your cluster.
 
 ### AWS Textract OCR capabilities
 

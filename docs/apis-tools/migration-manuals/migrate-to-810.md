@@ -44,6 +44,7 @@ Review the actions required for the following 8.10 changes:
 | Type                                                         | Change                                                                                                               |
 | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
 | <span className="label-highlight red">Breaking change</span> | [Search filters: `UserTaskFilter` process filters converted into advanced search filters] (#usertask-process-filter) |
+| <span className="label-highlight red">Breaking change</span> | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)              |
 
 ## Breaking changes
 
@@ -84,6 +85,72 @@ Regenerate your client.
 <TabItem value='custom'>
 
 No change is needed if your code already uses the exact-match filters for `processDefinitionKey`, `processInstanceKey`, and `bpmnProcessId` in `UserTaskFilter`.
+
+</TabItem>
+</Tabs>
+
+### `POST /v2/message-subscriptions/search` returns start event subscriptions {#message-subscription-type}
+
+#### Change
+
+The `POST /v2/message-subscriptions/search` endpoint now returns both start event and intermediate event message subscriptions. Previously, only intermediate event subscriptions were returned.
+
+#### Why
+
+This change provides complete visibility into all active message subscriptions for a process, including start event subscriptions that were previously excluded.
+
+#### New field
+
+Each result includes a new `messageSubscriptionType` enum field:
+
+| Value           | Description                                       |
+| :-------------- | :------------------------------------------------ |
+| `START_EVENT`   | A start event message subscription.               |
+| `PROCESS_EVENT` | An intermediate catch event message subscription. |
+
+In existing legacy data, this field is `NULL`.
+
+#### Impact
+
+Integrations that consume results from `POST /v2/message-subscriptions/search` will now receive start event subscriptions in addition to intermediate event subscriptions. Code that assumes only intermediate events may produce unexpected behavior.
+
+#### Action
+
+<Tabs groupId="audience" defaultValue="sdk" queryString values={[
+{label: 'Official SDK users', value: 'sdk'},
+{label: 'Generated-client users', value: 'generated'},
+{label: 'Custom integrations', value: 'custom'},
+]}>
+
+<TabItem value='sdk'>
+
+Update to the latest SDK version. If your code relies on the endpoint returning only intermediate event subscriptions, add a filter to exclude start events when constructing your search query.
+
+</TabItem>
+<TabItem value='generated'>
+
+Regenerate your client from the 8.10 OpenAPI specification to include the new `messageSubscriptionType` field. If your code expects only intermediate event subscriptions, add the filter shown in the **Custom integrations** tab to your request payload.
+
+</TabItem>
+<TabItem value='custom'>
+
+If your code relies on the endpoint returning only intermediate event subscriptions, add the following filter to restore the previous behavior:
+
+```json title="Before (no filter needed — endpoint returned only intermediate events)"
+{
+  "filter": {}
+}
+```
+
+```json title="After (filter required to exclude start events)"
+{
+  "filter": {
+    "messageSubscriptionType": { "$neq": "START_EVENT" }
+  }
+}
+```
+
+This filter works correctly for both new data and legacy data (which has `NULL` in the `messageSubscriptionType` field).
 
 </TabItem>
 </Tabs>

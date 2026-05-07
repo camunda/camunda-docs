@@ -279,7 +279,8 @@ With the backup ID passed as a command-line argument:
 ```yaml
 orchestration:
   command:
-    ["/usr/local/camunda/bin/restore", "--backupId=1772001869309,1772001899400"]
+    - "/usr/local/camunda/bin/restore"
+    - "--backupId=1772001869309,1772001899400"
 ```
 
   </TabItem>
@@ -311,7 +312,8 @@ An alternative approach to overwriting the startup behavior to restore the parti
 ```yaml
 orchestration:
   enabled: true
-  command: ["/usr/local/camunda/bin/restore"]
+  command:
+    - "/usr/local/camunda/bin/restore"
   env:
     - name: SPRING_PROFILES_ACTIVE
       value: "restore"
