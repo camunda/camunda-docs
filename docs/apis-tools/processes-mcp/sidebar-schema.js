@@ -9,6 +9,7 @@ module.exports = [
       id: "apis-tools/processes-mcp/processes-mcp-overview",
     },
     items: [
+      "apis-tools/processes-mcp/processes-mcp-setup",
       "apis-tools/processes-mcp/processes-mcp-static-tools",
       "apis-tools/processes-mcp/processes-mcp-version-binding",
     ],

@@ -50,7 +50,26 @@ The Processes MCP Server uses [Streamable HTTP](https://modelcontextprotocol.io/
 
 ## Get started
 
-To expose a process as an MCP tool and connect an MCP client to the Processes MCP Server, see [Expose a process as an MCP tool](/components/agentic-orchestration/expose-process-as-mcp-tool.md).
+:::important Camunda 8.10
+The Processes MCP Server is only available from Camunda 8.10 onwards.
+:::
+
+To expose a BPMN process as an MCP tool, see [Expose a process as an MCP tool](/components/agentic-orchestration/expose-process-as-mcp-tool.md).
+
+If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), the Processes MCP Server is enabled by default. Connect any MCP client using this configuration:
+
+```json
+{
+  "servers": {
+    "camunda-processes": {
+      "type": "http",
+      "url": "http://localhost:8080/mcp/processes"
+    }
+  }
+}
+```
+
+For production environments and other deployment types, the Processes MCP Server must be explicitly enabled before use. See [Enable and connect](./processes-mcp-setup.md) for more details.
 
 ## Static tools
 

@@ -13,9 +13,6 @@ keywords:
   ]
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 Expose a deployed BPMN process as a callable [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tool so that AI agents and LLM-powered applications can discover and invoke it.
 
 The [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) is built into the Orchestration Cluster and automatically registers processes as MCP tools when they are deployed with the MCP start event element template.
@@ -73,56 +70,7 @@ Only the latest deployed version of a process is exposed as an MCP tool. If you 
 
 ## Step 5: Connect an MCP client
 
-Connect any MCP-compliant client to the Processes MCP Server endpoint. The server uses [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport.
-
-<Tabs>
-<TabItem value="local" label="Local (Camunda 8 Run / Docker Compose)" default>
-
-```json
-{
-  "servers": {
-    "camunda-processes": {
-      "type": "http",
-      "url": "http://localhost:8080/mcp/processes"
-    }
-  }
-}
-```
-
-</TabItem>
-<TabItem value="saas" label="SaaS">
-
-```json
-{
-  "servers": {
-    "camunda-processes": {
-      "type": "http",
-      "url": "https://${REGION_ID}.api.camunda.io/${CLUSTER_ID}/mcp/processes"
-    }
-  }
-}
-```
-
-For authenticated environments, use [`c8ctl mcp-proxy`](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup.md#using-c8ctl-mcp-proxy) to handle OAuth 2.0 client credentials transparently.
-
-</TabItem>
-<TabItem value="self-managed" label="Self-Managed">
-
-```json
-{
-  "servers": {
-    "camunda-processes": {
-      "type": "http",
-      "url": "https://<your-host>/mcp/processes"
-    }
-  }
-}
-```
-
-</TabItem>
-</Tabs>
-
-For authentication setup, see [Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+Connect any MCP-compliant client to the Processes MCP Server. See [Enable and connect](/apis-tools/processes-mcp/processes-mcp-setup.md) for endpoint URLs, authentication options, and `c8ctl mcp-proxy` configuration.
 
 ## Observability
 
