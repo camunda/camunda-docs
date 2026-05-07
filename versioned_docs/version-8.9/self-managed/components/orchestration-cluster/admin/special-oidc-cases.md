@@ -92,8 +92,6 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_RESOURCE_1=https://another-resource.example
 
 </Tabs>
 
-For a complete list of available OIDC configuration properties, see the [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc).
-
 ## Use the Bearer JWT client authentication method
 
 In environments that require additional security, you can configure the Orchestration Cluster backend to use the Bearer JWT client authentication method, **private key JWT**, instead of the standard client ID and secret method.
