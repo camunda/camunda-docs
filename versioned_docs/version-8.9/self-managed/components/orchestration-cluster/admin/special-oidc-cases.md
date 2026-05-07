@@ -58,6 +58,42 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ENDSESSIONENDPOINTURI=http://<Docker networ
 
 The exact property values depend on your OIDC provider and environment.
 
+## Specify resource servers in token requests
+
+The Orchestration Cluster supports [RFC 8707 (Resource Indicators for OAuth 2.0)](https://datatracker.ietf.org/doc/html/rfc8707), which allows you to specify target resource servers when requesting access tokens from your OIDC provider.
+
+This is useful when your OIDC provider issues different tokens depending on the intended resource server (audience). By including resource indicators in the token request, you can ensure the Orchestration Cluster receives tokens with the appropriate audience claims for your environment.
+
+Configure resource indicators using the `camunda.security.authentication.oidc.resource` property:
+
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
+<TabItem value="yaml">
+
+```yaml
+camunda:
+  security:
+    authentication:
+      oidc:
+        resource:
+          - https://api.example.com
+          - https://another-resource.example.com
+```
+
+</TabItem>
+
+<TabItem value="env">
+
+```
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_RESOURCE[0]=https://api.example.com
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_RESOURCE[1]=https://another-resource.example.com
+```
+
+</TabItem>
+
+</Tabs>
+
+For a complete list of available OIDC configuration properties, see the [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc).
+
 ## Use the Bearer JWT client authentication method
 
 In environments that require additional security, you can configure the Orchestration Cluster backend to use the Bearer JWT client authentication method, **private key JWT**, instead of the standard client ID and secret method.
