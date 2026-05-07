@@ -19,7 +19,7 @@ The [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) 
 
 ## Prerequisites
 
-- Access to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) or [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
+- Access to [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) or [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
 - An Orchestration Cluster running Camunda 8.10 or later.
 
 ## Step 1: Add an MCP start event to your process
