@@ -2288,7 +2288,7 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/admin/bring-your-groups",
                 "self-managed/components/orchestration-cluster/admin/debugging-authentication",
                 "self-managed/components/orchestration-cluster/admin/special-oidc-cases",
-                "self-managed/components/orchestration-cluster/admin/mcp-tools",
+                "self-managed/components/orchestration-cluster/admin/mcp-processes",
               ],
             },
           ],

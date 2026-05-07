@@ -60,7 +60,9 @@ The rest of the process runs as normal after the MCP start event. When an MCP cl
 2. The process executes.
 3. When the process instance completes, the Processes MCP Server returns the process output variables to the MCP client as the tool result.
 
-Map the incoming tool call arguments to the process variables your process expects, and ensure the output variables align with what you described in **What the tool returns**.
+:::tip Align LLM inputs with process variables
+You can map the incoming tool call arguments from the LLM to the process variables your process expects using **Output mapping**. If you don't define any eplicit output mapping, all incoming tool call arguments become process variables with the same names.
+:::
 
 ## Step 4: Deploy the process
 
@@ -125,4 +127,4 @@ For authentication setup, see [Authentication](/apis-tools/orchestration-cluster
 
 ## Observability
 
-After deploying, you can verify that your process is registered as an MCP tool in the Orchestration Cluster admin UI. See [MCP tools](/self-managed/components/orchestration-cluster/admin/mcp-tools.md).
+After deploying, you can verify that your process is registered as an MCP tool in the Orchestration Cluster admin UI. See [MCP Processes](/self-managed/components/orchestration-cluster/admin/mcp-processes.md).

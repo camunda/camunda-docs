@@ -7,7 +7,9 @@ description: "Reference for the MCP start event element template, which register
 
 The **MCP start event** is an element template (category: **AI Tools**) applied to a BPMN message start event. When deployed, it registers the process as an MCP tool in the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
 
-It is not a connector and is not handled by the connector runtime. The element template configures the start event metadata that the Processes MCP Server uses to expose the process as a tool to MCP clients.
+:::note
+The MCP start event is not handled by the Connector Runtime like other Connectors. The element template configures the start event metadata that the Processes MCP Server uses to expose the process as a tool to MCP clients.
+:::
 
 ## Apply the template
 
@@ -15,8 +17,6 @@ It is not a connector and is not handled by the connector runtime. The element t
 2. Select a start event (or add a new one).
 3. In the properties panel, click the element template picker.
 4. Select **MCP start event** from the **AI Tools** category.
-
-![MCP start event properties panel in Web Modeler](agentic-ai/img/mcp-start-event-properties.png)
 
 ## Properties
 
@@ -38,7 +38,7 @@ When the process is deployed:
 1. The Processes MCP Server reads the element template metadata and registers the process as an MCP tool.
 2. MCP clients can discover the tool by name and call it.
 3. Each tool invocation starts a new process instance with the tool call arguments mapped as process variables.
-4. When the process instance completes, the Processes MCP Server returns the output variables to the MCP client as the tool result.
+4. The MCP Server returns the key of the started process instance to the client, which can use it to track execution status or retrieve results.
 
 Only the latest deployed version of a process is exposed. See [Version binding](/apis-tools/processes-mcp/processes-mcp-version-binding.md).
 
