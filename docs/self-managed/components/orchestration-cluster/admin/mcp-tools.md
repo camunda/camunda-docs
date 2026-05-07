@@ -22,7 +22,7 @@ The following information is displayed for each registered tool:
 | **Version**                | The process definition version currently registered. Only the latest deployed version is exposed. |
 | **Status**                 | Whether the tool is active and accepting calls.                                                   |
 
-## Troubleshooting
+## Troubleshoot
 
 **A process is not appearing after deployment.** Verify that the process was deployed successfully and that the MCP start event element template is applied to the start event. Check for deployment errors in Operate.
 

@@ -2,8 +2,10 @@
 id: processes-mcp-version-binding
 title: "Version binding"
 sidebar_label: "Version binding"
-description: "How the Processes MCP Server exposes process versions, and what happens when a process is redeployed."
+description: "Understand how the Processes MCP Server handles process version binding, stale tool references after redeployment, and best practices for managing breaking changes."
 ---
+
+Understand how the Processes MCP Server handles process version binding, stale tool references after redeployment, and best practices for managing breaking changes.
 
 ## Which version is exposed
 
