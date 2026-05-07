@@ -34,7 +34,7 @@ See [Trial vs. enterprise budgets](#trial-vs-enterprise-budgets) for more detail
 Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as cluster secrets.
 
 - If you are using an AI agent blueprint, no additional configuration is needed in most cases. Explore selected AI agent blueprints in the [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
-- If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your AI agent connector with the following parameters:
+- If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) with the following parameters:
   - **Provider**: `OpenAI Compatible`.
   - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
   - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`.
@@ -42,7 +42,7 @@ Once Camunda-provided LLM is available in your organization, its credentials are
 
 ## Supported models
 
-Camunda-provided LLM supports multiple Bedrock-backed models. In the AI Agent connector, set the **Model** field to one of the following values:
+Camunda-provided LLM supports multiple Bedrock-backed models. When using the AI Agent connector, set the **Model** field to one of the following values:
 
 | Model                       | Value to set in **Model**     | What it's good for                                                                                                    |
 | :-------------------------- | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
@@ -55,7 +55,9 @@ Camunda-provided LLM supports multiple Bedrock-backed models. In the AI Agent co
 | OpenAI GPT-OSS 20B          | `openai.gpt-oss-20b`          | Best for budget-conscious experimentation and simpler automations with lower complexity.                              |
 | Qwen Qwen3 235B             | `qwen.qwen3-235b`             | Best for advanced reasoning and coding use cases where you want strong performance with good cost efficiency.         |
 
-When selecting a model, consider your process requirements, expected usage volume, and token budget. For a broader model selection framework, see [Choose the right LLM](./choose-right-model-agentic.md).
+:::note
+When selecting a model, consider your process requirements, expected usage volume, and token budget. For model selection guidelines, see how to [choose the right LLM](./choose-right-model-agentic.md).
+:::
 
 ## Trial vs. enterprise budgets
 

@@ -48,7 +48,7 @@ export const fundamentalCards_monitoring = [
     link: "../monitor-ai-agents/",
     title: "Monitor your AI agents",
     image: IconOperate,
-    description: "Monitor and troubleshoot your AI agents.",
+    description: "Monitor your AI agents with Operate.",
   },
   {
     link: "../analyze-ai-agents/",

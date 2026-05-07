@@ -49,13 +49,9 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 
 ### Supported models
 
-The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API.
+The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API. See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
 
-If you're using Camunda 8 SaaS, you can also use [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) to run the model without additional LLM provider setup.
-
-See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
-
-In this guide, you can try three use cases:
+In this guide, you can try the following use cases:
 
 | Setup                    | Model provider                                                                    | Model used                                             | Prerequisites                                                                                                                                                                                                                                                                                                                                                              |
 | :----------------------- | :-------------------------------------------------------------------------------- | :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -128,9 +124,9 @@ For prompt configuration details, see [AI Agent connector: System prompt, user p
 Depending on your model choice, configure the AI Agent connector accordingly.
 
 :::info
-With Camunda-provided LLM in SaaS, you do not need additional LLM setup.
+With Camunda-provided LLM, you do not need additional LLM setup.
 
-Camunda-provided LLM is only available in SaaS and is not available in Self-Managed environments.
+Camunda-provided LLM is only available in SaaS. It is not available in Self-Managed environments.
 :::
 
 <Tabs groupId="setup" defaultValue="camunda-provided-llm" values={

@@ -20,14 +20,6 @@ Consider the following aspects regarding your model requirements and setup const
 | **Cost vs. speed**        | Larger models offer higher accuracy but often with higher latency and cost. Balance performance against Service Level Agreements (SLAs) and budgets.                 |
 | **Accuracy vs. openness** | Proprietary models often lead in benchmark accuracy. Open-source models provide flexibility, fine-tuning, and offline use cases.                                     |
 
-## Models available in Camunda Provided LLM
-
-Camunda-provided LLM gives you access to multiple models for experimentation and evaluation, so you can test different options without setting up your own provider.
-
-Camunda-provided LLM is only available in Camunda 8 SaaS. It is not available in Camunda 8 Self-Managed.
-
-For the current model list, model names, and values to use in the connector, see [Supported models in Camunda-provided LLM](./camunda-provided-llm.md#supported-models).
-
 ## Measure agent performance
 
 The ideal model should handle tools effectively, follow instructions consistently, and complete actions successfully.
@@ -94,3 +86,13 @@ Model selection should always reflect your **use case**. For example, a math-hea
 :::
 
 A clear framework and benchmarked data helps you choose an LLM or foundation model to power your Camunda agent.
+
+### Test with Camunda-provided LLM
+
+Camunda-provided LLM gives you access to [multiple models](./camunda-provided-llm.md#supported-models) for experimentation and evaluation, so you can test different options without setting up your own provider.
+
+:::important
+Camunda-provided LLM is only available in Camunda 8 SaaS. It is not available in Camunda 8 Self-Managed.
+:::
+
+See [Camunda-provided LLM](./camunda-provided-llm.md) for more details.
