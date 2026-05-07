@@ -81,3 +81,16 @@ image: DocsIcon,
 description: "View details of all activity within an organization, such as cluster creation, deletion, updates, and user invitations.",
 },
 ]} columns={2}/>
+
+## Analyze operations
+
+Monitor cluster health, track job and process execution, and measure business value across your Camunda organization:
+
+<AoGrid ao={[
+{
+link: "./analyze-operations/job-dashboard",
+title: "Monitor the job dashboard",
+image: DocsIcon,
+description: "Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved.",
+},
+]} columns={1}/>

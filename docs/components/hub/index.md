@@ -22,6 +22,12 @@ Manage organizational resources, including clusters and workspaces, and govern t
 
 <AoGrid ao={[
 {
+link: "./organization/manage-workspaces",
+title: "Manage workspaces",
+image: DocsIcon,
+description: "Create and manage workspaces within your organization.",
+},
+{
 link: "./organization/manage-clusters/manage-cluster",
 title: "Manage clusters",
 image: DocsIcon,
@@ -38,6 +44,12 @@ link: "./organization/manage-organization-settings/organization-settings",
 title: "Manage organization",
 image: DocsIcon,
 description: "Manage organizational settings, and view usage alerts and history.",
+},
+{
+link: "./organization/analyze-operations/",
+title: "Analyze operations",
+image: DocsIcon,
+description: "Monitor cluster health, track job and process execution, and measure business value across your Camunda organization.",
 },
 ]} columns={3}/>
 
