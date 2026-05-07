@@ -20,9 +20,11 @@ c8 run ./order.bpmn --profile=prod
 c8 watch --profile=local
 ```
 
+:::
+
 ## Deploy
 
-Deploy BPMN, DMN, and form resources to the active cluster.
+Deploy resources to the active cluster.
 
 ### Deploy a single file
 
@@ -48,7 +50,15 @@ c8 deploy
 c8 deploy ./my-project
 ```
 
-`c8ctl` recursively traverses the directory for `.bpmn`, `.dmn`, and `.form` files.
+When scanning directories, `c8ctl` includes files with the following extensions by default:
+
+`.bpmn`, `.dmn`, `.form`, `.md`, `.txt`, `.xml`, `.rpa`, `.json`, `.config`, `.yml`, `.yaml`
+
+Use `--force` to deploy files with any extension:
+
+```bash
+c8 deploy ./custom-resource.unsupported --force
+```
 
 ### Building blocks and process applications
 
@@ -101,29 +111,67 @@ c8 deploy process-v1.bpmn
 c8 deploy process-v2.bpmn
 ```
 
+### Exclude files with `.c8ignore`
+
+Create a `.c8ignore` file in your project directory to exclude files and directories from deployment and watch scanning. The format follows the same pattern syntax as `.gitignore`:
+
+```text
+# Exclude test resources
+tests/
+
+# Exclude work-in-progress files
+wip-*.bpmn
+
+# Exclude a specific file
+old-process.bpmn
+```
+
+Place the `.c8ignore` file in the root of the directory you pass to `c8 deploy` or `c8 watch`. Patterns are matched against relative file paths within that directory.
+
 ## Run
 
-The `run` command deploys a BPMN file and immediately creates a process instance in a single step:
+The `run` command deploys a file and immediately creates a process instance in a single step:
 
 ```bash
 c8 run ./order-process.bpmn
 
 # With variables
 c8 run ./order-process.bpmn --variables='{"orderId":"12345","amount":100}'
+
+# Deploy a file with an unsupported extension
+c8 run ./process.xml --force
 ```
 
 ## Watch
 
-Watch a directory for changes to `.bpmn`, `.dmn`, and `.form` files, and auto-redeploy on save:
+Watch a directory for file changes and auto-redeploy on save:
 
 ```bash
 c8 watch
 
 # Watch a specific directory
 c8 watch ./my-project
+
+# Monitor only specific file extensions
+c8 watch --extensions=.bpmn,.dmn,.form
+
+# continue watching current directory
+# even when deployment fails
+c8 watch --force
 ```
 
-`c8ctl` applies a cooldown between redeploys to prevent rapid successive deployments while you are actively editing files.
+By default, `c8ctl` monitors the same extensions used by `deploy`. Use `--extensions` to override. Use `--force` to continue watching after deployment errors.
+
+### Continue watching after deployment errors
+
+By default, `c8ctl` stops watching when a deployment fails with an error. Use `--force` to continue watching and redeploy on subsequent file changes, even after errors:
+
+```bash
+c8 watch --force
+c8 watch ./my-project --force
+```
+
+This is useful during active development when your resources may temporarily be in an invalid state.
 
 ## Profile management
 
@@ -194,6 +242,7 @@ c8 use tenant my-tenant-id
 ```bash
 c8 output json    # JSON output for scripting
 c8 output text    # human-readable tables (default)
+c8 output         # show current output mode
 ```
 
 ## MCP proxy
@@ -337,9 +386,43 @@ c8 await pi --id=order-process --variables="{\"orderData\": $processVar}" --fetc
 
 :::
 
+## Open web applications
+
+Open Camunda web applications in your default browser using the `open` command:
+
+```bash
+c8 open operate
+c8 open tasklist
+c8 open modeler
+c8 open optimize
+```
+
+The URL is derived from the active profile's base URL. This works with self-managed clusters where the base URL ends with a version suffix (for example, `http://localhost:8080/v2`).
+
+Use `--dry-run` to display the URL without opening the browser:
+
+```bash
+c8 open operate --dry-run
+```
+
+Use `--profile` to open an application for a specific cluster:
+
+```bash
+c8 open operate --profile=prod
+```
+
+## Verbose mode
+
+Use the `--verbose` flag to see detailed information about credential resolution, plugin loading, and other internal operations:
+
+```bash
+c8 deploy ./process.bpmn --verbose
+c8 list pi --verbose
+```
+
 ## Debug mode
 
-Enable debug logging to see detailed information about credential resolution, plugin loading, and other internal operations:
+Enable debug logging with environment variables for even more detailed output:
 
 ```bash
 DEBUG=1 c8 deploy ./process.bpmn
