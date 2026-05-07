@@ -1,11 +1,11 @@
 ---
 id: configuration
-title: "Console configuration"
-sidebar_label: "Console configuration"
-description: "Read details on the configuration variables of Console Self-Managed."
+title: "Camunde Hub configuration"
+sidebar_label: "Camunda Hub configuration"
+description: "Read details on the configuration variables of Camunda Hub Self-Managed."
 ---
 
-Console Self-Managed can be configured using environment variables and configuration parameters.
+Camunda Hub Self-Managed can be configured using environment variables and configuration parameters.
 
 :::note
 Underscores in environment variables correspond to configuration file key levels.
