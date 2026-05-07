@@ -26,19 +26,20 @@ An execution listener is a blocking operation, meaning that the workflow executi
 
 You can configure execution listeners for individual BPMN elements, such as tasks, events, and gateways, as well as for the overall process and subprocesses.
 
-There are three types of execution listeners:
+There are four types of execution listeners:
 
 - **Before all**: Invoked only on the [multi-instance](/components/modeler/bpmn/multi-instance/multi-instance.md) body, _before_ any inner instances are created. Useful for initializing variables such as the `inputCollection`.
 - **Start**: Invoked _before_ the element is processed. Useful for setting variables or executing preconditions.
 - **End**: Invoked _after_ the element is processed. Useful for executing cleanup or post-processing tasks.
+- **Cancel**: Invoked on the process element _when the process instance is terminated_. Useful for cleanup, audit logging, or notifying external systems that the process did not complete.
 
 Each listener has three properties:
 
-| Property    | Description                                                                |
-| :---------- | :------------------------------------------------------------------------- |
-| `eventType` | Specifies when the listener is triggered (`beforeAll`, `start`, or `end`). |
-| `type`      | The name of the job type.                                                  |
-| `retries`   | The number of job retries.                                                 |
+| Property    | Description                                                                          |
+| :---------- | :----------------------------------------------------------------------------------- |
+| `eventType` | Specifies when the listener is triggered (`beforeAll`, `start`, `end`, or `cancel`). |
+| `type`      | The name of the job type.                                                            |
+| `retries`   | The number of job retries.                                                           |
 
 :::note
 If multiple listeners of the same `eventType` (such as multiple start listeners) are defined on the same activity, they are executed sequentially, one after the other, in the order defined in the BPMN model.
@@ -112,6 +113,12 @@ End listeners are invoked after applying the variable output mappings and before
 - If an end listener completes the job with variables, those variables are propagated to the element's parent scope, like
   variables from the output mappings. Subsequent listeners can access these variables.
 
+### `cancel` listeners
+
+Cancel listeners run when a process instance is terminated. They execute sequentially after all child elements have terminated and before the process reaches its final terminated state.
+
+- A cancel listener can read the process variables and complete the job with variables. The variables are merged into the process scope and visible to subsequent cancel listeners.
+
 ## Incident recovery
 
 During execution listener processing, issues can arise that lead to [incidents](/components/concepts/incidents.md). For example, these incidents can occur due to job execution failures or problems during expression evaluation.
@@ -126,7 +133,7 @@ If all retries are exhausted and the job still fails, the process halts, and an 
 
 Incidents can also occur during the evaluation of an execution listener's properties (for example, due to incorrect variable mapping or expression syntax).
 
-If this happens, all listeners of the same event type (`start` or `end`) that were processed before the failure are re-executed once the issue is resolved, even if they had previously completed successfully.
+If this happens, all listeners of the same event type (`start`, `end`, or `cancel`) that were processed before the failure are re-executed once the issue is resolved, even if they had previously completed successfully.
 
 ## Limitations
 
@@ -141,6 +148,9 @@ Execution listeners have the following limitations:
 
 - **`beforeAll`**: Supported only for multi-instance activities.
   - Earlier versions do not support the `beforeAll` event type and will reject deployments that use it.
+
+- **`cancel`**: Supported only on the process element.
+  - Earlier versions do not support the `cancel` event type and will reject deployments that use it.
 
 - **Duplicate listeners**: Execution listeners must have unique combinations of `eventType` and `type`.
   Defining multiple listeners with the same `eventType` and `type` results in a validation error. However, you can define listeners with the same `type` if they use different `eventType` values.

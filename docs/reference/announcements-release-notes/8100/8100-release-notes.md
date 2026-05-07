@@ -172,3 +172,15 @@ You can now:
 - Use the improved in-line variables display.
 
 This change helps navigate more complex data during operations and troubleshooting.
+
+### Orchestration Cluster
+
+#### Cancel execution listener
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/2768 -->
+
+Execution listeners now support a `cancel` event type on the process element. The cancel listeners run when a process instance is terminated — useful for cleanup, audit logging, or notifying external systems that the process did not complete.
+
+For details, see [`cancel` listeners](/components/concepts/execution-listeners.md#cancel-listeners).
