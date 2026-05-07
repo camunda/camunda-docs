@@ -61,7 +61,7 @@ To help with editor support, you can add example data to an element. Add a JSON 
 
 Providing this data is optional, but it's recommended if you want to take full advantage of the FEEL editor's suggestions. It is especially useful for variables that the modeler cannot discover automatically, such as variables created by [job workers](/components/concepts/job-workers.md) or passed as process start variables.
 
-This data will also be used while [playing your process](/components/modeler/web-modeler/validation/play-your-process.md) to set variables from the respective elements when performing the following actions:
+This data will also be used while [playing your process](/components/hub/workspace/modeler/validation/play-your-process.md) to set variables from the respective elements when performing the following actions:
 
 - Starting a new instance
 - Completing a job

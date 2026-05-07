@@ -5,7 +5,7 @@ import IconAoLlmImg from "../assets/icon-llm.png";
 import IconOptimize from "../assets/icon-optimize.png";
 import IconConnectorImg from "../connectors/img/icon-connectors.png";
 import IconOperate from "../assets/icon-operate.png";
-import IconTest from "../modeler/web-modeler/idp/img/icon-prereqs.png";
+import IconTest from "../hub/workspace/modeler/idp/img/icon-prereqs.png";
 import IconRAG from "../assets/icon-long-term-memory.png";
 
 // Get started cards on introduction page

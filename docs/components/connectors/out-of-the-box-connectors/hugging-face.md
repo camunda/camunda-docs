@@ -32,7 +32,7 @@ Fill the **Hugging Face API key** field with a valid Hugging Face API key.
 
 Keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (for example, `HUGGING_FACE_SECRET`) so you can reference it later in the connector.
 
 ## Payload

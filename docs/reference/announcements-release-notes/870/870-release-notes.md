@@ -61,13 +61,13 @@ Connector manage and run provides a consolidated view of your running inbound co
 - Real-time alerts will notify operators when connectors are not running, preventing unnoticed downtimes.
 - Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
 
-To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
+To learn more about this feature, see [manage your connectors](/components/hub/organization/manage-clusters/manage-connectors.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2647 https://github.com/camunda/product-hub/issues/1063 -->
 
 ### Custom JWKS and JWT Algorithms Support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Self-Managed customers now have [full control over JWT configurations](/self-managed/components/modeler/web-modeler/configuration/configuration.md) for enhanced security and compatibility.
+Self-Managed customers now have [full control over JWT configurations](/self-managed/components/hub/configuration/modeler-configuration.md) for enhanced security and compatibility.
 
 <!--- https://github.com/camunda/web-modeler/issues/11571 --->
 
@@ -110,7 +110,7 @@ Use intelligent document processing (IDP) to integrate automated document proces
 - IDP uses artificial intelligence (AI) and machine learning (ML) to identify, extract, and organize data from your structured and unstructured documents into a structured format you can use in your processes.
 - For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
 
-To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
+To learn more about this feature, see [intelligent document processing](/components/hub/workspace/modeler/intelligent-document-processing.md).
 
 ### Process applications in Desktop Modeler <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
 
@@ -120,7 +120,7 @@ We have enabled developers to manage and work with multi-file BPMN projects dire
 
 ### Process application versioning, README, and review <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/modeler/web-modeler/process-applications/process-application-versioning.md), and [readable for everyone](/components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#review) and approved.
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/hub/workspace/manage-projects/project-versioning.md), and [readable for everyone](/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/hub/workspace/manage-projects/project-pipeline.md#review) and approved.
 
 <!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
 
@@ -132,7 +132,7 @@ Create and append tasks with resources available in the current project and proc
 
 ### Unified deployment experience from Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-[Authenticate deployments](/components/modeler/web-modeler/process-applications/process-application-versioning.md) with your existing user tokens, rather than entering shared secrets. This further simplifies the deployment process beyond our 8.6 release.
+[Authenticate deployments](/components/hub/workspace/manage-projects/project-versioning.md) with your existing user tokens, rather than entering shared secrets. This further simplifies the deployment process beyond our 8.6 release.
 
 <!--- https://github.com/camunda/product-hub/issues/2073 --->
 
@@ -205,7 +205,7 @@ Cluster capacity provides a high-level overview of how well a cluster is coping 
 - Use this information to check and monitor if a cluster is appropriately sized for its workload.
 - Cluster capacity can also be used as an indicator of cluster health. For example, a cluster running at maximum capacity can be an indicator of poor cluster responsiveness.
 
-To learn more about this feature, see [cluster capacity](/components/console/manage-clusters/cluster-capacity.md).
+To learn more about this feature, see [cluster capacity](/components/hub/organization/manage-clusters/cluster-capacity.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2346 -->
 
@@ -217,10 +217,10 @@ Use intelligent document processing (IDP) to integrate automated document proces
 - For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
 
 :::note
-IDP only offers support for Camunda 8 Self-Managed development deployment via Docker with the 8.7.0-alpha5 release (see [example deployment](/components/modeler/web-modeler/idp/idp-configuration.md#idp-docker-example)). Full production support for Camunda 8 SaaS and Camunda 8 Self-Managed is planned for delivery with the 8.7 release. Camunda 8 Run is not supported as IDP requires Web Modeler.
+IDP only offers support for Camunda 8 Self-Managed development deployment via Docker with the 8.7.0-alpha5 release (see [example deployment](/components/hub/workspace/modeler/idp/idp-configuration.md#idp-docker-example)). Full production support for Camunda 8 SaaS and Camunda 8 Self-Managed is planned for delivery with the 8.7 release. Camunda 8 Run is not supported as IDP requires Web Modeler.
 :::
 
-To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
+To learn more about this feature, see [intelligent document processing](/components/hub/workspace/modeler/intelligent-document-processing.md).
 
 <!-- https://github.com/camunda/camunda-docs/issues/4575, https://github.com/camunda/product-hub/issues/2521 -->
 
@@ -237,7 +237,7 @@ Process landscape visualization provides a comprehensive, hierarchical view of a
 - Visualize the entire process landscape of a project in a single, interactive interface.
 - Drill down from high-level processes to detailed sub-processes and activities.
 
-To learn more about this feature, see [process landscape visualization](/components/modeler/web-modeler/process-landscape-visualization.md).
+To learn more about this feature, see [process landscape visualization](/components/hub/workspace/modeler/process-landscape-visualization.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2432 -->
 
@@ -258,7 +258,7 @@ Web Modeler now supports stronger governance and change control. This ensures sa
 - Reviews cannot be performed by the user who created the process application version, and the reviewer is logged in the version history of a process application.
 - Admins can enable production deployments for reviewed process applications as an alternative to using their own deployment pipeline.
 
-To learn more about this feature, see [process governance](/components/modeler/web-modeler/process-applications/process-application-pipeline.md).
+To learn more about this feature, see [process governance](/components/hub/workspace/manage-projects/project-pipeline.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2583 -->
 
@@ -366,7 +366,7 @@ Web Modeler now supports native integration between a process application and a 
 
 Non-technical users in orgs running GitLab can now easily access the files in their source of truth, collaborate cross-platform with Desktop Modeler users, and contribute changes to a feature branch that can be easily merged and deployed.
 
-To learn more about this feature, see [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md).
+To learn more about this feature, see [Git sync](/components/hub/workspace/manage-projects/git-sync.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2502 -->
 
@@ -397,7 +397,7 @@ For example, you can validate your process by creating and rerunning scenarios f
 - As you save completed instances as scenarios, Play calculates the percent of elements covered by the scenario suite.
 - This is the first step towards bringing automated testing into Web Modeler, and enabling business and IT to collaborate on automated tests.
 
-To learn more about this feature, see [Play scenarios](/components/modeler/web-modeler/validation/play-your-process.md#scenarios).
+To learn more about this feature, see [Play scenarios](/components/hub/workspace/modeler/validation/play-your-process.md#scenarios).
 
 <!-- https://github.com/camunda/product-hub/issues/2073 -->
 
@@ -551,7 +551,7 @@ You can export activity logs as JSON or CSV files from the Console UI or API.
 - **UI:** On the Organization management **Activity** tab, click **Export activity**.
 - **API:** Send a GET request to the Management API `GetJson` or `GetCsv` endpoint.
 
-To learn more about this feature, see [view organization activity](/components/console/manage-organization/view-organization-activity.md).
+To learn more about this feature, see [view organization activity](/components/hub/organization/manage-organization-settings/view-organization-activity.md).
 
 <!-- https://github.com/camunda/camunda/issues/24374, https://github.com/camunda/camunda/issues/24385, https://github.com/camunda/camunda/issues/24377 -->
 
@@ -639,7 +639,7 @@ You can now configure and automatically generate a custom connector template in 
 - You can start from a blank template or import an existing API definition such as an OpenAPI specification, Swagger specification, or a Postman collection.
 - For example, download a Postman collection as a YAML file, import this into the generator, and choose which methods to include in the generated template.
 
-To learn more about generating connector templates, see [generate a connector template](/components/modeler/web-modeler/element-templates/element-template-generator.md).
+To learn more about generating connector templates, see [generate a connector template](/components/hub/workspace/modeler/element-templates/element-template-generator.md).
 
 ### Monorepo Git sync <span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 
@@ -651,7 +651,7 @@ When configuring Git sync in Web Modeler, define the optional `/path` option to 
 - Sync with your main branch to perform visual diffing, collaboration, and manual testing in Web Modeler. Remember not to make any changes in this branch.
 - Edit the `/path` for multiple process applications to integrate Web Modeler with your existing monorepo and code assets.
 
-To learn more about configuring Git sync, see [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md).
+To learn more about configuring Git sync, see [Git sync](/components/hub/workspace/manage-projects/git-sync.md).
 
 ### Resize clusters on SaaS <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span>
 
@@ -662,7 +662,7 @@ Enterprise customers can flexibly resize their clusters to adjust capacity and p
 - Increase or decrease the cluster size at any time by adding or removing hosting packages.
 - For example, increase the cluster size to improve performance and add capacity, or decrease the cluster size to free up reservations for another cluster.
 
-To learn more about this feature, see [resize a cluster](/components/console/manage-clusters/manage-cluster.md#resize-a-cluster).
+To learn more about this feature, see [resize a cluster](/components/hub/organization/manage-clusters/manage-cluster.md#resize-a-cluster).
 
 ### Unified deployment experience for Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 
