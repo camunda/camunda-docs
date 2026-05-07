@@ -144,8 +144,8 @@ Also included in this namespace are components that are tightly integrated with 
 
 As shown in the [architecture diagram](#web-modeler-and-console), this namespace contains:
 
-- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) — browser-based BPMN editor
-- [Console](/self-managed/components/console/overview.md) — administrative interface
+- Web Modeler — browser-based BPMN editor
+- Console — administrative interface
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
 
 This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).

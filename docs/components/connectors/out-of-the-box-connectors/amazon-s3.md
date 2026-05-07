@@ -22,7 +22,7 @@ Learn more about Amazon S3 in the [Amazon Simple Storage Service Documentation](
 
 :::note
 Use Camunda secrets to store credentials and avoid exposing sensitive information from the process.
-See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 :::
 
 ## Create an Amazon S3 connector task

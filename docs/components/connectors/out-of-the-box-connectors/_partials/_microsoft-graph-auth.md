@@ -1,6 +1,6 @@
 ### Bearer token
 
-Select **Bearer token** in the **Type** dropdown in the **Authentication** section and enter your bearer token value. Use [Camunda secrets](/components/console/manage-clusters/manage-secrets.md) to avoid exposing sensitive credentials.
+Select **Bearer token** in the **Type** dropdown in the **Authentication** section and enter your bearer token value. Use [Camunda secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to avoid exposing sensitive credentials.
 
 :::note
 Bearer tokens expire after **60–90 minutes**. The connector cannot refresh them automatically, so you must provide a new valid access token before expiry.
@@ -35,7 +35,7 @@ Select **Client credentials** in the **Type** dropdown in the **Authentication**
 6. Click **Add**.
 7. Copy the secret value immediately. This value is only displayed once and cannot be retrieved later.
 
-Store your credentials securely using [Camunda secrets](/components/console/manage-clusters/manage-secrets.md).
+Store your credentials securely using [Camunda secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 
 ### Refresh token
 

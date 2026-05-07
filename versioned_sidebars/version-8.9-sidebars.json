@@ -251,6 +251,7 @@
             "components/agentic-orchestration/monitor-ai-agents",
             "components/agentic-orchestration/analyze-ai-agents",
             "components/agentic-orchestration/test-ai-agents",
+            "components/agentic-orchestration/rag-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"
           ]
@@ -265,6 +266,7 @@
           "items": [
             "components/modeler/web-modeler/idp/idp-configuration",
             "components/modeler/web-modeler/idp/idp-applications",
+            "components/modeler/web-modeler/idp/idp-document-classification",
             {
               "type": "category",
               "label": "Document extraction",

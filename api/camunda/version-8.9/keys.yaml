@@ -76,12 +76,13 @@ components:
       allOf:
         - $ref: "#/components/schemas/LongKey"
     DecisionEvaluationInstanceKey:
-      description: System-generated key for a decision evaluation instance.
+      description: |
+        System-generated identifier for a decision evaluation instance. It is composed of the
+        parent decision evaluation key and the 1-based index of the evaluated decision within
+        that evaluation, joined by a hyphen (format: `<decisionEvaluationKey>-<index>`).
       format: DecisionEvaluationInstanceKey
-      example: "2251799813684367"
       type: string
-      allOf:
-        - $ref: "#/components/schemas/LongKey"
+      example: 2251799813684367-1
     DecisionEvaluationKey:
       allOf:
         - $ref: "#/components/schemas/LongKey"

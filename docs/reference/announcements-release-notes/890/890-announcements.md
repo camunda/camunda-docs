@@ -13,7 +13,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 | Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
 | ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| 14 April 2026      | 13 October 2027              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -1387,7 +1387,7 @@ This enhancement ensures consistency across environments and simplifies setup fo
 
 With Camunda 8.9, you can now deploy forms independently. This enhancement provides greater control over what is deployed and when, enabling more precise management of changes and updates across environments.
 
-As part of this improvement, we have removed the automatic deployment of [linked forms](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md). Forms must now be explicitly deployed, giving teams finer control over versioning, release timing, and deployment scope.
+As part of this improvement, we have removed the automatic deployment of [linked forms](/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking.md). Forms must now be explicitly deployed, giving teams finer control over versioning, release timing, and deployment scope.
 
 This change supports more predictable deployments and helps teams manage updates with greater confidence and flexibility.
 
@@ -1412,7 +1412,7 @@ You can now invite users who have not yet logged in to Web Modeler by entering t
 
 Inviting the entire organization only applies to users who have logged in at least once.
 
-<p class="link-arrow">[Add users to projects](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+<p class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</p>
 
 </div>
 </div>
@@ -1430,7 +1430,7 @@ When using JSON as the output for the logs the structure has slightly changed:
 - `logger`: This field is now renamed to `loggerName`.
 - `thread`: Previously represented the name of the thread. Now we have an object named `threadContext` with a field `name` that has this value.
 
-See [Logging documentation](/self-managed/components/modeler/web-modeler/configuration/logging.md#json-structure) for more information.
+See [Logging documentation](/self-managed/components/hub/configuration/logging.md#json-structure) for more information.
 
 </div>
 </div>
