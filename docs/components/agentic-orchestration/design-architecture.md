@@ -63,11 +63,11 @@ In production agentic systems, model routing and fallback (switching between LLM
 Camunda operates at the **orchestration layer**, complementing these gateways by providing production-level visibility and control over the outcomes of routing decisions:
 
 - **Observability**: Track which model and provider handled each agent interaction through process variables and [Operate](/components/operate/operate-introduction.md). When your gateway routes to a fallback model, Camunda can capture this context, including the model used, the provider, and the reason for fallback, making every decision auditable at the process level.
-- **Process-level reasoning**: Use gateway-reported metadata (for example, `model_used`, `fallback_reason`) in downstream process logic. For example, a BPMN gateway can route to a human review step when a fallback model was used, or flag the instance for compliance review.
+- **Process-level reasoning**: Use gateway-reported metadata, like `model_used` and `fallback_reason`, in downstream process logic. For example, a BPMN gateway can route to a human review step when a fallback model was used, or it can flag the instance for compliance review.
 - **Resilience patterns**: Combine Camunda's built-in retry and incident handling with your gateway's routing logic. If all providers fail, Camunda can escalate to a human task or trigger an alternative process path rather than silently failing.
 
 :::tip
-When connecting your AI agent to an LLM through an AI gateway, configure the gateway to return routing metadata (such as which model served the request and why). Store this metadata in process variables so you can observe and act on it in your BPMN process.
+When connecting your AI agent to an LLM through an AI gateway, configure the gateway to return routing metadata, such as which model served the request and why. Store this metadata in process variables so you can observe and act on it in your BPMN process.
 :::
 
 ### How execution works in an AI agent
