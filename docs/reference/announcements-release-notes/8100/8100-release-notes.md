@@ -38,6 +38,18 @@ import PageDescription from '@site/src/components/PageDescription';
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 12 May 2026  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.10.0-alpha1)</li></ul> | -    |
 
+### Agentic orchestration
+
+#### Standalone evaluation assertions for judge and semantic similarity
+
+<!-- https://github.com/camunda/camunda/issues/46130
+https://github.com/camunda/camunda/issues/46130
+https://github.com/camunda/camunda/issues/49548 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span></div>
+
+Camunda Process Test now exposes **judge-based evaluation** and **semantic similarity evaluation** as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
+
 ### Camunda Hub
 
 #### Usage & billing metrics for 2025 enterprise license model
@@ -87,6 +99,16 @@ Execution listeners now support configurable headers, aligned with service task 
 - In BPMN, execution listeners can define `<zeebe:taskHeaders>`. The headers are passed to the listener’s job worker alongside any base-element headers, with listener headers overriding on key conflicts.
 - In Modeler, you can configure execution listener headers visually (name/value pairs) without editing BPMN XML.
 - Listener workers can consume these headers as metadata and configuration parameters using the same patterns as service task job workers.
+
+### Integrations
+
+#### Microsoft Teams routing and permission-aware task actions
+
+<!-- https://github.com/camunda/product-hub/issues/3424 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Integrations">Integrations</span></div>
+
+Camunda for Microsoft Teams now supports routing incident and task collaboration to private channels, shared channels, and group chats. Notifications and task actions in Teams now align with Camunda assignment and access rules, ensuring that only eligible users are notified and allowed to act.
 
 ### Operate
 
