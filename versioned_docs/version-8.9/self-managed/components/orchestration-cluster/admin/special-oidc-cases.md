@@ -60,14 +60,14 @@ The exact property values depend on your OIDC provider and environment.
 
 ## Specify resources in token and authorization requests
 
-The Orchestration Cluster supports [RFC 8707 (Resource Indicators for OAuth 2.0)](https://datatracker.ietf.org/doc/html/rfc8707), which allows you to specify target resources when requesting access tokens and performing authorization with your OIDC provider.
+The Orchestration Cluster supports [RFC 8707 (Resource Indicators for OAuth 2.0)](https://datatracker.ietf.org/doc/html/rfc8707). With this, you can specify target resources when requesting access tokens and performing authorization with your OIDC provider.
 
 This is useful when your OIDC provider issues different tokens depending on the intended resource (audience). By including resource indicators in token and authorization requests, you can ensure the Orchestration Cluster receives tokens with the appropriate audience claims for your environment.
 
-Configure resource indicators using the `camunda.security.authentication.oidc.resource` property:
-
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
+
+Configure resource indicators using the `camunda.security.authentication.oidc.resource` property:
 
 ```yaml
 camunda:
@@ -82,6 +82,8 @@ camunda:
 </TabItem>
 
 <TabItem value="env">
+
+Configure resource indicators using the `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_RESOURCE_0` environment variable:
 
 ```
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_RESOURCE_0=https://api.example.com
