@@ -58,11 +58,11 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ENDSESSIONENDPOINTURI=http://<Docker networ
 
 The exact property values depend on your OIDC provider and environment.
 
-## Specify resource servers in token requests
+## Specify resources in token and authorization requests
 
-The Orchestration Cluster supports [RFC 8707 (Resource Indicators for OAuth 2.0)](https://datatracker.ietf.org/doc/html/rfc8707), which allows you to specify target resource servers when requesting access tokens from your OIDC provider.
+The Orchestration Cluster supports [RFC 8707 (Resource Indicators for OAuth 2.0)](https://datatracker.ietf.org/doc/html/rfc8707), which allows you to specify target resources when requesting access tokens and performing authorization with your OIDC provider.
 
-This is useful when your OIDC provider issues different tokens depending on the intended resource server (audience). By including resource indicators in the token request, you can ensure the Orchestration Cluster receives tokens with the appropriate audience claims for your environment.
+This is useful when your OIDC provider issues different tokens depending on the intended resource (audience). By including resource indicators in token and authorization requests, you can ensure the Orchestration Cluster receives tokens with the appropriate audience claims for your environment.
 
 Configure resource indicators using the `camunda.security.authentication.oidc.resource` property:
 
@@ -84,8 +84,8 @@ camunda:
 <TabItem value="env">
 
 ```
-CAMUNDA_SECURITY_AUTHENTICATION_OIDC_RESOURCE[0]=https://api.example.com
-CAMUNDA_SECURITY_AUTHENTICATION_OIDC_RESOURCE[1]=https://another-resource.example.com
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_RESOURCE_0=https://api.example.com
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_RESOURCE_1=https://another-resource.example.com
 ```
 
 </TabItem>
