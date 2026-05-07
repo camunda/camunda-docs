@@ -14,7 +14,7 @@ import PageDescription from '@site/src/components/PageDescription';
 The Processes MCP Server is a capability of the Orchestration Cluster that exposes your deployed BPMN processes as callable tools through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP).
 
 - Any process equipped with an [MCP start event](../../components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) element template is automatically registered as an MCP tool when deployed.
-- MCP clients discover these tools at runtime and invoke them by name. Each invocation starts a new process instance and returns the result when the process completes.
+- MCP clients discover these tools at runtime and invoke them by name. Each invocation starts a new process instance and returns the started process instance key immediately.
 - The server shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model as the Orchestration Cluster REST API.
 
 :::note

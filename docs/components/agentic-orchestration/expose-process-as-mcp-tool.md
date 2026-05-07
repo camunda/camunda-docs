@@ -57,11 +57,10 @@ LLMs use the **What it does**, **Which inputs it needs**, **When to use**, and *
 The rest of the process runs as normal after the MCP start event. When an MCP client calls the tool:
 
 1. The Processes MCP Server starts a new process instance with the tool call arguments mapped as process variables.
-2. The process executes.
-3. When the process instance completes, the Processes MCP Server returns the process output variables to the MCP client as the tool result.
+2. The server immediately returns the started process instance key to the MCP client.
 
 :::tip Align LLM inputs with process variables
-You can map the incoming tool call arguments from the LLM to the process variables your process expects using **Output mapping**. If you don't define any eplicit output mapping, all incoming tool call arguments become process variables with the same names.
+You can map the incoming tool call arguments from the LLM to the process variables your process expects using **Output mapping**. If you don't define any explicit output mapping, all incoming tool call arguments become process variables with the same names.
 :::
 
 ## Step 4: Deploy the process
