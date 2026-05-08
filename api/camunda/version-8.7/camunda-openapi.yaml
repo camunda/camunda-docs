@@ -25,6 +25,24 @@ servers:
         default: http
         description: The schema of the Camunda 8 REST API server.
 
+tags:
+  - name: Clock
+  - name: Cluster
+  - name: Decision definition
+  - name: Decision instance
+  - name: Decision requirements
+  - name: Document
+  - name: Element instance
+  - name: Flow node Instance
+  - name: Incident
+  - name: Job
+  - name: License
+  - name: Message
+  - name: Process instance
+  - name: Resource
+  - name: Signal
+  - name: User task
+
 paths:
   /topology:
     get:
