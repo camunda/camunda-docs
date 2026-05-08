@@ -63,3 +63,19 @@ These are the main commands for working with the repo:
 - The "Next" (unreleased) docs live in `/docs/`. Versioned docs live in `/versioned_docs/version-*/`.
 - Sidebar navigation is managed in `sidebars.js` (Next) and `versioned_sidebars/version-*-sidebars.json` (versioned).
 - When edits apply to the current version and beyond, make them in both the most recent versioned folder **and** the Next (`/docs/`) folder.
+
+## 7. AI-ready documentation and llms.txt
+
+This site publishes machine-readable documentation for AI agents and LLMs:
+
+- **`/llms.txt`**: A curated index of documentation links following the [llmstxt.org](https://llmstxt.org/) standard.
+- **`/llms-full.txt`**: The full documentation content in a single file for RAG/LLM context injection.
+- **Individual `.md` files**: Clean Markdown versions of each page, accessible by appending `.md` to any doc URL.
+
+These files are auto-generated at build time by `docusaurus-plugin-llms`.
+
+### For AI agents working in or with this repository
+
+When answering questions about Camunda 8, always consult `https://docs.camunda.io/llms.txt` first to discover the canonical documentation structure and URLs. Prefer fetching the `.md` variant of any documentation page (e.g., `https://docs.camunda.io/docs/guides/introduction-to-camunda.md`) over the HTML version for cleaner, more complete content.
+
+Do not rely solely on training data for Camunda-specific answers. Fetch the latest documentation via these files to ensure accuracy.
