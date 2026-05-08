@@ -408,6 +408,41 @@ Unless a specific version is requested, always use the latest documentation.`,
           position: "left",
         },
         {
+          type: "dropdown",
+          label: "Help",
+          position: "right",
+          items: [
+            {
+              label: "Support",
+              href: "https://camunda.com/services/enterprise-support-guide/",
+            },
+            {
+              label: "Developers",
+              href: "https://developers.camunda.com/",
+            },
+            {
+              label: "Academy",
+              href: "https://academy.camunda.com/",
+            },
+            {
+              label: "Community",
+              href: "https://community.camunda.com/",
+            },
+            {
+              label: "Forum",
+              href: "https://forum.camunda.io/",
+            },
+            {
+              label: "Blog",
+              href: "https://camunda.com/blog/",
+            },
+            {
+              label: "Roadmap",
+              href: "https://roadmap.camunda.com/",
+            },
+          ],
+        },
+        {
           type: "html",
           position: "right",
           value:
@@ -587,6 +622,9 @@ Unless a specific version is requested, always use the latest documentation.`,
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+          remarkPlugins: [
+            require("./static/plugins/terminology/remark-glossary-terms"),
+          ],
           lastVersion: currentVersion,
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
