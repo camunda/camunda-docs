@@ -263,9 +263,19 @@ module.exports = {
           items: [
             "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/monitor-ai-agents",
-            "components/agentic-orchestration/analyze-ai-agents",
-            "components/agentic-orchestration/test-ai-agents",
+            {
+              type: "category",
+              label: "Evaluate your AI agents",
+              link: {
+                type: "doc",
+                id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
+              },
+              items: [
+                "components/agentic-orchestration/monitor-ai-agents",
+                "components/agentic-orchestration/analyze-ai-agents",
+                "components/agentic-orchestration/test-ai-agents",
+              ],
+            },
             "components/agentic-orchestration/rag-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
