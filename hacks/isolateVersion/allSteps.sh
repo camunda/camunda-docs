@@ -1,8 +1,12 @@
 #!/bin/bash   
 set -e # exit at first error
 
-# Before running this script make sure this version is correct!
-ARCHIVED_VERSION="8.3"
+# Before running this script make sure the version is set
+if [[ -z "${ARCHIVED_VERSION}" ]]
+then
+    echo 'Set the archive version: `export ARCHIVED_VERSION=8.x`'
+    exit 1
+fi
 
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
