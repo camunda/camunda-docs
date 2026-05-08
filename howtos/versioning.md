@@ -117,7 +117,7 @@ https://github.com/camunda/camunda-docs/commits/unsupported/8.6/
 Change the version to your archived version.
 
 <details>
-    <summary>Reference video: archiving 8.5 with Mark and Maxim</summary>
+    <summary>Reference video: archiving 8.5</summary>
 
 You can view a video of the archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival > Archival steps).
 
