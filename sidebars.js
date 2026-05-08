@@ -271,9 +271,9 @@ module.exports = {
                 id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
               },
               items: [
-                "components/agentic-orchestration/monitor-ai-agents",
-                "components/agentic-orchestration/analyze-ai-agents",
-                "components/agentic-orchestration/test-ai-agents",
+                "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+                "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+                "components/agentic-orchestration/evaluate-agents/test-ai-agents",
               ],
             },
             "components/agentic-orchestration/rag-ai-agents",

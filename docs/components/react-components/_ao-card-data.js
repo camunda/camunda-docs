@@ -35,7 +35,7 @@ export const fundamentalCards = [
   },
   {
     link: "../evaluate-agents-overview/",
-    title: "Evaluate AI agents",
+    title: "Evaluate your AI agents",
     image: IconAoDesignImg,
     description:
       "Evaluate the performance and effectiveness of your AI agents.",
