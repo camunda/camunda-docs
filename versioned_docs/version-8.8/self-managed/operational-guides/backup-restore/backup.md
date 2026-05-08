@@ -75,6 +75,18 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
 
    </Tabs>
 
+### Additional considerations
+
+Each Camunda 8 backup is identified by a backup ID. In this guide, `x` is used as a placeholder for this backup ID. A complete backup of a Camunda 8 cluster with backup ID `x` consists of:
+
+- A backup of Zeebe with ID `x`
+- A backup of Optimize with ID `x`
+- A backup of Web Applications (Operate, Tasklist) with ID `x`
+
+The backup ID must be an integer greater than the previous backup's ID.
+
+Optimize is not part of the Web Applications backup API and needs to be executed separately to successfully make a backup. Depending on your deployment configuration, you may not have Optimize deployed. It is safe to ignore the backup instructions for Optimize if it is not deployed.
+
 ### 1. Soft pause exporting in Zeebe
 
 This step uses the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md?exporting=softPause#exporting-api).

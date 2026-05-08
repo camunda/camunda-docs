@@ -74,7 +74,13 @@ This ensures high availability while preserving the integrity of the data snapsh
 
 ### Additional considerations
 
-A backup `x` of Camunda 8 using Elasticsearch or OpenSearch consists of backup `x` of Zeebe, backup `x` of Optimize, and backup `x` of Web Applications (Operate, Tasklist). The backup ID must be an integer and greater than the previous backups.
+Each Camunda 8 backup is identified by a backup ID. In this guide, `x` is used as a placeholder for this backup ID. A complete backup of a Camunda 8 cluster with backup ID `x` consists of:
+
+- A backup of Zeebe with ID `x`
+- A backup of Optimize with ID `x`
+- A backup of Web Applications (Operate, Tasklist) with ID `x`
+
+The backup ID must be an integer greater than the previous backup's ID.
 
 Optimize is not part of the Web Applications backup API and needs to be executed separately to successfully make a backup. Depending on your deployment configuration, you may not have Optimize deployed. It is safe to ignore the backup instructions for Optimize if it is not deployed.
 

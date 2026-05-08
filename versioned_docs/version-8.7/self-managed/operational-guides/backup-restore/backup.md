@@ -20,6 +20,15 @@ To create a backup you must complete the following main steps:
 
 You can also optionally [back up your Web Modeler data](#back-up-web-modeler-data).
 
+Each Camunda 8 backup is identified by a backup ID. In this guide, `x` is used as a placeholder for this backup ID. A complete backup of a Camunda 8 cluster with backup ID `x` consists of:
+
+- A backup of Zeebe with ID `x`
+- A backup of Optimize with ID `x`
+- A backup of Operate with ID `x`
+- A backup of Tasklist with ID `x`
+
+The backup ID must be an integer greater than the previous backup's ID.
+
 :::caution before you begin
 
 - To create a consistent backup, you **must** complete backing up the WebApps first before backing up the Zeebe Cluster.
