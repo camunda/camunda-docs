@@ -135,6 +135,18 @@ You can view a video of the archival process in the documentation team Google Dr
 
 Make the manual changes described by the output of the `allSteps.sh` script in a new PR. See [this PR](https://github.com/camunda/camunda-docs/pull/6586) as an example. You may need to remove generated API reference docs, and tidy up any broken links in this step, to get the build green and successful.
 
+Postprocess the docs to help automate some of the changes you need to make in this step:
+
+```sh
+cd hacks/archiveVersion
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python 2-postprocess.py
+```
+
+Read the docstring in the postprocess file for details.
+
 ### Merge all PRs
 
 Merge all the pull requests submitted so far. Then, confirm these changes are successfully published to the associated staging location: `https://stage.unsupported.docs.camunda.io/8.x/`.

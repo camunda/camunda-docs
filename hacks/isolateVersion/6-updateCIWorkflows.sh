@@ -85,5 +85,8 @@ else
   sed -i "s/DOCS_SITE_BASE_URL: \//DOCS_SITE_BASE_URL: \/$ARCHIVED_VERSION\//" .github/workflows/publish-stage.yaml
 fi
 
+# 3. remove check-format
+rm .github/workflows/check-format.yaml
+
 git add .github/workflows
 git commit -m "archiving($ARCHIVED_VERSION): update CI workflows"
