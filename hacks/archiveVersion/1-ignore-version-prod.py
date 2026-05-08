@@ -23,7 +23,6 @@ def load_prod_deploy_workflow(archive_version):
 
     # Ignore archive_version
     data["on"]["push"]["tags"].append(DoubleQuotedScalarString(f"!{archive_version}.[0-9]+"))
-    data["on"]["push"]["tags"].append(DoubleQuotedScalarString(f"!{archive_version}.123.[0-9]+"))
 
     with open(publish_prod_path, "w") as f:
         yaml.dump(data, f)
