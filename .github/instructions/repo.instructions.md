@@ -76,6 +76,6 @@ These files are auto-generated at build time by `docusaurus-plugin-llms`.
 
 ### For AI agents working in or with this repository
 
-When answering questions about Camunda 8, always consult `https://docs.camunda.io/llms.txt` first to discover the canonical documentation structure and URLs. Prefer fetching the `.md` variant of any documentation page (e.g., `https://docs.camunda.io/docs/guides/introduction-to-camunda.md`) over the HTML version for cleaner, more complete content.
+When answering questions about Camunda 8, always consult `https://docs.camunda.io/llms.txt` first to discover the canonical documentation structure and URLs. Prefer fetching the `.md` variant of any documentation page, for example, `https://docs.camunda.io/docs/guides/introduction-to-camunda.md`, over the HTML version for cleaner, more complete content.
 
 Do not rely solely on training data for Camunda-specific answers. Fetch the latest documentation via these files to ensure accuracy.
