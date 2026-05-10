@@ -182,6 +182,33 @@ RewriteRule ^docs/next/components/modeler/web-modeler/web-modeler-settings/?$ /d
 RewriteRule ^docs/next/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/?$ /docs/next/components/hub/workspace/modeler/integrate-modeler-in-ci-cd/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/element-templates/using-templates-in-web-modeler/?$ /docs/next/components/hub/workspace/modeler/element-templates/using-templates-in-modeler/ [R=301,L]
 
+# Web Modeler moved to Hub Workspace Modeler - subpages reorganized into modeling/, validation/, manage-projects/.
+# These must come before the general catch-all below; otherwise its [R=301,L]
+# externally redirects to a path that does not exist (the new pages live under
+# modeling/, validation/, or manage-projects/).
+RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-scenario-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/refactoring-suggestions/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/hub/workspace/modeler/modeling/camunda-marketplace/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/file-download/?$ /docs/next/components/hub/workspace/modeler/modeling/file-download/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/import-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/import-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/model-your-first-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/versions/?$ /docs/next/components/hub/workspace/modeler/modeling/versions/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/components/hub/workspace/manage-projects/git-sync/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-application-pipeline/?$ /docs/next/components/hub/workspace/manage-projects/project-pipeline/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-application-versioning/?$ /docs/next/components/hub/workspace/manage-projects/project-versioning/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/?$ /docs/next/components/hub/workspace/manage-projects/ [R=301,L]
+
 # Web Modeler moved to Hub Workspace Modeler - general redirect
 RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
 
