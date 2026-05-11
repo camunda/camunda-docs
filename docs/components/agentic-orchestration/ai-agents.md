@@ -21,7 +21,7 @@ Start building and integrating AI agents into your end-to-end processes.
 ## Why tool documentation in ad-hoc sub-processes matters
 
 In an AI agent model, each BPMN activity inside an ad-hoc sub-process is effectively a tool exposed to the LLM.
-The activity name its documentation are used by the LLM to decide what to do next.
+The activity name and its documentation are used by the LLM to decide what to do next.
 
 Clear, behavior-oriented descriptions help the LLM:
 
