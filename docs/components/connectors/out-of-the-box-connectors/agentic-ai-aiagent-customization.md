@@ -136,10 +136,15 @@ public class MyCustomAgentInitializer implements AgentInitializer {
 
 The AI Agent connector includes a set of default storage backends for conversation history, but you can also implement your own to meet specific needs. Similar to the agent initialization example above, you can register a bean that implements the `ConversationStore` interface to provide your own storage implementation.
 
+A custom store needs three pieces:
+
+- A `ConversationStore` bean — entry point. Its `type()` value is referenced from the element template.
+- A `ConversationSession` returned by `createSession(...)` — performs the actual load and store for a single agent turn. The caller manages its lifecycle via try-with-resources, so override `close()` if your session holds external resources (connections, clients).
+- A `ConversationContext` implementation — the storage cursor persisted as part of the `agentContext` process variable. Must be annotated with `@JsonTypeName` and registered with the runtime `ObjectMapper`.
+
 The following example shows how to implement a custom store using a Spring Data JPA repository. The value returned by the `type()` method is used to identify the store type in the AI Agent connector configuration.
 
 ```java
-
 @Component
 public class MyConversationStore implements ConversationStore {
 
@@ -157,27 +162,95 @@ public class MyConversationStore implements ConversationStore {
     }
 
     @Override
-    @Transactional
-    public <T> T executeInSession(
+    public ConversationSession createSession(
+            AgentExecutionContext executionContext, AgentContext agentContext) {
+        return new MyConversationSession(repository, executionContext);
+    }
+
+    @Override
+    public void onJobCompleted(
+            AgentExecutionContext executionContext, AgentContext committedContext) {
+        // Best-effort hook fired after Zeebe accepted the job completion. Optional: use
+        // this to update a projection, archive the previous record, emit an event, etc.
+    }
+
+    @Override
+    public void onJobCompletionFailed(
             AgentExecutionContext executionContext,
-            AgentContext agentContext,
-            ConversationSessionHandler<T> sessionHandler) {
-        // optionally read parameters from execution context
-        final var session = new MyConversationSession(repository, executionContext.jobContext());
-        return sessionHandler.handleSession(session);
+            AgentContext failedContext,
+            JobCompletionFailure failure) {
+        // Best-effort hook fired after Zeebe rejected the job completion (or the
+        // connector itself raised an error). The record written by storeMessages during
+        // this job is now an orphan — optional: delete it here so orphans do not
+        // accumulate.
     }
 }
 ```
 
-The actual storage logic lives within the session implementation you'll need to provide, which exposes methods to read and write the messages from the runtime memory:
+The session reads and writes the conversation messages for a single agent turn. `loadMessages` returns the message history that the incoming `ConversationContext` references; `storeMessages` persists the updated message list and returns a new `ConversationContext` pointing to the newly written record. The caller assembles the full `AgentContext` from the returned context.
 
 ```java
-public interface ConversationSession {
-    void loadIntoRuntimeMemory(AgentContext agentContext, RuntimeMemory memory);
+public class MyConversationSession implements ConversationSession {
 
-    AgentContext storeFromRuntimeMemory(AgentContext agentContext, RuntimeMemory memory);
+    private final MyConversationRepository repository;
+    private final AgentExecutionContext executionContext;
+
+    private MyConversationContext previousContext;
+
+    public MyConversationSession(
+            MyConversationRepository repository, AgentExecutionContext executionContext) {
+        this.repository = repository;
+        this.executionContext = executionContext;
+    }
+
+    @Override
+    public ConversationLoadResult loadMessages(AgentContext agentContext) {
+        previousContext = ConversationUtil.loadConversationContext(
+                agentContext, MyConversationContext.class);
+        if (previousContext == null) {
+            return ConversationLoadResult.empty();
+        }
+
+        return repository
+                .findById(previousContext.recordId())
+                .map(record -> ConversationLoadResult.of(record.getMessages()))
+                .orElseGet(ConversationLoadResult::empty);
+    }
+
+    @Override
+    public ConversationContext storeMessages(
+            AgentContext agentContext, ConversationStoreRequest request) {
+        // Always write to a new record. Never mutate the row the previous context points
+        // to — see the storage contract note below.
+        final var conversationId = previousContext != null
+                ? previousContext.conversationId()
+                : UUID.randomUUID().toString();
+
+        final var saved = repository.save(new MyConversationRecord(
+                conversationId,
+                executionContext.jobContext().getElementInstanceKey(),
+                request.messages()));
+
+        return new MyConversationContext(conversationId, saved.getId());
+    }
 }
 ```
+
+The `ConversationContext` is the storage cursor. It is serialized as part of the `agentContext` process variable, so it must be annotated with `@JsonTypeName` and contain everything needed to locate the stored data on the next turn:
+
+```java
+@JsonTypeName("my-conversation")
+public record MyConversationContext(String conversationId, UUID recordId)
+        implements ConversationContext {}
+```
+
+Register the subtype with the runtime `ObjectMapper` so the connector can deserialize the context back from the process variable — for example via a `Jackson2ObjectMapperBuilderCustomizer` bean calling `registerSubtypes(MyConversationContext.class)`.
+
+:::note Storage contract
+`storeMessages` must always write to a **new** record (or document, or branch) and return a `ConversationContext` pointing to it — never mutate or overwrite the data the previous context points at. If job completion fails, Zeebe retries with the old `AgentContext` (and therefore the old cursor); the old pointer must still resolve to the old data. The newly written record becomes an orphan, which the `onJobCompletionFailed` hook can clean up.
+
+See the [storage contract reference](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/reference/ai-agent.md#storage-contract) for the full rules every implementation must follow.
+:::
 
 After implementing the custom store, you can reference the store type in your AI Agent connector configuration (see [memory configuration](./agentic-ai-aiagent.md#memory)):
 

@@ -50,6 +50,14 @@ https://github.com/camunda/camunda/issues/49548 -->
 
 Camunda Process Test now exposes **judge-based evaluation** and **semantic similarity evaluation** as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
 
+#### AI Agent connector: Conversation storage SPI redesign (breaking change)
+
+<!-- https://github.com/camunda/connectors/pull/6784 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign) for details and a migration link.
+
 ### Camunda Hub
 
 #### Usage & billing metrics for 2025 enterprise license model
