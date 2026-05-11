@@ -38,7 +38,7 @@ Once Camunda-provided LLM is available in your organization, its credentials are
   - **Provider**: `OpenAI Compatible`.
   - **API endpoint**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_ENDPOINT}}`.
   - **API key**: `{{secrets.CAMUNDA_PROVIDED_LLM_API_KEY}}`.
-  - **Model**: Select a model from the [list of supported models](#supported-models). For example `eu.amazon.nova-pro-v1:0`.
+  - **Model**: Select a model from the [list of supported models](#supported-models). For example `amazon.nova-pro-v1`.
 
 ## Supported models
 
