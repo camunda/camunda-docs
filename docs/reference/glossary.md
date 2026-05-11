@@ -225,7 +225,7 @@ An event represents a state change associated with an aspect of an executing [pr
 
 ### Execution platform version
 
-In Desktop Modeler, the execution platform version is the Camunda runtime version that a new diagram targets. It determines which execution semantics and validation rules Modeler applies.
+In Desktop Modeler and Web Modeler, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
 
 The execution platform version is not a deployed process definition version, a Web Modeler version, or a SaaS cluster generation.
 
