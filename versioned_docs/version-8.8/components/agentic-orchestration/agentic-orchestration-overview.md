@@ -38,7 +38,7 @@ Get started with Camunda agentic orchestration by building and running your firs
 
 Understand the core concepts of Camunda agentic orchestration.
 
-<AoGrid ao={fundamentalCards} columns={2}/>
+<AoGrid ao={fundamentalCards} columns={3}/>
 
 Learn how to monitor and troubleshoot AI agents in real time with Operate, and analyze and improve performance over time with Optimize.
 
