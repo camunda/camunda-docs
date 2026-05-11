@@ -36,7 +36,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
 | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
-| 12 May 2026  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.10.0-alpha1)</li></ul> | -    |
+| 13 May 2026  | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.10.0-alpha1)</li></ul> | -    |
 
 ### Agentic orchestration
 
