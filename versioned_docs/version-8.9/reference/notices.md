@@ -37,7 +37,7 @@ May 12, 2026
 
 ### Impact
 
-The application was vulnerable to [CVE-2026-42198](https://nvd.nist.gov/vuln/detail/CVE-2026-42198), where an attacker with the priviliges to impersonate or MITM the PostgreSQL server can force the JDBC driver to perform SCRAM authentication with a very large iteration count. This can lead to burning CPU inside the SCRAM PBKDF2 computation before authentication can fail. Web Modeler and Identity are affected by this CVE when run with their default configuration. Zeebe, Operate and Tasklist are only affected in a self-managed setup when running the application with RDBMS as secondary storage with a PostgreSQL server configured as endpoint.
+The application was vulnerable to [CVE-2026-42198](https://nvd.nist.gov/vuln/detail/CVE-2026-42198), where an attacker with the privileges to impersonate or MITM the PostgreSQL server can force the JDBC driver to perform SCRAM authentication with a very large iteration count. This can lead to burning CPU inside the SCRAM PBKDF2 computation before authentication can fail. Web Modeler and Identity are affected by this CVE when run with their default configuration. Zeebe, Operate and Tasklist are only affected in a self-managed setup when running the application with RDBMS as secondary storage with a PostgreSQL server configured as endpoint.
 
 ### How to determine if the installation is affected
 
