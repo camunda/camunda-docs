@@ -217,6 +217,8 @@ Example task testing finished event:
 
 Variables panel events are sent on different interactions with the [Variables](../../data-handling.md#inspecting-variables) panel:
 
+- User opened the variables panel.
+- User closed the variables panel.
 - User filtered variables using the search input. The search term is not included in the event.
 - User expanded or collapsed a scope section.
 - User expanded or collapsed a variable row.

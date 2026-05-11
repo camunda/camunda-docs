@@ -71,31 +71,31 @@ Select **None** in the **Authentication** dropdown. No authentication headers ar
 
 Sends an `Authorization: Basic <base64(username:password)>` header with each request.
 
-| Field    | Required | Description                                                                                                                                                          |
-| :------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Username | Yes      | The username for authentication.                                                                                                                                     |
-| Password | Yes      | The password for authentication. Camunda recommends using [secrets](/components/console/manage-clusters/manage-secrets.md). For example, `{{secrets.MCP_PASSWORD}}`. |
+| Field    | Required | Description                                                                                                                                                                   |
+| :------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Username | Yes      | The username for authentication.                                                                                                                                              |
+| Password | Yes      | The password for authentication. Camunda recommends using [secrets](/components/hub/organization/manage-clusters/manage-secrets.md). For example, `{{secrets.MCP_PASSWORD}}`. |
 
 ### Bearer token
 
 Sends an `Authorization: Bearer <token>` header with each request.
 
-| Field        | Required | Description                                                                                                                                                     |
-| :----------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bearer token | Yes      | The bearer token value. Camunda recommends using [secrets](/components/console/manage-clusters/manage-secrets.md). For example, `{{secrets.MCP_BEARER_TOKEN}}`. |
+| Field        | Required | Description                                                                                                                                                              |
+| :----------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bearer token | Yes      | The bearer token value. Camunda recommends using [secrets](/components/hub/organization/manage-clusters/manage-secrets.md). For example, `{{secrets.MCP_BEARER_TOKEN}}`. |
 
 ### OAuth 2.0 client credentials
 
 Automatically retrieves and manages access tokens using the OAuth 2.0 client credentials flow (machine-to-machine authentication). Tokens are cached in memory and automatically refreshed when expired.
 
-| Field                 | Required | Description                                                                                                          |
-| :-------------------- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| OAuth token endpoint  | Yes      | The URL to obtain access tokens.                                                                                     |
-| Client ID             | Yes      | Your OAuth client identifier.                                                                                        |
-| Client secret         | Yes      | Your OAuth client secret. Camunda recommends using [secrets](/components/console/manage-clusters/manage-secrets.md). |
-| Audience              | No       | Target API identifier (required by some OAuth providers).                                                            |
-| Scopes                | No       | Space-separated list of scopes to request.                                                                           |
-| Client authentication | Yes      | **Send credentials in header** (Basic authentication) or **send credentials in body**.                               |
+| Field                 | Required | Description                                                                                                                   |
+| :-------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| OAuth token endpoint  | Yes      | The URL to obtain access tokens.                                                                                              |
+| Client ID             | Yes      | Your OAuth client identifier.                                                                                                 |
+| Client secret         | Yes      | Your OAuth client secret. Camunda recommends using [secrets](/components/hub/organization/manage-clusters/manage-secrets.md). |
+| Audience              | No       | Target API identifier (required by some OAuth providers).                                                                     |
+| Scopes                | No       | Space-separated list of scopes to request.                                                                                    |
+| Client authentication | Yes      | **Send credentials in header** (Basic authentication) or **send credentials in body**.                                        |
 
 For more details on OAuth 2.0 client credentials flow, see [REST connector OAuth](/components/connectors/protocol/rest.md#rest-connector-oauth-token).
 

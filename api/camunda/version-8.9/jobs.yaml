@@ -5,8 +5,10 @@ paths:
         - Job
       operationId: activateJobs
       summary: Activate jobs
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -41,6 +43,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for jobs based on given criteria.
@@ -71,8 +75,10 @@ paths:
         - Job
       operationId: failJob
       summary: Fail job
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -122,8 +128,10 @@ paths:
         - Job
       operationId: throwJobError
       summary: Throw error for job
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -173,8 +181,10 @@ paths:
         - Job
       operationId: completeJob
       summary: Complete job
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -225,6 +235,8 @@ paths:
       summary: Update job
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 

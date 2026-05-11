@@ -12,7 +12,7 @@ The Asana connector is an outbound protocol connector that allows you to connect
 To use the **Asana connector**, you must have an Asana [personal access token](https://developers.asana.com/docs/personal-access-token).
 
 :::note
-Use Camunda secrets to avoid exposing your Asana personal access token as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your Asana personal access token as plain text. Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Asana connector task

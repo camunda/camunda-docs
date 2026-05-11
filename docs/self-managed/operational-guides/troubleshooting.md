@@ -176,7 +176,7 @@ Due to limitations, the Identity `contextPath` approach is unavailable when usin
 
 ## Web Modeler database schema
 
-The Web Modeler `restapi` component requires a [database connection](/self-managed/components/modeler/web-modeler/configuration/configuration.md#database). This connection should not point to the same database as Keycloak does.
+The Web Modeler `restapi` component requires a [database connection](/self-managed/components/hub/configuration/modeler-configuration.md#database). This connection should not point to the same database as Keycloak does.
 
 ## Gateway timeout on redirect
 
@@ -272,7 +272,7 @@ This script verifies connectivity to a Zeebe instance using HTTP/2 and gRPC prot
 ./checks/zeebe/connectivity.sh -a https://local.distro.example.com/auth/realms/camunda-platform/protocol/openid-connect/token -i myclientid -s 0Rn28VrQxGNxowrCWe6wbujwFghO4990 -u orchestration-api -H zeebe.local.distro.example.com:443
 ```
 
-Find more information on [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-process-application/kube/README.md#4-generating-an-m2m-token-for-our-application).
+Find more information on [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-project/kube/README.md#4-generating-an-m2m-token-for-our-application).
 
 ### IRSA configuration check
 

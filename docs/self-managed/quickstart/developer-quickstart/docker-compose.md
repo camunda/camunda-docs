@@ -102,7 +102,7 @@ By default, the Orchestration Cluster uses [Basic authentication](/self-managed/
 
 | Component           | URL                                            | Description                                                                                                                                                                                          |
 | :------------------ | :--------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Console             | [http://localhost:8087](http://localhost:8087) | [Manage clusters](../../../components/console/introduction-to-console.md) and component configurations                                                                                               |
+| Console             | [http://localhost:8087](http://localhost:8087) | [Manage clusters](/components/hub/organization/manage-clusters/manage-cluster.md) and component configurations                                                                                       |
 | Optimize            | [http://localhost:8083](http://localhost:8083) | [Analyze and improve](../../../components/optimize/what-is-optimize.md) process performance                                                                                                          |
 | Management Identity | [http://localhost:8084](http://localhost:8084) | [Manage users](/self-managed/components/management-identity/overview.md) for Console, Optimize, and Web Modeler                                                                                      |
 | Web Modeler         | [http://localhost:8070](http://localhost:8070) | Model [BPMN](../../../components/modeler/bpmn/bpmn.md) processes, [DMN](../../../components/modeler/dmn/dmn.md) decisions, and [forms](../../../components/modeler/forms/camunda-forms-reference.md) |
@@ -584,7 +584,7 @@ The full configuration uses Keycloak for OIDC authentication. The client credent
 Non-production installations of Web Modeler are limited to five collaborators per project. See [licensing](/reference/licenses.md).
 :::
 
-[Web Modeler](../../../components/modeler/web-modeler/launch-web-modeler.md) provides a browser-based interface for creating and deploying BPMN, DMN, and form diagrams.  
+[Web Modeler](../../../components/hub/workspace/modeler/launch-modeler.md) provides a browser-based interface for creating and deploying BPMN, DMN, and form diagrams.  
 It is included in the full configuration by default but can also run as a standalone setup.
 
 #### Standalone setup
@@ -606,7 +606,7 @@ docker compose -f docker-compose-web-modeler.yaml down -v
 When using the full configuration, Web Modeler connects automatically to the local Orchestration Cluster started by `docker-compose-full.yaml`. You can deploy and run processes directly from the Web Modeler interface.
 
 1. Log in to Web Modeler at [http://localhost:8070](http://localhost:8070) with `demo` / `demo`.
-1. [Create a new project](../../../components/modeler/web-modeler/launch-web-modeler.md) or open an existing BPMN diagram.
+1. [Create a new project](../../../components/hub/workspace/modeler/launch-modeler.md) or open an existing BPMN diagram.
 1. Use the visual modeler to [design your BPMN process](../../../components/modeler/bpmn/bpmn.md).
 1. Click **Deploy** to deploy the diagram to the pre-configured Orchestration Cluster.
 1. After deployment, you can [create process instances](../../../components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8080/operate).
@@ -620,7 +620,7 @@ Web Modeler is not included in the lightweight configuration. To use Web Modeler
 1. Manually configure the cluster connection in Web Modeler's configuration.
 1. Use `NONE` or `BASIC` authentication for the lightweight Orchestration Cluster.
 
-See the [Web Modeler cluster configuration guide](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) for details.
+See the [Web Modeler cluster configuration guide](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) for details.
 :::
 
 #### Emails

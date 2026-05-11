@@ -293,7 +293,7 @@ This improves security by preventing all environment variables from being expose
 To use a custom prefix, configure it via the Java property or environment variable and name your secrets accordingly:
 
 ```bash
-export CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
 export SUPER_SECRETS_MY_SECRET='foo'   # Resolved via {{ secrets.MY_SECRET }}
 ```
 
@@ -311,26 +311,26 @@ When no prefix is configured, the connector runtime logs a warning that this mod
 
 The following environment variables can be used to configure the default secret provider:
 
-| Name                                                        | Description                                                                                                                                                       | Default value |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_ENABLED`     | Whether the default secret provider is enabled.                                                                                                                   | `true`        |
-| `CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_PREFIX`      | Prefix applied to the secret name before lookup. Only environment variables starting with this prefix are available as secrets. Set to empty to disable (unsafe). | `SECRET_`     |
-| `CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_TENANTAWARE` | Whether the secret provider should be tenant-aware.                                                                                                               | `false`       |
+| Name                                                      | Description                                                                                                                                                       | Default value |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`    | Whether the default secret provider is enabled.                                                                                                                   | `true`        |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`     | Prefix applied to the secret name before lookup. Only environment variables starting with this prefix are available as secrets. Set to empty to disable (unsafe). | `SECRET_`     |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE` | Whether the secret provider should be tenant-aware.                                                                                                               | `false`       |
 
 If the secret provider is set to be tenant-aware, the secret format will change to `${prefix}${tenantId}_${secretName}`:
 
 Example with empty prefix:
 
 ```bash
-export CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_TENANTAWARE=true
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE=true
 export tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
 ```
 
 Example with prefix set:
 
 ```bash
-export CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_TENANTAWARE=true
-export CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE=true
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
 export SUPER_SECRETS_tenant1_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }} from tenant1
 ```
 

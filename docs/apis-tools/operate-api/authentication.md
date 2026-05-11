@@ -29,4 +29,4 @@ A successful response returns matching process instances.
 
 - [Identity and access management](/components/concepts/access-control/access-control-overview.md)
 - [OIDC setup (Self-Managed)](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md)
-- [API client setup (SaaS)](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
+- [API client setup (SaaS)](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client)

@@ -8,7 +8,7 @@ description: "Learn about authentication methods for management and modeling com
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Authentication to the Camunda 8 management and modeling components and their resources is managed by [Management Identity](/self-managed/components/management-identity/overview.md). This includes components such as [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md), [Console](/self-managed/components/console/overview.md), and [Optimize](/self-managed/components/optimize/overview.md).
+Authentication to the Camunda 8 management and modeling components and their resources is managed by [Management Identity](/self-managed/components/management-identity/overview.md). This includes components such as Web Modeler, Console, and [Optimize](/self-managed/components/optimize/overview.md).
 
 ## About Management Identity authentication
 
