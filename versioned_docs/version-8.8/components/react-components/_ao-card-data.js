@@ -32,6 +32,13 @@ export const fundamentalCards = [
     image: IconAoDesignImg,
     description: "Plan and design your agentic orchestration solutions.",
   },
+  {
+    link: "../evaluate-agents-overview/",
+    title: "Evaluate your AI agents",
+    image: IconAoDesignImg,
+    description:
+      "Evaluate the performance and effectiveness of your AI agents.",
+  },
 ];
 
 // Fundamentals cards on introduction page
