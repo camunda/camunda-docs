@@ -32,6 +32,7 @@ May 7, 2026
 - Camunda Tasklist
 - Camunda Operate
 - Camunda Optimize
+- Camunda Web Modeler
 
 ### Impact
 
@@ -46,6 +47,7 @@ You are using:
 - Camunda Tasklist ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
 - Camunda Operate ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
 - Camunda Optimize ≤ 8.9.1, ≤ 8.8.8, or ≤ 8.7.20
+- Camunda Web Modeler <= 8.9.1, <= 8.8.13, or <= 8.7.20
 
 ### Solution
 
@@ -56,6 +58,7 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Tasklist 8.9.2, 8.8.24, 8.7.29
 - Camunda Operate 8.9.2, 8.8.24, 8.7.29
 - Camunda Optimize 8.9.2, 8.8.24, 8.7.21
+- Camunda Web Modeler 8.9.2, 8.8.14, 8.7.21
 
 ## Notice 46
 
