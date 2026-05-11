@@ -198,46 +198,17 @@ The session reads and writes the conversation messages for a single agent turn. 
 ```java
 public class MyConversationSession implements ConversationSession {
 
-    private final MyConversationRepository repository;
-    private final AgentExecutionContext executionContext;
-
-    private MyConversationContext previousContext;
-
-    public MyConversationSession(
-            MyConversationRepository repository, AgentExecutionContext executionContext) {
-        this.repository = repository;
-        this.executionContext = executionContext;
-    }
-
     @Override
     public ConversationLoadResult loadMessages(AgentContext agentContext) {
-        previousContext = ConversationUtil.loadConversationContext(
-                agentContext, MyConversationContext.class);
-        if (previousContext == null) {
-            return ConversationLoadResult.empty();
-        }
-
-        return repository
-                .findById(previousContext.recordId())
-                .map(record -> ConversationLoadResult.of(record.getMessages()))
-                .orElseGet(ConversationLoadResult::empty);
+        // Load the messages referenced by the ConversationContext in agentContext.
     }
 
     @Override
     public ConversationContext storeMessages(
             AgentContext agentContext, ConversationStoreRequest request) {
-        // Always write to a new record. Never mutate the row the previous context points
-        // to — see the storage contract note below.
-        final var conversationId = previousContext != null
-                ? previousContext.conversationId()
-                : UUID.randomUUID().toString();
-
-        final var saved = repository.save(new MyConversationRecord(
-                conversationId,
-                executionContext.jobContext().getElementInstanceKey(),
-                request.messages()));
-
-        return new MyConversationContext(conversationId, saved.getId());
+        // Persist request.messages() to a new record and return a ConversationContext
+        // pointing at it. Never mutate the record the previous context points to —
+        // see the storage contract note below.
     }
 }
 ```
