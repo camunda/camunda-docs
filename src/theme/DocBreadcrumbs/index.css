@@ -1,0 +1,95 @@
+.doc-breadcrumbs-row {
+  --ifm-breadcrumb-size-multiplier: 0.8;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.doc-breadcrumbs-row > nav {
+  margin-bottom: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.doc-breadcrumbs-row > nav .breadcrumbs {
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+}
+
+.doc-meta-row {
+  flex: 0 0 auto;
+  margin: 0;
+  align-self: flex-start;
+}
+
+.doc-meta-row__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-surface-color, var(--ifm-background-color));
+  color: var(--ifm-color-emphasis-900);
+  cursor: pointer;
+  font: inherit;
+  font-size: calc(1rem * var(--ifm-breadcrumb-size-multiplier));
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.doc-meta-row__copy:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.doc-meta-row__copy:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.doc-meta-row__copy[aria-expanded="true"] {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.doc-meta-row__dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.doc-meta-row__menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 50;
+  min-width: 14rem;
+  margin: 0;
+  padding: 0.35rem 0;
+  list-style: none;
+  background: var(--ifm-background-surface-color, var(--ifm-background-color));
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.doc-meta-row__menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.45rem 0.85rem;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-900);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.doc-meta-row__menu-item:hover,
+.doc-meta-row__menu-item:focus-visible {
+  background: var(--ifm-color-emphasis-100);
+  outline: none;
+}

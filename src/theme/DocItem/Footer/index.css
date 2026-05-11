@@ -5,14 +5,3 @@
 .button--icon {
   line-height: 1em;
 }
-
-.copy-stable-link__button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-}
-
-.copy-stable-link__icon {
-  display: inline-flex;
-  align-items: center;
-}
