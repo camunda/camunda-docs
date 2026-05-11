@@ -21,7 +21,7 @@ This page guides you through the manual installation of Camunda 8 on a local mac
   - Choose a supported secondary storage backend for your installation path.
   - **Document-store backend (Elasticsearch or OpenSearch)**: See [supported environments](/reference/supported-environments.md).
     - For deployment options, see the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/deploy).
-  - **RDBMS**: See [RDBMS production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) and [manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) for supported databases and setup details.
+  - **RDBMS**: See [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture) for backend trade-offs, and [manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) for supported databases and setup details.
 
 For suggested minimum hardware requirements and networking, see the [manual reference architecture requirements](/self-managed/reference-architecture/manual.md#requirements).
 

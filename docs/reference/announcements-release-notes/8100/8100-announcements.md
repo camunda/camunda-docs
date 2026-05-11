@@ -17,12 +17,16 @@ import PageDescription from '@site/src/components/PageDescription';
 :::info 8.10 resources
 
 - See [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) to learn more about new features and enhancements.
-- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/23) for an overview of known bugs by component and severity.
   :::
 
 ## Supported environments
 
-<div className="release-announcement-row">
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
+<!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
@@ -50,11 +54,15 @@ Supported environments change 2 description.
 <p className="link-arrow">Placeholder link</p>
 
 </div>
-</div>
+</div> -->
 
 ## Agentic orchestration
 
-<div className="release-announcement-row">
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
+<!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
@@ -67,11 +75,15 @@ Agentic orchestration change 1 description.
 **Action:** Description.
 
 </div>
-</div>
+</div> -->
 
 ## APIs & tools
 
-:::info 8.10 APIs & Tools migration guide
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
+<!-- :::info 8.10 APIs & Tools migration guide
 Migrate your API integrations, SDKs, and generated clients to Camunda 8.10 using the [8.10 APIs & Tools migration guide](/).
 :::
 
@@ -105,11 +117,30 @@ A new `messageSubscriptionType` enum field is included in each result. Existing 
 <p className="link-arrow">[8.10 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-810.md#message-subscription-type)</p>
 
 </div>
+</div> -->
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `GET /decision-instances/{decisionEvaluationInstanceKey}` now validates the key format
+
+The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance.api.mdx) endpoint previously returned `404 Not Found` when the `decisionEvaluationInstanceKey` path parameter contained invalid characters that did not match the required pattern `^[0-9]+-[0-9]+$`. The endpoint now correctly returns `400 Bad Request` in this case, while `404 Not Found` is reserved for well-formed keys that do not exist.
+
+**Action:** Update any client code or error handling that relied on receiving `404 Not Found` for malformed keys to also handle `400 Bad Request`.
+
+</div>
 </div>
 
 ## Connectors
 
-<div className="release-announcement-row">
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
+<!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
@@ -122,11 +153,15 @@ Connectors change 1 description.
 **Action:** Description.
 
 </div>
-</div>
+</div> -->
 
 ## Data
 
-<div className="release-announcement-row">
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
+<!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
@@ -139,11 +174,15 @@ Data change 1 description.
 **Action:** Description.
 
 </div>
-</div>
+</div> -->
 
 ## Deployment
 
-<div className="release-announcement-row">
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
+<!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
@@ -156,11 +195,15 @@ Deployment change 1 description.
 **Action:** Description.
 
 </div>
-</div>
+</div> -->
 
 ## Identity
 
-<div className="release-announcement-row">
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
+<!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
@@ -171,11 +214,15 @@ Deployment change 1 description.
 Identity change 1 description.
 
 </div>
-</div>
+</div> -->
 
 ## Modeler
 
-<div className="release-announcement-row">
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
+<!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
@@ -186,4 +233,4 @@ Identity change 1 description.
 Web Modeler change 1 description.
 
 </div>
-</div>
+</div> -->

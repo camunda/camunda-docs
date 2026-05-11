@@ -36,6 +36,10 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 Important changes in Camunda 8.10 are summarized as follows:
 
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
+
 <!-- <table className="table-callout">
 <tr>
     <td width="30%">**What's new/changed**</td>
