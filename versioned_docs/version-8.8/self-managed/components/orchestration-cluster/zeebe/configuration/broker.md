@@ -47,10 +47,10 @@ Finally, the REST server is only serving requests _if, and only if, the embedded
 
 The `server` configuration allows you to configure the main REST server. Below are a few common ones, but you can find a more exhaustive list [in the official Spring documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.server).
 
-| Field   | Description                                                                                                                  | Example value |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| address | Sets the host the REST server binds to. This setting can also be overridden using the environment variable `SERVER_ADDRESS`. | 0.0.0.0       |
-| port    | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`.    | 8080          |
+| Field   | Description                                                                                                                     | Example value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| address | Sets the address the REST server binds to. This setting can also be overridden using the environment variable `SERVER_ADDRESS`. | 0.0.0.0       |
+| port    | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`.       | 8080          |
 
 #### server.compression
 
@@ -101,7 +101,7 @@ The `management.server` configuration allows you to configure the management ser
 
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| address   | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_ADDRESS`.                                                                                                                                         | 0.0.0.0       |
+| address   | Sets the address the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_ADDRESS`.                                                                                                                                      | 0.0.0.0       |
 | port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 

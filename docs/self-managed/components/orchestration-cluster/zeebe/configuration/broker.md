@@ -36,7 +36,7 @@ Relative paths are resolved relative to the installation directory of the broker
 
 We provide tables with environment variables, application properties, a description, and corresponding default values in the following sections.
 
-For Camunda 8.9+, use the unified `camunda.*` properties and corresponding `CAMUNDA_*` environment variables shown on this page.
+For Camunda 8.9+, use the unified `camunda.*` properties and corresponding `CAMUNDA_*` environment variables where they are documented on this page.
 
 Configuration names are noted as the **header** of each documented section, while the **field** values represent properties to set the configuration.
 
@@ -52,10 +52,10 @@ Finally, the REST server is only serving requests _if, and only if, the embedded
 
 The `server` configuration allows you to configure the main REST server. Below are a few common ones, but you can find a more exhaustive list [in the official Spring documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.server).
 
-| Field | Description                                                                                                               | Example value |
-| ----- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host  | Sets the host the REST server binds to. This setting can also be overridden using the environment variable `SERVER_HOST`. | 0.0.0.0       |
-| port  | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`. | 8080          |
+| Field   | Description                                                                                                                     | Example value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| address | Sets the address the REST server binds to. This setting can also be overridden using the environment variable `SERVER_ADDRESS`. | 0.0.0.0       |
+| port    | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`.       | 8080          |
 
 #### server.compression
 
@@ -106,7 +106,7 @@ The `management.server` configuration allows you to configure the management ser
 
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
+| address   | Sets the address the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_ADDRESS`.                                                                                                                                      | 0.0.0.0       |
 | port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 
@@ -121,18 +121,23 @@ management.server:
 
 ### zeebe.broker.gateway
 
-To configure the embedded gateway, see [Gateway config docs](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
+Use `zeebe.broker.gateway.*` properties to configure the embedded gateway. For a standalone gateway, use `zeebe.gateway.*` properties.
 
-| Field  | Description                                                                                                                                               | Example value |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enable | Enable the embedded gateway to start on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | false         |
+Where a specific embedded gateway property has a unified `camunda.*` equivalent, use the `camunda.*` property documented on this page instead.
+
+To configure the embedded gateway, see [Gateway configuration](./gateway.md).
+
+| Field  | Description                                                                                                                                       | Example value |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enable | Enables the embedded gateway on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | false         |
 
 #### YAML snippet
 
 ```yaml
-broker:
-  gateway:
-    enable: false
+zeebe:
+  broker:
+    gateway:
+      enable: false
 ```
 
 ### camunda.cluster.network
@@ -676,10 +681,10 @@ Configure flow control for user requests.
 camunda:
   processing:
     flow-control:
-    request:
-      enabled: true
-      algorithm: aimd
-      windowed: false
+      request:
+        enabled: true
+        algorithm: aimd
+        windowed: false
 ```
 
 ### camunda.processing.flow-control.request.aimd
@@ -720,10 +725,10 @@ camunda:
 camunda:
   processing:
     flow-control:
-    request:
-      algorithm: fixed
-      fixed:
-        limit: 20
+      request:
+        algorithm: fixed
+        fixed:
+          limit: 20
 ```
 
 ### camunda.processing.flow-control.request.vegas
@@ -763,7 +768,7 @@ camunda:
   processing:
     flow-control:
       request:
-      algorithm: gradient
+        algorithm: gradient
         gradient:
           min-limit: 10
           initial-limit: 20
@@ -787,11 +792,11 @@ camunda:
     flow-control:
       request:
         algorithm: gradient2
-          gradient2:
-            min-limit: 10
-            initial-limit: 20
-            rtt-tolerance: 2.0
-            long-window: 600
+        gradient2:
+          min-limit: 10
+          initial-limit: 20
+          rtt-tolerance: 2.0
+          long-window: 600
 ```
 
 ### camunda.processing.flow-control.write
