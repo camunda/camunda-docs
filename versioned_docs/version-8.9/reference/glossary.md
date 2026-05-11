@@ -644,12 +644,12 @@ In Camunda 8, version is an overloaded term. Depending on context, it can refer 
 
 A version tag is a user-defined string label for a specific resource or snapshot.
 
-For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Web Modeler project versioning, a version tag labels a saved project snapshot.
+For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Web Modeler process application versioning, a version tag labels a saved process application snapshot.
 
 A version tag is not generated automatically and does not replace the numeric process definition version.
 
 - [Resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md#versiontag)
-- [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
+- [Process application versioning](/components/modeler/web-modeler/process-applications/process-application-versioning.md)
 
 ### Web Modeler version
 
@@ -657,8 +657,8 @@ A Web Modeler version is a saved snapshot of a BPMN or DMN file, or of an entire
 
 Web Modeler versions help you compare, restore, review, and deploy snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
 
-- [Versions](/components/hub/workspace/modeler/modeling/versions.md)
-- [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
+- [Versions](/components/modeler/web-modeler/modeling/versions.md)
+- [Process application versioning](/components/modeler/web-modeler/process-applications/process-application-versioning.md)
 
 ## W
 
