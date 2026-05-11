@@ -291,6 +291,32 @@ You can now:
 
 This change helps navigate more complex data during operations and troubleshooting.
 
+### APIs & tools
+
+#### In-memory OAuth credentials cache by default for the Java client
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects the Java client">Java client</span><span class="badge badge--medium" title="This feature affects the Spring SDK">Spring SDK</span></div>
+
+<!-- https://github.com/camunda/camunda/issues/13124 -->
+
+The Camunda Java client now caches OAuth credentials **in memory by default**. The file-based cache at `$HOME/.camunda/credentials` is no longer enabled out of the box and is available as an explicit opt-in.
+
+Why this change:
+
+- The previous default tried to create `$HOME/.camunda/credentials` on first use. In hardened container environments — non-root users (Kubernetes `securityContext.runAsUser`, OpenShift), read-only root filesystems, immutable images — this raised `AccessDeniedException`/`IOException` at first cache write. Affected users had to apply a non-obvious workaround (mount a writable volume and point an environment variable at it) just to get a client to start.
+- Memory-only caching removes that footgun: clients work out of the box in any deployment topology, and the in-process token cache plus proactive refresh still avoids unnecessary token endpoint calls during a JVM's lifetime.
+- The file cache had also been a source of latent corruption when multiple JVMs shared the same `$HOME`; making it opt-in scopes its use to deployments where persistence across restarts is genuinely needed.
+
+How to opt in to the file-based cache (behavior identical to pre-8.10):
+
+- Java client builder: `CredentialsProvider.newCredentialsProviderBuilder().credentialsCachePath("/path/to/cache")`.
+- Spring property: `camunda.client.auth.credentials-cache-path: /path/to/cache`.
+- Environment variable: `CAMUNDA_CLIENT_CONFIG_PATH=/path/to/cache` (or `ZEEBE_CLIENT_CONFIG_PATH` for the legacy Zeebe client).
+
+If you previously set `CAMUNDA_CLIENT_CONFIG_PATH` / `ZEEBE_CLIENT_CONFIG_PATH` only to work around the non-root container error, you can now remove that configuration and rely on the in-memory default.
+
+<p class="link-arrow">[Spring Boot starter configuration](/apis-tools/camunda-spring-boot-starter/configuration.md#credentials-cache-path)</p>
+
 ### Orchestration Cluster
 
 #### Cancel execution listener

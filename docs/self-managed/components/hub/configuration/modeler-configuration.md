@@ -425,13 +425,13 @@ To customize the client configuration, you can provide optional properties.
 
 <TabItem value="envVars">
 
-| Environment variable            | Description                                                                                              | Example value                    | Default Value                |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------------------- |
-| `CAMUNDA_CA_CERTIFICATE_PATH`   | [optional]<br/>Path to a root CA certificate to be used instead of the certificate in the default store. | `/path/to/certificate`           | -                            |
-| `CAMUNDA_CLIENT_CONFIG_PATH`    | [optional]<br/>Path to the client's OAuth credential cache.                                              | `/path/to/credentials/cache.txt` | `$HOME/.camunda/credentials` |
-| `CAMUNDA_CLIENT_REQUESTTIMEOUT` | [optional]<br/>The request timeout used when communicating with a target Zeebe cluster.                  | `60000`                          | `10000`                      |
-| `CAMUNDA_AUTH_CONNECT_TIMEOUT`  | [optional]<br/>The connection timeout for requests to the OAuth server.                                  | `30000`                          | `5000`                       |
-| `CAMUNDA_AUTH_READ_TIMEOUT`     | [optional]<br/>The data read timeout for requests to the OAuth server.                                   | `30000`                          | `5000`                       |
+| Environment variable            | Description                                                                                                                            | Example value                    | Default Value    |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------- |
+| `CAMUNDA_CA_CERTIFICATE_PATH`   | [optional]<br/>Path to a root CA certificate to be used instead of the certificate in the default store.                               | `/path/to/certificate`           | -                |
+| `CAMUNDA_CLIENT_CONFIG_PATH`    | [optional]<br/>Path to a file used to cache the client's OAuth credentials on disk. When unset, credentials are cached in memory only. | `/path/to/credentials/cache.txt` | _in-memory only_ |
+| `CAMUNDA_CLIENT_REQUESTTIMEOUT` | [optional]<br/>The request timeout used when communicating with a target Zeebe cluster.                                                | `60000`                          | `10000`          |
+| `CAMUNDA_AUTH_CONNECT_TIMEOUT`  | [optional]<br/>The connection timeout for requests to the OAuth server.                                                                | `30000`                          | `5000`           |
+| `CAMUNDA_AUTH_READ_TIMEOUT`     | [optional]<br/>The data read timeout for requests to the OAuth server.                                                                 | `30000`                          | `5000`           |
 
 </TabItem>
 
@@ -441,7 +441,7 @@ To customize the client configuration, you can provide optional properties.
 camunda:
   ca-certificate-path: /path/to/certificate # optional
   client:
-    config-path: /path/to/credentials/cache.txt # optional, default: $HOME/.camunda/credentials
+    config-path: /path/to/credentials/cache.txt # optional; when unset, OAuth credentials are cached in memory only
     request-timeout: 60000 # optional, default: 10000
   auth:
     connect-timeout: 30000 # optional, default: 5000
