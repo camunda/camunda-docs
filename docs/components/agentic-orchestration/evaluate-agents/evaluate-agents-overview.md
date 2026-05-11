@@ -6,8 +6,8 @@ description: "Evaluate your AI agents by monitoring them in real time with Opera
 keywords: ["agentic orchestration"]
 ---
 
-import AoGrid from '../react-components/\_ao-card';
-import { fundamentalCards_monitoring, recommendationCards } from '../react-components/\_ao-card-data';
+import AoGrid from '../../react-components/\_ao-card';
+import { fundamentalCards_monitoring, recommendationCards } from '../../react-components/\_ao-card-data';
 
 Evaluate your AI agents by monitoring them in real time with Operate, improve performance over time with Optimize, and test them using Camunda Process Test.
 
