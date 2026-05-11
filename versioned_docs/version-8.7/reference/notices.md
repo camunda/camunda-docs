@@ -19,6 +19,44 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 48
+
+### Publication date
+
+May 12, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+
+### Impact
+
+The application was vulnerable to [CVE-2026-42198](https://nvd.nist.gov/vuln/detail/CVE-2026-42198), where an attacker with the priviliges to impersonate or MITM the PostgreSQL server can force the JDBC driver to perform SCRAM authentication with a very large iteration count. This can lead to burning CPU inside the SCRAM PBKDF2 computation before authentication can fail. Web Modeler and Identity are affected by this CVE when run with their default configuration. Zeebe, Operate and Tasklist are only affected in a self-managed setup when running the application with RDBMS as secondary storage with a PostgreSQL server configured as endpoint.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Web Modeler ≤ 8.9.3, ≤ 8.8.14, or ≤ 8.7.21
+- Camunda Identity ≤ 8.9.3, ≤ 8.8.12, or ≤ 8.7.19
+- Camunda Zeebe ≤ 8.9.3, ≤ 8.8.24, or ≤ 8.7.29
+- Camunda Tasklist ≤ 8.9.3, ≤ 8.8.24, or ≤ 8.7.29
+- Camunda Operate ≤ 8.9.3, ≤ 8.8.24, or ≤ 8.7.29
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Web Modeler 8.9.3, 8.8.14, 8.7.21
+- Camunda Identity 8.9.3, 8.8.12, 8.7.19
+- Camunda Zeebe 8.9.3, 8.8.24, 8.7.29
+- Camunda Tasklist 8.9.3, 8.8.24, 8.7.29
+- Camunda Operate 8.9.3, 8.8.24, 8.7.29
+
 ## Notice 47
 
 ### Publication date
