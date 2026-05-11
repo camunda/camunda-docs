@@ -27,11 +27,11 @@ May 12, 2026
 
 ### Products affected
 
-- Camunda Web Modeler
 - Camunda Identity
 - Camunda Zeebe
 - Camunda Tasklist
 - Camunda Operate
+- Camunda Web Modeler
 
 ### Impact
 
@@ -41,21 +41,21 @@ The application was vulnerable to [CVE-2026-42198](https://nvd.nist.gov/vuln/det
 
 You are using:
 
-- Camunda Web Modeler ≤ 8.9.3, ≤ 8.8.14, or ≤ 8.7.21
 - Camunda Identity ≤ 8.9.3, ≤ 8.8.12, or ≤ 8.7.19
 - Camunda Zeebe ≤ 8.9.3, ≤ 8.8.24, or ≤ 8.7.29
 - Camunda Tasklist ≤ 8.9.3, ≤ 8.8.24, or ≤ 8.7.29
 - Camunda Operate ≤ 8.9.3, ≤ 8.8.24, or ≤ 8.7.29
+- Camunda Web Modeler ≤ 8.9.2, ≤ 8.8.13, or ≤ 8.7.20
 
 ### Solution
 
 Camunda has provided the following releases which contain the fix:
 
-- Camunda Web Modeler 8.9.3, 8.8.14, 8.7.21
 - Camunda Identity 8.9.3, 8.8.12, 8.7.19
 - Camunda Zeebe 8.9.3, 8.8.24, 8.7.29
 - Camunda Tasklist 8.9.3, 8.8.24, 8.7.29
 - Camunda Operate 8.9.3, 8.8.24, 8.7.29
+- Camunda Web Modeler 8.9.3, 8.8.14, 8.7.21
 
 ## Notice 47
 
