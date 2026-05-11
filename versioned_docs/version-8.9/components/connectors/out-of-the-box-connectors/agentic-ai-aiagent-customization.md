@@ -43,7 +43,7 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
 
        <properties>
            <!-- use the desired connectors version -->
-           <version.connectors>8.8.0</version.connectors>
+           <version.connectors>8.9.0</version.connectors>
        </properties>
 
        <dependencies>
@@ -114,8 +114,9 @@ public class MyCustomAgentInitializer implements AgentInitializer {
     private final AgentInitializer delegate;
 
     public MyCustomAgentInitializer(
-            AdHocToolsSchemaResolver schemaResolver, GatewayToolHandlerRegistry gatewayToolHandlers) {
-        this.delegate = new AgentInitializerImpl(schemaResolver, gatewayToolHandlers);
+        AgentToolsResolver agentToolsResolver,
+        GatewayToolHandlerRegistry gatewayToolHandlers) {
+        this.delegate = new AgentInitializerImpl(agentToolsResolver, gatewayToolHandlers);
     }
 
     @Override
