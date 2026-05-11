@@ -6,6 +6,7 @@ import IconOptimize from "../assets/icon-optimize.png";
 import IconConnectorImg from "../connectors/img/icon-connectors.png";
 import IconOperate from "../assets/icon-operate.png";
 import IconRAG from "../assets/icon-long-term-memory.png";
+import IconTest from "../assets/icon-prereqs.png";
 
 // Get started cards on introduction page
 export const getStartedCards = [
@@ -35,7 +36,7 @@ export const fundamentalCards = [
   {
     link: "../evaluate-agents/evaluate-agents-overview/",
     title: "Evaluate your AI agents",
-    image: IconAoDesignImg,
+    image: IconTest,
     description:
       "Evaluate the performance and effectiveness of your AI agents.",
   },
