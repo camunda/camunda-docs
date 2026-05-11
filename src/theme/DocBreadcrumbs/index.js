@@ -121,6 +121,49 @@ function CopySingleButton({ url, label }) {
   );
 }
 
+const DROPDOWN_COPY = {
+  latest: {
+    versioned:
+      "Pins to this version. Page content won't change when newer versions are released.",
+    rolling:
+      "Always shows the latest page version. Changes with each minor release.",
+  },
+  next: {
+    versioned:
+      "Pins to the next version once released. Stable across future docs.",
+    rolling: "Always shows the in-development version of this page.",
+  },
+};
+
+function stripProtocol(url) {
+  return url.replace(/^https?:\/\//, "");
+}
+
+function MenuItem({ icon, label, description, url, copied, onClick }) {
+  return (
+    <button
+      type="button"
+      role="menuitem"
+      className="doc-meta-row__menu-item"
+      onClick={onClick}
+      title={url}
+    >
+      <span className="doc-meta-row__menu-item-icon" aria-hidden="true">
+        {icon}
+      </span>
+      <span className="doc-meta-row__menu-item-body">
+        <span className="doc-meta-row__menu-item-label">
+          {copied ? "Copied!" : label}
+        </span>
+        <span className="doc-meta-row__menu-item-desc">{description}</span>
+        <span className="doc-meta-row__menu-item-url">
+          {stripProtocol(url)}
+        </span>
+      </span>
+    </button>
+  );
+}
+
 function CopyDropdown({ versionedUrl, rollingUrl, rollingLabel }) {
   const [open, setOpen] = useState(false);
   const [copiedKey, setCopiedKey] = useState(null);
@@ -171,30 +214,24 @@ function CopyDropdown({ versionedUrl, rollingUrl, rollingLabel }) {
       {open && (
         <ul className="doc-meta-row__menu" role="menu">
           <li role="none">
-            <button
-              type="button"
-              role="menuitem"
-              className="doc-meta-row__menu-item"
+            <MenuItem
+              icon={linkIcon}
+              label="Copy page link (versioned)"
+              description={DROPDOWN_COPY[rollingLabel].versioned}
+              url={versionedUrl}
+              copied={copiedKey === "versioned"}
               onClick={() => handleCopy("versioned", versionedUrl)}
-              title={versionedUrl}
-            >
-              {copiedKey === "versioned"
-                ? "Copied!"
-                : "Copy page link (versioned)"}
-            </button>
+            />
           </li>
           <li role="none">
-            <button
-              type="button"
-              role="menuitem"
-              className="doc-meta-row__menu-item"
+            <MenuItem
+              icon={linkIcon}
+              label={`Copy page link (${rollingLabel})`}
+              description={DROPDOWN_COPY[rollingLabel].rolling}
+              url={rollingUrl}
+              copied={copiedKey === "rolling"}
               onClick={() => handleCopy("rolling", rollingUrl)}
-              title={rollingUrl}
-            >
-              {copiedKey === "rolling"
-                ? "Copied!"
-                : `Copy page link (${rollingLabel})`}
-            </button>
+            />
           </li>
         </ul>
       )}
