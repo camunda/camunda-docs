@@ -157,14 +157,14 @@ This table shows RDBMS support status by component (including RDBMS as secondary
 | :------------------------ | :----------------- | :---------------------------------------------------------------------------------------------------------------- |
 | **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                                              |
 | Tasklist UI               | ✅ Fully supported | All functionality available.                                                                                      |
-| Operate UI                | ⚠️ Limited         | Partial support in **8.9-alpha3**. See [Operate limitations](#operate-with-rdbms) below.                          |
+| Operate UI                | ✅ Fully supported | All functionality available.                                                                                      |
 | Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                                                   |
 | Web Modeler               | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md). |
 | Identity                  | ✅ Fully supported | All functionality available.                                                                                      |
 | Management API (REST API) | ✅ Fully supported | All functionality available.                                                                                      |
 
 :::note
-"Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their RDBMS support and maturity can differ by the alpha release.
+"Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their support status can differ by component.
 :::
 
 ## Known limitations
