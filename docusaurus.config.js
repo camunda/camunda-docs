@@ -38,7 +38,6 @@ module.exports = {
         rel: "alternate",
         type: "text/markdown",
         href: `${docsSiteUrl}/llms.txt`, // Use absolute URL to bypass link checker
-        href: "/llms.txt",
         title: "LLM-friendly documentation index",
       },
     },
