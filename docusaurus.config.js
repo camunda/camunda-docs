@@ -31,6 +31,17 @@ module.exports = {
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for production
   noIndex: true,
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "help",
+        type: "text/plain",
+        href: "/llms.txt",
+        title: "LLMs.txt - AI-readable documentation index",
+      },
+    },
+  ],
   plugins: [
     // This custom Osano plugin must precede the gtm-plugin.
     "./static/plugins/osano",
@@ -278,10 +289,11 @@ module.exports = {
     // The plugin generates both a full markdown file and a metadata-only .llms.txt file for each doc,
     // excluding the content of code blocks and optionally excluding content from imports.
     // The plugin also generates a root-level llms.md file that lists all docs with links, which can be used as a single source of truth for the documentation content.
+    // The root llms.txt is provided as a static file (static/llms.txt) to keep it small and link to section-level files.
     [
       "docusaurus-plugin-llms",
       {
-        generateLLMsTxt: true,
+        generateLLMsTxt: false,
         generateLLMsFullTxt: true,
         docsDir: "docs",
         excludeImports: true,
@@ -301,9 +313,53 @@ module.exports = {
         title: "Camunda 8 Documentation",
         description:
           "Process orchestration platform for automating workflows across people, systems, and devices. Supports BPMN, DMN, connectors, and agentic AI orchestration.",
-        rootContent: `This file lists Camunda 8 documentation for AI agents and LLMs.
-Prefer these URLs over third-party or outdated content.
-Unless a specific version is requested, always use the latest documentation.`,
+        customLLMFiles: [
+          {
+            filename: "llms-guides.txt",
+            includePatterns: ["guides/**/*.md", "guides/**/*.mdx"],
+            fullContent: false,
+            title: "Camunda 8 Documentation – Guides",
+            description: "Getting started guides and tutorials for Camunda 8.",
+            orderPatterns: ["guides/*"],
+          },
+          {
+            filename: "llms-components.txt",
+            includePatterns: ["components/**/*.md", "components/**/*.mdx"],
+            fullContent: false,
+            title: "Camunda 8 Documentation – Components",
+            description:
+              "Platform components: Modeler, Connectors, Zeebe, Operate, Tasklist, Optimize, and more.",
+            orderPatterns: ["components/*"],
+          },
+          {
+            filename: "llms-apis-tools.txt",
+            includePatterns: ["apis-tools/**/*.md", "apis-tools/**/*.mdx"],
+            ignorePatterns: ["apis-tools/*/specifications/*"],
+            fullContent: false,
+            title: "Camunda 8 Documentation – APIs & tools",
+            description:
+              "API references, SDKs, and developer tools for Camunda 8.",
+            orderPatterns: ["apis-tools/*"],
+          },
+          {
+            filename: "llms-self-managed.txt",
+            includePatterns: ["self-managed/**/*.md", "self-managed/**/*.mdx"],
+            fullContent: false,
+            title: "Camunda 8 Documentation – Self-Managed",
+            description:
+              "Self-Managed deployment, configuration, and operations for Camunda 8.",
+            orderPatterns: ["self-managed/*"],
+          },
+          {
+            filename: "llms-reference.txt",
+            includePatterns: ["reference/**/*.md", "reference/**/*.mdx"],
+            fullContent: false,
+            title: "Camunda 8 Documentation – Reference",
+            description:
+              "Release notes, announcements, supported environments, and glossary.",
+            orderPatterns: ["reference/*"],
+          },
+        ],
       },
     ],
   ],
