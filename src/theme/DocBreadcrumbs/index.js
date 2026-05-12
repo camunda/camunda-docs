@@ -1,7 +1,7 @@
 // Why is this swizzled?
 //   - Renders a metadata strip to the right of the breadcrumbs containing a
-//     version pill and a "Copy page link" affordance. Lets users pin a
-//     permalink to the version they are reading without leaving the page.
+//     "Copy page link" affordance. Lets users copy a permalink appropriate
+//     to the version they are reading without leaving the page.
 //   - On the latest and `next` versions, the affordance is a dropdown with
 //     two options: copy a versioned (pinned) URL or a rolling (latest/next)
 //     URL. On other versions the URL is already pinned, so a single button
