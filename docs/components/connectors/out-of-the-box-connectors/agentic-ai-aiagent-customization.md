@@ -144,9 +144,9 @@ The AI Agent connector includes a set of default storage backends for conversati
 
 A custom store needs three pieces:
 
-- A `ConversationStore` bean — entry point. Its `type()` value is referenced from the element template.
-- A `ConversationSession` returned by `createSession(...)` — performs the actual load and store for a single agent turn. The caller manages its lifecycle via try-with-resources, so override `close()` if your session holds external resources (connections, clients).
-- A `ConversationContext` implementation — the storage cursor persisted as part of the `agentContext` process variable. Must be annotated with `@JsonTypeName` and registered with the runtime `ObjectMapper`.
+- A `ConversationStore` bean: The entry point. Its `type()` value is referenced from the element template.
+- A `ConversationSession` returned by `createSession(...)`: Performs the actual load and store for a single agent turn. The caller manages its lifecycle via `try-with-resources`, so override `close()` if your session holds external resources (connections, clients).
+- A `ConversationContext` implementation: The storage cursor persisted as part of the `agentContext` process variable. It must be annotated with `@JsonTypeName` and registered with the runtime `ObjectMapper`.
 
 The following example shows how to implement a custom store using a Spring Data JPA repository. The value returned by the `type()` method is used to identify the store type in the AI Agent connector configuration.
 
@@ -221,10 +221,12 @@ public record MyConversationContext(String conversationId, UUID recordId)
         implements ConversationContext {}
 ```
 
-Register the subtype with the runtime `ObjectMapper` so the connector can deserialize the context back from the process variable — for example via a `Jackson2ObjectMapperBuilderCustomizer` bean calling `registerSubtypes(MyConversationContext.class)`.
+Register the subtype with the runtime `ObjectMapper` so the connector can deserialize the context back from the process variable. For example via a `Jackson2ObjectMapperBuilderCustomizer` bean calling `registerSubtypes(MyConversationContext.class)`.
 
 :::note Storage contract
-`storeMessages` must always write to a **new** record (or document, or branch) and return a `ConversationContext` pointing to it — never mutate or overwrite the data the previous context points at. If job completion fails, Zeebe retries with the old `AgentContext` (and therefore the old cursor); the old pointer must still resolve to the old data. The newly written record becomes an orphan, which the `onJobCompletionFailed` hook can clean up.
+`storeMessages` must always write to a **new** record (or document, or branch) and return a `ConversationContext` pointing to it.
+
+Never mutate or overwrite the data the previous context points at. If job completion fails, Zeebe retries with the old `AgentContext` (and therefore the old cursor); the old pointer must still resolve to the old data. The newly written record becomes an orphan, which the `onJobCompletionFailed` hook can clean up.
 
 See the [storage contract reference](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/reference/ai-agent.md#storage-contract) for the full rules every implementation must follow.
 :::
