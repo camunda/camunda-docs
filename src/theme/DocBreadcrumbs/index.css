@@ -93,10 +93,14 @@
   cursor: pointer;
 }
 
-.doc-meta-row__menu-item:hover,
+.doc-meta-row__menu-item:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
 .doc-meta-row__menu-item:focus-visible {
   background: var(--ifm-color-emphasis-100);
-  outline: none;
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: -2px;
 }
 
 .doc-meta-row__menu-item-icon {
