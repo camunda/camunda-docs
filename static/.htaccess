@@ -964,6 +964,11 @@ RewriteRule ^docs/components/camunda-integrations/sap/?$ /docs/components/camund
 
 # Restructure Agentic AI docs
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/analyze-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/analyze-ai-agents/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/monitor-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/monitor-ai-agents/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/test-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/test-ai-agents/ [R=301,L]
+RewriteRule ^docs/8.8/components/agentic-orchestration/analyze-ai-agents/?$ /docs/8.8/components/agentic-orchestration/evaluate-agents/analyze-ai-agents/ [R=301,L]
+RewriteRule ^docs/8.8/components/agentic-orchestration/monitor-ai-agents/?$ /docs/8.8/components/agentic-orchestration/evaluate-agents/monitor-ai-agents/ [R=301,L]
 
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
 RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]

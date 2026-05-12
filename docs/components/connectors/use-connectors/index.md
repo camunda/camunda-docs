@@ -261,8 +261,7 @@ Use the provided FEEL functions:
   a [CompleteJob call](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx) to the workflow
   engine.
 
-The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with
-a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
+The `bpmnError` FEEL function can be called with one, two, or three parameters. Optionally, you can pass variables as the third parameter and combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
 
 ```
 if response.body.status = "failed" then bpmnError("FAILED", "The action failed", response.body) else null
@@ -287,12 +286,15 @@ Returns a context entry with an `errorType`, `errorCode` and `errorMessage`.
 
 - parameters:
   - `errorCode`: string
-  - `errorMessage`: string
+  - `errorMessage`: string (optional)
 - result: context
 
 ```feel
 bpmnError("123", "error received")
 // { errorType: "bpmnError", errorCode: "123", errorMessage: "error received" }
+
+bpmnError("123")
+// { errorType: "bpmnError", errorCode: "123" }
 ```
 
 ### Function bpmnError with variables
