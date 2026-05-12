@@ -562,11 +562,11 @@ connectors:
 
 ### Polling authentication mode
 
-Connectors use the [Operate API](/apis-tools/operate-api/overview.md) to fetch process definitions that contain inbound connectors. Depending on your Camunda architecture, choose one of the following values for the `inbound.mode` parameter:
+Connectors use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to fetch process definitions that contain inbound connectors. Depending on your Camunda architecture, choose one of the following values for the `inbound.mode` parameter:
 
-- `disabled` — Polling from Operate is disabled. The connector runtime supports only outbound interactions, such as HTTP REST calls.
-- `credentials` — The connector runtime authenticates to the Operate API with basic HTTP authentication.
-- `oauth` — _(Recommended, and enabled by default)_ The connector runtime authenticates to the Operate API with OAuth 2.0. Camunda uses Keycloak as the default OAuth provider.
+- `disabled` — Polling from the Orchestration Cluster is disabled. The connector runtime supports only outbound interactions, such as HTTP REST calls.
+- `credentials` — The connector runtime authenticates to the Orchestration Cluster REST API with basic HTTP authentication.
+- `oauth` — _(Recommended, and enabled by default)_ The connector runtime authenticates to the Orchestration Cluster REST API with OAuth 2.0. Camunda uses Keycloak as the default OAuth provider.
 
 ## Troubleshooting
 

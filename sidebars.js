@@ -639,7 +639,6 @@ module.exports = {
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
-            "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
             "components/tasklist/userguide/audit-task-history",
           ],
@@ -871,7 +870,6 @@ module.exports = {
                         "components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/form-linking",
-                        "components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
                       ],
                     },
@@ -1332,8 +1330,6 @@ module.exports = {
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/operate-api/sidebar-schema"),
-            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -1500,9 +1496,6 @@ module.exports = {
             "apis-tools/testing/connectors",
             "apis-tools/testing/json-test-cases",
           ],
-        },
-        {
-          Deprecated: ["apis-tools/testing/zeebe-process-test"],
         },
       ],
     },
@@ -2285,7 +2278,6 @@ module.exports = {
               Tasklist: [
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-configuration",
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling",
-                "self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions",
               ],
             },
             {
