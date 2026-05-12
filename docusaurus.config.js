@@ -314,35 +314,35 @@ module.exports = {
             title: "Camunda 8 Guides",
             description:
               "Getting started guides, tutorials, and walkthroughs for Camunda 8.",
-            includeOrder: ["guides/*"],
+            includePatterns: ["guides/*"],
           },
           {
             filename: "llms-components.txt",
             title: "Camunda 8 Components",
             description:
               "Console, Modeler, Zeebe, Operate, Tasklist, Optimize, Connectors, and Agentic Orchestration.",
-            includeOrder: ["components/*"],
+            includePatterns: ["components/*"],
           },
           {
             filename: "llms-apis-tools.txt",
             title: "Camunda 8 APIs & Tools",
             description:
               "REST APIs, SDKs, clients, CLI, and developer tooling.",
-            includeOrder: ["apis-tools/*"],
+            includePatterns: ["apis-tools/*"],
           },
           {
             filename: "llms-self-managed.txt",
             title: "Camunda 8 Self-Managed",
             description:
               "Deployment, configuration, upgrade, and operations for Self-Managed installations.",
-            includeOrder: ["self-managed/*"],
+            includePatterns: ["self-managed/*"],
           },
           {
             filename: "llms-reference.txt",
             title: "Camunda 8 Reference",
             description:
               "Release notes, announcements, glossary, licenses, dependencies, and supported environments.",
-            includeOrder: ["reference/*"],
+            includePatterns: ["reference/*"],
           },
         ],
       },
