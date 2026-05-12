@@ -143,7 +143,6 @@ function MenuItem({ icon, label, description, url, copied, onClick }) {
   return (
     <button
       type="button"
-      role="menuitem"
       className="doc-meta-row__menu-item"
       onClick={onClick}
       title={url}
@@ -203,7 +202,6 @@ function CopyDropdown({ versionedUrl, rollingUrl, rollingLabel }) {
       <button
         type="button"
         className="doc-meta-row__copy"
-        aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
@@ -212,8 +210,8 @@ function CopyDropdown({ versionedUrl, rollingUrl, rollingLabel }) {
         {chevron}
       </button>
       {open && (
-        <ul className="doc-meta-row__menu" role="menu">
-          <li role="none">
+        <ul className="doc-meta-row__menu">
+          <li>
             <MenuItem
               icon={linkIcon}
               label="Copy page link (versioned)"
@@ -223,7 +221,7 @@ function CopyDropdown({ versionedUrl, rollingUrl, rollingLabel }) {
               onClick={() => handleCopy("versioned", versionedUrl)}
             />
           </li>
-          <li role="none">
+          <li>
             <MenuItem
               icon={linkIcon}
               label={`Copy page link (${rollingLabel})`}
