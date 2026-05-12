@@ -1229,12 +1229,8 @@ judge.customPrompt=You are a domain expert evaluating financial data accuracy.
 Or programmatically:
 
 ```java
-JudgeConfig.of(prompt ->myChatModelAdapter.
-
-generate(prompt))
-        .
-
-withCustomPrompt("You are a domain expert evaluating financial data accuracy.");
+JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
+    .withCustomPrompt("You are a domain expert evaluating financial data accuracy.");
 ```
 
 </TabItem>
@@ -1245,15 +1241,9 @@ You can also override the custom prompt for a single assertion chain:
 
 ```java
 assertThat(processInstance)
-    .
-
-withJudgeConfig(config ->config
-        .
-
-withCustomPrompt("You are a domain expert evaluating financial data accuracy."))
-        .
-
-hasVariableSatisfiesJudge("result","Contains valid totals.");
+    .withJudgeConfig(config -> config
+        .withCustomPrompt("You are a domain expert evaluating financial data accuracy."))
+    .hasVariableSatisfiesJudge("result", "Contains valid totals.");
 ```
 
 ### Custom ChatModelAdapter
@@ -1321,8 +1311,8 @@ using `CamundaAssert.setJudgeConfig()`:
 
 ```java
 CamundaAssert.setJudgeConfig(
-        JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
-            .withThreshold(0.8));
+    JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
+        .withThreshold(0.8));
 ```
 
 </TabItem>
@@ -1358,8 +1348,8 @@ using `CamundaAssert.setJudgeConfig()`:
 
 ```java
 CamundaAssert.setJudgeConfig(
-        JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
-            .withThreshold(0.8));
+    JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
+        .withThreshold(0.8));
 ```
 
 Or register the JUnit extension manually with a judge configuration:
@@ -1368,8 +1358,8 @@ Or register the JUnit extension manually with a judge configuration:
 
 @RegisterExtension
 CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
-        .withJudgeConfig(JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
-                .withThreshold(0.8));
+    .withJudgeConfig(JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
+        .withThreshold(0.8));
 ```
 
 </TabItem>
@@ -1451,11 +1441,13 @@ same. Increase the threshold when your assertion needs stricter semantic agreeme
 
 <TabItem value='openai-embedding'>
 
-| Property                              | Required | Type       | Description                                               |
-| ------------------------------------- | -------- | ---------- | --------------------------------------------------------- |
-| `similarity.embedding-model.provider` | Yes      | `string`   | Custom provider name matching your SPI implementation.    |
-| `similarity.embedding-model.model`    | Yes      | `string`   | Model name.                                               |
-| `similarity.embedding-model.timeout`  | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`). |
+| Property                                | Required | Type       | Description                                                            |
+| --------------------------------------- | -------- | ---------- | ---------------------------------------------------------------------- |
+| `similarity.embedding-model.provider`   | Yes      | `string`   | Set to `openai`.                                                       |
+| `similarity.embedding-model.model`      | Yes      | `string`   | Model name (for example `text-embedding-3-small`).                     |
+| `similarity.embedding-model.api-key`    | Yes      | `string`   | API key.                                                               |
+| `similarity.embedding-model.dimensions` | No       | `integer`  | Number of output dimensions for models that support custom dimensions. |
+| `similarity.embedding-model.timeout`    | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).              |
 
 **Example:**
 
@@ -1464,13 +1456,13 @@ camunda:
   process-test:
     similarity:
       embedding-model:
-        provider: "my-custom-provider"
-        model: "my-model"
-        custom-properties:
-          endpoint: "https://my-embeddings.example.com/v1"
+        provider: "openai"
+        model: "text-embedding-3-small"
+        api-key: ${OPENAI_API_KEY}
 ```
 
 </TabItem>
+
 <TabItem value='amazon-bedrock-embedding'>
 
 Supports Bedrock long-term API keys or AWS IAM credentials. Falls back to the
