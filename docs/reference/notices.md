@@ -87,7 +87,7 @@ You are using:
 - Camunda Tasklist ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
 - Camunda Operate ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
 - Camunda Optimize ≤ 8.9.1, ≤ 8.8.8, or ≤ 8.7.20
-- Camunda Web Modeler <= 8.9.1, <= 8.8.13, or <= 8.7.20
+- Camunda Web Modeler ≤ 8.9.1, ≤ 8.8.13, or ≤ 8.7.20
 
 ### Solution
 
