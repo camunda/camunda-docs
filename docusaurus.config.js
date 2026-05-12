@@ -635,6 +635,7 @@ Unless a specific version is requested, always use the latest documentation.`,
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           remarkPlugins: [
             require("./static/plugins/terminology/remark-glossary-terms"),
+            require("./static/plugins/llms-directive/remark-llms-directive"),
           ],
           lastVersion: currentVersion,
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
