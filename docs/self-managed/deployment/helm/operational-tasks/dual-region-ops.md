@@ -173,7 +173,7 @@ desired={<img src={Five} alt="Desired state diagram" style={{border: 'none', tra
 
 #### Procedure
 
-Start with creating a port-forward to the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
+Start with creating a port-forward to the `Zeebe Gateway` in the surviving region to the local host so you can interact with the Zeebe Gateway.
 
 The following alternatives to port-forwarding are possible:
 

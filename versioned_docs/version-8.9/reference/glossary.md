@@ -255,7 +255,11 @@ In a clustered environment, a [broker](#zeebe-broker) which is not a [leader](#l
 
 ### Gateway
 
-See [Zeebe Gateway](#zeebe-gateway).
+Gateway can refer to different concepts in Camunda docs, depending on the context:
+
+- In BPMN, a gateway controls how a process flow branches, merges, or synchronizes.
+- In runtime and API contexts, the [Zeebe Gateway](#zeebe-gateway) is the component that exposes APIs and routes requests to Zeebe brokers.
+- In Kubernetes deployment docs, Gateway can also refer to Kubernetes Gateway API resources.
 
 ### Generative AI
 
@@ -733,4 +737,4 @@ The Zeebe Exporter system provides an event stream of state changes within Zeebe
 
 The Zeebe Gateway is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster that allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a Zeebe cluster.
 
-- [Zeebe Gateway](self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md)
+- [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md)
