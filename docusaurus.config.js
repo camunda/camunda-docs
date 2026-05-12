@@ -31,6 +31,17 @@ module.exports = {
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for production
   noIndex: true,
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "alternate",
+        type: "text/markdown",
+        href: "/llms.txt",
+        title: "LLM-friendly documentation index",
+      },
+    },
+  ],
   plugins: [
     // This custom Osano plugin must precede the gtm-plugin.
     "./static/plugins/osano",

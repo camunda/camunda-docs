@@ -46,8 +46,25 @@ AddType text/plain      graphqls
 # Add diff mime type
 AddType text/plain      diff
 
+# Content negotiation: serve .md when Accept: text/markdown is requested
+# Only applies to /docs/ paths that are not already static assets or .md files
+RewriteCond %{HTTP_ACCEPT} text/markdown
+RewriteCond %{REQUEST_URI} ^/docs/
+RewriteCond %{REQUEST_URI} !\.(md|js|css|png|jpg|svg|json|xml|yaml|bpmn|pdf)$
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}.md -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}index.md -f
+RewriteRule ^(docs/.+?)/?$ /$1.md [L]
+
+# Ensure Vary: Accept header is set on docs pages for proper caching
+<Directory "/docs">
+    Header append Vary Accept
+</Directory>
+
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 [R=301,L]
+
+## Redirect for case-sensitive llms.txt
+RewriteRule ^LLMs\.txt$ /llms.txt [R=301,L]
 
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
