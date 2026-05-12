@@ -951,10 +951,10 @@ natural language expectations. This section covers how to set up the LLM provide
 CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured
 support for major LLM providers: OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and OpenAI-compatible APIs.
 LangChain4j requires Java 17+. You can provide your own LLM integration through a
-custom `ChatModelAdapter` instead (see [Custom ChatModelAdapter](#custom-chatmodeladapter)).
+custom `ChatModelAdapter` instead (see [custom ChatModelAdapter](#custom-chatmodeladapter)).
 
 :::tip
-For a guided walkthrough of setting up and testing AI agents, see [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md).
+For a guided walkthrough of setting up and testing AI agents, see [test your AI agents](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md).
 :::
 
 <Tabs groupId="client" defaultValue="spring-sdk-pre" queryString values={[
@@ -985,7 +985,7 @@ Add the `camunda-process-test-langchain4j` dependency to your project:
 
 </Tabs>
 
-If you provide a custom `ChatModelAdapter` (see [Custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency
+If you provide a custom `ChatModelAdapter` (see [custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency
 is not required.
 
 ### Property reference
@@ -993,7 +993,7 @@ is not required.
 All judge properties are nested under `camunda.process-test.judge` in Spring configuration. In Java properties files,
 use the `judge.` prefix with camelCase keys (for example, `judge.chat-model.api-key` becomes `judge.chatModel.apiKey`).
 
-For configuration examples, see [Step 2: Configure the LLM provider and connectors](/components/agentic-orchestration/test-ai-agents.md#step-2-configure-the-llm-provider-and-connectors).
+For configuration examples, see [Step 2: configure the LLM provider and connectors](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md#step-2-configure-the-llm-provider-and-connectors).
 
 Unless noted otherwise, properties in the provider tables are required.
 
