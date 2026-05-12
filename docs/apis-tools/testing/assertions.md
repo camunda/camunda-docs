@@ -422,7 +422,7 @@ assertThat(processInstance)
     .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
 ```
 
-# hasVariableSimilarTo
+### hasVariableSimilarTo
 
 Assert that a process variable is semantically similar to an expected string using a configured embedding model. The variable value and the expected value are
 converted to embeddings, and the cosine similarity is compared against the configured threshold. The assertion fails if the variable doesn't exist or the
@@ -798,10 +798,6 @@ assertThatDecision(DecisionSelectors.byId("decision-id")).hasNoMatchedRules();
 You can verify arbitrary string values, independent of a process instance, using `CamundaAssert.assertThatValue()`. This is useful for evaluating
 values produced outside of a running process — for example, the response of a tool call or an intermediate string passed between components — with the
 same LLM judge and embedding-based similarity checks used for process variables.
-
-```java
-import static io.camunda.process.test.api.CamundaAssert.assertThatValue;
-```
 
 ### satisfiesJudge
 
