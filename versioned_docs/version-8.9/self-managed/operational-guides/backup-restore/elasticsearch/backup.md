@@ -74,7 +74,17 @@ This ensures high availability while preserving the integrity of the data snapsh
 
 ### Additional considerations
 
-A backup `x` of Camunda 8 using Elasticsearch or OpenSearch consists of backup `x` of Zeebe, backup `x` of Optimize, and backup `x` of Web Applications (Operate, Tasklist). The backup ID must be an integer and greater than the previous backups.
+In this guide, `x` is a placeholder for a single backup ID, such as `1748937221`. When you create a full Camunda 8 backup using Elasticsearch or OpenSearch, use the same backup ID for each component backup in that backup set.
+
+For example, backup `1748937221` of Camunda 8 consists of the following component backups:
+
+- A Zeebe backup with backup ID `1748937221`, which contains one snapshot per partition.
+- An Optimize backup with backup ID `1748937221`, which can contain multiple Optimize snapshots.
+- A Web Applications backup with backup ID `1748937221`, which can contain multiple Operate and Tasklist snapshots.
+
+This means one `backupId` identifies the full Camunda 8 backup set, while each component can still create multiple underlying snapshots.
+
+The backup ID must be an integer and greater than any previous backup ID.
 
 Optimize is not part of the Web Applications backup API and needs to be executed separately to successfully make a backup. Depending on your deployment configuration, you may not have Optimize deployed. It is safe to ignore the backup instructions for Optimize if it is not deployed.
 
