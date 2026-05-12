@@ -301,6 +301,7 @@ module.exports = {
         addMdExtension: true,
         generateMarkdownFiles: true,
         preserveDirectoryStructure: true,
+        addLinkTag: false,
         includeOrder: [
           "guides/*",
           "components/*",
