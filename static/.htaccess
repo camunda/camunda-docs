@@ -56,9 +56,8 @@ RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}index.md -f
 RewriteRule ^(docs/.+?)/?$ /$1.md [L]
 
 # Ensure Vary: Accept header is set on docs pages for proper caching
-<Directory "/docs">
-    Header append Vary Accept
-</Directory>
+SetEnvIf Request_URI "^/docs/" DOCS_PATH
+Header append Vary Accept env=DOCS_PATH
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 [R=301,L]
