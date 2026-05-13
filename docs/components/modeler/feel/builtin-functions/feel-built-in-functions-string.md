@@ -393,6 +393,25 @@ to base64("FEEL")
 // "RkVFTA=="
 ```
 
+## from base64(value)
+
+<MarkerCamundaExtension></MarkerCamundaExtension>
+
+Returns the given Base64 encoded string decoded to a plain string.
+
+**Function signature**
+
+```feel
+from base64(value: string): string
+```
+
+**Examples**
+
+```feel
+from base64("RkVFTA==")
+// "FEEL"
+```
+
 ## is blank(string)
 
 <MarkerCamundaExtension></MarkerCamundaExtension>

@@ -144,8 +144,8 @@ Also included in this namespace are components that are tightly integrated with 
 
 As shown in the [architecture diagram](#web-modeler-and-console), this namespace contains:
 
-- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) — browser-based BPMN editor
-- [Console](/self-managed/components/console/overview.md) — administrative interface
+- Web Modeler — browser-based BPMN editor
+- Console — administrative interface
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
 
 This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
@@ -257,7 +257,7 @@ The following databases are required:
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
 :::
 
-For more information, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
+For backend trade-offs and production guidance, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). For more general context, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmarking to determine the appropriate sizing for your specific environment and workload.
 

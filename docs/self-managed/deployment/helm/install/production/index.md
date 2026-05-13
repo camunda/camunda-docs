@@ -63,7 +63,7 @@ kubectl create namespace management-and-modeling
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), and the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
+- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), Console, and the Web Modeler components.
 
 - **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), [Connectors](/self-managed/components/connectors/overview.md) and [Optimize](/self-managed/components/optimize/overview.md).
 
@@ -233,7 +233,7 @@ For more information on connecting to external databases, the following guides a
 - Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)
 - [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
 - Using Amazon OpenSearch service [through IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
-- Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
+- Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/hub/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 
 ## Orchestration Cluster configuration
 

@@ -894,6 +894,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-resources",
+          label: "Search resources",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-resource",
           label: "Get resource",
           className: "api-method get",

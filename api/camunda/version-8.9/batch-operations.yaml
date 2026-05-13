@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get batch operation by key.
@@ -48,6 +50,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for batch operations based on given criteria.
@@ -78,8 +82,10 @@ paths:
         - Batch operation
       operationId: cancelBatchOperation
       summary: Cancel Batch operation
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -118,8 +124,10 @@ paths:
         - Batch operation
       operationId: suspendBatchOperation
       summary: Suspend Batch operation
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -160,8 +168,10 @@ paths:
         - Batch operation
       operationId: resumeBatchOperation
       summary: Resume Batch operation
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -204,6 +214,8 @@ paths:
       summary: Search batch operation items
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 

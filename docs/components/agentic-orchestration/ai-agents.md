@@ -21,7 +21,7 @@ Start building and integrating AI agents into your end-to-end processes.
 ## Why tool documentation in ad-hoc sub-processes matters
 
 In an AI agent model, each BPMN activity inside an ad-hoc sub-process is effectively a tool exposed to the LLM.
-The activity name its documentation are used by the LLM to decide what to do next.
+The activity name and its documentation are used by the LLM to decide what to do next.
 
 Clear, behavior-oriented descriptions help the LLM:
 
@@ -92,7 +92,7 @@ Learn more about this model in the [example AI Agent Sub-process connector integ
 Learn more about building and integrating AI agents in Camunda 8:
 
 - [Building Your First AI Agent in Camunda](https://camunda.com/blog/2025/05/step-by-step-guide-ai-task-agents-camunda/)
-- [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md)
+- [Test your AI agents](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)
 - [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/step-by-step-guide-ai-task-agents-camunda/)
 - [Artificial Intelligence (AI) Agents: What You Need to Know](https://camunda.com/blog/2024/08/ai-agents-what-you-need-to-know/)
 - [Camunda AI agents](https://camunda.com/blog/tag/ai-agent/)

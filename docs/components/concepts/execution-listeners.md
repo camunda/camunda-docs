@@ -26,22 +26,29 @@ An execution listener is a blocking operation, meaning that the workflow executi
 
 You can configure execution listeners for individual BPMN elements, such as tasks, events, and gateways, as well as for the overall process and subprocesses.
 
-There are two types of execution listener:
+There are three types of execution listeners:
 
-- **Start:** Invoked _before_ the element is processed. Useful for setting variables or executing preconditions.
-- **End:** Invoked _after_ the element is processed. Useful for executing cleanup or post-processing tasks.
+- **Before all**: Invoked only on the [multi-instance](/components/modeler/bpmn/multi-instance/multi-instance.md) body, _before_ any inner instances are created. Useful for initializing variables such as the `inputCollection`.
+- **Start**: Invoked _before_ the element is processed. Useful for setting variables or executing preconditions.
+- **End**: Invoked _after_ the element is processed. Useful for executing cleanup or post-processing tasks.
 
 Each listener has three properties:
 
-| Property    | Description                                                  |
-| :---------- | :----------------------------------------------------------- |
-| `eventType` | Specifies when the listener is triggered (`start` or `end`). |
-| `type`      | The name of the job type.                                    |
-| `retries`   | The number of job retries.                                   |
+| Property    | Description                                                                |
+| :---------- | :------------------------------------------------------------------------- |
+| `eventType` | Specifies when the listener is triggered (`beforeAll`, `start`, or `end`). |
+| `type`      | The name of the job type.                                                  |
+| `retries`   | The number of job retries.                                                 |
 
 :::note
 If multiple listeners of the same `eventType` (such as multiple start listeners) are defined on the same activity, they are executed sequentially, one after the other, in the order defined in the BPMN model.
 :::
+
+## Task headers
+
+An execution listener can define an arbitrary number of `taskHeaders`; they are static metadata handed to workers along with the job. The headers can be used as configuration parameters for the worker.
+
+The job worker receives the listener headers, as well as the custom headers defined for the BPMN element on which the listener is configured. If the BPMN element and the listener both define the same header key, the listener value is used.
 
 ## Implement an execution listener
 
@@ -60,7 +67,27 @@ See the [job worker documentation](/apis-tools/java-client/job-worker.md) for ex
 
 Similar to regular job workers, a listener can read variables of the process instance and set new variables by completing the job with variables. The scope of variables and the effect of the job variables depend on the listener event type.
 
-### Start listeners
+### `beforeAll` listeners
+
+`beforeAll` listeners are supported only on the [multi-instance](/components/modeler/bpmn/multi-instance/multi-instance.md) body. They are invoked once per multi-instance body activation, before the `inputCollection` is evaluated and inner instances are created.
+
+When a multi-instance activity is entered, the engine processes the body and inner-activity listeners in the following order:
+
+1. Variable input mappings of the multi-instance body are applied, if any.
+2. All `beforeAll` body listeners are executed sequentially, in the order defined in the BPMN model.
+3. The body's `inputCollection` expression is evaluated.
+4. Inner instances are created, sequentially or in parallel, depending on the multi-instance configuration.
+5. For each inner instance, the existing [Start listeners](#start-listeners) and [End listeners](#end-listeners) of the inner activity are invoked as usual.
+
+You can use variables for the following use cases:
+
+| Use case                         | Description                                                                                                                 |
+| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| Dynamic collection               | Compute the `inputCollection` just before multi-instance evaluation, based on current process state or external data.       |
+| Resolving identifiers into items | Resolve IDs into concrete items and write them into the collection variable that the multi-instance activity iterates over. |
+| Pre-initializing shared context  | Set helper variables used by multi-instance expressions and the body's `completionCondition`.                               |
+
+### `start` listeners
 
 Start listeners are invoked after applying the variable input mappings, and before subscribing to events, evaluating the element's expressions, and executing the element's behavior.
 
@@ -76,7 +103,7 @@ You can use variables for the following use cases:
 | Gateways                  | <p> [Inclusive](/components/modeler/bpmn/inclusive-gateways/inclusive-gateways.md), [exclusive](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md), [event-based gateways](/components/modeler/bpmn/event-based-gateways/event-based-gateways.md): Use ELs to calculate and set variables that determine the outgoing path from these gateways. The custom logic executed by ELs can evaluate current data and set the necessary variables to guide the process flow correctly.</p>                                                                                                                                                                                                                                                          |
 | Intermediate catch events | <p><ul><li><p>[Message events](/components/modeler/bpmn/message-events/message-events.md#intermediate-message-catch-events): Variables set by ELs can be used to define the message correlation key, ensuring the correct message is matched with the event.</p></li><li><p>[Timer events](/components/modeler/bpmn/timer-events/timer-events.md#intermediate-timer-catch-events): ELs can define timer expressions based on the calculated variables, enabling dynamic timer configurations.</p></li><li><p>[Signal events](/components/modeler/bpmn/signal-events/signal-events.md#signal-intermediate-catch-events): Variables can determine the signal name, allowing for flexible signal handling based on the current process state.</p></li></ul></p> |
 
-### End listeners
+### `end` listeners
 
 End listeners are invoked after applying the variable output mappings and before leaving the element.
 
@@ -112,8 +139,11 @@ Execution listeners have the following limitations:
   - Error end event (end ELs): Place the ELs on the related error catch event.
   - Compensation boundary events: Place the ELs on the compensation handler.
 
+- **`beforeAll`**: Supported only for multi-instance activities.
+  - Earlier versions do not support the `beforeAll` event type and will reject deployments that use it.
+
 - **Duplicate listeners**: Execution listeners must have unique combinations of `eventType` and `type`.
-  Defining multiple listeners with the same `eventType` and `type` results in a validation error. However, you can define listeners with the same `type` if they are associated with different `eventType` values.
+  Defining multiple listeners with the same `eventType` and `type` results in a validation error. However, you can define listeners with the same `type` if they use different `eventType` values.
 
 - **Interrupting escalation events**: For intermediate throw and end events with an interrupting escalation event, `end` listeners are not executed. The escalation event terminates the element's processing immediately upon activation, bypassing any defined `end` listeners.
 
@@ -126,3 +156,4 @@ Execution listeners have the following limitations:
 - [Incidents](/components/concepts/incidents.md)
 - [Job workers (basics)](/components/concepts/job-workers.md)
 - [Job workers (Java client)](/apis-tools/java-client/job-worker.md)
+- [Multi-instance](/components/modeler/bpmn/multi-instance/multi-instance.md)

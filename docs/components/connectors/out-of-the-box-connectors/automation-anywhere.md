@@ -32,7 +32,7 @@ You can choose among the available **Automation Anywhere connector** authenticat
 :::note
 We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `AUTOMATION_ANYWHERE_PASSWORD`) so you can reference it later in the connector.
 
 :::

@@ -4,9 +4,7 @@ title: Camunda Hub
 description: "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub."
 ---
 
-import BPMNIcon from "@site/docs/components/assets/icon-bpmn.png";
 import DocsIcon from "@site/docs/components/assets/icon-docs.png";
-import PlayIcon from "@site/docs/components/assets/icon-play.png";
 import AoGrid from '../react-components/\_ao-card';
 
 Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
@@ -24,22 +22,34 @@ Manage organizational resources, including clusters and workspaces, and govern t
 
 <AoGrid ao={[
 {
-link: "../console/manage-clusters/manage-cluster",
+link: "./organization/manage-workspaces",
+title: "Manage workspaces",
+image: DocsIcon,
+description: "Create and manage workspaces within your organization.",
+},
+{
+link: "./organization/manage-clusters/manage-cluster",
 title: "Manage clusters",
 image: DocsIcon,
 description: "Create, monitor, and assign clusters for seamless execution across all rollout stages.",
 },
 {
-link: "../console/manage-organization/manage-users",
+link: "./organization/manage-members/manage-users",
 title: "Manage members",
 image: DocsIcon,
 description: "Manage the users, user groups, and roles in your organization.",
 },
 {
-link: "../console/manage-organization/organization-settings",
+link: "./organization/manage-organization-settings/organization-settings",
 title: "Manage organization",
 image: DocsIcon,
 description: "Manage organizational settings, and view usage alerts and history.",
+},
+{
+link: "./organization/analyze-operations/",
+title: "Analyze operations",
+image: DocsIcon,
+description: "Monitor cluster health, track job and process execution, and measure business value across your Camunda organization.",
 },
 ]} columns={3}/>
 
@@ -49,13 +59,13 @@ Discover and use approved reusable assets, manage projects, and deliver business
 
 <AoGrid ao={[
 {
-link: "../modeler/web-modeler/process-applications",
+link: "./workspace/manage-projects",
 title: "Manage projects",
 image: DocsIcon,
-description: "Develop and progress project releases through the stages of a typical development lifecycle.",
+description: "Develop project releases through the stages of a typical development lifecycle.",
 },
 {
-link: "../modeler/web-modeler",
+link: "./workspace/modeler",
 title: "Model business processes",
 image: DocsIcon,
 description: "Collaboratively design executable processes as the foundation for scalable IT and business automation.",

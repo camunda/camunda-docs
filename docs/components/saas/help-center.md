@@ -12,7 +12,7 @@ Camunda 8 SaaS offers a Help Center to all users, where you can access additiona
 
 ## Visiting the Help Center
 
-You can visit the Help Center directly from your Camunda 8 account. From Console or Modeler, click the **Open Help Center** icon in the top right corner of the navigation bar:
+You can visit the Help Center directly from your Camunda 8 account. From Camunda Hub, click the **Open Help Center** icon in the top right corner of the navigation bar:
 
 ![question mark icon to open the help center](./img/open-help-center.png)
 
@@ -32,7 +32,7 @@ Click **Retake the survey** at any time for a new list of recommendations.
 
 As mentioned, the **Your recommendations** tab populates a list of recommended resources and next steps based on your sign-up or in-app onboarding survey.
 
-These resources may link to additional material in the Console, documentation, Camunda Academy, or blog.
+These resources may link to additional material in Camunda Hub, documentation, Camunda Academy, or blog.
 
 ### Automation project guide
 
@@ -57,5 +57,5 @@ The **Share your feedback** tab offers a quick way to share product feedback, su
 You may also click the **Documentation** or **Support forum** links in the bottom left corner of the modal if you would like to be taken to either of these resources at any time.
 
 :::note
-Worried about losing your place in Console or Modeler? Clicking any links in the Help Center will automatically open a new tab for additional learning, and your current tab will remain as-is within the product.
+Worried about losing your place in Camunda Hub? Clicking any links in the Help Center will automatically open a new tab for additional learning, and your current tab will remain as-is within the product.
 :::

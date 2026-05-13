@@ -28,7 +28,7 @@ Starting from Camunda 8.9, the Elasticsearch and OpenSearch exporters provide op
 
 - Variable names: Inclusion and exclusion lists with match modes such as exact, starts with, and ends with.
 - Variable value types: Inclusion and exclusion lists for inferred types such as `String`, `Number`, `Boolean`, `Object` and `Null`.
-- Variable scope: Disable export of all local-scope variables (`export-local-variables: false`) and apply separate name/type inclusion and exclusion lists for root vs. local variables.
+- Variable scope: Disable export of all local-scope variables (`export-local-variables-enabled: false`) and apply separate name/type inclusion and exclusion lists for root vs. local variables.
 - BPMN process IDs: Inclusion and exclusion lists by `bpmnProcessId` that drop all records tied to selected processes.
 - Optimize mode: Keeps only the record value types and intents required by Optimize and drops other record types not used by Optimize.
 
