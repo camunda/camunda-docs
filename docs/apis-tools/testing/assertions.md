@@ -415,7 +415,7 @@ assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> 
 ### hasVariableSatisfiesJudge
 
 Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The assertion
-fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
+fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
 
 ```java
 assertThat(processInstance)
@@ -426,7 +426,7 @@ assertThat(processInstance)
 
 Assert that a process variable is semantically similar to an expected string using a configured embedding model. The variable value and the expected value are
 converted to embeddings, and the cosine similarity is compared against the configured threshold. The assertion fails if the variable doesn't exist or the
-similarity score is below the configured threshold (default: 0.5). Requires [semantic similarity configuration](configuration.md#semantic-similarity-configuration).
+similarity score is below the configured threshold (default: 0.5). It requires [semantic similarity configuration](configuration.md#semantic-similarity-configuration).
 
 ```java
 assertThat(processInstance)
@@ -489,7 +489,7 @@ assertThat(processInstance).hasLocalVariableSatisfies(
 
 Assert that a local variable in the scope of a given element satisfies a natural language expectation using a configured LLM judge. Use the BPMN
 element ID or an [element selector](utilities.md#element-selector) to identify the element. The expectation is evaluated only once. The assertion
-fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
+fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
 
 ```java
 assertThat(processInstance)
@@ -502,7 +502,7 @@ assertThat(processInstance)
 
 Assert that a local variable in the scope of a given element is semantically similar to an expected string using a configured embedding model. Use the BPMN
 element ID or an [element selector](utilities.md#element-selector) to identify the element. The assertion fails if the variable doesn't exist or the
-similarity score is below the configured threshold (default: 0.5). Requires [semantic similarity configuration](configuration.md#semantic-similarity-configuration).
+similarity score is below the configured threshold (default: 0.5). It requires [semantic similarity configuration](configuration.md#semantic-similarity-configuration).
 
 ```java
 assertThat(processInstance)
@@ -795,14 +795,16 @@ assertThatDecision(DecisionSelectors.byId("decision-id")).hasNoMatchedRules();
 
 ## Value assertions
 
-You can verify arbitrary string values, independent of a process instance, using `CamundaAssert.assertThatValue()`. This is useful for evaluating
-values produced outside of a running process - for example, a single property of a variable object, with the
+You can verify arbitrary string values, independent of a process instance, using `CamundaAssert.assertThatValue()`.
+
+This is useful for evaluating
+values produced outside of a running process. For example, a single property of a variable object, with the
 same LLM judge and embedding-based similarity checks used for process variables.
 
 ### satisfiesJudge
 
 Assert that the given value satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The
-assertion fails if the LLM score is below the configured threshold (default: 0.5). Requires [judge configuration](configuration.md#judge-configuration).
+assertion fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
 
 ```java
 assertThatValue("The order has been shipped and will arrive tomorrow.")
@@ -821,7 +823,7 @@ assertThatValue(response)
 
 Assert that the given value is semantically similar to an expected string using a configured embedding model. Both values are converted to embeddings,
 and the cosine similarity is compared against the configured threshold. The assertion fails if the similarity score is below the configured threshold
-(default: 0.5). Requires [semantic similarity configuration](configuration.md#semantic-similarity-configuration).
+(default: 0.5). It requires [semantic similarity configuration](configuration.md#semantic-similarity-configuration).
 
 ```java
 assertThatValue("Hi there, what can I do for you?")

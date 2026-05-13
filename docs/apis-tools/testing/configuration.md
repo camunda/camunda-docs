@@ -1368,16 +1368,21 @@ CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
 
 ## Semantic similarity configuration
 
-[Semantic similarity assertions](assertions.md#hasvariablesimilarto) use a configured embedding model to compare process variables (or plain values) to
-an expected string using vector embeddings. The assertion converts both values to embeddings and compares them using cosine similarity. This section covers
-how to set up the embedding model provider and tune the similarity behavior.
+[Semantic similarity assertions](assertions.md#hasvariablesimilarto) use a configured embedding model to compare process variables (or plain values) to an expected string using vector embeddings.
+The assertion converts both values to embeddings and compares them using cosine similarity.
+
+This section covers how to set up the embedding model provider and tune the similarity behavior.
 
 ### Prerequisites
 
-CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured
-support for major embedding model providers: OpenAI, Azure OpenAI, Amazon Bedrock, and OpenAI-compatible APIs.
-LangChain4j requires Java 17+. You can provide your own embedding integration through a custom `EmbeddingModelAdapter`
-instead (see [Custom EmbeddingModelAdapter](#custom-embeddingmodeladapter)).
+CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured support for major embedding model providers, such as OpenAI, Azure OpenAI, Amazon Bedrock, and OpenAI-compatible APIs.
+
+You can provide your own embedding integration through a custom `EmbeddingModelAdapter`
+instead. See [custom EmbeddingModelAdapter](#custom-embeddingmodeladapter) for details.
+
+:::info
+LangChain4j requires Java 17+.
+:::
 
 <Tabs groupId="client" defaultValue="spring-sdk-similarity-pre" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk-similarity-pre' },
@@ -1407,16 +1412,17 @@ Add the `camunda-process-test-langchain4j` dependency to your project:
 
 </Tabs>
 
-If you provide a custom `EmbeddingModelAdapter` (see [Custom EmbeddingModelAdapter](#custom-embeddingmodeladapter)),
+If you provide a custom `EmbeddingModelAdapter` (see [custom EmbeddingModelAdapter](#custom-embeddingmodeladapter)),
 this dependency is not required.
 
 ### Property reference
 
-All semantic similarity properties are nested under `camunda.process-test.similarity` in Spring configuration. In Java
-properties files, use the `similarity.` prefix with camelCase keys (for example, `similarity.embedding-model.api-key`
-becomes `similarity.embeddingModel.apiKey`).
+All semantic similarity properties are nested under `camunda.process-test.similarity` in Spring configuration.
+In Java properties files, use the `similarity.` prefix with camelCase keys. For example, `similarity.embedding-model.api-key` becomes `similarity.embeddingModel.apiKey`.
 
+:::note
 Unless noted otherwise, properties in the provider tables are required.
+:::
 
 #### Similarity settings
 
@@ -1425,9 +1431,8 @@ Unless noted otherwise, properties in the provider tables are required.
 | `similarity.threshold`                     | `double`  | `0.5`   | Cosine similarity threshold (0.0 to 1.0) for the assertion to pass.                                                          |
 | `similarity.default-preprocessors-enabled` | `boolean` | `true`  | When `true`, applies the default text preprocessors (lowercase, Unicode NFC, and whitespace normalization) before embedding. |
 
-The default threshold of `0.5` treats two strings as similar when their cosine similarity is at least `0.5`. This is a
-practical default for AI-generated text, where wording and phrasing may vary between runs even when the meaning is the
-same. Increase the threshold when your assertion needs stricter semantic agreement.
+The default threshold of 0.5 treats two strings as similar when their cosine similarity is at least 0.5. This is a practical default for AI-generated text, where wording and phrasing may vary between runs even when the meaning is the same.
+Increase the threshold when your assertion needs stricter semantic agreement.
 
 #### Embedding model settings
 
@@ -1465,7 +1470,7 @@ camunda:
 
 <TabItem value='amazon-bedrock-embedding'>
 
-Supports Bedrock long-term API keys or AWS IAM credentials. Falls back to the
+It supports Bedrock long-term API keys or AWS IAM credentials. It falls back to the
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
 
 | Property                                            | Required                       | Type       | Description                                                                                    |
@@ -1499,7 +1504,7 @@ camunda:
 
 <TabItem value='azure-openai-embedding'>
 
-Supports API key authentication. Falls back to
+It supports API key authentication. It falls back to
 [`DefaultAzureCredential`](https://learn.microsoft.com/en-us/java/api/com.azure.identity.defaultazurecredential).
 
 | Property                                | Required | Type       | Description                                                                                                                |
@@ -1528,7 +1533,7 @@ camunda:
 
 <TabItem value='openai-compatible-embedding'>
 
-For local models (such as [Ollama](https://ollama.com/)) or any third-party API that implements the
+For local models, such as [Ollama](https://ollama.com/), or any third-party API that implements the
 [OpenAI embeddings format](https://platform.openai.com/docs/api-reference/embeddings).
 
 | Property                                | Required | Type       | Description                                                              |
@@ -1558,7 +1563,7 @@ camunda:
 <TabItem value='custom-embedding'>
 
 For providers not listed above, use a custom provider name and pass arbitrary properties. See
-[Custom EmbeddingModelAdapter](#custom-embeddingmodeladapter) for implementation details.
+[custom EmbeddingModelAdapter](#custom-embeddingmodeladapter) for implementation details.
 
 | Property                                         | Required | Type       | Description                                                                                   |
 | ------------------------------------------------ | -------- | ---------- | --------------------------------------------------------------------------------------------- |
@@ -1630,8 +1635,9 @@ SemanticSimilarityConfig.of(myEmbeddingAdapter, 0.7)
 ### Custom EmbeddingModelAdapter
 
 You can provide your own `EmbeddingModelAdapter` implementation without depending on the `camunda-process-test-langchain4j`
-module. An `EmbeddingModelAdapter` is a functional interface that takes a string and returns a vector of floating-point
-numbers representing the text's semantic embedding.
+module.
+
+An `EmbeddingModelAdapter` is a functional interface that takes a string and returns a vector of floating-point numbers representing the text's semantic embedding.
 
 <Tabs groupId="client" defaultValue="spring-sdk-embed" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk-embed' },
