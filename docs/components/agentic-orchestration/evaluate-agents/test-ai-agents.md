@@ -354,13 +354,14 @@ For the full assertion API, see [Assertions](/apis-tools/testing/assertions.md#h
 
 ## Step 7: Verify with semantic similarity
 
-Semantic similarity assertions are a deterministic, lower-cost alternative to judge assertions. Instead of calling a judge LLM at assertion time, they convert both the actual variable value and the expected text to vector embeddings and compare them using cosine similarity. They work best when you can express the expected result as a concrete sample string. For open-ended criteria that require reasoning — such as "the agent followed the right tool order" — use a [judge assertion](#step-5-verify-agent-output-with-judge-assertions) instead.
+Semantic similarity assertions are a deterministic, lower-cost alternative to judge assertions. Instead of calling a judge LLM at assertion time, they convert both the actual variable value and the expected text to vector embeddings and compare them using cosine similarity. They work best when you can express the expected result as a concrete sample string.
+For open-ended criteria that require reasoning, such as "the agent followed the right tool order", use a [judge assertion](#step-5-verify-agent-output-with-judge-assertions) instead.
 
 ### Configure the embedding model
 
-The embedding model does not need to match the AI agent's LLM or the judge model. A lightweight embedding model often works well because the context is small.
+The embedding model does not need to match the AI agent's LLM or the judge model. Depending on your requirements, a lightweight model is often good enough for a good test result.
 
-Add the embedding model configuration to your test configuration alongside the connector runtime and judge settings from Step 2:
+Add the embedding model configuration to your test configuration alongside the CPT settings from Step 2:
 
 <Tabs groupId="similarity-provider" defaultValue="amazon-bedrock-similarity" queryString values={[
 {label: 'Amazon Bedrock', value: 'amazon-bedrock-similarity' },
@@ -372,14 +373,12 @@ Add the embedding model configuration to your test configuration alongside the c
 ```yaml
 camunda:
   process-test:
-    connectors-secrets:
-      AWS_BEDROCK_ACCESS_KEY: ${AWS_LLM_BEDROCK_ACCESS_KEY}
-      AWS_BEDROCK_SECRET_KEY: ${AWS_LLM_BEDROCK_SECRET_KEY}
     similarity:
       embedding-model:
         provider: "amazon-bedrock"
         model: "amazon.titan-embed-text-v2:0"
         region: "eu-central-1"
+        dimensions: 256
         credentials:
           access-key: ${AWS_LLM_BEDROCK_ACCESS_KEY}
           secret-key: ${AWS_LLM_BEDROCK_SECRET_KEY}
@@ -397,7 +396,7 @@ camunda:
     similarity:
       embedding-model:
         provider: "openai-compatible"
-        model: "nomic-embed-text"
+        model: "<your-model-id>"
         base-url: "http://localhost:11434/v1"
 ```
 
@@ -409,29 +408,40 @@ For the full property reference, see [semantic similarity configuration](/apis-t
 
 ### Add a similarity assertion
 
-With the embedding model configured, use `hasVariableSimilarTo` as a complementary check on the `agent` variable:
+With the embedding model configured, use `hasLocalVariableSimilarTo` as a complementary check on the `email_body` variable of the `AskHumanToSendEmail` task instance:
 
 ```java
 assertThat(processInstance)
-    .hasVariableSimilarTo(
-        "agent",
-        "Sent Ervin a joke by email after he approved the message.");
+    .hasLocalVariableSimilarTo(
+        "AskHumanToSendEmail",
+        "email_body",
+        """
+          Hey Ervin! Here is a joke for you:
+          Why did the workflow cross the road? To get to the happy path.
+          """);
 ```
 
-The assertion converts both strings to embeddings, applies the default text preprocessors (lowercase, Unicode NFC, and whitespace normalization), and compares cosine similarity against the default threshold of 0.5. To tune the threshold globally, use the [semantic similarity configuration](/apis-tools/testing/configuration.md#semantic-similarity-configuration). To override it for a single assertion:
+The assertion converts both strings to embeddings, applies the default text preprocessors (lowercase, Unicode NFC, and whitespace normalization), and compares cosine similarity against the default threshold of 0.5.
+Override the minimal success threshold for a single assertion if you require a higher precision for some assertions:
 
 ```java
 assertThat(processInstance)
     .withSemanticSimilarityConfig(config -> config.withThreshold(0.8))
-    .hasVariableSimilarTo("agent", "Sent Ervin a joke by email after he approved the message.");
+    .hasLocalVariableSimilarTo(
+        "AskHumanToSendEmail",
+        "email_body",
+        """
+          Hey Ervin! Here is a joke for you:
+          Why did the workflow cross the road? To get to the happy path.
+          """);
 ```
 
 ### When to use judge vs. similarity
 
-| Verification style                                                            | Best for                                                                                                              | Cost                                                                                                                              |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| [Judge](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge)          | Open-ended natural-language criteria, multi-part expectations, anything that needs reasoning over the agent's output. | One extra LLM call per assertion. Score and explanation depend on the configured judge model.                                     |
-| [Semantic similarity](/apis-tools/testing/assertions.md#hasvariablesimilarto) | Checks where a concrete reference text close to the expected output can be written down. Deterministic and fast.      | One embedding call per value (cacheable). No reasoning step, so it cannot evaluate criteria that aren't expressed in the wording. |
+| Verification style                                                            | Best for                                                                                                              | Cost                                                                                                                  |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [Judge](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge)          | Open-ended natural-language criteria, multi-part expectations, anything that needs reasoning over the agent's output. | One extra LLM call per assertion. Score and explanation depend on the configured judge model.                         |
+| [Semantic similarity](/apis-tools/testing/assertions.md#hasvariablesimilarto) | Checks where a concrete reference text is close to an actual variable content. Deterministic and fast.                | One embedding call per value. No reasoning step, so it cannot evaluate criteria that aren't expressed in the wording. |
 
 Use judge assertions when expressing the expectation as plain English is natural. Use similarity assertions when the expected answer is itself a sample string.
 
@@ -441,8 +451,8 @@ Both judge and semantic similarity assertions operate on the **serialized JSON s
 
 Beyond this shared constraint:
 
-- **Judge assertions** work well for structured data and natural-language text — the LLM reasons over the serialized form to produce a score and explanation.
-- **Semantic similarity assertions** compare the serialized variable against the expected string in embedding space. Highly structured variables — such as JSON objects with many fields — may score lower than expected even when the semantic meaning matches. Providing a more targeted expected string or lowering the threshold can address this.
+- **Judge assertions** work well for structured data and expectations that require reasoning, for example asserting the conversation over the agent context inside a variable. Here the LLM reasons over the serialized form to produce a score and explanation.
+- **Semantic similarity assertions** compare the serialized variable against the expected string using a vector space. Highly structured variables, such as JSON objects with many fields, may score lower than expected even when the semantic meaning matches.
 
 ## Next steps
 
