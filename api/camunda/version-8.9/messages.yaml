@@ -5,8 +5,10 @@ paths:
         - Message
       operationId: publishMessage
       summary: Publish message
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -40,8 +42,10 @@ paths:
         - Message
       operationId: correlateMessage
       summary: Correlate message
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -85,6 +89,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for message subscriptions based on given criteria.
@@ -117,6 +123,8 @@ paths:
       summary: Search correlated message subscriptions
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 

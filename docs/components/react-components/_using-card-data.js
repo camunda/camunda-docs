@@ -20,7 +20,7 @@ export const featuresCards = [
       "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
   },
   {
-    link: "./modeler/web-modeler/idp/",
+    link: "./hub/workspace/modeler/idp/",
     title: "Intelligent document processing (IDP)",
     image: IconIdpImg,
     description: "Integrate automated document processing into your processes.",
@@ -57,8 +57,7 @@ export const usingCamundaCards = [
     link: "./modeler/about-modeler/",
     title: "Modeler",
     image: IconModelerImg,
-    description:
-      "Use Web Modeler and Desktop Modeler to model your BPMN diagrams.",
+    description: "Model your BPMN diagrams.",
   },
   {
     link: "./concepts/bpmn-dmn-feel/",
@@ -88,10 +87,11 @@ export const usingCamundaCards = [
       "Business intelligence and analytics for enterprise customers.",
   },
   {
-    link: "./console/introduction-to-console/",
-    title: "Console",
+    link: "./hub/",
+    title: "Camunda Hub",
     image: IconConsoleImg,
-    description: "Manage Camunda components, clusters, and your organization.",
+    description:
+      "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale.",
   },
 ];
 
@@ -104,7 +104,7 @@ export const featuresPageCards = [
       "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
   },
   {
-    link: "../modeler/web-modeler/idp/",
+    link: "../hub/workspace/modeler/idp/",
     title: "Intelligent document processing (IDP)",
     image: IconIdpImg,
     description: "Integrate automated document processing into your processes.",

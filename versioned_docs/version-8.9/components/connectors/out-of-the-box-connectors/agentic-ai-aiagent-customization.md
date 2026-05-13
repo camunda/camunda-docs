@@ -43,7 +43,7 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
 
        <properties>
            <!-- use the desired connectors version -->
-           <version.connectors>8.8.0</version.connectors>
+           <version.connectors>8.9.0</version.connectors>
        </properties>
 
        <dependencies>
@@ -75,13 +75,19 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
    camunda:
      connector:
        agenticai:
-         aiagent:
-           enabled: true
          ad-hoc-tools-schema-resolver:
            enabled: false
          mcp:
            remote-client:
              enabled: false
+         a2a:
+           client:
+             outbound:
+               enabled: false
+             polling:
+               enabled: false
+             webhook:
+               enabled: false
    ```
 
 5. If the default AI Agent connector is already connected to your engine (for example, if you are connecting to SaaS), you can override the registered AI Agent connector job worker type by setting one of the following type environment variables to a custom value (such as `my-ai-agent`) when starting your application.
@@ -114,8 +120,9 @@ public class MyCustomAgentInitializer implements AgentInitializer {
     private final AgentInitializer delegate;
 
     public MyCustomAgentInitializer(
-            AdHocToolsSchemaResolver schemaResolver, GatewayToolHandlerRegistry gatewayToolHandlers) {
-        this.delegate = new AgentInitializerImpl(schemaResolver, gatewayToolHandlers);
+        AgentToolsResolver agentToolsResolver,
+        GatewayToolHandlerRegistry gatewayToolHandlers) {
+        this.delegate = new AgentInitializerImpl(agentToolsResolver, gatewayToolHandlers);
     }
 
     @Override

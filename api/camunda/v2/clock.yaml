@@ -5,8 +5,10 @@ paths:
         - Clock
       operationId: pinClock
       summary: Pin internal clock (alpha)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -39,8 +41,10 @@ paths:
         - Clock
       operationId: resetClock
       summary: Reset internal clock (alpha)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 

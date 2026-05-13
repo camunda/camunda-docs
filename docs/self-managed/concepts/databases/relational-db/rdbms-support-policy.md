@@ -15,7 +15,7 @@ This policy applies to:
 It covers relational databases used for:
 
 - [Secondary storage for the Orchestration Cluster](/self-managed/concepts/secondary-storage/index.md)
-- [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/database.md)
+- [Web Modeler](/self-managed/components/hub/configuration/database.md)
 
 :::info
 Camunda follows an **"all LTS versions"** rule for database support. All listed database versions are official **LTS releases still supported by the vendor**. Camunda tests against both the **oldest** and **newest** supported version of each database in CI.
@@ -153,15 +153,15 @@ For deployment instructions, see [loading JDBC drivers into pods](/self-managed/
 
 This table shows RDBMS support status by component (including RDBMS as secondary storage where applicable):
 
-| Component                 | Support status     | Notes                                                                                                             |
-| :------------------------ | :----------------- | :---------------------------------------------------------------------------------------------------------------- |
-| **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                                              |
-| Tasklist UI               | ✅ Fully supported | All functionality available.                                                                                      |
-| Operate UI                | ⚠️ Limited         | Partial support in **8.9-alpha3**. See [Operate limitations](#operate-with-rdbms) below.                          |
-| Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                                                   |
-| Web Modeler               | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md). |
-| Identity                  | ✅ Fully supported | All functionality available.                                                                                      |
-| Management API (REST API) | ✅ Fully supported | All functionality available.                                                                                      |
+| Component                 | Support status     | Notes                                                                                             |
+| :------------------------ | :----------------- | :------------------------------------------------------------------------------------------------ |
+| **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                              |
+| Tasklist UI               | ✅ Fully supported | All functionality available.                                                                      |
+| Operate UI                | ⚠️ Limited         | Partial support in **8.9-alpha3**. See [Operate limitations](#operate-with-rdbms) below.          |
+| Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                                   |
+| Web Modeler               | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md). |
+| Identity                  | ✅ Fully supported | All functionality available.                                                                      |
+| Management API (REST API) | ✅ Fully supported | All functionality available.                                                                      |
 
 :::note
 "Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their RDBMS support and maturity can differ by the alpha release.
@@ -204,6 +204,7 @@ For hands-on instructions to deploy Camunda with RDBMS, start with:
 
 Then choose your deployment pattern:
 
-- [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Reference topology and design considerations.
+- [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture) - Canonical backend trade-offs and production architecture guidance.
+- [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Manual deployment topology guidance for RDBMS.
 - [Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) - Entry point for manual installation, configuration, and operations.
 - [RDBMS example deployment for Helm](/self-managed/deployment/helm/install/helm-with-rdbms.md) - Kubernetes/Helm-based example walkthrough.

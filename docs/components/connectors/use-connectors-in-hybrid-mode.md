@@ -36,7 +36,7 @@ Refer to the [element template](https://github.com/camunda/connectors/blob/main/
 
 ### Prerequisites
 
-Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Orchestration Cluster REST API` scope. Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
+Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Orchestration Cluster REST API` scope. Learn more about [how to obtain required credentials](/components/hub/organization/manage-clusters/manage-api-clients.md).
 
 To use secrets managed by the SaaS environment, add the `Secrets` scope.
 
@@ -101,8 +101,7 @@ CAMUNDA_CONNECTOR_SECRETPROVIDER_CONSOLE_ENABLED = true
 camunda.connector.secretprovider.console.enabled = true
 ```
 
-After enabling Console, secret provider secrets used in an external connectors
-runtime will be resolved by fetching them from Console.
+After enabling Camunda Hub, secret provider secrets used in an external connector's runtime will be resolved by fetching them from Camunda Hub.
 
 ## Preparing element template for hybrid mode
 

@@ -84,6 +84,21 @@ The following key changes were also released as part of an 8.8.x patch release.
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
+
+#### `GET /decision-instances/{decisionEvaluationInstanceKey}` now validates the key format
+
+The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance.api.mdx) endpoint previously returned `404 Not Found` when the `decisionEvaluationInstanceKey` path parameter contained invalid characters that did not match the required pattern `^[0-9]+-[0-9]+$`. The endpoint now correctly returns `400 Bad Request` in this case, while `404 Not Found` is reserved for well-formed keys that do not exist.
+
+**Action:** Update any client code or error handling that relied on receiving `404 Not Found` for malformed keys to also handle `400 Bad Request`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
   
 #### Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled
 
@@ -124,7 +139,7 @@ You must update your clients to at least 8.7.16, as this contains the fix for th
 
 #### Webhook alerts JSON format
 
-In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/console/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
+In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/hub/organization/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
 
 In 8.8.9, the `processVersion` field reverts to returning an integer value representing the process version only. A new `processVersionTag` field is introduced to include the process version tag when available.
 
@@ -544,7 +559,7 @@ DocumentReference
   
 #### Connector SDK: Changes to activity logging in inbound connectors
 
-The Connector SDK 8.8 introduces a new way to [log activities](/components/console/manage-clusters/manage-connectors.md#activity-log) in inbound connectors.
+The Connector SDK 8.8 introduces a new way to [log activities](/components/hub/organization/manage-clusters/manage-connectors.md#activity-log) in inbound connectors.
 
 Objects of the `InboundConnectorContext` class now provide a new overloaded method:
 
@@ -834,7 +849,7 @@ With the Camunda 8.8 release, the configuration for the external database used b
 With the Camunda 8.8 release, the default ID token claim that Web Modeler uses to assign usernames has changed from `name` to `preferred_username`.
 
 - This change aligns the configuration with other Camunda 8 components for consistency across the platform.
-- To continue using the `name` claim, explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` as an environment variable for the Web Modeler `webapp`. See [Identity / Keycloak configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#identity--keycloak-1).
+- To continue using the `name` claim, explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` as an environment variable for the Web Modeler `webapp`. See [Identity / Keycloak configuration](/self-managed/components/hub/configuration/modeler-configuration.md#identity--keycloak-1).
 
 </div>
 </div>
@@ -1032,7 +1047,7 @@ For future use, refer to the [new AWS Marketplace listing](https://aws.amazon.co
 
 #### Removed: Cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` in Web Modeler Self-Managed
 
-With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are no longer supported.
+With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) are no longer supported.
 
 For more information on how to migrate, see the [upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/components/870-to-880.md#cluster-configuration).
 
@@ -1047,8 +1062,8 @@ For more information on how to migrate, see the [upgrade guide](/versioned_docs/
 
 #### Cluster configuration in Web Modeler Self-Managed
 
-The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) now depend on the version of the cluster.
-For version 8.8 and above, [new configuration options](/self-managed/components/modeler/web-modeler/configuration/configuration.md#additional-configuration-for-cluster-versions--88) are required.
+The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) now depend on the version of the cluster.
+For version 8.8 and above, [new configuration options](/self-managed/components/hub/configuration/modeler-configuration.md#additional-configuration-for-cluster-versions--88) are required.
 
 For more information on how to modify your existing configuration, see the [upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/components/870-to-880.md#changed-configuration-options).
 

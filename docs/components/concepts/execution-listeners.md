@@ -44,6 +44,12 @@ Each listener has three properties:
 If multiple listeners of the same `eventType` (such as multiple start listeners) are defined on the same activity, they are executed sequentially, one after the other, in the order defined in the BPMN model.
 :::
 
+## Task headers
+
+An execution listener can define an arbitrary number of `taskHeaders`; they are static metadata handed to workers along with the job. The headers can be used as configuration parameters for the worker.
+
+The job worker receives the listener headers, as well as the custom headers defined for the BPMN element on which the listener is configured. If the BPMN element and the listener both define the same header key, the listener value is used.
+
 ## Implement an execution listener
 
 Execution listeners are processed by [job workers](/components/concepts/job-workers.md).
@@ -60,12 +66,6 @@ See the [job worker documentation](/apis-tools/java-client/job-worker.md) for ex
 ## Variables in an execution listener
 
 Similar to regular job workers, a listener can read variables of the process instance and set new variables by completing the job with variables. The scope of variables and the effect of the job variables depend on the listener event type.
-
-## Task headers
-
-An execution listener can define an arbitrary number of `taskHeaders`; they are static metadata handed to workers along with the job. The headers can be used as configuration parameters for the worker.
-
-The job worker receives the listener headers, as well as the custom headers defined for the BPMN element on which the listener is configured. If the BPMN element and the listener both define the same header key, the listener value is used.
 
 ### `beforeAll` listeners
 

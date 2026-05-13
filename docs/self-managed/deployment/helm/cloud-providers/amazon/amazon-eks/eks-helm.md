@@ -411,7 +411,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ```
 
 :::note Web Modeler SMTP secret
-If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)):
+If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/hub/configuration/modeler-configuration.md#smtp--email)):
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-webmodeler-secret.sh
@@ -447,7 +447,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 #### Web Modeler
 
-As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
+As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../components/hub/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Identity
