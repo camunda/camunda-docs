@@ -381,6 +381,12 @@ Manual tasks are part of [human task orchestration](/guides/getting-started-orch
 
 - [Manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md)
 
+### Multi-tenancy
+
+Multi-tenancy allows a single Camunda 8 installation to serve multiple tenants while keeping each tenant's data, configurations, and access logically isolated.
+
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+
 ### Message
 
 A message contains information to be delivered to interested parties during execution of a [process instance](#process-instance). Messages can be published via Kafka or [Zeebe](#zeebe)’s internal messaging system. Messages are associated with timestamp and other constraints such as time-to-live (TTL).
@@ -601,6 +607,13 @@ This way, a [Camunda workflow](#workflow) can receive messages from an external 
 
 ## T
 
+### Tenant
+
+A tenant is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions.
+
+- [Tenant management](/components/admin/tenant.md)
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+
 ### Temperature
 
 A parameter that regulates the randomness or creativity of AI-generated text. Lower values result in more focused and predictable responses, while higher values lead to more creative and varied outputs.
@@ -635,6 +648,12 @@ A user task listener allows users to execute custom logic in response to specifi
 - [User task listeners](/components/concepts/user-task-listeners.md)
 
 ## V
+
+### Variable
+
+A variable stores data for a [process instance](#process-instance) or a local scope within a process. Variables can hold JSON values and are used to pass business data between tasks, expressions, and events.
+
+- [Variables](/components/concepts/variables.md)
 
 ### Version
 
