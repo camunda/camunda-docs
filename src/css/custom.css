@@ -1941,8 +1941,9 @@ ul ul .table-of-contents__link--active {
 
 [data-theme="dark"] .glossary-term__link {
   font-weight: 600;
-  text-decoration-thickness: auto;
-  text-underline-offset: auto;
+  text-decoration: underline dotted currentColor;
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.12em;
 }
 
 .glossary-term:focus-within .glossary-term__tooltip {
