@@ -796,7 +796,7 @@ assertThatDecision(DecisionSelectors.byId("decision-id")).hasNoMatchedRules();
 ## Value assertions
 
 You can verify arbitrary string values, independent of a process instance, using `CamundaAssert.assertThatValue()`. This is useful for evaluating
-values produced outside of a running process — for example, the response of a tool call or an intermediate string passed between components — with the
+values produced outside of a running process - for example, a single property of a variable object, with the
 same LLM judge and embedding-based similarity checks used for process variables.
 
 ### satisfiesJudge
