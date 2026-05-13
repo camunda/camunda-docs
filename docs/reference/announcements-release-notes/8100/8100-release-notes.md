@@ -56,12 +56,12 @@ See the [release announcement](/reference/announcements-release-notes/8100/8100-
 
 <div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
 
-Camunda-provided agentic blueprints now work out of the box on Camunda 8 SaaS, helping you build and run AI agents immediately without first wiring your own LLM credentials.
+You can now run any AI Agent on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without wiring your own LLM credentials. Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
 
 - **SaaS trial organizations** receive $5 of included LLM budget.
 - **SaaS enterprise organizations** receive $100 of included LLM budget (AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically).
 
-The required credentials are populated automatically as cluster secrets, and the blueprints are preconfigured to use the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) by default, so there is little to no extra setup needed to get started.
+This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup on day one.
 
 #### Standalone evaluation assertions for judge and semantic similarity
 
