@@ -412,6 +412,10 @@ assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> 
 });
 ```
 
+:::tip
+For a guided walkthrough of setting up and testing AI agents, see [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md).
+:::
+
 ### hasVariableSatisfiesJudge
 
 Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The assertion

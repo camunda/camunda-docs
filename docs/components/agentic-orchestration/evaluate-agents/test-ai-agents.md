@@ -20,6 +20,7 @@ In this guide, you will write integration tests that keep the AI agent and LLM i
 
 - **[Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior)** reacts to whichever tasks the agent activates, instead of blocking on a single hard-coded execution order. This addresses the non-deterministic control flow.
 - **[Judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge)** verify AI-generated output or tool execution results with a judge LLM that scores whether a value satisfies a natural-language expectation, replacing brittle exact-match checks.
+- **[Semantic similarity assertions](/apis-tools/testing/assertions.md#hasvariablesimilarto)** verify AI-generated output against a reference text using embeddings and cosine similarity. They are a deterministic, lower-cost alternative to judge assertions when you can express the expected result as a concrete sample string.
 
 After completing this guide, you will be able to test your AI agents using CPT.
 
@@ -351,9 +352,97 @@ assertThat(processInstance)
 
 For the full assertion API, see [Assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge).
 
+## Step 7: Verify with semantic similarity
+
+Semantic similarity assertions are a deterministic, lower-cost alternative to judge assertions. Instead of calling a judge LLM at assertion time, they convert both the actual variable value and the expected text to vector embeddings and compare them using cosine similarity. They work best when you can express the expected result as a concrete sample string. For open-ended criteria that require reasoning — such as "the agent followed the right tool order" — use a [judge assertion](#step-5-verify-agent-output-with-judge-assertions) instead.
+
+### Configure the embedding model
+
+The embedding model does not need to match the AI agent's LLM or the judge model. A lightweight embedding model often works well because the context is small.
+
+Add the embedding model configuration to your test configuration alongside the connector runtime and judge settings from Step 2:
+
+<Tabs groupId="similarity-provider" defaultValue="amazon-bedrock-similarity" queryString values={[
+{label: 'Amazon Bedrock', value: 'amazon-bedrock-similarity' },
+{label: 'Ollama', value: 'openai-compatible-similarity' }
+]}>
+
+<TabItem value='amazon-bedrock-similarity'>
+
+```yaml
+camunda:
+  process-test:
+    connectors-secrets:
+      AWS_BEDROCK_ACCESS_KEY: ${AWS_LLM_BEDROCK_ACCESS_KEY}
+      AWS_BEDROCK_SECRET_KEY: ${AWS_LLM_BEDROCK_SECRET_KEY}
+    similarity:
+      embedding-model:
+        provider: "amazon-bedrock"
+        model: "amazon.titan-embed-text-v2:0"
+        region: "eu-central-1"
+        credentials:
+          access-key: ${AWS_LLM_BEDROCK_ACCESS_KEY}
+          secret-key: ${AWS_LLM_BEDROCK_SECRET_KEY}
+```
+
+</TabItem>
+
+<TabItem value='openai-compatible-similarity'>
+
+Use this provider for [Ollama](https://ollama.com/).
+
+```yaml
+camunda:
+  process-test:
+    similarity:
+      embedding-model:
+        provider: "openai-compatible"
+        model: "nomic-embed-text"
+        base-url: "http://localhost:11434/v1"
+```
+
+</TabItem>
+
+</Tabs>
+
+For the full property reference, see [semantic similarity configuration](/apis-tools/testing/configuration.md#semantic-similarity-configuration).
+
+### Add a similarity assertion
+
+With the embedding model configured, use `hasVariableSimilarTo` as a complementary check on the `agent` variable:
+
+```java
+assertThat(processInstance)
+    .hasVariableSimilarTo(
+        "agent",
+        "Sent Ervin a joke by email after he approved the message.");
+```
+
+The assertion converts both strings to embeddings, applies the default text preprocessors (lowercase, Unicode NFC, and whitespace normalization), and compares cosine similarity against the default threshold of 0.5. To tune the threshold globally, use the [semantic similarity configuration](/apis-tools/testing/configuration.md#semantic-similarity-configuration). To override it for a single assertion:
+
+```java
+assertThat(processInstance)
+    .withSemanticSimilarityConfig(config -> config.withThreshold(0.8))
+    .hasVariableSimilarTo("agent", "Sent Ervin a joke by email after he approved the message.");
+```
+
+### When to use judge vs. similarity
+
+| Verification style                                                            | Best for                                                                                                              | Cost                                                                                                                              |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| [Judge](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge)          | Open-ended natural-language criteria, multi-part expectations, anything that needs reasoning over the agent's output. | One extra LLM call per assertion. Score and explanation depend on the configured judge model.                                     |
+| [Semantic similarity](/apis-tools/testing/assertions.md#hasvariablesimilarto) | Checks where a concrete reference text close to the expected output can be written down. Deterministic and fast.      | One embedding call per value (cacheable). No reasoning step, so it cannot evaluate criteria that aren't expressed in the wording. |
+
+Use judge assertions when expressing the expectation as plain English is natural. Use similarity assertions when the expected answer is itself a sample string.
+
 ## Limitations
 
-Judge assertions evaluate the **serialized JSON string** of a process variable. The judge LLM receives this plain-text representation and reasons over it to produce a score. This works well for structured data and natural-language text, but the judge cannot reason about non-textual content such as [Camunda documents](/components/document-handling/getting-started.md) or other embedded binaries. In these cases, the judge sees only metadata or encoded strings, not the actual content.
+Both judge and semantic similarity assertions operate on the **serialized JSON string** of a process variable. Neither can evaluate non-textual content such as [Camunda documents](/components/document-handling/getting-started.md) or other embedded binaries; in those cases, only metadata or encoded strings reach the assertion.
+
+Beyond this shared constraint:
+
+- **Judge assertions** work well for structured data and natural-language text — the LLM reasons over the serialized form to produce a score and explanation.
+- **Semantic similarity assertions** compare the serialized variable against the expected string in embedding space. Highly structured variables — such as JSON objects with many fields — may score lower than expected even when the semantic meaning matches. Providing a more targeted expected string or lowering the threshold can address this.
 
 ## Next steps
 
@@ -361,5 +450,6 @@ Now that you know how to test your AI agents, you can:
 
 - Learn more about [Camunda Process Test assertions](/apis-tools/testing/assertions.md), including all judge assertion methods.
 - Review [judge configuration](/apis-tools/testing/configuration.md#judge-configuration) for the full property reference and chat model provider settings.
+- Explore [semantic similarity assertions](/apis-tools/testing/assertions.md#hasvariablesimilarto) and the matching [semantic similarity configuration](/apis-tools/testing/configuration.md#semantic-similarity-configuration) for the full embedding-model provider reference.
 - Explore [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior), including chained actions and lifecycle details.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
