@@ -73,7 +73,7 @@ To use an Azure OpenAI model, you must first deploy it in the Azure AI Foundry p
 :::
 
 :::tip
-To use **Anthropic Claude** models deployed on Azure AI Foundry, configure the [Anthropic](#anthropic) provider instead — not this one.
+To use **Anthropic Claude** models deployed on Azure AI Foundry, configure the [Anthropic](#anthropic) provider instead of this one.
 :::
 
 #### Google Vertex AI
