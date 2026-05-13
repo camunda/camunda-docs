@@ -1878,6 +1878,8 @@ ul ul .table-of-contents__link--active {
   display: inline;
   position: relative;
   --glossary-term-accent: var(--ifm-color-primary);
+  --glossary-term-arrow-size: 0.75rem;
+  --glossary-term-arrow-overlap: 0.375rem;
 }
 
 .glossary-term__link {
@@ -1916,10 +1918,10 @@ ul ul .table-of-contents__link--active {
 .glossary-term__tooltip::after {
   content: "";
   position: absolute;
-  top: 100%;
+  top: calc(100% - var(--glossary-term-arrow-overlap));
   left: 50%;
-  width: 0.75rem;
-  height: 0.75rem;
+  width: var(--glossary-term-arrow-size);
+  height: var(--glossary-term-arrow-size);
   border-right: 1px solid var(--glossary-term-accent);
   border-bottom: 1px solid var(--glossary-term-accent);
   background: var(--ifm-background-surface-color);
