@@ -6,6 +6,7 @@ import IconOptimize from "../assets/icon-optimize.png";
 import IconConnectorImg from "../connectors/img/icon-connectors.png";
 import IconOperate from "../assets/icon-operate.png";
 import IconRAG from "../assets/icon-long-term-memory.png";
+import IconTest from "../assets/icon-prereqs.png";
 
 // Get started cards on introduction page
 export const getStartedCards = [
@@ -38,6 +39,13 @@ export const fundamentalCards = [
     title: "Design and architecture",
     image: IconAoDesignImg,
     description: "Plan and design your agentic orchestration solutions.",
+  },
+  {
+    link: "../evaluate-agents/evaluate-agents-overview/",
+    title: "Evaluate your AI agents",
+    image: IconTest,
+    description:
+      "Evaluate the performance and effectiveness of your AI agents.",
   },
 ];
 

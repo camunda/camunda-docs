@@ -8,9 +8,9 @@ keywords: ["agentic ai", "AI agents", "Operate"]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import ProcessInstance from './img/process-instance-overview.png';
-import InstanceHistory from './img/instance-history.png';
-import Variables from './img/variables.png';
+import ProcessInstance from '../img/process-instance-overview.png';
+import InstanceHistory from '../img/instance-history.png';
+import Variables from '../img/variables.png';
 
 Monitor and troubleshoot your AI agent process instances in real time using Operate.
 
@@ -19,7 +19,7 @@ Monitor and troubleshoot your AI agent process instances in real time using Oper
 In this guide, you will:
 
 - Inspect an AI agent process instance in Operate.
-- Understand agent’s tool usage and metadata such as tool call inputs and results.
+- Understand the agent's tool usage and metadata, such as tool call inputs and results.
 - Analyze the agent context and how it is stored.
 
 :::note
@@ -34,7 +34,7 @@ After completing this guide, you will be able to inspect, debug, and monitor AI 
 - You have the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint deployed in [Modeler](/components/modeler/about-modeler.md).
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), where you will use the same example AI agent process. Completing that guide first is recommended. However, it can be applied to other AI agent process implementations.
+This guide is a follow-up to [build your first AI agent](/guides/getting-started-agentic-orchestration.md), where you use the same example AI agent process. We recommend completing that guide first. However, you can also apply this guide to other AI agent process implementations.
 :::
 
 ## Step 1: Run your AI agent process
@@ -48,7 +48,7 @@ For example:
 ## Step 2: Open the process instance in Operate
 
 1. Open [Operate](/components/operate/operate-introduction.md).
-2. Locate the process instance created by your prompt. See [View a deployed process](/components/operate/userguide/basic-operate-navigation.md#view-a-deployed-process) for more details.
+2. Locate the process instance created by your prompt. See [view a deployed process](/components/operate/userguide/basic-operate-navigation.md#view-a-deployed-process) for more details.
 3. Open your process instance view by clicking on its process instance key.
 
 At this point, you should see the process progressing through your model:
@@ -67,7 +67,7 @@ With Operate, you can track the agent activity and see which tool tasks are call
    - In the bottom-left pane, you can see where the element belongs in the execution tree:
      <img src={InstanceHistory} alt="Jokes API execution tree" width="80%"/>
 
-- In the bottom-right pane, the element details are displayed, including the [**Variables**](components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
+- In the bottom-right pane, the element details are displayed, including the [**Variables**](/components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
   However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree. See [Step 4: Inspect tool calls](#step-4-inspect-tool-calls) for more details.
 
 ## Step 4: Inspect tool calls
@@ -199,5 +199,4 @@ In this case, the required action is to provide feedback on the agent results. T
 Now that you know how to monitor your AI agents, you can:
 
 - [Analyze your AI agents](./analyze-ai-agents.md) with Optimize.
-- [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md) with Camunda Process Test, including handling non-deterministic flows and verifying AI-generated output.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).

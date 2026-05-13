@@ -7,10 +7,10 @@ keywords: ["agentic ai", "AI agents", "Optimize"]
 toc_max_heading_level: 2
 ---
 
-import ScriptTask from './img/script-task.png';
-import Heatmap from './img/heatmap.png';
-import PieChart from './img/pie-chart.png';
-import Dashboard from './img/dashboard-optimize.png';
+import ScriptTask from '../img/script-task.png';
+import Heatmap from '../img/heatmap.png';
+import PieChart from '../img/pie-chart.png';
+import Dashboard from '../img/dashboard-optimize.png';
 
 Analyze and improve the performance of your AI agent executions using Optimize.
 
@@ -30,7 +30,7 @@ After completing this guide, you will be able to analyze AI agent executions in 
 - You have deployed and run the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint. This is needed for Optimize to fetch execution data to analyze. Consider running it using different prompts to trigger various AI agent tools.
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
+This guide is a follow-up to [build your first AI agent](/guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process. We recommend completing that guide first. However, you can also apply this guide to other AI agent process implementations.
 :::
 
 ## Step 1: Make your data available
@@ -171,5 +171,5 @@ You can create a dashboard, which is a collection of reports that you can view t
 
 Now that you know how to analyze your AI agents, you can:
 
-- [Monitor your AI agents](/components/agentic-orchestration/monitor-ai-agents.md) with Operate.
+- [Monitor your AI agents](./monitor-ai-agents.md) with Operate.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
