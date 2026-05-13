@@ -1377,10 +1377,7 @@ This section covers how to set up the embedding model provider and tune the simi
 
 CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured support for major embedding model providers, such as OpenAI, Azure OpenAI, Amazon Bedrock, and OpenAI-compatible APIs.
 
-You can provide your own embedding integration through a custom `EmbeddingModelAdapter`
-instead. See [custom EmbeddingModelAdapter](#custom-embeddingmodeladapter) for details.
-
-:::info
+:::note
 LangChain4j requires Java 17+.
 :::
 
@@ -1392,7 +1389,7 @@ LangChain4j requires Java 17+.
 <TabItem value='spring-sdk-similarity-pre'>
 
 Camunda Process Test Spring includes the LangChain4j providers as a transitive dependency. No additional
-dependency is needed.
+dependency or configuration is needed.
 
 </TabItem>
 
@@ -1412,8 +1409,9 @@ Add the `camunda-process-test-langchain4j` dependency to your project:
 
 </Tabs>
 
-If you provide a custom `EmbeddingModelAdapter` (see [custom EmbeddingModelAdapter](#custom-embeddingmodeladapter)),
-this dependency is not required.
+:::important
+You can provide your own embedding integration through a custom `EmbeddingModelAdapter`. In that case, this dependency is not required. See [custom EmbeddingModelAdapter](#custom-embeddingmodeladapter) for more details.
+:::
 
 ### Property reference
 
