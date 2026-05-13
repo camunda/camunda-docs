@@ -10,7 +10,7 @@ const directive = {
         },
         {
           type: "link",
-          url: "/llms.txt",
+          url: "pathname:///llms.txt",
           children: [{ type: "text", value: "llms.txt" }],
         },
         {
