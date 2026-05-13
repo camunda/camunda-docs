@@ -41,7 +41,21 @@ const directive = {
 
 function remarkLlmsDirective() {
   return (tree) => {
-    tree.children.unshift(directive);
+    // Find the index after the last import/export statement so we don't break MDX import resolution
+    let insertIndex = 0;
+    for (let i = 0; i < tree.children.length; i++) {
+      const node = tree.children[i];
+      if (
+        node.type === "mdxjsEsm" ||
+        node.type === "import" ||
+        node.type === "export"
+      ) {
+        insertIndex = i + 1;
+      } else {
+        break;
+      }
+    }
+    tree.children.splice(insertIndex, 0, directive);
   };
 }
 
