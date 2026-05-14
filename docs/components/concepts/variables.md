@@ -94,7 +94,27 @@ The job of **Task B** is completed with the variables `b`, `c`, and `d`. The var
 
 In some cases, variables should be set in a given scope, even if they don't exist in this scope before.
 
-To deactivate the variable propagation, the variables are set as **local variables**. This means the variables are created or updated in the given scope, regardless if they existed in this scope before.
+To deactivate variable propagation, set the variables as **local variables**. This creates or updates the variables in the given scope, regardless of whether they existed in this scope before.
+
+### Define local variables
+
+To define a local variable in Modeler, add an input mapping on the activity, subprocess, or call activity where you want the variable to exist.
+
+The `target` of the input mapping becomes a local variable in that element's scope. For example, an input mapping with `source: =customer.name` and `target: reviewerName` creates the local variable `reviewerName` in that scope.
+
+This is the main way to create local variables for user tasks, subprocesses, and multi-instance activities.
+
+### Scope behavior in common modeling patterns
+
+The scope boundary depends on the BPMN element you use:
+
+| Pattern                 | Scope behavior                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Embedded subprocess     | Creates a local scope inside the same process instance. Local variables stay inside the subprocess unless you propagate them with output mappings. Root-scope process variables are still shared, so parallel or multi-instance embedded subprocess instances can overwrite the same process variable.                                                                                          |
+| Call activity           | Starts a new process instance. Input mappings create local variables on the call activity scope and those variables are copied to the called process instance. The child instance has its own process-variable scope, so sibling call activity instances do not share those child variables directly. Variables are only propagated back through normal propagation or output mapping behavior. |
+| Multi-instance activity | Each instance has its own local scope. Use input mappings to create per-instance local variables, especially in parallel multi-instance activities, to avoid race conditions when multiple instances update the same process variable.                                                                                                                                                          |
+
+If a form field or task variable should be different for each subprocess or each multi-instance instance, define it as a local variable with an input mapping instead of writing it directly to the root process scope.
 
 ## Input/output variable mappings
 
@@ -130,6 +150,8 @@ Variable mappings are evaluated in the defined order. Therefore, a `source` expr
 Input mappings can be used to create new variables. They can be defined on [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), [script tasks](/components/modeler/bpmn/script-tasks/script-tasks.md), [business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md), [call activities](/components/modeler/bpmn/call-activities/call-activities.md), [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md), [send tasks](/components/modeler/bpmn/send-tasks/send-tasks.md), and [subprocesses](/components/modeler/bpmn/subprocesses.md).
 
 When an input mapping is applied, it creates a new [**local variable**](#local-variables) in the scope where the mapping is defined.
+
+In Modeler, define these mappings in the element properties.
 
 You can use [expressions](./expressions.md) or static values for input mappings. You can leave the `source` empty to map the `target` variable to `null`.
 
