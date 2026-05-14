@@ -37,10 +37,21 @@ Switching CLIs does not require a release-state migration; Helm is client-side o
 :::note
 Additional changes for 8.10 will be added here as the 8.10 documentation is updated.
 :::
+<table className="table-callout">
+<tr>
+    <td width="30%">**What's new/changed**</td>
+    <td>**Summary**</td>
+</tr>
+<tr>
+    <td>Legacy APIs and Tasklist V1 removals</td>
+    <td>Camunda 8.10 removes the Operate API, the Tasklist API and Tasklist V1 mode, public start forms, user task access restrictions, and Zeebe Process Test. Review the release announcement and migration guides before you upgrade.</td>
+</tr>
+</table>
 
 :::info learn more and upgrade
 
 - See [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) for a full summary of what's included in Camunda 8.10, including all breaking changes and deprecations, and supported environment changes.
+- For removed legacy APIs, Tasklist V1-dependent features, and Zeebe Process Test, see the [8.10 release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test).
 - Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.9 to 8.10.
 
 :::

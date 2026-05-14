@@ -79,6 +79,37 @@ Supported environments change 2 description.
 Changes for 8.10 will be added here as the 8.10 documentation is updated.
 :::
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removal of legacy APIs, Tasklist V1-dependent features, and Zeebe Process Test
+
+Starting with Camunda 8.10.0-alpha2, Camunda removes the legacy component APIs and related features that were deprecated in 8.8.
+
+The following items are removed:
+
+- The [Operate API](/apis-tools/operate-api/overview.md)
+- The [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) and Tasklist V1 mode
+- Tasklist V1-dependent features such as [user task access restrictions](/components/tasklist/user-task-access-restrictions.md) and [public start forms](/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes.md)
+- [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md)
+
+**Action:** Migrate integrations and testing workflows to the current replacements:
+
+- Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) instead of the removed Operate API and Tasklist API.
+- Use [user task authorization](/components/tasklist/user-task-authorization.md) and [authorization-based access control](/components/concepts/access-control/authorizations.md) instead of user task access restrictions.
+- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
+- Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
+
+<p className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
+<p className="link-arrow">[Migrate from Zeebe Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
+<p className="link-arrow">[Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</p>
+
+</div>
+</div>
+
 <!-- :::info 8.10 APIs & Tools migration guide
 Migrate your API integrations, SDKs, and generated clients to Camunda 8.10 using the [8.10 APIs & Tools migration guide](/).
 :::
