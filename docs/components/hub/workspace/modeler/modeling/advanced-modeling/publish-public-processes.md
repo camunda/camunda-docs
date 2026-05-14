@@ -6,6 +6,8 @@ description: "Public start forms were removed in Camunda 8.10 and are no longer 
 
 Public start forms were removed in Camunda 8.10 together with Tasklist V1.
 
+For the release-level summary of this removal, see the [8.10 release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test).
+
 ## Current alternatives
 
 - For authenticated users inside your organization, link a Camunda Form to a start event and start the process directly [in Tasklist](/components/tasklist/userguide/starting-processes.md).
