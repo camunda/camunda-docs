@@ -18,10 +18,12 @@ Use the following task lifecycle as a starting point.
 
 In a typical flow, users can:
 
-- `start` a task to indicate that they are working on it.
-- `complete` the task when the work is done.
-- When they cannot continue work, they can `pause` it and `resume` it later.
-- While a task is paused, the data entered up to this point is preserved. If users are unable to continue, they can `return` a task to the queue for someone else to pick up, which resets the task data.
+- Get assigned to a task, or assign the task to themselves.
+- Start working on the task.
+- Complete the task when the work is done.
+- Pause, resume, or return the task if they can't continue work, depending on how your task application handles interrupted work.
+
+If your application supports interrupted work, make sure it explicitly persists any draft or intermediate data before users leave the form.
 
 ```mermaid
 stateDiagram-v2
@@ -61,7 +63,7 @@ User task listeners run in a blocking manner. The lifecycle transition pauses un
 Listeners can also deny certain transitions. During `completing`, a listener can reject the transition and return the task to its previous state.
 
 :::tip
-To use Optimize task performance reports, include at least `start` and `complete` actions in your lifecycle. Optionally include `pause`, `resume`, and `return`.
+Optimize currently tracks assigned and unassigned time for user tasks. If you need more detailed reporting, such as work started, paused, resumed, or returned, model these as custom `action` values and process them in your own reporting or audit logic.
 :::
 
 ### Task assignment
@@ -81,16 +83,18 @@ flowchart
 
 The execution engine does not validate user authorization. Your application must enforce access control.
 
-Tasklist allows only the assigned user, an admin, or a manager to update and complete a task. You can implement different rules in your application, such as allowing a user to complete a task on behalf of another user.
+Tasklist allows only the assigned user or another authorized user to update and complete a task. You can implement different rules in your application, such as allowing a user to complete a task on behalf of another user.
+
+In Camunda 8.9 and later, you can use [user task authorizations](../../../components/tasklist/user-task-authorization.md) to control who can read, update, assign, or complete user tasks.
 
 The following best practices are implemented in Tasklist:
 
 - `update` and `complete` operations can only be performed by the assigned user or an admin or manager.
 - Users can only see tasks assigned to them and tasks assigned to their candidate groups.
-- When a task is returned to the queue (i.e. the assignee is cleared), its data and status are reset to `open`.
-- Only admins or managers can reassign tasks.
+- When a task is returned to the queue, the assignee is cleared so another user can pick it up.
+- Only authorized users can reassign tasks.
 - Users can return tasks, but they must provide a comment explaining why.
-- Users can mark tasks with a follow-up date. These then disappear from their individual task list until the follow-up date is reached. The `open` status is preserved, or the task is moved to the `paused` status if it has already been processed. The task remains assigned to the user.
+- Users can mark tasks with a follow-up date. Depending on the assignment, the task remains assigned to the user or becomes unassigned.
 
 Define validation logic that matches your use case.
 
@@ -106,7 +110,7 @@ Supported events:
 - `completing`
 - `canceling`
 
-Lifecycle events represent engine-level transitions. Actions such as `start`, `pause`, and `resume` are application-level operations that typically trigger the `updating` event.
+Lifecycle events represent engine-level transitions. Supported API calls can include an `action` value to add application-specific meaning to the resulting user task listener event. For example, your application can use actions such as `start`, `pause`, or `resume` to represent application-level work progress.
 
 ### `creating`
 
@@ -114,16 +118,13 @@ The `creating` event is emitted when a task instance is created. If the `creatin
 
 ### `assigning`
 
-The engine emits the `assigning` event when a task assignment changes. This includes actions such as `claim`, `assign`, `return`, or `unassign`.
+The engine emits the `assigning` event when a task assignment changes. The resulting event can include an `action` value, such as `claim`, `assign`, `return`, or `unassign`.
 
 ### `updating`
 
-The engine emits the `updating` event when task data changes (except assignment), including:
+The engine emits the `updating` event when task data changes, except assignment changes. This can include changes to variables, candidate users, candidate groups, or other supported task fields.
 
-- candidate users or groups
-- due date or follow-up date
-
-It also emits this event for application-level actions such as `start`, `pause`, or `resume`.
+The update API can also include an `action` value. Use this value to add application-specific meaning to the resulting event, such as `start`, `pause`, or `resume`.
 
 ### `completing`
 
@@ -165,12 +166,12 @@ Use the `action` attribute to describe the reason for the change, such as `claim
 
 ### Update a task
 
-Use the update endpoint to modify task data or perform lifecycle actions.
+Use the update endpoint to modify task data or provide an application-specific `action` value.
 
 You can:
 
 - Update fields such as candidate users, candidate groups, due date, or follow-up date using a `changeset`.
-- Trigger application-level actions such as `start`, `pause`, or `resume` by providing an `action`.
+- Add application-specific meaning to the resulting event by providing an `action` value, such as `start`, `pause`, or `resume`.
 
 You can also send custom actions for audit or business logic purposes, such as `escalate`, `requestFurtherInformation`, `uploadDocument`, or `openExternalApp`.
 
@@ -200,7 +201,7 @@ Optimize supports task productivity reports but currently measures only assigned
 It does not calculate:
 
 - **Idle time:** Time a task was open (time to `start`).
-- **Net working time:** Time during which a task was processed from `start` to `complete`, excluding time spent in `pause` until `resume`.
+- **Net working time:** Time during which a task was processed from a custom `start` action to completion, excluding time between custom `pause` and `resume` actions.
 
 ### Export task lifecycle information
 
