@@ -187,9 +187,8 @@
     {
       "name": "camunda.client.auth.credentials-cache-path",
       "type": "java.lang.String",
-      "description": "The path to the credentials cache file.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
-      "defaultValue": "$HOME\/.camunda\/credentials"
+      "description": "The path to the credentials cache file. If unset or empty, the OAuth provider caches credentials only in memory and does not persist them across restarts. Set this to a writable path to opt in to persistent file-based caching. See issue #13124.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.issuer-url",
@@ -542,6 +541,13 @@
       "defaultValue": false
     },
     {
+      "name": "camunda.client.worker.defaults.stream-inactivity-timeout",
+      "type": "java.time.Duration",
+      "description": "If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before cancelling and recreating it. The timer is reset every time a job is received. Must be strictly less than {@code streamTimeout} when both are set.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": "PT10M"
+    },
+    {
       "name": "camunda.client.worker.defaults.stream-timeout",
       "type": "java.time.Duration",
       "description": "If streaming is enabled, sets the maximum lifetime for a stream. When this timeout is reached, the stream closes, and no more jobs are activated or received. If the worker is still open, a new stream opens immediately.",
@@ -578,7 +584,7 @@
     {
       "name": "camunda.client.worker.override",
       "type": "java.util.Map<java.lang.String,io.camunda.client.spring.properties.CamundaClientJobWorkerProperties>",
-      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type.",
+      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type or worker name.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties"
     },
     {
