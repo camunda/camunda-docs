@@ -145,10 +145,13 @@ The lightweight `docker-compose.yaml` starts the Orchestration Cluster with Elas
 
 The full-stack `docker-compose-full.yaml` already includes PostgreSQL for Management Identity and Web Modeler. That database is separate from the Orchestration Cluster secondary storage. If you want the Orchestration Cluster itself to use RDBMS, configure the `camunda` service as shown in the examples below.
 
+For the full configuration, also update `./.orchestration/application.yaml` with the matching `camunda.data.secondary-storage` YAML settings. Use `docker-compose.override.yaml` to add the database service, and use the tabs below as per-database examples.
+
 Use this workflow for each example:
 
 1. Create `docker-compose.override.yaml` in the extracted distribution directory.
 1. Copy the backend-specific example into that file.
+1. For the full configuration, copy the matching backend settings into `./.orchestration/application.yaml`.
 1. If the backend requires an external JDBC driver, place the driver JAR directly in `./driver-lib` and keep the `./driver-lib:/driver-lib` volume mount from the example.
 1. Start the updated stack with the command shown below the example.
 
@@ -167,6 +170,92 @@ These examples switch the Orchestration Cluster from Elasticsearch to RDBMS. The
 :::note
 The Orchestration Cluster supports RDBMS as secondary storage. Operate support on RDBMS is still limited in 8.9-alpha3. Before using these examples beyond local development, review the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#operate-with-rdbms).
 :::
+
+#### Run with YAML configuration files
+
+For the lightweight configuration, select one of the provided files in `./configuration` by setting `ORCHESTRATION_CONFIG_FILE`. Keep the matching `docker-compose.override.yaml` from the tabs below so Docker Compose also starts the required database container.
+
+For the full configuration, copy the matching `camunda.data.secondary-storage` settings from `./configuration/application-<database>.yaml` into `./.orchestration/application.yaml`, then start the stack with both Compose files.
+
+<Tabs groupId="docker-compose-rdbms-yaml" defaultValue="postgresql" values={[
+{label: 'PostgreSQL', value: 'postgresql'},
+{label: 'MariaDB', value: 'mariadb'},
+{label: 'MySQL', value: 'mysql'},
+{label: 'Oracle', value: 'oracle'},
+{label: 'Microsoft SQL Server', value: 'mssql'},
+{label: 'H2', value: 'h2'},
+]}>
+<TabItem value="postgresql">
+
+```shell
+# Lightweight configuration
+ORCHESTRATION_CONFIG_FILE=application-postgresql.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full configuration
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
+```
+
+</TabItem>
+<TabItem value="mariadb">
+
+```shell
+# Lightweight configuration
+ORCHESTRATION_CONFIG_FILE=application-mariadb.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full configuration
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
+```
+
+</TabItem>
+<TabItem value="mysql">
+
+```shell
+# Lightweight configuration
+ORCHESTRATION_CONFIG_FILE=application-mysql.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full configuration
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
+```
+
+</TabItem>
+<TabItem value="oracle">
+
+```shell
+# Lightweight configuration
+ORCHESTRATION_CONFIG_FILE=application-oracle.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full configuration
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
+```
+
+</TabItem>
+<TabItem value="mssql">
+
+```shell
+# Lightweight configuration
+ORCHESTRATION_CONFIG_FILE=application-mssql.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full configuration
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
+```
+
+</TabItem>
+<TabItem value="h2">
+
+```shell
+# Lightweight configuration
+ORCHESTRATION_CONFIG_FILE=application-h2.yaml docker compose up -d
+
+# Full configuration
+docker compose -f docker-compose-full.yaml up -d
+```
+
+</TabItem>
+</Tabs>
+
+#### Add database services with Docker Compose overrides
+
+Use the following examples as the matching `docker-compose.override.yaml` content for each backend.
 
 <Tabs groupId="docker-compose-rdbms" defaultValue="postgresql" values={[
 {label: 'PostgreSQL', value: 'postgresql'},
