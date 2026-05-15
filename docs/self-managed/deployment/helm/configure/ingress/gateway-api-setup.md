@@ -148,7 +148,7 @@ You are responsible for creating all resources that expose Camunda's services.
 | `global.gateway.tls.secretName`        | string  | `""`    | Name of the Kubernetes `Secret` containing the TLS certificate and private key.                                                                                                                                                                                                        |
 | `global.gateway.name`                  | string  | `""`    | The name of the Gateway resource that Routes attach to. Defaults to the Helm release fullname when unset. Set this when the shared Gateway has a different name than your release (Scenario B).                                                  |
 | `global.gateway.namespace`             | string  | `""`    | The namespace where the Gateway resource lives. Set this only when using a shared Gateway in a different namespace than your Camunda components (see [Scenario B](#scenario-b-shared-gateway-in-a-different-namespace)). When unset, Kubernetes defaults to the Route's own namespace. |
-| `global.gateway.controllerNamespace`   | string  | `""`    | The namespace from which an external controller or operator creates Routes that reference Camunda services. The chart uses this value in the `ReferenceGrant`'s `from.namespace` field. Leave unset if your Routes are created by this chart.   |
+| `global.gateway.controllerNamespace`   | string  | `""`    | The namespace from which an external controller or operator creates Routes that reference Camunda services. The chart uses this value in the `ReferenceGrant`'s `from.namespace` field. Leave unset if your Routes are created by this chart.                                          |
 
 ## Additional configuration
 
