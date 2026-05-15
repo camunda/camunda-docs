@@ -28,8 +28,14 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 Important changes in Camunda 8.10 are summarized as follows:
 
+:::warning Breaking change: Helm v4 required
+Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI.
+
+Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+:::
+
 :::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
+Additional changes for 8.10 will be added here as the 8.10 documentation is updated.
 :::
 
 :::info learn more and upgrade
