@@ -1896,6 +1896,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
+                "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
               ],
             },
             {
@@ -2185,9 +2186,7 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/operational-guides/data-purge",
-        {
-          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
-        },
+        "self-managed/operational-guides/troubleshooting",
       ],
     },
     {

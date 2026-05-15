@@ -20,10 +20,14 @@ If you don't have a Kubernetes cluster yet, check out our setup guides:
 In this guide, you deploy the Orchestration Cluster with Basic authentication and RDBMS (embedded H2) as secondary storage. For a full deployment with all components (Optimize, Web Modeler, Console, Management Identity, and Keycloak), follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md). For production environments, see the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
 :::
 
+:::warning Helm v4 required
+Camunda 8.10 (chart 15.x) requires the Helm CLI v4. Helm v3 is not supported. If you are switching from the Helm v3 CLI, no release-state migration is required. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
+:::
+
 ## Prerequisites
 
 - **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components.
-- **Helm**: The Helm CLI installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
+- **Helm**: The Helm CLI v4 installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
 
 ## Orchestration Cluster only
 
