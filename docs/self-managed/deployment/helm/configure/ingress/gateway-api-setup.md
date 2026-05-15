@@ -89,15 +89,15 @@ spec:
         from: All
 ```
 
-For tighter control, use `from: Selector` with a namespace label. Kubernetes automatically applies the `kubernetes.io/metadata.name` label to all namespaces (Kubernetes 1.21 and later):
-
-```yaml
-    allowedRoutes:
-      namespaces:
-        from: Selector
-        selector:
-          matchLabels:
-            kubernetes.io/metadata.name: <your-camunda-namespace>
+    - name: http
+      port: 80
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              kubernetes.io/metadata.name: <your-camunda-namespace>
 ```
 
 ### Scenario C: Use a pre-existing Gateway in the same namespace
