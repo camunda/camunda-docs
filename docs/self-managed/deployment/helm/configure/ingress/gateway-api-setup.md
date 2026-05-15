@@ -81,23 +81,23 @@ The simplest option is `from: All`, which accepts routes from any namespace:
 ```yaml
 spec:
   listeners:
-  - name: http
-    port: 80
-    protocol: HTTP
-    allowedRoutes:
-      namespaces:
-        from: All
-```
-
     - name: http
       port: 80
       protocol: HTTP
       allowedRoutes:
         namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              kubernetes.io/metadata.name: <your-camunda-namespace>
+          from: All
+```
+
+For tighter control, use `from: Selector` with a namespace label. Kubernetes automatically applies the `kubernetes.io/metadata.name` label to all namespaces (Kubernetes 1.21 and later):
+
+```yaml
+allowedRoutes:
+  namespaces:
+    from: Selector
+    selector:
+      matchLabels:
+        kubernetes.io/metadata.name: <your-camunda-namespace>
 ```
 
 ### Scenario C: Use a pre-existing Gateway in the same namespace
@@ -139,14 +139,14 @@ You are responsible for creating all resources that expose Camunda's services.
 | -------------------------------------- | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `global.host`                          | string  | `""`    | The external hostname where Camunda is reachable. Used as the `hostname` on the Gateway listener and as the `hostnames` field in each Route.                                                                                                                                           |
 | `global.gateway.enabled`               | boolean | `false` | Enable the Kubernetes Gateway API integration. When `false`, no Gateway API resources are created regardless of other settings.                                                                                                                                                        |
-| `global.gateway.createGatewayResource` | boolean | `true`  | Create the `Gateway` CustomResource as part of this Helm release. Set to `false` if a Gateway already exists in the target namespace or in a separate namespace.                                                                                                                       |
+| `global.gateway.createGatewayResource` | boolean | `false` | Create the `Gateway` CustomResource as part of this Helm release. Set to `true` when you want the chart to own the Gateway (Scenario A). Set to `false` if a Gateway already exists in the target namespace or in a separate namespace.                                                |
 | `global.gateway.external`              | boolean | `false` | Skip creating all Gateway API resources (Gateway, Routes, and ReferenceGrant). Use this when you manage all networking resources yourself.                                                                                                                                             |
 | `global.gateway.className`             | string  | `""`    | The name of the `GatewayClass` resource that tells the cluster which Gateway controller manages this Gateway.                                                                                                                                                                          |
 | `global.gateway.labels`                | map     | `{}`    | Labels added to the Gateway and all Route resources.                                                                                                                                                                                                                                   |
 | `global.gateway.annotations`           | map     | `{}`    | Annotations added to the Gateway and all Route resources.                                                                                                                                                                                                                              |
 | `global.gateway.tls.enabled`           | boolean | `false` | Enable TLS on the Gateway listener. Requires `global.gateway.tls.secretName` to be set.                                                                                                                                                                                                |
 | `global.gateway.tls.secretName`        | string  | `""`    | Name of the Kubernetes `Secret` containing the TLS certificate and private key.                                                                                                                                                                                                        |
-| `global.gateway.name`                  | string  | `""`    | The name of the Gateway resource that Routes attach to. Defaults to the Helm release fullname when unset. Set this when the shared Gateway has a different name than your release (Scenario B).                                                  |
+| `global.gateway.name`                  | string  | `""`    | The name of the Gateway resource that Routes attach to. Defaults to the Helm release fullname when unset. Set this when the shared Gateway has a different name than your release (Scenario B).                                                                                        |
 | `global.gateway.namespace`             | string  | `""`    | The namespace where the Gateway resource lives. Set this only when using a shared Gateway in a different namespace than your Camunda components (see [Scenario B](#scenario-b-shared-gateway-in-a-different-namespace)). When unset, Kubernetes defaults to the Route's own namespace. |
 | `global.gateway.controllerNamespace`   | string  | `""`    | The namespace from which an external controller or operator creates Routes that reference Camunda services. The chart uses this value in the `ReferenceGrant`'s `from.namespace` field. Leave unset if your Routes are created by this chart.                                          |
 
