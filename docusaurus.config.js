@@ -301,6 +301,7 @@ module.exports = {
         addMdExtension: true,
         generateMarkdownFiles: true,
         preserveDirectoryStructure: true,
+        addLinkTag: false,
         ignoreFiles: ["apis-tools/*/specifications/*"],
         title: "Camunda 8 Documentation",
         description:
@@ -318,7 +319,7 @@ module.exports = {
             filename: "llms-components.txt",
             title: "Camunda 8 Components",
             description:
-              "Console, Modeler, Zeebe, Operate, Tasklist, Optimize, Connectors, and Agentic Orchestration.",
+              "Console, Modeler, Zeebe, Operate, Tasklist, Optimize, Connectors, and agentic orchestration.",
             includePatterns: ["components/*"],
             fullContent: false,
           },
