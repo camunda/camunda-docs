@@ -682,16 +682,29 @@ body {
 
 .sign-up {
   color: #fff !important;
-  border-color: #fff;
+  background-color: #fc5d0d;
+  border-color: #fc5d0d;
   margin: 1em;
   transition: all 0.3s;
 }
 
 .sign-up:hover {
-  color: #000 !important;
-  background-color: #fff;
+  color: #fff !important;
+  background-color: #171c29;
+  border-color: #171c29;
   transform: translateY(-4px);
   transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .sign-up {
+  background-color: transparent;
+  border-color: #fff;
+}
+
+[data-theme="dark"] .sign-up:hover {
+  color: #000 !important;
+  background-color: #fff;
+  border-color: #fff;
 }
 
 .hero--secondary {
