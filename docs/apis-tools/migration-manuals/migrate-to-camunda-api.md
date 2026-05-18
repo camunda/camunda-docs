@@ -12,15 +12,15 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::note Have you already migrated?
-You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
+You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide is retained to help customers migrate before upgrading from 8.9 to 8.10. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
 :::
 
 ## About
 
-This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), and what to consider when migrating. It covers all public endpoints in the component REST APIs and their Orchestration Cluster API counterparts or required migration changes.
+This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) before upgrading to Camunda 8.10, where the V1 component REST APIs are removed. It covers all public endpoints in the component REST APIs and their Orchestration Cluster API counterparts or required migration changes.
 
 - Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This is the single Orchestration Cluster REST API.
-- Individual component APIs (starting with the former Operate and Tasklist APIs) are being deprecated over time. These will continue to be in the product in the short-term, but Camunda recommends you begin the adoption of the new API.
+- Individual component APIs (starting with the former Operate and Tasklist APIs) were deprecated before their removal in 8.10. Use this guide to complete the migration before upgrading.
 
 :::info
 To learn more about the unified REST API, see [the official blog announcement](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
