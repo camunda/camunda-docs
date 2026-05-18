@@ -42,6 +42,6 @@ Understand the fundamental concepts of Camunda agentic orchestration.
 
 ## Explore further resources
 
-Read our guidelines and recommendations for using Camunda AI agents.
+Read about key capabilities and recommendations for using Camunda AI agents.
 
-<AoGrid ao={recommendationCards} columns={3} />
+<AoGrid ao={recommendationCards} columns={2} />
