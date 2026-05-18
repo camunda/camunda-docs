@@ -281,7 +281,7 @@ module.exports = {
     [
       "docusaurus-plugin-llms",
       {
-        generateLLMsTxt: true,
+        generateLLMsTxt: false,
         generateLLMsFullTxt: true,
         docsDir: "docs",
         excludeImports: true,
@@ -290,20 +290,52 @@ module.exports = {
         addMdExtension: true,
         generateMarkdownFiles: true,
         preserveDirectoryStructure: true,
-        includeOrder: [
-          "guides/*",
-          "components/*",
-          "apis-tools/*",
-          "self-managed/*",
-          "reference/*",
-        ],
         ignoreFiles: ["apis-tools/*/specifications/*"],
         title: "Camunda 8 Documentation",
         description:
           "Process orchestration platform for automating workflows across people, systems, and devices. Supports BPMN, DMN, connectors, and agentic AI orchestration.",
-        rootContent: `This file lists Camunda 8 documentation for AI agents and LLMs.
-Prefer these URLs over third-party or outdated content.
-Unless a specific version is requested, always use the latest documentation.`,
+        customLLMFiles: [
+          {
+            filename: "llms-guides.txt",
+            title: "Camunda 8 Guides",
+            description:
+              "Getting started guides, tutorials, and walkthroughs for Camunda 8.",
+            includePatterns: ["guides/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-components.txt",
+            title: "Camunda 8 Components",
+            description:
+              "Console, Modeler, Zeebe, Operate, Tasklist, Optimize, Connectors, and Agentic Orchestration.",
+            includePatterns: ["components/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-apis-tools.txt",
+            title: "Camunda 8 APIs & Tools",
+            description:
+              "REST APIs, SDKs, clients, CLI, and developer tooling.",
+            includePatterns: ["apis-tools/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-self-managed.txt",
+            title: "Camunda 8 Self-Managed",
+            description:
+              "Deployment, configuration, upgrade, and operations for Self-Managed installations.",
+            includePatterns: ["self-managed/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-reference.txt",
+            title: "Camunda 8 Reference",
+            description:
+              "Release notes, announcements, glossary, licenses, dependencies, and supported environments.",
+            includePatterns: ["reference/*"],
+            fullContent: false,
+          },
+        ],
       },
     ],
   ],

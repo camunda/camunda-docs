@@ -24,28 +24,13 @@ import PageDescription from '@site/src/components/PageDescription';
 
 Upgrading to Camunda 8.10 delivers significant benefits and keeps your installation aligned and ready for future releases.
 
-<!-- <div className="list-tick">
-
-- **Feature 1**: Description
-
-- **Feature 2**: Description
-
-</div> -->
-
 ## Summary of important changes
 
 Important changes in Camunda 8.10 are summarized as follows:
 
-<table className="table-callout">
-<tr>
-    <td width="30%">**What's new/changed**</td>
-    <td>**Summary**</td>
-</tr>
-<tr>
-    <td>Legacy APIs and Tasklist V1 removals</td>
-    <td>Camunda 8.10 removes the Operate API, the Tasklist API and Tasklist V1 mode, public start forms, user task access restrictions, and Zeebe Process Test. Review the release announcement and migration guides before you upgrade.</td>
-</tr>
-</table>
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
 
 :::info learn more and upgrade
 

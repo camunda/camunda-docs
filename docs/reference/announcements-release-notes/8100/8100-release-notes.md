@@ -50,6 +50,40 @@ The conversation storage SPI used by [custom AI Agent storage backends](/compone
 
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign) for more details.
 
+#### Camunda-provided LLM for SaaS
+
+<!-- https://github.com/camunda/product-hub/issues/2883 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+You can now run any AI Agent on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without wiring your own LLM credentials. Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
+
+The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. For enterprise organizations, AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically.
+
+This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup on day one.
+
+#### MCP start event element template
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+<!-- https://github.com/camunda/connectors/pull/6742 -->
+
+The **MCP start event** element template is now available in Web Modeler and Desktop Modeler. Apply it to a BPMN message start event to configure the process as an MCP tool with name, purpose, inputs, and usage guidance for LLMs.
+
+See [MCP start event](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) for the full property reference.
+
+#### Processes MCP Server
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/camunda/pull/52246 -->
+
+Camunda 8.10 introduces the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md), which enables AI agents to discover and call your deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
+
+Deploy a process with an MCP start event and it is automatically registered as a callable tool. MCP clients connect to the `/mcp/processes` endpoint and can invoke any registered process, with the Orchestration Cluster starting a new process instance and returning the process instance key immediately.
+
+The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
+
 #### Standalone evaluation assertions for judge and semantic similarity
 
 <!-- https://github.com/camunda/camunda/issues/46130

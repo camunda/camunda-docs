@@ -142,7 +142,7 @@ AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 When using Azure Blob Storage as a backup store, you can enable logging to
 troubleshoot issues with the Azure SDK. To do this, go through the following steps:
 
-1. Add logging for azure SDK, and set it to debug through the zeebe broker
+1. Add logging for Azure SDK, and set it to debug through the Zeebe Broker
    loggers endpoint:
 
 `curl 'http://localhost:9600/actuator/loggers/com.azure' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'`

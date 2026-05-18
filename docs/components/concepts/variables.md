@@ -4,7 +4,7 @@ title: "Variables"
 description: "Variables are part of process instances and represent their data. Leverage the scope of variables and customize how they are merged into process instances."
 ---
 
-Variables are part of a process instance and represent the data of the instance.
+[Variables](/reference/glossary.md#variable) are part of a [process instance](/reference/glossary.md#process-instance) and represent the data of the instance.
 
 A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
 
