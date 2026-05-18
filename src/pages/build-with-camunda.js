@@ -977,12 +977,18 @@ Available skills:
             <div className={styles.aiExampleGrid}>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
-                "Deploy the order-process.bpmn and start an instance with
-                orderId=42"
+                "Create an invoice approval process with a user task for review
+                and an HTTP connector to notify accounting"
               </div>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
-                "Show me all incidents on the payment-flow process"
+                "Build an AI agent that triages customer support tickets and
+                routes them to the right team"
+              </div>
+              <div className={styles.aiExampleItem}>
+                <span className={styles.aiPromptIcon}>💬</span>
+                "Deploy order-process.bpmn and start an instance with
+                orderId=42"
               </div>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
