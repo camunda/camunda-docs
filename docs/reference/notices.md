@@ -21,6 +21,85 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 48
+
+### Publication date
+
+May 13, 2026
+
+### Products affected
+
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-42198](https://nvd.nist.gov/vuln/detail/CVE-2026-42198), where an attacker with the privileges to impersonate or perform a man-in-the-middle (MITM) attack on the PostgreSQL server can force the JDBC driver to perform SCRAM authentication with a very large iteration count. This can lead to high CPU usage during the SCRAM PBKDF2 computation before authentication can fail. Web Modeler and Identity are affected by this CVE when run with their default configuration. Zeebe, Operate, and Tasklist are only affected in a self-managed setup when running the application with RDBMS as secondary storage with a PostgreSQL server configured as the endpoint.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Identity ≤ 8.9.2, ≤ 8.8.11, or ≤ 8.7.18
+- Camunda Zeebe ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Tasklist ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Operate ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Web Modeler ≤ 8.9.2, ≤ 8.8.13, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Identity 8.9.3, 8.8.12, 8.7.19
+- Camunda Zeebe 8.9.3, 8.8.24, 8.7.29
+- Camunda Tasklist 8.9.3, 8.8.24, 8.7.29
+- Camunda Operate 8.9.3, 8.8.24, 8.7.29
+- Camunda Web Modeler 8.9.3, 8.8.14, 8.7.21
+
+## Notice 47
+
+### Publication date
+
+May 7, 2026
+
+### Products affected
+
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Optimize
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-40973](https://nvd.nist.gov/vuln/detail/CVE-2026-40973), where a local attacker could take control of the embedded Spring Boot `ApplicationTemp` directory. If `server.servlet.session.persistent` is set to `true`, this could allow session hijacking or arbitrary code execution. Default Camunda 8 deployments are not affected.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Identity ≤ 8.9.1, ≤ 8.8.11, or ≤ 8.7.18
+- Camunda Zeebe ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Tasklist ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Operate ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Optimize ≤ 8.9.1, ≤ 8.8.8, or ≤ 8.7.20
+- Camunda Web Modeler ≤ 8.9.1, ≤ 8.8.13, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Identity 8.9.2, 8.8.12, 8.7.19
+- Camunda Zeebe 8.9.2, 8.8.24, 8.7.29
+- Camunda Tasklist 8.9.2, 8.8.24, 8.7.29
+- Camunda Operate 8.9.2, 8.8.24, 8.7.29
+- Camunda Optimize 8.9.2, 8.8.24, 8.7.21
+- Camunda Web Modeler 8.9.2, 8.8.14, 8.7.21
+
 ## Notice 46
 
 ### Publication date
