@@ -86,7 +86,7 @@ module.exports = {
       label: "Build with AI",
       link: {
         type: "doc",
-        id: "guides/build-with-ai/build-with-ai",
+        id: "guides/build-with-ai/overview",
       },
       items: ["guides/build-with-ai/ai-usage-guidelines"],
     },

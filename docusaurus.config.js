@@ -429,7 +429,7 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "guides/build-with-ai/build-with-ai",
+          docId: "guides/build-with-ai/overview",
           label: "Build with AI",
           position: "left",
         },
