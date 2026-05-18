@@ -74,7 +74,17 @@ This ensures high availability while preserving the integrity of the data snapsh
 
 ### Additional considerations
 
-A backup `x` of Camunda 8 using Elasticsearch or OpenSearch consists of backup `x` of Zeebe, backup `x` of Optimize, and backup `x` of Web Applications (Operate, Tasklist). The backup ID must be an integer and greater than the previous backups.
+In this guide, `$BACKUP_ID` is the placeholder for a single backup ID, such as `1748937221`. When you create a full Camunda 8 backup using Elasticsearch or OpenSearch, use the same backup ID for each component backup in that backup set.
+
+For example, backup `1748937221` of Camunda 8 consists of the following component backups:
+
+- A Zeebe backup with backup ID `1748937221`, which contains one snapshot per partition.
+- An Optimize backup with backup ID `1748937221`, which can contain multiple Optimize snapshots.
+- A Web Applications backup with backup ID `1748937221`, which can contain multiple Operate and Tasklist snapshots.
+
+This means one `backupId` identifies the full Camunda 8 backup set, while each component can still create multiple underlying snapshots.
+
+The backup ID must be an integer and greater than any previous backup ID.
 
 Optimize is not part of the Web Applications backup API and needs to be executed separately to successfully make a backup. Depending on your deployment configuration, you may not have Optimize deployed. It is safe to ignore the backup instructions for Optimize if it is not deployed.
 
@@ -201,7 +211,7 @@ During a hot backup, the Zeebe cluster remains fully operational:
 
 The `/actuator/backupRuntime` API then creates a consistent backup of each partition while processing continues. The “wait for backup to complete” steps in this guide only poll backup status and do not introduce any additional pause in processing beyond the initial soft export pause.
 
-### 2. Start a backup `x` of the web applications (Operate / Tasklist)
+### 2. Start the web applications backup (Operate / Tasklist)
 
 This step uses the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
 
@@ -232,7 +242,7 @@ curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory" \
 
    </details>
 
-### 3. Start a backup `x` of Optimize
+### 3. Start the Optimize backup
 
 This step uses the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md).
 
@@ -256,7 +266,7 @@ curl -XPOST "$OPTIMIZE_MANAGEMENT_API/actuator/backups" \
 
    </details>
 
-### 4. Wait for backup `x` of the web applications (Operate / Tasklist) to complete
+### 4. Wait for the web applications backup to complete
 
 This step uses the [web applications management backup API](/self-managed/operational-guides/backup-restore/webapps-backup.md).
 
@@ -328,7 +338,7 @@ Alternatively as a one-line to wait until the state is `COMPLETED` using a while
 while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupHistory/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
 ```
 
-### 5. Wait for backup `x` of Optimize to complete
+### 5. Wait for the Optimize backup to complete
 
 This step uses the [Optimize management backup API](/self-managed/operational-guides/backup-restore/optimize-backup.md).
 
@@ -376,7 +386,7 @@ Alternatively as a one-line to wait until the state is `COMPLETED` using a while
 while [[ "$(curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
 ```
 
-### 6. Create a backup `x` of the exported Zeebe indices in Elasticsearch/OpenSearch
+### 6. Create a backup of the exported Zeebe indices in Elasticsearch/OpenSearch
 
 You can create this backup using the respective Snapshots API.
 
@@ -504,7 +514,7 @@ This remains relevant if you run Optimize, which still relies on the former expo
 
    </Tabs>
 
-### 7. Wait for backup `x` of the exported Zeebe indices to complete before proceeding
+### 7. Wait for the backup of the exported Zeebe indices to complete before proceeding
 
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
@@ -626,7 +636,7 @@ This remains relevant if you run Optimize, which still relies on the former expo
 
    </Tabs>
 
-### 8. Create a backup of the Zeebe Broker partitions
+### 8. Create the Zeebe broker backup
 
 This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
@@ -649,7 +659,7 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
          </summary>
       </details>
 
-### 9. Wait for backup `x` of Zeebe to complete before proceeding
+### 9. Wait for the Zeebe backup to complete before proceeding
 
 This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 
