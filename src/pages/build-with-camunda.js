@@ -438,57 +438,38 @@ function TerminalWindow({ title, children, copyable = false }) {
         {copyable && (
           <button
             type="button"
-            className={styles.copyButton}
-            onClick={handleCopy}
-            aria-label="Copy command"
-          >
-            {copied ? (
-              <>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M3 8l3 3 7-7"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                Copied
-              </>
-            ) : (
-              <>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <rect
-                    x="5"
-                    y="5"
-                    width="9"
-                    height="9"
-                    rx="1.5"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                  />
-                  <path
-                    d="M3 11V3.5A1.5 1.5 0 014.5 2H11"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                Copy
-              </>
+            aria-label={copied ? "Copied" : "Copy code to clipboard"}
+            title={copied ? "Copied" : "Copy"}
+            className={clsx(
+              styles.copyButton,
+              copied && styles.copyButtonCopied
             )}
+            onClick={handleCopy}
+          >
+            <span className={styles.copyButtonIcons} aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                className={styles.copyIcon}
+                width="16"
+                height="16"
+              >
+                <path
+                  fill="currentColor"
+                  d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
+                />
+              </svg>
+              <svg
+                viewBox="0 0 24 24"
+                className={styles.successIcon}
+                width="16"
+                height="16"
+              >
+                <path
+                  fill="currentColor"
+                  d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+                />
+              </svg>
+            </span>
           </button>
         )}
         <pre className={styles.terminalPre}>{children}</pre>
@@ -516,14 +497,11 @@ function BuildWithCamunda() {
             style={{ scrollMarginTop: "5rem" }}
           >
             <div className={styles.terminalHeroIntro}>
-              <span className={styles.eyebrow}>Build with Camunda</span>
               <h1 className={styles.terminalHeroTitle}>
-                Start from your terminal
+                Build with Camunda 8.9
               </h1>
               <p className={styles.terminalHeroSub}>
-                The Camunda CLI scaffolds projects, starts a local runtime,
-                deploys processes, and manages clusters — one tool for the full
-                dev lifecycle.
+                Go from zero to a running workflow in under two minutes.
               </p>
             </div>
 
@@ -557,40 +535,93 @@ function BuildWithCamunda() {
                   <TerminalIcon />
                 </span>
                 <div className={styles.cliPrimaryHeading}>
-                  <h2 className={styles.cliPrimaryTitle}>Camunda CLI</h2>
+                  <h2 className={styles.cliPrimaryTitle}>
+                    Install and run locally with the CLI
+                  </h2>
                   <p className={styles.cliPrimaryMeta}>
                     v8.9 · Requires Node.js 18+
                   </p>
                 </div>
               </div>
 
+              <p className={styles.cliPrimaryIntro}>
+                Install{" "}
+                <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
+                  c8ctl
+                </Link>{" "}
+                from npm and spin up a Self-Managed Camunda cluster on your
+                machine.
+              </p>
               <TerminalWindow copyable>
                 {`$ npm install -g @camunda8/cli`}
               </TerminalWindow>
 
               <ul className={styles.cliFeatureList}>
                 <li>
-                  <CheckIcon color="#22a06b" /> Scaffold a new project
+                  <CheckIcon color="#22a06b" /> Works on macOS, Linux, Windows
                 </li>
                 <li>
-                  <CheckIcon color="#22a06b" /> Start local runtime
+                  <CheckIcon color="#22a06b" /> Desktop Modeler for modeling
                 </li>
                 <li>
-                  <CheckIcon color="#22a06b" /> Deploy processes
+                  <CheckIcon color="#22a06b" /> AI agent skills built in
                 </li>
                 <li>
-                  <CheckIcon color="#22a06b" /> Manage SaaS clusters
+                  <CheckIcon color="#22a06b" /> Your data stays on your machine
                 </li>
               </ul>
+
+              <p className={styles.cliInfoNote}>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="8"
+                    cy="8"
+                    r="7"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                  <path
+                    d="M8 7v4"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+                </svg>
+                <span>
+                  c8ctl uses c8run, which requires{" "}
+                  <Link
+                    to={useBaseUrl(
+                      "docs/next/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+                    )}
+                  >
+                    OpenJDK 21–25
+                  </Link>
+                  .
+                </span>
+              </p>
 
               <div className={styles.cliPrimaryDivider} />
 
               <p className={styles.quickStartLabel}>Quick start</p>
               <TerminalWindow copyable>
-                {`$ c8 project create my-first-process
-$ cd my-first-process
-$ c8 dev
-✓ Runtime started at http://localhost:8080`}
+                {`# Start your cluster
+$ c8ctl cluster start 8.9
+
+# Camunda is now running! Deploy your first process:
+$ git clone https://github.com/camunda/camunda-8-get-started.git
+$ cd camunda-8-get-started/1-rocket-launch/
+$ c8ctl deploy .
+$ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
+
+# Open Operate at http://localhost:8080/operate to see your process instance running. Log in with the credentials \`demo/demo\`.`}
               </TerminalWindow>
 
               <div className={styles.cliPrimaryActions}>
@@ -608,17 +639,16 @@ $ c8 dev
                 </Link>
               </div>
             </div>
+          </section>
+        </div>
 
-            {/* ─── Other ways divider ─── */}
-            <div className={styles.otherWaysDivider}>
-              <span className={styles.otherWaysLine} />
-              <span className={styles.otherWaysLabel}>
-                Other ways to get started
-              </span>
-              <span className={styles.otherWaysLine} />
-            </div>
+        {/* ─── Other ways frame ─── */}
+        <section className={clsx("container", styles.otherWaysSection)}>
+          <div className={styles.otherWaysFrame}>
+            <span className={styles.otherWaysBadge}>
+              Other ways to get started
+            </span>
 
-            {/* ─── Secondary option cards ─── */}
             <div className={styles.otherWaysGrid}>
               <div className={styles.otherWayCard}>
                 <div className={styles.otherWayHeader}>
@@ -660,33 +690,8 @@ $ c8 dev
                 </Link>
               </div>
             </div>
-
-            {/* ─── Docker banner ─── */}
-            <Link
-              className={styles.dockerBanner}
-              to={useBaseUrl(
-                "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
-              )}
-            >
-              <span className={styles.dockerBannerIcon}>
-                <DockerIcon />
-              </span>
-              <div className={styles.dockerBannerBody}>
-                <strong className={styles.dockerBannerTitle}>
-                  Prefer Docker?
-                </strong>
-                <p className={styles.dockerBannerDesc}>
-                  Run the full stack with{" "}
-                  <CodeBlock>docker compose up</CodeBlock> using the official
-                  profiles.
-                </p>
-              </div>
-              <span className={styles.dockerBannerCta}>
-                Guide <ArrowRight />
-              </span>
-            </Link>
-          </section>
-        </div>
+          </div>
+        </section>
 
         {/* ─── Everything from your terminal ─── */}
         <section className={clsx("container", styles.section)}>
