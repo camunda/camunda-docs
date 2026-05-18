@@ -5,7 +5,7 @@ sidebar_label: MCP start event
 description: "Reference for the MCP start event element template, which registers a BPMN process as a callable MCP tool in the Processes MCP Server."
 ---
 
-The **MCP start event** is an element template applied to a BPMN message start event. When deployed, it registers the process as an MCP tool in the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
+The **MCP start event** is an [element template](/reference/glossary.md#element-template) applied to a BPMN message start event. When deployed, it registers the process as an MCP tool in the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
 
 :::note
 The MCP start event is not handled by the Connector Runtime like other Connectors. The element template configures the start event metadata that the Processes MCP Server uses to expose the process as a tool to MCP clients.
