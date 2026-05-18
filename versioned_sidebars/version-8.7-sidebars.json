@@ -54,6 +54,17 @@
       ]
     }
   ],
+  "BuildWithAI": [
+    {
+      "type": "category",
+      "label": "Build with AI",
+      "link": {
+        "type": "doc",
+        "id": "guides/build-with-ai/overview"
+      },
+      "items": ["guides/build-with-ai/ai-usage-guidelines"]
+    }
+  ],
   "Components": [
     "components/components-overview",
     {
