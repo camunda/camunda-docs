@@ -883,42 +883,39 @@ $ c8ctl resolve inc 2251799813685251`}
           </div>
           <div className={styles.aiGrid}>
             <div className={styles.aiCard}>
-              <h4 style={{ color: "inherit" }}>
-                Add Camunda skills as Claude plugin{" "}
+              <h4 style={{ display: "flex", alignItems: "center" }}>
+                Add Camunda skills as Claude plugin
                 <span
                   style={{
-                    marginLeft: "0.5rem",
-                    display: "inline-block",
-                    padding: "0.15rem 0.5rem",
-                    borderRadius: "999px",
-                    fontSize: "0.75rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.02em",
-                    backgroundColor: "#fc5d0d",
-                    border: "1px solid #fc5d0d",
-                    color: "#ffffff",
-                    verticalAlign: "middle",
-                    lineHeight: 1.2,
+                    marginLeft: "auto",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                 >
-                  Coming soon
+                  <Link
+                    to="https://github.com/camunda/skills"
+                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                  >
+                    camunda/skills
+                  </Link>
                 </span>
               </h4>
               <TerminalWindow title="Terminal">
-                {`$ claude plugin add camunda/camunda-ai-dev-kit
+                {`$ claude plugin marketplace add camunda/skills
+$ claude plugin install camunda-skills@camunda-skills
 
 Available skills:
-  /new-project  — scaffold a new Camunda project
-  /new-process  — generate a BPMN process
-  /new-agent    — generate an agentic AI process (ad-hoc sub-process + AI Agent connector)
-  /new-dmn      — generate a DMN decision table
-  /new-form     — generate a Camunda Form
-  /new-worker   — generate a job worker
-  /deploy       — deploy resources to Camunda
-  /start        — start a process instance
-  /status       — check instance/incident status
-  /view-process       — visualize BPMN, DMN, or Form files
-  /setup-environment  — install and start Camunda 8 Run locally`}
+  /camunda-c8ctl                   — install and configure c8ctl
+  /camunda-bpmn                    — create and edit BPMN 2.0 processes
+  /camunda-feel                    — write and debug FEEL expressions
+  /camunda-forms                   — create Camunda Form schemas
+  /camunda-connectors              — configure pre-built connectors
+  /camunda-development             — pick the right development surface
+  /camunda-job-workers             — implement job workers (Java, Spring, TypeScript)
+  /camunda-connectors-development  — build custom connectors
+  /camunda-process-mgmt            — deploy, operate, and debug processes
+  /camunda-ai-agent                — build AI agents in BPMN
+  /camunda-docs                    — look up the Camunda 8 docs`}
               </TerminalWindow>
             </div>
             <div className={styles.aiCard}>
