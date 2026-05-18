@@ -16,7 +16,7 @@ Test your AI agent processes in Camunda 8 with [Camunda Process Test (CPT)](/api
 
 AI agent processes are non-deterministic: the [AI Agent connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) decides at runtime which tools to invoke and in what order, and its free-text output varies across runs.
 
-In this guide, you will write integration tests that keep the AI agent and LLM interaction real while mocking external tool executions, using two CPT features:
+In this guide, you will build integration tests that keep the AI agent and LLM interaction real while mocking external tool executions, using the following CPT features:
 
 - **[Conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior)** reacts to whichever tasks the agent activates, instead of blocking on a single hard-coded execution order. This addresses the non-deterministic control flow.
 - **[Judge assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge)** verify AI-generated output or tool execution results with a judge LLM that scores whether a value satisfies a natural-language expectation, replacing brittle exact-match checks.
@@ -271,9 +271,11 @@ processTestContext
 
 For the full conditional behavior API, see [Utilities](/apis-tools/testing/utilities.md#conditional-behavior).
 
-## Step 5: Verify agent output with judge assertions
+## Step 5: Verify with judge assertions
 
-After the process completes, use a judge assertion to verify that the agent's output satisfies a natural language expectation. The following example puts the full test together: it registers the conditional behaviors from Step 4, starts the process with the prompt `"Send Ervin a joke"`, and then asserts that the agent completed the scenario correctly:
+Use a judge assertion to verify that the agent's output satisfies a natural language expectation.
+
+The following example registers the conditional behaviors from [Step 4](#step-4-handle-non-deterministic-flow-paths), starts the process with the prompt `"Send Ervin a joke"`, and then asserts that the agent completed the scenario correctly:
 
 ```java
 @Test
@@ -318,7 +320,7 @@ The LLM may return any value between these anchor points (for example, 0.6 or 0.
 
 If the assertion fails, for example because the agent never called `LoadUserByID` or sent the email to the wrong address, the judge returns a low score with an explanation of which parts of the expectation were not met. This gives you a clear, human-readable failure message instead of a generic assertion error.
 
-## Step 6: Tune the judge evaluation
+### Tune the judge evaluation
 
 Use `withJudgeConfig` to set a stricter threshold for individual assertions:
 
@@ -352,16 +354,18 @@ assertThat(processInstance)
 
 For the full assertion API, see [Assertions](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge).
 
-## Step 7: Verify with semantic similarity
+## Step 6: Verify with semantic similarity
 
-Semantic similarity assertions are a deterministic, lower-cost alternative to judge assertions. Instead of calling a judge LLM at assertion time, they convert both the actual variable value and the expected text to vector embeddings and compare them using cosine similarity. They work best when you can express the expected result as a concrete sample string.
-For open-ended criteria that require reasoning, such as "the agent followed the right tool order", use a [judge assertion](#step-5-verify-agent-output-with-judge-assertions) instead.
+Semantic similarity assertions are a deterministic, lower-cost alternative to judge assertions.
+
+Instead of calling a judge LLM at assertion time, they convert both the actual variable value and the expected text to vector embeddings and compare them using cosine similarity.
+They work best when you can express the expected result as a concrete sample string.
 
 ### Configure the embedding model
 
 The embedding model does not need to match the AI agent's LLM or the judge model. Depending on your requirements, a lightweight model is often good enough for a good test result.
 
-Add the embedding model configuration to your test configuration alongside the CPT settings from Step 2:
+Add the embedding model configuration to your test configuration alongside the CPT settings from [Step 2](#step-2-configure-the-llm-provider-and-connectors):
 
 <Tabs groupId="similarity-provider" defaultValue="amazon-bedrock-similarity" queryString values={[
 {label: 'Amazon Bedrock', value: 'amazon-bedrock-similarity' },
@@ -422,6 +426,7 @@ assertThat(processInstance)
 ```
 
 The assertion converts both strings to embeddings, applies the default text preprocessors (lowercase, Unicode NFC, and whitespace normalization), and compares cosine similarity against the default threshold of 0.5.
+
 Override the minimal success threshold for a single assertion if you require a higher precision for some assertions:
 
 ```java
@@ -438,12 +443,16 @@ assertThat(processInstance)
 
 ### When to use judge vs. similarity
 
-| Verification style                                                            | Best for                                                                                                              | Cost                                                                                                                  |
+| Method                                                                        | Best for                                                                                                              | Cost                                                                                                                  |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | [Judge](/apis-tools/testing/assertions.md#hasvariablesatisfiesjudge)          | Open-ended natural-language criteria, multi-part expectations, anything that needs reasoning over the agent's output. | One extra LLM call per assertion. Score and explanation depend on the configured judge model.                         |
-| [Semantic similarity](/apis-tools/testing/assertions.md#hasvariablesimilarto) | Checks where a concrete reference text is close to an actual variable content. Deterministic and fast.                | One embedding call per value. No reasoning step, so it cannot evaluate criteria that aren't expressed in the wording. |
+| [Semantic similarity](/apis-tools/testing/assertions.md#hasvariablesimilarto) | Checks where a concrete reference text is close to a variable's actual content. Deterministic and fast.               | One embedding call per value. No reasoning step, so it cannot evaluate criteria that aren't expressed in the wording. |
 
-Use judge assertions when expressing the expectation as plain English is natural. Use similarity assertions when the expected answer is itself a sample string.
+:::tip
+
+- Use judge assertions when it feels natural to express the expectation in natural language.
+- Use similarity assertions when the expected answer is itself a sample string.
+  :::
 
 ## Limitations
 
@@ -451,15 +460,14 @@ Both judge and semantic similarity assertions operate on the **serialized JSON s
 
 Beyond this shared constraint:
 
-- **Judge assertions** work well for structured data and expectations that require reasoning, for example asserting the conversation over the agent context inside a variable. Here the LLM reasons over the serialized form to produce a score and explanation.
+- **Judge assertions** work well for structured data and expectations that require reasoning. For example, asserting the conversation stored in the agent context inside a variable: The LLM reasons over the serialized form to produce a score and explanation.
 - **Semantic similarity assertions** compare the serialized variable against the expected string using a vector space. Highly structured variables, such as JSON objects with many fields, may score lower than expected even when the semantic meaning matches.
 
 ## Next steps
 
 Now that you know how to test your AI agents, you can:
 
-- Learn more about [Camunda Process Test assertions](/apis-tools/testing/assertions.md), including all judge assertion methods.
-- Review [judge configuration](/apis-tools/testing/configuration.md#judge-configuration) for the full property reference and chat model provider settings.
-- Explore [semantic similarity assertions](/apis-tools/testing/assertions.md#hasvariablesimilarto) and the matching [semantic similarity configuration](/apis-tools/testing/configuration.md#semantic-similarity-configuration) for the full embedding-model provider reference.
-- Explore [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior), including chained actions and lifecycle details.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+- Dive into [Camunda Process Test assertions](/apis-tools/testing/assertions.md).
+- Review [judge](/apis-tools/testing/configuration.md#judge-configuration) and [semantic similarity](/apis-tools/testing/configuration.md#semantic-similarity-configuration) configurations for the full property references.
+- Explore [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior), including chained actions and lifecycle details.
