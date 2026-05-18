@@ -12,17 +12,17 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::note Have you already migrated?
-You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
+You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide is retained to help customers migrate before upgrading from 8.9 to 8.10. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
 :::
 
 ## About
 
-This document outlines the changes required to continue using the component REST APIs after upgrading to Camunda 8.8, if migration to the new [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) is not yet possible.
+This document outlines the changes required to migrate from the component REST APIs before upgrading to Camunda 8.10, where the V1 component APIs are removed. Use it if migration to the new [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) was not yet possible during your 8.8 or 8.9 upgrade.
 
 In this context, **components** refer to the standalone Camunda applications **Operate** and **Tasklist**, each exposing its own V1 REST API.
 
 :::note
-As of version 8.8, the V1 component APIs are deprecated. We strongly recommend [migrating to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) where possible.
+As of version 8.8, the V1 component APIs are deprecated. They are removed in 8.10, so complete this migration before upgrading. We strongly recommend [migrating to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) where possible.
 :::
 
 ## Migrate V1 APIs
