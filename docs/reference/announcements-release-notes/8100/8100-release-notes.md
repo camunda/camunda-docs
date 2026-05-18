@@ -50,6 +50,18 @@ The conversation storage SPI used by [custom AI Agent storage backends](/compone
 
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign) for more details.
 
+#### Camunda-provided LLM for SaaS
+
+<!-- https://github.com/camunda/product-hub/issues/2883 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+You can now run any AI Agent on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without wiring your own LLM credentials. Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
+
+The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. For enterprise organizations, AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically.
+
+This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup on day one.
+
 #### Standalone evaluation assertions for judge and semantic similarity
 
 <!-- https://github.com/camunda/camunda/issues/46130

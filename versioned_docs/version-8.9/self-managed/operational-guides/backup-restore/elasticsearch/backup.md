@@ -51,13 +51,13 @@ The Camunda 8 components like the Orchestration Cluster and Optimize store data 
 
 For example, using Elasticsearch or OpenSearch's native snapshot capabilities directly does not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, backups must be initiated through each component individually, using their built-in backup functionality.
 
-The same principle applies to Zeebe. Backups must be scheduled through Zeebe to ensure a consistent snapshot of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is not enough, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
+The same principle applies to Zeebe. Backups must be scheduled through Zeebe to ensure a consistent snapshot of all partition data. Simply taking a disk-level snapshot of each Zeebe Broker is not enough, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
 
 A complete backup of a Camunda 8 cluster using Elasticsearch or OpenSearch includes:
 
 - Backups of Web Applications (Operate, Tasklist), and Optimize (triggered through their APIs).
 - Backup of indices from Elasticsearch/OpenSearch containing exported Zeebe records.
-- A Zeebe broker partition backup (triggered through its API).
+- A Zeebe Broker partition backup (triggered through its API).
 
 Because the data across these systems is interdependent, all components must be backed up as part of the same backup window. Backups taken independently at different times may not align and could result in an unreliable restore point.
 
@@ -626,7 +626,7 @@ This remains relevant if you run Optimize, which still relies on the former expo
 
    </Tabs>
 
-### 8. Create a backup `x` of the Zeebe broker partitions
+### 8. Create a backup of the Zeebe Broker partitions
 
 This step uses the [Zeebe management backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 

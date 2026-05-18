@@ -181,7 +181,7 @@ This example shows a 3-broker cluster.
 - Assign a unique `node-id` to each broker, starting from `0` and incrementing up to the total number of brokers (`0`, `1`, `2`).
 - Use the same `initial-contact-points` on all brokers.
 
-For more details, see the [Zeebe broker cluster configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokercluster).
+For more details, see the [Zeebe Broker cluster configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokercluster).
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
