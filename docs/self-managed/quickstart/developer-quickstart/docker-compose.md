@@ -165,7 +165,7 @@ Some existing pages still use the legacy environment variable prefix `CAMUNDA_DA
 These examples switch the Orchestration Cluster from Elasticsearch to RDBMS. They are suitable for local development and evaluation. PostgreSQL and H2 are the simplest starting points. MariaDB and SQL Server are also bundled in the image. MySQL and Oracle require you to provide the JDBC driver.
 
 :::note
-The Orchestration Cluster supports RDBMS as secondary storage. Operate support on RDBMS is still limited in 8.9-alpha3. Before using these examples beyond local development, review the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#operate-with-rdbms).
+The Orchestration Cluster supports RDBMS as secondary storage. Before using these examples beyond local development, review the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
 <Tabs groupId="docker-compose-rdbms" defaultValue="postgresql" values={[
