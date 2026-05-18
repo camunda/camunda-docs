@@ -80,6 +80,17 @@ module.exports = {
       ],
     },
   ],
+  BuildWithAI: [
+    {
+      type: "category",
+      label: "Build with AI",
+      link: {
+        type: "doc",
+        id: "guides/build-with-ai/build-with-ai",
+      },
+      items: ["guides/build-with-ai/ai-usage-guidelines"],
+    },
+  ],
   Components: [
     "components/components-overview",
     {

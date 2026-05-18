@@ -417,6 +417,12 @@ module.exports = {
         },
         {
           type: "doc",
+          docId: "guides/build-with-ai/build-with-ai",
+          label: "Build with AI",
+          position: "left",
+        },
+        {
+          type: "doc",
           docId: "components/components-overview",
           label: "Using Camunda",
           position: "left",
