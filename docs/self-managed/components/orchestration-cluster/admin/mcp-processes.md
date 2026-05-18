@@ -1,7 +1,7 @@
 ---
 id: mcp-processes
 title: MCP processes
-sidebar_label: MCP Processes
+sidebar_label: MCP processes
 description: "Monitor which processes are registered as MCP tools in the Orchestration Cluster admin UI."
 ---
 
@@ -25,6 +25,5 @@ The following information is displayed for each registered process:
 
 ## Troubleshoot
 
-**A process is not appearing after deployment.** Verify that the process was deployed successfully and that the MCP start event element template is applied to the start event. Check for deployment errors in Operate.
-
-**A process shows an unexpected version.** The Processes MCP Server always exposes the latest deployed version. If a previous version is showing, a newer deployment may have failed. See [Version binding](/apis-tools/processes-mcp/processes-mcp-version-binding.md).
+- **A process is not appearing after deployment**: Verify that the process was deployed successfully and that the MCP start event element template is applied to the start event. Check for deployment errors in Operate.
+- **A process shows an unexpected version:** The Processes MCP Server always exposes the latest deployed version. If a previous version is showing, a newer deployment may have failed. See [version binding](/apis-tools/processes-mcp/processes-mcp-version-binding.md) for more details.

@@ -7,6 +7,7 @@ import IconConnectorImg from "../connectors/img/icon-connectors.png";
 import IconOperate from "../assets/icon-operate.png";
 import IconTest from "../hub/workspace/modeler/idp/img/icon-prereqs.png";
 import IconRAG from "../assets/icon-long-term-memory.png";
+import IconMCP from "../assets/icon-mcp.png";
 
 // Get started cards on introduction page
 export const getStartedCards = [
@@ -82,7 +83,7 @@ export const recommendationCards = [
   {
     link: "../expose-process-as-mcp-tool/",
     title: "Expose a process as an MCP tool",
-    image: IconAoAgentImg,
+    image: IconMCP,
     description:
       "Configure a BPMN process to register as a callable MCP tool for AI agents.",
   },
