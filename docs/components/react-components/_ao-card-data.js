@@ -85,7 +85,7 @@ export const recommendationCards = [
     title: "Expose a process as an MCP tool",
     image: IconMCP,
     description:
-      "Configure a BPMN process to register as a callable MCP tool for AI agents.",
+      "Configure a BPMN process as a callable MCP tool for AI agents.",
   },
   {
     link: "../choose-right-model-agentic/",
