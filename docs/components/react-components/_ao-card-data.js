@@ -28,6 +28,13 @@ export const fundamentalCards = [
       "Build and integrate AI agents into your end-to-end processes.",
   },
   {
+    link: "../camunda-provided-llm/",
+    title: "Camunda-provided LLM",
+    image: IconAoLlmImg,
+    description:
+      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
+  },
+  {
     link: "../ao-design/",
     title: "Design and architecture",
     image: IconAoDesignImg,
@@ -39,6 +46,11 @@ export const fundamentalCards = [
     image: IconAoAgentImg,
     description:
       "Configure a BPMN process to register as a callable MCP tool for AI agents.",
+    link: "../evaluate-agents/evaluate-agents-overview/",
+    title: "Evaluate your AI agents",
+    image: IconTest,
+    description:
+      "Evaluate the performance and effectiveness of your AI agents.",
   },
 ];
 

@@ -247,10 +247,21 @@
           },
           "items": [
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/camunda-provided-llm",
             "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/monitor-ai-agents",
-            "components/agentic-orchestration/analyze-ai-agents",
-            "components/agentic-orchestration/test-ai-agents",
+            {
+              "type": "category",
+              "label": "Evaluate your AI agents",
+              "link": {
+                "type": "doc",
+                "id": "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview"
+              },
+              "items": [
+                "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+                "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+                "components/agentic-orchestration/evaluate-agents/test-ai-agents"
+              ]
+            },
             "components/agentic-orchestration/rag-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"
@@ -3395,7 +3406,20 @@
                 "self-managed/quickstart/developer-quickstart/c8run-troubleshooting"
               ]
             },
-            "self-managed/quickstart/developer-quickstart/docker-compose"
+            {
+              "type": "category",
+              "label": "Docker Compose",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/quickstart/developer-quickstart/docker-compose"
+              },
+              "items": [
+                "self-managed/quickstart/developer-quickstart/docker-compose/install-start",
+                "self-managed/quickstart/developer-quickstart/docker-compose/configuration",
+                "self-managed/quickstart/developer-quickstart/docker-compose/secondary-storage",
+                "self-managed/quickstart/developer-quickstart/docker-compose/connectors-and-modeling"
+              ]
+            }
           ]
         },
         "self-managed/quickstart/administrator-quickstart"

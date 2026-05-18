@@ -31,7 +31,7 @@ After completing this guide, you will be able to test your AI agents using CPT.
 - You have downloaded the [AI Agent Chat With Tools](https://marketplace.camunda.com/en-US/apps/587865) process to your local machine.
 
 :::important
-This guide is a follow-up to [Build your first AI agent](../../guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process. Completing that guide first is recommended. However, you can also apply this guide to other AI agent process implementations.
+This guide is a follow-up to [build your first AI agent](/guides/getting-started-agentic-orchestration.md), in which you use the same example AI agent process. We recommend completing that guide first. However, you can also apply this guide to other AI agent process implementations.
 :::
 
 ## Step 1: Prepare the example AI agent blueprint

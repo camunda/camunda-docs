@@ -41,10 +41,12 @@ Complete the following steps in this guide:
 
 Review the actions required for the following 8.10 changes:
 
-| Type                                                         | Change                                                                                                               |
-| :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| <span className="label-highlight red">Breaking change</span> | [Search filters: `UserTaskFilter` process filters converted into advanced search filters] (#usertask-process-filter) |
-| <span className="label-highlight red">Breaking change</span> | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)              |
+| Type                                                              | Change                                                                                                              |
+| :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
+| <span className="label-highlight red">Breaking change</span>      | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter) |
+| <span className="label-highlight red">Breaking change</span>      | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)             |
+| <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                        |
+| <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                            |
 
 ## Breaking changes
 
@@ -155,9 +157,29 @@ This filter works correctly for both new data and legacy data (which has `NULL` 
 </TabItem>
 </Tabs>
 
+## Behavioral changes
+
+### Resource API now uses eventual consistency {#resource-eventual-consistency}
+
+The [Get resource] and [Get resource content] APIs now retrieve from secondary storage, resulting in eventual consistency. After a resource is deployed, there may be a brief delay before it becomes retrievable via these endpoints.
+
+If your application assumes immediate resource retrieval after deployment, add retry logic or a short delay before querying resources.
+
+## Deprecations
+
+Review the actions required for the following deprecations:
+
+### Deprecated: GET resource content API {#deprecated-get-resource-content}
+
+The [Get resource content] endpoint is deprecated. Use [Get resource content binary] instead, which provides the same functionality and also returns generic resources.
+
 ## Next steps
 
 Once you have completed the [upgrade steps](#upgrade-steps) in this guide, you should:
 
 1. Re-compile and run your test suite against the 8.10 API.
 <!--- 1. Review [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) for additional context on each change. --->
+
+[Get resource]: ../orchestration-cluster-api-rest/specifications/get-resource.api.mdx
+[Get resource content]: ../orchestration-cluster-api-rest/specifications/get-resource-content.api.mdx
+[Get resource content binary]: ../orchestration-cluster-api-rest/specifications/get-resource-content-binary.api.mdx

@@ -33,7 +33,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#s">S</a></div>
     <div class="letter-link"><a href="#t">T</a></div>
     <div class="letter-link"><a href="#u">U</a></div>
-    <div class="letter-link">V</div>
+    <div class="letter-link"><a href="#v">V</a></div>
     <div class="letter-link"><a href="#w">W</a></div>
     <div class="letter-link">X</div>
     <div class="letter-link">Y</div>
@@ -217,6 +217,14 @@ An event represents a state change associated with an aspect of an executing [pr
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
+### Execution platform version
+
+In Desktop Modeler and Web Modeler, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
+
+The execution platform version is not a deployed process definition version, a Web Modeler version, or a SaaS cluster generation.
+
+- [Desktop Modeler flags](/components/modeler/desktop-modeler/flags/flags.md#default-execution-platform-version)
+
 ### Execution listener
 
 An execution listener is a mechanism that allows users to execute custom logic at specific points during [workflow](#workflow) execution. Execution listeners can be attached to [BPMN elements](#element) to react to lifecycle events, such as when an element starts or ends. This feature facilitates pre-processing and post-processing tasks without cluttering the BPMN model, functioning similarly to [job workers](#job-worker) by leveraging the same infrastructure.
@@ -252,6 +260,14 @@ See [Zeebe Gateway](#zeebe-gateway).
 ### Generative AI
 
 Any AI system that can produce new content, such as text, images, or audio, in response to prompts. Generative AI doesn’t just analyze existing data; it creates original output that is often contextually relevant to the input.
+
+### Generation
+
+In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. Console uses generations instead of a single engine version because the underlying component versions can change independently.
+
+A generation is not a process definition version, a version tag, or a Web Modeler version.
+
+- [Generation names](/reference/announcements-release-notes/release-policy.md#generation-names)
 
 ## H
 
@@ -365,6 +381,12 @@ Manual tasks are part of [human task orchestration](/guides/getting-started-orch
 
 - [Manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md)
 
+### Multi-tenancy
+
+Multi-tenancy allows a single Camunda 8 installation to serve multiple tenants while keeping each tenant's data, configurations, and access logically isolated.
+
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+
 ### Message
 
 A message contains information to be delivered to interested parties during execution of a [process instance](#process-instance). Messages can be published via Kafka or [Zeebe](#zeebe)’s internal messaging system. Messages are associated with timestamp and other constraints such as time-to-live (TTL).
@@ -426,6 +448,15 @@ Identified by:
 - **version**: Version number assigned by the engine
 
 The engine uses process definitions to start [process instances](#process-instance).
+
+### Process definition version
+
+A process definition version is the numeric version assigned by the Orchestration Cluster each time you deploy a process definition with the same process ID.
+
+Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a Web Modeler version, which is a saved file or project snapshot.
+
+- [Process definition](#process-definition)
+- [Migrate process instances](/components/operate/userguide/process-instance-migration.md)
 
 ### Process instance
 
@@ -576,6 +607,13 @@ This way, a [Camunda workflow](#workflow) can receive messages from an external 
 
 ## T
 
+### Tenant
+
+A tenant is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions.
+
+- [Tenant management](/components/admin/tenant.md)
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+
 ### Temperature
 
 A parameter that regulates the randomness or creativity of AI-generated text. Lower values result in more focused and predictable responses, while higher values lead to more creative and varied outputs.
@@ -608,6 +646,38 @@ Camunda recommends using Camunda user tasks in your process definitions. With 8.
 A user task listener allows users to execute custom logic in response to specific user task lifecycle events, such as assigning or completing a task. User task listeners are attached to BPMN user tasks and facilitate validation, custom task assignment, and other operations during user task execution. They operate similarly to [job workers](#job-worker), leveraging the same infrastructure for processing external logic.
 
 - [User task listeners](/components/concepts/user-task-listeners.md)
+
+## V
+
+### Variable
+
+A variable stores data for a [process instance](#process-instance) or a local scope within a process. Variables can hold JSON values and are used to pass business data between tasks, expressions, and events.
+
+- [Variables](/components/concepts/variables.md)
+
+### Version
+
+In Camunda 8, version is an overloaded term. Depending on context, it can refer to a [process definition version](#process-definition-version), a [version tag](#version-tag), a [Web Modeler version](#web-modeler-version), an [execution platform version](#execution-platform-version), or a SaaS [generation](#generation).
+
+### Version tag
+
+A version tag is a user-defined string label for a specific resource or snapshot.
+
+For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Web Modeler process application versioning, a version tag labels a saved process application snapshot.
+
+A version tag is not generated automatically and does not replace the numeric process definition version.
+
+- [Resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md#versiontag)
+- [Process application versioning](/components/modeler/web-modeler/process-applications/process-application-versioning.md)
+
+### Web Modeler version
+
+A Web Modeler version is a saved snapshot of a BPMN or DMN file, or of an entire project. Diagram versions were previously called milestones.
+
+Web Modeler versions help you compare, restore, review, and deploy snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Versions](/components/modeler/web-modeler/modeling/versions.md)
+- [Process application versioning](/components/modeler/web-modeler/process-applications/process-application-versioning.md)
 
 ## W
 

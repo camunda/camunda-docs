@@ -162,6 +162,8 @@ Additional information adapted from the [upstream documentation](https://nodejs.
 
 ### Default execution platform version
 
+This setting controls the [execution platform version](/reference/glossary.md#execution-platform-version) used by Desktop Modeler. It does not change the version of a deployed cluster or process definition.
+
 To change default execution platform version, configure your `flags.json` as follows:
 
 ```json

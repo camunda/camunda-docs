@@ -21,7 +21,7 @@ These quickstarts are intended for local testing and learning purposes only. The
 If you're a developer looking to evaluate or build process solutions with Camunda 8, this path is for you. It focuses on getting a minimal setup running quickly using:
 
 - **Camunda 8 Run**: A lightweight distribution of the Camunda engine.
-- **Docker Compose**: For spinning up required services like Zeebe, Operate, and Tasklist.
+- **Docker Compose**: For spinning up required services like [Zeebe](/reference/glossary.md#zeebe), Operate, and Tasklist.
 
 [Get started with the developer quickstart](./developer-quickstart.md)
 
@@ -40,7 +40,7 @@ In each quickstart, you will:
 
 - Spin up a local environment with the core Camunda 8 components.
 - Deploy a sample process definition.
-- Interact with the Orchestration Cluster web applications (Operate and Tasklist).
+- Interact with the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) web applications (Operate and Tasklist).
 - Understand the responsibilities associated with your chosen role (developer or administrator).
 
 ## Prerequisites

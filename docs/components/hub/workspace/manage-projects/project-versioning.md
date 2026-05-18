@@ -11,6 +11,8 @@ import VersionListImg from './img/web-modeler-version-view-process-application-v
 
 Projects support versioning, allowing you to create distinct versions for the entire project. You can use versioning to save a single snapshot of all the project files in one action. This helps you track a project throughout its development lifecycle and ensures the correct version is referenced.
 
+In this context, a version is a Web Modeler project snapshot, not a deployed process definition version. See [version](/reference/glossary.md#version).
+
 ## Version creation
 
 To create a project version:
