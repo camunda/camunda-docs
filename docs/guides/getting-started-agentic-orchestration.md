@@ -29,7 +29,7 @@ In this guide, you will:
 - Run your AI agent using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities to the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
-- Integrate a Large Language Model (LLM) into your AI agent.
+- Integrate a [Large Language Model (LLM)](/reference/glossary.md#large-language-model-llm) into your AI agent.
 
 After completing it, you will have an example AI agent running in Camunda 8.
 
@@ -189,7 +189,7 @@ You can keep the default configuration or adjust it to test other setups. To do 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel" width="50%"/>
 
 :::tip
-When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md), by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
+When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md), by clicking the `fx` icon, to reference [process variables](/reference/glossary.md#process-variable) and create dynamic prompts based on runtime data.
 :::
 
 </TabItem>

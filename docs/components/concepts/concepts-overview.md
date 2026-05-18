@@ -25,7 +25,7 @@ Camunda 8 separates runtime execution data from analytical and operational data 
 
 In the diagram above, storage systems appear in two distinct roles:
 
-- **Primary storage** — The authoritative store for runtime execution state used by the Orchestration Cluster to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
+- **Primary storage** — The authoritative store for runtime execution state used by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
 - **Secondary storage** — Systems used for indexing, search, analytics, operational views, and long-term retention. Data is populated from primary storage and optimized for querying rather than execution. See [secondary storage](/reference/glossary.md#secondary-storage).
 
 ### Secondary storage implementations
@@ -84,7 +84,7 @@ Design fully-executable process and decision models that reduce misalignment and
 
 #### Connectors
 
-Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. Outbound Connectors trigger events outside of Camunda, while inbound connectors allow processes running on Camunda to receive messages from external systems. Connectors also serve as the tool layer for AI agents, enabling agents to interact with external systems in a governed, reusable way. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
+Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. [Outbound connectors](/reference/glossary.md#outbound-connector) trigger events outside of Camunda, while [inbound connectors](/reference/glossary.md#inbound-connector) allow processes running on Camunda to receive messages from external systems. Connectors also serve as the tool layer for AI agents, enabling agents to interact with external systems in a governed, reusable way. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
 
 #### AI agents
 

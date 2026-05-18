@@ -435,6 +435,14 @@ Camunda 8.9 adds support for deleting process and decision data, retaining hiera
   <li><span class="link-arrow">[Audit log](/components/audit-log/overview.md)</span></li>
 </ul>
 
+### Tasklist V1 OpenSearch compatibility
+
+OpenSearch 3.6.0 is not supported when Tasklist V1 is enabled. Please use OpenSearch 2.19+ or versions 3.4.x–3.5.x, or migrate to Tasklist V2.
+
+:::note
+Tasklist V1 is planned for removal in version 8.10, so we strongly recommend migrating to Tasklist V2 to avoid future compatibility issues.
+:::
+
 ## RDBMS secondary storage
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
