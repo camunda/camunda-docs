@@ -24,30 +24,13 @@ import PageDescription from '@site/src/components/PageDescription';
 
 Upgrading to Camunda 8.10 delivers significant benefits and keeps your installation aligned and ready for future releases.
 
-<div className="list-tick">
-
-- **Processes MCP Server**: Expose deployed BPMN processes as callable MCP tools for AI agents — without custom integration code. Connect any MCP-compliant client to `/mcp/processes` to discover and invoke your processes as tools.
-
-</div>
-
 ## Summary of important changes
 
 Important changes in Camunda 8.10 are summarized as follows:
 
-<table className="table-callout">
-<tr>
-    <td width="30%">**What's new/changed**</td>
-    <td>**Summary**</td>
-</tr>
-<tr>
-    <td>[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</td>
-    <td>New MCP server at `/mcp/processes` that exposes deployed BPMN processes as callable MCP tools. Processes register automatically on deployment when configured with the MCP start event element template.</td>
-</tr>
-<tr>
-    <td>[MCP start event element template](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md)</td>
-    <td>New element template (AI Tools category) applied to a BPMN message start event to configure a process as an MCP tool with name, purpose, input descriptions, and usage guidance for LLMs.</td>
-</tr>
-</table>
+:::note
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
+:::
 
 :::info learn more and upgrade
 

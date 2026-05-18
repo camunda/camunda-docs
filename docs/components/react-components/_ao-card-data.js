@@ -41,11 +41,6 @@ export const fundamentalCards = [
     description: "Plan and design your agentic orchestration solutions.",
   },
   {
-    link: "../expose-process-as-mcp-tool/",
-    title: "Expose a process as an MCP tool",
-    image: IconAoAgentImg,
-    description:
-      "Configure a BPMN process to register as a callable MCP tool for AI agents.",
     link: "../evaluate-agents/evaluate-agents-overview/",
     title: "Evaluate your AI agents",
     image: IconTest,
@@ -83,6 +78,13 @@ export const recommendationCards = [
     title: "Add long-term memory",
     image: IconRAG,
     description: "Add long-term memory to your AI agents.",
+  },
+  {
+    link: "../expose-process-as-mcp-tool/",
+    title: "Expose a process as an MCP tool",
+    image: IconAoAgentImg,
+    description:
+      "Configure a BPMN process to register as a callable MCP tool for AI agents.",
   },
   {
     link: "../choose-right-model-agentic/",

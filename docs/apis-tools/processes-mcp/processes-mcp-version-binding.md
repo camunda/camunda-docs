@@ -18,11 +18,11 @@ MCP clients typically cache the tool list after connecting. If a client cached t
 MCP clients must therefore:
 
 1. Handle the stale-tool error gracefully.
-2. Re-fetch the tool list (run tool discovery again) before retrying.
+2. Re-fetch the tool list by running tool discovery again before retrying.
 
 ## Implications for process owners
 
-Redeploying a process with a changed interface — different tool name, input parameters, or output variables — is a breaking change for any MCP client currently holding a reference to that tool.
+Redeploying a process with a changed interface, such as a different tool name, input parameters, or output variables, is a breaking change for any MCP client currently holding a reference to that tool.
 
 To reduce disruption:
 

@@ -265,9 +265,6 @@ module.exports = {
             "components/agentic-orchestration/camunda-provided-llm",
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/expose-process-as-mcp-tool",
-            "components/agentic-orchestration/monitor-ai-agents",
-            "components/agentic-orchestration/analyze-ai-agents",
-            "components/agentic-orchestration/test-ai-agents",
             {
               type: "category",
               label: "Evaluate your AI agents",

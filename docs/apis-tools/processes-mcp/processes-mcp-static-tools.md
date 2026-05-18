@@ -7,7 +7,7 @@ description: "Static tools always available on the Processes MCP Server for insp
 
 The Processes MCP Server exposes the following static tools alongside dynamically registered process tools.
 
-These tools let an MCP agent inspect the process instance it just started — its variables, state, and incidents — without switching to a different MCP server.
+These tools let an MCP agent inspect the process instance it just started, including its variables, state, and incidents, without switching to a different MCP server.
 
 | Tool                 | Description                                                 |
 | :------------------- | :---------------------------------------------------------- |

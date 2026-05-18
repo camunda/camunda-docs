@@ -17,26 +17,26 @@ The Processes MCP Server is a capability of the Orchestration Cluster that expos
 - MCP clients discover these tools at runtime and invoke them by name. Each invocation starts a new process instance and returns the started process instance key immediately.
 - The server shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model as the Orchestration Cluster REST API.
 
-:::note
-This is the Processes MCP Server documentation. If you are looking to:
-
-- Give AI agents access to Camunda's operational capabilities (incidents, user tasks, process instances…), see the [Orchestration Cluster MCP Server](../orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md).
-- Connect an AI agent running inside a BPMN process to an external MCP server, see the [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
-  :::
-
 :::important Camunda 8 public API
 The Processes MCP Server is not part of the [Camunda 8 public API](/reference/public-api.md).
 :::
 
+:::note
+This is the Processes MCP Server documentation. If you are looking to:
+
+- Give AI agents access to Camunda's operational capabilities, such as incidents, user tasks, and process instances, see the [Orchestration Cluster MCP Server](../orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md).
+- Connect an AI agent running inside a BPMN process to an external MCP server, see the [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
+  :::
+
 ### Key features
 
-| Feature                   | Description                                                                                                                                                   |
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Process tool registration | Processes with an MCP start event are automatically registered as MCP tools on deployment.                                                                    |
-| Tool discovery            | MCP clients discover available process tools and their schemas at runtime.                                                                                    |
-| Static tools              | The server also exposes a set of [static tools](#static-tools) for inspecting running process instances.                                                      |
-| Version binding           | Only the latest deployed version of a process is exposed. See [Version binding](./processes-mcp-version-binding.md).                                          |
-| Standard transport        | Uses [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) — compatible with any MCP-compliant client. |
+| Feature                   | Description                                                                                                                                                  |
+| :------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Process tool registration | Processes with an MCP start event are automatically registered as MCP tools on deployment.                                                                   |
+| Tool discovery            | MCP clients discover available process tools and their schemas at runtime.                                                                                   |
+| Static tools              | The server also exposes a set of [static tools](#static-tools) for inspecting running process instances.                                                     |
+| Version binding           | Only the latest deployed version of a process is exposed. See [Version binding](./processes-mcp-version-binding.md).                                         |
+| Standard transport        | Uses [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http), compatible with any MCP-compliant client. |
 
 ### Authentication
 
@@ -73,4 +73,5 @@ For production environments and other deployment types, the Processes MCP Server
 
 ## Static tools
 
-In addition to dynamically registered process tools, the Processes MCP Server always exposes a set of static tools for inspecting the process instances it starts. See [Static tools](./processes-mcp-static-tools.md).
+In addition to dynamically registered process tools, the Processes MCP Server exposes a set of static tools for inspecting the process instances it starts.
+See [static tools](./processes-mcp-static-tools.md) for more details.
