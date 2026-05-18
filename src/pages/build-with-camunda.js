@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
@@ -66,6 +66,20 @@ function CheckIcon({ color = "#78a9ff" }) {
         d="M5 8l2 2 4-4"
         stroke={color}
         strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DownloadIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
+        stroke="#fc5d0d"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -384,7 +398,25 @@ function CodeBlock({ children }) {
   return <code className={styles.inlineCode}>{children}</code>;
 }
 
-function TerminalWindow({ title, children }) {
+function TerminalWindow({ title, children, copyable = false }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    const text = typeof children === "string" ? children : String(children);
+    const stripped = text
+      .split("\n")
+      .map((line) => line.replace(/^\$\s?/, ""))
+      .filter((line) => !line.startsWith("#") && !line.startsWith("✓"))
+      .join("\n")
+      .trim();
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(stripped).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      });
+    }
+  };
+
   return (
     <div className={styles.terminalWindow}>
       <div className={styles.terminalHeader}>
@@ -403,6 +435,62 @@ function TerminalWindow({ title, children }) {
         {title && <span className={styles.terminalTitle}>{title}</span>}
       </div>
       <div className={styles.terminalBody}>
+        {copyable && (
+          <button
+            type="button"
+            className={styles.copyButton}
+            onClick={handleCopy}
+            aria-label="Copy command"
+          >
+            {copied ? (
+              <>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 8l3 3 7-7"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Copied
+              </>
+            ) : (
+              <>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="5"
+                    y="5"
+                    width="9"
+                    height="9"
+                    rx="1.5"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                  />
+                  <path
+                    d="M3 11V3.5A1.5 1.5 0 014.5 2H11"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                Copy
+              </>
+            )}
+          </button>
+        )}
         <pre className={styles.terminalPre}>{children}</pre>
       </div>
     </div>
@@ -418,404 +506,187 @@ function BuildWithCamunda() {
       description="Process orchestration for developers. Go from zero to a running workflow in under two minutes."
     >
       <div className={styles.page}>
-        {/* ─── Hero + Start cards wrapper ─── */}
+        {/* ─── Hero: Start from your terminal ─── */}
         <div className={styles.heroWrapper}>
           <div className={styles.heroGlow} />
 
-          {/* ─── Hero ─── */}
-          <header className={styles.hero}>
-            <div className={clsx("container", styles.heroInner)}>
-              <h1 className={styles.heroTitle}>Build with Camunda 8.9</h1>
-              <p className={styles.heroSub}>
-                Go from zero to a running workflow in under two minutes.
-              </p>
-              <p className={styles.heroSub}>
-                Choose how you want to get started:
+          <section
+            className={clsx("container", styles.terminalHeroSection)}
+            id="get-started"
+            style={{ scrollMarginTop: "5rem" }}
+          >
+            <div className={styles.terminalHeroIntro}>
+              <span className={styles.eyebrow}>Build with Camunda</span>
+              <h1 className={styles.terminalHeroTitle}>
+                Start from your terminal
+              </h1>
+              <p className={styles.terminalHeroSub}>
+                The Camunda CLI scaffolds projects, starts a local runtime,
+                deploys processes, and manages clusters — one tool for the full
+                dev lifecycle.
               </p>
             </div>
-          </header>
 
-          {/* ─── Two-card start options ─── */}
-          <section className={clsx("container", styles.section)}>
-            <div className={styles.startGrid}>
-              {/* SaaS card */}
-              <div className={clsx(styles.startCard, styles.startCardSaas)}>
-                <span className={styles.startCardIcon}>
-                  <CloudIcon />
-                </span>
-                <span
-                  className={styles.startCardLabel}
-                  style={{ color: "#78a9ff" }}
+            {/* ─── Main CLI card ─── */}
+            <div className={styles.cliPrimaryCard}>
+              <span className={styles.recommendedBadge}>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  style={{ marginRight: 4 }}
                 >
-                  FASTEST START
-                </span>
-                <h2 className={styles.startCardTitle}>Free trial on SaaS</h2>
-                <p className={styles.startCardDesc}>
-                  Get your own fully managed Camunda cluster. Nothing to
-                  install, just sign up and start modeling today.
-                </p>
-                <ul className={styles.checkList}>
-                  <li>
-                    <CheckIcon color="#78a9ff" /> Zero setup - runs in Camunda's
-                    cloud
-                  </li>
-                  <li>
-                    <CheckIcon color="#78a9ff" /> Web Modeler included
-                  </li>
-                  <li>
-                    <CheckIcon color="#78a9ff" /> AI agent skills built in
-                  </li>
-                  <li>
-                    <CheckIcon color="#78a9ff" /> 30 days free, fully featured
-                  </li>
-                </ul>
-                <div className={styles.startCardFooter}>
-                  <Link
-                    className={styles.ctaButton}
-                    to="https://accounts.cloud.camunda.io/signup?utm_source=camunda_docs&utm_medium=cta&utm_campaign=cli_landing_page"
-                  >
-                    Create free account <ArrowRight />
-                  </Link>
-                  <span className={styles.ctaNote}>
-                    ~60 seconds to your first cluster
-                  </span>
-                </div>
-              </div>
-
-              {/* OR badge */}
-              <div className={styles.orBadge}>OR</div>
-
-              {/* CLI card */}
-              <div className={clsx(styles.startCard, styles.startCardCli)}>
-                <span className={styles.startCardIcon}>
+                  <path
+                    d="M12 2.5l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8-4.8-1.7 4.8-1.7L12 2.5z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M19 13l.9 2.6L22.5 16.5l-2.6.9L19 20l-.9-2.6-2.6-.9 2.6-.9L19 13z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M5.5 15l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6.6-1.7z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Recommended for developers and agent builders
+              </span>
+              <div className={styles.cliPrimaryHeader}>
+                <span className={styles.cliPrimaryIcon}>
                   <TerminalIcon />
                 </span>
-                <span
-                  className={styles.startCardLabel}
-                  style={{ color: "#fc5d0d" }}
-                >
-                  FULL CONTROL
-                </span>
-                <h2 className={styles.startCardTitle}>
-                  Run locally with the CLI <VersionBadge />
-                </h2>
-                <p className={styles.startCardDesc}>
-                  Use the{" "}
-                  <Link
-                    to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}
-                  >
-                    <CodeBlock>c8ctl</CodeBlock>
-                  </Link>
-                  Camunda CLI tool. Run locally and scale seamlessly to
-                  enterprise clusters with the same runtime and stack, deploying
-                  anywhere with one command.
-                </p>
-                <ul className={styles.checkList}>
-                  <li>
-                    <CheckIcon color="#fc5d0d" /> Works on macOS, Linux, Windows
-                  </li>
-                  <li>
-                    <CheckIcon color="#fc5d0d" /> Desktop Modeler for modeling
-                  </li>
-                  <li>
-                    <CheckIcon color="#fc5d0d" /> AI agent skills built in
-                  </li>
-                  <li>
-                    <CheckIcon color="#fc5d0d" /> Your data stays on your
-                    machine
-                  </li>
-                </ul>
-                <div className={styles.startCardFooter}>
-                  <Link
-                    className={clsx(styles.ctaButton, styles.ctaButtonCli)}
-                    to="#get-started"
-                  >
-                    Install now <ArrowDown />
-                  </Link>
-                  <span className={styles.ctaNote}>
-                    ~2 minutes to a running engine
-                  </span>
+                <div className={styles.cliPrimaryHeading}>
+                  <h2 className={styles.cliPrimaryTitle}>Camunda CLI</h2>
+                  <p className={styles.cliPrimaryMeta}>
+                    v8.9 · Requires Node.js 18+
+                  </p>
                 </div>
+              </div>
+
+              <TerminalWindow copyable>
+                {`$ npm install -g @camunda8/cli`}
+              </TerminalWindow>
+
+              <ul className={styles.cliFeatureList}>
+                <li>
+                  <CheckIcon color="#22a06b" /> Scaffold a new project
+                </li>
+                <li>
+                  <CheckIcon color="#22a06b" /> Start local runtime
+                </li>
+                <li>
+                  <CheckIcon color="#22a06b" /> Deploy processes
+                </li>
+                <li>
+                  <CheckIcon color="#22a06b" /> Manage SaaS clusters
+                </li>
+              </ul>
+
+              <div className={styles.cliPrimaryDivider} />
+
+              <p className={styles.quickStartLabel}>Quick start</p>
+              <TerminalWindow copyable>
+                {`$ c8 project create my-first-process
+$ cd my-first-process
+$ c8 dev
+✓ Runtime started at http://localhost:8080`}
+              </TerminalWindow>
+
+              <div className={styles.cliPrimaryActions}>
+                <Link
+                  className={styles.btnPrimary}
+                  to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}
+                >
+                  CLI docs <ArrowRight />
+                </Link>
+                <Link
+                  className={styles.btnSecondary}
+                  to="https://www.npmjs.com/package/@camunda8/cli"
+                >
+                  View on npm <ArrowRight />
+                </Link>
               </div>
             </div>
+
+            {/* ─── Other ways divider ─── */}
+            <div className={styles.otherWaysDivider}>
+              <span className={styles.otherWaysLine} />
+              <span className={styles.otherWaysLabel}>
+                Other ways to get started
+              </span>
+              <span className={styles.otherWaysLine} />
+            </div>
+
+            {/* ─── Secondary option cards ─── */}
+            <div className={styles.otherWaysGrid}>
+              <div className={styles.otherWayCard}>
+                <div className={styles.otherWayHeader}>
+                  <span className={styles.otherWayIcon}>
+                    <CloudIcon />
+                  </span>
+                  <h3 className={styles.otherWayTitle}>SaaS</h3>
+                </div>
+                <p className={styles.otherWayDesc}>
+                  Skip local setup. Model and deploy in the browser with a free
+                  account.
+                </p>
+                <Link
+                  className={styles.otherWayLink}
+                  to="https://accounts.cloud.camunda.io/signup?utm_source=camunda_docs&utm_medium=cta&utm_campaign=cli_landing_page"
+                >
+                  Create free account <ArrowRight />
+                </Link>
+              </div>
+
+              <div className={styles.otherWayCard}>
+                <div className={styles.otherWayHeader}>
+                  <span className={styles.otherWayIcon}>
+                    <DownloadIcon />
+                  </span>
+                  <h3 className={styles.otherWayTitle}>Download packages</h3>
+                </div>
+                <p className={styles.otherWayDesc}>
+                  Desktop Modeler, Camunda 8 Run, and the full getting started
+                  bundle.
+                </p>
+                <Link
+                  className={styles.otherWayLink}
+                  to={useBaseUrl(
+                    "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+                  )}
+                >
+                  All downloads <ArrowRight />
+                </Link>
+              </div>
+            </div>
+
+            {/* ─── Docker banner ─── */}
+            <Link
+              className={styles.dockerBanner}
+              to={useBaseUrl(
+                "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
+              )}
+            >
+              <span className={styles.dockerBannerIcon}>
+                <DockerIcon />
+              </span>
+              <div className={styles.dockerBannerBody}>
+                <strong className={styles.dockerBannerTitle}>
+                  Prefer Docker?
+                </strong>
+                <p className={styles.dockerBannerDesc}>
+                  Run the full stack with{" "}
+                  <CodeBlock>docker compose up</CodeBlock> using the official
+                  profiles.
+                </p>
+              </div>
+              <span className={styles.dockerBannerCta}>
+                Guide <ArrowRight />
+              </span>
+            </Link>
           </section>
         </div>
-
-        {/* ─── Quick install ─── */}
-        <section
-          id="get-started"
-          className={clsx("container", styles.section)}
-          style={{ scrollMarginTop: "5rem" }}
-        >
-          <div
-            className={styles.sectionHeader}
-            style={{ marginBottom: "1rem" }}
-          >
-            <h2 className={styles.sectionTitle}>
-              Get started with c8ctl <VersionBadge />
-            </h2>
-            <p className={styles.sectionSub}>
-              Install{" "}
-              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                <CodeBlock>c8ctl</CodeBlock>
-              </Link>{" "}
-              from npm and spin up a Self-Managed Camunda cluster on your
-              machine.
-            </p>
-          </div>
-          <div
-            className={styles.modelerNote}
-            style={{ marginTop: "0", marginBottom: "1.5rem" }}
-          >
-            <p>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style={{ marginRight: "0.4rem", verticalAlign: "middle" }}
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              <code>c8ctl</code> uses c8run, which requires{" "}
-              <Link
-                to={useBaseUrl(
-                  "docs/next/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                )}
-              >
-                OpenJDK 21–25
-              </Link>{" "}
-              .
-            </p>
-          </div>
-
-          <TerminalWindow title="Terminal">
-            {`$ npm install @camunda8/cli -g
-$ c8ctl cluster start 8.9
-
-# Camunda is now running! Deploy your first process:
-$ git clone https://github.com/camunda/camunda-8-get-started.git
-$ cd camunda-8-get-started/1-rocket-launch/
-$ c8ctl deploy .
-$ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
-
-# Open Operate at http://localhost:8080/operate to see your process instance running. Log in with the credentials \`demo/demo\`. `}
-          </TerminalWindow>
-
-          {/* c8run direct download */}
-          <div className={styles.modelerNote}>
-            <p>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style={{ marginRight: "0.4rem", verticalAlign: "middle" }}
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              No npm? Download Camunda 8 Run directly and start a local Camunda
-              cluster without the CLI.
-            </p>
-            <details className={styles.collapsible}>
-              <summary>Download Camunda 8 Run</summary>
-              <div className={styles.collapsibleContent}>
-                <p style={{ marginBottom: "0.75rem" }}>
-                  Requires{" "}
-                  <a
-                    href="https://adoptium.net/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    OpenJDK 21–25
-                  </a>
-                  . Extract the archive and run:
-                </p>
-                <TerminalWindow title="Terminal">
-                  {`# macOS / Linux
-./start.sh
-
-# Windows
-.\\c8run.exe start`}
-                </TerminalWindow>
-                <div
-                  className={styles.downloadButtons}
-                  style={{ marginTop: "1rem" }}
-                >
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-aarch64.zip"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    macOS (Apple Silicon)
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-x86_64.zip"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    macOS (Intel)
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-linux-x86_64.tar.gz"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Linux
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-windows-x86_64.zip"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Windows
-                  </a>
-                </div>
-                <p className={styles.downloadMeta}>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                    )}
-                  >
-                    Installation guide
-                  </Link>
-                </p>
-              </div>
-            </details>
-          </div>
-
-          {/* Desktop Modeler download */}
-          <div className={styles.modelerNote}>
-            <p>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style={{ marginRight: "0.4rem", verticalAlign: "middle" }}
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              Download Desktop Modeler to design and edit BPMN diagrams, DMN
-              decisions, and forms.
-            </p>
-            <details className={styles.collapsible}>
-              <summary>Download Desktop Modeler </summary>
-              <div className={styles.collapsibleContent}>
-                {/* Homebrew install option (macOS) */}
-                <p style={{ marginBottom: "0.75rem" }}>
-                  On macOS, you can install the Desktop Modeler via{" "}
-                  <a
-                    href="https://brew.sh/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Homebrew
-                  </a>
-                  :
-                </p>
-                <TerminalWindow title="Terminal">
-                  {`$ brew install --cask camunda-modeler`}
-                </TerminalWindow>
-
-                {/* Manual download buttons */}
-                <p style={{ marginTop: "1rem", marginBottom: "0.75rem" }}>
-                  Or download and install manually:
-                </p>
-                <div className={styles.downloadButtons}>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-mac-arm64.dmg"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    macOS (Apple Silicon)
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-mac-x64.dmg"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    macOS (Intel)
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-win-x64.zip"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Windows
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-linux-x64.tar.gz"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Linux
-                  </a>
-                </div>
-                <p className={styles.downloadMeta}>
-                  Version 5.45 ·{" "}
-                  <Link
-                    to={useBaseUrl(
-                      "docs/components/modeler/desktop-modeler/install-the-modeler/"
-                    )}
-                  >
-                    Installation guide
-                  </Link>
-                </p>
-              </div>
-            </details>
-          </div>
-        </section>
 
         {/* ─── Everything from your terminal ─── */}
         <section className={clsx("container", styles.section)}>

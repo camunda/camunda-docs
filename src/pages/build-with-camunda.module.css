@@ -203,6 +203,414 @@
   }
 }
 
+/* ─── Terminal hero (image-based redesign) ─── */
+.terminalHeroSection {
+  position: relative;
+  z-index: 1;
+  padding: 4rem 0 3rem;
+  max-width: 880px;
+}
+
+.terminalHeroIntro {
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-color);
+  margin-bottom: 0.75rem;
+}
+
+.terminalHeroTitle {
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--heading-color);
+  margin: 0 0 0.9rem;
+  border-bottom: none;
+  padding: 0;
+}
+
+[data-theme="dark"] .terminalHeroTitle {
+  color: #ffffff;
+}
+
+.terminalHeroSub {
+  font-size: 1.05rem;
+  color: var(--muted-color);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 720px;
+}
+
+[data-theme="dark"] .terminalHeroSub {
+  color: #cccccc;
+}
+
+/* Primary CLI card */
+.cliPrimaryCard {
+  position: relative;
+  background: var(--card-bg);
+  border: 2px solid #78a9ff;
+  border-radius: 14px;
+  padding: 3.5rem 1.75rem 1.75rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.recommendedBadge {
+  position: absolute;
+  top: -14px;
+  left: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.8rem;
+  background: #3b6fd6;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(59, 111, 214, 0.3);
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .recommendedBadge {
+  background: #78a9ff;
+  color: #0a0a0f;
+  box-shadow: 0 2px 8px rgba(120, 169, 255, 0.4);
+}
+
+.cliPrimaryHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cliPrimaryIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(120, 169, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.cliPrimaryHeading {
+  display: flex;
+  flex-direction: column;
+}
+
+.cliPrimaryTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin: 0;
+  border-bottom: none;
+  padding: 0;
+  line-height: 1.2;
+}
+
+.cliPrimaryMeta {
+  font-size: 0.88rem;
+  color: var(--muted-color);
+  margin: 0.2rem 0 0;
+}
+
+.cliPrimaryCard .terminalWindow {
+  max-width: 100%;
+  background: #0d1117;
+  border: 1px solid #0d1117;
+  margin: 0 0 1.25rem;
+}
+
+.cliPrimaryCard .terminalWindow .terminalHeader {
+  display: none;
+}
+
+.cliPrimaryCard .terminalWindow .terminalBody {
+  padding: 1rem 1.25rem;
+}
+
+.cliPrimaryCard .terminalWindow .terminalPre {
+  color: #c8e1ff;
+}
+
+.cliFeatureList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem 1.5rem;
+}
+
+.cliFeatureList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.95rem;
+  color: var(--page-color);
+}
+
+.cliPrimaryDivider {
+  border-top: 1px solid var(--card-border);
+  margin: 0.5rem 0 1.25rem;
+}
+
+.quickStartLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin: 0 0 0.75rem;
+}
+
+.cliPrimaryActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 540px) {
+  .cliPrimaryActions {
+    grid-template-columns: 1fr;
+  }
+  .cliFeatureList {
+    grid-template-columns: 1fr;
+  }
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.4rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #3b6fd6;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.btnPrimary:hover {
+  background: #2f5cb8;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.4rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--page-bg);
+  color: var(--heading-color) !important;
+  border: 1px solid var(--card-border);
+  text-decoration: none !important;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.btnSecondary:hover {
+  background: var(--section-alt-bg);
+  color: var(--heading-color) !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+}
+
+/* Other ways divider */
+.otherWaysDivider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.otherWaysLine {
+  flex: 1;
+  height: 1px;
+  background: var(--card-border);
+}
+
+.otherWaysLabel {
+  font-size: 0.85rem;
+  color: var(--muted-color);
+  font-weight: 500;
+}
+
+.otherWaysGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .otherWaysGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.otherWayCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition:
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.otherWayCard:hover {
+  border-color: var(--card-hover-border);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--card-hover-shadow);
+}
+
+.otherWayHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.6rem;
+}
+
+.otherWayIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.otherWayIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.otherWayTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin: 0;
+  border-bottom: none;
+  padding: 0;
+}
+
+.otherWayDesc {
+  font-size: 0.92rem;
+  color: var(--muted-color);
+  line-height: 1.5;
+  margin: 0 0 1rem;
+  flex: 1;
+}
+
+.otherWayLink {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #3b6fd6 !important;
+  text-decoration: none !important;
+}
+
+.otherWayLink:hover {
+  color: #2f5cb8 !important;
+  text-decoration: none !important;
+}
+
+/* Docker banner */
+.dockerBanner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  background: var(--section-alt-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  color: var(--page-color) !important;
+  text-decoration: none !important;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.dockerBanner:hover {
+  border-color: var(--card-hover-border);
+  color: var(--page-color) !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+}
+
+.dockerBannerIcon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dockerBannerIcon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.dockerBannerBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.dockerBannerTitle {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 0.15rem;
+}
+
+.dockerBannerDesc {
+  font-size: 0.88rem;
+  color: var(--muted-color);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.dockerBannerCta {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #3b6fd6;
+  white-space: nowrap;
+}
+
+@media (max-width: 540px) {
+  .dockerBanner {
+    flex-wrap: wrap;
+  }
+  .dockerBannerCta {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
 /* ─── Section common ─── */
 .section {
   padding: 3rem 0;
@@ -468,7 +876,50 @@
 }
 
 .terminalBody {
+  position: relative;
   padding: 1rem 1.4rem;
+}
+
+.copyButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--terminal-text);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+  z-index: 1;
+}
+
+.copyButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Light-terminal variant (default terminalBg is light) */
+.cliPrimaryCard .copyButton {
+  color: #c8e1ff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.cliPrimaryCard .copyButton:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .terminalPre {
