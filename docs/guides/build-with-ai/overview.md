@@ -36,21 +36,19 @@ Build Camunda solutions with AI-ready workflows, including agentic orchestration
 
 With Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md), you can embed AI agents directly inside your BPMN-based processes. Agentic orchestration lets human tasks, deterministic rule sets, and AI-driven decisions collaborate in a robust, end-to-end process.
 
-<p><a href="../../../guides/getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
-
 ## Design with AI
 
 Use these selected AI features to design workflows and processes more easily and faster.
 
 <AoGrid columns={2} ao={[
 {
-link: "../../components/early-access/alpha/bpmn-copilot/bpmn-copilot/",
+link: "../../../components/early-access/alpha/bpmn-copilot/",
 title: "Camunda Copilot",
 image: IconCopilotImg,
 description: "Generate and modify BPMN processes, Camunda Forms, and FEEL expressions from natural-language prompts.",
 },
 {
-link: "../../components/hub/workspace/modeler/idp/",
+link: "../../../components/hub/workspace/modeler/idp/",
 title: "Intelligent document processing (IDP)",
 image: IconIdpImg,
 description: "Extract structured data from documents and integrate it into your processes.",
@@ -59,23 +57,23 @@ description: "Extract structured data from documents and integrate it into your 
 
 ## Integrate via MCP
 
-Use MCP servers to give your AI assistant context — both runtime cluster state and Camunda documentation — in the same workflow.
+Use MCP servers to enable your AI agents to interact with Camunda.
 
 <AoGrid columns={3} ao={[
 {
-link: "../../reference/mcp-docs/docs-mcp/",
+link: "../../../reference/mcp-docs/",
 title: "Docs MCP server",
 image: IconDocsImg,
-description: "Retrieve up-to-date Camunda documentation from your AI assistant.",
+description: "Retrieve up-to-date Camunda documentation from your AI agents.",
 },
 {
-link: "../../apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
+link: "../../../apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
 title: "Orchestration Cluster MCP server",
 image: IconMcpImg,
-description: "Interact with Camunda runtime and management capabilities from your AI assistant.",
+description: "Interact with Camunda runtime and management capabilities from your AI agents.",
 },
 {
-link: "../../apis-tools/processes-mcp/processes-mcp-overview/",
+link: "../../../apis-tools/processes-mcp/processes-mcp-overview/",
 title: "Processes MCP server",
 image: IconMcpImg,
 description: "Expose your Camunda processes as MCP tools that AI agents can invoke.",
