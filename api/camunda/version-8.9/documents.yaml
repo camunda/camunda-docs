@@ -57,6 +57,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "415":
           $ref: "common-responses.yaml#/components/responses/UnsupportedMediaType"
+      x-added-in-version: "8.6"
   /documents/batch:
     post:
       tags:
@@ -138,6 +139,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "415":
           $ref: "common-responses.yaml#/components/responses/UnsupportedMediaType"
+      x-added-in-version: "8.7"
   /documents/{documentId}:
     get:
       tags:
@@ -190,6 +192,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
     delete:
       tags:
         - Document
@@ -229,6 +232,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
   /documents/{documentId}/links:
     post:
       tags:
@@ -280,6 +284,7 @@ paths:
                 $ref: "#/components/schemas/DocumentLink"
         "400":
           $ref: "common-responses.yaml#/components/responses/InvalidData"
+      x-added-in-version: "8.7"
 components:
   schemas:
     DocumentReference:
