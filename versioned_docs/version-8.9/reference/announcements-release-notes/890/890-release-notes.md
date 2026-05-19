@@ -112,7 +112,7 @@ Camunda Process Test now adds dedicated support for AI agent testing, making it 
 - Judge assertions use a configured LLM to assess whether AI-generated output satisfies a natural-language expectation, so you can verify response quality and intent.
 - Conditional behavior helps you model reactive test behavior for agent-driven flows by watching process state changes and completing tasks as they appear, without blocking the test on a predefined path.
 
-<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/test-ai-agents.md)</p>
+<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
 
 ### Camunda Docs MCP server
 
@@ -430,6 +430,14 @@ Camunda 8.9 adds support for deleting process and decision data, retaining hiera
   <li><span class="link-arrow">[Process instance modification](/components/concepts/process-instance-modification.md)</span></li>
   <li><span class="link-arrow">[Audit log](/components/audit-log/overview.md)</span></li>
 </ul>
+
+### Tasklist V1 OpenSearch compatibility
+
+OpenSearch 3.6.0 is not supported when Tasklist V1 is enabled. Please use OpenSearch 2.19+ or versions 3.4.x–3.5.x, or migrate to Tasklist V2.
+
+:::note
+Tasklist V1 is planned for removal in version 8.10, so we strongly recommend migrating to Tasklist V2 to avoid future compatibility issues.
+:::
 
 ## RDBMS secondary storage
 

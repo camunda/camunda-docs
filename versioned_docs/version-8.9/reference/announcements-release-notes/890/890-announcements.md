@@ -161,6 +161,21 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 </div>
 <div className="release-announcement-content">
 
+#### `GET /decision-instances/{decisionEvaluationInstanceKey}` now validates the key format
+
+The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance.api.mdx) endpoint previously returned `404 Not Found` when the `decisionEvaluationInstanceKey` path parameter contained invalid characters that did not match the required pattern `^[0-9]+-[0-9]+$`. The endpoint now correctly returns `400 Bad Request` in this case, while `404 Not Found` is reserved for well-formed keys that do not exist.
+
+**Action:** Update any client code or error handling that relied on receiving `404 Not Found` for malformed keys to also handle `400 Bad Request`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Bug fix: `FormResult.schema` type corrected from object to string
 
 The `schema` property in the `FormResult` response was incorrectly specified as `type: object` in the OpenAPI contract, but the server has always returned it as a JSON `string`. This specification bug is now fixed.
@@ -506,7 +521,7 @@ Starting with Camunda 8.9, the environment-based connector secret provider uses 
 **Action:** Choose one of the following options before or during your upgrade:
 
 - Update your secret environment variables to use the `SECRET_` prefix.
-- Configure a custom prefix via `camunda.connector.secret-provider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_PREFIX`.
+- Configure a custom prefix via `camunda.connector.secretprovider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`.
 - Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
 
 <p className="link-arrow">[connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md#secrets)</p>

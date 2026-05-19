@@ -30,7 +30,7 @@ Limitations of alpha features and components include:
 - (SaaS) No availability targets.
 - Released outside the standard [release policy](/reference/announcements-release-notes/release-policy.md).
 
-To learn more about using alpha features, see [enabling alpha features](/components/console/manage-organization/enable-alpha-features.md).
+To learn more about using alpha features, see [enabling alpha features](/components/hub/organization/manage-organization-settings/enable-alpha-features.md).
 
 ## Available alpha features
 

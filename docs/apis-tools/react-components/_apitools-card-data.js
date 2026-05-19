@@ -29,6 +29,14 @@ export const apiCards = [
     type: "MCP",
   },
   {
+    link: "../processes-mcp/processes-mcp-overview/",
+    title: "Processes MCP Server",
+    image: IconMcpImg,
+    description:
+      "Expose deployed BPMN processes as callable MCP tools for AI agents.",
+    type: "MCP",
+  },
+  {
     link: "../administration-api/administration-api-reference/",
     title: "Administration API (SaaS)",
     image: IconAdminImg,

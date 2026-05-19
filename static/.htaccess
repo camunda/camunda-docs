@@ -46,8 +46,24 @@ AddType text/plain      graphqls
 # Add diff mime type
 AddType text/plain      diff
 
+# Content negotiation: serve .md when Accept: text/markdown is requested
+# Only applies to /docs/ paths that are not already static assets or .md files
+RewriteCond %{HTTP_ACCEPT} text/markdown
+RewriteCond %{REQUEST_URI} ^/docs/
+RewriteCond %{REQUEST_URI} !\.(md|js|css|png|jpg|svg|json|xml|yaml|bpmn|pdf)$
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}.md -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}index.md -f
+RewriteRule ^(docs/.+?)/?$ /$1.md [L]
+
+# Ensure Vary: Accept header is set on docs pages for proper caching
+SetEnvIf Request_URI "^/docs/" DOCS_PATH
+Header append Vary Accept env=DOCS_PATH
+
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 [R=301,L]
+
+## Redirect for case-sensitive llms.txt
+RewriteRule ^LLMs\.txt$ /llms.txt [R=301,L]
 
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
@@ -160,6 +176,50 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #---------------------------------------------------------------------------------
 #   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
+
+# Redirects associated with Camunda Hub
+RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-members/manage-user-groups [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-members/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
+
+# Process applications - specific renamed files
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/process-applications/$ /docs/next/components/hub/workspace/manage-projects/manage-projects [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/next/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
+
+# Process applications - general redirect
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)$ /docs/next/components/hub/workspace/manage-projects/$1 [R=301,L]
+
+# Web Modeler moved to Hub Workspace Modeler - specific renamed files
+RewriteRule ^docs/next/components/modeler/web-modeler/launch-web-modeler/?$ /docs/next/components/hub/workspace/modeler/launch-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/web-modeler-settings/?$ /docs/next/components/hub/workspace/modeler/modeler-settings/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/?$ /docs/next/components/hub/workspace/modeler/integrate-modeler-in-ci-cd/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/element-templates/using-templates-in-web-modeler/?$ /docs/next/components/hub/workspace/modeler/element-templates/using-templates-in-modeler/ [R=301,L]
+
+# Web Modeler moved to Hub Workspace Modeler - general redirect
+RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
+
+# Move Console and Web Modeler docs to Camunda Hub (next version)
+RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/usage-metrics/?$ /docs/next/self-managed/components/hub/usage-metrics/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/telemetry/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/overview/?$ /docs/next/self-managed/components/hub/modeler-overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/monitoring/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/modeler-configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/database/?$ /docs/next/self-managed/components/hub/configuration/database/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/identity/?$ /docs/next/self-managed/components/hub/configuration/identity/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/logging/?$ /docs/next/self-managed/components/hub/configuration/logging/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/modeler-ssl/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/copilot/?$ /docs/next/self-managed/components/hub/configuration/copilot/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-database-connection/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-zeebe-connection/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-missing-data/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-proxy-configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
 
 # Fix broken links from camunda-platform-get-started README
 
@@ -903,6 +963,11 @@ RewriteRule ^docs/components/camunda-integrations/sap/?$ /docs/components/camund
 
 # Restructure Agentic AI docs
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/analyze-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/analyze-ai-agents/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/monitor-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/monitor-ai-agents/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/test-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/test-ai-agents/ [R=301,L]
+RewriteRule ^docs/8.8/components/agentic-orchestration/analyze-ai-agents/?$ /docs/8.8/components/agentic-orchestration/evaluate-agents/analyze-ai-agents/ [R=301,L]
+RewriteRule ^docs/8.8/components/agentic-orchestration/monitor-ai-agents/?$ /docs/8.8/components/agentic-orchestration/evaluate-agents/monitor-ai-agents/ [R=301,L]
 
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
 RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]

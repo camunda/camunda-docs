@@ -39,7 +39,7 @@ After running a test, you can view the resulting process instance in [Operate](.
 
 For configuration steps, see:
 
-- [Test in Web Modeler](./web-modeler/validation/task-testing.md)
+- [Test in Web Modeler](../hub/workspace/modeler/validation/task-testing.md)
 - [Test in Desktop Modeler](./desktop-modeler/task-testing.md)
 
 ## Supported elements

@@ -204,6 +204,7 @@ For hands-on instructions to deploy Camunda with RDBMS, start with:
 
 Then choose your deployment pattern:
 
-- [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Reference topology and design considerations.
+- [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture) - Canonical backend trade-offs and production architecture guidance.
+- [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Manual deployment topology guidance for RDBMS.
 - [Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) - Entry point for manual installation, configuration, and operations.
 - [RDBMS example deployment for Helm](/self-managed/deployment/helm/install/helm-with-rdbms.md) - Kubernetes/Helm-based example walkthrough.

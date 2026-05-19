@@ -25,7 +25,7 @@ Camunda 8 separates runtime execution data from analytical and operational data 
 
 In the diagram above, storage systems appear in two distinct roles:
 
-- **Primary storage** — The authoritative store for runtime execution state used by the Orchestration Cluster to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
+- **Primary storage** — The authoritative store for runtime execution state used by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
 - **Secondary storage** — Systems used for indexing, search, analytics, operational views, and long-term retention. Data is populated from primary storage and optimized for querying rather than execution. See [secondary storage](/reference/glossary.md#secondary-storage).
 
 ### Secondary storage implementations
@@ -80,11 +80,11 @@ Camunda 8 is designed to operate on a very large scale. To achieve this, it prov
 
 ### Modeler
 
-Design fully-executable process and decision models that reduce misalignment and handoff friction while giving engineers the freedom they need to build the right solution. Camunda Modeler gives business users an intuitive way to model processes and decisions using the BPMN and DMN standards so their intent is clear, structured, and directly usable by developers. Developers can take the model as-is and build scalable, flexible solutions without worrying about losing alignment with business intent. Available via [web and desktop app](/components/modeler/about-modeler.md).
+Design fully-executable process and decision models that reduce misalignment and handoff friction while giving engineers the freedom they need to build the right solution. Camunda Modeler gives business users an intuitive way to model processes and decisions using the BPMN and DMN standards so their intent is clear, structured, and directly usable by developers. Developers can take the model as-is and build scalable, flexible solutions without worrying about losing alignment with business intent. Available via [Camunda Hub](/components/hub/workspace/modeler/index.md) and a dedicated [desktop app](/components/modeler/desktop-modeler/index.md).
 
 #### Connectors
 
-Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. Outbound Connectors trigger events outside of Camunda, while inbound connectors allow processes running on Camunda to receive messages from external systems. Connectors also serve as the tool layer for AI agents, enabling agents to interact with external systems in a governed, reusable way. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
+Connectors communicate with any system or technology, reducing the time it takes to automate and orchestrate business processes. [Outbound connectors](/reference/glossary.md#outbound-connector) trigger events outside of Camunda, while [inbound connectors](/reference/glossary.md#inbound-connector) allow processes running on Camunda to receive messages from external systems. Connectors also serve as the tool layer for AI agents, enabling agents to interact with external systems in a governed, reusable way. Browse connectors in [Camunda Marketplace](https://marketplace.camunda.com/).
 
 #### AI agents
 
@@ -110,9 +110,9 @@ With [Operate](/components/operate/operate-introduction.md), teams can monitor r
 
 [Optimize](/components/optimize/what-is-optimize.md) leverages process execution data to continuously [provide actionable insights](/components/optimize/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
 
-### Console
+### Camunda Hub
 
-With [Console](/components/console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments, from development to production. Console offers control over organizational settings such as user and role management, and provides insights into usage metrics.
+With [Camunda Hub](/components/hub/index.md), you'll manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
 
 ## How does Camunda 8 compare to other solutions?
 
@@ -140,7 +140,7 @@ Camunda enables teams to embed AI agents into governed business processes, combi
 
 - To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/reference/contact.md) page.
 - [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
-- [Create a Camunda 8 account](/components/console/manage-plan/create-account.md)
+- [Create a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)
 - [Automate a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md)
 - [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
