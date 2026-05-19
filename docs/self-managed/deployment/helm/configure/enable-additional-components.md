@@ -53,6 +53,10 @@ If you enable Web Modeler, Console, or Optimize without enabling Management Iden
 
 ## Web Modeler
 
+:::note Camunda 8.10+
+Starting with Camunda 8.10, Web Modeler and Console are consolidated under a single **Camunda Hub** component. You can enable both with `camundaHub.enabled: true`. The legacy keys (`webModeler.enabled`, `console.enabled`) still work via a backward-compatibility shim but are deprecated. See the [8.9 to 8.10 upgrade guide](/self-managed/upgrade/helm/890-to-8100.md#camunda-hub-consolidation) for details.
+:::
+
 To enable Web Modeler, configure the required values in the Helm chart. For the full list of options, see the [Web Modeler Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
 - Set `webModeler.enabled: true` (disabled by default).
