@@ -90,6 +90,36 @@ module.exports = {
       },
       items: ["guides/build-with-ai/ai-usage-guidelines"],
     },
+    {
+      type: "category",
+      label: "Agentic orchestration",
+      link: {
+        type: "doc",
+        id: "components/agentic-orchestration/agentic-orchestration-overview",
+      },
+      items: [
+        "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/camunda-provided-llm",
+        "components/agentic-orchestration/ao-design",
+        {
+          type: "category",
+          label: "Evaluate your AI agents",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
+          },
+          items: [
+            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
+          ],
+        },
+        "components/agentic-orchestration/rag-ai-agents",
+        "components/agentic-orchestration/expose-process-as-mcp-tool",
+        "components/agentic-orchestration/choose-right-model-agentic",
+        "components/agentic-orchestration/model-recommendations-agentic",
+      ],
+    },
   ],
   Components: [
     "components/components-overview",
@@ -264,36 +294,6 @@ module.exports = {
         id: "components/features-integrations/features-integrations",
       },
       items: [
-        {
-          type: "category",
-          label: "Agentic orchestration",
-          link: {
-            type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration-overview",
-          },
-          items: [
-            "components/agentic-orchestration/ai-agents",
-            "components/agentic-orchestration/camunda-provided-llm",
-            "components/agentic-orchestration/ao-design",
-            {
-              type: "category",
-              label: "Evaluate your AI agents",
-              link: {
-                type: "doc",
-                id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
-              },
-              items: [
-                "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
-                "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
-                "components/agentic-orchestration/evaluate-agents/test-ai-agents",
-              ],
-            },
-            "components/agentic-orchestration/rag-ai-agents",
-            "components/agentic-orchestration/expose-process-as-mcp-tool",
-            "components/agentic-orchestration/choose-right-model-agentic",
-            "components/agentic-orchestration/model-recommendations-agentic",
-          ],
-        },
         {
           type: "category",
           label: "Intelligent document processing (IDP)",
