@@ -559,8 +559,7 @@ function BuildWithCamunda() {
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
                 <CodeBlock>c8ctl</CodeBlock>
               </Link>{" "}
-              from npm and spin up a Self-Managed Camunda cluster on your
-              machine.
+              from npm and spin up a Self-Managed cluster on your machine.
             </p>
           </div>
           <div
@@ -906,16 +905,16 @@ $ claude plugin install camunda-skills@camunda-skills
 
 Available skills:
   /camunda-c8ctl                   — install and configure c8ctl
+  /camunda-ai-agent                — build AI agents in BPMN
   /camunda-bpmn                    — create and edit BPMN 2.0 processes
+  /camunda-connectors              — configure pre-built connectors
+  /camunda-connectors-development  — build custom connectors
+  /camunda-development             — choose the integration type
+  /camunda-docs                    — search the Camunda 8 docs
   /camunda-feel                    — write and debug FEEL expressions
   /camunda-forms                   — create Camunda Form schemas
-  /camunda-connectors              — configure pre-built connectors
-  /camunda-development             — pick the right development surface
   /camunda-job-workers             — implement job workers (Java, Spring, TypeScript)
-  /camunda-connectors-development  — build custom connectors
-  /camunda-process-mgmt            — deploy, operate, and debug processes
-  /camunda-ai-agent                — build AI agents in BPMN
-  /camunda-docs                    — look up the Camunda 8 docs`}
+  /camunda-process-mgmt            — deploy, operate, and debug processes`}
               </TerminalWindow>
             </div>
             <div className={styles.aiCard}>
@@ -982,8 +981,8 @@ Available skills:
               </div>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
-                "Build an AI agent that triages customer support tickets and
-                routes them to the right team"
+                "Build an AI agent to triage and route customer support tickets
+                to the correct team"
               </div>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
@@ -993,7 +992,7 @@ Available skills:
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
                 "Investigate incidents on the payment-flow process and resolve
-                any that are due to missing payment details"
+                any that are caused by missing payment details"
               </div>
             </div>
           </div>
