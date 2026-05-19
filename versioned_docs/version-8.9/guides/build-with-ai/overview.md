@@ -2,15 +2,15 @@
 id: overview
 title: Build with AI
 sidebar_label: Build with AI
-description: "Set up an AI-ready development workflow for Camunda with MCP, docs context, and practical troubleshooting guidance."
+description: "Build Camunda solutions with AI-ready workflows, including agentic orchestration, Camunda Copilot, and MCP integrations."
 keywords: [ai, mcp, claude, copilot, cursor, agentic]
 ---
 
-Use this guide to set up a practical AI-assisted development workflow for Camunda-based solutions.
+Build Camunda solutions with AI-ready workflows, including agentic orchestration, Camunda Copilot, and MCP integrations.
 
-## Set up your AI development environment
+## Get started
 
-The Build with Camunda page is the starting point for AI development with Camunda. From there, you can explore quickstarts, download the CLI, and connect AI tooling to a running cluster.
+See Build with Camunda to set up your AI development environment. It the starting point for AI development with Camunda. From there, you can explore quickstarts, download the CLI, and connect AI tooling to a running cluster.
 
 Once you have a cluster running, connect your AI tools:
 
@@ -52,10 +52,6 @@ Use the Orchestration Cluster MCP Server to let your AI assistant interact with 
 Use the Docs MCP server so your AI assistant can retrieve up-to-date Camunda documentation while generating code or guidance.
 
 Using both MCP servers gives your AI tool runtime context and documentation context in the same workflow.
-
-## Best practices for integrating AI
-
-See Integrate AI into your processes for guidance on how to apply AI patterns effectively inside Camunda: when to use the AI Agent connector instead of a hand-rolled LLM loop, how to compose multi-step tools inside ad-hoc sub-processes, and how to structure prompts for predictable results.
 
 ## Use AI responsibly
 
