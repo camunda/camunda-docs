@@ -88,7 +88,10 @@ module.exports = {
         type: "doc",
         id: "guides/build-with-ai/overview",
       },
-      items: ["guides/build-with-ai/ai-usage-guidelines"],
+      items: [
+        "guides/build-with-ai/ai-usage-guidelines",
+        "reference/mcp-docs/docs-mcp",
+      ],
     },
     {
       type: "category",
@@ -1624,7 +1627,6 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/contact",
-    "reference/mcp-docs/docs-mcp",
     "reference/legal",
   ],
   "Self-Managed": [
