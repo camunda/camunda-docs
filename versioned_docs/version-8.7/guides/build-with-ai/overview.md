@@ -19,8 +19,6 @@ import IconIdpImg from '../../components/assets/icon-idp.png';
 
 Build Camunda solutions with AI-ready workflows, including agentic orchestration and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents inside BPMN processes, and use Camunda Copilot to design faster.
 
-<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic-orange" title="Build with Camunda" href="/build-with-camunda" style={{marginBottom: '30px', marginTop: '20px'}}>Set up your AI development environment</a>
-
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
@@ -54,7 +52,7 @@ description: "Extract structured data from documents and integrate it into your 
 
 ## Integrate via MCP
 
-Use the [Docs MCP server](../../reference/mcp-docs/mcp-docs.md) so your AI agents can retrieve up-to-date Camunda documentation while generating code or guidance.
+Retrieve up-to-date Camunda documentation from your AI agents with the Camunda [Docs MCP server](../../reference/mcp-docs/mcp-docs.md).
 
 ## Use AI responsibly
 

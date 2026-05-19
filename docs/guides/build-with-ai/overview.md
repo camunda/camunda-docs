@@ -57,7 +57,7 @@ description: "Extract structured data from documents and integrate it into your 
 
 ## Integrate via MCP
 
-Use MCP servers to enable your AI agents to interact with Camunda.
+Use MCP servers to let your AI agents interact with Camunda.
 
 <AoGrid columns={3} ao={[
 {
@@ -70,7 +70,7 @@ description: "Retrieve up-to-date Camunda documentation from your AI agents.",
 link: "../../../apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
 title: "Orchestration Cluster MCP server",
 image: IconMcpImg,
-description: "Interact with Camunda runtime and management capabilities from your AI agents.",
+description: "Give your AI agents access to Camunda’s operational capabilities.",
 },
 {
 link: "../../../apis-tools/processes-mcp/processes-mcp-overview/",
