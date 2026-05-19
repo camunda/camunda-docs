@@ -967,7 +967,10 @@ Available skills:
       "url": "https://camunda-docs.mcp.kapa.ai"
     }
   }
-}`}
+}
+
+
+`}
               </TerminalWindow>
             </div>
           </div>
