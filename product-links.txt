@@ -94,7 +94,7 @@ https://docs.camunda.io/docs/next/components/audit-log/overview/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/880-announcements/#apis--tools
 https://docs.camunda.io/docs/components/saas/secure-connectivity/
 
-# Camunda Hub Pre-8.10
+# Web Modeler Pre-8.10
 
 https://docs.camunda.io/api/v2.0/problem-types/bad-request
 https://docs.camunda.io/contact
@@ -339,7 +339,7 @@ https://docs.camunda.io/docs/8.9/reference/announcements-release-notes/890/890-r
 https://docs.camunda.io/docs/8.9/reference/contact/
 https://docs.camunda.io/docs/8.9/reference/glossary/
 
-# Camunda Hub Self-Managed 8.10
+# Camunda Hub 8.10
 
 https://docs.camunda.io/docs/8.10/apis-tools/migration-manuals/migrate-to-camunda-user-tasks
 https://docs.camunda.io/docs/8.10/components/concepts/access-control/authorizations/
