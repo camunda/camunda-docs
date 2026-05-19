@@ -184,11 +184,13 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 </div>
 <div className="release-announcement-content">
 
-#### Unused PVC in optimize is unmounted
+#### Unused PVC in Optimize is unmounted
 
-Theres was an unused PVC in optimize that was mounted on /camunda but was never used by the application. In the helm chart, this PVC is now unmounted, but the PVC will still exist in the kubernetes cluster. This means that there may be some storage quota that can be freed by deleting. This volume is by default an emptyDir, but if you configured it to be persistent with `optimize.persistence.enabled=true` in `values.yaml`, then the PVC will still exist.
+There was an unused PVC in Optimize mounted on `/camunda` that the application never used. This PVC is now unmounted in the Helm chart, but it still exists in your Kubernetes cluster. You can free storage quota by deleting it.
 
-The claim name is `<releaseName>-camunda-platform-optimize-data`
+By default, this volume is an `emptyDir`. However, if you set `optimize.persistence.enabled=true` in `values.yaml`, the PVC persists and must be manually deleted.
+
+The claim name is `<releaseName>-camunda-platform-optimize-data`.
 
 </div>
 </div>
