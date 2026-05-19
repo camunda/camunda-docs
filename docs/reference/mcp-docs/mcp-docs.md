@@ -143,12 +143,14 @@ Once connected to the MCP server within your editor, you can ask context-aware q
 
 ### Authentication
 
-When connecting to the MCP server for the first time, you must authenticate via Google sign-in.
+When connecting to the MCP server for the first time, you must authenticate with either Google or GitHub.
 
-This anonymous Google ID is only used to enforce per-user rate limits and prevent abuse of the Camunda Docs MCP server:
+This authentication is only used to enforce per-user rate limits and prevent abuse of the Camunda Docs MCP server:
 
 - 40 requests per user per hour.
 - 200 requests per user per day.
+
+If you sign in with GitHub, Kapa does not request access to your repositories, organizations, or email address. It uses only a stable GitHub user ID for rate limiting.
 
 :::note
 The MCP server is powered by the Kapa.ai AI assistant. Refer to the [Kapa documentation](https://docs.kapa.ai/integrations/mcp/overview#authentication) to learn more about authentication.
