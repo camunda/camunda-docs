@@ -56,7 +56,7 @@ Use Camunda Copilot to design processes, forms, and decisions faster. Use Intell
 {
 link: "../../components/early-access/alpha/bpmn-copilot/bpmn-copilot/",
 title: "Camunda Copilot",
-image: "/img/icon-modeler.png",
+image: "../components/assets/icon-camunda-copilot.png",
 description: "Generate and modify BPMN processes, Camunda Forms, and FEEL expressions from natural-language prompts.",
 },
 {
