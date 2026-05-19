@@ -178,6 +178,21 @@ Data change 1 description.
 Changes for 8.10 will be added here as the 8.10 documentation is updated.
 :::
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unused PVC in optimize is unmounted
+
+Theres was an unused PVC in optimize that was mounted on /camunda but was never used by the application. In the helm chart, this PVC is now unmounted, but the PVC will still exist in the kubernetes cluster. This means that there may be some storage quota that can be freed by deleting. This volume is by default an emptyDir, but if you configured it to be persistent with `optimize.persistence.enabled=true` in `values.yaml`, then the PVC will still exist.
+
+The claim name is `<releaseName>-camunda-platform-optimize-data`
+
+</div>
+</div>
+
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
