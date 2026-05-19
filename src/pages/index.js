@@ -6,6 +6,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
 import AlgoliaSearchBox from "@theme/SearchBar";
+import iconBuildWithAi from "../../docs/components/assets/icon-agentic.png";
 
 const features = [
   {
@@ -17,7 +18,7 @@ const features = [
   },
   {
     title: "Build with AI",
-    imageUrl: "img/home-build-with-ai.png",
+    imageUrl: iconBuildWithAi,
     url: "/docs/guides/build-with-ai/overview/",
     description:
       "Set up an AI-ready development workflow and orchestrate AI agents inside your processes.",
