@@ -7,6 +7,7 @@ page_rank: 80
 ---
 
 import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
+import HelmV4Required from './\_partials/\_helm-v4-required.md'
 
 Camunda recommends using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production environments.
 
@@ -14,9 +15,7 @@ There are many ways to provision and configure a Kubernetes cluster, and several
 
 Camunda provides continuously improved Helm charts that are not tied to any specific cloud provider allowing you to choose your preferred Kubernetes platform. These charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform). To provide feedback or report issues, use the [Helm GitHub repository](https://github.com/camunda/camunda-platform-helm/issues).
 
-:::warning Helm v4 required for Camunda 8.10
-Camunda 8.10 charts (15.x) require the Helm CLI v4. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. Switching CLIs does not require a release-state migration. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
-:::
+<HelmV4Required />
 
 ## What is Helm?
 
