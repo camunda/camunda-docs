@@ -42,7 +42,7 @@ Each listener has three properties:
 | `retries`   | The number of job retries.                                                           |
 
 :::note
-If multiple listeners of the same `eventType` (such as multiple start listeners) are defined on the same activity, they are executed sequentially, one after the other, in the order defined in the BPMN model.
+If multiple listeners of the same `eventType` (such as multiple start listeners) are defined on the same activity, they are executed sequentially in the order defined in the BPMN model.
 :::
 
 ## Task headers
@@ -117,7 +117,7 @@ End listeners are invoked after applying the variable output mappings and before
 
 Cancel listeners run when a process instance is terminated. They execute sequentially after all child elements have terminated and before the process reaches its final terminated state.
 
-- A cancel listener can read the process variables and complete the job with variables. The variables are merged into the process scope and visible to subsequent cancel listeners.
+- A cancel listener can read the process variables. If a cancel listener completes the job with variables, the variables are merged into the process scope and visible to subsequent cancel listeners.
 
 ## Incident recovery
 

@@ -181,6 +181,6 @@ This change helps navigate more complex data during operations and troubleshooti
 
 <!-- https://github.com/camunda/product-hub/issues/2768 -->
 
-Execution listeners now support a `cancel` event type on the process element. The cancel listeners run when a process instance is terminated — useful for cleanup, audit logging, or notifying external systems that the process did not complete.
+Execution listeners now support a `cancel` event type on the process element. Cancel listeners run when a process instance is terminated — useful for cleanup, audit logging, or notifying external systems.
 
 For details, see [`cancel` listeners](/components/concepts/execution-listeners.md#cancel-listeners).
