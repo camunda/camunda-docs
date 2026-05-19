@@ -747,7 +747,10 @@ function addAddedInVersionAnnotation(specFilePath) {
 // operation-level and schema-level field version annotations to conditionally render
 // "Added in X.Y" badges on individual schema properties.
 function removeVendorExtensions(specFilePath) {
-  const PRESERVED_EXTENSIONS = new Set(["x-added-in-version", "x-properties-added-in-version"]);
+  const PRESERVED_EXTENSIONS = new Set([
+    "x-added-in-version",
+    "x-properties-added-in-version",
+  ]);
 
   function recursivelyRemoveVendorExtension(obj) {
     if (obj && typeof obj === "object") {
