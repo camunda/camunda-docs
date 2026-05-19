@@ -6,11 +6,28 @@ description: "Build Camunda solutions with AI-ready workflows, including agentic
 keywords: [ai, mcp, claude, copilot, cursor, agentic]
 ---
 
-Build Camunda solutions with AI-ready workflows, including agentic orchestration, Camunda Copilot, and MCP integrations.
+import AoGrid from '../../components/react-components/\_ao-card';
+
+<h3 class="subheading">Build Camunda solutions with AI-ready workflows.</h3>
+
+<div class="double-column-container" style={{marginBottom: '50px'}}>
+<div class="double-column-left" style={{marginRight: '50px', flex: '1.35'}}>
+
+Build Camunda solutions with AI-ready workflows, including agentic orchestration, Camunda Copilot, and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents inside BPMN processes, and use Camunda Copilot to design faster.
+
+<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic-orange" title="Build with Camunda" href="/build-with-camunda" style={{marginBottom: '30px', marginTop: '20px'}}>Build with Camunda</a>
+
+</div>
+<div class="double-column-right" style={{flex: '1'}}>
+
+<img src="/img/icon-agentic.png" alt="Build with AI" title="Build with AI" class="img-noborder img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0', maxWidth: '300px'}}/>
+
+</div>
+</div>
 
 ## Get started
 
-See Build with Camunda to set up your AI development environment. It the starting point for AI development with Camunda. From there, you can explore quickstarts, download the CLI, and connect AI tooling to a running cluster.
+See [Build with Camunda](/build-with-camunda) to set up your AI development environment. It's the starting point for AI development with Camunda. From there, you can explore quickstarts, download the CLI, and connect AI tooling to a running cluster.
 
 Once you have a cluster running, connect your AI tools:
 
@@ -31,27 +48,49 @@ In the agentic orchestration section you'll find:
 
 Start with Build your first AI agent to see the end-to-end pattern in action.
 
-## Design processes with Camunda Copilot
+## Design with AI
 
-Camunda Copilot is an AI assistant built into Web Modeler that helps you design and iterate on processes faster.
+Use Camunda Copilot to design processes, forms, and decisions faster. Use Intelligent document processing (IDP) to extract structured data from documents inside your processes.
 
-With Copilot you can:
-
-- **Generate and modify BPMN processes** from natural-language descriptions — create a new process, add error handling, or restructure an existing process using plain text prompts.
-- **Write and debug FEEL expressions** — describe what the expression should calculate, translate code from Java or JavaScript, or fix a broken expression.
-- **Build Camunda Forms** — describe the data you need to collect and Copilot creates the form structure and binds it to a user task.
-- **Convert legacy artifacts** — paste BPEL, Java, or Python code and let Copilot transform it into BPMN.
-- **Search documentation** — Copilot can query the Camunda knowledge base to give context-aware guidance directly inside Web Modeler (SaaS only).
-
-Copilot is available in Web Modeler for SaaS clusters. Self-Managed deployments can configure their own LLM provider.
+<AoGrid columns={2} ao={[
+{
+link: "../../components/early-access/alpha/bpmn-copilot/bpmn-copilot/",
+title: "Camunda Copilot",
+image: "/img/icon-modeler.png",
+description: "Generate and modify BPMN processes, Camunda Forms, and FEEL expressions from natural-language prompts.",
+},
+{
+link: "../../components/hub/workspace/modeler/idp/",
+title: "Intelligent document processing (IDP)",
+image: "/img/icon-idp.png",
+description: "Extract structured data from documents and integrate it into your processes.",
+},
+]} />
 
 ## Integrate via MCP
 
-Use the Orchestration Cluster MCP Server to let your AI assistant interact with Camunda runtime and management capabilities.
+Use MCP servers to give your AI assistant context — both runtime cluster state and Camunda documentation — in the same workflow.
 
-Use the Docs MCP server so your AI assistant can retrieve up-to-date Camunda documentation while generating code or guidance.
-
-Using both MCP servers gives your AI tool runtime context and documentation context in the same workflow.
+<AoGrid columns={3} ao={[
+{
+link: "../../reference/mcp-docs/docs-mcp/",
+title: "Docs MCP server",
+image: "/img/icon-docs.png",
+description: "Retrieve up-to-date Camunda documentation from your AI assistant.",
+},
+{
+link: "../../apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
+title: "Orchestration Cluster MCP server",
+image: "/img/icon-mcp.png",
+description: "Interact with Camunda runtime and management capabilities from your AI assistant.",
+},
+{
+link: "../../apis-tools/processes-mcp/processes-mcp-overview/",
+title: "Processes MCP server",
+image: "/img/icon-mcp.png",
+description: "Expose your Camunda processes as MCP tools that AI agents can invoke.",
+},
+]} />
 
 ## Use AI responsibly
 

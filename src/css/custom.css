@@ -2093,6 +2093,16 @@ h3.subheading {
   border: 1px solid white;
 }
 
+.button--hero--topic-orange {
+  background-color: #fc5d0d;
+  border-color: #fc5d0d;
+}
+
+.button--hero--topic-orange:hover {
+  background-color: #171c29;
+  border-color: #171c29;
+}
+
 [data-theme="dark"] .button--hero--topic:hover {
   background-color: #ffffff;
   color: var(--ifm-color-black) !important;
