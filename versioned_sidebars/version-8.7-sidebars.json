@@ -62,10 +62,7 @@
         "type": "doc",
         "id": "guides/build-with-ai/overview"
       },
-      "items": [
-        "guides/build-with-ai/ai-usage-guidelines",
-        "reference/mcp-docs/docs-mcp"
-      ]
+      "items": ["guides/build-with-ai/ai-usage-guidelines"]
     },
     {
       "type": "category",
@@ -77,6 +74,41 @@
       "items": [
         "components/agentic-orchestration/ao-design",
         "components/agentic-orchestration/ai-agents"
+      ]
+    },
+    "reference/mcp-docs/docs-mcp",
+    {
+      "type": "category",
+      "label": "Intelligent document processing (IDP)",
+      "link": {
+        "type": "doc",
+        "id": "components/modeler/web-modeler/idp"
+      },
+      "items": [
+        "components/modeler/web-modeler/idp/idp-configuration",
+        "components/modeler/web-modeler/idp/idp-applications",
+        {
+          "type": "category",
+          "label": "Document extraction",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/web-modeler/idp/idp-document-extraction"
+          },
+          "items": [
+            "components/modeler/web-modeler/idp/idp-unstructured-extraction"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Integrate IDP into your processes",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/web-modeler/idp/idp-integrate"
+          },
+          "items": ["components/modeler/web-modeler/idp/idp-example"]
+        },
+        "components/modeler/web-modeler/idp/idp-key-concepts",
+        "components/modeler/web-modeler/idp/idp-reference"
       ]
     }
   ],
@@ -225,40 +257,6 @@
             "components/document-handling/send-document-to-external-system-via-connector"
           ]
         }
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Intelligent document processing (IDP)",
-      "link": {
-        "type": "doc",
-        "id": "components/modeler/web-modeler/idp"
-      },
-      "items": [
-        "components/modeler/web-modeler/idp/idp-configuration",
-        "components/modeler/web-modeler/idp/idp-applications",
-        {
-          "type": "category",
-          "label": "Document extraction",
-          "link": {
-            "type": "doc",
-            "id": "components/modeler/web-modeler/idp/idp-document-extraction"
-          },
-          "items": [
-            "components/modeler/web-modeler/idp/idp-unstructured-extraction"
-          ]
-        },
-        {
-          "type": "category",
-          "label": "Integrate IDP into your processes",
-          "link": {
-            "type": "doc",
-            "id": "components/modeler/web-modeler/idp/idp-integrate"
-          },
-          "items": ["components/modeler/web-modeler/idp/idp-example"]
-        },
-        "components/modeler/web-modeler/idp/idp-key-concepts",
-        "components/modeler/web-modeler/idp/idp-reference"
       ]
     },
     {

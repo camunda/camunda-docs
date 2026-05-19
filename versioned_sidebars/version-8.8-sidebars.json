@@ -77,10 +77,7 @@
         "type": "doc",
         "id": "guides/build-with-ai/overview"
       },
-      "items": [
-        "guides/build-with-ai/ai-usage-guidelines",
-        "reference/mcp-docs/docs-mcp"
-      ]
+      "items": ["guides/build-with-ai/ai-usage-guidelines"]
     },
     {
       "type": "category",
@@ -108,6 +105,42 @@
         "components/agentic-orchestration/rag-ai-agents",
         "components/agentic-orchestration/choose-right-model-agentic",
         "components/agentic-orchestration/model-recommendations-agentic"
+      ]
+    },
+    "reference/mcp-docs/docs-mcp",
+    {
+      "type": "category",
+      "label": "Intelligent document processing (IDP)",
+      "link": {
+        "type": "doc",
+        "id": "components/modeler/web-modeler/idp"
+      },
+      "items": [
+        "components/modeler/web-modeler/idp/idp-configuration",
+        "components/modeler/web-modeler/idp/idp-applications",
+        {
+          "type": "category",
+          "label": "Document extraction",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/web-modeler/idp/idp-document-extraction"
+          },
+          "items": [
+            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+            "components/modeler/web-modeler/idp/idp-structured-extraction"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Integrate IDP into your processes",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/web-modeler/idp/idp-integrate"
+          },
+          "items": ["components/modeler/web-modeler/idp/idp-example"]
+        },
+        "components/modeler/web-modeler/idp/idp-key-concepts",
+        "components/modeler/web-modeler/idp/idp-reference"
       ]
     }
   ],
@@ -252,41 +285,6 @@
         "id": "components/features-integrations/features-integrations"
       },
       "items": [
-        {
-          "type": "category",
-          "label": "Intelligent document processing (IDP)",
-          "link": {
-            "type": "doc",
-            "id": "components/modeler/web-modeler/idp"
-          },
-          "items": [
-            "components/modeler/web-modeler/idp/idp-configuration",
-            "components/modeler/web-modeler/idp/idp-applications",
-            {
-              "type": "category",
-              "label": "Document extraction",
-              "link": {
-                "type": "doc",
-                "id": "components/modeler/web-modeler/idp/idp-document-extraction"
-              },
-              "items": [
-                "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-                "components/modeler/web-modeler/idp/idp-structured-extraction"
-              ]
-            },
-            {
-              "type": "category",
-              "label": "Integrate IDP into your processes",
-              "link": {
-                "type": "doc",
-                "id": "components/modeler/web-modeler/idp/idp-integrate"
-              },
-              "items": ["components/modeler/web-modeler/idp/idp-example"]
-            },
-            "components/modeler/web-modeler/idp/idp-key-concepts",
-            "components/modeler/web-modeler/idp/idp-reference"
-          ]
-        },
         {
           "type": "category",
           "label": "Robotic Process Automation (RPA)",
