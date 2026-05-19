@@ -221,19 +221,13 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 
 #### Supported Versions
 
-We conduct testing and ensure compatibility against the following OpenShift versions:
+Camunda 8 supports any OpenShift version that is in the Red Hat **General Availability**, **Full Support**, or **Maintenance Support** life cycle phases. For the current life cycle status of each release, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
 
-| OpenShift Version |
-| ----------------- |
-| 4.18.x            |
-| 4.17.x            |
-| 4.16.x            |
-| 4.15.x            |
-| 4.14.x            |
+This aligns with the [Kubernetes version skew and supportability policy](https://kubernetes.io/releases/version-skew-policy/): as long as the OpenShift release is supported by Red Hat (and ships a Kubernetes version supported by the upstream community), it is supported for running Camunda 8.
 
-:::caution Versions compatibility
+:::note Continuous validation
 
-Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support life cycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+Our reference architectures are continuously validated against the latest stable OpenShift release available in Red Hat's GA channel. New OpenShift minor releases are picked up as soon as they become generally available and do not require a documentation update to be considered supported.
 
 :::
 
