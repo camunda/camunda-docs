@@ -1513,6 +1513,18 @@
   border-top: 4px solid var(--card-border);
 }
 
+.everythingSection {
+  position: relative;
+  background: #f7f7f7;
+  margin-top: 3rem;
+  padding: 5rem 0 4rem;
+  border-top: 4px solid var(--card-border);
+}
+
+[data-theme="dark"] .everythingSection {
+  background: var(--explore-bg);
+}
+
 .exploreGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

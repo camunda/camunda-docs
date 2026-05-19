@@ -694,52 +694,54 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
         </section>
 
         {/* ─── Everything from your terminal ─── */}
-        <section className={clsx("container", styles.section)}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Everything from your terminal <VersionBadge />
-            </h2>
-            <p className={styles.sectionSub}>
-              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                <CodeBlock>c8ctl</CodeBlock>
-              </Link>{" "}
-              gives you a single CLI for the full Camunda lifecycle with no
-              browser required.
-            </p>
-          </div>
-          <div className={styles.commandGrid}>
-            <div className={styles.commandCard}>
-              <h4>Manage your clusters</h4>
-              <TerminalWindow title="Terminal">
-                {`$ c8ctl cluster start 8.9.0-alpha5
+        <section className={styles.everythingSection}>
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>
+                Everything from your terminal <VersionBadge />
+              </h2>
+              <p className={styles.sectionSub}>
+                <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
+                  <CodeBlock>c8ctl</CodeBlock>
+                </Link>{" "}
+                gives you a single CLI for the full Camunda lifecycle with no
+                browser required.
+              </p>
+            </div>
+            <div className={styles.commandGrid}>
+              <div className={styles.commandCard}>
+                <h4>Manage your clusters</h4>
+                <TerminalWindow title="Terminal">
+                  {`$ c8ctl cluster start 8.9.0-alpha5
 $ c8ctl cluster stop
 
 `}
-              </TerminalWindow>
-            </div>
-            <div className={styles.commandCard}>
-              <h4>Deploy and start processes</h4>
-              <TerminalWindow title="Terminal">
-                {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn
+                </TerminalWindow>
+              </div>
+              <div className={styles.commandCard}>
+                <h4>Deploy and start processes</h4>
+                <TerminalWindow title="Terminal">
+                  {`$ c8ctl deploy ./rocket-launch.bpmn plot-destination.dmn
 $ c8ctl create pi --id=rocket-launch --variables='{"fuelLevel":90}'
 $ c8ctl list pi`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.commandCard}>
-              <h4>Interact with processes</h4>
-              <TerminalWindow title="Terminal">
-                {`$ c8ctl list jobs --type=launch-approval
+                </TerminalWindow>
+              </div>
+              <div className={styles.commandCard}>
+                <h4>Interact with processes</h4>
+                <TerminalWindow title="Terminal">
+                  {`$ c8ctl list jobs --type=launch-approval
 $ c8ctl activate jobs launch-approval
 $ c8ctl complete job 2251799813685252`}
-              </TerminalWindow>
-            </div>
-            <div className={styles.commandCard}>
-              <h4>Monitor and debug</h4>
-              <TerminalWindow title="Terminal">
-                {`$ c8ctl list inc --state=ACTIVE
+                </TerminalWindow>
+              </div>
+              <div className={styles.commandCard}>
+                <h4>Monitor and debug</h4>
+                <TerminalWindow title="Terminal">
+                  {`$ c8ctl list inc --state=ACTIVE
 $ c8ctl get inc 2251799813685251
 $ c8ctl resolve inc 2251799813685251`}
-              </TerminalWindow>
+                </TerminalWindow>
+              </div>
             </div>
           </div>
         </section>
