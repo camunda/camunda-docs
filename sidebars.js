@@ -278,6 +278,7 @@ module.exports = {
               ],
             },
             "components/agentic-orchestration/rag-ai-agents",
+            "components/agentic-orchestration/expose-process-as-mcp-tool",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -1032,6 +1033,7 @@ module.exports = {
                     "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-human-in-the-loop",
                   ],
                 },
+                "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event",
                 "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
               ],
             },
@@ -1287,6 +1289,7 @@ module.exports = {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
         require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
+        require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         {
@@ -2307,6 +2310,7 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/admin/connect-multiple-identity-providers",
                 "self-managed/components/orchestration-cluster/admin/bring-your-groups",
                 "self-managed/components/orchestration-cluster/admin/debugging-authentication",
+                "self-managed/components/orchestration-cluster/admin/mcp-processes",
                 "self-managed/components/orchestration-cluster/admin/special-oidc-cases",
               ],
             },

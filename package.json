@@ -43,8 +43,8 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
     "@bpmn-io/form-js": "^1.15.2",
-    "@camunda8/docusaurus-plugin-openapi-docs": "^4.6.6",
-    "@camunda8/docusaurus-theme-openapi-docs": "^4.6.6",
+    "@camunda8/docusaurus-plugin-openapi-docs": "4.6.7",
+    "@camunda8/docusaurus-theme-openapi-docs": "4.6.7",
     "@docusaurus/core": "^3.8.0",
     "@docusaurus/faster": "^3.8.0",
     "@docusaurus/preset-classic": "^3.8.0",
@@ -58,6 +58,7 @@
     "pushfeedback-react": "^0.1.63",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
     "react-player": "^3.0.0",
     "unist-util-visit": "^5.0.0"
   },
@@ -91,11 +92,13 @@
   },
   "overrides": {
     "react-live": ">=3.1.1 <4.2.0",
-    "postman-code-generators": "2.1.0"
+    "postman-code-generators": "2.1.0",
+    "@docusaurus/plugin-content-docs": "3.9.2"
   },
   "resolutions": {
     "react-live": ">=3.1.1 <4.2.0",
-    "postman-code-generators": "2.1.0"
+    "postman-code-generators": "2.1.0",
+    "@docusaurus/plugin-content-docs": "3.9.2"
   },
   "engines": {
     "node": ">=18.0"

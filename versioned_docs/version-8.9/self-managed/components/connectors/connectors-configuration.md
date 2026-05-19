@@ -61,7 +61,7 @@ camunda:
 
 ### HTTPS configuration
 
-If using an HTTPS connection, you may need to provide a certificate to validate the gateway's certificate chain.
+If using an HTTPS connection, you may need to provide a certificate to validate the Zeebe Gateway's certificate chain.
 
 <Tabs groupId="https-config" defaultValue="environment-variables" queryString values={[
 {label: 'Environment variables', value: 'environment-variables' },
@@ -311,10 +311,10 @@ When no prefix is configured, the connector runtime logs a warning that this mod
 
 The following environment variables can be used to configure the default secret provider:
 
-| Name                                                      | Description                                                                                                                                                       | Default value |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`    | Whether the default secret provider is enabled.                                                                                                                   | `true`        |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`     | Prefix applied to the secret name before lookup. Only environment variables starting with this prefix are available as secrets. Set to empty to disable (unsafe). | `SECRET_`     |
+| Name                                                       | Description                                                                                                                                                       | Default value |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`     | Whether the default secret provider is enabled.                                                                                                                   | `true`        |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`      | Prefix applied to the secret name before lookup. Only environment variables starting with this prefix are available as secrets. Set to empty to disable (unsafe). | `SECRET_`     |
 | `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE` | Whether the secret provider should be tenant-aware.                                                                                                               | `false`       |
 
 If the secret provider is set to be tenant-aware, the secret format will change to `${prefix}${tenantId}_${secretName}`:
