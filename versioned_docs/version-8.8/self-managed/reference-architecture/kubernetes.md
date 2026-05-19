@@ -273,7 +273,7 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 
 Camunda 8 supports any OpenShift version in the Red Hat **General Availability**, **Full Support**, or **Maintenance Support** life cycle phases (see the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift)). This aligns with the upstream [Kubernetes version skew and supportability policy](https://kubernetes.io/releases/version-skew-policy/).
 
-Our reference architectures are continuously validated against the latest stable OpenShift release available in Red Hat's GA channel. New OpenShift minor releases are picked up as soon as they become generally available and do not require a documentation update to be considered supported.
+Our reference architectures are continuously validated against the latest stable OpenShift release available in Red Hat's GA channel. Newly released OpenShift minor versions are evaluated and validated shortly after their GA.
 
 :::
 
