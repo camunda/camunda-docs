@@ -54,6 +54,29 @@
       ]
     }
   ],
+  "BuildWithAI": [
+    {
+      "type": "category",
+      "label": "Build with AI",
+      "link": {
+        "type": "doc",
+        "id": "guides/build-with-ai/overview"
+      },
+      "items": ["guides/build-with-ai/ai-usage-guidelines"]
+    },
+    {
+      "type": "category",
+      "label": "Agentic orchestration",
+      "link": {
+        "type": "doc",
+        "id": "components/agentic-orchestration/agentic-orchestration"
+      },
+      "items": [
+        "components/agentic-orchestration/ao-design",
+        "components/agentic-orchestration/ai-agents"
+      ]
+    }
+  ],
   "Components": [
     "components/components-overview",
     {
@@ -176,18 +199,6 @@
             "components/console/console-troubleshooting/common-pitfalls"
           ]
         }
-      ]
-    },
-    {
-      "type": "category",
-      "label": "Agentic orchestration",
-      "link": {
-        "type": "doc",
-        "id": "components/agentic-orchestration/agentic-orchestration"
-      },
-      "items": [
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/ai-agents"
       ]
     },
     {
