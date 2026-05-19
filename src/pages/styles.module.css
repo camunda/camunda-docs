@@ -82,7 +82,7 @@
   width: 90px;
 }
 
-img.featuresImage[src*="home-build-with-ai"] {
+img.featuresImage[src*="icon-agentic"] {
   padding: 10px;
   box-sizing: border-box;
 }

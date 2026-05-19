@@ -7,6 +7,11 @@ keywords: [ai, mcp, claude, copilot, cursor, agentic]
 ---
 
 import AoGrid from '../../components/react-components/\_ao-card';
+import IconAgenticImg from '../../components/assets/icon-agentic.png';
+import IconCopilotImg from '../../components/assets/icon-camunda-copilot.png';
+import IconIdpImg from '../../components/assets/icon-idp.png';
+import IconDocsImg from '../../components/assets/icon-docs.png';
+import IconOrchClusterImg from '../../components/assets/icon-orchcluster.png';
 
 <h3 class="subheading">Build Camunda solutions with AI-ready workflows.</h3>
 
@@ -20,7 +25,7 @@ Build Camunda solutions with AI-ready workflows, including agentic orchestration
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
-<img src="/img/icon-agentic.png" alt="Build with AI" title="Build with AI" class="img-noborder img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0', maxWidth: '300px'}}/>
+<img src={IconAgenticImg} alt="Build with AI" title="Build with AI" class="img-noborder img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0', maxWidth: '300px'}}/>
 
 </div>
 </div>
@@ -56,13 +61,13 @@ Use Camunda Copilot to design processes, forms, and decisions faster. Use Intell
 {
 link: "../../components/early-access/alpha/bpmn-copilot/bpmn-copilot/",
 title: "Camunda Copilot",
-image: "/img/icon-modeler.png",
+image: IconCopilotImg,
 description: "Generate and modify BPMN processes, Camunda Forms, and FEEL expressions from natural-language prompts.",
 },
 {
 link: "../../components/modeler/web-modeler/idp/",
 title: "Intelligent document processing (IDP)",
-image: "/img/icon-idp.png",
+image: IconIdpImg,
 description: "Extract structured data from documents and integrate it into your processes.",
 },
 ]} />
@@ -75,13 +80,13 @@ Use MCP servers to give your AI assistant context — both runtime cluster state
 {
 link: "../../reference/mcp-docs/docs-mcp/",
 title: "Docs MCP server",
-image: "/img/icon-docs.png",
+image: IconDocsImg,
 description: "Retrieve up-to-date Camunda documentation from your AI assistant.",
 },
 {
 link: "../../apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/",
 title: "Orchestration Cluster MCP server",
-image: "/img/icon-mcp.png",
+image: IconOrchClusterImg,
 description: "Interact with Camunda runtime and management capabilities from your AI assistant.",
 },
 ]} />
