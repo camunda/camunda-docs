@@ -258,9 +258,9 @@ With those URLs, configure the following redirect URIs in your OIDC provider:
 - Management Identity: `https://identity.example.com/auth/login-callback`
 - Optimize: `https://optimize.example.com/api/authentication/callback`
 - Web Modeler UI: `https://modeler.example.com/login-callback`
-- Console: `https://console.example.com`
+- Console: `https://console.example.com/`
 
-For Web Modeler, the `restapi` component configuration can look like this:
+For Web Modeler, the `restapi` component configuration varies by provider. The example below uses Keycloak; for other providers, retrieve the issuer and JWK set URLs from your provider's [OpenID configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) (typically `https://<provider>/.well-known/openid-configuration`):
 
 ```shell
 OAUTH2_CLIENT_ID=web-modeler
