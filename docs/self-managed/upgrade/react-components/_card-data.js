@@ -12,11 +12,18 @@ export const overviewCards = [
     title: "Kubernetes with Helm",
     image: K8sIcon,
     description:
-      "Upgrade a Helm-managed Camunda 8.8 deployment on Kubernetes to version 8.9.",
+      "Upgrade a Helm-managed Camunda 8.9 deployment on Kubernetes to version 8.10.",
   },
 ];
 
 export const helmIndexCards = [
+  {
+    link: "./890-to-8100",
+    title: "Upgrade Camunda 8.9 to 8.10 using Helm",
+    image: IconArrow,
+    description:
+      "Follow the main Helm upgrade guide to perform the required configuration changes and run the Helm upgrade.",
+  },
   {
     link: "./880-to-890",
     title: "Upgrade Camunda 8.8 to 8.9 using Helm",
