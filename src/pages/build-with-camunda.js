@@ -559,8 +559,7 @@ function BuildWithCamunda() {
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
                 <CodeBlock>c8ctl</CodeBlock>
               </Link>{" "}
-              from npm and spin up a Self-Managed Camunda cluster on your
-              machine.
+              from npm and spin up a Self-Managed cluster on your machine.
             </p>
           </div>
           <div
@@ -883,42 +882,39 @@ $ c8ctl resolve inc 2251799813685251`}
           </div>
           <div className={styles.aiGrid}>
             <div className={styles.aiCard}>
-              <h4 style={{ color: "inherit" }}>
-                Add Camunda skills as Claude plugin{" "}
+              <h4 style={{ display: "flex", alignItems: "center" }}>
+                Add Camunda skills as Claude plugin
                 <span
                   style={{
-                    marginLeft: "0.5rem",
-                    display: "inline-block",
-                    padding: "0.15rem 0.5rem",
-                    borderRadius: "999px",
-                    fontSize: "0.75rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.02em",
-                    backgroundColor: "#fc5d0d",
-                    border: "1px solid #fc5d0d",
-                    color: "#ffffff",
-                    verticalAlign: "middle",
-                    lineHeight: 1.2,
+                    marginLeft: "auto",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                 >
-                  Coming soon
+                  <Link
+                    to="https://github.com/camunda/skills"
+                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                  >
+                    camunda/skills
+                  </Link>
                 </span>
               </h4>
               <TerminalWindow title="Terminal">
-                {`$ claude plugin add camunda/camunda-ai-dev-kit
+                {`$ claude plugin marketplace add camunda/skills
+$ claude plugin install camunda-skills@camunda-skills
 
 Available skills:
-  /new-project  — scaffold a new Camunda project
-  /new-process  — generate a BPMN process
-  /new-agent    — generate an agentic AI process (ad-hoc sub-process + AI Agent connector)
-  /new-dmn      — generate a DMN decision table
-  /new-form     — generate a Camunda Form
-  /new-worker   — generate a job worker
-  /deploy       — deploy resources to Camunda
-  /start        — start a process instance
-  /status       — check instance/incident status
-  /view-process       — visualize BPMN, DMN, or Form files
-  /setup-environment  — install and start Camunda 8 Run locally`}
+  /camunda-c8ctl                   — install and configure c8ctl
+  /camunda-ai-agent                — build AI agents in BPMN
+  /camunda-bpmn                    — create and edit BPMN 2.0 processes
+  /camunda-connectors              — configure pre-built connectors
+  /camunda-connectors-development  — build custom connectors
+  /camunda-development             — choose the integration type
+  /camunda-docs                    — search the Camunda 8 docs
+  /camunda-feel                    — write and debug FEEL expressions
+  /camunda-forms                   — create Camunda Form schemas
+  /camunda-job-workers             — implement job workers (Java, Spring, TypeScript)
+  /camunda-process-mgmt            — deploy, operate, and debug processes`}
               </TerminalWindow>
             </div>
             <div className={styles.aiCard}>
@@ -980,17 +976,23 @@ Available skills:
             <div className={styles.aiExampleGrid}>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
-                "Deploy the order-process.bpmn and start an instance with
+                "Create an invoice approval process with a user task for review
+                and an HTTP connector to notify accounting"
+              </div>
+              <div className={styles.aiExampleItem}>
+                <span className={styles.aiPromptIcon}>💬</span>
+                "Build an AI agent to triage and route customer support tickets
+                to the correct team"
+              </div>
+              <div className={styles.aiExampleItem}>
+                <span className={styles.aiPromptIcon}>💬</span>
+                "Deploy order-process.bpmn and start an instance with
                 orderId=42"
               </div>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
-                "Show me all incidents on the payment-flow process"
-              </div>
-              <div className={styles.aiExampleItem}>
-                <span className={styles.aiPromptIcon}>💬</span>
                 "Investigate incidents on the payment-flow process and resolve
-                any that are due to missing payment details"
+                any that are caused by missing payment details"
               </div>
             </div>
           </div>

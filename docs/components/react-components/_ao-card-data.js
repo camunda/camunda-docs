@@ -7,6 +7,7 @@ import IconConnectorImg from "../connectors/img/icon-connectors.png";
 import IconOperate from "../assets/icon-operate.png";
 import IconTest from "../hub/workspace/modeler/idp/img/icon-prereqs.png";
 import IconRAG from "../assets/icon-long-term-memory.png";
+import IconMCP from "../assets/icon-mcp.png";
 
 // Get started cards on introduction page
 export const getStartedCards = [
@@ -78,6 +79,13 @@ export const recommendationCards = [
     title: "Add long-term memory",
     image: IconRAG,
     description: "Add long-term memory to your AI agents.",
+  },
+  {
+    link: "../expose-process-as-mcp-tool/",
+    title: "Expose a process as an MCP tool",
+    image: IconMCP,
+    description:
+      "Configure a BPMN process as a callable MCP tool for AI agents.",
   },
   {
     link: "../choose-right-model-agentic/",
