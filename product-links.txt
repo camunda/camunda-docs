@@ -96,7 +96,6 @@ https://docs.camunda.io/docs/components/saas/secure-connectivity/
 
 # Web Modeler Pre-8.10
 
-https://docs.camunda.io/api/v2.0/problem-types/bad-request
 https://docs.camunda.io/contact
 https://docs.camunda.io/docs/
 https://docs.camunda.io/docs/apis-clients/operate-api/

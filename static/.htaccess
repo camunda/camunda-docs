@@ -250,8 +250,6 @@ RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooti
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-proxy-configuration/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
 
-# Fix broken links from camunda-platform-get-started README
-
 # Get started with Optimize
 RewriteRule ^docs/next/guides/improve-processes-with-optimize/?$ /docs/next/components/optimize/improve-processes-with-optimize/ [R=301,L]
 
@@ -316,6 +314,22 @@ RewriteRule ^docs/components/agentic-orchestration/?$ /docs/components/agentic-o
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
+
+# Web Modeler product links pre 8.10:
+# Before 8.10, these links were hardcoded in the product, so we have to maintain them until those versions are no longer supported.
+# Starting with 8.10, the product moved to pinned version links using /docs/8.10. These can, therefore, be removed with version 8.9.
+RewriteRule ^docs/components/connectors/protocol/webhook/$ /docs/components/connectors/protocol/http-webhook/ [R=301,L]
+RewriteRule ^docs/components/integration-framework/connectors/out-of-the-box-connectors/rest/$ /docs/components/connectors/protocol/rest/ [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/overview/$ /docs/components/tasklist/userguide/using-tasklist/ [R=301,L]
+RewriteRule ^docs/guides/orchestrate-api-endpoints/$ /docs/guides/orchestrate-apis/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/cli-client/$ /docs/next/apis-tools/c8ctl/getting-started/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/community-clients/c-sharp/$ /docs/next/apis-tools/csharp-sdk/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/go-client/$ https://unsupported.docs.camunda.io/8.5/docs/apis-tools/go-client/go-get-started/ [R=301,L]
+RewriteRule ^docs/apis-tools/orchestration-cluster-api-rest/specifications/create-document-link/$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/create-document-link/ [R=301,L]
+RewriteRule ^docs/next/guides/setup-client-connection-credentials$ /docs/components/console/introduction-to-console/ [R=301,L]
+RewriteRule ^docs/product-manuals/tasklist/introduction$ /docs/components/tasklist/introduction-to-tasklist/ [R=301,L]
+RewriteRule ^docs/product-manuals/tasklist/userguide/camunda-forms$ /docs/components/modeler/forms/camunda-forms-reference/ [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/configuration/$ /docs/self-managed/components/orchestration-cluster/operate/operate-configuration/ [R=301,L]
 
 # APIs & tools migration guide root
 RewriteRule ^docs/apis-tools/migration-manuals/?$ /docs/apis-tools/migration-manuals/migrate-to-89/ [R=301,L]
