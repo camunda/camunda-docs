@@ -86,6 +86,11 @@ The propagation ends when a scope contains a variable with the same name. In thi
 
 If no scope contains this variable, it's created as a new variable in the root scope.
 
+This automatic propagation behavior differs depending on the BPMN element:
+
+- **Embedded subprocesses**: Local variables created in the subprocess (via input mappings) propagate to the parent scope unless you prevent this with output mappings.
+- **Call activities**: Variables do not propagate automatically from the called process instance back to the parent unless output mappings are defined. This isolation provides better encapsulation.
+
 ![variable-propagation](assets/variable-propagation.png)
 
 The job of **Task B** is completed with the variables `b`, `c`, and `d`. The variables `b` and `c` are already defined in higher scopes and are updated with the new values. Variable `d` doesn't exist before and is created in the root scope.
@@ -98,11 +103,9 @@ To deactivate variable propagation, set the variables as **local variables**. Th
 
 ### Define local variables
 
-To define a local variable in Modeler, add an input mapping on the activity, subprocess, or call activity where you want the variable to exist.
+To define a local variable in Modeler, add an input mapping on the activity, subprocess, or call activity where you want the variable to exist. For details on input mapping concepts (`source` and `target`) see [input/output variable mappings](#inputoutput-variable-mappings).
 
 The `target` of the input mapping becomes a local variable in that element's scope. For example, an input mapping with `source: =customer.name` and `target: reviewerName` creates the local variable `reviewerName` in that scope.
-
-This is the main way to create local variables for user tasks, subprocesses, and multi-instance activities.
 
 ### Scope behavior in common modeling patterns
 
@@ -115,6 +118,16 @@ The scope boundary depends on the BPMN element you use:
 | Multi-instance activity | Each instance has its own local scope. Use input mappings to create per-instance local variables, especially in parallel multi-instance activities, to avoid race conditions when multiple instances update the same process variable.                                                                                                                                                                                                                           |
 
 If a form field or task variable should be different for each subprocess or each multi-instance instance, define it as a local variable with an input mapping instead of writing it directly to the root process scope.
+
+:::tip When to use local variables
+Use local variables to isolate data within a specific scope, especially for:
+
+- **Per-instance data in multi-instance activities**: Create per-instance copies of variables to avoid race conditions when parallel instances update the same root process variable.
+- **Subprocess-specific data**: Variables that should not affect sibling subprocess instances or the parent scope.
+- **Task-specific context**: Variables computed for a single task that shouldn't persist to the process level.
+
+Remember: Local variables are removed when a scope is exited unless you explicitly propagate them with output mappings.
+:::
 
 ## Input/output variable mappings
 
