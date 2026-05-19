@@ -21,8 +21,11 @@ The Orchestration Cluster MCP Server is not part of the [Camunda 8 public API](/
 :::
 
 :::note
-This is the Orchestration Cluster MCP Server documentation. If you want to connect an AI agent running in a BPMN process to an external MCP server, see [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
-:::
+This is the Orchestration Cluster MCP Server documentation. If you are looking to:
+
+- Expose your own BPMN processes as callable MCP tools for AI agents, see the [Processes MCP Server](../processes-mcp/processes-mcp-overview.md).
+- Connect an AI agent running in a BPMN process to an external MCP server, see the [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
+  :::
 
 ### Key features
 

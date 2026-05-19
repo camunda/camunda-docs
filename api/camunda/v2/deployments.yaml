@@ -43,6 +43,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /resources/{resourceKey}:
     get:
       tags:
@@ -84,6 +85,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.7"
   /resources/{resourceKey}/content:
     get:
       deprecated: true
@@ -135,6 +137,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.7"
   /resources/{resourceKey}/content/binary:
     get:
       tags:
@@ -144,7 +147,7 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.11]]
+        [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -177,6 +180,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
   /resources/search:
     post:
       tags:
@@ -217,6 +221,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
   /resources/{resourceKey}/deletion:
     post:
       tags:
@@ -278,6 +283,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
 components:
   schemas:
     DeploymentResult:
@@ -334,6 +340,9 @@ components:
           description: Deployed resource.
           allOf:
             - $ref: "#/components/schemas/DeploymentResourceResult"
+      x-properties-added-in-version:
+        - propertyName: resource
+          addedInVersion: "8.7"
     DeploymentProcessResult:
       description: A deployed process.
       type: object
@@ -513,6 +522,9 @@ components:
             will not be populated.
           type: boolean
           default: false
+      x-properties-added-in-version:
+        - propertyName: deleteHistory
+          addedInVersion: "8.9"
     DeleteResourceResponse:
       type: object
       required:
@@ -533,6 +545,11 @@ components:
             This field is only populated when the request `deleteHistory` is set to `true` and the resource
             is a process definition. For other resource types (decisions, forms, generic resources),
             this field will be `null`.
+      x-properties-added-in-version:
+        - propertyName: resourceKey
+          addedInVersion: "8.9"
+        - propertyName: batchOperation
+          addedInVersion: "8.9"
     ResourceResult:
       type: object
       required:
@@ -565,6 +582,19 @@ components:
           allOf:
             - $ref: "#/components/schemas/ResourceKey"
           description: The unique key of this resource.
+      x-properties-added-in-version:
+        - propertyName: resourceName
+          addedInVersion: "8.7"
+        - propertyName: version
+          addedInVersion: "8.7"
+        - propertyName: versionTag
+          addedInVersion: "8.7"
+        - propertyName: resourceId
+          addedInVersion: "8.7"
+        - propertyName: tenantId
+          addedInVersion: "8.7"
+        - propertyName: resourceKey
+          addedInVersion: "8.7"
     DeploymentKey:
       description: Key for a deployment.
       format: DeploymentKey
@@ -615,6 +645,17 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DeploymentKey"
+      x-properties-added-in-version:
+        - propertyName: $eq
+          addedInVersion: "8.9"
+        - propertyName: $neq
+          addedInVersion: "8.9"
+        - propertyName: $exists
+          addedInVersion: "8.9"
+        - propertyName: $in
+          addedInVersion: "8.9"
+        - propertyName: $notIn
+          addedInVersion: "8.9"
     ResourceKeyFilterProperty:
       description: ResourceKey property with full advanced search capabilities.
       oneOf:
@@ -650,6 +691,17 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ResourceKey"
+      x-properties-added-in-version:
+        - propertyName: $eq
+          addedInVersion: "8.9"
+        - propertyName: $neq
+          addedInVersion: "8.9"
+        - propertyName: $exists
+          addedInVersion: "8.9"
+        - propertyName: $in
+          addedInVersion: "8.9"
+        - propertyName: $notIn
+          addedInVersion: "8.9"
     ResourceSearchQuerySortRequest:
       type: object
       properties:

@@ -34,6 +34,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
   /decision-requirements/{decisionRequirementsKey}:
     get:
       tags:
@@ -80,6 +81,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /decision-requirements/{decisionRequirementsKey}/xml:
     get:
       tags:
@@ -126,6 +128,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
 components:
   schemas:
     DecisionRequirementsSearchQuerySortRequest:
@@ -181,6 +184,9 @@ components:
         resourceName:
           type: string
           description: The name of the resource from which the decision requirements were parsed
+      x-properties-added-in-version:
+        - propertyName: resourceName
+          addedInVersion: "8.8"
     DecisionRequirementsSearchQueryResult:
       required:
         - items
@@ -224,3 +230,16 @@ components:
           type: integer
           format: int32
           description: The assigned version of the decision requirements.
+      x-properties-added-in-version:
+        - propertyName: decisionRequirementsId
+          addedInVersion: "8.6"
+        - propertyName: decisionRequirementsKey
+          addedInVersion: "8.6"
+        - propertyName: decisionRequirementsName
+          addedInVersion: "8.6"
+        - propertyName: resourceName
+          addedInVersion: "8.6"
+        - propertyName: tenantId
+          addedInVersion: "8.6"
+        - propertyName: version
+          addedInVersion: "8.6"
