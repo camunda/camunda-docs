@@ -16,6 +16,13 @@ const features = [
       "New to Camunda 8? Create an account and start modeling your first process.",
   },
   {
+    title: "Build with AI",
+    imageUrl: "img/home-build-with-ai.png",
+    url: "/docs/guides/build-with-ai/overview/",
+    description:
+      "Set up an AI-ready development workflow and orchestrate AI agents inside your processes.",
+  },
+  {
     title: "Using Camunda",
     imageUrl: "img/home-components.png",
     url: "/docs/components/",
@@ -35,13 +42,6 @@ const features = [
     url: "/docs/apis-tools/working-with-apis-tools/",
     description:
       "Explore Zeebe client libraries, Camunda component APIs, and SDKs.",
-  },
-  {
-    title: "Best Practices",
-    imageUrl: "img/home-bp.png",
-    url: "/docs/components/best-practices/best-practices-overview/",
-    description:
-      "Level up your BPMN and DMN skills, including insights from consulting and the community.",
   },
   {
     title: "Reference",
