@@ -83,8 +83,8 @@
 }
 
 img.featuresImage[src*="home-build-with-ai"] {
-  height: 70px;
-  width: 70px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .featuresTitle {

@@ -88,10 +88,7 @@ module.exports = {
         type: "doc",
         id: "guides/build-with-ai/overview",
       },
-      items: [
-        "guides/build-with-ai/ai-usage-guidelines",
-        "reference/mcp-docs/docs-mcp",
-      ],
+      items: ["guides/build-with-ai/ai-usage-guidelines"],
     },
     {
       type: "category",
@@ -121,6 +118,44 @@ module.exports = {
         "components/agentic-orchestration/expose-process-as-mcp-tool",
         "components/agentic-orchestration/choose-right-model-agentic",
         "components/agentic-orchestration/model-recommendations-agentic",
+      ],
+    },
+    "reference/mcp-docs/docs-mcp",
+    {
+      type: "category",
+      label: "Intelligent document processing (IDP)",
+      link: {
+        type: "doc",
+        id: "components/hub/workspace/modeler/idp",
+      },
+      items: [
+        "components/hub/workspace/modeler/idp/idp-configuration",
+        "components/hub/workspace/modeler/idp/idp-applications",
+        "components/hub/workspace/modeler/idp/idp-document-classification",
+        {
+          type: "category",
+          label: "Document extraction",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-document-extraction",
+          },
+          items: [
+            "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
+            "components/hub/workspace/modeler/idp/idp-structured-extraction",
+          ],
+        },
+        // "components/hub/workspace/modeler/idp/idp-document-automation",
+        {
+          type: "category",
+          label: "Integrate IDP into your processes",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-integrate",
+          },
+          items: ["components/hub/workspace/modeler/idp/idp-example"],
+        },
+        "components/hub/workspace/modeler/idp/idp-key-concepts",
+        "components/hub/workspace/modeler/idp/idp-reference",
       ],
     },
   ],
@@ -297,43 +332,6 @@ module.exports = {
         id: "components/features-integrations/features-integrations",
       },
       items: [
-        {
-          type: "category",
-          label: "Intelligent document processing (IDP)",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp",
-          },
-          items: [
-            "components/hub/workspace/modeler/idp/idp-configuration",
-            "components/hub/workspace/modeler/idp/idp-applications",
-            "components/hub/workspace/modeler/idp/idp-document-classification",
-            {
-              type: "category",
-              label: "Document extraction",
-              link: {
-                type: "doc",
-                id: "components/hub/workspace/modeler/idp/idp-document-extraction",
-              },
-              items: [
-                "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
-                "components/hub/workspace/modeler/idp/idp-structured-extraction",
-              ],
-            },
-            // "components/hub/workspace/modeler/idp/idp-document-automation",
-            {
-              type: "category",
-              label: "Integrate IDP into your processes",
-              link: {
-                type: "doc",
-                id: "components/hub/workspace/modeler/idp/idp-integrate",
-              },
-              items: ["components/hub/workspace/modeler/idp/idp-example"],
-            },
-            "components/hub/workspace/modeler/idp/idp-key-concepts",
-            "components/hub/workspace/modeler/idp/idp-reference",
-          ],
-        },
         {
           type: "category",
           label: "Robotic Process Automation (RPA)",

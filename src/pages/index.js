@@ -176,7 +176,7 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/components/agentic-orchestration/")}
+                to={useBaseUrl(search_agentic_url)}
               >
                 Agentic Orchestration
               </Link>
