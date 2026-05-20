@@ -8,9 +8,9 @@ keywords: [ai, ai act, compliance, governance, ai agent, copilot, idp]
 
 Learn how to use Camunda AI features responsibly with guidance on data handling, human oversight, prohibited uses, and AI agents.
 
-## About Camunda's AI features
+## About Camunda AI features
 
-Camunda's AI features and capabilities currently include:
+Camunda AI features and capabilities currently include:
 
 - **Agentic orchestration**: Embedding AI agents into BPMN processes so that an AI model can, within boundaries you define, decide which tools to call to reach a goal.
 - **Camunda Copilot**: AI-assisted process, form, and decision modeling. Describe what you need in natural language and Camunda generates BPMN diagrams, Camunda Forms, and FEEL expressions.

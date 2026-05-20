@@ -40,7 +40,7 @@ Agentic orchestration lets human tasks, deterministic rule sets, and AI-driven d
 
 ## Design with AI
 
-Use these selected AI features to design workflows and processes more easily and faster.
+Explore these selected AI features to design workflows and processes more easily and faster.
 
 <AoGrid columns={2} ao={[
 {
