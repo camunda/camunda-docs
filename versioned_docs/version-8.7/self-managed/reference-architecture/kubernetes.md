@@ -219,21 +219,19 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
   - 1,000 - 3,000 IOPS per volume
   - throughput of 1,000 MB/s per volume
 
-#### Supported Versions
+#### Supported versions
 
-We conduct testing and ensure compatibility against the following OpenShift versions:
+:::info Supported versions
 
-| OpenShift Version |
-| ----------------- |
-| 4.18.x            |
-| 4.17.x            |
-| 4.16.x            |
-| 4.15.x            |
-| 4.14.x            |
+As stated in the general [supported environments](/reference/supported-environments.md) policy, Camunda 8 Self-Managed runs on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/) distribution. For OpenShift specifically, this means any release in the Red Hat **General Availability**, **Full Support**, or **Maintenance Support** lifecycle phases (see the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift)), within the upstream [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/).
+
+Our reference architectures are continuously validated against the latest stable OpenShift release available in Red Hat's GA channel. Newly released OpenShift minor versions are evaluated and validated shortly after their GA.
 
 :::caution Versions compatibility
 
-Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support life cycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support lifecycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+
+Our reference architectures are continuously validated against the latest stable OpenShift release available in Red Hat's GA channel. Newly released OpenShift minor versions are evaluated and validated shortly after their GA.
 
 :::
 

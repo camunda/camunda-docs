@@ -835,9 +835,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
                 {`$ c8ctl cluster start 8.9.0-alpha5
-$ c8ctl cluster stop
-
-`}
+$ c8ctl cluster stop`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>

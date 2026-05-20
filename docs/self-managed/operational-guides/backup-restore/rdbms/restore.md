@@ -103,7 +103,7 @@ orchestration:
       value: "restore"
     - name: ZEEBE_RESTORE
       value: "true"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3" # or GCS, AZURE, FILESYSTEM
     # Rest of the backup store configuration (bucket, region, etc.)
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -126,7 +126,7 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:543
 # ... other RDBMS config
 
 # Ensure backup store is configured
-export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE=S3
+export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE=S3
 # ... other store config
 
 mkdir -p camunda
@@ -158,7 +158,7 @@ orchestration:
       value: "true"
     - name: ZEEBE_RESTORE_TO_TIMESTAMP
       value: "2026-01-10T14:00:00Z"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3"
     # Rest of the backup store configuration
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -212,7 +212,7 @@ orchestration:
       value: "2026-01-10T13:00:00Z"
     - name: ZEEBE_RESTORE_TO_TIMESTAMP
       value: "2026-01-10T14:00:00Z"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3"
     # Rest of the backup store configuration
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -261,7 +261,7 @@ orchestration:
       value: "restore"
     - name: ZEEBE_RESTORE
       value: "true"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3"
     # Rest of the backup store configuration
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
