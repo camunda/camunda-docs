@@ -37,7 +37,6 @@ To determine the exact Docusaurus version used by this site, check the `@docusau
 - Keep the PR in **draft** while actively working on it. Removing draft status signals it is ready for review.
 - Use **labels** to communicate the component, version, and priority. PRs without labels may be triaged slowly.
 - Add the **`deploy` label** to trigger a preview site deployment. Recommended for large or complex changes. Preview deployments are published at `https://preview.docs.camunda.cloud/pr-<N>/`, where `<N>` is the PR number.
-- The **GitHub CLI** (`gh`) is the expected tool for PR and issue operations. It must be installed and authenticated (`gh auth status`) to create PRs, fetch checks, or read review comments.
 
 ## 4. Code formatting and commits
 
@@ -58,35 +57,25 @@ These are the main commands for working with the repo:
 
 - Always run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors.
 - **Do not** run `npm run build` speculatively during exploration. It is slow. Use it only to validate final changes.
-- HTML minifier `diagnostic - error` warnings emitted by the SWC minifier (under `experimental_faster: true`) are **non-fatal**. A clean build can still log them for many paths. The only fatal failure to act on is `Docusaurus static site generation failed for N paths`.
 
 ## 6. Versioning
 
 - The "Next" (unreleased) docs live in `/docs/`. Versioned docs live in `/versioned_docs/version-*/`.
 - Sidebar navigation is managed in `sidebars.js` (Next) and `versioned_sidebars/version-*-sidebars.json` (versioned).
 - When edits apply to the current version and beyond, make them in both the most recent versioned folder **and** the Next (`/docs/`) folder.
-
-### Folder to URL prefix mapping
-
-The current released version is set in `src/versions.js` (`currentVersion`) and Docusaurus is configured with `lastVersion: currentVersion`, so the released version is served with no URL prefix. The mapping for the versions currently in the repo is:
-
-| Repo path                     | URL prefix                                       |
-| ----------------------------- | ------------------------------------------------ |
-| `docs/`                       | `/docs/next/...` (the unreleased "Next" version) |
-| `versioned_docs/version-8.9/` | `/docs/...` (default, no version prefix)         |
-| `versioned_docs/version-8.8/` | `/docs/8.8/...`                                  |
-| `versioned_docs/version-8.7/` | `/docs/8.7/...`                                  |
-| `src/pages/`                  | Site root, not versioned                         |
-
-When a new version is cut, `currentVersion` and the unprefixed version shift accordingly. Re-check `src/versions.js` before relying on this mapping.
+- The current released version is set in `src/versions.js` (`currentVersion`) and Docusaurus is configured with `lastVersion: currentVersion`, so the released version is served with no URL prefix. When a new version is cut, `currentVersion` and the unprefixed version shift accordingly.
 
 ### Navbar links resolve across every version
 
-Navbar entries with `type: "doc"` in `docusaurus.config.js` resolve the same `docId` against **every** version, including `docs/` (Next). If the `docId` is missing from any one of `docs/`, `versioned_docs/version-8.9/`, `versioned_docs/version-8.8/`, or `versioned_docs/version-8.7/`, the build fails with `Docusaurus static site generation failed for ~N paths` and no underlying stack trace. When adding or renaming a navbar doc link, confirm the `docId` exists in every version.
+Navbar entries with `type: "doc"` in `docusaurus.config.js` resolve the same `docId` against **every** version, including `docs/` (Next). If the `docId` is missing from any version, the build fails.
+
+- When adding or renaming a navbar doc link, confirm the `docId` exists in every version.
 
 ### Doc IDs can diverge between versions
 
-The same conceptual page can have different filenames (and therefore different doc IDs) across versions — for example, an "overview" page may have been renamed when a section was restructured. Verify the target file name in each version before back- or forward-porting a link; do not assume the path from one version exists in another.
+The same conceptual page can have different filenames (and therefore different doc IDs) across versions. For example, an "overview" page may have been renamed when a section was restructured.
+
+- Verify the target file name in each version before back- or forward-porting a link; do not assume the path from one version exists in another.
 
 ## 7. AI-ready documentation and llms.txt
 
