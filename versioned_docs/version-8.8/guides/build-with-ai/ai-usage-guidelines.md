@@ -57,7 +57,7 @@ If you're unsure, [contact Camunda](https://www.camunda.com/services/support-gui
 
 AI-generated outputs may be incorrect, incomplete, biased, or outdated. Always review outputs critically before acting on them, particularly in business-critical, legally relevant, or financially significant contexts.
 
-In those contexts, consider implementing a Human-in-the-Loop mechanism ((see [glossary](#glossary)).): a human review step before the output is acted upon.
+In those contexts, consider implementing a [Human-in-the-Loop (HITL)](/reference/glossary.md#human-in-the-loop-hitl) mechanism: a human review step before the output is acted upon.
 
 ## The AI models behind these features
 
@@ -177,7 +177,7 @@ Maintain effective human oversight over any AI agent you deploy. This is also a 
 
 At a minimum, human oversight means:
 
-- Someone with the authority and technical ability to stop the agent at any time using a kill switch or equivalent mechanism (see [glossary](#glossary)).
+- Someone with the authority and technical ability to stop the agent at any time using a [kill switch](/reference/glossary.md#kill-switch) or equivalent mechanism.
 - Defined limits on what the agent can do. For example, caps on transaction amounts, action frequency, or which systems it can write to.
 - A human approval step for any action with significant legal, financial, or safety implications.
 - A regular review process so you can catch drift or unexpected behavior before it becomes a problem.
@@ -220,14 +220,4 @@ This does not need to be a formal audit process; it can be as simple as periodic
 
 Keep a record of the key decisions you made when setting up and operating your AI agent, including what it does, how it is configured, what controls are in place, and how those have evolved over time. Good documentation makes incidents easier to investigate and changes easier to manage. It also supports your compliance obligations under the AI Act if your use case is ever scrutinized.
 
-## Glossary
-
-The following terms are used in these usage guidelines.
-
-| Term                     | Definition                                                                                                                                                                                                                                                                                                                                                                                     |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AI agent                 | AI that, with an increased degree of autonomy, can plan and act in a goal-oriented manner without human intervention — including triggering actions without renewed human approval, independent continuous planning, and orchestrating or controlling tools, systems, or sub-agents with write or execution rights. Goes beyond reactive chatbots, regardless of technology or designation.    |
-| Kill switch              | A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case — together with its connected tools and interfaces — into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner. |
-| Human-in-the-Loop (HITL) | A human review and approval step before AI-generated outputs with legal, financial, or safety-relevant effects are acted upon.                                                                                                                                                                                                                                                                 |
-| Human-on-the-Loop (HOTL) | Continuous human oversight of an AI agent's actions, with the ability to intervene at any time — but without requiring approval for each individual action.                                                                                                                                                                                                                                    |
-| GPAI model               | A general-purpose AI model trained on large amounts of data using self-supervision at scale, capable of performing a wide range of tasks.                                                                                                                                                                                                                                                      |
+For definitions of [AI agent](/reference/glossary.md#ai-agent), [GPAI model](/reference/glossary.md#gpai-model), [Human-in-the-Loop (HITL)](/reference/glossary.md#human-in-the-loop-hitl), [Human-on-the-Loop (HOTL)](/reference/glossary.md#human-on-the-loop-hotl), and [kill switch](/reference/glossary.md#kill-switch), see the [glossary](/reference/glossary.md).
