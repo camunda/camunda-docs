@@ -2,7 +2,7 @@
 applyTo: "**"
 ---
 
-**When to use:** All files. Read this before any change to understand repo structure, PR workflow, and commit conventions. Read the full guidelines at `/howtos/documentation-guidelines.md`.
+**When to use:** All files. Read this before any change to understand repo structure, PR workflow, and commit conventions. Only consult the full guidelines at `/howtos/documentation-guidelines.md` if you need information not covered here.
 
 ## 1. File and repo structure
 
@@ -55,7 +55,7 @@ These are the main commands for working with the repo:
 - `npm run build`: Generate a static build.
 - `npm run format`: Validate Prettier formatting.
 
-- Always run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors.
+- If you added, moved, or removed pages, changed link targets, or edited sidebars, run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors. Skip the build for small content edits that don't affect links or structure.
 - **Do not** run `npm run build` speculatively during exploration. It is slow. Use it only to validate final changes.
 
 ## 6. Versioning
@@ -77,18 +77,14 @@ The same conceptual page can have different filenames (and therefore different d
 
 - Verify the target file name in each version before back- or forward-porting a link; do not assume the path from one version exists in another.
 
-## 7. AI-ready documentation and llms.txt
+## 7. AI-ready documentation outputs
 
-This site publishes machine-readable documentation for AI agents and LLMs:
+At build time, `docusaurus-plugin-llms` auto-generates machine-readable outputs for external AI agents and LLMs that consume Camunda documentation:
 
 - **`/llms.txt`**: A curated index of documentation links following the [llmstxt.org](https://llmstxt.org/) standard.
 - **`/llms-full.txt`**: The full documentation content in a single file for RAG/LLM context injection.
 - **Individual `.md` files**: Clean Markdown versions of each page, accessible by appending `.md` to any doc URL.
 
-These files are auto-generated at build time by `docusaurus-plugin-llms`.
+### Agents working inside this repository
 
-### For AI agents working in or with this repository
-
-When answering questions about Camunda 8, always consult `https://docs.camunda.io/llms.txt` first to discover the canonical documentation structure and URLs. Prefer fetching the `.md` variant of any documentation page, for example, `https://docs.camunda.io/docs/guides/introduction-to-camunda.md`, over the HTML version for cleaner, more complete content.
-
-Do not rely solely on training data for Camunda-specific answers. Fetch the latest documentation via these files to ensure accuracy.
+This repository is the source of truth. Read local Markdown files directly — do not fetch `docs.camunda.io` to look up Camunda content. The published outputs above are derived from these files at build time, so fetching them costs context and latency without adding information. `llms-full.txt` in particular is multiple megabytes and will exhaust an agent's context window.
