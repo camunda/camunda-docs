@@ -17,7 +17,7 @@ import IconIdpImg from '../../components/assets/icon-idp.png';
 <div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left" style={{marginRight: '50px', flex: '1.35'}}>
 
-Build Camunda solutions with AI-ready workflows, including agentic orchestration and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents inside BPMN processes, and use Camunda Copilot to design faster.
+Build Camunda solutions with agentic orchestration and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents inside BPMN processes, and use Camunda Copilot to design faster.
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -29,7 +29,9 @@ Build Camunda solutions with AI-ready workflows, including agentic orchestration
 
 ## Orchestrate AI agents
 
-With Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md), you can embed AI agents directly inside your BPMN-based processes. Agentic orchestration lets human tasks, deterministic rule sets, and AI-driven decisions collaborate in a robust, end-to-end process.
+With Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md), integrate and orchestrate AI agents into your BPMN-based processes.
+
+Agentic orchestration lets human tasks, deterministic rule sets, and AI-driven decisions collaborate in a robust, end-to-end process.
 
 ## Design with AI
 
@@ -56,4 +58,4 @@ Retrieve up-to-date Camunda documentation from your AI agents with the Camunda [
 
 ## Use AI responsibly
 
-Before you ship AI-driven processes to production, review our [AI usage guidelines](./ai-usage-guidelines.md) for requirements on security, legality, data handling, human oversight, and prohibited use cases.
+Review our [AI usage guidelines](./ai-usage-guidelines.md) for requirements on security, legality, data handling, human oversight, and prohibited use cases.
