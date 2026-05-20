@@ -173,7 +173,7 @@ Running a limited pilot before full deployment gives you the opportunity to catc
 
 ### Human oversight
 
-Maintain effective human oversight over any AI agent you deploy. This is also a sound operational principle — autonomous agents acting in production systems can have real-world consequences that are difficult to reverse.
+Maintain effective human oversight over any AI agent you deploy. This is also a sound operational principle; autonomous agents acting in production systems can have real-world consequences that are difficult to reverse.
 
 At a minimum, human oversight means:
 
@@ -219,5 +219,3 @@ This does not need to be a formal audit process; it can be as simple as periodic
 ### Documentation
 
 Keep a record of the key decisions you made when setting up and operating your AI agent, including what it does, how it is configured, what controls are in place, and how those have evolved over time. Good documentation makes incidents easier to investigate and changes easier to manage. It also supports your compliance obligations under the AI Act if your use case is ever scrutinized.
-
-For definitions of [AI agent](/reference/glossary.md#ai-agent), [GPAI model](/reference/glossary.md#gpai-model), [Human-in-the-Loop (HITL)](/reference/glossary.md#human-in-the-loop-hitl), [Human-on-the-Loop (HOTL)](/reference/glossary.md#human-on-the-loop-hotl), and [kill switch](/reference/glossary.md#kill-switch), see the [glossary](/reference/glossary.md).
