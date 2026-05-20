@@ -2,21 +2,21 @@
 id: ai-usage-guidelines
 title: AI usage guidelines
 sidebar_label: AI usage guidelines
-description: "Guidelines for using Camunda's AI-powered features responsibly, including data handling, human oversight, prohibited use cases, and requirements for AI agents."
+description: "Learn how to use Camunda AI features responsibly with guidance on data handling, human oversight, prohibited uses, and AI agents."
 keywords: [ai, ai act, compliance, governance, ai agent, copilot, idp]
 ---
 
-These usage guidelines explain how you can use Camunda's AI-powered features responsibly and what requirements apply when you do.
+Learn how to use Camunda AI features responsibly with guidance on data handling, human oversight, prohibited uses, and AI agents.
 
 ## About Camunda's AI features
 
-Camunda's AI services are the AI-powered features and capabilities available within the Camunda platform. They currently include:
+Camunda's AI features and capabilities currently include:
 
-- **Camunda Copilot** — AI-assisted process, form, and decision modeling. Describe what you need in natural language and Camunda generates BPMN diagrams, Camunda Forms, and FEEL expressions.
-- **Intelligent Document Processing (IDP)** — Automated document analysis and structured data extraction, connecting to your chosen document AI provider.
-- **AI agent orchestration** — Embedding AI agents into BPMN processes so that an AI model can, within boundaries you define, decide which tools to call to reach a goal.
+- **Agentic orchestration**: Embedding AI agents into BPMN processes so that an AI model can, within boundaries you define, decide which tools to call to reach a goal.
+- **Camunda Copilot**: AI-assisted process, form, and decision modeling. Describe what you need in natural language and Camunda generates BPMN diagrams, Camunda Forms, and FEEL expressions.
+- **Intelligent Document Processing (IDP)**: Automated document analysis and structured data extraction, connecting to your chosen document AI provider.
 
-Camunda provides an application and orchestration layer that integrates AI models via interfaces. In most cases, the underlying AI models are not developed or operated by Camunda itself. Depending on your setup, AI models may be:
+Camunda provides an **application and orchestration layer** that integrates AI models via interfaces. In most cases, the underlying AI models are not developed or operated by Camunda itself. Depending on your setup, AI models may be:
 
 - Provided by a third-party provider that Camunda has selected and licensed (for example, in SaaS deployments).
 - Provided by a third-party provider that you select and contract directly.
@@ -26,12 +26,12 @@ The specific models and providers active in your environment are described in th
 
 ## How to use AI services responsibly
 
-The following principles apply across all AI service use cases. They reflect both good engineering practice and regulatory expectations — we've distilled them here so you have a single reference point rather than having to navigate the regulation itself.
+The following principles apply across all AI service use cases. They reflect both good engineering practice and regulatory expectations.
 
 | Principle    | What it means in practice                                                                                                                                                                  |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Security     | Use as little data, as few permissions, and as few interfaces as necessary for your use case. Before using any data or system, confirm you are authorized to use it in the way you intend. |
-| Legality     | Comply with all applicable laws, industry regulations, and contractual obligations — including the EU AI Act where it applies to your use case.                                            |
+| Legality     | Comply with all applicable laws, industry regulations, and contractual obligations, including the EU AI Act where it applies to your use case.                                             |
 | Fairness     | Review AI-generated outputs to assess whether they could have a discriminatory effect on individuals or groups.                                                                            |
 | Transparency | Document data sources, AI models, versions, prompts, and key decisions. Where applicable law requires it, label AI-generated content as such.                                              |
 | Monitoring   | Monitor AI service usage at intervals appropriate to the risk level of your use case, and keep records of your monitoring activities.                                                      |
@@ -40,24 +40,24 @@ The following principles apply across all AI service use cases. They reflect bot
 
 Camunda's AI services are designed and intended for use in non-high-risk scenarios.
 
-If your use case qualifies as high-risk, you are responsible for compliance with the applicable legal requirements. Reach out to Camunda before proceeding so we can discuss what that means for your specific scenario.
+If your use case qualifies as high-risk, you are responsible for compliance with the applicable legal requirements. [Reach out to Camunda](https://www.camunda.com/services/support-guide/) before proceeding so we can discuss what that means for your specific scenario.
 
 ### Use cases that may qualify as high-risk
 
 If your use case involves any of the following, take a closer look before deploying:
 
-- Recruitment or selection of individuals — for example, filtering job applications or evaluating candidates.
-- Decisions affecting employment relationships — for example, promotion, termination, or performance monitoring.
+- Recruitment or selection of individuals. For example, filtering job applications or evaluating candidates.
+- Decisions affecting employment relationships. For example, promotion, termination, or performance monitoring.
 - Creditworthiness assessment or credit scoring (except systems used solely for fraud detection).
 - Risk assessment or pricing for life and health insurance.
 
-If you're unsure, contact Camunda — we'd rather have the conversation early.
+If you're unsure, [contact Camunda](https://www.camunda.com/services/support-guide/).
 
 ## Evaluating AI outputs
 
-AI-generated outputs may be incorrect, incomplete, biased, or outdated. Always review outputs critically before acting on them — particularly in business-critical, legally relevant, or financially significant contexts.
+AI-generated outputs may be incorrect, incomplete, biased, or outdated. Always review outputs critically before acting on them, particularly in business-critical, legally relevant, or financially significant contexts.
 
-In those contexts, consider implementing a Human-in-the-Loop (HITL) mechanism: a human review step before the output is acted upon. See the [glossary](#glossary) for a full definition.
+In those contexts, consider implementing a Human-in-the-Loop mechanism ((see [glossary](#glossary)).): a human review step before the output is acted upon.
 
 ## The AI models behind these features
 
@@ -86,7 +86,7 @@ In practice, AI literacy means the people in your organization who configure, op
 
 ### Practical steps
 
-How you meet this standard is largely up to you — the AI Act does not prescribe a specific training format. As a starting point, we suggest:
+How you meet this standard is largely up to you. The AI Act does not prescribe a specific training format. As a starting point, we suggest:
 
 - Providing some form of orientation before people in your organization first use Camunda's AI services.
 - Revisiting that orientation when the AI services change significantly or when use cases evolve.
@@ -94,7 +94,7 @@ How you meet this standard is largely up to you — the AI Act does not prescrib
 
 ## Handling data with care
 
-When using Camunda's AI services, you are submitting data — potentially including personal data — to AI models. The following requirements apply.
+When using Camunda's AI services, you are submitting data, potentially including personal data, to AI models. The following requirements apply.
 
 ### Data minimization
 
@@ -126,46 +126,46 @@ Implement appropriate measures against prompt injection, data exfiltration, and 
 Before submitting content as input to Camunda's AI services, make sure that:
 
 - You have the right to use it in the way you intend, including for AI processing.
-- It does not infringe third-party intellectual property rights — including copyright, trademark, database rights, and open-source license obligations.
+- It does not infringe third-party intellectual property rights, including copyright, trademark, database rights, and open-source license obligations.
 - Where the content belongs to a third party, your license covers AI training and the specific use you have in mind.
 
 ### Output content
 
-Outputs generated by AI services may be subject to copyright or related rights — the legal position varies by jurisdiction and continues to evolve. Before relying on AI-generated outputs commercially or legally, verify that your intended use is permissible.
+Outputs generated by AI services may be subject to copyright or related rights, the legal position varies by jurisdiction and continues to evolve. Before relying on AI-generated outputs commercially or legally, verify that your intended use is permissible.
 
 ## What you must not do
 
-The following uses of Camunda's AI services are prohibited. If you are unsure if a planned use case falls into any of these categories, contact Camunda before proceeding.
+The following uses of Camunda's AI services are prohibited. If you are unsure if a planned use case falls into any of these categories, [contact Camunda](https://www.camunda.com/services/support-guide/) before proceeding.
 
 These uses are prohibited regardless of technical feasibility:
 
-- **Manipulation** — Using AI to materially distort people's behavior through covert or manipulative techniques in a way likely to cause significant harm.
-- **Exploitation of vulnerable groups** — Deliberately exploiting the vulnerabilities of specific groups, such as children or persons with disabilities, to materially distort their behavior.
-- **Social scoring** — Evaluating or ranking individuals using AI in a way that leads to detrimental or unfair treatment.
-- **Predictive policing** — Predicting criminal offenses based on profiling or personal characteristics.
-- **Biometric database scraping** — Collecting facial or biometric data from the internet or camera systems without targeting specific individuals, to build or expand facial recognition databases.
-- **Biometric categorization** — Inferring sensitive personal characteristics from biometric data, such as racial or ethnic origin, political opinion, religious belief, health data, or sexual orientation.
-- **Emotion recognition at work or school** — Monitoring the emotional state of employees or learners in workplace or educational contexts.
-- **Real-time biometric identification in public spaces** — Using AI to identify individuals in real time in publicly accessible spaces for law enforcement purposes.
+- **Manipulation**: Using AI to materially distort people's behavior through covert or manipulative techniques in a way likely to cause significant harm.
+- **Exploitation of vulnerable groups**: Deliberately exploiting the vulnerabilities of specific groups, such as children or persons with disabilities, to materially distort their behavior.
+- **Social scoring**: Evaluating or ranking individuals using AI in a way that leads to detrimental or unfair treatment.
+- **Predictive policing**: Predicting criminal offenses based on profiling or personal characteristics.
+- **Biometric database scraping**: Collecting facial or biometric data from the internet or camera systems without targeting specific individuals, to build or expand facial recognition databases.
+- **Biometric categorization**: Inferring sensitive personal characteristics from biometric data, such as racial or ethnic origin, political opinion, religious belief, health data, or sexual orientation.
+- **Emotion recognition at work or school**: Monitoring the emotional state of employees or learners in workplace or educational contexts.
+- **Real-time biometric identification in public spaces**: Using AI to identify individuals in real time in publicly accessible spaces for law enforcement purposes.
 
 ## Working with AI agents
 
-AI agents are AI-powered components that can, with a degree of autonomy, plan and execute multi-step actions to reach a goal — including calling tools, triggering actions in connected systems, and orchestrating sub-processes. Because of this autonomy, they carry higher operational and legal risk than assistive AI features like the Copilot.
+AI agents are AI-powered components that can, with a degree of autonomy, plan and execute multi-step actions to reach a goal, including calling tools, triggering actions in connected systems, and orchestrating sub-processes. Because of this autonomy, they carry higher operational and legal risk than assistive AI features like the Copilot.
 
-The requirements below are not about limiting what you can build — Camunda's AI agent framework is designed to be flexible and powerful. They are about helping you deploy agents safely, so that the autonomy you enable stays within the boundaries you intend.
+The requirements below are not about limiting what you can build: Camunda's AI agent framework is designed to be flexible and powerful. They are about helping you deploy agents safely, so that the autonomy you enable stays within the boundaries you intend.
 
 ### Before you deploy: planning
 
 A small amount of upfront planning makes AI agent deployments significantly safer and easier to manage. Before deploying an agent into production, document:
 
 - What the agent is supposed to do, and what it is not supposed to do.
-- How much autonomy it has — for example, whether it can act immediately or only propose actions for human approval.
+- How much autonomy it has. For example, whether it can act immediately or only propose actions for human approval.
 - What "success" looks like, and under what conditions the agent should be stopped.
 - Which systems, processes, and interfaces are in scope.
 
 ### Governance
 
-For any agent running in production, define clear answers to: who owns this use case, who is responsible for the technical implementation, who handles incidents, and how changes are approved. The AI agent has no legal capacity — everything it does is legally attributed to your organization, so knowing who is accountable matters.
+For any agent running in production, define clear answers to: who owns this use case, who is responsible for the technical implementation, who handles incidents, and how changes are approved. The AI agent has no legal capacity, and everything it does is legally attributed to your organization, so knowing who is accountable matters.
 
 ### Pilot before you scale
 
@@ -177,12 +177,12 @@ Maintain effective human oversight over any AI agent you deploy. This is also a 
 
 At a minimum, human oversight means:
 
-- Someone with the authority and technical ability to stop the agent at any time — a kill switch or equivalent mechanism (see [glossary](#glossary)).
-- Defined limits on what the agent can do — for example, caps on transaction amounts, action frequency, or which systems it can write to.
+- Someone with the authority and technical ability to stop the agent at any time using a kill switch or equivalent mechanism (see [glossary](#glossary)).
+- Defined limits on what the agent can do. For example, caps on transaction amounts, action frequency, or which systems it can write to.
 - A human approval step for any action with significant legal, financial, or safety implications.
 - A regular review process so you can catch drift or unexpected behavior before it becomes a problem.
 
-How you implement these controls is up to you — the right approach depends on your use case, your risk tolerance, and your existing operational processes. These guidelines do not prescribe a specific technical implementation.
+How you implement these controls is up to you. The right approach depends on your use case, your risk tolerance, and your existing operational processes. These guidelines do not prescribe a specific technical implementation.
 
 ### Technical readiness
 
@@ -192,11 +192,11 @@ Before going to production with an AI agent, ask:
 - Do we have monitoring in place to detect errors or anomalous behavior?
 - Can we roll back if something goes wrong?
 
-These are standard questions for any production system — they matter more for AI agents because the failure modes can be less predictable.
+These are standard questions for any production system and they matter more for AI agents because the failure modes can be less predictable.
 
 ### Data and tool access
 
-Agents with broad access to data and tools are harder to control and audit. As a general principle, give agents access to only what they need to do their job — the least-privilege principle. In practice this means:
+Agents with broad access to data and tools are harder to control and audit. As a general principle, give agents access to only what they need to do their job, the least-privilege principle. In practice this means:
 
 - Knowing what data the agent can reach and how sensitive it is.
 - Restricting the tools and actions available to the agent to those actually needed for the use case.
@@ -208,15 +208,17 @@ Users interacting with AI-driven processes should know they are doing so. Make s
 
 - AI-driven interactions are clearly identified.
 - Users know how to escalate or get help.
-- There is a plan for communicating disruptions or incidents — both internally and, where required, externally.
+- There is a plan for communicating disruptions or incidents, both internally and, where required, externally.
 
 ### Bias and fairness
 
-Where an AI agent makes or influences decisions in sensitive areas — such as HR, financial access, or similar — build in a periodic fairness review. This does not need to be a formal audit process; it can be as simple as periodically reviewing a sample of agent decisions to check that outcomes are consistent and not systematically skewed.
+Where an AI agent makes or influences decisions in sensitive areas, such as HR, financial access, or similar, build in a periodic fairness review.
+
+This does not need to be a formal audit process; it can be as simple as periodically reviewing a sample of agent decisions to check that outcomes are consistent and not systematically skewed.
 
 ### Documentation
 
-Keep a record of the key decisions you made when setting up and operating your AI agent — what it does, how it is configured, what controls are in place, and how those have evolved over time. Good documentation makes incidents easier to investigate and changes easier to manage. It also supports your compliance obligations under the AI Act if your use case is ever scrutinized.
+Keep a record of the key decisions you made when setting up and operating your AI agent, including what it does, how it is configured, what controls are in place, and how those have evolved over time. Good documentation makes incidents easier to investigate and changes easier to manage. It also supports your compliance obligations under the AI Act if your use case is ever scrutinized.
 
 ## Glossary
 
