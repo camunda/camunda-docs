@@ -21,7 +21,7 @@ const features = [
     imageUrl: iconBuildWithAi,
     url: "/docs/guides/build-with-ai/overview/",
     description:
-      "Set up an AI-ready development workflow and orchestrate AI agents inside your processes.",
+      "Build Camunda solutions with AI-ready workflows and agentic orchestration.",
   },
   {
     title: "Using Camunda",
