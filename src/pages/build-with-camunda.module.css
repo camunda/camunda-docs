@@ -79,75 +79,32 @@
   text-decoration: none !important;
 }
 
-/* ─── Hero ─── */
+/* ─── Hero (camunda.com gradient) ─── */
 .heroWrapper {
   position: relative;
   overflow: hidden;
-  background: var(--page-bg);
+  background:
+    linear-gradient(180deg, #161616 0%, transparent 30%),
+    linear-gradient(180deg, transparent 45%, #161616 95%),
+    radial-gradient(
+      ellipse 90% 110% at 50% 80%,
+      #1c1a52 0%,
+      #0d0b2a 35%,
+      #161616 80%,
+      #161616 100%
+    );
 }
 
 .heroGlow {
   position: absolute;
-  inset: -40px;
+  inset: 0;
   pointer-events: none;
   z-index: 0;
-  background:
-    radial-gradient(
-      ellipse 700px 500px at 35% 28%,
-      rgba(252, 93, 13, 0.2) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 600px 450px at 65% 24%,
-      rgba(120, 169, 255, 0.18) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 750px 500px at 55% 55%,
-      rgba(252, 93, 13, 0.12) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 650px 450px at 40% 58%,
-      rgba(120, 169, 255, 0.14) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 500px 400px at 50% 42%,
-      rgba(252, 93, 13, 0.1) 0%,
-      transparent 60%
-    );
-  filter: blur(50px);
-}
-
-[data-theme="dark"] .heroGlow {
-  background:
-    radial-gradient(
-      ellipse 700px 500px at 35% 28%,
-      rgba(252, 93, 13, 0.3) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 600px 450px at 65% 24%,
-      rgba(120, 169, 255, 0.26) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 750px 500px at 55% 55%,
-      rgba(252, 93, 13, 0.18) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 650px 450px at 40% 58%,
-      rgba(120, 169, 255, 0.2) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 500px 400px at 50% 42%,
-      rgba(252, 93, 13, 0.14) 0%,
-      transparent 60%
-    );
-  filter: blur(50px);
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 65%,
+    rgba(28, 26, 82, 0.55) 0%,
+    transparent 80%
+  );
 }
 
 .hero {
@@ -200,8 +157,8 @@
 .terminalHeroSection {
   position: relative;
   z-index: 1;
-  padding: 0 0 3rem;
-  max-width: 880px;
+  padding: 0 0 9rem;
+  max-width: 1200px;
 }
 
 .terminalHeroIntro {
@@ -230,14 +187,10 @@
   font-size: 3.6rem;
   font-weight: 800;
   line-height: 1.1;
-  color: #1a1f36;
+  color: #ffffff;
   margin: 0 0 1.2rem;
   padding: 0;
   border-bottom: none;
-}
-
-[data-theme="dark"] .terminalHeroTitle {
-  color: var(--ifm-heading-color);
 }
 
 @media (max-width: 768px) {
@@ -249,10 +202,277 @@
 .terminalHeroSub {
   font-size: 1.2rem;
   font-weight: normal;
-  color: var(--ifm-font-color-base);
+  color: rgba(255, 255, 255, 0.78);
   line-height: 1.5;
   margin: 0 auto;
   max-width: 620px;
+}
+
+/* ─── 3-card hero row ─── */
+.heroCardRow {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+@media (max-width: 996px) {
+  .heroCardRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heroCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 2rem 1.5rem 1.5rem;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+[data-theme="dark"] .heroCard {
+  background: #ffffff;
+  border-color: #d9d9d9;
+}
+
+[data-theme="dark"] .heroCard .heroCardTitle {
+  color: #1a1f36;
+}
+
+[data-theme="dark"] .heroCard .heroCardMeta {
+  color: #666;
+}
+
+[data-theme="dark"] .heroCard .heroCardDesc,
+[data-theme="dark"] .heroCard .heroCardChecks li {
+  color: #3c4257;
+}
+
+[data-theme="dark"] .heroCard .heroCardCtaAlt {
+  background: #ffffff;
+  color: #1a1f36 !important;
+  border-color: #d9d9d9;
+}
+
+[data-theme="dark"] .heroCard .heroCardCtaAlt:hover {
+  background: #f5f6f8;
+  border-color: #0076d6;
+  color: #1a1f36 !important;
+}
+
+[data-theme="dark"] .heroCardIcon {
+  background: rgba(120, 169, 255, 0.18);
+}
+
+.heroCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.heroCardPriority {
+  border: 2px solid #78a9ff;
+  padding: 3rem 2rem 2rem;
+  background:
+    linear-gradient(
+      155deg,
+      rgba(120, 169, 255, 0.08) 0%,
+      rgba(252, 93, 13, 0.04) 100%
+    ),
+    #ffffff;
+  box-shadow:
+    0 20px 50px rgba(120, 169, 255, 0.28),
+    0 0 0 6px rgba(120, 169, 255, 0.06);
+  transform: translateY(-4px);
+}
+
+.heroCardPriority:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 24px 60px rgba(120, 169, 255, 0.35),
+    0 0 0 6px rgba(120, 169, 255, 0.08);
+}
+
+[data-theme="dark"] .heroCardPriority {
+  background:
+    linear-gradient(
+      155deg,
+      rgba(120, 169, 255, 0.08) 0%,
+      rgba(252, 93, 13, 0.04) 100%
+    ),
+    #ffffff;
+  border-color: #78a9ff;
+  box-shadow:
+    0 20px 50px rgba(120, 169, 255, 0.28),
+    0 0 0 6px rgba(120, 169, 255, 0.08);
+}
+
+.heroCardPriority .heroCardIcon {
+  background: rgba(120, 169, 255, 0.2);
+  width: 56px;
+  height: 56px;
+}
+
+.heroCardPriority .heroCardTitle {
+  font-size: 1.45rem;
+}
+
+.heroCardPriority .heroCardCta {
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  box-shadow: 0 6px 18px lab(38.4009% 52.6132 -92.3857 / 0.4);
+}
+
+.heroCardIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(120, 169, 255, 0.12);
+  margin-bottom: 1rem;
+}
+
+.heroCardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin: 0 0 0.25rem;
+  padding: 0;
+  border-bottom: none;
+  line-height: 1.25;
+}
+
+.heroCardMeta {
+  font-size: 0.82rem;
+  color: var(--muted-color);
+  margin: 0 0 0.85rem;
+}
+
+.heroCardDesc {
+  font-size: 0.92rem;
+  color: var(--page-color);
+  line-height: 1.5;
+  margin: 0 0 1rem;
+}
+
+.heroCardChecks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex: 1;
+}
+
+.heroCardChecks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--page-color);
+}
+
+.heroCardCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  background: lab(38.4009% 52.6132 -92.3857);
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition:
+    background 0.15s,
+    transform 0.15s,
+    filter 0.15s;
+}
+
+.heroCardCta:hover {
+  background: lab(38.4009% 52.6132 -92.3857);
+  filter: brightness(1.1);
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+}
+
+.heroCardCtaAlt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  background: var(--card-bg);
+  color: var(--heading-color) !important;
+  border: 1px solid var(--card-border);
+  text-decoration: none !important;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.15s;
+}
+
+.heroCardCtaAlt:hover {
+  background: var(--section-alt-bg);
+  border-color: var(--card-hover-border);
+  color: var(--heading-color) !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+}
+
+/* CLI install detail block */
+.cliInstallBlock {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Downloads detail */
+.downloadsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .downloadsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.downloadBlock {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.downloadBlockTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin: 0 0 0.4rem;
+  padding: 0;
+  border-bottom: none;
+}
+
+.downloadBlockDesc {
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  line-height: 1.5;
+  margin: 0 0 1rem;
 }
 
 /* Primary CLI card */
@@ -278,21 +498,15 @@
   display: inline-flex;
   align-items: center;
   padding: 0.35rem 0.8rem;
-  background: #3b6fd6;
+  background: lab(38.4009% 52.6132 -92.3857);
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 999px;
-  box-shadow: 0 2px 8px rgba(59, 111, 214, 0.3);
+  box-shadow: 0 2px 8px lab(38.4009% 52.6132 -92.3857 / 0.4);
   white-space: nowrap;
-}
-
-[data-theme="dark"] .recommendedBadge {
-  background: #78a9ff;
-  color: #0a0a0f;
-  box-shadow: 0 2px 8px rgba(120, 169, 255, 0.4);
 }
 
 .cliPrimaryHeader {
