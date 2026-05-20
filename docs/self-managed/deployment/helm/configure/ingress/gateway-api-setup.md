@@ -168,7 +168,7 @@ global:
       secretName: camunda-tls
 ```
 
-When TLS is enabled, the chart configures the Gateway listener on port 443 with `protocol: HTTPS` and sets `sectionName: https` on all Routes.
+When TLS is enabled, the chart configures the Gateway listener on port 443 with `protocol: HTTPS` and sets `sectionName: https` on all HTTPRoutes, and sets `sectionName: grpcs` on the GRPCRoute (used by Zeebe).
 
 ### NGINX Gateway Fabric: ProxySettingsPolicy
 
