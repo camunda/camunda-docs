@@ -1,16 +1,19 @@
-"""Postprocess the docs.
+"""Preprocess the docs.
 
 After isolating the documentation, we need to do some more processing.
 This includes:
 
-1. remove_root_references: Remove links to /docs, as that directory no longer exists.
+1. remove_root_references: Remove links to /docs.
 2. update_version_banner: Update the unmaintained version banner text.
 3. remove_build_with_camunda: Remove build with Camunda page.
+4. replace_homepage: Replace the homepage with a simplified version, removing problematic components and links.
+5. fix_image_references: Fix invalid image references.
 """
 
 
 import os
 import re
+import shutil
 
 def update_version_banner():
     with open("../../src/theme/DocVersionBanner/index.tsx") as f:
@@ -33,9 +36,19 @@ def remove_root_references():
                 with open(f"{dir_}/{file_}") as f:
                     content = f.read()
                     content = re.sub(r"\[(.+?)\]\((.+?)\)", _replace_if_root_reference, content)
+                    content = re.sub(r"href:\s*\"\/docs\/8.6\/(.+?)\"", "href:\"/docs/\\1\"", content)
 
                 with open(f"{dir_}/{file_}", "w") as f:
                     f.write(content)
+
+def fix_image_references():
+    with open("../../docusaurus.config.js") as f:
+        content = f.read()
+        content = re.sub(r'img src="/8\.6/img/twitter\.svg"', 'img src="/img/twitter.svg"', content)
+        content = re.sub(r'img src="/8\.6/img/github-mark-white\.svg"', 'img src="/img/github-mark-white.svg"', content)
+
+    with open("../../docusaurus.config.js", "w") as f:
+        f.write(content)
 
 def remove_build_with_camunda():
     """Remove build-with-camunda files.
@@ -45,7 +58,12 @@ def remove_build_with_camunda():
     os.remove("../../src/pages/build-with-camunda.js")
     os.remove("../../src/pages/build-with-camunda.module.css")
 
+def replace_homepage():
+    shutil.copyfile("./templates/homepage.js", "../../src/pages/index.js")
+
 if __name__ == "__main__":
     remove_root_references()
     update_version_banner()
     remove_build_with_camunda()
+    replace_homepage()
+    fix_image_references()

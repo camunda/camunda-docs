@@ -94,10 +94,10 @@ You now have a branch named `unsupported/8.x` (using your actual minor version).
 
 ### Create and publish the unmaintained branch
 
-On the `unsupported/8.x` branch, in `/hacks/isolateVersion`, run `allSteps.sh`:
+On the `unsupported/8.x` branch, isolate the archived version:
 
 ```sh
-./hacks/isolateVersion/allSteps.sh
+make -C hacks/archiveVersion isolate-version
 ```
 
 This automates a handful of basic steps to remove all other versions of the documentation and prepare the site for being published as unsupported. See the script for more details.
@@ -119,25 +119,29 @@ You can review the changes at https://github.com/camunda/camunda-docs/commits/un
 
 ### Fix links and redirects
 
-Make the manual changes described by the output of the `allSteps.sh` script in a new PR. See [this PR](https://github.com/camunda/camunda-docs/pull/6586) as an example. You may need to remove generated API reference docs, and tidy up any broken links in this step, to get the build green and successful.
-
-Postprocess the docs to help automate some of the changes you need to make in this step:
+Preprocess the docs to automate some common changes that need to be made against the isolated version:
 
 ```sh
-make -C hacks/archiveVersion postprocess
+make -C hacks/archiveVersion preprocess
 ```
 
-Read the docstring in the postprocess file for details.
+Read the docstring in the preprocess file for details.
+
+#### Manually fix links
 
 Unfortunately, there will likely be other broken links you'll need to fix manually:
 
 1. Run `npm run build` to discover and resolve remaining build errors.
 2. Submit a PR targeting `unsupported/8.6` (not `main`). The build pipeline will show the remaining broken links.
 
+#### Manually remove redirects
+
 Next, you'll need to remove 8.6 redirects from `.htaccess`. This helps keep the redirects file clean and maintainable for future authors.
 
 1. Add a catch-all redirect at the top of the file, pointing all 8.6 documentation at the unsupported site:
 2. Remove everything except redirects from `/8.6/` files to other `/8.6/` files.
+
+Make the manual changes described by the output of the `allSteps.sh` script in a new PR. See [this PR](https://github.com/camunda/camunda-docs/pull/6586) as an example. You may need to remove generated API reference docs, and tidy up any broken links in this step, to get the build green and successful.
 
 ### Merge all PRs
 
