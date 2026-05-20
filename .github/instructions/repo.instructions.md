@@ -55,7 +55,7 @@ These are the main commands for working with the repo:
 - `npm run build`: Generate a static build.
 - `npm run format`: Validate Prettier formatting.
 
-- If you added, moved, or removed pages, changed link targets, or edited sidebars, run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors. Skip the build for small content edits that don't affect links or structure.
+- Run `npm run build` before submitting changes to catch broken links, invalid Markdown, and build errors when the change touches any of: page adds/moves/removes, link targets (including cross-version links), sidebars, navbar entries in `docusaurus.config.js`, redirects in `static/.htaccess`, or MDX components. Skip the build for small content edits that don't affect links or structure.
 - **Do not** run `npm run build` speculatively during exploration. It is slow. Use it only to validate final changes.
 
 ## 6. Versioning
