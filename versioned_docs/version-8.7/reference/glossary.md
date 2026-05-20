@@ -16,11 +16,11 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#d">D</a></div>
     <div class="letter-link"><a href="#e">E</a></div>
     <div class="letter-link"><a href="#f">F</a></div>
-    <div class="letter-link">G</div>
+    <div class="letter-link"><a href="#g">G</a></div>
     <div class="letter-link"><a href="#h">H</a></div>
     <div class="letter-link"><a href="#i">I</a></div>
     <div class="letter-link"><a href="#j">J</a></div>
-    <div class="letter-link">K</div>
+    <div class="letter-link"><a href="#k">K</a></div>
     <div class="letter-link"><a href="#l">L</a></div>
     <div class="letter-link"><a href="#m">M</a></div>
   </div>
@@ -174,7 +174,27 @@ In a clustered environment, a broker which is not a leader is a follower of a gi
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
+## G
+
+### GPAI model
+
+A general-purpose AI model trained on large amounts of data using self-supervision at scale, capable of performing a wide range of tasks. Used in the EU AI Act to classify foundation models.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#the-ai-models-behind-these-features)
+
 ## H
+
+### Human-in-the-Loop (HITL)
+
+A human review and approval step before AI-generated outputs with legal, financial, or safety-relevant effects are acted upon.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#evaluating-ai-outputs)
+
+### Human-on-the-Loop (HOTL)
+
+Continuous human oversight of an AI agent's actions, with the ability to intervene at any time, but without requiring approval for each individual action.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
 
 ### Human task
 
@@ -234,6 +254,14 @@ This is the amount of time the broker will wait for a complete or fail response 
 A special type of client that polls for and executes available jobs. An uncompleted job prevents Zeebe from advancing process execution to the next step.
 
 - [Job workers](/components/concepts/job-workers.md)
+
+## K
+
+### Kill switch
+
+A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
 
 ## L
 
