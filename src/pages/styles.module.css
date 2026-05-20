@@ -82,7 +82,7 @@
   width: 90px;
 }
 
-img.featuresImage[src*="icon-agentic"] {
+img.featuresImage[alt="Build with AI"] {
   padding: 20px;
   box-sizing: border-box;
 }
