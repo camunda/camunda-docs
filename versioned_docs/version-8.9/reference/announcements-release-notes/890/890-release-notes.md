@@ -765,7 +765,7 @@ A [critical bug in 8.9-alpha5](https://github.com/camunda/camunda/issues/47955) 
 
 The Operate, Tasklist, and Identity application profiles are now merged into the existing gateway profile to provide a simplified but flexible deployment model.
 
-- These components are now treated as UIs served by the gateway.
+- These components are now treated as UIs served by the Zeebe Gateway.
 - Control their inclusion via configuration properties (for example, `camunda.webapps.enabled=operate,identity`).
 
 #### Amazon ECS (EC2+Fargate) support
