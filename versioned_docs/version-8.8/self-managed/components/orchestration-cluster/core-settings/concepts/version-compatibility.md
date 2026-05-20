@@ -21,19 +21,19 @@ Camunda 8 versions follow the `MAJOR.MINOR.PATCH` format (for example, `8.8.3`).
 
 ## Required upgrade procedure
 
-All minor version upgrades in a Self-Managed Orchestration Cluster must follow this three-step procedure:
+All minor version upgrades in a Self-Managed Orchestration Cluster must follow this procedure:
 
-1. **Update to the latest patch version of your current minor.** For example, before upgrading from `8.7.X` to `8.8.Y`, first update to the latest `8.7` patch. This update is required so that schema version metadata is present and the schema compatibility check can succeed.
+1. **Upgrade to the latest patch version of your current minor.** For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to the latest `8.7` patch. This is required so that schema version metadata is present and the schema compatibility check can succeed.
 
-2. **Upgrade to the next minor version.** Never skip minor versions. For example, `8.7.X → 8.8.Y` is supported, but `8.6.X → 8.8.Y` is not.
+2. **Upgrade to the next minor version.** Never skip minor versions. For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not.
 
-3. **Update to the latest patch version of the target minor.** For example, after upgrading to `8.8.0`, update to the latest `8.8` patch.
+3. After reaching the target minor, **upgrade to the latest patch version of the target minor.** For example, after upgrading to `8.8.0`, update to the latest `8.8` patch.
 
 You can execute this procedure across multiple validation environments (for example, dev → test → stage → prod) before production rollout.
 
 You must not:
 
-- Skip the latest-patch update of the source minor before a minor upgrade. The schema compatibility check requires the source minor to be at its latest patch.
+- Skip the latest-patch upgrade of the source minor before a minor upgrade. The schema compatibility check requires the source minor to be at its latest patch.
 - Skip minor versions.
 - Downgrade minor or major versions.
 - Include pre-release (`-alpha*`) versions in an upgrade chain.
@@ -83,15 +83,15 @@ If you upgrade from an earlier patch that does **not** store schema version meta
 All minor version upgrades must follow the required upgrade procedure described above and proceed strictly minor-by-minor.
 The schema manager compares the stored schema version (the last successful schema upgrade) with the current application version:
 
-| Case                                               | Action        | Metadata updated?    | Notes                                                      |
-| -------------------------------------------------- | ------------- | -------------------- | ---------------------------------------------------------- |
-| Patch upgrade                                      | Update schema | Yes (to new version) |                                                            |
-| Minor upgrade (single step, latest patch required) | Update schema | Yes                  | Source minor must be at its latest patch before upgrading. |
-| Minor downgrade                                    | Skip          | No                   | Tolerated for rolling update restarts                      |
-| Patch downgrade                                    | Skip          | No                   | Avoids churn; schema stays forward compatible              |
-| Skipped minor (multi-step)                         | Fail startup  | No                   | Prevents unsupported jump                                  |
-| Alpha build involved                               | Fail startup  | No                   | Must use stable releases for upgrade path                  |
-| Major change                                       | Fail startup  | No                   | Not supported                                              |
+| Case                                               | Action        | Metadata updated?    | Notes                                         |
+| -------------------------------------------------- | ------------- | -------------------- | --------------------------------------------- |
+| Patch upgrade                                      | Update schema | Yes (to new version) |                                               |
+| Minor upgrade (single step, latest patch required) | Update schema | Yes                  |                                               |
+| Minor downgrade                                    | Skip          | No                   | Tolerated for rolling update restarts         |
+| Patch downgrade                                    | Skip          | No                   | Avoids churn; schema stays forward compatible |
+| Skipped minor (multi-step)                         | Fail startup  | No                   | Prevents unsupported jump                     |
+| Alpha build involved                               | Fail startup  | No                   | Must use stable releases for upgrade path     |
+| Major change                                       | Fail startup  | No                   | Not supported                                 |
 
 ### Where the schema version is stored
 
@@ -126,7 +126,7 @@ Always upgrade between stable releases.
 
 ## Recommended operational steps
 
-1. Follow the [required upgrade procedure](#required-upgrade-procedure) for every minor upgrade. Updating to the latest patch of the source minor and the target minor is mandatory, not optional.
+1. Follow the [required upgrade procedure](#required-upgrade-procedure) for every minor upgrade. Updating to the latest patch of the source minor and the target minor is mandatory.
 1. Do not include pre-release builds in production upgrade chains.
 1. Investigate any broker health status showing `brokerStatus: DOWN` after an upgrade. This typically indicates a rejected upgrade path.
 
