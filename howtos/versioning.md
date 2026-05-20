@@ -73,11 +73,7 @@ git checkout -b archive-step-1
 Navigate to `hacks/archiveVersion`, and run `1-ignore-version-prod.py`:
 
 ```sh
-cd hacks/archiveVersion
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python 1-ignore-version-prod.py
+make -C hacks/archiveVersion ignore-version-prod
 ```
 
 This automatically updates `publish-prod.yaml` to ignore tags for the archived minor version and any future patches during future production releases.
@@ -110,22 +106,12 @@ This creates a large set of commits. Push them to remote, but don't open a PR.
 
 > **Warning:** Do not merge this branch into `main`! This branch will persist indefinitely alongside `main` and will never be merged. Instead, it will be used to deploy to unsupported.docs.camunda.io.
 
-You can review the changes at:
-
-https://github.com/camunda/camunda-docs/commits/unsupported/8.6/
-
-Change the version to your archived version.
+You can review the changes at https://github.com/camunda/camunda-docs/commits/unsupported/8.6/ (Change the version to your archived version.)
 
 <details>
-    <summary>Reference video: archiving 8.5</summary>
+    <summary>Reference materials</summary>
 
-You can view a video of the archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival > Archival steps).
-
-</details>
-
-<details>
-    <summary>Reference pull requests</summary>
-
+- 8.5 archival video (old): You can view a video of the 8.5 archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival > Archival steps).
 - [Very large PR](https://github.com/camunda/camunda-docs/pull/5586)
 - [Much smaller PR](https://github.com/camunda/camunda-docs/pull/5587)
 
@@ -138,14 +124,20 @@ Make the manual changes described by the output of the `allSteps.sh` script in a
 Postprocess the docs to help automate some of the changes you need to make in this step:
 
 ```sh
-cd hacks/archiveVersion
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python 2-postprocess.py
+make -C hacks/archiveVersion postprocess
 ```
 
 Read the docstring in the postprocess file for details.
+
+Unfortunately, there will likely be other broken links you'll need to fix manually:
+
+1. Run `npm run build` to discover and resolve remaining build errors.
+2. Submit a PR targeting `unsupported/8.6` (not `main`). The build pipeline will show the remaining broken links.
+
+Next, you'll need to remove 8.6 redirects from `.htaccess`. This helps keep the redirects file clean and maintainable for future authors.
+
+1. Add a catch-all redirect at the top of the file, pointing all 8.6 documentation at the unsupported site:
+2. Remove everything except redirects from `/8.6/` files to other `/8.6/` files.
 
 ### Merge all PRs
 

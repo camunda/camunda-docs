@@ -69,6 +69,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         docs: {\\
           lastVersion: currentVersion,\\
           includeCurrentVersion: false,\\
+          docItemComponent: \"@theme/ApiItem\",\\
           versions: {\\
             \"$ARCHIVED_VERSION\": {\\
               label: \"$ARCHIVED_VERSION\",\\
@@ -84,6 +85,7 @@ else
         docs: {\\
           lastVersion: currentVersion,\\
           includeCurrentVersion: false,\\
+          docItemComponent: \"@theme/ApiItem\",\\
           versions: {\\
             \"$ARCHIVED_VERSION\": {\\
               label: \"$ARCHIVED_VERSION\",\\
