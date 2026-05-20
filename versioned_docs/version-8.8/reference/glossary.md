@@ -238,14 +238,6 @@ When an AI confidently produces incorrect or fabricated information that seems p
 
 A human review and approval step before AI-generated outputs with legal, financial, or safety-relevant effects are acted upon.
 
-- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#evaluating-ai-outputs)
-
-### Human-on-the-Loop (HOTL)
-
-Continuous human oversight of an AI agent's actions, with the ability to intervene at any time, but without requiring approval for each individual action.
-
-- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
-
 ### Human task
 
 Camunda 8 allows you to orchestrate processes with human tasks, which may be [user tasks](#user-task) or [manual tasks](#manual-task).
