@@ -16,10 +16,10 @@
   --card-border: var(--ifm-color-emphasis-300);
   --card-hover-border: var(--ifm-color-primary);
   --card-hover-shadow: rgba(0, 0, 0, 0.1);
-  --terminal-bg: var(--ifm-background-surface-color);
-  --terminal-header-bg: var(--ifm-color-emphasis-200);
-  --terminal-border: var(--ifm-color-emphasis-300);
-  --terminal-text: var(--ifm-font-color-base);
+  --terminal-bg: #292d3e;
+  --terminal-header-bg: #1f2230;
+  --terminal-border: #1f2230;
+  --terminal-text: #bfc7d5;
   --section-alt-bg: var(--ifm-background-surface-color);
   --arch-connector-color: #78a9ff;
   --inline-code-bg: rgba(197, 67, 2, 0.08);
@@ -83,16 +83,13 @@
 .heroWrapper {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, #161616 0%, transparent 30%),
-    linear-gradient(180deg, transparent 45%, #161616 95%),
-    radial-gradient(
-      ellipse 90% 110% at 50% 80%,
-      #1c1a52 0%,
-      #0d0b2a 35%,
-      #161616 80%,
-      #161616 100%
-    );
+  background: linear-gradient(
+    180deg,
+    #1c1a52 0%,
+    #100e36 25%,
+    #0d0b2a 50%,
+    #161616 100%
+  );
 }
 
 .heroGlow {
@@ -161,6 +158,17 @@
   max-width: 1200px;
 }
 
+@media (max-width: 996px) {
+  .terminalHeroSection {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .page :global(.container) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
 .terminalHeroIntro {
   margin-bottom: 2.5rem;
   text-align: center;
@@ -212,13 +220,22 @@
 .heroCardRow {
   display: grid;
   grid-template-columns: 1fr 1.4fr 1fr;
-  gap: 1.25rem;
+  gap: 2.5rem;
   align-items: stretch;
 }
 
 @media (max-width: 996px) {
   .heroCardRow {
     grid-template-columns: 1fr;
+  }
+  .heroCardRow > :nth-child(1) {
+    order: 2;
+  }
+  .heroCardRow > :nth-child(2) {
+    order: 1;
+  }
+  .heroCardRow > :nth-child(3) {
+    order: 3;
   }
 }
 
@@ -437,6 +454,15 @@
   margin: 0 auto;
 }
 
+.cliInstallBlock .terminalWindow {
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+
+.cliInstallSection {
+  max-width: 1200px !important;
+}
+
 /* Downloads detail */
 .downloadsGrid {
   display: grid;
@@ -601,6 +627,14 @@
   line-height: 1.5;
 }
 
+.cliInfoNoteCentered {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0.75rem auto 0;
+  max-width: 720px;
+}
+
 .cliInfoNote svg {
   flex-shrink: 0;
   margin-top: 2px;
@@ -621,10 +655,29 @@
 }
 
 .quickStartLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--heading-color);
   margin: 0 0 0.75rem;
+}
+
+.stepNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: transparent;
+  color: currentColor;
+  border: 1.5px solid currentColor;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .cliPrimaryActions {
@@ -944,7 +997,7 @@
 .sectionSub {
   font-size: 1.05rem;
   color: var(--muted-color);
-  max-width: 740px;
+  max-width: 1000px;
   margin: 0 auto;
   line-height: 1.6;
 }
