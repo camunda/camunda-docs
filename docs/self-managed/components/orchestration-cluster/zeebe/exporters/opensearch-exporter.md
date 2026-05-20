@@ -319,10 +319,6 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 nanoseconds `nanos`.
 :::
 
-:::note
-Set `manage-policy: false` when the ISM policy is managed externally (for example by a separate provisioning step or by your platform team). With this option, the exporter does not modify the ISM policy resource and does not detach the policy from existing indices when retention is disabled.
-:::
-
 </TabItem>
 
 <TabItem value="authentication">
