@@ -325,7 +325,7 @@ RewriteRule ^docs/guides/orchestrate-api-endpoints/$ /docs/guides/orchestrate-ap
 RewriteRule ^docs/next/apis-clients/cli-client/$ /docs/next/apis-tools/c8ctl/getting-started/ [R=301,L]
 RewriteRule ^docs/next/apis-clients/community-clients/c-sharp/$ /docs/next/apis-tools/csharp-sdk/ [R=301,L]
 RewriteRule ^docs/next/apis-clients/go-client/$ https://unsupported.docs.camunda.io/8.5/docs/apis-tools/go-client/go-get-started/ [R=301,L]
-RewriteRule ^docs/apis-tools/orchestration-cluster-api-rest/specifications/create-document-link/$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/create-document-link/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/create-document-link/$ /docs/next/apis-tools/orchestration-cluster-api-rest/specifications/create-document-link/ [R=301,L]
 RewriteRule ^docs/next/guides/setup-client-connection-credentials$ /docs/components/console/introduction-to-console/ [R=301,L]
 RewriteRule ^docs/product-manuals/tasklist/introduction$ /docs/components/tasklist/introduction-to-tasklist/ [R=301,L]
 RewriteRule ^docs/product-manuals/tasklist/userguide/camunda-forms$ /docs/components/modeler/forms/camunda-forms-reference/ [R=301,L]
