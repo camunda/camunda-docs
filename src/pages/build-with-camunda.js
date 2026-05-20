@@ -732,8 +732,12 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
             </TerminalWindow>
           </div>
 
+          <div className={styles.pillSeparator}>
+            <span className={styles.sectionPill}>Using the CLI</span>
+          </div>
+
           {/* Everything from your terminal (moved into CLI section) */}
-          <div className={styles.sectionHeader} style={{ marginTop: "4rem" }}>
+          <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
               Everything from your terminal <VersionBadge />
             </h2>
@@ -781,14 +785,18 @@ $ c8ctl resolve inc 2251799813685251`}
             </div>
           </div>
 
+          <div className={styles.pillSeparator}>
+            <span className={styles.sectionPill}>AI agent integration</span>
+          </div>
+
           {/* Teach AI agent (moved into CLI section) */}
-          <div className={styles.sectionHeader} style={{ marginTop: "4rem" }}>
+          <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
               Teach your AI agent Camunda <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
-              Give your coding assistant Camunda superpowers. Deploy processes,
-              manage clusters, and query instances right from your AI workflow.
+              Give your coding assistant superpowers. Deploy processes, manage
+              clusters, and query instances directly from your AI workflow.
             </p>
           </div>
           <div className={styles.aiGrid}>
