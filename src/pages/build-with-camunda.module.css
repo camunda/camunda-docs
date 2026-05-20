@@ -459,6 +459,39 @@
   margin-bottom: 2rem;
 }
 
+.pillSeparator {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6rem 0 4rem;
+}
+
+.pillSeparator::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--ifm-color-emphasis-300);
+  z-index: 0;
+}
+
+.sectionPill {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-800);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+
 .cliInstallSection {
   max-width: 1200px !important;
 }
