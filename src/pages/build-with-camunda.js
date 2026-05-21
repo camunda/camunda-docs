@@ -398,7 +398,7 @@ function CodeBlock({ children }) {
   return <code className={styles.inlineCode}>{children}</code>;
 }
 
-function TerminalWindow({ title, children, copyable = false }) {
+function TerminalWindow({ title, children, copyable = true }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -740,7 +740,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
           {/* Everything from your terminal (moved into CLI section) */}
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Full control from your terminal <VersionBadge />
+              Full control from your terminal
             </h2>
             <p className={styles.sectionSub}>
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
@@ -793,11 +793,11 @@ $ c8ctl resolve inc 2251799813685251`}
           {/* Teach AI agent (moved into CLI section) */}
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Train your AI agent on Camunda <VersionBadge />
+              Train your AI agent on Camunda
             </h2>
             <p className={styles.sectionSub}>
-              Give your coding assistant superpowers. Deploy processes, manage
-              clusters, and query instances directly from your AI workflow.
+              Deploy processes, manage clusters, and query instances directly
+              from your AI workflow.
             </p>
           </div>
           <div className={styles.aiGrid}>
@@ -824,17 +824,17 @@ $ c8ctl resolve inc 2251799813685251`}
 $ claude plugin install camunda-skills@camunda-skills
 
 Available skills:
-  /camunda-c8ctl                   — install and configure c8ctl
-  /camunda-ai-agent                — build AI agents in BPMN
-  /camunda-bpmn                    — create and edit BPMN 2.0 processes
-  /camunda-connectors              — configure pre-built connectors
-  /camunda-connectors-development  — build custom connectors
-  /camunda-development             — choose the integration type
-  /camunda-docs                    — search the Camunda 8 docs
-  /camunda-feel                    — write and debug FEEL expressions
-  /camunda-forms                   — create Camunda Form schemas
-  /camunda-job-workers             — implement job workers (Java, Spring, TypeScript)
-  /camunda-process-mgmt            — deploy, operate, and debug processes`}
+  /camunda-c8ctl                    — install and configure c8ctl
+  /camunda-ai-agent                 — build AI agents in BPMN
+  /camunda-bpmn                     — create and edit BPMN 2.0 processes
+  /camunda-connectors               — configure pre-built connectors
+  /camunda-connectors-development   — build custom connectors
+  /camunda-development              — choose the integration type
+  /camunda-docs                     — search the Camunda 8 docs
+  /camunda-feel                     — write and debug FEEL expressions
+  /camunda-forms                    — create Camunda Form schemas
+  /camunda-job-workers              — implement job workers (Java, Spring, TypeScript)
+  /camunda-process-mgmt             — deploy, operate, and debug processes`}
               </TerminalWindow>
             </div>
             <div className={styles.aiCard}>
@@ -892,7 +892,10 @@ Available skills:
             </div>
           </div>
           <div className={styles.aiExamples}>
-            <h4>Then ask your agent:</h4>
+            <h4>...then ask your agent</h4>
+            <p className={styles.aiExamplesSub}>
+              Try one of these prompts to see Camunda skills in action.
+            </p>
             <div className={styles.aiExampleGrid}>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
@@ -922,9 +925,7 @@ Available skills:
         <section className={clsx(styles.moreSection, styles.downloadsSection)}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>
-                Get started with Camunda downloads
-              </h2>
+              <h2 className={styles.sectionTitle}>Camunda downloads</h2>
               <p className={styles.sectionSub}>
                 Download the components you need for local Camunda 8 development
                 on macOS, Windows, or Linux.
@@ -1446,7 +1447,9 @@ Available skills:
         </section>
 
         {/* ─── Explore docs ─── */}
-        <section className={styles.exploreSection}>
+        <section
+          className={clsx(styles.exploreSection, styles.exploreSectionLast)}
+        >
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Explore the docs</h2>
