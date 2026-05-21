@@ -494,6 +494,16 @@
 
 .cliInstallSection {
   max-width: 1200px !important;
+  padding-top: 4rem !important;
+}
+
+/* Get started with Camunda downloads section bg */
+.downloadsSection {
+  background: #f7f7f7 !important;
+}
+
+[data-theme="dark"] .downloadsSection {
+  background: var(--ifm-background-surface-color) !important;
 }
 
 /* Downloads detail */
