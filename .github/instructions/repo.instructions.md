@@ -37,6 +37,7 @@ To determine the exact Docusaurus version used by this site, check the `@docusau
 - Keep the PR in **draft** while actively working on it. Removing draft status signals it is ready for review.
 - Use **labels** to communicate the component, version, and priority. PRs without labels may be triaged slowly.
 - Add the **`deploy` label** to trigger a preview site deployment. Recommended for large or complex changes. Preview deployments are published at `https://preview.docs.camunda.cloud/pr-<N>/`, where `<N>` is the PR number.
+- Use the PR template at `.github/pull_request_template.md` when opening a PR. When updating an existing PR description, preserve the full template structure and edit content inside the `## Description` section only, unless explicitly asked to change other sections.
 
 ## 4. Code formatting and commits
 
