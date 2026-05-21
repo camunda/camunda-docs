@@ -10,7 +10,7 @@ from ruamel.yaml.scalarstring import DoubleQuotedScalarString
 import os
 import re
 
-def load_prod_deploy_workflow(archive_version):
+def load_prod_deploy_workflow(archived_version):
     yaml = YAML()
     yaml.default_flow_style = False
     yaml.indent(mapping=2, sequence=4, offset=2)
@@ -21,23 +21,23 @@ def load_prod_deploy_workflow(archive_version):
     with open(publish_prod_path) as f:
         data = yaml.load(f)
 
-    # Ignore archive_version
-    data["on"]["push"]["tags"].append(DoubleQuotedScalarString(f"!{archive_version}.[0-9]+"))
+    # Ignore archived_version
+    data["on"]["push"]["tags"].append(DoubleQuotedScalarString(f"!{archived_version}.[0-9]+"))
 
     with open(publish_prod_path, "w") as f:
         yaml.dump(data, f)
 
-def get_archive_version():
-    """Get the archive version from environment variables.
+def get_archived_version():
+    """Get the archived version from environment variables.
 
     Assert the version is in the correct format.
     """
 
-    archive_version = os.environ["ARCHIVED_VERSION"]
-    assert re.match("^8.[0-9]+$", archive_version), "Set the archive version: `export ARCHIVED_VERSION=8.x`"
+    archived_version = os.environ["ARCHIVED_VERSION"]
+    assert re.match("^8.[0-9]+$", archived_version), "Set the archive version: `export ARCHIVED_VERSION=8.x`"
 
-    return archive_version
+    return archived_version
 
 if __name__ == "__main__":
-    archive_version = get_archive_version()
-    load_prod_deploy_workflow(archive_version)
+    archived_version = get_archived_version()
+    load_prod_deploy_workflow(archived_version)

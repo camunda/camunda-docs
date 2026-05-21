@@ -76,7 +76,7 @@ Navigate to `hacks/archiveVersion`, and run `1-ignore-version-prod.py`:
 make -C hacks/archiveVersion ignore-version-prod
 ```
 
-This automatically updates `publish-prod.yaml` to ignore tags for the archived minor version and any future patches during future production releases.
+This automatically updates `publish-prod.yaml` to ignore tags for the archived minor version and any patches during future production releases.
 
 Commit and submit a PR.
 
@@ -100,22 +100,11 @@ On the `unsupported/8.x` branch, isolate the archived version:
 make -C hacks/archiveVersion isolate-version
 ```
 
-This automates a handful of basic steps to remove all other versions of the documentation and prepare the site for being published as unsupported. See the script for more details.
+This automates a handful of basic steps to remove all other versions of the documentation and prepare the site for being published as unsupported. See the scripts in `hacks/isolateVersion` for more details.
 
-This creates a large set of commits. Push them to remote, but don't open a PR.
+This creates a large set of commits. Push them to remote, but **don't open a PR**. You can review the changes at https://github.com/camunda/camunda-docs/commits/unsupported/8.6/ (Change the version to your archived version.)
 
 > **Warning:** Do not merge this branch into `main`! This branch will persist indefinitely alongside `main` and will never be merged. Instead, it will be used to deploy to unsupported.docs.camunda.io.
-
-You can review the changes at https://github.com/camunda/camunda-docs/commits/unsupported/8.6/ (Change the version to your archived version.)
-
-<details>
-    <summary>Reference materials</summary>
-
-- 8.5 archival video (old): You can view a video of the 8.5 archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival > Archival steps).
-- [Very large PR](https://github.com/camunda/camunda-docs/pull/5586)
-- [Much smaller PR](https://github.com/camunda/camunda-docs/pull/5587)
-
-</details>
 
 ### Fix links and redirects
 
@@ -125,23 +114,30 @@ Preprocess the docs to automate some common changes that need to be made against
 make -C hacks/archiveVersion preprocess
 ```
 
-Read the docstring in the preprocess file for details.
+Read the docstring in `hacks/archiveVersion/2-preprocess.py` for details.
 
 #### Manually fix links
 
 Unfortunately, there will likely be other broken links you'll need to fix manually:
 
 1. Run `npm run build` to discover and resolve remaining build errors.
-2. Submit a PR targeting `unsupported/8.6` (not `main`). The build pipeline will show the remaining broken links.
+2. Submit a PR targeting `unsupported/8.x` (not `main`). The build pipeline will show the remaining broken links.
 
 #### Manually remove redirects
 
-Next, you'll need to remove 8.6 redirects from `.htaccess`. This helps keep the redirects file clean and maintainable for future authors.
+Next, you'll need to remove irrelevant redirects from `.htaccess`. The unsupported site for the archived version is only concerned with that version's redirects.
 
-1. Add a catch-all redirect at the top of the file, pointing all 8.6 documentation at the unsupported site:
-2. Remove everything except redirects from `/8.6/` files to other `/8.6/` files.
+As a rule of thumb, remove everything except redirects belonging to the archived version. For example, if you're archiving version 8.6:
 
-Make the manual changes described by the output of the `allSteps.sh` script in a new PR. See [this PR](https://github.com/camunda/camunda-docs/pull/6586) as an example. You may need to remove generated API reference docs, and tidy up any broken links in this step, to get the build green and successful.
+```txt
+RewriteRule ^docs/8.6/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/8.6/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
+```
+
+Should be kept and rewritten as:
+
+```txt
+RewriteRule ^docs/components/console/manage-plan/upgrade-to-starter-plan/?$ /8.6/docs/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
+```
 
 ### Merge all PRs
 
@@ -212,6 +208,14 @@ Note that there was a difference in the process between 8.3 and 8.4 archival, so
       1. Open a smaller, reviewable PR that logically removes the version, and links to the external unmaintained version in the top navigation bar. [Example](https://github.com/camunda/camunda-docs/pull/5597).
       2. Open a second larger PR that physically removes the source files. [Example](https://github.com/camunda/camunda-docs/pull/5601).
    2. [Publish a new patch release of the main docs](./release-procedure.md#perform-a-patch-release).
+
+</details>
+<details>
+    <summary>Isolate version reference materials</summary>
+
+- 8.5 archival video (old): You can view a video of the 8.5 archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival > Archival steps).
+- [Very large PR](https://github.com/camunda/camunda-docs/pull/5586)
+- [Much smaller PR](https://github.com/camunda/camunda-docs/pull/5587)
 
 </details>
 
