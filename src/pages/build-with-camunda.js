@@ -560,7 +560,7 @@ function BuildWithCamunda() {
                       fill="currentColor"
                     />
                   </svg>
-                  Recommended for developers and AI builders
+                  Recommended for AI builders
                 </span>
                 <span className={styles.heroCardIcon}>
                   <TerminalIcon />
@@ -926,42 +926,192 @@ Available skills:
                 Get started with Camunda downloads
               </h2>
               <p className={styles.sectionSub}>
-                Choose the setup that fits your workflow and infrastructure.
+                Download the components you need for local Camunda 8 development
+                on macOS, Windows, or Linux.
               </p>
             </div>
-            <div className={styles.waysGrid}>
+
+            {/* Recommended Getting Started Package */}
+            <div className={styles.downloadHighlight}>
+              <span className={styles.recommendedBadge}>
+                Recommended for new developers
+              </span>
+              <h3 className={styles.downloadHighlightTitle}>
+                Getting Started Package
+              </h3>
+              <p className={styles.downloadHighlightVersion}>
+                v8.9.0 · Released Apr 17, 2026 · Requires JDK 21+
+              </p>
+              <p className={styles.downloadHighlightDesc}>
+                A complete bundle with all essential components to get started
+                quickly. Includes Desktop Modeler, Runtime, and examples.
+                Perfect for new developers.
+              </p>
+              <div className={styles.downloadButtons}>
+                <a
+                  className={styles.downloadButton}
+                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-aarch64.zip"
+                >
+                  macOS (Apple Silicon)
+                </a>
+                <a
+                  className={styles.downloadButton}
+                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-x86_64.zip"
+                >
+                  macOS (Intel)
+                </a>
+                <a
+                  className={styles.downloadButton}
+                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-windows-x86_64.zip"
+                >
+                  Windows
+                </a>
+                <a
+                  className={styles.downloadButton}
+                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-linux-x86_64.tar.gz"
+                >
+                  Linux
+                </a>
+              </div>
+              <p className={styles.downloadHighlightHint}>
+                Extract the archive and run{" "}
+                <CodeBlock>./camunda-start.sh</CodeBlock> (macOS/Linux) or{" "}
+                <CodeBlock>camunda-start.bat</CodeBlock> (Windows).
+              </p>
               <Link
+                className={styles.heroCardCta}
                 to={useBaseUrl(
-                  "docs/self-managed/quickstart/developer-quickstart/docker-compose/"
+                  "docs/guides/getting-started-example/#instructions"
                 )}
-                className={styles.wayCard}
               >
-                <DockerIcon />
-                <h3>Docker Compose</h3>
-                <p>
-                  Run the full Camunda stack locally with a single{" "}
-                  <CodeBlock>docker compose up</CodeBlock>.
-                </p>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/self-managed/deployment/helm/install/quick-install/"
-                )}
-                className={styles.wayCard}
-              >
-                <KubernetesIcon />
-                <h3>Kubernetes</h3>
-                <p>
-                  Deploy to any Kubernetes cluster with the official Camunda
-                  Helm chart.
-                </p>
+                Setup guidance and instructions <ArrowRight />
               </Link>
             </div>
+
+            <div className={styles.waysGrid}>
+              <div className={styles.wayCard}>
+                <img
+                  src="https://developers.camunda.com/wp-content/uploads/2026/02/pencil.png"
+                  alt="Desktop Modeler"
+                  width="64"
+                  height="64"
+                  className={styles.wayCardImage}
+                />
+                <h3>Desktop Modeler</h3>
+                <p>
+                  Design BPMN processes and DMN tables locally. Drag, drop, and
+                  design workflows, decisions, and forms.
+                </p>
+                <p className={styles.downloadMeta}>
+                  Latest stable v5.47.0 · Released 05.07.2026
+                </p>
+                <div className={styles.downloadButtons}>
+                  <a
+                    className={styles.downloadButton}
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-mac-arm64.dmg"
+                  >
+                    macOS
+                  </a>
+                  <a
+                    className={styles.downloadButton}
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-win-x64.zip"
+                  >
+                    Windows
+                  </a>
+                  <a
+                    className={styles.downloadButton}
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-linux-x64.tar.gz"
+                  >
+                    Linux
+                  </a>
+                </div>
+              </div>
+              <div className={styles.wayCard}>
+                <img
+                  src="https://developers.camunda.com/wp-content/uploads/2026/02/play.png"
+                  alt="Camunda 8 Run"
+                  width="64"
+                  height="64"
+                  className={styles.wayCardImage}
+                />
+                <h3>Camunda 8 Run</h3>
+                <p>
+                  Lightweight all-in-one Camunda distribution for effortless
+                  local development. Requires OpenJDK.
+                </p>
+                <p className={styles.downloadMeta}>
+                  Latest stable v8.9 · Experimental v8.9.0-alpha5
+                </p>
+                <div className={styles.downloadButtons}>
+                  <a
+                    className={styles.downloadButton}
+                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-aarch64.zip"
+                  >
+                    macOS
+                  </a>
+                  <a
+                    className={styles.downloadButton}
+                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-windows-x86_64.zip"
+                  >
+                    Windows
+                  </a>
+                  <a
+                    className={styles.downloadButton}
+                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-linux-x86_64.tar.gz"
+                  >
+                    Linux
+                  </a>
+                </div>
+              </div>
+              <div className={styles.wayCard}>
+                <img
+                  src="https://developers.camunda.com/wp-content/uploads/2026/02/rpa.png"
+                  alt="RPA Worker"
+                  width="64"
+                  height="64"
+                  className={styles.wayCardImage}
+                />
+                <h3>RPA Worker</h3>
+                <p>
+                  Full BPMN and DMN editing with automated deployment
+                  capabilities.
+                </p>
+                <p className={styles.downloadMeta}>
+                  Latest stable v1.2.2 · Released 01.14.2026
+                </p>
+                <div className={styles.downloadButtons}>
+                  <a
+                    className={styles.downloadButton}
+                    href="https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_darwin_aarch64.zip"
+                  >
+                    macOS
+                  </a>
+                  <a
+                    className={styles.downloadButton}
+                    href="https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_win32_amd64.zip"
+                  >
+                    Windows
+                  </a>
+                  <a
+                    className={styles.downloadButton}
+                    href="https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_linux_amd64.zip"
+                  >
+                    Linux
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <p className={styles.downloadsFooter}>
+              <Link to="https://downloads.camunda.cloud/release/">
+                Browse more downloads <ArrowRight />
+              </Link>
+            </p>
           </div>
         </section>
 
         {/* ─── More ways to run (duplicate) ─── */}
-        <section className={styles.moreSection}>
+        <section className={clsx(styles.moreSection, styles.darkSection)}>
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>

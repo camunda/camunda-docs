@@ -497,6 +497,49 @@
   padding-top: 4rem !important;
 }
 
+/* Dark bg "More ways to run" section */
+.darkSection {
+  background: #1d1941 !important;
+  color: rgba(255, 255, 255, 0.92);
+  margin-top: 0 !important;
+  border-top: none !important;
+}
+
+.darkSection .sectionTitle {
+  color: #ffffff;
+}
+
+.darkSection .sectionSub {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.darkSection .wayCard {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.darkSection .wayCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #78a9ff;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.darkSection .wayCard h3 {
+  color: #ffffff;
+}
+
+.darkSection .wayCard p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.darkSection .wayCard .inlineCode,
+.darkSection .wayCard code {
+  background: rgba(120, 169, 255, 0.18);
+  color: #c8e1ff;
+}
+
 /* Get started with Camunda downloads section bg */
 .downloadsSection {
   background: #f7f7f7 !important;
@@ -504,6 +547,98 @@
 
 [data-theme="dark"] .downloadsSection {
   background: var(--ifm-background-surface-color) !important;
+}
+
+.downloadHighlight {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid #78a9ff;
+  border-radius: 14px;
+  padding: 3rem 2rem 2rem;
+  margin: 0 auto 2.5rem;
+  max-width: 900px;
+  box-shadow: 0 12px 32px rgba(120, 169, 255, 0.18);
+  text-align: center;
+}
+
+[data-theme="dark"] .downloadHighlight {
+  background: var(--ifm-background-color);
+}
+
+.downloadHighlightTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin: 0.5rem 0 0.25rem;
+  padding: 0;
+  border-bottom: none;
+}
+
+.downloadHighlightVersion {
+  font-size: 0.88rem;
+  color: var(--muted-color);
+  margin: 0 0 1rem;
+}
+
+.downloadHighlightDesc {
+  font-size: 1rem;
+  color: var(--page-color);
+  line-height: 1.55;
+  margin: 0 auto 0.85rem;
+  max-width: 640px;
+}
+
+.downloadHighlightHint {
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  margin: 1.25rem auto 1.5rem;
+  max-width: 900px;
+  line-height: 1.5;
+}
+
+.downloadHighlight .downloadButtons {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1.5rem auto;
+  max-width: 700px;
+}
+
+.wayCardImage {
+  margin: 0 auto 0.5rem;
+  display: block;
+  object-fit: contain;
+}
+
+.wayCard .downloadButtons {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.downloadsSection .waysGrid {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 996px) {
+  .downloadsSection .waysGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.downloadsFooter {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.downloadsFooter a {
+  display: inline-flex;
+  align-items: center;
 }
 
 /* Downloads detail */
@@ -1782,10 +1917,66 @@
   flex-shrink: 0;
 }
 
-/* ─── Explore docs ─── */
+/* ─── Explore docs (dark variant matching darkSection) ─── */
 .exploreSection {
-  background: var(--explore-bg);
+  background: #1d1941;
+  color: rgba(255, 255, 255, 0.92);
   padding: 3rem 0 4rem;
+}
+
+.exploreSection .sectionTitle {
+  color: #ffffff;
+}
+
+.exploreSection .sectionSub {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.exploreSection .deployCard,
+.exploreSection .archBox,
+.exploreSection .agenticCard,
+.exploreSection .exploreCard {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.exploreSection .deployCard:hover,
+.exploreSection .archBox:hover,
+.exploreSection .agenticCard:hover,
+.exploreSection .exploreCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #78a9ff;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.exploreSection .deployCard h3,
+.exploreSection .deployCard h4,
+.exploreSection .archBox strong,
+.exploreSection .agenticCard h3,
+.exploreSection .agenticCard h4,
+.exploreSection .exploreCard h3,
+.exploreSection .exploreCard h4,
+.exploreSection .archGroupTitle {
+  color: #ffffff;
+}
+
+.exploreSection .deployCard p,
+.exploreSection .archBox span,
+.exploreSection .agenticCard p,
+.exploreSection .exploreCard p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.exploreSection .archBoxPrimary {
+  background: rgba(120, 169, 255, 0.12);
+  border-color: #78a9ff;
+}
+
+.exploreSection .archGroupHighlight {
+  background: rgba(120, 169, 255, 0.06);
+  border-color: #78a9ff;
 }
 
 /* ─── Agentic orchestration ─── */
