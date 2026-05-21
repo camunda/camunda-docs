@@ -41,7 +41,7 @@ The migrator supports the following SQL databases:
 | **PostgreSQL**           | 15, 16, 17, 18 | `org.postgresql.Driver`                        | Recommended for production |
 | **Oracle**               | 19c, 23ai      | `oracle.jdbc.OracleDriver`                     | Recommended for production |
 | **Microsoft SQL Server** | 2022           | `com.microsoft.sqlserver.jdbc.SQLServerDriver` | Recommended for production |
-| **MariaDB**              | 10.6, 11.8     | `org.mariadb.jdbc.Driver`                      | Recommended for production |
+| **MariaDB**              | 11.8           | `org.mariadb.jdbc.Driver`                      | Recommended for production |
 
 The migrator supports migration only within the same database vendor:
 
