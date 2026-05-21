@@ -87,4 +87,6 @@ At build time, `docusaurus-plugin-llms` auto-generates machine-readable outputs 
 
 ### Agents working inside this repository
 
-This repository is the source of truth. Read local Markdown files directly — do not fetch `docs.camunda.io` to look up Camunda content. The published outputs above are derived from these files at build time, so fetching them costs context and latency without adding information. `llms-full.txt` in particular is multiple megabytes and will exhaust an agent's context window.
+This repository is the source of truth. Read local Markdown files directly. Do not fetch `docs.camunda.io` to look up Camunda content.
+
+The published outputs above are derived from these files at build time, so fetching them costs context and latency without adding information. `llms-full.txt` in particular is multiple megabytes and will exhaust an agent's context window.
