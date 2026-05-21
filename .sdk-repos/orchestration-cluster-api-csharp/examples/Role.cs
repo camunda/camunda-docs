@@ -23,11 +23,11 @@ public static class RoleExamples
     #region GetRole
 
     // <GetRole>
-    public static async Task GetRoleExample()
+    public static async Task GetRoleExample(RoleId roleId)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetRoleAsync("developer");
+        var result = await client.GetRoleAsync(roleId);
         Console.WriteLine($"Role: {result.Name}");
     }
     // </GetRole>
@@ -53,11 +53,11 @@ public static class RoleExamples
     #region UpdateRole
 
     // <UpdateRole>
-    public static async Task UpdateRoleExample()
+    public static async Task UpdateRoleExample(RoleId roleId)
     {
         using var client = CamundaClient.Create();
 
-        await client.UpdateRoleAsync("developer", new RoleUpdateRequest
+        await client.UpdateRoleAsync(roleId, new RoleUpdateRequest
         {
             Name = "senior-developer",
         });
@@ -68,11 +68,11 @@ public static class RoleExamples
     #region DeleteRole
 
     // <DeleteRole>
-    public static async Task DeleteRoleExample()
+    public static async Task DeleteRoleExample(RoleId roleId)
     {
         using var client = CamundaClient.Create();
 
-        await client.DeleteRoleAsync("developer");
+        await client.DeleteRoleAsync(roleId);
     }
     // </DeleteRole>
     #endregion DeleteRole
@@ -80,11 +80,11 @@ public static class RoleExamples
     #region AssignRoleToUser
 
     // <AssignRoleToUser>
-    public static async Task AssignRoleToUserExample(Username username)
+    public static async Task AssignRoleToUserExample(RoleId roleId, Username username)
     {
         using var client = CamundaClient.Create();
 
-        await client.AssignRoleToUserAsync("developer", username);
+        await client.AssignRoleToUserAsync(roleId, username);
     }
     // </AssignRoleToUser>
     #endregion AssignRoleToUser
@@ -92,11 +92,11 @@ public static class RoleExamples
     #region UnassignRoleFromUser
 
     // <UnassignRoleFromUser>
-    public static async Task UnassignRoleFromUserExample(Username username)
+    public static async Task UnassignRoleFromUserExample(RoleId roleId, Username username)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignRoleFromUserAsync("developer", username);
+        await client.UnassignRoleFromUserAsync(roleId, username);
     }
     // </UnassignRoleFromUser>
     #endregion UnassignRoleFromUser
@@ -104,11 +104,11 @@ public static class RoleExamples
     #region AssignRoleToGroup
 
     // <AssignRoleToGroup>
-    public static async Task AssignRoleToGroupExample()
+    public static async Task AssignRoleToGroupExample(RoleId roleId, GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
-        await client.AssignRoleToGroupAsync("developer", "engineering");
+        await client.AssignRoleToGroupAsync(roleId, groupId);
     }
     // </AssignRoleToGroup>
     #endregion AssignRoleToGroup
@@ -116,11 +116,11 @@ public static class RoleExamples
     #region UnassignRoleFromGroup
 
     // <UnassignRoleFromGroup>
-    public static async Task UnassignRoleFromGroupExample()
+    public static async Task UnassignRoleFromGroupExample(RoleId roleId, GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignRoleFromGroupAsync("developer", "engineering");
+        await client.UnassignRoleFromGroupAsync(roleId, groupId);
     }
     // </UnassignRoleFromGroup>
     #endregion UnassignRoleFromGroup
@@ -128,11 +128,11 @@ public static class RoleExamples
     #region AssignRoleToClient
 
     // <AssignRoleToClient>
-    public static async Task AssignRoleToClientExample()
+    public static async Task AssignRoleToClientExample(RoleId roleId, ClientId clientId)
     {
         using var client = CamundaClient.Create();
 
-        await client.AssignRoleToClientAsync("developer", "my-service-account");
+        await client.AssignRoleToClientAsync(roleId, clientId);
     }
     // </AssignRoleToClient>
     #endregion AssignRoleToClient
@@ -140,11 +140,11 @@ public static class RoleExamples
     #region UnassignRoleFromClient
 
     // <UnassignRoleFromClient>
-    public static async Task UnassignRoleFromClientExample()
+    public static async Task UnassignRoleFromClientExample(RoleId roleId, ClientId clientId)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignRoleFromClientAsync("developer", "my-service-account");
+        await client.UnassignRoleFromClientAsync(roleId, clientId);
     }
     // </UnassignRoleFromClient>
     #endregion UnassignRoleFromClient
@@ -152,11 +152,11 @@ public static class RoleExamples
     #region AssignRoleToMappingRule
 
     // <AssignRoleToMappingRule>
-    public static async Task AssignRoleToMappingRuleExample()
+    public static async Task AssignRoleToMappingRuleExample(RoleId roleId, MappingRuleId mappingRuleId)
     {
         using var client = CamundaClient.Create();
 
-        await client.AssignRoleToMappingRuleAsync("developer", "rule-123");
+        await client.AssignRoleToMappingRuleAsync(roleId, mappingRuleId);
     }
     // </AssignRoleToMappingRule>
     #endregion AssignRoleToMappingRule
@@ -164,11 +164,11 @@ public static class RoleExamples
     #region UnassignRoleFromMappingRule
 
     // <UnassignRoleFromMappingRule>
-    public static async Task UnassignRoleFromMappingRuleExample()
+    public static async Task UnassignRoleFromMappingRuleExample(RoleId roleId, MappingRuleId mappingRuleId)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignRoleFromMappingRuleAsync("developer", "rule-123");
+        await client.UnassignRoleFromMappingRuleAsync(roleId, mappingRuleId);
     }
     // </UnassignRoleFromMappingRule>
     #endregion UnassignRoleFromMappingRule
@@ -176,13 +176,13 @@ public static class RoleExamples
     #region SearchUsersForRole
 
     // <SearchUsersForRole>
-    public static async Task SearchUsersForRoleExample()
+    public static async Task SearchUsersForRoleExample(RoleId roleId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchUsersForRoleAsync(
-            "developer",
-            new SearchUsersForRoleRequest());
+            roleId,
+            new RoleUserSearchQueryRequest());
 
         foreach (var user in result.Items)
         {
@@ -195,12 +195,12 @@ public static class RoleExamples
     #region SearchGroupsForRole
 
     // <SearchGroupsForRole>
-    public static async Task SearchGroupsForRoleExample()
+    public static async Task SearchGroupsForRoleExample(RoleId roleId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchGroupsForRoleAsync(
-            "developer",
+            roleId,
             new RoleGroupSearchQueryRequest());
 
         foreach (var group in result.Items)
@@ -214,13 +214,13 @@ public static class RoleExamples
     #region SearchClientsForRole
 
     // <SearchClientsForRole>
-    public static async Task SearchClientsForRoleExample()
+    public static async Task SearchClientsForRoleExample(RoleId roleId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchClientsForRoleAsync(
-            "developer",
-            new SearchClientsForRoleRequest());
+            roleId,
+            new RoleClientSearchQueryRequest());
 
         foreach (var c in result.Items)
         {
@@ -233,12 +233,12 @@ public static class RoleExamples
     #region SearchMappingRulesForRole
 
     // <SearchMappingRulesForRole>
-    public static async Task SearchMappingRulesForRoleExample()
+    public static async Task SearchMappingRulesForRoleExample(RoleId roleId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchMappingRulesForRoleAsync(
-            "developer",
+            roleId,
             new MappingRuleSearchQueryRequest());
 
         foreach (var rule in result.Items)
