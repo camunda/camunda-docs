@@ -89,7 +89,7 @@ If you encounter a duplicate environment variable error, apply one of the follow
    helm upgrade ... --server-side=false
    ```
 
-4. For Camunda 8.9 (chart 14.x) and earlier only, use Helm CLI v3 as a temporary workaround. Helm v3 is not supported for Camunda 8.10 (chart 15.x).
+4. For Camunda 8.9 (chart 14.x) and earlier, Helm CLI v3 is supported. Helm v3 is not supported for Camunda 8.10 (chart 15.x).
 
 :::note Helm CLI v3 support timeline
 Helm CLI v3 receives bug fixes until July 8, 2026, and security fixes until November 11, 2026. See the [Helm support policy](https://helm.sh/blog/helm-4-released#helm-v3-support). Camunda 8.10 (chart 15.x) does not support Helm v3 regardless of this timeline.
