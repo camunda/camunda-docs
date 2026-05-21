@@ -499,7 +499,7 @@
 
 /* Dark bg "More ways to run" section */
 .darkSection {
-  background: #1d1941 !important;
+  background: #1c1a52 !important;
   color: rgba(255, 255, 255, 0.92);
   margin-top: 0 !important;
   border-top: none !important;
@@ -1444,8 +1444,9 @@
 }
 
 .copyButton:hover {
-  background: rgba(0, 0, 0, 0.08);
-  color: var(--ifm-color-emphasis-900);
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .cliPrimaryCard .copyButton {
@@ -1855,47 +1856,90 @@
 }
 
 .aiExamples {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 1.8rem 2rem;
+  margin-top: 2.5rem;
+  padding: 2.5rem 0 0;
 }
 
 .aiExamples h4 {
-  font-size: 0.95rem;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--heading-color);
-  margin: 0 0 1rem;
+  margin: 0 0 0.4rem;
   border-bottom: none;
   padding: 0;
+  text-align: center;
+}
+
+.aiExamplesSub {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted-color);
+  margin: 0 auto 1.75rem;
+  max-width: 540px;
 }
 
 .aiExampleGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
 }
 
 .aiExampleItem {
   display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  font-size: 0.88rem;
-  color: var(--muted-color);
-  font-style: italic;
-  line-height: 1.5;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.5rem 1.5rem 1.4rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: var(--page-color);
+  line-height: 1.55;
+  position: relative;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.aiExampleItem:hover {
+  transform: translateY(-3px);
+  border-color: #fc5d0d;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .aiExampleItem:hover {
+  box-shadow: 0 10px 28px rgba(252, 93, 13, 0.18);
 }
 
 .aiPromptIcon {
   font-style: normal;
-  font-size: 1rem;
+  font-size: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(252, 93, 13, 0.12);
   flex-shrink: 0;
 }
 
 /* ─── Explore docs (dark variant matching darkSection) ─── */
 .exploreSection {
-  background: #1d1941;
+  background: #1c1a52;
   color: rgba(255, 255, 255, 0.92);
   padding: 3rem 0 4rem;
+}
+
+.exploreSectionLast {
+  background: linear-gradient(
+    180deg,
+    #1c1a52 0%,
+    #100e36 35%,
+    #0d0b2a 70%,
+    #161616 100%
+  );
 }
 
 .exploreSection .sectionTitle {
