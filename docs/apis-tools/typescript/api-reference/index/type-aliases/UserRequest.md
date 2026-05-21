@@ -46,7 +46,7 @@ The password of the user.
 ### username
 
 ```ts
-username: string;
+username: Username;
 ```
 
-The username of the user.
+The username of the new user.
