@@ -37,6 +37,7 @@ The migrator supports the following SQL databases:
 
 | Database                 | Version        | JDBC Driver                                    | Notes                      |
 | ------------------------ | -------------- | ---------------------------------------------- | -------------------------- |
+| **H2**                   | 2.4            | `org.h2.Driver`                                | Default, good for testing  |
 | **PostgreSQL**           | 15, 16, 17, 18 | `org.postgresql.Driver`                        | Recommended for production |
 | **Oracle**               | 19c, 23ai      | `oracle.jdbc.OracleDriver`                     | Recommended for production |
 | **Microsoft SQL Server** | 2022           | `com.microsoft.sqlserver.jdbc.SQLServerDriver` | Recommended for production |

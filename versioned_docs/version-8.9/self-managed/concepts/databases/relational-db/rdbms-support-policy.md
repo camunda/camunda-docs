@@ -114,19 +114,19 @@ For Camunda Orchestration Cluster secondary storage, H2 is a single-broker optio
 
 Camunda bundles JDBC drivers for databases where redistribution is permitted and expects you to provide drivers where licensing or distribution constraints apply (for example, Oracle).
 
-Driver versions are not pinned as a formal support guarantee unless explicitly stated. Bundled and tested versions can change with dependency updates (for example, Spring Boot updates).
+Bundled driver versions are not pinned as a formal support guarantee. Each bundled driver is tested in CI against every supported version of the corresponding database listed above, and the exact version may change between Camunda patch releases as dependencies are updated. To inspect the precise driver version bundled in a given Camunda release, see the `lib/` directory of the distribution archive.
 
 ### Bundled drivers
 
-The following JDBC drivers and wrappers are included in the Camunda application images:
+The following JDBC drivers and wrappers are included in the Camunda application images. Each is known to be compatible with every supported version of the corresponding database listed above:
 
-| Database / platform      | Driver artifact                                  | Version       | Notes                                                          |
-| :----------------------- | :----------------------------------------------- | :------------ | :------------------------------------------------------------- |
-| PostgreSQL               | `org.postgresql:postgresql`                      | 42.7.8        | Bundled in Camunda images.                                     |
-| MariaDB                  | `org.mariadb.jdbc:mariadb-java-client`           | 3.5.7         | Bundled in Camunda images.                                     |
-| Microsoft SQL Server     | `com.microsoft.sqlserver:mssql-jdbc`             | 12.10.2.jre11 | Bundled in Camunda images (JRE 11).                            |
-| H2                       | `com.h2database:h2`                              | 2.3.232       | Bundled in Camunda images.                                     |
-| Amazon Aurora (AWS JDBC) | `software.amazon.jdbc:aws-advanced-jdbc-wrapper` | 2.6.8         | JDBC wrapper for AWS Aurora; requires a supported base driver. |
+| Database / platform      | Driver artifact                                  | Notes                                                          |
+| :----------------------- | :----------------------------------------------- | :------------------------------------------------------------- |
+| PostgreSQL               | `org.postgresql:postgresql`                      | Bundled in Camunda images.                                     |
+| MariaDB                  | `org.mariadb.jdbc:mariadb-java-client`           | Bundled in Camunda images.                                     |
+| Microsoft SQL Server     | `com.microsoft.sqlserver:mssql-jdbc`             | Bundled in Camunda images (JRE 11).                            |
+| H2                       | `com.h2database:h2`                              | Bundled in Camunda images.                                     |
+| Amazon Aurora (AWS JDBC) | `software.amazon.jdbc:aws-advanced-jdbc-wrapper` | JDBC wrapper for AWS Aurora; requires a supported base driver. |
 
 ### User-supplied drivers
 
