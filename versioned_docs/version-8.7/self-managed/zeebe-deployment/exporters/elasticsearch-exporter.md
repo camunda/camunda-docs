@@ -157,6 +157,14 @@ All index templates created by this exporter apply the created ILM Policy.
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds `nanos`.
 :::
 
+:::note Externally managed policy
+
+When `managePolicy: false`, the exporter still attaches the policy named by `policyName` (default `zeebe-record-retention-policy`) to the indices it creates. The policy must already exist in your Elasticsearch cluster under that name when the exporter starts.
+
+If the policy does not exist, Elasticsearch silently accepts the dangling `index.lifecycle.name` setting. The exporter starts successfully, but ILM logs `policy_not_found` warnings on each cycle and skips retention actions until the policy is created. Once you create the policy under the configured name, ILM picks it up retroactively on its next cycle.
+
+:::
+
 </TabItem>
 
 <TabItem value="authentication">
