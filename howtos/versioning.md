@@ -23,6 +23,16 @@ Our current policy is to support versions for 18 months. Any version older than 
 
 When a version is archived, it is removed from the main docs, isolated on a branch named `unsupported/x.xx` where `x.xx` is the version, and deployed to the URLs `https://unsupported.docs.camunda.io/x.xx/` and `https://stage.unsupported.docs.camunda.io/x.xx/`.
 
+### Prerequisites
+
+This process relies on automations to take care of the bulk of the archiving work on your behalf. To run those automations, you'll need the following dependencies:
+
+- Bash
+- Make
+- Python 3.12+
+
+Additionally, you'll also need to configure your Git email and name in your development environment with `git config`.
+
 ### Create a GitHub issue
 
 Create a new GitHub issue to track your progress:
@@ -48,13 +58,13 @@ This issue tracks related activities.
 
 ### Set your archive version environment variable
 
-Set an environment variable to be used in future automations:
+Set the archived version in an environment variable:
 
 ```sh
 export ARCHIVED_VERSION=8.x  # use the real minor version number
 ```
 
-All future steps should be run from the same shell, or you need to export this environment variable again. You can always verify it's set with `echo`:
+All future steps will use this environment variable and should, therefore, be run from the same shell. Otherwise, you need to export this environment variable again. You can always verify it's set with `echo`:
 
 ```sh
 echo $ARCHIVED_VERSION
@@ -70,13 +80,13 @@ git pull
 git checkout -b archive-step-1
 ```
 
-Navigate to `hacks/archiveVersion`, and run `1-ignore-version-prod.py`:
+Run the `ignore-version-prod` automation:
 
 ```sh
 make -C hacks/archiveVersion ignore-version-prod
 ```
 
-This automatically updates `publish-prod.yaml` to ignore tags for the archived minor version and any patches during future production releases.
+This updates `publish-prod.yaml` to ignore tags for the archived minor version and any patches during future production releases.
 
 Commit and submit a PR.
 
@@ -108,13 +118,15 @@ This creates a large set of commits. Push them to remote, but **don't open a PR*
 
 ### Fix links and redirects
 
-Preprocess the docs to automate some common changes that need to be made against the isolated version:
+Preprocess the docs to automate common changes that need to be made against the isolated version:
 
 ```sh
 make -C hacks/archiveVersion preprocess
 ```
 
 Read the docstring in `hacks/archiveVersion/2-preprocess.py` for details.
+
+Review and commit the changes.
 
 #### Manually fix links
 
