@@ -146,12 +146,13 @@ A retention policy can be set up to delete old data.
 When enabled, this creates an Index State Management (ISM) policy that deletes the data after the
 specified `minimumAge`. All index templates created by this exporter apply the created ISM policy.
 
-| Option            | Description                                                                   | Default                         |
-| ----------------- | ----------------------------------------------------------------------------- | ------------------------------- |
-| enabled           | If `true` the ISM policy is created and applied to the index templates.       | `false`                         |
-| minimumAge        | Specifies how old the data must be, before the data is deleted as a duration. | `30d`                           |
-| policyName        | The name of the created and applied ISM policy.                               | `zeebe-record-retention-policy` |
-| policyDescription | The description of the created and applied ISM policy.                        | `Zeebe record retention policy` |
+| Option            | Description                                                                                                                                                                                   | Default                         |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| enabled           | If `true` the ISM policy is created and applied to the index templates.                                                                                                                       | `false`                         |
+| minimumAge        | Specifies how old the data must be, before the data is deleted as a duration.                                                                                                                 | `30d`                           |
+| policyName        | The name of the created and applied ISM policy.                                                                                                                                               | `zeebe-record-retention-policy` |
+| policyDescription | The description of the created and applied ISM policy.                                                                                                                                        | `Zeebe record retention policy` |
+| managePolicy      | If `true` the exporter creates, updates, and removes the ISM policy on its own. Set to `false` to leave an externally managed policy untouched (the exporter neither creates nor removes it). | `true`                          |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or
