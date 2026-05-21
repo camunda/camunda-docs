@@ -25,11 +25,11 @@ public static class MappingRuleExamples
     #region GetMappingRule
 
     // <GetMappingRule>
-    public static async Task GetMappingRuleExample()
+    public static async Task GetMappingRuleExample(MappingRuleId mappingRuleId)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetMappingRuleAsync("rule-123");
+        var result = await client.GetMappingRuleAsync(mappingRuleId);
         Console.WriteLine($"Mapping rule: {result.Name}");
     }
     // </GetMappingRule>
@@ -56,11 +56,11 @@ public static class MappingRuleExamples
     #region UpdateMappingRule
 
     // <UpdateMappingRule>
-    public static async Task UpdateMappingRuleExample()
+    public static async Task UpdateMappingRuleExample(MappingRuleId mappingRuleId)
     {
         using var client = CamundaClient.Create();
 
-        await client.UpdateMappingRuleAsync("rule-123", new MappingRuleUpdateRequest
+        await client.UpdateMappingRuleAsync(mappingRuleId, new MappingRuleUpdateRequest
         {
             ClaimName = "groups",
             ClaimValue = "senior-engineering",
@@ -73,11 +73,11 @@ public static class MappingRuleExamples
     #region DeleteMappingRule
 
     // <DeleteMappingRule>
-    public static async Task DeleteMappingRuleExample()
+    public static async Task DeleteMappingRuleExample(MappingRuleId mappingRuleId)
     {
         using var client = CamundaClient.Create();
 
-        await client.DeleteMappingRuleAsync("rule-123");
+        await client.DeleteMappingRuleAsync(mappingRuleId);
     }
     // </DeleteMappingRule>
     #endregion DeleteMappingRule
