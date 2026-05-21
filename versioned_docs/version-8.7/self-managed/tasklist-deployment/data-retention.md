@@ -70,10 +70,21 @@ camunda.tasklist:
 
 With `ilmManagePolicy: false`, Tasklist:
 
-- Does not create or update the ILM/ISM policy resource on startup (it assumes the policy already exists under the configured name).
+- Does not create or update the ILM/ISM policy resource on startup (it assumes the policy already exists under the expected name).
 - Does not detach the policy from existing indices when `ilmEnabled` is `false`.
 
 The default is `true`, which preserves the historical behavior.
+
+:::caution Policy name is hardcoded
+
+Tasklist attaches the policy named `tasklist_delete_archived_indices` to archived indices. This name is **not configurable**. When `ilmManagePolicy: false`, the external policy must already exist in your cluster under exactly that name.
+
+If the policy does not exist when `ilmEnabled: true`:
+
+- **Elasticsearch**: Tasklist starts successfully, but ILM logs `policy_not_found` warnings on each cycle and skips retention actions on the affected indices. Once the policy is created externally under the configured name, ILM picks it up retroactively on its next cycle.
+- **OpenSearch**: Tasklist logs an error for each index it cannot attach the policy to and continues. The affected indices remain unmanaged until the policy is provisioned and Tasklist runs the attach step again.
+
+:::
 
 :::note
 Only indices containing dates in their suffix may be deleted.

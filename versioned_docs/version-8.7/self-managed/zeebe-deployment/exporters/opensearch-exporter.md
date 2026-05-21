@@ -159,6 +159,14 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 nanoseconds `nanos`.
 :::
 
+:::note Externally managed policy
+
+When `managePolicy: false`, the exporter still attaches the policy named by `policyName` (default `zeebe-record-retention-policy`) to the indices it creates. The policy must already exist in your OpenSearch cluster under that name when the exporter starts.
+
+If the policy does not exist, OpenSearch's ISM `add` API rejects the call and the exporter fails to start with `OpensearchExporterException: Failed to add policy to indices`. Provision the ISM policy before starting Camunda when using `managePolicy: false`.
+
+:::
+
 </TabItem>
 
 <TabItem value="authentication">
