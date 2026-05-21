@@ -56,6 +56,25 @@ camunda.tasklist:
 
 This ILM Policy works on Elasticsearch 7 as well, and can function as a replacement for the Elasticsearch Curator.
 
+### Externally managed ILM/ISM policies
+
+By default Tasklist creates and updates the ILM/ISM policy resource itself when `ilmEnabled` is `true`, and removes the policy from existing indices when `ilmEnabled` is `false`. When the policy is managed externally (for example by a separate provisioning step that runs before Tasklist starts), set `ilmManagePolicy` to `false`:
+
+```yaml
+camunda.tasklist:
+  archiver:
+    ilmEnabled: true
+    ilmManagePolicy: false
+    ilmMinAgeForDeleteArchivedIndices: 30d
+```
+
+With `ilmManagePolicy: false`, Tasklist:
+
+- Does not create or update the ILM/ISM policy resource on startup (it assumes the policy already exists under the configured name).
+- Does not detach the policy from existing indices when `ilmEnabled` is `false`.
+
+The default is `true`, which preserves the historical behavior.
+
 :::note
 Only indices containing dates in their suffix may be deleted.
 :::
