@@ -38,6 +38,28 @@ Input mappings can be used to transform the variables into a format accepted by 
 
 For more information about this topic visit the documentation about [Input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
 
+## Job priority
+
+Service tasks support the `zeebe:jobPriorityDefinition` extension element.
+
+You can define job priority:
+
+- On the process as a default
+- On the service task as an override
+
+The task-level priority takes precedence over the process-level priority.
+
+The `priority` attribute accepts:
+
+- A static integer value, for example `90`
+- A FEEL expression that evaluates to an integer, for example `=jobPriority`
+
+If no priority is defined, the default priority is `0`.
+
+Priority uses signed integer semantics. Do not assume a fixed `0-99` engine limit.
+
+For activation behavior and limitations, see [job prioritization](../../../concepts/job-workers.md#job-prioritization).
+
 ## Additional resources
 
 ### XML representation

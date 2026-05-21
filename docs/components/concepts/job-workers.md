@@ -256,6 +256,31 @@ For example, if jobs of a given type are not activated, but a worker is opened f
 
 If it's not present in the gateway as a client stream, restart your worker. If it's not present as a consumer in one of the brokers, this indicates a bug. As a workaround, restart your gateway, which will cause some interruption in your service, but will force all streams for this gateway to be recreated properly.
 
+## Job prioritization
+
+Camunda supports job prioritization for pull-based job activation.
+
+Job priority affects the order in which jobs are activated for workers. It does not change retries, failures, or completion semantics.
+
+Important behavior:
+
+- Higher-priority jobs are activated before lower-priority jobs within a partition
+- Ordering is best effort across the cluster, not a global guarantee across all partitions
+- If no priority is defined, the default priority is `0`
+- Task-level priority overrides process-level priority
+- Jobs with the same priority are activated by ascending job key
+- Low-priority jobs can starve under sustained high-priority load and may never be activated while workers remain fully occupied by higher-priority jobs
+- Camunda does not provide fairness, aging, or starvation mitigation in the engine
+
+If starvation becomes a problem, increase worker capacity or revise your priority assignments.
+
+Priority values can be static integers or FEEL expressions. FEEL expressions are evaluated when the job is created, and the resulting integer is stored on the job.
+
+### Job streaming limitation
+
+Job streaming does not honor job priority ordering.
+If you mix job pull and job streaming, the benefits of prioritization can be reduced.
+
 ## Tags
 
 Tags provide a powerful way to add lightweight metadata to jobs.
