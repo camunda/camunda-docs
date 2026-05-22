@@ -30,6 +30,7 @@
     "api:generate:zeebe": "npm run api:generate zeebe",
     "api:generate:adminsm": "npm run api:generate adminsm",
     "api:generate:camunda": "npm run api:generate camunda",
+    "api:generate:hub": "npm run api:generate hub",
     "config-reference:download": "node ./config-reference/generate-config-reference.js download",
     "config-reference:download:camunda-spring-boot-starter": "npm run config-reference:download camunda-spring-boot-starter",
     "config-reference:download:camunda-spring-boot-starter:8.8": "npm run config-reference:download:camunda-spring-boot-starter 8.8",

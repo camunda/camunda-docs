@@ -1309,6 +1309,7 @@ module.exports = {
         require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-rest/sidebar-schema"),
         {
           type: "category",
           label: "Optimize API",
