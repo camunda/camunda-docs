@@ -679,7 +679,7 @@ function BuildWithCamunda() {
                   Run locally with the CLI
                 </h2>
                 <p className={styles.heroCardMeta}>
-                  Camunda 8.9+ · Requires Node.js 18+
+                  Camunda 8.9+ · Requires Node.js 18+ & OpenJDK 21-25
                 </p>
                 <p className={styles.heroCardDesc}>
                   Run locally and scale seamlessly to enterprise clusters using
@@ -829,7 +829,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
                 <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
               </svg>
               <span>
-                c8ctl uses Camunda 8 Run, which requires{" "}
+                c8ctl uses Camunda 8 Run, which requires Node.js 18+ and{" "}
                 <Link
                   to={useBaseUrl(
                     "docs/next/self-managed/quickstart/developer-quickstart/c8run/install-start/"
