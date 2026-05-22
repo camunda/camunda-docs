@@ -19,12 +19,20 @@ jobs:
           repository: camunda/camunda-docs
           path: docs
 
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
+          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+          repositories: camunda-hub
+
       - name: Check for stable branch
         id: compute_branch
         run: |
           # During development of a minor release, engineers push changes to the camunda hub repo's main branch, so we use main during this time to keep the docs up to date
-          # with the alpha releases. However, toward the end of the dev cycle for the minor version, engineers cut a stable version branch in the form stable/8.x and 
-          # start including code for the next version in main. At this point, we need to stop using main and switch to the stable branch until the minor version ships. 
+          # with the alpha releases. However, toward the end of the dev cycle for the minor version, engineers cut a stable version branch in the form stable/8.x and
+          # start including code for the next version in main. At this point, we need to stop using main and switch to the stable branch until the minor version ships.
           # After that, we need to switch back to using main.
 
           # This step in the workflow uses the docs repo's latest release tag to compute the next expected stable branch. If such a branch exists, we use it.
@@ -43,7 +51,7 @@ jobs:
 
           # If a stable camunda hub branch exists for the next minor release, use it. Otherwise, use main.
           stable_branch="stable/$next_minor_release"
-          if git ls-remote --exit-code --heads https://github.com/camunda/camunda-hub $stable_branch; then
+          if git ls-remote --exit-code --heads https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/camunda/camunda-hub $stable_branch; then
             echo "Found a stable branch: $stable_branch"
             echo "camunda_hub_branch=$stable_branch" >> "$GITHUB_OUTPUT"
           else
@@ -55,6 +63,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: camunda/camunda-hub
+          token: ${{ steps.generate_token.outputs.token }}
           path: rest-spec
           ref: ${{ steps.compute_branch.outputs.camunda_hub_branch }}
           sparse-checkout: restapi/public-api/src/main/resources/openapi/v2
@@ -80,14 +89,6 @@ jobs:
             echo "Changes detected."
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           fi
-
-      - name: Generate token
-        if: steps.check_changes.outputs.has_changes == 'true'
-        id: generate_token
-        uses: actions/create-github-app-token@v3
-        with:
-          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
-          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true'
