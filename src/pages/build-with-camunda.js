@@ -750,7 +750,7 @@ function BuildWithCamunda() {
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
                 <CodeBlock>c8ctl</CodeBlock>
               </Link>{" "}
-              from npm and start a Self-Managed Camunda cluster on your machine.
+              from npm and start a Self-Managed cluster on your machine.
             </p>
           </div>
 
@@ -864,9 +864,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
                 {`$ c8ctl cluster start 8.9.0-alpha5
-$ c8ctl cluster stop
-
-`}
+$ c8ctl cluster stop`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
@@ -911,25 +909,21 @@ $ c8ctl resolve inc 2251799813685251`}
           </div>
           <div className={styles.aiGrid}>
             <div className={styles.aiCard}>
-              <h4 style={{ color: "inherit" }}>
-                Add Camunda skills as Claude plugin{" "}
+              <h4 style={{ display: "flex", alignItems: "center" }}>
+                Add Camunda skills as Claude plugin
                 <span
                   style={{
-                    marginLeft: "0.5rem",
-                    display: "inline-block",
-                    padding: "0.15rem 0.5rem",
-                    borderRadius: "999px",
-                    fontSize: "0.75rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.02em",
-                    backgroundColor: "#fc5d0d",
-                    border: "1px solid #fc5d0d",
-                    color: "#ffffff",
-                    verticalAlign: "middle",
-                    lineHeight: 1.2,
+                    marginLeft: "auto",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                 >
-                  Coming soon
+                  <Link
+                    to="https://github.com/camunda/skills"
+                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                  >
+                    camunda/skills
+                  </Link>
                 </span>
               </h4>
               <TerminalWindow title="Terminal">
@@ -1056,7 +1050,11 @@ Available skills:
         </section>
 
         {/* ─── Get started with Camunda downloads ─── */}
-        <section className={clsx(styles.moreSection, styles.downloadsSection)}>
+        <section
+          id="downloads"
+          className={clsx(styles.moreSection, styles.downloadsSection)}
+          style={{ scrollMarginTop: "5rem" }}
+        >
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Camunda downloads</h2>
@@ -1126,7 +1124,7 @@ Available skills:
                 .
               </p>
               <Link
-                className={styles.heroCardCta}
+                className={styles.heroCardCtaAlt}
                 to={useBaseUrl(
                   "docs/self-managed/quickstart/developer-quickstart/c8run/"
                 )}
