@@ -707,19 +707,26 @@
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
-  padding: 0.3rem 0.8rem;
-  background: #ffffff;
-  color: #888888;
-  border: 1.5px solid #cccccc;
+  padding: 0.35rem 0.8rem;
+  background: lab(38.4009% 52.6132 -92.3857);
+  color: #ffffff;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 999px;
+  box-shadow: 0 2px 8px lab(38.4009% 52.6132 -92.3857 / 0.4);
   white-space: nowrap;
 }
 
-[data-theme="dark"] .recommendedBadge {
+.downloadHighlight .recommendedBadge {
+  background: #ffffff;
+  color: #888888;
+  border: 1.5px solid #cccccc;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .downloadHighlight .recommendedBadge {
   background: var(--ifm-background-color);
   color: rgba(255, 255, 255, 0.7);
   border-color: rgba(255, 255, 255, 0.35);
