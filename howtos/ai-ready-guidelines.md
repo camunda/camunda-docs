@@ -1,20 +1,8 @@
 # AI-ready content guidelines
 
-This guide describes how to write Camunda docs content that's reliably consumable by AI assistants (Copilot, Claude Code, Cursor, Kapa.ai) and by RAG/agent pipelines.
+This guide describes how to write Camunda docs content that's reliably consumable by AI assistants and by RAG/agent pipelines.
 
-It supplements — it does not replace — the [Camunda style guide](technical-writing-styleguide.md) and the [contributor documentation guidelines](documentation-guidelines.md). All existing tone, grammar, and terminology rules still apply.
-
-## Why this exists
-
-AI assistants are now a primary audience for Camunda docs alongside human readers. The site already publishes machine-readable artifacts (`/llms.txt`, `/llms-full.txt`, `.md` variants of every page) and integrates with Kapa.ai via an MCP server. Those handle the **delivery** layer.
-
-The remaining gap is at the **page level**. When agents fetch a page, they extract content by walking headings, reading the first sentences after each heading, and converting tables into structured data. Patterns that work fine for human browsing — configuration described in prose, prerequisites hidden in tabs, parameters shown only in screenshots — silently fail for agents.
-
-The rules below address that gap. They're derived from the [Agent-Friendly Documentation Spec](https://agentdocsspec.com/), [Kapa.ai's writing best practices](https://docs.kapa.ai/improving/writing-best-practices), and structural problems found in a sample audit of Camunda docs pages.
-
-## The universal rules
-
-Every Markdown page must follow these eight rules. They apply regardless of whether the page is a concept, a how-to, a reference, or anything else — Camunda docs don't use page-type templates.
+It supplements the [Camunda style guide](technical-writing-styleguide.md) and the [contributor documentation guidelines](documentation-guidelines.md).
 
 ### 1. Start each page and each section with a direct answer
 
@@ -114,32 +102,6 @@ All seven columns must be present even when some cells contain `—`. The absenc
 Each connector operation gets its own table. Authentication is its own table, separate from operation tables. Outputs use the simpler form: `Field | Type | Description`.
 
 This rule applies to **every** connector page in [docs/components/connectors/out-of-the-box-connectors/](../docs/components/connectors/out-of-the-box-connectors/). New connector pages must follow it from day one; existing pages should be retrofitted opportunistically during normal edits, with the most frequently used connectors prioritized.
-
-## What you don't need to do
-
-To prevent over-engineering, here are things you might think are required for AI-readiness but **are not**:
-
-- **No page-type templates.** Camunda docs do not classify pages as concept/how-to/reference/connector. Write the page that fits the content; apply the universal rules above.
-- **No new frontmatter fields.** The existing fields (`id`, `title`, `description`, `sidebar_label`, `sidebar_position`, `page_rank`) are sufficient. Don't invent `page_type`, `applies_to_version`, `last_updated`, `audience`, or similar — they create drift risk without measurable AI benefit. Versioning is already implicit in the folder structure; the `description` field is what `llms.txt` consumes.
-- **No JSON-LD or schema.org structured data.** Search-engine-style structured data is a "could be valuable" optimization, not a current gap.
-- **No special markup for AI consumers.** Don't add hidden divs, AI-only comments, or alternate "AI-friendly" sections. Agents fetch the same `.md` variant that the dev site serves; one good version of the page is the goal.
-
-If you find yourself wanting to add structure "for the AI", check whether the universal rules already cover it. They usually do.
-
-## Self-check before you submit
-
-Before opening a PR with content changes, scan your edits against this checklist:
-
-- [ ] The page starts with a one-sentence summary directly under the H1.
-- [ ] Every section starts with a sentence that answers "what is this section about?".
-- [ ] No "see above", "as mentioned earlier", or "now that you've".
-- [ ] Headings are specific (not "Configuration", "Overview", "How it works").
-- [ ] Heading hierarchy is consistent — no skipped levels.
-- [ ] If the page documents fields or parameters, those are in a Markdown table.
-- [ ] (Connector pages only) Every operation has a parameter table with the seven-column contract.
-- [ ] Every screenshot has the values it depicts also written in the text.
-- [ ] No prerequisites, steps, or critical configuration only inside a tab.
-- [ ] Code fences are closed and tagged with the language.
 
 ## References
 

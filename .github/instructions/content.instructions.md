@@ -4,8 +4,6 @@ applyTo: "**/*.md"
 
 **When to use:** Any content editing, documentation writing, or Markdown file changes. This is a condensed summary of the full style guide at `/howtos/technical-writing-styleguide.md`. Use these rules for routine work. Only consult the full style guide if you encounter a style question not covered here.
 
-For structural rules that make content reliably consumable by AI assistants (Copilot, Claude Code, Cursor, Kapa.ai), follow `/howtos/ai-ready-guidelines.md` in addition to the rules below.
-
 ## 1. Language and grammar
 
 - Default to **American English** (US spelling: "analyze" not "analyse", "color" not "colour", "capitalize" not "capitalise").
@@ -79,4 +77,4 @@ For structural rules that make content reliably consumable by AI assistants (Cop
 
 ## 6. AI-ready content
 
-Camunda docs are a primary input for AI assistants and RAG pipelines. When writing or editing content, follow `/howtos/ai-ready-guidelines.md` to keep pages reliably extractable by AI tools. The guide covers the eight universal page rules (direct summary sentences, self-contained sections, descriptive headings, consistent hierarchy, tables for structured data, no critical info only in screenshots or tabs, complete code fences) and the parameter-table contract for connector pages.
+Camunda docs are a primary input for AI assistants and RAG pipelines. When writing or editing content, follow `/howtos/ai-ready-guidelines.md` to keep pages reliably extractable by AI tools.
