@@ -750,7 +750,7 @@ function BuildWithCamunda() {
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
                 <CodeBlock>c8ctl</CodeBlock>
               </Link>{" "}
-              from npm and start a Self-Managed Camunda cluster on your machine.
+              from npm and start a Self-Managed cluster on your machine.
             </p>
           </div>
 
@@ -864,9 +864,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
                 {`$ c8ctl cluster start 8.9.0-alpha5
-$ c8ctl cluster stop
-
-`}
+$ c8ctl cluster stop`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
@@ -1052,7 +1050,11 @@ Available skills:
         </section>
 
         {/* ─── Get started with Camunda downloads ─── */}
-        <section className={clsx(styles.moreSection, styles.downloadsSection)}>
+        <section
+          id="downloads"
+          className={clsx(styles.moreSection, styles.downloadsSection)}
+          style={{ scrollMarginTop: "5rem" }}
+        >
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Camunda downloads</h2>
@@ -1122,7 +1124,7 @@ Available skills:
                 .
               </p>
               <Link
-                className={styles.heroCardCta}
+                className={styles.heroCardCtaAlt}
                 to={useBaseUrl(
                   "docs/self-managed/quickstart/developer-quickstart/c8run/"
                 )}

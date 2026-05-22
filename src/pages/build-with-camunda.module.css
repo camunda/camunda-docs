@@ -493,7 +493,7 @@
 }
 
 .cliInstallSection {
-  max-width: 1200px !important;
+  max-width: 1500px !important;
   padding-top: 4rem !important;
 }
 
@@ -502,7 +502,12 @@
   background: #1c1a52 !important;
   color: rgba(255, 255, 255, 0.92);
   margin-top: 0 !important;
-  border-top: none !important;
+  border-top: 1px solid var(--ifm-color-emphasis-300) !important;
+}
+
+[data-theme="dark"] .darkSection {
+  background: var(--ifm-background-color) !important;
+  border-top-color: var(--ifm-color-emphasis-300) !important;
 }
 
 .darkSection .sectionTitle {
@@ -552,12 +557,12 @@
 .downloadHighlight {
   position: relative;
   background: #ffffff;
-  border: 2px solid #78a9ff;
+  border: 1px solid #cccccc;
   border-radius: 14px;
   padding: 3rem 2rem 2rem;
   margin: 0 auto 2.5rem;
   max-width: 900px;
-  box-shadow: 0 12px 32px rgba(120, 169, 255, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   text-align: center;
 }
 
@@ -632,6 +637,7 @@
 .downloadsFooter {
   text-align: center;
   margin-top: 2rem;
+  padding-bottom: 1.5rem;
   font-size: 0.95rem;
   font-weight: 600;
 }
@@ -701,16 +707,22 @@
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
-  padding: 0.35rem 0.8rem;
-  background: lab(38.4009% 52.6132 -92.3857);
-  color: #ffffff;
+  padding: 0.3rem 0.8rem;
+  background: #ffffff;
+  color: #888888;
+  border: 1.5px solid #cccccc;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 999px;
-  box-shadow: 0 2px 8px lab(38.4009% 52.6132 -92.3857 / 0.4);
   white-space: nowrap;
+}
+
+[data-theme="dark"] .recommendedBadge {
+  background: var(--ifm-background-color);
+  color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .cliPrimaryHeader {
@@ -1884,6 +1896,9 @@
 .aiExamples {
   margin-top: 2.5rem;
   padding: 2.5rem 0 0;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .aiExamplesCta {
@@ -1891,7 +1906,7 @@
   justify-content: center;
   margin-top: 4rem;
   padding-top: 1rem;
-  padding-bottom: 4rem;
+  padding-bottom: 1.5rem;
 }
 
 .aiExamplesCta .heroCardCta {
@@ -1920,8 +1935,20 @@
 
 .aiExampleGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
+}
+
+@media (max-width: 1100px) {
+  .aiExampleGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .aiExampleGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .aiExampleItem {
@@ -1972,6 +1999,10 @@
   padding: 3rem 0 4rem;
 }
 
+[data-theme="dark"] .exploreSection {
+  background: var(--ifm-background-color);
+}
+
 .exploreSectionLast {
   background: linear-gradient(
     180deg,
@@ -1980,6 +2011,10 @@
     #0d0b2a 70%,
     #161616 100%
   );
+}
+
+[data-theme="dark"] .exploreSectionLast {
+  background: var(--ifm-background-color);
 }
 
 .exploreSection .sectionTitle {
@@ -2095,7 +2130,7 @@
   background: var(--explore-bg);
   margin-top: 3rem;
   padding: 5rem 0 4rem;
-  border-top: 4px solid var(--card-border);
+  border-top: 1px solid var(--card-border);
 }
 
 .everythingSection {
