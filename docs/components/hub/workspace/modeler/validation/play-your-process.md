@@ -43,27 +43,59 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 ## Get started with Play
 
-![play process definition view](../img/play-definition.png)
+![Configure Scenario panel](../img/play-definition.png)
 
-The first view in Play is the process definition view. It shows deployment problems, active process instances, and start events.
+The first view in Play is the process definition view. It shows deployment problems, active process instances, and a **Configure Scenario** panel on the right.
 
-Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in **Implement** mode.
+The **Configure Scenario** panel shows different options depending on the type of the selected start event:
 
-Alternatively, save example data to the BPMN file directly from the modal in Play to reuse it in future sessions or share it with others.
+- **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
+- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. **Start** is disabled when the message name is empty.
+- **Signal start event**: A **Signal name** dropdown pre-filled with the signal from the BPMN definition.
 
-Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
+**Start** is also disabled when the variables field contains invalid JSON.
+
+To prefill example data, define it in the **Example data** section of the start event in **Implement** mode. See [data handling](/components/modeler/data-handling.md) for details.
+
+### Define a test segment
+
+By default, execution starts from the process start event and runs to natural completion. To focus on a specific part of your process, define a segment with a custom start and end boundary in the **Configure Scenario** panel.
+
+#### Start boundary
+
+The start boundary defaults to the process start event. To change it:
+
+1. In the **Configure Scenario** panel, click the start row.
+2. Search for an element by name, or click an activatable element directly on the canvas. The selected element is highlighted with a **Start** label on the diagram.
+
+Elements before the start boundary are not activated and do not appear in the instance history.
+
+The same element type restrictions apply as for [**Add token** modifications](#modifications-limitations). Clicking a non-activatable element in picking mode has no effect.
+
+#### End boundary
+
+The end boundary defaults to the first end event. To change it:
+
+1. In the **Configure Scenario** panel, click the end row.
+2. Search for an element by name, or click an activatable element directly on the canvas. The selected element is highlighted with an **End** label on the diagram.
+
+When an end boundary is set, the process instance terminates after that element completes. Elements after it are not activated and do not appear in the instance history.
+
+#### Canvas click cycle
+
+Once both boundaries are set, canvas clicks cycle automatically: the first click sets a new start boundary and clears the end; the second click sets the new end boundary. To update only one boundary at a time, click its row in the panel — the next canvas click updates only that boundary.
 
 :::note
 Play will only consider the first executable process ID in the BPMN file.
 :::
-
-![play example data](../img/play-example-data.png)
 
 ## Play a process
 
 ![play process instance view](../img/play-instance.png)
 
 Click the action icons next to a task or event to play the process.
+
+If you defined a test segment with an end boundary, the instance terminates automatically after the end element completes — elements after it are not activated and do not appear in the instance history.
 
 The **Instance History** panel tracks the path taken throughout the diagram.
 
@@ -166,7 +198,7 @@ Scenario coverage will not display as expected if you edit or remove the "metada
 You can run scenarios on the process definition page by clicking either the **Run all scenarios** button or the **Run scenario** button with the play icon for each individual scenario.
 
 - Scenario execution results are marked with either a **Completed** or **Failed** status.
-- You must manually update a failed scenario by clicking **manually complete and update the scenario**, especially if diagram changes are made that require further user input (such as when a new flow node is added to a previously saved scenario path).
+- You must manually update a failed scenario by clicking **manually complete and update the scenario** button, especially if diagram changes are made that require further user input (such as when a new flow node is added to a previously saved scenario path).
 
 ![Run a scenario on the process definition page](../img/play-scenario-runs.png)
 
