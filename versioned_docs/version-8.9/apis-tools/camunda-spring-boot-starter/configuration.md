@@ -84,7 +84,7 @@ The connection to Camunda API is determined by `camunda.client.grpc-address` and
 
 #### gRPC address
 
-Define the address of the [gRPC API](/apis-tools/zeebe-api/grpc.md) exposed by the [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md):
+Define the address of the [gRPC API](/apis-tools/zeebe-api/grpc.md) exposed by the [Zeebe Gateway](/reference/glossary.md#zeebe-gateway):
 
 ```yaml
 camunda:
@@ -98,7 +98,7 @@ You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerEx
 
 #### REST address
 
-Define address of the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md):
+Define address of the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) exposed by the Zeebe Gateway:
 
 ```yaml
 camunda:

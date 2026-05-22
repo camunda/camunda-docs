@@ -30,7 +30,7 @@ path: object;
 #### clientId
 
 ```ts
-clientId: string;
+clientId: ClientId;
 ```
 
 The client ID.
@@ -38,7 +38,7 @@ The client ID.
 #### roleId
 
 ```ts
-roleId: string;
+roleId: RoleId;
 ```
 
 The role ID.

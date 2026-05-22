@@ -6,6 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import createCamundaClient, {
   createCamundaResultClient,
+  GroupId,
   isOk,
   isSdkError,
   type JobActionReceipt,
@@ -14,6 +15,7 @@ import createCamundaClient, {
   type ProcessDefinitionId,
   ProcessDefinitionKey,
   type ProcessInstanceKey,
+  RoleId,
 } from '@camunda8/orchestration-cluster-api';
 import { z } from 'zod';
 
@@ -538,6 +540,7 @@ async function _readmeJobCompletionPatterns() {
       return job.complete({ variables: { processed: true } });
 
       // GOOD: No-arg completion example, sentinel stored for ultimate return
+      // biome-ignore lint/correctness/noUnreachable: intentional — showing multiple completion patterns
       const ack = await job.complete();
       // ...
       return ack;
@@ -616,6 +619,27 @@ function _readmePoolStats() {
 }
 
 // Suppress "declared but never read"
+// ---------------------------------------------------------------------------
+// V9 → V10 Migration
+// ---------------------------------------------------------------------------
+
+async function _readmeV9ToV10Migration() {
+  const camunda = createCamundaClient();
+  //#region V9ToV10Migration
+  // v9 — plain strings were accepted
+  // await camunda.assignRoleToGroup({
+  //   roleId: 'developer',
+  //   groupId: 'engineering',
+  // });
+
+  // v10 — use the branded type helpers at the boundary
+  await camunda.assignRoleToGroup({
+    roleId: RoleId.assumeExists('developer'),
+    groupId: GroupId.assumeExists('engineering'),
+  });
+  //#endregion V9ToV10Migration
+}
+
 void _readmeQuickStart;
 void _readmeOverrides;
 void _readmeCustomFetch;
@@ -644,3 +668,4 @@ void _readmeBackpressureState;
 void _readmeThreadedLifecycle;
 void _readmeThreadedGraceful;
 void _readmePoolStats;
+void _readmeV9ToV10Migration;

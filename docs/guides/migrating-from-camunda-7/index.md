@@ -42,5 +42,5 @@ Get help with your migration journey from the following additional resources.
 - [Camunda Academy: Migration Overview](https://academy.camunda.com/c8-migration-overview/)
 
 :::info
-Still need more help? Contact your customer success manager or [reach out to Camunda](https://camunda.com/contact-us/).
+Still need more help? [Reach out to Camunda](https://camunda.com/contact-us/).
 :::
