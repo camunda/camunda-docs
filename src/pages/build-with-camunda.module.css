@@ -1860,6 +1860,20 @@
   padding: 2.5rem 0 0;
 }
 
+.aiExamplesCta {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  padding-top: 1rem;
+  padding-bottom: 4rem;
+}
+
+.aiExamplesCta .heroCardCta {
+  padding: 1rem 2rem;
+  font-size: 1.05rem;
+  box-shadow: 0 6px 18px lab(38.4009% 52.6132 -92.3857 / 0.4);
+}
+
 .aiExamples h4 {
   font-size: 1.5rem;
   font-weight: 700;

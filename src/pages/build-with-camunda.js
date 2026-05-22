@@ -87,6 +87,116 @@ function DownloadIcon() {
   );
 }
 
+function PencilIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <path
+        d="M18 46l3-12 20-20 9 9-20 20-12 3z"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <path
+        d="M37 17l9 9"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M18 46l5-2"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function PlayIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <circle
+        cx="32"
+        cy="32"
+        r="18"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        fill="none"
+      />
+      <path d="M28 24l13 8-13 8z" fill="#fc5d0d" />
+    </svg>
+  );
+}
+
+function RpaIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <path
+        d="M32 14v6"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <circle cx="32" cy="12" r="2" fill="#fc5d0d" />
+      <rect
+        x="18"
+        y="22"
+        width="28"
+        height="22"
+        rx="4"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        fill="none"
+      />
+      <circle cx="26" cy="32" r="2.5" fill="#fc5d0d" />
+      <circle cx="38" cy="32" r="2.5" fill="#fc5d0d" />
+      <path
+        d="M26 39h12"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14 30v8M50 30v8"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M22 48v4M42 48v4"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 function KubernetesIcon() {
   return <K8sSvgIcon width="72" height="72" />;
 }
@@ -512,11 +622,11 @@ function BuildWithCamunda() {
                 <span className={styles.heroCardIcon}>
                   <CloudIcon />
                 </span>
-                <h2 className={styles.heroCardTitle}>Camunda SaaS</h2>
+                <h2 className={styles.heroCardTitle}>Free SaaS trial</h2>
                 <p className={styles.heroCardMeta}>Fully managed cloud</p>
                 <p className={styles.heroCardDesc}>
-                  Skip local setup. Model and deploy in browser with a free
-                  account — 30 days fully featured.
+                  Get your own fully managed Camunda cluster. Nothing to
+                  install, sign up and start modeling today.
                 </p>
                 <ul className={styles.heroCardChecks}>
                   <li>
@@ -566,14 +676,14 @@ function BuildWithCamunda() {
                   <TerminalIcon />
                 </span>
                 <h2 className={styles.heroCardTitle}>
-                  Run locally with c8ctl CLI
+                  Run locally with the CLI
                 </h2>
                 <p className={styles.heroCardMeta}>
-                  v8.9 · Requires Node.js 18+
+                  Camunda 8.9+ · Requires Node.js 18+
                 </p>
                 <p className={styles.heroCardDesc}>
-                  Scaffold projects, run local runtime, deploy processes — one
-                  CLI for devs and agent builders.
+                  Run locally and scale seamlessly to enterprise clusters using
+                  the same runtime and stack. Deploy anywhere with one command.
                 </p>
                 <ul className={styles.heroCardChecks}>
                   <li>
@@ -633,15 +743,14 @@ function BuildWithCamunda() {
         >
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Run locally with c8ctl CLI <VersionBadge />
+              Run locally with the CLI <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
               Install{" "}
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                c8ctl
+                <CodeBlock>c8ctl</CodeBlock>
               </Link>{" "}
-              from npm and spin up a Self-Managed Camunda cluster on your
-              machine.
+              from npm and start a Self-Managed Camunda cluster on your machine.
             </p>
           </div>
 
@@ -652,7 +761,7 @@ function BuildWithCamunda() {
             >
               <span className={styles.stepNumber}>1</span>
               <span style={{ marginLeft: "0.6rem" }}>
-                Install the c8ctl CLI via npm
+                Install c8ctl CLI via npm
               </span>
               <span
                 style={{
@@ -734,7 +843,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
           </div>
 
           <div className={styles.pillSeparator}>
-            <span className={styles.sectionPill}>Using the CLI</span>
+            <span className={styles.sectionPill}>How to use the CLI</span>
           </div>
 
           {/* Everything from your terminal (moved into CLI section) */}
@@ -922,6 +1031,27 @@ Available skills:
                 any that are caused by missing payment details"
               </div>
             </div>
+
+            <div className={styles.aiExamplesCta}>
+              <Link className={styles.heroCardCta} to="#cli-install">
+                Ready to start? Install now
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  style={{ marginLeft: 6 }}
+                >
+                  <path
+                    d="M8 13V3M4 7l4-4 4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -931,8 +1061,8 @@ Available skills:
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Camunda downloads</h2>
               <p className={styles.sectionSub}>
-                Download the components you need for local Camunda 8 development
-                on macOS, Windows, or Linux.
+                No NPM? Download everything you need for local Camunda 8
+                development on macOS, Windows, or Linux.
               </p>
             </div>
 
@@ -983,25 +1113,33 @@ Available skills:
                 <CodeBlock>./camunda-start.sh</CodeBlock> (macOS/Linux) or{" "}
                 <CodeBlock>camunda-start.bat</CodeBlock> (Windows).
               </p>
+              <p className={styles.downloadHighlightHint}>
+                On successful startup, you are shown a success page with getting
+                started options. Problems? See{" "}
+                <Link
+                  to={useBaseUrl(
+                    "docs/guides/getting-started-example/#instructions"
+                  )}
+                >
+                  troubleshooting
+                </Link>
+                .
+              </p>
               <Link
                 className={styles.heroCardCta}
                 to={useBaseUrl(
-                  "docs/guides/getting-started-example/#instructions"
+                  "docs/self-managed/quickstart/developer-quickstart/c8run/"
                 )}
               >
-                Setup guidance and instructions <ArrowRight />
+                Camunda 8 Run developer quickstart <ArrowRight />
               </Link>
             </div>
 
             <div className={styles.waysGrid}>
               <div className={styles.wayCard}>
-                <img
-                  src="https://developers.camunda.com/wp-content/uploads/2026/02/pencil.png"
-                  alt="Desktop Modeler"
-                  width="64"
-                  height="64"
-                  className={styles.wayCardImage}
-                />
+                <div className={styles.wayCardImage}>
+                  <PencilIconLg />
+                </div>
                 <h3>Desktop Modeler</h3>
                 <p>
                   Design BPMN processes and DMN tables locally. Drag, drop, and
@@ -1032,13 +1170,9 @@ Available skills:
                 </div>
               </div>
               <div className={styles.wayCard}>
-                <img
-                  src="https://developers.camunda.com/wp-content/uploads/2026/02/play.png"
-                  alt="Camunda 8 Run"
-                  width="64"
-                  height="64"
-                  className={styles.wayCardImage}
-                />
+                <div className={styles.wayCardImage}>
+                  <PlayIconLg />
+                </div>
                 <h3>Camunda 8 Run</h3>
                 <p>
                   Lightweight all-in-one Camunda distribution for effortless
@@ -1069,13 +1203,9 @@ Available skills:
                 </div>
               </div>
               <div className={styles.wayCard}>
-                <img
-                  src="https://developers.camunda.com/wp-content/uploads/2026/02/rpa.png"
-                  alt="RPA Worker"
-                  width="64"
-                  height="64"
-                  className={styles.wayCardImage}
-                />
+                <div className={styles.wayCardImage}>
+                  <RpaIconLg />
+                </div>
                 <h3>RPA Worker</h3>
                 <p>
                   Full BPMN and DMN editing with automated deployment
@@ -1107,11 +1237,14 @@ Available skills:
               </div>
             </div>
 
-            <p className={styles.downloadsFooter}>
-              <Link to="https://downloads.camunda.cloud/release/">
+            <div className={styles.downloadsFooter}>
+              <Link
+                className={styles.heroCardCtaAlt}
+                to="https://downloads.camunda.cloud/release/"
+              >
                 Browse more downloads <ArrowRight />
               </Link>
-            </p>
+            </div>
           </div>
         </section>
 
