@@ -1,0 +1,394 @@
+---
+id: get-file
+title: "Get a file"
+description: "Returns the file metadata and content for the given file key."
+sidebar_label: "Get a file"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/hub-api-rest/specifications/hub-public-api-v-2
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get a file"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/files/{fileKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns the file metadata and content for the given file key.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "fileKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the file.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The file was retrieved successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: [
+              "fileKey",
+              "name",
+              "workspaceKey",
+              "folderKey",
+              "simplePath",
+              "canonicalPath",
+              "revision",
+              "type",
+              "content",
+              "created",
+              "createdBy",
+              "updated",
+              "updatedBy",
+            ],
+            properties: {
+              fileKey: {
+                description: "The unique key identifying this file.",
+                type: "string",
+              },
+              name: { description: "The name of the file.", type: "string" },
+              workspaceKey: {
+                description: "The key of the workspace this file belongs to.",
+                type: "string",
+              },
+              folderKey: {
+                description:
+                  "The key of the parent folder. Null if the file is at workspace root.",
+                type: "string",
+                nullable: true,
+              },
+              simplePath: {
+                description:
+                  "The human-readable path of the file within its workspace.",
+                type: "string",
+              },
+              canonicalPath: {
+                description:
+                  "The canonical (ID-based) path of the file within its workspace.",
+                type: "string",
+              },
+              revision: {
+                description:
+                  "The current revision number, used for optimistic locking.",
+                type: "integer",
+                format: "int32",
+              },
+              type: {
+                description: "The type of the file.",
+                type: "string",
+                enum: [
+                  "bpmn",
+                  "dmn",
+                  "form",
+                  "element-template",
+                  "rpa",
+                  "markdown",
+                  "tests",
+                ],
+              },
+              content: {
+                description:
+                  "The content of the file. Present in single-file responses (get, create, update) but null in search results for performance reasons.\n",
+                type: "string",
+                nullable: true,
+              },
+              created: {
+                description: "The timestamp when the file was created.",
+                type: "string",
+                format: "date-time",
+              },
+              createdBy: {
+                description: "The user who created the file.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+              updated: {
+                description: "The timestamp when the file was last updated.",
+                type: "string",
+                format: "date-time",
+              },
+              updatedBy: {
+                description: "The user who last updated the file.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+            },
+            title: "FileResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The file was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

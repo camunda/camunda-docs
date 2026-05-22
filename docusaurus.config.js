@@ -277,6 +277,27 @@ module.exports = {
       },
     ],
     [
+      // Hub REST API docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hub-openapi",
+        docsPluginId: "default",
+        config: {
+          hub: {
+            specPath: "api/hub/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-rest/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
       // RSS feed for security notices
       "./static/plugins/notices-feed",
       {
