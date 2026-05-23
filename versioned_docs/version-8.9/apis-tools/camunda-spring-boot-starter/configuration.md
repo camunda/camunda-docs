@@ -1031,6 +1031,148 @@ camunda:
       enabled: false
 ```
 
+## Set cluster variables on start-up
+
+To set [cluster variables](/components/modeler/feel/cluster-variable/overview.md) on application start-up, use the `@ClusterVariables` annotation. Cluster variables allow you to maintain environment-specific configurations, API endpoints, and feature flags centrally without hardcoding them in individual process definitions.
+
+The annotation follows the same pattern as `@Deployment`, allowing you to declaratively define cluster variables that are automatically upserted when the application starts.
+
+### Define cluster variables from JSON resources
+
+Use JSON resource files to define cluster variables at the class level. Each JSON file must be a flat JSON object where keys become variable names and values become variable values:
+
+```java
+@ClusterVariables(resources = "classpath:cluster-variables.json")
+@SpringBootApplication
+public class MyApplication {
+  // application code
+}
+```
+
+Example JSON file (`cluster-variables.json`):
+
+```json
+{
+  "environment": "production",
+  "maxRetries": 3,
+  "apiEndpoint": "https://api.example.com"
+}
+```
+
+You can specify multiple JSON files:
+
+```java
+@ClusterVariables(resources = {"classpath:common-vars.json", "classpath:env-vars.json"})
+```
+
+Or use wildcard patterns:
+
+```java
+@ClusterVariables(resources = "classpath*:/config/**/*.json")
+```
+
+### Define cluster variables from method return values
+
+Use the annotation at the method level to define cluster variables from method return values. The return value (any type — `Map`, POJO, or `record`) is serialized via `JsonMapper` and upserted as cluster variables:
+
+```java
+@ClusterVariables
+public Map<String, Object> clusterVariables() {
+    return Map.of(
+        "environment", "production",
+        "maxRetries", 3
+    );
+}
+```
+
+You can also use POJOs or records:
+
+```java
+public record ClusterConfig(String environment, int maxRetries) {}
+
+@ClusterVariables
+public ClusterConfig clusterVariables() {
+    return new ClusterConfig("production", 3);
+}
+```
+
+### Define cluster variables from application properties
+
+Define cluster variables in your application configuration files:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      enabled: true # default: true
+      variables:
+        environment: production
+        maxRetries: 3
+        apiEndpoint: https://api.example.com
+```
+
+### Configure tenant-scoped cluster variables
+
+All three modes support tenant-scoped variables via the `tenantId` attribute:
+
+**JSON resources:**
+
+```java
+@ClusterVariables(resources = "classpath:tenant-vars.json", tenantId = "tenant-a")
+```
+
+**Method return values:**
+
+```java
+@ClusterVariables(tenantId = "tenant-a")
+public Map<String, Object> tenantVariables() {
+    return Map.of("environment", "production");
+}
+```
+
+**Application properties:**
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      tenant-id: tenant-a
+      variables:
+        environment: production
+```
+
+For details on tenant-scoped variables and scope resolution, see [scope and priority](/components/modeler/feel/cluster-variable/scope-and-priority.md).
+
+### Use multiple annotations
+
+The `@ClusterVariables` annotation is `@Repeatable`, allowing you to stack multiple annotations on one class or method:
+
+```java
+@ClusterVariables(resources = "classpath:common.json")
+@ClusterVariables(resources = "classpath:tenant-a.json", tenantId = "tenant-a")
+@SpringBootApplication
+public class MyApplication {
+  // application code
+}
+```
+
+### Behaviour and lifecycle
+
+- **Idempotency**: Variables are upserted (updated if they exist, created if they don't), making the operation safe across application restarts.
+- **Lifecycle**: Variables are set on application start-up and remain in the cluster. On application shutdown, variables are cleared from the in-memory list but **not deleted** from the cluster.
+- **Updates**: Changes to variable definitions require an application restart to take effect.
+
+### Disable cluster variables processing
+
+To disable the automatic processing of cluster variables, set:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      enabled: false
+```
+
 ## React to events
 
 The Camunda Spring Boot Starter integrates with Spring events and also publishes its own events.
