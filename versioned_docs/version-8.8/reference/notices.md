@@ -19,6 +19,218 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 48
+
+### Publication date
+
+May 13, 2026
+
+### Products affected
+
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-42198](https://nvd.nist.gov/vuln/detail/CVE-2026-42198), where an attacker with the privileges to impersonate or perform a man-in-the-middle (MITM) attack on the PostgreSQL server can force the JDBC driver to perform SCRAM authentication with a very large iteration count. This can lead to high CPU usage inside the SCRAM PBKDF2 computation before authentication can fail. Web Modeler and Identity are affected by this CVE when run with their default configuration. Zeebe, Operate, and Tasklist are only affected in a self-managed setup when running the application with RDBMS as secondary storage with a PostgreSQL server configured as the endpoint.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Identity ≤ 8.9.2, ≤ 8.8.11, or ≤ 8.7.18
+- Camunda Zeebe ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Tasklist ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Operate ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Web Modeler ≤ 8.9.2, ≤ 8.8.13, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Identity 8.9.3, 8.8.12, 8.7.19
+- Camunda Zeebe 8.9.3, 8.8.24, 8.7.29
+- Camunda Tasklist 8.9.3, 8.8.24, 8.7.29
+- Camunda Operate 8.9.3, 8.8.24, 8.7.29
+- Camunda Web Modeler 8.9.3, 8.8.14, 8.7.21
+
+## Notice 47
+
+### Publication date
+
+May 7, 2026
+
+### Products affected
+
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Optimize
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-40973](https://nvd.nist.gov/vuln/detail/CVE-2026-40973), where a local attacker could take control of the embedded Spring Boot `ApplicationTemp` directory. If `server.servlet.session.persistent` is set to `true`, this could allow session hijacking or arbitrary code execution. Default Camunda 8 deployments are not affected.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Identity ≤ 8.9.1, ≤ 8.8.11, or ≤ 8.7.18
+- Camunda Zeebe ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Tasklist ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Operate ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Optimize ≤ 8.9.1, ≤ 8.8.8, or ≤ 8.7.20
+- Camunda Web Modeler ≤ 8.9.1, ≤ 8.8.13, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Identity 8.9.2, 8.8.12, 8.7.19
+- Camunda Zeebe 8.9.2, 8.8.24, 8.7.29
+- Camunda Tasklist 8.9.2, 8.8.24, 8.7.29
+- Camunda Operate 8.9.2, 8.8.24, 8.7.29
+- Camunda Optimize 8.9.2, 8.8.24, 8.7.21
+- Camunda Web Modeler 8.9.2, 8.8.14, 8.7.21
+
+## Notice 46
+
+### Publication date
+
+May 7, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `axios` used by Camunda Web Modeler was affected by [CVE-2026-42264](https://github.com/advisories/GHSA-q8qp-cvcw-x6jj), a prototype pollution vulnerability in the HTTP adapter that could allow credential injection and request hijacking when `Object.prototype` is polluted by another dependency in the same process.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.13, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.14, 8.7.21
+
+## Notice 45
+
+### Publication date
+
+April 24, 2026
+
+### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+
+### Impact
+
+The application was vulnerable to [CVE-2026-5588](https://nvd.nist.gov/vuln/detail/CVE-2026-5588), where the PKIX CompositeVerifier in the embedded Bouncy Castle cryptography library could accept an empty signature sequence as valid, weakening certificate signature verification and potentially allowing acceptance of improperly signed certificates.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Tasklist 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+- Camunda Zeebe 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+- Camunda Operate 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Tasklist 8.9.1, 8.8.23, 8.7.28
+- Camunda Zeebe 8.9.1, 8.8.23, 8.7.28
+- Camunda Operate 8.9.1, 8.8.23, 8.7.28
+
+## Notice 44
+
+### Publication date
+
+April 24, 2026
+
+### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+
+### Impact
+
+The application was vulnerable to [CVE-2025-14813](https://nvd.nist.gov/vuln/detail/CVE-2025-14813), where the GOSTCTR implementation in the embedded Bouncy Castle cryptography library used an incorrect one-byte counter and could not securely encrypt or decrypt more than 255 blocks, potentially compromising the confidentiality and integrity of data encrypted with this algorithm.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Tasklist 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+- Camunda Zeebe 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+- Camunda Operate 8.9.0, ≤ 8.8.22, or ≤ 8.7.27
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Tasklist 8.9.1, 8.8.23, 8.7.28
+- Camunda Zeebe 8.9.1, 8.8.23, 8.7.28
+- Camunda Operate 8.9.1, 8.8.23, 8.7.28
+
+## Notice 43
+
+### Publication date
+
+Apr 7, 2026
+
+### Products affected
+
+- Management Identity
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Optimize
+- Camunda Web Modeler
+
+### Impact
+
+When applications specify HTTP response headers for servlet applications using Spring Security, there is the possibility that the HTTP headers will not be written. This is related to [CVE-2026-22732](https://nvd.nist.gov/vuln/detail/CVE-2026-22732).
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity 8.7.4 - 8.7.10, 8.7.12 - 8.7.16, 8.8.0 - 8.8.2, or 8.8.5 - 8.8.9
+- Zeebe 8.7.21 - 8.7.25
+- Tasklist 8.7.21 - 8.7.25
+- Operate 8.7.22 - 8.7.25
+- Optimize 8.7.14 - 8.7.18 or 8.8.2 - 8.8.7
+- Web Modeler Self-Managed ≤ 8.6.26, ≤ 8.7.18, or ≤ 8.8.11
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Management Identity 8.7.17, 8.8.10
+- Zeebe 8.7.26
+- Tasklist 8.7.26
+- Operate 8.7.26
+- Optimize 8.7.19, 8.8.8
+- Web Modeler Self-Managed 8.6.27, 8.7.19, 8.8.12
+
+The fix was deployed to Web Modeler SaaS on March 23, 2026, 17:26 CET.
+
 ## Notice 42
 
 ### Publication date

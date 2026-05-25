@@ -49,7 +49,7 @@ For services that require an API key for authentication, you can configure the R
 
 We advise you to keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_API_KEY_SECRET`) so you can reference it later in the connector.
 
 ### Configure API key authentication
@@ -70,7 +70,7 @@ Select the **REST connector** and fill out the following properties under the **
 
 We advise you to keep your **Password** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_BASIC_SECRET`) so you can reference it later in the connector.
 
 ### Configure Basic Authentication
@@ -87,7 +87,7 @@ Select the **REST connector** and fill out the following properties under the **
 
 We advise you to keep your **Bearer token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `REST_BEARER_TOKEN`) so you can reference it later in the connector.
 
 #### Configure the Bearer token
@@ -103,7 +103,7 @@ Select the **REST connector** and fill out the following properties under the **
 
 We advise you to keep your **OAUTH_TOKEN_ENDPOINT** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `OAUTH_TOKEN_ENDPOINT`) so you can reference it later in the connector.
 
 #### Configure the OAuth token
@@ -181,6 +181,10 @@ Depending on the `Content-Type`, the file will be uploaded as a binary or a JSON
 - **Binary**: The file will be uploaded as a binary object. The `Content-Type` header **must** be set to `multipart/form-data`. The body must a map, where the key is the name of the file field and the value is a document reference.
   ![connectors-rest-upload](../../../images/connectors/connectors-rest-upload.png)
 - **JSON**: The file will be uploaded as a JSON object. The `Content-Type` header **must** be set to `application/json` (this is the default). The body must be a map, where the key is the name of the file field and the value is a document reference, similar to the binary upload. The file will be **base64 encoded** and included in the JSON object.
+
+### Allow redirects
+
+- **Follow redirects**: When enabled, the connector automatically follows HTTP 3xx redirect responses, resolving the final destination URL. When disabled (default), the connector returns the original 3xx response including the `Location` header, leaving redirect handling to your process logic.
 
 ### Encoding
 

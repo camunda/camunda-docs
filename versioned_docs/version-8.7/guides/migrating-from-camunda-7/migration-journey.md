@@ -143,7 +143,6 @@ You can run small Camunda 8 installations, one per solution, if you like. They c
 There are multiple ways to set up Camunda 8:
 
 - Use **Camunda's SaaS** offering: You don't need to install or operate the platform yourself. This is the most convenient and generally recommended option. If you face legal challenges around information security, privacy, and compliance, check the [Camunda Trust Center](https://camunda.com/trust-center/). However, be aware of the following limitations:
-
   - You cannot [migrate historical audit data from Camunda 7](./migration-tooling.md).
   - [Multi-tenancy](/self-managed/concepts/multi-tenancy.md) is not currently supported.
 
@@ -334,7 +333,7 @@ While Camunda sees a lot of value in doing both tasks at the same time - as you 
 
 ## <span className="callout">5</span>Migrate data (optional)
 
-With your solution code migrated, you also need to look at your production data. Camunda currently develops the **[Data Migrator](./migration-tooling.md#data-migrator)** to be used for this (**planned to be available with 8.8**). You might need to customize the data migrator, especially if you used complex data formats in Camunda 7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step you might also need to extract big payloads and binaries (such as documents) into an external data store and reference it from the process (using for example upcoming document handling possibilities).
+With your solution code migrated, you also need to look at your production data. Camunda provides the **[Data Migrator](./migration-tooling.md#data-migrator)** to be used for this (**available from version 8.8 onward**). You might need to customize the data migrator, especially if you used complex data formats in Camunda 7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step you might also need to extract big payloads and binaries (such as documents) into an external data store and reference it from the process (using for example upcoming document handling possibilities).
 
 Data to be migrated includes **runtime instances, audit data, and optimize data**. Let's look at it one by one.
 

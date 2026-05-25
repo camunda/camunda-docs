@@ -1,0 +1,357 @@
+---
+id: throw-job-error
+title: "Throw error for job"
+sidebar_label: "Throw error for job"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWtty2zgS/RUU5iF2LUUqjpNxtOupVWRlRrnYLknJbsp2eUCyJcEmAQ4AStao+O9bDYC6ZyZ+2wc9uCzi1o3u0weXxoIaNta0dUM/yJjeBVQWoJjhUvRS2qJmouTsg4y7SklFA5qCThQvsJ626K24FTc37YuL7sV97/L+a7c/6F1dts7CN3d3rq5zdTnoDYbdy8631mDYv7r81dX0oZDKaMJIXGouQGsCKIIc8RBCIqRoGEgmgicsOyZmwgyRSVIqTWYTngEplExAay7GhJEHGYc0oAVTLAcDCqezoILlQFv0QcYfYU4DylHjgpkJDaiCP0quIKUto0rYntZwAuQR5kSOiJlAPbxOJpAz2lpQMy9wZG0UF2Ma0JFUOTPLkn99sCJ/oQGFJ5YXGTY+OXn98ue3b89evnrz+tXp27MdWw7m2kDeGINA+0NqNRhJVc+vqu6c3qDNO5nOUZHtaSRSGBAGq1hRZDyxjoweNEpY7M5Axg+QGDSdQrcbDhprrSc6MgX82DWNc1QiU3COmfEsIzGQnJlkAimZcTMhTNTtsJTAFIQJbwUNtqxXBU7cZ9CajfdIbNcD5a6Fk1koOeUpaMLSlGNLlhE7+6e9UgIqyixjMboCTVUFdMoUxwI749Uo12uW2IeND4OrS+LstjZ7LrRhwnBmwEJmOThhxhZkMmEZ0YksoIbVjnnceLYAtG1io8/Pf2NaS8dtTatah/bNmiPvAmq4sUiso7nvsESrynXThRTameOkefoXjuC6VgzhuYyQKqCnzeZ+yHh3pSRlhuEAQhoyZRlPMbK+A9tCyTiD/B+78N1SjFy7liQFw3hWu4dp4hrGkBIuyE3/fYe8PX39893RxJhCt6JoNpuFapQ0IOVGqlCqcaRGCf5hu+OQDCegENlzBPga1lYBQ3QBCR/xhBhpjeHVJuiq/U5bd5Gtq50TUG2YKbUlB5yKpS2EVmJduBmmbti/oKNS8R2aaZMv/R7hKQjDR3Pkzx2dbZ8RKzMcg8WyNK04Y+Jxg89qC6Yy0WHC8lKkLOQyYgWPpidhs/ZeA4fUUczShqoBt8Tiru7byuoyz5laUvG2nit93rGU9FcCvB1XErgwMAa1bh4uzKuTHZkI19+Gw2vihnA854DOda3AhuzTZjOgORc8L/P6iz25rzfNZrV05t/PVxB4KjImbABsT5oLkksFHuWb0/dTr3E5Jzc5e/ogYz2U7cTwKTOg70jCBAZeDKRgSkOKllri62+Q1FAwAgXYcj+mcGndAZZUfMy3Z7KpejQ9iR5krCPmFMUxqxVGqA/uC2dDx1an+whq6JjIrT8obsynIOw6OmOOckayFClxHIbfXiSkLlAPRHQgogMRHYjoOUT09llExDVaD8tmSoqx9S2QpFQKhMnmIfm8MqwmTK1tnXy/eqNGYpnOD7R1oK0DbR1o67m09XrfQa0tCHpZYXy6k569clF4pN++dHFMZG12OMEdGOjAQAcGei4Dvdq/cdKgpjwB3Cktt0WkFGzKuL3pwojm2gb0hBUFCCJFNidSEC3zJSnhPTHGPeqs7c0qSRSgDUnMksdCgdYl1ktSqPr2zQkH9QIxkxelsbstWaoENBkpmZMY0CzwNGGlNpAGhE0lT7HM+lXDFIWOGM9KBTokPeFAlzANgbvSQ5tsXgF6skMOZVxo8nu/O7j60u9077v//a39ZTDsXvwekk7GQRi3J1SQyDwHgdtCI93tYcmybE4UGDUnZiL1minYyADeI+PM5WhEClBcpiH5JksEFMmAKY9MSxZWtw0z5ZBMmOA6J2jVFvked+B3hLaTApWN/gSIIVre5DcSKRIojI7qhaaxWlOinyZMpBkX48aG7MMe97DCHFaYwwrzvBWmCuhTg6UppA0uGlNQ2ulxFr6xIxsQWOJShY8wp6197TFNlJXg+2EGLgczkZgZLaS2mTNMKLao027hko1VBD5d6tYTJ6RUGW3RhWOoqhVFi4nUpmotMBNaRdMTupWUwmrHZHWg2SzSxAneRSRWYNKztuSVwkSScdlc0slwyVKk3x0Mya/MwIzNbdIGxW+KOWueNfdKwKY/MHr7uudXUitgnZNrEUgNe0W4xs8VYpOjGpJScTMf4BDOhO+AKVDtEn20hK6XbSXhd2wb0cD/eF8D+sN/hqh+zDRP/m4IbGMRiQtRf5Wl7dYQ3siqrqJnM/e5Kl8HQmUjcCStfA/4/YZpX/ew7xLszfClXzpZYn3sc+Idx8WkK8ZcAHiZDqA1aY+5mZRxmMg88tS9/M+1LkHTaifGr3uWBXFzUgq7RIuxTweTWuYZSZy2GOEZT0Bo2KPaJ1dDvrrJkJdh8zkqxpmMo5xxEXkROuq0P3+5vGg3PvU63ctBt/EybIbmyVivYTDnTKzpMcQMp9+g4ZweZLyN18VqU/J/9hLCoxSz4VGRMS7QV9Z2C09YN/guAvcQreX7CMdZd4HnnRu6WMRMwxeVVRUW/1GCmtPWzd0KnZbXUq7xd0pbI5bp7YT5upGO+n5Tc0z2P7HYq7cvZGK+Rsc08KTt1a/uqoBOgKWg1hi940Q3hm4DVXfeeRtRBXWPdoL70++03dhsbiwG11eDIRKIf5eRuyhXbIY7OTZzCktrEstLtmxBMybGpYt8N6Zft3A/MbDE4ZYObIeYnBcwsKbF0GExYDAMLj4iE9lTCm5YckvSC3/c8eHkDg+B3RMR9zyFVO5I8+LfPmbOIrlOKg0fpg1W8Bf/RKQyPRcJGZUisaSz8TTI89yRc0fLyzgmi1tB8GSj8WGDi+zzfaodHVsRhLAZ48u24YaMIzsYIU5G4D6WrNoiL67b3z53L4f379u9T92LF+stPMViIzbP8bjn79UVHplKJSB1DV2vCtWpLC687a/nZmI3BN+xu7WlV/t+w5D3On0k3i1HTqVNr7iyrWcZq1I312M0TwojZ/b7BxnfW33vYWX5+8d10zd+IZdSQMsNlFhZ5Jxsmd1Zva4Pt0b3+nqr4/jn/n+wqsE3Hedb6q91XPrgHmF9fku/tj/1LtrD3tXlfbffv+rf0mBfa//e5/yW9kRR+ucibr3DAzakG/2O/e/jdad1fvq+w0pLmd4a4cZ6Gg7SRwvHoowznthdPk+Iw/+Q6Ucy3Id9H1cOnse3wsPVCZoy9R0fhB0bDssIWMaAq90Q1UYVNp3yccMXAmbbSFpVLjbN3K1Dh5yTH/BKdy2ObI8fcUsdSHfV/wD30e/4
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.9/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Throw error for job"} <MarkerAddedInVersion version="8.6" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/{jobKey}/error"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Reports a business error (i.e. non-technical) that occurs while processing a job.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "jobKey",
+      in: "path",
+      required: true,
+      description: "The key of the job.",
+      schema: {
+        type: "string",
+        format: "string<JobKey>",
+        example: "2251799813653498",
+        description: "System-generated key for a job.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            errorCode: {
+              description:
+                "The error code that will be matched with an error catch event.\n",
+              type: "string",
+            },
+            errorMessage: {
+              description:
+                "An error message that provides additional context.\n",
+              type: "string",
+              nullable: true,
+            },
+            variables: {
+              additionalProperties: true,
+              description:
+                "JSON object that will instantiate the variables at the local scope of the error catch event that catches the thrown error.\n",
+              type: "object",
+              nullable: true,
+            },
+          },
+          required: ["errorCode"],
+          title: "JobErrorRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "An error is thrown for the job." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The job with the given key was not found or is not activated.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The job with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

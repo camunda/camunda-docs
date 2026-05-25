@@ -228,6 +228,12 @@
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
+      "name": "camunda.client.auth.proactive-token-refresh-threshold",
+      "type": "java.time.Duration",
+      "description": "The lead time before actual token expiry at which a background refresh is triggered. The token is still considered valid inside this window; this is a policy knob for how early refresh kicks in so callers don't have to block on a synchronous refresh at the cliff edge. Must be strictly larger than the internal expiry grace period.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
       "name": "camunda.client.auth.read-timeout",
       "type": "java.time.Duration",
       "description": "The data read timeout for requests to the OAuth credentials provider.",
@@ -244,6 +250,36 @@
       "name": "camunda.client.auth.scope",
       "type": "java.lang.String",
       "description": "The scopes of the access token.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-backoff-multiplier",
+      "type": "java.lang.Double",
+      "description": "The multiplier applied to the backoff duration between successive token fetch retry attempts. Must be greater than or equal to 1.0.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-initial-backoff",
+      "type": "java.time.Duration",
+      "description": "The initial backoff duration applied between token fetch retry attempts. Subsequent delays grow geometrically by {@link #tokenFetchBackoffMultiplier}.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of attempts (including the initial one) when fetching a token from the OAuth authorization server. Retries are only attempted on IOException or HTTP status codes configured via {@code tokenFetchRetryableStatusCodes}.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-non-retryable-cooldown",
+      "type": "java.time.Duration",
+      "description": "Duration for which token fetches fail fast after the token endpoint returns a non-retryable response. After the cooldown elapses, the next call retries; if it fails again non-retryably, the latch re-arms with a new cooldown. Set to Duration.ZERO to disable the cooldown entirely.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-retryable-status-codes",
+      "type": "java.util.Set<java.lang.Integer>",
+      "description": "The set of HTTP status codes from the token endpoint that should be retried with backoff. Any non-200 status code outside this set trips a non-retryable failure latch that fails fast for the duration of tokenFetchNonRetryableCooldown.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -421,6 +457,13 @@
       "description": "The tenant ID used for tenant-aware commands when no tenant ID is set.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "<default>"
+    },
+    {
+      "name": "camunda.client.use-client-side-load-balancing",
+      "type": "java.lang.Boolean",
+      "description": "If <code>true<\/code>, enables client-side load balancing by using DNS-based resolution and distributing requests across all resolved addresses. Useful for setups without an external load balancer, such as Docker Compose, Testcontainers, or Kubernetes headless services.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "defaultValue": false
     },
     {
       "name": "camunda.client.worker.defaults.auto-complete",

@@ -23,7 +23,7 @@ The **Kafka Producer connector** is an outbound connector that allows you to con
 To use the **Kafka Producer connector**, you must have a Kafka instance with a configured bootstrap server.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 :::
 
 ## Create a Kafka Producer connector task
@@ -261,7 +261,7 @@ The **Kafka Consumer connector** allows you to consume messages by subscribing t
 To use the **Kafka Consumer connector**, you must have a Kafka instance with a configured bootstrap server.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 :::
 
 ## Create a Kafka Consumer connector event
@@ -282,7 +282,7 @@ In the **Authentication** section, select the **Authentication type**. If you se
 
 :::note
 
-- Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+- Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 - To learn more about Kafka authentication, see [Kafka secure authentication](#what-mechanism-is-used-to-authenticate-against-kafka-1).
 
 :::
@@ -291,6 +291,7 @@ In the **Authentication** section, select the **Authentication type**. If you se
 
 In the **Kafka** section, you can configure the following properties:
 
+- **Consumer Group ID**: Set the consumer group ID for this connector. Always provide an explicit, stable value that identifies the logical consumer group (for example, `my-app-order-processor`). If you leave this field empty, the connector auto-generates an ID from its internal deduplication key. That generated ID can change across connector upgrades, including from 8.8 to 8.9, causing Kafka to treat the connector as a new consumer group and potentially replay already processed messages.
 - **Schema strategy**: Select the schema strategy for your messages.
   - Select **No schema**, **Inline schema** for Avro serialization.
   - Select **Schema registry** If you have a Confluent Schema Registry.
@@ -537,6 +538,10 @@ If any of the field is not populated, you must configure your security method fo
   group.id=kafka-inbound-connector-{{bpmnProcessId}}
   enable.auto.commit=false
   ```
+
+:::caution
+The `group.id` value above is auto-generated when no explicit **Consumer Group ID** is configured in the connector. This generated ID is derived from the connector's internal deduplication key and can change across connector upgrades, including from 8.8 to 8.9. When the group ID changes, Kafka treats the connector as a new consumer group, which means committed offsets are not reused and messages may be replayed. To avoid this, always set an explicit **Consumer Group ID**. You can [look up existing consumer groups](https://docs.confluent.io/kafka/operations-tools/manage-consumer-groups.html#list-groups-and-view-offsets) to find the current group ID in use.
+:::
 
 ### What is the precedence of client properties loading?
 

@@ -48,6 +48,8 @@ mkcert requires [NSS](https://github.com/FiloSottile/mkcert#supported-root-store
 
 In addition to the deployment mode, you must choose a [secondary storage](/self-managed/concepts/secondary-storage/index.md) backend. The `SECONDARY_STORAGE` environment variable controls which backend the deployment scripts use. You must set it explicitly before running any deployment command — there is no default.
 
+For production backend trade-offs between Elasticsearch/OpenSearch and RDBMS, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). This kind guide is for local development and testing only.
+
 | Value           | Operators deployed                    | Components                                                  |
 | --------------- | ------------------------------------- | ----------------------------------------------------------- |
 | `elasticsearch` | ECK, CloudNativePG, Keycloak Operator | Full platform including Optimize                            |
@@ -85,12 +87,12 @@ You can also use [asdf](https://asdf-vm.com/) to install the tools, with the ver
 By the end of this tutorial, you'll have:
 
 - A local Kubernetes cluster running with kind. This includes one control plane and two worker nodes.
-- An Ingress NGINX controller deployed for routing traffic (domain mode only).
+- A Contour Ingress controller deployed for routing traffic (domain mode only).
 - TLS certificates configured with mkcert (domain mode only).
 - Prerequisite services deployed via Kubernetes operators:
-  - Elasticsearch via ECK (Elasticsearch secondary storage only)
-  - PostgreSQL via CloudNativePG
-  - Keycloak via the Keycloak Operator
+  - Elasticsearch via ECK (used as secondary storage in this guide; RDBMS is a supported alternative — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md))
+  - PostgreSQL (CloudNativePG)
+  - Keycloak (Keycloak Operator)
 - Camunda 8 Self-Managed fully deployed and accessible, connected to the operator-managed services.
 
 :::info Other installation profiles
@@ -169,22 +171,22 @@ If you'd prefer a simpler setup without domain configuration, skip to [No-domain
 
 ### Deploy the Ingress controller
 
-Deploy the [Ingress NGINX controller](https://kubernetes.github.io/ingress-nginx/) to handle incoming traffic:
+Deploy the [Contour Ingress controller](https://projectcontour.io/) to handle incoming traffic:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/ingress-nginx-deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/contour-deploy.sh
 ```
 
 This script:
 
-1. Installs Ingress NGINX via Helm.
-2. Configures it to run on the control plane node with `hostNetwork: true`.
-3. Waits until the controller is ready.
+1. Installs Contour via Helm.
+2. Configures Envoy to run on the control plane node with `hostNetwork: true`.
+3. Waits until the Envoy deployment is ready.
 
 Verify the Ingress controller is running:
 
 ```bash
-kubectl get pods -n ingress-nginx
+kubectl get pods -n projectcontour
 ```
 
 ### Configure DNS resolution
@@ -195,13 +197,13 @@ For pods inside the cluster to resolve `camunda.example.com`, configure CoreDNS 
 https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/coredns-config.sh
 ```
 
-This configuration rewrites DNS queries for `camunda.example.com` and `zeebe-camunda.example.com` to the Ingress NGINX controller service (`ingress-nginx-controller.ingress-nginx.svc.cluster.local`), allowing pods to reach Camunda services using the same domain names as external clients.
+This configuration rewrites DNS queries for `camunda.example.com` and `zeebe-camunda.example.com` to the Contour Envoy service (`contour-envoy.projectcontour.svc.cluster.local`), allowing pods to reach Camunda services using the same domain names as external clients.
 
 <details>
 <summary>Review the CoreDNS configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/configs/coredns-configmap.yaml
+https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/configs/coredns-configmap-contour.yaml
 ```
 
 </details>
@@ -255,9 +257,13 @@ The certificate generation script:
 
 Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
-- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) (Elasticsearch secondary storage only)
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) — used as secondary storage in this guide.
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
+
+:::note Secondary storage alternatives
+This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) is a supported alternative for the Orchestration Cluster. To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+:::
 
 Run the operator deployment script, specifying the domain deployment mode:
 
@@ -287,6 +293,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 ```
 
 </details>
+
+:::note Using RDBMS instead of Elasticsearch
+If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
+:::
 
 This uses the following Helm values:
 
@@ -331,7 +341,7 @@ This section covers the simplified setup using port-forwarding without TLS.
 
 Before deploying Camunda, you need to deploy the external services it depends on. These dependencies are deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md):
 
-- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) (Elasticsearch secondary storage only)
+- Elasticsearch via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) — used as secondary storage in this guide
 - PostgreSQL via [CloudNativePG](https://cloudnative-pg.io/)
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
@@ -377,6 +387,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 ```
 
 </details>
+
+:::note Using RDBMS instead of Elasticsearch
+If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
+:::
 
 This uses the following Helm values:
 
@@ -445,7 +459,7 @@ Optimize is only available with Elasticsearch secondary storage. If you deployed
 | ------------------------------ | ---------------------------------------------- | ------------------------------------ |
 | Operate                        | https://camunda.example.com/operate            | All                                  |
 | Tasklist                       | https://camunda.example.com/tasklist           | All                                  |
-| Identity                       | https://camunda.example.com/identity           | All                                  |
+| Admin                          | https://camunda.example.com/admin              | All                                  |
 | Management Identity            | https://camunda.example.com/managementidentity | All                                  |
 | Optimize                       | https://camunda.example.com/optimize           | Elasticsearch secondary storage only |
 | Orchestration Cluster REST API | https://camunda.example.com/                   | All                                  |
@@ -474,7 +488,7 @@ sudo kubefwd services -n "camunda"
 
 Now, you can reach services directly, for example:
 
-- **Identity**: `http://camunda-identity/managementidentity`
+- **Management Identity**: `http://camunda-identity/managementidentity`
 - **Keycloak**: `http://keycloak-service:18080/auth`
 - **Zeebe Gateway gRPC**: `camunda-zeebe-gateway:26500`
 
@@ -487,7 +501,7 @@ You can still use localhost ports if you prefer traditional port-forwarding. Sto
 | Zeebe Gateway (HTTP) | http://localhost:8080/             | All                                  |
 | Operate              | http://localhost:8080/operate      | All                                  |
 | Tasklist             | http://localhost:8080/tasklist     | All                                  |
-| Identity             | http://localhost:8080/identity     | All                                  |
+| Admin                | http://localhost:8080/admin        | All                                  |
 | Management Identity  | http://localhost:8085              | All                                  |
 | Optimize             | http://localhost:8083              | Elasticsearch secondary storage only |
 | Web Modeler          | http://localhost:8070              | All                                  |
@@ -589,7 +603,7 @@ kubectl rollout restart deployment -n camunda
 Check the Ingress controller status:
 
 ```bash
-kubectl get pods -n ingress-nginx
+kubectl get pods -n projectcontour
 kubectl get ingress -n camunda
 ```
 

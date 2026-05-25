@@ -31,6 +31,17 @@ module.exports = {
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for production
   noIndex: true,
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "alternate",
+        type: "text/markdown",
+        href: `${docsSiteUrl}/llms.txt`, // Use absolute URL to bypass link checker
+        title: "LLM-friendly documentation index",
+      },
+    },
+  ],
   plugins: [
     // This custom Osano plugin must precede the gtm-plugin.
     "./static/plugins/osano",
@@ -45,7 +56,7 @@ module.exports = {
     "./static/plugins/bpmn-js",
     [
       // Operate API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-operate-openapi",
         docsPluginId: "default",
@@ -68,13 +79,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.6: {
-                specPath: "api/operate/version-8.6/operate-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/operate-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -82,7 +86,7 @@ module.exports = {
     ],
     [
       // Tasklist REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-tasklist-openapi",
         docsPluginId: "default",
@@ -105,13 +109,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.6: {
-                specPath: "api/tasklist/version-8.6/tasklist-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/tasklist-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -119,7 +116,7 @@ module.exports = {
     ],
     [
       // Administration Self-Managed REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-adminsm-openapi",
         docsPluginId: "default",
@@ -143,14 +140,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.6: {
-                specPath:
-                  "api/administration-sm/version-8.6/administration-sm-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/administration-sm-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -158,7 +147,7 @@ module.exports = {
     ],
     [
       // Orchestration Cluster REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-camunda-openapi",
         docsPluginId: "default",
@@ -171,10 +160,73 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            sdkExamples: [
+              {
+                lang: "TypeScript",
+                highlight: "typescript",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-js/examples/operation-map.json",
+                autoImports: true,
+                defaultImports:
+                  "import { createCamundaClient } from '@camunda8/orchestration-cluster-api';",
+              },
+              {
+                lang: "Python",
+                highlight: "python",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-python/examples/operation-map.json",
+                autoImports: true,
+                defaultImports:
+                  "from camunda_orchestration_sdk import CamundaClient",
+              },
+              {
+                lang: "C#",
+                highlight: "csharp",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-csharp/examples/operation-map.json",
+                autoImports: true,
+                defaultImports: "using Camunda.Orchestration.Sdk;",
+              },
+            ],
             version: "1",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.9: {
+                specPath: "api/camunda/version-8.9/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.9/apis-tools/orchestration-cluster-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+                sdkExamples: [
+                  {
+                    lang: "TypeScript",
+                    highlight: "typescript",
+                    operationMapPath:
+                      ".sdk-repos/version-8.9/orchestration-cluster-api-js/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports:
+                      "import { createCamundaClient } from '@camunda8/orchestration-cluster-api';",
+                  },
+                  {
+                    lang: "Python",
+                    highlight: "python",
+                    operationMapPath:
+                      ".sdk-repos/version-8.9/orchestration-cluster-api-python/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports:
+                      "from camunda_orchestration_sdk import CamundaClient",
+                  },
+                  {
+                    lang: "C#",
+                    highlight: "csharp",
+                    operationMapPath:
+                      ".sdk-repos/version-8.9/orchestration-cluster-api-csharp/examples/operation-map.json",
+                    autoImports: true,
+                    defaultImports: "using Camunda.Orchestration.Sdk;",
+                  },
+                ],
+              },
               8.8: {
                 specPath: "api/camunda/version-8.8/camunda-openapi.yaml",
                 outputDir:
@@ -189,13 +241,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.6: {
-                specPath: "api/camunda/version-8.6/camunda-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -203,7 +248,7 @@ module.exports = {
     ],
     [
       // Zeebe REST API docs generation
-      "docusaurus-plugin-openapi-docs",
+      "@camunda8/docusaurus-plugin-openapi-docs",
       {
         id: "api-zeebe-openapi",
         docsPluginId: "default",
@@ -226,13 +271,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.6: {
-                specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -245,6 +283,71 @@ module.exports = {
         url: docsSiteUrl,
         contextPath: docsSitebaseUrl,
         maxItems: 50,
+      },
+    ],
+    // Docusaurus plugin for LLM training and AI agent consumption.
+    // The plugin generates both a full markdown file and a metadata-only .llms.txt file for each doc,
+    // excluding the content of code blocks and optionally excluding content from imports.
+    // The plugin also generates a root-level llms.md file that lists all docs with links, which can be used as a single source of truth for the documentation content.
+    [
+      "docusaurus-plugin-llms",
+      {
+        generateLLMsTxt: false,
+        generateLLMsFullTxt: true,
+        docsDir: "docs",
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+        processingBatchSize: 50,
+        addMdExtension: true,
+        generateMarkdownFiles: true,
+        preserveDirectoryStructure: true,
+        addLinkTag: false,
+        ignoreFiles: ["apis-tools/*/specifications/*"],
+        title: "Camunda 8 Documentation",
+        description:
+          "Process orchestration platform for automating workflows across people, systems, and devices. Supports BPMN, DMN, connectors, and agentic AI orchestration.",
+        customLLMFiles: [
+          {
+            filename: "llms-guides.txt",
+            title: "Camunda 8 Guides",
+            description:
+              "Getting started guides, tutorials, and walkthroughs for Camunda 8.",
+            includePatterns: ["guides/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-components.txt",
+            title: "Camunda 8 Components",
+            description:
+              "Console, Modeler, Zeebe, Operate, Tasklist, Optimize, Connectors, and agentic orchestration.",
+            includePatterns: ["components/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-apis-tools.txt",
+            title: "Camunda 8 APIs & Tools",
+            description:
+              "REST APIs, SDKs, clients, CLI, and developer tooling.",
+            includePatterns: ["apis-tools/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-self-managed.txt",
+            title: "Camunda 8 Self-Managed",
+            description:
+              "Deployment, configuration, upgrade, and operations for Self-Managed installations.",
+            includePatterns: ["self-managed/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-reference.txt",
+            title: "Camunda 8 Reference",
+            description:
+              "Release notes, announcements, glossary, licenses, dependencies, and supported environments.",
+            includePatterns: ["reference/*"],
+            fullContent: false,
+          },
+        ],
       },
     ],
   ],
@@ -347,6 +450,41 @@ module.exports = {
           docId: "reference/overview",
           label: "Reference",
           position: "left",
+        },
+        {
+          type: "dropdown",
+          label: "Help",
+          position: "right",
+          items: [
+            {
+              label: "Support",
+              href: "https://camunda.com/services/enterprise-support-guide/",
+            },
+            {
+              label: "Developers",
+              href: "https://developers.camunda.com/",
+            },
+            {
+              label: "Academy",
+              href: "https://academy.camunda.com/",
+            },
+            {
+              label: "Community",
+              href: "https://community.camunda.com/",
+            },
+            {
+              label: "Forum",
+              href: "https://forum.camunda.io/",
+            },
+            {
+              label: "Blog",
+              href: "https://camunda.com/blog/",
+            },
+            {
+              label: "Roadmap",
+              href: "https://roadmap.camunda.com/",
+            },
+          ],
         },
         {
           type: "html",
@@ -528,16 +666,19 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+          remarkPlugins: [
+            require("./static/plugins/terminology/remark-glossary-terms"),
+          ],
           lastVersion: currentVersion,
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
             current: {
-              label: "8.9 (unreleased)",
+              label: "8.10 (unreleased)",
             },
-            8.7: {
+            8.8: {
               banner: "none",
             },
-            8.6: {
+            8.7: {
               banner: "none",
             },
           },
@@ -554,8 +695,8 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.6/**",
             "/docs/8.7/**",
+            "/docs/8.8/**",
           ],
         },
       },
@@ -565,7 +706,7 @@ module.exports = {
     mermaid: true,
   },
   themes: [
-    "docusaurus-theme-openapi-docs",
+    "@camunda8/docusaurus-theme-openapi-docs",
     "@saucelabs/theme-github-codeblock",
     "@docusaurus/theme-mermaid",
   ],

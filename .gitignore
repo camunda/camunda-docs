@@ -29,3 +29,5 @@ node_modules
 
 camunda-deployment-references
 camunda-deployment-references/**
+
+.claude/settings.local.json

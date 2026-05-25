@@ -35,7 +35,7 @@ Reads a CSV from a text or a document and converts it into an array of JSON reco
 ```csv
 product,quantity,price
 Wireless Mouse,25,29.99
-Office Chair,8,149.50n
+Office Chair,8,149.50
 USB Cable,100,12.99
 Monitor Stand,15,45.00
 Desk Lamp,32,24.95
@@ -180,7 +180,7 @@ Every record for an array-based `Data` input contains all values in a single arr
 ```json
 [
   ["Wireless Mouse", "25", "29.99"],
-  ["Office Chair", "8", "149.50n"],
+  ["Office Chair", "8", "149.50"],
   ["USB Cable", "100", "12.99"],
   ["Monitor Stand", "15", "45.00"],
   ["Desk Lamp", "32", "24.95"]
@@ -191,7 +191,7 @@ Every record for an array-based `Data` input contains all values in a single arr
 
 ```json
 {
-  "content": "Wireless Mouse,25,29.99\r\nOffice Chair,8,149.50n\r\nUSB Cable,100,12.99\r\nMonitor Stand,15,45.00\r\nDesk Lamp,32,24.95\r\n"
+  "content": "Wireless Mouse,25,29.99\r\nOffice Chair,8,149.50\r\nUSB Cable,100,12.99\r\nMonitor Stand,15,45.00\r\nDesk Lamp,32,24.95\r\n"
 }
 ```
 

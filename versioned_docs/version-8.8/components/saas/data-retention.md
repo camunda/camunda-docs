@@ -10,9 +10,8 @@ In Camunda 8 SaaS, the following data retention strategies are implemented. This
 
 The following time-to-live settings are configured in SaaS for each application. These are the defaults for our production clusters in the Starter and Enterprise plans.
 
-- **Operate**: 30 days
+- **Orchestration Cluster**: 30 days
 - **Optimize**: 180 days
-- **Tasklist**: 30 days
 - **Zeebe**: 7 days
 - **Usage metrics**: 730 days (2 years)
 

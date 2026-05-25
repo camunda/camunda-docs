@@ -8,6 +8,7 @@
         "id": "guides/introduction-to-camunda"
       },
       "items": [
+        "guides/getting-started-hello-world",
         "guides/getting-started-example",
         "guides/getting-started-agentic-orchestration",
         "guides/orchestrate-human-tasks",
@@ -218,8 +219,21 @@
           },
           "items": [
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/camunda-provided-llm",
             "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/monitor-ai-agents",
+            {
+              "type": "category",
+              "label": "Evaluate your AI agents",
+              "link": {
+                "type": "doc",
+                "id": "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview"
+              },
+              "items": [
+                "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+                "components/agentic-orchestration/evaluate-agents/analyze-ai-agents"
+              ]
+            },
+            "components/agentic-orchestration/rag-ai-agents",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"
           ]
@@ -328,6 +342,7 @@
               "items": [
                 "components/camunda-integrations/servicenow/prerequisites",
                 "components/camunda-integrations/servicenow/setup-and-configuration",
+                "components/camunda-integrations/servicenow/camunda-spoke",
                 {
                   "type": "category",
                   "label": "Connectors",
@@ -404,7 +419,6 @@
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration",
-            "components/modeler/web-modeler/context-pad",
             "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
@@ -507,7 +521,6 @@
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
-            "components/modeler/desktop-modeler/variables",
             {
               "Element templates": [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
@@ -528,6 +541,7 @@
             "components/modeler/desktop-modeler/troubleshooting"
           ]
         },
+        "components/modeler/using-web-and-desktop-modeler-together",
         {
           "Camunda Forms": [
             "components/modeler/forms/camunda-forms-reference",
@@ -590,7 +604,6 @@
           ]
         },
         "components/modeler/data-handling",
-        "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/task-testing",
         {
           "Reference": [
@@ -2802,18 +2815,6 @@
           "items": [
             "reference/announcements-release-notes/870/870-announcements",
             "reference/announcements-release-notes/870/870-release-notes"
-          ]
-        },
-        {
-          "type": "category",
-          "label": "8.6",
-          "link": {
-            "type": "doc",
-            "id": "reference/announcements-release-notes/860/860-announcements"
-          },
-          "items": [
-            "reference/announcements-release-notes/860/860-announcements",
-            "reference/announcements-release-notes/860/860-release-notes"
           ]
         },
         "reference/announcements-release-notes/release-policy"

@@ -86,7 +86,7 @@ For the failback procedure, the recreated region must not include any active Cam
 
 :::info
 
-In the following examples, direct API calls are used because authentication methods may vary depending on your embedded Identity configuration.
+In the following examples, direct API calls are used because authentication methods may vary depending on your Admin configuration.
 
 The **Management API** (default port `9600`) is not secured by default.
 
@@ -145,7 +145,7 @@ echo "You have lost $CLUSTER_RECREATED, $CLUSTER_SURVIVING is still alive"
   </TabItem>
 </Tabs>
 
-The `camunda-zeebe-x` pod represents the new architecture that contains the Orchestration Cluster and its components. It includes the former Zeebe Gateway, Operate, Tasklist, the new embedded Identity, and the new Camunda Exporter.
+The `camunda-zeebe-x` pod represents the new architecture that contains the Orchestration Cluster and its components. It includes the former Zeebe Gateway, Operate, Tasklist, the new embedded Admin, and the new Camunda Exporter.
 
 <div style={{textAlign: 'center'}}>
   <img src={OC} alt="Orchestration Cluster" style={{border: 'none', width: '60%', transform: 'scale(1.3)'}} />
@@ -173,7 +173,7 @@ desired={<img src={Five} alt="Desired state diagram" style={{border: 'none', tra
 
 #### Procedure
 
-Start with creating a port-forward to the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
+Start with creating a port-forward to the `Zeebe Gateway` in the surviving region to the local host so you can interact with the Zeebe Gateway.
 
 The following alternatives to port-forwarding are possible:
 
@@ -830,7 +830,7 @@ Half of the amount of your set `clusterSize` is used to spawn Zeebe brokers.
 For example, in the case of `clusterSize: 8`, four Zeebe brokers are provisioned in the newly created region.
 
 :::danger
-It is expected that the Zeebe broker pods will not reach the "Ready" state since they are not yet part of a Zeebe cluster and, therefore, not considered healthy by the readiness probe.
+It is expected that the Zeebe Broker pods will not reach the "Ready" state since they are not yet part of a Zeebe cluster and, therefore, not considered healthy by the readiness probe.
 :::
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the new Zeebe brokers are recognized but yet a full member of the Zeebe cluster.

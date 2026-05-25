@@ -31,12 +31,12 @@ The usage metrics endpoint retrieves metrics for a specific date range, includin
 
 ### API details
 
-| Parameter     | Required | Description                  | Format / Default                         |
-| ------------- | -------- | ---------------------------- | ---------------------------------------- |
-| `startTime`   | Yes      | Start of date range          | ISO 8601: `2025-09-16T12:30:45.123+0000` |
-| `endTime`     | Yes      | End of date range            | ISO 8601: `2025-09-16T12:30:45.123+0000` |
-| `tenantId`    | No       | Filter by tenant             | String                                   |
-| `withTenants` | No       | Include per-tenant breakdown | `false` (default)                        |
+| Parameter     | Required | Description                  | Format / Default                          |
+| ------------- | -------- | ---------------------------- | ----------------------------------------- |
+| `startTime`   | Yes      | Start of date range          | ISO 8601: `2025-09-16T12:30:45.123-00:00` |
+| `endTime`     | Yes      | End of date range            | ISO 8601: `2025-09-16T12:30:45.123-00:00` |
+| `tenantId`    | No       | Filter by tenant             | String                                    |
+| `withTenants` | No       | Include per-tenant breakdown | `false` (default)                         |
 
 **Endpoint:**
 

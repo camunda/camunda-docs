@@ -40,7 +40,7 @@ You can use this to define which user the task can be assigned to. You can speci
 :::info
 Usernames and group IDs in the Orchestration Cluster are case-sensitive. When you set `assignee`, `candidateUsers`, or `candidateGroups`, always use the exact value from your identity provider or Identity user record, including case. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
 
-You can also use assignment resources to configure [user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md) when using Tasklist V1, so that only the assignee, candidate users, and members of candidate groups can see and work on a task. In Tasklist V2, candidate users and candidate groups are interpreted through authorization-based access control: they affect task visibility and assignment only when the user has matching task or process authorizations.
+You can also use assignment resources to configure [user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md) when using Tasklist V1, so that only the assignee, candidate users, and members of candidate groups can see and work on a task. In Tasklist V2, candidate users and candidate groups are not evaluated by Tasklist for task visibility or assignment. Tasklist V2 relies on authorization-based access control at the process-definition level only.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
@@ -305,7 +305,7 @@ A user task with user task listeners configured:
 ### References
 
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Form linking in Modeler](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md)
+- [Form linking in Modeler](/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking.md)
 - [Job handling](/components/concepts/job-workers.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
 - [User task listeners](/components/concepts/user-task-listeners.md)

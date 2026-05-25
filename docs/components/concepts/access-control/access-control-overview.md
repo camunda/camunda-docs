@@ -29,12 +29,16 @@ These identities serve different purposes: one controls access to process execut
 </tr>
 <tr style={{ backgroundColor: 'var(--ifm-table-background)'}}>
     <td width="30%">Management Identity</td>
-    <td><p>Used for managing the components Web Modeler, Console, and Optimize.</p><p>Management Identity is typically required for platform administrators and developers, and is separate from the identities used for process orchestration.</p></td>
+    <td><p>Used for managing the components Camunda Hub and Optimize.</p><p>Management Identity is typically required for platform administrators and developers, and is separate from the identities used for process orchestration.</p></td>
 </tr>
 </table>
 
 :::tip
 Understanding which identity is required for a given action helps you apply the correct access control policies.
+:::
+
+:::note
+Identity object identifiers and names are limited to **256 characters**. This limit applies independently of the secondary storage backend used by the Orchestration Cluster.
 :::
 
 ## Identity provider (IdP) integration
@@ -64,7 +68,7 @@ For example, a user's authorizations allow them to access Operate, view running 
 | Identity type               | Authorization model              | Description                                                                                                                                                                      | Management interface                   |
 | :-------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
 | Orchestration Cluster Admin | Fine-grained permissions         | Controls access to applications, APIs, and runtime resources through specific permissions for each resource type and action (for example, `PROCESS_DEFINITION` and `USER_TASK`). | Camunda Admin UI or API                |
-| Management Identity         | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups to manage Console, Web Modeler, and Optimize.                                                                         | Keycloak admin console or external IdP |
+| Management Identity         | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups to manage Camunda Hub and Optimize.                                                                                   | Keycloak admin console or external IdP |
 
 ### How authentication and authorization work together
 
@@ -115,7 +119,7 @@ For environments using OIDC:
 1. Generate a JSON Web Token (JWT).
 2. Include the token in each API request as: `Authorization: Bearer <TOKEN>`.
 
-- [Generate a token (SaaS)](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
+- [Generate a token (SaaS)](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client)
 - [Generate a token (Self-Managed)](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md)
 
 Example request using a token:

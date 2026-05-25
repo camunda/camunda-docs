@@ -5,8 +5,10 @@ paths:
         - Job
       operationId: activateJobs
       summary: Activate jobs
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -32,6 +34,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /jobs/search:
     post:
       tags:
@@ -40,6 +43,8 @@ paths:
       summary: Search jobs
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -65,14 +70,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /jobs/{jobKey}/failure:
     post:
       tags:
         - Job
       operationId: failJob
       summary: Fail job
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -116,14 +124,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /jobs/{jobKey}/error:
     post:
       tags:
         - Job
       operationId: throwJobError
       summary: Throw error for job
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -167,14 +178,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /jobs/{jobKey}/completion:
     post:
       tags:
         - Job
       operationId: completeJob
       summary: Complete job
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -217,6 +231,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /jobs/{jobKey}:
     patch:
       tags:
@@ -225,6 +240,8 @@ paths:
       summary: Update job
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -267,6 +284,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
 components:
   schemas:
     JobActivationRequest:
@@ -319,8 +337,11 @@ components:
           default: PROVIDED
       required:
         - type
-        - timeout
         - maxJobsToActivate
+        - timeout
+      x-properties-added-in-version:
+        - propertyName: tenantFilter
+          addedInVersion: "8.9"
     JobActivationResult:
       description: The list of activated jobs
       type: object
@@ -436,6 +457,17 @@ components:
           nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
+      x-properties-added-in-version:
+        - propertyName: kind
+          addedInVersion: "8.8"
+        - propertyName: listenerEventType
+          addedInVersion: "8.8"
+        - propertyName: userTask
+          addedInVersion: "8.8"
+        - propertyName: tags
+          addedInVersion: "8.8"
+        - propertyName: rootProcessInstanceKey
+          addedInVersion: "8.9"
     UserTaskProperties:
       required:
         - candidateGroups
@@ -636,6 +668,11 @@ components:
           description: When the job was last updated. Field is present for jobs created after 8.9.
           allOf:
             - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+      x-properties-added-in-version:
+        - propertyName: creationTime
+          addedInVersion: "8.9"
+        - propertyName: lastUpdateTime
+          addedInVersion: "8.9"
     JobSearchQueryResult:
       description: Job search response.
       required:
@@ -774,6 +811,13 @@ components:
           nullable: true
           type: string
           format: date-time
+      x-properties-added-in-version:
+        - propertyName: rootProcessInstanceKey
+          addedInVersion: "8.9"
+        - propertyName: creationTime
+          addedInVersion: "8.9"
+        - propertyName: lastUpdateTime
+          addedInVersion: "8.9"
     JobFailRequest:
       type: object
       properties:
@@ -825,6 +869,9 @@ components:
           nullable: true
         result:
           $ref: "#/components/schemas/JobResult"
+      x-properties-added-in-version:
+        - propertyName: result
+          addedInVersion: "8.8"
     JobResult:
       description: |
         The result of the completed job as determined by the worker.
@@ -955,6 +1002,9 @@ components:
           $ref: "keys.yaml#/components/schemas/OperationReference"
       required:
         - changeset
+      x-properties-added-in-version:
+        - propertyName: operationReference
+          addedInVersion: "8.8"
     JobChangeset:
       description: JSON object with changed job attribute values. The job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead.
       type: object
@@ -1003,6 +1053,8 @@ components:
       type: string
       enum:
         - ASSIGNING
+        - BEFORE_ALL
+        - CANCEL
         - CANCELING
         - COMPLETING
         - CREATING

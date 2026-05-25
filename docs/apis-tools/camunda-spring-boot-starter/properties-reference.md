@@ -288,6 +288,22 @@ Type: <code>string</code>
   <code>&quot;&lt;default&gt;&quot;</code>
 </td>
 </tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.use-client-side-load-balancing" env="CAMUNDA_CLIENT_USECLIENTSIDELOADBALANCING"/><a href="#camundaclientuseclientsideloadbalancing" id="camundaclientuseclientsideloadbalancing" class="hash-link"/>
+</td>
+
+<td>
+
+If `true`, enables client-side load balancing by using DNS-based resolution and distributing requests across all resolved addresses. Useful for setups without an external load balancer, such as Docker Compose, Testcontainers, or Kubernetes headless services.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>false</code>
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -482,6 +498,22 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.proactive-token-refresh-threshold" env="CAMUNDA_CLIENT_AUTH_PROACTIVETOKENREFRESHTHRESHOLD"/><a href="#camundaclientauthproactivetokenrefreshthreshold" id="camundaclientauthproactivetokenrefreshthreshold" class="hash-link"/>
+</td>
+
+<td>
+
+The lead time before actual token expiry at which a background refresh is triggered. The token is still considered valid inside this window; this is a policy knob for how early refresh kicks in so callers don't have to block on a synchronous refresh at the cliff edge. Must be strictly larger than the internal expiry grace period.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
   <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.read-timeout" env="CAMUNDA_CLIENT_AUTH_READTIMEOUT"/><a href="#camundaclientauthreadtimeout" id="camundaclientauthreadtimeout" class="hash-link"/>
 </td>
 
@@ -522,6 +554,86 @@ Type: <code>string</code>
 The scopes of the access token.
 
 Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-backoff-multiplier" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHBACKOFFMULTIPLIER"/><a href="#camundaclientauthtokenfetchbackoffmultiplier" id="camundaclientauthtokenfetchbackoffmultiplier" class="hash-link"/>
+</td>
+
+<td>
+
+The multiplier applied to the backoff duration between successive token fetch retry attempts. Must be greater than or equal to 1.0.
+
+Type: <code>double</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-initial-backoff" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHINITIALBACKOFF"/><a href="#camundaclientauthtokenfetchinitialbackoff" id="camundaclientauthtokenfetchinitialbackoff" class="hash-link"/>
+</td>
+
+<td>
+
+The initial backoff duration applied between token fetch retry attempts. Subsequent delays grow geometrically by `token-fetch-backoff-multiplier`.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-max-retries" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHMAXRETRIES"/><a href="#camundaclientauthtokenfetchmaxretries" id="camundaclientauthtokenfetchmaxretries" class="hash-link"/>
+</td>
+
+<td>
+
+The maximum number of attempts (including the initial one) when fetching a token from the OAuth authorization server. Retries are only attempted on IOException or HTTP status codes configured via `token-fetch-retryable-status-codes`.
+
+Type: <code>integer</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-non-retryable-cooldown" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHNONRETRYABLECOOLDOWN"/><a href="#camundaclientauthtokenfetchnonretryablecooldown" id="camundaclientauthtokenfetchnonretryablecooldown" class="hash-link"/>
+</td>
+
+<td>
+
+Duration for which token fetches fail fast after the token endpoint returns a non-retryable response. After the cooldown elapses, the next call retries; if it fails again non-retryably, the latch re-arms with a new cooldown. Set to Duration.ZERO to disable the cooldown entirely.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-retryable-status-codes" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHRETRYABLESTATUSCODES"/><a href="#camundaclientauthtokenfetchretryablestatuscodes" id="camundaclientauthtokenfetchretryablestatuscodes" class="hash-link"/>
+</td>
+
+<td>
+
+The set of HTTP status codes from the token endpoint that should be retried with backoff. Any non-200 status code outside this set trips a non-retryable failure latch that fails fast for the duration of tokenFetchNonRetryableCooldown.
+
+Type: <code>array[integer]</code>
 
 </td>
 <td>

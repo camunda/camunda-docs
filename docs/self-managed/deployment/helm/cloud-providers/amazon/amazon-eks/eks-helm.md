@@ -22,6 +22,16 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
+<!-- TODO(camunda/team-infrastructure-experience#1063): Reword this Aurora PostgreSQL routing guidance when the broader InfraEx guidance is finalized. -->
+
+:::note Using Amazon Aurora PostgreSQL as secondary storage
+Use this page for the EKS cluster, networking, Ingress, and AWS-managed services.
+
+Then continue with [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+
+If you use Amazon OpenSearch Service for secondary storage, continue with the default path in this guide.
+:::
+
 ## Requirements
 
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
@@ -30,7 +40,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.man7.org/linux/man-pages/man1/envsubst.1.html) to generate manifests.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
-- A namespace to host the Camunda Platform.
+- A namespace to host Camunda.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
@@ -118,7 +128,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 If you do not have a domain name, external access to Camunda 8 web endpoints from outside the AWS VPC will not be possible. In this case, you may skip the DNS setup and proceed directly to [deploying Camunda 8 via Helm charts](#deploy-camunda-8-via-helm-charts).
 
-Alternatively, you can use `kubectl port-forward` to access the Camunda platform without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+Alternatively, you can use `kubectl port-forward` to access Camunda without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 Throughout the rest of this installation guide, we will refer to configurations as **"With domain"** or **"Without domain"** depending on whether the application is exposed via a domain.
 :::
@@ -317,14 +327,25 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and connectors](/self-managed/deployment/helm/install/quick-install.md#configuring-web-modeler-console-and-connectors).
+Web Modeler, Console, and Management Identity are not enabled by default in this deployment.
 
-#### Use internal Elasticsearch instead of the managed OpenSearch
+To enable these enterprise components in an OIDC-enabled full cluster, first deploy the required infrastructure (PostgreSQL, Elasticsearch/OpenSearch, and an IdP, such as Keycloak) using the official operators, then apply the Helm values examples shown in [deploy required dependencies with operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
-If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment. This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
+#### Secondary storage options
 
-:::tip Alternative: Operator-based Elasticsearch deployment
-Instead of using Bitnami subcharts for internal Elasticsearch, consider deploying [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
+This guide includes a managed Amazon OpenSearch example path for secondary storage. Choose the backend that fits your requirements:
+
+- **Managed OpenSearch**: Use the managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
+- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster. Follow this EKS guide for the cluster, networking, Ingress, and optional AWS services, then continue with [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) for the Helm workflow and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for the values reference.
+
+RDBMS as secondary storage disables Optimize unless you also deploy Elasticsearch or OpenSearch alongside it.
+
+#### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
+
+For advanced deployments, you can disable managed OpenSearch and enable the Elasticsearch deployment from the Camunda Helm chart:
+
+:::caution Deprecated path
+The Helm-chart Elasticsearch deployment uses deprecated Bitnami subcharts. Prefer managed Elasticsearch/OpenSearch services for long-term deployments, or deploy [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) if you need operator-based Elasticsearch with automated scaling, upgrades, and built-in security.
 :::
 
 <details>
@@ -390,7 +411,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ```
 
 :::note Web Modeler SMTP secret
-If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)):
+If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/hub/configuration/modeler-configuration.md#smtp--email)):
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-webmodeler-secret.sh
@@ -408,7 +429,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) Camunda using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
@@ -426,7 +447,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 #### Web Modeler
 
-As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
+As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../components/hub/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Identity
@@ -454,7 +475,7 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
   Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
 
   ```bash reference
-  https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml#L28-L42
+  https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml#L28-L48
   ```
 
   - Replace `OPENSEARCH_MASTER_USERNAME` and `OPENSEARCH_MASTER_PASSWORD` with your OpenSearch domain admin credentials.

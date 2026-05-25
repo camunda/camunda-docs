@@ -136,7 +136,7 @@ From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the ex
 
 | Design                                        | Automate                                                                                                | Improve        |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------- |
-| Desktop Modeler 5.31+ <br/> Web Modeler 8.7.x | (Zeebe, Operate, Tasklist) 8.7.x, Connectors 8.7.x, <br/>Identity 8.7.x, Console 8.7.x, RPA worker 1.0+ | Optimize 8.7.x |
+| Desktop Modeler 5.34+ <br/> Web Modeler 8.7.x | (Zeebe, Operate, Tasklist) 8.7.x, Connectors 8.7.x, <br/>Identity 8.7.x, Console 8.7.x, RPA worker 1.0+ | Optimize 8.7.x |
 | Desktop Modeler 5.28+ <br/> Web Modeler 8.6.x | (Zeebe, Operate, Tasklist) 8.6.x, Connectors 8.6.x, <br/>Identity 8.6.x, Console 8.6.x                  | Optimize 8.6.x |
 | Desktop Modeler 5.22+ <br/> Web Modeler 8.5.x | Zeebe 8.5.x, Operate 8.5.x, Tasklist 8.5.x, <br/>Identity 8.5.x, Connectors 8.5.x, Console 8.5.x        | Optimize 8.5.x |
 | Desktop Modeler 5.19+ <br/> Web Modeler 8.4.x | Zeebe 8.4.x, Operate 8.4.x, Tasklist 8.4.x, <br/>Identity 8.4.x, Connectors 8.4.x                       | Optimize 8.4.x |

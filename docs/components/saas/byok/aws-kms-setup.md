@@ -24,7 +24,7 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
 
 ## Step 1: Create a Camunda 8 SaaS Orchestration cluster
 
-1. Sign in to the [Camunda Console](https://console.camunda.io/).
+1. Sign in to the [Camunda Hub](https://console.camunda.io/).
 2. Navigate to the **Cluster** section and click **Create new cluster**.
 3. Select an AWS Region for your cluster.
 4. Choose **Single region** or **Dual region backup**.
@@ -110,7 +110,7 @@ For dual-region setups, you can also run the single-region script twice—once i
    - Switch to policy view and replace the existing policy with the [provided key policy](https://github.com/camunda/camunda-docs/tree/main/docs/components/saas/byok/downloads/aws-kms-key-policy.json).
    - Replace `<YOUR_AWS_ACCOUNT_ID>` and `<TENANT_ROLE_ARN>` with your values.
 7. **Finish and copy the ARN**
-   - Click **Finish** and copy the key ARN to use in the Camunda Console.
+   - Click **Finish** and copy the key ARN to use in Camunda Hub.
 
 #### Dual-region backup
 
@@ -188,7 +188,7 @@ Replace `<tenant-role-arn>` with the **AWS Role ARN** from Step 1, and `<custome
 
 ## Step 3: Associate the AWS KMS key with your Camunda cluster
 
-1. Return to the **Camunda Console** and locate the **AWS KMS key ARN** input field.  
+1. Return to **Camunda Hub**, and locate the **AWS KMS key ARN** input field.  
    ![KMS AWS key ARN input field](./img/aws-key-arn.png)
    - For dual region, two fields will be available—enter the correct key for each Region.
 2. Paste your AWS KMS key ARN(s) from Step 2.
@@ -204,7 +204,7 @@ Once a key is applied, it cannot be edited or replaced. To change keys, you must
 
 ## Step 4: Verify encryption and logging
 
-- In the **Camunda Console**, check the cluster details **Encryption at rest** tab to confirm the **AWS KMS key ARN** is applied correctly.  
+- In **Camunda Hub**, check the cluster details **Encryption at rest** tab to confirm the **AWS KMS key ARN** is applied correctly.  
   ![cluster details page](./img/cluster-details-page.png)
 - In AWS, verify key usage:
   1. Navigate to **Customer managed keys**.

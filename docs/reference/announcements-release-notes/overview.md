@@ -1,10 +1,12 @@
 ---
 id: overview
 title: "Release announcements and release notes"
-description: "Important announcements and release notes for upcoming and past Camunda 8 releases that customers should be aware of."
+description: "Announcements and release notes for currently maintained Camunda documentation versions."
 ---
 
-Announcements and release notes for supported versions of the Camunda documentation.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
 
 <table className="table-callout" width="100%">
 <tr>
@@ -15,11 +17,18 @@ Announcements and release notes for supported versions of the Camunda documentat
 <td>**Scheduled End of maintenance**</td>
 </tr>
 <tr>
+<td>8.10</td>
+<td>13 October 2026</td>
+<td>[8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md)</td>
+<td>[8.10 release notes](/reference/announcements-release-notes/8100/8100-release-notes.md)</td>
+<td>11 April 2028</td>
+</tr>
+<tr>
 <td>8.9</td>
 <td>14 April 2026</td>
 <td>[8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md)</td>
 <td>[8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md)</td>
-<td>13 October 2028</td>
+<td>13 October 2027</td>
 </tr>
 <tr>
 <td>8.8</td>
@@ -35,13 +44,6 @@ Announcements and release notes for supported versions of the Camunda documentat
 <td>[8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md)</td>
 <td>13 October 2026</td>
 </tr>
-<tr>
-<td>8.6</td>
-<td>8 October 2024</td>
-<td>[8.6 release announcements](/reference/announcements-release-notes/860/860-announcements.md)</td>
-<td>[8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md)</td>
-<td>14 April 2026</td>
-</tr>
 </table>
 
 ## Release announcements
@@ -53,7 +55,7 @@ Release announcements include:
 
 :::info
 
-- See [upgrade guides](/self-managed/upgrade/components/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
+- See [upgrade to Camunda 8.9](/self-managed/upgrade/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
 - See [supported environments](/reference/supported-environments.md) for environments and technologies supported by Camunda 8.
 
 :::
@@ -62,7 +64,7 @@ Release announcements include:
 
 Release notes include details of new product features and enhancements.
 
-Release notes are separated by minor release pages and include alphas released during the development cycle.
+Release notes are provided for each minor release and include alphas released during the development cycle.
 
 ## Changelogs
 

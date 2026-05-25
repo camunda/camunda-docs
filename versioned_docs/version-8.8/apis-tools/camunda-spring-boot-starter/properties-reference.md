@@ -263,7 +263,7 @@ Type: <code>duration</code>
 
 <td>
 
-The REST API address of the Camunda instance that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both`camunda.client.mode`.
+The REST API address of the Camunda instance that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both `camunda.client.mode`.
 
 Type: <code>url</code>
 
@@ -759,7 +759,7 @@ Properties for automatic deployment at startup.
 
 <td>
 
-Indicates if deployment uses the `@Deployment` annotation.
+Indicates if the `@Deployment` annotation is processed.
 
 Type: <code>boolean</code>
 

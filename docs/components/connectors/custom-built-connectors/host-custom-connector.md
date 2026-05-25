@@ -21,7 +21,7 @@ we will refer this file as `connector.jar`.
 This approach is equivalent to the [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md), except you don't need to override
 existing connectors and instead add a new one. You need to have a running Camunda cluster, and a pair
 of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes.
-Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
+Learn more about [how to obtain required credentials](/components/hub/organization/manage-clusters/manage-api-clients.md).
 
 Run the following command:
 
@@ -33,7 +33,7 @@ docker run --rm --name=CustomConnectorInSaaS \
     -e CAMUNDA_CLIENT_CLOUD_CLIENT-ID='<YOUR_CLIENT_ID>' \
     -e CAMUNDA_CLIENT_CLOUD_CLIENT-SECRET='<YOUR_CLIENT_SECRET>' \
     -e CAMUNDA_CLIENT_CLOUD_REGION='<YOUR_CLUSTER_REGION>' \
-    -e CAMUNDA_OPERATE_CLIENT_URL='https://<region>.operate.camunda.io/<cluster-id>' \
+    -e CAMUNDA_OPERATE_CLIENT_URL='https://<region>.api.camunda.io/<cluster-id>' \
         camunda/connectors-bundle:<desired-version>
 ```
 

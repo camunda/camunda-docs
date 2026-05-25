@@ -82,7 +82,8 @@ function loadAPIConfigs() {
   const apiConfigs = config.plugins
     .filter(
       (plugin) =>
-        Array.isArray(plugin) && plugin[0] === "docusaurus-plugin-openapi-docs"
+        Array.isArray(plugin) &&
+        plugin[0] === "@camunda8/docusaurus-plugin-openapi-docs"
     )
     .reduce((acc, plugin) => {
       const [_, options] = plugin;
