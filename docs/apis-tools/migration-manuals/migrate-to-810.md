@@ -167,11 +167,11 @@ This filter works correctly for both new data and legacy data (which has `NULL` 
 The element instance search endpoint (`POST /v2/element-instances/search`) gained two filtering capabilities:
 
 - The `elementId` and `elementName` filter fields now accept [advanced search filter objects](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) in addition to plain string equality. Supported operators: `$eq`, `$neq`, `$exists`, `$in`, `$notIn`, `$like` (wildcard pattern with `*` and `?`).
-- The filter body now accepts a top-level `$or` property that takes an array of alternative filter groups combined with OR logic. Top-level filter fields and `$or` are combined with AND logic.
+- The request body's `filter` object now accepts a top-level `$or` property that takes an array of alternative filter groups combined with OR logic. Top-level filter fields and `$or` are combined with AND logic.
 
 #### Why
 
-These additions let you express the queries the UI needs (for example, "match any element whose name or ID contains a substring") in a single request, avoiding multiple round trips and client-side merging.
+These additions let you express the queries the user interface (UI) needs (for example, "match any element whose name or ID contains a substring") in a single request, avoiding multiple round trips and client-side merging.
 
 #### Impact
 
