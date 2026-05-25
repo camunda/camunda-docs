@@ -8,6 +8,11 @@ mdx:
 
 # Camunda 8 Orchestration Cluster TypeScript SDK
 
+[![npm](https://img.shields.io/npm/v/@camunda8/orchestration-cluster-api)](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api)
+[![npm downloads](https://img.shields.io/npm/dw/@camunda8/orchestration-cluster-api)](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/camunda/orchestration-cluster-api-js/blob/main/LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/camunda/orchestration-cluster-api-js)](https://github.com/camunda/orchestration-cluster-api-js/releases)
+
 <!-- WARNING: The content and specific structure of this file drives Docusaurus generation in camunda-docs. Also, code examples are injected during build. Please refer to MAINTAINER.md before editing. -->
 
 Type‑safe, promise‑based client for the Camunda 8 Orchestration Cluster REST API.
@@ -152,9 +157,50 @@ await camunda.createDeployment({
 });
 ```
 
-`TenantId.assumeExists()` validates the string against the tenant ID pattern and brands it at zero runtime cost. See [Branded Keys](#branded-keys) for more on this pattern.
+`TenantId.assumeExists()` validates the string against the tenant ID pattern and returns a branded value. The branded value is just a string at runtime, but `assumeExists()` performs validation and can throw if the input is malformed. See [Branded Keys](#branded-keys) for more on this pattern.
 
 > **Tip**: If your tenant ID comes from a validated source (environment variable, config file), call `TenantId.assumeExists()` once at startup and pass the branded value throughout your application.
+
+## Migrating from 8.9
+
+SDK 10.x (for Camunda 8.10) promotes several identifier and name fields from plain `string` to **branded types** via `CamundaKey<T>`. The wire format and runtime API are unchanged — branded values are still plain strings at runtime and are assignable anywhere a `string` is expected (template literals, logging, JSON serialization). Callers need to brand values using `.assumeExists()` (which performs validation) to satisfy the new types.
+
+### New branded types
+
+| Brand                 | Used for                   |
+| --------------------- | -------------------------- |
+| `RoleId`              | Role identifiers           |
+| `GroupId`             | Group identifiers          |
+| `ClientId`            | OAuth client identifiers   |
+| `MappingRuleId`       | Mapping-rule identifiers   |
+| `ClusterVariableName` | Cluster variable names     |
+| `AgentInstanceKey`    | Agent-instance system keys |
+
+### Migration
+
+<!-- snippet-source: examples/readme.ts | regions: V9ToV10Migration -->
+
+```ts
+// v9 — plain strings were accepted
+// await camunda.assignRoleToGroup({
+//   roleId: 'developer',
+//   groupId: 'engineering',
+// });
+
+// v10 — use the branded type helpers at the boundary
+await camunda.assignRoleToGroup({
+  roleId: RoleId.assumeExists("developer"),
+  groupId: GroupId.assumeExists("engineering"),
+});
+```
+
+Each branded type has an `.assumeExists()` method that validates the string and returns the branded value. Validation runs at call time and can throw if the input is malformed, so call it once at the boundary (startup, config parsing, API response) and pass the branded value through your application. See [Branded Keys](#branded-keys) for more on this pattern.
+
+### What does NOT change
+
+- The wire format is unchanged — all values are still strings on the wire.
+- No method signatures changed name or arity.
+- Branded values are assignable anywhere a `string` is expected (template literals, logging, JSON serialization), so existing string-handling code continues to work.
 
 ## Quick Start (Zero‑Config – Recommended)
 
@@ -701,6 +747,7 @@ Example patterns:
 return job.complete({ variables: { processed: true } });
 
 // GOOD: No-arg completion example, sentinel stored for ultimate return
+// biome-ignore lint/correctness/noUnreachable: intentional — showing multiple completion patterns
 const ack = await job.complete();
 // ...
 return ack;

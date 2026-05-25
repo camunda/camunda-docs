@@ -16,7 +16,7 @@ type RoleGroupResult = object;
 ### groupId
 
 ```ts
-groupId: string;
+groupId: GroupId;
 ```
 
 The id of the group.

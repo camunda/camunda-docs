@@ -1,4 +1,32 @@
 {
+  "get_agent_instance": [
+    {
+      "file": "agent_instance.py",
+      "region": "GetAgentInstance",
+      "label": "Get an agent instance"
+    }
+  ],
+  "search_agent_instances": [
+    {
+      "file": "agent_instance.py",
+      "region": "SearchAgentInstances",
+      "label": "Search agent instances"
+    }
+  ],
+  "create_agent_instance": [
+    {
+      "file": "agent_instance.py",
+      "region": "CreateAgentInstance",
+      "label": "Create an agent instance"
+    }
+  ],
+  "update_agent_instance": [
+    {
+      "file": "agent_instance.py",
+      "region": "UpdateAgentInstance",
+      "label": "Update an agent instance"
+    }
+  ],
   "get_topology": [
     {
       "file": "admin_operations.py",
@@ -874,6 +902,13 @@
       "label": "Get start process form"
     }
   ],
+  "get_form_by_key": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetFormByKey",
+      "label": "Get a form by key"
+    }
+  ],
   "get_variable": [
     {
       "file": "extended_operations.py",
@@ -1215,6 +1250,20 @@
       "file": "admin_operations.py",
       "region": "GetResourceContent",
       "label": "Get resource content"
+    }
+  ],
+  "get_resource_content_binary": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetResourceContentBinary",
+      "label": "Get resource content as binary"
+    }
+  ],
+  "search_resources": [
+    {
+      "file": "admin_operations.py",
+      "region": "SearchResources",
+      "label": "Search resources"
     }
   ],
   "get_usage_metrics": [

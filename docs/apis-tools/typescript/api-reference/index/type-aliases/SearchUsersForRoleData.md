@@ -16,18 +16,8 @@ type SearchUsersForRoleData = object;
 ### body?
 
 ```ts
-optional body?: SearchQueryRequest & object;
+optional body?: RoleUserSearchQueryRequest;
 ```
-
-#### Type Declaration
-
-##### sort?
-
-```ts
-optional sort?: object[];
-```
-
-Sort field criteria.
 
 ---
 
@@ -40,7 +30,7 @@ path: object;
 #### roleId
 
 ```ts
-roleId: string;
+roleId: RoleId;
 ```
 
 The role ID.

@@ -30,7 +30,7 @@ path: object;
 #### name
 
 ```ts
-name: string;
+name: ClusterVariableName;
 ```
 
 The name of the cluster variable

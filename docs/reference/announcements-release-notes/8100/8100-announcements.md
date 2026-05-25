@@ -130,6 +130,21 @@ The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifica
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `JobIntent.COMPLETED` follow-up event no longer carries variables by default
+
+Starting with 8.10, the `JobIntent.COMPLETED` follow-up event is emitted without variables by default. This prevents `ExceededBatchRecordSizeException` when a job completes with very large variables. Without this setting, the `JobIntent.COMPLETE` command could be rejected and the job could time out.
+
+**Action:** If your exporter or integration reads completion variables from the `JobIntent.COMPLETED` event, read them instead from the `JobIntent.COMPLETE` command record or the follow-up `ProcessEvent.TRIGGERING` event, both of which always carry the variables. To restore the pre-8.10 behavior where `JobIntent.COMPLETED` events carry variables, set `camunda.processing.engine.job.include-variables-in-job-completed-event` to `true`.
+
+</div>
+</div>
+
 ## Connectors
 
 :::note
