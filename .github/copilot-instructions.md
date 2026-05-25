@@ -1,6 +1,6 @@
 # Copilot instructions for camunda-docs
 
-These instructions apply to all Copilot interactions in this repository, including code review and Copilot Chat.
+These instructions apply to all AI agents (Claude Code, Copilot, OpenAI Codex, and similar tools) interactions in this repository.
 
 ## Before editing
 
