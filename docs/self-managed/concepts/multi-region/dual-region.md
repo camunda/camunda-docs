@@ -20,13 +20,16 @@ In Tier 2, a full Camunda Orchestration Cluster runs continuously in both a prim
 | **Failover mode**                   | Manual, operator-initiated                               |
 | **Standing second region required** | Yes — full Orchestration Cluster running in both regions |
 
+Tier 2 formalizes Camunda's production-proven dual-region configuration — the dual-region architecture that enterprise customers already operate — with published RTO/RPO targets, a certified reference architecture, and a documented failover runbook.
+
+In Tier 2, a full Camunda Orchestration Cluster runs continuously in both a primary and a secondary region. Zeebe replicates its log stream across both regions using the Raft protocol, and secondary storage (Elasticsearch) is populated independently in each region via the Camunda Exporter. Under normal operation, user traffic is routed exclusively to the primary region. On primary-region failure, an operator executes the failover runbook to restore service from the secondary region.
+
 | Property                            | Value                                                    |
 | ----------------------------------- | -------------------------------------------------------- |
-| **RTO**                             | ~15 minutes                                              |
-| **RPO**                             | 0                                                        |
+| **RTO**                             | ~15 minutes (see [RTO summary](#rto-summary))            |
+| **RPO**                             | 0 for process state (see [RPO scope](#rpo-scope))        |
 | **Failover mode**                   | Manual, operator-initiated                               |
 | **Standing second region required** | Yes — full Orchestration Cluster running in both regions |
-| **Primary compliance fit**          | DORA, SR 11-7 (with documented runbook)                  |
 
 :::caution
 
@@ -45,12 +48,12 @@ Tier 2 combines **active-active data replication** with **active-active user tra
 
 ### Version-specific behavior
 
-- **Camunda 8.8** — Traffic routing is **active-passive**. The v2 REST API and Tasklist v2 already eliminate the v1-era region-specific data loss for batch operations and task assignments by routing changes through the Camunda Exporter. If your workload uses v2 APIs exclusively, you can already operate active-active.
-- **Camunda 8.9+** — User-facing **active-active** becomes the default for dual-region deployments when v2-API is not used. The v1-API limitation is the last remaining reason for active-passive routing, and it is being removed.
+- **Camunda 8.8** — Traffic routing is **active-passive**. The v2 REST API and Tasklist V2 already eliminate the v1-era region-specific data loss for batch operations and task assignments by routing changes through the Camunda Exporter. If your workload uses v2 APIs exclusively, you can already operate active-active.
+- **Camunda 8.9+** — User-facing **active-active** becomes the default for dual-region deployments when v12-API is not used. The v1-API limitation is the last remaining reason for active-passive routing, and it is being removed.
 
 ### User traffic management
 
-User traffic can be routed to either or both regions via DNS, load balancer, or network routing policies. If a region fails, traffic must be redirected as part of the [failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover).
+Route user traffic exclusively to the both primary or secondary region via DNS configuration, load balancer settings, or network routing policies. If the primary region fails, traffic must be redirected manually to the secondary region as part of the [failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover).
 
 :::warning Operation requirement
 Traffic redirection must be performed as part of the complete failover procedure. Redirecting traffic without following the operational procedure can lead to system inconsistencies and data issues.
@@ -333,7 +336,7 @@ The headline **~15 minute RTO** is the end-to-end planning target including DNS 
 The 5-minute baseline for reinstallation comes from automated test runs. Actual times depend on data volume, chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types), available resources, and operator familiarity with the runbook.
 
 :::info
-The **Recovery Time Objective (RTO)** estimates are based on our internal tests and should be considered approximate. Actual times may vary depending on your environment, network conditions, operator familiarity, and DNS TTL configuration.
+RTO estimates are based on internal tests and should be considered approximate. Actual times may vary depending on your environment, network conditions, operator familiarity, and DNS TTL configuration.
 :::
 
 ## Further resources
