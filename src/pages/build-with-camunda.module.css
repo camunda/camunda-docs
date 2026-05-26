@@ -216,26 +216,82 @@
   max-width: 620px;
 }
 
-/* ─── 3-card hero row ─── */
-.heroCardRow {
+/* ─── Hero layout: Run locally umbrella + SaaS ─── */
+.heroLayout {
   display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
+  grid-template-columns: 2.4fr 1fr;
   gap: 2.5rem;
   align-items: stretch;
 }
 
 @media (max-width: 996px) {
-  .heroCardRow {
+  .heroLayout {
     grid-template-columns: 1fr;
   }
-  .heroCardRow > :nth-child(1) {
-    order: 2;
+}
+
+.localGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.heroColTitle {
+  display: inline-flex;
+  align-self: center;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  background: transparent;
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  margin: 0 auto 3rem;
+  white-space: nowrap;
+}
+
+.heroColSub {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 auto 1.25rem;
+  line-height: 1.5;
+  text-align: center;
+  max-width: 480px;
+}
+
+.localGroupCards {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .localGroupCards {
+    grid-template-columns: 1fr;
   }
-  .heroCardRow > :nth-child(2) {
-    order: 1;
-  }
-  .heroCardRow > :nth-child(3) {
-    order: 3;
+}
+
+.saasColumn {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  padding-left: 2.5rem;
+}
+
+.saasColumn > .heroCard {
+  flex: 1;
+}
+
+@media (max-width: 996px) {
+  .saasColumn {
+    border-left: none;
+    padding-left: 0;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
   }
 }
 

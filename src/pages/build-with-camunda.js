@@ -615,116 +615,129 @@ function BuildWithCamunda() {
               </p>
             </div>
 
-            {/* ─── 3-card hero row ─── */}
-            <div className={styles.heroCardRow}>
-              {/* SaaS (left) */}
-              <div className={styles.heroCard}>
-                <span className={styles.heroCardIcon}>
-                  <CloudIcon />
-                </span>
-                <h2 className={styles.heroCardTitle}>Free SaaS trial</h2>
-                <p className={styles.heroCardMeta}>Fully managed cloud</p>
-                <p className={styles.heroCardDesc}>
-                  Get your own fully managed Camunda cluster. Nothing to
-                  install, sign up and start modeling today.
-                </p>
-                <ul className={styles.heroCardChecks}>
-                  <li>
-                    <CheckIcon color="#22a06b" /> Zero setup
-                  </li>
-                  <li>
-                    <CheckIcon color="#22a06b" /> Web Modeler included
-                  </li>
-                  <li>
-                    <CheckIcon color="#22a06b" /> AI agent skills built in
-                  </li>
-                </ul>
+            {/* ─── Hero layout: Run locally group + SaaS ─── */}
+            <div className={styles.heroLayout}>
+              {/* Run locally umbrella (no border) */}
+              <div className={styles.localGroup}>
+                <div className={styles.localGroupCards}>
+                  {/* CLI - priority */}
+                  <Link
+                    className={clsx(styles.heroCard, styles.heroCardPriority)}
+                    to="#cli-install"
+                  >
+                    <span className={styles.recommendedBadge}>
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        style={{ marginRight: 4 }}
+                      >
+                        <path
+                          d="M12 2.5l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8-4.8-1.7 4.8-1.7L12 2.5z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M19 13l.9 2.6L22.5 16.5l-2.6.9L19 20l-.9-2.6-2.6-.9 2.6-.9L19 13z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M5.5 15l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6.6-1.7z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      Recommended for AI builders
+                    </span>
+                    <span className={styles.heroCardIcon}>
+                      <TerminalIcon />
+                    </span>
+                    <h2 className={styles.heroCardTitle}>
+                      Run locally with the CLI
+                    </h2>
+                    <p className={styles.heroCardMeta}>
+                      Camunda 8.9+ · Requires Node.js 18+ & OpenJDK 21-25
+                    </p>
+                    <p className={styles.heroCardDesc}>
+                      Run locally and scale seamlessly to enterprise clusters
+                      using the same runtime and stack. Deploy anywhere with one
+                      command.
+                    </p>
+                    <ul className={styles.heroCardChecks}>
+                      <li>
+                        <CheckIcon color="#22a06b" /> macOS, Linux, Windows
+                      </li>
+                      <li>
+                        <CheckIcon color="#22a06b" /> AI agent skills built in
+                      </li>
+                      <li>
+                        <CheckIcon color="#22a06b" /> Data stays on your machine
+                      </li>
+                    </ul>
+                    <span className={styles.heroCardCta}>
+                      Install now <ArrowDown />
+                    </span>
+                  </Link>
+
+                  {/* Downloads */}
+                  <Link className={styles.heroCard} to="#downloads">
+                    <span className={styles.heroCardIcon}>
+                      <DownloadIcon />
+                    </span>
+                    <h2 className={styles.heroCardTitle}>Camunda downloads</h2>
+                    <p className={styles.heroCardMeta}>
+                      Desktop Modeler · c8run
+                    </p>
+                    <p className={styles.heroCardDesc}>
+                      Download Desktop Modeler, Camunda 8 Run, and the full
+                      getting started bundle for offline install.
+                    </p>
+                    <ul className={styles.heroCardChecks}>
+                      <li>
+                        <CheckIcon color="#22a06b" /> Desktop Modeler installer
+                      </li>
+                      <li>
+                        <CheckIcon color="#22a06b" /> Camunda 8 Run archive
+                      </li>
+                      <li>
+                        <CheckIcon color="#22a06b" /> No npm required
+                      </li>
+                    </ul>
+                    <span className={styles.heroCardCtaAlt}>
+                      View downloads <ArrowDown />
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* SaaS (right) */}
+              <div className={styles.saasColumn}>
                 <Link
-                  className={styles.heroCardCtaAlt}
+                  className={clsx(styles.heroCard, styles.heroCardSaas)}
                   to="https://accounts.cloud.camunda.io/signup?utm_source=camunda_docs&utm_medium=cta&utm_campaign=cli_landing_page"
                 >
-                  Create free account <ArrowRight />
-                </Link>
-              </div>
-
-              {/* CLI - priority (center) */}
-              <div className={clsx(styles.heroCard, styles.heroCardPriority)}>
-                <span className={styles.recommendedBadge}>
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    style={{ marginRight: 4 }}
-                  >
-                    <path
-                      d="M12 2.5l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8-4.8-1.7 4.8-1.7L12 2.5z"
-                      fill="currentColor"
-                    />
-                    <path
-                      d="M19 13l.9 2.6L22.5 16.5l-2.6.9L19 20l-.9-2.6-2.6-.9 2.6-.9L19 13z"
-                      fill="currentColor"
-                    />
-                    <path
-                      d="M5.5 15l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6.6-1.7z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  Recommended for AI builders
-                </span>
-                <span className={styles.heroCardIcon}>
-                  <TerminalIcon />
-                </span>
-                <h2 className={styles.heroCardTitle}>
-                  Run locally with the CLI
-                </h2>
-                <p className={styles.heroCardMeta}>
-                  Camunda 8.9+ · Requires Node.js 18+ & OpenJDK 21-25
-                </p>
-                <p className={styles.heroCardDesc}>
-                  Run locally and scale seamlessly to enterprise clusters using
-                  the same runtime and stack. Deploy anywhere with one command.
-                </p>
-                <ul className={styles.heroCardChecks}>
-                  <li>
-                    <CheckIcon color="#22a06b" /> macOS, Linux, Windows
-                  </li>
-                  <li>
-                    <CheckIcon color="#22a06b" /> AI agent skills built in
-                  </li>
-                  <li>
-                    <CheckIcon color="#22a06b" /> Data stays on your machine
-                  </li>
-                </ul>
-                <Link className={styles.heroCardCta} to="#cli-install">
-                  Install now <ArrowDown />
-                </Link>
-              </div>
-
-              {/* Downloads (right) */}
-              <div className={styles.heroCard}>
-                <span className={styles.heroCardIcon}>
-                  <DownloadIcon />
-                </span>
-                <h2 className={styles.heroCardTitle}>Camunda downloads</h2>
-                <p className={styles.heroCardMeta}>Desktop Modeler · c8run</p>
-                <p className={styles.heroCardDesc}>
-                  Download Desktop Modeler, Camunda 8 Run, and the full getting
-                  started bundle for offline install.
-                </p>
-                <ul className={styles.heroCardChecks}>
-                  <li>
-                    <CheckIcon color="#22a06b" /> Desktop Modeler installer
-                  </li>
-                  <li>
-                    <CheckIcon color="#22a06b" /> Camunda 8 Run archive
-                  </li>
-                  <li>
-                    <CheckIcon color="#22a06b" /> No npm required
-                  </li>
-                </ul>
-                <Link className={styles.heroCardCtaAlt} to="#downloads">
-                  View downloads <ArrowDown />
+                  <span className={styles.heroCardIcon}>
+                    <CloudIcon />
+                  </span>
+                  <h2 className={styles.heroCardTitle}>Free SaaS trial</h2>
+                  <p className={styles.heroCardMeta}>Fully managed cloud</p>
+                  <p className={styles.heroCardDesc}>
+                    Get your own fully managed Camunda cluster. Nothing to
+                    install, sign up and start modeling today.
+                  </p>
+                  <ul className={styles.heroCardChecks}>
+                    <li>
+                      <CheckIcon color="#22a06b" /> Zero setup
+                    </li>
+                    <li>
+                      <CheckIcon color="#22a06b" /> Web Modeler included
+                    </li>
+                    <li>
+                      <CheckIcon color="#22a06b" /> AI agent skills built in
+                    </li>
+                  </ul>
+                  <span className={styles.heroCardCtaAlt}>
+                    Create free account <ArrowRight />
+                  </span>
                 </Link>
               </div>
             </div>
