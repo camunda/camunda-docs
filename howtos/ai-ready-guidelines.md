@@ -17,8 +17,8 @@ Aim for one self-contained sentence, ideally under 25 words / ~150 characters. A
 
 A section must make sense in isolation. RAG systems fetch sections, not whole pages, and agents follow links one at a time.
 
-- Don't write "as mentioned above", "see the previous section", "now that you've configured X".
-- Repeat the prerequisite or context inline. Short, slightly redundant prose beats implicit references.
+- Avoid context-dependent phrasing like "as mentioned above", "see the previous section", "now that you've configured X". Repeat the context inline instead.
+  For example, instead of "Now that you've configured authentication…", write "After you configure authentication with a client ID and client secret, start the connector runtime."
 - If you need to refer to another page, link to it with a descriptive label, not "see here".
 
 ### 3. Use descriptive, specific headings
@@ -32,7 +32,7 @@ Reuse the same heading wording when the same concept appears in multiple pages s
 
 ### 4. Keep heading hierarchy consistent
 
-- Use H1 once, for the page title (Docusaurus generates it from frontmatter `title`).
+- Do not add an H1 heading. Docusaurus generates the page title as the only H1 heading from the frontmatter `title`.
 - Do not skip levels.
 - Within a page, sibling headings at the same depth should describe sibling concepts.
 
