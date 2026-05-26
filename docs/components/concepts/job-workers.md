@@ -260,21 +260,39 @@ If it's not present in the gateway as a client stream, restart your worker. If i
 
 Camunda supports job prioritization for pull-based job activation.
 
+You can define job priority:
+
+- On the process as a default.
+- On supported job-creating tasks as an override, including service tasks, send tasks, and script or business rule tasks implemented as job workers.
+
 Job priority affects the order in which jobs are activated for workers. It does not change retries, failures, or completion semantics.
 
 Important behavior:
 
-- Higher-priority jobs are activated before lower-priority jobs within a partition
-- Ordering is best effort across the cluster, not a global guarantee across all partitions
-- If no priority is defined, the default priority is `0`
-- Task-level priority overrides process-level priority
-- Jobs with the same priority are activated by ascending job key
-- Low-priority jobs can starve under sustained high-priority load and may never be activated while workers remain fully occupied by higher-priority jobs
-- Camunda does not provide fairness, aging, or starvation mitigation in the engine
+- Higher-priority jobs are activated before lower-priority jobs within a partition.
+- Ordering is best effort across the cluster, not a global guarantee across all partitions.
+- If no priority is defined, the default priority is `0`.
+- Task-level priority overrides process-level priority.
+- Jobs with the same priority are activated by ascending job key.
+- Low-priority jobs can starve under sustained high-priority load and may never be activated while workers remain fully occupied by higher-priority jobs.
+- Camunda does not provide fairness, aging, or starvation mitigation in the engine.
 
 If starvation becomes a problem, increase worker capacity or revise your priority assignments.
 
 Priority values can be static integers or FEEL expressions. FEEL expressions are evaluated when the job is created, and the resulting integer is stored on the job.
+
+Priority uses signed 32-bit integer semantics. Do not assume a fixed `0-99` engine limit.
+
+### Validation and runtime failure behavior
+
+Job priority values can be static integers or FEEL expressions.
+
+Invalid FEEL expressions are handled differently depending on when they fail:
+
+- If the expression is invalid at deployment time, BPMN deployment fails and the process is not deployed.
+- If the expression fails at runtime, for example because a referenced variable is missing, Camunda raises an incident and the job is not created.
+
+Current recovery is manual. You can provide the missing variable and then resolve the incident.
 
 ### Job streaming limitation
 

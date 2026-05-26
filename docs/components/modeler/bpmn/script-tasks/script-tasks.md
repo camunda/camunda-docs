@@ -84,6 +84,13 @@ blueprint for your own job worker.
 
 :::
 
+## Job priority
+
+This task type supports `zeebe:jobPriorityDefinition`.
+
+You can define job priority on the process as a default and override it on this task.
+For priority behavior and limitations, see [Job prioritization](../../../concepts/job-workers.md#job-prioritization).
+
 ### XML representation
 
 A script task with a custom header:

@@ -40,41 +40,30 @@ For more information about this topic visit the documentation about [Input/outpu
 
 ## Job priority
 
-Service tasks support the `zeebe:jobPriorityDefinition` extension element.
+This task type supports `zeebe:jobPriorityDefinition` when implemented as a job worker.
 
-You can define job priority:
-
-- On the process as a default
-- On the service task as an override
-
-The task-level priority takes precedence over the process-level priority.
-
-The `priority` attribute accepts:
-
-- A static integer value, for example `90`
-- A FEEL expression that evaluates to an integer, for example `=jobPriority`
-
-If no priority is defined, the default priority is `0`.
-
-Priority uses signed integer semantics. Do not assume a fixed `0-99` engine limit.
-
-For activation behavior and limitations, see [job prioritization](../../../concepts/job-workers.md#job-prioritization).
+You can define job priority on the process as a default and override it on this task.
+For priority behavior and limitations, see [Job prioritization](../../../concepts/job-workers.md#job-prioritization).
 
 ## Additional resources
 
 ### XML representation
 
-A service task with a custom header:
+A service task with a custom header and priority definition:
 
 ```xml
-<bpmn:serviceTask id="collect-money" name="Collect Money">
+<bpmn:process id="order-process" isExecutable="true">
   <bpmn:extensionElements>
-    <zeebe:taskDefinition type="payment-service" retries="5" />
-    <zeebe:taskHeaders>
-      <zeebe:header key="method" value="VISA" />
-    </zeebe:taskHeaders>
+    <zeebe:jobPriorityDefinition priority="50" />
   </bpmn:extensionElements>
-</bpmn:serviceTask>
+
+  <bpmn:serviceTask id="collect-payment" name="Collect payment">
+    <bpmn:extensionElements>
+      <zeebe:taskDefinition type="payment-service" retries="5" />
+      <zeebe:jobPriorityDefinition priority="90" />
+    </bpmn:extensionElements>
+  </bpmn:serviceTask>
+</bpmn:process>
 ```
 
 ## Next steps
