@@ -282,7 +282,7 @@ If the primary region is lost:
 #### Recovery steps for primary region loss
 
 1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the process automation engine (zeebe).
-2. **Traffic rerouting:** Redirect user traffic to the secondary region (now primary).
+2. **Traffic rerouting:** With v2 APIs (default in 8.9+), remove the failed region from serving traffic (for example, via DNS or load balancer health checks). With v1 APIs, redirect user traffic to the secondary region (now primary).
 3. **Data and task management**:
    - Reassign uncompleted tasks lost from the previous primary region.
    - Recreate batch operations in Operate.
