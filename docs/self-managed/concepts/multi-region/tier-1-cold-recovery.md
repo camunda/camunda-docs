@@ -25,11 +25,11 @@ Tier 1 RTO and RPO are **not engine-guaranteed**. Recovery time depends on data 
 
 ## Architecture overview
 
-In Tier 1, a single active region runs the full Camunda Orchestration Cluster. Automated backup jobs export Zeebe partition snapshots and secondary storage backups (Elasticsearch or RDBMS) to an S3-compatible object storage bucket replicated to a separate AWS region. There is no warm standby — no second cluster runs during normal operations.
+In Tier 1, a single active region runs the full Camunda Orchestration Cluster. Automated backup jobs export Zeebe partition snapshots and secondary storage backups (Elasticsearch or RDBMS) to an S3-compatible object storage bucket replicated to a separate region. There is no warm standby — no second cluster runs during normal operations.
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│ Primary region (e.g. us-east-1)                          │
+│ Primary region                                           │
 │                                                          │
 │  ┌────────────────────────────────────────────────┐      │
 │  │ Orchestration Cluster                           │      │
@@ -40,8 +40,8 @@ In Tier 1, a single active region runs the full Camunda Orchestration Cluster. A
 └────────────────────────┼─────────────────────────────────┘
                          ▼
          ┌────────────────────────────────┐
-         │ Cross-region S3 bucket         │
-         │ (e.g. us-west-2)               │
+         │ Cross-region object storage    │
+         │ (S3-compatible, replicated)    │
          │   Zeebe partition snapshots    │
          │   ES snapshots / RDBMS dumps   │
          └────────────────────────────────┘
@@ -100,20 +100,10 @@ The total elapsed time across these steps is the realized RTO.
 
 For step-by-step restore instructions, see the [Backup and restore guides](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
-## DR testing
-
-A Tier 1 recovery plan that has never been exercised should be treated as unverified. Run a full DR drill at least quarterly in a non-production environment that mirrors the production setup. The drill should validate that:
-
-- Backup data is accessible from the secondary region
-- The restore procedure completes successfully within the target RTO
-- The restored cluster passes health checks and processes work as expected
-
-Regular drills also ensure the team is familiar with the restore procedure before a real incident requires it.
-
 ## Related documentation
 
 - [Multi-region resilience tiers overview](./resilience-tiers.md)
-- [Tier 2 — Dual-Region Active/Passive](./tier-2-dual-region.md)
+- [Tier 2 — Dual-Region](./dual-region.md)
 - [Backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
 - [Zeebe backup management API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
 - [Elasticsearch backup](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md)
