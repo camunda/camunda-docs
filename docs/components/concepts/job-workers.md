@@ -283,6 +283,12 @@ Priority values can be static integers or FEEL expressions. FEEL expressions are
 
 Priority uses signed 32-bit integer semantics. Do not assume a fixed `0-99` engine limit.
 
+:::note Compatibility for pre-8.10 jobs
+Jobs created before 8.10 may not have a stored priority value in secondary storage.
+
+For compatibility, Camunda treats these jobs as if they had the default priority value of `0`.
+:::
+
 ### Validation and runtime failure behavior
 
 Job priority values can be static integers or FEEL expressions.
