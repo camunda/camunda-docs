@@ -47,14 +47,14 @@ Every Camunda component also supports a `dnsConfig` value that lets you supply c
 
 The following components support `dnsConfig`:
 
-| Component | Value key |
-|---|---|
-| Orchestration cluster | `orchestration.dnsConfig` |
-| Identity | `identity.dnsConfig` |
-| Connectors | `connectors.dnsConfig` |
-| Optimize | `optimize.dnsConfig` |
-| Console | `console.dnsConfig` |
-| Web Modeler REST API | `webModeler.restapi.dnsConfig` |
+| Component              | Value key                         |
+| ---------------------- | --------------------------------- |
+| Orchestration cluster  | `orchestration.dnsConfig`         |
+| Identity               | `identity.dnsConfig`              |
+| Connectors             | `connectors.dnsConfig`            |
+| Optimize               | `optimize.dnsConfig`              |
+| Console                | `console.dnsConfig`               |
+| Web Modeler REST API   | `webModeler.restapi.dnsConfig`    |
 | Web Modeler WebSockets | `webModeler.websockets.dnsConfig` |
 
 Use `dnsConfig` when you need to override or extend the default DNS resolver — for example, to add a private nameserver or a custom search domain:
