@@ -43,7 +43,13 @@ See [agentic orchestration](/components/agentic-orchestration/agentic-orchestrat
 
 Explore these selected AI features to design workflows and processes more easily and faster.
 
-<AoGrid columns={2} ao={[
+<AoGrid columns={3} ao={[
+{
+link: "https://github.com/camunda/skills",
+title: "Camunda Skills",
+image: IconAgenticImg,
+description: "Extend your AI coding assistant with Camunda-specific skills to design, deploy, and manage processes.",
+},
 {
 link: "../../../components/early-access/alpha/bpmn-copilot/",
 title: "Camunda Copilot",
