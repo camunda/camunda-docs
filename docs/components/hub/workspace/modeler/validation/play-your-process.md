@@ -72,6 +72,8 @@ Elements before the start boundary are not activated and do not appear in the in
 
 The same element type restrictions apply as for [**Add token** modifications](#modifications-limitations). Clicking a non-activatable element in picking mode has no effect.
 
+**Publish message** and **Broadcast signal** elements don't support segment boundaries — selecting either as a start disables the end boundary and the process runs to natural completion.
+
 #### End boundary
 
 The end boundary defaults to the first end event. To change it:
