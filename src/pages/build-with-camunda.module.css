@@ -216,10 +216,10 @@
   max-width: 620px;
 }
 
-/* ─── Hero layout: Run locally umbrella + SaaS ─── */
+/* ─── Hero: 3-card flat row ─── */
 .heroLayout {
   display: grid;
-  grid-template-columns: 2.4fr 1fr;
+  grid-template-columns: 1fr 1.4fr 1fr;
   gap: 2.5rem;
   align-items: stretch;
 }
@@ -227,6 +227,15 @@
 @media (max-width: 996px) {
   .heroLayout {
     grid-template-columns: 1fr;
+  }
+  .heroLayout > :nth-child(1) {
+    order: 3;
+  }
+  .heroLayout > :nth-child(2) {
+    order: 1;
+  }
+  .heroLayout > :nth-child(3) {
+    order: 2;
   }
 }
 
@@ -278,21 +287,33 @@
 .saasColumn {
   display: flex;
   flex-direction: column;
-  border-left: 1px solid rgba(255, 255, 255, 0.18);
-  padding-left: 2.5rem;
 }
 
 .saasColumn > .heroCard {
   flex: 1;
 }
 
-@media (max-width: 996px) {
-  .saasColumn {
-    border-left: none;
-    padding-left: 0;
-    padding-top: 2.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-  }
+.cardTag {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  margin-bottom: 0.85rem;
+}
+
+.cardTagLocal {
+  background: rgba(252, 93, 13, 0.12);
+  color: #fc5d0d;
+}
+
+.cardTagCloud {
+  background: rgba(120, 169, 255, 0.15);
+  color: #2f5cb8;
 }
 
 .heroCard {
