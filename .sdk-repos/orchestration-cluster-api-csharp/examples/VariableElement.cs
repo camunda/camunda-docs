@@ -23,7 +23,7 @@ public static class VariableElementExamples
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.SearchVariablesAsync(new SearchVariablesRequest());
+        var result = await client.SearchVariablesAsync(new VariableSearchQuery());
 
         foreach (var variable in result.Items)
         {

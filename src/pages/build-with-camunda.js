@@ -769,7 +769,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
                 </p>
                 <div className={styles.downloadButtons}>
                   <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-mac-arm64.dmg"
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-mac-arm64.dmg"
                     className={styles.downloadButton}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -777,7 +777,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
                     macOS (Apple Silicon)
                   </a>
                   <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-mac-x64.dmg"
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-mac-x64.dmg"
                     className={styles.downloadButton}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -785,7 +785,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
                     macOS (Intel)
                   </a>
                   <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-win-x64.zip"
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-win-x64.zip"
                     className={styles.downloadButton}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -793,7 +793,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
                     Windows
                   </a>
                   <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-linux-x64.tar.gz"
+                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-linux-x64.tar.gz"
                     className={styles.downloadButton}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -802,7 +802,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
                   </a>
                 </div>
                 <p className={styles.downloadMeta}>
-                  Version 5.45 ·{" "}
+                  Version 5.47 ·{" "}
                   <Link
                     to={useBaseUrl(
                       "docs/components/modeler/desktop-modeler/install-the-modeler/"

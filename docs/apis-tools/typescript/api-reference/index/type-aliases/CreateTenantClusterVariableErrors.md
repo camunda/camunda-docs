@@ -43,6 +43,16 @@ Forbidden. The request is not allowed.
 
 ---
 
+### 404
+
+```ts
+404: ProblemDetail;
+```
+
+The tenant with the given ID was not found.
+
+---
+
 ### 500
 
 ```ts

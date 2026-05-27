@@ -16,7 +16,7 @@ type CreateClusterVariableRequest = object;
 ### name
 
 ```ts
-name: string;
+name: ClusterVariableName;
 ```
 
 The name of the cluster variable. Must be unique within its scope (global or tenant-specific).

@@ -408,11 +408,11 @@ components:
           description: Total output tokens produced across all model calls.
         modelCalls:
           type: integer
-          format: int64
+          format: int32
           description: Total number of LLM calls made.
         toolCalls:
           type: integer
-          format: int64
+          format: int32
           description: Total number of tool calls made.
     AgentInstanceLimits:
       description: The configured limits for an agent instance, set once at creation.
@@ -424,11 +424,11 @@ components:
       properties:
         maxModelCalls:
           type: integer
-          format: int64
+          format: int32
           description: Maximum LLM calls allowed. -1 if no limit is configured.
         maxToolCalls:
           type: integer
-          format: int64
+          format: int32
           description: Maximum tool calls allowed. -1 if no limit is configured.
         maxTokens:
           type: integer
@@ -497,12 +497,12 @@ components:
           description: Increment to apply to the total output token counter.
         modelCalls:
           type: integer
-          format: int64
+          format: int32
           minimum: 0
           description: Increment to apply to the total model call counter.
         toolCalls:
           type: integer
-          format: int64
+          format: int32
           minimum: 0
           description: Increment to apply to the total tool call counter.
     AgentInstanceUpdateRequest:

@@ -172,7 +172,13 @@ You can run scenarios on the process definition page by clicking either the **Ru
 
 ### Limitations {#scenarios-limitations}
 
+Play displays a warning badge on diagram elements with known limitations. Use the **Show problems**/**Hide problems** toggle in the diagram controls to show or hide these badges.
+
+![Play warning badges on diagram elements](../img/play-warning-badges.png)
+
 - Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
+- Ad-hoc sub-processes are not supported. Scenarios containing ad-hoc sub-processes cannot be executed successfully.
+- Timer events can't be manually triggered. When a scenario reaches a timer event, execution pauses until the timer fires automatically. To skip a timer, use [process instance modification](#modify-a-process-instance) to move the token to the next element.
 - Scenario paths that include process modifications are not supported.
 - Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
 - Play scenarios are compatible with the [CPT JSON instruction format](/apis-tools/testing/json-test-cases.md), but the following [instructions](/apis-tools/testing/json-test-cases.md#reference-instructions) are not supported and will be skipped during execution:
