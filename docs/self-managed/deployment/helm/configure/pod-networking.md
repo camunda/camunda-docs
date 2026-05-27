@@ -13,14 +13,14 @@ Every Camunda component supports a `dnsPolicy` value that controls how DNS resol
 
 The following components support `dnsPolicy`:
 
-| Component | Value key |
-|---|---|
-| Orchestration cluster | `orchestration.dnsPolicy` |
-| Identity | `identity.dnsPolicy` |
-| Connectors | `connectors.dnsPolicy` |
-| Optimize | `optimize.dnsPolicy` |
-| Console | `console.dnsPolicy` |
-| Web Modeler REST API | `webModeler.restapi.dnsPolicy` |
+| Component              | Value key                         |
+| ---------------------- | --------------------------------- |
+| Orchestration cluster  | `orchestration.dnsPolicy`         |
+| Identity               | `identity.dnsPolicy`              |
+| Connectors             | `connectors.dnsPolicy`            |
+| Optimize               | `optimize.dnsPolicy`              |
+| Console                | `console.dnsPolicy`               |
+| Web Modeler REST API   | `webModeler.restapi.dnsPolicy`    |
 | Web Modeler WebSockets | `webModeler.websockets.dnsPolicy` |
 
 Example — setting a custom DNS policy for the orchestration cluster:
