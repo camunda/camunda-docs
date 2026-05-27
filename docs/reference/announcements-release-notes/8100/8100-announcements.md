@@ -20,41 +20,92 @@ import PageDescription from '@site/src/components/PageDescription';
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/23) for an overview of known bugs by component and severity.
   :::
 
-## Supported environments
-
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Supported environments change 1
+#### PostgreSQL 14 no longer supported
 
-Supported environments change 1 description.
+Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16, 17, and 18.
 
-<p className="link-arrow">Placeholder link</p>
+- PostgreSQL 14 reached the end of its standard support window.
+- Upgrade your PostgreSQL instance to a supported version before moving to Camunda 8.10.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
 </div>
 </div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Supported environments change 2
+#### Amazon Aurora PostgreSQL 14 no longer supported
 
-Supported environments change 2 description.
+Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14. Supported versions are now 15, 16, and 17.
 
-<p className="link-arrow">Placeholder link</p>
+- Aurora PostgreSQL 14 has reached the end of standard support on AWS.
+- Migrate your Aurora cluster to a supported version before moving to Camunda 8.10.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
 </div>
-</div> -->
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Microsoft SQL Server 2019 no longer supported
+
+Camunda 8.10 drops support for Microsoft SQL Server 2019. Supported versions are now 2022 and 2025.
+
+- SQL Server 2019 has reached the end of mainstream support from Microsoft.
+- Upgrade your SQL Server instance to a supported version before moving to Camunda 8.10.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Oracle 23ai rebranded as Oracle 26ai
+
+Oracle has rebranded Oracle Database 23ai as Oracle AI Database 26ai, effective with the October 2025 Release Update (RU 23.26). The internal version continues to use the 23.x code line; the transition requires no database upgrade or application recertification. Camunda 8.10's supported Oracle versions are 19c and 26ai.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### H2 2.3 no longer supported
+
+Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
+
+- The bundled H2 driver in Camunda images is on the 2.4 line.
+- H2 remains supported for development, testing, and evaluation only. Production use is not recommended.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
 
 ## Agentic orchestration
 
