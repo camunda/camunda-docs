@@ -34,12 +34,12 @@ If you don't set `dnsPolicy` for a component, Kubernetes applies its default (`C
 
 Common values:
 
-| Value | Behavior |
-|---|---|
-| `ClusterFirst` | In-cluster DNS takes priority; unresolved names fall back to the upstream nameserver. Default for most pods. |
-| `ClusterFirstWithHostNet` | Same as `ClusterFirst`, but required when `hostNetwork: true` to preserve in-cluster DNS resolution. |
-| `Default` | Pods inherit the DNS configuration of the node they run on. |
-| `None` | DNS is configured entirely via `dnsConfig`. |
+| Value                     | Behavior                                                                                                     |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `ClusterFirst`            | In-cluster DNS takes priority; unresolved names fall back to the upstream nameserver. Default for most pods. |
+| `ClusterFirstWithHostNet` | Same as `ClusterFirst`, but required when `hostNetwork: true` to preserve in-cluster DNS resolution.         |
+| `Default`                 | Pods inherit the DNS configuration of the node they run on.                                                  |
+| `None`                    | DNS is configured entirely via `dnsConfig`.                                                                  |
 
 ## Custom DNS configuration
 
