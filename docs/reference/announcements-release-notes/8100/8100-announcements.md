@@ -82,7 +82,7 @@ Camunda 8.10 drops support for Microsoft SQL Server 2019. Supported versions are
 
 #### Oracle 23ai rebranded as Oracle 26ai
 
-Oracle has rebranded Oracle Database 23ai as Oracle AI Database 26ai, effective with the October 2025 release update (RU 23.26). The internal version remains the 23.x code line; the transition requires no database upgrade or application re-certification. Camunda 8.10's supported Oracle versions are 19c and 26ai.
+Oracle has rebranded Oracle Database 23ai as Oracle AI Database 26ai, effective with the October 2025 Release Update (RU 23.26). The internal version continues to use the 23.x code line; the transition requires no database upgrade or application recertification. Camunda 8.10's supported Oracle versions are 19c and 26ai.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
