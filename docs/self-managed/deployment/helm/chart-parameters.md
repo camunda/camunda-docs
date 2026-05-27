@@ -24,7 +24,7 @@ The following tables show the **top-level configuration sections** in `values.ya
 | `global`        | Configures shared settings that apply across components |
 | `orchestration` | Configures orchestration cluster settings               |
 
-For pod-level networking options such as `hostNetwork`, `dnsPolicy`, and `dnsConfig`, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
+For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestration.hostNetwork`, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
 
 ### Other Camunda applications
 
