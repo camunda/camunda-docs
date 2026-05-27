@@ -1637,3 +1637,22 @@ Camunda backups have been improved and made easier to use. The web application b
 #### Spring SDK and Orchestration Cluster REST API Migration
 
 The Connectors experience is enhanced with the migration from the Spring Zeebe to the Orchestration Cluster REST API, and the removal of dependency on the Operate client.
+
+### Self-Managed
+
+#### Host network support for orchestration cluster pods
+
+<!-- https://github.com/camunda/camunda-platform-helm/pull/6247 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm">Helm</span></div>
+
+The 8.8 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets orchestration cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
+
+When `orchestration.hostNetwork` is set to `true` and `orchestration.dnsPolicy` is not set, the chart automatically uses `dnsPolicy: ClusterFirstWithHostNet` to preserve in-cluster DNS resolution. You can override this by setting `orchestration.dnsPolicy` explicitly.
+
+```yaml
+orchestration:
+  hostNetwork: true
+```
+
+For details, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
