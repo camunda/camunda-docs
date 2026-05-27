@@ -26,7 +26,7 @@ Use the following guides to upgrade a Camunda 8 Self-Managed deployment installa
 
 ### Helm chart version
 
-The Camunda Helm chart version is independent from the Camunda application version. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify the Helm chart version that deploys Camunda 8.9 (chart 14.x) or 8.10 (chart 15.x).
+The Camunda Helm chart version is independent from the Camunda application version. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify the Helm chart version that deploys your Camunda application version.
 
 You can also list available chart versions using the Helm CLI:
 
