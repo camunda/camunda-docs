@@ -6,6 +6,7 @@ description: "Build Camunda solutions with AI-ready workflows, including agentic
 keywords: [ai, mcp, claude, copilot, cursor, agentic]
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import AoGrid from '../../components/react-components/\_ao-card';
 import IconAgenticImg from '../../components/assets/icon-agentic.png';
 import IconAIAgent from '../../components/agentic-orchestration/img/ao-ai-agent.png';
@@ -22,7 +23,7 @@ import IconMcpImg from '../../components/assets/icon-mcp.png';
 
 Build Camunda solutions with agentic orchestration and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents inside BPMN processes, and use Camunda Copilot to design faster.
 
-<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic-orange" title="Build with Camunda" href="/build-with-camunda" style={{marginBottom: '30px', marginTop: '20px'}}>Set up your AI development environment</a>
+<a class="button button--outline button--secondary button--md button--hero--topic button--hero--topic-orange" title="Build with Camunda" href={useBaseUrl('/build-with-camunda')} style={{marginBottom: '30px', marginTop: '20px'}}>Set up your AI development environment</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
