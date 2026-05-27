@@ -187,21 +187,19 @@ For details, see [`cancel` listeners](/components/concepts/execution-listeners.m
 
 ### Self-Managed
 
-#### Host network and DNS configuration support for Helm chart components
+#### Host network support for orchestration cluster pods
 
 <!-- https://github.com/camunda/camunda-platform-helm/pull/6210 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm">Helm</span></div>
 
-The 8.10 Helm chart adds DNS configuration support and host network access for component pods.
+The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets orchestration cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
 
-**DNS policy and custom DNS** — Every Camunda component now exposes `dnsPolicy` and `dnsConfig` values, letting you control DNS resolution behavior per component. Use these when running in environments that require a private nameserver, custom search domains, or specific resolver options. Supported components include the orchestration cluster, Identity, Connectors, Optimize, Console, and Web Modeler.
-
-**Host network** (orchestration cluster only) — `orchestration.hostNetwork` (default: `false`) lets orchestration cluster pods share the host node's network namespace. When set to `true` and `orchestration.dnsPolicy` is not set, the chart automatically uses `dnsPolicy: ClusterFirstWithHostNet` to preserve in-cluster DNS resolution.
+When `orchestration.hostNetwork` is set to `true` and `orchestration.dnsPolicy` is not set, the chart automatically uses `dnsPolicy: ClusterFirstWithHostNet` to preserve in-cluster DNS resolution. You can override this by setting `orchestration.dnsPolicy` explicitly.
 
 ```yaml
 orchestration:
   hostNetwork: true
 ```
 
-For full details and configuration examples, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
+For details, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
