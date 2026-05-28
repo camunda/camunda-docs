@@ -87,6 +87,33 @@ function DownloadIcon() {
   );
 }
 
+function SparklesIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <path
+        d="M32 18l3.2 9 9 3.2-9 3.2-3.2 9-3.2-9-9-3.2 9-3.2L32 18z"
+        fill="#fc5d0d"
+      />
+      <path
+        d="M46 38l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8-4.8-1.7 4.8-1.7L46 38z"
+        fill="#fc5d0d"
+      />
+      <path
+        d="M18 42l1.1 3.1 3.1 1.1-3.1 1.1-1.1 3.1-1.1-3.1-3.1-1.1 3.1-1.1L18 42z"
+        fill="#fc5d0d"
+      />
+    </svg>
+  );
+}
+
 function PencilIconLg() {
   return (
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
@@ -615,8 +642,8 @@ function BuildWithCamunda() {
               </p>
             </div>
 
-            {/* ─── Hero: 3-card choice ─── */}
-            <div className={styles.heroLayout}>
+            {/* ─── Hero: 2-card choice ─── */}
+            <div className={styles.heroLayoutTwo}>
               {/* Self-Managed (left, priority) */}
               <Link
                 className={clsx(styles.heroCard, styles.heroCardPriority)}
@@ -651,15 +678,13 @@ function BuildWithCamunda() {
                 <span className={styles.heroCardIcon}>
                   <TerminalIcon />
                 </span>
-                <h2 className={styles.heroCardTitle}>
-                  Run locally on your machine
-                </h2>
+                <h2 className={styles.heroCardTitle}>Run Camunda locally</h2>
                 <p className={styles.heroCardMeta}>
                   Camunda 8.9+ · macOS, Linux, Windows
                 </p>
                 <p className={styles.heroCardDesc}>
-                  Install via npm, start c8run, deploy your first process, and
-                  see it running in Operate — all from your terminal.
+                  Install and start Camunda locally, deploy your first process,
+                  and see it running. All from your terminal.
                 </p>
                 <ul className={styles.heroCardChecks}>
                   <li>
@@ -677,7 +702,7 @@ function BuildWithCamunda() {
                 </span>
               </Link>
 
-              {/* SaaS (center) */}
+              {/* SaaS (right) */}
               <Link
                 className={clsx(styles.heroCard, styles.heroCardSaas)}
                 to="https://accounts.cloud.camunda.io/signup?utm_source=camunda_docs&utm_medium=cta&utm_campaign=cli_landing_page"
@@ -709,39 +734,6 @@ function BuildWithCamunda() {
                   Create free account <ArrowRight />
                 </span>
               </Link>
-
-              {/* Downloads (right) */}
-              <Link
-                className={styles.heroCard}
-                to="https://developers.camunda.com/install-camunda-8/"
-              >
-                <span className={clsx(styles.cardTag, styles.cardTagLocal)}>
-                  Local
-                </span>
-                <span className={styles.heroCardIcon}>
-                  <DownloadIcon />
-                </span>
-                <h2 className={styles.heroCardTitle}>Camunda downloads</h2>
-                <p className={styles.heroCardMeta}>Desktop Modeler · c8run</p>
-                <p className={styles.heroCardDesc}>
-                  Download Desktop Modeler, Camunda 8 Run, and the full getting
-                  started bundle for offline install.
-                </p>
-                <ul className={styles.heroCardChecks}>
-                  <li>
-                    <CheckIcon color="#22a06b" /> Desktop Modeler installer
-                  </li>
-                  <li>
-                    <CheckIcon color="#22a06b" /> Camunda 8 Run archive
-                  </li>
-                  <li>
-                    <CheckIcon color="#22a06b" /> No npm required
-                  </li>
-                </ul>
-                <span className={styles.heroCardCtaAlt}>
-                  View downloads <ArrowRight />
-                </span>
-              </Link>
             </div>
           </section>
         </div>
@@ -761,16 +753,8 @@ function BuildWithCamunda() {
               Run Camunda locally <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
-              Install the CLI via npm and start a local Camunda 8 environment
-              powered by{" "}
-              <Link
-                to={useBaseUrl(
-                  "docs/self-managed/quickstart/developer-quickstart/c8run/"
-                )}
-              >
-                Camunda 8 Run
-              </Link>
-              .
+              Install the Camunda CLI and start running your local Camunda
+              environment.
             </p>
           </div>
 
@@ -830,10 +814,10 @@ function BuildWithCamunda() {
                 <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
               </svg>
               <span>
-                Requires Node.js 18+ and{" "}
+                Install requires Node.js 18+. Camunda 8 Run requires{" "}
                 <Link
                   to={useBaseUrl(
-                    "docs/next/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+                    "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
                   )}
                 >
                   OpenJDK 21–25
@@ -846,13 +830,17 @@ function BuildWithCamunda() {
           {/* ─── Fallback: Download bundle ─── */}
           <details className={styles.bundleFallback}>
             <summary className={styles.bundleFallbackSummary}>
-              <DownloadIcon /> Don't have Node.js? Use the getting started
-              bundle instead
+              <span>
+                No Node.js? Download and run the getting started bundle instead
+              </span>
+              <span className={styles.bundleFallbackIcon}>
+                <DownloadIcon />
+              </span>
             </summary>
             <div className={styles.bundleFallbackContent}>
               <p className={styles.bundleFallbackDesc}>
-                The getting started bundle gives you the same Camunda 8 Run
-                environment without requiring npm. Download, extract, and run.
+                Download, extract, and run the getting started bundle for a
+                Camunda 8 Run environment without npm.
               </p>
               <div className={styles.downloadButtons}>
                 <a
@@ -916,10 +904,10 @@ $ ./camunda-start.sh
                   <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
                 </svg>
                 <span>
-                  Requires{" "}
+                  Camunda 8 Run requires{" "}
                   <Link
                     to={useBaseUrl(
-                      "docs/next/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+                      "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
                     )}
                   >
                     OpenJDK 21–25
@@ -984,14 +972,14 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
                 <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
               </svg>
               <span>
-                Data needs to sync to Operate, so your process instance may not
-                appear immediately. See the{" "}
+                Your process instance appears once data has synced to Operate.
+                See{" "}
                 <Link
                   to={useBaseUrl("docs/guides/getting-started-hello-world/")}
                 >
-                  full getting started guide
-                </Link>{" "}
-                for more details.
+                  run your first BPMN process
+                </Link>
+                .
               </span>
             </p>
           </div>
@@ -1006,11 +994,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
               Full control from your terminal
             </h2>
             <p className={styles.sectionSub}>
-              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                <CodeBlock>c8ctl</CodeBlock>
-              </Link>{" "}
-              gives you a single CLI for the full Camunda lifecycle with no
-              browser required.
+              Use the CLI for the full Camunda lifecycle. No browser required.
             </p>
           </div>
           <div className={styles.commandGrid}>
@@ -1046,6 +1030,42 @@ $ c8ctl resolve inc 2251799813685251`}
               </TerminalWindow>
             </div>
           </div>
+
+          <p
+            className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+            style={{ marginTop: "2.5rem" }}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="8"
+                cy="8"
+                r="7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
+              <path
+                d="M8 7v4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+            </svg>
+            <span>
+              Read the{" "}
+              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
+                c8ctl CLI documentation
+              </Link>{" "}
+              to learn more about managing Camunda directly from the terminal.
+            </span>
+          </p>
 
           <div className={styles.pillSeparator}>
             <span className={styles.sectionPill}>AI agent integration</span>
@@ -1182,7 +1202,7 @@ Available skills:
 
             <div className={styles.aiExamplesCta}>
               <Link className={styles.heroCardCta} to="#self-managed">
-                Ready to start? Install now
+                Get started
                 <svg
                   width="16"
                   height="16"
@@ -1286,6 +1306,74 @@ Available skills:
                 <HelmIcon />
                 <h4>Kubernetes + Helm</h4>
                 <p>Flexible deployment with the official Helm chart.</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── Camunda downloads ─── */}
+        <section
+          id="downloads"
+          className={clsx(
+            styles.moreSection,
+            styles.darkSection,
+            styles.noTopBorder
+          )}
+          style={{ scrollMarginTop: "5rem" }}
+        >
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Camunda downloads</h2>
+              <p className={styles.sectionSub}>
+                Download everything you need for local Camunda 8 development on
+                macOS, Windows, or Linux.
+              </p>
+            </div>
+            <div className={styles.downloadsGrid4}>
+              <Link
+                to="https://developers.camunda.com/install-camunda-8/"
+                className={styles.wayCard}
+              >
+                <div className={styles.wayCardImage}>
+                  <SparklesIconLg />
+                </div>
+                <h3>Getting Started bundle</h3>
+                <p>
+                  Complete bundle with Desktop Modeler, Runtime, and examples.
+                </p>
+              </Link>
+              <Link
+                to="https://developers.camunda.com/install-camunda-8/"
+                className={styles.wayCard}
+              >
+                <div className={styles.wayCardImage}>
+                  <PencilIconLg />
+                </div>
+                <h3>Desktop Modeler</h3>
+                <p>Design BPMN processes, DMN tables, and forms locally.</p>
+              </Link>
+              <Link
+                to="https://developers.camunda.com/install-camunda-8/"
+                className={styles.wayCard}
+              >
+                <div className={styles.wayCardImage}>
+                  <PlayIconLg />
+                </div>
+                <h3>Camunda 8 Run</h3>
+                <p>Lightweight Camunda distribution for local development.</p>
+              </Link>
+              <Link
+                to="https://developers.camunda.com/install-camunda-8/"
+                className={styles.wayCard}
+              >
+                <div className={styles.wayCardImage}>
+                  <RpaIconLg />
+                </div>
+                <h3>RPA Worker</h3>
+                <p>
+                  Run robotic process automation tasks alongside your BPMN
+                  workflows.
+                </p>
               </Link>
             </div>
           </div>
