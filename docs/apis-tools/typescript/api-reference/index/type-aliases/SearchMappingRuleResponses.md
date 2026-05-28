@@ -16,17 +16,7 @@ type SearchMappingRuleResponses = object;
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: MappingRuleSearchQueryResult;
 ```
 
 The mapping rule search result.
-
-#### Type Declaration
-
-##### items
-
-```ts
-items: MappingRuleResult[];
-```
-
-The matching mapping rules.

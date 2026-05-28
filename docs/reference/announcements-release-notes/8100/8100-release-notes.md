@@ -172,3 +172,34 @@ You can now:
 - Use the improved in-line variables display.
 
 This change helps navigate more complex data during operations and troubleshooting.
+
+### Orchestration Cluster
+
+#### Cancel execution listener
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/2768 -->
+
+Execution listeners now support a `cancel` event type on the process element. Cancel listeners run when a process instance is terminated — useful for cleanup, audit logging, or notifying external systems.
+
+For details, see [`cancel` listeners](/components/concepts/execution-listeners.md#cancel-listeners).
+
+### Self-Managed
+
+#### Host network support for orchestration cluster pods
+
+<!-- https://github.com/camunda/camunda-platform-helm/pull/6210 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm">Helm</span></div>
+
+The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets orchestration cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
+
+When `orchestration.hostNetwork` is set to `true` and `orchestration.dnsPolicy` is not set, the chart automatically uses `dnsPolicy: ClusterFirstWithHostNet` to preserve in-cluster DNS resolution. You can override this by setting `orchestration.dnsPolicy` explicitly.
+
+```yaml
+orchestration:
+  hostNetwork: true
+```
+
+For details, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).

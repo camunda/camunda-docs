@@ -18,7 +18,7 @@ Element instance filter.
 ### elementId?
 
 ```ts
-optional elementId?: ElementId;
+optional elementId?: ElementIdFilterProperty;
 ```
 
 The element ID for this element instance.
@@ -50,7 +50,7 @@ The scope key of this element instance. If provided with a process instance key 
 ### elementName?
 
 ```ts
-optional elementName?: string;
+optional elementName?: StringFilterProperty;
 ```
 
 The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.

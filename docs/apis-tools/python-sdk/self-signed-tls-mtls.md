@@ -2,7 +2,7 @@
 id: self-signed-tls-mtls
 title: Self-signed TLS / mTLS
 sidebar_label: Self-signed TLS / mTLS
-sidebar_position: 8
+sidebar_position: 9
 mdx:
   format: md
 ---

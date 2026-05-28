@@ -30,7 +30,7 @@ path: object;
 #### clientId
 
 ```ts
-clientId: string;
+clientId: ClientId;
 ```
 
 The unique identifier of the application.

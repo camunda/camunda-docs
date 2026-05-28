@@ -979,8 +979,8 @@ When parsing unknown fields in the Protobuf Java Lite and Full library, a malici
 program crash.
 
 - As Zeebe makes extensive use of Protobuf, this could lead to denial-of-service (DoS) issues on the server side.
-- This issue allows an attacker to send specific payloads that will always result in `StackOverflowException`. This could lead to gateway performance issues and affect system availability.
-- Although the gateway will not crash, it will spend more time working on these requests. An attacker could use this opportunity to slow it down and make it unusable by sending a large number of requests within a short time frame.
+- This issue allows an attacker to send specific payloads that will always result in `StackOverflowException`. This could lead to Zeebe Gateway performance issues and affect system availability.
+- Although the Zeebe Gateway will not crash, it will spend more time working on these requests. An attacker could use this opportunity to slow it down and make it unusable by sending a large number of requests within a short time frame.
 
 No data is leaked, lost, or corrupted. This issue only affects application availability.
 
@@ -1008,7 +1008,7 @@ Camunda Zeebe
 
 ### Impact
 
-Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that could crash the gateway.
+Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that could crash the Zeebe Gateway.
 
 ### How to determine if the installation is affected
 
@@ -1147,7 +1147,7 @@ The Tasklist REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthent
 - POST /v1/forms/\{formId}
 - POST /v1/variables/\{variableId}
 
-Find more information about the methods in our [Tasklist REST API documentation](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
+Find more information about the methods in our [Tasklist REST API documentation](/versioned_docs/version-8.9/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 
 Therefore, if you use Tasklist 8.2.0 or 8.2.1, and if you have sensible data stored in process variables (accessed by user tasks), this data could have been accessed by users knowing the endpoint of the Tasklist instance without authentication.
 

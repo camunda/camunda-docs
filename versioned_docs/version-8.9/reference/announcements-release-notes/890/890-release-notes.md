@@ -765,7 +765,7 @@ A [critical bug in 8.9-alpha5](https://github.com/camunda/camunda/issues/47955) 
 
 The Operate, Tasklist, and Identity application profiles are now merged into the existing gateway profile to provide a simplified but flexible deployment model.
 
-- These components are now treated as UIs served by the gateway.
+- These components are now treated as UIs served by the Zeebe Gateway.
 - Control their inclusion via configuration properties (for example, `camunda.webapps.enabled=operate,identity`).
 
 #### Amazon ECS (EC2+Fargate) support
@@ -1726,3 +1726,22 @@ In Camunda 8.10, the default memory allocation strategy changes from `PARTITION`
 
 Test the `FRACTION` strategy in Camunda 8.9 to prepare for this change. Alternatively, explicitly set the strategy to `PARTITION` to keep the previous memory allocation behavior.
 :::
+
+### Self-Managed
+
+#### Host network support for orchestration cluster pods
+
+<!-- https://github.com/camunda/camunda-platform-helm/pull/6248 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm">Helm</span></div>
+
+The 8.9 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets orchestration cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
+
+When `orchestration.hostNetwork` is set to `true` and `orchestration.dnsPolicy` is not set, the chart automatically uses `dnsPolicy: ClusterFirstWithHostNet` to preserve in-cluster DNS resolution. You can override this by setting `orchestration.dnsPolicy` explicitly.
+
+```yaml
+orchestration:
+  hostNetwork: true
+```
+
+For details, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
