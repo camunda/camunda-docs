@@ -53,6 +53,15 @@ In v2, all error responses use the [RFC 9457](https://www.rfc-editor.org/rfc/rfc
 }
 ```
 
+### Pagination
+
+In v1, `page` specified the page to return, and `size` specified the number of items per page. In v2, `page` is an object supporting limit/offset pagination:
+
+- `page.from` specifies the offset, the item index to start searching from.
+- `page.limit` limits the number of items returned.
+
+In v1, the default page size was 10. In v2, the default limit is 100.
+
 ## Files API
 
 The files API in v2 renames fields and includes minor implementation changes in every endpoint.
@@ -97,13 +106,6 @@ The v1 response returned a nested structure, with `metadata` and `content` as se
 | ------------------ | ---------------------------- | --------------------------------------------------------------------- |
 | `filter`           | `filter`                     | Now supports advanced operators, including `$eq`, `$in`, and `$like`. |
 | `total` (response) | `page.totalItems` (response) | Moved into the `page` response object.                                |
-
-In v1, `page` specified the page to return, and `size` specified the number of items per page. In v2, `page` is an object supporting limit/offset pagination:
-
-- `page.from` specifies the offset, the item index to start searching from.
-- `page.limit` limits the number of items returned.
-
-In v1, the default page size was 10. In v2, the default limit now 100.
 
 `content` is `null` on all items in the search response. Fetch individual files to retrieve content.
 
