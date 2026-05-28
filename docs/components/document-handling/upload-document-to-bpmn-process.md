@@ -47,8 +47,7 @@ You can configure a form with the Filepicker for a start event of a BPMN process
 
 :::note
 
-Only logged-in users can upload files.
-[Publicly accessible processes](/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes.md) with a start form do not support file upload using the Filepicker.
+Only logged-in users can upload files when starting a process from Tasklist.
 
 :::
 

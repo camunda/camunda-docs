@@ -177,6 +177,16 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
+# Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
+RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/operate-api/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/testing/zeebe-process-test/?$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-process-test/ [R=301,L]
+RewriteRule ^docs/next/components/tasklist/user-task-access-restrictions/?$ /docs/next/components/tasklist/user-task-authorization/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions/?$ /docs/next/components/tasklist/user-task-authorization/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/?$ /docs/next/components/tasklist/userguide/starting-processes/ [R=301,L]
+
 # Redirects associated with Camunda Hub
 RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-members/manage-user-groups [R=301,L]
@@ -186,8 +196,14 @@ RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/component
 RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
 
 # Process applications - specific renamed files
-RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/process-applications/$ /docs/next/components/hub/workspace/manage-projects/manage-projects [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/?$ /docs/next/components/hub/workspace/manage-projects/manage-projects [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/next/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-application-versioning/?$ /docs/next/components/hub/workspace/manage-projects/project-versioning/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-application-pipeline/?$ /docs/next/components/hub/workspace/manage-projects/project-pipeline/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/create-a-process-application/?$ /docs/next/components/hub/workspace/manage-projects/create-a-project/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/deploy-process-application/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/components/hub/workspace/manage-projects/git-sync/ [R=301,L]
 
 # Process applications - general redirect
 RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)$ /docs/next/components/hub/workspace/manage-projects/$1 [R=301,L]
@@ -197,6 +213,29 @@ RewriteRule ^docs/next/components/modeler/web-modeler/launch-web-modeler/?$ /doc
 RewriteRule ^docs/next/components/modeler/web-modeler/web-modeler-settings/?$ /docs/next/components/hub/workspace/modeler/modeler-settings/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/?$ /docs/next/components/hub/workspace/modeler/integrate-modeler-in-ci-cd/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/element-templates/using-templates-in-web-modeler/?$ /docs/next/components/hub/workspace/modeler/element-templates/using-templates-in-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/hub/workspace/modeler/modeling/camunda-marketplace/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/context-pad/?$ /docs/next/components/hub/workspace/modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/file-download/?$ /docs/next/components/hub/workspace/modeler/modeling/file-download/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/import-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/import-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/model-your-first-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/versions/?$ /docs/next/components/hub/workspace/modeler/modeling/versions/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/about-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-scenario-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/implement-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/design-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/design-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/collaborate-with-modes/?$ /docs/next/components/hub/workspace/modeler/collaboration/collaborate-with-modes/ [R=301,L]
 
 # Web Modeler moved to Hub Workspace Modeler - general redirect
 RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
@@ -220,8 +259,6 @@ RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooti
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-missing-data/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-proxy-configuration/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
-
-# Fix broken links from camunda-platform-get-started README
 
 # Get started with Optimize
 RewriteRule ^docs/next/guides/improve-processes-with-optimize/?$ /docs/next/components/optimize/improve-processes-with-optimize/ [R=301,L]
@@ -287,6 +324,22 @@ RewriteRule ^docs/components/agentic-orchestration/?$ /docs/components/agentic-o
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
+
+# Web Modeler product links pre 8.10:
+# Before 8.10, these links were hardcoded in the product, so we have to maintain them until those versions are no longer supported.
+# Starting with 8.10, the product moved to pinned version links using /docs/8.10. These can, therefore, be removed with version 8.9.
+RewriteRule ^docs/components/connectors/protocol/webhook/$ /docs/components/connectors/protocol/http-webhook/ [R=301,L]
+RewriteRule ^docs/components/integration-framework/connectors/out-of-the-box-connectors/rest/$ /docs/components/connectors/protocol/rest/ [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/overview/$ /docs/components/tasklist/userguide/using-tasklist/ [R=301,L]
+RewriteRule ^docs/guides/orchestrate-api-endpoints/$ /docs/guides/orchestrate-apis/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/cli-client/$ /docs/next/apis-tools/c8ctl/getting-started/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/community-clients/c-sharp/$ /docs/next/apis-tools/csharp-sdk/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/go-client/$ https://unsupported.docs.camunda.io/8.5/docs/apis-tools/go-client/go-get-started/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/create-document-link/$ /docs/next/apis-tools/orchestration-cluster-api-rest/specifications/create-document-link/ [R=301,L]
+RewriteRule ^docs/next/guides/setup-client-connection-credentials$ /docs/components/console/introduction-to-console/ [R=301,L]
+RewriteRule ^docs/product-manuals/tasklist/introduction$ /docs/components/tasklist/introduction-to-tasklist/ [R=301,L]
+RewriteRule ^docs/product-manuals/tasklist/userguide/camunda-forms$ /docs/components/modeler/forms/camunda-forms-reference/ [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/configuration/$ /docs/self-managed/components/orchestration-cluster/operate/operate-configuration/ [R=301,L]
 
 # APIs & tools migration guide root
 RewriteRule ^docs/apis-tools/migration-manuals/?$ /docs/apis-tools/migration-manuals/migrate-to-89/ [R=301,L]
@@ -434,37 +487,6 @@ RewriteRule ^docs/8.8/self-managed/deployment/helm/configure/vendor-supported-in
 RewriteRule ^docs/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
 
 # Restructure Web Modeler Docs (8.8)
-## Web Modeler folder restructure - moved to modeling/
-RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/modeler/web-modeler/modeling/camunda-marketplace/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/context-pad/?$ /docs/next/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/file-download/?$ /docs/next/components/modeler/web-modeler/modeling/file-download/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/import-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/import-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/model-your-first-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/versions/?$ /docs/next/components/modeler/web-modeler/modeling/versions/ [R=301,L]
-
-## Web Modeler folder restructure - moved to modeling/advanced-modeling/
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/refactoring-suggestions/ [R=301,L]
-
-## Web Modeler folder restructure - moved to validation/
-RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/modeler/web-modeler/validation/play-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/modeler/web-modeler/validation/play-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/modeler/web-modeler/validation/task-testing/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/modeler/web-modeler/validation/test-scenario-files/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/modeler/web-modeler/validation/token-simulation/ [R=301,L]
-
-## Web Modeler folder restructure - moved to process-applications/
-RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/components/modeler/web-modeler/process-applications/git-sync/ [R=301,L]
-
-## Web Modeler folder restructure - moved to collaboration/
-RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
-
 ## Current Web Modeler folder restructure
 RewriteRule ^docs/components/modeler/web-modeler/camunda-marketplace/?$ /docs/components/modeler/web-modeler/modeling/camunda-marketplace/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/context-pad/?$ /docs/components/modeler/web-modeler/modeling/context-pad/ [R=301,L]

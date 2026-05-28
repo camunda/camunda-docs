@@ -640,7 +640,6 @@ module.exports = {
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
-            "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
             "components/tasklist/userguide/audit-task-history",
           ],
@@ -872,7 +871,6 @@ module.exports = {
                         "components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/form-linking",
-                        "components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
                       ],
                     },
@@ -1335,8 +1333,6 @@ module.exports = {
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/operate-api/sidebar-schema"),
-            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -1503,9 +1499,6 @@ module.exports = {
             "apis-tools/testing/connectors",
             "apis-tools/testing/json-test-cases",
           ],
-        },
-        {
-          Deprecated: ["apis-tools/testing/zeebe-process-test"],
         },
       ],
     },
@@ -1733,6 +1726,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
@@ -1899,6 +1893,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
+                "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
               ],
             },
             {
@@ -2188,9 +2183,7 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/operational-guides/data-purge",
-        {
-          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
-        },
+        "self-managed/operational-guides/troubleshooting",
       ],
     },
     {
@@ -2301,7 +2294,6 @@ module.exports = {
               Tasklist: [
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-configuration",
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling",
-                "self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions",
               ],
             },
             {
