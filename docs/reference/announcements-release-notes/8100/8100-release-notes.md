@@ -32,6 +32,12 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0-alpha2
+
+| Release date | Changelog(s) | Blog |
+| :----------- | :----------- | :--- |
+| 09 June 2026 | -            | -    |
+
 ## 8.10.0-alpha1
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
