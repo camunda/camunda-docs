@@ -163,10 +163,9 @@ For more information, see the [metrics](/self-managed/operational-guides/monitor
 
 The following advanced configuration options can be provided via environment variables:
 
-| Variable           | Description                                                                                                                                                                                                                     |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `JAVA_OPTS`        | Allows you to override Java command line parameters for Camunda.                                                                                                                                                                |
-| `JDK_JAVA_OPTIONS` | Passed directly to the JVM. When the resolved runtime is Java 25 or newer, Camunda 8 Run automatically appends `--enable-native-access=ALL-UNNAMED` and `--sun-misc-unsafe-memory-access=allow`. Existing values are preserved. |
+| Variable    | Description                                                      |
+| ----------- | ---------------------------------------------------------------- |
+| `JAVA_OPTS` | Allows you to override Java command line parameters for Camunda. |
 
 ## Next steps
 
