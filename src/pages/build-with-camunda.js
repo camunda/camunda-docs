@@ -716,8 +716,8 @@ function BuildWithCamunda() {
                 <h2 className={styles.heroCardTitle}>Free SaaS trial</h2>
                 <p className={styles.heroCardMeta}>Fully managed cloud</p>
                 <p className={styles.heroCardDesc}>
-                  Get your own fully managed Camunda cluster. Nothing to
-                  install, sign up and start modeling today.
+                  Get your own fully managed Camunda cluster. No install, sign
+                  up and start modeling today.
                 </p>
                 <ul className={styles.heroCardChecks}>
                   <li>
