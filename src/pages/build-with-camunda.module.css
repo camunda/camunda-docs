@@ -224,6 +224,20 @@
   align-items: stretch;
 }
 
+/* ─── Hero: 2-card layout ─── */
+.heroLayoutTwo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 996px) {
+  .heroLayoutTwo {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 996px) {
   .heroLayout {
     grid-template-columns: 1fr;
@@ -534,6 +548,131 @@
 .cliInstallBlock .terminalWindow {
   max-width: 100%;
   margin-bottom: 2rem;
+}
+
+.cliInstallBlock .downloadButtons {
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+/* ─── Install tabs ─── */
+.installTabs {
+  display: flex;
+  gap: 0;
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+}
+
+.installTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+  margin-bottom: -2px;
+}
+
+.installTab:hover {
+  color: var(--ifm-color-primary);
+}
+
+.installTabActive {
+  color: var(--ifm-color-primary);
+  border-bottom-color: var(--ifm-color-primary);
+}
+
+.installTab svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .installTabs {
+    flex-direction: column;
+    border-bottom: none;
+    gap: 0.25rem;
+  }
+  .installTab {
+    border-bottom: none;
+    border-left: 3px solid transparent;
+    margin-bottom: 0;
+  }
+  .installTabActive {
+    border-left-color: var(--ifm-color-primary);
+    border-bottom-color: transparent;
+  }
+}
+
+/* ─── Bundle fallback (details/summary) ─── */
+.bundleFallback {
+  max-width: 720px;
+  margin: 3rem auto 0;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  background: var(--ifm-color-emphasis-0);
+  overflow: hidden;
+}
+
+.bundleFallbackSummary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.15s;
+}
+
+.bundleFallbackSummary::-webkit-details-marker {
+  display: none;
+}
+
+.bundleFallbackSummary::before {
+  content: "▶";
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+  color: var(--ifm-color-emphasis-500);
+}
+
+.bundleFallback[open] .bundleFallbackSummary::before {
+  transform: rotate(90deg);
+}
+
+.bundleFallbackSummary:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.bundleFallbackSummary svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bundleFallbackContent {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.bundleFallbackDesc {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 1.25rem;
+}
+
+.bundleFallbackContent .downloadButtons {
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .pillSeparator {
