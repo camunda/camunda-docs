@@ -110,8 +110,7 @@ paths:
 
         Updates the mutable fields of an agent instance: status, metric counters, and
         tools. Metric values are treated as deltas and applied immediately to the
-        aggregate counters. Tool updates replace the existing tool list. At least one of
-        status, metrics, or tools must be provided.
+        aggregate counters. Tool updates replace the existing tool list.
       parameters:
         - name: agentInstanceKey
           in: path
@@ -288,7 +287,11 @@ components:
         - tools
         - elementId
         - processInstanceKey
+        - rootProcessInstanceKey
         - processDefinitionKey
+        - processDefinitionId
+        - processDefinitionVersion
+        - processDefinitionVersionTag
         - tenantId
         - creationDate
         - lastUpdatedDate
@@ -326,10 +329,29 @@ components:
           description: The key of the process instance that owns this agent instance.
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
+        rootProcessInstanceKey:
+          description: |
+            The key of the root process instance. The root process instance is the top-level
+            ancestor in the process instance hierarchy.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         processDefinitionKey:
           description: The key of the process definition associated with this agent instance.
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
+        processDefinitionId:
+          description: The BPMN process ID of the process definition associated with this agent instance.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/ProcessDefinitionId"
+        processDefinitionVersion:
+          type: integer
+          format: int32
+          description: The version of the process definition associated with this agent instance.
+        processDefinitionVersionTag:
+          type: string
+          nullable: true
+          description: The version tag of the process definition associated with this agent instance.
         tenantId:
           description: The tenant ID of this agent instance.
           allOf:
@@ -438,9 +460,19 @@ components:
       description: The current status of an agent instance.
       type: string
       enum:
+        - UNKNOWN
         - COMPLETED
         - IDLE
         - INITIALIZING
+        - THINKING
+        - TOOL_CALLING
+        - TOOL_DISCOVERY
+    AgentInstanceUpdateStatusEnum:
+      description: |
+        The status values that can be set on an agent instance via an update request.
+      type: string
+      enum:
+        - IDLE
         - THINKING
         - TOOL_CALLING
         - TOOL_DISCOVERY
@@ -507,14 +539,25 @@ components:
           description: Increment to apply to the total tool call counter.
     AgentInstanceUpdateRequest:
       description: |
-        Request to update the mutable state of an agent instance. At least one of
-        status, metrics, or tools must be provided.
+        Request to update the mutable state of an agent instance.
       type: object
+      required:
+        - elementInstanceKey
       properties:
+        elementInstanceKey:
+          nullable: false
+          description: |
+            The key of the currently-active element instance for this agent instance.
+            Used for ownership/equality validation against the stored agent instance
+            and, when the supplied key differs from the previous association (re-entry
+            of an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys
+            with the reverse link updated on the supplied element instance.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
         status:
           description: The new status of the agent instance.
           allOf:
-            - $ref: "#/components/schemas/AgentInstanceStatusEnum"
+            - $ref: "#/components/schemas/AgentInstanceUpdateStatusEnum"
         metrics:
           description: Metric increments to apply to the aggregate counters.
           allOf:
@@ -524,6 +567,7 @@ components:
             The complete list of tools available to the agent, replacing any previously
             stored tools. When provided, the engine replaces the existing tool list with
             this value.
+          nullable: true
           type: array
           items:
             $ref: "#/components/schemas/AgentTool"
