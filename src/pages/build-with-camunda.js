@@ -874,7 +874,7 @@ function BuildWithCamunda() {
                   Follow the instructions in{" "}
                   <Link
                     to={useBaseUrl(
-                      "docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
+                      "/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
                     )}
                   >
                     run your first BPMN process
@@ -1014,7 +1014,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
                 See{" "}
                 <Link
                   to={useBaseUrl(
-                    "docs/guides/getting-started-hello-world#step-3-explore-your-process-in-operate"
+                    "/docs/guides/getting-started-hello-world#step-3-explore-your-process-in-operate"
                   )}
                 >
                   explore your process in Operate
