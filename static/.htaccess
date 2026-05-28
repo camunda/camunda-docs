@@ -325,6 +325,12 @@ RewriteRule ^docs/components/agentic-orchestration/?$ /docs/components/agentic-o
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
 
+# Removed in 8.9: Amazon Bedrock AgentCore connectors
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-long-term-memory/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-codeinterpreter/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+
 # Web Modeler product links pre 8.10:
 # Before 8.10, these links were hardcoded in the product, so we have to maintain them until those versions are no longer supported.
 # Starting with 8.10, the product moved to pinned version links using /docs/8.10. These can, therefore, be removed with version 8.9.
