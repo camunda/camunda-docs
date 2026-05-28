@@ -1101,9 +1101,10 @@ $ c8ctl resolve inc 2251799813685251`}
             <span>
               Read the{" "}
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                Camunda CLI documentation
+                Camunda CLI
               </Link>{" "}
-              to learn more about managing Camunda directly from the terminal.
+              documentation to learn more about managing Camunda directly from
+              the terminal.
             </span>
           </p>
 
