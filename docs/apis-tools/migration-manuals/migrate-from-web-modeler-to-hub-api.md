@@ -19,22 +19,12 @@ The Web Modeler API v1 is the REST API for Web Modeler, a standalone product for
 The [Camunda Hub API v2](/apis-tools/hub-api-rest/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed:
 
 - In v1, _projects_ were the top-level container for files and folders. In v2, _workspaces_ are a new organizational level above projects. Files still belong to _projects_, which now live inside a workspace. You can read more in the [Camunda Hub workspace documentation](/components/hub/workspace/index.md).
-- In v1, resources were identified by `id` fields. In v2, resources are identified by `key` fields (Examples include `fileKey`, `projectKey`, and `folderKey`).
+- In v1, resources were identified by `Id` fields. In v2, resources are identified by `Key` fields. For example, `folderId` is now `folderKey`.
 - Update operations in v2 require a `revision` field. Fetch the current revision from a get or create response and include it in your update request to prevent overwriting concurrent changes.
-- All error responses in v2 use the [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) `ProblemDetail` format instead of ad-hoc error objects.
 
 ## General changes
 
 The following sections cover changes that apply across the entire API, regardless of which resource you're working with. Review these before making any endpoint-specific changes.
-
-### Terminology
-
-Several core concepts have been renamed or reorganized between v1 and v2. Use this table to map v1 terms to their v2 equivalents before updating your code.
-
-| Web Modeler API v1 | Camunda Hub API v2                                                                                                        | Notes                                                                                                                                                           |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project            | [Workspace](/components/hub/workspace/index.md) + [Project](/components/hub/workspace/manage-projects/manage-projects.md) | v2 introduces workspaces as a new level above projects. v1 projects map to v2 projects; workspaces are a new grouping above them. Files still use `projectKey`. |
-| `<resource>Id`     | `<resource>Key`                                                                                                           | Identifiers are now named with a `Key` suffix. For example, `folderKey` instead of `folderId`. The underlying values have not changed, only the names.          |
 
 ### Base URLs
 
@@ -95,38 +85,35 @@ The v1 response returned a nested structure, with `metadata` and `content` as se
 
 ### Update a file
 
-| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                           |
-| ------------------ | ------------------ | --------------------------------------------------------------- |
-| `folderId`         | `folderKey`        | Renamed.                                                        |
-| `projectId`        | `projectKey`       | Renamed. Use to move files between projects within a workspace. |
-| `revision`         | `revision`         | Now required.                                                   |
+| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                       |
+| ------------------ | ------------------ | --------------------------------------------------------------------------- |
+| `folderId`         | `folderKey`        | Renamed.                                                                    |
+| `projectId`        | `projectKey`       | Renamed. Use to move files between projects within a Camunda Hub workspace. |
+| `revision`         | `revision`         | Now required.                                                               |
 
 ### Search files
 
-The request and response structures for the [search files endpoint](/apis-tools/hub-api-rest/specifications/search-files.api.mdx) have changed significantly.
-
-| Web Modeler API v1 | Camunda Hub API v2           | Notes                                                                                 |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------- |
-| `filter`           | `filter`                     | Now supports advanced operators, including `$eq`, `$in`, and `$like`, for each field. |
-| `total` (response) | `page.totalItems` (response) | Moved into the `page` response object.                                                |
+| Web Modeler API v1 | Camunda Hub API v2           | Notes                                                                 |
+| ------------------ | ---------------------------- | --------------------------------------------------------------------- |
+| `filter`           | `filter`                     | Now supports advanced operators, including `$eq`, `$in`, and `$like`. |
+| `total` (response) | `page.totalItems` (response) | Moved into the `page` response object.                                |
 
 In v1, `page` specified the page to return, and `size` specified the number of items per page. In v2, `page` is an object supporting limit/offset pagination:
 
 - `page.from` specifies the offset, the item index to start searching from.
--
+- `page.limit` limits the number of items returned.
 
-|
-| `size` | `page.limit` | Default and maximum page size increased. (integer, default 100, max 10,000) |
+In v1, the default page size was 10. In v2, the default limit now 100.
 
-`content` is `null` on all items in the search response. Fetch individual files to retrieve content. Adds `403 Forbidden`. Removes `404 Not Found`.
+`content` is `null` on all items in the search response. Fetch individual files to retrieve content.
 
 ### File response fields
 
-Only changed fields are listed. See the [API reference](/apis-tools/hub-api-rest/specifications/get-file.api.mdx) for the full schema.
+Only changed fields are listed:
 
-| v1 field    | v2 field     | Notes                                                                                                           |
-| ----------- | ------------ | --------------------------------------------------------------------------------------------------------------- |
-| `id`        | `fileKey`    | Renamed.                                                                                                        |
-| `projectId` | `projectKey` | Renamed.                                                                                                        |
-| `folderId`  | `folderKey`  | Renamed.                                                                                                        |
-| `type`      | `type`       | Unchanged in the response. Note: the v1 _request_ field was named `fileType`; the response already used `type`. |
+| v1 field        | v2 field        | Notes                                                       |
+| --------------- | --------------- | ----------------------------------------------------------- |
+| `id`            | `fileKey`       | Renamed.                                                    |
+| `projectId`     | `projectKey`    | Renamed.                                                    |
+| `folderId`      | `folderKey`     | Renamed.                                                    |
+| `canonicalPath` | `canonicalPath` | In v1, `canonicalPath` was an object. In v2, it's a string. |
