@@ -104,6 +104,52 @@
   );
 }
 
+.heroSparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heroSparkles svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sparkleGroup path {
+  animation: sparkleTwinkle 4s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.sparkleGroup path:nth-child(2n) {
+  animation-delay: 1s;
+  animation-duration: 5s;
+}
+
+.sparkleGroup path:nth-child(3n) {
+  animation-delay: 2.2s;
+  animation-duration: 6s;
+}
+
+.sparkleGroup path:nth-child(4n) {
+  animation-delay: 3.5s;
+}
+
+@keyframes sparkleTwinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
 .hero {
   position: relative;
   padding: 5rem 0 1.5rem;
@@ -227,14 +273,17 @@
 /* ─── Hero: 2-card layout ─── */
 .heroLayoutTwo {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.3fr 1fr;
   gap: 2.5rem;
   align-items: stretch;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 @media (max-width: 996px) {
   .heroLayoutTwo {
     grid-template-columns: 1fr;
+    max-width: 540px;
   }
 }
 
@@ -492,8 +541,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.7rem 1.25rem;
-  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
   font-size: 0.92rem;
   font-weight: 600;
   background: lab(38.4009% 52.6132 -92.3857);
@@ -517,8 +566,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.7rem 1.25rem;
-  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
   font-size: 0.92rem;
   font-weight: 600;
   background: var(--card-bg);
@@ -626,7 +675,8 @@
 .bundleFallbackSummary {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 0.75rem;
   padding: 1rem 1.25rem;
   font-size: 0.95rem;
   font-weight: 600;
@@ -638,6 +688,12 @@
 
 .bundleFallbackSummary::-webkit-details-marker {
   display: none;
+}
+
+.bundleFallbackIcon {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
 }
 
 .bundleFallbackSummary::before {
@@ -924,15 +980,30 @@
   display: inline-flex;
   align-items: center;
   padding: 0.35rem 0.8rem;
-  background: lab(38.4009% 52.6132 -92.3857);
+  background: linear-gradient(
+    90deg,
+    #6366f1 0%,
+    #6366f1 35%,
+    #8b5cf6 50%,
+    #6366f1 65%,
+    #6366f1 100%
+  );
+  background-size: 250% 100%;
+  animation: shimmerBadge 8s linear infinite;
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 999px;
-  box-shadow: 0 2px 8px lab(38.4009% 52.6132 -92.3857 / 0.4);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
   white-space: nowrap;
+}
+
+@keyframes shimmerBadge {
+  to {
+    background-position: -200% 0;
+  }
 }
 
 .downloadHighlight .recommendedBadge {
@@ -1042,10 +1113,14 @@
 
 .cliInfoNoteCentered {
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   text-align: center;
   margin: 0.75rem auto 0;
   max-width: 720px;
+}
+
+.cliInfoNoteCentered svg {
+  margin-top: 5px;
 }
 
 .cliInfoNote svg {
@@ -1113,8 +1188,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.4rem;
-  border-radius: 8px;
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
   font-size: 0.95rem;
   font-weight: 600;
   background: #3b6fd6;
@@ -1136,8 +1211,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.4rem;
-  border-radius: 8px;
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
   font-size: 0.95rem;
   font-weight: 600;
   background: var(--page-bg);
@@ -1557,7 +1632,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.65rem 1.6rem;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 0.9rem;
   font-weight: 600;
   color: #fff !important;
@@ -2017,12 +2092,12 @@
 .downloadButton {
   display: inline-flex;
   align-items: center;
-  padding: 0.45rem 1rem;
+  padding: 0.45rem 1.1rem;
   font-size: 0.85rem;
   font-weight: 600;
   color: #ffffff !important;
   background: var(--ifm-color-primary);
-  border-radius: 8px;
+  border-radius: 999px;
   text-decoration: none !important;
   transition: background 0.2s;
 }
@@ -2130,6 +2205,42 @@
   margin-top: 4rem;
   padding-top: 1rem;
   padding-bottom: 1.5rem;
+}
+
+.commandGridCta {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.btnSm {
+  padding: 0.5rem 1.1rem !important;
+  font-size: 0.85rem !important;
+}
+
+.noTopBorder {
+  border-top: none !important;
+  margin-top: 0 !important;
+}
+
+.downloadsGrid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 996px) {
+  .downloadsGrid4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .downloadsGrid4 {
+    grid-template-columns: 1fr;
+  }
 }
 
 .aiExamplesCta .heroCardCta {
