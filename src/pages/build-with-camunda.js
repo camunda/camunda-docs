@@ -87,6 +87,26 @@ function DownloadIcon() {
   );
 }
 
+function DownloadBtnIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      style={{ marginRight: 6, verticalAlign: "-2px" }}
+    >
+      <path
+        d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function SparklesIconLg() {
   return (
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
@@ -753,7 +773,7 @@ function BuildWithCamunda() {
               Run Camunda locally <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
-              Install the Camunda CLI and start running your local Camunda
+              Install the Camunda CLI via npm and start using your local Camunda
               environment.
             </p>
           </div>
@@ -814,15 +834,15 @@ function BuildWithCamunda() {
                 <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
               </svg>
               <span>
-                Install requires Node.js 18+. Camunda 8 Run requires{" "}
+                Install via npm requires Node.js 18+.{" "}
                 <Link
                   to={useBaseUrl(
                     "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
                   )}
                 >
-                  OpenJDK 21–25
-                </Link>
-                .
+                  Camunda 8 Run
+                </Link>{" "}
+                requires OpenJDK 21–25.
               </span>
             </p>
           </div>
@@ -831,41 +851,52 @@ function BuildWithCamunda() {
           <details className={styles.bundleFallback}>
             <summary className={styles.bundleFallbackSummary}>
               <span>
-                No Node.js? Download and run the getting started bundle instead
-              </span>
-              <span className={styles.bundleFallbackIcon}>
-                <DownloadIcon />
+                No Node.js or npm? Download and run the getting started bundle
+                instead
               </span>
             </summary>
             <div className={styles.bundleFallbackContent}>
-              <p className={styles.bundleFallbackDesc}>
-                Download, extract, and run the getting started bundle for a
-                Camunda 8 Run environment without npm.
-              </p>
+              <ol className={styles.bundleFallbackDesc}>
+                <li>
+                  Download, extract, and run the getting started bundle for a
+                  Camunda 8 Run environment.
+                </li>
+                <li>
+                  Follow the instructions in{" "}
+                  <Link
+                    to={useBaseUrl(
+                      "docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
+                    )}
+                  >
+                    run your first BPMN process
+                  </Link>{" "}
+                  to deploy and run your model.
+                </li>
+              </ol>
               <div className={styles.downloadButtons}>
                 <a
                   className={styles.downloadButton}
                   href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-aarch64.zip"
                 >
-                  macOS (Apple Silicon)
+                  <DownloadBtnIcon /> macOS (Apple Silicon)
                 </a>
                 <a
                   className={styles.downloadButton}
                   href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-x86_64.zip"
                 >
-                  macOS (Intel)
+                  <DownloadBtnIcon /> macOS (Intel)
                 </a>
                 <a
                   className={styles.downloadButton}
                   href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-windows-x86_64.zip"
                 >
-                  Windows
+                  <DownloadBtnIcon /> Windows
                 </a>
                 <a
                   className={styles.downloadButton}
                   href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-linux-x86_64.tar.gz"
                 >
-                  Linux
+                  <DownloadBtnIcon /> Linux
                 </a>
               </div>
               <TerminalWindow copyable>
@@ -878,7 +909,12 @@ $ ./camunda-start.sh
 # Extract the .zip and run camunda-start.bat`}
               </TerminalWindow>
               <p
-                className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+                className={styles.cliInfoNote}
+                style={{
+                  textAlign: "left",
+                  justifyContent: "flex-start",
+                  marginTop: "1.5rem",
+                }}
               >
                 <svg
                   width="16"
@@ -904,15 +940,15 @@ $ ./camunda-start.sh
                   <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
                 </svg>
                 <span>
-                  Camunda 8 Run requires{" "}
                   <Link
                     to={useBaseUrl(
                       "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
                     )}
                   >
-                    OpenJDK 21–25
-                  </Link>
-                  . No npm or Node.js needed.
+                    Camunda 8 Run
+                  </Link>{" "}
+                  requires OpenJDK 21–25. Node.js/npm not required for getting
+                  started bundle.
                 </span>
               </p>
             </div>
@@ -938,8 +974,8 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
             </TerminalWindow>
 
             <p className={styles.quickStartLabel}>
-              <span className={styles.stepNumber}>4</span> See it running in
-              Operate
+              <span className={styles.stepNumber}>4</span> See the process
+              running in Operate
             </p>
             <TerminalWindow copyable={false}>
               {`# Open Operate at http://localhost:8080/operate
@@ -975,9 +1011,11 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
                 Your process instance appears once data has synced to Operate.
                 See{" "}
                 <Link
-                  to={useBaseUrl("docs/guides/getting-started-hello-world/")}
+                  to={useBaseUrl(
+                    "docs/guides/getting-started-hello-world#step-3-explore-your-process-in-operate"
+                  )}
                 >
-                  run your first BPMN process
+                  explore your process in Operate
                 </Link>
                 .
               </span>
@@ -1061,7 +1099,7 @@ $ c8ctl resolve inc 2251799813685251`}
             <span>
               Read the{" "}
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                c8ctl CLI documentation
+                Camunda CLI documentation
               </Link>{" "}
               to learn more about managing Camunda directly from the terminal.
             </span>
@@ -1319,7 +1357,7 @@ Available skills:
             styles.darkSection,
             styles.noTopBorder
           )}
-          style={{ scrollMarginTop: "5rem" }}
+          style={{ scrollMarginTop: "5rem", paddingTop: "3rem" }}
         >
           <div className="container">
             <div className={styles.sectionHeader}>
