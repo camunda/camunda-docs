@@ -10,7 +10,7 @@ paths:
     post:
       operationId: createFile
       summary: Create a file
-      description: Creates a new file in the specified workspace and folder.
+      description: Creates a new file in the specified project and folder.
       x-added-in-version: "0.1.0"
       tags:
         - File
@@ -182,7 +182,7 @@ components:
       additionalProperties: false
       required:
         - name
-        - workspaceKey
+        - projectKey
         - type
         - content
       properties:
@@ -191,11 +191,11 @@ components:
           type: string
           minLength: 1
           maxLength: 255
-        workspaceKey:
-          description: The key of the workspace this file belongs to.
+        projectKey:
+          description: The key of the project this file belongs to.
           type: string
         folderKey:
-          description: The key of the parent folder. If omitted or null, the file is created at workspace root.
+          description: The key of the parent folder. If omitted or null, the file is created at project root.
           type: string
           nullable: true
         type:
@@ -225,8 +225,11 @@ components:
           type: string
           minLength: 1
           maxLength: 255
+        projectKey:
+          description: The project to move the file to.
+          type: string
         folderKey:
-          description: The updated parent folder key. Set to null to move to workspace root.
+          description: The updated parent folder key. Set to null to move to project root.
           type: string
           nullable: true
         content:
@@ -244,7 +247,7 @@ components:
       required:
         - fileKey
         - name
-        - workspaceKey
+        - projectKey
         - folderKey
         - simplePath
         - canonicalPath
@@ -262,18 +265,18 @@ components:
         name:
           description: The name of the file.
           type: string
-        workspaceKey:
-          description: The key of the workspace this file belongs to.
+        projectKey:
+          description: The key of the project this file belongs to.
           type: string
         folderKey:
-          description: The key of the parent folder. Null if the file is at workspace root.
+          description: The key of the parent folder. Null if the file is at project root.
           type: string
           nullable: true
         simplePath:
-          description: The human-readable path of the file within its workspace.
+          description: The human-readable path of the file within its project.
           type: string
         canonicalPath:
-          description: The canonical (ID-based) path of the file within its workspace.
+          description: The canonical (ID-based) path of the file within its project.
           type: string
         revision:
           description: The current revision number, used for optimistic locking.
@@ -331,19 +334,24 @@ components:
     # --- Search schemas ---
 
     FileSearchQuery:
-      allOf:
-        - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
-        - type: object
-          properties:
-            sort:
-              description: Sort field criteria.
-              type: array
-              items:
-                $ref: "#/components/schemas/FileSearchQuerySortRequest"
-            filter:
-              description: The file search filters.
-              allOf:
-                - $ref: "#/components/schemas/FileFilter"
+      type: object
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          oneOf:
+            - $ref: "search-models.yaml#/components/schemas/LimitPagination"
+            - $ref: "search-models.yaml#/components/schemas/OffsetPagination"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/FileSearchQuerySortRequest"
+        filter:
+          description: The file search filters.
+          allOf:
+            - $ref: "#/components/schemas/FileFilter"
 
     FileSearchQuerySortRequest:
       type: object
@@ -369,8 +377,8 @@ components:
           description: Filter by file name.
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
-        workspaceKey:
-          description: Filter by workspace key.
+        projectKey:
+          description: Filter by project key.
           allOf:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         folderKey:
@@ -399,14 +407,15 @@ components:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
 
     FileSearchQueryResult:
-      allOf:
-        - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
-        - type: object
-          required:
-            - items
-          properties:
-            items:
-              description: The matching files.
-              type: array
-              items:
-                $ref: "#/components/schemas/FileResult"
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching files.
+          type: array
+          items:
+            $ref: "#/components/schemas/FileResult"
+        page:
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
