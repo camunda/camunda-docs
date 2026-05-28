@@ -138,6 +138,10 @@ RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/operate/?$ /docs/next/reference/announcements-release-notes/890/890-announcements/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-long-term-memory/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-codeinterpreter/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
 
 
 ## Reabsorbed Optimize docs
