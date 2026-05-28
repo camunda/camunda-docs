@@ -59,6 +59,40 @@ The AI agent is provided as 2 different variants, each with different capabiliti
 
 :::
 
+### Choose an implementation
+
+The right implementation depends on whether you need tool calling and how much control you need over the feedback loop.
+
+| Use case                                                                             | Recommended implementation                                       |
+| :----------------------------------------------------------------------------------- | :--------------------------------------------------------------- |
+| Agentic workflow with automatic tool calling (most use cases)                        | [AI Agent Sub-process](#ai-agent-sub-process)                    |
+| Simple one-shot LLM call without tool calling                                        | [AI Agent Task](#ai-agent-task)                                  |
+| Custom loop control — for example, human approval or PII detection before tool calls | [AI Agent Task](#ai-agent-task) with external ad-hoc sub-process |
+
+- **AI Agent Sub-process** (recommended): The sub-process handles tool resolution and the feedback loop automatically. Tools are resolved from activities inside the sub-process, so no explicit loop modeling is needed. This is the simplest configuration for most agentic workflows. Note that you must include at least one activity (tool) inside the sub-process.
+- **AI Agent Task without tools**: A single, one-shot LLM call with no ad-hoc sub-process. Use this for simple inference tasks that don't require tool calling.
+- **AI Agent Task with tools**: Tools are provided by an external ad-hoc sub-process that you model explicitly, giving you full control over the feedback loop. Use this when you need to intercept tool calls — for example, to add a human approval step or run PII detection before a tool executes. This is the most complex configuration.
+
+### Configuration comparison
+
+The following table summarizes the key configuration differences between the two implementations. For full details, see the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) and [AI Agent Task](./agentic-ai-aiagent-task.md) pages.
+
+| Configuration field    | AI Agent Sub-process                                                             | AI Agent Task                                                      |
+| :--------------------- | :------------------------------------------------------------------------------- | :----------------------------------------------------------------- |
+| Model provider         | Yes                                                                              | Yes                                                                |
+| Model                  | Yes                                                                              | Yes                                                                |
+| System prompt          | Yes                                                                              | Yes                                                                |
+| User prompt            | Yes                                                                              | Yes                                                                |
+| Tools                  | Automatic (resolved from activities inside the sub-process)                      | Optional — requires ad-hoc sub-process ID and tool call results    |
+| Agent context (memory) | Optional — only needed when re-entering the agent from an external feedback loop | Required — must be aligned with the output mapping result variable |
+| Limits                 | Yes                                                                              | Yes                                                                |
+| Event handling         | Yes                                                                              | No                                                                 |
+| Response               | Yes                                                                              | Yes                                                                |
+| `toolCalls` in output  | No                                                                               | Yes — returned for routing to the ad-hoc sub-process               |
+| Error handling         | Yes                                                                              | Yes                                                                |
+| Retries                | Yes                                                                              | Yes                                                                |
+| Execution listeners    | Yes                                                                              | Yes                                                                |
+
 ### AI Agent Sub-process
 
 The [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) implementation uses the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to provide an integrated solution
