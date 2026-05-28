@@ -708,7 +708,7 @@ function BuildWithCamunda() {
                 </p>
                 <ul className={styles.heroCardChecks}>
                   <li>
-                    <CheckIcon color="#22a06b" /> One command to install
+                    <CheckIcon color="#22a06b" /> One command to install Camunda
                   </li>
                   <li>
                     <CheckIcon color="#22a06b" /> AI agent skills built in
@@ -773,7 +773,7 @@ function BuildWithCamunda() {
               Run Camunda locally <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
-              Install the Camunda CLI via npm and start using your local Camunda
+              Install the Camunda CLI via npm and start a local Camunda
               environment.
             </p>
           </div>
@@ -804,6 +804,22 @@ function BuildWithCamunda() {
 
             <p className={styles.quickStartLabel}>
               <span className={styles.stepNumber}>2</span> Start Camunda 8 Run
+              <span
+                style={{
+                  marginLeft: "auto",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Link
+                  to={useBaseUrl(
+                    "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+                  )}
+                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                >
+                  Camunda 8 Run
+                </Link>
+              </span>
             </p>
             <TerminalWindow copyable>
               {`$ c8ctl cluster start 8.9`}
@@ -834,15 +850,8 @@ function BuildWithCamunda() {
                 <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
               </svg>
               <span>
-                Install via npm requires Node.js 18+.{" "}
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                  )}
-                >
-                  Camunda 8 Run
-                </Link>{" "}
-                requires OpenJDK 21–25.
+                Install via npm requires Node.js 18+. Camunda 8 Run requires
+                OpenJDK 21–25.
               </span>
             </p>
           </div>
@@ -940,15 +949,8 @@ $ ./camunda-start.sh
                   <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
                 </svg>
                 <span>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                    )}
-                  >
-                    Camunda 8 Run
-                  </Link>{" "}
-                  requires OpenJDK 21–25. Node.js/npm not required for getting
-                  started bundle.
+                  Camunda 8 Run requires OpenJDK 21–25. Node.js/npm not required
+                  for getting started bundle.
                 </span>
               </p>
             </div>
