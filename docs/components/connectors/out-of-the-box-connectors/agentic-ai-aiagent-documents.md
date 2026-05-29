@@ -9,15 +9,14 @@ The AI Agent connector can pass [Camunda documents](/self-managed/concepts/docum
 from two sources:
 
 - The [user prompt](./agentic-ai-aiagent-subprocess.md#user-prompt) **Documents** field.
-- [Tool call results](./agentic-ai-aiagent-tool-definitions.md#tool-call-responses) (and event payloads from event
-  sub-processes).
+- [Tool call results](./agentic-ai-aiagent-tool-definitions.md#tool-call-responses) and event payloads from event sub-processes.
 
 In both cases, supported documents are resolved and passed to the LLM as native content blocks so the model can
 interpret them directly.
 
 ## Supported document types
 
-As file type support varies by LLM provider/model, you must test your document use case with the provider you are using.
+Because file type support varies by LLM provider and model, you must test your document use case with the provider you are using.
 
 | File type         | Supported | Description                                                                                                                                                                        |
 | :---------------- | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -44,17 +43,13 @@ accept document content blocks, refer to the
 
 ## Documents in tool call results
 
-[Tool call responses](./agentic-ai-aiagent-tool-definitions.md#tool-call-responses) can contain document references
-nested anywhere within the result structure.
+[Tool call responses](./agentic-ai-aiagent-tool-definitions.md#tool-call-responses) can contain document references nested anywhere within the result structure.
 
-The agent extracts these documents from the tool call result and passes them to the LLM as native content blocks (plain
-text for text files, base64 encoded content for PDFs and images) — the same mechanism used for user prompt documents.
+The agent extracts these documents from the tool call result and passes them to the LLM as native content blocks (plain text for text files, base64 encoded content for PDFs and images). This is the same mechanism used for user prompt documents.
 
-In the conversation, the tool call result itself retains a lightweight document _reference_ (for example, the document
-ID and store, or an external URL). The resolved document content is delivered in a separate follow-up user message
-immediately after the tool result, allowing the model to correlate each reference with its content.
+In the conversation, the tool call result itself retains a lightweight document _reference_ (for example, the document ID and store, or an external URL). The resolved document content is delivered in a separate follow-up user message immediately after the tool result, allowing the model to correlate each reference with its content.
 
 For example, a tool can return a document for the LLM to analyze:
 
 - A [REST connector](/components/connectors/protocol/rest.md) tool with the **Store response** option enabled downloads a PDF document.
-- A user task tool with a [Filepicker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form lets a person upload a document (human-in-the-loop).
+- A user task tool with a [Filepicker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form lets a person upload a document as part of a human-in-the-loop workflow.
