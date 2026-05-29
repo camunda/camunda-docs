@@ -88,8 +88,9 @@ module.exports = {
         type: "doc",
         id: "guides/build-with-ai/overview",
       },
-      items: ["guides/build-with-ai/ai-usage-guidelines"],
+      items: [],
     },
+    "guides/build-with-ai/ai-usage-guidelines",
     {
       type: "category",
       label: "Agentic orchestration",
@@ -120,7 +121,6 @@ module.exports = {
         "components/agentic-orchestration/model-recommendations-agentic",
       ],
     },
-    "reference/mcp-docs/docs-mcp",
     {
       type: "category",
       label: "Intelligent document processing (IDP)",
@@ -158,6 +158,7 @@ module.exports = {
         "components/hub/workspace/modeler/idp/idp-reference",
       ],
     },
+    "reference/mcp-docs/docs-mcp",
   ],
   Components: [
     "components/components-overview",
