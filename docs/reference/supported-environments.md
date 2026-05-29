@@ -46,8 +46,8 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Connector SDK**: OpenJDK 17+
 - **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 4.0.x
 - **Helm CLI**:
-  - v4.x required for Camunda 8.10 (chart 15.x) and later.
-  - v3.x supported for Camunda 8.9 (chart 14.x) and earlier — see the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
+  - v4.x is the only supported version for Camunda 8.10 (chart 15.x) and later.
+  - v3.x is supported for earlier Camunda versions — see the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
   - See [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md) for details.
 
 ## Camunda 8 Self-Managed
