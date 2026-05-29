@@ -14,13 +14,9 @@ Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. Mi
 
 ## About
 
-Web Modeler API v1 is the REST API for Web Modeler, a standalone product for modeling and managing process diagrams. It exposed resources like projects, folders, files, and collaborators as they existed within Web Modeler.
+Web Modeler API v1 was the REST API for Web Modeler, a standalone product for modeling and managing process diagrams. It exposed resources like projects, folders, files, and collaborators as they existed within Web Modeler.
 
-[Camunda Hub API v2](/apis-tools/hub-api-rest/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed:
-
-- In v1, _projects_ were the top-level container for files and folders. In v2, _workspaces_ are a new organizational level above projects. Files still belong to _projects_, which now live inside a workspace. You can read more in the [Camunda Hub workspace documentation](/components/hub/workspace/index.md).
-- In v1, resources were identified by `Id` fields. In v2, resources are identified by `Key` fields. For example, `folderId` is now `folderKey`.
-- Update operations in v2 require a `revision` field. Fetch the current revision from a get or create response and include it in your update request to prevent overwriting concurrent changes.
+[Camunda Hub API v2](/apis-tools/hub-api-rest/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed.
 
 ## General changes
 
@@ -61,6 +57,18 @@ In v1, `page` specified the page to return, and `size` specified the number of i
 - `page.limit` limits the number of items returned.
 
 In v1, the default page size was 10. In v2, the default limit is 100.
+
+### Projects
+
+In v1, _projects_ were the top-level container for files and folders. In v2, _workspaces_ are a new organizational level above projects. Files still belong to _projects_, which now live inside a workspace. You can read more in the [Camunda Hub workspace documentation](/components/hub/workspace/index.md).
+
+### Key fields
+
+In v1, resources were identified by `Id` fields. In v2, resources are identified by `Key` fields. For example, `folderId` is now `folderKey`.
+
+### Revisions
+
+Update operations in v2 require a `revision` field. Fetch the current revision from a get or create response and include it in your update request to prevent overwriting concurrent changes.
 
 ## Files API
 
