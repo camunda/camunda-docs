@@ -641,7 +641,7 @@ function BuildWithCamunda() {
   return (
     <Layout
       title="Build with Camunda"
-      description="Process orchestration for developers. Go from zero to a running workflow in under two minutes."
+      description="Process orchestration for developers. Go from zero to a running workflow in minutes."
     >
       <div className={styles.page}>
         {/* ─── Hero: Start from your terminal ─── */}
@@ -658,7 +658,7 @@ function BuildWithCamunda() {
                 Start building with Camunda
               </h1>
               <p className={styles.terminalHeroSub}>
-                Go from zero to a running workflow in under two minutes.
+                Get started with a running workflow in minutes.
               </p>
             </div>
 
@@ -718,7 +718,7 @@ function BuildWithCamunda() {
                   </li>
                 </ul>
                 <span className={styles.heroCardCta}>
-                  Get started <ArrowDown />
+                  Start building <ArrowDown />
                 </span>
               </Link>
 
@@ -789,14 +789,7 @@ function BuildWithCamunda() {
                   display: "flex",
                   alignItems: "center",
                 }}
-              >
-                <Link
-                  to="https://www.npmjs.com/package/@camunda8/cli"
-                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                >
-                  c8ctl on npm
-                </Link>
-              </span>
+              ></span>
             </p>
             <TerminalWindow copyable>
               {`$ npm install -g @camunda8/cli`}
@@ -810,16 +803,7 @@ function BuildWithCamunda() {
                   display: "flex",
                   alignItems: "center",
                 }}
-              >
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                  )}
-                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                >
-                  Camunda 8 Run
-                </Link>
-              </span>
+              ></span>
             </p>
             <TerminalWindow copyable>
               {`$ c8ctl cluster start 8.9`}
@@ -850,8 +834,22 @@ function BuildWithCamunda() {
                 <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
               </svg>
               <span>
-                Install via npm requires Node.js 18+. Camunda 8 Run requires
-                OpenJDK 21–25.
+                <Link
+                  to="https://www.npmjs.com/package/@camunda8/cli"
+                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                >
+                  Install via npm
+                </Link>{" "}
+                requires Node.js 18+.{" "}
+                <Link
+                  to={useBaseUrl(
+                    "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+                  )}
+                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                >
+                  Camunda 8 Run
+                </Link>{" "}
+                requires OpenJDK 21–25.
               </span>
             </p>
           </div>
@@ -1031,7 +1029,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
           {/* Everything from your terminal (moved into CLI section) */}
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Full control from your terminal
+              Manage Camunda from your terminal
             </h2>
             <p className={styles.sectionSub}>
               Use the CLI for the full Camunda lifecycle. No browser required.
@@ -1099,12 +1097,11 @@ $ c8ctl resolve inc 2251799813685251`}
               <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
             </svg>
             <span>
-              Read the{" "}
+              Learn more about using the{" "}
               <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
                 Camunda CLI
               </Link>{" "}
-              documentation to learn more about managing Camunda directly from
-              the terminal.
+              to manage Camunda directly from the terminal.
             </span>
           </p>
 
@@ -1115,7 +1112,7 @@ $ c8ctl resolve inc 2251799813685251`}
           {/* Teach AI agent (moved into CLI section) */}
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Train your AI agent on Camunda
+              Train your AI agents on Camunda
             </h2>
             <p className={styles.sectionSub}>
               Deploy processes, manage clusters, and query instances directly
@@ -1125,21 +1122,7 @@ $ c8ctl resolve inc 2251799813685251`}
           <div className={styles.aiGrid}>
             <div className={styles.aiCard}>
               <h4 style={{ display: "flex", alignItems: "center" }}>
-                Add Camunda skills as Claude plugin
-                <span
-                  style={{
-                    marginLeft: "auto",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <Link
-                    to="https://github.com/camunda/skills"
-                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                  >
-                    camunda/skills
-                  </Link>
-                </span>
+                Add Camunda Skills as Claude plugin
               </h4>
               <TerminalWindow title="Terminal">
                 {`$ claude plugin marketplace add camunda/skills
@@ -1162,37 +1145,6 @@ Available skills:
             <div className={styles.aiCard}>
               <h4 style={{ display: "flex", alignItems: "center" }}>
                 Connect to Camunda via MCP
-                <span
-                  style={{
-                    marginLeft: "auto",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <Link
-                    to={useBaseUrl(
-                      "docs/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/"
-                    )}
-                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                  >
-                    Orchestration Cluster MCP
-                  </Link>
-                  <span
-                    style={{
-                      color: "var(--muted-color)",
-                      margin: "0 0.4rem",
-                      fontWeight: 300,
-                    }}
-                  >
-                    |
-                  </span>
-                  <Link
-                    to={useBaseUrl("docs/reference/mcp-docs/")}
-                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                  >
-                    Docs MCP
-                  </Link>
-                </span>
               </h4>
               <TerminalWindow title="Terminal">
                 {`// mcp.json
@@ -1213,10 +1165,64 @@ Available skills:
               </TerminalWindow>
             </div>
           </div>
+          <p
+            className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+            style={{ marginTop: "2.5rem" }}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="8"
+                cy="8"
+                r="7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
+              <path
+                d="M8 7v4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+            </svg>
+            <span>
+              Learn more about{" "}
+              <Link
+                to="https://github.com/camunda/skills"
+                style={{ fontWeight: 400, fontSize: "0.85rem" }}
+              >
+                Camunda Skills
+              </Link>
+              {", and the "}
+              <Link
+                to={useBaseUrl(
+                  "docs/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/"
+                )}
+                style={{ fontWeight: 400, fontSize: "0.85rem" }}
+              >
+                Orchestration Cluster MCP
+              </Link>{" "}
+              and{" "}
+              <Link
+                to={useBaseUrl("docs/reference/mcp-docs/")}
+                style={{ fontWeight: 400, fontSize: "0.85rem" }}
+              >
+                Docs MCP
+              </Link>{" "}
+              servers.
+            </span>
+          </p>
           <div className={styles.aiExamples}>
             <h4>...then ask your agent</h4>
             <p className={styles.aiExamplesSub}>
-              Try one of these prompts to see Camunda skills in action.
+              Try one of these prompts to see Camunda Skills in action.
             </p>
             <div className={styles.aiExampleGrid}>
               <div className={styles.aiExampleItem}>
@@ -1243,7 +1249,7 @@ Available skills:
 
             <div className={styles.aiExamplesCta}>
               <Link className={styles.heroCardCta} to="#self-managed">
-                Get started
+                Start building
                 <svg
                   width="16"
                   height="16"
