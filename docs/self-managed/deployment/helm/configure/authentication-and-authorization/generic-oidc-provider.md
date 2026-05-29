@@ -21,7 +21,7 @@ Before you begin, ensure you have:
 - An OIDC-compliant provider already deployed and accessible.
 - Administrative access to create and configure OIDC clients in your provider.
 - Access to your provider's discovery document to obtain endpoint URLs.
-- A Kubernetes cluster with Helm 3.x installed.
+- A Kubernetes cluster with the Helm CLI v4 installed.
 - kubectl configured to access your cluster.
 
 :::note

@@ -144,12 +144,10 @@ function Home() {
                   "button button--outline button--secondary button--lg sign-up",
                   styles.getStarted
                 )}
-                to={useBaseUrl(
-                  "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
-                )}
-                title="Sign up for Camunda 8 SaaS"
+                to={useBaseUrl("build-with-camunda")}
+                title="Try Camunda 8 for free"
               >
-                Sign up
+                Try free
               </Link>
             </div>
           </div>
