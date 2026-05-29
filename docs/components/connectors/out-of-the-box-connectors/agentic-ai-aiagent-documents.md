@@ -53,3 +53,8 @@ text for text files, base64 encoded content for PDFs and images) — the same me
 In the conversation, the tool call result itself retains a lightweight document _reference_ (for example, the document
 ID and store, or an external URL). The resolved document content is delivered in a separate follow-up user message
 immediately after the tool result, allowing the model to correlate each reference with its content.
+
+For example, a tool can return a document for the LLM to analyze:
+
+- A [REST connector](/components/connectors/protocol/rest.md) tool with the **Store response** option enabled downloads a PDF document.
+- A user task tool with a [Filepicker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form lets a person upload a document (human-in-the-loop).
