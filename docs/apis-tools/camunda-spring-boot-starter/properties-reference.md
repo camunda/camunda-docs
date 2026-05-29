@@ -391,13 +391,13 @@ Type: <code>duration</code>
 
 <td>
 
-The path to the credentials cache file.
+The path to the credentials cache file. If unset or empty, the OAuth provider caches credentials only in memory and does not persist them across restarts. Set this to a writable path to opt in to persistent file-based caching. See issue #13124.
 
 Type: <code>string</code>
 
 </td>
 <td>
-  <code>&quot;$HOME&#x2F;.camunda&#x2F;credentials&quot;</code>
+  <code>null</code>
 </td>
 </tr>
 <tr>
@@ -883,6 +883,54 @@ Type: <code>string</code>
 </tbody>
 </table>
 
+### `camunda.client.cluster-variables`
+
+Properties for setting cluster variables at startup.
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.enabled" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_ENABLED"/><a href="#camundaclientclustervariablesenabled" id="camundaclientclustervariablesenabled" class="hash-link"/>
+</td>
+
+<td>
+
+Indicates if the `@ClusterVariables` annotation is processed and configured variables are applied.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>true</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES"/><a href="#camundaclientclustervariablesvariables" id="camundaclientclustervariablesvariables" class="hash-link"/>
+</td>
+
+<td>
+
+Cluster variables to set at startup as key-value pairs.
+
+Type: <code>map[string,object]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+</tbody>
+</table>
+
 ### `camunda.client.deployment`
 
 Properties for automatic deployment at startup.
@@ -1122,6 +1170,22 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-inactivity-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMINACTIVITYTIMEOUT"/><a href="#camundaclientworkerdefaultsstreaminactivitytimeout" id="camundaclientworkerdefaultsstreaminactivitytimeout" class="hash-link"/>
+</td>
+
+<td>
+
+If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before cancelling and recreating it. The timer is reset every time a job is received. Must be strictly less than `stream-timeout` when both are set.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>&quot;PT10M&quot;</code>
+</td>
+</tr>
+<tr>
+<td>
   <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMTIMEOUT"/><a href="#camundaclientworkerdefaultsstreamtimeout" id="camundaclientworkerdefaultsstreamtimeout" class="hash-link"/>
 </td>
 
@@ -1253,7 +1317,7 @@ Type: <code>duration</code>
 
 ### `camunda.client.worker.override`
 
-Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type.
+Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type or worker name.
 
 <table>
 <thead>
@@ -1434,6 +1498,22 @@ Type: <code>duration</code>
 Opt-in feature flag that enables job streaming. When enabled, the job worker uses both streaming and polling to activate jobs. A long-lived stream eagerly pushes new jobs, and polling retrieves jobs created <em>before</em> any streams were opened.
 
 Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type|worker-name&gt;.stream-inactivity-timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE|WORKERNAME&gt;_STREAMINACTIVITYTIMEOUT"/><a href="#camundaclientworkeroverridejobtypeworkernamestreaminactivitytimeout" id="camundaclientworkeroverridejobtypeworkernamestreaminactivitytimeout" class="hash-link"/>
+</td>
+
+<td>
+
+If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before cancelling and recreating it. The timer is reset every time a job is received. Must be strictly less than `stream-timeout` when both are set.
+
+Type: <code>duration</code>
 
 </td>
 <td>
