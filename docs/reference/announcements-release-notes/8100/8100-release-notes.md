@@ -86,6 +86,19 @@ Expression Evaluation: process/element context support
   - Requires exactly one of `processInstanceKey` or `elementInstanceKey` (mutually exclusive); sending both returns `00 Bad Request`.
 - Behavior remains side-effect free and uses the same timeout and guardrails as the existing cluster-scope evaluation.
 
+### Support start forms in Desktop Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/2406 -->
+
+The Desktop Modeler now supports defining form references on none start events in Camunda 8 BPMN models, matching the existing Web Modeler capability.
+
+Process developers can configure start forms directly in the Desktop Modeler's properties panel using:
+
+- Camunda Form (linked) — reference a deployed Camunda Form by ID
+- Camunda Form (embedded) — embed form JSON in the BPMN diagram (deprecated)
+
+Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across the Web and Desktop Modeler.
+
 ## 8.10.0-alpha1
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
