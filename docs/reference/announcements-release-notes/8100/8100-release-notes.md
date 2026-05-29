@@ -38,6 +38,24 @@ import PageDescription from '@site/src/components/PageDescription';
 | :----------- | :----------- | :--- |
 | 09 June 2026 | -            | -    |
 
+### Scope-Aware Variable Export Configuration for Optimize
+
+<!-- https://github.com/camunda/product-hub/issues/3435 -->
+
+You can now configure variable export behavior by scope:
+
+- Root (process instance) variables and local variables can be enabled or disabled independently.
+- You can exclude all local variables by default, while still whitelisting specific local variables by name pattern.
+- Configuration integrates with the existing variable filtering mechanism, using consistent syntax and semantics.
+- Terminology is aligned with Camunda 8 docs:
+  - Root scope / process instance scope for variables visible across the process.
+  - Local variables for variables defined in child scopes only.
+
+This allows setups such as:
+
+- Export only root variables for all processes.
+- Additionally export a curated subset of local variables (e.g., taskContextDisplayName, specific local audit variables) without exposing all locals.
+
 ## 8.10.0-alpha1
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
