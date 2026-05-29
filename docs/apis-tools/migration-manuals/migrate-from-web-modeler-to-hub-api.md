@@ -94,8 +94,6 @@ All v1 files endpoints have a direct v2 equivalent:
 | `folderId`         | `folderKey`        | Renamed.                                                                                            |
 | `fileType`         | `type`             | Renamed. `connector_template` is no longer supported. `element_template` is now `element-template`. |
 
-On success, this endpoint now returns `201 Created`. Web Modeler API v1 returned `200 OK`.
-
 ### Get a file
 
 The v1 response returned a nested structure, with `metadata` and `content` as separate top-level fields. The v2 response is a flat object.
