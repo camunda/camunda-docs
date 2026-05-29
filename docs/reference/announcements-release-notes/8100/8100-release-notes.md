@@ -56,6 +56,21 @@ This allows setups such as:
 - Export only root variables for all processes.
 - Additionally export a curated subset of local variables (e.g., taskContextDisplayName, specific local audit variables) without exposing all locals.
 
+### Pro-Code AI Enablement via Skills Repository
+
+<!-- https://github.com/camunda/product-hub/issues/3557 -->
+
+Camunda Agent Development Kit (ADK) — Early Access
+
+The Camunda ADK is a set of tools for AI coding agents that enables them to build, validate, and configure Camunda artifacts — not just generate code. Install the ADK alongside Skills and your AI agent can:
+
+- Build and modify BPMN diagrams programmatically with layout applied automatically
+- Configure connectors using element templates (no raw XML)
+- Generate form schemas with validation
+- Create and edit DMN decision tables
+- Run BPMN lint rules against generated diagrams
+- Scaffold and wire Camunda Process Test (CPT) integration tests
+
 ## 8.10.0-alpha1
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
