@@ -188,16 +188,11 @@ the tool.
 
 ### Document support
 
-Similar to the [user prompt](agentic-ai-aiagent-subprocess.md#user-prompt) **Documents** field, tool call responses can contain
-[Camunda Document references](/self-managed/concepts/document-handling/overview.md) nested anywhere within the result
-structure (supporting the same file types as for the user prompt).
+Tool call responses can contain [Camunda Document references](/self-managed/concepts/document-handling/overview.md)
+nested anywhere within the result structure. The agent extracts these documents and passes them to the LLM as native
+content blocks.
 
-The agent extracts these documents from the tool call result and passes them to the LLM as native content blocks (plain
-text for text files, base64 encoded content for PDFs and images) — the same mechanism used for user prompt documents.
-
-In the conversation, the tool call result itself retains a lightweight document _reference_ (for example, the document
-ID and store, or an external URL). The resolved document content is delivered in a separate follow-up user message
-immediately after the tool result, allowing the model to correlate each reference with its content.
+For supported file types and details on how documents are resolved, see [document support](./agentic-ai-aiagent-documents.md).
 
 ## Gateway tool definitions
 
