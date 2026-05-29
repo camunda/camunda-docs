@@ -33,6 +33,12 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS cluster using 
 
 After creation, note the **AWS Role ARN** displayed in the Console for your cluster.
 
+:::note AWS Role ARN format
+The AWS Role ARN will be in the format `arn:aws:iam::<ACCOUNT-ID>:role/c8-cluster/c8-apps-<CLUSTER-ID>`, where `<CLUSTER-ID>` is your cluster's unique identifier.
+
+For example: `arn:aws:iam::123456789012:role/c8-cluster/c8-apps-a5f5ac9d-423f-4b18-8f46-3c7f21ba6fb8`
+:::
+
 ## Step 2: Create and configure an AWS KMS key
 
 You can create the key either via AWS CLI or manually in the AWS Management Console.
