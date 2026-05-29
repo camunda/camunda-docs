@@ -71,6 +71,21 @@ The Camunda ADK is a set of tools for AI coding agents that enables them to buil
 - Run BPMN lint rules against generated diagrams
 - Scaffold and wire Camunda Process Test (CPT) integration tests
 
+### FEEL Evaluation with Process Instance Key
+
+<!-- https://github.com/camunda/product-hub/issues/3606 -->
+
+Expression Evaluation: process/element context support
+
+- Extended `POST /v2/expression/evaluation` to optionally evaluate expressions in the context of:
+  - A process instance, via `processInstanceKey`, or
+  - A flow node instance, via `elementInstanceKey`.
+- The endpoint now:
+  - Combines process instance variables, element-local variables (for element scope), cluster variables, and optional request context into a single evaluation context.
+  - Enforces existing `EXPRESSION:EVALUATE` plus `PROCESS_DEFINITION:READ_PROCESS_INSTANCE` on the underlying process definition.
+  - Requires exactly one of `processInstanceKey` or `elementInstanceKey` (mutually exclusive); sending both returns `00 Bad Request`.
+- Behavior remains side-effect free and uses the same timeout and guardrails as the existing cluster-scope evaluation.
+
 ## 8.10.0-alpha1
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
