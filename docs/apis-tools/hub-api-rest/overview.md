@@ -15,4 +15,4 @@ See the [authentication guide](/apis-tools/hub-api-rest/authentication.md) for s
 
 ## Migrating from Web Modeler API v1
 
-The Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [Migrate](/apis-tools/hub-api-rest/overview.md) to the Camunda Hub REST API v2 before upgrading to 8.12.
+Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [Migrate](/apis-tools/hub-api-rest/overview.md) to Camunda Hub REST API v2 before upgrading to 8.12.

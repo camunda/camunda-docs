@@ -7,7 +7,7 @@ description: "Use the Web Modeler API to access your Web Modeler data."
 ---
 
 :::note DEPRECATED
-The Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [Migrate to the Camunda Hub REST API v2](../migration-manuals/migrate-from-web-modeler-to-hub-api.md).
+Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [Migrate to Camunda Hub REST API v2](../migration-manuals/migrate-from-web-modeler-to-hub-api.md).
 :::
 
 Use the Web Modeler API to access your Web Modeler data.
