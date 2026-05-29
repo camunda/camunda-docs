@@ -290,7 +290,7 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
-            version: "1",
+            version: "0.1.0",
             label: "Unused but required field",
             baseUrl: "Unused but required field",
           },
