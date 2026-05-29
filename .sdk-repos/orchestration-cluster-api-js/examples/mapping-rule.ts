@@ -1,7 +1,10 @@
 // Compilable usage examples for mapping rule operations.
 // These examples are type-checked during build to guard against API regressions.
 
-import { createCamundaClient, type MappingRuleId } from '@camunda8/orchestration-cluster-api';
+import {
+  createCamundaClient,
+  type MappingRuleId,
+} from "@camunda8/orchestration-cluster-api";
 
 //#region CreateMappingRule
 async function createMappingRuleExample(mappingRuleId: MappingRuleId) {
@@ -9,9 +12,9 @@ async function createMappingRuleExample(mappingRuleId: MappingRuleId) {
 
   const result = await camunda.createMappingRule({
     mappingRuleId,
-    name: 'LDAP Group Mapping',
-    claimName: 'groups',
-    claimValue: 'engineering',
+    name: "LDAP Group Mapping",
+    claimName: "groups",
+    claimValue: "engineering",
   });
 
   console.log(`Created mapping rule: ${result.mappingRuleId}`);
@@ -54,9 +57,9 @@ async function updateMappingRuleExample(mappingRuleId: MappingRuleId) {
 
   await camunda.updateMappingRule({
     mappingRuleId,
-    name: 'LDAP Group Mapping',
-    claimName: 'groups',
-    claimValue: 'engineering-team',
+    name: "LDAP Group Mapping",
+    claimName: "groups",
+    claimValue: "engineering-team",
   });
 }
 //#endregion UpdateMappingRule

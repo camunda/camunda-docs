@@ -6,16 +6,18 @@ import {
   type ProcessDefinitionId,
   type ProcessDefinitionKey,
   type ProcessInstanceKey,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region CreateProcessInstanceById
-async function createProcessInstanceByIdExample(processDefinitionId: ProcessDefinitionId) {
+async function createProcessInstanceByIdExample(
+  processDefinitionId: ProcessDefinitionId
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createProcessInstance({
     processDefinitionId,
     variables: {
-      orderId: 'ORD-12345',
+      orderId: "ORD-12345",
       amount: 99.95,
     },
   });
@@ -25,14 +27,16 @@ async function createProcessInstanceByIdExample(processDefinitionId: ProcessDefi
 //#endregion CreateProcessInstanceById
 
 //#region CreateProcessInstanceByKey
-async function createProcessInstanceByKeyExample(processDefinitionKey: ProcessDefinitionKey) {
+async function createProcessInstanceByKeyExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
   const camunda = createCamundaClient();
 
   // Key from a previous API response (e.g. deployment)
   const result = await camunda.createProcessInstance({
     processDefinitionKey,
     variables: {
-      orderId: 'ORD-12345',
+      orderId: "ORD-12345",
       amount: 99.95,
     },
   });
@@ -42,7 +46,9 @@ async function createProcessInstanceByKeyExample(processDefinitionKey: ProcessDe
 //#endregion CreateProcessInstanceByKey
 
 //#region CancelProcessInstance
-async function cancelProcessInstanceExample(processDefinitionId: ProcessDefinitionId) {
+async function cancelProcessInstanceExample(
+  processDefinitionId: ProcessDefinitionId
+) {
   const camunda = createCamundaClient();
 
   // Create a process instance and get its key from the response
@@ -58,7 +64,9 @@ async function cancelProcessInstanceExample(processDefinitionId: ProcessDefiniti
 //#endregion CancelProcessInstance
 
 //#region GetProcessInstance
-async function getProcessInstanceExample(processInstanceKey: ProcessInstanceKey) {
+async function getProcessInstanceExample(
+  processInstanceKey: ProcessInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const instance = await camunda.getProcessInstance(
@@ -72,13 +80,15 @@ async function getProcessInstanceExample(processInstanceKey: ProcessInstanceKey)
 //#endregion GetProcessInstance
 
 //#region SearchProcessInstances
-async function searchProcessInstancesExample(processDefinitionId: ProcessDefinitionId) {
+async function searchProcessInstancesExample(
+  processDefinitionId: ProcessDefinitionId
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchProcessInstances(
     {
       filter: { processDefinitionId },
-      sort: [{ field: 'startDate', order: 'DESC' }],
+      sort: [{ field: "startDate", order: "DESC" }],
       page: { limit: 10 },
     },
     { consistency: { waitUpToMs: 5000 } }

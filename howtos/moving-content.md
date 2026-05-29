@@ -181,7 +181,6 @@ If you wish to test `.htaccess` rules, you have a couple options:
    The local server is based on the contents of your `./build` folder.
 
    **To start the local server**:
-
    1. Build the docs with `npm run build:docker`.
 
       You may also use `npm run build` to build the docs, but `npm run build:docker` will likely run in a more stable manner. Both will result in a built website inside the `/build` folder.
@@ -194,7 +193,6 @@ If you wish to test `.htaccess` rules, you have a couple options:
    4. Clean up the server with `docker compose down`.
 
    **If you make changes and want to re-start the server**:
-
    1. Apply the changes to your `build` folder, either manually or by re-running `npm run build`.
    2. Rebuild the environment with `docker compose build`.
    3. Re-start the server with `docker compose up`.

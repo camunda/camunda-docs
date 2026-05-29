@@ -5,7 +5,7 @@ import {
   createCamundaClient,
   type TenantId,
   type Username,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region CreateTenant
 async function createTenantExample(tenantId: TenantId) {
@@ -13,7 +13,7 @@ async function createTenantExample(tenantId: TenantId) {
 
   const result = await camunda.createTenant({
     tenantId,
-    name: 'Customer Service',
+    name: "Customer Service",
   });
 
   console.log(`Created tenant: ${result.tenantId}`);
@@ -24,7 +24,10 @@ async function createTenantExample(tenantId: TenantId) {
 async function getTenantExample(tenantId: TenantId) {
   const camunda = createCamundaClient();
 
-  const tenant = await camunda.getTenant({ tenantId }, { consistency: { waitUpToMs: 5000 } });
+  const tenant = await camunda.getTenant(
+    { tenantId },
+    { consistency: { waitUpToMs: 5000 } }
+  );
 
   console.log(`Tenant: ${tenant.name}`);
 }
@@ -53,7 +56,7 @@ async function updateTenantExample(tenantId: TenantId) {
 
   await camunda.updateTenant({
     tenantId,
-    name: 'Customer Service Team',
+    name: "Customer Service Team",
   });
 }
 //#endregion UpdateTenant
@@ -67,7 +70,10 @@ async function deleteTenantExample(tenantId: TenantId) {
 //#endregion DeleteTenant
 
 //#region AssignUserToTenant
-async function assignUserToTenantExample(tenantId: TenantId, username: Username) {
+async function assignUserToTenantExample(
+  tenantId: TenantId,
+  username: Username
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignUserToTenant({
@@ -78,7 +84,10 @@ async function assignUserToTenantExample(tenantId: TenantId, username: Username)
 //#endregion AssignUserToTenant
 
 //#region UnassignUserFromTenant
-async function unassignUserFromTenantExample(tenantId: TenantId, username: Username) {
+async function unassignUserFromTenantExample(
+  tenantId: TenantId,
+  username: Username
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignUserFromTenant({
@@ -94,7 +103,7 @@ async function assignGroupToTenantExample(tenantId: TenantId) {
 
   await camunda.assignGroupToTenant({
     tenantId,
-    groupId: 'engineering-team',
+    groupId: "engineering-team",
   });
 }
 //#endregion AssignGroupToTenant
@@ -105,7 +114,7 @@ async function unassignGroupFromTenantExample(tenantId: TenantId) {
 
   await camunda.unassignGroupFromTenant({
     tenantId,
-    groupId: 'engineering-team',
+    groupId: "engineering-team",
   });
 }
 //#endregion UnassignGroupFromTenant
@@ -116,7 +125,7 @@ async function assignRoleToTenantExample(tenantId: TenantId) {
 
   await camunda.assignRoleToTenant({
     tenantId,
-    roleId: 'process-admin',
+    roleId: "process-admin",
   });
 }
 //#endregion AssignRoleToTenant
@@ -127,7 +136,7 @@ async function unassignRoleFromTenantExample(tenantId: TenantId) {
 
   await camunda.unassignRoleFromTenant({
     tenantId,
-    roleId: 'process-admin',
+    roleId: "process-admin",
   });
 }
 //#endregion UnassignRoleFromTenant
@@ -138,7 +147,7 @@ async function assignClientToTenantExample(tenantId: TenantId) {
 
   await camunda.assignClientToTenant({
     tenantId,
-    clientId: 'my-service-account',
+    clientId: "my-service-account",
   });
 }
 //#endregion AssignClientToTenant
@@ -149,7 +158,7 @@ async function unassignClientFromTenantExample(tenantId: TenantId) {
 
   await camunda.unassignClientFromTenant({
     tenantId,
-    clientId: 'my-service-account',
+    clientId: "my-service-account",
   });
 }
 //#endregion UnassignClientFromTenant
@@ -160,7 +169,7 @@ async function assignMappingRuleToTenantExample(tenantId: TenantId) {
 
   await camunda.assignMappingRuleToTenant({
     tenantId,
-    mappingRuleId: 'rule-123',
+    mappingRuleId: "rule-123",
   });
 }
 //#endregion AssignMappingRuleToTenant
@@ -171,7 +180,7 @@ async function unassignMappingRuleFromTenantExample(tenantId: TenantId) {
 
   await camunda.unassignMappingRuleFromTenant({
     tenantId,
-    mappingRuleId: 'rule-123',
+    mappingRuleId: "rule-123",
   });
 }
 //#endregion UnassignMappingRuleFromTenant

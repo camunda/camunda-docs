@@ -5,7 +5,7 @@ import {
   type AgentInstanceKey,
   createCamundaClient,
   type ElementInstanceKey,
-} from '@camunda8/orchestration-cluster-api';
+} from "@camunda8/orchestration-cluster-api";
 
 //#region GetAgentInstance
 async function getAgentInstanceExample(agentInstanceKey: AgentInstanceKey) {
@@ -27,8 +27,8 @@ async function searchAgentInstancesExample() {
 
   const result = await camunda.searchAgentInstances(
     {
-      filter: { status: { $eq: 'IDLE' } },
-      sort: [{ field: 'creationDate', order: 'DESC' }],
+      filter: { status: { $eq: "IDLE" } },
+      sort: [{ field: "creationDate", order: "DESC" }],
       page: { limit: 10 },
     },
     { consistency: { waitUpToMs: 5000 } }
@@ -42,15 +42,17 @@ async function searchAgentInstancesExample() {
 //#endregion SearchAgentInstances
 
 //#region CreateAgentInstance
-async function createAgentInstanceExample(elementInstanceKey: ElementInstanceKey) {
+async function createAgentInstanceExample(
+  elementInstanceKey: ElementInstanceKey
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createAgentInstance({
     elementInstanceKey,
     definition: {
-      model: 'gpt-4o',
-      provider: 'openai',
-      systemPrompt: 'You are a helpful assistant.',
+      model: "gpt-4o",
+      provider: "openai",
+      systemPrompt: "You are a helpful assistant.",
     },
   });
 
@@ -64,7 +66,7 @@ async function updateAgentInstanceExample(agentInstanceKey: AgentInstanceKey) {
 
   await camunda.updateAgentInstance({
     agentInstanceKey,
-    status: 'THINKING',
+    status: "THINKING",
     metrics: {
       inputTokens: 150,
       outputTokens: 50,
