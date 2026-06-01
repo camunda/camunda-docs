@@ -6,9 +6,9 @@ function preGenerateDocs(config) {
 }
 
 function postGenerateDocs(config) {
-  // removeDuplicateVersionBadge(
-  //   `${config.outputDir}/administration-api-self-managed.info.mdx`
-  // );
+  removeDuplicateVersionBadge(
+    `${config.outputDir}/hub-public-api-v-2.info.mdx`
+  );
 }
 
 module.exports = {

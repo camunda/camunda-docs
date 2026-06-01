@@ -1,0 +1,50 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+openapi: 3.0.3
+info:
+  title: Hub Public API V2
+  description: API for communicating with Camunda Hub.
+  version: 0.1.0
+  contact:
+    name: Camunda
+    url: https://camunda.com
+
+servers:
+  - url: "{schema}://{host}:{port}/api/v2"
+    variables:
+      host:
+        default: localhost
+        description: The hostname of the Hub API server.
+      port:
+        default: "8088"
+        description: The port of the Hub API server.
+      schema:
+        default: http
+        description: The schema of the Hub API server.
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: File
+    description: File management operations.
+
+paths:
+  /files:
+    $ref: "files.yaml#/paths/~1files"
+  /files/{fileKey}:
+    $ref: "files.yaml#/paths/~1files~1{fileKey}"
+  /files/search:
+    $ref: "files.yaml#/paths/~1files~1search"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from the authorization server.

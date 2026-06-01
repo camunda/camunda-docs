@@ -1,13 +1,13 @@
 ---
-id: update-file
-title: "Update a file"
-description: "Updates the metadata and/or content of an existing file."
-sidebar_label: "Update a file"
+id: get-file
+title: "Get a file"
+description: "Returns the file metadata and content for the given file key."
+sidebar_label: "Get a file"
 hide_title: true
 hide_table_of_contents: true
-api: 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
-sidebar_class_name: "patch api-method"
-info_path: docs/apis-tools/hub-api-rest/specifications/hub-public-api-v-2
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-public-api-v-2
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -24,16 +24,16 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Update a file"}
+  children={"Get a file"}
 ></Heading>
 
 <MethodEndpoint
-  method={"patch"}
+  method={"get"}
   path={"/files/{fileKey}"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Updates the metadata and/or content of an existing file.
+Returns the file metadata and content for the given file key.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -51,57 +51,14 @@ Updates the metadata and/or content of an existing file.
   ]}
 ></ParamsDetails>
 
-<RequestSchema
-  title={"Body"}
-  body={{
-    required: true,
-    content: {
-      "application/json": {
-        schema: {
-          type: "object",
-          additionalProperties: false,
-          required: ["revision"],
-          properties: {
-            name: {
-              description: "The updated name of the file.",
-              type: "string",
-              minLength: 1,
-              maxLength: 255,
-            },
-            projectKey: {
-              description: "The project to move the file to.",
-              type: "string",
-            },
-            folderKey: {
-              description:
-                "The updated parent folder key. Set to null to move to project root.",
-              type: "string",
-              nullable: true,
-            },
-            content: {
-              description: "The updated content of the file.",
-              type: "string",
-            },
-            revision: {
-              description:
-                "The current revision of the file for optimistic locking.",
-              type: "integer",
-              format: "int32",
-            },
-          },
-          title: "FileUpdateRequest",
-        },
-      },
-    },
-  }}
-></RequestSchema>
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
 <StatusCodes
   id={undefined}
   label={undefined}
   responses={{
     "200": {
-      description: "The file was updated successfully.",
+      description: "The file was retrieved successfully.",
       content: {
         "application/json": {
           schema: {
@@ -232,56 +189,6 @@ Updates the metadata and/or content of an existing file.
         },
       },
     },
-    "400": {
-      description: "The provided data is not valid.",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            required: ["type", "title", "status", "detail", "instance"],
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-                example:
-                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-                example: "Bad Request",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                example: 400,
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-                example:
-                  "Request property [maxJobsToActivates] cannot be parsed",
-              },
-              instance: {
-                type: "string",
-                format: "uri-reference",
-                description:
-                  "A URI path identifying the origin of the problem.",
-                example: "/v2/jobs/activation",
-              },
-            },
-            title: "ProblemDetail",
-          },
-        },
-      },
-    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },
@@ -385,56 +292,6 @@ Updates the metadata and/or content of an existing file.
     },
     "404": {
       description: "The file was not found.",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            required: ["type", "title", "status", "detail", "instance"],
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-                example:
-                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-                example: "Bad Request",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                example: 400,
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-                example:
-                  "Request property [maxJobsToActivates] cannot be parsed",
-              },
-              instance: {
-                type: "string",
-                format: "uri-reference",
-                description:
-                  "A URI path identifying the origin of the problem.",
-                example: "/v2/jobs/activation",
-              },
-            },
-            title: "ProblemDetail",
-          },
-        },
-      },
-    },
-    "409": {
-      description: "The file was modified concurrently (revision conflict).",
       content: {
         "application/problem+json": {
           schema: {
