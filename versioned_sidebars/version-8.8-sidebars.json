@@ -77,8 +77,9 @@
         "type": "doc",
         "id": "guides/build-with-ai/overview"
       },
-      "items": ["guides/build-with-ai/ai-usage-guidelines"]
+      "items": []
     },
+    "guides/build-with-ai/ai-usage-guidelines",
     {
       "type": "category",
       "label": "Agentic orchestration",
@@ -107,7 +108,6 @@
         "components/agentic-orchestration/model-recommendations-agentic"
       ]
     },
-    "reference/mcp-docs/docs-mcp",
     {
       "type": "category",
       "label": "Intelligent document processing (IDP)",
@@ -142,7 +142,8 @@
         "components/modeler/web-modeler/idp/idp-key-concepts",
         "components/modeler/web-modeler/idp/idp-reference"
       ]
-    }
+    },
+    "reference/mcp-docs/docs-mcp"
   ],
   "Components": [
     "components/components-overview",
@@ -2878,7 +2879,6 @@
                 "self-managed/quickstart/developer-quickstart/c8run-troubleshooting"
               ]
             },
-
             "self-managed/quickstart/developer-quickstart/docker-compose"
           ]
         },
