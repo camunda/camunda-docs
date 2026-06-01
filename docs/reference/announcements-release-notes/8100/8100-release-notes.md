@@ -38,66 +38,86 @@ import PageDescription from '@site/src/components/PageDescription';
 | :----------- | :----------- | :--- |
 | 09 June 2026 | -            | -    |
 
-### Scope-Aware Variable Export Configuration for Optimize
+### Agentic orchestration
 
-<!-- https://github.com/camunda/product-hub/issues/3435 -->
-
-You can now configure variable export behavior by scope:
-
-- Root (process instance) variables and local variables can be enabled or disabled independently.
-- You can exclude all local variables by default, while still whitelisting specific local variables by name pattern.
-- Configuration integrates with the existing variable filtering mechanism, using consistent syntax and semantics.
-- Terminology is aligned with Camunda 8 docs:
-  - Root scope / process instance scope for variables visible across the process.
-  - Local variables for variables defined in child scopes only.
-
-This allows setups such as:
-
-- Export only root variables for all processes.
-- Additionally export a curated subset of local variables (e.g., taskContextDisplayName, specific local audit variables) without exposing all locals.
-
-### Pro-Code AI Enablement via Skills Repository
+#### Pro-Code AI Enablement via Skills Repository
 
 <!-- https://github.com/camunda/product-hub/issues/3557 -->
 
-Camunda Agent Development Kit (ADK) — Early Access
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
 
-The Camunda ADK is a set of tools for AI coding agents that enables them to build, validate, and configure Camunda artifacts — not just generate code. Install the ADK alongside Skills and your AI agent can:
+The Camunda Agent Development Kit (ADK) is a set of tools for AI coding agents that enables them to build, validate, and configure Camunda artifacts—not just generate code. With the ADK and Skills installed, your AI agent can:
 
-- Build and modify BPMN diagrams programmatically with layout applied automatically
-- Configure connectors using element templates (no raw XML)
-- Generate form schemas with validation
-- Create and edit DMN decision tables
-- Run BPMN lint rules against generated diagrams
-- Scaffold and wire Camunda Process Test (CPT) integration tests
+- Build and modify BPMN diagrams with a human-readable layout.
+- Configure connectors using element templates (no raw XML).
+- Generate form schemas with validation.
+- Create and edit DMN decision tables.
+- Run BPMN lint rules against generated diagrams.
+- Scaffold and wire Camunda Process Test (CPT) integration tests.
 
-### FEEL Evaluation with Process Instance Key
+### APIs & tools
+
+#### FEEL Evaluation with Process Instance Key
 
 <!-- https://github.com/camunda/product-hub/issues/3606 -->
 
-Expression Evaluation: process/element context support
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
 
-- Extended `POST /v2/expression/evaluation` to optionally evaluate expressions in the context of:
-  - A process instance, via `processInstanceKey`, or
-  - A flow node instance, via `elementInstanceKey`.
-- The endpoint now:
-  - Combines process instance variables, element-local variables (for element scope), cluster variables, and optional request context into a single evaluation context.
-  - Enforces existing `EXPRESSION:EVALUATE` plus `PROCESS_DEFINITION:READ_PROCESS_INSTANCE` on the underlying process definition.
-  - Requires exactly one of `processInstanceKey` or `elementInstanceKey` (mutually exclusive); sending both returns `00 Bad Request`.
-- Behavior remains side-effect free and uses the same timeout and guardrails as the existing cluster-scope evaluation.
+`POST /v2/expression/evaluation` now optionally evaluates expressions in the context of a process instance or flow node instance:
 
-### Support start forms in Desktop Modeler
+- Pass `processInstanceKey` to evaluate in the context of a process instance.
+- Pass `elementInstanceKey` to evaluate in the context of a flow node instance.
+
+The endpoint:
+
+- Combines process instance variables, element-local variables (for element scope), cluster variables, and optional request context into a single evaluation context.
+- Enforces `EXPRESSION:EVALUATE` plus `PROCESS_DEFINITION:READ_PROCESS_INSTANCE` on the underlying process definition.
+- Requires exactly one of `processInstanceKey` or `elementInstanceKey` (mutually exclusive); sending both returns `400 Bad Request`.
+
+Behavior remains side-effect free and uses the same timeout and guardrails as the existing cluster-scope evaluation.
+
+### Modeler
+
+#### Support for start forms in Desktop Modeler
 
 <!-- https://github.com/camunda/product-hub/issues/2406 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 The Desktop Modeler now supports defining form references on none start events in Camunda 8 BPMN models, matching the existing Web Modeler capability.
 
 Process developers can configure start forms directly in the Desktop Modeler's properties panel using:
 
-- Camunda Form (linked) — reference a deployed Camunda Form by ID
-- Camunda Form (embedded) — embed form JSON in the BPMN diagram (deprecated)
+- Camunda Form (linked) — reference a deployed Camunda Form by ID.
+- Camunda Form (embedded) — embed form JSON in the BPMN diagram (deprecated).
 
-Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across the Web and Desktop Modeler.
+Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Web Modeler and Desktop Modeler.
+
+### Optimize
+
+#### Scope-Aware Variable Export Configuration for Optimize
+
+<!-- https://github.com/camunda/product-hub/issues/3435 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+You can now configure variable export behavior by scope:
+
+- Root (process instance) variables and local variables can be enabled or disabled independently.
+- You can exclude all local variables by default, while still allowlisting specific local variables by name pattern.
+- Configuration integrates with the existing variable filtering mechanism, using consistent syntax and semantics.
+
+Terminology aligns with Camunda 8 docs:
+
+- **Root scope / process instance scope**: variables visible across the process.
+- **Local variables**: variables defined in child scopes only.
+
+This enables setups such as:
+
+- Export only root variables for all processes.
+- Export a curated subset of local variables (for example, `taskContextDisplayName` or specific local audit variables) without exposing all locals.
+
+For details, see [Exporter-side filters and Optimize data completeness](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#exporter-side-filters-and-optimize-data-completeness).
 
 ## 8.10.0-alpha1
 
