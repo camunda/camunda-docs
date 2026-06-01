@@ -25,7 +25,7 @@ All minor version upgrades in a Self-Managed Orchestration Cluster must follow t
 
 1. **Upgrade to the latest patch version of your current minor.** For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to the latest `8.7` patch. This is required so that schema version metadata is present and the schema compatibility check can succeed.
 
-2. **Upgrade to the next minor version.** Never skip minor versions. For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not.
+2. **Upgrade to the next minor version.** Do not skip minor versions. For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not.
 
 3. After reaching the target minor, **upgrade to the latest patch version of the target minor.** For example, after upgrading to `8.8.0`, update to the latest `8.8` patch.
 
