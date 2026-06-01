@@ -62,8 +62,9 @@
         "type": "doc",
         "id": "guides/build-with-ai/overview"
       },
-      "items": ["guides/build-with-ai/ai-usage-guidelines"]
+      "items": []
     },
+    "guides/build-with-ai/ai-usage-guidelines",
     {
       "type": "category",
       "label": "Agentic orchestration",
@@ -76,7 +77,6 @@
         "components/agentic-orchestration/ai-agents"
       ]
     },
-    "reference/mcp-docs/docs-mcp",
     {
       "type": "category",
       "label": "Intelligent document processing (IDP)",
@@ -110,7 +110,8 @@
         "components/modeler/web-modeler/idp/idp-key-concepts",
         "components/modeler/web-modeler/idp/idp-reference"
       ]
-    }
+    },
+    "reference/mcp-docs/docs-mcp"
   ],
   "Components": [
     "components/components-overview",

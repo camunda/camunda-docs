@@ -8,7 +8,7 @@ keywords: [ai, mcp, claude, copilot, cursor, agentic]
 
 import AoGrid from '../../components/react-components/\_ao-card';
 import IconAgenticImg from '../../components/assets/icon-agentic.png';
-import IconAIAgent from '../../components/agentic-orchestration/img/ao-ai-agent.png';
+import IconAIAgent from '../../components/assets/hero-build-with-ai.png';
 import IconCopilotImg from '../../components/assets/icon-camunda-copilot.png';
 import IconIdpImg from '../../components/assets/icon-idp.png';
 
@@ -17,22 +17,23 @@ import IconIdpImg from '../../components/assets/icon-idp.png';
 <div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left" style={{marginRight: '50px', flex: '1.35'}}>
 
-Build Camunda solutions with agentic orchestration and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents inside BPMN processes, and use Camunda Copilot to design faster.
+Build Camunda solutions with agentic orchestration and MCP integrations. Connect your AI tools to a running Camunda cluster, embed AI agents in BPMN processes, and design faster with Camunda Copilot.
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
-<img src={IconAIAgent} alt="Build with AI" title="Build with AI" class="img-noborder img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0', maxWidth: '300px'}}/>
+<img src={IconAIAgent} alt="Build with AI" title="Build with AI" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
 
 ## Orchestrate AI agents
 
-From simple task agents to complex multi-agent systems, Camunda gives you the building blocks for every enterprise automation pattern.
-
 Orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
-See [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) for more details.
+
+Set up and build any enterprise automation pattern - from simple task agents to complex multi-agent systems.
+
+<p class="link-arrow">[Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)</p>
 
 ## Design with AI
 
