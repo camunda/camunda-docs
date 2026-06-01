@@ -16,17 +16,7 @@ type SearchMappingRulesForGroupResponses = object;
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: GroupMappingRuleSearchResult;
 ```
 
 The mapping rules assigned to the group.
-
-#### Type Declaration
-
-##### items
-
-```ts
-items: MappingRuleResult[];
-```
-
-The matching mapping rules.

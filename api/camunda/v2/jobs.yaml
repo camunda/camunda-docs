@@ -1054,6 +1054,7 @@ components:
       enum:
         - ASSIGNING
         - BEFORE_ALL
+        - CANCEL
         - CANCELING
         - COMPLETING
         - CREATING

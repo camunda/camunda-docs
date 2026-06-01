@@ -138,7 +138,7 @@ The priority of the user task.
 ### processDefinitionId?
 
 ```ts
-optional processDefinitionId?: ProcessDefinitionId;
+optional processDefinitionId?: ProcessDefinitionIdFilterProperty;
 ```
 
 The ID of the process definition.
@@ -148,7 +148,7 @@ The ID of the process definition.
 ### processDefinitionKey?
 
 ```ts
-optional processDefinitionKey?: ProcessDefinitionKey;
+optional processDefinitionKey?: ProcessDefinitionKeyFilterProperty;
 ```
 
 The key of the process definition.
@@ -158,7 +158,7 @@ The key of the process definition.
 ### processInstanceKey?
 
 ```ts
-optional processInstanceKey?: ProcessInstanceKey;
+optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The key of the process instance.

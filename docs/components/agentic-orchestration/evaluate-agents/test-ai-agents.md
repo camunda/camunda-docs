@@ -1,7 +1,7 @@
 ---
 id: test-ai-agents
 title: Test your AI agents with CPT
-sidebar_label: Test your AI agents
+sidebar_label: Test with CPT
 description: "Test your AI agent processes in Camunda 8 with Camunda Process Test (CPT)."
 keywords: ["agentic ai", "AI agents", "Camunda Process Test"]
 toc_max_heading_level: 2

@@ -348,4 +348,4 @@ Don't want to build the process yourself? Click this button to create it from a 
 - Learn how to write powerful [expressions](/components/concepts/expressions.md) and utilize [variables](/components/concepts/variables.md) to route complex process flows.
 - Get an [introduction to Operate](/components/operate/operate-introduction.md).
 - Learn how to [set up Tasklist](/components/tasklist/introduction-to-tasklist.md) for efficient task management.
-- Explore [start forms](/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes.md) and attach the form directly to the start event.
+- Explore start forms and attach the form directly to the start event for authenticated starts in Tasklist.

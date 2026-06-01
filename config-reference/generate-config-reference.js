@@ -28,6 +28,7 @@ const typeReplacements = {
   "io.camunda.client.api.command.enums.TenantFilter":
     "enum[assigned, provided]",
   "java.util.Set<java.lang.Integer>": "array[integer]",
+  "java.util.Map<java.lang.String,java.lang.Object>": "map[string,object]",
 };
 
 const preserveGroups = [];

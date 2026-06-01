@@ -16,17 +16,7 @@ type SearchUsersResponses = object;
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: UserSearchResult;
 ```
 
 The user search result.
-
-#### Type Declaration
-
-##### items
-
-```ts
-items: object[];
-```
-
-The matching users.

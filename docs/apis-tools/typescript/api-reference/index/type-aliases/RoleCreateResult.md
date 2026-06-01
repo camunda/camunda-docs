@@ -36,7 +36,7 @@ The display name of the created role.
 ### roleId
 
 ```ts
-roleId: string;
+roleId: RoleId;
 ```
 
 The ID of the created role.

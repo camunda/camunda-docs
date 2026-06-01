@@ -299,7 +299,7 @@ Yes, you can use the `bpmnlint` and `dmnlint` libraries to automatically verify 
 
 #### How can I perform unit and integration tests on my processes?
 
-You can use the `zeebe-process-test` library for Java-based unit tests or community-built clients for other programming languages. These libraries allow you to execute your BPMN and DMN diagrams with assertions in your development or preview environments.
+You can use [Camunda Process Test](/apis-tools/testing/getting-started.md) for Java-based unit and integration tests, or community-built clients for other programming languages. These libraries allow you to execute your BPMN and DMN diagrams with assertions in your development or preview environments.
 
 #### How do I provide environment variables to connectors in preview environments?
 

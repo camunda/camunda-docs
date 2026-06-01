@@ -1,7 +1,7 @@
 ---
 id: analyze-ai-agents
 title: Analyze your AI agents with Optimize
-sidebar_label: Analyze your AI agents
+sidebar_label: Analyze with Optimize
 description: "Analyze and improve the performance of your AI agent executions using Optimize."
 keywords: ["agentic ai", "AI agents", "Optimize"]
 toc_max_heading_level: 2
