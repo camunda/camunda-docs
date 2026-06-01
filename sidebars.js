@@ -1026,6 +1026,7 @@ module.exports = {
                       ],
                     },
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },

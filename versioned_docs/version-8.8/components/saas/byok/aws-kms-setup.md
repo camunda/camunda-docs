@@ -16,9 +16,10 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
 | Technical familiarity | Some experience with the AWS Management Console, IAM roles, and AWS KMS.    |
 
 :::warning Important
+
 - Deleting or disabling your AWS KMS key will make your cluster and data inaccessible. To understand how Camunda behaves if a key is disabled, deleted, or its policy is changed, see [key state behavior](/components/saas/byok/key-state-behavior.md).
 - Key management is fully customer-side in AWS KMS. Camunda cannot rotate keys.
-:::
+  :::
 
 ## Step 1: Create a Camunda 8 SaaS Orchestration cluster
 
@@ -31,7 +32,11 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
    ![external option encryption at rest](./img/external-encryption.png)
 6. Click **Create cluster**.
 
-After creation, note the **AWS Role ARN** displayed in the Console for your cluster.
+After creation, note the **AWS Role ARN** displayed in the Console for your cluster. The ARN uses the following format:
+
+```
+arn:aws:iam::<account-id>:role/c8-cluster/c8-apps-<uuid>
+```
 
 ## Step 2: Create and configure an AWS KMS key
 

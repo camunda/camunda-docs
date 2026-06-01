@@ -45,10 +45,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
 - **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 4.0.x
-- **Helm CLI**:
-  - v4.x required for Camunda 8.10 (chart 15.x) and later.
-  - v3.x supported for Camunda 8.9 (chart 14.x) and earlier — see the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
-  - See [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md) for details.
+- **Helm CLI**: v4.x is required for Camunda 8.10 (chart 15.x) and later. See [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md) for details, and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
 
 ## Camunda 8 Self-Managed
 
@@ -109,7 +106,7 @@ Regardless of the type, the network storage volumes you use must meet these requ
 
 ### Helm charts version matrix
 
-Camunda Helm chart version `15.x.x` works with Camunda version `8.10.x` and requires the Helm v4 CLI. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for more details.
+Camunda Helm chart version `15.x.x` works with Camunda version `8.10.x` and requires the Helm v4 CLI. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for more details.
 
 ## Component requirements
 
