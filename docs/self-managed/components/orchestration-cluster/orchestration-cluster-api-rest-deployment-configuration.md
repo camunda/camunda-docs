@@ -17,6 +17,15 @@ The `maxMessageSize` default value is 4MB. You can configure this setting in the
 - [Gateway config](../orchestration-cluster/zeebe/configuration/gateway.md#zeebegatewaynetwork)
 - [Broker config](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokernetwork)
 
+If you deploy with Helm, set `global.config.requestBodySize`. The chart applies this value to
+the Zeebe message size and the REST multipart file and request size. If you expose the REST API
+through ingress, keep
+`global.ingress.annotations.nginx.ingress.kubernetes.io/proxy-body-size` aligned with the same size.
+
+This setting aligns the HTTP, multipart, Gateway, and Broker transport limits. Deployments can still
+be rejected by Zeebe's internal record batch processing if the deployed resources and follow-up records
+exceed the engine batch limit.
+
 If you increase this value, you must also adjust the configuration for the deployment REST endpoint to match.
 
 ### REST API server configuration
