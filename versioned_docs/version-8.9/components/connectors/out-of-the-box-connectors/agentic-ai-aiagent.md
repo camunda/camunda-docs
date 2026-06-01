@@ -85,7 +85,7 @@ The following table summarizes the key configuration differences between the two
 | Execution listeners    | Yes                                                                             | Yes                                                               |
 
 :::note
-Execution listeners behave differently between the two implementations. On the AI Agent Sub-process, they only run when entering and exiting the ad-hoc sub-process, not on every loop iteration. On the AI Agent Task, they are triggered on every job execution, so the two are semantically different.
+Execution listeners behave differently between the two implementations. On the AI Agent Sub-process, they only run when entering and exiting the ad-hoc sub-process, not on every loop iteration. On the AI Agent Task, they are triggered on every job execution.
 :::
 
 ### AI Agent Sub-process
