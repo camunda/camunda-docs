@@ -33,7 +33,14 @@ Orchestrate AI agents within your BPMN-based workflows, enabling human tasks, de
 
 Set up and build any enterprise automation pattern - from simple task agents to complex multi-agent systems.
 
-<p class="link-arrow">[Agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)</p>
+<AoGrid columns={2} ao={[
+{
+link: "../../../components/agentic-orchestration/agentic-orchestration/",
+title: "Agentic orchestration",
+image: IconAgenticImg,
+description: "Orchestrate AI agents alongside human tasks and system integrations in your BPMN processes.",
+},
+]} />
 
 ## Design with AI
 
