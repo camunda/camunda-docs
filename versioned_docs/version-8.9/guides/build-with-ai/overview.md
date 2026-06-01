@@ -9,6 +9,7 @@ keywords: [ai, mcp, claude, copilot, cursor, agentic]
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import AoGrid from '../../components/react-components/\_ao-card';
 import IconAgenticImg from '../../components/assets/icon-agentic.png';
+import IconConnectorsImg from '../../components/assets/icon-connectors.png';
 import IconAIAgent from '../../components/assets/hero-build-with-ai.png';
 import IconCopilotImg from '../../components/assets/icon-camunda-copilot.png';
 import IconIdpImg from '../../components/assets/icon-idp.png';
@@ -39,7 +40,20 @@ Orchestrate AI agents within your BPMN-based workflows, enabling human tasks, de
 
 Set up and build any enterprise automation pattern - from simple task agents to complex multi-agent systems.
 
-<p class="link-arrow">[Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)</p>
+<AoGrid columns={2} ao={[
+{
+link: "../../../components/agentic-orchestration/agentic-orchestration-overview/",
+title: "Agentic orchestration",
+image: IconAgenticImg,
+description: "Orchestrate AI agents alongside human tasks and system integrations in your BPMN processes.",
+},
+{
+link: "../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/",
+title: "AI Agent connector",
+image: IconConnectorsImg,
+description: "Embed an LLM-powered agent in your process with the out-of-the-box AI Agent connector.",
+},
+]} />
 
 ## Design with AI
 
