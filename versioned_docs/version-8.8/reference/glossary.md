@@ -20,7 +20,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#h">H</a></div>
     <div class="letter-link"><a href="#i">I</a></div>
     <div class="letter-link"><a href="#j">J</a></div>
-    <div class="letter-link">K</div>
+    <div class="letter-link"><a href="#k">K</a></div>
     <div class="letter-link"><a href="#l">L</a></div>
     <div class="letter-link"><a href="#m">M</a></div>
   </div>
@@ -222,11 +222,21 @@ See [Zeebe Gateway](#zeebe-gateway).
 
 Any AI system that can produce new content, such as text, images, or audio, in response to prompts. Generative AI doesn’t just analyze existing data; it creates original output that is often contextually relevant to the input.
 
+### GPAI model
+
+A general-purpose AI model trained on large amounts of data using self-supervision at scale, capable of performing a wide range of tasks. Used in the EU AI Act to classify foundation models.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#the-ai-models-behind-these-features)
+
 ## H
 
 ### Hallucination
 
 When an AI confidently produces incorrect or fabricated information that seems plausible. It reflects the model’s tendency to produce patterns that appear coherent but lack factual accuracy.
+
+### Human-in-the-Loop (HITL)
+
+A human review and approval step before AI-generated outputs with legal, financial, or safety-relevant effects are acted upon.
 
 ### Human task
 
@@ -290,6 +300,14 @@ This is the amount of time the broker will wait for a complete or fail response 
 A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#job). An uncompleted job prevents [Zeebe](#zeebe) from advancing process execution to the next step.
 
 - [Job workers](/components/concepts/job-workers.md)
+
+## K
+
+### Kill switch
+
+A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
 
 ## L
 

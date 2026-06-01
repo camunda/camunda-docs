@@ -5,6 +5,8 @@ sidebar_label: Production install
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm chart with production-ready configuration.
 ---
 
+import HelmV4Required from '../../\_partials/\_helm-v4-required.md'
+
 This is a **scenario-based, production-focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient baseline for most production use cases.
 
 This is a single production install guide with database options in one flow:
@@ -14,12 +16,14 @@ This is a single production install guide with database options in one flow:
 
 AWS examples are used where helpful, but the flow applies to other [supported Kubernetes distributions](/reference/supported-environments.md#deployment-options) with equivalent services.
 
+<HelmV4Required />
+
 ## Prerequisites
 
 Before proceeding with the setup, ensure the following requirements are met:
 
 - **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components. This guide will use an AWS EKS cluster for reference. Step-by-step documentation is available to deploy an EKS cluster with [Terraform](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md), and [install Camunda 8](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
-- **Helm**: Make sure the [Helm CLI](/reference/supported-environments.md#clients) is installed.
+- **Helm**: Make sure the [Helm CLI v4](/reference/supported-environments.md#clients) is installed. Helm v3 is not supported for Camunda 8.10 and later.
 - **DNS Configuration**: You must have access to configure DNS for your domain in order to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:

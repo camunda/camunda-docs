@@ -1,7 +1,7 @@
 ---
 id: monitor-ai-agents
 title: Monitor your AI agents with Operate
-sidebar_label: Monitor your AI agents
+sidebar_label: Monitor with Operate
 description: "Monitor and troubleshoot your AI agent process instances in real time using Operate."
 keywords: ["agentic ai", "AI agents", "Operate"]
 ---

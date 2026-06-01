@@ -1,6 +1,6 @@
 ---
 id: configuration
-title: "Camunde Hub configuration"
+title: "Camunda Hub configuration"
 sidebar_label: "Camunda Hub configuration"
 description: "Read details on the configuration variables of Camunda Hub Self-Managed."
 ---
