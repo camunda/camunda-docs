@@ -37,6 +37,10 @@ helm search repo camunda/camunda-platform --versions
 
 ## Upgrade notes
 
+### Bitnami subcharts removed in 8.10
+
+The four bundled Bitnami subcharts (`identityKeycloak`, `identityPostgresql`, `webModelerPostgresql`, `elasticsearch`), deprecated in 8.9, are removed in 8.10. Setting any of these keys makes `helm upgrade` fail. Migrate each component to externally managed infrastructure before upgrading — see [Upgrade 8.9 to 8.10](/self-managed/upgrade/helm/890-to-8100.md) and the [Migration from Bitnami](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) guide.
+
 ### Bitnami Docker repository migration
 
 On August 28, 2025, Bitnami migrated its container images from [bitnami](https://hub.docker.com/u/bitnami) to [bitnamilegacy](https://hub.docker.com/u/bitnamilegacy). The Camunda Helm charts have been updated to use the new repository.

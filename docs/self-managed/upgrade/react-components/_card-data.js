@@ -28,6 +28,13 @@ export const overviewCards = [
 
 export const helmIndexCards = [
   {
+    link: "./890-to-8100",
+    title: "Upgrade Camunda 8.9 to 8.10 using Helm",
+    image: IconArrow,
+    description:
+      "Upgrade a Helm-managed Camunda 8.9 deployment to 8.10, including the Bitnami subchart removal.",
+  },
+  {
     link: "./880-to-890",
     title: "Upgrade Camunda 8.8 to 8.9 using Helm",
     image: IconArrow,
