@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync-file:
+  sync-sm:
     runs-on: ubuntu-latest
 
     steps:
@@ -42,23 +42,22 @@ jobs:
 
       - name: Check for maintenance branch
         id: compute_branch
-        needs: generate_token
         run: |
           # Self-Managed Hub API docs:
-          # During development of a minor release, engineers push changes to 
-          # the camunda hub repo's main branch, so we use main during this 
-          # time to keep the docs up to date with the alpha releases. 
-          # However, toward the end of the dev cycle for the minor version, 
-          # engineers cut a maintenance version branch in the form self-managed/8.x 
-          # and start including code for the next version in main. At this point, 
-          # we need to stop using main and switch to the maintenance branch until 
+          # During development of a minor release, engineers push changes to
+          # the camunda hub repo's main branch, so we use main during this
+          # time to keep the docs up to date with the alpha releases.
+          # However, toward the end of the dev cycle for the minor version,
+          # engineers cut a maintenance version branch in the form self-managed/8.x
+          # and start including code for the next version in main. At this point,
+          # we need to stop using main and switch to the maintenance branch until
           # the minor version ships. After that, we need to switch back to using main.
 
-          # This step in the workflow uses the docs repo's latest release tag 
-          # to compute the next expected maintenance branch. If such a branch exists, 
+          # This step in the workflow uses the docs repo's latest release tag
+          # to compute the next expected maintenance branch. If such a branch exists,
           # we use it. Otherwise, we use main.
 
-          # Get the latest docs tag, and increment the minor version 
+          # Get the latest docs tag, and increment the minor version
           # to store the next minor release.
           cd docs
           next_minor_release=$(
@@ -70,7 +69,7 @@ jobs:
                 | awk -F. '{printf "%d.%d", $1, $2+1}'
           )
 
-          # If a maintenance branch for camunda hub exists for the next minor release, use it. 
+          # If a maintenance branch for camunda hub exists for the next minor release, use it.
           # Otherwise, use main.
           maintenance_branch="self-managed/$next_minor_release"
           if git ls-remote --exit-code --heads https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/camunda/camunda-hub $maintenance_branch; then
@@ -83,8 +82,6 @@ jobs:
 
       - name: Checkout Camunda Hub (Self-Managed)
         uses: actions/checkout@v6
-        id: checkout_sm
-        needs: compute_branch
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
@@ -94,7 +91,6 @@ jobs:
           sparse-checkout-cone-mode: false
 
       - name: Sync next Self-Managed documentation
-        needs: checkout_sm
         run: |
           cd docs
           mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsm/v2
@@ -103,20 +99,56 @@ jobs:
           npm i
           npm run api:generate:hubsm
 
+      - name: Upload Self-Managed changes
+        uses: actions/upload-artifact@v4
+        with:
+          name: sm-changes
+          path: |
+            docs/api/hubsm
+            docs/docs/apis-tools/hub-api-sm
+
+  sync-saas:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Camunda docs repository
+        uses: actions/checkout@v6
+        with:
+          repository: camunda/camunda-docs
+          path: docs
+
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@v3.4.0
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          repositories: camunda-hub
+
       - name: Checkout Camunda Hub (SaaS)
         uses: actions/checkout@v6
-        id: checkout_saas
-        needs: generate_token
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
           path: rest-spec
-          ref: ${{ steps.compute_branch.outputs.camunda_hub_branch }}
+          ref: main
           sparse-checkout: restapi/public-api/src/main/resources/openapi/v2
           sparse-checkout-cone-mode: false
 
       - name: Sync next SaaS documentation
-        needs: checkout_saas
         run: |
           cd docs
           mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsaas/v2
@@ -124,6 +156,58 @@ jobs:
           mv rest-api.yaml camunda-openapi.yaml
           npm i
           npm run api:generate:hubsaas
+
+      - name: Upload SaaS changes
+        uses: actions/upload-artifact@v4
+        with:
+          name: saas-changes
+          path: |
+            docs/api/hubsaas
+            docs/docs/apis-tools/hub-api-saas
+
+  create-pr:
+    runs-on: ubuntu-latest
+    needs: [sync-sm, sync-saas]
+
+    steps:
+      - name: Checkout Camunda docs repository
+        uses: actions/checkout@v6
+        with:
+          repository: camunda/camunda-docs
+          path: docs
+
+      - name: Download Self-Managed changes
+        uses: actions/download-artifact@v4
+        with:
+          name: sm-changes
+          path: docs/
+
+      - name: Download SaaS changes
+        uses: actions/download-artifact@v4
+        with:
+          name: saas-changes
+          path: docs/
+
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@v3.4.0
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          repositories: camunda-docs
 
       - name: Check for changes
         id: check_changes
