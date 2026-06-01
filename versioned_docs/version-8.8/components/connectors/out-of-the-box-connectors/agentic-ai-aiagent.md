@@ -84,6 +84,10 @@ The following table summarizes the key configuration differences between the two
 | Retries                | Yes                                                                             | Yes                                                               |
 | Execution listeners    | Yes                                                                             | Yes                                                               |
 
+:::note
+Execution listeners behave differently between the two implementations. On the AI Agent Sub-process, they only run when entering and exiting the ad-hoc sub-process, not on every loop iteration. On the AI Agent Task, they are triggered on every job execution, so the two are semantically different.
+:::
+
 ### AI Agent Sub-process
 
 The [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) implementation uses the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to provide an integrated solution
