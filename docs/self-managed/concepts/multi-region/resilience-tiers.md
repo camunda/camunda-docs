@@ -5,7 +5,7 @@ sidebar_label: "Resilience tiers"
 description: "Camunda's structured framework for multi-region disaster recovery: compare Tier 1 (Cold Recovery) and Tier 2 (Warm Standby) by RTO, RPO, cost, and compliance fit."
 ---
 
-Camunda provides a structured, tiered multi-region resilience framework for Self-Managed deployments. Each tier combines a published reference architecture with documented RTO and RPO targets, a deployment guide, and an operational runbook — so you can match your Camunda disaster recovery posture to your operational requirements and compliance obligations without reverse-engineering undocumented capabilities.
+Camunda provides a structured, tiered multi-region resilience framework for Self-Managed Orchestration cluster deployments. Each tier combines a published reference architecture with documented RTO and RPO targets, a deployment guide, and an operational runbook — so you can match your Camunda disaster recovery posture to your operational requirements and compliance obligations without reverse-engineering undocumented capabilities.
 
 ## Available tiers
 
@@ -13,10 +13,6 @@ Camunda provides a structured, tiered multi-region resilience framework for Self
 | ----- | ------------------------------------------ | --------------------------------------------------------------------------------------- | ----------- | ---------------- |
 | **1** | [Cold Recovery](./tier-1-cold-recovery.md) | Scheduled backup to cross-region object storage; manual restore into a secondary region | ~1–4 hours  | 15 min – 4 hours |
 | **2** | [Dual-Region](./dual-region.md)            | Dual-region exporters with a secondary region; manual failover                          | ~15 minutes | 0 minutes        |
-
-:::note
-A third tier — Active-Active with near-zero RTO/RPO using a globally distributed RDBMS — is in development.
-:::
 
 ## RTO and RPO definitions
 

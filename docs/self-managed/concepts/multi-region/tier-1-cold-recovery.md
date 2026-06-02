@@ -5,19 +5,20 @@ sidebar_label: "Tier 1 — Cold Recovery"
 description: "Conceptual overview of Tier 1 cold backup-based disaster recovery for Camunda Self-Managed: how it works, backup scope, recovery flow, and RTO/RPO characteristics."
 ---
 
-import DualRegion from "./img/dual-region.jpg";
+<!-- Image source: https://miro.com/app/board/uXjVL-6SrPc=/ -->
+
+import ColdRecovery from "./img/cold-recovery-diagram.jpg";
 
 Tier 1 is Camunda's lowest-cost multi-region resilience configuration. It provides a documented, repeatable recovery path from complete primary-region loss using scheduled backups exported to cross-region object storage and a manual restore procedure into a secondary region.
 
 Tier 1 is suited for development and staging environments, low-criticality production workloads, and deployments where recovery measured in hours is operationally acceptable.
 
-| Property                            | Value                                                   |
-| ----------------------------------- | ------------------------------------------------------- |
-| **RTO**                             | ~1–4 hours (operator and environment dependent)         |
-| **RPO**                             | 15 minutes – 4 hours (backup-interval dependent)        |
-| **Failover mode**                   | Manual, human-initiated                                 |
-| **Standing second region required** | No — restore into a newly provisioned region            |
-| **Primary compliance fit**          | Basic Business Continuity Management (BCM) requirements |
+| Property                            | Value                                            |
+| ----------------------------------- | ------------------------------------------------ |
+| **RTO**                             | ~1–4 hours (operator and environment dependent)  |
+| **RPO**                             | 15 minutes – 4 hours (backup-interval dependent) |
+| **Failover mode**                   | Manual, human-initiated                          |
+| **Standing second region required** | No — restore into a newly provisioned region     |
 
 :::important
 Tier 1 RTO and RPO are **not engine-guaranteed**. Recovery time depends on data volume, backup frequency, operator familiarity with the restore procedure, and the speed at which a secondary region can be provisioned. Treat the ranges above as planning targets, not contractual commitments.
@@ -27,41 +28,19 @@ Tier 1 RTO and RPO are **not engine-guaranteed**. Recovery time depends on data 
 
 In Tier 1, a single active region runs the full Camunda Orchestration Cluster. Automated backup jobs export Zeebe partition snapshots and secondary storage backups (Elasticsearch or RDBMS) to an S3-compatible object storage bucket replicated to a separate region. There is no warm standby — no second cluster runs during normal operations.
 
-```
-┌──────────────────────────────────────────────────────────┐
-│ Primary region                                           │
-│                                                          │
-│  ┌────────────────────────────────────────────────┐      │
-│  │ Orchestration Cluster                           │      │
-│  │   Zeebe  │  Operate  │  Tasklist  │  Admin      │      │
-│  │   Secondary storage (Elasticsearch / RDBMS)     │      │
-│  └─────────────────────┬──────────────────────────┘      │
-│                        │ scheduled backup jobs           │
-└────────────────────────┼─────────────────────────────────┘
-                         ▼
-         ┌────────────────────────────────┐
-         │ Cross-region object storage    │
-         │ (S3-compatible, replicated)    │
-         │   Zeebe partition snapshots    │
-         │   ES snapshots / RDBMS dumps   │
-         └────────────────────────────────┘
-```
+<img src={ColdRecovery} alt="Camunda Cold Recovery from Backup architecture" style={{border: 'none'}} />
 
 On primary-region failure, an operator provisions a new environment in the secondary region and restores from the most recent consistent backup set.
 
 ## Backup scope
 
-A complete Tier 1 backup covers two storage layers. Both must be backed up — and aligned in time — to produce a consistent restore point.
+A complete Tier 1 backup covers two storage layers. Both must be backed up, see the [Backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
 | Layer                                  | Backup target                      | Backup mechanism                                                         |
 | -------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------ |
 | **Primary storage** (Zeebe log stream) | Zeebe partition snapshots          | Zeebe Backup Management API                                              |
 | **Secondary storage** (Elasticsearch)  | Elasticsearch index snapshots      | Orchestration cluster backup API                                         |
 | **Secondary storage** (RDBMS)          | Database dump or continuous backup | Database-native tools (`pg_dump`, Oracle RMAN, AWS RDS automated backup) |
-
-:::note
-Restoring only Zeebe without the corresponding secondary storage backup (or vice versa) will produce an inconsistent cluster. The two backups are correlated by backup ID on the Elasticsearch path, or by timestamp alignment on the RDBMS path.
-:::
 
 ### Component coverage
 
@@ -71,7 +50,7 @@ Restoring only Zeebe without the corresponding secondary storage backup (or vice
 | **Operate**                 | Yes — via Elasticsearch or RDBMS backup | State is stored in secondary storage           |
 | **Tasklist**                | Yes — via Elasticsearch or RDBMS backup | State is stored in secondary storage           |
 | **Admin / Identity**        | Yes — via Elasticsearch or RDBMS backup | Authentication and authorization configuration |
-| **Optimize**                | Elasticsearch path only                 | Not supported with RDBMS secondary storage     |
+| **Optimize**                | Elasticsearch path only                 | back up independently                          |
 | **Web Modeler**             | Not included                            | Standalone component; back up independently    |
 | **Connectors**              | Not included                            | Stateless; redeploy from source                |
 
@@ -79,8 +58,8 @@ Restoring only Zeebe without the corresponding secondary storage backup (or vice
 
 For Tier 1 recovery to be viable, three conditions must be in place before a failure occurs:
 
-- **Cross-region replication** — The primary S3 backup bucket must replicate objects to a bucket in the secondary region so that backup data remains accessible if the primary region becomes unavailable.
-- **Regular backup schedule** — Both Zeebe and secondary storage must be backed up on a consistent schedule. Backup frequency directly determines RPO: a 1-hour backup interval means up to 1 hour of data loss in the worst case.
+- **Backup storage Cross-region replication** — The primary S3 backup bucket must replicate objects to a bucket in the secondary region so that backup data remains accessible if the primary region becomes unavailable.
+- **Regular backup schedule** — Both Orchestration cluster and secondary storage must be backed up on a consistent schedule. Backup frequency directly determines RPO: a 1-hour backup interval means up to 1 hour of data loss in the worst case.
 - **Backup validation** — Backups should be periodically verified to confirm they are complete and restorable. An untested backup provides no recovery guarantee.
 
 For configuration instructions and scheduling guidance, see the [Backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
@@ -94,7 +73,7 @@ When the primary region fails, Tier 1 recovery follows this sequence:
 3. **Select restore point** — Identify the most recent complete, consistent backup set from the replica S3 bucket.
 4. **Restore Camunda Orchestration cluster** — Follow [Restore procedure](../../operational-guides/backup-restore/backup-and-restore.md).
 5. **Start and verify** — Deploy the Orchestration Cluster against the restored data and confirm health before routing traffic.
-6. **Redirect traffic** — Update DNS or load balancer configuration to point production traffic at the secondary region.
+6. **Redirect traffic** — Update applications, DNS or load balancer configuration to point production traffic at the secondary region.
 
 The total elapsed time across these steps is the realized RTO.
 

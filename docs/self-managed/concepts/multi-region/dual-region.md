@@ -37,12 +37,12 @@ Tier 2 combines **active-active data replication** with **active-active user tra
 
 ### Version-specific behavior
 
-- **Camunda 8.8** — Traffic routing is **active-passive**. The v2 REST API and Tasklist V2 already eliminate the v1-era region-specific data loss for batch operations and task assignments by routing changes through the Camunda Exporter. If your workload uses v2 APIs exclusively, you can already operate active-active.
-- **Camunda 8.9+** — User-facing **active-active** becomes the default for dual-region deployments when v12-API is not used. The v1-API limitation is the last remaining reason for active-passive routing, and it is being removed.
+- **Camunda 8.8** — Traffic routing is **active-passive**. The v2 REST API and Tasklist v2 already eliminate the v1-era region-specific data loss for batch operations and task assignments by routing changes through the Camunda Exporter. If your workload uses v2 APIs exclusively, you can already operate active-active.
+- **Camunda 8.9+** — User-facing **active-active** becomes the default for dual-region deployments when v2-API is not used. The v1-API limitation is the last remaining reason for active-passive routing, and it is being removed.
 
 ### User traffic management
 
-Route user traffic exclusively to the both primary or secondary region via DNS configuration, load balancer settings, or network routing policies. If the primary region fails, traffic must be redirected manually to the secondary region as part of the [failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover).
+User traffic can be routed to either or both regions via DNS, load balancer, or network routing policies. If a region fails, traffic must be redirected as part of the [failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover).
 
 :::warning Operation requirement
 Traffic redirection must be performed as part of the complete failover procedure. Redirecting traffic without following the operational procedure can lead to system inconsistencies and data issues.
