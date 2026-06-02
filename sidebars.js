@@ -2201,7 +2201,7 @@ module.exports = {
             id: "self-managed/concepts/multi-region/resilience-tiers",
           },
           items: [
-            "self-managed/concepts/multi-region/tier-1-cold-recovery",
+            "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
           ],
         },
