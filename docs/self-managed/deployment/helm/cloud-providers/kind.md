@@ -48,6 +48,8 @@ mkcert requires [NSS](https://github.com/FiloSottile/mkcert#supported-root-store
 
 In addition to the deployment mode, you must choose a [secondary storage](/self-managed/concepts/secondary-storage/index.md) backend. The `SECONDARY_STORAGE` environment variable controls which backend the deployment scripts use. You must set it explicitly before running any deployment command — there is no default.
 
+For production backend trade-offs between Elasticsearch/OpenSearch and RDBMS, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). This kind guide is for local development and testing only.
+
 | Value           | Operators deployed                    | Components                                                  |
 | --------------- | ------------------------------------- | ----------------------------------------------------------- |
 | `elasticsearch` | ECK, CloudNativePG, Keycloak Operator | Full platform including Optimize                            |

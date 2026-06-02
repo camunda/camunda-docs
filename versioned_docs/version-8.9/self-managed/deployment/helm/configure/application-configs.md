@@ -230,7 +230,9 @@ camunda:
 
 Optimize uses its own configuration loader (not standard Spring Boot conventions). It reads only two files: `environment-config.yaml` (main config) and `application-ccsm.yaml` (Identity/auth config, loaded when the `ccsm` Spring profile is active). It does **not** scan its config directory for additional files.
 
-The Helm chart extracts the default `environment-config.yaml`, then **merges all `extraConfiguration` entries at template rendering time** into the final `environment-config.yaml`. Later entries override earlier ones.
+Starting with **Camunda 8.9**, Optimize also loads any additional configuration files that are referenced via Spring's `spring.config.import` or `spring.config.location` properties. This allows you to use `optimize.extraConfiguration` to configure Optimize-native settings in addition to Spring-only settings.
+
+In the Helm chart, each `optimize.extraConfiguration` entry is rendered as a separate file in the Optimize config directory. Spring imports these files in the order you define them, and Optimize's configuration loader applies them in the **same order**. For duplicate keys, later entries override earlier ones.
 
 ```yaml
 optimize:
@@ -248,7 +250,7 @@ optimize:
                 httpPort: 9200
 ```
 
-Both entries are merged with the default Optimize config into a single `environment-config.yaml`.
+Both files remain separate in the Optimize config directory and are loaded at runtime in the order you define.
 
 :::caution
 The `content` must be valid YAML. If invalid YAML is provided, Helm will fail during template rendering with a parse error. This is intentional and prevents deploying a broken configuration.
@@ -256,14 +258,14 @@ The `content` must be valid YAML. If invalid YAML is provided, Helm will fail du
 
 ### Summary
 
-| Component             | Runtime       | Config format | How `extraConfiguration` is applied                                                                      |
-| --------------------- | ------------- | ------------- | -------------------------------------------------------------------------------------------------------- |
-| Identity              | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
-| Connectors            | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
-| Orchestration Cluster | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
-| Web Modeler REST API  | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import) |
-| Console               | Node.js       | YAML          | Merged at template time into single `application-override.yaml`                                          |
-| Optimize              | Java (custom) | YAML          | Merged at template time into single `environment-config.yaml`                                            |
+| Component             | Runtime       | Config format | How `extraConfiguration` is applied                                                                                                                                                                                |
+| --------------------- | ------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Identity              | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import)                                                                                                           |
+| Connectors            | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import)                                                                                                           |
+| Orchestration Cluster | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import)                                                                                                           |
+| Web Modeler REST API  | Spring Boot   | YAML          | Individual files mounted, imported via `spring.config.import` (use `springImport: false` to skip import)                                                                                                           |
+| Console               | Node.js       | YAML          | Merged at template time into single `application-override.yaml`                                                                                                                                                    |
+| Optimize              | Java (custom) | YAML          | Loaded at runtime from `environment-config.yaml` plus any files imported via `spring.config.import` / `spring.config.location` (rendered from `optimize.extraConfiguration`); later imports override earlier ones. |
 
 ## Practical example: migrating from environment variables to a configuration file
 

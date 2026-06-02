@@ -724,7 +724,7 @@ camunda:
     # Change the connection (default: Camunda 8 Run)
     remote:
       camunda-monitoring-api-address: http://0.0.0.0:9600
-      connectors-rest-api-address: http://0.0.0.0:8085
+      connectors-rest-api-address: http://0.0.0.0:8086
       # The connection timeout in ISO-8601 duration format (default: PT1M)
       runtime-connection-timeout: PT1M
   client:
@@ -746,7 +746,7 @@ In your `/camunda-container-runtime.properties` file:
 runtimeMode=remote
 # Change the connection (default: Camunda 8 Run)
 remote.camundaMonitoringApiAddress=http://0.0.0.0:9600
-remote.connectorsRestApiAddress=http://0.0.0.0:8085
+remote.connectorsRestApiAddress=http://0.0.0.0:8086
 camunda.client.gateway.grpc.address=http://0.0.0.0:26500
 camunda.client.gateway.rest.address=http://0.0.0.0:8080
 # The connection timeout in ISO-8601 duration format (default: PT1M)
@@ -778,7 +778,7 @@ public class MyProcessTest {
                             .grpcAddress(URI.create("http://0.0.0.0:26500"))
                     )
                     .withRemoteCamundaMonitoringApiAddress(URI.create("http://0.0.0.0:9600"))
-                    .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"))
+                    .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8086"))
                     // Change the connection timeout (default: PT1M)
                     .withRemoteRuntimeConnectionTimeout(Duration.ofMinutes(1));
 }
@@ -955,10 +955,10 @@ natural language expectations. This section covers how to set up the LLM provide
 CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured
 support for major LLM providers: OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and OpenAI-compatible APIs.
 LangChain4j requires Java 17+. You can provide your own LLM integration through a
-custom `ChatModelAdapter` instead (see [Custom ChatModelAdapter](#custom-chatmodeladapter)).
+custom `ChatModelAdapter` instead (see [custom ChatModelAdapter](#custom-chatmodeladapter)).
 
 :::tip
-For a guided walkthrough of setting up and testing AI agents, see [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md).
+For a guided walkthrough of setting up and testing AI agents, see [test your AI agents](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md).
 :::
 
 <Tabs groupId="client" defaultValue="spring-sdk-pre" queryString values={[
@@ -989,7 +989,7 @@ Add the `camunda-process-test-langchain4j` dependency to your project:
 
 </Tabs>
 
-If you provide a custom `ChatModelAdapter` (see [Custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency
+If you provide a custom `ChatModelAdapter` (see [custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency
 is not required.
 
 ### Property reference
@@ -997,7 +997,7 @@ is not required.
 All judge properties are nested under `camunda.process-test.judge` in Spring configuration. In Java properties files,
 use the `judge.` prefix with camelCase keys (for example, `judge.chat-model.api-key` becomes `judge.chatModel.apiKey`).
 
-For configuration examples, see [Step 2: Configure the LLM provider and connectors](/components/agentic-orchestration/test-ai-agents.md#step-2-configure-the-llm-provider-and-connectors).
+For configuration examples, see [step 2: configure the LLM provider and connectors](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md#step-2-configure-the-llm-provider-and-connectors).
 
 Unless noted otherwise, properties in the provider tables are required.
 

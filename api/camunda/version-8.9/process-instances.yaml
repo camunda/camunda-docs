@@ -5,8 +5,10 @@ paths:
         - Process instance
       operationId: createProcessInstance
       summary: Create process instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -67,6 +69,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+      x-added-in-version: "8.6"
   /process-instances/{processInstanceKey}:
     get:
       tags:
@@ -75,6 +78,8 @@ paths:
       summary: Get process instance
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -110,6 +115,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /process-instances/{processInstanceKey}/sequence-flows:
     get:
       tags:
@@ -118,6 +124,8 @@ paths:
       summary: Get sequence flows
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -147,6 +155,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /process-instances/{processInstanceKey}/statistics/element-instances:
     get:
       tags:
@@ -155,6 +164,8 @@ paths:
       summary: Get element instance statistics
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -184,6 +195,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /process-instances/search:
     post:
       tags:
@@ -192,6 +204,8 @@ paths:
       summary: Search process instances
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -217,14 +231,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
   /process-instances/{processInstanceKey}/incidents/search:
     post:
       tags:
         - Process instance
       operationId: searchProcessInstanceIncidents
       summary: Search related incidents
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -271,6 +288,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /process-instances/{processInstanceKey}/incident-resolution:
     post:
       tags:
@@ -279,6 +297,8 @@ paths:
       summary: Resolve related incidents
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -314,14 +334,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.9"
   /process-instances/{processInstanceKey}/cancellation:
     post:
       tags:
         - Process instance
       operationId: cancelProcessInstance
       summary: Cancel process instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -359,14 +382,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
         "504":
           $ref: "common-responses.yaml#/components/responses/GatewayTimeoutTaskListenerBlocking"
+      x-added-in-version: "8.6"
   /process-instances/cancellation:
     post:
       tags:
         - Process instance
       operationId: cancelProcessInstancesBatchOperation
       summary: Cancel process instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -400,14 +426,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /process-instances/incident-resolution:
     post:
       tags:
         - Process instance
       operationId: resolveIncidentsBatchOperation
       summary: Resolve related incidents (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -441,14 +470,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /process-instances/migration:
     post:
       tags:
         - Process instance
       operationId: migrateProcessInstancesBatchOperation
       summary: Migrate process instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -482,14 +514,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /process-instances/modification:
     post:
       tags:
         - Process instance
       operationId: modifyProcessInstancesBatchOperation
       summary: Modify process instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -525,6 +560,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /process-instances/{processInstanceKey}/deletion:
     post:
       tags:
@@ -533,6 +569,8 @@ paths:
       summary: Delete process instance
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -576,14 +614,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.9"
   /process-instances/deletion:
     post:
       tags:
         - Process instance
       operationId: deleteProcessInstancesBatchOperation
       summary: Delete process instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -616,14 +657,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /process-instances/{processInstanceKey}/migration:
     post:
       tags:
         - Process instance
       operationId: migrateProcessInstance
       summary: Migrate process instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -672,14 +716,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /process-instances/{processInstanceKey}/modification:
     post:
       tags:
         - Process instance
       operationId: modifyProcessInstance
       summary: Modify process instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -720,6 +767,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /process-instances/{processInstanceKey}/call-hierarchy:
     get:
       tags:
@@ -728,6 +776,8 @@ paths:
       summary: Get call hierarchy
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -765,6 +815,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
 components:
   schemas:
     ProcessInstanceCreationInstruction:

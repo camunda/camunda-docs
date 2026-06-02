@@ -55,9 +55,9 @@ When using an OpenAI Compatible provider, you can bring your own model (BYOM) fo
 
 The following prerequisites apply regardless of your cloud provider:
 
-| Prerequisite                                                         | Description                                                                                                                                                                                                                                              |
-| :------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) | <ul><li><p>Web Modeler is required to create, manage, publish, and integrate [IDP applications](idp-applications.md) and [document extraction](idp-document-extraction.md) templates.</p></li><li><p>IDP does not support Desktop Modeler.</p></li></ul> |
+| Prerequisite                                                         | Description                                                                                                                                                                                                                                                                                                                    |
+| :------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) | <ul><li><p>Web Modeler is required to create, manage, publish, and integrate [IDP applications](idp-applications.md), [document extraction](idp-document-extraction.md) templates, and [document classification](idp-document-classification.md) templates.</p></li><li><p>IDP does not support Desktop Modeler.</p></li></ul> |
 
 ## Cluster requirements {#cluster-requirements}
 
@@ -204,7 +204,7 @@ To use [Docker](/self-managed/deployment/docker/docker.md) to deploy and run Cam
    1. Save and close the file.
 
 1. Configure [document handling environment variables](/components/document-handling/getting-started.md) for the Tasklist and Zeebe components.
-1. [Run Camunda 8 with Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md#run-camunda-8-with-docker-compose). For example, run the full configuration in the extracted directory:
+1. [Configure Docker Compose environments](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#choose-a-docker-compose-configuration). For example, run the full configuration in the extracted directory:
 
    ```
    docker compose -f docker-compose-full.yaml up -d

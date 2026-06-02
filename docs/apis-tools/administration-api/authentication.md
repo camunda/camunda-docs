@@ -81,16 +81,16 @@ Client credentials are created for an organization, and therefore can access all
 
 Scopes define the access for client credentials. A client can have one or multiple of the following permissions:
 
-![createConsoleApiClient](../../components/console/manage-organization/img/create-console-api-client.png)
+![createConsoleApiClient](../../components/hub/organization/manage-organization-settings/img/create-console-api-client.png)
 
 A client can have one or multiple permissions from the following groups:
 
-- **Cluster**: [Manage your clusters](/components/console/manage-clusters/create-cluster.md).
-- **Zeebe Client**: [Manage API clients](/components/console/manage-clusters/manage-api-clients.md) for your cluster.
+- **Cluster**: [Manage your clusters](/components/hub/organization/manage-clusters/create-cluster.md).
+- **Zeebe Client**: [Manage API clients](/components/hub/organization/manage-clusters/manage-api-clients.md) for your cluster.
 - **Web Modeler API**: Interact with the [Web Modeler API](/apis-tools/web-modeler-api/index.md).
-- **IP allowlist**: Configure [IP allowlist](/components/console/manage-clusters/manage-ip-allowlists.md) rules.
-- **Connector Secrets**: [Manage secrets](/components/console/manage-clusters/manage-secrets.md) of your clusters.
-- **Members**: [Manage members](/components/console/manage-organization/manage-users.md) of your organization.
+- **IP allowlist**: Configure [IP allowlist](/components/hub/organization/manage-clusters/manage-ip-allowlists.md) rules.
+- **Connector Secrets**: [Manage secrets](/components/hub/organization/manage-clusters/manage-secrets.md) of your clusters.
+- **Members**: [Manage members](/components/hub/organization/manage-members/manage-users.md) of your organization.
 - **Backups**: Manage [backups](/components/saas/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
 
 The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).

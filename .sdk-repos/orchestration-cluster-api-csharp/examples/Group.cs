@@ -6,13 +6,13 @@ public static class GroupExamples
 {
     #region CreateGroup
     // <CreateGroup>
-    public static async Task CreateGroupExample()
+    public static async Task CreateGroupExample(GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateGroupAsync(new GroupCreateRequest
         {
-            GroupId = "engineering",
+            GroupId = groupId,
             Name = "Engineering",
         });
 
@@ -24,11 +24,11 @@ public static class GroupExamples
     #region GetGroup
 
     // <GetGroup>
-    public static async Task GetGroupExample()
+    public static async Task GetGroupExample(GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetGroupAsync("engineering");
+        var result = await client.GetGroupAsync(groupId);
         Console.WriteLine($"Group: {result.Name}");
     }
     // </GetGroup>
@@ -54,11 +54,11 @@ public static class GroupExamples
     #region UpdateGroup
 
     // <UpdateGroup>
-    public static async Task UpdateGroupExample()
+    public static async Task UpdateGroupExample(GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
-        await client.UpdateGroupAsync("engineering", new GroupUpdateRequest
+        await client.UpdateGroupAsync(groupId, new GroupUpdateRequest
         {
             Name = "engineering-team",
         });
@@ -69,11 +69,11 @@ public static class GroupExamples
     #region DeleteGroup
 
     // <DeleteGroup>
-    public static async Task DeleteGroupExample()
+    public static async Task DeleteGroupExample(GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
-        await client.DeleteGroupAsync("engineering");
+        await client.DeleteGroupAsync(groupId);
     }
     // </DeleteGroup>
     #endregion DeleteGroup
@@ -81,11 +81,11 @@ public static class GroupExamples
     #region AssignUserToGroup
 
     // <AssignUserToGroup>
-    public static async Task AssignUserToGroupExample(Username username)
+    public static async Task AssignUserToGroupExample(GroupId groupId, Username username)
     {
         using var client = CamundaClient.Create();
 
-        await client.AssignUserToGroupAsync("engineering", username);
+        await client.AssignUserToGroupAsync(groupId, username);
     }
     // </AssignUserToGroup>
     #endregion AssignUserToGroup
@@ -93,11 +93,11 @@ public static class GroupExamples
     #region UnassignUserFromGroup
 
     // <UnassignUserFromGroup>
-    public static async Task UnassignUserFromGroupExample(Username username)
+    public static async Task UnassignUserFromGroupExample(GroupId groupId, Username username)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignUserFromGroupAsync("engineering", username);
+        await client.UnassignUserFromGroupAsync(groupId, username);
     }
     // </UnassignUserFromGroup>
     #endregion UnassignUserFromGroup
@@ -105,11 +105,11 @@ public static class GroupExamples
     #region AssignClientToGroup
 
     // <AssignClientToGroup>
-    public static async Task AssignClientToGroupExample()
+    public static async Task AssignClientToGroupExample(GroupId groupId, ClientId clientId)
     {
         using var client = CamundaClient.Create();
 
-        await client.AssignClientToGroupAsync("engineering", "my-service-account");
+        await client.AssignClientToGroupAsync(groupId, clientId);
     }
     // </AssignClientToGroup>
     #endregion AssignClientToGroup
@@ -117,11 +117,11 @@ public static class GroupExamples
     #region UnassignClientFromGroup
 
     // <UnassignClientFromGroup>
-    public static async Task UnassignClientFromGroupExample()
+    public static async Task UnassignClientFromGroupExample(GroupId groupId, ClientId clientId)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignClientFromGroupAsync("engineering", "my-service-account");
+        await client.UnassignClientFromGroupAsync(groupId, clientId);
     }
     // </UnassignClientFromGroup>
     #endregion UnassignClientFromGroup
@@ -129,11 +129,11 @@ public static class GroupExamples
     #region AssignMappingRuleToGroup
 
     // <AssignMappingRuleToGroup>
-    public static async Task AssignMappingRuleToGroupExample()
+    public static async Task AssignMappingRuleToGroupExample(GroupId groupId, MappingRuleId mappingRuleId)
     {
         using var client = CamundaClient.Create();
 
-        await client.AssignMappingRuleToGroupAsync("engineering", "rule-123");
+        await client.AssignMappingRuleToGroupAsync(groupId, mappingRuleId);
     }
     // </AssignMappingRuleToGroup>
     #endregion AssignMappingRuleToGroup
@@ -141,11 +141,11 @@ public static class GroupExamples
     #region UnassignMappingRuleFromGroup
 
     // <UnassignMappingRuleFromGroup>
-    public static async Task UnassignMappingRuleFromGroupExample()
+    public static async Task UnassignMappingRuleFromGroupExample(GroupId groupId, MappingRuleId mappingRuleId)
     {
         using var client = CamundaClient.Create();
 
-        await client.UnassignMappingRuleFromGroupAsync("engineering", "rule-123");
+        await client.UnassignMappingRuleFromGroupAsync(groupId, mappingRuleId);
     }
     // </UnassignMappingRuleFromGroup>
     #endregion UnassignMappingRuleFromGroup
@@ -153,13 +153,13 @@ public static class GroupExamples
     #region SearchUsersForGroup
 
     // <SearchUsersForGroup>
-    public static async Task SearchUsersForGroupExample()
+    public static async Task SearchUsersForGroupExample(GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchUsersForGroupAsync(
-            "engineering",
-            new SearchUsersForGroupRequest());
+            groupId,
+            new GroupUserSearchQueryRequest());
 
         foreach (var user in result.Items)
         {
@@ -172,13 +172,13 @@ public static class GroupExamples
     #region SearchClientsForGroup
 
     // <SearchClientsForGroup>
-    public static async Task SearchClientsForGroupExample()
+    public static async Task SearchClientsForGroupExample(GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchClientsForGroupAsync(
-            "engineering",
-            new SearchClientsForGroupRequest());
+            groupId,
+            new GroupClientSearchQueryRequest());
 
         foreach (var c in result.Items)
         {
@@ -191,12 +191,12 @@ public static class GroupExamples
     #region SearchRolesForGroup
 
     // <SearchRolesForGroup>
-    public static async Task SearchRolesForGroupExample()
+    public static async Task SearchRolesForGroupExample(GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchRolesForGroupAsync(
-            "engineering",
+            groupId,
             new RoleSearchQueryRequest());
 
         foreach (var role in result.Items)
@@ -210,12 +210,12 @@ public static class GroupExamples
     #region SearchMappingRulesForGroup
 
     // <SearchMappingRulesForGroup>
-    public static async Task SearchMappingRulesForGroupExample()
+    public static async Task SearchMappingRulesForGroupExample(GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.SearchMappingRulesForGroupAsync(
-            "engineering",
+            groupId,
             new MappingRuleSearchQueryRequest());
 
         foreach (var rule in result.Items)

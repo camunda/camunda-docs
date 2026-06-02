@@ -5,8 +5,10 @@ paths:
         - Message
       operationId: publishMessage
       summary: Publish message
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -34,14 +36,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /messages/correlation:
     post:
       tags:
         - Message
       operationId: correlateMessage
       summary: Correlate message
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -76,6 +81,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /message-subscriptions/search:
     post:
       tags:
@@ -84,6 +90,8 @@ paths:
       summary: Search message subscriptions
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -109,6 +117,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /correlated-message-subscriptions/search:
     post:
       tags:
@@ -117,6 +126,8 @@ paths:
       summary: Search correlated message subscriptions
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -142,6 +153,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
 components:
   schemas:
     MessageCorrelationRequest:

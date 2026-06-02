@@ -16,6 +16,38 @@ represents a feature area.
 
 ## Properties
 
+### authentication
+
+```ts
+authentication: AuthenticationConfigurationResponse;
+```
+
+---
+
+### cloud
+
+```ts
+cloud: CloudConfigurationResponse;
+```
+
+---
+
+### components
+
+```ts
+components: ComponentsConfigurationResponse;
+```
+
+---
+
+### deployment
+
+```ts
+deployment: DeploymentConfigurationResponse;
+```
+
+---
+
 ### jobMetrics
 
 ```ts

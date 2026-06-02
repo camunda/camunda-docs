@@ -56,7 +56,7 @@ It is critical that no Camunda components are running during the restore. Runnin
 
 ## Step 1: Restore Zeebe from its primary storage backup
 
-Camunda provides a standalone restore application that must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
+Camunda provides a standalone restore application that must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
 
 :::warning
 Persistent volumes or disks must not contain any pre-existing data before restoring Zeebe. If data exists from a previous deployment, it must be cleared first.
@@ -103,7 +103,7 @@ orchestration:
       value: "restore"
     - name: ZEEBE_RESTORE
       value: "true"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3" # or GCS, AZURE, FILESYSTEM
     # Rest of the backup store configuration (bucket, region, etc.)
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -126,7 +126,7 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:543
 # ... other RDBMS config
 
 # Ensure backup store is configured
-export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE=S3
+export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE=S3
 # ... other store config
 
 mkdir -p camunda
@@ -158,7 +158,7 @@ orchestration:
       value: "true"
     - name: ZEEBE_RESTORE_TO_TIMESTAMP
       value: "2026-01-10T14:00:00Z"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3"
     # Rest of the backup store configuration
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -212,7 +212,7 @@ orchestration:
       value: "2026-01-10T13:00:00Z"
     - name: ZEEBE_RESTORE_TO_TIMESTAMP
       value: "2026-01-10T14:00:00Z"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3"
     # Rest of the backup store configuration
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -261,7 +261,7 @@ orchestration:
       value: "restore"
     - name: ZEEBE_RESTORE
       value: "true"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3"
     # Rest of the backup store configuration
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -279,7 +279,8 @@ With the backup ID passed as a command-line argument:
 ```yaml
 orchestration:
   command:
-    ["/usr/local/camunda/bin/restore", "--backupId=1772001869309,1772001899400"]
+    - "/usr/local/camunda/bin/restore"
+    - "--backupId=1772001869309,1772001899400"
 ```
 
   </TabItem>
@@ -311,7 +312,8 @@ An alternative approach to overwriting the startup behavior to restore the parti
 ```yaml
 orchestration:
   enabled: true
-  command: ["/usr/local/camunda/bin/restore"]
+  command:
+    - "/usr/local/camunda/bin/restore"
   env:
     - name: SPRING_PROFILES_ACTIVE
       value: "restore"
@@ -325,7 +327,7 @@ The application exits after restore and Kubernetes restarts the pod, which appea
 After removing the temporary restore command or unsetting `ZEEBE_RESTORE` to restore Zeebe's default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
 
 :::tip
-In Kubernetes, Zeebe runs as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which is intended for long-running, persistent applications. Because StatefulSet pods are restarted automatically, restore-mode pods can appear in `CrashLoopBackOff` after a successful restore. Observe Zeebe broker logs during restore. If a pod has already restarted, use `--previous` to view logs from the completed restore run:
+In Kubernetes, Zeebe runs as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which is intended for long-running, persistent applications. Because StatefulSet pods are restarted automatically, restore-mode pods can appear in `CrashLoopBackOff` after a successful restore. Observe Zeebe Broker logs during restore. If a pod has already restarted, use `--previous` to view logs from the completed restore run:
 
 ```bash
 kubectl logs <zeebe-pod-name> --previous
@@ -367,6 +369,12 @@ After both primary and secondary storage are restored, start all Camunda compone
 :::note
 After starting the components, monitor the logs for any errors or warnings. Components will reconcile their state with the restored data, which may take some time depending on the size of the data. When using RDBMS-aware or time range restore, Zeebe re-exports events from the backup's checkpoint position up to its current state, bringing the RDBMS up to date.
 :::
+
+## (Optional) Restore Optimize data {#restore-optimize-data}
+
+If you previously backed up Optimize data, restore it independently using the standalone Optimize restore procedure. Optimize can be restored while the Orchestration Cluster restore is in progress or after it completes; the restore procedures are independent.
+
+See [back up and restore Optimize independently](../optimize-backup-and-restore.md#restore-a-backup) for the complete procedure.
 
 ## (Optional) Restore Web Modeler data
 

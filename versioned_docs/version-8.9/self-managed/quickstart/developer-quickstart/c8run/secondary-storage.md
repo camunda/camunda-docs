@@ -277,7 +277,7 @@ Operate can run against the default H2 store, but some user-facing Operate featu
 
 Camunda 8 uses two layers of storage:
 
-- **[Primary storage](/reference/glossary.md#primary-storage)** is handled by the Zeebe broker to store workflow execution data.
+- **[Primary storage](/reference/glossary.md#primary-storage)** is handled by the Zeebe Broker to store workflow execution data.
 - **[Secondary storage](/reference/glossary.md#secondary-storage)** is used by applications like Operate, Tasklist, and Admin to read and present that data.
 
 For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).

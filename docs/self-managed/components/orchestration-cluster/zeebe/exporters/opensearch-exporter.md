@@ -189,7 +189,7 @@ camunda:
       opensearch:
         args:
           index:
-            export-local-variables: true
+            export-local-variables-enabled: true
 
             # Root variable name filters
             root-variable-name-inclusion-exact: []
@@ -215,7 +215,7 @@ camunda:
 
 Behavior overview:
 
-- If `export-local-variables` is set to `false`, no local variables are exported.
+- If `export-local-variables-enabled` is set to `false`, no local variables are exported.
 - If all `root-*` and `local-*` lists are empty, only the global filters (`variable-name-*` and `variable-value-type-*`) apply. This preserves behavior from earlier versions.
 - If any root-specific or local-specific list is non-empty, that scope uses both the global filters and the scope-specific filters.
 - Exclusion filters take precedence over inclusion filters.
@@ -226,7 +226,7 @@ Export only selected root variables and exclude temporary local variables:
 
 ```yaml
 index:
-  export-local-variables: true
+  export-local-variables-enabled: true
 
   # Include only specific root variables
   root-variable-name-inclusion-exact: ["customerId", "orderId"]
@@ -306,16 +306,25 @@ With the default configuration, the exporter would aggregate records and flush t
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index State Management (ISM) policy that deletes the data after the specified `minimumAge`. All index templates created by this exporter apply the created ISM policy.
 
-| Option             | Description                                                                   | Default                         |
-| ------------------ | ----------------------------------------------------------------------------- | ------------------------------- |
-| enabled            | If `true` the ISM policy is created and applied to the index templates.       | `false`                         |
-| minimum-age        | Specifies how old the data must be, before the data is deleted as a duration. | `30d`                           |
-| policy-name        | The name of the created and applied ISM policy.                               | `zeebe-record-retention-policy` |
-| policy-description | The description of the created and applied ISM policy.                        | `Zeebe record retention policy` |
+| Option             | Description                                                                                                                                                                                   | Default                         |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| enabled            | If `true` the ISM policy is created and applied to the index templates.                                                                                                                       | `false`                         |
+| minimum-age        | Specifies how old the data must be, before the data is deleted as a duration.                                                                                                                 | `30d`                           |
+| policy-name        | The name of the created and applied ISM policy.                                                                                                                                               | `zeebe-record-retention-policy` |
+| policy-description | The description of the created and applied ISM policy.                                                                                                                                        | `Zeebe record retention policy` |
+| manage-policy      | If `true` the exporter creates, updates, and removes the ISM policy on its own. Set to `false` to leave an externally managed policy untouched (the exporter neither creates nor removes it). | `true`                          |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or
 nanoseconds `nanos`.
+:::
+
+:::note Externally managed policy
+
+When `manage-policy: false`, the exporter still attaches the policy named by `policy-name` (default `zeebe-record-retention-policy`) to the indices it creates. The policy must already exist in your OpenSearch cluster under that name when the exporter starts.
+
+If the policy does not exist, OpenSearch's ISM `add` API rejects the call and the exporter fails to start with `OpensearchExporterException: Failed to add policy to indices`. Provision the ISM policy before starting Camunda when using `manage-policy: false`.
+
 :::
 
 </TabItem>

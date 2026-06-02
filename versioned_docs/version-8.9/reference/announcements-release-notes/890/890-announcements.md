@@ -13,7 +13,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 | Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
 | ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| 14 April 2026      | 13 October 2027              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -154,6 +154,21 @@ Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using 
 Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test are **forward-compatible** with the Orchestration Cluster, meaning you can upgrade the cluster and clients independently. For example, you can run a client on 8.8 against a cluster on 8.9, see [Client and API compatibility](/reference/public-api.md#client-and-api-compatibility).
 :::
 <br/>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `GET /decision-instances/{decisionEvaluationInstanceKey}` now validates the key format
+
+The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance.api.mdx) endpoint previously returned `404 Not Found` when the `decisionEvaluationInstanceKey` path parameter contained invalid characters that did not match the required pattern `^[0-9]+-[0-9]+$`. The endpoint now correctly returns `400 Bad Request` in this case, while `404 Not Found` is reserved for well-formed keys that do not exist.
+
+**Action:** Update any client code or error handling that relied on receiving `404 Not Found` for malformed keys to also handle `400 Bad Request`.
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -432,6 +447,29 @@ Previously, customers had to handle both empty string and absent/null to determi
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Process Test: Connectors port changed from 8085 to 8086
+
+Starting with Camunda 8.9.1, the default Connectors REST API port for Camunda Process Test remote runtime has changed from 8085 to 8086.
+
+This change aligns with Camunda 8 Run, which exposes Connectors on port 8086 as of version 8.9.1. The previous default port 8085 would break inbound connector invocations when running tests against Camunda 8 Run.
+
+**Action:** If you use Camunda Process Test with remote runtime configuration:
+
+- Update your `connectors-rest-api-address` configuration to use port 8086 instead of 8085.
+- If you explicitly configured port 8085 in your test configuration, update it to 8086.
+- If you rely on the default configuration, no action is needed—the default is now 8086.
+
+<p className="link-arrow">[Camunda Process Test configuration](/apis-tools/testing/configuration.md#remote-runtime)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
@@ -506,7 +544,7 @@ Starting with Camunda 8.9, the environment-based connector secret provider uses 
 **Action:** Choose one of the following options before or during your upgrade:
 
 - Update your secret environment variables to use the `SECRET_` prefix.
-- Configure a custom prefix via `camunda.connector.secret-provider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_PREFIX`.
+- Configure a custom prefix via `camunda.connector.secretprovider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`.
 - Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
 
 <p className="link-arrow">[connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md#secrets)</p>

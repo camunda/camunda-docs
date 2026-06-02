@@ -5,8 +5,10 @@ paths:
         - Incident
       operationId: searchIncidents
       summary: Search incidents
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -32,14 +34,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
   /incidents/{incidentKey}:
     get:
       tags:
         - Incident
       operationId: getIncident
       summary: Get incident
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -75,14 +80,17 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
   /incidents/{incidentKey}/resolution:
     post:
       tags:
         - Incident
       operationId: resolveIncident
       summary: Resolve incident
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -127,14 +135,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /incidents/statistics/process-instances-by-error:
     post:
       tags:
         - Incident
       operationId: getProcessInstanceStatisticsByError
       summary: Get process instance statistics by error
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -163,14 +174,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /incidents/statistics/process-instances-by-definition:
     post:
       tags:
         - Incident
       operationId: getProcessInstanceStatisticsByDefinition
       summary: Get process instance statistics by definition
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -200,6 +214,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
 components:
   schemas:
     IncidentSearchQuery:
@@ -216,6 +231,11 @@ components:
           description: The incident search filters.
           allOf:
             - $ref: "#/components/schemas/IncidentFilter"
+      x-properties-added-in-version:
+        - propertyName: sort
+          addedInVersion: "8.6"
+        - propertyName: filter
+          addedInVersion: "8.6"
     IncidentFilter:
       description: Incident search filter.
       type: object
@@ -268,6 +288,13 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/JobKeyFilterProperty"
           description: The job key, if exists, associated with this incident.
+      x-properties-added-in-version:
+        - propertyName: elementId
+          addedInVersion: "8.8"
+        - propertyName: incidentKey
+          addedInVersion: "8.8"
+        - propertyName: elementInstanceKey
+          addedInVersion: "8.8"
     IncidentErrorTypeFilterProperty:
       description: IncidentErrorTypeEnum with full advanced search capabilities.
       oneOf:
@@ -305,6 +332,19 @@ components:
             $ref: "#/components/schemas/IncidentErrorTypeEnum"
         $like:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
+      x-properties-added-in-version:
+        - propertyName: $eq
+          addedInVersion: "8.9"
+        - propertyName: $neq
+          addedInVersion: "8.9"
+        - propertyName: $exists
+          addedInVersion: "8.9"
+        - propertyName: $in
+          addedInVersion: "8.9"
+        - propertyName: $notIn
+          addedInVersion: "8.9"
+        - propertyName: $like
+          addedInVersion: "8.9"
     IncidentErrorTypeEnum:
       description: Incident error type with a defined set of values.
       type: string
@@ -362,6 +402,19 @@ components:
             $ref: "#/components/schemas/IncidentStateEnum"
         $like:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
+      x-properties-added-in-version:
+        - propertyName: $eq
+          addedInVersion: "8.9"
+        - propertyName: $neq
+          addedInVersion: "8.9"
+        - propertyName: $exists
+          addedInVersion: "8.9"
+        - propertyName: $in
+          addedInVersion: "8.9"
+        - propertyName: $notIn
+          addedInVersion: "8.9"
+        - propertyName: $like
+          addedInVersion: "8.9"
     IncidentStateEnum:
       description: Incident states with a defined set of values.
       type: string
@@ -405,6 +458,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/IncidentResult"
+      x-properties-added-in-version:
+        - propertyName: items
+          addedInVersion: "8.6"
     IncidentResult:
       type: object
       required:
@@ -478,11 +534,41 @@ components:
           nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/JobKey"
+      x-properties-added-in-version:
+        - propertyName: processDefinitionId
+          addedInVersion: "8.6"
+        - propertyName: errorType
+          addedInVersion: "8.6"
+        - propertyName: errorMessage
+          addedInVersion: "8.6"
+        - propertyName: elementId
+          addedInVersion: "8.8"
+        - propertyName: creationTime
+          addedInVersion: "8.6"
+        - propertyName: state
+          addedInVersion: "8.6"
+        - propertyName: tenantId
+          addedInVersion: "8.6"
+        - propertyName: incidentKey
+          addedInVersion: "8.8"
+        - propertyName: processDefinitionKey
+          addedInVersion: "8.6"
+        - propertyName: processInstanceKey
+          addedInVersion: "8.6"
+        - propertyName: rootProcessInstanceKey
+          addedInVersion: "8.9"
+        - propertyName: elementInstanceKey
+          addedInVersion: "8.8"
+        - propertyName: jobKey
+          addedInVersion: "8.6"
     IncidentResolutionRequest:
       type: object
       properties:
         operationReference:
           $ref: "keys.yaml#/components/schemas/OperationReference"
+      x-properties-added-in-version:
+        - propertyName: operationReference
+          addedInVersion: "8.8"
     IncidentProcessInstanceStatisticsByErrorQuery:
       type: object
       properties:
