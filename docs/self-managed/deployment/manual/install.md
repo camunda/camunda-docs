@@ -71,14 +71,13 @@ Orchestration Cluster:
 Connectors:
 
 - Bundle (includes pre-bundled connectors from Camunda)
+
   - File names follow the pattern `connector-runtime-bundle-x.y.z-with-dependencies.jar`.
-  - [Maven Central](https://central.sonatype.com/artifact/io.camunda.connector/connector-runtime-bundle/versions) - Select a version, then click **Browse** to view the `.jar`.
-  - [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/connector/connector-runtime-bundle/) - Select a version, then browse the files to download.
+  - Released bundle artifacts aren't available in Maven Central or Artifactory.
 
 - Runtime-only
   - File names follow the pattern `connector-runtime-application-x.y.z.jar`.
-  - [Maven Central](https://central.sonatype.com/artifact/io.camunda.connector/connector-runtime-application/versions) - Select a version, then click **Browse** to view the `.jar`.
-  - [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/connector/connector-runtime-application/) - Select a version, then browse the files to download.
+  - Released runtime-only artifacts aren't available in Maven Central or Artifactory.
 
 :::note
 
