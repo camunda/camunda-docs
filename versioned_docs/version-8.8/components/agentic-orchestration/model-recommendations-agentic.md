@@ -1,11 +1,11 @@
 ---
 id: model-recommendations-agentic
-title: LLM recommendations
+title: LLM recommendations for agentic processes
 sidebar_label: LLM recommendations
-description: Prompting recommendations when using models for agentic process
+description: Recommendations and best practices for choosing LLMs and designing effective prompts for agentic processes.
 ---
 
-Recommendations and best practices for working with models and effective prompts.
+Recommendations and best practices for choosing LLMs and designing effective prompts for agentic processes.
 
 ## General model requirements
 
