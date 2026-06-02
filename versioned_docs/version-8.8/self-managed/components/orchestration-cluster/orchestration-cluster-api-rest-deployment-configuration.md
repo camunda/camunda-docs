@@ -26,6 +26,9 @@ This setting aligns the HTTP, multipart, Tomcat, Gateway, and Broker transport l
 can still be rejected by Zeebe's internal record batch processing if the deployed resources and
 follow-up records exceed the engine batch limit.
 
+Multipart requests include metadata and boundary overhead in addition to the uploaded file content.
+Set these limits slightly above the largest file you expect users or Connectors to upload.
+
 If you increase this value, you must also adjust the configuration for the deployment REST endpoint to match.
 
 ### REST API server configuration
