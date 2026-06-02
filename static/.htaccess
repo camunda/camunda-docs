@@ -138,6 +138,10 @@ RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/operate/?$ /docs/next/reference/announcements-release-notes/890/890-announcements/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-long-term-memory/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-codeinterpreter/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
 
 
 ## Reabsorbed Optimize docs
@@ -176,6 +180,16 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #---------------------------------------------------------------------------------
 #   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
+
+# Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
+RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/operate-api/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/testing/zeebe-process-test/?$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-process-test/ [R=301,L]
+RewriteRule ^docs/next/components/tasklist/user-task-access-restrictions/?$ /docs/next/components/tasklist/user-task-authorization/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions/?$ /docs/next/components/tasklist/user-task-authorization/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/?$ /docs/next/components/tasklist/userguide/starting-processes/ [R=301,L]
 
 # Redirects associated with Camunda Hub
 RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]

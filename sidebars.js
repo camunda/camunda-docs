@@ -80,6 +80,86 @@ module.exports = {
       ],
     },
   ],
+  BuildWithAI: [
+    {
+      type: "category",
+      label: "Build with AI",
+      link: {
+        type: "doc",
+        id: "guides/build-with-ai/overview",
+      },
+      items: [],
+    },
+    "guides/build-with-ai/ai-usage-guidelines",
+    {
+      type: "category",
+      label: "Agentic orchestration",
+      link: {
+        type: "doc",
+        id: "components/agentic-orchestration/agentic-orchestration-overview",
+      },
+      items: [
+        "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/camunda-provided-llm",
+        "components/agentic-orchestration/ao-design",
+        {
+          type: "category",
+          label: "Evaluate your AI agents",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
+          },
+          items: [
+            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
+          ],
+        },
+        "components/agentic-orchestration/rag-ai-agents",
+        "components/agentic-orchestration/expose-process-as-mcp-tool",
+        "components/agentic-orchestration/choose-right-model-agentic",
+        "components/agentic-orchestration/model-recommendations-agentic",
+      ],
+    },
+    {
+      type: "category",
+      label: "Intelligent document processing (IDP)",
+      link: {
+        type: "doc",
+        id: "components/hub/workspace/modeler/idp",
+      },
+      items: [
+        "components/hub/workspace/modeler/idp/idp-configuration",
+        "components/hub/workspace/modeler/idp/idp-applications",
+        "components/hub/workspace/modeler/idp/idp-document-classification",
+        {
+          type: "category",
+          label: "Document extraction",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-document-extraction",
+          },
+          items: [
+            "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
+            "components/hub/workspace/modeler/idp/idp-structured-extraction",
+          ],
+        },
+        // "components/hub/workspace/modeler/idp/idp-document-automation",
+        {
+          type: "category",
+          label: "Integrate IDP into your processes",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-integrate",
+          },
+          items: ["components/hub/workspace/modeler/idp/idp-example"],
+        },
+        "components/hub/workspace/modeler/idp/idp-key-concepts",
+        "components/hub/workspace/modeler/idp/idp-reference",
+      ],
+    },
+    "reference/mcp-docs/docs-mcp",
+  ],
   Components: [
     "components/components-overview",
     {
@@ -253,73 +333,6 @@ module.exports = {
         id: "components/features-integrations/features-integrations",
       },
       items: [
-        {
-          type: "category",
-          label: "Agentic orchestration",
-          link: {
-            type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration-overview",
-          },
-          items: [
-            "components/agentic-orchestration/ai-agents",
-            "components/agentic-orchestration/camunda-provided-llm",
-            "components/agentic-orchestration/ao-design",
-            {
-              type: "category",
-              label: "Evaluate your AI agents",
-              link: {
-                type: "doc",
-                id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
-              },
-              items: [
-                "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
-                "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
-                "components/agentic-orchestration/evaluate-agents/test-ai-agents",
-              ],
-            },
-            "components/agentic-orchestration/rag-ai-agents",
-            "components/agentic-orchestration/expose-process-as-mcp-tool",
-            "components/agentic-orchestration/choose-right-model-agentic",
-            "components/agentic-orchestration/model-recommendations-agentic",
-          ],
-        },
-        {
-          type: "category",
-          label: "Intelligent document processing (IDP)",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp",
-          },
-          items: [
-            "components/hub/workspace/modeler/idp/idp-configuration",
-            "components/hub/workspace/modeler/idp/idp-applications",
-            "components/hub/workspace/modeler/idp/idp-document-classification",
-            {
-              type: "category",
-              label: "Document extraction",
-              link: {
-                type: "doc",
-                id: "components/hub/workspace/modeler/idp/idp-document-extraction",
-              },
-              items: [
-                "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
-                "components/hub/workspace/modeler/idp/idp-structured-extraction",
-              ],
-            },
-            // "components/hub/workspace/modeler/idp/idp-document-automation",
-            {
-              type: "category",
-              label: "Integrate IDP into your processes",
-              link: {
-                type: "doc",
-                id: "components/hub/workspace/modeler/idp/idp-integrate",
-              },
-              items: ["components/hub/workspace/modeler/idp/idp-example"],
-            },
-            "components/hub/workspace/modeler/idp/idp-key-concepts",
-            "components/hub/workspace/modeler/idp/idp-reference",
-          ],
-        },
         {
           type: "category",
           label: "Robotic Process Automation (RPA)",
@@ -640,7 +653,6 @@ module.exports = {
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
-            "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
             "components/tasklist/userguide/audit-task-history",
           ],
@@ -872,7 +884,6 @@ module.exports = {
                         "components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/form-linking",
-                        "components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
                       ],
                     },
@@ -1015,6 +1026,7 @@ module.exports = {
                       ],
                     },
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
@@ -1335,8 +1347,6 @@ module.exports = {
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/operate-api/sidebar-schema"),
-            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -1504,9 +1514,6 @@ module.exports = {
             "apis-tools/testing/json-test-cases",
           ],
         },
-        {
-          Deprecated: ["apis-tools/testing/zeebe-process-test"],
-        },
       ],
     },
     {
@@ -1613,7 +1620,6 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/contact",
-    "reference/mcp-docs/docs-mcp",
     "reference/legal",
   ],
   "Self-Managed": [
@@ -1733,6 +1739,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
@@ -1899,6 +1906,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
+                "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
               ],
             },
             {
@@ -2142,6 +2150,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/optimize-backup-and-restore",
           ],
         },
         {
@@ -2188,9 +2197,7 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/operational-guides/data-purge",
-        {
-          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
-        },
+        "self-managed/operational-guides/troubleshooting",
       ],
     },
     {
@@ -2301,7 +2308,6 @@ module.exports = {
               Tasklist: [
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-configuration",
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling",
-                "self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions",
               ],
             },
             {

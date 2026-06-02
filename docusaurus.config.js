@@ -429,6 +429,12 @@ module.exports = {
         },
         {
           type: "doc",
+          docId: "guides/build-with-ai/overview",
+          label: "Build with AI",
+          position: "left",
+        },
+        {
+          type: "doc",
           docId: "components/components-overview",
           label: "Using Camunda",
           position: "left",
@@ -493,7 +499,7 @@ module.exports = {
             '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
         },
         {
-          to: "https://camunda.com/download?utm_source=docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",
+          to: "build-with-camunda",
           position: "right",
           className: "button button--primary button--md try-free",
           label: "Try Free",

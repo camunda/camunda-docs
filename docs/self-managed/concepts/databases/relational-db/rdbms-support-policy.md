@@ -25,18 +25,18 @@ Camunda follows an **"all LTS versions"** rule for database support. All listed 
 
 The following relational databases are officially supported when used as an RDBMS backend (including as secondary storage where applicable):
 
-| Database                 | Supported versions              |
-| ------------------------ | ------------------------------- |
-| PostgreSQL               | 14 (deprecated), 15, 16, 17, 18 |
-| Amazon Aurora PostgreSQL | 14 (deprecated), 15, 16, 17     |
-| MariaDB                  | 10.11, 11.4, 11.8               |
-| MySQL                    | 8.4                             |
-| Microsoft SQL Server     | 2019 (deprecated), 2022, 2025   |
-| Oracle                   | 19c, 23ai                       |
-| H2                       | 2.3, 2.4                        |
+| Database                 | Supported versions |
+| ------------------------ | ------------------ |
+| PostgreSQL               | 15, 16, 17, 18     |
+| Amazon Aurora PostgreSQL | 15, 16, 17         |
+| MariaDB                  | 10.11, 11.4, 11.8  |
+| MySQL                    | 8.4                |
+| Microsoft SQL Server     | 2022, 2025         |
+| Oracle                   | 19c, 26ai          |
+| H2                       | 2.4                |
 
 :::info
-Changes to supported versions are announced in the [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+Changes to supported versions are announced in the [release notes](/reference/announcements-release-notes/8100/8100-announcements.md).
 :::
 
 ### Recommended database versions
@@ -114,19 +114,19 @@ For Camunda Orchestration Cluster secondary storage, H2 is a single-broker optio
 
 Camunda bundles JDBC drivers for databases where redistribution is permitted and expects you to provide drivers where licensing or distribution constraints apply (for example, Oracle).
 
-Driver versions are not pinned as a formal support guarantee unless explicitly stated. Bundled and tested versions can change with dependency updates (for example, Spring Boot updates).
+Bundled driver versions are not pinned as a formal support guarantee. Each bundled driver is tested in CI against every supported version of the corresponding database listed above, and the exact version may change between Camunda patch releases as dependencies are updated. To inspect the precise driver version bundled in a given Camunda release, see the `lib/` directory of the distribution archive.
 
 ### Bundled drivers
 
-The following JDBC drivers and wrappers are included in the Camunda application images:
+The following JDBC drivers and wrappers are included in the Camunda application images. Each is known to be compatible with every supported version of the corresponding database listed above:
 
-| Database / platform      | Driver artifact                                  | Version       | Notes                                                          |
-| :----------------------- | :----------------------------------------------- | :------------ | :------------------------------------------------------------- |
-| PostgreSQL               | `org.postgresql:postgresql`                      | 42.7.8        | Bundled in Camunda images.                                     |
-| MariaDB                  | `org.mariadb.jdbc:mariadb-java-client`           | 3.5.7         | Bundled in Camunda images.                                     |
-| Microsoft SQL Server     | `com.microsoft.sqlserver:mssql-jdbc`             | 12.10.2.jre11 | Bundled in Camunda images (JRE 11).                            |
-| H2                       | `com.h2database:h2`                              | 2.3.232       | Bundled in Camunda images.                                     |
-| Amazon Aurora (AWS JDBC) | `software.amazon.jdbc:aws-advanced-jdbc-wrapper` | 2.6.8         | JDBC wrapper for AWS Aurora; requires a supported base driver. |
+| Database / platform      | Driver artifact                                  | Notes                                                          |
+| :----------------------- | :----------------------------------------------- | :------------------------------------------------------------- |
+| PostgreSQL               | `org.postgresql:postgresql`                      | Bundled in Camunda images.                                     |
+| MariaDB                  | `org.mariadb.jdbc:mariadb-java-client`           | Bundled in Camunda images.                                     |
+| Microsoft SQL Server     | `com.microsoft.sqlserver:mssql-jdbc`             | Bundled in Camunda images (JRE 11).                            |
+| H2                       | `com.h2database:h2`                              | Bundled in Camunda images.                                     |
+| Amazon Aurora (AWS JDBC) | `software.amazon.jdbc:aws-advanced-jdbc-wrapper` | JDBC wrapper for AWS Aurora; requires a supported base driver. |
 
 ### User-supplied drivers
 
@@ -157,7 +157,7 @@ This table shows RDBMS support status by component (including RDBMS as secondary
 | :------------------------ | :----------------- | :------------------------------------------------------------------------------------------------ |
 | **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                              |
 | Tasklist UI               | ✅ Fully supported | All functionality available.                                                                      |
-| Operate UI                | ⚠️ Limited         | Partial support in **8.9-alpha3**. See [Operate limitations](#operate-with-rdbms) below.          |
+| Operate UI                | ✅ Fully supported | All functionality available.                                                                      |
 | Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                                   |
 | Web Modeler               | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md). |
 | Identity                  | ✅ Fully supported | All functionality available.                                                                      |
