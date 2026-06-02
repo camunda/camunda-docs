@@ -53,13 +53,13 @@ export const fundamentalCards = [
 export const fundamentalCards_monitoring = [
   {
     link: "../monitor-ai-agents/",
-    title: "Monitor your AI agents",
+    title: "Monitor with Operate",
     image: IconOperate,
     description: "Monitor your AI agents with Operate.",
   },
   {
     link: "../analyze-ai-agents/",
-    title: "Analyze your AI agents",
+    title: "Analyze with Optimize",
     image: IconOptimize,
     description: "Analyze your AI agents with Optimize.",
   },
