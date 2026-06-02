@@ -31,7 +31,7 @@ When evaluating models for your agentic process, focus on these three core capab
 - **Instruction adherence:** Does the model follow your prompts, policies, and constraints as expected?
 
 :::tip
-To validate these capabilities against your own agent process, see [Test your AI agents with CPT](./evaluate-agents/test-ai-agents.md). Camunda Process Test keeps the LLM interaction real while mocking external tool executions, so you can assert on tool usage, action completion, and the agent's output.
+To validate these capabilities against your own agent process, [test your AI agents with Camunda Process Test (CPT)](./evaluate-agents/test-ai-agents.md).
 :::
 
 ## Benchmark your candidate models
@@ -91,7 +91,7 @@ Model selection should always reflect your **use case**. For example, a math-hea
 
 A clear framework and benchmarked data helps you choose an LLM or foundation model to power your Camunda agent.
 
-### Test with Camunda-provided LLM
+### Explore models with Camunda-provided LLM
 
 Camunda-provided LLM gives you access to [multiple models](./camunda-provided-llm.md#supported-models) for experimentation and evaluation, so you can test different options without setting up your own provider.
 
@@ -105,5 +105,5 @@ See [Camunda-provided LLM](./camunda-provided-llm.md) for more details.
 
 Selecting and benchmarking a model is only the first step. Once your agent is running, validate and continuously evaluate its behavior in practice:
 
-- [Test your AI agents with CPT](./evaluate-agents/test-ai-agents.md): Write integration tests that keep the LLM interaction real while mocking external tools, and assert on tool usage, action completion, and agent output.
 - [Evaluate your AI agents](./evaluate-agents/evaluate-agents-overview.md): Monitor agents in real time with Operate and improve their performance over time with Optimize.
+- [Test with CPT](./evaluate-agents/test-ai-agents.md): Write integration tests that assert on tool usage, action completion, and agent output.
