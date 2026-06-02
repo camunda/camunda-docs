@@ -40,7 +40,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ### Agentic orchestration
 
-#### Pro-Code AI Enablement via Skills Repository
+#### Pro-code AI enablement via Skills repository
 
 <!-- https://github.com/camunda/product-hub/issues/3557 -->
 
@@ -72,7 +72,7 @@ This pattern is called "LLM-as-a-judge" and is useful for testing AI agent subpr
 
 ### APIs & tools
 
-#### FEEL Evaluation with Process Instance Key
+#### FEEL evaluation with process instance key
 
 <!-- https://github.com/camunda/product-hub/issues/3606 -->
 
@@ -110,7 +110,7 @@ Start forms can now be defined and edited in both modelers, ensuring a seamless 
 
 ### Optimize
 
-#### Scope-Aware Variable Export Configuration for Optimize
+#### Scope-aware variable export configuration for Optimize
 
 <!-- https://github.com/camunda/product-hub/issues/3435 -->
 
