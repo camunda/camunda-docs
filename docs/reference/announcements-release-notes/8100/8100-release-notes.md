@@ -76,12 +76,12 @@ This pattern is called "LLM-as-a-judge" and is useful for testing AI agent subpr
 
 <!-- https://github.com/camunda/product-hub/issues/3606 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
 
-`POST /v2/expression/evaluation` now optionally evaluates expressions in the context of a process instance or flow node instance:
+`POST /v2/expression/evaluation` now optionally evaluates expressions in the context of:
 
-- Pass `processInstanceKey` to evaluate in the context of a process instance.
-- Pass `elementInstanceKey` to evaluate in the context of a flow node instance.
+- A process instance, via `processInstanceKey`.
+- A flow node instance, via `elementInstanceKey`.
 
 The endpoint:
 
@@ -97,14 +97,14 @@ Behavior remains side-effect free and uses the same timeout and guardrails as th
 
 <!-- https://github.com/camunda/product-hub/issues/2406 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
-The Desktop Modeler now supports defining form references on none start events in Camunda 8 BPMN models, matching the existing Web Modeler capability.
+Desktop Modeler now supports defining form references on [none start events](/components/modeler/bpmn/none-events/none-events.md) in Camunda 8 BPMN models, matching the existing Web Modeler capability.
 
-Process developers can configure start forms directly in the Desktop Modeler's properties panel using:
+You can configure start forms directly in Desktop Modeler's properties panel using:
 
-- Camunda Form (linked) — reference a deployed Camunda Form by ID.
-- Camunda Form (embedded) — embed form JSON in the BPMN diagram (deprecated).
+- Camunda Form (linked): Reference a deployed Camunda Form by ID.
+- Camunda Form (embedded): Embed form JSON in the BPMN diagram (deprecated).
 
 Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Web Modeler and Desktop Modeler.
 
@@ -114,25 +114,23 @@ Start forms can now be defined and edited in both modelers, ensuring a seamless 
 
 <!-- https://github.com/camunda/product-hub/issues/3435 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
 You can now configure variable export behavior by scope:
 
-- Root (process instance) variables and local variables can be enabled or disabled independently.
-- You can exclude all local variables by default, while still allowlisting specific local variables by name pattern.
+- You can enable or disable root (process instance) variables and local variables independently.
+- You can exclude all local variables by default, while still allowing specific local variables by name pattern.
 - Configuration integrates with the existing variable filtering mechanism, using consistent syntax and semantics.
 
 Terminology aligns with Camunda 8 docs:
 
-- **Root scope / process instance scope**: variables visible across the process.
-- **Local variables**: variables defined in child scopes only.
+- **Root scope/process instance scope**: Variables visible across the process.
+- **Local variables**: Variables defined in child scopes only.
 
-This enables setups such as:
+With this, you can configure setups such as:
 
 - Export only root variables for all processes.
 - Export a curated subset of local variables (for example, `taskContextDisplayName` or specific local audit variables) without exposing all locals.
-
-For details, see [Exporter-side filters and Optimize data completeness](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#exporter-side-filters-and-optimize-data-completeness).
 
 ## 8.10.0-alpha1
 
