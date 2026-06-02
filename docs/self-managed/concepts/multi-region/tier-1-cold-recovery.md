@@ -54,11 +54,25 @@ A complete Tier 1 backup covers two storage layers. Both must be backed up, see 
 | **Web Modeler**             | Not included                            | Standalone component; back up independently    |
 | **Connectors**              | Not included                            | Stateless; redeploy from source                |
 
+## Cross-region backup replication
+
+Cross-region replication of the backup storage is the **load-bearing assumption** of Tier 1. If backups exist only in the primary region, there is no disaster recovery when that region is lost — the backups are lost with it. Replication is therefore not optional and not merely a best practice; it is the prerequisite that makes Tier 1 work.
+
+The primary backup bucket must replicate objects to a bucket in a **separate region** so that backup data remains accessible if the primary region becomes unavailable. For S3-compatible object storage, this is typically configured as continuous cross-region replication on the bucket itself.
+
+Concretely, this means:
+
+- The replica bucket lives in a different region from the primary cluster.
+- Replication runs continuously and automatically — there is no manual copy step.
+- Replication lag is monitored and bounded; an unreplicated backup is not yet a recoverable backup.
+- The replica bucket's access policies allow restore from a freshly provisioned secondary-region environment that does not yet exist at backup time.
+
+For provider-specific guidance, see the [Backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+
 ## Backup requirements
 
-For Tier 1 recovery to be viable, three conditions must be in place before a failure occurs:
+In addition to cross-region replication, two further conditions must be in place before a failure occurs:
 
-- **Backup storage Cross-region replication** — The primary S3 backup bucket must replicate objects to a bucket in the secondary region so that backup data remains accessible if the primary region becomes unavailable.
 - **Regular backup schedule** — Both Orchestration cluster and secondary storage must be backed up on a consistent schedule. Backup frequency directly determines RPO: a 1-hour backup interval means up to 1 hour of data loss in the worst case.
 - **Backup validation** — Backups should be periodically verified to confirm they are complete and restorable. An untested backup provides no recovery guarantee.
 
@@ -73,9 +87,28 @@ When the primary region fails, Tier 1 recovery follows this sequence:
 3. **Select restore point** — Identify the most recent complete, consistent backup set from the replica S3 bucket.
 4. **Restore Camunda Orchestration cluster** — Follow [Restore procedure](../../operational-guides/backup-restore/backup-and-restore.md).
 5. **Start and verify** — Deploy the Orchestration Cluster against the restored data and confirm health before routing traffic.
-6. **Redirect traffic** — Update applications, DNS or load balancer configuration to point production traffic at the secondary region.
+6. **Fence the old region** — Before redirecting traffic, ensure the original region's cluster, job workers, and connectors are stopped or otherwise prevented from acting (see [Fencing the old region](#fencing-the-old-region) below).
+7. **Redirect traffic** — Update applications, DNS or load balancer configuration to point production traffic at the secondary region.
 
-The total elapsed time across these steps is the realized RTO.
+The total elapsed time across all these steps is the realized RTO.
+
+:::important Detection and decision time count toward RTO
+Steps 1 (detect and declare) is **not instantaneous** and is often the largest variable contributor to total RTO. Time-to-detect (how long until the outage is recognized) and time-to-decide (how long until the on-call operator authorizes a failover) can each run from minutes to hours depending on monitoring coverage, paging rotation, and escalation policy. The published 1–4 hour RTO assumes these phases are exercised regularly; otherwise they dominate the realized recovery time.
+:::
+
+### Fencing the old region
+
+If the primary region failure is a true region loss, the old cluster is already gone and no further action is needed. However, if the failure is actually a **network partition** — the region is unreachable from your control plane but still running — the original Orchestration Cluster, its job workers, and its connectors may still be active. Promoting the restored cluster without fencing the old one results in **two live clusters that both believe they own the same process instances**, able to drive the same external side effects (payments, emails, downstream API calls) twice.
+
+Repointing DNS or load balancers does not solve this: job workers and connectors do not route through the front-door traffic layer. They poll Zeebe and call external systems directly.
+
+Before redirecting traffic, ensure the old region cannot act. Use one or more of the following mechanisms, in order of preference:
+
+- **Stop or scale down the old deployment** if it is reachable (for example, scale Zeebe brokers, gateways, workers, and connector deployments to zero).
+- **Revoke the old region's credentials and identity** so it can no longer authenticate to external systems or downstream APIs.
+- **Isolate the old region at the network layer** (security groups, firewall rules, or VPC routing) so it cannot reach external systems even if it remains running.
+
+Document and rehearse the specific mechanism you will use as part of your DR drill — fencing is operationally specific to your environment and must be tested before a real incident.
 
 For step-by-step restore instructions, see the [Backup and restore guides](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
