@@ -19,7 +19,7 @@ The `maxMessageSize` default value is 4MB. You can configure this setting in the
 
 If you deploy with Helm, set `global.config.requestBodySize`. The chart applies this value to
 the Zeebe message size, the REST multipart file and request size, and the Tomcat HTTP form post
-size. If you expose the REST API through ingress, keep
+size. If you expose the REST API through Ingress, keep
 `global.ingress.annotations.nginx.ingress.kubernetes.io/proxy-body-size` aligned with the same size.
 
 This setting aligns the HTTP, multipart, Tomcat, Gateway, and Broker transport limits. Deployments
