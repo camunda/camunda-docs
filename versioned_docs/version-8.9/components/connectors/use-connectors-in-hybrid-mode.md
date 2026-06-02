@@ -8,7 +8,7 @@ description: "Learn how to run connectors in hybrid mode."
 <span className="badge badge--active--inbound">Inbound</span>
 
 :::note
-Hybrid mode is supported as of the connectors `0.23.0` release. We recommend using the latest stable version from the [Camunda connectors Docker registry](https://hub.docker.com/r/camunda/connectors-bundle/tags).
+Hybrid mode is supported as of the connectors `0.23.0` release. Use the latest stable version from the [Camunda connectors Docker registry](https://hub.docker.com/r/camunda/connectors-bundle/tags).
 :::
 
 **Hybrid mode** is where you can run a Self-Managed connector runtime instance attached to a Camunda SaaS cluster or another Self-Managed cluster that has another instance of the connector runtime attached.
@@ -89,8 +89,8 @@ becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in th
 | ------------------------- | ---------------------------------- | ------------------------------- |
 | HTTP REST                 | `CONNECTOR_HTTP_REST_TYPE`         | `io.camunda:http-json:local`    |
 | AWS SQS (Outbound)        | `CONNECTOR_AWS_SQS_OUTBOUND_TYPE`  | `io.camunda:aws-sqs:local`      |
-| Kafka Consumer (Inbound)  | `CONNECTOR_KAFKA_CONSUMER_TYPE`    | `io.camunda:kafka:local`        |
-| Kafka Producer (Outbound) | `CONNECTOR_KAFKA_PRODUCER_TYPE`    | `io.camunda:kafka:local`        |
+| Kafka consumer (Inbound)  | `CONNECTOR_KAFKA_CONSUMER_TYPE`    | `io.camunda:kafka:local`        |
+| Kafka producer (Outbound) | `CONNECTOR_KAFKA_PRODUCER_TYPE`    | `io.camunda:kafka:local`        |
 | SendGrid                  | `CONNECTOR_SENDGRID_TYPE`          | `io.camunda:sendgrid:local`     |
 | Slack                     | `CONNECTOR_SLACK_TYPE`             | `io.camunda:slack:local`        |
 | Gmail                     | `CONNECTOR_GMAIL_TYPE`             | `io.camunda:gmail:local`        |
