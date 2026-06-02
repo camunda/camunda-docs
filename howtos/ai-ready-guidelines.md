@@ -42,7 +42,7 @@ Anything that is fundamentally a list of fields, options, parameters, or values 
 
 ### 6. Critical information must appear as text, not only in screenshots or diagrams
 
-Agents can't perform optical character recognition.. If the only place a binding name, field value, or required setting appears is inside an image, that information is invisible to AI assistants.
+Agents can't perform optical character recognition. If the only place a binding name, field value, or required setting appears is inside an image, that information is invisible to AI assistants.
 
 - Use images as **supplementary illustration**, never as the only source of a value the reader (human or agent) needs to act on.
 - For every diagram, include a short prose description of what it shows.
