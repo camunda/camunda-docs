@@ -34,9 +34,9 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## 8.10.0-alpha2
 
-| Release date | Changelog(s) | Blog |
-| :----------- | :----------- | :--- |
-| 09 June 2026 | -            | -    |
+| Release date | Changelog(s)                                                                                        | Blog |
+| :----------- | :-------------------------------------------------------------------------------------------------- | :--- |
+| 09 June 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha2)</li></ul> | -    |
 
 ### Agentic orchestration
 
