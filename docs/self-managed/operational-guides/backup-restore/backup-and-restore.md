@@ -13,6 +13,10 @@ import { esCards, rdbmsCards } from './react-components/\_card-data';
 
 Use the backup feature to back up and restore your Camunda 8 Self-Managed components and cluster.
 
+:::tip Disaster recovery context
+If you are using backups as the foundation of a cross-region recovery strategy, see [Tier 1 — Cold Recovery](../../concepts/multi-region/tier-1-cold-recovery.md) for the architecture, RTO/RPO targets, and recovery flow. Tier 1 builds on the procedures in this guide.
+:::
+
 ## About this guide
 
 This guide covers how to back up and restore your Camunda 8 Self-Managed components and cluster. Automate backup and restore procedures with tools that meet your organization's requirements.

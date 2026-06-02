@@ -24,6 +24,10 @@ import TabItem from '@theme/TabItem';
 
 Back up your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, and Tasklist) when using a relational database management system (RDBMS) as secondary storage.
 
+:::tip
+For cross-region recovery using these RDBMS backups, see [Tier 1 — Cold Recovery](../../../concepts/multi-region/tier-1-cold-recovery.md).
+:::
+
 :::note
 This procedure is part of the **first phase of Decoupled Continuous Backups** and covers only **Zeebe**, **Operate**, and **Tasklist**. It does **not** cover **Identity** or **Optimize**.
 
