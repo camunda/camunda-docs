@@ -40,17 +40,9 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 :::
 
-<!-- ## Feature 1
+## Camunda 8 Run no longer requires Java
 
-Description for feature 1.
-
-### Feature 1 details 1
-
-Description for feature 1 details 1.
-
-### Feature 1 details 2
-
-Description for feature 1 details 2. -->
+Camunda 8 Run now ships with a bundled Java runtime. You no longer need to install OpenJDK or set `JAVA_HOME` before starting it.
 
 ## Helm chart deployment
 
