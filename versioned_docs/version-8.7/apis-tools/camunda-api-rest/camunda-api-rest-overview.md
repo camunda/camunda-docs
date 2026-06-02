@@ -35,13 +35,13 @@ You can also directly [download the OpenAPI specification](https://github.com/ca
 You can change the `maxMessageSize` default value of 4MB in the [Gateway](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
 
 If you deploy with Helm, set `global.config.requestBodySize`. The chart applies this value to
-the Zeebe Gateway, broker message size, and REST multipart file and request size. If you expose the REST API
-through ingress, keep
+the Zeebe Gateway, broker message size, REST multipart file and request size, and Tomcat HTTP form
+post size. If you expose the REST API through ingress, keep
 `global.ingress.annotations.nginx.ingress.kubernetes.io/proxy-body-size` aligned with the same size.
 
-This setting aligns the HTTP, multipart, Gateway, and Broker transport limits. Deployments can still
-be rejected by Zeebe's internal record batch processing if the deployed resources and follow-up records
-exceed the engine batch limit.
+This setting aligns the HTTP, multipart, Tomcat, Gateway, and Broker transport limits. Deployments
+can still be rejected by Zeebe's internal record batch processing if the deployed resources and
+follow-up records exceed the engine batch limit.
 
 If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/deploy-resources.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
 
@@ -50,6 +50,7 @@ You can adjust this configuration via the following properties:
 ```properties
 spring.servlet.multipart.max-file-size=4MB
 spring.servlet.multipart.max-request-size=4MB
+server.tomcat.max-http-form-post-size=4MB
 ```
 
 For example, if you increase the `maxMessageSize` to 10MB, increase these property values to 10MB as well.

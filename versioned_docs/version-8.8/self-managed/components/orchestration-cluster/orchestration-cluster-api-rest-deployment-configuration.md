@@ -6,7 +6,7 @@ description: "Learn how to configure upload limits and multipart handling for Or
 
 ## Deployment configuration
 
-The Orchestration Cluster REST API supports file and multipart uploads when deploying BPMN diagrams and other resources. By default, the maximum allowed request size is 4MB. You can increase this limit in Self-Managed cluster through configuration of the Zeebe Gateway, Broker, and the REST layer (e.g. Spring Boot + Tomcat).
+The Orchestration Cluster REST API supports file and multipart uploads when deploying BPMN diagrams and other resources. By default, the maximum allowed request size is 4MB. You can increase this limit in Self-Managed cluster through configuration of the Zeebe Gateway, Broker, and the REST layer, for example, Spring Boot and Tomcat.
 
 This guide walks you through adjusting these settings.
 
@@ -18,13 +18,13 @@ The `maxMessageSize` default value is 4MB. You can configure this setting in the
 - [Broker config](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokernetwork)
 
 If you deploy with Helm, set `global.config.requestBodySize`. The chart applies this value to
-the Zeebe message size and the REST multipart file and request size. If you expose the REST API
-through ingress, keep
+the Zeebe message size, the REST multipart file and request size, and the Tomcat HTTP form post
+size. If you expose the REST API through ingress, keep
 `global.ingress.annotations.nginx.ingress.kubernetes.io/proxy-body-size` aligned with the same size.
 
-This setting aligns the HTTP, multipart, Gateway, and Broker transport limits. Deployments can still
-be rejected by Zeebe's internal record batch processing if the deployed resources and follow-up records
-exceed the engine batch limit.
+This setting aligns the HTTP, multipart, Tomcat, Gateway, and Broker transport limits. Deployments
+can still be rejected by Zeebe's internal record batch processing if the deployed resources and
+follow-up records exceed the engine batch limit.
 
 If you increase this value, you must also adjust the configuration for the deployment REST endpoint to match.
 
@@ -37,6 +37,7 @@ For Spring Boot applications:
 ```properties
 spring.servlet.multipart.max-file-size=10MB
 spring.servlet.multipart.max-request-size=10MB
+server.tomcat.max-http-form-post-size=10MB
 ```
 
 ### Tomcat multipart settings
