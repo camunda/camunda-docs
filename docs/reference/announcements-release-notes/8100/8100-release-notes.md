@@ -89,7 +89,7 @@ The endpoint:
 - Enforces `EXPRESSION:EVALUATE` plus `PROCESS_DEFINITION:READ_PROCESS_INSTANCE` on the underlying process definition.
 - Requires exactly one of `processInstanceKey` or `elementInstanceKey` (mutually exclusive); sending both returns `400 Bad Request`.
 
-Behavior remains side-effect free and uses the same timeout and guardrails as the existing cluster-scope evaluation.
+Behavior remains free from side effects and uses the same timeout and guardrails as the existing cluster-scope evaluation.
 
 ### Modeler
 
