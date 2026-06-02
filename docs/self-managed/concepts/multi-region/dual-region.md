@@ -40,9 +40,23 @@ Tier 2 combines **active-active data replication** with API-version-dependent us
 - **Camunda 8.8** — Traffic routing is **active-passive**. v1-era region-specific state (batch operations, task assignments) is the limiting factor.
 - **Camunda 8.9+** — With the v2 REST API and Tasklist V2, traffic routing is **active-active by default**. Both regions serve user traffic simultaneously. Deployments still using v1 APIs continue to operate active-passive.
 
+### Primary and secondary regions (v1 APIs only)
+
+With v2 APIs (default in 8.9+), both regions serve user traffic simultaneously — there is no primary/secondary distinction at the UI layer.
+
+The primary/secondary terminology only applies to deployments still using v1 APIs:
+
+- **Primary region**: Serves user traffic (UI access, API calls).
+- **Secondary region**: Fully operational but does not serve user traffic under normal conditions.
+
+In both cases, both regions are operationally active with all components running and replicating data.
+
 ### User traffic management
 
-User traffic can be routed to either or both regions via DNS, load balancer, or network routing policies. If a region fails, traffic must be redirected as part of the [failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover).
+- **With v2 APIs (default in 8.9+):** User traffic can be served from both regions simultaneously. Distribute traffic via DNS, load balancer, or network routing policies as appropriate for your setup.
+- **With v1 APIs:** You must route user traffic exclusively to the primary region (via DNS, load balancer, or network routing policies). If the primary region fails, traffic must be redirected manually to the secondary region.
+
+In either case, region-failure traffic changes must be performed as part of the [failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover).
 
 :::warning Operation requirement
 Traffic redirection must be performed as part of the complete failover procedure. Redirecting traffic without following the operational procedure can lead to system inconsistencies and data issues.
@@ -50,14 +64,14 @@ Traffic redirection must be performed as part of the complete failover procedure
 
 ## Architecture overview
 
-|                                 **Component** | **Mode**          | **Both Regions Running** | **User Traffic**          | **RPO** |
-| --------------------------------------------: | ----------------- | ------------------------ | ------------------------- | ------- |
-| <p align="left">**Orchestration Cluster**</p> |                   | ✅ Required              |                           |         |
-|                                         Zeebe | Active-active     | ✅ Required              | Both regions process data | 0       |
-|                                         Admin | Active-active     | ✅ Required              | Cluster-level identity    | 0       |
-|                                       Operate | Active-passive UI | ✅ Required              | One region serves users   | 0       |
-|                                      Tasklist | Active-passive UI | ✅ Required              | One region serves users   | 0       |
-|         <p align="left">**Elasticsearch**</p> | Active-active     | ✅ Required              | Data replicated to both   | 0       |
+|                                 **Component** | **Mode**                                                | **Both Regions Running** | **User Traffic**                          | **RPO** |
+| --------------------------------------------: | ------------------------------------------------------- | ------------------------ | ----------------------------------------- | ------- |
+| <p align="left">**Orchestration Cluster**</p> |                                                         | ✅ Required              |                                           |         |
+|                                         Zeebe | Active-active                                           | ✅ Required              | Both regions process data                 | 0       |
+|                                         Admin | Active-active                                           | ✅ Required              | Cluster-level identity                    | 0       |
+|                                       Operate | Active-active with v2 API (active-passive with v1)      | ✅ Required              | Both regions serve users with v2 API      | 0       |
+|                                      Tasklist | Active-active with Tasklist V2 (active-passive with v1) | ✅ Required              | Both regions serve users with Tasklist V2 | 0       |
+|         <p align="left">**Elasticsearch**</p> | Active-active                                           | ✅ Required              | Data replicated to both                   | 0       |
 
 :::important
 **All components in both regions must be fully operational at all times.** "Passive" refers only to user traffic routing, not system operation. Both regions actively participate in data processing and replication.
