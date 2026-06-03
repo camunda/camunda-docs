@@ -10,6 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import AoGrid from '../../components/react-components/\_ao-card';
 import IconAgenticImg from '../../components/assets/icon-agentic.png';
 import IconConnectorsImg from '../../components/assets/icon-connectors.png';
+import IconPlay from '../../components/assets/icon-play.png';
 import IconLlmImg from '../../components/assets/icon-llm.png';
 import IconAIAgent from '../../components/assets/hero-build-with-ai.png';
 import IconCopilotImg from '../../components/assets/icon-camunda-copilot.png';
@@ -39,26 +40,26 @@ Build Camunda solutions with agentic orchestration and MCP integrations. Connect
 
 Build AI agents that combine the flexibility of AI with the reliability of process orchestration. Embed LLM-powered agents directly in your BPMN processes so they can reason, call tools, and act, from simple task agents to complex multi-agent systems.
 
-You can also orchestrate these agents alongside human tasks, deterministic rule sets, and AI-driven decisions, so each collaborates in a robust, end-to-end process.
+Orchestrate these agents alongside human tasks, deterministic rule sets, and AI-driven decisions in robust, end-to-end processes.
 
 <AoGrid columns={3} ao={[
 {
 link: "../../getting-started-agentic-orchestration/",
 title: "Build your first AI agent",
-image: IconLlmImg,
+image: IconPlay,
 description: "Follow a hands-on guide to build and run your first AI agent in Camunda.",
-},
-{
-link: "../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/",
-title: "AI Agent connector",
-image: IconConnectorsImg,
-description: "Embed an LLM-powered agent in your process with the out-of-the-box AI Agent connector.",
 },
 {
 link: "../../../components/agentic-orchestration/agentic-orchestration-overview/",
 title: "Agentic orchestration",
 image: IconAgenticImg,
 description: "Orchestrate AI agents alongside human tasks and system integrations in your BPMN processes.",
+},
+{
+link: "../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/",
+title: "AI Agent connector",
+image: IconConnectorsImg,
+description: "Embed an LLM-powered agent in your process with the out-of-the-box AI Agent connector.",
 },
 ]} />
 
