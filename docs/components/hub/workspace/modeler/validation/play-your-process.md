@@ -47,7 +47,7 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 The first view in Play is the process definition view. It shows deployment problems, active process instances, and a **Configure Scenario** panel on the right.
 
-The **Configure Scenario** panel shows different options depending on the type of the selected start event:
+Click a **start event** to configure how the process should start in the **Configure Scenario** panel. The panel shows different options depending on the type of the selected start event:
 
 - **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
 - **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. **Start** is disabled when the message name is empty.
@@ -95,7 +95,7 @@ Play will only consider the first executable process ID in the BPMN file.
 
 ![play process instance view](../img/play-instance.png)
 
-Click the action icons next to a task or event to play the process.
+Click the **play** action icon next to a task or event to play the process.
 
 If you defined a test segment with an end boundary, the instance terminates automatically after the end element completes — elements after it are not activated and do not appear in the instance history.
 
@@ -109,7 +109,7 @@ Actions in Play can be initiated through Operate, Tasklist, or external APIs. Fo
 
 In SaaS, view your process instance in Operate by selecting the **Process Instance Key** in the header.
 
-![play process instance view](../img/play-view-process-instance.png)
+![view process instance in Operate](../img/play-view-process-instance.png)
 
 You have a few options to mock an external system:
 
@@ -156,7 +156,7 @@ Use scenarios to quickly rerun processes while tracking test coverage.
 For example, you can validate your process by creating and rerunning scenarios for different paths to check the process works as expected after any diagram changes are made. Scenarios allow you to replay and confirm that a process completes correctly with the predefined actions and variables.
 
 :::note
-Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline.
+Although scenarios are valuable for rapid validation during development, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline for comprehensive testing.
 :::
 
 Scenarios are stored in [test scenario files](test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
