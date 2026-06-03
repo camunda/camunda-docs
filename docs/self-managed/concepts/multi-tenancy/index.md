@@ -1,29 +1,19 @@
 ---
-id: physical-tenants
-title: "Physical Tenants"
-sidebar_label: "Physical Tenants"
-description: "Physical Tenants enable strong data isolation and independent management of multiple teams within a single Camunda 8 cluster."
+id: multi-tenancy-overview
+title: "Multi-tenancy"
+sidebar_label: "Multi-tenancy"
+description: "Multi-tenancy enables multiple isolated teams or organizations to run within a single Camunda 8 installation."
 ---
 
 :::info
-Physical Tenants are available in Camunda 8 Self-Managed only. This feature is not available in Camunda 8 SaaS.
+Multi-tenancy is available in Camunda 8 Self-Managed only. This feature is not available in Camunda 8 SaaS.
 :::
 
-A **Physical Tenant** is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each acting like a self-contained mini-cluster with fully isolated data, independent lifecycle management, and no runtime interference between tenants.
-
-Physical Tenants provide a balanced approach to multi-tenancy—offering strong isolation without the operational complexity and cost of running separate clusters.
-
-## Why Physical Tenants
-
-**Strong isolation without complexity:** Run multiple teams or organizations on one cluster with complete data separation and independent operations, without the overhead of managing multiple orchestration clusters.
-
-**Independent operations:** Back up, restore, scale, and manage each Physical Tenant independently. Tenant-specific performance issues do not affect other tenants.
-
-**Cost efficiency:** Share infrastructure while maintaining tenant autonomy, reducing operational overhead compared to multi-cluster deployments.
+Multi-tenancy enables you to isolate data, configurations, and operations for multiple teams, departments, or organizations within a single Camunda 8 installation. Camunda 8 supports three distinct multi-tenancy models, each with different isolation levels and operational characteristics.
 
 ## Three models of multi-tenancy
 
-Camunda 8 supports three architectural levels of multi-tenancy:
+Choose the model that best fits your isolation requirements and operational constraints:
 
 | Aspect                     | Logical Tenant                   | Physical Tenant                         | Multi-Cluster                             |
 | -------------------------- | -------------------------------- | --------------------------------------- | ----------------------------------------- |
@@ -34,53 +24,30 @@ Camunda 8 supports three architectural levels of multi-tenancy:
 | **Operational complexity** | Low                              | Medium                                  | High                                      |
 | **Use case**               | Small teams, low-risk separation | Multiple teams, strong isolation needed | Separate organizations, maximum isolation |
 
-## Terminology
+## Logical Tenants
 
-### Physical Tenant
+**Lightweight tenant-ID based multi-tenancy** for cost-efficient subdivision within a single cluster. Logical tenants share infrastructure but have logically isolated data, configurations, and access controls.
 
-An isolated execution unit within an Orchestration Cluster. Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant.
+Best for: Departments or teams within the same organization with low-risk separation needs.
 
-### Logical Tenant
+- [Learn more about Logical Tenants](logical-tenants.md)
 
-The existing tenant-ID based multi-tenancy model available within Camunda 8. Logical tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other logical tenants. Multiple logical tenants can coexist within a single Physical Tenant.
+## Physical Tenants
 
-### Default Physical Tenant
+**Strong physical isolation within a single cluster** with separate data storage, independent operations, and no runtime interference between tenants. Each Physical Tenant acts like a self-contained mini-cluster.
 
-Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. In Camunda 8.10, the default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant.
+Best for: Multiple teams or organizations needing strong isolation without the cost and complexity of separate clusters.
 
-### Cluster-wide operation
+- [Learn more about Physical Tenants](physical-tenants.md)
 
-An operation that affects the entire Orchestration Cluster, such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific Physical Tenant.
+## Multi-Cluster
 
-### Tenant-scoped operation
+**Full isolation through dedicated infrastructure** with separate clusters per tenant. Maximum isolation and operational independence, but highest infrastructure cost and complexity.
 
-An operation that targets a specific Physical Tenant, such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
+Best for: Separate organizations with maximum isolation requirements or strict data residency needs.
 
-## API and access patterns
+## Next steps
 
-**Tenant-scoped APIs** are accessible at `/physical-tenants/{physicalTenantId}/v2/`:
-
-- REST API: `POST /physical-tenants/my-tenant/v2/process-definitions`
-- Webapps: `https://your-cluster/physical-tenants/my-tenant/operate`
-
-**Cluster-wide APIs** are accessible at `/cluster/v2/`:
-
-- Cluster operations: `POST /cluster/v2/backup`
-- Cluster health: `GET /cluster/v2/health`
-
-**gRPC clients** specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
-
-## Logical and Physical tenants together
-
-Logical tenants remain available within each Physical Tenant as a lightweight subdivision mechanism. You can use logical tenants for cost-efficient sub-division (for example, multiple departments within a team) while relying on Physical Tenants for strong isolation (for example, separate teams within an organization).
-
-**Important:** There is no migration path from logical tenants to Physical Tenants. Logical tenants created in a Physical Tenant remain associated with that tenant and cannot be migrated to another Physical Tenant.
-
-## Wording conventions
-
-When referencing Physical Tenants in documentation and code:
-
-- Use **`physicalTenantId`** when referencing Physical Tenant API parameters, configuration keys, or system identifiers
-- Use **`tenantId`** only when referencing logical tenants (backward-compatible with existing API)
-- Existing API keys remain unchanged
-- Use **Physical Tenant** (capitalized) as the canonical term
+- Configure [logical tenants](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) for lightweight subdivision
+- Explore [Physical Tenants](physical-tenants.md) for strong isolation
+- Manage [tenants in Identity](/self-managed/components/management-identity/manage-tenants.md)
