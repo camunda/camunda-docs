@@ -15,7 +15,7 @@ If you are upgrading from a version earlier than 8.8, see [upgrading from an ear
 :::
 
 :::warning Plan your move to the Helm v4 CLI
-Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. Camunda 8.10 (chart 15.x) requires the Helm v4 CLI. Chart 14.x also supports Helm v4, so switch your tooling to the Helm v4 CLI while running 8.9 to be ready before you upgrade to 8.10. No release-state migration is required when switching CLIs. See [Move from the Helm v3 CLI to v4](https://docs.camunda.io/docs/next/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4/).
+Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. Camunda 8.10 (chart 15.x) requires the Helm v4 CLI. Chart 14.x also supports Helm v4, so switch your tooling to the Helm v4 CLI while running 8.9 to be ready before you upgrade to 8.10. No release-state migration is required when switching CLIs. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
 :::
 
 ## Upgrade guides
