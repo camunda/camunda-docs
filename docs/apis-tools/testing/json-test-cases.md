@@ -1192,7 +1192,7 @@ Example:
 
 An instruction to register a conditional behavior that reacts to process state changes. See the [utilities documentation](utilities.md#conditional-behavior) for more details.
 
-The conditions form a conjunction — the behavior fires only when every assertion succeeds. Actions are consumed in order: the first match fires the first action, the second match fires the second, and the last action repeats indefinitely.
+The conditions form a conjunction; the behavior fires only when every assertion succeeds. Actions are consumed in order: the first match fires the first action, the second match fires the second, and the last action repeats indefinitely.
 
 <table>
   <tbody><tr>
