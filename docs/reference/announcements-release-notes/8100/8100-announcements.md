@@ -176,9 +176,9 @@ Starting with Camunda 8.10.0-alpha2, Camunda removes the legacy component APIs a
 
 The following items are removed:
 
-- The [Operate API](/apis-tools/operate-api/overview.md)
-- The [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) and Tasklist V1 mode
-- Tasklist V1-dependent features such as [user task access restrictions](/components/tasklist/user-task-access-restrictions.md) and [public start forms](/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes.md)
+- The [Operate API (8.9 documentation)](/versioned_docs/version-8.9/apis-tools/operate-api/overview.md)
+- The [Tasklist API (8.9 documentation)](/versioned_docs/version-8.9/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) and Tasklist V1 mode
+- Tasklist V1-dependent features such as [user task access restrictions (8.9 documentation)](/versioned_docs/version-8.9/components/tasklist/user-task-access-restrictions.md) and [public start forms](/components/tasklist/userguide/starting-processes.md#public-start-forms)
 - [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md)
 
 **Action:** Migrate integrations and testing workflows to the current replacements:
