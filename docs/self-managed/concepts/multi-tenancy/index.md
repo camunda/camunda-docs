@@ -26,11 +26,11 @@ Choose the model that best fits your isolation requirements and operational cons
 
 ## Logical Tenants
 
-**Lightweight tenant-ID based multi-tenancy** for cost-efficient subdivision within a single cluster. Logical tenants share infrastructure but have logically isolated data, configurations, and access controls.
+**Lightweight tenant-ID based multi-tenancy** for cost-efficient subdivision within a single cluster. Logical Tenants share infrastructure but have logically isolated data, configurations, and access controls.
 
 Best for: Departments or teams within the same organization with low-risk separation needs.
 
-- [Learn more about Logical Tenants](logical-tenants.md)
+- [Learn more about Logical Tenants](logical-tenants.md).
 
 ## Physical Tenants
 
@@ -38,7 +38,7 @@ Best for: Departments or teams within the same organization with low-risk separa
 
 Best for: Multiple teams or organizations needing strong isolation without the cost and complexity of separate clusters.
 
-- [Learn more about Physical Tenants](physical-tenants.md)
+- [Learn more about Physical Tenants](physical-tenants.md).
 
 ## Multi-Cluster
 
@@ -48,6 +48,6 @@ Best for: Separate organizations with maximum isolation requirements or strict d
 
 ## Next steps
 
-- Configure [logical tenants](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) for lightweight subdivision
-- Explore [Physical Tenants](physical-tenants.md) for strong isolation
-- Manage [tenants in Identity](/self-managed/components/management-identity/manage-tenants.md)
+- Configure [Logical Tenants](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) for lightweight subdivision.
+- Explore [Physical Tenants](physical-tenants.md) for strong isolation.
+- Manage [tenants in Identity](/self-managed/components/management-identity/manage-tenants.md).
