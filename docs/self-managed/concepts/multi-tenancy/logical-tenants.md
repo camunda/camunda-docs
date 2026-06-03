@@ -2,16 +2,16 @@
 id: logical-tenants
 title: "Logical Tenants"
 sidebar_label: "Logical Tenants"
-description: "Logical tenants provide lightweight tenant-ID based isolation within a single Camunda 8 cluster."
+description: "Logical Tenants provide lightweight tenant-ID based isolation within a single Camunda 8 cluster."
 ---
 
-**Logical tenants** are the lightweight tenant-ID based multi-tenancy model available within Camunda 8. Logical tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other logical tenants. Multiple logical tenants can coexist within a single Physical Tenant or cluster.
+**Logical Tenants** are the lightweight tenant-ID based multi-tenancy model available within Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
 
-Logical tenants are best for cost-efficient sub-division of teams or departments within the same organization. See [Multi-tenancy overview](index.md) to compare with other isolation models.
+Logical Tenants are best for cost-efficient sub-division of teams or departments within the same organization. See [Multi-tenancy overview](index.md) to compare with other isolation models.
 
-## How logical tenants work
+## How Logical Tenants work
 
-Camunda 8 implements logical tenancy using tenant identifiers within a single installation. All tenant data is stored in the same database, with isolation enforced by appending a tenant identifier to each data object (e.g., process definitions, process instances, jobs).
+Camunda 8 implements Logical Tenancy using tenant identifiers within a single installation. All tenant data is stored in the same database, with isolation enforced by appending a tenant identifier to each data object (e.g., process definitions, process instances, jobs).
 
 ### Tenant identifier
 
@@ -75,25 +75,25 @@ If you wish to use it with the same tenants as an Orchestration Cluster, you wil
 
 ## Configuration and management
 
-All logical tenant configuration and management pages are consolidated here. Each page focuses on a specific aspect:
+All Logical Tenant configuration and management pages are consolidated here. Each page focuses on a specific aspect:
 
 ### Deployment configuration
 
-- [Configure multi-tenancy in Helm chart](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) — Set up multi-tenancy flags and prerequisites for Orchestration Cluster and Management Identity
+- [Configure multi-tenancy in Helm chart](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) — Set up multi-tenancy flags and prerequisites for Orchestration Cluster and Management Identity.
 
 ### Tenant initialization
 
-- [Initialize tenants for Optimize](/self-managed/components/management-identity/configuration/initialize-tenants.md) — Programmatically create tenants at startup using configuration files or environment variables
+- [Initialize tenants for Optimize](/self-managed/components/management-identity/configuration/initialize-tenants.md) — Programmatically create tenants at startup using configuration files or environment variables.
 
 ### Runtime management
 
-- [Manage tenants in Identity](/self-managed/components/management-identity/manage-tenants.md) — Create, view, and manage tenants through the Identity UI; assign users, groups, and applications
+- [Manage tenants in Identity](/self-managed/components/management-identity/manage-tenants.md) — Create, view, and manage tenants through the Identity UI; assign users, groups, and applications.
 
 ### Component-specific setup
 
-- [Optimize multi-tenancy](/self-managed/components/optimize/configuration/multi-tenancy.md) — Enable and configure multi-tenancy features specific to Optimize
+- [Optimize multi-tenancy](/self-managed/components/optimize/configuration/multi-tenancy.md) — Enable and configure multi-tenancy features specific to Optimize.
 
 ## Next steps
 
-- Need stronger isolation? See [Physical Tenants](physical-tenants.md)
-- Compare all models: [Multi-tenancy overview](index.md)
+- Need stronger isolation? See [Physical Tenants](physical-tenants.md).
+- Compare all models: [Multi-tenancy overview](index.md).

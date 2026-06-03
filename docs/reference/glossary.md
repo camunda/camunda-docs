@@ -401,9 +401,9 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
 
-### Logical tenant
+### Logical Tenant
 
-A [logical tenant](#logical-tenant) is an existing, lightweight tenant-ID based multi-tenancy model in Camunda 8. Logical tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other logical tenants. Multiple logical tenants can coexist within a single [Physical Tenant](#physical-tenant).
+A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based multi-tenancy model in Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single [Physical Tenant](#physical-tenant).
 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
@@ -424,7 +424,7 @@ Manual tasks are part of [human task orchestration](/guides/getting-started-orch
 
 ### Multi-tenancy
 
-Multi-tenancy allows a single Camunda 8 installation to serve multiple [logical tenants](#logical-tenant) while keeping each tenant's data, configurations, and access logically isolated. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenant](#physical-tenant).
+Multi-tenancy allows a single Camunda 8 installation to serve multiple [Logical Tenants](#logical-tenant) while keeping each tenant's data, configurations, and access logically isolated. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenant](#physical-tenant).
 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
 - [Logical Tenant](#logical-tenant)
@@ -666,7 +666,7 @@ This way, a [Camunda workflow](#workflow) can receive messages from an external 
 
 ### Tenant
 
-A [logical tenant](#logical-tenant) is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions. For strong physical isolation, see [Physical Tenant](#physical-tenant).
+A [Logical Tenant](#logical-tenant) is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions. For strong physical isolation, see [Physical Tenant](#physical-tenant).
 
 - [Tenant management](/components/admin/tenant.md)
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)

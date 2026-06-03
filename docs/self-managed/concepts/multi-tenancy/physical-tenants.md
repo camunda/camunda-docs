@@ -49,19 +49,19 @@ An operation that targets a specific Physical Tenant, such as deploying a proces
 
 **gRPC clients** specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
-## Logical and Physical tenants together
+## Logical and Physical Tenants together
 
-Logical tenants remain available within each Physical Tenant as a lightweight subdivision mechanism. You can use logical tenants for cost-efficient sub-division (for example, multiple departments within a team) while relying on Physical Tenants for strong isolation (for example, separate teams within an organization).
+Logical Tenants remain available within each Physical Tenant as a lightweight subdivision mechanism. You can use Logical Tenants for cost-efficient sub-division (for example, multiple departments within a team) while relying on Physical Tenants for strong isolation (for example, separate teams within an organization).
 
 See [Logical Tenants](logical-tenants.md) for details on the lightweight tenant-ID based model.
 
-**Important:** There is no migration path from logical tenants to Physical Tenants. Logical tenants created in a Physical Tenant remain associated with that tenant and cannot be migrated to another Physical Tenant.
+**Important:** There is no migration path from Logical Tenants to Physical Tenants. Logical Tenants created in a Physical Tenant remain associated with that tenant and cannot be migrated to another Physical Tenant.
 
 ## Wording conventions
 
-When referencing Physical Tenants in documentation and code:
+When referencing Physical Tenants and Logical Tenants in documentation and code:
 
-- Use **`physicalTenantId`** when referencing Physical Tenant API parameters, configuration keys, or system identifiers
-- Use **`tenantId`** only when referencing logical tenants (backward-compatible with existing API)
-- Existing API keys remain unchanged
-- Use **Physical Tenant** (capitalized) as the canonical term
+- Use **`physicalTenantId`** when referencing Physical Tenant API parameters, configuration keys, or system identifiers.
+- Use **`tenantId`** only when referencing Logical Tenants (backward-compatible with existing API).
+- Existing API keys remain unchanged.
+- Use **Physical Tenant** and **Logical Tenant** (capitalized) as the canonical terms.
