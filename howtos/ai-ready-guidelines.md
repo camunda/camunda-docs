@@ -38,7 +38,7 @@ Reuse the same heading wording when the same concept appears in multiple pages s
 
 ### 5. Put structured data in tables, not prose
 
-Anything that is fundamentally a list of fields, options, parameters, or values goes in a Markdown table. Prose descriptions of parameters scatter the contract across paragraphs and make field-level extraction unreliable.
+Anything that is fundamentally a list of fields, options, parameters, or values goes in a Markdown table.
 
 ### 6. Critical information must appear as text, not only in screenshots or diagrams
 
@@ -52,10 +52,7 @@ Agents can't perform optical character recognition. If the only place a binding 
 
 Agents typically see only the active tab when a page is rendered, and Markdown-export pipelines often serialize only the default tab. Content inside non-default tabs becomes invisible.
 
-- **Allowed:** Code examples in different languages across tabs (the concept is repeated, only the syntax changes).
-- **Not allowed:** Prerequisites split across SaaS vs Self-Managed tabs, configuration steps that exist only in one tab, error troubleshooting that only appears under one variant.
-
-If prerequisites or steps differ by environment, list both flat in the page body, clearly labeled. For example:
+If prerequisites or steps differ by environment or programming language, list both flat in the page body, clearly labeled. For example:
 
 ```markdown
 ## Prerequisites
@@ -75,7 +72,7 @@ If prerequisites or steps differ by environment, list both flat in the page body
 
 - Always close fences (` ``` `).
 - Include the language tag (` ```yaml `, ` ```java `, ` ```bash `).
-- Don't split a single example across multiple unrelated fences with prose in between if the prose isn't part of the example.
+- Avoid breaking one example into several separate code blocks unless each block represents a distinct step. If you need to explain the example, place the explanation before or after the full example rather than interrupting it.
 - Don't rely on "...add your value here..." placeholders without explaining what kind of value belongs there.
 
 ## References
