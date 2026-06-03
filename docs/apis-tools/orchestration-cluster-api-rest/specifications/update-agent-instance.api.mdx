@@ -1,0 +1,447 @@
+---
+id: update-agent-instance
+title: "Update agent instance"
+sidebar_label: "Update agent instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "patch api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Update agent instance"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/agent-instances/{agentInstanceKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Updates the mutable fields of an agent instance: status, metric counters, and
+tools. Metric values are treated as deltas and applied immediately to the
+aggregate counters. Tool updates replace the existing tool list.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "agentInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the agent instance to update.",
+      schema: {
+        type: "string",
+        format: "string<AgentInstanceKey>",
+        example: "4503599627370496",
+        description: "System-generated key for an agent instance.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            "Request to update the mutable state of an agent instance.\n",
+          type: "object",
+          required: ["elementInstanceKey"],
+          properties: {
+            elementInstanceKey: {
+              nullable: false,
+              description:
+                "The key of the currently-active element instance for this agent instance.\nUsed for ownership/equality validation against the stored agent instance\nand, when the supplied key differs from the previous association (re-entry\nof an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys\nwith the reverse link updated on the supplied element instance.\n",
+              allOf: [
+                {
+                  description: "System-generated key for a element instance.",
+                  format: "ElementInstanceKey",
+                  example: "2251799813686789",
+                  type: "string",
+                  allOf: [
+                    {
+                      description:
+                        "Zeebe Engine resource key (Java long serialized as string)",
+                      type: "string",
+                      title: "LongKey",
+                    },
+                  ],
+                  title: "ElementInstanceKey",
+                },
+              ],
+            },
+            status: {
+              description: "The new status of the agent instance.",
+              allOf: [
+                {
+                  description:
+                    "The status values that can be set on an agent instance via an update request.\n",
+                  type: "string",
+                  enum: ["IDLE", "THINKING", "TOOL_CALLING", "TOOL_DISCOVERY"],
+                  title: "AgentInstanceUpdateStatusEnum",
+                },
+              ],
+            },
+            metrics: {
+              description:
+                "Metric increments to apply to the aggregate counters.",
+              allOf: [
+                {
+                  description:
+                    "Metric increments to apply to the agent instance aggregate counters. The engine\naccumulates these deltas into running totals on each UPDATED event. All fields\nare optional; omit a field to leave the corresponding counter unchanged.\n",
+                  type: "object",
+                  properties: {
+                    inputTokens: {
+                      type: "integer",
+                      format: "int64",
+                      minimum: 0,
+                      description:
+                        "Increment to apply to the total input token counter.",
+                    },
+                    outputTokens: {
+                      type: "integer",
+                      format: "int64",
+                      minimum: 0,
+                      description:
+                        "Increment to apply to the total output token counter.",
+                    },
+                    modelCalls: {
+                      type: "integer",
+                      format: "int32",
+                      minimum: 0,
+                      description:
+                        "Increment to apply to the total model call counter.",
+                    },
+                    toolCalls: {
+                      type: "integer",
+                      format: "int32",
+                      minimum: 0,
+                      description:
+                        "Increment to apply to the total tool call counter.",
+                    },
+                  },
+                  title: "AgentInstanceMetricsDelta",
+                },
+              ],
+            },
+            tools: {
+              description:
+                "The complete list of tools available to the agent, replacing any previously\nstored tools. When provided, the engine replaces the existing tool list with\nthis value.\n",
+              nullable: true,
+              type: "array",
+              items: {
+                description: "A tool available to the agent.",
+                type: "object",
+                required: ["name", "description", "elementId"],
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The tool name as visible to the LLM.",
+                  },
+                  description: {
+                    type: "string",
+                    nullable: true,
+                    description: "A human-readable description of the tool.",
+                  },
+                  elementId: {
+                    type: "string",
+                    nullable: true,
+                    description:
+                      "The BPMN element ID of the tool element within the ad-hoc sub-process.",
+                  },
+                },
+                title: "AgentTool",
+              },
+            },
+          },
+          title: "AgentInstanceUpdateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The agent instance was updated successfully." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The agent instance with the given key was not found.\nMore details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

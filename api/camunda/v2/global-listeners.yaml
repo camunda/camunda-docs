@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.9]]
+
         [[CONSISTENCY:STRONG]]
 
         Create a new global user task listener.
@@ -40,6 +42,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.9"
   /global-task-listeners/{id}:
     get:
       tags:
@@ -48,6 +51,8 @@ paths:
       summary: Get global user task listener
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -78,6 +83,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
     put:
       tags:
         - Global listener
@@ -85,6 +91,8 @@ paths:
       summary: Update global user task listener
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -125,6 +133,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.9"
     delete:
       tags:
         - Global listener
@@ -132,6 +141,8 @@ paths:
       summary: Delete global user task listener
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -162,6 +173,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.9"
   /global-task-listeners/search:
     post:
       tags:
@@ -170,6 +182,8 @@ paths:
       summary: Search global user task listeners
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -194,6 +208,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
 components:
   schemas:
     GlobalListenerSourceEnum:

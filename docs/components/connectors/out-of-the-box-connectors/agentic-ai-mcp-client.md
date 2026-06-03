@@ -11,8 +11,11 @@ import { fundamentalCards } from '../../react-components/\_mcp-card-data';
 Integrate [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../agentic-orchestration/agentic-orchestration-overview.md).
 
 :::tip Camunda as an MCP server
-The Orchestration Cluster includes a built-in [MCP server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md) that can be used as a remote MCP server with the MCP Client connectors. See [Enable and connect](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup.md#use-with-the-mcp-client-connectors) for configuration details.
-:::
+The Orchestration Cluster includes two built-in MCP servers that can be used as remote MCP server targets with the MCP Client connectors:
+
+- The [Orchestration Cluster MCP Server](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview.md) exposes Camunda's operational capabilities (incidents, user tasks, process instances…). See [Enable and connect](/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-setup.md#use-with-the-mcp-client-connectors) for configuration details.
+- The [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) exposes your deployed BPMN processes as callable tools (served at `/mcp/processes`). See [Enable and connect](/apis-tools/processes-mcp/processes-mcp-setup.md#use-with-the-mcp-client-connectors) for configuration details.
+  :::
 
 ## About
 

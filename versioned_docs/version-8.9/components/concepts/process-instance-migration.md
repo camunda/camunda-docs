@@ -180,6 +180,10 @@ When you migrate a job worker user task to a Camunda user task:
 - The current `assignee` is not preserved. The task is assigned to the initial assignee defined in the target user task definition.
   :::
 
+:::note
+Incidents on the job worker user task need to be resolved before migrating to a Camunda user task, otherwise the migration will fail.
+:::
+
 ## Deal with catch events
 
 An exception to changing the process instance state is specific to catch events.

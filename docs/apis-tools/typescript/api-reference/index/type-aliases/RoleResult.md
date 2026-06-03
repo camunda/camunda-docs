@@ -38,7 +38,7 @@ The role name.
 ### roleId
 
 ```ts
-roleId: string;
+roleId: RoleId;
 ```
 
 The role id.

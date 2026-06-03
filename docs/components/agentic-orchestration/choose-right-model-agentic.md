@@ -30,6 +30,10 @@ When evaluating models for your agentic process, focus on these three core capab
 - **Action completion:** Does the agent fully achieve the goals of each task without manual intervention?
 - **Instruction adherence:** Does the model follow your prompts, policies, and constraints as expected?
 
+:::tip
+To validate these capabilities against your own agent process, [test your AI agents with Camunda Process Test (CPT)](./evaluate-agents/test-ai-agents.md).
+:::
+
 ## Benchmark your candidate models
 
 Once you have defined your model needs, setup requirements, and peformance metrics, standardized benchmarks help you measure these aspects objectively.
@@ -86,3 +90,20 @@ Model selection should always reflect your **use case**. For example, a math-hea
 :::
 
 A clear framework and benchmarked data helps you choose an LLM or foundation model to power your Camunda agent.
+
+### Explore models with Camunda-provided LLM
+
+Camunda-provided LLM gives you access to [multiple models](./camunda-provided-llm.md#supported-models) for experimentation and evaluation, so you can test different options without setting up your own provider.
+
+:::important
+Camunda-provided LLM is only available in Camunda 8 SaaS. It is not available in Camunda 8 Self-Managed.
+:::
+
+See [Camunda-provided LLM](./camunda-provided-llm.md) for more details.
+
+## Next steps
+
+Selecting and benchmarking a model is only the first step. Once your agent is running, validate and continuously evaluate its behavior in practice:
+
+- [Evaluate your AI agents](./evaluate-agents/evaluate-agents-overview.md): Monitor agents in real time with Operate and improve their performance over time with Optimize.
+- [Test with CPT](./evaluate-agents/test-ai-agents.md): Write integration tests that assert on tool usage, action completion, and agent output.

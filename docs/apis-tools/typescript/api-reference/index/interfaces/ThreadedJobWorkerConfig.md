@@ -83,7 +83,7 @@ Zod schema for variables in the activated job
 optional jobTimeoutMs?: number;
 ```
 
-Job activation timeout
+Job activation timeout in ms — default `60000`. Overridden by CAMUNDA_WORKER_TIMEOUT env var.
 
 ---
 
@@ -103,7 +103,7 @@ Zeebe job type
 optional maxParallelJobs?: number;
 ```
 
-concurrency limit
+Concurrency limit — default `10`. Overridden by CAMUNDA_WORKER_MAX_CONCURRENT_JOBS env var.
 
 ---
 

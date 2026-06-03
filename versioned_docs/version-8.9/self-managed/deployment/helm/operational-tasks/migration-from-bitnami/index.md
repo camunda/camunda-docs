@@ -117,7 +117,7 @@ All migration paths require an explicit decision for authentication and connecti
 
 ### Migration hooks {#migration-hooks}
 
-The migration scripts support **hooks** — custom shell scripts that run before or after each migration phase. Place executable scripts in the [`hooks/`](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/migration/hooks) directory after cloning the deployment references repository:
+The migration scripts support **hooks** — custom shell scripts that run before or after each migration phase. Place executable scripts in the [`hooks/`](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/generic/kubernetes/migration/hooks) directory after cloning the deployment references repository:
 
 | Hook               | Trigger                                 |
 | ------------------ | --------------------------------------- |

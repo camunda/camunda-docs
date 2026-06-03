@@ -32,7 +32,7 @@ import Install from './react-components/\_install-c8run.md'
 
 This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
-Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
+Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing [user tasks](/reference/glossary.md#user-task), you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 
 :::note
 If you prefer a video-based learning experience or a more complex example, visit [this Camunda Academy course](https://bit.ly/3PJJocB).
@@ -225,7 +225,7 @@ Human-centric processes involving user tasks seamlessly unfold within Tasklist, 
 2. After you deploy your process, it can be executed on the cluster. There are multiple ways to run a process. This time, click **Run** in Modeler for a test run.
 
 :::tip
-Other options to run a process are to start it via Tasklist, test it in the Play mode, or call it via the API or an inbound trigger. Read more about [run options](/components/modeler/web-modeler/run-or-publish-your-process.md).
+Other options to run a process are to start it via Tasklist, test it in the Play mode, or call it via the API or an inbound trigger. Read more about [run options](/components/hub/workspace/modeler/run-or-publish-your-process.md).
 :::
 
 </TabItem>
@@ -261,7 +261,7 @@ Ensure your installation of [Camunda 8 Run](/self-managed/quickstart/developer-q
    <img src={OperateHumanTasks} alt="Process instance monitoring in Operate" />
 
 :::tip
-In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Play mode](/components/modeler/web-modeler/validation/play-your-process.md).
+In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Play mode](/components/hub/workspace/modeler/validation/play-your-process.md).
 :::
 
 </TabItem>
@@ -348,4 +348,4 @@ Don't want to build the process yourself? Click this button to create it from a 
 - Learn how to write powerful [expressions](/components/concepts/expressions.md) and utilize [variables](/components/concepts/variables.md) to route complex process flows.
 - Get an [introduction to Operate](/components/operate/operate-introduction.md).
 - Learn how to [set up Tasklist](/components/tasklist/introduction-to-tasklist.md) for efficient task management.
-- Explore [start forms](/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes.md) and attach the form directly to the start event.
+- Explore start forms and attach the form directly to the start event for authenticated starts in Tasklist.

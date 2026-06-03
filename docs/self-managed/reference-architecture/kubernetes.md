@@ -144,8 +144,8 @@ Also included in this namespace are components that are tightly integrated with 
 
 As shown in the [architecture diagram](#web-modeler-and-console), this namespace contains:
 
-- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) — browser-based BPMN editor
-- [Console](/self-managed/components/console/overview.md) — administrative interface
+- Web Modeler — browser-based BPMN editor
+- Console — administrative interface
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
 
 This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
@@ -257,7 +257,7 @@ The following databases are required:
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
 :::
 
-For more information, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
+For backend trade-offs and production guidance, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). For more general context, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmarking to determine the appropriate sizing for your specific environment and workload.
 
@@ -279,19 +279,17 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 
 #### Supported versions
 
-We conduct testing and ensure compatibility with the following OpenShift versions:
+:::info Supported versions
 
-| OpenShift version |
-| ----------------- |
-| 4.19.x            |
-| 4.18.x            |
-| 4.17.x            |
-| 4.16.x            |
-| 4.15.x            |
+As stated in the general [supported environments](/reference/supported-environments.md) policy, Camunda 8 Self-Managed runs on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/) distribution. For OpenShift specifically, this means any release in the Red Hat **General Availability**, **Full Support**, or **Maintenance Support** lifecycle phases (see the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift)), within the upstream [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/).
+
+Our reference architectures are continuously validated against the latest stable OpenShift release available in Red Hat's GA channel. Newly released OpenShift minor versions are evaluated and validated shortly after their GA.
 
 :::caution Versions compatibility
 
-Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support life cycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support lifecycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+
+Our reference architectures are continuously validated against the latest stable OpenShift release available in Red Hat's GA channel. Newly released OpenShift minor versions are evaluated and validated shortly after their GA.
 
 :::
 

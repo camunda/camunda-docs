@@ -7,12 +7,15 @@ page_rank: 80
 ---
 
 import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
+import HelmV4Required from './\_partials/\_helm-v4-required.md'
 
 Camunda recommends using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production environments.
 
 There are many ways to provision and configure a Kubernetes cluster, and several architectural decisions to consider. For example, will your workers run inside the Kubernetes cluster or externally? You'll need to configure the cluster accordingly and tailor the setup to your architecture.
 
 Camunda provides continuously improved Helm charts that are not tied to any specific cloud provider allowing you to choose your preferred Kubernetes platform. These charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform). To provide feedback or report issues, use the [Helm GitHub repository](https://github.com/camunda/camunda-platform-helm/issues).
+
+<HelmV4Required />
 
 ## What is Helm?
 

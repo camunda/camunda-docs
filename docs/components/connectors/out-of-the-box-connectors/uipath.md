@@ -31,7 +31,7 @@ You can choose among the available UiPath connector authentication types accordi
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `BEARER_TOKEN_UIPATH`) so you can reference it later in the connector.
 
 #### Configure the bearer token
@@ -47,7 +47,7 @@ Select the **UiPath connector** and fill out the following properties under the 
 
 We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `UIPATH_CLIENT_ID`) so you can reference it later in the connector.
 
 #### Configure the OAuth Token

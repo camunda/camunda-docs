@@ -87,7 +87,7 @@ You can increase or decrease the [cluster size](/components/concepts/clusters.md
 1. Click **Confirm** to resize the cluster, or **Cancel** to close the modal without resizing the cluster.
 
 :::note
-Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
+To increase the cluster size beyond the maximum 4x size, [reach out to Camunda](https://camunda.com/contact-us/). This requires custom sizing and pricing.
 :::
 
 ## Delete a cluster

@@ -9,24 +9,21 @@ This guide is a focused walkthrough for teams using an external relational datab
 
 Use [production install](/self-managed/deployment/helm/install/production/index.md) as the primary installation guide. Use this page when you want additional RDBMS-specific examples for that flow.
 
+If you deploy on AWS EKS, use [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) for the cluster, Ingress, and AWS-managed service setup, then return to this page for the RDBMS-specific Helm configuration and installation steps.
+
 Related guides:
 
 - [Production install](/self-managed/deployment/helm/install/production/index.md)
+- [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
 - [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
 
 ## What changes when using RDBMS?
 
-In Camunda 8, secondary storage stores historical data and process state. You can use either a document-store backend (Elasticsearch/OpenSearch) or an RDBMS, depending on your requirements. This guide focuses on the RDBMS option:
+In Camunda 8, secondary storage stores historical data and process state. You can use either a document-store backend (Elasticsearch/OpenSearch) or an RDBMS, depending on your requirements. For the canonical production trade-off guidance, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
 
-| Aspect               | Document-store backend (Elasticsearch/OpenSearch)   | RDBMS                                                       |
-| -------------------- | --------------------------------------------------- | ----------------------------------------------------------- |
-| **Storage choice**   | Helm-managed subchart                               | You manage (PostgreSQL, etc.)                               |
-| **Scaling**          | Scale the search cluster independently from Camunda | Scale via your database service (vertical or read replicas) |
-| **Backup strategy**  | ES/OS snapshot/restore tooling                      | Database-native backups (e.g., pg_dump, vendor tools)       |
-| **Monitoring**       | ES/OS metrics and dashboards                        | Database-native monitoring and alerts                       |
-| **Operator support** | No embedded document-store operator bundled         | Database operators (optional)                               |
+This guide focuses on the Helm-specific RDBMS path. In practice, that means you provide and operate an external supported relational database, and the Orchestration Cluster reads operational data through that backend.
 
 When using RDBMS, **Optimize still requires Elasticsearch or OpenSearch**. Only the Orchestration Cluster uses RDBMS.
 
@@ -69,6 +66,10 @@ Before you begin:
 - Managed services widely available on AWS (RDS), Azure, GCP.
 
 ### Step 2: Prepare your database
+
+:::note On Amazon Aurora PostgreSQL
+Skip the local `createdb` and `createuser` commands. Connect to your Aurora writer endpoint with `psql`, and prefer IAM database authentication over a static password. See [Install Camunda 8 on an EKS cluster](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md) and the [Aurora Terraform module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/aws/modules/aurora).
+:::
 
 Create a database and user. For example, in PostgreSQL:
 
@@ -160,7 +161,7 @@ If you're using Oracle, MySQL, or a database version not covered by bundled driv
 For detailed information about JDBC driver strategies, security configurations, and validation, see [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
 :::
 
-**Option A: Init container (recommended for production)**
+#### Option A: Init container (recommended for production)
 
 Update your `values-rdbms.yaml`:
 
@@ -191,7 +192,7 @@ orchestration:
 
 For other driver sources (e.g., private repositories), adjust the `wget` command or use a private container registry for pre-built images.
 
-**Option B: ConfigMap (GitOps-friendly)**
+#### Option B: ConfigMap (GitOps-friendly)
 
 Store the driver JAR in a ConfigMap and mount it:
 
@@ -307,7 +308,7 @@ orchestration:
 
 In production, separate the Orchestration Cluster from management components (WebModeler, Console, Identity, Optimize):
 
-**Namespace 1: Orchestration + Connectors**
+#### Namespace 1: Orchestration + Connectors
 
 ```yaml
 orchestration:
@@ -333,7 +334,7 @@ identity:
   enabled: false
 ```
 
-**Namespace 2: Management components (with document-store secondary storage)**
+#### Namespace 2: Management components (with document-store secondary storage)
 
 ```yaml
 orchestration:

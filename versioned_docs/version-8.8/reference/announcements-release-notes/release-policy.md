@@ -113,11 +113,7 @@ In our managed service, Camunda reserves the right to force update or restart a 
 
 ## Self-Managed
 
-When a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers are notified via email.
-
-:::info
-Non-enterprise customers can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements-release-notes/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
-:::
+You can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements-release-notes/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 
 ### Helm chart
 

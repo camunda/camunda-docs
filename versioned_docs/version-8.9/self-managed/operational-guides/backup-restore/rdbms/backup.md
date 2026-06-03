@@ -86,8 +86,8 @@ camunda:
   <TabItem value="env" label="Environment variables">
 
 ```bash
-export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE=S3
-export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_CONTINUOUS=true
+export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE=S3
+export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_CONTINUOUS=true
 ```
 
   </TabItem>

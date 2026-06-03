@@ -46,7 +46,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 <h3>Steps</h3>
 
-1. Identify what management and modeling components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
+1. Identify what management and modeling components you need to use in Camunda 8: [Camunda Hub](../../hub/index.md) and [Optimize](../../optimize/overview.md).
 2. In your OIDC provider, **create an application for each of the management and modeling components you want to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
    - The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
      :::note
@@ -144,7 +144,7 @@ This configuration allows login without the `offline_access` scope.
 Ensure you register a new application for each component.
 :::
 
-1. Identify what management and modeling components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
+1. Identify what management and modeling components you need to use in Camunda 8: [Camunda Hub](../../hub/index.md) and [Optimize](../../optimize/overview.md).
 2. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each component you would like to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
 3. Navigate to the new application's **Overview** page, and make note of the **Client ID**. This will also be used as the audience ID.
 4. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
@@ -243,6 +243,44 @@ Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entr
 | Optimize            | **Microsoft Entra ID:** <br/> `https://<OPTIMIZE_URL>/api/authentication/callback` <br/><br/> **Helm:** <br/> `https://<OPTIMIZE_URL>` | There is a fallback if you use the existing environment variables to configure your authentication provider. If you use a custom `yaml`, update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following Optimize features are not currently available: <br/>- The **User permissions** tab in collections<br/>- The **Alerts** tab in collections<br/>- Digests<br/>- Accessible usernames for owners of resources (the `sub` claim value is displayed instead).                                                                                    |
 | Web Modeler         | **Microsoft Entra ID:** <br/> `https://<WEB_MODELER_URL>/login-callback` <br/><br/> **Helm:** <br/> `https://<WEB_MODELER_URL>`        | Web Modeler requires two clients: one for the UI, and one for the API. <br/><br/> Required configuration variables for the `restapi` component:<br/> `OAUTH2_CLIENT_ID=[ui-client-id]`<br/> `CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[ui-audience]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[api-audience]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=[provider-jwks-url]`. |
 | Console             | **Microsoft Entra ID:** <br/> `https://<CONSOLE_URL>` <br/><br/> **Helm:** <br/> `https://<CONSOLE_URL>`                               |
+
+#### Example component values
+
+The examples below use these public URLs:
+
+- Management Identity: `https://identity.example.com`
+- Optimize: `https://optimize.example.com`
+- Web Modeler: `https://modeler.example.com`
+- Console: `https://console.example.com`
+
+With those URLs, configure the following redirect URIs in your OIDC provider:
+
+- Management Identity: `https://identity.example.com/auth/login-callback`
+- Optimize: `https://optimize.example.com/api/authentication/callback`
+- Web Modeler UI: `https://modeler.example.com/login-callback`
+- Console: `https://console.example.com/`
+
+For Web Modeler, the `restapi` component configuration varies by provider. The example below uses Keycloak; for other providers, retrieve the issuer and JWK set URLs from your provider's [OpenID configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) (typically `https://<provider>/.well-known/openid-configuration`):
+
+```shell
+OAUTH2_CLIENT_ID=web-modeler
+CAMUNDA_IDENTITY_BASEURL=http://identity:8080
+CAMUNDA_IDENTITY_TYPE=GENERIC
+CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=web-modeler-api
+CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=web-modeler-public-api
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=https://idp.example.com/realms/camunda
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=https://idp.example.com/realms/camunda/protocol/openid-connect/certs
+```
+
+Use the internal Identity base URL for `CAMUNDA_IDENTITY_BASEURL`, not the public redirect URL.
+
+For Microsoft Entra ID, replace the provider-specific values:
+
+```shell
+CAMUNDA_IDENTITY_TYPE=MICROSOFT
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=https://login.microsoftonline.com/<tenant-id>/v2.0
+SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=https://login.microsoftonline.com/<tenant-id>/discovery/v2.0/keys
+```
 
 ## Supported and unsupported OIDC features
 

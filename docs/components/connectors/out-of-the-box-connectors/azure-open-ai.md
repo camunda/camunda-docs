@@ -42,7 +42,7 @@ Fill the **API key** field with a valid Azure OpenAI API key.
 
 Keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (for example, `AZURE_OAI_SECRET`) so you can reference it later in the connector.
 
 ## Operation

@@ -1,0 +1,1304 @@
+{
+  "get_topology": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetTopology",
+      "label": "Get cluster topology"
+    }
+  ],
+  "get_status": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetStatus",
+      "label": "Check cluster status"
+    }
+  ],
+  "create_deployment": [
+    {
+      "file": "deployment.py",
+      "region": "DeployResources",
+      "label": "From files"
+    },
+    {
+      "file": "deployment.py",
+      "region": "DeployResourcesWithTenant",
+      "label": "With tenant ID"
+    }
+  ],
+  "delete_resource": [
+    {
+      "file": "deployment.py",
+      "region": "DeleteResource",
+      "label": "Delete a resource"
+    }
+  ],
+  "create_process_instance": [
+    {
+      "file": "process_instance.py",
+      "region": "CreateProcessInstanceByKey",
+      "label": "By key"
+    },
+    {
+      "file": "process_instance.py",
+      "region": "CreateProcessInstanceByKeyFromStorage",
+      "label": "By stored key"
+    },
+    {
+      "file": "process_instance.py",
+      "region": "CreateProcessInstanceById",
+      "label": "By ID"
+    }
+  ],
+  "cancel_process_instance": [
+    {
+      "file": "process_instance.py",
+      "region": "CancelProcessInstance",
+      "label": "Cancel a process instance"
+    }
+  ],
+  "search_process_instances": [
+    {
+      "file": "process_instance.py",
+      "region": "SearchProcessInstances",
+      "label": "Search process instances"
+    }
+  ],
+  "activate_jobs": [
+    {
+      "file": "job.py",
+      "region": "ActivateJobs",
+      "label": "Activate and process jobs",
+      "imports": "from camunda_orchestration_sdk import CamundaAsyncClient"
+    }
+  ],
+  "complete_job": [
+    {
+      "file": "job.py",
+      "region": "CompleteJob",
+      "label": "Complete a job"
+    }
+  ],
+  "fail_job": [
+    {
+      "file": "job.py",
+      "region": "FailJob",
+      "label": "Fail a job with retry"
+    }
+  ],
+  "evaluate_decision": [
+    {
+      "file": "decision.py",
+      "region": "EvaluateDecisionByKey",
+      "label": "By key"
+    },
+    {
+      "file": "decision.py",
+      "region": "EvaluateDecisionById",
+      "label": "By ID"
+    }
+  ],
+  "get_decision_definition": [
+    {
+      "file": "decision.py",
+      "region": "GetDecisionDefinition",
+      "label": "Get a decision definition"
+    }
+  ],
+  "search_decision_definitions": [
+    {
+      "file": "decision.py",
+      "region": "SearchDecisionDefinitions",
+      "label": "Search decision definitions"
+    }
+  ],
+  "assign_user_task": [
+    {
+      "file": "user_task.py",
+      "region": "AssignUserTask",
+      "label": "Assign a user task"
+    }
+  ],
+  "unassign_user_task": [
+    {
+      "file": "user_task.py",
+      "region": "UnassignUserTask",
+      "label": "Unassign a user task"
+    }
+  ],
+  "complete_user_task": [
+    {
+      "file": "user_task.py",
+      "region": "CompleteUserTask",
+      "label": "Complete a user task"
+    }
+  ],
+  "update_user_task": [
+    {
+      "file": "user_task.py",
+      "region": "UpdateUserTask",
+      "label": "Update a user task"
+    }
+  ],
+  "get_user_task": [
+    {
+      "file": "user_task.py",
+      "region": "GetUserTask",
+      "label": "Get a user task"
+    }
+  ],
+  "search_user_tasks": [
+    {
+      "file": "user_task.py",
+      "region": "SearchUserTasks",
+      "label": "Search user tasks"
+    }
+  ],
+  "correlate_message": [
+    {
+      "file": "message_signal.py",
+      "region": "CorrelateMessage",
+      "label": "Correlate a message"
+    }
+  ],
+  "publish_message": [
+    {
+      "file": "message_signal.py",
+      "region": "PublishMessage",
+      "label": "Publish a message"
+    }
+  ],
+  "broadcast_signal": [
+    {
+      "file": "message_signal.py",
+      "region": "BroadcastSignal",
+      "label": "Broadcast a signal"
+    }
+  ],
+  "get_incident": [
+    {
+      "file": "incident.py",
+      "region": "GetIncident",
+      "label": "Get an incident"
+    }
+  ],
+  "resolve_incident": [
+    {
+      "file": "incident.py",
+      "region": "ResolveIncident",
+      "label": "Resolve an incident"
+    }
+  ],
+  "search_incidents": [
+    {
+      "file": "incident.py",
+      "region": "SearchIncidents",
+      "label": "Search incidents"
+    }
+  ],
+  "create_authorization": [
+    {
+      "file": "authorization.py",
+      "region": "CreateAuthorization",
+      "label": "Create an authorization"
+    }
+  ],
+  "get_authorization": [
+    {
+      "file": "authorization.py",
+      "region": "GetAuthorization",
+      "label": "Get an authorization"
+    }
+  ],
+  "search_authorizations": [
+    {
+      "file": "authorization.py",
+      "region": "SearchAuthorizations",
+      "label": "Search authorizations"
+    }
+  ],
+  "update_authorization": [
+    {
+      "file": "authorization.py",
+      "region": "UpdateAuthorization",
+      "label": "Update an authorization"
+    }
+  ],
+  "delete_authorization": [
+    {
+      "file": "authorization.py",
+      "region": "DeleteAuthorization",
+      "label": "Delete an authorization"
+    }
+  ],
+  "create_user": [
+    {
+      "file": "user.py",
+      "region": "CreateUser",
+      "label": "Create a user"
+    }
+  ],
+  "create_admin_user": [
+    {
+      "file": "user.py",
+      "region": "CreateAdminUser",
+      "label": "Create an admin user"
+    }
+  ],
+  "get_user": [
+    {
+      "file": "user.py",
+      "region": "GetUser",
+      "label": "Get a user"
+    }
+  ],
+  "search_users": [
+    {
+      "file": "user.py",
+      "region": "SearchUsers",
+      "label": "Search users"
+    }
+  ],
+  "update_user": [
+    {
+      "file": "user.py",
+      "region": "UpdateUser",
+      "label": "Update a user"
+    }
+  ],
+  "delete_user": [
+    {
+      "file": "user.py",
+      "region": "DeleteUser",
+      "label": "Delete a user"
+    }
+  ],
+  "create_group": [
+    {
+      "file": "group.py",
+      "region": "CreateGroup",
+      "label": "Create a group"
+    }
+  ],
+  "get_group": [
+    {
+      "file": "group.py",
+      "region": "GetGroup",
+      "label": "Get a group"
+    }
+  ],
+  "search_groups": [
+    {
+      "file": "group.py",
+      "region": "SearchGroups",
+      "label": "Search groups"
+    }
+  ],
+  "update_group": [
+    {
+      "file": "group.py",
+      "region": "UpdateGroup",
+      "label": "Update a group"
+    }
+  ],
+  "delete_group": [
+    {
+      "file": "group.py",
+      "region": "DeleteGroup",
+      "label": "Delete a group"
+    }
+  ],
+  "assign_user_to_group": [
+    {
+      "file": "group.py",
+      "region": "AssignUserToGroup",
+      "label": "Assign a user to a group"
+    }
+  ],
+  "unassign_user_from_group": [
+    {
+      "file": "group.py",
+      "region": "UnassignUserFromGroup",
+      "label": "Unassign a user from a group"
+    }
+  ],
+  "assign_client_to_group": [
+    {
+      "file": "group.py",
+      "region": "AssignClientToGroup",
+      "label": "Assign a client to a group"
+    }
+  ],
+  "unassign_client_from_group": [
+    {
+      "file": "group.py",
+      "region": "UnassignClientFromGroup",
+      "label": "Unassign a client from a group"
+    }
+  ],
+  "search_users_for_group": [
+    {
+      "file": "group.py",
+      "region": "SearchUsersForGroup",
+      "label": "Search users in a group"
+    }
+  ],
+  "search_clients_for_group": [
+    {
+      "file": "group.py",
+      "region": "SearchClientsForGroup",
+      "label": "Search clients in a group"
+    }
+  ],
+  "search_roles_for_group": [
+    {
+      "file": "group.py",
+      "region": "SearchRolesForGroup",
+      "label": "Search roles for a group"
+    }
+  ],
+  "assign_mapping_rule_to_group": [
+    {
+      "file": "group.py",
+      "region": "AssignMappingRuleToGroup",
+      "label": "Assign a mapping rule to a group"
+    }
+  ],
+  "unassign_mapping_rule_from_group": [
+    {
+      "file": "group.py",
+      "region": "UnassignMappingRuleFromGroup",
+      "label": "Unassign a mapping rule from a group"
+    }
+  ],
+  "search_mapping_rules_for_group": [
+    {
+      "file": "group.py",
+      "region": "SearchMappingRulesForGroup",
+      "label": "Search mapping rules for a group"
+    }
+  ],
+  "create_role": [
+    {
+      "file": "role.py",
+      "region": "CreateRole",
+      "label": "Create a role"
+    }
+  ],
+  "get_role": [
+    {
+      "file": "role.py",
+      "region": "GetRole",
+      "label": "Get a role"
+    }
+  ],
+  "search_roles": [
+    {
+      "file": "role.py",
+      "region": "SearchRoles",
+      "label": "Search roles"
+    }
+  ],
+  "update_role": [
+    {
+      "file": "role.py",
+      "region": "UpdateRole",
+      "label": "Update a role"
+    }
+  ],
+  "delete_role": [
+    {
+      "file": "role.py",
+      "region": "DeleteRole",
+      "label": "Delete a role"
+    }
+  ],
+  "assign_role_to_user": [
+    {
+      "file": "role.py",
+      "region": "AssignRoleToUser",
+      "label": "Assign a role to a user"
+    }
+  ],
+  "unassign_role_from_user": [
+    {
+      "file": "role.py",
+      "region": "UnassignRoleFromUser",
+      "label": "Unassign a role from a user"
+    }
+  ],
+  "assign_role_to_group": [
+    {
+      "file": "role.py",
+      "region": "AssignRoleToGroup",
+      "label": "Assign a role to a group"
+    }
+  ],
+  "unassign_role_from_group": [
+    {
+      "file": "role.py",
+      "region": "UnassignRoleFromGroup",
+      "label": "Unassign a role from a group"
+    }
+  ],
+  "assign_role_to_client": [
+    {
+      "file": "role.py",
+      "region": "AssignRoleToClient",
+      "label": "Assign a role to a client"
+    }
+  ],
+  "unassign_role_from_client": [
+    {
+      "file": "role.py",
+      "region": "UnassignRoleFromClient",
+      "label": "Unassign a role from a client"
+    }
+  ],
+  "assign_role_to_mapping_rule": [
+    {
+      "file": "role.py",
+      "region": "AssignRoleToMappingRule",
+      "label": "Assign a role to a mapping rule"
+    }
+  ],
+  "unassign_role_from_mapping_rule": [
+    {
+      "file": "role.py",
+      "region": "UnassignRoleFromMappingRule",
+      "label": "Unassign a role from a mapping rule"
+    }
+  ],
+  "search_users_for_role": [
+    {
+      "file": "role.py",
+      "region": "SearchUsersForRole",
+      "label": "Search users for a role"
+    }
+  ],
+  "search_groups_for_role": [
+    {
+      "file": "role.py",
+      "region": "SearchGroupsForRole",
+      "label": "Search groups for a role"
+    }
+  ],
+  "search_clients_for_role": [
+    {
+      "file": "role.py",
+      "region": "SearchClientsForRole",
+      "label": "Search clients for a role"
+    }
+  ],
+  "search_mapping_rules_for_role": [
+    {
+      "file": "role.py",
+      "region": "SearchMappingRulesForRole",
+      "label": "Search mapping rules for a role"
+    }
+  ],
+  "create_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "CreateTenant",
+      "label": "Create a tenant"
+    }
+  ],
+  "get_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "GetTenant",
+      "label": "Get a tenant"
+    }
+  ],
+  "search_tenants": [
+    {
+      "file": "tenant.py",
+      "region": "SearchTenants",
+      "label": "Search tenants"
+    }
+  ],
+  "update_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "UpdateTenant",
+      "label": "Update a tenant"
+    }
+  ],
+  "delete_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "DeleteTenant",
+      "label": "Delete a tenant"
+    }
+  ],
+  "assign_user_to_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "AssignUserToTenant",
+      "label": "Assign a user to a tenant"
+    }
+  ],
+  "unassign_user_from_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "UnassignUserFromTenant",
+      "label": "Unassign a user from a tenant"
+    }
+  ],
+  "assign_group_to_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "AssignGroupToTenant",
+      "label": "Assign a group to a tenant"
+    }
+  ],
+  "unassign_group_from_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "UnassignGroupFromTenant",
+      "label": "Unassign a group from a tenant"
+    }
+  ],
+  "assign_role_to_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "AssignRoleToTenant",
+      "label": "Assign a role to a tenant"
+    }
+  ],
+  "unassign_role_from_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "UnassignRoleFromTenant",
+      "label": "Unassign a role from a tenant"
+    }
+  ],
+  "assign_client_to_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "AssignClientToTenant",
+      "label": "Assign a client to a tenant"
+    }
+  ],
+  "unassign_client_from_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "UnassignClientFromTenant",
+      "label": "Unassign a client from a tenant"
+    }
+  ],
+  "assign_mapping_rule_to_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "AssignMappingRuleToTenant",
+      "label": "Assign a mapping rule to a tenant"
+    }
+  ],
+  "unassign_mapping_rule_from_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "UnassignMappingRuleFromTenant",
+      "label": "Unassign a mapping rule from a tenant"
+    }
+  ],
+  "search_users_for_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "SearchUsersForTenant",
+      "label": "Search users for a tenant"
+    }
+  ],
+  "search_clients_for_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "SearchClientsForTenant",
+      "label": "Search clients for a tenant"
+    }
+  ],
+  "search_group_ids_for_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "SearchGroupIdsForTenant",
+      "label": "Search groups for a tenant"
+    }
+  ],
+  "search_roles_for_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "SearchRolesForTenant",
+      "label": "Search roles for a tenant"
+    }
+  ],
+  "search_mapping_rules_for_tenant": [
+    {
+      "file": "tenant.py",
+      "region": "SearchMappingRulesForTenant",
+      "label": "Search mapping rules for a tenant"
+    }
+  ],
+  "create_mapping_rule": [
+    {
+      "file": "mapping_rule.py",
+      "region": "CreateMappingRule",
+      "label": "Create a mapping rule"
+    }
+  ],
+  "get_mapping_rule": [
+    {
+      "file": "mapping_rule.py",
+      "region": "GetMappingRule",
+      "label": "Get a mapping rule"
+    }
+  ],
+  "search_mapping_rule": [
+    {
+      "file": "mapping_rule.py",
+      "region": "SearchMappingRule",
+      "label": "Search mapping rules"
+    }
+  ],
+  "update_mapping_rule": [
+    {
+      "file": "mapping_rule.py",
+      "region": "UpdateMappingRule",
+      "label": "Update a mapping rule"
+    }
+  ],
+  "delete_mapping_rule": [
+    {
+      "file": "mapping_rule.py",
+      "region": "DeleteMappingRule",
+      "label": "Delete a mapping rule"
+    }
+  ],
+  "get_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "GetBatchOperation",
+      "label": "Get a batch operation"
+    }
+  ],
+  "search_batch_operations": [
+    {
+      "file": "batch_operation.py",
+      "region": "SearchBatchOperations",
+      "label": "Search batch operations"
+    }
+  ],
+  "search_batch_operation_items": [
+    {
+      "file": "batch_operation.py",
+      "region": "SearchBatchOperationItems",
+      "label": "Search batch operation items"
+    }
+  ],
+  "cancel_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "CancelBatchOperation",
+      "label": "Cancel a batch operation"
+    }
+  ],
+  "suspend_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "SuspendBatchOperation",
+      "label": "Suspend a batch operation"
+    }
+  ],
+  "resume_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "ResumeBatchOperation",
+      "label": "Resume a batch operation"
+    }
+  ],
+  "cancel_process_instances_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "CancelProcessInstancesBatchOperation",
+      "label": "Cancel process instances in batch"
+    }
+  ],
+  "delete_process_instances_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "DeleteProcessInstancesBatchOperation",
+      "label": "Delete process instances in batch"
+    }
+  ],
+  "migrate_process_instances_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "MigrateProcessInstancesBatchOperation",
+      "label": "Migrate process instances in batch"
+    }
+  ],
+  "modify_process_instances_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "ModifyProcessInstancesBatchOperation",
+      "label": "Modify process instances in batch"
+    }
+  ],
+  "resolve_incidents_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "ResolveIncidentsBatchOperation",
+      "label": "Resolve incidents in batch"
+    }
+  ],
+  "delete_decision_instances_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "DeleteDecisionInstancesBatchOperation",
+      "label": "Delete decision instances in batch"
+    }
+  ],
+  "delete_process_instance": [
+    {
+      "file": "extended_operations.py",
+      "region": "DeleteProcessInstance",
+      "label": "Delete a process instance"
+    }
+  ],
+  "get_process_instance": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessInstance",
+      "label": "Get a process instance"
+    }
+  ],
+  "migrate_process_instance": [
+    {
+      "file": "extended_operations.py",
+      "region": "MigrateProcessInstance",
+      "label": "Migrate a process instance"
+    }
+  ],
+  "modify_process_instance": [
+    {
+      "file": "extended_operations.py",
+      "region": "ModifyProcessInstance",
+      "label": "Modify a process instance"
+    }
+  ],
+  "get_process_instance_statistics": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessInstanceStatistics",
+      "label": "Get process instance statistics"
+    }
+  ],
+  "get_process_instance_sequence_flows": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessInstanceSequenceFlows",
+      "label": "Get process instance sequence flows"
+    }
+  ],
+  "get_process_instance_call_hierarchy": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessInstanceCallHierarchy",
+      "label": "Get process instance call hierarchy"
+    }
+  ],
+  "search_process_instance_incidents": [
+    {
+      "file": "extended_operations.py",
+      "region": "SearchProcessInstanceIncidents",
+      "label": "Search process instance incidents"
+    }
+  ],
+  "resolve_process_instance_incidents": [
+    {
+      "file": "extended_operations.py",
+      "region": "ResolveProcessInstanceIncidents",
+      "label": "Resolve process instance incidents"
+    }
+  ],
+  "get_process_definition": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessDefinition",
+      "label": "Get a process definition"
+    }
+  ],
+  "get_process_definition_xml": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessDefinitionXml",
+      "label": "Get process definition XML"
+    }
+  ],
+  "search_process_definitions": [
+    {
+      "file": "extended_operations.py",
+      "region": "SearchProcessDefinitions",
+      "label": "Search process definitions"
+    }
+  ],
+  "get_process_definition_statistics": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessDefinitionStatistics",
+      "label": "Get process definition element statistics"
+    }
+  ],
+  "get_process_definition_instance_statistics": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessDefinitionInstanceStatistics",
+      "label": "Get process definition instance statistics"
+    }
+  ],
+  "get_process_definition_instance_version_statistics": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessDefinitionInstanceVersionStatistics",
+      "label": "Get version statistics"
+    }
+  ],
+  "get_process_definition_message_subscription_statistics": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessDefinitionMessageSubscriptionStatistics",
+      "label": "Get message subscription statistics"
+    }
+  ],
+  "get_start_process_form": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetStartProcessForm",
+      "label": "Get start process form"
+    }
+  ],
+  "get_variable": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetVariable",
+      "label": "Get a variable"
+    }
+  ],
+  "search_variables": [
+    {
+      "file": "extended_operations.py",
+      "region": "SearchVariables",
+      "label": "Search variables"
+    }
+  ],
+  "get_element_instance": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetElementInstance",
+      "label": "Get an element instance"
+    }
+  ],
+  "search_element_instances": [
+    {
+      "file": "extended_operations.py",
+      "region": "SearchElementInstances",
+      "label": "Search element instances"
+    }
+  ],
+  "search_element_instance_incidents": [
+    {
+      "file": "extended_operations.py",
+      "region": "SearchElementInstanceIncidents",
+      "label": "Search element instance incidents"
+    }
+  ],
+  "create_element_instance_variables": [
+    {
+      "file": "extended_operations.py",
+      "region": "CreateElementInstanceVariables",
+      "label": "Create element instance variables"
+    }
+  ],
+  "activate_ad_hoc_sub_process_activities": [
+    {
+      "file": "extended_operations.py",
+      "region": "ActivateAdHocSubProcessActivities",
+      "label": "Activate ad-hoc sub-process activities"
+    }
+  ],
+  "get_decision_definition_xml": [
+    {
+      "file": "additional_operations.py",
+      "region": "GetDecisionDefinitionXml",
+      "label": "Get decision definition XML"
+    }
+  ],
+  "get_decision_instance": [
+    {
+      "file": "additional_operations.py",
+      "region": "GetDecisionInstance",
+      "label": "Get a decision instance"
+    }
+  ],
+  "search_decision_instances": [
+    {
+      "file": "additional_operations.py",
+      "region": "SearchDecisionInstances",
+      "label": "Search decision instances"
+    }
+  ],
+  "delete_decision_instance": [
+    {
+      "file": "additional_operations.py",
+      "region": "DeleteDecisionInstance",
+      "label": "Delete a decision instance"
+    }
+  ],
+  "get_decision_requirements": [
+    {
+      "file": "additional_operations.py",
+      "region": "GetDecisionRequirements",
+      "label": "Get decision requirements"
+    }
+  ],
+  "get_decision_requirements_xml": [
+    {
+      "file": "additional_operations.py",
+      "region": "GetDecisionRequirementsXml",
+      "label": "Get decision requirements XML"
+    }
+  ],
+  "search_decision_requirements": [
+    {
+      "file": "additional_operations.py",
+      "region": "SearchDecisionRequirements",
+      "label": "Search decision requirements"
+    }
+  ],
+  "create_document_link": [
+    {
+      "file": "additional_operations.py",
+      "region": "CreateDocumentLink",
+      "label": "Create a document link"
+    }
+  ],
+  "create_document": [
+    {
+      "file": "additional_operations.py",
+      "region": "CreateDocument",
+      "label": "Create a document"
+    }
+  ],
+  "create_documents": [
+    {
+      "file": "additional_operations.py",
+      "region": "CreateDocuments",
+      "label": "Create documents"
+    }
+  ],
+  "get_document": [
+    {
+      "file": "additional_operations.py",
+      "region": "GetDocument",
+      "label": "Get a document"
+    }
+  ],
+  "delete_document": [
+    {
+      "file": "additional_operations.py",
+      "region": "DeleteDocument",
+      "label": "Delete a document"
+    }
+  ],
+  "throw_job_error": [
+    {
+      "file": "additional_operations.py",
+      "region": "ThrowJobError",
+      "label": "Throw a job error"
+    }
+  ],
+  "update_job": [
+    {
+      "file": "additional_operations.py",
+      "region": "UpdateJob",
+      "label": "Update a job"
+    }
+  ],
+  "search_jobs": [
+    {
+      "file": "additional_operations.py",
+      "region": "SearchJobs",
+      "label": "Search jobs"
+    }
+  ],
+  "get_user_task_form": [
+    {
+      "file": "additional_operations.py",
+      "region": "GetUserTaskForm",
+      "label": "Get a user task form"
+    }
+  ],
+  "search_user_task_variables": [
+    {
+      "file": "additional_operations.py",
+      "region": "SearchUserTaskVariables",
+      "label": "Search user task variables"
+    }
+  ],
+  "search_user_task_audit_logs": [
+    {
+      "file": "additional_operations.py",
+      "region": "SearchUserTaskAuditLogs",
+      "label": "Search user task audit logs"
+    }
+  ],
+  "search_user_task_effective_variables": [
+    {
+      "file": "additional_operations.py",
+      "region": "SearchUserTaskEffectiveVariables",
+      "label": "Search user task effective variables"
+    }
+  ],
+  "get_global_cluster_variable": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetGlobalClusterVariable",
+      "label": "Get a global cluster variable"
+    }
+  ],
+  "create_global_cluster_variable": [
+    {
+      "file": "admin_operations.py",
+      "region": "CreateGlobalClusterVariable",
+      "label": "Create a global cluster variable"
+    }
+  ],
+  "update_global_cluster_variable": [
+    {
+      "file": "admin_operations.py",
+      "region": "UpdateGlobalClusterVariable",
+      "label": "Update a global cluster variable"
+    }
+  ],
+  "delete_global_cluster_variable": [
+    {
+      "file": "admin_operations.py",
+      "region": "DeleteGlobalClusterVariable",
+      "label": "Delete a global cluster variable"
+    }
+  ],
+  "get_tenant_cluster_variable": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetTenantClusterVariable",
+      "label": "Get a tenant cluster variable"
+    }
+  ],
+  "create_tenant_cluster_variable": [
+    {
+      "file": "admin_operations.py",
+      "region": "CreateTenantClusterVariable",
+      "label": "Create a tenant cluster variable"
+    }
+  ],
+  "update_tenant_cluster_variable": [
+    {
+      "file": "admin_operations.py",
+      "region": "UpdateTenantClusterVariable",
+      "label": "Update a tenant cluster variable"
+    }
+  ],
+  "delete_tenant_cluster_variable": [
+    {
+      "file": "admin_operations.py",
+      "region": "DeleteTenantClusterVariable",
+      "label": "Delete a tenant cluster variable"
+    }
+  ],
+  "search_cluster_variables": [
+    {
+      "file": "admin_operations.py",
+      "region": "SearchClusterVariables",
+      "label": "Search cluster variables"
+    }
+  ],
+  "create_global_task_listener": [
+    {
+      "file": "admin_operations.py",
+      "region": "CreateGlobalTaskListener",
+      "label": "Create a global task listener"
+    }
+  ],
+  "get_global_task_listener": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetGlobalTaskListener",
+      "label": "Get a global task listener"
+    }
+  ],
+  "update_global_task_listener": [
+    {
+      "file": "admin_operations.py",
+      "region": "UpdateGlobalTaskListener",
+      "label": "Update a global task listener"
+    }
+  ],
+  "delete_global_task_listener": [
+    {
+      "file": "admin_operations.py",
+      "region": "DeleteGlobalTaskListener",
+      "label": "Delete a global task listener"
+    }
+  ],
+  "search_global_task_listeners": [
+    {
+      "file": "admin_operations.py",
+      "region": "SearchGlobalTaskListeners",
+      "label": "Search global task listeners"
+    }
+  ],
+  "get_license": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetLicense",
+      "label": "Get license information"
+    }
+  ],
+  "get_system_configuration": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetSystemConfiguration",
+      "label": "Get system configuration"
+    }
+  ],
+  "get_authentication": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetAuthentication",
+      "label": "Get authentication info"
+    }
+  ],
+  "pin_clock": [
+    {
+      "file": "admin_operations.py",
+      "region": "PinClock",
+      "label": "Pin the cluster clock"
+    }
+  ],
+  "reset_clock": [
+    {
+      "file": "admin_operations.py",
+      "region": "ResetClock",
+      "label": "Reset the cluster clock"
+    }
+  ],
+  "evaluate_conditionals": [
+    {
+      "file": "admin_operations.py",
+      "region": "EvaluateConditionals",
+      "label": "Evaluate conditionals"
+    }
+  ],
+  "evaluate_expression": [
+    {
+      "file": "admin_operations.py",
+      "region": "EvaluateExpression",
+      "label": "Evaluate an expression"
+    }
+  ],
+  "get_resource": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetResource",
+      "label": "Get a resource"
+    }
+  ],
+  "get_resource_content": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetResourceContent",
+      "label": "Get resource content"
+    }
+  ],
+  "get_usage_metrics": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetUsageMetrics",
+      "label": "Get usage metrics"
+    }
+  ],
+  "search_message_subscriptions": [
+    {
+      "file": "admin_operations.py",
+      "region": "SearchMessageSubscriptions",
+      "label": "Search message subscriptions"
+    }
+  ],
+  "search_correlated_message_subscriptions": [
+    {
+      "file": "admin_operations.py",
+      "region": "SearchCorrelatedMessageSubscriptions",
+      "label": "Search correlated message subscriptions"
+    }
+  ],
+  "get_audit_log": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetAuditLog",
+      "label": "Get an audit log entry"
+    }
+  ],
+  "search_audit_logs": [
+    {
+      "file": "admin_operations.py",
+      "region": "SearchAuditLogs",
+      "label": "Search audit logs"
+    }
+  ],
+  "get_process_instance_statistics_by_error": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetProcessInstanceStatisticsByError",
+      "label": "Get instance statistics by error"
+    }
+  ],
+  "get_process_instance_statistics_by_definition": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetProcessInstanceStatisticsByDefinition",
+      "label": "Get instance statistics by definition"
+    }
+  ],
+  "get_job_error_statistics": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetJobErrorStatistics",
+      "label": "Get job error statistics"
+    }
+  ],
+  "get_job_time_series_statistics": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetJobTimeSeriesStatistics",
+      "label": "Get job time series statistics"
+    }
+  ],
+  "get_job_type_statistics": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetJobTypeStatistics",
+      "label": "Get job type statistics"
+    }
+  ],
+  "get_job_worker_statistics": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetJobWorkerStatistics",
+      "label": "Get job worker statistics"
+    }
+  ],
+  "get_global_job_statistics": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetGlobalJobStatistics",
+      "label": "Get global job statistics"
+    }
+  ]
+}

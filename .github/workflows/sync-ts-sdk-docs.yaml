@@ -30,7 +30,11 @@ jobs:
         run: |
           VERSION="${{ github.event.inputs.docs_version }}"
           if [ -n "$VERSION" ]; then
-            echo "sdk_ref=stable/${VERSION}" >> "$GITHUB_OUTPUT"
+            if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+$'; then
+              echo "::error::docs_version must be in X.Y format (e.g. '8.9'), got: '$VERSION'"
+              exit 1
+            fi
+            echo "sdk_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
             echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
             echo "pr_branch=update-ts-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
@@ -65,11 +69,16 @@ jobs:
 
       - name: Copy SDK examples for code samples
         run: |
-          EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-js/examples"
+          VERSION="${{ github.event.inputs.docs_version }}"
+          if [ -n "$VERSION" ]; then
+            EXAMPLES_TARGET="docs/.sdk-repos/version-${VERSION}/orchestration-cluster-api-js/examples"
+          else
+            EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-js/examples"
+          fi
           rm -rf "$EXAMPLES_TARGET"
           mkdir -p "$EXAMPLES_TARGET"
           cp -R ts-sdk/examples/* "$EXAMPLES_TARGET/"
-          echo "Copied TypeScript SDK examples → .sdk-repos/"
+          echo "Copied TypeScript SDK examples → $EXAMPLES_TARGET"
 
       - name: Build markdown docs
         working-directory: ts-sdk

@@ -32,7 +32,7 @@ Update from 8.6.x to 8.7.x
 
 Update from 8.5.x to 8.6.x
 
-[Release notes](/reference/announcements-release-notes/860/860-release-notes.md) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/)
+[Release notes](https://github.com/camunda/camunda/releases/tag/8.6.0) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/)
 
 ## [Camunda 8.4 to Camunda 8.5](../840-to-850)
 

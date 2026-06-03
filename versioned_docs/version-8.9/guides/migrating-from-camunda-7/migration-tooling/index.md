@@ -7,6 +7,8 @@ description: "Learn about the available migration tools."
 
 Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools.
 
+All migration tools are available as **ready-to-use builds** from the [GitHub releases page](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases). You can download different versions as needed for your migration.
+
 ## Migration tools
 
 Camunda provides the following migration tools:

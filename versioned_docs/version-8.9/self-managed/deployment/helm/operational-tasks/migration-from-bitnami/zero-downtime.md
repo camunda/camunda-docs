@@ -747,7 +747,7 @@ The script checks whether each resource exists before attempting deletion, so it
 <summary>Show details: Cleanup script reference</summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/5-cleanup-bitnami.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/5-cleanup-bitnami.sh
 ```
 
 </details>

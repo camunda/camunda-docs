@@ -13,7 +13,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 | Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
 | ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| 14 April 2026      | 13 October 2027              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -154,6 +154,21 @@ Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using 
 Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test are **forward-compatible** with the Orchestration Cluster, meaning you can upgrade the cluster and clients independently. For example, you can run a client on 8.8 against a cluster on 8.9, see [Client and API compatibility](/reference/public-api.md#client-and-api-compatibility).
 :::
 <br/>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `GET /decision-instances/{decisionEvaluationInstanceKey}` now validates the key format
+
+The [Get decision instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance.api.mdx) endpoint previously returned `404 Not Found` when the `decisionEvaluationInstanceKey` path parameter contained invalid characters that did not match the required pattern `^[0-9]+-[0-9]+$`. The endpoint now correctly returns `400 Bad Request` in this case, while `404 Not Found` is reserved for well-formed keys that do not exist.
+
+**Action:** Update any client code or error handling that relied on receiving `404 Not Found` for malformed keys to also handle `400 Bad Request`.
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -432,6 +447,29 @@ Previously, customers had to handle both empty string and absent/null to determi
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Process Test: Connectors port changed from 8085 to 8086
+
+Starting with Camunda 8.9.1, the default Connectors REST API port for Camunda Process Test remote runtime has changed from 8085 to 8086.
+
+This change aligns with Camunda 8 Run, which exposes Connectors on port 8086 as of version 8.9.1. The previous default port 8085 would break inbound connector invocations when running tests against Camunda 8 Run.
+
+**Action:** If you use Camunda Process Test with remote runtime configuration:
+
+- Update your `connectors-rest-api-address` configuration to use port 8086 instead of 8085.
+- If you explicitly configured port 8085 in your test configuration, update it to 8086.
+- If you rely on the default configuration, no action is needed—the default is now 8086.
+
+<p className="link-arrow">[Camunda Process Test configuration](/apis-tools/testing/configuration.md#remote-runtime)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
@@ -506,7 +544,7 @@ Starting with Camunda 8.9, the environment-based connector secret provider uses 
 **Action:** Choose one of the following options before or during your upgrade:
 
 - Update your secret environment variables to use the `SECRET_` prefix.
-- Configure a custom prefix via `camunda.connector.secret-provider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRET_PROVIDER_ENVIRONMENT_PREFIX`.
+- Configure a custom prefix via `camunda.connector.secretprovider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`.
 - Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
 
 <p className="link-arrow">[connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md#secrets)</p>
@@ -1212,6 +1250,78 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: Operator-based infrastructure
+
+All Self-Managed [reference architectures](https://github.com/camunda/camunda-deployment-references) now use Kubernetes operators (CloudNativePG, ECK, Keycloak operator) instead of embedded Bitnami subcharts for infrastructure services. This applies to AKS, EKS, OpenShift, and Kind deployments.
+
+**Action:** If you follow a reference architecture and currently use Bitnami-managed infrastructure, use the [migration tooling](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) to transition to operator-managed services.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: Generic OIDC replaces Keycloak as default
+
+Reference architectures now use auth overlays with generic OIDC instead of Keycloak by default, enabling flexible identity provider integration.
+
+**Action:** If you deploy using a reference architecture with the default identity provider configuration, review the updated auth overlay settings.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: Amazon ECS on Fargate
+
+A new container-based reference architecture is available for deploying Camunda on AWS ECS with Fargate, without requiring Kubernetes.
+
+<p className="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: AKS RDBMS variant and Kind local development
+
+- A lighter Azure AKS reference architecture using PostgreSQL as secondary storage (no Elasticsearch) with PostgreSQL 17 support is now available.
+- A Kind (Kubernetes in Docker) reference architecture is available for local development and testing.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Reference architectures: OpenShift dual-region with ECK
+
+OpenShift dual-region reference architecture now supports ECK (Elastic Cloud on Kubernetes) operator for Elasticsearch. EKS dual-region also uses the ECK operator, and headless service DNS is now used for initial contact points.
+
+</div>
+</div>
+
 ## Identity
 
 <div className="release-announcement-row">
@@ -1372,6 +1482,36 @@ This enhancement ensures consistency across environments and simplifies setup fo
 Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
 This enhancement aligns Web Modeler's database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: The main process label has been removed from process applications
+
+Starting with Camunda 8.9, the main process label has been removed from process applications in Web Modeler.
+This removes all restrictions previously tied to the main process label, aligning the Web Modeler process application experience with the Desktop Modeler.
+As a result, process applications can now be synced with Git more easily.
+Additionally, users have the freedom to deploy and run any process within a process application, allowing them to design solutions with more than one primary entry point.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Users now have full control over version tags in process applications
+
+Starting with Camunda 8.9, users have full control over the `versionTag` attribute across all resource types in a process application. The `versionTag` is no longer automatically set on the main process XML when creating a process application version.
+Instead, users can set the `versionTag` manually in the properties panel for BPMN, DMN, form, and RPA files, allowing them to choose a `versionTag` for each resource independently.
 
 </div>
 </div>

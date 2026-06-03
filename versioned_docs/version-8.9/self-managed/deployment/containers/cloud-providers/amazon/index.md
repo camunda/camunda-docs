@@ -57,7 +57,7 @@ image: ConfigIcon,
 description: "Configuration reference for the Node ID provider.",
 },
 {
-link: "https://github.com/camunda/camunda-deployment-references/tree/main/aws/containers/ecs-single-region-fargate",
+link: "https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/aws/containers/ecs-single-region-fargate",
 title: "Reference architecture",
 image: ReferenceIcon,
 description: "The ECS single-region (Fargate) reference architecture.",

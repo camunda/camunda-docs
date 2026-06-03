@@ -9,7 +9,7 @@ Before deploying Camunda, create the `camunda-credentials` Kubernetes secret wit
 <details>
 <summary>See the create-identity-secrets.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/local/kubernetes/kind-single-region/procedure/create-identity-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/local/kubernetes/kind-single-region/procedure/create-identity-secrets.sh
 ```
 </details>
 

@@ -40,7 +40,7 @@ Pagination parameters.
 #### sort?
 
 ```ts
-optional sort?: object[];
+optional sort?: UserTaskVariableSearchQuerySortRequest[];
 ```
 
 Sort field criteria.
