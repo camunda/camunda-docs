@@ -964,6 +964,10 @@ For an embedded gateway setup, any gateway property can be passed along to the `
 
 #### zeebe.broker.gateway.multitenancy
 
+:::note
+This section describes configuration for **logical tenants**. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md).
+:::
+
 Multi-tenancy in Zeebe can be configured with the following configuration properties.
 Multi-tenancy is disabled by default.
 Read more [in the multi-tenancy documentation](/components/concepts/multi-tenancy.md).
