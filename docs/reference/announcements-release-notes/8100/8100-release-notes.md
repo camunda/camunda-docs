@@ -55,20 +55,16 @@ The Camunda Agent Development Kit (ADK) is a set of tools for AI coding agents t
 - Run BPMN lint rules against generated diagrams.
 - Scaffold and wire Camunda Process Test (CPT) integration tests.
 
-#### Judge assertions in CPT test cases
+#### Judge assertions in CPT JSON Test Cases
 
-<!-- https://github.com/camunda/camunda/issues/46128 -->
+<!-- https://github.com/camunda/camunda/issues/46462 -->
 
 <div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span></div>
 
-Camunda Process Test (CPT) test cases now support **judge assertions**. With these assertions, an LLM:
+Camunda Process Test (CPT) now supports **judge assertions** in JSON test cases.
 
-1. Interprets your natural-language expectations.
-2. Evaluates an agent's behavior against those expectations.
-3. Reasons about whether those expectations are met.
-4. Provides a verdict, including a confidence score and reasoning.
-
-This pattern is called "LLM-as-a-judge" and is useful for testing AI agent subprocesses where similarity metrics and deterministic "exact match" assertions are insufficient.
+- Define judge assertions using [JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions).
+- Use a preconfigured judge from `camunda-container-runtime.properties` or Spring application properties depending on the test execution context.
 
 #### Processes MCP Server
 
