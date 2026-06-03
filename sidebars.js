@@ -2187,6 +2187,11 @@ module.exports = {
           ],
         },
         {
+          "Multi-tenancy": [
+            "self-managed/concepts/multi-tenancy/physical-tenants",
+          ],
+        },
+        {
           type: "category",
           label: "Audit log",
           link: {

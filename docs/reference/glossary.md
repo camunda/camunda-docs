@@ -122,6 +122,12 @@ See [Zeebe cluster](#zeebe-cluster).
 
 A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
 
+### Cluster-wide operation
+
+An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+
 ### Camunda 8
 
 Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
@@ -395,6 +401,13 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
 
+### Logical tenant
+
+A [logical tenant](#logical-tenant) is an existing, lightweight tenant-ID based multi-tenancy model in Camunda 8. Logical tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other logical tenants. Multiple logical tenants can coexist within a single [Physical Tenant](#physical-tenant).
+
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+
 ## M
 
 ### Management Identity
@@ -411,9 +424,11 @@ Manual tasks are part of [human task orchestration](/guides/getting-started-orch
 
 ### Multi-tenancy
 
-Multi-tenancy allows a single Camunda 8 installation to serve multiple tenants while keeping each tenant's data, configurations, and access logically isolated.
+Multi-tenancy allows a single Camunda 8 installation to serve multiple [logical tenants](#logical-tenant) while keeping each tenant's data, configurations, and access logically isolated. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenant](#physical-tenant).
 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
+- [Logical Tenant](#logical-tenant)
+- [Physical Tenant](#physical-tenant)
 
 ### Message
 
@@ -516,6 +531,14 @@ A process variable represents the execution state (i.e data) of a process instan
 
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
+
+### Physical Tenant
+
+An isolated execution unit within an [Orchestration Cluster](#orchestration-cluster). Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant. Multiple [logical tenants](#logical-tenant) can coexist within a single Physical Tenant.
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Logical Tenant](#logical-tenant)
+- [Multi-tenancy](#multi-tenancy)
 
 ### Project
 
@@ -643,10 +666,18 @@ This way, a [Camunda workflow](#workflow) can receive messages from an external 
 
 ### Tenant
 
-A tenant is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions.
+A [logical tenant](#logical-tenant) is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions. For strong physical isolation, see [Physical Tenant](#physical-tenant).
 
 - [Tenant management](/components/admin/tenant.md)
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
+- [Logical Tenant](#logical-tenant)
+- [Physical Tenant](#physical-tenant)
+
+### Tenant-scoped operation
+
+An operation that targets a specific [Physical Tenant](#physical-tenant), such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
 
 ### Temperature
 
