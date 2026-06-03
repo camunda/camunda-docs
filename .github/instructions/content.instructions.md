@@ -77,4 +77,4 @@ applyTo: "**/*.md"
 
 ## 6. AI-ready content
 
-Camunda docs are a primary input for AI assistants and RAG pipelines. When writing new content or editing existing content, follow `/howtos/ai-ready-guidelines.md` to keep pages reliably extractable by AI tools.
+Camunda docs are a primary input for AI assistants and RAG pipelines. When writing or editing content, follow `/howtos/ai-ready-guidelines.md` to keep pages reliably extractable by AI tools.
