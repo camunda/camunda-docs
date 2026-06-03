@@ -9,6 +9,7 @@ keywords: [ai, mcp, claude, copilot, cursor, agentic]
 import AoGrid from '../../components/react-components/\_ao-card';
 import IconAgenticImg from '../../components/assets/icon-agentic.png';
 import IconConnectorsImg from '../../components/assets/icon-connectors.png';
+import IconPlay from '../../components/assets/icon-play.png';
 import IconAIAgent from '../../components/assets/hero-build-with-ai.png';
 import IconCopilotImg from '../../components/assets/icon-camunda-copilot.png';
 import IconIdpImg from '../../components/assets/icon-idp.png';
@@ -28,13 +29,19 @@ Build Camunda solutions with agentic orchestration and MCP integrations. Connect
 </div>
 </div>
 
-## Orchestrate AI agents
+## Build AI agents
 
-Orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
+Build AI agents that combine the flexibility of AI with the reliability of process orchestration. Embed LLM-powered agents directly in your BPMN processes so they can reason, call tools, and act, from simple task agents to complex multi-agent systems.
 
-Set up and build any enterprise automation pattern, from simple task agents to complex multi-agent systems.
+Orchestrate these agents alongside human tasks, deterministic rule sets, and AI-driven decisions in robust, end-to-end processes.
 
-<AoGrid columns={2} ao={[
+<AoGrid columns={3} ao={[
+{
+link: "../../getting-started-agentic-orchestration/",
+title: "Build your first AI agent",
+image: IconPlay,
+description: "Follow a hands-on guide to build and run your first AI agent in Camunda.",
+},
 {
 link: "../../../components/agentic-orchestration/agentic-orchestration-overview/",
 title: "Agentic orchestration",
