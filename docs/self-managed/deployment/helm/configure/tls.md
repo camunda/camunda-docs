@@ -15,14 +15,14 @@ This guide describes how to enable TLS for Camunda 8 Self-Managed component conn
 
 ## What's covered
 
-| Connection | Status | Mechanism |
-| --- | :---: | --- |
-| Camunda components → Elasticsearch (private CA, self-hosted or AWS) | ✅ | `global.tls.caBundle` |
-| Camunda components → OpenSearch (private CA, self-hosted or AWS-managed) | ✅ | `global.tls.caBundle` |
-| Camunda components → PostgreSQL JDBC (`sslmode=verify-full` + CA) | ✅ | `global.tls.caBundle` + JDBC URL |
-| Camunda components → external OIDC issuer with private CA (Entra, Okta, internal Keycloak) | ✅ | `global.tls.caBundle` |
-| Browser / external client → ingress / GatewayAPI (UI, gRPC) | ✅ | Standard Kubernetes ingress TLS — configured separately via per-component `*.ingress.tls` or `global.gateway.tls`, **not** via `global.tls.caBundle`. See the [Helm chart ingress configuration](https://docs.camunda.io/docs/self-managed/deployment/helm/configure/) reference. |
-| In-cluster pod-to-pod transport (Operate ↔ Zeebe gateway, Connectors ↔ gateway, etc.) | ❌ | Requires a service mesh (Linkerd, Istio, Cilium) |
+| Connection                                                                                 | Status | Mechanism                                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------ | :----: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda components → Elasticsearch (private CA, self-hosted or AWS)                        |   ✅   | `global.tls.caBundle`                                                                                                                                                                                                                                                             |
+| Camunda components → OpenSearch (private CA, self-hosted or AWS-managed)                   |   ✅   | `global.tls.caBundle`                                                                                                                                                                                                                                                             |
+| Camunda components → PostgreSQL JDBC (`sslmode=verify-full` + CA)                          |   ✅   | `global.tls.caBundle` + JDBC URL                                                                                                                                                                                                                                                  |
+| Camunda components → external OIDC issuer with private CA (Entra, Okta, internal Keycloak) |   ✅   | `global.tls.caBundle`                                                                                                                                                                                                                                                             |
+| Browser / external client → ingress / GatewayAPI (UI, gRPC)                                |   ✅   | Standard Kubernetes ingress TLS — configured separately via per-component `*.ingress.tls` or `global.gateway.tls`, **not** via `global.tls.caBundle`. See the [Helm chart ingress configuration](https://docs.camunda.io/docs/self-managed/deployment/helm/configure/) reference. |
+| In-cluster pod-to-pod transport (Operate ↔ Zeebe gateway, Connectors ↔ gateway, etc.)      |   ❌   | Requires a service mesh (Linkerd, Istio, Cilium)                                                                                                                                                                                                                                  |
 
 This boundary — chart-supported component-to-datastore TLS and external edges, with in-cluster transport delegated to a service mesh — is the explicit scope of the chart-level TLS deliverable.
 
@@ -32,11 +32,11 @@ This boundary — chart-supported component-to-datastore TLS and external edges,
 
 Camunda components are split between two trust ecosystems with incompatible expectations:
 
-| World | Examples | Trust input format |
-| --- | --- | --- |
-| OS / OpenSSL native | libcurl in init scripts, Go's `crypto/x509`, the OpenSearch native client (post-8.6.7), PostgreSQL JDBC's `sslrootcert=` flag | PEM (text), via `SSL_CERT_FILE` / file path |
-| JVM | Operate, Tasklist, Optimize, Web Modeler restapi, Identity, Connectors, Zeebe broker | **Keystore** (binary PKCS12 or JKS), via `-Djavax.net.ssl.trustStore=…` |
-| Node.js | Console, Web Modeler websockets | PEM, via `NODE_EXTRA_CA_CERTS` |
+| World               | Examples                                                                                                                      | Trust input format                                                      |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| OS / OpenSSL native | libcurl in init scripts, Go's `crypto/x509`, the OpenSearch native client (post-8.6.7), PostgreSQL JDBC's `sslrootcert=` flag | PEM (text), via `SSL_CERT_FILE` / file path                             |
+| JVM                 | Operate, Tasklist, Optimize, Web Modeler restapi, Identity, Connectors, Zeebe broker                                          | **Keystore** (binary PKCS12 or JKS), via `-Djavax.net.ssl.trustStore=…` |
+| Node.js             | Console, Web Modeler websockets                                                                                               | PEM, via `NODE_EXTRA_CA_CERTS`                                          |
 
 The JVM **does not read PEM bundles** — `-Djavax.net.ssl.trustStore=` only accepts a binary keystore (PKCS12 or JKS). So historically, customers wanting Java to trust a private CA had to:
 
@@ -54,10 +54,11 @@ The `values-tls.yaml` overlay wires a single user-supplied CA bundle through eve
 1. The PEM bundle is mounted at `/etc/camunda/tls/ca.crt` (read-only).
 2. `SSL_CERT_FILE=/etc/camunda/tls/ca.crt` and `NODE_EXTRA_CA_CERTS=/etc/camunda/tls/ca.crt` are set on every component. `SSL_CERT_FILE` is picked up by OpenSSL-linked libraries (libcurl, Go's `crypto/x509` on Linux, the post-8.6.7 OpenSearch native client). `NODE_EXTRA_CA_CERTS` is picked up by Node.js components (Console, Web Modeler websockets).
 3. A dedicated init container per Java component **builds the keystore the JVM will read**:
-   - Copies `$JAVA_HOME/lib/security/cacerts` (the JDK's own truststore — PKCS12 format on Java 21, contains all public/well-known CAs) into a shared `emptyDir`.
-   - Runs `keytool -importcert -keystore <copied cacerts> -file /etc/camunda/tls/ca.crt -alias camunda-user-ca` to **append the user CA** to the copy.
-   - Result: a PKCS12 truststore at `/var/camunda/tls-truststore/cacerts` containing **public CAs + your CA**. Public-CA endpoints (cloud APIs, public-CA OIDC) keep working alongside your private CA.
-   - The truststore is rebuilt fresh on every pod start — CA rotation is just "replace the Secret + `kubectl rollout restart`", no stale keystore baggage.
+   - It runs the **component's own image** (the one already pulled for that pod), so air-gapped installs need no extra mirrored image. It locates the JRE through `$JAVA_HOME` (falling back to the location of `keytool` on the `PATH`) and copies that JRE's `cacerts` into a shared `emptyDir`. This is the JDK's own truststore, PKCS12 on Java 21, containing all public and well-known CAs plus any baked into a custom image. Set `global.tls.caBundle.image` only if a component image lacks `keytool`.
+   - It splits the PEM bundle into individual certificates and runs `keytool -importcert` for **each** one under its own alias (`camunda-user-ca-1`, `camunda-user-ca-2`, and so on), so a concatenated root and intermediate chain is imported in full rather than silently truncated to the first certificate.
+   - The result is a PKCS12 truststore at `/var/camunda/tls-truststore/cacerts` containing the public CAs plus your CAs. Public-CA endpoints such as cloud APIs and public-CA OIDC keep working alongside your private CA.
+   - The truststore is rebuilt fresh on every pod start, so CA rotation carries no stale keystore baggage. See [Updating the CA](#updating-the-ca).
+   - The init container's `securityContext` runs as non-root with a read-only root filesystem and dropped capabilities. It's routed through the chart's OpenShift compatibility helper, so `global.compatibility.openshift.adaptSecurityContext` drops the fixed UID for the restricted SCC.
 4. `JAVA_TOOL_OPTIONS` is prepended with `-Djavax.net.ssl.trustStore=/var/camunda/tls-truststore/cacerts -Djavax.net.ssl.trustStorePassword=changeit`. The chart deliberately does **not** set `-Djavax.net.ssl.trustStoreType` because the JVM default (PKCS12 on Java 21) matches the truststore the init container produces. JVM HTTP clients (Apache `httpcore5`, the `OperateOpenSearchConnector`, PostgreSQL JDBC) automatically trust the user CA.
 
 :::caution `SSL_CERT_FILE` replaces the system bundle
@@ -126,6 +127,7 @@ kubectl -n "$NAMESPACE" get pod -l app.kubernetes.io/component=zeebe-broker -o y
 ```
 
 Expected:
+
 - `SSL_CERT_FILE: /etc/camunda/tls/ca.crt`
 - `JAVA_TOOL_OPTIONS` containing `-Djavax.net.ssl.trustStore=/var/camunda/tls-truststore/cacerts`
 - A `ca-bundle` volume sourced from `camunda-ca-bundle`
@@ -191,7 +193,7 @@ optimize:
     opensearch:
       enabled: true
       aws:
-        enabled: false   # set true + remove auth.* for IRSA against AWS-managed OpenSearch
+        enabled: false # set true + remove auth.* for IRSA against AWS-managed OpenSearch
       url:
         protocol: https
         host: "your-opensearch.example.com"
@@ -231,9 +233,9 @@ global:
   identity:
     auth:
       issuerBackendUrl: "https://your-idp.example.com/realms/camunda"
-      tokenUrl:         "https://your-idp.example.com/realms/camunda/protocol/openid-connect/token"
-      jwksUrl:          "https://your-idp.example.com/realms/camunda/protocol/openid-connect/certs"
-      authUrl:          "https://your-idp.example.com/realms/camunda/protocol/openid-connect/auth"
+      tokenUrl: "https://your-idp.example.com/realms/camunda/protocol/openid-connect/token"
+      jwksUrl: "https://your-idp.example.com/realms/camunda/protocol/openid-connect/certs"
+      authUrl: "https://your-idp.example.com/realms/camunda/protocol/openid-connect/auth"
 ```
 
 ## cert-manager integration
@@ -268,6 +270,14 @@ Two important boundaries:
 
 :::
 
+## Install-time guardrails
+
+When `global.tls.caBundle` is set, the chart emits warnings in the Helm `NOTES.txt` output (shown after `helm install` or `helm upgrade`) for the configurations most likely to defeat the trust setup silently. Read them after each deploy:
+
+- **A per-component JKS truststore overrides the CA bundle.** If a component also has a legacy `tls.secret` JKS configured, the JKS wins for that component and the bundle is ignored there. Remove the per-component `tls.secret` to switch to the bundle.
+- **The bundle is trust, not encryption.** `global.tls.caBundle` adds CA trust but does not turn a plaintext connection into TLS. If the bundle is set while a datastore URL is still `http://`, the warning flags the connection is unencrypted. Point the URL at `https://` (or set the JDBC `sslmode`) to actually encrypt the traffic.
+- **A component `env` entry for `JAVA_TOOL_OPTIONS` strips the truststore flags.** Kubernetes keeps the last duplicate environment variable, so setting `JAVA_TOOL_OPTIONS` through a component's `env` overrides the chart's truststore flags and breaks JVM trust. Include `-Djavax.net.ssl.trustStore=/var/camunda/tls-truststore/cacerts -Djavax.net.ssl.trustStorePassword=changeit` in your value, or use the component's `javaOpts` value where it exists (orchestration, optimize, Web Modeler restapi), which the chart appends to.
+
 ## Verify no plaintext fallback
 
 A small regression check ships with the Helm chart that scans pod env vars in a namespace and fails if any URL points at a known datastore service over plain HTTP, or if any `jdbc:postgresql://` URL omits TLS. The script lives in `camunda-platform-helm`, not in this docs repo — fetch it from the chart repo before running:
@@ -301,6 +311,24 @@ kubectl -n "$NAMESPACE" rollout restart \
 ```
 
 The init container re-runs on each pod start and imports the new CA into a fresh truststore. Apply (rather than delete + create) avoids a window where the Secret does not exist; any pod evicted, OOM-killed, or rescheduled in that window would otherwise hit `CreateContainerConfigError`.
+
+### Automatic rollout on `helm upgrade`
+
+If you manage the release with Helm, you don't need the manual `rollout restart`. The chart stamps a `checksum/ca-bundle` annotation on the Java pods, derived from the CA Secret's contents, so the next `helm upgrade` rolls those pods automatically when the CA changes:
+
+```bash
+kubectl -n "$NAMESPACE" create secret generic camunda-ca-bundle \
+  --from-file=ca.crt=./new-ca-bundle.pem \
+  --dry-run=client -o yaml | kubectl -n "$NAMESPACE" apply -f -
+
+helm upgrade --install camunda camunda/camunda-platform \
+  --namespace "$NAMESPACE" -f values-tls.yaml -f your-values.yaml
+```
+
+The checksum is read from the live Secret through Helm's `lookup` function, which only has cluster access during a real `helm upgrade`. Two consequences:
+
+- A raw `kubectl edit secret` (no `helm upgrade`) does not trigger the rollout. Use the manual `rollout restart` above instead.
+- GitOps tools that render with `helm template` (Argo CD, Flux) have no `lookup` access, so the annotation stays constant and the rollout does not fire on rotation. Drive the restart from your GitOps stack instead, for example an Argo CD `PostSync` hook or a Flux `kustomize` patch that rolls the Java workloads when the CA Secret changes.
 
 ## Legacy: per-component JKS truststore (deprecated)
 
