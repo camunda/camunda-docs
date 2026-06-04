@@ -59,7 +59,7 @@ Covers Zeebe, Operate, Tasklist, and Optimize. Back up and restore with no downt
 
 ### Relational databases (RDBMS)
 
-This is the **first phase of new backup capabilities** enabled by using an RDBMS as secondary storage. It covers Zeebe, Operate, and Tasklist. Identity and Optimize are not included. If you deploy Optimize alongside an RDBMS-backed Orchestration Cluster, back up Optimize independently using the [standalone Optimize backup procedure](./optimize-backup-and-restore.md).
+This is the **first phase of new backup capabilities** enabled by using an RDBMS as secondary storage. It covers Zeebe, Operate, Admin(Identity) and Tasklist. Management Identity and Optimize are not included. If you deploy Optimize alongside an RDBMS-backed Orchestration Cluster, back up Optimize independently using the [standalone Optimize backup procedure](./optimize-backup-and-restore.md).
 
 Using an RDBMS as secondary storage unlocks three new capabilities not available in the Elasticsearch / OpenSearch path:
 

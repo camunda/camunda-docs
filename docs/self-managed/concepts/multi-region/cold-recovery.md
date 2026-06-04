@@ -17,11 +17,11 @@ Cold Recovery is suited for development and staging environments, low-criticalit
 | ----------------------------------- | ------------------------------------------------ |
 | **RTO**                             | ~1–4 hours (operator and environment dependent)  |
 | **RPO**                             | 15 minutes – 4 hours (backup-interval dependent) |
-| **Failover mode**                   | Manual, human-initiated                          |
+| **Failover mode**                   | Manual, operator-initiated                       |
 | **Standing second region required** | No — restore into a newly provisioned region     |
 
 :::important
-Cold Recovery RTO and RPO are **not engine-guaranteed**. Recovery time depends on data volume, backup frequency, operator familiarity with the restore procedure, and the speed at which a secondary region can be provisioned. Treat the ranges above as planning targets, not contractual commitments.
+Cold Recovery RTO and RPO is time depend on data volume, backup frequency, operator familiarity with the restore procedure, and the speed at which a secondary region can be provisioned. Treat the ranges above as planning targets, not contractual commitments.
 :::
 
 ## Architecture overview
@@ -83,12 +83,12 @@ For configuration instructions and scheduling guidance, see the [Backup and rest
 When the primary region fails, Cold Recovery follows this sequence:
 
 1. **Detect and declare** — Confirm the primary region is unavailable and initiate the recovery process.
-2. **Provision** — Spin up a new Camunda environment in the secondary region (or activate a pre-provisioned standby if one exists).
+2. **Fence the old region** — Before redirecting traffic, ensure the original region's cluster, job workers, and connectors are stopped or otherwise prevented from acting (see [Fencing the 3. **Provision** — Spin up a new Camunda environment in the secondary region (or activate a pre-provisioned standby if one exists).
 3. **Select restore point** — Identify the most recent complete, consistent backup set from the replica S3 bucket.
 4. **Restore Camunda Orchestration cluster** — Follow the [Restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 5. **Start and verify** — Deploy the Orchestration Cluster against the restored data and confirm health before routing traffic.
-6. **Fence the old region** — Before redirecting traffic, ensure the original region's cluster, job workers, and connectors are stopped or otherwise prevented from acting (see [Fencing the old region](#fencing-the-old-region)).
-7. **Redirect traffic** — Update applications, DNS or load balancer configuration to point production traffic at the secondary region.
+   old region](#fencing-the-old-region)).
+6. **Redirect traffic** — Update applications, DNS or load balancer configuration to point production traffic at the secondary region.
 
 The total elapsed time across all these steps is the realized RTO. For step-by-step restore instructions, see the [Backup and restore guides](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
