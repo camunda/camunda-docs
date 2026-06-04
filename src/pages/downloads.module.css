@@ -3,6 +3,28 @@
 /* Downloads-specific styles. Shared page/hero/section/card styles
    are imported from build-with-camunda.module.css in downloads.js. */
 
+/* ─── Hero background download icon ─── */
+.heroBgIcon {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-45%);
+  width: 220px;
+  height: 220px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .heroBgIcon {
+    width: 180px;
+    height: 180px;
+    left: 4%;
+  }
+}
+
 /* ─── CLI icon wrapper (matches 72px footprint of Docker/K8s icons) ─── */
 .cliIconWrap {
   width: 72px;
