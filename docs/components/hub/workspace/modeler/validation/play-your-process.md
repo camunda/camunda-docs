@@ -57,11 +57,11 @@ Click a **start event** to configure how the process should start in the **Confi
 
 To prefill example data, define it in the **Example data** section of the start event in **Implement** mode. See [data handling](/components/modeler/data-handling.md) for details.
 
-### Define a test segment
+## Define a test segment
 
 By default, execution starts from the process start event and runs to natural completion. To focus on a specific part of your process, define a segment with a custom start and end boundary in the **Configure Scenario** panel.
 
-#### Start boundary
+### Start boundary
 
 The start boundary defaults to the process start event. To change it:
 
@@ -72,9 +72,9 @@ Elements before the start boundary are not activated and do not appear in the in
 
 The same element type restrictions apply as for [**Add token** modifications](#modifications-limitations). Clicking a non-activatable element in picking mode has no effect.
 
-**Publish message** and **Broadcast signal** elements don't support segment boundaries — selecting either as a start disables the end boundary and the process runs to natural completion.
+**Publish message** and **Broadcast signal** elements don't support segment boundaries. If you select either as the start boundary, you can't select an end boundary, and the process runs until it reaches the end node naturally reached from that selected start event.
 
-#### End boundary
+### End boundary
 
 The end boundary defaults to the first end event. To change it:
 
@@ -83,7 +83,7 @@ The end boundary defaults to the first end event. To change it:
 
 When an end boundary is set, the process instance terminates after that element completes. Elements after it are not activated and do not appear in the instance history.
 
-#### Canvas click cycle
+### Canvas click cycle
 
 Once both boundaries are set, canvas clicks cycle automatically: the first click sets a new start boundary and clears the end; the second click sets the new end boundary. To update only one boundary at a time, click its row in the panel — the next canvas click updates only that boundary.
 
