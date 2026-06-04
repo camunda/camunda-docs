@@ -23,7 +23,7 @@ Key benefits:
 - **No LLM account setup required.** You don't need to sign up with a model provider or configure credentials to start exploring AI agents.
 - **Compare different LLM providers.** Run your agent with different models and easily switch between them to find the best fit for your use case.
 - **No surprise bills.** Your organization gets a free, preconfigured budget for testing and experimentation.
-- **Instant blueprints.** AI agent blueprints that use Camunda-provided LLM work out of the box — deploy and run with no configuration needed.
+- **Instant blueprints.** AI agent blueprints that use Camunda-provided LLM work out of the box with no configuration needed.
 - **Seamless transition.** When you're ready for production, switch to a customer-managed provider like AWS Bedrock without changing your process architecture.
 
 Camunda-provided LLM is available in Camunda SaaS for:
@@ -107,7 +107,7 @@ If your process model doesn’t handle LLM failures, an exhausted budget may res
 The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Console shows usage statistics for Camunda-provided LLM, including:
 
 - How much of your budget has been used.
-- What is the available budget remaining.
+- How much budget remains.
 
 Use this data to plan your transition to a customer-managed provider when you're ready for production.
 
@@ -133,4 +133,4 @@ To switch away, follow these steps:
 3. Re-deploy your process.
 4. Test a process instance end-to-end and verify results.
 
-Your orchestration model doesn't change during this transition. The BPMN process, event choreography, and human touchpoints you designed with Camunda-provided LLM carry forward unchanged — only the LLM backend configuration shifts.
+Your orchestration model doesn’t change during this transition. The BPMN process, event choreography, and human touchpoints you designed with Camunda-provided LLM carry forward unchanged, while only the LLM backend configuration shifts.
