@@ -10,11 +10,13 @@ Learn how to recover recently deleted files before they're permanently removed.
 
 When you delete a file, it's removed from the project and moved to **Recently deleted**. You have 30 days to restore it before it's permanently deleted.
 
+## Permanent deletion in Camunda Hub
+
+Permanent deletion occurs 30 days after a file is deleted. This removes all associated data, including file content, version history, metadata, and git linkage.
+
 ### Restore permissions
 
-Only users with **edit** or **admin** access to the project at the time of the restore action. The role at the time of the original deletion is not considered.
-
-Permanent deletion removes all associated data, including file content, version history, metadata, and git linkage.
+Only users with project-level **edit** or **admin** access at the time of the restore, may restore a recently-deleted file. The role at the time of the original deletion is not considered.
 
 ## Browse recently-deleted files
 
