@@ -661,6 +661,21 @@ No valid post-logout redirect URL found in session, falling back to default: '/'
 
 Ensure that the post-logout redirect URL (`<camunda-host>/post-logout`) is registered in your IdP configuration.
 
+#### IdP `end_session_endpoint` not available
+
+If RP-initiated logout is enabled but the IdP does not expose an `end_session_endpoint`, the local Orchestration Cluster session is terminated and the following message is displayed:
+
+```
+The identity provider's end_session_endpoint is not available. The local session has been terminated, but the IdP session will still be active.
+```
+
+The user is signed out of Camunda, but their IdP session remains active.
+
+To resolve this:
+
+- Verify that your IdP supports RP-initiated logout and exposes an `end_session_endpoint`.
+- If your IdP does not support RP-initiated logout, disable it by setting `idp-logout-enabled` to `false`.
+
 ## Further resources
 
 - [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)

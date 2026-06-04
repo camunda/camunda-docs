@@ -143,7 +143,7 @@ values={[
 
 <TabItem value="version-8-7-x">
 
-From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the exact same `minor` and `patch` level to ensure compatibility.
+From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on the exact same `minor` and `patch` level to ensure compatibility.
 
 | Design                                        | Automate                                                                                                | Improve        |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------- |

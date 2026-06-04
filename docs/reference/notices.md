@@ -21,6 +21,36 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 49
+
+### Publication date
+
+June 4, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `undertow-core` used by Camunda Web Modeler was affected by the following vulnerabilities:
+
+- [CVE-2026-28369](https://nvd.nist.gov/vuln/detail/CVE-2026-28369)
+- [CVE-2026-28368](https://nvd.nist.gov/vuln/detail/CVE-2026-28368)
+- [CVE-2026-28367](https://nvd.nist.gov/vuln/detail/CVE-2026-28367)
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.14, or ≤ 8.7.21
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.15, 8.7.22
+
 ## Notice 48
 
 ### Publication date
@@ -1147,7 +1177,7 @@ The Tasklist REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthent
 - POST /v1/forms/\{formId}
 - POST /v1/variables/\{variableId}
 
-Find more information about the methods in our [Tasklist REST API documentation](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
+Find more information about the methods in our [Tasklist REST API documentation](/versioned_docs/version-8.9/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 
 Therefore, if you use Tasklist 8.2.0 or 8.2.1, and if you have sensible data stored in process variables (accessed by user tasks), this data could have been accessed by users knowing the endpoint of the Tasklist instance without authentication.
 
