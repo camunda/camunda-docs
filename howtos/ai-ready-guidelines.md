@@ -6,7 +6,7 @@ It supplements the [Camunda style guide](technical-writing-styleguide.md) and th
 
 ### 1. Start each page and section with a direct answer
 
-The first sentence under any heading (including the H1) should directly answer "what is this?" or "what does this section/page do?" in one quotable line.
+The first sentence under any heading (including the H1) should be quotable and directly answer "what is this?" or "what does this section/page do?".
 
 Aim for one self-contained sentence, ideally under 25 words / ~150 characters. Agents extract the first sentences after a heading; that's what gets cited and indexed.
 
@@ -48,27 +48,7 @@ Agents can't perform optical character recognition. If the only place a binding 
 - For every diagram, include a short prose description of what it shows.
 - For every screenshot of a UI form, include the field names and their values inline in the text before or after the image.
 
-### 7. Never put critical information only inside a tab
-
-Agents typically see only the active tab when a page is rendered, and Markdown-export pipelines often serialize only the default tab. Content inside non-default tabs becomes invisible.
-
-If prerequisites or steps differ by environment or programming language, list both flat in the page body, clearly labeled. For example:
-
-```markdown
-## Prerequisites
-
-**For SaaS:**
-
-- A Camunda 8 SaaS account.
-- ...
-
-**For Self-Managed:**
-
-- A running Self-Managed installation.
-- ...
-```
-
-### 8. Keep code blocks complete and self-contained
+### 7. Keep code blocks complete and self-contained
 
 - Always close fences (` ``` `).
 - Include the language tag (` ```yaml `, ` ```java `, ` ```bash `).
