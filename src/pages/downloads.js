@@ -704,7 +704,7 @@ function Downloads() {
           className={clsx(
             bwcStyles.moreSection,
             bwcStyles.darkSection,
-            styles.lastSectionSpaced
+            bwcStyles.noTopBorder
           )}
         >
           <div className="container">
@@ -778,6 +778,37 @@ function Downloads() {
                   Deploy to any Kubernetes cluster with the official Camunda
                   Helm chart.
                 </p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── Start building CTA ─── */}
+        <section
+          className={clsx(
+            bwcStyles.moreSection,
+            bwcStyles.darkSection,
+            bwcStyles.exploreSectionLast,
+            bwcStyles.noTopBorder,
+            styles.lastSectionSpaced
+          )}
+          style={{ paddingTop: "2rem", paddingBottom: "8rem" }}
+        >
+          <div className="container">
+            <div className={bwcStyles.sectionHeader}>
+              <h2 className={bwcStyles.sectionTitle}>
+                Start building with Camunda
+              </h2>
+              <p className={bwcStyles.sectionSub}>
+                Get started with a running workflow in minutes.
+              </p>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Link
+                to={useBaseUrl("/build-with-camunda")}
+                className={bwcStyles.heroCardCtaAlt}
+              >
+                Start building <ExternalLinkIcon />
               </Link>
             </div>
           </div>

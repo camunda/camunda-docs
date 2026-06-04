@@ -44,6 +44,17 @@
   text-decoration: none !important;
 }
 
+[data-theme="dark"] .browseMoreButton {
+  border-color: #ffffff;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .browseMoreButton:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+  color: #ffffff !important;
+}
+
 /* ─── Last section: gradient bg + extra bottom space ─── */
 .lastSectionSpaced {
   padding-bottom: 8rem !important;
