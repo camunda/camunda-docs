@@ -641,7 +641,7 @@ function BuildWithCamunda() {
   return (
     <Layout
       title="Build with Camunda"
-      description="Process orchestration for developers. Go from zero to a running workflow in minutes."
+      description="Process orchestration for users. Go from zero to a running workflow in minutes."
     >
       <div className={styles.page}>
         {/* ─── Hero: Start from your terminal ─── */}

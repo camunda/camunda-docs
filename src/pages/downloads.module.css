@@ -1,0 +1,201 @@
+/* stylelint-disable docusaurus/copyright-header */
+
+/* Downloads-specific styles. Shared page/hero/section/card styles
+   are imported from build-with-camunda.module.css in downloads.js. */
+
+/* ─── Hero (minimal override for padding) ─── */
+.heroSection {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 0 4rem;
+  max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 1rem 0 2.5rem;
+  }
+}
+
+/* ─── OS Tabs ─── */
+.osTabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin: 0 auto 2.5rem;
+  border-bottom: 2px solid var(--card-border);
+  max-width: 400px;
+}
+
+.osTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.2rem;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: var(--muted-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+  margin-bottom: -2px;
+}
+
+.osTab:hover {
+  color: var(--card-hover-border);
+}
+
+.osTabActive {
+  color: var(--card-hover-border);
+  border-bottom-color: var(--card-hover-border);
+}
+
+/* ─── Downloads grid ─── */
+.downloadsSection {
+  padding-top: 3rem !important;
+  padding-bottom: 4rem !important;
+}
+
+/* ─── Download card ─── */
+.downloadCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  transition: all 0.25s;
+}
+
+.downloadCard:hover {
+  border-color: var(--card-hover-border);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px var(--card-hover-shadow);
+}
+
+.downloadCardFeatured {
+  border-color: var(--card-hover-border);
+  padding-top: 2.5rem;
+}
+
+.downloadCardFeatured:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 12px 32px var(--card-hover-shadow);
+}
+
+.downloadCardIcon {
+  margin-bottom: 0.75rem;
+}
+
+.downloadCardIcon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.downloadCardDesc {
+  font-size: 0.88rem;
+  color: var(--muted-color);
+  line-height: 1.5;
+  margin: 0 0 1rem;
+  flex: 1;
+}
+
+.downloadCardMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.downloadCardVersion {
+  display: inline-block;
+  padding: 0.15em 0.55em;
+  border-radius: 999px;
+  background: var(--inline-code-bg);
+  color: var(--inline-code-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.downloadCardDate {
+  font-size: 0.8rem;
+  color: var(--muted-color);
+}
+
+.downloadCardLinks {
+  margin-bottom: 0.75rem;
+}
+
+.downloadCardLabel {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-color);
+  margin-bottom: 0.4rem;
+}
+
+.downloadCardButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.dlButtonExperimental {
+  background: var(--ifm-color-emphasis-600);
+  color: #ffffff !important;
+}
+
+.dlButtonExperimental:hover {
+  background: var(--ifm-color-emphasis-700);
+  color: #ffffff !important;
+}
+
+.experimentalToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--muted-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 0.4rem;
+  transition: color 0.15s;
+}
+
+.experimentalToggle:hover {
+  color: var(--card-hover-border);
+}
+
+.experimentalToggleIcon {
+  font-size: 0.7rem;
+}
+
+.downloadCardFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.downloadCardFooterLink {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--card-hover-border) !important;
+  text-decoration: none !important;
+}
+
+.downloadCardFooterLink:hover {
+  text-decoration: underline !important;
+}
