@@ -19,6 +19,36 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 49
+
+### Publication date
+
+June 4, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `undertow-core` used by Camunda Web Modeler was affected by the following vulnerabilities:
+
+- [CVE-2026-28369](https://nvd.nist.gov/vuln/detail/CVE-2026-28369)
+- [CVE-2026-28368](https://nvd.nist.gov/vuln/detail/CVE-2026-28368)
+- [CVE-2026-28367](https://nvd.nist.gov/vuln/detail/CVE-2026-28367)
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.14, or ≤ 8.7.21
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.15, 8.7.22
+
 ## Notice 48
 
 ### Publication date
