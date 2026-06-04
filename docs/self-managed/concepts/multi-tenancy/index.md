@@ -17,7 +17,7 @@ Choose the model that best fits your isolation requirements and operational cons
 
 | Aspect                     | Logical Tenant                   | Physical Tenant                         | Multi-Cluster                             |
 | -------------------------- | -------------------------------- | --------------------------------------- | ----------------------------------------- |
-| **Isolation**              | Logical only                     | Physical (data and compute)             | Full physical isolation                   |
+| **Isolation**              | Logical only                     | Strong physical data isolation          | Full physical isolation                   |
 | **Data sharing**           | Single shared database           | Separate data per tenant                | Separate per cluster                      |
 | **Backup/restore**         | Cluster-level only               | Independent per tenant                  | Independent per cluster                   |
 | **Cost**                   | Most efficient                   | Balanced                                | Most expensive                            |
@@ -34,7 +34,7 @@ Best for: Departments or teams within the same organization with low-risk separa
 
 ## Physical Tenants
 
-**Strong physical isolation within a single cluster** with separate data storage, independent operations, and no runtime interference between tenants. Each Physical Tenant acts like a self-contained mini-cluster.
+**Strong physical data isolation within a single cluster** with separate data storage and independent operations per tenant. Physical Tenants still share cluster compute resources such as CPU and memory, so runtime interference is reduced but not fully eliminated.
 
 Best for: Multiple teams or organizations needing strong isolation without the cost and complexity of separate clusters.
 
