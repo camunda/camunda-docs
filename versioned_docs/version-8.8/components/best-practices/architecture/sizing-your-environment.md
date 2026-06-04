@@ -61,6 +61,7 @@ Optimize is an optional component that provides process analytics and reporting.
 - Use variable filtering to reduce the amount of data exported/imported by Optimize.
 - Tune retention periods: shorter retention means less data in ES, and better performance.
 - Disable variable import entirely if variables are not needed in Optimize reports.
+- To increase Optimize import throughput, raise `CAMUNDA_OPTIMIZE_ZEEBE_MAX_IMPORT_PAGE_SIZE` so each import cycle fetches more exported records. This helps Optimize keep pace under high load and reduces import lag, at the cost of higher memory use per fetch.
 
 The sizing guidance for [Self-Managed](sizing-self-managed.md#baseline-resource-configuration) provides configurations with and without Optimize to help you plan accordingly.
 
