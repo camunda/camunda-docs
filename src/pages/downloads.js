@@ -5,6 +5,8 @@ import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import bwcStyles from "./build-with-camunda.module.css";
 import styles from "./downloads.module.css";
+import K8sSvgIcon from "../components/CamundaSelfManaged/icons/kubernetes.svg";
+import DockerSvgIcon from "../components/CamundaSelfManaged/icons/docker.svg";
 
 /* ─── OS detection ─── */
 
@@ -607,12 +609,22 @@ function Downloads() {
         {/* ─── Hero ─── */}
         <div className={bwcStyles.heroWrapper}>
           <div className={bwcStyles.heroGlow} />
-          <section className={clsx("container", styles.heroSection)}>
-            <div className={bwcStyles.terminalHeroIntro}>
+          <section
+            className={clsx(
+              "container",
+              bwcStyles.terminalHeroSection,
+              styles.heroSectionTight
+            )}
+          >
+            <div
+              className={clsx(
+                bwcStyles.terminalHeroIntro,
+                styles.heroIntroTight
+              )}
+            >
               <h1 className={bwcStyles.terminalHeroTitle}>Camunda Downloads</h1>
               <p className={bwcStyles.terminalHeroSub}>
-                Download everything you need for local Camunda 8 development on
-                macOS, Windows, or Linux.
+                Download everything you need for local Camunda 8 development.
               </p>
             </div>
           </section>
@@ -674,47 +686,68 @@ function Downloads() {
               activeOS={activeOS}
             />
           </div>
+
+          <div className={styles.browseMoreWrap}>
+            <a
+              href="https://downloads.camunda.cloud/"
+              className={styles.browseMoreButton}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Browse more downloads <ExternalLinkIcon />
+            </a>
+          </div>
         </section>
 
         {/* ─── Alternative install methods ─── */}
-        <section className={clsx(bwcStyles.moreSection, bwcStyles.darkSection)}>
+        <section
+          className={clsx(
+            bwcStyles.moreSection,
+            bwcStyles.darkSection,
+            styles.lastSectionSpaced
+          )}
+        >
           <div className="container">
             <div className={bwcStyles.sectionHeader}>
-              <h2 className={bwcStyles.sectionTitle}>Other ways to install</h2>
+              <h2 className={bwcStyles.sectionTitle}>
+                More ways to run Camunda locally
+              </h2>
               <p className={bwcStyles.sectionSub}>
-                Prefer a different workflow? Install via CLI or run with Docker.
+                Choose the setup that fits your workflow and infrastructure.
               </p>
             </div>
-            <div className={bwcStyles.waysGrid}>
+            <div className={clsx(bwcStyles.waysGrid, styles.waysGridWide)}>
               <Link
                 to={useBaseUrl("/build-with-camunda#self-managed")}
                 className={bwcStyles.wayCard}
               >
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                  <rect
-                    x="2"
-                    y="4"
-                    width="20"
-                    height="16"
-                    rx="2"
-                    stroke="#fc5d0d"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M6 8l4 4-4 4"
-                    stroke="#fc5d0d"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M12 16h6"
-                    stroke="#fc5d0d"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                <h3>Install via Camunda CLI</h3>
+                <span className={styles.cliIconWrap}>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                    <rect
+                      x="2"
+                      y="4"
+                      width="20"
+                      height="16"
+                      rx="2"
+                      stroke="#fc5d0d"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d="M6 8l4 4-4 4"
+                      stroke="#fc5d0d"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M12 16h6"
+                      stroke="#fc5d0d"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+                <h3>Camunda CLI</h3>
                 <p>
                   Install with <code>npm install -g @camunda8/cli</code> and
                   manage everything from your terminal.
@@ -726,12 +759,7 @@ function Downloads() {
                 )}
                 className={bwcStyles.wayCard}
               >
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M13 4h-2v3h2V4zM16 4h-2v3h2V4zM13 8h-2v3h2V8zM16 8h-2v3h2V8zM19 8h-2v3h2V8zM10 8H8v3h2V8zM22 11.5c-.4-.3-1.3-.5-2-.3-.2-1-.9-1.8-1.7-2.2l-.4-.2-.2.4c-.3.6-.4 1.5-.2 2.1.1.4.4.8.7 1.1-.3.2-.7.3-1 .4-.5.2-1 .2-1.5.2H1.3l-.1.6c-.1 1.2.1 2.4.5 3.5.5 1.2 1.3 2.1 2.4 2.7 1.2.6 3.2 1 5 1 1 0 2-.1 3-.3 1.3-.3 2.5-.8 3.5-1.6.8-.6 1.6-1.4 2.1-2.4.8.1 2.6 0 3.5-1.7l.2-.3-.5-.3z"
-                    fill="#78a9ff"
-                  />
-                </svg>
+                <DockerSvgIcon width="72" height="72" />
                 <h3>Docker Compose</h3>
                 <p>
                   Run the full Camunda stack locally with a single{" "}
@@ -744,73 +772,13 @@ function Downloads() {
                 )}
                 className={bwcStyles.wayCard}
               >
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                    stroke="#78a9ff"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                  />
-                </svg>
-                <h3>Kubernetes + Helm</h3>
+                <K8sSvgIcon width="72" height="72" />
+                <h3>Kubernetes</h3>
                 <p>
                   Deploy to any Kubernetes cluster with the official Camunda
                   Helm chart.
                 </p>
               </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Help section ─── */}
-        <section
-          className={clsx(
-            bwcStyles.exploreSection,
-            bwcStyles.exploreSectionLast
-          )}
-        >
-          <div className="container">
-            <div className={bwcStyles.sectionHeader}>
-              <h2 className={bwcStyles.sectionTitle}>Need help?</h2>
-              <p className={bwcStyles.sectionSub}>
-                Check our documentation, community, and support resources.
-              </p>
-            </div>
-            <div className={bwcStyles.exploreGrid}>
-              <Link
-                to={useBaseUrl("docs/guides/")}
-                className={bwcStyles.exploreCard}
-              >
-                <h3>Documentation</h3>
-                <p>
-                  Guides, tutorials, and reference for all Camunda components.
-                </p>
-              </Link>
-              <a
-                href="https://forum.camunda.io/"
-                className={bwcStyles.exploreCard}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h3>Community Forum</h3>
-                <p>
-                  Ask questions, share solutions, and connect with other
-                  developers.
-                </p>
-              </a>
-              <a
-                href="https://downloads.camunda.cloud/release/"
-                className={bwcStyles.exploreCard}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h3>All Downloads</h3>
-                <p>
-                  Browse the full Camunda download archive for all versions.
-                </p>
-              </a>
             </div>
           </div>
         </section>

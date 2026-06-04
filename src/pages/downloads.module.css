@@ -3,18 +3,83 @@
 /* Downloads-specific styles. Shared page/hero/section/card styles
    are imported from build-with-camunda.module.css in downloads.js. */
 
-/* ─── Hero (minimal override for padding) ─── */
-.heroSection {
-  position: relative;
-  z-index: 1;
-  padding: 2rem 0 4rem;
-  max-width: 1200px;
+/* ─── CLI icon wrapper (matches 72px footprint of Docker/K8s icons) ─── */
+.cliIconWrap {
+  width: 72px;
+  height: 72px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 768px) {
-  .heroSection {
-    padding: 1rem 0 2.5rem;
+/* ─── Browse more downloads outline button ─── */
+.browseMoreWrap {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0 0;
+}
+
+.browseMoreButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem;
+  border: 1px solid var(--card-hover-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--card-hover-border) !important;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    transform 0.15s;
+}
+
+.browseMoreButton:hover {
+  background: var(--card-hover-border);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  text-decoration: none !important;
+}
+
+/* ─── Last section: gradient bg + extra bottom space ─── */
+.lastSectionSpaced {
+  padding-bottom: 8rem !important;
+  background: linear-gradient(
+    180deg,
+    #1c1a52 0%,
+    #100e36 35%,
+    #0d0b2a 70%,
+    #161616 100%
+  ) !important;
+}
+
+[data-theme="dark"] .lastSectionSpaced {
+  background: var(--ifm-background-color) !important;
+}
+
+/* ─── More ways: 3-up wide grid ─── */
+.waysGridWide {
+  grid-template-columns: 1fr 1fr 1fr !important;
+  max-width: 1100px !important;
+}
+
+@media (max-width: 900px) {
+  .waysGridWide {
+    grid-template-columns: 1fr !important;
   }
+}
+
+/* ─── Hero overrides (tighter than build-with-camunda hero) ─── */
+.heroSectionTight {
+  padding-bottom: 2rem !important;
+}
+
+.heroIntroTight {
+  padding: 4rem 0 2.5rem !important;
+  margin-bottom: 0 !important;
 }
 
 /* ─── OS Tabs ─── */
@@ -22,27 +87,32 @@
   display: flex;
   justify-content: center;
   gap: 0;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 4rem;
   border-bottom: 2px solid var(--card-border);
-  max-width: 400px;
+  max-width: 560px;
 }
 
 .osTab {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.65rem 1.2rem;
+  gap: 0.55rem;
+  padding: 0.9rem 1.75rem;
   border: none;
   border-bottom: 3px solid transparent;
   background: transparent;
   color: var(--muted-color);
-  font-size: 0.9rem;
+  font-size: 1.15rem;
   font-weight: 600;
   cursor: pointer;
   transition:
     color 0.15s,
     border-color 0.15s;
   margin-bottom: -2px;
+}
+
+.osTab svg {
+  width: 22px;
+  height: 22px;
 }
 
 .osTab:hover {
