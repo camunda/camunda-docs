@@ -1,5 +1,5 @@
 ---
-id: physical-tenants/index
+id: index
 title: "Physical Tenant isolation model"
 sidebar_label: "Physical Tenant isolation model"
 description: "Learn how Physical Tenants isolate execution, storage, and API routing within a single orchestration cluster."
