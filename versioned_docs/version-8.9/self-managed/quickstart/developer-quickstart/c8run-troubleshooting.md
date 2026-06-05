@@ -7,7 +7,7 @@ description: Identify and resolve common issues when starting, configuring, or u
 
 Camunda 8 Run provides log files in the `c8run/logs` directory that can help diagnose most issues. Check these logs first when troubleshooting:
 
-- `c8run.log` – main log for Camunda 8 Run
+- `camunda.log` – main log for Camunda 8 Run
 - `connectors.log` – Connectors component
 
 If you configured external Elasticsearch, inspect that deployment's logs separately.
