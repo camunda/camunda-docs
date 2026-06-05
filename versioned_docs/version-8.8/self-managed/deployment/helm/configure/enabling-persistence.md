@@ -7,7 +7,7 @@ description: "Learn how to enable persistent volume claims (PVCs) on Optimize, W
 
 Several Camunda 8 components keep state on disk and accept optional persistent volume configuration in the Helm chart. Enabling these is straightforward, but a few values keys are easy to misconfigure. This guide walks through each component and shows a complete, working `values.yaml` you can drop into a Helm release.
 
-A reference scenario covering all three options at once lives in the Helm chart repository at `charts/camunda-platform-8.9/test/integration/scenarios/chart-full-setup/values/features/persistence.yaml` (and the same path under `8.8`/`8.10`). It is exercised by nightly CI.
+A reference scenario covering all three options at once lives in the Helm chart repository at `charts/camunda-platform-8.9/test/integration/scenarios/chart-full-setup/values/features/persistence.yaml` (and the same path under `8.8`/`8.10`). It runs in nightly CI.
 
 ## When you need persistent volumes
 
@@ -21,7 +21,7 @@ If your cluster does not have a usable default storage class, set `storageClassN
 
 ## Enabling Optimize persistence
 
-`optimize.persistence.enabled: true` creates two PVCs (`-data-camunda` and `-data-tmp`) that back Optimize's `/camunda` and `/tmp` directories. Optimize requires Elasticsearch as its secondary storage backend; this option does not apply to OpenSearch or RDBMS deployments.
+`optimize.persistence.enabled: true` creates two PVCs (`-data-camunda` and `-data-tmp`) that back Optimize's `/camunda` and `/tmp` directories. Optimize requires Elasticsearch as its secondary storage backend, and this option does not apply to OpenSearch or RDBMS deployments.
 
 ```yaml
 optimize:
@@ -67,8 +67,8 @@ webModeler:
     deploymentStrategy: RollingUpdate # default; or "Recreate"
 ```
 
-- **`RollingUpdate` (default)** is zero-downtime: the new pod becomes ready before the old pod is removed. This works **only** when the PVC supports concurrent attach — a `ReadWriteMany` access mode, or an `existingClaim` backed by RWX storage (NFS, EFS, Azure Files, etc.). On a `ReadWriteOnce` PVC the new pod cannot attach the volume held by the old pod and the rollout deadlocks with `Multi-Attach error`.
-- **`Recreate`** terminates the old pod first, then starts the new one. Use this with the chart's default chart-managed PVC (which is `ReadWriteOnce`). The trade-off is brief downtime per upgrade (typically tens of seconds to a minute, depending on Web Modeler's startup time).
+- **`RollingUpdate` (default)** is zero-downtime: the new pod becomes ready before the old pod is removed. This works **only** when the PVC supports concurrent attach — a `ReadWriteMany` access mode, or an `existingClaim` backed by RWX storage (NFS, EFS, Azure Files, etc.). On a `ReadWriteOnce` PVC, the new pod cannot attach the volume held by the old pod and the rollout deadlocks with `Multi-Attach error`.
+- **`Recreate`** terminates the old pod first, then starts the new one. Use this with the chart's default PVC (which is `ReadWriteOnce`). The trade-off is brief downtime per upgrade (typically tens of seconds to a minute, depending on Web Modeler's startup time).
 
 Pick `Recreate` if you let the chart create the PVC and your cluster's default storage class is RWO (the common case on GKE PD, EBS, Azure Disk). Pick `RollingUpdate` if you've supplied an `existingClaim` backed by an RWX volume.
 
@@ -91,7 +91,7 @@ orchestration:
 In chart `8.7` (which predates the unified orchestration component), use `zeebe.extraVolumeClaimTemplates` with the same shape.
 
 :::warning
-`volumeClaimTemplates` is **immutable** after the StatefulSet is created. To add or change an `extraVolumeClaimTemplates` entry on an existing release you must delete the StatefulSet (and optionally its PVCs) before running `helm upgrade`. Plan this configuration before your initial install.
+`volumeClaimTemplates` is **immutable** after the StatefulSet is created. To add or change an `extraVolumeClaimTemplates` entry on an existing release, you must delete the StatefulSet (and optionally its PVCs) before running `helm upgrade`. Plan this configuration before your initial install.
 :::
 
 Common pitfalls:
@@ -133,7 +133,7 @@ After `helm install`, verify with:
 kubectl -n <namespace> get pvc
 ```
 
-You should see PVCs for the bundled Elasticsearch master and PostgreSQL pods, plus:
+You should see PVCs for the bundled Elasticsearch primary and PostgreSQL pods, plus:
 
 - `<release>-camunda-platform-optimize-data-camunda` and `-tmp`
 - `<release>-camunda-platform-webmodeler-data`
