@@ -28,14 +28,8 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 Important changes in Camunda 8.10 are summarized as follows:
 
-:::warning Breaking change: Helm v4 required
-Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI.
-
-Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
-:::
-
 :::note
-Additional changes for 8.10 will be added here as the 8.10 documentation is updated.
+Changes for 8.10 will be added here as the 8.10 documentation is updated.
 :::
 
 :::info learn more and upgrade
@@ -46,17 +40,32 @@ Additional changes for 8.10 will be added here as the 8.10 documentation is upda
 
 :::
 
-<!-- ## Feature 1
+## Camunda 8 Run no longer requires Java
 
-Description for feature 1.
+Camunda 8 Run now ships with a bundled Java runtime. You no longer need to install OpenJDK or set `JAVA_HOME` before starting it.
 
-### Feature 1 details 1
+## Helm chart deployment
 
-Description for feature 1 details 1.
+Important changes to Helm chart deployment in 8.10 are as follows:
 
-### Feature 1 details 2
+### Helm v4 required
 
-Description for feature 1 details 2. -->
+:::warning Breaking change
+Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda versions are the last to support the Helm v3 CLI.
+:::
+
+Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
+
+<ul>
+  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+</ul>
+
+### Host network support for orchestration cluster pods
+
+The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets orchestration cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
+
+<p class="link-arrow">[Configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md)</p>
 
 ## Upgrade guides {#upgrade-guides}
 
