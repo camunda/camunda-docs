@@ -28,6 +28,13 @@ export const fundamentalCards = [
       "Build and integrate AI agents into your end-to-end processes.",
   },
   {
+    link: "../../connectors/out-of-the-box-connectors/agentic-ai-aiagent/",
+    title: "AI Agent connector",
+    image: IconConnectorImg,
+    description:
+      "Integrate LLMs with your processes using the AI Agent connector.",
+  },
+  {
     link: "../camunda-provided-llm/",
     title: "Camunda-provided LLM",
     image: IconAoLlmImg,

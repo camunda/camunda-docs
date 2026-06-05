@@ -14,9 +14,46 @@ Start building and integrating AI agents into your end-to-end processes.
 
 <p><img src={AgentImg} title="An AI agent in a process" alt="An AI agent in a process"  className="img-transparent" style={{border:0,padding:0,paddingLeft:30,paddingTop:10,margin:0,marginLeft:10,float: 'right', width: '45%'}}/>An AI agent is a software program that autonomously gathers data and carries out tasks using this information, independently or on behalf of another system or person.</p>
 
-- AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions.
+AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions.
 
-- For example, you can use an AI agent to select and execute tasks within an ad-hoc sub-process, by evaluating the current process context and determining the relevant tasks and tools to use in response.
+For example, you can use an AI agent to select and execute tasks within an ad-hoc sub-process, by evaluating the current process context and determining the relevant tasks and tools to use in response.
+
+## AI Agent connector
+
+The [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) is the primary Camunda connector for building AI agents. It integrates an LLM with your BPMN process, enabling the agent to reason over context, select tools, and respond to users or process events.
+
+Key capabilities include:
+
+- **LLM provider support**: Connects to a range of providers, such as Anthropic, Amazon Bedrock, Google Gemini, and OpenAI.
+- **Tool calling**: Exposes BPMN activities inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) as tools the LLM can call and execute.
+- **Memory**: Short-term conversational memory enables multi-turn interactions and follow-up questions within a process instance.
+
+### How the feedback loop works
+
+The AI Agent connector operates in a feedback loop between the LLM and Camunda:
+
+1. A user prompt is sent to the connector. The LLM evaluates the prompt, the system prompt, and the available tool definitions.
+1. If the LLM determines that a tool call is needed, Camunda activates the corresponding BPMN activity in the ad-hoc sub-process.
+1. The tool result is passed back to the LLM, which decides whether more tool calls are needed.
+1. The loop continues until the LLM returns a final response, which can then be routed to the next step in the process.
+
+Decision-making and execution are intentionally split:
+
+- **LLM decides**: Which tool to call next, in what order, and with which parameters.
+- **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
+
+### Choose an implementation
+
+The connector is available in two variants suited for different use cases:
+
+| Implementation                                                                                            | Best for                   | Description                                                                                                                                                           |
+| :-------------------------------------------------------------------------------------------------------- | :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) | Most use cases             | Handles tool resolution and the feedback loop automatically inside an ad-hoc sub-process. **Recommended for the majority of agentic workflows.**                      |
+| [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md)              | Advanced or one-shot tasks | Uses a service task with a manually modeled feedback loop. Use this when you need to intercept tool calls, add approval steps, or perform a simple one-shot LLM call. |
+
+:::tip
+See the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) documentation for full configuration details, implementation examples, and reference.
+:::
 
 ## Why tool documentation in ad-hoc sub-processes matters
 
@@ -67,7 +104,7 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
 </tr>
 <tr>
     <td>[Ad-hoc tools schema resolver connector](/components/connectors/out-of-the-box-connectors/agentic-ai-ahsp-tools-schema-resolver.md)</td>
-    <td>Can be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.</td>
+    <td>Can be used independently with other AI connectors for direct LLM interaction. Use this connector if you don't want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.</td>
 </tr>
 <tr>
     <td>[Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)</td>
@@ -77,9 +114,9 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
 
 ## Integrate an AI agent into your process
 
-A common model for AI agent integration uses an ad-hoc sub-process and AI agent connector in a [tools feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md).
+A common model for AI agent integration uses an ad-hoc sub-process and AI Agent connector in a [tools feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md).
 
-In this model, an AI agent is defined using an AI agent connector, with the tools available to the agent defined in an ad-hoc sub-process. The AI agent is able to understand the context and process goal, and uses the available tools to complete the goal.
+In this model, an AI agent is defined using an AI Agent connector, with the tools available to the agent defined in an ad-hoc sub-process. The AI agent is able to understand the context and process goal, and uses the available tools to complete the goal.
 
 <p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Get started" className="img-700"/></p>
 
