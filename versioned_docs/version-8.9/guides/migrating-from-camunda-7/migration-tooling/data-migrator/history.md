@@ -524,6 +524,16 @@ See [example interceptor](https://github.com/camunda/camunda-7-to-8-migration-to
 - Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
 - Built-in transformers run first, followed by custom interceptors
 
+### Required fields
+
+Some Camunda 8 entity fields must be non-null. There are some fields that the built-in transformers always populate but a custom interceptor can overwrite with a `null` value. When a required field is `null` even after all interceptors have run, the migrator skips the entity and records a skip reason (see [Error handling](#error-handling)).
+
+When customizing entity conversion, do not set the following required fields to `null`:
+
+| Camunda 8 model    | Required fields                                                                         |
+| ------------------ | --------------------------------------------------------------------------------------- |
+| `FlowNodeInstance` | `flowNodeInstanceKey`, `flowNodeId`, `type`, `state`, `processDefinitionId`, `tenantId` |
+
 ### Error handling
 
 When an entity transformation fails:
