@@ -11,6 +11,8 @@ Multi-tenancy is only supported in Camunda 8 Self-Managed. It is not available i
 
 [Multi-tenancy](/reference/glossary.md#multi-tenancy) in Camunda 8 enables a single installation to serve multiple [tenants](/reference/glossary.md#tenant) such as departments, teams, or external clients, while keeping each tenant's data and processes logically isolated.
 
+If you need physical isolation within a single orchestration cluster, see [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
+
 The following sections explain how multi-tenancy works in Camunda 8.
 
 ## Isolation of data and processes

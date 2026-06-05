@@ -2125,6 +2125,7 @@ module.exports = {
             },
           ],
         },
+        "self-managed/concepts/physical-tenants/index",
         {
           type: "category",
           label: "Back up and restore",
