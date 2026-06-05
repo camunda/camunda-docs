@@ -11,7 +11,6 @@ import AoGrid from '../../components/react-components/\_ao-card';
 import IconAgenticImg from '../../components/assets/icon-agentic.png';
 import IconConnectorsImg from '../../components/assets/icon-connectors.png';
 import IconPlay from '../../components/assets/icon-play.png';
-import IconLlmImg from '../../components/assets/icon-llm.png';
 import IconAIAgent from '../../components/assets/hero-build-with-ai.png';
 import IconCopilotImg from '../../components/assets/icon-camunda-copilot.png';
 import IconIdpImg from '../../components/assets/icon-idp.png';
