@@ -8,7 +8,7 @@ Learn how to recover recently deleted files before they're permanently removed.
 
 ## Soft deletion in Camunda Hub
 
-When you delete a file, it's removed from the project and moved to **Recently deleted**. You have 30 days to restore it before it's permanently deleted.
+When you delete a file, it's removed from the project and moved to **Recently deleted**. You have 30 days to restore it before permanent deletion.
 
 :::note
 
