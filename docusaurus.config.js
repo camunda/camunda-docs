@@ -467,8 +467,8 @@ module.exports = {
               href: "https://camunda.com/services/enterprise-support-guide/",
             },
             {
-              label: "Developers",
-              href: "https://developers.camunda.com/",
+              label: "Downloads",
+              to: "/downloads",
             },
             {
               label: "Academy",
@@ -521,7 +521,7 @@ module.exports = {
           items: [
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              to: "/build-with-camunda",
             },
             {
               label: "Support and feedback",
@@ -548,10 +548,6 @@ module.exports = {
               href: "https://camunda.com/developers/how-to-contribute/",
             },
             {
-              label: "Developer resources",
-              href: "https://camunda.com/developers/",
-            },
-            {
               label: "Subscribe",
               href: "https://camunda.com/developers/developer-community-updates/",
             },
@@ -560,6 +556,10 @@ module.exports = {
         {
           title: "Camunda",
           items: [
+            {
+              label: "Downloads",
+              to: "/downloads",
+            },
             {
               label: "Web Modeler",
               href: "https://camunda.io",
