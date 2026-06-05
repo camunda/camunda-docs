@@ -22,7 +22,7 @@ Permanent deletion occurs 30 days after a file is deleted. This removes all asso
 
 ## Restore permissions
 
-Only users with project-level **edit** or **admin** access at the time of the attempted restore, may restore a recently deleted file. The role at the time of the original deletion is not considered.
+Only users with project-level **edit** or **admin** access at the time of the restore attempt can restore a recently deleted file. The role at the time of the original deletion is not considered.
 
 ## Browse recently deleted files
 
