@@ -1,7 +1,7 @@
 ---
 id: recently-deleted
 title: Recover deleted files
-description: Recover deleted files within 30 days of deletion.
+description: Recover deleted files within 30 days of deletion. After 30 days, files are permanently deleted along with their content, version history, and Git links.
 ---
 
 Learn how to recover recently deleted files before they're permanently removed.
@@ -22,7 +22,7 @@ Permanent deletion occurs 30 days after a file is deleted. This removes all asso
 
 ## Restore permissions
 
-Only users with project-level **edit** or **admin** access at the time of the restore attempt can restore a recently deleted file. The role at the time of the original deletion is not considered.
+Only users with [**Project Admin** or **Editor** access](../modeler/collaboration/collaboration.md#access-rights-and-permissions) at the time of the restore attempt can restore a recently deleted file. The role at the time of the original deletion is not considered.
 
 ## Browse recently deleted files
 
