@@ -55,7 +55,7 @@ graph LR
 
 **Key points:**
 
-- Operate, Tasklist, and Admin use the Orchestration Cluster API, and that API reads from the configured secondary storage (RDBMS).
+- Operate, Tasklist, and Admin use the Orchestration Cluster API rather than reading directly from secondary storage. The Orchestration Cluster API reads from the configured secondary storage (RDBMS).
 - Optimize requires Elasticsearch or OpenSearch and reads and writes directly to it.
 - The Zeebe Broker can export to multiple targets simultaneously to support this architecture.
 
