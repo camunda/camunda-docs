@@ -43,7 +43,7 @@ Starting with Camunda 8.8, user task candidate groups should reference group IDs
 1. Confirm a group ID exists for the value.
 2. If no ID is found, find a group name for the value, and resolve its ID.
 
-This behavior can be disabled by setting the `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION=false` configuration property, so user task candidate group values are not checked by the Zeebe engine. See [zeebe.broker.experimental.engine.caches](/self-managed/components/orchestration-cluster/zeebe/configuration/broker#zeebebrokerexperimentalenginecaches) for all related configuration properties.
+This behavior can be disabled by setting the `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION=false` configuration property, so user task candidate group values are not checked by the Zeebe engine. See [zeebe.broker.experimental.engine.caches](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerexperimentalenginecaches) for all related configuration properties.
 :::
 
 :::info
