@@ -39,7 +39,7 @@ Each row shows:
 | **Deleted on**     | The date and time of the deletion                                                                                                                           |
 | **Days remaining** | Days left before permanent deletion                                                                                                                         |
 
-The default sort order has the most recently deleted files first.
+By default, the list is sorted with the most recently deleted files first.
 
 ## Restore a file
 
