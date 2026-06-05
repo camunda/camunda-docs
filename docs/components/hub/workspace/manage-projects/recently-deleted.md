@@ -4,7 +4,7 @@ title: Recover deleted files
 description: Recover deleted files within 30 days of deletion.
 ---
 
-Learn how to recover recently-deleted files before they're permanently removed.
+Learn how to recover recently deleted files before they're permanently removed.
 
 ## Soft deletion in Camunda Hub
 
@@ -22,9 +22,9 @@ Permanent deletion occurs 30 days after a file is deleted. This removes all asso
 
 ## Restore permissions
 
-Only users with project-level **edit** or **admin** access at the time of the attempted restore, may restore a recently-deleted file. The role at the time of the original deletion is not considered.
+Only users with project-level **edit** or **admin** access at the time of the attempted restore, may restore a recently deleted file. The role at the time of the original deletion is not considered.
 
-## Browse recently-deleted files
+## Browse recently deleted files
 
 In Camunda Hub, in the left-hand navigation, click **Recently deleted**. This shows all files deleted from any projects within the last 30 days.
 
@@ -39,7 +39,7 @@ Each row shows:
 | **Deleted on**     | The date and time of the deletion                                                                                                                           |
 | **Days remaining** | Days left before permanent deletion                                                                                                                         |
 
-The default sort order has the most recently-deleted files first.
+The default sort order has the most recently deleted files first.
 
 ## Restore a file
 
