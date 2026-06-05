@@ -26,7 +26,7 @@ Only users with project-level **edit** or **admin** access at the time of the re
 
 ## Browse recently deleted files
 
-In Camunda Hub, in the left-hand navigation, click **Recently deleted**. This shows all files deleted from any projects within the last 30 days.
+In Camunda Hub, in the left-hand navigation, click **Recently deleted**. This page lists files deleted from any projects within the last 30 days.
 
 Each row shows:
 
