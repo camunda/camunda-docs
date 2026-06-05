@@ -18,10 +18,18 @@ Camunda-provided LLM is only available in Camunda 8 SaaS. It is not available in
 Camunda-provided LLM is free to use within the provided budget, and is intended for testing and experimentation. When you're ready for production or need more control, switch to a customer-managed provider.
 :::
 
+Key benefits:
+
+- **No LLM account setup required.** You don't need to sign up with a model provider or configure credentials to start exploring AI agents.
+- **Compare different LLM providers.** Run your agent with different models and easily switch between them to find the best fit for your use case.
+- **No surprise bills.** Your organization gets a free, preconfigured budget for testing and experimentation.
+- **Instant blueprints.** AI agent blueprints that use Camunda-provided LLM work out of the box with no configuration needed.
+- **Seamless transition.** When you're ready for production, switch to a customer-managed provider like AWS Bedrock without changing your process architecture.
+
 Camunda-provided LLM is available in Camunda SaaS for:
 
-- **SaaS trial organizations**: Includes Camunda-managed credentials and a free budget.
-- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly enable AI features. When you enable them, Camunda-provided LLM is enabled automatically. If Camunda-provided LLM is unavailable, disable AI features and then re-enable them.
+- **SaaS trial organizations**: Includes Camunda-managed credentials and a free budget. AI features are enabled by default.
+- **SaaS enterprise organizations**: Includes a larger budget to support multiple proofs of concept. You must explicitly enable AI features in Camunda Console. When you enable them, Camunda-provided LLM is enabled automatically. If Camunda-provided LLM is unavailable, disable AI features and then re-enable them.
 
 :::note
 Availability, budgets, and UI may vary by environment and rollout stage.
@@ -42,7 +50,7 @@ Once Camunda-provided LLM is available in your organization, its credentials are
 
 ## Supported models
 
-Camunda-provided LLM supports multiple Bedrock-backed models. When using the AI Agent connector, set the **Model** field to one of the following values:
+Camunda-provided LLM uses a managed LLM gateway that supports multiple models from different providers. You can switch between models to compare how your agent performs with each one. When using the AI Agent connector, set the **Model** field to one of the following values:
 
 | Model                       | Value to set in **Model**     | What it's good for                                                                                                    |
 | :-------------------------- | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
@@ -94,6 +102,15 @@ When your organization reaches its Camunda-provided LLM budget cap:
 If your process model doesn’t handle LLM failures, an exhausted budget may result in incidents or failed instances. Consider adding BPMN error handling to provide a user-friendly fallback path.
 :::
 
+## Monitor usage
+
+The Camunda-provided LLM budget is shared across your organization, so you should monitor consumption. Camunda Console shows usage statistics for Camunda-provided LLM, including:
+
+- How much of your budget has been used.
+- How much budget remains.
+
+Use this data to plan your transition to a customer-managed provider when you're ready for production.
+
 ## Switch away from Camunda-provided LLM
 
 As you move from evaluation to production, you may want to switch to your own LLM provider. This gives you:
@@ -115,3 +132,5 @@ To switch away, follow these steps:
 2. Update your AI Agent connector configuration to use the new LLM provider.
 3. Re-deploy your process.
 4. Test a process instance end-to-end and verify results.
+
+Your orchestration model doesn’t change during this transition. The BPMN process, event choreography, and human touchpoints you designed with Camunda-provided LLM carry forward unchanged, while only the LLM backend configuration shifts.
