@@ -99,6 +99,22 @@ The endpoint:
 
 Behavior remains free from side effects and uses the same timeout and guardrails as the existing cluster-scope evaluation.
 
+#### Remove deprecated APIs, Zeebe Client, and Zeebe Process Test
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+
+The Operate and Tasklist APIs, deprecated since 8.8, have been removed. Process data, task management, and operational queries are now served through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+<p class="link-arrow">[Migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
+
+The Zeebe Client has been removed and replaced by the [Camunda Java Client](/apis-tools/java-client/getting-started.md). This covers process deployment, message correlation, and job handling.
+
+<p class="link-arrow">[Migrate to the Camunda Java Client](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)</p>
+
+The Zeebe Process Test library has been removed and replaced by [Camunda Process Test](/apis-tools/testing/getting-started.md). This provides richer assertions, Spring integration, and alignment with the Orchestration Cluster API surface.
+
+<p class="link-arrow">[Migrate to Camunda Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
+
 ### Modeler
 
 #### Support for start forms in Desktop Modeler
