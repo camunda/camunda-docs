@@ -40,7 +40,7 @@ For more information about this topic visit the documentation about [Input/outpu
 
 ## Job priority
 
-This task type supports `zeebe:jobPriorityDefinition` when implemented as a job worker.
+This task type supports `zeebe:jobPriorityDefinition`.
 
 You can define job priority on the process as a default and override it on this task.
 For priority behavior and limitations, see [Job prioritization](../../../concepts/job-workers.md#job-prioritization).
@@ -51,20 +51,12 @@ For priority behavior and limitations, see [Job prioritization](../../../concept
 
 A service task with a custom header and priority definition:
 
-```xml
-<bpmn:process id="order-process" isExecutable="true">
-  <bpmn:extensionElements>
-    <zeebe:jobPriorityDefinition priority="50" />
-  </bpmn:extensionElements>
-
-  <bpmn:serviceTask id="collect-payment" name="Collect payment">
-    <bpmn:extensionElements>
-      <zeebe:taskDefinition type="payment-service" retries="5" />
-      <zeebe:jobPriorityDefinition priority="90" />
-    </bpmn:extensionElements>
-  </bpmn:serviceTask>
-</bpmn:process>
-```
+<bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
+<bpmn:extensionElements>
+<zeebe:calledDecision decisionId="shipping_box_size" resultVariable="boxSize" />
+<zeebe:jobPriorityDefinition priority="90" />
+</bpmn:extensionElements>
+</bpmn:businessRuleTask>
 
 ## Next steps
 

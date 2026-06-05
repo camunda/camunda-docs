@@ -258,22 +258,22 @@ If it's not present in the gateway as a client stream, restart your worker. If i
 
 ## Job prioritization
 
-Camunda supports job prioritization for pull-based job activation.
+Camunda supports job prioritization for pull-based job activation. Job priority affects the order in which jobs are activated for workers. It does not change retries, failures, or completion semantics.
 
 You can define job priority:
 
 - On the process as a default.
 - On supported job-creating tasks as an override, including service tasks, send tasks, and script or business rule tasks implemented as job workers.
 
-Job priority affects the order in which jobs are activated for workers. It does not change retries, failures, or completion semantics.
-
 Important behavior:
 
+- If you do not specify job priorities, jobs keep the existing FIFO behavior (order by arrival/creation).
 - Higher-priority jobs are activated before lower-priority jobs within a partition.
 - Ordering is best effort across the cluster, not a global guarantee across all partitions.
+- Because jobs are distributed across partitions, priority ordering is applied per partition rather than as one globally sorted queue.
 - If no priority is defined, the default priority is `0`.
 - Task-level priority overrides process-level priority.
-- Jobs with the same priority are activated by ascending job key.
+- Within the same priority, jobs are activated in FIFO order.
 - Low-priority jobs can starve under sustained high-priority load and may never be activated while workers remain fully occupied by higher-priority jobs.
 - Camunda does not provide fairness, aging, or starvation mitigation in the engine.
 
@@ -283,10 +283,12 @@ Priority values can be static integers or FEEL expressions. FEEL expressions are
 
 Priority uses signed 32-bit integer semantics. Do not assume a fixed `0-99` engine limit.
 
-:::note Compatibility for pre-8.10 jobs
-Jobs created before 8.10 may not have a stored priority value in secondary storage.
+:::warning Compatibility for pre-8.10 jobs
+Jobs created before 8.10 do not have a populated `priority` value in secondary storage.
 
-For compatibility, Camunda treats these jobs as if they had the default priority value of `0`.
+For job execution behavior, Camunda treats these jobs as if they had the default priority value of `0`.
+
+However, if you use job APIs that filter or sort by `priority`, pre-8.10 jobs are filtered out because no priority value is stored for them.
 :::
 
 ### Validation and runtime failure behavior
