@@ -157,6 +157,15 @@
   border-bottom-color: var(--card-hover-border);
 }
 
+/* ─── OS auto-detected label ─── */
+.osDetectedLabel {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted-color);
+  margin: -3rem 0 3rem;
+  opacity: 0.75;
+}
+
 /* ─── Downloads grid ─── */
 .downloadsSection {
   padding-top: 3rem !important;

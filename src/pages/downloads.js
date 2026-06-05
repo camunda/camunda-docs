@@ -595,9 +595,12 @@ function DownloadCard({
 
 function Downloads() {
   const [activeOS, setActiveOS] = useState("mac");
+  const [detectedOS, setDetectedOS] = useState(null);
 
   useEffect(() => {
-    setActiveOS(detectOS());
+    const os = detectOS();
+    setActiveOS(os);
+    setDetectedOS(os);
   }, []);
 
   return (
@@ -652,7 +655,41 @@ function Downloads() {
             styles.downloadsSection
           )}
         >
-          <OSTabs activeOS={activeOS} onSelect={setActiveOS} />
+          <OSTabs
+            activeOS={activeOS}
+            onSelect={(os) => {
+              setActiveOS(os);
+              setDetectedOS(null);
+            }}
+          />
+          {detectedOS && (
+            <p className={styles.osDetectedLabel}>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                style={{ marginRight: 4, verticalAlign: "-1px" }}
+              >
+                <circle
+                  cx="6"
+                  cy="6"
+                  r="5.5"
+                  stroke="currentColor"
+                  strokeOpacity="0.5"
+                />
+                <path
+                  d="M4 6l1.5 1.5L8 4.5"
+                  stroke="currentColor"
+                  strokeWidth="1.3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              Detected:{" "}
+              {{ mac: "macOS", windows: "Windows", linux: "Linux" }[detectedOS]}
+            </p>
+          )}
 
           <div className={bwcStyles.downloadsGrid}>
             <DownloadCard
