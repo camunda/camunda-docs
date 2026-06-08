@@ -1,7 +1,7 @@
 ---
 id: agentic-ai-aiagent-tool-definitions
-sidebar_label: Tool Definitions
-title: AI Agent Tool Definitions
+sidebar_label: Tool definitions
+title: AI Agent tool definitions
 description: Tool definitions for AI agents using the fromAi() function syntax
 ---
 
