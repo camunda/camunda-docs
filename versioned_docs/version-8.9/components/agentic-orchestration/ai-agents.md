@@ -25,7 +25,7 @@ The [AI Agent connector](/components/connectors/out-of-the-box-connectors/agenti
 Key capabilities include:
 
 - **LLM provider support**: Connects to a range of providers, such as Anthropic, Amazon Bedrock, Google Gemini, and OpenAI.
-- **Tool calling**: Exposes BPMN activities inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) as tools the LLM can call and execute.
+- **Tool calling**: Exposes BPMN activities inside an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) as tools the LLM can call and execute.
 - **Memory**: Short-term conversational memory enables multi-turn interactions and follow-up questions within a process instance.
 
 ### How the feedback loop works
