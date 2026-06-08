@@ -93,15 +93,3 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
     <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
 </tr>
 </table>
-
-:::info further resources
-
-Learn more about building and integrating AI agents in Camunda 8:
-
-- [Building Your First AI Agent in Camunda](https://camunda.com/blog/2025/05/step-by-step-guide-ai-task-agents-camunda/)
-- [Test your AI agents](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)
-- [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/step-by-step-guide-ai-task-agents-camunda/)
-- [Artificial Intelligence (AI) Agents: What You Need to Know](https://camunda.com/blog/2024/08/ai-agents-what-you-need-to-know/)
-- [Camunda AI agents](https://camunda.com/blog/tag/ai-agent/)
-
-:::
