@@ -21,7 +21,7 @@ paths:
             schema:
               $ref: "#/components/schemas/FileCreateRequest"
       responses:
-        "201":
+        "200":
           description: The file was created successfully.
           content:
             application/json:
@@ -340,9 +340,8 @@ components:
           description: >
             Pagination criteria. Supports offset-based pagination (from/limit) or
             a simple limit.
-          oneOf:
-            - $ref: "search-models.yaml#/components/schemas/LimitPagination"
-            - $ref: "search-models.yaml#/components/schemas/OffsetPagination"
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
         sort:
           description: Sort field criteria.
           type: array
