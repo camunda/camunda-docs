@@ -72,10 +72,9 @@ For provider-specific guidance, see the [Backup and restore overview](/self-mana
 
 ## Backup requirements
 
-In addition to cross-region replication, two further conditions must be in place before a failure occurs:
+In addition to cross-region replication, make sure the following is in place before a failure occurs:
 
-- **Regular backup schedule** — Both Orchestration cluster and secondary storage must be backed up on a consistent schedule. Backup frequency directly determines RPO: a 1-hour backup interval means up to 1 hour of data loss in the worst case.
-- **Backup validation** — Backups should be periodically verified to confirm they are complete and restorable. An untested backup provides no recovery guarantee.
+**Regular backup schedule** — Both Orchestration cluster and secondary storage must be backed up on a consistent schedule. Backup frequency directly determines RPO: a 1-hour backup interval means up to 1 hour of data loss in the worst case.
 
 For configuration instructions and scheduling guidance, see the [Backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
@@ -92,6 +91,8 @@ When the primary region fails, Cold Recovery follows this sequence:
 7. **Redirect traffic** — Update applications, DNS or load balancer configuration to point production traffic at the secondary region.
 
 The total elapsed time across all these steps is the realized RTO. For step-by-step restore instructions, see the [Backup and restore guides](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+
+We recommend testing this recovery flow end-to-end before a real incident occurs. Prior validation ensures each step works as expected in your environment.
 
 :::important Detection and decision time count toward RTO
 Step 1 (detect and declare) is **not instantaneous** and is often the largest variable contributor to total RTO. Time-to-detect (how long until the outage is recognized) and time-to-decide (how long until the on-call operator authorizes a failover) can each run from minutes to hours depending on monitoring coverage, paging rotation, and escalation policy. The published 1–4 hour RTO assumes these phases are exercised regularly; otherwise they dominate the realized recovery time.
