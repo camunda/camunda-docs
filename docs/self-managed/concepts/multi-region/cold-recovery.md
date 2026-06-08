@@ -11,7 +11,7 @@ import ColdRecovery from "./img/cold-recovery-diagram.jpg";
 
 Cold Recovery is Camunda's lowest-cost multi-region resilience configuration. It provides a documented, repeatable recovery path from complete primary-region loss using scheduled backups exported to cross-region object storage and a manual restore procedure into a secondary region.
 
-Cold Recovery is suited for development and staging environments, low-criticality production workloads, and deployments where recovery measured in hours is operationally acceptable.
+Cold Recovery is suited for production workloads, where recovery measured in hours is operationally acceptable.
 
 | Property                            | Value                                            |
 | ----------------------------------- | ------------------------------------------------ |
