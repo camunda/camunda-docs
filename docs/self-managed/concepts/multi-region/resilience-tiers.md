@@ -1,30 +1,39 @@
 ---
 id: resilience-tiers
-title: "Multi-region resilience"
-sidebar_label: "Multi-region resilience"
-description: "Camunda's framework for multi-region disaster recovery: compare Cold Recovery and Dual-Region by RTO, RPO, cost, and compliance fit."
+title: "Multi-region deployment"
+sidebar_label: "Multi-region deployment"
+description: "Learn about multi-region deployment and choosing the right option for your recovery and resilience needs."
 ---
 
-Camunda provides a structured multi-region resilience framework for Self-Managed Orchestration Cluster deployments. The right option for you is determined by how critical your process automation is to the business — specifically, how much downtime and data loss it can tolerate, and what compliance obligations apply.
+import PageDescription from '@site/src/components/PageDescription';
 
-Each option combines a published reference architecture with documented RTO and RPO targets, a deployment guide, and an operational runbook, so you can match your Camunda disaster recovery posture to those requirements without reverse-engineering undocumented capabilities.
+<PageDescription />
 
-## Start here: how critical is your workload?
+## About
 
-Use the following questions to identify the option that matches your business needs. The architecture follows from the answer — not the other way around.
+Camunda provides a structured multi-region resilience framework for Self-Managed Orchestration Cluster deployments.
 
-| If your business can tolerate…                                              | …then you need                          |
-| --------------------------------------------------------------------------- | --------------------------------------- |
-| Recovery measured in **hours**, and **minutes to hours of data loss**       | [**Cold Recovery**](./cold-recovery.md) |
-| Recovery in **~15 minutes**, with **no data loss**, and audit-ready posture | [**Dual-Region**](./dual-region.md)     |
+You can choose from either of the following types of multi-region configuration:
 
-### RTO and RPO definitions
+- **[Cold Recovery](./cold-recovery.md)**: Camunda's lowest-cost multi-region configuration. Recovery measured in hours is operationally acceptable.
+- **[Dual-Region](./dual-region.md)**: Dual-region deployment with continuous replication. A full Camunda Orchestration Cluster runs continuously in both a primary and secondary region.
 
-**Recovery Point Objective (RPO)** is the maximum tolerable amount of data loss, measured as the time between the last persisted consistent backup and the moment of failure.
+### Choosing the right option
 
-**Recovery Time Objective (RTO)** is the maximum tolerable time from failure detection to service restoration in a functional state.
+The right option for you is determined by how critical your process automation is to your business, specifically, how much downtime and data loss you can tolerate, and what compliance obligations you have.
 
-## Option comparison
+First, determine how critical your workload is:
+
+| If your business can tolerate the following:                                 | Choose this option                  |
+| :--------------------------------------------------------------------------- | :---------------------------------- |
+| Recovery measured in **hours**, and **minutes to hours of data loss**.       | [Cold Recovery](./cold-recovery.md) |
+| Recovery in **~15 minutes**, with **no data loss**, and audit-ready posture. | [Dual-Region](./dual-region.md)     |
+
+Each option includes a reference architecture, deployment guide, and operational runbook with documented [Recovery Time Objective (RTO)](/reference/glossary.md#recovery-time-objective-rto) and [Recovery Point Objective (RPO)](/reference/glossary.md#recovery-point-objective-rpo) targets.
+
+## Comparison of multi-region deployment options
+
+The following table provides a comparison of the different multi-region deployment options:
 
 | Consideration           | Cold Recovery                                                                           | Dual-Region                                                                                                                                          |
 | ----------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
