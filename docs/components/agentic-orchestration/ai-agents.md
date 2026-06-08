@@ -41,33 +41,15 @@ Decision-making and execution are intentionally split:
 - **LLM decides**: Which tool to call next, in what order, and with which parameters.
 - **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
 
+A common integration model uses an ad-hoc sub-process and the AI Agent connector in a tools feedback loop. In this model, the agent understands the process goal and uses the available tools to complete it.
+
+<p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Example AI agent integration diagram" className="img-700"/></p>
+
+:::tip
+Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
+:::
+
 See the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) documentation for full configuration details, implementation examples, and reference.
-
-## Why tool documentation in ad-hoc sub-processes matters
-
-In an AI agent model, each BPMN activity inside an ad-hoc sub-process is effectively a tool exposed to the LLM.
-The activity name and its documentation are used by the LLM to decide what to do next.
-
-Clear, behavior-oriented descriptions help the LLM:
-
-- Select the right tool for the current goal.
-- Pass the right parameters in the expected format.
-- Avoid unsafe, redundant, or nonsensical actions.
-
-Poor or missing documentation increases the risk of:
-
-- Incorrect or ambiguous tool selection.
-- Repeated tool calls or skipped required steps.
-- Hallucinated behavior and responses that do not match process intent.
-
-### Example: weak vs strong tool definition
-
-| Tool definition | Example                                                                                                                                                                                                                                           |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Weak            | **Name**: `Lookup`<br/>**Documentation**: `Find customer data`                                                                                                                                                                                    |
-| Strong          | **Name**: `Resolve customer by legal company name`<br/>**Documentation**: `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
-
-A clear tool name and precise documentation make the expected behavior explicit, improving reliability during tool selection and execution.
 
 ## AI agent integration features
 
@@ -99,18 +81,6 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
     <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
 </tr>
 </table>
-
-## Integrate an AI agent into your process
-
-A common model for AI agent integration uses an ad-hoc sub-process and AI Agent connector in a [tools feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md).
-
-In this model, an AI agent is defined using an AI Agent connector, with the tools available to the agent defined in an ad-hoc sub-process. The AI agent is able to understand the context and process goal, and uses the available tools to complete the goal.
-
-<p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Get started" className="img-700"/></p>
-
-:::tip
-Learn more about this model in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
-:::
 
 :::info further resources
 
