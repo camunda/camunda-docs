@@ -26,7 +26,7 @@ Migration details are summarized as follows:
 ## Key features
 
 - Preserves the execution state of running process instances during migration.
-- Maps Camunda 7 process instance `businessKey` to Camunda 8 `businessId` in runtime migration.
+- Maps Camunda 7 process instance `businessKey` to Camunda 8 `businessId`. Both for runtime and history migration, this mapping is supported.
 - Converts and migrates process variables, decision inputs, and decision outputs with proper type handling.
 - Supports customizable variable interceptors for both runtime and history migration contexts.
 - Validates data before migration to help ensure a successful run.
