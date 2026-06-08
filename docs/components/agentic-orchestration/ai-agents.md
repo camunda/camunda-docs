@@ -19,7 +19,7 @@ For example, you can use an AI agent to select and execute tasks within an ad-ho
 
 ## The AI Agent connector
 
-The [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) is the primary Camunda connector for building AI agents. It integrates an LLM with your BPMN process, enabling the agent to reason over context, select tools, and respond to users or process events.
+The AI Agent connector is the primary Camunda connector for building AI agents. It integrates an LLM with your BPMN process, enabling the agent to reason over context, select tools, and respond to users or process events.
 
 Key capabilities include:
 
