@@ -27,7 +27,17 @@ Key capabilities include:
 - **Tool calling**: Exposes BPMN activities inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) as tools the LLM can call and execute.
 - **Memory**: Short-term conversational memory enables multi-turn interactions and follow-up questions within a process instance.
 
-### How the feedback loop works
+See the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) documentation for full configuration details, implementation examples, and reference.
+
+### Integrate an AI agent into your process
+
+The recommended approach for most use cases is to use the AI Agent Sub-process implementation due to its simplified configuration and support for event sub-processes.
+
+In this approach, you integrate the agent using an ad-hoc sub-process and the AI Agent Connector in a tool feedback loop, where the agent understands the process goal and uses the available tools to complete it.
+
+<p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Example AI agent integration diagram" className="img-700"/></p>
+
+#### How the feedback loop works
 
 The AI Agent connector operates in a feedback loop between the LLM and Camunda:
 
@@ -41,15 +51,9 @@ Decision-making and execution are intentionally split:
 - **LLM decides**: Which tool to call next, in what order, and with which parameters.
 - **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
 
-A common integration model uses an ad-hoc sub-process and the AI Agent connector in a tools feedback loop. In this model, the agent understands the process goal and uses the available tools to complete it.
-
-<p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Example AI agent integration diagram" className="img-700"/></p>
-
 :::tip
 Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
 :::
-
-See the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) documentation for full configuration details, implementation examples, and reference.
 
 ## AI agent integration features
 
@@ -86,8 +90,6 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
 
 Learn more about building and integrating AI agents in Camunda 8:
 
-- [Building Your First AI Agent in Camunda](https://camunda.com/blog/2025/05/step-by-step-guide-ai-task-agents-camunda/)
-- [Test your AI agents](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)
 - [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/step-by-step-guide-ai-task-agents-camunda/)
 - [Artificial Intelligence (AI) Agents: What You Need to Know](https://camunda.com/blog/2024/08/ai-agents-what-you-need-to-know/)
 - [Camunda AI agents](https://camunda.com/blog/tag/ai-agent/)
