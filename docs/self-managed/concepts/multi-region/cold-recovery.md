@@ -26,7 +26,7 @@ Cold Recovery RTO and RPO is time depend on data volume, backup frequency, opera
 
 ## Architecture overview
 
-In Cold Recovery, a single active region runs the full Camunda Orchestration Cluster. Automated backup jobs export Zeebe partition snapshots and secondary storage backups (Elasticsearch or RDBMS) to an S3-compatible object storage bucket replicated to a separate region. There is no warm standby — no second cluster runs during normal operations.
+In Cold Recovery, a single active region runs the Camunda Orchestration Cluster. Automated backup jobs export Zeebe partition snapshots and secondary storage backups (Elasticsearch, OpenSearch or RDBMS) to an S3-compatible object storage bucket replicated to a separate region. There is no warm standby — no second cluster runs during normal operations.
 
 <img src={ColdRecovery} alt="Camunda Cold Recovery from Backup architecture" style={{border: 'none'}} />
 
@@ -36,27 +36,28 @@ On primary-region failure, an operator provisions a new environment in the secon
 
 A complete Cold Recovery backup covers two storage layers. Both must be backed up; see the [Backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
-| Layer                                  | Backup target                      | Backup mechanism                                                         |
-| -------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------ |
-| **Primary storage** (Zeebe log stream) | Zeebe partition snapshots          | Zeebe Backup Management API                                              |
-| **Secondary storage** (Elasticsearch)  | Elasticsearch index snapshots      | Orchestration cluster backup API                                         |
-| **Secondary storage** (RDBMS)          | Database dump or continuous backup | Database-native tools (`pg_dump`, Oracle RMAN, AWS RDS automated backup) |
+| Layer                                             | Backup target                            | Backup mechanism                                                         |
+| ------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------ |
+| **Primary storage** (Zeebe log stream)            | Zeebe partition snapshots                | Zeebe Backup Management API                                              |
+| **Secondary storage** (Elasticsearch/ OpenSearch) | Elasticsearch/OpenSearch index snapshots | Orchestration cluster backup API                                         |
+| **Secondary storage** (RDBMS)                     | Database dump or continuous backup       | Database-native tools (`pg_dump`, Oracle RMAN, AWS RDS automated backup) |
 
 ### Component coverage
 
-| Component                   | Included in backup                      | Notes                                          |
-| --------------------------- | --------------------------------------- | ---------------------------------------------- |
-| **Zeebe** (primary storage) | Yes — partition snapshots               | Required                                       |
-| **Operate**                 | Yes — via Elasticsearch or RDBMS backup | State is stored in secondary storage           |
-| **Tasklist**                | Yes — via Elasticsearch or RDBMS backup | State is stored in secondary storage           |
-| **Admin / Identity**        | Yes — via Elasticsearch or RDBMS backup | Authentication and authorization configuration |
-| **Optimize**                | Elasticsearch path only                 | Standalone component; back up independently    |
-| **Web Modeler**             | Not included                            | Standalone component; back up independently    |
-| **Connectors**              | Not included                            | Stateless; redeploy from source                |
+| Component                   | Included in backup                                 | Notes                                          |
+| --------------------------- | -------------------------------------------------- | ---------------------------------------------- |
+| **Zeebe** (primary storage) | Yes — partition snapshots                          | Required                                       |
+| **Operate**                 | Yes — via Elasticsearch/OpenSearch or RDBMS backup | State is stored in secondary storage           |
+| **Tasklist**                | Yes — via Elasticsearch/OpenSearch or RDBMS backup | State is stored in secondary storage           |
+| **Admin**                   | Yes — via Elasticsearch/OpenSearch or RDBMS backup | Authentication and authorization configuration |
+| **Optimize**                | Elasticsearch/OpenSearch path only                 | Standalone component; back up independently    |
+| **Management Identity**     | Not included                                       | Standalone component; back up independently    |
+| **Web Modeler**             | Not included                                       | Standalone component; back up independently    |
+| **Connectors**              | Not included                                       | Stateless; redeploy from source                |
 
 ## Cross-region backup replication
 
-Cross-region replication of the backup storage is the **load-bearing assumption** of Cold Recovery. If backups exist only in the primary region, there is no disaster recovery when that region is lost — the backups are lost with it. Replication is therefore not optional and not merely a best practice; it is the prerequisite that makes Cold Recovery work.
+Cross-region replication of the backup storage is the **necessary requirement** of Cold Recovery. If backups exist only in the primary region, there is no disaster recovery when that region is lost — the backups are lost with it. Replication is therefore not optional and not merely a best practice; it is the prerequisite that makes Cold Recovery work.
 
 The primary backup bucket must replicate objects to a bucket in a **separate region** so that backup data remains accessible if the primary region becomes unavailable. For S3-compatible object storage, this is typically configured as continuous cross-region replication on the bucket itself.
 
@@ -83,12 +84,12 @@ For configuration instructions and scheduling guidance, see the [Backup and rest
 When the primary region fails, Cold Recovery follows this sequence:
 
 1. **Detect and declare** — Confirm the primary region is unavailable and initiate the recovery process.
-2. **Fence the old region** — Before redirecting traffic, ensure the original region's cluster, job workers, and connectors are stopped or otherwise prevented from acting (see [Fencing the 3. **Provision** — Spin up a new Camunda environment in the secondary region (or activate a pre-provisioned standby if one exists).
-3. **Select restore point** — Identify the most recent complete, consistent backup set from the replica S3 bucket.
-4. **Restore Camunda Orchestration cluster** — Follow the [Restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
-5. **Start and verify** — Deploy the Orchestration Cluster against the restored data and confirm health before routing traffic.
-   old region](#fencing-the-old-region)).
-6. **Redirect traffic** — Update applications, DNS or load balancer configuration to point production traffic at the secondary region.
+2. **Fence the old region** — Before redirecting traffic, ensure the original region's cluster, job workers, and connectors are stopped or otherwise prevented from acting see [Fencing The Old Region](#fencing-the-old-region)
+3. **Provision** — Spin up a new Camunda environment in the secondary region (or activate a pre-provisioned standby if one exists).
+4. **Select restore point** — Identify the most recent complete, consistent backup set from the replica S3 bucket.
+5. **Restore Camunda Orchestration cluster** — Follow the [Restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+6. **Start and verify** — Deploy the Orchestration Cluster against the restored data and confirm health before routing traffic.
+7. **Redirect traffic** — Update applications, DNS or load balancer configuration to point production traffic at the secondary region.
 
 The total elapsed time across all these steps is the realized RTO. For step-by-step restore instructions, see the [Backup and restore guides](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
@@ -98,7 +99,7 @@ Step 1 (detect and declare) is **not instantaneous** and is often the largest va
 
 ### Fencing the old region
 
-If the primary region failure is a true region loss, the old cluster is already gone and no further action is needed. However, if the failure is actually a **network partition** — the region is unreachable from your control plane but still running — the original Orchestration Cluster, its job workers, and its connectors may still be active. Promoting the restored cluster without fencing the old one results in **two live clusters that both believe they own the same process instances**, able to drive the same external side effects (payments, emails, downstream API calls) twice.
+If the region is truly gone, nothing is running there and no fencing is needed. The problem is when the region only _looks_ gone — a **network partition** means you cannot reach it, but the Orchestration Cluster, job workers, and connectors are still running inside it. If you start the restored cluster without first stopping the old one, you end up with **two clusters that both think they own the same process instances**. Each one can run the same action twice — sending the same payment, email, or API call a second time.
 
 Repointing DNS or load balancers does not solve this: job workers and connectors do not route through the front-door traffic layer. They poll Zeebe and call external systems directly.
 

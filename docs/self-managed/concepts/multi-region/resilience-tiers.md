@@ -20,21 +20,21 @@ Use the following questions to identify the option that matches your business ne
 
 ### RTO and RPO definitions
 
-**Recovery Point Objective (RPO)** is the maximum tolerable amount of data loss, measured as the time between the last consistent backup or replication point and the moment of failure.
+**Recovery Point Objective (RPO)** is the maximum tolerable amount of data loss, measured as the time between the last persisted consistent backup and the moment of failure.
 
 **Recovery Time Objective (RTO)** is the maximum tolerable time from failure detection to service restoration in a functional state.
 
 ## Option comparison
 
-| Consideration           | Cold Recovery                                                                           | Dual-Region                                                                                          |
-| ----------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| **Recovery time (RTO)** | ~1–4 hours                                                                              | ~15 minutes                                                                                          |
-| **Data loss (RPO)**     | 15 min – 4 hours (backup-interval dependent)                                            | 0 minutes                                                                                            |
-| **Failover mode**       | Manual, operator-initiated                                                              | Manual or operator-initiated                                                                         |
-| **Architecture**        | Scheduled backup to cross-region object storage; manual restore into a secondary region | Full Orchestration Cluster running in both regions; dual-region exporters; manual failover           |
-| **Typical use case**    | Low-criticality production; environments where hours-long recovery is acceptable        | Enterprise production workloads that must survive a region failure                                   |
-| **Compliance fit**      | Basic business continuity management (BCM) requirements                                 | Certified, auditable region-recovery posture with a published runbook                                |
-| **Relative cost**       | **$** — object storage only; no standing second region                                  | **$$$** — full Orchestration Cluster running continuously in both regions, plus cross-region traffic |
+| Consideration           | Cold Recovery                                                                           | Dual-Region                                                                                                                                          |
+| ----------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Recovery time (RTO)** | ~1–4 hours                                                                              | ~15 minutes                                                                                                                                          |
+| **Data loss (RPO)**     | 15 min – 4 hours (backup-interval dependent)                                            | 0 minutes                                                                                                                                            |
+| **Failover mode**       | Manual, operator-initiated                                                              | Manual or operator-initiated                                                                                                                         |
+| **Architecture**        | Scheduled backup to cross-region object storage; manual restore into a secondary region | Orchestration Cluster running in both regions; dual-region exporters; manual failover                                                                |
+| **Typical use case**    | Low-criticality production; environments where hours-long recovery is acceptable        | Enterprise production workloads that must survive a region failure                                                                                   |
+| **Compliance fit**      | Basic business continuity management (BCM) requirements                                 | Certified, auditable region-recovery posture with a published runbook                                                                                |
+| **Relative cost**       | **$** — object storage only; no standing second region                                  | **$$$** — Orchestration Cluster running across both regions with extra capacity to sustain load in case of Region failure, plus cross-region traffic |
 
 :::important
 Cold Recovery RTO and RPO targets are bounded by data volume, backup frequency, and operator restore speed. Treat published ranges as planning targets, not contractual commitments.
