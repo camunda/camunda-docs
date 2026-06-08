@@ -34,47 +34,24 @@
   justify-content: center;
 }
 
-/* ─── Browse more downloads outline button ─── */
-.browseMoreWrap {
-  display: flex;
-  justify-content: center;
-  margin: 3rem 0 0;
+/* ─── Additional release resources ─── */
+.additionalReleasesSection {
+  margin-top: 2.75rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--card-border);
 }
 
-.browseMoreButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.25rem;
-  border: 1px solid var(--card-hover-border);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--card-hover-border) !important;
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-decoration: none !important;
-  transition:
-    background 0.15s,
-    color 0.15s,
-    transform 0.15s;
+.additionalReleasesTitle {
+  margin: 0;
+  text-align: center;
+  font-size: 1.35rem;
 }
 
-.browseMoreButton:hover {
-  background: var(--card-hover-border);
-  color: #ffffff !important;
-  transform: translateY(-2px);
-  text-decoration: none !important;
-}
-
-[data-theme="dark"] .browseMoreButton {
-  border-color: #ffffff;
-  color: #ffffff !important;
-}
-
-[data-theme="dark"] .browseMoreButton:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: #ffffff;
-  color: #ffffff !important;
+.additionalReleasesSub {
+  margin: 0.6rem auto 1.5rem;
+  text-align: center;
+  color: var(--muted-color);
+  max-width: 700px;
 }
 
 /* ─── Last section: gradient bg + extra bottom space ─── */
@@ -170,6 +147,11 @@
 .downloadsSection {
   padding-top: 3rem !important;
   padding-bottom: 4rem !important;
+}
+
+.downloadsGridFull {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  max-width: 100% !important;
 }
 
 /* ─── Download card ─── */
