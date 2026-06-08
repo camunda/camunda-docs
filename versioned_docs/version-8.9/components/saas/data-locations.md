@@ -104,4 +104,4 @@ You can use the Camunda‑hosted [Web Modeler](/components/modeler/web-modeler/i
 
 | Host location     | Data handled                                   | Personal data processing                   |
 | :---------------- | :--------------------------------------------- | :----------------------------------------- |
-| Belgium, EU (GCP) | Only stores process models (diagrams/designs). | Not intended for personal data processing. |
+| Germany, EU (AWS) | Only stores process models (diagrams/designs). | Not intended for personal data processing. |
