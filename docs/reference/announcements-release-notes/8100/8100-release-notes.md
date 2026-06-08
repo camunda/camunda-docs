@@ -46,7 +46,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
 
-The Camunda Agent Development Kit (ADK) is a set of tools for AI coding agents that enables them to build, validate, and configure Camunda artifacts—not just generate code. With the ADK and Skills installed, your AI agent can:
+The Camunda Skills repository is a set of tools for AI coding agents that enables them to build, validate, and configure Camunda artifacts—not just generate code. With the Skills installed, your AI agent can:
 
 - Build and modify BPMN diagrams with a human-readable layout.
 - Configure connectors using element templates (no raw XML).
