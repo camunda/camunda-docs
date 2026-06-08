@@ -31,9 +31,9 @@ See the [AI Agent connector](/components/connectors/out-of-the-box-connectors/ag
 
 ### Integrate an AI agent into your process
 
-The recommended approach for most use cases is to use the AI Agent Sub-process implementation due to its simplified configuration and support for event sub-processes.
+The recommended approach for most use cases is to use the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) implementation due to its simplified configuration and support for event sub-processes.
 
-In this approach, you integrate the agent using an ad-hoc sub-process and the AI Agent Connector in a tool feedback loop, where the agent understands the process goal and uses the available tools to complete it.
+In this approach, you integrate the agent using an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) in a tool feedback loop, where the agent understands the process goal and uses the available tools to complete it.
 
 <p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Example AI agent integration diagram" className="img-700"/></p>
 
@@ -85,13 +85,3 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
     <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
 </tr>
 </table>
-
-:::info further resources
-
-Learn more about building and integrating AI agents in Camunda 8:
-
-- [Intelligent by Design: A Step-by-Step Guide to AI Task Agents in Camunda](https://camunda.com/blog/2025/05/step-by-step-guide-ai-task-agents-camunda/)
-- [Artificial Intelligence (AI) Agents: What You Need to Know](https://camunda.com/blog/2024/08/ai-agents-what-you-need-to-know/)
-- [Camunda AI agents](https://camunda.com/blog/tag/ai-agent/)
-
-:::
