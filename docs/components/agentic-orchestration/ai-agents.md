@@ -33,7 +33,7 @@ See the [AI Agent connector](/components/connectors/out-of-the-box-connectors/ag
 
 The recommended approach for most use cases is to use the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) implementation due to its simplified configuration and support for event sub-processes.
 
-In this approach, you integrate the agent using an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) in a tool feedback loop, where the agent understands the process goal and uses the available tools to complete it.
+In this approach, you integrate the agent using an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) and the AI Agent connector in a tool feedback loop, where the agent understands the process goal and uses the available tools to complete it.
 
 <p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Example AI agent integration diagram" className="img-700"/></p>
 
