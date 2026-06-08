@@ -33,7 +33,7 @@ export const fundamentalCards = [
     title: "AI Agent connector",
     image: IconConnectorImg,
     description:
-      "Integrate LLMs with your processes using the AI Agent connector.",
+      "Embed LLM-powered agents in your processes with the AI Agent connector.",
   },
   {
     link: "../camunda-provided-llm/",
