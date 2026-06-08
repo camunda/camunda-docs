@@ -822,6 +822,11 @@ module.exports = {
                   label: "Git Sync",
                   id: "components/hub/workspace/manage-projects/git-sync",
                 },
+                {
+                  type: "doc",
+                  label: "Recover deleted files",
+                  id: "components/hub/workspace/manage-projects/recently-deleted",
+                },
               ],
             },
             {
