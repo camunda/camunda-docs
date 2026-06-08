@@ -15,6 +15,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/SearchQueryPageRequest"
 
+    SearchQueryPage:
+      oneOf:
+        - $ref: "#/components/schemas/LimitPagination"
+        - $ref: "#/components/schemas/OffsetPagination"
+
     SearchQueryPageRequest:
       x-polymorphic-schema: true
       description: >

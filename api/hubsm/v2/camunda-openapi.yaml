@@ -32,6 +32,10 @@ security:
 tags:
   - name: File
     description: File management operations.
+  - name: Folder
+    description: Folder management operations.
+  - name: Project
+    description: Project management operations.
 
 paths:
   /files:
@@ -40,6 +44,16 @@ paths:
     $ref: "files.yaml#/paths/~1files~1{fileKey}"
   /files/search:
     $ref: "files.yaml#/paths/~1files~1search"
+  /folders:
+    $ref: "folders.yaml#/paths/~1folders"
+  /folders/{folderKey}:
+    $ref: "folders.yaml#/paths/~1folders~1{folderKey}"
+  /projects:
+    $ref: "projects.yaml#/paths/~1projects"
+  /projects/{projectKey}:
+    $ref: "projects.yaml#/paths/~1projects~1{projectKey}"
+  /projects/search:
+    $ref: "projects.yaml#/paths/~1projects~1search"
 
 components:
   securitySchemes:
