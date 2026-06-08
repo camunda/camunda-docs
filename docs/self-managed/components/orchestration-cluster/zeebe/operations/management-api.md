@@ -127,7 +127,7 @@ POST actuator/exporters/{exporterId}/enable
 }
 ```
 
-`initializeFrom` accepts an existing exporter's ID. Both the exporter you're enabling and the exporter you're initializing from must be the same [type](../exporters/exporters.md). For example, you can't use an Elasticsearch exporter's ID to initialize an Opensearch exporter.
+`initializeFrom` accepts an existing exporter's ID. Both the exporter you're enabling and the exporter you're initializing from must be the same [type](../exporters/exporters.md). For example, you can't use an Elasticsearch exporter's ID to initialize an OpenSearch exporter.
 
 After you enable the exporter, new records will be exported to it.
 
