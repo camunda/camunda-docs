@@ -389,8 +389,6 @@ For example:
 
 Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
-:::info Camunda Academy
-Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.
-
-Read more AI agent articles and tutorials on [Camunda AI agents](https://camunda.com/blog/tag/ai-agent/).
+:::tip
+Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to design and integrate AI agents in your end-to-end processes. For more insights and examples, explore our [Camunda AI agents blog posts](https://camunda.com/blog/tag/ai-agent/).
 :::
