@@ -1,14 +1,14 @@
 ---
 id: ai-agents
 title: AI agents
-description: "Start building and integrating AI agents into your end-to-end processes. An AI agent is a software program that autonomously gathers data and carries out tasks using this information, independently or on behalf of another system or person."
+description: "Build and integrate AI agents into your end-to-end processes."
 keywords: ["agentic ai", "AI agents"]
 ---
 
 import ExampleImg from '../connectors/img/ai-agent-subprocess.png';
 import AgentImg from './img/ao-ai-agent.png';
 
-Start building and integrating AI agents into your end-to-end processes.
+Build and integrate AI agents into your end-to-end processes.
 
 ## About AI agents
 
