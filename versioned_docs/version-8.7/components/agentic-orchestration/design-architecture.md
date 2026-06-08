@@ -42,32 +42,7 @@ Follow these principles when designing your agentic orchestration solution:
 
 - **Prompt versioning**: Version every prompt, so you can revert to using a previous prompt when required.
 
-### Define your agent tools
-
-In the AI agent model, each BPMN activity inside an ad-hoc sub-process is a tool exposed to the LLM. The activity name and its documentation are used by the LLM to decide what to do next.
-
-Clear, behavior-oriented descriptions help the LLM:
-
-- Select the right tool for the current goal.
-- Pass the right parameters in the expected format.
-- Avoid unsafe, redundant, or nonsensical actions.
-
-Poor or missing documentation increases the risk of:
-
-- Incorrect or ambiguous tool selection.
-- Repeated tool calls or skipped required steps.
-- Hallucinated behavior and responses that do not match process intent.
-
-#### Example: weak vs strong tool definition
-
-| Tool definition | Example                                                                                                                                                                                                                                           |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Weak            | **Name**: `Lookup`<br/>**Documentation**: `Find customer data`                                                                                                                                                                                    |
-| Strong          | **Name**: `Resolve customer by legal company name`<br/>**Documentation**: `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
-
-A clear tool name and precise documentation make the expected behavior explicit, improving reliability during tool selection and execution.
-
-### Mixing Agents with Workflow patterns
+### Mixing agents with workflow patterns
 
 <p><img src={WorkflowImg} style={{marginBottom: '0'}} title="Diagram showing how to mix agents into your workflow patterns" className="img-transparent"/></p>
 
