@@ -317,7 +317,7 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 ## Use Play with Camunda Self-Managed
 
-After selecting the **Play** tab in Self-Managed, the Play view opens directly. The cluster setup and deployment flow is the same as in SaaS; see [Opening Play](#opening-play).
+After selecting the **Play** tab in Self-Managed, the Play view opens directly. The cluster setup and deployment flow is the same as in SaaS, see [opening Play](#opening-play).
 
 ### Limitations {#self-managed-limitations}
 
