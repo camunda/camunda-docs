@@ -1,0 +1,631 @@
+---
+id: get-folder
+title: "Get a folder"
+description: "Returns the folder metadata and its content (child folders and files)."
+sidebar_label: "Get a folder"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-public-api-v-2
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get a folder"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/folders/{folderKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns the folder metadata and its content (child folders and files).
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "folderKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the folder.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The folder was retrieved successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            description:
+              "A folder with its metadata and content (child folders and files).",
+            required: ["folder", "content"],
+            properties: {
+              folder: {
+                description: "The folder metadata.",
+                allOf: [
+                  {
+                    type: "object",
+                    required: [
+                      "folderKey",
+                      "name",
+                      "projectKey",
+                      "parentFolderKey",
+                      "created",
+                      "createdBy",
+                      "updated",
+                      "updatedBy",
+                    ],
+                    properties: {
+                      folderKey: {
+                        description: "The unique key identifying this folder.",
+                        type: "string",
+                      },
+                      name: {
+                        description: "The name of the folder.",
+                        type: "string",
+                      },
+                      projectKey: {
+                        description:
+                          "The key of the project this folder belongs to.",
+                        type: "string",
+                      },
+                      parentFolderKey: {
+                        description:
+                          "The key of the parent folder. Null if the folder is at project root.",
+                        type: "string",
+                        nullable: true,
+                      },
+                      created: {
+                        description:
+                          "The timestamp when the folder was created.",
+                        type: "string",
+                        format: "date-time",
+                      },
+                      createdBy: {
+                        description: "The user who created the folder.",
+                        allOf: [
+                          {
+                            type: "object",
+                            description: "A reference to a user.",
+                            required: ["name", "email"],
+                            properties: {
+                              name: {
+                                description: "The display name of the user.",
+                                type: "string",
+                              },
+                              email: {
+                                description: "The email address of the user.",
+                                type: "string",
+                                format: "email",
+                              },
+                            },
+                            title: "UserReference",
+                          },
+                        ],
+                      },
+                      updated: {
+                        description:
+                          "The timestamp when the folder was last updated.",
+                        type: "string",
+                        format: "date-time",
+                      },
+                      updatedBy: {
+                        description: "The user who last updated the folder.",
+                        allOf: [
+                          {
+                            type: "object",
+                            description: "A reference to a user.",
+                            required: ["name", "email"],
+                            properties: {
+                              name: {
+                                description: "The display name of the user.",
+                                type: "string",
+                              },
+                              email: {
+                                description: "The email address of the user.",
+                                type: "string",
+                                format: "email",
+                              },
+                            },
+                            title: "UserReference",
+                          },
+                        ],
+                      },
+                    },
+                    title: "FolderResult",
+                  },
+                ],
+              },
+              content: {
+                description:
+                  "The content of the folder (child folders and files).",
+                allOf: [
+                  {
+                    type: "object",
+                    description:
+                      "The content of a folder, listing its direct children.",
+                    required: ["folders", "files"],
+                    properties: {
+                      folders: {
+                        description: "The child folders within this folder.",
+                        type: "array",
+                        items: {
+                          type: "object",
+                          required: [
+                            "folderKey",
+                            "name",
+                            "projectKey",
+                            "parentFolderKey",
+                            "created",
+                            "createdBy",
+                            "updated",
+                            "updatedBy",
+                          ],
+                          properties: {
+                            folderKey: {
+                              description:
+                                "The unique key identifying this folder.",
+                              type: "string",
+                            },
+                            name: {
+                              description: "The name of the folder.",
+                              type: "string",
+                            },
+                            projectKey: {
+                              description:
+                                "The key of the project this folder belongs to.",
+                              type: "string",
+                            },
+                            parentFolderKey: {
+                              description:
+                                "The key of the parent folder. Null if the folder is at project root.",
+                              type: "string",
+                              nullable: true,
+                            },
+                            created: {
+                              description:
+                                "The timestamp when the folder was created.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            createdBy: {
+                              description: "The user who created the folder.",
+                              allOf: [
+                                {
+                                  type: "object",
+                                  description: "A reference to a user.",
+                                  required: ["name", "email"],
+                                  properties: {
+                                    name: {
+                                      description:
+                                        "The display name of the user.",
+                                      type: "string",
+                                    },
+                                    email: {
+                                      description:
+                                        "The email address of the user.",
+                                      type: "string",
+                                      format: "email",
+                                    },
+                                  },
+                                  title: "UserReference",
+                                },
+                              ],
+                            },
+                            updated: {
+                              description:
+                                "The timestamp when the folder was last updated.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            updatedBy: {
+                              description:
+                                "The user who last updated the folder.",
+                              allOf: [
+                                {
+                                  type: "object",
+                                  description: "A reference to a user.",
+                                  required: ["name", "email"],
+                                  properties: {
+                                    name: {
+                                      description:
+                                        "The display name of the user.",
+                                      type: "string",
+                                    },
+                                    email: {
+                                      description:
+                                        "The email address of the user.",
+                                      type: "string",
+                                      format: "email",
+                                    },
+                                  },
+                                  title: "UserReference",
+                                },
+                              ],
+                            },
+                          },
+                          title: "FolderResult",
+                        },
+                      },
+                      files: {
+                        description: "The files within this folder.",
+                        type: "array",
+                        items: {
+                          type: "object",
+                          required: [
+                            "fileKey",
+                            "name",
+                            "projectKey",
+                            "folderKey",
+                            "simplePath",
+                            "canonicalPath",
+                            "revision",
+                            "type",
+                            "content",
+                            "created",
+                            "createdBy",
+                            "updated",
+                            "updatedBy",
+                          ],
+                          properties: {
+                            fileKey: {
+                              description:
+                                "The unique key identifying this file.",
+                              type: "string",
+                            },
+                            name: {
+                              description: "The name of the file.",
+                              type: "string",
+                            },
+                            projectKey: {
+                              description:
+                                "The key of the project this file belongs to.",
+                              type: "string",
+                            },
+                            folderKey: {
+                              description:
+                                "The key of the parent folder. Null if the file is at project root.",
+                              type: "string",
+                              nullable: true,
+                            },
+                            simplePath: {
+                              description:
+                                "The human-readable path of the file within its project.",
+                              type: "string",
+                            },
+                            canonicalPath: {
+                              description:
+                                "The canonical (ID-based) path of the file within its project.",
+                              type: "string",
+                            },
+                            revision: {
+                              description:
+                                "The current revision number, used for optimistic locking.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            type: {
+                              description: "The type of the file.",
+                              type: "string",
+                              enum: [
+                                "bpmn",
+                                "dmn",
+                                "form",
+                                "element-template",
+                                "rpa",
+                                "markdown",
+                                "tests",
+                              ],
+                            },
+                            content: {
+                              description:
+                                "The content of the file. Present in single-file responses (get, create, update) but null in search results for performance reasons.\n",
+                              type: "string",
+                              nullable: true,
+                            },
+                            created: {
+                              description:
+                                "The timestamp when the file was created.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            createdBy: {
+                              description: "The user who created the file.",
+                              allOf: [
+                                {
+                                  type: "object",
+                                  description: "A reference to a user.",
+                                  required: ["name", "email"],
+                                  properties: {
+                                    name: {
+                                      description:
+                                        "The display name of the user.",
+                                      type: "string",
+                                    },
+                                    email: {
+                                      description:
+                                        "The email address of the user.",
+                                      type: "string",
+                                      format: "email",
+                                    },
+                                  },
+                                  title: "UserReference",
+                                },
+                              ],
+                            },
+                            updated: {
+                              description:
+                                "The timestamp when the file was last updated.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            updatedBy: {
+                              description:
+                                "The user who last updated the file.",
+                              allOf: [
+                                {
+                                  type: "object",
+                                  description: "A reference to a user.",
+                                  required: ["name", "email"],
+                                  properties: {
+                                    name: {
+                                      description:
+                                        "The display name of the user.",
+                                      type: "string",
+                                    },
+                                    email: {
+                                      description:
+                                        "The email address of the user.",
+                                      type: "string",
+                                      format: "email",
+                                    },
+                                  },
+                                  title: "UserReference",
+                                },
+                              ],
+                            },
+                          },
+                          title: "FileResult",
+                        },
+                      },
+                    },
+                    title: "FolderContent",
+                  },
+                ],
+              },
+            },
+            title: "FolderDetailResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The folder was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
