@@ -557,11 +557,11 @@ A record represents a command or an event. For example, a command to create a ne
 
 ### Recovery Point Objective (RPO)
 
-Maximum tolerable amount of data loss, measured as the time between the last persisted consistent backup and the moment of failure.
+Multi-region resilience: Maximum tolerable amount of data loss, measured as the time between the last persisted consistent backup and the moment of failure.
 
 ### Recovery Time Objective (RTO)
 
-Maximum tolerable time from failure detection to service restoration in a functional state.
+Multi-region resilience: Maximum tolerable time from failure detection to service restoration in a functional state.
 
 ### Reference architecture
 

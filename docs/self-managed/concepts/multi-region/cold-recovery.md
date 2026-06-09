@@ -2,26 +2,32 @@
 id: cold-recovery
 title: "Cold Recovery"
 sidebar_label: "Cold Recovery"
-description: "Conceptual overview of cold backup-based disaster recovery for Camunda Self-Managed: how it works, backup scope, recovery flow, and RTO/RPO characteristics."
+description: "Cold recovery uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss."
 ---
 
 <!-- Image source: https://miro.com/app/board/uXjVL-6SrPc=/ -->
 
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
 import ColdRecovery from "./img/cold-recovery-diagram.jpg";
+
+## About
 
 Cold Recovery is Camunda's lowest-cost multi-region resilience configuration. It provides a documented, repeatable recovery path from complete primary-region loss using scheduled backups exported to cross-region object storage and a manual restore procedure into a secondary region.
 
-Cold Recovery is suited for production workloads, where recovery measured in hours is operationally acceptable.
+Cold Recovery is suited for production workloads in which recovery measured in hours is operationally acceptable.
 
-| Property                            | Value                                            |
-| ----------------------------------- | ------------------------------------------------ |
-| **RTO**                             | ~1–4 hours (operator and environment dependent)  |
-| **RPO**                             | 15 minutes – 4 hours (backup-interval dependent) |
-| **Failover mode**                   | Manual, operator-initiated                       |
-| **Standing second region required** | No — restore into a newly provisioned region     |
+| Consideration                        | Value                                            |
+| :----------------------------------- | :----------------------------------------------- |
+| **Recovery time (RTO)**              | ~1–4 hours (operator and environment dependent)  |
+| **Data loss (RPO)**                  | 15 minutes – 4 hours (backup-interval dependent) |
+| **Failover mode**                    | Manual, operator-initiated                       |
+| **Standing second region required?** | No. Restore into a newly provisioned region      |
 
 :::important
-Cold Recovery RTO and RPO is time depend on data volume, backup frequency, operator familiarity with the restore procedure, and the speed at which a secondary region can be provisioned. Treat the ranges above as planning targets, not contractual commitments.
+Cold Recovery [RTO](/reference/glossary.md#recovery-time-objective-rto) and [RPO](/reference/glossary.md#recovery-point-objective-rpo) is time depend on data volume, backup frequency, operator familiarity with the restore procedure, and the speed at which a secondary region can be provisioned. Treat the ranges above as planning targets, not contractual commitments.
 :::
 
 ## Architecture overview
