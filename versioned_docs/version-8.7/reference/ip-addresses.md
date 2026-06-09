@@ -28,6 +28,10 @@ The public IP addresses exposed for connecting to the cluster depends on the clo
 - **Amazon Web Services (AWS)**: Each endpoint is served by multiple IP addresses.
 - **Google Cloud Platform (GCP)**: IP addresses are AnyCast IP addresses and are globally available.
 
+:::note
+AWS-hosted clusters support secure connectivity using AWS PrivateLink. For setup details, see [Secure connectivity (AWS PrivateLink)](/docs/components/saas/secure-connectivity/).
+:::
+
 ## Outbound connections
 
 If you use a [Camunda connector](/components/connectors/introduction.md), your cluster sends requests from the Camunda SaaS infrastructure to the external services you configure in your processes.
