@@ -425,19 +425,19 @@ const CAMUNDA_RUN = {
 };
 
 const RPA_WORKER = {
-  version: "1.2.2",
-  date: "Jan 14, 2026",
+  version: "1.3.2",
+  date: "Apr 23, 2026",
   alphaVersion: "1.3.0-alpha.3",
   links: {
     mac: {
       stable: [
         {
           label: "Apple Silicon",
-          url: "https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_darwin_aarch64.zip",
+          url: "https://downloads.camunda.cloud/release/rpa-worker/1.3.2/rpa-worker_1.3.2_darwin_aarch64.zip",
         },
         {
           label: "Intel",
-          url: "https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_darwin_x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/rpa-worker/1.3.2/rpa-worker_1.3.2_darwin_amd64.zip",
         },
       ],
       experimental: [
@@ -455,7 +455,7 @@ const RPA_WORKER = {
       stable: [
         {
           label: "Windows (x64)",
-          url: "https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_windows_x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/rpa-worker/1.3.2/rpa-worker_1.3.2_win32_amd64.zip",
         },
       ],
       experimental: [
@@ -469,7 +469,7 @@ const RPA_WORKER = {
       stable: [
         {
           label: "Linux (x64)",
-          url: "https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_linux_x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/rpa-worker/1.3.2/rpa-worker_1.3.2_linux_amd64.zip",
         },
       ],
       experimental: [
