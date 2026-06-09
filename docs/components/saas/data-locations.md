@@ -49,7 +49,7 @@ Connector secrets are optional. This information only applies if you use connect
 | Host location            | Data handled                                 | Personal data processing                                                                                                                                                        |
 | :----------------------- | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <p>Germany, EU (AWS)</p> | Stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
-| Belgium, EU (GCP)        | Stores process models (diagrams/designs).    | Not intended for personal data processing.                                                                                                                                      |
+| Germany, EU (AWS)        | Stores process models (diagrams/designs).    | Not intended for personal data processing.                                                                                                                                      |
 
 You can use Camunda Hub and/or the [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda Self‑Managed if you want to control the hosting location.
 

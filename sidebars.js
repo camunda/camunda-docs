@@ -822,6 +822,11 @@ module.exports = {
                   label: "Git Sync",
                   id: "components/hub/workspace/manage-projects/git-sync",
                 },
+                {
+                  type: "doc",
+                  label: "Recover deleted files",
+                  id: "components/hub/workspace/manage-projects/recently-deleted",
+                },
               ],
             },
             {
@@ -1304,6 +1309,8 @@ module.exports = {
         require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-saas/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-sm/sidebar-schema"),
         {
           type: "category",
           label: "Optimize API",
@@ -1343,10 +1350,10 @@ module.exports = {
             "apis-tools/optimize-api/variable-labeling",
           ],
         },
-        require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
+            require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -1538,7 +1545,10 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",
-      items: ["apis-tools/migration-manuals/migrate-to-810"],
+      items: [
+        "apis-tools/migration-manuals/migrate-to-810",
+        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
+      ],
     },
   ],
   Reference: [
@@ -2175,6 +2185,18 @@ module.exports = {
                 "self-managed/concepts/document-handling/configuration/helm",
               ],
             },
+          ],
+        },
+        {
+          type: "category",
+          label: "Multi-tenancy",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-tenancy/multi-tenancy-overview",
+          },
+          items: [
+            "self-managed/concepts/multi-tenancy/logical-tenants",
+            "self-managed/concepts/multi-tenancy/physical-tenants",
           ],
         },
         {
