@@ -40,13 +40,13 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ### Agentic orchestration
 
-#### Pro-code AI enablement via Skills repository
+#### Skills repository for pro-code AI enablement
 
 <!-- https://github.com/camunda/product-hub/issues/3557 -->
 
 <div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
 
-The Camunda Skills repository is a set of tools for AI coding agents that enables them to build, validate, and configure Camunda artifacts—not just generate code. With the Skills installed, your AI agent can:
+The Camunda Skills repository toolset enables AI coding agents to build, validate, and configure Camunda artifacts. With the Skills installed, your AI agent can:
 
 - Build and modify BPMN diagrams with a human-readable layout.
 - Configure connectors using element templates (no raw XML).
@@ -72,13 +72,19 @@ Camunda Process Test (CPT) now supports **judge assertions** in JSON test cases.
 
 <!-- https://github.com/camunda/camunda/issues/48491 -->
 
-Camunda 8.10 introduces the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md), which enables AI agents to discover and call your deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
+AI agents can use the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) to discover and call deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
 
-Deploy a process with an MCP start event and it is automatically registered as a callable tool. MCP clients connect to the `/mcp/processes` endpoint and can invoke any registered process, with the Orchestration Cluster starting a new process instance and returning the process instance key immediately.
+When you deploy a process with an MCP start event it is automatically registered as a callable tool. MCP clients connect to the `/mcp/processes` endpoint and can invoke any registered process, with the Orchestration Cluster starting a new process instance and immediately returning the process instance key.
 
 The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
 
 ### APIs & tools
+
+#### Camunda 8 Run no longer requires Java
+
+Camunda 8 Run now includes a bundled Java runtime. This means you no longer need to install OpenJDK or set `JAVA_HOME` before starting Camunda 8 Run.
+
+<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
 #### FEEL evaluation with process instance key
 
@@ -86,7 +92,7 @@ The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-s
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
 
-`POST /v2/expression/evaluation` now optionally evaluates expressions in the context of:
+The `POST /v2/expression/evaluation` endpoint now optionally evaluates expressions in the context of:
 
 - A process instance, via `processInstanceKey`.
 - A flow node instance, via `elementInstanceKey`.
@@ -99,19 +105,19 @@ The endpoint:
 
 Behavior remains free from side effects and uses the same timeout and guardrails as the existing cluster-scope evaluation.
 
-#### Remove deprecated APIs, Zeebe Client, and Zeebe Process Test
+#### Removal of deprecated APIs, Zeebe Client, and Zeebe Process Test
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
 
-The Operate and Tasklist APIs, deprecated since 8.8, have been removed. Process data, task management, and operational queries are now served through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+The deprecated Operate and Tasklist APIs are removed. Process data, task management, and operational queries are now served through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 <p class="link-arrow">[Migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
 
-The Zeebe Client has been removed and replaced by the [Camunda Java Client](/apis-tools/java-client/getting-started.md). This covers process deployment, message correlation, and job handling.
+The Zeebe Client is removed and replaced by the [Camunda Java Client](/apis-tools/java-client/getting-started.md). This covers process deployment, message correlation, and job handling.
 
 <p class="link-arrow">[Migrate to the Camunda Java Client](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)</p>
 
-The Zeebe Process Test library has been removed and replaced by [Camunda Process Test](/apis-tools/testing/getting-started.md). This provides richer assertions, Spring integration, and alignment with the Orchestration Cluster API surface.
+The Zeebe Process Test library is removed and replaced by [Camunda Process Test](/apis-tools/testing/getting-started.md). This provides richer assertions, Spring integration, and alignment with the Orchestration Cluster API surface.
 
 <p class="link-arrow">[Migrate to Camunda Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
 
