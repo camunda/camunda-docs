@@ -14,9 +14,9 @@ Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orches
 
 Every record in Camunda passes through two distinct storage layers, and understanding the difference between them is the key to understanding sizing.
 
-**Primary storage** is the Raft log plus RocksDB snapshots, one set per partition. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader that is responsible for both processing commands and exporting records.
+**[Primary storage](/reference/glossary/#primary-storage)** is the Raft log plus RocksDB snapshots, one set per partition. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader that is responsible for both processing commands and exporting records.
 
-**Secondary storage** is Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
+**[Secondary storage](/reference/glossary/#secondary-storage)** is Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
 
 ## The three paths
 
