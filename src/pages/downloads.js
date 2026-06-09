@@ -699,7 +699,7 @@ function Downloads() {
               version={GETTING_STARTED.version}
               date={GETTING_STARTED.date}
               links={GETTING_STARTED.links}
-              docsLink="/docs/next/guides/getting-started-hello-world/#step-2-deploy-and-run-your-model"
+              docsLink="/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
               activeOS={activeOS}
               badge="Recommended for new users"
             />
