@@ -27,16 +27,18 @@ Cold Recovery is suited for production workloads in which recovery measured in h
 | **Standing second region required?** | No. Restore into a newly provisioned region      |
 
 :::important
-Cold Recovery [RTO](/reference/glossary.md#recovery-time-objective-rto) and [RPO](/reference/glossary.md#recovery-point-objective-rpo) is time depend on data volume, backup frequency, operator familiarity with the restore procedure, and the speed at which a secondary region can be provisioned. Treat the ranges above as planning targets, not contractual commitments.
+Cold Recovery [RTO](/reference/glossary.md#recovery-time-objective-rto) and [RPO](/reference/glossary.md#recovery-point-objective-rpo) depends on data volume, backup frequency, operator familiarity with the restore procedure, and the speed at which a secondary region can be provisioned. The ranges above are planning targets, not contractual commitments.
 :::
 
 ## Architecture overview
 
-In Cold Recovery, a single active region runs the Camunda Orchestration Cluster. Automated backup jobs export Zeebe partition snapshots and secondary storage backups (Elasticsearch, OpenSearch or RDBMS) to an S3-compatible object storage bucket replicated to a separate region. There is no warm standby — no second cluster runs during normal operations.
+In Cold Recovery, a single active region runs the Camunda Orchestration Cluster.
 
 <img src={ColdRecovery} alt="Camunda Cold Recovery from Backup architecture" style={{border: 'none'}} />
 
-On primary-region failure, an operator provisions a new environment in the secondary region and restores from the most recent consistent backup set.
+- Automated backup jobs export Zeebe partition snapshots and secondary storage backups (Elasticsearch, OpenSearch or RDBMS) to an S3-compatible object storage bucket replicated to a separate region.
+- There is no warm standby. For example, a second cluster does not run during normal operations.
+- On primary-region failure, an operator provisions a new environment in the secondary region and restores from the most recent consistent backup set.
 
 ## Backup scope
 

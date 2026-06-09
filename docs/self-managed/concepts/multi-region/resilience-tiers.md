@@ -2,7 +2,7 @@
 id: resilience-tiers
 title: "Multi-region resilience"
 sidebar_label: "Multi-region resilience"
-description: "Learn about multi-region deployment and choose the right option for your recovery and resilience needs."
+description: "Learn about multi-region deployment and choose the right strategy for your recovery and resilience needs."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
@@ -13,15 +13,15 @@ import PageDescription from '@site/src/components/PageDescription';
 
 Camunda provides a structured multi-region resilience framework for Self-Managed Orchestration Cluster deployments.
 
-You can choose from either of the following types of multi-region configuration:
+You can choose either of the following multi-region configuration options:
 
 - **[Cold Recovery](./cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable.
 
 - **[Dual-Region](./dual-region.md)**: Dual-region deployment with continuous replication. A full Camunda Orchestration Cluster runs continuously in both a primary and secondary region.
 
-### Get started: Choose the right option
+### Get started: Choose the right strategy
 
-The right option for your business is determined by how critical your process automation is to your business. How much downtime and data loss can you tolerate, and what compliance obligations do you have?
+Choosing the right option is determined by how critical your process automation is to your business. How much downtime and data loss can you tolerate, and what compliance obligations do you have?
 
 First, determine how critical your workload is:
 
@@ -34,7 +34,7 @@ Each option includes a reference architecture, deployment guide, and operational
 
 ## Comparison of multi-region resilience
 
-The following table provides a comparison of the available multi-region deployment options:
+The following table provides a detailed comparison of the available multi-region deployment options:
 
 | Consideration           | Cold Recovery                                                                           | Dual-Region                                                                                                                                         |
 | :---------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
