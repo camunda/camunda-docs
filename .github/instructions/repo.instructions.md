@@ -78,23 +78,21 @@ The same conceptual page can have different filenames (and therefore different d
 
 - Verify the target file name in each version before back- or forward-porting a link; do not assume the path from one version exists in another.
 
-## 7. Release documentation: where content belongs
+## 7. Release documentation
 
 Each minor release has three files under `docs/reference/announcements-release-notes/<version>/`:
 
-| File                         | Purpose                                       | What goes here                                                                                                                                                                                         |
-| ---------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `<version>-announcements.md` | Advance notice for operators and developers   | Breaking changes, deprecations, removed APIs, supported environment changes (OS, DB, K8s versions). Anything that **requires action before upgrading**.                                                |
-| `<version>-release-notes.md` | Chronological record of what shipped and when | Every notable feature, enhancement, and fix, organized by release tag (alpha1, alpha2, GA). New entries go in the section for the release tag where the feature first appeared.                        |
-| `whats-new-in-<version>.md`  | Upgrade decision aid and narrative highlights | Selected features that represent significant value or important behavioral change worth calling out to upgraders. Not a complete list — curated highlights only. Cross-references the other two files. |
+| File                         | Purpose                                       | What goes here                                                                                                                                                                                        |
+| ---------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<version>-announcements.md` | Advance notice for operators and developers   | Breaking changes, deprecations, removed APIs, supported environment changes (OS, DB, K8s versions). Anything that **requires action before upgrading**.                                               |
+| `<version>-release-notes.md` | Chronological record of what shipped and when | Every notable feature, enhancement, and fix, organized by release tag (alpha1, alpha2, GA). New entries go in the section for the release tag where the feature first appeared.                       |
+| `whats-new-in-<version>.md`  | Upgrade decision aid and narrative highlights | Selected features that represent significant value or important behavioral change worth calling out to upgraders. Not a complete list, curated highlights only. Cross-references the other two files. |
 
 **Decision guide for a new feature entry:**
 
-- Does it break existing behavior or require upgrade action? → **announcements** (and optionally release notes)
-- Did it ship in a specific alpha or GA tag? → **release notes** (always)
-- Is it significant enough to influence an upgrade decision? → **what's new** (optional, curated)
-
-Most features belong in **release notes**. Only notable highlights belong in **what's new**. Announcements are reserved for breaking/required-action items.
+- Does it break existing behavior or require upgrade action? **Announcements** (and optionally release notes)
+- Did it ship in a specific alpha or GA tag? **Release Notes** (always)
+- Is it significant enough to influence an upgrade decision? **What's New** (optional, curated)
 
 ## 8. AI-ready documentation outputs
 
