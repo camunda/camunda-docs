@@ -14,7 +14,7 @@ Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orches
 
 Every record in Camunda passes through two distinct storage layers, and understanding the difference between them is the key to understanding sizing.
 
-**Primary storage** is the RAFT log plus RocksDB snapshots, one set per partition. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader that is responsible for both processing commands and exporting records.
+**Primary storage** is the Raft log plus RocksDB snapshots, one set per partition. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader that is responsible for both processing commands and exporting records.
 
 **Secondary storage** is Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
 
@@ -22,7 +22,7 @@ Every record in Camunda passes through two distinct storage layers, and understa
 
 | Path | Direction | Latency characteristic |
 |---|---|---|
-| Command path | Inbound (client → engine) | Synchronous, bounded by RAFT |
+| Command path | Inbound (client → engine) | Synchronous, bounded by Raft |
 | Export pipeline | Internal (engine → secondary storage) | Async, partition-bounded |
 | Query path | Outbound (secondary storage → caller) | Depends on export pipeline lag |
 
@@ -30,24 +30,24 @@ Every record in Camunda passes through two distinct storage layers, and understa
 
 A command travels from the client to the engine and back before it is considered complete:
 
-**Client (REST or gRPC) → Camunda API (Gateway) → Broker (Command API) → RAFT log → Processing Engine → Event on log → RocksDB**
+**Client (REST or gRPC) → Zeebe Gateway → Broker → Raft log → Processing Engine → event on log → RocksDB**
 
-Commands return only after the RAFT log entry is committed and the engine has confirmed processing it (via an event written back to the log). The engine is single-threaded per partition — only one command per partition is processed at a time, and only the partition leader drives the engine.
+Commands return only after the Raft log entry is committed and the engine has confirmed processing it (via an event written back to the log). The stream processor reads commands sequentially per partition — only one command per partition is processed at a time, and only the partition leader runs the stream processor.
 
 If the engine cannot process commands fast enough — for example, because disk I/O is saturated — the Command API applies backpressure to the client.
 
 ### Export pipeline
 
-After the engine processes a command, the exporter asynchronously writes the resulting records to secondary storage in two phases: first aggregating records from the log, then bulk writeback.
+After the engine processes a command, the exporter asynchronously reads records from the log and writes them to secondary storage in batches.
 
 **The exporter runs on the same leader as the engine.** It is partition-bounded and cannot scale independently of partition count.
 
 There are two exporters in play:
 
 - **Camunda Exporter**: aggregates and writes enriched data to secondary storage for Operate, Tasklist, and the REST Query API.
-- **ES/OS Exporter**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
+- **Elasticsearch exporter**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
 
-The exporter tracks its position (a checkpoint) in RocksDB. If the exporter falls behind, it applies backpressure to the engine once the gap between the exporter's position and the engine's position exceeds a configurable threshold. A slow secondary storage therefore directly reduces process execution throughput.
+The exporter tracks its position (a checkpoint) in RocksDB. If the exporter falls behind, Zeebe reduces the record write rate via [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) to keep the backlog manageable. In extreme cases, client commands are rejected via the standard backpressure mechanism. A slow secondary storage therefore directly reduces process execution throughput.
 
 ### Query path
 
@@ -59,7 +59,7 @@ This means query results are **eventually consistent**: there is always some lag
 
 Optimize sits on top of the export pipeline as a second-tier consumer:
 
-1. The ES/OS Exporter writes raw engine events into per-partition Elasticsearch/OpenSearch indices.
+1. The Elasticsearch exporter writes raw engine events into per-partition Elasticsearch/OpenSearch indices.
 2. Optimize's **importer** reads from those indices and transforms the data into its own analytics indices.
 3. Optimize writes the analytics indices **back into the same Elasticsearch cluster**.
 
@@ -72,16 +72,16 @@ This creates a second write pass on Elasticsearch — on top of the Camunda Expo
 **Mitigation options:** Run Optimize on a separate Elasticsearch instance to isolate its load from the core export pipeline; use variable filtering to reduce export volume; tune retention periods; disable variable import if variables are not needed in Optimize reports.
 
 :::note
-Optimize is not supported with RDBMS backends. If Optimize is required, Elasticsearch must be present regardless of which secondary storage backend you use for the core platform.
+Optimize is not supported with RDBMS backends. If Optimize is required, a separate Elasticsearch instance must be present even if the core platform uses OpenSearch or RDBMS.
 :::
 
 For concrete sizing recommendations with Optimize enabled, see [Impact of Optimize](sizing-your-environment.md#impact-of-optimize).
 
-## Operational delay
+## Data availability latency
 
-Operational delay is the time between an event occurring in the engine and it being queryable in Operate, Tasklist, or the REST Query API. Under a healthy setup with a well-provisioned Elasticsearch cluster, this is typically under 5 seconds.
+Data availability latency is the time between an event occurring in the engine and it being queryable in Operate, Tasklist, or the REST Query API. Under a healthy setup with a well-provisioned Elasticsearch cluster, this is typically under 5 seconds.
 
-Operational delay degrades when:
+Data availability latency degrades when:
 
 - **Elasticsearch disk utilization exceeds ~70%**: indexing slows, the exporter queue grows, and engine backpressure kicks in.
 - **Optimize is enabled**: the second write pass competes for Elasticsearch I/O, increasing overall indexing latency.
