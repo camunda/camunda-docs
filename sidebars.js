@@ -2188,6 +2188,18 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Multi-tenancy",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-tenancy/multi-tenancy-overview",
+          },
+          items: [
+            "self-managed/concepts/multi-tenancy/logical-tenants",
+            "self-managed/concepts/multi-tenancy/physical-tenants",
+          ],
+        },
+        {
+          type: "category",
           label: "Audit log",
           link: {
             type: "doc",
