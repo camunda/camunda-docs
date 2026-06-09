@@ -73,10 +73,10 @@ The resource returns to its original location.
 
 ### Parent resources
 
-If you restore a parent resource the resources deleted with it are also restored. Child resources that once belonged to the parent resource but were deleted independently are not affected.
+If you restore a parent resource, the resources deleted with it are also restored. Child resources that once belonged to the parent resource but were deleted independently are not affected.
 
 ### Child resources
 
-You can restore a child resource without restoring its parent folder or process application. Since the child can't be restored to its original location, it's placed in a new folder at the project root using the template `${fileName} - restored`. The actual folder name is presented in the confirmation modal when you restore the file.
+You can restore a child resource without restoring its parent folder or process application. Since the child can't be restored to its original location, it's placed in a new folder at the project root using the template `${fileName} - restored`. The actual folder name is presented in the confirmation modal when you restore the resource.
 
 If the project has been deleted, you must restore the project before you can restore any of its child resources. Similarly, you must restore an IDP application before you can restore its IDP projects.
