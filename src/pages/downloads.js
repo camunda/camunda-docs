@@ -364,19 +364,19 @@ const DESKTOP_MODELER = {
 };
 
 const CAMUNDA_RUN = {
-  version: "8.9",
-  date: "Mar 10, 2026",
+  version: "8.9.6",
+  date: "Jun 9, 2026",
   alphaVersion: "8.9.0-alpha5",
   links: {
     mac: {
       stable: [
         {
           label: "Apple Silicon",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-aarch64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.6/camunda8-run-8.9.6-darwin-aarch64.zip",
         },
         {
           label: "Intel",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.6/camunda8-run-8.9.6-darwin-x86_64.zip",
         },
       ],
       experimental: [
@@ -394,7 +394,7 @@ const CAMUNDA_RUN = {
       stable: [
         {
           label: "Windows (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-windows-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.6/camunda8-run-8.9.6-windows-x86_64.zip",
         },
       ],
       experimental: [
@@ -408,7 +408,7 @@ const CAMUNDA_RUN = {
       stable: [
         {
           label: "Linux (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-linux-x86_64.tar.gz",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.6/camunda8-run-8.9.6-linux-x86_64.tar.gz",
         },
       ],
       experimental: [
