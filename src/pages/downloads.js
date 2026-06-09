@@ -275,29 +275,29 @@ function OSTabs({ activeOS, onSelect }) {
 /* ─── Download data ─── */
 
 const GETTING_STARTED = {
-  version: "8.9.0",
-  date: "Apr 17, 2026",
+  version: "8.10.0-alpha2",
+  date: "Jun 9, 2026",
   links: {
     mac: [
       {
         label: "Apple Silicon",
-        url: "https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-aarch64.zip",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-aarch64.zip",
       },
       {
         label: "Intel",
-        url: "https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-x86_64.zip",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-x86_64.zip",
       },
     ],
     windows: [
       {
         label: "Windows (x64)",
-        url: "https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-windows-x86_64.zip",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-windows-x86_64.zip",
       },
     ],
     linux: [
       {
         label: "Linux (x64)",
-        url: "https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-linux-x86_64.tar.gz",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-linux-x86_64.tar.gz",
       },
     ],
   },
