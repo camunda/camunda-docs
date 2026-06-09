@@ -45,7 +45,7 @@ Support for JSON responses varies by provider and model:
 - **OpenAI**: Selecting the JSON response format is equivalent to using the [JSON mode](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#json-mode). Providing a JSON Schema instructs the model to return [structured outputs](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#structured-outputs-vs-json-mode).
 - **Anthropic**: JSON response format requires a JSON Schema. See [Anthropic's structured outputs documentation](https://platform.claude.com/docs/en/build-with-claude/structured-outputs).
 - **AWS Bedrock**: JSON response format requires a JSON Schema. See [AWS Bedrock structured output documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/structured-output.html).
-- **Other providers**: Use the text response format with the **Parse text as JSON** option instead.
+- **Other providers**: Consult the provider's documentation to check if JSON response format is supported. If not, use the text response format with the **Parse text as JSON** option instead.
 
 | Field                     | Required | Description                                                                                                                                                                                                                                                           |
 | :------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
