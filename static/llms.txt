@@ -19,6 +19,6 @@ For detailed content, use these section-level indexes:
 
 ## Full content
 
-For RAG pipelines and offline indexing only — not suitable for in-context reading:
+For RAG pipelines and offline indexing only, not suitable for in-context reading, use:
 
 - [Full documentation](/llms-full.txt): Complete documentation content in a single file (multiple megabytes).
