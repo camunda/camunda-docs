@@ -126,7 +126,7 @@ To integrate a testcontainer engine and use assertions, add the following Maven 
 
 ### Spring Boot 4 support
 
-`spring-boot-starter-camunda-test` transitively depends on `spring-boot-starter-camunda-sdk`, which targets Spring Boot 3. To use it in a Spring Boot 4 project, exclude that starter and add the dedicated Spring Boot 4 starter (`camunda-spring-boot-4-starter`) at the same version:
+`spring-boot-starter-camunda-test` transitively depends on `spring-boot-starter-camunda-sdk`, which targets Spring Boot 3. To use it in a Spring Boot 4 project, exclude that starter and add the dedicated [Spring Boot 4 starter](../spring-zeebe-sdk/getting-started.md#spring-boot-40-support) (`camunda-spring-boot-4-starter`, available from the `8.7.24` patch release) at the same version:
 
 ```xml
 <dependency>
