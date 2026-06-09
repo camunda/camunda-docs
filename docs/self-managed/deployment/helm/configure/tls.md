@@ -312,9 +312,9 @@ kubectl -n "$NAMESPACE" rollout restart \
 
 The init container re-runs on each pod start and imports the new CA into a fresh truststore. Apply (rather than delete + create) avoids a window where the Secret does not exist; any pod evicted, OOM-killed, or rescheduled in that window would otherwise hit `CreateContainerConfigError`.
 
-### Automatic rollout on `helm upgrade`
+### Optional: automatic rollout on `helm upgrade`
 
-If you manage the release with Helm, you don't need the manual `rollout restart`. The chart stamps a `checksum/ca-bundle` annotation on the Java pods, derived from the CA Secret's contents, so the next `helm upgrade` rolls those pods automatically when the CA changes:
+Manual `rollout restart` (above) is the default rotation path. You can optionally opt in to automatic rollout by setting `global.tls.caBundle.autoRollout: true`. The chart then stamps a `checksum/ca-bundle` annotation on the Java pods, derived from the CA Secret's contents, so the next `helm upgrade` rolls those pods automatically when the CA changes:
 
 ```bash
 kubectl -n "$NAMESPACE" create secret generic camunda-ca-bundle \
@@ -322,13 +322,18 @@ kubectl -n "$NAMESPACE" create secret generic camunda-ca-bundle \
   --dry-run=client -o yaml | kubectl -n "$NAMESPACE" apply -f -
 
 helm upgrade --install camunda camunda/camunda-platform \
-  --namespace "$NAMESPACE" -f values-tls.yaml -f your-values.yaml
+  --namespace "$NAMESPACE" \
+  --set global.tls.caBundle.autoRollout=true \
+  -f values-tls.yaml -f your-values.yaml
 ```
 
-The checksum is read from the live Secret through Helm's `lookup` function, which only has cluster access during a real `helm upgrade`. Two consequences:
+It's **off by default** because the checksum is read from the live Secret through Helm's `lookup` function, which has two important constraints:
 
-- A raw `kubectl edit secret` (no `helm upgrade`) does not trigger the rollout. Use the manual `rollout restart` above instead.
-- GitOps tools that render with `helm template` (Argo CD, Flux) have no `lookup` access, so the annotation stays constant and the rollout does not fire on rotation. Drive the restart from your GitOps stack instead, for example an Argo CD `PostSync` hook or a Flux `kustomize` patch that rolls the Java workloads when the CA Secret changes.
+- **RBAC:** the identity running `helm upgrade` must have `get` on Secrets in the release namespace. Without it, `lookup` raises a `Forbidden` error that is not catchable in a template and **fails the `helm upgrade`**. Only enable `autoRollout` where the upgrading identity has Secret-read access.
+- **GitOps:** Argo CD and Flux render with `helm template`, which has no `lookup` cluster access, so the annotation stays constant and the rollout does not fire on rotation. Drive the restart from your GitOps stack instead, for example an Argo CD `PostSync` hook or a Flux `kustomize` patch that rolls the Java workloads when the CA Secret changes.
+- A raw `kubectl edit secret` (no `helm upgrade`) also does not trigger the rollout — use the manual `rollout restart` above.
+
+Trust itself never depends on this flag; it only controls the rollout convenience.
 
 ## Legacy: per-component JKS truststore (deprecated)
 
