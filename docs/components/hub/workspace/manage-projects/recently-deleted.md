@@ -1,14 +1,14 @@
 ---
 id: recently-deleted
 title: Recover deleted resources
-description: Recover deleted files, folders, and projects within 30 days of deletion. After 30 days, resources are permanently deleted along with their content, version history, and Git links.
+description: Recover deleted files, folders, and process applications within 30 days of deletion. After 30 days, resources are permanently deleted along with their content, version history, and Git links.
 ---
 
-Learn how to recover recently deleted resources, including files, folders, and projects, before they're permanently removed.
+Learn how to recover recently deleted resources, including files, folders, and process applications, before they're permanently removed.
 
 ## Soft deletion in Camunda Hub
 
-When you delete a resource, it's removed from the project and moved to **Recently deleted**. You have 30 days to restore it before permanent deletion.
+When you delete a resource, it's moved to **Recently deleted**. You have 30 days to restore it before permanent deletion. If the resource is a folder or process applications, the resources it contains are also moved to **Recently deleted**.
 
 :::note
 
@@ -26,7 +26,7 @@ Only users with [**Project Admin** or **Editor** access](../modeler/collaboratio
 
 ## Browse recently deleted resources
 
-In Camunda Hub, in the left-hand navigation, click **Recently deleted**. This page lists resources deleted from any projects within the last 30 days.
+In Camunda Hub, in the left-hand navigation, click **Recently deleted**. This page lists resources deleted from any process applications within the last 30 days.
 
 Each row shows:
 
@@ -41,6 +41,8 @@ Each row shows:
 
 By default, the list is sorted with the most recently deleted resources first.
 
+If the recently deleted resource is a folder or process application, you can expand the row to reveal the resources deleted with it.
+
 ## Restore a resource
 
 To restore a recently deleted resource:
@@ -50,3 +52,11 @@ To restore a recently deleted resource:
 3. Click the restore icon at the end of the resource's row.
 
 The resource returns to its original location.
+
+### Parent resources
+
+If you restore a parent resource (a folder or process application) the resources deleted with it are also restored. However, child resources that once belonged to the parent resource but were deleted independently are not affected.
+
+### Child resources
+
+You can restore a child resource without restoring the parent resource with which it was deleted. In this case, the child can't be restored to its original location, so it's placed in a new folder at the project root using the template `${fileName} - restored`. The actual folder name is presented in the confirmation modal when you restore the file.
