@@ -149,7 +149,7 @@ To integrate a testcontainer engine and use assertions, add the following Maven 
 </dependency>
 ```
 
-If you use the testcontainers module, apply the same exclusion to `spring-boot-starter-camunda-test-testcontainer`. JUnit 6 (required by Spring Boot 4) is provided automatically by your Spring Boot 4 dependency management.
+If you use the testcontainers module, apply the same exclusion to `spring-boot-starter-camunda-test-testcontainer`. No other changes are required: your Spring Boot 4 dependency management supplies the matching JUnit version automatically.
 
 ### Usage
 
