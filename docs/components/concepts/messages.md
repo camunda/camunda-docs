@@ -92,6 +92,33 @@ When subscriptions are opened for different processes, the message is correlated
 
 A message is _not_ correlated to a message start event subscription if an instance of the process is active and was created by a message with the same correlation key. If the message is buffered, it can be correlated after the active instance is ended. Otherwise, it is discarded.
 
+### Duplicate subscriptions
+
+When multiple process instances open a subscription for the same message name and correlation key simultaneously, the message is correlated to exactly one of those instances. The selection is non-deterministic — there is no guarantee about which instance receives the message.
+
+This behavior is by design. An alternative approach — for example, routing to the most recently created instance — would mask correlation key design problems during single-instance development testing, and then fail unexpectedly in production when multiple users run concurrent instances. Non-deterministic selection surfaces the problem early.
+
+The correct solution is to use **unique correlation keys per interaction**, so that each subscription is unambiguous. This is especially important in patterns where an agent or process sends a message to an external system and waits for a reply.
+
+#### Unique correlation key pattern
+
+If your process uses a send-and-wait pattern (for example, a service task sends a message to an external system, and a message catch event waits for the reply), avoid static or shared correlation keys such as a user ID or a fixed string. Instead:
+
+1. **Generate a unique key** when the outbound message is sent — for example, using a UUID.
+2. **Pass the key to the external system** alongside the message content.
+3. **Subscribe with the same key** in the catch event's correlation key expression.
+4. **Include the key in the reply** so the webhook or callback can return it, and the catch event resolves to the correct instance.
+
+```feel
+// Bad: shared key across all instances for a given user
+= userId
+
+// Good: unique key per interaction
+= chatId + "-" + uuid()
+```
+
+Using a shared key makes the process work correctly during single-instance testing but fails silently when stale instances accumulate or when multiple users run the process concurrently. Unique keys eliminate this class of bug entirely.
+
 ## Message uniqueness
 
 A message can have an optional message ID — a unique ID to ensure the message is published and processed only once (i.e. idempotency). The ID can be any string; for example, a request ID, a tracking number, or the offset/position in a message queue.
@@ -178,6 +205,25 @@ Learn more in our [message aggregation guide](./message-aggregation.md).
 The message is published with a `TTL = 0` and a correlation key that identifies the entity.
 
 The first message creates a new process instance. The following messages are discarded and do not create a new instance if they have the same correlation key and the created process instance is still active.
+
+### Request-reply with unique correlation key
+
+**Problem**: An agent or service sends a message to an external system (for example, a chat platform or webhook) and waits for a reply. Multiple process instances may be active concurrently, each waiting for its own reply.
+
+**Solution**:
+
+Generate a unique correlation key when the outbound message is sent, pass it to the external system, and subscribe with the same key in the reply catch event.
+
+This avoids the [duplicate subscription problem](#duplicate-subscriptions) that occurs when all instances share the same correlation key (for example, a static user ID or a fixed string). With a shared key, replies are delivered non-deterministically — the wrong instance may receive the reply, and the problem only surfaces when stale instances accumulate or multiple users run concurrently.
+
+A common implementation:
+
+1. A service task sends the outbound message and generates a unique key (for example, `chatId + "-" + uuid()`).
+2. The external system receives both the message content and the correlation key.
+3. When the external system replies, it includes the correlation key.
+4. A message catch event subscribes using the same key, so the reply reaches the correct instance.
+
+This pattern is the recommended approach for any send-and-wait interaction where process instances can run concurrently.
 
 ## Message response
 

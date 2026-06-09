@@ -163,6 +163,22 @@ fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.se
 
 For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) documentation.
 
+## Message catch events as tools
+
+You can use a message intermediate catch event inside an ad-hoc sub-process as a tool — for example, to model a "wait for reply" step where the agent sends a message to an external system and waits for a response before continuing.
+
+When using this pattern, each process instance opens a message subscription. If multiple instances run concurrently (for example, multiple users or multiple test runs), and they all subscribe with the same message name and correlation key, Zeebe delivers the reply to one instance non-deterministically. The wrong instance may receive the reply, and there is no warning when this happens.
+
+To avoid this, use a **unique correlation key per interaction** rather than a shared value such as a user ID or a fixed string:
+
+1. Generate a unique key when the outbound message is sent — for example, `chatId + "-" + uuid()`.
+2. Pass the key to the external system alongside the message content.
+3. Subscribe in the catch event using the same key, so the reply reaches the correct instance.
+
+:::note
+For a detailed explanation of this pattern and why non-deterministic selection is the correct Zeebe behavior (rather than "most recent instance wins"), see [duplicate subscriptions](/components/concepts/messages.md#duplicate-subscriptions) in the messages concept documentation.
+:::
+
 ## Tool call responses
 
 To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
