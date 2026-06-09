@@ -47,10 +47,10 @@ Support for JSON responses varies by provider and model:
 - **AWS Bedrock**: JSON response format requires a JSON Schema. See [AWS Bedrock structured output documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/structured-output.html).
 - **Other providers**: Consult the provider's documentation to check if JSON response format is supported. If not, use the text response format with the **Parse text as JSON** option instead.
 
-| Field                     | Required | Description                                                                                                                                                                                                                                                           |
-| :------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Response JSON schema      | No       | <p>Describes the desired response format as [JSON Schema](https://json-schema.org/).</p><p><ul><li>See [OpenAI's structured outputs documentation](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#introduction) for examples.</li></ul></p> |
-| Response JSON schema name | No       | <p>Depending on the provider, the schema must be configured with a name for the schema (such as `Person`).</p><p>Ideally this name describes the purpose of the schema to make the model aware of the expected data.</p>                                              |
+| Field                     | Required | Description                                                                                                                                                                                                                                         |
+| :------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response JSON schema      | No       | <p>Describes the desired response format as [JSON Schema](https://json-schema.org/).</p><p>See [OpenAI's structured outputs documentation](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#introduction) for examples.</p> |
+| Response JSON schema name | No       | <p>Depending on the provider, the schema must be configured with a name for the schema (such as `Person`).</p><p>Ideally this name describes the purpose of the schema to make the model aware of the expected data.</p>                            |
 
 For example, the following shows an example JSON Schema describing the expected response format for a user profile:
 
