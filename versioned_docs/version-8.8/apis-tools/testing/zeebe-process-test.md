@@ -130,6 +130,33 @@ To integrate a testcontainer engine and use assertions, add the following Maven 
 </dependency>
 ```
 
+### Spring Boot 4 support
+
+`spring-boot-starter-camunda-test` transitively depends on `camunda-spring-boot-starter`, which targets Spring Boot 3. To use it in a Spring Boot 4 project, exclude that starter and add the dedicated Spring Boot 4 starter (`camunda-spring-boot-4-starter`) at the same version:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>spring-boot-starter-camunda-test</artifactId>
+  <version>X.Y.Z</version>
+  <scope>test</scope>
+  <exclusions>
+    <exclusion>
+      <groupId>io.camunda</groupId>
+      <artifactId>camunda-spring-boot-starter</artifactId>
+    </exclusion>
+  </exclusions>
+</dependency>
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>camunda-spring-boot-4-starter</artifactId>
+  <version>X.Y.Z</version>
+  <scope>test</scope>
+</dependency>
+```
+
+If you use the testcontainers module, apply the same exclusion to `spring-boot-starter-camunda-test-testcontainer`. JUnit 6 (required by Spring Boot 4) is provided automatically by your Spring Boot 4 dependency management.
+
 ### Usage
 
 Add the `@ZeebeSpringTest` annotation to your Spring Boot test case to make the engine and a client available in your test case.
