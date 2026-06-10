@@ -29,8 +29,9 @@ const PermissionRow = ({ entry }) => {
   if (Array.isArray(entry.anyOf)) {
     const options = entry.anyOf;
     if (options.length === 0) return null;
-    const sameResource = options.every((o) => o.resourceType === options[0].resourceType);
-
+    const sameResource = options.every(
+      (o) => o.resourceType === options[0].resourceType
+    );
 
     if (sameResource) {
       return (
