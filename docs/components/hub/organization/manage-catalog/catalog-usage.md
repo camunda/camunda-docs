@@ -36,7 +36,7 @@ When the CoE publishes a newer version of a template you already use, Hub offers
 
 ## Manage the Catalog as a Center of Excellence
 
-The CoE curates the Catalog by controlling which assets delivery teams can discover and apply. Lifecycle management happens through the git collection repository and the [ingestion API](/components/hub/organization/manage-catalog/getting-started.md#step-2-set-up-cicd-to-sync-assets) — each submission is the full desired state of the Catalog.
+The CoE curates the Catalog by controlling which assets delivery teams can discover and apply. Lifecycle management happens through the git collection repository and the [ingestion API](/components/hub/organization/manage-catalog/getting-started.md#step-2-connect-the-repository-to-hub) — each submission is the full desired state of the Catalog.
 
 ### Unpublished assets
 

@@ -16,8 +16,8 @@ The Catalog in Camunda Hub lets your Center of Excellence (CoE) publish and mana
 
 In this guide, you will:
 
-- Set up a collection repository that aggregates element templates from your project repositories.
-- Configure CI/CD pipelines to sync assets to the Hub Catalog.
+- Organize your element templates in a git repository.
+- Connect that repository to the Hub Catalog with a CI/CD pipeline.
 - Verify that published assets appear in the Catalog for delivery teams to use.
 
 ## Prerequisites
@@ -29,34 +29,27 @@ In this guide, you will:
 
 ## Understand the Catalog workflow
 
-The Catalog connects your CoE's git-based development workflow to Hub:
+The Catalog connects a git repository to Hub through a CI/CD pipeline:
 
-1. Your CoE maintains element templates across one or more **project repositories**, each containing implementation details like job workers, BPMN processes, forms, and DMN decisions.
-2. Element templates from all project repositories are pushed into a single **collection repository** via CI/CD.
-3. When the collection repository is updated, a CI/CD pipeline calls the Hub Catalog API to submit the current state of all element templates.
-4. Hub compares the submitted assets against its internal state and publishes new or updated versions automatically.
-5. Delivery team members discover and apply the latest approved templates from the Catalog when modeling in Hub.
+1. Element templates and their metadata live in a git repository — this can be an existing monorepo or a dedicated repository.
+2. Whenever that repository changes, a CI/CD pipeline submits the current set of element templates to the Hub Catalog API.
+3. Hub compares the submission against its stored state and publishes new or updated versions automatically.
+4. Delivery teams discover and apply the latest templates from the Catalog when modeling in Hub.
+
+The part you set up is step 2 — the connection between your repository and Hub. The rest of this guide focuses on that.
 
 :::note
-The Catalog supports a **single repository** as its source. If your CoE manages element templates across multiple project repositories, you must consolidate them into one collection repository before syncing to Hub.
+The Catalog syncs from a **single repository**. If your element templates already live together in one repository (for example, a monorepo), sync from it directly. If they are spread across several repositories, first consolidate them into one — see [Sync assets from multiple repositories](#sync-assets-from-multiple-repositories).
 :::
 
-## Step 1: Set up a collection repository
+## Step 1: Organize your assets
 
-Because the Catalog accepts a single repository as its source, set up a dedicated **collection repository** that aggregates element templates from all your project repositories.
+Point the Catalog at a single git repository that holds your element templates. This can be an existing repository (such as a monorepo) or a dedicated one. The sync only looks at element templates and their README files; any other files in the repository — job workers, BPMN processes, forms, DMN decisions — are ignored.
 
-### Project repositories
-
-Your CoE likely maintains multiple project repositories, each containing the full implementation for a solution — including job workers, BPMN processes, forms, DMN decisions, and element templates. These repositories remain the source of truth for development.
-
-To feed the Catalog, configure CI/CD in each project repository to copy its element templates (and their README files) into the collection repository whenever a new version is created (for example, on a tag, release, or push to `main`).
-
-### Collection repository
-
-The collection repository contains **only** element templates and their accompanying README files — no implementation details. Each asset is grouped in its own directory:
+Each asset is grouped in its own directory:
 
 ```
-catalog-collection/
+your-repo/
 ├── payment-connector/
 │   ├── README.md
 │   └── payment-connector.json
@@ -126,52 +119,16 @@ When you submit assets to the Catalog API, Hub compares each submitted template 
 In addition, every `id` in a single submission must be unique. If two templates share the same `id`, the submission is rejected with a `400 Bad Request`.
 
 :::caution
-Always increment the `version` field when you change an element template's content. The Catalog API validates the whole submission as a single transaction: if any asset fails validation, **no** changes are applied (see [Step 2](#stage-2-sync-the-collection-repository-to-hub)).
+Always increment the `version` field when you change an element template's content. The Catalog API validates the whole submission as a single transaction: if any asset fails validation, **no** changes are applied (see [Step 2](#step-2-connect-the-repository-to-hub)).
 :::
 
-## Step 2: Set up CI/CD to sync assets
+## Step 2: Connect the repository to Hub
 
-The CI/CD setup has two stages:
-
-1. **Project repository → Collection repository**: Each project repository pushes its element templates and READMEs into the collection repository.
-2. **Collection repository → Hub**: The collection repository submits all assets to the Hub Catalog API.
+This is the core of the setup. Add a CI/CD job to your repository that authenticates with Camunda 8 and submits the current set of element templates to the Hub Catalog API whenever the repository changes.
 
 :::tip
 Camunda provides an [example collection repository](https://github.com/camunda/catalog-collection-example) with a ready-to-use GitHub Actions workflow and sample assets you can use as a starting point.
 :::
-
-### Stage 1: Push element templates to the collection repository
-
-In each project repository, add a CI/CD job that copies the element template and its README into the collection repository when a new version is created.
-
-```yaml
-# Example: GitHub Actions workflow in a project repository
-name: Push templates to collection repo
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  push-to-collection:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout project repository
-        uses: actions/checkout@v4
-
-      - name: Push element templates to collection repo
-        run: |
-          git clone https://x-access-token:${{ secrets.COLLECTION_REPO_TOKEN }}@github.com/your-org/catalog-collection.git
-          cp -r element-templates/payment-connector catalog-collection/payment-connector
-          cd catalog-collection
-          git add .
-          git commit -m "Update payment-connector templates"
-          git push
-```
-
-### Stage 2: Sync the collection repository to Hub
-
-In the collection repository, add a CI/CD job that authenticates with Camunda 8 and submits all assets to the Hub Catalog API whenever the repository is updated.
 
 The job calls a single ingestion endpoint:
 
@@ -285,6 +242,39 @@ If the submission is invalid, the request fails and **no** changes are applied (
 | `400 Bad Request`  | Validation failed — for example, invalid template JSON, changed content without a version bump, or a duplicate template `id`. |
 | `401 Unauthorized` | No valid access token was provided.                                                                                           |
 | `404 Not Found`    | The token is missing the required `create`/`update` permissions.                                                              |
+
+## Sync assets from multiple repositories
+
+If your element templates already live together in one repository, skip this section — Step 2 is all you need.
+
+If they are spread across several repositories, add a step that consolidates them into the single repository you sync from. A common pattern is a CI/CD job in each source repository that copies its element templates and READMEs into a dedicated collection repository when a new version is created:
+
+```yaml
+# Example: GitHub Actions workflow in a source repository
+name: Push templates to collection repo
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  push-to-collection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+
+      - name: Push element templates to collection repo
+        run: |
+          git clone https://x-access-token:${{ secrets.COLLECTION_REPO_TOKEN }}@github.com/your-org/catalog-collection.git
+          cp -r element-templates/payment-connector catalog-collection/payment-connector
+          cd catalog-collection
+          git add .
+          git commit -m "Update payment-connector templates"
+          git push
+```
+
+The collection repository then syncs to Hub exactly as described in [Step 2](#step-2-connect-the-repository-to-hub).
 
 ## Step 3: Handle asset lifecycle
 
