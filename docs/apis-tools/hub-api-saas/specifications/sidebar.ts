@@ -108,6 +108,84 @@ const sidebar: SidebarsConfig = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Version",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/create-version",
+          label: "Create a version",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-version",
+          label: "Get a version",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/update-version",
+          label: "Update a version",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/delete-version",
+          label: "Delete a version",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/search-versions",
+          label: "Search versions",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/restore-version",
+          label: "Restore a version",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Workspace",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/create-workspace",
+          label: "Create a workspace",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-workspace",
+          label: "Get a workspace",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/update-workspace",
+          label: "Update a workspace",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/delete-workspace",
+          label: "Delete a workspace",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/search-workspaces",
+          label: "Search workspaces",
+          className: "api-method post",
+        },
+      ],
+    },
   ],
 };
 

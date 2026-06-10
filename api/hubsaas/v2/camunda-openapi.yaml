@@ -36,6 +36,10 @@ tags:
     description: Folder management operations.
   - name: Project
     description: Project management operations.
+  - name: Version
+    description: Version management operations.
+  - name: Workspace
+    description: Workspace management operations.
 
 paths:
   /files:
@@ -54,6 +58,20 @@ paths:
     $ref: "projects.yaml#/paths/~1projects~1{projectKey}"
   /projects/search:
     $ref: "projects.yaml#/paths/~1projects~1search"
+  /versions:
+    $ref: "versions.yaml#/paths/~1versions"
+  /versions/{versionKey}:
+    $ref: "versions.yaml#/paths/~1versions~1{versionKey}"
+  /versions/search:
+    $ref: "versions.yaml#/paths/~1versions~1search"
+  /versions/{versionKey}/restoration:
+    $ref: "versions.yaml#/paths/~1versions~1{versionKey}~1restoration"
+  /workspaces:
+    $ref: "workspaces.yaml#/paths/~1workspaces"
+  /workspaces/{workspaceKey}:
+    $ref: "workspaces.yaml#/paths/~1workspaces~1{workspaceKey}"
+  /workspaces/search:
+    $ref: "workspaces.yaml#/paths/~1workspaces~1search"
 
 components:
   securitySchemes:
