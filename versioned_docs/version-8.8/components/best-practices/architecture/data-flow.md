@@ -17,7 +17,7 @@ Every record in Camunda passes through two distinct storage layers, and understa
 
 **[Primary storage](/reference/glossary/#primary-storage)** is the multi Raft cluster in Camunda, with partitions as the scaling unit. Each Partition has a Raft append-only log, RocksDB to store internal state, and snapshots for compaction. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader that is responsible for both processing commands and exporting records.
 
-**[Secondary storage](/reference/glossary/#secondary-storage)** is an external data storage where events are written to, like: Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
+**[Secondary storage](/reference/glossary/#secondary-storage)** is an external data storage where events are written to, like: Elasticsearch or OpenSearch. It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
 
 ## Command processing path
 
@@ -45,13 +45,12 @@ After the engine processes a command, it confirms its state change by an event o
 
 **The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count.
 
-There are three built-in exporters in play:
+There are two built-in exporters in play:
 
-- **[Camunda Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API
-- **[RDBMS Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter.md)**: aggregates and writes enriched data to secondary storage (RDBMS) for Operate, Tasklist, and the REST Query API.
+- **[Camunda Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API.
 - **[Elasticsearch Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
 
-The Camunda Exporter and RDBMS Exporter are mutually exclusive — only one can be enabled at a time. The Elasticsearch exporter is independent and can be enabled alongside either of the other two.
+The Elasticsearch exporter is independent and can be enabled alongside the Camunda Exporter.
 
 **Important to note:** read events are applied to the registered exporters one by one, in the same order as they appear on the log, and one event is first applied to ALL exporters before moving to the next event.
 
@@ -92,10 +91,6 @@ This was exactly the reason to change the architecture in 8.8 to have the Camund
 Details on the impact of running Optimize can be found in the [sizing guide](sizing-your-environment.md#impact-of-optimize).
 
 **Mitigation options:** Run Optimize on a separate Elasticsearch instance to isolate its load from the core export pipeline; use variable filtering to reduce export volume; tune retention periods; disable variable import if variables are not needed in Optimize reports.
-
-:::note
-Optimize is not supported with RDBMS backends. If Optimize is required, a separate Elasticsearch instance must be present even if the core platform uses RDBMS.
-:::
 
 ## Sizing bridge
 
