@@ -187,7 +187,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
         }}
       >
         For the complete documentation index, see{" "}
-        <a href="/llms.txt">llms.txt</a>. 
+        <a href="/llms.txt">llms.txt</a>.
       </div>
       <VersionNotification />
       {children}
