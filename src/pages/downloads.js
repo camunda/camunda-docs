@@ -366,7 +366,7 @@ const DESKTOP_MODELER = {
 const CAMUNDA_RUN = {
   version: "8.9.6",
   date: "Jun 9, 2026",
-  alphaVersion: "8.9.0-alpha5",
+  alphaVersion: "8.10.0-alpha2",
   links: {
     mac: {
       stable: [
@@ -382,11 +382,11 @@ const CAMUNDA_RUN = {
       experimental: [
         {
           label: "Alpha Apple Silicon",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.0-alpha5/camunda8-run-8.9.0-alpha5-darwin-aarch64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha2/camunda8-run-8.10.0-alpha2-darwin-aarch64.zip",
         },
         {
           label: "Alpha Intel",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.0-alpha5/camunda8-run-8.9.0-alpha5-darwin-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha2/camunda8-run-8.10.0-alpha2-darwin-x86_64.zip",
         },
       ],
     },
@@ -400,7 +400,7 @@ const CAMUNDA_RUN = {
       experimental: [
         {
           label: "Alpha Windows",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.0-alpha5/camunda8-run-8.9.0-alpha5-windows-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha2/camunda8-run-8.10.0-alpha2-windows-x86_64.zip",
         },
       ],
     },
@@ -414,7 +414,7 @@ const CAMUNDA_RUN = {
       experimental: [
         {
           label: "Alpha Linux",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.0-alpha5/camunda8-run-8.9.0-alpha5-linux-x86_64.tar.gz",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha2/camunda8-run-8.10.0-alpha2-linux-x86_64.tar.gz",
         },
       ],
     },
@@ -483,6 +483,95 @@ const RPA_WORKER = {
   docsLink: "/docs/components/rpa/getting-started/",
   previousVersions: "https://downloads.camunda.cloud/release/rpa-worker/",
 };
+
+const ADDITIONAL_RELEASES = [
+  {
+    title: "Camunda Orchestration Cluster",
+    description:
+      "Download self-managed orchestration runtime artifacts and view all release notes.",
+    version: "latest",
+    date: "GitHub",
+    links: {
+      mac: [
+        {
+          label: "Latest release",
+          url: "https://github.com/camunda/camunda/releases/latest",
+        },
+      ],
+      windows: [
+        {
+          label: "Latest release",
+          url: "https://github.com/camunda/camunda/releases/latest",
+        },
+      ],
+      linux: [
+        {
+          label: "Latest release",
+          url: "https://github.com/camunda/camunda/releases/latest",
+        },
+      ],
+    },
+    previousVersions: "https://github.com/camunda/camunda/releases",
+    icon: <PlayIconLg />,
+  },
+  {
+    title: "Camunda Connectors",
+    description:
+      "Get prebuilt connector artifacts and review release history for connector updates.",
+    version: "latest",
+    date: "GitHub",
+    links: {
+      mac: [
+        {
+          label: "Latest release",
+          url: "https://github.com/camunda/connectors/releases/latest",
+        },
+      ],
+      windows: [
+        {
+          label: "Latest release",
+          url: "https://github.com/camunda/connectors/releases/latest",
+        },
+      ],
+      linux: [
+        {
+          label: "Latest release",
+          url: "https://github.com/camunda/connectors/releases/latest",
+        },
+      ],
+    },
+    previousVersions: "https://github.com/camunda/connectors/releases",
+    icon: <SparklesIconLg />,
+  },
+  {
+    title: "Enterprise Web Modeler",
+    description:
+      "Enterprise-only downloads for Camunda 7 and Camunda 8 Web Modeler artifacts.",
+    version: "enterprise",
+    date: "Camunda",
+    links: {
+      mac: [
+        {
+          label: "Enterprise downloads",
+          url: "https://downloads.camunda.cloud/enterprise-release/",
+        },
+      ],
+      windows: [
+        {
+          label: "Enterprise downloads",
+          url: "https://downloads.camunda.cloud/enterprise-release/",
+        },
+      ],
+      linux: [
+        {
+          label: "Enterprise downloads",
+          url: "https://downloads.camunda.cloud/enterprise-release/",
+        },
+      ],
+    },
+    icon: <PencilIconLg />,
+  },
+];
 
 /* ─── Download card component ─── */
 
@@ -691,7 +780,9 @@ function Downloads() {
             </p>
           )}
 
-          <div className={bwcStyles.downloadsGrid}>
+          <div
+            className={clsx(bwcStyles.downloadsGrid, styles.downloadsGridFull)}
+          >
             <DownloadCard
               icon={<SparklesIconLg />}
               title="Getting Started Package"
@@ -738,15 +829,34 @@ function Downloads() {
             />
           </div>
 
-          <div className={styles.browseMoreWrap}>
-            <a
-              href="https://downloads.camunda.cloud/"
-              className={styles.browseMoreButton}
-              target="_blank"
-              rel="noopener noreferrer"
+          <div className={styles.additionalReleasesSection}>
+            <h2 className={styles.additionalReleasesTitle}>
+              Additional releases
+            </h2>
+            <p className={styles.additionalReleasesSub}>
+              Explore orchestration and connector release streams, plus
+              enterprise-only artifacts.
+            </p>
+            <div
+              className={clsx(
+                bwcStyles.downloadsGrid,
+                styles.downloadsGridFull
+              )}
             >
-              Browse more downloads <ExternalLinkIcon />
-            </a>
+              {ADDITIONAL_RELEASES.map((resource) => (
+                <DownloadCard
+                  key={resource.title}
+                  icon={resource.icon}
+                  title={resource.title}
+                  description={resource.description}
+                  version={resource.version}
+                  date={resource.date}
+                  links={resource.links}
+                  previousVersions={resource.previousVersions}
+                  activeOS={activeOS}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
