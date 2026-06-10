@@ -8,6 +8,7 @@ description: "How data moves through Camunda 8.8+: the command path, export pipe
 Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orchestration-cluster.md). For a component-topology overview, see the [reference architecture](/self-managed/reference-architecture/). This page goes one level deeper: it traces how data moves through those components — and why that flow drives the sizing recommendations in the pages that follow.
 
 ![Camunda 8.8+ architecture overview](assets/architecture-8.8plus.jpg)
+
 <!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/ -->
 
 ## A tale of two storages
@@ -40,7 +41,7 @@ You can read more about this internal processing [here](../../zeebe/technical-co
 
 ![Camunda 8.8+ architecture overview - Data Flow Export pipeline](assets/architecture-8.8plus-data-flow-export-path.jpg)
 
-After the engine processes a command, it confirms its state change by an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in *batches*. Can be seen in blue in the diagram above.
+After the engine processes a command, it confirms its state change by an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in _batches_. Can be seen in blue in the diagram above.
 
 **The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count.
 
@@ -54,13 +55,13 @@ The Camunda Exporter and RDBMS Exporter are mutually exclusive — only one can 
 
 **Important to note:** read events are applied to the registered exporters one by one, in the same order as they appear on the log, and one event is first applied to ALL exporters before moving to the next event.
 
-The exporters track their position in the Exporter state (backed by RocksDB). If the exporting backlog grows over a certain threshold, Camunda reduces the record write rate via a corresponding [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) mechanics to keep the exporting backlog manageable. In extreme cases, client commands are rejected via the standard backpressure mechanism. 
+The exporters track their position in the Exporter state (backed by RocksDB). If the exporting backlog grows over a certain threshold, Camunda reduces the record write rate via a corresponding [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) mechanics to keep the exporting backlog manageable. In extreme cases, client commands are rejected via the standard backpressure mechanism.
 
 Exporter behavior and performance is important for the system, because:
 
-- *If an exporter falls behind, it holds up all exporters for that partition.*
-- *A slow secondary storage therefore directly reduces process execution throughput.*
-- *Custom exporters can have a high impact on overall throughput if they are not performant enough.*
+- _If an exporter falls behind, it holds up all exporters for that partition._
+- _A slow secondary storage therefore directly reduces process execution throughput._
+- _Custom exporters can have a high impact on overall throughput if they are not performant enough._
 
 ## Query path
 
