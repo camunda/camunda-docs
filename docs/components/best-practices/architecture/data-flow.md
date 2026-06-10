@@ -44,16 +44,27 @@ You can read more about this internal processing [here](https://docs.camunda.io/
 
 ### Export pipeline
 
-After the engine processes a command, the exporter asynchronously reads records from the log and writes them to secondary storage in batches.
+After the engine processes a command, it confirms its state change by an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in *batches*.
 
-**The exporter runs on the same leader as the engine.** It is partition-bounded and cannot scale independently of partition count.
+**The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count.
 
-There are two exporters in play:
+There are three built-in exporters in play:
 
-- **Camunda Exporter**: aggregates and writes enriched data to secondary storage for Operate, Tasklist, and the REST Query API.
-- **Elasticsearch exporter**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
+- **[Camunda Exporter](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API
+- **[RDBMS Exporter](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter/)**: aggregates and writes enriched data to secondary storage (RDBMS) for Operate, Tasklist, and the REST Query API.
+- **[Elasticsearch Exporter](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
 
-The exporter tracks its position (a checkpoint) in RocksDB. If the exporter falls behind, Zeebe reduces the record write rate via [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) to keep the backlog manageable. In extreme cases, client commands are rejected via the standard backpressure mechanism. A slow secondary storage therefore directly reduces process execution throughput.
+The Camunda Exporter and RDBMS Exporter are mutually exclusive — only one can be enabled at a time. The Elasticsearch exporter is independent and can be enabled alongside either of the other two.
+
+**Important to note:** read events are applied to the registered exporters one by one, in the same order as they appear on the log, and one event is first applied to ALL exporters before moving to the next event.
+
+The exporters track their position in the Exporter state (backed by RocksDB). If the exporting backlog grows over a certain threshold, Camunda reduces the record write rate via a corresponding [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) mechanics to keep the exporting backlog manageable. In extreme cases, client commands are rejected via the standard backpressure mechanism. 
+
+Exporter behavior and performance is important for the system, because:
+
+- *If an exporter falls behind, it holds up all exporters for that partition.*
+- *A slow secondary storage therefore directly reduces process execution throughput.*
+- *Custom exporters can have a high impact on overall throughput if they are not performant enough.*
 
 ### Query path
 
