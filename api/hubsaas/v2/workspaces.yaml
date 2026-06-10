@@ -1,0 +1,334 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Workspace resource paths and schemas
+paths:
+  /workspaces:
+    post:
+      operationId: createWorkspace
+      summary: Create a workspace
+      description: Creates a new workspace in the caller's organization.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Workspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkspaceCreateRequest"
+      responses:
+        "200":
+          description: The workspace was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /workspaces/{workspaceKey}:
+    get:
+      operationId: getWorkspace
+      summary: Get a workspace
+      description: Returns the workspace metadata and its contained projects.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Workspace
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceKeyPathParam"
+      responses:
+        "200":
+          description: The workspace was retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceDetailResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The workspace was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+    patch:
+      operationId: updateWorkspace
+      summary: Update a workspace
+      description: Updates an existing workspace.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Workspace
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceKeyPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkspaceUpdateRequest"
+      responses:
+        "200":
+          description: The workspace was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The workspace was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+    delete:
+      operationId: deleteWorkspace
+      summary: Delete a workspace
+      description: >-
+        Deletes the workspace with the given key. The workspace must be empty,
+        meaning it contains no files, no projects, and no IDP applications.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Workspace
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceKeyPathParam"
+      responses:
+        "204":
+          description: The workspace was deleted successfully.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The workspace was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /workspaces/search:
+    post:
+      operationId: searchWorkspaces
+      summary: Search workspaces
+      description: Returns workspaces matching the given search criteria. Results are scoped to the caller's organization.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Workspace
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkspaceSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  parameters:
+    WorkspaceKeyPathParam:
+      name: workspaceKey
+      in: path
+      required: true
+      description: The unique key identifying the workspace.
+      schema:
+        type: string
+
+  schemas:
+    # --- Request schemas ---
+
+    WorkspaceCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+      properties:
+        name:
+          description: The name of the workspace.
+          type: string
+          minLength: 1
+          maxLength: 255
+
+    WorkspaceUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          description: The updated name of the workspace.
+          type: string
+          minLength: 1
+          maxLength: 255
+
+    # --- Response schemas ---
+
+    WorkspaceResult:
+      type: object
+      required:
+        - workspaceKey
+        - name
+        - created
+        - createdBy
+        - updated
+        - updatedBy
+      properties:
+        workspaceKey:
+          description: The unique key identifying this workspace.
+          type: string
+        name:
+          description: The name of the workspace.
+          type: string
+        created:
+          description: The timestamp when the workspace was created.
+          type: string
+          format: date-time
+        createdBy:
+          description: The user who created the workspace.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+        updated:
+          description: The timestamp when the workspace was last updated.
+          type: string
+          format: date-time
+        updatedBy:
+          description: The user who last updated the workspace.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+
+    WorkspaceDetailResult:
+      type: object
+      required:
+        - workspace
+        - content
+      properties:
+        workspace:
+          description: The workspace metadata.
+          allOf:
+            - $ref: "#/components/schemas/WorkspaceResult"
+        content:
+          description: The contents of the workspace.
+          allOf:
+            - $ref: "#/components/schemas/WorkspaceContent"
+
+    WorkspaceContent:
+      type: object
+      required:
+        - projects
+      properties:
+        projects:
+          description: The projects contained in this workspace.
+          type: array
+          items:
+            $ref: "projects.yaml#/components/schemas/ProjectResult"
+
+    # --- Search schemas ---
+
+    WorkspaceSearchQuery:
+      type: object
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkspaceSearchQuerySortRequest"
+        filter:
+          description: The workspace search filters.
+          allOf:
+            - $ref: "#/components/schemas/WorkspaceFilter"
+
+    WorkspaceSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - created
+            - updated
+        order:
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    WorkspaceFilter:
+      type: object
+      description: Filter criteria for searching workspaces.
+      properties:
+        name:
+          description: Filter by workspace name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        created:
+          description: Filter by creation date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        updated:
+          description: Filter by last update date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        createdBy:
+          description: Filter by creator email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        updatedBy:
+          description: Filter by last updater email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+
+    WorkspaceSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching workspaces.
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkspaceResult"
+        page:
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
