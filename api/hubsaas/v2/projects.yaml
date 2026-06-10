@@ -19,22 +19,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectCreateRequest'
+              $ref: "#/components/schemas/ProjectCreateRequest"
       responses:
         "200":
           description: The project was created successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectResult'
+                $ref: "#/components/schemas/ProjectResult"
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
   /projects/{projectKey}:
     get:
@@ -45,26 +45,26 @@ paths:
       tags:
         - Project
       parameters:
-        - $ref: '#/components/parameters/ProjectKeyPathParam'
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
       responses:
         "200":
           description: The project was retrieved successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectDetailResult'
+                $ref: "#/components/schemas/ProjectDetailResult"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: The project was not found.
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
     patch:
       operationId: updateProject
@@ -74,34 +74,34 @@ paths:
       tags:
         - Project
       parameters:
-        - $ref: '#/components/parameters/ProjectKeyPathParam'
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectUpdateRequest'
+              $ref: "#/components/schemas/ProjectUpdateRequest"
       responses:
         "200":
           description: The project was updated successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectResult'
+                $ref: "#/components/schemas/ProjectResult"
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: The project was not found.
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
     delete:
       operationId: deleteProject
@@ -114,24 +114,24 @@ paths:
       tags:
         - Project
       parameters:
-        - $ref: '#/components/parameters/ProjectKeyPathParam'
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
       responses:
         "204":
           description: The project was deleted successfully.
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: The project was not found.
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
   /projects/search:
     post:
@@ -146,22 +146,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectSearchQuery'
+              $ref: "#/components/schemas/ProjectSearchQuery"
       responses:
         "200":
           description: The search completed successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectSearchQueryResult'
+                $ref: "#/components/schemas/ProjectSearchQueryResult"
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
 components:
   parameters:
@@ -217,11 +217,11 @@ components:
         project:
           description: The project metadata.
           allOf:
-            - $ref: '#/components/schemas/ProjectResult'
+            - $ref: "#/components/schemas/ProjectResult"
         content:
           description: The content of the project (child folders and files).
           allOf:
-            - $ref: '#/components/schemas/ProjectContent'
+            - $ref: "#/components/schemas/ProjectContent"
 
     ProjectContent:
       type: object
@@ -234,12 +234,12 @@ components:
           description: The child folders within this project.
           type: array
           items:
-            $ref: 'folders.yaml#/components/schemas/FolderResult'
+            $ref: "folders.yaml#/components/schemas/FolderResult"
         files:
           description: The files within this project.
           type: array
           items:
-            $ref: 'files.yaml#/components/schemas/FileResult'
+            $ref: "files.yaml#/components/schemas/FileResult"
 
     ProjectResult:
       type: object
@@ -268,7 +268,7 @@ components:
         createdBy:
           description: The user who created the project.
           allOf:
-            - $ref: 'files.yaml#/components/schemas/UserReference'
+            - $ref: "files.yaml#/components/schemas/UserReference"
         updated:
           description: The timestamp when the project was last updated.
           type: string
@@ -276,7 +276,7 @@ components:
         updatedBy:
           description: The user who last updated the project.
           allOf:
-            - $ref: 'files.yaml#/components/schemas/UserReference'
+            - $ref: "files.yaml#/components/schemas/UserReference"
 
     # --- Search schemas ---
 
@@ -288,16 +288,16 @@ components:
             Pagination criteria. Supports offset-based pagination (from/limit) or
             a simple limit.
           allOf:
-            - $ref: 'search-models.yaml#/components/schemas/SearchQueryPage'
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
         sort:
           description: Sort field criteria.
           type: array
           items:
-            $ref: '#/components/schemas/ProjectSearchQuerySortRequest'
+            $ref: "#/components/schemas/ProjectSearchQuerySortRequest"
         filter:
           description: The project search filters.
           allOf:
-            - $ref: '#/components/schemas/ProjectFilter'
+            - $ref: "#/components/schemas/ProjectFilter"
 
     ProjectSearchQuerySortRequest:
       type: object
@@ -312,7 +312,7 @@ components:
             - created
             - updated
         order:
-          $ref: 'search-models.yaml#/components/schemas/SortOrderEnum'
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
 
     ProjectFilter:
       type: object
@@ -321,27 +321,27 @@ components:
         workspaceKey:
           description: Filter by workspace key.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         name:
           description: Filter by project name.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/StringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         created:
           description: Filter by creation date.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/DateTimeFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
         updated:
           description: Filter by last update date.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/DateTimeFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
         createdBy:
           description: Filter by creator email address.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         updatedBy:
           description: Filter by last updater email address.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
 
     ProjectSearchQueryResult:
       type: object
@@ -353,6 +353,6 @@ components:
           description: The matching projects.
           type: array
           items:
-            $ref: '#/components/schemas/ProjectResult'
+            $ref: "#/components/schemas/ProjectResult"
         page:
-          $ref: 'search-models.yaml#/components/schemas/SearchQueryPageResponse'
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"

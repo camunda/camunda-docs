@@ -19,22 +19,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FileCreateRequest'
+              $ref: "#/components/schemas/FileCreateRequest"
       responses:
         "200":
           description: The file was created successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileResult'
+                $ref: "#/components/schemas/FileResult"
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
   /files/{fileKey}:
     get:
@@ -45,26 +45,26 @@ paths:
       tags:
         - File
       parameters:
-        - $ref: '#/components/parameters/FileKeyPathParam'
+        - $ref: "#/components/parameters/FileKeyPathParam"
       responses:
         "200":
           description: The file was retrieved successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileResult'
+                $ref: "#/components/schemas/FileResult"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: The file was not found.
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
     patch:
       operationId: updateFile
@@ -74,40 +74,40 @@ paths:
       tags:
         - File
       parameters:
-        - $ref: '#/components/parameters/FileKeyPathParam'
+        - $ref: "#/components/parameters/FileKeyPathParam"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FileUpdateRequest'
+              $ref: "#/components/schemas/FileUpdateRequest"
       responses:
         "200":
           description: The file was updated successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileResult'
+                $ref: "#/components/schemas/FileResult"
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: The file was not found.
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "409":
           description: The file was modified concurrently (revision conflict).
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
     delete:
       operationId: deleteFile
@@ -117,22 +117,22 @@ paths:
       tags:
         - File
       parameters:
-        - $ref: '#/components/parameters/FileKeyPathParam'
+        - $ref: "#/components/parameters/FileKeyPathParam"
       responses:
         "204":
           description: The file was deleted successfully.
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: The file was not found.
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
   /files/search:
     post:
@@ -147,22 +147,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FileSearchQuery'
+              $ref: "#/components/schemas/FileSearchQuery"
       responses:
         "200":
           description: The search completed successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileSearchQueryResult'
+                $ref: "#/components/schemas/FileSearchQueryResult"
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
 components:
   parameters:
@@ -306,7 +306,7 @@ components:
         createdBy:
           description: The user who created the file.
           allOf:
-            - $ref: '#/components/schemas/UserReference'
+            - $ref: "#/components/schemas/UserReference"
         updated:
           description: The timestamp when the file was last updated.
           type: string
@@ -314,7 +314,7 @@ components:
         updatedBy:
           description: The user who last updated the file.
           allOf:
-            - $ref: '#/components/schemas/UserReference'
+            - $ref: "#/components/schemas/UserReference"
 
     UserReference:
       type: object
@@ -341,16 +341,16 @@ components:
             Pagination criteria. Supports offset-based pagination (from/limit) or
             a simple limit.
           allOf:
-            - $ref: 'search-models.yaml#/components/schemas/SearchQueryPage'
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
         sort:
           description: Sort field criteria.
           type: array
           items:
-            $ref: '#/components/schemas/FileSearchQuerySortRequest'
+            $ref: "#/components/schemas/FileSearchQuerySortRequest"
         filter:
           description: The file search filters.
           allOf:
-            - $ref: '#/components/schemas/FileFilter'
+            - $ref: "#/components/schemas/FileFilter"
 
     FileSearchQuerySortRequest:
       type: object
@@ -366,7 +366,7 @@ components:
             - created
             - updated
         order:
-          $ref: 'search-models.yaml#/components/schemas/SortOrderEnum'
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
 
     FileFilter:
       type: object
@@ -375,35 +375,35 @@ components:
         name:
           description: Filter by file name.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/StringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         projectKey:
           description: Filter by project key.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         folderKey:
           description: Filter by parent folder key.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         type:
           description: Filter by file type.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         created:
           description: Filter by creation date.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/DateTimeFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
         updated:
           description: Filter by last update date.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/DateTimeFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
         createdBy:
           description: Filter by creator email address.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         updatedBy:
           description: Filter by last updater email address.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
 
     FileSearchQueryResult:
       type: object
@@ -415,6 +415,6 @@ components:
           description: The matching files.
           type: array
           items:
-            $ref: '#/components/schemas/FileResult'
+            $ref: "#/components/schemas/FileResult"
         page:
-          $ref: 'search-models.yaml#/components/schemas/SearchQueryPageResponse'
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
