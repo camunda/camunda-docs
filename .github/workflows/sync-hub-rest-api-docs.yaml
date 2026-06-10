@@ -155,7 +155,7 @@ jobs:
           mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsaas/v2
 
           # Format spec files
-          npm i
+          npm ci
           npx prettier --write api/hubsaas/v2/*.yaml
 
           cd api/hubsaas/v2
