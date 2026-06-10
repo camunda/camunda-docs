@@ -806,7 +806,7 @@ function BuildWithCamunda() {
               ></span>
             </p>
             <TerminalWindow copyable>
-              {`$ c8ctl cluster start 8.9`}
+              {`$ c8ctl cluster start 8.10-alpha2`}
             </TerminalWindow>
 
             <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
@@ -840,16 +840,7 @@ function BuildWithCamunda() {
                 >
                   Install via npm
                 </Link>{" "}
-                requires Node.js 18+.{" "}
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                  )}
-                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                >
-                  Camunda 8 Run
-                </Link>{" "}
-                requires OpenJDK 21–25.
+                requires Node.js 18+.
               </span>
             </p>
           </div>
