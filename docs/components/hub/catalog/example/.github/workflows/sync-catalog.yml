@@ -1,0 +1,27 @@
+name: Sync Catalog to Hub
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  # SaaS configuration. For Self-Managed, point CAMUNDA_OAUTH_URL at Management
+  # Identity, drop CAMUNDA_OAUTH_AUDIENCE, and set CAMUNDA_CATALOG_BASE_URL to
+  # your own Web Modeler API (default http://localhost:8070/api/v2).
+  CAMUNDA_OAUTH_URL: https://login.cloud.camunda.io/oauth/token
+  CAMUNDA_OAUTH_AUDIENCE: api.cloud.camunda.io
+  CAMUNDA_CATALOG_BASE_URL: https://modeler.cloud.camunda.io/api/v2
+
+jobs:
+  sync-catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync element templates to Hub Catalog
+        env:
+          CAMUNDA_CONSOLE_CLIENT_ID: ${{ secrets.CAMUNDA_CONSOLE_CLIENT_ID }}
+          CAMUNDA_CONSOLE_CLIENT_SECRET: ${{ secrets.CAMUNDA_CONSOLE_CLIENT_SECRET }}
+        run: bash scripts/sync-to-hub.sh
