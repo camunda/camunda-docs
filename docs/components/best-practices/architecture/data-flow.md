@@ -5,7 +5,7 @@ sidebar_label: "Data flow"
 description: "How data moves through Camunda 8.8+: the command path, export pipeline, and query path — and why each matters for sizing your environment."
 ---
 
-Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orchestration-cluster.md). For a component-topology overview, see the [reference architecture](/self-managed/reference-architecture/). This page goes one level deeper: it traces how data moves through those components — and why that flow drives the sizing recommendations in the pages that follow.
+Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orchestration-cluster.md). For a component-topology overview, see the [reference architecture](/self-managed/reference-architecture/reference-architecture.md). This page goes one level deeper: it traces how data moves through those components — and why that flow drives the sizing recommendations in the pages that follow.
 
 ![Camunda 8.8+ architecture overview](assets/architecture-8.8plus.jpg)
 
@@ -15,9 +15,9 @@ Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orches
 
 Every record in Camunda passes through two distinct storage layers, and understanding the difference between them is the key to understanding sizing.
 
-**[Primary storage](/reference/glossary/#primary-storage)** is the multi Raft cluster in Camunda, with partitions as the scaling unit. Each Partition has a Raft append-only log, RocksDB to store internal state, and snapshots for compaction. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader that is responsible for both processing commands and exporting records.
+**[Primary storage](/reference/glossary.md#primary-storage)** is the multi Raft cluster in Camunda, with partitions as the scaling unit. Each Partition has a Raft append-only log, RocksDB to store internal state, and snapshots for compaction. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader that is responsible for both processing commands and exporting records.
 
-**[Secondary storage](/reference/glossary/#secondary-storage)** is an external data storage where events are written to, like: Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
+**[Secondary storage](/reference/glossary.md#secondary-storage)** is an external data storage where events are written to, like: Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
 
 ## Command processing path
 
