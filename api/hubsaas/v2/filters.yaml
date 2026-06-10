@@ -50,11 +50,11 @@ components:
       title: Advanced filter
       description: Advanced string filter.
       allOf:
-        - $ref: "#/components/schemas/BasicStringFilter"
+        - $ref: '#/components/schemas/BasicStringFilter'
         - type: object
           properties:
             $like:
-              $ref: "#/components/schemas/LikeFilter"
+              $ref: '#/components/schemas/LikeFilter'
 
     AdvancedIntegerFilter:
       title: Advanced filter
@@ -222,7 +222,7 @@ components:
         - title: Exact match
           description: Matches the value exactly.
           type: string
-        - $ref: "#/components/schemas/BasicStringFilter"
+        - $ref: '#/components/schemas/BasicStringFilter'
 
     StringFilterProperty:
       description: String property with full advanced search capabilities.
@@ -230,7 +230,7 @@ components:
         - title: Exact match
           description: Matches the value exactly.
           type: string
-        - $ref: "#/components/schemas/AdvancedStringFilter"
+        - $ref: '#/components/schemas/AdvancedStringFilter'
 
     IntegerFilterProperty:
       description: Integer property with advanced search capabilities.
@@ -239,7 +239,7 @@ components:
           description: Matches the value exactly.
           type: integer
           format: int32
-        - $ref: "#/components/schemas/AdvancedIntegerFilter"
+        - $ref: '#/components/schemas/AdvancedIntegerFilter'
 
     LongFilterProperty:
       description: Long property with advanced search capabilities.
@@ -248,7 +248,7 @@ components:
           description: Matches the value exactly.
           type: integer
           format: int64
-        - $ref: "#/components/schemas/AdvancedLongFilter"
+        - $ref: '#/components/schemas/AdvancedLongFilter'
 
     DateTimeFilterProperty:
       description: Date-time property with full advanced search capabilities.
@@ -257,4 +257,4 @@ components:
           description: Matches the value exactly.
           type: string
           format: date-time
-        - $ref: "#/components/schemas/AdvancedDateTimeFilter"
+        - $ref: '#/components/schemas/AdvancedDateTimeFilter'

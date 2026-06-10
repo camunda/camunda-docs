@@ -13,7 +13,7 @@ components:
       type: string
       x-semantic-type: StartCursor
       minLength: 1
-      pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$"
+      pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$'
       example: WzIyNTE3OTk4MTM2ODcxMDJd
 
     EndCursor:
@@ -22,5 +22,5 @@ components:
       type: string
       x-semantic-type: EndCursor
       minLength: 1
-      pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$"
+      pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$'
       example: WzIyNTE3OTk4MTM2ODcxMDJd

@@ -16,25 +16,25 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+            $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
 
     Forbidden:
       description: Forbidden. The request is not allowed.
       content:
         application/problem+json:
           schema:
-            $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+            $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
 
     InvalidData:
       description: The provided data is not valid.
       content:
         application/problem+json:
           schema:
-            $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+            $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
 
     InternalServerError:
       description: An internal error occurred while processing the request.
       content:
         application/problem+json:
           schema:
-            $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+            $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
