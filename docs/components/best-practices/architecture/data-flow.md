@@ -16,7 +16,7 @@ Every record in Camunda passes through two distinct storage layers, and understa
 
 **[Primary storage](/reference/glossary/#primary-storage)** is the multi Raft cluster in Camunda, with partitions as the scaling unit. Each Partition has a Raft append-only log, RocksDB to store internal state, and snapshots for compaction. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader that is responsible for both processing commands and exporting records.
 
-**[Secondary storage](/reference/glossary/#secondary-storage)** is an external data storage where events are written to,like: Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
+**[Secondary storage](/reference/glossary/#secondary-storage)** is an external data storage where events are written to, like: Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
 
 ## Command processing path
 
@@ -26,7 +26,7 @@ The command processing path (Command lifecycle) looks like this:
 
 **Client (REST or gRPC) → Camunda API (Gateway) → Broker (Command API) → Raft partition (log) → Raft replication → Processing Engine → event on log → RocksDB state update → Client response**
 
-Client responses are not sent until the command is fully processed  by the engine, the engine is only able to process the command when it is commited on the log (as part of the Raft consensus protocol). The engine reads commands sequentially per partition — only one command per partition is processed at a time, and only the Raft partition leader runs the engine.
+Client responses are not sent until the command is fully processed by the engine, the engine is only able to process the command when it is commited on the log (as part of the Raft consensus protocol). The engine reads commands sequentially per partition — only one command per partition is processed at a time, and only the Raft partition leader runs the engine.
 
 This means command response latency is bounded below by Raft commit time, engine processing time and processing queue length. In a healthy and stable cluster, this typically means sub-second response latency for simple commands.
 
@@ -77,7 +77,7 @@ Optimize sits on top of the export pipeline as a second-tier consumer:
 This means Optimize has an additional hop in the data flow compared to Operate and Tasklist, and it writes to secondary storage twice: once for the raw events and once for the analytics indices. As result data availability latency for Optimize is higher than for Operate and Tasklist, and the overall write load on Elasticsearch is significantly higher when Optimize is enabled.
 
 :::note
-This was exactly the reason to change the architecture in 8.8 to have the Camunda Exporter to aggregate the data for Operate and Tasklist as before both had a similar Exporter-Importer architecture as Optimize. See related [Blog post](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/)*
+This was exactly the reason to change the architecture in 8.8 to have the Camunda Exporter to aggregate the data for Operate and Tasklist as before both had a similar Exporter-Importer architecture as Optimize. See related [Blog post](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
 :::
 
 Details on the impact of running Optimize can be found in the [sizing guide](sizing-your-environment.md#impact-of-optimize).
@@ -87,8 +87,6 @@ Details on the impact of running Optimize can be found in the [sizing guide](siz
 :::note
 Optimize is not supported with RDBMS backends. If Optimize is required, a separate Elasticsearch instance must be present even if the core platform uses RDBMS.
 :::
-
-For concrete sizing recommendations with Optimize enabled, see [Impact of Optimize](sizing-your-environment.md#impact-of-optimize).
 
 ## Sizing bridge
 
