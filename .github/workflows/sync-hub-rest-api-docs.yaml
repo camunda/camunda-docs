@@ -93,7 +93,7 @@ jobs:
           mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsm/v2
 
           # Format spec files
-          npm i
+          npm ci
           npx prettier --write api/hubsm/v2/*.yaml
 
           cd api/hubsm/v2
