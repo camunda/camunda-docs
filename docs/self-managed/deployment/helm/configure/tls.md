@@ -19,7 +19,7 @@ The `global.tls.caBundle` key and the `values-tls.yaml` overlay are introduced i
 | Camunda components → OpenSearch (private CA, self-hosted or AWS-managed)                   | `global.tls.caBundle`                                                                                                                                                                                         |
 | Camunda components → PostgreSQL JDBC (`sslmode=verify-full` + CA)                          | `global.tls.caBundle` + JDBC URL                                                                                                                                                                              |
 | Camunda components → external OIDC issuer with private CA (Entra, Okta, internal Keycloak) | `global.tls.caBundle`                                                                                                                                                                                         |
-| Browser / external client → ingress / GatewayAPI (UI, gRPC)                                | Standard Kubernetes ingress TLS — configured via per-component `*.ingress.tls` or `global.gateway.tls`, **not** `global.tls.caBundle`. See [ingress configuration](/self-managed/deployment/helm/configure/). |
+| Browser / external client → Ingress / GatewayAPI (UI, gRPC)                                | Standard Kubernetes Ingress TLS — configured via per-component `*.ingress.tls` or `global.gateway.tls`, **not** `global.tls.caBundle`. See [Ingress configuration](/self-managed/deployment/helm/configure/). |
 
 In-cluster pod-to-pod traffic is not covered by this overlay — see [In-cluster transport (service mesh required)](#in-cluster-transport-service-mesh-required).
 
