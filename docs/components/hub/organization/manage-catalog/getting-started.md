@@ -126,10 +126,6 @@ Always increment the `version` field when you change an element template's conte
 
 This is the core of the setup. Add a CI/CD job to your repository that authenticates with Camunda 8 and submits the current set of element templates to the Hub Catalog API whenever the repository changes.
 
-:::tip
-Camunda provides an [example collection repository](https://github.com/camunda/catalog-collection-example) with a ready-to-use GitHub Actions workflow and sample assets you can use as a starting point.
-:::
-
 The job calls a single ingestion endpoint:
 
 ```
@@ -143,20 +139,9 @@ The request body is `multipart/form-data` and represents the **complete desired 
 
 Each `README.md` is paired with the template it references through the `template:` value in its frontmatter, resolved relative to the README's directory. Because the submission is the full desired state, Hub **unpublishes** any asset that exists in the Catalog but is absent from the submission (see [Step 3](#step-3-handle-asset-lifecycle)).
 
-**1. Configure CI/CD secrets**
+**1. Provide credentials and configuration**
 
-Store your client credentials as secrets in your CI/CD system. For GitHub Actions, add them under **Settings > Secrets and variables > Actions**:
-
-| Secret                          | Description                                                          |
-| ------------------------------- | -------------------------------------------------------------------- |
-| `CAMUNDA_CONSOLE_CLIENT_ID`     | Client ID of the credentials with `create` and `update` permissions. |
-| `CAMUNDA_CONSOLE_CLIENT_SECRET` | Client secret (shown only once at creation).                         |
-
-See [Web Modeler API authentication](/apis-tools/web-modeler-api/authentication.md) for how to create credentials and obtain a token in each environment.
-
-**2. Add the GitHub Actions workflow**
-
-The endpoint base URL and the token issuer differ between SaaS and Self-Managed:
+The sync script reads its configuration from environment variables. Store the client credentials securely (for example, as CI/CD secrets) and expose them — together with the environment-specific URLs — as environment variables. The token issuer and the Web Modeler API base URL differ between SaaS and Self-Managed:
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -166,31 +151,12 @@ The endpoint base URL and the token issuer differ between SaaS and Self-Managed:
 
 <TabItem value='saas'>
 
-```yaml
-name: Sync Catalog to Hub
-
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-
-env:
-  CAMUNDA_OAUTH_URL: https://login.cloud.camunda.io/oauth/token
-  CAMUNDA_OAUTH_AUDIENCE: api.cloud.camunda.io
-  CAMUNDA_CATALOG_BASE_URL: https://modeler.cloud.camunda.io/api/v2
-
-jobs:
-  sync-catalog:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Sync element templates to Hub Catalog
-        env:
-          CAMUNDA_CONSOLE_CLIENT_ID: ${{ secrets.CAMUNDA_CONSOLE_CLIENT_ID }}
-          CAMUNDA_CONSOLE_CLIENT_SECRET: ${{ secrets.CAMUNDA_CONSOLE_CLIENT_SECRET }}
-        run: bash scripts/sync-to-hub.sh
+```bash
+export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
+export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
+export CAMUNDA_OAUTH_URL="https://login.cloud.camunda.io/oauth/token"
+export CAMUNDA_OAUTH_AUDIENCE="api.cloud.camunda.io"
+export CAMUNDA_CATALOG_BASE_URL="https://modeler.cloud.camunda.io/api/v2"
 ```
 
 </TabItem>
@@ -199,36 +165,72 @@ jobs:
 
 In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance instead of the Camunda SaaS login, there is no `audience`, and the Web Modeler API is served from your own installation (default `http://localhost:8070`). Adjust the URLs to match your installation.
 
-```yaml
-name: Sync Catalog to Hub
-
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-
-env:
-  CAMUNDA_OAUTH_URL: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-  CAMUNDA_CATALOG_BASE_URL: http://localhost:8070/api/v2
-
-jobs:
-  sync-catalog:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Sync element templates to Hub Catalog
-        env:
-          CAMUNDA_CONSOLE_CLIENT_ID: ${{ secrets.CAMUNDA_CONSOLE_CLIENT_ID }}
-          CAMUNDA_CONSOLE_CLIENT_SECRET: ${{ secrets.CAMUNDA_CONSOLE_CLIENT_SECRET }}
-        run: bash scripts/sync-to-hub.sh
+```bash
+export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
+export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
+export CAMUNDA_OAUTH_URL="http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token"
+export CAMUNDA_CATALOG_BASE_URL="http://localhost:8070/api/v2"
 ```
 
 </TabItem>
 </Tabs>
 
-The `sync-to-hub.sh` script obtains an access token, discovers all asset directories (each containing a `README.md` and a `.json` template), builds the multipart request, and submits it to the ingestion endpoint. See the [example collection repository](https://github.com/camunda/catalog-collection-example) for the full script.
+See [Web Modeler API authentication](/apis-tools/web-modeler-api/authentication.md) for how to create credentials with the required `create` and `update` permissions.
+
+**2. Run the sync script**
+
+The following script obtains an access token, discovers each asset directory (a `README.md` plus a `.json` template), builds the multipart request, and submits the full desired state to the ingestion endpoint. Run it from the root of your asset repository whenever the templates change.
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+# --- Authenticate --------------------------------------------------------------
+
+# In Self-Managed, omit the audience parameter.
+AUDIENCE_ARG=()
+if [[ -n "${CAMUNDA_OAUTH_AUDIENCE:-}" ]]; then
+  AUDIENCE_ARG=(--data-urlencode "audience=${CAMUNDA_OAUTH_AUDIENCE}")
+fi
+
+ACCESS_TOKEN=$(curl --silent --fail --request POST "${CAMUNDA_OAUTH_URL}" \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode 'grant_type=client_credentials' \
+  "${AUDIENCE_ARG[@]}" \
+  --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
+  --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}" | jq -r '.access_token')
+
+# --- Collect each asset's template and README parts ----------------------------
+
+# The multipart filename carries the asset directory as a prefix (for example,
+# payment-connector/README.md) so Hub can resolve the README's `template:`
+# reference relative to that directory and pair the two parts.
+FORM_ARGS=()
+for asset_dir in */; do
+  readme="${asset_dir}README.md"
+  json_file=$(ls "${asset_dir}"*.json 2>/dev/null | head -1 || true)
+  [[ -f "${readme}" && -n "${json_file}" ]] || continue
+
+  name=$(basename "${asset_dir}")
+  json_base=$(basename "${json_file}")
+  FORM_ARGS+=(-F "template=@${json_file};filename=${name}/${json_base};type=application/json")
+  FORM_ARGS+=(-F "readme=@${readme};filename=${name}/README.md;type=text/markdown")
+done
+
+# --- Submit the full desired state ---------------------------------------------
+
+HTTP_STATUS=$(curl --silent --output /dev/null --write-out '%{http_code}' --request PUT \
+  "${CAMUNDA_CATALOG_BASE_URL}/catalog/assets/ingestion" \
+  --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+  "${FORM_ARGS[@]}")
+
+if [[ "${HTTP_STATUS}" == "204" ]]; then
+  echo "Catalog sync completed successfully."
+else
+  echo "Catalog sync failed (HTTP ${HTTP_STATUS})."
+  exit 1
+fi
+```
 
 ### What the API returns
 
@@ -284,7 +286,7 @@ When you submit assets to the Catalog, any asset that **already exists in Hub bu
 
 Unpublishing an asset means:
 
-- **For delivery teams** (Web Modeler users): The asset no longer appears in the Catalog and cannot be applied to **new** diagrams. Diagrams that already use the template are unaffected and keep their properties — there is **no** in-diagram notification that the asset was unpublished.
+- **For delivery teams** (Web Modeler users): The asset is no longer discoverable in the Catalog and cannot be applied to new diagrams. Projects that already use the template continue to work as before.
 - **For CoE members** (organization administrators): The asset remains visible (for example, in a dedicated view) along with its usage information, such as which diagrams still reference the template.
 
 :::info

@@ -42,7 +42,7 @@ The CoE curates the Catalog by controlling which assets delivery teams can disco
 
 An asset is **unpublished** when it exists in Hub but is no longer part of the latest submission.
 
-- **Delivery teams** (Web Modeler users) can no longer discover the asset in the Catalog or apply it to **new** diagrams. Diagrams that already use the template are unaffected and keep working — the template properties remain on the existing elements. There is **no** in-diagram notification that the asset was unpublished.
+- **Delivery teams** (Web Modeler users) can no longer discover the asset in the Catalog or apply it to new diagrams. Projects that already use the template continue to work as before.
 - **CoE members** (organization administrators) can still view unpublished assets along with their usage — for example, which diagrams still reference the template — to plan a migration.
 
 :::info
