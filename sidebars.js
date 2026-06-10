@@ -729,8 +729,16 @@ module.exports = {
               ],
             },
             {
-              type: "doc",
-              id: "components/hub/organization/manage-catalog/manage-catalog",
+              type: "category",
+              label: "Manage the catalog",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-catalog/manage-catalog",
+              },
+              items: [
+                "components/hub/catalog/getting-started-catalog",
+                "components/hub/organization/manage-catalog/catalog-usage",
+              ],
             },
             {
               type: "category",

@@ -321,6 +321,6 @@ When a new version of an asset is published, delivery team members see an **Upda
 
 ## Next steps
 
-- Learn more about [element templates](/components/modeler/web-modeler/element-templates/using-templates.md) and how to define them.
-- Explore [managing element templates](/components/modeler/web-modeler/element-templates/manage-element-templates.md) in the modeler.
+- Learn more about [element templates](/components/hub/workspace/modeler/element-templates/using-templates.md) and how to define them.
+- Explore [managing element templates](/components/hub/workspace/modeler/element-templates/manage-element-templates.md) in the modeler.
 - Set up additional CI/CD steps in your project repositories to deploy related collateral (job workers, BPMN processes, forms) to your Orchestration Clusters.
