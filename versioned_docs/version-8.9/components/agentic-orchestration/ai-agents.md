@@ -22,7 +22,7 @@ The AI Agent connector is the primary Camunda connector for building AI agents. 
 Key capabilities include:
 
 - **LLM provider support**: Connects to a range of providers, such as Anthropic, Amazon Bedrock, Google Gemini, and OpenAI.
-- **Tool calling**: Exposes BPMN activities inside an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) as tools the LLM can call and execute.
+- **Tool calling**: Exposes BPMN activities inside an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) as tools the LLM can select.
 - **Memory**: Short-term conversational memory enables multi-turn interactions and follow-up questions within a process instance.
 
 See the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) documentation for full configuration details, implementation examples, and reference.
