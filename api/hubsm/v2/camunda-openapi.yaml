@@ -14,13 +14,13 @@ info:
     url: https://camunda.com
 
 servers:
-  - url: "{schema}://{host}:{port}/api/v2"
+  - url: '{schema}://{host}:{port}/api/v2'
     variables:
       host:
         default: localhost
         description: The hostname of the Hub API server.
       port:
-        default: "8088"
+        default: '8088'
         description: The port of the Hub API server.
       schema:
         default: http
@@ -36,24 +36,42 @@ tags:
     description: Folder management operations.
   - name: Project
     description: Project management operations.
+  - name: Version
+    description: Version management operations.
+  - name: Workspace
+    description: Workspace management operations.
 
 paths:
   /files:
-    $ref: "files.yaml#/paths/~1files"
+    $ref: 'files.yaml#/paths/~1files'
   /files/{fileKey}:
-    $ref: "files.yaml#/paths/~1files~1{fileKey}"
+    $ref: 'files.yaml#/paths/~1files~1{fileKey}'
   /files/search:
-    $ref: "files.yaml#/paths/~1files~1search"
+    $ref: 'files.yaml#/paths/~1files~1search'
   /folders:
-    $ref: "folders.yaml#/paths/~1folders"
+    $ref: 'folders.yaml#/paths/~1folders'
   /folders/{folderKey}:
-    $ref: "folders.yaml#/paths/~1folders~1{folderKey}"
+    $ref: 'folders.yaml#/paths/~1folders~1{folderKey}'
   /projects:
-    $ref: "projects.yaml#/paths/~1projects"
+    $ref: 'projects.yaml#/paths/~1projects'
   /projects/{projectKey}:
-    $ref: "projects.yaml#/paths/~1projects~1{projectKey}"
+    $ref: 'projects.yaml#/paths/~1projects~1{projectKey}'
   /projects/search:
-    $ref: "projects.yaml#/paths/~1projects~1search"
+    $ref: 'projects.yaml#/paths/~1projects~1search'
+  /versions:
+    $ref: 'versions.yaml#/paths/~1versions'
+  /versions/{versionKey}:
+    $ref: 'versions.yaml#/paths/~1versions~1{versionKey}'
+  /versions/search:
+    $ref: 'versions.yaml#/paths/~1versions~1search'
+  /versions/{versionKey}/restoration:
+    $ref: 'versions.yaml#/paths/~1versions~1{versionKey}~1restoration'
+  /workspaces:
+    $ref: 'workspaces.yaml#/paths/~1workspaces'
+  /workspaces/{workspaceKey}:
+    $ref: 'workspaces.yaml#/paths/~1workspaces~1{workspaceKey}'
+  /workspaces/search:
+    $ref: 'workspaces.yaml#/paths/~1workspaces~1search'
 
 components:
   securitySchemes:

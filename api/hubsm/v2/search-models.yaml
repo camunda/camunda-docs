@@ -13,12 +13,12 @@ components:
         page:
           description: Pagination criteria.
           allOf:
-            - $ref: "#/components/schemas/SearchQueryPageRequest"
+            - $ref: '#/components/schemas/SearchQueryPageRequest'
 
     SearchQueryPage:
       oneOf:
-        - $ref: "#/components/schemas/LimitPagination"
-        - $ref: "#/components/schemas/OffsetPagination"
+        - $ref: '#/components/schemas/LimitPagination'
+        - $ref: '#/components/schemas/OffsetPagination'
 
     SearchQueryPageRequest:
       x-polymorphic-schema: true
@@ -26,10 +26,10 @@ components:
         Pagination criteria. Can use offset-based pagination (from/limit)
         OR cursor-based pagination (after/before + limit), but not both.
       oneOf:
-        - $ref: "#/components/schemas/LimitPagination"
-        - $ref: "#/components/schemas/OffsetPagination"
-        - $ref: "#/components/schemas/CursorForwardPagination"
-        - $ref: "#/components/schemas/CursorBackwardPagination"
+        - $ref: '#/components/schemas/LimitPagination'
+        - $ref: '#/components/schemas/OffsetPagination'
+        - $ref: '#/components/schemas/CursorForwardPagination'
+        - $ref: '#/components/schemas/CursorBackwardPagination'
 
     LimitPagination:
       type: object
@@ -72,7 +72,7 @@ components:
             Use the `endCursor` value from the previous response
             to fetch the next page of results.
           allOf:
-            - $ref: "cursors.yaml#/components/schemas/EndCursor"
+            - $ref: 'cursors.yaml#/components/schemas/EndCursor'
         limit:
           description: The maximum number of items to return in one request.
           type: integer
@@ -92,7 +92,7 @@ components:
             Use the `startCursor` value from the previous response
             to fetch the previous page of results.
           allOf:
-            - $ref: "cursors.yaml#/components/schemas/StartCursor"
+            - $ref: 'cursors.yaml#/components/schemas/StartCursor'
         limit:
           description: The maximum number of items to return in one request.
           type: integer
@@ -107,7 +107,7 @@ components:
         - page
       properties:
         page:
-          $ref: "#/components/schemas/SearchQueryPageResponse"
+          $ref: '#/components/schemas/SearchQueryPageResponse'
 
     SortOrderEnum:
       description: The order in which to sort the related field.
@@ -145,11 +145,11 @@ components:
             Use this in the `before` field of an ensuing request.
           nullable: true
           allOf:
-            - $ref: "cursors.yaml#/components/schemas/StartCursor"
+            - $ref: 'cursors.yaml#/components/schemas/StartCursor'
         endCursor:
           description: >
             The cursor value for getting the next page of results.
             Use this in the `after` field of an ensuing request.
           nullable: true
           allOf:
-            - $ref: "cursors.yaml#/components/schemas/EndCursor"
+            - $ref: 'cursors.yaml#/components/schemas/EndCursor'

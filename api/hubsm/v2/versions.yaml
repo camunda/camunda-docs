@@ -1,0 +1,480 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Version resource paths and schemas
+paths:
+  /versions:
+    post:
+      operationId: createVersion
+      summary: Create a version
+      description: >
+        Creates a new version by taking a snapshot of the current content of the
+        specified file.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Version
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionCreateRequest'
+      responses:
+        "200":
+          description: The version was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResult'
+        "400":
+          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+        "401":
+          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+        "403":
+          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+        "409":
+          description: >
+            A version for a connector template with the same template ID has
+            already been published in the same project.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+        "500":
+          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+
+  /versions/{versionKey}:
+    get:
+      operationId: getVersion
+      summary: Get a version
+      description: >
+        Returns the version metadata and the file content at that version.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Version
+      parameters:
+        - $ref: '#/components/parameters/VersionKeyPathParam'
+      responses:
+        "200":
+          description: The version was found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionDetailResult'
+        "401":
+          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+        "403":
+          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+        "404":
+          description: The version was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+        "500":
+          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+
+    patch:
+      operationId: updateVersion
+      summary: Update a version
+      description: Updates the name of an existing version.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Version
+      parameters:
+        - $ref: '#/components/parameters/VersionKeyPathParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionUpdateRequest'
+      responses:
+        "200":
+          description: The version was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResult'
+        "400":
+          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+        "401":
+          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+        "403":
+          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+        "404":
+          description: The version was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+        "409":
+          description: >
+            A conflict occurred, e.g. when publishing a connector template version
+            and a conflicting template ID already exists in the same project.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+        "500":
+          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+
+    delete:
+      operationId: deleteVersion
+      summary: Delete a version
+      description: Deletes the specified version.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Version
+      parameters:
+        - $ref: '#/components/parameters/VersionKeyPathParam'
+      responses:
+        "204":
+          description: The version was deleted successfully.
+        "401":
+          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+        "403":
+          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+        "404":
+          description: The version was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+        "500":
+          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+
+  /versions/search:
+    post:
+      operationId: searchVersions
+      summary: Search versions
+      description: >
+        Returns versions matching the given search criteria.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Version
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionSearchQuery'
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionSearchQueryResult'
+        "400":
+          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+        "401":
+          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+        "403":
+          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+        "500":
+          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+
+  /versions/{versionKey}/restoration:
+    post:
+      operationId: restoreVersion
+      summary: Restore a version
+      description: >
+        Restores the file content to the state captured in this version. A new
+        version is created representing the restored state. For element template
+        files, the request body must include the target version number.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Version
+      parameters:
+        - $ref: '#/components/parameters/VersionKeyPathParam'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VersionRestorationRequest'
+      responses:
+        "200":
+          description: The version was restored successfully. Returns the newly created version.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResult'
+        "400":
+          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+        "401":
+          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+        "403":
+          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+        "404":
+          description: The version was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+        "409":
+          description: A conflict occurred (e.g. connector template version conflict).
+          content:
+            application/problem+json:
+              schema:
+                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+        "500":
+          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+
+
+components:
+  parameters:
+    VersionKeyPathParam:
+      name: versionKey
+      in: path
+      required: true
+      description: The unique key of the version.
+      schema:
+        type: string
+
+  schemas:
+    # --- Request schemas ---
+
+    VersionCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - fileKey
+        - name
+      properties:
+        fileKey:
+          description: The key of the file to create a version for.
+          type: string
+        name:
+          description: The name for the version.
+          type: string
+          minLength: 1
+          maxLength: 255
+        description:
+          description: An optional description for the version.
+          type: string
+          maxLength: 255
+        organizationPublic:
+          description: >
+            Whether the version is published to shared resources (visible
+            organization-wide). Only applicable to element template files.
+            Defaults to false.
+          type: boolean
+          default: false
+
+    VersionUpdateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+      properties:
+        name:
+          description: The new name for the version.
+          type: string
+          minLength: 1
+          maxLength: 255
+        description:
+          description: An optional description for the version.
+          type: string
+          nullable: true
+          maxLength: 255
+        organizationPublic:
+          description: >
+            Whether the version is published to shared resources (visible
+            organization-wide). Only applicable to element template files.
+          type: boolean
+
+    VersionRestorationRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        version:
+          description: >
+            The target version number to set in the restored file content.
+            Required when restoring an element template file. Ignored for
+            other file types.
+          type: integer
+          format: int64
+
+    # --- Response schemas ---
+
+    VersionResult:
+      type: object
+      required:
+        - versionKey
+        - name
+        - description
+        - fileKey
+        - created
+        - createdBy
+        - updated
+        - updatedBy
+        - organizationPublic
+      properties:
+        versionKey:
+          description: The unique key of the version.
+          type: string
+        name:
+          description: The name of the version.
+          type: string
+        description:
+          description: The description of the version.
+          type: string
+          nullable: true
+        fileKey:
+          description: The key of the file this version belongs to.
+          type: string
+        organizationPublic:
+          description: Whether the version is published to shared resources.
+          type: boolean
+        created:
+          description: The timestamp when the version was created.
+          type: string
+          format: date-time
+        createdBy:
+          description: The user who created the version. May be null for legacy or system-created versions.
+          nullable: true
+          allOf:
+            - $ref: 'files.yaml#/components/schemas/UserReference'
+        updated:
+          description: The timestamp when the version was last updated.
+          type: string
+          format: date-time
+        updatedBy:
+          description: The user who last updated the version. May be null for legacy or system-created versions.
+          nullable: true
+          allOf:
+            - $ref: 'files.yaml#/components/schemas/UserReference'
+
+    VersionDetailResult:
+      type: object
+      required:
+        - versionKey
+        - name
+        - description
+        - fileKey
+        - created
+        - createdBy
+        - updated
+        - updatedBy
+        - organizationPublic
+        - content
+      properties:
+        versionKey:
+          description: The unique key of the version.
+          type: string
+        name:
+          description: The name of the version.
+          type: string
+        description:
+          description: The description of the version.
+          type: string
+          nullable: true
+        fileKey:
+          description: The key of the file this version belongs to.
+          type: string
+        organizationPublic:
+          description: Whether the version is published to shared resources.
+          type: boolean
+        created:
+          description: The timestamp when the version was created.
+          type: string
+          format: date-time
+        createdBy:
+          description: The user who created the version. May be null for legacy or system-created versions.
+          nullable: true
+          allOf:
+            - $ref: 'files.yaml#/components/schemas/UserReference'
+        updated:
+          description: The timestamp when the version was last updated.
+          type: string
+          format: date-time
+        updatedBy:
+          description: The user who last updated the version. May be null for legacy or system-created versions.
+          nullable: true
+          allOf:
+            - $ref: 'files.yaml#/components/schemas/UserReference'
+        content:
+          description: The file content at this version.
+          type: string
+
+    # --- Search schemas ---
+
+    VersionSearchQuery:
+      type: object
+      required:
+        - filter
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: 'search-models.yaml#/components/schemas/SearchQueryPage'
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionSearchQuerySortRequest'
+        filter:
+          description: >
+            The version search filters. The fileKey filter is required.
+          allOf:
+            - $ref: '#/components/schemas/VersionFilter'
+
+    VersionSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - created
+        order:
+          $ref: 'search-models.yaml#/components/schemas/SortOrderEnum'
+
+    VersionFilter:
+      type: object
+      description: Filter criteria for searching versions.
+      required:
+        - fileKey
+      properties:
+        fileKey:
+          description: >
+            Filter by file key. This is a required filter — versions
+            cannot be searched across files.
+          allOf:
+            - $ref: 'filters.yaml#/components/schemas/StringFilterProperty'
+        name:
+          description: Filter by version name.
+          allOf:
+            - $ref: 'filters.yaml#/components/schemas/StringFilterProperty'
+        created:
+          description: Filter by creation date.
+          allOf:
+            - $ref: 'filters.yaml#/components/schemas/DateTimeFilterProperty'
+        createdBy:
+          description: Filter by creator email address.
+          allOf:
+            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+
+    VersionSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching versions.
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionResult'
+        page:
+          $ref: 'search-models.yaml#/components/schemas/SearchQueryPageResponse'
