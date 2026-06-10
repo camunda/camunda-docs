@@ -68,9 +68,11 @@ Exporter behavior and performance is important for the system, because:
 
 ### Query path
 
-Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from secondary storage. They never read directly from the engine.
+Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from the configured secondary storage. They never read directly from the engine.
 
-This means query results are **eventually consistent**: there is always some lag between a command completing in the engine and the result being visible in search results or the UI. Query latency is bounded below by export pipeline lag — if the exporter is behind, queries are behind.
+This means query results are depending on the performance of the primary (processing path) and secondary storage (exporting pipeline). They are **eventually consistent**: there is always some lag between a command completing in the engine and the result being visible in search results or the UI.
+
+Query latency is bounded below by export pipeline lag — if the exporter is behind, queries are behind. This is measured as the `data availability latency`.
 
 ## Optimize data flow
 
