@@ -18,7 +18,7 @@ Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **c
 
 - **PostgreSQL**: AWS RDS, Azure Database for PostgreSQL, Google Cloud SQL, or any managed PostgreSQL service
 - **Elasticsearch**: Elastic Cloud or any managed Elasticsearch service
-- **Keycloak**: This guide does not assume a managed Keycloak service. Keep Keycloak on the [Keycloak Operator](https://www.keycloak.org/operator/installation), or replace it with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) if that better fits your environment.
+- **Keycloak**: Keep Keycloak on the [Keycloak Operator](https://www.keycloak.org/operator/installation), replace it with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md), or migrate the bundled realm onto an external, standalone, or Helm-managed Keycloak with `KEYCLOAK_TARGET_MODE=external` (see [Migrate Keycloak to an external instance](#migrate-keycloak-to-an-external-instance)).
 
 ## When to use this guide
 
@@ -172,6 +172,58 @@ export EXTERNAL_ES_SECRET="external-es"
 </details>
 
 You can use the same managed PostgreSQL host for all components—each database is separate. This is common when using a single RDS instance with multiple databases.
+
+### Migrate Keycloak to an external instance {#migrate-keycloak-to-an-external-instance}
+
+By default, the scripts deploy the Keycloak Operator and a `Keycloak` custom resource. To instead point Camunda at a pre-existing external, standalone, or Helm-managed Keycloak, set `KEYCLOAK_TARGET_MODE=external`. The scripts migrate the realm into the external Keycloak database and rewire Camunda to the external endpoint. They do not deploy or manage the Keycloak instance itself.
+
+:::note
+`KEYCLOAK_TARGET_MODE=external` requires `PG_TARGET_MODE=external`, because the external Keycloak serves the migrated realm from the external Keycloak database (`EXTERNAL_PG_KEYCLOAK_*`). This flow is intended for a data-only cutover: set `SKIP_HELM_UPGRADE=true` and let your upgrade pipeline run the `helm upgrade` that points Camunda at the external Keycloak.
+:::
+
+Configure the external Keycloak connection variables in `env.sh`:
+
+| Variable                         | Default                    | Description                                                                           |
+| -------------------------------- | -------------------------- | ------------------------------------------------------------------------------------- |
+| `KEYCLOAK_TARGET_MODE`           | `operator`                 | Set to `external` to skip the operator and rewire Camunda to a pre-existing Keycloak. |
+| `EXTERNAL_KEYCLOAK_PROTOCOL`     | `http`                     | Protocol of the external Keycloak.                                                    |
+| `EXTERNAL_KEYCLOAK_HOST`         | (empty)                    | Host of the external Keycloak.                                                        |
+| `EXTERNAL_KEYCLOAK_PORT`         | `80`                       | Port of the external Keycloak.                                                        |
+| `EXTERNAL_KEYCLOAK_CONTEXT_PATH` | `/auth`                    | Context path of the external Keycloak.                                                |
+| `EXTERNAL_KEYCLOAK_REALM`        | `/realms/camunda-platform` | Realm path served by the external Keycloak.                                           |
+| `EXTERNAL_KEYCLOAK_ADMIN_SECRET` | (empty)                    | Kubernetes secret in `NAMESPACE` holding the Keycloak admin `password`.               |
+
+<details>
+<summary>Show details: external Keycloak configuration example</summary>
+
+```bash
+# Migrate the Keycloak realm onto an external Keycloak (data-only cutover)
+export KEYCLOAK_TARGET_MODE="external"
+export PG_TARGET_MODE="external"
+export SKIP_HELM_UPGRADE="true"
+
+export EXTERNAL_KEYCLOAK_PROTOCOL="http"
+export EXTERNAL_KEYCLOAK_HOST="keycloak"
+export EXTERNAL_KEYCLOAK_PORT="80"
+export EXTERNAL_KEYCLOAK_CONTEXT_PATH="/auth"
+export EXTERNAL_KEYCLOAK_REALM="/realms/camunda-platform"
+export EXTERNAL_KEYCLOAK_ADMIN_SECRET="external-keycloak-admin"
+```
+
+</details>
+
+#### Source database names that differ from the target
+
+The bundled Bitnami Keycloak subchart defaults to database `bitnami_keycloak` and user `bn_keycloak`, which differ from the migration target names. When the source names differ, set the `*_SOURCE_DB_NAME` and `*_SOURCE_DB_USER` overrides. They default to the target names, so you only set them when the source differs:
+
+```bash
+export KEYCLOAK_SOURCE_DB_NAME="bitnami_keycloak"
+export KEYCLOAK_SOURCE_DB_USER="bn_keycloak"
+export KEYCLOAK_DB_NAME="keycloak"
+export KEYCLOAK_DB_USER="keycloak"
+```
+
+The same pattern applies to the `IDENTITY_SOURCE_DB_*` and `WEBMODELER_SOURCE_DB_*` variables.
 
 ### Create custom Helm values
 
