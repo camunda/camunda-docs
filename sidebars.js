@@ -214,6 +214,7 @@ module.exports = {
             "components/concepts/access-control/authorizations",
             "components/concepts/access-control/connect-to-identity-provider",
             "components/concepts/access-control/mapping-rules",
+            "components/concepts/multi-tenancy",
           ],
         },
         "components/concepts/job-workers",
