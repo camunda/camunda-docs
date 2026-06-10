@@ -7,8 +7,8 @@ description: "How data moves through Camunda 8.8+: the command path, export pipe
 
 Camunda 8.8 introduced a consolidated [Orchestration Cluster](/components/orchestration-cluster.md). For a component-topology overview, see the [reference architecture](/self-managed/reference-architecture/). This page goes one level deeper: it traces how data moves through those components — and why that flow drives the sizing recommendations in the pages that follow.
 
-![Camunda 8.8+ architecture overview](assets/architecture-8.8-plus.jpg)
-<!-- Source: Miro board, exported from PR camunda/camunda-docs#8590 -->
+![Camunda 8.8+ architecture overview](assets/architecture-8.8plus.jpg)
+<!-- Source: Miro board https://miro.com/app/board/uXjVGiNnJBc=/ -->
 
 ## A tale of two storages
 
@@ -22,7 +22,9 @@ Every record in Camunda passes through two distinct storage layers, and understa
 
 A command travels from the client to the primary storage to the engine and only after processing a response comes back.
 
-The command processing path (Command lifecycle) looks like this:
+![Camunda 8.8+ architecture overview - Data Flow Command processing path](assets/architecture-8.8plus-data-flow-command.jpg)
+
+The command processing path (Command lifecycle) looks like this (showed in green in the diagram above):
 
 **Client (REST or gRPC) → Camunda API (Gateway) → Broker (Command API) → Raft partition (log) → Raft replication → Processing Engine → event on log → RocksDB state update → Client response**
 
@@ -36,7 +38,9 @@ You can read more about this internal processing [here](https://docs.camunda.io/
 
 ## Export pipeline
 
-After the engine processes a command, it confirms its state change by an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in *batches*.
+![Camunda 8.8+ architecture overview - Data Flow Export pipeline](assets/architecture-8.8plus-data-flow-export-path.jpg)
+
+After the engine processes a command, it confirms its state change by an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in *batches*. Can be seen in blue in the diagram above.
 
 **The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count.
 
@@ -60,7 +64,9 @@ Exporter behavior and performance is important for the system, because:
 
 ## Query path
 
-Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from the configured secondary storage. They never read directly from the engine.
+![Camunda 8.8+ architecture overview - Data Flow Query path](assets/architecture-8.8plus-data-flow-query.jpg)
+
+Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from the configured secondary storage. They never read directly from the engine. Can be seen in red in the diagram above.
 
 This means query results are depending on the performance of the primary (processing path) and secondary storage (exporting pipeline). They are **eventually consistent**: there is always some lag between a command completing in the engine and the result being visible in search results or the UI. This is measured as the `data availability latency`.
 
@@ -68,7 +74,9 @@ Data availability latency is bounded below by export pipeline lag; if the export
 
 ## Optimize data flow
 
-Optimize sits on top of the export pipeline as a second-tier consumer:
+![Camunda 8.8+ architecture overview - Data Flow Optimize](assets/architecture-8.8plus-data-flow-optimize.jpg)
+
+Optimize sits on top of the export pipeline as a second-tier consumer (can be seen in violet in the diagram above).
 
 1. The Elasticsearch exporter writes raw engine events into per-partition Elasticsearch/OpenSearch indices.
 2. Optimize's **importer** reads from those indices and transforms the data into its own analytics indices.
