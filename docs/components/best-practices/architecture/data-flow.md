@@ -72,18 +72,20 @@ Optimize sits on top of the export pipeline as a second-tier consumer:
 
 1. The Elasticsearch exporter writes raw engine events into per-partition Elasticsearch/OpenSearch indices.
 2. Optimize's **importer** reads from those indices and transforms the data into its own analytics indices.
-3. Optimize writes the analytics indices **back into the same Elasticsearch cluster**.
+3. Optimize writes the analytics indices **back into the same or another Elasticsearch cluster**.
 
-This creates a second write pass on Elasticsearch — on top of the Camunda Exporter writes. The combined write load has significant sizing implications:
+This means Optimize has an additional hop in the data flow compared to Operate and Tasklist, and it writes to secondary storage twice: once for the raw events and once for the analytics indices. As result data availability latency for Optimize is higher than for Operate and Tasklist, and the overall write load on Elasticsearch is significantly higher when Optimize is enabled.
 
-- Benchmarks show a **25–50% throughput reduction** when Optimize is enabled versus disabled, depending on workload and payload size.
-- Optimize import time increases approximately linearly with payload size. A realistic payload (~11 KB) takes proportionally longer to import than a typical payload (~0.5 KB).
-- With a realistic payload and 30-day retention, Optimize can consume 128 Gi of Elasticsearch disk in under 12 hours at 1 process instance per second.
+:::note
+This was exactly the reason to change the architecture in 8.8 to have the Camunda Exporter to aggregate the data for Operate and Tasklist as before both had a similar Exporter-Importer architecture as Optimize. See related [Blog post](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/)*
+:::
+
+Details on the impact of running Optimize can be found in the [sizing guide](sizing-your-environment.md#impact-of-optimize).
 
 **Mitigation options:** Run Optimize on a separate Elasticsearch instance to isolate its load from the core export pipeline; use variable filtering to reduce export volume; tune retention periods; disable variable import if variables are not needed in Optimize reports.
 
 :::note
-Optimize is not supported with RDBMS backends. If Optimize is required, a separate Elasticsearch instance must be present even if the core platform uses OpenSearch or RDBMS.
+Optimize is not supported with RDBMS backends. If Optimize is required, a separate Elasticsearch instance must be present even if the core platform uses RDBMS.
 :::
 
 For concrete sizing recommendations with Optimize enabled, see [Impact of Optimize](sizing-your-environment.md#impact-of-optimize).
