@@ -62,9 +62,9 @@ Exporter behavior and performance is important for the system, because:
 
 Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from the configured secondary storage. They never read directly from the engine.
 
-This means query results are depending on the performance of the primary (processing path) and secondary storage (exporting pipeline). They are **eventually consistent**: there is always some lag between a command completing in the engine and the result being visible in search results or the UI.
+This means query results are depending on the performance of the primary (processing path) and secondary storage (exporting pipeline). They are **eventually consistent**: there is always some lag between a command completing in the engine and the result being visible in search results or the UI. This is measured as the `data availability latency`.
 
-Query latency is bounded below by export pipeline lag — if the exporter is behind, queries are behind. This is measured as the `data availability latency`.
+Data availability latency is bounded below by export pipeline lag; if the exporter is behind, data availability is behind. This can be caused by a slow or overloaded secondary storage.
 
 ## Optimize data flow
 
@@ -89,17 +89,6 @@ Optimize is not supported with RDBMS backends. If Optimize is required, a separa
 :::
 
 For concrete sizing recommendations with Optimize enabled, see [Impact of Optimize](sizing-your-environment.md#impact-of-optimize).
-
-## Data availability latency
-
-Data availability latency is the time between an event occurring in the engine and it being queryable in Operate, Tasklist, or the REST Query API. Under a healthy setup with a well-provisioned Elasticsearch cluster, this is typically under 5 seconds.
-
-Data availability latency degrades when:
-
-- **Elasticsearch disk utilization exceeds ~70%**: indexing slows, the exporter queue grows, and engine backpressure kicks in.
-- **Optimize is enabled**: the second write pass competes for Elasticsearch I/O, increasing overall indexing latency.
-
-For the specific factors and recommended thresholds, see [Data availability latency](sizing-your-environment.md#data-availability-latency).
 
 ## Four scenarios
 
