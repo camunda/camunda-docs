@@ -2,7 +2,10 @@ name: Sync Camunda Hub REST API
 
 on:
   schedule:
-    - cron: "0 15 * * 4" # Runs every Thursday at 3 PM UTC
+    - cron: "0 15 * * *"
+  push:
+    branches:
+      - fix-hub-sync
   workflow_dispatch:
 
 jobs:
@@ -91,9 +94,13 @@ jobs:
         run: |
           cd docs
           mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsm/v2
+
+          # Format spec files
+          npm i
+          npx prettier --write api/hubsm/v2/*.yaml
+
           cd api/hubsm/v2
           mv rest-api.yaml camunda-openapi.yaml
-          npm i
           npm run api:generate:hubsm
 
       - name: Upload Self-Managed changes
@@ -149,9 +156,13 @@ jobs:
         run: |
           cd docs
           mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsaas/v2
+
+          # Format spec files
+          npm i
+          npx prettier --write api/hubsaas/v2/*.yaml
+
           cd api/hubsaas/v2
           mv rest-api.yaml camunda-openapi.yaml
-          npm i
           npm run api:generate:hubsaas
 
       - name: Upload SaaS changes
