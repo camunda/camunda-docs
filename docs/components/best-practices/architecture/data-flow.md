@@ -18,14 +18,6 @@ Every record in Camunda passes through two distinct storage layers, and understa
 
 **[Secondary storage](/reference/glossary/#secondary-storage)** is an external data storage where events are written to,like: Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
 
-## The three paths
-
-| Path | Direction | Latency characteristic |
-|---|---|---|
-| Command path | Inbound (client → engine) | Synchronous, bounded by Raft |
-| Export pipeline | Internal (engine → secondary storage) | Async, partition-bounded |
-| Query path | Outbound (secondary storage → caller) | Depends on export pipeline lag |
-
 ### Command processing path
 
 A command travels from the client to the primary storage to the engine and only after processing a response comes back.
