@@ -736,7 +736,7 @@ module.exports = {
                 id: "components/hub/organization/manage-catalog/manage-catalog",
               },
               items: [
-                "components/hub/catalog/getting-started-catalog",
+                "components/hub/organization/manage-catalog/getting-started-catalog",
                 "components/hub/organization/manage-catalog/catalog-usage",
               ],
             },

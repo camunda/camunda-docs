@@ -5,7 +5,7 @@ sidebar_label: Use Catalog assets
 description: "Discover and apply published Catalog assets in the Hub Catalog and Canvas, and manage assets as a Center of Excellence."
 ---
 
-Once your Center of Excellence (CoE) has [synced element templates to the Catalog](/components/hub/catalog/getting-started.md), delivery teams discover and apply them while modeling, and the CoE manages their lifecycle.
+Once your Center of Excellence (CoE) has [synced element templates to the Catalog](/components/hub/organization/manage-catalog/getting-started.md), delivery teams discover and apply them while modeling, and the CoE manages their lifecycle.
 
 :::note
 The Catalog browsing, Canvas, and CoE management experiences describe the planned 8.10 behavior. The user interface is still being built out, so exact labels and screens may differ from this guide.
@@ -36,14 +36,14 @@ When the CoE publishes a newer version of a template you already use, Hub offers
 
 ## Manage the Catalog as a Center of Excellence
 
-The CoE curates the Catalog by controlling which assets delivery teams can discover and apply. Lifecycle management happens through the git collection repository and the [ingestion API](/components/hub/catalog/getting-started.md#step-2-set-up-cicd-to-sync-assets) — each submission is the full desired state of the Catalog.
+The CoE curates the Catalog by controlling which assets delivery teams can discover and apply. Lifecycle management happens through the git collection repository and the [ingestion API](/components/hub/organization/manage-catalog/getting-started.md#step-2-set-up-cicd-to-sync-assets) — each submission is the full desired state of the Catalog.
 
 ### Unpublished assets
 
 An asset is **unpublished** when it exists in Hub but is no longer part of the latest submission.
 
-- **Delivery teams** can no longer discover or apply the asset. Existing diagrams that already use the template continue to render its properties, with a notice that the asset is unpublished.
-- **CoE members** can still view unpublished assets along with their usage — for example, which diagrams still reference the template — to plan a migration.
+- **Delivery teams** (Web Modeler users) can no longer discover the asset in the Catalog or apply it to **new** diagrams. Diagrams that already use the template are unaffected and keep working — the template properties remain on the existing elements. There is **no** in-diagram notification that the asset was unpublished.
+- **CoE members** (organization administrators) can still view unpublished assets along with their usage — for example, which diagrams still reference the template — to plan a migration.
 
 :::info
 Unpublishing is distinct from element template **deprecation**. Deprecation is a property inside the element template file; unpublishing is a Catalog-level state that reflects the asset's absence from the current submission.
@@ -59,5 +59,5 @@ Deletion is irreversible. Use it only to correct mistakes or remove assets that 
 
 ## Next steps
 
-- [Get started with the Catalog](/components/hub/catalog/getting-started.md) — set up the git collection repository and CI/CD sync.
+- [Get started with the Catalog](/components/hub/organization/manage-catalog/getting-started.md) — set up the git collection repository and CI/CD sync.
 - Learn more about [element templates](/components/hub/workspace/modeler/element-templates/using-templates.md).
