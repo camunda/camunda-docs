@@ -1,13 +1,6 @@
 ### Prerequisites
 
-- OpenJDK 21+
 - [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
-
-:::note
-After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
-
-If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
-:::
 
 ### Install and start Camunda 8 Run
 
