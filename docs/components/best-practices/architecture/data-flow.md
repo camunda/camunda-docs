@@ -90,41 +90,6 @@ Optimize is not supported with RDBMS backends. If Optimize is required, a separa
 
 For concrete sizing recommendations with Optimize enabled, see [Impact of Optimize](sizing-your-environment.md#impact-of-optimize).
 
-## Four scenarios
-
-### Deploy a process definition
-
-1. Client sends `POST /v2/deployments` → command path → engine parses the BPMN/DMN and stores the definition in RocksDB.
-2. The engine emits a `PROCESS` record on the log.
-3. The Camunda Exporter writes the process definition record to secondary storage.
-4. The definition is now queryable via `GET /v2/process-definitions`.
-
-:::note
-A deployment is distributed across all partitions — each partition must acknowledge it. If a `CreateProcessInstance` command reaches a partition before the deployment record has propagated to that partition, the command will fail. This is expected behavior, not a bug.
-:::
-
-### Complete a service task via job worker
-
-1. Client creates a process instance → engine executes BPMN until it reaches the service task → engine activates the job → Camunda Exporter writes a `JOB_CREATED` event to secondary storage.
-2. A job worker polls and activates the job.
-3. Worker completes the job → completion command goes through the command path → engine advances the token.
-4. Camunda Exporter writes completion events → instance is visible as completed in Operate.
-
-### Complete a user task
-
-1. Engine reaches the user task → emits a `USER_TASK` record → Camunda Exporter indexes the task in secondary storage.
-2. Tasklist reads from secondary storage and displays the task to the assigned user.
-3. User assigns and completes the task in the Tasklist UI → completion command goes through the command path → engine resumes the token.
-4. Camunda Exporter writes the updated task record (status: completed) to secondary storage.
-
-### Exporter backpressure
-
-1. Elasticsearch experiences slowness (disk above ~70%, resource contention, or Optimize write competition).
-2. Indexing latency increases → Camunda Exporter write batches queue up.
-3. Exporter position falls behind engine position → gap reaches the configurable threshold.
-4. Engine applies backpressure → process execution throughput drops.
-5. Recovery: free Elasticsearch disk or add resources → indexing recovers → backpressure releases → exporter catches up.
-
 ## Sizing bridge
 
 The three paths above map directly to the factors documented in [Size your environment](sizing-your-environment.md):
