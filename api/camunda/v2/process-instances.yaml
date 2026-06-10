@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Creates and starts an instance of the specified process.
@@ -87,6 +89,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get the process instance by the process instance key.
@@ -135,6 +139,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -264,6 +270,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -464,6 +472,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX0NBTkNFTF9QUk9DRVNTX0lOU1RBTkNFIn1dfV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Cancels multiple running process instances.
@@ -604,6 +614,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siZHluYW1pYyI6dHJ1ZSwibm90ZSI6IlJlc29sdmVkIGF0IHJ1bnRpbWUgZnJvbSB0aGUgc291cmNlIGFuZCB0YXJnZXQgcHJvY2VzcyBkZWZpbml0aW9ucyByZWZlcmVuY2VkIGluIHRoZSByZXF1ZXN0IGJvZHkuIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 

@@ -1074,6 +1074,23 @@ h3 .badge:nth-of-type(1) {
   border: 1px solid #4589ff;
 }
 
+/* Required permissions (RBAC) section */
+.required-permissions__table {
+  display: table;
+  width: auto;
+  min-width: 50%;
+}
+
+.required-permissions__table th,
+.required-permissions__table td {
+  text-align: left;
+}
+
+.required-permissions__or {
+  font-style: italic;
+  color: var(--ifm-color-emphasis-700);
+}
+
 /* HTTP Method badges */
 .badge--get,
 .badge--post,
