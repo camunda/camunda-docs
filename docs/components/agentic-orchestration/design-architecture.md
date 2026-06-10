@@ -99,6 +99,12 @@ Poor or missing documentation increases the risk of:
 
 A clear tool name and precise documentation make the expected behavior explicit, improving reliability during tool selection and execution.
 
+#### Tool parameters
+
+Each tool can also declare input parameters the LLM must supply at runtime. Use the [`fromAi()`](../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings to mark a value as LLM-provided, with an optional description and type to guide the model.
+
+See [tool definitions](../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
+
 ### Mixing agents with workflow patterns
 
 <p><img src={WorkflowImg} style={{marginBottom: '0'}} title="Diagram showing how to mix agents into your workflow patterns" className="img-transparent"/></p>
