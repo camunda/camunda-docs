@@ -92,10 +92,10 @@ For concrete sizing recommendations with Optimize enabled, see [Impact of Optimi
 
 ## Sizing bridge
 
-The three paths above map directly to the factors documented in [Size your environment](sizing-your-environment.md):
+The paths above map directly to the factors documented in [Size your environment](sizing-your-environment.md):
 
-- **Partition count** bounds both command path throughput and export pipeline parallelism. More partitions means more parallel processing and more parallel export, up to the available hardware.
-- **Elasticsearch disk utilization** is the most common cause of operational delay degradation. Monitor and scale storage before hitting ~70%.
-- **Optimize** significantly increases secondary storage write load. Size Elasticsearch separately — or use a dedicated Elasticsearch instance — if Optimize is enabled.
+- **Partition count** bounds both command path throughput and export pipeline parallelism. More partitions means more parallel processing and exporting, up to the available hardware.
+- **Elasticsearch resources** is the most common cause of operational delay and degradation. Monitor and scale storage before hitting performance bottlenecks.
+- **Optimize** significantly increases secondary storage write load. Size Elasticsearch respectively — or use a dedicated Elasticsearch instance — if Optimize is enabled.
 
 For hardware recommendations based on these factors, see [Size your environment](sizing-your-environment.md).
