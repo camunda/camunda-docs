@@ -275,48 +275,48 @@ function OSTabs({ activeOS, onSelect }) {
 /* ─── Download data ─── */
 
 const GETTING_STARTED = {
-  version: "8.9.0",
-  date: "Apr 17, 2026",
+  version: "8.10.0-alpha2",
+  date: "Jun 9, 2026",
   links: {
     mac: [
       {
         label: "Apple Silicon",
-        url: "https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-aarch64.zip",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-aarch64.zip",
       },
       {
         label: "Intel",
-        url: "https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-x86_64.zip",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-x86_64.zip",
       },
     ],
     windows: [
       {
         label: "Windows (x64)",
-        url: "https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-windows-x86_64.zip",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-windows-x86_64.zip",
       },
     ],
     linux: [
       {
         label: "Linux (x64)",
-        url: "https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-linux-x86_64.tar.gz",
+        url: "https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-linux-x86_64.tar.gz",
       },
     ],
   },
 };
 
 const DESKTOP_MODELER = {
-  version: "5.47.0",
-  date: "May 7, 2026",
+  version: "5.48.0",
+  date: "Jun 5, 2026",
   nightlyLabel: "Nightly",
   links: {
     mac: {
       stable: [
         {
           label: "Apple Silicon (.dmg)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-mac-arm64.dmg",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.48.0/camunda-modeler-5.48.0-mac-arm64.dmg",
         },
         {
           label: "Intel (.dmg)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-mac-x64.dmg",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.48.0/camunda-modeler-5.48.0-mac-x64.dmg",
         },
       ],
       experimental: [
@@ -334,7 +334,7 @@ const DESKTOP_MODELER = {
       stable: [
         {
           label: "Windows (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-win-x64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.48.0/camunda-modeler-5.48.0-win-x64.zip",
         },
       ],
       experimental: [
@@ -348,7 +348,7 @@ const DESKTOP_MODELER = {
       stable: [
         {
           label: "Linux (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.47.0/camunda-modeler-5.47.0-linux-x64.tar.gz",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.48.0/camunda-modeler-5.48.0-linux-x64.tar.gz",
         },
       ],
       experimental: [
@@ -364,19 +364,19 @@ const DESKTOP_MODELER = {
 };
 
 const CAMUNDA_RUN = {
-  version: "8.9",
-  date: "Mar 10, 2026",
+  version: "8.9.6",
+  date: "Jun 9, 2026",
   alphaVersion: "8.9.0-alpha5",
   links: {
     mac: {
       stable: [
         {
           label: "Apple Silicon",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-aarch64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.6/camunda8-run-8.9.6-darwin-aarch64.zip",
         },
         {
           label: "Intel",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.6/camunda8-run-8.9.6-darwin-x86_64.zip",
         },
       ],
       experimental: [
@@ -394,7 +394,7 @@ const CAMUNDA_RUN = {
       stable: [
         {
           label: "Windows (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-windows-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.6/camunda8-run-8.9.6-windows-x86_64.zip",
         },
       ],
       experimental: [
@@ -408,7 +408,7 @@ const CAMUNDA_RUN = {
       stable: [
         {
           label: "Linux (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-linux-x86_64.tar.gz",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.6/camunda8-run-8.9.6-linux-x86_64.tar.gz",
         },
       ],
       experimental: [
@@ -425,19 +425,19 @@ const CAMUNDA_RUN = {
 };
 
 const RPA_WORKER = {
-  version: "1.2.2",
-  date: "Jan 14, 2026",
+  version: "1.3.2",
+  date: "Apr 23, 2026",
   alphaVersion: "1.3.0-alpha.3",
   links: {
     mac: {
       stable: [
         {
           label: "Apple Silicon",
-          url: "https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_darwin_aarch64.zip",
+          url: "https://downloads.camunda.cloud/release/rpa-worker/1.3.2/rpa-worker_1.3.2_darwin_aarch64.zip",
         },
         {
           label: "Intel",
-          url: "https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_darwin_x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/rpa-worker/1.3.2/rpa-worker_1.3.2_darwin_amd64.zip",
         },
       ],
       experimental: [
@@ -455,7 +455,7 @@ const RPA_WORKER = {
       stable: [
         {
           label: "Windows (x64)",
-          url: "https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_windows_x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/rpa-worker/1.3.2/rpa-worker_1.3.2_win32_amd64.zip",
         },
       ],
       experimental: [
@@ -469,7 +469,7 @@ const RPA_WORKER = {
       stable: [
         {
           label: "Linux (x64)",
-          url: "https://downloads.camunda.cloud/release/rpa-worker/1.2.2/rpa-worker_1.2.2_linux_x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/rpa-worker/1.3.2/rpa-worker_1.3.2_linux_amd64.zip",
         },
       ],
       experimental: [
@@ -699,7 +699,7 @@ function Downloads() {
               version={GETTING_STARTED.version}
               date={GETTING_STARTED.date}
               links={GETTING_STARTED.links}
-              docsLink="/docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
+              docsLink="/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
               activeOS={activeOS}
               badge="Recommended for new users"
             />

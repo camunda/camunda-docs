@@ -14,11 +14,11 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
 
-In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+To play a process, you must first configure a cluster. A **setup environment** overlay prompts you to select a cluster and deploy your process. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
-A Play environment is then started that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
+Click **Deploy** in the overlay to deploy. The current version of the active process and all its dependencies, like called processes or DMN files, are deployed to the selected cluster.
 
-The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a connector secret isn’t filled out.
+The selected cluster name is shown in the Play action bar. Click it to switch clusters without leaving Play; the newly selected cluster becomes the deployment and execution target.
 
 In SaaS, Play uses connector secrets from your selected cluster. connector secrets are not currently supported in Self-Managed.
 
@@ -45,7 +45,9 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 ![Configure Scenario panel](../img/play-definition.png)
 
-The first view in Play is the process definition view. It shows deployment problems, active process instances, and a **Configure Scenario** panel on the right.
+When you open Play, the [setup environment overlay](#opening-play) prompts you to configure a cluster and deploy. Once deployed, the process definition view shows deployment problems, active process instances, scenarios, and a **Configure Scenario** overlay.
+
+![play configure scenario view](../img/play-configure-scenario.png)
 
 Click a **start event** to configure how the process should start in the **Configure Scenario** panel. The panel shows different options depending on the type of the selected start event:
 
@@ -267,7 +269,7 @@ Rewinding a process instance that has modifications applied to is currently not 
 
 ## Rapid iteration
 
-To make changes, switch back to **Implement** mode. When returning to Play, your process is redeployed. Play only shows process instances from the process’s most recent version, so you may not see your previous instances.
+To make changes, switch back to **Implement** mode. When returning to Play, your process needs to be redeployed. Play only shows process instances from the process’s most recent version, so you may not see your previous instances.
 
 Play saves your inputs when completing user task forms. It auto-fills your last response if you open the same form later in the session. You can click **Reset** to reset the form to its defaults.
 
@@ -311,12 +313,11 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 - [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
 - Currently, Play supports displaying up to 100 flow node instances in the instance history panel, 100 variables in the variables panel, and 100 process instances on the process definition page. To access all related data, you can use Operate.
 - While you can still interact with your process instance in Play (for example, completing jobs or publishing messages), you may be unable to resolve incidents if they occur beyond the 100th flow node instance, as Play does not track them. In this case, incident resolution can be managed in Operate.
-- Play doesn't support elements defined using [FEEL expressions](/components/modeler/feel/what-is-feel.md), such as job types for service tasks, message correlation keys, and called elements in call activities.
 - User tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above. Please consider migrating to [Camunda user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks).
 
 ## Use Play with Camunda Self-Managed
 
-After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+After selecting the **Play** tab in Self-Managed, the Play view opens directly. The cluster setup and deployment flow is the same as in SaaS, see [opening Play](#opening-play).
 
 ### Limitations {#self-managed-limitations}
 
