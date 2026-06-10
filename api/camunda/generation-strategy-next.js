@@ -801,7 +801,7 @@ function addRequiredPermissionsAnnotation(specFilePath) {
 
         const permissions = operation[REQUIRED_PERMISSIONS_EXTENSION];
         // Only annotate operations that declare the extension. An empty array is
-        // meaningful (explicitly public) and still gets a badge; a missing
+        // meaningful (explicitly public) and still renders the section; a missing
         // extension means "not yet annotated" and is left untouched.
         if (!Array.isArray(permissions)) {
           return;
