@@ -187,8 +187,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
         }}
       >
         For the complete documentation index, see{" "}
-        <a href="/llms.txt">llms.txt</a>. Markdown versions of pages are
-        available by appending .md to any documentation URL.
+        <a href="/llms.txt">llms.txt</a>. 
       </div>
       <VersionNotification />
       {children}
