@@ -46,9 +46,9 @@ After the engine processes a command, it confirms its state change by an event o
 
 There are three built-in exporters in play:
 
-- **[Camunda Exporter](../../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API
-- **[RDBMS Exporter](../../../../self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter.md)**: aggregates and writes enriched data to secondary storage (RDBMS) for Operate, Tasklist, and the REST Query API.
-- **[Elasticsearch Exporter](../../../../self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
+- **[Camunda Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API
+- **[RDBMS Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter.md)**: aggregates and writes enriched data to secondary storage (RDBMS) for Operate, Tasklist, and the REST Query API.
+- **[Elasticsearch Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
 
 The Camunda Exporter and RDBMS Exporter are mutually exclusive — only one can be enabled at a time. The Elasticsearch exporter is independent and can be enabled alongside either of the other two.
 
