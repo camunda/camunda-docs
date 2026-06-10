@@ -127,6 +127,16 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 </div>
 </div>
 
+## Key changes
+
+### 8.9.x patch releases
+
+The following key change was also released as part of an 8.9.x patch release.
+
+| Patch release                                                  | Type            | Key change                                                                                              |
+| :------------------------------------------------------------- | :-------------- | :------------------------------------------------------------------------------------------------------ |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record) |
+
 ## Agentic orchestration
 
 <div className="release-announcement-row">
@@ -154,6 +164,23 @@ Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using 
 Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test are **forward-compatible** with the Orchestration Cluster, meaning you can upgrade the cluster and clients independently. For example, you can run a client on 8.8 against a cluster on 8.9, see [Client and API compatibility](/reference/public-api.md#client-and-api-compatibility).
 :::
 <br/>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
+
+[Camunda 8.9.1](/reference/announcements-release-notes/890/890-release-notes.md) unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.9.1 or any later 8.9.x patch. The built-in Elasticsearch, OpenSearch, and RDBMS exporters are unaffected.
+
+A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and will be available in a later 8.9.x patch.
+
+**Action:** If you maintain a custom exporter that reads message batch records, avoid calling `getMessageKeys()` until you upgrade to a patch that includes the fix.
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
