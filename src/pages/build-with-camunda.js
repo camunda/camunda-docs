@@ -641,7 +641,7 @@ function BuildWithCamunda() {
   return (
     <Layout
       title="Build with Camunda"
-      description="Process orchestration for developers. Go from zero to a running workflow in minutes."
+      description="Process orchestration for users. Go from zero to a running workflow in minutes."
     >
       <div className={styles.page}>
         {/* ─── Hero: Start from your terminal ─── */}
@@ -1039,7 +1039,7 @@ $ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
             <div className={styles.commandCard}>
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl cluster start 8.9.0-alpha5
+                {`$ c8ctl cluster start 8.9
 $ c8ctl cluster stop`}
               </TerminalWindow>
             </div>
@@ -1364,133 +1364,31 @@ Available skills:
           className={clsx(
             styles.moreSection,
             styles.darkSection,
-            styles.noTopBorder
+            styles.noTopBorder,
+            styles.exploreSectionLast
           )}
-          style={{ scrollMarginTop: "5rem", paddingTop: "3rem" }}
+          style={{
+            scrollMarginTop: "5rem",
+            paddingTop: "3rem",
+            paddingBottom: "8rem",
+          }}
         >
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Camunda downloads</h2>
               <p className={styles.sectionSub}>
-                Download everything you need for local Camunda 8 development on
-                macOS, Windows, or Linux.
+                Download everything you need for local Camunda 8 development.
               </p>
             </div>
-            <div className={styles.downloadsGrid4}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <Link
-                to="https://developers.camunda.com/install-camunda-8/"
-                className={styles.wayCard}
+                to={useBaseUrl("/downloads")}
+                className={styles.heroCardCtaAlt}
               >
-                <div className={styles.wayCardImage}>
-                  <SparklesIconLg />
-                </div>
-                <h3>Getting Started bundle</h3>
-                <p>
-                  Complete bundle with Desktop Modeler, Runtime, and examples.
-                </p>
-              </Link>
-              <Link
-                to="https://developers.camunda.com/install-camunda-8/"
-                className={styles.wayCard}
-              >
-                <div className={styles.wayCardImage}>
-                  <PencilIconLg />
-                </div>
-                <h3>Desktop Modeler</h3>
-                <p>Design BPMN processes, DMN tables, and forms locally.</p>
-              </Link>
-              <Link
-                to="https://developers.camunda.com/install-camunda-8/"
-                className={styles.wayCard}
-              >
-                <div className={styles.wayCardImage}>
-                  <PlayIconLg />
-                </div>
-                <h3>Camunda 8 Run</h3>
-                <p>Lightweight Camunda distribution for local development.</p>
-              </Link>
-              <Link
-                to="https://developers.camunda.com/install-camunda-8/"
-                className={styles.wayCard}
-              >
-                <div className={styles.wayCardImage}>
-                  <RpaIconLg />
-                </div>
-                <h3>RPA Worker</h3>
-                <p>
-                  Run robotic process automation tasks alongside your BPMN
-                  workflows.
-                </p>
+                Go to downloads <ArrowRight />
               </Link>
             </div>
           </div>
-        </section>
-
-        {/* ─── Explore docs ─── */}
-        <section
-          className={clsx(styles.exploreSection, styles.exploreSectionLast)}
-        >
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Explore the docs</h2>
-              <p className={styles.sectionSub}>
-                Browse Camunda 8 guides, resources, SDK, and API documentation.
-              </p>
-            </div>
-            <div className={styles.exploreGrid}>
-              <Link
-                to={useBaseUrl("docs/guides/")}
-                className={styles.exploreCard}
-              >
-                <h3>Get started</h3>
-                <p>
-                  New to Camunda? Create an account and model your first
-                  process.
-                </p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/components/")}
-                className={styles.exploreCard}
-              >
-                <h3>Using Camunda</h3>
-                <p>Learn about Modeler, Zeebe, Operate, Tasklist, and more.</p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/self-managed/about-self-managed/")}
-                className={styles.exploreCard}
-              >
-                <h3>Self-Managed</h3>
-                <p>Host and operate Camunda on your own infrastructure.</p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
-                className={styles.exploreCard}
-              >
-                <h3>APIs and tools</h3>
-                <p>Client libraries, REST APIs, SDKs, and integrations.</p>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/components/best-practices/best-practices-overview/"
-                )}
-                className={styles.exploreCard}
-              >
-                <h3>Best Practices</h3>
-                <p>
-                  Level up your BPMN, DMN, and process orchestration skills.
-                </p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/reference/")}
-                className={styles.exploreCard}
-              >
-                <h3>Reference</h3>
-                <p>Release notes, supported environments, and licenses.</p>
-              </Link>
-            </div>
-          </div>
-          <br />
-          <br />
         </section>
       </div>
     </Layout>
