@@ -117,7 +117,6 @@ A business rule task with a called decision that does not specify the binding ty
 <bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
   <bpmn:extensionElements>
     <zeebe:calledDecision decisionId="shipping_box_size" resultVariable="boxSize" />
-    <zeebe:jobPriorityDefinition priority="90" />
   </bpmn:extensionElements>
 </bpmn:businessRuleTask>
 ```
@@ -154,6 +153,7 @@ A business rule task with a job worker implementation and a custom header:
     <zeebe:taskHeaders>
       <zeebe:header key="decisionRef" value="risk" />
     </zeebe:taskHeaders>
+    <zeebe:jobPriorityDefinition priority="90" />
   </bpmn:extensionElements>
 </bpmn:businessRuleTask>
 ```

@@ -76,7 +76,7 @@ to transform the variables passed to the job worker, or to customize how the var
 
 ## Job priority
 
-This task type supports `zeebe:jobPriorityDefinition`.
+This task type supports `zeebe:jobPriorityDefinition` when implemented as a job worker.
 
 You can define job priority on the process as a default and override it on this task.
 For priority behavior and limitations, see [Job prioritization](../../../concepts/job-workers.md#job-prioritization).
@@ -114,7 +114,6 @@ A script task with an inline FEEL expression:
 <bpmn:scriptTask id="calculate-sum" name="Calculate sum">
   <bpmn:extensionElements>
     <zeebe:script expression="=a + b" resultVariable="sum" />
-    <zeebe:jobPriorityDefinition priority="90" />
   </bpmn:extensionElements>
 </bpmn:scriptTask>
 ```

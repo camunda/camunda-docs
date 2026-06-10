@@ -51,12 +51,17 @@ For priority behavior and limitations, see [Job prioritization](../../../concept
 
 A service task with a custom header and priority definition:
 
-<bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
-<bpmn:extensionElements>
-<zeebe:calledDecision decisionId="shipping_box_size" resultVariable="boxSize" />
-<zeebe:jobPriorityDefinition priority="90" />
-</bpmn:extensionElements>
-</bpmn:businessRuleTask>
+```xml
+<bpmn:serviceTask id="collect-money" name="Collect Money">
+  <bpmn:extensionElements>
+    <zeebe:taskDefinition type="payment-service" retries="5" />
+    <zeebe:taskHeaders>
+      <zeebe:header key="method" value="VISA" />
+    </zeebe:taskHeaders>
+    <zeebe:jobPriorityDefinition priority="90" />
+  </bpmn:extensionElements>
+</bpmn:serviceTask>
+```
 
 ## Next steps
 
