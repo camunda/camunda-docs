@@ -19,22 +19,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WorkspaceCreateRequest'
+              $ref: "#/components/schemas/WorkspaceCreateRequest"
       responses:
         "200":
           description: The workspace was created successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WorkspaceResult'
+                $ref: "#/components/schemas/WorkspaceResult"
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
   /workspaces/{workspaceKey}:
     get:
@@ -45,26 +45,26 @@ paths:
       tags:
         - Workspace
       parameters:
-        - $ref: '#/components/parameters/WorkspaceKeyPathParam'
+        - $ref: "#/components/parameters/WorkspaceKeyPathParam"
       responses:
         "200":
           description: The workspace was retrieved successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WorkspaceDetailResult'
+                $ref: "#/components/schemas/WorkspaceDetailResult"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: The workspace was not found.
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
     patch:
       operationId: updateWorkspace
@@ -74,34 +74,34 @@ paths:
       tags:
         - Workspace
       parameters:
-        - $ref: '#/components/parameters/WorkspaceKeyPathParam'
+        - $ref: "#/components/parameters/WorkspaceKeyPathParam"
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WorkspaceUpdateRequest'
+              $ref: "#/components/schemas/WorkspaceUpdateRequest"
       responses:
         "200":
           description: The workspace was updated successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WorkspaceResult'
+                $ref: "#/components/schemas/WorkspaceResult"
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: The workspace was not found.
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
     delete:
       operationId: deleteWorkspace
@@ -113,24 +113,24 @@ paths:
       tags:
         - Workspace
       parameters:
-        - $ref: '#/components/parameters/WorkspaceKeyPathParam'
+        - $ref: "#/components/parameters/WorkspaceKeyPathParam"
       responses:
         "204":
           description: The workspace was deleted successfully.
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           description: The workspace was not found.
           content:
             application/problem+json:
               schema:
-                $ref: 'problem-detail.yaml#/components/schemas/ProblemDetail'
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
   /workspaces/search:
     post:
@@ -145,22 +145,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WorkspaceSearchQuery'
+              $ref: "#/components/schemas/WorkspaceSearchQuery"
       responses:
         "200":
           description: The search completed successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WorkspaceSearchQueryResult'
+                $ref: "#/components/schemas/WorkspaceSearchQueryResult"
         "400":
-          $ref: 'common-responses.yaml#/components/responses/InvalidData'
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
-          $ref: 'common-responses.yaml#/components/responses/Unauthorized'
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
-          $ref: 'common-responses.yaml#/components/responses/Forbidden'
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
-          $ref: 'common-responses.yaml#/components/responses/InternalServerError'
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
 components:
   parameters:
@@ -222,7 +222,7 @@ components:
         createdBy:
           description: The user who created the workspace.
           allOf:
-            - $ref: 'files.yaml#/components/schemas/UserReference'
+            - $ref: "files.yaml#/components/schemas/UserReference"
         updated:
           description: The timestamp when the workspace was last updated.
           type: string
@@ -230,7 +230,7 @@ components:
         updatedBy:
           description: The user who last updated the workspace.
           allOf:
-            - $ref: 'files.yaml#/components/schemas/UserReference'
+            - $ref: "files.yaml#/components/schemas/UserReference"
 
     WorkspaceDetailResult:
       type: object
@@ -241,11 +241,11 @@ components:
         workspace:
           description: The workspace metadata.
           allOf:
-            - $ref: '#/components/schemas/WorkspaceResult'
+            - $ref: "#/components/schemas/WorkspaceResult"
         content:
           description: The contents of the workspace.
           allOf:
-            - $ref: '#/components/schemas/WorkspaceContent'
+            - $ref: "#/components/schemas/WorkspaceContent"
 
     WorkspaceContent:
       type: object
@@ -256,7 +256,7 @@ components:
           description: The projects contained in this workspace.
           type: array
           items:
-            $ref: 'projects.yaml#/components/schemas/ProjectResult'
+            $ref: "projects.yaml#/components/schemas/ProjectResult"
 
     # --- Search schemas ---
 
@@ -268,16 +268,16 @@ components:
             Pagination criteria. Supports offset-based pagination (from/limit) or
             a simple limit.
           allOf:
-            - $ref: 'search-models.yaml#/components/schemas/SearchQueryPage'
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
         sort:
           description: Sort field criteria.
           type: array
           items:
-            $ref: '#/components/schemas/WorkspaceSearchQuerySortRequest'
+            $ref: "#/components/schemas/WorkspaceSearchQuerySortRequest"
         filter:
           description: The workspace search filters.
           allOf:
-            - $ref: '#/components/schemas/WorkspaceFilter'
+            - $ref: "#/components/schemas/WorkspaceFilter"
 
     WorkspaceSearchQuerySortRequest:
       type: object
@@ -292,7 +292,7 @@ components:
             - created
             - updated
         order:
-          $ref: 'search-models.yaml#/components/schemas/SortOrderEnum'
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
 
     WorkspaceFilter:
       type: object
@@ -301,23 +301,23 @@ components:
         name:
           description: Filter by workspace name.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/StringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         created:
           description: Filter by creation date.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/DateTimeFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
         updated:
           description: Filter by last update date.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/DateTimeFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
         createdBy:
           description: Filter by creator email address.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         updatedBy:
           description: Filter by last updater email address.
           allOf:
-            - $ref: 'filters.yaml#/components/schemas/BasicStringFilterProperty'
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
 
     WorkspaceSearchQueryResult:
       type: object
@@ -329,6 +329,6 @@ components:
           description: The matching workspaces.
           type: array
           items:
-            $ref: '#/components/schemas/WorkspaceResult'
+            $ref: "#/components/schemas/WorkspaceResult"
         page:
-          $ref: 'search-models.yaml#/components/schemas/SearchQueryPageResponse'
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
