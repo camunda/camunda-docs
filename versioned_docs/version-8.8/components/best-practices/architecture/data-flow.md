@@ -34,7 +34,7 @@ This means command response latency is bounded below by Raft commit time, engine
 
 If the engine cannot process commands fast enough; for example, because disk I/O is saturated, network latency is high or the backlog is large, the Command API applies backpressure to the client.
 
-You can read more about this internal processing [here](https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/).
+You can read more about this internal processing [here](../../zeebe/technical-concepts/internal-processing.md).
 
 ## Export pipeline
 
@@ -46,9 +46,9 @@ After the engine processes a command, it confirms its state change by an event o
 
 There are three built-in exporters in play:
 
-- **[Camunda Exporter](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API
-- **[RDBMS Exporter](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter/)**: aggregates and writes enriched data to secondary storage (RDBMS) for Operate, Tasklist, and the REST Query API.
-- **[Elasticsearch Exporter](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
+- **[Camunda Exporter](../../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API
+- **[RDBMS Exporter](../../../../self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter.md)**: aggregates and writes enriched data to secondary storage (RDBMS) for Operate, Tasklist, and the REST Query API.
+- **[Elasticsearch Exporter](../../../../self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
 
 The Camunda Exporter and RDBMS Exporter are mutually exclusive — only one can be enabled at a time. The Elasticsearch exporter is independent and can be enabled alongside either of the other two.
 
