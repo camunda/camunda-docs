@@ -16,44 +16,55 @@ Every record in Camunda passes through two distinct storage layers, and understa
 
 **[Primary storage](/reference/glossary/#primary-storage)** is the multi Raft cluster in Camunda, with partitions as the scaling unit. Each Partition has a Raft append-only log, RocksDB to store internal state, and snapshots for compaction. All writes land here first. It is durable and strongly consistent, but it is not directly queryable from outside the cluster. Each partition has exactly one leader that is responsible for both processing commands and exporting records.
 
-**[Secondary storage](/reference/glossary/#secondary-storage)** is an external data storage where events are written to,like: Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
+**[Secondary storage](/reference/glossary/#secondary-storage)** is an external data storage where events are written to, like: Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
 
-## The three paths
+## Command processing path
 
-| Path | Direction | Latency characteristic |
-|---|---|---|
-| Command path | Inbound (client → engine) | Synchronous, bounded by Raft |
-| Export pipeline | Internal (engine → secondary storage) | Async, partition-bounded |
-| Query path | Outbound (secondary storage → caller) | Depends on export pipeline lag |
+A command travels from the client to the primary storage to the engine and only after processing a response comes back.
 
-### Command path
+The command processing path (Command lifecycle) looks like this:
 
-A command travels from the client to the engine and back before it is considered complete:
+**Client (REST or gRPC) → Camunda API (Gateway) → Broker (Command API) → Raft partition (log) → Raft replication → Processing Engine → event on log → RocksDB state update → Client response**
 
-**Client (REST or gRPC) → Zeebe Gateway → Broker → Raft log → Processing Engine → event on log → RocksDB**
+Client responses are not sent until the command is fully processed by the engine, the engine is only able to process the command when it is commited on the log (as part of the Raft consensus protocol). The engine reads commands sequentially per partition — only one command per partition is processed at a time, and only the Raft partition leader runs the engine.
 
-Commands return only after the Raft log entry is committed and the engine has confirmed processing it (via an event written back to the log). The stream processor reads commands sequentially per partition — only one command per partition is processed at a time, and only the partition leader runs the stream processor.
+This means command response latency is bounded below by Raft commit time, engine processing time and processing queue length. In a healthy and stable cluster, this typically means sub-second response latency for simple commands.
 
-If the engine cannot process commands fast enough — for example, because disk I/O is saturated — the Command API applies backpressure to the client.
+If the engine cannot process commands fast enough; for example, because disk I/O is saturated, network latency is high or the backlog is large, the Command API applies backpressure to the client.
 
-### Export pipeline
+You can read more about this internal processing [here](https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/).
 
-After the engine processes a command, the exporter asynchronously reads records from the log and writes them to secondary storage in batches.
+## Export pipeline
 
-**The exporter runs on the same leader as the engine.** It is partition-bounded and cannot scale independently of partition count.
+After the engine processes a command, it confirms its state change by an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in *batches*.
 
-There are two exporters in play:
+**The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count.
 
-- **Camunda Exporter**: aggregates and writes enriched data to secondary storage for Operate, Tasklist, and the REST Query API.
-- **Elasticsearch exporter**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
+There are three built-in exporters in play:
 
-The exporter tracks its position (a checkpoint) in RocksDB. If the exporter falls behind, Zeebe reduces the record write rate via [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) to keep the backlog manageable. In extreme cases, client commands are rejected via the standard backpressure mechanism. A slow secondary storage therefore directly reduces process execution throughput.
+- **[Camunda Exporter](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API
+- **[RDBMS Exporter](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter/)**: aggregates and writes enriched data to secondary storage (RDBMS) for Operate, Tasklist, and the REST Query API.
+- **[Elasticsearch Exporter](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
 
-### Query path
+The Camunda Exporter and RDBMS Exporter are mutually exclusive — only one can be enabled at a time. The Elasticsearch exporter is independent and can be enabled alongside either of the other two.
 
-Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from secondary storage. They never read directly from the engine.
+**Important to note:** read events are applied to the registered exporters one by one, in the same order as they appear on the log, and one event is first applied to ALL exporters before moving to the next event.
 
-This means query results are **eventually consistent**: there is always some lag between a command completing in the engine and the result being visible in search results or the UI. Query latency is bounded below by export pipeline lag — if the exporter is behind, queries are behind.
+The exporters track their position in the Exporter state (backed by RocksDB). If the exporting backlog grows over a certain threshold, Camunda reduces the record write rate via a corresponding [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) mechanics to keep the exporting backlog manageable. In extreme cases, client commands are rejected via the standard backpressure mechanism. 
+
+Exporter behavior and performance is important for the system, because:
+
+- *If an exporter falls behind, it holds up all exporters for that partition.*
+- *A slow secondary storage therefore directly reduces process execution throughput.*
+- *Custom exporters can have a high impact on overall throughput if they are not performant enough.*
+
+## Query path
+
+Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from the configured secondary storage. They never read directly from the engine.
+
+This means query results are depending on the performance of the primary (processing path) and secondary storage (exporting pipeline). They are **eventually consistent**: there is always some lag between a command completing in the engine and the result being visible in search results or the UI. This is measured as the `data availability latency`.
+
+Data availability latency is bounded below by export pipeline lag; if the exporter is behind, data availability is behind. This can be caused by a slow or overloaded secondary storage.
 
 ## Optimize data flow
 
@@ -61,74 +72,28 @@ Optimize sits on top of the export pipeline as a second-tier consumer:
 
 1. The Elasticsearch exporter writes raw engine events into per-partition Elasticsearch/OpenSearch indices.
 2. Optimize's **importer** reads from those indices and transforms the data into its own analytics indices.
-3. Optimize writes the analytics indices **back into the same Elasticsearch cluster**.
+3. Optimize writes the analytics indices **back into the same or another Elasticsearch cluster**.
 
-This creates a second write pass on Elasticsearch — on top of the Camunda Exporter writes. The combined write load has significant sizing implications:
+This means Optimize has an additional hop in the data flow compared to Operate and Tasklist, and it writes to secondary storage twice: once for the raw events and once for the analytics indices. As result data availability latency for Optimize is higher than for Operate and Tasklist, and the overall write load on Elasticsearch is significantly higher when Optimize is enabled.
 
-- Benchmarks show a **25–50% throughput reduction** when Optimize is enabled versus disabled, depending on workload and payload size.
-- Optimize import time increases approximately linearly with payload size. A realistic payload (~11 KB) takes proportionally longer to import than a typical payload (~0.5 KB).
-- With a realistic payload and 30-day retention, Optimize can consume 128 Gi of Elasticsearch disk in under 12 hours at 1 process instance per second.
+:::note
+This was exactly the reason to change the architecture in 8.8 to have the Camunda Exporter to aggregate the data for Operate and Tasklist as before both had a similar Exporter-Importer architecture as Optimize. See related [Blog post](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
+:::
+
+Details on the impact of running Optimize can be found in the [sizing guide](sizing-your-environment.md#impact-of-optimize).
 
 **Mitigation options:** Run Optimize on a separate Elasticsearch instance to isolate its load from the core export pipeline; use variable filtering to reduce export volume; tune retention periods; disable variable import if variables are not needed in Optimize reports.
 
 :::note
-Optimize is not supported with RDBMS backends. If Optimize is required, a separate Elasticsearch instance must be present even if the core platform uses OpenSearch or RDBMS.
+Optimize is not supported with RDBMS backends. If Optimize is required, a separate Elasticsearch instance must be present even if the core platform uses RDBMS.
 :::
-
-For concrete sizing recommendations with Optimize enabled, see [Impact of Optimize](sizing-your-environment.md#impact-of-optimize).
-
-## Data availability latency
-
-Data availability latency is the time between an event occurring in the engine and it being queryable in Operate, Tasklist, or the REST Query API. Under a healthy setup with a well-provisioned Elasticsearch cluster, this is typically under 5 seconds.
-
-Data availability latency degrades when:
-
-- **Elasticsearch disk utilization exceeds ~70%**: indexing slows, the exporter queue grows, and engine backpressure kicks in.
-- **Optimize is enabled**: the second write pass competes for Elasticsearch I/O, increasing overall indexing latency.
-
-For the specific factors and recommended thresholds, see [Data availability latency](sizing-your-environment.md#data-availability-latency).
-
-## Four scenarios
-
-### Deploy a process definition
-
-1. Client sends `POST /v2/deployments` → command path → engine parses the BPMN/DMN and stores the definition in RocksDB.
-2. The engine emits a `PROCESS` record on the log.
-3. The Camunda Exporter writes the process definition record to secondary storage.
-4. The definition is now queryable via `GET /v2/process-definitions`.
-
-:::note
-A deployment is distributed across all partitions — each partition must acknowledge it. If a `CreateProcessInstance` command reaches a partition before the deployment record has propagated to that partition, the command will fail. This is expected behavior, not a bug.
-:::
-
-### Complete a service task via job worker
-
-1. Client creates a process instance → engine executes BPMN until it reaches the service task → engine activates the job → Camunda Exporter writes a `JOB_CREATED` event to secondary storage.
-2. A job worker polls and activates the job.
-3. Worker completes the job → completion command goes through the command path → engine advances the token.
-4. Camunda Exporter writes completion events → instance is visible as completed in Operate.
-
-### Complete a user task
-
-1. Engine reaches the user task → emits a `USER_TASK` record → Camunda Exporter indexes the task in secondary storage.
-2. Tasklist reads from secondary storage and displays the task to the assigned user.
-3. User assigns and completes the task in the Tasklist UI → completion command goes through the command path → engine resumes the token.
-4. Camunda Exporter writes the updated task record (status: completed) to secondary storage.
-
-### Exporter backpressure
-
-1. Elasticsearch experiences slowness (disk above ~70%, resource contention, or Optimize write competition).
-2. Indexing latency increases → Camunda Exporter write batches queue up.
-3. Exporter position falls behind engine position → gap reaches the configurable threshold.
-4. Engine applies backpressure → process execution throughput drops.
-5. Recovery: free Elasticsearch disk or add resources → indexing recovers → backpressure releases → exporter catches up.
 
 ## Sizing bridge
 
-The three paths above map directly to the factors documented in [Size your environment](sizing-your-environment.md):
+The paths above map directly to the factors documented in [Size your environment](sizing-your-environment.md):
 
-- **Partition count** bounds both command path throughput and export pipeline parallelism. More partitions means more parallel processing and more parallel export, up to the available hardware.
-- **Elasticsearch disk utilization** is the most common cause of operational delay degradation. Monitor and scale storage before hitting ~70%.
-- **Optimize** significantly increases secondary storage write load. Size Elasticsearch separately — or use a dedicated Elasticsearch instance — if Optimize is enabled.
+- **Partition count** bounds both command path throughput and export pipeline parallelism. More partitions means more parallel processing and exporting, up to the available hardware.
+- **Elasticsearch resources** is the most common cause of operational delay and degradation. Monitor and scale storage before hitting performance bottlenecks.
+- **Optimize** significantly increases secondary storage write load. Size Elasticsearch respectively — or use a dedicated Elasticsearch instance — if Optimize is enabled.
 
 For hardware recommendations based on these factors, see [Size your environment](sizing-your-environment.md).
