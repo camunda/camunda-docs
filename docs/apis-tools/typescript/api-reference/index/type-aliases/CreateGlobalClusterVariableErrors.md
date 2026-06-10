@@ -43,6 +43,16 @@ Forbidden. The request is not allowed.
 
 ---
 
+### 409
+
+```ts
+409: ProblemDetail;
+```
+
+A cluster variable with this name already exists.
+
+---
+
 ### 500
 
 ```ts

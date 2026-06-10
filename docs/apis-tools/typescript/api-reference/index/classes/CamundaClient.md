@@ -1411,6 +1411,70 @@ Agent instance
 
 ---
 
+### createAgentInstanceHistoryItem()
+
+```ts
+createAgentInstanceHistoryItem(input, options?): CancelablePromise<AgentInstanceHistoryItemCreationResult>;
+```
+
+Create agent instance history item
+
+Appends a single history item to an agent instance's conversation history.
+The created item has commitStatus PENDING until the job identified by jobLease
+completes successfully, at which point it transitions to COMMITTED. If the job
+fails or is superseded by a retry, the item is marked DISCARDED.
+
+-
+
+#### Parameters
+
+##### input
+
+[`createAgentInstanceHistoryItemInput`](../type-aliases/createAgentInstanceHistoryItemInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentInstanceHistoryItemCreationResult`](../type-aliases/AgentInstanceHistoryItemCreationResult.md)\>
+
+#### Example
+
+```ts
+async function createAgentInstanceHistoryItemExample(
+  agentInstanceKey: AgentInstanceKey,
+  elementInstanceKey: ElementInstanceKey,
+  jobKey: JobKey,
+  jobLease: string
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createAgentInstanceHistoryItem({
+    agentInstanceKey,
+    elementInstanceKey,
+    jobKey,
+    jobLease,
+    role: "ASSISTANT",
+    content: [{ contentType: "TEXT", text: "How can I help you today?" }],
+    producedAt: new Date().toISOString(),
+  });
+
+  console.log(`Created history item: ${result.historyItemKey}`);
+}
+```
+
+#### Operation Id
+
+createAgentInstanceHistoryItem
+
+#### Tags
+
+Agent instance
+
+---
+
 ### createAuthorization()
 
 ```ts
@@ -3335,7 +3399,10 @@ evaluateExpression(input, options?): CancelablePromise<ExpressionEvaluationResul
 
 Evaluate an expression
 
-Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
+Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
+cluster variables when a tenant ID is provided. Optionally, provide a `scopeKey` to make the
+variables of a specific process instance or element instance visible while evaluating the
+expression.
 
 -
 
@@ -7435,6 +7502,79 @@ Batch operation
 
 ---
 
+### searchAgentInstanceHistory()
+
+```ts
+searchAgentInstanceHistory(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AgentInstanceHistorySearchQueryResult>;
+```
+
+Search agent instance history
+
+Searches the conversation history of an agent instance. Committed items
+are returned by default.
+
+-
+
+#### Parameters
+
+##### input
+
+[`searchAgentInstanceHistoryInput`](../type-aliases/searchAgentInstanceHistoryInput.md)
+
+##### consistencyManagement
+
+[`searchAgentInstanceHistoryConsistency`](../type-aliases/searchAgentInstanceHistoryConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentInstanceHistorySearchQueryResult`](../type-aliases/AgentInstanceHistorySearchQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchAgentInstanceHistoryExample(
+  agentInstanceKey: AgentInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchAgentInstanceHistory(
+    {
+      agentInstanceKey,
+      filter: { role: { $eq: "ASSISTANT" } },
+      sort: [{ field: "producedAt", order: "ASC" }],
+      page: { limit: 20 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const item of result.items ?? []) {
+    console.log(`${item.historyItemKey} (${item.role})`);
+  }
+  console.log(`Total: ${result.page.totalItems}`);
+}
+```
+
+#### Operation Id
+
+searchAgentInstanceHistory
+
+#### Tags
+
+Agent instance
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### searchAgentInstances()
 
 ```ts
@@ -8431,6 +8571,77 @@ async function searchElementInstancesExample(
 #### Operation Id
 
 searchElementInstances
+
+#### Tags
+
+Element instance
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### searchElementInstanceWaitStates()
+
+```ts
+searchElementInstanceWaitStates(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ElementInstanceWaitStateQueryResult>;
+```
+
+Search element instance wait states
+
+Returns the wait states for element instances matching the given filter.
+
+-
+
+#### Parameters
+
+##### input
+
+[`ElementInstanceWaitStateQuery`](../type-aliases/ElementInstanceWaitStateQuery.md)
+
+##### consistencyManagement
+
+[`searchElementInstanceWaitStatesConsistency`](../type-aliases/searchElementInstanceWaitStatesConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ElementInstanceWaitStateQueryResult`](../type-aliases/ElementInstanceWaitStateQueryResult.md)\>
+
+#### Example
+
+```ts
+async function searchElementInstanceWaitStatesExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchElementInstanceWaitStates(
+    {
+      filter: {
+        processInstanceKey,
+      },
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const waitState of result.items ?? []) {
+    console.log(`${waitState.elementId}: ${waitState.waitStateType}`);
+  }
+}
+```
+
+#### Operation Id
+
+searchElementInstanceWaitStates
 
 #### Tags
 
@@ -10327,6 +10538,107 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### searchVariablesAsDto()
+
+```ts
+searchVariablesAsDto<TSchema>(schema, options): CancelablePromise<VariableMap<TSchema>>;
+```
+
+Search for process variables and bind them to a Zod schema (the DTO).
+
+The schema's keys are the exact variable names to fetch; its shape drives validation. Only
+those declared variables are queried (via a `name $in [...]` filter), so memory stays bound
+by the DTO shape rather than the total number of variables on the instance. Results are
+paged internally until every declared variable is found or the result set is exhausted.
+
+Returns a [VariableMap](VariableMap.md) offering lenient access (`has` / `get`) and a strict
+`validate()` that parses the collected values against the schema — returning a fully-typed
+object or throwing a `ZodError` when a required variable is missing or malformed.
+
+#### Type Parameters
+
+##### TSchema
+
+`TSchema` _extends_ [`AnyVariableSchema`](../type-aliases/AnyVariableSchema.md)
+
+#### Parameters
+
+##### schema
+
+`TSchema`
+
+A Zod object schema declaring the variables to fetch.
+
+##### options
+
+Query scope. `processInstanceKey` is required; `scopeKey` narrows to a single
+element-instance scope, `tenantId` filters by tenant, and `pageSize` tunes the page limit.
+`consistency` controls eventual-consistency tolerance for the underlying `searchVariables`
+calls: it defaults to `{ waitUpToMs: 0 }` (no waiting), but a non-zero `waitUpToMs` makes the
+paging calls poll until the data is consistent, avoiding intermittent missing variables /
+`ZodError` on a freshly-updated instance.
+
+###### consistency?
+
+\{
+`pollIntervalMs?`: `number`;
+`waitUpToMs`: `number`;
+\}
+
+###### consistency.pollIntervalMs?
+
+`number`
+
+###### consistency.waitUpToMs
+
+`number`
+
+###### pageSize?
+
+`number`
+
+###### processInstanceKey
+
+[`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md)
+
+###### scopeKey?
+
+[`ScopeKey`](../type-aliases/ScopeKey.md)
+
+###### tenantId?
+
+[`TenantId`](../type-aliases/TenantId.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`VariableMap`](VariableMap.md)\<`TSchema`\>\>
+
+#### Throws
+
+when a declared variable is found at more than one
+scope and no `scopeKey` was provided to disambiguate.
+
+#### Throws
+
+when a variable's value is not valid JSON.
+
+#### Example
+
+```ts
+import { z } from "zod";
+const OrderVariables = z.object({
+  orderId: z.string(),
+  amount: z.number().optional(),
+});
+const map = await client.searchVariablesAsDto(OrderVariables, {
+  processInstanceKey,
+});
+if (map.has("amount")) console.log(map.get("amount"));
+const order = map.validate(); // { orderId: string; amount?: number }
+```
+
+---
+
 ### stopAllWorkers()
 
 ```ts
@@ -11123,8 +11435,7 @@ Update agent instance
 
 Updates the mutable fields of an agent instance: status, metric counters, and
 tools. Metric values are treated as deltas and applied immediately to the
-aggregate counters. Tool updates replace the existing tool list. At least one of
-status, metrics, or tools must be provided.
+aggregate counters. Tool updates replace the existing tool list.
 
 -
 
@@ -11145,11 +11456,15 @@ status, metrics, or tools must be provided.
 #### Example
 
 ```ts
-async function updateAgentInstanceExample(agentInstanceKey: AgentInstanceKey) {
+async function updateAgentInstanceExample(
+  agentInstanceKey: AgentInstanceKey,
+  elementInstanceKey: ElementInstanceKey
+) {
   const camunda = createCamundaClient();
 
   await camunda.updateAgentInstance({
     agentInstanceKey,
+    elementInstanceKey,
     status: "THINKING",
     metrics: {
       inputTokens: 150,
