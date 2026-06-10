@@ -18,7 +18,7 @@ Every record in Camunda passes through two distinct storage layers, and understa
 
 **[Secondary storage](/reference/glossary/#secondary-storage)** is an external data storage where events are written to,like: Elasticsearch, OpenSearch, or an RDBMS (available from 8.9). It is eventually consistent — populated asynchronously by the export pipeline. Everything that Operate, Tasklist, and the REST Query API reads comes exclusively from secondary storage.
 
-### Command processing path
+## Command processing path
 
 A command travels from the client to the primary storage to the engine and only after processing a response comes back.
 
@@ -34,7 +34,7 @@ If the engine cannot process commands fast enough; for example, because disk I/O
 
 You can read more about this internal processing [here](https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/).
 
-### Export pipeline
+## Export pipeline
 
 After the engine processes a command, it confirms its state change by an event on the log. Exporters asynchronously read such events from the log (only committed events) and write them to secondary storage in *batches*.
 
@@ -58,7 +58,7 @@ Exporter behavior and performance is important for the system, because:
 - *A slow secondary storage therefore directly reduces process execution throughput.*
 - *Custom exporters can have a high impact on overall throughput if they are not performant enough.*
 
-### Query path
+## Query path
 
 Operate, Tasklist, and the REST Query API (`GET /v2/...`) read exclusively from the configured secondary storage. They never read directly from the engine.
 
