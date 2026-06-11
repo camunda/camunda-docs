@@ -175,24 +175,22 @@ You can use the same managed PostgreSQL host for all components—each database 
 
 ### Migrate Keycloak to an external instance {#migrate-keycloak-to-an-external-instance}
 
-By default, the scripts deploy the Keycloak Operator and a `Keycloak` custom resource. To instead point Camunda at a pre-existing external, standalone, or Helm-managed Keycloak, set `KEYCLOAK_TARGET_MODE=external`. The scripts migrate the realm into the external Keycloak database and rewire Camunda to the external endpoint. They do not deploy or manage the Keycloak instance itself.
+By default, the scripts deploy the Keycloak Operator and a `Keycloak` custom resource. To instead point Camunda at a pre-existing external, standalone, or Helm-managed Keycloak, set `KEYCLOAK_TARGET_MODE=external`. The scripts migrate the realm into the external Keycloak database, but they do not deploy or manage the Keycloak instance itself, and they do not repoint Camunda — your upgrade pipeline performs that cutover.
 
-:::note
-Setting `KEYCLOAK_TARGET_MODE=external` is a **data-only** migration. When you source `env.sh`, it automatically derives `PG_TARGET_MODE=external` (the external Keycloak serves the migrated realm from the external Keycloak database, `EXTERNAL_PG_KEYCLOAK_*`) and `SKIP_HELM_UPGRADE=true` — you do not set those yourself. The scripts migrate the realm database and stop with Camunda still frozen on the old backends; your upgrade pipeline then runs the `helm upgrade` that switches Camunda to the external Keycloak and wires its authentication credentials.
-:::
+Setting `KEYCLOAK_TARGET_MODE=external` is a **data-only** migration. When you source `env.sh`, it automatically derives `PG_TARGET_MODE=external` (the external Keycloak serves the migrated realm from the external Keycloak database, `EXTERNAL_PG_KEYCLOAK_*`) and `SKIP_HELM_UPGRADE=true` — you do not set those yourself. The scripts migrate the realm database and stop with Camunda still frozen on the old backends. Your upgrade pipeline then runs the `helm upgrade` that switches Camunda to the external Keycloak and wires its authentication credentials.
 
 In this mode, the per-phase behavior changes accordingly: Phase 1 skips the Keycloak Operator deployment, Phase 3 runs the data migration but stops before the final `helm upgrade` (your pipeline owns it), and Phase 4 skips the Keycloak Custom Resource health check. The PostgreSQL and Elasticsearch phases are unchanged.
 
 Configure the external Keycloak connection variables in `env.sh`:
 
-| Variable                         | Default                    | Description                                                                           |
-| -------------------------------- | -------------------------- | ------------------------------------------------------------------------------------- |
-| `KEYCLOAK_TARGET_MODE`           | `operator`                 | Set to `external` to skip the operator and rewire Camunda to a pre-existing Keycloak. |
-| `EXTERNAL_KEYCLOAK_PROTOCOL`     | `http`                     | Protocol of the external Keycloak.                                                    |
-| `EXTERNAL_KEYCLOAK_HOST`         | (empty)                    | Host of the external Keycloak.                                                        |
-| `EXTERNAL_KEYCLOAK_PORT`         | `80`                       | Port of the external Keycloak.                                                        |
-| `EXTERNAL_KEYCLOAK_CONTEXT_PATH` | `/auth`                    | Context path of the external Keycloak.                                                |
-| `EXTERNAL_KEYCLOAK_REALM`        | `/realms/camunda-platform` | Realm path served by the external Keycloak.                                           |
+| Variable                         | Default                    | Description                                                                              |
+| -------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------- |
+| `KEYCLOAK_TARGET_MODE`           | `operator`                 | Set to `external` to skip the operator and migrate the realm to a pre-existing Keycloak. |
+| `EXTERNAL_KEYCLOAK_PROTOCOL`     | `http`                     | Protocol of the external Keycloak.                                                       |
+| `EXTERNAL_KEYCLOAK_HOST`         | (empty)                    | Host of the external Keycloak.                                                           |
+| `EXTERNAL_KEYCLOAK_PORT`         | `80`                       | Port of the external Keycloak.                                                           |
+| `EXTERNAL_KEYCLOAK_CONTEXT_PATH` | `/auth`                    | Context path of the external Keycloak.                                                   |
+| `EXTERNAL_KEYCLOAK_REALM`        | `/realms/camunda-platform` | Realm path served by the external Keycloak.                                              |
 
 <details>
 <summary>Show details: external Keycloak configuration example</summary>
@@ -334,7 +332,7 @@ What happens:
 
 - When `PG_TARGET_MODE=external`, the CloudNativePG (CNPG) operator is not installed; your managed PostgreSQL is used directly.
 - When `ES_TARGET_MODE=external`, the Elastic Cloud on Kubernetes (ECK) operator is not installed; your managed Elasticsearch target is used directly.
-- The Keycloak Operator is still deployed with a Custom Resource pointing to your managed PostgreSQL. When `KEYCLOAK_TARGET_MODE=external`, the operator is not deployed and Camunda is pointed at your existing Keycloak instead (see [Migrate Keycloak to an external instance](#migrate-keycloak-to-an-external-instance)).
+- The Keycloak Operator is still deployed with a Custom Resource pointing to your managed PostgreSQL. When `KEYCLOAK_TARGET_MODE=external`, the operator is not deployed; Camunda is repointed to your existing Keycloak later, when your pipeline runs the `helm upgrade` (see [Migrate Keycloak to an external instance](#migrate-keycloak-to-an-external-instance)).
 - The script validates connectivity to each external endpoint before proceeding.
 
 ### Phase 2: Initial backup (no downtime)
