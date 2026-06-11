@@ -523,6 +523,104 @@ const ADDITIONAL_RELEASES = [
   },
 ];
 
+/* ─── Small CLI snippet ─── */
+
+function Snippet({ lines }) {
+  return (
+    <pre className={styles.snippet}>
+      {lines.map((line, i) => (
+        <React.Fragment key={i}>
+          <span className={styles.snippetPrompt}>$ </span>
+          {line}
+          {i < lines.length - 1 ? "\n" : ""}
+        </React.Fragment>
+      ))}
+    </pre>
+  );
+}
+
+function BundleButtons({ activeOS }) {
+  const links = GETTING_STARTED.links[activeOS] || [];
+  return (
+    <div className={styles.downloadCardButtons}>
+      {links.map((link) => (
+        <a key={link.url} href={link.url} className={bwcStyles.downloadButton}>
+          <DownloadBtnIcon /> {link.label}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+/* ─── Getting Started card: CLI + bundle, stacked ─── */
+
+function GettingStartedCard({ activeOS }) {
+  return (
+    <div className={clsx(styles.downloadCard, styles.downloadCardFeatured)}>
+      <span className={bwcStyles.recommendedBadge}>
+        Recommended for new users
+      </span>
+      <div className={styles.downloadCardIcon}>
+        <SparklesIconLg />
+      </div>
+      <h3 className={bwcStyles.downloadBlockTitle}>Getting Started Package</h3>
+      <p className={styles.downloadCardDesc}>
+        Desktop Modeler, runtime, and example processes. Pick whichever path
+        fits your setup.
+      </p>
+      <div className={styles.downloadCardMeta}>
+        <span className={styles.downloadCardVersion}>
+          v{GETTING_STARTED.version}
+        </span>
+        <span className={styles.downloadCardDate}>{GETTING_STARTED.date}</span>
+      </div>
+
+      <div className={styles.splitStack}>
+        <div className={styles.splitSection}>
+          <p
+            className={clsx(
+              styles.splitColumnHeading,
+              styles.splitColumnHeadingPrimary
+            )}
+          >
+            Install via CLI
+          </p>
+          <Snippet
+            lines={[
+              "npm install -g @camunda8/cli",
+              `c8ctl cluster start ${GETTING_STARTED.version}`,
+            ]}
+          />
+          <p className={styles.splitColumnBlurb}>Requires Node.js 18+.</p>
+        </div>
+
+        <div className={styles.splitDividerHorizontal}>
+          <span className={styles.splitDividerLabel}>OR</span>
+        </div>
+
+        <div className={styles.splitSection}>
+          <p className={styles.splitColumnHeading}>Download bundle</p>
+          <BundleButtons activeOS={activeOS} />
+          <p className={styles.splitColumnBlurb}>
+            Extract and run. No Node.js required.
+          </p>
+        </div>
+      </div>
+
+      <div className={styles.downloadCardFooter}>
+        <Link
+          to={useBaseUrl(
+            "/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
+          )}
+          className={styles.downloadCardFooterLink}
+        >
+          Setup guide
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Download card component ─── */
 
 function DownloadCard({
@@ -749,17 +847,7 @@ function Downloads() {
           <div
             className={clsx(bwcStyles.downloadsGrid, styles.downloadsGridFull)}
           >
-            <DownloadCard
-              icon={<SparklesIconLg />}
-              title="Getting Started Package"
-              description="Complete bundle with Desktop Modeler, Runtime, and example processes. Everything you need to build your first process in one download."
-              version={GETTING_STARTED.version}
-              date={GETTING_STARTED.date}
-              links={GETTING_STARTED.links}
-              docsLink="/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
-              activeOS={activeOS}
-              badge="Recommended for new users"
-            />
+            <GettingStartedCard activeOS={activeOS} />
             <DownloadCard
               icon={<PencilIconLg />}
               title="Desktop Modeler"

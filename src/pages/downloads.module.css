@@ -293,3 +293,87 @@
 .downloadCardFooterLink:hover {
   text-decoration: underline !important;
 }
+
+/* ─── Getting Started card: stacked CLI + bundle split ─── */
+
+.snippet {
+  background: #0d0b2a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  font-family:
+    "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 0.78rem;
+  color: #e6e6ff;
+  margin: 0 0 0.5rem;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.snippetPrompt {
+  color: #78a9ff;
+  user-select: none;
+}
+
+.splitStack {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+
+.splitSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.splitColumnHeading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-color);
+  margin: 0 0 0.5rem;
+}
+
+.splitColumnHeadingPrimary {
+  color: var(--card-hover-border);
+}
+
+.splitColumnBlurb {
+  font-size: 0.75rem;
+  color: var(--muted-color);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.splitDividerHorizontal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.splitDividerHorizontal::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--card-border);
+}
+
+.splitDividerLabel {
+  position: relative;
+  z-index: 1;
+  background: var(--card-bg);
+  padding: 0 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--muted-color);
+}
