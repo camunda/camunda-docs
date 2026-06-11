@@ -289,24 +289,22 @@ SELECT COUNT(*) FROM zeebe_process;
 
 For a complete post-deployment checklist, see [validate RDBMS connectivity](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
 
-## Transaction Isolation Levels
+## Transaction isolation levels
 
-This section applies to the following database types:
+This section applies to:
 
 - Microsoft SQL Server
-- Microsoft Azure SQL
+- Azure SQL Database
 
-Microsoft SQL Server and Azure SQL implement the `READ_COMMITTED` isolation level different from most databases. As a
-result you may suffer deadlocks when putting the Camunda cluster under high load.
+SQL Server and Azure SQL Database use lock-based behavior for the `READ COMMITTED` isolation level by default. Under high concurrent load, this can increase deadlock frequency in Camunda workloads.
 
-Example deadlock error message:
+Example deadlock error:
 
 > com.microsoft.sqlserver.jdbc.SQLServerException: An error occurred during the current command (Done status 0). Transaction (Process ID 83) was deadlocked on lock resources with another process and has been chosen as the deadlock victim. Rerun the transaction.
 
-If you experience such deadlocks in your MSSQL installation, you must execute the following statement in order to
-enable SNAPSHOT isolation:
+If you observe this deadlock pattern in your MSSQL installation, enable `READ_COMMITTED_SNAPSHOT` on the Camunda database:
 
 ```sql
 ALTER DATABASE [database-name]
-SET READ_COMMITTED_SNAPSHOT ON
+SET READ_COMMITTED_SNAPSHOT ON;
 ```
