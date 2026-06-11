@@ -90,7 +90,7 @@ A message is _not_ correlated to a message start event subscription if an instan
 
 ### Duplicate subscriptions
 
-When multiple process instances open a subscription for the same message name and correlation key simultaneously, the message is correlated to exactly one of those instances. The selection is non-deterministic, there is no guarantee about which instance receives the message.
+When multiple process instances open a subscription for the same message name and correlation key simultaneously, the message is correlated to exactly one of those instances. The selection is non-deterministic; there is no guarantee about which instance receives the message.
 
 This behavior is by design. An alternative approach, for example, routing to the most recently created instance, would mask correlation key design problems during single-instance development testing, and then fail unexpectedly in production when multiple users run concurrent instances. Non-deterministic selection surfaces the problem early.
 
