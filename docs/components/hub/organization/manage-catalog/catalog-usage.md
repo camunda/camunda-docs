@@ -43,7 +43,7 @@ The CoE curates the Catalog by controlling which assets delivery teams can disco
 An asset is **unpublished** when it exists in Hub but is no longer part of the latest submission.
 
 - **Delivery teams** (Web Modeler users) can no longer discover the asset in the Catalog or apply it to new diagrams. Projects that already use the template continue to work as before.
-- **CoE members** (organization administrators) can still view unpublished assets along with their usage — for example, which diagrams still reference the template — to plan a migration.
+- **CoE members** (organization administrators) keep access to unpublished assets so they can track remaining usage — which diagrams still reference the template — and migrate those diagrams to a newer version or a different template before removing the asset entirely.
 
 :::info
 Unpublishing is distinct from element template **deprecation**. Deprecation is a property inside the element template file; unpublishing is a Catalog-level state that reflects the asset's absence from the current submission.

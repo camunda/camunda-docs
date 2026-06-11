@@ -287,7 +287,7 @@ When you submit assets to the Catalog, any asset that **already exists in Hub bu
 Unpublishing an asset means:
 
 - **For delivery teams** (Web Modeler users): The asset is no longer discoverable in the Catalog and cannot be applied to new diagrams. Projects that already use the template continue to work as before.
-- **For CoE members** (organization administrators): The asset remains visible (for example, in a dedicated view) along with its usage information, such as which diagrams still reference the template.
+- **For CoE members** (organization administrators): The asset stays visible so the CoE can track its remaining usage — which diagrams still reference the template — and drive the migration of those diagrams to a newer version or a different template before the asset is removed entirely.
 
 :::info
 Unpublishing is different from deprecation. Deprecation is a property within the element template file itself. Unpublishing is a Catalog-level state that indicates the asset is no longer part of the current submission.
