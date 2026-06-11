@@ -12,7 +12,7 @@ description: "Understand the aspects relevant to Camunda 8 sizing. Once you do, 
 Understand the aspects relevant to Camunda 8 sizing. Once you do, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration.
 
 :::tip Before you size
-See [Data flow](data-flow.md) to understand how the command path, export pipeline, and query path affect throughput and latency — the factors that drive the recommendations on this page.
+See [Data flow](data-flow.md) first to understand the factors that drive the recommendations on this page.
 :::
 
 <!-- Anchors for backward compatibility with old single-page URLs -->
