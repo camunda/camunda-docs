@@ -26,7 +26,7 @@ The following entities are not supported for migration (no properties are migrat
 
 ## Supported entities
 
-The following limitations apply to Audit log entries:
+The following limitations apply to audit log entries:
 
 - Audit log entries are migrated only for user tasks, process definitions, process instances, variables, jobs, external tasks, users, groups, and authorizations.
 - Audit log entries are not migrated for batch operations, identity links, attachments, decisions, job definitions, metrics, operation logs, filters, comments, and properties.

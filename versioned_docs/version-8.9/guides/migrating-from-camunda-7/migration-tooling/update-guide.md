@@ -30,9 +30,9 @@ Before you update:
 
 #### Data Migrator: History nullability fixes
 
-This patch fixes cases where the History Data Migrator wrote `null` values for fields that Camunda 8.10 enforces as non-nullable. Without these fixes, data migrated with the History Data Migrator can fail along the Camunda 8.9 → 8.10 migration route. The fixes change migration behavior in two ways:
+This patch fixes cases where the History Data Migrator wrote `null` values for fields that Camunda 8.10 enforces as non-nullable. Without these fixes, data migrated with the History Data Migrator can fail during migration from Camunda 8.9 to 8.10. The fixes change migration behavior in two ways:
 
-- **Some rows are now skipped instead of migrated.** Jobs and incidents whose corresponding Camunda 7 historic activity instance was never persisted (async-before activities that fail on all available retries before entry) previously migrated with a null `elementInstanceKey` / `flowNodeInstanceKey`. These rows are now skipped and recorded in the skip log with a reason. See [Jobs](data-migrator/limitations.md#jobs) and [Incidents](data-migrator/limitations.md#incidents-1) limitations.
+- **Some rows are now skipped instead of migrated.** Jobs and incidents whose corresponding Camunda 7 historic activity instance was never persisted (async-before activities that fail on all available retries before entry) were previously migrated with a null `elementInstanceKey` / `flowNodeInstanceKey`. These rows are now skipped and recorded in the skip log with a reason. See [Jobs](data-migrator/limitations.md#jobs) and [Incidents](data-migrator/limitations.md#incidents-1) limitations.
 - **Some previously-null fields now carry a value.** Job `worker`, incident `errorMessage`, and audit log `entityKey` are now populated, using a placeholder (for example, `C7_MIGRATED` or `C7_NO_MESSAGE`) if the value would have been `null` otherwise. Job `lastUpdateTime` is now populated from the most recent Camunda 7 historic log entry. See the [History migration coverage](data-migrator/history-coverage.md) page for per-field details.
 
 :::note
