@@ -103,9 +103,9 @@ If your process uses a send-and-wait pattern (for example, a service task sends 
 1. **Generate a unique key** when the outbound message is sent.
    For example:
 
-```feel
-= chatId + "-" + uuid()
-```
+   ```feel
+   = chatId + "-" + uuid()
+   ```
 
 2. **Pass the key to the external system** alongside the message content.
 3. **Subscribe with the same key** in the catch event's correlation key expression.
