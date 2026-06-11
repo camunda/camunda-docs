@@ -2352,6 +2352,7 @@ module.exports = {
               },
               items: [
                 "self-managed/components/hub/configuration/properties",
+                "self-managed/components/hub/configuration/legacy-cluster-config",
                 "self-managed/components/hub/configuration/ssl",
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",
