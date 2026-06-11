@@ -17,7 +17,7 @@ Each component is configured separately as described below.
 The two components support configuration through environment variables.
 For the `restapi` component, environment variables can be used as an alternative to `application.yml` following [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables): convert the property to uppercase, remove any dashes, and replace any delimiters (`.`) with `_`.
 
-For example, the property `camunda.modeler.clusters[0].name` is represented by the environment variable `CAMUNDA_MODELER_CLUSTERS_0_NAME`.
+For example, the property `camunda.modeler.clusters[0][0].name` is represented by the environment variable `CAMUNDA_MODELER_CLUSTERS_0_NAME`.
 
 If you are using the Camunda 8 Helm chart, read more about the different configuration options in the chart's [Helm chart values documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 You can pass environment variables to each component via `webModeler.restapi.env` and `webModeler.websocket.env` in your `values.yaml`.
@@ -79,9 +79,183 @@ server:
 
 ### Clusters
 
-Configure your clusters using the settings available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md), instead.
+Configure your clusters using the following settings available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md), instead.
 
 <!--- TODO: Link to migration guide --->
+
+<Tabs groupId="configType" defaultValue="application.yaml">
+<TabItem value="application.yaml" label="Application properties">
+
+| Property                                             | Description                                                                                                         | Example value                                |
+| :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------- |
+| `camunda.modeler.clusters[0].id`                     | An identifier for the cluster.                                                                                      | `camunda-platform`                           |
+| `camunda.modeler.clusters[0].name`                   | A readable name for the cluster.                                                                                    | `Camunda Platform`                           |
+| `camunda.modeler.clusters[0].version`                | The cluster version.                                                                                                | `8.10.0`                                     |
+| `camunda.modeler.clusters[0].tags`                   | A list of tags.                                                                                                     | `['dev', 'test']`                            |
+| `camunda.modeler.clusters[0].authentication`         | The [authentication method](#available-authentication-methods).                                                     | `BEARER_TOKEN`                               |
+| `camunda.modeler.clusters[0].authorizations.enabled` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub. | `true`                                       |
+| `camunda.modeler.clusters[0].custom-properties`      | A list of custom properties.                                                                                        | See [custom properties](#custom-properties). |
+| `camunda.modeler.clusters[0].components`             | A list of components for the clusters.                                                                              | See [components](#components).               |
+
+</TabItem>
+<TabItem value="env" label="Environment variables">
+
+| Property                                            | Description                                                                                                         | Example value                                |
+| :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_ID`                     | An identifier for the cluster.                                                                                      | `camunda-platform`                           |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME`                   | A readable name for the cluster.                                                                                    | `Camunda Platform`                           |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`                | The cluster version.                                                                                                | `8.10.0`                                     |
+| `CAMUNDA_MODELER_CLUSTERS_0_TAGS`                   | A list of tags.                                                                                                     | `['dev', 'test']`                            |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION`         | The [authentication method](#available-authentication-methods).                                                     | `BEARER_TOKEN`                               |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub. | `true`                                       |
+| `CAMUNDA_MODELER_CLUSTERS_0_CUSTOM_PROPERTIES`      | A list of custom properties.                                                                                        | See [custom properties](#custom-properties). |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS`             | A list of components for the clusters.                                                                              | -                                            |
+
+</TabItem>
+</Tabs>
+
+#### Available authentication methods
+
+| Method         | Description                                                                                                                             | When to use?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BEARER_TOKEN` | Camunda Hub sends the authenticated user's token in the `Authorization` header with every request to the cluster.                       | **Cluster version >= 8.8**<br/>The cluster uses [OIDC authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) with the same identity provider as Camunda Hub.<br/>_Note_: You need to ensure that the cluster [accepts Camunda Hub's token audience](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).<br/><br/>**Cluster version < 8.8**<br/>The cluster uses [Camunda Identity-based authentication](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization) and the external identity provider supports access tokens with multiple audiences (example provider: Keycloak).<br/>_Note_: For the token to be accepted by the different cluster components, it must contain each component's audience. |
+| `BASIC`        | Camunda Hub sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.<br/><br/>**Cluster version < 8.8**<br/>not supported                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `NONE`         | Camunda Hub does not send any authentication information.                                                                               | **Cluster version >= 8.8**<br/>The cluster API is [configured as unprotected](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) and can be used without authentication.<br/><br/>**Cluster version < 8.8**<br/>The authentication / token validation in the Zeebe Gateway is [disabled](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+
+#### Custom properties
+
+Use custom properties to include helpful links in the **Clusters** user interface:
+
+<!--- TODO: Include an image --->
+
+<Tabs groupId="configType" className="tabs-hidden" defaultValue="application.yaml">
+<TabItem value="application.yaml" label="Application properties">
+
+| Property                                                         | Description                           |
+| :--------------------------------------------------------------- | :------------------------------------ |
+| `camunda.modeler.clusters[0].custom-properties[0].description`   | A description of the custom property. |
+| `camunda.modeler.clusters[0].custom-properties[0].links`         | A list of links.                      |
+| `camunda.modeler.clusters[0].custom-properties[0].links[0].name` | A name for the link.                  |
+| `camunda.modeler.clusters[0].custom-properties[0].links[0].url`  | The link's URL.                       |
+
+Example configuration:
+
+```yaml
+camunda:
+  modeler:
+    clusters:
+      - id: camunda-platform
+        # other fields...
+        custom-properties:
+          - description: This is the integration environment for the Camunda platform.
+            links:
+              - name: Camunda
+                url: https://camunda.com/
+              - name: Documentation
+                url: https://docs.camunda.io/
+```
+
+</TabItem>
+<TabItem value="env" label="Environment variables">
+
+| Property                                                      | Description                           |
+| :------------------------------------------------------------ | :------------------------------------ |
+| `CAMUNDA_MODELER_CLUSTERS_0_CUSTOM_PROPERTIES_0_DESCRIPTION`  | A description of the custom property. |
+| `CAMUNDA_MODELER_CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_NAME` | A name for the indexed link.          |
+| `CAMUNDA_MODELER_CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_URL`  | The link's URL.                       |
+
+Example configuration:
+
+```bash
+CAMUNDA.MODELER.CLUSTERS_0_CUSTOM_PROPERTIES_0_DESCRIPTION=This is the integration environment for the Camunda platform.
+CAMUNDA.MODELER.CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_NAME=Camunda
+CAMUNDA.MODELER.CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_URL=https://camunda.com/
+```
+
+</TabItem>
+</Tabs>
+
+#### Components
+
+Use `components` to set up components in the cluster:
+
+<Tabs groupId="configType" className="tabs-hidden" defaultValue="application.yaml">
+<TabItem value="application.yaml" label="Application properties">
+
+| Property                                                   | Description                                                                                                                                                                                |
+| :--------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.modeler.clusters[0].components[0].name`           | The component's name.                                                                                                                                                                      |
+| `camunda.modeler.clusters[0].components[0].type`           | The component's type.                                                                                                                                                                      |
+| `camunda.modeler.clusters[0].components[0].version`        | The component's version.                                                                                                                                                                   |
+| `camunda.modeler.clusters[0].components[0].urls.grpc`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).                                                                               |
+| `camunda.modeler.clusters[0].components[0].urls.rest`      | The [the base URL](#notes-on-host-names-and-port-numbers) of the [Orchestration Cluster REST APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). |
+| `camunda.modeler.clusters[0].components[0].urls.readiness` | The address of the health check endpoint.                                                                                                                                                  |
+
+</TabItem>
+<TabItem value="env" label="Environment variables">
+
+| Property                                                 | Description                                                                                                                                                                                |
+| :------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_NAME`           | The component's name.                                                                                                                                                                      |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_TYPE`           | The component's type.                                                                                                                                                                      |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_VERSION`        | The component's version.                                                                                                                                                                   |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_GRPC`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).                                                                               |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST`      | The [the base URL](#notes-on-host-names-and-port-numbers) of the [Orchestration Cluster REST APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS` | The address of the health check endpoint.                                                                                                                                                  |
+
+</TabItem>
+</Tabs>
+
+Available component types and requirements:
+
+| Configuration value     | Component                     | Requirements                                   |
+| :---------------------- | :---------------------------- | :--------------------------------------------- |
+| `connectors`            | Connectors                    | REST URL                                       |
+| `identity`              | Admin                         | -                                              |
+| `webModelerWebApp`      | Camunda Hub                   | -                                              |
+| `operate`               | Operate                       | -                                              |
+| `optimize`              | Optimize                      | -                                              |
+| `orchestration`         | Orchestration Cluster         | Cluster version >= 8.8, gRPC URL, and REST URL |
+| `orchestrationIdentity` | Admin and Management Identity | -                                              |
+| `tasklist`              | Tasklist                      | -                                              |
+| `zeebe`                 | Zeebe Broker                  | Cluster version < 8.8, gRPC URL, and REST URL  |
+| `zeebeGateway`          | Zeebe Gateway                 | Cluster version < 8.8                          |
+
+Example configuration:
+
+<Tabs groupId="configType" className="tabs-hidden" defaultValue="application.yaml">
+<TabItem value="application.yaml" label="Application properties">
+
+```yaml
+camunda:
+  modeler:
+    clusters:
+      - id: camunda-platform
+        # other fields...
+        components:
+          - name: orchestration
+            type: Orchestration Cluster
+            version: 8.10.0
+            urls:
+              grpc: grpcs://camunda.example.com:26500
+              rest: https://camunda.example.com
+              readiness: https://camunda.example.com:8091/health/readiness
+```
+
+</TabItem>
+<TabItem value="env" label="Environment variables">
+
+```bash
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_NAME=orchestration
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_TYPE=Orchestration Cluster
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_VERSION=8.10.0
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_GRPC=grpcs://camunda.example.com:26500
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST=https://camunda.example.com
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS=https://camunda.example.com:8091/health/readiness
+```
+
+</TabItem>
+</Tabs>
 
 ### Database
 

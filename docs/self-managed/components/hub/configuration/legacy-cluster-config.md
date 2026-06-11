@@ -38,12 +38,12 @@ The available configuration options depend on the version of the cluster:
 
 <TabItem value="envVars">
 
-| Environment variable                        | Description                                                                       | Example value    |
-| ------------------------------------------- | --------------------------------------------------------------------------------- | ---------------- |
-| `CAMUNDA_MODELER_CLUSTERS_0_ID`             | A unique identifier to use for your cluster.                                      | `test-cluster-1` |
-| `CAMUNDA_MODELER_CLUSTERS_0_NAME`           | The name of your cluster.                                                         | `Test Cluster 1` |
-| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`        | The Camunda version used by this cluster.                                         | `8.8.0`          |
-| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` | The [authentication](#available-authentication-methods) to use with your cluster. | `BEARER_TOKEN`   |
+| Environment variable                        | Description                                                                                      | Example value    |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_ID`             | A unique identifier to use for your cluster.                                                     | `test-cluster-1` |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME`           | The name of your cluster.                                                                        | `Test Cluster 1` |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`        | The Camunda version used by this cluster.                                                        | `8.8.0`          |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` | The [authentication](./properties.md#available-authentication-methods) to use with your cluster. | `BEARER_TOKEN`   |
 
 </TabItem>
 
@@ -54,7 +54,7 @@ camunda.modeler.clusters:
   - id: test-cluster-1
     name: Test Cluster 1
     version: 8.8.0
-    authentication: BEARER_TOKEN # See "Available authentication methods" below
+    authentication: BEARER_TOKEN
 ```
 
 </TabItem>
@@ -129,11 +129,3 @@ camunda.modeler.clusters:
 </TabItem>
 
 </Tabs>
-
-#### Available authentication methods
-
-| Method         | Description                                                                                                                             | When to use?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `BEARER_TOKEN` | Camunda Hub sends the authenticated user's token in the `Authorization` header with every request to the cluster.                       | **Cluster version >= 8.8**<br/>The cluster uses [OIDC authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) with the same identity provider as Camunda Hub.<br/>_Note_: You need to ensure that the cluster [accepts Camunda Hub's token audience](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).<br/><br/>**Cluster version < 8.8**<br/>The cluster uses [Camunda Identity-based authentication](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization) and the external identity provider supports access tokens with multiple audiences (example provider: Keycloak).<br/>_Note_: For the token to be accepted by the different cluster components, it must contain each component's audience. |
-| `BASIC`        | Camunda Hub sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.<br/><br/>**Cluster version < 8.8**<br/>not supported                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `NONE`         | Camunda Hub does not send any authentication information.                                                                               | **Cluster version >= 8.8**<br/>The cluster API is [configured as unprotected](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) and can be used without authentication.<br/><br/>**Cluster version < 8.8**<br/>The authentication / token validation in the Zeebe Gateway is [disabled](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
