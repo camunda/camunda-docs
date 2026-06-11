@@ -2351,8 +2351,8 @@ module.exports = {
                 id: "self-managed/components/hub/configuration/configuration",
               },
               items: [
+                "self-managed/components/hub/configuration/properties",
                 "self-managed/components/hub/configuration/ssl",
-                "self-managed/components/hub/configuration/modeler-configuration",
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",
                 "self-managed/components/hub/configuration/logging",

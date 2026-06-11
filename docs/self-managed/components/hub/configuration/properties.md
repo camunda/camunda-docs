@@ -1,17 +1,16 @@
 ---
-id: modeler-configuration
-title: "Web Modeler Configuration"
-sidebar_label: "Web Modeler Configuration"
-description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, and WebSocket."
+id: properties
+title: "Property reference"
+description: "Read details on the configuration variables of Camunda Hub Self-Managed."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Web Modeler Self-Managed consists of two components: [`restapi`](#configuration-of-the-restapi-component) and [`websocket`](#configuration-of-the-websocket-component).
+Camunda Hub Self-Managed consists of two components: [`restapi`](#configuration-of-the-restapi-component) and [`websocket`](#configuration-of-the-websocket-component).
 Each component is configured separately as described below.
 
-- The `restapi` component is a Spring Boot application. Its configuration is stored in a YAML file (`application.yml`) by default. All Web Modeler-specific settings are prefixed with `camunda.modeler`.
+- The `restapi` component is a Spring Boot application. Its configuration is stored in a YAML file (`application.yml`) by default. All Camunda Hub-specific settings are prefixed with `camunda.modeler`.
 - The `websocket` (PHP/Laravel) component is configured via environment variables.
 
 :::note Configuration methods
@@ -56,9 +55,9 @@ When running the `restapi` component in a container (Docker / Kubernetes), use t
 
 | Environment variable         | Description                                                                                                                                                   | Example value                                                    | Default value |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------- |
-| `RESTAPI_SERVER_URL`         | URL at which users access Web Modeler in the browser (used to construct redirect URLs in the client-side login flow as well as links in notification emails). | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
+| `RESTAPI_SERVER_URL`         | URL at which users access Camunda Hub in the browser (used to construct redirect URLs in the client-side login flow as well as links in notification emails). | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
 | `SERVER_SERVLET_CONTEXTPATH` | [optional]<br/>Context path of the URL. Must be set if `RESTAPI_SERVER_URL` does not point to the root path of a (sub-)domain.                                | `/modeler`                                                       | -             |
-| `SERVER_HTTPS_ONLY`          | [optional]<br/>Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                        | `true`                                                           | `true`        |
+| `SERVER_HTTPS_ONLY`          | [optional]<br/>Enforce the usage of HTTPS when users access Camunda Hub (by redirecting from `http://` to `https://`).                                        | `true`                                                           | `true`        |
 
 </TabItem>
 
@@ -80,7 +79,7 @@ server:
 
 ### Clusters
 
-Clusters must be configured using the following options to access the cluster from within Web Modeler. If no clusters are configured, you will not be able to perform any actions that require a cluster (for example, deploy, start an instance, or Play a process).
+Clusters must be configured using the following options to access the cluster from within Camunda Hub. If no clusters are configured, you will not be able to perform any actions that require a cluster (for example, deploy, start an instance, or Play a process).
 
 The Camunda 8 [Helm](/self-managed/deployment/helm/install/quick-install.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
 
@@ -141,7 +140,7 @@ camunda.modeler.clusters:
 | `CAMUNDA_MODELER_CLUSTERS_0_URL_GRPC`               | [Internal or external](#notes-on-host-names-and-port-numbers) address where the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md) can be reached.                                                                                                                                  | `grpc://camunda:26500`,<br/>`grpcs://camunda.example.com:26500` |
 | `CAMUNDA_MODELER_CLUSTERS_0_URL_REST`               | [Internal or external](#notes-on-host-names-and-port-numbers) address where the cluster's REST APIs can be reached. Used as the base URL for requests to the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). | `http://camunda:8080`,<br/>`https://camunda.example.com`        |
 | `CAMUNDA_MODELER_CLUSTERS_0_URL_WEBAPP`             | [External](#notes-on-host-names-and-port-numbers) address where the cluster's web applications can be reached in a browser.                                                                                                                                                      | `https://camunda.example.com`                                   |
-| `CAMUNDA_MODELER_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Indicates if [authorizations are enabled](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) for the cluster. If `true`, users will see a hint when they deploy from Web Modeler.                                    | `true`                                                          |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Indicates if [authorizations are enabled](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) for the cluster. If `true`, users will see a hint when they deploy from Camunda Hub.                                    | `true`                                                          |
 
 </TabItem>
 
@@ -200,13 +199,13 @@ camunda.modeler.clusters:
 
 | Method         | Description                                                                                                                             | When to use?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `BEARER_TOKEN` | Web Modeler sends the authenticated user's token in the `Authorization` header with every request to the cluster.                       | **Cluster version >= 8.8**<br/>The cluster uses [OIDC authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) with the same identity provider as Web Modeler.<br/>_Note_: You need to ensure that the cluster [accepts Web Modeler's token audience](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).<br/><br/>**Cluster version < 8.8**<br/>The cluster uses [Camunda Identity-based authentication](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization) and the external identity provider supports access tokens with multiple audiences (example provider: Keycloak).<br/>_Note_: For the token to be accepted by the different cluster components, it must contain each component's audience. |
-| `BASIC`        | Web Modeler sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.<br/><br/>**Cluster version < 8.8**<br/>not supported                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `NONE`         | Web Modeler does not send any authentication information.                                                                               | **Cluster version >= 8.8**<br/>The cluster API is [configured as unprotected](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) and can be used without authentication.<br/><br/>**Cluster version < 8.8**<br/>The authentication / token validation in the Zeebe Gateway is [disabled](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `BEARER_TOKEN` | Camunda Hub sends the authenticated user's token in the `Authorization` header with every request to the cluster.                       | **Cluster version >= 8.8**<br/>The cluster uses [OIDC authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) with the same identity provider as Camunda Hub.<br/>_Note_: You need to ensure that the cluster [accepts Camunda Hub's token audience](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).<br/><br/>**Cluster version < 8.8**<br/>The cluster uses [Camunda Identity-based authentication](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization) and the external identity provider supports access tokens with multiple audiences (example provider: Keycloak).<br/>_Note_: For the token to be accepted by the different cluster components, it must contain each component's audience. |
+| `BASIC`        | Camunda Hub sends a username and password with every request to the cluster. The credentials have to be provided by the user in the UI. | **Cluster version >= 8.8**<br/>The cluster uses Basic authentication.<br/><br/>**Cluster version < 8.8**<br/>not supported                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `NONE`         | Camunda Hub does not send any authentication information.                                                                               | **Cluster version >= 8.8**<br/>The cluster API is [configured as unprotected](/self-managed/components/orchestration-cluster/admin/overview.md#enable-api-authentication-and-authorizations) and can be used without authentication.<br/><br/>**Cluster version < 8.8**<br/>The authentication / token validation in the Zeebe Gateway is [disabled](/versioned_docs/version-8.7/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization).                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ### Database
 
-Web Modeler currently supports PostgreSQL, Oracle, Microsoft SQL Server (MSSQL), MySQL, MariaDB, and H2 as persistent data storage.
+Camunda Hub currently supports PostgreSQL, Oracle, Microsoft SQL Server (MSSQL), MySQL, MariaDB, and H2 as persistent data storage.
 
 :::info Oracle and MySQL driver
 The Oracle and MySQL drivers are not provided by default and must be downloaded and supplied for the application to load.
@@ -247,11 +246,11 @@ spring:
 
 </Tabs>
 
-Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
+Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Camunda Hub's database connection.
 
 ### SMTP / email
 
-Web Modeler requires an SMTP server to send notification emails to users.
+Camunda Hub requires an SMTP server to send notification emails to users.
 
 <Tabs groupId="restapi-smtp" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
@@ -267,8 +266,8 @@ Web Modeler requires an SMTP server to send notification emails to users.
 | `RESTAPI_MAIL_USER`         | [optional]<br/>SMTP user name                                              | `modeler-user`        | -             |
 | `RESTAPI_MAIL_PASSWORD`     | [optional]<br/>SMTP user password                                          | \*\*\*                | -             |
 | `RESTAPI_MAIL_ENABLE_TLS`   | Enforce TLS encryption for SMTP connections (using STARTTLS).              | `true`                | `true`        |
-| `RESTAPI_MAIL_FROM_ADDRESS` | Email address used as the sender of emails sent by Web Modeler.            | `noreply@example.com` | -             |
-| `RESTAPI_MAIL_FROM_NAME`    | [optional]<br/>Name displayed as the sender of emails sent by Web Modeler. | `Camunda`             | `Camunda`     |
+| `RESTAPI_MAIL_FROM_ADDRESS` | Email address used as the sender of emails sent by Camunda Hub.            | `noreply@example.com` | -             |
+| `RESTAPI_MAIL_FROM_NAME`    | [optional]<br/>Name displayed as the sender of emails sent by Camunda Hub. | `Camunda`             | `Camunda`     |
 
 </TabItem>
 
@@ -297,7 +296,7 @@ spring:
 
 ### WebSocket
 
-Web Modeler uses a [WebSocket server](#configuration-of-the-websocket-component) to send events (e.g. "file updated", "comment added", "user opened diagram") between the backend and the client application in the browser.
+Camunda Hub uses a [WebSocket server](#configuration-of-the-websocket-component) to send events (e.g. "file updated", "comment added", "user opened diagram") between the backend and the client application in the browser.
 This enables features like real-time notifications and immediate UI updates.
 
 <Tabs groupId="restapi-websocket" defaultValue="envVars" queryString values={[
@@ -314,8 +313,8 @@ This enables features like real-time notifications and immediate UI updates.
 | `RESTAPI_PUSHER_APP_ID`   | _must be the same as_ [`PUSHER_APP_ID`](#configuration-of-the-websocket-component)                                                            | `web-modeler`        | -             |
 | `RESTAPI_PUSHER_KEY`      | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*               | -             |
 | `RESTAPI_PUSHER_SECRET`   | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websocket-component)                                                        | \*\*\*               | -             |
-| `CLIENT_PUSHER_HOST`      | [External](#notes-on-host-names-and-port-numbers) host name on which the Web Modeler client accesses the WebSocket server from the browser.   | `ws.example.com`     | -             |
-| `CLIENT_PUSHER_PORT`      | [External](#notes-on-host-names-and-port-numbers) port number on which the Web Modeler client accesses the WebSocket server from the browser. | `443`                | `80`          |
+| `CLIENT_PUSHER_HOST`      | [External](#notes-on-host-names-and-port-numbers) host name on which the Camunda Hub client accesses the WebSocket server from the browser.   | `ws.example.com`     | -             |
+| `CLIENT_PUSHER_PORT`      | [External](#notes-on-host-names-and-port-numbers) port number on which the Camunda Hub client accesses the WebSocket server from the browser. | `443`                | `80`          |
 | `CLIENT_PUSHER_PATH`      | [optional]<br/>_must be the same as_ [`PUSHER_APP_PATH`](#configuration-of-the-websocket-component)                                           | `/modeler-ws`        | `/`           |
 | `CLIENT_PUSHER_FORCE_TLS` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`               | `false`       |
 
@@ -344,7 +343,7 @@ camunda.modeler:
 
 ### Identity / Keycloak
 
-Web Modeler uses Keycloak as the default authentication provider (using OAuth 2.0 + OpenID Connect) and integrates with [Management Identity](/self-managed/components/management-identity/overview.md) for user management and authorization (see [Manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md)).
+Camunda Hub uses Keycloak as the default authentication provider (using OAuth 2.0 + OpenID Connect) and integrates with [Management Identity](/self-managed/components/management-identity/overview.md) for user management and authorization (see [Manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md)).
 
 <Tabs groupId="restapi-identity" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
@@ -363,7 +362,7 @@ Web Modeler uses Keycloak as the default authentication provider (using OAuth 2.
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI`     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform`                               | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI`    | [optional] URL of the JWK Set endpoint (used for JWT validation). Only necessary if URL cannot be derived from the OIDC configuration endpoint.                                                                                                                                         | `https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs` | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWS_ALGORITHMS` | [optional] List of trusted JWS algorithms used for JWT validation. Only necessary if the algorithms cannot be derived from the JWK Set response.                                                                                                                                        | `ES256`                                                                                   | -                        |
-| `OAUTH2_CLIENT_ID`                                         | Client ID of the Web Modeler application configured in Identity.                                                                                                                                                                                                                        | `web-modeler`                                                                             | -                        |
+| `OAUTH2_CLIENT_ID`                                         | Client ID of the Camunda Hub application configured in Identity.                                                                                                                                                                                                                        | `web-modeler`                                                                             | -                        |
 | `OAUTH2_CLIENT_SCOPE`                                      | [optional]<br/>OIDC scopes requested during authentication, determining what user information is included in the token.                                                                                                                                                                 | `full`                                                                                    | `openid email profile`   |
 | `OAUTH2_CLIENT_FETCH_REQUEST_CREDENTIALS`                  | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies.                     | `include`                                                                                 | -                        |
 
@@ -408,14 +407,14 @@ spring:
 
 :::note Helm behavior
 The `restapi` component default for `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM` is `name`.
-In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
+In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Camunda Hub `restapi` environment.
 :::
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### Camunda client
 
-Web Modeler uses the [Camunda Java client](/apis-tools/java-client/getting-started.md) to connect to Zeebe.
+Camunda Hub uses the [Camunda Java client](/apis-tools/java-client/getting-started.md) to connect to Zeebe.
 To customize the client configuration, you can provide optional properties.
 
 <Tabs groupId="restapi-client" defaultValue="envVars" queryString values={[
@@ -466,7 +465,7 @@ For more details, [see the Zeebe connection troubleshooting section](/self-manag
 | Environment variable                | Description                                                          | Example value                                 | Default value |
 | ----------------------------------- | -------------------------------------------------------------------- | --------------------------------------------- | ------------- |
 | `LOGGING_CONFIG`                    | [optional]<br/>Path to custom Log4j2 configuration.                  | `file:/full/path/to/custom-log4j2-spring.xml` | -             |
-| `CAMUNDA_MODELER_LOG_LEVEL`         | [optional]<br/>Defines the log level for the Web Modeler components. | `DEBUG`                                       | `INFO`        |
+| `CAMUNDA_MODELER_LOG_LEVEL`         | [optional]<br/>Defines the log level for the Camunda Hub components. | `DEBUG`                                       | `INFO`        |
 | `CAMUNDA_LOG_FILE_APPENDER_ENABLED` | [optional]<br/>To enable logging to a file.                          | `true`                                        | `false`       |
 | `CAMUNDA_MODELER_LOG_APPENDER`      | [optional]<br/>Defines which appender to use for logging.            | `Stackdriver`                                 | `Console`     |
 | `LOG_LEVEL_CLIENT`                  | [optional]<br/>Log level for the client.                             | `DEBUG`                                       | `WARN`        |
@@ -540,14 +539,14 @@ camunda.modeler:
 
 </Tabs>
 
-Refer to the [advanced SSL configuration guide](./modeler-ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
+Refer to the [advanced SSL configuration guide](./modeler-ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Camunda Hub components.
 
 ### Monitoring and health probes {#monitoring}
 
 The `restapi` component is a Spring Boot application that includes the [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready), providing health check and metrics endpoints out of the box.
 These endpoints are served on a separate management port (default: `8091`).
 
-By default, Web Modeler uses the following actuator configuration:
+By default, Camunda Hub uses the following actuator configuration:
 
 <Tabs groupId="restapi-monitoring" defaultValue="applicationYaml" queryString values={[
 {label: 'application.yml', value: 'applicationYaml' },
@@ -642,7 +641,7 @@ For more details, including Kubernetes probe configuration examples and `websock
 
 ### Git Sync
 
-Web Modeler supports syncing files via [Git Sync](/components/hub/workspace/manage-projects/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
+Camunda Hub supports syncing files via [Git Sync](/components/hub/workspace/manage-projects/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
 
 <Tabs groupId="git-sync" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
@@ -703,7 +702,7 @@ camunda.modeler:
 | `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
 | `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
 | `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |
+| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
 
 </TabItem>
 
@@ -753,7 +752,7 @@ camunda.modeler.resource-import.allow-private-ip-address: true # default: false;
 
 ## Configuration of the `websocket` component
 
-The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
+The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Camunda Hub Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
 The `websocket` component is configured via environment variables.
 When using the Camunda Helm chart, you can pass these variables via `webModeler.websocket.env` in your `values.yaml`.
@@ -761,7 +760,7 @@ See the [Helm chart values docs](https://artifacthub.io/packages/helm/camunda/ca
 
 | Environment variable | Description                                                                                                                                                              | Example value | Default value |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------- |
-| `PUSHER_APP_ID`      | ID of the single application/tenant configured for Web Modeler.                                                                                                          | `web-modeler` | -             |
+| `PUSHER_APP_ID`      | ID of the single application/tenant configured for Camunda Hub.                                                                                                          | `web-modeler` | -             |
 | `PUSHER_APP_KEY`     | A unique key used for authentication. Provide a random alphanumeric string of at least 20 characters.                                                                    | \*\*\*        | -             |
 | `PUSHER_APP_SECRET`  | A unique secret used for authentication. Provide a random alphanumeric string of at least 20 characters.                                                                 | \*\*\*        | -             |
 | `PUSHER_APP_PATH`    | [optional]<br/>Base path of the WebSocket endpoint. Can be used to expose the endpoint on a sub path instead of the domain root (e.g. `https://example.com/modeler-ws`). | `/modeler-ws` | `/`           |
@@ -782,7 +781,7 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 | `PUSHER_SSL_KEY`        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate. | `/full/path/to/key.pem`         | -             |
 | `PUSHER_SSL_PASSPHRASE` | [optional]<br/>Passphrase for the private key file.                            | `change-me`                     | -             |
 
-Refer to the [advanced SSL configuration guide](./modeler-ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
+Refer to the [advanced SSL configuration guide](./modeler-ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Camunda Hub components.
 
 ## Notes on host names and port numbers
 
