@@ -236,7 +236,7 @@
     {
       "name": "camunda.client.auth.proactive-token-refresh-threshold",
       "type": "java.time.Duration",
-      "description": "The lead time before actual token expiry at which a background refresh is triggered. The token is still considered valid inside this window; this is a policy knob for how early refresh kicks in so callers don't have to block on a synchronous refresh at the cliff edge. Must be strictly larger than the internal expiry grace period.",
+      "description": "Controls how far before token expiry a background refresh is triggered. The token remains valid within this window, so callers don't block on a synchronous refresh at expiry. Must be strictly greater than the internal expiry grace period.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -267,7 +267,7 @@
     {
       "name": "camunda.client.auth.token-fetch-initial-backoff",
       "type": "java.time.Duration",
-      "description": "The initial backoff duration applied between token fetch retry attempts. Subsequent delays grow geometrically by {@link #tokenFetchBackoffMultiplier}.",
+      "description": "The initial backoff duration applied between token fetch retry attempts. Each subsequent delay is multiplied by {@code camunda.client.auth.token-fetch-backoff-multiplier}.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -279,13 +279,13 @@
     {
       "name": "camunda.client.auth.token-fetch-non-retryable-cooldown",
       "type": "java.time.Duration",
-      "description": "Duration for which token fetches fail fast after the token endpoint returns a non-retryable response. After the cooldown elapses, the next call retries; if it fails again non-retryably, the latch re-arms with a new cooldown. Set to Duration.ZERO to disable the cooldown entirely.",
+      "description": "If the token endpoint returns a non-retryable response, subsequent token fetch attempts fail immediately without making a request. This property specifies the duration of this cooldown period. After the cooldown period elapses, the next request retries; if it also fails with a non-retryable error, the cooldown resets. Set to {@code Duration.ZERO} to disable the cooldown.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.token-fetch-retryable-status-codes",
       "type": "java.util.Set<java.lang.Integer>",
-      "description": "The set of HTTP status codes from the token endpoint that should be retried with backoff. Any non-200 status code outside this set trips a non-retryable failure latch that fails fast for the duration of tokenFetchNonRetryableCooldown.",
+      "description": "The set of HTTP status codes from the token endpoint that are retried with backoff. Any other non-200 status code triggers the {@code camunda.client.auth.token-fetch-non-retryable-cooldown} cooldown.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -563,7 +563,7 @@
     {
       "name": "camunda.client.worker.defaults.stream-inactivity-timeout",
       "type": "java.time.Duration",
-      "description": "If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before cancelling and recreating it. The timer is reset every time a job is received. Must be strictly less than {@code streamTimeout} when both are set.",
+      "description": "If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before canceling and recreating it. The timer is reset every time a job is received. Must be strictly less than {@code streamTimeout} when both are set.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": "PT10M"
     },

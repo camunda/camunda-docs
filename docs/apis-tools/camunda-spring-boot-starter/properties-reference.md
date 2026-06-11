@@ -503,7 +503,7 @@ Type: <code>string</code>
 
 <td>
 
-The lead time before actual token expiry at which a background refresh is triggered. The token is still considered valid inside this window; this is a policy knob for how early refresh kicks in so callers don't have to block on a synchronous refresh at the cliff edge. Must be strictly larger than the internal expiry grace period.
+Controls how far before token expiry a background refresh is triggered. The token remains valid within this window, so callers don't block on a synchronous refresh at expiry. Must be strictly greater than the internal expiry grace period.
 
 Type: <code>duration</code>
 
@@ -583,7 +583,7 @@ Type: <code>double</code>
 
 <td>
 
-The initial backoff duration applied between token fetch retry attempts. Subsequent delays grow geometrically by `token-fetch-backoff-multiplier`.
+The initial backoff duration applied between token fetch retry attempts. Each subsequent delay is multiplied by `camunda.client.auth.token-fetch-backoff-multiplier`.
 
 Type: <code>duration</code>
 
@@ -615,7 +615,7 @@ Type: <code>integer</code>
 
 <td>
 
-Duration for which token fetches fail fast after the token endpoint returns a non-retryable response. After the cooldown elapses, the next call retries; if it fails again non-retryably, the latch re-arms with a new cooldown. Set to Duration.ZERO to disable the cooldown entirely.
+If the token endpoint returns a non-retryable response, subsequent token fetch attempts fail immediately without making a request. This property specifies the duration of this cooldown period. After the cooldown period elapses, the next request retries; if it also fails with a non-retryable error, the cooldown resets. Set to `duration.zero` to disable the cooldown.
 
 Type: <code>duration</code>
 
@@ -631,7 +631,7 @@ Type: <code>duration</code>
 
 <td>
 
-The set of HTTP status codes from the token endpoint that should be retried with backoff. Any non-200 status code outside this set trips a non-retryable failure latch that fails fast for the duration of tokenFetchNonRetryableCooldown.
+The set of HTTP status codes from the token endpoint that are retried with backoff. Any other non-200 status code triggers the `camunda.client.auth.token-fetch-non-retryable-cooldown` cooldown.
 
 Type: <code>array[integer]</code>
 
@@ -1175,7 +1175,7 @@ Type: <code>boolean</code>
 
 <td>
 
-If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before cancelling and recreating it. The timer is reset every time a job is received. Must be strictly less than `stream-timeout` when both are set.
+If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before canceling and recreating it. The timer is reset every time a job is received. Must be strictly less than `stream-timeout` when both are set.
 
 Type: <code>duration</code>
 
@@ -1511,7 +1511,7 @@ Type: <code>boolean</code>
 
 <td>
 
-If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before cancelling and recreating it. The timer is reset every time a job is received. Must be strictly less than `stream-timeout` when both are set.
+If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before canceling and recreating it. The timer is reset every time a job is received. Must be strictly less than `stream-timeout` when both are set.
 
 Type: <code>duration</code>
 
