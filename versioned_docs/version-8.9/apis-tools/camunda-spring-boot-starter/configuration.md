@@ -1031,6 +1031,79 @@ camunda:
       enabled: false
 ```
 
+## Set cluster variables on start-up
+
+To set cluster variables at application start-up, use the `@ClusterVariables` annotation. Variables are set when the Camunda client starts and removed from the cluster when it stops.
+
+There are three ways to provide the variables:
+
+### From JSON resource files
+
+Provide one or more JSON resource files using the `resources` attribute:
+
+```java
+@ClusterVariables(resources = "classpath:cluster-variables.json")
+@SpringBootApplication
+public class MyApplication { }
+```
+
+Multiple files can be provided at once:
+
+```java
+@ClusterVariables(resources = {"classpath:vars-a.json", "classpath:vars-b.json"})
+@SpringBootApplication
+public class MyApplication { }
+```
+
+### From a method
+
+Annotate a method with `@ClusterVariables`. The return value is serialized to JSON and set as cluster variables. Any type the configured `JsonMapper` can serialize is supported — `Map`, POJO, record, etc.:
+
+```java
+@ClusterVariables
+public MyConfig clusterVariables() {
+    return new MyConfig("production", 3);
+}
+```
+
+### From application properties
+
+Define variables directly in your `application.yaml`:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      variables:
+        environment: production
+        maxRetries: 3
+```
+
+Variables defined in properties are applied in addition to any annotation-defined variables.
+
+### Specify the tenant to set variables for
+
+To set cluster variables scoped to a specific tenant, set the `tenantId` property of the `@ClusterVariables` annotation:
+
+```java
+@ClusterVariables(resources = "classpath:cluster-variables.json", tenantId = "myTenant")
+@SpringBootApplication
+public class MyApplication { }
+```
+
+By default, the annotation sets the variables to the global scope.
+
+### Disable cluster variable processing
+
+To disable the processing of `@ClusterVariables` annotations, you can set:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      enabled: false
+```
+
 ## React to events
 
 The Camunda Spring Boot Starter integrates with Spring events and also publishes its own events.
