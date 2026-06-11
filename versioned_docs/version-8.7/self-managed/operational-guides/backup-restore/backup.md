@@ -400,6 +400,12 @@ This will continue exporting records, but not delete those records (log compacti
 curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/pause?soft=true"
 ```
 
+:::warning
+This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
+
+If the request fails, verify that all brokers are running and retry.
+:::
+
    <details>
       <summary>Example output</summary>
       <summary>
@@ -749,6 +755,12 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
       ```bash
       curl -XPOST "$GATEWAY_MANAGEMENT_API/actuator/exporting/resume"
       ```
+
+:::warning
+This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
+
+If the request fails, verify that all brokers are running and retry.
+:::
 
       <details>
          <summary>Example output</summary>

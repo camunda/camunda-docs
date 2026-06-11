@@ -11,8 +11,6 @@ mdx:
 type UpdateGroupData = object;
 ```
 
-Defined in: [gen/types.gen.ts:10813](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10813)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:10813](https://github.com/camunda/orchestration-cl
 ```ts
 body: GroupUpdateRequest;
 ```
-
-Defined in: [gen/types.gen.ts:10814](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10814)
 
 ---
 
@@ -31,12 +27,10 @@ Defined in: [gen/types.gen.ts:10814](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:10815](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10815)
-
 #### groupId
 
 ```ts
-groupId: string;
+groupId: GroupId;
 ```
 
 The group ID.
@@ -46,10 +40,8 @@ The group ID.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:10821](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10821)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:10821](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/groups/{groupId}";
 ```
-
-Defined in: [gen/types.gen.ts:10822](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L10822)

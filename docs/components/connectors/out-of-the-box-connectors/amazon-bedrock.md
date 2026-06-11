@@ -22,7 +22,7 @@ the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/
 
 :::note
 Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer
-to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon Bedrock connector task

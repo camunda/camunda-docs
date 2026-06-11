@@ -11,8 +11,6 @@ mdx:
 type UpdateTenantClusterVariableData = object;
 ```
 
-Defined in: [gen/types.gen.ts:9009](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9009)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:9009](https://github.com/camunda/orchestration-clu
 ```ts
 body: UpdateClusterVariableRequest;
 ```
-
-Defined in: [gen/types.gen.ts:9010](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9010)
 
 ---
 
@@ -31,12 +27,10 @@ Defined in: [gen/types.gen.ts:9010](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:9011](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9011)
-
 #### name
 
 ```ts
-name: string;
+name: ClusterVariableName;
 ```
 
 The name of the cluster variable
@@ -54,10 +48,8 @@ The tenant ID
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:9021](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9021)
 
 ---
 
@@ -66,5 +58,3 @@ Defined in: [gen/types.gen.ts:9021](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/cluster-variables/tenants/{tenantId}/{name}";
 ```
-
-Defined in: [gen/types.gen.ts:9022](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L9022)

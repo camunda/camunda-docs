@@ -100,19 +100,19 @@ It is presented as an example for running Camunda 8 in ROSA.
 
 <RosaHcpAuth />
 
-Configure `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
+Configure `CLUSTER_0_REGION` and `CLUSTER_1_REGION` with the target regions respectively.
 
 ```bash
 # Set the region, adjust as needed
-export CLUSTER_1_REGION="us-east-1"
-export CLUSTER_2_REGION="us-east-2"
+export CLUSTER_0_REGION="us-east-1"
+export CLUSTER_1_REGION="us-east-2"
 ```
 
 Verify your AWS quotas for each region:
 
 ```bash
+rosa verify quota --region="$CLUSTER_0_REGION"
 rosa verify quota --region="$CLUSTER_1_REGION"
-rosa verify quota --region="$CLUSTER_2_REGION"
 ```
 
 :::note
@@ -135,12 +135,12 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
    cd clusters
    ```
 
-2. Configure your topology deployment, as you will use multiple regions, specify `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
+2. Configure your topology deployment, as you will use multiple regions, specify `CLUSTER_0_REGION` and `CLUSTER_1_REGION` with the target regions respectively.
 
    ```bash
    # set the region, adjust to your needs
-   export CLUSTER_1_REGION="us-east-1"
-   export CLUSTER_2_REGION="us-east-2"
+   export CLUSTER_0_REGION="us-east-1"
+   export CLUSTER_1_REGION="us-east-2"
 
    # ensure bucket variables are set
    export S3_TF_BUCKET_REGION="<your-region>"
@@ -160,18 +160,18 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/clusters/config.tf
    ```
 
-5. Review the file named `cluster_region_1.tf` in the same directory.
-   This file describes the cluster of the region 1, you may want to customize the `locals` variables with parameters of your choice, those are described in the next steps.
+5. Review the file named `cluster_region_0.tf` in the same directory.
+   This file describes the cluster of the region 0, you may want to customize the `locals` variables with parameters of your choice, those are described in the next steps.
+
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_0.tf
+   ```
+
+6. Do the same review with `cluster_region_1.tf` and adjust it to your needs.
+   This file describes the cluster of the region 1:
 
    ```hcl reference
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
-   ```
-
-6. Do the same review with `cluster_region_2.tf` and adjust it to your needs.
-   This file describes the cluster of the region 2:
-
-   ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_2.tf
    ```
 
 7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
@@ -226,8 +226,8 @@ Each module that you have previously set up contains an output definition at the
     ```bash
     # describes what will be created
     terraform plan -out clusters.plan \
-        -var cluster_1_region="$CLUSTER_1_REGION" \
-        -var cluster_2_region="$CLUSTER_2_REGION"
+        -var cluster_0_region="$CLUSTER_0_REGION" \
+        -var cluster_1_region="$CLUSTER_1_REGION"
     ```
 
 1.  After reviewing the plan, you can confirm and apply the changes.
@@ -265,11 +265,11 @@ To create the peering between each cluster’s VPC, you need to gather some info
 1. Then for each cluster, save the associated [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc):
 
    ```bash
+   export CLUSTER_0_VPC_ID="$(terraform output -raw cluster_0_vpc_id)"
+   echo "CLUSTER_0_VPC_ID=$CLUSTER_0_VPC_ID"
+
    export CLUSTER_1_VPC_ID="$(terraform output -raw cluster_1_vpc_id)"
    echo "CLUSTER_1_VPC_ID=$CLUSTER_1_VPC_ID"
-
-   export CLUSTER_2_VPC_ID="$(terraform output -raw cluster_2_vpc_id)"
-   echo "CLUSTER_2_VPC_ID=$CLUSTER_2_VPC_ID"
    ```
 
 #### Set up the peering module
@@ -325,10 +325,10 @@ This command connects Terraform to the S3 bucket for managing the state file, en
 
    ```bash
    terraform plan -out peering.plan \
+        -var cluster_0_region="$CLUSTER_0_REGION" \
+        -var cluster_0_vpc_id="$CLUSTER_0_VPC_ID" \
         -var cluster_1_region="$CLUSTER_1_REGION" \
-        -var cluster_1_vpc_id="$CLUSTER_1_VPC_ID" \
-        -var cluster_2_region="$CLUSTER_2_REGION" \
-        -var cluster_2_vpc_id="$CLUSTER_2_VPC_ID"
+        -var cluster_1_vpc_id="$CLUSTER_1_VPC_ID"
    ```
 
 1. After reviewing the execution plan, apply the configuration to create the VPC peering connection:
@@ -463,26 +463,26 @@ You can now access the created OpenShift clusters.
 
     ```bash
     # Cluster 1
-    rosa grant user cluster-admin --cluster="$CLUSTER_1_NAME" --user="$CLUSTER_1_ADMIN_USERNAME"
+    rosa grant user cluster-admin --cluster="$CLUSTER_0_NAME" --user="$CLUSTER_0_ADMIN_USERNAME"
 
     # Cluster 2
-    rosa grant user cluster-admin --cluster="$CLUSTER_2_NAME" --user="$CLUSTER_2_ADMIN_USERNAME"
+    rosa grant user cluster-admin --cluster="$CLUSTER_1_NAME" --user="$CLUSTER_1_ADMIN_USERNAME"
     ```
 
 1.  Log in to the OpenShift clusters and configure the kubeconfig contexts:
 
     ```bash
     # Cluster 1
+    oc config delete-context "$CLUSTER_0_NAME" || true
+
+    oc login -u "$CLUSTER_0_ADMIN_USERNAME" "$CLUSTER_0_API_URL" -p "$CLUSTER_0_ADMIN_PASSWORD"
+    oc config rename-context $(oc config current-context) "$CLUSTER_0_NAME"
+
+    # Cluster 2
     oc config delete-context "$CLUSTER_1_NAME" || true
 
     oc login -u "$CLUSTER_1_ADMIN_USERNAME" "$CLUSTER_1_API_URL" -p "$CLUSTER_1_ADMIN_PASSWORD"
     oc config rename-context $(oc config current-context) "$CLUSTER_1_NAME"
-
-    # Cluster 2
-    oc config delete-context "$CLUSTER_2_NAME" || true
-
-    oc login -u "$CLUSTER_2_ADMIN_USERNAME" "$CLUSTER_2_API_URL" -p "$CLUSTER_2_ADMIN_PASSWORD"
-    oc config rename-context $(oc config current-context) "$CLUSTER_2_NAME"
     ```
 
 1.  Verify your connection to the clusters with `oc`:
@@ -515,12 +515,12 @@ To delete the module, follow these steps:
 
 1. Before proceeding with the deletion of the VPC peering module, ensure that the necessary variables, which were provided during the module creation, are still available. To verify that the required variables are correctly defined, repeat the steps from the [retrieve the VPC peering cluster variables](#retrieve-the-peering-cluster-variables) section.
 
-1. Ensure that the `CLUSTER_1_REGION` and `CLUSTER_2_REGION` variables are defined correctly:
+1. Ensure that the `CLUSTER_0_REGION` and `CLUSTER_1_REGION` variables are defined correctly:
 
    ```bash
    # set the region, adjust to your needs
-   export CLUSTER_1_REGION="us-east-1"
-   export CLUSTER_2_REGION="us-east-2"
+   export CLUSTER_0_REGION="us-east-1"
+   export CLUSTER_1_REGION="us-east-2"
    ```
 
 1. Navigate to the VPC peering module directory `peering` where the VPC peering module configuration is located.
@@ -529,10 +529,10 @@ To delete the module, follow these steps:
 
    ```bash
    terraform plan -destroy \
+     -var cluster_0_region="$CLUSTER_0_REGION" \
+     -var cluster_0_vpc_id="$CLUSTER_0_VPC_ID" \
      -var cluster_1_region="$CLUSTER_1_REGION" \
      -var cluster_1_vpc_id="$CLUSTER_1_VPC_ID" \
-     -var cluster_2_region="$CLUSTER_2_REGION" \
-     -var cluster_2_vpc_id="$CLUSTER_2_VPC_ID" \
      -out destroy-peering.plan
    ```
 
@@ -558,8 +558,8 @@ The clusters can be deleted once they are no longer in use and have no dependenc
 
    ```bash
    terraform plan -destroy \
+     -var cluster_0_region="$CLUSTER_0_REGION" \
      -var cluster_1_region="$CLUSTER_1_REGION" \
-     -var cluster_2_region="$CLUSTER_2_REGION" \
      -out destroy-clusters.plan
    ```
 

@@ -583,63 +583,6 @@ With `ES_WARM_REINDEX=true`, the bulk of the Elasticsearch data transfer happens
 
 <MeasureEstimate />
 
-## Troubleshooting
-
-### A migration job fails
-
-Check the job logs for details:
-
-```bash
-# List migration jobs
-kubectl get jobs -n ${NAMESPACE} -l migration.camunda.io/type
-
-# View logs for a specific job
-kubectl logs -n ${NAMESPACE} job/<job-name>
-
-# Describe the job for events
-kubectl describe job <job-name> -n ${NAMESPACE}
-```
-
-Each phase is idempotent; you can rerun it after fixing the issue.
-
-### PostgreSQL restore fails with permission errors
-
-When restoring to CNPG, the `pg_restore` command uses `--no-owner --no-privileges` flags to avoid permission mismatches. If you see errors related to ownership, verify that the target database user has the correct permissions:
-
-```bash
-kubectl exec -it <cnpg-primary-pod> -n ${NAMESPACE} -- psql -U postgres -c "\\du"
-```
-
-### Elasticsearch reindex fails
-
-The ES restore uses the `_reindex` API to pull data from the source Bitnami Elasticsearch to the target ECK cluster. Both clusters must be reachable within the same namespace. Check that the source ES is still running and accessible:
-
-```bash
-# Check if source ES is reachable from the target
-kubectl exec -it <eck-pod> -n ${NAMESPACE} -- \
-  curl -s http://${CAMUNDA_RELEASE_NAME}-elasticsearch:9200/_cluster/health
-```
-
-If the reindex fails for specific indices, check the job logs for mapping conflicts or timeout errors. You can delete the problematic indices on the target and rerun Phase 3.
-
-### Migration status check
-
-View the current migration progress:
-
-```bash
-bash 1-deploy-targets.sh --status
-```
-
-This shows which phases have been completed and their timestamps.
-
-### State tracking
-
-The scripts maintain migration state in `.state/migration.env`, a plain key-value file that records phase completion timestamps and deployment decisions. Each run appends to `.state/migration-YYYY-MM-DD.log`. The `.state/` directory is local and gitignored. To reset state and start over, run:
-
-```bash
-rm -rf .state/
-```
-
 ## Operational readiness
 
 Before running this migration in production, use the checklist below to reduce risk and confirm the cutover plan is ready.
@@ -698,3 +641,60 @@ After completing the migration, monitor the following for at least 48 hours:
 - **Camunda component logs**: check for connection errors, authentication failures, or data inconsistencies.
 - **Process instance completion**: verify that in-flight process instances continue to execute correctly.
 - **Zeebe export lag**: confirm that Zeebe exporters are writing to the new Elasticsearch without delays.
+
+## Troubleshooting
+
+### A migration job fails
+
+Check the job logs for details:
+
+```bash
+# List migration jobs
+kubectl get jobs -n ${NAMESPACE} -l migration.camunda.io/type
+
+# View logs for a specific job
+kubectl logs -n ${NAMESPACE} job/<job-name>
+
+# Describe the job for events
+kubectl describe job <job-name> -n ${NAMESPACE}
+```
+
+Each phase is idempotent; you can rerun it after fixing the issue.
+
+### PostgreSQL restore fails with permission errors
+
+When restoring to CNPG, the `pg_restore` command uses `--no-owner --no-privileges` flags to avoid permission mismatches. If you see errors related to ownership, verify that the target database user has the correct permissions:
+
+```bash
+kubectl exec -it <cnpg-primary-pod> -n ${NAMESPACE} -- psql -U postgres -c "\\du"
+```
+
+### Elasticsearch reindex fails
+
+The ES restore uses the `_reindex` API to pull data from the source Bitnami Elasticsearch to the target ECK cluster. Both clusters must be reachable within the same namespace. Check that the source ES is still running and accessible:
+
+```bash
+# Check if source ES is reachable from the target
+kubectl exec -it <eck-pod> -n ${NAMESPACE} -- \
+  curl -s http://${CAMUNDA_RELEASE_NAME}-elasticsearch:9200/_cluster/health
+```
+
+If the reindex fails for specific indices, check the job logs for mapping conflicts or timeout errors. You can delete the problematic indices on the target and rerun Phase 3.
+
+### Migration status check
+
+View the current migration progress:
+
+```bash
+bash 1-deploy-targets.sh --status
+```
+
+This shows which phases have been completed and their timestamps.
+
+### State tracking
+
+The scripts maintain migration state in `.state/migration.env`, a plain key-value file that records phase completion timestamps and deployment decisions. Each run appends to `.state/migration-YYYY-MM-DD.log`. The `.state/` directory is local and gitignored. To reset state and start over, run:
+
+```bash
+rm -rf .state/
+```

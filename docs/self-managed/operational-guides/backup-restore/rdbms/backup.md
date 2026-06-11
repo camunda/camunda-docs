@@ -25,9 +25,9 @@ import TabItem from '@theme/TabItem';
 Back up your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, and Tasklist) when using a relational database management system (RDBMS) as secondary storage.
 
 :::note
-This procedure is part of the **first phase of Decoupled Continuous Backups** and covers only Orchestration cluster components: **Zeebe**, **Operate** and **Tasklist**. It does **not** support backup or restore of **Optimize** records.
+This procedure is part of the **first phase of Decoupled Continuous Backups** and covers only **Zeebe**, **Operate**, and **Tasklist**. It does **not** cover **Identity** or **Optimize**.
 
-If you are using Optimize, you must continue to use the [standard Camunda backup and restore procedure](../backup-and-restore.md) for Orchestration cluster data. Failing to do so may result in data loss or inconsistency for Optimize.
+Optimize always stores its data in Elasticsearch or OpenSearch, independently of the Orchestration Cluster's secondary storage. If you deploy Optimize alongside an RDBMS-backed Orchestration Cluster, back up Optimize independently using the [standalone Optimize backup procedure](../optimize-backup-and-restore.md). You do not need to switch the Orchestration Cluster backup to the Elasticsearch / OpenSearch path.
 :::
 
 ## Prerequisites
@@ -61,7 +61,7 @@ Continuous backups must be enabled for RDBMS backup and restore.
 ### How continuous backups work
 
 Continuous backups rely on a Zeebe feature that retains data records in the log stream until they are backed up.
-This ensures that after restore, the state of primary and secondary storage is in sync, without needing to orchestrate the backup of primary and secondary storage.
+This ensures that after restore, the state of primary and secondary storage is in sync, without the need to orchestrate primary and secondary storage backups.
 
 When continuous backups are enabled:
 
@@ -92,8 +92,8 @@ camunda:
   <TabItem value="env" label="Environment variables">
 
 ```bash
-export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE=S3
-export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_CONTINUOUS=true
+export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE=S3
+export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_CONTINUOUS=true
 ```
 
   </TabItem>
@@ -101,7 +101,7 @@ export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_CONTINUOUS=true
 
 ### Checkpoint interval
 
-The checkpoint interval controls how frequently Zeebe injects marker checkpoints into the log stream. These markers serve as potential restore points — since a cluster can only be restored to a checkpoint that exists on all partitions, more frequent markers enable finer-grained [point-in-time restore](./restore.md#time-range-restore).
+The checkpoint interval controls how frequently Zeebe injects marker checkpoints into the log stream. These markers serve as potential restore points — since a cluster can only be restored to a checkpoint that exists on all partitions, more frequent markers enable finer-grained [point-in-time restore](./restore.md#point-in-time-restore).
 
 ```yaml
 camunda:
@@ -125,9 +125,8 @@ Use the [backup state actuator](../zeebe-backup-and-restore.md#request-runtime-s
 
 ### Scheduled backup
 
-Zeebe's internal backup scheduler creates primary storage backups at a predefined interval — these are the actual backups you restore from. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range tracking. Both should be enabled together for a complete backup strategy.
-
-Combined with [continuous backups](#continuous-backups), this ensures you always have backup ranges available for disaster recovery. Learn more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
+Zeebe's internal backup scheduler creates primary storage backups at a predefined interval. The **schedule** and **continuous mode** serve complementary purposes: the schedule triggers the backups, while continuous mode prevents log compaction and enables backup range trackin, this ensures you always have backup ranges available for disaster recoveryg.
+Both should be enabled together for a complete backup strategy. Learn more about configuring the backup scheduler [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackup).
 
 #### Recommended configuration
 
@@ -187,9 +186,15 @@ If the response is empty or missing partitions, check your backup store configur
 
 ## Backing up RDBMS
 
-Back up the RDBMS as described in the [prerequisites](#prerequisites). While exact synchronization with Zeebe backups is not required — the restore process handles alignment automatically — keeping backup intervals similar minimizes the time Zeebe needs to re-export events after a restore.
+Back up the RDBMS as described in the [prerequisites](#prerequisites). While exact synchronization with Zeebe backups is not required, as the restore process handles alignment automatically, keeping backup intervals similar minimizes the time Zeebe needs to re-export events after a restore.
 
 During restore, Zeebe reads the **exporter position** from the `EXPORTER_POSITION` table — which records the last Zeebe log stream position exported to the RDBMS — to determine which primary storage backup to restore from.
+
+## (Optional) Back up Optimize data {#back-up-optimize-data}
+
+If you are using Optimize alongside an RDBMS-backed Orchestration Cluster, Optimize must be backed up independently. Optimize always stores its data in Elasticsearch or OpenSearch, regardless of what the Orchestration Cluster uses as secondary storage.
+
+See [back up and restore Optimize independently](../optimize-backup-and-restore.md) for the complete procedure.
 
 ## (Optional) Back up Web Modeler data {#back-up-web-modeler-data}
 
@@ -199,7 +204,7 @@ See [backup and restore Web Modeler data](../modeler-backup-and-restore.md) for 
 
 ## Primary storage retention
 
-You can enable a retention mechanism over primary storage (Zeebe's) backups. This periodically deletes backups from the configured blob storage based on the preconfigured retention window. Learn more about configuring backup retention [here](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackupretention). The retention mechanism always maintains at least one backup regardless of the window configuration as a data resiliency measure.
+Automatic retention for primary storage (Zeebe's) backups is available. This periodically deletes backups from the configured blob storage based on a preconfigured retention window. At least one backup is always retained to prevent potential data loss, even if it falls outside the configured retention window.. To configure backup retention settings, see [backup retention configuration](../../../../components/orchestration-cluster/core-settings/configuration/properties/#camundadataprimary-storagebackupretention).
 
 When retention deletes old backups, the affected [backup ranges](#backup-ranges) shrink accordingly, narrowing your available restore window. Ensure that your retention window is at least as long as the restore window you require. For example, if you need the ability to restore to any point in the last 7 days, set the retention window to at least `P7D`.
 

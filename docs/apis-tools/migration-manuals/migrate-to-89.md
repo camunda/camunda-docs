@@ -2,18 +2,19 @@
 id: migrate-to-89
 title: "Camunda 8.9 APIs & Tools migration guide"
 sidebar_label: "Upgrade to Camunda 8.9"
-description: "Migrate your API integrations, SDKs, and generated clients to Camunda 8.9. Covers breaking changes, deprecations, and step-by-step migration actions."
+description: "Learn how to migrate your API integrations, SDKs, and generated clients to Camunda 8.9."
 toc_max_heading_level: 2
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-Migrate your API integrations, SDKs, and generated clients to Camunda 8.9.
+<PageDescription />
 
-## About this guide
+## About
 
-This guide details the API and SDK changes introduced in Camunda 8.9 that require customer action.
+This guide details the API and SDK changes introduced in Camunda 8.9 that require customer action, including breaking changes, deprecations, and step-by-step migration actions.
 
 Details are provided for each integration type, including what changed, why, and what action you must take.
 
@@ -44,11 +45,11 @@ If you already performed these migrations during your 8.8 upgrade, proceed to [C
 
 | 8.9 status                                                 | Component/Use                                                                                                           | Migrate to                  | Migrate by          |
 | :--------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
-| <span className="label-highlight yellow">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                                                     | Orchestration Cluster API   | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [ZeebeClient](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [Spring Zeebe SDK](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)         | Camunda Spring Boot Starter | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [Zeebe Process Test (ZPT)](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) | Camunda Process Test (CPT)  | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [Job-based user tasks](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)       | Camunda user tasks          | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                 | Orchestration Cluster API   | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [ZeebeClient](../migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Spring Zeebe SDK](../migration-manuals/migrate-to-camunda-spring-boot-starter.md)  | Camunda Spring Boot Starter | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Zeebe Process Test (ZPT)](../migration-manuals/migrate-to-camunda-process-test.md) | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Job-based user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md)       | Camunda user tasks          | Before Camunda 8.10 |
 
 :::tip
 Learn more about API changes in the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).

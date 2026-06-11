@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for element instances based on given criteria.
@@ -32,6 +34,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /element-instances/{elementInstanceKey}:
     get:
       tags:
@@ -40,6 +43,8 @@ paths:
       summary: Get element instance
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -77,14 +82,17 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /element-instances/{elementInstanceKey}/variables:
     put:
       tags:
         - Element instance
       operationId: createElementInstanceVariables
       summary: Update element instance variables
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -124,14 +132,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
         "504":
           $ref: "common-responses.yaml#/components/responses/GatewayTimeoutTaskListenerBlocking"
+      x-added-in-version: "8.6"
   /element-instances/{elementInstanceKey}/incidents/search:
     post:
       tags:
         - Element instance
       operationId: searchElementInstanceIncidents
       summary: Search for incidents of a specific element instance
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -179,14 +190,17 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation:
     post:
       tags:
         - Ad-hoc sub-process
       operationId: activateAdHocSubProcessActivities
       summary: Activate activities within an ad-hoc sub-process
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -228,6 +242,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
 components:
   schemas:
     ElementInstanceSearchQuerySortRequest:
@@ -269,7 +284,44 @@ components:
           allOf:
             - $ref: "#/components/schemas/ElementInstanceFilter"
     ElementInstanceFilter:
-      description: Element instance filter.
+      description: Element instance search filter.
+      allOf:
+        - $ref: "#/components/schemas/ElementInstanceFilterFields"
+        - type: object
+          x-properties-added-in-version:
+            - propertyName: $or
+              addedInVersion: "8.10"
+          properties:
+            $or:
+              description: |
+                Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.
+
+                Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.
+                <br>
+                <em>Example:</em>
+
+                ```json
+                {
+                  "processInstanceKey": "2251799813685323",
+                  "$or": [
+                    { "elementName": { "$like": "*Order*" } },
+                    { "elementId":   { "$like": "*Order*" } }
+                  ]
+                }
+                ```
+                This matches element instances scoped to the given process instance whose:
+
+                <ul style="padding-left: 20px; margin-left: 20px;">
+                  <li style="list-style-type: disc;"><code>elementName</code> contains <em>Order</em>, or</li>
+                  <li style="list-style-type: disc;"><code>elementId</code> contains <em>Order</em></li>
+                </ul>
+                <br>
+                <p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.
+              type: array
+              items:
+                $ref: "#/components/schemas/ElementInstanceFilterFields"
+    ElementInstanceFilterFields:
+      description: Element instance filter fields.
       type: object
       properties:
         processDefinitionId:
@@ -314,11 +366,12 @@ components:
         elementId:
           description: The element ID for this element instance.
           allOf:
-            - $ref: "identifiers.yaml#/components/schemas/ElementId"
+            - $ref: "identifiers.yaml#/components/schemas/ElementIdFilterProperty"
         elementName:
-          type: string
           description: |
             The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         hasIncident:
           type: boolean
           description: Shows whether this element instance has an incident related to.
@@ -504,6 +557,9 @@ components:
             - $ref: "keys.yaml#/components/schemas/IncidentKey"
           description: Incident key associated with this element instance.
           nullable: true
+      x-properties-added-in-version:
+        - propertyName: rootProcessInstanceKey
+          addedInVersion: "8.9"
     ElementInstanceStateEnum:
       description: Element states
       type: string

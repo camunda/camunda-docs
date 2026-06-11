@@ -104,6 +104,26 @@ static void configureAssertions() {
 }
 ```
 
+### Judge configuration
+
+Override the global [judge configuration](configuration.md#judge-configuration) for a single assertion chain using `withJudgeConfig`.
+
+```java
+assertThat(processInstance)
+    .withJudgeConfig(config -> config.withThreshold(0.9))
+    .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
+```
+
+### Semantic similarity configuration
+
+Override the global [semantic similarity configuration](configuration.md#semantic-similarity-configuration) for a single assertion chain using `withSemanticSimilarityConfig`.
+
+```java
+assertThat(processInstance)
+    .withSemanticSimilarityConfig(config -> config.withThreshold(0.9))
+    .hasVariableSimilarTo("greeting", "Hello, how can I help you today?");
+```
+
 ## Process instance assertions
 
 You can verify the process instance state and other properties using `CamundaAssert.assertThat()` or
@@ -392,6 +412,27 @@ assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> 
 });
 ```
 
+### hasVariableSatisfiesJudge
+
+Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The assertion
+fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
+
+```java
+assertThat(processInstance)
+    .hasVariableSatisfiesJudge("result", "Contains a valid JSON response with status OK.");
+```
+
+### hasVariableSimilarTo
+
+Assert that a process variable is semantically similar to an expected string using a configured embedding model. The variable value and the expected value are
+converted to embeddings, and the cosine similarity is compared against the configured threshold. The assertion fails if the variable doesn't exist or the
+similarity score is below the configured threshold (default: 0.5). It requires [semantic similarity configuration](configuration.md#semantic-similarity-configuration).
+
+```java
+assertThat(processInstance)
+    .hasVariableSimilarTo("greeting", "Hello, how can I help you today?");
+```
+
 ### hasLocalVariableNames
 
 Assert that the process instance has the local variables in the scope of the given element. Use the BPMN element ID or a
@@ -442,6 +483,32 @@ assertThat(processInstance).hasLocalVariableSatisfies(
         Assertions.assertThat(emailTo.name()).isEqualTo("Zee");
         Assertions.assertThat(emailTo.email()).isEqualTo("zee@camunda.com");
     });
+```
+
+### hasLocalVariableSatisfiesJudge
+
+Assert that a local variable in the scope of a given element satisfies a natural language expectation using a configured LLM judge. Use the BPMN
+element ID or an [element selector](utilities.md#element-selector) to identify the element. The expectation is evaluated only once. The assertion
+fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
+
+```java
+assertThat(processInstance)
+    .hasLocalVariableSatisfiesJudge(
+        ElementSelectors.byName("Greet Customer"), "output",
+        "Contains a polite greeting addressed to the customer.");
+```
+
+### hasLocalVariableSimilarTo
+
+Assert that a local variable in the scope of a given element is semantically similar to an expected string using a configured embedding model. Use the BPMN
+element ID or an [element selector](utilities.md#element-selector) to identify the element. The assertion fails if the variable doesn't exist or the
+similarity score is below the configured threshold (default: 0.5). It requires [semantic similarity configuration](configuration.md#semantic-similarity-configuration).
+
+```java
+assertThat(processInstance)
+    .hasLocalVariableSimilarTo(
+        ElementSelectors.byName("Greet Customer"), "output",
+        "Hello, how can I help you today?");
 ```
 
 ## Process instance message assertions
@@ -724,6 +791,51 @@ Asserts that the decision table matched no rules. The assertion will fail if the
 
 ```java
 assertThatDecision(DecisionSelectors.byId("decision-id")).hasNoMatchedRules();
+```
+
+## Value assertions
+
+You can verify arbitrary string values, independent of a process instance, using `CamundaAssert.assertThatValue()`.
+
+This is useful for evaluating
+values produced outside of a running process. For example, a single property of a variable object, with the
+same LLM judge and embedding-based similarity checks used for process variables.
+
+### satisfiesJudge
+
+Assert that the given value satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The
+assertion fails if the LLM score is below the configured threshold (default: 0.5). It requires [judge configuration](configuration.md#judge-configuration).
+
+```java
+assertThatValue("The order has been shipped and will arrive tomorrow.")
+    .satisfiesJudge("Confirms that the order is on its way to the customer.");
+```
+
+Override the global judge configuration for a single assertion chain using `withJudgeConfig`.
+
+```java
+assertThatValue(response)
+    .withJudgeConfig(config -> config.withThreshold(0.9))
+    .satisfiesJudge("Contains a valid JSON response with status OK.");
+```
+
+### isSimilarTo
+
+Assert that the given value is semantically similar to an expected string using a configured embedding model. Both values are converted to embeddings,
+and the cosine similarity is compared against the configured threshold. The assertion fails if the similarity score is below the configured threshold
+(default: 0.5). It requires [semantic similarity configuration](configuration.md#semantic-similarity-configuration).
+
+```java
+assertThatValue("Hi there, what can I do for you?")
+    .isSimilarTo("Hello, how can I help you today?");
+```
+
+Override the global semantic similarity configuration for a single assertion chain using `withSemanticSimilarityConfig`.
+
+```java
+assertThatValue(response)
+    .withSemanticSimilarityConfig(config -> config.withThreshold(0.9))
+    .isSimilarTo("Hello, how can I help you today?");
 ```
 
 ## Custom assertions

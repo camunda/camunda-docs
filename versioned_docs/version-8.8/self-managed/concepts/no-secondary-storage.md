@@ -8,7 +8,7 @@ The `noSecondaryStorage` mode allows you to run Zeebe clusters with only the eng
 
 ## No secondary storage mode
 
-In this mode, only the Zeebe process engine and primary storage components are available. This setup provides core process orchestration functionality, but does **not** include the full feature set of the Camunda platform.
+In this mode, only the Zeebe process engine and primary storage components are available. This setup provides core process orchestration functionality, but does **not** include the full feature set of Camunda.
 
 For the complete Camunda 8 experience, including web applications, APIs, and advanced features, we recommend using the standard deployment with secondary storage enabled.
 

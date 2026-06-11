@@ -2,14 +2,16 @@
 id: deploying-resources
 title: Deploying Resources
 sidebar_label: Deploying Resources
-sidebar_position: 8
+sidebar_position: 10
 mdx:
   format: md
 ---
 
 # Deploying Resources
 
-Deploy BPMN, DMN, or Form files from disk:
+Deploy BPMN, DMN, RPA, Form, or generic resource files from disk:
+
+<!-- snippet-source: examples/readme.py | regions: ReadmeDeployResources -->
 
 ```python
 from camunda_orchestration_sdk import CamundaClient

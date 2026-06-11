@@ -459,7 +459,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart on each cluster.
+- Installs (or upgrades) Camunda using the Helm chart on each cluster.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from the value file.
 

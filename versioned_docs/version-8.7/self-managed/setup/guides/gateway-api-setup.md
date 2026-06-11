@@ -39,11 +39,13 @@ Get started by running the `helm template` command against version 8.9 or later 
 
 ```bash
 helm template camunda camunda/camunda-platform \
-  --version 14.0.0 \
+  --devel \
+  --version 14.0.0-alpha5 \
   --set global.host=example.com \
   --set global.gateway.enabled=true \
   --set global.gateway.createGatewayResource=true \
   --set orchestration.data.secondaryStorage.type=elasticsearch \
+  --set orchestration.gateway.grpc.enabled=true \
   --show-only templates/orchestration/httproute.yaml \
   --show-only templates/orchestration/grpcroute.yaml \
   --show-only templates/common/referencegrant.yaml \

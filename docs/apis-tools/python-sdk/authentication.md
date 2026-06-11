@@ -2,7 +2,7 @@
 id: authentication
 title: Authentication
 sidebar_label: Authentication
-sidebar_position: 7
+sidebar_position: 8
 mdx:
   format: md
 ---
@@ -48,6 +48,8 @@ CAMUNDA_BASIC_AUTH_PASSWORD=your-password
 ```
 
 Or programmatically:
+
+<!-- snippet-source: examples/readme.py | regions: ReadmeBasicAuth -->
 
 ```python
 from camunda_orchestration_sdk import CamundaClient

@@ -470,7 +470,7 @@ Zeebe does not support backup encryption natively, but it _can_ use filesystem b
 
 | Field    | Description                                                                                                                                                                                                                                                                                 | Example Value      |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| basePath | The base path is used to define the parent directory of all create backups and backup-manifest files. **This directory must exist and be writable by the Zeebe broker**. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_FILESYSTEM_BASEPATH`. | /mnt/backups/zeebe |
+| basePath | The base path is used to define the parent directory of all create backups and backup-manifest files. **This directory must exist and be writable by the Zeebe Broker**. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_FILESYSTEM_BASEPATH`. | /mnt/backups/zeebe |
 
 #### YAML snippet
 
@@ -920,9 +920,12 @@ Each exporter should be configured following this template:
 #### YAML snippet
 
 ```yaml
-exporters:
-  jarPath:
-  className:
+zeebe:
+  broker:
+    ...
+    exporters:
+      jarPath:
+      className:
 ```
 
 ### zeebe.broker.exporters.elasticsearch
@@ -955,11 +958,22 @@ See the experimental section of the [defaults.yaml](https://github.com/camunda/c
 
 Be aware that all configurations which are part of the experimental section are subject to change and can be dropped at any time.
 
+#### zeebe.broker.experimental.engine.caches
+
+| Field                        | Description                                                                                                                                                                                                                                                                                                                                        | Example value |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| groupNameCacheCapacity       | Maximum number of group names held in the in-memory name-to-ID cache used during candidate group resolution. This setting can also be overridden using the environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_GROUPNAMECACHECAPACITY`.                                                                                                  | 1000          |
+| candidateGroupNameResolution | If true, the Zeebe engine attempts to resolve user task candidate group names to group IDs at task creation. Set to false to disable this resolution and pass candidate group values through unchanged. This setting can also be overridden using the environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION`. | true          |
+
 ### Multitenancy configuration
 
 For an embedded gateway setup, any gateway property can be passed along to the `StandaloneBroker` by prefixing `zeebe.broker`.
 
 #### zeebe.broker.gateway.multitenancy
+
+:::note
+This section describes configuration for **logical tenants**. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md).
+:::
 
 Multi-tenancy in Zeebe can be configured with the following configuration properties.
 Multi-tenancy is disabled by default.

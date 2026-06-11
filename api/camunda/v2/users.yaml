@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:STRONG]]
 
         Create a new user.
@@ -40,6 +42,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /users/search:
     post:
       tags:
@@ -48,6 +51,8 @@ paths:
       summary: Search users
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -72,6 +77,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /users/{username}:
     get:
       tags:
@@ -80,6 +86,8 @@ paths:
       summary: Get user
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -110,6 +118,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
     put:
       tags:
         - User
@@ -117,6 +126,8 @@ paths:
       summary: Update user
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -155,6 +166,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - User
@@ -162,6 +174,8 @@ paths:
       summary: Delete user
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -188,6 +202,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
 components:
   schemas:
     UserRequest:
@@ -197,8 +212,9 @@ components:
           description: The password of the user.
           type: string
         username:
-          description: The username of the user.
-          type: string
+          description: The username of the new user.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/Username"
         name:
           description: The name of the user.
           type: string
@@ -212,7 +228,9 @@ components:
       type: object
       properties:
         username:
-          $ref: "identifiers.yaml#/components/schemas/Username"
+          description: The username of the created user.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/Username"
         name:
           description: The name of the user.
           nullable: true
@@ -241,7 +259,9 @@ components:
       type: object
       properties:
         username:
-          $ref: "identifiers.yaml#/components/schemas/Username"
+          description: The username of the updated user.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/Username"
         name:
           description: The name of the user.
           nullable: true
@@ -258,7 +278,9 @@ components:
       type: object
       properties:
         username:
-          $ref: "identifiers.yaml#/components/schemas/Username"
+          description: The username of the user.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/Username"
         name:
           description: The name of the user.
           nullable: true

@@ -233,7 +233,7 @@ If you choose not to use this module, you must provide your own Elasticsearch or
 Additionally, be sure to delete the `opensearch.tf` file in your reference copy—otherwise, the resources defined in it will still be created.
 :::
 
-The OpenSearch module provisions an OpenSearch domain for use with the Camunda platform. OpenSearch is a powerful alternative to Elasticsearch.
+The OpenSearch module provisions an OpenSearch domain for use with Camunda. OpenSearch is a powerful alternative to Elasticsearch.
 
 :::note Migration to OpenSearch is not supported
 
@@ -322,13 +322,15 @@ The following example uses scripts from the Terraform installation to deploy and
 1. Navigate to the procedure directory:
 
 ```sh
-cd camunda-deployment-references-main/aws/ec2/procedure
+cd camunda-deployment-references/aws/compute/ec2-single-region/procedure
 ```
 
 The `procedure` directory contains Bash scripts for installing and configuring Camunda 8.
 
 2. Configure script behavior using the following environment variables:
    - `CLOUDWATCH_ENABLED`: Defaults to `false`. Set to `true` to install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
+   - `CAMUNDA_DISTRO_USER`: Camunda Enterprise LDAP username for authenticating against `artifacts.camunda.com` (Artifactory). Required to download artifacts from `artifacts.camunda.com`.
+   - `CAMUNDA_DISTRO_PASSWORD`: Camunda Enterprise LDAP password for authenticating against `artifacts.camunda.com` (Artifactory). Required to download artifacts from `artifacts.camunda.com`.
 
 3. Override default versions in the `camunda-install.sh` script by modifying these variables:
    - `OPENJDK_VERSION`: The Temurin Java version to install.
@@ -385,7 +387,7 @@ Using Terraform, you can obtain the HTTP endpoint of the Application Load Balanc
 1. Navigate to the Terraform folder:
 
 ```sh
-cd camunda-deployment-references-main/aws/ec2/terraform
+cd camunda-deployment-references/aws/ec2/terraform
 ```
 
 2. Retrieve the Application Load Balancer output:

@@ -23,7 +23,7 @@ By default, Camunda 8 SaaS uses a provider-managed encryption key with [Google C
 
 Key points:
 
-- Encryption type is selected only when [creating a cluster](/components/console/manage-clusters/create-cluster.md)
+- Encryption type is selected only when [creating a cluster](/components/hub/organization/manage-clusters/create-cluster.md)
 - Each cluster can have its own key
 - The key applies to all workloads and persists across updates
 - View encryption details on the cluster's **Overview** tab under **Cluster Details**

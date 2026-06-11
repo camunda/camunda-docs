@@ -6,6 +6,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
 import AlgoliaSearchBox from "@theme/SearchBar";
+import iconBuildWithAi from "../../docs/components/assets/icon-agentic.png";
 
 const features = [
   {
@@ -14,6 +15,13 @@ const features = [
     url: "/docs/guides",
     description:
       "New to Camunda 8? Create an account and start modeling your first process.",
+  },
+  {
+    title: "Build with AI",
+    imageUrl: iconBuildWithAi,
+    url: "/docs/guides/build-with-ai/overview/",
+    description:
+      "Build Camunda solutions with AI-ready workflows and agentic orchestration.",
   },
   {
     title: "Using Camunda",
@@ -35,13 +43,6 @@ const features = [
     url: "/docs/apis-tools/working-with-apis-tools/",
     description:
       "Explore Zeebe client libraries, Camunda component APIs, and SDKs.",
-  },
-  {
-    title: "Best Practices",
-    imageUrl: "img/home-bp.png",
-    url: "/docs/components/best-practices/best-practices-overview/",
-    description:
-      "Level up your BPMN and DMN skills, including insights from consulting and the community.",
   },
   {
     title: "Reference",
@@ -143,12 +144,10 @@ function Home() {
                   "button button--outline button--secondary button--lg sign-up",
                   styles.getStarted
                 )}
-                to={useBaseUrl(
-                  "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
-                )}
-                title="Sign up for Camunda 8 SaaS"
+                to={useBaseUrl("build-with-camunda")}
+                title="Try Camunda 8 for free"
               >
-                Sign up
+                Try free
               </Link>
             </div>
           </div>
@@ -178,7 +177,7 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/components/agentic-orchestration/")}
+                to={useBaseUrl(search_agentic_url)}
               >
                 Agentic Orchestration
               </Link>
@@ -188,10 +187,10 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/880/whats-new-in-88/"
+                  "docs/reference/announcements-release-notes/890/whats-new-in-89/"
                 )}
               >
-                What's new in 8.8
+                What's new in 8.9
               </Link>
               <Link
                 className={clsx(
@@ -199,10 +198,10 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/880/880-release-notes/"
+                  "docs/reference/announcements-release-notes/890/890-release-notes/"
                 )}
               >
-                8.8 release notes
+                8.9 release notes
               </Link>
               <Link
                 className={clsx(

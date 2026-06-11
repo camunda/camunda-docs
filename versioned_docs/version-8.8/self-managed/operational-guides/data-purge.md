@@ -246,7 +246,15 @@ When the scaling has completed, the `changeId` from the previous response will b
 
 ## Considerations
 
-### Don't perform the purge operation during other cluster operations
+### 1. DryRun
+
+You can set the `dryRun` parameter to `true` to simulate the purge operation without deleting any data. This can be useful to understand the impact of the operation before proceeding.
+
+```sh
+curl -X POST 'http://localhost:9600/actuator/cluster/purge?dryRun=true'
+```
+
+### 2. Don't perform the purge operation during other cluster operations
 
 You cannot perform the purge operation if another cluster operation is already in progress (for example, scaling).
 

@@ -11,17 +11,13 @@ mdx:
 type UnassignMappingRuleFromTenantData = object;
 ```
 
-Defined in: [gen/types.gen.ts:16060](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16060)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:16061](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16061)
 
 ---
 
@@ -31,12 +27,10 @@ Defined in: [gen/types.gen.ts:16061](https://github.com/camunda/orchestration-cl
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:16062](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16062)
-
 #### mappingRuleId
 
 ```ts
-mappingRuleId: string;
+mappingRuleId: MappingRuleId;
 ```
 
 The unique identifier of the mapping rule.
@@ -54,10 +48,8 @@ The unique identifier of the tenant.
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:16072](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16072)
 
 ---
 
@@ -66,5 +58,3 @@ Defined in: [gen/types.gen.ts:16072](https://github.com/camunda/orchestration-cl
 ```ts
 url: "/tenants/{tenantId}/mapping-rules/{mappingRuleId}";
 ```
-
-Defined in: [gen/types.gen.ts:16073](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L16073)

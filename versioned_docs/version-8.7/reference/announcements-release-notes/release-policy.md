@@ -113,11 +113,7 @@ In our managed service, Camunda reserves the right to force update or restart a 
 
 ## Self-Managed
 
-When a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers are notified via email.
-
-:::info
-Non-enterprise customers can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements-release-notes/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
-:::
+You can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements-release-notes/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 
 ### Helm chart
 
@@ -141,6 +137,6 @@ However, certain dependencies used by Camunda 8 may have a shorter maintenance p
 
 **Zeebe**, **Operate**, **Tasklist**, and **Optimize** are Spring Boot applications, and leverage Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
 
-However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, patch releases for these server-side components also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version.
+However, Spring Boot has a shorter maintenance window than Camunda for its open-source software (OSS) offering. [Versions are only supported for 13 months](https://spring.io/projects/spring-boot#support), versus Camunda's 18 months. To circumvent this, patch releases for these server-side components also update Spring Boot minor versions, such that the latest patch release of these components uses a supported Spring version. In cases where a Spring major version's OSS support ends before Camunda's own support window, Camunda may utilize Spring enterprise support artifacts from a vendor determined on a case-by-case basis to ensure continued maintenance and security coverage.
 
 As for libraries and SDKs meant to be included in third-party applications, Camunda follows a best effort policy to balance compatibility and secure Spring-dependent libraries.

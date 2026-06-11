@@ -1,12 +1,23 @@
 ---
 id: overview
-title: "Overview"
+title: "Web Modeler API"
 slug: /apis-tools/web-modeler-api/overview
 sidebar_position: 1
-description: "Web Modeler API is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation."
+description: "Use the Web Modeler API to access your Web Modeler data."
 ---
 
-Web Modeler provides a REST API at `/api/*`.
+:::note DEPRECATED
+Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [Migrate to Camunda Hub REST API v2](../migration-manuals/migrate-from-web-modeler-to-hub-api.md).
+:::
+
+Use the Web Modeler API to access your Web Modeler data.
+
+## About
+
+You can use the Web Modeler REST API to programmatically access your Web Modeler data.
+
+- Web Modeler provides a REST API at `/api/*`.
+- Requests and responses are in JSON notation.
 
 ## Authentication
 

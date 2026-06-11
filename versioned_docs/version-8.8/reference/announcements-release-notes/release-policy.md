@@ -113,11 +113,7 @@ In our managed service, Camunda reserves the right to force update or restart a 
 
 ## Self-Managed
 
-When a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers are notified via email.
-
-:::info
-Non-enterprise customers can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements-release-notes/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
-:::
+You can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements-release-notes/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 
 ### Helm chart
 
@@ -150,7 +146,7 @@ The update policy covers the Spring Framework and Security versions, as well as 
 
 The Camunda Orchestration Cluster leverages Spring Boot to implement core functionality, like application configuration, REST infrastructure (including security), and other production-ready features.
 
-Camunda ensures that **the latest available patch releases make use of a Spring version with an active OSS support window**. Therefore, Orchestration Cluster patch releases **may contain updates to newer Spring Boot minor versions**.
+Camunda ensures that **the latest available patch releases make use of a Spring version within an active support window**. Therefore, Orchestration Cluster patch releases **may contain updates to newer Spring Boot minor versions**. In cases where a Spring major version's OSS support ends before Camunda's own support window, Camunda may utilize Spring enterprise support artifacts from a vendor determined on a case-by-case basis to ensure continued maintenance and security coverage for the Orchestration Cluster components.
 
 #### Client libraries and SDKs
 

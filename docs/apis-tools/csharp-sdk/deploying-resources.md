@@ -2,7 +2,7 @@
 id: deploying-resources
 title: "Deploying Resources"
 sidebar_label: "Deploying Resources"
-sidebar_position: 10
+sidebar_position: 11
 mdx:
   format: md
 ---
@@ -13,9 +13,9 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Deploy BPMN, DMN, or Form files from disk:
+Deploy BPMN, DMN, RPA, Form, or generic resource files from disk:
 
-<!-- snippet:UsingDirective+DeployResources -->
+<!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DeployResources -->
 
 ```csharp
 using Camunda.Orchestration.Sdk;

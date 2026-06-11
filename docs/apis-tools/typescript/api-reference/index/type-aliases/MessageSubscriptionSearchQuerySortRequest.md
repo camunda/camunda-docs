@@ -11,8 +11,6 @@ mdx:
 type MessageSubscriptionSearchQuerySortRequest = object;
 ```
 
-Defined in: [gen/types.gen.ts:4771](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4771)
-
 ## Properties
 
 ### field
@@ -21,17 +19,20 @@ Defined in: [gen/types.gen.ts:4771](https://github.com/camunda/orchestration-clu
 field:
   | "messageSubscriptionKey"
   | "processDefinitionId"
+  | "processDefinitionName"
+  | "processDefinitionVersion"
   | "processInstanceKey"
   | "elementId"
   | "elementInstanceKey"
   | "messageSubscriptionState"
+  | "messageSubscriptionType"
   | "lastUpdatedDate"
   | "messageName"
   | "correlationKey"
-  | "tenantId";
+  | "tenantId"
+  | "toolName"
+  | "inboundConnectorType";
 ```
-
-Defined in: [gen/types.gen.ts:4775](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4775)
 
 The field to sort by.
 
@@ -40,7 +41,5 @@ The field to sort by.
 ### order?
 
 ```ts
-optional order: SortOrderEnum;
+optional order?: SortOrderEnum;
 ```
-
-Defined in: [gen/types.gen.ts:4776](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L4776)

@@ -2,7 +2,7 @@
 id: programmatic-configuration-use-sparingly
 title: Programmatic configuration (use sparingly)
 sidebar_label: Programmatic configuration (use sparingly)
-sidebar_position: 6
+sidebar_position: 7
 mdx:
   format: md
 ---
@@ -10,6 +10,8 @@ mdx:
 # Programmatic configuration (use sparingly)
 
 Only use `configuration={...}` when you must supply or mutate configuration dynamically (e.g. tests, multi-tenant routing, or ephemeral preview environments). Keys mirror their `CAMUNDA_*` environment names.
+
+<!-- snippet-source: examples/readme.py | regions: ReadmeProgrammaticConfig -->
 
 ```python
 from camunda_orchestration_sdk import CamundaClient

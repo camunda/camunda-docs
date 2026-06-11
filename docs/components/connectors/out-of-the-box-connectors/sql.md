@@ -11,7 +11,7 @@ The **SQL connector** is an outbound connector that allows you to connect your B
 
 To use the **SQL connector**, ensure you have an SQL database instance running.
 
-To avoid exposing your sensitive data as plain text, use Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+To avoid exposing your sensitive data as plain text, use Camunda secrets. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ## Create an SQL connector task
 
@@ -135,7 +135,7 @@ Variables need to be provided as a list or an object. We provide three ways to u
 
 ### How do I store secrets for my connector?
 
-Use Camunda secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ### What is the output format of the SQL connector?
 

@@ -48,6 +48,17 @@ To install these components, use one of the supported methods:
 
 Download the required Camunda 8 artifacts from the following sources. Make sure that all artifacts use the same minor version to ensure compatibility.
 
+:::note Artifactory authentication
+Downloading artifacts from [artifactory](https://artifacts.camunda.com) requires authentication. Use your Camunda Enterprise LDAP credentials.
+
+When using `curl`, pass your username with the `-u` flag and let `curl` prompt for the password:
+
+```sh
+curl -u "$CAMUNDA_DISTRO_USER" -fL <url>
+```
+
+:::
+
 Orchestration Cluster:
 
 - File names follow the pattern `camunda-zeebe-x.y.z.(zip|tar.gz)`.
@@ -499,14 +510,22 @@ Consider the following file structure:
 
 ```shell
 /home/user/connectors $
-├── connector-runtime-(application|bundle)-x.y.z(-with-dependencies).jar
-└── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
+└── connector-runtime-(application|bundle)-x.y.z-with-dependencies.jar
 ```
 
-To start connectors bundle with all custom connectors locally, run:
+To start the connector runtime locally, run:
 
 ```shell
-java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
+java -jar /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar
+```
+
+The runtime bundle is packaged as a Spring Boot uber-jar (with its dependencies under `BOOT-INF/lib/`), so it must be launched with `java -jar`. The older flat-classpath invocation (`java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"`) no longer works as of connector runtime 8.8.12
+
+To load additional custom connectors, place their JARs in a separate directory and point Spring Boot's loader at it:
+
+```shell
+java -Dloader.path=/home/user/custom-connectors \
+  -jar /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar
 ```
 
 This starts a Zeebe client, registering the defined connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.

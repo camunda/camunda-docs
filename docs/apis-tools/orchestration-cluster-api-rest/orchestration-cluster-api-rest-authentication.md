@@ -39,7 +39,7 @@ curl http://localhost:8080/v2/topology
 Basic Authentication uses username and password credentials.
 
 **For Camunda 8 Run:**  
-Enable Basic Auth by configuring authentication in your `application.yaml`. See [Camunda 8 Run documentation](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
+Enable Basic Auth by configuring authentication in your `application.yaml`. See [Camunda 8 Run documentation](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#enable-authentication-and-authorization) for details.
 
 **For Helm:**  
 Basic Auth is enabled by default for the Orchestration Cluster API.
@@ -67,7 +67,7 @@ OIDC-based authentication is recommended for production and required for SaaS. O
 
 <TabItem value="saas">
 
-1. [Create client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console.
+1. [Create client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console.
 2. Request an access token using the credentials:
 
 ```shell

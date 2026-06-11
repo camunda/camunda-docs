@@ -11,17 +11,13 @@ mdx:
 type DeleteTenantClusterVariableData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8909](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8909)
-
 ## Properties
 
 ### body?
 
 ```ts
-optional body: never;
+optional body?: never;
 ```
-
-Defined in: [gen/types.gen.ts:8910](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8910)
 
 ---
 
@@ -31,12 +27,10 @@ Defined in: [gen/types.gen.ts:8910](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:8911](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8911)
-
 #### name
 
 ```ts
-name: string;
+name: ClusterVariableName;
 ```
 
 The name of the cluster variable
@@ -54,10 +48,8 @@ The tenant ID
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:8921](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8921)
 
 ---
 
@@ -66,5 +58,3 @@ Defined in: [gen/types.gen.ts:8921](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/cluster-variables/tenants/{tenantId}/{name}";
 ```
-
-Defined in: [gen/types.gen.ts:8922](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8922)

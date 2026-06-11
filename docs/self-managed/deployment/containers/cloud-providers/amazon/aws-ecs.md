@@ -21,10 +21,6 @@ For the exact tool versions used during testing, refer to the repository's [.too
 
 ### Considerations
 
-:::warning Experimental release (8.9.0-alpha3)
-This guide is based on an experimental release. Content and results may change before the final 8.9.0 release.
-:::
-
 :::warning
 Running this guide incurs costs on your AWS account, primarily for ECS and Aurora. Use the AWS [pricing calculator](https://calculator.aws/#/) to estimate costs for your region.
 :::
@@ -37,7 +33,7 @@ If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.ca
   - Cost and performance may differ from a related Kubernetes setup with block storage.
   - The EFS volume is shared among all brokers to support the native ECS Service capabilities.
 - AWS does not support block storage options in combination with ECS Services and Fargate. For a detailed overview, have a look at the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
-- Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a [Zeebe broker](../../../../../components/zeebe/technical-concepts/architecture.md#brokers). Autoscaling may not have effects as the brokers have to be explicitly joined into the [Zeebe cluster](../../../../../components/zeebe/technical-concepts/clustering.md) or when removed result in partitions or data becoming inaccessible.
+- Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a [Zeebe Broker](../../../../../components/zeebe/technical-concepts/architecture.md#brokers). Autoscaling may not have effects as the brokers have to be explicitly joined into the [Zeebe cluster](../../../../../components/zeebe/technical-concepts/clustering.md) or when removed result in partitions or data becoming inaccessible.
 - A node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, instead of relying on a statically-configured node-id.
 - This guide focuses on Aurora PostgreSQL for the secondary datastorage as it is a newly supported offering by Camunda 8 and potentially more familiar for customers.
   - You may still use Elasticsearch or OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
@@ -220,7 +216,7 @@ If not otherwise indicated, the `.tf` file is corresponding to the [root workspa
 - ECS Service and task definition
   - Defines the base setup for the Orchestration Cluster, including the node ID provider, EFS configuration, and initial cluster endpoints.
   - Automatically sets the Zeebe cluster size based on the task count.
-  - Resolves initial contact points using DNS with multiple A records instead of requiring explicit Zeebe broker addresses.
+  - Resolves initial contact points using DNS with multiple A records instead of requiring explicit Zeebe Broker addresses.
 
 - Task-specific IAM role
   - Grants access to AWS services required by this component, such as the S3 bucket and Aurora PostgreSQL.
@@ -253,7 +249,7 @@ The base terraform documentation for this module can be found [alongside the rep
 `camunda.tf` contains the module invocations with an example base configuration for the Orchestration Cluster and Connectors:
 
 - Aurora PostgreSQL configuration with the [AWS JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper) that comes as part of the Camunda distribution
-- Basic authentication Identity setup
+- Basic authentication Admin setup
   - Admin user with random password
   - Connectors user with random password configured and pre-configured for Connectors to consume to connect to the Orchestration Cluster
 
@@ -512,7 +508,7 @@ Without these additions, information is transmitted in plaintext and is therefor
 1. Navigate to the Terraform folder:
 
 ```sh
-cd camunda-deployment-references-main/aws/containers/ecs-single-region-fargate/terraform
+cd terraform
 ```
 
 2. Retrieve the Application Load Balancer output:

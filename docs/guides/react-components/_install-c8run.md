@@ -1,13 +1,6 @@
 ### Prerequisites
 
-- OpenJDK 21+
 - [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
-
-:::note
-After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
-
-If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
-:::
 
 ### Install and start Camunda 8 Run
 
@@ -20,11 +13,12 @@ import {C8Run} from "@site/src/components/CamundaDistributions";
 When successful, a new Operate window automatically opens.
 
 :::note
-If Camunda 8 Run fails to start, run the [shutdown script](/self-managed/quickstart/developer-quickstart/c8run.md#shut-down-camunda-8-run) to end the current processes, then run the start script again.
+If Camunda 8 Run fails to start, run the [shutdown script](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#shut-down-camunda-8-run) to end the current processes, then run the start script again.
 :::
 
 :::note
-Starting with 8.9.0-alpha3, Camunda 8 Run starts with H2 as the default secondary storage. Elasticsearch is still bundled and supported but must be explicitly enabled in `c8run/configuration/application.yaml` if you want Camunda 8 Run to manage Elasticsearch.
+Starting with 8.10.0-alpha2, Camunda 8 Run no longer requires Java to start.
+Camunda 8 Run starts with H2 as the default secondary storage. Elasticsearch is still supported but must be explicitly enabled in `c8run/configuration/application.yaml`.
 :::
 
-For more information and local configuration options, see the [Camunda 8 Run installation guide](/self-managed/quickstart/developer-quickstart/c8run.md).
+For more information and local configuration options, see the [Camunda 8 Run installation guide](/self-managed/quickstart/developer-quickstart/c8run/install-start.md).

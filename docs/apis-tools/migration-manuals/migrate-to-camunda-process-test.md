@@ -2,13 +2,14 @@
 id: migrate-to-camunda-process-test
 title: Migrate to Camunda Process Test
 sidebar_label: "Camunda Process Test"
-description: "Learn how to migrate from Zeebe Process Test to Camunda Process Test"
+description: "Learn how to migrate from Zeebe Process Test to Camunda Process Test."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import PageDescription from '@site/src/components/PageDescription';
 
-Learn how to migrate from Zeebe Process Test to Camunda Process Test
+<PageDescription />
 
 :::note Have you already migrated?
 You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
@@ -18,8 +19,8 @@ You do not need to perform this migration again if you already did this when upg
 
 [Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications.
 
-- It is the successor to [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md) (ZPT).
-- Starting with version **8.8**, ZPT is deprecated and will be removed in version **8.10**. See [release announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/).
+- It is the successor to Zeebe Process Test (ZPT).
+- Starting with version **8.8**, ZPT is deprecated and was removed in version **8.10**. See [release announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/).
 
 This guide walks you through migrating your existing test cases from ZPT to CPT step-by-step.
 
@@ -112,7 +113,7 @@ In this mode, CPT connects to a remote runtime, such as a local Camunda 8 Run ru
 Prepare your remote runtime:
 
 1. **Install Camunda 8 Run**  
-   Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run) on your machine.
+   Follow the [installation guide](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#install-and-start-camunda-8-run) on your machine.
 
 2. **Enable the management clock endpoint**  
    See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1):
@@ -589,9 +590,10 @@ Congratulations! Your process tests should now be fully migrated to CPT and runn
 
 When you’re ready, take the next steps to continue your journey:
 
-- Explore new [assertions](/apis-tools/testing/assertions.md)
-- Simplify your tests with new [utilities](/apis-tools/testing/utilities.md)
-- Generate [process test coverage reports](/apis-tools/testing/getting-started.md#process-test-coverage)
+- Explore new [assertions](/apis-tools/testing/assertions.md).
+- Simplify your tests with new [utilities](/apis-tools/testing/utilities.md).
+- Generate [process test coverage reports](/apis-tools/testing/getting-started.md#process-test-coverage).
+- Refer to the [API documentation](https://javadoc.io/doc/io.camunda/camunda-process-test-java/latest/io/camunda/process/test/api/package-summary.html) for details.
 
 ## Troubleshooting
 

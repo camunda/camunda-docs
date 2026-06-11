@@ -11,8 +11,6 @@ mdx:
 type UpdateGlobalClusterVariableData = object;
 ```
 
-Defined in: [gen/types.gen.ts:8713](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8713)
-
 ## Properties
 
 ### body
@@ -20,8 +18,6 @@ Defined in: [gen/types.gen.ts:8713](https://github.com/camunda/orchestration-clu
 ```ts
 body: UpdateClusterVariableRequest;
 ```
-
-Defined in: [gen/types.gen.ts:8714](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8714)
 
 ---
 
@@ -31,12 +27,10 @@ Defined in: [gen/types.gen.ts:8714](https://github.com/camunda/orchestration-clu
 path: object;
 ```
 
-Defined in: [gen/types.gen.ts:8715](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8715)
-
 #### name
 
 ```ts
-name: string;
+name: ClusterVariableName;
 ```
 
 The name of the cluster variable
@@ -46,10 +40,8 @@ The name of the cluster variable
 ### query?
 
 ```ts
-optional query: never;
+optional query?: never;
 ```
-
-Defined in: [gen/types.gen.ts:8721](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8721)
 
 ---
 
@@ -58,5 +50,3 @@ Defined in: [gen/types.gen.ts:8721](https://github.com/camunda/orchestration-clu
 ```ts
 url: "/cluster-variables/global/{name}";
 ```
-
-Defined in: [gen/types.gen.ts:8722](https://github.com/camunda/orchestration-cluster-api-js/blob/67d45ce4f287cc3401854a637606d7e989daefac/src/gen/types.gen.ts#L8722)

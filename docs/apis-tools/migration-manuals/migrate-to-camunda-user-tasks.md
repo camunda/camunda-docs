@@ -7,21 +7,24 @@ description: "Learn how to migrate job worker-based user tasks to Camunda user t
 
 import DocCardList from '@theme/DocCardList';
 import FormViewer from "@site/src/mdx/FormViewer";
-import YesItem from "../tasklist-api-rest/assets/react-components/YesItem";
-import NoItem from "../tasklist-api-rest/assets/react-components/NoItem";
-import TableTextSmall from "../tasklist-api-rest/assets/react-components/TableTextSmall";
-import userTaskMigrationDecisionHelperForm from "../tasklist-api-rest/assets/forms/userTaskMigrationDecisionHelperForm.js";
-import "../tasklist-api-rest/assets/css/condensedTable.module.css";
-import styles from "../tasklist-api-rest/assets/css/cleanImages.module.css";
-import CamundaUserTaskSelectionImg from '../tasklist-api-rest/assets/img/camunda-user-task-selection.png';
+import YesItem from "./assets/camunda-user-tasks/react-components/YesItem";
+import NoItem from "./assets/camunda-user-tasks/react-components/NoItem";
+import TableTextSmall from "./assets/camunda-user-tasks/react-components/TableTextSmall";
+import userTaskMigrationDecisionHelperForm from "./assets/camunda-user-tasks/forms/userTaskMigrationDecisionHelperForm.js";
+import "./assets/camunda-user-tasks/css/condensedTable.module.css";
+import styles from "./assets/camunda-user-tasks/css/cleanImages.module.css";
+import CamundaUserTaskSelectionImg from './assets/camunda-user-tasks/img/camunda-user-task-selection.png';
+import PageDescription from '@site/src/components/PageDescription';
 
-Camunda 8.7 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task ([formerly named Zeebe user task](/reference/announcements-release-notes/870/870-release-notes.md#zeebe-user-tasks-modeling-migration-support-saasself-managedmodeler)).
+<PageDescription />
 
 :::note Have you already migrated?
 You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
 :::
 
 ## About
+
+Camunda 8.7 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task ([formerly named Zeebe user task](/reference/announcements-release-notes/870/870-release-notes.md#zeebe-user-tasks-modeling-migration-support-saasself-managedmodeler)).
 
 Camunda user tasks have several benefits compared to Job worked-based user tasks, including:
 
@@ -161,7 +164,7 @@ To make an informed decision, you should understand the differences between both
 
 ## Change the implementation type of user tasks
 
-We recommend you migrate process-by-process, allowing you to thoroughly test the processes in your test environments or via your [CI/CD](/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd.md). To do this, take the following steps:
+We recommend you migrate process-by-process, allowing you to thoroughly test the processes in your test environments or via your [CI/CD](/components/hub/workspace/modeler/integrate-modeler-in-ci-cd.md). To do this, take the following steps:
 
 1. Open a diagram you want to migrate.
 2. Click on a user task.
@@ -241,9 +244,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Query user tasks</th>
         <td>
-            <a href="../../tasklist-api-rest/specifications/search-tasks">
-                <code>POST /tasks/search</code>
-            </a>
+            <code>POST /tasks/search</code>
         </td>
         <td>
             <a href="../../orchestration-cluster-api-rest/specifications/search-user-tasks">
@@ -254,9 +255,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Get user task</th>
         <td>
-            <a href="../../tasklist-api-rest/specifications/get-task-by-id/">
-                <code>GET /tasks/:taskId</code>
-            </a>
+            <code>GET /tasks/:taskId</code>
         </td>
         <td>
             <a href="../../orchestration-cluster-api-rest/specifications/get-user-task">
@@ -267,12 +266,10 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
         <td>
-            <a href="../../tasklist-api-rest/specifications/get-variable-by-id/">
-                <code>GET /variables/:variableId</code>
-            </a>
+            <code>GET /variables/:variableId</code>
         </td>
         <td>
-            <a href="../../tasklist-api-rest/specifications/search-task-variables">
+            <a href="../../orchestration-cluster-api-rest/specifications/search-user-task-variables">
                 <code>POST /tasks/:taskId/variables/search</code>
             </a>
         </td>
@@ -280,9 +277,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Get task form</th>
         <td>
-            <a href="../../tasklist-api-rest/specifications/get-form/">
-                <code>GET /forms/:formId</code>
-            </a>
+            <code>GET /forms/:formId</code>
         </td>
         <td>
             <a href="../../orchestration-cluster-api-rest/specifications/get-user-task-form">
@@ -293,9 +288,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Assign a task</th>
         <td>
-            <a href="../../tasklist-api-rest/specifications/assign-task/">
-                <code>PATCH /tasks/:taskId/assign</code>
-            </a>
+            <code>PATCH /tasks/:taskId/assign</code>
         </td>
         <td>
             <a href="../../orchestration-cluster-api-rest/specifications/assign-user-task">
@@ -306,9 +299,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Unassign a task</th>
         <td>
-            <a href="../../tasklist-api-rest/specifications/unassign-task/">
-                <code>PATCH /tasks/:taskId/unassign</code>
-            </a>
+            <code>PATCH /tasks/:taskId/unassign</code>
         </td>
         <td>
             <a href="../../orchestration-cluster-api-rest/specifications/unassign-user-task">
@@ -319,9 +310,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Complete task</th>
         <td>
-            <a href="../../tasklist-api-rest/specifications/complete-task/">
-                <code>PATCH /tasks/:taskId/complete</code>
-            </a>
+            <code>PATCH /tasks/:taskId/complete</code>
         </td>
         <td>
             <a href="../../orchestration-cluster-api-rest/specifications/complete-user-task">
@@ -341,9 +330,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Save and retrieve draft variables</th>
         <td>
-            <a href="../../tasklist-api-rest/specifications/save-draft-task-variables/">
-                <code>POST /tasks/:taskId/variables</code>
-            </a>
+            <code>POST /tasks/:taskId/variables</code>
         </td>
         <td style={{color: "gray"}}>-</td>
     </tr>
@@ -362,9 +349,9 @@ Refer to the dedicated sections and API explorers to learn details about the API
 <DocCardList items={[
 {
 type:"link",
-href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
-label: "Tasklist API (REST)",
-docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
+href:"/docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/",
+label: "Tasklist API migration guide",
+docId:"apis-tools/migration-manuals/migrate-to-camunda-api"
 },
 {
 type:"link",

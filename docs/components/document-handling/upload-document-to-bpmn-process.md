@@ -13,11 +13,11 @@ When [building a form](/components/modeler/forms/utilizing-forms.md) for a proce
 
 In the Filepicker configuration, you can specify whether users can upload a single file or [multiple files](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties) and define the list of [supported file formats](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers).
 
-Although this example focuses on [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md), you can also build a form for document upload in [Desktop Modeler](/components/modeler/desktop-modeler/index.md). The Filepicker form component is available in both environments.
+Although this example focuses on [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md), you can also build a form for document upload in [Desktop Modeler](/components/modeler/desktop-modeler/index.md). The Filepicker form component is available in both environments.
 
 ![Form with Filepicker](./img/form-with-file-picker.png)
 
-A designed form can be [linked](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md) to a [user task](#upload-a-document-from-a-user-task-in-tasklist) or used to [start a process](#upload-a-document-to-start-a-process).
+A designed form can be [linked](/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking.md) to a [user task](#upload-a-document-from-a-user-task-in-tasklist) or used to [start a process](#upload-a-document-to-start-a-process).
 Documents uploaded with the form can then be [referenced](#get-reference-to-an-uploaded-document) later in the process.
 
 The Filepicker always returns an array with metadata for a single or multiple files, for example:
@@ -47,8 +47,7 @@ You can configure a form with the Filepicker for a start event of a BPMN process
 
 :::note
 
-Only logged-in users can upload files.
-[Publicly accessible processes](/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes.md) with a start form do not support file upload using the Filepicker.
+Only logged-in users can upload files when starting a process from Tasklist.
 
 :::
 

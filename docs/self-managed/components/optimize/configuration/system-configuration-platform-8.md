@@ -13,12 +13,12 @@ Optimize imports process, variable, incident, and user task data from the Zeebe 
 
 The settings below control how Optimize connects to and paginates this exporter data.
 
-| YAML path               | Default value | Description                                                                                                                                                           |
-| ----------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| zeebe.enabled           | false         | Toggles whether Optimize should attempt to import data from the connected Zeebe instance.                                                                             |
-| zeebe.name              | zeebe-record  | The index prefix used for exported Zeebe records. This must match the `index.prefix` configured in the Elasticsearch or OpenSearch exporter that Optimize reads from. |
-| zeebe.partitionCount    | 1             | The number of partitions configured for the Zeebe record source.                                                                                                      |
-| zeebe.maxImportPageSize | 200           | The max page size for importing Zeebe data.                                                                                                                           |
+| YAML path               | Default value | Description                                                                                                                                                                                                                                                       |
+| ----------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| zeebe.enabled           | false         | Toggles whether Optimize should attempt to import data from the connected Zeebe instance.                                                                                                                                                                         |
+| zeebe.name              | zeebe-record  | The index prefix used for exported Zeebe records. This must match the `index.prefix` configured in the Elasticsearch or OpenSearch exporter that Optimize reads from.                                                                                             |
+| zeebe.partitionCount    | 1             | The number of partitions configured for the Zeebe record source.                                                                                                                                                                                                  |
+| zeebe.maxImportPageSize | 200           | The max page size for importing Zeebe data. Increasing it can help Optimize catch up faster when imports lag, but it uses more memory per fetch; decreasing it reduces memory use and per-query load on Elasticsearch/OpenSearch, but it can increase import lag. |
 
 ### Exporter-side filters and Optimize data completeness
 
@@ -28,6 +28,7 @@ Starting from Camunda 8.9, the Elasticsearch and OpenSearch exporters provide op
 
 - Variable names: Inclusion and exclusion lists with match modes such as exact, starts with, and ends with.
 - Variable value types: Inclusion and exclusion lists for inferred types such as `String`, `Number`, `Boolean`, `Object` and `Null`.
+- Variable scope: Disable export of all local-scope variables (`export-local-variables-enabled: false`) and apply separate name/type inclusion and exclusion lists for root vs. local variables.
 - BPMN process IDs: Inclusion and exclusion lists by `bpmnProcessId` that drop all records tied to selected processes.
 - Optimize mode: Keeps only the record value types and intents required by Optimize and drops other record types not used by Optimize.
 

@@ -21,7 +21,7 @@ This page guides you through the manual installation of Camunda 8 on a local mac
   - Choose a supported secondary storage backend for your installation path.
   - **Document-store backend (Elasticsearch or OpenSearch)**: See [supported environments](/reference/supported-environments.md).
     - For deployment options, see the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/deploy).
-  - **RDBMS**: See [RDBMS production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) and [manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) for supported databases and setup details.
+  - **RDBMS**: See [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture) for backend trade-offs, and [manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) for supported databases and setup details.
 
 For suggested minimum hardware requirements and networking, see the [manual reference architecture requirements](/self-managed/reference-architecture/manual.md#requirements).
 
@@ -50,6 +50,17 @@ To install these components, use one of the supported methods:
 
 Download the required Camunda 8 artifacts from the following sources. Make sure that all artifacts use the same minor version to ensure compatibility.
 
+:::note Artifactory authentication
+Downloading artifacts from [artifactory](https://artifacts.camunda.com) requires authentication. Use your Camunda Enterprise LDAP credentials.
+
+When using `curl`, pass your username with the `-u` flag and let `curl` prompt for the password:
+
+```sh
+curl -u "$CAMUNDA_DISTRO_USER" -fL <url>
+```
+
+:::
+
 Orchestration Cluster:
 
 - File names follow the pattern `camunda-zeebe-x.y.z.(zip|tar.gz)`.
@@ -60,14 +71,13 @@ Orchestration Cluster:
 Connectors:
 
 - Bundle (includes pre-bundled connectors from Camunda)
+
   - File names follow the pattern `connector-runtime-bundle-x.y.z-with-dependencies.jar`.
-  - [Maven Central](https://central.sonatype.com/artifact/io.camunda.connector/connector-runtime-bundle/versions) - Select a version, then click **Browse** to view the `.jar`.
-  - [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/connector/connector-runtime-bundle/) - Select a version, then browse the files to download.
+  - Released bundle artifacts aren't available in Maven Central or Artifactory.
 
 - Runtime-only
   - File names follow the pattern `connector-runtime-application-x.y.z.jar`.
-  - [Maven Central](https://central.sonatype.com/artifact/io.camunda.connector/connector-runtime-application/versions) - Select a version, then click **Browse** to view the `.jar`.
-  - [Artifactory](https://artifacts.camunda.com/ui/native/zeebe/io/camunda/connector/connector-runtime-application/) - Select a version, then browse the files to download.
+  - Released runtime-only artifacts aren't available in Maven Central or Artifactory.
 
 :::note
 
@@ -118,7 +128,7 @@ Set the secondary storage type value to `elasticsearch` or `opensearch` for this
 If your security settings require authentication for the secondary storage, configure both `username` and `password`.
 Omit these fields if authentication is not required.
 
-The following configuration defines how the Orchestration Cluster connects to document-store secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Identity, and Camunda Exporter.
+The following configuration defines how the Orchestration Cluster connects to document-store secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Admin, and Camunda Exporter.
 
 For detailed configuration options, see the [Orchestration Cluster configuration](/self-managed/components/orchestration-cluster/core-settings/overview.md)
 
@@ -170,7 +180,7 @@ This example shows a 3-broker cluster.
 - Assign a unique `node-id` to each broker, starting from `0` and incrementing up to the total number of brokers (`0`, `1`, `2`).
 - Use the same `initial-contact-points` on all brokers.
 
-For more details, see the [Zeebe broker cluster configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokercluster).
+For more details, see the [Zeebe Broker cluster configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokercluster).
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
@@ -278,7 +288,7 @@ Once you've downloaded the Orchestration Cluster distribution, extract it into a
 3. Update the configuration in `config/application.yaml`, or export the environment variables.
 4. Navigate to `bin` folder.
 5. Run `camunda.sh` (Linux/macOS) or `camunda.bat` (Windows).
-6. Open [http://localhost:8080](http://localhost:8080). On first access, you’ll be asked to create an admin user unless [Identity](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) is configured with OIDC or a similar option.
+6. Open [http://localhost:8080](http://localhost:8080). On first access, you'll be asked to create an admin user unless [Admin](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) is configured with OIDC or a similar option.
 
 :::note
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Web Modeler is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
@@ -499,14 +509,22 @@ Consider the following file structure:
 
 ```shell
 /home/user/connectors $
-├── connector-runtime-(application|bundle)-x.y.z(-with-dependencies).jar
-└── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
+└── connector-runtime-(application|bundle)-x.y.z-with-dependencies.jar
 ```
 
-To start connectors bundle with all custom connectors locally, run:
+To start the connector runtime locally, run:
 
 ```shell
-java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
+java -jar /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar
+```
+
+The runtime bundle is packaged as a Spring Boot uber-jar (with its dependencies under `BOOT-INF/lib/`), so it must be launched with `java -jar`. The older flat-classpath invocation (`java -cp "/home/user/connectors/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"`) no longer works as of connector runtime 8.9.4.
+
+To load additional custom connectors, place their JARs in a separate directory and point Spring Boot's loader at it:
+
+```shell
+java -Dloader.path=/home/user/custom-connectors \
+  -jar /home/user/connectors/connector-runtime-bundle-x.y.z-with-dependencies.jar
 ```
 
 This starts a Zeebe client, registering the defined connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.

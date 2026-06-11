@@ -43,11 +43,14 @@ The exporter can be enabled by configuring it with the `classpath` in the broker
 For example:
 
 ```yaml
-exporters:
-  elasticsearch:
-    className: io.camunda.zeebe.exporter.ElasticsearchExporter
-    args:
-    # Refer to the table below for the available args options
+zeebe:
+  broker:
+    ...
+    exporters:
+      elasticsearch:
+        className: io.camunda.zeebe.exporter.ElasticsearchExporter
+        args:
+        # Refer to the table below for the available args options
 ```
 
 The exporter can be configured by providing `args`. The table below explains all the different
@@ -143,14 +146,23 @@ A retention policy can be set up to delete old data.
 When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified `minimumAge`.
 All index templates created by this exporter apply the created ILM Policy.
 
-| Option     | Description                                                                  | Default                         |
-| ---------- | ---------------------------------------------------------------------------- | ------------------------------- |
-| enabled    | If `true` the ILM Policy is created and applied to the index templates       | `false`                         |
-| minimumAge | Specifies how old the data must be, before the data is deleted as a duration | `30d`                           |
-| policyName | The name of the created and applied ILM policy                               | `zeebe-record-retention-policy` |
+| Option       | Description                                                                                                                                                                                  | Default                         |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| enabled      | If `true` the ILM Policy is created and applied to the index templates                                                                                                                       | `false`                         |
+| minimumAge   | Specifies how old the data must be, before the data is deleted as a duration                                                                                                                 | `30d`                           |
+| policyName   | The name of the created and applied ILM policy                                                                                                                                               | `zeebe-record-retention-policy` |
+| managePolicy | If `true` the exporter creates, updates, and removes the ILM policy on its own. Set to `false` to leave an externally managed policy untouched (the exporter neither creates nor removes it) | `true`                          |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds `nanos`.
+:::
+
+:::note Externally managed policy
+
+When `managePolicy: false`, the exporter still attaches the policy named by `policyName` (default `zeebe-record-retention-policy`) to the indices it creates. The policy must already exist in your Elasticsearch cluster under that name when the exporter starts.
+
+If the policy does not exist, Elasticsearch silently accepts the dangling `index.lifecycle.name` setting. The exporter starts successfully, but ILM logs `policy_not_found` warnings on each cycle and skips retention actions until the policy is created. Once you create the policy under the configured name, ILM picks it up retroactively on its next cycle.
+
 :::
 
 </TabItem>
@@ -173,75 +185,78 @@ Here is an example configuration of the exporter:
 
 ```yaml
 ---
-exporters:
-  elasticsearch:
-    # Elasticsearch Exporter ----------
-    # An example configuration for the elasticsearch exporter:
-    #
-    # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_..."
-    #
+zeebe:
+  broker:
+    ...
+    exporters:
+      elasticsearch:
+        # Elasticsearch Exporter ----------
+        # An example configuration for the elasticsearch exporter:
+        #
+        # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_..."
+        #
 
-    className: io.camunda.zeebe.exporter.ElasticsearchExporter
+        className: io.camunda.zeebe.exporter.ElasticsearchExporter
 
-    args:
-      # A comma separated list of URLs pointing to the Elasticsearch instances you wish to export to.
-      # For example, if you want to connect to multiple nodes for redundancy:
-      # url: http://localhost:9200,http://localhost:9201
-      url: http://localhost:9200
+        args:
+          # A comma separated list of URLs pointing to the Elasticsearch instances you wish to export to.
+          # For example, if you want to connect to multiple nodes for redundancy:
+          # url: http://localhost:9200,http://localhost:9201
+          url: http://localhost:9200
 
-      bulk:
-        delay: 5
-        size: 1000
-        memoryLimit: 10485760
+          bulk:
+            delay: 5
+            size: 1000
+            memoryLimit: 10485760
 
-      retention:
-        enabled: true
-        minimumAge: 30d
-        policyName: zeebe-records-retention-policy
+          retention:
+            enabled: true
+            minimumAge: 30d
+            policyName: zeebe-records-retention-policy
 
-      authentication:
-        username: elastic
-        password: changeme
+          authentication:
+            username: elastic
+            password: changeme
 
-      index:
-        prefix: zeebe-record
-        createTemplate: true
+          index:
+            prefix: zeebe-record
+            createTemplate: true
 
-        indexSuffixDatePattern: "yyyy-MM-dd"
+            indexSuffixDatePattern: "yyyy-MM-dd"
 
-        command: false
-        event: true
-        rejection: false
+            command: false
+            event: true
+            rejection: false
 
-        commandDistribution: true
-        decisionRequirements: true
-        decision: true
-        decisionEvaluation: true
-        deployment: true
-        deploymentDistribution: true
-        error: true
-        escalation: true
-        form: true
-        incident: true
-        job: true
-        jobBatch: false
-        message: true
-        messageStartSubscription: true
-        messageSubscription: true
-        process: true
-        processEvent: false
-        processInstance: true
-        processInstanceCreation: true
-        processInstanceMigration: true
-        processInstanceModification: true
-        processMessageSubscription: true
-        resourceDeletion: true
-        signal: true
-        signalSubscription: true
-        timer: true
-        userTask: true
-        variable: true
-        variableDocument: true
+            commandDistribution: true
+            decisionRequirements: true
+            decision: true
+            decisionEvaluation: true
+            deployment: true
+            deploymentDistribution: true
+            error: true
+            escalation: true
+            form: true
+            incident: true
+            job: true
+            jobBatch: false
+            message: true
+            messageStartSubscription: true
+            messageSubscription: true
+            process: true
+            processEvent: false
+            processInstance: true
+            processInstanceCreation: true
+            processInstanceMigration: true
+            processInstanceModification: true
+            processMessageSubscription: true
+            resourceDeletion: true
+            signal: true
+            signalSubscription: true
+            timer: true
+            userTask: true
+            variable: true
+            variableDocument: true
 ```
 
 ## Self-signed certificates

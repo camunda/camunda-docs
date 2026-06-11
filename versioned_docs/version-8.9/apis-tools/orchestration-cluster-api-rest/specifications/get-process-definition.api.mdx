@@ -1,0 +1,416 @@
+---
+id: get-process-definition
+title: "Get process definition"
+sidebar_label: "Get process definition"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.9/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get process definition"} <MarkerAddedInVersion version="8.8" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/process-definitions/{processDefinitionKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Returns process definition as JSON.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processDefinitionKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the process definition, which acts as a unique identifier for this process definition.\n",
+      schema: {
+        type: "string",
+        format: "string<ProcessDefinitionKey>",
+        example: "2251799813686749",
+        description: "System-generated key for a deployed process definition.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The process definition is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: [
+              "processDefinitionKey",
+              "name",
+              "resourceName",
+              "version",
+              "versionTag",
+              "processDefinitionId",
+              "tenantId",
+              "hasStartForm",
+            ],
+            properties: {
+              name: {
+                description: "Name of this process definition.",
+                nullable: true,
+                type: "string",
+              },
+              resourceName: {
+                description: "Resource name for this process definition.",
+                type: "string",
+              },
+              version: {
+                description: "Version of this process definition.",
+                type: "integer",
+                format: "int32",
+              },
+              versionTag: {
+                description: "Version tag of this process definition.",
+                nullable: true,
+                type: "string",
+              },
+              processDefinitionId: {
+                allOf: [
+                  {
+                    description:
+                      "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                    format: "ProcessDefinitionId",
+                    type: "string",
+                    example: "new-account-onboarding-workflow",
+                    title: "ProcessDefinitionId",
+                  },
+                ],
+                description:
+                  "Process definition ID of this process definition.",
+              },
+              tenantId: {
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+                description: "Tenant ID of this process definition.",
+              },
+              processDefinitionKey: {
+                allOf: [
+                  {
+                    description:
+                      "System-generated key for a deployed process definition.",
+                    format: "ProcessDefinitionKey",
+                    example: "2251799813686749",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ProcessDefinitionKey",
+                  },
+                ],
+                description: "The key for this process definition.",
+              },
+              hasStartForm: {
+                description:
+                  "Indicates whether the start event of the process has an associated Form Key.",
+                type: "boolean",
+              },
+            },
+            title: "ProcessDefinitionResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The process definition with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
