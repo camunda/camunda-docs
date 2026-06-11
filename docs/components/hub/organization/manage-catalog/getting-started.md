@@ -86,7 +86,7 @@ It handles payment initiation, status checks, and refund processing.
 
 ### Usage
 
-Apply this template to a service task to configure a payment operation.
+Apply this template to a Service task to configure a payment operation.
 ```
 
 The Markdown content below the frontmatter is displayed as the asset description when browsing the Catalog in Hub.
