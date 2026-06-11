@@ -112,7 +112,7 @@ These improvements also make a user-facing **active-active** setup possible. Sta
 
 The dual-region architecture consists of two regions in a Kubernetes-based installation. Each region has a Kubernetes cluster with fully operational Camunda 8 components.
 
-<img src={DualRegionImg} alt="Camunda dual-region architecture" title="Camunda dual-region architecture" class="img-noborder img-800"/>
+<img src={DualRegionImg} alt="Camunda dual-region architecture" title="Camunda dual-region architecture" class="img-noborder img-900"/>
 
 - With v2 APIs (default in 8.9+), both regions serve user traffic simultaneously.
 - With v1 APIs, **Region 0** acts as the primary region serving user traffic and **Region 1** acts as the secondary region, fully operational but not serving user traffic.
