@@ -825,7 +825,7 @@ module.exports = {
                 },
                 {
                   type: "doc",
-                  label: "Recover deleted files",
+                  label: "Recover deleted resources",
                   id: "components/hub/workspace/manage-projects/recently-deleted",
                 },
               ],

@@ -11,7 +11,7 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Request and response model classes (560 types).
+Request and response model classes (602 types).
 
 ## Quick Reference
 
@@ -20,6 +20,9 @@ Request and response model classes (560 types).
 - [AdHocSubProcessActivateActivitiesInstruction](#adhocsubprocessactivateactivitiesinstruction) — AdHocSubProcessActivateActivitiesInstruction
 - [AdHocSubProcessActivateActivityReference](#adhocsubprocessactivateactivityreference) — AdHocSubProcessActivateActivityReference
 - [AdvancedActorTypeFilter](#advancedactortypefilter) — Advanced AuditLogActorTypeEnum filter
+- [AdvancedAgentHistoryItemKeyFilter](#advancedagenthistoryitemkeyfilter) — Advanced AgentHistoryItemKey filter
+- [AdvancedAgentInstanceHistoryCommitStatusFilter](#advancedagentinstancehistorycommitstatusfilter) — Advanced AgentInstanceHistoryCommitStatusEnum filter
+- [AdvancedAgentInstanceHistoryRoleFilter](#advancedagentinstancehistoryrolefilter) — Advanced AgentInstanceHistoryRoleEnum filter
 - [AdvancedAgentInstanceKeyFilter](#advancedagentinstancekeyfilter) — Advanced AgentInstanceKey filter
 - [AdvancedAgentInstanceStatusFilter](#advancedagentinstancestatusfilter) — Advanced AgentInstanceStatusEnum filter
 - [AdvancedAuditLogEntityKeyFilter](#advancedauditlogentitykeyfilter) — Advanced entityKey filter
@@ -64,21 +67,42 @@ Request and response model classes (560 types).
 - [AdvancedStringFilter](#advancedstringfilter) — Advanced string filter
 - [AdvancedUserTaskStateFilter](#advancedusertaskstatefilter) — Advanced UserTaskStateEnum filter
 - [AdvancedVariableKeyFilter](#advancedvariablekeyfilter) — Advanced VariableKey filter
+- [AdvancedWaitStateElementTypeFilter](#advancedwaitstateelementtypefilter) — Advanced element type filter
+- [AdvancedWaitStateTypeFilter](#advancedwaitstatetypefilter) — Advanced wait state type filter
+- [AgentHistoryItemKeyExactMatch](#agenthistoryitemkeyexactmatch) — Matches the value exactly
+- [AgentHistoryItemKeyFilterProperty](#agenthistoryitemkeyfilterproperty) — AgentHistoryItemKey property with full advanced search capabilities
 - [AgentInstanceCreationRequest](#agentinstancecreationrequest) — Request to create a new agent instance
 - [AgentInstanceCreationResult](#agentinstancecreationresult) — Response returned after successfully creating an agent instance
 - [AgentInstanceDefinition](#agentinstancedefinition) — The static definition of an agent instance, set once at creation
+- [AgentInstanceDocumentContent](#agentinstancedocumentcontent) — A Camunda Document Store reference content block
 - [AgentInstanceFilter](#agentinstancefilter) — Agent instance search filter
+- [AgentInstanceHistoryCommitStatusExactMatch](#agentinstancehistorycommitstatusexactmatch) — Matches the value exactly
+- [AgentInstanceHistoryCommitStatusFilterProperty](#agentinstancehistorycommitstatusfilterproperty) — AgentInstanceHistoryCommitStatusEnum property with full advanced search capabilities
+- [AgentInstanceHistoryFilter](#agentinstancehistoryfilter) — Agent instance history item search filter
+- [AgentInstanceHistoryItemCreationResult](#agentinstancehistoryitemcreationresult) — Response returned after successfully appending a history item
+- [AgentInstanceHistoryItemMetrics](#agentinstancehistoryitemmetrics) — Per-call token and latency metrics for an ASSISTANT history item
+- [AgentInstanceHistoryItemRequest](#agentinstancehistoryitemrequest) — Request to append a single history item to an agent instance's conversation history
+- [AgentInstanceHistoryItemResult](#agentinstancehistoryitemresult) — A single conversation history item belonging to an agent instance
+- [AgentInstanceHistoryRoleExactMatch](#agentinstancehistoryroleexactmatch) — Matches the value exactly
+- [AgentInstanceHistoryRoleFilterProperty](#agentinstancehistoryrolefilterproperty) — AgentInstanceHistoryRoleEnum property with full advanced search capabilities
+- [AgentInstanceHistorySearchQuery](#agentinstancehistorysearchquery) — Agent instance history search request
+- [AgentInstanceHistorySearchQueryResult](#agentinstancehistorysearchqueryresult) — Agent instance history search response
+- [AgentInstanceHistorySearchQuerySortRequest](#agentinstancehistorysearchquerysortrequest) — AgentInstanceHistorySearchQuerySortRequest
 - [AgentInstanceKeyExactMatch](#agentinstancekeyexactmatch) — Matches the value exactly
 - [AgentInstanceKeyFilterProperty](#agentinstancekeyfilterproperty) — AgentInstanceKey property with full advanced search capabilities
 - [AgentInstanceLimits](#agentinstancelimits) — The configured limits for an agent instance, set once at creation
+- [AgentInstanceMessageContent](#agentinstancemessagecontent) — A single content block within a history item
 - [AgentInstanceMetrics](#agentinstancemetrics) — Aggregated metrics for an agent instance across all model calls
 - [AgentInstanceMetricsDelta](#agentinstancemetricsdelta) — Metric increments to apply to the agent instance aggregate counters
+- [AgentInstanceObjectContent](#agentinstanceobjectcontent) — An arbitrary structured content block
 - [AgentInstanceResult](#agentinstanceresult) — AgentInstanceResult
 - [AgentInstanceSearchQuery](#agentinstancesearchquery) — Agent instance search request
 - [AgentInstanceSearchQueryResult](#agentinstancesearchqueryresult) — Agent instance search response
 - [AgentInstanceSearchQuerySortRequest](#agentinstancesearchquerysortrequest) — AgentInstanceSearchQuerySortRequest
 - [AgentInstanceStatusExactMatch](#agentinstancestatusexactmatch) — Matches the value exactly
 - [AgentInstanceStatusFilterProperty](#agentinstancestatusfilterproperty) — AgentInstanceStatusEnum property with full advanced search capabilities
+- [AgentInstanceTextContent](#agentinstancetextcontent) — A plain-text content block
+- [AgentInstanceToolCall](#agentinstancetoolcall) — A tool call associated with a history item
 - [AgentInstanceUpdateRequest](#agentinstanceupdaterequest) — Request to update the mutable state of an agent instance
 - [AgentTool](#agenttool) — A tool available to the agent
 - [AncestorScopeInstruction](#ancestorscopeinstruction) — Defines the ancestor scope for the created element instances
@@ -227,7 +251,8 @@ Request and response model classes (560 types).
 - [ElementId](#elementid) — The model-defined id of an element
 - [ElementIdExactMatch](#elementidexactmatch) — Matches the value exactly
 - [ElementIdFilterProperty](#elementidfilterproperty) — ElementId property with full advanced search capabilities
-- [ElementInstanceFilter](#elementinstancefilter) — Element instance filter
+- [ElementInstanceFilter](#elementinstancefilter) — Element instance search filter
+- [ElementInstanceFilterFields](#elementinstancefilterfields) — Element instance filter fields
 - [ElementInstanceKeyExactMatch](#elementinstancekeyexactmatch) — Matches the value exactly
 - [ElementInstanceKeyFilterProperty](#elementinstancekeyfilterproperty) — ElementInstanceKey property with full advanced search capabilities
 - [ElementInstanceResult](#elementinstanceresult) — ElementInstanceResult
@@ -236,6 +261,11 @@ Request and response model classes (560 types).
 - [ElementInstanceSearchQuerySortRequest](#elementinstancesearchquerysortrequest) — ElementInstanceSearchQuerySortRequest
 - [ElementInstanceStateExactMatch](#elementinstancestateexactmatch) — Matches the value exactly
 - [ElementInstanceStateFilterProperty](#elementinstancestatefilterproperty) — ElementInstanceStateEnum property with full advanced search capabilities
+- [ElementInstanceWaitStateFilter](#elementinstancewaitstatefilter) — Filters for the element instance inspection
+- [ElementInstanceWaitStateQuery](#elementinstancewaitstatequery) — Element instance inspection request
+- [ElementInstanceWaitStateQueryResult](#elementinstancewaitstatequeryresult) — ElementInstanceWaitStateQueryResult
+- [ElementInstanceWaitStateQuerySortRequest](#elementinstancewaitstatequerysortrequest) — ElementInstanceWaitStateQuerySortRequest
+- [ElementInstanceWaitStateResult](#elementinstancewaitstateresult) — An element instance waiting state
 - [EndCursor](#endcursor) — The end cursor in a search query result set
 - [EntityTypeExactMatch](#entitytypeexactmatch) — Matches the value exactly
 - [EntityTypeFilterProperty](#entitytypefilterproperty) — AuditLogEntityTypeEnum property with full advanced search capabilities
@@ -314,6 +344,8 @@ Request and response model classes (560 types).
 - [IncidentStateFilterProperty](#incidentstatefilterproperty) — IncidentStateEnum with full advanced search capabilities
 - [InferredAncestorKeyInstruction](#inferredancestorkeyinstruction) — Instructs the engine to derive the ancestor scope key from the source element's hierarchy
 - [IntegerFilterProperty](#integerfilterproperty) — Integer property with advanced search capabilities
+- [IterationId](#iterationid) — A client-provided sequential integer identifying a logical iteration: one LLM
+  call, its tool dispatches, and their results
 - [JobActivationRequest](#jobactivationrequest) — JobActivationRequest
 - [JobActivationResult](#jobactivationresult) — The list of activated jobs
 - [JobChangeset](#jobchangeset) — JSON object with changed job attribute values
@@ -354,6 +386,7 @@ Request and response model classes (560 types).
 - [JobTypeStatisticsQuery](#jobtypestatisticsquery) — Job type statistics query
 - [JobTypeStatisticsQueryResult](#jobtypestatisticsqueryresult) — Job type statistics query result
 - [JobUpdateRequest](#jobupdaterequest) — JobUpdateRequest
+- [JobWaitStateDetails](#jobwaitstatedetails) — JobWaitStateDetails
 - [JobWorker](#jobworker) — A long-running worker that polls the Camunda broker for jobs of a specific type,
   dispatches them to a handler, and auto-completes or auto-fails based on the outcome
 - [JobWorkerStatisticsFilter](#jobworkerstatisticsfilter) — Job worker statistics search filter
@@ -392,6 +425,7 @@ Request and response model classes (560 types).
 - [MessageSubscriptionStateFilterProperty](#messagesubscriptionstatefilterproperty) — MessageSubscriptionStateEnum with full advanced search capabilities
 - [MessageSubscriptionTypeExactMatch](#messagesubscriptiontypeexactmatch) — Matches the value exactly
 - [MessageSubscriptionTypeFilterProperty](#messagesubscriptiontypefilterproperty) — MessageSubscriptionTypeEnum with full advanced search capabilities
+- [MessageWaitStateDetails](#messagewaitstatedetails) — MessageWaitStateDetails
 - [MigrateProcessInstanceMappingInstruction](#migrateprocessinstancemappinginstruction) — The mapping instructions describe how to map elements from the source process definition to the target process definition
 - [ModifyProcessInstanceVariableInstruction](#modifyprocessinstancevariableinstruction) — Instruction describing which variables to create or update
 - [OffsetPagination](#offsetpagination) — OffsetPagination
@@ -539,6 +573,8 @@ Request and response model classes (560 types).
 - [TopologyResponse](#topologyresponse) — The response of a topology request
 - [TypedVariables](#typedvariables) — Extension methods for deserializing Camunda variable and custom header payloads
   from untyped object properties into strongly-typed DTOs
+- [TypedVariablesException](#typedvariablesexception) — Base class for all errors raised by the DTO-driven typed variable map feature
+  ()
 - [UpdateClusterVariableRequest](#updateclustervariablerequest) — UpdateClusterVariableRequest
 - [UpdateGlobalTaskListenerRequest](#updateglobaltasklistenerrequest) — UpdateGlobalTaskListenerRequest
 - [UsageMetricsResponse](#usagemetricsresponse) — UsageMetricsResponse
@@ -571,16 +607,26 @@ Request and response model classes (560 types).
 - [UserUpdateRequest](#userupdaterequest) — UserUpdateRequest
 - [UserUpdateResult](#userupdateresult) — UserUpdateResult
 - [Username](#username) — The unique name of a user
+- [VariableDeserializationException](#variabledeserializationexception) — Raised when a present variable value cannot be deserialized
 - [VariableFilter](#variablefilter) — Variable filter request
 - [VariableKeyExactMatch](#variablekeyexactmatch) — Matches the value exactly
 - [VariableKeyFilterProperty](#variablekeyfilterproperty) — VariableKey property with full advanced search capabilities
+- [VariableMap<T>](#variablemap<t>) — Result of a DTO-driven variable search ()
 - [VariableResult](#variableresult) — Variable search response item
 - [VariableResultBase](#variableresultbase) — Variable response item
+- [VariableScopeCollisionException](#variablescopecollisionexception) — Raised when a declared variable name is returned at more than one scope
 - [VariableSearchQuery](#variablesearchquery) — Variable search query request
 - [VariableSearchQueryResult](#variablesearchqueryresult) — Variable search query response
 - [VariableSearchQuerySortRequest](#variablesearchquerysortrequest) — VariableSearchQuerySortRequest
 - [VariableSearchResult](#variablesearchresult) — Variable search response item
+- [VariableValidationException](#variablevalidationexception) — Raised by when one or more required DTO members
+  (non-nullable members, or members marked with the required modifier) are absent
+  from the search result
 - [VariableValueFilterProperty](#variablevaluefilterproperty) — VariableValueFilterProperty
+- [WaitStateElementTypeExactMatch](#waitstateelementtypeexactmatch) — Matches the value exactly
+- [WaitStateElementTypeFilterProperty](#waitstateelementtypefilterproperty) — Element type property with full advanced search capabilities
+- [WaitStateTypeExactMatch](#waitstatetypeexactmatch) — Matches the value exactly
+- [WaitStateTypeFilterProperty](#waitstatetypefilterproperty) — Wait state type property with full advanced search capabilities
 - [WorkerDefaultsConfig](#workerdefaultsconfig)
 
 ---
@@ -644,6 +690,7 @@ public sealed class ActivatedJobResult
 | `UserTask`                 | `UserTaskProperties`           | User task properties, if the job is a user task. This is `null` if the job is not a user task.                                                                                                                                              |
 | `Tags`                     | `List<Tag>`                    | List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.                                                                                                                                    |
 | `RootProcessInstanceKey`   | `Nullable<ProcessInstanceKey>` | The key of the root process instance. The root process instance is the top-level ancestor in the process instance hierarchy. This field is only present for data belonging to process instance hierarchies created in version 8.9 or later. |
+| `Priority`                 | `Int32`                        | The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.                                                                                         |
 
 ## AdHocSubProcessActivateActivitiesInstruction
 
@@ -686,6 +733,52 @@ public sealed class AdvancedActorTypeFilter
 | `Exists` | `Nullable<Boolean>`               | Checks if the current property exists.                                                                                                                                                                                                                     |
 | `In`     | `List<AuditLogActorTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
 | `Like`   | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## AdvancedAgentHistoryItemKeyFilter
+
+Advanced AgentHistoryItemKey filter.
+
+```csharp
+public sealed class AdvancedAgentHistoryItemKeyFilter
+```
+
+| Property | Type                            | Description                                                 |
+| -------- | ------------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<AgentHistoryItemKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<AgentHistoryItemKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`             | Checks if the current property exists.                      |
+| `In`     | `List<AgentHistoryItemKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<AgentHistoryItemKey>`     | Checks if the property matches none of the provided values. |
+
+## AdvancedAgentInstanceHistoryCommitStatusFilter
+
+Advanced AgentInstanceHistoryCommitStatusEnum filter.
+
+```csharp
+public sealed class AdvancedAgentInstanceHistoryCommitStatusFilter
+```
+
+| Property | Type                                             | Description                                                |
+| -------- | ------------------------------------------------ | ---------------------------------------------------------- |
+| `Eq`     | `Nullable<AgentInstanceHistoryCommitStatusEnum>` | Checks for equality with the provided value.               |
+| `Neq`    | `Nullable<AgentInstanceHistoryCommitStatusEnum>` | Checks for inequality with the provided value.             |
+| `Exists` | `Nullable<Boolean>`                              | Checks if the current property exists.                     |
+| `In`     | `List<AgentInstanceHistoryCommitStatusEnum>`     | Checks if the property matches any of the provided values. |
+
+## AdvancedAgentInstanceHistoryRoleFilter
+
+Advanced AgentInstanceHistoryRoleEnum filter.
+
+```csharp
+public sealed class AdvancedAgentInstanceHistoryRoleFilter
+```
+
+| Property | Type                                     | Description                                                |
+| -------- | ---------------------------------------- | ---------------------------------------------------------- |
+| `Eq`     | `Nullable<AgentInstanceHistoryRoleEnum>` | Checks for equality with the provided value.               |
+| `Neq`    | `Nullable<AgentInstanceHistoryRoleEnum>` | Checks for inequality with the provided value.             |
+| `Exists` | `Nullable<Boolean>`                      | Checks if the current property exists.                     |
+| `In`     | `List<AgentInstanceHistoryRoleEnum>`     | Checks if the property matches any of the provided values. |
 
 ## AdvancedAgentInstanceKeyFilter
 
@@ -1403,6 +1496,66 @@ public sealed class AdvancedVariableKeyFilter
 | `In`     | `List<VariableKey>`     | Checks if the property matches any of the provided values.  |
 | `NotIn`  | `List<VariableKey>`     | Checks if the property matches none of the provided values. |
 
+## AdvancedWaitStateElementTypeFilter
+
+Advanced element type filter.
+
+```csharp
+public sealed class AdvancedWaitStateElementTypeFilter
+```
+
+| Property | Type                                 | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<WaitStateElementTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<WaitStateElementTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<WaitStateElementTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## AdvancedWaitStateTypeFilter
+
+Advanced wait state type filter.
+
+```csharp
+public sealed class AdvancedWaitStateTypeFilter
+```
+
+| Property | Type                          | Description                                                                                                                                                                                                                                                |
+| -------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<WaitStateTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<WaitStateTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<WaitStateTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## AgentHistoryItemKeyExactMatch
+
+Matches the value exactly.
+
+```csharp
+public readonly record struct AgentHistoryItemKeyExactMatch : ICamundaKey, IEquatable<AgentHistoryItemKeyExactMatch>
+```
+
+| Property | Type     | Description                  |
+| -------- | -------- | ---------------------------- |
+| `Value`  | `String` | The underlying string value. |
+
+## AgentHistoryItemKeyFilterProperty
+
+AgentHistoryItemKey property with full advanced search capabilities.
+
+```csharp
+public sealed class AgentHistoryItemKeyFilterProperty
+```
+
+| Property | Type                            | Description                                                 |
+| -------- | ------------------------------- | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<AgentHistoryItemKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<AgentHistoryItemKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`             | Checks if the current property exists.                      |
+| `In`     | `List<AgentHistoryItemKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<AgentHistoryItemKey>`     | Checks if the property matches none of the provided values. |
+
 ## AgentInstanceCreationRequest
 
 Request to create a new agent instance.
@@ -1443,6 +1596,18 @@ public sealed class AgentInstanceDefinition
 | `Provider`     | `String` | The LLM provider (for example, openai or anthropic).  |
 | `SystemPrompt` | `String` | The system prompt configured for this agent instance. |
 
+## AgentInstanceDocumentContent
+
+A Camunda Document Store reference content block.
+
+```csharp
+public sealed class AgentInstanceDocumentContent : AgentInstanceMessageContent
+```
+
+| Property            | Type                | Description                                                     |
+| ------------------- | ------------------- | --------------------------------------------------------------- |
+| `DocumentReference` | `DocumentReference` | A reference to a document stored in the Camunda Document Store. |
+
 ## AgentInstanceFilter
 
 Agent instance search filter.
@@ -1451,18 +1616,203 @@ Agent instance search filter.
 public sealed class AgentInstanceFilter
 ```
 
-| Property               | Type                                     | Description                                                                                                                                                                                     |
-| ---------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AgentInstanceKey`     | `AgentInstanceKeyFilterProperty`         | The unique key of the agent instance.                                                                                                                                                           |
-| `Status`               | `AgentInstanceStatusFilterProperty`      | The current status of the agent instance.                                                                                                                                                       |
-| `ElementId`            | `ElementIdFilterProperty`                | The BPMN element ID of the agent task.                                                                                                                                                          |
-| `ProcessInstanceKey`   | `ProcessInstanceKeyFilterProperty`       | The key of the process instance that owns this agent instance.                                                                                                                                  |
-| `ProcessDefinitionKey` | `ProcessDefinitionKeyFilterProperty`     | The key of the process definition associated with this agent instance.                                                                                                                          |
-| `TenantId`             | `StringFilterProperty`                   | The tenant ID of the agent instance.                                                                                                                                                            |
-| `CreationDate`         | `DateTimeFilterProperty`                 | The creation date of the agent instance.                                                                                                                                                        |
-| `LastUpdatedDate`      | `DateTimeFilterProperty`                 | The date the agent instance was last updated.                                                                                                                                                   |
-| `CompletionDate`       | `DateTimeFilterProperty`                 | The completion date of the agent instance.                                                                                                                                                      |
-| `ElementInstanceKeys`  | `List<ElementInstanceKeyFilterProperty>` | The keys of element instances associated with this agent instance. If multiple keys are provided, the filter matches agent instances associated with all of the provided keys at the same time. |
+| Property                      | Type                                     | Description                                                                                                                                                                                     |
+| ----------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AgentInstanceKey`            | `AgentInstanceKeyFilterProperty`         | The unique key of the agent instance.                                                                                                                                                           |
+| `Status`                      | `AgentInstanceStatusFilterProperty`      | The current status of the agent instance.                                                                                                                                                       |
+| `ElementId`                   | `ElementIdFilterProperty`                | The BPMN element ID of the agent task.                                                                                                                                                          |
+| `ProcessInstanceKey`          | `ProcessInstanceKeyFilterProperty`       | The key of the process instance that owns this agent instance.                                                                                                                                  |
+| `RootProcessInstanceKey`      | `ProcessInstanceKeyFilterProperty`       | The key of the root process instance. Filters agent instances belonging to a specific call hierarchy. The root process instance is the top-level ancestor in the process instance hierarchy.    |
+| `ProcessDefinitionKey`        | `ProcessDefinitionKeyFilterProperty`     | The key of the process definition associated with this agent instance.                                                                                                                          |
+| `TenantId`                    | `StringFilterProperty`                   | The tenant ID of the agent instance.                                                                                                                                                            |
+| `CreationDate`                | `DateTimeFilterProperty`                 | The creation date of the agent instance.                                                                                                                                                        |
+| `LastUpdatedDate`             | `DateTimeFilterProperty`                 | The date the agent instance was last updated.                                                                                                                                                   |
+| `CompletionDate`              | `DateTimeFilterProperty`                 | The completion date of the agent instance.                                                                                                                                                      |
+| `ElementInstanceKeys`         | `List<ElementInstanceKeyFilterProperty>` | The keys of element instances associated with this agent instance. If multiple keys are provided, the filter matches agent instances associated with all of the provided keys at the same time. |
+| `ProcessDefinitionId`         | `StringFilterProperty`                   | The BPMN process ID of the process definition associated with this agent instance.                                                                                                              |
+| `ProcessDefinitionVersion`    | `IntegerFilterProperty`                  | The version of the process definition associated with this agent instance.                                                                                                                      |
+| `ProcessDefinitionVersionTag` | `StringFilterProperty`                   | The version tag of the process definition associated with this agent instance.                                                                                                                  |
+
+## AgentInstanceHistoryCommitStatusExactMatch
+
+Matches the value exactly.
+
+```csharp
+public readonly record struct AgentInstanceHistoryCommitStatusExactMatch : ICamundaKey, IEquatable<AgentInstanceHistoryCommitStatusExactMatch>
+```
+
+| Property | Type     | Description                  |
+| -------- | -------- | ---------------------------- |
+| `Value`  | `String` | The underlying string value. |
+
+## AgentInstanceHistoryCommitStatusFilterProperty
+
+AgentInstanceHistoryCommitStatusEnum property with full advanced search capabilities.
+
+```csharp
+public sealed class AgentInstanceHistoryCommitStatusFilterProperty
+```
+
+| Property | Type                                             | Description                                                |
+| -------- | ------------------------------------------------ | ---------------------------------------------------------- |
+| `Eq`     | `Nullable<AgentInstanceHistoryCommitStatusEnum>` | Checks for equality with the provided value.               |
+| `Neq`    | `Nullable<AgentInstanceHistoryCommitStatusEnum>` | Checks for inequality with the provided value.             |
+| `Exists` | `Nullable<Boolean>`                              | Checks if the current property exists.                     |
+| `In`     | `List<AgentInstanceHistoryCommitStatusEnum>`     | Checks if the property matches any of the provided values. |
+
+## AgentInstanceHistoryFilter
+
+Agent instance history item search filter.
+
+```csharp
+public sealed class AgentInstanceHistoryFilter
+```
+
+| Property             | Type                                             | Description                                                                                                                                          |
+| -------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `HistoryItemKey`     | `AgentHistoryItemKeyFilterProperty`              | The unique key of the history item.                                                                                                                  |
+| `Role`               | `AgentInstanceHistoryRoleFilterProperty`         | The role of the history item.                                                                                                                        |
+| `ElementInstanceKey` | `ElementInstanceKeyFilterProperty`               | The key of the element instance under which the history item was produced.                                                                           |
+| `JobKey`             | `JobKeyFilterProperty`                           | The key of the job activation that produced the history item.                                                                                        |
+| `Iteration`          | `IntegerFilterProperty`                          | The iteration number.                                                                                                                                |
+| `CommitStatus`       | `AgentInstanceHistoryCommitStatusFilterProperty` | The commit status of the history item. Defaults to COMMITTED only. Include PENDING or DISCARDED explicitly to debug in-flight or failed activations. |
+| `ProducedAt`         | `DateTimeFilterProperty`                         | The timestamp when the history item was produced.                                                                                                    |
+
+## AgentInstanceHistoryItemCreationResult
+
+Response returned after successfully appending a history item.
+
+```csharp
+public sealed class AgentInstanceHistoryItemCreationResult
+```
+
+| Property         | Type                  | Description                                            |
+| ---------------- | --------------------- | ------------------------------------------------------ |
+| `HistoryItemKey` | `AgentHistoryItemKey` | The system-generated key for the created history item. |
+
+## AgentInstanceHistoryItemMetrics
+
+Per-call token and latency metrics for an ASSISTANT history item.
+
+```csharp
+public sealed class AgentInstanceHistoryItemMetrics
+```
+
+| Property       | Type    | Description                                          |
+| -------------- | ------- | ---------------------------------------------------- |
+| `InputTokens`  | `Int64` | Input tokens consumed by this LLM call.              |
+| `OutputTokens` | `Int64` | Output tokens produced by this LLM call.             |
+| `DurationMs`   | `Int64` | Wall-clock duration of the LLM call in milliseconds. |
+
+## AgentInstanceHistoryItemRequest
+
+Request to append a single history item to an agent instance's conversation history.
+
+```csharp
+public sealed class AgentInstanceHistoryItemRequest
+```
+
+| Property             | Type                                | Description                                                                                                                                                                                                                                                         |
+| -------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ElementInstanceKey` | `ElementInstanceKey`                | The key of the currently-active element instance.                                                                                                                                                                                                                   |
+| `JobKey`             | `JobKey`                            | The key of the current job activation during which this history item was produced.                                                                                                                                                                                  |
+| `JobLease`           | `String`                            | Opaque lease token received from the job activation response.                                                                                                                                                                                                       |
+| `Iteration`          | `Nullable<IterationId>`             | Sequential iteration number this item belongs to. Omit if not grouping items into iterations.                                                                                                                                                                       |
+| `Role`               | `AgentInstanceHistoryRoleEnum`      | The role of this history item in the conversation.                                                                                                                                                                                                                  |
+| `Content`            | `List<AgentInstanceMessageContent>` | The content blocks of this history item.                                                                                                                                                                                                                            |
+| `ToolCalls`          | `List<AgentInstanceToolCall>`       | Tool calls associated with this history item. For ASSISTANT items: tool calls dispatched by this LLM response, with arguments populated. For TOOL_RESULT items: single-entry array referencing the originating tool call, with arguments null. Omit for USER items. |
+| `Metrics`            | `AgentInstanceHistoryItemMetrics`   | Per-call token and latency metrics. Present on ASSISTANT items only.                                                                                                                                                                                                |
+| `ProducedAt`         | `DateTimeOffset`                    | The connector-side timestamp of when this message was produced.                                                                                                                                                                                                     |
+
+## AgentInstanceHistoryItemResult
+
+A single conversation history item belonging to an agent instance.
+
+```csharp
+public sealed class AgentInstanceHistoryItemResult
+```
+
+| Property             | Type                                   | Description                                                                                                                                                                                                                                                |
+| -------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `HistoryItemKey`     | `AgentHistoryItemKey`                  | The unique key for this history item. Stable and sortable by creation order.                                                                                                                                                                               |
+| `AgentInstanceKey`   | `AgentInstanceKey`                     | The key of the agent instance this item belongs to.                                                                                                                                                                                                        |
+| `ElementInstanceKey` | `ElementInstanceKey`                   | The key of the AI Agent Task or ad-hoc sub-process element instance under which this item was produced.                                                                                                                                                    |
+| `JobKey`             | `JobKey`                               | The key of the job activation during which this item was produced.                                                                                                                                                                                         |
+| `JobLease`           | `String`                               | The lease token of the activation that produced this item.                                                                                                                                                                                                 |
+| `Iteration`          | `Nullable<IterationId>`                | The sequential iteration number this item belongs to. Null if not provided by the connector.                                                                                                                                                               |
+| `Role`               | `AgentInstanceHistoryRoleEnum`         | The role of this history item in the conversation.                                                                                                                                                                                                         |
+| `Content`            | `List<AgentInstanceMessageContent>`    | The content blocks of this history item.                                                                                                                                                                                                                   |
+| `ToolCalls`          | `List<AgentInstanceToolCall>`          | Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches. ASSISTANT items: dispatched tool calls with arguments populated. TOOL_RESULT items: single-entry array referencing the originating tool call (arguments null). |
+| `Metrics`            | `AgentInstanceHistoryItemMetrics`      | Per-call token and latency metrics. Present on ASSISTANT items only.                                                                                                                                                                                       |
+| `CommitStatus`       | `AgentInstanceHistoryCommitStatusEnum` | The commit status of this history item.                                                                                                                                                                                                                    |
+| `ProducedAt`         | `DateTimeOffset`                       | The connector-side timestamp of when this message was produced.                                                                                                                                                                                            |
+
+## AgentInstanceHistoryRoleExactMatch
+
+Matches the value exactly.
+
+```csharp
+public readonly record struct AgentInstanceHistoryRoleExactMatch : ICamundaKey, IEquatable<AgentInstanceHistoryRoleExactMatch>
+```
+
+| Property | Type     | Description                  |
+| -------- | -------- | ---------------------------- |
+| `Value`  | `String` | The underlying string value. |
+
+## AgentInstanceHistoryRoleFilterProperty
+
+AgentInstanceHistoryRoleEnum property with full advanced search capabilities.
+
+```csharp
+public sealed class AgentInstanceHistoryRoleFilterProperty
+```
+
+| Property | Type                                     | Description                                                |
+| -------- | ---------------------------------------- | ---------------------------------------------------------- |
+| `Eq`     | `Nullable<AgentInstanceHistoryRoleEnum>` | Checks for equality with the provided value.               |
+| `Neq`    | `Nullable<AgentInstanceHistoryRoleEnum>` | Checks for inequality with the provided value.             |
+| `Exists` | `Nullable<Boolean>`                      | Checks if the current property exists.                     |
+| `In`     | `List<AgentInstanceHistoryRoleEnum>`     | Checks if the property matches any of the provided values. |
+
+## AgentInstanceHistorySearchQuery
+
+Agent instance history search request.
+
+```csharp
+public sealed class AgentInstanceHistorySearchQuery
+```
+
+| Property | Type                                               | Description                      |
+| -------- | -------------------------------------------------- | -------------------------------- |
+| `Sort`   | `List<AgentInstanceHistorySearchQuerySortRequest>` | Sort field criteria.             |
+| `Filter` | `AgentInstanceHistoryFilter`                       | The history item search filters. |
+| `Page`   | `SearchQueryPageRequest`                           | Pagination criteria.             |
+
+## AgentInstanceHistorySearchQueryResult
+
+Agent instance history search response.
+
+```csharp
+public sealed class AgentInstanceHistorySearchQueryResult
+```
+
+| Property | Type                                   | Description                                      |
+| -------- | -------------------------------------- | ------------------------------------------------ |
+| `Items`  | `List<AgentInstanceHistoryItemResult>` | The matching history items.                      |
+| `Page`   | `SearchQueryPageResponse`              | Pagination information about the search results. |
+
+## AgentInstanceHistorySearchQuerySortRequest
+
+AgentInstanceHistorySearchQuerySortRequest
+
+```csharp
+public sealed class AgentInstanceHistorySearchQuerySortRequest
+```
+
+| Property | Type                                              | Description                                   |
+| -------- | ------------------------------------------------- | --------------------------------------------- |
+| `Field`  | `AgentInstanceHistorySearchQuerySortRequestField` | The field to sort by.                         |
+| `Order`  | `Nullable<SortOrderEnum>`                         | The order in which to sort the related field. |
 
 ## AgentInstanceKeyExactMatch
 
@@ -1502,9 +1852,17 @@ public sealed class AgentInstanceLimits
 
 | Property        | Type    | Description                                                 |
 | --------------- | ------- | ----------------------------------------------------------- |
-| `MaxModelCalls` | `Int64` | Maximum LLM calls allowed. -1 if no limit is configured.    |
-| `MaxToolCalls`  | `Int64` | Maximum tool calls allowed. -1 if no limit is configured.   |
+| `MaxModelCalls` | `Int32` | Maximum LLM calls allowed. -1 if no limit is configured.    |
+| `MaxToolCalls`  | `Int32` | Maximum tool calls allowed. -1 if no limit is configured.   |
 | `MaxTokens`     | `Int64` | Maximum total tokens allowed. -1 if no limit is configured. |
+
+## AgentInstanceMessageContent
+
+A single content block within a history item. Discriminated by `contentType`.
+
+```csharp
+public abstract class AgentInstanceMessageContent
+```
 
 ## AgentInstanceMetrics
 
@@ -1518,8 +1876,8 @@ public sealed class AgentInstanceMetrics
 | -------------- | ------- | ---------------------------------------------------- |
 | `InputTokens`  | `Int64` | Total input tokens consumed across all model calls.  |
 | `OutputTokens` | `Int64` | Total output tokens produced across all model calls. |
-| `ModelCalls`   | `Int64` | Total number of LLM calls made.                      |
-| `ToolCalls`    | `Int64` | Total number of tool calls made.                     |
+| `ModelCalls`   | `Int32` | Total number of LLM calls made.                      |
+| `ToolCalls`    | `Int32` | Total number of tool calls made.                     |
 
 ## AgentInstanceMetricsDelta
 
@@ -1535,8 +1893,20 @@ public sealed class AgentInstanceMetricsDelta
 | -------------- | ----------------- | ----------------------------------------------------- |
 | `InputTokens`  | `Nullable<Int64>` | Increment to apply to the total input token counter.  |
 | `OutputTokens` | `Nullable<Int64>` | Increment to apply to the total output token counter. |
-| `ModelCalls`   | `Nullable<Int64>` | Increment to apply to the total model call counter.   |
-| `ToolCalls`    | `Nullable<Int64>` | Increment to apply to the total tool call counter.    |
+| `ModelCalls`   | `Nullable<Int32>` | Increment to apply to the total model call counter.   |
+| `ToolCalls`    | `Nullable<Int32>` | Increment to apply to the total tool call counter.    |
+
+## AgentInstanceObjectContent
+
+An arbitrary structured content block.
+
+```csharp
+public sealed class AgentInstanceObjectContent : AgentInstanceMessageContent
+```
+
+| Property | Type     | Description                   |
+| -------- | -------- | ----------------------------- |
+| `Object` | `Object` | Arbitrary structured content. |
 
 ## AgentInstanceResult
 
@@ -1546,22 +1916,26 @@ AgentInstanceResult
 public sealed class AgentInstanceResult
 ```
 
-| Property               | Type                       | Description                                                                                   |
-| ---------------------- | -------------------------- | --------------------------------------------------------------------------------------------- |
-| `AgentInstanceKey`     | `AgentInstanceKey`         | The unique key for this agent instance.                                                       |
-| `Status`               | `AgentInstanceStatusEnum`  | The current status of an agent instance.                                                      |
-| `Definition`           | `AgentInstanceDefinition`  | The static definition of the agent, including model, provider, and system prompt.             |
-| `Metrics`              | `AgentInstanceMetrics`     | Aggregated metrics across all iterations of this agent instance.                              |
-| `Limits`               | `AgentInstanceLimits`      | The configured limits for this agent instance, set once at creation.                          |
-| `Tools`                | `List<AgentTool>`          | The tools available to the agent.                                                             |
-| `ElementId`            | `ElementId`                | The BPMN element ID of the ad-hoc sub-process or AI agent task that owns this agent instance. |
-| `ProcessInstanceKey`   | `ProcessInstanceKey`       | The key of the process instance that owns this agent instance.                                |
-| `ProcessDefinitionKey` | `ProcessDefinitionKey`     | The key of the process definition associated with this agent instance.                        |
-| `TenantId`             | `TenantId`                 | The tenant ID of this agent instance.                                                         |
-| `CreationDate`         | `DateTimeOffset`           | The date when this agent instance was created.                                                |
-| `LastUpdatedDate`      | `DateTimeOffset`           | The date when this agent instance was last updated.                                           |
-| `CompletionDate`       | `Nullable<DateTimeOffset>` | The date when this agent instance completed. Null while the agent is still running.           |
-| `ElementInstanceKeys`  | `List<ElementInstanceKey>` | The keys of all element instances associated with this agent instance.                        |
+| Property                      | Type                       | Description                                                                                                                  |
+| ----------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `AgentInstanceKey`            | `AgentInstanceKey`         | The unique key for this agent instance.                                                                                      |
+| `Status`                      | `AgentInstanceStatusEnum`  | The current status of an agent instance.                                                                                     |
+| `Definition`                  | `AgentInstanceDefinition`  | The static definition of the agent, including model, provider, and system prompt.                                            |
+| `Metrics`                     | `AgentInstanceMetrics`     | Aggregated metrics across all iterations of this agent instance.                                                             |
+| `Limits`                      | `AgentInstanceLimits`      | The configured limits for this agent instance, set once at creation.                                                         |
+| `Tools`                       | `List<AgentTool>`          | The tools available to the agent.                                                                                            |
+| `ElementId`                   | `ElementId`                | The BPMN element ID of the ad-hoc sub-process or AI agent task that owns this agent instance.                                |
+| `ProcessInstanceKey`          | `ProcessInstanceKey`       | The key of the process instance that owns this agent instance.                                                               |
+| `RootProcessInstanceKey`      | `ProcessInstanceKey`       | The key of the root process instance. The root process instance is the top-level ancestor in the process instance hierarchy. |
+| `ProcessDefinitionKey`        | `ProcessDefinitionKey`     | The key of the process definition associated with this agent instance.                                                       |
+| `ProcessDefinitionId`         | `ProcessDefinitionId`      | The BPMN process ID of the process definition associated with this agent instance.                                           |
+| `ProcessDefinitionVersion`    | `Int32`                    | The version of the process definition associated with this agent instance.                                                   |
+| `ProcessDefinitionVersionTag` | `String`                   | The version tag of the process definition associated with this agent instance.                                               |
+| `TenantId`                    | `TenantId`                 | The tenant ID of this agent instance.                                                                                        |
+| `CreationDate`                | `DateTimeOffset`           | The date when this agent instance was created.                                                                               |
+| `LastUpdatedDate`             | `DateTimeOffset`           | The date when this agent instance was last updated.                                                                          |
+| `CompletionDate`              | `Nullable<DateTimeOffset>` | The date when this agent instance completed. Null while the agent is still running.                                          |
+| `ElementInstanceKeys`         | `List<ElementInstanceKey>` | The keys of all element instances associated with this agent instance.                                                       |
 
 ## AgentInstanceSearchQuery
 
@@ -1631,20 +2005,48 @@ public sealed class AgentInstanceStatusFilterProperty
 | `In`     | `List<AgentInstanceStatusEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
 | `Like`   | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
+## AgentInstanceTextContent
+
+A plain-text content block.
+
+```csharp
+public sealed class AgentInstanceTextContent : AgentInstanceMessageContent
+```
+
+| Property | Type     | Description       |
+| -------- | -------- | ----------------- |
+| `Text`   | `String` | The text content. |
+
+## AgentInstanceToolCall
+
+A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.
+ASSISTANT items carry arguments; TOOL_RESULT items carry arguments as null.
+
+```csharp
+public sealed class AgentInstanceToolCall
+```
+
+| Property     | Type     | Description                                                                                    |
+| ------------ | -------- | ---------------------------------------------------------------------------------------------- |
+| `ToolCallId` | `String` | The LLM-assigned tool call ID. Correlates ASSISTANT items to their matching TOOL_RESULT items. |
+| `ToolName`   | `String` | The LLM-visible tool name.                                                                     |
+| `ElementId`  | `String` | The BPMN element ID handling this tool.                                                        |
+| `Arguments`  | `Object` | The tool call arguments as provided by the LLM. Null on TOOL_RESULT items.                     |
+
 ## AgentInstanceUpdateRequest
 
-Request to update the mutable state of an agent instance. At least one of
-status, metrics, or tools must be provided.
+Request to update the mutable state of an agent instance.
 
 ```csharp
 public sealed class AgentInstanceUpdateRequest
 ```
 
-| Property  | Type                                | Description                                                                                                                                                          |
-| --------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Status`  | `Nullable<AgentInstanceStatusEnum>` | The new status of the agent instance.                                                                                                                                |
-| `Metrics` | `AgentInstanceMetricsDelta`         | Metric increments to apply to the aggregate counters.                                                                                                                |
-| `Tools`   | `List<AgentTool>`                   | The complete list of tools available to the agent, replacing any previously stored tools. When provided, the engine replaces the existing tool list with this value. |
+| Property             | Type                                      | Description                                                                                                                                                                                                                                                                                                                                                               |
+| -------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ElementInstanceKey` | `ElementInstanceKey`                      | The key of the currently-active element instance for this agent instance. Used for ownership/equality validation against the stored agent instance and, when the supplied key differs from the previous association (re-entry of an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys with the reverse link updated on the supplied element instance. |
+| `Status`             | `Nullable<AgentInstanceUpdateStatusEnum>` | The new status of the agent instance.                                                                                                                                                                                                                                                                                                                                     |
+| `Metrics`            | `AgentInstanceMetricsDelta`               | Metric increments to apply to the aggregate counters.                                                                                                                                                                                                                                                                                                                     |
+| `Tools`              | `List<AgentTool>`                         | The complete list of tools available to the agent, replacing any previously stored tools. When provided, the engine replaces the existing tool list with this value.                                                                                                                                                                                                      |
 
 ## AgentTool
 
@@ -2627,13 +3029,9 @@ Configuration for SaaS/cloud-specific settings.
 public sealed class CloudConfigurationResponse
 ```
 
-| Property          | Type                   | Description                                    |
-| ----------------- | ---------------------- | ---------------------------------------------- |
-| `OrganizationId`  | `String`               | The SaaS organization ID, if applicable.       |
-| `ClusterId`       | `String`               | The SaaS cluster ID, if applicable.            |
-| `Stage`           | `Nullable<CloudStage>` | The cloud deployment stage.                    |
-| `MixpanelToken`   | `String`               | The Mixpanel analytics token for the cloud UI. |
-| `MixpanelAPIHost` | `String`               | The Mixpanel API host URL.                     |
+| Property | Type     | Description                 |
+| -------- | -------- | --------------------------- |
+| `Stage`  | `String` | The cloud deployment stage. |
 
 ## ClusterVariableName
 
@@ -2956,10 +3354,10 @@ CursorBackwardPagination
 public sealed class CursorBackwardPagination : SearchQueryPageRequest
 ```
 
-| Property | Type              | Description                                                                                   |
-| -------- | ----------------- | --------------------------------------------------------------------------------------------- |
-| `Before` | `StartCursor`     | Use the `startCursor` value from the previous response to fetch the previous page of results. |
-| `Limit`  | `Nullable<Int32>` | The maximum number of items to return in one request.                                         |
+| Property | Type                    | Description                                                                                   |
+| -------- | ----------------------- | --------------------------------------------------------------------------------------------- |
+| `Before` | `Nullable<StartCursor>` | Use the `startCursor` value from the previous response to fetch the previous page of results. |
+| `Limit`  | `Nullable<Int32>`       | The maximum number of items to return in one request.                                         |
 
 ## CursorForwardPagination
 
@@ -2969,10 +3367,10 @@ CursorForwardPagination
 public sealed class CursorForwardPagination : SearchQueryPageRequest
 ```
 
-| Property | Type              | Description                                                                             |
-| -------- | ----------------- | --------------------------------------------------------------------------------------- |
-| `After`  | `EndCursor`       | Use the `endCursor` value from the previous response to fetch the next page of results. |
-| `Limit`  | `Nullable<Int32>` | The maximum number of items to return in one request.                                   |
+| Property | Type                  | Description                                                                             |
+| -------- | --------------------- | --------------------------------------------------------------------------------------- |
+| `After`  | `Nullable<EndCursor>` | Use the `endCursor` value from the previous response to fetch the next page of results. |
+| `Limit`  | `Nullable<Int32>`     | The maximum number of items to return in one request.                                   |
 
 ## DateTimeFilterProperty
 
@@ -3533,12 +3931,10 @@ Configuration for deployment characteristics.
 public sealed class DeploymentConfigurationResponse
 ```
 
-| Property                | Type      | Description                                  |
-| ----------------------- | --------- | -------------------------------------------- |
-| `IsEnterprise`          | `Boolean` | Whether this is an enterprise deployment.    |
-| `IsMultiTenancyEnabled` | `Boolean` | Whether multi-tenancy is enabled.            |
-| `ContextPath`           | `String`  | The servlet context path for the deployment. |
-| `MaxRequestSize`        | `Int64`   | The maximum HTTP request size in bytes.      |
+| Property                | Type      | Description                             |
+| ----------------------- | --------- | --------------------------------------- |
+| `IsMultiTenancyEnabled` | `Boolean` | Whether multi-tenancy is enabled.       |
+| `MaxRequestSize`        | `Int64`   | The maximum HTTP request size in bytes. |
 
 ## DeploymentDecisionRequirementsResult
 
@@ -3689,9 +4085,9 @@ Provides a concrete key to use as ancestor scope for the created element instanc
 public sealed class DirectAncestorKeyInstruction : AncestorScopeInstruction
 ```
 
-| Property                     | Type     | Description                                                                                                                                                                                                                                                                                                   |
-| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AncestorElementInstanceKey` | `Object` | The key of the ancestor scope the element instance should be created in. Set to -1 to create the new element instance within an existing element instance of the flow scope. If multiple instances of the target element's flow scope exist, choose one specifically with this property by providing its key. |
+| Property                     | Type                 | Description                                                                                                                                                                                                                                                                                                   |
+| ---------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AncestorElementInstanceKey` | `ElementInstanceKey` | The key of the ancestor scope the element instance should be created in. Set to -1 to create the new element instance within an existing element instance of the flow scope. If multiple instances of the target element's flow scope exist, choose one specifically with this property by providing its key. |
 
 ## DocumentCreationBatchResponse
 
@@ -3853,28 +4249,54 @@ public sealed class ElementIdFilterProperty
 
 ## ElementInstanceFilter
 
-Element instance filter.
+Element instance search filter.
 
 ```csharp
 public sealed class ElementInstanceFilter
 ```
 
-| Property                  | Type                                  | Description                                                                                                                                                                                                                                                                                          |
-| ------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ProcessDefinitionId`     | `Nullable<ProcessDefinitionId>`       | The process definition ID associated to this element instance.                                                                                                                                                                                                                                       |
-| `State`                   | `ElementInstanceStateFilterProperty`  | State of element instance as defined set of values.                                                                                                                                                                                                                                                  |
-| `Type`                    | `Nullable<ElementInstanceFilterType>` | Type of element as defined set of values.                                                                                                                                                                                                                                                            |
-| `ElementId`               | `ElementIdFilterProperty`             | The element ID for this element instance.                                                                                                                                                                                                                                                            |
-| `ElementName`             | `StringFilterProperty`                | The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.                                                                                                                                                  |
-| `HasIncident`             | `Nullable<Boolean>`                   | Shows whether this element instance has an incident related to.                                                                                                                                                                                                                                      |
-| `TenantId`                | `Nullable<TenantId>`                  | The unique identifier of the tenant.                                                                                                                                                                                                                                                                 |
-| `ElementInstanceKey`      | `Nullable<ElementInstanceKey>`        | The assigned key, which acts as a unique identifier for this element instance.                                                                                                                                                                                                                       |
-| `ProcessInstanceKey`      | `Nullable<ProcessInstanceKey>`        | The process instance key associated to this element instance.                                                                                                                                                                                                                                        |
-| `ProcessDefinitionKey`    | `Nullable<ProcessDefinitionKey>`      | The process definition key associated to this element instance.                                                                                                                                                                                                                                      |
-| `IncidentKey`             | `Nullable<IncidentKey>`               | The key of incident if field incident is true.                                                                                                                                                                                                                                                       |
-| `StartDate`               | `DateTimeFilterProperty`              | The start date of this element instance.                                                                                                                                                                                                                                                             |
-| `EndDate`                 | `DateTimeFilterProperty`              | The end date of this element instance.                                                                                                                                                                                                                                                               |
-| `ElementInstanceScopeKey` | `String`                              | The scope key of this element instance. If provided with a process instance key it will return element instances that are immediate children of the process instance. If provided with an element instance key it will return element instances that are immediate children of the element instance. |
+| Property                  | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ProcessDefinitionId`     | `Nullable<ProcessDefinitionId>`       | The process definition ID associated to this element instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `State`                   | `ElementInstanceStateFilterProperty`  | State of element instance as defined set of values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `Type`                    | `Nullable<ElementInstanceFilterType>` | Type of element as defined set of values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `ElementId`               | `ElementIdFilterProperty`             | The element ID for this element instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `ElementName`             | `StringFilterProperty`                | The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `HasIncident`             | `Nullable<Boolean>`                   | Shows whether this element instance has an incident related to.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `TenantId`                | `Nullable<TenantId>`                  | The unique identifier of the tenant.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `ElementInstanceKey`      | `Nullable<ElementInstanceKey>`        | The assigned key, which acts as a unique identifier for this element instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `ProcessInstanceKey`      | `Nullable<ProcessInstanceKey>`        | The process instance key associated to this element instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `ProcessDefinitionKey`    | `Nullable<ProcessDefinitionKey>`      | The process definition key associated to this element instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `IncidentKey`             | `Nullable<IncidentKey>`               | The key of incident if field incident is true.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `StartDate`               | `DateTimeFilterProperty`              | The start date of this element instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `EndDate`                 | `DateTimeFilterProperty`              | The end date of this element instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `ElementInstanceScopeKey` | `String`                              | The scope key of this element instance. If provided with a process instance key it will return element instances that are immediate children of the process instance. If provided with an element instance key it will return element instances that are immediate children of the element instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `Or`                      | `List<ElementInstanceFilterFields>`   | Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied. Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match. &lt;br&gt; &lt;em&gt;Example:&lt;/em&gt; `json {   "processInstanceKey": "2251799813685323",   "$or": [     { "elementName": { "$like": "*Order*" } },     { "elementId":   { "$like": "*Order*" } }   ] } ` This matches element instances scoped to the given process instance whose: &lt;ul style="padding-left: 20px; margin-left: 20px;"&gt; &lt;li style="list-style-type: disc;"&gt;&lt;code&gt;elementName&lt;/code&gt; contains &lt;em&gt;Order&lt;/em&gt;, or&lt;/li&gt; &lt;li style="list-style-type: disc;"&gt;&lt;code&gt;elementId&lt;/code&gt; contains &lt;em&gt;Order&lt;/em&gt;&lt;/li&gt; &lt;/ul&gt; &lt;br&gt; &lt;p&gt;Note: Using complex &lt;code&gt;$or&lt;/code&gt; conditions may impact performance, use with caution in high-volume environments. |
+
+## ElementInstanceFilterFields
+
+Element instance filter fields.
+
+```csharp
+public sealed class ElementInstanceFilterFields
+```
+
+| Property                  | Type                                        | Description                                                                                                                                                                                                                                                                                          |
+| ------------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ProcessDefinitionId`     | `Nullable<ProcessDefinitionId>`             | The process definition ID associated to this element instance.                                                                                                                                                                                                                                       |
+| `State`                   | `ElementInstanceStateFilterProperty`        | State of element instance as defined set of values.                                                                                                                                                                                                                                                  |
+| `Type`                    | `Nullable<ElementInstanceFilterFieldsType>` | Type of element as defined set of values.                                                                                                                                                                                                                                                            |
+| `ElementId`               | `ElementIdFilterProperty`                   | The element ID for this element instance.                                                                                                                                                                                                                                                            |
+| `ElementName`             | `StringFilterProperty`                      | The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.                                                                                                                                                  |
+| `HasIncident`             | `Nullable<Boolean>`                         | Shows whether this element instance has an incident related to.                                                                                                                                                                                                                                      |
+| `TenantId`                | `Nullable<TenantId>`                        | The unique identifier of the tenant.                                                                                                                                                                                                                                                                 |
+| `ElementInstanceKey`      | `Nullable<ElementInstanceKey>`              | The assigned key, which acts as a unique identifier for this element instance.                                                                                                                                                                                                                       |
+| `ProcessInstanceKey`      | `Nullable<ProcessInstanceKey>`              | The process instance key associated to this element instance.                                                                                                                                                                                                                                        |
+| `ProcessDefinitionKey`    | `Nullable<ProcessDefinitionKey>`            | The process definition key associated to this element instance.                                                                                                                                                                                                                                      |
+| `IncidentKey`             | `Nullable<IncidentKey>`                     | The key of incident if field incident is true.                                                                                                                                                                                                                                                       |
+| `StartDate`               | `DateTimeFilterProperty`                    | The start date of this element instance.                                                                                                                                                                                                                                                             |
+| `EndDate`                 | `DateTimeFilterProperty`                    | The end date of this element instance.                                                                                                                                                                                                                                                               |
+| `ElementInstanceScopeKey` | `String`                                    | The scope key of this element instance. If provided with a process instance key it will return element instances that are immediate children of the process instance. If provided with an element instance key it will return element instances that are immediate children of the element instance. |
 
 ## ElementInstanceKeyExactMatch
 
@@ -3996,6 +4418,83 @@ public sealed class ElementInstanceStateFilterProperty
 | `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                     |
 | `In`     | `List<ElementInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
 | `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## ElementInstanceWaitStateFilter
+
+Filters for the element instance inspection.
+
+```csharp
+public sealed class ElementInstanceWaitStateFilter
+```
+
+| Property                 | Type                                 | Description                          |
+| ------------------------ | ------------------------------------ | ------------------------------------ |
+| `ElementInstanceKey`     | `ElementInstanceKeyFilterProperty`   | Filter by element instance key.      |
+| `ProcessInstanceKey`     | `ProcessInstanceKeyFilterProperty`   | Filter by process instance key.      |
+| `RootProcessInstanceKey` | `ProcessInstanceKeyFilterProperty`   | Filter by root process instance key. |
+| `ElementId`              | `ElementIdFilterProperty`            | Filter by element ID.                |
+| `ElementType`            | `WaitStateElementTypeFilterProperty` | Filter by element type.              |
+| `WaitStateType`          | `WaitStateTypeFilterProperty`        | Filter by wait state type.           |
+
+## ElementInstanceWaitStateQuery
+
+Element instance inspection request.
+
+```csharp
+public sealed class ElementInstanceWaitStateQuery
+```
+
+| Property | Type                                             | Description                         |
+| -------- | ------------------------------------------------ | ----------------------------------- |
+| `Sort`   | `List<ElementInstanceWaitStateQuerySortRequest>` | Sort field criteria.                |
+| `Filter` | `ElementInstanceWaitStateFilter`                 | Filter criteria for the inspection. |
+| `Page`   | `SearchQueryPageRequest`                         | Pagination criteria.                |
+
+## ElementInstanceWaitStateQueryResult
+
+ElementInstanceWaitStateQueryResult
+
+```csharp
+public sealed class ElementInstanceWaitStateQueryResult
+```
+
+| Property | Type                                   | Description                                      |
+| -------- | -------------------------------------- | ------------------------------------------------ |
+| `Items`  | `List<ElementInstanceWaitStateResult>` | The matching waiting states.                     |
+| `Page`   | `SearchQueryPageResponse`              | Pagination information about the search results. |
+
+## ElementInstanceWaitStateQuerySortRequest
+
+ElementInstanceWaitStateQuerySortRequest
+
+```csharp
+public sealed class ElementInstanceWaitStateQuerySortRequest
+```
+
+| Property | Type                                            | Description                                   |
+| -------- | ----------------------------------------------- | --------------------------------------------- |
+| `Field`  | `ElementInstanceWaitStateQuerySortRequestField` | The field to sort by.                         |
+| `Order`  | `Nullable<SortOrderEnum>`                       | The order in which to sort the related field. |
+
+## ElementInstanceWaitStateResult
+
+An element instance waiting state.
+
+```csharp
+public sealed class ElementInstanceWaitStateResult
+```
+
+| Property                 | Type                           | Description                                                   |
+| ------------------------ | ------------------------------ | ------------------------------------------------------------- |
+| `WaitStateType`          | `WaitStateTypeEnum`            | The type of waiting state an element instance is in.          |
+| `RootProcessInstanceKey` | `Nullable<ProcessInstanceKey>` | Key of the root process instance.                             |
+| `ProcessInstanceKey`     | `ProcessInstanceKey`           | The process instance key associated to this element instance. |
+| `ElementInstanceKey`     | `ElementInstanceKey`           | The element instance key associated to this element instance. |
+| `ElementId`              | `ElementId`                    | The element ID for this element instance.                     |
+| `ElementType`            | `WaitStateElementTypeEnum`     | The BPMN element type of this element instance.               |
+| `TenantId`               | `TenantId`                     | The tenant ID of the element instance.                        |
+| `JobDetails`             | `JobWaitStateDetails`          | Job details, present when waitStateType is JOB.               |
+| `MessageDetails`         | `MessageWaitStateDetails`      | Message details, present when waitStateType is MESSAGE.       |
 
 ## EndCursor
 
@@ -4146,11 +4645,12 @@ ExpressionEvaluationRequest
 public sealed class ExpressionEvaluationRequest : ITenantIdSettable
 ```
 
-| Property     | Type     | Description                                                                                                                          |
-| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `Expression` | `String` | The expression to evaluate (e.g., "=x + y")                                                                                          |
-| `TenantId`   | `String` | Required when the expression references tenant-scoped cluster variables                                                              |
-| `Variables`  | `Object` | Optional variables for expression evaluation. These variables are only used for the current evaluation and do not persist beyond it. |
+| Property     | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                 |
+| ------------ | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Expression` | `String`             | The expression to evaluate (e.g., "=x + y")                                                                                                                                                                                                                                                                                                                                 |
+| `TenantId`   | `String`             | Required when the expression references tenant-scoped cluster variables                                                                                                                                                                                                                                                                                                     |
+| `ScopeKey`   | `Nullable<ScopeKey>` | Key of the process instance or element instance whose variables should be made visible to the expression. Use a process instance key to evaluate against the process instance scope, or an element instance key to evaluate against that element instance scope. If omitted, the expression is evaluated unscoped, using only cluster variables and request-body variables. |
+| `Variables`  | `Object`             | Optional variables for expression evaluation. These variables are only used for the current evaluation and do not persist beyond it.                                                                                                                                                                                                                                        |
 
 ## ExpressionEvaluationResult
 
@@ -5076,6 +5576,21 @@ public sealed class IntegerFilterProperty
 | `Lte`    | `Nullable<Int32>`   | Lower than or equal comparison with the provided value.    |
 | `In`     | `List<Int32>`       | Checks if the property matches any of the provided values. |
 
+## IterationId
+
+A client-provided sequential integer identifying a logical iteration: one LLM
+call, its tool dispatches, and their results. Must be a positive integer,
+increasing with each iteration. Established by the
+connector when appending the first history item of an iteration.
+
+```csharp
+public readonly record struct IterationId : ICamundaLongKey, IEquatable<IterationId>
+```
+
+| Property | Type    | Description                |
+| -------- | ------- | -------------------------- |
+| `Value`  | `Int64` | The underlying long value. |
+
 ## JobActivationRequest
 
 JobActivationRequest
@@ -5239,30 +5754,31 @@ Job search filter.
 public sealed class JobFilter
 ```
 
-| Property                   | Type                                 | Description                                                                 |
-| -------------------------- | ------------------------------------ | --------------------------------------------------------------------------- |
-| `Deadline`                 | `DateTimeFilterProperty`             | When the job can next be activated.                                         |
-| `DeniedReason`             | `StringFilterProperty`               | The reason provided by the user task listener for denying the work.         |
-| `ElementId`                | `StringFilterProperty`               | The element ID associated with the job.                                     |
-| `ElementInstanceKey`       | `ElementInstanceKeyFilterProperty`   | The element instance key associated with the job.                           |
-| `EndTime`                  | `DateTimeFilterProperty`             | When the job ended.                                                         |
-| `ErrorCode`                | `StringFilterProperty`               | The error code provided for the failed job.                                 |
-| `ErrorMessage`             | `StringFilterProperty`               | The error message that provides additional context for a failed job.        |
-| `HasFailedWithRetriesLeft` | `Nullable<Boolean>`                  | Indicates whether the job has failed with retries left.                     |
-| `IsDenied`                 | `Nullable<Boolean>`                  | Indicates whether the user task listener denies the work.                   |
-| `JobKey`                   | `JobKeyFilterProperty`               | The key, a unique identifier for the job.                                   |
-| `Kind`                     | `JobKindFilterProperty`              | The kind of the job.                                                        |
-| `ListenerEventType`        | `JobListenerEventTypeFilterProperty` | The listener event type of the job.                                         |
-| `ProcessDefinitionId`      | `StringFilterProperty`               | The process definition ID associated with the job.                          |
-| `ProcessDefinitionKey`     | `ProcessDefinitionKeyFilterProperty` | The process definition key associated with the job.                         |
-| `ProcessInstanceKey`       | `ProcessInstanceKeyFilterProperty`   | The process instance key associated with the job.                           |
-| `Retries`                  | `IntegerFilterProperty`              | The number of retries left.                                                 |
-| `State`                    | `JobStateFilterProperty`             | The state of the job.                                                       |
-| `TenantId`                 | `StringFilterProperty`               | The tenant ID.                                                              |
-| `Type`                     | `StringFilterProperty`               | The type of the job.                                                        |
-| `Worker`                   | `StringFilterProperty`               | The name of the worker for this job.                                        |
-| `CreationTime`             | `DateTimeFilterProperty`             | When the job was created. Field is present for jobs created after 8.9.      |
-| `LastUpdateTime`           | `DateTimeFilterProperty`             | When the job was last updated. Field is present for jobs created after 8.9. |
+| Property                   | Type                                 | Description                                                                                                                          |
+| -------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `Deadline`                 | `DateTimeFilterProperty`             | When the job can next be activated.                                                                                                  |
+| `DeniedReason`             | `StringFilterProperty`               | The reason provided by the user task listener for denying the work.                                                                  |
+| `ElementId`                | `StringFilterProperty`               | The element ID associated with the job.                                                                                              |
+| `ElementInstanceKey`       | `ElementInstanceKeyFilterProperty`   | The element instance key associated with the job.                                                                                    |
+| `EndTime`                  | `DateTimeFilterProperty`             | When the job ended.                                                                                                                  |
+| `ErrorCode`                | `StringFilterProperty`               | The error code provided for the failed job.                                                                                          |
+| `ErrorMessage`             | `StringFilterProperty`               | The error message that provides additional context for a failed job.                                                                 |
+| `HasFailedWithRetriesLeft` | `Nullable<Boolean>`                  | Indicates whether the job has failed with retries left.                                                                              |
+| `IsDenied`                 | `Nullable<Boolean>`                  | Indicates whether the user task listener denies the work.                                                                            |
+| `JobKey`                   | `JobKeyFilterProperty`               | The key, a unique identifier for the job.                                                                                            |
+| `Kind`                     | `JobKindFilterProperty`              | The kind of the job.                                                                                                                 |
+| `ListenerEventType`        | `JobListenerEventTypeFilterProperty` | The listener event type of the job.                                                                                                  |
+| `Priority`                 | `IntegerFilterProperty`              | The priority of the job. Jobs created before 8.10 have no stored priority and are excluded from results when this filter is applied. |
+| `ProcessDefinitionId`      | `StringFilterProperty`               | The process definition ID associated with the job.                                                                                   |
+| `ProcessDefinitionKey`     | `ProcessDefinitionKeyFilterProperty` | The process definition key associated with the job.                                                                                  |
+| `ProcessInstanceKey`       | `ProcessInstanceKeyFilterProperty`   | The process instance key associated with the job.                                                                                    |
+| `Retries`                  | `IntegerFilterProperty`              | The number of retries left.                                                                                                          |
+| `State`                    | `JobStateFilterProperty`             | The state of the job.                                                                                                                |
+| `TenantId`                 | `StringFilterProperty`               | The tenant ID.                                                                                                                       |
+| `Type`                     | `StringFilterProperty`               | The type of the job.                                                                                                                 |
+| `Worker`                   | `StringFilterProperty`               | The name of the worker for this job.                                                                                                 |
+| `CreationTime`             | `DateTimeFilterProperty`             | When the job was created. Field is present for jobs created after 8.9.                                                               |
+| `LastUpdateTime`           | `DateTimeFilterProperty`             | When the job was last updated. Field is present for jobs created after 8.9.                                                          |
 
 ## JobHandler
 
@@ -5506,32 +6022,33 @@ JobSearchResult
 public sealed class JobSearchResult
 ```
 
-| Property                   | Type                           | Description                                                                                                                                                                                                                                 |
-| -------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CustomHeaders`            | `Dictionary<String>`           | A set of custom headers defined during modelling.                                                                                                                                                                                           |
-| `Deadline`                 | `Nullable<DateTimeOffset>`     | If the job has been activated, when it will next be available to be activated.                                                                                                                                                              |
-| `DeniedReason`             | `String`                       | The reason provided by the user task listener for denying the work.                                                                                                                                                                         |
-| `ElementId`                | `Nullable<ElementId>`          | The element ID associated with the job. May be missing on job failure.                                                                                                                                                                      |
-| `ElementInstanceKey`       | `ElementInstanceKey`           | The element instance key associated with the job.                                                                                                                                                                                           |
-| `EndTime`                  | `Nullable<DateTimeOffset>`     | End date of the job. This is `null` if the job is not in an end state yet.                                                                                                                                                                  |
-| `ErrorCode`                | `String`                       | The error code provided for a failed job.                                                                                                                                                                                                   |
-| `ErrorMessage`             | `String`                       | The error message that provides additional context for a failed job.                                                                                                                                                                        |
-| `HasFailedWithRetriesLeft` | `Boolean`                      | Indicates whether the job has failed with retries left.                                                                                                                                                                                     |
-| `IsDenied`                 | `Nullable<Boolean>`            | Indicates whether the user task listener denies the work.                                                                                                                                                                                   |
-| `JobKey`                   | `JobKey`                       | The key, a unique identifier for the job.                                                                                                                                                                                                   |
-| `Kind`                     | `JobKindEnum`                  | The job kind.                                                                                                                                                                                                                               |
-| `ListenerEventType`        | `JobListenerEventTypeEnum`     | The listener event type of the job.                                                                                                                                                                                                         |
-| `ProcessDefinitionId`      | `ProcessDefinitionId`          | The process definition ID associated with the job.                                                                                                                                                                                          |
-| `ProcessDefinitionKey`     | `ProcessDefinitionKey`         | The process definition key associated with the job.                                                                                                                                                                                         |
-| `ProcessInstanceKey`       | `ProcessInstanceKey`           | The process instance key associated with the job.                                                                                                                                                                                           |
-| `RootProcessInstanceKey`   | `Nullable<ProcessInstanceKey>` | The key of the root process instance. The root process instance is the top-level ancestor in the process instance hierarchy. This field is only present for data belonging to process instance hierarchies created in version 8.9 or later. |
-| `Retries`                  | `Int32`                        | The amount of retries left to this job.                                                                                                                                                                                                     |
-| `State`                    | `JobStateEnum`                 | The state of the job.                                                                                                                                                                                                                       |
-| `TenantId`                 | `TenantId`                     | The unique identifier of the tenant.                                                                                                                                                                                                        |
-| `Type`                     | `String`                       | The type of the job.                                                                                                                                                                                                                        |
-| `Worker`                   | `String`                       | The name of the worker of this job.                                                                                                                                                                                                         |
-| `CreationTime`             | `Nullable<DateTimeOffset>`     | When the job was created. Field is present for jobs created after 8.9.                                                                                                                                                                      |
-| `LastUpdateTime`           | `Nullable<DateTimeOffset>`     | When the job was last updated. Field is present for jobs created after 8.9.                                                                                                                                                                 |
+| Property                   | Type                           | Description                                                                                                                                                                                                                                    |
+| -------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CustomHeaders`            | `Dictionary<String>`           | A set of custom headers defined during modelling.                                                                                                                                                                                              |
+| `Deadline`                 | `Nullable<DateTimeOffset>`     | If the job has been activated, when it will next be available to be activated.                                                                                                                                                                 |
+| `DeniedReason`             | `String`                       | The reason provided by the user task listener for denying the work.                                                                                                                                                                            |
+| `ElementId`                | `Nullable<ElementId>`          | The element ID associated with the job. May be missing on job failure.                                                                                                                                                                         |
+| `ElementInstanceKey`       | `ElementInstanceKey`           | The element instance key associated with the job.                                                                                                                                                                                              |
+| `EndTime`                  | `Nullable<DateTimeOffset>`     | End date of the job. This is `null` if the job is not in an end state yet.                                                                                                                                                                     |
+| `ErrorCode`                | `String`                       | The error code provided for a failed job.                                                                                                                                                                                                      |
+| `ErrorMessage`             | `String`                       | The error message that provides additional context for a failed job.                                                                                                                                                                           |
+| `HasFailedWithRetriesLeft` | `Boolean`                      | Indicates whether the job has failed with retries left.                                                                                                                                                                                        |
+| `IsDenied`                 | `Nullable<Boolean>`            | Indicates whether the user task listener denies the work.                                                                                                                                                                                      |
+| `JobKey`                   | `JobKey`                       | The key, a unique identifier for the job.                                                                                                                                                                                                      |
+| `Kind`                     | `JobKindEnum`                  | The job kind.                                                                                                                                                                                                                                  |
+| `ListenerEventType`        | `JobListenerEventTypeEnum`     | The listener event type of the job.                                                                                                                                                                                                            |
+| `ProcessDefinitionId`      | `ProcessDefinitionId`          | The process definition ID associated with the job.                                                                                                                                                                                             |
+| `ProcessDefinitionKey`     | `ProcessDefinitionKey`         | The process definition key associated with the job.                                                                                                                                                                                            |
+| `ProcessInstanceKey`       | `ProcessInstanceKey`           | The process instance key associated with the job.                                                                                                                                                                                              |
+| `RootProcessInstanceKey`   | `Nullable<ProcessInstanceKey>` | The key of the root process instance. The root process instance is the top-level ancestor in the process instance hierarchy. This field is only present for data belonging to process instance hierarchies created in version 8.9 or later.    |
+| `Retries`                  | `Int32`                        | The amount of retries left to this job.                                                                                                                                                                                                        |
+| `State`                    | `JobStateEnum`                 | The state of the job.                                                                                                                                                                                                                          |
+| `TenantId`                 | `TenantId`                     | The unique identifier of the tenant.                                                                                                                                                                                                           |
+| `Type`                     | `String`                       | The type of the job.                                                                                                                                                                                                                           |
+| `Worker`                   | `String`                       | The name of the worker of this job.                                                                                                                                                                                                            |
+| `CreationTime`             | `Nullable<DateTimeOffset>`     | When the job was created. Field is present for jobs created after 8.9.                                                                                                                                                                         |
+| `LastUpdateTime`           | `Nullable<DateTimeOffset>`     | When the job was last updated. Field is present for jobs created after 8.9.                                                                                                                                                                    |
+| `Priority`                 | `Int32`                        | The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; they appear last when sorting by this field and are excluded when filtering by this field. The API returns 0 for such jobs. |
 
 ## JobStateExactMatch
 
@@ -5685,6 +6202,22 @@ public sealed class JobUpdateRequest
 | -------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `Changeset`          | `JobChangeset`                 | JSON object with changed job attribute values. The job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead. |
 | `OperationReference` | `Nullable<OperationReference>` | A reference key chosen by the user that will be part of all records resulting from this operation. Must be &gt; 0 if provided.                               |
+
+## JobWaitStateDetails
+
+JobWaitStateDetails
+
+```csharp
+public sealed class JobWaitStateDetails
+```
+
+| Property            | Type                                 | Description                                                                                  |
+| ------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------- |
+| `JobKey`            | `JobKey`                             | The key of the job.                                                                          |
+| `JobType`           | `String`                             | The job type (worker subscription identifier).                                               |
+| `JobKind`           | `JobKindEnum`                        | The kind of job.                                                                             |
+| `ListenerEventType` | `Nullable<JobListenerEventTypeEnum>` | The listener event type of the job (only set for execution listener and task listener jobs). |
+| `Retries`           | `Nullable<Int32>`                    | The number of retries remaining for the job.                                                 |
 
 ## JobWorker
 
@@ -6232,6 +6765,19 @@ public sealed class MessageSubscriptionTypeFilterProperty
 | `Exists` | `Nullable<Boolean>`                     | Checks if the current property exists.                                                                                                                                                                                                                     |
 | `In`     | `List<MessageSubscriptionTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
 | `Like`   | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## MessageWaitStateDetails
+
+MessageWaitStateDetails
+
+```csharp
+public sealed class MessageWaitStateDetails
+```
+
+| Property         | Type     | Description                                                               |
+| ---------------- | -------- | ------------------------------------------------------------------------- |
+| `MessageName`    | `String` | The name of the message being awaited.                                    |
+| `CorrelationKey` | `String` | The correlation key for the message subscription (null for start events). |
 
 ## MigrateProcessInstanceMappingInstruction
 
@@ -8285,6 +8831,15 @@ into your DTO type.
 public static class TypedVariables
 ```
 
+## TypedVariablesException
+
+Base class for all errors raised by the DTO-driven typed variable map feature
+().
+
+```csharp
+public class TypedVariablesException : Exception, ISerializable
+```
+
 ## UpdateClusterVariableRequest
 
 UpdateClusterVariableRequest
@@ -8766,6 +9321,23 @@ public readonly record struct Username : ICamundaKey, IEquatable<Username>
 | -------- | -------- | ---------------------------- |
 | `Value`  | `String` | The underlying string value. |
 
+## VariableDeserializationException
+
+Raised when a present variable value cannot be deserialized.
+
+This covers both a value that is not parseable as JSON and a syntactically valid value
+that cannot be bound to the requested CLR type. A missing variable is not an
+error (it simply does not appear in the map); a present but undeserializable
+value is, and is surfaced here rather than silently dropped.
+
+```csharp
+public sealed class VariableDeserializationException : TypedVariablesException, ISerializable
+```
+
+| Property       | Type     | Description                                        |
+| -------------- | -------- | -------------------------------------------------- |
+| `VariableName` | `String` | The variable name whose value could not be parsed. |
+
 ## VariableFilter
 
 Variable filter request.
@@ -8812,6 +9384,24 @@ public sealed class VariableKeyFilterProperty
 | `In`     | `List<VariableKey>`     | Checks if the property matches any of the provided values.  |
 | `NotIn`  | `List<VariableKey>`     | Checks if the property matches none of the provided values. |
 
+## VariableMap<T>
+
+Result of a DTO-driven variable search ().
+
+Holds the parsed variable values keyed by their query name (the DTO member's
+[JsonPropertyName] value, or the member name transformed by the serializer's naming
+policy). Provides lenient, defensive access via /
+and a strict that constructs the
+declared DTO and enforces required members.
+
+```csharp
+public sealed class VariableMap<T> where T : class
+```
+
+| Property | Type                               | Description                                         |
+| -------- | ---------------------------------- | --------------------------------------------------- |
+| `Raw`    | `IReadOnlyDictionary<JsonElement>` | The parsed variable values, keyed by variable name. |
+
 ## VariableResult
 
 Variable search response item.
@@ -8846,6 +9436,24 @@ public sealed class VariableResultBase
 | `ScopeKey`               | `ScopeKey`                     | The key of the scope where this variable is directly defined. For process-level variables, this is the process instance key. For local variables, this is the key of the specific element instance (task, subprocess, gateway, event, etc.) where the variable is directly defined. |
 | `ProcessInstanceKey`     | `ProcessInstanceKey`           | The key of the process instance of this variable.                                                                                                                                                                                                                                   |
 | `RootProcessInstanceKey` | `Nullable<ProcessInstanceKey>` | The key of the root process instance. The root process instance is the top-level ancestor in the process instance hierarchy. This field is only present for data belonging to process instance hierarchies created in version 8.9 or later.                                         |
+
+## VariableScopeCollisionException
+
+Raised when a declared variable name is returned at more than one scope.
+
+The DTO is a flat name-to-value map, but BPMN variables are scoped (process-level
+vs. local element scopes). When a declared variable resolves to multiple scopes the
+SDK cannot deterministically choose one, so it raises rather than guessing. Pass
+scopeKey to the search call to disambiguate.
+
+```csharp
+public sealed class VariableScopeCollisionException : TypedVariablesException, ISerializable
+```
+
+| Property       | Type                    | Description                                                             |
+| -------------- | ----------------------- | ----------------------------------------------------------------------- |
+| `VariableName` | `String`                | The variable name that was found at multiple scopes.                    |
+| `ScopeKeys`    | `IReadOnlyList<String>` | The distinct scope keys the variable was observed at, sorted ascending. |
 
 ## VariableSearchQuery
 
@@ -8906,6 +9514,21 @@ public sealed class VariableSearchResult
 | `ProcessInstanceKey`     | `ProcessInstanceKey`           | The key of the process instance of this variable.                                                                                                                                                                                                                                   |
 | `RootProcessInstanceKey` | `Nullable<ProcessInstanceKey>` | The key of the root process instance. The root process instance is the top-level ancestor in the process instance hierarchy. This field is only present for data belonging to process instance hierarchies created in version 8.9 or later.                                         |
 
+## VariableValidationException
+
+Raised by when one or more required DTO members
+(non-nullable members, or members marked with the required modifier) are absent
+from the search result.
+
+```csharp
+public sealed class VariableValidationException : TypedVariablesException, ISerializable
+```
+
+| Property               | Type                    | Description                                                   |
+| ---------------------- | ----------------------- | ------------------------------------------------------------- |
+| `DtoType`              | `Type`                  | The DTO type that failed validation.                          |
+| `MissingVariableNames` | `IReadOnlyList<String>` | The variable names of the required members that were missing. |
+
 ## VariableValueFilterProperty
 
 VariableValueFilterProperty
@@ -8918,6 +9541,62 @@ public sealed class VariableValueFilterProperty
 | -------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Name`   | `String`               | Name of the variable.                                                                                                                                                                                                                                                                                 |
 | `Value`  | `StringFilterProperty` | The value of the variable. Variable values in filters need to be in serialized JSON format. For example, a variable with string value `myValue` can be found with the filter value `"myValue"`. Consider appropriate escaping for special characters in JSON strings when constructing filter values. |
+
+## WaitStateElementTypeExactMatch
+
+Matches the value exactly.
+
+```csharp
+public readonly record struct WaitStateElementTypeExactMatch : ICamundaKey, IEquatable<WaitStateElementTypeExactMatch>
+```
+
+| Property | Type     | Description                  |
+| -------- | -------- | ---------------------------- |
+| `Value`  | `String` | The underlying string value. |
+
+## WaitStateElementTypeFilterProperty
+
+Element type property with full advanced search capabilities.
+
+```csharp
+public sealed class WaitStateElementTypeFilterProperty
+```
+
+| Property | Type                                 | Description                                                                                                                                                                                                                                                |
+| -------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<WaitStateElementTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<WaitStateElementTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<WaitStateElementTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## WaitStateTypeExactMatch
+
+Matches the value exactly.
+
+```csharp
+public readonly record struct WaitStateTypeExactMatch : ICamundaKey, IEquatable<WaitStateTypeExactMatch>
+```
+
+| Property | Type     | Description                  |
+| -------- | -------- | ---------------------------- |
+| `Value`  | `String` | The underlying string value. |
+
+## WaitStateTypeFilterProperty
+
+Wait state type property with full advanced search capabilities.
+
+```csharp
+public sealed class WaitStateTypeFilterProperty
+```
+
+| Property | Type                          | Description                                                                                                                                                                                                                                                |
+| -------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<WaitStateTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                               |
+| `Neq`    | `Nullable<WaitStateTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                             |
+| `Exists` | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                     |
+| `In`     | `List<WaitStateTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                 |
+| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character.  Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## WorkerDefaultsConfig
 

@@ -458,6 +458,35 @@ async function _readmeDeployNode() {
 }
 
 // ---------------------------------------------------------------------------
+// Typed Variable Map (DTO-driven search)
+// ---------------------------------------------------------------------------
+
+async function _readmeTypedVariables(processInstanceKey: ProcessInstanceKey) {
+  const camunda = createCamundaClient();
+  //#region ReadmeTypedVariables
+  // The Zod schema is the DTO: its keys are the variable names to fetch, and its
+  // shape drives validation. Only these declared variables are queried, so memory
+  // stays bound by the DTO — not by the total number of variables on the instance.
+  const OrderVariables = z.object({
+    orderId: z.string(), // required
+    amount: z.number().optional(), // optional
+  });
+
+  const map = await camunda.searchVariablesAsDto(OrderVariables, { processInstanceKey });
+
+  // Lenient access: defensive reads that never throw on missing variables.
+  if (map.has('amount')) {
+    console.log('Amount:', map.get('amount'));
+  }
+
+  // Strict access: returns a fully-typed object, or throws a ZodError when a
+  // required variable is missing or malformed.
+  const order = map.validate(); // { orderId: string; amount?: number }
+  console.log('Order:', order.orderId);
+  //#endregion ReadmeTypedVariables
+}
+
+// ---------------------------------------------------------------------------
 // Testing Patterns
 // ---------------------------------------------------------------------------
 
@@ -659,6 +688,7 @@ void _readmeErrorHandling;
 void _readmeResultClient;
 void _readmeDeployBrowser;
 void _readmeDeployNode;
+void _readmeTypedVariables;
 void _readmeTestingClient;
 void _readmeTestingMock;
 void _readmeWorkerDefaultsEnv;

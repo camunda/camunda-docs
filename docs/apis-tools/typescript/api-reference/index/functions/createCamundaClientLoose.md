@@ -933,6 +933,26 @@ createAgentInstance(...a): CancelablePromise<{
 `agentInstanceKey`: `string`;
 \}\>
 
+### createAgentInstanceHistoryItem()
+
+```ts
+createAgentInstanceHistoryItem(...a): CancelablePromise<{
+  historyItemKey: string;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`historyItemKey`: `string`;
+\}\>
+
 ### createAuthorization()
 
 ```ts
@@ -2109,8 +2129,12 @@ getAgentInstance(...a): CancelablePromise<{
      outputTokens: number;
      toolCalls: number;
   };
+  processDefinitionId: string;
   processDefinitionKey: string;
+  processDefinitionVersion: number;
+  processDefinitionVersionTag: string | null;
   processInstanceKey: string;
+  rootProcessInstanceKey: string;
   status: AgentInstanceStatusEnum;
   tenantId: string;
   tools: object[];
@@ -2148,8 +2172,12 @@ getAgentInstance(...a): CancelablePromise<{
 `outputTokens`: `number`;
 `toolCalls`: `number`;
 \};
+`processDefinitionId`: `string`;
 `processDefinitionKey`: `string`;
+`processDefinitionVersion`: `number`;
+`processDefinitionVersionTag`: `string` \| `null`;
 `processInstanceKey`: `string`;
+`rootProcessInstanceKey`: `string`;
 `status`: [`AgentInstanceStatusEnum`](../type-aliases/AgentInstanceStatusEnum.md);
 `tenantId`: `string`;
 `tools`: `object`[];
@@ -3229,8 +3257,8 @@ getElementInstance(...a): CancelablePromise<{
   startDate: string;
   state: ElementInstanceStateEnum;
   tenantId: string;
-  type:   | "USER_TASK"
-     | "UNKNOWN"
+  type:   | "UNKNOWN"
+     | "USER_TASK"
      | "UNSPECIFIED"
      | "PROCESS"
      | "SUB_PROCESS"
@@ -3289,8 +3317,8 @@ getElementInstance(...a): CancelablePromise<{
 `startDate`: `string`;
 `state`: [`ElementInstanceStateEnum`](../type-aliases/ElementInstanceStateEnum.md);
 `tenantId`: `string`;
-`type`: \| `"USER_TASK"`
-\| `"UNKNOWN"`
+`type`: \| `"UNKNOWN"`
+\| `"USER_TASK"`
 \| `"UNSPECIFIED"`
 \| `"PROCESS"`
 \| `"SUB_PROCESS"`
@@ -4389,18 +4417,12 @@ getSystemConfiguration(...a): CancelablePromise<{
      isLoginDelegated: boolean;
   };
   cloud: {
-     clusterId: string | null;
-     mixpanelAPIHost: string | null;
-     mixpanelToken: string | null;
-     organizationId: string | null;
      stage: CloudStage | null;
   };
   components: {
      active: WebappComponent[];
   };
   deployment: {
-     contextPath: string;
-     isEnterprise: boolean;
      isMultiTenancyEnabled: boolean;
      maxRequestSize: number;
   };
@@ -4429,18 +4451,12 @@ getSystemConfiguration(...a): CancelablePromise<{
 `isLoginDelegated`: `boolean`;
 \};
 `cloud`: \{
-`clusterId`: `string` \| `null`;
-`mixpanelAPIHost`: `string` \| `null`;
-`mixpanelToken`: `string` \| `null`;
-`organizationId`: `string` \| `null`;
 `stage`: [`CloudStage`](../type-aliases/CloudStage.md) \| `null`;
 \};
 `components`: \{
 `active`: [`WebappComponent`](../type-aliases/WebappComponent.md)[];
 \};
 `deployment`: \{
-`contextPath`: `string`;
-`isEnterprise`: `boolean`;
 `isMultiTenancyEnabled`: `boolean`;
 `maxRequestSize`: `number`;
 \};
@@ -5186,6 +5202,54 @@ resumeBatchOperation(...a): CancelablePromise<void>;
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
+### searchAgentInstanceHistory()
+
+```ts
+searchAgentInstanceHistory(...a): CancelablePromise<{
+  items: object[];
+  page: {
+     endCursor:   | {
+      [key: number]: string;
+        __brand: "EndCursor";
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
+      [key: number]: string;
+        __brand: "StartCursor";
+      }
+        | null;
+     totalItems: number;
+  };
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`items`: `object`[];
+`page`: \{
+`endCursor`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"EndCursor"`;
+\}
+\| `null`;
+`hasMoreTotalItems`: `boolean`;
+`startCursor`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"StartCursor"`;
+\}
+\| `null`;
+`totalItems`: `number`;
+\};
+\}\>
+
 ### searchAgentInstances()
 
 ```ts
@@ -5862,6 +5926,54 @@ searchElementInstanceIncidents(...a): CancelablePromise<{
 
 ```ts
 searchElementInstances(...a): CancelablePromise<{
+  items: object[];
+  page: {
+     endCursor:   | {
+      [key: number]: string;
+        __brand: "EndCursor";
+      }
+        | null;
+     hasMoreTotalItems: boolean;
+     startCursor:   | {
+      [key: number]: string;
+        __brand: "StartCursor";
+      }
+        | null;
+     totalItems: number;
+  };
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`items`: `object`[];
+`page`: \{
+`endCursor`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"EndCursor"`;
+\}
+\| `null`;
+`hasMoreTotalItems`: `boolean`;
+`startCursor`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"StartCursor"`;
+\}
+\| `null`;
+`totalItems`: `number`;
+\};
+\}\>
+
+### searchElementInstanceWaitStates()
+
+```ts
+searchElementInstanceWaitStates(...a): CancelablePromise<{
   items: object[];
   page: {
      endCursor:   | {
@@ -7247,6 +7359,40 @@ searchVariables(...a): CancelablePromise<{
 \}
 \| `null`;
 `totalItems`: `number`;
+\};
+\}\>
+
+### searchVariablesAsDto()
+
+```ts
+searchVariablesAsDto(...a): CancelablePromise<{
+  raw: {
+   [key: string]: unknown;
+  };
+  get: unknown;
+  has: boolean;
+  validate: {
+   [key: string]: unknown;
+  };
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`raw`: \{
+\[`key`: `string`\]: `unknown`;
+\};
+`get`: `unknown`;
+`has`: `boolean`;
+`validate`: \{
+\[`key`: `string`\]: `unknown`;
 \};
 \}\>
 
