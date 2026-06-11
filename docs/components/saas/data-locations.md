@@ -21,7 +21,7 @@ Camunda 8 [Alerts](/components/hub/organization/manage-clusters/manage-alerts.md
 
 | Host location     | Data handled                                          | Personal data processing |
 | :---------------- | :---------------------------------------------------- | :----------------------- |
-| Belgium, EU (GCP) | Route alerts containing administrative metadata only. | N/A                      |
+| Germany, EU (AWS) | Route alerts containing administrative metadata only. | N/A                      |
 
 :::note optional
 Camunda 8 Alerts are optional. This information only applies if you use Alerts.
