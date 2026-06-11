@@ -266,6 +266,8 @@ The Oracle and MySQL drivers are not provided by default and must be downloaded 
 Refer to the [Oracle](database.md#oracle) and [MySQL](database.md#mysql) database configuration section for details.
 :::
 
+<!--- TODO: Change all related tab groups --->
+
 <Tabs groupId="database" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars' },
 {label: 'application.yml', value: 'applicationYaml' },
@@ -744,38 +746,59 @@ camunda.modeler:
 
 ### Feature flags
 
-<Tabs groupId="restapi-feature-flags" defaultValue="envVars" queryString values={[
-{label: 'Environment variables', value: 'envVars' },
-{label: 'application.yml', value: 'applicationYaml' },
-]}>
+<Tabs groupId="configType" defaultValue="application.yaml">
+<TabItem value="application.yaml" label="Application properties">
 
-<TabItem value="envVars">
+| Environment variable                                         | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `camunda.modeler.feature.play-enabled`                       | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
+| `camunda.modeler.feature.bpmn-deployment-enabled`            | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
+| `camunda.modeler.feature.dmn-deployment-enabled`             | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
+| `camunda.modeler.feature.dynamic-cluster-management-enabled` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
+| `camunda.marketplace.enabled`                                | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
 
-| Environment variable            | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
-| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
-| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
-
-</TabItem>
-
-<TabItem value="applicationYaml">
+Example configuration:
 
 ```yaml
 camunda:
   modeler.feature:
-    bpmn-deployment-enabled: true # default: true
-    dmn-deployment-enabled: true # default: true
-    play-enabled: true # default: true
+    play-enabled: true
+    bpmn-deployment-enabled: true
+    dmn-deployment-enabled: true
+    dynamic-cluster-management-enabled: false
 
   marketplace:
-    enabled: true # default: true
+    enabled: true
 ```
 
 </TabItem>
+<TabItem value="env" label="Environment variables">
 
+| Environment variable                 | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `PLAY_ENABLED`                       | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
+| `ZEEBE_BPMN_DEPLOYMENT_ENABLED`      | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
+| `ZEEBE_DMN_DEPLOYMENT_ENABLED`       | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
+| `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
+| `MARKETPLACE_ENABLED`                | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
+
+</TabItem>
 </Tabs>
+
+#### Dynamic cluster management
+
+With dynamic cluster management, the orchestration cluster can ping Camunda Hub to request information about the cluster. The available information is limited to [certain preconfigured properties](https://docs.camunda.io/docs/next/self-managed/components/orchestration-cluster/zeebe/configuration/broker-config/#console-ping-configuration), such as license information.
+
+<!--- TODO: update "console ping configuration" --->
+
+If you disable dynamic cluster management, clusters are automatically created, updated, and deleted according to your [clusters configuration](#clusters).
+
+If you enable dynamic cluster management, clusters are only automatically _created_ when you add them to the configuration. Updates and deletes are manual:
+
+- To delete a cluster, use the public delete clusters API.
+- To update a cluster, use the public delete clusters API, update the configuration, and let the cluster be recreated automatically.
+
+The public delete cluster and create cluster APIs are only exposed when this feature flag is enabled.
 
 ### Unstable configuration options
 
