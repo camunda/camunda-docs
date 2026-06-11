@@ -1081,7 +1081,7 @@ camunda:
         maxRetries: 3
 ```
 
-Properties-defined variables are applied in addition to any annotation-defined variables.
+Variables defined in properties are applied in addition to any annotation-defined variables.
 
 ### Specify the tenant to set variables for
 
