@@ -1,0 +1,1744 @@
+---
+id: search-element-instance-wait-states
+title: "Search element instance wait states"
+sidebar_label: "Search element instance wait states"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search element instance wait states"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/element-instances/wait-states/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Returns the wait states for element instances matching the given filter.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description: "Element instance inspection request.",
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "elementInstanceKey",
+                      "processInstanceKey",
+                      "rootProcessInstanceKey",
+                      "elementId",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "ElementInstanceWaitStateQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "Filter criteria for the inspection.",
+              allOf: [
+                {
+                  description: "Filters for the element instance inspection.",
+                  type: "object",
+                  properties: {
+                    elementInstanceKey: {
+                      description: "Filter by element instance key.",
+                      allOf: [
+                        {
+                          description:
+                            "ElementInstanceKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ElementInstanceKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ElementInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a element instance.",
+                                      format: "ElementInstanceKey",
+                                      example: "2251799813686789",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ElementInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a element instance.",
+                                      format: "ElementInstanceKey",
+                                      example: "2251799813686789",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ElementInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ElementInstanceKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    processInstanceKey: {
+                      description: "Filter by process instance key.",
+                      allOf: [
+                        {
+                          description:
+                            "ProcessInstanceKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a process instance.",
+                                      format: "ProcessInstanceKey",
+                                      example: "2251799813690746",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a process instance.",
+                                      format: "ProcessInstanceKey",
+                                      example: "2251799813690746",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ProcessInstanceKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    rootProcessInstanceKey: {
+                      description: "Filter by root process instance key.",
+                      allOf: [
+                        {
+                          description:
+                            "ProcessInstanceKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a process instance.",
+                                      format: "ProcessInstanceKey",
+                                      example: "2251799813690746",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a process instance.",
+                                      format: "ProcessInstanceKey",
+                                      example: "2251799813690746",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ProcessInstanceKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    elementId: {
+                      description: "Filter by element ID.",
+                      allOf: [
+                        {
+                          description:
+                            "ElementId property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The model-defined id of an element.",
+                                  format: "ElementId",
+                                  type: "string",
+                                  example: "Activity_106kosb",
+                                  title: "ElementId",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced ElementId filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The model-defined id of an element.",
+                                      format: "ElementId",
+                                      type: "string",
+                                      example: "Activity_106kosb",
+                                      title: "ElementId",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The model-defined id of an element.",
+                                      format: "ElementId",
+                                      type: "string",
+                                      example: "Activity_106kosb",
+                                      title: "ElementId",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The model-defined id of an element.",
+                                    format: "ElementId",
+                                    type: "string",
+                                    example: "Activity_106kosb",
+                                    title: "ElementId",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The model-defined id of an element.",
+                                    format: "ElementId",
+                                    type: "string",
+                                    example: "Activity_106kosb",
+                                    title: "ElementId",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "ElementIdFilterProperty",
+                        },
+                      ],
+                    },
+                    elementType: {
+                      description: "Filter by element type.",
+                      allOf: [
+                        {
+                          description:
+                            "Element type property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The BPMN element type of a waiting element instance.",
+                                  type: "string",
+                                  enum: [
+                                    "AD_HOC_SUB_PROCESS",
+                                    "AD_HOC_SUB_PROCESS_INNER_INSTANCE",
+                                    "BOUNDARY_EVENT",
+                                    "BUSINESS_RULE_TASK",
+                                    "CALL_ACTIVITY",
+                                    "END_EVENT",
+                                    "EVENT_BASED_GATEWAY",
+                                    "EVENT_SUB_PROCESS",
+                                    "EXCLUSIVE_GATEWAY",
+                                    "INCLUSIVE_GATEWAY",
+                                    "INTERMEDIATE_CATCH_EVENT",
+                                    "INTERMEDIATE_THROW_EVENT",
+                                    "MANUAL_TASK",
+                                    "MULTI_INSTANCE_BODY",
+                                    "PARALLEL_GATEWAY",
+                                    "PROCESS",
+                                    "RECEIVE_TASK",
+                                    "SCRIPT_TASK",
+                                    "SEND_TASK",
+                                    "SEQUENCE_FLOW",
+                                    "SERVICE_TASK",
+                                    "START_EVENT",
+                                    "SUB_PROCESS",
+                                    "TASK",
+                                    "UNKNOWN",
+                                    "UNSPECIFIED",
+                                    "USER_TASK",
+                                  ],
+                                  title: "WaitStateElementTypeEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced element type filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The BPMN element type of a waiting element instance.",
+                                      type: "string",
+                                      enum: [
+                                        "AD_HOC_SUB_PROCESS",
+                                        "AD_HOC_SUB_PROCESS_INNER_INSTANCE",
+                                        "BOUNDARY_EVENT",
+                                        "BUSINESS_RULE_TASK",
+                                        "CALL_ACTIVITY",
+                                        "END_EVENT",
+                                        "EVENT_BASED_GATEWAY",
+                                        "EVENT_SUB_PROCESS",
+                                        "EXCLUSIVE_GATEWAY",
+                                        "INCLUSIVE_GATEWAY",
+                                        "INTERMEDIATE_CATCH_EVENT",
+                                        "INTERMEDIATE_THROW_EVENT",
+                                        "MANUAL_TASK",
+                                        "MULTI_INSTANCE_BODY",
+                                        "PARALLEL_GATEWAY",
+                                        "PROCESS",
+                                        "RECEIVE_TASK",
+                                        "SCRIPT_TASK",
+                                        "SEND_TASK",
+                                        "SEQUENCE_FLOW",
+                                        "SERVICE_TASK",
+                                        "START_EVENT",
+                                        "SUB_PROCESS",
+                                        "TASK",
+                                        "UNKNOWN",
+                                        "UNSPECIFIED",
+                                        "USER_TASK",
+                                      ],
+                                      title: "WaitStateElementTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The BPMN element type of a waiting element instance.",
+                                      type: "string",
+                                      enum: [
+                                        "AD_HOC_SUB_PROCESS",
+                                        "AD_HOC_SUB_PROCESS_INNER_INSTANCE",
+                                        "BOUNDARY_EVENT",
+                                        "BUSINESS_RULE_TASK",
+                                        "CALL_ACTIVITY",
+                                        "END_EVENT",
+                                        "EVENT_BASED_GATEWAY",
+                                        "EVENT_SUB_PROCESS",
+                                        "EXCLUSIVE_GATEWAY",
+                                        "INCLUSIVE_GATEWAY",
+                                        "INTERMEDIATE_CATCH_EVENT",
+                                        "INTERMEDIATE_THROW_EVENT",
+                                        "MANUAL_TASK",
+                                        "MULTI_INSTANCE_BODY",
+                                        "PARALLEL_GATEWAY",
+                                        "PROCESS",
+                                        "RECEIVE_TASK",
+                                        "SCRIPT_TASK",
+                                        "SEND_TASK",
+                                        "SEQUENCE_FLOW",
+                                        "SERVICE_TASK",
+                                        "START_EVENT",
+                                        "SUB_PROCESS",
+                                        "TASK",
+                                        "UNKNOWN",
+                                        "UNSPECIFIED",
+                                        "USER_TASK",
+                                      ],
+                                      title: "WaitStateElementTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The BPMN element type of a waiting element instance.",
+                                    type: "string",
+                                    enum: [
+                                      "AD_HOC_SUB_PROCESS",
+                                      "AD_HOC_SUB_PROCESS_INNER_INSTANCE",
+                                      "BOUNDARY_EVENT",
+                                      "BUSINESS_RULE_TASK",
+                                      "CALL_ACTIVITY",
+                                      "END_EVENT",
+                                      "EVENT_BASED_GATEWAY",
+                                      "EVENT_SUB_PROCESS",
+                                      "EXCLUSIVE_GATEWAY",
+                                      "INCLUSIVE_GATEWAY",
+                                      "INTERMEDIATE_CATCH_EVENT",
+                                      "INTERMEDIATE_THROW_EVENT",
+                                      "MANUAL_TASK",
+                                      "MULTI_INSTANCE_BODY",
+                                      "PARALLEL_GATEWAY",
+                                      "PROCESS",
+                                      "RECEIVE_TASK",
+                                      "SCRIPT_TASK",
+                                      "SEND_TASK",
+                                      "SEQUENCE_FLOW",
+                                      "SERVICE_TASK",
+                                      "START_EVENT",
+                                      "SUB_PROCESS",
+                                      "TASK",
+                                      "UNKNOWN",
+                                      "UNSPECIFIED",
+                                      "USER_TASK",
+                                    ],
+                                    title: "WaitStateElementTypeEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "WaitStateElementTypeFilterProperty",
+                        },
+                      ],
+                    },
+                    waitStateType: {
+                      description: "Filter by wait state type.",
+                      allOf: [
+                        {
+                          description:
+                            "Wait state type property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The type of waiting state an element instance is in.",
+                                  type: "string",
+                                  enum: ["JOB", "MESSAGE"],
+                                  title: "WaitStateTypeEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced wait state type filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The type of waiting state an element instance is in.",
+                                      type: "string",
+                                      enum: ["JOB", "MESSAGE"],
+                                      title: "WaitStateTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The type of waiting state an element instance is in.",
+                                      type: "string",
+                                      enum: ["JOB", "MESSAGE"],
+                                      title: "WaitStateTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The type of waiting state an element instance is in.",
+                                    type: "string",
+                                    enum: ["JOB", "MESSAGE"],
+                                    title: "WaitStateTypeEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "WaitStateTypeFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "ElementInstanceWaitStateFilter",
+                },
+              ],
+            },
+          },
+          title: "ElementInstanceWaitStateQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The element instance wait state search result.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["items"],
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching waiting states.",
+                type: "array",
+                items: {
+                  description: "An element instance waiting state.",
+                  type: "object",
+                  required: [
+                    "processInstanceKey",
+                    "elementInstanceKey",
+                    "elementId",
+                    "elementType",
+                    "tenantId",
+                    "rootProcessInstanceKey",
+                    "bpmnProcessId",
+                    "details",
+                  ],
+                  properties: {
+                    rootProcessInstanceKey: {
+                      description: "Key of the root process instance.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a process instance.",
+                          format: "ProcessInstanceKey",
+                          example: "2251799813690746",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessInstanceKey",
+                        },
+                      ],
+                    },
+                    processInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a process instance.",
+                          format: "ProcessInstanceKey",
+                          example: "2251799813690746",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessInstanceKey",
+                        },
+                      ],
+                      description:
+                        "The process instance key associated to this element instance.",
+                    },
+                    elementInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a element instance.",
+                          format: "ElementInstanceKey",
+                          example: "2251799813686789",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ElementInstanceKey",
+                        },
+                      ],
+                      description:
+                        "The element instance key associated to this element instance.",
+                    },
+                    elementId: {
+                      allOf: [
+                        {
+                          description: "The model-defined id of an element.",
+                          format: "ElementId",
+                          type: "string",
+                          example: "Activity_106kosb",
+                          title: "ElementId",
+                        },
+                      ],
+                      description: "The element ID for this element instance.",
+                    },
+                    elementType: {
+                      description:
+                        "The BPMN element type of this element instance.",
+                      allOf: [
+                        {
+                          description:
+                            "The BPMN element type of a waiting element instance.",
+                          type: "string",
+                          enum: [
+                            "AD_HOC_SUB_PROCESS",
+                            "AD_HOC_SUB_PROCESS_INNER_INSTANCE",
+                            "BOUNDARY_EVENT",
+                            "BUSINESS_RULE_TASK",
+                            "CALL_ACTIVITY",
+                            "END_EVENT",
+                            "EVENT_BASED_GATEWAY",
+                            "EVENT_SUB_PROCESS",
+                            "EXCLUSIVE_GATEWAY",
+                            "INCLUSIVE_GATEWAY",
+                            "INTERMEDIATE_CATCH_EVENT",
+                            "INTERMEDIATE_THROW_EVENT",
+                            "MANUAL_TASK",
+                            "MULTI_INSTANCE_BODY",
+                            "PARALLEL_GATEWAY",
+                            "PROCESS",
+                            "RECEIVE_TASK",
+                            "SCRIPT_TASK",
+                            "SEND_TASK",
+                            "SEQUENCE_FLOW",
+                            "SERVICE_TASK",
+                            "START_EVENT",
+                            "SUB_PROCESS",
+                            "TASK",
+                            "UNKNOWN",
+                            "UNSPECIFIED",
+                            "USER_TASK",
+                          ],
+                          title: "WaitStateElementTypeEnum",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      description: "The tenant ID of the element instance.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                    bpmnProcessId: {
+                      description:
+                        "The BPMN process ID of the process definition associated to this element instance.",
+                      type: "string",
+                    },
+                    details: {
+                      description:
+                        "Wait-state-specific details, resolved by waitStateType.",
+                      allOf: [
+                        {
+                          description:
+                            "Wait-state-specific details of an element instance.",
+                          discriminator: {
+                            propertyName: "waitStateType",
+                            mapping: {
+                              JOB: {
+                                type: "object",
+                                required: [
+                                  "waitStateType",
+                                  "jobKey",
+                                  "jobType",
+                                  "jobKind",
+                                  "listenerEventType",
+                                  "retries",
+                                ],
+                                allOf: [
+                                  {
+                                    description:
+                                      "Common fields shared by all wait-state details variants.",
+                                    type: "object",
+                                    required: ["waitStateType"],
+                                    properties: {
+                                      waitStateType: {
+                                        description:
+                                          "The wait state type discriminator.",
+                                        type: "string",
+                                      },
+                                    },
+                                    title: "BaseWaitStateDetails",
+                                  },
+                                ],
+                                properties: {
+                                  jobKey: {
+                                    allOf: [
+                                      {
+                                        description:
+                                          "System-generated key for a job.",
+                                        format: "JobKey",
+                                        example: "2251799813653498",
+                                        type: "string",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
+                                            type: "string",
+                                            title: "LongKey",
+                                          },
+                                        ],
+                                        title: "JobKey",
+                                      },
+                                    ],
+                                    description: "The key of the job.",
+                                  },
+                                  jobType: {
+                                    description:
+                                      "The job type (worker subscription identifier).",
+                                    type: "string",
+                                  },
+                                  jobKind: {
+                                    description: "The kind of job.",
+                                    allOf: [
+                                      {
+                                        description: "The job kind.",
+                                        example: "BPMN_ELEMENT",
+                                        type: "string",
+                                        enum: [
+                                          "BPMN_ELEMENT",
+                                          "EXECUTION_LISTENER",
+                                          "TASK_LISTENER",
+                                          "AD_HOC_SUB_PROCESS",
+                                        ],
+                                        title: "JobKindEnum",
+                                      },
+                                    ],
+                                  },
+                                  listenerEventType: {
+                                    description:
+                                      "The listener event type of the job (only set for execution listener and task listener jobs).",
+                                    nullable: true,
+                                    allOf: [
+                                      {
+                                        example: "UNSPECIFIED",
+                                        description:
+                                          "The listener event type of the job.",
+                                        type: "string",
+                                        enum: [
+                                          "ASSIGNING",
+                                          "BEFORE_ALL",
+                                          "CANCEL",
+                                          "CANCELING",
+                                          "COMPLETING",
+                                          "CREATING",
+                                          "END",
+                                          "START",
+                                          "UNSPECIFIED",
+                                          "UPDATING",
+                                        ],
+                                        title: "JobListenerEventTypeEnum",
+                                      },
+                                    ],
+                                  },
+                                  retries: {
+                                    description:
+                                      "The number of retries remaining for the job.",
+                                    nullable: true,
+                                    type: "integer",
+                                    format: "int32",
+                                  },
+                                },
+                                title: "JobWaitStateDetails",
+                              },
+                              MESSAGE: {
+                                type: "object",
+                                required: [
+                                  "waitStateType",
+                                  "messageName",
+                                  "correlationKey",
+                                ],
+                                allOf: [
+                                  {
+                                    description:
+                                      "Common fields shared by all wait-state details variants.",
+                                    type: "object",
+                                    required: ["waitStateType"],
+                                    properties: {
+                                      waitStateType: {
+                                        description:
+                                          "The wait state type discriminator.",
+                                        type: "string",
+                                      },
+                                    },
+                                    title: "BaseWaitStateDetails",
+                                  },
+                                ],
+                                properties: {
+                                  messageName: {
+                                    description:
+                                      "The name of the message being awaited.",
+                                    type: "string",
+                                  },
+                                  correlationKey: {
+                                    description:
+                                      "The correlation key for the message subscription (null for start events).",
+                                    nullable: true,
+                                    type: "string",
+                                  },
+                                },
+                                title: "MessageWaitStateDetails",
+                              },
+                            },
+                          },
+                          oneOf: [
+                            {
+                              type: "object",
+                              required: [
+                                "waitStateType",
+                                "jobKey",
+                                "jobType",
+                                "jobKind",
+                                "listenerEventType",
+                                "retries",
+                              ],
+                              allOf: [
+                                {
+                                  description:
+                                    "Common fields shared by all wait-state details variants.",
+                                  type: "object",
+                                  required: ["waitStateType"],
+                                  properties: {
+                                    waitStateType: {
+                                      description:
+                                        "The wait state type discriminator.",
+                                      type: "string",
+                                    },
+                                  },
+                                  title: "BaseWaitStateDetails",
+                                },
+                              ],
+                              properties: {
+                                jobKey: {
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a job.",
+                                      format: "JobKey",
+                                      example: "2251799813653498",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "JobKey",
+                                    },
+                                  ],
+                                  description: "The key of the job.",
+                                },
+                                jobType: {
+                                  description:
+                                    "The job type (worker subscription identifier).",
+                                  type: "string",
+                                },
+                                jobKind: {
+                                  description: "The kind of job.",
+                                  allOf: [
+                                    {
+                                      description: "The job kind.",
+                                      example: "BPMN_ELEMENT",
+                                      type: "string",
+                                      enum: [
+                                        "BPMN_ELEMENT",
+                                        "EXECUTION_LISTENER",
+                                        "TASK_LISTENER",
+                                        "AD_HOC_SUB_PROCESS",
+                                      ],
+                                      title: "JobKindEnum",
+                                    },
+                                  ],
+                                },
+                                listenerEventType: {
+                                  description:
+                                    "The listener event type of the job (only set for execution listener and task listener jobs).",
+                                  nullable: true,
+                                  allOf: [
+                                    {
+                                      example: "UNSPECIFIED",
+                                      description:
+                                        "The listener event type of the job.",
+                                      type: "string",
+                                      enum: [
+                                        "ASSIGNING",
+                                        "BEFORE_ALL",
+                                        "CANCEL",
+                                        "CANCELING",
+                                        "COMPLETING",
+                                        "CREATING",
+                                        "END",
+                                        "START",
+                                        "UNSPECIFIED",
+                                        "UPDATING",
+                                      ],
+                                      title: "JobListenerEventTypeEnum",
+                                    },
+                                  ],
+                                },
+                                retries: {
+                                  description:
+                                    "The number of retries remaining for the job.",
+                                  nullable: true,
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                              },
+                              title: "JobWaitStateDetails",
+                            },
+                            {
+                              type: "object",
+                              required: [
+                                "waitStateType",
+                                "messageName",
+                                "correlationKey",
+                              ],
+                              allOf: [
+                                {
+                                  description:
+                                    "Common fields shared by all wait-state details variants.",
+                                  type: "object",
+                                  required: ["waitStateType"],
+                                  properties: {
+                                    waitStateType: {
+                                      description:
+                                        "The wait state type discriminator.",
+                                      type: "string",
+                                    },
+                                  },
+                                  title: "BaseWaitStateDetails",
+                                },
+                              ],
+                              properties: {
+                                messageName: {
+                                  description:
+                                    "The name of the message being awaited.",
+                                  type: "string",
+                                },
+                                correlationKey: {
+                                  description:
+                                    "The correlation key for the message subscription (null for start events).",
+                                  nullable: true,
+                                  type: "string",
+                                },
+                              },
+                              title: "MessageWaitStateDetails",
+                            },
+                          ],
+                          title: "WaitStateDetails",
+                        },
+                      ],
+                    },
+                  },
+                  title: "ElementInstanceWaitStateResult",
+                },
+              },
+            },
+            title: "ElementInstanceWaitStateQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

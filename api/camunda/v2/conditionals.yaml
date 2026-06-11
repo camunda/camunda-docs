@@ -4,6 +4,9 @@ paths:
       tags:
         - Conditional
       operationId: evaluateConditionals
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Evaluate root level conditional start events
       description: |-
 
