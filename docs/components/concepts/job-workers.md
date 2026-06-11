@@ -258,6 +258,8 @@ If it's not present in the gateway as a client stream, restart your worker. If i
 
 ## Job prioritization
 
+Use job prioritization when you have mixed-urgency workloads and want time-sensitive jobs to be activated ahead of lower-priority ones.
+
 Camunda supports job prioritization for pull-based job activation. Job priority affects the order in which jobs are activated for workers. It does not change retries, failures, or completion semantics.
 
 You can define job priority:
@@ -265,47 +267,36 @@ You can define job priority:
 - On the process as a default.
 - On supported job-creating tasks as an override, including service tasks, send tasks, and script or business rule tasks implemented as job workers.
 
-Important behavior:
+Job priority is enforced per partition, not globally across the cluster. Within a partition, higher-priority jobs are activated before lower-priority ones. Within the same priority level, jobs activate in FIFO order. If you don't set any priorities, standard FIFO behavior applies throughout.
 
-- If you do not specify job priorities, jobs keep the existing FIFO behavior (order by arrival/creation).
-- Higher-priority jobs are activated before lower-priority jobs within a partition.
-- Ordering is best effort across the cluster, not a global guarantee across all partitions.
-- Because jobs are distributed across partitions, priority ordering is applied per partition rather than as one globally sorted queue.
-- If no priority is defined, the default priority is `0`.
-- Task-level priority overrides process-level priority.
-- Within the same priority, jobs are activated in FIFO order.
-- Low-priority jobs can starve under sustained high-priority load and may never be activated while workers remain fully occupied by higher-priority jobs.
-- Camunda does not provide fairness, aging, or starvation mitigation in the engine.
+The default priority is 0. A task-level priority definition overrides any process-level default.
 
-If starvation becomes a problem, increase worker capacity or revise your priority assignments.
+Be aware that low-priority jobs can starve if workers are consistently occupied by higher-priority work. Camunda doesn't provide starvation mitigation, fairness guarantees, or priority aging. If starvation becomes a problem, increase worker capacity or revise your priority assignments.
 
 Priority values can be static integers or FEEL expressions. FEEL expressions are evaluated when the job is created, and the resulting integer is stored on the job.
 
-Priority uses signed 32-bit integer semantics. Do not assume a fixed `0-99` engine limit.
+Priority accepts any signed 32-bit integer. The engine does not enforce a fixed upper or lower bound such as `0-99`.
 
-:::warning Compatibility for pre-8.10 jobs
-Jobs created before 8.10 do not have a populated `priority` value in secondary storage.
+Jobs created before version 8.10 do not have a stored priority value. For job execution, Camunda treats them as having the default priority of 0.
 
-For job execution behavior, Camunda treats these jobs as if they had the default priority value of `0`.
-
-However, if you use job APIs that filter or sort by `priority`, pre-8.10 jobs are filtered out because no priority value is stored for them.
+:::warning
+If you use job APIs that filter or sort by priority, pre-8.10 jobs are excluded from results because no priority value is stored for them. Review any priority-based queries before upgrading.
 :::
 
 ### Validation and runtime failure behavior
-
-Job priority values can be static integers or FEEL expressions.
 
 Invalid FEEL expressions are handled differently depending on when they fail:
 
 - If the expression is invalid at deployment time, BPMN deployment fails and the process is not deployed.
 - If the expression fails at runtime, for example because a referenced variable is missing, Camunda raises an incident and the job is not created.
 
-Current recovery is manual. You can provide the missing variable and then resolve the incident.
+To recover, provide the missing variable value and resolve the incident manually in Operate.
 
 ### Job streaming limitation
 
-Job streaming does not honor job priority ordering.
-If you mix job pull and job streaming, the benefits of prioritization can be reduced.
+Job streaming activates jobs as they are created and ignores priorities.
+
+If you use job pulling and job streaming together for the same job type, this negates the benefits of job prioritization.
 
 ## Tags
 

@@ -100,7 +100,7 @@ Define [variable mappings](/components/concepts/variables.md#inputoutput-variabl
 the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
 to transform the variables passed to the job worker, or to customize how the variables of the job merge.
 
-## Job priority
+### Job priority
 
 This task type supports `zeebe:jobPriorityDefinition` when implemented as a job worker.
 
