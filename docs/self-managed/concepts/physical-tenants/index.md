@@ -65,6 +65,12 @@ Use cluster-scoped routes for operations that apply to the whole cluster:
 
 - Cluster-wide REST: `/cluster/v2/...`
 
+## Configure and provision Physical Tenants
+
+To configure tenant defaults, per-tenant overrides, validation expectations, and property examples, see [configuration reference](./configuration-reference.md).
+
+To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
+
 ## What is not isolated in 8.10
 
 - Gateways are shared between tenants, so a saturated gateway can still affect multiple tenants.

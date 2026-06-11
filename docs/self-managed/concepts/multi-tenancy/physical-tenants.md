@@ -69,3 +69,7 @@ When referencing Physical Tenants and Logical Tenants in documentation and code:
 ## Learn more
 
 For detailed technical information about isolation model, architecture, and storage configuration, see [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
+
+For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
+
+For adding tenants and lifecycle expectations in 8.10, see [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md).
