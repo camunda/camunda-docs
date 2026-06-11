@@ -100,15 +100,19 @@ export const MarkerRequiredPermissions = ({
 
       {!hasPermissions ? (
         <p>
-          This endpoint does not require any specific permission. See{" "}
+          Even when authorization is enabled, this endpoint requires no specific
+          permission. See{" "}
           <a href={AUTHORIZATIONS_DOCS_URL}>resources and permissions</a> to
           learn more.
         </p>
       ) : (
         <>
           <p>
-            Calling this endpoint requires the following authorization
-            {permissions.length > 1 ? "s (all are required)" : ""}. See{" "}
+            When authorization is enabled, this endpoint requires{" "}
+            {permissions.length > 1
+              ? "all of the following permissions"
+              : "the following permission"}
+            . See{" "}
             <a href={AUTHORIZATIONS_DOCS_URL}>resources and permissions</a> to
             learn more.
           </p>
