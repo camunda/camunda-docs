@@ -76,6 +76,16 @@ The date the agent instance was last updated.
 
 ---
 
+### processDefinitionId?
+
+```ts
+optional processDefinitionId?: StringFilterProperty;
+```
+
+The BPMN process ID of the process definition associated with this agent instance.
+
+---
+
 ### processDefinitionKey?
 
 ```ts
@@ -86,6 +96,26 @@ The key of the process definition associated with this agent instance.
 
 ---
 
+### processDefinitionVersion?
+
+```ts
+optional processDefinitionVersion?: IntegerFilterProperty;
+```
+
+The version of the process definition associated with this agent instance.
+
+---
+
+### processDefinitionVersionTag?
+
+```ts
+optional processDefinitionVersionTag?: StringFilterProperty;
+```
+
+The version tag of the process definition associated with this agent instance.
+
+---
+
 ### processInstanceKey?
 
 ```ts
@@ -93,6 +123,18 @@ optional processInstanceKey?: ProcessInstanceKeyFilterProperty;
 ```
 
 The key of the process instance that owns this agent instance.
+
+---
+
+### rootProcessInstanceKey?
+
+```ts
+optional rootProcessInstanceKey?: ProcessInstanceKeyFilterProperty;
+```
+
+The key of the root process instance. Filters agent instances belonging to a specific
+call hierarchy. The root process instance is the top-level ancestor in the process
+instance hierarchy.
 
 ---
 

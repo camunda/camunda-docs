@@ -53,6 +53,16 @@ The tenant with the given ID was not found.
 
 ---
 
+### 409
+
+```ts
+409: ProblemDetail;
+```
+
+A cluster variable with this name already exists for the given tenant.
+
+---
+
 ### 500
 
 ```ts

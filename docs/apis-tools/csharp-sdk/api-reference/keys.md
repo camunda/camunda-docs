@@ -17,6 +17,7 @@ Strongly-typed domain key types provide compile-time safety for entity identifie
 
 | Key Type                        | Description                                                                           |
 | ------------------------------- | ------------------------------------------------------------------------------------- |
+| `AgentHistoryItemKey`           | System-generated key for an agent history item.                                       |
 | `AgentInstanceKey`              | System-generated key for an agent instance.                                           |
 | `AuditLogEntityKey`             | System-generated entity key for an audit log entry.                                   |
 | `AuditLogKey`                   | System-generated key for an audit log entry.                                          |
@@ -60,6 +61,14 @@ All key types share these methods:
 | `ToString()`           | Returns the string representation.               |
 
 ## Details
+
+### AgentHistoryItemKey
+
+System-generated key for an agent history item.
+
+```csharp
+public readonly record struct AgentHistoryItemKey : ICamundaKey, IEquatable<AgentHistoryItemKey>
+```
 
 ### AgentInstanceKey
 

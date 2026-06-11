@@ -641,6 +641,43 @@ Benchmark results against a single-node local cluster with multiple independent 
 
 BALANCED wins 3 of 4 on pure throughput. The only scenario where LEGACY is faster is extreme overload (800 concurrent requests against a single broker) — and in that case LEGACY accumulates 44,505 errors vs BALANCED's 15,527. The default just works.
 
+## Typed Variable Map (DTO-driven search)
+
+`searchVariablesAsDto` fetches process variables and binds them to a [Zod](https://zod.dev) schema that acts as the DTO. The schema's keys are the exact variable names to fetch, and its shape drives validation. Only the declared variables are queried (via a `name $in [...]` filter), so memory stays bound by the DTO shape rather than the total number of variables on the instance. Results are paged internally until every declared variable is found or the result set is exhausted.
+
+The returned `VariableMap` offers two access modes:
+
+- **Lenient** — `has(name)` / `get(name)` for defensive reads that never throw on missing variables.
+- **Strict** — `validate()` returns a fully-typed object, or throws a `ZodError` when a required variable is missing or malformed.
+
+If a declared variable is found at more than one scope (for example a local variable shadowing a process-level one), the search throws a `VariableScopeCollisionError` rather than silently picking one. Pass an explicit `scopeKey` to disambiguate.
+
+<!-- snippet-source: examples/readme.ts | regions: ReadmeTypedVariables -->
+
+```ts
+// The Zod schema is the DTO: its keys are the variable names to fetch, and its
+// shape drives validation. Only these declared variables are queried, so memory
+// stays bound by the DTO — not by the total number of variables on the instance.
+const OrderVariables = z.object({
+  orderId: z.string(), // required
+  amount: z.number().optional(), // optional
+});
+
+const map = await camunda.searchVariablesAsDto(OrderVariables, {
+  processInstanceKey,
+});
+
+// Lenient access: defensive reads that never throw on missing variables.
+if (map.has("amount")) {
+  console.log("Amount:", map.get("amount"));
+}
+
+// Strict access: returns a fully-typed object, or throws a ZodError when a
+// required variable is missing or malformed.
+const order = map.validate(); // { orderId: string; amount?: number }
+console.log("Order:", order.orderId);
+```
+
 ## Job Workers (Polling API)
 
 The SDK provides a lightweight polling job worker for service task job types using `createJobWorker`. It activates jobs in batches (respecting a concurrency limit), validates variables (optional), and offers action helpers on each job.
