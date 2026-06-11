@@ -489,27 +489,11 @@ const ADDITIONAL_RELEASES = [
     title: "Camunda Orchestration Cluster",
     description:
       "Download self-managed orchestration runtime artifacts and view all release notes.",
-    version: "latest",
-    date: "GitHub",
-    links: {
-      mac: [
-        {
-          label: "Latest release",
-          url: "https://github.com/camunda/camunda/releases/latest",
-        },
-      ],
-      windows: [
-        {
-          label: "Latest release",
-          url: "https://github.com/camunda/camunda/releases/latest",
-        },
-      ],
-      linux: [
-        {
-          label: "Latest release",
-          url: "https://github.com/camunda/camunda/releases/latest",
-        },
-      ],
+    version: "8.9.8",
+    date: "Jun 10, 2026",
+    primaryLink: {
+      label: "View latest release on GitHub",
+      url: "https://github.com/camunda/camunda/releases/latest",
     },
     previousVersions: "https://github.com/camunda/camunda/releases",
     icon: <PlayIconLg />,
@@ -518,56 +502,22 @@ const ADDITIONAL_RELEASES = [
     title: "Camunda Connectors",
     description:
       "Get prebuilt connector artifacts and review release history for connector updates.",
-    version: "latest",
-    date: "GitHub",
-    links: {
-      mac: [
-        {
-          label: "Latest release",
-          url: "https://github.com/camunda/connectors/releases/latest",
-        },
-      ],
-      windows: [
-        {
-          label: "Latest release",
-          url: "https://github.com/camunda/connectors/releases/latest",
-        },
-      ],
-      linux: [
-        {
-          label: "Latest release",
-          url: "https://github.com/camunda/connectors/releases/latest",
-        },
-      ],
+    version: "8.10.0-alpha2",
+    date: "Jun 2, 2026",
+    primaryLink: {
+      label: "View latest release on GitHub",
+      url: "https://github.com/camunda/connectors/releases/latest",
     },
     previousVersions: "https://github.com/camunda/connectors/releases",
     icon: <SparklesIconLg />,
   },
   {
-    title: "Enterprise Web Modeler",
+    title: "Camunda 7 and Camunda 8 Enterprise downloads",
     description:
       "Enterprise-only downloads for Camunda 7 and Camunda 8 Web Modeler artifacts.",
-    version: "enterprise",
-    date: "Camunda",
-    links: {
-      mac: [
-        {
-          label: "Enterprise downloads",
-          url: "https://downloads.camunda.cloud/enterprise-release/",
-        },
-      ],
-      windows: [
-        {
-          label: "Enterprise downloads",
-          url: "https://downloads.camunda.cloud/enterprise-release/",
-        },
-      ],
-      linux: [
-        {
-          label: "Enterprise downloads",
-          url: "https://downloads.camunda.cloud/enterprise-release/",
-        },
-      ],
+    primaryLink: {
+      label: "Browse enterprise downloads",
+      url: "https://downloads.camunda.cloud/enterprise-release/",
     },
     icon: <PencilIconLg />,
   },
@@ -582,13 +532,14 @@ function DownloadCard({
   version,
   date,
   links,
+  primaryLink,
   docsLink,
   previousVersions,
   activeOS,
   badge,
 }) {
   const [showExperimental, setShowExperimental] = useState(false);
-  const osLinks = links[activeOS] || {};
+  const osLinks = (links && links[activeOS]) || {};
   // Support both flat array (Getting Started) and { stable, experimental } shape
   const isFlat = Array.isArray(osLinks);
   const stableLinks = isFlat ? osLinks : osLinks.stable || [];
@@ -605,25 +556,40 @@ function DownloadCard({
       <div className={styles.downloadCardIcon}>{icon}</div>
       <h3 className={bwcStyles.downloadBlockTitle}>{title}</h3>
       <p className={styles.downloadCardDesc}>{description}</p>
-      <div className={styles.downloadCardMeta}>
-        <span className={styles.downloadCardVersion}>v{version}</span>
-        <span className={styles.downloadCardDate}>{date}</span>
-      </div>
-
-      <div className={styles.downloadCardLinks}>
-        <span className={styles.downloadCardLabel}>Stable</span>
-        <div className={styles.downloadCardButtons}>
-          {stableLinks.map((link) => (
-            <a
-              key={link.url}
-              href={link.url}
-              className={bwcStyles.downloadButton}
-            >
-              <DownloadBtnIcon /> {link.label}
-            </a>
-          ))}
+      {version && (
+        <div className={styles.downloadCardMeta}>
+          <span className={styles.downloadCardVersion}>v{version}</span>
+          {date && <span className={styles.downloadCardDate}>{date}</span>}
         </div>
-      </div>
+      )}
+
+      {primaryLink ? (
+        <div className={styles.downloadCardLinks}>
+          <a
+            href={primaryLink.url}
+            className={styles.downloadCardFooterLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {primaryLink.label} <ExternalLinkIcon />
+          </a>
+        </div>
+      ) : (
+        <div className={styles.downloadCardLinks}>
+          <span className={styles.downloadCardLabel}>Stable</span>
+          <div className={styles.downloadCardButtons}>
+            {stableLinks.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                className={bwcStyles.downloadButton}
+              >
+                <DownloadBtnIcon /> {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       {experimentalLinks.length > 0 && (
         <div className={styles.downloadCardLinks}>
@@ -852,6 +818,7 @@ function Downloads() {
                   version={resource.version}
                   date={resource.date}
                   links={resource.links}
+                  primaryLink={resource.primaryLink}
                   previousVersions={resource.previousVersions}
                   activeOS={activeOS}
                 />
@@ -871,7 +838,7 @@ function Downloads() {
           <div className="container">
             <div className={bwcStyles.sectionHeader}>
               <h2 className={bwcStyles.sectionTitle}>
-                More ways to run Camunda locally
+                More ways to run your own Camunda
               </h2>
               <p className={bwcStyles.sectionSub}>
                 Choose the setup that fits your workflow and infrastructure.
