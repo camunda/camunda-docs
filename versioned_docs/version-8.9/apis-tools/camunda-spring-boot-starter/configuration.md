@@ -1033,6 +1033,10 @@ camunda:
 
 ## Set cluster variables on start-up
 
+:::info
+The `@ClusterVariables` annotation is available from Camunda 8.9.9.
+:::
+
 To set cluster variables at application start-up, use the `@ClusterVariables` annotation. Variables are set when the Camunda client starts and removed from the cluster when it stops.
 
 There are three ways to provide the variables:
