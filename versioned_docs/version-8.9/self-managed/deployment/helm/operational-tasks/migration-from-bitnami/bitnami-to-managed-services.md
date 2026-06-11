@@ -178,7 +178,7 @@ You can use the same managed PostgreSQL host for all components—each database 
 By default, the scripts deploy the Keycloak Operator and a `Keycloak` custom resource. To instead point Camunda at a pre-existing external, standalone, or Helm-managed Keycloak, set `KEYCLOAK_TARGET_MODE=external`. The scripts migrate the realm into the external Keycloak database and rewire Camunda to the external endpoint. They do not deploy or manage the Keycloak instance itself.
 
 :::note
-`KEYCLOAK_TARGET_MODE=external` requires `PG_TARGET_MODE=external`, because the external Keycloak serves the migrated realm from the external Keycloak database (`EXTERNAL_PG_KEYCLOAK_*`). This flow is intended for a data-only cutover: set `SKIP_HELM_UPGRADE=true` and let your upgrade pipeline run the `helm upgrade` that points Camunda at the external Keycloak.
+Setting `KEYCLOAK_TARGET_MODE=external` is a **data-only** migration. When you source `env.sh`, it automatically derives `PG_TARGET_MODE=external` (the external Keycloak serves the migrated realm from the external Keycloak database, `EXTERNAL_PG_KEYCLOAK_*`) and `SKIP_HELM_UPGRADE=true` — you do not set those yourself. The scripts migrate the realm database and stop with Camunda still frozen on the old backends; your upgrade pipeline then runs the `helm upgrade` that switches Camunda to the external Keycloak and wires its authentication credentials.
 :::
 
 Configure the external Keycloak connection variables in `env.sh`:
@@ -191,23 +191,21 @@ Configure the external Keycloak connection variables in `env.sh`:
 | `EXTERNAL_KEYCLOAK_PORT`         | `80`                       | Port of the external Keycloak.                                                        |
 | `EXTERNAL_KEYCLOAK_CONTEXT_PATH` | `/auth`                    | Context path of the external Keycloak.                                                |
 | `EXTERNAL_KEYCLOAK_REALM`        | `/realms/camunda-platform` | Realm path served by the external Keycloak.                                           |
-| `EXTERNAL_KEYCLOAK_ADMIN_SECRET` | (empty)                    | Kubernetes secret in `NAMESPACE` holding the Keycloak admin `password`.               |
 
 <details>
 <summary>Show details: external Keycloak configuration example</summary>
 
 ```bash
-# Migrate the Keycloak realm onto an external Keycloak (data-only cutover)
+# Migrate the Keycloak realm onto an external Keycloak (data-only cutover).
+# Set this one flag plus the EXTERNAL_KEYCLOAK_* connection variables — sourcing
+# env.sh then auto-derives PG_TARGET_MODE=external and SKIP_HELM_UPGRADE=true.
 export KEYCLOAK_TARGET_MODE="external"
-export PG_TARGET_MODE="external"
-export SKIP_HELM_UPGRADE="true"
 
 export EXTERNAL_KEYCLOAK_PROTOCOL="http"
 export EXTERNAL_KEYCLOAK_HOST="keycloak"
 export EXTERNAL_KEYCLOAK_PORT="80"
 export EXTERNAL_KEYCLOAK_CONTEXT_PATH="/auth"
 export EXTERNAL_KEYCLOAK_REALM="/realms/camunda-platform"
-export EXTERNAL_KEYCLOAK_ADMIN_SECRET="external-keycloak-admin"
 ```
 
 </details>
