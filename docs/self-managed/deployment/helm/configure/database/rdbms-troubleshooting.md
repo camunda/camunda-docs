@@ -307,3 +307,4 @@ If you observe this deadlock pattern in your MSSQL installation, enable `READ_CO
 ```sql
 ALTER DATABASE [database-name]
 SET READ_COMMITTED_SNAPSHOT ON;
+```
