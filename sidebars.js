@@ -2343,7 +2343,6 @@ module.exports = {
           },
           items: [
             "self-managed/components/hub/usage-metrics",
-            "self-managed/components/hub/telemetry",
             "self-managed/components/hub/monitoring",
             {
               type: "category",
