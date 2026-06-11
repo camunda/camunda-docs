@@ -1,0 +1,248 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Collaborator resource paths and schemas
+paths:
+  /workspaces/{workspaceKey}/collaborators:
+    post:
+      operationId: addCollaborator
+      summary: Add or update a collaborator
+      description: >
+        Adds a collaborator to the workspace, or updates the role of an existing
+        collaborator. The collaborator is identified by their email address.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Collaborator
+      parameters:
+        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollaboratorCreateRequest"
+      responses:
+        "200":
+          description: The collaborator was added or updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollaboratorResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The workspace was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /workspaces/{workspaceKey}/collaborators/{email}:
+    delete:
+      operationId: removeCollaborator
+      summary: Remove a collaborator
+      description: Removes a collaborator from the workspace.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Collaborator
+      parameters:
+        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+        - $ref: "#/components/parameters/CollaboratorEmailPathParam"
+      responses:
+        "204":
+          description: The collaborator was removed successfully.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The workspace or collaborator was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /collaborators/search:
+    post:
+      operationId: searchCollaborators
+      summary: Search collaborators
+      description: >
+        Returns collaborators matching the given search criteria. A workspace key
+        filter is required — collaborators cannot be searched across workspaces.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Collaborator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollaboratorSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollaboratorSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  parameters:
+    CollaboratorEmailPathParam:
+      name: email
+      in: path
+      required: true
+      description: The email address of the collaborator.
+      schema:
+        type: string
+        format: email
+
+  schemas:
+    # --- Request schemas ---
+
+    CollaboratorCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - email
+        - role
+      properties:
+        email:
+          description: The email address of the collaborator to add or update.
+          type: string
+          format: email
+        role:
+          description: The role to assign to the collaborator.
+          allOf:
+            - $ref: "#/components/schemas/CollaboratorRole"
+
+    # --- Response schemas ---
+
+    CollaboratorResult:
+      type: object
+      required:
+        - workspaceKey
+        - email
+        - name
+        - role
+      properties:
+        workspaceKey:
+          description: The unique key of the workspace the collaborator belongs to.
+          type: string
+        email:
+          description: The email address of the collaborator.
+          type: string
+          format: email
+        name:
+          description: The display name of the collaborator, if known.
+          type: string
+        role:
+          description: The role of the collaborator in the workspace.
+          allOf:
+            - $ref: "#/components/schemas/CollaboratorRole"
+
+    CollaboratorRole:
+      type: string
+      description: The role a collaborator can have in a workspace.
+      enum:
+        - workspace_admin
+        - editor
+        - commenter
+        - viewer
+
+    # --- Search schemas ---
+
+    CollaboratorSearchQuery:
+      type: object
+      required:
+        - filter
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/CollaboratorSearchQuerySortRequest"
+        filter:
+          description: >
+            The collaborator search filters. The workspaceKey filter is required.
+          allOf:
+            - $ref: "#/components/schemas/CollaboratorFilter"
+
+    CollaboratorSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - email
+            - name
+            - role
+        order:
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    CollaboratorFilter:
+      type: object
+      description: Filter criteria for searching collaborators.
+      required:
+        - workspaceKey
+      properties:
+        workspaceKey:
+          description: >
+            Filter by workspace key. Only the `$eq` operator is supported —
+            collaborators cannot be searched across workspaces.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        email:
+          description: Filter by collaborator email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        name:
+          description: Filter by collaborator display name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        role:
+          description: Filter by collaborator role.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+
+    CollaboratorSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching collaborators.
+          type: array
+          items:
+            $ref: "#/components/schemas/CollaboratorResult"
+        page:
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
