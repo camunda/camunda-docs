@@ -181,6 +181,8 @@ By default, the scripts deploy the Keycloak Operator and a `Keycloak` custom res
 Setting `KEYCLOAK_TARGET_MODE=external` is a **data-only** migration. When you source `env.sh`, it automatically derives `PG_TARGET_MODE=external` (the external Keycloak serves the migrated realm from the external Keycloak database, `EXTERNAL_PG_KEYCLOAK_*`) and `SKIP_HELM_UPGRADE=true` — you do not set those yourself. The scripts migrate the realm database and stop with Camunda still frozen on the old backends; your upgrade pipeline then runs the `helm upgrade` that switches Camunda to the external Keycloak and wires its authentication credentials.
 :::
 
+In this mode, the per-phase behavior changes accordingly: Phase 1 skips the Keycloak Operator deployment, Phase 3 runs the data migration but stops before the final `helm upgrade` (your pipeline owns it), and Phase 4 skips the Keycloak Custom Resource health check. The PostgreSQL and Elasticsearch phases are unchanged.
+
 Configure the external Keycloak connection variables in `env.sh`:
 
 | Variable                         | Default                    | Description                                                                           |
@@ -222,6 +224,10 @@ export KEYCLOAK_DB_USER="keycloak"
 ```
 
 The same pattern applies to the `IDENTITY_SOURCE_DB_*` and `WEBMODELER_SOURCE_DB_*` variables.
+
+#### Transient Keycloak cluster data is excluded automatically
+
+When the realm database is backed up, the scripts automatically exclude the data in Keycloak's `JGROUPS_PING` table — the transient JDBC_PING cluster-discovery table whose rows hold the source cluster's node addresses. Restoring those rows into the target Keycloak would make it fail on startup with a duplicate-key violation on `constraint_jgroups_ping`, leaving the migrated Keycloak in `CrashLoopBackOff`. The table schema is preserved and restored empty, so the external Keycloak re-registers its own cluster membership on startup. You do not need to configure anything for this.
 
 ### Create custom Helm values
 
@@ -328,7 +334,7 @@ What happens:
 
 - When `PG_TARGET_MODE=external`, the CloudNativePG (CNPG) operator is not installed; your managed PostgreSQL is used directly.
 - When `ES_TARGET_MODE=external`, the Elastic Cloud on Kubernetes (ECK) operator is not installed; your managed Elasticsearch target is used directly.
-- The Keycloak Operator is still deployed with a Custom Resource pointing to your managed PostgreSQL.
+- The Keycloak Operator is still deployed with a Custom Resource pointing to your managed PostgreSQL. When `KEYCLOAK_TARGET_MODE=external`, the operator is not deployed and Camunda is pointed at your existing Keycloak instead (see [Migrate Keycloak to an external instance](#migrate-keycloak-to-an-external-instance)).
 - The script validates connectivity to each external endpoint before proceeding.
 
 ### Phase 2: Initial backup (no downtime)
@@ -429,7 +435,7 @@ If you cannot configure `reindex.remote.whitelist` on the managed target, or pre
 bash 4-validate.sh
 ```
 
-The validation script checks that all Camunda deployments and StatefulSets are ready, and that the Keycloak Custom Resource is healthy. For external PostgreSQL and Elasticsearch targets, it verifies connectivity to the managed service endpoints rather than checking CNPG/ECK cluster status. A migration report is generated at `.state/migration-report.md`.
+The validation script checks that all Camunda deployments and StatefulSets are ready, and that the Keycloak Custom Resource is healthy (skipped when `KEYCLOAK_TARGET_MODE=external`, where there is no operator-managed Custom Resource). For external PostgreSQL and Elasticsearch targets, it verifies connectivity to the managed service endpoints rather than checking CNPG/ECK cluster status. A migration report is generated at `.state/migration-report.md`.
 
 :::warning Wait before cleanup
 Do not move on to the next phase immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) before cleanup. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [rollback](#rollback)).
