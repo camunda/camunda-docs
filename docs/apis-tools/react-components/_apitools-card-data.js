@@ -44,13 +44,6 @@ export const apiCards = [
     type: "REST",
   },
   {
-    link: "../administration-sm-api/administration-sm-api-overview/",
-    title: "Administration API (Self-Managed)",
-    image: IconAdminImg,
-    description: "Get cluster data including installed apps and usage metrics.",
-    type: "REST",
-  },
-  {
     link: "../optimize-api/overview/",
     title: "Optimize API",
     image: IconOptimizeImg,

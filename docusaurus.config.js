@@ -122,8 +122,12 @@ module.exports = {
         docsPluginId: "default",
         config: {
           adminsm: {
-            specPath: "api/administration-sm/administration-sm-openapi.yaml",
-            outputDir: "docs/apis-tools/administration-sm-api/specifications",
+            // This API is no longer supported from 8.10. Since this is required, I'm using 8.9 values.
+            // To generate docs for older versions, run `npm run api:generate -- adminsm <version>`.
+            specPath:
+              "api/administration-sm/version-8.9/administration-sm-openapi.yaml",
+            outputDir:
+              "versioned_docs/version-8.9/apis-tools/administration-sm-api/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -132,6 +136,22 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.9: {
+                specPath:
+                  "api/administration-sm/version-8.9/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.9/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.8: {
+                specPath:
+                  "api/administration-sm/version-8.8/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.8/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.7: {
                 specPath:
                   "api/administration-sm/version-8.7/administration-sm-openapi.yaml",

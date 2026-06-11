@@ -1101,6 +1101,7 @@ RewriteRule ^optimize/self-managed/components/optimize/advanced-features/import-
 RewriteRule ^optimize/self-managed/components/optimize/advanced-features/engine-data-deletion/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
 
 # Finalize the renaming of Console SM API to Administration API (Self-Managed)
+# This was removed with the introduction of Camunda Hub. When 8.10 becomes the next "current" docs, we should redirect to the Hub API SM.
 RewriteRule ^docs/apis-tools/administration-sm-api/specifications/sm-admin(istration)?-api/?$ /docs/apis-tools/administration-sm-api/specifications/administration-api-self-managed/ [R=301,L]
 
 # Move migrating to Zeebe user tasks
