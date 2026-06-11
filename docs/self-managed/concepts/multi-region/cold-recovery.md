@@ -5,14 +5,12 @@ sidebar_label: "Cold Recovery"
 description: "Cold recovery uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss."
 ---
 
-<!-- Image source: https://miro.com/app/board/uXjVL-6SrPc=/ -->
-
 import PageDescription from '@site/src/components/PageDescription';
 import ColdRecoveryImg from './img/multi-region-cold-recovery.png';
 
 <PageDescription />
 
-import ColdRecovery from "./img/cold-recovery-diagram.jpg";
+<!-- Image source: https://miro.com/app/board/uXjVL-6SrPc=/ -->
 
 ## About
 
@@ -31,7 +29,7 @@ Cold Recovery is suited for production workloads in which recovery measured in h
 Cold Recovery [RTO](/reference/glossary.md#recovery-time-objective-rto) and [RPO](/reference/glossary.md#recovery-point-objective-rpo) depends on data volume, backup frequency, operator familiarity with the restore procedure, and the speed at which a secondary region can be provisioned. The ranges above are planning targets, not contractual commitments.
 :::
 
-## Architecture overview
+## Architecture
 
 In Cold Recovery, a single active region runs the Camunda Orchestration Cluster.
 
