@@ -7,10 +7,6 @@ description: "Discover and apply published Catalog assets in the Hub Catalog and
 
 Once your Center of Excellence (CoE) has [synced element templates to the Catalog](/components/hub/organization/manage-catalog/getting-started.md), delivery teams discover and apply them while modeling, and the CoE manages their lifecycle.
 
-:::note
-The Catalog browsing, Canvas, and CoE management experiences describe the planned 8.10 behavior. The user interface is still being built out, so exact labels and screens may differ from this guide.
-:::
-
 ## Discover assets in the Catalog
 
 Delivery team members browse the Catalog in Hub to find approved, ready-to-use element templates. For each asset, the Catalog shows its name, short description, category, tags, latest version, and icon.
