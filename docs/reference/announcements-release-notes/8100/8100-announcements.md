@@ -107,6 +107,40 @@ Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch 9.2 no longer supported
+
+Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.3. Supported Elasticsearch versions are now 8.19+ and 9.3+.
+
+- Upgrade Elasticsearch 9.2 clusters to 9.3 or later before moving to Camunda 8.10.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenSearch 3.4 no longer supported
+
+Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Supported OpenSearch versions are now 2.19+ and 3.5+.
+
+- Upgrade OpenSearch 3.4 clusters to 3.5 or later before moving to Camunda 8.10.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
 ## Agentic orchestration
 
 <div className="release-announcement-row">
@@ -142,9 +176,9 @@ Starting with Camunda 8.10.0-alpha2, Camunda removes the legacy component APIs a
 
 The following items are removed:
 
-- The [Operate API](/apis-tools/operate-api/overview.md)
-- The [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) and Tasklist V1 mode
-- Tasklist V1-dependent features such as [user task access restrictions](/components/tasklist/user-task-access-restrictions.md) and [public start forms](/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes.md)
+- The [Operate API (8.9 documentation)](/versioned_docs/version-8.9/apis-tools/operate-api/overview.md)
+- The [Tasklist API (8.9 documentation)](/versioned_docs/version-8.9/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) and Tasklist V1 mode
+- Tasklist V1-dependent features such as [user task access restrictions (8.9 documentation)](/versioned_docs/version-8.9/components/tasklist/user-task-access-restrictions.md) and [public start forms](/components/tasklist/userguide/starting-processes.md#public-start-forms)
 - [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md)
 
 **Action:** Migrate integrations and testing workflows to the current replacements:

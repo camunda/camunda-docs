@@ -277,6 +277,48 @@ module.exports = {
       },
     ],
     [
+      // Hub API Self-Managed docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsm-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsm: {
+            specPath: "api/hubsm/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-sm/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
+      // Hub API SaaS docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsaas-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsaas: {
+            specPath: "api/hubsaas/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-saas/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
       // RSS feed for security notices
       "./static/plugins/notices-feed",
       {
@@ -429,6 +471,12 @@ module.exports = {
         },
         {
           type: "doc",
+          docId: "guides/build-with-ai/overview",
+          label: "Build with AI",
+          position: "left",
+        },
+        {
+          type: "doc",
           docId: "components/components-overview",
           label: "Using Camunda",
           position: "left",
@@ -461,8 +509,8 @@ module.exports = {
               href: "https://camunda.com/services/enterprise-support-guide/",
             },
             {
-              label: "Developers",
-              href: "https://developers.camunda.com/",
+              label: "Downloads",
+              to: "/downloads",
             },
             {
               label: "Academy",
@@ -493,7 +541,7 @@ module.exports = {
             '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
         },
         {
-          to: "https://camunda.com/download?utm_source=docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",
+          to: "build-with-camunda",
           position: "right",
           className: "button button--primary button--md try-free",
           label: "Try Free",
@@ -515,7 +563,7 @@ module.exports = {
           items: [
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              to: "/build-with-camunda",
             },
             {
               label: "Support and feedback",
@@ -542,10 +590,6 @@ module.exports = {
               href: "https://camunda.com/developers/how-to-contribute/",
             },
             {
-              label: "Developer resources",
-              href: "https://camunda.com/developers/",
-            },
-            {
               label: "Subscribe",
               href: "https://camunda.com/developers/developer-community-updates/",
             },
@@ -554,6 +598,10 @@ module.exports = {
         {
           title: "Camunda",
           items: [
+            {
+              label: "Downloads",
+              to: "/downloads",
+            },
             {
               label: "Web Modeler",
               href: "https://camunda.io",

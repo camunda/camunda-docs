@@ -112,7 +112,7 @@ The example includes a form linked to the start event, allowing you to submit re
 <img src={AiAgentStartFormImg} alt="Example AI agent start form" className="img-800"/>
 
 :::tip Understand the decision model behind this example
-To make this agent reliable, treat each activity in the ad-hoc sub-process as a documented tool. Learn why this matters in [AI agents: Why tool documentation in ad-hoc sub-processes matters](/components/agentic-orchestration/ai-agents.md#why-tool-documentation-in-ad-hoc-sub-processes-matters).
+To make this agent reliable, treat each activity in the ad-hoc sub-process as a documented tool. Learn why this matters in [Design and architecture: Define your agent tools](/components/agentic-orchestration/design-architecture.md#define-your-agent-tools).
 
 For a runtime view of what the LLM decides vs. what Camunda orchestrates, see [Design and architecture: How execution works in an AI agent](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
 
@@ -389,6 +389,6 @@ For example:
 
 Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
-:::info Camunda Academy
-Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.
+:::tip
+Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to design and integrate AI agents in your end-to-end processes. For more insights and examples, explore our [Camunda AI agents blog posts](https://camunda.com/blog/tag/ai-agent/).
 :::

@@ -27,6 +27,12 @@ readonly ASSIGNING: "ASSIGNING" = 'ASSIGNING';
 readonly BEFORE_ALL: "BEFORE_ALL" = 'BEFORE_ALL';
 ```
 
+### CANCEL
+
+```ts
+readonly CANCEL: "CANCEL" = 'CANCEL';
+```
+
 ### CANCELING
 
 ```ts

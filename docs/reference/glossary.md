@@ -20,7 +20,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#h">H</a></div>
     <div class="letter-link"><a href="#i">I</a></div>
     <div class="letter-link"><a href="#j">J</a></div>
-    <div class="letter-link">K</div>
+    <div class="letter-link"><a href="#k">K</a></div>
     <div class="letter-link"><a href="#l">L</a></div>
     <div class="letter-link"><a href="#m">M</a></div>
   </div>
@@ -42,6 +42,14 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 </div>
 
 ## A
+
+### Ad-hoc sub-process
+
+A special type of BPMN subprocess that allows activities to be executed in any order, skipped, or repeated, without a predefined sequence. Activities are activated dynamically at runtime, either by a human or a system, rather than following a fixed flow.
+
+In Camunda, ad-hoc sub-processes are the foundation for AI agent tool execution: each activity inside the sub-process acts as a tool the LLM can select and invoke during a feedback loop.
+
+- [Ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md)
 
 ### Admin
 
@@ -121,6 +129,12 @@ See [Zeebe cluster](#zeebe-cluster).
 ### Cluster variable
 
 A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
+
+### Cluster-wide operation
+
+An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
 
 ### Camunda 8
 
@@ -279,6 +293,12 @@ A generation is not a process definition version, a version tag, or a Web Modele
 
 - [Generation names](/reference/announcements-release-notes/release-policy.md#generation-names)
 
+### GPAI model
+
+A general-purpose AI model trained on large amounts of data using self-supervision at scale, capable of performing a wide range of tasks. Used in the EU AI Act to classify foundation models.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#the-ai-models-behind-these-features)
+
 ## H
 
 ### Hallucination
@@ -299,6 +319,10 @@ H2 is not intended for production usage. For Camunda secondary storage, H2 is a 
 - [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
 
 See also: [Secondary storage](#secondary-storage)
+
+### Human-in-the-Loop (HITL)
+
+A human review and approval step before AI-generated outputs with legal, financial, or safety-relevant effects are acted upon.
 
 ### Human task
 
@@ -359,6 +383,14 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 
 - [Job workers](/components/concepts/job-workers.md)
 
+## K
+
+### Kill switch
+
+A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
+
 ## L
 
 ### Large language model (LLM)
@@ -377,6 +409,13 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
 
+### Logical Tenant
+
+A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based multi-tenancy model in Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single [Physical Tenant](#physical-tenant).
+
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+
 ## M
 
 ### Management Identity
@@ -393,9 +432,11 @@ Manual tasks are part of [human task orchestration](/guides/getting-started-orch
 
 ### Multi-tenancy
 
-Multi-tenancy allows a single Camunda 8 installation to serve multiple tenants while keeping each tenant's data, configurations, and access logically isolated.
+Multi-tenancy allows a single Camunda 8 installation to serve multiple [Logical Tenants](#logical-tenant) while keeping each tenant's data, configurations, and access logically isolated. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenant](#physical-tenant).
 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
+- [Logical Tenant](#logical-tenant)
+- [Physical Tenant](#physical-tenant)
 
 ### Message
 
@@ -498,6 +539,14 @@ A process variable represents the execution state (i.e data) of a process instan
 
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
+
+### Physical Tenant
+
+An isolated execution unit within an [Orchestration Cluster](#orchestration-cluster). Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant. Multiple [logical tenants](#logical-tenant) can coexist within a single Physical Tenant.
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Logical Tenant](#logical-tenant)
+- [Multi-tenancy](#multi-tenancy)
 
 ### Project
 
@@ -625,10 +674,18 @@ This way, a [Camunda workflow](#workflow) can receive messages from an external 
 
 ### Tenant
 
-A tenant is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions.
+A [Logical Tenant](#logical-tenant) is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions. For strong physical isolation, see [Physical Tenant](#physical-tenant).
 
 - [Tenant management](/components/admin/tenant.md)
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
+- [Logical Tenant](#logical-tenant)
+- [Physical Tenant](#physical-tenant)
+
+### Tenant-scoped operation
+
+An operation that targets a specific [Physical Tenant](#physical-tenant), such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
 
 ### Temperature
 

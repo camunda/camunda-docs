@@ -21,6 +21,9 @@ The History Data Migrator can copy this audit data to Camunda 8. For process ins
 Audit data migration might need to look at a huge amount of data, which can take time to migrate.
 You can run audit data migration alongside normal operations (for example, after the successful big bang migration of runtime process instances) so that it doesn't require downtime and as such, the performance might not be as critical as for runtime instance migration.
 
+During history migration, the Data Migrator maps the Camunda 7 process instance `businessKey` to Camunda 8 `businessId`.
+If no business key is present, the process instance is migrated without a business ID. If the business key is blank, it is migrated as a blank business ID.
+
 During migration, the History Data Migrator sets a `legacyId` variable in the process instances to link them to their original Camunda 7 process instances.
 
 ## Requirements and limitations
