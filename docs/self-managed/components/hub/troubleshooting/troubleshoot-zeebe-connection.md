@@ -63,17 +63,17 @@ default. No filesystem access is required, so running `modeler-restapi` as a non
 `securityContext.runAsUser` option) or on a read-only container filesystem works out of the box.
 
 If you want to persist tokens across restarts of `modeler-restapi`, opt in to a file-based cache by setting the
-`ZEEBE_CLIENT_CONFIG_PATH` environment variable to a writeable file location. Ensure the directory exists and is
+`CAMUNDA_CLIENT_CONFIG_PATH` environment variable to a writeable file location. If you are using legacy Zeebe client environment variables, you can also use `ZEEBE_CLIENT_CONFIG_PATH`. Ensure the directory exists and is
 writeable by the process user:
 
 ```shell
-ZEEBE_CLIENT_CONFIG_PATH=/path/to/credentials/cache.txt
+CAMUNDA_CLIENT_CONFIG_PATH=/path/to/credentials/cache.txt
 ```
 
 :::note
 Before Camunda 8.10, the file-based cache was enabled by default and pointed at `$HOME/.camunda/credentials`. Running
 as a non-root user without overriding this path caused `IOException`s on first cache write. If you previously set
-`ZEEBE_CLIENT_CONFIG_PATH` solely to work around that error, you can now remove the variable and rely on the in-memory
+`CAMUNDA_CLIENT_CONFIG_PATH` or `ZEEBE_CLIENT_CONFIG_PATH` (legacy) solely to work around that error, you can now remove the variable and rely on the in-memory
 default.
 :::
 

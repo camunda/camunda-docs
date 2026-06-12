@@ -309,7 +309,7 @@ Why this change:
 
 How to opt in to the file-based cache (behavior identical to pre-8.10):
 
-- Java client builder: `CredentialsProvider.newCredentialsProviderBuilder().credentialsCachePath("/path/to/cache")`.
+- Java client builder: `new OAuthCredentialsProviderBuilder().credentialsCachePath("/path/to/cache")`.
 - Spring property: `camunda.client.auth.credentials-cache-path: /path/to/cache`.
 - Environment variable: `CAMUNDA_CLIENT_CONFIG_PATH=/path/to/cache` (or `ZEEBE_CLIENT_CONFIG_PATH` for the legacy Zeebe client).
 
