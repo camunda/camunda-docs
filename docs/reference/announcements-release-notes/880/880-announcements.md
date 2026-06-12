@@ -868,7 +868,7 @@ With the Camunda 8.8 release, the configuration for the external database used b
 With the Camunda 8.8 release, the default ID token claim that Web Modeler uses to assign usernames has changed from `name` to `preferred_username`.
 
 - This change aligns the configuration with other Camunda 8 components for consistency across the platform.
-- To continue using the `name` claim, explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` as an environment variable for the Web Modeler `webapp`. See [Identity / Keycloak configuration](/self-managed/components/hub/configuration/modeler-configuration.md#identity--keycloak-1).
+- To continue using the `name` claim, explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` as an environment variable for the Web Modeler `webapp`. See [Identity / Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak-1).
 
 </div>
 </div>
@@ -1103,7 +1103,7 @@ For future use, refer to the [new AWS Marketplace listing](https://aws.amazon.co
 
 #### Removed: Cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` in Web Modeler Self-Managed
 
-With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) are no longer supported.
+With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/properties.md#clusters) are no longer supported.
 
 For more information on how to migrate, see the [upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/components/870-to-880.md#cluster-configuration).
 
@@ -1118,8 +1118,8 @@ For more information on how to migrate, see the [upgrade guide](/versioned_docs/
 
 #### Cluster configuration in Web Modeler Self-Managed
 
-The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) now depend on the version of the cluster.
-For version 8.8 and above, [new configuration options](/self-managed/components/hub/configuration/modeler-configuration.md#additional-configuration-for-cluster-versions--88) are required.
+The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/properties.md#clusters) now depend on the version of the cluster.
+For version 8.8 and above, [new configuration options](/self-managed/components/hub/configuration/properties.md#additional-configuration-for-cluster-versions--88) are required.
 
 For more information on how to modify your existing configuration, see the [upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/components/870-to-880.md#changed-configuration-options).
 
