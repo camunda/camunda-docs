@@ -28,6 +28,13 @@
       "sourceMethod": "getCloud()"
     },
     {
+      "name": "camunda.client.cluster-variables",
+      "type": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
+      "description": "Properties for setting cluster variables at startup.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "sourceMethod": "getClusterVariables()"
+    },
+    {
       "name": "camunda.client.deployment",
       "type": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
       "description": "Properties for automatic deployment at startup.",
@@ -341,6 +348,19 @@
       "type": "java.lang.String",
       "description": "The region the Camunda client connects to.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientCloudProperties"
+    },
+    {
+      "name": "camunda.client.cluster-variables.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Indicates if the <code>@ClusterVariables<\/code> annotation is processed and configured variables are applied.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camunda.client.cluster-variables.variables",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Cluster variables to set at startup as key-value pairs.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
     },
     {
       "name": "camunda.client.deployment.enabled",
