@@ -787,18 +787,14 @@ camunda:
 
 #### Dynamic cluster management
 
-With dynamic cluster management, the orchestration cluster can ping Camunda Hub to request information about the cluster. The available information is limited to [certain preconfigured properties](https://docs.camunda.io/docs/next/self-managed/components/orchestration-cluster/zeebe/configuration/broker-config/#console-ping-configuration), such as license information.
+With dynamic cluster management, you can [configure components](https://docs.camunda.io/docs/next/self-managed/components/orchestration-cluster/zeebe/configuration/broker-config/#console-ping-configuration) to automatically send license information to Camunda Hub.
 
-<!--- TODO: update "console ping configuration" --->
+Additionally, the way you manage clusters changes. Instead of clusters being automatically created, updated, and deleted according to your [clusters configuration](#clusters), clusters are only automatically _created_ when you add them to the configuration. Updates and deletes are manual.
 
-If you disable dynamic cluster management, clusters are automatically created, updated, and deleted according to your [clusters configuration](#clusters).
+Two public APIs are exposed when this feature flag is enabled to make this possible:
 
-If you enable dynamic cluster management, clusters are only automatically _created_ when you add them to the configuration. Updates and deletes are manual:
-
-- To delete a cluster, use the public delete clusters API.
-- To update a cluster, use the public delete clusters API, update the configuration, and let the cluster be recreated automatically.
-
-The public delete cluster and create cluster APIs are only exposed when this feature flag is enabled.
+- Create cluster
+- Delete cluster
 
 ### Unstable configuration options
 
