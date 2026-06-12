@@ -10,6 +10,10 @@ import TabItem from '@theme/TabItem';
 
 Migrate to the Camunda Java Client from the Zeebe Java Client.
 
+:::note Using Spring Boot?
+If you are migrating from the Spring Zeebe SDK, use [migrate to Camunda Spring Boot Starter](migrate-to-camunda-spring-boot-starter.md) instead. This guide covers migrations from the Zeebe Java Client to the Camunda Java Client.
+:::
+
 ## About
 
 This guide provides an overview of the process for migrating to the Camunda Java Client.

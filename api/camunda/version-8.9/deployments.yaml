@@ -5,8 +5,10 @@ paths:
         - Resource
       operationId: createDeployment
       summary: Deploy resources
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -41,14 +43,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /resources/{resourceKey}:
     get:
       tags:
         - Resource
       operationId: getResource
       summary: Get resource
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -78,14 +83,17 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.7"
   /resources/{resourceKey}/content:
     get:
       tags:
         - Resource
       operationId: getResourceContent
       summary: Get resource content
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -115,6 +123,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.7"
   /resources/{resourceKey}/deletion:
     post:
       tags:
@@ -123,6 +132,8 @@ paths:
       summary: Delete resource
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -174,6 +185,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
 components:
   schemas:
     DeploymentResult:

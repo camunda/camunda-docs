@@ -4,7 +4,7 @@ title: "Processes"
 description: "Processes are flowchart-like blueprints that define the orchestration of tasks."
 ---
 
-A process is a defined sequence of distinct steps or tasks representing your business logic. Examples of a process could be an e-commerce shopping experience, or onboarding a new employee.
+A [process](/reference/glossary.md#process) is a defined sequence of distinct steps or tasks representing your business logic. Examples of a process could be an e-commerce shopping experience, or onboarding a new employee.
 
 At large, process orchestration is a technology that coordinates the various moving parts (or endpoints) of a business process, and sometimes even ties multiple processes together. Process orchestration helps you work with the people, systems, and devices you already have—while achieving goals around end-to-end process automation.
 
@@ -36,11 +36,11 @@ Camunda provides [Modeler](/components/modeler/about-modeler.md), a free and ope
 
 Camunda offers two Modeler tools to design and implement your diagrams:
 
-- [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md): Integrate seamlessly with Camunda 8 SaaS and Self-Managed installations alongside [Console](../console/introduction-to-console.md).
+- [Camunda Hub](/components/hub/workspace/modeler/index.md): Integrate seamlessly with Camunda 8 SaaS and Self-Managed installations.
 - [Desktop Modeler](/components/modeler/desktop-modeler/index.md): Design, view, and edit models using this desktop application. Install and use Desktop Modeler locally, all while integrating your local development environment.
 
 :::note
-New to modeling a process? Visit our [getting started guide](/components/modeler/web-modeler/collaboration/design-your-process.md).
+New to modeling a process? Visit our [getting started guide](/components/hub/workspace/modeler/collaboration/design-your-process.md).
 :::
 
 ## Process execution

@@ -43,6 +43,16 @@ Forbidden. The request is not allowed.
 
 ---
 
+### 409
+
+```ts
+409: ProblemDetail;
+```
+
+Role with this id already exists.
+
+---
+
 ### 500
 
 ```ts

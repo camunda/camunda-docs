@@ -11,7 +11,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See see [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
+`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
 :::
 
 ## About
@@ -208,13 +208,39 @@ c8ctl --version           # print version
 Run any verb without a resource to see what resources are available:
 
 ```bash
-c8 list                   # shows: pi, pd, ut, inc, jobs, profiles, plugins
-c8 search                 # shows: pi, pd, ut, inc, jobs, variables
+c8 list                   # shows: pi, pd, ut, inc, jobs, profiles, plugins, users, roles, groups, tenants, auth, mr
+c8 search                 # shows: pi, pd, ut, inc, jobs, variables, users, roles, groups, tenants, auth, mr
 ```
+
+## Send feedback
+
+```bash
+c8 feedback
+```
+
+Opens the GitHub issues page in your browser to report bugs or request features.
+
+## Update notifications
+
+`c8ctl` checks for newer versions in the background and displays a one-time notification when an update is available. This check is suppressed in CI environments, JSON output mode, and development versions.
 
 ## Shell completion
 
-`c8ctl` supports shell completion for bash, zsh, and fish.
+The recommended way to set up shell completion is with the `install` subcommand:
+
+```bash
+c8 completion install
+```
+
+This auto-detects your shell, writes the completion file, and wires it into your shell configuration. To specify a shell explicitly:
+
+```bash
+c8 completion install --shell zsh
+```
+
+Completions auto-refresh when the CLI is upgraded.
+
+Alternatively, generate the completion script manually:
 
 <Tabs>
   <TabItem value="bash" label="Bash">
@@ -245,7 +271,7 @@ c8ctl completion fish > ~/.config/fish/completions/c8ctl.fish
 
 Fish loads the completion automatically on the next shell start.
 
-</TabItem> 
+</TabItem>
 </Tabs>
 
 ## Output modes

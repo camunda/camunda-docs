@@ -46,6 +46,22 @@ Following the end-of-life of macOS 12, support for Desktop Modeler on macOS 12 h
 
 Collectively, these changes consolidate overlapping functionality, align configuration and client behavior across components, and establish clearer upgrade paths for upcoming releases.
 
+### 8.7.x patch releases
+
+The following key change was also released as part of an 8.7.x patch release.
+
+| Patch release                                                    | Type            | Key change                                                                                              |
+| :--------------------------------------------------------------- | :-------------- | :------------------------------------------------------------------------------------------------------ |
+| [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record) |
+
+### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
+
+Camunda 8.7.27 unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.7.27 or any later 8.7.x patch. The built-in Elasticsearch and OpenSearch exporters are unaffected.
+
+A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and will be available in a later 8.7.x patch.
+
+**Action:** If you maintain a custom exporter that reads message batch records, avoid calling `getMessageKeys()` until you upgrade to a patch that includes the fix.
+
 ### Deprecation of Self-Managed AWS Marketplace offering
 
 As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
@@ -55,17 +71,17 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
-With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
+With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) to be able to deploy from Web Modeler.
 
 <img src={DeployDiagramImg} alt="New 8.7 deploy diagram modal" width="600px" style={{border: '0', paddingTop: '0', marginTop: '0'}} />
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
-- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
+- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) to be able to deploy from this modal.
 - Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
 
 ### Deprecated: Web Modeler cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The following authentication methods for a [configured cluster in Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
+The following authentication methods for a [configured cluster in Web Modeler](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
 
 - `OAUTH`: This method was replaced by `BEARER_TOKEN`.
 - `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md).

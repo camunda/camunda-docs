@@ -41,17 +41,15 @@ You will:
   </TabItem>
   <TabItem value="nodejs">
 <ul>
-    <li>[JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/)</li>
     <li>[Node.js](https://nodejs.org/en) 20+</li>
     <li>NPM 11+</li>
 </ul>
   </TabItem>
   </Tabs>
 
-## Download the Camunda 8 starter package
+## Download the Getting Started Package
 
-Download the Camunda 8 starter package from the following website:  
-[https://developers.camunda.com/install-camunda-8/](https://developers.camunda.com/install-camunda-8/)
+Download the Getting Started Package from [Camunda Downloads](/downloads).
 
 The starter package includes the following components:
 
@@ -67,7 +65,7 @@ The example project, located in the `camunda-8-get-started/2-order-process-with-
 
 ![Example business process](./img/getting-started-guide-example-process.png)
 
-The service tasks in the process are executed by job workers. The `java` and `nodejs` directories inside `2-order-process-with-service-workers` contain code for job workers that correspond to this process model.
+The service tasks in the process are executed by [job workers](/reference/glossary.md#job-worker). The `java` and `nodejs` directories inside `2-order-process-with-service-workers` contain code for job workers that correspond to this process model.
 
 ## Instructions
 
@@ -130,7 +128,7 @@ The service tasks in the process are executed by job workers. The `java` and `no
 
 ## View the process instance and start job workers
 
-A process instance is now running in the engine.
+A [process instance](/reference/glossary.md#process-instance) is now running in the engine.
 
 You can view the process instance in **Operate**, the visual operations tool, by navigating to:  
 [http://localhost:8080/operate](http://localhost:8080/operate)  

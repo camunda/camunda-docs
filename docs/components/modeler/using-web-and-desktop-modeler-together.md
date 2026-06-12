@@ -4,7 +4,7 @@ title: Using Web and Desktop Modeler together
 description: "Understand the implications of using Web Modeler and Desktop Modeler for modeling process diagrams."
 ---
 
-[Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md) are both tools for designing [BPMN](/components/modeler/bpmn/bpmn.md) diagrams, but they serve different purposes and shine in different scenarios.
+[Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md) are both tools for designing [BPMN](/components/modeler/bpmn/bpmn.md) diagrams, but they serve different purposes and shine in different scenarios.
 
 Web Modeler is great for collaborative, cloud-based process modeling. It allows teams to work together in real-time, manage versions, and store models centrally. It's especially useful when working in distributed teams or when you need tight integration with a remotely hosted Camunda 8 cluster — whether it's Camunda SaaS or your own self-managed environment.
 
@@ -17,13 +17,13 @@ Using both tools together allows you to combine the best of both worlds:
 
 This workflow bridges the gap between business users and developers, ensuring smooth handoffs and better alignment across the team.
 
-When using [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md) to keep your project in sync between Web Modeler and your local environment, there are a few considerations to ensure both modelers work together transparently.
+When using [Git sync](/components/hub/workspace/manage-projects/git-sync.md) to keep your project in sync between a Camunda Hub workspace and your local environment, there are a few considerations to ensure both modelers interpret the project (and its `.project` file) consistently.
 
 ## Process applications
 
-| Desktop Modeler                                                                            | Web Modeler                                                                                                                            |
-| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| A process application is represented as a folder containing a `.process-application` file. | A process application is represented as a [type folder](/components/modeler/web-modeler/process-applications/process-applications.md). |
+| Desktop Modeler                                                                            | Web Modeler                                                                                                            |
+| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| A process application is represented as a folder containing a `.process-application` file. | A process application is represented as a [type folder](/components/hub/workspace/manage-projects/manage-projects.md). |
 
 :::tip
 Camunda recommends always structuring your projects as process applications. This ensures consistent behavior across both Web Modeler and Desktop Modeler with minimal adjustments.

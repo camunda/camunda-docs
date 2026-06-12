@@ -549,7 +549,7 @@ the central connector function.
 
 Connectors that require confidential information to connect to external systems need to be able
 to manage those securely. As described in the
-[guide for creating secrets](/components/console/manage-clusters/manage-secrets.md), secrets can be
+[guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md), secrets can be
 controlled in a secure location and referenced in a connector's properties using a placeholder
 pattern `{{secrets.*}}`. To make this mechanism as robust as possible, secret handling comes with
 the connector SDK out of the box. That way, all connectors can use the same standard way of
