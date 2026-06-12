@@ -1,0 +1,34 @@
+name: Claude PR Review
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  claude-review:
+    if: |
+      (github.event_name == 'issue_comment' || github.event_name == 'pull_request_review_comment') &&
+      contains(github.event.comment.body, '@claude')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          direct_prompt: |
+            Review this pull request against the Camunda docs contribution standards.
+
+            Read these files before reviewing:
+            - `.github/instructions/content.instructions.md` — language, grammar, punctuation, formatting, links, and product terminology rules
+            - `.github/instructions/repo.instructions.md` — repo structure, PR workflow, and commit conventions
+
+            Focus on the changed files only. For each issue found, post an inline comment on the relevant line with:
+            - What the problem is
+            - Why it violates the guidelines
+            - A concrete suggestion for how to fix it
+
+            Prioritize: incorrect product terminology, broken link conventions, heading case, formatting violations, and unclear or passive writing. Skip minor stylistic preferences where the existing text is defensible.
