@@ -1035,7 +1035,7 @@ camunda:
 
 ## Set cluster variables at startup
 
-To set cluster variables at application startup, use the `@ClusterVariables` annotation. Cluster variables are set when the Camunda client starts and removed from the cluster when it stops.
+To set cluster variables at application startup, use the `@ClusterVariables` annotation. Cluster variables are set when the Camunda client starts.
 
 There are three ways to provide the variables:
 
@@ -1085,7 +1085,7 @@ Variables defined in properties are applied in addition to any annotation-define
 
 ### Specify the tenant to set variables for
 
-To set cluster variables scoped to a specific tenant, set the `tenantId` property of the `@ClusterVariables` annotation:
+To set cluster variables scoped to a specific tenant, set the `tenantId` property of the `@ClusterVariables` annotation. Tenant scoping is only available via the annotation; variables defined in properties are always applied to the global scope.
 
 ```java
 @ClusterVariables(resources = "classpath:cluster-variables.json", tenantId = "myTenant")
