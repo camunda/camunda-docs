@@ -969,7 +969,7 @@ camunda:
 
 ## Deploy resources on start-up
 
-To deploy process models on application start-up, use the `@Deployment` annotation:
+To deploy process models at application startup, use the `@Deployment` annotation:
 
 ```java
 @Deployment(resources = "classpath:demoProcess.bpmn")
@@ -1031,13 +1031,13 @@ camunda:
       enabled: false
 ```
 
-## Set cluster variables on start-up
+## Set cluster variables at startup
 
 :::note
-The `@ClusterVariables` annotation is available from Camunda 8.9.9+.
+The `@ClusterVariables` annotation is available in Camunda 8.9.9+.
 :::
 
-To set cluster variables at application start-up, use the `@ClusterVariables` annotation. Variables are set when the Camunda client starts and removed from the cluster when it stops.
+To set cluster variables at application startup, use the `@ClusterVariables` annotation. Cluster variables are set when the Camunda client starts and removed from the cluster when it stops.
 
 There are three ways to provide the variables:
 
@@ -1095,11 +1095,11 @@ To set cluster variables scoped to a specific tenant, set the `tenantId` propert
 public class MyApplication { }
 ```
 
-By default, the annotation sets the variables to the global scope.
+By default, the annotation sets the variables in the global scope.
 
 ### Disable cluster variable processing
 
-To disable all cluster variable processing (both annotation-based and property-based), you can set:
+To disable all cluster variable processing (both annotation-based and property-based), set:
 
 ```yaml
 camunda:

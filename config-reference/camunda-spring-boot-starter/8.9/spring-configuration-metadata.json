@@ -352,14 +352,14 @@
     {
       "name": "camunda.client.cluster-variables.enabled",
       "type": "java.lang.Boolean",
-      "description": "Indicates if the <code>@ClusterVariables<\/code> annotation is processed and configured variables are applied.",
+      "description": "Indicates whether the <code>@ClusterVariables<\/code> annotation is processed and configured cluster variables are applied.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
       "defaultValue": true
     },
     {
       "name": "camunda.client.cluster-variables.variables",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
-      "description": "Cluster variables to set at startup as key-value pairs.",
+      "description": "Cluster variables to apply at startup as key-value pairs.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
     },
     {
