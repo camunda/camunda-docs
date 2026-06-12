@@ -52,7 +52,7 @@ https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connecto
 https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connectors/outbound-connector
 https://docs.camunda.io/docs/components/concepts/messages/#message-correlation-overview
 https://docs.camunda.io/docs/components/concepts/messages/#message-subscriptions
-https://docs.camunda.io/docs/components/connectors/connectors/protocol/http-webhook/#use-the-correlation-object
+https://docs.camunda.io/docs/components/connectors/connectors/protocol/http-webhook/#correlation
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/#authentication
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb
@@ -109,7 +109,6 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/kaf
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/kafka/?kafka=outbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound
-https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/#configuration
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-teams
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/openai
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/operate
