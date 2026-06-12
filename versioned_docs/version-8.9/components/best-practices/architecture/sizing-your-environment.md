@@ -52,7 +52,7 @@ Optimize is an optional component that provides process analytics and reporting.
 - **Throughput:** Fewer tasks/second achievable at the same hardware level when Optimize is running.
 - **Disk space:** Optimize stores significant amounts of data in Elasticsearch, especially with large payloads. In testing, 128 Gi of ES disk was consumed in under 12 hours at 1 PI/s with the realistic payload (~11 KB) and 30-day retention.
 - **Elasticsearch resources:** More CPU, memory, and disk are needed for ES when Optimize is enabled.
-- **Import time:** Optimize import time increases approximately linearly with payload size. Larger payloads (for example, 11 KB realistic vs. 0.5 KB typical) result in proportionally longer import times.
+- **Individual import latency:** Optimize import time increases approximately linearly with payload size. Larger payloads (for example, 11 KB realistic vs. 0.5 KB typical) result in proportionally larger individual import latency.
 - **Report loading times:** As historical data accumulates in Elasticsearch, Optimize report loading times increase approximately linearly.
 
 #### Mitigations
@@ -61,6 +61,7 @@ Optimize is an optional component that provides process analytics and reporting.
 - Use variable filtering to reduce the amount of data exported/imported by Optimize.
 - Tune retention periods: shorter retention means less data in ES, and better performance.
 - Disable variable import entirely if variables are not needed in Optimize reports.
+- If you are noticing a significant lag between the rate of exported Zeebe records and imported Optimize data you may want to increase Optimize **import throughput**. To do so, raise `CAMUNDA_OPTIMIZE_ZEEBE_MAX_IMPORT_PAGE_SIZE` so each import cycle fetches more exported records. This helps Optimize keep pace under high load and can reduce import lag. However, this increases memory use per fetch and can negatively impact **individual record latency**, as Optimize must wait to fill larger batches before processing.
 
 The sizing guidance for [Self-Managed](sizing-self-managed.md#baseline-resource-configuration) provides configurations with and without Optimize to help you plan accordingly.
 

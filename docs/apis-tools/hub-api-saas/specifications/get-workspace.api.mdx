@@ -1,0 +1,467 @@
+---
+id: get-workspace
+title: "Get a workspace"
+description: "Returns the workspace metadata and its contained projects."
+sidebar_label: "Get a workspace"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-public-api-v-2
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get a workspace"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/workspaces/{workspaceKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns the workspace metadata and its contained projects.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "workspaceKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the workspace.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The workspace was retrieved successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["workspace", "content"],
+            properties: {
+              workspace: {
+                description: "The workspace metadata.",
+                allOf: [
+                  {
+                    type: "object",
+                    required: [
+                      "workspaceKey",
+                      "name",
+                      "created",
+                      "createdBy",
+                      "updated",
+                      "updatedBy",
+                    ],
+                    properties: {
+                      workspaceKey: {
+                        description:
+                          "The unique key identifying this workspace.",
+                        type: "string",
+                      },
+                      name: {
+                        description: "The name of the workspace.",
+                        type: "string",
+                      },
+                      created: {
+                        description:
+                          "The timestamp when the workspace was created.",
+                        type: "string",
+                        format: "date-time",
+                      },
+                      createdBy: {
+                        description: "The user who created the workspace.",
+                        allOf: [
+                          {
+                            type: "object",
+                            description: "A reference to a user.",
+                            required: ["name", "email"],
+                            properties: {
+                              name: {
+                                description: "The display name of the user.",
+                                type: "string",
+                              },
+                              email: {
+                                description: "The email address of the user.",
+                                type: "string",
+                                format: "email",
+                              },
+                            },
+                            title: "UserReference",
+                          },
+                        ],
+                      },
+                      updated: {
+                        description:
+                          "The timestamp when the workspace was last updated.",
+                        type: "string",
+                        format: "date-time",
+                      },
+                      updatedBy: {
+                        description: "The user who last updated the workspace.",
+                        allOf: [
+                          {
+                            type: "object",
+                            description: "A reference to a user.",
+                            required: ["name", "email"],
+                            properties: {
+                              name: {
+                                description: "The display name of the user.",
+                                type: "string",
+                              },
+                              email: {
+                                description: "The email address of the user.",
+                                type: "string",
+                                format: "email",
+                              },
+                            },
+                            title: "UserReference",
+                          },
+                        ],
+                      },
+                    },
+                    title: "WorkspaceResult",
+                  },
+                ],
+              },
+              content: {
+                description: "The contents of the workspace.",
+                allOf: [
+                  {
+                    type: "object",
+                    required: ["projects"],
+                    properties: {
+                      projects: {
+                        description:
+                          "The projects contained in this workspace.",
+                        type: "array",
+                        items: {
+                          type: "object",
+                          required: [
+                            "projectKey",
+                            "name",
+                            "workspaceKey",
+                            "created",
+                            "createdBy",
+                            "updated",
+                            "updatedBy",
+                          ],
+                          properties: {
+                            projectKey: {
+                              description:
+                                "The unique key identifying this project.",
+                              type: "string",
+                            },
+                            name: {
+                              description: "The name of the project.",
+                              type: "string",
+                            },
+                            workspaceKey: {
+                              description:
+                                "The key of the workspace this project belongs to.",
+                              type: "string",
+                            },
+                            created: {
+                              description:
+                                "The timestamp when the project was created.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            createdBy: {
+                              description: "The user who created the project.",
+                              allOf: [
+                                {
+                                  type: "object",
+                                  description: "A reference to a user.",
+                                  required: ["name", "email"],
+                                  properties: {
+                                    name: {
+                                      description:
+                                        "The display name of the user.",
+                                      type: "string",
+                                    },
+                                    email: {
+                                      description:
+                                        "The email address of the user.",
+                                      type: "string",
+                                      format: "email",
+                                    },
+                                  },
+                                  title: "UserReference",
+                                },
+                              ],
+                            },
+                            updated: {
+                              description:
+                                "The timestamp when the project was last updated.",
+                              type: "string",
+                              format: "date-time",
+                            },
+                            updatedBy: {
+                              description:
+                                "The user who last updated the project.",
+                              allOf: [
+                                {
+                                  type: "object",
+                                  description: "A reference to a user.",
+                                  required: ["name", "email"],
+                                  properties: {
+                                    name: {
+                                      description:
+                                        "The display name of the user.",
+                                      type: "string",
+                                    },
+                                    email: {
+                                      description:
+                                        "The email address of the user.",
+                                      type: "string",
+                                      format: "email",
+                                    },
+                                  },
+                                  title: "UserReference",
+                                },
+                              ],
+                            },
+                          },
+                          title: "ProjectResult",
+                        },
+                      },
+                    },
+                    title: "WorkspaceContent",
+                  },
+                ],
+              },
+            },
+            title: "WorkspaceDetailResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The workspace was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

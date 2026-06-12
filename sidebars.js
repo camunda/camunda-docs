@@ -824,7 +824,7 @@ module.exports = {
                 },
                 {
                   type: "doc",
-                  label: "Recover deleted files",
+                  label: "Recover deleted resources",
                   id: "components/hub/workspace/manage-projects/recently-deleted",
                 },
               ],
@@ -2184,6 +2184,18 @@ module.exports = {
                 "self-managed/concepts/document-handling/configuration/helm",
               ],
             },
+          ],
+        },
+        {
+          type: "category",
+          label: "Multi-tenancy",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-tenancy/multi-tenancy-overview",
+          },
+          items: [
+            "self-managed/concepts/multi-tenancy/logical-tenants",
+            "self-managed/concepts/multi-tenancy/physical-tenants",
           ],
         },
         {

@@ -103,6 +103,16 @@ Aggregated metrics across all iterations of this agent instance.
 
 ---
 
+### processDefinitionId
+
+```ts
+processDefinitionId: ProcessDefinitionId;
+```
+
+The BPMN process ID of the process definition associated with this agent instance.
+
+---
+
 ### processDefinitionKey
 
 ```ts
@@ -113,6 +123,26 @@ The key of the process definition associated with this agent instance.
 
 ---
 
+### processDefinitionVersion
+
+```ts
+processDefinitionVersion: number;
+```
+
+The version of the process definition associated with this agent instance.
+
+---
+
+### processDefinitionVersionTag
+
+```ts
+processDefinitionVersionTag: string | null;
+```
+
+The version tag of the process definition associated with this agent instance.
+
+---
+
 ### processInstanceKey
 
 ```ts
@@ -120,6 +150,17 @@ processInstanceKey: ProcessInstanceKey;
 ```
 
 The key of the process instance that owns this agent instance.
+
+---
+
+### rootProcessInstanceKey
+
+```ts
+rootProcessInstanceKey: ProcessInstanceKey;
+```
+
+The key of the root process instance. The root process instance is the top-level
+ancestor in the process instance hierarchy.
 
 ---
 
