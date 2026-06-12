@@ -1099,7 +1099,7 @@ By default, the annotation sets the variables to the global scope.
 
 ### Disable cluster variable processing
 
-To disable the processing of `@ClusterVariables` annotations, you can set:
+To disable all cluster variable processing (both annotation-based and property-based), you can set:
 
 ```yaml
 camunda:
