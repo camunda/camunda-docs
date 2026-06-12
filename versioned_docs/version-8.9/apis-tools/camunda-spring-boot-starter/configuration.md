@@ -1066,7 +1066,7 @@ Annotate a method with `@ClusterVariables`. The return value is serialized to JS
 ```java
 @ClusterVariables
 public MyConfig clusterVariables() {
-    return new MyConfig("production", 3);
+  return new MyConfig("production", 3);
 }
 ```
 
