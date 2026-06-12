@@ -1059,7 +1059,7 @@ public class MyApplication { }
 
 ### From a method
 
-Annotate a method with `@ClusterVariables`. The return value is serialized to JSON and set as cluster variables. Any type the configured `JsonMapper` can serialize is supported — `Map`, POJO, record, etc.:
+Annotate a method with `@ClusterVariables`. The return value is serialized to JSON and set as cluster variables. Any type the configured `JsonMapper` can serialize is supported, for example `Map`, a POJO, or a record:
 
 ```java
 @ClusterVariables
