@@ -44,6 +44,14 @@ When a user opens the task, they can view and download the document directly fro
 
 ![Document preview for task in Tasklist](./img/task-with-document-preview-tasklist.png)
 
+## View and download a document in Operate
+
+When a process instance variable references a document, you can view, preview, and download that document directly from the **Variables** tab of the process instance view in Operate, without making REST API calls.
+
+![Document reference variables in the Operate Variables tab](./img/document-preview-in-operate.png)
+
+Document reference variables render with a document icon, file name, type, and size instead of raw JSON. Each document has preview and download actions, and an **All / Documents** filter above the variables table narrows the list to variables that reference documents. To inspect the underlying reference value, use the expand button on the variable.
+
 ## Download a document using the Orchestration Cluster REST API
 
 You can also download a document from your Camunda 8 cluster using the Orchestration Cluster REST API.
