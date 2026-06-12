@@ -57,8 +57,8 @@ camunda:
 | `camunda.document.aws.<id>.bucket-path`              | No       | Folder-like path within the S3 bucket. Defaults to `""`.                                                                                                                                                                                          |
 | `camunda.document.aws.<id>.bucket-ttl`               | No       | Time-to-live for documents in the bucket, in days.                                                                                                                                                                                                |
 | `camunda.document.aws.<id>.endpoint`                 | No       | Custom endpoint URL for an [S3-compatible object store](#s3-compatible-object-stores) such as MinIO, Cloudian, or Garage. When unset, the AWS SDK default endpoint is used.                                                                       |
-| `camunda.document.aws.<id>.force-path-style`         | No       | Forces path-style addressing on the S3 client. Most S3-compatible backends require this. Auto-enabled whenever `endpoint` is set, so operators rarely need to set this explicitly.                                                               |
-| `camunda.document.aws.<id>.chunked-encoding-enabled` | No       | Controls AWS chunked transfer encoding. Set to `false` for S3-compatible backends that do not support `aws-chunked` streaming-signed uploads (e.g. Garage). When unset, the SDK default (`true`) is used, which is correct for AWS S3 and MinIO. |
+| `camunda.document.aws.<id>.force-path-style`         | No       | Forces path-style addressing on the S3 client. Most S3-compatible backends require this. Automatically enabled when `endpoint` is set, so explicit configuration is rarely needed.                                                              |
+| `camunda.document.aws.<id>.chunked-encoding-enabled` | No       | Controls AWS chunked transfer encoding. Set to `false` for S3-compatible backends that do not support `aws-chunked` streaming-signed uploads (for example, Garage). When unset, the SDK default (`true`) is used, which is correct for AWS S3 and MinIO. |
 | `camunda.document.default-store-id`                  | Yes      | Instance ID of the store to use as the default.                                                                                                                                                                                                   |
 | `camunda.document.thread-pool-size`                  | No       | Number of threads in the document store thread pool.                                                                                                                                                                                              |
 
@@ -77,7 +77,7 @@ DOCUMENT_DEFAULT_STORE_ID=aws
 
 ### S3-compatible object stores
 
-The AWS S3 store can target any self-hosted S3-compatible object store (MinIO, Cloudian, Garage, etc.) by setting `endpoint` on the store instance, in addition to the standard properties above. The bucket must already exist on the backend — Camunda does not create it.
+To use an S3-compatible object store (MinIO, Cloudian, Garage, etc.), set `endpoint` on the store instance, in addition to the standard properties above. The bucket must already exist on the backend — Camunda does not create it.
 
 **Example (MinIO running alongside Camunda in the same Compose network):**
 

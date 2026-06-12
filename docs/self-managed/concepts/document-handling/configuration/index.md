@@ -22,7 +22,7 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
 
 ## Supported storage options
 
-- By using **external cloud file bucket storages**, documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storages are supported:
+- By using **external cloud file bucket storage**, documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
   - [**AWS S3**](https://aws.amazon.com/s3/) — including [S3-compatible object stores](/self-managed/concepts/document-handling/configuration/helm.md#s3-compatible-object-storage) such as MinIO, Cloudian, or Garage (configured through the AWS S3 store with a custom endpoint)
   - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)

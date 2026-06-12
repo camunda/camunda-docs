@@ -62,11 +62,11 @@ global:
                 bucketPath: ""
                 ## @param global.documentStore.type.aws.bucketTtl [int, nullable] (Optional) Time-to-live for documents in the S3 bucket (number in days).
                 bucketTtl: 0
-                ## @param global.documentStore.type.aws.endpoint (Optional) Endpoint URL for an S3-compatible object store (e.g. http://minio.minio.svc.cluster.local:9000). When unset, the AWS SDK default endpoint is used.
+                ## @param global.documentStore.type.aws.endpoint (Optional) Endpoint URL for an S3-compatible object store (for example, http://minio.minio.svc.cluster.local:9000). When unset, the AWS SDK default endpoint is used.
                 endpoint: ""
                 ## @param global.documentStore.type.aws.forcePathStyle [nullable] (Optional) Force path-style addressing on the S3 client. When unset, path-style is auto-enabled if an endpoint is configured, otherwise the SDK default is used.
                 forcePathStyle:
-                ## @param global.documentStore.type.aws.chunkedEncodingEnabled [nullable] (Optional) Enable AWS chunked transfer encoding. Set to false for S3-compatible backends that do not support it (e.g. Garage). When unset, the SDK default (true) is used.
+                ## @param global.documentStore.type.aws.chunkedEncodingEnabled [nullable] (Optional) Enable AWS chunked transfer encoding. Set to false for S3-compatible backends that do not support it (for example, Garage). When unset, the SDK default (true) is used.
                 chunkedEncodingEnabled:
                 ## @param global.documentStore.type.aws.class Fully qualified class name for the AWS document store provider.
                 class: "io.camunda.document.store.aws.AwsDocumentStoreProvider"
@@ -157,10 +157,10 @@ Camunda's AWS S3 store can also target self-hosted S3-compatible object stores s
 | Property                                              | Description                                                                                                                                                                                                                                                                |
 | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `camunda.document.aws.<id>.endpoint`                  | URL of the S3-compatible server. Setting this switches the store into S3-compatible mode. Example: `http://minio.minio.svc.cluster.local:9000`.                                                                                                                            |
-| `camunda.document.aws.<id>.force-path-style`          | Forces path-style bucket addressing on the S3 client. Most S3-compatible servers (MinIO, Garage) require path-style. When unset, path-style is auto-enabled whenever `endpoint` is set, so most operators do not need to set this explicitly.                             |
+| `camunda.document.aws.<id>.force-path-style`          | Forces path-style bucket addressing on the S3 client. Most S3-compatible servers (MinIO, Garage) require this. Automatically enabled when `endpoint` is set, so explicit configuration is rarely needed.                                                                   |
 | `camunda.document.aws.<id>.chunked-encoding-enabled`  | Controls AWS chunked transfer encoding. Some S3-compatible backends (notably Garage) do not implement the `aws-chunked` streaming-signed upload mode and require this to be `false`. When unset, the SDK default (`true`) is used, which is correct for MinIO and similar. |
 
-Credentials are configured the same way as for AWS S3, via `existingSecret`/`accessKeyIdKey`/`secretAccessKeyKey` under `global.documentStore.type.aws`. The bucket must exist on the backend before Camunda starts — the chart does not create it.
+Credentials are configured the same way as AWS S3, via `existingSecret`/`accessKeyIdKey`/`secretAccessKeyKey` under `global.documentStore.type.aws`. The bucket must exist on the backend before Camunda starts — the chart does not create it.
 
 ##### Example: in-cluster MinIO
 
