@@ -79,11 +79,9 @@ applyTo: "**/*.md"
 
 Camunda docs are a primary input for AI assistants and RAG pipelines. These rules are covered in the style guide, but are called out here because they have the highest impact on AI extractability:
 
-- **Opening sentences**: the first sentence after any heading should directly answer "what is this?" or "what does this section do?" — aim for one self-contained sentence under 25 words.
+- **Opening sentences**: the first sentence after any heading should directly answer "what is this?" or "what does this section do?." Aim for one self-contained sentence under 150 characters.
 - **Descriptive headings**: use specific, action-oriented names ("Configure the Slack outbound connector") rather than generic ones ("Configuration", "Overview", "How it works").
 - **Self-contained sections**: avoid context-dependent phrasing ("as mentioned above", "now that you've configured X"). Repeat the necessary context inline.
 - **Tables over prose**: any list of fields, options, parameters, or configuration values goes in a Markdown table, not a prose paragraph.
 - **Critical information as text**: never use an image as the only source of a value a reader must act on. Include field names and values in the text before or after the image.
 - **Complete code blocks**: close all fences, include the language tag, and keep examples self-contained.
-
-For context on why agents are now a primary audience and how they consume content, see `/howtos/ai-ready-guidelines.md`.
