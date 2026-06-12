@@ -32,8 +32,15 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "409":
+          description: A cluster variable with this name already exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /cluster-variables/tenants/{tenantId}:
     post:
       operationId: createTenantClusterVariable
@@ -80,8 +87,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: A cluster variable with this name already exists for the given tenant.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /cluster-variables/search:
     post:
       tags:
@@ -123,6 +137,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /cluster-variables/global/{name}:
     get:
       operationId: getGlobalClusterVariable
@@ -165,6 +180,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
     put:
       operationId: updateGlobalClusterVariable
       tags:
@@ -213,6 +229,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
     delete:
       operationId: deleteGlobalClusterVariable
       tags:
@@ -250,6 +267,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /cluster-variables/tenants/{tenantId}/{name}:
     get:
       operationId: getTenantClusterVariable
@@ -298,6 +316,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
     put:
       operationId: updateTenantClusterVariable
       tags:
@@ -352,6 +371,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
     delete:
       operationId: deleteTenantClusterVariable
       tags:
@@ -395,6 +415,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
 components:
   schemas:
     ClusterVariableScopeEnum:

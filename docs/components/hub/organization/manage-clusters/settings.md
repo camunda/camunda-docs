@@ -40,23 +40,10 @@ For more information on updating clusters, see [update your cluster](/components
 
 ## Enforce user task restrictions
 
-You can enable user task access restrictions in the cluster to restrict Tasklist task access to assigned/candidate users and groups.
+Starting with Camunda 8.10, this cluster setting is no longer available because user task access restrictions were removed together with Tasklist V1.
 
-:::caution Tasklist V1 only
-User task access restrictions are supported only by the Tasklist V1 API and are not available in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
-
-To continue using user task access restrictions, see [switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes) to enable Tasklist V1 mode.
-
-In Tasklist V2, task visibility is controlled by authorization-based access control rather than user task access restrictions. For a conceptual overview of how authorizations control access to user tasks, see [authorization-based access control](../../../concepts/access-control/authorizations.md).
-:::
-
-- Enable this setting to use user task access restrictions in the cluster when Tasklist V1 is enabled. Tasks assigned to users or candidate groups are only visible to assigned users or respective group members.
-- Disable this setting if you do not want to use user task access restrictions in the cluster. Any user can see any task, regardless of the assignment. Use this mode in development environments to test assignment rules.
-
-Changes to this setting can take a few minutes to be applied, as it requires a Tasklist restart.
-
-:::tip
-For more information on user task access restrictions, see [user task access restrictions](/components/tasklist/user-task-access-restrictions.md).
+:::note
+Use [authorization-based access control](../../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control task visibility and operations in current Tasklist deployments.
 :::
 
 ## Delete this cluster

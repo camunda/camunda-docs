@@ -14,6 +14,10 @@ Upgrade a Camunda 8 Self-Managed deployment installation using the official Camu
 If you are upgrading from a version earlier than 8.8, see [upgrading from an earlier version](/self-managed/upgrade/index.md#upgrading-from-an-earlier-version).
 :::
 
+:::warning Upgrading to Camunda 8.10
+Camunda 8.10 (chart 15.x) requires the Helm CLI v4. Switch to the Helm v4 CLI before you run `helm upgrade`. No release-state migration is required. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
+:::
+
 ## Upgrade guides
 
 Use the following guides to upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
@@ -33,7 +37,7 @@ For Helm-managed deployments:
 
 ### Helm chart version
 
-The Camunda Helm chart version is independent from the Camunda application version. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify the Helm chart version that deploys Camunda 8.10.
+The Camunda Helm chart version is independent from the Camunda application version. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify the Helm chart version that deploys your Camunda application version.
 
 You can also list available chart versions using the Helm CLI:
 

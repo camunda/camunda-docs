@@ -173,7 +173,7 @@ desired={<img src={Five} alt="Desired state diagram" style={{border: 'none', tra
 
 #### Procedure
 
-Start with creating a port-forward to the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
+Start with creating a port-forward to the `Zeebe Gateway` in the surviving region to the local host so you can interact with the Zeebe Gateway.
 
 The following alternatives to port-forwarding are possible:
 
@@ -830,7 +830,7 @@ Half of the amount of your set `clusterSize` is used to spawn Zeebe brokers.
 For example, in the case of `clusterSize: 8`, four Zeebe brokers are provisioned in the newly created region.
 
 :::danger
-It is expected that the Zeebe broker pods will not reach the "Ready" state since they are not yet part of a Zeebe cluster and, therefore, not considered healthy by the readiness probe.
+It is expected that the Zeebe Broker pods will not reach the "Ready" state since they are not yet part of a Zeebe cluster and, therefore, not considered healthy by the readiness probe.
 :::
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the new Zeebe brokers are recognized but yet a full member of the Zeebe cluster.

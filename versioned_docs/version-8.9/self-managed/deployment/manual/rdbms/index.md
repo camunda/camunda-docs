@@ -15,7 +15,7 @@ Manual installation is **not** supported for Kubernetes. If you run on Kubernete
 
 For backend trade-offs and production architecture decisions, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
 
-In this manual deployment path, the Orchestration Cluster reads from a single configured secondary storage type: RDBMS. However, the Zeebe broker can export to multiple targets simultaneously. If you deploy Optimize, configure both the RDBMS exporter (for Orchestration Cluster operations) and an Elasticsearch/OpenSearch exporter for Optimize.
+In this manual deployment path, the Orchestration Cluster reads from a single configured secondary storage type: RDBMS. However, the Zeebe Broker can export to multiple targets simultaneously. If you deploy Optimize, configure both the RDBMS exporter (for Orchestration Cluster operations) and an Elasticsearch/OpenSearch exporter for Optimize.
 
 ```mermaid
 graph LR
@@ -55,9 +55,9 @@ graph LR
 
 **Key points:**
 
-- Operate, Tasklist, and Admin use the Orchestration Cluster API, and that API reads from the configured secondary storage (RDBMS).
+- Operate, Tasklist, and Admin use the Orchestration Cluster API rather than reading directly from secondary storage. The Orchestration Cluster API reads from the configured secondary storage (RDBMS).
 - Optimize requires Elasticsearch or OpenSearch and reads and writes directly to it.
-- The Zeebe broker can export to multiple targets simultaneously to support this architecture.
+- The Zeebe Broker can export to multiple targets simultaneously to support this architecture.
 
 ## Supported installation targets
 

@@ -14,11 +14,11 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
 
-In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+To play a process, you must first configure a cluster. A **setup environment** overlay prompts you to select a cluster and deploy your process. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
-A Play environment is then started that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
+Click **Deploy** in the overlay to deploy. The current version of the active process and all its dependencies, like called processes or DMN files, are deployed to the selected cluster.
 
-The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a connector secret isn’t filled out.
+The selected cluster name is shown in the Play action bar. Click it to switch clusters without leaving Play; the newly selected cluster becomes the deployment and execution target.
 
 In SaaS, Play uses connector secrets from your selected cluster. connector secrets are not currently supported in Self-Managed.
 
@@ -43,27 +43,63 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 ## Get started with Play
 
-![play process definition view](../img/play-definition.png)
+![Configure Scenario panel](../img/play-definition.png)
 
-The first view in Play is the process definition view. It shows deployment problems, active process instances, and start events.
+When you open Play, the [setup environment overlay](#opening-play) prompts you to configure a cluster and deploy. Once deployed, the process definition view shows deployment problems, active process instances, scenarios, and a **Configure Scenario** overlay.
 
-Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in **Implement** mode.
+![play configure scenario view](../img/play-configure-scenario.png)
 
-Alternatively, save example data to the BPMN file directly from the modal in Play to reuse it in future sessions or share it with others.
+Click a **start event** to configure how the process should start in the **Configure Scenario** panel. The panel shows different options depending on the type of the selected start event:
 
-Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
+- **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
+- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. **Start** is disabled when the message name is empty.
+- **Signal start event**: A **Signal name** dropdown pre-filled with the signal from the BPMN definition.
+
+**Start** is also disabled when the variables field contains invalid JSON.
+
+To prefill example data, define it in the **Example data** section of the start event in **Implement** mode. See [data handling](/components/modeler/data-handling.md) for details.
+
+## Define a test segment
+
+By default, execution starts from the process start event and runs to natural completion. To focus on a specific part of your process, define a segment with a custom start and end boundary in the **Configure Scenario** panel.
+
+### Start boundary
+
+The start boundary defaults to the process start event. To change it:
+
+1. In the **Configure Scenario** panel, click the start row.
+2. Search for an element by name, or click an activatable element directly on the canvas. The selected element is highlighted with a **Start** label on the diagram.
+
+Elements before the start boundary are not activated and do not appear in the instance history.
+
+The same element type restrictions apply as for [**Add token** modifications](#modifications-limitations). Clicking a non-activatable element in picking mode has no effect.
+
+**Publish message** and **Broadcast signal** elements don't support segment boundaries. If you select either as the start boundary, you can't select an end boundary, and the process runs until it reaches the end node naturally reached from that selected start event.
+
+### End boundary
+
+The end boundary defaults to the first end event. To change it:
+
+1. In the **Configure Scenario** panel, click the end row.
+2. Search for an element by name, or click an activatable element directly on the canvas. The selected element is highlighted with an **End** label on the diagram.
+
+When an end boundary is set, the process instance terminates after that element completes. Elements after it are not activated and do not appear in the instance history.
+
+### Canvas click cycle
+
+Once both boundaries are set, canvas clicks cycle automatically: the first click sets a new start boundary and clears the end; the second click sets the new end boundary. To update only one boundary at a time, click its row in the panel — the next canvas click updates only that boundary.
 
 :::note
 Play will only consider the first executable process ID in the BPMN file.
 :::
 
-![play example data](../img/play-example-data.png)
-
 ## Play a process
 
 ![play process instance view](../img/play-instance.png)
 
-Click the action icons next to a task or event to play the process.
+Click the **play** action icon next to a task or event to play the process.
+
+If you defined a test segment with an end boundary, the instance terminates automatically after the end element completes — elements after it are not activated and do not appear in the instance history.
 
 The **Instance History** panel tracks the path taken throughout the diagram.
 
@@ -75,7 +111,7 @@ Actions in Play can be initiated through Operate, Tasklist, or external APIs. Fo
 
 In SaaS, view your process instance in Operate by selecting the **Process Instance Key** in the header.
 
-![play process instance view](../img/play-view-process-instance.png)
+![view process instance in Operate](../img/play-view-process-instance.png)
 
 You have a few options to mock an external system:
 
@@ -122,7 +158,7 @@ Use scenarios to quickly rerun processes while tracking test coverage.
 For example, you can validate your process by creating and rerunning scenarios for different paths to check the process works as expected after any diagram changes are made. Scenarios allow you to replay and confirm that a process completes correctly with the predefined actions and variables.
 
 :::note
-Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline.
+Although scenarios are valuable for rapid validation during development, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline for comprehensive testing.
 :::
 
 Scenarios are stored in [test scenario files](test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
@@ -166,13 +202,19 @@ Scenario coverage will not display as expected if you edit or remove the "metada
 You can run scenarios on the process definition page by clicking either the **Run all scenarios** button or the **Run scenario** button with the play icon for each individual scenario.
 
 - Scenario execution results are marked with either a **Completed** or **Failed** status.
-- You must manually update a failed scenario by clicking **manually complete and update the scenario**, especially if diagram changes are made that require further user input (such as when a new flow node is added to a previously saved scenario path).
+- You must manually update a failed scenario by clicking **manually complete and update the scenario** button, especially if diagram changes are made that require further user input (such as when a new flow node is added to a previously saved scenario path).
 
 ![Run a scenario on the process definition page](../img/play-scenario-runs.png)
 
 ### Limitations {#scenarios-limitations}
 
+Play displays a warning badge on diagram elements with known limitations. Use the **Show problems**/**Hide problems** toggle in the diagram controls to show or hide these badges.
+
+![Play warning badges on diagram elements](../img/play-warning-badges.png)
+
 - Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
+- Ad-hoc sub-processes are not supported. Scenarios containing ad-hoc sub-processes cannot be executed successfully.
+- Timer events can't be manually triggered. When a scenario reaches a timer event, execution pauses until the timer fires automatically. To skip a timer, use [process instance modification](#modify-a-process-instance) to move the token to the next element.
 - Scenario paths that include process modifications are not supported.
 - Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
 - Play scenarios are compatible with the [CPT JSON instruction format](/apis-tools/testing/json-test-cases.md), but the following [instructions](/apis-tools/testing/json-test-cases.md#reference-instructions) are not supported and will be skipped during execution:
@@ -227,7 +269,7 @@ Rewinding a process instance that has modifications applied to is currently not 
 
 ## Rapid iteration
 
-To make changes, switch back to **Implement** mode. When returning to Play, your process is redeployed. Play only shows process instances from the process’s most recent version, so you may not see your previous instances.
+To make changes, switch back to **Implement** mode. When returning to Play, your process needs to be redeployed. Play only shows process instances from the process’s most recent version, so you may not see your previous instances.
 
 Play saves your inputs when completing user task forms. It auto-fills your last response if you open the same form later in the session. You can click **Reset** to reset the form to its defaults.
 
@@ -271,12 +313,11 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 - [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
 - Currently, Play supports displaying up to 100 flow node instances in the instance history panel, 100 variables in the variables panel, and 100 process instances on the process definition page. To access all related data, you can use Operate.
 - While you can still interact with your process instance in Play (for example, completing jobs or publishing messages), you may be unable to resolve incidents if they occur beyond the 100th flow node instance, as Play does not track them. In this case, incident resolution can be managed in Operate.
-- Play doesn't support elements defined using [FEEL expressions](/components/modeler/feel/what-is-feel.md), such as job types for service tasks, message correlation keys, and called elements in call activities.
 - User tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above. Please consider migrating to [Camunda user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks).
 
 ## Use Play with Camunda Self-Managed
 
-After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+After selecting the **Play** tab in Self-Managed, the Play view opens directly. The cluster setup and deployment flow is the same as in SaaS, see [opening Play](#opening-play).
 
 ### Limitations {#self-managed-limitations}
 
@@ -289,6 +330,6 @@ After selecting the **Play** tab in Self-Managed, you are prompted to select fro
 
 The use of Play may result in additional charges depending on your organization's plan and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
 
-- **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, contact your Customer Success Manager.
+- **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, [contact Camunda support](https://camunda.com/services/support/).
 - **Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. For Professional Plans, you may need to purchase a development cluster.
 - **Trial Plans:** You can use any cluster.

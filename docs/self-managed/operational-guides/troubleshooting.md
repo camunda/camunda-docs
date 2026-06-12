@@ -142,7 +142,7 @@ AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 When using Azure Blob Storage as a backup store, you can enable logging to
 troubleshoot issues with the Azure SDK. To do this, go through the following steps:
 
-1. Add logging for azure SDK, and set it to debug through the zeebe broker
+1. Add logging for Azure SDK, and set it to debug through the Zeebe Broker
    loggers endpoint:
 
 `curl 'http://localhost:9600/actuator/loggers/com.azure' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'`
@@ -184,7 +184,12 @@ A gateway timeout can occur if the headers of a response are too big (for exampl
 
 ## Helm CLI version and installation failures
 
-If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Ensure you use the Helm CLI version `3.13` or higher.
+If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an unsupported version of the Helm CLI.
+
+- For Camunda 8.9 and earlier (chart 14.x and earlier), use Helm CLI v3.13 or higher.
+- For Camunda 8.10+ (chart 15.x+), Helm CLI v4.x is required.
+
+For chart-to-CLI compatibility across versions, see [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 ## DNS disruption issue for Zeebe in Kubernetes clusters (1.29-1.31)
 

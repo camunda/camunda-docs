@@ -72,12 +72,30 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 The following key changes were also released as part of an 8.8.x patch release.
 
-| Patch release                                                  | Type            | Key change                                                                                                                                            |
-| :------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
-| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9) | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+| Patch release                                                    | Type            | Key change                                                                                                                                            |
+| :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
 
 ### APIs & tools
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
+
+Camunda 8.8.22 unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.8.22 or any later 8.8.x patch. The built-in Elasticsearch, OpenSearch, and RDBMS exporters are unaffected.
+
+A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and will be available in a later 8.8.x patch.
+
+**Action:** If you maintain a custom exporter that reads message batch records, avoid calling `getMessageKeys()` until you upgrade to a patch that includes the fix.
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -273,7 +291,7 @@ With the Camunda 8.8 release, the [Web Modeler API](/apis-tools/web-modeler-api/
   
 #### Deprecated: Operate and Tasklist v1 REST APIs
 
-With the Camunda 8.8 release, the deprecation process for the [Operate](/apis-tools/operate-api/overview.md) and [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) REST APIs begins.
+With the Camunda 8.8 release, the deprecation process for the [Operate](/versioned_docs/version-8.9/apis-tools/operate-api/overview.md) and [Tasklist](/versioned_docs/version-8.9/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) REST APIs begins.
 
 You can begin migrating to the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for querying to prepare for this change.
 
@@ -284,7 +302,7 @@ You can begin migrating to the [Orchestration Cluster REST API](/apis-tools/orch
 | Camunda 8.10 | These APIs are removed.                                                                  |
 
 :::warning Impact on user task access restrictions
-[User task access restrictions](/components/tasklist/user-task-access-restrictions.md) are only supported with the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply.
+[User task access restrictions](/versioned_docs/version-8.9/components/tasklist/user-task-access-restrictions.md) are only supported with the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply.
 :::
 
 :::info
@@ -374,7 +392,7 @@ You should use `element_template` instead, which provides equivalent functionali
   
 #### Deprecated: Zeebe Process Test
 
-With the Camunda 8.8 release, the deprecation of [Zeebe Process Test](../../../apis-tools/testing/zeebe-process-test.md) is announced.
+With the Camunda 8.8 release, the deprecation of Zeebe Process Test is announced.
 
 - Zeebe Process Test is superseded by [Camunda Process Test](../../../apis-tools/testing/getting-started.md).
 - Zeebe Process Test is scheduled for removal in the Camunda 8.10 release.
@@ -417,7 +435,7 @@ The Assignees list is removed from the response.
 
 #### Deprecated: start public process via form in Tasklist
 
-With the Camunda 8.8 release, the deprecation of the [start public process via form](/components/tasklist/userguide/starting-processes.md#start-public-processes-via-form) feature is announced.
+With the Camunda 8.8 release, the deprecation of the start public process via form feature is announced.
 
 - This SaaS feature is deprecated and does not work with [Tasklist running in V2 mode](/components/tasklist/api-versions.md). This feature will be removed in the 8.10 release.
 - To continue using this feature with Camunda 8.8, you must run [Tasklist in V1 mode](/components/tasklist/api-versions.md).

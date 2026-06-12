@@ -16,14 +16,15 @@ description: "Complete reference of all c8ctl CLI commands, flags, resources, an
 
 These flags are accepted by every command.
 
-| Flag               | Type    | Required | Description                                                                     |
-| ------------------ | ------- | -------- | ------------------------------------------------------------------------------- |
-| `--help` / `-h`    | boolean |          | Show help                                                                       |
-| `--version` / `-v` | string  |          | Show CLI version, or filter by process definition version on supported commands |
-| `--profile`        | string  |          | Use a specific profile                                                          |
-| `--dry-run`        | boolean |          | Preview the API request without executing                                       |
-| `--verbose`        | boolean |          | Show verbose output                                                             |
-| `--fields`         | string  |          | Comma-separated list of fields to display                                       |
+| Flag               | Type    | Required | Description                                                                                             |
+| ------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `--help` / `-h`    | boolean |          | Show help                                                                                               |
+| `--version` / `-v` | string  |          | Show CLI version, or filter by process definition version on supported commands                         |
+| `--profile`        | string  |          | Use a specific profile                                                                                  |
+| `--dry-run`        | boolean |          | Preview the API request without executing                                                               |
+| `--verbose`        | boolean |          | Show verbose output                                                                                     |
+| `--fields`         | string  |          | Comma-separated list of fields to display                                                               |
+| `--json`           | boolean |          | Force JSON output for this invocation (does not persist; overrides session state and C8CTL_OUTPUT_MODE) |
 
 ## Resource Aliases
 
@@ -69,7 +70,7 @@ List resources
 **Resource-specific flags:**
 
 <details>
-<summary><code>process-definition</code></summary>
+<summary><code>process-definition</code> (<code>pd</code>)</summary>
 
 | Flag                    | Type   | Required | Description                                |
 | ----------------------- | ------ | -------- | ------------------------------------------ |
@@ -84,7 +85,7 @@ List resources
 </details>
 
 <details>
-<summary><code>process-instance</code></summary>
+<summary><code>process-instance</code> (<code>pi</code>)</summary>
 
 | Flag                         | Type   | Required | Description                                |
 | ---------------------------- | ------ | -------- | ------------------------------------------ |
@@ -100,7 +101,7 @@ List resources
 </details>
 
 <details>
-<summary><code>user-task</code></summary>
+<summary><code>user-task</code> (<code>ut</code>)</summary>
 
 | Flag                     | Type   | Required | Description                         |
 | ------------------------ | ------ | -------- | ----------------------------------- |
@@ -114,7 +115,7 @@ List resources
 </details>
 
 <details>
-<summary><code>incident</code></summary>
+<summary><code>incident</code> (<code>inc</code>)</summary>
 
 | Flag                     | Type   | Required | Description                                |
 | ------------------------ | ------ | -------- | ------------------------------------------ |
@@ -186,7 +187,7 @@ List resources
 </details>
 
 <details>
-<summary><code>authorization</code></summary>
+<summary><code>authorization</code> (<code>auth</code>)</summary>
 
 | Flag             | Type   | Required | Description             |
 | ---------------- | ------ | -------- | ----------------------- |
@@ -198,7 +199,7 @@ List resources
 </details>
 
 <details>
-<summary><code>mapping-rule</code></summary>
+<summary><code>mapping-rule</code> (<code>mr</code>)</summary>
 
 | Flag              | Type   | Required | Description               |
 | ----------------- | ------ | -------- | ------------------------- |
@@ -228,7 +229,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 **Resource-specific flags:**
 
 <details>
-<summary><code>process-definition</code></summary>
+<summary><code>process-definition</code> (<code>pd</code>)</summary>
 
 | Flag                    | Type   | Required | Description                                |
 | ----------------------- | ------ | -------- | ------------------------------------------ |
@@ -243,7 +244,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 </details>
 
 <details>
-<summary><code>process-instance</code></summary>
+<summary><code>process-instance</code> (<code>pi</code>)</summary>
 
 | Flag                         | Type   | Required | Description                                |
 | ---------------------------- | ------ | -------- | ------------------------------------------ |
@@ -259,7 +260,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 </details>
 
 <details>
-<summary><code>user-task</code></summary>
+<summary><code>user-task</code> (<code>ut</code>)</summary>
 
 | Flag                     | Type   | Required | Description                         |
 | ------------------------ | ------ | -------- | ----------------------------------- |
@@ -273,7 +274,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 </details>
 
 <details>
-<summary><code>incident</code></summary>
+<summary><code>incident</code> (<code>inc</code>)</summary>
 
 | Flag                     | Type   | Required | Description                                |
 | ------------------------ | ------ | -------- | ------------------------------------------ |
@@ -304,7 +305,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 </details>
 
 <details>
-<summary><code>variable</code></summary>
+<summary><code>variable</code> (<code>var</code>, <code>vars</code>)</summary>
 
 | Flag                   | Type    | Required | Description                                 |
 | ---------------------- | ------- | -------- | ------------------------------------------- |
@@ -360,7 +361,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 </details>
 
 <details>
-<summary><code>authorization</code></summary>
+<summary><code>authorization</code> (<code>auth</code>)</summary>
 
 | Flag             | Type   | Required | Description             |
 | ---------------- | ------ | -------- | ----------------------- |
@@ -372,7 +373,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 </details>
 
 <details>
-<summary><code>mapping-rule</code></summary>
+<summary><code>mapping-rule</code> (<code>mr</code>)</summary>
 
 | Flag              | Type   | Required | Description               |
 | ----------------- | ------ | -------- | ------------------------- |
@@ -424,7 +425,7 @@ Get a resource by key
 **Resource-specific flags:**
 
 <details>
-<summary><code>process-definition</code></summary>
+<summary><code>process-definition</code> (<code>pd</code>)</summary>
 
 | Flag    | Type    | Required | Description                        |
 | ------- | ------- | -------- | ---------------------------------- |
@@ -445,7 +446,7 @@ Get a resource by key
 </details>
 
 <details>
-<summary><code>process-instance</code></summary>
+<summary><code>process-instance</code> (<code>pi</code>)</summary>
 
 | Flag          | Type    | Required | Description                 |
 | ------------- | ------- | -------- | --------------------------- |
@@ -499,7 +500,7 @@ Create a resource (process instance, identity)
 **Resource-specific flags:**
 
 <details>
-<summary><code>authorization</code></summary>
+<summary><code>authorization</code> (<code>auth</code>)</summary>
 
 | Flag             | Type   | Required | Description                 |
 | ---------------- | ------ | -------- | --------------------------- |
@@ -735,9 +736,11 @@ Deploy files to Camunda (auto-discovers deployable files in directories)
 
 **Flags:**
 
-| Flag      | Type    | Required | Description                                                     |
-| --------- | ------- | -------- | --------------------------------------------------------------- |
-| `--force` | boolean |          | Deploy any file type, ignoring the default extension allow-list |
+| Flag               | Type    | Required | Description                                                                                                                                                   |
+| ------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--force`          | boolean |          | Deploy any file type, ignoring the default extension allow-list                                                                                               |
+| `--extensions`     | string  |          | Comma-separated list of additional file extensions to include when scanning directories (e.g. .md,.txt). Explicit file paths bypass the extension allow-list. |
+| `--all-extensions` | boolean |          | Include all server-supported file extensions during directory discovery                                                                                       |
 
 **Examples:**
 
@@ -842,10 +845,11 @@ Watch files for changes and auto-deploy
 
 **Flags:**
 
-| Flag           | Type    | Required | Description                                                              |
-| -------------- | ------- | -------- | ------------------------------------------------------------------------ |
-| `--force`      | boolean |          | Continue watching after all deployment errors                            |
-| `--extensions` | string  |          | Comma-separated list of file extensions to watch (e.g. .bpmn,.dmn,.form) |
+| Flag               | Type    | Required | Description                                                                                       |
+| ------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------- |
+| `--force`          | boolean |          | Continue watching after all deployment errors                                                     |
+| `--extensions`     | string  |          | Comma-separated list of additional file extensions to watch (merged with defaults, e.g. .md,.txt) |
+| `--all-extensions` | boolean |          | Watch all server-supported file extensions                                                        |
 
 **Examples:**
 
@@ -1039,6 +1043,21 @@ c8ctl init plugin my-plugin                                 # Create new plugin 
 
 ---
 
+### `doctor`
+
+Surface plugin-loading collisions detected at startup (#363). Reports loaded plugins with their command names, and any first-registration-wins drops (plugin-name or command-name).
+
+**Resources:** plugin
+
+**Examples:**
+
+```bash
+c8ctl doctor plugin                                         # List loaded plugins and any load-time collisions
+c8ctl doctor plugin --json                                  # Machine-readable doctor output
+```
+
+---
+
 ### `use`
 
 Set active profile or tenant
@@ -1137,12 +1156,13 @@ Show help (run 'c8ctl help \<command>' for details)
 
 ### `which`
 
-Show active profile
+Show active profile or output mode
 
-**Resources:** profile
+**Resources:** profile, output
 
 **Examples:**
 
 ```bash
 c8ctl which profile                                         # Show currently active profile
+c8ctl which output                                          # Show current output mode
 ```

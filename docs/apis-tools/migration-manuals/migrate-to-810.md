@@ -41,12 +41,13 @@ Complete the following steps in this guide:
 
 Review the actions required for the following 8.10 changes:
 
-| Type                                                              | Change                                                                                                              |
-| :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
-| <span className="label-highlight red">Breaking change</span>      | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter) |
-| <span className="label-highlight red">Breaking change</span>      | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)             |
-| <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                        |
-| <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                            |
+| Type                                                              | Change                                                                                                                      |
+| :---------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| <span className="label-highlight red">Breaking change</span>      | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter)         |
+| <span className="label-highlight red">Breaking change</span>      | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)                     |
+| <span className="label-highlight orange">Behavioral change</span> | [Element instance search: advanced filters on `elementId` / `elementName` and `$or` support](#element-instance-advanced-or) |
+| <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
+| <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |
 
 ## Breaking changes
 
@@ -158,6 +159,68 @@ This filter works correctly for both new data and legacy data (which has `NULL` 
 </Tabs>
 
 ## Behavioral changes
+
+### Element instance search: advanced filters on `elementId` / `elementName` and `$or` support {#element-instance-advanced-or}
+
+#### Change
+
+The element instance search endpoint (`POST /v2/element-instances/search`) gained two filtering capabilities:
+
+- The `elementId` and `elementName` filter fields now accept [advanced search filter objects](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) in addition to plain string equality. Supported operators: `$eq`, `$neq`, `$exists`, `$in`, `$notIn`, `$like` (wildcard pattern with `*` and `?`).
+- The request body's `filter` object now accepts a top-level `$or` property that takes an array of alternative filter groups combined with OR logic. Top-level filter fields and `$or` are combined with AND logic.
+
+#### Why
+
+These additions let you express the queries the user interface (UI) needs (for example, "match any element whose name or ID contains a substring") in a single request, avoiding multiple round trips and client-side merging.
+
+#### Impact
+
+The change is additive and backward compatible — existing exact-match requests continue to work unchanged. New requests can now use advanced operators and `$or` to express richer queries:
+
+```json
+{
+  "filter": {
+    "processInstanceKey": "2251799813685323",
+    "$or": [
+      { "elementName": { "$like": "*Order*" } },
+      { "elementId": { "$like": "*Order*" } }
+    ]
+  }
+}
+```
+
+The example matches element instances where `processInstanceKey` equals the given value AND either `elementName` or `elementId` contains the substring `Order`.
+
+:::note
+Complex `$or` conditions may impact performance in high-volume environments; use them with care.
+:::
+
+The `elementName` filter only matches instances created in 8.8 or later, since earlier runtimes did not persist this field on element instances.
+
+#### Action
+
+<Tabs groupId="audience" defaultValue="sdk" queryString values={[
+{label: 'Official SDK users', value: 'sdk'},
+{label: 'Generated-client users', value: 'generated'},
+{label: 'Custom integrations', value: 'custom'},
+]}>
+
+<TabItem value='sdk'>
+
+Update to the latest SDK version. The new SDK exposes advanced filters for `elementId` and `elementName`, and the `$or` filter on `ElementInstanceFilter`.
+
+</TabItem>
+<TabItem value='generated'>
+
+Regenerate your client from the 8.10 OpenAPI specification to pick up the advanced filter and `$or` types on `ElementInstanceFilter`.
+
+</TabItem>
+<TabItem value='custom'>
+
+No change is needed for existing requests. To use the new operators, send advanced filter objects on `elementId` / `elementName`, or a top-level `$or` array, as shown above.
+
+</TabItem>
+</Tabs>
 
 ### Resource API now uses eventual consistency {#resource-eventual-consistency}
 
