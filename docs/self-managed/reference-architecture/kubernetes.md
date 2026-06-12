@@ -179,15 +179,20 @@ Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, 
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements. Sizing depends heavily on your specific use cases and workload. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
+The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a starting baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
 
 - **4 Kubernetes nodes**
   - CPU: 4 modern cores
   - Memory: 16 GiB
 - **Persistent volumes**
-  - 1,000 IOPS
+  - 3,000 IOPS
+  - 125 MiB/s throughput
   - 32 GiB
   - _Avoid burstable disk types_
+
+:::note Storage performance figures are a baseline, not a strict requirement
+The storage performance figures above and in the distribution- and cloud-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a baseline to get started, not authoritative benchmarked requirements. There is no dedicated, provider-specific benchmark behind them, and the same target applies regardless of provider (OpenShift, EKS, AKS, GKE, or generic Kubernetes). Actual needs vary with your workload, throughput, data retention, and exporter load. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
+:::
 
 #### Networking
 
@@ -274,8 +279,8 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 - Instance type: 4 vCPUs (x86_64, >3.1 GHz), 16 GiB memory
 - Number of dedicated nodes: 4
 - Volume type: SSD
-  - 1,000–3,000 IOPS per volume
-  - Throughput of 1,000 MB/s per volume
+  - 3,000 IOPS baseline
+  - 125 MiB/s throughput baseline
 
 #### Supported versions
 
@@ -303,6 +308,7 @@ Our reference architectures are continuously validated against the latest stable
 - Number of Kubernetes nodes: 4
 - Volume type: SSD `gp3`
   - 3,000 IOPS baseline
+  - 125 MiB/s throughput baseline
   - Requires [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) to be installed and a `gp3` StorageClass [configured](https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html)
 - Volume alternative: `gp2`
   - Only if `gp3` isn't available
@@ -355,6 +361,7 @@ Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingre
 - Number of Kubernetes nodes: 4
 - Volume type: Premium SSD v2
   - 3,000 IOPS baseline
+  - 125 MiB/s throughput baseline
   - Several [known limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2-limitations), e.g., lack of [Azure Backup support](https://learn.microsoft.com/en-us/azure/backup/disk-backup-support-matrix#limitations)
 - Volume alternative: Premium SSD
   - IOPS performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds)
@@ -372,6 +379,7 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 - Number of Kubernetes nodes: 4
 - Volume type: Performance (SSD) persistent disks
   - IOPS performance [varies based on volume size](https://cloud.google.com/compute/docs/disks/performance#performance_factors)
+  - 125 MiB/s throughput baseline
   - Minimum 34 GiB for > 1,000 IOPS
 
 #### Load balancer
