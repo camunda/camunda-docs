@@ -887,7 +887,7 @@ Properties for setting cluster variables at startup.
 
 <td>
 
-Indicates if the `@ClusterVariables` annotation is processed and configured variables are applied.
+Indicates whether the `@ClusterVariables` annotation is processed and configured cluster variables are applied.
 
 Type: <code>boolean</code>
 
@@ -903,7 +903,7 @@ Type: <code>boolean</code>
 
 <td>
 
-Cluster variables to set at startup as key-value pairs.
+Cluster variables to apply at startup as key-value pairs.
 
 Type: <code>map[string,object]</code>
 
