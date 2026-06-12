@@ -867,6 +867,54 @@ Type: <code>string</code>
 </tbody>
 </table>
 
+### `camunda.client.cluster-variables`
+
+Properties for setting cluster variables at startup.
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.enabled" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_ENABLED"/><a href="#camundaclientclustervariablesenabled" id="camundaclientclustervariablesenabled" class="hash-link"/>
+</td>
+
+<td>
+
+Indicates if the `@ClusterVariables` annotation is processed and configured variables are applied.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>true</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.variables" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_VARIABLES"/><a href="#camundaclientclustervariablesvariables" id="camundaclientclustervariablesvariables" class="hash-link"/>
+</td>
+
+<td>
+
+Cluster variables to set at startup as key-value pairs.
+
+Type: <code>map[string,object]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+</tbody>
+</table>
+
 ### `camunda.client.deployment`
 
 Properties for automatic deployment at startup.
