@@ -108,6 +108,10 @@ for pvc in $(kubectl get pvc -n "$namespace" --no-headers -o custom-columns=":sp
   kubectl describe pv "$pvc" >> pv-describe.txt
 done
 
+echo "  - Collecting Storage Classes information:"
+kubectl get storageclass -o yaml > storageclasses.txt
+kubectl describe storageclass > storageclasses-describe.txt
+
 echo "  - Collecting service information (list of services in the namespace)."
 kubectl get svc -n "$namespace" > services.txt
 
