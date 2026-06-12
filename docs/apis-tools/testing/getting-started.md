@@ -24,8 +24,8 @@ CPT is part of the Camunda 8 [public API](/reference/public-api.md) and is cover
 :::
 
 :::note
-CPT is the successor to [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md). Our previous testing
-library is deprecated and will be removed with version 8.10. See
+CPT is the successor to Zeebe Process Test (ZPT). Our previous testing
+library was removed in Camunda 8.10. See
 the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) on how to migrate your process
 tests.
 :::
@@ -344,7 +344,7 @@ Learn more about the following topics:
 - `CamundaAssert` and [assertions](assertions.md)
 - `CamundaProcessTestContext` and [utilities](utilities.md)
 - How to [configure the runtime](configuration.md)
-- How to [test AI agent processes](/components/agentic-orchestration/test-ai-agents.md)
+- How to [test AI agent processes](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)
 - Best practices for [writing process tests](/components/best-practices/development/testing-process-definitions.md)
 
 Refer to the [API documentation](https://javadoc.io/doc/io.camunda/camunda-process-test-java/latest/io/camunda/process/test/api/package-summary.html) for details.

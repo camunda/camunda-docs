@@ -4,9 +4,13 @@ from __future__ import annotations
 
 from camunda_orchestration_sdk import (
     CamundaClient,
+    ClientId,
+    GroupId,
+    MappingRuleId,
     MappingRuleSearchQueryRequest,
     RoleCreateRequest,
     RoleGroupSearchQueryRequest,
+    RoleId,
     RoleSearchQueryRequest,
     RoleUpdateRequest,
     Unset,
@@ -15,11 +19,11 @@ from camunda_orchestration_sdk import (
 
 
 # region CreateRole
-def create_role_example() -> None:
+def create_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.create_role(
-        data=RoleCreateRequest(role_id="developer", name="Developer"),
+        data=RoleCreateRequest(role_id=role_id, name="Developer"),
     )
 
     print(f"Role: {result.role_id}")
@@ -27,10 +31,10 @@ def create_role_example() -> None:
 
 
 # region GetRole
-def get_role_example() -> None:
+def get_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
-    result = client.get_role(role_id="developer")
+    result = client.get_role(role_id=role_id)
 
     print(f"Role: {result.name}")
 # endregion GetRole
@@ -51,118 +55,118 @@ def search_roles_example() -> None:
 
 
 # region UpdateRole
-def update_role_example() -> None:
+def update_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     client.update_role(
-        role_id="developer",
+        role_id=role_id,
         data=RoleUpdateRequest(name="senior-developer"),
     )
 # endregion UpdateRole
 
 
 # region DeleteRole
-def delete_role_example() -> None:
+def delete_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
-    client.delete_role(role_id="developer")
+    client.delete_role(role_id=role_id)
 # endregion DeleteRole
 
 
 # region AssignRoleToUser
-def assign_role_to_user_example(username: Username) -> None:
+def assign_role_to_user_example(role_id: RoleId, username: Username) -> None:
     client = CamundaClient()
 
     client.assign_role_to_user(
-        role_id="developer",
+        role_id=role_id,
         username=username,
     )
 # endregion AssignRoleToUser
 
 
 # region UnassignRoleFromUser
-def unassign_role_from_user_example(username: Username) -> None:
+def unassign_role_from_user_example(role_id: RoleId, username: Username) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_user(
-        role_id="developer",
+        role_id=role_id,
         username=username,
     )
 # endregion UnassignRoleFromUser
 
 
 # region AssignRoleToGroup
-def assign_role_to_group_example() -> None:
+def assign_role_to_group_example(role_id: RoleId, group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.assign_role_to_group(
-        role_id="developer",
-        group_id="engineering",
+        role_id=role_id,
+        group_id=group_id,
     )
 # endregion AssignRoleToGroup
 
 
 # region UnassignRoleFromGroup
-def unassign_role_from_group_example() -> None:
+def unassign_role_from_group_example(role_id: RoleId, group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_group(
-        role_id="developer",
-        group_id="engineering",
+        role_id=role_id,
+        group_id=group_id,
     )
 # endregion UnassignRoleFromGroup
 
 
 # region AssignRoleToClient
-def assign_role_to_client_example() -> None:
+def assign_role_to_client_example(role_id: RoleId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.assign_role_to_client(
-        role_id="developer",
-        client_id="my-service-account",
+        role_id=role_id,
+        client_id=client_id,
     )
 # endregion AssignRoleToClient
 
 
 # region UnassignRoleFromClient
-def unassign_role_from_client_example() -> None:
+def unassign_role_from_client_example(role_id: RoleId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_client(
-        role_id="developer",
-        client_id="my-service-account",
+        role_id=role_id,
+        client_id=client_id,
     )
 # endregion UnassignRoleFromClient
 
 
 # region AssignRoleToMappingRule
-def assign_role_to_mapping_rule_example() -> None:
+def assign_role_to_mapping_rule_example(role_id: RoleId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.assign_role_to_mapping_rule(
-        role_id="developer",
-        mapping_rule_id="rule-123",
+        role_id=role_id,
+        mapping_rule_id=mapping_rule_id,
     )
 # endregion AssignRoleToMappingRule
 
 
 # region UnassignRoleFromMappingRule
-def unassign_role_from_mapping_rule_example() -> None:
+def unassign_role_from_mapping_rule_example(role_id: RoleId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_mapping_rule(
-        role_id="developer",
-        mapping_rule_id="rule-123",
+        role_id=role_id,
+        mapping_rule_id=mapping_rule_id,
     )
 # endregion UnassignRoleFromMappingRule
 
 
 # region SearchUsersForRole
-def search_users_for_role_example() -> None:
+def search_users_for_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.search_users_for_role(
-        role_id="developer",
+        role_id=role_id,
     )
 
     if not isinstance(result.items, Unset):
@@ -172,11 +176,11 @@ def search_users_for_role_example() -> None:
 
 
 # region SearchGroupsForRole
-def search_groups_for_role_example() -> None:
+def search_groups_for_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.search_groups_for_role(
-        role_id="developer",
+        role_id=role_id,
         data=RoleGroupSearchQueryRequest(),
     )
 
@@ -187,11 +191,11 @@ def search_groups_for_role_example() -> None:
 
 
 # region SearchClientsForRole
-def search_clients_for_role_example() -> None:
+def search_clients_for_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.search_clients_for_role(
-        role_id="developer",
+        role_id=role_id,
     )
 
     if not isinstance(result.items, Unset):
@@ -201,11 +205,11 @@ def search_clients_for_role_example() -> None:
 
 
 # region SearchMappingRulesForRole
-def search_mapping_rules_for_role_example() -> None:
+def search_mapping_rules_for_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.search_mapping_rules_for_role(
-        role_id="developer",
+        role_id=role_id,
         data=MappingRuleSearchQueryRequest(),
     )
 

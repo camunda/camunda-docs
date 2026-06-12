@@ -21,6 +21,111 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 48
+
+### Publication date
+
+May 13, 2026
+
+### Products affected
+
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-42198](https://nvd.nist.gov/vuln/detail/CVE-2026-42198), where an attacker with the privileges to impersonate or perform a man-in-the-middle (MITM) attack on the PostgreSQL server can force the JDBC driver to perform SCRAM authentication with a very large iteration count. This can lead to high CPU usage during the SCRAM PBKDF2 computation before authentication can fail. Web Modeler and Identity are affected by this CVE when run with their default configuration. Zeebe, Operate, and Tasklist are only affected in a self-managed setup when running the application with RDBMS as secondary storage with a PostgreSQL server configured as the endpoint.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Identity ≤ 8.9.2, ≤ 8.8.11, or ≤ 8.7.18
+- Camunda Zeebe ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Tasklist ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Operate ≤ 8.9.2, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Web Modeler ≤ 8.9.2, ≤ 8.8.13, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Identity 8.9.3, 8.8.12, 8.7.19
+- Camunda Zeebe 8.9.3, 8.8.24, 8.7.29
+- Camunda Tasklist 8.9.3, 8.8.24, 8.7.29
+- Camunda Operate 8.9.3, 8.8.24, 8.7.29
+- Camunda Web Modeler 8.9.3, 8.8.14, 8.7.21
+
+## Notice 47
+
+### Publication date
+
+May 7, 2026
+
+### Products affected
+
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Optimize
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-40973](https://nvd.nist.gov/vuln/detail/CVE-2026-40973), where a local attacker could take control of the embedded Spring Boot `ApplicationTemp` directory. If `server.servlet.session.persistent` is set to `true`, this could allow session hijacking or arbitrary code execution. Default Camunda 8 deployments are not affected.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Identity ≤ 8.9.1, ≤ 8.8.11, or ≤ 8.7.18
+- Camunda Zeebe ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Tasklist ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Operate ≤ 8.9.1, ≤ 8.8.23, or ≤ 8.7.28
+- Camunda Optimize ≤ 8.9.1, ≤ 8.8.8, or ≤ 8.7.20
+- Camunda Web Modeler ≤ 8.9.1, ≤ 8.8.13, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Identity 8.9.2, 8.8.12, 8.7.19
+- Camunda Zeebe 8.9.2, 8.8.24, 8.7.29
+- Camunda Tasklist 8.9.2, 8.8.24, 8.7.29
+- Camunda Operate 8.9.2, 8.8.24, 8.7.29
+- Camunda Optimize 8.9.2, 8.8.24, 8.7.21
+- Camunda Web Modeler 8.9.2, 8.8.14, 8.7.21
+
+## Notice 46
+
+### Publication date
+
+May 7, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `axios` used by Camunda Web Modeler was affected by [CVE-2026-42264](https://github.com/advisories/GHSA-q8qp-cvcw-x6jj), a prototype pollution vulnerability in the HTTP adapter that could allow credential injection and request hijacking when `Object.prototype` is polluted by another dependency in the same process.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.13, or ≤ 8.7.20
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.14, 8.7.21
+
 ## Notice 45
 
 ### Publication date
@@ -874,8 +979,8 @@ When parsing unknown fields in the Protobuf Java Lite and Full library, a malici
 program crash.
 
 - As Zeebe makes extensive use of Protobuf, this could lead to denial-of-service (DoS) issues on the server side.
-- This issue allows an attacker to send specific payloads that will always result in `StackOverflowException`. This could lead to gateway performance issues and affect system availability.
-- Although the gateway will not crash, it will spend more time working on these requests. An attacker could use this opportunity to slow it down and make it unusable by sending a large number of requests within a short time frame.
+- This issue allows an attacker to send specific payloads that will always result in `StackOverflowException`. This could lead to Zeebe Gateway performance issues and affect system availability.
+- Although the Zeebe Gateway will not crash, it will spend more time working on these requests. An attacker could use this opportunity to slow it down and make it unusable by sending a large number of requests within a short time frame.
 
 No data is leaked, lost, or corrupted. This issue only affects application availability.
 
@@ -903,7 +1008,7 @@ Camunda Zeebe
 
 ### Impact
 
-Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that could crash the gateway.
+Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that could crash the Zeebe Gateway.
 
 ### How to determine if the installation is affected
 
@@ -1042,7 +1147,7 @@ The Tasklist REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthent
 - POST /v1/forms/\{formId}
 - POST /v1/variables/\{variableId}
 
-Find more information about the methods in our [Tasklist REST API documentation](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
+Find more information about the methods in our [Tasklist REST API documentation](/versioned_docs/version-8.9/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 
 Therefore, if you use Tasklist 8.2.0 or 8.2.1, and if you have sensible data stored in process variables (accessed by user tasks), this data could have been accessed by users knowing the endpoint of the Tasklist instance without authentication.
 

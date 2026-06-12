@@ -32,7 +32,7 @@ https://camunda-docs.mcp.kapa.ai
 
 ### One-click install
 
-You can perform a one-click installation or copy the MCP server URL via the **Use MCP** dropdown.
+You can perform a one-click installation or copy the MCP server URL via the **Use MCP** dropdown in the **Ask AI** button popup at the top of this documentation page.
 
 <img src={McpServerDropdownImg} alt="Ask context-aware questions about Camunda within VS Code." title="Ask context-aware questions about Camunda within VS Code." class="img-700" style={{marginTop: '0'}}/>
 
@@ -143,12 +143,14 @@ Once connected to the MCP server within your editor, you can ask context-aware q
 
 ### Authentication
 
-When connecting to the MCP server for the first time, you must authenticate via Google sign-in.
+When connecting to the MCP server for the first time, you must authenticate with either Google or GitHub.
 
-This anonymous Google ID is only used to enforce per-user rate limits and prevent abuse of the Camunda Docs MCP server:
+This authentication is only used to enforce per-user rate limits and prevent abuse of the Camunda Docs MCP server:
 
 - 40 requests per user per hour.
 - 200 requests per user per day.
+
+If you sign in with GitHub, Kapa does not request access to your repositories, organizations, or email address. It uses only a stable GitHub user ID for rate limiting.
 
 :::note
 The MCP server is powered by the Kapa.ai AI assistant. Refer to the [Kapa documentation](https://docs.kapa.ai/integrations/mcp/overview#authentication) to learn more about authentication.

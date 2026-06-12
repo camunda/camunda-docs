@@ -80,6 +80,86 @@ module.exports = {
       ],
     },
   ],
+  BuildWithAI: [
+    {
+      type: "category",
+      label: "Build with AI",
+      link: {
+        type: "doc",
+        id: "guides/build-with-ai/overview",
+      },
+      items: [],
+    },
+    "guides/build-with-ai/ai-usage-guidelines",
+    {
+      type: "category",
+      label: "Agentic orchestration",
+      link: {
+        type: "doc",
+        id: "components/agentic-orchestration/agentic-orchestration-overview",
+      },
+      items: [
+        "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/camunda-provided-llm",
+        "components/agentic-orchestration/ao-design",
+        {
+          type: "category",
+          label: "Evaluate your AI agents",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
+          },
+          items: [
+            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
+          ],
+        },
+        "components/agentic-orchestration/rag-ai-agents",
+        "components/agentic-orchestration/expose-process-as-mcp-tool",
+        "components/agentic-orchestration/choose-right-model-agentic",
+        "components/agentic-orchestration/model-recommendations-agentic",
+      ],
+    },
+    {
+      type: "category",
+      label: "Intelligent document processing (IDP)",
+      link: {
+        type: "doc",
+        id: "components/hub/workspace/modeler/idp",
+      },
+      items: [
+        "components/hub/workspace/modeler/idp/idp-configuration",
+        "components/hub/workspace/modeler/idp/idp-applications",
+        "components/hub/workspace/modeler/idp/idp-document-classification",
+        {
+          type: "category",
+          label: "Document extraction",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-document-extraction",
+          },
+          items: [
+            "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
+            "components/hub/workspace/modeler/idp/idp-structured-extraction",
+          ],
+        },
+        // "components/hub/workspace/modeler/idp/idp-document-automation",
+        {
+          type: "category",
+          label: "Integrate IDP into your processes",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-integrate",
+          },
+          items: ["components/hub/workspace/modeler/idp/idp-example"],
+        },
+        "components/hub/workspace/modeler/idp/idp-key-concepts",
+        "components/hub/workspace/modeler/idp/idp-reference",
+      ],
+    },
+    "reference/mcp-docs/docs-mcp",
+  ],
   Components: [
     "components/components-overview",
     {
@@ -253,61 +333,6 @@ module.exports = {
         id: "components/features-integrations/features-integrations",
       },
       items: [
-        {
-          type: "category",
-          label: "Agentic orchestration",
-          link: {
-            type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration-overview",
-          },
-          items: [
-            "components/agentic-orchestration/ai-agents",
-            "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/monitor-ai-agents",
-            "components/agentic-orchestration/analyze-ai-agents",
-            "components/agentic-orchestration/test-ai-agents",
-            "components/agentic-orchestration/rag-ai-agents",
-            "components/agentic-orchestration/choose-right-model-agentic",
-            "components/agentic-orchestration/model-recommendations-agentic",
-          ],
-        },
-        {
-          type: "category",
-          label: "Intelligent document processing (IDP)",
-          link: {
-            type: "doc",
-            id: "components/modeler/web-modeler/idp",
-          },
-          items: [
-            "components/modeler/web-modeler/idp/idp-configuration",
-            "components/modeler/web-modeler/idp/idp-applications",
-            "components/modeler/web-modeler/idp/idp-document-classification",
-            {
-              type: "category",
-              label: "Document extraction",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/idp/idp-document-extraction",
-              },
-              items: [
-                "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-                "components/modeler/web-modeler/idp/idp-structured-extraction",
-              ],
-            },
-            // "components/modeler/web-modeler/idp/idp-document-automation",
-            {
-              type: "category",
-              label: "Integrate IDP into your processes",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/idp/idp-integrate",
-              },
-              items: ["components/modeler/web-modeler/idp/idp-example"],
-            },
-            "components/modeler/web-modeler/idp/idp-key-concepts",
-            "components/modeler/web-modeler/idp/idp-reference",
-          ],
-        },
         {
           type: "category",
           label: "Robotic Process Automation (RPA)",
@@ -628,7 +653,6 @@ module.exports = {
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
-            "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
             "components/tasklist/userguide/audit-task-history",
           ],
@@ -673,26 +697,34 @@ module.exports = {
           },
           items: [
             {
-              type: "doc",
-              id: "components/hub/organization/manage-workspaces/manage-workspaces",
+              type: "category",
+              label: "Manage workspaces",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-workspaces/manage-workspaces",
+              },
+              items: [
+                "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+              ],
             },
             {
               type: "category",
               label: "Manage clusters",
               link: {
                 type: "doc",
-                id: "components/console/manage-clusters/manage-cluster",
+                id: "components/hub/organization/manage-clusters/manage-cluster",
               },
               items: [
-                "components/console/manage-clusters/create-cluster",
-                "components/console/manage-clusters/cluster-connectors",
-                "components/console/manage-clusters/manage-api-clients",
-                "components/console/manage-clusters/manage-secrets",
-                "components/console/manage-clusters/manage-alerts",
-                "components/console/manage-clusters/manage-ip-allowlists",
-                "components/console/manage-clusters/create-backups",
-                "components/console/manage-clusters/settings",
-                "components/console/manage-clusters/cluster-capacity",
+                "components/hub/organization/manage-clusters/create-cluster",
+                "components/hub/organization/manage-clusters/cluster-connectors",
+                "components/hub/organization/manage-clusters/manage-api-clients",
+                "components/hub/organization/manage-clusters/manage-secrets",
+                "components/hub/organization/manage-clusters/manage-alerts",
+                "components/hub/organization/manage-clusters/manage-ip-allowlists",
+                "components/hub/organization/manage-clusters/create-backups",
+                "components/hub/organization/manage-clusters/settings",
+                "components/hub/organization/manage-clusters/cluster-capacity",
+                "components/hub/organization/manage-clusters/troubleshoot-clusters",
               ],
             },
             {
@@ -704,10 +736,10 @@ module.exports = {
               label: "Manage members",
               link: {
                 type: "doc",
-                id: "components/console/manage-organization/manage-users",
+                id: "components/hub/organization/manage-members/manage-users",
               },
               items: [
-                "components/console/manage-organization/manage-user-groups",
+                "components/hub/organization/manage-members/manage-user-groups",
               ],
             },
             {
@@ -715,25 +747,36 @@ module.exports = {
               label: "Manage organization settings",
               link: {
                 type: "doc",
-                id: "components/console/manage-organization/organization-settings",
+                id: "components/hub/organization/manage-organization-settings/organization-settings",
               },
               items: [
-                "components/console/manage-organization/external-sso",
-                "components/console/manage-organization/view-organization-activity",
-                "components/console/manage-organization/enable-alpha-features",
-                "components/console/manage-organization/usage-history",
-                "components/console/manage-organization/usage-alerts",
-                "components/console/manage-organization/advanced-search",
-                "components/console/manage-organization/switch-organization",
-                "components/console/manage-organization/delete-account",
+                "components/hub/organization/manage-organization-settings/external-sso",
+                "components/hub/organization/manage-organization-settings/view-organization-activity",
+                "components/hub/organization/manage-organization-settings/enable-alpha-features",
+                "components/hub/organization/manage-organization-settings/usage-history",
+                "components/hub/organization/manage-organization-settings/usage-alerts",
+                "components/hub/organization/manage-organization-settings/advanced-search",
+                "components/hub/organization/manage-organization-settings/switch-organization",
+                "components/hub/organization/manage-organization-settings/delete-account",
                 {
                   "Manage plan": [
-                    "components/console/manage-plan/create-account",
-                    "components/console/manage-plan/available-plans",
-                    "components/console/manage-plan/upgrade-to-enterprise-plan",
-                    "components/console/manage-plan/update-billing-reservations",
+                    "components/hub/organization/manage-organization-settings/manage-plan/create-account",
+                    "components/hub/organization/manage-organization-settings/manage-plan/available-plans",
+                    "components/hub/organization/manage-organization-settings/manage-plan/upgrade-to-enterprise-plan",
+                    "components/hub/organization/manage-organization-settings/manage-plan/update-billing-reservations",
                   ],
                 },
+              ],
+            },
+            {
+              type: "category",
+              label: "Analyze operations",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/analyze-operations/analyze-operations",
+              },
+              items: [
+                "components/hub/organization/analyze-operations/job-dashboard",
               ],
             },
           ],
@@ -751,33 +794,38 @@ module.exports = {
               label: "Manage projects",
               link: {
                 type: "doc",
-                id: "components/modeler/web-modeler/process-applications/process-applications",
+                id: "components/hub/workspace/manage-projects/manage-projects",
               },
               items: [
                 {
                   type: "doc",
                   label: "Lifecycle",
-                  id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
+                  id: "components/hub/workspace/manage-projects/project-pipeline",
                 },
                 {
                   type: "doc",
                   label: "Creation",
-                  id: "components/modeler/web-modeler/process-applications/create-a-process-application",
+                  id: "components/hub/workspace/manage-projects/create-a-project",
                 },
                 {
                   type: "doc",
                   label: "Deployment",
-                  id: "components/modeler/web-modeler/process-applications/deploy-process-application",
+                  id: "components/hub/workspace/manage-projects/deploy-project",
                 },
                 {
                   type: "doc",
                   label: "Versioning",
-                  id: "components/modeler/web-modeler/process-applications/process-application-versioning",
+                  id: "components/hub/workspace/manage-projects/project-versioning",
                 },
                 {
                   type: "doc",
                   label: "Git Sync",
-                  id: "components/modeler/web-modeler/process-applications/git-sync",
+                  id: "components/hub/workspace/manage-projects/git-sync",
+                },
+                {
+                  type: "doc",
+                  label: "Recover deleted resources",
+                  id: "components/hub/workspace/manage-projects/recently-deleted",
                 },
               ],
             },
@@ -790,31 +838,31 @@ module.exports = {
               label: "Model business processes",
               link: {
                 type: "doc",
-                id: "components/modeler/web-modeler/index",
+                id: "components/hub/workspace/modeler/index",
               },
               items: [
                 {
                   Model: [
-                    "components/modeler/web-modeler/launch-web-modeler",
-                    "components/modeler/web-modeler/modeling/model-your-first-diagram",
-                    "components/modeler/web-modeler/run-or-publish-your-process",
-                    "components/modeler/web-modeler/process-landscape-visualization",
-                    "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
-                    "components/modeler/web-modeler/modeling/versions",
-                    "components/modeler/web-modeler/modeling/file-download",
-                    "components/modeler/web-modeler/modeling/camunda-marketplace",
+                    "components/hub/workspace/modeler/launch-modeler",
+                    "components/hub/workspace/modeler/modeling/model-your-first-diagram",
+                    "components/hub/workspace/modeler/run-or-publish-your-process",
+                    "components/hub/workspace/modeler/process-landscape-visualization",
+                    "components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram",
+                    "components/hub/workspace/modeler/modeling/versions",
+                    "components/hub/workspace/modeler/modeling/file-download",
+                    "components/hub/workspace/modeler/modeling/camunda-marketplace",
                     {
                       type: "doc",
-                      id: "components/modeler/web-modeler/web-modeler-settings",
+                      id: "components/hub/workspace/modeler/modeler-settings",
                       label: "Settings",
                     },
                     {
                       type: "category",
                       label: "Import",
                       items: [
-                        "components/modeler/web-modeler/modeling/import-diagram",
-                        "components/modeler/web-modeler/modeling/import-resources",
-                        "components/modeler/web-modeler/modeling/prepare-resources",
+                        "components/hub/workspace/modeler/modeling/import-diagram",
+                        "components/hub/workspace/modeler/modeling/import-resources",
+                        "components/hub/workspace/modeler/modeling/prepare-resources",
                       ],
                     },
                     {
@@ -822,27 +870,26 @@ module.exports = {
                       label: "Element templates",
                       link: {
                         type: "doc",
-                        id: "components/modeler/web-modeler/element-templates/manage-element-templates",
+                        id: "components/hub/workspace/modeler/element-templates/manage-element-templates",
                       },
                       items: [
-                        "components/modeler/web-modeler/element-templates/element-template-generator",
-                        "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
-                        "components/modeler/web-modeler/element-templates/save-as-element-templates",
-                        "components/modeler/web-modeler/element-templates/best-practices",
+                        "components/hub/workspace/modeler/element-templates/element-template-generator",
+                        "components/hub/workspace/modeler/element-templates/using-templates-in-modeler",
+                        "components/hub/workspace/modeler/element-templates/save-as-element-templates",
+                        "components/hub/workspace/modeler/element-templates/best-practices",
                       ],
                     },
                     {
                       "AI features": [
-                        "components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai",
+                        "components/hub/workspace/modeler/modeling/advanced-modeling/camunda-docs-ai",
                       ],
                     },
                     {
                       "Advanced modeling": [
-                        "components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking",
-                        "components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking",
-                        "components/modeler/web-modeler/modeling/advanced-modeling/form-linking",
-                        "components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes",
-                        "components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
+                        "components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking",
+                        "components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking",
+                        "components/hub/workspace/modeler/modeling/advanced-modeling/form-linking",
+                        "components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
                       ],
                     },
                   ],
@@ -852,22 +899,21 @@ module.exports = {
                   label: "Collaborate",
                   link: {
                     type: "doc",
-                    id: "components/modeler/web-modeler/collaboration/collaboration",
+                    id: "components/hub/workspace/modeler/collaboration/collaboration",
                   },
                   items: [
-                    "components/modeler/web-modeler/collaboration/collaborate-with-modes",
-                    "components/modeler/web-modeler/collaboration/design-your-process",
-                    "components/modeler/web-modeler/collaboration/implement-your-process",
-                    "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
-                    "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
+                    "components/hub/workspace/modeler/collaboration/collaborate-with-modes",
+                    "components/hub/workspace/modeler/collaboration/design-your-process",
+                    "components/hub/workspace/modeler/collaboration/implement-your-process",
+                    "components/hub/workspace/modeler/integrate-modeler-in-ci-cd",
                   ],
                 },
                 {
                   Validate: [
-                    "components/modeler/web-modeler/validation/play-your-process",
-                    "components/modeler/web-modeler/validation/test-scenario-files",
-                    "components/modeler/web-modeler/validation/token-simulation",
-                    "components/modeler/web-modeler/validation/task-testing",
+                    "components/hub/workspace/modeler/validation/play-your-process",
+                    "components/hub/workspace/modeler/validation/test-scenario-files",
+                    "components/hub/workspace/modeler/validation/token-simulation",
+                    "components/hub/workspace/modeler/validation/task-testing",
                   ],
                 },
               ],
@@ -985,6 +1031,7 @@ module.exports = {
                       ],
                     },
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
@@ -1003,6 +1050,7 @@ module.exports = {
                     "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-human-in-the-loop",
                   ],
                 },
+                "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event",
                 "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
               ],
             },
@@ -1258,8 +1306,11 @@ module.exports = {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
         require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
+        require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-saas/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-sm/sidebar-schema"),
         {
           type: "category",
           label: "Optimize API",
@@ -1299,12 +1350,10 @@ module.exports = {
             "apis-tools/optimize-api/variable-labeling",
           ],
         },
-        require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/operate-api/sidebar-schema"),
-            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
+            require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -1472,9 +1521,6 @@ module.exports = {
             "apis-tools/testing/json-test-cases",
           ],
         },
-        {
-          Deprecated: ["apis-tools/testing/zeebe-process-test"],
-        },
       ],
     },
     {
@@ -1499,7 +1545,10 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",
-      items: ["apis-tools/migration-manuals/migrate-to-810"],
+      items: [
+        "apis-tools/migration-manuals/migrate-to-810",
+        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
+      ],
     },
   ],
   Reference: [
@@ -1581,7 +1630,6 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/contact",
-    "reference/mcp-docs/docs-mcp",
     "reference/legal",
   ],
   "Self-Managed": [
@@ -1616,7 +1664,20 @@ module.exports = {
                 "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
               ],
             },
-            "self-managed/quickstart/developer-quickstart/docker-compose",
+            {
+              type: "category",
+              label: "Docker Compose",
+              link: {
+                type: "doc",
+                id: "self-managed/quickstart/developer-quickstart/docker-compose",
+              },
+              items: [
+                "self-managed/quickstart/developer-quickstart/docker-compose/install-start",
+                "self-managed/quickstart/developer-quickstart/docker-compose/configuration",
+                "self-managed/quickstart/developer-quickstart/docker-compose/secondary-storage",
+                "self-managed/quickstart/developer-quickstart/docker-compose/connectors-and-modeling",
+              ],
+            },
           ],
         },
         "self-managed/quickstart/administrator-quickstart",
@@ -1688,6 +1749,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
@@ -1854,6 +1916,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
+                "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
               ],
             },
             {
@@ -2097,6 +2160,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/optimize-backup-and-restore",
           ],
         },
         {
@@ -2124,6 +2188,18 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Multi-tenancy",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-tenancy/multi-tenancy-overview",
+          },
+          items: [
+            "self-managed/concepts/multi-tenancy/logical-tenants",
+            "self-managed/concepts/multi-tenancy/physical-tenants",
+          ],
+        },
+        {
+          type: "category",
           label: "Audit log",
           link: {
             type: "doc",
@@ -2143,9 +2219,7 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/operational-guides/data-purge",
-        {
-          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
-        },
+        "self-managed/operational-guides/troubleshooting",
       ],
     },
     {
@@ -2256,7 +2330,6 @@ module.exports = {
               Tasklist: [
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-configuration",
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling",
-                "self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions",
               ],
             },
             {
@@ -2266,6 +2339,7 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/admin/connect-multiple-identity-providers",
                 "self-managed/components/orchestration-cluster/admin/bring-your-groups",
                 "self-managed/components/orchestration-cluster/admin/debugging-authentication",
+                "self-managed/components/orchestration-cluster/admin/mcp-processes",
                 "self-managed/components/orchestration-cluster/admin/special-oidc-cases",
               ],
             },
@@ -2279,30 +2353,35 @@ module.exports = {
             id: "self-managed/components/hub/camunda-hub",
           },
           items: [
-            "self-managed/components/console/usage-metrics",
-            "self-managed/components/console/telemetry",
-            "self-managed/components/modeler/web-modeler/monitoring",
+            "self-managed/components/hub/usage-metrics",
+            "self-managed/components/hub/telemetry",
+            "self-managed/components/hub/monitoring",
             {
-              Configuration: [
-                "self-managed/components/console/configuration/configuration",
-                "self-managed/components/console/configuration/ssl",
-                "self-managed/components/modeler/web-modeler/configuration/configuration",
-                "self-managed/components/modeler/web-modeler/configuration/database",
-                "self-managed/components/modeler/web-modeler/configuration/identity",
-                "self-managed/components/modeler/web-modeler/configuration/logging",
-                "self-managed/components/modeler/web-modeler/configuration/ssl",
-                "self-managed/components/modeler/web-modeler/configuration/copilot",
+              type: "category",
+              label: "Configuration",
+              link: {
+                type: "doc",
+                id: "self-managed/components/hub/configuration/configuration",
+              },
+              items: [
+                "self-managed/components/hub/configuration/ssl",
+                "self-managed/components/hub/configuration/modeler-configuration",
+                "self-managed/components/hub/configuration/database",
+                "self-managed/components/hub/configuration/identity",
+                "self-managed/components/hub/configuration/logging",
+                "self-managed/components/hub/configuration/modeler-ssl",
+                "self-managed/components/hub/configuration/copilot",
               ],
             },
             {
               type: "category",
               label: "Troubleshooting",
               items: [
-                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
-                "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
+                "self-managed/components/hub/troubleshooting/troubleshoot-database-connection",
+                "self-managed/components/hub/troubleshooting/troubleshoot-zeebe-connection",
+                "self-managed/components/hub/troubleshooting/troubleshoot-missing-data",
+                "self-managed/components/hub/troubleshooting/troubleshoot-proxy-configuration",
+                "self-managed/components/hub/troubleshooting/troubleshoot-other-problems",
               ],
             },
           ],

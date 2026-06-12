@@ -13,6 +13,21 @@ paths:
         [[CONSISTENCY:STRONG]]
 
         Create a new group.
+
+        The supplied `groupId` is validated against `^[a-zA-Z0-9_~@.+-]+
+        (max 256 characters) by `IdentifierValidator.validateId` in the
+        runtime. This strict validation applies wherever the Groups API
+        is available: in OIDC deployments that set
+        `camunda.security.authentication.oidc.groupsClaim` the Groups
+        API (including this endpoint) is disabled entirely, so group
+        CRUD never sees externally-minted IdP IDs. The BYOG relaxation
+        only loosens validation when a group is referenced *as a member*
+        of a role or tenant (`assignRoleToGroup`,
+        `assignGroupToTenant`); group CRUD itself always uses the strict
+        default-id regex. The constraint is not advertised on the
+        `GroupId` schema so that the same schema can be reused at
+        member-reference sites without falsely rejecting
+        externally-minted IdP group IDs there.
       requestBody:
         content:
           application/json:
@@ -31,10 +46,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "409":
+          description: Group with this id already exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /groups/search:
     post:
       tags:
@@ -70,6 +92,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /groups/{groupId}:
     get:
       tags:
@@ -90,7 +113,7 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       responses:
         "200":
           description: The group is successfully returned.
@@ -110,6 +133,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
     put:
       tags:
         - Group
@@ -129,7 +153,7 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       requestBody:
         required: true
         content:
@@ -157,6 +181,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Group
@@ -176,7 +201,7 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       responses:
         "204":
           description: The group was deleted successfully.
@@ -192,6 +217,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /groups/{groupId}/users/{username}:
     put:
       tags:
@@ -213,7 +239,7 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
         - name: username
           in: path
           required: true
@@ -243,6 +269,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Group
@@ -263,7 +290,7 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
         - name: username
           in: path
           required: true
@@ -287,6 +314,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /groups/{groupId}/users/search:
     post:
       tags:
@@ -307,7 +335,7 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       requestBody:
         required: false
         content:
@@ -335,6 +363,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /groups/{groupId}/clients/{clientId}:
     put:
       tags:
@@ -356,13 +385,13 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
         - name: clientId
           in: path
           required: true
           description: The client ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/ClientId"
       responses:
         "204":
           description: The client was assigned successfully to the group.
@@ -386,6 +415,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Group
@@ -406,13 +436,13 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
         - name: clientId
           in: path
           required: true
           description: The client ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/ClientId"
       responses:
         "204":
           description: The client was unassigned successfully from the group.
@@ -430,6 +460,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /groups/{groupId}/clients/search:
     post:
       tags:
@@ -450,7 +481,7 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       requestBody:
         required: false
         content:
@@ -478,6 +509,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /groups/{groupId}/mapping-rules/{mappingRuleId}:
     put:
       tags:
@@ -498,13 +530,13 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
         - name: mappingRuleId
           in: path
           required: true
           description: The mapping rule ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/MappingRuleId"
       responses:
         "204":
           description: The mapping rule was assigned successfully to the group.
@@ -528,6 +560,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Group
@@ -547,13 +580,13 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
         - name: mappingRuleId
           in: path
           required: true
           description: The mapping rule ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/MappingRuleId"
       responses:
         "204":
           description: The mapping rule was unassigned successfully from the group.
@@ -571,6 +604,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /groups/{groupId}/mapping-rules/search:
     post:
       tags:
@@ -591,7 +625,7 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       requestBody:
         required: false
         content:
@@ -619,6 +653,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /groups/{groupId}/roles/search:
     post:
       tags:
@@ -639,7 +674,7 @@ paths:
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       requestBody:
         required: false
         content:
@@ -667,13 +702,15 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
 components:
   schemas:
     GroupCreateRequest:
       type: object
       properties:
         groupId:
-          type: string
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/GroupId"
           description: The ID of the new group.
         name:
           type: string
@@ -688,8 +725,9 @@ components:
       type: object
       properties:
         groupId:
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/GroupId"
           description: The ID of the created group.
-          type: string
         name:
           description: The display name of the created group.
           type: string
@@ -716,8 +754,9 @@ components:
       type: object
       properties:
         groupId:
-          type: string
-          description: The unique external group ID.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/GroupId"
+          description: The unique group ID.
         name:
           type: string
           description: The name of the group.
@@ -737,7 +776,8 @@ components:
           type: string
           description: The group name.
         groupId:
-          type: string
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/GroupId"
           description: The group ID.
         description:
           type: string
@@ -845,7 +885,8 @@ components:
       properties:
         clientId:
           description: The ID of the client.
-          type: string
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/ClientId"
       required:
         - clientId
     GroupClientSearchResult:

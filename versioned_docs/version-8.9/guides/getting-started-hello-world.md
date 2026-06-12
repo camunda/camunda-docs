@@ -32,10 +32,9 @@ After completing this guide, you will have a BPMN process running locally in Cam
 
 - [JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/): Required by Camunda 8 Run to start the engine locally.
 
-## Step 1: Download the Camunda 8 starter package
+## Step 1: Download the Getting Started Package
 
-Download the Camunda 8 starter package from the following website:
-[https://developers.camunda.com/install-camunda-8/](https://developers.camunda.com/install-camunda-8/)
+Download the Getting Started Package from [Camunda Downloads](/downloads).
 
 The starter package includes the following components:
 
@@ -74,7 +73,7 @@ The starter package includes the following components:
 3. Open Camunda Modeler from the starter package.
 4. Click **File**, then **Open File** to open the process model `camunda-8-get-started/1-rocket-launch/rocket-launch.bpmn`.
 5. Deploy your model by clicking the rocket icon in the bottom toolbar. You can use the pre-configured **c8run (local)** connection and click **Deploy**. This automatically deploys all resources in the project, including the DMN decision table.
-6. Click **Play** in the bottom toolbar to start a new process instance.
+6. Click **Play** in the bottom toolbar to start a new [process instance](/reference/glossary.md#process-instance).
 7. Run your first model instance by setting the input mission variables. For example:
 
 ```json

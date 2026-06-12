@@ -32,10 +32,9 @@ After completing this guide, you will have a BPMN process running locally in Cam
 
 - [JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/): Required by Camunda 8 Run to start the engine locally.
 
-## Step 1: Download the Camunda 8 starter package
+## Step 1: ## Download the Getting Started Package
 
-Download the Camunda 8 starter package from the following website:
-[https://developers.camunda.com/install-camunda-8/](https://developers.camunda.com/install-camunda-8/)
+Download the Getting Started Package from [Camunda Downloads](/downloads).
 
 The starter package includes the following components:
 

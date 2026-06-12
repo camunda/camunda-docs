@@ -1,0 +1,246 @@
+---
+id: get-resource-content-binary
+title: "Get resource content as binary"
+sidebar_label: "Get resource content as binary"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get resource content as binary"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/resources/{resourceKey}/content/binary"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Returns the content of a deployed resource in binary format (octet-stream).
+:::info
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective APIs.
+:::
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "resourceKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the resource.",
+      schema: {
+        type: "string",
+        oneOf: [
+          {
+            description:
+              "System-generated key for a deployed process definition.",
+            format: "ProcessDefinitionKey",
+            example: "2251799813686749",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "ProcessDefinitionKey",
+          },
+          {
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            description:
+              "System-generated key for a deployed decision requirements definition.",
+            format: "DecisionRequirementsKey",
+            example: "2251799813683346",
+            type: "string",
+            title: "DecisionRequirementsKey",
+          },
+          {
+            description: "System-generated key for a deployed form.",
+            format: "FormKey",
+            example: "2251799813684365",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "FormKey",
+          },
+          {
+            description: "System-generated key for a decision definition.",
+            format: "DecisionDefinitionKey",
+            example: "2251799813326547",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "DecisionDefinitionKey",
+          },
+        ],
+        description: "The system-assigned key for this resource.",
+        format: "ResourceKey",
+        title: "ResourceKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The resource content is successfully returned.",
+      content: {
+        "application/octet-stream": {
+          schema: { type: "string", format: "binary" },
+        },
+      },
+    },
+    "404": {
+      description: "A resource with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

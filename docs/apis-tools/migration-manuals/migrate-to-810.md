@@ -41,10 +41,13 @@ Complete the following steps in this guide:
 
 Review the actions required for the following 8.10 changes:
 
-| Type                                                         | Change                                                                                                               |
-| :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| <span className="label-highlight red">Breaking change</span> | [Search filters: `UserTaskFilter` process filters converted into advanced search filters] (#usertask-process-filter) |
-| <span className="label-highlight red">Breaking change</span> | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)              |
+| Type                                                              | Change                                                                                                                      |
+| :---------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| <span className="label-highlight red">Breaking change</span>      | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter)         |
+| <span className="label-highlight red">Breaking change</span>      | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)                     |
+| <span className="label-highlight orange">Behavioral change</span> | [Element instance search: advanced filters on `elementId` / `elementName` and `$or` support](#element-instance-advanced-or) |
+| <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
+| <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |
 
 ## Breaking changes
 
@@ -155,9 +158,91 @@ This filter works correctly for both new data and legacy data (which has `NULL` 
 </TabItem>
 </Tabs>
 
+## Behavioral changes
+
+### Element instance search: advanced filters on `elementId` / `elementName` and `$or` support {#element-instance-advanced-or}
+
+#### Change
+
+The element instance search endpoint (`POST /v2/element-instances/search`) gained two filtering capabilities:
+
+- The `elementId` and `elementName` filter fields now accept [advanced search filter objects](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) in addition to plain string equality. Supported operators: `$eq`, `$neq`, `$exists`, `$in`, `$notIn`, `$like` (wildcard pattern with `*` and `?`).
+- The request body's `filter` object now accepts a top-level `$or` property that takes an array of alternative filter groups combined with OR logic. Top-level filter fields and `$or` are combined with AND logic.
+
+#### Why
+
+These additions let you express the queries the user interface (UI) needs (for example, "match any element whose name or ID contains a substring") in a single request, avoiding multiple round trips and client-side merging.
+
+#### Impact
+
+The change is additive and backward compatible — existing exact-match requests continue to work unchanged. New requests can now use advanced operators and `$or` to express richer queries:
+
+```json
+{
+  "filter": {
+    "processInstanceKey": "2251799813685323",
+    "$or": [
+      { "elementName": { "$like": "*Order*" } },
+      { "elementId": { "$like": "*Order*" } }
+    ]
+  }
+}
+```
+
+The example matches element instances where `processInstanceKey` equals the given value AND either `elementName` or `elementId` contains the substring `Order`.
+
+:::note
+Complex `$or` conditions may impact performance in high-volume environments; use them with care.
+:::
+
+The `elementName` filter only matches instances created in 8.8 or later, since earlier runtimes did not persist this field on element instances.
+
+#### Action
+
+<Tabs groupId="audience" defaultValue="sdk" queryString values={[
+{label: 'Official SDK users', value: 'sdk'},
+{label: 'Generated-client users', value: 'generated'},
+{label: 'Custom integrations', value: 'custom'},
+]}>
+
+<TabItem value='sdk'>
+
+Update to the latest SDK version. The new SDK exposes advanced filters for `elementId` and `elementName`, and the `$or` filter on `ElementInstanceFilter`.
+
+</TabItem>
+<TabItem value='generated'>
+
+Regenerate your client from the 8.10 OpenAPI specification to pick up the advanced filter and `$or` types on `ElementInstanceFilter`.
+
+</TabItem>
+<TabItem value='custom'>
+
+No change is needed for existing requests. To use the new operators, send advanced filter objects on `elementId` / `elementName`, or a top-level `$or` array, as shown above.
+
+</TabItem>
+</Tabs>
+
+### Resource API now uses eventual consistency {#resource-eventual-consistency}
+
+The [Get resource] and [Get resource content] APIs now retrieve from secondary storage, resulting in eventual consistency. After a resource is deployed, there may be a brief delay before it becomes retrievable via these endpoints.
+
+If your application assumes immediate resource retrieval after deployment, add retry logic or a short delay before querying resources.
+
+## Deprecations
+
+Review the actions required for the following deprecations:
+
+### Deprecated: GET resource content API {#deprecated-get-resource-content}
+
+The [Get resource content] endpoint is deprecated. Use [Get resource content binary] instead, which provides the same functionality and also returns generic resources.
+
 ## Next steps
 
 Once you have completed the [upgrade steps](#upgrade-steps) in this guide, you should:
 
 1. Re-compile and run your test suite against the 8.10 API.
 <!--- 1. Review [8.10 release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) for additional context on each change. --->
+
+[Get resource]: ../orchestration-cluster-api-rest/specifications/get-resource.api.mdx
+[Get resource content]: ../orchestration-cluster-api-rest/specifications/get-resource-content.api.mdx
+[Get resource content binary]: ../orchestration-cluster-api-rest/specifications/get-resource-content-binary.api.mdx

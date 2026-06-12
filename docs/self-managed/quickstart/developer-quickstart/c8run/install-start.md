@@ -14,14 +14,11 @@ Use this page to install Camunda 8 Run locally, start it on macOS, Linux, or Win
 
 ## Prerequisites
 
-- **OpenJDK 21–25**: Required for running Camunda 8 as a Java application.
 - **[Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)**
 - **If using Ubuntu**: Ubuntu 22.04 or newer
 
 :::note
-After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
-
-If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
+Starting with 8.10.0-alpha2, Camunda 8 Run does not require a separate Java installation.
 :::
 
 ## Install and start Camunda 8 Run

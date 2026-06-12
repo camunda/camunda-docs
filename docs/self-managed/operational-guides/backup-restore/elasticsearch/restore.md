@@ -631,7 +631,7 @@ The following specific prerequisites are required when restoring the Zeebe Clust
 ### Restore Zeebe Cluster
 
 :::note
-During the restoration of the Elasticsearch / OpenSearch state, we had to temporarily deploy Zeebe. This will have resulted in persistent volumes on Kubernetes and a filled data directory on each Zeebe broker in case of a manual deployment.
+During the restoration of the Elasticsearch / OpenSearch state, we had to temporarily deploy Zeebe. This will have resulted in persistent volumes on Kubernetes and a filled data directory on each Zeebe Broker in case of a manual deployment.
 
 In the case of Kubernetes to remove all related persistent volumes.
 
@@ -645,10 +645,10 @@ kubectl get pvc -o custom-columns=NAME:.metadata.name --no-headers \
 
 New persistent volumes will be created on a new Camunda Helm chart upgrade and install.
 
-In case of a manual deployment, this means to remove the data directory of each Zeebe broker.
+In case of a manual deployment, this means to remove the data directory of each Zeebe Broker.
 :::
 
-Camunda provides a standalone app which must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
+Camunda provides a standalone app which must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured - via environment variables or using the configuration file located in `config/application.yaml`.
 
 :::warning
 When restoring, provide the same configuration (node id, data directory, cluster size, and replication count) as the broker that will be running in this node. The partition count **must be same** as in the backup.
@@ -718,7 +718,7 @@ After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` an
 
 :::tip
 
-In Kubernetes, Zeebe runs as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which is intended for long-running, persistent applications. Because StatefulSet pods are restarted automatically, restore-mode pods can appear in `CrashLoopBackOff` after a successful restore. Observe Zeebe broker logs during restore, and use `--previous` if a pod has already restarted.
+In Kubernetes, Zeebe runs as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which is intended for long-running, persistent applications. Because StatefulSet pods are restarted automatically, restore-mode pods can appear in `CrashLoopBackOff` after a successful restore. Observe Zeebe Broker logs during restore, and use `--previous` if a pod has already restarted.
 
 The restore app will not import or overwrite data again, but you may miss the first successful run if you are not observing logs actively.
 
@@ -806,7 +806,7 @@ After the database has been restored, you can start Web Modeler again.
 
 :::danger
 When restoring Web Modeler data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
-Otherwise, users may not be able to access their projects after the restore (see [Web Modeler's troubleshooting guide](/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data.md)).
+Otherwise, users may not be able to access their projects after the restore (see [Web Modeler's troubleshooting guide](/self-managed/components/hub/troubleshooting/troubleshoot-missing-data.md)).
 :::
 
 :::tip

@@ -8,6 +8,32 @@ mdx:
 
 # Semantic Types
 
+## AgentHistoryItemKey
+
+```python
+class AgentHistoryItemKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [AgentHistoryItemKey](#agenthistoryitemkey)
+
+## AgentInstanceKey
+
+```python
+class AgentInstanceKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [AgentInstanceKey](#agentinstancekey)
+
 ## AuditLogEntityKey
 
 ```python
@@ -72,6 +98,32 @@ Bases: `str`
   **value** (_str_)
 - **Return type:**
   [BusinessId](#businessid)
+
+## ClientId
+
+```python
+class ClientId(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [ClientId](#clientid)
+
+## ClusterVariableName
+
+```python
+class ClusterVariableName(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [ClusterVariableName](#clustervariablename)
 
 ## ConditionalEvaluationKey
 
@@ -268,6 +320,19 @@ Bases: `str`
 - **Return type:**
   [GlobalListenerId](#globallistenerid)
 
+## GroupId
+
+```python
+class GroupId(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [GroupId](#groupid)
+
 ## IncidentKey
 
 ```python
@@ -293,6 +358,19 @@ Bases: `str`
   **value** (_str_)
 - **Return type:**
   [JobKey](#jobkey)
+
+## MappingRuleId
+
+```python
+class MappingRuleId(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [MappingRuleId](#mappingruleid)
 
 ## MessageKey
 
@@ -358,6 +436,19 @@ Bases: `str`
   **value** (_str_)
 - **Return type:**
   [ProcessInstanceKey](#processinstancekey)
+
+## RoleId
+
+```python
+class RoleId(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [RoleId](#roleid)
 
 ## SignalKey
 

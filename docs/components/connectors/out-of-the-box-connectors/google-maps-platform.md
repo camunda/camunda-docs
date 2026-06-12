@@ -28,7 +28,7 @@ In the **Authentication** section, set the relevant API key. Refer to the [offic
 :::note
 We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `GOOGLE_MAPS_PLATFORM_API_KEY`) so you can reference it later in the connector.
 
 :::
