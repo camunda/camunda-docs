@@ -36,15 +36,16 @@
 
 /* ─── Additional release resources ─── */
 .additionalReleasesSection {
-  margin-top: 2.75rem;
-  padding-top: 2rem;
+  margin-top: 5rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3rem;
   border-top: 1px solid var(--card-border);
 }
 
 .additionalReleasesTitle {
   margin: 0;
   text-align: center;
-  font-size: 1.35rem;
+  font-size: 1.75rem;
 }
 
 .additionalReleasesSub {
@@ -154,6 +155,35 @@
   max-width: 100% !important;
 }
 
+.downloadsGridTwo {
+  grid-template-columns: 1fr 1fr !important;
+  max-width: 100% !important;
+  margin-bottom: 2.5rem !important;
+}
+
+@media (max-width: 768px) {
+  .downloadsGridTwo {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Login required badge ─── */
+.loginBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--inline-code-bg);
+  color: var(--muted-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  align-self: flex-start;
+}
+
 /* ─── Download card ─── */
 .downloadCard {
   position: relative;
@@ -239,6 +269,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  margin-bottom: 0.75rem;
 }
 
 .dlButtonExperimental {

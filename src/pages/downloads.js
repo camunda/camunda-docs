@@ -177,6 +177,110 @@ function RpaIconLg() {
   );
 }
 
+function GearIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <g
+        transform="translate(12,12) scale(1.667)"
+        stroke="#fc5d0d"
+        fill="none"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <circle cx="12" cy="12" r="3" />
+      </g>
+    </svg>
+  );
+}
+
+function BuildingIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      {/* Main building */}
+      <rect
+        x="16"
+        y="20"
+        width="32"
+        height="30"
+        rx="1.5"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+      />
+      {/* Roof line */}
+      <path
+        d="M13 20h38"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      {/* Windows row 1 */}
+      <rect x="21" y="26" width="5" height="5" rx="1" fill="#fc5d0d" />
+      <rect x="30" y="26" width="5" height="5" rx="1" fill="#fc5d0d" />
+      <rect x="39" y="26" width="5" height="5" rx="1" fill="#fc5d0d" />
+      {/* Windows row 2 */}
+      <rect x="21" y="35" width="5" height="5" rx="1" fill="#fc5d0d" />
+      <rect x="39" y="35" width="5" height="5" rx="1" fill="#fc5d0d" />
+      {/* Door */}
+      <rect
+        x="29"
+        y="38"
+        width="7"
+        height="12"
+        rx="1"
+        stroke="#fc5d0d"
+        strokeWidth="2"
+      />
+      {/* Ground */}
+      <path
+        d="M13 50h38"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function ConnectorIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <g transform="translate(12, 10) scale(0.08)">
+        <path
+          fillRule="evenodd"
+          fill="#fc5d0d"
+          d="M439.6,229.32c-18.39,0-34.08,11.71-40.05,27.99h-94.5c-6.44-23.89-28.34-41.46-54.22-41.46s-47.78,17.57-54.22,41.46h-94.39c-5.97-16.39-21.66-27.99-40.05-27.99-23.66,0-42.74,19.09-42.74,42.63s19.09,42.63,42.63,42.63c18.39,0,34.08-11.71,40.05-27.99h94.5c6.44,23.89,28.34,41.46,54.22,41.46s47.78-17.57,54.22-41.46h94.5c5.97,16.39,21.66,27.99,40.05,27.99,23.54,0,42.63-19.09,42.63-42.63s-19.09-42.63-42.63-42.63h0ZM250.83,301.22c-16.16,0-29.16-13.12-29.16-29.16s13.12-29.28,29.16-29.28,29.16,13.12,29.16,29.16c.12,16.16-13,29.28-29.16,29.28h0Z"
+        />
+      </g>
+    </svg>
+  );
+}
+
 function CheckIcon({ color = "#22a06b" }) {
   return (
     <svg
@@ -496,10 +600,10 @@ const ADDITIONAL_RELEASES = [
       url: "https://github.com/camunda/camunda/releases/latest",
     },
     previousVersions: "https://github.com/camunda/camunda/releases",
-    icon: <PlayIconLg />,
+    icon: <GearIconLg />,
   },
   {
-    title: "Camunda Connectors",
+    title: "Connectors",
     description:
       "Get prebuilt connector artifacts and review release history for connector updates.",
     version: "8.10.0-alpha2",
@@ -509,33 +613,99 @@ const ADDITIONAL_RELEASES = [
       url: "https://github.com/camunda/connectors/releases/latest",
     },
     previousVersions: "https://github.com/camunda/connectors/releases",
-    icon: <SparklesIconLg />,
+    icon: <ConnectorIconLg />,
   },
   {
-    title: "Camunda 7 and Camunda 8 Enterprise downloads",
+    title: "Enterprise download center",
     description:
       "Enterprise-only downloads for Camunda 7 and Camunda 8 Web Modeler artifacts.",
     primaryLink: {
       label: "Browse enterprise downloads",
       url: "https://downloads.camunda.cloud/enterprise-release/",
     },
-    icon: <PencilIconLg />,
+    icon: <BuildingIconLg />,
+    loginRequired: true,
   },
 ];
 
-/* ─── Small CLI snippet ─── */
+/* ─── CLI snippet (matches build-with-camunda terminal style) ─── */
 
 function Snippet({ lines }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    const text = lines.join("\n");
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      });
+    }
+  };
+
   return (
-    <pre className={styles.snippet}>
-      {lines.map((line, i) => (
-        <React.Fragment key={i}>
-          <span className={styles.snippetPrompt}>$ </span>
-          {line}
-          {i < lines.length - 1 ? "\n" : ""}
-        </React.Fragment>
-      ))}
-    </pre>
+    <div className={bwcStyles.terminalWindow} style={{ margin: "0 0 0.5rem" }}>
+      <div className={bwcStyles.terminalHeader}>
+        <span
+          className={bwcStyles.terminalDot}
+          style={{ background: "#ff5f57" }}
+        />
+        <span
+          className={bwcStyles.terminalDot}
+          style={{ background: "#febc2e" }}
+        />
+        <span
+          className={bwcStyles.terminalDot}
+          style={{ background: "#28c840" }}
+        />
+      </div>
+      <div className={bwcStyles.terminalBody}>
+        <button
+          type="button"
+          aria-label={copied ? "Copied" : "Copy code to clipboard"}
+          title={copied ? "Copied" : "Copy"}
+          className={clsx(
+            bwcStyles.copyButton,
+            copied && bwcStyles.copyButtonCopied
+          )}
+          onClick={handleCopy}
+        >
+          <span className={bwcStyles.copyButtonIcons} aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              className={bwcStyles.copyIcon}
+              width="16"
+              height="16"
+            >
+              <path
+                fill="currentColor"
+                d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
+              />
+            </svg>
+            <svg
+              viewBox="0 0 24 24"
+              className={bwcStyles.successIcon}
+              width="16"
+              height="16"
+            >
+              <path
+                fill="currentColor"
+                d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+              />
+            </svg>
+          </span>
+        </button>
+        <pre className={bwcStyles.terminalPre}>
+          {lines.map((line, i) => (
+            <React.Fragment key={i}>
+              <span style={{ color: "#78a9ff", userSelect: "none" }}>$ </span>
+              {line}
+              {i < lines.length - 1 ? "\n" : ""}
+            </React.Fragment>
+          ))}
+        </pre>
+      </div>
+    </div>
   );
 }
 
@@ -577,14 +747,7 @@ function GettingStartedCard({ activeOS }) {
 
       <div className={styles.splitStack}>
         <div className={styles.splitSection}>
-          <p
-            className={clsx(
-              styles.splitColumnHeading,
-              styles.splitColumnHeadingPrimary
-            )}
-          >
-            Install via CLI
-          </p>
+          <p className={styles.splitColumnHeading}>Install via CLI</p>
           <Snippet
             lines={[
               "npm install -g @camunda8/cli",
@@ -635,6 +798,7 @@ function DownloadCard({
   previousVersions,
   activeOS,
   badge,
+  loginRequired,
 }) {
   const [showExperimental, setShowExperimental] = useState(false);
   const osLinks = (links && links[activeOS]) || {};
@@ -654,6 +818,25 @@ function DownloadCard({
       <div className={styles.downloadCardIcon}>{icon}</div>
       <h3 className={bwcStyles.downloadBlockTitle}>{title}</h3>
       <p className={styles.downloadCardDesc}>{description}</p>
+      {loginRequired && (
+        <span className={styles.loginBadge}>
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ flexShrink: 0 }}
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          Requires login
+        </span>
+      )}
       {version && (
         <div className={styles.downloadCardMeta}>
           <span className={styles.downloadCardVersion}>v{version}</span>
@@ -720,26 +903,28 @@ function DownloadCard({
         </div>
       )}
 
-      <div className={styles.downloadCardFooter}>
-        {docsLink && (
-          <Link
-            to={useBaseUrl(docsLink)}
-            className={styles.downloadCardFooterLink}
-          >
-            Setup guide
-          </Link>
-        )}
-        {previousVersions && (
-          <a
-            href={previousVersions}
-            className={styles.downloadCardFooterLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Previous versions <ExternalLinkIcon />
-          </a>
-        )}
-      </div>
+      {(docsLink || previousVersions) && (
+        <div className={styles.downloadCardFooter}>
+          {docsLink && (
+            <Link
+              to={useBaseUrl(docsLink)}
+              className={styles.downloadCardFooterLink}
+            >
+              Setup guide
+            </Link>
+          )}
+          {previousVersions && (
+            <a
+              href={previousVersions}
+              className={styles.downloadCardFooterLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Previous versions <ExternalLinkIcon />
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -845,7 +1030,7 @@ function Downloads() {
           )}
 
           <div
-            className={clsx(bwcStyles.downloadsGrid, styles.downloadsGridFull)}
+            className={clsx(bwcStyles.downloadsGrid, styles.downloadsGridTwo)}
           >
             <GettingStartedCard activeOS={activeOS} />
             <DownloadCard
@@ -885,11 +1070,11 @@ function Downloads() {
 
           <div className={styles.additionalReleasesSection}>
             <h2 className={styles.additionalReleasesTitle}>
-              Additional releases
+              Additional downloads
             </h2>
             <p className={styles.additionalReleasesSub}>
-              Explore orchestration and connector release streams, plus
-              enterprise-only artifacts.
+              Get the latest Orchestration Cluster and connector releases, and
+              browse enterprise downloads.
             </p>
             <div
               className={clsx(
@@ -908,6 +1093,7 @@ function Downloads() {
                   links={resource.links}
                   primaryLink={resource.primaryLink}
                   previousVersions={resource.previousVersions}
+                  loginRequired={resource.loginRequired}
                   activeOS={activeOS}
                 />
               ))}

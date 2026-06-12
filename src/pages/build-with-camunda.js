@@ -750,8 +750,8 @@ function BuildWithCamunda() {
                     <CheckIcon color="#22a06b" /> AI agent skills built in
                   </li>
                   <li>
-                    <CheckIcon color="#22a06b" /> Comes with free LLM tokens to
-                    run your first agent
+                    <CheckIcon color="#22a06b" /> Free LLM tokens to run your
+                    first agent!
                   </li>
                 </ul>
                 <span className={styles.heroCardCtaAlt}>
