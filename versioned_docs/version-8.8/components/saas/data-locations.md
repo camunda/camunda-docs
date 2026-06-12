@@ -15,17 +15,13 @@ Learn more about where your Camunda 8 SaaS data is located and how data is handl
 Unless specifically mentioned, Camunda does not process personal data on behalf of its customers. It is the responsibility of you as the customer to decide whether to use Camunda for processing personal data.
 :::
 
-:::note planned changes from GCP to AWS
-Some components are changing from GCP to AWS as part of planned improvements to Camunda 8 SaaS. For example, Console and connector secrets are planned to change to AWS hosting in December 2025.
-:::
-
 ## Alerts
 
 Camunda 8 [Alerts](/components/console/manage-clusters/manage-alerts.md) can notify you when process instances stop with an error.
 
 | Host location     | Data handled                                          | Personal data processing |
 | :---------------- | :---------------------------------------------------- | :----------------------- |
-| Belgium, EU (GCP) | Route alerts containing administrative metadata only. | N/A                      |
+| Germany, EU (AWS) | Route alerts containing administrative metadata only. | N/A                      |
 
 :::note optional
 Camunda 8 Alerts are optional. This information only applies if you use Alerts.
@@ -52,7 +48,7 @@ The Camunda‑hosted [Console](/components/console/introduction-to-console.md) a
 
 | Host location                                                        | Data handled                                      | Personal data processing                                                                                                                                                        |
 | :------------------------------------------------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <p>Belgium, EU (GCP)</p><p>From December 2025: Germany, EU (AWS)</p> | Only stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
+| Germany, EU (AWS) | Only stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
 
 ## Identity
 
@@ -104,4 +100,4 @@ You can use the Camunda‑hosted [Web Modeler](/components/modeler/web-modeler/i
 
 | Host location     | Data handled                                   | Personal data processing                   |
 | :---------------- | :--------------------------------------------- | :----------------------------------------- |
-| Belgium, EU (GCP) | Only stores process models (diagrams/designs). | Not intended for personal data processing. |
+| Germany, EU (AWS) | Only stores process models (diagrams/designs). | Not intended for personal data processing. |

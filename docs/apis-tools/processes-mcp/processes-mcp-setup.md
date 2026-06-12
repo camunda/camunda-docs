@@ -125,7 +125,7 @@ For example, use the following in `claude_desktop_config.json` for Claude Code:
     "camunda-processes": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@camunda8/cli", "mcp-proxy"],
+      "args": ["-y", "@camunda8/cli", "mcp-proxy", "/mcp/processes"],
       "env": {
         "CAMUNDA_BASE_URL": "https://<cluster-base-url>",
         "CAMUNDA_CLIENT_ID": "<client-id>",

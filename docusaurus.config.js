@@ -277,6 +277,48 @@ module.exports = {
       },
     ],
     [
+      // Hub API Self-Managed docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsm-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsm: {
+            specPath: "api/hubsm/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-sm/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
+      // Hub API SaaS docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsaas-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsaas: {
+            specPath: "api/hubsaas/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-saas/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
       // RSS feed for security notices
       "./static/plugins/notices-feed",
       {
@@ -467,8 +509,8 @@ module.exports = {
               href: "https://camunda.com/services/enterprise-support-guide/",
             },
             {
-              label: "Developers",
-              href: "https://developers.camunda.com/",
+              label: "Downloads",
+              to: "/downloads",
             },
             {
               label: "Academy",
@@ -521,7 +563,7 @@ module.exports = {
           items: [
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              to: "/build-with-camunda",
             },
             {
               label: "Support and feedback",
@@ -548,10 +590,6 @@ module.exports = {
               href: "https://camunda.com/developers/how-to-contribute/",
             },
             {
-              label: "Developer resources",
-              href: "https://camunda.com/developers/",
-            },
-            {
               label: "Subscribe",
               href: "https://camunda.com/developers/developer-community-updates/",
             },
@@ -560,6 +598,10 @@ module.exports = {
         {
           title: "Camunda",
           items: [
+            {
+              label: "Downloads",
+              to: "/downloads",
+            },
             {
               label: "Web Modeler",
               href: "https://camunda.io",

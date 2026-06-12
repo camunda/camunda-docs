@@ -50,3 +50,9 @@ readonly TOOL_CALLING: "TOOL_CALLING" = 'TOOL_CALLING';
 ```ts
 readonly TOOL_DISCOVERY: "TOOL_DISCOVERY" = 'TOOL_DISCOVERY';
 ```
+
+### UNKNOWN
+
+```ts
+readonly UNKNOWN: "UNKNOWN" = 'UNKNOWN';
+```

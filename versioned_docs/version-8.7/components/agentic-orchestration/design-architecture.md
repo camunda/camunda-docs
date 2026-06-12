@@ -42,7 +42,7 @@ Follow these principles when designing your agentic orchestration solution:
 
 - **Prompt versioning**: Version every prompt, so you can revert to using a previous prompt when required.
 
-### Mixing Agents with Workflow patterns
+### Mixing agents with workflow patterns
 
 <p><img src={WorkflowImg} style={{marginBottom: '0'}} title="Diagram showing how to mix agents into your workflow patterns" className="img-transparent"/></p>
 
