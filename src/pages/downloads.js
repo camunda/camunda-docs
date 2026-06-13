@@ -630,85 +630,6 @@ const ADDITIONAL_RELEASES = [
 
 /* ─── CLI snippet (matches build-with-camunda terminal style) ─── */
 
-function Snippet({ lines }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    const text = lines.join("\n");
-    if (navigator?.clipboard?.writeText) {
-      navigator.clipboard.writeText(text).then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-      });
-    }
-  };
-
-  return (
-    <div className={bwcStyles.terminalWindow} style={{ margin: "0 0 0.5rem" }}>
-      <div className={bwcStyles.terminalHeader}>
-        <span
-          className={bwcStyles.terminalDot}
-          style={{ background: "#ff5f57" }}
-        />
-        <span
-          className={bwcStyles.terminalDot}
-          style={{ background: "#febc2e" }}
-        />
-        <span
-          className={bwcStyles.terminalDot}
-          style={{ background: "#28c840" }}
-        />
-      </div>
-      <div className={bwcStyles.terminalBody}>
-        <button
-          type="button"
-          aria-label={copied ? "Copied" : "Copy code to clipboard"}
-          title={copied ? "Copied" : "Copy"}
-          className={clsx(
-            bwcStyles.copyButton,
-            copied && bwcStyles.copyButtonCopied
-          )}
-          onClick={handleCopy}
-        >
-          <span className={bwcStyles.copyButtonIcons} aria-hidden="true">
-            <svg
-              viewBox="0 0 24 24"
-              className={bwcStyles.copyIcon}
-              width="16"
-              height="16"
-            >
-              <path
-                fill="currentColor"
-                d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
-              />
-            </svg>
-            <svg
-              viewBox="0 0 24 24"
-              className={bwcStyles.successIcon}
-              width="16"
-              height="16"
-            >
-              <path
-                fill="currentColor"
-                d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
-              />
-            </svg>
-          </span>
-        </button>
-        <pre className={bwcStyles.terminalPre}>
-          {lines.map((line, i) => (
-            <React.Fragment key={i}>
-              <span style={{ color: "#78a9ff", userSelect: "none" }}>$ </span>
-              {line}
-              {i < lines.length - 1 ? "\n" : ""}
-            </React.Fragment>
-          ))}
-        </pre>
-      </div>
-    </div>
-  );
-}
-
 function BundleButtons({ activeOS }) {
   const links = GETTING_STARTED.links[activeOS] || [];
   return (
@@ -722,7 +643,7 @@ function BundleButtons({ activeOS }) {
   );
 }
 
-/* ─── Getting Started card: CLI + bundle, stacked ─── */
+/* ─── Getting Started card: version, date, and bundle download ─── */
 
 function GettingStartedCard({ activeOS }) {
   return (
@@ -735,8 +656,8 @@ function GettingStartedCard({ activeOS }) {
       </div>
       <h3 className={bwcStyles.downloadBlockTitle}>Getting Started Package</h3>
       <p className={styles.downloadCardDesc}>
-        Desktop Modeler, runtime, and example processes. Pick whichever path
-        fits your setup.
+        Prebuilt bundle with Desktop Modeler, the Camunda 8 runtime, and example
+        processes for local development.
       </p>
       <div className={styles.downloadCardMeta}>
         <span className={styles.downloadCardVersion}>
@@ -745,30 +666,13 @@ function GettingStartedCard({ activeOS }) {
         <span className={styles.downloadCardDate}>{GETTING_STARTED.date}</span>
       </div>
 
-      <div className={styles.splitStack}>
-        <div className={styles.splitSection}>
-          <p className={styles.splitColumnHeading}>Install via CLI</p>
-          <Snippet
-            lines={[
-              "npm install -g @camunda8/cli",
-              `c8ctl cluster start ${GETTING_STARTED.version}`,
-            ]}
-          />
-          <p className={styles.splitColumnBlurb}>Requires Node.js 18+.</p>
-        </div>
+      <BundleButtons activeOS={activeOS} />
 
-        <div className={styles.splitDividerHorizontal}>
-          <span className={styles.splitDividerLabel}>OR</span>
-        </div>
-
-        <div className={styles.splitSection}>
-          <p className={styles.splitColumnHeading}>Download bundle</p>
-          <BundleButtons activeOS={activeOS} />
-          <p className={styles.splitColumnBlurb}>
-            Extract and run. No Node.js required.
-          </p>
-        </div>
-      </div>
+      <p className={styles.downloadCardNote}>
+        Unzip the bundle, then start Camunda 8 Run from the extracted folder
+        with <code>camunda-start.sh</code> on macOS/Linux or
+        <code>camunda-start.bat</code> on Windows.
+      </p>
 
       <div className={styles.downloadCardFooter}>
         <Link
