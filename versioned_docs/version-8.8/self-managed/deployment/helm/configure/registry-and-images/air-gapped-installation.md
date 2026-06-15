@@ -124,7 +124,9 @@ docker pull registry.camunda.cloud/bitnami/postgresql:latest
 ### Access enterprise images with Skopeo
 
 :::note Registry migration notice
-On November 30, 2025, our image vendor migrated its repositories. Pulling images is unaffected: any image can still be pulled when you reference its exact tag. Tag listing is affected. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI only return tags cached since the migration. The listed tags are therefore an incomplete view of what is available, because the registry stores only cached images, not the full upstream catalog. For the list of supported images and tags, refer to the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+On November 30, 2025, our image vendor migrated its repositories. Pulling images is unaffected: any image can still be pulled when you reference its exact tag. Tag listing is affected. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI only return tags cached since the migration. The listed tags are therefore an incomplete view of what is available, because the registry stores only cached images, not the full upstream catalog.
+
+For the list of supported images and tags, refer to the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 :::
 
 If you use Bitnami Premium images from the `vendor-ee` registry, you can use [Skopeo](https://github.com/containers/skopeo) to copy images directly to your private registry without requiring Docker locally:

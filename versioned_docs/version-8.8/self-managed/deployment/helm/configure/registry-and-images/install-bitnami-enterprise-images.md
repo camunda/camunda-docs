@@ -196,7 +196,9 @@ When using Bitnami images, consider these constraints:
 ## Compatibility note
 
 :::note Registry migration notice
-On November 30, 2025, our image vendor migrated its repositories. Pulling images is unaffected: any image can still be pulled when you reference its exact tag. Tag listing is affected. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI only return tags cached since the migration. The listed tags are therefore an incomplete view of what is available, because the registry stores only cached images, not the full upstream catalog. For the list of supported images and tags, refer to the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+On November 30, 2025, our image vendor migrated its repositories. Pulling images is unaffected: any image can still be pulled when you reference its exact tag. Tag listing is affected. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI only return tags cached since the migration. The listed tags are therefore an incomplete view of what is available, because the registry stores only cached images, not the full upstream catalog.
+
+For the list of supported images and tags, refer to the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 :::
 
 This configuration follows Bitnami's official image and chart usage guidelines. For licensing, support levels, and CVE management, refer to [Bitnami Documentation](https://docs.bitnami.com/) and [Bitnami Enterprise](https://bitnami.com/enterprise).
