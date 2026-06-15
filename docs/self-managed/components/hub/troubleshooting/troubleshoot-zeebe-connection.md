@@ -59,7 +59,7 @@ intermediate certificates](https://nginx.org/en/docs/http/configuring_https_serv
 ### OAuth token cache for the `modeler-restapi` process
 
 When using the `OAuth` authentication method for deploying to Zeebe, Web Modeler caches OAuth tokens in memory by
-default. No filesystem access is required, so running `modeler-restapi` as a non-root user (e.g. via Kubernetes'
+default. No filesystem access is required, so running `modeler-restapi` as a non-root user (for example, via Kubernetes'
 `securityContext.runAsUser` option) or on a read-only container filesystem works out of the box.
 
 If you want to persist tokens across restarts of `modeler-restapi`, opt in to a file-based cache by setting the

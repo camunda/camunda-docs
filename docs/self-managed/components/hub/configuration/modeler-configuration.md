@@ -425,7 +425,7 @@ To customize the client configuration, you can provide optional properties.
 
 <TabItem value="envVars">
 
-| Environment variable            | Description                                                                                                                            | Example value                    | Default Value    |
+| Environment variable            | Description                                                                                                                            | Example value                    | Default value    |
 | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------- |
 | `CAMUNDA_CA_CERTIFICATE_PATH`   | [optional]<br/>Path to a root CA certificate to be used instead of the certificate in the default store.                               | `/path/to/certificate`           | -                |
 | `CAMUNDA_CLIENT_CONFIG_PATH`    | [optional]<br/>Path to a file used to cache the client's OAuth credentials on disk. When unset, credentials are cached in memory only. | `/path/to/credentials/cache.txt` | _in-memory only_ |
@@ -768,7 +768,7 @@ See the [Helm chart values docs](https://artifacthub.io/packages/helm/camunda/ca
 
 ### Logging
 
-| Environment variable | Description                                                                                                                     | Example value | Default Value |
+| Environment variable | Description                                                                                                                     | Example value | Default value |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
 | `LOG_CHANNEL`        | [optional]<br/>Log channel driver, see [Laravel documentation](https://laravel.com/docs/10.x/logging#available-channel-drivers) | `single`      | `stack`       |
 
@@ -776,7 +776,7 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 
 ### SSL
 
-| Environment variable    | Description                                                                    | Example value                   | Default Value |
+| Environment variable    | Description                                                                    | Example value                   | Default value |
 | ----------------------- | ------------------------------------------------------------------------------ | ------------------------------- | ------------- |
 | `PUSHER_SSL_CERT`       | [optional]<br/>Path to a PEM-encoded SSL certificate file.                     | `/full/path/to/certificate.pem` | -             |
 | `PUSHER_SSL_KEY`        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate. | `/full/path/to/key.pem`         | -             |

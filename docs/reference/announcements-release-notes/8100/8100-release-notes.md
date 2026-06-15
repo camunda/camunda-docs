@@ -304,8 +304,8 @@ The Camunda Java client now caches OAuth credentials **in memory by default**. T
 Why this change:
 
 - The previous default tried to create `$HOME/.camunda/credentials` on first use. In hardened container environments — non-root users (Kubernetes `securityContext.runAsUser`, OpenShift), read-only root filesystems, immutable images — this raised `AccessDeniedException`/`IOException` at first cache write. Affected users had to apply a non-obvious workaround (mount a writable volume and point an environment variable at it) just to get a client to start.
-- Memory-only caching removes that footgun: clients work out of the box in any deployment topology, and the in-process token cache plus proactive refresh still avoids unnecessary token endpoint calls during a JVM's lifetime.
-- The file cache had also been a source of latent corruption when multiple JVMs shared the same `$HOME`; making it opt-in scopes its use to deployments where persistence across restarts is genuinely needed.
+- Memory-only caching removes that footgun: clients work out of the box in any deployment topology, and the in-process token cache plus proactive refresh still avoid unnecessary token endpoint calls during a JVM's lifetime.
+- The file cache had also been a source of latent corruption when multiple JVMs shared the same `$HOME`; making it opt-in restricts its use to deployments where persistence across restarts is genuinely needed.
 
 How to opt in to the file-based cache (behavior identical to pre-8.10):
 
