@@ -185,7 +185,7 @@ The following are suggested minimum requirements to get started. There is no one
   - CPU: 4 modern cores
   - Memory: 16 GiB
 - **Persistent volumes**
-  - 3,000 IOPS
+  - 3,000 IOPS baseline
   - 125 MiB/s throughput
   - 32 GiB
   - _Avoid burstable disk types_
