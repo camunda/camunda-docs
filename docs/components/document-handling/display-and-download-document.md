@@ -46,11 +46,11 @@ When a user opens the task, they can view and download the document directly fro
 
 ## View and download a document in Operate
 
-When a process instance variable references a document, you can view, preview, and download that document directly from the **Variables** tab of the process instance view in Operate, without making REST API calls.
+When a process instance variable references a document, you can preview and download that document directly from the **Variables** tab in the process instance detail view.
 
-![Document reference variables in the Operate Variables tab](./img/document-preview-in-operate.png)
+Document variables display the document's file name, type, and size. You can preview supported formats (PDF, JSON, plain text, PNG, JPG) directly in Operate, or download any document to your local machine. Use the **All / Documents** filter to show only document variables in the table.
 
-Document reference variables render with a document icon, file name, type, and size instead of raw JSON. Each document has preview and download actions, and an **All / Documents** filter above the variables table narrows the list to variables that reference documents. To inspect the underlying reference value, use the expand button on the variable.
+To inspect the underlying document reference metadata (such as document ID), expand the variable row.
 
 ## Download a document using the Orchestration Cluster REST API
 
