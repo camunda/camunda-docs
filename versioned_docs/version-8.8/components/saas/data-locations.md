@@ -65,6 +65,18 @@ The Camunda‑hosted [Console](/components/console/introduction-to-console.md) a
 
 :::
 
+## App Integrations
+
+App Integrations enable connection between Camunda 8 clusters and your productivity tools, including Microsoft Teams and Slack.
+
+| Host location     | Data handled                                                               | Personal data processing                                                                                                                                                                      |
+| :---------------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Germany, EU (AWS) | User accounts and authentication metadata. Separate from process payloads. | Limited to account/authentication data by design to access the Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
+
+:::note optional
+App Integrations are optional. This information only applies if you use App Integrations.
+:::
+
 ## Orchestration Clusters and backups
 
 You can choose a [region](regions.md) in **GCP** or **AWS**. Each [Orchestration Cluster](/components/orchestration-cluster.md) uses a dedicated infrastructure.
