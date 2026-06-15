@@ -27,6 +27,20 @@
       "label": "Update an agent instance"
     }
   ],
+  "createAgentInstanceHistoryItem": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "CreateAgentInstanceHistoryItem",
+      "label": "Append an agent instance history item"
+    }
+  ],
+  "searchAgentInstanceHistory": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "SearchAgentInstanceHistory",
+      "label": "Search agent instance history"
+    }
+  ],
   "getTopology": [
     {
       "file": "Client.cs",
@@ -1064,6 +1078,13 @@
       "file": "VariableElement.cs",
       "region": "SearchElementInstanceIncidents",
       "label": "Search element instance incidents"
+    }
+  ],
+  "searchElementInstanceWaitStates": [
+    {
+      "file": "VariableElement.cs",
+      "region": "SearchElementInstanceWaitStates",
+      "label": "Search element instance wait states"
     }
   ],
   "createElementInstanceVariables": [
