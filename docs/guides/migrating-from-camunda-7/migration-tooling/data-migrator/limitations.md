@@ -48,7 +48,7 @@ The runtime migration has the following limitations.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5175
 - Data changed via user operations
   - Data set via user operations like setting a due date to a user task cannot be migrated currently.
-  -  Job and process priority values are not migrated. During migration a new Camunda 8 process instance is created, so it uses the job priorities defined on its Camunda 8 process definition rather than any values from the Camunda 7 instance.
+  - Job and process priority values are not migrated. During migration a new Camunda 8 process instance is created, so it uses the job priorities defined on its Camunda 8 process definition rather than any values from the Camunda 7 instance.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5182
 
 ### Variables
