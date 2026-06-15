@@ -179,7 +179,7 @@ Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, 
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a starting baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
+The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
 
 - **4 Kubernetes nodes**
   - CPU: 4 modern cores
