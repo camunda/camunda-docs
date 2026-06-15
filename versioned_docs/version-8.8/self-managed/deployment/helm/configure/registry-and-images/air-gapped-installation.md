@@ -101,7 +101,7 @@ The open-source variant is based on the `bitnamilegacy` repository and receives 
 :::tip About the original Bitnami Keycloak images
 If you prefer to use the original Bitnami Keycloak images directly (`bitnamilegacy/keycloak` or `registry.camunda.cloud/vendor-ee/keycloak`), you can override the image in your Helm values. This is not required, as Camunda Keycloak images are fully compatible and recommended.
 
-Note that `registry.camunda.cloud/vendor-ee/keycloak` is a proxied path: its tags are not fully listable (see the [registry migration notice](#access-enterprise-images-with-skopeo)), which can break registry mirrors that sync by tag enumeration. For enterprise deployments, prefer `registry.camunda.cloud/keycloak-ee/keycloak`, which is fully enumerable.
+Note that `registry.camunda.cloud/vendor-ee/keycloak` is a proxied path: its tags are not fully listable (see the [registry migration notice](#access-enterprise-images-with-skopeo)), which can break registry mirrors that sync from the tag list. For enterprise deployments, prefer `registry.camunda.cloud/keycloak-ee/keycloak`, which is fully listable.
 :::
 
 ### Access Camunda images from the Camunda registry
@@ -123,8 +123,8 @@ docker pull registry.camunda.cloud/bitnami/postgresql:latest
 
 ### Access enterprise images with Skopeo
 
-:::info Registry migration notice
-On November 30, 2025, our image vendor migrated its repositories. Pulling images is unaffected: any image can still be pulled when you reference its exact tag. Tag listing is affected: for `vendor-ee/*` paths, `skopeo` and the Harbor web UI only return tags cached since the migration, so the listed tags are an incomplete view of what is available — the registry exposes cached images, not the full upstream catalog. For the list of supported images and tags, refer to the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+:::note Registry migration notice
+On November 30, 2025, our image vendor migrated its repositories. Pulling images is unaffected: any image can still be pulled when you reference its exact tag. Tag listing is affected. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI only return tags cached since the migration. The listed tags are therefore an incomplete view of what is available, because the registry stores only cached images, not the full upstream catalog. For the list of supported images and tags, refer to the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 :::
 
 If you use Bitnami Premium images from the `vendor-ee` registry, you can use [Skopeo](https://github.com/containers/skopeo) to copy images directly to your private registry without requiring Docker locally:

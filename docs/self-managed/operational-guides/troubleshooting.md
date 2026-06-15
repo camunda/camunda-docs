@@ -337,10 +337,10 @@ skopeo login registry.camunda.cloud --username <your-username> --password <your-
 skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
 
-:::info Registry migration notice
-As of November 30, 2025, our image vendor migrated its repositories. Images published before this date remain available and can still be pulled when you reference their exact tag, but they no longer appear in `skopeo` tag listings. For `vendor-ee/*` paths, tag enumeration only returns images cached after the migration, so neither `skopeo` nor the Harbor web UI lists the complete set of available versions — the registry only exposes cached images, not the full upstream catalog. Pulling an image by its exact tag still works even when that tag is not listed.
+:::note Registry migration notice
+On November 30, 2025, our image vendor migrated its repositories. Pulling images is unaffected: any image can still be pulled when you reference its exact tag. Tag listing is affected. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI only return tags cached since the migration. The listed tags are therefore an incomplete view of what is available, because the registry stores only cached images, not the full upstream catalog.
 
-For the list of supported images and tags, refer to the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull from an enumerable repository such as `registry.camunda.cloud/camunda/<image>` or `registry.camunda.cloud/keycloak-ee/keycloak`; for `vendor-ee/<image>` paths, pull or mirror by the exact tag instead of relying on tag enumeration.
+For the list of supported images and tags, refer to the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull from a fully listed repository such as `registry.camunda.cloud/camunda/<image>` or `registry.camunda.cloud/keycloak-ee/keycloak`. For `vendor-ee/<image>` paths, pull or mirror by the exact tag instead of relying on the tag list.
 :::
 
 ## Incorrect authorizations when deploying resources from Modeler
