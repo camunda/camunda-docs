@@ -97,6 +97,8 @@ The open-source variant is based on the `bitnamilegacy` repository and receives 
 
 :::tip About the original Bitnami Keycloak images
 If you prefer to use the original Bitnami Keycloak images directly (`bitnamilegacy/keycloak` or `registry.camunda.cloud/vendor-ee/keycloak`), you can override the image in your Helm values. This is not required, as Camunda Keycloak images are fully compatible and recommended.
+
+Note that `registry.camunda.cloud/vendor-ee/keycloak` is a proxied path: its tags are not fully listable (see the [registry migration notice](#access-enterprise-images-with-skopeo)), which can break registry mirrors that sync by tag enumeration. For enterprise deployments, prefer `registry.camunda.cloud/keycloak-ee/keycloak`, which is fully enumerable.
 :::
 
 A helper script is available in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) to pull and save Docker images.
