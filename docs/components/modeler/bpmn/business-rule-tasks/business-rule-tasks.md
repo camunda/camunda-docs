@@ -46,7 +46,7 @@ The `bindingType` attribute determines which version of the called decision is e
 
 - `latest`: The latest deployed version at the moment the business rule task is activated.
 - `deployment`: The version that was deployed together with the currently running version of the process.
-- `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.
+- `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute. Usually, the `versionTag` is defined as a [static value](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `v1.0`), but it can also be defined as an [expression](/components/concepts/expressions.md) (e.g. `= "v" + version`). The expression is evaluated on activating the business rule task (or when an incident at the business rule task is resolved) after input mappings have been applied. The expression must result in a `string`.
 
 To learn more about choosing binding types, see [choosing the resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
@@ -125,13 +125,25 @@ A business rule task with a called decision that uses the `deployment` binding t
 </bpmn:businessRuleTask>
 ```
 
-A business rule task with a called decision that uses the `versionTag` binding type:
+A business rule task with a called decision that uses the `versionTag` binding type with a static version tag:
 
 ```xml
 <bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
   <bpmn:extensionElements>
     <zeebe:calledDecision decisionId="shipping_box_size"
                           bindingType="versionTag" versionTag="v1.0"
+                          resultVariable="boxSize" />
+  </bpmn:extensionElements>
+</bpmn:businessRuleTask>
+```
+
+A business rule task with a called decision that uses the `versionTag` binding type with expressions for both `decisionId` and `versionTag`:
+
+```xml
+<bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
+  <bpmn:extensionElements>
+    <zeebe:calledDecision decisionId="= \"shipping_box_size_\" + countryCode"
+                          bindingType="versionTag" versionTag="= decisionVersion"
                           resultVariable="boxSize" />
   </bpmn:extensionElements>
 </bpmn:businessRuleTask>
