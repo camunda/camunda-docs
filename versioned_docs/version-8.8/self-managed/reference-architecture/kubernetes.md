@@ -181,7 +181,7 @@ The following are suggested minimum requirements. Sizing depends heavily on your
 - **Persistent volumes**
   - 1,000 IOPS
   - 32 GiB
-  - Use **SSD-backed** volumes only. HDD-backed volume types (such as AWS EBS `sc1` and `st1`) and burstable disk types cannot meet Zeebe's Raft flush latency requirements and are not supported.
+  - Use SSD-backed volumes. HDD-backed volume types (such as AWS EBS `sc1` and `st1`) cannot meet Zeebe's Raft flush latency requirements and are not supported.
 
 #### Networking
 
@@ -298,6 +298,7 @@ Our reference architectures are continuously validated against the latest stable
   - Only if `gp3` isn't available
   - IOPS performance [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance)
   - Minimum 34 GiB for >1,000 IOPS
+  - `gp2` is burst-based, so size it for the baseline (non-burst) IOPS your workload must sustain
 - **Unsupported volume types**: HDD-backed `sc1` (Cold HDD) and `st1` (Throughput HDD). These volume types cannot meet the synchronous disk flush requirements of Zeebe's Raft consensus protocol. Additionally, `sc1` and `st1` use burst credits for throughput — once exhausted, write latency spikes to hundreds of milliseconds, causing persistent Raft append timeouts and leader instability.
 
 #### Load balancer

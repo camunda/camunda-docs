@@ -100,6 +100,7 @@ If you want to use another NFS, it must meet these requirements:
 
 Regardless of the type, the network storage volumes you use must meet these requirements:
 
+- They must be SSD-backed. HDD-backed volume types (such as AWS EBS `sc1` and `st1`) cannot meet these IOPS and latency targets and are not supported.
 - They must be capable of **at least 1,000 IOPS**.
 - The latency of write/msync operations must be in the **low single digit milliseconds** under normal conditions. Ideally, it's in the order of microseconds.
 - The p99 latency must be **lower than 300 milliseconds**.
