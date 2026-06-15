@@ -134,6 +134,8 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 The following matrix shows which component versions work together.
 
+For Helm-managed deployments, use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) as the source of truth for the component versions bundled in a supported chart release. Do not manually override bundled component image tags unless a specific upgrade guide or release note instructs you to do so.
+
 <Tabs
 defaultValue="version-8-7-x"
 values={[
