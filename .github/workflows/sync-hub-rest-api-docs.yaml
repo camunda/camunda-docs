@@ -101,7 +101,7 @@ jobs:
           npm run api:generate:hubsm
 
       - name: Upload Self-Managed changes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sm-changes
           path: |
@@ -163,7 +163,7 @@ jobs:
           npm run api:generate:hubsaas
 
       - name: Upload SaaS changes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: saas-changes
           path: |
@@ -182,13 +182,13 @@ jobs:
           path: docs
 
       - name: Download Self-Managed changes
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: sm-changes
           path: docs/
 
       - name: Download SaaS changes
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: saas-changes
           path: docs/
