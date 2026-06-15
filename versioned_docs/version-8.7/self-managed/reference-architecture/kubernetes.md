@@ -218,6 +218,7 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 - Volume type: SSD
   - 1,000 - 3,000 IOPS per volume
   - throughput of 1,000 MB/s per volume
+- **Unsupported volume types**: HDD-backed volumes cannot meet Zeebe's Raft flush latency requirements. Choose an SSD-backed storage class.
 
 #### Supported versions
 
@@ -303,6 +304,7 @@ Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingre
 - Volume alternative: Premium SSD
   - IOPS performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds)
   - Minimum 256 GiB (P15) for > 1,000 IOPS
+- **Unsupported volume types**: Standard HDD cannot meet Zeebe's Raft flush latency requirements. Avoid Standard SSD unless sized to sustain the required IOPS without relying on bursting.
 
 #### Load Balancer
 
@@ -317,6 +319,7 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 - Volume type: Performance (SSD) persistent disks
   - IOPS performance [varies based on volume size](https://cloud.google.com/compute/docs/disks/performance#performance_factors)
   - Minimum 34 GiB for > 1,000 IOPS
+- **Unsupported volume types**: Standard persistent disks (`pd-standard`, HDD-backed) cannot meet Zeebe's Raft flush latency requirements. Use SSD-backed (`pd-ssd`) volumes.
 
 #### Load Balancer
 
