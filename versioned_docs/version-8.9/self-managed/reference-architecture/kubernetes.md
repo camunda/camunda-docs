@@ -191,7 +191,7 @@ The following are suggested minimum requirements to get started. There is no one
   - _Avoid burstable disk types_
 
 :::note Storage performance figures are a baseline, not a strict requirement
-The storage performance figures above and in the distribution- and cloud-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a baseline to get started, not authoritative benchmarked requirements. There is no dedicated, provider-specific benchmark behind them, and the same target applies regardless of provider (OpenShift, EKS, AKS, GKE, or generic Kubernetes). Actual needs vary with your workload, throughput, data retention, and exporter load. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
+The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes), there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
 :::
 
 #### Networking
