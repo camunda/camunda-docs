@@ -156,8 +156,8 @@ For the full setup including dependencies and project structure, see [Getting st
 
 The test uses the prompt `"Send Ervin a joke"`. In response, the agent:
 
-- Calls `ListUsers` and `Jokes_API` in any order.
-- Collects feedback through the `User_Feedback` user task.
+- Calls `List Users` and `Jokes API` in any order.
+- Collects feedback through the `User Feedback` user task.
 
 With [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior), you can register background reactions that monitor the process state and execute actions as conditions are met, without blocking the test thread. Register behaviors before starting the process; they then react independently as the process progresses.
 
@@ -173,7 +173,7 @@ First, define records for the tool call results:
 record User(int id, String name, String username) {}
 ```
 
-Register a behavior that completes the `ListUsers` tool with a mock user list when the agent invokes it:
+Register a behavior that completes the `List Users` tool with a mock user list when the agent invokes it:
 
 ```java
 processTestContext
@@ -190,7 +190,7 @@ processTestContext
                     new User(2, "Ervin Howell", "Antonette")))));
 ```
 
-Register a behavior that completes the `Jokes_API` tool. This behavior uses chained `.then()` calls to return different jokes on repeated invocations:
+Register a behavior that completes the `Jokes API` tool. This behavior uses chained `.then()` calls to return different jokes on repeated invocations:
 
 ```java
 String firstJoke = "Why did the workflow cross the road? To get to the happy path.";
@@ -211,9 +211,11 @@ processTestContext
 
 ### Complete user tasks
 
-The `User_Feedback` user task is outside the agent and prompts the user to approve the current joke or request a different one. Use chained `.then()` calls to handle repeated invocations: the first action is consumed on the first invocation, and the last action repeats for all subsequent invocations.
+The `User Feedback` user task is outside the agent and prompts the user to approve the agent output or request a different one.
 
-Register a behavior that first rejects the joke with a follow-up request, then approves the result on the next invocation:
+Use chained `.then()` calls when a behavior should produce different results on repeated invocations: the first action is consumed on the first invocation, and the last action repeats for all subsequent invocations.
+
+For example, register a behavior that first rejects the joke with a follow-up request, then approves the result on the next invocation:
 
 ```java
 processTestContext
