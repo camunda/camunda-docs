@@ -378,7 +378,7 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 - Instance type: n(1|2)-standard-4 (4 vCPUs, 15 / 16 GiB memory)
 - Number of Kubernetes nodes: 4
 - Volume type: Performance (SSD) persistent disks
-  - IOPS performance [varies based on volume size](https://cloud.google.com/compute/docs/disks/performance#performance_factors)
+  - 3,000 IOPS baseline
   - 125 MiB/s throughput baseline
   - Minimum 34 GiB for > 1,000 IOPS
 
