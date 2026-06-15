@@ -31,7 +31,7 @@ The base URL has changed for both SaaS and Self-Managed deployments. Update any 
 | SaaS         | `https://modeler.cloud.camunda.io/api/v1` | `https://hub.cloud.camunda.io/api/v2` |
 | Self-Managed | `http://localhost:8070/api/v1`            | `http://localhost:8088/api/v2`        |
 
-When using Camunda 8 Self-Managed, the URLs are dependent on your configuration. The Self-Managed URLs and ports provided in this table are examples based on a [no-domain Helm deployment to a local kind cluster](docs/self-managed/deployment/helm/cloud-providers/kind.md?mode=no-domain#no-domain-mode-deployment).
+In Camunda 8 Self-Managed, the URLs depend on your configuration. The URLs and ports provided in this table are examples based on a [no-domain Helm deployment to a local kind cluster](/self-managed/deployment/helm/cloud-providers/kind.md#no-domain-mode-deployment).
 
 ### Authentication
 
@@ -55,8 +55,8 @@ In v2, all error responses use the [RFC 9457](https://www.rfc-editor.org/rfc/rfc
 
 In Web Modeler API v1, you used two fields to paginate items in a response:
 
-- `page` specified the page to return
-- `size` specified the number of items per page
+- `page` specified the page to return.
+- `size` specified the number of items per page.
 
 For example:
 
@@ -67,11 +67,11 @@ For example:
 }
 ```
 
-This skips the first _page_ of 20 items (indexes 0-19) and returns the second page of 20 items (indexes 20-39). If there aren't enough items to fill the second page, you receive all remaining items.
+This request skips the first _page_ of 20 items (indexes 0–19) and returns the second page of 20 items (indexes 20–39). If there aren't enough items to fill the second page, you receive all remaining items.
 
 In Camunda Hub API v2, you use a `page` object with two fields:
 
-- `page.from` specifies the offset, the item index to start searching from.
+- `page.from` specifies the offset, the item index to start from.
 - `page.limit` limits the number of items returned.
 
 For example:
@@ -85,9 +85,9 @@ For example:
 }
 ```
 
-This returns the same items as the earlier example, but uses a different method to do so. Instead of specifying the number of pages to skip, you specify the index to start _from_ (20) and the maximum amount, or _limit_, of items to return (20). This returns the items from index 20-39. Like the previous implementation, if there are fewer items than the limit, you receive all remaining items.
+Instead of specifying the number of pages to skip, you specify the index to start _from_ (20) and the maximum number, or _limit_, of items to return (20). This request returns the items at indexes 20–39. As in v1, if there are fewer items than the limit, you receive all remaining items.
 
-In addition to the different pagination method, the default page size has changed. In v1, the default page size was 10. In v2, the default limit is 100.
+In addition to the different pagination model, the default page size has changed. In v1, the default page size was 10. In v2, the default limit is 100.
 
 ### Projects
 
@@ -95,7 +95,7 @@ In v1, _projects_ were the top-level container for files and folders. In v2, _wo
 
 ### Key fields
 
-In v1, resources were identified by `Id` fields. In v2, resources are identified by `Key` fields. For example, `folderId` is now `folderKey`. Despite the name change, the _values_ of these identifiers are the same. For example, a `folderId` obtained from Web Modeler API v1 can be used as a `folderKey` in Camunda Hub API v2.
+In v1, resources were identified by `Id` fields. In v2, resources are identified by `Key` fields. For example, `folderId` is now `folderKey`. Despite the name change, the _values_ of these identifiers are the same. For example, you can use a `folderId` obtained from Web Modeler API v1 as a `folderKey` in Camunda Hub API v2.
 
 ## Files API
 
