@@ -1,7 +1,7 @@
 ---
 id: agentic-ai-aiagent-tool-definitions
-sidebar_label: Tool Definitions
-title: AI Agent Tool Definitions
+sidebar_label: Tool definitions
+title: AI Agent tool definitions
 description: Tool definitions for AI agents using the fromAi() function syntax
 ---
 
@@ -188,11 +188,11 @@ the tool.
 
 ### Document support
 
-Similar to the [user prompt](agentic-ai-aiagent.md#user-prompt) **Documents** field, tool call responses can contain
-[Camunda Document references](/self-managed/concepts/document-handling/overview.md) within arbitrary structures
-(supporting the same file types as for the user prompt).
+Tool call responses can contain [Camunda document references](/self-managed/concepts/document-handling/overview.md)
+nested anywhere within the result structure. The agent extracts these documents and passes them to the LLM as native
+content blocks.
 
-When serializing the tool call response to JSON, document references are transformed into a content block containing the plain text or base64 encoded document content, before being passed to the LLM.
+For supported file types and details on how documents are resolved, see [document support](./agentic-ai-aiagent-documents.md).
 
 ## Gateway tool definitions
 

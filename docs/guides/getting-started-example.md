@@ -41,17 +41,15 @@ You will:
   </TabItem>
   <TabItem value="nodejs">
 <ul>
-    <li>[JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/)</li>
     <li>[Node.js](https://nodejs.org/en) 20+</li>
     <li>NPM 11+</li>
 </ul>
   </TabItem>
   </Tabs>
 
-## Download the Camunda 8 starter package
+## Download the Getting Started Package
 
-Download the Camunda 8 starter package from the following website:  
-[https://developers.camunda.com/install-camunda-8/](https://developers.camunda.com/install-camunda-8/)
+Download the Getting Started Package from [Camunda Downloads](/downloads).
 
 The starter package includes the following components:
 

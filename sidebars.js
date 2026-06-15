@@ -80,6 +80,86 @@ module.exports = {
       ],
     },
   ],
+  BuildWithAI: [
+    {
+      type: "category",
+      label: "Build with AI",
+      link: {
+        type: "doc",
+        id: "guides/build-with-ai/overview",
+      },
+      items: [],
+    },
+    "guides/build-with-ai/ai-usage-guidelines",
+    {
+      type: "category",
+      label: "Agentic orchestration",
+      link: {
+        type: "doc",
+        id: "components/agentic-orchestration/agentic-orchestration-overview",
+      },
+      items: [
+        "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/camunda-provided-llm",
+        "components/agentic-orchestration/ao-design",
+        {
+          type: "category",
+          label: "Evaluate your AI agents",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
+          },
+          items: [
+            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
+          ],
+        },
+        "components/agentic-orchestration/rag-ai-agents",
+        "components/agentic-orchestration/expose-process-as-mcp-tool",
+        "components/agentic-orchestration/choose-right-model-agentic",
+        "components/agentic-orchestration/model-recommendations-agentic",
+      ],
+    },
+    {
+      type: "category",
+      label: "Intelligent document processing (IDP)",
+      link: {
+        type: "doc",
+        id: "components/hub/workspace/modeler/idp",
+      },
+      items: [
+        "components/hub/workspace/modeler/idp/idp-configuration",
+        "components/hub/workspace/modeler/idp/idp-applications",
+        "components/hub/workspace/modeler/idp/idp-document-classification",
+        {
+          type: "category",
+          label: "Document extraction",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-document-extraction",
+          },
+          items: [
+            "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
+            "components/hub/workspace/modeler/idp/idp-structured-extraction",
+          ],
+        },
+        // "components/hub/workspace/modeler/idp/idp-document-automation",
+        {
+          type: "category",
+          label: "Integrate IDP into your processes",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-integrate",
+          },
+          items: ["components/hub/workspace/modeler/idp/idp-example"],
+        },
+        "components/hub/workspace/modeler/idp/idp-key-concepts",
+        "components/hub/workspace/modeler/idp/idp-reference",
+      ],
+    },
+    "reference/mcp-docs/docs-mcp",
+  ],
   Components: [
     "components/components-overview",
     {
@@ -253,73 +333,6 @@ module.exports = {
         id: "components/features-integrations/features-integrations",
       },
       items: [
-        {
-          type: "category",
-          label: "Agentic orchestration",
-          link: {
-            type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration-overview",
-          },
-          items: [
-            "components/agentic-orchestration/ai-agents",
-            "components/agentic-orchestration/camunda-provided-llm",
-            "components/agentic-orchestration/ao-design",
-            {
-              type: "category",
-              label: "Evaluate your AI agents",
-              link: {
-                type: "doc",
-                id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
-              },
-              items: [
-                "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
-                "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
-                "components/agentic-orchestration/evaluate-agents/test-ai-agents",
-              ],
-            },
-            "components/agentic-orchestration/rag-ai-agents",
-            "components/agentic-orchestration/expose-process-as-mcp-tool",
-            "components/agentic-orchestration/choose-right-model-agentic",
-            "components/agentic-orchestration/model-recommendations-agentic",
-          ],
-        },
-        {
-          type: "category",
-          label: "Intelligent document processing (IDP)",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp",
-          },
-          items: [
-            "components/hub/workspace/modeler/idp/idp-configuration",
-            "components/hub/workspace/modeler/idp/idp-applications",
-            "components/hub/workspace/modeler/idp/idp-document-classification",
-            {
-              type: "category",
-              label: "Document extraction",
-              link: {
-                type: "doc",
-                id: "components/hub/workspace/modeler/idp/idp-document-extraction",
-              },
-              items: [
-                "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
-                "components/hub/workspace/modeler/idp/idp-structured-extraction",
-              ],
-            },
-            // "components/hub/workspace/modeler/idp/idp-document-automation",
-            {
-              type: "category",
-              label: "Integrate IDP into your processes",
-              link: {
-                type: "doc",
-                id: "components/hub/workspace/modeler/idp/idp-integrate",
-              },
-              items: ["components/hub/workspace/modeler/idp/idp-example"],
-            },
-            "components/hub/workspace/modeler/idp/idp-key-concepts",
-            "components/hub/workspace/modeler/idp/idp-reference",
-          ],
-        },
         {
           type: "category",
           label: "Robotic Process Automation (RPA)",
@@ -809,6 +822,11 @@ module.exports = {
                   label: "Git Sync",
                   id: "components/hub/workspace/manage-projects/git-sync",
                 },
+                {
+                  type: "doc",
+                  label: "Recover deleted resources",
+                  id: "components/hub/workspace/manage-projects/recently-deleted",
+                },
               ],
             },
             {
@@ -1013,6 +1031,7 @@ module.exports = {
                       ],
                     },
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
@@ -1290,6 +1309,8 @@ module.exports = {
         require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-saas/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-sm/sidebar-schema"),
         {
           type: "category",
           label: "Optimize API",
@@ -1329,10 +1350,10 @@ module.exports = {
             "apis-tools/optimize-api/variable-labeling",
           ],
         },
-        require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
+            require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -1524,7 +1545,10 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",
-      items: ["apis-tools/migration-manuals/migrate-to-810"],
+      items: [
+        "apis-tools/migration-manuals/migrate-to-810",
+        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
+      ],
     },
   ],
   Reference: [
@@ -1606,7 +1630,6 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/contact",
-    "reference/mcp-docs/docs-mcp",
     "reference/legal",
   ],
   "Self-Managed": [
@@ -1726,6 +1749,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
@@ -1892,6 +1916,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
+                "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
               ],
             },
             {
@@ -2135,6 +2160,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/optimize-backup-and-restore",
           ],
         },
         {
@@ -2162,6 +2188,18 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Multi-tenancy",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-tenancy/multi-tenancy-overview",
+          },
+          items: [
+            "self-managed/concepts/multi-tenancy/logical-tenants",
+            "self-managed/concepts/multi-tenancy/physical-tenants",
+          ],
+        },
+        {
+          type: "category",
           label: "Audit log",
           link: {
             type: "doc",
@@ -2181,9 +2219,7 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/operational-guides/data-purge",
-        {
-          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
-        },
+        "self-managed/operational-guides/troubleshooting",
       ],
     },
     {

@@ -101,14 +101,14 @@ Camunda supports **Oracle LTS releases**.
 
 ### H2
 
-H2 is supported for development, testing, and evaluation only. Production use is not recommended.
+Camunda recommends H2 for development, testing, and evaluation. It is not recommended for production workloads.
 
-For Camunda Orchestration Cluster secondary storage, H2 is a single-broker option only:
+For Camunda Orchestration Cluster secondary storage, H2 is best suited to single-broker setups:
 
 - Multi-broker clusters with H2 are not a valid architecture.
 - H2 does not provide a shared database across brokers.
 - In-memory H2 is ephemeral and does not survive restarts.
-- File-based H2 persists on local disk and is suitable for local/dev usage only.
+- File-based H2 persists on local disk and is best suited to local and developer-focused usage.
 
 ## Supported JDBC driver versions
 
@@ -157,14 +157,14 @@ This table shows RDBMS support status by component (including RDBMS as secondary
 | :------------------------ | :----------------- | :---------------------------------------------------------------------------------------------------------------- |
 | **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                                              |
 | Tasklist UI               | ✅ Fully supported | All functionality available.                                                                                      |
-| Operate UI                | ⚠️ Limited         | Partial support in **8.9-alpha3**. See [Operate limitations](#operate-with-rdbms) below.                          |
+| Operate UI                | ✅ Fully supported | All functionality available.                                                                                      |
 | Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                                                   |
 | Web Modeler               | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md). |
 | Identity                  | ✅ Fully supported | All functionality available.                                                                                      |
 | Management API (REST API) | ✅ Fully supported | All functionality available.                                                                                      |
 
 :::note
-"Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their RDBMS support and maturity can differ by the alpha release.
+"Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their support status can differ by component.
 :::
 
 ## Known limitations
