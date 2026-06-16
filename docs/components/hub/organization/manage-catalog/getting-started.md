@@ -39,14 +39,14 @@ The Catalog connects a git repository to Hub through a CI/CD pipeline:
 The part you set up is step 2 — the connection between your repository and Hub. The rest of this guide focuses on that.
 
 :::note
-The Catalog syncs from a **single repository**. If your element templates already live together in one repository (for example, a monorepo), sync from it directly. If they are spread across several repositories, first consolidate them into one — see [Sync assets from multiple repositories](#sync-assets-from-multiple-repositories).
+The Catalog syncs from a **single repository**. If your element templates already live together in one repository (for example, a monorepo), sync from it directly. If they are spread across several repositories, first consolidate them into one — see [Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md).
 :::
 
 ## Step 1: Organize your assets
 
 Point the Catalog at a single git repository that holds your element templates. This can be an existing repository (such as a monorepo) or a dedicated one. The sync only looks at element templates and their README files; any other files in the repository — job workers, BPMN processes, forms, DMN decisions — are ignored.
 
-Each asset is grouped in its own directory:
+Each asset is grouped in its own directory. The asset directories do not have to be at the repository root — the sync discovers them wherever they are, so you can nest them under a subfolder (for example, `element-templates/`) alongside other content:
 
 ```
 your-repo/
@@ -66,7 +66,7 @@ Each asset directory contains exactly two files:
 - **README.md**: A Markdown file with metadata in the frontmatter and a description in the body. The frontmatter references the single element template file (through the `template:` field) and provides optional attributes like category and tags.
 - **Element template file** (`.json`): The element template descriptor. The `id` and `version` fields in this file are authoritative for the asset's identity and version in the Catalog, and the asset name, short description, and icon are read from this file as well.
 
-In 8.10, an asset is exactly this pair of files. Assets do not reference any other files (such as separate icon or image files): the icon is embedded in the element template JSON, and any resources the template uses (forms, called processes, job workers) are deployed separately through your existing tooling.
+In 8.10, an asset is exactly this pair of files. An asset cannot reference any other files: the README supports Markdown text only (embedded images and videos are not supported in this iteration), the icon is embedded in the element template JSON, and any resources the template uses (forms, called processes, job workers) are deployed separately through your existing tooling.
 
 ### Define the asset README
 
@@ -143,7 +143,7 @@ The request body is `multipart/form-data` and represents the **complete desired 
 - a `template` part containing the element template `.json` file, and
 - a `readme` part containing the `README.md` file.
 
-Each `README.md` is paired with the template named in its `template:` frontmatter. The template must be in the same directory as the README. Because the submission is the full desired state, Hub **unpublishes** any asset that exists in the Catalog but is absent from the submission (see [Step 3](#step-3-handle-asset-lifecycle)).
+Each `README.md` is paired with the template named in its `template:` frontmatter. The template must be in the same directory as the README. Because the submission is the full desired state, Hub **unpublishes** any asset that exists in the Catalog but is absent from the submission (see [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md)).
 
 ### Start from the example repository
 
@@ -199,75 +199,9 @@ The sync script in the example repository obtains an access token, discovers eac
 bash scripts/sync-catalog.sh
 ```
 
-A successful ingestion returns `204 No Content`. If the submission is invalid, the request fails with a `4xx` status and **no** changes are applied — the ingestion is validated and applied as a single transaction. For the full list of status codes and error responses, see the Camunda Hub API reference _(documentation to be added)_.
+A successful ingestion returns `204 No Content`. If the submission is invalid, the request fails with a `4xx` status and **no** changes are applied — the ingestion is validated and applied as a single transaction. For the full list of status codes and error responses, see the Camunda Hub API reference for [SaaS](/apis-tools/hub-api-saas/overview.md) and [Self-Managed](/apis-tools/hub-api-sm/overview.md).
 
-## Sync assets from multiple repositories
-
-If your element templates already live together in one repository, skip this section — Step 2 is all you need.
-
-If they are spread across several repositories, add a step that consolidates them into the single repository you sync from. A common pattern is a CI/CD job in each source repository that copies its element templates and READMEs into a dedicated collection repository when a new version is created:
-
-```yaml
-# Example: GitHub Actions workflow in a source repository
-name: Push templates to collection repo
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  push-to-collection:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source repository
-        uses: actions/checkout@v4
-
-      - name: Push element templates to collection repo
-        run: |
-          git clone https://x-access-token:${{ secrets.COLLECTION_REPO_TOKEN }}@github.com/your-org/catalog-collection.git
-          cp -r element-templates/payment-connector catalog-collection/payment-connector
-          cd catalog-collection
-          git add .
-          git commit -m "Update payment-connector templates"
-          git push
-```
-
-The collection repository then syncs to Hub exactly as described in [Step 2](#step-2-connect-the-repository-to-hub).
-
-## Step 3: Handle asset lifecycle
-
-### Unpublished assets
-
-When you submit assets to the Catalog, any asset that **already exists in Hub but is not included in the submission** is automatically unpublished.
-
-Unpublishing an asset means:
-
-- **For delivery teams** (Web Modeler users): The asset is no longer discoverable in the Catalog and cannot be applied to new diagrams. Projects that already use the template continue to work as before.
-- **For CoE members** (organization administrators): The asset stays visible so the CoE can track its remaining usage — which diagrams still reference the template — and drive the migration of those diagrams to a newer version or a different template before the asset is removed entirely.
-
-:::info
-Unpublishing is different from deprecation:
-
-- **Unpublishing** is a Catalog-level state that indicates the asset is no longer part of the current submission. Use it when an asset should no longer be offered to delivery teams — for example, when you replace a connector with a successor and want to drive migration off the old one.
-- **Deprecation** is a property within the element template file itself that flags a template as outdated while keeping it available. Use it to signal "still works, but prefer the alternative" without removing the asset from the Catalog.
-
-:::
-
-### Deleting assets
-
-To permanently remove an asset from the Catalog, use the Camunda Hub API delete endpoint:
-
-```
-DELETE <camunda-hub-api-base-url>/api/v2/catalog/assets/{assetKey}
-```
-
-The token must have the `delete` permission. Deleting an asset removes it and all of its versions entirely: CoE members can no longer browse it, and its element template can no longer be resolved in diagrams. Values already configured on diagram elements remain in the BPMN file, but the template definition (labels, groupings, and validation) is no longer applied.
-
-:::caution
-Deletion is irreversible. Use it to correct mistakes or remove assets that should never have been published. For assets you want to phase out, prefer unpublishing or deprecation so that delivery teams have a clear migration path.
-:::
-
-## Step 4: Verify the Catalog in Hub
+## Step 3: Verify the Catalog in Hub
 
 After your CI/CD pipeline runs successfully:
 
@@ -279,6 +213,7 @@ When a new version of an asset is published, delivery team members see an **Upda
 
 ## Next steps
 
-- Learn more about [element templates](/components/hub/workspace/modeler/element-templates/using-templates.md) and how to define them.
-- Explore [managing element templates](/components/hub/workspace/modeler/element-templates/manage-element-templates.md) in the modeler.
+- [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md) — unpublish, deprecate, and delete Catalog assets.
+- [Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) — consolidate templates from several repositories before syncing.
+- [Use Catalog assets in Hub](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md) — how delivery teams discover and apply published assets while modeling.
 - Set up additional CI/CD steps in your project repositories to deploy related collateral (job workers, BPMN processes, forms) to your Orchestration Clusters.

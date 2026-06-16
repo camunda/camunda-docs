@@ -30,5 +30,8 @@ An asset does not bundle the resources a template references (task forms, called
 
 ## In this section
 
-- **[Get started with the Catalog](/components/hub/organization/manage-catalog/getting-started.md)** — set up a collection repository, configure CI/CD, and sync element templates to Hub.
-- **[Use Catalog assets in Hub](/components/hub/organization/manage-catalog/catalog-usage.md)** — discover assets in the Catalog and apply them while modeling, and manage published assets as a CoE.
+- **[Get started with the Catalog](/components/hub/organization/manage-catalog/getting-started.md)** — set up a repository, configure CI/CD, and sync element templates to Hub.
+- **[Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md)** — unpublish, deprecate, and delete Catalog assets as a CoE.
+- **[Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md)** — consolidate templates spread across several repositories before syncing.
+
+Delivery teams looking to consume published assets while modeling should see [Use Catalog assets in Hub](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md).
