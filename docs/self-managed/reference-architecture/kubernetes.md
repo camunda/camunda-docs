@@ -187,7 +187,12 @@ The following are suggested minimum requirements. Sizing depends heavily on your
 - **Persistent volumes**
   - 1,000 IOPS
   - 32 GiB
-  - Use SSD-backed volumes. HDD-backed volume types cannot meet Zeebe's Raft flush latency requirements and are not supported. Avoid burstable volume types unless sized to sustain the required IOPS without relying on burst credits.
+  - SSD-backed volumes only. HDD-backed volumes are not supported.
+  - Avoid burstable volume types unless they can sustain 1,000+ IOPS continuously without relying on burst credits.
+
+:::note
+HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency.
+:::
 
 #### Networking
 
@@ -276,7 +281,7 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 - Volume type: SSD
   - 1,000–3,000 IOPS per volume
   - Throughput of 1,000 MB/s per volume
-- **Unsupported volume types**: HDD-backed volumes cannot meet Zeebe's Raft flush latency requirements. Choose an SSD-backed storage class.
+- Unsupported volume types: HDD-backed volumes are not supported.
 
 #### Supported versions
 
@@ -309,7 +314,11 @@ Our reference architectures are continuously validated against the latest stable
   - Only if `gp3` isn't available
   - IOPS performance [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance)
   - Minimum 34 GiB for >1,000 IOPS
-- **Unsupported volume types**: HDD-backed `sc1` (Cold HDD) and `st1` (Throughput HDD). These volume types cannot meet the synchronous disk flush requirements of Zeebe's Raft consensus protocol. Additionally, `sc1` and `st1` use burst credits for throughput — once exhausted, write latency spikes to hundreds of milliseconds, causing persistent Raft append timeouts and leader instability.
+- Unsupported volume types: `sc1` (Cold HDD) and `st1` (Throughput HDD) are not supported.
+
+:::caution
+`sc1` and `st1` cannot meet Zeebe's Raft protocol disk flush requirements. They use burst credits for throughput, and once credits are exhausted, write latency spikes to hundreds of milliseconds, causing persistent Raft append timeouts and leader instability.
+:::
 
 #### Load balancer
 
@@ -361,7 +370,8 @@ Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingre
 - Volume alternative: Premium SSD
   - IOPS performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds)
   - Minimum 256 GiB (P15) for > 1,000 IOPS
-- **Unsupported volume types**: Standard HDD cannot meet Zeebe's Raft flush latency requirements. Avoid Standard SSD unless sized to sustain the required IOPS without relying on bursting.
+- Unsupported volume types: Standard HDD is not supported.
+- Volume alternative caveat: Standard SSD is supported if sized to sustain 1,000+ IOPS continuously without relying on bursting.
 
 #### Load balancer
 
@@ -376,7 +386,7 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 - Volume type: Performance (SSD) persistent disks
   - IOPS performance [varies based on volume size](https://cloud.google.com/compute/docs/disks/performance#performance_factors)
   - Minimum 34 GiB for > 1,000 IOPS
-- **Unsupported volume types**: Standard persistent disks (`pd-standard`, HDD-backed) cannot meet Zeebe's Raft flush latency requirements. Use SSD-backed (`pd-ssd`) volumes.
+- Unsupported volume types: Standard persistent disks (`pd-standard`, HDD-backed) cannot meet Zeebe's Raft flush latency requirements. Use SSD-backed (`pd-ssd`) volumes.
 
 #### Load balancer
 

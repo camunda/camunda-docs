@@ -93,10 +93,10 @@ If you want to use another NFS, it must meet these requirements:
 
 Regardless of the type, the network storage volumes you use must meet these requirements:
 
-- They must be SSD-backed. HDD-backed volumes typically sustain only tens to a few hundred IOPS with multi-millisecond seek latency, well below the 1,000 IOPS minimum and single-digit-millisecond latency required here, so they are not supported.
 - They must be capable of **at least 1,000 IOPS**.
 - The latency of write/msync operations must be in the **low single digit milliseconds** under normal conditions. Ideally, it's in the order of microseconds.
 - The p99 latency must be **lower than 300 milliseconds**.
+- They must be SSD-backed. HDD-backed volumes typically sustain only tens to a few hundred IOPS with multi-millisecond seek latency, well below the 1,000 IOPS minimum and single-digit-millisecond latency required for Zeebe, so they are not supported.
 
 ### Helm charts version matrix
 
