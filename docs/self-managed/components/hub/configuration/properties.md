@@ -789,7 +789,7 @@ camunda:
 
 #### Dynamic cluster management
 
-With dynamic cluster management, you can [configure components](https://docs.camunda.io/docs/next/self-managed/components/orchestration-cluster/zeebe/configuration/broker-config/#console-ping-configuration) to automatically send license information to Camunda Hub.
+With dynamic cluster management, you can [configure components](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#console-ping-configuration) to automatically send license information to Camunda Hub.
 
 Additionally, the way you manage clusters changes. Instead of clusters being automatically created, updated, and deleted according to your [clusters configuration](#clusters), clusters are only automatically _created_ when you add them to the configuration. Updates and deletes are manual.
 
