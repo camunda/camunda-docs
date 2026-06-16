@@ -48,11 +48,12 @@ Collectively, these changes consolidate overlapping functionality, align configu
 
 ### 8.7.x patch releases
 
-The following key change was also released as part of an 8.7.x patch release.
+The following key changes were also released as part of an 8.7.x patch release.
 
-| Patch release                                                    | Type            | Key change                                                                                              |
-| :--------------------------------------------------------------- | :-------------- | :------------------------------------------------------------------------------------------------------ |
-| [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record) |
+| Patch release                                                    | Type            | Key change                                                                                                       |
+| :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Change          | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
+| [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 
@@ -61,6 +62,34 @@ Camunda 8.7.27 unintentionally removed the `getMessageKeys()` method (and the un
 A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and will be available in a later 8.7.x patch.
 
 **Action:** If you maintain a custom exporter that reads message batch records, avoid calling `getMessageKeys()` until you upgrade to a patch that includes the fix.
+
+### Multi-instance sub-process output mapping variable scope regression {#multi-instance-output-mapping-regression}
+
+Camunda 8.7.28 introduced a regression where output mappings inside a multi-instance sub-process that also defines an output collection cause local variables to unexpectedly propagate to the parent scope.
+
+**When are you affected?**
+
+You are affected if your process contains a multi-instance sub-process that meets both of the following conditions:
+
+1. The sub-process defines an output collection.
+2. One or more elements inside the sub-process define output mappings.
+
+Under these conditions:
+
+- Local variables from inside the sub-process appear on the parent scope and are visible in Operate.
+- If any leaked variable shares a name with a variable on the parent scope, the parent scope value is overwritten.
+
+**Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique — do not reuse names that exist on the parent scope.
+
+**Fix:** A fix will be available in a later 8.7.x patch. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
+
+- [camunda/camunda#11789](https://github.com/camunda/camunda/issues/11789): FEEL expressions used as mapping sources may not evaluate correctly due to ordering. This was reported internally with no customer support cases.
+- [camunda/camunda#35251](https://github.com/camunda/camunda/issues/35251): When one value from a nested variable is listed as an output mapping, all values in the nested variable are merged into the parent scope. Workaround: map the full nested variable instead of individual values.
+
+**Action:**
+
+- Before the fix is available: apply the workaround above.
+- After upgrading to the fixed patch: if you adapted processes to work around bugs #11789 or #35251, review whether those adaptations are still needed.
 
 ### Deprecation of Self-Managed AWS Marketplace offering
 
