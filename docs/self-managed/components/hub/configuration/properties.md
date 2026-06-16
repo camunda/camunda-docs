@@ -210,18 +210,18 @@ Use `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 
 Available component types and requirements:
 
-| Configuration value     | Component                     | Requirements                                   |
-| :---------------------- | :---------------------------- | :--------------------------------------------- |
-| `connectors`            | Connectors                    | REST URL                                       |
-| `identity`              | Admin                         | -                                              |
-| `webModelerWebApp`      | Camunda Hub                   | -                                              |
-| `operate`               | Operate                       | -                                              |
-| `optimize`              | Optimize                      | -                                              |
-| `orchestration`         | Orchestration Cluster         | Cluster version >= 8.8, gRPC URL, and REST URL |
-| `orchestrationIdentity` | Admin and Management Identity | -                                              |
-| `tasklist`              | Tasklist                      | -                                              |
-| `zeebe`                 | Zeebe Broker                  | Cluster version < 8.8, gRPC URL, and REST URL  |
-| `zeebeGateway`          | Zeebe Gateway                 | Cluster version < 8.8                          |
+| Configuration value     | Component             | Requirements                                   |
+| :---------------------- | :-------------------- | :--------------------------------------------- |
+| `connectors`            | Connectors            | REST URL                                       |
+| `identity`              | Management Identity   | -                                              |
+| `webModelerWebApp`      | Camunda Hub           | -                                              |
+| `operate`               | Operate               | -                                              |
+| `optimize`              | Optimize              | -                                              |
+| `orchestration`         | Orchestration Cluster | Cluster version >= 8.8, gRPC URL, and REST URL |
+| `orchestrationIdentity` | Admin                 | -                                              |
+| `tasklist`              | Tasklist              | -                                              |
+| `zeebe`                 | Zeebe Broker          | Cluster version < 8.8, gRPC URL, and REST URL  |
+| `zeebeGateway`          | Zeebe Gateway         | Cluster version < 8.8                          |
 
 Example configuration:
 
