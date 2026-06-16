@@ -131,3 +131,26 @@ See [tool definitions](../connectors/out-of-the-box-connectors/agentic-ai-aiagen
     <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions.</td>
 </tr>
 </table>
+
+### Calling processes as agent tools
+
+When an AI agent needs to invoke another BPMN process as a tool, you have two options: use a **call activity** inside the ad-hoc sub-process, or add an **MCP client** gateway tool connected to the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
+
+The right choice depends on whether the target process runs on the same or a different Orchestration Cluster:
+
+| Scenario                                                   | Recommended approach                                                                                                                                                                                                                  |
+| :--------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Target process is on the **same** Orchestration Cluster    | Use a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) inside the ad-hoc sub-process                                                                                                                      |
+| Target process is on a **different** Orchestration Cluster | Use the [MCP Remote Client connector](../connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector.md) connected to the other cluster's [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) |
+
+These two approaches differ in runtime behavior, the result the agent receives, instance visibility, and the audit trail:
+
+| &nbsp;                 | Call activity                                                                                                                 | MCP client (Processes MCP)                                                                                                                           |
+| :--------------------- | :---------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Execution**          | Synchronous: the tool call waits for the called process to complete and returns its output to the agent.                      | Fire-and-forget: the called process starts immediately and the tool returns the process instance key. The agent does not receive the process output. |
+| **Instance hierarchy** | Connected: the called process instance is a child of the ad-hoc sub-process element, visible in the instance tree in Operate. | Detached: the called process runs independently with no structural link to the calling agent process.                                                |
+| **Audit logs**         | Consistent hierarchical view: the audit trail reflects the full call hierarchy.                                               | Messaging-like view: the audit trail shows a process triggered by an external message, with no structural link to the calling agent.                 |
+
+:::tip
+Although it is technically possible to use an MCP client to connect to the Processes MCP Server on the same cluster as the calling agent, this produces a detached hierarchy and a less coherent audit trail. Use call activities for same-cluster process invocations.
+:::
