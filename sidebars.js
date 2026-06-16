@@ -2344,13 +2344,7 @@ module.exports = {
             "self-managed/components/hub/usage-metrics",
             "self-managed/components/hub/monitoring",
             {
-              type: "category",
-              label: "Configuration",
-              link: {
-                type: "doc",
-                id: "self-managed/components/hub/configuration/configuration",
-              },
-              items: [
+              Configuration: [
                 "self-managed/components/hub/configuration/properties",
                 "self-managed/components/hub/configuration/legacy-cluster-config",
                 "self-managed/components/hub/configuration/ssl",
