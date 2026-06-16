@@ -89,7 +89,7 @@ Under these conditions:
 **Action:**
 
 - Before the fix is available: apply the workaround above.
-- After upgrading to the fixed patch: if you adapted processes to work around bugs #11789 or #35251, review whether those adaptations are still needed.
+- After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
