@@ -74,7 +74,7 @@ Flags passed as command line arguments take precedence over those configured via
 | "disable-platform"                                            | false                               |
 | "disable-zeebe"                                               | false                               |
 | "disable-remote-interaction"                                  | false                               |
-| "single-instance"                                             | false                               |
+| ["single-instance"](#single-instance)                         | false                               |
 | "user-data-dir"                                               | [Electron default](../search-paths) |
 | ["display-version"](#custom-display-version-label)            | `undefined`                         |
 | ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)             | `undefined`                         |
@@ -88,6 +88,10 @@ Flags passed as command line arguments take precedence over those configured via
 ### Disable plug-ins
 
 Start the modeler without activating installed plug-ins. This is useful to debug modeler errors.
+
+### Single instance
+
+By default, Desktop Modeler enforces single-instance mode, preventing more than one instance from running at a time. To run multiple instances simultaneously, pass `--no-single-instance` when starting the application.
 
 ### BPMN-only mode
 

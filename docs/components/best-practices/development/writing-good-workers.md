@@ -7,7 +7,7 @@ description: "Service tasks within Camunda 8 require you to set a task type and 
 
 1. Write all glue code in one application, separating different classes or functions for the different task types.
 2. Think about idempotency and read or write as little data as possible from/to the process.
-3. Write non-blocking (reactive, async) code for your workers if you need to parallelize work. Use blocking code only for use cases where all work can be executed in a serialized manner. Don’t think about configuring thread pools yourself.
+3. If you use Java 21 or later, prefer virtual threads for parallel workers that perform blocking I/O. Use reactive or async code when your runtime already uses it, or when you need extremely high throughput or low latency.
 
 ## Organizing glue code and workers in process solutions
 
@@ -78,7 +78,7 @@ Workers can control the number of jobs retrieved at once. In a busy system it ma
 
 You will have jobs in your local application that need to be processed. The worst case in terms of scalability is that you process the jobs sequentially one after the other. While this sounds bad, it is still a valid approach for many use cases, as most projects do not need any parallel processing in the worker code as they simply do not care whether a job is executed a second earlier or later. Think of a business process that is executed only some hundred times per day and includes mostly human tasks — a sequential worker is totally sufficient. In this case, you can skip this paragraph section.
 
-However, you might need to do better and process jobs in parallel and utilize the full power of your worker’s CPUs. In such a case, you should read on and understand the difference between writing blocking and non-blocking code.
+However, you might need to do better and process jobs in parallel. In such a case, you should read on and understand the difference between writing blocking code on platform threads, blocking code on virtual threads, and non-blocking code.
 
 ### Blocking / synchronous code and thread pools
 
@@ -88,7 +88,13 @@ Assume that your worker shall invoke 20 REST requests, each taking around 100ms,
 
 A common approach to scaling throughput beyond this limit is to leverage a thread pool. This works as blocked threads are not actively consuming CPU cores, so you can run more threads than CPU cores — since they are only waiting for I/O most of the time. In the above example with 100ms latency of REST calls, having a thread pool of 10 threads increases throughput to 100 jobs/second.
 
-The downside of using thread pools is that you need to have a good understanding of your code, thread pools in general, and the concrete libraries being used. Typically, we do not recommend configuring thread pools yourself. If you need to scale beyond the linear execution of jobs, leverage reactive programming.
+The downside of using thread pools is that you need to have a good understanding of your code, thread pools in general, and the concrete libraries being used. Typically, we do not recommend configuring platform thread pools yourself. In Java 21 and later, prefer virtual threads for workers that perform blocking I/O.
+
+### Blocking code with virtual threads
+
+Virtual threads let you keep a straightforward blocking programming model while avoiding the cost of assigning one platform thread to every blocked operation. This makes them a good default for Java workers that spend most of their time waiting for I/O, such as REST calls or database requests.
+
+Use virtual threads when you run on Java 21 or later and want to process many I/O-bound jobs in parallel without rewriting your worker code into a reactive style. Reactive programming can still be useful for extremely high-throughput or low-latency scenarios where the lower overhead matters enough to justify the added complexity.
 
 ### Non-blocking / reactive code
 
@@ -98,7 +104,7 @@ With a reactive HTTP client you will write code to issue the REST request, but t
 
 ### Recommendation
 
-In general, using reactive programming is favorable in most situations where parallel processing is important. However, we sometimes observe a lack of understanding and adoption in developer communities, which might hinder adoption in your environment.
+In Java 21 and later, prefer virtual threads for I/O-bound job workers that need parallel processing. They keep worker code easier to read while avoiding most of the scalability limits of platform threads. Use reactive programming when your client stack already uses it, or when you need extremely high throughput or low latency and have measured that the lower overhead is worth the complexity.
 
 ## Performance best-practices
 
@@ -179,7 +185,7 @@ Doing so **limits** the degree of parallelism to the number of threads you have 
 10:57:00.764 [pool-4-thread-1] …finished. Complete Job…10:57:00.805 [pool-4-thread-1] …completed (3). Current throughput (jobs/s ): 3
 ```
 
-If you experience a large number of jobs, and these jobs are waiting for IO the whole time — as REST calls do — you should think about using **reactive programming**. For the REST call, this means for example the Spring WebClient:
+If you experience a large number of jobs, and these jobs are waiting for IO the whole time — as REST calls do — Java 21 virtual threads are usually a good default. You can also use **reactive programming**, especially for extremely high-throughput or low-latency scenarios where you have measured that its lower overhead matters. For the REST call, this means for example the Spring WebClient:
 
 ```java
 @JobWorker(type = "rest", autoComplete = false)
@@ -244,13 +250,13 @@ With this reactive glue code, you don’t need to worry about thread pools in th
 10:54:08.167 [ault-executor-0] …completed (55). Current throughput (jobs/s ): 55, Max: 55
 ```
 
-These observations yield the following recommendations:
+These observations yield the following recommendations for Java:
 
-|              | Blocking Code                                                                                                                                                                        | Reactive Code                                                                                                    |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| Parallelism  | Some parallelism is possibly by a thread pool, which is used by the client library. The default thread pool size is one, which needs to be adjusted in the config in order to scale. | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform. |
-| **Use when** | You don't have requirements to process jobs in parallel                                                                                                                              | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST)                          |
-|              | Your developers are not familiar with reactive programming                                                                                                                           | This should be the **default** if your developer are familiar with reactive programming.                         |
+|              | Blocking code on platform threads                                                                                                                                                      | Blocking code on virtual threads                                                                                      | Reactive code                                                                                                                              |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Parallelism  | Some parallelism is possible with a thread pool, which is used by the client library. The default thread pool size is one, which needs to be adjusted in the config in order to scale. | Many blocked operations can run concurrently without tying each blocked operation to a platform thread.               | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform.                           |
+| **Use when** | You don't have requirements to process jobs in parallel.                                                                                                                               | You use Java 21 or later, need to process I/O-bound jobs in parallel, and want to keep straightforward blocking code. | Your client stack already uses reactive programming, or you need extremely high throughput or low latency and have measured the tradeoffs. |
+|              | You intentionally want to limit parallelism with a small worker thread pool.                                                                                                           | This should be the default for Java workers that need parallel I/O and don't otherwise require reactive programming.  | Your developers are familiar with reactive programming and the added complexity is acceptable.                                             |
 
 ### Node.js client
 

@@ -1,8 +1,12 @@
-#!/bin/bash   
+#!/bin/bash
 set -e # exit at first error
 
-# Before running this script make sure this version is correct!
-ARCHIVED_VERSION="8.3"
+# Before running this script make sure the version is set
+if [[ -z "${ARCHIVED_VERSION}" ]]
+then
+    echo 'Set the archive version: `export ARCHIVED_VERSION=8.x`'
+    exit 1
+fi
 
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -63,8 +67,4 @@ if [[ "$script_index" == 8 || -z "$script_index" ]]; then
   source $script_directory/8-updateCurrentVersion.sh
 fi
 
-notify "Automated steps are complete! For ease of review, consider PR'ing the deletion commits separate from the rest of the changes."
-notify "Manual steps that remain: 
-9. Fix htaccess rules
-10. Fix links
-"
+notify "Automated steps are complete!"

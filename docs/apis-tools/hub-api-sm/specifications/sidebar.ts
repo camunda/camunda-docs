@@ -74,6 +74,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Info",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-info",
+          label: "Get API info",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Project",
       items: [
         {
@@ -182,6 +194,30 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/hub-api-sm/specifications/search-workspaces",
           label: "Search workspaces",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Collaborator",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/add-collaborator",
+          label: "Add or update a collaborator",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/remove-collaborator",
+          label: "Remove a collaborator",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/search-collaborators",
+          label: "Search collaborators",
           className: "api-method post",
         },
       ],
