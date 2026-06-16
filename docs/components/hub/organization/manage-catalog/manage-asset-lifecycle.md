@@ -40,6 +40,8 @@ To permanently remove an asset from the Catalog, use the Camunda Hub API delete 
 DELETE <camunda-hub-api-base-url>/api/v2/catalog/assets/{assetKey}
 ```
 
+For the full request and response schema, see the **Delete a catalog asset** reference for [SaaS](/apis-tools/hub-api-saas/specifications/delete-catalog-asset.api.mdx) and [Self-Managed](/apis-tools/hub-api-sm/specifications/delete-catalog-asset.api.mdx).
+
 The token must have the `delete` permission. Deleting an asset removes it and all of its versions entirely: CoE members can no longer browse it, and its element template can no longer be resolved in diagrams. Values already configured on diagram elements remain in the BPMN file, but the template definition (labels, groupings, and validation) is no longer applied — the element is shown as a [missing template](/components/hub/workspace/modeler/element-templates/using-templates.md#missing-templates).
 
 :::caution

@@ -138,6 +138,8 @@ The job calls a single ingestion endpoint:
 PUT <camunda-hub-api-base-url>/api/v2/catalog/assets/ingestion
 ```
 
+For the full request and response schema, see the **Ingest catalog assets** reference for [SaaS](/apis-tools/hub-api-saas/specifications/ingest-catalog-assets.api.mdx) and [Self-Managed](/apis-tools/hub-api-sm/specifications/ingest-catalog-assets.api.mdx).
+
 The request body is `multipart/form-data` and represents the **complete desired state** of your Catalog. For each asset, the request includes two parts:
 
 - a `template` part containing the element template `.json` file, and
@@ -147,11 +149,7 @@ Each `README.md` is paired with the template named in its `template:` frontmatte
 
 ### Start from the example repository
 
-The fastest way to set up the sync is the example catalog repository. It contains placeholder element templates, a ready-to-use sync script (`scripts/sync-catalog.sh`), and a GitHub Actions workflow that submits the full desired state on every push to `main`. Use it as a template, replace the example assets with your own, and configure the credentials below.
-
-:::note
-The example repository will be published by Camunda. _(Repository URL to be added.)_
-:::
+The fastest way to set up the sync is the [example catalog repository](https://github.com/camunda/catalog-template). It contains placeholder element templates, a ready-to-use sync script (`scripts/sync-catalog.sh`), and a GitHub Actions workflow that submits the full desired state on every push to `main`. Use it as a template, replace the example assets with your own, and configure the credentials below.
 
 **1. Provide credentials and configuration**
 
@@ -199,7 +197,7 @@ The sync script in the example repository obtains an access token, discovers eac
 bash scripts/sync-catalog.sh
 ```
 
-A successful ingestion returns `204 No Content`. If the submission is invalid, the request fails with a `4xx` status and **no** changes are applied — the ingestion is validated and applied as a single transaction. For the full list of status codes and error responses, see the Camunda Hub API reference for [SaaS](/apis-tools/hub-api-saas/overview.md) and [Self-Managed](/apis-tools/hub-api-sm/overview.md).
+A successful ingestion returns `204 No Content`. If the submission is invalid, the request fails with a `4xx` status and **no** changes are applied — the ingestion is validated and applied as a single transaction. For the full list of status codes and error responses, see the **Ingest catalog assets** reference for [SaaS](/apis-tools/hub-api-saas/specifications/ingest-catalog-assets.api.mdx) and [Self-Managed](/apis-tools/hub-api-sm/specifications/ingest-catalog-assets.api.mdx).
 
 ## Step 3: Verify the Catalog in Hub
 
