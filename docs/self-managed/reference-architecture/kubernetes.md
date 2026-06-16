@@ -394,6 +394,8 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
   - Minimum 100 GiB for 3,000 IOPS
 - Unsupported volume types: Standard persistent disks (`pd-standard`, HDD-backed) cannot meet Zeebe's Raft flush latency requirements. Use SSD-backed (`pd-ssd`) volumes.
 
+<!-- Sizing note: "Minimum 100 GiB for 3,000 IOPS" above is derived from the GCP pd-ssd baseline of ~30 IOPS/GiB (3,000 IOPS / 30 IOPS per GiB = 100 GiB). Ref: https://cloud.google.com/compute/docs/disks/performance -->
+
 #### Load balancer
 
 If you are using the [GKE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) (Ingress-gce), you may need to use `cloud.google.com/app-protocols` annotations in the **Zeebe Gateway** service. For more details, visit the GKE guide [using HTTP/2 for load balancing with Ingress](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2).
