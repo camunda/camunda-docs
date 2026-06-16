@@ -186,12 +186,12 @@ The following are suggested minimum requirements to get started. There is no one
   - Memory: 16 GiB
 - **Persistent volumes**
   - 3,000 IOPS baseline
-  - 125 MiB/s throughput
+  - 125 MiB/s throughput baseline
   - 32 GiB
   - _Avoid burstable disk types_
 
 :::note Storage performance figures are a baseline, not a strict requirement
-The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes), there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
+The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes); there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
 :::
 
 #### Networking
