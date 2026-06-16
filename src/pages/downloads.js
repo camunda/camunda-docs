@@ -669,9 +669,9 @@ function GettingStartedCard({ activeOS }) {
       <BundleButtons activeOS={activeOS} />
 
       <p className={styles.downloadCardNote}>
-        Unzip the bundle, then start Camunda 8 Run from the extracted folder
-        with <code>camunda-start.sh</code> on macOS/Linux or
-        <code>camunda-start.bat</code> on Windows.
+        Unzip the bundle and start Camunda 8 Run from the extracted folder with{" "}
+        <code>camunda-start.sh</code> (macOS/Linux) or
+        <code>camunda-start.bat</code> (Windows).
       </p>
 
       <div className={styles.downloadCardFooter}>
