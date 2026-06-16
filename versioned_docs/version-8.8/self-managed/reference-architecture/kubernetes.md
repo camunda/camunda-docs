@@ -182,7 +182,7 @@ The following are suggested minimum requirements. Sizing depends heavily on your
   - 1,000 IOPS
   - 32 GiB
   - SSD-backed volumes only. HDD-backed volumes are not supported.
-  - Avoid burstable volume types unless they can sustain 1,000+ IOPS continuously without relying on burst credits.
+  - Avoid burstable volume types unless they can sustain the required IOPS continuously without relying on burst credits.
 
 :::note
 HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency.
@@ -361,7 +361,7 @@ Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingre
   - IOPS performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds)
   - Minimum 256 GiB (P15) for > 1,000 IOPS
 - Unsupported volume types: Standard HDD is not supported.
-- Volume alternative caveat: Standard SSD is supported if sized to sustain 1,000+ IOPS continuously without relying on bursting.
+- Volume alternative caveat: Standard SSD is supported if sized to sustain the required IOPS continuously without relying on bursting.
 
 #### Load balancer
 
