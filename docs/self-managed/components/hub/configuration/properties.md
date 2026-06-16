@@ -177,10 +177,10 @@ CAMUNDA.MODELER.CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_URL=https://camunda.com/
 
 #### Components
 
-Use `components` to set up components in the cluster:
-
 <Tabs groupId="configType" className="tabs-hidden" defaultValue="application.yaml">
 <TabItem value="application.yaml" label="Application properties">
+
+Use `components` to set up components in the cluster:
 
 | Property                                                   | Description                                                                                                                                                                                |
 | :--------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -193,6 +193,8 @@ Use `components` to set up components in the cluster:
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
+
+Use `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 
 | Property                                                 | Description                                                                                                                                                                                |
 | :------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
