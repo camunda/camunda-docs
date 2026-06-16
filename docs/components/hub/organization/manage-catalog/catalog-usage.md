@@ -2,7 +2,7 @@
 id: catalog-usage
 title: Use Catalog assets in Hub
 sidebar_label: Use Catalog assets
-description: "Discover and apply published Catalog assets in the Hub Catalog and Canvas, and manage assets as a Center of Excellence."
+description: "Discover and apply published Catalog assets while modeling in Hub, and manage assets as a Center of Excellence."
 ---
 
 Once your Center of Excellence (CoE) has [synced element templates to the Catalog](/components/hub/organization/manage-catalog/getting-started.md), delivery teams discover and apply them while modeling, and the CoE manages their lifecycle.
@@ -18,13 +18,13 @@ You can narrow the list to find the right asset:
 - **Filter by tags** to combine related assets across categories.
 - **Sort** by name, creation date, or last updated date.
 
-Assets that were recently added or updated are highlighted so teams can spot new templates at a glance. Only published assets appear in the Catalog — unpublished assets are never shown to delivery teams.
+Assets that were recently added or updated are highlighted so teams can spot new templates at a glance. Only published assets appear in the Catalog — unpublished assets are hidden from delivery teams.
 
-## Apply assets in Canvas
+## Apply assets while modeling
 
 To use a Catalog asset while modeling:
 
-1. Open a BPMN diagram in the Hub modeler (Canvas).
+1. Open a BPMN diagram in the Hub modeler.
 2. Select an element and apply a published element template from the Catalog.
 3. Configure the element through the properties panel as defined by the template.
 
@@ -47,7 +47,7 @@ Unpublishing is distinct from element template **deprecation**. Deprecation is a
 
 ### Deleting assets
 
-Deleting an asset removes it from the Catalog entirely: CoE members can no longer view it, and its properties are no longer accessible in diagrams that referenced it. Deletion is performed through the public API and is not exposed in the Hub UI in 8.10.
+Deleting an asset removes it from the Catalog entirely: CoE members can no longer view it, and its properties are no longer accessible in diagrams that referenced it. Deletion is performed through the Camunda Hub API and is not exposed in the Hub UI in 8.10.
 
 :::caution
 Deletion is irreversible. Use it only to correct mistakes or remove assets that should never have been published. To phase out an asset while giving delivery teams a migration path, prefer unpublishing or deprecation.

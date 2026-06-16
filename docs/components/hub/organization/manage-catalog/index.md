@@ -31,4 +31,4 @@ An asset does not bundle the resources a template references (task forms, called
 ## In this section
 
 - **[Get started with the Catalog](/components/hub/organization/manage-catalog/getting-started.md)** — set up a collection repository, configure CI/CD, and sync element templates to Hub.
-- **[Use Catalog assets in Hub](/components/hub/organization/manage-catalog/catalog-usage.md)** — discover assets in the Catalog and Canvas, and manage published assets as a CoE.
+- **[Use Catalog assets in Hub](/components/hub/organization/manage-catalog/catalog-usage.md)** — discover assets in the Catalog and apply them while modeling, and manage published assets as a CoE.
