@@ -8,6 +8,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Catalog",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/ingest-catalog-assets",
+          label: "Ingest catalog assets",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/delete-catalog-asset",
+          label: "Delete a catalog asset",
+          className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "File",
       items: [
         {
