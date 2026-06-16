@@ -189,7 +189,7 @@ The following are suggested minimum requirements to get started. There is no one
   - 125 MiB/s throughput baseline
   - 32 GiB
   - SSD-backed volumes only. HDD-backed volumes are not supported.
-  - Avoid burstable volume types unless they can sustain the target IOPS continuously without relying on burst credits.
+  - Avoid burstable volume types unless they can sustain the target IOPS and throughput continuously without relying on burst credits.
 
 :::note Storage performance figures are a baseline, not a strict requirement
 The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes); there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
@@ -282,8 +282,8 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 - Instance type: 4 vCPUs (x86_64, >3.1 GHz), 16 GiB memory
 - Number of dedicated nodes: 4
 - Volume type: SSD
-  - 3,000 IOPS baseline
-  - 125 MiB/s throughput baseline
+  - 3,000 IOPS baseline per volume
+  - 125 MiB/s throughput baseline per volume
 - Unsupported volume types: HDD-backed volumes are not supported.
 
 #### Supported versions
@@ -376,7 +376,7 @@ Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingre
   - IOPS performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds)
   - Minimum 256 GiB (P15) for > 1,000 IOPS
 - Unsupported volume types: Standard HDD is not supported.
-- Volume alternative caveat: Standard SSD is supported if sized to sustain the target IOPS continuously without relying on bursting.
+- Volume alternative caveat: Standard SSD is supported if sized to sustain the target IOPS and throughput continuously without relying on bursting.
 
 #### Load balancer
 
@@ -391,10 +391,8 @@ Azure offers the **Application Gateway for Containers (AGC)**, which supports gR
 - Volume type: Performance (SSD) persistent disks
   - 3,000 IOPS baseline
   - 125 MiB/s throughput baseline
-  - Minimum ~260 GiB to sustain the 3,000 IOPS and 125 MiB/s baseline (on `pd-ssd`, throughput is the binding constraint)
+  - On `pd-ssd`, IOPS and throughput scale with disk size, so size the disk to meet the baseline (throughput is the binding constraint). See [GCP disk performance](https://cloud.google.com/compute/docs/disks/performance).
 - Unsupported volume types: Standard persistent disks (`pd-standard`, HDD-backed) cannot meet Zeebe's Raft flush latency requirements. Use SSD-backed (`pd-ssd`) volumes.
-
-<!-- Sizing note: on GKE pd-ssd, IOPS and throughput both scale with capacity (~30 IOPS and ~0.48 MB/s per GiB; https://cloud.google.com/compute/docs/disks/performance). Reaching 3,000 IOPS needs ~100 GiB and 125 MiB/s needs ~260 GiB, so ~260 GiB (throughput-bound) sustains both baselines. -->
 
 #### Load balancer
 
