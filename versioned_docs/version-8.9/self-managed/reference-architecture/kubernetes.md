@@ -187,12 +187,12 @@ The following are suggested minimum requirements to get started. There is no one
 - **Persistent volumes**
   - 3,000 IOPS baseline
   - 125 MiB/s throughput baseline
-  - 32 GiB
+  - 32 GiB minimum capacity
   - SSD-backed volumes only. HDD-backed volumes are not supported.
   - Avoid burstable volume types unless they can sustain the target IOPS and throughput continuously without relying on burst credits.
 
 :::note Storage performance figures are a baseline, not a strict requirement
-The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes); there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
+The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes); there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. On providers where disk performance scales with capacity (for example, GKE `pd-ssd`), reaching the IOPS and throughput baseline can require a disk larger than the 32 GiB minimum capacity. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
 
 Storage type, however, is a strict requirement: HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency, and are not supported.
 :::
@@ -316,8 +316,7 @@ Our reference architectures are continuously validated against the latest stable
   - Requires [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) to be installed and a `gp3` StorageClass [configured](https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html)
 - Volume alternative: `gp2`
   - Only if `gp3` isn't available
-  - IOPS performance [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance)
-  - Minimum 34 GiB for >1,000 IOPS
+  - Performance [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance); size the disk to sustain the target IOPS and throughput baseline
 - Unsupported volume types: `sc1` (Cold HDD) and `st1` (Throughput HDD) are not supported.
 
 :::caution
@@ -373,8 +372,7 @@ Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingre
   - 125 MiB/s throughput baseline
   - Several [known limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2-limitations), e.g., lack of [Azure Backup support](https://learn.microsoft.com/en-us/azure/backup/disk-backup-support-matrix#limitations)
 - Volume alternative: Premium SSD
-  - IOPS performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds)
-  - Minimum 256 GiB (P15) for > 1,000 IOPS
+  - Performance [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds); size the disk to sustain the target IOPS and throughput baseline
 - Unsupported volume types: Standard HDD is not supported.
 - Volume alternative caveat: Standard SSD is supported if sized to sustain the target IOPS and throughput continuously without relying on bursting.
 
