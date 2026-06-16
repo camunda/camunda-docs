@@ -1154,4 +1154,3 @@ Under these conditions:
 
 - Before the fix is available: apply the workaround above.
 - After upgrading to the fixed patch: if you adapted processes to work around bugs #11789 or #35251, review whether those adaptations are still needed.
-</div>
