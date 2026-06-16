@@ -127,11 +127,11 @@ The v1 response returned a nested structure, with `metadata` and `content` as se
 
 ### Update a file
 
-| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                       |
-| ------------------ | ------------------ | --------------------------------------------------------------------------- |
-| `folderId`         | `folderKey`        | Renamed.                                                                    |
-| `projectId`        | `projectKey`       | Renamed. Use to move files between projects within a Camunda Hub workspace. |
-| `revision`         | `revision`         | Now required.                                                               |
+| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                                                                                                    |
+| ------------------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `folderId`         | `folderKey`        | Renamed.                                                                                                                                                 |
+| `projectId`        | `projectKey`       | Renamed. Use to move files between projects within a Camunda Hub workspace.                                                                              |
+| `revision`         | `revision`         | Now required. Fetch the current revision from a get or create response, and include it in your update request to prevent overwriting concurrent changes. |
 
 ### Search files
 
@@ -152,7 +152,3 @@ Only changed fields are listed:
 | `projectId`     | `projectKey`    | Renamed.                                                    |
 | `folderId`      | `folderKey`     | Renamed.                                                    |
 | `canonicalPath` | `canonicalPath` | In v1, `canonicalPath` was an object. In v2, it's a string. |
-
-### Revisions
-
-Update operations in v2 require a `revision` field. Fetch the current revision from a get or create response and include it in your update request to prevent overwriting concurrent changes.
