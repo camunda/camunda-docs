@@ -74,7 +74,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 
 | Patch release                                                    | Type            | Key change                                                                                                                                            |
 | :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Change          | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |

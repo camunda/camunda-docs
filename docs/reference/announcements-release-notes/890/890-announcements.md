@@ -135,7 +135,7 @@ The following key changes were also released as part of an 8.9.x patch release.
 
 | Patch release                                                  | Type            | Key change                                                                                                       |
 | :------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1) | Change          | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
 ## Agentic orchestration

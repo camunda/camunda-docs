@@ -52,7 +52,7 @@ The following key changes were also released as part of an 8.7.x patch release.
 
 | Patch release                                                    | Type            | Key change                                                                                                       |
 | :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
-| [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Change          | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
+| [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
