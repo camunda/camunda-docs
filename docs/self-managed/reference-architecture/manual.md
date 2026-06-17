@@ -85,7 +85,7 @@ Any of the following are just suggestions for the minimum viable setup, the sizi
 
 - Modern CPU: 2 cores
 - Memory: 4 GB RAM
-- Storage: 32 GB SSD (**1,000** IOPS recommended; avoid burstable disk types)
+- Storage: 32 GB SSD-backed, minimum 1,000 IOPS. HDD-backed volume types cannot meet Zeebe's Raft flush latency requirements and are not supported.
 
 Suggested instance types from cloud providers:
 
