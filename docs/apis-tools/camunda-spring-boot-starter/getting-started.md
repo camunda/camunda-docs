@@ -41,9 +41,9 @@ With the Camunda Spring Boot Starter, you can build:
 
 | Camunda Spring Boot Starter artifact | Camunda Spring Boot Starter version | JDK  | Bundled Spring Boot version | Compatible Spring Boot version(s) |
 | ------------------------------------ | ----------------------------------- | ---- | --------------------------- | --------------------------------- |
-| `camunda-spring-boot-starter`        | 8.9.x                               | ≥ 17 | 4.0.x                       |                                   |
-| `camunda-spring-boot-4-starter`      | 8.9.x                               | ≥ 17 | 4.0.x                       |                                   |
-| `camunda-spring-boot-3-starter`      | 8.9.x                               | ≥ 17 | 3.5.x                       |                                   |
+| `camunda-spring-boot-starter`        | 8.10.x                              | ≥ 17 | 4.0.x                       |                                   |
+| `camunda-spring-boot-4-starter`      | 8.10.x                              | ≥ 17 | 4.0.x                       |                                   |
+| `camunda-spring-boot-3-starter`      | 8.10.x                              | ≥ 17 | 3.5.x                       |                                   |
 
 ### Dedicated Spring Boot 3 and 4 modules
 
