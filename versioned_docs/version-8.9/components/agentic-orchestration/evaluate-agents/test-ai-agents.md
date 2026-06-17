@@ -281,7 +281,7 @@ The judge evaluates matches using the following scoring scale:
 
 The LLM may return any value between these anchor points (for example, 0.6 or 0.85). The default threshold is 0.5. This means the assertion passes when the response is at least partially satisfied according to the rubric, which is a practical default for AI-generated output that may vary in wording or completeness across runs. Use a higher threshold when the response must satisfy stricter semantic requirements. You can change the threshold globally in the [judge configuration](/apis-tools/testing/configuration.md#judge-configuration) or per assertion using `withJudgeConfig`.
 
-If the assertion fails, for example because the agent used the wrong joke or the feedback was not handled correctly, the judge returns a low score with an explanation of which parts of the expectation were not met. This gives you a clear, human-readable failure message instead of a generic assertion error.
+If the assertion fails, for example, because the agent made up its own joke instead of calling the `Jokes API` tool, or the feedback was not handled correctly, the judge returns a low score with an explanation of which parts of the expectation were not met. This gives you a clear, human-readable failure message instead of a generic assertion error.
 
 ## Step 6: Tune the judge evaluation
 

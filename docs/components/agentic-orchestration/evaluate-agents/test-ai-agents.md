@@ -154,7 +154,7 @@ For the full setup including dependencies and project structure, see [Getting st
 
 ## Step 4: Handle non-deterministic flow paths
 
-The test uses the prompt `"Send Ervin a joke"`. In response, the agent:
+In this guide, the test uses the prompt `"Give me a joke! Greet Ervin as an introduction"`. In response, the agent:
 
 - Calls `List Users` and `Jokes API` in any order.
 - Collects feedback through the `User Feedback` user task.
@@ -270,7 +270,7 @@ You can use two types of assertions to verify the agent output:
 
 Use a judge assertion to verify the agent output satisfies a natural language expectation.
 
-The following example registers the conditional behaviors from [Step 4](#step-4-handle-non-deterministic-flow-paths), starts the process with the prompt `"Send Ervin a joke"`, and then asserts that the agent completed the scenario correctly:
+The following example registers the conditional behaviors from [Step 4](#step-4-handle-non-deterministic-flow-paths), starts the process with the prompt `"Give me a joke! Greet Ervin as an introduction"`, and then asserts that the agent completed the scenario correctly:
 
 ```java
 @Test
@@ -278,7 +278,7 @@ void shouldSendErvinAJoke() {
     ProcessInstanceEvent processInstance = client.newCreateInstanceCommand()
         .bpmnProcessId("ai-agent-chat-with-tools")
         .latestVersion()
-        .variables(Map.of("inputText", "Send Ervin a joke"))
+        .variables(Map.of("inputText", "Give me a joke! Greet Ervin as an introduction"))
         .send()
         .join();
 
@@ -309,7 +309,7 @@ The judge evaluates matches using the following scoring scale:
 
 The LLM may return any value between these anchor points (for example, 0.6 or 0.85). The default threshold is 0.5. This means the assertion passes when the response is at least partially satisfied according to the rubric, which is a practical default for AI-generated output that may vary in wording or completeness across runs. Use a higher threshold when the response must satisfy stricter semantic requirements. You can change the threshold globally in the [judge configuration](/apis-tools/testing/configuration.md#judge-configuration) or per assertion using `withJudgeConfig`.
 
-If the assertion fails, for example because the agent used the wrong joke or the feedback was not handled correctly, the judge returns a low score with an explanation of which parts of the expectation were not met. This gives you a clear, human-readable failure message instead of a generic assertion error.
+If the assertion fails, for example, because the agent made up its own joke instead of calling the `Jokes API` tool, or the feedback was not handled correctly, the judge returns a low score with an explanation of which parts of the expectation were not met. This gives you a clear, human-readable failure message instead of a generic assertion error.
 
 #### Tune the judge evaluation
 
@@ -408,12 +408,13 @@ With the embedding model configured, use `hasVariableSimilarTo` as a complementa
 
 ```java
 assertThat(processInstance)
-    .hasVariableSimilarTo(
-        "agent",
+    .hasLocalVariableSimilarTo(
+        "User_Feedback",
+        "responseText",
         """
           Hey Ervin! Here is a joke for you:
           Why did the workflow cross the road? To get to the happy path.
-          """);
+        """);
 ```
 
 The assertion converts both strings to embeddings, applies the default text preprocessors (lowercase, Unicode NFC, and whitespace normalization), and compares cosine similarity against the default threshold of 0.5.
