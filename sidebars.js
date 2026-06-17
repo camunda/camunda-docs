@@ -2011,6 +2011,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
+                "self-managed/deployment/aws/ecs-dual-region/ecs-fargate-dual-region",
               ],
             },
           ],
