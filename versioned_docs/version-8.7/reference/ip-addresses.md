@@ -29,7 +29,7 @@ The public IP addresses exposed for connecting to the cluster depends on the clo
 - **Google Cloud Platform (GCP)**: IP addresses are AnyCast IP addresses and are globally available.
 
 :::note
-AWS-hosted clusters support secure connectivity using AWS PrivateLink. For setup details, see [Secure connectivity (AWS PrivateLink)](/docs/components/saas/secure-connectivity/).
+AWS-hosted clusters support secure connectivity using AWS PrivateLink. For setup details, see [version 8.9 secure connectivity (AWS PrivateLink) documentation](/versioned_docs/version-8.9/components/saas/secure-connectivity/index.md) for more information.
 :::
 
 ## Outbound connections
