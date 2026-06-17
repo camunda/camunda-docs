@@ -1579,7 +1579,7 @@ Under these conditions:
 - Local variables from inside the sub-process appear on the parent scope and are visible in Operate.
 - If any leaked variable shares a name with a variable on the parent scope, the parent scope value is overwritten.
 
-**Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique — do not reuse names that exist on the parent scope.
+**Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
 
 **Fix:** A fix will be available in a later 8.9.x patch. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
 
