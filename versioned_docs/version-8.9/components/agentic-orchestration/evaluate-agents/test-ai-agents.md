@@ -154,7 +154,7 @@ For the full setup including dependencies and project structure, see [Getting st
 
 ## Step 4: Handle non-deterministic flow paths
 
-The test uses the prompt `"Send Ervin a joke"`. In response, the agent:
+In this guide, the test uses the prompt `"Give me a joke! Greet Ervin as an introduction"`. In response, the agent:
 
 - Calls `List Users` and `Jokes API` in any order.
 - Collects feedback through the `User Feedback` user task.
@@ -242,7 +242,7 @@ For the full conditional behavior API, see [Utilities](/apis-tools/testing/utili
 
 ## Step 5: Verify agent output with judge assertions
 
-After the process completes, use a judge assertion to verify that the agent's output satisfies a natural language expectation. The following example puts the full test together: it registers the conditional behaviors from Step 4, starts the process with the prompt `"Send Ervin a joke"`, and then asserts that the agent completed the scenario correctly:
+After the process completes, use a judge assertion to verify that the agent's output satisfies a natural language expectation. The following example puts the full test together: it registers the conditional behaviors from Step 4, starts the process with the prompt `"Give me a joke! Greet Ervin as an introduction"`, and then asserts that the agent completed the scenario correctly:
 
 ```java
 @Test
@@ -250,7 +250,7 @@ void shouldSendErvinAJoke() {
     ProcessInstanceEvent processInstance = client.newCreateInstanceCommand()
         .bpmnProcessId("ai-agent-chat-with-tools")
         .latestVersion()
-        .variables(Map.of("inputText", "Send Ervin a joke"))
+        .variables(Map.of("inputText", "Give me a joke! Greet Ervin as an introduction"))
         .send()
         .join();
 
