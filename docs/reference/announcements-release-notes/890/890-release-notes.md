@@ -519,7 +519,7 @@ Camunda 8.9 expands Web Modeler with broader event template support, email-based
 <ul>
   <li><span class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</span></li>
   <li><span class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</span></li>
-  <li><span class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
+  <li><span class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
 </ul>
 
 ## 8.9.0-alpha5
@@ -1628,7 +1628,7 @@ Element templates now support reusable [BPMN signals](/components/modeler/bpmn/s
 
 Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Undertow. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
 
-<p class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
+<p class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
 
 #### Web Modeler: IP egress monitoring (SaaS)
 
