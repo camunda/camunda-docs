@@ -181,7 +181,7 @@ Enter the value as you would compare it (for example, `42` for numbers, `2024-01
 4. Click **Apply**
 
 :::note
-Numeric comparison operators (such as <= or <) are not supported. Use **equals** or **contains** as alternatives.
+Numeric comparison operators are not supported. Use **equals** or **contains** as alternatives.
 :::
 
 ## Known limitations
