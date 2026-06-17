@@ -32,7 +32,7 @@ The docs team performs a recurrent audit as part of the docs housekeeping tasks:
 
 - [ ] Check `.github/instructions/repo.instructions.md` is consistent with repo workflows and guidelines in the `howtos/` guides.
 - [ ] Check rules in `.github/instructions/content.instructions.md` are consistent with `howtos/technical-writing-styleguide.md`.
-- [ ] Check for contradictions across instruction files. Scan pairs that cover overlapping topics — for example, `.github/copilot-instructions.md` and `.github/instructions/repo.instructions.md` both touch build commands; `AGENTS.md` and `.github/copilot-instructions.md` both set agent scope. If two files say different things about the same behavior, reconcile them so agents receive consistent guidance.
+- [ ] Check for contradictions across agent instruction files. If two files say different things about the same behavior, reconcile them so agents receive consistent guidance.
 - [ ] [Review llms.txt files](#review-llmstxt-files).
 
 #### Review llms.txt files
