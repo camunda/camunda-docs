@@ -80,13 +80,6 @@ Your AWS IAM principal needs permissions for the following services:
 - Secrets Manager (secret creation)
 - Route 53 Resolver — required only if you enable `enable_cross_region_dns_resolver` in the VPC layer to resolve service discovery DNS across regions: `route53resolver:CreateResolverEndpoint`, `route53resolver:CreateResolverRule`, `route53resolver:AssociateResolverRule`
 
-### Camunda Enterprise access
-
-The reference architecture pulls Camunda container images from `registry.camunda.cloud`, which is gated behind a Camunda Enterprise license. You need:
-
-- Credentials for `registry.camunda.cloud` (`registry_username` / `registry_password`), supplied as Terraform variables in the infra layer.
-- A Camunda license key. The reference deployment expects the orchestration cluster to find a license at runtime; consult the [Camunda Self-Managed license documentation](/self-managed/setup/install.md) for how to provide it.
-
 ### AWS service quotas
 
 Dual-region deployments often hit account-default quotas. Before deploying, verify and request increases as needed for both regions:
