@@ -43,8 +43,8 @@ If you did not already migrate to the following APIs and SDKs during your 8.8 up
 
 If you already performed these migrations during your 8.8 upgrade, proceed to [Camunda 8.9 breaking changes, deprecations, and supported environment changes](#camunda-89-breaking-changes-deprecations-and-supported-environment-changes).
 
-| 8.9 status                                                 | Component/Use                                                                                                           | Migrate to                  | Migrate by          |
-| :--------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
+| 8.9 status                                                 | Component/Use                                                                       | Migrate to                  | Migrate by          |
+| :--------------------------------------------------------- | :---------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
 | <span className="label-highlight yellow">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                 | Orchestration Cluster API   | Before Camunda 8.10 |
 | <span className="label-highlight yellow">Deprecated</span> | [ZeebeClient](../migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
 | <span className="label-highlight yellow">Deprecated</span> | [Spring Zeebe SDK](../migration-manuals/migrate-to-camunda-spring-boot-starter.md)  | Camunda Spring Boot Starter | Before Camunda 8.10 |
