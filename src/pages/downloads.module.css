@@ -34,47 +34,25 @@
   justify-content: center;
 }
 
-/* ─── Browse more downloads outline button ─── */
-.browseMoreWrap {
-  display: flex;
-  justify-content: center;
-  margin: 3rem 0 0;
+/* ─── Additional release resources ─── */
+.additionalReleasesSection {
+  margin-top: 5rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3rem;
+  border-top: 1px solid var(--card-border);
 }
 
-.browseMoreButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.25rem;
-  border: 1px solid var(--card-hover-border);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--card-hover-border) !important;
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-decoration: none !important;
-  transition:
-    background 0.15s,
-    color 0.15s,
-    transform 0.15s;
+.additionalReleasesTitle {
+  margin: 0;
+  text-align: center;
+  font-size: 1.75rem;
 }
 
-.browseMoreButton:hover {
-  background: var(--card-hover-border);
-  color: #ffffff !important;
-  transform: translateY(-2px);
-  text-decoration: none !important;
-}
-
-[data-theme="dark"] .browseMoreButton {
-  border-color: #ffffff;
-  color: #ffffff !important;
-}
-
-[data-theme="dark"] .browseMoreButton:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: #ffffff;
-  color: #ffffff !important;
+.additionalReleasesSub {
+  margin: 0.6rem auto 1.5rem;
+  text-align: center;
+  color: var(--muted-color);
+  max-width: 700px;
 }
 
 /* ─── Last section: gradient bg + extra bottom space ─── */
@@ -172,6 +150,40 @@
   padding-bottom: 4rem !important;
 }
 
+.downloadsGridFull {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  max-width: 100% !important;
+}
+
+.downloadsGridTwo {
+  grid-template-columns: 1fr 1fr !important;
+  max-width: 100% !important;
+  margin-bottom: 2.5rem !important;
+}
+
+@media (max-width: 768px) {
+  .downloadsGridTwo {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Login required badge ─── */
+.loginBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--inline-code-bg);
+  color: var(--muted-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  align-self: flex-start;
+}
+
 /* ─── Download card ─── */
 .downloadCard {
   position: relative;
@@ -257,6 +269,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.downloadCardNote {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--muted-color);
+  font-size: 0.8rem;
+  line-height: 1.45;
 }
 
 .dlButtonExperimental {
