@@ -54,6 +54,8 @@ jobs:
           body=$(cat <<EOF
           This PR updates a file under \`howtos/\`. Please check whether any of the following AI instruction files needs updating to match this change:
 
+          - \`AGENTS.md\`
+          - \`CLAUDE.md\`
           - \`.github/copilot-instructions.md\`
           - \`.github/instructions/content.instructions.md\`
           - \`.github/instructions/repo.instructions.md\`
