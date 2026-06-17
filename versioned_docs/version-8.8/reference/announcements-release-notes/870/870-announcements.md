@@ -65,18 +65,16 @@ A fix that restores the method (now deprecated, returning an empty list for reco
 
 ### Multi-instance sub-process output mapping variable scope regression {#multi-instance-output-mapping-regression}
 
-Camunda 8.7.28 introduced a regression where output mappings inside a multi-instance sub-process that also defines an output collection cause local variables to unexpectedly propagate to the parent scope.
+Camunda 8.7.28 introduced a regression in which output mappings inside a multi-instance sub-process that also defines an output collection cause local variables to propagate to the parent scope.
 
-**When are you affected?**
-
-You are affected if your process contains a multi-instance sub-process that meets both of the following conditions:
+You're affected if your process contains a multi-instance sub-process that meets both of the following conditions:
 
 1. The sub-process defines an output collection.
 2. One or more elements inside the sub-process define output mappings.
 
 Under these conditions:
 
-- Local variables from inside the sub-process appear on the parent scope and are visible in Operate.
+- Local variables from inside the sub-process appear in the parent scope and are visible in Operate.
 - If any leaked variable shares a name with a variable on the parent scope, the parent scope value is overwritten.
 
 **Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
@@ -88,7 +86,7 @@ Under these conditions:
 
 **Action:**
 
-- Before the fix is available: apply the workaround above.
+- Before the fix is available: ensure all variable names inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
 - After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
 
 ### Deprecation of Self-Managed AWS Marketplace offering
