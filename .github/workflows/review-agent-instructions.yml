@@ -20,6 +20,7 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_AUTHOR: ${{ github.event.pull_request.user.login }}
       REPO: ${{ github.repository }}
       DOC_URL: ${{ github.server_url }}/${{ github.repository }}/blob/main/howtos/maintain-agent-instructions.md
     steps:
@@ -52,7 +53,7 @@ jobs:
         if: steps.check.outputs.skip == 'false'
         run: |
           body=$(cat <<EOF
-          This PR updates a file under \`howtos/\`. Please check whether any of the following AI instruction files needs updating to match this change:
+          @$PR_AUTHOR this PR updates a file under \`howtos/\`. Please check whether any of the following AI instruction files needs updating to match this change:
 
           - \`AGENTS.md\`
           - \`CLAUDE.md\`
