@@ -23,7 +23,7 @@ You may not access process instances or decision instances after you've deleted 
 To delete multiple process instances at once from the **Processes** page, take the following steps:
 
 1. On the **Processes** page, in the **Filter** panel, apply the **Finished Instances** filter by checking the appropriate box.
-2. Optionally, narrow down the list using additional filters such as **Process Name**, **Process Version**, or other available filters.
+2. Optionally, narrow down the list using additional filters. For detailed guidance on filtering options (including process name, version, and multi-variable filters), see [filter process instances](./filter-process-instances.md).
 3. Select the process instances you want to delete by checking the checkbox next to each one, or use the select-all checkbox to select all instances.
 4. Click the **Delete** button in the toolbar.
 5. Confirm the delete operation by clicking **Delete**.
@@ -33,12 +33,13 @@ To delete multiple process instances at once from the **Processes** page, take t
 To delete a single process instance from the **Processes** page, take the following steps:
 
 1. On the **Processes** page, in the **Filter** panel, apply the **Finished Instances** filter by checking the appropriate box.
-2. Click the **Delete** button on any process instance you want to delete.
-3. Confirm the delete operation by clicking **Delete**.
+2. For detailed guidance on using the filter panel, see [filter process instances](./filter-process-instances.md).
+3. Click the **Delete** button on any process instance you want to delete.
+4. Confirm the delete operation by clicking **Delete**.
 
 ### Delete a process instance from the instance detail page
 
-1. On the **Processes** page, in the **Filter** panel, apply the **Finished Instances** filter by checking the appropriate box.
+1. On the **Processes** page, in the **Filter** panel, apply the **Finished Instances** filter by checking the appropriate box. For detailed guidance on filtering, see [filter process instances](./filter-process-instances.md).
 2. Navigate to the instance detail page by clicking the **Process Instance Key** of the process instance you want to delete.
 3. In the page header, click the **Delete** button.
 4. Confirm the delete operation by clicking **Delete**.
