@@ -74,7 +74,7 @@ Every instance has a local variable `loopCounter`. It holds the index in the `in
 
 Execution listeners on a multi-instance body support a `beforeAll` event type that fires **once** per body activation — before the `inputCollection` expression is evaluated and before any instances are created. This is distinct from `start` listeners, which fire once per instance.
 
-For full details on execution listener types and configuration, see [Execution listeners](/components/concepts/execution-listeners.md).
+For full details on execution listener types and configuration, see [execution listeners](/components/concepts/execution-listeners.md).
 
 ## Variable mappings
 
