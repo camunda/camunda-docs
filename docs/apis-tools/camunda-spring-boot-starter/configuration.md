@@ -245,7 +245,7 @@ There are three ways to define the token URL. They're prioritized as follows:
 
 #### Credentials cache path
 
-You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
+By default, the Java client caches OAuth credentials in memory only. To persist credentials across JVM restarts, opt in to a file-based cache by setting `camunda.client.auth.credentials-cache-path` to a writeable file location (directory path and file name):
 
 ```yaml
 camunda:
@@ -253,6 +253,8 @@ camunda:
     auth:
       credentials-cache-path: /tmp/credentials
 ```
+
+When this property is unset or empty, no cache file is created and tokens are fetched fresh after each restart.
 
 #### Custom identity provider security context
 

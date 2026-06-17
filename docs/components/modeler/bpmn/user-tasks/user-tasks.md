@@ -38,6 +38,15 @@ You can use this to define which user the task can be assigned to. You can speci
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
 :::info
+Starting with Camunda 8.8, user task candidate groups should reference group IDs instead of group names. The Zeebe engine will attempt to resolve a candidate group value in the following way:
+
+1. Confirm a group ID exists for the value.
+2. If no ID is found, find a group name for the value, and resolve its ID.
+
+This behavior can be disabled by setting the `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION=false` configuration property, so user task candidate group values are not checked by the Zeebe engine. See [zeebe.broker.experimental.engine.caches](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerexperimentalenginecaches) for all related configuration properties.
+:::
+
+:::info
 Usernames and group IDs in the Orchestration Cluster are case-sensitive. When you set `assignee`, `candidateUsers`, or `candidateGroups`, always use the exact value from your identity provider or Identity user record, including case. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
 
 Candidate users and candidate groups are not used by current Tasklist releases for task visibility or assignment. Use [user task authorization](/components/tasklist/user-task-authorization.md) and [authorization-based access control](/components/concepts/access-control/authorizations.md) to control who can see and work on a task.

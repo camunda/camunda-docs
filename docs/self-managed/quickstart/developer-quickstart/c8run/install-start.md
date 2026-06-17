@@ -17,6 +17,10 @@ Use this page to install Camunda 8 Run locally, start it on macOS, Linux, or Win
 - **[Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)**
 - **If using Ubuntu**: Ubuntu 22.04 or newer
 
+:::note
+Starting with 8.10.0-alpha2, Camunda 8 Run does not require a separate Java installation.
+:::
+
 ## Install and start Camunda 8 Run
 
 1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the `.tgz` file extracts the Camunda 8 Run script into a new directory.

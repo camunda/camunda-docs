@@ -32,6 +32,136 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0-alpha2
+
+| Release date | Changelog(s)                                                                                                                                                                                 | Blog |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
+| 09 June 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.10.0-alpha2)</li></ul> | -    |
+
+### Agentic orchestration
+
+#### Skills repository for pro-code AI enablement
+
+<!-- https://github.com/camunda/product-hub/issues/3557 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature is in early access">Early access</span></div>
+
+The Camunda Skills repository toolset enables AI coding agents to build, validate, and configure Camunda artifacts. With the Skills installed, your AI agent can:
+
+- Build and modify BPMN diagrams with a human-readable layout.
+- Configure connectors using element templates (no raw XML).
+- Generate form schemas with validation.
+- Create and edit DMN decision tables.
+- Run BPMN lint rules against generated diagrams.
+- Scaffold and wire Camunda Process Test (CPT) integration tests.
+
+#### Judge assertions in CPT JSON Test Cases
+
+<!-- https://github.com/camunda/camunda/issues/46462 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span></div>
+
+Camunda Process Test (CPT) now supports **judge assertions** in JSON test cases.
+
+- Define judge assertions using [JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions).
+- Use a preconfigured judge from `camunda-container-runtime.properties` or Spring application properties depending on the test execution context.
+
+#### Processes MCP Server
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/camunda/issues/48491 -->
+
+AI agents can use the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) to discover and call deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
+
+When you deploy a process with an MCP start event it is automatically registered as a callable tool. MCP clients connect to the `/mcp/processes` endpoint and can invoke any registered process, with the Orchestration Cluster starting a new process instance and immediately returning the process instance key.
+
+The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
+
+### APIs & tools
+
+#### Camunda 8 Run no longer requires Java
+
+Camunda 8 Run now includes a bundled Java runtime. This means you no longer need to install OpenJDK or set `JAVA_HOME` before starting Camunda 8 Run.
+
+<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
+
+#### FEEL evaluation with process instance key
+
+<!-- https://github.com/camunda/product-hub/issues/3606 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+
+The `POST /v2/expression/evaluation` endpoint now optionally evaluates expressions in the context of:
+
+- A process instance, via `processInstanceKey`.
+- A flow node instance, via `elementInstanceKey`.
+
+The endpoint:
+
+- Combines process instance variables, element-local variables (for element scope), cluster variables, and optional request context into a single evaluation context.
+- Enforces `EXPRESSION:EVALUATE` plus `PROCESS_DEFINITION:READ_PROCESS_INSTANCE` on the underlying process definition.
+- Requires exactly one of `processInstanceKey` or `elementInstanceKey` (mutually exclusive); sending both returns `400 Bad Request`.
+
+Behavior remains free from side effects and uses the same timeout and guardrails as the existing cluster-scope evaluation.
+
+#### Removal of deprecated APIs, Zeebe Client, and Zeebe Process Test
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+
+The deprecated Operate and Tasklist APIs are removed. Process data, task management, and operational queries are now served through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+<p class="link-arrow">[Migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
+
+The Zeebe Client is removed and replaced by the [Camunda Java Client](/apis-tools/java-client/getting-started.md). This covers process deployment, message correlation, and job handling.
+
+<p class="link-arrow">[Migrate to the Camunda Java Client](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)</p>
+
+The Zeebe Process Test library is removed and replaced by [Camunda Process Test](/apis-tools/testing/getting-started.md). This provides richer assertions, Spring integration, and alignment with the Orchestration Cluster API surface.
+
+<p class="link-arrow">[Migrate to Camunda Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
+
+### Modeler
+
+#### Support for start forms in Desktop Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/2406 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+Desktop Modeler now supports defining form references on [none start events](/components/modeler/bpmn/none-events/none-events.md) in Camunda 8 BPMN models, matching the existing Web Modeler capability.
+
+You can configure start forms directly in Desktop Modeler's properties panel using:
+
+- Camunda Form (linked): Reference a deployed Camunda Form by ID.
+- Camunda Form (embedded): Embed form JSON in the BPMN diagram (deprecated).
+
+Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Web Modeler and Desktop Modeler.
+
+### Optimize
+
+#### Scope-aware variable export configuration for Optimize
+
+<!-- https://github.com/camunda/product-hub/issues/3435 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+You can now configure variable export behavior by scope:
+
+- You can enable or disable root (process instance) variables and local variables independently.
+- You can exclude all local variables by default, while still allowing specific local variables by name pattern.
+- Configuration integrates with the existing variable filtering mechanism, using consistent syntax and semantics.
+
+Terminology aligns with Camunda 8 docs:
+
+- **Root scope/process instance scope**: Variables visible across the process.
+- **Local variables**: Variables defined in child scopes only.
+
+With this, you can configure setups such as:
+
+- Export only root variables for all processes.
+- Export a curated subset of local variables (for example, `taskContextDisplayName` or specific local audit variables) without exposing all locals.
+
 ## 8.10.0-alpha1
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
@@ -71,18 +201,6 @@ This dramatically reduces time-to-first-running-agent by removing the need for e
 The **MCP start event** element template is now available in Web Modeler and Desktop Modeler. Apply it to a BPMN message start event to configure the process as an MCP tool with name, purpose, inputs, and usage guidance for LLMs.
 
 See [MCP start event](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) for the full property reference.
-
-#### Processes MCP Server
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-<!-- https://github.com/camunda/camunda/pull/52246 -->
-
-Camunda 8.10 introduces the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md), which enables AI agents to discover and call your deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
-
-Deploy a process with an MCP start event and it is automatically registered as a callable tool. MCP clients connect to the `/mcp/processes` endpoint and can invoke any registered process, with the Orchestration Cluster starting a new process instance and returning the process instance key immediately.
-
-The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
 
 #### Standalone evaluation assertions for judge and semantic similarity
 
@@ -172,6 +290,32 @@ You can now:
 - Use the improved in-line variables display.
 
 This change helps navigate more complex data during operations and troubleshooting.
+
+### APIs & tools
+
+#### In-memory OAuth credentials cache by default for the Java client
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects the Java client">Java client</span><span class="badge badge--medium" title="This feature affects the Spring SDK">Spring SDK</span></div>
+
+<!-- https://github.com/camunda/camunda/issues/13124 -->
+
+The Camunda Java client now caches OAuth credentials **in memory by default**. The file-based cache at `$HOME/.camunda/credentials` is no longer enabled out of the box and is available as an explicit opt-in.
+
+Why this change:
+
+- The previous default tried to create `$HOME/.camunda/credentials` on first use. In hardened container environments — non-root users (Kubernetes `securityContext.runAsUser`, OpenShift), read-only root filesystems, immutable images — this raised `AccessDeniedException`/`IOException` at first cache write. Affected users had to apply a non-obvious workaround (mount a writable volume and point an environment variable at it) just to get a client to start.
+- Memory-only caching removes that footgun: clients work out of the box in any deployment topology, and the in-process token cache plus proactive refresh still avoid unnecessary token endpoint calls during a JVM's lifetime.
+- The file cache had also been a source of latent corruption when multiple JVMs shared the same `$HOME`; making it opt-in restricts its use to deployments where persistence across restarts is genuinely needed.
+
+How to opt in to the file-based cache (behavior identical to pre-8.10):
+
+- Java client builder: `new OAuthCredentialsProviderBuilder().credentialsCachePath("/path/to/cache")`.
+- Spring property: `camunda.client.auth.credentials-cache-path: /path/to/cache`.
+- Environment variable: `CAMUNDA_CLIENT_CONFIG_PATH=/path/to/cache` (or `ZEEBE_CLIENT_CONFIG_PATH` for the legacy Zeebe client).
+
+If you previously set `CAMUNDA_CLIENT_CONFIG_PATH` / `ZEEBE_CLIENT_CONFIG_PATH` only to work around the non-root container error, you can now remove that configuration and rely on the in-memory default.
+
+<p class="link-arrow">[Spring Boot starter configuration](/apis-tools/camunda-spring-boot-starter/configuration.md#credentials-cache-path)</p>
 
 ### Orchestration Cluster
 

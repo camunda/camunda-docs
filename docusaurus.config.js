@@ -277,6 +277,48 @@ module.exports = {
       },
     ],
     [
+      // Hub API Self-Managed docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsm-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsm: {
+            specPath: "api/hubsm/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-sm/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
+      // Hub API SaaS docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsaas-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsaas: {
+            specPath: "api/hubsaas/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-saas/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
       // RSS feed for security notices
       "./static/plugins/notices-feed",
       {
@@ -301,7 +343,6 @@ module.exports = {
         addMdExtension: true,
         generateMarkdownFiles: true,
         preserveDirectoryStructure: true,
-        addLinkTag: false,
         ignoreFiles: ["apis-tools/*/specifications/*"],
         title: "Camunda 8 Documentation",
         description:

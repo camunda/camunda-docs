@@ -824,7 +824,7 @@ module.exports = {
                 },
                 {
                   type: "doc",
-                  label: "Recover deleted files",
+                  label: "Recover deleted resources",
                   id: "components/hub/workspace/manage-projects/recently-deleted",
                 },
               ],
@@ -1309,6 +1309,8 @@ module.exports = {
         require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-saas/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-sm/sidebar-schema"),
         {
           type: "category",
           label: "Optimize API",
@@ -1348,10 +1350,10 @@ module.exports = {
             "apis-tools/optimize-api/variable-labeling",
           ],
         },
-        require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
+            require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -1543,7 +1545,10 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",
-      items: ["apis-tools/migration-manuals/migrate-to-810"],
+      items: [
+        "apis-tools/migration-manuals/migrate-to-810",
+        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
+      ],
     },
   ],
   Reference: [
@@ -1894,20 +1899,7 @@ module.exports = {
                 id: "self-managed/deployment/helm/operational-tasks/index",
               },
               items: [
-                {
-                  type: "category",
-                  label: "Migration from Bitnami",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
-                  },
-                  items: [
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators",
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services",
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives",
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime",
-                  ],
-                },
+                "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
@@ -2179,6 +2171,18 @@ module.exports = {
                 "self-managed/concepts/document-handling/configuration/helm",
               ],
             },
+          ],
+        },
+        {
+          type: "category",
+          label: "Multi-tenancy",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-tenancy/multi-tenancy-overview",
+          },
+          items: [
+            "self-managed/concepts/multi-tenancy/logical-tenants",
+            "self-managed/concepts/multi-tenancy/physical-tenants",
           ],
         },
         {

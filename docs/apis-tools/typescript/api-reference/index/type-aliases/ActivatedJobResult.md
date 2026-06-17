@@ -85,6 +85,16 @@ listenerEventType: JobListenerEventTypeEnum;
 
 ---
 
+### priority
+
+```ts
+priority: number;
+```
+
+The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.
+
+---
+
 ### processDefinitionId
 
 ```ts
