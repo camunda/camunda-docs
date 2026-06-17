@@ -408,7 +408,7 @@ With the embedding model configured, use `hasVariableSimilarTo` as a complementa
 
 ```java
 assertThat(processInstance)
-    .hasLocalVariableSimilarTo(
+    .hasVariableSimilarTo(
         "User_Feedback",
         "responseText",
         """
@@ -425,11 +425,12 @@ Override the minimal success threshold for a single assertion if you require a h
 assertThat(processInstance)
     .withSemanticSimilarityConfig(config -> config.withThreshold(0.8))
     .hasVariableSimilarTo(
-        "agent",
+        "User_Feedback",
+        "responseText",
         """
           Hey Ervin! Here is a joke for you:
           Why did the workflow cross the road? To get to the happy path.
-          """);
+        """);
 ```
 
 ## Next steps
