@@ -182,14 +182,15 @@ CAMUNDA.MODELER.CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_URL=https://camunda.com/
 
 Use `components` to set up components in the cluster:
 
-| Property                                                   | Description                                                                                                                                                                                |
-| :--------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `camunda.modeler.clusters[0].components[0].name`           | The component's name.                                                                                                                                                                      |
-| `camunda.modeler.clusters[0].components[0].type`           | The component's type.                                                                                                                                                                      |
-| `camunda.modeler.clusters[0].components[0].version`        | The component's version.                                                                                                                                                                   |
-| `camunda.modeler.clusters[0].components[0].urls.grpc`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).                                                                               |
-| `camunda.modeler.clusters[0].components[0].urls.rest`      | The [the base URL](#notes-on-host-names-and-port-numbers) of the [Orchestration Cluster REST APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). |
-| `camunda.modeler.clusters[0].components[0].urls.readiness` | The address of the health check endpoint.                                                                                                                                                  |
+| Property                                                   | Description                                                                                                  |
+| :--------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
+| `camunda.modeler.clusters[0].components[0].name`           | The component's name.                                                                                        |
+| `camunda.modeler.clusters[0].components[0].type`           | The component's type.                                                                                        |
+| `camunda.modeler.clusters[0].components[0].version`        | The component's version.                                                                                     |
+| `camunda.modeler.clusters[0].components[0].urls.webapp`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. |
+| `camunda.modeler.clusters[0].components[0].urls.rest`      | The API base URL for connectors.                                                                             |
+| `camunda.modeler.clusters[0].components[0].urls.grpc`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). |
+| `camunda.modeler.clusters[0].components[0].urls.readiness` | The address of the health check endpoint.                                                                    |
 
 </TabItem>
 <TabItem value="env" label="Environment variables">

@@ -7,7 +7,7 @@ import K8sIcon from "../assets/kubernetes.png";
 import JarIcon from "../assets/jar.png";
 import IconGear from "../assets/icon-prereqs.png";
 import IconCloud from "../assets/icon-backup.png";
-import IconArrow from "../manual/assets/icon-arrow.png";
+import IconArrow from "../assets/icon-arrow.png";
 
 export const overviewCards = [
   {
@@ -16,13 +16,6 @@ export const overviewCards = [
     image: K8sIcon,
     description:
       "Upgrade a Helm-managed Camunda 8.8 deployment on Kubernetes to version 8.9.",
-  },
-  {
-    link: "./manual",
-    title: "Manual",
-    image: JarIcon,
-    description:
-      "Manually upgrade a local Camunda installation from an archive distribution to version 8.9.",
   },
 ];
 

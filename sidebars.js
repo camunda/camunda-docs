@@ -2478,7 +2478,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.9",
+      label: "Upgrade to Camunda 8.10",
       className: "sidebar-cta",
       link: {
         type: "doc",
@@ -2495,7 +2495,6 @@ module.exports = {
           },
           items: ["self-managed/upgrade/helm/880-to-890"],
         },
-        "self-managed/upgrade/manual/index",
         {
           type: "category",
           label: "Component upgrade",
@@ -2503,15 +2502,7 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/components/index",
           },
-          items: [
-            "self-managed/upgrade/components/880-to-890",
-            {
-              Database: [
-                "self-managed/upgrade/components/database/changes-in-elasticsearch-8",
-              ],
-            },
-            "self-managed/upgrade/components/keycloak/keycloak-compatibility",
-          ],
+          items: ["self-managed/upgrade/components/890-to-8100"],
         },
       ],
     },
