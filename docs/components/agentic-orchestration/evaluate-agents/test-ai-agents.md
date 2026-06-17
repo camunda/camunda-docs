@@ -404,7 +404,7 @@ For the full property reference, see [semantic similarity configuration](/apis-t
 
 ### Add a similarity assertion
 
-With the embedding model configured, use `hasVariableSimilarTo` as a complementary check on the `agent` process variable:
+With the embedding model configured, use `hasVariableSimilarTo` as a complementary check on the `responseText` variable of the `User_Feedback` task instance:
 
 ```java
 assertThat(processInstance)
