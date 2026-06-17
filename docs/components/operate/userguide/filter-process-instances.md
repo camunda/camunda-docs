@@ -4,13 +4,14 @@ title: Filter process instances
 description: Learn how to filter process instances by variables and other properties using single and multi-variable filters.
 ---
 
-Narrow down large lists of process instances using filters. Combine multiple variable filters with AND logic to find the exact instances you need.
+Narrow down large lists of process instances using filters. Combine multiple variable filters with `AND` logic to find the exact instances you need.
 
 :::note Related pages
 
 - **[Delete finished instances](./delete-finished-instances.md)** — Use filters to select instances for deletion.
 - **[Resolve incidents and update variables](./resolve-incidents-update-variables.md)** — Use filters to locate instances that need action.
-  :::
+
+:::
 
 ## Filter panel
 
@@ -85,7 +86,7 @@ The sidebar displays a count of active variable filter conditions. Click **Add/E
 | **does not exist** | Variable is not present                            | Find instances missing a required variable          |
 
 :::caution
-The **contains** operator searches only the first ~8,191 characters of a variable value. If a match exists beyond this boundary, it will not be returned.
+The **contains** operator searches only the first ~8,000 characters of a variable value. If a match exists beyond this boundary, it will not be returned.
 :::
 
 ### AND logic
