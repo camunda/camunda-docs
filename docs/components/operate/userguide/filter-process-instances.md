@@ -181,7 +181,7 @@ Enter the value as you would compare it (for example, `42` for numbers, `2024-01
 4. Click **Apply**
 
 :::note
-Numeric comparison operators (>, <, >=, <=) are not supported. Use **equals** or **contains** as alternatives.
+Numeric comparison operators (such as <= or <) are not supported. Use **equals** or **contains** as alternatives.
 :::
 
 ## Known limitations
@@ -190,7 +190,7 @@ Numeric comparison operators (>, <, >=, <=) are not supported. Use **equals** or
 - **OR logic**: Filters are combined with AND logic only; OR conditions are not supported.
 - **Variable name autocomplete**: Variable names must be entered as free text. Variable name suggestions based on process definitions are a planned future enhancement.
 - **Nested JSON path filtering**: Filtering on nested properties within JSON objects (for example, `customer.region`) is not supported; filter on the top-level variable only.
-- **Contains truncation**: The **contains** operator searches only the first ~8,191 characters of a variable value.
+- **Contains truncation**: The **contains** operator searches only the first ~8,100 characters of a variable value.
 - **Filter sharing**: Filter state is stored in your browser session and cannot be shared via URL. See [filter persistence](#filter-persistence) for details.
 
 ## Related topics
