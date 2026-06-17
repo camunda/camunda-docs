@@ -327,6 +327,7 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe
 
 # For enterprise images (requires authentication)
 skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
+# vendor-ee/* tag lists are incomplete since the November 2025 migration (see note below); pull by exact tag.
 skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
 

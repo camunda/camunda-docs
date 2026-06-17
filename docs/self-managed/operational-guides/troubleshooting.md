@@ -337,12 +337,6 @@ skopeo login registry.camunda.cloud --username <your-username> --password <your-
 skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
 
-:::note Registry migration notice
-On November 30, 2025, our image vendor migrated its repositories. Pulling images is unaffected: any image can still be pulled when you reference its exact tag. Tag listing is affected. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI only return tags cached since the migration. The listed tags are therefore an incomplete view of what is available, because the registry stores only cached images, not the full upstream catalog.
-
-For the list of supported images and tags, refer to the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull from a fully listed repository such as `registry.camunda.cloud/camunda/<image>` or `registry.camunda.cloud/keycloak-ee/keycloak`. For `vendor-ee/<image>` paths, pull or mirror by the exact tag instead of relying on the tag list.
-:::
-
 ## Incorrect authorizations when deploying resources from Modeler
 
 If you encounter missing or invalid authorizations when deploying resources or starting process instances from Web Modeler or Desktop Modeler, review which credentials are being used:
