@@ -510,7 +510,7 @@ You must apply the custom `StorageClass` before installing the Camunda Helm char
 
 :::warning Migration from Bitnami Elasticsearch to ECK in dual-region
 
-There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators.md) and apply it individually to each region.
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure (documented for Camunda 8.9)](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) and apply it individually to each region.
 
 :::
 
