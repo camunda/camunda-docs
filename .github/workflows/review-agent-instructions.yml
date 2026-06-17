@@ -53,7 +53,7 @@ jobs:
         if: steps.check.outputs.skip == 'false'
         run: |
           body=$(cat <<EOF
-          @$PR_AUTHOR this PR updates a file under \`howtos/\`. Please check whether any of the following AI instruction files needs updating to match this change:
+          @$PR_AUTHOR this PR updates a file under \`howtos/\`. Please check whether any of the following AI agent instruction files needs updating to match this change:
 
           - \`AGENTS.md\`
           - \`CLAUDE.md\`
@@ -61,7 +61,7 @@ jobs:
           - \`.github/instructions/content.instructions.md\`
           - \`.github/instructions/repo.instructions.md\`
 
-          If nothing applies, remove the \`review-agent-instructions\` label. See [Maintain AI instruction files]($DOC_URL) for more details.
+          If nothing applies, remove the \`review-agent-instructions\` label. See [maintain AI instruction files]($DOC_URL) for more details.
           EOF
           )
 
