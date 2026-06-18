@@ -12,8 +12,6 @@ Each Physical Tenant can use isolated secondary storage, ensuring complete struc
 - **[Provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md)** — Tenant operations
   :::
 
----
-
 ## RDBMS storage
 
 Each Physical Tenant can have its own schema or database instance.
@@ -60,11 +58,7 @@ tenant-a:
 - **Manual DDL**: If running Liquibase scripts separately, apply to every tenant's schema before each upgrade
 - **Resource scaling**: Each tenant gets its own JDBC datasource per cluster node; add memory/CPU for many tenants
 
-:::note TODO
-**Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete.
-:::
-
----
+<!--- **Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete. --->
 
 ## Elasticsearch/OpenSearch storage
 
@@ -119,11 +113,7 @@ camunda:
 - **Collision prevention**: Use full tenant ID; avoid overlapping prefixes (e.g., `eu` and `eu-west`)
 - **Validation**: Cluster fails at startup if two tenants have overlapping index names
 
-:::note TODO
-**Pending verification**: Collision detection for overlapping tenant IDs (e.g., `eu` vs `eu-west`) is being verified in code.
-:::
-
----
+<!--- **Pending verification**: Collision detection for overlapping tenant IDs (e.g., `eu` vs `eu-west`) is being verified in code. --->
 
 ## Document Store storage
 
@@ -184,8 +174,6 @@ physical-tenants:
 - **Validation**: Cluster rejects config if two tenants point to same storage location
 - **Subpath structure**: `s3://bucket/{physicalTenantId}/documents/`
 
----
-
 ## Operational considerations
 
 ### Backup and restore
@@ -234,8 +222,6 @@ Risks to avoid:
 | **Add tenant**   | Create storage backend → Validate connectivity → Add config → Rolling restart |
 | **Consolidate**  | Backup source → Create new backend → Update config → Restore → Verify         |
 | **Split tenant** | Plan data distribution → Backup → Create stores → Restore to each → Restart   |
-
----
 
 ## Storage configuration matrix
 
