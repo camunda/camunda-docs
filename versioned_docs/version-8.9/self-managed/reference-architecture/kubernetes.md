@@ -223,7 +223,7 @@ Database ports are not included here, as databases should be maintained outside 
 
 Typical defaults include:
 
-- `5432`: PostgreSQL
+- `5432`: PostgreSQL (Management Identity, Web Modeler, and RDBMS secondary storage when used)
 - `9200`, `9300`, `9600`: Document-store secondary storage (Elasticsearch/OpenSearch)
   :::
 
@@ -256,10 +256,10 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-| Database                         | Requirement                                                                                        |
-| :------------------------------- | :------------------------------------------------------------------------------------------------- |
-| Document-store secondary storage | Required by Orchestration Cluster and Optimize in this topology (Elasticsearch/OpenSearch).        |
-| PostgreSQL                       | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
+| Database                                  | Requirement                                                                                                                                                                 |
+| :---------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Secondary storage (Orchestration Cluster) | Elasticsearch or OpenSearch (document store) in this topology, or a supported RDBMS (relational database) as an alternative. Optimize requires Elasticsearch or OpenSearch. |
+| PostgreSQL                                | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster.                                                                          |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
