@@ -63,41 +63,6 @@ Once you've chosen your backend, export the variable so all subsequent commands 
 export SECONDARY_STORAGE=postgres   # or: elasticsearch
 ```
 
-### PostgreSQL secondary storage configuration
-
-When you set `SECONDARY_STORAGE=postgres`, the operator deployment step deploys the `pg-camunda` [CloudNativePG](https://cloudnative-pg.io/) cluster (database `camunda`, user `camunda`), and the `camunda-rdbms-values.yml` overlay points the Orchestration Cluster at it through the in-cluster `pg-camunda-rw` service. The overlay applies this RDBMS values delta:
-
-```yaml
-orchestration:
-  exporters:
-    camunda:
-      enabled: false
-    rdbms:
-      enabled: true
-  data:
-    secondaryStorage:
-      type: rdbms
-      rdbms:
-        url: jdbc:postgresql://pg-camunda-rw:5432/camunda
-        username: camunda
-        secret:
-          existingSecret: pg-camunda-secret
-          existingSecretKey: password
-elasticsearch:
-  enabled: false
-optimize:
-  enabled: false # Optimize requires Elasticsearch/OpenSearch
-```
-
-The operator scripts create the `pg-camunda-secret` credentials automatically. If you point Camunda at an external PostgreSQL instead of the in-cluster cluster, create the referenced secret yourself:
-
-```bash
-kubectl create secret generic pg-camunda-secret \
-  --from-literal=password='<password>' --namespace camunda
-```
-
-For the full Helm workflow and configuration reference, see the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
-
 ## Prerequisites
 
 Before you begin, you'll need:
