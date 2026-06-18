@@ -71,7 +71,6 @@ Orchestration Cluster:
 Connectors:
 
 - Bundle (includes pre-bundled connectors from Camunda)
-
   - File names follow the pattern `connector-runtime-bundle-x.y.z-with-dependencies.jar`.
   - Released bundle artifacts aren't available in Maven Central or Artifactory.
 
