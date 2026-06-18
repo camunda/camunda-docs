@@ -85,18 +85,18 @@ becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in th
 
 #### Common connector types
 
-| Connector                 | Environment variable               | Example value                   |
-| ------------------------- | ---------------------------------- | ------------------------------- |
-| HTTP REST                 | `CONNECTOR_HTTP_REST_TYPE`         | `io.camunda:http-json:local`    |
-| AWS SQS (Outbound)        | `CONNECTOR_AWS_SQS_OUTBOUND_TYPE`  | `io.camunda:aws-sqs:local`      |
-| Kafka consumer (Inbound)  | `CONNECTOR_KAFKA_CONSUMER_TYPE`    | `io.camunda:kafka:local`        |
-| Kafka producer (Outbound) | `CONNECTOR_KAFKA_PRODUCER_TYPE`    | `io.camunda:kafka:local`        |
-| SendGrid                  | `CONNECTOR_SENDGRID_TYPE`          | `io.camunda:sendgrid:local`     |
-| Slack                     | `CONNECTOR_SLACK_TYPE`             | `io.camunda:slack:local`        |
-| Gmail                     | `CONNECTOR_GMAIL_TYPE`             | `io.camunda:gmail:local`        |
-| Google Drive              | `CONNECTOR_GOOGLE_DRIVE_TYPE`      | `io.camunda:google-drive:local` |
-| RabbitMQ (Inbound)        | `CONNECTOR_RABBITMQ_CONSUMER_TYPE` | `io.camunda:rabbitmq:local`     |
-| RabbitMQ (Outbound)       | `CONNECTOR_RABBITMQ_PRODUCER_TYPE` | `io.camunda:rabbitmq:local`     |
+| Connector                 | Environment variable               | Example value                         |
+| ------------------------- | ---------------------------------- | ------------------------------------- |
+| HTTP REST                 | `CONNECTOR_HTTP_REST_TYPE`         | `io.camunda:http-json:local`          |
+| AWS SQS (Outbound)        | `CONNECTOR_AWS_SQS_OUTBOUND_TYPE`  | `io.camunda:aws-sqs:local`            |
+| Kafka consumer (Inbound)  | `CONNECTOR_KAFKA_CONSUMER_TYPE`    | `io.camunda:connector-kafka:local`    |
+| Kafka producer (Outbound) | `CONNECTOR_KAFKA_PRODUCER_TYPE`    | `io.camunda:connector-kafka:local`    |
+| SendGrid                  | `CONNECTOR_SENDGRID_TYPE`          | `io.camunda:sendgrid:local`           |
+| Slack                     | `CONNECTOR_SLACK_TYPE`             | `io.camunda:slack:local`              |
+| Gmail                     | `CONNECTOR_GMAIL_TYPE`             | `io.camunda:gmail:local`              |
+| Google Drive              | `CONNECTOR_GOOGLE_DRIVE_TYPE`      | `io.camunda:google-drive:local`       |
+| RabbitMQ (Inbound)        | `CONNECTOR_RABBITMQ_CONSUMER_TYPE` | `io.camunda:connector-rabbitmq:local` |
+| RabbitMQ (Outbound)       | `CONNECTOR_RABBITMQ_PRODUCER_TYPE` | `io.camunda:connector-rabbitmq:local` |
 
 For a complete list of all available connectors and their types, see the [available connectors overview](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) or check the [official connectors repository](https://github.com/camunda/connectors).
 
