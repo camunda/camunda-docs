@@ -10,7 +10,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::tip Subscribe to release notifications
-Subscribe to the [RSS feed](pathname:///rss/releases/versions.xml) for release updates and get automatic notifications when new releases are published.
+Subscribe to the RSS feed for release updates and get automatic notifications when new releases are published.
 :::
 
 Published when a new Camunda 8 release train completes for SaaS and Self-Managed.
