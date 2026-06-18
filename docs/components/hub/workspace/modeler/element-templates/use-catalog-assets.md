@@ -30,6 +30,8 @@ To use a Catalog asset while modeling:
 
 When the CoE publishes a newer version of a template you already use, Hub offers an **update** path on elements that reference the older version, so you can move to the latest version on your terms.
 
+If the CoE unpublishes an asset you already use, its template is deprecated: elements that reference it keep working but show a deprecation hint in the properties panel, signaling that you should migrate to a newer version or a different template.
+
 ## Next steps
 
 - Learn more about [element templates](/components/hub/workspace/modeler/element-templates/using-templates.md).

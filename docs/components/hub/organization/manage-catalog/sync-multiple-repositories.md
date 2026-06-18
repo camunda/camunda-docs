@@ -44,4 +44,4 @@ The collection repository then syncs to Hub exactly as described in [Step 2 of t
 ## Next steps
 
 - [Get started with the Catalog](/components/hub/organization/manage-catalog/getting-started.md) — set up the repository and CI/CD pipeline.
-- [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md) — unpublish, deprecate, and delete Catalog assets.
+- [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md) — unpublish and delete Catalog assets.

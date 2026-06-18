@@ -211,7 +211,7 @@ When a new version of an asset is published, delivery team members see an **Upda
 
 ## Next steps
 
-- [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md) — unpublish, deprecate, and delete Catalog assets.
+- [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md) — unpublish and delete Catalog assets.
 - [Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) — consolidate templates from several repositories before syncing.
 - [Use Catalog assets in Hub](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md) — how delivery teams discover and apply published assets while modeling.
 - Set up additional CI/CD steps in your project repositories to deploy related collateral (job workers, BPMN processes, forms) to your Orchestration Clusters.
