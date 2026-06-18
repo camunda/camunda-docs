@@ -18,9 +18,9 @@ The reference architecture creates two identically configured ECS Fargate cluste
 - Active-active deployment across two AWS regions (default `eu-west-2` and `eu-west-3`; pick your own pair).
 - Eight Zeebe brokers (four per region) with `cluster_size=8`, `replication_factor=4`, and `partition_count=8`. Asymmetric initial contact points use ECS Service Connect locally and the cross-region NLB for inter-region traffic.
 - Aurora Global Database — single writer endpoint per cluster, with the [AWS JDBC Wrapper](https://github.com/aws/aws-advanced-jdbc-wrapper) `failover` plugin enabled for automatic reconnection after a writer change.
-- Cross-region connectivity via [AWS Transit Gateway](https://aws.amazon.com/transit-gateway/) (default) or [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
+- Cross-region connectivity via [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) (recommended default) or [AWS Transit Gateway](https://aws.amazon.com/transit-gateway/) for Enterprise scenarios.
 - [Route 53 Resolver](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html) endpoints to forward Cloud Map service-discovery DNS queries across regions.
-- Camunda 8.10 or later. The unified Orchestration Cluster `/v2/*` REST API requires Basic authentication; see [Access the deployment](#access-the-deployment).
+- Camunda 8.10 or later. The unified Orchestration Cluster `/v2/*` REST API requires Basic authentication; see [Verify connectivity to Camunda 8](#verify-connectivity-to-camunda-8).
 
 :::note Active-active scope
 Active-active in this guide refers to the Zeebe data plane: one stretched cluster whose brokers and partitions live in both regions, accepting and processing work concurrently from either region. The Aurora-backed secondary storage tier is active-standby — region 0 hosts the writer and region 1 hosts a cross-region reader. Promoting region 1 to writer is an explicit step during failover, not an automatic property of the deployment.
@@ -189,10 +189,10 @@ Make these decisions before running any `terraform apply`. They affect every lay
 
 ### Networking mode
 
-| Option                    | `networking_mode` value | When to use                                                                                                         |
-| ------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Transit Gateway (default) | `transit_gateway`       | Production, existing TGW deployments, or anticipated future multi-VPC topologies. Incurs hourly and per-GB charges. |
-| VPC peering               | `vpc_peering`           | Development or proof-of-concept. Simpler to manage; limited to a direct 1:1 connection between the two regions.     |
+| Option                | `networking_mode` value | When to use                                                                                                                                                                                                           |
+| --------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| VPC peering (default) | `vpc_peering`           | Simpler to manage. Start here if you don't have a cross-region network in place.                                                                                                                                      |
+| Transit Gateway       | `transit_gateway`       | Enterprise scenarios — existing Transit Gateway deployments or hub-and-spoke topologies that need to integrate this cluster. Choose this only when you actually need it and understand the hourly and per-GB charges. |
 
 :::note
 Neither Transit Gateway nor VPC peering encrypts traffic at the network layer. Raft replication between Zeebe brokers crosses the AWS backbone in cleartext unless you add an encryption layer (for example, IPsec on the TGW attachment, or application-layer TLS on the Zeebe broker channel). Regulated workloads should evaluate this before choosing.
@@ -232,7 +232,7 @@ cluster_name       = "<your-cluster-name>"
 aws_profile        = "<your-aws-profile>" # optional; omit when authenticating via AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY
 region_0           = "<primary-region>"         # for example, eu-west-2
 region_1           = "<secondary-region>"       # for example, eu-west-3
-networking_mode    = "transit_gateway"          # or "vpc_peering"
+networking_mode    = "vpc_peering"              # default; set to "transit_gateway" only for Enterprise scenarios
 region_0_cidr      = "10.192.0.0/16"
 region_1_cidr      = "10.202.0.0/16"
 single_nat_gateway = false                      # set to true to reduce NAT costs in non-production
@@ -244,13 +244,13 @@ For BYO-VPC, add:
 byo_vpc = true
 
 region_0_vpc_id                  = "vpc-<your-vpc-id>"
-region_0_vpc_cidr                = "10.192.0.0/16"
+region_0_vpc_cidr                = "<your-vpc-CIDR>"
 region_0_private_subnet_ids      = ["subnet-aaa", "subnet-bbb", "subnet-ccc"]
 region_0_public_subnet_ids       = ["subnet-ddd", "subnet-eee", "subnet-fff"]
 region_0_private_route_table_ids = ["rtb-xxx"]
 
 region_1_vpc_id                  = "vpc-<your-vpc-id>"
-region_1_vpc_cidr                = "10.202.0.0/16"
+region_1_vpc_cidr                = "<your-vpc-CIDR>"
 region_1_private_subnet_ids      = ["subnet-ggg", "subnet-hhh", "subnet-iii"]
 region_1_public_subnet_ids       = ["subnet-jjj", "subnet-kkk", "subnet-lll"]
 region_1_private_route_table_ids = ["rtb-yyy"]
@@ -392,7 +392,53 @@ cd ../vpc && terraform destroy
 The reference architecture sets `s3_force_destroy = true` by default so `terraform destroy` removes backup S3 buckets without manual emptying. Flip `s3_force_destroy` to `false` in `terraform/infra/terraform.tfvars` and re-apply the infra layer before running any real workload through the stack. Otherwise, `terraform destroy` will delete backup data permanently.
 :::
 
-## Access the deployment
+## Verify connectivity to Camunda 8
+
+Using Terraform, you can obtain the HTTP endpoint of each Application Load Balancer and interact with Camunda through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+:::warning HTTPS
+To keep dependencies minimal and non-blocking for a quick start, this reference architecture omits a custom domain and TLS configuration.
+
+You can add TLS by attaching an AWS Certificate Manager (ACM) certificate to each Application Load Balancer. For details, see the AWS documentation on [creating an HTTPS listener](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html). Information on configuring a custom domain is available in the [Application Load Balancer documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#dns-name).
+
+Without these additions, traffic is transmitted in cleartext and is therefore insecure.
+:::
+
+1. Navigate to the infra Terraform folder:
+
+   ```bash
+   cd terraform/infra
+   ```
+
+2. Retrieve an ALB endpoint. The dual-region setup is active-active, so either region's ALB works:
+
+   ```bash
+   terraform output -raw region_0_alb_endpoint
+   terraform output -raw region_1_alb_endpoint
+   ```
+
+   Both ALBs expose the Orchestration Cluster and Connectors through the same port and use listener rules to determine the path they're on:
+
+   - ALB:80
+     - `/*` routes to the Orchestration Cluster UI and REST API.
+     - `/connectors*` routes to the Connectors.
+   - ALB:9600 (optional, not recommended to be exposed publicly)
+     - `/*` routes to the Orchestration Cluster management endpoints.
+     - Connectors combines the management port with the web server by default.
+   - NLB:26500 (TCP)
+     - Exposes the Orchestration Cluster Zeebe Gateway over gRPC. Retrieve the endpoint with `terraform output -raw region_0_nlb_grpc_endpoint` or `terraform output -raw region_1_nlb_grpc_endpoint`.
+
+3. Access the URL of `region_0_alb_endpoint` (or `region_1_alb_endpoint`), which presents a login screen.
+
+   The admin user is `admin`. The password is randomly generated and shared between regions. Retrieve it with:
+
+   ```bash
+   terraform output -raw admin_user_password
+   ```
+
+4. Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to communicate with Camunda. Follow the [authentication example](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
+
+### Seeded users
 
 Camunda 8.10 requires Basic authentication on the unified `/v2/*` REST API. Two users are seeded at first boot:
 
@@ -489,7 +535,20 @@ open http://localhost:8080
 | NLB external (region 0/1) | 26500 | TCP      | Zeebe gRPC for clients.                                 |
 | NLB internal (region 0/1) | 26502 | TCP      | Zeebe Raft, cross-region, private.                      |
 
-## Failover and failback
+## Operations
+
+### Backup and restore
+
+The general [backup and restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md) applies, with two dual-region specifics to keep in mind:
+
+- **Backups are per region.** Each orchestration cluster writes to its local S3 backup bucket via `CAMUNDA_DATA_BACKUP_S3_BUCKETNAME`. The infra layer exposes both bucket names as outputs: `backup_bucket_region_0_name` and `backup_bucket_region_1_name`. Trigger backups against either region's API; ensure your backup tooling reads the correct bucket for that region.
+- **Restore is not exposed by the dual-region app layer.** The underlying orchestration-cluster module supports an init-container restore (`restore_enabled`, `restore_backup_id` — see [restore options when using RDBMS](/self-managed/operational-guides/backup-restore/rdbms/restore.md#restore-options)), but these variables are not surfaced in `terraform/app/camunda.tf` in this reference. Enabling restore for a dual-region deployment requires customizing the app layer to pass the restore variables to both regional module invocations and to coordinate broker IDs that span both regions. Treat dual-region restore as an advanced scenario; validate it against your specific topology before relying on it.
+
+:::note
+Camunda recommends restoring to a fresh cluster rather than reusing an existing one. A newly created cluster has empty S3 backup buckets and EFS volumes, so no additional cleanup is needed. If you restore into an existing cluster, manually empty the S3 bucket configured for the node ID provider and fully clear the EFS volumes in both regions before starting the restore.
+:::
+
+### Failover and failback
 
 The reference repository ships helper scripts under `aws/containers/ecs-dual-region-fargate/procedure/`:
 
@@ -508,6 +567,49 @@ The reference repository ships helper scripts under `aws/containers/ecs-dual-reg
 ```
 
 Read the scripts in the reference repository for the exact actions and prerequisites. Failover is manual — no automated health-check-driven promotion is included.
+
+## Troubleshooting
+
+### Logs
+
+ECS task logs are exported to CloudWatch by default unless you configure otherwise. They are visible in the CloudWatch console and inline in the ECS service view alongside each task.
+
+Retrieve the log group names from the app layer output:
+
+```bash
+cd terraform/app
+terraform output -raw region_0_log_group_name
+terraform output -raw region_1_log_group_name
+```
+
+### Accessing task or management API
+
+ECS tasks are not reachable from outside the VPC without a workaround. Options include:
+
+- Use the [Session Manager port-forward method](#method-b--session-manager-port-forward) to reach a running orchestration cluster task without a public IP. The reference architecture sets `task_enable_execute_command = true` by default, so the channel is already available.
+- Run an EC2 or ECS debug task inside the same VPC and call the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) over the private network.
+- Connect via an [AWS Client VPN](https://aws.amazon.com/vpn/client-vpn/) attached to the VPC.
+- Use Lambda or Step Functions to invoke the API.
+- Temporarily expose the management API on the ALB (not recommended for production).
+
+To open an interactive shell on a running task via [AWS ECS Exec](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec-run.html):
+
+```bash
+CLUSTER=$(cd terraform/infra && terraform output -raw cluster_name)
+TASK_ARN=$(aws ecs list-tasks \
+  --cluster "${CLUSTER}-r0-cluster" \
+  --service-name "${CLUSTER}-r0-oc-orchestration-cluster" \
+  --query 'taskArns[0]' --output text)
+
+aws ecs execute-command \
+  --cluster "${CLUSTER}-r0-cluster" \
+  --task "${TASK_ARN##*/}" \
+  --container orchestration-cluster \
+  --command "/bin/sh" \
+  --interactive
+```
+
+For general troubleshooting, see the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
 
 ## Known limitations
 
