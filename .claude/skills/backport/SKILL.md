@@ -46,12 +46,7 @@ For each target version:
 
 ## 4. Validation
 
-```bash
-npm run format         # Always
-npm run build          # When adding/moving/removing pages, editing sidebars,
-                       # changing link targets, touching docusaurus.config.js,
-                       # static/.htaccess, or MDX components in src/
-```
+Follow the build and format rules in `repo.instructions.md` §5.
 
 ## 5. Commit and PR conventions
 
