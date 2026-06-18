@@ -17,17 +17,7 @@ Before touching any file, confirm:
 
 - **What changed**: list the files modified in the source change (content edits, new pages, sidebar additions, `.htaccess` redirects).
 - **Why it applies to older versions**: bug fixes, clarifications, and corrections to already-shipped features are backport candidates. Content for unreleased features is not.
-- **Which versions**: check whether the feature existed in each target version. Active versioned folders and their coverage:
-
-| Folder                        | Version |
-| ----------------------------- | ------- |
-| `versioned_docs/version-8.9/` | 8.9     |
-| `versioned_docs/version-8.8/` | 8.8     |
-| `versioned_docs/version-8.7/` | 8.7     |
-
-Camunda maintains 18 months of minor versions. Do not backport to unmaintained versions (8.6 and earlier); if a user explicitly requests this, explain that the version is no longer maintained and no `versioned_docs/version-8.6/` folder exists.
-
-Check `src/versions.js` (`currentVersion`) and `versions.json` for the live version list.
+- **Which versions**: check whether the feature existed in each target version. See `repo.instructions.md` §6 for the active version list and how to look it up in `src/versions.js` and `versions.json`. Do not backport to unmaintained versions; if a user explicitly requests one, explain that no `versioned_docs/version-<N>/` folder exists for it.
 
 ## 2. Find the equivalent file in each target version
 
