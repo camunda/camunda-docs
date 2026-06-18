@@ -21,6 +21,10 @@ You can configure a BPMN process as a callable MCP tool through the [Processes M
 
 It is built into the Orchestration Cluster and automatically registers processes as MCP tools when they are deployed with the [MCP start event element template](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md).
 
+:::tip
+If your AI agent and the target process run on the **same** Orchestration Cluster, consider using a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) inside the ad-hoc sub-process instead. Call activities are synchronous and maintain a connected instance hierarchy with a consistent audit trail. See [call processes as agent tools](/components/agentic-orchestration/design-architecture.md#call-processes-as-agent-tools) for a full comparison.
+:::
+
 ## Prerequisites
 
 - Access to [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) or [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).

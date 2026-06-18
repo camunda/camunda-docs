@@ -1,0 +1,47 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Info resource paths and schemas
+paths:
+  /info:
+    get:
+      operationId: getInfo
+      summary: Get API info
+      description: >
+        Returns metadata about the V2 API, including the API version and the
+        organization authorized by the caller's credentials.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Info
+      responses:
+        "200":
+          description: The API info was retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InfoResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  schemas:
+    InfoResult:
+      type: object
+      required:
+        - version
+        - authorizedOrganization
+      properties:
+        version:
+          description: The API version.
+          type: string
+        authorizedOrganization:
+          description: >
+            The organization ID that the caller's credentials are authorized for.
+          type: string
