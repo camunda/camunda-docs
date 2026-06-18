@@ -237,6 +237,12 @@ The following legacy fields are deprecated in Camunda 8.8+ but remain functional
 | **AWS Document Store Credentials** | `global.documentStore.type.aws.existingSecret`, `global.documentStore.type.aws.accessKeyIdKey`, `global.documentStore.type.aws.secretAccessKeyKey`                                  | AWS credentials for S3 document storage (requires multiple keys: access key ID and secret access key)                                          |
 | **GCP Document Store Credentials** | `global.documentStore.type.gcp.existingSecret`, `global.documentStore.type.gcp.credentialsKey`, `global.documentStore.type.gcp.mountPath`, `global.documentStore.type.gcp.fileName` | GCP service account JSON for GCS document storage (single key containing JSON file, with additional mount configuration for file-based access) |
 
+### Credential precedence with IRSA
+
+The AWS SDK resolves credentials through its [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which reads the static `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables before the IRSA web identity token. Because the chart injects these variables from the access key secrets above whenever the AWS document store is enabled, their presence takes precedence and prevents [IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#document-store-s3) from being used — even when the service account is annotated with an IAM role.
+
+To authenticate with IRSA instead, set `global.documentStore.type.aws.irsa.enabled` to `true`. The chart then skips injecting the static credentials, and the AWS access key secrets above are not required.
+
 ## Migration from legacy pattern (8.7 → 8.8+)
 
 If you are upgrading from Camunda 8.7 or earlier and using the legacy secret management pattern, migrate to the new structured `secret:` pattern available in Camunda 8.8+ for better consistency and future compatibility. The legacy fields are deprecated in 8.8+ but will remain functional during the transition period.
