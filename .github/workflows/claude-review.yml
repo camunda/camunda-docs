@@ -9,8 +9,10 @@ on:
 jobs:
   claude-review:
     if: |
-      (github.event_name == 'issue_comment' || github.event_name == 'pull_request_review_comment') &&
-      contains(github.event.comment.body, '@claude')
+      github.event_name == 'pull_request_review_comment' ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request != null &&
+       contains(github.event.comment.body, '@claude'))
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -19,6 +21,7 @@ jobs:
       - uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           direct_prompt: |
             Review this pull request against the Camunda docs contribution standards referenced from AGENTS.md.
 
