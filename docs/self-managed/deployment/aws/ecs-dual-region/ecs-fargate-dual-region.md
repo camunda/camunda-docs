@@ -9,18 +9,22 @@ This guide walks you through deploying Camunda 8 Self-Managed in an active-activ
 
 ## What you'll deploy
 
-The reference architecture creates two symmetric ECS Fargate clusters, one per AWS region, with Zeebe brokers distributed across both regions to provide active-active resilience.
+The reference architecture creates two identically configured ECS Fargate clusters, one per AWS region, with Zeebe brokers distributed across both regions to provide active-active resilience.
+
+:::note
+**Active-active** in this guide refers to the Zeebe data plane: one stretched cluster whose brokers and partitions live in both regions, accepting and processing work concurrently from either region. The Aurora-backed secondary storage tier is **active-standby** — region 0 is the writer and region 1 is a cross-region reader. Promoting region 1 to writer is an explicit step during failover, not an automatic property of the deployment.
+:::
 
 **What gets deployed:**
 
 - Eight Zeebe brokers (four per region), replication factor 4, eight partitions. Zone-aware placement ensures every partition has replicas in both regions (`CAMUNDA_CLUSTER_PARTITIONING_ZONEAWARE_ZONES_*`).
 - Two Connector tasks (one per region).
-- Seconday Storage: 
-   - One Aurora Global Database with a writer in region 0 and a cross-region reader in region 1, 
-   - or two independent OpenSearch domains (one per region).
-- Cross-region connectivity via: 
-   - AWS Transit Gateway,
-   - or VPC Peering.
+- Secondary storage:
+  - One Aurora Global Database with a writer in region 0 and a cross-region reader in region 1,
+  - or two independent OpenSearch domains (one per region).
+- Cross-region connectivity via:
+  - AWS Transit Gateway,
+  - or VPC Peering.
 - Application Load Balancers (ALB) for HTTP and metrics traffic, and Network Load Balancers (NLB) for gRPC and Zeebe inter-broker communication.
 
 ```mermaid
@@ -165,7 +169,7 @@ Neither Transit Gateway nor VPC Peering encrypts traffic at the network layer. R
 | OpenSearch            | `opensearch`                   | Required if you need Optimize. One independent OpenSearch domain per region; brokers export to both. No native cross-region replication — you're responsible for replication and failover. |
 
 :::warning
-`secondary_storage_type` is a one-way decision. Switching after deployment requires a full export and re-import of runtime data; the reference architecture does not include an in-place migration path. Pick the storage type that matches your long-term needs before running `terraform apply`.
+`secondary_storage_type` is a one-way decision. Migration between RDBMS and OpenSearch is not supported today — there is no documented path or script. Pick the storage type that matches your long-term needs before running `terraform apply`.
 :::
 
 ## Terraform layout
@@ -305,7 +309,7 @@ If either check fails, do not proceed to verification. Inspect CloudWatch Logs f
 Run the following checks after the app layer reaches steady state. Retrieve the ALB endpoints from `terraform output` in `terraform/app/`.
 
 :::warning
-The commands below use `http://` for first-deployment verification. HTTP transmits Basic auth credentials and process data in cleartext. Before exposing the cluster to any non-trusted network, attach a TLS certificate to the ALB (see [Next steps](#next-steps)) and rerun the verification over `https://`.
+The commands below use `http://` for first-deployment verification. HTTP transmits Basic authentication credentials and process data in cleartext. Before exposing the cluster to any non-trusted network, attach a TLS certificate to the ALB (see [Next steps](#next-steps)) and rerun the verification over `https://`.
 :::
 
 **Zeebe topology:**
@@ -342,10 +346,10 @@ The output must show `Status=available` with two members (one writer, one reader
 **Process definition API** (when `secondary_storage_type = rdbms`):
 
 ```bash
-curl -u admin:<admin-password> http://<region_0_alb_endpoint>/v2/process-definitions/search
+curl -u admin http://<region_0_alb_endpoint>/v2/process-definitions/search
 ```
 
-Retrieve the admin password from AWS Secrets Manager (recommended). `terraform output` reads the secret from Terraform state in cleartext, so use it only for local development and ensure the state backend is protected.
+`curl` prompts for the password interactively, which avoids leaving credentials in shell history. Retrieve the admin password from AWS Secrets Manager (recommended). `terraform output` reads the secret from Terraform state in cleartext, so use it only for local development and ensure the state backend is protected.
 
 Expect HTTP 200.
 
