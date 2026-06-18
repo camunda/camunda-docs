@@ -12,8 +12,6 @@ import ColdRecoveryImg from './img/multi-region-cold-recovery.png';
 
 <!-- Image source: https://miro.com/app/board/uXjVL-6SrPc=/ -->
 
-## About
-
 Cold Recovery is Camunda's lowest-cost multi-region resilience configuration. It provides a documented, repeatable recovery path from complete primary-region loss using scheduled backups exported to cross-region object storage and a manual restore procedure into a secondary region.
 
 Cold Recovery is suited for production workloads in which recovery measured in hours is operationally acceptable.
@@ -43,11 +41,13 @@ In Cold Recovery, a single active region runs the Camunda Orchestration Cluster.
 
 You must back up **both** Primary and Secondary storage layers for a complete Cold Recovery backup. See [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
-| Layer                                             | Backup target                            | Backup mechanism                                                         |
-| :------------------------------------------------ | :--------------------------------------- | :----------------------------------------------------------------------- |
-| **Primary storage** (Zeebe log stream)            | Zeebe partition snapshots                | Zeebe Backup Management API                                              |
-| **Secondary storage** (Elasticsearch/ OpenSearch) | Elasticsearch/OpenSearch index snapshots | Orchestration cluster backup API                                         |
-| **Secondary storage** (RDBMS)                     | Database dump or continuous backup       | Database-native tools (`pg_dump`, Oracle RMAN, AWS RDS automated backup) |
+| Layer                                            | Backup target                            | Backup mechanism                                                         |
+| :----------------------------------------------- | :--------------------------------------- | :----------------------------------------------------------------------- |
+| **Primary storage** (Zeebe log stream)           | Zeebe partition snapshots                | Zeebe Backup Management API                                              |
+| **Secondary storage** (Elasticsearch/OpenSearch) | Elasticsearch/OpenSearch index snapshots | Orchestration cluster backup API                                         |
+| **Secondary storage** (RDBMS)                    | Database dump or continuous backup       | Database-native tools (`pg_dump`, Oracle RMAN, AWS RDS automated backup) |
+
+The RDBMS backup path is the **first phase** of new backup capabilities and currently covers a narrower set of components than the Elasticsearch/OpenSearch path. See [relational database backup](/self-managed/operational-guides/backup-restore/rdbms/backup.md) for the components it includes.
 
 ### Component coverage
 
@@ -95,7 +95,7 @@ For configuration instructions and scheduling guidance, see [backup and restore]
 When the primary region fails, Cold Recovery follows this sequence:
 
 1. **Detect and declare**: Confirm the primary region is unavailable and initiate the recovery process.
-2. **Fence the old region**: Before redirecting traffic, ensure the original region's cluster, job workers, and connectors are stopped or otherwise prevented from acting see [fencing the old region](#fencing-the-old-region)
+2. **Fence the old region**: Before redirecting traffic, ensure the original region's cluster, job workers, and connectors are stopped or otherwise prevented from acting. See [fencing the old region](#fencing-the-old-region).
 3. **Provision**: Spin up a new Camunda environment in the secondary region (or activate a pre-provisioned standby if one exists).
 4. **Select restore point**: Identify the most recent complete, consistent backup set from the replica S3 bucket.
 5. **Restore Camunda Orchestration cluster**: Follow the [restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md).

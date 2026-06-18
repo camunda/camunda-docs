@@ -10,8 +10,6 @@ import OverviewImg from './img/multi-region-overview.png';
 
 <PageDescription />
 
-## About
-
 Camunda provides a structured multi-region resilience framework for Self-Managed Orchestration Cluster deployments.
 
 <img src={OverviewImg} alt="High-level diagram showing Cold Recovery and Dual-Region strategies" title="Cold Recovery and Dual-Region strategies" class="img-noborder img-700"/>
@@ -31,7 +29,7 @@ First, determine how critical your workload is:
 | Recovery measured in **hours**, and **minutes to hours of data loss**.       | [Cold Recovery](./cold-recovery.md) |
 | Recovery in **~15 minutes**, with **no data loss**, and audit-ready posture. | [Dual-Region](./dual-region.md)     |
 
-Each option includes a reference architecture, deployment guide, and operational runbook with documented [Recovery Time Objective (RTO)](/reference/glossary.md#recovery-time-objective-rto) and [Recovery Point Objective (RPO)](/reference/glossary.md#recovery-point-objective-rpo) targets.
+Dual-Region includes a reference architecture and operational runbook with documented [Recovery Time Objective (RTO)](/reference/glossary.md#recovery-time-objective-rto) and [Recovery Point Objective (RPO)](/reference/glossary.md#recovery-point-objective-rpo) targets. Cold Recovery is a manual procedure built on the [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) guide; validate it in your environment.
 
 ## Comparison of multi-region resilience
 
@@ -41,7 +39,7 @@ The following table provides a detailed comparison of the available multi-region
 | :---------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Recovery time (RTO)** | ~1–4 hours                                                                              | ~15 minutes                                                                                                                                                       |
 | **Data loss (RPO)**     | 15 min – 4 hours (backup-interval dependent)                                            | 0 minutes                                                                                                                                                         |
-| **Failover mode**       | Manual, operator-initiated                                                              | Manual or operator-initiated                                                                                                                                      |
+| **Failover mode**       | Manual, operator-initiated                                                              | Manual, operator-initiated                                                                                                                                        |
 | **Architecture**        | Scheduled backup to cross-region object storage; manual restore into a secondary region | Orchestration Cluster running in both regions; dual-region exporters; manual failover                                                                             |
 | **Typical use case**    | Low-criticality production; environments where hours-long recovery is acceptable        | Enterprise production workloads that must survive a region failure                                                                                                |
 | **Compliance fit**      | Basic business continuity management (BCM) requirements                                 | Certified, auditable region-recovery posture with a published runbook                                                                                             |
