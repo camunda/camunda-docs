@@ -53,8 +53,8 @@ tenant-a:
 
 ### Validation and operations
 
-- **Configuration**: Misconfiguration (duplicate schema/URL) causes startup error with clear message
-- **Pre-startup**: Ensure each tenant's schema exists, is empty, and credentials are valid
+- **Configuration**: Misconfiguration (duplicate schema/URL) causes a startup error with a clear message
+- **Pre-startup**: Ensure each tenant's schema exists, is empty, and has valid credentials
 - **Manual DDL**: If running Liquibase scripts separately, apply to every tenant's schema before each upgrade
 - **Resource scaling**: Each tenant gets its own JDBC datasource per cluster node; add memory/CPU for many tenants
 
@@ -110,10 +110,10 @@ camunda:
 ### Naming and collision prevention
 
 - **Prefix format**: `{tenantId}-` (dash automatically appended)
-- **Collision prevention**: Use full tenant ID; avoid overlapping prefixes (e.g., `eu` and `eu-west`)
+- **Collision prevention**: Use full tenant ID; avoid overlapping prefixes (for example, `eu` and `eu-west`)
 - **Validation**: Cluster fails at startup if two tenants have overlapping index names
 
-<!--- **Pending verification**: Collision detection for overlapping tenant IDs (e.g., `eu` vs `eu-west`) is being verified in code. --->
+<!--- **Pending verification**: Collision detection for overlapping tenant IDs (for example, `eu` vs `eu-west`) is being verified in code. --->
 
 ## Document Store storage
 
@@ -169,8 +169,8 @@ physical-tenants:
 
 ### Availability and validation
 
-- **At startup**: Warning if bucket missing or credentials invalid; cluster continues
-- **At runtime**: Error returned when tenant tries to create/retrieve document if store unavailable
+- **At startup**: Warning if bucket is missing or credentials are invalid; cluster continues
+- **At runtime**: An error is returned when a tenant tries to create/retrieve a document if the store is unavailable
 - **Validation**: Cluster rejects config if two tenants point to same storage location
 - **Subpath structure**: `s3://bucket/{physicalTenantId}/documents/`
 
@@ -207,7 +207,7 @@ Risks to avoid:
 
 - Don't share JDBC URLs between tenants
 - Don't overlap index prefixes
-- Don't point two tenants to same bucket without distinct subpaths
+- Don't point two tenants to the same bucket without distinct subpaths
 
 ### Scaling and capacity planning
 
