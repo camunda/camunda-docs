@@ -11,6 +11,7 @@ import TabItem from "@theme/TabItem";
 
 import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
 import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
+import SecondaryStorageOptionsNote from '../../\_partials/\_secondary-storage-options-note.md'
 
 This guide explains how to provision an [Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) using Terraform, a widely used Infrastructure as Code (IaC) tool.  
 The EKS cluster serves as the infrastructure foundation for running Camunda 8.
@@ -40,6 +41,8 @@ New to Terraform or Infrastructure as Code? Start with the [Terraform IaC docume
   - Adequate quotas for **VPCs, EC2 instances, and storage**.
   - Request increases if needed via the AWS console. You pay only for used resources. See [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and [Amazon EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)
 - **Shell** – Examples use GNU Bash.
+
+<SecondaryStorageOptionsNote />
 
 For the tool versions used in testing, see the repository’s [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file. It contains an up-to-date list of versions used for testing.
 
@@ -342,16 +345,12 @@ If you don't want to use this module, you can skip this section. However, you ma
 If you choose not to use this module, you can either:
 
 - Provide a managed Elasticsearch or OpenSearch service, or deploy Elasticsearch in your cluster via ECK.
-- Use RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+- Use RDBMS as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details and the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines.
 
 Additionally, you must delete the `opensearch.tf` file within the `terraform/cluster` directory of your chosen reference as it will otherwise create the resources.
 :::
 
 The OpenSearch module creates an OpenSearch domain intended for Camunda. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
-
-:::note
-Secondary storage is configurable. Depending on the components you run and your requirements, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for configuration guidance and limitations.
-:::
 
 :::note Migration to OpenSearch is not supported
 

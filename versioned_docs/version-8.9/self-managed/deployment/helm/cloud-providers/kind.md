@@ -262,7 +262,7 @@ Before deploying Camunda, you need to deploy the external services it depends on
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
 :::note Secondary storage alternatives
-This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) is a supported alternative for the Orchestration Cluster. To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS is a supported alternative for the Orchestration Cluster (see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines). To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 :::
 
 Run the operator deployment script, specifying the domain deployment mode:
