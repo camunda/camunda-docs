@@ -4,6 +4,9 @@ paths:
       tags:
         - Authorization
       operationId: createAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create authorization
       description: |-
 
@@ -48,6 +51,9 @@ paths:
       tags:
         - Authorization
       operationId: updateAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update authorization
       description: |-
 
@@ -90,6 +96,9 @@ paths:
       tags:
         - Authorization
       operationId: getAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get authorization
       description: |-
 
@@ -130,6 +139,9 @@ paths:
       tags:
         - Authorization
       operationId: deleteAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete authorization
       description: |-
 
@@ -176,6 +188,9 @@ paths:
 
         Search for authorizations based on given criteria.
       operationId: searchAuthorizations
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       requestBody:
         content:
           application/json:

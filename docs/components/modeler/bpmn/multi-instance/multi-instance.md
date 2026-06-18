@@ -70,6 +70,12 @@ When a non-interrupting boundary event is triggered, the instances are not affec
 
 Every instance has a local variable `loopCounter`. It holds the index in the `inputCollection` of this instance, starting with `1`.
 
+## Execution listeners in multi-instance bodies
+
+Execution listeners on a multi-instance body support a `beforeAll` event type that fires **once** per body activation — before the `inputCollection` expression is evaluated and before any instances are created. This is distinct from `start` listeners, which fire once per instance.
+
+For full details on execution listener types and configuration, see [execution listeners](/components/concepts/execution-listeners.md).
+
 ## Variable mappings
 
 Input and output variable mappings can be defined at the multi-instance activity; they are applied on each instance on activating and on completing.

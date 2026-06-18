@@ -18,7 +18,7 @@ jobs:
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v3.4.0
+        uses: hashicorp/vault-action@v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -101,7 +101,7 @@ jobs:
           npm run api:generate:hubsm
 
       - name: Upload Self-Managed changes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sm-changes
           path: |
@@ -120,7 +120,7 @@ jobs:
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v3.4.0
+        uses: hashicorp/vault-action@v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -163,7 +163,7 @@ jobs:
           npm run api:generate:hubsaas
 
       - name: Upload SaaS changes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: saas-changes
           path: |
@@ -182,20 +182,20 @@ jobs:
           path: docs
 
       - name: Download Self-Managed changes
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: sm-changes
           path: docs/
 
       - name: Download SaaS changes
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: saas-changes
           path: docs/
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v3.4.0
+        uses: hashicorp/vault-action@v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
