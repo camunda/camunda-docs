@@ -140,6 +140,8 @@ Also included in this namespace are components that are tightly integrated with 
 - [Optimize](/components/optimize/what-is-optimize.md) — reporting and analytics
 - [Connectors](/components/connectors/introduction.md) — external system integrations
 
+The Orchestration Cluster also depends on a **secondary storage** backend for Operate, Tasklist, and the Orchestration Cluster v2 REST API. This is a document store (Elasticsearch or OpenSearch) or a supported RDBMS (relational database), provisioned outside the StatefulSet as a managed service or operator-managed database. Optimize requires Elasticsearch or OpenSearch and cannot use RDBMS. For the trade-offs and how to choose a backend, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
+
 #### Web Modeler and Console namespace
 
 As shown in the [architecture diagram](#web-modeler-and-console), this namespace contains:
