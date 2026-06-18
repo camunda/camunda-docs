@@ -109,7 +109,7 @@ Configure your clusters using the following settings available from Camunda 8.10
 | `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION`         | The [authentication method](#available-authentication-methods).                                                     | `BEARER_TOKEN`                               |
 | `CAMUNDA_MODELER_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub. | `true`                                       |
 | `CAMUNDA_MODELER_CLUSTERS_0_CUSTOM_PROPERTIES`      | A list of custom properties.                                                                                        | See [custom properties](#custom-properties). |
-| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS`             | A list of components for the clusters.                                                                              | -                                            |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS`             | A list of components for the cluster.                                                                               | See [components](#components).               |
 
 </TabItem>
 </Tabs>
