@@ -91,18 +91,23 @@ This guide will incur costs on your cloud provider account, specifically for the
 
 ### Variants
 
-We support two variants of this architecture:
+<!-- TODO: eks-single-region-rdbms snippets use the feat/eks-single-region-rdbms branch until it merges; switch to blob/stable/8.9/ (8.9 doc) and blob/main/ (next doc) once it lands (camunda/camunda-deployment-references#2711). -->
+
+We support the following variants of this architecture:
 
 - **Standard installation** - Uses username and password connection for the Camunda components (or relies on network isolation for specific components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
 
 - **IRSA** (IAM Roles for Service Accounts) - Uses service accounts to perform authentication with IAM policies. This approach offers stronger security and better integration with AWS services, as it eliminates the need to manage credentials manually. It is especially beneficial in environments with strict security requirements, where fine-grained access control and dynamic role-based access are essential.
 
+- **RDBMS** - Uses an Amazon Aurora PostgreSQL database as the [secondary storage](/self-managed/concepts/secondary-storage/index.md) for the Orchestration Cluster instead of Amazon OpenSearch. This variant (`eks-single-region-rdbms`) builds on the standard installation, provisions an additional `camunda_orchestration` database, and does not create an OpenSearch domain, which results in a lighter infrastructure footprint. For configuration details, see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) and [install Camunda 8 with RDBMS](/self-managed/deployment/helm/install/helm-with-rdbms.md).
+
 #### How to choose
 
 - If you prefer a simpler setup with Basic authentication or network isolation, and your security needs are moderate, the **standard installation** is a suitable choice.
 - If you require enhanced security, dynamic role-based access management, and want to leverage AWS’s identity services for fine-grained control, the **IRSA** variant is the better option.
+- If you want a lighter infrastructure without an OpenSearch domain and do not need Optimize, choose the **RDBMS** variant. Optimize requires Elasticsearch or OpenSearch and is not available with RDBMS secondary storage.
 
-Both can be set up with or without a **Domain** ([Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)).
+Each variant can be set up with or without a **Domain** ([Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)).
 
 ### Outcome
 
@@ -140,6 +145,13 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/get-your-copy.sh
+```
+
+   </TabItem>
+   <TabItem value="rdbms" label="RDBMS">
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/get-your-copy.sh
 ```
 
    </TabItem>
@@ -203,6 +215,15 @@ The module is locally sourced in your clone. Any changes you make to the module 
 
    ```hcl reference
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/terraform/cluster/cluster.tf
+   ```
+
+   </TabItem>
+   <TabItem value="rdbms" label="RDBMS">
+
+   The RDBMS variant uses the same cluster module as the standard variant, so this `cluster.tf` is identical to the standard one:
+
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/terraform/cluster/cluster.tf
    ```
 
    </TabItem>
@@ -332,6 +353,15 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_aurora_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
 
    </TabItem>
+   <TabItem value="rdbms" label="RDBMS">
+
+   The RDBMS variant extends the Aurora PostgreSQL setup with an additional `camunda_orchestration` database and a dedicated `orchestration_db` user, used as the secondary storage for the Orchestration Cluster:
+
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/terraform/cluster/db.tf
+   ```
+
+   </TabItem>
    </Tabs>
 
 1. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/aurora/README.md) for more details on other customization options.
@@ -414,6 +444,11 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
 
    As the OpenSearch domain has advanced security enabled and [fine-grained access control](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html), we will later use your provided master username (`advanced_security_master_user_name`) and password (`advanced_security_master_user_password`) to perform the initial setup of the security component, allowing the created IRSA role to access the domain.
+
+   </TabItem>
+   <TabItem value="rdbms" label="RDBMS">
+
+   The RDBMS variant uses Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster, so it does not provision an OpenSearch domain. The `eks-single-region-rdbms` reference does not include an `opensearch.tf` file, so skip this OpenSearch module setup and do not create the OpenSearch module. For details, see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 
    </TabItem>
    </Tabs>
