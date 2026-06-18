@@ -803,14 +803,27 @@ camunda:
 
 #### Dynamic cluster management
 
-With dynamic cluster management, you can [configure components](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#console-ping-configuration) to automatically send license information to Camunda Hub.
+Use dynamic cluster management to automatically register your clusters with Camunda Hub.
 
-Additionally, the way you manage clusters changes. Instead of clusters being automatically created, updated, and deleted according to your [clusters configuration](#clusters), clusters are only automatically _created_ when you add them to the configuration. Updates and deletes are manual.
+By default, without dynamic cluster management, clusters are strictly managed by your configuration. They're created, updated, and deleted when your cluster configuration values change.
 
-Two public APIs are exposed when this feature flag is enabled to make this possible:
+Dynamic cluster management changes this behavior to a hybrid model, making use of both your cluster configuration and the following cluster management API endpoints that are only exposed when dynamic cluster management is enabled:
 
-- **Create cluster:** `POST /api/v1/clusters`
-- **Delete cluster:** `DELETE /api/v1/clusters/{clusterId}`
+| Name                           | Path                                  |
+| :----------------------------- | :------------------------------------ |
+| **Create cluster (discovery)** | `POST /api/v1/clusters`               |
+| **Delete cluster**             | `DELETE /api/v1/clusters/{clusterId}` |
+
+In this mode, you:
+
+- Define new clusters in your configuration. Newly defined clusters are still automatically created.
+- [Configure your components](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#console-ping-configuration) to send license information directly to the create cluster endpoint.
+- Delete clusters with the delete cluster endpoint.
+- No longer update clusters. Instead, you must delete a cluster with the API, update your configuration, and allow the cluster to be automatically recreated.
+
+:::note
+The create cluster endpoint is only for sending cluster information for a cluster that was already created through your configuration. Don't use it to create clusters.
+:::
 
 ### Unstable configuration options
 
