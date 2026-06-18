@@ -86,7 +86,7 @@ Your AWS IAM principal needs permissions for the following services:
 
 ### AWS service quotas
 
-Dual-region deployments often hit account-default quotas. Before deploying, verify and request increases as needed for both regions:
+Dual-region deployments may require quota increases. Before deploying, verify service quotas and request increases as needed.
 
 - Aurora Global Database (some accounts require a support request to enable Aurora Global).
 - Elastic IPs (NAT gateways consume one per AZ per region).
