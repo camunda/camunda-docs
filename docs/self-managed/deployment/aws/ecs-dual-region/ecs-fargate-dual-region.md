@@ -15,7 +15,9 @@ The reference architecture creates two symmetric ECS Fargate clusters, one per A
 
 - Eight Zeebe brokers (four per region), replication factor 4, eight partitions. Zone-aware placement ensures every partition has replicas in both regions (`CAMUNDA_CLUSTER_PARTITIONING_ZONEAWARE_ZONES_*`).
 - Two regional Connector tasks (one per region).
-- One Aurora Global Database with a writer in region 0 and a cross-region reader in region 1, **or** two independent OpenSearch domains (one per region).
+- Seconday Storage: 
+   - One Aurora Global Database with a writer in region 0 and a cross-region reader in region 1, 
+   - or two independent OpenSearch domains (one per region).
 - Cross-region connectivity via: 
    - AWS Transit Gateway,
    - or VPC Peering.
