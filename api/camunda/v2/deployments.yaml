@@ -4,6 +4,9 @@ paths:
       tags:
         - Resource
       operationId: createDeployment
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Deploy resources
       description: |-
 
@@ -12,7 +15,8 @@ paths:
 
         [[CONSISTENCY:STRONG]]
 
-        Deploys one or more resources (e.g. processes, decision models, or forms).
+        Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources, and generic files.
+        A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA resources are stored as deployable generic resources in the engine.
         This is an atomic call, i.e. either all resources are deployed or none of them are.
       requestBody:
         required: true
@@ -49,6 +53,9 @@ paths:
       tags:
         - Resource
       operationId: getResource
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get resource
       description: |-
 
@@ -92,6 +99,9 @@ paths:
       tags:
         - Resource
       operationId: getResourceContent
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get RPA resource content (deprecated)
       description: |-
 
@@ -143,6 +153,9 @@ paths:
       tags:
         - Resource
       operationId: getResourceContentBinary
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get resource content as binary
       description: |-
 
@@ -186,6 +199,9 @@ paths:
       tags:
         - Resource
       operationId: searchResources
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search resources
       description: |-
 
@@ -227,6 +243,9 @@ paths:
       tags:
         - Resource
       operationId: deleteResource
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete resource
       description: |-
 

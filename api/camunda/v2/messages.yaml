@@ -4,6 +4,9 @@ paths:
       tags:
         - Message
       operationId: publishMessage
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Publish message
       description: |-
 
@@ -42,6 +45,9 @@ paths:
       tags:
         - Message
       operationId: correlateMessage
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Correlate message
       description: |-
 
@@ -87,6 +93,9 @@ paths:
       tags:
         - Message subscription
       operationId: searchMessageSubscriptions
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search message subscriptions
       description: |-
 
@@ -135,6 +144,9 @@ paths:
       tags:
         - Message subscription
       operationId: searchCorrelatedMessageSubscriptions
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search correlated message subscriptions
       description: |-
 
@@ -663,7 +675,12 @@ components:
       required:
         - field
     MessageSubscriptionStateEnum:
-      description: The state of message subscription.
+      description: |
+        The state of message subscription.
+
+        **Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not
+        tracked for these subscriptions. To query correlation history for process start events,
+        use the `/correlated-message-subscriptions/search` endpoint.
       type: string
       enum:
         - CORRELATED

@@ -46,6 +46,18 @@ const sidebar: SidebarsConfig = {
           label: "Search agent instances",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance-history-item",
+          label: "Create agent instance history item",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instance-history",
+          label: "Search agent instance history",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -388,6 +400,12 @@ const sidebar: SidebarsConfig = {
       type: "category",
       label: "Element instance",
       items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instance-wait-states",
+          label: "Search element instance wait states",
+          className: "api-method post",
+        },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instances",

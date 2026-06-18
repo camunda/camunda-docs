@@ -4,6 +4,9 @@ paths:
       tags:
         - Process instance
       operationId: createProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create process instance
       description: |-
 
@@ -75,6 +78,9 @@ paths:
       tags:
         - Process instance
       operationId: getProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process instance
       description: |-
 
@@ -121,6 +127,9 @@ paths:
       tags:
         - Process instance
       operationId: getProcessInstanceSequenceFlows
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get sequence flows
       description: |-
 
@@ -161,6 +170,9 @@ paths:
       tags:
         - Process instance
       operationId: getProcessInstanceStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get element instance statistics
       description: |-
 
@@ -201,6 +213,9 @@ paths:
       tags:
         - Process instance
       operationId: searchProcessInstances
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search process instances
       description: |-
 
@@ -237,6 +252,9 @@ paths:
       tags:
         - Process instance
       operationId: searchProcessInstanceIncidents
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search related incidents
       description: |-
 
@@ -294,6 +312,9 @@ paths:
       tags:
         - Process instance
       operationId: resolveProcessInstanceIncidents
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Resolve related incidents
       description: |-
 
@@ -340,6 +361,9 @@ paths:
       tags:
         - Process instance
       operationId: cancelProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Cancel process instance
       description: |-
 
@@ -388,6 +412,9 @@ paths:
       tags:
         - Process instance
       operationId: cancelProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Cancel process instances (batch)
       description: |-
 
@@ -432,6 +459,9 @@ paths:
       tags:
         - Process instance
       operationId: resolveIncidentsBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Resolve related incidents (batch)
       description: |-
 
@@ -476,6 +506,9 @@ paths:
       tags:
         - Process instance
       operationId: migrateProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Migrate process instances (batch)
       description: |-
 
@@ -520,6 +553,9 @@ paths:
       tags:
         - Process instance
       operationId: modifyProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Modify process instances (batch)
       description: |-
 
@@ -566,6 +602,9 @@ paths:
       tags:
         - Process instance
       operationId: deleteProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete process instance
       description: |-
 
@@ -620,6 +659,9 @@ paths:
       tags:
         - Process instance
       operationId: deleteProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete process instances (batch)
       description: |-
 
@@ -663,6 +705,9 @@ paths:
       tags:
         - Process instance
       operationId: migrateProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Migrate process instance
       description: |-
 
@@ -722,6 +767,9 @@ paths:
       tags:
         - Process instance
       operationId: modifyProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Modify process instance
       description: |-
 
@@ -773,6 +821,9 @@ paths:
       tags:
         - Process instance
       operationId: getProcessInstanceCallHierarchy
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get call hierarchy
       description: |-
 
@@ -1803,7 +1854,7 @@ components:
             Set to -1 to create the new element instance within an existing element instance of the
             flow scope. If multiple instances of the target element's flow scope exist, choose one
             specifically with this property by providing its key.
-          oneOf:
+          allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
       required:
         - ancestorElementInstanceKey

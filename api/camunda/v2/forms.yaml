@@ -4,6 +4,9 @@ paths:
       tags:
         - Form
       operationId: getFormByKey
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get form by key
       description: |-
 

@@ -4,6 +4,9 @@ paths:
       tags:
         - Group
       operationId: createGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create group
       description: |-
 
@@ -62,6 +65,9 @@ paths:
       tags:
         - Group
       operationId: searchGroups
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search groups
       description: |-
 
@@ -98,6 +104,9 @@ paths:
       tags:
         - Group
       operationId: getGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get group
       description: |-
 
@@ -138,6 +147,9 @@ paths:
       tags:
         - Group
       operationId: updateGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update group
       description: |-
 
@@ -186,6 +198,9 @@ paths:
       tags:
         - Group
       operationId: deleteGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete group
       description: |-
 
@@ -223,6 +238,9 @@ paths:
       tags:
         - Group
       operationId: assignUserToGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a user to a group
       description: |-
 
@@ -274,6 +292,9 @@ paths:
       tags:
         - Group
       operationId: unassignUserFromGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a user from a group
       description: |-
 
@@ -320,6 +341,9 @@ paths:
       tags:
         - Group
       operationId: searchUsersForGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search group users
       description: |-
 
@@ -369,6 +393,9 @@ paths:
       tags:
         - Group
       operationId: assignClientToGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a client to a group
       description: |-
 
@@ -420,6 +447,9 @@ paths:
       tags:
         - Group
       operationId: unassignClientFromGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a client from a group
       description: |-
 
@@ -466,6 +496,9 @@ paths:
       tags:
         - Group
       operationId: searchClientsForGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search group clients
       description: |-
 
@@ -515,6 +548,9 @@ paths:
       tags:
         - Group
       operationId: assignMappingRuleToGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a mapping rule to a group
       description: |-
 
@@ -565,6 +601,9 @@ paths:
       tags:
         - Group
       operationId: unassignMappingRuleFromGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a mapping rule from a group
       description: |-
 
@@ -610,6 +649,9 @@ paths:
       tags:
         - Group
       operationId: searchMappingRulesForGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search group mapping rules
       description: |-
 
@@ -659,6 +701,9 @@ paths:
       tags:
         - Group
       operationId: searchRolesForGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search group roles
       description: |-
 
