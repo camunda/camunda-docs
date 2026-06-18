@@ -16,7 +16,7 @@ Guides a docs contribution end-to-end: scoping the change, editing the right ver
 
 ## 2. Which folders to update
 
-Camunda maintains 18 months of minor versions. Check `src/versions.js` (`currentVersion`) and `versions.json` for the live version list — the table below reflects the current state but will go stale when a new version ships.
+Camunda maintains 18 months of minor versions. Check `src/versions.js` (`currentVersion`) and `versions.json` for the live version list. The table below reflects the current state but will go stale when a new version ships:
 
 | Folder                        | When to update                                    |
 | ----------------------------- | ------------------------------------------------- |
@@ -31,14 +31,14 @@ Camunda maintains 18 months of minor versions. Check `src/versions.js` (`current
 - Feature in the current release and beyond → edit the most recent `versioned_docs/version-*/` folder **and** `docs/`.
 - Bug fix or clarification to an already-released version → edit the affected `versioned_docs/version-*/` folder(s) and, if still relevant, `docs/`. To apply the same fix to multiple older versions, use `/backport`.
 
-Doc IDs can differ across versions — the same page may have been renamed when a section was restructured. Verify the actual filename in each version folder before copying content or links.
+Doc IDs can differ across versions. The same page may have been renamed when a section was restructured. Verify the actual filename in each version folder before copying content or links.
 
 ## 3. Sidebar registration (new pages only)
 
 Adding a page requires a sidebar entry in every version where it exists:
 
-- **Next (`docs/`)** — add the doc ID to `sidebars.js`
-- **Versioned** — add the doc ID to `versioned_sidebars/version-<N>-sidebars.json`
+- **Next (`docs/`)**: add the doc ID to `sidebars.js`
+- **Versioned**: add the doc ID to `versioned_sidebars/version-<N>-sidebars.json`
 
 The doc ID is the file path relative to its docs root, without the `.md` extension. For example, a file at `docs/components/modeler/bpmn/tasks/user-task.md` has the doc ID `components/modeler/bpmn/tasks/user-task`.
 
@@ -59,7 +59,7 @@ npm run build          # When adding/moving/removing pages, editing sidebars,
                        # static/.htaccess, or MDX components in src/
 ```
 
-Skip `npm run build` for small content edits that don't affect page structure or links — it is slow.
+Skip `npm run build` for small content edits that don't affect page structure or links. It is slow.
 
 ## 6. PR checklist
 
@@ -72,7 +72,7 @@ Skip `npm run build` for small content edits that don't affect page structure or
 
 ## 7. Commit messages
 
-Format: `{type}(scope): {description}` — header between 72 and 120 characters.
+Format: `{type}(scope): {description}` with header between 72 and 120 characters.
 
 Valid types: `build`, `ci`, `deps`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`, `chore`.
 

@@ -17,17 +17,19 @@ Before touching any file, confirm:
 - **Why it applies to older versions**: bug fixes, clarifications, and corrections to already-shipped features are backport candidates. Content for unreleased features is not.
 - **Which versions**: check whether the feature existed in each target version. Active versioned folders and their coverage:
 
-| Folder                        | Version               |
-| ----------------------------- | --------------------- |
-| `versioned_docs/version-8.9/` | 8.9 (current release) |
-| `versioned_docs/version-8.8/` | 8.8                   |
-| `versioned_docs/version-8.7/` | 8.7                   |
+| Folder                        | Version |
+| ----------------------------- | ------- |
+| `versioned_docs/version-8.9/` | 8.9     |
+| `versioned_docs/version-8.8/` | 8.8     |
+| `versioned_docs/version-8.7/` | 8.7     |
 
-Camunda maintains 18 months of minor versions. Do not backport to unmaintained versions (8.6 and earlier) — if a user explicitly requests this, explain that the version is no longer maintained and no `versioned_docs/version-8.6/` folder exists. Check `src/versions.js` (`currentVersion`) and `versions.json` for the live version list; the table above will go stale when a new version ships.
+Camunda maintains 18 months of minor versions. Do not backport to unmaintained versions (8.6 and earlier); if a user explicitly requests this, explain that the version is no longer maintained and no `versioned_docs/version-8.6/` folder exists.
+
+Check `src/versions.js` (`currentVersion`) and `versions.json` for the live version list.
 
 ## 2. Find the equivalent file in each target version
 
-Doc IDs can diverge across versions — the same conceptual page may have been renamed or moved when a section was restructured. Do not assume a path from one version exists in another.
+Doc IDs can diverge across versions: the same conceptual page may have been renamed or moved when a section was restructured. Do not assume a path from one version exists in another.
 
 For each target version:
 
@@ -38,7 +40,7 @@ For each target version:
 ## 3. Apply the change
 
 - Copy the content edit faithfully. Do not adapt for version differences unless the content references a feature or API that did not exist in that version.
-- If the source change added a **new page**: create the file in the target version folder and add its doc ID to `versioned_sidebars/version-<N>-sidebars.json` at the same position in the hierarchy. Also copy any co-located image or asset files (for example, an `img/` or `assets/` subdirectory alongside the page) — images referenced by the page must exist in each version folder where the page lives.
+- If the source change added a **new page**: create the file in the target version folder and add its doc ID to `versioned_sidebars/version-<N>-sidebars.json` at the same position in the hierarchy. Also copy any co-located image or asset files (for example, an `img/` or `assets/` subdirectory alongside the page). Images referenced by the page must exist in each version folder where the page lives.
 - If the source change added a **redirect** to `static/.htaccess`: the redirect already covers all versions (`.htaccess` is not versioned). No action needed.
 - If the source change updated a **sidebar entry** (rename, reorder): apply the equivalent edit to `versioned_sidebars/version-<N>-sidebars.json`.
 
@@ -53,17 +55,17 @@ npm run build          # When adding/moving/removing pages, editing sidebars,
 
 ## 5. Commit and PR conventions
 
-**Commit message** — same format as any other change, but call out the version in the scope:
+**Commit message**: same format as any other change, but call out the version in the scope:
 
 ```
 docs(version-8.8): backport REST connector polling guide from 8.9
 fix(version-8.7,version-8.8): correct filter description for process instance variables
 ```
 
-**PR description** — state clearly which versions are included and link to the source PR or commit. Example:
+**PR description**: state clearly which versions are included and link to the source PR or commit. Example:
 
 > Backports #9050 to 8.8 and 8.7. Applies the corrected filter description for process instance variables. No structural changes; content-only edit.
 
-**Labels** — apply the version labels for each version included in the backport (for example, `version:8.8`, `version:8.7`) in addition to any component label. Add `low prio` unless the source change was a bug fix or security correction.
+**Labels**: apply the version labels for each version included in the backport (for example, `version:8.8`, `version:8.7`) in addition to any component label.
 
-**Reviewer** — add `@camunda/tech-writers` unless working with an embedded writer, same as any other PR.
+**Reviewer**: add `@camunda/tech-writers` unless working with an embedded writer, same as any other PR.
