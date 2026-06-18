@@ -16,20 +16,20 @@ Guides a docs contribution end-to-end: scoping the change, editing the right ver
 
 ## 2. Which folders to update
 
-Camunda maintains 18 months of minor versions. Active folders in this repo:
+Camunda maintains 18 months of minor versions. Check `src/versions.js` (`currentVersion`) and `versions.json` for the live version list — the table below reflects the current state but will go stale when a new version ships.
 
 | Folder                        | When to update                                    |
 | ----------------------------- | ------------------------------------------------- |
 | `docs/`                       | Change applies to the **upcoming** (Next) release |
 | `versioned_docs/version-8.9/` | Current released version                          |
-| `versioned_docs/version-8.8/` | Backport to 8.8                                   |
-| `versioned_docs/version-8.7/` | Backport to 8.7                                   |
+| `versioned_docs/version-8.8/` | Previous version                                  |
+| `versioned_docs/version-8.7/` | Previous version                                  |
 
 **Decision rule:**
 
 - Feature not yet released → edit `docs/` only.
-- Feature in the current release and beyond → edit `versioned_docs/version-8.9/` **and** `docs/`.
-- Bug fix or clarification to an already-released version → edit the affected `versioned_docs/version-*/` folder(s) and, if still relevant, `docs/`.
+- Feature in the current release and beyond → edit the most recent `versioned_docs/version-*/` folder **and** `docs/`.
+- Bug fix or clarification to an already-released version → edit the affected `versioned_docs/version-*/` folder(s) and, if still relevant, `docs/`. To apply the same fix to multiple older versions, use `/backport`.
 
 Doc IDs can differ across versions — the same page may have been renamed when a section was restructured. Verify the actual filename in each version folder before copying content or links.
 
@@ -55,7 +55,8 @@ Run before committing:
 ```bash
 npm run format         # Always — fixes Prettier issues
 npm run build          # When adding/moving/removing pages, editing sidebars,
-                       # changing link targets, touching docusaurus.config.js or static/.htaccess
+                       # changing link targets, touching docusaurus.config.js,
+                       # static/.htaccess, or MDX components in src/
 ```
 
 Skip `npm run build` for small content edits that don't affect page structure or links — it is slow.
@@ -73,7 +74,7 @@ Skip `npm run build` for small content edits that don't affect page structure or
 
 Format: `{type}(scope): {description}` — header between 72 and 120 characters.
 
-Valid types: `docs`, `fix`, `feat`, `chore`, `refactor`, `style`.
+Valid types: `build`, `ci`, `deps`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`, `chore`.
 
 Examples:
 

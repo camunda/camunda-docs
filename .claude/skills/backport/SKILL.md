@@ -23,7 +23,7 @@ Before touching any file, confirm:
 | `versioned_docs/version-8.8/` | 8.8                   |
 | `versioned_docs/version-8.7/` | 8.7                   |
 
-Camunda maintains 18 months of minor versions. Do not backport to unmaintained versions (8.6 and earlier).
+Camunda maintains 18 months of minor versions. Do not backport to unmaintained versions (8.6 and earlier) — if a user explicitly requests this, explain that the version is no longer maintained and no `versioned_docs/version-8.6/` folder exists. Check `src/versions.js` (`currentVersion`) and `versions.json` for the live version list; the table above will go stale when a new version ships.
 
 ## 2. Find the equivalent file in each target version
 
@@ -38,7 +38,7 @@ For each target version:
 ## 3. Apply the change
 
 - Copy the content edit faithfully. Do not adapt for version differences unless the content references a feature or API that did not exist in that version.
-- If the source change added a **new page**: create the file in the target version folder and add its doc ID to `versioned_sidebars/version-<N>-sidebars.json` at the same position in the hierarchy.
+- If the source change added a **new page**: create the file in the target version folder and add its doc ID to `versioned_sidebars/version-<N>-sidebars.json` at the same position in the hierarchy. Also copy any co-located image or asset files (for example, an `img/` or `assets/` subdirectory alongside the page) — images referenced by the page must exist in each version folder where the page lives.
 - If the source change added a **redirect** to `static/.htaccess`: the redirect already covers all versions (`.htaccess` is not versioned). No action needed.
 - If the source change updated a **sidebar entry** (rename, reorder): apply the equivalent edit to `versioned_sidebars/version-<N>-sidebars.json`.
 
@@ -46,7 +46,9 @@ For each target version:
 
 ```bash
 npm run format         # Always
-npm run build          # When adding pages, editing sidebars, or changing link targets
+npm run build          # When adding/moving/removing pages, editing sidebars,
+                       # changing link targets, touching docusaurus.config.js,
+                       # static/.htaccess, or MDX components in src/
 ```
 
 ## 5. Commit and PR conventions
