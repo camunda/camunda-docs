@@ -4,6 +4,7 @@ paths:
       tags:
         - Setup
       operationId: createAdminUser
+      security: []
       summary: Create admin user
       description: |-
 

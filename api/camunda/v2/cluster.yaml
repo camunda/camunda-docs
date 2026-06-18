@@ -4,6 +4,9 @@ paths:
       tags:
         - Cluster
       operationId: getTopology
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get cluster topology
       description: |-
 
@@ -30,6 +33,7 @@ paths:
       tags:
         - Cluster
       operationId: getStatus
+      security: []
       summary: Get cluster status
       description: |-
 

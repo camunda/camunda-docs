@@ -4,6 +4,9 @@ paths:
       tags:
         - Global listener
       operationId: createGlobalTaskListener
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create global user task listener
       description: |-
 
@@ -48,6 +51,9 @@ paths:
       tags:
         - Global listener
       operationId: getGlobalTaskListener
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get global user task listener
       description: |-
 
@@ -88,6 +94,9 @@ paths:
       tags:
         - Global listener
       operationId: updateGlobalTaskListener
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update global user task listener
       description: |-
 
@@ -138,6 +147,9 @@ paths:
       tags:
         - Global listener
       operationId: deleteGlobalTaskListener
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete global user task listener
       description: |-
 
@@ -179,6 +191,9 @@ paths:
       tags:
         - Global listener
       operationId: searchGlobalTaskListeners
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search global user task listeners
       description: |-
 

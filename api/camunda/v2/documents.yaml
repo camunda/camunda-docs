@@ -4,6 +4,9 @@ paths:
       tags:
         - Document
       operationId: createDocument
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Upload document
       description: |-
 
@@ -63,6 +66,9 @@ paths:
       tags:
         - Document
       operationId: createDocuments
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Upload multiple documents
       description: |-
 
@@ -148,6 +154,9 @@ paths:
       tags:
         - Document
       operationId: getDocument
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Download document
       description: |-
 
@@ -200,6 +209,9 @@ paths:
       tags:
         - Document
       operationId: deleteDocument
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete document
       description: |-
 
@@ -241,6 +253,9 @@ paths:
       tags:
         - Document
       operationId: createDocumentLink
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create document link
       description: |-
 
