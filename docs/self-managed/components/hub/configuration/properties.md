@@ -17,7 +17,7 @@ Each component is configured separately as described below.
 The two components support configuration through environment variables.
 For the `restapi` component, environment variables can be used as an alternative to `application.yml` following [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables): convert the property to uppercase, remove any dashes, and replace any delimiters (`.`) with `_`.
 
-For example, the property `camunda.modeler.clusters[0][0].name` is represented by the environment variable `CAMUNDA_MODELER_CLUSTERS_0_NAME`.
+For example, the property `camunda.modeler.clusters[0].name` is represented by the environment variable `CAMUNDA_MODELER_CLUSTERS_0_NAME`.
 
 If you are using the Camunda 8 Helm chart, read more about the different configuration options in the chart's [Helm chart values documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 You can pass environment variables to each component via `webModeler.restapi.env` and `webModeler.websocket.env` in your `values.yaml`.
@@ -197,14 +197,15 @@ Use `components` to set up components in the cluster:
 
 Use `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 
-| Property                                                 | Description                                                                                                                                                                                |
-| :------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_NAME`           | The component's name.                                                                                                                                                                      |
-| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_TYPE`           | The component's type.                                                                                                                                                                      |
-| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_VERSION`        | The component's version.                                                                                                                                                                   |
-| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_GRPC`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).                                                                               |
-| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST`      | The [the base URL](#notes-on-host-names-and-port-numbers) of the [Orchestration Cluster REST APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). |
-| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS` | The address of the health check endpoint.                                                                                                                                                  |
+| Property                                                 | Description                                                                                                  |
+| :------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_NAME`           | The component's name.                                                                                        |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_TYPE`           | The component's type.                                                                                        |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_VERSION`        | The component's version.                                                                                     |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_WEBAPP`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST`      | The API base URL for connectors.                                                                             |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_GRPC`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS` | The address of the health check endpoint.                                                                    |
 
 </TabItem>
 </Tabs>
@@ -236,25 +237,37 @@ camunda:
       - id: camunda-platform
         # other fields...
         components:
-          - name: orchestration
-            type: Orchestration Cluster
-            version: 8.10.0
+          - name: "Orchestration Cluster"
+            type: "orchestration"
+            version: "8.10-SNAPSHOT"
             urls:
-              grpc: grpcs://camunda.example.com:26500
-              rest: https://camunda.example.com
-              readiness: https://camunda.example.com:8091/health/readiness
+              grpc: "grpcs://camunda.example.com:26500"
+              rest: "https://camunda.example.com"
+              readiness: "https://camunda.example.com:9600/core/actuator/health/readiness"
+          - name: "Orchestration Admin"
+            type: "orchestrationIdentity"
+            version: "8.10-SNAPSHOT"
+            urls:
+              webapp: "https://camunda.example.com"
+              readiness: "https://camunda.example.com:9600/core/actuator/health/readiness"
 ```
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
 ```bash
-CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_NAME=orchestration
-CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_TYPE=Orchestration Cluster
-CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_VERSION=8.10.0
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_NAME='Orchestration Cluster'
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_TYPE=orchestration
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_VERSION=8.10-SNAPSHOT
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_GRPC=grpcs://camunda.example.com:26500
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST=https://camunda.example.com
-CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS=https://camunda.example.com:8091/health/readiness
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS=https://camunda.example.com:9600/core/actuator/health/readiness
+
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_NAME='Orchestration Admin'
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_TYPE=orchestrationIdentity
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_VERSION=8.10-SNAPSHOT
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_URLS_WEBAPP=https://camunda.example.com
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_URLS_READINESS=https://camunda.example.com:9600/core/actuator/health/readiness
 ```
 
 </TabItem>
