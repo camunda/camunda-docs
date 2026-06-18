@@ -69,6 +69,49 @@ This guide supports two [secondary storage](/self-managed/concepts/secondary-sto
 Select a variant using the **Elasticsearch**/**RDBMS** tabs throughout this guide. All tabbed sections will switch together automatically.
 :::
 
+#### Configure Azure Database for PostgreSQL as secondary storage
+
+[RDBMS secondary storage](/self-managed/concepts/secondary-storage/index.md) is available for the Orchestration Cluster since 8.9. Azure Database for PostgreSQL Flexible Server is among the supported engines in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md). The steps below show only the AKS-specific delta; for JDBC drivers, the Helm install, and verification, follow the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) and the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) values reference. For a complete worked example, see the [`aks-single-region-rdbms` reference implementation](https://github.com/camunda/camunda-deployment-references/tree/main/azure/kubernetes/aks-single-region-rdbms).
+
+1. Create the orchestration database and user on your Flexible Server, matching the `DB_ORCHESTRATION_NAME` and `DB_ORCHESTRATION_USERNAME` variables you exported. Connect with `psql` and run:
+
+   ```sql
+   CREATE DATABASE camunda;
+   CREATE USER camunda WITH ENCRYPTED PASSWORD 'your-secure-password';
+   GRANT ALL PRIVILEGES ON DATABASE camunda TO camunda;
+   ```
+
+2. Add the RDBMS values delta to your `values.yml`, using your Flexible Server host. Azure Database for PostgreSQL requires TLS, so keep `sslmode=require` in the URL. This enables the `rdbms` exporter and disables Elasticsearch and Optimize:
+
+   ```yaml
+   orchestration:
+     exporters:
+       camunda:
+         enabled: false
+       rdbms:
+         enabled: true
+     data:
+       secondaryStorage:
+         type: rdbms
+         rdbms:
+           url: jdbc:postgresql://${DB_HOST}:5432/${DB_ORCHESTRATION_NAME}?sslmode=require
+           username: ${DB_ORCHESTRATION_USERNAME}
+           secret:
+             existingSecret: orchestration-postgres-secret
+             existingSecretKey: password
+   elasticsearch:
+     enabled: false
+   optimize:
+     enabled: false # Optimize requires Elasticsearch/OpenSearch
+   ```
+
+3. Create the `orchestration-postgres-secret` with the database password in the Camunda namespace:
+
+   ```bash
+   kubectl create secret generic orchestration-postgres-secret \
+     --from-literal=password="$DB_ORCHESTRATION_PASSWORD" --namespace camunda
+   ```
+
 ## Export environment variables
 
 To streamline execution of the following commands, we recommend exporting multiple environment variables.

@@ -334,9 +334,52 @@ To enable these enterprise components in an OIDC-enabled full cluster, first dep
 This guide includes a managed Amazon OpenSearch example path for secondary storage. Choose the backend that fits your requirements:
 
 - **Managed OpenSearch**: Use the managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
-- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster. Follow this EKS guide for the cluster, networking, Ingress, and optional AWS services, then continue with [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) for the Helm workflow and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for the values reference.
+- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster. Follow this EKS guide for the cluster, networking, Ingress, and optional AWS services, then continue with [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) for the Helm workflow and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for the values reference. For the EKS-specific delta, follow the steps below.
 
 RDBMS as secondary storage disables Optimize unless you also deploy Elasticsearch or OpenSearch alongside it.
+
+##### Configure Amazon Aurora PostgreSQL as secondary storage
+
+[RDBMS secondary storage](/self-managed/concepts/secondary-storage/index.md) is available for the Orchestration Cluster since 8.9, with Amazon Aurora PostgreSQL among the supported engines in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md). The steps below show only the EKS-specific delta. For JDBC drivers, the Helm install, and verification, follow the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md).
+
+1. Create the orchestration database and user. Connect to the writer endpoint of the Aurora cluster you provisioned with the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup, then run:
+
+   ```sql
+   CREATE DATABASE camunda;
+   CREATE USER camunda WITH ENCRYPTED PASSWORD 'your-secure-password';
+   GRANT ALL PRIVILEGES ON DATABASE camunda TO camunda;
+   ```
+
+2. Add the RDBMS values delta to your `values.yml`, using the Aurora writer endpoint as the host with a plain `jdbc:postgresql://` URL. This enables the `rdbms` exporter and disables Elasticsearch and Optimize:
+
+   ```yaml
+   orchestration:
+     exporters:
+       camunda:
+         enabled: false
+       rdbms:
+         enabled: true
+     data:
+       secondaryStorage:
+         type: rdbms
+         rdbms:
+           url: jdbc:postgresql://<aurora-writer-endpoint>:5432/camunda
+           username: camunda
+           secret:
+             existingSecret: orchestration-postgres-secret
+             existingSecretKey: password
+   elasticsearch:
+     enabled: false
+   optimize:
+     enabled: false # Optimize requires Elasticsearch/OpenSearch
+   ```
+
+3. Create the `orchestration-postgres-secret` with the database password in the Camunda namespace:
+
+   ```bash
+   kubectl create secret generic orchestration-postgres-secret \
+     --from-literal=password='<password>' --namespace camunda
+   ```
 
 #### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
 
