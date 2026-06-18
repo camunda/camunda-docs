@@ -16,19 +16,4 @@ For sidebar registration, redirects, validation commands, PR workflow, and commi
 
 ## 2. Which versions to update
 
-Check `src/versions.js` (`currentVersion`) and `versions.json` for the live version list. The table below reflects the current state but will go stale when a new version ships.
-
-| Folder                        | When to update                                    |
-| ----------------------------- | ------------------------------------------------- |
-| `docs/`                       | Change applies to the **upcoming** (Next) release |
-| `versioned_docs/version-8.9/` | Current released version                          |
-| `versioned_docs/version-8.8/` | Previous version                                  |
-| `versioned_docs/version-8.7/` | Previous version                                  |
-
-**Decision rule:**
-
-- Feature not yet released → edit `docs/` only.
-- Feature in the current release and beyond → edit the most recent `versioned_docs/version-*/` folder **and** `docs/`.
-- Bug fix or clarification to an already-released version → edit the affected `versioned_docs/version-*/` folder(s) and, if still relevant, `docs/`. To apply the same fix to multiple older versions, use `/backport`.
-
-Doc IDs can differ across versions — the same page may have been renamed when a section was restructured. Verify the actual filename in each version folder before copying content or links.
+Follow the "Which folders to edit" rules in `repo.instructions.md` §6. To apply the same fix to multiple older versions, use `/backport`.
