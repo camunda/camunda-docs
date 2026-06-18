@@ -7,6 +7,8 @@ argument-hint: "<description of the change to backport, or the PR/branch it came
 
 # /backport — backport a docs change to older versions
 
+**Only proceed when the PR author has explicitly requested a backport.** Do not decide to backport on their behalf. If it is unclear which versions to target, ask before touching any files.
+
 Applies an existing change (already made in `docs/` or a versioned folder) to one or more older versioned releases.
 
 ## 1. Identify what to backport

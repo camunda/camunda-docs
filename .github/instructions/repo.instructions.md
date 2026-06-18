@@ -68,6 +68,7 @@ These are the main commands for working with the repo:
   - Unreleased feature (not yet in any versioned release) → edit `docs/` only.
   - Change applies to the current release and beyond → edit the most recent `versioned_docs/version-*/` folder **and** `docs/`.
   - Bug fix or clarification to an already-released version → edit the affected `versioned_docs/version-*/` folder(s) and, if still relevant, `docs/`.
+- **Backporting is a PR author decision.** Do not backport a change to additional versions unless the PR author explicitly instructs you to. When in doubt, complete the change for the requested version and ask.
 
 ### Navbar links resolve across every version
 

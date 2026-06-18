@@ -16,4 +16,4 @@ For sidebar registration, redirects, validation commands, PR workflow, and commi
 
 ## 2. Which versions to update
 
-Follow the "Which folders to edit" rules in `repo.instructions.md` §6. To apply the same fix to multiple older versions, use `/backport`.
+Follow the "Which folders to edit" rules in `repo.instructions.md` §6. Backporting is the PR author's decision — do not backport unless explicitly asked. If asked, use `/backport`.
