@@ -809,8 +809,8 @@ Additionally, the way you manage clusters changes. Instead of clusters being aut
 
 Two public APIs are exposed when this feature flag is enabled to make this possible:
 
-- Create cluster
-- Delete cluster
+- **Create cluster:** `POST /api/v1/clusters`
+- **Delete cluster:** `DELETE /api/v1/clusters/{clusterId}`
 
 ### Unstable configuration options
 
