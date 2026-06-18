@@ -22,8 +22,6 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
-<!-- TODO(camunda/team-infrastructure-experience#1063): Reword this Aurora PostgreSQL routing guidance when the broader InfraEx guidance is finalized. -->
-
 :::note Using Amazon Aurora PostgreSQL as secondary storage
 Use this page for the EKS cluster, networking, Ingress, and AWS-managed services.
 
