@@ -124,7 +124,7 @@ Throughout the rest of this guide, we refer to configurations as **"With domain"
 
 In this section, we provide an optional setup guide for configuring an Ingress with TLS and DNS management, allowing you to access your application through a specified domain. If you haven't set up an Ingress, refer to the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) for more details. In Kubernetes, an Ingress is an API object that manages external access to services in a cluster, typically over HTTP, and can also handle TLS encryption for secure connections.
 
-To monitor your Ingress setup using Azure Monitor, you may find the official guide on [monitoring ingress controllers with Azure Monitor and Prometheus](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-prometheus-integration) helpful. For more details on the Ingress controller used in this guide and its configuration options, refer to the [Contour documentation](https://projectcontour.io/docs/).
+To monitor your Ingress setup using Azure Monitor, you may find the official guide on [monitoring Ingress controllers with Azure Monitor and Prometheus](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-prometheus-integration) helpful. For more details on the Ingress controller used in this guide and its configuration options, refer to the [Contour documentation](https://projectcontour.io/docs/).
 
 ### Export Values
 
