@@ -227,7 +227,8 @@ Typical defaults include:
 
 - `5432`: PostgreSQL (Management Identity, Web Modeler, and a PostgreSQL-based RDBMS secondary storage when used)
 - `9200`, `9300`, `9600`: Document-store secondary storage (Elasticsearch/OpenSearch)
-  :::
+
+:::
 
 ##### Load balancer
 
