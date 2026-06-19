@@ -33,7 +33,7 @@ Prepare your Self-Managed environment for upgrading to Camunda 8.10. Confirm upg
 Upgrade a Camunda 8 Self-Managed deployment from version 8.9 to 8.10. This guide applies to Self-Managed installations only and does not apply to Camunda SaaS.
 
 :::caution version 8.9 required
-Camunda 8 upgrades must be performed sequentially. If your deployment is running a version **earlier than 8.9**, you must complete the required version-specific upgrades listed in [upgrading from an earlier version](#upgrading-from-an-earlier-version) before you can upgrade to 8.9.
+Camunda 8 upgrades must be performed sequentially. If your deployment is running a version **earlier than 8.9**, you must complete the required version-specific upgrades listed in [upgrading from an earlier version](#upgrading-from-an-earlier-version) before you can upgrade to 8.10.
 :::
 
 ## Prepare for upgrade
