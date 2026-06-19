@@ -79,9 +79,7 @@ server:
 
 ### Clusters
 
-Configure your clusters using the following settings available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md), instead.
-
-<!--- TODO: Link to migration guide --->
+To show your Orchestration Clusters in Camunda Hub, using the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](../../../upgrade/components/890-to-8100.md#camunda-hub).
 
 <Tabs groupId="configType" defaultValue="application.yaml">
 <TabItem value="application.yaml" label="Application properties">
@@ -803,11 +801,11 @@ camunda:
 
 #### Dynamic cluster management
 
-Use dynamic cluster management to automatically register your clusters with Camunda Hub.
+Use dynamic cluster management to automatically create records for your clusters within Camunda Hub.
 
-By default, without dynamic cluster management, clusters are strictly managed by your configuration. They're created, updated, and deleted when your cluster configuration values change.
+By default, clusters shown in Camunda Hub are strictly managed by your [configuration](#clusters). Cluster records are created, updated, and deleted when you change your cluster configuration values.
 
-Dynamic cluster management changes this behavior to a hybrid model, making use of both your cluster configuration and the following cluster management API endpoints that are only exposed when dynamic cluster management is enabled:
+Dynamic cluster management changes this behavior to a hybrid model that makes use of both your cluster configuration—if provided—and the following cluster management API endpoints that are only exposed when dynamic cluster management is enabled:
 
 | Name                           | Path                                  |
 | :----------------------------- | :------------------------------------ |
@@ -816,13 +814,18 @@ Dynamic cluster management changes this behavior to a hybrid model, making use o
 
 In this mode, you:
 
-- Define new clusters in your configuration. Newly defined clusters are still automatically created.
-- [Configure your components](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#console-ping-configuration) to send license information directly to the create cluster endpoint.
-- Delete clusters with the delete cluster endpoint.
-- No longer update clusters. Instead, you must delete a cluster with the API, update your configuration, and allow the cluster to be automatically recreated.
+1. [Configure your Orchestration Cluster components](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#console-ping-configuration) to send license information directly to the create cluster endpoint. If you didn't define the clusters in your configuration, new cluster records with minimal information and no management functionality in the user interface will be created by a request to this endpoint.
+2. Delete stale cluster records from Camunda Hub with the delete cluster endpoint.
+
+While not required, you can still define new clusters in your configuration. Newly defined clusters are automatically registered in Camunda Hub with all [available settings](#clusters) and management functionality in the Camunda Hub interface.
+
+If you remove a cluster configuration, you need to manually delete the cluster record with the delete cluster endpoint. With dynamic cluster management, you can't update cluster records. Instead, delete the record and either:
+
+- Allow the cluster to ping Camunda Hub with new information.
+- Update your configuration, and let the cluster record be recreated.
 
 :::note
-The create cluster endpoint is only for sending cluster information for a cluster that was already created through your configuration. Don't use it to create clusters.
+If you use dynamic cluster management, do not manually call the create cluster endpoint—only configure your clusters to do so. This endpoint doesn't currently support creating clusters with all configurable settings.
 :::
 
 ### Unstable configuration options
