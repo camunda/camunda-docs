@@ -26,6 +26,8 @@ The element template object is divided into required and optional key-value pair
 - [`engines : Object`](./template-metadata.md#engine-compatibility-engines): Dictionary of environments compatible with the template. The environment version is specified using a semantic version range.
 - [`elementType : Object`](./template-metadata.md#supported-bpmn-types-appliesto-and-elementtype): Sets the type of the element. The element is replaced with the specified type when a user applies the template.
 - [`groups : Object`](./template-metadata.md#grouping-properties-groups): Defines groups of property input fields. Groups are sections in the properties panel. Properties can be assigned a group.
+- [`presets : Array<Object>`](./template-metadata.md#predefined-configurations-steps-and-presets): Defines reusable sets of property values. A preset is applied when a user selects its associated step.
+- [`steps : Array<Object>`](./template-metadata.md#predefined-configurations-steps-and-presets): Defines a hierarchical menu of predefined configurations shown when the template is applied. Each final step applies a preset.
 
 Some keys and values require other keys to be set. If your editor supports the [JSON schema](https://json-schema.org/), it will flag missing keys as errors.
 The Web Modeler's editor will also show these errors in the template editor problems panel.
