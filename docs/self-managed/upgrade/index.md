@@ -23,7 +23,7 @@ Prepare your Self-Managed environment for upgrading to Camunda 8.10. Confirm upg
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
-<img src={OverviewImg} alt="Upgrade your Camunda 8 Self-Managed deployment from version 8.8 to 8.9" title="Upgrade your Camunda 8 Self-Managed deployment from version 8.8 to 8.9" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+<img src={OverviewImg} alt="Upgrade your Camunda 8 Self-Managed deployment from version 8.9 to 8.10" title="Upgrade your Camunda 8 Self-Managed deployment from version 8.9 to 8.10" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
