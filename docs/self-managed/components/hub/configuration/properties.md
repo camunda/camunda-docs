@@ -124,8 +124,6 @@ To show your Orchestration Clusters in Camunda Hub, using the following configur
 
 Use custom properties to include helpful links in the **Clusters** user interface:
 
-<!--- TODO: Include an image --->
-
 <Tabs groupId="configType" className="tabs-hidden" defaultValue="application.yaml">
 <TabItem value="application.yaml" label="Application properties">
 
