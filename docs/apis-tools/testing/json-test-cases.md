@@ -644,7 +644,7 @@ An instruction to assert a single variable of a process instance. See the [asser
   </tr>
   <tr>
     <td>satisfiesExpression</td>
-    <td>A FEEL expression assertion. See <a href="assertions.md#hasvariablesatisfiesexpression">hasVariableSatisfiesExpression</a>.</td>
+    <td>A FEEL expression assertion that must evaluate to <code>true</code> for the given variable. See <a href="assertions.md#hasvariablesatisfiesexpression">hasVariableSatisfiesExpression</a>.</td>
     <td>string</td>
     <td>No</td>
   </tr>
@@ -670,8 +670,8 @@ Example:
   "processInstanceSelector": {
     "processDefinitionId": "MoonExplorationProcess"
   },
-  "variableName": "amount",
-  "satisfiesExpression": "= amount > 100 and amount < 1000"
+  "variableName": "order",
+  "satisfiesExpression": "= order.status = \"approved\" and count(order.items) = 3 and order.items[name = \"Helmet\"][1].quantity = 1"
 }
 ```
 
