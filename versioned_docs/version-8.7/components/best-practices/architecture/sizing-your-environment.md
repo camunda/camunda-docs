@@ -93,6 +93,10 @@ Furthermore, data is also sent from Operate and Optimize, which store data in El
 Elasticsearch needs enough memory available to load a large amount of this data into memory.
 :::
 
+:::note Use SSDs for Elasticsearch
+Use SSD-backed storage for Elasticsearch (your secondary storage). The critical factor is disk **latency**, not throughput — cloud-provider throughput figures often look similar for HDD and SSD, which is misleading. In testing, HDD-backed Elasticsearch caused multi-second flush durations, a persistent export backlog, and significant overall throughput degradation. Provision performant, low-latency disks to avoid these bottlenecks.
+:::
+
 :::note Use SSDs for Zeebe (primary storage)
 Use SSD-backed storage for Zeebe (your primary storage). Every command is written and flushed to the Zeebe Raft log before it is processed: the leader must persist the entry and followers must flush it before acknowledging, so disk write and flush **latency** sits directly on the processing critical path. As with Elasticsearch, the critical factor is latency, not throughput — cloud-provider throughput figures often look similar for HDD and SSD, which is misleading. In testing, HDD-backed primary storage degraded throughput by roughly 50%, raised commit latency, and triggered additional Raft snapshot replication. Provision performant, low-latency (single-digit-millisecond write latency) disks for Zeebe. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
 :::

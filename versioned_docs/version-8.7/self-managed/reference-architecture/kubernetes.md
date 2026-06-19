@@ -211,6 +211,10 @@ For more information, see the [reference architecture overview](/self-managed/re
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmark tests to determine the appropriate size specific to your environment and use case.
 
+:::note Secondary storage disk requirements
+Secondary storage (Elasticsearch/OpenSearch) is customer-managed. Provision it with sufficient resources and use performant disks — disk latency directly impacts export throughput and overall cluster performance. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md#disk-space) for sizing guidance.
+:::
+
 Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from Zeebe to your database.
 
 ## Distributions
