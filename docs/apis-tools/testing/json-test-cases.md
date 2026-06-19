@@ -670,8 +670,8 @@ Example:
   "processInstanceSelector": {
     "processDefinitionId": "MoonExplorationProcess"
   },
-  "variableName": "order",
-  "satisfiesExpression": "= order.status = \"approved\" and count(order.items) = 3 and order.items[name = \"Helmet\"][1].quantity = 1"
+  "variableName": "mission",
+  "satisfiesExpression": "mission.status = \"completed\" and count(mission.astronauts) = 4 and list contains(mission.astronauts, \"Zee\")"
 }
 ```
 
