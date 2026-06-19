@@ -94,7 +94,7 @@ Elasticsearch needs enough memory available to load a large amount of this data 
 :::
 
 :::note Use SSDs for Elasticsearch
-Use SSD-backed storage for Elasticsearch (your secondary storage). The critical factor is disk **latency**, not throughput — cloud-provider throughput figures often look similar for HDD and SSD, which is misleading. In testing, HDD-backed Elasticsearch caused multi-second flush durations, a persistent export backlog, and significant overall throughput degradation. Provision performant, low-latency disks to avoid these bottlenecks.
+Use SSD-backed storage for Elasticsearch (your secondary storage). The critical factor is disk **latency**, not throughput — cloud-provider throughput figures often look similar for HDD and SSD, which is misleading. In testing, HDD-backed Elasticsearch caused multi-second flush durations, a persistent export backlog, and significant overall throughput degradation. Provision performant, low-latency disks to avoid these bottlenecks. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
 :::
 
 :::note Use SSDs for Zeebe (primary storage)
