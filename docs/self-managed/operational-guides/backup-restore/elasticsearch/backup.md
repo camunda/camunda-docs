@@ -206,8 +206,8 @@ During a hot backup, the Zeebe cluster remains fully operational:
 
 - Zeebe continues to accept new client requests (for example, starting process instances) and to process existing workflow instances.
 - Job workers and other external workers continue to receive and complete jobs.
-- Exporters continue to export records. While soft pause is active, Zeebe temporarily does not advance the exporter position, which prevents log compaction and increases broker disk usage for the duration of the backup window. Ensure broker disks have enough free space.
-- If a broker restarts while soft pause is active, some already-exported records may be exported again after the restart. This is expected, because exporting always resumes from the last acknowledged exporter position.
+- Exporters continue to export records. While soft pause is active, Zeebe temporarily does not advance the exporter position, which prevents log compaction and increases broker disk usage for the duration of the backup window. Ensure broker disks have enough free space. Keep the backup window as short as possible and resume exporting promptly once the backup completes.
+- If a broker restarts while soft pause is active, some already-exported records may be exported again after the restart. This is expected, because exporting always resumes from the last acknowledged exporter position. The same behavior applies after a restore: exporters start from the last persisted position and re-export all records processed during the soft-pause window. This is the intended mechanism that bridges the Zeebe backup and the secondary storage (Elasticsearch/OpenSearch) backup.
 
 The `/actuator/backupRuntime` API then creates a consistent backup of each partition while processing continues. The “wait for backup to complete” steps in this guide only poll backup status and do not introduce any additional pause in processing beyond the initial soft export pause.
 
