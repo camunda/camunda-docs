@@ -270,7 +270,7 @@ Starting with 8.9.0-alpha3, the default [Camunda Spring Boot Starter](../../../a
 **Action:** Migrate your application to Spring Boot 4.0.x and continue using `camunda-spring-boot-starter`. If you're not yet ready to upgrade, switch to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x and has no announced end date. See [dedicated Spring Boot 3 and 4 modules](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules).
 
 :::info Spring Boot support timeline
-OSS support for Spring Boot 3.x ends in June 2026 — this is a Spring framework lifecycle change. Camunda will continue to maintain `camunda-spring-boot-3-starter` beyond that date. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for context on Spring's support lifecycle.
+OSS support for Spring Boot 3.x ends in June 2026. This is a Spring framework lifecycle change. Camunda will continue to maintain `camunda-spring-boot-3-starter` beyond that date. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for context on Spring's support lifecycle.
 :::
 
 </div>
