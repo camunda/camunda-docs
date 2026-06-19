@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 :::note DEPRECATED
 This method of configuring clusters is deprecated and will be removed in a later version of Camunda Hub Self-Managed.
 
-See the [migration guide](/docs/self-managed/upgrade/components/890-to-8100.md#camunda-hub) for more details.
+See the [migration guide](/self-managed/upgrade/components/890-to-8100.md#camunda-hub) for more details.
 
 :::
 
