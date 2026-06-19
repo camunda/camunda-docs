@@ -643,6 +643,12 @@ An instruction to assert a single variable of a process instance. See the [asser
     <td>Yes</td>
   </tr>
   <tr>
+    <td>satisfiesExpression</td>
+    <td>A FEEL expression assertion. See <a href="assertions.md#hasvariablesatisfiesexpression">hasVariableSatisfiesExpression</a>.</td>
+    <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
     <td>satisfiesJudge</td>
     <td>An LLM judge assertion that evaluates the variable against a semantic expectation.</td>
     <td><a href="#judge-assertion">JudgeAssertion</a></td>
@@ -655,6 +661,19 @@ An instruction to assert a single variable of a process instance. See the [asser
     <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "type": "ASSERT_VARIABLE",
+  "processInstanceSelector": {
+    "processDefinitionId": "MoonExplorationProcess"
+  },
+  "variableName": "amount",
+  "satisfiesExpression": "= amount > 100 and amount < 1000"
+}
+```
 
 #### Judge Assertion
 

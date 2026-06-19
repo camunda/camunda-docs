@@ -412,6 +412,17 @@ assertThat(processInstance).hasVariableSatisfies("order", Order.class, order -> 
 });
 ```
 
+### hasVariableSatisfiesExpression
+
+Assert that the process instance has a variable with a value that satisfies the given FEEL expression.
+
+The assertion fails if the variable doesn't exist or the expression evaluates to `false`.
+
+```java
+assertThat(processInstance)
+    .hasVariableSatisfiesExpression("amount", "= amount > 100 and amount < 1000");
+```
+
 ### hasVariableSatisfiesJudge
 
 Assert that a process variable satisfies a natural language expectation using a configured LLM judge. The expectation is evaluated only once. The assertion
