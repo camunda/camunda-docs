@@ -356,7 +356,7 @@ Take a look at the example project on [GitHub](https://github.com/camunda/camund
 ## Process Test Coverage
 
 After a test run, CPT prints the coverage of your BPMN processes and DMN decision tables to the log and generates a
-detailed HTML and JSON report. You can use the report to identify untested paths in your processes or decisions.
+detailed HTML and JSON report. You can use the report to identify untested paths in your processes and decision tables, and increase your test coverage.
 
 A link to the HTML report is printed in the log:
 

@@ -915,7 +915,7 @@ camunda:
       excludedProcesses:
         - process_1
         - process_2
-      # Exclude decision from the report by their decision definition ID
+      # Exclude decisions from the report by their decision definition ID
       excludedDecisions:
         - decision_1
         - decision_2
@@ -933,7 +933,7 @@ coverage.reportDirectory=target/coverage-report
 # Exclude processes from the report by their process definition ID
 excludedProcesses[0]=process_1
 excludedProcesses[1]=process_2
-# Exclude decision from the report by their decision definition ID
+# Exclude decisions from the report by their decision definition ID
 excludedDecisions[0]=decision_1
 excludedDecisions[1]=decision_2
 ```
