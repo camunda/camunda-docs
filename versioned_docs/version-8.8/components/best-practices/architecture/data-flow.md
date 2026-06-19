@@ -53,9 +53,9 @@ After the engine processes a command, it confirms its state change with an event
 **The exporters run on the same leader as the engine.** They are partition-bounded and cannot scale independently of partition count. There are two built-in exporters in play:
 
 - **[Camunda Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)**: aggregates and writes enriched data to secondary storage (ES/OS) for Operate, Tasklist, and the REST Query API.
-- **[Elasticsearch Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
+- **[Elasticsearch Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) / [OpenSearch Exporter](../../../self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)**: writes raw engine events into specific Elasticsearch/OpenSearch indices, consumed by Optimize.
 
-The Elasticsearch exporter is independent and can be enabled alongside the Camunda Exporter.
+The Elasticsearch/OpenSearch exporter is independent and can be enabled alongside the Camunda Exporter.
 
 :::note
 Read events are applied to the registered exporters one by one, in the same order as they appear on the log. Each event is applied to ALL exporters before the next event is processed.
@@ -86,11 +86,11 @@ Optimize sits on top of the export pipeline as a second-tier consumer. See it in
 
 ![Camunda 8.8+ architecture overview - Data Flow Optimize](assets/architecture-8.8plus-data-flow-optimize.jpg)
 
-1. The Elasticsearch exporter writes raw engine events into per-partition Elasticsearch/OpenSearch indices.
+1. The Elasticsearch/OpenSearch exporter writes raw engine events into per-partition Elasticsearch/OpenSearch indices.
 2. Optimize's **importer** reads from those indices and transforms the data into its own analytics indices.
-3. Optimize writes the analytics indices **back into the same or another Elasticsearch cluster**.
+3. Optimize writes the analytics indices **back into the same or another Elasticsearch/OpenSearch cluster**.
 
-This means Optimize has an additional hop in the data flow compared to Operate and Tasklist, and it writes to secondary storage twice: once for the raw events and once for the analytics indices. As a result, data availability latency for Optimize is higher than for Operate and Tasklist, and the overall write load on Elasticsearch is significantly higher when Optimize is enabled.
+This means Optimize has an additional hop in the data flow compared to Operate and Tasklist, and it writes to secondary storage twice: once for the raw events and once for the analytics indices. As a result, data availability latency for Optimize is higher than for Operate and Tasklist, and the overall write load on Elasticsearch/OpenSearch is significantly higher when Optimize is enabled.
 
 :::note
 This is exactly why the architecture was changed in 8.8: the Camunda Exporter now aggregates the data for Operate and Tasklist, which previously both used an Exporter-Importer architecture similar to Optimize. See this [blog post](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/) for more details.
@@ -98,9 +98,9 @@ This is exactly why the architecture was changed in 8.8: the Camunda Exporter no
 
 See the [sizing guide](./sizing-your-environment.md#impact-of-optimize) for details on the impact of running Optimize.
 
-### Reduce Optimize load on Elasticsearch
+### Reduce Optimize load on Elasticsearch/OpenSearch
 
-- Run Optimize on a separate Elasticsearch instance to isolate its load from the core export pipeline.
+- Run Optimize on a separate Elasticsearch/OpenSearch instance to isolate its load from the core export pipeline.
 - Use variable filtering to reduce export volume.
 - Tune retention periods.
 - Disable variable import if variables are not needed in Optimize reports.
@@ -110,7 +110,7 @@ See the [sizing guide](./sizing-your-environment.md#impact-of-optimize) for deta
 The paths above map directly to the factors to consider when [sizing your environment](sizing-your-environment.md):
 
 - **Partition count** bounds both command path throughput and export pipeline parallelism. More partitions means more parallel processing and exporting, up to the available hardware.
-- **Elasticsearch resources** is the most common cause of operational delay and degradation. Monitor and scale storage before hitting performance bottlenecks.
-- **Optimize** significantly increases secondary storage write load. Size Elasticsearch accordingly, or use a dedicated Elasticsearch instance, if Optimize is enabled.
+- **Elasticsearch/OpenSearch resources** is the most common cause of operational delay and degradation. Monitor and scale storage before hitting performance bottlenecks.
+- **Optimize** significantly increases secondary storage write load. Size Elasticsearch/OpenSearch accordingly, or use a dedicated Elasticsearch/OpenSearch instance, if Optimize is enabled.
 
 For hardware recommendations based on these factors, see how to [size your environment](sizing-your-environment.md).
