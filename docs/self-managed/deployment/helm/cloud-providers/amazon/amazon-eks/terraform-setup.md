@@ -728,6 +728,16 @@ To authenticate and authorize access to PostgreSQL and OpenSearch, **you do not 
 :::
 
   </TabItem>
+
+  <TabItem value="rdbms" label="RDBMS">
+
+The RDBMS variant exports the orchestration database variables.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/export-helm-values.sh
+```
+
+  </TabItem>
 </Tabs>
 
 Ensure that you use the actual values you passed to the Terraform module during the setup of PostgreSQL and OpenSearch.
@@ -790,6 +800,14 @@ The choice depends on your infrastructure setup and security preferences. In thi
    This should display the secret with the base64 encoded values.
 
    </TabItem>
+
+   <TabItem value="rdbms" label="RDBMS">
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/create-setup-db-secret.sh
+   ```
+
+   </TabItem>
    </Tabs>
 
 3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`.
@@ -798,6 +816,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    [
    {label: 'Standard', value: 'standard' },
    {label: 'IRSA', value: 'irsa' },
+   {label: 'RDBMS', value: 'rdbms' },
    ]}>
    <TabItem value="standard">
 
@@ -810,6 +829,15 @@ The choice depends on your infrastructure setup and security preferences. In thi
 
    ```yaml reference
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-postgres-create-db.yml
+   ```
+
+   </TabItem>
+   <TabItem value="rdbms">
+
+   The RDBMS variant also creates the `camunda_orchestration` database used as secondary storage for the Orchestration Cluster.
+
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/setup-postgres-create-db.yml
    ```
 
    </TabItem>
@@ -926,6 +954,11 @@ The standard installation comes already pre-configured, and no additional steps 
    ```
 
 Running these commands will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+
+</TabItem>
+<TabItem value="rdbms" label="RDBMS">
+
+The RDBMS variant uses Amazon Aurora PostgreSQL as secondary storage and does not provision OpenSearch, so this OpenSearch access configuration does not apply. Skip it.
 
 </TabItem>
 </Tabs>
