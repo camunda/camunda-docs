@@ -19,7 +19,6 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      # TODO: confirm Vault path once ANTHROPIC_API_KEY is stored in Vault
       - name: Import secrets from Vault
         id: secrets
         uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
