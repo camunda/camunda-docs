@@ -671,7 +671,7 @@ Example:
     "processDefinitionId": "MoonExplorationProcess"
   },
   "variableName": "mission",
-  "satisfiesExpression": "mission.status = \"completed\" and count(mission.astronauts) = 4 and list contains(mission.astronauts, \"Zee\")"
+  "satisfiesExpression": "mission.status = \"completed\" and list contains(mission.astronauts, \"Zee\")"
 }
 ```
 

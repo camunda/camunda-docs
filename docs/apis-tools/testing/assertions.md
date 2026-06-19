@@ -426,7 +426,7 @@ The assertion fails if the variable doesn't exist or the expression doesn't eval
 assertThat(processInstance)
     .hasVariableSatisfiesExpression(
         "order",
-        "order.status = \"approved\" and count(order.items) = 3 and order.items[name = \"Helmet\"][1].quantity = 1");
+        "order.status = \"approved\" and list contains(order.items.name, \"Oxygen tank\")");
 ```
 
 ### hasVariableSatisfiesJudge
@@ -519,7 +519,7 @@ assertThat(processInstance)
     .hasLocalVariableSatisfiesExpression(
         ElementSelectors.byId("review-order"),
         "order",
-        "order.status = \"approved\" and count(order.items) = 3 and order.items[name = \"Helmet\"][1].quantity = 1");
+        "order.status = \"approved\" and list contains(order.items.name, \"Oxygen tank\")");
 ```
 
 ### hasLocalVariableSatisfiesJudge
