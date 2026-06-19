@@ -279,6 +279,7 @@ module.exports = {
             "components/best-practices/management/doing-a-proper-poc",
           ],
           Architecture: [
+            "components/best-practices/architecture/data-flow",
             "components/best-practices/architecture/deciding-about-your-stack",
             {
               type: "category",
