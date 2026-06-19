@@ -4,6 +4,9 @@ paths:
       tags:
         - User task
       operationId: completeUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Complete user task
       description: |-
 
@@ -58,6 +61,9 @@ paths:
       tags:
         - User task
       operationId: assignUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign user task
       description: |-
 
@@ -112,6 +118,9 @@ paths:
       tags:
         - User task
       operationId: getUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get user task
       description: |-
 
@@ -156,6 +165,9 @@ paths:
       tags:
         - User task
       operationId: updateUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update user task
       description: |-
 
@@ -210,6 +222,9 @@ paths:
       tags:
         - User task
       operationId: getUserTaskForm
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get user task form
       description: |-
 
@@ -258,6 +273,9 @@ paths:
       tags:
         - User task
       operationId: unassignUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign user task
       description: |-
 
@@ -306,6 +324,9 @@ paths:
       tags:
         - User task
       operationId: searchUserTasks
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search user tasks
       description: |-
 
@@ -342,6 +363,9 @@ paths:
       tags:
         - User task
       operationId: searchUserTaskVariables
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search user task variables
       description: |-
 
@@ -395,6 +419,9 @@ paths:
       tags:
         - User task
       operationId: searchUserTaskEffectiveVariables
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search user task effective variables
       description: |-
 
@@ -447,6 +474,9 @@ paths:
       tags:
         - User task
       operationId: searchUserTaskAuditLogs
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search user task audit logs
       description: |-
 

@@ -4,6 +4,9 @@ paths:
       tags:
         - System
       operationId: getUsageMetrics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get usage metrics
       description: |-
 
@@ -87,6 +90,9 @@ paths:
       tags:
         - System
       operationId: getSystemConfiguration
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: System configuration (alpha)
       description: |-
 
@@ -130,7 +136,7 @@ paths:
                       canLogout: true
                       isLoginDelegated: false
                     cloud:
-                      stage: null
+                      stage: prod
         "401":
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "500":
@@ -301,6 +307,7 @@ components:
       properties:
         stage:
           description: The cloud deployment stage.
+          type: string
           nullable: true
           allOf:
             - $ref: "#/components/schemas/CloudStage"

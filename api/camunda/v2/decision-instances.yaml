@@ -4,6 +4,9 @@ paths:
       tags:
         - Decision instance
       operationId: searchDecisionInstances
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search decision instances
       description: |-
 
@@ -40,6 +43,9 @@ paths:
       tags:
         - Decision instance
       operationId: getDecisionInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get decision instance
       description: |-
 
@@ -84,6 +90,9 @@ paths:
       tags:
         - Decision instance
       operationId: deleteDecisionInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete decision instance
       description: |-
 
@@ -132,6 +141,9 @@ paths:
       tags:
         - Decision instance
       operationId: deleteDecisionInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete decision instances (batch)
       description: |-
 
