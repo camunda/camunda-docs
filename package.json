@@ -51,6 +51,7 @@
     "@docusaurus/faster": "^3.8.0",
     "@docusaurus/preset-classic": "^3.8.0",
     "@docusaurus/theme-mermaid": "^3.8.0",
+    "@iconify-json/logos": "^1.2.11",
     "@mdx-js/react": "^3.1.0",
     "@saucelabs/theme-github-codeblock": "^0.3.0",
     "cheerio": "^1.1.2",
