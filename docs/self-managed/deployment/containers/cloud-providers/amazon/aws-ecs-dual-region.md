@@ -1,5 +1,5 @@
 ---
-id: ecs-dual-region-fargate
+id: aws-ecs-dual-region
 title: "Dual-region setup (ECS Fargate)"
 description: "Reference architecture for Camunda 8 Self-Managed on AWS ECS Fargate in an active-active dual-region configuration backed by Aurora Global Database."
 sidebar_position: 2
