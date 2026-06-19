@@ -750,7 +750,7 @@ Dynamic cluster management changes this behavior to a hybrid model that makes us
 
 In this mode, you:
 
-1. [Configure your Orchestration Cluster components](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#console-ping-configuration) to send license information directly to the create cluster endpoint. If you didn't define the clusters in your configuration, new cluster records with minimal information and no management functionality in the user interface will be created by a request to this endpoint.
+1. [Configure your Orchestration Cluster components](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the create cluster endpoint. If you didn't define the clusters in your configuration, new cluster records with minimal information and no management functionality in the user interface will be created by a request to this endpoint.
 2. Delete stale cluster records from Camunda Hub with the delete cluster endpoint.
 
 While not required, you can still define new clusters in your configuration. Newly defined clusters are automatically registered in Camunda Hub with all [available settings](#clusters) and management functionality in the Camunda Hub interface.
