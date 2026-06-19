@@ -145,7 +145,8 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 
 - **Memory:** Increase Elasticsearch memory to store more historical data without performance degradation.
 - **Nodes:** Add Elasticsearch statefulset replicas for more IOPS and query throughput.
-- **Disk:** Increase disk size based on your data retention requirements. With Optimize enabled and a realistic payload (~11 KB), Elasticsearch disk can fill rapidly (for example, 128 Gi in under 12 hours at 1 PI/s with 30-day retention).
+- **Disk size:** Increase disk size based on your data retention requirements. With Optimize enabled and a realistic payload (~11 KB), Elasticsearch disk can fill rapidly (for example, 128 Gi in under 12 hours at 1 PI/s with 30-day retention).
+- **Disk type:** Use SSDs for Elasticsearch storage. Disk **latency** — not throughput — is the critical factor. HDD-backed Elasticsearch has been observed to cause flush durations of 8–10 seconds, leading to a growing export backlog, increased broker memory usage from in-flight records, and overall cluster throughput degradation of up to ~70% compared to an equivalent SSD-backed setup. Cloud providers often show similar throughput numbers for HDD and SSD, which can be misleading — the latency difference is what matters for Camunda's export pipeline.
 - **Index replicas:** The disk estimates in the baseline tables above do not account for index-level replicas. In multi-node clusters, configure at least one replica per index for fault tolerance — each replica stores a full copy of the primary shard data, approximately doubling total disk usage. From Camunda 8.10 onwards, the Elasticsearch/OpenSearch Exporter defaults to one replica. For earlier versions, configure this explicitly. See [managing replicas](/self-managed/concepts/secondary-storage/managing-secondary-storage.md#replicas).
 
 ## Primary storage considerations
