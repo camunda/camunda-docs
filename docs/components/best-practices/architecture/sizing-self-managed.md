@@ -147,6 +147,14 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 - **Nodes:** Add Elasticsearch statefulset replicas for more IOPS and query throughput.
 - **Disk:** Increase disk size based on your data retention requirements. With Optimize enabled and a realistic payload (~11 KB), Elasticsearch disk can fill rapidly (for example, 128 Gi in under 12 hours at 1 PI/s with 30-day retention).
 
+## Primary storage considerations
+
+The Orchestration Cluster is highly IO-intensive: every command is written to the Raft log and flushed to disk before it can be processed. A partition leader must replicate and commit a record before processing and responding to it, and each follower must write and flush the record before acknowledging replication. Disk write and flush **latency** therefore sits directly on the critical path of request processing.
+
+For this reason, primary storage must use low-latency **SSDs**; HDD-backed volumes are not supported. Disk _throughput_ alone is not a reliable indicator — cloud providers often report similar throughput for HDD and SSD volumes, but the latency difference is large and is what matters for Camunda. In testing, using high-latency (HDD) disks for primary storage degraded throughput by around 50% compared to SSDs, increased commit latencies, and triggered additional Raft snapshot replication between brokers.
+
+See the [reference architecture minimum cluster requirements](/self-managed/reference-architecture/kubernetes.md#minimum-cluster-requirements) for concrete per-platform disk recommendations, and the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
+
 ## Secondary storage considerations
 
 The resource tables above assume Elasticsearch as the secondary storage backend. If you are using a different backend:
