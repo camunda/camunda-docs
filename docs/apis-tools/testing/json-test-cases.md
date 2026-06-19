@@ -644,7 +644,7 @@ An instruction to assert a single variable of a process instance. See the [asser
   </tr>
   <tr>
     <td>satisfiesExpression</td>
-    <td>A FEEL expression assertion that must evaluate to <code>true</code> for the given variable. See <a href="assertions.md#hasvariablesatisfiesexpression">hasVariableSatisfiesExpression</a>.</td>
+    <td>A FEEL expression assertion that must evaluate to <code>true</code> for the given variable.</td>
     <td>string</td>
     <td>No</td>
   </tr>
