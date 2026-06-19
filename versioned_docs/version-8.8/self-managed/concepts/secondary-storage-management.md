@@ -52,6 +52,10 @@ The number of primary shards should be determined based on your data size and an
 
 - **Multiple Node Cluster**: In a multi-node cluster, it is advisable to configure at least one replica for each index. This ensures that if one node fails, the data remains accessible from another node, enhancing fault tolerance and availability.
 
+:::note
+Each replica stores a full copy of the primary shard data, so one replica per index approximately doubles the total disk required for those indices. Account for replica storage when [sizing your Elasticsearch/OpenSearch cluster](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling).
+:::
+
 ## Backups
 
 Regular backups of your secondary storage data are crucial for disaster recovery and data integrity:
