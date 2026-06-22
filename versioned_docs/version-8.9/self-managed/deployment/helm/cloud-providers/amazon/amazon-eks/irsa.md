@@ -211,7 +211,7 @@ Overall, this will disable the role assumption of the node for the Kubernetes po
 
 ## Document store (S3)
 
-When using the [AWS S3 document store](/self-managed/concepts/document-handling/configuration/helm.md) on Amazon EKS, you can authenticate to S3 with IRSA instead of static AWS credentials. This removes long-lived access keys from your Kubernetes secrets and lets Camunda components assume an IAM role through their service account.
+When using the [AWS S3 document store](/self-managed/concepts/document-handling/configuration/helm.md) on Amazon EKS, you can authenticate to S3 with IRSA instead of static AWS credentials. This removes long-lived access keys from your Kubernetes secrets and enables Camunda components to assume an IAM role through their service account.
 
 ### Prerequisites
 
@@ -311,9 +311,9 @@ With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK re
    You should see `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`, and no `AWS_ACCESS_KEY_ID`.
 3. Upload and download a document to confirm S3 access works end to end.
 
-## Backup-related
+## Elasticsearch backup with IRSA
 
-When implementing [backup and restore procedures](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for **Elasticsearch** in your **Camunda** deployment, you can leverage **AWS IAM Roles for Service Accounts (IRSA)** to securely access **S3 buckets**.
+When implementing [backup and restore procedures](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for Elasticsearch in your Camunda deployment, you can use IRSA to securely access S3 buckets.
 
 ### Bitnami Elasticsearch chart configuration
 
