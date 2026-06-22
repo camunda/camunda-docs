@@ -45,7 +45,7 @@ Review the actions required for the following 8.10 changes:
 | :---------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
 | <span className="label-highlight red">Breaking change</span>      | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter)         |
 | <span className="label-highlight red">Breaking change</span>      | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)                     |
-| <span className="label-highlight red">Breaking change</span>      | [Administration API (Self-Managed) is migrated](#administration-api-self-managed-migrated)                                  |
+| <span className="label-highlight red">Breaking change</span>      | [Administration API (Self-Managed) migrated](#administration-api-self-managed-migrated)                                     |
 | <span className="label-highlight orange">Behavioral change</span> | [Element instance search: advanced filters on `elementId` / `elementName` and `$or` support](#element-instance-advanced-or) |
 | <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
 | <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |

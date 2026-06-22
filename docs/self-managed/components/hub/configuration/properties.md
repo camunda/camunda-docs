@@ -73,7 +73,7 @@ server:
 
 ### Clusters
 
-To show your Orchestration Clusters in Camunda Hub, using the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](../../../upgrade/components/890-to-8100.md#camunda-hub).
+To show your Orchestration Clusters in Camunda Hub, use the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](../../../upgrade/components/890-to-8100.md#camunda-hub).
 
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
@@ -178,7 +178,7 @@ Use `components` to set up components in the cluster:
 | `camunda.modeler.clusters[0].components[0].type`           | The component's type.                                                                                        |
 | `camunda.modeler.clusters[0].components[0].version`        | The component's version.                                                                                     |
 | `camunda.modeler.clusters[0].components[0].urls.webapp`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. |
-| `camunda.modeler.clusters[0].components[0].urls.rest`      | The API base URL for connectors.                                                                             |
+| `camunda.modeler.clusters[0].components[0].urls.rest`      | The REST API base URL for Connectors and the Orchestration Cluster.                                          |
 | `camunda.modeler.clusters[0].components[0].urls.grpc`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). |
 | `camunda.modeler.clusters[0].components[0].urls.readiness` | The address of the health check endpoint.                                                                    |
 
@@ -193,7 +193,7 @@ Use `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 | `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_TYPE`           | The component's type.                                                                                        |
 | `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_VERSION`        | The component's version.                                                                                     |
 | `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_WEBAPP`    | The API base URL for all components with a web app: Admin, Management Identity, Optimize, Tasklist, Operate. |
-| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST`      | The API base URL for connectors.                                                                             |
+| `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST`      | The REST API base URL for Connectors and the Orchestration Cluster.                                          |
 | `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_GRPC`      | The [address](#notes-on-host-names-and-port-numbers) of the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md). |
 | `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS` | The address of the health check endpoint.                                                                    |
 
@@ -750,7 +750,7 @@ Dynamic cluster management changes this behavior to a hybrid model that makes us
 
 In this mode, you:
 
-1. [Configure your Orchestration Cluster components](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the create cluster endpoint. If you didn't define the clusters in your configuration, new cluster records with minimal information and no management functionality in the user interface will be created by a request to this endpoint.
+1. [Configure your Orchestration Clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the create cluster endpoint. If you didn't define the clusters in your configuration, new cluster records with minimal information and no management functionality in the user interface will be created by a request to this endpoint.
 2. Delete stale cluster records from Camunda Hub with the delete cluster endpoint.
 
 While not required, you can still define new clusters in your configuration. Newly defined clusters are automatically registered in Camunda Hub with all [available settings](#clusters) and management functionality in the Camunda Hub interface.
