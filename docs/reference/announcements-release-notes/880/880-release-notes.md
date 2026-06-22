@@ -659,7 +659,7 @@ In addition to bearer token authentication, you can now configure Web Modeler in
 - Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to the cluster.
 
-<p><a href="../../../../self-managed/components/hub/configuration/modeler-configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
+<p><a href="../../../../self-managed/components/hub/configuration/properties/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
 
 ### Element template editor onboarding
 
