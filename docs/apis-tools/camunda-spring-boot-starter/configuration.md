@@ -1076,7 +1076,7 @@ Define variables directly in your `application.yaml`:
 camunda:
   client:
     cluster-variables:
-      variables:
+      global:
         environment: production
         maxRetries: 3
 ```
@@ -1085,7 +1085,7 @@ Variables defined in properties are applied in addition to any annotation-define
 
 ### Specify the tenant to set variables for
 
-To set cluster variables scoped to a specific tenant, set the `tenantId` property of the `@ClusterVariables` annotation. Tenant scoping is only available via the annotation; variables defined in properties are always applied to the global scope.
+To set cluster variables scoped to a specific tenant, use the `tenantId` property of the `@ClusterVariables` annotation:
 
 ```java
 @ClusterVariables(resources = "classpath:cluster-variables.json", tenantId = "myTenant")
@@ -1093,7 +1093,19 @@ To set cluster variables scoped to a specific tenant, set the `tenantId` propert
 public class MyApplication { }
 ```
 
-By default, the annotation sets the variables in the global scope.
+Or use the `tenant` property in your `application.yaml`:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      tenant:
+        myTenant:
+          environment: staging
+          maxRetries: 5
+```
+
+By default, the annotation and `global` property set variables in the global scope.
 
 ### Disable cluster variable processing
 
