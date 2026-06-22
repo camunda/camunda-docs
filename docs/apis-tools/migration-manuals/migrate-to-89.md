@@ -344,7 +344,7 @@ Starting with 8.9.0, the default [Camunda Spring Boot Starter](/apis-tools/camun
 #### Action
 
 - Migrate your application to Spring Boot 4.0.x and continue using `camunda-spring-boot-starter`.
-- If you cannot migrate yet, switch your dependency to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x. Note that OSS support for Spring Boot 3.5.x ends in June 2026, so plan your migration accordingly.
+- If you cannot migrate yet, switch your dependency to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x. Camunda will continue to maintain this module beyond June 2026 (when Spring's own OSS support for Spring Boot 3.x ends). For Spring framework-level security patches after that date, consider commercial support from a third-party provider.
 - See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for details.
 - See the [dedicated Spring Boot 3 and 4 modules](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules) documentation for more information.
 
