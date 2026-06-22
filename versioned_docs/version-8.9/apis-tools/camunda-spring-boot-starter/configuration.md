@@ -1033,6 +1033,10 @@ camunda:
 
 ## Set cluster variables at startup
 
+:::note
+The `@ClusterVariables` annotation and cluster variables configuration are available from Camunda Spring Boot Starter version 8.9.9.
+:::
+
 To set cluster variables at application startup, use the `@ClusterVariables` annotation. Cluster variables are set when the Camunda client starts.
 
 There are three ways to provide the variables:
