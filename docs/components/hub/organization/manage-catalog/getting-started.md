@@ -1,7 +1,6 @@
 ---
 id: getting-started-catalog
 title: Get started with the catalog
-sidebar_label: Get started with the catalog
 description: "Set up a reusable asset catalog in Camunda Hub by syncing element templates from your Git repository using CI/CD."
 keywords: [catalog, element templates, hub, getting started]
 ---
