@@ -207,12 +207,12 @@ Note that `proxyVerify` covers only the NGINX → Orchestration leg. In-cluster 
 
 ## Supported modes
 
-| Mode | `global.tls.orchestration.rest.enabled` | `global.tls.orchestration.grpc.enabled` | `/orchestration` ingress backend | gRPC ingress backend-protocol | Web Modeler gRPC | Connectors gRPC | REST clients |
-| ---- | --------------------------------------- | --------------------------------------- | -------------------------------- | ----------------------------- | ---------------- | --------------- | ------------ |
-| Plaintext (default) | `false` | `false` | HTTP                             | `GRPC`                        | `grpc://`        | `http://`       | `http://`    |
-| REST TLS only       | `true`  | `false` | HTTPS                            | `GRPC`                        | `grpc://`        | `http://`       | `https://`   |
-| gRPC TLS only       | `false` | `true`  | HTTP                             | `GRPCS`                       | `grpcs://`       | `https://`      | `http://`    |
-| Both TLS            | `true`  | `true`  | HTTPS                            | `GRPCS`                       | `grpcs://`       | `https://`      | `https://`   |
+| Mode                | `global.tls.orchestration.rest.enabled` | `global.tls.orchestration.grpc.enabled` | `/orchestration` ingress backend | gRPC ingress backend-protocol | Web Modeler gRPC | Connectors gRPC | REST clients |
+| ------------------- | --------------------------------------- | --------------------------------------- | -------------------------------- | ----------------------------- | ---------------- | --------------- | ------------ |
+| Plaintext (default) | `false`                                 | `false`                                 | HTTP                             | `GRPC`                        | `grpc://`        | `http://`       | `http://`    |
+| REST TLS only       | `true`                                  | `false`                                 | HTTPS                            | `GRPC`                        | `grpc://`        | `http://`       | `https://`   |
+| gRPC TLS only       | `false`                                 | `true`                                  | HTTP                             | `GRPCS`                       | `grpcs://`       | `https://`      | `http://`    |
+| Both TLS            | `true`                                  | `true`                                  | HTTPS                            | `GRPCS`                       | `grpcs://`       | `https://`      | `https://`   |
 
 The chart derives Web Modeler and Connectors endpoints automatically. Explicit `webModeler.restapi.clusters` and `connectors.configuration` blocks remain authoritative — set them only if you need an endpoint shape the helpers do not produce.
 
@@ -352,4 +352,126 @@ kubectl -n <namespace> get deployment <release>-connectors \
 
 kubectl -n <namespace> get deployment <release>-connectors \
   -o jsonpath='{.spec.template.spec.containers[0].readinessProbe.httpGet.scheme}{"\n"}'
+```
+
+## Optimize TLS
+
+Optimize in 8.10 runs its own Spring Boot HTTP server and is exposed through a Gateway API `HTTPRoute` (not via an NGINX ingress). `global.tls.optimize` mirrors the Orchestration REST surface and configures TLS termination at the Optimize pod.
+
+This server-side TLS is independent of the existing client-side `optimize.database.elasticsearch.tls` / `optimize.database.opensearch.tls` (and legacy `global.elasticsearch.tls.existingSecret` / `global.opensearch.tls.existingSecret`) truststore wiring, which secures the Optimize → ES/OS connection direction. Both can be configured together; the chart mounts the server-side keystore as a separate `optimize-server-tls` volume that coexists with the existing client-side `keystore` truststore mount.
+
+### Modes
+
+- **PKCS12 (default)** — `secret.type: pkcs12`. The chart sets `SERVER_SSL_KEY_STORE`, `SERVER_SSL_KEY_STORE_TYPE=PKCS12`, and `SERVER_SSL_KEY_STORE_PASSWORD` (from a `secretKeyRef`) on the Optimize main container. Use when you manage keystores out-of-band (Java PKI, internal CA).
+- **PEM (cert-manager compatible)** — `secret.type: pem`. The chart sets `SERVER_SSL_CERTIFICATE` and `SERVER_SSL_CERTIFICATE_PRIVATE_KEY` on the Optimize main container. Compatible with cert-manager `kubernetes.io/tls` Secrets out of the box.
+
+In both modes the chart:
+
+- Sets `SERVER_SSL_ENABLED=true` on the Optimize main container (and only the main container — the optional `migration` init container is untouched, since it does not serve HTTP).
+- Mounts the referenced Secret at `/usr/local/camunda/certificates/optimize/` as a `optimize-server-tls` projected Secret volume with mode `0440`.
+- Switches the container probes (`startupProbe` / `readinessProbe` / `livenessProbe`) to `HTTPS` when the user has left the probe `scheme` at its default `HTTP`.
+- Stamps a `checksum/optimize-tls` pod annotation when `global.tls.optimize.autoRollout: true`, so the next `helm upgrade` rolls Optimize on cert rotation.
+
+### Server-side vs client-side TLS in Optimize
+
+The two surfaces are deliberately orthogonal:
+
+| Direction                     | Values key                                                                                  | Volume name           | Purpose                                                                               |
+| ----------------------------- | ------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------- |
+| Inbound (clients → Optimize)  | `global.tls.optimize.secret.existingSecret`                                                 | `optimize-server-tls` | Server identity cert + key for the Optimize HTTP listener (this guide).               |
+| Outbound (Optimize → ES / OS) | `optimize.database.elasticsearch.tls.secret.existingSecret` (or `…opensearch.tls.secret.…`) | `keystore`            | Truststore so Optimize trusts the ES / OS server cert when calling secondary storage. |
+
+Operators commonly need both at once (mTLS-style hardening across the whole data plane). The chart supports both simultaneously; the regression test suite asserts that the `optimize-server-tls` and `keystore` volumes coexist with their respective mounts on the Optimize main container.
+
+### PKCS12 example
+
+```yaml
+global:
+  tls:
+    optimize:
+      enabled: true
+      secret:
+        existingSecret: optimize-tls-keystore
+        existingSecretKey: keystore.p12
+        existingSecretPasswordKey: keystore-password
+        keyAlias: optimize-rest
+    caBundle:
+      secret:
+        existingSecret: camunda-internal-ca
+        existingSecretKey: ca.crt
+```
+
+Create the Secret out-of-band:
+
+```shell
+openssl pkcs12 -export \
+  -in ./tls.crt -inkey ./tls.key \
+  -out ./keystore.p12 \
+  -password pass:changeit \
+  -name optimize-rest
+
+kubectl create secret generic optimize-tls-keystore \
+  --from-file=keystore.p12=./keystore.p12 \
+  --from-literal=keystore-password=changeit
+```
+
+### PEM example (cert-manager)
+
+```yaml
+global:
+  tls:
+    optimize:
+      enabled: true
+      secret:
+        existingSecret: optimize-cert
+        type: pem
+    caBundle:
+      secret:
+        existingSecret: camunda-internal-ca
+        existingSecretKey: ca.crt
+```
+
+With a cert-manager `Certificate` that issues into the same namespace, the resulting `kubernetes.io/tls` Secret already carries `tls.crt` and `tls.key` — the chart picks them up automatically (the PKCS12 default `existingSecretKey: keystore.p12` is auto-substituted to `tls.crt` in PEM mode).
+
+### Combined server + client TLS example
+
+```yaml
+global:
+  tls:
+    optimize:
+      enabled: true
+      secret:
+        existingSecret: optimize-tls-keystore
+    caBundle:
+      secret:
+        existingSecret: camunda-internal-ca
+        existingSecretKey: ca.crt
+optimize:
+  enabled: true
+  database:
+    elasticsearch:
+      tls:
+        enabled: true
+        secret:
+          existingSecret: elasticsearch-ca
+          existingSecretKey: ca.crt
+```
+
+The chart wires the inbound `optimize-server-tls` keystore for the Optimize HTTP listener AND the outbound `keystore` truststore that Optimize uses when calling Elasticsearch over HTTPS. Both paths are independent and may be enabled together.
+
+### Gateway API caveat
+
+In 8.10, Optimize is exposed via the Gateway API `HTTPRoute`, not via an NGINX `Ingress`. Backend HTTPS for Gateway API is configured at the listener / Service level on the gateway implementation — not via NGINX `backend-protocol` annotations. The `global.tls.optimize.proxyVerify` block is reserved for parity with the Orchestration surface and has no effect on the Gateway API path today. Intra-cluster TLS terminates at the Optimize pod with this configuration; backend-protocol selection for the gateway listener is a separate concern.
+
+### Verification
+
+```shell
+kubectl -n <namespace> get deployment <release>-optimize \
+  -o jsonpath='{.spec.template.spec.containers[0].env}' | jq '.[] | select(.name|startswith("SERVER_SSL_"))'
+
+kubectl -n <namespace> get deployment <release>-optimize \
+  -o jsonpath='{.spec.template.spec.containers[0].readinessProbe.httpGet.scheme}{"\n"}'
+
+kubectl -n <namespace> get deployment <release>-optimize \
+  -o jsonpath='{range .spec.template.spec.volumes[*]}{.name}{"\n"}{end}' | grep -E 'optimize-server-tls|keystore'
 ```
