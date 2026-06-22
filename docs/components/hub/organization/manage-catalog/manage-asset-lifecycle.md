@@ -2,12 +2,12 @@
 id: manage-asset-lifecycle
 title: Manage the asset lifecycle
 sidebar_label: Manage the asset lifecycle
-description: "Unpublish and delete catalog assets as a Center of Excellence to drive safe migrations for delivery teams."
+description: "Unpublish and delete catalog assets as a center of excellence to drive safe migrations for delivery teams."
 keywords:
   [catalog, element templates, hub, lifecycle, unpublish, deprecate, delete]
 ---
 
-As a Center of Excellence (CoE), you control which element templates delivery teams can discover and apply through the catalog. Over time you will retire assets, replace them with successors, or remove them entirely. This guide explains the lifecycle states the catalog provides and when to use each one.
+As a center of excellence (CoE), you control which element templates delivery teams can discover and apply through the catalog. Over time you will retire assets, replace them with successors, or remove them entirely. This guide explains the lifecycle states the catalog provides and when to use each one.
 
 Before you start, make sure you have [set up the catalog](/components/hub/organization/manage-catalog/getting-started.md) and can submit assets through your CI/CD pipeline.
 

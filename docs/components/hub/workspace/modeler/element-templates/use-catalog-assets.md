@@ -5,7 +5,7 @@ sidebar_label: Use catalog assets
 description: "Discover and apply published catalog element templates while modeling in Hub."
 ---
 
-Once your Center of Excellence (CoE) has [synced element templates to the catalog](/components/hub/organization/manage-catalog/getting-started.md), delivery teams discover and apply them while modeling.
+Once your center of excellence (CoE) has [synced element templates to the catalog](/components/hub/organization/manage-catalog/getting-started.md), delivery teams discover and apply them while modeling.
 
 ## Discover assets in the catalog
 

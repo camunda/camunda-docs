@@ -4,13 +4,13 @@ title: Manage the catalog
 description: "Establish a Git repository with catalog assets, upload the assets in a CI/CD pipeline, and make them available across your organization."
 ---
 
-The catalog in Camunda Hub lets a Center of Excellence (CoE) publish reusable automation assets from a git repository so that delivery teams can discover and apply them when modeling.
+The catalog in Camunda Hub lets a center of excellence (CoE) publish reusable automation assets from a git repository so that delivery teams can discover and apply them when modeling.
 
 ## About the catalog
 
 catalog assets live in your own git repository and are uploaded to Camunda Hub through a CI/CD pipeline that calls the Hub catalog API. In Hub:
 
-- A **Center of Excellence (CoE)** curates the assets and manages their lifecycle (publishing and unpublishing) for the organization.
+- A **center of excellence (CoE)** curates the assets and manages their lifecycle (publishing and unpublishing) for the organization.
 - **Delivery teams** discover the published assets and apply them when they model business processes.
 
 These are organizational roles, not Camunda concepts. In Camunda Hub, they map to [organization roles](/components/hub/organization/manage-members/manage-users.md):
