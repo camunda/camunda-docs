@@ -64,7 +64,7 @@ The asset directories don't have to be at the repository root. The [sync script]
 Each asset directory contains exactly two files:
 
 - **README.md**: A Markdown file with metadata in the frontmatter and a description in the body. The frontmatter references the element template file and provides optional attributes like category and tags.
-- **Element template file**: The [element template descriptor](/docs/components/modeler/element-templates/defining-templates.md). The `id` and `version` fields in this file are authoritative for the asset's identity and version in the catalog. The asset name, short description, and icon are also read from this file.
+- **Element template file**: The [element template descriptor](/components/modeler/element-templates/defining-templates.md). The `id` and `version` fields in this file are authoritative for the asset's identity and version in the catalog. The asset name, short description, and icon are also read from this file.
 
 The sync script only looks at these two files; any other files in the repository are ignored.
 
