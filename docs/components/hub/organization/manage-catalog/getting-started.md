@@ -2,18 +2,18 @@
 id: getting-started-catalog
 title: Get started with the catalog
 sidebar_label: Get started with the catalog
-description: "Set up a reusable asset catalog in Camunda Hub by syncing element templates from your git repository using CI/CD."
+description: "Set up a reusable asset catalog in Camunda Hub by syncing element templates from your Git repository using CI/CD."
 keywords: [catalog, element templates, hub, getting started]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The catalog in Camunda Hub lets your center of excellence (CoE) publish and manage reusable element templates from a git repository. Delivery teams can then discover and apply these templates directly from the Hub when modeling processes.
+The catalog in Camunda Hub lets your center of excellence (CoE) publish and manage reusable element templates from a Git repository. Delivery teams can then discover and apply these templates directly from the Hub when modeling processes.
 
 In this guide, you will:
 
-- Organize your element templates in a git repository.
+- Organize your element templates in a Git repository.
 - Connect that repository to the Hub catalog with a CI/CD pipeline.
 - Verify that published assets appear in the catalog for delivery teams to use.
 
@@ -21,14 +21,14 @@ In this guide, you will:
 
 - A Camunda 8 account with an active organization ([SaaS](https://signup.camunda.com/) or [Self-Managed](/self-managed/about-self-managed.md)).
 - Client credentials with **Camunda Hub API** permissions to access the catalog ingestion endpoint. The credentials must include the **`create`** and **`update`** permissions, which the ingestion endpoint requires. See the Camunda Hub API authentication guides for [SaaS](/apis-tools/hub-api-saas/authentication.md) and [Self-Managed](/apis-tools/hub-api-sm/authentication.md).
-- A git repository where your element templates are stored (for example, on GitHub, GitLab, or Bitbucket).
+- A Git repository where your element templates are stored (for example, on GitHub, GitLab, or Bitbucket).
 - A CI/CD pipeline configured for that repository (for example, GitHub Actions, GitLab CI, or Azure Pipelines).
 
 ## Understand the catalog workflow
 
-The catalog connects a git repository to Hub through a CI/CD pipeline:
+The catalog connects a Git repository to Hub through a CI/CD pipeline:
 
-1. Element templates and their metadata live in a git repository — this can be an existing monorepo or a dedicated repository.
+1. Element templates and their metadata live in a Git repository — this can be an existing monorepo or a dedicated repository.
 2. Whenever that repository changes, a CI/CD pipeline submits the current set of element templates to the Hub catalog API.
 3. Hub compares the submission against its stored state and publishes new or updated versions automatically.
 4. Delivery teams discover and apply the latest templates from the catalog when modeling in Hub.
@@ -41,7 +41,7 @@ The catalog syncs from a **single repository**. If your element templates alread
 
 ## Step 1: Organize your assets
 
-Point the catalog at a single git repository that holds your element templates. This can be an existing repository (such as a monorepo) or a dedicated one. The sync only looks at element templates and their README files; any other files in the repository — job workers, BPMN processes, forms, DMN decisions — are ignored.
+Point the catalog at a single Git repository that holds your element templates. This can be an existing repository (such as a monorepo) or a dedicated one. The sync only looks at element templates and their README files; any other files in the repository — job workers, BPMN processes, forms, DMN decisions — are ignored.
 
 Each asset is grouped in its own directory. The asset directories do not have to be at the repository root — the sync discovers them wherever they are, so you can nest them under a subfolder (for example, `element-templates/`) alongside other content:
 
