@@ -352,14 +352,20 @@
     {
       "name": "camunda.client.cluster-variables.enabled",
       "type": "java.lang.Boolean",
-      "description": "Indicates whether the <code>@ClusterVariables<\/code> annotation is processed and configured cluster variables are applied.",
+      "description": "Indicates if cluster variable processing is enabled. When <code>true<\/code>, variables configured via <code>@ClusterVariables<\/code> annotations and via the <code>global<\/code>\/<code>tenant<\/code> properties are applied at startup. When <code>false<\/code>, all cluster variable processing is skipped.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
       "defaultValue": true
     },
     {
-      "name": "camunda.client.cluster-variables.variables",
+      "name": "camunda.client.cluster-variables.global",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
-      "description": "Cluster variables to apply at startup as key-value pairs.",
+      "description": "Globally-scoped cluster variables to set at startup as key-value pairs.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
+    },
+    {
+      "name": "camunda.client.cluster-variables.tenant",
+      "type": "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>",
+      "description": "Tenant-scoped cluster variables to set at startup, keyed by tenant ID.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
     },
     {
