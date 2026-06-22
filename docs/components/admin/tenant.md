@@ -50,9 +50,24 @@ The `<default>` tenant is automatically created when Admin starts.
 
    ![tenant-management-tenant-details-users-tab](./img/tenant-management-tenant-details-users-tab.png)
 
-## Update and delete a tenant
+## Update a tenant
 
-Tenants cannot be updated after creation. To change a tenant's details, you must delete the tenant and then create a new tenant with the details you require.
+To update a tenant:
+
+1. Log in to Admin in your cluster, and click on the **Tenants** tab.
+2. Click on the **pencil icon** next to the tenant you want to update.
+3. Update the tenant details:
+   - **Name**: The name of the tenant.
+   - **Description**: A description of the tenant.
+4. Click on the **Save** button.
+
+The tenant details are updated.
+
+:::note
+The `<default>` tenant is a system entity and cannot be updated.
+:::
+
+## Delete a tenant
 
 To delete a tenant, click on the **Delete** option in the list of tenants, and confirm the deletion.
 

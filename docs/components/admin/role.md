@@ -31,6 +31,23 @@ The role is created and can now be assigned to users or groups.
 
 <img src={CreateRoleImg} alt="Create a role" class="img-700"/>
 
+## Update a role
+
+To update a role:
+
+1. Log in to Admin in your cluster, and click on the **Roles** tab.
+2. Click on the **pencil icon** next to the role you want to update.
+3. Update the role details:
+   - **Name**: The name of the role.
+   - **Description**: A description of the role.
+4. Click on the **Save** button.
+
+The role details are updated.
+
+:::note
+Default roles that are automatically created are system entities and cannot be updated.
+:::
+
 ## Delete a role
 
 To delete a role:
@@ -40,6 +57,10 @@ To delete a role:
 3. Confirm the deletion by clicking **Delete** in the confirmation dialog.
 
 The role is deleted. The authorizations that were granted to the role are also removed.
+
+:::note
+Default roles that are automatically created are system entities and cannot be deleted.
+:::
 
 ## Assign authorizations to a role
 
