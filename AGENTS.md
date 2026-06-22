@@ -24,7 +24,7 @@ For documentation-only tasks:
 
 ## Creating PRs
 
-When creating a PR, invoke the `create-pr` project skill (`.claude/commands/create-pr.md`). It provides the exact procedure for reading the PR template, choosing labels, and constructing the `gh pr create` command.
+When creating a PR, invoke the `create-pr` skill (`.claude/skills/create-pr/SKILL.md`). It provides the exact procedure for reading the PR template, choosing labels, and constructing the `gh pr create` command.
 
 Do not write a PR body from scratch. Do not use `gh pr create --body "..."` with inline content — the template contains backticks and special characters that require writing to a file first.
 

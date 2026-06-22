@@ -1,4 +1,11 @@
-# Create PR — camunda-docs
+---
+name: create-pr
+description: Use when opening a pull request in camunda-docs. Covers reading the PR template verbatim, choosing the correct priority label, and constructing the gh pr create command with --body-file to avoid heredoc quoting issues.
+user-invocable: true
+argument-hint: "<brief description of the change>"
+---
+
+# /create-pr — open a pull request for camunda-docs
 
 Follow these steps in order. Do not skip or reorder them.
 
