@@ -785,6 +785,23 @@ This aligns the Helm chart with the Orchestration Cluster's default configuratio
 </div>
 <div className="release-announcement-content">
 
+#### Optimize: Unused PVC is unmounted
+
+An unused volume mounted at `/camunda` in Optimize has been removed from the Helm chart. Optimize did not use this volume.
+
+By default, this mount used an `emptyDir`, so no PVC cleanup is required. However, if you set `optimize.persistence.enabled=true` in `values.yaml`, the PVC may still exist in your Kubernetes cluster even though Optimize no longer mounts it.
+
+**Action:** If you previously enabled `optimize.persistence.enabled=true`, delete the leftover PVC to reclaim storage quota. The claim name is `<releaseName>-camunda-platform-optimize-data`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Helm chart: Deprecated secret keys removed
 
 Secret configuration keys that were deprecated in Camunda 8.8 are now removed in 8.9. Using any of the removed keys in your `values.yaml` will cause a hard failure during `helm install` or `helm upgrade`.
