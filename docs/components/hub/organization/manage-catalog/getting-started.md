@@ -39,6 +39,10 @@ The part you set up is step 2 — the connection between your repository and Hub
 The catalog syncs from a **single repository**. If your element templates already live together in one repository (for example, a monorepo), sync from it directly. If they are spread across several repositories, first consolidate them into one — see [Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md).
 :::
 
+### Start from the example repository
+
+The fastest way to set up the sync is the [example catalog repository](https://github.com/camunda/catalog-template). It contains placeholder element templates, a ready-to-use sync script (`scripts/sync-catalog.sh`), and a GitHub Actions workflow that submits the full desired state on every push to `main`. Use it as a template, replace the example assets with your own, and configure the credentials below.
+
 ## Step 1: Organize your assets
 
 Point the catalog at a single Git repository that holds your element templates. This can be an existing repository (such as a monorepo) or a dedicated one. The sync only looks at element templates and their README files; any other files in the repository — job workers, BPMN processes, forms, DMN decisions — are ignored.
@@ -143,10 +147,6 @@ The request body is `multipart/form-data` and represents the **complete desired 
 - a `readme` part containing the `README.md` file.
 
 Each `README.md` is paired with the template named in its `template:` frontmatter. The template must be in the same directory as the README. Because the submission is the full desired state, Hub **unpublishes** any asset that exists in the catalog but is absent from the submission (see [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md)).
-
-### Start from the example repository
-
-The fastest way to set up the sync is the [example catalog repository](https://github.com/camunda/catalog-template). It contains placeholder element templates, a ready-to-use sync script (`scripts/sync-catalog.sh`), and a GitHub Actions workflow that submits the full desired state on every push to `main`. Use it as a template, replace the example assets with your own, and configure the credentials below.
 
 **1. Provide credentials and configuration**
 
