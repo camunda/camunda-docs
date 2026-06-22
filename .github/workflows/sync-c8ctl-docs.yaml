@@ -44,13 +44,13 @@ jobs:
           fi
 
       - name: Checkout camunda-docs
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout c8ctl
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/c8ctl
           ref: ${{ steps.resolve.outputs.c8ctl_ref }}

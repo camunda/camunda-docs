@@ -343,7 +343,6 @@ module.exports = {
         addMdExtension: true,
         generateMarkdownFiles: true,
         preserveDirectoryStructure: true,
-        addLinkTag: false,
         ignoreFiles: ["apis-tools/*/specifications/*"],
         title: "Camunda 8 Documentation",
         description:
@@ -758,4 +757,5 @@ module.exports = {
     "@saucelabs/theme-github-codeblock",
     "@docusaurus/theme-mermaid",
   ],
+  clientModules: [require.resolve("./src/scripts/mermaid_icons.js")],
 };

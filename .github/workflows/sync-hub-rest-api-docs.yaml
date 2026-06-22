@@ -11,14 +11,14 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v3.4.0
+        uses: hashicorp/vault-action@v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -78,7 +78,7 @@ jobs:
           fi
 
       - name: Checkout Camunda Hub (Self-Managed)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
@@ -101,7 +101,7 @@ jobs:
           npm run api:generate:hubsm
 
       - name: Upload Self-Managed changes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sm-changes
           path: |
@@ -113,14 +113,14 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v3.4.0
+        uses: hashicorp/vault-action@v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -140,7 +140,7 @@ jobs:
           repositories: camunda-hub
 
       - name: Checkout Camunda Hub (SaaS)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
@@ -163,7 +163,7 @@ jobs:
           npm run api:generate:hubsaas
 
       - name: Upload SaaS changes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: saas-changes
           path: |
@@ -176,26 +176,26 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Download Self-Managed changes
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: sm-changes
           path: docs/
 
       - name: Download SaaS changes
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: saas-changes
           path: docs/
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v3.4.0
+        uses: hashicorp/vault-action@v4.0.0
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle

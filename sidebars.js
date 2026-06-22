@@ -279,6 +279,7 @@ module.exports = {
             "components/best-practices/management/doing-a-proper-poc",
           ],
           Architecture: [
+            "components/best-practices/architecture/data-flow",
             "components/best-practices/architecture/deciding-about-your-stack",
             {
               type: "category",
@@ -1899,20 +1900,7 @@ module.exports = {
                 id: "self-managed/deployment/helm/operational-tasks/index",
               },
               items: [
-                {
-                  type: "category",
-                  label: "Migration from Bitnami",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
-                  },
-                  items: [
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators",
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services",
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives",
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime",
-                  ],
-                },
+                "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
@@ -2024,6 +2012,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region",
               ],
             },
           ],

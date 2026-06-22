@@ -43,13 +43,13 @@ If you did not already migrate to the following APIs and SDKs during your 8.8 up
 
 If you already performed these migrations during your 8.8 upgrade, proceed to [Camunda 8.9 breaking changes, deprecations, and supported environment changes](#camunda-89-breaking-changes-deprecations-and-supported-environment-changes).
 
-| 8.9 status                                                 | Component/Use                                                                                                           | Migrate to                  | Migrate by          |
-| :--------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
-| <span className="label-highlight yellow">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                                                     | Orchestration Cluster API   | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [ZeebeClient](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [Spring Zeebe SDK](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)         | Camunda Spring Boot Starter | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [Zeebe Process Test (ZPT)](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) | Camunda Process Test (CPT)  | Before Camunda 8.10 |
-| <span className="label-highlight yellow">Deprecated</span> | [Job-based user tasks](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)       | Camunda user tasks          | Before Camunda 8.10 |
+| 8.9 status                                                 | Component/Use                                                                       | Migrate to                  | Migrate by          |
+| :--------------------------------------------------------- | :---------------------------------------------------------------------------------- | :-------------------------- | :------------------ |
+| <span className="label-highlight yellow">Deprecated</span> | [V1 component APIs](../migration-manuals/migrate-to-camunda-api.md)                 | Orchestration Cluster API   | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [ZeebeClient](../migration-manuals/migrate-to-camunda-java-client.md)               | Camunda Java Client         | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Spring Zeebe SDK](../migration-manuals/migrate-to-camunda-spring-boot-starter.md)  | Camunda Spring Boot Starter | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Zeebe Process Test (ZPT)](../migration-manuals/migrate-to-camunda-process-test.md) | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| <span className="label-highlight yellow">Deprecated</span> | [Job-based user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md)       | Camunda user tasks          | Before Camunda 8.10 |
 
 :::tip
 Learn more about API changes in the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
@@ -344,7 +344,7 @@ Starting with 8.9.0, the default [Camunda Spring Boot Starter](/apis-tools/camun
 #### Action
 
 - Migrate your application to Spring Boot 4.0.x and continue using `camunda-spring-boot-starter`.
-- If you cannot migrate yet, switch your dependency to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x. Note that OSS support for Spring Boot 3.5.x ends in June 2026, so plan your migration accordingly.
+- If you cannot migrate yet, switch your dependency to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x. Camunda will continue to maintain this module beyond June 2026 (when Spring's own OSS support for Spring Boot 3.x ends). For Spring framework-level security patches after that date, consider commercial support from a third-party provider.
 - See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for details.
 - See the [dedicated Spring Boot 3 and 4 modules](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules) documentation for more information.
 
