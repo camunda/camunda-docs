@@ -1,15 +1,15 @@
 ---
 id: use-catalog-assets
-title: Use Catalog assets in Hub
-sidebar_label: Use Catalog assets
-description: "Discover and apply published Catalog element templates while modeling in Hub."
+title: Use catalog assets in Hub
+sidebar_label: Use catalog assets
+description: "Discover and apply published catalog element templates while modeling in Hub."
 ---
 
-Once your Center of Excellence (CoE) has [synced element templates to the Catalog](/components/hub/organization/manage-catalog/getting-started.md), delivery teams discover and apply them while modeling.
+Once your Center of Excellence (CoE) has [synced element templates to the catalog](/components/hub/organization/manage-catalog/getting-started.md), delivery teams discover and apply them while modeling.
 
-## Discover assets in the Catalog
+## Discover assets in the catalog
 
-Delivery team members browse the Catalog in Hub to find approved, ready-to-use element templates. For each asset, the Catalog shows its name, short description, category, tags, latest version, and icon. The name, description, and icon are read from the element template JSON itself, so what teams see in the Catalog matches what they see when the template is applied.
+Delivery team members browse the catalog in Hub to find approved, ready-to-use element templates. For each asset, the catalog shows its name, short description, category, tags, latest version, and icon. The name, description, and icon are read from the element template JSON itself, so what teams see in the catalog matches what they see when the template is applied.
 
 You can narrow the list to find the right asset:
 
@@ -18,14 +18,14 @@ You can narrow the list to find the right asset:
 - **Filter by tags** to combine related assets across categories.
 - **Sort** by name, creation date, or last updated date.
 
-Assets that were recently added or updated are highlighted so teams can spot new templates at a glance. Only published assets appear in the Catalog — unpublished assets are hidden from delivery teams.
+Assets that were recently added or updated are highlighted so teams can spot new templates at a glance. Only published assets appear in the catalog — unpublished assets are hidden from delivery teams.
 
 ## Apply assets while modeling
 
-To use a Catalog asset while modeling:
+To use a catalog asset while modeling:
 
 1. Open a BPMN diagram in the Hub modeler.
-2. Select an element and apply a published element template from the Catalog.
+2. Select an element and apply a published element template from the catalog.
 3. Configure the element through the properties panel as defined by the template.
 
 When the CoE publishes a newer version of a template you already use, Hub offers an **update** path on elements that reference the older version, so you can move to the latest version on your terms.
