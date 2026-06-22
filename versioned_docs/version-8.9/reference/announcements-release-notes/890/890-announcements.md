@@ -430,7 +430,7 @@ The previous component-specific endpoints (for example, `*.zeebe.camunda.io`, `*
 
 #### Frontend application URLs now require explicit application prefix {#frontend-path-prefix-required}
 
-Camunda 8.9 introduces a unified architecture where multiple application profiles (Operate, Tasklist) run together rather than as standalone Spring profiles. As a result, the automatic path redirection that previously allowed access without an explicit application prefix has been removed.
+In Camunda 8.9, Operate and Tasklist run in a single unified frontend application rather than as separate deployments. This architectural change requires explicit path prefixes to route requests to the correct handler. As a result, the automatic path redirection that previously allowed access without an explicit application prefix has been removed.
 
 Before 8.9, both of the following URLs worked:
 
@@ -450,7 +450,7 @@ Prefix-less paths now return `404 Not Found` instead of redirecting.
 
 **Impact:** Any bookmarks, external links, scripts, or applications that use prefix-less frontend URLs will break after upgrading to 8.9.
 
-**Action:** Update all stored or constructed frontend URLs to include the explicit application prefix (`/operate/` or `/tasklist/`).
+**Action:** Update all stored or constructed frontend URLs to include the explicit application prefix (`/operate/` or `/tasklist/`). If you use reverse proxies or load balancers, consider adding redirect rules to handle legacy URL formats.
 
 <p className="link-arrow">[Upgrade 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md#frontend-application-urls-now-require-explicit-application-prefix-breaking)</p>
 
