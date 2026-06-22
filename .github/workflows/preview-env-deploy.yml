@@ -25,7 +25,7 @@ jobs:
 
     name: build-docs
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Import secrets from Vault
         id: secrets
