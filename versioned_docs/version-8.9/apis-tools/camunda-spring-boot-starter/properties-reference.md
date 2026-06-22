@@ -869,6 +869,10 @@ Type: <code>string</code>
 
 ### `camunda.client.cluster-variables`
 
+:::note
+The cluster variables properties are available from Camunda Spring Boot Starter version 8.9.9.
+:::
+
 Properties for setting cluster variables at startup.
 
 <table>
