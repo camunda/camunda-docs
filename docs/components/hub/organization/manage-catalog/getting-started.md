@@ -9,9 +9,6 @@ keywords: [catalog, element templates, hub, getting started]
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-<span class="badge badge--intermediate">Intermediate</span>
-<span class="badge badge--medium">30 minutes</span>
-
 The catalog in Camunda Hub lets your Center of Excellence (CoE) publish and manage reusable element templates from a git repository. Delivery teams can then discover and apply these templates directly from the Hub when modeling processes.
 
 In this guide, you will:
