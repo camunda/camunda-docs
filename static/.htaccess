@@ -195,6 +195,14 @@ RewriteRule ^docs/next/self-managed/components/hub/configuration/modeler-ssl/?$ 
 # Hub telemetry page removed; monitoring is the closest replacement
 RewriteRule ^docs/next/self-managed/components/hub/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
 
+# Administration SM API removed; replaced by Camunda Hub
+RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-overview/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-authentication/?$ /docs/next/apis-tools/web-modeler-api/authentication/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administration-api-self-managed/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+
+
 # Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
 RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/operate-api/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
