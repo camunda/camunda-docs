@@ -190,6 +190,8 @@ RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-
 
 # Web Modeler and Console SM are merged in 8.10 to create Camunda Hub
 RewriteRule ^docs/next/self-managed/components/hub/configuration/modeler-configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
+# Hub telemetry page removed; monitoring is the closest replacement
+RewriteRule ^docs/next/self-managed/components/hub/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
 
 # Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
 RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
@@ -257,7 +259,6 @@ RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/component
 # Move Console and Web Modeler docs to Camunda Hub (next version)
 RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/overview/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/console/usage-metrics/?$ /docs/next/self-managed/components/hub/usage-metrics/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/telemetry/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/console/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/configuration/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/console/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/overview/?$ /docs/next/self-managed/components/hub/modeler-overview/ [R=301,L]
