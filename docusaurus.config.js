@@ -757,4 +757,5 @@ module.exports = {
     "@saucelabs/theme-github-codeblock",
     "@docusaurus/theme-mermaid",
   ],
+  clientModules: [require.resolve("./src/scripts/mermaid_icons.js")],
 };

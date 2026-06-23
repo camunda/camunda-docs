@@ -279,6 +279,7 @@ module.exports = {
             "components/best-practices/management/doing-a-proper-poc",
           ],
           Architecture: [
+            "components/best-practices/architecture/data-flow",
             "components/best-practices/architecture/deciding-about-your-stack",
             {
               type: "category",
@@ -2011,6 +2012,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region",
               ],
             },
           ],
