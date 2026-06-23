@@ -188,13 +188,6 @@ RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 
-# Web Modeler and Console SM are merged in 8.10 to create Camunda Hub
-RewriteRule ^docs/next/self-managed/components/hub/configuration/modeler-configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
-
-# Hub configuration pages removed; content merged into unified property reference
-RewriteRule ^docs/next/self-managed/components/hub/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/hub/configuration/modeler-ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
-
 # Console telemetry page removed; monitoring is the closest replacement
 RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
 
@@ -269,17 +262,17 @@ RewriteRule ^docs/next/components/modeler/web-modeler/collaborate-with-modes/?$ 
 RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
 
 # Move Console and Web Modeler docs to Camunda Hub (next version)
-RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/console/usage-metrics/?$ /docs/next/self-managed/components/hub/usage-metrics/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/console/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/console/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/overview/?$ /docs/next/self-managed/components/hub/modeler-overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/monitoring/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/modeler-configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/database/?$ /docs/next/self-managed/components/hub/configuration/database/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/identity/?$ /docs/next/self-managed/components/hub/configuration/identity/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/logging/?$ /docs/next/self-managed/components/hub/configuration/logging/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/modeler-ssl/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/copilot/?$ /docs/next/self-managed/components/hub/configuration/copilot/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-database-connection/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-zeebe-connection/ [R=301,L]
