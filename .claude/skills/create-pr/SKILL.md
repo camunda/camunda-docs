@@ -1,6 +1,6 @@
 ---
 name: create-pr
-description: Use when opening a pull request in camunda-docs. Covers reading the PR template verbatim, choosing the correct priority label, and constructing the gh pr create command with --body-file to avoid heredoc quoting issues.
+description: Use when opening a pull request in camunda-docs. Covers reading the PR template, choosing the correct priority label, and constructing the gh pr create command with --body-file to avoid heredoc quoting issues.
 user-invocable: true
 argument-hint: "<brief description of the change>"
 ---
@@ -38,7 +38,7 @@ Also add when applicable:
 
 ## Step 3: Create the PR
 
-Write the body to a temp file — the template contains backticks and special characters that make inline heredocs unreliable — then pass it with `--body-file`:
+Write the body to a temp file: the template contains backticks and special characters that make inline heredocs unreliable. Then pass it with `--body-file`:
 
 ```bash
 # Write the full template with only the Description section filled in
