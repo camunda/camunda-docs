@@ -22,12 +22,6 @@ For documentation-only tasks:
 - Do not run baseline validation before editing.
 - Do not run security scans unless the task involves code, dependencies, generated artifacts, or security-sensitive configuration.
 
-## Creating PRs
-
-When creating a PR, invoke the `create-pr` skill (`.claude/skills/create-pr/SKILL.md`). It provides the exact procedure for reading the PR template, choosing labels, and constructing the `gh pr create` command.
-
-Do not write a PR body from scratch. Do not use `gh pr create --body "..."` with inline content — the template contains backticks and special characters that require writing to a file first.
-
 ## Validation
 
 For documentation-only changes, prefer lightweight validation first:
