@@ -11,22 +11,26 @@ Follow these steps in order. Do not skip or reorder them.
 
 ## Step 1: Read the PR template
 
+1. Read the PR template at `.github/pull_request_template.md`. You can use the following command:
+
 ```bash
 cat .github/pull_request_template.md
 ```
 
-This output is your PR body with two types of changes allowed:
-
-1. Replace the HTML comment block inside `## Description` with the actual description of the change.
-2. In `## When should this change go live?` and `## PR Checklist`: check (`[x]`) the items that apply to this PR. Do not add, remove, or reword any checklist items or HTML comments in these sections.
+2. Replace the HTML comment block inside `## Description` with the description of the changes the PR introduces.
+3. In `## When should this change go live?` and `## PR Checklist`: check (`[x]`) the items that apply to this PR. Do not add, remove, or reword any checklist items or HTML comments in these sections.
 
 ## Step 2: Choose labels
+
+1. List all the available labels in the repo with:
 
 ```bash
 gh label list
 ```
 
-Add labels to communicate the component, version, and priority. PRs without labels may be triaged slowly. Select whatever applies to this PR from the available list; include at least one priority label. Also add the `deploy` label for large or complex changes — it triggers a preview at `https://preview.docs.camunda.cloud/pr-<N>/`.
+2. Add labels to communicate the component, version, and priority. PRs without labels may be triaged slowly. Select whatever applies to this PR from the available list; include at least one priority label. 
+
+3. Add the `deploy` label to trigger a preview site deployment. Do it only for large or complex changes, or when the PR author explicitly requests it. Preview deployments are published at `https://preview.docs.camunda.cloud/pr-<N>/`, where `<N>` is the PR number.
 
 ## Step 3: Create the PR
 
