@@ -220,10 +220,6 @@ camunda:
       level: INFO
 ```
 
-:::note
-`console.overrideConfiguration` is the old way of overriding the default application configuration for Console. It has been deprecated. Please convert to using `console.extraConfiguration`.
-:::
-
 #### Custom configuration loading
 
 **Applies to:** Optimize
