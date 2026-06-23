@@ -557,7 +557,7 @@ camunda.modeler:
 </TabItem>
 </Tabs>
 
-Refer to the [advanced SSL configuration guide](./modeler-ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Camunda Hub components.
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Camunda Hub components.
 
 ### Monitoring and health probes {#monitoring}
 
@@ -816,7 +816,7 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 | `PUSHER_SSL_KEY`        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate. | `/full/path/to/key.pem`         | -             |
 | `PUSHER_SSL_PASSPHRASE` | [optional]<br/>Passphrase for the private key file.                            | `change-me`                     | -             |
 
-Refer to the [advanced SSL configuration guide](./modeler-ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Camunda Hub components.
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Camunda Hub components.
 
 ## Notes on host names and port numbers
 

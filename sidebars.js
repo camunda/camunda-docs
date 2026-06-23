@@ -2353,7 +2353,7 @@ module.exports = {
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",
                 "self-managed/components/hub/configuration/logging",
-                "self-managed/components/hub/configuration/modeler-ssl",
+                "self-managed/components/hub/configuration/ssl",
                 "self-managed/components/hub/configuration/copilot",
               ],
             },
