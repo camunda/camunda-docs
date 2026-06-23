@@ -1,18 +1,22 @@
 ---
 id: sync-multiple-repositories
 title: Sync assets from multiple repositories
-sidebar_label: Sync assets from multiple repositories
 description: "Consolidate element templates spread across several repositories into a single collection repository before syncing to the Hub catalog."
 keywords: [catalog, element templates, hub, monorepo, multiple repositories]
 ---
 
-The catalog syncs from a **single repository**. If your element templates already live together in one repository (for example, a monorepo), sync from it directly as described in [Get started with the catalog](/components/hub/organization/manage-catalog/getting-started.md) — you do not need this guide.
+Consolidate element templates spread across several repositories into a single collection repository before syncing to the Hub catalog.
 
-If your element templates are spread across several repositories, add a step that consolidates them into the single repository you sync from.
+## When to use this guide
+
+The catalog syncs from a single repository. Depending on your setup, you may or may not need this guide:
+
+- ❌ If your element templates already live together in one repository, [sync from it directly](/components/hub/organization/manage-catalog/getting-started.md). You do not need this guide.
+- ✅ If your element templates are spread across several repositories, you need to consolidate them before syncing. This guide shows you how.
 
 ## Consolidate templates into a collection repository
 
-A common pattern is a CI/CD job in each source repository that copies its element templates and READMEs into a dedicated collection repository whenever a new version is created. The collection repository is the single source the catalog syncs from.
+Camunda recommends using a CI/CD job in each source repository that copies its element templates and READMEs into a dedicated collection repository whenever a new version is created. For example:
 
 ```yaml
 # Example: GitHub Actions workflow in a source repository
@@ -39,7 +43,7 @@ jobs:
           git push
 ```
 
-The collection repository then [syncs to Hub](./getting-started.md#run-the-sync).
+The collection repository then [syncs to Camunda Hub](./getting-started.md#run-the-sync).
 
 ## Next steps
 
