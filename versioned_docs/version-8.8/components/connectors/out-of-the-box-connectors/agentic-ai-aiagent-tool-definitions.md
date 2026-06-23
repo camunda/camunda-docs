@@ -169,7 +169,7 @@ You can use an intermediate message catch event inside an ad-hoc sub-process as 
 
 When using this pattern, each process instance opens a message subscription. If multiple instances run concurrently, and they all subscribe with the same message name and correlation key, Zeebe delivers the reply to one instance non-deterministically. The wrong instance may receive the reply, and there is no warning when this happens.
 
-To avoid this, use a [unique correlation key per interaction](../../concepts/messages.md#unique-correlation-key-pattern).
+To avoid this, use a [unique correlation key per interaction](../../concepts/messages.md#request-reply-with-unique-correlation-key).
 
 ## Tool Call Responses
 
