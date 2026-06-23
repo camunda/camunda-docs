@@ -94,11 +94,11 @@ A message is _not_ correlated to a message start event subscription if an instan
 
 ### Duplicate subscriptions
 
-The selection is non-deterministic — when multiple instances subscribe to the same message name and correlation key simultaneously, there is no guarantee about which instance receives the message.
+When multiple process instances subscribe to the same message name and correlation key simultaneously, there is no guarantee about which instance receives the message.
 
-This behavior is by design. An alternative approach, for example, routing to the most recently created instance, would mask correlation key design problems during single-instance development testing, and then fail unexpectedly in production when multiple users run concurrent instances. Non-deterministic selection surfaces the problem early.
+The selection is non-deterministic by design. An alternative approach, for example, routing to the most recently created instance, would mask correlation key design problems during single-instance development testing, and then fail unexpectedly in production when multiple users run concurrent instances. Non-deterministic selection surfaces the problem early.
 
-The optimal solution is to use **unique correlation keys per interaction**, so that each subscription is unambiguous. See [Request-reply with unique correlation key](#request-reply-with-unique-correlation-key) for a complete example.
+The optimal solution is to use **unique correlation keys per interaction**, so that each subscription is unambiguous. See [request-reply with unique correlation key](#request-reply-with-unique-correlation-key) for more details.
 
 ## Message uniqueness
 
