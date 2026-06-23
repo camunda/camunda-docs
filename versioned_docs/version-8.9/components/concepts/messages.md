@@ -94,26 +94,11 @@ A message is _not_ correlated to a message start event subscription if an instan
 
 ### Duplicate subscriptions
 
-When multiple process instances open a subscription for the same message name and correlation key simultaneously, the message is correlated to exactly one of those instances. The selection is non-deterministic; there is no guarantee about which instance receives the message.
+The selection is non-deterministic — when multiple instances subscribe to the same message name and correlation key simultaneously, there is no guarantee about which instance receives the message.
 
 This behavior is by design. An alternative approach, for example, routing to the most recently created instance, would mask correlation key design problems during single-instance development testing, and then fail unexpectedly in production when multiple users run concurrent instances. Non-deterministic selection surfaces the problem early.
 
-The optimal solution is to use **unique correlation keys per interaction**, so that each subscription is unambiguous. This is especially important in patterns where an agent or process sends a message to an external system and waits for a reply.
-
-#### Unique correlation key pattern
-
-If your process uses a send-and-wait pattern (for example, a service task sends a message to an external system, and a message catch event waits for the reply), avoid static or shared correlation keys such as a user ID or a fixed string. Instead:
-
-1. **Generate a unique key** when the outbound message is sent.
-   For example:
-
-   ```feel
-   = chatId + "-" + uuid()
-   ```
-
-2. **Pass the key to the external system** alongside the message content.
-3. **Subscribe with the same key** in the catch event's correlation key expression.
-4. **Include the key in the reply** so the webhook or callback can return it, and the catch event resolves to the correct instance.
+The optimal solution is to use **unique correlation keys per interaction**, so that each subscription is unambiguous. See [Request-reply with unique correlation key](#request-reply-with-unique-correlation-key) for a complete example.
 
 ## Message uniqueness
 
