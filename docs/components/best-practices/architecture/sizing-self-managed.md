@@ -153,7 +153,7 @@ The Orchestration Cluster is highly IO-intensive: every command is written to th
 
 For this reason, primary storage must use low-latency **SSDs**; HDD-backed volumes are not supported. Disk _throughput_ alone is not a reliable indicator — cloud providers often report similar throughput for HDD and SSD volumes, but the latency difference is large and is what matters for Camunda. In testing, using high-latency (HDD) disks for primary storage degraded throughput by around 50% compared to SSDs, increased commit latencies, and triggered additional Raft snapshot replication between brokers.
 
-See the [reference architecture minimum cluster requirements](/self-managed/reference-architecture/kubernetes.md#minimum-cluster-requirements) for concrete per-platform disk recommendations, and the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
+See [Command processing path](data-flow.md#command-processing-path) for the architectural context on why disk latency sits on the critical path, the [reference architecture minimum cluster requirements](/self-managed/reference-architecture/kubernetes.md#minimum-cluster-requirements) for concrete per-platform disk recommendations, and the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
 
 ## Secondary storage considerations
 
