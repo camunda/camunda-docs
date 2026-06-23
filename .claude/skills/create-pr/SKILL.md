@@ -23,7 +23,7 @@ cat .github/pull_request_template.md
 
 ## Step 2: Add labels
 
-1. List all the available labels in the repo with:
+1. List all the available labels in the repo:
 
 ```bash
 gh label list
