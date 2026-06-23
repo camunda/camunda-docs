@@ -39,7 +39,7 @@ jobs:
           git push
 ```
 
-The collection repository then syncs to Hub exactly as described in [Step 2 of the getting started guide](/components/hub/organization/manage-catalog/getting-started.md#step-2-connect-the-repository-to-hub).
+The collection repository then [syncs to Hub](./getting-started.md#run-the-sync).
 
 ## Next steps
 
