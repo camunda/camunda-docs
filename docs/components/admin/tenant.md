@@ -52,14 +52,16 @@ The `<default>` tenant is automatically created when Admin starts.
 
 ## Update a tenant
 
+You can update the name and description of a tenant, but cannot change its ID after creation. To change a tenant's ID, you must delete the tenant and create a new one.
+
 To update a tenant:
 
-1. Log in to Admin in your cluster, and click on the **Tenants** tab.
-2. Click on the **pencil icon** next to the tenant you want to update.
+1. Log in to Admin in your cluster, and select the **Tenants** tab.
+2. Click the **pencil icon** next to the tenant you want to update.
 3. Update the tenant details:
    - **Name**: The name of the tenant.
-   - **Description**: A description of the tenant.
-4. Click on the **Save** button.
+   - **Description**: An optional description of the tenant.
+4. Click the **Save** button.
 
 The tenant details are updated.
 
