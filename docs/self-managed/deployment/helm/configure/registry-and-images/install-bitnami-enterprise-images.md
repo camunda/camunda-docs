@@ -203,10 +203,13 @@ As of November 30, 2025, our image vendor has migrated its repositories. All ima
 
 ### Browse available images and tags
 
-A pre-generated list of every available Bitnami Premium image — with all tags and their image digests — is published and refreshed automatically from the upstream vendor catalog:
+For each Bitnami Premium image, a JSON file listing every available tag and its image digest is published and refreshed automatically from the upstream vendor catalog, at:
 
-- Human-readable: [available_images.md](https://camunda.github.io/camunda-deployment-references/available_images.md)
-- Machine-readable (JSON): [available_images.json](https://camunda.github.io/camunda-deployment-references/available_images.json)
+```text
+https://camunda.github.io/camunda-deployment-references/bitnami_<image>.json
+```
+
+For example, [bitnami_postgresql.json](https://camunda.github.io/camunda-deployment-references/bitnami_postgresql.json). You can browse all of the published files in the [`gh-pages` branch](https://github.com/camunda/camunda-deployment-references/tree/gh-pages/docs).
 
 Use this list as the source of truth for the available versions. Because it is generated from the upstream catalog, it is complete — it also includes images published before the November 30, 2025 migration that `skopeo` can no longer list.
 
