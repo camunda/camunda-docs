@@ -75,6 +75,10 @@ server:
 
 To show your Orchestration Clusters in Camunda Hub, use the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](../../../upgrade/components/890-to-8100.md#camunda-hub).
 
+:::note
+Only Web Modeler admins (users with the [`admin:*` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) can access the cluster pages in Camunda Hub.
+:::
+
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
