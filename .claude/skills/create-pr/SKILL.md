@@ -2,7 +2,7 @@
 name: create-pr
 description: Use when opening a pull request in camunda-docs. Covers reading the PR template, marking applicable checklist items, choosing labels, constructing the gh pr create command with --body-file, and adding the PR to the Documentation Team project.
 user-invocable: true
-argument-hint: "<brief description of the change>"
+argument-hint: "<brief description of the PR>"
 ---
 
 # /create-pr — open a pull request for camunda-docs
