@@ -92,7 +92,7 @@ To show your Orchestration Clusters in Camunda Hub, use the following configurat
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Property                                            | Description                                                                                                         | Example value                                |
+| Environment variable                                | Description                                                                                                         | Example value                                |
 | :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------- |
 | `CAMUNDA_MODELER_CLUSTERS_0_ID`                     | An identifier for the cluster.                                                                                      | `camunda-platform`                           |
 | `CAMUNDA_MODELER_CLUSTERS_0_NAME`                   | A readable name for the cluster.                                                                                    | `Camunda Platform`                           |
@@ -148,7 +148,7 @@ camunda:
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Property                                                      | Description                           |
+| Environment variable                                          | Description                           |
 | :------------------------------------------------------------ | :------------------------------------ |
 | `CAMUNDA_MODELER_CLUSTERS_0_CUSTOM_PROPERTIES_0_DESCRIPTION`  | A description of the custom property. |
 | `CAMUNDA_MODELER_CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_NAME` | A name for the indexed link.          |
@@ -187,7 +187,7 @@ Use `components` to set up components in the cluster:
 
 Use `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 
-| Property                                                 | Description                                                                                                  |
+| Environment variable                                     | Description                                                                                                  |
 | :------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- |
 | `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_NAME`           | The component's name.                                                                                        |
 | `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_TYPE`           | The component's type.                                                                                        |
@@ -699,7 +699,7 @@ camunda.modeler:
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-| Environment variable                                         | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
+| Property                                                     | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
 | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
 | `camunda.modeler.feature.play-enabled`                       | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
 | `camunda.modeler.feature.bpmn-deployment-enabled`            | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
