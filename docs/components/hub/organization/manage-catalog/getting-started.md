@@ -129,7 +129,7 @@ When you submit assets to the catalog API, Camunda Hub compares each submitted t
 
 Additionally, every `id` in a single submission must be unique. If two templates share the same `id`, the entire submission is rejected with a `400 Bad Request`.
 
-:::caution
+:::warning
 Always increment the `version` when you change an element template's content. The catalog API validates the whole submission as a single transaction. If any asset fails validation, _no_ changes are applied.
 :::
 

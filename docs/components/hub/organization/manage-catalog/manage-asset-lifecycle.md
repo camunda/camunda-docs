@@ -39,7 +39,7 @@ For the center of excellence, responsible for managing the catalog, the asset re
 - Track which diagrams still reference the template.
 - Encourage the migration of those diagrams to a newer version or a different template before the asset is removed entirely.
 
-:::info
+:::note
 Unpublishing is a catalog-level state that indicates the asset is no longer part of the current submission. Use it when an asset should no longer be offered to delivery teams—for example, when you replace a connector with a successor and want to drive migration off the old one.
 
 Because unpublishing automatically deprecates the underlying element template, you don't need to manually set the `deprecated` property in the template to flag it as outdated; removing the asset from the submission is enough.
@@ -62,7 +62,7 @@ Deleting an asset removes it and all of its versions entirely:
 
 Values already configured on diagram elements remain in the BPMN file, but the template definition—including labels, groupings, and validation—is no longer applied. The element is shown as a [missing template](/components/hub/workspace/modeler/element-templates/using-templates.md#missing-templates).
 
-:::caution
+:::warning
 Deletion is irreversible. Use it to correct mistakes or remove assets that should never have been published. To phase out assets, prefer unpublishing so the template is deprecated and delivery teams have a clear migration path.
 :::
 
