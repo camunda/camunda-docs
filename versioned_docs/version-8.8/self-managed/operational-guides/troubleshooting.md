@@ -327,8 +327,15 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe
 
 # For enterprise images (requires authentication)
 skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
+# vendor-ee/* tag lists are incomplete since the November 2025 migration (see the registry migration notice); pull by exact tag.
 skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
+
+:::note Registry migration notice
+On November 30, 2025, the image vendor (Bitnami) migrated its repositories. This does not affect pulling images: you can still pull any image by its exact tag. It does affect tag listing. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI return only the tags cached since the migration, so the listed tags are incomplete. The registry stores cached images, not the full upstream catalog.
+
+For the list of supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull from a fully listed repository such as `registry.camunda.cloud/camunda/<image>` or `registry.camunda.cloud/keycloak-ee/keycloak`. For `vendor-ee/<image>` paths, pull or mirror by the exact tag instead of relying on the tag list.
+:::
 
 ## Incorrect authorizations when deploying resources from Modeler
 
