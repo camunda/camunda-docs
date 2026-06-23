@@ -11,16 +11,17 @@ Follow these steps in order. Do not skip or reorder them.
 
 ## Step 1: Read the PR template
 
-1. Read the PR template at `.github/pull_request_template.md`. You can use the following command:
+1. Read the PR template at `.github/pull_request_template.md`:
 
 ```bash
 cat .github/pull_request_template.md
 ```
 
 2. Replace the HTML comment block inside `## Description` with the description of the changes the PR introduces.
-3. In `## When should this change go live?` and `## PR Checklist`: check (`[x]`) the items that apply to this PR. Do not add, remove, or reword any checklist items or HTML comments in these sections.
 
-## Step 2: Choose labels
+3. In `## When should this change go live?` and `## PR Checklist`, check (`[x]`) the items that apply to this PR. Do not add, remove, or reword any checklist items or HTML comments in these sections.
+
+## Step 2: Add labels
 
 1. List all the available labels in the repo with:
 
@@ -28,16 +29,17 @@ cat .github/pull_request_template.md
 gh label list
 ```
 
-2. Add labels to communicate the component, version, and priority. PRs without labels may be triaged slowly. Select whatever applies to this PR from the available list; include at least one priority label. 
+2. Add any labels that apply to this PR to communicate the component, version, and priority. PRs without labels may be triaged slowly.  
 
-3. Add the `deploy` label to trigger a preview site deployment. Do it only for large or complex changes, or when the PR author explicitly requests it. Preview deployments are published at `https://preview.docs.camunda.cloud/pr-<N>/`, where `<N>` is the PR number.
+3. Add the `deploy` label to trigger a preview site deployment. Do this only for large or complex changes, or when the PR author explicitly requests it. 
 
 ## Step 3: Create the PR
 
-Write the body to a temp file: the template contains backticks and special characters that make inline heredocs unreliable. Then pass it with `--body-file`:
+1. Write the body to a temp file: the template contains backticks and special characters that make inline heredocs unreliable. 
+
+2. Pass it with `--body-file`:
 
 ```bash
-# Write the full template with the Description filled in and applicable checklist items checked
 cat > /tmp/pr-body.md << 'PREOF'
 [full PR body here]
 PREOF
@@ -48,12 +50,11 @@ gh pr create \
   --label "CHOSEN_LABEL"
 ```
 
-For the PR title format, follow the commit message conventions in `.github/instructions/repo.instructions.md` § 4 (Code formatting and commits).
+3. Follow the commit message conventions in `.github/instructions/repo.instructions.md` § 4 (Code formatting and commits) for the PR title format.
 
-## Step 4: Add to the Documentation Team GitHub Project
+4. Add the PR to the Documentation Team GitHub project:
 
 ```bash
 gh pr edit <PR-number> --add-project "Documentation Team"
 ```
 
-Both PRs and issues should appear in the team's board and backlog.
