@@ -195,8 +195,8 @@ RewriteRule ^docs/next/self-managed/components/hub/configuration/modeler-configu
 RewriteRule ^docs/next/self-managed/components/hub/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/hub/configuration/modeler-ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
 
-# Hub telemetry page removed; monitoring is the closest replacement
-RewriteRule ^docs/next/self-managed/components/hub/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
+# Console telemetry page removed; monitoring is the closest replacement
+RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
 
 # Administration SM API removed; replaced by Camunda Hub
 RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-overview/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
