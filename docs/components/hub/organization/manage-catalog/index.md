@@ -8,7 +8,7 @@ The catalog in Camunda Hub lets a center of excellence (CoE) publish reusable au
 
 ## About the catalog
 
-catalog assets live in your own Git repository and are uploaded to Camunda Hub through a CI/CD pipeline that calls the Hub catalog API. In Hub:
+Catalog assets live in your own Git repository and are uploaded to Camunda Hub through a CI/CD pipeline that calls the Hub catalog API. In Hub:
 
 - A **center of excellence (CoE)** curates the assets and manages their lifecycle (publishing and unpublishing) for the organization.
 - **Delivery teams** discover the published assets and apply them when they model business processes.
