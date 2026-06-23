@@ -201,4 +201,17 @@ On November 30, 2025, the image vendor (Bitnami) migrated its repositories. This
 For the list of supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 :::
 
+### Browse available images and tags
+
+A pre-generated list of every available Bitnami Premium image — with all tags and their image digests — is published and refreshed automatically from the upstream vendor catalog:
+
+- Human-readable: [available_images.md](https://camunda.github.io/camunda-deployment-references/available_images.md)
+- Machine-readable (JSON): [available_images.json](https://camunda.github.io/camunda-deployment-references/available_images.json)
+
+Use this list as the source of truth for the available versions. Because it is generated from the upstream catalog, it is complete — it also includes images published before the November 30, 2025 migration that `skopeo` can no longer list.
+
+:::warning
+Do not use the Harbor registry UI to browse these images: it only shows images that have already been cached, not the full upstream catalog.
+:::
+
 This configuration follows Bitnami's official image and chart usage guidelines. For licensing, support levels, and CVE management, refer to [Bitnami Documentation](https://docs.bitnami.com/) and [Bitnami Enterprise](https://bitnami.com/enterprise).
