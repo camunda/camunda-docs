@@ -29,13 +29,13 @@ cat .github/pull_request_template.md
 gh label list
 ```
 
-2. Add any labels that apply to this PR to communicate the component, version, and priority. PRs without labels may be triaged slowly.  
+2. Add any labels that apply to this PR to communicate the component, version, and priority. PRs without labels may be triaged slowly.
 
-3. Add the `deploy` label to trigger a preview site deployment. Do this only for large or complex changes, or when the PR author explicitly requests it. 
+3. Add the `deploy` label to trigger a preview site deployment. Do this only for large or complex changes, or when the PR author explicitly requests it.
 
 ## Step 3: Create the PR
 
-1. Write the body to a temp file: the template contains backticks and special characters that make inline heredocs unreliable. 
+1. Write the body to a temp file: the template contains backticks and special characters that make inline heredocs unreliable.
 
 2. Pass it with `--body-file`:
 
@@ -57,4 +57,3 @@ gh pr create \
 ```bash
 gh pr edit <PR-number> --add-project "Documentation Team"
 ```
-
