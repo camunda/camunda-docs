@@ -220,10 +220,6 @@ camunda:
       level: INFO
 ```
 
-:::note
-`console.overrideConfiguration` is the old way of overriding the default application configuration for Console. It has been deprecated. Please convert to using `console.extraConfiguration`.
-:::
-
 #### Custom configuration loading
 
 **Applies to:** Optimize
@@ -720,8 +716,7 @@ For more details on where to find configuration options for specific components,
 - [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md)
 - [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md)
 - [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md)
-- [Web Modeler](/self-managed/components/hub/configuration/modeler-configuration.md)
-- [Console](/self-managed/components/hub/configuration/configuration.md)
+- [Camunda Hub](/self-managed/components/hub/configuration/properties.md)
 - [Connectors](/self-managed/components/connectors/connectors-configuration.md)
 - [Identity](/self-managed/components/management-identity/miscellaneous/configuration-variables.md)
 - [Optimize](/self-managed/components/optimize/configuration/system-configuration.md)

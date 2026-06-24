@@ -1,6 +1,6 @@
 ---
 id: evaluate-agents-overview
-title: Evaluate your AI agents
+title: Evaluate AI agents
 sidebar_label: Evaluate AI agents
 description: "Evaluate your AI agents by monitoring them in real time with Operate, improving performance over time with Optimize, and testing them with Camunda Process Test."
 keywords: ["agentic orchestration"]
