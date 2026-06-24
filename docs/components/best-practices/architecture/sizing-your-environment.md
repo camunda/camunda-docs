@@ -62,9 +62,9 @@ Optimize is an optional component that provides process analytics and reporting.
 #### Mitigations
 
 - Consider running Optimize on a separate Elasticsearch instance to isolate its load from the core platform.
-- Use variable filtering to reduce the amount of data exported/imported by Optimize.
+- Use [variable filtering](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#exporter-side-filters-and-optimize-data-completeness) to reduce the amount of data exported/imported by Optimize. Configure the filters in the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#variable-name-filters) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#variable-name-filters) exporter.
 - Tune retention periods: shorter retention means less data in ES, and better performance.
-- Disable variable import entirely if variables are not needed in Optimize reports.
+- [Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) entirely if variables are not needed in Optimize reports.
 - If you are noticing a significant lag between the rate of exported Zeebe records and imported Optimize data you may want to increase Optimize **import throughput**. To do so, raise `CAMUNDA_OPTIMIZE_ZEEBE_MAX_IMPORT_PAGE_SIZE` so each import cycle fetches more exported records. This helps Optimize keep pace under high load and can reduce import lag. However, this increases memory use per fetch and can negatively impact **individual record latency**, as Optimize must wait to fill larger batches before processing.
 
 The sizing guidance for [Self-Managed](sizing-self-managed.md#baseline-resource-configuration) provides configurations with and without Optimize to help you plan accordingly.

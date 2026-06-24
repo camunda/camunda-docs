@@ -19,6 +19,10 @@ Variable import affects several areas of Optimize’s operation:
 
 If your organization primarily focuses on process performance metrics rather than detailed business context, disabling variable import can help improve scalability and responsiveness.
 
+:::note
+Variable import controls what Optimize **imports** from already-exported data. To reduce what the broker **exports** in the first place (by variable name, type, BPMN process, or Optimize mode), use the [exporter-side filters](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#exporter-side-filters-and-optimize-data-completeness). For the sizing impact of Optimize and when to reduce its data volume, see [Impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize).
+:::
+
 ## Optimize configuration
 
 Variable import is controlled using the `CAMUNDA_OPTIMIZE_ZEEBE_VARIABLE_IMPORT_ENABLED=true|false` environment variable.
