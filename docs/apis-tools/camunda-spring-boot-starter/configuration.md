@@ -605,6 +605,43 @@ public DocumentResult sendDocumentAsResult() {
 }
 ```
 
+##### Completing ad-hoc sub-process jobs with a result
+
+When your job worker handles an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) job, you can return an `AdHocSubProcessResultFunction` to specify which element to activate within the sub-process. The starter automatically applies the result when completing the job.
+
+Return a lambda that calls `activateElement` with the target element ID:
+
+```java
+@JobWorker(type = "myAdHocSubprocessJob")
+public AdHocSubProcessResultFunction handleAdHocSubprocess() {
+  return r -> r.activateElement("myElementId");
+}
+```
+
+To also submit process variables with the result, use the `AdHocSubProcessResultFunction.withVariables` factory method:
+
+```java
+@JobWorker(type = "myAdHocSubprocessJob")
+public AdHocSubProcessResultFunction handleAdHocSubprocess() {
+  Map<String, Object> variables = Map.of("decision", "approved");
+  return AdHocSubProcessResultFunction.withVariables(variables,
+      r -> r.activateElement("approvalTask"));
+}
+```
+
+##### Completing user task listener jobs with a result
+
+When your job worker handles a user task listener job, you can return a `UserTaskResultFunction` to control the outcome of the listener. The starter automatically applies the result when completing the job.
+
+Return a lambda that configures the result, for example to correct the assignee:
+
+```java
+@JobWorker(type = "io.camunda:userTaskListener:complete")
+public UserTaskResultFunction handleUserTaskListener() {
+  return r -> r.correctAssignee("newAssignee");
+}
+```
+
 #### Programmatically completing jobs
 
 Your job worker code can also complete the job itself. This gives you more control over when exactly you want to complete the job (for example, allowing the completion to be moved to reactive callbacks):
