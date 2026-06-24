@@ -34,14 +34,22 @@ You can also directly [download the OpenAPI specification](https://github.com/ca
 
 You can change the `maxMessageSize` default value of 4MB in the [Gateway](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
 
-If you deploy with Helm, set `global.config.requestBodySize`. The chart applies this value to
-the Zeebe Gateway, broker message size, REST multipart file and request size, and Tomcat HTTP form
-post size. If you expose the REST API through Ingress, keep
-`global.ingress.annotations.nginx.ingress.kubernetes.io/proxy-body-size` aligned with the same size.
+If you deploy with Helm, the chart defaults to 10MB via `global.config.requestBodySize`, applying
+this value to the Zeebe Gateway and broker message size, REST multipart file and request size, and
+the Tomcat HTTP form post size on the Zeebe Gateway. Change `global.config.requestBodySize` only if
+you need a value other than 10MB.
+
+If you expose the REST API through Ingress, you must also explicitly set
+`global.ingress.annotations.nginx.ingress.kubernetes.io/proxy-body-size` to the same value.
+This annotation is not propagated automatically from `requestBodySize`. If you use
+`zeebeGateway.ingress.rest` to expose the REST endpoint directly, also set
+`nginx.ingress.kubernetes.io/proxy-body-size` in `zeebeGateway.ingress.rest.annotations`, as that
+Ingress object does not inherit from `global.ingress.annotations`.
 
 This setting aligns the HTTP, multipart, Tomcat, Gateway, and Broker transport limits. Deployments
 can still be rejected by Zeebe's internal record batch processing if the deployed resources and
-follow-up records exceed the engine batch limit.
+follow-up records exceed the engine batch limit. This engine-level rejection returns an HTTP 500
+response, not HTTP 413.
 
 Multipart requests include metadata and boundary overhead in addition to the uploaded file content.
 Set these limits slightly above the largest file you expect users or Connectors to upload.
