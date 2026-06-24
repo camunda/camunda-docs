@@ -210,7 +210,7 @@ https://camunda.github.io/camunda-deployment-references/bitnami_<image>.json
 
 For example, [bitnami_postgresql.json](https://camunda.github.io/camunda-deployment-references/bitnami_postgresql.json). You can browse all of the published files in the [`gh-pages` branch](https://github.com/camunda/camunda-deployment-references/tree/gh-pages/docs).
 
-Use this list as the source of truth for the available versions. Because it is generated from the upstream catalog, it is complete — it also includes images published before the November 30, 2025 migration that `skopeo` can no longer list.
+Use this list as the source of truth for the available versions. Because it is generated from the upstream catalog, it is complete. It also includes images published before the November 30, 2025 migration that `skopeo` can no longer list.
 
 :::warning
 Do not use the Harbor registry UI to browse these images: it only shows images that have already been cached, not the full upstream catalog.

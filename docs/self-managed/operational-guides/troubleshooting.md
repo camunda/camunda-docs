@@ -336,7 +336,9 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe
 ```
 
 :::note Bitnami Premium (`vendor-ee/*`) images
-Since the November 30, 2025 vendor migration, `skopeo` and the Harbor UI return only the `vendor-ee/*` tags cached since the migration, so registry tag listing is incomplete — do not rely on it. Use the published per-image feed instead (generated from the upstream catalog, always complete): see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/); to obtain a specific tag, pull or mirror it by its exact tag.
+Since the November 30, 2025 vendor migration, `skopeo` and the Harbor UI return only the `vendor-ee/*` tags cached since the migration, so registry tag listing is incomplete. Do not rely on it.
+
+Use the published per-image feed instead, which is generated from the upstream catalog and is always complete: see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull or mirror it by its exact tag.
 :::
 
 ## Incorrect authorizations when deploying resources from Modeler
