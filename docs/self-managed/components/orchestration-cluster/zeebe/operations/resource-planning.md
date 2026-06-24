@@ -162,9 +162,9 @@ Memory usage is determined by the Java heap size (by default, [25% of the maximu
 
 Zeebe supports multiple RocksDB memory allocation strategies, configured via the `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY` setting in the broker configuration:
 
-- `PARTITION` (default): Total RocksDB memory equals the actual number of partitions per broker (from the cluster topology) multiplied by the configured memory limit.
+- `FRACTION` (default): RocksDB memory is allocated as a fraction of total available memory.
+- `PARTITION`: Total RocksDB memory equals the actual number of partitions per broker (from the cluster topology) multiplied by the configured memory limit.
 - `BROKER`: Total RocksDB memory equals the configured memory limit, regardless of the number of partitions.
-- `FRACTION`: RocksDB memory is allocated as a fraction of total available memory.
 
 When using the `FRACTION` strategy, configure the fraction using `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYFRACTION` (range `[0,1]`). The default is `0.1` (10% of total memory).
 
