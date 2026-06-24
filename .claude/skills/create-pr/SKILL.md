@@ -7,6 +7,8 @@ argument-hint: "<brief description of the PR>"
 
 # /create-pr — open a pull request for camunda-docs
 
+**Preconditions:** Ensure your work is on a non-`main` branch that has already been pushed to the remote (`git push -u origin <branch>`). `gh pr create` will fail if the branch is not pushed or if you are on `main`.
+
 Follow these steps in order. Do not skip or reorder them.
 
 ## Step 1: Read the PR template
@@ -37,23 +39,24 @@ gh label list
 
 1. Write the body to a temp file: the template contains backticks and special characters that make inline heredocs unreliable.
 
-2. Pass it with `--body-file`:
+2. Pass it with `--body-file` and capture the URL from stdout:
 
 ```bash
 cat > /tmp/pr-body.md << 'PREOF'
 [full PR body here]
 PREOF
 
-gh pr create \
+PR_URL=$(gh pr create \
   --title "..." \
   --body-file /tmp/pr-body.md \
-  --label "CHOSEN_LABEL"
+  --label "CHOSEN_LABEL")
+echo "$PR_URL"
 ```
 
 3. Follow the commit message conventions in `.github/instructions/repo.instructions.md` § 4 (Code formatting and commits) for the PR title format.
 
-4. Add the PR to the Documentation Team GitHub project:
+4. Add the PR to the Documentation Team GitHub project using the URL captured above:
 
 ```bash
-gh pr edit <PR-number> --add-project "Documentation Team"
+gh pr edit "$PR_URL" --add-project "Documentation Team"
 ```
