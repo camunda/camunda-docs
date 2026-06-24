@@ -35,9 +35,9 @@ gh label list
 
 ## Step 3: Create the PR
 
-1. Write the body to a temp file: the template contains backticks and special characters that make an inline `--body` argument unreliable.
+1. Write the body to a temp file because the PR template contains backticks and special characters that make an inline `--body` argument unreliable.
 
-2. Pass it with `--body-file` and capture the URL from stdout:
+2. Pass it with `--body-file` and capture the PR URL. For example:
 
 ```bash
 cat > /tmp/pr-body.md << 'PREOF'
