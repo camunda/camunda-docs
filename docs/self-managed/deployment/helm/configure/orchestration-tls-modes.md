@@ -9,7 +9,7 @@ Orchestration exposes a REST API (`SERVER_SSL_ENABLED`) and a gRPC API (`CAMUNDA
 
 :::caution Trust bundle is required for self-signed and private-PKI certificates
 
-The settings on this page configure the Orchestration **server** and the **NGINX ingress** legs. They do **not** by themselves teach in-cluster Java clients (Web Modeler, Connectors) to trust the cert. If the Orchestration server certificate is self-signed or issued by a private/internal CA, you **must also** set [`global.tls.caBundle.secret.existingSecret`](./secret-management.md) to a Secret holding the trust bundle. Without it, the JVM default truststore is used and gRPC/REST handshakes will fail.
+The settings on this page configure the Orchestration **server** and the **NGINX ingress** legs. They do **not** by themselves teach in-cluster Java clients (Web Modeler, Connectors) to trust the cert. If the Orchestration server certificate is self-signed or issued by a private/internal CA, you **must also** set `global.tls.caBundle.secret.existingSecret` to a Secret holding the CA bundle that signed it. Without it, the JVM default truststore is used and gRPC/REST handshakes from Web Modeler and Connectors will fail with `PKIX path building failed`. The minimal caBundle configuration is shown in the [cert-manager recipe](#recipe-cert-manager--lets-encrypt-or-internal-issuer) below.
 
 Certificates issued by a public CA already present in the JVM truststore (Let's Encrypt, DigiCert, etc.) do not require this.
 
@@ -62,29 +62,72 @@ One edge case: rotating **only the keystore password** without changing the cert
 
 cert-manager produces `kubernetes.io/tls` Secrets with `tls.crt` + `tls.key`. The chart consumes those directly — PEM for REST (via `type: pem`) and PEM for gRPC.
 
+If you are issuing certificates from a public ACME provider (Let's Encrypt, ZeroSSL, Buypass) skip directly to step 4 — your CA is already in the JVM default truststore and no `caBundle` is needed. The four-step block below covers the in-cluster CA flow that most Self-Managed installs use.
+
 ```yaml
-# 1. Issuer (or ClusterIssuer): in this example a self-signed in-cluster CA.
-#    For a public CA, use the cert-manager ACME / Let's Encrypt Issuer instead.
+# 1. Bootstrap Issuer. A bare selfSigned Issuer cannot issue a CA bundle on
+#    its own — it only signs each Certificate with that Certificate's own
+#    private key. It exists solely to sign step 2 (the actual CA Certificate).
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: camunda-ca
+  name: camunda-selfsigned-bootstrap
   namespace: camunda
 spec:
   selfSigned: {}
 ---
-# 2. Certificate request. SAN must match the in-cluster service hostname.
+# 2. The actual CA Certificate. isCA: true makes this a CA cert whose
+#    private key signs subsequent leaf certs. The resulting Secret
+#    (camunda-ca-bundle) is what global.tls.caBundle.secret.existingSecret
+#    points at — Web Modeler and Connectors load it into the JVM truststore.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: camunda-ca
+  namespace: camunda
+spec:
+  isCA: true
+  commonName: camunda-ca
+  secretName: camunda-ca-bundle
+  duration: 87600h # 10 years — pick a CA lifetime longer than any leaf
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: camunda-selfsigned-bootstrap
+    kind: Issuer
+---
+# 3. The CA Issuer. Uses the CA cert+key from step 2 to sign leaf
+#    Certificates. This is the Issuer your server Certificates reference.
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: camunda-ca-issuer
+  namespace: camunda
+spec:
+  ca:
+    secretName: camunda-ca-bundle
+---
+# 4. Server Certificate (gRPC shown; REST is identical with its own
+#    secretName + dnsNames matching the REST service).
+#
+# IMPORTANT: dnsNames must match the actual Kubernetes Service name
+# that fronts the Orchestration gRPC port (26500). Confirm with:
+#   kubectl -n camunda get svc -l app.kubernetes.io/component=zeebe-gateway
+# In the chart 8.10 default layout this is `<release>-zeebe-gateway`
+# (kept for backward compatibility through the Orchestration rebrand).
+# Substitute your actual release name for `my-release` below.
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: orchestration-grpc-cert
   namespace: camunda
 spec:
-  secretName: orchestration-grpc-cert # → matches existingSecret below
+  secretName: orchestration-grpc-cert # → matches existingSecret in values
   duration: 8760h
   renewBefore: 720h
   issuerRef:
-    name: camunda-ca
+    name: camunda-ca-issuer # step 3, NOT the bootstrap
     kind: Issuer
   dnsNames:
     - my-release-zeebe-gateway
@@ -102,7 +145,7 @@ global:
       rest:
         enabled: true
         secret:
-          existingSecret: orchestration-rest-cert # also a cert-manager Certificate
+          existingSecret: orchestration-rest-cert # a step-4 Certificate for the REST service
           type: pem
           # existingSecretKey defaults to tls.crt when type=pem (auto-substituted)
           # existingSecretPrivateKeyKey defaults to tls.key
@@ -114,9 +157,11 @@ global:
           # existingSecretPrivateKeyKey defaults to tls.key
     caBundle:
       secret:
-        # For an internal CA Issuer, expose the CA cert as a Secret and reference it
-        # here so Web Modeler and Connectors trust it. Skip this if the cert is from
-        # a public CA already in the JVM truststore.
+        # The CA cert Secret from step 2 above. Web Modeler and Connectors
+        # load this into the JVM truststore so their handshakes to the
+        # Orchestration REST and gRPC servers succeed. Skip this whole
+        # block if your server certs are from a public CA already in the
+        # JVM default truststore (Let's Encrypt, DigiCert, etc.).
         existingSecret: camunda-ca-bundle
         existingSecretKey: ca.crt
       autoRollout: true
