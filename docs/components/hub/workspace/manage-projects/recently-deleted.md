@@ -20,7 +20,7 @@ When you delete a resource, it's moved to **Recently deleted**. You have 30 days
 If the resource is a parent resource, such as a folder or process application, the child resources it contains are also moved to **Recently deleted**.
 
 :::note
-Soft deletion only applies to resources deleted using the Camunda Hub user interface in Camunda 8.10 and later. All items deleted in earlier versions are immediately and permanently deleted—along with their data in process application version history—and can't be recovered.
+Soft deletion only applies to resources deleted using the Camunda Hub user interface in Camunda 8.10 and later. All items deleted in earlier versions are immediately and permanently deleted, along with their data in process application version history, and can't be recovered.
 :::
 
 ## Permanent deletion in Camunda Hub
