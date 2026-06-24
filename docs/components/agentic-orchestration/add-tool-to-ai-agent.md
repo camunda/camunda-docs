@@ -229,16 +229,3 @@ In the **Output Mapping** section, set **Result Expression** to:
   }
 }
 ```
-
-## Tool types
-
-You can use any BPMN activity type as a tool. Common options include:
-
-| Tool type            | When to use                                                                                                                                          |
-| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| REST connector       | Call an external HTTP API.                                                                                                                           |
-| Script task          | Execute inline logic or data transformation.                                                                                                         |
-| User task            | Route to a human for input or approval as part of the agent's decision path.                                                                         |
-| Call activity        | Invoke another BPMN process as a tool when the target process is on the same cluster.                                                                |
-| MCP client connector | Expose tools from an external [MCP server](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) as gateway tools to the agent. |
-| Sub-process          | Model a multi-step sub-flow that the LLM triggers as a single tool.                                                                                  |
