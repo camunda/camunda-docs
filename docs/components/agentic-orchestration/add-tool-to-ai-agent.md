@@ -26,11 +26,6 @@ The AI Agent connector gathers all root-level activities in the ad-hoc sub-proce
 For the full technical reference on how tool definitions are resolved and the complete `fromAi()` function syntax, see [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
 :::
 
-## Prerequisites
-
-- An existing AI agent process using the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md). If you don't have one yet, follow [Build your first AI agent](/guides/getting-started-agentic-orchestration.md).
-- Camunda 8 version 8.8 or newer.
-
 ## Add an activity inside the ad-hoc sub-process
 
 Open your process in [Web Modeler](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
