@@ -17,7 +17,14 @@ Follow these steps in order. Do not skip or reorder them.
 git branch --show-current
 ```
 
-If the result is `main`, stop immediately and tell the user: "Cannot open a PR from `main`. Please switch to a feature branch first." Do not proceed.
+If the result is `main`, derive a short kebab-case branch name from the PR description (e.g. `docs/add-connector-timeout-config`), then create it, switch to it, and push:
+
+```bash
+git checkout -b <derived-branch-name>
+git push -u origin HEAD
+```
+
+Then continue to Step 1.
 
 2. Check whether the branch has an upstream:
 
