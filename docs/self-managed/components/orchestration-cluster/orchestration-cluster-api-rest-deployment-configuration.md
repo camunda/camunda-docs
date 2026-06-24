@@ -18,7 +18,7 @@ The `maxMessageSize` default value is 4MB for raw Zeebe deployments (10MB for He
 - [Broker config](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokernetwork)
 
 If you deploy with Helm, the chart defaults to 10MB via `global.config.requestBodySize`, applying
-this value to the Zeebe message size, the REST multipart file and request size, and the Tomcat HTTP
+this value to the Zeebe Gateway and broker message size, the REST multipart file and request size, and the Tomcat HTTP
 form post size on the Zeebe Gateway. Change `global.config.requestBodySize` only if you need a
 value other than 10MB.
 
@@ -34,7 +34,7 @@ response, not HTTP 413.
 Multipart requests include metadata and boundary overhead in addition to the uploaded file content.
 Set these limits slightly above the largest file you expect users or Connectors to upload.
 
-If you increase this value, you must also adjust the configuration for the deployment REST endpoint to match.
+If you are not using Helm and increase this value, you must also adjust the configuration for the deployment REST endpoint to match.
 
 ### REST API server configuration
 
