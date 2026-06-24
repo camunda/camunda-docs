@@ -35,7 +35,7 @@ gh label list
 
 ## Step 3: Create the PR
 
-1. Write the body to a temp file: the template contains backticks and special characters that make inline heredocs unreliable.
+1. Write the body to a temp file: the template contains backticks and special characters that make an inline `--body` argument unreliable.
 
 2. Pass it with `--body-file` and capture the URL from stdout:
 
@@ -47,7 +47,8 @@ PREOF
 PR_URL=$(gh pr create \
   --title "..." \
   --body-file /tmp/pr-body.md \
-  --label "CHOSEN_LABEL")
+  --label "LABEL_A" \
+  --label "LABEL_B")
 echo "$PR_URL"
 ```
 
