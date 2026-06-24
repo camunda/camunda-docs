@@ -5,12 +5,6 @@ title: Configure TLS
 description: "Enable TLS for Camunda 8 Self-Managed component connections to datastores using the Helm chart's values-tls.yaml overlay."
 ---
 
-:::info Applies to Camunda 8.10+ (Helm chart 15.x+)
-
-The `global.tls.caBundle` key and the `values-tls.yaml` overlay are introduced in chart 15.x.
-
-:::
-
 ## What's covered
 
 | Connection                                                                                 | Mechanism                                                                                                                                                                                     |
