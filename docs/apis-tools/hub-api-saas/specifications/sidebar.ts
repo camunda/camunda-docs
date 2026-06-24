@@ -8,6 +8,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Catalog",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/ingest-catalog-assets",
+          label: "Ingest catalog assets",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/delete-catalog-asset",
+          label: "Delete a catalog asset",
+          className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "File",
       items: [
         {
@@ -69,6 +87,18 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/hub-api-saas/specifications/delete-folder",
           label: "Delete a folder",
           className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Info",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-info",
+          label: "Get API info",
+          className: "api-method get",
         },
       ],
     },
@@ -182,6 +212,30 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/hub-api-saas/specifications/search-workspaces",
           label: "Search workspaces",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Collaborator",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/add-collaborator",
+          label: "Add or update a collaborator",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/remove-collaborator",
+          label: "Remove a collaborator",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/search-collaborators",
+          label: "Search collaborators",
           className: "api-method post",
         },
       ],

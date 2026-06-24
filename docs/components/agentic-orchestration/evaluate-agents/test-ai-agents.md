@@ -154,11 +154,10 @@ For the full setup including dependencies and project structure, see [Getting st
 
 ## Step 4: Handle non-deterministic flow paths
 
-The test uses the prompt `"Send Ervin a joke"`. In response, the agent:
+In this guide, the test uses the prompt `"Give me a joke! Greet Ervin as an introduction"`. In response, the agent:
 
-- Calls `ListUsers`, `LoadUserByID`, and `Jokes_API` in any order.
-- Presents an email for review via `AskHumanToSendEmail`.
-- Collects feedback through `User_Feedback`.
+- Calls `List Users` and `Jokes API` in any order.
+- Collects feedback through the `User Feedback` user task.
 
 With [conditional behavior](/apis-tools/testing/utilities.md#conditional-behavior), you can register background reactions that monitor the process state and execute actions as conditions are met, without blocking the test thread. Register behaviors before starting the process; they then react independently as the process progresses.
 
@@ -172,10 +171,9 @@ First, define records for the tool call results:
 
 ```java
 record User(int id, String name, String username) {}
-record UserDetail(int id, String name, String username, String email) {}
 ```
 
-Register a behavior that completes the `ListUsers` tool with a mock user list when the agent invokes it:
+Register a behavior that completes the `List Users` tool with a mock user list when the agent invokes it:
 
 ```java
 processTestContext
@@ -192,22 +190,7 @@ processTestContext
                     new User(2, "Ervin Howell", "Antonette")))));
 ```
 
-Register a behavior that completes the `LoadUserByID` tool with Ervin's details:
-
-```java
-processTestContext
-    .when(
-        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
-            .hasActiveElements("LoadUserByID"))
-    .as("complete LoadUserByID")
-    .then(
-        () -> processTestContext.completeJob(
-            JobSelectors.byElementId("LoadUserByID"),
-            Map.of("toolCallResult",
-                new UserDetail(2, "Ervin Howell", "Antonette", "123@abc.local"))));
-```
-
-Register a behavior that completes the `Jokes_API` tool. This behavior uses chained `.then()` calls to return different jokes on repeated invocations:
+Register a behavior that completes the `Jokes API` tool. This behavior uses chained `.then()` calls to return different jokes on repeated invocations:
 
 ```java
 String firstJoke = "Why did the workflow cross the road? To get to the happy path.";
@@ -228,28 +211,11 @@ processTestContext
 
 ### Complete user tasks
 
-The `AskHumanToSendEmail` user task requires human approval. Register a behavior that auto-approves the email when the task appears:
+The `User Feedback` user task is outside the agent and prompts the user to approve the agent output or request a different one.
 
-```java
-processTestContext
-    .when(
-        () -> assertThatProcessInstance(ProcessInstanceSelectors.byProcessId("ai-agent-chat-with-tools"))
-            .hasActiveElements("AskHumanToSendEmail"))
-    .as("approve email")
-    .then(
-        () -> processTestContext.completeUserTask(
-            "AskHumanToSendEmail", Map.of("emailOk", true)));
-```
+Use chained `.then()` calls when a behavior should produce different results on repeated invocations: the first action is consumed on the first invocation, and the last action repeats for all subsequent invocations.
 
-:::important
-Each behavior's action should resolve the process state that the condition checks for. For example, if the condition checks for an active user task, the action should complete that task. Otherwise the behavior may execute repeatedly.
-:::
-
-### Handle repeated invocations
-
-Use chained `.then()` calls when a behavior should produce different results on repeated invocations. The first action is consumed on the first invocation, and the last action repeats for all subsequent invocations.
-
-In this example, the first feedback rejection sends the agent back with a follow-up request, and the second feedback loop approves the result:
+For example, register a behavior that first rejects the joke with a follow-up request, then approves the result on the next invocation:
 
 ```java
 processTestContext
@@ -267,6 +233,10 @@ processTestContext
         () -> processTestContext.completeUserTask(
             "User_Feedback", Map.of("userSatisfied", true)));
 ```
+
+:::important
+Each behavior's action should resolve the process state that the condition checks for. For example, if the condition checks for an active user task, the action should complete that task. Otherwise the behavior may execute repeatedly.
+:::
 
 For the full conditional behavior API, see [Utilities](/apis-tools/testing/utilities.md#conditional-behavior).
 
@@ -300,7 +270,7 @@ You can use two types of assertions to verify the agent output:
 
 Use a judge assertion to verify the agent output satisfies a natural language expectation.
 
-The following example registers the conditional behaviors from [Step 4](#step-4-handle-non-deterministic-flow-paths), starts the process with the prompt `"Send Ervin a joke"`, and then asserts that the agent completed the scenario correctly:
+The following example registers the conditional behaviors from [Step 4](#step-4-handle-non-deterministic-flow-paths), starts the process with the prompt `"Give me a joke! Greet Ervin as an introduction"`, and then asserts that the agent completed the scenario correctly:
 
 ```java
 @Test
@@ -308,7 +278,7 @@ void shouldSendErvinAJoke() {
     ProcessInstanceEvent processInstance = client.newCreateInstanceCommand()
         .bpmnProcessId("ai-agent-chat-with-tools")
         .latestVersion()
-        .variables(Map.of("inputText", "Send Ervin a joke"))
+        .variables(Map.of("inputText", "Give me a joke! Greet Ervin as an introduction"))
         .send()
         .join();
 
@@ -317,12 +287,8 @@ void shouldSendErvinAJoke() {
         .hasVariableSatisfiesJudge(
             "agent",
             """
-            The agent correctly identified Ervin by calling the following tools:
-            1. ListUsers
-            2. LoadUserByID with id=2.
-            Furthermore, the agent called AskHumanToSendEmail and the email
-            should have been sent successfully!
-            The mail must contain a joke.
+            The agent correctly identified Ervin by calling ListUsers.
+            The agent fetched a joke using Jokes_API.
             After the user rejected the first joke and asked for another one, the
             agent offered a second, different joke.
             """);
@@ -343,7 +309,7 @@ The judge evaluates matches using the following scoring scale:
 
 The LLM may return any value between these anchor points (for example, 0.6 or 0.85). The default threshold is 0.5. This means the assertion passes when the response is at least partially satisfied according to the rubric, which is a practical default for AI-generated output that may vary in wording or completeness across runs. Use a higher threshold when the response must satisfy stricter semantic requirements. You can change the threshold globally in the [judge configuration](/apis-tools/testing/configuration.md#judge-configuration) or per assertion using `withJudgeConfig`.
 
-If the assertion fails, for example because the agent never called `LoadUserByID` or sent the email to the wrong address, the judge returns a low score with an explanation of which parts of the expectation were not met. This gives you a clear, human-readable failure message instead of a generic assertion error.
+If the assertion fails, for example, because the agent made up its own joke instead of calling the `Jokes API` tool, or the feedback was not handled correctly, the judge returns a low score with an explanation of which parts of the expectation were not met. This gives you a clear, human-readable failure message instead of a generic assertion error.
 
 #### Tune the judge evaluation
 
@@ -438,17 +404,17 @@ For the full property reference, see [semantic similarity configuration](/apis-t
 
 ### Add a similarity assertion
 
-With the embedding model configured, use `hasLocalVariableSimilarTo` as a complementary check on the `email_body` variable of the `AskHumanToSendEmail` task instance:
+With the embedding model configured, use `hasVariableSimilarTo` as a complementary check on the `responseText` variable of the `User_Feedback` task instance:
 
 ```java
 assertThat(processInstance)
-    .hasLocalVariableSimilarTo(
-        "AskHumanToSendEmail",
-        "email_body",
+    .hasVariableSimilarTo(
+        "User_Feedback",
+        "responseText",
         """
           Hey Ervin! Here is a joke for you:
           Why did the workflow cross the road? To get to the happy path.
-          """);
+        """);
 ```
 
 The assertion converts both strings to embeddings, applies the default text preprocessors (lowercase, Unicode NFC, and whitespace normalization), and compares cosine similarity against the default threshold of 0.5.
@@ -458,13 +424,13 @@ Override the minimal success threshold for a single assertion if you require a h
 ```java
 assertThat(processInstance)
     .withSemanticSimilarityConfig(config -> config.withThreshold(0.8))
-    .hasLocalVariableSimilarTo(
-        "AskHumanToSendEmail",
-        "email_body",
+    .hasVariableSimilarTo(
+        "User_Feedback",
+        "responseText",
         """
           Hey Ervin! Here is a joke for you:
           Why did the workflow cross the road? To get to the happy path.
-          """);
+        """);
 ```
 
 ## Next steps

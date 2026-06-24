@@ -4,6 +4,7 @@ paths:
       tags:
         - License
       operationId: getLicense
+      security: []
       summary: Get license status
       description: |-
 

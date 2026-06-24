@@ -4,6 +4,9 @@ paths:
       tags:
         - Role
       operationId: createRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create role
       description: |-
 
@@ -47,6 +50,9 @@ paths:
       tags:
         - Role
       operationId: searchRoles
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search roles
       description: |-
 
@@ -83,6 +89,9 @@ paths:
       tags:
         - Role
       operationId: getRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get role
       description: |-
 
@@ -123,6 +132,9 @@ paths:
       tags:
         - Role
       operationId: updateRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update role
       description: |-
 
@@ -171,6 +183,9 @@ paths:
       tags:
         - Role
       operationId: deleteRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete role
       description: |-
 
@@ -208,6 +223,9 @@ paths:
       tags:
         - Role
       operationId: assignRoleToUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a user
       description: |-
 
@@ -258,6 +276,9 @@ paths:
       tags:
         - Role
       operationId: unassignRoleFromUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a user
       description: |-
 
@@ -303,6 +324,9 @@ paths:
       tags:
         - Role
       operationId: searchUsersForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role users
       description: |-
 
@@ -352,6 +376,9 @@ paths:
       tags:
         - Role
       operationId: assignRoleToClient
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a client
       description: |-
 
@@ -402,6 +429,9 @@ paths:
       tags:
         - Role
       operationId: unassignRoleFromClient
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a client
       description: |-
 
@@ -447,6 +477,9 @@ paths:
       tags:
         - Role
       operationId: searchClientsForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role clients
       description: |-
 
@@ -496,6 +529,9 @@ paths:
       tags:
         - Role
       operationId: assignRoleToGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a group
       description: |-
 
@@ -546,6 +582,9 @@ paths:
       tags:
         - Role
       operationId: unassignRoleFromGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a group
       description: |-
 
@@ -591,6 +630,9 @@ paths:
       tags:
         - Role
       operationId: searchGroupsForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role groups
       description: |-
 
@@ -640,6 +682,9 @@ paths:
       tags:
         - Role
       operationId: assignRoleToMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a mapping rule
       description: |-
 
@@ -690,6 +735,9 @@ paths:
       tags:
         - Role
       operationId: unassignRoleFromMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a mapping rule
       description: |-
 
@@ -735,6 +783,9 @@ paths:
       tags:
         - Role
       operationId: searchMappingRulesForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role mapping rules
       description: |-
 

@@ -30,18 +30,28 @@ security:
   - bearerAuth: []
 
 tags:
+  - name: Catalog
+    description: Catalog asset management operations.
   - name: File
     description: File management operations.
   - name: Folder
     description: Folder management operations.
+  - name: Info
+    description: API metadata operations.
   - name: Project
     description: Project management operations.
   - name: Version
     description: Version management operations.
   - name: Workspace
     description: Workspace management operations.
+  - name: Collaborator
+    description: Collaborator management operations.
 
 paths:
+  /catalog/assets/ingestion:
+    $ref: "catalog.yaml#/paths/~1catalog~1assets~1ingestion"
+  /catalog/assets/{assetKey}:
+    $ref: "catalog.yaml#/paths/~1catalog~1assets~1{assetKey}"
   /files:
     $ref: "files.yaml#/paths/~1files"
   /files/{fileKey}:
@@ -52,6 +62,8 @@ paths:
     $ref: "folders.yaml#/paths/~1folders"
   /folders/{folderKey}:
     $ref: "folders.yaml#/paths/~1folders~1{folderKey}"
+  /info:
+    $ref: "info.yaml#/paths/~1info"
   /projects:
     $ref: "projects.yaml#/paths/~1projects"
   /projects/{projectKey}:
@@ -72,6 +84,12 @@ paths:
     $ref: "workspaces.yaml#/paths/~1workspaces~1{workspaceKey}"
   /workspaces/search:
     $ref: "workspaces.yaml#/paths/~1workspaces~1search"
+  /workspaces/{workspaceKey}/collaborators:
+    $ref: "collaborators.yaml#/paths/~1workspaces~1{workspaceKey}~1collaborators"
+  /workspaces/{workspaceKey}/collaborators/{email}:
+    $ref: "collaborators.yaml#/paths/~1workspaces~1{workspaceKey}~1collaborators~1{email}"
+  /collaborators/search:
+    $ref: "collaborators.yaml#/paths/~1collaborators~1search"
 
 components:
   securitySchemes:
