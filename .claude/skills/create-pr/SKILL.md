@@ -7,9 +7,29 @@ argument-hint: "<brief description of the PR>"
 
 # /create-pr — open a pull request for camunda-docs
 
-**Preconditions:** Ensure your work is on a non-`main` branch that has already been pushed to the remote (`git push -u origin <branch>`). `gh pr create` will fail if the branch is not pushed or if you are on `main`.
-
 Follow these steps in order. Do not skip or reorder them.
+
+## Step 0: Verify branch state
+
+1. Check the current branch:
+
+```bash
+git branch --show-current
+```
+
+If the result is `main`, stop immediately and tell the user: "Cannot open a PR from `main`. Please switch to a feature branch first." Do not proceed.
+
+2. Check whether the branch has an upstream:
+
+```bash
+git status -sb
+```
+
+If the output shows `## <branch>...origin/<branch>`, the branch is already pushed — proceed to Step 1. Otherwise push it now:
+
+```bash
+git push -u origin HEAD
+```
 
 ## Step 1: Read the PR template
 
