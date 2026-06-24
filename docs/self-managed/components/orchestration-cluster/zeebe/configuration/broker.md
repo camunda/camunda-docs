@@ -1067,7 +1067,7 @@ camunda:
   console:
     ping:
       enabled: true
-      endpoint: https://hub.endpoint.com
+      endpoint: https://hub.endpoint.com/api/v1/clusters
       clusterName: test_cluster_name
       pingPeriod: 1h
       properties:
