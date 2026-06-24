@@ -93,7 +93,7 @@
         "components/agentic-orchestration/ao-design",
         {
           "type": "category",
-          "label": "Evaluate your AI agents",
+          "label": "Evaluate AI agents",
           "link": {
             "type": "doc",
             "id": "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview"
