@@ -1,7 +1,7 @@
 ---
 id: add-tool-to-ai-agent
-title: Add a tool to an AI agent
-sidebar_label: Add a tool to an AI agent
+title: Add tools to an AI agent
+sidebar_label: Add tools to an AI agent
 description: "Add BPMN activities as callable tools to your AI agents."
 keywords: ["agentic ai", "AI agents", "tools", "fromAi", "toolCallResult"]
 ---

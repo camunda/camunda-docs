@@ -76,7 +76,7 @@ export const fundamentalCards_monitoring = [
 export const recommendationCards = [
   {
     link: "../add-tool-to-ai-agent/",
-    title: "Add a tool to an AI agent",
+    title: "Add tools to an AI agent",
     image: IconAoAgentImg,
     description: "Add BPMN activities as callable tools to your AI agents.",
   },

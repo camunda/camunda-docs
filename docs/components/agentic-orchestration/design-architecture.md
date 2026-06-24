@@ -76,7 +76,7 @@ In the AI agent model, each BPMN activity inside an ad-hoc sub-process is a tool
 
 Clear, behavior-oriented tool names and descriptions directly improve agent reliability. Vague or missing documentation increases the risk of incorrect tool selection, repeated calls, and hallucinated behavior.
 
-For a step-by-step guide on naming tools, writing descriptions, declaring `fromAi()` parameters, and mapping `toolCallResult` outputs, see [Add a tool to an AI agent](./add-tool-to-ai-agent.md).
+For a step-by-step guide on naming tools, writing descriptions, declaring `fromAi()` parameters, and mapping `toolCallResult` outputs, see [Add tools to an AI agent](./add-tool-to-ai-agent.md).
 
 ### Mix agents with workflow patterns
 
