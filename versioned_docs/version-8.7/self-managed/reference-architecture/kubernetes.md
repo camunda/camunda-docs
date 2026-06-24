@@ -124,7 +124,7 @@ For more details on multi-region configurations, especially dual-region setups, 
 
 We recommend using an officially [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution.
 
-Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/setup/install.md) for easy installation on Kubernetes. The latest Helm chart is typically compatible with Kubernetes' [official support cycle](https://kubernetes.io/releases/).
+Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/setup/install.md) for easy installation on Kubernetes. The latest Helm chart is typically compatible with Kubernetes' [official support cycle](https://kubernetes.io/releases/). For the full list of tested and supported environments, see [supported environments](/reference/supported-environments.md).
 
 #### Minimum cluster requirements
 
