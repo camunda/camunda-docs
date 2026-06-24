@@ -32,7 +32,7 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/claude-reviewer ANTHROPIC_API_KEY;
 
-      - uses: anthropics/claude-code-action@beta
+      - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ steps.secrets.outputs.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
