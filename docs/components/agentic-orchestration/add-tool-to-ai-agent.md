@@ -22,6 +22,17 @@ A tool is a BPMN activity inside an ad-hoc sub-process that the LLM can choose t
 
 The AI Agent connector gathers all root-level activities in the ad-hoc sub-process (those with no incoming flows), builds a tool definition for each, and passes them to the LLM as part of the prompt. The LLM then decides which tool to call, in what order, and with which parameters.
 
+You can use any BPMN activity type as a tool:
+
+| Tool type            | When to use                                                                                                                                          |
+| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| REST connector       | Call an external HTTP API.                                                                                                                           |
+| Script task          | Execute inline logic or data transformation.                                                                                                         |
+| User task            | Route to a human for input or approval as part of the agent's decision path.                                                                         |
+| Call activity        | Invoke another BPMN process as a tool when the target process is on the same cluster.                                                                |
+| MCP client connector | Expose tools from an external [MCP server](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) as gateway tools to the agent. |
+| Sub-process          | Model a multi-step sub-flow that the LLM triggers as a single tool.                                                                                  |
+
 :::tip
 For the full technical reference on how tool definitions are resolved and the complete `fromAi()` function syntax, see [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
 :::
@@ -50,6 +61,7 @@ The LLM selects tools based on the activity name and its **Documentation** field
 1. Open the **Documentation** field in the properties panel and write a description that explains:
    - What the tool does.
    - When the LLM should use it.
+   - When it should not — especially if two tools have overlapping purposes.
    - Any constraints or expected inputs.
 
 **Example: weak vs. strong description**
@@ -59,13 +71,13 @@ The LLM selects tools based on the activity name and its **Documentation** field
 | Weak   | `Lookup`                           | `Find customer data`                                                                                                                                                    |
 | Strong | `Resolve customer by company name` | `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
 
-A precise description makes the expected behavior explicit and reduces the risk of incorrect tool selection, repeated calls, or hallucinated behavior.
+A precise description makes the expected behavior explicit and reduces the risk of incorrect tool selection, repeated calls, or hallucinated behavior. Vague descriptions are the most common cause of unreliable agent behavior.
 
 ## Declare AI-generated parameters with `fromAi()`
 
 If the tool requires values that the LLM should supply at runtime — such as a search query, a location, or an identifier — declare those parameters using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
 
-The `fromAi()` function marks a value as LLM-provided and generates a JSON Schema parameter definition that is passed to the LLM as part of the tool definition.
+The `fromAi()` function marks a value as LLM-provided and generates a JSON Schema parameter definition that is passed to the LLM as part of the tool definition. Always provide a description and type for every parameter — this significantly reduces hallucinated values.
 
 **Basic usage** — declare a string parameter:
 
@@ -158,7 +170,7 @@ toolCallResult = [status: "completed", id: customerId]
 </Tabs>
 
 :::note
-The `toolCallResult` value can be a primitive string, a number, or a complex FEEL context object. Complex objects are serialized to JSON before being passed to the LLM. If `toolCallResult` is not set or is empty after the tool executes, the AI Agent connector returns a constant success string to the LLM.
+The `toolCallResult` value can be a primitive string, a number, or a complex FEEL context object. Complex objects are serialized to JSON before being passed to the LLM. Prefer returning a structured FEEL context over a raw string when the result has multiple fields — this gives the LLM more to work with when summarizing the outcome. If `toolCallResult` is not set or is empty after the tool executes, the AI Agent connector returns a constant success string to the LLM.
 :::
 
 ## Example: add a REST connector tool
@@ -230,10 +242,3 @@ You can use any BPMN activity type as a tool. Common options include:
 | Call activity        | Invoke another BPMN process as a tool when the target process is on the same cluster.                                                                |
 | MCP client connector | Expose tools from an external [MCP server](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) as gateway tools to the agent. |
 | Sub-process          | Model a multi-step sub-flow that the LLM triggers as a single tool.                                                                                  |
-
-## Best practices
-
-- **Be specific in descriptions**: the LLM reads the tool name and documentation to choose which tool to call. Vague descriptions lead to incorrect or repeated tool calls.
-- **Describe when to use and when not to use**: if two tools look similar, add a sentence clarifying when each is appropriate.
-- **Use typed `fromAi()` parameters**: always provide a description and type. This reduces hallucinated parameter values.
-- **Return structured results**: return a FEEL context in `toolCallResult` rather than a raw string when the data has multiple fields. This makes the LLM's summary more accurate.
