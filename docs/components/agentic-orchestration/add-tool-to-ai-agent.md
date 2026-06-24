@@ -2,16 +2,14 @@
 id: add-tool-to-ai-agent
 title: Add a tool to an AI agent
 sidebar_label: Add a tool to an AI agent
-description: "Step-by-step guide to adding a tool to an AI agent in Camunda 8, covering tool anatomy, fromAi() parameters, tool call results, and best practices."
+description: "Add any BPMN activity as a callable tool to your Camunda AI agent — define its name, description, fromAi() parameters, and toolCallResult output."
 keywords: ["agentic ai", "AI agents", "tools", "fromAi", "toolCallResult"]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-<span class="badge badge--intermediate">Intermediate</span>
-
-Tools are the building blocks of an AI agent. Each BPMN activity inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) is a tool the LLM can select. This guide walks you through adding a tool to an AI agent using the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md).
+Add any BPMN activity as a callable tool to your Camunda AI agent — define its name, description, `fromAi()` parameters, and `toolCallResult` output.
 
 ## What is a tool
 
@@ -33,7 +31,7 @@ For the full technical reference on how tool definitions are resolved and the co
 - An existing AI agent process using the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md). If you don't have one yet, follow [Build your first AI agent](/guides/getting-started-agentic-orchestration.md).
 - Camunda 8 version 8.8 or newer.
 
-## Step 1: Add an activity inside the ad-hoc sub-process
+## Add an activity inside the ad-hoc sub-process
 
 Open your process in [Web Modeler](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 
@@ -49,7 +47,7 @@ Open your process in [Web Modeler](/components/hub/workspace/modeler/index.md) o
 You can model a sub-flow inside the ad-hoc sub-process. Only the first activity in the sub-flow (the root node) is exposed to the LLM as a tool; the rest of the flow executes automatically once the LLM selects it.
 :::
 
-## Step 2: Write a meaningful tool name and description
+## Write a tool name and description
 
 The LLM selects tools based on the activity name and its **Documentation** field. Clear, specific descriptions significantly improve the reliability of tool selection.
 
@@ -68,7 +66,7 @@ The LLM selects tools based on the activity name and its **Documentation** field
 
 A precise description makes the expected behavior explicit and reduces the risk of incorrect tool selection, repeated calls, or hallucinated behavior.
 
-## Step 3: Declare AI-generated input parameters with `fromAi()`
+## Declare AI-generated parameters with `fromAi()`
 
 If the tool requires values that the LLM should supply at runtime — such as a search query, a location, or an identifier — declare those parameters using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
 
@@ -108,7 +106,7 @@ The first argument to `fromAi()` must be a reference to a field within the `tool
 
 For more examples and the full function signature, see [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue).
 
-## Step 4: Return the result as `toolCallResult`
+## Return the result as `toolCallResult`
 
 After the tool executes, its output must be returned in a process variable named `toolCallResult` so the AI Agent connector can pass it back to the LLM.
 
@@ -168,14 +166,6 @@ toolCallResult = [status: "completed", id: customerId]
 The `toolCallResult` value can be a primitive string, a number, or a complex FEEL context object. Complex objects are serialized to JSON before being passed to the LLM. If `toolCallResult` is not set or is empty after the tool executes, the AI Agent connector returns a constant success string to the LLM.
 :::
 
-## Step 5: Deploy and test the tool
-
-1. Deploy the updated process.
-1. Start a new process instance and send a prompt that would trigger the new tool.
-1. In [Operate](/components/operate/operate-introduction.md), observe which activities the agent activates and in what order.
-
-When testing, write prompts that clearly require the new tool. For example, if you added a weather-lookup tool, try prompts like _"What's the weather in Berlin?"_ to verify the tool is selected and returns the expected result.
-
 ## Example: add a REST connector tool
 
 This example adds a tool that fetches current weather conditions using the [Open-Meteo API](https://open-meteo.com/).
@@ -233,10 +223,6 @@ In the **Output Mapping** section, set **Result Expression** to:
 }
 ```
 
-### Test the tool
-
-Deploy the process and try prompts like _"What's the temperature in Paris?"_ or _"Is it windy in Tokyo?"_. The LLM will select the tool, supply the latitude and longitude, and summarize the result.
-
 ## Tool types
 
 You can use any BPMN activity type as a tool. Common options include:
@@ -256,11 +242,3 @@ You can use any BPMN activity type as a tool. Common options include:
 - **Describe when to use and when not to use**: if two tools look similar, add a sentence clarifying when each is appropriate.
 - **Use typed `fromAi()` parameters**: always provide a description and type. This reduces hallucinated parameter values.
 - **Return structured results**: return a FEEL context in `toolCallResult` rather than a raw string when the data has multiple fields. This makes the LLM's summary more accurate.
-- **Test with realistic prompts**: run the agent with prompts that reflect actual user intent to verify tool selection behavior.
-
-## Additional resources
-
-- [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) — full reference for tool resolution, `fromAi()` syntax, gateway tools, and tool call responses.
-- [Design and architecture: Define your agent tools](/components/agentic-orchestration/design-architecture.md#define-your-agent-tools) — architectural guidance for naming and documenting tools.
-- [`fromAi()` FEEL function reference](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) — complete function signature and examples.
-- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md) — introductory guide for setting up an AI agent from scratch.

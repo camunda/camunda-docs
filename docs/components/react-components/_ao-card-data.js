@@ -75,6 +75,13 @@ export const fundamentalCards_monitoring = [
 // Recommendation cards on introduction page
 export const recommendationCards = [
   {
+    link: "../add-tool-to-ai-agent/",
+    title: "Add a tool to an AI agent",
+    image: IconAoAgentImg,
+    description:
+      "Add BPMN activities as callable tools — configure names, descriptions, parameters, and outputs.",
+  },
+  {
     link: "../rag-ai-agents/",
     title: "Add long-term memory",
     image: IconRAG,

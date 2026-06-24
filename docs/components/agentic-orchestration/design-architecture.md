@@ -72,34 +72,11 @@ This is a typical execution timeline:
 
 ### Define your agent tools
 
-In the AI agent model, each BPMN activity inside an ad-hoc sub-process is a tool exposed to the LLM. The activity name and its documentation are used by the LLM to decide what to do next.
+In the AI agent model, each BPMN activity inside an ad-hoc sub-process is a tool exposed to the LLM. The activity name and its **Documentation** field are used by the LLM to decide which tool to call, in what order, and with which parameters.
 
-Clear, behavior-oriented descriptions help the LLM:
+Clear, behavior-oriented tool names and descriptions directly improve agent reliability. Vague or missing documentation increases the risk of incorrect tool selection, repeated calls, and hallucinated behavior.
 
-- Select the right tool for the current goal.
-- Pass the right parameters in the expected format.
-- Avoid unsafe, redundant, or nonsensical actions.
-
-Poor or missing documentation increases the risk of:
-
-- Incorrect or ambiguous tool selection.
-- Repeated tool calls or skipped required steps.
-- Hallucinated behavior and responses that do not match process intent.
-
-#### Example: weak vs strong tool definition
-
-| Tool definition | Example                                                                                                                                                                                                                                           |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Weak            | **Name**: `Lookup`<br/>**Documentation**: `Find customer data`                                                                                                                                                                                    |
-| Strong          | **Name**: `Resolve customer by legal company name`<br/>**Documentation**: `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
-
-A clear tool name and precise documentation make the expected behavior explicit, improving reliability during tool selection and execution.
-
-#### Tool parameters
-
-Each tool can also declare input parameters the LLM must supply at runtime. Use the [`fromAi()`](../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings to mark a value as LLM-provided, with an optional description and type to guide the model.
-
-See [tool definitions](../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
+For a step-by-step guide on naming tools, writing descriptions, declaring `fromAi()` parameters, and mapping `toolCallResult` outputs, see [Add a tool to an AI agent](./add-tool-to-ai-agent.md).
 
 ### Mix agents with workflow patterns
 
