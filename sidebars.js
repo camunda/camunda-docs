@@ -102,6 +102,7 @@ module.exports = {
         "components/agentic-orchestration/ai-agents",
         "components/agentic-orchestration/camunda-provided-llm",
         "components/agentic-orchestration/ao-design",
+        "components/agentic-orchestration/add-tool-to-ai-agent",
         {
           type: "category",
           label: "Evaluate your AI agents",
