@@ -1309,7 +1309,6 @@ module.exports = {
         require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
         require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
-        require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         require("./docs/apis-tools/hub-api-saas/sidebar-schema"),
         require("./docs/apis-tools/hub-api-sm/sidebar-schema"),
         {
@@ -1546,8 +1545,11 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",
+      link: {
+        type: "doc",
+        id: "apis-tools/migration-manuals/migrate-to-810",
+      },
       items: [
-        "apis-tools/migration-manuals/migrate-to-810",
         "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
       ],
     },
@@ -2343,22 +2345,15 @@ module.exports = {
           },
           items: [
             "self-managed/components/hub/usage-metrics",
-            "self-managed/components/hub/telemetry",
             "self-managed/components/hub/monitoring",
             {
-              type: "category",
-              label: "Configuration",
-              link: {
-                type: "doc",
-                id: "self-managed/components/hub/configuration/configuration",
-              },
-              items: [
-                "self-managed/components/hub/configuration/ssl",
-                "self-managed/components/hub/configuration/modeler-configuration",
+              Configuration: [
+                "self-managed/components/hub/configuration/properties",
+                "self-managed/components/hub/configuration/legacy-cluster-config",
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",
                 "self-managed/components/hub/configuration/logging",
-                "self-managed/components/hub/configuration/modeler-ssl",
+                "self-managed/components/hub/configuration/ssl",
                 "self-managed/components/hub/configuration/copilot",
               ],
             },
@@ -2486,7 +2481,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.9",
+      label: "Upgrade to Camunda 8.10",
       className: "sidebar-cta",
       link: {
         type: "doc",
@@ -2503,7 +2498,6 @@ module.exports = {
           },
           items: ["self-managed/upgrade/helm/880-to-890"],
         },
-        "self-managed/upgrade/manual/index",
         {
           type: "category",
           label: "Component upgrade",
@@ -2511,15 +2505,7 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/components/index",
           },
-          items: [
-            "self-managed/upgrade/components/880-to-890",
-            {
-              Database: [
-                "self-managed/upgrade/components/database/changes-in-elasticsearch-8",
-              ],
-            },
-            "self-managed/upgrade/components/keycloak/keycloak-compatibility",
-          ],
+          items: ["self-managed/upgrade/components/890-to-8100"],
         },
       ],
     },
