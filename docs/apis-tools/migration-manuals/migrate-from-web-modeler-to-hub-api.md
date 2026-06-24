@@ -18,6 +18,14 @@ Web Modeler API v1 was the REST API for Web Modeler, a standalone product for mo
 
 [Camunda Hub API v2](/apis-tools/hub-api-sm/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed.
 
+## Deprecation timeline
+
+| Version  | Action                                                                                                                                                                       |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **8.10** | v2 ships alongside v1. v1 is marked deprecated — all v1 responses include `Deprecation`, `Sunset`, and `Link` HTTP headers. The v1 OpenAPI spec is marked `deprecated: true` |
+| **8.11** | v1 remains available but is not extended. No new features are added to deprecated endpoints.                                                                                 |
+| **8.12** | v1 endpoints are removed. Applications still using v1 receive `404`.                                                                                                         |
+
 ## General changes
 
 The following sections cover changes that apply across the entire API, regardless of which resource you're working with. Review these before making any endpoint-specific changes.
@@ -39,19 +47,55 @@ See the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentica
 
 ### Error responses
 
-In v2, all error responses use the [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) `ProblemDetail` format with `Content-Type: application/problem+json`.
+In Web Modeler API v1, error responses used a custom format:
 
-```json
+```json title="Web Modeler API v1"
 {
-  "type": "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+  "message": "File not found",
+  "status": 404
+}
+```
+
+In Camunda Hub API v2, all error responses use the [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) "problem detail" format with `Content-Type: application/problem+json`:
+
+```json title="Camunda Hub API v2"
+{
+  "type": "about:blank",
+  "title": "Not Found",
+  "status": 404,
+  "detail": "File with key 'abc-123' not found.",
+  "instance": "/api/v2/files/abc-123"
+}
+```
+
+This format includes the following fields:
+
+| Field      | Description                                              |
+| ---------- | -------------------------------------------------------- |
+| `type`     | URI identifying the problem type (usually `about:blank`) |
+| `title`    | Short human-readable summary                             |
+| `status`   | HTTP status code                                         |
+| `detail`   | Explanation with actionable guidance                     |
+| `instance` | URI of the request that caused the error                 |
+
+Validation errors include an additional `violations` array:
+
+```json title="Camunda Hub API v2"
+{
+  "type": "about:blank",
   "title": "Bad Request",
   "status": 400,
-  "detail": "Request property [name] must not be blank",
-  "instance": "/v2/files"
+  "detail": "Validation failed for request body.",
+  "instance": "/api/v2/files",
+  "violations": [{ "field": "name", "message": "must not be blank" }]
 }
 ```
 
 ### Pagination
+
+Offset pagination in Camunda Hub API v2 is different than Web Modeler API v1. Additionally, v2 introduces cursor pagination.
+
+#### Offset pagination
 
 In Web Modeler API v1, you used two fields to paginate items in a response:
 
@@ -60,7 +104,7 @@ In Web Modeler API v1, you used two fields to paginate items in a response:
 
 For example:
 
-```json
+```json title="Web Modeler API v1"
 {
   "page": 2,
   "size": 20
@@ -76,7 +120,7 @@ In Camunda Hub API v2, you use a `page` object with two fields:
 
 For example:
 
-```json
+```json title="Camunda Hub API v2"
 {
   "page": {
     "from": 20,
@@ -89,21 +133,136 @@ Instead of specifying the number of pages to skip, you specify the index to star
 
 In addition to the different pagination model, the default page size has changed. In v1, the default page size was 10. In v2, the default limit is 100.
 
-### Projects
+#### Cursor pagination
 
-In v1, _projects_ were the top-level container for files and folders. In v2, _workspaces_ are a new organizational level above projects. Files still belong to _projects_, which now live inside a workspace. You can read more in the [Camunda Hub workspace documentation](/components/hub/workspace/index.md).
+In addition to offset pagination, Camunda Hub API v2 offers cursor pagination. With this, you use a `page` object with two fields:
 
-### Key fields
+- `page.after` specifies the cursor to start from. You receive this from a prior response.
+- `page.limit` limits the number of items returned.
 
-In v1, resources were identified by `Id` fields. In v2, resources are identified by `Key` fields. For example, `folderId` is now `folderKey`. Despite the name change, the _values_ of these identifiers are the same. For example, you can use a `folderId` obtained from Web Modeler API v1 as a `folderKey` in Camunda Hub API v2.
+```json title="Camunda Hub API v2"
+{
+  "page": {
+    "after": "{endCursor from previous response}",
+    "limit": 20
+  }
+}
+```
 
-## Files API
+With cursor pagination, you specify the _cursor_ to start from and the maximum number, or _limit_, of items to return (20). This request returns the next 20 items after the cursor. If there are fewer items than the limit, you receive all remaining items.
 
-The files API in v2 renames fields and includes minor implementation changes in every endpoint.
+#### Paginated responses
+
+Paginated responses in Camunda Hub API v2 have the following changes:
+
+| Web Modeler API v1 | Camunda Hub API v2       | Notes                                                         |
+| ------------------ | ------------------------ | ------------------------------------------------------------- |
+| `page`             | -                        | Removed                                                       |
+| `size`             | -                        | Removed                                                       |
+| `total`            | `page.totalItems`        | Moved into the `page` object                                  |
+| -                  | `page.hasMoreTotalItems` | New field                                                     |
+| -                  | `page.startCursor`       | New field. Start cursor for [pagination](#cursor-pagination). |
+| -                  | `page.endCursor`         | New field. End cursor for [pagination](#cursor-pagination).   |
+
+### Projects renamed to workspaces
+
+In Web Modeler API v1, _projects_ were the top-level container for files and folders:
+
+```
+Organization
+└─ Project        # top-level container
+   ├─ Folder
+   │   ├─ File
+   │   └─ Folder  # nested
+   └─ File        # root-level
+
+```
+
+In Camunda Hub API v2, _workspaces_ are a new organizational level above projects:
+
+```
+Organization
+└─ Workspace         # new top-level container, groups projects
+   ├─ Project        # same as v1 project, now inside a workspace
+   │  ├─ Folder
+   │  │   ├─ File
+   │  │   └─ Folder  # nested
+   │  └─ File        # root-level
+   └─ Project
+      └─ File        # root-level
+```
+
+The `projectId` in v1 and the `workspaceKey` in v2 refer to the same underlying entity; the same UUID works in both APIs.
+
+### Date filters
+
+Web Modeler API v1 supports a custom date precision syntax that encodes a comparison operator, timestamp, and truncation unit into a single string. Camunda Hub API v2 drops this encoding in favor of explicit operators. You compute period boundaries yourself.
+
+The following examples show equivalent date filters in Web Modeler API v1 and Camunda Hub API v2:
+
+| Web Modeler API v1        | Camunda Hub API v2                                                       | Explanation                          |
+| ------------------------- | ------------------------------------------------------------------------ | ------------------------------------ |
+| `2023-09-20T...Z\|\|/y`   | `{ "$gte": "2023-01-01T00:00:00Z", "$lte": "2023-12-31T23:59:59.999Z" }` | Within year 2023                     |
+| `2023-09-20T...Z\|\|/M`   | `{ "$gte": "2023-09-01T00:00:00Z", "$lte": "2023-09-30T23:59:59.999Z" }` | Within September 2023                |
+| `>=2023-09-20T...Z\|\|/y` | `{ "$gte": "2023-01-01T00:00:00Z" }`                                     | On or after start of 2023            |
+| `<2023-09-20T...Z\|\|/M`  | `{ "$lt": "2023-09-01T00:00:00Z" }`                                      | Before September 2023                |
+| `2023-09-20T11:31:20Z`    | `{ "$eq": "2023-09-20T11:31:20Z" }`                                      | Exact match                          |
+| `>=2023-09-20T11:31:20Z`  | `{ "$gte": "2023-09-20T11:31:20Z" }`                                     | On or after a specific date and time |
+
+The following date filter operators are available in Camunda Hub API v2:
+
+| Operator | Description                 |
+| -------- | --------------------------- |
+| `$eq`    | Equals (same as v1 default) |
+| `$gt`    | Greater than                |
+| `$gte`   | Greater than or equal to    |
+| `$lt`    | Less than                   |
+| `$lte`   | Less than or equal to       |
+
+### Search filters
+
+Web Modeler API v1 uses equality-only filters, except for dates:
+
+```json title="Web Modeler API v1"
+{
+  "filter": {
+    "name": "my-process",
+    "type": "bpmn"
+  }
+}
+```
+
+Camunda Hub API v2 replaces these with an explicit operator set:
+
+```json title="Camunda Hub API v2"
+{
+  "filter": {
+    "name": { "$eq": "my-process" },
+    "type": { "$in": ["bpmn"] }
+  }
+}
+```
+
+The following filter operators are available in Camunda Hub API:
+
+| Operator         | Description                             | Example                                                                     |
+| ---------------- | --------------------------------------- | --------------------------------------------------------------------------- |
+| `$eq`            | Equals (same as v1 default)             | `{ "name": { "$eq": "my-process" } }`                                       |
+| `$neq`           | Not equals                              | `{ "type": { "$neq": "dmn" } }`                                             |
+| `$gt` / `$gte`   | Greater than / greater than or equal to | `{ "created": { "$gte": "2024-01-01T00:00:00Z" } }`                         |
+| `$lt` / `$lte`   | Less than / less than or equal to       | `{ "created": { "$lt": "2024-06-01T00:00:00Z" } }`                          |
+| `$like`          | Pattern match (SQL LIKE)                | `{ "name": { "$like": "%order%" } }`                                        |
+| `$in` / `$notIn` | In / not in list                        | `{ "type": { "$in": ["bpmn", "form"] } }`                                   |
+| `$exists`        | Null check                              | `{ "folderKey": { "$exists": false } }`                                     |
+| `$or`            | Logical OR                              | `{ "$or": [{ "type": { "$eq": "bpmn" } }, { "type": { "$eq": "form" } }] }` |
+
+## File API
+
+The following sections cover changes that apply to file API endpoints.
 
 ### Endpoint mapping
 
-All v1 files endpoints have a direct v2 equivalent:
+All file API endpoints have a Camunda Hub API v2 equivalent:
 
 | Operation     | Web Modeler API v1          | Camunda Hub API v2           |
 | ------------- | --------------------------- | ---------------------------- |
@@ -113,13 +272,18 @@ All v1 files endpoints have a direct v2 equivalent:
 | Delete a file | `DELETE /v1/files/{fileId}` | `DELETE /v2/files/{fileKey}` |
 | Search files  | `POST /v1/files/search`     | `POST /v2/files/search`      |
 
-### Create a file
+### Field mapping {#file-api-field-mapping}
 
-| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                                               |
-| ------------------ | ------------------ | --------------------------------------------------------------------------------------------------- |
-| `projectId`        | `projectKey`       | Renamed and now required. This refers to a project within a Camunda Hub workspace.                  |
-| `folderId`         | `folderKey`        | Renamed.                                                                                            |
-| `fileType`         | `type`             | Renamed. `connector_template` is no longer supported. `element_template` is now `element-template`. |
+The following fields have changed across all file endpoints:
+
+| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                                                                               |
+| ------------------ | ------------------ | ---------------- | --------------------------------------------------------------------------------------------------- |
+| `fileType`         | `type`             | Request/response | Renamed. `connector_template` is no longer supported. `element_template` is now `element-template`. |
+| `folderId`         | `folderKey`        | Request/response | Renamed                                                                                             |
+| `projectId`        | `workspaceKey`     | Request/response | [Renamed, but uses the same UUID](#projects-renamed-to-workspaces)                                  |
+| -                  | `content`          | Response         | New field                                                                                           |
+| `id`               | `fileKey`          | Response         | Renamed                                                                                             |
+| `canonicalPath`    | `canonicalPath`    | Response         | In v1, `canonicalPath` was an object. In v2, it's a string.                                         |
 
 ### Get a file
 
@@ -127,28 +291,343 @@ The v1 response returned a nested structure, with `metadata` and `content` as se
 
 ### Update a file
 
-| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                                                                                                    |
-| ------------------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `folderId`         | `folderKey`        | Renamed.                                                                                                                                                 |
-| `projectId`        | `projectKey`       | Renamed. Use to move files between projects within a Camunda Hub workspace.                                                                              |
-| `revision`         | `revision`         | Now required. Fetch the current revision from a get or create response, and include it in your update request to prevent overwriting concurrent changes. |
+A `revision` is now required to prevent overwriting concurrent changes. Fetch the current revision from a get or create response, and include it in your update request.
 
 ### Search files
 
-| Web Modeler API v1 | Camunda Hub API v2           | Notes                                                                 |
-| ------------------ | ---------------------------- | --------------------------------------------------------------------- |
-| `filter`           | `filter`                     | Now supports advanced operators, including `$eq`, `$in`, and `$like`. |
-| `total` (response) | `page.totalItems` (response) | Moved into the `page` response object.                                |
+In addition to the [general field changes](#file-api-field-mapping), the following request fields have changed:
+
+| Web Modeler API v1       | Camunda Hub API v2 | Notes                                                                                           |
+| ------------------------ | ------------------ | ----------------------------------------------------------------------------------------------- |
+| `filter`                 | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`             |
+| `filter.createdBy.email` | `filter.createdBy` | In v1, `createdBy` was an object. In v2, it's a string representing the creator's email address |
+| `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` was an object. In v2, it's a string representing the updater's email address |
+| `sort.direction`         | `sort.order`       | Renamed                                                                                         |
 
 `content` is `null` on all items in the search response. Fetch individual files to retrieve content.
 
-### File response fields
+## Folder API
 
-Only changed fields are listed:
+The following sections cover changes that apply to folder API endpoints.
 
-| v1 field        | v2 field        | Notes                                                       |
-| --------------- | --------------- | ----------------------------------------------------------- |
-| `id`            | `fileKey`       | Renamed.                                                    |
-| `projectId`     | `projectKey`    | Renamed.                                                    |
-| `folderId`      | `folderKey`     | Renamed.                                                    |
-| `canonicalPath` | `canonicalPath` | In v1, `canonicalPath` was an object. In v2, it's a string. |
+### Endpoint mapping
+
+All folder API endpoints have a Camunda Hub API v2 equivalent:
+
+| Operation       | Web Modeler API v1              | Camunda Hub API v2               |
+| --------------- | ------------------------------- | -------------------------------- |
+| Create a folder | `POST /v1/folders`              | `POST /v2/folders`               |
+| Get a folder    | `GET /v1/folders/{folderId}`    | `GET /v2/folders/{folderKey}`    |
+| Update a folder | `PATCH /v1/folders/{folderId}`  | `PATCH /v2/folders/{folderKey}`  |
+| Delete a folder | `DELETE /v1/folders/{folderId}` | `DELETE /v2/folders/{folderKey}` |
+
+### Field mapping {#folder-api-field-mapping}
+
+The following fields have changed across all folder endpoints:
+
+| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                                              |
+| ------------------ | ------------------ | ---------------- | ------------------------------------------------------------------ |
+| `parentId`         | `parentFolderKey`  | Request/response | Renamed                                                            |
+| `projectId`        | `workspaceKey`     | Request/response | [Renamed, but uses the same UUID](#projects-renamed-to-workspaces) |
+| `id`               | `folderKey`        | Response         | Renamed                                                            |
+
+### Get a folder
+
+In Web Modeler API v1, folder data in the response was nested under a `metadata` key:
+
+```json title="Web Modeler API v1"
+{
+  "metadata": {
+    "id": "f-456",
+    "name": "processes",
+    "projectId": "p-123",
+    "parentId": null,
+    "created": "...",
+    "createdBy": { "name": "...", "email": "..." },
+  }
+  "content": {
+    "folders": [{ "id": "..." }],
+    "files": [{ "id": "..." }]
+  }
+}
+```
+
+In Camunda Hub API v2, folder data is nested under a `folder` key:
+
+```json title="Camunda Hub API v2"
+{
+  "folder": {
+    "folderKey": "f-456",
+    "name": "processes",
+    "workspaceKey": "p-123",
+    "parentFolderKey": null,
+    "created": "...",
+    "createdBy": { "name": "...", "email": "..." },
+    "updated": "...",
+    "updatedBy": { "name": "...", "email": "..." }
+  },
+  "content": {
+    "folders": [{ "folderKey": "..." }],
+    "files": [{ "fileKey": "..." }]
+  }
+}
+```
+
+## Workspace API
+
+In Web Modeler API v1, you managed projects with the `projects` resource. In Camunda Hub API v2, projects are now called workspaces, and you manage them with the `workspaces` resource. The UUID values are the same. The concept, field names, and API paths have changed.
+
+### Endpoint mapping
+
+All workspace API endpoints have a Camunda Hub API v2 equivalent:
+
+| Operation          | Web Modeler API v1                | Camunda Hub API v2                     |
+| ------------------ | --------------------------------- | -------------------------------------- |
+| Create a workspace | `POST /v1/projects`               | `POST /v2/workspaces`                  |
+| Get a workspace    | `GET /v1/projects/{projectId}`    | `GET /v2/workspaces/{workspaceKey}`    |
+| Update a workspace | `PATCH /v1/projects/{projectId}`  | `PATCH /v2/workspaces/{workspaceKey}`  |
+| Delete a workspace | `DELETE /v1/projects/{projectId}` | `DELETE /v2/workspaces/{workspaceKey}` |
+| Search workspaces  | `POST /v1/projects/search`        | `POST /v2/workspaces/search`           |
+
+### Field mapping {#workspace-api-field-mapping}
+
+The following fields have changed across all workspace endpoints:
+
+| Web Modeler API v1 | Camunda Hub API v2 | Application | Notes                                |
+| ------------------ | ------------------ | ----------- | ------------------------------------ |
+| `id`               | `workspaceKey`     | Response    | Renamed. Referred to the project ID. |
+
+### Get a workspace
+
+In Web Modeler API v1, project data in the response was nested under a `metadata` key:
+
+```json title="Web Modeler API v1"
+{
+  "metadata": {
+    "id": "p-123",
+    "name": "My Project"
+  },
+  "content": {
+    "folders": [{ "projectKey": "proj-1", "name": "App v1" }]
+  }
+}
+```
+
+In Camunda Hub API v2, folder data is nested under a `folder` key with `projects` in the `content`:
+
+```json title="Camunda Hub API v2"
+{
+  "workspace": {
+    "workspaceKey": "p-123",
+    "name": "My Workspace"
+  },
+  "content": {
+    "projects": [{ "projectKey": "proj-1", "name": "App v1" }]
+  }
+}
+```
+
+### Search workspaces
+
+In addition to the [general field changes](#workspace-api-field-mapping), the following request fields have changed:
+
+| Web Modeler API v1       | Camunda Hub API v2 | Notes                                                                                           |
+| ------------------------ | ------------------ | ----------------------------------------------------------------------------------------------- |
+| `filter`                 | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`             |
+| `filter.id`              | -                  | Removed                                                                                         |
+| `filter.description`     | -                  | Removed                                                                                         |
+| `filter.createdBy.email` | `filter.createdBy` | In v1, `createdBy` was an object. In v2, it's a string representing the creator's email address |
+| `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` was an object. In v2, it's a string representing the updater's email address |
+| `sort.direction`         | `sort.order`       | Renamed                                                                                         |
+
+## Collaborator API
+
+Three important changes have been made to the collaborator API in Camunda Hub API v2:
+
+- The [path](#endpoint-mapping) is restructured under workspaces.
+- The HTTP method for [adding a collaborator](#add-a-collaborator) changes from `PUT` to `POST`.
+- The [role enum](#role) is renamed.
+
+### Endpoint mapping
+
+All collaborator API endpoints have a Camunda Hub API v2 equivalent:
+
+| Operation             | Web Modeler API v1                             | Camunda Hub API v2                                           |
+| --------------------- | ---------------------------------------------- | ------------------------------------------------------------ |
+| Add a collaborator    | `PUT /v1/collaborators`                        | `POST /v2/workspaces/{workspaceKey}/collaborators`           |
+| Remove a collaborator | `DELETE /v1/collaborators/{projectId}/{email}` | `DELETE /v2/workspaces/{workspaceKey}/collaborators/{email}` |
+| Search collaborators  | `POST /v1/collaborators/search`                | `POST /v2/collaborators/search`                              |
+
+### Field mapping {#collaborator-api-field-mapping}
+
+The following fields have changed across all file endpoints:
+
+| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                |
+| ------------------ | ------------------ | ---------------- | ------------------------------------ |
+| `projectId`        | `workspaceKey`     | Request/response | Renamed. Referred to the project ID. |
+
+### Add a collaborator
+
+`workspaceKey` moves from the request body to the path. The `project_admin` role is renamed to `workspace_admin`.
+
+### Search collaborators
+
+In addition to the [general field changes](#collaborator-api-field-mapping), the following request fields have changed:
+
+| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                               |
+| ------------------ | ------------------ | ----------------------------------------------------------------------------------- |
+| `filter`           | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like` |
+| `sort.direction`   | `sort.order`       | Renamed                                                                             |
+
+Here is an example request from v1:
+
+```json title="Web Modeler API v1"
+{
+  "filter": { "projectId": "p-123", "role": "project_admin" },
+  "page": 0,
+  "size": 10
+}
+```
+
+Here is an equivalent request in v2:
+
+```json title="Camunda Hub API v2"
+{
+  "filter": {
+    "workspaceKey": { "$eq": "p-123" },
+    "role": { "$eq": "workspace_admin" }
+  },
+  "page": { "from": 0, "limit": 10 }
+}
+```
+
+### Role enum
+
+| Web Modeler API v1 | Camunda Hub API v2 | Notes                                  |
+| ------------------ | ------------------ | -------------------------------------- |
+| `project_admin`    | `workspace_admin`  | Renamed to match workspace terminology |
+| `editor`           | `editor`           | Unchanged                              |
+| `commenter`        | `commenter`        | Unchanged                              |
+| `viewer`           | `viewer`           | Unchanged                              |
+
+## Version API
+
+The following sections cover changes that apply to version API endpoints.
+
+### Endpoint mapping
+
+All version API endpoints have a Camunda Hub API v2 equivalent _with the exception of the compare versions endpoint_:
+
+| Operation            | Web Modeler API v1                                     | Camunda Hub API v2                           |
+| -------------------- | ------------------------------------------------------ | -------------------------------------------- |
+| Create a version     | `POST /v1/versions`                                    | `POST /v2/versions`                          |
+| Get a version        | `GET /v1/versions/{versionId}`                         | `GET /v2/versions/{versionKey}`              |
+| Update a version     | `PATCH /v1/versions/{versionId}`                       | `PATCH /v2/versions/{versionKey}`            |
+| Delete a version     | `DELETE /v1/versions/{versionId}`                      | `DELETE /v2/versions/{versionKey}`           |
+| Search versions      | `POST /v1/versions/search`                             | `POST /v2/versions/search`                   |
+| Restore a version    | `POST /v1/versions/{versionId}/restore`                | `POST /v2/versions/{versionKey}/restoration` |
+| Compare two versions | `GET /v1/versions/compare/{version1Id}...{version2Id}` | Does not exist                               |
+
+### Field mapping {#version-api-field-mapping}
+
+The following fields have changed across all file endpoints:
+
+| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes   |
+| ------------------ | ------------------ | ---------------- | ------- |
+| `fileId`           | `fileKey`          | Request/response | Renamed |
+| `id`               | `versionKey`       | Response         | Renamed |
+| `versionId`        | `versionKey`       | Response         | Renamed |
+
+### Get version
+
+In Web Modeler API v1, version data in the response was nested under a `metadata` key:
+
+```json title="Web Modeler API v1"
+{
+  "metadata": {
+    "id": "ver-123",
+    "name": "version",
+  }
+  "content": "versioned content"
+}
+```
+
+In Camunda Hub API v2, version data is at the top level of the response body:
+
+```json title="Camunda Hub API v2"
+{
+  "versionKey": "ver-123",
+  "name": "version",
+  "content": "versioned content"
+}
+```
+
+### Search versions
+
+In addition to the [general field changes](#version-api-field-mapping), the following request fields have changed:
+
+| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                               |
+| ------------------ | ------------------ | ----------------------------------------------------------------------------------- |
+| `filter`           | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like` |
+| `sort.direction`   | `sort.order`       | Renamed                                                                             |
+
+### Restore a version
+
+In Web Modeler API v1, you used the verb "restore" and passed the `versionId` in the path and the request body:
+
+```json title="Web Modeler API v1"
+POST /api/v1/versions/{versionId}/restore
+{
+  "versionId": {versionId}
+}
+```
+
+In Camunda Hub API v2, use the noun "restoration" and the version to restore is identified solely by the path parameter:
+
+```json title="Camunda Hub API v2"
+POST /api/v2/versions/{versionKey}/restoration
+(no request body)
+```
+
+### Compare two versions
+
+The compare versions endpoint `GET /versions/compare/{version1Id}...{version2Id}` no longer exists in Camunda Hub API v2.
+
+In Web Modeler API v1, the compare versions endpoint returned a link to a visual comparison between two versions where the version referenced by `version1Id` acts as a baseline to compare the version referenced by `version2Id` against.
+
+Instead of making an API request for this link, you can construct it yourself:
+
+1. Get the file and version keys from the search or get version API.
+2. Insert the keys into one of the following URL patterns:
+
+| Resource type    | Template URL                                                                     |
+| :--------------- | :------------------------------------------------------------------------------- |
+| BPMN             | `{baseUrl}/diagrams/{fileKey}/versions/{versionKey1}...{versionKey2}`            |
+| Element template | `{baseUrl}/connector-templates/{fileKey}/versions/{versionKey1}...{versionKey2}` |
+| Form             | `{baseUrl}/forms/{fileKey}/versions/{versionKey1}...{versionKey2}`               |
+| RPA              | `{baseUrl}/rpa-scripts/{fileKey}/versions/{versionKey1}...{versionKey2}`         |
+
+Replace `{baseURL}` with the Web Modeler base URL. The version keys must be for the same file.
+
+## Info API
+
+### Endpoint mapping
+
+The info API endpoint has a Camunda Hub API v2 equivalent:
+
+| Operation | Web Modeler API v1 | Camunda Hub API v2 |
+| --------- | ------------------ | ------------------ |
+| Get info  | `GET /v1/info`     | `GET /v2/info`     |
+
+### Get Info
+
+The following response fields have changed:
+
+| Web Modeler API v1 | Camunda Hub API v2 | Notes   |
+| ------------------ | ------------------ | ------- |
+| `createPermission` | -                  | Removed |
+| `readPermission`   | -                  | Removed |
+| `updatePermission` | -                  | Removed |
+| `deletePermission` | -                  | Removed |
+
+To determine your permissions, check the scopes configured when your API token was created. If a request lacks the required permission, the API returns `403 Forbidden` with a `ProblemDetail` body explaining which permission is missing.
