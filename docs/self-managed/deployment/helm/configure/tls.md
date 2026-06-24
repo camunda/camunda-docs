@@ -13,13 +13,13 @@ The `global.tls.caBundle` key and the `values-tls.yaml` overlay are introduced i
 
 ## What's covered
 
-| Connection                                                                                 | Mechanism                                                                                                                                                                                       |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda components → Elasticsearch (private CA, self-hosted or AWS)                        | `global.tls.caBundle`                                                                                                                                                                           |
-| Camunda components → OpenSearch (private CA, self-hosted or AWS-managed)                   | `global.tls.caBundle`                                                                                                                                                                           |
-| Camunda components → PostgreSQL JDBC (`sslmode=verify-full` + CA)                          | `global.tls.caBundle` + JDBC URL                                                                                                                                                                |
-| Camunda components → external OIDC issuer with private CA (Entra, Okta, internal Keycloak) | `global.tls.caBundle`                                                                                                                                                                           |
-| Browser / external client → Ingress / GatewayAPI (UI, gRPC)                                | Standard Kubernetes Ingress TLS — configured via per-component `*.ingress.tls` or `global.gateway.tls`, **not** `global.tls.caBundle`. See [Ingress configuration](./ingress/ingress-setup.md). |
+| Connection                                                                                 | Mechanism                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda components → Elasticsearch (private CA, self-hosted or AWS)                        | `global.tls.caBundle`                                                                                                                                                                         |
+| Camunda components → OpenSearch (private CA, self-hosted or AWS-managed)                   | `global.tls.caBundle`                                                                                                                                                                         |
+| Camunda components → PostgreSQL JDBC (`sslmode=verify-full` + CA)                          | `global.tls.caBundle` + JDBC URL                                                                                                                                                              |
+| Camunda components → external OIDC issuer with private CA (Entra, Okta, internal Keycloak) | `global.tls.caBundle`                                                                                                                                                                         |
+| Browser / external client → Ingress / GatewayAPI (UI, gRPC)                                | Standard Kubernetes Ingress TLS — configured via per-component `*.ingress.tls` or `global.gateway.tls`, _not_ `global.tls.caBundle`. See [Ingress configuration](./ingress/ingress-setup.md). |
 
 In-cluster pod-to-pod traffic is not covered by this overlay — see [In-cluster transport (service mesh required)](#in-cluster-transport-service-mesh-required).
 
@@ -42,17 +42,13 @@ The `values-tls.yaml` overlay bridges all three from a single PEM bundle:
 
 :::caution `SSL_CERT_FILE` replaces the system bundle
 
-`SSL_CERT_FILE` **replaces** (not appends to) the OS CA bundle for OpenSSL clients. Include all public CAs your components reach alongside your private CA:
+`SSL_CERT_FILE` _replaces_ (not appends to) the OS CA bundle for OpenSSL clients. Include all public CAs your components reach alongside your private CA:
 
 ```bash
 cat /etc/ssl/certs/ca-certificates.crt your-private-ca.pem > camunda-ca-bundle.pem
 ```
 
-:::
-
-:::caution Python `requests` does not honour `SSL_CERT_FILE`
-
-Set `REQUESTS_CA_BUNDLE=/etc/camunda/tls/ca.crt` on Python-based connector containers — `requests` reads `REQUESTS_CA_BUNDLE` / `CURL_CA_BUNDLE`, not `SSL_CERT_FILE`.
+Python-based connector containers are an exception: `requests` reads `REQUESTS_CA_BUNDLE` / `CURL_CA_BUNDLE`, not `SSL_CERT_FILE`. Set `REQUESTS_CA_BUNDLE=/etc/camunda/tls/ca.crt` on those containers.
 
 :::
 
@@ -93,6 +89,8 @@ helm upgrade --install camunda camunda/camunda-platform \
 ```
 
 `your-values.yaml` provides datastore URLs, credentials, and other scenario config. The TLS overlay is additive — it does not replace your existing values.
+
+Download the overlay from the same chart version you install. The `main` branch tracks the latest chart, so if you pin a specific chart release, fetch `values-tls.yaml` from the matching release tag instead of `main`.
 
 ### 3. Verify
 
@@ -241,11 +239,11 @@ Server certs for Elasticsearch, OpenSearch, and PostgreSQL must be issued separa
 
 ## Install-time guardrails
 
-After each `helm install` or `helm upgrade`, check the `NOTES.txt` output for these warnings:
+After each `helm install` or `helm upgrade`, check the `NOTES.txt` output for these warnings (re-display it at any time with `helm status <release>`):
 
-- **Per-component JKS overrides the bundle.** If a component has a legacy `tls.secret` JKS configured, the JKS takes precedence and the bundle is ignored for that component. Remove `tls.secret` to use the bundle.
-- **Bundle is trust, not encryption.** `global.tls.caBundle` adds CA trust but does not enable TLS on a plaintext URL. Set the URL to `https://` (or set the JDBC `sslmode`).
-- **`JAVA_TOOL_OPTIONS` in component `env` overrides the truststore flags.** Set it via `javaOpts` (orchestration, optimize, Web Modeler restapi) instead, which the chart appends to.
+- Per-component JKS overrides the bundle. If a component has a legacy `tls.secret` JKS configured, the JKS takes precedence and the bundle is ignored for that component. Remove `tls.secret` to use the bundle.
+- Bundle is trust, not encryption. `global.tls.caBundle` adds CA trust but does not enable TLS on a plaintext URL. Set the URL to `https://` (or set the JDBC `sslmode`).
+- `JAVA_TOOL_OPTIONS` in component `env` overrides the truststore flags. Set it via `javaOpts` (orchestration, optimize, Web Modeler restapi) instead, which the chart appends to.
 
 ## Verify no plaintext fallback
 
@@ -319,7 +317,7 @@ The init container builds a PKCS12 truststore; the chart omits `-Djavax.net.ssl.
 
 ### Bitnami PostgreSQL `tls.certCAFilename` enables mTLS
 
-Do not set `tls.certCAFilename` on the bundled Bitnami PostgreSQL subchart — it switches PostgreSQL into `clientcert=verify-full` mode (`pg_hba.conf`) and breaks plain clients. Use `tls.certFilename` and `tls.certKeyFilename` only.
+Do not set `tls.certCAFilename` on the bundled Bitnami PostgreSQL subchart. It switches PostgreSQL into `clientcert=verify-full` mode (`pg_hba.conf`) and breaks plain clients. Use `tls.certFilename` and `tls.certKeyFilename` only.
 
 ### Console and Web Modeler websockets are Node.js
 
