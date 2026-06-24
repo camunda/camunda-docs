@@ -2,14 +2,14 @@
 id: add-tool-to-ai-agent
 title: Add a tool to an AI agent
 sidebar_label: Add a tool to an AI agent
-description: "Add any BPMN activity as a callable tool to your Camunda AI agent — define its name, description, fromAi() parameters, and toolCallResult output."
+description: "Add BPMN activities as callable tools to your AI agents."
 keywords: ["agentic ai", "AI agents", "tools", "fromAi", "toolCallResult"]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Add any BPMN activity as a callable tool to your Camunda AI agent — define its name, description, `fromAi()` parameters, and `toolCallResult` output.
+Add BPMN activities as callable tools to your AI agents.
 
 ## What is a tool
 

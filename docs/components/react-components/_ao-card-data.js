@@ -78,8 +78,7 @@ export const recommendationCards = [
     link: "../add-tool-to-ai-agent/",
     title: "Add a tool to an AI agent",
     image: IconAoAgentImg,
-    description:
-      "Add BPMN activities as callable tools — configure names, descriptions, parameters, and outputs.",
+    description: "Add BPMN activities as callable tools to your AI agents.",
   },
   {
     link: "../rag-ai-agents/",
