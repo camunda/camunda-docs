@@ -34,7 +34,6 @@ To determine the exact Docusaurus version used by this site, check the `@docusau
 
 ## 3. PR and issue workflow
 
-- Keep the PR in **draft** while actively working on it. Removing draft status signals it is ready for review.
 - Add **labels** to communicate the component, version, and priority. Both PRs and issues without labels may be triaged slowly.
 - Add the **`deploy` label** to a PR to trigger a preview site deployment. This is recommended for large or complex changes. Preview deployments are published at `https://preview.docs.camunda.cloud/pr-<N>/`, where `<N>` is the PR number.
 - When creating a PR, invoke the `create-pr` skill (`.claude/skills/create-pr/SKILL.md`).
