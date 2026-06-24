@@ -9,35 +9,6 @@ argument-hint: "<brief description of the PR>"
 
 Follow these steps in order. Do not skip or reorder them.
 
-## Step 0: Verify branch state
-
-1. Check the current branch:
-
-```bash
-git branch --show-current
-```
-
-If the result is `main`, derive a short kebab-case branch name from the PR description (e.g. `docs/add-connector-timeout-config`), then create it, switch to it, and push:
-
-```bash
-git checkout -b <derived-branch-name>
-git push -u origin HEAD
-```
-
-Then continue to Step 1.
-
-2. Check whether the branch has an upstream:
-
-```bash
-git status -sb
-```
-
-If the output shows `## <branch>...origin/<branch>`, the branch is already pushed. Proceed to Step 1. Otherwise push it now:
-
-```bash
-git push -u origin HEAD
-```
-
 ## Step 1: Read the PR template
 
 1. Read the PR template at `.github/pull_request_template.md`:
