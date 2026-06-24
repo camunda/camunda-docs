@@ -32,7 +32,7 @@ Then continue to Step 1.
 git status -sb
 ```
 
-If the output shows `## <branch>...origin/<branch>`, the branch is already pushed — proceed to Step 1. Otherwise push it now:
+If the output shows `## <branch>...origin/<branch>`, the branch is already pushed. Proceed to Step 1. Otherwise push it now:
 
 ```bash
 git push -u origin HEAD
