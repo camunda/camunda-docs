@@ -167,10 +167,10 @@ Create and store client credentials securely—for example, as CI/CD secrets—a
 <TabItem value='saas'>
 
 ```bash
-export CAMUNDA_HUB_CLIENT_ID="<client-id>"
-export CAMUNDA_HUB_CLIENT_SECRET="<client-secret>"
+export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
+export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
 export CAMUNDA_OAUTH_URL="https://login.cloud.camunda.io/oauth/token"
-export CAMUNDA_HUB_OAUTH_AUDIENCE="api.cloud.camunda.io"
+export CAMUNDA_CONSOLE_OAUTH_AUDIENCE="api.cloud.camunda.io"
 export CAMUNDA_HUB_REST_URL="https://hub.cloud.camunda.io"
 ```
 
@@ -183,8 +183,8 @@ Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-saas/authe
 In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance. There is no `audience`, and the Camunda Hub API is served from your own installation, which defaults to `http://localhost:8088`. Adjust the URLs to match your installation:
 
 ```bash
-export CAMUNDA_HUB_CLIENT_ID="<client-id>"
-export CAMUNDA_HUB_CLIENT_SECRET="<client-secret>"
+export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
+export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
 export CAMUNDA_OAUTH_URL="http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token"
 export CAMUNDA_HUB_REST_URL="http://localhost:8088"
 ```
