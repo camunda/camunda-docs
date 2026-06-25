@@ -33,7 +33,7 @@ Starting from Camunda 8.9, the Elasticsearch and OpenSearch exporters provide op
 - Optimize mode: Keeps only the record value types and intents required by Optimize and drops other record types not used by Optimize.
 
 :::warning
-These filters run **inside the exporter** and permanently drop matching records from the exported stream. Optimize cannot import data that was never exported, and dropped records cannot be recovered later — even if you relax the filters.
+These filters run **inside the exporter** and permanently drop matching records from the exported stream. Optimize cannot import data that was never exported, and dropped records cannot be recovered later, even if you relax the filters.
 :::
 
 #### Non‑retroactive filters and permanent gaps
