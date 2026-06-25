@@ -319,22 +319,19 @@ or use
 
 ## Find available container image versions
 
-When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment. Use [skopeo](https://github.com/containers/skopeo) to list available tags:
+When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment.
+
+For Camunda's own images, use [skopeo](https://github.com/containers/skopeo) to list available tags:
 
 ```shell
-# For open source images (no authentication required)
+# Open source images (no authentication required)
 skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe | jq '.RepoTags'
-
-# For enterprise images (requires authentication)
-skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
-# vendor-ee/* tag lists are incomplete since the November 2025 migration (see the registry migration notice); pull by exact tag.
-skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
 
-:::note Registry migration notice
-On November 30, 2025, the image vendor (Bitnami) migrated its repositories. This does not affect pulling images: you can still pull any image by its exact tag. It does affect tag listing. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI return only the tags cached since the migration, so the listed tags are incomplete. The registry stores cached images, not the full upstream catalog.
+:::note Bitnami Premium (`vendor-ee/*`) images
+Since the November 30, 2025 vendor migration, `skopeo` and the Harbor UI return only the `vendor-ee/*` tags cached since the migration, so registry tag listing is incomplete. Do not rely on it.
 
-For the list of supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull from a fully listed repository such as `registry.camunda.cloud/camunda/<image>` or `registry.camunda.cloud/keycloak-ee/keycloak`. For `vendor-ee/<image>` paths, pull or mirror by the exact tag instead of relying on the tag list.
+Use the published per-image feed instead, which is generated from the upstream catalog and is always complete: see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull or mirror it by its exact tag.
 :::
 
 ## Incorrect authorizations when deploying resources from Modeler
