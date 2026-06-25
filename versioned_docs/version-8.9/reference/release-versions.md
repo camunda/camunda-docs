@@ -38,7 +38,7 @@ Each release shows the component versions shipped together and links to the GitH
 
 **SaaS**: Generation numbers (for example, 8.9+gen9) indicate a patch deployment to the SaaS platform. A higher generation number means a newer patch within the same minor version.
 
-**Self-Managed:** Use the version tabs to find the component versions that correspond to your Helm chart release. See the [Camunda Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to map Helm chart versions to component versions.
+**Self-Managed:** Use the version tabs to find the component versions that correspond to your Helm chart release. See the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to map Helm chart versions to component versions.
 
 :::note Supported versions
 Not all minor versions receive ongoing patch releases. See [supported environments](/reference/supported-environments.md) to check actively maintained versions.
