@@ -120,8 +120,11 @@ spec:
 # IMPORTANT: dnsNames must match the actual Kubernetes Service name
 # that fronts the Orchestration gRPC port (26500). Confirm with:
 #   kubectl -n camunda get svc -l app.kubernetes.io/component=zeebe-gateway
-# In the chart 8.10 default layout this is `<release>-zeebe-gateway`
-# (kept for backward compatibility through the Orchestration rebrand).
+# The Service name derives from orchestration.serviceName; in the chart 8.10
+# default layout it is typically `<release>-zeebe-gateway` (the
+# zeebe-gateway component label is kept for backward compatibility through
+# the Orchestration rebrand). Always confirm the actual name with the
+# command above rather than assuming it.
 # Substitute your actual release name for `my-release` below.
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -318,10 +321,10 @@ After deploying, confirm the in-cluster endpoints match the chosen mode:
 kubectl -n <namespace> get ingress <release>-grpc \
   -o jsonpath='{.metadata.annotations.nginx\.ingress\.kubernetes\.io/backend-protocol}{"\n"}'
 
-kubectl -n <namespace> get configmap <release>-connectors \
+kubectl -n <namespace> get configmap <release>-connectors-configuration \
   -o jsonpath='{.data.application\.yaml}' | grep -E 'grpc-address|rest-address'
 
-kubectl -n <namespace> get configmap <release>-web-modeler-restapi \
+kubectl -n <namespace> get configmap <release>-web-modeler-restapi-configuration \
   -o jsonpath='{.data.application\.yaml}' | grep -E '^\s+(grpc|rest):'
 ```
 
