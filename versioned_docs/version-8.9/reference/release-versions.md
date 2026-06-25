@@ -34,8 +34,14 @@ Subscribe to the RSS feed for release updates and get automatic notifications wh
 
 ## About
 
-Camunda 8 releases are as follows (whatever we want to say about this page and releases)...
+Each release shows the component versions shipped together and links to the GitHub changelog for each component.
 
-See the [Camunda Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to find the Helm chart version for each Camunda release.
+**SaaS**: Generation numbers (for example, 8.9+gen9) indicate a patch deployment to the SaaS platform. A higher generation number means a newer patch within the same minor version.
+
+**Self-Managed:** Use the version tabs to find the component versions that correspond to your Helm chart release. See the [Camunda Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to map Helm chart versions to component versions.
+
+:::note Supported versions
+Not all minor versions receive ongoing patch releases. See [supported environments](/docs/reference/supported-environments/) to check actively maintained versions.
+:::
 
 <ReleaseVersions />
