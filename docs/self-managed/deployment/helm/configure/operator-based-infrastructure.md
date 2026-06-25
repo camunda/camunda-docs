@@ -45,7 +45,7 @@ Using official Kubernetes operators provides several advantages over traditional
 - **Advanced lifecycle management**: Automated upgrades, failover, and disaster recovery capabilities
 - **Best practices implementation**: Following upstream recommended deployment patterns established by vendor experts
 - **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies (through vendor support channels)
-- **Future-proof architecture**: Doesn't depend on deprecated Bitnami subcharts, ensuring long-term maintainability
+- **Future-proof architecture**: Eliminates dependency on third-party image supply chains (Bitnami/Broadcom), giving you direct control over infrastructure image sources, base OS, and update cadence. Bitnami subcharts are removed in Camunda 8.10.
 
 ## Prerequisites
 
