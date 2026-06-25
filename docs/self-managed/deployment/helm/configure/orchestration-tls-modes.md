@@ -302,7 +302,7 @@ With this configuration the chart:
 - Renders the Web Modeler REST API ConfigMap with `grpc: grpcs://<orchestration-grpc-service>:26500`.
 - Renders the Connectors ConfigMap with `grpc-address: https://<orchestration-grpc-service>:26500`.
 
-Trust material for in-cluster Java components flows through [`global.tls.caBundle`](./secret-management.md). The CA bundle is mounted as a Java truststore into Orchestration, Web Modeler, Connectors, and any other Java components in the release.
+Trust material for in-cluster Java components flows through [`global.tls.caBundle`](#recipe-cert-manager--lets-encrypt-or-internal-issuer). The CA bundle is mounted as a Java truststore into Orchestration, Web Modeler, Connectors, and any other Java components in the release.
 
 ## Verification
 
