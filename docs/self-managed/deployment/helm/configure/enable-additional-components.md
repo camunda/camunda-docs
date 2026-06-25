@@ -23,8 +23,8 @@ Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeeb
 - Elasticsearch
 - OpenSearch
 - RDBMS
-- PostgreSQL (Bitnami subchart) - only if needed for Web Modeler or Identity
-- Keycloak (Bitnami subchart) - only if using internal authentication
+- PostgreSQL (internal subchart) - only if needed for Web Modeler or Identity
+- Keycloak (internal subchart) - only if using internal authentication
 
 :::note Upgrading from 8.7?
 In Camunda 8.7, more components were enabled by default. If you're upgrading from 8.7 and used any of the components listed above, you must explicitly enable them in your 8.8 `values.yaml`.
@@ -59,7 +59,7 @@ To enable Web Modeler, configure the required values in the Helm chart. For the 
 - **Enable Management Identity** (required for authentication) - see [authentication and authorization](./authentication-and-authorization/index.md).
 - Configure your SMTP server under `webModeler.restapi.mail`. Web Modeler requires an SMTP server to send notification emails to users.
 - Configure the database connection. Web Modeler requires a PostgreSQL database for persistent storage. Other databases are not supported.
-  - **Option 1:** Set `webModelerPostgresql.enabled: true` to install a new PostgreSQL instance using the [Bitnami PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql).
+  - **Option 1:** Set `webModelerPostgresql.enabled: true` to install an internal PostgreSQL instance. On Camunda 8.9 and earlier this uses the [Bitnami PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql); from Camunda 8.10 the bundled Bitnami subchart is removed — provision PostgreSQL via [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or a managed service.
   - **Option 2:** Set `webModelerPostgresql.enabled: false` and connect to an external PostgreSQL instance.
 
 We recommend specifying values in a YAML file and passing it to the `helm install` command.

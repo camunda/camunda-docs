@@ -64,7 +64,7 @@ See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configu
 - Manage infrastructure lifecycle independently of Camunda applications
 - Implement your organization's security, backup, and monitoring standards
 
-If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
+Bitnami subcharts are removed in Camunda 8.10 (Helm chart `15.x`); provision [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services instead. On Camunda 8.9 and earlier, see [Install Bitnami enterprise images](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/) for Bitnami Premium image guidance.
 
 ### Observability
 

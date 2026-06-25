@@ -28,8 +28,8 @@ PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they a
 - **Operator support**: For operational support on infrastructure components, engage the respective project teams or community support channels directly (CloudNativePG, Elastic, Keycloak), or use managed services.
   :::
 
-:::note Alternative: Bitnami Enterprise Images
-If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
+:::note Bitnami subcharts (Camunda 8.9 and earlier)
+Bitnami subcharts are removed in Camunda 8.10 (Helm chart `15.x`). On Camunda 8.9 and earlier you could continue using them via [Bitnami enterprise images](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/); migrate to operators or managed services before upgrading to 8.10.
 :::
 
 <MigrationTip />

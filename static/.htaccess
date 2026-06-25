@@ -198,6 +198,10 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administr
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 
+# The "Install Bitnami enterprise images" page is removed in 8.10 (Bitnami images are no longer
+# usable from chart 15.x); redirect to the 8.9 page, the last version that documents them.
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/?$ /docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/ [R=301,L]
+
 # Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
 RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/operate-api/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]

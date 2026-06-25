@@ -32,6 +32,10 @@ component:
 
 ### Bitnami subchart pattern
 
+:::note Camunda 8.9 and earlier
+Bitnami subcharts are removed in Camunda 8.10 (Helm chart `15.x`). This pattern applies to **Camunda 8.9 and earlier**; see the [8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/secret-management/). For Camunda 8.10, configure secrets for your [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services instead.
+:::
+
 Some components use Bitnami subcharts for database services (PostgreSQL), which follow their own authentication patterns that differ from the main Camunda secret structure. These use the standard Bitnami PostgreSQL Helm chart pattern with `existingSecret` and `secretKeys` containing `adminPasswordKey` and `userPasswordKey`.
 
 The following Bitnami subchart configurations are available:

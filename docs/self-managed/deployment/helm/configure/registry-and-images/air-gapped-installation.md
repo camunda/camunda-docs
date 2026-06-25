@@ -56,6 +56,10 @@ Skip this section if you're using external managed services or separately deploy
 
 Choose one of the following image options:
 
+:::warning Bitnami subcharts are removed in Camunda 8.10
+Starting with Camunda 8.10 (Helm chart `15.x`), the bundled Bitnami subcharts (PostgreSQL, Elasticsearch, Keycloak) are removed. The Bitnami image options below apply to **Camunda 8.9 and earlier** — see the [8.9 air-gapped guide](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation/). For Camunda 8.10, mirror the images for your [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services instead.
+:::
+
 #### Option A: Open-source Bitnami images (community default)
 
 - [bitnamilegacy/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
@@ -77,7 +81,7 @@ These open-source images are the community default but are not recommended for p
 :::tip Enterprise benefits
 The `vendor-ee` registry provides proxied access to Bitnami Premium images from Broadcom, offering enhanced security patches, enterprise support, and compliance features.
 
-For detailed configuration and installation instructions, see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+For detailed configuration and installation instructions, see [Install Bitnami enterprise images](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/) in the Camunda 8.9 documentation.
 :::
 
 #### Camunda Keycloak images
@@ -148,7 +152,7 @@ skopeo copy --src-creds=<your-username>:<your-password> \
 - Replace `<your-username>` and `<your-password>` with your Camunda Enterprise LDAP credentials.
 - Replace `your-private-registry.com` with your actual private registry URL.
 - Use the image tags that match your Helm chart version requirements.
-- For a complete list of available enterprise images and their tags, see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+- For a complete list of available enterprise images and their tags, see [Install Bitnami enterprise images](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/) in the Camunda 8.9 documentation.
 
 ### Required Helm charts
 

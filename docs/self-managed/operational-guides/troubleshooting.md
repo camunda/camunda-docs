@@ -24,7 +24,7 @@ The security warning does not indicate a security vulnerability. This warning ca
 
 In both cases, the security warning is a precautionary measure from Bitnami's detection system and does not indicate a genuine security risk.
 
-For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#understanding-cves-in-bitnami-images).
+For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/#understanding-cves-in-bitnami-images) in the Camunda 8.9 documentation (Bitnami images are not used from Camunda 8.10).
 
 ### Suppress the warning
 
@@ -331,10 +331,6 @@ When working with custom registries or air-gapped environments, you may need to 
 ```shell
 # For open source images (no authentication required)
 skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe | jq '.RepoTags'
-
-# For enterprise images (requires authentication)
-skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
-skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
 
 ## Incorrect authorizations when deploying resources from Modeler
