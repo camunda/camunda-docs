@@ -100,7 +100,7 @@ and process values).
 | Option                           | Description                                                                                                                                                                                                | Default      |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | bpmnProcessIdExclusion           | Excludes all records with these BPMN process IDs. Exclusion wins over inclusion.                                                                        | `[]`         |
-| bpmnProcessIdInclusion           | Restricts exported records to these BPMN process IDs. If empty, all processes are included.                                                             | `[]`         |
+| bpmnProcessIdInclusion           | Restricts exported records to these BPMN process IDs. If empty, all processes are included. Value types without a `bpmnProcessId` (such as `DEPLOYMENT`, `DECISION`) are not affected by this filter.                                                             | `[]`         |
 | checkpoint                       | If `true` records related to checkpoints will be exported                                                                                                                                                  | `false`      |
 | command                          | If `true` command records will be exported                                                                                                                                                                 | `false`      |
 | command-distribution             | If `true` records related to command distributions will be exported                                                                                                                                        | `true`       |
@@ -123,7 +123,7 @@ and process values).
 | message-subscription             | If `true` records related to message subscriptions will be exported                                                                                                                                        | `true`       |
 | number-of-replicas               | The number of shard [replicas](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-index-level-index-settings) used for each new record index created. | 0            |
 | number-of-shards                 | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.          | 3            |
-| optimizeModeEnabled              | If `true`, restricts exported record types to those consumed by Optimize.                                                                                             | `false`      |
+| optimizeModeEnabled              | If `true`, restricts exported record types to those consumed by Optimize. Other value types are dropped. Use only when these indices are dedicated to Optimize.                                                                                             | `false`      |
 | prefix                           | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                    | zeebe-record |
 | process                          | If `true` records related to processes will be exported                                                                                                                                                    | `true`       |
 | process-event                    | If `true` records related to process events will be exported                                                                                                                                               | `false`      |
@@ -148,7 +148,7 @@ and process values).
 | variableNameInclusionExact       | Includes variables whose names exactly match. If empty, no name inclusion filter applies.                                                             | `[]`         |
 | variableNameInclusionStartWith   | Includes variables whose names start with these prefixes. If empty, no name inclusion filter applies.                                                 | `[]`         |
 | variableValueTypeExclusion       | Excludes variables of these inferred JSON types. Exclusion wins over inclusion.                                                                       | `[]`         |
-| variableValueTypeInclusion       | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included.        | `[]`         |
+| variableValueTypeInclusion       | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included. Use to drop large object or array payloads at export time.        | `[]`         |
 </TabItem>
 
 <TabItem value="bulk">
