@@ -41,7 +41,7 @@ Each release shows the component versions shipped together and links to the GitH
 **Self-Managed:** Use the version tabs to find the component versions that correspond to your Helm chart release. See the [Camunda Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to map Helm chart versions to component versions.
 
 :::note Supported versions
-Not all minor versions receive ongoing patch releases. See [supported environments](/reference/supported-environments/) to check actively maintained versions.
+Not all minor versions receive ongoing patch releases. See [supported environments](/reference/supported-environments.md) to check actively maintained versions.
 :::
 
 <ReleaseVersions />
