@@ -40,7 +40,9 @@ function VersionContent({ version }) {
         <strong>SaaS:</strong> {version.saas}
         {version.helm && (
           <>
-            {" "}&nbsp;&nbsp; <strong>Self-Managed:</strong> Helm chart {version.helm}
+            {" "}
+            &nbsp;&nbsp; <strong>Self-Managed:</strong> Helm chart{" "}
+            {version.helm}
           </>
         )}
       </p>
@@ -60,7 +62,12 @@ function VersionContent({ version }) {
                 {component.subtext && (
                   <>
                     <br />
-                    <span style={{ fontSize: "0.85em", color: "var(--ifm-color-emphasis-700)" }}>
+                    <span
+                      style={{
+                        fontSize: "0.85em",
+                        color: "var(--ifm-color-emphasis-700)",
+                      }}
+                    >
                       ({component.subtext})
                     </span>
                   </>
@@ -71,7 +78,13 @@ function VersionContent({ version }) {
                 {component.links.map((link, i) => (
                   <React.Fragment key={link.label}>
                     {i > 0 && " · "}
-                    <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.label}
+                    </a>
                   </React.Fragment>
                 ))}
               </td>
@@ -92,12 +105,18 @@ function ReleaseEntry({ release }) {
       <Heading
         as="h3"
         id={release.date}
-        style={{ marginTop: "calc(var(--ifm-h3-vertical-rhythm-top, 2) * var(--ifm-leading, 1.25rem))" }}
+        style={{
+          marginTop:
+            "calc(var(--ifm-h3-vertical-rhythm-top, 2) * var(--ifm-leading, 1.25rem))",
+        }}
       >
         {formatDate(release.date)}
       </Heading>
       {multiVersion ? (
-        <Tabs groupId="camunda-version" defaultValue={minorVersion(versions[0].saas)}>
+        <Tabs
+          groupId="camunda-version"
+          defaultValue={minorVersion(versions[0].saas)}
+        >
           {versions.map((version) => {
             const minor = minorVersion(version.saas);
             const label = version.label ? `${minor} — ${version.label}` : minor;
@@ -117,7 +136,8 @@ function ReleaseEntry({ release }) {
 
 function MonthGroup({ month, monthReleases, isLatest }) {
   const id = monthId(monthReleases[0].date);
-  const topMargin = "calc(var(--ifm-h2-vertical-rhythm-top, 3) * var(--ifm-leading, 1.25rem))";
+  const topMargin =
+    "calc(var(--ifm-h2-vertical-rhythm-top, 3) * var(--ifm-leading, 1.25rem))";
   const [open, setOpen] = React.useState(false);
   const content = monthReleases.map((release) => (
     <ReleaseEntry key={release.date} release={release} />
@@ -126,7 +146,9 @@ function MonthGroup({ month, monthReleases, isLatest }) {
   if (isLatest) {
     return (
       <section style={{ overflow: "hidden" }}>
-        <Heading as="h2" id={id} style={{ marginTop: topMargin }}>{month}</Heading>
+        <Heading as="h2" id={id} style={{ marginTop: topMargin }}>
+          {month}
+        </Heading>
         {content}
         <hr />
       </section>
@@ -141,13 +163,17 @@ function MonthGroup({ month, monthReleases, isLatest }) {
     >
       <summary style={{ listStyle: "none", cursor: "pointer" }}>
         <Heading as="h2" id={id} style={{ marginTop: 0 }}>
-          <span style={{
-            display: "inline-block",
-            marginRight: "0.4em",
-            fontSize: "0.7em",
-            transform: open ? "rotate(90deg)" : "rotate(0deg)",
-            transition: "transform 0.2s",
-          }}>▶</span>
+          <span
+            style={{
+              display: "inline-block",
+              marginRight: "0.4em",
+              fontSize: "0.7em",
+              transform: open ? "rotate(90deg)" : "rotate(0deg)",
+              transition: "transform 0.2s",
+            }}
+          >
+            ▶
+          </span>
           {month}
         </Heading>
       </summary>
@@ -165,7 +191,11 @@ export default function ReleaseVersions() {
     const key = monthKey(release.date);
     if (!seen.has(key)) {
       seen.set(key, []);
-      groups.push({ key, label: formatMonth(release.date), releases: seen.get(key) });
+      groups.push({
+        key,
+        label: formatMonth(release.date),
+        releases: seen.get(key),
+      });
     }
     seen.get(key).push(release);
   }
@@ -173,7 +203,12 @@ export default function ReleaseVersions() {
   return (
     <>
       {groups.map(({ key, label, releases: monthReleases }, i) => (
-        <MonthGroup key={key} month={label} monthReleases={monthReleases} isLatest={i === 0} />
+        <MonthGroup
+          key={key}
+          month={label}
+          monthReleases={monthReleases}
+          isLatest={i === 0}
+        />
       ))}
     </>
   );
