@@ -45,6 +45,12 @@ Compatibility is confirmed for [Camunda Helm chart releases version 11 and above
 
 You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks/). Below is a quick reference for common usage options:
 
+<!-- REVIEW(8.10): the c8-sm-checks default PostgreSQL component list and the example output below reference `identityKeycloak`, which is removed in chart 15.x. This is the external c8-sm-checks script's concern (not chart config) — a human should confirm the current script defaults and update these examples if the script changed for 8.10. -->
+
+:::note Pending review for 8.10
+The `c8-sm-checks` default PostgreSQL component list (`identityKeycloak,identity,webModeler`) and the example output below reference `identityKeycloak`, which is **removed in Camunda 8.10** (chart `15.x`). These come from the external [c8-sm-checks](https://github.com/camunda/c8-sm-checks/) script, not the chart — verify the current script defaults and update these examples for 8.10.
+:::
+
 ```bash
 Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p] [-l] [-s]
 Options:
