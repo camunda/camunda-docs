@@ -706,7 +706,7 @@ An LLM-as-judge assertion that evaluates a variable against a semantic expectati
   </tr>
   <tr>
     <td>attachDocuments</td>
-    <td>When true, resolves Camunda document references in the variable value and attaches their content to the judge. Overrides the configured <code>attach-documents</code> setting. Requires a multimodal-capable model. See <a href="configuration.md#document-attachment">document attachment</a>.</td>
+    <td>When true, resolves Camunda document references in the variable value and attaches their content to the judge. Overrides the configured <code>judge.attach-documents</code> setting. To evaluate attached content, use a multimodal-capable model; otherwise CPT evaluates only the raw variable JSON. See <a href="configuration.md#document-attachment">document attachment</a>.</td>
     <td>boolean</td>
     <td>No</td>
   </tr>
