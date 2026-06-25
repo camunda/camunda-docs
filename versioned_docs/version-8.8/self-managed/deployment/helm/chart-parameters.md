@@ -42,7 +42,7 @@ For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestr
 :::warning Bitnami subcharts deprecated — action required before upgrading to 8.10
 Bitnami subcharts are intended for development, testing, and transitional use only. They are deprecated in Camunda 8.9 and will be **removed in Camunda 8.10**. Migrate all production deployments to externally managed services or Kubernetes operators before upgrading.
 
-See [Deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for the recommended approach, or [Migrate from Bitnami subcharts](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/) for step-by-step migration instructions.
+See [Deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for the recommended approach, or [Migrate from Bitnami subcharts](/versioned_docs/version-8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for step-by-step migration instructions.
 :::
 
 ### Observability

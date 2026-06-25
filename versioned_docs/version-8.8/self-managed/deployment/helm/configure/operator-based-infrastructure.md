@@ -28,7 +28,7 @@ PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they a
   :::
 
 :::warning Transitional path: Bitnami enterprise images (deprecated in 8.9)
-If you're still using Bitnami subcharts during migration, you can continue with Bitnami Premium images through Camunda 8.9. Bitnami subcharts will be **removed in Camunda 8.10** — complete your migration before upgrading. See [Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for transitional configuration, or [Migrate from Bitnami subcharts](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/) for migration instructions.
+If you're still using Bitnami subcharts during migration, you can continue with Bitnami Premium images through Camunda 8.9. Bitnami subcharts will be **removed in Camunda 8.10** — complete your migration before upgrading. See [Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for transitional configuration, or [Migrate from Bitnami subcharts](/versioned_docs/version-8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for migration instructions.
 :::
 
 ## Why use Kubernetes operators?

@@ -6,7 +6,7 @@ description: Configure the Camunda Helm chart to use Bitnami Premium enterprise 
 ---
 
 :::warning Bitnami subcharts deprecated — migrate before upgrading to 8.10
-Bitnami subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in Camunda 8.9 and will be **removed in Camunda 8.10** (Helm chart `15.x`, planned Q4 2026). This page documents a transitional configuration. For new and existing production deployments, migrate to externally managed infrastructure or managed cloud services before upgrading. See [Migrate from Bitnami subcharts](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/) for step-by-step instructions.
+Bitnami subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in Camunda 8.9 and will be **removed in Camunda 8.10** (Helm chart `15.x`). This page documents a transitional configuration. For new and existing production deployments, migrate to externally managed infrastructure or managed cloud services before upgrading. See [Migrate from Bitnami subcharts](/versioned_docs/version-8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for step-by-step instructions.
 :::
 
 This guide explains how to configure the Camunda Helm chart to use Bitnami Premium images designed for production environments. These images are referred to as Enterprise images, indicating that they are intended for Camunda Enterprise customers. The guide also covers configuration steps, security considerations, CVE reporting, and best practices.
@@ -28,7 +28,7 @@ Bitnami Premium images do not change Camunda's support policy for infrastructure
 Previously, some users deployed Bitnami subcharts in production. Starting with Camunda 8.8, Bitnami subcharts are primarily intended for development and testing unless your teams have specific expertise running Bitnami charts in production.
 
 For existing users:
-Bitnami subcharts remain functional in Camunda 8.8 and 8.9 to support your migration. Plan and complete your migration to externally managed services or Kubernetes operators before upgrading to Camunda 8.10. See [Changes to Camunda Helm Sub-Charts](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/) for background and [Migrate from Bitnami subcharts](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/) for step-by-step instructions.
+Bitnami subcharts remain functional in Camunda 8.8 and 8.9 to support your migration. The migration must run while on Camunda 8.9 — upgrade from 8.8 to 8.9 first, complete the Bitnami migration, then upgrade from 8.9 to 8.10. See [Changes to Camunda Helm Sub-Charts](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/) for background and [Migrate from Bitnami subcharts](/versioned_docs/version-8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for step-by-step instructions.
 
 ### Alternative for production deployments
 
@@ -234,7 +234,7 @@ When using Bitnami images, consider these constraints:
 | 8.9             | Deprecated; disabled by default in new installs                |
 | 8.10            | **Removed** — subcharts are not available in Helm chart `15.x` |
 
-Migrate to [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed cloud services before upgrading to 8.10. See [Migrate from Bitnami subcharts](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/) for the full guide.
+Migrate to [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed cloud services before upgrading to 8.10. See [Migrate from Bitnami subcharts](/versioned_docs/version-8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for the full guide.
 
 ## Compatibility note
 
