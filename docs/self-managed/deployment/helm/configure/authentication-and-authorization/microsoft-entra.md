@@ -268,6 +268,7 @@ global:
 identity:
   enabled: true
 
+# TODO(8.10): identityPostgresql / webModelerPostgresql (Bitnami PostgreSQL subcharts) are removed in chart 15.x — provide PostgreSQL via the CloudNativePG operator or a managed service (see operator-based-infrastructure.md). Rewrite pending first review.
 identityPostgresql:
   enabled: true
   auth:

@@ -67,6 +67,7 @@ This secret includes the following keys:
 Enable the Keycloak subchart and configure it to use the secret:
 
 ```yaml
+# TODO(8.10): identityKeycloak (Bitnami Keycloak subchart) is removed in chart 15.x — deploy Keycloak via the Keycloak operator and connect with global.identity.keycloak.* instead (see operator-based-infrastructure.md). Rewrite pending first review.
 identityKeycloak:
   enabled: true
   auth:

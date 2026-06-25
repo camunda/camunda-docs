@@ -116,6 +116,7 @@ identity:
       existingSecret: "camunda-credentials"
       existingSecretKey: "identity-firstuser-password"
 
+# TODO(8.10): identityKeycloak / webModelerPostgresql (Bitnami subcharts) are removed in chart 15.x — deploy Keycloak via the Keycloak operator and PostgreSQL via the CloudNativePG operator or a managed service (see operator-based-infrastructure.md). Rewrite pending first review.
 identityKeycloak:
   enabled: true
   auth:

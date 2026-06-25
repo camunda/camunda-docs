@@ -677,6 +677,7 @@ optimize:
   contextPath: /optimize
 identity:
   enabled: false
+# TODO(8.10): identityKeycloak / webModelerPostgresql / elasticsearch (Bitnami subcharts) are removed in chart 15.x — these `enabled: false` toggles no longer exist; configure operator-based or managed Keycloak/PostgreSQL/Elasticsearch instead (see operator-based-infrastructure.md). Rewrite pending first review.
 identityKeycloak:
   enabled: false
 webModeler:

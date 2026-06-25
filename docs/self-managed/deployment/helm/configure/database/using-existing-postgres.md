@@ -91,6 +91,7 @@ identity:
       existingSecretKey: "password"
     database: "management-identity"
 
+# TODO(8.10): identityKeycloak.externalDatabase (Bitnami Keycloak subchart) is removed in chart 15.x — Keycloak is deployed via the Keycloak operator in 8.10; configure its database there instead (see operator-based-infrastructure.md). Rewrite pending first review.
 identityKeycloak:
   externalDatabase:
     url: "jdbc:postgresql://db.example.com:5432/modeler"

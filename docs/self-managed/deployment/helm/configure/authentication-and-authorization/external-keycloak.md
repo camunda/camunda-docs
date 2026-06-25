@@ -240,6 +240,7 @@ webModeler:
     mail:
       fromAddress: noreply@example.com
 
+# TODO(8.10): webModelerPostgresql (Bitnami PostgreSQL subchart) is removed in chart 15.x — provide PostgreSQL via the CloudNativePG operator or a managed service (see operator-based-infrastructure.md). Rewrite pending first review.
 webModelerPostgresql:
   enabled: true
   auth:
