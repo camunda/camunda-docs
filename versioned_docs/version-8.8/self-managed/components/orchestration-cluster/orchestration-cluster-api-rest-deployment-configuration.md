@@ -38,7 +38,7 @@ If you are not using Helm and increase this value, you must also adjust the conf
 
 ### REST API server configuration
 
-If you're using the REST API and submitting files via multipart upload (e.g., using `POST /v2/deployments`), make sure your application is configured to accept the updated request sizes. If you increase the `maxMessageSize` to 10MB, increase these property values to 10MB as well.
+If you're increasing the `maxMessageSize` and using the REST API for multipart uploads (for example, using `POST /v2/deployments`), you must configure your application to accept the updated request sizes. If you increase the `maxMessageSize` to 10MB, increase these property values to 10MB as well.
 
 For Spring Boot applications:
 
