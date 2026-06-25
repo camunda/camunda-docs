@@ -69,14 +69,14 @@ kubectl -n "$NAMESPACE" create secret generic camunda-ca-bundle \
 Download the overlay (ships in the chart repo, not in the `helm repo` cache):
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.10/values-tls.yaml
+curl -fsSLO https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.9/values-tls.yaml
 ```
 
 Install or upgrade with the overlay:
 
 ```bash
 helm upgrade --install camunda camunda/camunda-platform \
-  --version 15.x \
+  --version 14.x \
   --namespace "$NAMESPACE" \
   -f values-tls.yaml \
   -f your-values.yaml
@@ -279,7 +279,7 @@ Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` anno
 
 ## Legacy: per-component JKS truststore (deprecated)
 
-Deprecated as of chart 15.x. Affected fields:
+Deprecated as of chart 14.x. Affected fields:
 
 - `global.elasticsearch.tls.secret.existingSecret` / `existingSecretKey`
 - `global.opensearch.tls.secret.existingSecret` / `existingSecretKey`
@@ -334,4 +334,4 @@ Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). 
 ## Related
 
 - [Helm chart TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md) — per-connection support level
-- [Helm chart `values-tls.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.10/values-tls.yaml) — the overlay this guide describes
+- [Helm chart `values-tls.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.9/values-tls.yaml) — the overlay this guide describes
