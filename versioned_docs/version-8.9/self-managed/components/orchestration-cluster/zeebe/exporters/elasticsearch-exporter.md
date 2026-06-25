@@ -65,7 +65,7 @@ camunda:
   data:
     exporters:
       elasticsearch:
-        class-name: io.camunda.zeebe.exporter.ElasticsearchExporter
+        className: io.camunda.zeebe.exporter.ElasticsearchExporter
         args:
         # Refer to the table below for the available args options
 ```
@@ -160,9 +160,9 @@ camunda:
       elasticsearch:
         args:
           index:
-            variable-name-inclusion-start-with:
+            variableNameInclusionStartWith:
               - business_
-            variable-name-exclusion-start-with:
+            variableNameExclusionStartWith:
               - business_debug
 ```
 
@@ -184,10 +184,10 @@ camunda:
       elasticsearch:
         args:
           index:
-            variable-value-type-inclusion:
+            variableValueTypeInclusion:
               - Object
               - String
-            variable-value-type-exclusion:
+            variableValueTypeExclusion:
               - Object
 ```
 
@@ -207,9 +207,9 @@ camunda:
       elasticsearch:
         args:
           index:
-            bpmn-process-id-inclusion:
+            bpmnProcessIdInclusion:
               - orderProcess
-            bpmn-process-id-exclusion:
+            bpmnProcessIdExclusion:
               - debugProcess
 ```
 
@@ -230,7 +230,7 @@ camunda:
       elasticsearch:
         args:
           index:
-            optimize-mode-enabled: true
+            optimizeModeEnabled: true
 ```
 
 When enabled, the exporter emits only the value types and intents that Optimize imports. Other value types are dropped unless you explicitly opt in to the legacy behavior (for example, via `include-enabled-records`).
@@ -314,7 +314,7 @@ camunda:
         # These settings can also be overridden using environment variables "CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_..."
         #
 
-        class-name: io.camunda.zeebe.exporter.ElasticsearchExporter
+        className: io.camunda.zeebe.exporter.ElasticsearchExporter
         args:
           # A comma separated list of URLs pointing to the Elasticsearch instances you wish to export to.
           # For example, if you want to connect to multiple nodes for redundancy:
@@ -324,12 +324,12 @@ camunda:
           bulk:
             delay: 5
             size: 1000
-            memory-limit: 10485760
+            memoryLimit: 10485760
 
           retention:
             enabled: true
-            minimum-age: 30d
-            policy-name: zeebe-records-retention-policy
+            minimumAge: 30d
+            policyName: zeebe-records-retention-policy
 
           authentication:
             username: elastic
@@ -337,43 +337,43 @@ camunda:
 
           index:
             prefix: zeebe-record
-            create-template: true
+            createTemplate: true
 
-            index-suffix-date-pattern: "yyyy-MM-dd"
+            indexSuffixDatePattern: "yyyy-MM-dd"
 
             command: false
             event: true
             rejection: false
 
-            command-distribution: true
-            decision-requirements: true
+            commandDistribution: true
+            decisionRequirements: true
             decision: true
-            decision-evaluation: true
+            decisionEvaluation: true
             deployment: true
-            deployment-distribution: true
+            deploymentDistribution: true
             error: true
             escalation: true
             form: true
             incident: true
             job: true
-            job-batch: false
+            jobBatch: false
             message: true
-            message-start-subscription: true
-            message-subscription: true
+            messageStartSubscription: true
+            messageSubscription: true
             process: true
-            process-event: false
-            process-instance: true
-            process-instance-creation: true
-            process-instance-migration: true
-            process-instance-modification: true
-            process-message-subscription: true
-            resource-deletion: true
+            processEvent: false
+            processInstance: true
+            processInstanceCreation: true
+            processInstanceMigration: true
+            processInstanceModification: true
+            processMessageSubscription: true
+            resourceDeletion: true
             signal: true
-            signal-subscription: true
+            signalSubscription: true
             timer: true
-            user-task: true
+            userTask: true
             variable: true
-            variable-document: true
+            variableDocument: true
 ```
 
 ## Self-signed certificates
