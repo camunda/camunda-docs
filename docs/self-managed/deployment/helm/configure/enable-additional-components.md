@@ -23,13 +23,11 @@ Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeeb
 - Elasticsearch
 - OpenSearch
 - RDBMS
-- PostgreSQL (external: managed service or Kubernetes operator) - only if needed for Web Modeler or Identity
-- Keycloak (external: managed service or Kubernetes operator) - only if using internal authentication
+- PostgreSQL - only if needed for Web Modeler or Identity
+- Keycloak - only if using internal authentication
 
-:::note Upgrading from 8.7?
-In Camunda 8.7, more components were enabled by default. If you're upgrading from 8.7 and used any of the components listed above, you must explicitly enable them in your 8.8 `values.yaml`.
-
-See the [8.7 to 8.8 upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/helm/870-to-880.md#ensure-required-components) for upgrade-specific instructions.
+:::note Infrastructure dependencies
+PostgreSQL, Keycloak, and Elasticsearch are no longer bundled in Camunda 8.10 (the Bitnami subcharts were removed). Provide them through managed services or Kubernetes operators — see [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 :::
 
 ## Management Identity
@@ -58,7 +56,7 @@ To enable Web Modeler, configure the required values in the Helm chart. For the 
 - Set `webModeler.enabled: true` (disabled by default).
 - **Enable Management Identity** (required for authentication) - see [authentication and authorization](./authentication-and-authorization/index.md).
 - Configure your SMTP server under `webModeler.restapi.mail`. Web Modeler requires an SMTP server to send notification emails to users.
-- Configure the database connection. Web Modeler requires an external PostgreSQL database for persistent storage, provided through a managed service or a Kubernetes operator (see [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md)). Other databases are not supported. Set `webModelerPostgresql.enabled: false` and connect Web Modeler to your external PostgreSQL instance.
+- Configure the database connection. Web Modeler requires an external PostgreSQL database for persistent storage, provided through a managed service or a Kubernetes operator (see [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md)). Other databases are not supported. Configure the connection under `webModeler.restapi.externalDatabase` (see the example below).
 
 We recommend specifying values in a YAML file and passing it to the `helm install` command.
 
@@ -80,14 +78,9 @@ webModeler:
       secret:
         existingSecret: "camunda-credentials-webmodeler"
         existingSecretKey: "webmodeler-smtp-user-password"
-
-webModelerPostgresql:
-  # The bundled PostgreSQL subchart was removed in Camunda 8.10; connect to an
-  # external PostgreSQL instead (see the external database example below).
-  enabled: false
 ```
 
-To connect Web Modeler to an external database, set `webModelerPostgresql.enabled: false` and provide values under `webModeler.restapi.externalDatabase`:
+To connect Web Modeler to an external database, provide values under `webModeler.restapi.externalDatabase`:
 
 ```yaml
 webModeler:
@@ -100,10 +93,6 @@ webModeler:
       secret:
         existingSecret: "camunda-credentials-webmodeler"
         existingSecretKey: "webmodeler-postgresql-user-password"
-
-webModelerPostgresql:
-  # Disables the PostgreSQL chart dependency.
-  enabled: false
 ```
 
 For more details, see the [Web Modeler Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
