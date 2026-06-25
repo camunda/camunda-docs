@@ -249,10 +249,10 @@ You can use two types of assertions to verify the agent output:
 
 ### When to use judge vs. similarity
 
-| Assertion                                               | Best for                                                                                                       | Cost                                                                                                                  |
-| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [Judge](#verify-with-judge-assertions)                  | Open-ended natural-language criteria, multi-part expectations, structured data, anything that needs reasoning. | One extra LLM call per assertion. Score and explanation depend on the configured judge model.                         |
-| [Semantic similarity](#verify-with-semantic-similarity) | Checks where a concrete reference text is close to a variable's actual content. Deterministic and fast.        | One embedding call per value. No reasoning step, so it cannot evaluate criteria that aren't expressed in the wording. |
+| Assertion                                               | Best for                                                                                                                                                                                                                                | Cost                                                                                                                  |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [Judge](#verify-with-judge-assertions)                  | Open-ended natural-language criteria, multi-part expectations, structured data, Camunda document content (with [document attachment](/apis-tools/testing/configuration.md#document-attachment) enabled), anything that needs reasoning. | One extra LLM call per assertion. Score and explanation depend on the configured judge model.                         |
+| [Semantic similarity](#verify-with-semantic-similarity) | Checks where a concrete reference text is close to a variable's actual content. Deterministic and fast.                                                                                                                                 | One embedding call per value. No reasoning step, so it cannot evaluate criteria that aren't expressed in the wording. |
 
 :::tip
 
@@ -262,7 +262,9 @@ You can use two types of assertions to verify the agent output:
 
 #### Limitations
 
-- Both judge and semantic similarity assertions operate on the **serialized JSON string** of a process variable. Neither can evaluate non-textual content such as [Camunda documents](/components/document-handling/getting-started.md) or other embedded binaries. In those cases, only metadata or encoded strings reach the assertion.
+- Judge assertions support Camunda document evaluation when [document attachment](/apis-tools/testing/configuration.md#document-attachment) is enabled. When enabled, document references in the variable are resolved and their content is passed to the judge as structured content blocks.
+
+- Semantic similarity assertions operate on the **serialized JSON string** of a process variable and cannot evaluate non-textual content such as [Camunda documents](/components/document-handling/getting-started.md) or other embedded binaries. In those cases, only metadata or encoded strings reach the assertion.
 
 - Semantic similarity assertions compare the serialized variable against the expected string using a vector space. Highly structured variables, such as JSON objects with many fields, may score lower than expected even when the semantic meaning matches.
 

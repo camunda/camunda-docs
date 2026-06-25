@@ -1011,10 +1011,11 @@ Unless noted otherwise, properties in the provider tables are required.
 
 #### Judge settings
 
-| Property              | Type     | Default | Description                                              |
-| --------------------- | -------- | ------- | -------------------------------------------------------- |
-| `judge.threshold`     | `double` | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass. |
-| `judge.custom-prompt` | `string` |         | Custom evaluation prompt replacing the default criteria. |
+| Property                 | Type      | Default | Description                                                                                                                                                                                                                                                     |
+| ------------------------ | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `judge.threshold`        | `double`  | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass.                                                                                                                                                                                                        |
+| `judge.custom-prompt`    | `string`  |         | Custom evaluation prompt replacing the default criteria.                                                                                                                                                                                                        |
+| `judge.attach-documents` | `boolean` | `false` | When `true`, resolves Camunda document references in the evaluated variable and attaches their content to the judge. Disabled by default to avoid unnecessary token cost. Requires a multimodal-capable model. See [document attachment](#document-attachment). |
 
 The default threshold of `0.5` treats a response as acceptable when it is at least partially satisfied according to the
 judge rubric. This is a practical default for AI-generated output, where wording and level of detail may vary between
@@ -1201,6 +1202,63 @@ camunda:
 
 </Tabs>
 
+### Document attachment
+
+When `attach-documents` is enabled, CPT scans the serialized variable JSON for [Camunda document](/components/document-handling/getting-started.md) references, downloads their content, and passes them to the judge alongside the text prompt as structured content blocks. This lets the judge evaluate actual document content, such as generated PDFs, images, or structured text files, allowing the judge to reason on the content of the documents.
+
+Document attachment is disabled by default. Enable it globally:
+
+<Tabs groupId="client" defaultValue="spring-sdk-attach" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk-attach' },
+{label: 'Java client', value: 'java-client-attach' },
+]}>
+
+<TabItem value='spring-sdk-attach'>
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      attach-documents: true
+```
+
+</TabItem>
+
+<TabItem value='java-client-attach'>
+
+```properties
+judge.attachDocuments=true
+```
+
+</TabItem>
+
+</Tabs>
+
+Or enable it per assertion using `withJudgeConfig`:
+
+```java
+assertThat(processInstance)
+    .withJudgeConfig(config -> config.withAttachDocuments(true))
+    .hasVariableSatisfiesJudge("report", "Contains an executive summary with at least three key findings.");
+```
+
+#### Content type handling
+
+How the document is passed to the judge depends on its MIME content type:
+
+| Content type                                                                                                                                            | Passed to judge as                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `image/*`                                                                                                                                               | Inline image block                                                      |
+| `application/pdf`                                                                                                                                       | PDF file block                                                          |
+| `text/*`, `application/json`, `application/xml`, `application/yaml`, `application/x-yaml`, or types with a structured suffix (`+json`, `+xml`, `+yaml`) | Inline text block (UTF-8)                                               |
+| All other types                                                                                                                                         | Placeholder text only; content is not inspectable. A warning is logged. |
+
+#### Behavior
+
+- All built-in providers support multimodal input. Custom `ChatModelAdapter` implementations must implement `MultimodalChatModelAdapter` to receive documents; otherwise document attachment does not take effect and the judge evaluates only the raw variable JSON.
+- Documents with the same document ID and store ID are deduplicated and downloaded once.
+- If a document fails to download, the assertion fails with an `IllegalStateException`.
+
 ### Custom prompt
 
 You can replace the default evaluation criteria with a custom prompt. The custom prompt replaces only the evaluation
@@ -1372,6 +1430,42 @@ CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
 </TabItem>
 
 </Tabs>
+
+#### Multimodal support
+
+To use [document attachment](#document-attachment) with a custom adapter, implement `MultimodalChatModelAdapter` instead of `ChatModelAdapter`. `MultimodalChatModelAdapter` extends `ChatModelAdapter` and adds a second `generate` overload that receives the resolved documents.
+
+Each `ResolvedDocument` provides the binary content via `getContent()` and metadata via `getDocumentId()`, `getFileName()`, and `getContentType()`. Pass each document to the provider as a native structured content block (image block, file block, or text block depending on the content type). Prefix each block with a text content header containing the document metadata so the judge can correlate the block back to the document reference in `<actual_value>`:
+
+```java
+public class MyMultimodalAdapter implements MultimodalChatModelAdapter {
+
+    @Override
+    public String generate(String prompt) {
+        return myClient.chat(prompt);
+    }
+
+    @Override
+    public String generate(String prompt, List<ResolvedDocument> documents) {
+        List<Object> parts = new ArrayList<>();
+        parts.add(new TextPart(prompt));
+
+        for (ResolvedDocument doc : documents) {
+            // text header identifying this document block
+            parts.add(new TextPart(
+                "--- documentId=\"" + doc.getDocumentId()
+                + "\" fileName=\"" + doc.getFileName()
+                + "\" contentType=\"" + doc.getContentType() + "\" ---"));
+            // binary content as a native structured block
+            parts.add(new BinaryPart(doc.getContent(), doc.getContentType()));
+        }
+
+        return myClient.chat(parts);
+    }
+}
+```
+
+Replace `TextPart` and `BinaryPart` with the content-block types your provider's SDK defines. If document attachment is enabled but the adapter only implements `ChatModelAdapter`, document attachment does not take effect and the judge evaluates only the raw variable JSON.
 
 ## Semantic similarity configuration
 
