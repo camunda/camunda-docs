@@ -211,7 +211,7 @@ openssl x509 -req -days 365 -in cert.csr -signkey private_key.pem -out cert.crt
 
 This generates a self-signed certificate named `cert.crt` valid for 365 days.
 
-You can now use it with the private key to register an app in Microsoft Entra, and configure your Azure git sync configuration.
+You can now use it with the private key to register an app in Microsoft Entra, and configure your Azure Git sync configuration.
 
 </TabItem>
 <TabItem value='bitbucket'>

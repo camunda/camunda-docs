@@ -729,8 +729,17 @@ module.exports = {
               ],
             },
             {
-              type: "doc",
-              id: "components/hub/organization/manage-catalog/manage-catalog",
+              type: "category",
+              label: "Manage the catalog",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-catalog/manage-catalog",
+              },
+              items: [
+                "components/hub/organization/manage-catalog/getting-started-catalog",
+                "components/hub/organization/manage-catalog/manage-asset-lifecycle",
+                "components/hub/organization/manage-catalog/sync-multiple-repositories",
+              ],
             },
             {
               type: "category",
@@ -876,6 +885,7 @@ module.exports = {
                       items: [
                         "components/hub/workspace/modeler/element-templates/element-template-generator",
                         "components/hub/workspace/modeler/element-templates/using-templates-in-modeler",
+                        "components/hub/workspace/modeler/element-templates/use-catalog-assets",
                         "components/hub/workspace/modeler/element-templates/save-as-element-templates",
                         "components/hub/workspace/modeler/element-templates/best-practices",
                       ],
