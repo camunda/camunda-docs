@@ -48,111 +48,26 @@ The following images must be available in your air-gapped environment:
 
 **Infrastructure images:**
 
-:::info When are infrastructure images needed?
-For air-gapped deployments, you must mirror Bitnami infrastructure images only if you use the embedded subcharts. These include PostgreSQL (for Identity and Web Modeler), Elasticsearch (for data storage), and Keycloak (for authentication).
-
-Skip this section if you're using external managed services or separately deployed infrastructure.
-:::
-
-Choose one of the following image options:
-
-:::warning Bitnami subcharts are removed in Camunda 8.10
-Starting with Camunda 8.10 (Helm chart `15.x`), the bundled Bitnami subcharts (PostgreSQL, Elasticsearch, Keycloak) are removed. The Bitnami image options below apply to **Camunda 8.9 and earlier** — see the [8.9 air-gapped guide](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation/). For Camunda 8.10, mirror the images for your [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services instead.
-:::
-
-#### Option A: Open-source Bitnami images (community default)
-
-- [bitnamilegacy/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
-- [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) (tag: `bitnami-*`)
-- [bitnamilegacy/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
-- [bitnamilegacy/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
-
-:::warning Not recommended for production
-These open-source images are the community default but are not recommended for production environments due to security and support limitations. Customers should transition to Option B or use managed infrastructure services.
-:::
-
-#### Option B: Enterprise Bitnami Premium images (recommended)
-
-- `registry.camunda.cloud/vendor-ee/postgresql` (requires enterprise credentials)
-- `registry.camunda.cloud/keycloak-ee/keycloak` (tag: `bitnami-ee-*`, requires enterprise credentials)
-- `registry.camunda.cloud/vendor-ee/os-shell` (requires enterprise credentials)
-- `registry.camunda.cloud/vendor-ee/elasticsearch` (requires enterprise credentials)
-
-:::tip Enterprise benefits
-The `vendor-ee` registry provides proxied access to Bitnami Premium images from Broadcom, offering enhanced security patches, enterprise support, and compliance features.
-
-For detailed configuration and installation instructions, see [Install Bitnami enterprise images](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/) in the Camunda 8.9 documentation.
-:::
-
-#### Camunda Keycloak images
-
-Camunda provides custom [Keycloak images](https://github.com/camunda/keycloak) that include the AWS JDBC wrapper and Camunda Identity theme. These images follow Bitnami's environment variable conventions.
-
-| Variant     | Registry                                                                | Tag prefix     | Availability                 |
-| ----------- | ----------------------------------------------------------------------- | -------------- | ---------------------------- |
-| Open-source | [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) | `bitnami-*`    | Public (Docker Hub)          |
-| Enterprise  | `registry.camunda.cloud/keycloak-ee/keycloak`                           | `bitnami-ee-*` | Camunda Enterprise customers |
-
-For backward compatibility, both variants are also available without the prefix in their respective registries.
+In Camunda 8.10, the Helm chart no longer bundles infrastructure: the Bitnami subcharts for PostgreSQL, Elasticsearch, and Keycloak are removed. Provide these through managed services or Kubernetes operators, and mirror the images each one requires into your private registry, following the operator or managed-service documentation. See [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
 :::note
-The open-source variant is based on the `bitnamilegacy` repository and receives no further updates from Bitnami. For production environments, use the enterprise variant or a managed Keycloak service.
+For the air-gapped procedure based on the bundled Bitnami subcharts (Camunda 8.9 and earlier), see the [8.9 air-gapped guide](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation/).
 :::
 
-:::tip About the original Bitnami Keycloak images
-If you prefer to use the original Bitnami Keycloak images directly (`bitnamilegacy/keycloak` or `registry.camunda.cloud/vendor-ee/keycloak`), you can override the image in your Helm values. This is not required, as Camunda Keycloak images are fully compatible and recommended.
-:::
-
-A helper script is available in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) to pull and save Docker images.
+A helper script is available in the [camunda-helm-repository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) to pull and save the Camunda Docker images.
 
 ### Access Camunda images from the Camunda registry
 
-All required images published on Docker Hub (Camunda and Bitnami organizations) are also available in the Camunda registry:
+All required Camunda images published on Docker Hub are also available in the Camunda registry:
 
 - `registry.camunda.cloud/camunda/<image>`
-- `registry.camunda.cloud/bitnami/<image>`
 
-For example, you can pull the Zeebe and PostgreSQL images from Docker Hub or the Camunda registry:
+For example, you can pull the Zeebe image from Docker Hub or the Camunda registry:
 
 ```shell
 docker pull camunda/zeebe:latest
 docker pull registry.camunda.cloud/camunda/zeebe:latest
-
-docker pull bitnamilegacy/postgresql:latest
-docker pull registry.camunda.cloud/bitnami/postgresql:latest
 ```
-
-### Access enterprise images with Skopeo
-
-:::info Registry migration notice
-As of November 30, 2025, our image vendor has migrated its repositories. All images downloaded before this date remain available but are no longer listable by the `skopeo` command. The `skopeo` command will return only images added by Bitnami after November 30, 2025.
-:::
-
-If you use Bitnami Premium images from the `vendor-ee` registry, you can use [Skopeo](https://github.com/containers/skopeo) to copy images directly to your private registry without requiring Docker locally:
-
-```shell
-# Copy Bitnami Premium PostgreSQL image
-skopeo copy --src-creds=<your-username>:<your-password> \
-  docker://registry.camunda.cloud/vendor-ee/postgresql:16.6.0-debian-12-r0 \
-  docker://your-private-registry.com/bitnami/postgresql:16.6.0-debian-12-r0
-
-# Copy Bitnami Premium Elasticsearch image
-skopeo copy --src-creds=<your-username>:<your-password> \
-  docker://registry.camunda.cloud/vendor-ee/elasticsearch:8.11.4-debian-12-r0 \
-  docker://your-private-registry.com/bitnami/elasticsearch:8.11.4-debian-12-r0
-
-# Copy Bitnami Premium Keycloak image
-skopeo copy --src-creds=<your-username>:<your-password> \
-  docker://registry.camunda.cloud/vendor-ee/keycloak:26.0.7-debian-12-r0 \
-  docker://your-private-registry.com/bitnami/keycloak:26.0.7-debian-12-r0
-```
-
-**Configuration notes:**
-
-- Replace `<your-username>` and `<your-password>` with your Camunda Enterprise LDAP credentials.
-- Replace `your-private-registry.com` with your actual private registry URL.
-- Use the image tags that match your Helm chart version requirements.
-- For a complete list of available enterprise images and their tags, see [Install Bitnami enterprise images](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/) in the Camunda 8.9 documentation.
 
 ### Required Helm charts
 
@@ -165,12 +80,7 @@ helm repo update
 helm pull camunda/camunda-platform
 ```
 
-The package is self-contained and includes these dependencies:
-
-- [Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch)
-- [Keycloak Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak)
-- [Postgres Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql)
-- [Bitnami Common Helm chart](https://artifacthub.io/packages/helm/bitnami/common)
+If you deploy infrastructure (PostgreSQL, Elasticsearch, Keycloak) with Kubernetes operators or managed services, also make their Helm charts or images available in your air-gapped environment, following their documentation.
 
 Install the Helm chart by either making it available in a [private repository](https://helm.sh/docs/topics/chart_repository/) that can be accessed from the air-gapped environment or providing the downloaded chart archive locally, for example:
 
@@ -179,40 +89,6 @@ helm install camunda --version $HELM_CHART_VERSION ./camunda-platform-11.1.0.tgz
 ```
 
 For supported versions, see [supported environments](/reference/supported-environments.md#camunda-8-self-managed) and the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
-
-### Dependency overview
-
-Identity uses Keycloak and lets you manage users, roles, and permissions for Camunda 8 components. This third-party dependency is reflected in the Helm chart as follows:
-
-```
-camunda-platform
-    |_ elasticsearch
-    |_ identity
-    |_ identityKeycloak
-        |_ postgresql
-    |_ orchestration
-    |_ optimize
-    |_ connectors
-    |_ webModeler
-    |_ postgresql
-```
-
-- Keycloak depends on Camunda Identity, and PostgreSQL depends on Keycloak.
-- PostgreSQL is also a dependency for Web Modeler.
-  - This dependency is optional: you can install PostgreSQL with Helm or use an existing [external database](/self-managed/deployment/helm/install/quick-install.md#optional-configure-external-database).
-- Elasticsearch is a dependency for the Orchestration Cluster and Optimize.
-- Connectors can run stand-alone, but if you use inbound capabilities, Operate becomes a dependency.
-
-You can configure Keycloak and PostgreSQL values at the same hierarchy level:
-
-```yaml
-identity:
-  [identity values]
-identityKeycloak:
-  [keycloak values]
-  postgresql:
-    [postgresql values]
-```
 
 ### Push Docker images to a repository
 
@@ -256,28 +132,10 @@ orchestration:
     repository: camunda/zeebe
     # e.g. work with the latest versions in development
     tag: latest
-elasticsearch:
-  image:
-    registry: example.jfrog.io
-    repository: bitnamilegacy/elasticsearch
-  sysctlImage:
-    registry: example.jfrog.io
-    repository: bitnamilegacy/os-shell
 identity:
   image:
     repository: camunda/identity
     ...
-identityKeycloak:
-  image:
-    registry: example.jfrog.io
-    repository: bitnamilegacy/keycloak
-    ...
-  postgresql:
-    image:
-      registry: example.jfrog.io
-      repository: bitnamilegacy/postgresql
-
-      ...
 optimize:
   image:
     repository: camunda/optimize
@@ -296,11 +154,6 @@ webModeler:
   websockets:
     image:
       repository: camunda/web-modeler-websockets
-  ...
-postgresql:
-  image:
-    registry: example.jfrog.io
-    repository: bitnamilegacy/postgresql
   ...
 ```
 

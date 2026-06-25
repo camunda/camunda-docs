@@ -342,65 +342,11 @@ RDBMS as secondary storage disables Optimize unless you also deploy Elasticsearc
 
 #### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
 
-For advanced deployments, you can disable managed OpenSearch and enable the Elasticsearch deployment from the Camunda Helm chart:
+For advanced deployments, you can use Elasticsearch instead of managed OpenSearch. The bundled Bitnami Elasticsearch subchart is removed in Camunda 8.10 — deploy Elasticsearch with the [Elastic Cloud on Kubernetes (ECK) operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or use a managed Elasticsearch service, then point the Orchestration Cluster at it (see [using external Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md)).
 
-:::caution Removed in 8.10
-The bundled Bitnami Elasticsearch subchart is removed in Camunda 8.10. Use a managed Elasticsearch/OpenSearch service, or deploy [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) for operator-based Elasticsearch with automated scaling, upgrades, and built-in security.
-:::
+#### Use an in-cluster PostgreSQL instead of managed Aurora
 
-<details>
-<summary>Show configuration changes to disable external OpenSearch usage</summary>
-
-```yaml
-global:
-  elasticsearch:
-    enabled: true
-  opensearch:
-    enabled: false
-
-elasticsearch:
-  enabled: true
-```
-
-</details>
-
-#### Use internal PostgreSQL instead of the managed Aurora
-
-If you prefer not to use an external PostgreSQL service, you can switch to the internal PostgreSQL deployment. In this case, you will need to configure the Helm chart as follows and remove certain configurations related to the external database and service account:
-
-:::tip Operator-based PostgreSQL deployment
-The bundled Bitnami PostgreSQL subchart is removed in Camunda 8.10. Use the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed PostgreSQL service for production-grade PostgreSQL clusters with automated backup, monitoring, and scaling capabilities.
-:::
-
-<details>
-<summary>Show configuration changes to disable external database usage</summary>
-
-```yaml
-webModelerPostgresql:
-  enabled: true
-
-webModeler:
-  # Remove this part
-
-  # restapi:
-  #     externalDatabase:
-  #         url: jdbc:aws-wrapper:postgresql://${DB_HOST}:5432/${DB_WEBMODELER_NAME}
-  #         user: ${DB_WEBMODELER_USERNAME}
-  #         ...
-
-identity:
-  # Remove this part
-
-  # externalDatabase:
-  #     enabled: true
-  #     host: ${DB_HOST}
-  #     port: 5432
-  #     username: ${DB_IDENTITY_USERNAME}
-  #     database: ${DB_IDENTITY_NAME}
-  #     ...
-```
-
-</details>
+To run PostgreSQL inside the cluster instead of managed Aurora, deploy it with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) and point Identity and Web Modeler at it. The bundled Bitnami PostgreSQL subchart was removed in Camunda 8.10.
 
 #### Fill your deployment with actual values
 
