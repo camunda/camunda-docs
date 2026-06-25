@@ -10,6 +10,10 @@ import TabItem from "@theme/TabItem";
 
 This guide shows you how to configure Camunda 8 Self-Managed to authenticate with any OpenID connect (OIDC)-compliant identity provider.
 
+:::caution Bitnami subcharts removed in Camunda 8.10
+Examples on this page enable bundled PostgreSQL subcharts (`identityPostgresql.enabled`, `webModelerPostgresql.enabled`), which are removed in Camunda 8.10 (Helm chart `15.x`). For 8.10, deploy these with [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services. This page is pending a full 8.10 update.
+:::
+
 :::info
 Before proceeding, since this is a general guide, refer to [External OIDC provider](./external-oidc-provider.md) to see the available provider-specific guides, as they include detailed setup instructions tailored to provider's interface.
 :::

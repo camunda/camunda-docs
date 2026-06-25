@@ -7,6 +7,10 @@ description: Learn how to connect the Camunda Helm chart to a Microsoft Entra te
 
 This guide shows you how to configure the Helm chart to use a Microsoft Entra tenant, with each Camunda component using a dedicated OIDC or OAuth client.
 
+:::caution Bitnami subcharts removed in Camunda 8.10
+Examples on this page enable bundled PostgreSQL subcharts (`identityPostgresql.enabled`, `webModelerPostgresql.enabled`), which are removed in Camunda 8.10 (Helm chart `15.x`). For 8.10, deploy these with [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services. This page is pending a full 8.10 update.
+:::
+
 ## Prerequisites
 
 Before you begin, ensure you have:

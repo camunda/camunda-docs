@@ -9,6 +9,10 @@ description: Learn how to connect the Camunda Helm chart to an external Keycloak
 The external Keycloak setup requires administrative access to the Keycloak server.
 :::
 
+:::caution Bitnami subcharts removed in Camunda 8.10
+Examples on this page enable a bundled PostgreSQL subchart (`webModelerPostgresql.enabled`), which is removed in Camunda 8.10 (Helm chart `15.x`). For 8.10, deploy PostgreSQL with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed service. This page is pending a full 8.10 update.
+:::
+
 The Camunda Helm chart can connect to an external Keycloak instance that acts as the identity management service for authentication and authorization.  
 With minimal configuration for administrative access, the Management Identity component can automatically configure the Keycloak realm and required entities on startup—simplifying setup and reducing the learning curve.
 

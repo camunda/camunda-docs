@@ -7,6 +7,10 @@ description: Learn how to configure and manage Basic authentication for Camunda 
 
 By default, Camunda 8 Self-Managed uses Basic authentication for all components deployed through the Helm chart. This method requires no additional configuration and is ideal for local or development environments.
 
+:::caution Bitnami subcharts removed in Camunda 8.10
+Examples on this page enable bundled Keycloak/PostgreSQL subcharts (`identityKeycloak.enabled`, `webModelerPostgresql.enabled`), which are removed in Camunda 8.10 (Helm chart `15.x`). For 8.10, deploy these with [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services. This page is pending a full 8.10 update.
+:::
+
 :::note
 Because Basic authentication is enabled by default, components that depend on Management Identity (which implements OIDC/OAuth authentication) are disabled by default. These components include:
 

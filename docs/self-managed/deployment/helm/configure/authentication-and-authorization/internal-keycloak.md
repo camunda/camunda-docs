@@ -11,6 +11,10 @@ Enable internal Keycloak if you don’t have an external identity provider (IdP)
 
 If you prefer to run Keycloak externally and disable the internal one, see [Set up the Helm chart with an external Keycloak instance](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).
 
+:::caution Removed in Camunda 8.10
+This page describes the **bundled (internal) Keycloak** (`identityKeycloak.enabled: true`), which is removed in Camunda 8.10 (Helm chart `15.x`) along with the other Bitnami subcharts. For Camunda 8.10, deploy Keycloak with the [Keycloak operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment), or use an [external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md) or managed service. This page is pending a full 8.10 operator-based rewrite.
+:::
+
 ## Configuration
 
 This guide shows you how to:
