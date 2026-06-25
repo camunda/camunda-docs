@@ -893,8 +893,8 @@ private static final CamundaProcessTestExtension EXTENSION =
 
 ## Process Test Coverage
 
-CPT generates an HTML and JSON coverage report of your BPMN processes. You can configure the report generation in the
-following way.
+CPT generates an HTML and JSON coverage report of your BPMN processes and DMN decision tables. You can configure the
+report generation in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -911,10 +911,14 @@ camunda:
     coverage:
       # Change the directory where the report is generated
       reportDirectory: target/coverage-report
-      # Exclude processes from the report
+      # Exclude processes from the report by their process definition ID
       excludedProcesses:
         - process_1
         - process_2
+      # Exclude decisions from the report by their decision definition ID
+      excludedDecisions:
+        - decision_1
+        - decision_2
 ```
 
 </TabItem>
@@ -926,9 +930,12 @@ In your `/camunda-container-runtime.properties` file:
 ```properties
 # Change the directory where the report is generated
 coverage.reportDirectory=target/coverage-report
-# Exclude processes from the report
+# Exclude processes from the report by their process definition ID
 excludedProcesses[0]=process_1
 excludedProcesses[1]=process_2
+# Exclude decisions from the report by their decision definition ID
+excludedDecisions[0]=decision_1
+excludedDecisions[1]=decision_2
 ```
 
 </TabItem>
