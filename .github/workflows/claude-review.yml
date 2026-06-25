@@ -39,4 +39,10 @@ jobs:
           direct_prompt: |
             Review this pull request against the Camunda docs contribution standards referenced from AGENTS.md.
 
-            Post inline comments for issues found, with a concrete fix suggestion for each.
+            Post inline review comments on the specific lines where issues are found. For each issue, include a concrete fix using GitHub's suggestion block format so the author can apply it directly:
+
+            ```suggestion
+            <replacement text here>
+            ```
+
+            Use suggestion blocks whenever a fix can be expressed as a direct text replacement on the commented line(s).

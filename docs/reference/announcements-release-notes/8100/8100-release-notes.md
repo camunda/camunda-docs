@@ -138,6 +138,18 @@ You can configure start forms directly in Desktop Modeler's properties panel usi
 
 Start forms can now be defined and edited in both modelers, ensuring a seamless experience when working with diagrams across Web Modeler and Desktop Modeler.
 
+### Orchestration Cluster
+
+#### Default RocksDB memory allocation strategy changed to `FRACTION`
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+The default RocksDB memory allocation strategy changes from `PARTITION` to `FRACTION`. RocksDB memory is now allocated as a fraction of total available memory (default `0.1`, or 10%) instead of scaling with the number of partitions per broker. This may result in a different amount of memory being allocated to RocksDB.
+
+To keep the previous behavior, explicitly set the strategy to `PARTITION`. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#rocksdb-memory-allocation-strategy) for more details.
+
+<p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+
 ### Optimize
 
 #### Scope-aware variable export configuration for Optimize

@@ -576,7 +576,7 @@ Starting with Camunda 8.9, the environment-based connector secret provider uses 
 - Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
 
 <p className="link-arrow">[connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md#secrets)</p>
-<p className="link-arrow">[Upgrade 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md#default-secret-provider-prefix-change-breaking)</p>
+<p className="link-arrow">[Upgrade 8.8 to 8.9](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#default-secret-provider-prefix-change-breaking)</p>
 
 </div>
 </div>
@@ -1443,7 +1443,7 @@ The separate `webapp` component has been removed and its functionality is now co
 
 This change might require updates to your application configuration.
 
-<p class="link-arrow">[Migrate configuration](/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
+<p class="link-arrow">[Migrate configuration](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
 
 </div>
 </div>
@@ -1475,7 +1475,7 @@ Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded 
 
 This enhancement ensures consistency across environments and simplifies setup for administrators.
 
-<p class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
+<p class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
 
 </div>
 </div>
