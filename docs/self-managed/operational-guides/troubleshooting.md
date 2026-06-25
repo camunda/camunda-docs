@@ -278,10 +278,12 @@ or use
 
 ## Find available container image versions
 
-When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment. Use [skopeo](https://github.com/containers/skopeo) to list available tags:
+When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment.
+
+For Camunda's own images, use [skopeo](https://github.com/containers/skopeo) to list available tags:
 
 ```shell
-# For open source images (no authentication required)
+# Open source images (no authentication required)
 skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe | jq '.RepoTags'
 ```
 
