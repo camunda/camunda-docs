@@ -19,12 +19,12 @@ Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it 
 2. Grant this client access to the **Camunda Hub API** with the necessary permissions.
 3. Once you've created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   | Name                     | Environment variable name    | Default value                                |
-   | ------------------------ | ---------------------------- | -------------------------------------------- |
-   | Client ID                | `CAMUNDA_HUB_CLIENT_ID`      | -                                            |
-   | Client Secret            | `CAMUNDA_HUB_CLIENT_SECRET`  | -                                            |
-   | Authorization Server URL | `CAMUNDA_OAUTH_URL`          | `https://login.cloud.camunda.io/oauth/token` |
-   | Audience                 | `CAMUNDA_HUB_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
+   | Name                     | Environment variable name        | Default value                                |
+   | ------------------------ | -------------------------------- | -------------------------------------------- |
+   | Client ID                | `CAMUNDA_CONSOLE_CLIENT_ID`      | -                                            |
+   | Client Secret            | `CAMUNDA_CONSOLE_CLIENT_SECRET`  | -                                            |
+   | Authorization Server URL | `CAMUNDA_OAUTH_URL`              | `https://login.cloud.camunda.io/oauth/token` |
+   | Audience                 | `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    :::caution
    When you create client credentials, the client secret is only shown once. Save the client secret somewhere safe.
@@ -34,9 +34,9 @@ Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it 
    curl --request POST ${CAMUNDA_OAUTH_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode "audience=${CAMUNDA_HUB_OAUTH_AUDIENCE}" \
-       --data-urlencode "client_id=${CAMUNDA_HUB_CLIENT_ID}" \
-       --data-urlencode "client_secret=${CAMUNDA_HUB_CLIENT_SECRET}"
+       --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
+       --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
    ```
    A successful response looks like this:
    ```json
