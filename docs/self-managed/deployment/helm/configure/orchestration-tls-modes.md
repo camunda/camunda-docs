@@ -54,13 +54,19 @@ The gRPC server only accepts PEM, so the gRPC `secret` block has no `type` field
 
 ### Cert rotation
 
-`global.tls.orchestration.autoRollout` mirrors `global.tls.caBundle.autoRollout`. When `true`, the chart stamps a `checksum/orchestration-tls-{rest,grpc}` pod annotation derived from **only the public cert content** of the configured Secret, so a `helm upgrade` rolls the Orchestration pods whenever the cert content changes. Hashing only the cert (not the keystore password or private key) means the annotation reveals nothing an attacker couldn't already learn from the TLS handshake — it cannot be replayed against candidate passwords. This uses Helm's `lookup`, which **requires the upgrading identity to have `get` on Secrets** in the release namespace and is **inert under GitOps tools that render with `helm template`**. Leave it off in those environments and rotate manually with `kubectl rollout restart statefulset/<release>-orchestration`.
+`global.tls.orchestration.autoRollout` mirrors `global.tls.caBundle.autoRollout`. When `true`, the chart stamps a `checksum/orchestration-tls-{rest,grpc}` pod annotation derived from the public cert content of the configured Secret. A `helm upgrade` then rolls the Orchestration pods whenever the cert content changes.
+
+The hash covers only the cert, not the keystore password or private key. That means the annotation reveals nothing an attacker could not already learn from the TLS handshake, and it cannot be replayed against candidate passwords.
+
+This uses Helm's `lookup`, which requires the upgrading identity to have `get` on Secrets in the release namespace. It is inert under GitOps tools that render with `helm template`. Leave `autoRollout` off in those environments and rotate manually with `kubectl rollout restart statefulset/<release>-orchestration`.
 
 One edge case: rotating **only the keystore password** without changing the cert content does not flip the hash, so autoRollout will not pick it up. In practice every modern rotation tool (cert-manager `Certificate` renewal, manual `openssl pkcs12 -export` cycles) writes a fresh keystore on each renewal, so the cert content changes too. For password-only rotation, use `kubectl rollout restart statefulset/<release>-orchestration`.
 
 ### Recipe: cert-manager + Let's Encrypt or internal Issuer
 
 cert-manager produces `kubernetes.io/tls` Secrets with `tls.crt` + `tls.key`. The chart consumes those directly — PEM for REST (via `type: pem`) and PEM for gRPC.
+
+This recipe assumes cert-manager v1.x is already installed in the cluster. If it is not, install it first per the [cert-manager installation guide](https://cert-manager.io/docs/installation/) (typically `helm install cert-manager jetstack/cert-manager --set crds.enabled=true`).
 
 If you are issuing certificates from a public ACME provider (Let's Encrypt, ZeroSSL, Buypass) skip directly to step 4 — your CA is already in the JVM default truststore and no `caBundle` is needed. The four-step block below covers the in-cluster CA flow that most Self-Managed installs use.
 
@@ -246,7 +252,7 @@ This adds the following annotations to the `/orchestration` and gRPC ingresses r
 - `nginx.ingress.kubernetes.io/proxy-ssl-secret: <namespace>/<caSecret.existingSecret>`
 - `nginx.ingress.kubernetes.io/proxy-ssl-name: <sniHost>` and `proxy-ssl-server-name: on` (only when `sniHost` is set)
 
-`proxyVerify` is opt-in independently per protocol — you can verify gRPC traffic only, REST only, or both. The CA Secret **must live in the same namespace as the Ingress resource** (an NGINX Ingress requirement). The chart fails template rendering if `proxyVerify.enabled: true` and `caSecret.existingSecret` is empty.
+`proxyVerify` is opt-in independently per protocol — you can verify gRPC traffic only, REST only, or both. By default the chart expects the CA Secret to live in the same namespace as the Ingress resource (an NGINX requirement). To reference a CA Secret in a different namespace (centralised cert-management namespace), set `caSecret.namespace`; the NGINX Ingress controller must be configured with `--watch-namespace` covering that namespace for the cross-namespace reference to resolve. The chart fails template rendering if `proxyVerify.enabled: true` and `caSecret.existingSecret` is empty.
 
 Note that `proxyVerify` covers only the NGINX → Orchestration leg. In-cluster Java clients (Web Modeler, Connectors) trust upstream certs through `global.tls.caBundle`, which is independent.
 
