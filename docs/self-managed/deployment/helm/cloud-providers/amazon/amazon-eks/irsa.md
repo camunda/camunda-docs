@@ -315,9 +315,13 @@ With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK re
 
 When implementing [backup and restore procedures](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for Elasticsearch in your Camunda deployment, you can use IRSA to securely access S3 buckets.
 
-### Bitnami Elasticsearch chart configuration
+### Elasticsearch backup configuration
 
-Camunda’s Helm chart uses the [Bitnami Elasticsearch chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) as a sub-chart. If you are using this setup, IRSA can be integrated for backup operations.
+:::note
+The bundled Bitnami Elasticsearch subchart is removed in Camunda 8.10. For 8.10, deploy Elasticsearch with the [ECK operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed service and configure S3 snapshot access per their documentation. The steps below apply to **Camunda 8.9 and earlier** — see the [8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa/).
+:::
+
+On Camunda 8.9 and earlier, Camunda’s Helm chart uses the [Bitnami Elasticsearch chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) as a sub-chart. If you are using this setup, IRSA can be integrated for backup operations.
 
 Following the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html), create an IAM role mapped to a Kubernetes service account with the required permissions for S3, as detailed in the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository#repository-s3-permissions).
 

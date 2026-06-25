@@ -30,21 +30,6 @@ component:
       existingSecretKey: "secret-key"
 ```
 
-### Bitnami subchart pattern
-
-:::note Camunda 8.9 and earlier
-Bitnami subcharts are removed in Camunda 8.10 (Helm chart `15.x`). This pattern applies to **Camunda 8.9 and earlier**; see the [8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/secret-management/). For Camunda 8.10, configure secrets for your [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services instead.
-:::
-
-Some components use Bitnami subcharts for database services (PostgreSQL), which follow their own authentication patterns that differ from the main Camunda secret structure. These use the standard Bitnami PostgreSQL Helm chart pattern with `existingSecret` and `secretKeys` containing `adminPasswordKey` and `userPasswordKey`.
-
-The following Bitnami subchart configurations are available:
-
-- **`identityPostgresql.auth`** - PostgreSQL database for Identity service
-- **`identityKeycloak.auth`** - Keycloak admin credentials
-- **`identityKeycloak.postgresql.auth`** - PostgreSQL database for Keycloak (when using Identity with Keycloak)
-- **`webModelerPostgresql.auth`** - PostgreSQL database for Web Modeler
-
 ## Application secrets
 
 These secrets are used by Camunda applications and external integrations. Configure them manually when using external secrets.
@@ -68,26 +53,11 @@ These secrets are used by Camunda applications and external integrations. Config
 | **External Elasticsearch Auth (Optimize)**      | `optimize.database.elasticsearch.auth.secret`                   | External | Password for external Elasticsearch authentication (Basic authentication)        |
 | **External OpenSearch Auth (Optimize)**         | `optimize.database.opensearch.auth.secret`                      | External | Password for external OpenSearch authentication (Basic authentication)           |
 
-### Secrets using Bitnami subchart patterns
-
-| **Secret**                          | **Chart values key**                              | **Purpose**                                       |
-| ----------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
-| **Identity PostgreSQL Password**    | `identityPostgresql.auth.existingSecret`          | Password for embedded PostgreSQL used by Identity |
-| **Keycloak Admin Password**         | `identityKeycloak.auth.existingSecret`            | Admin password for Keycloak (Camunda Identity)    |
-| **Keycloak PostgreSQL Password**    | `identityKeycloak.postgresql.auth.existingSecret` | Password for embedded PostgreSQL used by Keycloak |
-| **Web Modeler PostgreSQL Password** | `webModelerPostgresql.auth.existingSecret`        | Passwords for Web Modeler's embedded PostgreSQL   |
-
-**PostgreSQL Secret Keys**: For PostgreSQL subcharts, both `adminPasswordKey` and `userPasswordKey` are required:
-
-- `adminPasswordKey`: Password for the PostgreSQL administrator (typically used for administrative operations)
-- `userPasswordKey`: Password for the application-specific database user (used by the Camunda component)
-
 ## How to configure secrets
 
 Secrets can be configured in different ways:
 
 - Use the structured `secret:` pattern with `inlineSecret` for non-production or external Kubernetes Secrets for production
-- For Bitnami subchart components (PostgreSQL, Keycloak), use their native `existingSecret` pattern
 
 ### Method 1: Inline secrets (non-production only)
 
@@ -144,41 +114,6 @@ global:
         secret:
           existingSecret: "optimize-secret"
           existingSecretKey: "client-secret"
-```
-
-**For Bitnami subchart components:**
-
-```yaml
-# PostgreSQL database for Identity service
-identityPostgresql:
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
-
-# Keycloak admin credentials
-identityKeycloak:
-  auth:
-    existingSecret: camunda-credentials
-    passwordSecretKey: identity-keycloak-admin-password
-
-# PostgreSQL database for Keycloak (when using Identity with Keycloak)
-identityKeycloak:
-  postgresql:
-    auth:
-      existingSecret: camunda-credentials
-      secretKeys:
-        adminPasswordKey: identity-keycloak-postgresql-admin-password
-        userPasswordKey: identity-keycloak-postgresql-user-password
-
-# PostgreSQL database for Web Modeler
-webModelerPostgresql:
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: web-modeler-postgresql-admin-password
-      userPasswordKey: web-modeler-postgresql-user-password
 ```
 
 :::note
@@ -361,21 +296,6 @@ export IDENTITY_OPTIMIZE_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-opt
 
 # Only if "zeebe.enabled: true".
 export IDENTITY_ZEEBE_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-zeebe-identity-secret" -o jsonpath="{.data.zeebe-secret}" | base64 --decode)
-
-# Only if "postgresql.enabled: true".
-export WEB_MODELER_POSTGRESQL_ADMIN_SECRET=$(kubectl get secret "${RELEASE_NAME}-postgresql-web-modeler" -o jsonpath="{.data.postgres-password}" | base64 --decode)
-export WEB_MODELER_POSTGRESQL_USER_SECRET=$(kubectl get secret "${RELEASE_NAME}-postgresql-web-modeler" -o jsonpath="{.data.password}" | base64 --decode)
-
-# Only if "identityPostgresql.enabled: true".
-export IDENTITY_POSTGRESQL_ADMIN_SECRET=$(kubectl get secret "${RELEASE_NAME}-identity-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
-export IDENTITY_POSTGRESQL_USER_SECRET=$(kubectl get secret "${RELEASE_NAME}-identity-postgresql" -o jsonpath="{.data.password}" | base64 --decode)
-
-# Only if "identityKeycloak.enabled: true".
-export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "${RELEASE_NAME}-keycloak" -o jsonpath="{.data.admin-password}" | base64 --decode)
-
-# Only if "identityKeycloak.postgresql.enabled: true".
-export KEYCLOAK_POSTGRESQL_ADMIN_SECRET=$(kubectl get secret "${RELEASE_NAME}-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
-export KEYCLOAK_POSTGRESQL_USER_SECRET=$(kubectl get secret "${RELEASE_NAME}-postgresql" -o jsonpath="{.data.password}" | base64 --decode)
 ```
 
 #### 2. Create the consolidated secret

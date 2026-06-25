@@ -344,8 +344,8 @@ RDBMS as secondary storage disables Optimize unless you also deploy Elasticsearc
 
 For advanced deployments, you can disable managed OpenSearch and enable the Elasticsearch deployment from the Camunda Helm chart:
 
-:::caution Deprecated path
-The Helm-chart Elasticsearch deployment uses deprecated Bitnami subcharts. Prefer managed Elasticsearch/OpenSearch services for long-term deployments, or deploy [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) if you need operator-based Elasticsearch with automated scaling, upgrades, and built-in security.
+:::caution Removed in 8.10
+The bundled Bitnami Elasticsearch subchart is removed in Camunda 8.10. Use a managed Elasticsearch/OpenSearch service, or deploy [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) for operator-based Elasticsearch with automated scaling, upgrades, and built-in security.
 :::
 
 <details>
@@ -368,8 +368,8 @@ elasticsearch:
 
 If you prefer not to use an external PostgreSQL service, you can switch to the internal PostgreSQL deployment. In this case, you will need to configure the Helm chart as follows and remove certain configurations related to the external database and service account:
 
-:::tip Alternative: Operator-based PostgreSQL deployment
-Instead of using Bitnami subcharts for internal PostgreSQL, consider using [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) for production-grade PostgreSQL clusters with automated backup, monitoring, and scaling capabilities.
+:::tip Operator-based PostgreSQL deployment
+The bundled Bitnami PostgreSQL subchart is removed in Camunda 8.10. Use the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed PostgreSQL service for production-grade PostgreSQL clusters with automated backup, monitoring, and scaling capabilities.
 :::
 
 <details>

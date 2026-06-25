@@ -11,7 +11,7 @@ The [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md)
 
 - A private Docker registry accessible from your air-gapped environment
 - A private or local Helm chart repository
-- Access to a connected environment to pull required Camunda and Bitnami images
+- Access to a connected environment to pull the required Camunda and infrastructure images
 - [Helm CLI](https://helm.sh/docs/intro/install/) installed
 - `kubectl` access to your Kubernetes cluster
 
@@ -317,5 +317,5 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f v
 - **Mirror images and charts regularly**: Sync images and charts on a schedule to avoid version drift.
 - **Pin versions**: Use explicit tags instead of `latest` to ensure reproducibility.
 - **Validate charts**: Test Helm charts in a staging air-gapped environment before production.
-- **Monitor dependencies**: Track Bitnami and Camunda dependency updates, since they affect required images.
+- **Monitor dependencies**: Track Camunda and infrastructure dependency updates, since they affect required images.
 - **Secure access**: Restrict permissions to your private registry and Helm repository.
