@@ -74,7 +74,7 @@ This applies the following defaults:
 https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
 ```
 
-For some specific OIDC setups (e.g [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.auth.scope` in addition to the defaults provided by the mode, see the [`camunda.client.auth`-Properties reference](./properties-reference.md) for a full overview.
+For some specific OIDC setups (for example, [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.auth.scope` in addition to the defaults provided by the mode, see the [`camunda.client.auth`-Properties reference](./properties-reference.md) for a full overview.
 
 ## Connectivity
 
@@ -605,7 +605,7 @@ public DocumentResult sendDocumentAsResult() {
 
 ##### Completing ad-hoc sub-process jobs with a result
 
-When your job worker handles an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) job, you can return an `AdHocSubProcessResultFunction` to specify which element to activate within the sub-process. The starter automatically applies the result when completing the job.
+When your job worker handles an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) job, you can return an `AdHocSubProcessResultFunction` to specify which element to activate within the sub-process. The starter automatically applies the result when you complete the job.
 
 Return a lambda that calls `activateElement` with the target element ID:
 
@@ -629,7 +629,7 @@ public AdHocSubProcessResultFunction handleAdHocSubprocess() {
 
 ##### Completing user task listener jobs with a result
 
-When your job worker handles a user task listener job, you can return a `UserTaskResultFunction` to control the outcome of the listener. The starter automatically applies the result when completing the job.
+When your job worker handles a user task listener job, you can return a `UserTaskResultFunction` to control the outcome of the listener. The starter automatically applies the result when you complete the job.
 
 Return a lambda that configures the result, for example to correct the assignee:
 
@@ -642,7 +642,7 @@ public UserTaskResultFunction handleUserTaskListener() {
 
 #### Programmatically completing jobs
 
-Your job worker code can also complete the job itself. This gives you more control over when exactly you want to complete the job (for example, allowing the completion to be moved to reactive callbacks):
+Your job worker code can also complete the job itself. This gives you more control over when you want to complete the job (for example, allowing you to move the completion to reactive callbacks):
 
 ```java
 @JobWorker(type = "foo", autoComplete = false)
