@@ -107,18 +107,9 @@ At startup, configuration validation enforces tenant-level constraints.
 
 Known constraints and behavior for 8.10:
 
-- Tenant keys in `camunda.physical-tenants.<tenant-key>` are expected to be lowercase alphanumeric.
+- Tenant keys in `camunda.physical-tenants.<tenant-key>` must be lowercase alphanumeric (`[a-z0-9]+`) with a maximum length of 64 characters.
 - Validation is expected to reject unsupported or colliding storage configurations across tenants.
 - Validation failures are startup failures, not runtime warnings.
-
-<!--
-TODO(physical-tenants): Confirm and document the final key pattern and limits for <tenant-key>.
-Expected decision direction:
-- Pattern: [a-z0-9]+
-- No dashes and no uppercase
-- Maximum length: TBD
-Add exact validation error messages once finalized.
--->
 
 <!--
 TODO(physical-tenants): Add the final cross-tenant storage collision matrix once implementation details are finalized.
@@ -185,13 +176,9 @@ CAMUNDA_PHYSICALTENANTS_RISKPROD_SECURITY_AUTHENTICATION_PROVIDERS_ASSIGNED_0=co
 
 If YAML and environment variables are used together, use the same normalized tenant key in both forms.
 
-<!--
-TODO(physical-tenants): If support for a separate display/id field is finalized (for example, *.id for URL-facing IDs), document precedence and collision handling here.
--->
-
 ### Helm values
 
-If you deploy with Helm, provide equivalent values in your `values.yaml` for the same underlying Camunda properties.
+If you deploy with Helm, provide equivalent values in your `values.yaml` for the same underlying Camunda properties. Helm customers use the same application-level properties directly without chart-specific tenant keys.
 
 ```yaml
 # Example shape only. Map these values to your chart's current Camunda property injection mechanism.
@@ -208,10 +195,6 @@ camunda:
       database:
         url: jdbc:postgresql://db/riskprod
 ```
-
-<!--
-TODO(physical-tenants): Replace this Helm example with chart-specific keys and a validated, copy-paste-ready example once Helm support details are finalized.
--->
 
 ## Related pages
 
