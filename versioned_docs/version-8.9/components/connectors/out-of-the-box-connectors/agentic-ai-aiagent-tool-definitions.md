@@ -186,6 +186,9 @@ Depending on the used task, setting the variable content can be achieved in mult
   to a part of the `toolCallResult` variable (for example, an output mapping could be set to `toolCallResult.statusCode`)
 - A [script task](../../modeler/bpmn/script-tasks/script-tasks.md) that sets the `toolCallResult` variable
 
+If a tool consists of multiple elements (for example, a sequence of tasks with a gateway), `toolCallResult` can be set at
+any point in the flow. The variable is [read from the tool's scope when the flow completes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#collect-output).
+
 Tool call results can be either primitive values (for example, a string) or complex ones, such as
 a [FEEL context](../../modeler/feel/language-guide/feel-context-expressions.md) that is serialized to a JSON
 string before passing it to the LLM.
