@@ -106,8 +106,8 @@ and process values).
 
 | Option                           | Description                                                                                                                                                                                                                                                                                                                                                        | Default         |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| bpmnProcessIdExclusion           | Excludes all records with these BPMN process IDs. Exclusion wins over inclusion. See [BPMN process filters](#bpmn-process-filters).                                                                                                                                                                                                                                | `[]`            |
-| bpmnProcessIdInclusion           | Restricts exported records to these BPMN process IDs. If empty, all processes are included. See [BPMN process filters](#bpmn-process-filters).                                                                                                                                                                                                                     | `[]`            |
+| bpmnProcessIdExclusion           | Excludes all records with these BPMN process IDs. Exclusion wins over inclusion.                                                                                                                                                                                                                                | `[]`            |
+| bpmnProcessIdInclusion           | Restricts exported records to these BPMN process IDs. If empty, all processes are included.                                                                                                                                                                                                                     | `[]`            |
 | checkpoint                       | If `true` records related to checkpoints will be exported                                                                                                                                                                                                                                                                                                          | `false`         |
 | command                          | If `true` command records will be exported                                                                                                                                                                                                                                                                                                                         | `false`         |
 | command-distribution             | If `true` records related to command distributions will be exported                                                                                                                                                                                                                                                                                                | `true`          |
@@ -131,7 +131,7 @@ and process values).
 | message-subscription             | If `true` records related to message subscriptions will be exported                                                                                                                                                                                                                                                                                                | `true`          |
 | number-of-replicas               | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for each new record index created.                                                                                                                                                                                  | 0               |
 | number-of-shards                 | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                                                                                                                                                                                          | 3               |
-| optimizeModeEnabled              | If `true`, restricts exported record types to those consumed by Optimize. See [Optimize mode](#optimize-mode).                                                                                                                                                                                                                                                     | `false`         |
+| optimizeModeEnabled              | If `true`, restricts exported record types to those consumed by Optimize.                                                                                                                                                                                                                                                     | `false`         |
 | prefix                           | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                                                                                                                                                                            | zeebe-record    |
 | process                          | If `true` records related to processes will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
 | process-event                    | If `true` records related to process events will be exported                                                                                                                                                                                                                                                                                                       | `false`         |
@@ -149,105 +149,14 @@ and process values).
 | user-task                        | If `true` records related to user tasks will be exported                                                                                                                                                                                                                                                                                                           | `true`          |
 | variable                         | If `true` records related to variables will be exported                                                                                                                                                                                                                                                                                                            | `true`          |
 | variable-document                | If `true` records related to variable documents will be exported                                                                                                                                                                                                                                                                                                   | `true`          |
-| variableNameExclusionEndWith     | Excludes variables whose names end with these suffixes. Exclusion wins over inclusion. See [Variable-name filters](#variable-name-filters).                                                                                                                                                                                                                        | `[]`            |
-| variableNameExclusionExact       | Excludes variables whose names exactly match. Exclusion wins over inclusion. See [Variable-name filters](#variable-name-filters).                                                                                                                                                                                                                                  | `[]`            |
-| variableNameExclusionStartWith   | Excludes variables whose names start with these prefixes. Exclusion wins over inclusion. See [Variable-name filters](#variable-name-filters).                                                                                                                                                                                                                      | `[]`            |
-| variableNameInclusionEndWith     | Includes variables whose names end with these suffixes. If empty, no name inclusion filter applies. See [Variable-name filters](#variable-name-filters).                                                                                                                                                                                                           | `[]`            |
-| variableNameInclusionExact       | Includes variables whose names exactly match. If empty, no name inclusion filter applies. See [Variable-name filters](#variable-name-filters).                                                                                                                                                                                                                     | `[]`            |
-| variableNameInclusionStartWith   | Includes variables whose names start with these prefixes. If empty, no name inclusion filter applies. See [Variable-name filters](#variable-name-filters).                                                                                                                                                                                                         | `[]`            |
-| variableValueTypeExclusion       | Excludes variables of these inferred JSON types. Exclusion wins over inclusion. See [Variable-type filters](#variable-type-filters).                                                                                                                                                                                                                               | `[]`            |
-| variableValueTypeInclusion       | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included. See [Variable-type filters](#variable-type-filters).                                                                                                                                                                | `[]`            |
-
-### Variable-name filters
-
-Starting with Camunda 8.9, you can filter exported variable records by variable name.
-
-Configuration:
-
-```yaml
-camunda:
-  data:
-    exporters:
-      elasticsearch:
-        args:
-          index:
-            variableNameInclusionStartWith:
-              - business_
-            variableNameExclusionStartWith:
-              - business_debug
-```
-
-The exporter first matches variable names against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
-
-For details on how this interacts with Optimize, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
-
-### Variable-type filters
-
-Variable-type filters let you restrict exported variables by their inferred JSON type,
-such as `String`, `Number`, `Boolean`, `Object` or `Null`.
-The exporter first matches variable types against inclusion rules (if present), then against exclusion rules. If a variable type matches both, the exclusion wins.
-Configuration:
-
-```yaml
-camunda:
-  data:
-    exporters:
-      elasticsearch:
-        args:
-          index:
-            variableValueTypeInclusion:
-              - Object
-              - String
-            variableValueTypeExclusion:
-              - Object
-```
-
-Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
-[Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
-
-### BPMN process filters
-
-BPMN process filters control which processes (by `bpmnProcessId`) are exported. All records that carry the given `bpmnProcessId` follow the same decision.
-
-Configuration:
-
-```yaml
-camunda:
-  data:
-    exporters:
-      elasticsearch:
-        args:
-          index:
-            bpmnProcessIdInclusion:
-              - orderProcess
-            bpmnProcessIdExclusion:
-              - debugProcess
-```
-
-Processes listed under `inclusion` are candidates; `exclusion` removes any of those candidates again.
-
-Some value types that never expose `bpmnProcessId` (for example, `DEPLOYMENT`, `DECISION`) are not affected and remain controlled only via the `index.*` flags.
-
-### Optimize mode
-
-With Optimize mode, you can restrict exported records to those used by Optimize, reducing index size.
-
-Configuration:
-
-```yaml
-camunda:
-  data:
-    exporters:
-      elasticsearch:
-        args:
-          index:
-            optimizeModeEnabled: true
-```
-
-When enabled, the exporter emits only the value types and intents that Optimize imports. Other value types are dropped unless you explicitly opt in to the legacy behavior (for example, via `include-enabled-records`).
-
-Use this flag only if the exporter indices are dedicated to Optimize. For SaaS and Self-Managed recommendations, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
-
+| variableNameExclusionEndWith     | Excludes variables whose names end with these suffixes. Exclusion wins over inclusion.                                                                                                                                                                                                                        | `[]`            |
+| variableNameExclusionExact       | Excludes variables whose names exactly match. Exclusion wins over inclusion.                                                                                                                                                                                                                                  | `[]`            |
+| variableNameExclusionStartWith   | Excludes variables whose names start with these prefixes. Exclusion wins over inclusion.                                                                                                                                                                                                                      | `[]`            |
+| variableNameInclusionEndWith     | Includes variables whose names end with these suffixes. If empty, no name inclusion filter applies.                                                                                                                                                                                                           | `[]`            |
+| variableNameInclusionExact       | Includes variables whose names exactly match. If empty, no name inclusion filter applies.                                                                                                                                                                                                                     | `[]`            |
+| variableNameInclusionStartWith   | Includes variables whose names start with these prefixes. If empty, no name inclusion filter applies.                                                                                                                                                                                                         | `[]`            |
+| variableValueTypeExclusion       | Excludes variables of these inferred JSON types. Exclusion wins over inclusion.                                                                                                                                                                                                                               | `[]`            |
+| variableValueTypeInclusion       | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included.                                                                                                                                                                | `[]`            |
 </TabItem>
 
 <TabItem value="bulk">

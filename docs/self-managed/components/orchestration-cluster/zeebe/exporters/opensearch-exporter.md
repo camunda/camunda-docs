@@ -88,8 +88,8 @@ In most cases, you will not be interested in exporting every single record produ
 
 | Option                              | Description                                                                                                                                                                                                | Default      |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| bpmnProcessIdExclusion              | Excludes all records with these BPMN process IDs. Exclusion wins over inclusion. See [BPMN process filters](#bpmn-process-filters).                                                                        | `[]`         |
-| bpmnProcessIdInclusion              | Restricts exported records to these BPMN process IDs. If empty, all processes are included. See [BPMN process filters](#bpmn-process-filters).                                                             | `[]`         |
+| bpmnProcessIdExclusion              | Excludes all records with these BPMN process IDs. Exclusion wins over inclusion.                                                                        | `[]`         |
+| bpmnProcessIdInclusion              | Restricts exported records to these BPMN process IDs. If empty, all processes are included.                                                             | `[]`         |
 | checkpoint                          | If `true` records related to checkpoints will be exported                                                                                                                                                  | `false`      |
 | command                             | If `true` command records will be exported                                                                                                                                                                 | `false`      |
 | command-distribution                | If `true` records related to command distributions will be exported                                                                                                                                        | `true`       |
@@ -102,26 +102,26 @@ In most cases, you will not be interested in exporting every single record produ
 | error                               | If `true` records related to errors will be exported                                                                                                                                                       | `true`       |
 | escalation                          | If `true` records related to escalations will be exported                                                                                                                                                  | `true`       |
 | event                               | If `true` event records will be exported                                                                                                                                                                   | `true`       |
-| exportLocalVariablesEnabled         | If `false`, local (child-scope) variables are not exported. See [Scope-aware variable export](#scope-aware-variable-export).                                                                               | `true`       |
+| exportLocalVariablesEnabled         | If `false`, local (child-scope) variables are not exported.                                                                               | `true`       |
 | form                                | If `true` records related to forms will be exported                                                                                                                                                        | `true`       |
 | incident                            | If `true` records related to incidents will be exported                                                                                                                                                    | `true`       |
 | job                                 | If `true` records related to jobs will be exported                                                                                                                                                         | `true`       |
 | job-batch                           | If `true` records related to job batches will be exported                                                                                                                                                  | `false`      |
-| localVariableNameExclusionEndWith   | Excludes local variables whose names end with these suffixes. Exclusion wins over inclusion. See [Scope-aware variable export](#scope-aware-variable-export).                                              | `[]`         |
-| localVariableNameExclusionExact     | Excludes local variables whose names exactly match. Exclusion wins over inclusion. See [Scope-aware variable export](#scope-aware-variable-export).                                                        | `[]`         |
-| localVariableNameExclusionStartWith | Excludes local variables whose names start with these prefixes. Exclusion wins over inclusion. See [Scope-aware variable export](#scope-aware-variable-export).                                            | `[]`         |
-| localVariableNameInclusionEndWith   | Includes local variables whose names end with these suffixes. If empty, no local name inclusion filter applies. See [Scope-aware variable export](#scope-aware-variable-export).                           | `[]`         |
-| localVariableNameInclusionExact     | Includes local variables whose names exactly match. If empty, no local name inclusion filter applies. See [Scope-aware variable export](#scope-aware-variable-export).                                     | `[]`         |
-| localVariableNameInclusionStartWith | Includes local variables whose names start with these prefixes. If empty, no local name inclusion filter applies. See [Scope-aware variable export](#scope-aware-variable-export).                         | `[]`         |
-| localVariableValueTypeExclusion     | Excludes local variables of these inferred JSON types. Exclusion wins over inclusion. See [Scope-aware variable export](#scope-aware-variable-export).                                                     | `[]`         |
-| localVariableValueTypeInclusion     | Restricts exported local variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). See [Scope-aware variable export](#scope-aware-variable-export).                        | `[]`         |
+| localVariableNameExclusionEndWith   | Excludes local variables whose names end with these suffixes. Exclusion wins over inclusion.                                              | `[]`         |
+| localVariableNameExclusionExact     | Excludes local variables whose names exactly match. Exclusion wins over inclusion.                                                        | `[]`         |
+| localVariableNameExclusionStartWith | Excludes local variables whose names start with these prefixes. Exclusion wins over inclusion.                                            | `[]`         |
+| localVariableNameInclusionEndWith   | Includes local variables whose names end with these suffixes. If empty, no local name inclusion filter applies.                           | `[]`         |
+| localVariableNameInclusionExact     | Includes local variables whose names exactly match. If empty, no local name inclusion filter applies.                                     | `[]`         |
+| localVariableNameInclusionStartWith | Includes local variables whose names start with these prefixes. If empty, no local name inclusion filter applies.                         | `[]`         |
+| localVariableValueTypeExclusion     | Excludes local variables of these inferred JSON types. Exclusion wins over inclusion.                                                     | `[]`         |
+| localVariableValueTypeInclusion     | Restricts exported local variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`).                        | `[]`         |
 | message                             | If `true` records related to messages will be exported                                                                                                                                                     | `true`       |
 | message-batch                       | If `true` records related to message batches will be exported                                                                                                                                              | `false`      |
 | message-start-event-subscription    | If `true` records related to message start event subscriptions will be exported                                                                                                                            | `true`       |
 | message-subscription                | If `true` records related to message subscriptions will be exported                                                                                                                                        | `true`       |
 | number-of-replicas                  | The number of shard [replicas](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-index-level-index-settings) used for each new record index created. | 0            |
 | number-of-shards                    | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.          | 3            |
-| optimizeModeEnabled                 | If `true`, restricts exported record types to those consumed by Optimize. See [Optimize mode](#optimize-mode).                                                                                             | `false`      |
+| optimizeModeEnabled                 | If `true`, restricts exported record types to those consumed by Optimize.                                                                                             | `false`      |
 | prefix                              | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                    | zeebe-record |
 | process                             | If `true` records related to processes will be exported                                                                                                                                                    | `true`       |
 | process-event                       | If `true` records related to process events will be exported                                                                                                                                               | `false`      |
@@ -133,182 +133,28 @@ In most cases, you will not be interested in exporting every single record produ
 | process-message-subscription        | If `true` records related to process message subscriptions will be exported                                                                                                                                | `true`       |
 | rejection                           | If `true` rejection records will be exported                                                                                                                                                               | `false`      |
 | resource-deletion                   | If `true` records related to resource deletions will be exported                                                                                                                                           | `true`       |
-| rootVariableNameExclusionEndWith    | Excludes root variables whose names end with these suffixes. Exclusion wins over inclusion. See [Scope-aware variable export](#scope-aware-variable-export).                                               | `[]`         |
-| rootVariableNameExclusionExact      | Excludes root variables whose names exactly match. Exclusion wins over inclusion. See [Scope-aware variable export](#scope-aware-variable-export).                                                         | `[]`         |
-| rootVariableNameExclusionStartWith  | Excludes root variables whose names start with these prefixes. Exclusion wins over inclusion. See [Scope-aware variable export](#scope-aware-variable-export).                                             | `[]`         |
-| rootVariableNameInclusionEndWith    | Includes root variables whose names end with these suffixes. If empty, no root name inclusion filter applies. See [Scope-aware variable export](#scope-aware-variable-export).                             | `[]`         |
-| rootVariableNameInclusionExact      | Includes root variables whose names exactly match. If empty, no root name inclusion filter applies. See [Scope-aware variable export](#scope-aware-variable-export).                                       | `[]`         |
-| rootVariableNameInclusionStartWith  | Includes root variables whose names start with these prefixes. If empty, no root name inclusion filter applies. See [Scope-aware variable export](#scope-aware-variable-export).                           | `[]`         |
-| rootVariableValueTypeExclusion      | Excludes root variables of these inferred JSON types. Exclusion wins over inclusion. See [Scope-aware variable export](#scope-aware-variable-export).                                                      | `[]`         |
-| rootVariableValueTypeInclusion      | Restricts exported root variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). See [Scope-aware variable export](#scope-aware-variable-export).                         | `[]`         |
+| rootVariableNameExclusionEndWith    | Excludes root variables whose names end with these suffixes. Exclusion wins over inclusion.                                               | `[]`         |
+| rootVariableNameExclusionExact      | Excludes root variables whose names exactly match. Exclusion wins over inclusion.                                                         | `[]`         |
+| rootVariableNameExclusionStartWith  | Excludes root variables whose names start with these prefixes. Exclusion wins over inclusion.                                             | `[]`         |
+| rootVariableNameInclusionEndWith    | Includes root variables whose names end with these suffixes. If empty, no root name inclusion filter applies.                             | `[]`         |
+| rootVariableNameInclusionExact      | Includes root variables whose names exactly match. If empty, no root name inclusion filter applies.                                       | `[]`         |
+| rootVariableNameInclusionStartWith  | Includes root variables whose names start with these prefixes. If empty, no root name inclusion filter applies.                           | `[]`         |
+| rootVariableValueTypeExclusion      | Excludes root variables of these inferred JSON types. Exclusion wins over inclusion.                                                      | `[]`         |
+| rootVariableValueTypeInclusion      | Restricts exported root variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`).                         | `[]`         |
 | signal                              | If `true` records related to signals will be exported                                                                                                                                                      | `true`       |
 | signal-subscription                 | If `true` records related to signal subscriptions will be exported                                                                                                                                         | `true`       |
 | timer                               | If `true` records related to timers will be exported                                                                                                                                                       | `true`       |
 | user-task                           | If `true` records related to user tasks will be exported                                                                                                                                                   | `true`       |
 | variable                            | If `true` records related to variables will be exported                                                                                                                                                    | `true`       |
 | variable-document                   | If `true` records related to variable documents will be exported                                                                                                                                           | `true`       |
-| variableNameExclusionEndWith        | Excludes variables whose names end with these suffixes. Exclusion wins over inclusion. See [Variable-name filters](#variable-name-filters).                                                                | `[]`         |
-| variableNameExclusionExact          | Excludes variables whose names exactly match. Exclusion wins over inclusion. See [Variable-name filters](#variable-name-filters).                                                                          | `[]`         |
-| variableNameExclusionStartWith      | Excludes variables whose names start with these prefixes. Exclusion wins over inclusion. See [Variable-name filters](#variable-name-filters).                                                              | `[]`         |
-| variableNameInclusionEndWith        | Includes variables whose names end with these suffixes. If empty, no name inclusion filter applies. See [Variable-name filters](#variable-name-filters).                                                   | `[]`         |
-| variableNameInclusionExact          | Includes variables whose names exactly match. If empty, no name inclusion filter applies. See [Variable-name filters](#variable-name-filters).                                                             | `[]`         |
-| variableNameInclusionStartWith      | Includes variables whose names start with these prefixes. If empty, no name inclusion filter applies. See [Variable-name filters](#variable-name-filters).                                                 | `[]`         |
-| variableValueTypeExclusion          | Excludes variables of these inferred JSON types. Exclusion wins over inclusion. See [Variable-type filters](#variable-type-filters).                                                                       | `[]`         |
-| variableValueTypeInclusion          | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included. See [Variable-type filters](#variable-type-filters).        | `[]`         |
-
-### Variable-name filters
-
-Starting with Camunda 8.9, you can filter exported variable records by variable name.
-
-Configuration:
-
-```yaml
-camunda:
-  data:
-    exporters:
-      opensearch:
-        args:
-          index:
-            variableNameInclusionStartWith:
-              - business_
-            variableNameExclusionStartWith:
-              - business_debug
-```
-
-The exporter first matches variable names against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
-
-For details on how this interacts with Optimize, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
-
-### Variable-type filters
-
-Variable-type filters let you restrict exported variables by their inferred JSON type, such as `String`, `Number`, `Boolean`, `Object` or `Null`.
-
-Configuration:
-
-```yaml
-camunda:
-  data:
-    exporters:
-      opensearch:
-        args:
-          index:
-            variableValueTypeInclusion:
-              - Object
-              - String
-            variableValueTypeExclusion:
-              - Object
-```
-
-Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
-
-### Scope-aware variable export
-
-The OpenSearch exporter can filter root and local variables differently.
-
-- Root variables are created in the process instance scope and are visible throughout the process instance.
-- Local variables are created in a child scope, such as a sub-process, call activity, or task. They are visible only in that scope and its children.
-
-Configure these options under `index`:
-
-```yaml
-camunda:
-  data:
-    exporters:
-      opensearch:
-        args:
-          index:
-            exportLocalVariablesEnabled: true
-
-            # Root variable name filters
-            rootVariableNameInclusionExact: []
-            rootVariableNameInclusionStartWith: []
-            rootVariableNameInclusionEndWith: []
-            rootVariableNameExclusionExact: []
-            rootVariableNameExclusionStartWith: []
-            rootVariableNameExclusionEndWith: []
-            # Local variable name filters
-            localVariableNameInclusionExact: []
-            localVariableNameInclusionStartWith: []
-            localVariableNameInclusionEndWith: []
-            localVariableNameExclusionExact: []
-            localVariableNameExclusionStartWith: []
-            localVariableNameExclusionEndWith: []
-            # Root variable type filters
-            rootVariableValueTypeInclusion: []
-            rootVariableValueTypeExclusion: []
-            # Local variable type filters
-            localVariableValueTypeInclusion: []
-            localVariableValueTypeExclusion: []
-```
-
-Behavior overview:
-
-- If `export-local-variables-enabled` is set to `false`, no local variables are exported.
-- If all `root-*` and `local-*` lists are empty, only the global filters (`variable-name-*` and `variable-value-type-*`) apply. This preserves behavior from earlier versions.
-- If any root-specific or local-specific list is non-empty, that scope uses both the global filters and the scope-specific filters.
-- Exclusion filters take precedence over inclusion filters.
-
-#### Example configuration
-
-Export only selected root variables and exclude temporary local variables:
-
-```yaml
-index:
-  exportLocalVariablesEnabled: true
-
-  # Include only specific root variables
-  rootVariableNameInclusionExact: ["customerId", "orderId"]
-  # Exclude local variables used for temporary processing
-  localVariableNameExclusionStartWith: ["tmp_", "debug_"]
-  # Export only simple root variable types
-  rootVariableValueTypeInclusion: ["String", "Number"]
-```
-
-In this example:
-
-- Only `customerId` and `orderId` root variables are exported.
-- Local variables starting with `tmp_` or `debug_` are excluded.
-- Only root variables of type `String` and `Number` are exported.
-
-### BPMN process filters
-
-BPMN process filters control which processes (by `bpmnProcessId`) are exported. All records that carry the given `bpmnProcessId` follow the same decision.
-
-```yaml
-camunda:
-  data:
-    exporters:
-      opensearch:
-        args:
-          index:
-            bpmnProcessIdInclusion:
-              - orderProcess
-            bpmnProcessIdExclusion:
-              - debugProcess
-```
-
-Processes listed under `inclusion` are candidates; `exclusion` removes any of those candidates again.
-
-Some value types that never expose `bpmnProcessId` (for example, `DEPLOYMENT`, `DECISION`) are not affected and remain controlled only via the `index.*` flags.
-
-### Optimize mode
-
-With Optimize mode, you can restrict exported records to those used by Optimize, reducing index size.
-
-```yaml
-camunda:
-  data:
-    exporters:
-      opensearch:
-        args:
-          index:
-            optimizeModeEnabled: true
-```
-
-When enabled, the exporter emits only the value types and intents that Optimize imports. Other value types are dropped unless you explicitly opt in to the legacy behavior (for example, via `include-enabled-records`).
-
-Use this flag only if the exporter indices are dedicated to Optimize. For SaaS and Self-Managed recommendations, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
-
+| variableNameExclusionEndWith        | Excludes variables whose names end with these suffixes. Exclusion wins over inclusion.                                                                | `[]`         |
+| variableNameExclusionExact          | Excludes variables whose names exactly match. Exclusion wins over inclusion.                                                                          | `[]`         |
+| variableNameExclusionStartWith      | Excludes variables whose names start with these prefixes. Exclusion wins over inclusion.                                                              | `[]`         |
+| variableNameInclusionEndWith        | Includes variables whose names end with these suffixes. If empty, no name inclusion filter applies.                                                   | `[]`         |
+| variableNameInclusionExact          | Includes variables whose names exactly match. If empty, no name inclusion filter applies.                                                             | `[]`         |
+| variableNameInclusionStartWith      | Includes variables whose names start with these prefixes. If empty, no name inclusion filter applies.                                                 | `[]`         |
+| variableValueTypeExclusion          | Excludes variables of these inferred JSON types. Exclusion wins over inclusion.                                                                       | `[]`         |
+| variableValueTypeInclusion          | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included.        | `[]`         |
 </TabItem>
 
 <TabItem value="bulk">
