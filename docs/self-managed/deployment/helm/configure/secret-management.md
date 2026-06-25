@@ -319,21 +319,6 @@ stringData:
   # Only if "orchestration.enabled: true".
   identity-orchestration-client-token: "${IDENTITY_ZEEBE_CLIENT_SECRET}"
 
-  # Only if "identityPostgresql.enabled: true".
-  identity-postgresql-admin-password: "${IDENTITY_POSTGRESQL_ADMIN_SECRET}"
-  identity-postgresql-user-password: "${IDENTITY_POSTGRESQL_USER_SECRET}"
-
-  # Only if "keycloak.enabled: true".
-  identity-keycloak-admin-password: "${KEYCLOAK_ADMIN_SECRET}"
-
-  # Only if "keycloak.postgresql.enabled: true".
-  identity-keycloak-postgresql-admin-password: "${KEYCLOAK_POSTGRESQL_ADMIN_SECRET}"
-  identity-keycloak-postgresql-user-password: "${KEYCLOAK_POSTGRESQL_USER_SECRET}"
-
-  # Only if "postgresql.enabled: true".
-  webmodeler-postgresql-admin-password: "${WEB_MODELER_POSTGRESQL_ADMIN_SECRET}"
-  webmodeler-postgresql-user-password: "${WEB_MODELER_POSTGRESQL_USER_SECRET}"
-
   # Only if connecting to Elasticsearch
   orchestration-elasticsearch-password: "${ORCHESTRATION_ELASTICSEARCH_SECRET}"
   optimize-elasticsearch-password: "${OPTIMIZE_ELASTICSEARCH_SECRET}"
@@ -367,31 +352,6 @@ global:
         secret:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-optimize-client-token"
-
-identityPostgresql:
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "identity-postgresql-admin-password"
-      userPasswordKey: "identity-postgresql-user-password"
-
-identityKeycloak:
-  auth:
-    existingSecret: "camunda-credentials"
-    passwordSecretKey: "identity-keycloak-admin-password"
-  postgresql:
-    auth:
-      existingSecret: "camunda-credentials"
-      secretKeys:
-        adminPasswordKey: "identity-keycloak-postgresql-admin-password"
-        userPasswordKey: "identity-keycloak-postgresql-user-password"
-
-webModelerPostgresql:
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "webmodeler-postgresql-admin-password"
-      userPasswordKey: "webmodeler-postgresql-user-password"
 
 connectors:
   security:
