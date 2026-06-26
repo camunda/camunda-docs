@@ -76,17 +76,19 @@ The sidebar displays a count of active variable filter conditions. Click **Add/E
 
 ### Operators reference
 
-| Operator           | Behavior                                           | Example                                             |
-| ------------------ | -------------------------------------------------- | --------------------------------------------------- |
-| **equals**         | Exact match on variable value                      | Find instances where `status = "pending"`           |
-| **not equal**      | Value does not match                               | Find instances where `status ≠ "error"`             |
-| **contains**       | Substring match (searches truncated varValue only) | Find order IDs containing `"2024"`                  |
-| **is one of**      | Match any value in a comma-separated list          | Find instances where `priority` in `(high, urgent)` |
-| **exists**         | Variable is present (any value)                    | Find instances with a specific variable set         |
-| **does not exist** | Variable is not present                            | Find instances missing a required variable          |
+| Operator           | Behavior                                                                  | Example                                             |
+| ------------------ | ------------------------------------------------------------------------- | --------------------------------------------------- |
+| **equals**         | Exact match on variable value (searches truncated value only)             | Find instances where `status = "pending"`           |
+| **not equal**      | Value does not match (searches truncated value only)                      | Find instances where `status ≠ "error"`             |
+| **contains**       | Case-sensitive substring match (searches truncated value only)            | Find order IDs containing `"2024"`                  |
+| **is one of**      | Match any value in a comma-separated list (searches truncated value only) | Find instances where `priority` in `(high, urgent)` |
+| **exists**         | Variable is present (any value)                                           | Find instances with a specific variable set         |
+| **does not exist** | Variable is not present                                                   | Find instances missing a required variable          |
 
 :::caution
-The **contains** operator searches only the first ~8,000 characters of a variable value. If a match exists beyond this boundary, it will not be returned.
+Value-based variable filters (`equals`, `not equal`, `is one of`, and `contains`) search only the first ~8,000 characters of a variable value. If a match exists beyond this boundary, it will not be returned.
+
+In the Operate UI, the inline warning appears on **contains** only.
 :::
 
 ### AND logic
@@ -190,7 +192,7 @@ Numeric comparison operators are not supported. Use **equals** or **contains** a
 - **OR logic**: Filters are combined with AND logic only; OR conditions are not supported.
 - **Variable name autocomplete**: Variable names must be entered as free text. Variable name suggestions based on process definitions are a planned future enhancement.
 - **Nested JSON path filtering**: Filtering on nested properties within JSON objects (for example, `customer.region`) is not supported; filter on the top-level variable only.
-- **Contains truncation**: The **contains** operator searches only the first ~8,100 characters of a variable value.
+- **Value truncation**: Value-based operators (`equals`, `not equal`, `is one of`, and `contains`) search only the first ~8,000 characters of a variable value.
 - **Filter sharing**: Filter state is stored in your browser session and cannot be shared via URL. See [filter persistence](#filter-persistence) for details.
 
 ## Related topics
