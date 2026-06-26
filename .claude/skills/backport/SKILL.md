@@ -38,21 +38,23 @@ For each target version:
 
 ## 4. Validation
 
-Follow the build and format rules in `repo.instructions.md` §5.
+Follow the build and validation rules in `repo.instructions.md`, section 5.
 
 ## 5. Commit and PR conventions
 
-**Commit message**: same format as any other change, but call out the version in the scope:
+Follow the commit rules in `repo.instructions.md`, section 4, with the following specifications:
+
+**Commit message**: same format as any other change, but call out the version in the scope. For example:
 
 ```
 docs(version-8.8): backport REST connector polling guide from 8.9
 fix(version-8.7,version-8.8): correct filter description for process instance variables
 ```
 
-**PR description**: state clearly which versions are included and link to the source PR or commit. Example:
+**PR description**: state clearly which versions are included and link to the source PR or commit. For example:
 
-> Backports #9050 to 8.8 and 8.7. Applies the corrected filter description for process instance variables. No structural changes; content-only edit.
+```
+Backports #9050 to 8.8 and 8.7. Applies the corrected filter description for process instance variables. No structural changes; content-only edit.
+```
 
 **Labels**: apply the version labels for each version included in the backport (for example, `version:8.8`, `version:8.7`) in addition to any component label.
-
-**Reviewer**: add `@camunda/tech-writers` unless working with an embedded writer, same as any other PR.
