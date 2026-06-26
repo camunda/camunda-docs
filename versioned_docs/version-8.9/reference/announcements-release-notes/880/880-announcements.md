@@ -74,6 +74,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 
 | Patch release                                                    | Type            | Key change                                                                                                                                            |
 | :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
 | [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
@@ -1176,3 +1177,30 @@ Under these conditions:
 
 - Before the fix is available: apply the workaround above.
 - After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
+
+### Tasklist
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Tasklist V1: candidate group task visibility {#tasklist-v1-candidate-group-task-visibility}
+
+Camunda 8.8.26 introduced a regression in which user tasks become invisible in the Tasklist V1 API when a candidate group's name differs from its ID ([camunda/camunda#55576](https://github.com/camunda/camunda/issues/55576)).
+
+Starting with this regression, the Zeebe engine resolves candidate group names to IDs at task creation time, while the Tasklist V1 API resolves the authenticated user's group IDs to names before comparing against the stored candidate groups. When a group's name and ID differ, this mismatch causes tasks to be invisible to all members of that group.
+
+You're affected if you're using the Tasklist V1 API with user task access restrictions enabled and any group used as a candidate group in your processes has a name that differs from its ID.
+
+**Workaround:** Set the Zeebe broker environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION=false` (default: `true`) and ensure your BPMN models reference candidate groups by name rather than ID. This restores correct task visibility for newly-created tasks. Tasks created while the regression was active remain affected.
+
+**Fix:** The fix was released in [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29). After upgrading, tasks created while the regression was active are also fixed without requiring manual intervention.
+
+:::note
+The Tasklist V1 API is deprecated and will be removed in Camunda 8.10. Consider [migrating to the Tasklist V2 API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) to avoid disruption when upgrading to 8.10 or later.
+:::
+
+</div>
+</div>
