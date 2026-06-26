@@ -54,7 +54,7 @@ Control who can access what by assigning permissions through roles.
 ### Multi-tenancy
 
 :::note
-This section describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md).
+This section describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
 :::
 
 Isolate data and access in Optimize between different customers or business units by organizing resources into tenants. This is effective only if you have [multi-tenancy checks enabled for your Orchestration Cluster](/components/admin/tenant.md).

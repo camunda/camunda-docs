@@ -104,7 +104,7 @@ module.exports = {
         "components/agentic-orchestration/ao-design",
         {
           type: "category",
-          label: "Evaluate your AI agents",
+          label: "Evaluate AI agents",
           link: {
             type: "doc",
             id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
@@ -730,8 +730,17 @@ module.exports = {
               ],
             },
             {
-              type: "doc",
-              id: "components/hub/organization/manage-catalog/manage-catalog",
+              type: "category",
+              label: "Manage the catalog",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-catalog/manage-catalog",
+              },
+              items: [
+                "components/hub/organization/manage-catalog/getting-started-catalog",
+                "components/hub/organization/manage-catalog/manage-asset-lifecycle",
+                "components/hub/organization/manage-catalog/sync-multiple-repositories",
+              ],
             },
             {
               type: "category",
@@ -877,6 +886,7 @@ module.exports = {
                       items: [
                         "components/hub/workspace/modeler/element-templates/element-template-generator",
                         "components/hub/workspace/modeler/element-templates/using-templates-in-modeler",
+                        "components/hub/workspace/modeler/element-templates/use-catalog-assets",
                         "components/hub/workspace/modeler/element-templates/save-as-element-templates",
                         "components/hub/workspace/modeler/element-templates/best-practices",
                       ],
@@ -1889,6 +1899,7 @@ module.exports = {
                   ],
                 },
                 "self-managed/deployment/helm/configure/secret-management",
+                "self-managed/deployment/helm/configure/tls",
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
@@ -2187,7 +2198,15 @@ module.exports = {
           },
           items: [
             "self-managed/concepts/multi-tenancy/logical-tenants",
-            "self-managed/concepts/multi-tenancy/physical-tenants",
+            {
+              type: "category",
+              label: "Physical Tenants",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/multi-tenancy/physical-tenants",
+              },
+              items: ["self-managed/concepts/physical-tenants/index"],
+            },
           ],
         },
         {

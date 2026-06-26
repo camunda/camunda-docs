@@ -65,3 +65,7 @@ When referencing Physical Tenants and Logical Tenants in documentation and code:
 - Use **`tenantId`** only when referencing Logical Tenants (backward-compatible with existing API).
 - Existing API keys remain unchanged.
 - Use **Physical Tenant** and **Logical Tenant** (capitalized) as the canonical terms.
+
+## Learn more
+
+For detailed technical information about isolation model, architecture, and storage configuration, see [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md).

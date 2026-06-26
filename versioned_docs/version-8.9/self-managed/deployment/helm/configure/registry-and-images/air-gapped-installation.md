@@ -125,7 +125,7 @@ docker pull registry.camunda.cloud/bitnami/postgresql:latest
 :::note Registry migration notice
 On November 30, 2025, the image vendor (Bitnami) migrated its repositories. This does not affect pulling images: you can still pull any image by its exact tag. It does affect tag listing. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI return only the tags cached since the migration, so the listed tags are incomplete. The registry stores cached images, not the full upstream catalog.
 
-For the list of supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+For the complete list of available tags (with digests), see [Browse available images and tags](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags) and pick the exact tags to mirror from there. For supported combinations, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 :::
 
 If you use Bitnami Premium images from the `vendor-ee` registry, you can use [Skopeo](https://github.com/containers/skopeo) to copy images directly to your private registry without requiring Docker locally:
