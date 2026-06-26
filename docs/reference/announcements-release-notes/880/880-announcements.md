@@ -91,7 +91,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 
 Camunda 8.8.22 unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.8.22 or any later 8.8.x patch. The built-in Elasticsearch, OpenSearch, and RDBMS exporters are unaffected.
 
-A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and will be available in a later 8.8.x patch.
+A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and is available in 8.8.28.
 
 **Action:** If you maintain a custom exporter that reads message batch records, avoid calling `getMessageKeys()` until you upgrade to a patch that includes the fix.
 
@@ -868,7 +868,7 @@ With the Camunda 8.8 release, the configuration for the external database used b
 With the Camunda 8.8 release, the default ID token claim that Web Modeler uses to assign usernames has changed from `name` to `preferred_username`.
 
 - This change aligns the configuration with other Camunda 8 components for consistency across the platform.
-- To continue using the `name` claim, explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` as an environment variable for the Web Modeler `webapp`. See [Identity / Keycloak configuration](/self-managed/components/hub/configuration/modeler-configuration.md#identity--keycloak-1).
+- To continue using the `name` claim, explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` as an environment variable for the Web Modeler `webapp`. See [Identity / Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak-1).
 
 </div>
 </div>
@@ -1015,7 +1015,7 @@ Under these conditions:
 
 **Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
 
-**Fix:** A fix will be available in a later 8.8.x patch. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
+**Fix:** A fix is available in 8.8.28. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
 
 - [camunda/camunda#11789](https://github.com/camunda/camunda/issues/11789): FEEL expressions used as mapping sources may not evaluate correctly due to ordering.
 - [camunda/camunda#35251](https://github.com/camunda/camunda/issues/35251): When one value from a nested variable is listed as an output mapping, all values in the nested variable are merged into the parent scope. Workaround: map the full nested variable instead of individual values.
@@ -1103,7 +1103,7 @@ For future use, refer to the [new AWS Marketplace listing](https://aws.amazon.co
 
 #### Removed: Cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` in Web Modeler Self-Managed
 
-With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) are no longer supported.
+With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/properties.md#clusters) are no longer supported.
 
 For more information on how to migrate, see the [upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/components/870-to-880.md#cluster-configuration).
 
@@ -1118,8 +1118,8 @@ For more information on how to migrate, see the [upgrade guide](/versioned_docs/
 
 #### Cluster configuration in Web Modeler Self-Managed
 
-The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) now depend on the version of the cluster.
-For version 8.8 and above, [new configuration options](/self-managed/components/hub/configuration/modeler-configuration.md#additional-configuration-for-cluster-versions--88) are required.
+The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/hub/configuration/properties.md#clusters) now depend on the version of the cluster.
+For version 8.8 and above, [new configuration options](/self-managed/components/hub/configuration/properties.md#additional-configuration-for-cluster-versions--88) are required.
 
 For more information on how to modify your existing configuration, see the [upgrade guide](/versioned_docs/version-8.8/self-managed/upgrade/components/870-to-880.md#changed-configuration-options).
 
@@ -1182,7 +1182,7 @@ Under these conditions:
 
 **Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
 
-**Fix:** A fix will be available in a later 8.8.x patch. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
+**Fix:** A fix is available in 8.8.28. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
 
 - [camunda/camunda#11789](https://github.com/camunda/camunda/issues/11789): FEEL expressions used as mapping sources may not evaluate correctly due to ordering.
 - [camunda/camunda#35251](https://github.com/camunda/camunda/issues/35251): When one value from a nested variable is listed as an output mapping, all values in the nested variable are merged into the parent scope. Workaround: map the full nested variable instead of individual values.

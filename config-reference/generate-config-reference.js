@@ -29,6 +29,8 @@ const typeReplacements = {
     "enum[assigned, provided]",
   "java.util.Set<java.lang.Integer>": "array[integer]",
   "java.util.Map<java.lang.String,java.lang.Object>": "map[string,object]",
+  "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>":
+    "map[string,map[string,object]]",
 };
 
 const preserveGroups = [];

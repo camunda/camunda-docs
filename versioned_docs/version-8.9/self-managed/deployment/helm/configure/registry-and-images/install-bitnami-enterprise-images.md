@@ -147,6 +147,22 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 
 :::
 
+## Browse available images and tags
+
+For each Bitnami Premium image, a JSON file listing every available tag and its image digest is published and refreshed automatically from the upstream vendor catalog, at:
+
+```text
+https://camunda.github.io/camunda-deployment-references/bitnami_<image>.json
+```
+
+For example, [bitnami_postgresql.json](https://camunda.github.io/camunda-deployment-references/bitnami_postgresql.json). You can browse all of the published files in the [`gh-pages` branch](https://github.com/camunda/camunda-deployment-references/tree/gh-pages/docs).
+
+Use this list as the source of truth for the available versions. Because it is generated from the upstream catalog, it is complete. It also includes images published before the November 30, 2025 migration that `skopeo` can no longer list.
+
+:::warning
+Do not use the Harbor registry UI to browse these images: it only shows images that have already been cached, not the full upstream catalog.
+:::
+
 ## Understanding CVEs in Bitnami images
 
 Working with Bitnami images requires understanding CVE (Common Vulnerabilities and Exposures) reporting and how to interpret scan results.
@@ -197,8 +213,10 @@ When using Bitnami images, consider these constraints:
 
 ## Compatibility note
 
-:::info Registry migration notice
-As of November 30, 2025, our image vendor has migrated its repositories. All images downloaded before this date remain available but are no longer listable by the `skopeo` command. The `skopeo` command will return only images added by Bitnami after November 30, 2025.
+:::note Registry migration notice
+On November 30, 2025, the image vendor (Bitnami) migrated its repositories. This does not affect pulling images: you can still pull any image by its exact tag. It does affect tag listing. For `vendor-ee/*` paths, `skopeo` and the Harbor web UI return only the tags cached since the migration, so the listed tags are incomplete. The registry stores cached images, not the full upstream catalog.
+
+For the list of supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 :::
 
 This configuration follows Bitnami's official image and chart usage guidelines. For licensing, support levels, and CVE management, refer to [Bitnami Documentation](https://docs.bitnami.com/) and [Bitnami Enterprise](https://bitnami.com/enterprise).

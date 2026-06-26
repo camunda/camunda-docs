@@ -4,6 +4,9 @@ paths:
       tags:
         - Job
       operationId: getGlobalJobStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Global job statistics
       description: |-
 
@@ -60,6 +63,9 @@ paths:
       tags:
         - Job
       operationId: getJobTypeStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get job statistics by type
       description: |-
 
@@ -96,6 +102,9 @@ paths:
       tags:
         - Job
       operationId: getJobWorkerStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get job statistics by worker
       description: |-
 
@@ -132,6 +141,9 @@ paths:
       tags:
         - Job
       operationId: getJobTimeSeriesStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get time-series metrics for a job type
       description: |-
 
@@ -170,6 +182,9 @@ paths:
       tags:
         - Job
       operationId: getJobErrorStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get error metrics for a job type
       description: |-
 

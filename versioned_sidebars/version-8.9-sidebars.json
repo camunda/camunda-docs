@@ -104,7 +104,7 @@
         "components/agentic-orchestration/ao-design",
         {
           "type": "category",
-          "label": "Evaluate your AI agents",
+          "label": "Evaluate AI agents",
           "link": {
             "type": "doc",
             "id": "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview"
@@ -262,6 +262,7 @@
             "components/best-practices/management/doing-a-proper-poc"
           ],
           "Architecture": [
+            "components/best-practices/architecture/data-flow",
             "components/best-practices/architecture/deciding-about-your-stack",
             {
               "type": "category",
@@ -3620,6 +3621,7 @@
                   ]
                 },
                 "self-managed/deployment/helm/configure/secret-management",
+                "self-managed/deployment/helm/configure/tls",
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",

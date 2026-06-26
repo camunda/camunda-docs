@@ -85,6 +85,10 @@ paths:
     $ref: "agent-instances.yaml#/paths/~1agent-instances~1{agentInstanceKey}"
   /agent-instances/search:
     $ref: "agent-instances.yaml#/paths/~1agent-instances~1search"
+  /agent-instances/{agentInstanceKey}/history:
+    $ref: "agent-instances.yaml#/paths/~1agent-instances~1{agentInstanceKey}~1history"
+  /agent-instances/{agentInstanceKey}/history/search:
+    $ref: "agent-instances.yaml#/paths/~1agent-instances~1{agentInstanceKey}~1history~1search"
   /audit-logs/search:
     $ref: "audit-logs.yaml#/paths/~1audit-logs~1search"
   /audit-logs/{auditLogKey}:
@@ -161,6 +165,8 @@ paths:
     $ref: "documents.yaml#/paths/~1documents~1{documentId}~1links"
   /element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation:
     $ref: "element-instances.yaml#/paths/~1element-instances~1ad-hoc-activities~1{adHocSubProcessInstanceKey}~1activation"
+  /element-instances/wait-states/search:
+    $ref: "element-instances.yaml#/paths/~1element-instances~1wait-states~1search"
   /element-instances/search:
     $ref: "element-instances.yaml#/paths/~1element-instances~1search"
   /element-instances/{elementInstanceKey}:
@@ -395,7 +401,7 @@ paths:
     $ref: "variables.yaml#/paths/~1variables~1{variableKey}"
 components:
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
