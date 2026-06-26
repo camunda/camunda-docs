@@ -192,7 +192,7 @@ Organization
       └─ File        # root-level
 ```
 
-The `projectId` in v1 and the `workspaceKey` in v2 refer to the same underlying entity; the same UUID works in both APIs.
+In the workspace API, the v1 `projectId` is now called the v2 `workspaceKey`. The same UUID works in both. In files and folders, the v1 `projectId` maps to the v2 `projectKey`.
 
 ### Date filters
 
@@ -598,11 +598,18 @@ POST /api/v1/versions/{versionId}/restore
 }
 ```
 
-In Camunda Hub API v2, use the noun "restoration" and identify the version to restore using only the path parameter:
+In Camunda Hub API v2, use the noun "restoration" and identify the version to restore using the path parameter:
 
 ```json title="Camunda Hub API v2"
 POST /api/v2/versions/{versionKey}/restoration
-(no request body)
+(no body)
+```
+
+For element template files, include a `version` integer in the request body to set the target version number in the restored content:
+
+```json title="Camunda Hub API v2"
+POST /api/v2/versions/{versionKey}/restoration
+{ "version": 2 }
 ```
 
 ### Compare two versions
