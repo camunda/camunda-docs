@@ -93,7 +93,7 @@ Validation errors include an additional `violations` array:
 
 ### Pagination
 
-Offset pagination in Camunda Hub API v2 is different than Web Modeler API v1. Additionally, v2 introduces cursor pagination.
+Offset pagination in Camunda Hub API v2 is different from Web Modeler API v1. Additionally, v2 introduces cursor pagination.
 
 #### Offset pagination
 
@@ -135,7 +135,7 @@ In addition to the different pagination model, the default page size has changed
 
 #### Cursor pagination
 
-In addition to offset pagination, Camunda Hub API v2 offers cursor pagination. With this, you use a `page` object with two fields:
+In addition to offset pagination, Camunda Hub API v2 offers cursor pagination. With cursor pagination, you use a `page` object with two fields:
 
 - `page.after` specifies the cursor to start from. You receive this from a prior response.
 - `page.limit` limits the number of items returned.
@@ -413,7 +413,7 @@ In Web Modeler API v1, project data in the response was nested under a `metadata
 }
 ```
 
-In Camunda Hub API v2, folder data is nested under a `folder` key with `projects` in the `content`:
+In Camunda Hub API v2, workspace data is nested under a `workspace` key with `projects` in the `content`:
 
 ```json title="Camunda Hub API v2"
 {
@@ -442,7 +442,7 @@ In addition to the [general field changes](#workspace-api-field-mapping), the fo
 
 ## Collaborator API
 
-Three important changes have been made to the collaborator API in Camunda Hub API v2:
+Camunda Hub API v2 makes three important changes to the collaborator API:
 
 - The [path](#endpoint-mapping) is restructured under workspaces.
 - The HTTP method for [adding a collaborator](#add-a-collaborator) changes from `PUT` to `POST`.
@@ -516,7 +516,7 @@ The following sections cover changes that apply to version API endpoints.
 
 ### Endpoint mapping
 
-All version API endpoints have a Camunda Hub API v2 equivalent _with the exception of the compare versions endpoint_:
+All version API endpoints have a Camunda Hub API v2 equivalent, except the compare versions endpoint:
 
 | Operation            | Web Modeler API v1                                     | Camunda Hub API v2                           |
 | -------------------- | ------------------------------------------------------ | -------------------------------------------- |
@@ -538,7 +538,7 @@ The following fields have changed across all file endpoints:
 | `id`               | `versionKey`       | Response         | Renamed |
 | `versionId`        | `versionKey`       | Response         | Renamed |
 
-### Get version
+### Get a version
 
 In Web Modeler API v1, version data in the response was nested under a `metadata` key:
 
@@ -582,7 +582,7 @@ POST /api/v1/versions/{versionId}/restore
 }
 ```
 
-In Camunda Hub API v2, use the noun "restoration" and the version to restore is identified solely by the path parameter:
+In Camunda Hub API v2, use the noun "restoration" and identify the version to restore using only the path parameter:
 
 ```json title="Camunda Hub API v2"
 POST /api/v2/versions/{versionKey}/restoration
@@ -593,7 +593,7 @@ POST /api/v2/versions/{versionKey}/restoration
 
 The compare versions endpoint `GET /versions/compare/{version1Id}...{version2Id}` no longer exists in Camunda Hub API v2.
 
-In Web Modeler API v1, the compare versions endpoint returned a link to a visual comparison between two versions where the version referenced by `version1Id` acts as a baseline to compare the version referenced by `version2Id` against.
+In Web Modeler API v1, the compare versions endpoint returned a link to a visual comparison between two versions, with `version1Id` as the baseline and `version2Id` as the version being compared.
 
 Instead of making an API request for this link, you can construct it yourself:
 
@@ -619,7 +619,7 @@ The info API endpoint has a Camunda Hub API v2 equivalent:
 | --------- | ------------------ | ------------------ |
 | Get info  | `GET /v1/info`     | `GET /v2/info`     |
 
-### Get Info
+### Get info
 
 The following response fields have changed:
 
