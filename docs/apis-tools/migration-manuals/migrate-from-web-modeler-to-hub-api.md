@@ -256,6 +256,18 @@ The following filter operators are available in Camunda Hub API:
 | `$exists`        | Null check                              | `{ "folderKey": { "$exists": false } }`                                     |
 | `$or`            | Logical OR                              | `{ "$or": [{ "type": { "$eq": "bpmn" } }, { "type": { "$eq": "form" } }] }` |
 
+## Dropped endpoints
+
+The following v1 endpoints have no v2 equivalent and are not carried forward:
+
+| Web Modeler API v1                                     | Notes                                                                                    |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| `POST /v1/milestones`                                  | Milestones were deprecated in Camunda 8.7. Use the [Versions API](#version-api) instead. |
+| `GET /v1/milestones/{milestoneId}`                     | Use the [Versions API](#version-api) instead.                                            |
+| `PATCH /v1/milestones/{milestoneId}`                   | Use the [Versions API](#version-api) instead.                                            |
+| `DELETE /v1/milestones/{milestoneId}`                  | Use the [Versions API](#version-api) instead.                                            |
+| `GET /v1/versions/compare/{version1Id}...{version2Id}` | See [Compare two versions](#compare-two-versions).                                       |
+
 ## File API
 
 The following sections cover changes that apply to file API endpoints.
@@ -280,7 +292,7 @@ The following fields have changed across all file endpoints:
 | ------------------ | ------------------ | ---------------- | --------------------------------------------------------------------------------------------------- |
 | `fileType`         | `type`             | Request/response | Renamed. `connector_template` is no longer supported. `element_template` is now `element-template`. |
 | `folderId`         | `folderKey`        | Request/response | Renamed                                                                                             |
-| `projectId`        | `workspaceKey`     | Request/response | [Renamed, but uses the same UUID](#projects-renamed-to-workspaces)                                  |
+| `projectId`        | `projectKey`       | Request/response | Renamed                                                                                             |
 | -                  | `content`          | Response         | New field                                                                                           |
 | `id`               | `fileKey`          | Response         | Renamed                                                                                             |
 | `canonicalPath`    | `canonicalPath`    | Response         | In v1, `canonicalPath` was an object. In v2, it's a string.                                         |
@@ -297,12 +309,14 @@ A `revision` is now required to prevent overwriting concurrent changes. Fetch th
 
 In addition to the [general field changes](#file-api-field-mapping), the following request fields have changed:
 
-| Web Modeler API v1       | Camunda Hub API v2 | Notes                                                                                           |
-| ------------------------ | ------------------ | ----------------------------------------------------------------------------------------------- |
-| `filter`                 | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`             |
-| `filter.createdBy.email` | `filter.createdBy` | In v1, `createdBy` was an object. In v2, it's a string representing the creator's email address |
-| `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` was an object. In v2, it's a string representing the updater's email address |
-| `sort.direction`         | `sort.order`       | Renamed                                                                                         |
+| Web Modeler API v1       | Camunda Hub API v2  | Notes                                                                                           |
+| ------------------------ | ------------------- | ----------------------------------------------------------------------------------------------- |
+| `filter`                 | `filter`            | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`             |
+| `filter.projectId`       | `filter.projectKey` | Renamed                                                                                         |
+| `filter.folderId`        | `filter.folderKey`  | Renamed                                                                                         |
+| `filter.createdBy.email` | `filter.createdBy`  | In v1, `createdBy` was an object. In v2, it's a string representing the creator's email address |
+| `filter.updatedBy.email` | `filter.updatedBy`  | In v1, `updatedBy` was an object. In v2, it's a string representing the updater's email address |
+| `sort.direction`         | `sort.order`        | Renamed                                                                                         |
 
 `content` is `null` on all items in the search response. Fetch individual files to retrieve content.
 
@@ -325,11 +339,11 @@ All folder API endpoints have a Camunda Hub API v2 equivalent:
 
 The following fields have changed across all folder endpoints:
 
-| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                                              |
-| ------------------ | ------------------ | ---------------- | ------------------------------------------------------------------ |
-| `parentId`         | `parentFolderKey`  | Request/response | Renamed                                                            |
-| `projectId`        | `workspaceKey`     | Request/response | [Renamed, but uses the same UUID](#projects-renamed-to-workspaces) |
-| `id`               | `folderKey`        | Response         | Renamed                                                            |
+| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes   |
+| ------------------ | ------------------ | ---------------- | ------- |
+| `parentId`         | `parentFolderKey`  | Request/response | Renamed |
+| `projectId`        | `projectKey`       | Request/response | Renamed |
+| `id`               | `folderKey`        | Response         | Renamed |
 
 ### Get a folder
 
@@ -359,7 +373,7 @@ In Camunda Hub API v2, folder data is nested under a `folder` key:
   "folder": {
     "folderKey": "f-456",
     "name": "processes",
-    "workspaceKey": "p-123",
+    "projectKey": "p-123",
     "parentFolderKey": null,
     "created": "...",
     "createdBy": { "name": "...", "email": "..." },
@@ -408,7 +422,7 @@ In Web Modeler API v1, project data in the response was nested under a `metadata
     "name": "My Project"
   },
   "content": {
-    "folders": [{ "projectKey": "proj-1", "name": "App v1" }]
+    "folders": [{ "id": "f-001", "name": "My Folder" }]
   }
 }
 ```
@@ -474,10 +488,11 @@ The following fields have changed across all file endpoints:
 
 In addition to the [general field changes](#collaborator-api-field-mapping), the following request fields have changed:
 
-| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                               |
-| ------------------ | ------------------ | ----------------------------------------------------------------------------------- |
-| `filter`           | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like` |
-| `sort.direction`   | `sort.order`       | Renamed                                                                             |
+| Web Modeler API v1 | Camunda Hub API v2    | Notes                                                                                                   |
+| ------------------ | --------------------- | ------------------------------------------------------------------------------------------------------- |
+| `filter`           | `filter`              | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`                     |
+| `filter.projectId` | `filter.workspaceKey` | Renamed. In v2, `filter.workspaceKey` is required — collaborators cannot be searched across workspaces. |
+| `sort.direction`   | `sort.order`          | Renamed                                                                                                 |
 
 Here is an example request from v1:
 
@@ -566,10 +581,11 @@ In Camunda Hub API v2, version data is at the top level of the response body:
 
 In addition to the [general field changes](#version-api-field-mapping), the following request fields have changed:
 
-| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                               |
-| ------------------ | ------------------ | ----------------------------------------------------------------------------------- |
-| `filter`           | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like` |
-| `sort.direction`   | `sort.order`       | Renamed                                                                             |
+| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                                    |
+| ------------------ | ------------------ | ---------------------------------------------------------------------------------------- |
+| `filter`           | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`      |
+| `filter.fileId`    | `filter.fileKey`   | Renamed. In v2, `filter.fileKey` is required — versions cannot be searched across files. |
+| `sort.direction`   | `sort.order`       | Renamed                                                                                  |
 
 ### Restore a version
 
