@@ -232,7 +232,7 @@ An instruction to assert the evaluation of a decision. See the [assertions docum
   </tr>
   <tr>
     <td>output</td>
-    <td>Expected output of the decision (any JSON type)</td>
+    <td>Expected output of the decision. Can be any JSON type.</td>
     <td>any</td>
     <td>No</td>
     <td></td>
@@ -1648,8 +1648,15 @@ An instruction to mock a DMN decision. See the [utilities documentation](utiliti
   </tr>
   <tr>
     <td>variables</td>
-    <td>The variables to set as the decision output.</td>
+    <td>The variables to set as the decision output. Deprecated, use <code>decisionOutput</code>.</td>
     <td>object</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>decisionOutput</td>
+    <td>The decision output to mock. Can be any JSON type.</td>
+    <td>any</td>
     <td>No</td>
     <td></td>
   </tr>
@@ -1661,9 +1668,7 @@ Example:
 {
   "type": "MOCK_DMN_DECISION",
   "decisionDefinitionId": "ChooseRocket",
-  "variables": {
-    "rocket": "Falcon Heavy"
-  }
+  "decisionOutput": "Falcon Heavy"
 }
 ```
 
