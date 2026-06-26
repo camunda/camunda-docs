@@ -2197,7 +2197,15 @@ module.exports = {
           },
           items: [
             "self-managed/concepts/multi-tenancy/logical-tenants",
-            "self-managed/concepts/multi-tenancy/physical-tenants",
+            {
+              type: "category",
+              label: "Physical Tenants",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/multi-tenancy/physical-tenants",
+              },
+              items: ["self-managed/concepts/physical-tenants/index"],
+            },
           ],
         },
         {
