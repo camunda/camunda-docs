@@ -141,6 +141,21 @@ Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Support
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenSearch 3.7 now supported
+
+Camunda 8.10 adds support for OpenSearch 3.7. Supported OpenSearch 3.x versions are now 3.5, 3.6, and 3.7.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
 ## Agentic orchestration
 
 <div className="release-announcement-row">
