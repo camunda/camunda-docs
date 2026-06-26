@@ -22,14 +22,14 @@ description: "Learn how to back up your Camunda 8 Self-Managed components when a
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Back up your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, and Tasklist) when using a relational database management system (RDBMS) as secondary storage.
+Back up your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, Tasklist, and Admin) when using a relational database management system (RDBMS) as secondary storage.
 
 :::tip
 For cross-region recovery using these RDBMS backups, see [Cold Recovery](../../../concepts/multi-region/cold-recovery.md).
 :::
 
 :::note
-This procedure is part of the **first phase of Decoupled Continuous Backups** and covers only **Zeebe**, **Operate**, and **Tasklist**. It does **not** cover **Identity** or **Optimize**.
+This procedure is part of the **first phase of Decoupled Continuous Backups** and covers **Zeebe**, **Operate**, **Tasklist**, and **Admin**. It does **not** cover **Management Identity (Keycloak)** or **Optimize**.
 
 Optimize always stores its data in Elasticsearch or OpenSearch, independently of the Orchestration Cluster's secondary storage. If you deploy Optimize alongside an RDBMS-backed Orchestration Cluster, back up Optimize independently using the [standalone Optimize backup procedure](../optimize-backup-and-restore.md). You do not need to switch the Orchestration Cluster backup to the Elasticsearch / OpenSearch path.
 :::
