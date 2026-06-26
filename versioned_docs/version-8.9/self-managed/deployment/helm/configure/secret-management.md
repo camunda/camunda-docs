@@ -198,7 +198,7 @@ For Azure Blob Storage with DefaultAzureCredential (managed identities and Workl
 
 ### Credential precedence with IRSA
 
-The AWS SDK resolves credentials through its [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which reads the static `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables before the IRSA web identity token. Because the chart injects these variables from the access key secrets above whenever the AWS document store is enabled, their presence takes precedence and prevents [IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#document-store-s3) from being used — even when the service account is annotated with an IAM role.
+The AWS SDK resolves credentials through its [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which reads the static `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables before the IRSA web identity token. Because the chart injects these variables from the access key secrets above whenever the AWS document store is enabled, their presence takes precedence and prevents [IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#document-store-s3) from being used, even when the service account is annotated with an IAM role.
 
 To authenticate with IRSA instead, set `global.documentStore.type.aws.irsa.enabled` to `true`. The chart then skips injecting the static credentials, and the AWS access key secrets above are not required.
 
