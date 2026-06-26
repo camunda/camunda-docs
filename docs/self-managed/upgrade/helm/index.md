@@ -63,4 +63,4 @@ If you manually created a `<release>-webModeler-data` (capital `M`) PVC as a wor
 ## Related resources
 
 - [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)
-- [Component upgrade from 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md)
+- [Component upgrade from 8.9 to 8.10](../components/890-to-8100.md)
