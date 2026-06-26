@@ -25,8 +25,10 @@ Use this structure for Physical Tenants:
 ```yaml
 camunda:
   # Root-level defaults (implicit default tenant base)
-  database:
-    url: jdbc:postgresql://db/shared
+  data:
+    secondary-storage:
+      rdbms:
+        url: jdbc:postgresql://db/shared
   security:
     authentication:
       method: oidc
@@ -38,11 +40,13 @@ camunda:
   physical-tenants:
     # Optional overrides for the always-present default tenant
     default:
-      initialization:
+      cluster:
         # Required when you override default-tenant values
-        partitionsCount: 3
-      database:
-        url: jdbc:postgresql://db/default_tenant
+        partitions-count: 3
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:postgresql://db/default_tenant
       security:
         authentication:
           providers:
@@ -51,10 +55,12 @@ camunda:
 
     # Additional Physical Tenant
     tenanta:
-      initialization:
-        partitionsCount: 3
-      database:
-        url: jdbc:postgresql://db/tenanta
+      cluster:
+        partitions-count: 3
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:postgresql://db/tenanta
       security:
         authentication:
           providers:
@@ -67,7 +73,7 @@ camunda:
 For a configured tenant entry under `camunda.physical-tenants.<tenant-key>`:
 
 - Required when present:
-  - `initialization` block, if the tenant overrides defaults.
+  - `cluster.partitions-count`, if the tenant overrides default cluster sizing.
   - `security.authentication.providers.assigned` to assign one or more cluster-defined identity providers.
 - Optional:
   - Any tenant-overridable `camunda.*` properties that support per-tenant override behavior.
@@ -84,12 +90,12 @@ Use `camunda.physical-tenants.<tenant-key>.*` only for tenant-specific differenc
 
 The following properties are cluster-scoped and cannot be overridden per tenant:
 
-- `method`
-- `cluster-admin`
-- `csrf`
-- `multi-tenancy`
-- `http-headers`
-- `authentication-refresh-interval`
+- `camunda.security.authentication.method`
+- `camunda.security.cluster-admin`
+- `camunda.security.csrf`
+- `camunda.security.multi-tenancy`
+- `camunda.security.http-headers`
+- `camunda.security.authentication.authentication-refresh-interval`
 
 ## Default tenant behavior and compatibility
 
@@ -108,16 +114,15 @@ At startup, configuration validation enforces tenant-level constraints.
 Known constraints and behavior for 8.10:
 
 - Tenant keys in `camunda.physical-tenants.<tenant-key>` must be lowercase alphanumeric (`[a-z0-9]+`) with a maximum length of 64 characters.
-- Validation is expected to reject unsupported or colliding storage configurations across tenants.
+- Validation rejects unsupported or colliding storage configurations across tenants.
+- For RDBMS-backed secondary storage, the combination of `camunda.data.secondary-storage.rdbms.url` and the effective table prefix must be unique per tenant.
+- For Elasticsearch and OpenSearch, the effective index prefix must be unique per tenant.
+- For object stores, backend-specific location combinations must be unique per tenant:
+  - AWS S3: Bucket name and bucket path.
+  - GCP: Bucket name and prefix.
+  - Azure: Container name, container path, and endpoint.
+  - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
-
-<!--
-TODO(physical-tenants): Add the final cross-tenant storage collision matrix once implementation details are finalized.
-Include explicit rules for:
-- RDBMS schema/table-prefix collisions
-- Elasticsearch/OpenSearch index-prefix collisions
-- Document store bucket/path collisions
--->
 
 ## Configuration examples
 
@@ -125,8 +130,10 @@ Include explicit rules for:
 
 ```yaml
 camunda:
-  database:
-    url: jdbc:postgresql://db/default
+  data:
+    secondary-storage:
+      rdbms:
+        url: jdbc:postgresql://db/default
 
   security:
     authentication:
@@ -137,8 +144,8 @@ camunda:
 
   physical-tenants:
     default:
-      initialization:
-        partitionsCount: 3
+      cluster:
+        partitions-count: 3
       security:
         authentication:
           providers:
@@ -146,10 +153,12 @@ camunda:
               - corp-idp
 
     riskprod:
-      initialization:
-        partitionsCount: 3
-      database:
-        url: jdbc:postgresql://db/riskprod
+      cluster:
+        partitions-count: 3
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:postgresql://db/riskprod
       security:
         authentication:
           providers:
@@ -162,15 +171,15 @@ camunda:
 Spring environment variable mapping follows canonical property conversion:
 
 ```bash
-CAMUNDA_DATABASE_URL=jdbc:postgresql://db/default
+CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:postgresql://db/default
 CAMUNDA_SECURITY_AUTHENTICATION_METHOD=oidc
 CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_CORP_IDP_TYPE=oidc
 
-CAMUNDA_PHYSICALTENANTS_DEFAULT_INITIALIZATION_PARTITIONSCOUNT=3
+CAMUNDA_PHYSICALTENANTS_DEFAULT_CLUSTER_PARTITIONSCOUNT=3
 CAMUNDA_PHYSICALTENANTS_DEFAULT_SECURITY_AUTHENTICATION_PROVIDERS_ASSIGNED_0=corp-idp
 
-CAMUNDA_PHYSICALTENANTS_RISKPROD_INITIALIZATION_PARTITIONSCOUNT=3
-CAMUNDA_PHYSICALTENANTS_RISKPROD_DATABASE_URL=jdbc:postgresql://db/riskprod
+CAMUNDA_PHYSICALTENANTS_RISKPROD_CLUSTER_PARTITIONSCOUNT=3
+CAMUNDA_PHYSICALTENANTS_RISKPROD_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:postgresql://db/riskprod
 CAMUNDA_PHYSICALTENANTS_RISKPROD_SECURITY_AUTHENTICATION_PROVIDERS_ASSIGNED_0=corp-idp
 ```
 
@@ -183,17 +192,21 @@ If you deploy with Helm, provide equivalent values in your `values.yaml` for the
 ```yaml
 # Example shape only. Map these values to your chart's current Camunda property injection mechanism.
 camunda:
-  database:
-    url: jdbc:postgresql://db/default
+  data:
+    secondary-storage:
+      rdbms:
+        url: jdbc:postgresql://db/default
   physical-tenants:
     default:
-      initialization:
-        partitionsCount: 3
+      cluster:
+        partitions-count: 3
     riskprod:
-      initialization:
-        partitionsCount: 3
-      database:
-        url: jdbc:postgresql://db/riskprod
+      cluster:
+        partitions-count: 3
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:postgresql://db/riskprod
 ```
 
 ## Related pages
