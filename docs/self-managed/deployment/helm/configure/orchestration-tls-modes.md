@@ -24,19 +24,34 @@ global:
       autoRollout: false # opt-in: roll Orchestration pods on Secret rotation (requires Secret read RBAC)
       rest:
         enabled: false # REST TLS — sets SERVER_SSL_ENABLED on Orchestration
-        secret:
-          existingSecret: "" # Kubernetes secret holding the REST server cert material
-          type: pkcs12 # one of: pkcs12, pem
-          existingSecretKey: keystore.p12 # pkcs12: keystore file; pem: certificate file (e.g. tls.crt)
-          existingSecretPrivateKeyKey: tls.key # pem only — private-key file
-          existingSecretPasswordKey: keystore-password # pkcs12 only — keystore password key
-          keyAlias: "" # pkcs12 only — optional cert alias inside the keystore
+        type: pkcs12 # one of: pkcs12, pem
+        keyAlias: "" # pkcs12 only — optional cert alias inside the keystore
+        cert:
+          secret:
+            existingSecret: "" # Kubernetes Secret holding the REST server cert (or PKCS12 keystore)
+            existingSecretKey: "" # pkcs12: keystore file key (default keystore.p12); pem: cert key (default tls.crt)
+        privateKey:
+          secret:
+            existingSecretKey: tls.key # pem only — private-key key inside the Secret
+        keystorePassword:
+          secret:
+            existingSecretKey: keystore-password # pkcs12 only — keystore password key inside the Secret
+        proxyVerify:
+          enabled: false
+          caSecret:
+            secret:
+              existingSecret: "" # Secret holding the CA bundle for NGINX upstream verification
+              existingSecretKey: ca.crt
+            namespace: "" # optional: CA Secret namespace (defaults to release namespace)
       grpc:
         enabled: false # gRPC TLS — sets CAMUNDA_API_GRPC_SSL_ENABLED on Orchestration
-        secret:
-          existingSecret: "" # Kubernetes secret with PEM cert + key for the gRPC server
-          existingSecretKey: tls.crt
-          existingSecretPrivateKeyKey: tls.key
+        cert:
+          secret:
+            existingSecret: "" # Kubernetes Secret with PEM cert for the gRPC server
+            existingSecretKey: "" # defaults to tls.crt
+        privateKey:
+          secret:
+            existingSecretKey: tls.key
 ```
 
 Both flags default to `false`. Set either independently to enable that protocol's TLS. Explicit `orchestration.env` entries with the same name override these flags (Kubernetes last-wins on duplicate env names).
@@ -45,7 +60,7 @@ When `enabled: true`, the chart fails template rendering unless the cert materia
 
 ### REST TLS: PKCS12 vs PEM
 
-The REST `secret.type` field selects which Spring Boot SSL property family the chart emits:
+The REST `type` field selects which Spring Boot SSL property family the chart emits:
 
 - **`pkcs12` (default)** — emits `SERVER_SSL_KEY_STORE`, `SERVER_SSL_KEY_STORE_TYPE=PKCS12`, `SERVER_SSL_KEY_STORE_PASSWORD` (via `secretKeyRef`), and optionally `SERVER_SSL_KEY_ALIAS`.
 - **`pem`** — emits `SERVER_SSL_CERTIFICATE` and `SERVER_SSL_CERTIFICATE_PRIVATE_KEY` (Spring Boot 2.7+). Use this for cert-manager `kubernetes.io/tls` Secrets (`tls.crt` + `tls.key`) and Let's Encrypt-issued certificates — no manual PKCS12 conversion needed.
@@ -153,17 +168,19 @@ global:
       autoRollout: true # cert-manager renews on schedule; this rolls Orchestration on renewal
       rest:
         enabled: true
-        secret:
-          existingSecret: orchestration-rest-cert # a step-4 Certificate for the REST service
-          type: pem
-          # existingSecretKey defaults to tls.crt when type=pem (auto-substituted)
-          # existingSecretPrivateKeyKey defaults to tls.key
+        type: pem
+        cert:
+          secret:
+            existingSecret: orchestration-rest-cert # a step-4 Certificate for the REST service
+            # existingSecretKey defaults to tls.crt when type=pem (auto-substituted)
+        # privateKey.secret.existingSecretKey defaults to tls.key
       grpc:
         enabled: true
-        secret:
-          existingSecret: orchestration-grpc-cert
-          # existingSecretKey defaults to tls.crt
-          # existingSecretPrivateKeyKey defaults to tls.key
+        cert:
+          secret:
+            existingSecret: orchestration-grpc-cert
+            # existingSecretKey defaults to tls.crt
+        # privateKey.secret.existingSecretKey defaults to tls.key
     caBundle:
       secret:
         # The CA cert Secret from step 2 above. Web Modeler and Connectors
@@ -209,8 +226,9 @@ global:
     orchestration:
       grpc:
         enabled: true
-        secret:
-          existingSecret: orchestration-grpc-cert
+        cert:
+          secret:
+            existingSecret: orchestration-grpc-cert
 ```
 
 The `helm upgrade` will roll the Orchestration StatefulSet because the rendered env vars and volume names change. Expect a brief outage during the rolling restart (no data loss — PVCs are unchanged). Existing hand-written `webModeler.restapi.clusters` or `connectors.configuration` blocks remain authoritative; if their `grpc-address` / `rest-address` matches what the chart would derive (visible via `helm template`), you can delete them too.
@@ -225,37 +243,45 @@ global:
     orchestration:
       rest:
         enabled: true
-        secret:
-          existingSecret: orchestration-rest-cert
-          type: pem
-          existingSecretKey: tls.crt
-          existingSecretPrivateKeyKey: tls.key
+        type: pem
+        cert:
+          secret:
+            existingSecret: orchestration-rest-cert
+            existingSecretKey: tls.crt
+        privateKey:
+          secret:
+            existingSecretKey: tls.key
         proxyVerify:
           enabled: true
           caSecret:
-            existingSecret: orchestration-upstream-ca # PEM CA bundle
-            existingSecretKey: ca.crt
+            secret:
+              existingSecret: orchestration-upstream-ca # PEM CA bundle
+              existingSecretKey: ca.crt
           sniHost: "" # set when the cert SAN does not match the in-cluster service name
       grpc:
         enabled: true
-        secret:
-          existingSecret: orchestration-grpc-cert
-          existingSecretKey: tls.crt
-          existingSecretPrivateKeyKey: tls.key
+        cert:
+          secret:
+            existingSecret: orchestration-grpc-cert
+            existingSecretKey: tls.crt
+        privateKey:
+          secret:
+            existingSecretKey: tls.key
         proxyVerify:
           enabled: true
           caSecret:
-            existingSecret: orchestration-upstream-ca
-            existingSecretKey: ca.crt
+            secret:
+              existingSecret: orchestration-upstream-ca
+              existingSecretKey: ca.crt
 ```
 
 This adds the following annotations to the `/orchestration` and gRPC ingresses respectively:
 
 - `nginx.ingress.kubernetes.io/proxy-ssl-verify: on`
-- `nginx.ingress.kubernetes.io/proxy-ssl-secret: <namespace>/<caSecret.existingSecret>`
+- `nginx.ingress.kubernetes.io/proxy-ssl-secret: <namespace>/<caSecret.secret.existingSecret>`
 - `nginx.ingress.kubernetes.io/proxy-ssl-name: <sniHost>` and `proxy-ssl-server-name: on` (only when `sniHost` is set)
 
-`proxyVerify` is opt-in independently per protocol — you can verify gRPC traffic only, REST only, or both. By default the chart expects the CA Secret to live in the same namespace as the Ingress resource (an NGINX requirement). To reference a CA Secret in a different namespace (centralised cert-management namespace), set `caSecret.namespace`; the NGINX Ingress controller must be configured with `--watch-namespace` covering that namespace for the cross-namespace reference to resolve. The chart fails template rendering if `proxyVerify.enabled: true` and `caSecret.existingSecret` is empty.
+`proxyVerify` is opt-in independently per protocol — you can verify gRPC traffic only, REST only, or both. By default the chart expects the CA Secret to live in the same namespace as the Ingress resource (an NGINX requirement). To reference a CA Secret in a different namespace (centralised cert-management namespace), set `caSecret.namespace`; the NGINX Ingress controller must be configured with `--watch-namespace` covering that namespace for the cross-namespace reference to resolve. The chart fails template rendering if `proxyVerify.enabled: true` and `caSecret.secret.existingSecret` is empty.
 
 Note that `proxyVerify` covers only the NGINX → Orchestration leg. In-cluster Java clients (Web Modeler, Connectors) trust upstream certs through `global.tls.caBundle`, which is independent.
 
@@ -286,10 +312,13 @@ global:
     orchestration:
       grpc:
         enabled: true
-        secret:
-          existingSecret: orchestration-grpc-cert
-          existingSecretKey: tls.crt
-          existingSecretPrivateKeyKey: tls.key
+        cert:
+          secret:
+            existingSecret: orchestration-grpc-cert
+            existingSecretKey: tls.crt
+        privateKey:
+          secret:
+            existingSecretKey: tls.key
     caBundle:
       secret:
         existingSecret: camunda-internal-ca
@@ -334,8 +363,8 @@ Connectors in 8.10 runs its own Spring Boot HTTP server and is exposed through a
 
 ### Modes
 
-- **PKCS12 (default)** — `secret.type: pkcs12`. The chart sets `SERVER_SSL_KEY_STORE`, `SERVER_SSL_KEY_STORE_TYPE=PKCS12`, and `SERVER_SSL_KEY_STORE_PASSWORD` (from a `secretKeyRef`) on the Connectors container. Use when you manage keystores out-of-band (Java PKI, internal CA).
-- **PEM (cert-manager compatible)** — `secret.type: pem`. The chart sets `SERVER_SSL_CERTIFICATE` and `SERVER_SSL_CERTIFICATE_PRIVATE_KEY` on the Connectors container. Compatible with cert-manager `kubernetes.io/tls` Secrets out of the box.
+- **PKCS12 (default)** — `type: pkcs12`. The chart sets `SERVER_SSL_KEY_STORE`, `SERVER_SSL_KEY_STORE_TYPE=PKCS12`, and `SERVER_SSL_KEY_STORE_PASSWORD` (from a `secretKeyRef`) on the Connectors container. Use when you manage keystores out-of-band (Java PKI, internal CA).
+- **PEM (cert-manager compatible)** — `type: pem`. The chart sets `SERVER_SSL_CERTIFICATE` and `SERVER_SSL_CERTIFICATE_PRIVATE_KEY` on the Connectors container. Compatible with cert-manager `kubernetes.io/tls` Secrets out of the box.
 
 In both modes the chart:
 
@@ -351,11 +380,15 @@ global:
   tls:
     connectors:
       enabled: true
-      secret:
-        existingSecret: connectors-tls-keystore
-        existingSecretKey: keystore.p12
-        existingSecretPasswordKey: keystore-password
-        keyAlias: connectors-rest
+      type: pkcs12
+      keyAlias: connectors-rest
+      cert:
+        secret:
+          existingSecret: connectors-tls-keystore
+          existingSecretKey: keystore.p12
+      keystorePassword:
+        secret:
+          existingSecretKey: keystore-password
     caBundle:
       secret:
         existingSecret: camunda-internal-ca
@@ -383,16 +416,18 @@ global:
   tls:
     connectors:
       enabled: true
-      secret:
-        existingSecret: connectors-cert
-        type: pem
+      type: pem
+      cert:
+        secret:
+          existingSecret: connectors-cert
+          # existingSecretKey defaults to tls.crt when type=pem (auto-substituted)
     caBundle:
       secret:
         existingSecret: camunda-internal-ca
         existingSecretKey: ca.crt
 ```
 
-With a cert-manager `Certificate` that issues into the same namespace, the resulting `kubernetes.io/tls` Secret already carries `tls.crt` and `tls.key` — the chart picks them up automatically (the PKCS12 default `existingSecretKey: keystore.p12` is auto-substituted to `tls.crt` in PEM mode).
+With a cert-manager `Certificate` that issues into the same namespace, the resulting `kubernetes.io/tls` Secret already carries `tls.crt` and `tls.key` — the chart picks them up automatically (when `cert.secret.existingSecretKey` is left empty in PEM mode, `tls.crt` is substituted automatically).
 
 ### Gateway API caveat
 
@@ -416,8 +451,8 @@ This server-side TLS is independent of the existing client-side `optimize.databa
 
 ### Modes
 
-- **PKCS12 (default)** — `secret.type: pkcs12`. The chart sets `SERVER_SSL_KEY_STORE`, `SERVER_SSL_KEY_STORE_TYPE=PKCS12`, and `SERVER_SSL_KEY_STORE_PASSWORD` (from a `secretKeyRef`) on the Optimize main container. Use when you manage keystores out-of-band (Java PKI, internal CA).
-- **PEM (cert-manager compatible)** — `secret.type: pem`. The chart sets `SERVER_SSL_CERTIFICATE` and `SERVER_SSL_CERTIFICATE_PRIVATE_KEY` on the Optimize main container. Compatible with cert-manager `kubernetes.io/tls` Secrets out of the box.
+- **PKCS12 (default)** — `type: pkcs12`. The chart sets `SERVER_SSL_KEY_STORE`, `SERVER_SSL_KEY_STORE_TYPE=PKCS12`, and `SERVER_SSL_KEY_STORE_PASSWORD` (from a `secretKeyRef`) on the Optimize main container. Use when you manage keystores out-of-band (Java PKI, internal CA).
+- **PEM (cert-manager compatible)** — `type: pem`. The chart sets `SERVER_SSL_CERTIFICATE` and `SERVER_SSL_CERTIFICATE_PRIVATE_KEY` on the Optimize main container. Compatible with cert-manager `kubernetes.io/tls` Secrets out of the box.
 
 In both modes the chart:
 
@@ -432,7 +467,7 @@ The two surfaces are deliberately orthogonal:
 
 | Direction                     | Values key                                                                                  | Volume name           | Purpose                                                                               |
 | ----------------------------- | ------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------- |
-| Inbound (clients → Optimize)  | `global.tls.optimize.secret.existingSecret`                                                 | `optimize-server-tls` | Server identity cert + key for the Optimize HTTP listener (this guide).               |
+| Inbound (clients → Optimize)  | `global.tls.optimize.cert.secret.existingSecret`                                            | `optimize-server-tls` | Server identity cert + key for the Optimize HTTP listener (this guide).               |
 | Outbound (Optimize → ES / OS) | `optimize.database.elasticsearch.tls.secret.existingSecret` (or `…opensearch.tls.secret.…`) | `keystore`            | Truststore so Optimize trusts the ES / OS server cert when calling secondary storage. |
 
 Operators commonly need both at once (mTLS-style hardening across the whole data plane). The chart supports both simultaneously; the regression test suite asserts that the `optimize-server-tls` and `keystore` volumes coexist with their respective mounts on the Optimize main container.
@@ -444,11 +479,15 @@ global:
   tls:
     optimize:
       enabled: true
-      secret:
-        existingSecret: optimize-tls-keystore
-        existingSecretKey: keystore.p12
-        existingSecretPasswordKey: keystore-password
-        keyAlias: optimize-rest
+      type: pkcs12
+      keyAlias: optimize-rest
+      cert:
+        secret:
+          existingSecret: optimize-tls-keystore
+          existingSecretKey: keystore.p12
+      keystorePassword:
+        secret:
+          existingSecretKey: keystore-password
     caBundle:
       secret:
         existingSecret: camunda-internal-ca
@@ -476,16 +515,18 @@ global:
   tls:
     optimize:
       enabled: true
-      secret:
-        existingSecret: optimize-cert
-        type: pem
+      type: pem
+      cert:
+        secret:
+          existingSecret: optimize-cert
+          # existingSecretKey defaults to tls.crt when type=pem (auto-substituted)
     caBundle:
       secret:
         existingSecret: camunda-internal-ca
         existingSecretKey: ca.crt
 ```
 
-With a cert-manager `Certificate` that issues into the same namespace, the resulting `kubernetes.io/tls` Secret already carries `tls.crt` and `tls.key` — the chart picks them up automatically (the PKCS12 default `existingSecretKey: keystore.p12` is auto-substituted to `tls.crt` in PEM mode).
+With a cert-manager `Certificate` that issues into the same namespace, the resulting `kubernetes.io/tls` Secret already carries `tls.crt` and `tls.key` — the chart picks them up automatically (when `cert.secret.existingSecretKey` is left empty in PEM mode, `tls.crt` is substituted automatically).
 
 ### Combined server + client TLS example
 
@@ -494,8 +535,9 @@ global:
   tls:
     optimize:
       enabled: true
-      secret:
-        existingSecret: optimize-tls-keystore
+      cert:
+        secret:
+          existingSecret: optimize-tls-keystore
     caBundle:
       secret:
         existingSecret: camunda-internal-ca
