@@ -41,7 +41,7 @@ DELETE /projects/{id}/recently-deleted
 If you delete a file within a process application, its data is preserved in [older versions](../modeler/modeling/versions.md), if applicable. To permanently delete the file and its data from all process application version history, a **Project Admin** can call the public purge endpoint:
 
 ```bash
-DELETE /api/internal/projects/{projectId}/files/{fileId}/purge
+DELETE /files/{fileKey}/purge
 ```
 
 ## Restore permissions
