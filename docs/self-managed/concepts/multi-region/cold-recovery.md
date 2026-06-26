@@ -53,16 +53,16 @@ The RDBMS backup path is the **first phase** of new backup capabilities and curr
 
 The following table shows backup component coverage:
 
-| Component                          | Included in backup?                                | Notes                                          |
-| :--------------------------------- | :------------------------------------------------- | :--------------------------------------------- |
-| **Zeebe** (primary storage)        | Yes (partition snapshots)                          | Required                                       |
-| **Operate**                        | Yes (via Elasticsearch/OpenSearch or RDBMS backup) | State is stored in secondary storage           |
-| **Tasklist**                       | Yes (via Elasticsearch/OpenSearch or RDBMS backup) | State is stored in secondary storage           |
-| **Admin**                          | Yes (via Elasticsearch/OpenSearch or RDBMS backup) | Authentication and authorization configuration |
-| **Optimize**                       | Elasticsearch/OpenSearch path only                 | Standalone component; back up independently    |
-| **Management Identity (Keycloak)** | Not included                                       | Standalone component; back up independently    |
-| **Web Modeler**                    | Not included                                       | Standalone component; back up independently    |
-| **Connectors**                     | Not included                                       | Stateless; redeploy from source                |
+| Component                   | Included in backup?                                | Notes                                          |
+| :-------------------------- | :------------------------------------------------- | :--------------------------------------------- |
+| **Zeebe** (primary storage) | Yes (partition snapshots)                          | Required                                       |
+| **Operate**                 | Yes (via Elasticsearch/OpenSearch or RDBMS backup) | State is stored in secondary storage           |
+| **Tasklist**                | Yes (via Elasticsearch/OpenSearch or RDBMS backup) | State is stored in secondary storage           |
+| **Admin**                   | Yes (via Elasticsearch/OpenSearch or RDBMS backup) | Authentication and authorization configuration |
+| **Optimize**                | Elasticsearch/OpenSearch path only                 | Standalone component; back up independently    |
+| **Management Identity**     | Not included                                       | Standalone component; back up independently    |
+| **Web Modeler**             | Not included                                       | Standalone component; back up independently    |
+| **Connectors**              | Not included                                       | Stateless; redeploy from source                |
 
 ## Cross-region backup replication
 
