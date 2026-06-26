@@ -29,7 +29,7 @@ For cross-region recovery using these RDBMS backups, see [Cold Recovery](../../.
 :::
 
 :::note
-This procedure is part of the **first phase of Decoupled Continuous Backups** and covers **Zeebe**, **Operate**, **Tasklist**, and **Admin**. It does **not** cover **Management Identity (Keycloak)** or **Optimize**.
+This procedure is part of the **first phase of Decoupled Continuous Backups** and covers **Zeebe**, **Operate**, **Tasklist**, and **Admin**. It does **not** cover **Management Identity** or **Optimize**.
 
 Optimize always stores its data in Elasticsearch or OpenSearch, independently of the Orchestration Cluster's secondary storage. If you deploy Optimize alongside an RDBMS-backed Orchestration Cluster, back up Optimize independently using the [standalone Optimize backup procedure](../optimize-backup-and-restore.md). You do not need to switch the Orchestration Cluster backup to the Elasticsearch / OpenSearch path.
 :::
