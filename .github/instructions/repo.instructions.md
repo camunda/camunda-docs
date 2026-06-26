@@ -64,7 +64,7 @@ These are the main commands for working with the repo:
 
 - The "Next" (unreleased) docs live in `/docs/`. Versioned docs live in `/versioned_docs/version-*/`.
 - Sidebar navigation is managed in `sidebars.js` (Next) and `versioned_sidebars/version-*-sidebars.json` (versioned).
-- The current released version is set in `src/versions.js` (`currentVersion`). Active maintained versions are listed in `versions.json`. Docusaurus is configured with `lastVersion: currentVersion`, so the released version is served with no URL prefix. When a new version is cut, `currentVersion` and the unprefixed version shift accordingly.
+- Version configuration: `src/versions.js` sets `currentVersion` (the default released version served without URL prefix), and `versions.json` lists all active maintained versions. Docusaurus is configured with `lastVersion: currentVersion`, so when a new version is cut, `currentVersion` and the unprefixed version shift accordingly.
 - **Which folders to edit** depends on when the change applies:
   - Unreleased feature (not yet in any versioned release) → edit `docs/` only.
   - Change applies to the current release and beyond → edit the most recent `versioned_docs/version-*/` folder **and** `docs/`.
