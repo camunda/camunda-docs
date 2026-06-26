@@ -1011,11 +1011,11 @@ Unless noted otherwise, properties in the provider tables are required.
 
 #### Judge settings
 
-| Property                 | Type      | Default | Description                                                                                                                                                                                                                                                                                                                                  |
-| ------------------------ | --------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `judge.threshold`        | `double`  | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass.                                                                                                                                                                                                                                                                                     |
-| `judge.custom-prompt`    | `string`  |         | Custom evaluation prompt replacing the default criteria.                                                                                                                                                                                                                                                                                     |
-| `judge.attach-documents` | `boolean` | `false` | When `true`, resolves Camunda document references in the evaluated variable and attaches their content to the judge. Disabled by default to avoid unnecessary token cost. To evaluate attached content, use a multimodal-capable model; otherwise CPT evaluates only the raw variable JSON. See [document attachment](#document-attachment). |
+| Property                 | Type      | Default | Description                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------ | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `judge.threshold`        | `double`  | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass.                                                                                                                                                                                                                                                                                      |
+| `judge.custom-prompt`    | `string`  |         | Custom evaluation prompt replacing the default criteria.                                                                                                                                                                                                                                                                                      |
+| `judge.attach-documents` | `boolean` | `false` | When `true`, resolves Camunda document references in the evaluated variable and attaches their content to the judge. Disabled by default to avoid unnecessary token cost. To evaluate attached content, use a multimodal-capable model; otherwise, CPT evaluates only the raw variable JSON. See [document attachment](#document-attachment). |
 
 The default threshold of `0.5` treats a response as acceptable when it is at least partially satisfied according to the
 judge rubric. This is a practical default for AI-generated output, where wording and level of detail may vary between
@@ -1204,7 +1204,7 @@ camunda:
 
 ### Document attachment
 
-When `judge.attach-documents` is enabled, CPT scans the serialized variable JSON for [Camunda documents](/components/document-handling/getting-started.md) references, downloads their content, and passes it to the judge alongside the text prompt as structured content blocks. This lets the judge evaluate document content, such as generated PDFs, images, or text files.
+When `judge.attach-documents` is enabled, CPT scans the serialized variable JSON for [Camunda document](/components/document-handling/getting-started.md) references, downloads their content, and passes it to the judge alongside the text prompt as structured content blocks. This lets the judge evaluate document content, such as generated PDFs, images, or text files.
 
 Document attachment is disabled by default. Enable it globally:
 
@@ -1234,7 +1234,7 @@ judge.attachDocuments=true
 
 </Tabs>
 
-Or enable it per assertion using `withJudgeConfig`:
+You can also enable it per assertion using `withJudgeConfig`:
 
 ```java
 assertThat(processInstance)
@@ -1255,8 +1255,8 @@ How the document is passed to the judge depends on its MIME content type:
 
 #### Behavior
 
-- Built-in LangChain4j providers implement `MultimodalChatModelAdapter`. Custom `ChatModelAdapter` implementations must implement `MultimodalChatModelAdapter` to receive documents; otherwise document attachment does not take effect and the judge evaluates only the raw variable JSON.
-- Documents with the same document ID and store ID are deduplicated and downloaded once.
+- Built-in LangChain4j providers implement `MultimodalChatModelAdapter`. Custom `ChatModelAdapter` implementations must implement `MultimodalChatModelAdapter` to receive documents. Otherwise, document attachment does not take effect and the judge evaluates only the raw variable JSON.
+- Documents with the same document ID and store ID are deduplicated and downloaded only once.
 - If a document fails to download, the assertion fails with an `IllegalStateException`.
 
 ### Custom prompt

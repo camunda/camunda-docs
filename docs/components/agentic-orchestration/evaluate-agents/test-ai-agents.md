@@ -262,9 +262,9 @@ You can use two types of assertions to verify the agent output:
 
 #### Limitations
 
-- Judge assertions support Camunda document evaluation when [document attachment](/apis-tools/testing/configuration.md#document-attachment) is enabled. When enabled, document references in the variable are resolved and their content is passed to the judge as structured content blocks.
+- Judge assertions support Camunda document evaluation when [document attachment](/apis-tools/testing/configuration.md#document-attachment) is enabled. When enabled, document references in the variable are resolved, and their content is passed to the judge as structured content blocks.
 
-- Semantic similarity assertions operate on the **serialized JSON string** of a process variable and cannot evaluate non-textual content such as [Camunda documents](/components/document-handling/getting-started.md) or other embedded binaries. In those cases, only metadata or encoded strings reach the assertion.
+- Semantic similarity assertions operate on the **serialized JSON string** of a process variable and cannot evaluate non-text content, such as [Camunda documents](/components/document-handling/getting-started.md) or other embedded binaries. In those cases, only metadata or encoded strings reach the assertion.
 
 - Semantic similarity assertions compare the serialized variable against the expected string using a vector space. Highly structured variables, such as JSON objects with many fields, may score lower than expected even when the semantic meaning matches.
 
