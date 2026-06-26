@@ -185,9 +185,9 @@ Set `existingSecretKey` to match cert-manager's output key (`ca.crt` by default 
 
 :::caution Include the full trust chain
 
-If your `ClusterIssuer` is signed by an offline root CA, cert-manager outputs only the issuing intermediate. Concatenate the offline root into the bundle before creating the Secret — PKIX validation requires a chain that ends at a root present in the bundle.
+If your `ClusterIssuer` is signed by an offline root CA, cert-manager outputs only the issuing intermediate. Concatenate the offline root into the bundle before creating the Secret. PKIX validation needs a chain that ends at a root present in the bundle.
 
-Server certs for Elasticsearch and OpenSearch must be issued separately via additional `Certificate` resources signed by the same `ClusterIssuer`.
+Server certs for Elasticsearch, OpenSearch, and PostgreSQL must be issued separately via additional `Certificate` resources signed by the same `ClusterIssuer`.
 
 :::
 
@@ -195,9 +195,9 @@ Server certs for Elasticsearch and OpenSearch must be issued separately via addi
 
 After each `helm install` or `helm upgrade`, check the `NOTES.txt` output for these warnings (re-display it at any time with `helm status <release>`):
 
-- Per-component JKS overrides the bundle. If a component has a legacy `tls.secret` JKS configured, the JKS takes precedence and the bundle is ignored for that component. Remove `tls.secret` to use the bundle.
-- Bundle is trust, not encryption. `global.tls.caBundle` adds CA trust but does not enable TLS on a plaintext URL. Set the URL to `https://`.
-- `JAVA_TOOL_OPTIONS` in component `env` overrides the truststore flags. Set it via `javaOpts` instead, which the chart appends to.
+- Per-component JKS overrides the bundle. If a component has a legacy `tls.secret` JKS configured, you must remove it to use the bundle. Legacy JKS fields take priority over `global.tls.caBundle`.
+- Bundle is trust, not encryption. `global.tls.caBundle` adds CA trust but does not enable TLS on a plaintext URL. Set the URL to `https://` (or set the JDBC `sslmode`).
+- `JAVA_TOOL_OPTIONS` in component `env` overrides the truststore flags. Set it via `javaOpts` (orchestration, optimize, Web Modeler restapi) instead, which the chart appends to.
 
 ## Verify no plaintext fallback
 
@@ -228,7 +228,7 @@ The init container re-runs on each pod start and imports the new CA into a fresh
 
 ### Optional: automatic rollout on `helm upgrade`
 
-Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` annotation on Java pods so `helm upgrade` triggers a rollout automatically when the CA Secret changes.
+Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` annotation on Java pods so they automatically roll out when the CA Secret changes.
 
 :::caution Constraints
 
@@ -286,9 +286,7 @@ The following in-cluster connections are plaintext by default:
 | Web Modeler / Console / Optimize → Identity     | REST     |
 | Spring Boot management / metrics (probes)       | HTTP     |
 
-Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). See the
-[TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md)
-for the full connection inventory.
+Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). See the [TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md) for the full connection inventory.
 
 ## Related
 
