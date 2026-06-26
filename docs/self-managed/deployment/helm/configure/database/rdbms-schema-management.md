@@ -170,8 +170,8 @@ kubectl scale deployment camunda-orchestration --replicas=1 -n camunda
 ```
 
 :::note
-This will effectively stop the cluster from processing workflow data until the upgrade completes. The schema migration
-will be performed at the startup of the left cluster node.
+This reduces processing capacity during the upgrade because only one orchestration replica remains. The schema
+migration is performed when the first upgraded cluster node starts.
 :::
 
 Keep the effective replica count at `1` until Liquibase completes. If your Helm values manage the replica count, make
@@ -186,7 +186,7 @@ helm upgrade camunda camunda/camunda-platform --version X.Y.Z -f values.yaml -n 
 For large databases and long-running schema migrations, review [Liquibase lock issues](#liquibase-lock-issues) before
 upgrading. You might need to increase the DDL lock wait timeout so a long-running migration is not treated as stale.
 
-The helm-charts defines a default `readinessProbe`. Longer running migrations may cause the pod to be marked as not ready. If this happens, you can increase the `readinessProbe` timeout in your Helm values:
+The Helm chart defines a default `readinessProbe`. Longer-running migrations may cause the pod to be marked as not ready. If this happens, you can increase the `readinessProbe` timeout in your Helm values:
 
 ```yaml
 orchestration:
@@ -255,7 +255,7 @@ SELECT COUNT(*)
 FROM databasechangelog;
 ```
 
-This table should exist and contain entries for a fresh Camunda 8.9 installation. On upgrades, this number increases as
+This table should exist and contain entries for a fresh Camunda installation. On upgrades, this number increases as
 new changesets are applied.
 
 For troubleshooting, see [schema troubleshooting](#schema-troubleshooting).
@@ -267,7 +267,7 @@ scaling guidance, see [automatic schema management](#step-2a-automatic-schema-ma
 
 ### Rollback
 
-Camunda schema migrations are compatible to the previous version. This means that if you need to abort an upgrade and
+Camunda schema migrations are compatible with the previous version. This means that if you need to stop an upgrade and
 rollback to a previous version, you can do so without any issues. The previous version will be able to read the schema
 and continue processing.
 
