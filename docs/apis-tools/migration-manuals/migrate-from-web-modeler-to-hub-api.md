@@ -20,11 +20,11 @@ Web Modeler API v1 was the REST API for Web Modeler, a standalone product for mo
 
 ## Deprecation timeline
 
-| Version  | Action                                                                                                                                                                       |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **8.10** | v2 ships alongside v1. v1 is marked deprecated — all v1 responses include `Deprecation`, `Sunset`, and `Link` HTTP headers. The v1 OpenAPI spec is marked `deprecated: true` |
-| **8.11** | v1 remains available but is not extended. No new features are added to deprecated endpoints.                                                                                 |
-| **8.12** | v1 endpoints are removed. Applications still using v1 receive `404`.                                                                                                         |
+| Version  | Action                                                                                                                                                                                                                               |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **8.10** | Camunda Hub API v2 ships alongside Web Modeler API v1. Web Modeler API v1 is marked as **deprecated**, and all responses include `Deprecation`, `Sunset`, and `Link` HTTP headers. The v1 OpenAPI spec is marked `deprecated: true`. |
+| **8.11** | Web Modeler API v1 remains available but is not extended. No new features are added to deprecated endpoints.                                                                                                                         |
+| **8.12** | Web Modeler API v1 endpoints are removed. Applications still using v1 receive `404`.                                                                                                                                                 |
 
 ## General changes
 
