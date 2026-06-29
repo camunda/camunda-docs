@@ -13,10 +13,7 @@ This guide explains how to host your own **Connectors** developed with [Connecto
 
 For the purpose of this guide, we will be using a generic [Connector template](https://github.com/camunda/connector-template-outbound)
 as a reference. Clone the repository, and execute `mvn clean verify package`.
-This will produce two JAR files in the `target/` directory:
-
-- `connector-template-0.1.0-SNAPSHOT.jar` — the fat JAR containing all dependencies. Use this one.
-- `original-connector-template-0.1.0-SNAPSHOT.jar` — the original JAR without dependencies. Ignore this one.
+This produces two JAR files in the `target/` directory. Use `connector-template-0.1.0-SNAPSHOT.jar` (the JAR that bundles all dependencies). Ignore `original-connector-template-0.1.0-SNAPSHOT.jar` (the JAR without dependencies).
 
 In this guide, we will refer to `connector-template-0.1.0-SNAPSHOT.jar` as `connector.jar`.
 
@@ -40,8 +37,7 @@ docker run --rm --name=CustomConnectorInSaaS \
         camunda/connectors-bundle:<desired-version>
 ```
 
-The line `-v $PWD/connector.jar:/opt/custom/connector.jar` binds a volume with your connector at the path `$PWD/connector.jar`
-of your local machine.
+The line `-v $PWD/connector.jar:/opt/custom/connector.jar` mounts your connector JAR into the container at `/opt/custom`, and `LOADER_PATH=/opt/custom` adds that directory to the runtime classpath so the bundle loads your connector.
 
 ## Wiring your connector with Camunda Docker instance (without Keycloak)
 
