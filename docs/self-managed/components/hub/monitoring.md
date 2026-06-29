@@ -6,14 +6,14 @@ description: "Web Modeler provides health check and metrics endpoints for monito
 
 Web Modeler Self-Managed consists of two components (`restapi` and `websocket`), each exposing their own endpoints for health monitoring and metrics collection.
 
-For configuration details, including the default Actuator settings and the management port, see the [Monitoring and health probes](./configuration/modeler-configuration.md#monitoring) section on the configuration page.
+For configuration details, including the default Actuator settings and the management port, see the [Monitoring and health probes](./configuration/properties.md#monitoring) section on the configuration page.
 
 ## Available endpoints
 
 ### `restapi`
 
 The `restapi` component is a Spring Boot application that includes the [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready), providing health check and metrics endpoints out of the box.
-These endpoints are served on a separate management port (default: `8091`). You can configure it with the [`management.server.port`](./configuration/modeler-configuration.md#monitoring) property or the `MANAGEMENT_SERVER_PORT` environment variable.
+These endpoints are served on a separate management port (default: `8091`). You can configure it with the [`management.server.port`](./configuration/properties.md#monitoring) property or the `MANAGEMENT_SERVER_PORT` environment variable.
 
 | Endpoint                         | Description        |
 | -------------------------------- | ------------------ |
