@@ -1061,6 +1061,14 @@ components:
           format: int64
           description: The new timeout for the job in milliseconds.
           nullable: true
+        priority:
+          type: integer
+          format: int32
+          description: The new priority for the job. Higher values indicate higher priority.
+          nullable: true
+      x-properties-added-in-version:
+        - propertyName: priority
+          addedInVersion: "8.10"
     TenantFilterEnum:
       description: |
         The tenant filtering strategy for job activation. Determines whether to use tenant IDs provided in the request or tenant IDs assigned to the authenticated principal.
