@@ -9,11 +9,24 @@ jobs:
     if: github.event.requested_reviewer.login == 'christinaausley' || github.event.requested_reviewer.login == 'mesellings' || github.event.requested_team.name == 'Tech Writers'
     runs-on: ubuntu-latest
     steps:
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@v4.0.0
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
       - uses: actions/create-github-app-token@v3
         id: app-token
         with:
-          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
-          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
       - name: Get project IDs for later steps
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
