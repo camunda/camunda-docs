@@ -145,6 +145,27 @@ for pod in $(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":me
   kubectl describe pod -n "$namespace" "$pod" > "describe-$pod.log" 2>/dev/null
 done
 
+echo "  - Collecting java threaddumps ..."
+for pod in $(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":metadata.name"); do
+  if ! kubectl exec -n "$namespace" "$pod" -- which java > /dev/null 2>&1; then
+    echo "    - Skipping pod: $pod as java not installed"
+    continue
+  fi
+  if ! kubectl exec -n "$namespace" "$pod" -- which jattach > /dev/null 2>&1; then
+    echo "    - Skipping pod: $pod as jattach not installed"
+    continue
+  fi
+  if ! kubectl exec -n "$namespace" "$pod" -- which pgrep > /dev/null 2>&1; then
+    echo "    - Skipping pod: $pod as pgrep not installed"
+    continue
+  fi
+  java_pids=$(kubectl exec -n "$namespace" "$pod" -- pgrep java 2> /dev/null)
+  for java_pid in $java_pids; do
+    echo "    - Collecting threaddump from pod: ${pod}, java process: ${java_pid}"
+    kubectl exec -n "$namespace" "$pod" -- jattach $java_pid threaddump > "${pod}-pid-${java_pid}.jstack" 2>/dev/null
+  done
+done
+
 # Collect Helm resources
 echo "  - Collecting information via Helm..."
 release_name=`helm list -n "$namespace" --no-headers -q` 2>/dev/null
