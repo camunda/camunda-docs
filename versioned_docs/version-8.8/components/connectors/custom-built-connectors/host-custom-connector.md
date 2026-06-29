@@ -13,8 +13,12 @@ This guide explains how to host your own **Connectors** developed with [Connecto
 
 For the purpose of this guide, we will be using a generic [Connector template](https://github.com/camunda/connector-template-outbound)
 as a reference. Clone the repository, and execute `mvn clean verify package`.
-This will produce a file called `target/connector-template-0.1.0-SNAPSHOT-with-dependencies.jar`. In this guide,
-we will refer this file as `connector.jar`.
+This will produce two JAR files in the `target/` directory:
+
+- `connector-template-0.1.0-SNAPSHOT.jar` — the fat JAR containing all dependencies. Use this one.
+- `original-connector-template-0.1.0-SNAPSHOT.jar` — the original JAR without dependencies. Ignore this one.
+
+In this guide, we will refer to `connector-template-0.1.0-SNAPSHOT.jar` as `connector.jar`.
 
 ## Wiring your connector with a Camunda cluster
 
@@ -27,18 +31,17 @@ Run the following command:
 
 ```shell
 docker run --rm --name=CustomConnectorInSaaS \
-    -v $PWD/connector.jar:/opt/app/connector.jar \
-    -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=false \
-    -e CAMUNDA_CLIENT_CLOUD_CLUSTER-ID='<YOUR_CLUSTER_ID>' \
-    -e CAMUNDA_CLIENT_CLOUD_CLIENT-ID='<YOUR_CLIENT_ID>' \
-    -e CAMUNDA_CLIENT_CLOUD_CLIENT-SECRET='<YOUR_CLIENT_SECRET>' \
+    -v $PWD/connector.jar:/opt/custom/connector.jar \
+    -e LOADER_PATH=/opt/custom \
+    -e CAMUNDA_CLIENT_CLOUD_CLUSTER_ID='<YOUR_CLUSTER_ID>' \
+    -e CAMUNDA_CLIENT_AUTH_CLIENT_ID='<YOUR_CLIENT_ID>' \
+    -e CAMUNDA_CLIENT_AUTH_CLIENT_SECRET='<YOUR_CLIENT_SECRET>' \
     -e CAMUNDA_CLIENT_CLOUD_REGION='<YOUR_CLUSTER_REGION>' \
-    -e CAMUNDA_OPERATE_CLIENT_URL='https://<region>.operate.camunda.io/<cluster-id>' \
         camunda/connectors-bundle:<desired-version>
 ```
 
-The line `-v $PWD/connector.jar:/opt/app/connector.jar` binds a volume with your connector at the path `$PWD/connector.jar`
-of you local machine.
+The line `-v $PWD/connector.jar:/opt/custom/connector.jar` binds a volume with your connector at the path `$PWD/connector.jar`
+of your local machine.
 
 ## Wiring your connector with Camunda Docker instance (without Keycloak)
 
