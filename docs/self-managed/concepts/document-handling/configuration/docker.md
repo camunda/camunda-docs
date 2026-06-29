@@ -80,17 +80,6 @@ AWS SDK credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`)
 | `AWS_SECRET_ACCESS_KEY` | Yes      | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
 | `AWS_REGION`            | Yes      | Region where the bucket is.                                                                           |
 
-## AWS API client permission requirements
-
-To ensure seamless integration and functionality of document handling with AWS services, the API client utilized must be configured with the appropriate permissions. The following AWS Identity and Access Management (IAM) permissions are necessary for the execution of operations related to document handling:
-
-| Permission        | Description                                                                                                                                                                                                                     |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `s3:DeleteObject` | This permission authorizes the API client to remove objects from the specified S3 bucket.                                                                                                                                       |
-| `s3:GetObject`    | This permission is required to retrieve contents and metadata of objects from Amazon S3. The API client will utilize this permission to download or access the contents of the documents that have been uploaded to the bucket. |
-| `s3:ListBucket`   | This permission allows the application to verify it has access to the specified S3 bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up.               |
-| `s3:PutObject`    | To upload documents to an Amazon S3 bucket, the API client must have this permission.                                                                                                                                           |
-
 </TabItem>
 
 <TabItem value='gcp'>
@@ -129,19 +118,6 @@ The GCP credential variable (`GOOGLE_APPLICATION_CREDENTIALS`) is resolved by th
 | Credentials variable             | Required | Description                                                                                                             |
 | -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `GOOGLE_APPLICATION_CREDENTIALS` | Yes      | Specifies the file path to a JSON key file that contains authentication credentials for a Google Cloud service account. |
-
-## GCP API client permission requirements
-
-To ensure seamless integration and functionality of document handling with GCP services, the API client utilized must be configured with the appropriate permissions. The following permissions are necessary for the execution of operations related to document handling:
-
-| Permission                     | Description                                                                                                                                                                                                    |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `storage.buckets.get`          | This permission allows the application to verify it has access to the specified bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up. |
-| `storage.objects.get`          | This permission allows the API client to retrieve objects from Google Cloud Storage. It is vital for downloading or accessing the contents of stored objects.                                                  |
-| `storage.objects.create`       | With this permission, the API client can upload new objects to a bucket. It is essential for adding new documents to the storage.                                                                              |
-| `storage.objects.update`       | This permission enables the API client to update contents and metadata of existing objects within a bucket.                                                                                                    |
-| `storage.objects.delete`       | This permission grants the API client the ability to delete objects from a bucket.                                                                                                                             |
-| `iam.serviceAccounts.signBlob` | This permission allows the service account to sign data as part of the process to create secure, signed URLs for accessing uploaded documents.                                                                 |
 
 </TabItem>
 
@@ -214,16 +190,6 @@ DOCUMENT_DEFAULT_STORE_ID=azure
 
 </details>
 
-## Azure API client permission requirements
-
-To ensure seamless integration and functionality of document handling with Azure Blob Storage, the identity used must be assigned the `Storage Blob Data Contributor` RBAC role on the storage account. This role grants the following required permissions:
-
-| Permission                                                               | Description                      |
-| ------------------------------------------------------------------------ | -------------------------------- |
-| `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read`   | Read blob content and metadata.  |
-| `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write`  | Create or update blobs.          |
-| `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete` | Delete blobs from the container. |
-
 </TabItem>
 
 <TabItem value='in-memory'>
@@ -287,6 +253,42 @@ DOCUMENT_DEFAULT_STORE_ID=local
 </TabItem>
 
 </Tabs>
+
+## API client permission requirements
+
+### AWS S3
+
+To ensure seamless integration and functionality of document handling with AWS services, the API client utilized must be configured with the appropriate permissions. The following AWS Identity and Access Management (IAM) permissions are necessary for the execution of operations related to document handling:
+
+| Permission        | Description                                                                                                                                                                                                                     |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `s3:DeleteObject` | This permission authorizes the API client to remove objects from the specified S3 bucket.                                                                                                                                       |
+| `s3:GetObject`    | This permission is required to retrieve contents and metadata of objects from Amazon S3. The API client will utilize this permission to download or access the contents of the documents that have been uploaded to the bucket. |
+| `s3:ListBucket`   | This permission allows the application to verify it has access to the specified S3 bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up.               |
+| `s3:PutObject`    | To upload documents to an Amazon S3 bucket, the API client must have this permission.                                                                                                                                           |
+
+### GCP
+
+To ensure seamless integration and functionality of document handling with GCP services, the API client utilized must be configured with the appropriate permissions. The following permissions are necessary for the execution of operations related to document handling:
+
+| Permission                     | Description                                                                                                                                                                                                    |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `storage.buckets.get`          | This permission allows the application to verify it has access to the specified bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up. |
+| `storage.objects.get`          | This permission allows the API client to retrieve objects from Google Cloud Storage. It is vital for downloading or accessing the contents of stored objects.                                                  |
+| `storage.objects.create`       | With this permission, the API client can upload new objects to a bucket. It is essential for adding new documents to the storage.                                                                              |
+| `storage.objects.update`       | This permission enables the API client to update contents and metadata of existing objects within a bucket.                                                                                                    |
+| `storage.objects.delete`       | This permission grants the API client the ability to delete objects from a bucket.                                                                                                                             |
+| `iam.serviceAccounts.signBlob` | This permission allows the service account to sign data as part of the process to create secure, signed URLs for accessing uploaded documents.                                                                 |
+
+### Azure Blob Storage
+
+To ensure seamless integration and functionality of document handling with Azure Blob Storage, the identity used must be assigned the `Storage Blob Data Contributor` RBAC role on the storage account. This role grants the following required permissions:
+
+| Permission                                                               | Description                      |
+| ------------------------------------------------------------------------ | -------------------------------- |
+| `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read`   | Read blob content and metadata.  |
+| `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write`  | Create or update blobs.          |
+| `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete` | Delete blobs from the container. |
 
 ## Property mapping reference
 
