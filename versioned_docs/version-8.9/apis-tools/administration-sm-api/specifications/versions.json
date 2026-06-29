@@ -5,7 +5,17 @@
     "baseUrl": "Unused but required field"
   },
   {
-    "version": "8.6",
+    "version": "8.9",
+    "label": "Unused but required field",
+    "baseUrl": "Unused but required field"
+  },
+  {
+    "version": "8.8",
+    "label": "Unused but required field",
+    "baseUrl": "Unused but required field"
+  },
+  {
+    "version": "8.7",
     "label": "Unused but required field",
     "baseUrl": "Unused but required field"
   }

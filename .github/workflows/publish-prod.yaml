@@ -26,7 +26,7 @@ jobs:
     runs-on: gcp-core-16-release
     container: node:24
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -41,7 +41,7 @@ jobs:
           DOCS_SITE_URL: https://docs.camunda.io
           DOCS_SITE_BASE_URL: /
       - name: Publish
-        uses: burnett01/rsync-deployments@8.0.5
+        uses: burnett01/rsync-deployments@v9
         with:
           switches: -avzr --delete
           path: build/
