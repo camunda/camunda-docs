@@ -47,12 +47,25 @@ jobs:
             echo "changed_files=${CHANGED_FILES}" >> $GITHUB_OUTPUT
           fi
 
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@v4.0.0
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
       - name: Generate GitHub App token
         id: generate_token
         uses: actions/create-github-app-token@v3
         with:
-          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
-          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
         if: steps.update-links.outputs.changes_detected == 'true'
