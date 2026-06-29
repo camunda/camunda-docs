@@ -49,8 +49,8 @@ The diagram shows both regions as operational. Any grayed-out appearance represe
 
 In a dual-region setup, each Orchestration Cluster component operates as follows:
 
-- **Zeebe** runs across both regions using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), distributing partition leaders and followers for continuous replication.
-- **Zeebe exporters** push identical data to the Elasticsearch instance in each region. Zeebe's dual export mechanism (not Elasticsearch replication) maintains data consistency. The two Elasticsearch clusters don't communicate directly with each other.
+- **Orchestration cluster** runs across both regions using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), distributing partition leaders and followers for continuous replication.
+- **Camunda exporters** push identical data to the Elasticsearch instance in each region. Camunda orchestration cluster dual export mechanism (not Elasticsearch replication) maintains data consistency. The two Elasticsearch clusters don't communicate directly with each other.
 - **Operate and Tasklist** maintain synchronized data state across both regions via the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md). See [Active-active and active-passive modes](#active-active-and-active-passive-modes).
 - **Admin** is embedded in the Orchestration Cluster and provides cluster-level identity management.
 
