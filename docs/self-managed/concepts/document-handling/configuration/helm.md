@@ -9,7 +9,7 @@ keywords: ["document handling", "document storage configuration"]
 This page covers two configuration approaches:
 
 - **Legacy approach (deprecated)**: `global.documentStore.*` in `values.yaml` — generates `DOCUMENT_*` environment variables. Still works via a backward compatibility bridge but will be removed in a future release.
-- **New approach (recommended)**: `extraConfiguration` with `camunda.document.*` Spring properties — the unified configuration model. See [Using the unified configuration format](#using-the-unified-configuration-format).
+- **New approach (recommended)**: `extraConfiguration` with `camunda.document.*` Spring properties — the unified configuration model. See [using the unified configuration format](#using-the-unified-configuration-format).
 
 :::warning Deprecated: `DOCUMENT_*` and `DOCUMENT_STORE_*` environment variables
 
@@ -19,7 +19,7 @@ The `global.documentStore.*` Helm values generate legacy `DOCUMENT_*` and `DOCUM
 
 Helm offers external cloud file bucket storage options (recommended for production use when deploying with Helm) and in-memory storage (not suitable for production use):
 
-- By using **external cloud file bucket storage options**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
+- By using **external cloud file bucket storage options**, documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
   - [**AWS S3**](https://aws.amazon.com/s3/)
   - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
@@ -30,7 +30,7 @@ If no storage configuration is provided, the default document storage is in-memo
 
 To change the storage to **Google Cloud Platform**, **AWS S3**, or **Azure Blob Storage**, update the `values.yaml` file with the storage configuration parameters.
 
-The following `values.yaml` example shows the legacy configuration format. It generates deprecated `DOCUMENT_*` environment variables that are bridged to `camunda.document.*` properties at runtime. This approach still works but is deprecated. To use the new unified format instead, see [Using the unified configuration format](#using-the-unified-configuration-format).
+The following `values.yaml` example shows the legacy configuration format. It generates deprecated `DOCUMENT_*` environment variables that are bridged to `camunda.document.*` properties at runtime. This approach still works but is deprecated. To use the new unified format instead, see [using the unified configuration format](#using-the-unified-configuration-format).
 
 The example below represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml) and shows the fields you need to change to enable the storage type of your preference.
 

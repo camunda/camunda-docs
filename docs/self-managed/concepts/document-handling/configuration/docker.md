@@ -13,7 +13,7 @@ import TabItem from "@theme/TabItem";
 None of the storage options below with Docker Compose are suitable for production.
 :::
 
-Document Store configuration uses the unified `camunda.document.*` Spring property model. The sections below show the new configuration format. If you're migrating from legacy `DOCUMENT_*` environment variables, see [Property mapping reference](#property-mapping-reference).
+Document Store configuration uses the unified `camunda.document.*` Spring property model. The sections below show the new configuration format. If you're migrating from legacy `DOCUMENT_*` environment variables, see [property mapping reference](#property-mapping-reference).
 
 For Docker Compose, mount an `application.yaml` file and set `SPRING_CONFIG_ADDITIONAL_LOCATION` to its directory. For example, set `camunda.document.default-store-id` to specify the active store.
 
@@ -38,7 +38,7 @@ When using [Docker Compose](/self-managed/quickstart/developer-quickstart/docker
 
 <TabItem value='aws'>
 
-By using **external cloud file bucket storage** with [**AWS S3**](https://aws.amazon.com/s3/), documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management.
+By using **external cloud file bucket storage** with [**AWS S3**](https://aws.amazon.com/s3/), documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management.
 
 ```yaml
 camunda:
@@ -74,17 +74,17 @@ DOCUMENT_DEFAULT_STORE_ID=aws
 
 AWS SDK credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`) are resolved by the AWS SDK directly and are not part of `camunda.document.*`. Set them as environment variables as before.
 
-| Credentials variable    | Required | Description                                                                                           |
-| ----------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | Yes      | Access key ID used to interact with AWS S3 buckets.                                                   |
-| `AWS_SECRET_ACCESS_KEY` | Yes      | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
-| `AWS_REGION`            | Yes      | Region where the bucket is.                                                                           |
+| Credentials variable    | Required | Description                                                                          |
+| ----------------------- | -------- | ------------------------------------------------------------------------------------ |
+| `AWS_ACCESS_KEY_ID`     | Yes      | Access key ID used to interact with AWS S3 buckets.                                  |
+| `AWS_SECRET_ACCESS_KEY` | Yes      | The AWS secret access key associated with `AWS_ACCESS_KEY_ID`, used to authenticate. |
+| `AWS_REGION`            | Yes      | Region where the bucket is.                                                          |
 
 </TabItem>
 
 <TabItem value='gcp'>
 
-By using **external cloud file bucket storage** with [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage), documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management.
+By using **external cloud file bucket storage** with [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage), documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management.
 
 ```yaml
 camunda:
@@ -194,7 +194,7 @@ DOCUMENT_DEFAULT_STORE_ID=azure
 
 <TabItem value='in-memory'>
 
-**In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost. In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
+**In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost. In-memory storage is not suitable for production use, as pods and memory are not shared across components.
 
 In-memory is the default when no storage configuration is provided. To use in-memory explicitly when other stores are also configured:
 
@@ -258,7 +258,7 @@ DOCUMENT_DEFAULT_STORE_ID=local
 
 ### AWS S3
 
-To ensure seamless integration and functionality of document handling with AWS services, the API client utilized must be configured with the appropriate permissions. The following AWS Identity and Access Management (IAM) permissions are necessary for the execution of operations related to document handling:
+The API client must have the following AWS Identity and Access Management (IAM) permissions:
 
 | Permission        | Description                                                                                                                                                                                                                     |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -269,7 +269,7 @@ To ensure seamless integration and functionality of document handling with AWS s
 
 ### GCP
 
-To ensure seamless integration and functionality of document handling with GCP services, the API client utilized must be configured with the appropriate permissions. The following permissions are necessary for the execution of operations related to document handling:
+The API client must have the following permissions:
 
 | Permission                     | Description                                                                                                                                                                                                    |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -282,7 +282,7 @@ To ensure seamless integration and functionality of document handling with GCP s
 
 ### Azure Blob Storage
 
-To ensure seamless integration and functionality of document handling with Azure Blob Storage, the identity used must be assigned the `Storage Blob Data Contributor` RBAC role on the storage account. This role grants the following required permissions:
+To use document handling with Azure Blob Storage, assign the `Storage Blob Data Contributor` RBAC role to the identity on the storage account. This role grants the following permissions:
 
 | Permission                                                               | Description                      |
 | ------------------------------------------------------------------------ | -------------------------------- |
