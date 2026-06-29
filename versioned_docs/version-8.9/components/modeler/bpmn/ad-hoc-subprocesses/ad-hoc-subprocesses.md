@@ -1,8 +1,16 @@
 ---
 id: ad-hoc-subprocesses
 title: "Ad-hoc sub-processes"
-description: "The ad-hoc sub-processes allow flexibility while executing inner elements."
+description: "With ad-hoc sub-processes, you can model a flexible set of BPMN activities that activate in any order, run multiple times, or be skipped."
 ---
+
+With ad-hoc sub-processes, you can model a flexible set of BPMN activities that activate in any order, run multiple times, or be skipped.
+
+:::info
+With the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), you can implement an AI agent that dynamically selects and invokes tools, using the [job worker implementation](#job-worker-implementation) of an ad-hoc sub-process.
+:::
+
+## About
 
 Ad-hoc sub-processes are a special kind of [embedded subprocesses](../embedded-subprocesses/embedded-subprocesses.md) with an **ad-hoc marker** (represented
 by a **~** tilde character). Compared to regular subprocesses, ad-hoc sub-processes allow more flexibility
@@ -135,9 +143,9 @@ An ad-hoc sub-process can define input and output
 **Output variable mappings** are applied on completing the ad-hoc sub-process. They can be used to propagate local variables
 from the ad-hoc sub-process into the process instance. By default, no local variables are propagated.
 
-## Additional resources
+## XML representation
 
-### XML representation
+An ad-hoc sub-process is represented in BPMN XML using the `adHocSubProcess` element. The following example configures the active elements collection via the Zeebe `adHoc` extension and defines a completion condition.
 
 ```xml
 <bpmn:adHocSubProcess id="ad-hoc-subprocess" name="Ad-hoc sub-process" cancelRemainingInstances="false">
