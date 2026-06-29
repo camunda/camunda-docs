@@ -35,6 +35,12 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
   - It can be used with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/deployment/helm/install/quick-install.md).
   - In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
 
+## Physical Tenant isolation
+
+When running Physical Tenants, each tenant must be assigned a distinct document store location. Camunda validates uniqueness at startup and fails if two tenants resolve to the same `provider, bucket/container, path` tuple.
+
+For the per-tenant configuration model, including the root catalog, `assigned` restriction, field-level overrides, and startup collision examples, see [Document store isolation](/self-managed/concepts/physical-tenants/configuration-reference.md#document-store-isolation).
+
 ## Storage policies
 
 - **Maximum upload size for one or multiple files**: 10 MB
