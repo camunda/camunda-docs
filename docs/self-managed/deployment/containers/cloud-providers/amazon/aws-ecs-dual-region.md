@@ -8,9 +8,7 @@ sidebar_position: 2
 This reference architecture deploys Camunda 8 Self-Managed across two AWS regions on ECS Fargate in an active-active configuration, with Aurora Global Database as secondary storage and Camunda 8.10 unified `/v2/*` REST API.
 
 :::note Reference architecture
-This guide covers the **Orchestration Cluster** (Zeebe, Operate, Tasklist, Connectors). Optimize, Web Modeler, and Console are out of scope — see [Scope and what's not included](#scope-and-whats-not-included).
-
-Do not run production workloads without your own hardening, monitoring, and operational testing.
+This guide covers the **Orchestration Cluster** and Connectors.
 :::
 
 ## What you get
@@ -69,7 +67,7 @@ architecture-beta
 ```
 
 :::note
-This reference architecture is not a turnkey module. Clone the repository and adapt it to your environment — you are responsible for operating and maintaining the resulting infrastructure. Check the [changelog](https://github.com/camunda/camunda-deployment-references/releases) before upgrading to incorporate Camunda updates into your customized copy.
+This reference architecture is not a turnkey module. Clone the repository and adapt it to your environment — you are responsible for operating and maintaining the resulting infrastructure.
 :::
 
 ## Prerequisites
@@ -171,7 +169,7 @@ Wall-clock time for a greenfield deploy to a first healthy `/v2/topology` respon
 
 `terraform destroy` is faster: about 15–20 minutes end-to-end, with Aurora teardown again the bottleneck.
 
-Actual costs depend on region, instance sizing, commit discounts, and cross-region data egress. Use the [AWS Pricing Calculator](https://calculator.aws/#/) to estimate for your configuration. Always run `terraform destroy` when you are done with a demo to avoid ongoing charges.
+Actual costs depend on region, instance sizing, commit discounts, and cross-region data egress. Use the [AWS Pricing Calculator](https://calculator.aws/#/) to estimate for your configuration.
 
 ## Architecture decisions
 
@@ -600,15 +598,7 @@ aws ecs execute-command \
 
 For general troubleshooting, see the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
 
-## Scope and what's not included
-
-This reference covers the **Orchestration Cluster**: Zeebe, Operate, Tasklist, and Connectors. The following are out of scope by design, not gaps in the architecture:
-
-- **Optimize** requires Elasticsearch or OpenSearch as secondary storage. RDBMS-based deployments (Aurora) do not support Optimize. Deploy Optimize separately against an independent search cluster if needed.
-- **Web Modeler and Console** are SaaS-only components and are not part of any Self-Managed reference architecture.
-- **SSO / external identity provider.** Basic authentication is configured out of the box. Connecting an external IDP directly to the Orchestration Cluster is supported — see [Connect to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) in Next steps.
-
-The following are known operational constraints of this reference:
+## Known limitations
 
 - **Node ID assignment.** Even/odd broker ID assignment per region is pending follow-up work.
 - **Manual failover only.** No automated health-check-driven failover is included.
