@@ -1,10 +1,10 @@
 ---
 id: ad-hoc-subprocesses
 title: "Ad-hoc sub-processes"
-description: "With ad-hoc sub-processes, you can model a flexible set of BPMN activities that activate in any order, run multiple times, or be skipped."
+description: "With ad-hoc sub-processes, you can model a flexible set of BPMN activities that execute in any order, any number of times."
 ---
 
-With ad-hoc sub-processes, you can model a flexible set of BPMN activities that activate in any order, run multiple times, or be skipped.
+With ad-hoc sub-processes, you can model a flexible set of BPMN activities that execute in any order, any number of times.
 
 :::info
 With the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), you can implement an AI agent that dynamically selects and invokes tools, using the [job worker implementation](#job-worker-implementation) of an ad-hoc sub-process.
