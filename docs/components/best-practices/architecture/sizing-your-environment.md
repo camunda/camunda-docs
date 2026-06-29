@@ -49,8 +49,8 @@ The figures below come from Camunda 8.9 load tests. Because 8.8 and 8.9 share th
 
 #### In short
 
-- Enabling Optimize roughly **triples to quadruples Elasticsearch CPU and disk** at a realistic workload (around 3.4x CPU, 3.6x disk), largely independent of throughput.
-- It lowers achievable **processing throughput by 25-50%** on the same hardware.
+- Enabling Optimize roughly **triples to quadruples Elasticsearch CPU and disk** at a [realistic workload](sizing-benchmarks.md#reference-benchmark-scenario) (around 3.4x CPU, 3.6x disk), largely independent of throughput.
+- It lowers achievable **processing throughput by 25-50% at maximum load** on the same hardware.
 - The single most effective mitigation is to **keep variables out of Optimize**: this recovers around 60% of the storage and 65% of the CPU, plus most of the lost throughput, at the cost of variable-based analytics.
 - Size Elasticsearch/OpenSearch accordingly (CPU, disk, **and shard budget**), or run Optimize on a **dedicated Elasticsearch/OpenSearch instance**.
 
@@ -64,15 +64,15 @@ For how Optimize fits into the export pipeline, see [Optimize data flow](./data-
 
 #### What Optimize affects
 
-At a realistic workload, Optimize enabled vs. disabled:
+At a [realistic workload](sizing-benchmarks.md#reference-benchmark-scenario), Optimize enabled vs. disabled:
 
 - **Elasticsearch CPU:** around 3.4x higher.
 - **Elasticsearch disk:** around 3.6x more total data.
-- **Throughput:** 25-50% lower on the same hardware.
+- **Throughput:** unaffected at a realistic workload, but 25-50% lower at maximum load on the same hardware.
 - **Write-to-exporting latency:** around 2.6x higher.
 - **Backpressure at maximum load:** around 45% with Optimize vs. 35% without.
 - **Individual import latency:** increases approximately linearly with payload size.
-- **Report loading times:** increase approximately linearly with the complexity of data (like process instances and variables) and as historical data accumulates 
+- **Report loading times:** increase approximately linearly with the complexity of data (like process instances and variables) and as historical data accumulates
 
 Memory of the secondary storage is not a meaningful differentiator to improve performance.
 
@@ -82,17 +82,18 @@ Memory of the secondary storage is not a meaningful differentiator to improve pe
 - **Optimize's analytics indices grow.** Optimize keeps one document per process instance and can only apply retention-based cleanup once its importer has processed the instance's completion. While the importer lags, completions are recorded late, cleanup is deferred, and Optimize's own indices grow beyond their steady-state size.
 - **Data can be missed.** The raw exporter indices are cleaned up on the Elasticsearch/OpenSearch retention schedule. If the importer falls far enough behind, those records are deleted before Optimize imports them, and that data never reaches Optimize. This Exporter-Importer hazard is exactly what the 8.8 Camunda Exporter architecture removed for Operate and Tasklist.
 
-If you see persistent import lag, raise the import throughput (see mitigations below).
+Track import progress with the [Optimize metrics and bundled Grafana dashboards](/self-managed/operational-guides/monitoring/metrics.md). If you see persistent import lag, raise the import throughput (see mitigations below).
 :::
 
 #### Mitigations
 
 ##### Keep variables out of Optimize (highest impact, lowest risk)
 
-Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are two levers:
+Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are three levers, from most to least aggressive:
 
-- **Disable or scope variable export at the exporter.** Set `camunda.data.exporters.elasticsearch.args.index.variable: false` (OpenSearch: `camunda.data.exporters.opensearch.args.index.variable: false`) to drop variable records entirely, or use the `variableNameInclusionStartWith` and `variableNameExclusion*` filters under the same `index` configuration to scope which variables are exported. See [exporter-side filters and Optimize data completeness](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#exporter-side-filters-and-optimize-data-completeness) and the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration) exporter configuration. This is the only lever that also recovers throughput, because the exporter write path is the bottleneck at maximum load.
-- **[Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) in Optimize.** This achieves the same storage savings but does not recover throughput.
+- **Stop exporting variables entirely.** Set `camunda.data.exporters.elasticsearch.args.index.variable: false` (OpenSearch: `camunda.data.exporters.opensearch.args.index.variable: false`) to drop all variable records at the exporter. This is the only lever that also recovers throughput, because the exporter write path is the bottleneck at maximum load. See the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration) exporter configuration.
+- **Export only the variables you need (name and prefix filters).** Keep a subset with `variableNameInclusionStartWith` (for example, only `customer`-prefixed variables) or restrict with the `variableNameExclusion*` filters under the same `index` configuration. Use this when some variables drive Optimize reports but most are noise. See [exporter-side filters and Optimize data completeness](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#exporter-side-filters-and-optimize-data-completeness).
+- **[Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) in Optimize.** This achieves the same storage savings but does not recover throughput, because the records are still written by the exporter.
 
 **Trade-off:** filtered variables are unavailable in Optimize reports (variable filters, variable-based grouping, raw-data variable columns). These levers affect **Optimize only** - Operate and Tasklist read through the Camunda Exporter, so their variables stay intact.
 
@@ -104,7 +105,11 @@ Variables dominate Optimize's storage and CPU costs on secondary storage: Optimi
 
 #### Elasticsearch/OpenSearch shard budget
 
-Optimize creates a dedicated index per deployed process definition, each using at least one shard. Elasticsearch and OpenSearch cap the number of shards per node (1,000 by default), so a cluster's total shard budget is `nodes × per-node limit` (for example, 3,000 on a three-node cluster). A large or growing number of deployed process definitions consumes this budget and can approach the ceiling; small development or test clusters with few nodes reach it quickly. Once the ceiling is hit, new index creation is rejected, which can cascade into exporter backpressure and stalled processing. Account for the shard budget when sizing the Elasticsearch/OpenSearch cluster, not just CPU, memory, and disk. See [Impact of high process deployments on Elasticsearch](https://camunda.github.io/zeebe-chaos/2026/05/28/Impact-of-High-Process-Deployments-on-Elasticsearch).
+:::warning
+Optimize creates a dedicated index per deployed process definition, each using at least one shard. Elasticsearch and OpenSearch cap the number of shards per node (1,000 by default), so a cluster's total shard budget is `nodes × per-node limit` (for example, 3,000 on a three-node cluster). A large or growing number of deployed process definitions consumes this budget and can approach the ceiling; small development or test clusters with few nodes reach it quickly. Once the ceiling is hit, new index creation is rejected, which cascades into exporter backpressure and stalled processing.
+
+Account for the shard budget when sizing the Elasticsearch/OpenSearch cluster, not just CPU, memory, and disk. See [Impact of high process deployments on Elasticsearch](https://camunda.github.io/zeebe-chaos/2026/05/28/Impact-of-High-Process-Deployments-on-Elasticsearch).
+:::
 
 The sizing guidance for [Self-Managed](sizing-self-managed.md#baseline-resource-configuration) provides configurations with and without Optimize to help you plan accordingly.
 
