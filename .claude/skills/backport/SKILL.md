@@ -17,7 +17,10 @@ Before touching any file, confirm:
 
 - **What changed**: list the files modified in the source change (content edits, new pages, sidebar additions, `.htaccess` redirects).
 - **Why it applies to older versions**: bug fixes, clarifications, and corrections to already-shipped features are backport candidates. Content for unreleased features is not.
-- **Which versions**: use `versions.json` in the repo root to identify maintained versions. Do not backport to unmaintained versions; if a user explicitly requests one, explain that no `versioned_docs/version-<N>/` folder exists for it. For each candidate version, verify that the feature was available in that release by checking release context (for example, release notes or the release timeline) — do not rely on file presence alone. If applicability is unclear, ask the PR author before backporting.
+- **Which versions**:
+  - Use `versions.json` in the repo root to identify maintained versions.
+  - For each candidate version, verify that the feature was available in that release by checking release context (for example, release notes or the release timeline). Do not rely only on file presence.
+  - Do not backport to unmaintained versions. If a user explicitly requests one, explain that no `versioned_docs/version-<N>/` folder exists for it.
 
 ## 2. Find the equivalent file in each target version
 
