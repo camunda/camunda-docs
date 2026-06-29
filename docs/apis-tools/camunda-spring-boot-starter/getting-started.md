@@ -71,6 +71,34 @@ To use the Spring Boot 3 module, replace the default dependency in your project:
 </dependency>
 ```
 
+## Version support policy
+
+Camunda aligns Spring Boot Starter version support with the [Spring Boot OSS support timeline](https://spring.io/projects/spring-boot#support).
+
+### Supported versions
+
+Camunda supports two Spring Boot major versions at a time:
+
+- **The current major version** - shipped as the default `camunda-spring-boot-starter` artifact, always bundled with the latest stable Spring Boot major release.
+- **The previous major version** - shipped as a dedicated `camunda-spring-boot-{n}-starter` artifact, supported with no announced end date, but without Spring framework-level security patches after the Spring OSS support window closes.
+
+### Adding support for a new Spring Boot version
+
+Camunda adds support for a new Spring Boot major version when:
+
+- The version has reached General Availability (GA).
+- It is available at least one Camunda minor release cycle before it becomes the new default bundled version.
+- It has been validated across Camunda components that depend on the starter.
+
+### Deprecating support for older Spring Boot versions
+
+A Spring Boot version is deprecated when its OSS support window ends or is within 6 months of ending. Deprecation is announced in the Camunda release notes with the planned removal version. Removal happens no earlier than one full Camunda minor release cycle after the deprecation announcement.
+
+| Spring Boot version | Spring OSS support ends | Camunda status |
+| ------------------- | ----------------------- | -------------- |
+| 3.5.x               | June 2026               | Supported via `camunda-spring-boot-3-starter` - no Spring framework patches after June 2026 |
+| 4.0.x               | December 2026           | Default (`camunda-spring-boot-starter`) - deprecation to be announced |
+
 ## Get started
 
 ### Step 1: Add the dependency
@@ -224,7 +252,7 @@ camunda:
 
 ## Start building your process application
 
-With your project configured, you are ready to build your process application. Below are the core operations you’ll typically perform, along with guidance on the next steps.
+With your project configured, you are ready to build your process application. Below are the core operations you'll typically perform, along with guidance on the next steps.
 
 ### Inject the Camunda client
 
