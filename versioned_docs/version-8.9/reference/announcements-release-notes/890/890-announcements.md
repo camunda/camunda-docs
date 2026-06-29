@@ -133,9 +133,9 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 The following key changes were also released as part of an 8.9.x patch release.
 
-| Patch release                                                  | Type            | Key change                                                                                                       |
-| :------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
-| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
+| Patch release                                                    | Type            | Key change                                                                                                       |
+| :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                     |
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
@@ -1599,36 +1599,6 @@ Instead, users can set the `versionTag` manually in the properties panel for BPM
 </div>
 </div>
 
-## Engine
-
-### Multi-instance sub-process output mapping variable scope regression {#multi-instance-output-mapping-regression}
-
-Camunda 8.9.1 introduced a regression where output mappings inside a multi-instance sub-process that also defines an output collection cause local variables to unexpectedly propagate to the parent scope.
-
-**When are you affected?**
-
-You are affected if your process contains a multi-instance sub-process that meets both of the following conditions:
-
-1. The sub-process defines an output collection.
-2. One or more elements inside the sub-process define output mappings.
-
-Under these conditions:
-
-- Local variables from inside the sub-process appear on the parent scope and are visible in Operate.
-- If any leaked variable shares a name with a variable on the parent scope, the parent scope value is overwritten.
-
-**Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
-
-**Fix:** A fix is available in 8.9.9. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
-
-- [camunda/camunda#11789](https://github.com/camunda/camunda/issues/11789): FEEL expressions used as mapping sources may not evaluate correctly due to ordering.
-- [camunda/camunda#35251](https://github.com/camunda/camunda/issues/35251): When one value from a nested variable is listed as an output mapping, all values in the nested variable are merged into the parent scope. Workaround: map the full nested variable instead of individual values.
-
-**Action:**
-
-- Before the fix is available: apply the workaround above.
-- After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
-
 ## Tasklist
 
 <div className="release-announcement-row">
@@ -1641,11 +1611,11 @@ Under these conditions:
 
 Camunda 8.9.7 introduced a regression in which user tasks become invisible in the Tasklist V1 API when a candidate group's name differs from its ID ([camunda/camunda#55576](https://github.com/camunda/camunda/issues/55576)).
 
-Starting with this regression, the Zeebe engine resolves candidate group names to IDs at task creation time, while the Tasklist V1 API resolves the authenticated user's group IDs to names before comparing against the stored candidate groups. When a group's name and ID differ, this mismatch causes tasks to be invisible to all members of that group.
+With this regression, the Zeebe engine resolves candidate group names to IDs at task creation time, while the Tasklist V1 API resolves the authenticated user's group IDs to names before comparing them against the stored candidate groups. When a group's name and ID differ, this mismatch causes tasks to be invisible to all members of that group.
 
-You're affected if you're using the Tasklist V1 API with user task access restrictions enabled and any group used as a candidate group in your processes has a name that differs from its ID.
+You're affected if you use the Tasklist V1 API with user task access restrictions enabled and any group used as a candidate group in your processes has a name that differs from its ID.
 
-**Workaround:** Set the Zeebe broker environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION=false` (default: `true`) and ensure your BPMN models reference candidate groups by name rather than ID. This restores correct task visibility for newly-created tasks. Tasks created while the regression was active remain affected.
+**Workaround:** Set the Zeebe broker environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION` to `false` (default: `true`) and ensure your BPMN models reference candidate groups by name rather than ID. This restores correct task visibility for newly created tasks. Tasks created while the regression was active remain affected.
 
 **Fix:** The fix was released in [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10). After upgrading, tasks created while the regression was active are also fixed without requiring manual intervention.
 
