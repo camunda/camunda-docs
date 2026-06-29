@@ -44,6 +44,14 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 Camunda 8 Run now ships with a bundled Java runtime. You no longer need to install OpenJDK or set `JAVA_HOME` before starting it.
 
+## Wait states
+
+Operate now shows what an active process instance is waiting for, so you can tell expected waiting from a stalled instance. When you inspect an active element, you can see the wait state and its details — a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
+
+Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
+
+<p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
+
 ## Helm chart deployment
 
 Important changes to Helm chart deployment in 8.10 are as follows:
