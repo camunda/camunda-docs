@@ -34,21 +34,28 @@ else
   sed -i '/trigger-crawl:/,$d' .github/workflows/publish-prod.yaml
 fi
 
-#   d. add `unsupported.` to docs URLs
+#   d. remove the "Enable Indexing" step so the unsupported site remains noindexed
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' '/- name: Enable Indexing/,/noIndex/d' .github/workflows/publish-prod.yaml
+else
+  sed -i '/- name: Enable Indexing/,/noIndex/d' .github/workflows/publish-prod.yaml
+fi
+
+#   e. add `unsupported.` to docs URLs
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i '' 's/https:\/\/docs.camunda.io/https:\/\/unsupported.docs.camunda.io/' .github/workflows/publish-prod.yaml
 else
   sed -i 's/https:\/\/docs.camunda.io/https:\/\/unsupported.docs.camunda.io/' .github/workflows/publish-prod.yaml
 fi
 
-#   e. replace the main docs remote_path with this isolated version's remote_path.
+#   f. replace the main docs remote_path with this isolated version's remote_path.
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i '' "s/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 else
   sed -i "s/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 fi
 
-#   f. update `DOCS_SITE_BASE_URL` to specify isolated version
+#   g. update `DOCS_SITE_BASE_URL` to specify isolated version
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i '' "s/DOCS_SITE_BASE_URL: \//DOCS_SITE_BASE_URL: \/$ARCHIVED_VERSION\//" .github/workflows/publish-prod.yaml
 else
