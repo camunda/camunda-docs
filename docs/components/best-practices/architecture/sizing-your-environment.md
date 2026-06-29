@@ -50,7 +50,7 @@ The figures below come from Camunda 8.9 load tests. Because 8.8 and 8.9 share th
 #### In short
 
 - Enabling Optimize roughly **triples to quadruples Elasticsearch CPU and disk** at a realistic workload (around 3.4x CPU, 3.6x disk), largely independent of throughput.
-- It lowers achievable **throughput by 25-50%** on the same hardware.
+- It lowers achievable **processing throughput by 25-50%** on the same hardware.
 - The single most effective mitigation is to **keep variables out of Optimize**: this recovers around 60% of the storage and 65% of the CPU, plus most of the lost throughput, at the cost of variable-based analytics.
 - Size Elasticsearch/OpenSearch accordingly (CPU, disk, **and shard budget**), or run Optimize on a **dedicated Elasticsearch/OpenSearch instance**.
 
@@ -59,7 +59,7 @@ For how Optimize fits into the export pipeline, see [Optimize data flow](./data-
 #### Why Optimize matters for sizing
 
 - Optimize is a second-tier consumer of the export pipeline: the Elasticsearch/OpenSearch exporter writes raw engine events, Optimize's importer reads them and writes its own analytics indices back to Elasticsearch/OpenSearch, so data is written to secondary storage twice. See [Optimize data flow](./data-flow.md#optimize-data-flow).
-- In Camunda 8.8+, the Camunda Exporter and the Elasticsearch exporter run in the same thread within the broker, so Optimize export competes directly with core platform export for throughput.
+- In Camunda 8.8+, the Camunda Exporter and the Elasticsearch exporter run in the same thread within the broker, so Optimize data-pipeline competes directly with core platform exporting for throughput.
 - The overhead is **not proportional to throughput.** It scales with process model complexity (multi-instance and call activities) and variable volume. At a realistic workload where Optimize-enabled and Optimize-disabled clusters reached identical throughput with zero backpressure, the Optimize-enabled cluster still consumed **around 3.4x more Elasticsearch CPU.** Budget for this even at comfortable throughput.
 
 #### What Optimize affects
@@ -67,14 +67,14 @@ For how Optimize fits into the export pipeline, see [Optimize data flow](./data-
 At a realistic workload, Optimize enabled vs. disabled:
 
 - **Elasticsearch CPU:** around 3.4x higher.
-- **Elasticsearch disk:** around 3.6x more total data. A multiplier scales better across cluster sizes and retention periods than an absolute figure.
+- **Elasticsearch disk:** around 3.6x more total data.
 - **Throughput:** 25-50% lower on the same hardware.
 - **Write-to-exporting latency:** around 2.6x higher.
 - **Backpressure at maximum load:** around 45% with Optimize vs. 35% without.
-- **Individual import latency:** increases approximately linearly with payload size (for example, an 11 KB realistic payload vs. a 0.5 KB typical one).
-- **Report loading times:** increase approximately linearly as historical data accumulates.
+- **Individual import latency:** increases approximately linearly with payload size.
+- **Report loading times:** increase approximately linearly with the complexity of data (like process instances and variables) and as historical data accumulates 
 
-Memory is not a meaningful differentiator.
+Memory of the secondary storage is not a meaningful differentiator to improve performance.
 
 :::note
 **Watch Optimize import lag.** When Optimize's importer falls behind the export rate, two problems can appear:
@@ -89,7 +89,7 @@ If you see persistent import lag, raise the import throughput (see mitigations b
 
 ##### Keep variables out of Optimize (highest impact, lowest risk)
 
-Variables dominate Optimize's storage and CPU cost: Optimize stores a variable roughly **14x more expensively than the raw export does** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are two levers:
+Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are two levers:
 
 - **Disable or scope variable export at the exporter.** Set `camunda.data.exporters.elasticsearch.args.index.variable: false` (OpenSearch: `camunda.data.exporters.opensearch.args.index.variable: false`) to drop variable records entirely, or use the `variableNameInclusionStartWith` and `variableNameExclusion*` filters under the same `index` configuration to scope which variables are exported. See [exporter-side filters and Optimize data completeness](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#exporter-side-filters-and-optimize-data-completeness) and the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration) exporter configuration. This is the only lever that also recovers throughput, because the exporter write path is the bottleneck at maximum load.
 - **[Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) in Optimize.** This achieves the same storage savings but does not recover throughput.
