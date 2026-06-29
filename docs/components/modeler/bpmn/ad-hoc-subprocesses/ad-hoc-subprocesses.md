@@ -18,11 +18,8 @@ for executing inner elements.
 
 ![A demo process with an ad-hoc sub-process. Some elements inside the subprocess are active.](assets/ad-hoc-subprocess.png)
 
-The inner elements of an ad-hoc sub-process are not connected to a start or end event. Each element can be executed
-multiple times, in any order, or skipped.
-
-If elements depend on each other, the elements can be connected by a sequence flow to build a structured sequence
-within the ad-hoc sub-process.
+The inner elements of an ad-hoc sub-process are not connected to a start or end event. Each element can be executed multiple times, in any order, or skipped.
+If elements depend on each other, the elements can be connected by a sequence flow to build a structured sequence within the ad-hoc sub-process.
 
 An ad-hoc sub-process can be handled [internally by Zeebe](#bpmn-implementation), or by using a [job worker](#job-worker-implementation).
 
@@ -30,8 +27,8 @@ An ad-hoc sub-process can be handled [internally by Zeebe](#bpmn-implementation)
 
 An ad-hoc sub-process has the following constraints:
 
-- Must have at least one activity
-- Must not have start events or end events
+- Must have at least one activity.
+- Must not have start events or end events.
 
 ## BPMN implementation
 
