@@ -49,16 +49,45 @@ If you are still using a Camunda Helm chart that references the old repository, 
 
 See the [Bitnami GitHub announcement](https://github.com/bitnami/containers/issues/83267) for details.
 
-### Web Modeler persistence PVC name
+### Web Modeler restapi ephemeral volume
 
-In some 8.10 chart versions, the Web Modeler `restapi` deployment referenced a persistent volume claim named `<release>-webModeler-data` (camelCase), which did not match the chart-managed PVC `<release>-webmodeler-data` (lowercase). This name mismatch prevented the Web Modeler persistence volume from mounting. A patched 8.10 chart corrects the `claimName` so the `restapi` pod mounts the existing `<release>-webmodeler-data` PVC.
+Patched 8.10 charts replace the chart-managed shared persistent volume claim (PVC) for the Web Modeler `restapi` component with a per-pod ephemeral volume. The shared PVC (`<release>-webmodeler-data`) is removed from the chart. Kubernetes creates a dedicated PVC for each `restapi` pod when it starts and removes it when the pod terminates.
 
-**No action is required for most deployments.** The fix only corrects the deployment's claim reference; it does not rename the PVC. On upgrade, the `restapi` pod mounts the already-existing `<release>-webmodeler-data` PVC and no data migration is needed. The persisted volume holds only `/tmp` scratch and cache data — Web Modeler content is stored in PostgreSQL.
+The `/tmp` directory backed by this ephemeral volume holds only scratch and cache data — Web Modeler content is stored in PostgreSQL, the document store, and Elasticsearch. **This is a safe change with no data loss risk.**
 
-If you manually created a `<release>-webModeler-data` (capital `M`) PVC as a workaround for the broken mount, the `restapi` pod stops using it after you upgrade to a patched chart. The manual PVC is not deleted; it remains orphaned and continues to consume storage until you act. Choose one of the following:
+For most deployments, no action is required on upgrade. The following table shows what to expect based on your `webModeler.persistence` configuration:
 
-- Set `webModeler.persistence.existingClaim` to your manually created PVC to keep using it, or
-- Delete the orphaned PVC after confirming the `restapi` pod successfully mounts `<release>-webmodeler-data`.
+| Setting                              | Upgrade behavior                                                                                                                                                                                                                       |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled: false` (default)           | No change. Your pod continues using `emptyDir`. No action required.                                                                                                                                                                    |
+| `enabled: true`, no `existingClaim`  | `helm upgrade` succeeds. Each pod now uses a per-pod ephemeral PVC. The old `<release>-webmodeler-data` PVC is no longer managed by Helm and becomes orphaned. [Clean it up after upgrading](#clean-up-the-orphaned-pvc) if it exists. |
+| `enabled: true`, `existingClaim` set | No change. Your pod continues mounting your existing PVC. No action required.                                                                                                                                                          |
+
+#### Clean up the orphaned PVC
+
+If you previously set `webModeler.persistence.enabled: true` without `existingClaim`, an orphaned `<release>-webmodeler-data` PVC may exist in your namespace after upgrading. This PVC is no longer referenced by the chart and will not be deleted automatically.
+
+**On cloud providers (GKE, EKS, AKS):** The old PVC was most likely in `Pending` state because the default `WaitForFirstConsumer` storage class defers disk provisioning until a pod is scheduled. If the `restapi` pod never reached a `Running` state, no disk was ever provisioned. The PVC can be safely deleted with no data loss.
+
+**On on-premises clusters with `Immediate` binding:** A physical disk may have been provisioned when the PVC was created. Deleting the PVC releases the underlying disk. Since the volume only backed `/tmp` scratch content, no data is lost.
+
+1. Confirm the `restapi` pod is running and ready before proceeding:
+
+   ```bash
+   kubectl get pods -n <namespace> | grep restapi
+   ```
+
+2. Check whether the orphaned PVC exists:
+
+   ```bash
+   kubectl get pvc -n <namespace> | grep webmodeler-data
+   ```
+
+3. If the PVC exists, delete it:
+
+   ```bash
+   kubectl delete pvc <release>-webmodeler-data -n <namespace>
+   ```
 
 ## Related resources
 

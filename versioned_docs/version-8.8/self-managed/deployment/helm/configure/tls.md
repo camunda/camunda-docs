@@ -11,9 +11,14 @@ description: "Enable TLS for Camunda 8 Self-Managed component connections to dat
 | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Camunda components → Elasticsearch (private CA, self-hosted or AWS)                        | `global.tls.caBundle`                                                                                                                                                                         |
 | Camunda components → OpenSearch (private CA, self-hosted or AWS-managed)                   | `global.tls.caBundle`                                                                                                                                                                         |
-| Camunda components → PostgreSQL JDBC (`sslmode=verify-full` + CA)                          | `global.tls.caBundle` + JDBC URL                                                                                                                                                              |
 | Camunda components → external OIDC issuer with private CA (Entra, Okta, internal Keycloak) | `global.tls.caBundle`                                                                                                                                                                         |
 | Browser / external client → Ingress / GatewayAPI (UI, gRPC)                                | Standard Kubernetes Ingress TLS — configured via per-component `*.ingress.tls` or `global.gateway.tls`, _not_ `global.tls.caBundle`. See [Ingress configuration](./ingress/ingress-setup.md). |
+
+:::note PostgreSQL (RDBMS exporter)
+
+RDBMS secondary storage for the orchestration engine is not available in the 8.8 chart. Components that connect to PostgreSQL over TLS still benefit from the CA bundle — the cert is mounted at `/etc/camunda/tls/ca.crt` and a JDBC client can reference it with `sslmode=verify-full&sslrootcert=/etc/camunda/tls/ca.crt`.
+
+:::
 
 In-cluster pod-to-pod traffic is not covered by this overlay — see [In-cluster transport (service mesh required)](#in-cluster-transport-service-mesh-required).
 
@@ -69,14 +74,14 @@ kubectl -n "$NAMESPACE" create secret generic camunda-ca-bundle \
 Download the overlay (ships in the chart repo, not in the `helm repo` cache):
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.10/values-tls.yaml
+curl -fsSLO https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values-tls.yaml
 ```
 
 Install or upgrade with the overlay:
 
 ```bash
 helm upgrade --install camunda camunda/camunda-platform \
-  --version 15.x \
+  --version 13.x \
   --namespace "$NAMESPACE" \
   -f values-tls.yaml \
   -f your-values.yaml
@@ -103,88 +108,43 @@ See also [Verify no plaintext fallback](#verify-no-plaintext-fallback).
 
 ### Elasticsearch
 
-```yaml
-orchestration:
-  data:
-    secondaryStorage:
-      type: elasticsearch
-      elasticsearch:
-        url: "https://your-elasticsearch.example.com:9200"
-        auth:
-          username: elastic
-          secret:
-            existingSecret: "your-elasticsearch-credentials"
-            existingSecretKey: password
+In the 8.8 chart, Elasticsearch is configured via `global.elasticsearch` (the `orchestration.data.secondaryStorage` block was introduced in 8.9):
 
-optimize:
-  database:
-    elasticsearch:
-      enabled: true
-      url:
-        protocol: https
-        host: "your-elasticsearch.example.com"
-        port: 9200
-      auth:
-        username: elastic
-        secret:
-          existingSecret: "your-elasticsearch-credentials"
-          existingSecretKey: password
+```yaml
+global:
+  elasticsearch:
+    url:
+      protocol: https
+      host: "your-elasticsearch.example.com"
+      port: 9200
+    auth:
+      username: elastic
+      existingSecret: "your-elasticsearch-credentials"
+      existingSecretKey: password
 ```
 
 :::note
-The Zeebe ElasticsearchExporter uses its own auth env path (`ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_AUTHENTICATION_USERNAME` / `_PASSWORD`). `secondaryStorage.elasticsearch.auth` does not fill it — set those env vars via `orchestration.env` if needed.
+The Zeebe ElasticsearchExporter uses its own auth env path (`ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_AUTHENTICATION_USERNAME` / `_PASSWORD`). `global.elasticsearch.auth` does not fill it — set those env vars via the component's `env` block if needed.
 :::
 
 ### OpenSearch
 
 ```yaml
-orchestration:
-  data:
-    secondaryStorage:
-      type: opensearch
-      opensearch:
-        url: "https://your-opensearch.example.com:9200"
-        auth:
-          username: admin
-          secret:
-            existingSecret: "your-opensearch-credentials"
-            existingSecretKey: password
-
-optimize:
-  database:
-    opensearch:
-      enabled: true
-      aws:
-        enabled: false # set true + remove auth.* for IRSA against AWS-managed OpenSearch
-      url:
-        protocol: https
-        host: "your-opensearch.example.com"
-        port: 9200
-      auth:
-        username: admin
-        secret:
-          existingSecret: "your-opensearch-credentials"
-          existingSecretKey: password
+global:
+  opensearch:
+    url:
+      protocol: https
+      host: "your-opensearch.example.com"
+      port: 9200
+    auth:
+      username: admin
+      existingSecret: "your-opensearch-credentials"
+      existingSecretKey: password
+    # For AWS-managed OpenSearch with IRSA, set global.opensearch.aws.enabled: true
+    # and omit auth.* — the caBundle still supplies trust for the TLS endpoint.
 ```
 
 For AWS-managed OpenSearch with IRSA, leave `auth` unset and configure `aws.enabled: true` plus the appropriate service account annotations.
-
-### PostgreSQL (RDBMS exporter)
-
-The CA is mounted at `/etc/camunda/tls/ca.crt` — reference it directly in the JDBC URL:
-
-```yaml
-orchestration:
-  data:
-    secondaryStorage:
-      type: rdbms
-      rdbms:
-        url: "jdbc:postgresql://your-postgres.example.com:5432/orchestration?sslmode=verify-full&sslrootcert=/etc/camunda/tls/ca.crt"
-        username: camunda
-        secret:
-          existingSecret: "your-postgres-credentials"
-          existingSecretKey: password
-```
 
 ### External OIDC issuer with private CA
 
@@ -233,11 +193,11 @@ Server certs for Elasticsearch, OpenSearch, and PostgreSQL must be issued separa
 
 ## Install-time guardrails
 
-The chart emits these as `[camunda][warning]` messages from its constraints template while rendering `helm install` / `helm upgrade`. They also appear in the `helm status <release>` NOTES output when `global.createReleaseInfo` is enabled. Keep them in mind — some are enforced as render-time errors, others are silent precedence rules you must account for in your values:
+After each `helm install` or `helm upgrade`, check the `NOTES.txt` output for these warnings (re-display it at any time with `helm status <release>`):
 
 - Per-component JKS overrides the bundle. If a component has a legacy `tls.secret` JKS configured, you must remove it to use the bundle. Legacy JKS fields take priority over `global.tls.caBundle`.
 - Bundle is trust, not encryption. `global.tls.caBundle` adds CA trust but does not enable TLS on a plaintext URL. Set the URL to `https://` (or set the JDBC `sslmode`).
-- `JAVA_TOOL_OPTIONS` in component `env` overrides the truststore flags. For Orchestration and Optimize, set it via `javaOpts` instead, which the chart appends its truststore flags to. Connectors, Identity, and Web Modeler restapi receive the truststore flags automatically through a dedicated `JAVA_TOOL_OPTIONS` env — do not put truststore flags in their `javaOpts` (Web Modeler restapi's `javaOpts` feeds `JAVA_OPTIONS`, a different variable, so it has no effect on trust).
+- `JAVA_TOOL_OPTIONS` in component `env` overrides the truststore flags. Set it via `javaOpts` (orchestration, optimize, Web Modeler restapi) instead, which the chart appends to.
 
 ## Verify no plaintext fallback
 
@@ -279,14 +239,12 @@ Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` anno
 
 ## Legacy: per-component JKS truststore (deprecated)
 
-Deprecated as of chart 15.x. Affected fields:
+Deprecated as of chart 13.x. Affected fields:
 
 - `global.elasticsearch.tls.secret.existingSecret` / `existingSecretKey`
 - `global.opensearch.tls.secret.existingSecret` / `existingSecretKey`
 - `global.elasticsearch.tls.jks.secret.*`
 - `global.opensearch.tls.jks.secret.*`
-- `orchestration.data.secondaryStorage.elasticsearch.tls.secret.*`
-- `orchestration.data.secondaryStorage.opensearch.tls.secret.*`
 - `optimize.database.elasticsearch.tls.secret.*`
 - `optimize.database.opensearch.tls.secret.*`
 
@@ -328,10 +286,9 @@ The following in-cluster connections are plaintext by default:
 | Web Modeler / Console / Optimize → Identity     | REST     |
 | Spring Boot management / metrics (probes)       | HTTP     |
 
-Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). See the
-[TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md) for the full connection inventory.
+Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). See the [TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md) for the full connection inventory.
 
 ## Related
 
 - [Helm chart TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md) — per-connection support level
-- [Helm chart `values-tls.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.10/values-tls.yaml) — the overlay this guide describes
+- [Helm chart `values-tls.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.8/values-tls.yaml) — the overlay this guide describes
