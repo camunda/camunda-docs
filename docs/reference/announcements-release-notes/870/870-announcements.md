@@ -48,19 +48,46 @@ Collectively, these changes consolidate overlapping functionality, align configu
 
 ### 8.7.x patch releases
 
-The following key change was also released as part of an 8.7.x patch release.
+The following key changes were also released as part of an 8.7.x patch release.
 
-| Patch release                                                    | Type            | Key change                                                                                              |
-| :--------------------------------------------------------------- | :-------------- | :------------------------------------------------------------------------------------------------------ |
-| [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record) |
+| Patch release                                                    | Type            | Key change                                                                                                       |
+| :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
+| [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 
 Camunda 8.7.27 unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.7.27 or any later 8.7.x patch. The built-in Elasticsearch and OpenSearch exporters are unaffected.
 
-A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and will be available in a later 8.7.x patch.
+A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and is available in 8.7.33.
 
 **Action:** If you maintain a custom exporter that reads message batch records, avoid calling `getMessageKeys()` until you upgrade to a patch that includes the fix.
+
+### Multi-instance sub-process output mapping variable scope regression {#multi-instance-output-mapping-regression}
+
+Camunda 8.7.28 introduced a regression in which output mappings inside a multi-instance sub-process that also defines an output collection cause local variables to propagate to the parent scope.
+
+You're affected if your process contains a multi-instance sub-process that meets both of the following conditions:
+
+1. The sub-process defines an output collection.
+2. One or more elements inside the sub-process define output mappings.
+
+Under these conditions:
+
+- Local variables from inside the sub-process appear in the parent scope and are visible in Operate.
+- If any leaked variable shares a name with a variable on the parent scope, the parent scope value is overwritten.
+
+**Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
+
+**Fix:** A fix is available in 8.7.33. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
+
+- [camunda/camunda#11789](https://github.com/camunda/camunda/issues/11789): FEEL expressions used as mapping sources may not evaluate correctly due to ordering.
+- [camunda/camunda#35251](https://github.com/camunda/camunda/issues/35251): When one value from a nested variable is listed as an output mapping, all values in the nested variable are merged into the parent scope. Workaround: map the full nested variable instead of individual values.
+
+**Action:**
+
+- Before the fix is available: ensure all variable names inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
+- After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
 
 ### Deprecation of Self-Managed AWS Marketplace offering
 
@@ -71,17 +98,17 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
-With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) to be able to deploy from Web Modeler.
+With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/components/hub/configuration/properties.md#clusters) to be able to deploy from Web Modeler.
 
 <img src={DeployDiagramImg} alt="New 8.7 deploy diagram modal" width="600px" style={{border: '0', paddingTop: '0', marginTop: '0'}} />
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
-- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) to be able to deploy from this modal.
+- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/components/hub/configuration/properties.md#clusters) to be able to deploy from this modal.
 - Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
 
 ### Deprecated: Web Modeler cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The following authentication methods for a [configured cluster in Web Modeler](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
+The following authentication methods for a [configured cluster in Web Modeler](/self-managed/components/hub/configuration/properties.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
 
 - `OAUTH`: This method was replaced by `BEARER_TOKEN`.
 - `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md).

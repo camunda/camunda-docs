@@ -209,9 +209,111 @@ More details can be found in the [AWS documentation on modifying IMDS for existi
 
 Overall, this will disable the role assumption of the node for the Kubernetes pod.
 
-## Backup-related
+## Document store (S3)
 
-When implementing [backup and restore procedures](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for **Elasticsearch** in your **Camunda** deployment, you can leverage **AWS IAM Roles for Service Accounts (IRSA)** to securely access **S3 buckets**.
+When using the [AWS S3 document store](/self-managed/concepts/document-handling/configuration/helm.md) on Amazon EKS, you can authenticate to S3 with IRSA instead of static AWS credentials. This removes long-lived access keys from your Kubernetes secrets and enables Camunda components to assume an IAM role through their service account.
+
+### Prerequisites
+
+- An [IAM OIDC provider associated with your EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
+- An existing S3 bucket for documents.
+
+### Create the IAM role and policies
+
+Following the [AWS IRSA documentation](https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html), create an IAM role that the Camunda service accounts can assume.
+
+Attach a **permission policy** that grants the required S3 actions on your bucket:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:DeleteObject",
+        "s3:ListBucket"
+      ],
+      "Resource": ["arn:aws:s3:::<your-bucket>", "arn:aws:s3:::<your-bucket>/*"]
+    }
+  ]
+}
+```
+
+The role's **trust policy** must allow the relevant Kubernetes service accounts to assume it through web identity. Replace the account ID, region, OIDC provider ID, namespace, and release name with your values:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::<account-id>:oidc-provider/oidc.eks.<region>.amazonaws.com/id/<oidc-id>"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.<region>.amazonaws.com/id/<oidc-id>:sub": [
+            "system:serviceaccount:<namespace>:<release-name>-orchestration",
+            "system:serviceaccount:<namespace>:<release-name>-connectors"
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+
+### Configure the Helm chart
+
+Set `global.documentStore.type.aws.irsa.enabled` to `true` so the chart does not inject `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` into the pods, and annotate the service account of each component that accesses the document store with the IAM role ARN:
+
+```yaml
+global:
+  documentStore:
+    activeStoreId: "aws"
+    type:
+      aws:
+        enabled: true
+        irsa:
+          enabled: true
+        bucket: "<your-bucket>"
+        region: "<your-region>"
+
+orchestration:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
+
+connectors:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
+```
+
+:::note
+With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK resolves credentials through its [default provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which picks up the IRSA web identity token. Annotate the service account of every component you have enabled to use the document store; otherwise that component cannot reach S3.
+:::
+
+### Verify
+
+1. Confirm the pods start successfully without an AWS credentials secret:
+   ```bash
+   kubectl get pods -n <namespace>
+   ```
+2. Confirm the IRSA environment variables are injected and the static credentials are absent:
+   ```bash
+   kubectl exec -n <namespace> <orchestration-pod> -- env | grep AWS
+   ```
+   You should see `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`, and no `AWS_ACCESS_KEY_ID`.
+3. Upload and download a document to confirm S3 access works end to end.
+
+## Elasticsearch backup with IRSA
+
+When implementing [backup and restore procedures](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for Elasticsearch in your Camunda deployment, you can use IRSA to securely access S3 buckets.
 
 ### Bitnami Elasticsearch chart configuration
 

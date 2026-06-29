@@ -134,7 +134,7 @@ A cluster [variable](../../components/concepts/variables/) is a centrally manage
 
 An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
 ### Camunda 8
 
@@ -414,7 +414,7 @@ The log is comprised of an ordered sequence of records written to persistent sto
 A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based multi-tenancy model in Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single [Physical Tenant](#physical-tenant).
 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
 ## M
 
@@ -544,7 +544,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 An isolated execution unit within an [Orchestration Cluster](#orchestration-cluster). Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant. Multiple [logical tenants](#logical-tenant) can coexist within a single Physical Tenant.
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 - [Logical Tenant](#logical-tenant)
 - [Multi-tenancy](#multi-tenancy)
 
@@ -693,7 +693,7 @@ A [Logical Tenant](#logical-tenant) is a logically isolated space within a share
 
 An operation that targets a specific [Physical Tenant](#physical-tenant), such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
 ### Temperature
 

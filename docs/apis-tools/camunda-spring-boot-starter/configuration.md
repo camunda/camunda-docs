@@ -74,7 +74,7 @@ This applies the following defaults:
 https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
 ```
 
-For some specific OIDC setups (e.g [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.auth.scope` in addition to the defaults provided by the mode, see the [`camunda.client.auth`-Properties reference](./properties-reference.md) for a full overview.
+For some specific OIDC setups (for example, [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.auth.scope` in addition to the defaults provided by the mode, see the [`camunda.client.auth`-Properties reference](./properties-reference.md) for a full overview.
 
 ## Connectivity
 
@@ -245,7 +245,7 @@ There are three ways to define the token URL. They're prioritized as follows:
 
 #### Credentials cache path
 
-You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
+By default, the Java client caches OAuth credentials in memory only. To persist credentials across JVM restarts, opt in to a file-based cache by setting `camunda.client.auth.credentials-cache-path` to a writeable file location (directory path and file name):
 
 ```yaml
 camunda:
@@ -253,6 +253,8 @@ camunda:
     auth:
       credentials-cache-path: /tmp/credentials
 ```
+
+When this property is unset or empty, no cache file is created and tokens are fetched fresh after each restart.
 
 #### Custom identity provider security context
 
@@ -603,9 +605,46 @@ public DocumentResult sendDocumentAsResult() {
 }
 ```
 
+##### Completing ad-hoc sub-process jobs with a result
+
+When your job worker handles an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) job, you can return an `AdHocSubProcessResultFunction` to specify which element to activate within the sub-process. The starter automatically applies the result when you complete the job.
+
+Return a lambda that calls `activateElement` with the target element ID:
+
+```java
+@JobWorker(type = "myAdHocSubprocessJob")
+public AdHocSubProcessResultFunction handleAdHocSubprocess() {
+  return r -> r.activateElement("myElementId");
+}
+```
+
+To also submit process variables with the result, use the `AdHocSubProcessResultFunction.withVariables` factory method:
+
+```java
+@JobWorker(type = "myAdHocSubprocessJob")
+public AdHocSubProcessResultFunction handleAdHocSubprocess() {
+  Map<String, Object> variables = Map.of("decision", "approved");
+  return AdHocSubProcessResultFunction.withVariables(variables,
+      r -> r.activateElement("approvalTask"));
+}
+```
+
+##### Completing user task listener jobs with a result
+
+When your job worker handles a user task listener job, you can return a `UserTaskResultFunction` to control the outcome of the listener. The starter automatically applies the result when you complete the job.
+
+Return a lambda that configures the result, for example to correct the assignee:
+
+```java
+@JobWorker(type = "io.camunda:userTaskListener:complete")
+public UserTaskResultFunction handleUserTaskListener() {
+  return r -> r.correctAssignee("newAssignee");
+}
+```
+
 #### Programmatically completing jobs
 
-Your job worker code can also complete the job itself. This gives you more control over when exactly you want to complete the job (for example, allowing the completion to be moved to reactive callbacks):
+Your job worker code can also complete the job itself. This gives you more control over when you want to complete the job (for example, allowing you to move the completion to reactive callbacks):
 
 ```java
 @JobWorker(type = "foo", autoComplete = false)
@@ -969,7 +1008,7 @@ camunda:
 
 ## Deploy resources on start-up
 
-To deploy process models on application start-up, use the `@Deployment` annotation:
+To deploy process models at application startup, use the `@Deployment` annotation:
 
 ```java
 @Deployment(resources = "classpath:demoProcess.bpmn")
@@ -1028,6 +1067,91 @@ To disable the deployment of annotations, you can set:
 camunda:
   client:
     deployment:
+      enabled: false
+```
+
+## Set cluster variables at startup
+
+To set cluster variables at application startup, use the `@ClusterVariables` annotation. Cluster variables are set when the Camunda client starts.
+
+There are three ways to provide the variables:
+
+### From JSON resource files
+
+Provide one or more JSON resource files using the `resources` attribute:
+
+```java
+@ClusterVariables(resources = "classpath:cluster-variables.json")
+@SpringBootApplication
+public class MyApplication { }
+```
+
+Multiple files can be provided at once:
+
+```java
+@ClusterVariables(resources = {"classpath:vars-a.json", "classpath:vars-b.json"})
+@SpringBootApplication
+public class MyApplication { }
+```
+
+### From a method
+
+Annotate a method with `@ClusterVariables`. The return value is serialized to JSON and set as cluster variables. Any type the configured `JsonMapper` can serialize is supported, for example `Map`, a POJO, or a record:
+
+```java
+@ClusterVariables
+public MyConfig clusterVariables() {
+  return new MyConfig("production", 3);
+}
+```
+
+### From application properties
+
+Define variables directly in your `application.yaml`:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      global:
+        environment: production
+        maxRetries: 3
+```
+
+Variables defined in properties are applied in addition to any annotation-defined variables.
+
+### Specify the tenant to set variables for
+
+To set cluster variables scoped to a specific tenant, use the `tenantId` property of the `@ClusterVariables` annotation:
+
+```java
+@ClusterVariables(resources = "classpath:cluster-variables.json", tenantId = "myTenant")
+@SpringBootApplication
+public class MyApplication { }
+```
+
+Or use the `tenant` property in your `application.yaml`:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      tenant:
+        myTenant:
+          environment: staging
+          maxRetries: 5
+```
+
+By default, the annotation and `global` property set variables in the global scope.
+
+### Disable cluster variable processing
+
+To disable all cluster variable processing (both annotation-based and property-based), set:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
       enabled: false
 ```
 

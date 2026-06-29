@@ -76,6 +76,18 @@ We use the same procedure to handle the loss of both active and passive regions.
 
 **Temporary Loss Scenario:** If a region loss is temporary — such as from transient network issues — Zeebe can handle this situation without initiating recovery procedures, provided there is sufficient free space on the persistent disk. However, processing may halt due to a loss of quorum during this time.
 
+:::warning Expect transient cross-region disruptions
+While cross-region connectivity and DNS converge, some failover and failback steps may take longer than expected or return transient errors, and Zeebe brokers may stay `Running` without becoming `Ready`. This is expected, not a failure. Follow the remediation steps below before treating a step as failed.
+:::
+
+Failover and failback depend on cross-region network connectivity and DNS resolution between both regions. For example, Submariner `ServiceExport` resources and clusterset DNS on OpenShift, or VPC peering on Amazon EKS. While this connectivity converges, Zeebe brokers may stay `Running` without becoming `Ready` until they can resolve their peers in the other region.
+
+If a step does not converge on the first attempt:
+
+- Allow extra time for cross-region DNS and Zeebe quorum to stabilize before concluding the step has failed.
+- Re-run the step. These procedures are idempotent.
+- Restart any Zeebe broker that stays `Running` but never becomes `Ready`, so it can resolve its cross-region peers and rejoin the cluster.
+
 #### Key steps to handle passive region loss
 
 1. **Traffic rerouting:** Use DNS to reroute traffic to the surviving active region. (Details on managing DNS rerouting depend on your specific DNS setup and are not covered in this guide.)

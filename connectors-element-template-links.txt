@@ -2,6 +2,8 @@
 # This file is used to check that we don't accidentally break these links
 
 https://docs.camunda.io/docs
+https://docs.camunda.io/docs/8.10/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess
+https://docs.camunda.io/docs/8.10/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task
 https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-sagemaker
 https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-textract
 https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/sql
@@ -28,6 +30,7 @@ https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/google-cloud-storage/#authentication
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/hubspot
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/sql/#database
+https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver
 https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess
 https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess/
 https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess/#response
@@ -36,7 +39,14 @@ https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors
 https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task/#response
 https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-connector
 https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector
+https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/azure-blob-storage
 https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/azure-blob-storage/#oauth-20
+https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/azure-blob-storage/#prerequisites
+https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/embeddings-vector-db
+https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/google-cloud-storage
+https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/google-cloud-storage/#authentication
+https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/hubspot
+https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/sql/#database
 https://docs.camunda.io/docs/8.9/components/early-access/alpha/a2a-client/a2a-client-connector
 https://docs.camunda.io/docs/8.9/components/early-access/alpha/a2a-client/a2a-client-polling-connector
 https://docs.camunda.io/docs/8.9/components/early-access/alpha/a2a-client/a2a-client-webhook-connector
@@ -53,7 +63,9 @@ https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connecto
 https://docs.camunda.io/docs/components/concepts/messages/#message-correlation-overview
 https://docs.camunda.io/docs/components/concepts/messages/#message-subscriptions
 https://docs.camunda.io/docs/components/connectors/protocol/http-webhook/#correlation
+https://docs.camunda.io/docs/components/connectors/protocol/http-webhook/#use-the-correlation-object
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/#authentication
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/
@@ -65,6 +77,8 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/ama
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=outbound
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-textract/#operations
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-textract/#operations
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/asana
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/automation-anywhere
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/automation-anywhere/
@@ -84,6 +98,7 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/aws
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/azure-open-ai
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/blueprism
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/easy-post
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/email
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/github
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/github-webhook
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/github/?github=inbound
@@ -109,6 +124,8 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/kaf
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/kafka/?kafka=outbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/#configure-the-microsoft-365-outlook-connector
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/#configure-the-microsoft-365-outlook-connector
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-teams
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/openai
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/operate

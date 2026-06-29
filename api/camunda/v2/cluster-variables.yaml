@@ -2,6 +2,9 @@ paths:
   /cluster-variables/global:
     post:
       operationId: createGlobalClusterVariable
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Cluster Variable
       summary: Create a global-scoped cluster variable
@@ -44,6 +47,9 @@ paths:
   /cluster-variables/tenants/{tenantId}:
     post:
       operationId: createTenantClusterVariable
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Cluster Variable
       summary: Create a tenant-scoped cluster variable
@@ -101,6 +107,9 @@ paths:
       tags:
         - Cluster Variable
       operationId: searchClusterVariables
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       description: |-
 
 
@@ -141,6 +150,9 @@ paths:
   /cluster-variables/global/{name}:
     get:
       operationId: getGlobalClusterVariable
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Cluster Variable
       summary: Get a global-scoped cluster variable
@@ -183,6 +195,9 @@ paths:
       x-added-in-version: "8.9"
     put:
       operationId: updateGlobalClusterVariable
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Cluster Variable
       summary: Update a global-scoped cluster variable
@@ -232,6 +247,9 @@ paths:
       x-added-in-version: "8.9"
     delete:
       operationId: deleteGlobalClusterVariable
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Cluster Variable
       summary: Delete a global-scoped cluster variable
@@ -271,6 +289,9 @@ paths:
   /cluster-variables/tenants/{tenantId}/{name}:
     get:
       operationId: getTenantClusterVariable
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Cluster Variable
       summary: Get a tenant-scoped cluster variable
@@ -319,6 +340,9 @@ paths:
       x-added-in-version: "8.9"
     put:
       operationId: updateTenantClusterVariable
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Cluster Variable
       summary: Update a tenant-scoped cluster variable
@@ -374,6 +398,9 @@ paths:
       x-added-in-version: "8.9"
     delete:
       operationId: deleteTenantClusterVariable
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Cluster Variable
       summary: Delete a tenant-scoped cluster variable

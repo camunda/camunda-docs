@@ -30,6 +30,8 @@ security:
   - bearerAuth: []
 
 tags:
+  - name: Catalog
+    description: Catalog asset management operations.
   - name: File
     description: File management operations.
   - name: Folder
@@ -46,6 +48,10 @@ tags:
     description: Collaborator management operations.
 
 paths:
+  /catalog/assets/ingestion:
+    $ref: "catalog.yaml#/paths/~1catalog~1assets~1ingestion"
+  /catalog/assets/{assetKey}:
+    $ref: "catalog.yaml#/paths/~1catalog~1assets~1{assetKey}"
   /files:
     $ref: "files.yaml#/paths/~1files"
   /files/{fileKey}:

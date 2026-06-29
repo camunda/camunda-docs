@@ -4,6 +4,9 @@ paths:
       tags:
         - Decision definition
       operationId: searchDecisionDefinitions
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search decision definitions
       description: |-
 
@@ -40,6 +43,9 @@ paths:
       tags:
         - Decision definition
       operationId: getDecisionDefinition
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get decision definition
       description: |-
 
@@ -87,6 +93,9 @@ paths:
       tags:
         - Decision definition
       operationId: getDecisionDefinitionXML
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get decision definition XML
       description: |-
 
@@ -134,6 +143,9 @@ paths:
       tags:
         - Decision definition
       operationId: evaluateDecision
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Evaluate decision
       description: |-
 
@@ -161,7 +173,7 @@ paths:
               By decision definition ID:
                 summary: Evaluate the decision by decisionDefinitionId.
                 value:
-                  decisionDefinitionId: 1234-5678
+                  decisionDefinitionId: my-decision
                   variables: {}
       responses:
         "200":

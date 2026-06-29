@@ -53,7 +53,7 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the correct configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
+With the correct configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises), and is not tied to a specific Kubernetes version. The Helm chart supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
@@ -103,6 +103,7 @@ Regardless of the type, the network storage volumes you use must meet these requ
 - They must be capable of **at least 1,000 IOPS**.
 - The latency of write/msync operations must be in the **low single digit milliseconds** under normal conditions. Ideally, it's in the order of microseconds.
 - The p99 latency must be **lower than 300 milliseconds**.
+- They must be SSD-backed. HDD-backed volumes typically sustain only tens to a few hundred IOPS with multi-millisecond seek latency, well below the 1,000 IOPS minimum and single-digit-millisecond latency required for Zeebe, so they are not supported.
 
 ### Helm charts version matrix
 
@@ -140,6 +141,8 @@ For a complete list of supported RDBMS versions, JDBC driver information (bundle
 ### Component version matrix
 
 The following matrix shows which component versions work together. Components within the same column must share the same `minor` and `patch` version.
+
+For Helm-managed deployments, use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) as the source of truth for the component versions bundled in a supported chart release. Do not manually override bundled component image tags unless a specific upgrade guide or release note instructs you to do so.
 
 | [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                      |
 | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------- |

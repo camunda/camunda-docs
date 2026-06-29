@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
@@ -49,7 +49,7 @@ jobs:
           fi
 
       - name: Checkout Camunda
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda
           path: rest-spec

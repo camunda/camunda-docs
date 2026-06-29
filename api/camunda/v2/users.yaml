@@ -4,6 +4,9 @@ paths:
       tags:
         - User
       operationId: createUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create user
       description: |-
 
@@ -48,6 +51,9 @@ paths:
       tags:
         - User
       operationId: searchUsers
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search users
       description: |-
 
@@ -83,6 +89,9 @@ paths:
       tags:
         - User
       operationId: getUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get user
       description: |-
 
@@ -123,6 +132,9 @@ paths:
       tags:
         - User
       operationId: updateUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update user
       description: |-
 
@@ -171,6 +183,9 @@ paths:
       tags:
         - User
       operationId: deleteUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete user
       description: |-
 

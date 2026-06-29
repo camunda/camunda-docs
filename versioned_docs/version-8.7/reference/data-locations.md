@@ -43,8 +43,8 @@ Connector secrets are optional. This information only applies if you use connect
 
 The Camunda‑hosted [Console](/components/console/introduction-to-console.md) admin UI is used for cluster and organization management.
 
-| Host location                                                        | Data handled                                      | Personal data processing                                                                                                                                                        |
-| :------------------------------------------------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Host location     | Data handled                                      | Personal data processing                                                                                                                                                        |
+| :---------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Germany, EU (AWS) | Only stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
 
 ## Identity

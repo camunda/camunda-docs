@@ -17,7 +17,7 @@ Access and safely use the SQL and Liquibase scripts provided with Camunda 8 for 
 
 The scripts are included in the **Camunda 8 Run distribution** and in each **Camunda GitHub release** as a versioned ZIP file:
 
-- **GitHub release example:** [Camunda 8.9.0-alpha1](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha1)
+- **GitHub release example:** [Camunda 8.9.0](https://github.com/camunda/camunda/releases/tag/8.9.0)
 - **C8Run distribution:** top-level folder `rdbms-schema/`
 
 ## Distribution & ZIP contents
