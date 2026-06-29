@@ -12,7 +12,7 @@ With the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-
 
 ## About
 
-Ad-hoc sub-processes are a special kind of [embedded subprocesses](../embedded-subprocesses/embedded-subprocesses.md) with an **ad-hoc marker** (represented
+Ad-hoc sub-processes are a special kind of [embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md) with an **ad-hoc marker** (represented
 by a **~** tilde character). Compared to regular subprocesses, ad-hoc sub-processes allow more flexibility
 for executing inner elements.
 
