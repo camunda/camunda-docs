@@ -13,12 +13,12 @@ Add BPMN activities as callable tools to your AI agents.
 
 ## What is a tool
 
-A tool is a BPMN activity inside an ad-hoc sub-process that the LLM can choose to invoke to complete a goal. Each tool has:
+A tool is a BPMN activity inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that the [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
 
-- A **name** — the element ID, used by the LLM to identify the tool.
-- A **description** — the element's **Documentation** field, used by the LLM to decide when to call the tool.
-- **Input parameters** — values the LLM must supply at call time, declared using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
-- A **result** — the tool's output, returned to the LLM as `toolCallResult`.
+- A **name**: the element ID, used by the LLM to identify the tool.
+- A **description**: the element's **Documentation** field, used by the LLM to decide when to call the tool.
+- **Input parameters**: values the LLM must supply at call time, declared using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
+- A **result**: the tool's output, returned to the LLM as `toolCallResult`.
 
 The AI Agent connector gathers all root-level activities in the ad-hoc sub-process (those with no incoming flows), builds a tool definition for each, and passes them to the LLM as part of the prompt. The LLM then decides which tool to call, in what order, and with which parameters.
 
@@ -42,12 +42,12 @@ For the full technical reference on how tool definitions are resolved and the co
 Open your process in [Web Modeler](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 
 1. Click inside the ad-hoc sub-process to enter it.
-1. Add a new task element. You can use any BPMN activity type as a tool — service task, script task, user task, or a sub-process.
+1. Add a new task element. You can use any BPMN activity type as a tool, including service tasks, script tasks, user tasks, and sub-processes.
 1. Apply the appropriate connector or task type. For example:
    - Use the [REST Outbound connector](/components/connectors/protocol/rest.md) to call an external API.
    - Use a [script task](/components/modeler/bpmn/script-tasks/script-tasks.md) to execute inline logic.
    - Use a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) to route to a human reviewer.
-1. Make sure the activity has **no incoming sequence flow** — the AI Agent connector only resolves root-level activities as tools.
+1. Make sure the activity has **no incoming sequence flow**, as the AI Agent connector only resolves root-level activities as tools.
 
 :::tip
 You can model a sub-flow inside the ad-hoc sub-process. Only the first activity in the sub-flow (the root node) is exposed to the LLM as a tool; the rest of the flow executes automatically once the LLM selects it.
@@ -61,7 +61,7 @@ The LLM selects tools based on the activity name and its **Documentation** field
 1. Open the **Documentation** field in the properties panel and write a description that explains:
    - What the tool does.
    - When the LLM should use it.
-   - When it should not — especially if two tools have overlapping purposes.
+   - When it should not, especially if two tools have overlapping purposes.
    - Any constraints or expected inputs.
 
 **Example: weak vs. strong description**
@@ -75,23 +75,23 @@ A precise description makes the expected behavior explicit and reduces the risk 
 
 ## Declare AI-generated parameters with `fromAi()`
 
-If the tool requires values that the LLM should supply at runtime — such as a search query, a location, or an identifier — declare those parameters using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
+If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, declare those parameters using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
 
-The `fromAi()` function marks a value as LLM-provided and generates a JSON Schema parameter definition that is passed to the LLM as part of the tool definition. Always provide a description and type for every parameter — this significantly reduces hallucinated values.
+The `fromAi()` function marks a value as LLM-provided and generates a JSON Schema parameter definition that is passed to the LLM as part of the tool definition. Always provide a description and type for every parameter, as this significantly reduces hallucinated values.
 
-**Basic usage** — declare a string parameter:
+**Basic usage**: declare a string parameter:
 
 ```feel
 fromAi(toolCall.url, "The URL to fetch. Must be a valid HTTP(s) URL.", "string")
 ```
 
-**With type** — declare a number parameter:
+**With type**: declare a number parameter:
 
 ```feel
 fromAi(toolCall.latitude, "Latitude of the location", "number")
 ```
 
-**Optional parameter** — mark a parameter as not required:
+**Optional parameter**: mark a parameter as not required:
 
 ```feel
 fromAi(
@@ -101,7 +101,7 @@ fromAi(
 )
 ```
 
-**Combined in one expression** — use multiple `fromAi()` calls in a single field:
+**Combined in one expression**: use multiple `fromAi()` calls in a single field:
 
 ```feel
 fromAi(toolCall.firstName, "Customer first name", "string") + " " + fromAi(toolCall.lastName, "Customer last name", "string")
@@ -115,7 +115,7 @@ For more examples and the full function signature, see [`fromAi()`](/components/
 
 ## Return the result as `toolCallResult`
 
-After the tool executes, its output must be returned in a process variable named `toolCallResult` so the AI Agent connector can pass it back to the LLM.
+After the tool executes, its output must be returned in a [process variable](/reference/glossary.md#process-variable) named `toolCallResult` so the AI Agent connector can pass it back to the LLM.
 
 Use any of the following approaches depending on your task type:
 
@@ -170,62 +170,52 @@ toolCallResult = [status: "completed", id: customerId]
 </Tabs>
 
 :::note
-The `toolCallResult` value can be a primitive string, a number, or a complex FEEL context object. Complex objects are serialized to JSON before being passed to the LLM. Prefer returning a structured FEEL context over a raw string when the result has multiple fields — this gives the LLM more to work with when summarizing the outcome. If `toolCallResult` is not set or is empty after the tool executes, the AI Agent connector returns a constant success string to the LLM.
+The `toolCallResult` value can be a primitive string, a number, or a complex FEEL context object. Complex objects are serialized to JSON before being passed to the LLM. Prefer returning a structured FEEL context over a raw string when the result has multiple fields, as this gives the LLM more to work with when summarizing the outcome. If `toolCallResult` is not set or is empty after the tool executes, the AI Agent connector returns a constant success string to the LLM.
 :::
 
 ## Example: add a REST connector tool
 
 This example adds a tool that fetches current weather conditions using the [Open-Meteo API](https://open-meteo.com/).
 
-### Add the activity
+1. Inside the ad-hoc sub-process, add a new task, apply the [REST Outbound connector](/components/connectors/protocol/rest.md) using the **Change element** menu, and name the task `Get current weather`.
 
-1. Inside the ad-hoc sub-process, add a new task.
-1. Apply the [REST Outbound connector](/components/connectors/protocol/rest.md) using the **Change element** menu.
-1. Name the task `Get current weather`.
+1. In the **Documentation** field, enter a description so the LLM knows when to select this tool:
 
-### Write the description
+   ```
+   Fetches current weather conditions for a given location. Use this tool when the user asks about weather, temperature, wind, or climate conditions for a city or place. Returns temperature in Celsius, wind speed, and a weather description.
+   ```
 
-In the **Documentation** field, enter:
+1. In the **HTTP Endpoint** section, configure the request:
 
-```
-Fetches current weather conditions for a given location. Use this tool when the user asks about weather, temperature, wind, or climate conditions for a city or place. Returns temperature in Celsius, wind speed, and a weather description.
-```
+   - Set **Method** to **GET**.
+   - Set **URL** to:
 
-### Configure the connector
+     ```feel
+     "https://api.open-meteo.com/v1/forecast"
+     ```
 
-In the **HTTP Endpoint** section:
+   - Set **Query parameters** to:
 
-- Set **Method** to **GET**.
-- Set **URL** to:
+     ```feel
+     {
+       latitude: fromAi(toolCall.latitude, "Latitude of the location to check weather for", "number"),
+       longitude: fromAi(toolCall.longitude, "Longitude of the location to check weather for", "number"),
+       current: "temperature_2m,wind_speed_10m,weather_code"
+     }
+     ```
 
-  ```feel
-  "https://api.open-meteo.com/v1/forecast"
-  ```
+   The `latitude` and `longitude` are LLM-generated parameters. The `current` field is a fixed value that selects which weather fields to return.
 
-- Set **Query parameters** to:
+1. In the **Output Mapping** section, set **Result Expression** to return the relevant response fields as `toolCallResult`:
 
-  ```feel
-  {
-    latitude: fromAi(toolCall.latitude, "Latitude of the location to check weather for", "number"),
-    longitude: fromAi(toolCall.longitude, "Longitude of the location to check weather for", "number"),
-    current: "temperature_2m,wind_speed_10m,weather_code"
-  }
-  ```
-
-The `latitude` and `longitude` parameters are LLM-generated; the `current` parameter is a fixed value.
-
-### Map the result
-
-In the **Output Mapping** section, set **Result Expression** to:
-
-```feel
-{
-  toolCallResult: {
-    latitude: response.body.latitude,
-    longitude: response.body.longitude,
-    temperature_celsius: response.body.current.temperature_2m,
-    wind_speed_kmh: response.body.current.wind_speed_10m,
-    weather_code: response.body.current.weather_code
-  }
-}
-```
+   ```feel
+   {
+     toolCallResult: {
+       latitude: response.body.latitude,
+       longitude: response.body.longitude,
+       temperature_celsius: response.body.current.temperature_2m,
+       wind_speed_kmh: response.body.current.wind_speed_10m,
+       weather_code: response.body.current.weather_code
+     }
+   }
+   ```
