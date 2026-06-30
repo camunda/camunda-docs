@@ -93,8 +93,8 @@ Track import progress with the [Optimize metrics and bundled Grafana dashboards]
 
 Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are three levers, from most to least aggressive:
 
-- **Stop exporting variables entirely _(Camunda 8.9+)_.** Set `index.variable: false` at the Elasticsearch/OpenSearch exporter to drop all variable records. This is the only lever that also recovers throughput because the exporter write path is the bottleneck at maximum load.
-- **Export only the variables you need (name and prefix filters) _(Camunda 8.9+)_.** Keep a subset with name or prefix filters, for example only `customer`-prefixed variables. Use this when some variables drive Optimize reports, but most are noise.
+- **Stop exporting variables entirely.** Set `camunda.data.exporters.elasticsearch.args.index.variable: false` (OpenSearch: `camunda.data.exporters.opensearch.args.index.variable: false`) at the exporter to drop all variable records. This is the only lever that also recovers throughput because the exporter write path is the bottleneck at maximum load.
+- **Export only the variables you need (name and prefix filters).** Keep a subset with name or prefix filters, for example only `customer`-prefixed variables. Use this when some variables drive Optimize reports, but most are noise.
 - **[Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) in Optimize.** Available on all supported versions; achieves the storage savings but does not recover throughput, because the records are still written by the exporter.
 
 **Trade-off:** Filtered variables are unavailable in Optimize reports, including variable filters, variable-based grouping, and raw-data variable columns. These levers affect **Optimize only**; Operate and Tasklist read through the Camunda Exporter, so their variables stay intact.
