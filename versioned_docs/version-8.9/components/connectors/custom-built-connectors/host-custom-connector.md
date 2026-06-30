@@ -37,7 +37,8 @@ docker run --rm --name=CustomConnectorInSaaS \
         camunda/connectors-bundle:<desired-version>
 ```
 
-The line `-v $PWD/connector.jar:/opt/custom/connector.jar` mounts your connector JAR into the container at `/opt/custom`, and `LOADER_PATH=/opt/custom` adds that directory to the runtime classpath so the bundle loads your connector.
+The line `-v $PWD/connector.jar:/opt/custom/connector.jar` binds a volume with your connector at the path `$PWD/connector.jar`
+of your local machine.
 
 ## Wiring your connector with Camunda Docker instance (without Keycloak)
 
