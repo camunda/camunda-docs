@@ -1861,7 +1861,7 @@ CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
 
 If a judge or semantic similarity assertion fails with an error like the following:
 
-```
+```text
 dev.langchain4j.exception.AuthenticationException:
 software.amazon.awssdk.services.bedrockruntime.model.AccessDeniedException:
 User: arn:aws:iam::123456789012:user/my-user is not authorized to perform:
