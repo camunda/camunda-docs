@@ -171,9 +171,7 @@ process instance doesn't apply the termination instruction and rejects the comma
 Instead, we can terminate the call activity that created the child process instance.
 :::
 
-:::note
 Terminating a user task via modification does not trigger its [`canceling` user task listener](/components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
-:::
 
 ## Execute the modification instructions
 
