@@ -19,6 +19,110 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 54
+
+### Publication date
+
+July 1, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+Camunda Web Modeler was affected by [CVE-2026-40984](https://nvd.nist.gov/vuln/detail/CVE-2026-40984), where an unauthenticated attacker can send a specially crafted HTTP request to trigger uncontrolled resource consumption inside Micrometer's HTTP instrumentation layer, rendering Web Modeler unresponsive until restarted.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
+
+## Notice 53
+
+### Publication date
+
+July 1, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+Camunda Web Modeler was affected by [CVE-2026-11400](https://nvd.nist.gov/vuln/detail/CVE-2026-11400), where a successful exploit grants the attacker elevated database privileges, potentially enabling unauthorized read/write access to all application data stored in the Aurora/RDS database.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
+
+## Notice 52
+
+### Publication date
+
+July 1, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+Camunda Web Modeler was affected by [CVE-2026-47691](https://nvd.nist.gov/vuln/detail/CVE-2026-47691), where an attacker controlling a subdomain's name server can provide crafted NS records to poison the DNS cache for parent domains, potentially redirecting users to malicious servers and leading to information disclosure or integrity compromise.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
+
+## Notice 51
+
+### Publication date
+
+July 1, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+Camunda Web Modeler was affected by [CVE-2026-45674](https://nvd.nist.gov/vuln/detail/CVE-2026-45674), where a remote attacker can achieve information disclosure or data manipulation by crafting malicious DNS responses.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
+
 ## Notice 50
 
 ### Publication date
@@ -72,6 +176,7 @@ July 1, 2026
 - Camunda Tasklist
 - Camunda Operate
 - Camunda Optimize
+- Camunda Web Modeler
 
 ### Impact
 
@@ -86,6 +191,7 @@ You are using:
 - Camunda Tasklist ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
 - Camunda Operate ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
 - Camunda Optimize ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.22
+- Camunda Web Modeler ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
 
 And your deployment has server-side resource-chain caching enabled with at least one access-controlled resource handler configured.
 
@@ -98,6 +204,7 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Tasklist 8.9.10, 8.8.29, 8.7.34
 - Camunda Operate 8.9.10, 8.8.29, 8.7.34
 - Camunda Optimize 8.9.10, 8.8.29, 8.7.23
+- Camunda Web Modeler 8.9.5, 8.8.16, 8.7.23
 
 ## Notice 48
 
