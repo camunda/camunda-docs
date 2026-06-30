@@ -2,6 +2,9 @@ paths:
   /expression/evaluation:
     post:
       operationId: evaluateExpression
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Expression
       summary: Evaluate an expression

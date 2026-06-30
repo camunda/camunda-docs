@@ -4,6 +4,9 @@ paths:
       tags:
         - Audit Log
       operationId: searchAuditLogs
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search audit logs
       description: |-
 
@@ -40,6 +43,9 @@ paths:
       tags:
         - Audit Log
       operationId: getAuditLog
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get audit log
       description: |-
 
@@ -116,6 +122,8 @@ components:
         - relatedEntityKey
         - relatedEntityType
         - entityDescription
+        - inboundChannelType
+        - inboundChannelToolName
       properties:
         auditLogKey:
           allOf:
@@ -260,6 +268,19 @@ components:
             Additional description of the entity affected by the operation.
             For example, for variable operations, this will contain the variable name.
           nullable: true
+        inboundChannelType:
+          type: string
+          description: The type of the inbound channel that triggered the operation (e.g. MCP).
+          nullable: true
+        inboundChannelToolName:
+          type: string
+          description: The tool name of the inbound channel (e.g. the MCP tool that triggered the operation).
+          nullable: true
+      x-properties-added-in-version:
+        - propertyName: inboundChannelType
+          addedInVersion: "8.10"
+        - propertyName: inboundChannelToolName
+          addedInVersion: "8.10"
     AuditLogSearchQuerySortRequest:
       type: object
       properties:
@@ -286,6 +307,8 @@ components:
             - processDefinitionId
             - processDefinitionKey
             - processInstanceKey
+            - inboundChannelType
+            - inboundChannelToolName
             - result
             - tenantId
             - timestamp
@@ -429,6 +452,19 @@ components:
           description: The entity description filter.
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        inboundChannelType:
+          description: The inbound channel type search filter (e.g. MCP).
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        inboundChannelToolName:
+          description: The inbound channel tool name search filter.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+      x-properties-added-in-version:
+        - propertyName: inboundChannelType
+          addedInVersion: "8.10"
+        - propertyName: inboundChannelToolName
+          addedInVersion: "8.10"
     AuditLogSearchQueryResult:
       description: Audit log search response.
       type: object

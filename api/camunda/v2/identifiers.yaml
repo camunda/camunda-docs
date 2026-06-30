@@ -91,6 +91,16 @@ components:
       format: BusinessId
       type: string
       example: order-12345
+    IterationId:
+      description: |
+        A client-provided sequential integer identifying a logical iteration: one LLM
+        call, its tool dispatches, and their results. Must be a positive integer,
+        increasing with each iteration. Established by the
+        connector when appending the first history item of an iteration.
+      type: integer
+      format: int32
+      minimum: 1
+      example: 1
     ElementIdFilterProperty:
       description: ElementId property with full advanced search capabilities.
       oneOf:
