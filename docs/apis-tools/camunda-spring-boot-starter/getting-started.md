@@ -53,12 +53,12 @@ Starting with Camunda 8.9, the default `camunda-spring-boot-starter` artifact is
 - **`camunda-spring-boot-3-starter`**: Bundled with Spring Boot 3.5.x. Use this if your application is not yet ready to upgrade to Spring Boot 4.0.
 
 :::caution Spring Boot 3.5.x OSS support window
-Spring's open source support for Spring Boot 3.5.x ends in June 2026 (see [Spring Boot support timeline](https://spring.io/projects/spring-boot#support)). Camunda will continue to support and maintain `camunda-spring-boot-3-starter` with no announced end date.
+Spring's open source support for Spring Boot 3.5.x ended in June 2026 (see [Spring Boot support timeline](https://spring.io/projects/spring-boot#support)). Camunda continues to support and maintain `camunda-spring-boot-3-starter` until the end of Spring Commercial support for Spring Boot 3.x.
 
 What this means for your application:
 
-- **Camunda's starter:** Camunda continues to release patches for `camunda-spring-boot-3-starter`.
-- **Spring framework patches:** After June 2026, Spring will no longer provide security or bug-fix patches for Spring Boot 3.x. If your application requires Spring framework-level security patches after that date, consider obtaining commercial support from a third-party provider, or plan to migrate to Spring Boot 4.0.
+- **Camunda's starter:** Camunda continues to release patches for `camunda-spring-boot-3-starter` until the end of Spring Commercial support.
+- **Spring framework patches:** After June 2026, Spring will no longer provide open-source security or bug-fix patches for Spring Boot 3.x. Security patches remain available through Spring Commercial support (Broadcom).
   :::
 
 To use the Spring Boot 3 module, replace the default dependency in your project:
@@ -73,44 +73,39 @@ To use the Spring Boot 3 module, replace the default dependency in your project:
 
 ## Version support policy
 
-Camunda aligns Spring Boot Starter version support with the [Spring Boot OSS support timeline](https://spring.io/projects/spring-boot#support).
+Camunda aligns Spring Boot Starter version support with the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
 
 ### Supported versions
 
 Camunda supports two Spring Boot major versions at a time:
 
-- **The current major version** - shipped as the default `camunda-spring-boot-starter` artifact, always bundled with the latest stable minor of that major.
-- **The previous major version** - shipped as a dedicated `camunda-spring-boot-{n}-starter` artifact, supported with no announced end date, but without Spring framework-level security patches after the Spring OSS support window closes.
-
-Within each supported major, Camunda bundles the **latest stable minor version**. No separate artifacts are published per minor version - the bundled minor is updated transparently through Camunda's regular release cadence.
+- **The current major version** - shipped as the default `camunda-spring-boot-starter` artifact, always bundled with the latest stable minor of that major (for example, once Spring Boot 4.1 is available, `camunda-spring-boot-starter` will bundle 4.1.x instead of 4.0.x).
+- **The previous major version** - shipped as a dedicated `camunda-spring-boot-{n}-starter` artifact, pinned to the last stable minor of that major line. Supported until the end of [Spring Commercial support](https://spring.io/projects/spring-boot#support) for that major.
 
 ### Minor version updates
 
-When Spring releases a new minor version within a supported major (for example, Spring Boot 4.1 within the 4.x line), Camunda adopts it as follows:
+Within the current major, Camunda supports only the **latest stable minor version**. No separate artifacts are published per minor - the bundled minor of `camunda-spring-boot-starter` is updated in place.
 
-- The new minor is targeted in the next Camunda minor release after the Spring Boot minor has been GA for at least one Camunda release cycle.
-- No separate artifact is published per Spring Boot minor version - the bundled minor of `camunda-spring-boot-starter` is updated in place.
-- The previous minor is not maintained after the update. For example, once Camunda bundles Spring Boot 4.1.x, patches are no longer provided for 4.0.x.
-- Adoption is announced in the Camunda release notes and the compatibility table above is updated accordingly.
+When Spring releases a new minor version (for example, Spring Boot 4.1), Camunda adopts it in the next Camunda release after the Spring Boot minor reaches General Availability (GA). Once the new minor is adopted, the previous minor is no longer maintained.
 
 ### New major version support
 
-Camunda adds support for a new Spring Boot major version when:
+When a new Spring Boot major version reaches GA, Camunda makes it the default bundled version in the Camunda release that ships before the previous major's OSS support ends.
 
-- The version has reached General Availability (GA).
-- It is available at least one Camunda minor release cycle before becoming the new default bundled version.
-- It has been validated across Camunda components that depend on the starter.
+:::note Example
+Spring Boot 3.5 OSS support ended June 2026. Camunda made Spring Boot 4.x the default with Camunda 8.9 (released April 2026), the last Camunda release before the 3.5 OSS end date.
+:::
 
 ### Deprecating older major versions
 
-A Spring Boot major version is deprecated when its OSS support window ends or is within 6 months of ending. Deprecation is announced in the Camunda release notes with the planned removal version. Removal happens no earlier than one full Camunda minor release cycle after the deprecation announcement.
+Once a new major becomes the default, the previous major is maintained as a dedicated artifact (pinned to its last stable minor) until the end of Spring Commercial support for that major. After that point, the dedicated artifact receives no further updates.
 
 ### Current version status
 
-| Spring Boot version | Spring OSS support ends | Camunda status |
-| ------------------- | ----------------------- | -------------- |
-| 3.5.x               | June 2026               | Supported via `camunda-spring-boot-3-starter` - no Spring framework patches after June 2026 |
-| 4.0.x               | December 2026           | Default (`camunda-spring-boot-starter`) - will adopt 4.1.x once available per minor version update policy |
+| Spring Boot version | Spring OSS support ended | Spring Commercial support | Camunda status |
+| ------------------- | ------------------------ | ------------------------- | -------------- |
+| 3.5.x               | June 2026                | See [spring.io](https://spring.io/projects/spring-boot#support) | Supported via `camunda-spring-boot-3-starter` until end of Spring Commercial support |
+| 4.0.x               | December 2026            | See [spring.io](https://spring.io/projects/spring-boot#support) | Default (`camunda-spring-boot-starter`) - will update to 4.1.x in next Camunda release after Spring Boot 4.1 GA |
 
 ## Get started
 
@@ -287,7 +282,7 @@ public void handleJobFoo() {
 }
 ```
 
-To learn about all options you have with job workers, check out the [configuration](./configuration.md#job-worker-configuration-options) page.
+To learn about all options you have with job workers, check out the [configuration](./configuration.md#job-worker-configuration-options) page.  
 
 ## Deploy process models
 
