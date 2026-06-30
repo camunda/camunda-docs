@@ -561,8 +561,8 @@ In Web Modeler API v1, version data in the response was nested under a `metadata
 {
   "metadata": {
     "id": "ver-123",
-    "name": "version",
-  }
+    "name": "version"
+  },
   "content": "versioned content"
 }
 ```
