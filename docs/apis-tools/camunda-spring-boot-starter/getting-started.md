@@ -102,9 +102,9 @@ Once a new major becomes the default, the previous major is maintained as a dedi
 
 ### Current version status
 
-| Spring Boot version | Spring OSS support ended | Spring Commercial support | Camunda status |
-| ------------------- | ------------------------ | ------------------------- | -------------- |
-| 3.5.x               | June 2026                | See [spring.io](https://spring.io/projects/spring-boot#support) | Supported via `camunda-spring-boot-3-starter` until end of Spring Commercial support |
+| Spring Boot version | Spring OSS support ended | Spring Commercial support                                       | Camunda status                                                                                                  |
+| ------------------- | ------------------------ | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| 3.5.x               | June 2026                | See [spring.io](https://spring.io/projects/spring-boot#support) | Supported via `camunda-spring-boot-3-starter` until end of Spring Commercial support                            |
 | 4.0.x               | December 2026            | See [spring.io](https://spring.io/projects/spring-boot#support) | Default (`camunda-spring-boot-starter`) - will update to 4.1.x in next Camunda release after Spring Boot 4.1 GA |
 
 ## Get started
@@ -282,7 +282,7 @@ public void handleJobFoo() {
 }
 ```
 
-To learn about all options you have with job workers, check out the [configuration](./configuration.md#job-worker-configuration-options) page.  
+To learn about all options you have with job workers, check out the [configuration](./configuration.md#job-worker-configuration-options) page.
 
 ## Deploy process models
 
