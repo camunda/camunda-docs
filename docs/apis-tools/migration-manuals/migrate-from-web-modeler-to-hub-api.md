@@ -474,7 +474,7 @@ All collaborator API endpoints have a Camunda Hub API v2 equivalent:
 
 ### Field mapping {#collaborator-api-field-mapping}
 
-The following fields have changed across all file endpoints:
+The following fields have changed across all collaborator endpoints:
 
 | Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                |
 | ------------------ | ------------------ | ---------------- | ------------------------------------ |
