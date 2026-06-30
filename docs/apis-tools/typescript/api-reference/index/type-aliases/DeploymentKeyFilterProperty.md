@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type DeploymentKeyFilterProperty =
-  | DeploymentKeyExactMatch
-  | AdvancedDeploymentKeyFilter;
+  DeploymentKeyExactMatch | AdvancedDeploymentKeyFilter;
 ```
 
 DeploymentKey property with full advanced search capabilities.

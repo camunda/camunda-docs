@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type IncidentStateFilterProperty =
-  | IncidentStateExactMatch
-  | AdvancedIncidentStateFilter;
+  IncidentStateExactMatch | AdvancedIncidentStateFilter;
 ```
 
 IncidentStateEnum with full advanced search capabilities.

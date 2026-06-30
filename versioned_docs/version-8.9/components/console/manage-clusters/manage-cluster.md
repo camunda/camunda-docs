@@ -69,10 +69,6 @@ Clusters must be healthy before an update can be performed.
 
 If an update is available, a **Review Update** button is shown.
 
-:::note
-This button is not available for clusters enrolled in [automatic updates](/components/saas/auto-updates.md).
-:::
-
 ### Automated cluster updates
 
 You can decide if you want to have [automated updates](/components/saas/auto-updates.md) to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
