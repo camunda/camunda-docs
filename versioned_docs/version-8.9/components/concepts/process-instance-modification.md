@@ -171,6 +171,10 @@ process instance doesn't apply the termination instruction and rejects the comma
 Instead, we can terminate the call activity that created the child process instance.
 :::
 
+:::note
+Terminating a user task via modification does not trigger its [`canceling` user task listener](/components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
+:::
+
 ## Move an element instance
 
 Use the modification command to move an element instance. The move operation combines termination and activation in a single instruction. It terminates the source element instance and activates a target element in one atomic operation.
