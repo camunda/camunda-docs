@@ -357,8 +357,8 @@ In Web Modeler API v1, folder data in the response was nested under a `metadata`
     "projectId": "p-123",
     "parentId": null,
     "created": "...",
-    "createdBy": { "name": "...", "email": "..." },
-  }
+    "createdBy": { "name": "...", "email": "..." }
+  },
   "content": {
     "folders": [{ "id": "..." }],
     "files": [{ "id": "..." }]
