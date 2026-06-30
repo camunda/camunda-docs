@@ -625,10 +625,10 @@ Instead of making an API request for this link, you can construct it yourself:
 
 | Resource type    | Template URL                                                                     |
 | :--------------- | :------------------------------------------------------------------------------- |
-| BPMN             | `{baseUrl}/diagrams/{fileKey}/versions/{versionKey1}...{versionKey2}`            |
-| Element template | `{baseUrl}/connector-templates/{fileKey}/versions/{versionKey1}...{versionKey2}` |
-| Form             | `{baseUrl}/forms/{fileKey}/versions/{versionKey1}...{versionKey2}`               |
-| RPA              | `{baseUrl}/rpa-scripts/{fileKey}/versions/{versionKey1}...{versionKey2}`         |
+| BPMN             | `{baseURL}/diagrams/{fileKey}/versions/{versionKey1}...{versionKey2}`            |
+| Element template | `{baseURL}/connector-templates/{fileKey}/versions/{versionKey1}...{versionKey2}` |
+| Form             | `{baseURL}/forms/{fileKey}/versions/{versionKey1}...{versionKey2}`               |
+| RPA              | `{baseURL}/rpa-scripts/{fileKey}/versions/{versionKey1}...{versionKey2}`         |
 
 Replace `{baseURL}` with the Web Modeler base URL. The version keys must be for the same file.
 
