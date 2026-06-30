@@ -170,7 +170,7 @@ You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL 
 
 #### Connecting to Amazon OpenSearch
 
-The following example `values.yaml` enables OpenSearch with the required configuration. This example also globally disables all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false`, and disables internal Elasticsearch through `elasticsearch.enabled: false`:
+The following example `values.yaml` enables OpenSearch with the required configuration. This example also disables Elasticsearch as the secondary storage for all components through `global.elasticsearch.enabled: false`:
 
 ```yaml
 global:
@@ -187,9 +187,6 @@ global:
       protocol: https
       host: opensearch.example.com
       port: 443
-
-elasticsearch:
-  enabled: false
 ```
 
 #### Connect to an external database for Management Identity
@@ -517,8 +514,10 @@ identity:
       existingSecret: identity-db-secret
       existingSecretKey: database-password
 
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
+
 webModeler:
-  enabled: true
   contextPath: /modeler
   restapi:
     mail:
@@ -540,8 +539,6 @@ orchestration:
 optimize:
   enabled: false
 connectors:
-  enabled: false
-elasticsearch:
   enabled: false
 console:
   # Multi-namespace deployments require manual console.configuration to define
@@ -677,14 +674,7 @@ optimize:
   contextPath: /optimize
 identity:
   enabled: false
-# TODO(8.10): identityKeycloak / webModelerPostgresql / elasticsearch (Bitnami subcharts) are removed in chart 15.x — these `enabled: false` toggles no longer exist; configure operator-based or managed Keycloak/PostgreSQL/Elasticsearch instead (see operator-based-infrastructure.md). Rewrite pending first review.
-identityKeycloak:
-  enabled: false
-webModeler:
-  enabled: false
-webModelerPostgresql:
-  enabled: false
-elasticsearch:
+camundaHub:
   enabled: false
 ```
 

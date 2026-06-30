@@ -7,7 +7,7 @@ description: "Learn how to use an external PostgresQL instance in Camunda 8 Self
 
 The Camunda Helm chart does not bundle an internal PostgreSQL; provide one through a managed service or a Kubernetes operator. For production environments, we advise deploying PostgreSQL separately from the Camunda Helm charts. This guide steps through using an external PostgreSQL instance.
 
-This page applies to Management Identity, Keycloak, and Web Modeler. It does not apply to the Orchestration Cluster or Optimize.
+This page applies to Management Identity and Web Modeler. As of Camunda 8.10 (Helm chart `15.x`), Keycloak is no longer deployed by the Helm chart, so its database is configured where Keycloak runs — see [Operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or your [external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md). This page does not apply to the Orchestration Cluster or Optimize.
 
 ## Prerequisites
 
@@ -26,7 +26,6 @@ password: `examplePassword`
 
 ```SQL
 CREATE DATABASE "web-modeler";
-CREATE DATABASE "keycloak";
 CREATE DATABASE "management-identity";
 ```
 
@@ -38,8 +37,8 @@ kubectl create secret generic camunda-psql-db --from-literal=password=examplePas
 
 ## Configuration
 
-Three Camunda 8 Self-Managed components require PostgreSQL: Management Identity, Keycloak, and Web Modeler.
-Each of these components must be configured to connect to the external PostgreSQL instance.
+In Camunda 8.10, the Helm chart connects two components to external PostgreSQL: Management Identity and Web Modeler.
+Each of these components must be configured to connect to the external PostgreSQL instance. Keycloak's database is configured where Keycloak is deployed (operator or external), not through the Helm chart.
 
 ### Parameters
 
@@ -57,18 +56,11 @@ Each of these components must be configured to connect to the external PostgreSQ
 | `identity.externalDatabase.secret.existingSecret`              | string  | `""`    | Kubernetes Secret name containing database password                      |
 | `identity.externalDatabase.secret.existingSecretKey`           | string  | `""`    | Key within the Kubernetes Secret that contains the database password     |
 | `identity.externalDatabase.database`                           | string  | `""`    | Database name                                                            |
-| `identityKeycloak.externalDatabase.host`                       | string  | `""`    | Database host name                                                       |
-| `identityKeycloak.externalDatabase.port`                       | integer | `5432`  | Database port number                                                     |
-| `identityKeycloak.externalDatabase.user`                       | string  | `""`    | Database user name                                                       |
-| `identityKeycloak.externalDatabase.existingSecret`             | string  | `""`    | Kubernetes Secret containing the database password                       |
-| `identityKeycloak.externalDatabase.existingSecretKey`          | string  | `""`    | Key within the Kubernetes Secret containing the database password        |
-| `identityKeycloak.externalDatabase.database`                   | string  | `""`    | Database name                                                            |
 
 ### Example usage
 
 ```yaml
 webModeler:
-  enabled: true
   restapi:
     mail:
       fromAddress: noreply@camunda.mycompany.com
@@ -90,22 +82,6 @@ identity:
       existingSecret: "camunda-psql-db"
       existingSecretKey: "password"
     database: "management-identity"
-
-# TODO(8.10): identityKeycloak.externalDatabase (Bitnami Keycloak subchart) is removed in chart 15.x — Keycloak is deployed via the Keycloak operator in 8.10; configure its database there instead (see operator-based-infrastructure.md). Rewrite pending first review.
-identityKeycloak:
-  externalDatabase:
-    url: "jdbc:postgresql://db.example.com:5432/modeler"
-    user: "postgres"
-    existingSecret: "camunda-psql-db"
-    existingSecretKey: "password"
-    database: "keycloak"
-  auth:
-    adminUser: postgres
-    existingSecret: "camunda-psql-db"
-    existingSecretPasswordKey: "password"
-  # disable internal psql for keycloak
-  postgresql:
-    enabled: false
 ```
 
 ## Troubleshooting

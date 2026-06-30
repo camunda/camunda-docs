@@ -7,8 +7,8 @@ description: Learn how to configure and manage Basic authentication for Camunda 
 
 By default, Camunda 8 Self-Managed uses Basic authentication for all components deployed through the Helm chart. This method requires no additional configuration and is ideal for local or development environments.
 
-:::caution Bitnami subcharts removed in Camunda 8.10
-Examples on this page enable bundled Keycloak/PostgreSQL subcharts (`identityKeycloak.enabled`, `webModelerPostgresql.enabled`), which are removed in Camunda 8.10 (Helm chart `15.x`). For 8.10, deploy these with [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services. This page is pending a full 8.10 update.
+:::info Bitnami subcharts removed in Camunda 8.10
+Earlier releases bundled Keycloak and PostgreSQL through Bitnami subcharts (`identityKeycloak`, `webModelerPostgresql`). As of Camunda 8.10 (Helm chart `15.x`), the bundled Bitnami subcharts are removed: deploy Keycloak and PostgreSQL with [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services, as shown in the examples below.
 :::
 
 :::note
@@ -104,10 +104,25 @@ global:
   identity:
     auth:
       enabled: true
+      type: KEYCLOAK
+      issuerBackendUrl: http://keycloak-service:18080/auth/realms/camunda-platform
       optimize:
         secret:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-optimize-client-token"
+    keycloak:
+      internal: false # Connect to the operator-managed Keycloak instead of a bundled one
+      url:
+        protocol: http
+        host: keycloak-service
+        port: "18080"
+      contextPath: /auth
+      realm: /realms/camunda-platform
+      auth:
+        adminUser: temp-admin
+        secret:
+          existingSecret: keycloak-initial-admin
+          existingSecretKey: password
 
 identity:
   enabled: true
@@ -115,19 +130,14 @@ identity:
     secret:
       existingSecret: "camunda-credentials"
       existingSecretKey: "identity-firstuser-password"
-
-# TODO(8.10): identityKeycloak / webModelerPostgresql (Bitnami subcharts) are removed in chart 15.x — deploy Keycloak via the Keycloak operator and PostgreSQL via the CloudNativePG operator or a managed service (see operator-based-infrastructure.md). Rewrite pending first review.
-identityKeycloak:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    passwordSecretKey: "identity-keycloak-admin-password"
-  postgresql:
-    auth:
-      existingSecret: "camunda-credentials"
-      secretKeys:
-        adminPasswordKey: "identity-keycloak-postgresql-admin-password"
-        userPasswordKey: "identity-keycloak-postgresql-user-password"
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 
 optimize:
   enabled: true
@@ -137,27 +147,27 @@ connectors:
     authentication:
       method: basic
 
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
+
 webModeler:
-  enabled: true
   restapi:
     mail:
       fromAddress: noreply@example.com
-
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: "camunda-credentials"
-    secretKeys:
-      adminPasswordKey: "webmodeler-postgresql-admin-password"
-      userPasswordKey: "webmodeler-postgresql-user-password"
+    externalDatabase:
+      enabled: true
+      host: pg-webmodeler-rw
+      port: 5432
+      database: webmodeler
+      username: webmodeler
+      secret:
+        existingSecret: pg-webmodeler-secret
+        existingSecretKey: password
 
 orchestration:
   security:
     authentication:
       method: basic
-
-console:
-  enabled: true
 ```
 
 ### Connect to the cluster

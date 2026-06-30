@@ -10,8 +10,8 @@ import TabItem from "@theme/TabItem";
 
 This guide shows you how to configure Camunda 8 Self-Managed to authenticate with any OpenID connect (OIDC)-compliant identity provider.
 
-:::caution Bitnami subcharts removed in Camunda 8.10
-Examples on this page enable bundled PostgreSQL subcharts (`identityPostgresql.enabled`, `webModelerPostgresql.enabled`), which are removed in Camunda 8.10 (Helm chart `15.x`). For 8.10, deploy these with [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services. This page is pending a full 8.10 update.
+:::info Bitnami subcharts removed in Camunda 8.10
+Earlier releases bundled PostgreSQL through Bitnami subcharts (`identityPostgresql`, `webModelerPostgresql`). As of Camunda 8.10 (Helm chart `15.x`), the bundled Bitnami subcharts are removed: provide PostgreSQL with the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment) or a managed database, as shown in the examples below.
 :::
 
 :::info
@@ -158,18 +158,7 @@ kubectl create secret generic oidc-credentials \
 The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
-Next, create a secret with the remaining credentials for the Camunda Helm chart:
-
-```bash
-kubectl create secret generic camunda-credentials \
-  --from-literal=identity-postgresql-admin-password=CHANGE_ME \
-  --from-literal=identity-postgresql-user-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-admin-password=CHANGE_ME \
-  --from-literal=webmodeler-postgresql-user-password=CHANGE_ME
-```
-
-Unlike the OIDC client secrets, these passwords initialize the component databases.
-You can choose any values.
+The PostgreSQL credentials for Management Identity and Web Modeler are no longer created here. They are provided by the operator (or managed database) that hosts each database — for example the `pg-identity-secret` and `pg-webmodeler-secret` created by the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#postgresql-deployment).
 
 :::tip Alternative secret management
 For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions) for more options.
@@ -240,15 +229,14 @@ global:
 identity:
   fullURL: <identity-base-url>
   enabled: true
-
-# TODO(8.10): identityPostgresql / webModelerPostgresql (Bitnami PostgreSQL subcharts) are removed in chart 15.x — provide PostgreSQL via the CloudNativePG operator or a managed service (see operator-based-infrastructure.md). Rewrite pending first review.
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 ```
 
 #### Identity-specific parameters
@@ -394,21 +382,23 @@ global:
         clientApiAudience: <web-modeler-ui-audience>
         publicApiAudience: <web-modeler-api-audience>
 
-webModeler:
-  enabled: true
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
 
+webModeler:
   restapi:
     mail:
       fromAddress: noreply@example.com # Update with your email address
       # Additional SMTP configuration may be required - see Web Modeler docs
-
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: webmodeler-postgresql-admin-password
-      userPasswordKey: webmodeler-postgresql-user-password
+    externalDatabase:
+      enabled: true
+      host: pg-webmodeler-rw
+      port: 5432
+      database: webmodeler
+      username: webmodeler
+      secret:
+        existingSecret: pg-webmodeler-secret
+        existingSecretKey: password
 ```
 
 #### Web Modeler parameters
@@ -438,12 +428,9 @@ global:
         clientId: <console-client-id>
         audience: <console-audience>
         redirectUrl: <console-base-url>
-
-console:
-  enabled: true
 ```
 
-Replace `<console-base-url>` with the base URL where Console will be accessible. For local deployment, use `http://localhost:8087`.
+Console is deployed as part of Camunda Hub, which you enable with `camundaHub.enabled: true` in the [Web Modeler step](#configure-web-modeler). Replace `<console-base-url>` with the base URL where Console will be accessible. For local deployment, use `http://localhost:8087`.
 
 ## Complete configuration example
 
@@ -544,41 +531,37 @@ connectors:
 identity:
   fullURL: <identity-base-url>
   enabled: true
-
-identityPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
-
-# Disable internal Keycloak
-identityKeycloak:
-  enabled: false
+  externalDatabase:
+    enabled: true
+    host: pg-identity-rw
+    port: 5432
+    database: identity
+    secret:
+      existingSecret: pg-identity-secret
+      existingSecretKey: password
 
 # Optimize
 optimize:
   enabled: true
 
+# Console and Web Modeler (Camunda Hub)
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
+
 # Web Modeler
 webModeler:
-  enabled: true
   restapi:
     mail:
       fromAddress: <your-email-address>
-
-webModelerPostgresql:
-  enabled: true
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: webmodeler-postgresql-admin-password
-      userPasswordKey: webmodeler-postgresql-user-password
-
-# Console
-console:
-  enabled: true
+    externalDatabase:
+      enabled: true
+      host: pg-webmodeler-rw
+      port: 5432
+      database: webmodeler
+      username: webmodeler
+      secret:
+        existingSecret: pg-webmodeler-secret
+        existingSecretKey: password
 ```
 
 **Placeholders to replace:**
@@ -594,7 +577,7 @@ console:
 
 - All `<placeholders>` replaced with actual values.
 - All client secrets stored in the `oidc-credentials` secret.
-- Database passwords stored in the `camunda-credentials` secret.
+- Database credentials provided by the operator-managed database secrets (for example, `pg-identity-secret` and `pg-webmodeler-secret`).
 - Redirect URIs in OIDC provider match `redirectUrl` values.
 - Token inspection confirms audience values.
 - Verify tokens contain `preferred_username` and `client_id` claims, or uncomment and configure alternative claim names.
