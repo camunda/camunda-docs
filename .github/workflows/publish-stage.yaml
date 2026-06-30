@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - "main"
-      - "vault-secrets-pt-2"
     tags-ignore:
       - "*"
 
