@@ -96,7 +96,7 @@ This means Optimize has an additional hop in the data flow compared to Operate a
 This is exactly why the architecture was changed in 8.8: the Camunda Exporter now aggregates the data for Operate and Tasklist, which previously both used an Exporter-Importer architecture similar to Optimize. See this [blog post](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/) for more details.
 :::
 
-See the [sizing guide](./sizing-your-environment.md#impact-of-optimize) for the full impact of running Optimize and how to reduce it.
+See the [sizing guide](./sizing-your-environment.md#impact-of-optimize) for details on the impact of running Optimize and how to reduce it.
 
 ## Performance and sizing factors
 
