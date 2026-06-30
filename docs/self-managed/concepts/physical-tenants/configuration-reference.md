@@ -123,6 +123,7 @@ Known constraints and behavior for 8.10:
   - Azure: Container name, container path, and endpoint.
   - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
+- **Document store**: non-default tenants must declare `document.assigned`. Startup also fails if two tenants resolve to the same provider, bucket or container, and path. The error names the conflicting tenants.
 
 ## Configuration examples
 
@@ -134,6 +135,15 @@ camunda:
     secondary-storage:
       rdbms:
         url: jdbc:postgresql://db/default
+  document:
+    default-store-id: shared-s3
+    aws:
+      shared-s3:
+        bucket-name: company-docs-bucket
+        bucket-path: default/
+
+  database:
+    url: jdbc:postgresql://db/default
 
   security:
     authentication:
@@ -146,6 +156,11 @@ camunda:
     default:
       cluster:
         partitions-count: 3
+      document:
+        default-store-id: shared-s3
+        assigned:
+          - shared-s3
+        # inherits bucket-path: default/ from root
       security:
         authentication:
           providers:
@@ -159,6 +174,15 @@ camunda:
         secondary-storage:
           rdbms:
             url: jdbc:postgresql://db/riskprod
+      database:
+        url: jdbc:postgresql://db/riskprod
+      document:
+        default-store-id: shared-s3
+        assigned:
+          - shared-s3
+        aws:
+          shared-s3:
+            bucket-path: riskprod/ # distinct path — no collision with default
       security:
         authentication:
           providers:
@@ -174,12 +198,20 @@ Spring environment variable mapping follows canonical property conversion:
 CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:postgresql://db/default
 CAMUNDA_SECURITY_AUTHENTICATION_METHOD=oidc
 CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_CORP_IDP_TYPE=oidc
+CAMUNDA_DOCUMENT_DEFAULTSTOREID=shared-s3
+CAMUNDA_DOCUMENT_AWS_SHAREDS3_BUCKETNAME=company-docs-bucket
+CAMUNDA_DOCUMENT_AWS_SHAREDS3_BUCKETPATH=default/
 
 CAMUNDA_PHYSICALTENANTS_DEFAULT_CLUSTER_PARTITIONSCOUNT=3
+CAMUNDA_PHYSICALTENANTS_DEFAULT_DOCUMENT_DEFAULTSTOREID=shared-s3
+CAMUNDA_PHYSICALTENANTS_DEFAULT_DOCUMENT_ASSIGNED_0=shared-s3
 CAMUNDA_PHYSICALTENANTS_DEFAULT_SECURITY_AUTHENTICATION_PROVIDERS_ASSIGNED_0=corp-idp
 
 CAMUNDA_PHYSICALTENANTS_RISKPROD_CLUSTER_PARTITIONSCOUNT=3
 CAMUNDA_PHYSICALTENANTS_RISKPROD_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:postgresql://db/riskprod
+CAMUNDA_PHYSICALTENANTS_RISKPROD_DOCUMENT_DEFAULTSTOREID=shared-s3
+CAMUNDA_PHYSICALTENANTS_RISKPROD_DOCUMENT_ASSIGNED_0=shared-s3
+CAMUNDA_PHYSICALTENANTS_RISKPROD_DOCUMENT_AWS_SHAREDS3_BUCKETPATH=riskprod/
 CAMUNDA_PHYSICALTENANTS_RISKPROD_SECURITY_AUTHENTICATION_PROVIDERS_ASSIGNED_0=corp-idp
 ```
 
@@ -196,10 +228,20 @@ camunda:
     secondary-storage:
       rdbms:
         url: jdbc:postgresql://db/default
+  document:
+    default-store-id: shared-s3
+    aws:
+      shared-s3:
+        bucket-name: company-docs-bucket
+        bucket-path: default/
   physical-tenants:
     default:
       cluster:
         partitions-count: 3
+      document:
+        default-store-id: shared-s3
+        assigned:
+          - shared-s3
     riskprod:
       cluster:
         partitions-count: 3
@@ -207,6 +249,13 @@ camunda:
         secondary-storage:
           rdbms:
             url: jdbc:postgresql://db/riskprod
+      document:
+        default-store-id: shared-s3
+        assigned:
+          - shared-s3
+        aws:
+          shared-s3:
+            bucket-path: riskprod/
 ```
 
 ## Related pages
