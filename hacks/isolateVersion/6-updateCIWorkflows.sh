@@ -46,7 +46,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i '' "s/secret\/data\/products\/camunda-docs\/ci\/publish PROD_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish PROD_UNSUPPORTED_PATH;/g" .github/workflows/publish-prod.yaml
   sed -i '' "s/remote_path: \${{ steps.secrets.outputs.PROD_PATH }}/remote_path: \${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 else
-  sed -i '' "s/secret\/data\/products\/camunda-docs\/ci\/publish PROD_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish PROD_UNSUPPORTED_PATH;/g" .github/workflows/publish-prod.yaml
+  sed -i "s/secret\/data\/products\/camunda-docs\/ci\/publish PROD_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish PROD_UNSUPPORTED_PATH;/g" .github/workflows/publish-prod.yaml
   sed -i "s/remote_path: \${{ steps.secrets.outputs.PROD_PATH }}/remote_path: \${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 fi
 
@@ -78,7 +78,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i '' "s/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_UNSUPPORTED_PATH;/g" .github/workflows/publish-stage.yaml
   sed -i '' "s/remote_path: \${{ steps.secrets.outputs.STAGE_PATH }}/remote_path: \${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-stage.yaml
 else
-  sed -i '' "s/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_UNSUPPORTED_PATH;/g" .github/workflows/publish-stage.yaml
+  sed -i "s/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_UNSUPPORTED_PATH;/g" .github/workflows/publish-stage.yaml
   sed -i "s/remote_path: \${{ steps.secrets.outputs.STAGE_PATH }}/remote_path: \${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-stage.yaml
 fi
 
