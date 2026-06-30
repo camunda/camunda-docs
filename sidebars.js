@@ -365,6 +365,7 @@ module.exports = {
             "components/document-handling/send-document-to-external-system-via-connector",
           ],
         },
+        "components/wait-states/overview",
         {
           type: "category",
           label: "Camunda integrations",
@@ -636,6 +637,7 @@ module.exports = {
             },
             "components/operate/userguide/process-instance-migration",
             "components/operate/userguide/audit-operations",
+            "components/operate/userguide/view-wait-states",
           ],
         },
         {
@@ -2217,6 +2219,7 @@ module.exports = {
           },
           items: ["self-managed/concepts/audit-log/configure-audit-log"],
         },
+        "self-managed/concepts/wait-states/configure-wait-states",
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         {
