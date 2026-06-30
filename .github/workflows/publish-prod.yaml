@@ -2,6 +2,8 @@ name: publish-prod
 
 on:
   push:
+    branches:
+      - "tmp-test-8.3"
     tags:
       - "8.3.[0-9]+"
 

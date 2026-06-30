@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - "unsupported/8.3"
-      - "tmp-test-8.3"
     tags-ignore:
       - "*"
 
