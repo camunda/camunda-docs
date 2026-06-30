@@ -97,14 +97,7 @@ This means Optimize has an additional hop in the data flow compared to Operate a
 This is exactly why the architecture was changed in 8.8: the Camunda Exporter now aggregates the data for Operate and Tasklist, which previously both used an Exporter-Importer architecture similar to Optimize. See this [blog post](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/) for more details.
 :::
 
-See the [sizing guide](./sizing-your-environment.md#impact-of-optimize) for details on the impact of running Optimize.
-
-### Reduce Optimize load on Elasticsearch/OpenSearch
-
-- Run Optimize on a separate Elasticsearch/OpenSearch instance to isolate its load from the core export pipeline.
-- Use variable filtering to reduce export volume.
-- Tune retention periods.
-- Disable variable import if variables are not needed in Optimize reports.
+See the [sizing guide](./sizing-your-environment.md#impact-of-optimize) for details on the impact of running Optimize and how to reduce it.
 
 :::note
 Optimize is not supported with RDBMS backends. If Optimize is required, a separate Elasticsearch/OpenSearch instance must be present even if the core platform uses RDBMS.
