@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type JobListenerEventTypeFilterProperty =
-  | JobListenerEventTypeExactMatch
-  | AdvancedJobListenerEventTypeFilter;
+  JobListenerEventTypeExactMatch | AdvancedJobListenerEventTypeFilter;
 ```
 
 JobListenerEventTypeEnum property with full advanced search capabilities.

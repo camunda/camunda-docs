@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type ElementInstanceStateFilterProperty =
-  | ElementInstanceStateExactMatch
-  | AdvancedElementInstanceStateFilter;
+  ElementInstanceStateExactMatch | AdvancedElementInstanceStateFilter;
 ```
 
 ElementInstanceStateEnum property with full advanced search capabilities.

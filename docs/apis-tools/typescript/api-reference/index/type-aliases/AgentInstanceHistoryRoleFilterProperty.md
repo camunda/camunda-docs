@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type AgentInstanceHistoryRoleFilterProperty =
-  | AgentInstanceHistoryRoleExactMatch
-  | AdvancedAgentInstanceHistoryRoleFilter;
+  AgentInstanceHistoryRoleExactMatch | AdvancedAgentInstanceHistoryRoleFilter;
 ```
 
 AgentInstanceHistoryRoleEnum property with full advanced search capabilities.
