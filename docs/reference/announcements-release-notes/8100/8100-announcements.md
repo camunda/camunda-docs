@@ -141,6 +141,39 @@ Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Support
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### MariaDB 12.3 now supported
+
+Camunda 8.10 adds support for MariaDB 12.3, the latest LTS release of MariaDB.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### MariaDB 11.8 no longer supported
+
+Camunda 8.10 drops support for MariaDB 11.8. Supported versions are now 10.11, 11.4, and 12.3.
+
+- MariaDB 11.8 was a non-LTS development series release. Camunda supports MariaDB LTS releases only.
+- Upgrade your MariaDB instance to a supported version before moving to Camunda 8.10.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
+
 ## Agentic orchestration
 
 <div className="release-announcement-row">
