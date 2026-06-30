@@ -97,6 +97,10 @@ camunda:
           secret-key: ${AWS_LLM_BEDROCK_SECRET_KEY}
 ```
 
+:::note Bedrock IAM requirements
+The AWS principal must have `bedrock:InvokeModel` permission on each model ARN you configure, and each model must be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the configured region. If you also configure an embedding model through Bedrock for [semantic similarity assertions](#verify-with-semantic-similarity), it requires a separate IAM grant. See [Troubleshooting](/apis-tools/testing/configuration.md#amazon-bedrock-accessdeniedexception) if you encounter a 403 `AccessDeniedException`.
+:::
+
 </TabItem>
 
 <TabItem value='openai-compatible'>
@@ -381,6 +385,10 @@ camunda:
           access-key: ${AWS_LLM_BEDROCK_ACCESS_KEY}
           secret-key: ${AWS_LLM_BEDROCK_SECRET_KEY}
 ```
+
+:::note Bedrock IAM requirements
+The AWS principal must have `bedrock:InvokeModel` permission on the embedding model ARN, and the model must be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the configured region. This is a separate grant from the judge chat model. See [Troubleshooting](/apis-tools/testing/configuration.md#amazon-bedrock-accessdeniedexception) if you encounter a 403 `AccessDeniedException`.
+:::
 
 </TabItem>
 
