@@ -690,6 +690,7 @@ Activate jobs of a specific type for processing
 | `--maxJobsToActivate` | string |  | Maximum number of jobs to activate |
 | `--timeout` | string |  | Job timeout in milliseconds |
 | `--worker` | string |  | Worker name |
+| `--customHeaders` | boolean |  | Include custom headers in output |
 
 ---
 
