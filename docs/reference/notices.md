@@ -21,6 +21,44 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 55
+
+### Publication date
+
+July 1, 2026
+
+### Products affected
+
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Optimize
+
+### Impact
+
+The application was vulnerable to [CVE-2026-40983](https://nvd.nist.gov/vuln/detail/CVE-2026-40983), where an unauthenticated attacker can send a specially crafted gRPC request to trigger uncontrolled resource consumption inside Micrometer's gRPC instrumentation layer, rendering the affected component unresponsive until restarted.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Identity ≤ 8.9.4, ≤ 8.8.13, or ≤ 8.7.20
+- Camunda Zeebe ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Tasklist ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Operate ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Optimize ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.22
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Identity 8.9.5, 8.8.14, 8.7.21
+- Camunda Zeebe 8.9.10, 8.8.29, 8.7.34
+- Camunda Tasklist 8.9.10, 8.8.29, 8.7.34
+- Camunda Operate 8.9.10, 8.8.29, 8.7.34
+- Camunda Optimize 8.9.10, 8.8.29, 8.7.23
+
 ## Notice 54
 
 ### Publication date
@@ -29,22 +67,37 @@ July 1, 2026
 
 ### Products affected
 
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Optimize
 - Camunda Web Modeler
 
 ### Impact
 
-Camunda Web Modeler was affected by [CVE-2026-40984](https://nvd.nist.gov/vuln/detail/CVE-2026-40984), where an unauthenticated attacker can send a specially crafted HTTP request to trigger uncontrolled resource consumption inside Micrometer's HTTP instrumentation layer, rendering Web Modeler unresponsive until restarted.
+The application was vulnerable to [CVE-2026-40984](https://nvd.nist.gov/vuln/detail/CVE-2026-40984), where an unauthenticated attacker can send a specially crafted HTTP request to trigger uncontrolled resource consumption inside Micrometer's HTTP instrumentation layer, rendering the affected component unresponsive until restarted.
 
 ### How to determine if the installation is affected
 
 You are using:
 
+- Camunda Identity ≤ 8.9.4, ≤ 8.8.13, or ≤ 8.7.20
+- Camunda Zeebe ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Tasklist ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Operate ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Optimize ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.22
 - Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
 
 ### Solution
 
 Camunda has provided the following releases that contain the fix:
 
+- Camunda Identity 8.9.5, 8.8.14, 8.7.21
+- Camunda Zeebe 8.9.10, 8.8.29, 8.7.34
+- Camunda Tasklist 8.9.10, 8.8.29, 8.7.34
+- Camunda Operate 8.9.10, 8.8.29, 8.7.34
+- Camunda Optimize 8.9.10, 8.8.29, 8.7.23
 - Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
 
 ## Notice 53
@@ -55,22 +108,39 @@ July 1, 2026
 
 ### Products affected
 
+- Camunda Identity
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Optimize
 - Camunda Web Modeler
 
 ### Impact
 
-Camunda Web Modeler was affected by [CVE-2026-11400](https://nvd.nist.gov/vuln/detail/CVE-2026-11400), where a successful exploit grants the attacker elevated database privileges, potentially enabling unauthorized read/write access to all application data stored in the Aurora/RDS database.
+The application was vulnerable to [CVE-2026-11400](https://nvd.nist.gov/vuln/detail/CVE-2026-11400), where a successful exploit grants the attacker elevated database privileges on Amazon Aurora PostgreSQL, potentially enabling unauthorized read/write access to all application data stored in the database.
 
 ### How to determine if the installation is affected
 
 You are using:
 
+- Camunda Identity ≤ 8.9.4
+- Camunda Zeebe ≤ 8.9.10
+- Camunda Tasklist ≤ 8.9.10
+- Camunda Operate ≤ 8.9.10
+- Camunda Optimize ≤ 8.9.10
 - Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
+
+And your deployment is running on Amazon Aurora PostgreSQL with the AWS Advanced JDBC Wrapper configured to use the GlobalDatabasePlugin (for example, by setting `wrapperPlugins=globaldb` or equivalent in the JDBC connection URL). This is not the default Camunda configuration.
 
 ### Solution
 
 Camunda has provided the following releases that contain the fix:
 
+- Camunda Identity 8.9.5
+- Camunda Zeebe 8.9.11
+- Camunda Tasklist 8.9.11
+- Camunda Operate 8.9.11
+- Camunda Optimize 8.9.11
 - Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
 
 ## Notice 52
