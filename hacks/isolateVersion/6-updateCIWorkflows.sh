@@ -43,9 +43,11 @@ fi
 
 #   e. replace the main docs remote_path with this isolated version's remote_path.
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i '' "s/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
+  sed -i '' "s/secret\/data\/products\/camunda-docs\/ci\/publish PROD_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish PROD_UNSUPPORTED_PATH;/g" .github/workflows/publish-stage.yaml
+  sed -i '' "s/remote_path: \${{ steps.secrets.outputs.PROD_PATH }}/remote_path: \${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 else
-  sed -i "s/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
+  sed -i '' "s/secret\/data\/products\/camunda-docs\/ci\/publish PROD_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish PROD_UNSUPPORTED_PATH;/g" .github/workflows/publish-stage.yaml
+  sed -i "s/remote_path: \${{ steps.secrets.outputs.PROD_PATH }}/remote_path: \${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 fi
 
 #   f. update `DOCS_SITE_BASE_URL` to specify isolated version
@@ -71,11 +73,13 @@ else
   sed -i 's/https:\/\/stage.docs.camunda.io/https:\/\/stage.unsupported.docs.camunda.io/' .github/workflows/publish-stage.yaml
 fi
 
-#   c. replace `${{ secrets.AWS_STAGE_PUBLISH_PATH }}` with `${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}/{version}`
+#   c. replace `${{ steps.secrets.outputs.STAGE_PATH }}` with `${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}/{version}`
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i '' "s/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-stage.yaml
+  sed -i '' "s/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_UNSUPPORTED_PATH;/g" .github/workflows/publish-stage.yaml
+  sed -i '' "s/remote_path: \${{ steps.secrets.outputs.STAGE_PATH }}/remote_path: \${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-stage.yaml
 else
-  sed -i "s/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-stage.yaml
+  sed -i '' "s/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_PATH;/secret\/data\/products\/camunda-docs\/ci\/publish STAGE_UNSUPPORTED_PATH;/g" .github/workflows/publish-stage.yaml
+  sed -i "s/remote_path: \${{ steps.secrets.outputs.STAGE_PATH }}/remote_path: \${{ steps.secrets.outputs.STAGE_UNSUPPORTED_PATH }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-stage.yaml
 fi
 
 #   d. update `DOCS_SITE_BASE_URL` to specify isolated version
