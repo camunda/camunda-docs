@@ -797,6 +797,13 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "update_jobs_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
   "delete_process_instance": [
     {
       "file": "extended_operations.py",
