@@ -13,7 +13,7 @@ The Zeebe REST API is **deprecated**. While it continues to function, new develo
 The Zeebe REST API is a REST API designed to interact with the Zeebe workflow engine.
 
 :::note
-Ensure you [authenticate](./zeebe-api-rest-authentication.md) before accessing the Zeebe REST API.
+Ensure you [authenticate](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) before accessing the Zeebe REST API.
 :::
 
 ## Context paths
