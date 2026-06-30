@@ -8,7 +8,7 @@ import Components from './react-components/components.md'
 
 :::note
 
-Camunda 8 Self-Managed is not Camunda 7. [Find Camunda 7 documentation here](https://docs.camunda.org).
+Camunda 8 Self-Managed is _not_ Camunda 7. [Find Camunda 7 documentation here](https://docs.camunda.org).
 
 :::
 
