@@ -46,7 +46,7 @@ jobs:
         with:
           switches: -avzr --delete
           path: build/
-          remote_path: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}/
+          remote_path: ${{ steps.secrets.outputs.PROD_UNSUPPORTED_PATH }}/8.3
           remote_host: ${{ steps.secrets.outputs.HOST }}
           remote_user: ${{ steps.secrets.outputs.USER }}
           remote_key: ${{ steps.secrets.outputs.PRIVATE_KEY }}
