@@ -15,39 +15,38 @@ Strongly-typed domain key types provide compile-time safety for entity identifie
 
 ## Overview
 
-| Key Type                        | Description                                                                           |
-| ------------------------------- | ------------------------------------------------------------------------------------- |
-| `AgentHistoryItemKey`           | System-generated key for an agent history item.                                       |
-| `AgentInstanceKey`              | System-generated key for an agent instance.                                           |
-| `AuditLogEntityKey`             | System-generated entity key for an audit log entry.                                   |
-| `AuditLogKey`                   | System-generated key for an audit log entry.                                          |
-| `AuthorizationKey`              | System-generated key for an authorization.                                            |
-| `BatchOperationKey`             | System-generated key for an batch operation.                                          |
-| `ConditionalEvaluationKey`      | System-generated key for a conditional evaluation.                                    |
-| `DecisionDefinitionKey`         | System-generated key for a decision definition.                                       |
-| `DecisionEvaluationInstanceKey` | System-generated identifier for a decision evaluation instance. It is composed of the |
-
-parent decision evaluation key and the 1-based index of the evaluated decision within
-that evaluation, joined by a hyphen (format: `-`). |
-| `DecisionEvaluationKey` | System-generated key for a decision evaluation. |
-| `DecisionInstanceKey` | System-generated key for a deployed decision instance. |
-| `DecisionRequirementsKey` | System-generated key for a deployed decision requirements definition. |
-| `DeploymentKey` | Key for a deployment. |
-| `ElementInstanceKey` | System-generated key for a element instance. |
-| `FormKey` | System-generated key for a deployed form. |
-| `IncidentKey` | System-generated key for a incident. |
-| `JobKey` | System-generated key for a job. |
-| `LongKey` | Zeebe Engine resource key (Java long serialized as string) |
-| `MessageKey` | System-generated key for an message. |
-| `MessageSubscriptionKey` | System-generated key for a message subscription. |
-| `ProcessDefinitionKey` | System-generated key for a deployed process definition. |
-| `ProcessInstanceKey` | System-generated key for a process instance. |
-| `ResourceKey` | The system-assigned key for this resource. |
-| `ScopeKey` | System-generated key for a scope. A scope can hold variables and represents either an
-element instance in a BPMN process or the process instance itself. |
-| `SignalKey` | System-generated key for an signal. |
-| `UserTaskKey` | System-generated key for a user task. |
-| `VariableKey` | System-generated key for a variable. |
+| Key Type                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `AgentHistoryItemKey`                                                                 | System-generated key for an agent history item.                                       |
+| `AgentInstanceKey`                                                                    | System-generated key for an agent instance.                                           |
+| `AuditLogEntityKey`                                                                   | System-generated entity key for an audit log entry.                                   |
+| `AuditLogKey`                                                                         | System-generated key for an audit log entry.                                          |
+| `AuthorizationKey`                                                                    | System-generated key for an authorization.                                            |
+| `BatchOperationKey`                                                                   | System-generated key for an batch operation.                                          |
+| `ConditionalEvaluationKey`                                                            | System-generated key for a conditional evaluation.                                    |
+| `DecisionDefinitionKey`                                                               | System-generated key for a decision definition.                                       |
+| `DecisionEvaluationInstanceKey`                                                       | System-generated identifier for a decision evaluation instance. It is composed of the |
+| parent decision evaluation key and the 1-based index of the evaluated decision within |
+| that evaluation, joined by a hyphen (format: `-`).                                    |
+| `DecisionEvaluationKey`                                                               | System-generated key for a decision evaluation.                                       |
+| `DecisionInstanceKey`                                                                 | System-generated key for a deployed decision instance.                                |
+| `DecisionRequirementsKey`                                                             | System-generated key for a deployed decision requirements definition.                 |
+| `DeploymentKey`                                                                       | Key for a deployment.                                                                 |
+| `ElementInstanceKey`                                                                  | System-generated key for a element instance.                                          |
+| `FormKey`                                                                             | System-generated key for a deployed form.                                             |
+| `IncidentKey`                                                                         | System-generated key for a incident.                                                  |
+| `JobKey`                                                                              | System-generated key for a job.                                                       |
+| `LongKey`                                                                             | Zeebe Engine resource key (Java long serialized as string)                            |
+| `MessageKey`                                                                          | System-generated key for an message.                                                  |
+| `MessageSubscriptionKey`                                                              | System-generated key for a message subscription.                                      |
+| `ProcessDefinitionKey`                                                                | System-generated key for a deployed process definition.                               |
+| `ProcessInstanceKey`                                                                  | System-generated key for a process instance.                                          |
+| `ResourceKey`                                                                         | The system-assigned key for this resource.                                            |
+| `ScopeKey`                                                                            | System-generated key for a scope. A scope can hold variables and represents either an |
+| element instance in a BPMN process or the process instance itself.                    |
+| `SignalKey`                                                                           | System-generated key for an signal.                                                   |
+| `UserTaskKey`                                                                         | System-generated key for a user task.                                                 |
+| `VariableKey`                                                                         | System-generated key for a variable.                                                  |
 
 ## Common Methods
 

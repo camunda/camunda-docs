@@ -98,12 +98,10 @@ The lease token of the activation that produced this item.
 ### metrics
 
 ```ts
-metrics:
-  | AgentInstanceHistoryItemMetrics
-  | null;
+metrics: AgentInstanceHistoryItemMetrics;
 ```
 
-Per-call token and latency metrics. Present on ASSISTANT items only.
+Per-call token and latency metrics. Zero-valued when not available.
 
 ---
 
