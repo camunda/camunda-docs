@@ -91,13 +91,12 @@ Track import progress with the [Optimize metrics and bundled Grafana dashboards]
 
 ##### Keep variables out of Optimize (highest impact, lowest risk)
 
-Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are three levers, from most to least aggressive:
+Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are two levers:
 
-- **Stop exporting variables entirely _(Camunda 8.9+)_.** Set `index.variable: false` at the Elasticsearch/OpenSearch exporter to drop all variable records. This is the only lever that also recovers throughput because the exporter write path is the bottleneck at maximum load.
-- **Export only the variables you need (name and prefix filters) _(Camunda 8.9+)_.** Keep a subset with name or prefix filters, for example only `customer`-prefixed variables. Use this when some variables drive Optimize reports, but most are noise.
-- **[Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) in Optimize.** Available on all supported versions; achieves the storage savings but does not recover throughput, because the records are still written by the exporter.
+- **Stop exporting variables entirely.** Set `camunda.data.exporters.elasticsearch.args.index.variable: false` (OpenSearch: `camunda.data.exporters.opensearch.args.index.variable: false`) to drop all variable records at the exporter. This is the only lever that also recovers throughput, because the exporter write path is the bottleneck at maximum load. See the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration) exporter configuration.
+- **[Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) in Optimize.** This achieves the same storage savings but does not recover throughput, because the records are still written by the exporter.
 
-**Trade-off:** Filtered variables are unavailable in Optimize reports, including variable filters, variable-based grouping, and raw-data variable columns. These levers affect **Optimize only**; Operate and Tasklist read through the Camunda Exporter, so their variables stay intact.
+**Trade-off:** variables are then unavailable in Optimize reports, including variable filters, variable-based grouping, and raw-data variable columns. Both levers affect **Optimize only**; Operate and Tasklist read through the Camunda Exporter, so their variables stay intact.
 
 ##### Other mitigations
 
