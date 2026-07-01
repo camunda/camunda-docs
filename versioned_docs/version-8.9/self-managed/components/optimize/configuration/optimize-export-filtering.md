@@ -4,7 +4,7 @@ title: "Optimize export filtering"
 description: "Configure which processes and variables the Elasticsearch and OpenSearch exporters send to Optimize to reduce storage costs and scope analytics data."
 ---
 
-Starting with Camunda 8.9, you can configure the Elasticsearch and OpenSearch exporters to filter what data they write for Optimize. Use these filters to reduce Optimize's impact on Elasticsearch or OpenSearch storage and CPU, or to scope Optimize reports to only the processes and variables that matter for your analytics.
+Filter which processes and variables the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) and [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporters write for Optimize to reduce storage costs and scope analytics data.
 
 :::note
 Exporter-side filters require Camunda 8.9 or later. On earlier versions, exporters always write a complete, unfiltered event stream.
@@ -14,13 +14,13 @@ Exporter-side filters require Camunda 8.9 or later. On earlier versions, exporte
 
 The Elasticsearch and OpenSearch exporters run inside Zeebe brokers and write raw engine events to export indices. Optimize reads those indices and builds its own analytics indices.
 
-Export filters run **inside the exporter** and permanently drop matching records from the exported stream. Optimize cannot import data that was never exported, and dropped records cannot be recovered later — even if you relax the filters afterward.
+Export filters run **inside the exporter** and permanently drop matching records from the exported stream. Optimize cannot import data that was never exported, and dropped records cannot be recovered later, even if you relax the filters afterward.
 
 **These filters affect Optimize only.** Operate and Tasklist read through the Camunda Exporter, so their data stays intact regardless of what you configure here.
 
 ## Process definition filtering
 
-Use process definition filters to include or exclude entire processes from Optimize. Records tied to excluded processes — including process instances, variables, and incidents — are dropped before they reach Optimize's import indices.
+Use process definition filters to include or exclude entire processes from Optimize. Records tied to excluded processes (including process instances, variables, and incidents) are dropped before they reach Optimize's import indices.
 
 This is useful when you have high-volume processes that don't need analytics in Optimize.
 
@@ -31,7 +31,7 @@ This is useful when you have high-volume processes that don't need analytics in 
 
 Exclusion wins over inclusion when both lists contain a matching ID. Value types without a `bpmnProcessId` (such as `DEPLOYMENT` and `DECISION`) are not affected by these filters.
 
-**Example — include only analytics-relevant processes:**
+**Example: include only analytics-relevant processes:**
 
 ```yaml
 camunda:
@@ -73,7 +73,7 @@ Use name-based inclusion and exclusion lists to export only the variables you ne
 | Include specific variables | `variableNameInclusionExact`, `variableNameInclusionStartWith`, `variableNameInclusionEndWith` |
 | Exclude specific variables | `variableNameExclusionExact`, `variableNameExclusionStartWith`, `variableNameExclusionEndWith` |
 
-**Example — export only `customer`-prefixed variables and `orderId`:**
+**Example: export only `customer`-prefixed variables and `orderId`:**
 
 ```yaml
 camunda:
@@ -97,7 +97,7 @@ Drop variables by inferred JSON type to exclude large payloads such as objects o
 | Include specific types only | `variableValueTypeInclusion` |
 | Exclude specific types      | `variableValueTypeExclusion` |
 
-**Example — drop object and null variables:**
+**Example: drop object and null variables:**
 
 ```yaml
 camunda:
@@ -115,7 +115,7 @@ camunda:
 
 Filtered data is permanently unavailable in Optimize:
 
-- **Process filtering:** Excluded processes don't appear in Optimize reports. If you later re-enable a process, Optimize shows a permanent gap for the period when it was excluded — records from that window were never exported.
+- **Process filtering:** Excluded processes don't appear in Optimize reports. If you later re-enable a process, Optimize shows a permanent gap for the period when it was excluded, because records from that window were never exported.
 - **Variable filtering:** Filtered variables are unavailable in Optimize reports, including variable filters, variable-based grouping, and raw-data variable columns.
 
 For guidance on non-retroactivity, changing filters on running clusters, and safely applying filters mid-stream, see [Camunda 8 system configuration](./system-configuration-platform-8.md#exporter-side-filters-and-optimize-data-completeness).
