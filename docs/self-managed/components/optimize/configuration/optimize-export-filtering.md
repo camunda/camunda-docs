@@ -34,7 +34,7 @@ This is useful when you have high-volume processes that don't need analytics in 
 
 Exclusion wins over inclusion when both lists contain a matching ID. Value types without a `bpmnProcessId` (such as `DEPLOYMENT` and `DECISION`) are not affected by these filters.
 
-**Example: include only analytics-relevant processes:**
+**Example: Include only analytics-relevant processes**
 
 <Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
 <TabItem value="elasticsearch">
