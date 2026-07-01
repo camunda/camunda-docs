@@ -34,7 +34,7 @@ This is useful when you have high-volume processes that don't need analytics in 
 
 Exclusion wins over inclusion when both lists contain a matching ID. Value types without a `bpmnProcessId` (such as `DEPLOYMENT` and `DECISION`) are not affected by these filters.
 
-**Example: include only analytics-relevant processes:**
+**Example: Include only analytics-relevant processes**
 
 <Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
 <TabItem value="elasticsearch">
@@ -73,7 +73,7 @@ camunda:
 
 ## Variable filtering
 
-Variables are the largest contributor to Optimize's storage and CPU costs: Optimize stores a variable roughly 14x more expensively than the raw export (up to 29x for high-cardinality string variables). There are three levers, from most to least aggressive.
+Variables dominate Optimize's storage and CPU costs. For cost measurements and sizing context, see [Impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize). There are three levers, from most to least aggressive.
 
 ### Disable all variable export
 
