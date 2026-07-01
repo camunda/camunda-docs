@@ -65,7 +65,7 @@ jobs:
           remote_key: ${{ steps.secrets.outputs.PRIVATE_KEY }}
   trigger-crawl:
     runs-on: ubuntu-latest
-    # needs: publish
+    needs: publish
     steps:
       - name: Import Secrets
         id: secrets
