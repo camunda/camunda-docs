@@ -4,6 +4,9 @@ title: "Optimize export filtering"
 description: "Configure which processes and variables the Elasticsearch and OpenSearch exporters send to Optimize to reduce storage costs and scope analytics data."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Filter which processes and variables the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) and [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) exporters write for Optimize to reduce storage costs and scope analytics data.
 
 :::note
@@ -33,6 +36,9 @@ Exclusion wins over inclusion when both lists contain a matching ID. Value types
 
 **Example: include only analytics-relevant processes:**
 
+<Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
+<TabItem value="elasticsearch">
+
 ```yaml
 camunda:
   data:
@@ -46,6 +52,25 @@ camunda:
               - debugProcess
 ```
 
+</TabItem>
+<TabItem value="opensearch">
+
+```yaml
+camunda:
+  data:
+    exporters:
+      opensearch:
+        args:
+          index:
+            bpmnProcessIdInclusion:
+              - orderProcess
+            bpmnProcessIdExclusion:
+              - debugProcess
+```
+
+</TabItem>
+</Tabs>
+
 ## Variable filtering
 
 Variables are the largest contributor to Optimize's storage and CPU costs: Optimize stores a variable roughly 14x more expensively than the raw export (up to 29x for high-cardinality string variables). There are three levers, from most to least aggressive.
@@ -53,6 +78,9 @@ Variables are the largest contributor to Optimize's storage and CPU costs: Optim
 ### Disable all variable export
 
 Set `variable: false` to stop the exporter from writing any variable records to Optimize indices. This is the most impactful option: it also recovers exporter throughput, because the variable write path is the bottleneck at maximum load.
+
+<Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
+<TabItem value="elasticsearch">
 
 ```yaml
 camunda:
@@ -64,6 +92,22 @@ camunda:
             variable: false
 ```
 
+</TabItem>
+<TabItem value="opensearch">
+
+```yaml
+camunda:
+  data:
+    exporters:
+      opensearch:
+        args:
+          index:
+            variable: false
+```
+
+</TabItem>
+</Tabs>
+
 ### Filter by variable name
 
 Use name-based inclusion and exclusion lists to export only the variables you need. You can match by exact name, prefix (`startsWith`), or suffix (`endsWith`). Exclusion wins over inclusion when both rules match the same variable name.
@@ -74,6 +118,9 @@ Use name-based inclusion and exclusion lists to export only the variables you ne
 | Exclude specific variables | `variableNameExclusionExact`, `variableNameExclusionStartWith`, `variableNameExclusionEndWith` |
 
 **Example: include `business_`-prefixed variables but exclude `business_debug`:**
+
+<Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
+<TabItem value="elasticsearch">
 
 ```yaml
 camunda:
@@ -88,6 +135,25 @@ camunda:
               - business_debug
 ```
 
+</TabItem>
+<TabItem value="opensearch">
+
+```yaml
+camunda:
+  data:
+    exporters:
+      opensearch:
+        args:
+          index:
+            variableNameInclusionStartWith:
+              - business_
+            variableNameExclusionStartWith:
+              - business_debug
+```
+
+</TabItem>
+</Tabs>
+
 ### Filter by variable type
 
 Drop variables by inferred JSON type to exclude large payloads such as objects or arrays. Valid types are `String`, `Number`, `Boolean`, `Object`, and `Null`.
@@ -98,6 +164,9 @@ Drop variables by inferred JSON type to exclude large payloads such as objects o
 | Exclude specific types      | `variableValueTypeExclusion` |
 
 **Example: include only objects and strings, then exclude objects:**
+
+<Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
+<TabItem value="elasticsearch">
 
 ```yaml
 camunda:
@@ -113,6 +182,26 @@ camunda:
               - Object
 ```
 
+</TabItem>
+<TabItem value="opensearch">
+
+```yaml
+camunda:
+  data:
+    exporters:
+      opensearch:
+        args:
+          index:
+            variableValueTypeInclusion:
+              - Object
+              - String
+            variableValueTypeExclusion:
+              - Object
+```
+
+</TabItem>
+</Tabs>
+
 ## Trade-offs
 
 Filtered data is permanently unavailable in Optimize:
@@ -121,14 +210,3 @@ Filtered data is permanently unavailable in Optimize:
 - **Variable filtering:** Filtered variables are unavailable in Optimize reports, including variable filters, variable-based grouping, and raw-data variable columns.
 
 For guidance on non-retroactivity, changing filters on running clusters, and safely applying filters mid-stream, see [Camunda 8 system configuration](./system-configuration-platform-8.md#exporter-side-filters-and-optimize-data-completeness).
-
-## OpenSearch
-
-The same filter options are available for the OpenSearch exporter. Replace `camunda.data.exporters.elasticsearch` with `camunda.data.exporters.opensearch` in the configuration. See [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) for the full option reference.
-
-## Full option reference
-
-For a complete list of filter options and their defaults, see:
-
-- [Elasticsearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)
-- [OpenSearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)
