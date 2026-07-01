@@ -158,3 +158,12 @@ However, Camunda tests against newer Spring Boot minor releases and declares com
 If the library is compatible with a newer Spring version with an active OSS support window, Camunda declares compatibility one month before the support window ends, at the latest.
 
 With this policy, you can safely update your applications to a new Spring Boot version by overriding the default Spring release with another compatible version.
+
+**Spring Boot major versions**
+
+Camunda supports two Spring Boot major versions at a time:
+
+- The **current major** is shipped as the default `camunda-spring-boot-starter` artifact.
+- The **previous major** is shipped as a dedicated `camunda-spring-boot-{n}-starter` artifact, pinned to the last stable minor of that major. It remains supported until the end of Spring Commercial support for that major, after which no further updates are released.
+
+When a new Spring Boot major version reaches GA, Camunda makes it the default artifact in the Camunda release that ships before the previous major's OSS support ends.
