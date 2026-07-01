@@ -27,14 +27,14 @@ Use process definition filters to include or exclude entire processes from Optim
 
 This is useful when you have high-volume processes that don't need analytics in Optimize.
 
-| Goal                           | Option                   | Example value                           |
-| ------------------------------ | ------------------------ | --------------------------------------- |
-| Export only specific processes | `bpmnProcessIdInclusion` | `[order-fulfillment, invoice-approval]` |
-| Exclude specific processes     | `bpmnProcessIdExclusion` | `[high-volume-batch-job]`               |
+| Goal                           | Option                   |
+| ------------------------------ | ------------------------ |
+| Export only specific processes | `bpmnProcessIdInclusion` |
+| Exclude specific processes     | `bpmnProcessIdExclusion` |
 
 Exclusion wins over inclusion when both lists contain a matching ID. Value types without a `bpmnProcessId` (such as `DEPLOYMENT` and `DECISION`) are not affected by these filters.
 
-**Example: Include only analytics-relevant processes**
+**Example**
 
 <Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
 <TabItem value="elasticsearch">
@@ -73,7 +73,9 @@ camunda:
 
 ## Variable filtering
 
-Use variable filtering to control which variables are exported to Optimize. You can disable variable export entirely, filter by name, or filter by value type. Variable filtering is also an effective mitigation for Optimize's impact on Elasticsearch or OpenSearch sizing; see [Impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize) for details.
+Use variable filtering to control which variables are exported to Optimize. You can disable variable export entirely, filter by name, or filter by value type.
+
+Variable filtering is an effective mitigation for Optimize's impact on Elasticsearch or OpenSearch sizing. See [impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize) for details.
 
 ### Disable all variable export
 
@@ -117,7 +119,7 @@ Use name-based inclusion and exclusion lists to export only the variables you ne
 | Include specific variables | `variableNameInclusionExact`, `variableNameInclusionStartWith`, `variableNameInclusionEndWith` |
 | Exclude specific variables | `variableNameExclusionExact`, `variableNameExclusionStartWith`, `variableNameExclusionEndWith` |
 
-**Example: include `business_`-prefixed variables but exclude `business_debug`:**
+**Example**
 
 <Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
 <TabItem value="elasticsearch">
@@ -163,7 +165,7 @@ Use type-based inclusion and exclusion lists to filter variables by their inferr
 | Include specific types only | `variableValueTypeInclusion` |
 | Exclude specific types      | `variableValueTypeExclusion` |
 
-**Example: include only objects and strings, then exclude objects:**
+**Example**
 
 <Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
 <TabItem value="elasticsearch">
