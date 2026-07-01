@@ -1,7 +1,7 @@
 ---
 id: release-versions
 title: "Release versions"
-description: "A complete list of Camunda 8 releases including SaaS generations, Self-Managed Helm chart versions, and component version details."
+description: "Camunda 8 releases including SaaS generations, Helm chart versions, and component version details."
 toc_max_heading_level: 2
 ---
 
