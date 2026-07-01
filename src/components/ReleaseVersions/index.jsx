@@ -51,11 +51,15 @@ function VersionContent({ version }) {
           <tr>
             <th style={{ textAlign: "left" }}>Component</th>
             <th style={{ textAlign: "left" }}>Version</th>
-            <th style={{ textAlign: "left" }}>Links</th>
+            <th style={{ textAlign: "left" }}>Changelog</th>
+            <th style={{ textAlign: "left" }}>Docker Hub</th>
           </tr>
         </thead>
         <tbody>
-          {version.components.map((component) => (
+          {version.components.filter((c) => c.name !== "Camunda Platform (Helm)").map((component) => {
+            const githubLink = component.links.find((l) => l.label === "GitHub changelog");
+            const dockerLink = component.links.find((l) => l.label === "Docker Hub");
+            return (
             <tr key={component.name}>
               <td>
                 {component.name}
@@ -75,21 +79,22 @@ function VersionContent({ version }) {
               </td>
               <td>{component.version}</td>
               <td>
-                {component.links.map((link, i) => (
-                  <React.Fragment key={link.label}>
-                    {i > 0 && " · "}
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {link.label}
-                    </a>
-                  </React.Fragment>
-                ))}
+                {githubLink ? (
+                  <a href={githubLink.url} target="_blank" rel="noopener noreferrer">
+                    GitHub
+                  </a>
+                ) : "-"}
+              </td>
+              <td>
+                {dockerLink ? (
+                  <a href={dockerLink.url} target="_blank" rel="noopener noreferrer">
+                    Docker Hub
+                  </a>
+                ) : "-"}
               </td>
             </tr>
-          ))}
+            );
+          })}
         </tbody>
       </table>
     </>
