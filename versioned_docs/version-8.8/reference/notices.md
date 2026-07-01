@@ -149,22 +149,31 @@ July 1, 2026
 
 ### Products affected
 
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
 - Camunda Web Modeler
 
 ### Impact
 
-Camunda Web Modeler was affected by [CVE-2026-47691](https://nvd.nist.gov/vuln/detail/CVE-2026-47691), where an attacker controlling a subdomain's name server can provide crafted NS records to poison the DNS cache for parent domains, potentially redirecting users to malicious servers and leading to information disclosure or integrity compromise.
+The application was vulnerable to [CVE-2026-47691](https://nvd.nist.gov/vuln/detail/CVE-2026-47691), where an attacker controlling a subdomain's name server can provide crafted NS records to poison the DNS cache for parent domains, potentially redirecting users to malicious servers and leading to information disclosure or integrity compromise.
 
 ### How to determine if the installation is affected
 
 You are using:
 
+- Camunda Zeebe ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Tasklist ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Operate ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
 - Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
 
 ### Solution
 
 Camunda has provided the following releases that contain the fix:
 
+- Camunda Zeebe 8.9.10, 8.8.29, 8.7.34
+- Camunda Tasklist 8.9.10, 8.8.29, 8.7.34
+- Camunda Operate 8.9.10, 8.8.29, 8.7.34
 - Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
 
 ## Notice 51
@@ -175,22 +184,31 @@ July 1, 2026
 
 ### Products affected
 
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
 - Camunda Web Modeler
 
 ### Impact
 
-Camunda Web Modeler was affected by [CVE-2026-45674](https://nvd.nist.gov/vuln/detail/CVE-2026-45674), where a remote attacker can achieve information disclosure or data manipulation by crafting malicious DNS responses.
+The application was vulnerable to [CVE-2026-45674](https://nvd.nist.gov/vuln/detail/CVE-2026-45674), where a remote attacker can achieve information disclosure or data manipulation by crafting malicious DNS responses.
 
 ### How to determine if the installation is affected
 
 You are using:
 
+- Camunda Zeebe ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Tasklist ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
+- Camunda Operate ≤ 8.9.9, ≤ 8.8.28, or ≤ 8.7.33
 - Web Modeler Self-Managed ≤ 8.9.4, ≤ 8.8.15, or ≤ 8.7.22
 
 ### Solution
 
 Camunda has provided the following releases that contain the fix:
 
+- Camunda Zeebe 8.9.10, 8.8.29, 8.7.34
+- Camunda Tasklist 8.9.10, 8.8.29, 8.7.34
+- Camunda Operate 8.9.10, 8.8.29, 8.7.34
 - Web Modeler Self-Managed 8.9.5, 8.8.16, 8.7.23
 
 ## Notice 50
