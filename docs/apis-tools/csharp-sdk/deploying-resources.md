@@ -13,7 +13,7 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Deploy BPMN, DMN, RPA, Form, or generic resource files from disk:
+Deploy BPMN, DMN, or Form files from disk:
 
 <!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DeployResources -->
 

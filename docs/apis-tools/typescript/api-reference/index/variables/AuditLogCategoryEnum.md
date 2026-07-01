@@ -21,13 +21,13 @@ The category of the audit log operation.
 readonly ADMIN: "ADMIN" = 'ADMIN';
 ```
 
-### DEPLOYED_RESOURCES
+### DEPLOYED\_RESOURCES
 
 ```ts
 readonly DEPLOYED_RESOURCES: "DEPLOYED_RESOURCES" = 'DEPLOYED_RESOURCES';
 ```
 
-### USER_TASKS
+### USER\_TASKS
 
 ```ts
 readonly USER_TASKS: "USER_TASKS" = 'USER_TASKS';

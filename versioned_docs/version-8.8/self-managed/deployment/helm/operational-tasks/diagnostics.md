@@ -24,6 +24,7 @@ The script outputs the following data from your namespace and creates a zip file
 - **Network Resources**: Services, endpoints, and ingresses.
 - **Configuration**: Config map information.
 - **Actuator endpoints**: Read-only Zeebe and Spring Boot actuator outputs from Camunda pods (partition status, cluster topology, exporters, flow control, job streams, backup state, Prometheus metrics, and configuration properties).
+- **Database indices**: The Elasticsearch/OpenSearch index list (`_cat/indices`), when the datastore is deployed in the same namespace and reachable without TLS/authentication.
 
 ### Usage
 
@@ -257,6 +258,37 @@ else
       done
       if [[ -n "$collected" ]]; then
         echo "    - Collected actuators from pod ${pod}:${collected}"
+      fi
+      cleanup_port_forward
+    fi
+  done
+
+  # Collect the Elasticsearch/OpenSearch index list. It is cluster-wide, so the first reachable
+  # node is enough. Secured datastores (TLS/auth) are skipped here and must be collected manually.
+  es_port=9200
+  es_pods=$(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":metadata.name" 2>/dev/null | grep -iE 'elasticsearch|opensearch' || true)
+  for pod in $es_pods; do
+    local_port=""
+    attempt=0
+    while [[ -z "$local_port" && "$attempt" -lt 3 ]]; do
+      attempt=$((attempt + 1))
+      pf_log=$(mktemp 2>/dev/null || mktemp -t camunda-diag 2>/dev/null || echo "./.es-pf.$$.${attempt}")
+      kubectl port-forward -n "$namespace" "$pod" ":${es_port}" > "$pf_log" 2>&1 &
+      pf_pid=$!
+      for _ in $(seq 1 10); do
+        local_port=$(sed -n 's/.*Forwarding from 127.0.0.1:\([0-9]*\) ->.*/\1/p' "$pf_log" | head -1)
+        [[ -n "$local_port" ]] && break
+        kill -0 "$pf_pid" 2>/dev/null || break
+        sleep 1
+      done
+      [[ -z "$local_port" ]] && cleanup_port_forward
+    done
+
+    if [[ -n "$local_port" ]]; then
+      if curl -sf -m 10 "http://localhost:${local_port}/_cat/indices?v" -o "${pod}-cat-indices.txt" 2>/dev/null; then
+        echo "    - Collected _cat/indices from pod ${pod}"
+        cleanup_port_forward
+        break
       fi
       cleanup_port_forward
     fi

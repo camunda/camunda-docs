@@ -17,6 +17,7 @@ type DecisionInstanceSearchQuerySortRequest = object;
 
 ```ts
 field:
+  | "businessId"
   | "decisionDefinitionId"
   | "decisionDefinitionKey"
   | "decisionDefinitionName"
