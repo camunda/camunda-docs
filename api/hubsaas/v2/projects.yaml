@@ -58,11 +58,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The project was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -95,11 +91,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The project was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -125,11 +117,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The project was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -182,6 +170,9 @@ components:
       required:
         - name
         - workspaceKey
+      example:
+        name: "Payment Flow"
+        workspaceKey: "wks-abc-123"
       properties:
         name:
           description: The name of the project.
@@ -195,6 +186,8 @@ components:
     ProjectUpdateRequest:
       type: object
       additionalProperties: false
+      example:
+        name: "Payment Flow v2"
       properties:
         name:
           description: The updated name of the project.
@@ -210,6 +203,51 @@ components:
     ProjectDetailResult:
       type: object
       description: A project with its metadata and content (child folders and files).
+      example:
+        project:
+          projectKey: "prj-def-456"
+          name: "Payment Flow"
+          workspaceKey: "wks-abc-123"
+          created: "2025-02-01T08:00:00.000Z"
+          createdBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+          updated: "2025-06-10T14:22:00.000Z"
+          updatedBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+        content:
+          folders:
+            - folderKey: "fld-012-ghi"
+              name: "processes"
+              projectKey: "prj-def-456"
+              parentFolderKey: "fld-parent-001"
+              created: "2025-03-15T10:30:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-03-15T10:30:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+          files:
+            - fileKey: "file-789-xyz"
+              name: "order-process.bpmn"
+              projectKey: "prj-def-456"
+              folderKey: "fld-012-ghi"
+              simplePath: "/processes/order-process.bpmn"
+              canonicalPath: "/fld-012-ghi/file-789-xyz"
+              revision: 1
+              type: "bpmn"
+              content: "<?xml version='1.0' encoding='UTF-8'?>..."
+              created: "2025-03-15T10:30:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-06-10T14:22:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
       required:
         - project
         - content
@@ -243,6 +281,18 @@ components:
 
     ProjectResult:
       type: object
+      example:
+        projectKey: "prj-def-456"
+        name: "Payment Flow"
+        workspaceKey: "wks-abc-123"
+        created: "2025-02-01T08:00:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-06-10T14:22:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
       required:
         - projectKey
         - name
@@ -312,7 +362,9 @@ components:
             - created
             - updated
         order:
-          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
 
     ProjectFilter:
       type: object
@@ -355,4 +407,6 @@ components:
           items:
             $ref: "#/components/schemas/ProjectResult"
         page:
-          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"

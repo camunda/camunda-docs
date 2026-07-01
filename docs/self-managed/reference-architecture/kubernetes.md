@@ -195,6 +195,8 @@ The following are suggested minimum requirements to get started. There is no one
 The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes); there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. On providers where disk performance scales with capacity (for example, GKE `pd-ssd`), reaching the IOPS and throughput baseline can require a disk larger than the 32 GiB minimum capacity. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
 
 Storage type, however, is a strict requirement: HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency, and are not supported.
+
+The same SSD requirement applies to secondary storage (Elasticsearch/OpenSearch) — see the [Database](#database) section for details.
 :::
 
 #### Networking
@@ -268,6 +270,10 @@ Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-se
 For backend trade-offs and production guidance, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). For more general context, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmarking to determine the appropriate sizing for your specific environment and workload.
+
+:::note Secondary storage disk requirements
+Secondary storage (Elasticsearch/OpenSearch) is customer-managed. Provision it with sufficient resources and use performant disks — disk latency directly impacts export throughput and overall cluster performance. See [Elasticsearch scaling](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling) for disk type and sizing guidance.
+:::
 
 Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
 
