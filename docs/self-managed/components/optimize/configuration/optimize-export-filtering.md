@@ -41,9 +41,9 @@ camunda:
         args:
           index:
             bpmnProcessIdInclusion:
-              - order-fulfillment
-              - invoice-approval
-              - customer-onboarding
+              - orderProcess
+            bpmnProcessIdExclusion:
+              - debugProcess
 ```
 
 ## Variable filtering
@@ -73,7 +73,7 @@ Use name-based inclusion and exclusion lists to export only the variables you ne
 | Include specific variables | `variableNameInclusionExact`, `variableNameInclusionStartWith`, `variableNameInclusionEndWith` |
 | Exclude specific variables | `variableNameExclusionExact`, `variableNameExclusionStartWith`, `variableNameExclusionEndWith` |
 
-**Example: export only `customer`-prefixed variables and `orderId`:**
+**Example: include `business_`-prefixed variables but exclude `business_debug`:**
 
 ```yaml
 camunda:
@@ -83,9 +83,9 @@ camunda:
         args:
           index:
             variableNameInclusionStartWith:
-              - customer
-            variableNameInclusionExact:
-              - orderId
+              - business_
+            variableNameExclusionStartWith:
+              - business_debug
 ```
 
 ### Filter by variable type
@@ -97,7 +97,7 @@ Drop variables by inferred JSON type to exclude large payloads such as objects o
 | Include specific types only | `variableValueTypeInclusion` |
 | Exclude specific types      | `variableValueTypeExclusion` |
 
-**Example: drop object and null variables:**
+**Example: include only objects and strings, then exclude objects:**
 
 ```yaml
 camunda:
@@ -106,9 +106,11 @@ camunda:
       elasticsearch:
         args:
           index:
+            variableValueTypeInclusion:
+              - Object
+              - String
             variableValueTypeExclusion:
               - Object
-              - Null
 ```
 
 ## Trade-offs
