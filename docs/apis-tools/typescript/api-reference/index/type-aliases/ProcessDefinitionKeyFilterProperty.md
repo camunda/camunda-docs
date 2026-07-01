@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type ProcessDefinitionKeyFilterProperty =
-  | ProcessDefinitionKeyExactMatch
-  | AdvancedProcessDefinitionKeyFilter;
+  ProcessDefinitionKeyExactMatch | AdvancedProcessDefinitionKeyFilter;
 ```
 
 ProcessDefinitionKey property with full advanced search capabilities.

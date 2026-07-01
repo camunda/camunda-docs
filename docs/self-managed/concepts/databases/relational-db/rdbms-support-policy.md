@@ -28,7 +28,7 @@ The following relational databases are officially supported when used as an RDBM
 | Database                 | Supported versions |
 | ------------------------ | ------------------ |
 | PostgreSQL               | 15, 16, 17, 18     |
-| Amazon Aurora PostgreSQL | 15, 16, 17         |
+| Amazon Aurora PostgreSQL | 15, 16, 17, 18     |
 | MariaDB                  | 10.11, 11.4, 11.8  |
 | MySQL                    | 8.4                |
 | Microsoft SQL Server     | 2022, 2025         |

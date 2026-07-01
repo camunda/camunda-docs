@@ -44,9 +44,9 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 </div>
 <div className="release-announcement-content">
 
-#### Amazon Aurora PostgreSQL 14 no longer supported
+#### Amazon Aurora PostgreSQL 14 removed, 18 added
 
-Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14. Supported versions are now 15, 16, and 17.
+Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14 and adds support for version 18. Supported versions are now 15, 16, 17, and 18.
 
 - Aurora PostgreSQL 14 has reached the end of standard support on AWS.
 - Migrate your Aurora cluster to a supported version before moving to Camunda 8.10.

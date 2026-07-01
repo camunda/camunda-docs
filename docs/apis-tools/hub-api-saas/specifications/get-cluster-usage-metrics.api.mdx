@@ -1,13 +1,13 @@
 ---
-id: add-collaborator
-title: "Add or update a collaborator"
-description: "Adds a collaborator to the workspace, or updates the role of an existing collaborator. The collaborator is identified by their email address."
-sidebar_label: "Add or update a collaborator"
+id: get-cluster-usage-metrics
+title: "Get cluster usage metrics"
+description: "Returns the usage metrics for a cluster. The provided token is forwarded to the Orchestration Cluster API of the target cluster, so it must additionally include the read:* permission for the orchestration-api audience."
+sidebar_label: "Get cluster usage metrics"
 hide_title: true
 hide_table_of_contents: true
-api: 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
-sidebar_class_name: "post api-method"
-info_path: docs/apis-tools/hub-api-sm/specifications/hub-public-api-v-2
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -24,16 +24,16 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Add or update a collaborator"}
+  children={"Get cluster usage metrics"}
 ></Heading>
 
 <MethodEndpoint
-  method={"post"}
-  path={"/workspaces/{workspaceKey}/collaborators"}
+  method={"get"}
+  path={"/clusters/usage-metrics"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Adds a collaborator to the workspace, or updates the role of an existing collaborator. The collaborator is identified by their email address.
+Returns the usage metrics for a cluster. The provided token is forwarded to the Orchestration Cluster API of the target cluster, so it must additionally include the read:\* permission for the orchestration-api audience.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -42,142 +42,126 @@ Adds a collaborator to the workspace, or updates the role of an existing collabo
 <ParamsDetails
   parameters={[
     {
-      name: "workspaceKey",
-      in: "path",
+      name: "id",
+      in: "query",
       required: true,
-      description: "The unique key identifying the workspace.",
+      description: "The ID of the cluster.",
       schema: { type: "string" },
+    },
+    {
+      name: "start",
+      in: "query",
+      required: true,
+      description: "The start of the time range (epoch milliseconds).",
+      schema: { type: "integer", format: "int64" },
+    },
+    {
+      name: "end",
+      in: "query",
+      required: true,
+      description: "The end of the time range (epoch milliseconds).",
+      schema: { type: "integer", format: "int64" },
     },
   ]}
 ></ParamsDetails>
 
-<RequestSchema
-  title={"Body"}
-  body={{
-    required: true,
-    content: {
-      "application/json": {
-        schema: {
-          type: "object",
-          additionalProperties: false,
-          required: ["email", "role"],
-          properties: {
-            email: {
-              description:
-                "The email address of the collaborator to add or update.",
-              type: "string",
-              format: "email",
-            },
-            role: {
-              description: "The role to assign to the collaborator.",
-              allOf: [
-                {
-                  type: "string",
-                  description:
-                    "The role a collaborator can have in a workspace.",
-                  enum: ["workspace_admin", "editor", "commenter", "viewer"],
-                  title: "CollaboratorRole",
-                },
-              ],
-            },
-          },
-          title: "CollaboratorCreateRequest",
-        },
-      },
-    },
-  }}
-></RequestSchema>
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
 <StatusCodes
   id={undefined}
   label={undefined}
   responses={{
     "200": {
-      description: "The collaborator was added or updated successfully.",
+      description: "The usage metrics were retrieved successfully.",
       content: {
         "application/json": {
           schema: {
             type: "object",
-            required: ["workspaceKey", "email", "name", "role"],
+            required: [
+              "id",
+              "processInstances",
+              "decisionInstances",
+              "taskUsers",
+              "activeTenants",
+            ],
             properties: {
-              workspaceKey: {
-                description:
-                  "The unique key of the workspace the collaborator belongs to.",
-                type: "string",
-              },
-              email: {
-                description: "The email address of the collaborator.",
-                type: "string",
-                format: "email",
-              },
-              name: {
-                description: "The display name of the collaborator, if known.",
-                type: "string",
-              },
-              role: {
-                description: "The role of the collaborator in the workspace.",
+              id: { description: "The cluster ID.", type: "string" },
+              processInstances: {
+                description: "Process instance metrics.",
                 allOf: [
                   {
-                    type: "string",
-                    description:
-                      "The role a collaborator can have in a workspace.",
-                    enum: ["workspace_admin", "editor", "commenter", "viewer"],
-                    title: "CollaboratorRole",
+                    type: "object",
+                    required: ["total"],
+                    properties: {
+                      total: {
+                        description: "The total count.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                    },
+                    title: "MetricTotal",
+                  },
+                ],
+              },
+              decisionInstances: {
+                description: "Decision instance metrics.",
+                allOf: [
+                  {
+                    type: "object",
+                    required: ["total"],
+                    properties: {
+                      total: {
+                        description: "The total count.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                    },
+                    title: "MetricTotal",
+                  },
+                ],
+              },
+              taskUsers: {
+                description: "Task user metrics.",
+                allOf: [
+                  {
+                    type: "object",
+                    required: ["total", "assignees"],
+                    properties: {
+                      total: {
+                        description: "The total count.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      assignees: {
+                        description: "The list of assignee identifiers.",
+                        type: "array",
+                        items: { type: "string" },
+                      },
+                    },
+                    title: "TaskUsersMetric",
+                  },
+                ],
+              },
+              activeTenants: {
+                description: "Active tenant metrics.",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "object",
+                    required: ["total"],
+                    properties: {
+                      total: {
+                        description: "The total count.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                    },
+                    title: "MetricTotal",
                   },
                 ],
               },
             },
-            title: "CollaboratorResult",
-          },
-        },
-      },
-    },
-    "400": {
-      description: "The provided data is not valid.",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            required: ["type", "title", "status", "detail", "instance"],
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-                example:
-                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-                example: "Bad Request",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                example: 400,
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-                example:
-                  "Request property [maxJobsToActivates] cannot be parsed",
-              },
-              instance: {
-                type: "string",
-                format: "uri-reference",
-                description:
-                  "A URI path identifying the origin of the problem.",
-                example: "/v2/jobs/activation",
-              },
-            },
-            title: "ProblemDetail",
+            title: "UsageMetricsResult",
           },
         },
       },
@@ -230,6 +214,14 @@ Adds a collaborator to the workspace, or updates the role of an existing collabo
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -280,11 +272,19 @@ Adds a collaborator to the workspace, or updates the role of an existing collabo
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
         },
       },
     },
     "404": {
-      description: "The workspace was not found.",
+      description: "The requested resource was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -329,6 +329,13 @@ Adds a collaborator to the workspace, or updates the role of an existing collabo
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/file-789-xyz",
           },
         },
       },
@@ -379,6 +386,14 @@ Adds a collaborator to the workspace, or updates the role of an existing collabo
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
           },
         },
       },
