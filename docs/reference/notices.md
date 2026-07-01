@@ -91,7 +91,7 @@ You are using:
 
 ### Solution
 
-Camunda has provided the following releases that contain the fix:
+Camunda has provided the following releases which contain the fix:
 
 - Camunda Identity 8.9.5, 8.8.14, 8.7.21
 - Camunda Zeebe 8.9.10, 8.8.29, 8.7.34
@@ -134,7 +134,7 @@ And your deployment is running on Amazon Aurora PostgreSQL with the AWS Advanced
 
 ### Solution
 
-Camunda has provided the following releases that contain the fix:
+Camunda has provided the following releases which contain the fix:
 
 - Camunda Identity 8.9.5
 - Camunda Zeebe 8.9.11
@@ -171,7 +171,7 @@ You are using:
 
 ### Solution
 
-Camunda has provided the following releases that contain the fix:
+Camunda has provided the following releases which contain the fix:
 
 - Camunda Zeebe 8.9.10, 8.8.29, 8.7.34
 - Camunda Tasklist 8.9.10, 8.8.29, 8.7.34
@@ -206,7 +206,7 @@ You are using:
 
 ### Solution
 
-Camunda has provided the following releases that contain the fix:
+Camunda has provided the following releases which contain the fix:
 
 - Camunda Zeebe 8.9.10, 8.8.29, 8.7.34
 - Camunda Tasklist 8.9.10, 8.8.29, 8.7.34
