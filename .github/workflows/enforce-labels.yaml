@@ -36,9 +36,9 @@ jobs:
           payload-templated: true
           payload: |
             {
-              "github_server_url": ${{ GITHUB_SERVER_URL }},
-              "github_repo": ${{ GITHUB_REPOSITORY }},
-              "github_run_id": ${{ GITHUB_RUN_ID }},
-              "github_ref_name": ${{ GITHUB_REF_NAME }},
-              "github_workflow": ${{ GITHUB_WORKFLOW }}
+              "github_server_url": "${{ github.server_url }}",
+              "github_repo": "${{ github.repository }}",
+              "github_run_id": "${{ github.run_id }}",
+              "github_ref_name": "${{ github.ref_name }}",
+              "github_workflow": "${{ github.workflow }}"
             }
