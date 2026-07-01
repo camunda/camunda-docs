@@ -77,3 +77,36 @@ jobs:
           algolia-api-key: ${{ secrets.ALGOLIA_API_KEY }}
           site-url: "https://docs.camunda.io"
           crawler-name: ${{ secrets.ALGOLIA_CRAWLER_NAME }}
+  notify-failure:
+    name: Send message to Slack on failure
+    runs-on: ubuntu-latest
+    needs:
+      - publish
+      - trigger-crawl
+    if: failure()
+    steps:
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/ci/slack DOCS_NOTIFICATION_WEBHOOK_URL;
+      - id: slack
+        uses: slackapi/slack-github-action@e090a7a7c0b2d9b7ae32bd34f086e680ce260b06
+        with:
+          webhook: ${{ steps.secrets.outputs.DOCS_NOTIFICATION_WEBHOOK_URL }}
+          webhook-type: webhook-trigger
+          payload-templated: true
+          payload: |
+            {
+              "github_server_url": "${{ github.server_url }}",
+              "github_repo": "${{ github.repository }}",
+              "github_run_id": "${{ github.run_id }}",
+              "github_ref_name": "${{ github.ref_name }}",
+              "github_workflow": "${{ github.workflow }}"
+            }
