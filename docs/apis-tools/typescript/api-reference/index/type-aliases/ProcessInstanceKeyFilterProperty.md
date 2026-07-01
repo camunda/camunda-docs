@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type ProcessInstanceKeyFilterProperty =
-  | ProcessInstanceKeyExactMatch
-  | AdvancedProcessInstanceKeyFilter;
+  ProcessInstanceKeyExactMatch | AdvancedProcessInstanceKeyFilter;
 ```
 
 ProcessInstanceKey property with full advanced search capabilities.

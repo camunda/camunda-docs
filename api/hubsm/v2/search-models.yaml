@@ -107,7 +107,9 @@ components:
         - page
       properties:
         page:
-          $ref: "#/components/schemas/SearchQueryPageResponse"
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "#/components/schemas/SearchQueryPageResponse"
 
     SortOrderEnum:
       description: The order in which to sort the related field.
