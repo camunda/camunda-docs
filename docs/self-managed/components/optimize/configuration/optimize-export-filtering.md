@@ -73,9 +73,9 @@ camunda:
 
 ## Variable filtering
 
-Use variable filtering to control which variables are exported to Optimize. You can disable variable export entirely, filter by name, or filter by value type.
+Use variable filtering to control which variables are exported to Optimize. It is an effective mitigation for Optimize's impact on Elasticsearch or OpenSearch sizing. See [impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize) for details.
 
-Variable filtering is an effective mitigation for Optimize's impact on Elasticsearch or OpenSearch sizing. See [impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize) for details.
+You can disable variable export entirely, filter by name, or filter by value type.
 
 ### Disable all variable export
 
