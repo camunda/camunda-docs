@@ -39,12 +39,12 @@ The following are accepted as keyword arguments and will be used to construct ht
 - **Parameters:**
   - **base_url** (_str_)
   - **raise_on_unexpected_status** (_bool_)
-  - **cookies** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-  - **headers** (_dict_ _[\*\*str_ _,_ _str_ _]_)
+  - **cookies** (_dict_ _[__str_ _,_ _str_ _]_)
+  - **headers** (_dict_ _[__str_ _,_ _str_ _]_)
   - **timeout** (_httpx.Timeout_ _|_ _None_)
   - **verify_ssl** (_str_ _|_ _bool_ _|_ _ssl.SSLContext_)
   - **follow_redirects** (_bool_)
-  - **httpx_args** (_dict_ _[\*\*str_ _,_ _Any_ _]_)
+  - **httpx_args** (_dict_ _[__str_ _,_ _Any_ _]_)
 
 ### raise_on_unexpected_status
 
@@ -122,7 +122,7 @@ def with_cookies(cookies)
 Get a new client matching this one with additional cookies
 
 - **Parameters:**
-  **cookies** (_dict_ _[\*\*str_ _,_ _str_ _]_)
+  **cookies** (_dict_ _[__str_ _,_ _str_ _]_)
 - **Return type:**
   [_Client_](#client)
 
@@ -135,7 +135,7 @@ def with_headers(headers)
 Get a new client matching this one with additional headers
 
 - **Parameters:**
-  **headers** (_dict_ _[\*\*str_ _,_ _str_ _]_)
+  **headers** (_dict_ _[__str_ _,_ _str_ _]_)
 - **Return type:**
   [_Client_](#client)
 
@@ -186,12 +186,12 @@ The following are accepted as keyword arguments and will be used to construct ht
   - **prefix** (_str_)
   - **auth_header_name** (_str_)
   - **raise_on_unexpected_status** (_bool_)
-  - **cookies** (_dict_ _[\*\*str_ _,_ _str_ _]_)
-  - **headers** (_dict_ _[\*\*str_ _,_ _str_ _]_)
+  - **cookies** (_dict_ _[__str_ _,_ _str_ _]_)
+  - **headers** (_dict_ _[__str_ _,_ _str_ _]_)
   - **timeout** (_httpx.Timeout_ _|_ _None_)
   - **verify_ssl** (_str_ _|_ _bool_ _|_ _ssl.SSLContext_)
   - **follow_redirects** (_bool_)
-  - **httpx_args** (_dict_ _[\*\*str_ _,_ _Any_ _]_)
+  - **httpx_args** (_dict_ _[__str_ _,_ _Any_ _]_)
 
 ### raise_on_unexpected_status
 
@@ -308,7 +308,7 @@ def with_cookies(cookies)
 Get a new client matching this one with additional cookies
 
 - **Parameters:**
-  **cookies** (_dict_ _[\*\*str_ _,_ _str_ _]_)
+  **cookies** (_dict_ _[__str_ _,_ _str_ _]_)
 - **Return type:**
   [_AuthenticatedClient_](#authenticatedclient)
 
@@ -321,7 +321,7 @@ def with_headers(headers)
 Get a new client matching this one with additional headers
 
 - **Parameters:**
-  **headers** (_dict_ _[\*\*str_ _,_ _str_ _]_)
+  **headers** (_dict_ _[__str_ _,_ _str_ _]_)
 - **Return type:**
   [_AuthenticatedClient_](#authenticatedclient)
 

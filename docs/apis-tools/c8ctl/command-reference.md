@@ -40,6 +40,7 @@ These flags are accepted by every command.
 | `ut` | `user-task` |
 | `vars` | `variable` |
 | `var` | `variable` |
+| `ws` | `wait-state` |
 
 ## Search Flags
 
@@ -225,7 +226,7 @@ c8ctl list users                                            # List users
 
 Search resources with filters (wildcards, date ranges, case-insensitive)
 
-**Resources:** pi (process-instance), pd (process-definition), ut (user-task), inc (incident), jobs, vars (variable), users (user), roles (role), groups (group), tenants (tenant), auth (authorization), mapping-rules (mapping-rule)
+**Resources:** pi (process-instance), pd (process-definition), ut (user-task), inc (incident), jobs, vars (variable), users (user), roles (role), groups (group), tenants (tenant), auth (authorization), mapping-rules (mapping-rule), wait-state
 
 **Resource-specific flags:**
 
@@ -385,6 +386,20 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 
 </details>
 
+<details>
+<summary><code>wait-state</code> (<code>ws</code>)</summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--processInstanceKey` / `-k` | string |  | Filter by process instance key |
+| `--rootProcessInstanceKey` / `-r` | string |  | Filter by root process instance key |
+| `--elementInstanceKey` / `-e` | string |  | Filter by element instance key |
+| `--elementId` | string |  | Filter by element ID (supports wildcards, e.g. `*Task*`) |
+| `--elementType` | string |  | Filter by BPMN element type (e.g. SERVICE_TASK, USER_TASK, CALL_ACTIVITY) |
+| `--waitStateType` | string |  | Filter by wait state type (JOB, MESSAGE, TIMER, CONDITION, USER_TASK, SIGNAL) |
+
+</details>
+
 **Examples:**
 
 ```bash
@@ -400,6 +415,8 @@ c8ctl search variables --value=foo                          # Search for variabl
 c8ctl search variables --processInstanceKey=123 --fullValue  # Search variables with full values
 c8ctl search pd --iname='*order*'                           # Case-insensitive search by name
 c8ctl search ut --iassignee=John                            # Case-insensitive search by assignee
+c8ctl search ws --waitStateType=JOB                         # Search wait states of type JOB
+c8ctl search ws --elementType=SERVICE_TASK                  # Search wait states on service tasks
 ```
 
 ---
@@ -629,6 +646,33 @@ Mark a job as failed with optional error message and retry count
 
 ---
 
+### `update`
+
+Update the retries or timeout of a job. At least one of --retries or --timeout must be provided.
+
+**Resources:** job
+
+**Positional arguments:**
+
+- **job:** `<key>` (required)
+
+**Flags:**
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--retries` | string |  | New number of retries for the job |
+| `--timeout` | string |  | New job timeout in milliseconds |
+| `--operationReference` | string |  | Optional operation reference (long integer) |
+
+**Examples:**
+
+```bash
+c8ctl update job 12345 --retries 3                          # Set the retry count for a job
+c8ctl update job 12345 --timeout 60000                      # Set the job timeout to 60 seconds
+```
+
+---
+
 ### `activate`
 
 Activate jobs of a specific type for processing
@@ -646,6 +690,7 @@ Activate jobs of a specific type for processing
 | `--maxJobsToActivate` | string |  | Maximum number of jobs to activate |
 | `--timeout` | string |  | Job timeout in milliseconds |
 | `--worker` | string |  | Worker name |
+| `--customHeaders` | boolean |  | Include custom headers in output |
 
 ---
 

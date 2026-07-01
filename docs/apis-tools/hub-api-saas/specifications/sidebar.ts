@@ -4,7 +4,7 @@ const sidebar: SidebarsConfig = {
   apisidebar: [
     {
       type: "doc",
-      id: "apis-tools/hub-api-saas/specifications/hub-public-api-v-2",
+      id: "apis-tools/hub-api-saas/specifications/hub-api",
     },
     {
       type: "category",
@@ -20,6 +20,36 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/hub-api-saas/specifications/delete-catalog-asset",
           label: "Delete a catalog asset",
+          className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Cluster",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-clusters",
+          label: "Get all clusters",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/create-cluster",
+          label: "Create or update a cluster",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/get-cluster-usage-metrics",
+          label: "Get cluster usage metrics",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/delete-cluster",
+          label: "Delete a cluster",
           className: "api-method delete",
         },
       ],
@@ -218,24 +248,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Collaborator",
+      label: "Member",
       items: [
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/add-collaborator",
-          label: "Add or update a collaborator",
+          id: "apis-tools/hub-api-saas/specifications/add-member",
+          label: "Add or update a member",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/remove-collaborator",
-          label: "Remove a collaborator",
+          id: "apis-tools/hub-api-saas/specifications/remove-member",
+          label: "Remove a member",
           className: "api-method delete",
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/search-collaborators",
-          label: "Search collaborators",
+          id: "apis-tools/hub-api-saas/specifications/search-members",
+          label: "Search members",
           className: "api-method post",
         },
       ],

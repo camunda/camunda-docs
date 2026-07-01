@@ -772,6 +772,13 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "batch-operation.ts",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
   "deleteProcessInstance": [
     {
       "file": "extended-operations.ts",

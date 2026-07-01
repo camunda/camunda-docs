@@ -10,7 +10,7 @@ description: "Get diagnostics and logs from a Helm chart deployment."
 This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. The script collects all relevant information (including pod logs, events, and resource details) into a single directory, and outputs it in a .zip file to make it easier to share this information with the Camunda Support team.
 
 :::caution Data privacy notice
-Before sharing the generated diagnostics file with Camunda Support, review and remove any sensitive information such as passwords, API keys, personal data, or business-sensitive data from the collected logs and configuration data.
+Before sharing the generated diagnostics file with Camunda Support, review and remove any sensitive information such as passwords, API keys, personal data, or business-sensitive data from the collected logs and configuration data. This includes the collected actuator outputs: the `configprops` endpoint masks credential-like values, but connection URLs, hostnames, and bucket names are not redacted.
 :::
 
 ### What the script collects
@@ -23,6 +23,8 @@ The script outputs the following data from your namespace and creates a zip file
 - **Cluster Nodes**: Node descriptions.
 - **Network Resources**: Services, endpoints, and ingresses.
 - **Configuration**: Config map information.
+- **Actuator endpoints**: Read-only Zeebe and Spring Boot actuator outputs from Camunda pods (partition status, cluster topology, exporters, flow control, job streams, backup state, Prometheus metrics, and configuration properties).
+- **Database indices**: The Elasticsearch/OpenSearch index list (`_cat/indices`), when the datastore is deployed in the same namespace and reachable without TLS/authentication.
 
 ### Usage
 
@@ -145,6 +147,27 @@ for pod in $(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":me
   kubectl describe pod -n "$namespace" "$pod" > "describe-$pod.log" 2>/dev/null
 done
 
+echo "  - Collecting java threaddumps ..."
+for pod in $(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":metadata.name"); do
+  if ! kubectl exec -n "$namespace" "$pod" -- which java > /dev/null 2>&1; then
+    echo "    - Skipping pod: $pod as java not installed"
+    continue
+  fi
+  if ! kubectl exec -n "$namespace" "$pod" -- which jattach > /dev/null 2>&1; then
+    echo "    - Skipping pod: $pod as jattach not installed"
+    continue
+  fi
+  if ! kubectl exec -n "$namespace" "$pod" -- which pgrep > /dev/null 2>&1; then
+    echo "    - Skipping pod: $pod as pgrep not installed"
+    continue
+  fi
+  java_pids=$(kubectl exec -n "$namespace" "$pod" -- pgrep java 2> /dev/null)
+  for java_pid in $java_pids; do
+    echo "    - Collecting threaddump from pod: ${pod}, java process: ${java_pid}"
+    kubectl exec -n "$namespace" "$pod" -- jattach $java_pid threaddump > "${pod}-pid-${java_pid}.jstack" 2>/dev/null
+  done
+done
+
 # Collect Helm resources
 echo "  - Collecting information via Helm..."
 release_name=`helm list -n "$namespace" --no-headers -q` 2>/dev/null
@@ -154,6 +177,124 @@ else
   helm version > helm-version.txt
   helm history -n "$namespace" "$release_name" > helm-history.txt
   helm get values -n "$namespace" "$release_name" > helm-values.yaml
+fi
+
+# Collect read-only actuator endpoints from Camunda pods
+echo "  - Collecting actuator endpoints from Camunda pods..."
+if ! command -v curl > /dev/null 2>&1; then
+  echo "    INFO: 'curl' not found in PATH; skipping actuator collection. Install \"curl\", make it available in the PATH and re-run the script to include actuator data."
+  # Leave a breadcrumb in the archive so Support can tell this newer script ran but curl was
+  # missing, rather than the actuator data being a partial or failed collection.
+  printf '%s\n' \
+    "Actuator collection was attempted but skipped: the 'curl' command was not found in the PATH" \
+    "on the machine that ran this script." \
+    "" \
+    "As a result, no '<pod>-actuator-*' files are included in this archive. This is not a partial" \
+    "or failed collection of actuator data - it was not attempted at all. There is no need to" \
+    "re-run the script for this reason unless the actuator outputs are specifically required;" \
+    "in that case, install \"curl\", make it available in the PATH, and run the script again." \
+    > actuator-collection-skipped.txt
+else
+  # The management endpoint defaults to port 9600 on Camunda orchestration-cluster / Zeebe pods.
+  # We port-forward it per pod (no in-pod tooling required) and collect only read-only GET endpoints.
+  # The custom Zeebe actuators exist only on broker/gateway pods; "prometheus" and "configprops"
+  # exist on all Camunda Spring Boot components. Mutating endpoints (exporting, banning, rebalance,
+  # backup take/delete, and the cluster/exporters/partitions write operations) are intentionally
+  # NOT collected, as they would change cluster state.
+  management_port=9600
+  actuators="partitions:json cluster:json exporters:json flowControl:json jobstreams:json backupRuntime/state:json prometheus:txt configprops:json"
+
+  # Only Camunda components expose actuators, so restrict the loop to them via the chart label.
+  # Fall back to all pods if the label is absent (e.g. a non-Helm install).
+  actuator_pods=$(kubectl get pod -n "$namespace" -l app.kubernetes.io/part-of=camunda-platform --no-headers -o custom-columns=":metadata.name" 2>/dev/null)
+  if [[ -z "$actuator_pods" ]]; then
+    actuator_pods=$(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":metadata.name")
+  fi
+
+  # Make sure any port-forward we start is torn down, even on Ctrl-C or an error.
+  pf_pid=""
+  pf_log=""
+  cleanup_port_forward() {
+    [[ -n "$pf_pid" ]] && kill "$pf_pid" 2>/dev/null
+    [[ -n "$pf_pid" ]] && wait "$pf_pid" 2>/dev/null
+    [[ -n "$pf_log" ]] && rm -f "$pf_log"
+    pf_pid=""
+    pf_log=""
+  }
+  trap cleanup_port_forward EXIT INT TERM
+
+  for pod in $actuator_pods; do
+    # Open a port-forward on an ephemeral local port chosen by kubectl (no clash with bound ports).
+    # kubectl can fail to establish the tunnel transiently, so retry a few times; a pod that never
+    # establishes is skipped after the attempts and the rest of the run continues.
+    local_port=""
+    attempt=0
+    while [[ -z "$local_port" && "$attempt" -lt 3 ]]; do
+      attempt=$((attempt + 1))
+      # mktemp without a template is not portable (fails on macOS), so fall back progressively.
+      pf_log=$(mktemp 2>/dev/null || mktemp -t camunda-diag 2>/dev/null || echo "./.actuator-pf.$$.${attempt}")
+      kubectl port-forward -n "$namespace" "$pod" ":${management_port}" > "$pf_log" 2>&1 &
+      pf_pid=$!
+      # Wait until the tunnel is established (kubectl prints the chosen port), or give up early if
+      # the forward dies first (e.g. the pod does not expose the management port).
+      for _ in $(seq 1 10); do
+        local_port=$(sed -n 's/.*Forwarding from 127.0.0.1:\([0-9]*\) ->.*/\1/p' "$pf_log" | head -1)
+        [[ -n "$local_port" ]] && break
+        kill -0 "$pf_pid" 2>/dev/null || break
+        sleep 1
+      done
+      [[ -z "$local_port" ]] && cleanup_port_forward
+    done
+
+    if [[ -n "$local_port" ]]; then
+      collected=""
+      for entry in $actuators; do
+        actuator_path="${entry%%:*}"
+        ext="${entry##*:}"
+        name=$(echo "$actuator_path" | tr '/' '-')
+        if curl -sf -m 10 "http://localhost:${local_port}/actuator/${actuator_path}" -o "${pod}-actuator-${name}.${ext}" 2>/dev/null; then
+          collected="${collected} ${name}"
+        fi
+      done
+      if [[ -n "$collected" ]]; then
+        echo "    - Collected actuators from pod ${pod}:${collected}"
+      fi
+      cleanup_port_forward
+    fi
+  done
+
+  # Collect the Elasticsearch/OpenSearch index list. It is cluster-wide, so the first reachable
+  # node is enough. Secured datastores (TLS/auth) are skipped here and must be collected manually.
+  es_port=9200
+  es_pods=$(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":metadata.name" 2>/dev/null | grep -iE 'elasticsearch|opensearch' || true)
+  for pod in $es_pods; do
+    local_port=""
+    attempt=0
+    while [[ -z "$local_port" && "$attempt" -lt 3 ]]; do
+      attempt=$((attempt + 1))
+      pf_log=$(mktemp 2>/dev/null || mktemp -t camunda-diag 2>/dev/null || echo "./.es-pf.$$.${attempt}")
+      kubectl port-forward -n "$namespace" "$pod" ":${es_port}" > "$pf_log" 2>&1 &
+      pf_pid=$!
+      for _ in $(seq 1 10); do
+        local_port=$(sed -n 's/.*Forwarding from 127.0.0.1:\([0-9]*\) ->.*/\1/p' "$pf_log" | head -1)
+        [[ -n "$local_port" ]] && break
+        kill -0 "$pf_pid" 2>/dev/null || break
+        sleep 1
+      done
+      [[ -z "$local_port" ]] && cleanup_port_forward
+    done
+
+    if [[ -n "$local_port" ]]; then
+      if curl -sf -m 10 "http://localhost:${local_port}/_cat/indices?v" -o "${pod}-cat-indices.txt" 2>/dev/null; then
+        echo "    - Collected _cat/indices from pod ${pod}"
+        cleanup_port_forward
+        break
+      fi
+      cleanup_port_forward
+    fi
+  done
+
+  trap - EXIT INT TERM
 fi
 
 echo "All logs and descriptions collected."

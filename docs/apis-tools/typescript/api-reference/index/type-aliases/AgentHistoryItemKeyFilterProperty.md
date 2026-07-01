@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type AgentHistoryItemKeyFilterProperty =
-  | AgentHistoryItemKeyExactMatch
-  | AdvancedAgentHistoryItemKeyFilter;
+  AgentHistoryItemKeyExactMatch | AdvancedAgentHistoryItemKeyFilter;
 ```
 
 AgentHistoryItemKey property with full advanced search capabilities.
