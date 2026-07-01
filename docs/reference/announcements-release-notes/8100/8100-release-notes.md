@@ -61,7 +61,7 @@ The following Docker images will no longer be produced for Camunda 8.10 and Camu
 - [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
 
 
-Please use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda)  Docker image instead.
+Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
 
 ## 8.10.0-alpha2
 
