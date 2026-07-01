@@ -411,7 +411,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ```
 
 :::note Web Modeler SMTP secret
-If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/hub/configuration/modeler-configuration.md#smtp--email)):
+If you plan to enable Web Modeler, create the SMTP secret required for email notifications ([see how it's used by Web Modeler](/self-managed/components/hub/configuration/properties.md#smtp--email)):
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/create-webmodeler-secret.sh

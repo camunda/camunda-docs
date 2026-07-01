@@ -232,7 +232,7 @@ An instruction to assert the evaluation of a decision. See the [assertions docum
   </tr>
   <tr>
     <td>output</td>
-    <td>Expected output of the decision (any JSON type)</td>
+    <td>Expected output of the decision. Can be any JSON type.</td>
     <td>any</td>
     <td>No</td>
     <td></td>
@@ -643,6 +643,12 @@ An instruction to assert a single variable of a process instance. See the [asser
     <td>Yes</td>
   </tr>
   <tr>
+    <td>satisfiesExpression</td>
+    <td>A FEEL expression assertion that must evaluate to <code>true</code> for the given variable.</td>
+    <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
     <td>satisfiesJudge</td>
     <td>An LLM judge assertion that evaluates the variable against a semantic expectation.</td>
     <td><a href="#judge-assertion">JudgeAssertion</a></td>
@@ -655,6 +661,19 @@ An instruction to assert a single variable of a process instance. See the [asser
     <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "type": "ASSERT_VARIABLE",
+  "processInstanceSelector": {
+    "processDefinitionId": "MoonExplorationProcess"
+  },
+  "variableName": "mission",
+  "satisfiesExpression": "mission.status = \"completed\" and list contains(mission.astronauts, \"Zee\")"
+}
+```
 
 #### Judge Assertion
 
@@ -683,6 +702,12 @@ An LLM-as-judge assertion that evaluates a variable against a semantic expectati
     <td>customPrompt</td>
     <td>A custom prompt for the judge evaluation. Overrides the configured custom prompt.</td>
     <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>attachDocuments</td>
+    <td>When true, resolves Camunda document references in the variable value and attaches their content to the judge. Overrides the configured <code>judge.attach-documents</code> setting. To evaluate attached content, use a multimodal-capable model; otherwise, CPT evaluates only the raw variable JSON.</td>
+    <td>boolean</td>
     <td>No</td>
   </tr>
 </tbody></table>
@@ -1629,8 +1654,15 @@ An instruction to mock a DMN decision. See the [utilities documentation](utiliti
   </tr>
   <tr>
     <td>variables</td>
-    <td>The variables to set as the decision output.</td>
+    <td>The variables to set as the decision output. Deprecated, use <code>decisionOutput</code>.</td>
     <td>object</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>decisionOutput</td>
+    <td>The decision output to mock. Can be any JSON type.</td>
+    <td>any</td>
     <td>No</td>
     <td></td>
   </tr>
@@ -1642,9 +1674,7 @@ Example:
 {
   "type": "MOCK_DMN_DECISION",
   "decisionDefinitionId": "ChooseRocket",
-  "variables": {
-    "rocket": "Falcon Heavy"
-  }
+  "decisionOutput": "Falcon Heavy"
 }
 ```
 

@@ -90,7 +90,11 @@ The workflow engine itself will store data along every process instance, especia
 Furthermore, data is also sent from Operate and Optimize, which store data in Elasticsearch. These tools keep historical audit data for the configured retention times. The total amount of disk space can be reduced by using **data retention settings**. We typically delete data in Operate after 30 to 90 days, but keep it in Optimize for a longer period of time to allow more analysis. A good rule of thumb is something between 6 and 18 months.
 
 :::note
-Elasticsearch needs enough memory available to load a large amount of this data into memory.
+Elasticsearch needs enough memory available to load a large amount of this data into memory. Also use SSD-backed storage — disk **latency**, not throughput, is the critical factor. In testing, HDD-backed Elasticsearch caused multi-second flush durations, a persistent export backlog, and significant overall throughput degradation. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
+:::
+
+:::note Use SSDs for Zeebe (primary storage)
+Use SSD-backed storage for Zeebe (your primary storage). Every command is written and flushed to the Zeebe Raft log before it is processed: the leader must persist the entry and followers must flush it before acknowledging, so disk write and flush **latency** sits directly on the processing critical path. As with Elasticsearch, the critical factor is latency, not throughput — cloud-provider throughput figures often look similar for HDD and SSD, which is misleading. In testing, HDD-backed primary storage degraded throughput by roughly 50%, raised commit latency, and triggered additional Raft snapshot replication. Provision performant, low-latency (single-digit-millisecond write latency) disks for Zeebe. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
 :::
 
 Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json), Camunda measured the following approximate disk space requirements using Camunda 8 SaaS 1.2.4. These are not exact numbers, but they can help you estimate what to expect:

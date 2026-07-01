@@ -280,6 +280,10 @@ Within the FEEL expression, you access the following temporary variables:
 - The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code
   is only available if the connector's runtime behavior provided a code in the exception it threw.
 
+:::info
+If a **Result Variable** or **Result Expression** is configured on the connector task, the raw connector response is **not** available as `response` in the error expression. Instead, `response` contains only the mapped output variables. Reference those variables by name (for example, `myVar.status`) rather than using `response.body`.
+:::
+
 Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on
 technical exceptions thrown by a connector as well as regular results returned by the external system you integrated.
 The [example expressions](#bpmn-error-examples) below can serve as templates for such scenarios.

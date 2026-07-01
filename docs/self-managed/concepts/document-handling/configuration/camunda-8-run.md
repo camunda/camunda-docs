@@ -13,11 +13,17 @@ import TabItem from "@theme/TabItem";
 [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) can be used for local development only, and none of the storage options below are suitable for production.
 :::
 
-If no storage configuration is provided, the default document storage is **in-memory**. It means that documents will be lost when the application is stopped.
+Document Store configuration uses the unified `camunda.document.*` Spring property model. The sections below show the new configuration format. If you're migrating from legacy `DOCUMENT_*` environment variables, see [property mapping reference](#property-mapping-reference).
 
-To change this to a different storage method, use the environment variables in the sections below. No additional configuration is required for the **in-memory** storage.
+Provide these properties in an `application.yaml` file. For example, set `camunda.document.default-store-id` to specify the active store.
 
-To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `inmemory`, `gcp` (for Google Cloud Platform), `azure` (for Azure Blob Storage), and `local` (for local storage).
+If no storage configuration is provided, the default document storage is **in-memory**. Documents are lost when the application is stopped.
+
+:::warning Deprecated: `DOCUMENT_*` and `DOCUMENT_STORE_*` environment variables
+
+The legacy `DOCUMENT_*` and `DOCUMENT_STORE_*` environment variables (for example, `DOCUMENT_STORE_AWS_BUCKET`, `DOCUMENT_DEFAULT_STORE_ID`) are deprecated. They continue to work for at least one release cycle via a backward compatibility bridge, but will be removed in a future release. When both the unified `camunda.document.*` properties and the legacy environment variables are set, `camunda.document.*` takes precedence.
+
+:::
 
 ## Storage options
 
@@ -34,42 +40,45 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 
 By using **external cloud file bucket storage** with [**AWS S3**](https://aws.amazon.com/s3/), documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management.
 
-| Credentials variable    | Required | Description                                                                                           |
-| ----------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | Yes      | Access key ID used to interact with AWS S3 buckets.                                                   |
-| `AWS_SECRET_ACCESS_KEY` | Yes      | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
-| `AWS_REGION`            | Yes      | Region where the bucket is.                                                                           |
+```yaml
+camunda:
+  document:
+    default-store-id: aws1 # the instance ID defined below
+    aws:
+      aws1: # store instance ID — must match default-store-id
+        bucket-name: my-bucket
+        bucket-path: documents/ # optional
+        bucket-ttl: 30 # optional, days
+```
 
-| Store variable                   | Required | Description                                                                                                                                                                                                                                               |
-| -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_AWS_BUCKET`      | Yes      | Specifies the name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                       |
-| `DOCUMENT_STORE_AWS_CLASS`       | Yes      | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                                                                                    |
-| `DOCUMENT_STORE_AWS_BUCKET_PATH` | No       | Defines the folder-like path within the S3 bucket where documents are stored. This helps organize files within the bucket. For example, `documents/invoices`. If not provided, the application logic assumes a default value of `""`.                     |
-| `DOCUMENT_STORE_AWS_BUCKET_TTL`  | No       | Represents the time-to-live (TTL) for documents stored in the S3 bucket. This could be used to set an expiration policy, meaning documents will be deleted automatically after a specified duration. If not provided, the application logic ignores this. |
+| Property                                | Required | Description                                              |
+| --------------------------------------- | -------- | -------------------------------------------------------- |
+| `camunda.document.aws.<id>.bucket-name` | Yes      | Name of the AWS S3 bucket where documents are stored.    |
+| `camunda.document.aws.<id>.bucket-path` | No       | Folder-like path within the S3 bucket. Defaults to `""`. |
+| `camunda.document.aws.<id>.bucket-ttl`  | No       | Time-to-live for documents in the bucket, in days.       |
+| `camunda.document.default-store-id`     | Yes      | Instance ID of the store to use as the default.          |
+| `camunda.document.thread-pool-size`     | No       | Number of threads in the document store thread pool.     |
 
-**Example:**
+<details>
+<summary>Deprecated: legacy environment variable equivalents</summary>
 
 ```
-AWS_ACCESS_KEY_ID=AWSACCESSKEYID
-AWS_REGION=eu-north-1
-AWS_SECRET_ACCESS_KEY=AWSSECRETACCESSKEYGOESHERE
-DOCUMENT_STORE_AWS_BUCKET=test-bucket
-DOCUMENT_STORE_AWS_BUCKET_PATH=test/path
-DOCUMENT_STORE_AWS_BUCKET_TTL=5
 DOCUMENT_STORE_AWS_CLASS=io.camunda.document.store.aws.AwsDocumentStoreProvider
+DOCUMENT_STORE_AWS_BUCKET=my-bucket
+DOCUMENT_STORE_AWS_BUCKET_PATH=documents/
+DOCUMENT_STORE_AWS_BUCKET_TTL=30
 DOCUMENT_DEFAULT_STORE_ID=aws
 ```
 
-## AWS API client permission requirements
+</details>
 
-To ensure seamless integration and functionality of document handling with AWS services, the API client utilized must be configured with the appropriate permissions. The following AWS Identity and Access Management (IAM) permissions are necessary for the execution of operations related to document handling:
+AWS SDK credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`) are resolved by the AWS SDK directly and are not part of `camunda.document.*`. Set them as environment variables as before.
 
-| Permission        | Description                                                                                                                                                                                                                     |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `s3:DeleteObject` | This permission authorizes the API client to remove objects from the specified S3 bucket.                                                                                                                                       |
-| `s3:GetObject`    | This permission is required to retrieve contents and metadata of objects from Amazon S3. The API client will utilize this permission to download or access the contents of the documents that have been uploaded to the bucket. |
-| `s3:ListBucket`   | This permission allows the application to verify it has access to the specified S3 bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up.               |
-| `s3:PutObject`    | To upload documents to an Amazon S3 bucket, the API client must have this permission.                                                                                                                                           |
+| Credentials variable    | Required | Description                                                                          |
+| ----------------------- | -------- | ------------------------------------------------------------------------------------ |
+| `AWS_ACCESS_KEY_ID`     | Yes      | Access key ID used to interact with AWS S3 buckets.                                  |
+| `AWS_SECRET_ACCESS_KEY` | Yes      | The AWS secret access key associated with `AWS_ACCESS_KEY_ID`, used to authenticate. |
+| `AWS_REGION`            | Yes      | Region where the bucket is.                                                          |
 
 </TabItem>
 
@@ -77,36 +86,38 @@ To ensure seamless integration and functionality of document handling with AWS s
 
 By using **external cloud file bucket storage** with [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage), documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management.
 
-| Credentials variable             | Required | Description                                                                                                             |
-| -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `GOOGLE_APPLICATION_CREDENTIALS` | Yes      | Specifies the file path to a JSON key file that contains authentication credentials for a Google Cloud service account. |
+```yaml
+camunda:
+  document:
+    default-store-id: gcp1 # the instance ID defined below
+    gcp:
+      gcp1: # store instance ID — must match default-store-id
+        bucket-name: my-gcp-bucket
+        prefix: documents/ # optional
+```
 
-| Store variable              | Required | Description                                                                     |
-| --------------------------- | -------- | ------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_GCP_BUCKET` | Yes      | Defines the name of the Google Cloud Storage bucket where documents are stored. |
-| `DOCUMENT_STORE_GCP_CLASS`  | Yes      | io.camunda.document.store.gcp.GcpDocumentStoreProvider                          |
+| Property                                | Required | Description                                                         |
+| --------------------------------------- | -------- | ------------------------------------------------------------------- |
+| `camunda.document.gcp.<id>.bucket-name` | Yes      | Name of the Google Cloud Storage bucket where documents are stored. |
+| `camunda.document.gcp.<id>.prefix`      | No       | Folder-like prefix within the GCS bucket.                           |
+| `camunda.document.default-store-id`     | Yes      | Instance ID of the store to use as the default.                     |
 
-**Example:**
+<details>
+<summary>Deprecated: legacy environment variable equivalents</summary>
 
 ```
 DOCUMENT_STORE_GCP_CLASS=io.camunda.document.store.gcp.GcpDocumentStoreProvider
-DOCUMENT_STORE_GCP_BUCKET=test-bucket
+DOCUMENT_STORE_GCP_BUCKET=my-gcp-bucket
 DOCUMENT_DEFAULT_STORE_ID=gcp
-GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json
 ```
 
-## GCP API client permission requirements
+</details>
 
-To ensure seamless integration and functionality of document handling with GCP services, the API client utilized must be configured with the appropriate permissions. The following permissions are necessary for the execution of operations related to document handling:
+The GCP credential variable (`GOOGLE_APPLICATION_CREDENTIALS`) is resolved by the GCP SDK directly and is not part of `camunda.document.*`. Set it as an environment variable as before.
 
-| Permission                     | Description                                                                                                                                                                                                    |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `storage.buckets.get`          | This permission allows the application to verify it has access to the specified bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up. |
-| `storage.objects.get`          | This permission allows the API client to retrieve objects from Google Cloud Storage. It is vital for downloading or accessing the contents of stored objects.                                                  |
-| `storage.objects.create`       | With this permission, the API client can upload new objects to a bucket. It is essential for adding new documents to the storage.                                                                              |
-| `storage.objects.update`       | This permission enables the API client to update contents and metadata of existing objects within a bucket.                                                                                                    |
-| `storage.objects.delete`       | This permission grants the API client the ability to delete objects from a bucket.                                                                                                                             |
-| `iam.serviceAccounts.signBlob` | This permission allows the service account to sign data as part of the process to create secure, signed URLs for accessing uploaded documents.                                                                 |
+| Credentials variable             | Required | Description                                                                                                             |
+| -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `GOOGLE_APPLICATION_CREDENTIALS` | Yes      | Specifies the file path to a JSON key file that contains authentication credentials for a Google Cloud service account. |
 
 </TabItem>
 
@@ -122,15 +133,44 @@ Azure Blob Storage supports two authentication methods: connection string and De
 - For connection string authentication: The connection string from the Azure portal (**Settings > Access keys**).
 - For Managed Identity/DefaultAzureCredential authentication: The `Storage Blob Data Contributor` RBAC role assigned on the storage account.
 
-| Store variable                           | Required    | Description                                                                                                                             |
-| ---------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_AZURE_CLASS`             | Yes         | `io.camunda.document.store.azure.AzureBlobDocumentStoreProvider`                                                                        |
-| `DOCUMENT_STORE_AZURE_CONTAINER`         | Yes         | Name of the Azure Blob Storage container.                                                                                               |
-| `DOCUMENT_STORE_AZURE_CONNECTION_STRING` | Conditional | Azure Storage connection string. Required unless using DefaultAzureCredential.                                                          |
-| `DOCUMENT_STORE_AZURE_ENDPOINT`          | Conditional | Storage account endpoint (e.g. `https://myaccount.blob.core.windows.net`). Required when using DefaultAzureCredential/Managed Identity. |
-| `DOCUMENT_STORE_AZURE_CONTAINER_PATH`    | No          | Optional path/prefix within the container.                                                                                              |
-
 **Example (connection string):**
+
+```yaml
+camunda:
+  document:
+    default-store-id: az1 # the instance ID defined below
+    azure:
+      az1: # store instance ID — must match default-store-id
+        container-name: my-container
+        connection-string: "DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=...;EndpointSuffix=core.windows.net"
+        container-path: documents/ # optional
+```
+
+**Example (DefaultAzureCredential/Managed Identity):**
+
+```yaml
+camunda:
+  document:
+    default-store-id: az1 # the instance ID defined below
+    azure:
+      az1: # store instance ID — must match default-store-id
+        container-name: my-container
+        endpoint: "https://myaccount.blob.core.windows.net"
+        container-path: documents/ # optional
+```
+
+| Property                                        | Required    | Description                                                                                                                                     |
+| ----------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.azure.<id>.container-name`    | Yes         | Name of the Azure Blob Storage container.                                                                                                       |
+| `camunda.document.azure.<id>.connection-string` | Conditional | Azure Storage connection string. Required unless using DefaultAzureCredential.                                                                  |
+| `camunda.document.azure.<id>.endpoint`          | Conditional | Storage account endpoint (for example, `https://myaccount.blob.core.windows.net`). Required when using DefaultAzureCredential/Managed Identity. |
+| `camunda.document.azure.<id>.container-path`    | No          | Optional path/prefix within the container.                                                                                                      |
+| `camunda.document.default-store-id`             | Yes         | Instance ID of the store to use as the default.                                                                                                 |
+
+<details>
+<summary>Deprecated: legacy environment variable equivalents</summary>
+
+Connection string:
 
 ```
 DOCUMENT_STORE_AZURE_CLASS=io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
@@ -139,7 +179,7 @@ DOCUMENT_STORE_AZURE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountNam
 DOCUMENT_DEFAULT_STORE_ID=azure
 ```
 
-**Example (DefaultAzureCredential/Managed Identity):**
+DefaultAzureCredential/Managed Identity:
 
 ```
 DOCUMENT_STORE_AZURE_CLASS=io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
@@ -148,9 +188,7 @@ DOCUMENT_STORE_AZURE_ENDPOINT=https://myaccount.blob.core.windows.net
 DOCUMENT_DEFAULT_STORE_ID=azure
 ```
 
-## Azure API client permission requirements
-
-To ensure seamless integration and functionality of document handling with Azure Blob Storage, the identity used must be assigned the `Storage Blob Data Contributor` RBAC role on the storage account.
+</details>
 
 </TabItem>
 
@@ -160,23 +198,30 @@ To ensure seamless integration and functionality of document handling with Azure
 
 In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
 
-If no configuration is provided for at least one storage type, and no `DOCUMENT_DEFAULT_STORE_ID` is set, in-memory is used as the default storage type. If the configuration for another storage type has been provided (`DOCUMENT_STORE_AWS_BUCKET`, `DOCUMENT_STORE_AWS_BUCKET_PATH`, etc.), in-memory storage must be set explicitly to be used.
+In-memory is the default when no storage configuration is provided. To use in-memory explicitly when other stores are also configured:
 
-To use the in-memory store when an alternate configuration has been provided, take the following steps:
+```yaml
+camunda:
+  document:
+    default-store-id: inmemory1 # the instance ID defined below
+    in-memory:
+      inmemory1: {} # store instance ID — must match default-store-id
+```
 
-1. Set `DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`.
-2. Set `DOCUMENT_DEFAULT_STORE_ID=inmemory`.
+| Property                            | Required | Description                                                                 |
+| ----------------------------------- | -------- | --------------------------------------------------------------------------- |
+| `camunda.document.in-memory.<id>`   | Yes      | Declares an in-memory store instance. The value is an empty mapping (`{}`). |
+| `camunda.document.default-store-id` | Yes      | Instance ID of the store to use as the default.                             |
 
-| Store variable                  | Required | Description                                                                                                                              |
-| ------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_INMEMORY_CLASS` | Yes      | The class for instantiating the in-memory store. This must always be `io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`. |
-
-**Example:**
+<details>
+<summary>Deprecated: legacy environment variable equivalents</summary>
 
 ```
 DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider
 DOCUMENT_DEFAULT_STORE_ID=inmemory
 ```
+
+</details>
 
 </TabItem>
 
@@ -186,19 +231,126 @@ DOCUMENT_DEFAULT_STORE_ID=inmemory
 
 Local storage is not suitable for production use, as pods and file paths are not shared across components. This prevents components like Tasklist and Zeebe from accessing the same data. Files are stored locally, and their retention must be managed manually.
 
-| Store variable               | Required | Description                                                                                                                                 |
-| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_LOCAL_CLASS` | Yes      | The class for instantiating the local store. This must always be `io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider` |
-| `DOCUMENT_STORE_LOCAL_PATH`  | Yes      | The path to the directory which will host the uploaded files.                                                                               |
+```yaml
+camunda:
+  document:
+    default-store-id: local1 # the instance ID defined below
+    local:
+      local1: # store instance ID — must match default-store-id
+        path: /usr/local/camunda/documents
+```
 
-**Example:**
+| Property                            | Required | Description                                                                                                                                                    |
+| ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.local.<id>.path`  | Yes      | Path to the directory where uploaded files are stored. Use `/usr/local/camunda/documents` — it is pre-created with the right permissions for the process user. |
+| `camunda.document.default-store-id` | Yes      | Instance ID of the store to use as the default.                                                                                                                |
+
+<details>
+<summary>Deprecated: legacy environment variable equivalents</summary>
 
 ```
 DOCUMENT_STORE_LOCAL_CLASS=io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider
-DOCUMENT_STORE_LOCAL_PATH=/usr/local/camunda
+DOCUMENT_STORE_LOCAL_PATH=/usr/local/camunda/documents
 DOCUMENT_DEFAULT_STORE_ID=local
 ```
+
+</details>
 
 </TabItem>
 
 </Tabs>
+
+## API client permission requirements
+
+### AWS S3
+
+The API client must have the following AWS Identity and Access Management (IAM) permissions:
+
+| Permission        | Description                                                                                                                                                                                                                     |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `s3:DeleteObject` | This permission authorizes the API client to remove objects from the specified S3 bucket.                                                                                                                                       |
+| `s3:GetObject`    | This permission is required to retrieve contents and metadata of objects from Amazon S3. The API client will utilize this permission to download or access the contents of the documents that have been uploaded to the bucket. |
+| `s3:ListBucket`   | This permission allows the application to verify it has access to the specified S3 bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up.               |
+| `s3:PutObject`    | To upload documents to an Amazon S3 bucket, the API client must have this permission.                                                                                                                                           |
+
+### GCP
+
+The API client must have the following permissions:
+
+| Permission                     | Description                                                                                                                                                                                                    |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `storage.buckets.get`          | This permission allows the application to verify it has access to the specified bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up. |
+| `storage.objects.get`          | This permission allows the API client to retrieve objects from Google Cloud Storage. It is vital for downloading or accessing the contents of stored objects.                                                  |
+| `storage.objects.create`       | With this permission, the API client can upload new objects to a bucket. It is essential for adding new documents to the storage.                                                                              |
+| `storage.objects.update`       | This permission enables the API client to update contents and metadata of existing objects within a bucket.                                                                                                    |
+| `storage.objects.delete`       | This permission grants the API client the ability to delete objects from a bucket.                                                                                                                             |
+| `iam.serviceAccounts.signBlob` | This permission allows the service account to sign data as part of the process to create secure, signed URLs for accessing uploaded documents.                                                                 |
+
+### Azure Blob Storage
+
+To use document handling with Azure Blob Storage, assign the `Storage Blob Data Contributor` RBAC role to the identity on the storage account. This role grants the following permissions:
+
+| Permission                                                               | Description                      |
+| ------------------------------------------------------------------------ | -------------------------------- |
+| `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read`   | Read blob content and metadata.  |
+| `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write`  | Create or update blobs.          |
+| `Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete` | Delete blobs from the container. |
+
+## Property mapping reference
+
+Use this table to migrate from legacy `DOCUMENT_*` environment variables to the unified `camunda.document.*` properties.
+
+### Root-level
+
+| Legacy environment variable | Unified property                    |
+| --------------------------- | ----------------------------------- |
+| `DOCUMENT_DEFAULT_STORE_ID` | `camunda.document.default-store-id` |
+| `DOCUMENT_THREAD_POOL_SIZE` | `camunda.document.thread-pool-size` |
+
+### AWS S3
+
+| Legacy environment variable                             | Unified property                        |
+| ------------------------------------------------------- | --------------------------------------- |
+| `DOCUMENT_STORE_<id>_CLASS=...AwsDocumentStoreProvider` | Implicit — use the `aws` namespace      |
+| `DOCUMENT_STORE_<id>_BUCKET`                            | `camunda.document.aws.<id>.bucket-name` |
+| `DOCUMENT_STORE_<id>_BUCKET_PATH`                       | `camunda.document.aws.<id>.bucket-path` |
+| `DOCUMENT_STORE_<id>_BUCKET_TTL`                        | `camunda.document.aws.<id>.bucket-ttl`  |
+
+### GCP
+
+| Legacy environment variable                             | Unified property                        |
+| ------------------------------------------------------- | --------------------------------------- |
+| `DOCUMENT_STORE_<id>_CLASS=...GcpDocumentStoreProvider` | Implicit — use the `gcp` namespace      |
+| `DOCUMENT_STORE_<id>_BUCKET`                            | `camunda.document.gcp.<id>.bucket-name` |
+| `DOCUMENT_STORE_<id>_PREFIX`                            | `camunda.document.gcp.<id>.prefix`      |
+
+### Azure Blob
+
+| Legacy environment variable                                   | Unified property                                |
+| ------------------------------------------------------------- | ----------------------------------------------- |
+| `DOCUMENT_STORE_<id>_CLASS=...AzureBlobDocumentStoreProvider` | Implicit — use the `azure` namespace            |
+| `DOCUMENT_STORE_<id>_CONTAINER`                               | `camunda.document.azure.<id>.container-name`    |
+| `DOCUMENT_STORE_<id>_CONTAINER_PATH`                          | `camunda.document.azure.<id>.container-path`    |
+| `DOCUMENT_STORE_<id>_CONNECTION_STRING`                       | `camunda.document.azure.<id>.connection-string` |
+| `DOCUMENT_STORE_<id>_ENDPOINT`                                | `camunda.document.azure.<id>.endpoint`          |
+
+### Local storage
+
+| Legacy environment variable                                      | Unified property                     |
+| ---------------------------------------------------------------- | ------------------------------------ |
+| `DOCUMENT_STORE_<id>_CLASS=...LocalStorageDocumentStoreProvider` | Implicit — use the `local` namespace |
+| `DOCUMENT_STORE_<id>_PATH`                                       | `camunda.document.local.<id>.path`   |
+
+### In-memory
+
+| Legacy environment variable                                  | Unified property                         |
+| ------------------------------------------------------------ | ---------------------------------------- |
+| `DOCUMENT_STORE_<id>_CLASS=...InMemoryDocumentStoreProvider` | Implicit — use the `in-memory` namespace |
+
+## Startup validation
+
+The application validates the Document Store configuration at startup and fails with a clear error message in the following cases:
+
+- **Duplicate store IDs across namespaces**: Each store instance ID must be unique across all provider namespaces (`aws`, `gcp`, `azure`, `local`, `in-memory`).
+- **Missing required fields**: Required properties (for example, `bucket-name` for AWS or `container-name` for Azure) must be set.
+- **Unknown `default-store-id`**: The value of `camunda.document.default-store-id` must match a configured store instance ID.

@@ -11,7 +11,7 @@ mdx:
 type getIncidentConsistency = object;
 ```
 
-Management of eventual consistency \*
+Management of eventual consistency *
 
 ## Properties
 

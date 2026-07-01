@@ -6,9 +6,20 @@ description: "Learn more about storage configuration options for Helm setups."
 keywords: ["document handling", "document storage configuration"]
 ---
 
+This page covers two configuration approaches:
+
+- **Legacy approach (deprecated)**: `global.documentStore.*` in `values.yaml` — generates `DOCUMENT_*` environment variables. Still works via a backward compatibility bridge but will be removed in a future release.
+- **New approach (recommended)**: `extraConfiguration` with `camunda.document.*` Spring properties — the unified configuration model. See [using the unified configuration format](#using-the-unified-configuration-format).
+
+:::warning Deprecated: `DOCUMENT_*` and `DOCUMENT_STORE_*` environment variables
+
+The `global.documentStore.*` Helm values generate legacy `DOCUMENT_*` and `DOCUMENT_STORE_*` environment variables (for example, `DOCUMENT_STORE_AWS_BUCKET`, `DOCUMENT_DEFAULT_STORE_ID`). These are deprecated. They continue to work for at least one release cycle via a backward compatibility bridge, but will be removed in a future release. When both `camunda.document.*` properties and legacy environment variables are set, `camunda.document.*` takes precedence.
+
+:::
+
 Helm offers external cloud file bucket storage options (recommended for production use when deploying with Helm) and in-memory storage (not suitable for production use):
 
-- By using **external cloud file bucket storage options**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
+- By using **external cloud file bucket storage options**, documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
   - [**AWS S3**](https://aws.amazon.com/s3/)
   - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
@@ -19,7 +30,9 @@ If no storage configuration is provided, the default document storage is in-memo
 
 To change the storage to **Google Cloud Platform**, **AWS S3**, or **Azure Blob Storage**, update the `values.yaml` file with the storage configuration parameters.
 
-Below is an example of storage configuration. While this example mixes GCP, AWS, and in-memory, this example represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml). This example demonstrates the current default values and what they would need to change to enable the storage type of their preference.
+The following `values.yaml` example shows the legacy configuration format. It generates deprecated `DOCUMENT_*` environment variables that are bridged to `camunda.document.*` properties at runtime. This approach still works but is deprecated. To use the new unified format instead, see [using the unified configuration format](#using-the-unified-configuration-format).
+
+The example below represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml) and shows the fields you need to change to enable the storage type of your preference.
 
 :::note
 Azure Blob Storage configuration differs from AWS and GCP. Only the connection string secret is managed in `values.yaml` under `global.documentStore.type.azure`. All other Azure configuration (container name, class, endpoint, etc.) must be provided via [`extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md). See the [Azure Blob Storage configuration](#azure-blob-storage-configuration) section below for details.
@@ -35,6 +48,10 @@ global:
             aws:
                 ## @param global.documentStore.type.aws.enabled Enable AWS document store configuration.
                 enabled: false
+                ## @extra global.documentStore.type.aws.irsa IRSA (IAM Roles for Service Accounts) configuration for AWS authentication.
+                irsa:
+                  ## @param global.documentStore.type.aws.irsa.enabled When set to true, no AWS credentials are injected into pods, allowing IRSA to be used for authentication. When false (default), credentials are required via existingSecret or accessKeyId/secretAccessKey configuration.
+                  enabled: false
                 ## @param global.documentStore.type.aws.storeId Custom prefix for AWS. Default will generate env vars containing 'storeId' such as DOCUMENT_STORE_AWS_CLASS.
                 storeId: "AWS"
                 ## @param global.documentStore.type.aws.region AWS region for the S3 bucket. (example: us-east-1)
@@ -79,6 +96,86 @@ global:
                 class: "io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider"
 ```
 
+## Using the unified configuration format
+
+To adopt the new `camunda.document.*` model for any provider, disable the corresponding `global.documentStore.type.<provider>.enabled` flag and configure the store via `extraConfiguration`. This also enables advanced scenarios such as multiple named store instances.
+
+### AWS S3
+
+```yaml
+global:
+  documentStore:
+    activeStoreId: "aws1" # must match the store instance ID in extraConfiguration
+    type:
+      aws:
+        enabled: false # disable legacy env var generation
+        existingSecret: "aws-credentials"
+        accessKeyIdKey: "awsAccessKeyId"
+        secretAccessKeyKey: "awsSecretAccessKey"
+
+orchestration:
+  extraConfiguration:
+    - file: aws-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            aws:
+              aws1: # store instance ID — must match activeStoreId
+                bucket-name: my-bucket
+                bucket-path: documents/ # optional
+                bucket-ttl: 30 # optional, days
+
+connectors:
+  extraConfiguration:
+    - file: aws-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            aws:
+              aws1: # store instance ID — must match activeStoreId
+                bucket-name: my-bucket
+```
+
+### GCP
+
+```yaml
+global:
+  documentStore:
+    activeStoreId: "gcp1" # must match the store instance ID in extraConfiguration
+    type:
+      gcp:
+        enabled: false # disable legacy env var generation
+        existingSecret: "gcp-credentials"
+        credentialsKey: "service-account.json"
+        mountPath: "/var/secrets/gcp"
+        fileName: "service-account.json"
+
+orchestration:
+  extraConfiguration:
+    - file: gcp-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            gcp:
+              gcp1: # store instance ID — must match activeStoreId
+                bucket-name: my-gcp-bucket
+                prefix: documents/ # optional
+
+connectors:
+  extraConfiguration:
+    - file: gcp-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            gcp:
+              gcp1: # store instance ID — must match activeStoreId
+                bucket-name: my-gcp-bucket
+```
+
+### Azure Blob Storage
+
+See [Azure Blob Storage configuration](#azure-blob-storage-configuration) below for Azure-specific setup, including connection string and Managed Identity options.
+
 ## Azure Blob Storage configuration
 
 Azure Blob Storage uses a different configuration pattern than AWS and GCP. Only the connection string secret is managed via `values.yaml` under `global.documentStore.type.azure`. All other configuration (container name, class, endpoint, etc.) must be provided by the user via `orchestration.extraConfiguration` and `connectors.extraConfiguration`.
@@ -105,7 +202,7 @@ This example uses a connection string stored in a Kubernetes secret.
 ```yaml
 global:
   documentStore:
-    activeStoreId: "azure"
+    activeStoreId: "az1" # must match the store instance ID in extraConfiguration
     type:
       azure:
         connectionString:
@@ -119,10 +216,9 @@ orchestration:
       content: |
         camunda:
           document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
+            azure:
+              az1: # store instance ID — must match activeStoreId
+                container-name: my-container
 
 connectors:
   extraConfiguration:
@@ -130,10 +226,9 @@ connectors:
       content: |
         camunda:
           document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
+            azure:
+              az1: # store instance ID — must match activeStoreId
+                container-name: my-container
 ```
 
 ### Managed Identity/DefaultAzureCredential
@@ -143,7 +238,7 @@ When using AKS Workload Identity or Managed Identity, omit the connection string
 ```yaml
 global:
   documentStore:
-    activeStoreId: "azure"
+    activeStoreId: "az1" # must match the store instance ID in extraConfiguration
     # No connectionString secret needed — DefaultAzureCredential handles auth
 
 orchestration:
@@ -152,10 +247,9 @@ orchestration:
       content: |
         camunda:
           document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
+            azure:
+              az1: # store instance ID — must match activeStoreId
+                container-name: my-container
                 endpoint: https://myaccount.blob.core.windows.net
 
 connectors:
@@ -164,9 +258,16 @@ connectors:
       content: |
         camunda:
           document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
+            azure:
+              az1: # store instance ID — must match activeStoreId
+                container-name: my-container
                 endpoint: https://myaccount.blob.core.windows.net
 ```
+
+## Startup validation
+
+The application validates the Document Store configuration at startup and fails with a clear error message in the following cases:
+
+- **Duplicate store IDs across namespaces**: Each store instance ID must be unique across all provider namespaces (`aws`, `gcp`, `azure`, `local`, `in-memory`).
+- **Missing required fields**: Required properties (for example, `bucket-name` for AWS or `container-name` for Azure) must be set.
+- **Unknown `default-store-id`**: The value of `camunda.document.default-store-id` (or `activeStoreId` in Helm values) must match a configured store instance ID.

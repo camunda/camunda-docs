@@ -17,6 +17,12 @@ components:
         application/problem+json:
           schema:
             $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          example:
+            type: "about:blank"
+            title: "Unauthorized"
+            status: 401
+            detail: "The supplied authentication is not authorized to access this resource."
+            instance: "/api/v2/files"
 
     Forbidden:
       description: Forbidden. The request is not allowed.
@@ -24,6 +30,12 @@ components:
         application/problem+json:
           schema:
             $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          example:
+            type: "about:blank"
+            title: "Forbidden"
+            status: 403
+            detail: "Operation not allowed. Ensure your API credentials have the required permissions."
+            instance: "/api/v2/files/file-789-xyz"
 
     InvalidData:
       description: The provided data is not valid.
@@ -31,6 +43,12 @@ components:
         application/problem+json:
           schema:
             $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          example:
+            type: "about:blank"
+            title: "Bad Request"
+            status: 400
+            detail: "Validation failed for request body: 'name' must not be blank."
+            instance: "/api/v2/files"
 
     InternalServerError:
       description: An internal error occurred while processing the request.
@@ -38,3 +56,35 @@ components:
         application/problem+json:
           schema:
             $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          example:
+            type: "about:blank"
+            title: "Internal Server Error"
+            status: 500
+            detail: "An unexpected error occurred while processing your request. Please try again later."
+            instance: "/api/v2/files"
+
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          example:
+            type: "about:blank"
+            title: "Not Found"
+            status: 404
+            detail: "The requested resource was not found."
+            instance: "/api/v2/files/file-789-xyz"
+
+    Conflict:
+      description: A conflict occurred while processing the request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          example:
+            type: "about:blank"
+            title: "Conflict"
+            status: 409
+            detail: "The request conflicts with the current state of the resource."
+            instance: "/api/v2/files/file-789-xyz"

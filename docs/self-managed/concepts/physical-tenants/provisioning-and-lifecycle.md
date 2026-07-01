@@ -52,10 +52,7 @@ For 8.10:
 - Renaming a Physical Tenant is not supported.
 - Deleting a Physical Tenant is not supported.
 
-<!--
-TODO(physical-tenants): Add supported lifecycle operations for disable/rename/delete when product behavior is defined.
-Include required API/config paths, preconditions, and rollback behavior.
--->
+If you remove a Physical Tenant from configuration, the cluster will no longer process requests for that tenant. The API returns `404 Not Found` for requests scoped to a removed tenant. No data is deleted. You can reactivate the tenant by restoring its configuration.
 
 ## Out of scope for 8.10
 
