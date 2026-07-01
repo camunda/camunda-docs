@@ -1,0 +1,494 @@
+{
+  "version": "8.10",
+  "alpha": "alpha3",
+  "branch": "8.10-alpha3-release-notes",
+  "view": "https://github.com/orgs/camunda/projects/9/views/31",
+  "generated_at": "2026-07-01",
+  "release_notes_file": "docs/reference/announcements-release-notes/8100/8100-release-notes.md",
+  "announcements_file": "docs/reference/announcements-release-notes/8100/8100-announcements.md",
+  "epics": [
+    {
+      "number": 2896,
+      "url": "https://github.com/camunda/product-hub/issues/2896",
+      "title": "Test Process Segments",
+      "phase": "Done",
+      "alpha_label": "potential",
+      "assignee": "SaraCorazza",
+      "smes": [],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "Done",
+        "refs": [
+          "https://github.com/camunda/camunda-docs/issues/8882",
+          "https://github.com/camunda/camunda-docs/issues/8905"
+        ]
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3700,
+      "url": "https://github.com/camunda/product-hub/issues/3700",
+      "title": "Optimize On-Demand for Trial Clusters",
+      "phase": "Done",
+      "alpha_label": "version",
+      "assignee": "ultraschuppi",
+      "smes": [],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "N/A",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3704,
+      "url": "https://github.com/camunda/product-hub/issues/3704",
+      "title": "Bespoke Generations for C8 SaaS",
+      "phase": "Done",
+      "alpha_label": "version",
+      "assignee": "ultraschuppi",
+      "smes": [],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "N/A",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3459,
+      "url": "https://github.com/camunda/product-hub/issues/3459",
+      "title": "Multi-Variable Filtering",
+      "phase": "Validate",
+      "alpha_label": "target",
+      "assignee": "bojtospeter",
+      "smes": [],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "Missing",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3175,
+      "url": "https://github.com/camunda/product-hub/issues/3175",
+      "title": "(Internal) Process Application Versioning Redesign",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "steven-rg-harrison",
+      "smes": [],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "Missing",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3244,
+      "url": "https://github.com/camunda/product-hub/issues/3244",
+      "title": "Multi-Tenancy via Tenant Identifier in SaaS",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "bmudric",
+      "smes": ["alexronquillo"],
+      "status": "Needs content",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-needed",
+      "docs": {
+        "status": "In progress",
+        "refs": ["https://github.com/camunda/camunda-docs/issues/9120"]
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3315,
+      "url": "https://github.com/camunda/product-hub/issues/3315",
+      "title": "AI Agent Testing with Extended Camunda Process Test",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "nikonovd",
+      "smes": ["MaxTru"],
+      "status": "Already documented (alpha1+alpha2); no new alpha3 product change found",
+      "rn_label_current": "release-notes-added",
+      "rn_label_proposed": null,
+      "docs": {
+        "status": "Not found in camunda-docs (verify)",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3351,
+      "url": "https://github.com/camunda/product-hub/issues/3351",
+      "title": "[Tech] Migrate Console SM to Hub",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "wollefitz",
+      "smes": [],
+      "status": "No release notes",
+      "rn_label_current": "no-release-notes",
+      "rn_label_proposed": null,
+      "docs": {
+        "status": "Verify (docsRequired:complex, none found)",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3382,
+      "url": "https://github.com/camunda/product-hub/issues/3382",
+      "title": "Updated Global Navigation Structure",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "Skaiir",
+      "smes": ["wollefitz", "giorgionaps"],
+      "status": "Needs content",
+      "rn_label_current": "release-notes-needed",
+      "rn_label_proposed": "release-notes-needed",
+      "docs": {
+        "status": "Missing",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3402,
+      "url": "https://github.com/camunda/product-hub/issues/3402",
+      "title": "GIT based Catalog MVP",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "marstamm",
+      "smes": [],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "Missing",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3413,
+      "url": "https://github.com/camunda/product-hub/issues/3413",
+      "title": "Hub public APIs",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "nicpuppa",
+      "smes": [],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "In progress",
+        "refs": ["https://github.com/camunda/camunda-docs/pull/9211"]
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3474,
+      "url": "https://github.com/camunda/product-hub/issues/3474",
+      "title": "Variable Intelligence",
+      "phase": "Implement",
+      "alpha_label": "potential",
+      "assignee": "barinali",
+      "smes": [],
+      "status": "Needs content",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-needed",
+      "docs": {
+        "status": "pending content",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3490,
+      "url": "https://github.com/camunda/product-hub/issues/3490",
+      "title": "Outdated catalog assets visibility",
+      "phase": "Implement",
+      "alpha_label": "potential",
+      "assignee": "marstamm",
+      "smes": ["PhilippaC22", "Tally-e"],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "Missing",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3501,
+      "url": "https://github.com/camunda/product-hub/issues/3501",
+      "title": "Choosing a specific DMN version in a business rule within BPMN with FEEL expression",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "kristinkomschow",
+      "smes": ["YuliaKorsun"],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "Missing",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3542,
+      "url": "https://github.com/camunda/product-hub/issues/3542",
+      "title": "App Integrations Connector",
+      "phase": "Implement",
+      "alpha_label": "potential",
+      "assignee": "shtishiv",
+      "smes": [],
+      "status": "Needs content",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-needed",
+      "docs": {
+        "status": "pending content",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3568,
+      "url": "https://github.com/camunda/product-hub/issues/3568",
+      "title": "Deletion lifecycle for files, folders, and process applications",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "steven-rg-harrison",
+      "smes": [],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "Missing",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3589,
+      "url": "https://github.com/camunda/product-hub/issues/3589",
+      "title": "RDMBS new version support for 8.10",
+      "phase": "Implement",
+      "alpha_label": "target",
+      "assignee": "RomanJRW",
+      "smes": ["theburi"],
+      "status": "Already documented (announcements); MySQL gap",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "Verify (announcements cover; MySQL gap)",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3639,
+      "url": "https://github.com/camunda/product-hub/issues/3639",
+      "title": "Physical Tenant - REST API, RDBMS, and Document Store Support",
+      "phase": "Implement",
+      "alpha_label": "potential",
+      "assignee": "houssain-barouni",
+      "smes": [],
+      "status": "Needs content",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-needed",
+      "docs": {
+        "status": "pending content",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3741,
+      "url": "https://github.com/camunda/product-hub/issues/3741",
+      "title": "Allow customers to select the target version when upgrading a cluster",
+      "phase": "Implement",
+      "alpha_label": "potential",
+      "assignee": "ultraschuppi",
+      "smes": [],
+      "status": "Drafted",
+      "rn_label_current": null,
+      "rn_label_proposed": "release-notes-added",
+      "docs": {
+        "status": "N/A",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3552,
+      "url": "https://github.com/camunda/product-hub/issues/3552",
+      "title": "Self-Managed: 2 Region ECS RDBMS Reference Architecture",
+      "phase": "Define",
+      "alpha_label": "target",
+      "assignee": "marcel-dias",
+      "smes": [],
+      "status": "Not eligible (Define phase)",
+      "rn_label_current": null,
+      "rn_label_proposed": null,
+      "docs": {
+        "status": "not assessed",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3427,
+      "url": "https://github.com/camunda/product-hub/issues/3427",
+      "title": "Enforce Cluster Visibility via Workspace Association",
+      "phase": "Discover",
+      "alpha_label": "target",
+      "assignee": "felix-mueller",
+      "smes": [],
+      "status": "Not eligible (Discover phase)",
+      "rn_label_current": null,
+      "rn_label_proposed": null,
+      "docs": {
+        "status": "not assessed",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3443,
+      "url": "https://github.com/camunda/product-hub/issues/3443",
+      "title": "Governed Workspace Creation & Access",
+      "phase": "Discover",
+      "alpha_label": "potential",
+      "assignee": "felix-mueller",
+      "smes": [],
+      "status": "Not eligible (Discover phase)",
+      "rn_label_current": null,
+      "rn_label_proposed": null,
+      "docs": {
+        "status": "not assessed",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3475,
+      "url": "https://github.com/camunda/product-hub/issues/3475",
+      "title": "Runtime connection",
+      "phase": "Discover",
+      "alpha_label": "potential",
+      "assignee": "Balazs-PM",
+      "smes": [],
+      "status": "Not eligible (Discover phase)",
+      "rn_label_current": null,
+      "rn_label_proposed": null,
+      "docs": {
+        "status": "not assessed",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    },
+    {
+      "number": 3567,
+      "url": "https://github.com/camunda/product-hub/issues/3567",
+      "title": "Decoupled Element Template Lifecycle & Governance",
+      "phase": "Discover",
+      "alpha_label": "target",
+      "assignee": "PhilippaC22",
+      "smes": [],
+      "status": "Not eligible (Discover phase)",
+      "rn_label_current": null,
+      "rn_label_proposed": null,
+      "docs": {
+        "status": "not assessed",
+        "refs": []
+      },
+      "open_questions": [],
+      "proposed_action": null,
+      "backport_candidate": null,
+      "content_hash": null
+    }
+  ]
+}
