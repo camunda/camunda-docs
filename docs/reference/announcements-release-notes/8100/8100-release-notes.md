@@ -52,6 +52,17 @@ Wait state tracking is enabled by default and writes records to secondary storag
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
 
+### Docker images
+
+The following Docker images will no longer be produced for Camunda 8.10 and Camunda 8.9 (starting 8.9.12):
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+
+Please use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda)  Docker image instead.
+
 ## 8.10.0-alpha2
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |
