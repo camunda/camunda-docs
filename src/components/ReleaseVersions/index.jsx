@@ -42,7 +42,7 @@ function VersionContent({ version }) {
           <>
             {" "}
             &nbsp;&nbsp; <strong>Self-Managed:</strong> Helm chart{" "}
-            {version.helm}
+            {version.helm.replace(/^\d+\.\d+-/, "")}
           </>
         )}
       </p>
