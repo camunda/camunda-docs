@@ -73,11 +73,11 @@ camunda:
 
 ## Variable filtering
 
-Variables dominate Optimize's storage and CPU costs. For cost measurements and sizing context, see [Impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize). There are three levers, from most to least aggressive.
+Use variable filtering to control which variables are exported to Optimize. You can disable variable export entirely, filter by name, or filter by value type.
 
 ### Disable all variable export
 
-Set `variable: false` to stop the exporter from writing any variable records to Optimize indices. This is the most impactful option: it also recovers exporter throughput, because the variable write path is the bottleneck at maximum load.
+Set `variable: false` to stop the exporter from writing any variable records to Optimize indices.
 
 <Tabs groupId="exporter-type" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch'},{label: 'OpenSearch', value: 'opensearch'}]}>
 <TabItem value="elasticsearch">
@@ -156,7 +156,7 @@ camunda:
 
 ### Filter by variable type
 
-Drop variables by inferred JSON type to exclude large payloads such as objects or arrays. Valid types are `String`, `Number`, `Boolean`, `Object`, and `Null`.
+Use type-based inclusion and exclusion lists to filter variables by their inferred JSON type. Valid types are `String`, `Number`, `Boolean`, `Object`, and `Null`.
 
 | Goal                        | Options                      |
 | --------------------------- | ---------------------------- |
