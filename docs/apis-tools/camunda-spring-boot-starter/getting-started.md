@@ -237,12 +237,21 @@ private CamundaClient client;
 
 ## Implement the job worker
 
-Declare a method like this on a bean:
+Declare a method on a bean. By default, the method name is used as the job type, so you only need the annotation:
 
 ```java
-@JobWorker(type = "foo")
-public void handleJobFoo() {
-  // do whatever you need to do
+@JobWorker
+public void processOrder() {
+  // handles jobs of type 'processOrder'
+}
+```
+
+To inject specific process variables as typed parameters, use `@Variable`:
+
+```java
+@JobWorker
+public void processOrder(@Variable String orderId, @Variable BigDecimal amount) {
+  // only 'orderId' and 'amount' are fetched; types are enforced automatically
 }
 ```
 
