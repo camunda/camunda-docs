@@ -104,7 +104,7 @@ cluster, but rather only a subset of them. This can also be configured to limit 
 being exported (e.g. only events, no commands), and the value type of these records (e.g. only job
 and process values).
 
-For Optimize-specific filtering (process definition and variable filters), see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
+For Optimize-specific filtering, see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
 
 | Option                           | Description                                                                                                                                                                                                                                                                                                                                                        | Default         |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |

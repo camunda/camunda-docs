@@ -86,7 +86,7 @@ The exporter can be configured by providing `args`. The table below explains all
 
 In most cases, you will not be interested in exporting every single record produced by a Zeebe cluster, but rather only a subset of them. This can also be configured to limit the kinds of records exported (for example, only events, no commands), and the value type of these records (for example, only job and process values).
 
-For Optimize-specific filtering (process definition and variable filters), see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
+For Optimize-specific filtering, see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
 
 | Option                              | Description                                                                                                                                                                                                                                                                                                                                                                                                              | Default      |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
