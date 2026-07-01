@@ -61,7 +61,7 @@ What this means for your application:
 - **Spring framework patches:** After June 2026, Spring will no longer provide open-source security or bug-fix patches for Spring Boot 3.x. Security patches remain available through Spring Commercial support (Broadcom).
   :::
 
-For details on how Camunda handles major version transitions and end-of-support windows, see [Release policy → Spring Boot/Framework/Security updates](/reference/announcements-release-notes/release-policy.md#spring-bootframeworksecurity-updates).
+For details on how Camunda handles major version transitions and end-of-support windows, see [Spring Boot/Framework/Security updates](/reference/announcements-release-notes/release-policy.md#spring-bootframeworksecurity-updates).
 
 To use the Spring Boot 3 module, replace the default dependency in your project:
 
