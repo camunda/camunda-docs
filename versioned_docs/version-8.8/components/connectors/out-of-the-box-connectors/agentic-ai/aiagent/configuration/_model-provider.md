@@ -113,7 +113,7 @@ To learn more about authentication to the OpenAPI API, refer to [OpenAPI platfor
 
 #### OpenAI-compatible
 
-Select this option to use an LLM provider that provides OpenAI-compatible endpoints.
+With this option, you can connect to any LLM that exposes an OpenAI-compatible API, including open-weight models such as Qwen, Llama, and Mistral hosted via Ollama or any compatible inference platform.
 
 | Field        | Required | Description                                                                                                                                                                       |
 | :----------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

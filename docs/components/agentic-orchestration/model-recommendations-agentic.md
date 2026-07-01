@@ -30,6 +30,10 @@ The model should accept and return plain text.
 
 Agentic processes rely on text prompts and text-based replies (which may include JSON or other structured text). Avoid models that only produce non-text outputs or require special input formats. _Text in, text out_ is essential for simplicity and reliable tool integration.
 
+### Choosing by use case
+
+Not every decision in a process needs the same model. Frontier models deliver stronger reasoning and handle ambiguous inputs well, but carry higher per-call cost and external infrastructure dependency. Open-weight models, hosted via Ollama or a compatible inference platform, offer lower cost and full infrastructure control. They're a good fit for high-volume or simpler decisions. Matching model tier to decision complexity lets you keep accuracy where it counts and control costs everywhere else.
+
 ## General recommendations for agentic processes
 
 As well as choosing the right model, you should follow best practices in designing your agentic process.
