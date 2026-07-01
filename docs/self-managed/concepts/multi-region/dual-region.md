@@ -231,7 +231,7 @@ Region failure results in **immediate service interruption**:
 
 - No new process instances can start
 - Running process instances are suspended
-- User interfaces become unavailable if primary region is lost
+- User interfaces remain available in the surviving region
   :::
 
 See the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) for recovery steps from region loss and re-establishment procedures.
@@ -240,38 +240,20 @@ See the [operational procedure](/self-managed/deployment/helm/operational-tasks/
 You must monitor for region failures and execute the necessary [operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) to ensure smooth recovery and failover.
 :::
 
-### Primary region loss
+### Region loss impact
 
-If the primary region is lost:
+If either region is lost:
 
-- **Service disruption**: User traffic is unavailable
-- **Zeebe halt**: Processing stops due to quorum loss
-- **Data loss**: No data loss — all data is replicated via the Camunda Exporter and survives region loss (see [Active-active](#active-active)).
+- **Zeebe halt**: Processing stops due to quorum loss (half of the brokers become unreachable).
+- **User traffic**: The surviving region keeps serving user traffic. Remove the failed region from the traffic pool so requests are not routed to it.
+- **No data loss**: All data is replicated to both regions via the Camunda Exporter and survives region loss (see [active-active](#active-active)).
 
-#### Recovery steps for primary region loss
+#### Recovery steps
 
-1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the process automation engine (zeebe).
+1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the process automation engine (Zeebe).
 2. **Traffic rerouting:** Remove the failed region from serving traffic (for example, via DNS or load balancer health checks).
-3. **Data and task management**:
-   - Reassign uncompleted tasks lost from the previous primary region.
-   - Recreate batch operations in Operate.
-4. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback-phase) to create a new secondary region.
-
-### Secondary region loss
-
-If the secondary region is lost:
-
-- **Zeebe halt**: Processing stops due to quorum loss.
-- **No user impact**: Traffic continues to be served by the primary region during recovery.
-
-#### Recovery steps for secondary region loss
-
-1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover) to temporarily recover and restore processing.
-2. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback) to create a new secondary region.
-
-:::note
-Unlike primary region loss, no user-facing data is lost and no traffic rerouting is necessary.
-:::
+3. **Data recovery:** No manual recovery is required — all Operate and Tasklist data is replicated via the Camunda Exporter and remains available in the surviving region.
+4. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback-phase) to recreate the lost region.
 
 ### Disaster recovery
 

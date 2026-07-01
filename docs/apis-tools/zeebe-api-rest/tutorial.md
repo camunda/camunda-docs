@@ -20,7 +20,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 
 ## Getting started
 
-- You need authentication to access the API endpoints. Find more information [here](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+- You need authentication to access the API endpoints. See [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 ## Set up authentication
 
