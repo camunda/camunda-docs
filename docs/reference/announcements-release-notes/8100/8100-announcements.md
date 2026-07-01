@@ -324,6 +324,25 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x
 </div>
 <div className="release-announcement-content">
 
+#### Individual component Docker images no longer produced
+
+Starting with Camunda 8.10 and Camunda 8.9.12, the following individual component Docker images will no longer be produced:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+**Action:** Switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image before upgrading to Camunda 8.10 or Camunda 8.9.12+.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Unused PVC in Optimize is unmounted
 
 An unused volume mounted at `/camunda` in Optimize has been removed from the Helm chart. Optimize did not use this volume.
