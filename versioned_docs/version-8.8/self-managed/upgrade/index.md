@@ -43,6 +43,12 @@ Review required preparation steps and important changes before upgrading to Camu
 
 <p class="link-arrow">[Prepare for upgrade](prepare-for-upgrade.md)</p>
 
+:::tip Recommended Helm upgrade workflow
+For Helm upgrades, start from the full default Camunda 8.8 `values.yaml`, then copy over only the custom settings you still need from your 8.7 deployment. Avoid converting the old file piecemeal where possible.
+
+The Helm upgrade guide includes both the key-by-key migration tables and [complete 8.8 values file examples](./helm/870-to-880.md#example-upgrade-valuesyaml-from-87-to-88).
+:::
+
 ## Upgrade guides
 
 Choose the upgrade guide that matches how your environment is deployed:
