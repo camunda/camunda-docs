@@ -29,9 +29,7 @@ The default time between a process instance finishing and being moved to a dated
 
 ## Rollover Interval
 
-Process instances are archived into historical indices based on some rollover interval, by default this value is `1d` therefore a process instance which completed
-at yyyy-mm-dd would be archived into an index which that date as a suffix, meaning there would be one historical index per day. By increasing this interval, the number
-of historical indices will reduce which will reduce shard consumption.
+Process instances are archived into historical indices based on a rollover interval. By default, this value is `1d`, so a process instance that completed on `yyyy-mm-dd` is archived into an index with that date as a suffix, meaning there is one historical index per day. Increasing this interval reduces the number of historical indices, which reduces shard consumption.
 
 This value can be modified by setting the [rolloverInterval](importer-and-archiver.md#rollover-interval) configuration parameter.
 

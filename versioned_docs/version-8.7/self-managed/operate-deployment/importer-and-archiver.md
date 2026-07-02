@@ -132,5 +132,5 @@ Camunda supports the same set of rollover interval values on both Elasticsearch 
 See [data retention](data-retention.md#rollover-interval) for how the rollover interval affects effective retention.
 
 :::note
-This feature is officially supported from version >= 8.7.15.
+This feature is officially supported from version 8.7.15 onward.
 :::
