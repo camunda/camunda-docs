@@ -429,6 +429,41 @@ The previous component-specific endpoints (for example, `*.zeebe.camunda.io`, `*
 </div>
 <div className="release-announcement-content">
 
+#### Frontend application URLs now require explicit application prefix {#frontend-path-prefix-required}
+
+In Camunda 8.9, Operate and Tasklist run in a single unified frontend application rather than as separate deployments. This architectural change requires explicit path prefixes to route requests to the correct handler. As a result, the automatic path redirection that previously allowed access without an explicit application prefix has been removed.
+
+Before 8.9, both of the following URLs worked:
+
+```text
+https://<region>.operate.camunda.io/<cluster-id>/processes/<process-id>
+https://<region>.operate.camunda.io/<cluster-id>/operate/processes/<process-id>
+```
+
+From 8.9, only the URL with the explicit application prefix is valid:
+
+```text
+https://<region>.operate.camunda.io/<cluster-id>/operate/processes/<process-id>
+https://<region>.tasklist.camunda.io/<cluster-id>/tasklist/tasks/<task-id>
+```
+
+Prefix-less paths now return `404 Not Found` instead of redirecting.
+
+**Impact:** Any bookmarks, external links, scripts, or applications that use prefix-less frontend URLs will break after upgrading to 8.9.
+
+**Action:** Update all stored or constructed frontend URLs to include the explicit application prefix (`/operate/` or `/tasklist/`). If you use reverse proxies or load balancers, consider adding redirect rules to handle legacy URL formats.
+
+<p className="link-arrow">[Upgrade 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md#frontend-application-urls-now-require-explicit-application-prefix-breaking)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Type-safe pagination model in the Camunda Java client
 
 Starting with 8.9.0, the Camunda Java client uses type-safe pagination interfaces (`AnyPage`, `OffsetPage`, `CursorForwardPage`, `CursorBackwardPage`) instead of the previous `SearchRequestPage` class. Each search or statistics endpoint now exposes only the pagination methods it actually supports.
