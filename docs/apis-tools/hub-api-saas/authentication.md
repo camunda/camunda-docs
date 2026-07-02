@@ -11,7 +11,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## The process
 
-Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it in every request. If you already have a Web Modeler API v1 token, you can use the same token for this API.
+Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it in every request. If you already have a client or token for Web Modeler API v1, you can reuse it for this API.
 
 ## Generate a token
 
