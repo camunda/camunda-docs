@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
@@ -60,6 +62,8 @@ paths:
       summary: Get agent instance
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -112,6 +116,8 @@ paths:
       summary: Update agent instance
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -168,6 +174,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -206,6 +214,8 @@ paths:
       summary: Create agent instance history item
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -269,6 +279,8 @@ paths:
       summary: Search agent instance history
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[ADDED_IN_VERSION:8.10]]
 

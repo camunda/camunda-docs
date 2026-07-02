@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -57,6 +59,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -95,6 +99,8 @@ paths:
       summary: Get role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -138,6 +144,8 @@ paths:
       summary: Update role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -190,6 +198,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -229,6 +239,8 @@ paths:
       summary: Assign a role to a user
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -283,6 +295,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -330,6 +344,8 @@ paths:
       summary: Search role users
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -382,6 +398,8 @@ paths:
       summary: Assign a role to a client
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -436,6 +454,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -483,6 +503,8 @@ paths:
       summary: Search role clients
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -535,6 +557,8 @@ paths:
       summary: Assign a role to a group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -589,6 +613,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -636,6 +662,8 @@ paths:
       summary: Search role groups
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -688,6 +716,8 @@ paths:
       summary: Assign a role to a mapping rule
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -742,6 +772,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -789,6 +821,8 @@ paths:
       summary: Search role mapping rules
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 

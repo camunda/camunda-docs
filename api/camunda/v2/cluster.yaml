@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
         [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
@@ -37,6 +39,8 @@ paths:
       summary: Get cluster status
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[ADDED_IN_VERSION:8.8]]
 
