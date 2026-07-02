@@ -58,12 +58,10 @@ The diagram shows one orchestration cluster boundary with shared control-plane c
 Use tenant-scoped routes for tenant-specific requests:
 
 - REST: `/physical-tenants/{physicalTenantId}/v2/...`
-- gRPC: `Camunda-Physical-Tenant`
-- Default tenant compatibility: if the gRPC header is omitted, the request routes to the default Physical Tenant
+- gRPC: `Camunda-Physical-Tenant` header (upcoming — routes to `default` when omitted)
+- Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Use cluster-scoped routes for operations that apply to the whole cluster:
-
-- Cluster-wide REST: `/cluster/v2/...`
+Cluster-wide endpoints (such as topology and license) are not tenant-scoped. They remain at their standard `/v2/...` paths.
 
 ## Configure and provision Physical Tenants
 
