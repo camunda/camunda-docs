@@ -369,18 +369,7 @@ The LLM will recognize these as weather requests, select the **Get current weath
 
 ### Add your own tools
 
-To add more tools to your agent, follow the same pattern:
-
-1. Add a task inside the ad-hoc sub-process and apply a [connector](/components/connectors/introduction.md) or configure a [job worker](/components/concepts/job-workers.md).
-1. Write a clear tool name and **Documentation** description so the LLM knows when to use it.
-1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in input mappings to define the parameters the LLM must provide.
-1. Return `toolCallResult` in the result expression or output mapping.
-
-At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
-
-:::tip
-For more examples, review the tasks already available in this blueprint and the [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) documentation.
-:::
+To add more tools to your agent, follow the same pattern used above. For full guidance on naming tools, writing descriptions, declaring `fromAi()` parameters, and mapping results, see [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 
 ## Next steps
 
