@@ -1666,6 +1666,40 @@ public static async Task GetProcessInstanceStatisticsByErrorExample()
 }
 ```
 
+#### GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceWaitStateStatisticsQueryResult> GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get wait state statistics
+Get statistics about waiting element instances by the process instance key, grouped by element id.
+
+| Parameter            | Type                                                                | Description |
+| -------------------- | ------------------------------------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                                                |             |
+| `consistency`        | `ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>` |             |
+| `ct`                 | `CancellationToken`                                                 |             |
+
+**Returns:** `Task<ProcessInstanceWaitStateStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceWaitStateStatisticsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceWaitStateStatisticsAsync(
+        processInstanceKey);
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Element: {stat.ElementId}, waiting: {stat.WaitingCount}");
+    }
+}
+```
+
 #### MigrateProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceMigrationInstruction, CancellationToken)
 
 ```csharp

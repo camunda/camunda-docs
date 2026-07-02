@@ -11,7 +11,7 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Request and response model classes (608 types).
+Request and response model classes (610 types).
 
 ## Quick Reference
 
@@ -498,6 +498,8 @@ Request and response model classes (608 types).
 - [ProcessInstanceSequenceFlowsQueryResult](#processinstancesequenceflowsqueryresult) — Process instance sequence flows query response
 - [ProcessInstanceStateExactMatch](#processinstancestateexactmatch) — Matches the value exactly
 - [ProcessInstanceStateFilterProperty](#processinstancestatefilterproperty) — ProcessInstanceStateEnum property with full advanced search capabilities
+- [ProcessInstanceWaitStateStatisticsQueryResult](#processinstancewaitstatestatisticsqueryresult) — Process instance wait state statistics query response
+- [ProcessInstanceWaitStateStatisticsResult](#processinstancewaitstatestatisticsresult) — Process instance wait state statistics response item
 - [ResourceFilter](#resourcefilter) — Resource search filter
 - [ResourceKeyExactMatch](#resourcekeyexactmatch) — Matches the value exactly
 - [ResourceKeyFilterProperty](#resourcekeyfilterproperty) — ResourceKey property with full advanced search capabilities
@@ -7911,6 +7913,31 @@ public sealed class ProcessInstanceStateFilterProperty
 | `Exists`     | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<ProcessInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## ProcessInstanceWaitStateStatisticsQueryResult
+
+Process instance wait state statistics query response.
+
+```csharp
+public sealed class ProcessInstanceWaitStateStatisticsQueryResult
+```
+
+| Property | Type                                             | Description                |
+| -------- | ------------------------------------------------ | -------------------------- |
+| `Items`  | `List<ProcessInstanceWaitStateStatisticsResult>` | The wait state statistics. |
+
+## ProcessInstanceWaitStateStatisticsResult
+
+Process instance wait state statistics response item.
+
+```csharp
+public sealed class ProcessInstanceWaitStateStatisticsResult
+```
+
+| Property       | Type        | Description                                              |
+| -------------- | ----------- | -------------------------------------------------------- |
+| `ElementId`    | `ElementId` | The element id for which the wait states are aggregated. |
+| `WaitingCount` | `Int64`     | The total number of waiting instances of the element.    |
 
 ## ResourceFilter
 

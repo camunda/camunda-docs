@@ -109,6 +109,13 @@
       "label": "Get process instance statistics"
     }
   ],
+  "getProcessInstanceWaitStateStatistics": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get process instance wait state statistics"
+    }
+  ],
   "getProcessInstanceSequenceFlows": [
     {
       "file": "ProcessInstance.cs",
