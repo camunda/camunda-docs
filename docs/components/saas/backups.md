@@ -60,7 +60,7 @@ For detailed information on using the API, refer to the [Administration API refe
 
 ## Restore
 
-You can restore your cluster from a selected backup directly in Console.
+You can restore your cluster from a selected backup directly in Console or through the Administration API.
 
 - See [backup and restore overview](./backup-restore-overview.md).
 - See [restore a cluster from backup](./how-to-restore.md).

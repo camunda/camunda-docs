@@ -23,7 +23,7 @@ Use this when cluster data is inconsistent after an operational incident.
 ### Steps
 
 1. Identify the last known-good backup.
-2. Confirm the backup is `Completed` and compatible with current partition count.
+2. Confirm the backup is in `Completed` state.
 3. Start restore from Console.
 4. Wait for cluster to return to healthy state.
 5. Validate process execution and key business variables in Operate.

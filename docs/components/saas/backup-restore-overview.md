@@ -31,12 +31,7 @@ A backup captures a consistent cluster snapshot across Camunda components:
 
 ## Restore model
 
-Restore in this release is:
-
-- Same-cluster only
-- Same-organization only
-- Same-region only
-- In-place and destructive for current cluster data
+Restore operates within the same cluster, organization, and region only. The operation is in-place and overwrites current cluster data.
 
 When a restore starts, the cluster enters a restoring state and is unavailable until restore completes.
 
@@ -57,9 +52,8 @@ Camunda SaaS retains backups as count-based retention:
 - Cross-cluster restore is not supported in this release.
 - Cross-region restore is not supported in this release.
 - Cross-organization restore is not supported in this release.
-- Partition count must match between the selected backup and the current cluster.
 - Replication factor and node count differences are not blocking constraints for restore.
-- Restore rejects legacy backups that do not include a `generationUuid` label.
+- Backups created before the restore feature was introduced are not eligible for restore.
 - Cluster endpoints do not change after restore; applications reconnect to the same endpoints.
 - A new restore request is rejected while another restore is in progress.
 

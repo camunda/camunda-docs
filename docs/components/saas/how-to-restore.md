@@ -20,9 +20,8 @@ Use this guide to restore a SaaS cluster from an existing backup.
 
 - You need organization admin permissions for the target cluster.
 - The backup must be in `Completed` state.
-- The backup must include a `generationUuid` label.
-- Restore must not already be in progress for the cluster.
-- Partition count in the backup must match the cluster partition count.
+- Backups created before the restore feature was introduced are not eligible for restore.
+- Only one restore can be in progress per cluster at a time.
 
 Restore is destructive for current cluster data and causes cluster unavailability during execution.
 
