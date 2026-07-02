@@ -5,12 +5,6 @@ title: Configure TLS
 description: "Enable TLS for Camunda 8 Self-Managed component connections to datastores using the Helm chart's values-tls.yaml overlay."
 ---
 
-:::info Applies to Camunda 8.10+ (Helm chart 15.x+)
-
-The `global.tls.caBundle` key and the `values-tls.yaml` overlay are introduced in chart 15.x.
-
-:::
-
 ## What's covered
 
 | Connection                                                                                 | Mechanism                                                                                                                                                                                     |
@@ -231,7 +225,7 @@ Set `existingSecretKey` to match cert-manager's output key (`ca.crt` by default 
 
 :::caution Include the full trust chain
 
-If your `ClusterIssuer` is signed by an offline root CA, cert-manager outputs only the issuing intermediate. Concatenate the offline root into the bundle before creating the Secret — PKIX validation requires a chain that ends at a root present in the bundle.
+If your `ClusterIssuer` is signed by an offline root CA, cert-manager outputs only the issuing intermediate. Concatenate the offline root into the bundle before creating the Secret. PKIX validation needs a chain that ends at a root present in the bundle.
 
 Server certs for Elasticsearch, OpenSearch, and PostgreSQL must be issued separately via additional `Certificate` resources signed by the same `ClusterIssuer`.
 
@@ -239,11 +233,11 @@ Server certs for Elasticsearch, OpenSearch, and PostgreSQL must be issued separa
 
 ## Install-time guardrails
 
-After each `helm install` or `helm upgrade`, check the `NOTES.txt` output for these warnings (re-display it at any time with `helm status <release>`):
+The chart emits these as `[camunda][warning]` messages from its constraints template while rendering `helm install` / `helm upgrade`. They also appear in the `helm status <release>` NOTES output when `global.createReleaseInfo` is enabled. Keep them in mind — some are enforced as render-time errors, others are silent precedence rules you must account for in your values:
 
-- Per-component JKS overrides the bundle. If a component has a legacy `tls.secret` JKS configured, the JKS takes precedence and the bundle is ignored for that component. Remove `tls.secret` to use the bundle.
+- Per-component JKS overrides the bundle. If a component has a legacy `tls.secret` JKS configured, you must remove it to use the bundle. Legacy JKS fields take priority over `global.tls.caBundle`.
 - Bundle is trust, not encryption. `global.tls.caBundle` adds CA trust but does not enable TLS on a plaintext URL. Set the URL to `https://` (or set the JDBC `sslmode`).
-- `JAVA_TOOL_OPTIONS` in component `env` overrides the truststore flags. Set it via `javaOpts` (orchestration, optimize, Web Modeler restapi) instead, which the chart appends to.
+- `JAVA_TOOL_OPTIONS` in component `env` overrides the truststore flags. For Orchestration and Optimize, set it via `javaOpts` instead, which the chart appends its truststore flags to. Connectors, Identity, and Web Modeler restapi receive the truststore flags automatically through a dedicated `JAVA_TOOL_OPTIONS` env — do not put truststore flags in their `javaOpts` (Web Modeler restapi's `javaOpts` feeds `JAVA_OPTIONS`, a different variable, so it has no effect on trust).
 
 ## Verify no plaintext fallback
 
@@ -274,7 +268,7 @@ The init container re-runs on each pod start and imports the new CA into a fresh
 
 ### Optional: automatic rollout on `helm upgrade`
 
-Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` annotation on Java pods so `helm upgrade` triggers a rollout automatically when the CA Secret changes.
+Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` annotation on Java pods so they automatically roll out when the CA Secret changes.
 
 :::caution Constraints
 
@@ -335,8 +329,7 @@ The following in-cluster connections are plaintext by default:
 | Spring Boot management / metrics (probes)       | HTTP     |
 
 Encrypt these at the pod level with a service mesh (Linkerd, Istio, or Cilium). See the
-[TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md)
-for the full connection inventory.
+[TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md) for the full connection inventory.
 
 ## Related
 

@@ -365,6 +365,7 @@ module.exports = {
             "components/document-handling/send-document-to-external-system-via-connector",
           ],
         },
+        "components/wait-states/overview",
         {
           type: "category",
           label: "Camunda integrations",
@@ -622,6 +623,7 @@ module.exports = {
               ],
             },
             "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/filter-process-instances",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/monitor-batch-operations",
@@ -636,6 +638,7 @@ module.exports = {
             },
             "components/operate/userguide/process-instance-migration",
             "components/operate/userguide/audit-operations",
+            "components/operate/userguide/view-wait-states",
           ],
         },
         {
@@ -729,8 +732,17 @@ module.exports = {
               ],
             },
             {
-              type: "doc",
-              id: "components/hub/organization/manage-catalog/manage-catalog",
+              type: "category",
+              label: "Manage the catalog",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-catalog/manage-catalog",
+              },
+              items: [
+                "components/hub/organization/manage-catalog/getting-started-catalog",
+                "components/hub/organization/manage-catalog/manage-asset-lifecycle",
+                "components/hub/organization/manage-catalog/sync-multiple-repositories",
+              ],
             },
             {
               type: "category",
@@ -876,6 +888,7 @@ module.exports = {
                       items: [
                         "components/hub/workspace/modeler/element-templates/element-template-generator",
                         "components/hub/workspace/modeler/element-templates/using-templates-in-modeler",
+                        "components/hub/workspace/modeler/element-templates/use-catalog-assets",
                         "components/hub/workspace/modeler/element-templates/save-as-element-templates",
                         "components/hub/workspace/modeler/element-templates/best-practices",
                       ],
@@ -2187,7 +2200,15 @@ module.exports = {
           },
           items: [
             "self-managed/concepts/multi-tenancy/logical-tenants",
-            "self-managed/concepts/multi-tenancy/physical-tenants",
+            {
+              type: "category",
+              label: "Physical Tenants",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/multi-tenancy/physical-tenants",
+              },
+              items: ["self-managed/concepts/physical-tenants/index"],
+            },
           ],
         },
         {
@@ -2199,6 +2220,7 @@ module.exports = {
           },
           items: ["self-managed/concepts/audit-log/configure-audit-log"],
         },
+        "self-managed/concepts/wait-states/configure-wait-states",
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         {

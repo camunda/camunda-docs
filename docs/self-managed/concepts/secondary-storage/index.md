@@ -6,6 +6,8 @@ description: "Learn how secondary storage works in Camunda Self-Managed environm
 
 Camunda uses a layered storage model that separates workflow execution data from data used by web applications and APIs.
 
+If you are designing Physical Tenant isolation, see [Physical Tenant isolation model](../physical-tenants/index.md) for the tenant-level execution and routing boundaries that sit on top of secondary storage.
+
 ## About secondary storage
 
 Secondary storage is one of the two complementary layers in Camunda’s data model:

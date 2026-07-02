@@ -2239,6 +2239,8 @@ getAuditLog(...a): CancelablePromise<{
      __brand: "FormKey";
    }
      | null;
+  inboundChannelToolName: string | null;
+  inboundChannelType: string | null;
   jobKey:   | {
    [key: number]: string;
      __brand: "JobKey";
@@ -2365,6 +2367,8 @@ getAuditLog(...a): CancelablePromise<{
 `__brand`: `"FormKey"`;
 \}
 \| `null`;
+`inboundChannelToolName`: `string` \| `null`;
+`inboundChannelType`: `string` \| `null`;
 `jobKey`: \| \{
 \[`key`: `number`\]: `string`;
 `__brand`: `"JobKey"`;
@@ -3084,6 +3088,11 @@ getDecisionDefinitionXml(...a): CancelablePromise<string>;
 
 ```ts
 getDecisionInstance(...a): CancelablePromise<{
+  businessId:   | {
+   [key: number]: string;
+     __brand: "BusinessId";
+   }
+     | null;
   decisionDefinitionId: string;
   decisionDefinitionKey: string;
   decisionDefinitionName: string;
@@ -3131,6 +3140,11 @@ getDecisionInstance(...a): CancelablePromise<{
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`businessId`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"BusinessId"`;
+\}
+\| `null`;
 `decisionDefinitionId`: `string`;
 `decisionDefinitionKey`: `string`;
 `decisionDefinitionName`: `string`;
@@ -4613,6 +4627,11 @@ getUser(...a): CancelablePromise<{
 ```ts
 getUserTask(...a): CancelablePromise<{
   assignee: string | null;
+  businessId:   | {
+   [key: number]: string;
+     __brand: "BusinessId";
+   }
+     | null;
   candidateGroups: string[];
   candidateUsers: string[];
   completionDate: string | null;
@@ -4659,6 +4678,11 @@ getUserTask(...a): CancelablePromise<{
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
 `assignee`: `string` \| `null`;
+`businessId`: \| \{
+\[`key`: `number`\]: `string`;
+`__brand`: `"BusinessId"`;
+\}
+\| `null`;
 `candidateGroups`: `string`[];
 `candidateUsers`: `string`[];
 `completionDate`: `string` \| `null`;
@@ -7797,6 +7821,28 @@ updateJob(...a): CancelablePromise<void>;
 #### Returns
 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+### updateJobsBatchOperation()
+
+```ts
+updateJobsBatchOperation(...a): CancelablePromise<{
+  batchOperationKey: string;
+  batchOperationType: BatchOperationTypeEnum;
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`batchOperationKey`: `string`;
+`batchOperationType`: [`BatchOperationTypeEnum`](../type-aliases/BatchOperationTypeEnum.md);
+\}\>
 
 ### updateMappingRule()
 

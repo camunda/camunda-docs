@@ -32,6 +32,26 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0-alpha3
+
+| Release date | Changelog(s)                                                                                        | Blog |
+| :----------- | :-------------------------------------------------------------------------------------------------- | :--- |
+| 07 July 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha3)</li></ul> | -    |
+
+### Operate
+
+#### Wait states
+
+<!-- https://github.com/camunda/camunda/issues/45040 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+
+Operate now shows what an active process instance is waiting for. When you inspect an active element, you can see the wait state and its details — for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
+
+Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
+
+<p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
+
 ## 8.10.0-alpha2
 
 | Release date | Changelog(s)                                                                                                                                                                                 | Blog |

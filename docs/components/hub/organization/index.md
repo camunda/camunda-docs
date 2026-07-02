@@ -40,7 +40,7 @@ description: "Learn how to rename, resume, update, resize, or delete your cluste
 
 ## Manage the catalog
 
-Establish a git repository with catalog assets, upload the assets in a CI/CD pipeline, and approve them for use within your organization:
+Establish a Git repository with catalog assets, upload the assets in a CI/CD pipeline, and approve them for use within your organization:
 
 <span class="link-arrow">[Get started](./manage-catalog/index.md)</span>
 

@@ -30,6 +30,10 @@ global:
             aws:
                 ## @param global.documentStore.type.aws.enabled Enable AWS document store configuration.
                 enabled: false
+                ## @extra global.documentStore.type.aws.irsa IRSA (IAM Roles for Service Accounts) configuration for AWS authentication.
+                irsa:
+                  ## @param global.documentStore.type.aws.irsa.enabled When set to true, no AWS credentials are injected into pods, allowing IRSA to be used for authentication. When false (default), credentials are required via existingSecret or accessKeyId/secretAccessKey configuration.
+                  enabled: false
                 ## @param global.documentStore.type.aws.storeId Custom prefix for AWS. Default will generate env vars containing 'storeId' such as DOCUMENT_STORE_AWS_CLASS.
                 storeId: "AWS"
                 ## @param global.documentStore.type.aws.region AWS region for the S3 bucket. (example: us-east-1)
@@ -42,12 +46,23 @@ global:
                 bucketTtl: 0
                 ## @param global.documentStore.type.aws.class Fully qualified class name for the AWS document store provider.
                 class: "io.camunda.document.store.aws.AwsDocumentStoreProvider"
-                ## @param global.documentStore.type.aws.existingSecret Reference to an existing Kubernetes secret containing AWS credentials.
-                existingSecret: "aws-credentials"
-                ## @param global.documentStore.type.aws.accessKeyIdKey Key within the AWS credentials secret for AWS_ACCESS_KEY_ID.
-                accessKeyIdKey: "awsAccessKeyId"
-                ## @param global.documentStore.type.aws.secretAccessKeyKey Key within the AWS credentials secret for AWS_SECRET_ACCESS_KEY.
-                secretAccessKeyKey: "awsSecretAccessKey"
+                ## @extra global.documentStore.type.aws.accessKeyId configuration to provide the AWS access key ID.
+                accessKeyId:
+                  ## @param global.documentStore.type.aws.accessKeyId.secret.existingSecret can be used to reference an existing Kubernetes Secret containing the access key ID.
+                  ## @param global.documentStore.type.aws.accessKeyId.secret.existingSecretKey defines the key within the existing secret object.
+                  secret:
+                    existingSecret: ""
+                    existingSecretKey: "access-key-id"
+                ## @extra global.documentStore.type.aws.secretAccessKey configuration to provide the AWS secret access key.
+                secretAccessKey:
+                  ## @param global.documentStore.type.aws.secretAccessKey.secret.existingSecret can be used to reference an existing Kubernetes Secret containing the secret access key.
+                  ## @param global.documentStore.type.aws.secretAccessKey.secret.existingSecretKey defines the key within the existing secret object.
+                  secret:
+                    existingSecret: ""
+                    existingSecretKey: "secret-access-key"
+                ## @param global.documentStore.type.aws.existingSecret (Deprecated) Use accessKeyId.secret and secretAccessKey.secret instead.
+                ## @param global.documentStore.type.aws.accessKeyIdKey (Deprecated) Use accessKeyId.secret instead.
+                ## @param global.documentStore.type.aws.secretAccessKeyKey (Deprecated) Use secretAccessKey.secret instead.
             gcp:
                 ## @param global.documentStore.type.gcp.enabled Enable GCP document store configuration.
                 enabled: false
