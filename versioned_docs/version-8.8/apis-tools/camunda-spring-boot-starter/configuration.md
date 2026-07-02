@@ -344,7 +344,7 @@ public void checkPayment(@Variable String orderId, @Variable BigDecimal amount) 
 }
 ```
 
-With the [`-parameters` compiler flag](/apis-tools/camunda-spring-boot-starter/getting-started.md#enable-the-java-compiler--parameters-flag) enabled, the parameter name is used as the variable name automatically. To use a different variable name, set it explicitly on the annotation:
+With the [`-parameters` compiler flag](./getting-started.md#enable-the-java-compiler--parameters-flag) enabled, the parameter name is used as the variable name automatically. To use a different variable name, set it explicitly on the annotation:
 
 ```java
 @JobWorker
@@ -365,7 +365,7 @@ For workers that operate on multiple related variables, `@VariablesAsType` maps 
 @JobWorker
 public PaymentVariables checkPayment(@VariablesAsType PaymentVariables vars) {
   // access typed fields directly — no casting needed
-  vars.setApproved(vars.getAmount().compareTo(LIMIT) <= 0);
+  vars.setApproved(vars.getAmount().compareTo(BigDecimal.valueOf(100)) <= 0);
   return vars; // return the object to write updated fields back to the process
 }
 ```
@@ -662,11 +662,11 @@ Whenever you want a job to fail in a controlled way, you can throw a `JobError` 
 public void processOrder() {
   try {
     // some work
-  } catch(DynamicRetryException e) {
+  } catch (DynamicRetryException e) {
     // problem shall be indicated to the process:
     throw CamundaError.jobError("Error message", new ErrorVariables(), null, this::calculateRetryBackoff, e);
     // this is a static function that returns an instance of JobError with a dynamic retry backoff
-  } catch(StaticRetryException e) {
+  } catch (StaticRetryException e) {
     // problem shall be indicated to the process:
     throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
     // this is a static function that returns an instance of JobError with a static retry backoff
@@ -679,7 +679,7 @@ The JobError takes 5 parameters:
 - `errorMessage`: String
 - `variables`: Object _(optional)_, default `null`
 - `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
-- `retryBackoff`: Duration _or_ Function (Integer -> Duration) _(optional)_, defaults to the configured retry backoff, function input are the retries that will be submitted
+- `retryBackoff`: Duration _or_ `Function<Integer, Duration>` _(optional)_, defaults to the configured retry backoff; function input is the retries value that will be submitted
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
