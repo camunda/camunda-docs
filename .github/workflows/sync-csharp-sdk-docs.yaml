@@ -217,3 +217,12 @@ jobs:
           branch: ${{ steps.resolve.outputs.pr_branch }}
           commit-message: "docs: update C# SDK API reference (${{ steps.resolve.outputs.version_label }})"
           labels: "component:docs"
+  notify-failure:
+    needs:
+      - sync-csharp-sdk-docs
+    if: failure()
+    uses: ./.github/workflows/notify-failure.yml
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

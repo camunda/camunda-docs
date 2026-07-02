@@ -102,3 +102,12 @@ jobs:
           else
             echo "ℹ️ No updates needed. All release links are up to date."
           fi
+  notify-failure:
+    needs:
+      - update-release-links
+    if: failure()
+    uses: ./.github/workflows/notify-failure.yml
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}
