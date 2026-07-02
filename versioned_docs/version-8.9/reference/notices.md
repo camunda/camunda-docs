@@ -21,6 +21,18 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Understanding affected and fixed versions
+
+Each security notice lists affected and fixed versions by Camunda component (for example, Zeebe, Operate, Tasklist, Identity, Optimize, and Web Modeler), not by Helm chart version. The Helm chart has its own version, tracked separately from the component versions it deploys.
+
+For Camunda 8.8 and later, the Orchestration Cluster unifies Zeebe, Operate, and Tasklist, so these components share the same version number.
+
+To check whether your Helm deployment is affected:
+
+1. Identify the Helm chart version you are running.
+1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
+1. Compare those component versions with the affected and fixed versions listed in the notice.
+
 ## Notice 55
 
 ### Publication date
