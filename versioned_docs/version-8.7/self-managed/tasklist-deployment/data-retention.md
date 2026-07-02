@@ -27,7 +27,7 @@ All Tasklist data present in Elasticsearch (from both **main** and **dated** ind
 
 The default time between a process instance finishing and being moved to a dated index is one hour. This can be modified by setting the [waitPeriodBeforeArchiving](importer-and-archiver.md#archive-period) configuration parameter.
 
-## Rollover Interval
+## Rollover interval
 
 Process instances are archived into historical indices based on a rollover interval. By default, this value is `1d`, so a process instance that completed on `yyyy-mm-dd` is archived into an index with that date as a suffix, meaning there is one historical index per day. Increasing this interval reduces the number of historical indices, which reduces shard consumption.
 
