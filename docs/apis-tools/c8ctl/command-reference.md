@@ -945,6 +945,7 @@ Add a profile
 | `--clientSecret` | string |  | OAuth client secret |
 | `--audience` | string |  | OAuth audience |
 | `--oAuthUrl` | string |  | OAuth token URL |
+| `--scope` | string |  | OAuth scope (space-separated) |
 | `--defaultTenantId` | string |  | Default tenant ID |
 | `--username` | string |  | Basic auth username |
 | `--password` | string |  | Basic auth password |
