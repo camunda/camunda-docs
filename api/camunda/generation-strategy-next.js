@@ -1105,8 +1105,7 @@ function replaceRequiredPermissionsMarkersWithComponents(outputDir) {
   try {
     const tokenPattern = /\[\[REQUIRED_PERMISSIONS:([A-Za-z0-9_-]+)\]\]/g;
     const importLine =
-      "import MarkerRequiredPermissions from '@site/src/mdx/MarkerRequiredPermissions';";
-
+      'import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";';
     const files = listFilesRecursive(outputDir).filter((f) =>
       f.endsWith(".mdx")
     );
