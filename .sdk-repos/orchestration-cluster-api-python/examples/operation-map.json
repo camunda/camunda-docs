@@ -839,6 +839,13 @@
       "label": "Get process instance statistics"
     }
   ],
+  "get_process_instance_wait_state_statistics": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get process instance wait state statistics"
+    }
+  ],
   "get_process_instance_sequence_flows": [
     {
       "file": "extended_operations.py",
