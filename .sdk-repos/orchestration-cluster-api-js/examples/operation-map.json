@@ -807,6 +807,13 @@
       "label": "Get process instance statistics"
     }
   ],
+  "getProcessInstanceWaitStateStatistics": [
+    {
+      "file": "extended-operations.ts",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get process instance wait state statistics"
+    }
+  ],
   "getProcessInstanceSequenceFlows": [
     {
       "file": "extended-operations.ts",
