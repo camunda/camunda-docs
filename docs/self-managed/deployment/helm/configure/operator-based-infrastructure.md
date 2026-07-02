@@ -28,8 +28,8 @@ PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they a
 - **Operator support**: For operational support on infrastructure components, engage the respective project teams or community support channels directly (CloudNativePG, Elastic, Keycloak), or use managed services.
   :::
 
-:::note Alternative: Bitnami Enterprise Images
-If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
+:::note Bitnami subcharts (Camunda 8.9 and earlier)
+Bitnami subcharts are removed in Camunda 8.10 (Helm chart `15.x`). On Camunda 8.9 and earlier you could continue using them via [Bitnami enterprise images](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/); migrate to operators or managed services before upgrading to 8.10.
 :::
 
 <MigrationTip />
@@ -45,7 +45,7 @@ Using official Kubernetes operators provides several advantages over traditional
 - **Advanced lifecycle management**: Automated upgrades, failover, and disaster recovery capabilities
 - **Best practices implementation**: Following upstream recommended deployment patterns established by vendor experts
 - **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies (through vendor support channels)
-- **Future-proof architecture**: Doesn't depend on deprecated Bitnami subcharts, ensuring long-term maintainability
+- **Future-proof architecture**: Eliminates dependency on third-party image supply chains (Bitnami/Broadcom), giving you direct control over infrastructure image sources, base OS, and update cadence. Bitnami subcharts are removed in Camunda 8.10.
 
 ## Prerequisites
 
