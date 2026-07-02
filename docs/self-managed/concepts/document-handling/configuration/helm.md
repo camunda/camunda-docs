@@ -123,6 +123,27 @@ global:
 
 MinIO accepts the AWS SDK's default streaming-signed uploads, so `chunkedEncodingEnabled` is not set. For Garage, add `chunkedEncodingEnabled: false` to the same block.
 
+### Troubleshooting checksum issues
+
+Some S3-compatible implementations cannot properly handle the checksum feature of the S3 client introduced with version 2.30.0. For more details, refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+
+If checksum-related errors appear, disable automated checksum creation by adding these environment variables to your Zeebe and Tasklist pods via `extraEnv`:
+
+```yaml
+extraEnv:
+  - name: AWS_REQUEST_CHECKSUM_CALCULATION
+    value: WHEN_REQUIRED
+  - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+    value: WHEN_REQUIRED
+```
+
+If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support by adding to the same `extraEnv` list:
+
+```yaml
+  - name: DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5
+    value: "true"
+```
+
 ## Azure Blob Storage configuration
 
 Azure Blob Storage uses a different configuration pattern than AWS and GCP. Only the connection string secret is managed via `values.yaml` under `global.documentStore.type.azure`. All other configuration (container name, class, endpoint, etc.) must be provided by the user via `orchestration.extraConfiguration` and `connectors.extraConfiguration`.

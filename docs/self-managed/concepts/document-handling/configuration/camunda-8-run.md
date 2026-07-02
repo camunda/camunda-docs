@@ -83,6 +83,23 @@ DOCUMENT_DEFAULT_STORE_ID=aws
 
 For backends that do not support AWS chunked transfer encoding (notably Garage), add `DOCUMENT_STORE_AWS_CHUNKED_ENCODING_ENABLED=false`.
 
+### Troubleshooting checksum issues
+
+Some S3-compatible implementations cannot properly handle the checksum feature of the S3 client introduced with version 2.30.0. For more details, refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+
+If checksum-related errors appear, disable automated checksum creation by setting these environment variables before running `./c8run start`:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+AWS_RESPONSE_CHECKSUM_VALIDATION=WHEN_REQUIRED
+```
+
+If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support by setting:
+
+```
+DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5=true
+```
+
 ## AWS API client permission requirements
 
 To ensure seamless integration and functionality of document handling with AWS services, the API client utilized must be configured with the appropriate permissions. The following AWS Identity and Access Management (IAM) permissions are necessary for the execution of operations related to document handling:
