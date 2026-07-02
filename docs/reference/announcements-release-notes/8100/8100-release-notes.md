@@ -38,6 +38,97 @@ import PageDescription from '@site/src/components/PageDescription';
 | :----------- | :-------------------------------------------------------------------------------------------------- | :--- |
 | 07 July 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha3)</li></ul> | -    |
 
+### APIs & tools
+
+#### Public Hub REST API
+
+<!-- https://github.com/camunda/product-hub/issues/3413 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+Camunda Hub now provides a public REST API under `/v2/` for programmatic access to Hub resources. The OpenAPI specification is published on docs.camunda.io, and the Hub API is included in the official Camunda Postman collection. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
+
+:::note
+The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
+:::
+
+### Camunda Hub
+
+#### Git-based catalog (MVP)
+
+<!-- https://github.com/camunda/product-hub/issues/3402 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+Camunda Hub introduces an organization-level catalog (MVP) for reusable, Center of Excellence (CoE)-approved assets such as element templates, connectors, forms, and DMNs, backed by source control management (SCM). CoE teams can submit assets through the API from their SCM workflows, and delivery teams can browse catalog entries in Hub and inspect asset details. This release also adds in-diagram notifications for updated shared assets, and pre-deployment dependency checks that surface missing DMNs, forms, connectors, and other dependencies on the target cluster before deployment.
+
+#### Bespoke cluster generations for SaaS
+
+<!-- https://github.com/camunda/product-hub/issues/3704 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+Organizations can now access exclusive Camunda 8 generation versions tailored specifically for their organization, available for both new cluster creation and upgrades. These generations are not visible to other organizations.
+
+#### Outdated catalog assets visibility
+
+<!-- https://github.com/camunda/product-hub/issues/3490 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+You can now see at a glance which catalog assets are outdated and where they are used across your organization.
+
+- The **Manage assets** table shows outdated and up-to-date indicators for each asset.
+- Select an outdated asset to see the workspaces, projects, and files where it is in use, so you can assess impact and reach the right owners.
+- The **Workspace assets** tab (**Manage > Assets**) surfaces outdated status at the workspace level.
+- Query which files, projects, and owners use a specific outdated asset through the API, for automated governance workflows.
+
+All views are permission-aware.
+
+#### Select a target version when upgrading a cluster
+
+<!-- https://github.com/camunda/product-hub/issues/3741 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+When you upgrade an orchestration cluster that has more than one valid upgrade target, Console now shows a version selection step in the upgrade wizard. Each option displays the generation name and the Zeebe patch version. The recommended version (the longest upgrade path) is pre-selected and labeled **latest**, and you can choose a different option before proceeding. Clusters with only one upgrade target keep the existing flow.
+
+### Modeler
+
+#### Test process segments in Play
+
+<!-- https://github.com/camunda/product-hub/issues/2896 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of a process as low-code integration tests. Run segment tests individually or in batches to validate process changes faster, and test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run. Reuse saved segment tests during iterative model changes to catch regressions earlier.
+
+<p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/play-your-process.md)</p>
+
+#### Process application versioning redesign
+
+<!-- https://github.com/camunda/product-hub/issues/3175 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+Web Modeler now offers a unified versioning model for process applications:
+
+- Continuous change history on every file, where every save is recoverable with no user action required.
+- File versions you can name, compare (any two, including non-adjacent), and restore individually without affecting the rest of the process application.
+- Process application versions, a deliberate and named capture of the entire project, with comparison that highlights only changed files.
+- A two-step deployment form to configure resources and cluster, then review with a version banner, binding overview, and a non-blocking warning for empty `versionTag` references.
+- Deployment records that link modeler state, binding configuration, and the Zeebe `deploymentKey` per cluster, for traceability from Operate back to the exact files deployed.
+
+#### Safe deletion with a 30-day recovery window
+
+<!-- https://github.com/camunda/product-hub/issues/3568 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+Deleting an item in Web Modeler no longer removes it immediately. Deleted projects, files, folders, process applications, and IDP applications are moved to **Recently deleted** for 30 days, giving your team a window to review and restore anything removed by mistake. During the window, users with the appropriate permissions can see who deleted an item and when, and restore it. After 30 days, items are permanently deleted.
+
+Deletion no longer corrupts process application version history, as existing snapshots continue to reference deleted files correctly. The recovery window applies to deletions made in 8.10 and later; items deleted before upgrading cannot be recovered.
+
 ### Operate
 
 #### Wait states
@@ -51,6 +142,34 @@ Operate now shows what an active process instance is waiting for. When you inspe
 Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
+
+#### Multi-variable filtering
+
+<!-- https://github.com/camunda/product-hub/issues/3459 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+In Operate, you can now combine multiple variable filters with AND logic to find exactly the process instances you need. Filter by variable name, value, and comparison operators — equals, contains, greater than, and less than — including nested JSON paths.
+
+### Optimize
+
+#### Optimize disabled by default on new trial clusters
+
+<!-- https://github.com/camunda/product-hub/issues/3700 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+On new trial clusters in Camunda 8 SaaS, Optimize is now disabled by default. When Optimize is disabled, the overview shows a muted tile with an **Enable Optimize** prompt so it stays discoverable. Upgrading from a trial to a paid plan automatically enables Optimize, with no manual action required.
+
+### Orchestration Cluster
+
+#### Select a DMN version with a FEEL expression
+
+<!-- https://github.com/camunda/product-hub/issues/3501 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
 
 ## 8.10.0-alpha2
 
