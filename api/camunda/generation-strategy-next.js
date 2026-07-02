@@ -1117,8 +1117,10 @@ function replaceRequiredPermissionsMarkersWithComponents(outputDir) {
 
       let updated = content;
 
-      // Add import after frontmatter if not already present
-      if (!updated.includes(importLine)) {
+      // Add import after frontmatter if not already present. Match on the module
+      // path (not the exact importLine) so an already-formatted file whose import
+      // was rewritten to double quotes isn't given a second, duplicate import.
+      if (!/import\s+MarkerRequiredPermissions\s+from/.test(updated)) {
         const lines = updated.split("\n");
         let insertIdx = 0;
         if (lines[0] && lines[0].startsWith("---")) {
@@ -1157,14 +1159,19 @@ function replaceRequiredPermissionsMarkersWithComponents(outputDir) {
 
       // Render it as its own section after the description, mirroring the
       // generated "Request"/"Responses" sections. Insert just before the first
-      // of those headings so it sits between the description and Request.
-      // The anchors are matched with regexes because, before the final prettier
-      // pass, the generated <Heading> tag spreads its attributes over multiple
-      // lines (so a single-line string match would miss it). [^>]* spans those
-      // newlines but stops at the tag's closing ">".
+      // of these anchors so it sits between the description and the request
+      // content. Endpoints with no path params and no request body don't emit a
+      // <Heading id="request"> at all, so <ParamsDetails>/<RequestSchema> are
+      // included to keep the marker ahead of the request content on those pages;
+      // the earliest match wins. The anchors are matched with regexes because,
+      // before the final prettier pass, the generated <Heading> tag spreads its
+      // attributes over multiple lines (so a single-line string match would miss
+      // it). [^>]* spans those newlines but stops at the tag's closing ">".
       if (component) {
         const anchors = [
           /<Heading[^>]*id=\{"request"\}/,
+          /<ParamsDetails/,
+          /<RequestSchema/,
           /<Heading[^>]*id=\{"responses"\}/,
           /<StatusCodes/,
         ];
