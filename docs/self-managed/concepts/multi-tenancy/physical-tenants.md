@@ -74,3 +74,7 @@ For adding tenants and lifecycle expectations in 8.10, see [provisioning and lif
 For how REST API requests are routed to Physical Tenants, including default tenant compatibility and HTTP status codes, see [API routing](/self-managed/concepts/physical-tenants/api-routing.md).
 
 For identity deployment models, token routing, and per-tenant authorization, see [authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md).
+
+For how authorization is divided between cluster-wide and tenant-local operations, see [authorization model](/self-managed/concepts/physical-tenants/authorization-model.md).
+
+For how Physical Tenant storage isolation works across primary storage, secondary storage, and document stores, see [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).
