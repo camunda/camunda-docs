@@ -22,7 +22,7 @@ Due to this overhead, the MCP Remote Client connector is primarily intended for 
 ## Modeling
 
 1. Configure an AI agent ad-hoc sub-process as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md). Do not configure any tools within the ad-hoc sub-process yet.
-2. In a Self-Managed environment, install the [MCP Remote Client element template](https://raw.githubusercontent.com/camunda/connectors/refs/heads/main/connectors/agentic-ai/element-templates/agenticai-mcp-remote-client-outbound-connector.json).
+2. In a Self-Managed environment, install the [MCP Remote Client element template](https://raw.githubusercontent.com/camunda/connectors/refs/heads/main/connectors/agentic-ai/connector-agentic-ai/element-templates/agenticai-mcp-remote-client-outbound-connector.json).
 3. Create a service task within the ad-hoc sub-process and apply the **MCP Remote Client** element template.
 4. Configure the transport type and connection settings as described in [Transport type](#transport-type).
 5. Execute your process. You should see tool discovery calls routed to the MCP Client service task, and tool definitions provided by the MCP server listed in the agent context variable. As a result, the agent should be able to call the tools provided by the MCP server.
