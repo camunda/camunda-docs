@@ -99,9 +99,11 @@ paths:
       operationId: deleteProject
       summary: Delete a project
       description: >
-        Deletes the project with the given project key. The project must have no
-        files in the project or any of its descendants. Empty folders and version
-        history are removed as part of the deletion.
+        Soft-deletes the project with the given project key. The project is moved
+        to the recently deleted state and can be recovered during the retention
+        window. The project must have no files in the project or any of its
+        descendants. To permanently and irreversibly remove a project, use
+        `DELETE /projects/{projectKey}/permanent` instead.
       x-added-in-version: "0.1.0"
       tags:
         - Project
@@ -118,6 +120,39 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/{projectKey}/permanent:
+    delete:
+      operationId: permanentlyDeleteProject
+      summary: Permanently delete a project
+      description: >
+        Permanently and irreversibly removes the project with the given project
+        key. The project cannot be recovered afterwards. The project must have no
+        files in the project or any of its descendants. Empty folders and version
+        history are removed as part of the deletion. This works in one step and
+        does not require the project to be soft-deleted first.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "204":
+          description: The project was permanently deleted successfully.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The project was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
