@@ -33,7 +33,13 @@ Process instances are archived into historical indices based on some rollover in
 at yyyy-mm-dd would be archived into an index which that date as a suffix, meaning there would be one historical index per day. By increasing this interval, the number
 of historical indices will reduce which will reduce shard consumption.
 
-This value can be modified by setting the [rolloverInterval](importer-and-archiver.md#rollover-interval) configuration parameter
+This value can be modified by setting the [rolloverInterval](importer-and-archiver.md#rollover-interval) configuration parameter.
+
+:::warning
+With a `1w` or `1M` rollover interval, effective retention can be shorter than the configured retention value. Retention is applied per index, counted from the start of that index's calendar bucket (the Monday of the ISO week for `1w`, or the 1st of the month for `1M`) — not from the date the process instance actually finished.
+
+For example, with `rolloverInterval: 1w` and a retention period of `30d`: a process instance that finishes on Sunday, 14 June 2026 is archived into the weekly index starting Monday, 8 June 2026 (suffix `2026-06-08`). Retention counts from 8 June, so the index becomes eligible for deletion after 8 July 2026 — only 24 days after the instance actually finished, instead of the full 30 days.
+:::
 
 ## Data cleanup
 
