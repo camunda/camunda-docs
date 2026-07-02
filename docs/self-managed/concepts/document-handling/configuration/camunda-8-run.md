@@ -34,18 +34,23 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 
 By using **external cloud file bucket storage** with [**AWS S3**](https://aws.amazon.com/s3/), documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management.
 
+The same store also targets self-hosted **S3-compatible object stores** (MinIO, Cloudian, Garage, etc.) when a custom endpoint is configured — see [S3-compatible object stores](#s3-compatible-object-stores) below.
+
 | Credentials variable    | Required | Description                                                                                           |
 | ----------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
 | `AWS_ACCESS_KEY_ID`     | Yes      | Access key ID used to interact with AWS S3 buckets.                                                   |
 | `AWS_SECRET_ACCESS_KEY` | Yes      | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
 | `AWS_REGION`            | Yes      | Region where the bucket is.                                                                           |
 
-| Store variable                   | Required | Description                                                                                                                                                                                                                                               |
-| -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_AWS_BUCKET`      | Yes      | Specifies the name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                       |
-| `DOCUMENT_STORE_AWS_CLASS`       | Yes      | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                                                                                    |
-| `DOCUMENT_STORE_AWS_BUCKET_PATH` | No       | Defines the folder-like path within the S3 bucket where documents are stored. This helps organize files within the bucket. For example, `documents/invoices`. If not provided, the application logic assumes a default value of `""`.                     |
-| `DOCUMENT_STORE_AWS_BUCKET_TTL`  | No       | Represents the time-to-live (TTL) for documents stored in the S3 bucket. This could be used to set an expiration policy, meaning documents will be deleted automatically after a specified duration. If not provided, the application logic ignores this. |
+| Store variable                                | Required | Description                                                                                                                                                                                                                                              |
+| --------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_AWS_BUCKET`                   | Yes      | Specifies the name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                      |
+| `DOCUMENT_STORE_AWS_CLASS`                    | Yes      | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                                                                                   |
+| `DOCUMENT_STORE_AWS_BUCKET_PATH`              | No       | Optional path/prefix within the S3 bucket (for example, `documents/invoices`). If not provided, documents are stored at the bucket root.                                                                                                                 |
+| `DOCUMENT_STORE_AWS_BUCKET_TTL`               | No       | Time-to-live (TTL) for documents in the S3 bucket (number of days). When set, documents are automatically deleted after this duration. If not provided, documents are retained indefinitely.                                                             |
+| `DOCUMENT_STORE_AWS_ENDPOINT`                 | No       | Custom endpoint URL for an [S3-compatible object store](#s3-compatible-object-stores) such as MinIO, Cloudian, or Garage. When unset, the AWS SDK default endpoint is used.                                                                              |
+| `DOCUMENT_STORE_AWS_FORCE_PATH_STYLE`         | No       | Forces path-style addressing on the S3 client. Most S3-compatible backends require this. Automatically enabled when `DOCUMENT_STORE_AWS_ENDPOINT` is set, so explicit configuration is rarely needed.                                                    |
+| `DOCUMENT_STORE_AWS_CHUNKED_ENCODING_ENABLED` | No       | Controls AWS chunked transfer encoding. Set to `false` for S3-compatible backends that do not support `aws-chunked` streaming-signed uploads (for example, Garage). When unset, the SDK default (`true`) is used, which is correct for AWS S3 and MinIO. |
 
 **Example:**
 
@@ -58,6 +63,41 @@ DOCUMENT_STORE_AWS_BUCKET_PATH=test/path
 DOCUMENT_STORE_AWS_BUCKET_TTL=5
 DOCUMENT_STORE_AWS_CLASS=io.camunda.document.store.aws.AwsDocumentStoreProvider
 DOCUMENT_DEFAULT_STORE_ID=aws
+```
+
+### S3-compatible object stores
+
+To use an S3-compatible object store (MinIO, Cloudian, Garage, etc.), set `DOCUMENT_STORE_AWS_ENDPOINT` in addition to the standard AWS variables. Set these environment variables before running `./c8run start`. The bucket must already exist on the backend — Camunda does not create it.
+
+**Example (local MinIO):**
+
+```
+AWS_ACCESS_KEY_ID=minioadmin
+AWS_SECRET_ACCESS_KEY=minioadmin
+AWS_REGION=us-east-1
+DOCUMENT_STORE_AWS_BUCKET=camunda-docs
+DOCUMENT_STORE_AWS_CLASS=io.camunda.document.store.aws.AwsDocumentStoreProvider
+DOCUMENT_STORE_AWS_ENDPOINT=http://localhost:9000
+DOCUMENT_DEFAULT_STORE_ID=aws
+```
+
+For backends that do not support AWS chunked transfer encoding (notably Garage), add `DOCUMENT_STORE_AWS_CHUNKED_ENCODING_ENABLED=false`.
+
+### Troubleshooting checksum issues
+
+Some S3-compatible implementations cannot properly handle the checksum feature of the S3 client introduced with version 2.30.0. For more details, refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+
+If checksum-related errors appear, disable automated checksum creation by setting these environment variables before running `./c8run start`:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+AWS_RESPONSE_CHECKSUM_VALIDATION=WHEN_REQUIRED
+```
+
+If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support by setting:
+
+```
+DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5=true
 ```
 
 ## AWS API client permission requirements
@@ -122,13 +162,13 @@ Azure Blob Storage supports two authentication methods: connection string and De
 - For connection string authentication: The connection string from the Azure portal (**Settings > Access keys**).
 - For Managed Identity/DefaultAzureCredential authentication: The `Storage Blob Data Contributor` RBAC role assigned on the storage account.
 
-| Store variable                           | Required    | Description                                                                                                                             |
-| ---------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_AZURE_CLASS`             | Yes         | `io.camunda.document.store.azure.AzureBlobDocumentStoreProvider`                                                                        |
-| `DOCUMENT_STORE_AZURE_CONTAINER`         | Yes         | Name of the Azure Blob Storage container.                                                                                               |
-| `DOCUMENT_STORE_AZURE_CONNECTION_STRING` | Conditional | Azure Storage connection string. Required unless using DefaultAzureCredential.                                                          |
-| `DOCUMENT_STORE_AZURE_ENDPOINT`          | Conditional | Storage account endpoint (e.g. `https://myaccount.blob.core.windows.net`). Required when using DefaultAzureCredential/Managed Identity. |
-| `DOCUMENT_STORE_AZURE_CONTAINER_PATH`    | No          | Optional path/prefix within the container.                                                                                              |
+| Store variable                           | Required    | Description                                                                                                                                     |
+| ---------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_AZURE_CLASS`             | Yes         | `io.camunda.document.store.azure.AzureBlobDocumentStoreProvider`                                                                                |
+| `DOCUMENT_STORE_AZURE_CONTAINER`         | Yes         | Name of the Azure Blob Storage container.                                                                                                       |
+| `DOCUMENT_STORE_AZURE_CONNECTION_STRING` | Conditional | Azure Storage connection string. Required unless using DefaultAzureCredential.                                                                  |
+| `DOCUMENT_STORE_AZURE_ENDPOINT`          | Conditional | Storage account endpoint (for example, `https://myaccount.blob.core.windows.net`). Required when using DefaultAzureCredential/Managed Identity. |
+| `DOCUMENT_STORE_AZURE_CONTAINER_PATH`    | No          | Optional path/prefix within the container.                                                                                                      |
 
 **Example (connection string):**
 
