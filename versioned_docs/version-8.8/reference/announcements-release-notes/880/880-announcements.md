@@ -923,7 +923,7 @@ Full setup instructions are available in the [installation guide](/self-managed/
   
 #### Helm chart: Alternative infrastructure methods
 
-For production environments, use managed or external services first. If not available, prefer [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak over Bitnami subcharts. Bitnami subcharts remain supported for existing deployments. For new deployments, they should be used only for evaluation or proof-of-concept scenarios.
+For production environments, use managed or external services first. If not available, prefer [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak over Bitnami subcharts. Bitnami subcharts remain functional in 8.8 and 8.9 to support existing deployments during migration — they are deprecated in Camunda 8.9 and will be removed in Camunda 8.10. For new deployments, use operators or managed services.
 
 </div>
 </div>
