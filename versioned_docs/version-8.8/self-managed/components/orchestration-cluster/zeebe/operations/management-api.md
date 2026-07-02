@@ -149,7 +149,7 @@ POST actuator/exporters/{exporterId}/disable
 
 After disabling the exporter, no records will be exported to this exporter. Other exporters continue exporting.
 
-If you remove an exporter from the cluster configuration through Helm values — for example, by disabling Optimize, which removes the Elasticsearch or OpenSearch exporter — the exporter is only dropped from the static configuration, and the exporter is still declared in the dynamic cluster configuration, which prevents log compaction and increases disk usage. After removing an exporter through configuration, you need to explicitly disable it using the request above, and confirm that every broker reports the exporter as `DISABLED` (see [Monitor an exporter](#monitor-an-exporter)).
+Removing an exporter from the cluster configuration through Helm values only drops it from the static configuration. For example, disabling Optimize removes the Elasticsearch or OpenSearch exporter. The exporter is still declared in the dynamic cluster configuration, which prevents log compaction and increases disk usage. To fully deactivate it, explicitly disable it using the request above, and confirm that every broker reports the exporter as `DISABLED` (see [Monitor an exporter](#monitor-an-exporter)).
 
 ### Delete an exporter
 
