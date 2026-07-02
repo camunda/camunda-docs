@@ -159,11 +159,12 @@ If the library is compatible with a newer Spring version with an active OSS supp
 
 With this policy, you can safely update your applications to a new Spring Boot version by overriding the default Spring release with another compatible version.
 
-**Spring Boot major versions**
+##### Spring Boot major versions
 
 Camunda supports two Spring Boot major versions at a time:
 
-- The **current major** is shipped as the default `camunda-spring-boot-starter` artifact.
-- The **previous major** is shipped as a dedicated `camunda-spring-boot-{n}-starter` artifact, pinned to the last stable minor of that major. It remains supported until the end of Spring Commercial support for that major, after which no further updates are released.
+- A numbered `camunda-spring-boot-{n}-starter` artifact is published for each supported major, so you can pin to a major and stay on it.
+- The plain `camunda-spring-boot-starter` always follows the current default major.
+- The previous major stays supported until the end of Spring Commercial support for that major, after which it receives no further updates.
 
 When a new Spring Boot major version reaches GA, Camunda makes it the default artifact in the Camunda release that ships before the previous major's OSS support ends.

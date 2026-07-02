@@ -39,11 +39,13 @@ With the Camunda Spring Boot Starter, you can build:
 
 ## Version compatibility
 
-| Camunda Spring Boot Starter artifact | Camunda Spring Boot Starter version | JDK  | Bundled Spring Boot version | Compatible Spring Boot version(s) | Spring OSS support |
-| ------------------------------------ | ----------------------------------- | ---- | --------------------------- | --------------------------------- | ------------------ |
-| `camunda-spring-boot-starter`        | 8.10.x                              | ≥ 17 | 4.0.x                       |                                   | Ends December 2026 |
-| `camunda-spring-boot-4-starter`      | 8.10.x                              | ≥ 17 | 4.0.x                       |                                   | Ends December 2026 |
-| `camunda-spring-boot-3-starter`      | 8.10.x                              | ≥ 17 | 3.5.x                       |                                   | Ended June 2026    |
+| Camunda Spring Boot Starter artifact | Camunda Spring Boot Starter version | JDK  | Bundled Spring Boot version | Compatible Spring Boot version(s) |
+| ------------------------------------ | ----------------------------------- | ---- | --------------------------- | --------------------------------- |
+| `camunda-spring-boot-starter`        | 8.10.x                              | ≥ 17 | 4.0.x                       |                                   |
+| `camunda-spring-boot-4-starter`      | 8.10.x                              | ≥ 17 | 4.0.x                       |                                   |
+| `camunda-spring-boot-3-starter`      | 8.10.x                              | ≥ 17 | 3.5.x                       |                                   |
+
+For Spring Boot OSS and Commercial support dates, see the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
 
 ### Dedicated Spring Boot 3 and 4 modules
 
