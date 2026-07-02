@@ -51,8 +51,8 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 
 With the AI Agent connector, you can integrate frontier models from providers like Anthropic and Amazon Bedrock, or connect to open-weight models you host yourself on any OpenAI-compatible platform. See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for all options.
 
-:::tip Choosing the right model and model provider
-Frontier models bill per token. That works well for complex reasoning, but costs scale with volume. Self-hosted open-weight models use a fixed infrastructure cost instead, so routine decisions stay affordable as volume grows. Use a frontier model where nuanced judgment matters; use a self-hosted model where decisions are simple and high-volume.
+:::tip Choose the right model setup
+Frontier models are billed per token. That works well for complex reasoning, but costs scale with volume. Self-hosted open-weight models use a fixed infrastructure cost instead, so routine decisions stay affordable as volume grows. Use a frontier model where nuanced judgment matters, and use a self-hosted model where decisions are simple and high-volume.
 :::
 
 In this guide, you can try the following use cases:
