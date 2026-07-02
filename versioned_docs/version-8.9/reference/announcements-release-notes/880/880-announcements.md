@@ -1036,7 +1036,7 @@ Before 8.8.23 and from 8.8.28+, assigning an object literal to a variable replac
 
 Example: task A sets `result.a = 1`, then task B sets `result = {b: 2}`:
 
-- _Replace_ (before 8.8.23 and 8.8.28+): `result = {"b": 2}` — task A's value is overwritten.
+- _Replace_ (before 8.8.23 and from 8.8.28+): `result = {"b": 2}` — task A's value is overwritten.
 - _Merge_ (8.8.23–8.8.27): `result = {"a": 1, "b": 2}` — task A's value is preserved.
 
 Replace is the intended long-term behavior. The merge behavior in the affected patches was an unintended regression.
