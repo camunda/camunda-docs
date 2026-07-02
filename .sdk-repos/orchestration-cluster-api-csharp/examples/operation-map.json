@@ -1045,6 +1045,13 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
   "getVariable": [
     {
       "file": "VariableElement.cs",
