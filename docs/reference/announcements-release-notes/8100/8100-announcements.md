@@ -44,9 +44,9 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 </div>
 <div className="release-announcement-content">
 
-#### Amazon Aurora PostgreSQL 14 no longer supported
+#### Amazon Aurora PostgreSQL 14 removed, 18 added
 
-Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14. Supported versions are now 15, 16, and 17.
+Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14 and adds support for version 18. Supported versions are now 15, 16, 17, and 18.
 
 - Aurora PostgreSQL 14 has reached the end of standard support on AWS.
 - Migrate your Aurora cluster to a supported version before moving to Camunda 8.10.
@@ -83,6 +83,21 @@ Camunda 8.10 drops support for Microsoft SQL Server 2019. Supported versions are
 #### Oracle 23ai rebranded as Oracle 26ai
 
 Oracle has rebranded Oracle Database 23ai as Oracle AI Database 26ai, effective with the October 2025 Release Update (RU 23.26). The internal version continues to use the 23.x code line; the transition requires no database upgrade or application recertification. Camunda 8.10's supported Oracle versions are 19c and 26ai.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### MariaDB 12.3 now supported
+
+Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11, 11.4, 11.8, and 12.3.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 

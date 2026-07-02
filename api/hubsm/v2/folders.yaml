@@ -58,11 +58,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The folder was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -95,11 +91,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The folder was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -122,11 +114,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The folder was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -149,6 +137,9 @@ components:
       required:
         - name
         - projectKey
+      example:
+        name: "processes"
+        projectKey: "prj-def-456"
       properties:
         name:
           description: The name of the folder.
@@ -167,6 +158,9 @@ components:
     FolderUpdateRequest:
       type: object
       additionalProperties: false
+      example:
+        name: "archived-processes"
+        parentFolderKey: "fld-parent-999"
       properties:
         name:
           description: The updated name of the folder.
@@ -187,6 +181,19 @@ components:
 
     FolderResult:
       type: object
+      example:
+        folderKey: "fld-012-ghi"
+        name: "processes"
+        projectKey: "prj-def-456"
+        parentFolderKey: "fld-parent-001"
+        created: "2025-03-15T10:30:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-06-10T14:22:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
       required:
         - folderKey
         - name
@@ -230,6 +237,52 @@ components:
     FolderDetailResult:
       type: object
       description: A folder with its metadata and content (child folders and files).
+      example:
+        folder:
+          folderKey: "fld-012-ghi"
+          name: "processes"
+          projectKey: "prj-def-456"
+          parentFolderKey: "fld-parent-001"
+          created: "2025-03-15T10:30:00.000Z"
+          createdBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+          updated: "2025-06-10T14:22:00.000Z"
+          updatedBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+        content:
+          folders:
+            - folderKey: "fld-child-001"
+              name: "sub-processes"
+              projectKey: "prj-def-456"
+              parentFolderKey: "fld-012-ghi"
+              created: "2025-04-01T08:00:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-04-01T08:00:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+          files:
+            - fileKey: "file-789-xyz"
+              name: "order-process.bpmn"
+              projectKey: "prj-def-456"
+              folderKey: "fld-012-ghi"
+              simplePath: "/processes/order-process.bpmn"
+              canonicalPath: "/fld-012-ghi/file-789-xyz"
+              revision: 3
+              type: "bpmn"
+              content: "<?xml version='1.0' encoding='UTF-8'?>..."
+              created: "2025-03-15T10:30:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-06-10T14:22:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
       required:
         - folder
         - content

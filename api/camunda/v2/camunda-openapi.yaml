@@ -227,6 +227,8 @@ paths:
     $ref: "jobs.yaml#/paths/~1jobs~1{jobKey}~1error"
   /jobs/{jobKey}/failure:
     $ref: "jobs.yaml#/paths/~1jobs~1{jobKey}~1failure"
+  /jobs/batch-update:
+    $ref: "jobs.yaml#/paths/~1jobs~1batch-update"
   /jobs/statistics/global:
     $ref: "job-metrics.yaml#/paths/~1jobs~1statistics~1global"
   /jobs/statistics/by-types:
@@ -301,6 +303,8 @@ paths:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1sequence-flows"
   /process-instances/{processInstanceKey}/statistics/element-instances:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1statistics~1element-instances"
+  /process-instances/{processInstanceKey}/statistics/wait-states:
+    $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1statistics~1wait-states"
   /resources/search:
     $ref: "deployments.yaml#/paths/~1resources~1search"
   /resources/{resourceKey}:

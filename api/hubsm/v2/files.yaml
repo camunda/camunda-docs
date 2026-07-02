@@ -58,11 +58,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The file was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -95,17 +91,9 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The file was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "409":
-          description: The file was modified concurrently (revision conflict).
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/Conflict"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -126,11 +114,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The file was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -185,6 +169,12 @@ components:
         - projectKey
         - type
         - content
+      example:
+        name: "order-process.bpmn"
+        projectKey: "prj-def-456"
+        folderKey: "fld-012-ghi"
+        type: "bpmn"
+        content: "<?xml version='1.0' encoding='UTF-8'?>..."
       properties:
         name:
           description: The name of the file.
@@ -219,6 +209,10 @@ components:
       additionalProperties: false
       required:
         - revision
+      example:
+        name: "order-process-v2.bpmn"
+        content: "<?xml version='1.0' encoding='UTF-8'?>..."
+        revision: 3
       properties:
         name:
           description: The updated name of the file.
@@ -244,6 +238,24 @@ components:
 
     FileResult:
       type: object
+      example:
+        fileKey: "file-789-xyz"
+        name: "order-process.bpmn"
+        projectKey: "prj-def-456"
+        folderKey: "fld-012-ghi"
+        simplePath: "/processes/order-process.bpmn"
+        canonicalPath: "/fld-012-ghi/file-789-xyz"
+        revision: 3
+        type: "bpmn"
+        content: "<?xml version='1.0' encoding='UTF-8'?>..."
+        created: "2025-03-15T10:30:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-06-10T14:22:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
       required:
         - fileKey
         - name
@@ -266,8 +278,12 @@ components:
           description: The name of the file.
           type: string
         projectKey:
-          description: The key of the project this file belongs to.
+          description: >
+            The key of the project this file belongs to. Present in single-file responses
+            (get, create, update) but null in search results; full project resolution
+            for search results is not yet supported.
           type: string
+          nullable: true
         folderKey:
           description: The key of the parent folder. Null if the file is at project root.
           type: string
@@ -366,7 +382,9 @@ components:
             - created
             - updated
         order:
-          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
 
     FileFilter:
       type: object
@@ -376,10 +394,6 @@ components:
           description: Filter by file name.
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
-        projectKey:
-          description: Filter by project key.
-          allOf:
-            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         folderKey:
           description: Filter by parent folder key.
           allOf:
@@ -417,4 +431,6 @@ components:
           items:
             $ref: "#/components/schemas/FileResult"
         page:
-          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"

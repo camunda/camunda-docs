@@ -623,6 +623,7 @@ module.exports = {
               ],
             },
             "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/filter-process-instances",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/monitor-batch-operations",

@@ -746,6 +746,7 @@ components:
         - MIGRATE_PROCESS_INSTANCE
         - MODIFY_PROCESS_INSTANCE
         - RESOLVE_INCIDENT
+        - UPDATE_JOB
         - UPDATE_VARIABLE
     BatchOperationTypeFilterProperty:
       description: BatchOperationTypeEnum property with full advanced search capabilities.
