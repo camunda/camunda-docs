@@ -109,18 +109,30 @@ paths:
     $ref: "files.yaml#/paths/~1files"
   /files/{fileKey}:
     $ref: "files.yaml#/paths/~1files~1{fileKey}"
+  /files/{fileKey}/permanent:
+    $ref: "files.yaml#/paths/~1files~1{fileKey}~1permanent"
   /files/search:
     $ref: "files.yaml#/paths/~1files~1search"
+  /files/recently-deleted/search:
+    $ref: "files.yaml#/paths/~1files~1recently-deleted~1search"
+  /files/{fileKey}/restoration:
+    $ref: "files.yaml#/paths/~1files~1{fileKey}~1restoration"
+  /files/{fileKey}/purge:
+    $ref: "files.yaml#/paths/~1files~1{fileKey}~1purge"
   /folders:
     $ref: "folders.yaml#/paths/~1folders"
   /folders/{folderKey}:
     $ref: "folders.yaml#/paths/~1folders~1{folderKey}"
+  /folders/{folderKey}/permanent:
+    $ref: "folders.yaml#/paths/~1folders~1{folderKey}~1permanent"
   /info:
     $ref: "info.yaml#/paths/~1info"
   /projects:
     $ref: "projects.yaml#/paths/~1projects"
   /projects/{projectKey}:
     $ref: "projects.yaml#/paths/~1projects~1{projectKey}"
+  /projects/{projectKey}/permanent:
+    $ref: "projects.yaml#/paths/~1projects~1{projectKey}~1permanent"
   /projects/search:
     $ref: "projects.yaml#/paths/~1projects~1search"
   /versions:

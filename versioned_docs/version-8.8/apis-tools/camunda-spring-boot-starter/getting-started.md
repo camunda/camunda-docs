@@ -40,6 +40,8 @@ With the Camunda Spring Boot Starter, you can build:
 | `camunda-spring-boot-3-starter`      | >=8.8.15                            | ≥ 17 | 3.5.x                       |                                   |
 | `camunda-spring-boot-4-starter`      | >=8.8.9                             | ≥ 17 | 4.0.x                       |                                   |
 
+For Spring Boot OSS and Commercial support dates, see the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
+
 ### Spring Boot 4.0 support
 
 Starting with the Camunda 8.8.9 patch release, a dedicated starter artifact was added that provides Spring Boot 4.0 support:
@@ -57,6 +59,8 @@ You should use this as a drop-in replacement for the default `camunda-spring-boo
 :::note
 There is also a `camunda-spring-boot-3-starter` module available from the 8.8.15 patch release, which is an alias for `camunda-spring-boot-starter` in the 8.8 release. Use `camunda-spring-boot-3-starter` if you want to stay on Spring Boot 3 when upgrading to Camunda 8.9 or newer, where the default `camunda-spring-boot-starter` module will be based on Spring Boot 4.0.
 :::
+
+For details on how Camunda handles major version transitions and end-of-support windows, see [Spring Boot/Framework/Security updates](/reference/announcements-release-notes/release-policy.md#spring-bootframeworksecurity-updates).
 
 ## Get started
 
