@@ -92,3 +92,13 @@ jobs:
           algolia-api-key: ${{ steps.secrets.outputs.API_KEY }}
           site-url: "https://docs.camunda.io"
           crawler-name: ${{ steps.secrets.outputs.CRAWLER_NAME }}
+  notify-failure:
+    needs:
+      - publish
+      - trigger-crawl
+    if: failure()
+    uses: ./.github/workflows/notify-failure.yml
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}
