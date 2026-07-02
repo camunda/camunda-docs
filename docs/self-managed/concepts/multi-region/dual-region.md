@@ -10,7 +10,7 @@ description: "A dual-region setup allows you to run Camunda in two regions synch
 import DualRegion from "./img/dual-region.jpg";
 
 :::note
-Starting in Camunda 8.10, Tasklist V1 and Operate V1 APIs were removed. This page describes the **active-active** dual-region behavior for **Next** (unreleased/post-8.10) documentation. For 8.9 behavior, which includes active-passive user traffic routing for v1 API deployments, see the 8.9 versioned documentation. For details on what changed, see the [8.10 announcements](/reference/announcements-release-notes/8100/8100-announcements).
+Starting in Camunda 8.10, Tasklist V1 and Operate V1 APIs were removed. This page describes the **active-active** dual-region behavior for **Next** (unreleased/post-8.10) documentation. For 8.9 behavior, which includes active-passive user traffic routing for v1 API deployments, see the 8.9 versioned documentation. For details on what changed, see the [8.10 announcements](../../../reference/announcements-release-notes/8100/8100-announcements.md).
 :::
 
 Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). Starting with version 8.9, this setup runs **active-active** by default — both regions process data and serve user traffic (see [active-active](#active-active)).
