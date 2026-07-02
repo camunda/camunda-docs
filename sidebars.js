@@ -2210,6 +2210,7 @@ module.exports = {
               items: [
                 "self-managed/concepts/physical-tenants/index",
                 "self-managed/concepts/physical-tenants/configuration-reference",
+                "self-managed/concepts/physical-tenants/storage-isolation",
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
               ],
             },
