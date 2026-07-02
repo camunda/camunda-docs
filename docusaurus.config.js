@@ -1,6 +1,10 @@
 const { unmaintainedVersions } = require("./src/versions");
 const { currentVersion } = require("./src/versions");
 
+// Predict next version (e.g. 8.9 -> 8.10) for "next" page permalink hints.
+const [_currentMajor, _currentMinor] = currentVersion.split(".").map(Number);
+const nextVersion = `${_currentMajor}.${_currentMinor + 1}`;
+
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
@@ -22,6 +26,8 @@ module.exports = {
   baseUrl: docsSitebaseUrl,
   customFields: {
     canonicalUrlRoot: docsSiteUrl,
+    currentVersion,
+    nextVersion,
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",

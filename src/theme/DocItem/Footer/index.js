@@ -1,5 +1,5 @@
 // Why is this swizzled?
-//   To add a PushFeedback widget to every doc, to solicit feedback from readers.
+//   - To add a PushFeedback widget to every doc, to solicit feedback from readers.
 // Swizzled from version 2.4.1.
 
 import React, { useEffect } from "react";
