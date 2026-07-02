@@ -167,4 +167,4 @@ Camunda supports two Spring Boot major versions at a time:
 - The plain `camunda-spring-boot-starter` always follows the current default major.
 - The previous major stays supported until the end of Spring Commercial support for that major, after which it receives no further updates.
 
-When a new Spring Boot major version reaches GA, Camunda makes it the default artifact in the Camunda release that ships before the previous major's OSS support ends.
+When a new Spring Boot major version reaches GA, Camunda makes it the default artifact in the Camunda release that ships before OSS support for the previous major version ends.
