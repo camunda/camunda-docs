@@ -4,6 +4,8 @@ title: "Deploy an EKS cluster with eksctl"
 description: "Deploy an Amazon Kubernetes cluster (EKS) with eksctl with step-by-step guidance."
 ---
 
+import SecondaryStorageOptionsNote from '../../\_partials/\_secondary-storage-options-note.md'
+
 This guide explores the streamlined process of deploying Camunda 8 Self-Managed on Amazon Elastic Kubernetes Service (EKS) using the `eksctl` command-line tool.
 
 [Eksctl](https://eksctl.io/) is a common CLI tool for quickly creating and managing your Amazon EKS clusters and is [officially endorsed](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) by Amazon.
@@ -27,7 +29,7 @@ This is a basic setup to get started with Camunda 8 but does not reflect a high 
 We refer to this architecture as the **standard installation**, which can be set up with or without a **domain** ([Ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 The standard installation utilizes a username and password connection for the Camunda components (or simply relies on network isolation for certain components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
 
-**Secondary storage options:** This guide includes a managed OpenSearch example path. RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) is also a supported secondary storage backend for the Orchestration Cluster. If you prefer to use RDBMS instead of OpenSearch, you can configure this during the Helm installation step. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+<SecondaryStorageOptionsNote />
 
 To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/), or if you already have an Amazon EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
 
@@ -48,8 +50,7 @@ This guide results in the following:
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 17.x](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
-- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured as a secondary storage option for Camunda.
-  Note: This guide’s example provisions a managed OpenSearch domain. Depending on the components you run and your requirements, you can instead configure an RDBMS-based secondary storage backend for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured as a secondary storage option for Camunda (Elasticsearch/OpenSearch variants only; the RDBMS variant uses Amazon Aurora PostgreSQL instead).
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured and [Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
@@ -810,6 +811,14 @@ We will also use this step to verify connectivity to the database from the creat
    https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
    ```
 
+   <!-- TODO: eks-single-region-rdbms snippets use the feat/eks-single-region-rdbms branch until it merges; switch to blob/stable/8.9/ (8.9 doc) and blob/main/ (next doc) once it lands (camunda/camunda-deployment-references#2711). -->
+
+   For the **RDBMS** secondary storage variant, use the manifest from the `eks-single-region-rdbms` reference instead. It also creates the `camunda_orchestration` database and `orchestration_db` user used as the secondary storage for the Orchestration Cluster, in place of an OpenSearch domain:
+
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/setup-postgres-create-db.yml
+   ```
+
 4. Apply the manifest:
 
    ```bash
@@ -850,6 +859,8 @@ The resulting OpenSearch domain is intended for use with Camunda, the following 
 - Orchestration Cluster (Zeebe, Operate, Tasklist, Identity)
 - Optimize
 
+If you are deploying the **RDBMS** secondary storage variant, skip this section. That variant uses Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster and does not create an OpenSearch domain. For details, see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+
 :::info Optional service
 
 If you don't want to use the Amazon OpenSearch managed service, you can skip this section.
@@ -858,7 +869,7 @@ However, note that you may need to adjust the following instructions to remove r
 If you choose not to use this service, you can either:
 
 - Provide a managed OpenSearch or Elasticsearch service, or use the internal deployment by the Camunda Helm chart in Kubernetes.
-- Use RDBMS (PostgreSQL, MySQL, MariaDB, or Oracle) as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+- Use RDBMS as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details and the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines.
 
 :::
 
