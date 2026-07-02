@@ -22,7 +22,7 @@ In Camunda 8.10, the Physical Tenant authorization model is designed around per-
 Cluster-wide operations affect the entire orchestration cluster and are not scoped to a specific Physical Tenant. In Camunda 8.10, cluster-wide operations require elevated access that is separate from any per-tenant role.
 
 :::note
-Cluster-admin role support for cluster-wide operations is planned for a future release and is not available in 8.10. Check the [8.10 announcements](../../reference/announcements-release-notes/810/8.10-announcements.md) for details.
+Cluster-admin role support for cluster-wide operations is planned for a future release and is not available in 8.10. Check the [8.10 announcements](../../../reference/announcements-release-notes/8100/8100-announcements.md) for details.
 :::
 
 ### Cluster-wide endpoint paths
