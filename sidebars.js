@@ -2230,7 +2230,16 @@ module.exports = {
           ],
         },
         {
-          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+          type: "category",
+          label: "Multi-region",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-region/resilience-tiers",
+          },
+          items: [
+            "self-managed/concepts/multi-region/cold-recovery",
+            "self-managed/concepts/multi-region/dual-region",
+          ],
         },
         "self-managed/operational-guides/data-purge",
         "self-managed/operational-guides/troubleshooting",
