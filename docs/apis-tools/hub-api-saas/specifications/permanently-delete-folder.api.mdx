@@ -1,13 +1,13 @@
 ---
-id: delete-file
-title: "Delete a file"
-description: "Soft-deletes the file with the given file key. The file is moved to the recently deleted state and can be recovered until the retention period expires and the scheduled cleanup job runs. To permanently and irreversibly remove a file, use `DELETE /files/{fileKey}/permanent` instead."
-sidebar_label: "Delete a file"
+id: permanently-delete-folder
+title: "Permanently delete a folder"
+description: "Permanently and irreversibly removes the folder with the given folder key. The folder cannot be recovered afterwards. The folder must have no files in the folder or any of its descendants. This works in one step and does not require the folder to be soft-deleted first."
+sidebar_label: "Permanently delete a folder"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -24,16 +24,16 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Delete a file"}
+  children={"Permanently delete a folder"}
 ></Heading>
 
 <MethodEndpoint
   method={"delete"}
-  path={"/files/{fileKey}"}
+  path={"/folders/{folderKey}/permanent"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Soft-deletes the file with the given file key. The file is moved to the recently deleted state and can be recovered until the retention period expires and the scheduled cleanup job runs. To permanently and irreversibly remove a file, use `DELETE /files/{fileKey}/permanent` instead.
+Permanently and irreversibly removes the folder with the given folder key. The folder cannot be recovered afterwards. The folder must have no files in the folder or any of its descendants. This works in one step and does not require the folder to be soft-deleted first.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -42,10 +42,10 @@ Soft-deletes the file with the given file key. The file is moved to the recently
 <ParamsDetails
   parameters={[
     {
-      name: "fileKey",
+      name: "folderKey",
       in: "path",
       required: true,
-      description: "The unique key identifying the file.",
+      description: "The unique key identifying the folder.",
       schema: { type: "string" },
     },
   ]}
@@ -57,7 +57,65 @@ Soft-deletes the file with the given file key. The file is moved to the recently
   id={undefined}
   label={undefined}
   responses={{
-    "204": { description: "The file was deleted successfully." },
+    "204": { description: "The folder was permanently deleted successfully." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },
@@ -176,7 +234,7 @@ Soft-deletes the file with the given file key. The file is moved to the recently
       },
     },
     "404": {
-      description: "The requested resource was not found.",
+      description: "The folder was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -221,13 +279,6 @@ Soft-deletes the file with the given file key. The file is moved to the recently
               },
             },
             title: "ProblemDetail",
-          },
-          example: {
-            type: "about:blank",
-            title: "Not Found",
-            status: 404,
-            detail: "The requested resource was not found.",
-            instance: "/api/v2/files/file-789-xyz",
           },
         },
       },

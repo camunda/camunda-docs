@@ -1,13 +1,13 @@
 ---
-id: delete-file
-title: "Delete a file"
-description: "Soft-deletes the file with the given file key. The file is moved to the recently deleted state and can be recovered until the retention period expires and the scheduled cleanup job runs. To permanently and irreversibly remove a file, use `DELETE /files/{fileKey}/permanent` instead."
-sidebar_label: "Delete a file"
+id: purge-file
+title: "Purge a file from all version history"
+description: "Permanently and irrecoverably removes the file and all references to it across every process application version snapshot. Works on live and soft-deleted files. If the file row has already been permanently deleted, purge still removes any orphaned process application snapshot milestone references that point to the file by ID. Idempotent for files that never existed or have already been fully purged within the caller's organization."
+sidebar_label: "Purge a file from all version history"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -24,16 +24,16 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Delete a file"}
+  children={"Purge a file from all version history"}
 ></Heading>
 
 <MethodEndpoint
   method={"delete"}
-  path={"/files/{fileKey}"}
+  path={"/files/{fileKey}/purge"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Soft-deletes the file with the given file key. The file is moved to the recently deleted state and can be recovered until the retention period expires and the scheduled cleanup job runs. To permanently and irreversibly remove a file, use `DELETE /files/{fileKey}/permanent` instead.
+Permanently and irrecoverably removes the file and all references to it across every process application version snapshot. Works on live and soft-deleted files. If the file row has already been permanently deleted, purge still removes any orphaned process application snapshot milestone references that point to the file by ID. Idempotent for files that never existed or have already been fully purged within the caller's organization.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -57,7 +57,10 @@ Soft-deletes the file with the given file key. The file is moved to the recently
   id={undefined}
   label={undefined}
   responses={{
-    "204": { description: "The file was deleted successfully." },
+    "204": {
+      description:
+        "The file was purged, or was already absent. Once a file has been purged its ID is removed from all storage, so callers cannot distinguish between a file that was just purged, one that was purged in a previous call, and one that never existed — all three cases return 204.\n",
+    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },
@@ -176,7 +179,8 @@ Soft-deletes the file with the given file key. The file is moved to the recently
       },
     },
     "404": {
-      description: "The requested resource was not found.",
+      description:
+        "The file belongs to a different organization and cannot be accessed.",
       content: {
         "application/problem+json": {
           schema: {
@@ -221,13 +225,6 @@ Soft-deletes the file with the given file key. The file is moved to the recently
               },
             },
             title: "ProblemDetail",
-          },
-          example: {
-            type: "about:blank",
-            title: "Not Found",
-            status: 404,
-            detail: "The requested resource was not found.",
-            instance: "/api/v2/files/file-789-xyz",
           },
         },
       },
