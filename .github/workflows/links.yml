@@ -63,12 +63,3 @@ jobs:
           title: Link Checker Report
           content-filepath: ./lychee/out.md
           labels: report, automated issue, kind/bug, dx
-  notify-failure:
-    needs:
-      - lint
-    if: failure() && github.event_name != 'pull_request'
-    uses: ./.github/workflows/notify-failure.yml
-    secrets:
-      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
-      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
-      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}
