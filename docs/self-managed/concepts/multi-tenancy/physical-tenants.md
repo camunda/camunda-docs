@@ -42,10 +42,7 @@ An operation that targets a specific Physical Tenant, such as deploying a proces
 - REST API: `POST /physical-tenants/my-tenant/v2/process-definitions`
 - Webapps: `https://your-cluster/physical-tenants/my-tenant/operate`
 
-**Cluster-wide APIs** are accessible at `/cluster/v2/`:
-
-- Cluster operations: `POST /cluster/v2/backup`
-- Cluster health: `GET /cluster/v2/health`
+**Cluster-wide APIs** (such as topology and license) are not tenant-scoped. They remain at their standard `/v2/...` paths and are not available at the tenant-prefixed path.
 
 **gRPC clients** specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
@@ -73,3 +70,7 @@ For detailed technical information about isolation model, architecture, and stor
 For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
 
 For adding tenants and lifecycle expectations in 8.10, see [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md).
+
+For how REST API requests are routed to Physical Tenants, including default tenant compatibility and HTTP status codes, see [API routing](/self-managed/concepts/physical-tenants/api-routing.md).
+
+For identity deployment models, token routing, and per-tenant authorization, see [authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md).
