@@ -155,6 +155,16 @@ You can also map a nested field:
 | :----------------------- | :---------------------- |
 | `= response.body.status` | `toolCallResult.status` |
 
+:::tip Avoid accidental overwrites with multiple outputs
+When your tool task has several output parameters that each contribute a field to `toolCallResult`, prefer nested targets like `toolCallResult.status` over mapping everything directly to `toolCallResult`. Mapping to `toolCallResult` directly replaces the entire variable.
+
+For script tasks, the FEEL `put` function adds a single key to an existing context without replacing it:
+
+```feel
+put(toolCallResult, "Complete", sendEmail)
+```
+:::
+
 </TabItem>
 
 <TabItem value="script-task">
