@@ -7,6 +7,17 @@ description: "Learn how to configure IAM roles for service accounts (IRSA) withi
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+Camunda 8 components running on Amazon EKS can authenticate to AWS services, such as Amazon S3, Amazon Aurora PostgreSQL, and Amazon OpenSearch Service, without static access keys. Each component assumes an AWS IAM role through its Kubernetes service account. Amazon EKS provides two mechanisms for this, and Camunda supports both:
+
+- [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) maps an IAM role to a service account through an OIDC identity provider. IRSA is the mechanism used throughout this page and in the [Terraform reference architecture](terraform-setup.md).
+- [EKS Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html) maps an IAM role to a service account through the EKS Pod Identity Agent, without an OIDC provider. It is a simpler alternative to IRSA.
+
+Both mechanisms deliver credentials through the [AWS SDK default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), so Camunda components need no code or configuration change to switch between them. Camunda validates its deployments and reference architecture with IRSA, and because credential resolution is handled entirely by the AWS SDK, EKS Pod Identity is supported as well.
+
+:::warning Do not configure IRSA and Pod Identity on the same service account
+Use only one mechanism per Kubernetes service account. If a service account is annotated for IRSA and also has an EKS Pod Identity association, the AWS SDK default credentials provider chain resolves the IRSA web identity token before the Pod Identity credentials. IRSA then takes precedence, and the Pod Identity association is ignored.
+:::
+
 ## IRSA configuration validation of a Camunda 8 helm deployment
 
 The [c8-sm-checks](/self-managed/operational-guides/troubleshooting/troubleshooting.md#anomaly-detection-scripts) utility is designed to validate IAM Roles for Service Accounts ([IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) configuration in EKS Kubernetes clusters on AWS. It ensures that key components in a Camunda 8 deployment, such as PostgreSQL and OpenSearch, are properly configured to securely interact with AWS resources via the appropriate IAM roles.
@@ -310,6 +321,16 @@ With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK re
    ```
    You should see `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`, and no `AWS_ACCESS_KEY_ID`.
 3. Upload and download a document to confirm S3 access works end to end.
+
+### Authenticate with EKS Pod Identity instead
+
+To authenticate the document store with [EKS Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html) rather than IRSA, keep `global.documentStore.type.aws.irsa.enabled` set to `true`. Despite its name, this flag only stops the chart from injecting the static `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` credentials. Pod Identity requires this too, so the AWS SDK resolves credentials through its default provider chain.
+
+The remaining steps differ from the IRSA setup:
+
+- Skip the OIDC trust policy and the `eks.amazonaws.com/role-arn` service account annotation. Both apply to IRSA only.
+- Grant the IAM role to each component's service account by creating an [EKS Pod Identity association](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-association.html). The role still needs the same S3 permission policy shown above, with a trust policy for the `pods.eks.amazonaws.com` service principal.
+- When you verify the pods, expect the `AWS_CONTAINER_CREDENTIALS_FULL_URI` environment variable instead of `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`.
 
 ## Elasticsearch backup with IRSA
 
