@@ -19,7 +19,7 @@ The rule detects these issues:
 - **`fromAi()` on a non-entry element**: the connector resolves tool inputs only from the tool's entry element (the activity with no incoming sequence flows). A `fromAi()` call on a downstream element is ignored at runtime. Define the parameter on the entry element and read the `toolCall` variable directly where you need it.
 - **Wrong function name casing**: the function name is case-sensitive. Use `fromAi`, not `fromai` or `fromAI`.
 - **Description is missing, blank, or not a string literal**: the second argument should be a quoted string. It is syntactically optional, but the LLM reads it to decide what value to supply, so a missing or empty description degrades the agent's accuracy.
-- **`fromAi()` outside an agentic sub-process**: the function only has meaning inside an ad-hoc sub-process configured as an AI agent.
+- **`fromAi()` in the wrong place**: the connector only populates `toolCall` for a tool's inputs. `fromAi()` in an output mapping, in a sequence flow condition, or outside an agentic ad-hoc sub-process resolves to null at runtime. Define the parameter in an input mapping on the tool's entry element and read the resulting variable where you need it.
 
 ## <MarkerGuideline.Valid /> Correct `fromAi()` usage
 
