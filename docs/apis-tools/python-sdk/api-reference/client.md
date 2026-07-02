@@ -4462,6 +4462,50 @@ def get_process_instance_statistics_by_error_example() -> None:
             print(f"Error: {stat.error_message}")
 ```
 
+### get_process_instance_wait_state_statistics()
+
+```python
+def get_process_instance_wait_state_statistics(process_instance_key, , consistency=None, **kwargs)
+```
+
+Get wait state statistics
+
+> Get statistics about waiting element instances by the process instance key, grouped by element id.
+
+- **Parameters:**
+  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ProcessInstanceWaitStateStatisticsQueryResult
+- **Return type:**
+  ProcessInstanceWaitStateStatisticsQueryResult
+
+#### Examples
+
+**Get process instance wait state statistics:**
+
+```python
+def get_process_instance_wait_state_statistics_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.get_process_instance_wait_state_statistics(
+        process_instance_key=process_instance_key,
+    )
+
+    for stat in result.items:
+        print(f"Element: {stat.element_id}, Waiting: {stat.waiting_count}")
+```
+
 ### get_resource()
 
 ```python
