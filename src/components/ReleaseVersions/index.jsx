@@ -56,9 +56,13 @@ function VersionContent({ version }) {
           </tr>
         </thead>
         <tbody>
-          {version.components.filter((c) => c.name !== "Camunda Platform (Helm)").map((component) => {
-            const githubLink = component.links.find((l) => l.label === "GitHub changelog");
-            const dockerLink = component.links.find((l) => l.label === "Docker Hub");
+          {[
+            ...version.components.filter((c) => c.name === "Camunda Platform (Helm)"),
+            ...version.components.filter((c) => c.name !== "Camunda Platform (Helm)"),
+          ].map((component) => {
+            const showLinks = component.name !== "Web Modeler";
+            const githubLink = showLinks && component.links.find((l) => l.label === "GitHub changelog");
+            const dockerLink = showLinks && component.links.find((l) => l.label === "Docker Hub");
             return (
             <tr key={component.name}>
               <td>
@@ -124,7 +128,7 @@ function ReleaseEntry({ release }) {
         >
           {versions.map((version) => {
             const minor = minorVersion(version.saas);
-            const label = version.label ? `${minor} — ${version.label}` : minor;
+            const label = version.label ? `${minor} ${version.label}` : minor;
             return (
               <TabItem key={version.saas} value={minor} label={label}>
                 <VersionContent version={version} />
