@@ -124,7 +124,7 @@ Using your throughput and retention settings, you can now calculate the required
 
 ### Zeebe record ILM retention
 
-When the [Elasticsearch exporter retention policy](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) is enabled, Zeebe record indices are deleted after the configured `minimum-age`. Optimize reads from these same indices, so the retention window must be long enough to cover Optimize's worst-case import lag. If the exporter deletes records before Optimize imports them, process instance completion events are permanently lost: Optimize records the instance as ACTIVE with no endDate, and history cleanup can never remove it.
+When the [Elasticsearch exporter retention policy](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md) is enabled, Zeebe record indices are deleted after the configured `minimum-age`. Optimize reads from these same indices, so the retention window must be long enough to cover Optimize's worst-case import lag. If the exporter deletes records before Optimize imports them, process instance completion events are permanently lost: Optimize records the instance as ACTIVE with no endDate, and history cleanup can never remove it.
 
 **Minimum recommended retention:** Set `minimum-age` to at least **3-7 days** when running Optimize. This provides headroom for:
 
