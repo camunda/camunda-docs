@@ -1515,10 +1515,13 @@ h2#request {
   border-bottom: none;
   border-top: 1px solid var(--ifm-toc-border-color);
   margin-top: 2rem;
+  /* Match the Responses gap between the divider and the heading text, which
+     comes from the .openapi-tabs__response-header-section wrapper padding-top (1rem). */
+  padding-top: 1rem;
 }
 .anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#request {
   border-bottom: none;
-  padding-top: 2rem;
+  padding-top: 1rem;
   font-size: 28px;
   padding-bottom: 0;
 }
