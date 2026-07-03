@@ -284,7 +284,7 @@ Starting with 8.10, the `JobIntent.COMPLETED` follow-up event is emitted without
 
 #### Camunda Spring Boot Starter now bundles Spring Boot 4.1.x
 
-Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` & `camunda-spring-boot-4-starter`) is bundled with Spring Boot 4.1.x (up from 4.0.x in 8.9).
+Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` and `camunda-spring-boot-4-starter`) bundles Spring Boot 4.1.x (up from 4.0.x in 8.9).
 
 **Action:** Migrate your application to Spring Boot 4.1.x. See the [version compatibility table](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) for details.
 
