@@ -230,6 +230,7 @@ jobs:
           # To mitigate this, we stage the changes _before_ we check if there are any.
           # Then, we run lint-staged manually. Finally, we check if there are changes.
           # This should get rid of the whitespace-only changes and avoid an empty commit.
+          npm ci
           git add .
           npx lint-staged --allow-empty
 
