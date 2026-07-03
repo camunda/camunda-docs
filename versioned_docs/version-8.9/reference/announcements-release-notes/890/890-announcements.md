@@ -1457,7 +1457,7 @@ Patches 8.9.1–8.9.8 changed how output mappings behave when writing to composi
 
 Before 8.9.1 and from 8.9.9+, assigning an object literal to a variable replaces the variable entirely. In 8.9.1–8.9.8, the behavior changed to _merge_: existing keys in the variable are preserved and new keys are added.
 
-Example: task A sets `result.a = 1`, then task B sets `result = {b: 2}`:
+Example: task A sets `result = {a: 1}`, then task B sets `result = {b: 2}`:
 
 - _Replace_ (before 8.9.1 and from 8.9.9+): `result = {"b": 2}` — task A's value is overwritten.
 - _Merge_ (8.9.1–8.9.8): `result = {"a": 1, "b": 2}` — task A's value is preserved.
@@ -1466,8 +1466,8 @@ Replace is the intended long-term behavior. The merge behavior in the affected p
 
 **Action**
 
-- **Running 8.9.1–8.9.8:** your processes use merge behavior. Review any process that writes to composite variables from multiple tasks.
-- **Upgrading to 8.9.9+:** output mappings revert to replace behavior. Test affected processes before upgrading to production.
+- **Running 8.9.1–8.9.8:** your processes use merge behavior. Identify any process where one task writes to a sub-key of a variable and a later task assigns an object literal to the same parent. If found, either switch the later task to path notation `result.b = 2` or include all required keys explicitly in its object literal.
+- **Upgrading to 8.9.9+:** replace behavior is restored. The same processes identified above will behave differently after upgrading. If your process was relying on earlier tasks' values being kept, you need to fix it before upgrading: instead of assigning a whole object `result = {a: 1, b: 2}`, make sure it includes all the keys it needs explicitly — or write each key separately `result.a = 1, result.b = 2`
 
 </div>
 </div>
