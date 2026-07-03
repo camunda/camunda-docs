@@ -23,6 +23,12 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 :::
 
+## 8.8.30
+
+### Camunda Spring Boot Starter - Spring Boot 4.1 support
+
+The `camunda-spring-boot-4-starter` bundles Spring Boot 4.0.x. As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.8.30` patch onward. The `camunda-spring-boot-4-starter` continues to bundle Spring Boot 4.0.x by default.
+
 ### Technical Changelogs for all 8.8.x releases
 
 <details className="changelog-dropdown">
@@ -33,12 +39,6 @@ These release notes identify the main new features included in the 8.8 minor rel
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
-
-## 8.8.30
-
-### Camunda Spring Boot Starter - Spring Boot 4.1 support
-
-The `camunda-spring-boot-4-starter` bundles Spring Boot 4.0.x. As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.8.30` patch onward. The `camunda-spring-boot-4-starter` continues to bundle Spring Boot 4.0.x by default.
 
 ## Agentic orchestration
 
