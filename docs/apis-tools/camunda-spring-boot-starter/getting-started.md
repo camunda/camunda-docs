@@ -45,6 +45,8 @@ With the Camunda Spring Boot Starter, you can build:
 | `camunda-spring-boot-4-starter`      | 8.10.x                              | ≥ 17 | 4.0.x                       |                                   |
 | `camunda-spring-boot-3-starter`      | 8.10.x                              | ≥ 17 | 3.5.x                       |                                   |
 
+For Spring Boot OSS and Commercial support dates, see the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
+
 ### Dedicated Spring Boot 3 and 4 modules
 
 Starting with Camunda 8.9, the default `camunda-spring-boot-starter` artifact is bundled with **Spring Boot 4.0.x**. Additionally, two dedicated modules are available:
@@ -52,9 +54,16 @@ Starting with Camunda 8.9, the default `camunda-spring-boot-starter` artifact is
 - **`camunda-spring-boot-4-starter`**: Identical to `camunda-spring-boot-starter`. Use this if you want to explicitly target Spring Boot 4.0.x.
 - **`camunda-spring-boot-3-starter`**: Bundled with Spring Boot 3.5.x. Use this if your application is not yet ready to upgrade to Spring Boot 4.0.
 
-:::caution Spring Boot 3.5.x support window
-OSS support for Spring Boot 3.5.x ends in June 2026 (see [Spring Boot support timeline](https://spring.io/projects/spring-boot#support)). We encourage you to migrate to Spring Boot 4.0 before the support window closes. If you need continued Spring Boot 3.x support after June 2026, consider obtaining enterprise support from a third-party provider.
-:::
+:::caution Spring Boot 3.5.x OSS support window
+Spring's open source support for Spring Boot 3.5.x ended in June 2026 (see [Spring Boot support timeline](https://spring.io/projects/spring-boot#support)). Camunda continues to support and maintain `camunda-spring-boot-3-starter` until the end of Spring Commercial support for Spring Boot 3.x.
+
+What this means for your application:
+
+- **Camunda's starter:** Camunda continues to release patches for `camunda-spring-boot-3-starter` until the end of Spring Commercial support.
+- **Spring framework patches:** After June 2026, Spring will no longer provide open-source security or bug-fix patches for Spring Boot 3.x. Security patches remain available through Spring Commercial support (Broadcom).
+  :::
+
+For details on how Camunda handles major version transitions and end-of-support windows, see [Spring Boot/Framework/Security updates](/reference/announcements-release-notes/release-policy.md#spring-bootframeworksecurity-updates).
 
 To use the Spring Boot 3 module, replace the default dependency in your project:
 
@@ -219,7 +228,7 @@ camunda:
 
 ## Start building your process application
 
-With your project configured, you are ready to build your process application. Below are the core operations you’ll typically perform, along with guidance on the next steps.
+With your project configured, you are ready to build your process application. Below are the core operations you'll typically perform, along with guidance on the next steps.
 
 ### Inject the Camunda client
 
@@ -232,12 +241,21 @@ private CamundaClient client;
 
 ## Implement the job worker
 
-Declare a method like this on a bean:
+Declare a method on a bean. By default, the method name is used as the job type, so you only need the annotation:
 
 ```java
-@JobWorker(type = "foo")
-public void handleJobFoo() {
-  // do whatever you need to do
+@JobWorker
+public void processOrder() {
+  // handles jobs of type 'processOrder'
+}
+```
+
+To inject specific process variables as typed parameters, use `@Variable`:
+
+```java
+@JobWorker
+public void processOrder(@Variable String orderId, @Variable BigDecimal amount) {
+  // only 'orderId' and 'amount' are fetched; types are enforced automatically
 }
 ```
 

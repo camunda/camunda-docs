@@ -11,14 +11,14 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v4.0.0
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -78,7 +78,7 @@ jobs:
           fi
 
       - name: Checkout Camunda Hub (Self-Managed)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
@@ -113,14 +113,14 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v4.0.0
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -140,7 +140,7 @@ jobs:
           repositories: camunda-hub
 
       - name: Checkout Camunda Hub (SaaS)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
@@ -176,7 +176,7 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
@@ -195,7 +195,7 @@ jobs:
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v4.0.0
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -255,3 +255,14 @@ jobs:
           team-reviewers: camunda/tech-writers
           base: main
           labels: deploy
+  notify-failure:
+    needs:
+      - sync-sm
+      - sync-saas
+      - create-pr
+    if: failure()
+    uses: ./.github/workflows/notify-failure.yml
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

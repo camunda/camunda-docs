@@ -224,7 +224,7 @@ For more information, see the [Orchestration Cluster OIDC configuration guide](/
 :::note Username display in Web Modeler (Helm)
 With Helm defaults, usernames are typically resolved from `preferred_username`. If you want Web Modeler to use the `name` claim instead (for example, to show display names), set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
 
-See [Identity/Keycloak configuration](/self-managed/components/hub/configuration/modeler-configuration.md#identity--keycloak-1).
+See [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak-1).
 :::
 
 #### Configure Connectors

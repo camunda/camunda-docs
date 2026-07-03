@@ -50,7 +50,7 @@ public static IServiceCollection AddCamundaClient(this IServiceCollection servic
 Registers a singleton using an section.
 
 Typically called as services.AddCamundaClient(configuration.GetSection("Camunda")).
-PascalCase keys in the section are mapped to canonical CAMUNDA\_\* env-var names internally.
+PascalCase keys in the section are mapped to canonical CAMUNDA_* env-var names internally.
 Environment variables still apply as a base layer; section values override them.
 
 | Parameter              | Type                 | Description |
@@ -2399,6 +2399,43 @@ public static async Task UpdateJobExample(JobKey jobKey)
 }
 ```
 
+#### UpdateJobsBatchOperationAsync(JobBatchUpdateRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> UpdateJobsBatchOperationAsync(JobBatchUpdateRequest body, CancellationToken ct = default)
+```
+
+Update jobs (batch)
+Creates a batch operation to update jobs matching the given filter. At least one changeset field must be non-null. This is done asynchronously; the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter | Type                    | Description |
+| --------- | ----------------------- | ----------- |
+| `body`    | `JobBatchUpdateRequest` |             |
+| `ct`      | `CancellationToken`     |             |
+
+**Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task UpdateJobsBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.UpdateJobsBatchOperationAsync(
+        new JobBatchUpdateRequest
+        {
+            Filter = new JobFilter
+            {
+                Type = new StringFilterProperty { Eq = "my-job-type" },
+            },
+            Changeset = new JobChangeset { Retries = 3 },
+        });
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
 ### Job Workers
 
 #### RunWorkersAsync(TimeSpan?, CancellationToken)
@@ -2607,7 +2644,13 @@ public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceK
 
     foreach (var waitState in result.Items)
     {
-        Console.WriteLine($"{waitState.ElementId}: {waitState.WaitStateType}");
+        var details = waitState.Details switch
+        {
+            JobWaitStateDetails job => $"waiting on job '{job.JobType}'",
+            MessageWaitStateDetails message => $"waiting for message '{message.MessageName}'",
+            _ => "waiting",
+        };
+        Console.WriteLine($"{waitState.ElementId}: {details}");
     }
 }
 ```
@@ -4637,7 +4680,8 @@ public Task<DeploymentResult> CreateDeploymentAsync(MultipartFormDataContent con
 ```
 
 Deploy resources
-Deploys one or more resources (e.g. processes, decision models, or forms).
+Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources, and generic files.
+A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA resources are stored as deployable generic resources in the engine.
 This is an atomic call, i.e. either all resources are deployed or none of them are.
 
 | Parameter | Type                       | Description |

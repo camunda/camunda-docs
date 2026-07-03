@@ -1,13 +1,13 @@
 ---
 id: delete-folder
 title: "Delete a folder"
-description: "Deletes the folder with the given folder key. The folder must have no files in the folder or any of its descendants."
+description: "Soft-deletes the folder with the given folder key. The folder is moved to the recently deleted state and can be recovered during the retention window. The folder must have no files in the folder or any of its descendants. To permanently and irreversibly remove a folder, use `DELETE /folders/{folderKey}/permanent` instead."
 sidebar_label: "Delete a folder"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWU1z2zYQ/SsYnJopJSqO06a8uUk8SdqDx3Xqg6vDElhKiEGAAUDZqob/vbMAaX2mqU+98KCRSAK7bxdvH6HFhtsGHQRlzUfJCy5RY8BLqyU6nnGJXjjV0GNe8HfxoWdhiayKQ9iDCst4vVArNMPde1xP2c12VN36wJawQmYsq5RGz5TZNWMdA7NmtmIqeEZe0UgwwU95xh8nICXKiTKTFTqfsMymL6cznvEAC8+LO95Dnme8AQc1BnR0f8MN1MgLnhz9hmuecUUGGghLnnGHX1vlUPIiuBYPI6YYWqO+tkgxMSXRBFWtlVnsoCeMXiyxBl5seFg35M8Hp8yCd92cfPjGGo+enp/Nzunr2M+QUaAEUKIl860Q6H3Var2e8i7j57PZ6cmNsyslUTIJAZjyzNjAVqCVJHTCmoAm0FRoGq1EXPC8cbbUWP/4xZOdzU4Q+w4u2FUaySQGUJrZ8guKwCAtlVMlSlrQu+vLt+yX89c/z39YhtD4Is8fHh6mrhITlCpYN7VukbtK0IfGvYgscchqWLMSGUipyCdoCqhBFxR65hsUqlKCBRuz3sNmlOnpX4ZIkHKeYO0t6l16lvGggqZvHyC0PlKbQols8AGMwMidJ6/bpTxc0oxX1tUQeMFbp46K5IJ9vv54xJQ9zHFOBa0mG1DaNhSlBnPPM46PUDeavA0ZlFb4qYC6NRKmyubQqHx1Np0Nqzchkz4vQU4obPSBiJLCPYH9EKxv6xpcLL1TOLd4fgXJrrcO+jxuPSgTcBFF4yk9yoRXZ0c+ia4fbm6uWDLBhJVEfsfCUvkBwJ7v89ks47Uyqm7r4Qoe09VPs1n3tJjfj9cwfGw0mFgAh0Erw2rrsGf5fvh96AMv1+yuhsdPtvQ39kIEtYKAfs4EGCq8ElkDzqOkTD3x6ztMmjis0CGNPM0pUqwjYlmnFuowkn3o+eos/2JLn0MCSja7LUd4X9zvUg67rotC8/K00PQcYxrEvU8Kw6ANS0KVZIUJhxEk6CjfSwQZxXjDb29vJxfbwbgvOofK2Y3CNQrXKFyjcD1PuF4d68CldaWSEk3alQ4a1m+TQGv7gONGadSbUW9GvXm23nz/7xxFWtnWjBIzSswoMaPEPFNiXp9q+lwYRqvsqD7ROeuYFaJ1DiV7WCod3VPvaMDW83FUoFGBRgUaFeg5CtTR9ICGOu+pp36Pa16c6stnfAW6xaf+PHW/awxLuz1b4FlqvRc8T1skn2+emvMd1SS61dC8b53mBd8kKeqKPN8srQ9dsWmsC13P/ujVKSh1KlQakmRrqCptBeh4+xT96AGdEgxp+9CW7OLqI0tAYt+d3O2bfDN78+akNRr6L5Z2VXWwRcV90lYa/E1r8XDBo2idCuuYrxLBoaMWGy/u5ruP/yBTKT+7g55I2GOIHuk6DeJZ/+NyoOan25sjqJ9ub1iw92iYLQMog5JVztYRNPUGrVN/pxLbQqdKqGwE0BOPwrtqS61EjPLPY62g2yQNwtZ1a+J7yyzSEdTbJImUI6L78TkRvfRAxEXsT4T6KTzrWTZI7KCuwtYRZ2N9qMHszEznYAz6Pf4hzs32Dft/HZn1ixrwMeSNBmWIejHMTV99d/2JGL38iu3h2Dzry+eObzYlePzsdNfR7a8tOiLZfFttkXJSefoteVGB9ocnaLu5+OG6fxG/YP/5XO1kIP1NMOsdweFZL0vbYLp5N7Sfd2TrQghsws7Mb26C9tTr3fvf39+85133DxtzFo8=
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-sm/specifications/hub-public-api-v-2
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Deletes the folder with the given folder key. The folder must have no files in the folder or any of its descendants.
+Soft-deletes the folder with the given folder key. The folder is moved to the recently deleted state and can be recovered during the retention window. The folder must have no files in the folder or any of its descendants. To permanently and irreversibly remove a folder, use `DELETE /folders/{folderKey}/permanent` instead.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -105,6 +105,14 @@ Deletes the folder with the given folder key. The folder must have no files in t
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -156,6 +164,14 @@ Deletes the folder with the given folder key. The folder must have no files in t
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -206,11 +222,19 @@ Deletes the folder with the given folder key. The folder must have no files in t
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
         },
       },
     },
     "404": {
-      description: "The folder was not found.",
+      description: "The requested resource was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -255,6 +279,13 @@ Deletes the folder with the given folder key. The folder must have no files in t
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/file-789-xyz",
           },
         },
       },
@@ -305,6 +336,14 @@ Deletes the folder with the given folder key. The folder must have no files in t
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
           },
         },
       },

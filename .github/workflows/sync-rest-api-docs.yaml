@@ -11,10 +11,23 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
+
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
 
       - name: Check for stable branch
         id: compute_branch
@@ -49,7 +62,7 @@ jobs:
           fi
 
       - name: Checkout Camunda
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda
           path: rest-spec
@@ -147,8 +160,8 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v3
         with:
-          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
-          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true'
@@ -180,3 +193,12 @@ jobs:
           team-reviewers: camunda/tech-writers
           base: main
           labels: deploy
+  notify-failure:
+    needs:
+      - sync-file
+    if: failure()
+    uses: ./.github/workflows/notify-failure.yml
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

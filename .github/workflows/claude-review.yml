@@ -19,6 +19,8 @@ jobs:
       contents: read
       pull-requests: write
     steps:
+      - uses: actions/checkout@v7
+
       - name: Import secrets from Vault
         id: secrets
         uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
@@ -30,11 +32,17 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/claude-reviewer ANTHROPIC_API_KEY;
 
-      - uses: anthropics/claude-code-action@beta
+      - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ steps.secrets.outputs.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           direct_prompt: |
             Review this pull request against the Camunda docs contribution standards referenced from AGENTS.md.
 
-            Post inline comments for issues found, with a concrete fix suggestion for each.
+            Post inline review comments on the specific lines where issues are found. For each issue, include a concrete fix using GitHub's suggestion block format so the author can apply it directly:
+
+            ```suggestion
+            <replacement text here>
+            ```
+
+            Use suggestion blocks whenever a fix can be expressed as a direct text replacement on the commented line(s).

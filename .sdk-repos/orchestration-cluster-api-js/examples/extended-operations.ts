@@ -380,7 +380,16 @@ async function searchElementInstanceWaitStatesExample(processInstanceKey: Proces
   );
 
   for (const waitState of result.items ?? []) {
-    console.log(`${waitState.elementId}: ${waitState.waitStateType}`);
+    const { details } = waitState;
+    let description: string;
+    if (details.waitStateType === 'JOB') {
+      description = `waiting on job '${details.jobType}'`;
+    } else if (details.waitStateType === 'MESSAGE') {
+      description = `waiting for message '${details.messageName}'`;
+    } else {
+      description = `waiting (${details.waitStateType})`;
+    }
+    console.log(`${waitState.elementId}: ${description}`);
   }
 }
 //#endregion SearchElementInstanceWaitStates
