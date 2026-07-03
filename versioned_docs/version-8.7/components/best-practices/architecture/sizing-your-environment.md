@@ -97,6 +97,10 @@ Elasticsearch needs enough memory available to load a large amount of this data 
 Use SSD-backed storage for Zeebe (your primary storage). Every command is written and flushed to the Zeebe Raft log before it is processed: the leader must persist the entry and followers must flush it before acknowledging, so disk write and flush **latency** sits directly on the processing critical path. As with Elasticsearch, the critical factor is latency, not throughput — cloud-provider throughput figures often look similar for HDD and SSD, which is misleading. In testing, HDD-backed primary storage degraded throughput by roughly 50%, raised commit latency, and triggered additional Raft snapshot replication. Provision performant, low-latency (single-digit-millisecond write latency) disks for Zeebe. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
 :::
 
+:::note Index replicas in multi-node clusters
+The disk estimates in this section do not account for index-level replicas. In multi-node Elasticsearch/OpenSearch clusters, configure at least one replica per index for fault tolerance — each replica stores a full copy of the primary shard data, approximately doubling total disk usage. See [Configuring shards and replicas](/self-managed/concepts/secondary-storage-management.md#replicas) for guidance.
+:::
+
 Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json), Camunda measured the following approximate disk space requirements using Camunda 8 SaaS 1.2.4. These are not exact numbers, but they can help you estimate what to expect:
 
 - Zeebe: 75 kb / PI
