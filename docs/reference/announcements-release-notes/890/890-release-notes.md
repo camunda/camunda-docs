@@ -36,6 +36,12 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.9.12
+
+### Camunda Spring Boot Starter - Spring Boot 4.1 support
+
+As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot version 4.0 ends in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.9.12` patch onward. Spring Boot 4.0.x remains the default bundled version.
+
 ## Agentic orchestration
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
