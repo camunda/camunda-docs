@@ -54,6 +54,12 @@ Operations triggered through the Processes MCP Server are recorded in the [audit
 
 See [inbound channel](/components/audit-log/overview/operation-structure.md#inbound-channel) for details on how this is presented in the applications and the REST API.
 
+:::note
+The Processes MCP Server uses the same authentication as the REST API, so a tool call is attributed to the authenticated user or client.
+By default, [only user operations are recorded](/components/audit-log/overview/recorded-operations.md#limitations-and-constraints), not client operations.
+To capture MCP tool calls made by a client, configure the audit log to also track client operations.
+:::
+
 ## Get started
 
 :::important Camunda 8.10
