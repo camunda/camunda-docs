@@ -52,7 +52,7 @@ For Spring Boot OSS and Commercial support dates, see the [Spring Boot support t
 Starting with Camunda 8.10, the default `camunda-spring-boot-starter` artifact is bundled with **Spring Boot 4.1.x**. Additionally, two dedicated modules are available:
 
 - **`camunda-spring-boot-4-starter`**: Identical to `camunda-spring-boot-starter`. Use this if you want to explicitly target Spring Boot 4.1.x.
-- **`camunda-spring-boot-3-starter`**: Bundled with Spring Boot 3.5.x. Use this if your application is not yet ready to upgrade to Spring Boot 4.1.
+- **`camunda-spring-boot-3-starter`**: Bundled with Spring Boot 3.5.x. Use this if your application is not yet ready to upgrade to Spring Boot 4.1.x.
 
 :::caution Spring Boot 3.5.x OSS support window
 Spring's open source support for Spring Boot 3.5.x ended in June 2026 (see [Spring Boot support timeline](https://spring.io/projects/spring-boot#support)). Camunda continues to support and maintain `camunda-spring-boot-3-starter` until the end of Spring Commercial support for Spring Boot 3.x.
