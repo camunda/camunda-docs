@@ -93,25 +93,23 @@ Validation errors include an additional `violations` array:
 
 ### Pagination
 
-Offset pagination in Camunda Hub API v2 is different from Web Modeler API v1. Additionally, v2 introduces cursor pagination.
-
-#### Offset pagination
+Offset pagination in Camunda Hub API v2 is different from Web Modeler API v1.
 
 In Web Modeler API v1, you used two fields to paginate items in a response:
 
-- `page` specified the page to return.
+- `page` specified the page to return, starting with page 0.
 - `size` specified the number of items per page.
 
 For example:
 
 ```json title="Web Modeler API v1"
 {
-  "page": 2,
+  "page": 3,
   "size": 20
 }
 ```
 
-This request skips the first _page_ of 20 items (indexes 0–19) and returns the second page of 20 items (indexes 20–39). If there aren't enough items to fill the second page, you receive all remaining items.
+This request skips the first three _pages_ of 20 items (indexes 0–59) and returns the fourth page of 20 items (indexes 60–79). If there aren't enough items to fill the fourth page, you receive all remaining items.
 
 In Camunda Hub API v2, you use a `page` object with two fields:
 
@@ -123,46 +121,26 @@ For example:
 ```json title="Camunda Hub API v2"
 {
   "page": {
-    "from": 20,
+    "from": 60,
     "limit": 20
   }
 }
 ```
 
-Instead of specifying the number of pages to skip, you specify the index to start _from_ (20) and the maximum number, or _limit_, of items to return (20). This request returns the items at indexes 20–39. As in v1, if there are fewer items than the limit, you receive all remaining items.
+Instead of specifying the number of pages to skip, you specify the index to start _from_ (60) and the maximum number, or _limit_, of items to return (20). This request returns the items at indexes 60–79. As in v1, if there are fewer items than the limit, you receive all remaining items.
 
+:::note
 In addition to the different pagination model, the default page size has changed. In v1, the default page size was 10. In v2, the default limit is 100.
-
-#### Cursor pagination
-
-In addition to offset pagination, Camunda Hub API v2 offers cursor pagination. With cursor pagination, you use a `page` object with two fields:
-
-- `page.after` specifies the cursor to start from. You receive this from a prior response.
-- `page.limit` limits the number of items returned.
-
-```json title="Camunda Hub API v2"
-{
-  "page": {
-    "after": "{endCursor from previous response}",
-    "limit": 20
-  }
-}
-```
-
-With cursor pagination, you specify the _cursor_ to start from and the maximum number, or _limit_, of items to return (20). This request returns the next 20 items after the cursor. If there are fewer items than the limit, you receive all remaining items.
-
-#### Paginated responses
+:::
 
 Paginated responses in Camunda Hub API v2 have the following changes:
 
-| Web Modeler API v1 | Camunda Hub API v2       | Notes                                                         |
-| ------------------ | ------------------------ | ------------------------------------------------------------- |
-| `page`             | -                        | Removed                                                       |
-| `size`             | -                        | Removed                                                       |
-| `total`            | `page.totalItems`        | Moved into the `page` object                                  |
-| -                  | `page.hasMoreTotalItems` | New field                                                     |
-| -                  | `page.startCursor`       | New field. Start cursor for [pagination](#cursor-pagination). |
-| -                  | `page.endCursor`         | New field. End cursor for [pagination](#cursor-pagination).   |
+| Web Modeler API v1 | Camunda Hub API v2       | Notes                        |
+| ------------------ | ------------------------ | ---------------------------- |
+| `page`             | -                        | Removed                      |
+| `size`             | -                        | Removed                      |
+| `total`            | `page.totalItems`        | Moved into the `page` object |
+| -                  | `page.hasMoreTotalItems` | New field                    |
 
 ### Projects renamed to workspaces
 
