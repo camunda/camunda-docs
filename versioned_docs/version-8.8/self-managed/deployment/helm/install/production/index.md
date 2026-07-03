@@ -358,7 +358,7 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
 The Elasticsearch/OpenSearch Exporter defaults to zero index replicas for the Zeebe record indices it creates. Without replicas, a single node restart moves its shards to UNASSIGNED state and puts the cluster into RED health. Two consequences follow:
 
 - **Exporter backpressure builds up**: the Orchestration Cluster pauses exports when ES/OS cannot accept writes, which eventually throttles process execution throughput.
-- **Process instance data goes stale**: Operate and Tasklist importers read from these Zeebe record indices to build their views. While shards are UNASSIGNED, those importers cannot read newly exported records, so displayed process instance data lags behind until the node rejoins.
+- **Optimize analytics data goes stale**: the Optimize importer reads from these Zeebe record indices. While shards are UNASSIGNED, Optimize cannot read newly exported records, so its analytics data lags behind until the node rejoins.
 
 The cluster recovers once the node rejoins and shards are reassigned.
 :::
