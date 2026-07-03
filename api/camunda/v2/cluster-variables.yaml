@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
@@ -55,6 +57,8 @@ paths:
       summary: Create a tenant-scoped cluster variable
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -113,6 +117,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -159,6 +165,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
+
         [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -203,6 +211,8 @@ paths:
       summary: Update a global-scoped cluster variable
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -256,6 +266,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
@@ -297,6 +309,8 @@ paths:
       summary: Get a tenant-scoped cluster variable
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -348,6 +362,8 @@ paths:
       summary: Update a tenant-scoped cluster variable
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -406,6 +422,8 @@ paths:
       summary: Delete a tenant-scoped cluster variable
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.9]]
 

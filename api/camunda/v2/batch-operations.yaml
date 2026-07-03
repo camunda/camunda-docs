@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -57,6 +59,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -95,6 +99,8 @@ paths:
       summary: Cancel Batch operation
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -141,6 +147,8 @@ paths:
       summary: Suspend Batch operation
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -190,6 +198,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -237,6 +247,8 @@ paths:
       summary: Search batch operation items
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.8]]
 

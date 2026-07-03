@@ -1074,6 +1074,23 @@ h3 .badge:nth-of-type(1) {
   border: 1px solid #4589ff;
 }
 
+/* Required permissions (RBAC) section */
+.required-permissions__table {
+  display: table;
+  width: auto;
+  min-width: 50%;
+}
+
+.required-permissions__table th,
+.required-permissions__table td {
+  text-align: left;
+}
+
+.required-permissions__or {
+  font-style: italic;
+  color: var(--ifm-color-emphasis-700);
+}
+
 /* HTTP Method badges */
 .badge--get,
 .badge--post,
@@ -1486,12 +1503,25 @@ h2.openapi__method-endpoint-path {
 h2.openapi-tabs__response-header {
   border-bottom: none;
 }
+/* Required permissions renders as its own section between the description and the
+   Request section. Drop the default h2 underline; the section is instead set off
+   by the top divider on the Request heading below (matching the Responses section). */
+h2#required-permissions {
+  border-bottom: none;
+}
+/* Separate the Request section with a top divider, mirroring the Responses
+   section's .openapi-tabs__response-header-section border-top. */
 h2#request {
   border-bottom: none;
+  border-top: 1px solid var(--ifm-toc-border-color);
+  margin-top: 2rem;
+  /* Match the Responses gap between the divider and the heading text, which
+     comes from the .openapi-tabs__response-header-section wrapper padding-top (1rem). */
+  padding-top: 1rem;
 }
 .anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#request {
   border-bottom: none;
-  padding-top: 10px;
+  padding-top: 1rem;
   font-size: 28px;
   padding-bottom: 0;
 }
