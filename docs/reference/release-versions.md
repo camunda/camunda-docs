@@ -33,7 +33,7 @@ return entries;
 
 ## About
 
-Each release shows the component versions shipped together and links to the GitHub changelog for each component.
+Each release shows the component versions shipped with the release as well as GitHub/Docker Hub component links.
 
 **SaaS**: Generation numbers (for example, 8.9+gen9) indicate a patch deployment to the SaaS platform. A higher generation number means a newer patch within the same minor version.
 

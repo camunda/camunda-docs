@@ -3,6 +3,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
 import releases from "@site/src/data/release-versions.json";
+import styles from "./styles.module.css";
 
 function formatDate(isoDate) {
   const [year, month, day] = isoDate.split("-").map(Number);
@@ -193,10 +194,23 @@ function MonthGroup({ month, monthReleases, isLatest }) {
 }
 
 export default function ReleaseVersions() {
+  const [filterVersion, setFilterVersion] = React.useState("all");
+
+  const allVersions = [...new Set(
+    releases.flatMap((r) => r.versions.map((v) => minorVersion(v.saas)))
+  )].sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+
   const groups = [];
   const seen = new Map();
 
   for (const release of releases) {
+    const filteredVersions =
+      filterVersion === "all"
+        ? release.versions
+        : release.versions.filter((v) => minorVersion(v.saas) === filterVersion);
+
+    if (filteredVersions.length === 0) continue;
+
     const key = monthKey(release.date);
     if (!seen.has(key)) {
       seen.set(key, []);
@@ -206,17 +220,35 @@ export default function ReleaseVersions() {
         releases: seen.get(key),
       });
     }
-    seen.get(key).push(release);
+    seen.get(key).push({ ...release, versions: filteredVersions });
   }
 
   return (
     <>
+      <div className={styles.controls}>
+        <label htmlFor="version-filter" className={styles.label}>
+          Filter by version:
+        </label>
+        <select
+          id="version-filter"
+          className={styles.filterSelect}
+          value={filterVersion}
+          onChange={(e) => setFilterVersion(e.target.value)}
+        >
+          <option value="all">All versions</option>
+          {allVersions.map((v) => (
+            <option key={v} value={v}>
+              {v}
+            </option>
+          ))}
+        </select>
+      </div>
       {groups.map(({ key, label, releases: monthReleases }, i) => (
         <MonthGroup
           key={key}
           month={label}
           monthReleases={monthReleases}
-          isLatest={i === 0}
+          isLatest={i <= 1}
         />
       ))}
     </>
