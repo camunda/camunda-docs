@@ -376,7 +376,13 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
 #### Secondary storage index replicas
 
 :::warning Single point of failure without replicas
-The Helm chart defaults to zero index replicas for Elasticsearch/OpenSearch indices. In a multi-node cluster, a single node restart puts the cluster into RED state, causing export failures and query errors until the node recovers.
+The Helm chart defaults to zero index replicas for Elasticsearch/OpenSearch indices. Without replicas, a single node restart moves its shards to UNASSIGNED state and puts the cluster into RED health. The consequences are severe:
+
+- **Authorization checks fail**: since Camunda 8.8, authorization data is stored in Elasticsearch/OpenSearch. Every API request triggers an authorization query — if those queries fail, Camunda components reject incoming requests entirely.
+- **Operate and Tasklist queries return incomplete or no results** while shards are unavailable.
+- **Exporter backpressure builds up**: the Orchestration Cluster pauses exports when ES/OS cannot accept writes, which eventually throttles process execution throughput.
+
+The cluster recovers once the node rejoins, but there is no graceful degradation — the impact is immediate and affects all components.
 :::
 
 In multi-node Elasticsearch/OpenSearch clusters, configure at least one index replica:
