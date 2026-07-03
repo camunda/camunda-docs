@@ -739,7 +739,7 @@
     "versions": [
       {
         "saas": "8.10.0-alpha2",
-        "helm": "8.10-15.0.0-alpha2",
+        "helm": "15.0.0-alpha2",
         "label": "(alpha)",
         "components": [
           {
@@ -1226,6 +1226,90 @@
   {
     "date": "2026-05-13",
     "versions": [
+      {
+        "saas": "8.10.0-alpha1",
+        "helm": "15.0.0-alpha1",
+        "label": "(alpha)",
+        "components": [
+          {
+            "name": "Camunda Platform (Helm)",
+            "version": "15.0.0-alpha1",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.10-15.0.0-alpha1"
+              }
+            ]
+          },
+          {
+            "name": "Orchestration Cluster",
+            "version": "8.10.0-alpha1",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda/releases/tag/8.10.0-alpha1"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/camunda/tags?name=8.10.0-alpha1"
+              }
+            ]
+          },
+          {
+            "name": "Identity Management",
+            "version": "8.10.0-alpha1",
+            "subtext": null,
+            "links": []
+          },
+          {
+            "name": "Optimize",
+            "version": "8.10.0-alpha1",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda/releases/tag/8.10.0-alpha1"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/optimize/tags?name=8.10.0-alpha1"
+              }
+            ]
+          },
+          {
+            "name": "Connectors",
+            "version": "8.10.0-alpha1",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/connectors/releases/tag/8.10.0-alpha1"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/connectors-bundle/tags?name=8.10.0-alpha1"
+              }
+            ]
+          },
+          {
+            "name": "Web Modeler",
+            "version": "8.10.0-alpha1",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/web-modeler/releases/tag/8.10.0-alpha1"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/modeler-webapp/tags?name=8.10.0-alpha1"
+              }
+            ]
+          }
+        ]
+      },
       {
         "saas": "8.9+gen5",
         "helm": "14-rc-latest",
@@ -2510,6 +2594,90 @@
     "date": "2026-03-11",
     "versions": [
       {
+        "saas": "8.9.0-alpha5",
+        "helm": "8.9-14.0.0-alpha5",
+        "label": "(alpha)",
+        "components": [
+          {
+            "name": "Camunda Platform (Helm)",
+            "version": "8.9-14.0.0-alpha5",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.9-14.0.0-alpha5"
+              }
+            ]
+          },
+          {
+            "name": "Orchestration Cluster",
+            "version": "8.9.0-alpha5",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda/releases/tag/8.9.0-alpha5"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/camunda/tags?name=8.9.0-alpha5"
+              }
+            ]
+          },
+          {
+            "name": "Identity Management",
+            "version": "8.9.0-alpha5",
+            "subtext": null,
+            "links": []
+          },
+          {
+            "name": "Optimize",
+            "version": "8.9.0-alpha5",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda/releases/tag/8.9.0-alpha5"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/optimize/tags?name=8.9.0-alpha5"
+              }
+            ]
+          },
+          {
+            "name": "Connectors",
+            "version": "8.9.0-alpha5",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/connectors/releases/tag/8.9.0-alpha5"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/connectors-bundle/tags?name=8.9.0-alpha5"
+              }
+            ]
+          },
+          {
+            "name": "Web Modeler",
+            "version": "8.9.0-alpha5",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/web-modeler/releases/tag/8.9.0-alpha5"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/modeler-webapp/tags?name=8.9.0-alpha5"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "saas": "8.8+gen16",
         "helm": null,
         "label": null,
@@ -3114,6 +3282,79 @@
     "date": "2026-02-10",
     "versions": [
       {
+        "saas": "8.9.0-alpha4",
+        "helm": null,
+        "label": "(alpha)",
+        "components": [
+          {
+            "name": "Orchestration Cluster",
+            "version": "8.9.0-alpha4",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda/releases/tag/8.9.0-alpha4"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/camunda/tags?name=8.9.0-alpha4"
+              }
+            ]
+          },
+          {
+            "name": "Identity Management",
+            "version": "8.9.0-alpha4",
+            "subtext": null,
+            "links": []
+          },
+          {
+            "name": "Optimize",
+            "version": "8.9.0-alpha4",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda/releases/tag/8.9.0-alpha4"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/optimize/tags?name=8.9.0-alpha4"
+              }
+            ]
+          },
+          {
+            "name": "Connectors",
+            "version": "8.9.0-alpha4",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/connectors/releases/tag/8.9.0-alpha4"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/connectors-bundle/tags?name=8.9.0-alpha4"
+              }
+            ]
+          },
+          {
+            "name": "Web Modeler",
+            "version": "8.9.0-alpha4",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/web-modeler/releases/tag/8.9.0-alpha4"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/modeler-webapp/tags?name=8.9.0-alpha4"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "saas": "8.8+gen12",
         "helm": "8.8-13.4.2",
         "label": null,
@@ -3415,6 +3656,90 @@
   {
     "date": "2026-01-13",
     "versions": [
+      {
+        "saas": "8.9.0-alpha3",
+        "helm": "8.9-14.0.0-alpha3",
+        "label": "(alpha)",
+        "components": [
+          {
+            "name": "Camunda Platform (Helm)",
+            "version": "8.9-14.0.0-alpha3",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.9-14.0.0-alpha3"
+              }
+            ]
+          },
+          {
+            "name": "Orchestration Cluster",
+            "version": "8.9.0-alpha3",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda/releases/tag/8.9.0-alpha3"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/camunda/tags?name=8.9.0-alpha3"
+              }
+            ]
+          },
+          {
+            "name": "Identity Management",
+            "version": "8.9.0-alpha3",
+            "subtext": null,
+            "links": []
+          },
+          {
+            "name": "Optimize",
+            "version": "8.9.0-alpha3",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/camunda/releases/tag/8.9.0-alpha3"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/optimize/tags?name=8.9.0-alpha3"
+              }
+            ]
+          },
+          {
+            "name": "Connectors",
+            "version": "8.9.0-alpha3.1",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/connectors/releases/tag/8.9.0-alpha3.1"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/connectors-bundle/tags?name=8.9.0-alpha3.1"
+              }
+            ]
+          },
+          {
+            "name": "Web Modeler",
+            "version": "8.9.0-alpha3",
+            "subtext": null,
+            "links": [
+              {
+                "label": "GitHub changelog",
+                "url": "https://github.com/camunda/web-modeler/releases/tag/8.9.0-alpha3"
+              },
+              {
+                "label": "Docker Hub",
+                "url": "https://hub.docker.com/r/camunda/modeler-webapp/tags?name=8.9.0-alpha3"
+              }
+            ]
+          }
+        ]
+      },
       {
         "saas": "8.8+gen11",
         "helm": null,
