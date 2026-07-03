@@ -1,9 +1,6 @@
 name: Sync Camunda REST API
 
 on:
-  push:
-    branches:
-      - "fix-sync-rest-api"
   schedule:
     - cron: "0 15 * * 4" # Runs every Thursday at 3 PM UTC
   workflow_dispatch:
