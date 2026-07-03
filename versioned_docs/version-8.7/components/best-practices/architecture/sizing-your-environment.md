@@ -124,9 +124,9 @@ Using your throughput and retention settings, you can now calculate the required
 
 ### Zeebe record ILM retention
 
-When the [Elasticsearch exporter retention policy](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md) is enabled, Zeebe record indices are deleted after the configured `minimum-age`. Optimize reads from these same indices, so the retention window must be long enough to cover Optimize's worst-case import lag. If the exporter deletes records before Optimize imports them, process instance completion events are permanently lost: Optimize records the instance as ACTIVE with no endDate, and history cleanup can never remove it.
+When the [Elasticsearch exporter retention policy](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#retention) is enabled, Zeebe record indices are deleted after the configured `minimum-age`. Optimize reads from these same indices, so the retention window must be long enough to cover Optimize's worst-case import lag. If the exporter deletes records before Optimize imports them, process instance completion events are permanently lost: Optimize records the instance as `ACTIVE` with no `endDate`, and history cleanup can never remove it.
 
-**Minimum recommended retention:** Set `minimum-age` to at least **3-7 days** when running Optimize. This provides headroom for:
+**Minimum recommended retention:** Set `minimum-age` to at least **3 days** when running Optimize; **7 or more days** is recommended. This provides headroom for:
 
 - Import lag that grows as the Optimize process instance index grows larger.
 - Recovery time after Elasticsearch cluster events such as node restarts, rolling upgrades, and shard rebalancing.
@@ -137,7 +137,7 @@ The default `minimum-age` of `30d` provides sufficient headroom. If you reduced 
 
 **Self-reinforcing failure mode:** As Optimize's process instance index grows, Elasticsearch write latency increases, which raises per-batch import lag. Higher import lag increases the probability of an ILM race on the next cluster event. This cycle compounds on long-lived clusters running at sustained load. To break it, increase ILM retention and reduce the Optimize index size through history cleanup or variable filtering.
 
-**Symptom:** If Optimize history cleanup runs on schedule but consistently completes in zero seconds against a large dataset, orphaned ACTIVE documents are likely accumulating. See [diagnosing stalled cleanup](/self-managed/optimize-deployment/configuration/history-cleanup.md#diagnosing-stalled-cleanup).
+**Symptom:** If Optimize history cleanup runs on schedule but consistently completes in zero seconds against a large dataset, orphaned `ACTIVE` documents are likely accumulating. See [diagnosing stalled cleanup](/self-managed/optimize-deployment/configuration/history-cleanup.md#diagnosing-stalled-cleanup).
 
 ## Understanding sizing and scalability behavior
 
