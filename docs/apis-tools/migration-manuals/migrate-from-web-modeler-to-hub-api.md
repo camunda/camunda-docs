@@ -109,11 +109,11 @@ For example:
 }
 ```
 
-This request skips the first three _pages_ of 20 items (indexes 0–59) and returns the fourth page of 20 items (indexes 60–79). If there aren't enough items to fill the fourth page, you receive all remaining items.
+This request skips the first three _pages_ of 20 items (pages 0-2 and item indexes 0–59, inclusive) and returns the fourth page of 20 items (indexes 60–79). If there aren't enough items to fill the fourth page, you receive all remaining items.
 
 In Camunda Hub API v2, you use a `page` object with two fields:
 
-- `page.from` specifies the offset, the item index to start from.
+- `page.from` specifies the offset, the item index to start from, starting with index 0.
 - `page.limit` limits the number of items returned.
 
 For example:
