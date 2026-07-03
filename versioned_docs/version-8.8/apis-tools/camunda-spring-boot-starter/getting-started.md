@@ -38,7 +38,7 @@ With the Camunda Spring Boot Starter, you can build:
 | ------------------------------------ | ----------------------------------- | ---- | --------------------------- | --------------------------------- |
 | `camunda-spring-boot-starter`        | 8.8.x                               | ≥ 17 | 3.5.x                       |                                   |
 | `camunda-spring-boot-3-starter`      | >=8.8.15                            | ≥ 17 | 3.5.x                       |                                   |
-| `camunda-spring-boot-4-starter`      | >=8.8.9                             | ≥ 17 | 4.0.x                       |                                   |
+| `camunda-spring-boot-4-starter`      | >=8.8.9                             | ≥ 17 | 4.0.x                       | 4.1.x                             |
 
 For Spring Boot OSS and Commercial support dates, see the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
 
