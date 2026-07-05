@@ -1,13 +1,13 @@
 ---
-id: permanently-delete-file
-title: "Permanently delete a file"
-description: "Permanently and irreversibly removes the file with the given file key. Process application snapshot references to the file are detached so snapshot data is preserved. The file cannot be recovered afterwards. This works in one step and does not require the file to be soft-deleted first."
-sidebar_label: "Permanently delete a file"
+id: remove-cluster-registration
+title: "Remove a cluster registration"
+description: "Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic cluster management to be enabled."
+sidebar_label: "Remove a cluster registration"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -24,16 +24,16 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Permanently delete a file"}
+  children={"Remove a cluster registration"}
 ></Heading>
 
 <MethodEndpoint
   method={"delete"}
-  path={"/files/{fileKey}/permanent"}
+  path={"/clusters/{clusterId}"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Permanently and irreversibly removes the file with the given file key. Process application snapshot references to the file are detached so snapshot data is preserved. The file cannot be recovered afterwards. This works in one step and does not require the file to be soft-deleted first.
+Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic cluster management to be enabled.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -42,18 +42,11 @@ Permanently and irreversibly removes the file with the given file key. Process a
 <ParamsDetails
   parameters={[
     {
-      name: "fileKey",
+      name: "clusterId",
       in: "path",
       required: true,
-      description: "The unique key identifying the file.",
-      schema: {
-        description: "System-generated key for a file.",
-        type: "string",
-        format: "FileKey",
-        "x-semantic-type": "FileKey",
-        example: "file-789-xyz",
-        title: "FileKey",
-      },
+      description: "The unique ID identifying the cluster.",
+      schema: { type: "string" },
     },
   ]}
 ></ParamsDetails>
@@ -64,7 +57,9 @@ Permanently and irreversibly removes the file with the given file key. Process a
   id={undefined}
   label={undefined}
   responses={{
-    "204": { description: "The file was permanently deleted successfully." },
+    "204": {
+      description: "The cluster registration was removed successfully.",
+    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },
@@ -183,7 +178,7 @@ Permanently and irreversibly removes the file with the given file key. Process a
       },
     },
     "404": {
-      description: "The file was not found.",
+      description: "The requested resource was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -228,6 +223,13 @@ Permanently and irreversibly removes the file with the given file key. Process a
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/file-789-xyz",
           },
         },
       },

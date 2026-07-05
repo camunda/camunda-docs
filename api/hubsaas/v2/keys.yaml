@@ -1,0 +1,49 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Common key schemas used across the Hub Public API.
+#
+# Each key is a system-generated, opaque string identifier. The `x-semantic-type`
+# extension declares the semantic identity of the key so that tooling (e.g. the API
+# test generator) can recognise the same identifier wherever it appears and chain
+# dependent operations together. These are server-allocated, so none are marked
+# `x-semantic-client-minted`.
+components:
+  schemas:
+    FileKey:
+      description: System-generated key for a file.
+      type: string
+      format: FileKey
+      x-semantic-type: FileKey
+      example: file-789-xyz
+
+    FolderKey:
+      description: System-generated key for a folder.
+      type: string
+      format: FolderKey
+      x-semantic-type: FolderKey
+      example: fld-012-ghi
+
+    ProjectKey:
+      description: System-generated key for a project.
+      type: string
+      format: ProjectKey
+      x-semantic-type: ProjectKey
+      example: prj-def-456
+
+    VersionKey:
+      description: System-generated key for a version.
+      type: string
+      format: VersionKey
+      x-semantic-type: VersionKey
+      example: ver-345-jkl
+
+    WorkspaceKey:
+      description: System-generated key for a workspace.
+      type: string
+      format: WorkspaceKey
+      x-semantic-type: WorkspaceKey
+      example: wks-abc-123
