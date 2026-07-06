@@ -30,7 +30,7 @@ path: object;
 #### mappingRuleId
 
 ```ts
-mappingRuleId: string;
+mappingRuleId: MappingRuleId;
 ```
 
 The unique identifier of the mapping rule.

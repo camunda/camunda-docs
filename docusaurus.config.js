@@ -31,6 +31,17 @@ module.exports = {
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for production
   noIndex: true,
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "alternate",
+        type: "text/markdown",
+        href: `${docsSiteUrl}/llms.txt`, // Use absolute URL to bypass link checker
+        title: "LLM-friendly documentation index",
+      },
+    },
+  ],
   plugins: [
     // This custom Osano plugin must precede the gtm-plugin.
     "./static/plugins/osano",
@@ -111,8 +122,12 @@ module.exports = {
         docsPluginId: "default",
         config: {
           adminsm: {
-            specPath: "api/administration-sm/administration-sm-openapi.yaml",
-            outputDir: "docs/apis-tools/administration-sm-api/specifications",
+            // This API is no longer supported from 8.10. Since this is required, I'm using 8.9 values.
+            // To generate docs for older versions, run `npm run api:generate -- adminsm <version>`.
+            specPath:
+              "api/administration-sm/version-8.9/administration-sm-openapi.yaml",
+            outputDir:
+              "versioned_docs/version-8.9/apis-tools/administration-sm-api/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -121,6 +136,22 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.9: {
+                specPath:
+                  "api/administration-sm/version-8.9/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.9/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.8: {
+                specPath:
+                  "api/administration-sm/version-8.8/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.8/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.7: {
                 specPath:
                   "api/administration-sm/version-8.7/administration-sm-openapi.yaml",
@@ -266,12 +297,118 @@ module.exports = {
       },
     ],
     [
+      // Hub API Self-Managed docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsm-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsm: {
+            specPath: "api/hubsm/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-sm/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
+      // Hub API SaaS docs generation
+      "@camunda8/docusaurus-plugin-openapi-docs",
+      {
+        id: "api-hubsaas-openapi",
+        docsPluginId: "default",
+        config: {
+          hubsaas: {
+            specPath: "api/hubsaas/v2/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/hub-api-saas/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "0.1.0",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+          },
+        },
+      },
+    ],
+    [
       // RSS feed for security notices
       "./static/plugins/notices-feed",
       {
         url: docsSiteUrl,
         contextPath: docsSitebaseUrl,
         maxItems: 50,
+      },
+    ],
+    // Docusaurus plugin for LLM training and AI agent consumption.
+    // The plugin generates both a full markdown file and a metadata-only .llms.txt file for each doc,
+    // excluding the content of code blocks and optionally excluding content from imports.
+    // The plugin also generates a root-level llms.md file that lists all docs with links, which can be used as a single source of truth for the documentation content.
+    [
+      "docusaurus-plugin-llms",
+      {
+        generateLLMsTxt: false,
+        generateLLMsFullTxt: true,
+        docsDir: "docs",
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+        processingBatchSize: 50,
+        addMdExtension: true,
+        generateMarkdownFiles: true,
+        preserveDirectoryStructure: true,
+        ignoreFiles: ["apis-tools/*/specifications/*"],
+        title: "Camunda 8 Documentation",
+        description:
+          "Process orchestration platform for automating workflows across people, systems, and devices. Supports BPMN, DMN, connectors, and agentic AI orchestration.",
+        customLLMFiles: [
+          {
+            filename: "llms-guides.txt",
+            title: "Camunda 8 Guides",
+            description:
+              "Getting started guides, tutorials, and walkthroughs for Camunda 8.",
+            includePatterns: ["guides/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-components.txt",
+            title: "Camunda 8 Components",
+            description:
+              "Console, Modeler, Zeebe, Operate, Tasklist, Optimize, Connectors, and agentic orchestration.",
+            includePatterns: ["components/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-apis-tools.txt",
+            title: "Camunda 8 APIs & Tools",
+            description:
+              "REST APIs, SDKs, clients, CLI, and developer tooling.",
+            includePatterns: ["apis-tools/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-self-managed.txt",
+            title: "Camunda 8 Self-Managed",
+            description:
+              "Deployment, configuration, upgrade, and operations for Self-Managed installations.",
+            includePatterns: ["self-managed/*"],
+            fullContent: false,
+          },
+          {
+            filename: "llms-reference.txt",
+            title: "Camunda 8 Reference",
+            description:
+              "Release notes, announcements, glossary, licenses, dependencies, and supported environments.",
+            includePatterns: ["reference/*"],
+            fullContent: false,
+          },
+        ],
       },
     ],
   ],
@@ -353,6 +490,12 @@ module.exports = {
         },
         {
           type: "doc",
+          docId: "guides/build-with-ai/overview",
+          label: "Build with AI",
+          position: "left",
+        },
+        {
+          type: "doc",
           docId: "components/components-overview",
           label: "Using Camunda",
           position: "left",
@@ -376,13 +519,48 @@ module.exports = {
           position: "left",
         },
         {
+          type: "dropdown",
+          label: "Help",
+          position: "right",
+          items: [
+            {
+              label: "Support",
+              href: "https://camunda.com/services/enterprise-support-guide/",
+            },
+            {
+              label: "Downloads",
+              to: "/downloads",
+            },
+            {
+              label: "Academy",
+              href: "https://academy.camunda.com/",
+            },
+            {
+              label: "Community",
+              href: "https://community.camunda.com/",
+            },
+            {
+              label: "Forum",
+              href: "https://forum.camunda.io/",
+            },
+            {
+              label: "Blog",
+              href: "https://camunda.com/blog/",
+            },
+            {
+              label: "Roadmap",
+              href: "https://roadmap.camunda.com/",
+            },
+          ],
+        },
+        {
           type: "html",
           position: "right",
           value:
             '<button class="button button--secondary button--md kapa-open" onclick="if(window.Kapa&&window.Kapa.open){window.Kapa.open({});} return false;" title="Ask AI" aria-label="Ask AI"><img src="/img/ai-star.png" alt="" style="height:1em;width:1em;margin-right:6px;vertical-align:middle;" />Ask AI</button>',
         },
         {
-          to: "https://camunda.com/download?utm_source=docs.camunda.io&utm_medium=referral&utm_content=tryfreebutton",
+          to: "build-with-camunda",
           position: "right",
           className: "button button--primary button--md try-free",
           label: "Try Free",
@@ -404,7 +582,7 @@ module.exports = {
           items: [
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              to: "/build-with-camunda",
             },
             {
               label: "Support and feedback",
@@ -431,10 +609,6 @@ module.exports = {
               href: "https://camunda.com/developers/how-to-contribute/",
             },
             {
-              label: "Developer resources",
-              href: "https://camunda.com/developers/",
-            },
-            {
               label: "Subscribe",
               href: "https://camunda.com/developers/developer-community-updates/",
             },
@@ -443,6 +617,10 @@ module.exports = {
         {
           title: "Camunda",
           items: [
+            {
+              label: "Downloads",
+              to: "/downloads",
+            },
             {
               label: "Web Modeler",
               href: "https://camunda.io",
@@ -555,6 +733,9 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+          remarkPlugins: [
+            require("./static/plugins/terminology/remark-glossary-terms"),
+          ],
           lastVersion: currentVersion,
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
@@ -596,4 +777,5 @@ module.exports = {
     "@saucelabs/theme-github-codeblock",
     "@docusaurus/theme-mermaid",
   ],
+  clientModules: [require.resolve("./src/scripts/mermaid_icons.js")],
 };

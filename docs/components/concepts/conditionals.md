@@ -131,7 +131,7 @@ The behavior of conditional boundary events depends on where the variable is upd
 You can evaluate root-level conditional start events by using:
 
 - The Orchestration Cluster REST API. See [evaluate root-level conditional start events](../../apis-tools/orchestration-cluster-api-rest/specifications/evaluate-conditionals.api.mdx).
-- The Zeebe gateway gRPC API. See [`EvaluateConditional` RPC](../../apis-tools/zeebe-api/gateway-service.md#evaluateconditional-rpc).
+- The [Zeebe Gateway](/reference/glossary.md#zeebe-gateway) gRPC API. See [`EvaluateConditional` RPC](../../apis-tools/zeebe-api/gateway-service.md#evaluateconditional-rpc).
 - Client SDKs. For example, use `newEvaluateConditionalCommand()` in the Java client.
 
 When you evaluate conditional start events:

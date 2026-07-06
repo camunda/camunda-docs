@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.5]]
+
         [[CONSISTENCY:STRONG]]
 
         Obtains the current topology of the cluster the gateway is part of.
@@ -22,6 +24,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.5"
   /status:
     get:
       tags:
@@ -31,6 +34,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:STRONG]]
 
         Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
@@ -39,6 +44,7 @@ paths:
           description: The cluster is UP and has at least one partition with a healthy leader.
         "503":
           description: The cluster is DOWN and does not have any partition with a healthy leader.
+      x-added-in-version: "8.8"
 components:
   schemas:
     TopologyResponse:

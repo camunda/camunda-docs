@@ -768,55 +768,61 @@ Assuming you're using the official [Camunda Helm chart](/self-managed/setup/inst
 It will overwrite the start command of the resulting Zeebe pod, executing a restore script.
 It's important that the backup is configured for Zeebe to be able to restore from the backup!
 
-The following example is possible starting from the Camunda Helm chart version `12.1.0`.
 Look at the note below the example to see how it can be achieved with an older Camund Helm chart version.
 
-```yaml
-zeebe:
-   enabled: true
-   env:
-   # Environment variables to overwrite the Zeebe startup behavior
-   - name: ZEEBE_RESTORE
-     value: "true"
-   - name: ZEEBE_RESTORE_FROM_BACKUP_ID
-     value: "$BACKUP_ID" # Change the $BACKUP_ID to your actual value
-   # all the envs related to the backup store as outlined in the prerequisites
-   - name: ZEEBE_BROKER_DATA_BACKUP_STORE
-     value: "S3" # just as an example
-   ...
-
-# assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
-elasticsearch:
-   enabled: true
-
-connectors:
-   enabled: false
-optimize:
-   enabled: false
-operate:
-   enabled: false
-tasklist:
-   enabled: false
-zeebeGateway:
-   enabled: false
-```
-
-:::note Older Camunda Helm charts
-
-For older Camunda Helm chart versions one can overwrite the startup behaviour of the Zeebe brokers by setting the command.
-
-```yaml
-zeebe:
-   enabled: true
-   command: ["/usr/local/zeebe/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
-   env:
-   # all the envs related to the backup store as outlined in the prerequisites
-   ...
-```
-
+:::tip
+This example requires Camunda Helm chart `12.1.0` or later.
 :::
 
+```yaml
+zeebe:
+  enabled: true
+  env:
+    # Environment variables to overwrite the Zeebe startup behavior
+    - name: ZEEBE_RESTORE
+      value: "true"
+    - name: ZEEBE_RESTORE_FROM_BACKUP_ID
+      value: "$BACKUP_ID" # Change the $BACKUP_ID to your actual value
+    # all the envs related to the backup store as outlined in the prerequisites
+    - name: ZEEBE_BROKER_DATA_BACKUP_STORE
+      value: "S3" # just as an example
+    ...
+
+# If you use Elasticsearch from the embedded Helm chart, set this to true. Otherwise, set it to false.
+elasticsearch:
+  enabled: true
+connectors:
+  enabled: false
+optimize:
+  enabled: false
+operate:
+  enabled: false
+tasklist:
+  enabled: false
+zeebeGateway:
+  enabled: false
+```
+
+:::note Alternative overwrite
+
+For Camunda Helm chart versions earlier than `12.1.0`, the `ZEEBE_RESTORE` environment variable has no effect. To restore Zeebe, override the Zeebe brokers command.
+
+```yaml
+zeebe:
+  enabled: true
+  command:
+    - "/usr/local/camunda/bin/restore"
+    - "--backupId=$BACKUP_ID" # Change the $BACKUP_ID to your actual value.
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: "restore"
+  # All the envs related to the backup store as outlined in the prerequisites
+  ...
+```
+
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
+
+:::
 
 The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
 

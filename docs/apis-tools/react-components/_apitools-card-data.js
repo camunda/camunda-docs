@@ -29,17 +29,18 @@ export const apiCards = [
     type: "MCP",
   },
   {
+    link: "../processes-mcp/processes-mcp-overview/",
+    title: "Processes MCP Server",
+    image: IconMcpImg,
+    description:
+      "Expose deployed BPMN processes as callable MCP tools for AI agents.",
+    type: "MCP",
+  },
+  {
     link: "../administration-api/administration-api-reference/",
     title: "Administration API (SaaS)",
     image: IconAdminImg,
     description: "Manage Camunda clusters and API clients in SaaS.",
-    type: "REST",
-  },
-  {
-    link: "../administration-sm-api/administration-sm-api-overview/",
-    title: "Administration API (Self-Managed)",
-    image: IconAdminImg,
-    description: "Get cluster data including installed apps and usage metrics.",
     type: "REST",
   },
   {

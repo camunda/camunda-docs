@@ -400,6 +400,14 @@ void shouldCompleteJob() {
     // 4) With job selector by element ID "send_notification_task"
     processTestContext.completeJob(JobSelectors.byElementId("send_notification_task"));
 
+    // 5) With a mapper from input variables to output variables
+    processTestContext.completeJob(
+        "send-notification",
+        inputVariables -> {
+            final String recipient = (String) inputVariables.get("recipient");
+            return Map.of("notificationSent", true, "sentTo", recipient);
+        });
+
     // then: verify that the process instance completed the task
 }
 ```
@@ -543,6 +551,11 @@ void shouldCompleteUserTask() {
     // 3) With example data from the BPMN element
     processTestContext.completeUserTaskWithExampleData(
         UserTaskSelectors.byElementId("task_approveRequest"));
+
+    // 4) With a mapper from input variables to output variables
+    processTestContext.completeUserTask(
+        "task_approveRequest",
+        inputVariables -> Map.of("approved", inputVariables.containsKey("preApproved")));
 
     // then: verify that the process instance is completed
 }

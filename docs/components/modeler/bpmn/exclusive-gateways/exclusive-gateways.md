@@ -4,17 +4,22 @@ title: "Exclusive gateway"
 description: "Learn more about exclusive gateways (or XOR-gateways) and their conditions, which allow you to make a decision based on data such as process variables."
 ---
 
-An exclusive gateway (or XOR-gateway) allows you to make a decision based on data (i.e. on process variables).
+An exclusive gateway (or XOR-gateway) selects one outgoing sequence flow based on data such as process variables.
 
 ![process](assets/exclusive-gateway.png)
 
-If an exclusive gateway has multiple outgoing sequence flows, all sequence flows except one must have a `conditionExpression` to define when the flow is taken. The gateway can have one sequence flow without `conditionExpression`, which must be defined as the default flow.
+For an exclusive gateway with multiple outgoing sequence flows:
 
-When entering an exclusive gateway, the system evaluates the `conditionExpression` of each outgoing sequence flow in the order they are defined in the BPMN XML and selects the first flow whose condition is fulfilled.
+- All but one sequence flow must have a `conditionExpression`.
+- The remaining sequence flow can omit the `conditionExpression`, but the gateway must define it as the default flow.
+- Leaving the `conditionExpression` empty does not automatically make a sequence flow the default flow. In Modeler, set the exclusive gateway's default flow in the gateway properties by selecting the outgoing sequence flow to use as the default.
+- When a process instance reaches the gateway, the system evaluates the `conditionExpression` values in BPMN XML order and takes the first sequence flow whose condition is fulfilled.
+  - If no condition is fulfilled, the process instance takes the **default flow**. The default flow should not have a condition, so the system does not evaluate it.
+  - If no condition is fulfilled and the gateway has no default flow, an [incident](/components/concepts/incidents.md) is created.
 
-If no condition is fulfilled, it takes the **default flow** of the gateway. If the gateway has no default flow, an [incident](/components/concepts/incidents.md) is created.
+For example, if one sequence flow uses the condition `= totalPrice > 100`, you can set another outgoing sequence flow as the gateway's default flow to handle all remaining cases where `totalPrice <= 100`.
 
-An exclusive gateway can also be used to join multiple incoming flows together and improve the readability of the BPMN. A joining gateway has a pass-through semantic and doesn't merge the incoming concurrent flows like a parallel gateway.
+An exclusive gateway can also join multiple incoming flows to improve BPMN readability. A joining gateway has pass-through semantics and does not merge incoming concurrent flows like a parallel gateway.
 
 ## Conditions
 

@@ -1,0 +1,710 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# File resource paths and schemas
+paths:
+  /files:
+    post:
+      operationId: createFile
+      summary: Create a file
+      description: Creates a new file in the specified project and folder.
+      x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - fileKey
+        - revision
+      tags:
+        - File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileCreateRequest"
+      responses:
+        "200":
+          description: The file was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /files/{fileKey}:
+    get:
+      operationId: getFile
+      summary: Get a file
+      description: Returns the file metadata and content for the given file key.
+      x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: File
+        bind:
+          fileKey:
+            from: path
+            name: fileKey
+      tags:
+        - File
+      parameters:
+        - $ref: "#/components/parameters/FileKeyPathParam"
+      responses:
+        "200":
+          description: The file was retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+    patch:
+      operationId: updateFile
+      summary: Update a file
+      description: Updates the metadata and/or content of an existing file.
+      x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: File
+        bind:
+          fileKey:
+            from: path
+            name: fileKey
+      tags:
+        - File
+      parameters:
+        - $ref: "#/components/parameters/FileKeyPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileUpdateRequest"
+      responses:
+        "200":
+          description: The file was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "409":
+          $ref: "common-responses.yaml#/components/responses/Conflict"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+    delete:
+      operationId: deleteFile
+      summary: Delete a file
+      description: >
+        Soft-deletes the file with the given file key. The file is moved to the
+        recently deleted state and can be recovered until the retention period expires
+        and the scheduled cleanup job runs.
+        To permanently and irreversibly remove a file, use
+        `DELETE /files/{fileKey}/permanent` instead.
+      x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: File
+        bind:
+          fileKey:
+            from: path
+            name: fileKey
+      tags:
+        - File
+      parameters:
+        - $ref: "#/components/parameters/FileKeyPathParam"
+      responses:
+        "204":
+          description: The file was deleted successfully.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /files/{fileKey}/permanent:
+    delete:
+      operationId: permanentlyDeleteFile
+      summary: Permanently delete a file
+      description: >
+        Permanently and irreversibly removes the file with the given file key.
+        Process application snapshot references to the file are detached so
+        snapshot data is preserved. The file cannot be recovered afterwards.
+        This works in one step and does not require the file to be
+        soft-deleted first.
+      x-added-in-version: "0.1.0"
+      tags:
+        - File
+      parameters:
+        - $ref: "#/components/parameters/FileKeyPathParam"
+      responses:
+        "204":
+          description: The file was permanently deleted successfully.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The file was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /files/search:
+    post:
+      operationId: searchFiles
+      summary: Search files
+      description: Returns files matching the given search criteria.
+      x-added-in-version: "0.1.0"
+      tags:
+        - File
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /files/recently-deleted/search:
+    post:
+      operationId: searchRecentlyDeletedFiles
+      summary: Search recently deleted files
+      description: >
+        Returns soft-deleted files scoped to the caller's organization. Files
+        remain listed until the retention period expires and the scheduled
+        cleanup job runs; they can also be restored with
+        `POST /files/{fileKey}/restoration` or permanently removed with
+        `DELETE /files/{fileKey}/permanent`.
+      x-added-in-version: "0.1.0"
+      tags:
+        - File
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecentlyDeletedFileSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecentlyDeletedFileSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /files/{fileKey}/restoration:
+    post:
+      operationId: restoreFile
+      summary: Restore a recently deleted file
+      description: >
+        Restores a soft-deleted file back to the live project. If the file's
+        original parent folder was also deleted, the file is restored into a
+        new wrapper folder at the project root. The file cannot be restored if
+        its containing project has been deleted.
+      x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: File
+        bind:
+          fileKey:
+            from: path
+            name: fileKey
+      tags:
+        - File
+      parameters:
+        - $ref: "#/components/parameters/FileKeyPathParam"
+      responses:
+        "200":
+          description: The file was restored successfully. Returns the restored file.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The recently deleted file was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: The file cannot be restored because its project has been deleted.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /files/{fileKey}/purge:
+    delete:
+      operationId: purgeFile
+      summary: Purge a file from all version history
+      description: >
+        Permanently and irrecoverably removes the file and all references to it
+        across every process application version snapshot. Works on live and
+        soft-deleted files. If the file row has already been permanently deleted,
+        purge still removes any orphaned process application snapshot milestone
+        references that point to the file by ID. Idempotent for files that never
+        existed or have already been fully purged within the caller's organization.
+      x-added-in-version: "0.1.0"
+      tags:
+        - File
+      parameters:
+        - $ref: "#/components/parameters/FileKeyPathParam"
+      responses:
+        "204":
+          description: >
+            The file was purged, or was already absent. Once a file has been purged its ID is
+            removed from all storage, so callers cannot distinguish between a file that was just
+            purged, one that was purged in a previous call, and one that never existed — all three
+            cases return 204.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The file belongs to a different organization and cannot be accessed.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  parameters:
+    FileKeyPathParam:
+      name: fileKey
+      in: path
+      required: true
+      description: The unique key identifying the file.
+      schema:
+        $ref: "keys.yaml#/components/schemas/FileKey"
+
+  schemas:
+    # --- Identifier schemas ---
+
+    FileRevision:
+      description: The current revision number of a file, used for optimistic locking.
+      type: integer
+      format: int32
+      x-semantic-type: FileRevision
+
+    # --- Request schemas ---
+
+    FileCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - projectKey
+        - type
+        - content
+      example:
+        name: "order-process.bpmn"
+        projectKey: "prj-def-456"
+        folderKey: "fld-012-ghi"
+        type: "bpmn"
+        content: "<?xml version='1.0' encoding='UTF-8'?>..."
+      properties:
+        name:
+          description: The name of the file.
+          type: string
+          minLength: 1
+          maxLength: 255
+        projectKey:
+          description: The key of the project this file belongs to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        folderKey:
+          description: The key of the parent folder. If omitted or null, the file is created at project root.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
+        type:
+          description: The type of the file.
+          type: string
+          enum:
+            - bpmn
+            - dmn
+            - form
+            - element-template
+            - rpa
+            - markdown
+            - tests
+        content:
+          description: The content of the file.
+          type: string
+          minLength: 1
+
+    FileUpdateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - revision
+      example:
+        name: "order-process-v2.bpmn"
+        content: "<?xml version='1.0' encoding='UTF-8'?>..."
+        revision: 3
+      properties:
+        name:
+          description: The updated name of the file.
+          type: string
+          minLength: 1
+          maxLength: 255
+        projectKey:
+          description: The project to move the file to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        folderKey:
+          description: The updated parent folder key. Set to null to move to project root.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
+        content:
+          description: The updated content of the file.
+          type: string
+        revision:
+          description: The current revision of the file for optimistic locking.
+          allOf:
+            - $ref: "#/components/schemas/FileRevision"
+
+    # --- Response schemas ---
+
+    FileResult:
+      type: object
+      example:
+        fileKey: "file-789-xyz"
+        name: "order-process.bpmn"
+        projectKey: "prj-def-456"
+        folderKey: "fld-012-ghi"
+        simplePath: "/processes/order-process.bpmn"
+        canonicalPath: "/fld-012-ghi/file-789-xyz"
+        revision: 3
+        type: "bpmn"
+        content: "<?xml version='1.0' encoding='UTF-8'?>..."
+        created: "2025-03-15T10:30:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-06-10T14:22:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+      required:
+        - fileKey
+        - name
+        - projectKey
+        - folderKey
+        - simplePath
+        - canonicalPath
+        - revision
+        - type
+        - content
+        - created
+        - createdBy
+        - updated
+        - updatedBy
+      properties:
+        fileKey:
+          description: The unique key identifying this file.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
+        name:
+          description: The name of the file.
+          type: string
+        projectKey:
+          description: >
+            The key of the project this file belongs to. Present in single-file responses
+            (get, create, update) but null in search results; full project resolution
+            for search results is not yet supported.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        folderKey:
+          description: The key of the parent folder. Null if the file is at project root.
+          nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
+        simplePath:
+          description: The human-readable path of the file within its project.
+          type: string
+        canonicalPath:
+          description: The canonical (ID-based) path of the file within its project.
+          type: string
+        revision:
+          description: The current revision number, used for optimistic locking.
+          allOf:
+            - $ref: "#/components/schemas/FileRevision"
+        type:
+          description: The type of the file.
+          type: string
+          enum:
+            - bpmn
+            - dmn
+            - form
+            - element-template
+            - rpa
+            - markdown
+            - tests
+        content:
+          description: >
+            The content of the file. Present in single-file responses (get, create, update)
+            but null in search results for performance reasons.
+          type: string
+          nullable: true
+        created:
+          description: The timestamp when the file was created.
+          type: string
+          format: date-time
+        createdBy:
+          description: The user who created the file.
+          allOf:
+            - $ref: "#/components/schemas/UserReference"
+        updated:
+          description: The timestamp when the file was last updated.
+          type: string
+          format: date-time
+        updatedBy:
+          description: The user who last updated the file.
+          allOf:
+            - $ref: "#/components/schemas/UserReference"
+
+    UserReference:
+      type: object
+      description: A reference to a user.
+      required:
+        - name
+        - email
+      properties:
+        name:
+          description: The display name of the user.
+          type: string
+        email:
+          description: The email address of the user.
+          type: string
+          format: email
+
+    # --- Search schemas ---
+
+    FileSearchQuery:
+      type: object
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/FileSearchQuerySortRequest"
+        filter:
+          description: The file search filters.
+          allOf:
+            - $ref: "#/components/schemas/FileFilter"
+
+    FileSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - type
+            - created
+            - updated
+        order:
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    FileFilter:
+      type: object
+      description: Filter criteria for searching files.
+      properties:
+        name:
+          description: Filter by file name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        folderKey:
+          description: Filter by parent folder key.
+          x-semantic-type: FolderKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        type:
+          description: Filter by file type.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        created:
+          description: Filter by creation date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        updated:
+          description: Filter by last update date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        createdBy:
+          description: Filter by creator email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        updatedBy:
+          description: Filter by last updater email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+
+    FileSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching files.
+          type: array
+          items:
+            $ref: "#/components/schemas/FileResult"
+        page:
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+
+    # --- Recently deleted schemas ---
+
+    RecentlyDeletedFileSearchQuery:
+      type: object
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/RecentlyDeletedFileSearchQuerySortRequest"
+
+    RecentlyDeletedFileSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - type
+            - deleted
+        order:
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    RecentlyDeletedFileSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The recently deleted files.
+          type: array
+          items:
+            $ref: "#/components/schemas/RecentlyDeletedFileResult"
+        page:
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+
+    RecentlyDeletedFileResult:
+      type: object
+      required:
+        - fileKey
+        - name
+        - type
+        - projectKey
+        - deleted
+        - deletedBy
+      properties:
+        fileKey:
+          description: The unique key identifying the deleted file.
+          type: string
+        name:
+          description: The name of the deleted file.
+          type: string
+        type:
+          description: The type of the deleted file.
+          type: string
+          enum:
+            - bpmn
+            - dmn
+            - form
+            - element-template
+            - rpa
+            - markdown
+            - tests
+        projectKey:
+          description: The key of the project the file belonged to.
+          type: string
+        deleted:
+          description: The timestamp when the file was deleted.
+          type: string
+          format: date-time
+        deletedBy:
+          description: The user who deleted the file.
+          allOf:
+            - $ref: "#/components/schemas/UserReference"
+          nullable: true

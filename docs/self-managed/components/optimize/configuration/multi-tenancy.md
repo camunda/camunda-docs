@@ -6,6 +6,10 @@ description: "Learn about the supported multi-tenancy scenarios."
 
 <span class="badge badge--platform">Camunda 8 Self-Managed only</span>
 
+:::note
+This page describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+:::
+
 Multi-tenancy is the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/components/management-identity/manage-tenants.md) or
 clients within a single installation.
 

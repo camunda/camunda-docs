@@ -16,7 +16,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first AI agent, and orchestrating human tasks and APIs using connectors.
+Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first AI agent, and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
 
 <a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first BPMN process with Camunda 8" href="getting-started-hello-world" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first BPMN process with Camunda 8</a>
 
@@ -48,7 +48,7 @@ Get started with Camunda [agentic orchestration](/components/agentic-orchestrati
 
 ## Orchestrate human tasks
 
-This guide is for low-code developers using Camunda 8 SaaS to efficiently allocate work through user tasks.
+This guide is for low-code developers using Camunda 8 SaaS to efficiently allocate work through [user tasks](/reference/glossary.md#user-task).
 
 <p><a href="./orchestrate-human-tasks/" class="link-arrow">Get started with human task orchestration</a></p>
 

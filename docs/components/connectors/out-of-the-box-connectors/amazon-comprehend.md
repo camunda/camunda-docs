@@ -17,7 +17,7 @@ To use the **Amazon Comprehend connector**, you must have an **AWS IAM Access Ke
 
 :::note
 Use **Camunda secrets** to avoid exposing your AWS IAM credentials as plain text.  
-Refer to [managing secrets](components/console/manage-clusters/manage-secrets.md) for more details.
+Refer to [managing secrets](components/hub/organization/manage-clusters/manage-secrets.md) for more details.
 :::
 
 ## Create an Amazon Comprehend connector task
@@ -180,7 +180,7 @@ Mapped values **result**:
 
 ### How do I securely store AWS IAM credentials for my Comprehend connector?
 
-Store your AWS IAM credentials as **Camunda secrets** to avoid exposing sensitive information. Follow our [managing secrets guide](components/console/manage-clusters/manage-secrets.md) to learn more.
+Store your AWS IAM credentials as **Camunda secrets** to avoid exposing sensitive information. Follow our [managing secrets guide](components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ### AWS authentication types
 

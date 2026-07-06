@@ -5,9 +5,20 @@ title: Production architecture for Camunda 8 with RDBMS
 description: "Reference architecture for deploying Camunda 8 Self-Managed in production using an external RDBMS as secondary storage."
 ---
 
-Understand reference architectures for running Camunda 8 Self-Managed in production with a relational database (RDBMS) as secondary storage, including supported topologies, Orchestration Cluster interactions, and critical constraints.
+Apply RDBMS secondary storage to a **manual deployment**. For the canonical production architecture and trade-off guidance across manual, containerized, and Kubernetes deployments, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
 
-## Recommended topology
+## Manual deployment baseline
+
+For manual production deployments with RDBMS, use these baseline decisions:
+
+- Run at least three brokers across three availability zones for high availability.
+- Use an external supported RDBMS for the Orchestration Cluster's secondary storage.
+- Keep the database in the same region as the Orchestration Cluster.
+- Use managed database services or vendor-supported high-availability mechanisms when possible.
+
+For backend selection trade-offs, Optimize requirements, and Elasticsearch/OpenSearch versus RDBMS comparison guidance, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
+
+## Example topology
 
 For production deployments with RDBMS, Camunda recommends a **HA Zeebe cluster backed by an external managed RDBMS**:
 
@@ -48,19 +59,19 @@ graph TB
 
 ### Key characteristics
 
-**Clustering**
+#### Clustering
 
 - Minimum three brokers for production HA
 - Each broker in separate availability zone
 - Default replication factor 3 (spans AZs)
 
-**Secondary storage**
+#### Secondary storage
 
 - Single external managed RDBMS instance
 - Database handles replication and failover
 - Camunda does not manage database HA
 
-**Data flow**
+#### Data flow
 
 - Processes are executed
 - State is flushed to RDBMS
@@ -78,7 +89,7 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ## Production constraints
 
-❌ **ES/OS ↔ RDBMS migration not supported**: Choose your secondary storage backend before production. No automated migration tools available.
+❌ **ES/OS ↔ RDBMS migration not supported**: Choose your secondary storage backend before production. No automated migration tools are available.
 
 ❌ **Uniform broker configuration required**: All brokers in the Orchestration Cluster must export to the same secondary storage backend for its Orchestration Cluster indices. In addition, you may run Elasticsearch/OpenSearch to support Optimize, but the Orchestration Cluster still uses a single backend for its own secondary storage.
 
@@ -99,6 +110,7 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ## Next steps
 
+- [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [RDBMS configuration](/self-managed/deployment/manual/rdbms/configuration.md)
 - [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 - [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md)

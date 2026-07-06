@@ -290,62 +290,98 @@ or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes prec
 
 ### Job type
 
-You can configure the job type via the `JobWorker` annotation:
-
-```java
-@JobWorker(type = "foo")
-public void handleJobFoo() {
-  // handles jobs of type 'foo'
-}
-```
-
-If you don't specify the `type` attribute, the **method name** is used by default:
+By default, the **method name** is used as the job type, keeping your code self-documenting without additional configuration:
 
 ```java
 @JobWorker
-public void foo() {
-    // handles jobs of type 'foo'
+public void checkPayment() {
+  // handles jobs of type 'checkPayment'
 }
 ```
 
-As a third possibility, you can set a task type as property:
+To use a different job type, set the `type` attribute on the annotation:
+
+```java
+@JobWorker(type = "payment-check")
+public void checkPayment() {
+  // handles jobs of type 'payment-check'
+}
+```
+
+To override the job type externally without modifying the code — for example, when deploying a shared worker implementation under a different type name — use an application property:
 
 ```yaml
 camunda:
   client:
     worker:
       override:
-        foo:
-          type: bar
+        checkPayment:
+          type: payment-check
 ```
 
-As a fourth possibility, you can set a default task type as property:
+To set a fallback job type for all workers that don't define a type via annotation or property override:
 
 ```yaml
 camunda:
   client:
     worker:
       defaults:
-        type: foo
+        type: my-default-type
 ```
-
-This is used for all workers that do **not** set a task type via the annotation or set a job type as individual worker property.
 
 ### Control variable fetching
 
-A job worker can submit a list of variables when activating jobs to limit the amount of data being sent.
+By default, a job worker fetches **all** process variables when activating a job. To improve performance and keep your code clean, you should fetch only the variables your worker actually needs. See [writing good workers](/components/best-practices/development/writing-good-workers.md#data-minimization-in-workers) for more guidance on minimizing data transfer.
 
-There are implicit and explicit ways to control the variable fetching. While the implicit ones come with the job worker function parameters, the explicit ones are listed here.
+#### Using `@Variable` (recommended)
 
-#### Provide a list of variables to fetch
-
-You can specify that you only want to fetch some variables (instead of all) when executing a job, which can decrease load and improve performance:
+The recommended approach is to declare each variable you need as a typed method parameter annotated with `@Variable`. The SDK automatically fetches only those variables and injects them directly — no type casting required:
 
 ```java
-@JobWorker(type = "foo", fetchVariables={"variable1", "variable2"})
-public void handleJobFoo(final JobClient client, final ActivatedJob job) {
-  String variable1 = (String)job.getVariablesAsMap().get("variable1");
-  System.out.println(variable1);
+@JobWorker
+public void checkPayment(@Variable String orderId, @Variable BigDecimal amount) {
+  // only 'orderId' and 'amount' are fetched; types are enforced automatically
+}
+```
+
+With the [`-parameters` compiler flag](./getting-started.md#enable-the-java-compiler--parameters-flag) enabled, the parameter name is used as the variable name automatically. To use a different variable name, set it explicitly on the annotation:
+
+```java
+@JobWorker
+public void checkPayment(@Variable(name = "order_id") String orderId) {
+  // fetches the process variable 'order_id' into the 'orderId' parameter
+}
+```
+
+:::note
+This adds the variable name to the list of variables fetched from the process.
+:::
+
+#### Using `@VariablesAsType`
+
+For workers that operate on multiple related variables, `@VariablesAsType` maps process variables to your own class, eliminating individual type casts. Jackson's `@JsonProperty` annotation is respected. Return the updated object to write changes back to the process:
+
+```java
+@JobWorker
+public PaymentVariables checkPayment(@VariablesAsType PaymentVariables vars) {
+  // access typed fields directly — no casting needed
+  vars.setApproved(vars.getAmount().compareTo(BigDecimal.valueOf(100)) <= 0);
+  return vars; // return the object to write updated fields back to the process
+}
+```
+
+:::note
+This adds the names of the fields of the used type to the list of variables fetched from the process.
+:::
+
+#### Provide an explicit list of variables to fetch
+
+If you need access to the raw `ActivatedJob` or `JobClient` objects, you can specify an explicit list of variable names to avoid fetching all variables:
+
+```java
+@JobWorker(fetchVariables = {"orderId", "amount"})
+public void checkPayment(final JobClient client, final ActivatedJob job) {
+  String orderId = (String) job.getVariablesAsMap().get("orderId");
   // ...
 }
 ```
@@ -357,40 +393,41 @@ camunda:
   client:
     worker:
       override:
-        foo:
+        checkPayment:
           fetch-variables:
-            - variable1
-            - variable2
+            - orderId
+            - amount
 ```
 
 :::caution
 Using the properties-defined way of fetching variables will override **all** other detection strategies.
 :::
 
-#### Prevent the variable filtering
+#### Fetch all variables
 
-You can force that all variables are loaded anyway:
+If your worker genuinely needs every process variable, you can force fetching all variables:
 
 ```java
-@JobWorker(type = "foo", fetchAllVariables = true)
-public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variable String variable1) {
+@JobWorker(fetchAllVariables = true)
+public void checkPayment(final ActivatedJob job) {
+  // all variables are available via job.getVariablesAsMap()
 }
 ```
 
-You can also override the forced fetching of all variables in your properties:
+You can also set this in your properties:
 
 ```yml
 camunda:
   client:
     worker:
       override:
-        foo:
+        checkPayment:
           force-fetch-all-variables: true
 ```
 
 ### Define job worker function parameters
 
-The method signature you use to define job worker functions will affect how variables are retrieved.
+The method signature you use to define job worker functions determines what data is available in your worker. For fetching process variables, use [`@Variable`](#using-variable-recommended) or [`@VariablesAsType`](#using-variablesastype) — both are covered in the [variable fetching section](#control-variable-fetching) above.
 
 Unless stated otherwise, all specified methods for fetching variables will be combined into a single list of variables to retrieve.
 
@@ -399,8 +436,8 @@ Unless stated otherwise, all specified methods for fetching variables will be co
 The `JobClient` is also part of the native `JobHandler` functional interface:
 
 ```java
-@JobWorker(type = "foo")
-public void handleJobFoo(final JobClient jobClient) {
+@JobWorker
+public void processOrder(final JobClient jobClient) {
   // ...
 }
 ```
@@ -412,62 +449,15 @@ The `ActivatedJob` is also part of the native `JobHandler` functional interface.
 This will **prevent** the implicit variable fetching detection as you can retrieve variables in a programmatic way now:
 
 ```java
-@JobWorker(type = "foo")
-public void handleJobFoo(final ActivatedJob job) {
-  String variable1 = (String)job.getVariablesAsMap().get("variable1");
-  System.out.println(variable1);
+@JobWorker
+public void processOrder(final ActivatedJob job) {
+  String orderId = (String) job.getVariablesAsMap().get("orderId");
   // ...
 }
 ```
 
 :::note
-Only explicit variable fetching will be effective on using the `ActivatedJob` as parameter.
-:::
-
-#### Using `@Variable`
-
-By using the `@Variable` annotation, there is a shortcut to make variable retrieval simpler and only fetch certain variables, making them available as parameters:
-
-```java
-@JobWorker(type = "foo")
-public void handleJobFoo(@Variable(name = "variable1") String variable1) {
-  System.out.println(variable1);
-  // ...
-}
-```
-
-If you don't specify the `name` attribute on the annotation, the **method parameter name** is used as the variable name if you enabled the [`-parameters` compiler flag](/apis-tools/camunda-spring-boot-starter/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/camunda-spring-boot-starter/getting-started.md):
-
-```java
-@JobWorker(type = "foo")
-public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variable String variable1) {
-  System.out.println(variable1);
-  // ...
-}
-```
-
-:::note
-This will add the name of the variable to the joint list of variables to fetch.
-:::
-
-#### Using `@VariablesAsType`
-
-You can also use your own class into which the process variables are mapped to (comparable to `getVariablesAsType()` in the [Java client API](/apis-tools/java-client/getting-started.md)). Therefore, use the `@VariablesAsType` annotation. In the example below, `MyProcessVariables` refers to your own class:
-
-```java
-@JobWorker(type = "foo")
-public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables) {
-  // do whatever you need to do
-  variables.getMyAttributeX();
-  variables.setMyAttributeY(42);
-
-  // return variables object if something has changed, so the changes are submitted to Zeebe
-  return variables;
-}
-```
-
-:::note
-This will add the names of the fields of the used type to the joint list of variables to fetch. Jackson's `@JsonProperty` annotation is respected.
+Only explicit variable fetching will be effective when using the `ActivatedJob` as a parameter.
 :::
 
 #### Using `@Document`
@@ -492,7 +482,7 @@ You can use the `@CustomHeaders` annotation for a `Map<String, String>` paramete
 
 ```java
 @JobWorker
-public void handleFoo(@CustomHeaders Map<String, String> headers) {
+public void processOrder(@CustomHeaders Map<String, String> headers) {
   // do whatever you need to do
 }
 ```
@@ -507,7 +497,7 @@ You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@Pr
 
 ```java
 @JobWorker
-public void handleFoo(
+public void processOrder(
   @ProcessInstanceKey String processInstanceKey,
   @ElementInstanceKey long elementInstanceKey,
   @JobKey Long jobKey,
@@ -525,8 +515,8 @@ By default, the `autoComplete` attribute is set to `true` for any job worker.
 In this case, the Spring integration will handle job completion for you:
 
 ```java
-@JobWorker(type = "foo")
-public void handleJobFoo(final ActivatedJob job) {
+@JobWorker
+public void processOrder() {
   // do whatever you need to do
   // no need to call client.newCompleteCommand()...
 }
@@ -546,15 +536,15 @@ When using `autoComplete` you can return:
 - an `Object` that will be serialized to a JSON object
 
 ```java
-@JobWorker(type = "foo")
-public Map<String, Object> handleJobFoo(final ActivatedJob job) {
+@JobWorker
+public Map<String, Object> processOrder() {
   // some work
   if (successful) {
     // some data is returned to be stored as process variable
     return variablesMap;
   } else {
-   // problem shall be indicated to the process:
-   throw new BpmnError("DOESNT_WORK", "This does not work because...");
+    // problem shall be indicated to the process:
+    throw new BpmnError("DOESNT_WORK", "This does not work because...");
   }
 }
 ```
@@ -599,12 +589,12 @@ public DocumentResult sendDocumentAsResult() {
 Your job worker code can also complete the job itself. This gives you more control over when exactly you want to complete the job (for example, allowing the completion to be moved to reactive callbacks):
 
 ```java
-@JobWorker(type = "foo", autoComplete = false)
-public void handleJobFoo(final JobClient client, final ActivatedJob job) {
+@JobWorker(autoComplete = false)
+public void processOrder(final JobClient client, final ActivatedJob job) {
   // do whatever you need to do
   client.newCompleteCommand(job.getKey())
      .send()
-     .exceptionally( throwable -> { throw new RuntimeException("Could not complete job " + job, throwable); });
+     .exceptionally(throwable -> { throw new RuntimeException("Could not complete job " + job, throwable); });
 }
 ```
 
@@ -627,7 +617,7 @@ camunda:
   client:
     worker:
       override:
-        foo:
+        processOrder:
           auto-complete: false
 ```
 
@@ -645,37 +635,41 @@ This registers a callback to be executed when the command on the workflow engine
 When completing jobs programmatically, you must specify `autoComplete = false`. Otherwise, there is a race condition between your programmatic job completion and the Spring integration job completion, and this can lead to unpredictable results.
 :::
 
-### Reacting on problems
+### React to problems
 
-#### Throwing `BpmnError`s
+#### Throw a `BpmnError`
 
-Whenever your code hits a problem that should lead to a [BPMN error](/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `BpmnError` to provide the error code used in BPMN:
+If your code encounters a problem that should trigger a [BPMN error](/components/modeler/bpmn/error-events/error-events.md), throw a `BpmnError` and provide the error code defined in BPMN:
 
 ```java
-@JobWorker(type = "foo")
-public void handleJobFoo() {
+@JobWorker
+public void processOrder() {
   // some work
   if (businessError) {
-   // problem shall be indicated to the process:
-   throw CamundaError.bpmnError("ERROR_CODE", "Some explanation why this does not work");
-   // this is a static function that returns an instance of BpmnError
+    // problem shall be indicated to the process:
+    throw CamundaError.bpmnError("ERROR_CODE", "Some explanation why this does not work");
+    // this is a static function that returns an instance of BpmnError
   }
 }
 ```
 
-#### Failing jobs in a controlled way
+#### Fail jobs in a controlled way
 
 Whenever you want a job to fail in a controlled way, you can throw a `JobError` and provide parameters like `variables`, `retries` and `retryBackoff`:
 
 ```java
-@JobWorker(type = "foo")
-public void handleJobFoo() {
+@JobWorker
+public void processOrder() {
   try {
-   // some work
-  } catch(Exception e) {
-   // problem shall be indicated to the process:
-   throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
-   // this is a static function that returns an instance of JobError
+    // some work
+  } catch (DynamicRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, this::calculateRetryBackoff, e);
+    // this is a static function that returns an instance of JobError with a dynamic retry backoff
+  } catch (StaticRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
+    // this is a static function that returns an instance of JobError with a static retry backoff
   }
 }
 ```
@@ -685,7 +679,7 @@ The JobError takes 5 parameters:
 - `errorMessage`: String
 - `variables`: Object _(optional)_, default `null`
 - `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
-- `retryBackoff`: Duration _(optional)_, defaults to `PT0S`
+- `retryBackoff`: Duration _or_ `Function<Integer, Duration>` _(optional)_, defaults to the configured retry backoff; function input is the retries value that will be submitted
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
@@ -718,7 +712,7 @@ You can disable workers via the `enabled` parameter of the `@JobWorker` annotati
 
 ```java
 @JobWorker(enabled = false)
-public void foo() {
+public void processOrder() {
   // worker's code - now disabled
 }
 ```
@@ -730,7 +724,7 @@ camunda:
   client:
     worker:
       override:
-        foo:
+        processOrder:
           enabled: false
 ```
 
@@ -756,7 +750,7 @@ Number of jobs that are polled from the broker to be worked on in this client an
 
 ```java
 @JobWorker(maxJobsActive = 64)
-public void foo() {
+public void processOrder() {
   // worker's code
 }
 ```
@@ -768,7 +762,7 @@ camunda:
   client:
     worker:
       override:
-        foo:
+        processOrder:
           max-jobs-active: 64
 ```
 
@@ -790,7 +784,7 @@ Job streaming is disabled by default for job workers. To enable job streaming on
 
 ```java
 @JobWorker(streamEnabled = true)
-public void foo() {
+public void processOrder() {
   // worker's code
 }
 ```
@@ -802,7 +796,7 @@ camunda:
   client:
     worker:
       override:
-        foo:
+        processOrder:
           stream-enabled: true
 ```
 
@@ -836,7 +830,7 @@ Additionally, you can set `tenantIds` on the job worker level by using the annot
 
 ```java
 @JobWorker(tenantIds="myOtherTenant")
-public void foo() {
+public void processOrder() {
   // worker's code
 }
 ```
@@ -848,7 +842,7 @@ camunda:
   client:
     worker:
       override:
-        foo:
+        processOrder:
           tenants-ids:
             - <default>
             - foo
@@ -860,7 +854,7 @@ To define the job timeout, you can set the annotation (`long` in milliseconds):
 
 ```java
 @JobWorker(timeout=60000)
-public void foo() {
+public void processOrder() {
   // worker's code
 }
 ```
@@ -872,7 +866,7 @@ camunda:
   client:
     worker:
       override:
-        foo:
+        processOrder:
           timeout: PT1M
 ```
 

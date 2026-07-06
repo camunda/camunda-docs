@@ -18,7 +18,7 @@ To use the **Amazon Bedrock Knowledge Base connector**, you need the following:
 Learn more about Amazon Bedrock Knowledge Bases in the [official documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html).
 
 :::note
-Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon Bedrock Knowledge Base connector task

@@ -9,7 +9,10 @@ from camunda_orchestration_sdk import (
     ElementId,
     ElementInstanceKey,
     ElementInstanceSearchQuery,
+    ElementInstanceWaitStateQuery,
     IncidentSearchQuery,
+    JobWaitStateDetails,
+    MessageWaitStateDetails,
     MigrateProcessInstanceMappingInstruction,
     ProcessDefinitionId,
     ProcessDefinitionInstanceStatisticsQuery,
@@ -37,6 +40,8 @@ def get_process_instance_example(process_instance_key: ProcessInstanceKey) -> No
     )
 
     print(f"Process instance: {result.process_definition_id}")
+
+
 # endregion GetProcessInstance
 
 
@@ -47,11 +52,18 @@ def delete_process_instance_example(process_instance_key: ProcessInstanceKey) ->
     client.delete_process_instance(
         process_instance_key=process_instance_key,
     )
+
+
 # endregion DeleteProcessInstance
 
 
 # region MigrateProcessInstance
-def migrate_process_instance_example(process_instance_key: ProcessInstanceKey, target_process_definition_key: ProcessDefinitionKey, source_element_id: ElementId, target_element_id: ElementId) -> None:
+def migrate_process_instance_example(
+    process_instance_key: ProcessInstanceKey,
+    target_process_definition_key: ProcessDefinitionKey,
+    source_element_id: ElementId,
+    target_element_id: ElementId,
+) -> None:
     client = CamundaClient()
 
     client.migrate_process_instance(
@@ -66,6 +78,8 @@ def migrate_process_instance_example(process_instance_key: ProcessInstanceKey, t
             ],
         ),
     )
+
+
 # endregion MigrateProcessInstance
 
 
@@ -77,11 +91,15 @@ def modify_process_instance_example(process_instance_key: ProcessInstanceKey) ->
         process_instance_key=process_instance_key,
         data=ProcessInstanceModificationInstruction(),
     )
+
+
 # endregion ModifyProcessInstance
 
 
 # region GetProcessInstanceStatistics
-def get_process_instance_statistics_example(process_instance_key: ProcessInstanceKey) -> None:
+def get_process_instance_statistics_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_instance_statistics(
@@ -91,11 +109,15 @@ def get_process_instance_statistics_example(process_instance_key: ProcessInstanc
     if not isinstance(result.items, Unset):
         for stat in result.items:
             print(f"Element: {stat.element_id}, Active: {stat.active}")
+
+
 # endregion GetProcessInstanceStatistics
 
 
 # region GetProcessInstanceSequenceFlows
-def get_process_instance_sequence_flows_example(process_instance_key: ProcessInstanceKey) -> None:
+def get_process_instance_sequence_flows_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_instance_sequence_flows(
@@ -105,11 +127,15 @@ def get_process_instance_sequence_flows_example(process_instance_key: ProcessIns
     if not isinstance(result.items, Unset):
         for flow in result.items:
             print(f"Sequence flow: {flow}")
+
+
 # endregion GetProcessInstanceSequenceFlows
 
 
 # region GetProcessInstanceCallHierarchy
-def get_process_instance_call_hierarchy_example(process_instance_key: ProcessInstanceKey) -> None:
+def get_process_instance_call_hierarchy_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_instance_call_hierarchy(
@@ -118,11 +144,15 @@ def get_process_instance_call_hierarchy_example(process_instance_key: ProcessIns
 
     for entry in result:
         print(f"Call hierarchy entry: {entry}")
+
+
 # endregion GetProcessInstanceCallHierarchy
 
 
 # region SearchProcessInstanceIncidents
-def search_process_instance_incidents_example(process_instance_key: ProcessInstanceKey) -> None:
+def search_process_instance_incidents_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.search_process_instance_incidents(
@@ -133,11 +163,15 @@ def search_process_instance_incidents_example(process_instance_key: ProcessInsta
     if not isinstance(result.items, Unset):
         for incident in result.items:
             print(f"Incident: {incident.incident_key}")
+
+
 # endregion SearchProcessInstanceIncidents
 
 
 # region ResolveProcessInstanceIncidents
-def resolve_process_instance_incidents_example(process_instance_key: ProcessInstanceKey) -> None:
+def resolve_process_instance_incidents_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.resolve_process_instance_incidents(
@@ -145,11 +179,15 @@ def resolve_process_instance_incidents_example(process_instance_key: ProcessInst
     )
 
     print(f"Batch operation key: {result.batch_operation_key}")
+
+
 # endregion ResolveProcessInstanceIncidents
 
 
 # region GetProcessDefinition
-def get_process_definition_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_process_definition_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_definition(
@@ -157,11 +195,15 @@ def get_process_definition_example(process_definition_key: ProcessDefinitionKey)
     )
 
     print(f"Process definition: {result.name}")
+
+
 # endregion GetProcessDefinition
 
 
 # region GetProcessDefinitionXml
-def get_process_definition_xml_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_process_definition_xml_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     xml = client.get_process_definition_xml(
@@ -169,6 +211,8 @@ def get_process_definition_xml_example(process_definition_key: ProcessDefinition
     )
 
     print(f"XML length: {len(xml)}")
+
+
 # endregion GetProcessDefinitionXml
 
 
@@ -183,11 +227,15 @@ def search_process_definitions_example() -> None:
     if not isinstance(result.items, Unset):
         for pd in result.items:
             print(f"Process definition: {pd.name}")
+
+
 # endregion SearchProcessDefinitions
 
 
 # region GetProcessDefinitionStatistics
-def get_process_definition_statistics_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_process_definition_statistics_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_definition_statistics(
@@ -197,6 +245,8 @@ def get_process_definition_statistics_example(process_definition_key: ProcessDef
     if not isinstance(result.items, Unset):
         for stat in result.items:
             print(f"Element: {stat.element_id}")
+
+
 # endregion GetProcessDefinitionStatistics
 
 
@@ -211,11 +261,15 @@ def get_process_definition_instance_statistics_example() -> None:
     if not isinstance(result.items, Unset):
         for stat in result.items:
             print(f"Definition: {stat.process_definition_id}")
+
+
 # endregion GetProcessDefinitionInstanceStatistics
 
 
 # region GetProcessDefinitionInstanceVersionStatistics
-def get_process_definition_instance_version_statistics_example(process_definition_id: ProcessDefinitionId) -> None:
+def get_process_definition_instance_version_statistics_example(
+    process_definition_id: ProcessDefinitionId,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_definition_instance_version_statistics(
@@ -229,6 +283,8 @@ def get_process_definition_instance_version_statistics_example(process_definitio
     if not isinstance(result.items, Unset):
         for stat in result.items:
             print(f"Version: {stat.process_definition_version}")
+
+
 # endregion GetProcessDefinitionInstanceVersionStatistics
 
 
@@ -242,12 +298,18 @@ def get_process_definition_message_subscription_statistics_example() -> None:
 
     if not isinstance(result.items, Unset):
         for stat in result.items:
-            print(f"Definition: {stat.process_definition_id}, subscriptions: {stat.active_subscriptions}")
+            print(
+                f"Definition: {stat.process_definition_id}, subscriptions: {stat.active_subscriptions}"
+            )
+
+
 # endregion GetProcessDefinitionMessageSubscriptionStatistics
 
 
 # region GetStartProcessForm
-def get_start_process_form_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_start_process_form_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_start_process_form(
@@ -255,6 +317,8 @@ def get_start_process_form_example(process_definition_key: ProcessDefinitionKey)
     )
 
     print(f"Form: {result.form_key}")
+
+
 # endregion GetStartProcessForm
 
 
@@ -267,6 +331,8 @@ def get_variable_example(variable_key: VariableKey) -> None:
     )
 
     print(f"Variable: {result.name} = {result.value}")
+
+
 # endregion GetVariable
 
 
@@ -279,7 +345,36 @@ def search_variables_example() -> None:
     if not isinstance(result.items, Unset):
         for var in result.items:
             print(f"Variable: {var.name}")
+
+
 # endregion SearchVariables
+
+
+# region SearchVariablesAsDto
+def search_variables_as_dto_example(process_instance_key: ProcessInstanceKey) -> None:
+    from pydantic import BaseModel
+
+    class OrderVars(BaseModel):
+        order_id: str
+        amount: float | None = None
+
+    client = CamundaClient()
+
+    # Only the declared fields are fetched (derived as a name $in [...] filter).
+    variables = client.search_variables_as_dto(
+        OrderVars,
+        process_instance_key=process_instance_key,
+    )
+
+    # Lenient access — a missing variable reads as None.
+    print(f"order_id: {variables.get('order_id')}")
+
+    # Strict access — constructs the typed model, raising on missing/invalid values.
+    order = variables.validate()
+    print(f"amount: {order.amount}")
+
+
+# endregion SearchVariablesAsDto
 
 
 # region GetElementInstance
@@ -291,6 +386,8 @@ def get_element_instance_example(element_instance_key: ElementInstanceKey) -> No
     )
 
     print(f"Element: {result.element_id}")
+
+
 # endregion GetElementInstance
 
 
@@ -305,11 +402,15 @@ def search_element_instances_example() -> None:
     if not isinstance(result.items, Unset):
         for ei in result.items:
             print(f"Element instance: {ei.element_instance_key}")
+
+
 # endregion SearchElementInstances
 
 
 # region SearchElementInstanceIncidents
-def search_element_instance_incidents_example(element_instance_key: ElementInstanceKey) -> None:
+def search_element_instance_incidents_example(
+    element_instance_key: ElementInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.search_element_instance_incidents(
@@ -320,11 +421,40 @@ def search_element_instance_incidents_example(element_instance_key: ElementInsta
     if not isinstance(result.items, Unset):
         for incident in result.items:
             print(f"Incident: {incident.incident_key}")
+
+
 # endregion SearchElementInstanceIncidents
 
 
+# region SearchElementInstanceWaitStates
+def search_element_instance_wait_states_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_element_instance_wait_states(
+        data=ElementInstanceWaitStateQuery(),
+    )
+
+    for wait_state in result.items:
+        details = wait_state.details
+        if isinstance(details, JobWaitStateDetails):
+            info = f"waiting on job '{details.job_type}'"
+        elif isinstance(details, MessageWaitStateDetails):
+            info = f"waiting for message '{details.message_name}'"
+        else:
+            info = f"waiting ({details.wait_state_type})"
+        print(
+            f"Element {wait_state.element_id} "
+            f"(instance {wait_state.element_instance_key}) {info}"
+        )
+
+
+# endregion SearchElementInstanceWaitStates
+
+
 # region CreateElementInstanceVariables
-def create_element_instance_variables_example(element_instance_key: ElementInstanceKey) -> None:
+def create_element_instance_variables_example(
+    element_instance_key: ElementInstanceKey,
+) -> None:
     client = CamundaClient()
 
     variables = SetVariableRequestVariables.from_dict({"myVar": "myValue"})
@@ -334,6 +464,8 @@ def create_element_instance_variables_example(element_instance_key: ElementInsta
             variables=variables,
         ),
     )
+
+
 # endregion CreateElementInstanceVariables
 
 
@@ -350,4 +482,6 @@ def activate_ad_hoc_sub_process_activities_example(element_id: ElementId) -> Non
             ],
         ),
     )
+
+
 # endregion ActivateAdHocSubProcessActivities

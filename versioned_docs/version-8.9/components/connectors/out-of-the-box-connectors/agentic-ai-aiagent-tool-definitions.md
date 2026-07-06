@@ -1,7 +1,7 @@
 ---
 id: agentic-ai-aiagent-tool-definitions
-sidebar_label: Tool Definitions
-title: AI Agent Tool Definitions
+sidebar_label: Tool definitions
+title: AI Agent tool definitions
 description: Tool definitions for AI agents using the fromAi() function syntax
 ---
 
@@ -163,6 +163,14 @@ fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.se
 
 For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) documentation.
 
+## Message catch events as tools
+
+You can use an intermediate message catch event inside an ad-hoc sub-process as a tool. For example, to model a "wait for reply" step where the agent sends a message to an external system and waits for a response before continuing.
+
+When using this pattern, each process instance opens a message subscription. If multiple instances run concurrently, and they all subscribe with the same message name and correlation key, Zeebe delivers the reply to one instance non-deterministically. The wrong instance may receive the reply, and there is no warning when this happens.
+
+To avoid this, use a [unique correlation key per interaction](../../concepts/messages.md#request-reply-with-unique-correlation-key).
+
 ## Tool call responses
 
 To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
@@ -177,6 +185,9 @@ Depending on the used task, setting the variable content can be achieved in mult
 - An [output mapping](../../concepts/variables.md#output-mappings) creating the `toolCallResult` variable or adding
   to a part of the `toolCallResult` variable (for example, an output mapping could be set to `toolCallResult.statusCode`)
 - A [script task](../../modeler/bpmn/script-tasks/script-tasks.md) that sets the `toolCallResult` variable
+
+If a tool consists of multiple elements (for example, a sequence of tasks with a gateway), `toolCallResult` can be set at
+any point in the flow. The variable is [read from the tool's scope when the flow completes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#collect-output).
 
 Tool call results can be either primitive values (for example, a string) or complex ones, such as
 a [FEEL context](../../modeler/feel/language-guide/feel-context-expressions.md) that is serialized to a JSON

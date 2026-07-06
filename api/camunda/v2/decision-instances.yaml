@@ -4,9 +4,14 @@ paths:
       tags:
         - Decision instance
       operationId: searchDecisionInstances
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search decision instances
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -32,14 +37,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
   /decision-instances/{decisionEvaluationInstanceKey}:
     get:
       tags:
         - Decision instance
       operationId: getDecisionInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get decision instance
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -50,10 +61,7 @@ paths:
           required: true
           description: The assigned key of the decision instance, which acts as a unique identifier for this decision instance.
           schema:
-            type: string
-            format: string<DecisionEvaluationInstanceKey>
-            example: "2251799813684367"
-            description: System-generated key for a decision evaluation instance.
+            $ref: "keys.yaml#/components/schemas/DecisionEvaluationInstanceKey"
       responses:
         "200":
           description: The decision instance is successfully returned.
@@ -76,14 +84,20 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /decision-instances/{decisionEvaluationKey}/deletion:
     post:
       tags:
         - Decision instance
       operationId: deleteDecisionInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete decision instance
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -121,14 +135,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.9"
   /decision-instances/deletion:
     post:
       tags:
         - Decision instance
       operationId: deleteDecisionInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete decision instances (batch)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -160,6 +180,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
 components:
   schemas:
     DecisionInstanceSearchQuerySortRequest:
@@ -169,6 +190,7 @@ components:
           description: The field to sort by.
           type: string
           enum:
+            - businessId
             - decisionDefinitionId
             - decisionDefinitionKey
             - decisionDefinitionName
@@ -251,6 +273,11 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The key of the process instance.
+        businessId:
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+          description: |
+            The business ID of the owning process instance the decision instance belongs to. This only works for decision instances created with 8.10 and onwards. Decision instances from prior versions and standalone evaluations don't contain this data and cannot be found.
         decisionDefinitionKey:
           description: The key of the decision.
           allOf:
@@ -267,6 +294,41 @@ components:
           description: The key of the decision requirements definition.
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionRequirementsKeyFilterProperty"
+      x-properties-added-in-version:
+        - propertyName: decisionEvaluationInstanceKey
+          addedInVersion: "8.8"
+        - propertyName: state
+          addedInVersion: "8.6"
+        - propertyName: evaluationFailure
+          addedInVersion: "8.6"
+        - propertyName: evaluationDate
+          addedInVersion: "8.8"
+        - propertyName: decisionDefinitionId
+          addedInVersion: "8.6"
+        - propertyName: decisionDefinitionName
+          addedInVersion: "8.6"
+        - propertyName: decisionDefinitionVersion
+          addedInVersion: "8.6"
+        - propertyName: decisionDefinitionType
+          addedInVersion: "8.6"
+        - propertyName: tenantId
+          addedInVersion: "8.6"
+        - propertyName: decisionEvaluationKey
+          addedInVersion: "8.8"
+        - propertyName: processDefinitionKey
+          addedInVersion: "8.6"
+        - propertyName: processInstanceKey
+          addedInVersion: "8.6"
+        - propertyName: decisionDefinitionKey
+          addedInVersion: "8.6"
+        - propertyName: elementInstanceKey
+          addedInVersion: "8.8"
+        - propertyName: rootDecisionDefinitionKey
+          addedInVersion: "8.9"
+        - propertyName: decisionRequirementsKey
+          addedInVersion: "8.9"
+        - propertyName: businessId
+          addedInVersion: "8.10"
     DeleteDecisionInstanceRequest:
       type: object
       nullable: true
@@ -288,6 +350,7 @@ components:
     DecisionInstanceResult:
       type: object
       required:
+        - businessId
         - decisionDefinitionId
         - decisionDefinitionKey
         - decisionDefinitionName
@@ -306,6 +369,15 @@ components:
         - state
         - tenantId
       properties:
+        businessId:
+          description: |
+            The business ID of the owning process instance, inherited when the decision instance was
+            evaluated. This is `null` for decision instances created before version 8.10, for
+            standalone decision evaluations, and for decision instances whose owning process instance
+            has no business ID.
+          nullable: true
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/BusinessId"
         decisionDefinitionId:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/DecisionDefinitionId"
@@ -373,6 +445,43 @@ components:
           description: The tenant ID of the decision instance.
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
+      x-properties-added-in-version:
+        - propertyName: businessId
+          addedInVersion: "8.10"
+        - propertyName: decisionDefinitionId
+          addedInVersion: "8.6"
+        - propertyName: decisionDefinitionKey
+          addedInVersion: "8.6"
+        - propertyName: decisionDefinitionName
+          addedInVersion: "8.6"
+        - propertyName: decisionDefinitionType
+          addedInVersion: "8.6"
+        - propertyName: decisionDefinitionVersion
+          addedInVersion: "8.6"
+        - propertyName: decisionEvaluationInstanceKey
+          addedInVersion: "8.8"
+        - propertyName: decisionEvaluationKey
+          addedInVersion: "8.8"
+        - propertyName: elementInstanceKey
+          addedInVersion: "8.8"
+        - propertyName: evaluationDate
+          addedInVersion: "8.6"
+        - propertyName: evaluationFailure
+          addedInVersion: "8.6"
+        - propertyName: processDefinitionKey
+          addedInVersion: "8.6"
+        - propertyName: processInstanceKey
+          addedInVersion: "8.6"
+        - propertyName: result
+          addedInVersion: "8.6"
+        - propertyName: rootDecisionDefinitionKey
+          addedInVersion: "8.9"
+        - propertyName: rootProcessInstanceKey
+          addedInVersion: "8.9"
+        - propertyName: state
+          addedInVersion: "8.6"
+        - propertyName: tenantId
+          addedInVersion: "8.6"
     DecisionInstanceGetQueryResult:
       allOf:
         - $ref: "#/components/schemas/DecisionInstanceResult"
@@ -410,6 +519,13 @@ components:
         inputValue:
           description: The value of the decision input.
           type: string
+      x-properties-added-in-version:
+        - propertyName: inputId
+          addedInVersion: "8.6"
+        - propertyName: inputName
+          addedInVersion: "8.6"
+        - propertyName: inputValue
+          addedInVersion: "8.6"
     EvaluatedDecisionOutputItem:
       required:
         - ruleId
@@ -438,6 +554,11 @@ components:
           nullable: true
           type: integer
           format: int32
+      x-properties-added-in-version:
+        - propertyName: ruleId
+          addedInVersion: "8.9"
+        - propertyName: ruleIndex
+          addedInVersion: "8.9"
     MatchedDecisionRuleItem:
       required:
         - evaluatedOutputs
@@ -458,6 +579,13 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/EvaluatedDecisionOutputItem"
+      x-properties-added-in-version:
+        - propertyName: ruleId
+          addedInVersion: "8.6"
+        - propertyName: ruleIndex
+          addedInVersion: "8.6"
+        - propertyName: evaluatedOutputs
+          addedInVersion: "8.6"
     DecisionDefinitionTypeEnum:
       description: The type of the decision. UNSPECIFIED is deprecated and should not be used anymore, for removal in 8.10
       type: string
@@ -502,6 +630,19 @@ components:
             $ref: "#/components/schemas/DecisionInstanceStateEnum"
         $like:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
+      x-properties-added-in-version:
+        - propertyName: $eq
+          addedInVersion: "8.9"
+        - propertyName: $neq
+          addedInVersion: "8.9"
+        - propertyName: $exists
+          addedInVersion: "8.9"
+        - propertyName: $in
+          addedInVersion: "8.9"
+        - propertyName: $notIn
+          addedInVersion: "8.9"
+        - propertyName: $like
+          addedInVersion: "8.9"
     DecisionInstanceStateFilterProperty:
       description: DecisionInstanceStateEnum property with full advanced search capabilities.
       oneOf:

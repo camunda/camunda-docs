@@ -195,6 +195,7 @@ zeebe.broker.exporters:
         createTemplate: false
       retention:
         enabled: false
+        managePolicy: false
       authentication:
         username: camunda-app
         password: camunda123
@@ -253,6 +254,7 @@ orchestration:
             create-template: false
           retention:
             enabled: false
+            manage-policy: false
 ```
 
 ### Minor version upgrades with the standalone schema manager {#minor-upgrades}

@@ -2,10 +2,14 @@
 id: helm-v4
 title: "Helm 4"
 sidebar_label: "Helm 4"
-description: "Learn more about how Helm 4 behavior can affect Camunda Helm chart installs/upgrades and how to apply workarounds."
+description: "Learn how Helm 4 behavior affects Camunda Helm chart installs and upgrades."
 ---
 
-Learn how Helm 4 behavior can affect Camunda Helm chart installs and upgrades, and how to apply workarounds.
+Since Camunda 8.10 (chart 15.x), Helm CLI v4 is required. Use this page to understand Helm 4 behavior changes that affect the Camunda Helm chart and to apply the relevant workarounds.
+
+:::note Switching from Helm v3
+Switching CLIs does not require a release-state migration; Helm is client-side only. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
+:::
 
 :::info
 Learn more about Helm 4 changes in the [Helm documentation](https://helm.sh/docs/overview/#whats-new).
@@ -23,7 +27,7 @@ Helm CLI compatibility depends on the Camunda Helm chart version.
 | Camunda 8.9 – Chart 14.x  | ✅          | ✅ \*       |
 | Camunda 8.10 – Chart 15.x | ❌          | ✅ \*       |
 
-\* Helm CLI v4 may require workarounds when overriding environment variables.
+\* Helm CLI v4 may require workarounds when overriding environment variables. See [Workarounds](#workarounds).
 
 ## Helm 4 breaking changes
 
@@ -83,14 +87,13 @@ If you encounter a duplicate environment variable error, apply one of the follow
    helm upgrade ... --server-side=false
    ```
 
-4. Use Helm CLI v3 as a temporary workaround.
+4. On older chart versions where Helm CLI v3 is still supported, run installs and upgrades with Helm v3.
 
 :::note Helm CLI v3 support timeline
-Helm CLI v3 receives bug fixes until July 8, 2026, and security fixes until November 11, 2026.  
-See the [Helm support policy](https://helm.sh/blog/helm-4-released#helm-v3-support).
+Helm CLI v3 receives bug fixes until July 8, 2026, and security fixes until November 11, 2026. See the [Helm support policy](https://helm.sh/blog/helm-4-released#helm-v3-support). Chart 15.x and later require Helm v4 regardless of this timeline.
 :::
 
-If your package manager no longer provides Helm CLI v3, you can run it using Docker:
+If you are on a supported chart version and your package manager no longer provides Helm CLI v3, you can run it using Docker:
 
 ```bash
 docker run \

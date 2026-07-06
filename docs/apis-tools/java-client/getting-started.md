@@ -415,7 +415,7 @@ Refer to your identity provider documentation for configuring mutual TLS authent
 ### Step 2b: Configure the Orchestration Cluster connection for SaaS
 
 **Use for:** Camunda 8 SaaS environments.
-Get the values below from your [Camunda Console client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
+Get the values below from your [Camunda Console client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client).
 
 ```java
 private static final String CAMUNDA_CLUSTER_ID = "[Cluster ID from Console]";

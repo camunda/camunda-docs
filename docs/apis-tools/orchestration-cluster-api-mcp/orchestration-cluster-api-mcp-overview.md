@@ -21,8 +21,11 @@ The Orchestration Cluster MCP Server is not part of the [Camunda 8 public API](/
 :::
 
 :::note
-This is the Orchestration Cluster MCP Server documentation. If you want to connect an AI agent running in a BPMN process to an external MCP server, see [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
-:::
+This is the Orchestration Cluster MCP Server documentation. If you are looking to:
+
+- Expose your own BPMN processes as callable MCP tools for AI agents, see the [Processes MCP Server](../processes-mcp/processes-mcp-overview.md).
+- Connect an AI agent running in a BPMN process to an external MCP server, see the [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
+  :::
 
 ### Key features
 
@@ -41,7 +44,7 @@ The MCP server uses the same authentication model as the [Orchestration Cluster 
 
 For SaaS environments:
 
-1. [Create API client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console. Ensure the **Orchestration Cluster API** scope is enabled.
+1. [Create API client credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console. Ensure the **Orchestration Cluster API** scope is enabled.
 2. Use the generated **Client ID**, **Client secret**, **OAuth token endpoint**, and **audience** to obtain an access token via the [OAuth 2.0 client credentials flow](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt).
 3. Pass the token in the `Authorization: Bearer <token>` header, or use [`c8ctl mcp-proxy`](./orchestration-cluster-api-mcp-setup.md#using-c8ctl-mcp-proxy) to handle this automatically.
 

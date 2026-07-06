@@ -4,9 +4,14 @@ paths:
       tags:
         - Clock
       operationId: pinClock
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Pin internal clock (alpha)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -33,14 +38,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
   /clock/reset:
     post:
       tags:
         - Clock
       operationId: resetClock
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Reset internal clock (alpha)
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -59,6 +70,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.6"
 components:
   schemas:
     ClockPinRequest:

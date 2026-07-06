@@ -21,6 +21,10 @@ Use the following guides to upgrade a Camunda 8 Self-Managed deployment installa
 
 <ZeebeGrid zeebe={helmIndexCards} />
 
+:::note Patch upgrades within the same minor version
+For patch upgrades within the same minor version, such as `8.8.9` to `8.8.23`, there is no separate upgrade guide unless a specific patch's release notes specify additional required actions. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify the chart version for your target Camunda patch version, and review the relevant patch release notes before upgrading.
+:::
+
 ### Helm chart version
 
 The Camunda Helm chart version is independent from the Camunda application version. Use the Helm chart [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to identify the Helm chart version that deploys Camunda 8.8.

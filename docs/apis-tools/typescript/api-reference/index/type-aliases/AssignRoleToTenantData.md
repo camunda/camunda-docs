@@ -30,7 +30,7 @@ path: object;
 #### roleId
 
 ```ts
-roleId: string;
+roleId: RoleId;
 ```
 
 The unique identifier of the role.

@@ -240,7 +240,7 @@ The health of partitions in a broker can be monitored using the metric `zeebe_he
 
 Brokers can export optional execution latency metrics.
 
-To enable export of execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).
+To enable export of execution metrics, set the `CAMUNDA_MONITORING_METRICS_ENABLEEXPORTEREXECUTIONMETRICS` environment variable to `true` in your Zeebe [configuration file](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).
 
 ## Optimize error metrics
 
@@ -315,4 +315,4 @@ The dashboard provides insights into key data layer components for Camunda versi
 Configure metrics for each Camunda 8 component as follows:
 
 - [Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/concepts/monitoring.md)
-- [Web Modeler](/self-managed/components/modeler/web-modeler/monitoring.md)
+- [Web Modeler](/self-managed/components/hub/monitoring.md)

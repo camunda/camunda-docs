@@ -16,17 +16,7 @@ type SearchUsersForRoleResponses = object;
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: RoleUserSearchResult;
 ```
 
 The users with the assigned role.
-
-#### Type Declaration
-
-##### items
-
-```ts
-items: object[];
-```
-
-The matching users.

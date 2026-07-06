@@ -21,7 +21,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <td>14 April 2026</td>
 <td>[8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md)</td>
 <td>[8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md)</td>
-<td>13 October 2028</td>
+<td>13 October 2027</td>
 </tr>
 <tr>
 <td>8.8</td>

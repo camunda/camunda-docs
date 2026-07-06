@@ -25,7 +25,7 @@ You can choose among the available **Blue Prism connector** authentication types
 
 We advise you to keep your **Bearer Token** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](../../hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `BLUE_PRISM_BEARER_TOKEN`) so you can reference it later in the connector.
 
 #### Configure the bearer token
@@ -41,7 +41,7 @@ Select the **Blue Prism connector** and fill out the following properties under 
 
 We advise you to keep your **Client ID** and **Client secret** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](../../console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](../../hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `BLUE_PRISM_CLIENT_ID`) so you can reference it later in the connector.
 
 #### Configure the OAuth Token

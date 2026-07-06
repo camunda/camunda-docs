@@ -69,6 +69,82 @@
       ]
     }
   ],
+  "BuildWithAI": [
+    {
+      "type": "category",
+      "label": "Build with AI",
+      "link": {
+        "type": "doc",
+        "id": "guides/build-with-ai/overview"
+      },
+      "items": []
+    },
+    "guides/build-with-ai/ai-usage-guidelines",
+    {
+      "type": "category",
+      "label": "Agentic orchestration",
+      "link": {
+        "type": "doc",
+        "id": "components/agentic-orchestration/agentic-orchestration-overview"
+      },
+      "items": [
+        "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/camunda-provided-llm",
+        "components/agentic-orchestration/ao-design",
+        {
+          "type": "category",
+          "label": "Evaluate AI agents",
+          "link": {
+            "type": "doc",
+            "id": "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview"
+          },
+          "items": [
+            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents"
+          ]
+        },
+        "components/agentic-orchestration/rag-ai-agents",
+        "components/agentic-orchestration/choose-right-model-agentic",
+        "components/agentic-orchestration/model-recommendations-agentic"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Intelligent document processing (IDP)",
+      "link": {
+        "type": "doc",
+        "id": "components/modeler/web-modeler/idp"
+      },
+      "items": [
+        "components/modeler/web-modeler/idp/idp-configuration",
+        "components/modeler/web-modeler/idp/idp-applications",
+        {
+          "type": "category",
+          "label": "Document extraction",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/web-modeler/idp/idp-document-extraction"
+          },
+          "items": [
+            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+            "components/modeler/web-modeler/idp/idp-structured-extraction"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Integrate IDP into your processes",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/web-modeler/idp/idp-integrate"
+          },
+          "items": ["components/modeler/web-modeler/idp/idp-example"]
+        },
+        "components/modeler/web-modeler/idp/idp-key-concepts",
+        "components/modeler/web-modeler/idp/idp-reference"
+      ]
+    },
+    "reference/mcp-docs/docs-mcp"
+  ],
   "Components": [
     "components/components-overview",
     {
@@ -156,6 +232,7 @@
             "components/best-practices/management/doing-a-proper-poc"
           ],
           "Architecture": [
+            "components/best-practices/architecture/data-flow",
             "components/best-practices/architecture/deciding-about-your-stack",
             {
               "type": "category",
@@ -210,57 +287,6 @@
         "id": "components/features-integrations/features-integrations"
       },
       "items": [
-        {
-          "type": "category",
-          "label": "Agentic orchestration",
-          "link": {
-            "type": "doc",
-            "id": "components/agentic-orchestration/agentic-orchestration-overview"
-          },
-          "items": [
-            "components/agentic-orchestration/ai-agents",
-            "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/monitor-ai-agents",
-            "components/agentic-orchestration/analyze-ai-agents",
-            "components/agentic-orchestration/choose-right-model-agentic",
-            "components/agentic-orchestration/model-recommendations-agentic"
-          ]
-        },
-        {
-          "type": "category",
-          "label": "Intelligent document processing (IDP)",
-          "link": {
-            "type": "doc",
-            "id": "components/modeler/web-modeler/idp"
-          },
-          "items": [
-            "components/modeler/web-modeler/idp/idp-configuration",
-            "components/modeler/web-modeler/idp/idp-applications",
-            {
-              "type": "category",
-              "label": "Document extraction",
-              "link": {
-                "type": "doc",
-                "id": "components/modeler/web-modeler/idp/idp-document-extraction"
-              },
-              "items": [
-                "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-                "components/modeler/web-modeler/idp/idp-structured-extraction"
-              ]
-            },
-            {
-              "type": "category",
-              "label": "Integrate IDP into your processes",
-              "link": {
-                "type": "doc",
-                "id": "components/modeler/web-modeler/idp/idp-integrate"
-              },
-              "items": ["components/modeler/web-modeler/idp/idp-example"]
-            },
-            "components/modeler/web-modeler/idp/idp-key-concepts",
-            "components/modeler/web-modeler/idp/idp-reference"
-          ]
-        },
         {
           "type": "category",
           "label": "Robotic Process Automation (RPA)",
@@ -2823,7 +2849,6 @@
       "items": ["reference/data-collection/usage-metrics"]
     },
     "reference/contact",
-    "reference/mcp-docs/docs-mcp",
     "reference/legal"
   ],
   "Self-Managed": [
@@ -2855,7 +2880,6 @@
                 "self-managed/quickstart/developer-quickstart/c8run-troubleshooting"
               ]
             },
-
             "self-managed/quickstart/developer-quickstart/docker-compose"
           ]
         },
@@ -2913,6 +2937,7 @@
               },
               "items": [
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -2994,6 +3019,7 @@
                   ]
                 },
                 "self-managed/deployment/helm/configure/secret-management",
+                "self-managed/deployment/helm/configure/tls",
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",

@@ -16,29 +16,7 @@ type GetUserResponses = object;
 ### 200
 
 ```ts
-200: object;
+200: UserResult;
 ```
 
 The user is successfully returned.
-
-#### email
-
-```ts
-email: string | null;
-```
-
-The email of the user.
-
-#### name
-
-```ts
-name: string | null;
-```
-
-The name of the user.
-
-#### username
-
-```ts
-username: Username;
-```

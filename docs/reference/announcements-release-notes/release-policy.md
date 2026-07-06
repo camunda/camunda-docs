@@ -80,22 +80,21 @@ You can use the **Alpha** channel to access [alpha features](/components/early-a
 
 Non-cluster components include:
 
-- [Modeler (Web)](/components/modeler/web-modeler/launch-web-modeler.md)
-- [Connectors](/components/console/introduction-to-console.md)
-- [Console](/components/console/introduction-to-console.md)
+- [Camunda Hub](/components/hub/index.md)
+- [Connectors](/components/connectors/introduction.md)
 
 Non-cluster component versions are released continuously.
 
 - Customers are automatically updated to the latest component version when it is ready for release.
-- Admins can [enable alpha features](/components/console/manage-organization/enable-alpha-features.md) for non-cluster components in organization settings.
+- Admins can [enable alpha features](/components/hub/organization/manage-organization-settings/enable-alpha-features.md) for non-cluster components in organization settings.
 
 ### New Camunda 8 versions
 
 When a new Camunda 8 version is released, we try to provide the new version on our managed service at the same time.
 
-An **Update available** notification is shown in Console, recommending that you update to the latest version.
+An **Update available** notification is shown in Camunda Hub, recommending that you update to the latest version.
 
-![Console with notice to update the cluster in Camunda 8 SaaS](../img/update-console.png)
+![Camunda Hub with notice to update the cluster in Camunda 8 SaaS](../img/update-console.png)
 
 #### Generation names
 
@@ -113,11 +112,7 @@ In our managed service, Camunda reserves the right to force update or restart a 
 
 ## Self-Managed
 
-When a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers are notified via email.
-
-:::info
-Non-enterprise customers can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements-release-notes/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
-:::
+You can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements-release-notes/overview.md#announcements), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 
 ### Helm chart
 
@@ -163,3 +158,13 @@ However, Camunda tests against newer Spring Boot minor releases and declares com
 If the library is compatible with a newer Spring version with an active OSS support window, Camunda declares compatibility one month before the support window ends, at the latest.
 
 With this policy, you can safely update your applications to a new Spring Boot version by overriding the default Spring release with another compatible version.
+
+##### Spring Boot major versions
+
+Camunda supports two Spring Boot major versions at a time:
+
+- A numbered `camunda-spring-boot-{n}-starter` artifact is published for each supported major, so you can pin to a major and stay on it.
+- The plain `camunda-spring-boot-starter` always follows the current default major.
+- The previous major stays supported until the end of Spring Commercial support for that major, after which it receives no further updates.
+
+When a new Spring Boot major version reaches GA, Camunda makes it the default artifact in the Camunda release that ships before OSS support for the previous major version ends.

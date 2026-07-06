@@ -16,18 +16,8 @@ type SearchUsersForTenantData = object;
 ### body?
 
 ```ts
-optional body?: SearchQueryRequest & object;
+optional body?: TenantUserSearchQueryRequest;
 ```
-
-#### Type Declaration
-
-##### sort?
-
-```ts
-optional sort?: object[];
-```
-
-Sort field criteria.
 
 ---
 

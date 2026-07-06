@@ -16,7 +16,13 @@ type GetResourceContentResponses = object;
 ### 200
 
 ```ts
-200: string;
+200: object;
 ```
 
 The resource content is successfully returned.
+
+#### Index Signature
+
+```ts
+[key: string]: unknown
+```

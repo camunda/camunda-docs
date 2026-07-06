@@ -1,4 +1,46 @@
 {
+  "get_agent_instance": [
+    {
+      "file": "agent_instance.py",
+      "region": "GetAgentInstance",
+      "label": "Get an agent instance"
+    }
+  ],
+  "search_agent_instances": [
+    {
+      "file": "agent_instance.py",
+      "region": "SearchAgentInstances",
+      "label": "Search agent instances"
+    }
+  ],
+  "create_agent_instance": [
+    {
+      "file": "agent_instance.py",
+      "region": "CreateAgentInstance",
+      "label": "Create an agent instance"
+    }
+  ],
+  "update_agent_instance": [
+    {
+      "file": "agent_instance.py",
+      "region": "UpdateAgentInstance",
+      "label": "Update an agent instance"
+    }
+  ],
+  "create_agent_instance_history_item": [
+    {
+      "file": "agent_instance.py",
+      "region": "CreateAgentInstanceHistoryItem",
+      "label": "Append an agent instance history item"
+    }
+  ],
+  "search_agent_instance_history": [
+    {
+      "file": "agent_instance.py",
+      "region": "SearchAgentInstanceHistory",
+      "label": "Search agent instance history"
+    }
+  ],
   "get_topology": [
     {
       "file": "admin_operations.py",
@@ -755,6 +797,13 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "update_jobs_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
   "delete_process_instance": [
     {
       "file": "extended_operations.py",
@@ -874,6 +923,13 @@
       "label": "Get start process form"
     }
   ],
+  "get_form_by_key": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetFormByKey",
+      "label": "Get a form by key"
+    }
+  ],
   "get_variable": [
     {
       "file": "extended_operations.py",
@@ -907,6 +963,13 @@
       "file": "extended_operations.py",
       "region": "SearchElementInstanceIncidents",
       "label": "Search element instance incidents"
+    }
+  ],
+  "search_element_instance_wait_states": [
+    {
+      "file": "extended_operations.py",
+      "region": "SearchElementInstanceWaitStates",
+      "label": "Search element instance wait states"
     }
   ],
   "create_element_instance_variables": [
@@ -1215,6 +1278,20 @@
       "file": "admin_operations.py",
       "region": "GetResourceContent",
       "label": "Get resource content"
+    }
+  ],
+  "get_resource_content_binary": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetResourceContentBinary",
+      "label": "Get resource content as binary"
+    }
+  ],
+  "search_resources": [
+    {
+      "file": "admin_operations.py",
+      "region": "SearchResources",
+      "label": "Search resources"
     }
   ],
   "get_usage_metrics": [

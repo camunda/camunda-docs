@@ -9,7 +9,7 @@ In this section, learn how to build a form for document preview and download, an
 
 ## Build a form for document preview and download
 
-To display and allow downloading of a document you can use the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) in [forms](/components/modeler/forms/camunda-forms-reference.md). Although this example focuses on [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md), you can also build a form for document preview and download in [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
+To display and allow downloading of a document you can use the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) in [forms](/components/modeler/forms/camunda-forms-reference.md). Although this example focuses on [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md), you can also build a form for document preview and download in [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 
 :::note
 The document preview component offers previews in forms of PDF documents and images as the most common file types. Other document types are supported, but listed without the preview and show the file name with the option to download the file.
@@ -43,6 +43,16 @@ A document can be displayed in a user task form in [Tasklist](/components/taskli
 When a user opens the task, they can view and download the document directly from the form.
 
 ![Document preview for task in Tasklist](./img/task-with-document-preview-tasklist.png)
+
+## View and download a document in Operate
+
+When a process instance variable references a document, you can preview and download that document directly from the **Variables** tab in the process instance detail view.
+
+![Document reference variables in the Operate Variables tab](./img/document-preview-in-operate.png)
+
+Document variables display the document's file name, type, and size. You can preview supported formats (PDF, JSON, plain text, PNG, JPG) directly in Operate, or download any document to your local machine. Use the **All / Documents** filter to show only document variables in the table.
+
+To inspect the underlying document reference metadata (such as document ID), expand the variable row.
 
 ## Download a document using the Orchestration Cluster REST API
 

@@ -743,14 +743,22 @@ function addAddedInVersionAnnotation(specFilePath) {
 }
 
 // Remove all vendor extensions recursively (x-eventually-consistent, x-semantic-type, etc.)
+// Preserves x-added-in-version and x-properties-added-in-version — the plugin needs
+// operation-level and schema-level field version annotations to conditionally render
+// "Added in X.Y" badges on individual schema properties.
 function removeVendorExtensions(specFilePath) {
+  const PRESERVED_EXTENSIONS = new Set([
+    "x-added-in-version",
+    "x-properties-added-in-version",
+  ]);
+
   function recursivelyRemoveVendorExtension(obj) {
     if (obj && typeof obj === "object") {
       if (Array.isArray(obj)) {
         obj.forEach((item) => recursivelyRemoveVendorExtension(item));
       } else {
         Object.keys(obj).forEach((key) => {
-          if (key.startsWith("x-")) {
+          if (key.startsWith("x-") && !PRESERVED_EXTENSIONS.has(key)) {
             delete obj[key];
           } else {
             recursivelyRemoveVendorExtension(obj[key]);

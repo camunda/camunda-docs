@@ -1,0 +1,289 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Member resource paths and schemas
+paths:
+  /workspaces/{workspaceKey}/members:
+    post:
+      operationId: addMember
+      summary: Add or update a member
+      description: >
+        Adds a member to the workspace, or updates the role of an existing
+        member. The member is identified by their email address.
+      x-added-in-version: "0.1.0"
+      x-semantic-establishes:
+        kind: WorkspaceMemberMembership
+        shape: edge
+        identifiedBy:
+          - in: path
+            name: workspaceKey
+            semanticType: WorkspaceKey
+          - in: body
+            name: email
+            acceptsExternal: true
+            semanticType: MemberEmail
+      tags:
+        - Member
+      parameters:
+        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberCreateRequest"
+      responses:
+        "200":
+          description: The member was added or updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MemberResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /workspaces/{workspaceKey}/members/{email}:
+    delete:
+      operationId: removeMember
+      summary: Remove a member
+      description: Removes a member from the workspace.
+      x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: WorkspaceMemberMembership
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
+          email:
+            from: path
+            name: email
+      tags:
+        - Member
+      parameters:
+        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+        - $ref: "#/components/parameters/MemberEmailPathParam"
+      responses:
+        "204":
+          description: The member was removed successfully.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /members/search:
+    post:
+      operationId: searchMembers
+      summary: Search members
+      description: >
+        Returns members matching the given search criteria. A workspace key
+        filter is required — members cannot be searched across workspaces.
+      x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: body
+            name: filter.workspaceKey
+      tags:
+        - Member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MemberSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  parameters:
+    MemberEmailPathParam:
+      name: email
+      in: path
+      required: true
+      description: The email address of the member.
+      schema:
+        $ref: "#/components/schemas/MemberEmail"
+
+  schemas:
+    # --- Identifier schemas ---
+
+    MemberEmail:
+      description: The email address identifying a member.
+      type: string
+      format: email
+      x-semantic-type: MemberEmail
+      x-semantic-client-minted: true
+      example: alice@example.com
+
+    # --- Request schemas ---
+
+    MemberCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - email
+        - role
+      example:
+        email: "alice@example.com"
+        role: "editor"
+      properties:
+        email:
+          description: The email address of the member to add or update.
+          allOf:
+            - $ref: "#/components/schemas/MemberEmail"
+        role:
+          description: The role to assign to the member.
+          allOf:
+            - $ref: "#/components/schemas/MemberRole"
+
+    # --- Response schemas ---
+
+    MemberResult:
+      type: object
+      example:
+        workspaceKey: "wks-abc-123"
+        email: "alice@example.com"
+        name: "Alice Smith"
+        role: "editor"
+      required:
+        - workspaceKey
+        - email
+        - name
+        - role
+      properties:
+        workspaceKey:
+          description: The unique key of the workspace the member belongs to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
+        email:
+          description: The email address of the member.
+          allOf:
+            - $ref: "#/components/schemas/MemberEmail"
+        name:
+          description: The display name of the member, if known.
+          type: string
+        role:
+          description: The role of the member in the workspace.
+          allOf:
+            - $ref: "#/components/schemas/MemberRole"
+
+    MemberRole:
+      type: string
+      description: The role a member can have in a workspace.
+      enum:
+        - workspace_admin
+        - editor
+        - commenter
+        - viewer
+
+    # --- Search schemas ---
+
+    MemberSearchQuery:
+      type: object
+      required:
+        - filter
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/MemberSearchQuerySortRequest"
+        filter:
+          description: >
+            The member search filters. The workspaceKey filter is required.
+          allOf:
+            - $ref: "#/components/schemas/MemberFilter"
+
+    MemberSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - email
+            - name
+            - role
+        order:
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    MemberFilter:
+      type: object
+      description: Filter criteria for searching members.
+      required:
+        - workspaceKey
+      properties:
+        workspaceKey:
+          description: >
+            Filter by workspace key. Only the `$eq` operator is supported —
+            members cannot be searched across workspaces.
+          x-semantic-type: WorkspaceKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        email:
+          description: Filter by member email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        name:
+          description: Filter by member display name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        role:
+          description: Filter by member role.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+
+    MemberSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching members.
+          type: array
+          items:
+            $ref: "#/components/schemas/MemberResult"
+        page:
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"

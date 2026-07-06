@@ -1,0 +1,260 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Filter operator schemas for search queries
+components:
+  schemas:
+    # --- Leaf filter types ---
+
+    LikeFilter:
+      description: |
+        Checks if the property matches the provided like value.
+
+        Supported wildcard characters are:
+
+        * `*`: matches zero, one, or multiple characters.
+        * `?`: matches one, single character.
+
+        Wildcard characters can be escaped with backslash, for instance: `\*`.
+      type: string
+
+    BasicStringFilter:
+      title: Advanced filter
+      description: Basic advanced string filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          type: string
+        $neq:
+          description: Checks for inequality with the provided value.
+          type: string
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            type: string
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            type: string
+
+    AdvancedStringFilter:
+      title: Advanced filter
+      description: Advanced string filter.
+      allOf:
+        - $ref: "#/components/schemas/BasicStringFilter"
+        - type: object
+          properties:
+            $like:
+              $ref: "#/components/schemas/LikeFilter"
+
+    AdvancedIntegerFilter:
+      title: Advanced filter
+      description: Advanced integer (int32) filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          type: integer
+          format: int32
+        $neq:
+          description: Checks for inequality with the provided value.
+          type: integer
+          format: int32
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $gt:
+          description: Greater than comparison with the provided value.
+          type: integer
+          format: int32
+        $gte:
+          description: Greater than or equal comparison with the provided value.
+          type: integer
+          format: int32
+        $lt:
+          description: Lower than comparison with the provided value.
+          type: integer
+          format: int32
+        $lte:
+          description: Lower than or equal comparison with the provided value.
+          type: integer
+          format: int32
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            type: integer
+            format: int32
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            type: integer
+            format: int32
+
+    AdvancedLongFilter:
+      title: Advanced filter
+      description: Advanced integer (int64) filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          type: integer
+          format: int64
+        $neq:
+          description: Checks for inequality with the provided value.
+          type: integer
+          format: int64
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $gt:
+          description: Greater than comparison with the provided value.
+          type: integer
+          format: int64
+        $gte:
+          description: Greater than or equal comparison with the provided value.
+          type: integer
+          format: int64
+        $lt:
+          description: Lower than comparison with the provided value.
+          type: integer
+          format: int64
+        $lte:
+          description: Lower than or equal comparison with the provided value.
+          type: integer
+          format: int64
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            type: integer
+            format: int64
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            type: integer
+            format: int64
+
+    AdvancedDateTimeFilter:
+      title: Advanced filter
+      description: Advanced date-time filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          type: string
+          format: date-time
+        $neq:
+          description: Checks for inequality with the provided value.
+          type: string
+          format: date-time
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $gt:
+          description: Greater than comparison with the provided value.
+          type: string
+          format: date-time
+        $gte:
+          description: Greater than or equal comparison with the provided value.
+          type: string
+          format: date-time
+        $lt:
+          description: Lower than comparison with the provided value.
+          type: string
+          format: date-time
+        $lte:
+          description: Lower than or equal comparison with the provided value.
+          type: string
+          format: date-time
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            type: string
+            format: date-time
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            type: string
+            format: date-time
+
+    # --- Domain-level composite operator: $or ---
+    # The $or operator is applied per-domain on entity filter objects, not on
+    # leaf filter types.  Each domain filter composes its fields schema via
+    # allOf and adds an $or property whose items reference the fields-only
+    # variant (preventing recursive nesting).  Pattern:
+    #
+    #   MyEntityFilter:
+    #     allOf:
+    #       - $ref: '#/components/schemas/MyEntityFilterFields'
+    #       - type: object
+    #         properties:
+    #           $or:
+    #             description: |
+    #               List of alternative filter groups combined with OR logic.
+    #               Top-level fields AND (any $or item) must match.
+    #             type: array
+    #             items:
+    #               $ref: '#/components/schemas/MyEntityFilterFields'
+    #
+    # Because the items type varies per domain, $or cannot be a shared
+    # reusable schema.  Domain endpoint specs should follow this pattern
+    # when $or support is needed.
+
+    # --- Property-level filter types (oneOf shorthand or advanced) ---
+
+    BasicStringFilterProperty:
+      description: String property with basic advanced search capabilities.
+      oneOf:
+        - title: Exact match
+          description: Matches the value exactly.
+          type: string
+        - $ref: "#/components/schemas/BasicStringFilter"
+
+    StringFilterProperty:
+      description: String property with full advanced search capabilities.
+      oneOf:
+        - title: Exact match
+          description: Matches the value exactly.
+          type: string
+        - $ref: "#/components/schemas/AdvancedStringFilter"
+
+    IntegerFilterProperty:
+      description: Integer property with advanced search capabilities.
+      oneOf:
+        - title: Exact match
+          description: Matches the value exactly.
+          type: integer
+          format: int32
+        - $ref: "#/components/schemas/AdvancedIntegerFilter"
+
+    LongFilterProperty:
+      description: Long property with advanced search capabilities.
+      oneOf:
+        - title: Exact match
+          description: Matches the value exactly.
+          type: integer
+          format: int64
+        - $ref: "#/components/schemas/AdvancedLongFilter"
+
+    DateTimeFilterProperty:
+      description: Date-time property with full advanced search capabilities.
+      oneOf:
+        - title: Exact match
+          description: Matches the value exactly.
+          type: string
+          format: date-time
+        - $ref: "#/components/schemas/AdvancedDateTimeFilter"

@@ -23,7 +23,7 @@ public static class VariableElementExamples
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.SearchVariablesAsync(new SearchVariablesRequest());
+        var result = await client.SearchVariablesAsync(new VariableSearchQuery());
 
         foreach (var variable in result.Items)
         {
@@ -32,6 +32,34 @@ public static class VariableElementExamples
     }
     // </SearchVariables>
     #endregion SearchVariables
+
+    #region SearchVariablesAsDto
+
+    // <SearchVariablesAsDto>
+    public record OrderVariables(string OrderId, decimal Amount, string? Notes);
+
+    public static async Task SearchVariablesAsDtoExample(ProcessInstanceKey processInstanceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        // Search a process instance for exactly the variables declared on the DTO,
+        // pages and all, and collapse them into a single typed object.
+        var map = await client.SearchVariablesAsDtoAsync<OrderVariables>(processInstanceKey);
+
+        // Read individual values lazily without materializing the whole DTO.
+        if (map.Contains("amount"))
+        {
+            var amount = map.Get<decimal>("amount");
+            Console.WriteLine($"Amount: {amount}");
+        }
+
+        // Validate() enforces that every non-nullable member is present,
+        // throwing VariableValidationException if a required variable is missing.
+        OrderVariables order = map.Validate();
+        Console.WriteLine($"Order {order.OrderId}: {order.Amount}");
+    }
+    // </SearchVariablesAsDto>
+    #endregion SearchVariablesAsDto
 
     #region GetElementInstance
 
@@ -84,6 +112,39 @@ public static class VariableElementExamples
     }
     // </SearchElementInstanceIncidents>
     #endregion SearchElementInstanceIncidents
+
+    #region SearchElementInstanceWaitStates
+
+    // <SearchElementInstanceWaitStates>
+    public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceKey processInstanceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchElementInstanceWaitStatesAsync(
+            new ElementInstanceWaitStateQuery
+            {
+                Filter = new ElementInstanceWaitStateFilter
+                {
+                    ProcessInstanceKey = new ProcessInstanceKeyFilterProperty
+                    {
+                        Eq = processInstanceKey,
+                    },
+                },
+            });
+
+        foreach (var waitState in result.Items)
+        {
+            var details = waitState.Details switch
+            {
+                JobWaitStateDetails job => $"waiting on job '{job.JobType}'",
+                MessageWaitStateDetails message => $"waiting for message '{message.MessageName}'",
+                _ => "waiting",
+            };
+            Console.WriteLine($"{waitState.ElementId}: {details}");
+        }
+    }
+    // </SearchElementInstanceWaitStates>
+    #endregion SearchElementInstanceWaitStates
 
     #region CreateElementInstanceVariables
 

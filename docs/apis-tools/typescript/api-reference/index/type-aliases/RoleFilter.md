@@ -28,7 +28,7 @@ The role name search filters.
 ### roleId?
 
 ```ts
-optional roleId?: string;
+optional roleId?: RoleId;
 ```
 
 The role ID search filters.

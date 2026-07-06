@@ -1,26 +1,28 @@
 ---
 id: embeddings-vector-db
-title: Vector database connector
-sidebar_label: Vector database
+title: Vector Database connector
+sidebar_label: Vector Database
 description: Embed, store, and retrieve LLM embeddings and store them in vector databases.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The **vector database connector** allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction.
+The **Vector Database connector** allows embedding, storing, and retrieving Large Language Model (LLM) embeddings.
+
+This enables building AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction.
 
 :::note
-The **vector database connector** uses the [LangChain4j](https://docs.langchain4j.dev/) library. Data models and possible implementations are limited
+The **Vector Database connector** uses the [LangChain4j](https://docs.langchain4j.dev/) library. Data models and possible implementations are limited
 to the latest stable released LangChain4j library.
 :::
 
 ## Prerequisites
 
-Before using the **vector database connector**, ensure you understand the
+Before using the **Vector Database connector**, ensure you understand the
 [concept of LLM embeddings](https://huggingface.co/spaces/hesamation/primer-llm-embedding).
 
-To start using the **vector database connector**, ensure you have access to a supported LLM embeddings API to convert document content into vectorized embedding form. You will also need to have write access to a supported database.
+To start using the **Vector Database connector**, ensure you have access to a supported LLM embeddings API to convert document content into vectorized embedding form. You will also need to have write access to a supported database.
 
 ## Create a connector task
 
@@ -133,7 +135,7 @@ Camunda document reference metadata, similarity score, and the actual text conte
 
 <TabItem value='bedrock'>
 
-The **vector database connector** supports [Amazon Titan V1 and V2 models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).  
+The **Vector Database connector** supports [Amazon Titan V1 and V2 models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html).  
 You can also specify any custom model that supports text embedding and is available in your Amazon Bedrock account.
 
 To use Amazon Bedrock as an embedding model, provide:

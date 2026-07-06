@@ -16,17 +16,7 @@ type SearchClientsForTenantResponses = object;
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: TenantClientSearchResult;
 ```
 
 The search result of users for the tenant.
-
-#### Type Declaration
-
-##### items
-
-```ts
-items: object[];
-```
-
-The matching clients.

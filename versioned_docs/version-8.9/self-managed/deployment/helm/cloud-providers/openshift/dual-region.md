@@ -483,7 +483,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic
 
 </details>
 
-Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. The script derives the Zeebe broker count from your Helm values. For a dual-region setup, the default is `8` (four brokers per region):
+Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. The script derives the number of Zeebe Brokers from your Helm values. For a dual-region setup, the default is `8` (four brokers per region):
 
 ```
 chmod +x generate-zeebe-helm-values.sh

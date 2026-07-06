@@ -77,7 +77,7 @@ Starting in 8.9, Camunda 8 Run and default lightweight installs use H2 as the de
 H2 is a convenience default for local development, testing, and evaluation. It is not a production reference architecture and is not a valid backend for multi-broker Helm clusters.
 :::
 
-1. The Zeebe broker executes workflow instances and stores state in primary storage.
+1. The Zeebe Broker executes workflow instances and stores state in primary storage.
 1. Exporters, running as part of Zeebe, write orchestration data to the configured secondary storage backend and can write to multiple targets when needed.
 1. Operate, Tasklist, and Admin use the Orchestration Cluster API, which reads data from the configured secondary storage backend.
 

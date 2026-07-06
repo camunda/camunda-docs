@@ -1,0 +1,55 @@
+/**
+ * Single-icon dark/light mode toggle.
+ */
+
+.toggle {
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ifm-navbar-link-color);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+  appearance: none;
+  outline: none;
+}
+
+.toggle:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .toggle:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.toggle:focus-visible {
+  box-shadow: 0 0 0 2px var(--ifm-color-primary);
+}
+
+/* Icons – stacked on top of each other, only one visible at a time */
+.icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.6) rotate(-60deg);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  pointer-events: none;
+}
+
+.iconVisible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}

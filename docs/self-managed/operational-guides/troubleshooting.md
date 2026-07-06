@@ -142,7 +142,7 @@ AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 When using Azure Blob Storage as a backup store, you can enable logging to
 troubleshoot issues with the Azure SDK. To do this, go through the following steps:
 
-1. Add logging for azure SDK, and set it to debug through the zeebe broker
+1. Add logging for Azure SDK, and set it to debug through the Zeebe Broker
    loggers endpoint:
 
 `curl 'http://localhost:9600/actuator/loggers/com.azure' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'`
@@ -176,7 +176,7 @@ Due to limitations, the Identity `contextPath` approach is unavailable when usin
 
 ## Web Modeler database schema
 
-The Web Modeler `restapi` component requires a [database connection](/self-managed/components/modeler/web-modeler/configuration/configuration.md#database). This connection should not point to the same database as Keycloak does.
+The Web Modeler `restapi` component requires a [database connection](/self-managed/components/hub/configuration/properties.md#database). This connection should not point to the same database as Keycloak does.
 
 ## Gateway timeout on redirect
 
@@ -184,7 +184,12 @@ A gateway timeout can occur if the headers of a response are too big (for exampl
 
 ## Helm CLI version and installation failures
 
-If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Ensure you use the Helm CLI version `3.13` or higher.
+If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an unsupported version of the Helm CLI.
+
+- For Camunda 8.9 and earlier (chart 14.x and earlier), use Helm CLI v3.13 or higher.
+- For Camunda 8.10+ (chart 15.x+), Helm CLI v4.x is required.
+
+For chart-to-CLI compatibility across versions, see [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
 
 ## DNS disruption issue for Zeebe in Kubernetes clusters (1.29-1.31)
 
@@ -272,7 +277,7 @@ This script verifies connectivity to a Zeebe instance using HTTP/2 and gRPC prot
 ./checks/zeebe/connectivity.sh -a https://local.distro.example.com/auth/realms/camunda-platform/protocol/openid-connect/token -i myclientid -s 0Rn28VrQxGNxowrCWe6wbujwFghO4990 -u orchestration-api -H zeebe.local.distro.example.com:443
 ```
 
-Find more information on [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-process-application/kube/README.md#4-generating-an-m2m-token-for-our-application).
+Find more information on [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-project/kube/README.md#4-generating-an-m2m-token-for-our-application).
 
 ### IRSA configuration check
 
@@ -321,16 +326,20 @@ or use
 
 ## Find available container image versions
 
-When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment. Use [skopeo](https://github.com/containers/skopeo) to list available tags:
+When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment.
+
+For Camunda's own images, use [skopeo](https://github.com/containers/skopeo) to list available tags:
 
 ```shell
-# For open source images (no authentication required)
+# Open source images (no authentication required)
 skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe | jq '.RepoTags'
-
-# For enterprise images (requires authentication)
-skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
-skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
+
+:::note Bitnami Premium (`vendor-ee/*`) images
+Since the November 30, 2025 vendor migration, `skopeo` and the Harbor UI return only the `vendor-ee/*` tags cached since the migration, so registry tag listing is incomplete. Do not rely on it.
+
+Use the published per-image feed instead, which is generated from the upstream catalog and is always complete: see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull or mirror it by its exact tag.
+:::
 
 ## Incorrect authorizations when deploying resources from Modeler
 

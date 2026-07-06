@@ -53,7 +53,7 @@ server:
 
 ## Clients
 
-Unlike the gateway, TLS is enabled by default in all of Zeebe's supported clients. The following sections show how to disable or properly configure each client.
+Unlike the Zeebe Gateway, TLS is enabled by default in all of Zeebe's supported clients. The following sections show how to disable or properly configure each client.
 
 :::note
 Disabling TLS should only be done for testing or development. During production deployments, clients and gateways should be properly configured to establish secure connections.
@@ -61,7 +61,7 @@ Disabling TLS should only be done for testing or development. During production 
 
 ### Java
 
-Without any configuration, the client looks in the system's certificate store for a CA certificate with which to validate the gateway's certificate chain. If you wish to use TLS without having to install a certificate in client's system, you can specify a CA certificate:
+Without any configuration, the client looks in the system's certificate store for a CA certificate with which to validate the Zeebe Gateway's certificate chain. If you wish to use TLS without having to install a certificate in client's system, you can specify a CA certificate:
 
 ```java
 public class SecureClient {

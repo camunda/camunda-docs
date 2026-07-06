@@ -1,0 +1,281 @@
+name: Sync Camunda Hub REST API
+
+on:
+  schedule:
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync-sm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Camunda docs repository
+        uses: actions/checkout@v7
+        with:
+          repository: camunda/camunda-docs
+          path: docs
+
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          repositories: camunda-hub
+
+      - name: Check for maintenance branch
+        id: compute_branch
+        run: |
+          # Self-Managed Hub API docs:
+          # During development of a minor release, engineers push changes to
+          # the camunda hub repo's main branch, so we use main during this
+          # time to keep the docs up to date with the alpha releases.
+          # However, toward the end of the dev cycle for the minor version,
+          # engineers cut a maintenance version branch in the form self-managed/8.x
+          # and start including code for the next version in main. At this point,
+          # we need to stop using main and switch to the maintenance branch until
+          # the minor version ships. After that, we need to switch back to using main.
+
+          # This step in the workflow uses the docs repo's latest release tag
+          # to compute the next expected maintenance branch. If such a branch exists,
+          # we use it. Otherwise, we use main.
+
+          # Get the latest docs tag, and increment the minor version
+          # to store the next minor release.
+          cd docs
+          next_minor_release=$(
+            git ls-remote --tags origin '*.*.*'  \
+                | awk '{print $2}' \
+                | sed 's#refs/tags/##' \
+                | sort -V \
+                | tail -n1 \
+                | awk -F. '{printf "%d.%d", $1, $2+1}'
+          )
+
+          # If a maintenance branch for camunda hub exists for the next minor release, use it.
+          # Otherwise, use main.
+          maintenance_branch="self-managed/$next_minor_release"
+          if git ls-remote --exit-code --heads https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/camunda/camunda-hub $maintenance_branch; then
+            echo "Found a maintenance branch: $maintenance_branch"
+            echo "camunda_hub_branch=$maintenance_branch" >> "$GITHUB_OUTPUT"
+          else
+            echo "No maintenance branch for version $next_minor_release, using main"
+            echo "camunda_hub_branch=main" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout Camunda Hub (Self-Managed)
+        uses: actions/checkout@v7
+        with:
+          repository: camunda/camunda-hub
+          token: ${{ steps.generate_token.outputs.token }}
+          path: rest-spec
+          ref: ${{ steps.compute_branch.outputs.camunda_hub_branch }}
+          sparse-checkout: restapi/public-api/src/main/resources/openapi/v2
+          sparse-checkout-cone-mode: false
+
+      - name: Sync next Self-Managed documentation
+        run: |
+          cd docs
+          mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsm/v2
+
+          # Format spec files
+          npm ci
+          npx prettier --write api/hubsm/v2/*.yaml
+
+          cd api/hubsm/v2
+          mv rest-api.yaml camunda-openapi.yaml
+          npm run api:generate:hubsm
+
+      - name: Upload Self-Managed changes
+        uses: actions/upload-artifact@v7
+        with:
+          name: sm-changes
+          path: |
+            docs/api/hubsm
+            docs/docs/apis-tools/hub-api-sm
+
+  sync-saas:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Camunda docs repository
+        uses: actions/checkout@v7
+        with:
+          repository: camunda/camunda-docs
+          path: docs
+
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          repositories: camunda-hub
+
+      - name: Checkout Camunda Hub (SaaS)
+        uses: actions/checkout@v7
+        with:
+          repository: camunda/camunda-hub
+          token: ${{ steps.generate_token.outputs.token }}
+          path: rest-spec
+          ref: main
+          sparse-checkout: restapi/public-api/src/main/resources/openapi/v2
+          sparse-checkout-cone-mode: false
+
+      - name: Sync next SaaS documentation
+        run: |
+          cd docs
+          mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsaas/v2
+
+          # Format spec files
+          npm ci
+          npx prettier --write api/hubsaas/v2/*.yaml
+
+          cd api/hubsaas/v2
+          mv rest-api.yaml camunda-openapi.yaml
+          npm run api:generate:hubsaas
+
+      - name: Upload SaaS changes
+        uses: actions/upload-artifact@v7
+        with:
+          name: saas-changes
+          path: |
+            docs/api/hubsaas
+            docs/docs/apis-tools/hub-api-saas
+
+  create-pr:
+    runs-on: ubuntu-latest
+    needs: [sync-sm, sync-saas]
+
+    steps:
+      - name: Checkout Camunda docs repository
+        uses: actions/checkout@v7
+        with:
+          repository: camunda/camunda-docs
+          path: docs
+
+      - name: Download Self-Managed changes
+        uses: actions/download-artifact@v8
+        with:
+          name: sm-changes
+          path: docs/
+
+      - name: Download SaaS changes
+        uses: actions/download-artifact@v8
+        with:
+          name: saas-changes
+          path: docs/
+
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+          repositories: camunda-docs
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          cd docs
+
+          # We run lint-staged as a pre-commit hook. One of the format changes it performs
+          # is to remove whitespace-only changes. Therefore, if the REST API spec changes only
+          # include whitespace changes, lint-staged removes them and results in an error:
+          # "[FAILED] Prevented an empty git commit!"
+          # 
+          # To mitigate this, we stage the changes _before_ we check if there are any.
+          # Then, we run lint-staged manually. Finally, we check if there are changes.
+          # This should get rid of the whitespace-only changes and avoid an empty commit.
+          npm ci
+          git add .
+          npx lint-staged --allow-empty
+
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected."
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: "${{ steps.generate_token.outputs.token }}"
+          path: docs
+          title: Update Camunda Hub REST API docs
+          body: |
+            ## Description
+
+            This is an autogenerated PR by the [sync-hub-rest-api-docs workflow](https://github.com/camunda/camunda-docs/tree/main/.github/workflows/sync-hub-rest-api-docs.yaml).
+            This includes changes from the next camunda hub version (`main` branch).
+            This PR contains also all the generated OpenAPI files related to the changes.
+
+            ## When should this change go live?
+
+            - There is **no urgency** with this change and can be released at any time.
+
+            ## PR Checklist
+
+            - My changes are for the **next minor** and are in `/docs` directory (aka `/next/`).
+            - My changes require a [technical writer review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned @camunda/tech-writers as a reviewer.
+
+          commit-message: "docs: update Camunda Hub REST API spec"
+          branch: update-hub-rest-doc
+          delete-branch: true
+          team-reviewers: camunda/tech-writers
+          base: main
+          labels: deploy
+  notify-failure:
+    needs:
+      - sync-sm
+      - sync-saas
+      - create-pr
+    if: failure()
+    uses: ./.github/workflows/notify-failure.yml
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

@@ -23,7 +23,7 @@ The **Kafka Producer connector** is an outbound connector that allows you to con
 To use the **Kafka Producer connector**, you must have a Kafka instance with a configured bootstrap server.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 :::
 
 ## Create a Kafka Producer connector task
@@ -261,7 +261,7 @@ The **Kafka Consumer connector** allows you to consume messages by subscribing t
 To use the **Kafka Consumer connector**, you must have a Kafka instance with a configured bootstrap server.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 :::
 
 ## Create a Kafka Consumer connector event
@@ -282,7 +282,7 @@ In the **Authentication** section, select the **Authentication type**. If you se
 
 :::note
 
-- Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+- Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 - To learn more about Kafka authentication, see [Kafka secure authentication](#what-mechanism-is-used-to-authenticate-against-kafka-1).
 
 :::

@@ -8,6 +8,8 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.6]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for decision requirements based on given criteria.
@@ -32,6 +34,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
   /decision-requirements/{decisionRequirementsKey}:
     get:
       tags:
@@ -40,6 +43,8 @@ paths:
       summary: Get decision requirements
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -76,6 +81,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /decision-requirements/{decisionRequirementsKey}/xml:
     get:
       tags:
@@ -84,6 +90,8 @@ paths:
       summary: Get decision requirements XML
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -120,6 +128,7 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
 components:
   schemas:
     DecisionRequirementsSearchQuerySortRequest:

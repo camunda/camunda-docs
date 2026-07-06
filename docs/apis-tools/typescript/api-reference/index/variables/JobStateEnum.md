@@ -51,6 +51,12 @@ readonly FAILED: "FAILED" = 'FAILED';
 readonly MIGRATED: "MIGRATED" = 'MIGRATED';
 ```
 
+### PRIORITY_UPDATED
+
+```ts
+readonly PRIORITY_UPDATED: "PRIORITY_UPDATED" = 'PRIORITY_UPDATED';
+```
+
 ### RETRIES_UPDATED
 
 ```ts

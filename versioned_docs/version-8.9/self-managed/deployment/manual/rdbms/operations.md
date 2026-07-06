@@ -158,11 +158,12 @@ Avoid DROP, TRUNCATE, SUPERUSER, or other unnecessary privileges.
 
 ## Production deployment
 
-Before deploying to production, review the [production architecture guidance](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) for recommended topologies, and refer to the verification steps in the [troubleshooting section](#verification-and-troubleshooting) above to validate your RDBMS setup is healthy.
+Before deploying to production, review [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture) for backend trade-offs and the [manual production architecture guide](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) for recommended topology. Then use the verification steps in the [troubleshooting section](#verification-and-troubleshooting) above to validate your RDBMS setup is healthy.
 
 ## Next steps
 
 - [RDBMS configuration](/self-managed/deployment/manual/rdbms/configuration.md)
+- [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [RDBMS production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md)
 - [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 - [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)

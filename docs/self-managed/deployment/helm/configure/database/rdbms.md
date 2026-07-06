@@ -15,6 +15,7 @@ This page provides:
 
 Related guides:
 
+- [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
 - [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)
 - [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
@@ -109,7 +110,7 @@ For Liquibase lock recovery behavior, configure `camunda.data.secondary-storage.
 ### Example usage
 
 :::note
-Operate has limited functionality when using RDBMS as secondary storage in Camunda 8.9-alpha3. See [Operate limitations](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#operate-with-rdbms) for details.
+RDBMS is fully supported as secondary storage. For production planning, review the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
 ```yaml

@@ -1,4 +1,46 @@
 {
+  "getAgentInstance": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "GetAgentInstance",
+      "label": "Get an agent instance"
+    }
+  ],
+  "searchAgentInstances": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "SearchAgentInstances",
+      "label": "Search agent instances"
+    }
+  ],
+  "createAgentInstance": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "CreateAgentInstance",
+      "label": "Create an agent instance"
+    }
+  ],
+  "updateAgentInstance": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "UpdateAgentInstance",
+      "label": "Update an agent instance"
+    }
+  ],
+  "createAgentInstanceHistoryItem": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "CreateAgentInstanceHistoryItem",
+      "label": "Append an agent instance history item"
+    }
+  ],
+  "searchAgentInstanceHistory": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "SearchAgentInstanceHistory",
+      "label": "Search agent instance history"
+    }
+  ],
   "getTopology": [
     {
       "file": "Client.cs",
@@ -151,6 +193,13 @@
       "label": "Get start process form"
     }
   ],
+  "getFormByKey": [
+    {
+      "file": "Admin.cs",
+      "region": "GetFormByKey",
+      "label": "Get a form by key"
+    }
+  ],
   "createDeployment": [
     {
       "file": "Deployment.cs",
@@ -177,6 +226,20 @@
       "file": "Admin.cs",
       "region": "GetResourceContent",
       "label": "Get resource content"
+    }
+  ],
+  "getResourceContentBinary": [
+    {
+      "file": "Admin.cs",
+      "region": "GetResourceContentBinary",
+      "label": "Get resource content as binary"
+    }
+  ],
+  "searchResources": [
+    {
+      "file": "Admin.cs",
+      "region": "SearchResources",
+      "label": "Search resources"
     }
   ],
   "evaluateDecision": [
@@ -982,6 +1045,13 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
   "getVariable": [
     {
       "file": "VariableElement.cs",
@@ -1015,6 +1085,13 @@
       "file": "VariableElement.cs",
       "region": "SearchElementInstanceIncidents",
       "label": "Search element instance incidents"
+    }
+  ],
+  "searchElementInstanceWaitStates": [
+    {
+      "file": "VariableElement.cs",
+      "region": "SearchElementInstanceWaitStates",
+      "label": "Search element instance wait states"
     }
   ],
   "createElementInstanceVariables": [

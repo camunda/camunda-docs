@@ -4,9 +4,14 @@ paths:
       tags:
         - Job
       operationId: getGlobalJobStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Global job statistics
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -52,14 +57,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /jobs/statistics/by-types:
     post:
       tags:
         - Job
       operationId: getJobTypeStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get job statistics by type
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -85,14 +96,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /jobs/statistics/by-workers:
     post:
       tags:
         - Job
       operationId: getJobWorkerStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get job statistics by worker
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -118,14 +135,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /jobs/statistics/time-series:
     post:
       tags:
         - Job
       operationId: getJobTimeSeriesStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get time-series metrics for a job type
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -153,14 +176,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
   /jobs/statistics/errors:
     post:
       tags:
         - Job
       operationId: getJobErrorStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get error metrics for a job type
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -186,6 +215,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
 components:
   schemas:
     GlobalJobStatisticsQueryResult:
@@ -264,8 +294,8 @@ components:
       description: Job type statistics query result.
       type: object
       required:
-        - items
         - page
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -339,8 +369,8 @@ components:
       description: Job worker statistics query result.
       type: object
       required:
-        - items
         - page
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -414,8 +444,8 @@ components:
       description: Job time-series statistics query result.
       type: object
       required:
-        - items
         - page
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:
@@ -492,8 +522,8 @@ components:
       description: Job error statistics query result.
       type: object
       required:
-        - items
         - page
+        - items
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
       properties:

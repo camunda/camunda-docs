@@ -20,6 +20,48 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Agent instance",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance",
+          label: "Create agent instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-agent-instance",
+          label: "Get agent instance",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-agent-instance",
+          label: "Update agent instance",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instances",
+          label: "Search agent instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance-history-item",
+          label: "Create agent instance history item",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instance-history",
+          label: "Search agent instance history",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Audit Log",
       items: [
         {
@@ -360,6 +402,12 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instance-wait-states",
+          label: "Search element instance wait states",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instances",
           label: "Search element instances",
           className: "api-method post",
@@ -393,6 +441,18 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/evaluate-expression",
           label: "Evaluate an expression",
           className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Form",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-form-by-key",
+          label: "Get form by key",
+          className: "api-method get",
         },
       ],
     },
@@ -602,6 +662,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/fail-job",
           label: "Fail job",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-jobs-batch-operation",
+          label: "Update jobs (batch)",
           className: "api-method post",
         },
         {
@@ -880,6 +946,12 @@ const sidebar: SidebarsConfig = {
           label: "Get element instance statistics",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-wait-state-statistics",
+          label: "Get wait state statistics",
+          className: "api-method get",
+        },
       ],
     },
     {
@@ -894,6 +966,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-resources",
+          label: "Search resources",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-resource",
           label: "Get resource",
           className: "api-method get",
@@ -901,7 +979,13 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-resource-content",
-          label: "Get resource content",
+          label: "Get RPA resource content (deprecated)",
+          className: "menu__list-item--deprecated api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-resource-content-binary",
+          label: "Get resource content as binary",
           className: "api-method get",
         },
         {

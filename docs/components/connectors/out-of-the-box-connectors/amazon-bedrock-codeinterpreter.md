@@ -21,7 +21,7 @@ To use the **Amazon Bedrock Code Interpreter connector**, you need the following
 Learn more about the AgentCore Code Interpreter in the [official documentation](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/code-interpreter-tool.html).
 
 :::note
-Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon Bedrock Code Interpreter connector task

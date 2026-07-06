@@ -3,7 +3,7 @@
 
 To interact with your Camunda 8 cluster, you'll use the Camunda client. First, you'll need to create credentials.
 
-1. The main page for Console should be open on another tab. Use Console to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your **region Id** and **cluster Id** (in your client credentials under the **API** tab within your cluster). You will need this information later when creating a worker in the next section.
+1. The main page for Camunda Hub should be open on another tab. Use Camunda Hub to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your **region Id** and **cluster Id** (in your client credentials under the **API** tab within your cluster). You will need this information later when creating a worker in the next section.
    :::note
    If your account is new, you should have a cluster already available. If no cluster is available, or you’d like to create a new one, click **Create New Cluster**.
    :::

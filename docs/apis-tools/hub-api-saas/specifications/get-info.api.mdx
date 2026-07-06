@@ -1,0 +1,243 @@
+---
+id: get-info
+title: "Get API info"
+description: "Returns metadata about the V2 API, including the API version and the organization authorized by the caller's credentials."
+sidebar_label: "Get API info"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get API info"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/info"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns metadata about the V2 API, including the API version and the organization authorized by the caller's credentials.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The API info was retrieved successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            example: { version: "v2", authorizedOrganization: "org-mno-789" },
+            required: ["version", "authorizedOrganization"],
+            properties: {
+              version: { description: "The API version.", type: "string" },
+              authorizedOrganization: {
+                description:
+                  "The organization ID that the caller's credentials are authorized for.\n",
+                type: "string",
+              },
+            },
+            title: "InfoResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

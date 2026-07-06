@@ -4,9 +4,14 @@ paths:
       tags:
         - Document
       operationId: createDocument
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Upload document
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -55,14 +60,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "415":
           $ref: "common-responses.yaml#/components/responses/UnsupportedMediaType"
+      x-added-in-version: "8.6"
   /documents/batch:
     post:
       tags:
         - Document
       operationId: createDocuments
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Upload multiple documents
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -110,6 +121,9 @@ paths:
                     $ref: "#/components/schemas/DocumentMetadata"
               required:
                 - files
+              x-properties-added-in-version:
+                - propertyName: metadataList
+                  addedInVersion: "8.8"
             encoding:
               files:
                 headers:
@@ -134,14 +148,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "415":
           $ref: "common-responses.yaml#/components/responses/UnsupportedMediaType"
+      x-added-in-version: "8.7"
   /documents/{documentId}:
     get:
       tags:
         - Document
       operationId: getDocument
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Download document
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -184,13 +204,19 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
     delete:
       tags:
         - Document
       operationId: deleteDocument
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete document
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -221,14 +247,20 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
   /documents/{documentId}/links:
     post:
       tags:
         - Document
       operationId: createDocumentLink
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create document link
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -270,6 +302,7 @@ paths:
                 $ref: "#/components/schemas/DocumentLink"
         "400":
           $ref: "common-responses.yaml#/components/responses/InvalidData"
+      x-added-in-version: "8.7"
 components:
   schemas:
     DocumentReference:
@@ -299,6 +332,17 @@ components:
           nullable: true
         metadata:
           $ref: "#/components/schemas/DocumentMetadataResponse"
+      x-properties-added-in-version:
+        - propertyName: camunda.document.type
+          addedInVersion: "8.7"
+        - propertyName: storeId
+          addedInVersion: "8.6"
+        - propertyName: documentId
+          addedInVersion: "8.6"
+        - propertyName: contentHash
+          addedInVersion: "8.7"
+        - propertyName: metadata
+          addedInVersion: "8.6"
     DocumentCreationFailureDetail:
       type: object
       required:
@@ -320,6 +364,11 @@ components:
         detail:
           type: string
           description: A human-readable explanation specific to this occurrence of the problem.
+      x-properties-added-in-version:
+        - propertyName: status
+          addedInVersion: "8.9"
+        - propertyName: title
+          addedInVersion: "8.9"
     DocumentCreationBatchResponse:
       allOf:
         - type: object
@@ -367,6 +416,21 @@ components:
           type: object
           description: Custom properties of the document.
           additionalProperties: true
+      x-properties-added-in-version:
+        - propertyName: contentType
+          addedInVersion: "8.6"
+        - propertyName: fileName
+          addedInVersion: "8.6"
+        - propertyName: expiresAt
+          addedInVersion: "8.6"
+        - propertyName: size
+          addedInVersion: "8.6"
+        - propertyName: processDefinitionId
+          addedInVersion: "8.7"
+        - propertyName: processInstanceKey
+          addedInVersion: "8.7"
+        - propertyName: customProperties
+          addedInVersion: "8.7"
     DocumentMetadataResponse:
       description: Information about the document that is returned in responses.
       type: object
@@ -408,6 +472,13 @@ components:
           type: object
           description: Custom properties of the document.
           additionalProperties: true
+      x-properties-added-in-version:
+        - propertyName: processDefinitionId
+          addedInVersion: "8.7"
+        - propertyName: processInstanceKey
+          addedInVersion: "8.7"
+        - propertyName: customProperties
+          addedInVersion: "8.7"
     DocumentLinkRequest:
       type: object
       properties:

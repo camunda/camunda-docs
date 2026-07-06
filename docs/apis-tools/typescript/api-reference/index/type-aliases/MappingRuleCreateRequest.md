@@ -16,7 +16,7 @@ type MappingRuleCreateRequest = MappingRuleCreateUpdateRequest & object;
 ### mappingRuleId
 
 ```ts
-mappingRuleId: string;
+mappingRuleId: MappingRuleId;
 ```
 
 The unique ID of the mapping rule.

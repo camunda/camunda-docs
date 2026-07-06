@@ -4,9 +4,12 @@ paths:
       tags:
         - License
       operationId: getLicense
+      security: []
       summary: Get license status
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -20,6 +23,7 @@ paths:
                 $ref: "#/components/schemas/LicenseResponse"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
 components:
   schemas:
     LicenseResponse:
@@ -47,3 +51,8 @@ components:
           description: The date when the Camunda license expires
           type: string
           format: date-time
+      x-properties-added-in-version:
+        - propertyName: isCommercial
+          addedInVersion: "8.8"
+        - propertyName: expiresAt
+          addedInVersion: "8.8"

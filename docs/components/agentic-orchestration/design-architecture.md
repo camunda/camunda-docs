@@ -9,14 +9,12 @@ import WorkflowImg from './img/ao-workflow.png';
 
 Plan and design your agentic orchestration solutions, and understand recommended architecture guidelines.
 
-## Plan
+## Plan agentic orchestration solutions
 
 Follow these principles when planning your agentic orchestration solution:
 
 - **Problem first**: First, identify any problem you might have in a process, and only then determine whether an AI agent could help solve the problem. Do not use an AI agent where it is not really necessary, or just for the sake of it.
-
 - **Architect for composability**. Avoid becoming too dependant on a specific LLM model, for example by doing too much fine tuning. This allows you to more easily integrate newer LLM providers and models in the future that better suit your needs.
-
 - **Observability and governance**: Use [Operate](/components/operate/operate-introduction.md) and [Optimize](/components/optimize/what-is-optimize.md) for visibility into your agentic orchestration processes.
 
 ### Blend deterministic and dynamic orchestration
@@ -42,14 +40,12 @@ Agentic orchestration involves blending both deterministic and dynamic (AI-drive
 To learn more about determining when and where to use AI agents within your automation strategy, download the [why agentic process orchestration belongs in your automation](https://page.camunda.com/wp-why-agentic-process-orchestration-belongs-in-your-automation-strategy) strategy guide.
 :::
 
-## Design and architecture
+## Design agent orchestration workflows
 
 Follow these principles when designing your agentic orchestration solution:
 
 - **Guardrail sandwich**: Apply guardrails in your process when using agents. For example, you could have one agent performing the task execution, with another agent following up to check the chain of thought and make sure every execution is compliant. If the execution is not compliant, route to a human for additional validation.
-
 - **Human-in-the-Loop escalation**: Provide an agent with an escalation path to a human - confidence levels are useful, but it is good to always provide deterministic outbreaks for agents.
-
 - **Prompt versioning**: Version every prompt, so you can revert to using a previous prompt when required.
 
 ### How execution works in an AI agent
@@ -74,7 +70,38 @@ This is a typical execution timeline:
 1. Results are written to process variables and returned to the LLM context.
 1. The loop repeats until the LLM returns a final response or the process routes to deterministic follow-up steps.
 
-### Mixing agents with workflow patterns
+### Define your agent tools
+
+In the AI agent model, each BPMN activity inside an ad-hoc sub-process is a tool exposed to the LLM. The activity name and its documentation are used by the LLM to decide what to do next.
+
+Clear, behavior-oriented descriptions help the LLM:
+
+- Select the right tool for the current goal.
+- Pass the right parameters in the expected format.
+- Avoid unsafe, redundant, or nonsensical actions.
+
+Poor or missing documentation increases the risk of:
+
+- Incorrect or ambiguous tool selection.
+- Repeated tool calls or skipped required steps.
+- Hallucinated behavior and responses that do not match process intent.
+
+#### Example: weak vs strong tool definition
+
+| Tool definition | Example                                                                                                                                                                                                                                           |
+| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Weak            | **Name**: `Lookup`<br/>**Documentation**: `Find customer data`                                                                                                                                                                                    |
+| Strong          | **Name**: `Resolve customer by legal company name`<br/>**Documentation**: `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
+
+A clear tool name and precise documentation make the expected behavior explicit, improving reliability during tool selection and execution.
+
+#### Tool parameters
+
+Each tool can also declare input parameters the LLM must supply at runtime. Use the [`fromAi()`](../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings to mark a value as LLM-provided, with an optional description and type to guide the model.
+
+See [tool definitions](../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
+
+### Mix agents with workflow patterns
 
 <p><img src={WorkflowImg} style={{marginBottom: '0'}} title="Diagram showing how to mix agents into your workflow patterns" className="img-transparent"/></p>
 
@@ -100,3 +127,29 @@ This is a typical execution timeline:
     <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions.</td>
 </tr>
 </table>
+
+### Call processes as agent tools
+
+When an AI agent needs to invoke another BPMN process as a tool, you have two options:
+
+- Use a call activity inside the ad-hoc sub-process.
+- Add an MCP client gateway tool connected to the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md).
+
+The right choice depends on whether your target process runs on the same or a different Orchestration Cluster:
+
+| Scenario                                                   | Recommended approach                                                                                                                                                            |
+| :--------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Target process is on the **same** Orchestration Cluster    | Use a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) inside the ad-hoc sub-process.                                                               |
+| Target process is on a **different** Orchestration Cluster | Use the [MCP Remote Client connector](../connectors/out-of-the-box-connectors/agentic-ai-mcp-remote-client-connector.md) connected to the other cluster's Processes MCP Server. |
+
+These two approaches differ in runtime behavior, the result the agent receives, instance visibility, and the audit trail:
+
+| &nbsp;                 | Call activity                                                                                                      | MCP client                                                                                                                          |
+| :--------------------- | :----------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| **Execution**          | The tool call waits for the called process to complete and returns its output to the agent.                        | The called process starts immediately and the tool returns the process instance key. The agent does not receive the process output. |
+| **Instance hierarchy** | The called process instance is a child of the ad-hoc sub-process element, visible in the instance tree in Operate. | The called process runs independently with no structural link to the calling agent process.                                         |
+| **Audit logs**         | The audit trail reflects the full call hierarchy.                                                                  | The audit trail shows a process triggered by an external message, with no structural link to the calling agent.                     |
+
+:::note
+Although it is technically possible to use an MCP client to connect to the Processes MCP Server on the same cluster as the calling agent, this produces a detached hierarchy and a less coherent audit trail. Use call activities for same-cluster process invocations.
+:::

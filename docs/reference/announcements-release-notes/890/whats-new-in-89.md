@@ -306,10 +306,10 @@ Camunda 8.9 introduces the following enhancements and changes in Web Modeler.
 
 The following usability improvements simplify collaboration and help teams keep event configurations consistent.
 
-| Feature                                                                                                   | Description                                                                                                                                                                        |
-| :-------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Element templates](/components/modeler/element-templates/defining-templates.md)                          | Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.               |
-| [Email invitations](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
+| Feature                                                                                                     | Description                                                                                                                                                                        |
+| :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Element templates](/components/modeler/element-templates/defining-templates.md)                            | Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.               |
+| [Email invitations](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
 
 ### Improved Self-Managed installation
 
@@ -318,7 +318,7 @@ The separate `webapp` component has been removed, and its functionality is now c
 
 This change might require updates to your application configuration.
 
-<p class="link-arrow">[Migrate configuration](/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
+<p class="link-arrow">[Migrate configuration](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
 
 ### Log4j2 and Tomcat changes
 
@@ -338,7 +338,7 @@ You should:
 - Update any tooling that relies on old log formats or server behavior.
 - Validate the new setup in a staging environment before upgrading production.
 
-<p class="link-arrow">[Web Modeler logging](/self-managed/components/modeler/web-modeler/configuration/logging.md)</p>
+<p class="link-arrow">[Web Modeler logging](/self-managed/components/hub/configuration/logging.md)</p>
 
 ## Orchestration Cluster {#ocluster}
 

@@ -30,3 +30,5 @@ The name of the tenant.
 ```ts
 optional tenantId?: TenantId;
 ```
+
+The unique identifier of the tenant.

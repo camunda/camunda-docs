@@ -23,7 +23,7 @@ Typically, any changes to these IP addresses are communicated in advance. Howeve
 
 ## Inbound connections
 
-When you [create a cluster](/components/console/manage-clusters/create-cluster.md) in Camunda 8 SaaS, you will receive a set of hostnames for connecting to the different cluster components.
+When you [create a cluster](/components/hub/organization/manage-clusters/create-cluster.md) in Camunda 8 SaaS, you will receive a set of hostnames for connecting to the different cluster components.
 
 The public IP addresses exposed for connecting to the cluster depends on the cloud provider and [region](/components/saas/regions.md) the cluster was created in.
 

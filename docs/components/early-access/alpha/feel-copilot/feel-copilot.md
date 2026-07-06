@@ -8,7 +8,7 @@ description: "Chat with the AI FEEL Copilot for help generating FEEL (Friendly E
 import OpenFeelCopilot from './img/open-feel-copilot.png';
 import FeelCopilotPanel from './img/feel-copilot-panel.png'
 
-Chat with the AI FEEL Copilot for help generating [FEEL (Friendly Enough Expression Language)](/components/modeler/feel/what-is-feel.md) expressions in [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
+Chat with the AI FEEL Copilot for help generating [FEEL (Friendly Enough Expression Language)](/components/modeler/feel/what-is-feel.md) expressions in [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md).
 
 :::note Terms of use
 By using this tool, you agree to Camunda's use of the anonymized input and output data and anonymized feedback to improve it.
@@ -27,15 +27,14 @@ Camunda does not save your prompts and the resulting FEEL expressions to your ac
 
 To use the FEEL Copilot in Web Modeler, take the following steps:
 
-1. If you have not already done so, [opt in](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
-1. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
+1. If you have not already done so, [opt in](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
+1. Log in to [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md).
 1. Click **New project > Create new > BPMN diagram**.
 1. Open any FEEL Popup.
 
    :::note
 
    To open a FEEL popup from an empty diagram:
-
    1. In a new diagram, click the Start Event (the circle in the diagram).
    1. In the sidebar, click the plus (**+**) next to **Outputs**, and click **Variable assignment value**.
    1. Click the **Open popup editor** icon in the field to open the FEEL popup.

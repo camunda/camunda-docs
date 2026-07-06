@@ -5,8 +5,10 @@ paths:
         - User task
       operationId: completeUserTask
       summary: Complete user task
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -50,14 +52,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
         "504":
           $ref: "common-responses.yaml#/components/responses/GatewayTimeoutTaskListenerBlocking"
+      x-added-in-version: "8.5"
   /user-tasks/{userTaskKey}/assignment:
     post:
       tags:
         - User task
       operationId: assignUserTask
       summary: Assign user task
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -101,6 +106,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
         "504":
           $ref: "common-responses.yaml#/components/responses/GatewayTimeoutTaskListenerBlocking"
+      x-added-in-version: "8.5"
   /user-tasks/{userTaskKey}:
     get:
       tags:
@@ -109,6 +115,8 @@ paths:
       summary: Get user task
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -143,13 +151,16 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
     patch:
       tags:
         - User task
       operationId: updateUserTask
       summary: Update user task
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -193,14 +204,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
         "504":
           $ref: "common-responses.yaml#/components/responses/GatewayTimeoutTaskListenerBlocking"
+      x-added-in-version: "8.5"
   /user-tasks/{userTaskKey}/form:
     get:
       tags:
         - User task
       operationId: getUserTaskForm
       summary: Get user task form
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -238,14 +252,17 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /user-tasks/{userTaskKey}/assignee:
     delete:
       tags:
         - User task
       operationId: unassignUserTask
       summary: Unassign user task
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -283,6 +300,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
         "504":
           $ref: "common-responses.yaml#/components/responses/GatewayTimeoutTaskListenerBlocking"
+      x-added-in-version: "8.5"
   /user-tasks/search:
     post:
       tags:
@@ -291,6 +309,8 @@ paths:
       summary: Search user tasks
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -316,14 +336,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.6"
   /user-tasks/{userTaskKey}/variables/search:
     post:
       tags:
         - User task
       operationId: searchUserTaskVariables
       summary: Search user task variables
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -366,14 +389,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /user-tasks/{userTaskKey}/effective-variables/search:
     post:
       tags:
         - User task
       operationId: searchUserTaskEffectiveVariables
       summary: Search user task effective variables
-      description: |
+      description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -415,6 +441,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /user-tasks/{userTaskKey}/audit-logs/search:
     post:
       tags:
@@ -423,6 +450,8 @@ paths:
       summary: Search user task audit logs
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -453,6 +482,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
 components:
   schemas:
     UserTaskSearchQuerySortRequest:

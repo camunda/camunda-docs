@@ -4,7 +4,7 @@ title: "Job workers"
 description: "Learn more about job workers, a service that can perform a particular task in a process. When this task needs to be performed, this is represented by a job."
 ---
 
-A **job worker** is a service capable of performing a particular task in a process. Each time such a task needs to be performed, this is represented by a **job**.
+A [job worker](/reference/glossary.md#job-worker) is a service capable of performing a particular task in a process. Each time such a task needs to be performed, this is represented by a [job](/reference/glossary.md#job).
 
 A job has the following properties:
 

@@ -16,28 +16,8 @@ type SearchVariablesData = object;
 ### body?
 
 ```ts
-optional body?: SearchQueryRequest & object;
+optional body?: VariableSearchQuery;
 ```
-
-Variable search query request.
-
-#### Type Declaration
-
-##### filter?
-
-```ts
-optional filter?: VariableFilter;
-```
-
-The variable search filters.
-
-##### sort?
-
-```ts
-optional sort?: object[];
-```
-
-Sort field criteria.
 
 ---
 

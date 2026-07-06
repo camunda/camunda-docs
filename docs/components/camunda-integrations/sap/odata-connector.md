@@ -18,7 +18,7 @@ For a standard overview of the steps involved in the SAP OData connector, see th
 
 ## Prerequisites
 
-[Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+[Create an API client](/components/hub/organization/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
 
 To run the SAP OData connector Docker image, the following SAP infrastructure setup is required:
 
@@ -65,7 +65,7 @@ Configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) 
 
 Use the command `csap setup` to guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for odata \

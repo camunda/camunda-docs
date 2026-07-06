@@ -112,7 +112,7 @@ public static class UserTaskExamples
 
         var result = await client.SearchUserTaskVariablesAsync(
             userTaskKey,
-            new SearchUserTaskVariablesRequest());
+            new UserTaskVariableSearchQueryRequest());
 
         foreach (var variable in result.Items)
         {
@@ -150,7 +150,7 @@ public static class UserTaskExamples
 
         var result = await client.SearchUserTaskEffectiveVariablesAsync(
             userTaskKey,
-            new SearchUserTaskEffectiveVariablesRequest());
+            new UserTaskEffectiveVariableSearchQueryRequest());
 
         foreach (var variable in result.Items)
         {

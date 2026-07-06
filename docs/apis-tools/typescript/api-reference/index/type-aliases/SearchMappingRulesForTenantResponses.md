@@ -16,17 +16,7 @@ type SearchMappingRulesForTenantResponses = object;
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: TenantMappingRuleSearchResult;
 ```
 
 The search result of MappingRules for the tenant.
-
-#### Type Declaration
-
-##### items
-
-```ts
-items: MappingRuleResult[];
-```
-
-The matching mapping rules.

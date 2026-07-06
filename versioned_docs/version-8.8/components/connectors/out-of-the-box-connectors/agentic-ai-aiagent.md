@@ -45,18 +45,47 @@ The following prerequisites are required to use this connector:
 | :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
 
-## Implementations
+## Choose an implementation
 
-The AI agent is provided as 2 different variants, each with different capabilities and suited for different use cases.
+The AI Agent connector is available in two variants, each with different capabilities, suited for different use cases, and available with a dedicated element template:
 
-- [AI Agent Sub-process](#ai-agent-sub-process)
-- [AI Agent Task](#ai-agent-task)
+- [AI Agent Sub-process](#ai-agent-sub-process).
+- [AI Agent Task](#ai-agent-task).
 
-:::tip
+The right implementation depends on your use case.
 
-- You can choose the implementation type that best fits your use case, but the **recommended approach** for most use cases is to use the [**AI Agent Sub-process**](#ai-agent-sub-process) implementation due to the simplified configuration and support for event sub-processes.
-- Both variants are available with a dedicated element template that you can apply to the respective BPMN element.
+| Use case                                                                                                      | Implementation              | Description                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Agentic workflow with automatic tool calling (most use cases)                                                 | AI Agent Sub-process        | It handles tool resolution and the feedback loop automatically. No explicit loop modeling is needed. You must include at least one activity/tool inside the sub-process. |
+| Inference tasks that don't require tool calling                                                               | AI Agent Task without tools | A single, one-shot LLM call with no ad-hoc sub-process.                                                                                                                  |
+| Intercepting tool calls, for example, to add a human approval step or run PII detection before tool execution | AI Agent Task with tools    | Tools are provided by an external ad-hoc sub-process that you model explicitly, giving you full control over the feedback loop. This is the most complex configuration.  |
 
+:::info
+The **recommended approach** for most use cases is to use the **AI Agent Sub-process** implementation due to the simplified configuration and support for event sub-processes.
+:::
+
+### Configuration comparison
+
+The following table summarizes the key configuration differences between the two implementations.
+
+| Configuration field    | AI Agent Sub-process                                                            | AI Agent Task                                                     |
+| :--------------------- | :------------------------------------------------------------------------------ | :---------------------------------------------------------------- |
+| Model provider         | Yes                                                                             | Yes                                                               |
+| Model                  | Yes                                                                             | Yes                                                               |
+| System prompt          | Yes                                                                             | Yes                                                               |
+| User prompt            | Yes                                                                             | Yes                                                               |
+| Tools                  | Automatic (resolved from activities inside the sub-process)                     | Optional. Requires ad-hoc sub-process ID and tool call results    |
+| Agent context (memory) | Optional. Only needed when re-entering the agent from an external feedback loop | Required. Must be aligned with the output mapping result variable |
+| Limits                 | Yes                                                                             | Yes                                                               |
+| Event handling         | Yes                                                                             | No                                                                |
+| Response               | Yes                                                                             | Yes                                                               |
+| `toolCalls` in output  | No                                                                              | Yes. Returned for routing to the ad-hoc sub-process               |
+| Error handling         | Yes                                                                             | Yes                                                               |
+| Retries                | Yes                                                                             | Yes                                                               |
+| Execution listeners    | Yes                                                                             | Yes                                                               |
+
+:::note
+Execution listeners behave differently between the two implementations. On the AI Agent Sub-process, they only run when entering and exiting the ad-hoc sub-process, not on every loop iteration. On the AI Agent Task, they are triggered on every job execution.
 :::
 
 ### AI Agent Sub-process
@@ -148,6 +177,10 @@ The decision and execution loop is shared between the LLM and Camunda:
 - **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
 
 This means tools can be called in different orders, repeated, run in parallel, or skipped entirely, while execution remains constrained by the modeled process boundaries.
+
+:::tip
+For a broader overview of how execution works in an AI agent and architectural guidance, see [Design and architecture](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
+:::
 
 ### Feedback loop
 

@@ -4,9 +4,14 @@ paths:
       tags:
         - Authorization
       operationId: createAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create authorization
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -40,14 +45,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /authorizations/{authorizationKey}:
     put:
       tags:
         - Authorization
       operationId: updateAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update authorization
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -80,13 +91,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     get:
       tags:
         - Authorization
       operationId: getAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get authorization
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -117,13 +134,19 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Authorization
       operationId: deleteAuthorization
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete authorization
       description: |-
 
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -150,6 +173,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /authorizations/search:
     post:
       tags:
@@ -158,10 +182,15 @@ paths:
       description: |-
 
 
+        [[ADDED_IN_VERSION:8.8]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for authorizations based on given criteria.
       operationId: searchAuthorizations
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       requestBody:
         content:
           application/json:
@@ -182,6 +211,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
 components:
   schemas:
     AuthorizationIdBasedRequest:
@@ -238,6 +268,9 @@ components:
         - resourcePropertyName
         - resourceType
         - permissionTypes
+      x-properties-added-in-version:
+        - propertyName: resourcePropertyName
+          addedInVersion: "8.9"
     AuthorizationRequest:
       type: object
       oneOf:
@@ -299,6 +332,9 @@ components:
           description: The type of resource to search permissions for.
           allOf:
             - $ref: "#/components/schemas/ResourceTypeEnum"
+      x-properties-added-in-version:
+        - propertyName: resourcePropertyNames
+          addedInVersion: "8.9"
     AuthorizationResult:
       required:
         - ownerId
@@ -336,6 +372,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/AuthorizationKey"
           description: The key of the authorization.
+      x-properties-added-in-version:
+        - propertyName: resourcePropertyName
+          addedInVersion: "8.9"
     AuthorizationSearchResult:
       type: object
       required:
@@ -376,6 +415,7 @@ components:
         - CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE
         - CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE
         - CREATE_BATCH_OPERATION_RESOLVE_INCIDENT
+        - CREATE_BATCH_OPERATION_UPDATE_JOB
         - CREATE_DECISION_INSTANCE
         - CREATE_PROCESS_INSTANCE
         - CREATE_TASK_LISTENER

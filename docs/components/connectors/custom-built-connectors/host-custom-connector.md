@@ -13,32 +13,32 @@ This guide explains how to host your own **Connectors** developed with [Connecto
 
 For the purpose of this guide, we will be using a generic [Connector template](https://github.com/camunda/connector-template-outbound)
 as a reference. Clone the repository, and execute `mvn clean verify package`.
-This will produce a file called `target/connector-template-0.1.0-SNAPSHOT-with-dependencies.jar`. In this guide,
-we will refer this file as `connector.jar`.
+This produces two JAR files in the `target/` directory. Use `connector-template-0.1.0-SNAPSHOT.jar` (the JAR that bundles all dependencies). Ignore `original-connector-template-0.1.0-SNAPSHOT.jar` (the JAR without dependencies).
+
+In this guide, we will refer to `connector-template-0.1.0-SNAPSHOT.jar` as `connector.jar`.
 
 ## Wiring your connector with a Camunda cluster
 
 This approach is equivalent to the [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md), except you don't need to override
 existing connectors and instead add a new one. You need to have a running Camunda cluster, and a pair
 of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes.
-Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
+Learn more about [how to obtain required credentials](/components/hub/organization/manage-clusters/manage-api-clients.md).
 
 Run the following command:
 
 ```shell
 docker run --rm --name=CustomConnectorInSaaS \
-    -v $PWD/connector.jar:/opt/app/connector.jar \
-    -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=false \
-    -e CAMUNDA_CLIENT_CLOUD_CLUSTER-ID='<YOUR_CLUSTER_ID>' \
-    -e CAMUNDA_CLIENT_CLOUD_CLIENT-ID='<YOUR_CLIENT_ID>' \
-    -e CAMUNDA_CLIENT_CLOUD_CLIENT-SECRET='<YOUR_CLIENT_SECRET>' \
+    -v $PWD/connector.jar:/opt/custom/connector.jar \
+    -e LOADER_PATH=/opt/custom \
+    -e CAMUNDA_CLIENT_CLOUD_CLUSTER_ID='<YOUR_CLUSTER_ID>' \
+    -e CAMUNDA_CLIENT_AUTH_CLIENT_ID='<YOUR_CLIENT_ID>' \
+    -e CAMUNDA_CLIENT_AUTH_CLIENT_SECRET='<YOUR_CLIENT_SECRET>' \
     -e CAMUNDA_CLIENT_CLOUD_REGION='<YOUR_CLUSTER_REGION>' \
-    -e CAMUNDA_OPERATE_CLIENT_URL='https://<region>.api.camunda.io/<cluster-id>' \
         camunda/connectors-bundle:<desired-version>
 ```
 
-The line `-v $PWD/connector.jar:/opt/app/connector.jar` binds a volume with your connector at the path `$PWD/connector.jar`
-of you local machine.
+The line `-v $PWD/connector.jar:/opt/custom/connector.jar` binds a volume with your connector at the path `$PWD/connector.jar`
+of your local machine.
 
 ## Wiring your connector with Camunda Docker instance (without Keycloak)
 
@@ -78,7 +78,6 @@ docker run --rm --name=CustomConnectorInSMWithKeyCloak \
     -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=true \
     -e CAMUNDA_CLIENT_ID=<YOUR_CAMUNDA_CLIENT_ID> \
     -e CAMUNDA_CLIENT_SECRET=<YOUR_CAMUNDA_CLIENT_SECRET> \
-    -e CAMUNDA_CLIENT_CONFIG_PATH=/tmp/zeebe_auth_cache \
     -e ZEEBE_TOKEN_AUDIENCE=zeebe-api \
     -e ZEEBE_AUTHORIZATION_SERVER_URL=http://keycloak-service:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
     -e CAMUNDA_IDENTITY_TYPE=KEYCLOAK \
@@ -125,7 +124,6 @@ docker run --rm --name=CustomConnectorInSMWithHelm \
     -e CAMUNDA_CLIENT_SECURITY_PLAINTEXT=true \
     -e CAMUNDA_CLIENT_ID=zeebe \
     -e CAMUNDA_CLIENT_SECRET=<YOUR_CAMUNDA_CLIENT_SECRET> \
-    -e CAMUNDA_CLIENT_CONFIG_PATH=/tmp/zeebe_auth_cache \
     -e ZEEBE_TOKEN_AUDIENCE=zeebe-api \
     -e ZEEBE_AUTHORIZATION_SERVER_URL=http://host.docker.internal:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
     -e CAMUNDA_IDENTITY_TYPE=KEYCLOAK \

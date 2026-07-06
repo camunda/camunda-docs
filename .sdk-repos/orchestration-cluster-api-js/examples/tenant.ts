@@ -2,7 +2,11 @@
 // These examples are type-checked during build to guard against API regressions.
 
 import {
+  type ClientId,
   createCamundaClient,
+  type GroupId,
+  type MappingRuleId,
+  type RoleId,
   type TenantId,
   type Username,
 } from '@camunda8/orchestration-cluster-api';
@@ -89,89 +93,92 @@ async function unassignUserFromTenantExample(tenantId: TenantId, username: Usern
 //#endregion UnassignUserFromTenant
 
 //#region AssignGroupToTenant
-async function assignGroupToTenantExample(tenantId: TenantId) {
+async function assignGroupToTenantExample(tenantId: TenantId, groupId: GroupId) {
   const camunda = createCamundaClient();
 
   await camunda.assignGroupToTenant({
     tenantId,
-    groupId: 'engineering-team',
+    groupId,
   });
 }
 //#endregion AssignGroupToTenant
 
 //#region UnassignGroupFromTenant
-async function unassignGroupFromTenantExample(tenantId: TenantId) {
+async function unassignGroupFromTenantExample(tenantId: TenantId, groupId: GroupId) {
   const camunda = createCamundaClient();
 
   await camunda.unassignGroupFromTenant({
     tenantId,
-    groupId: 'engineering-team',
+    groupId,
   });
 }
 //#endregion UnassignGroupFromTenant
 
 //#region AssignRoleToTenant
-async function assignRoleToTenantExample(tenantId: TenantId) {
+async function assignRoleToTenantExample(tenantId: TenantId, roleId: RoleId) {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToTenant({
     tenantId,
-    roleId: 'process-admin',
+    roleId,
   });
 }
 //#endregion AssignRoleToTenant
 
 //#region UnassignRoleFromTenant
-async function unassignRoleFromTenantExample(tenantId: TenantId) {
+async function unassignRoleFromTenantExample(tenantId: TenantId, roleId: RoleId) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromTenant({
     tenantId,
-    roleId: 'process-admin',
+    roleId,
   });
 }
 //#endregion UnassignRoleFromTenant
 
 //#region AssignClientToTenant
-async function assignClientToTenantExample(tenantId: TenantId) {
+async function assignClientToTenantExample(tenantId: TenantId, clientId: ClientId) {
   const camunda = createCamundaClient();
 
   await camunda.assignClientToTenant({
     tenantId,
-    clientId: 'my-service-account',
+    clientId,
   });
 }
 //#endregion AssignClientToTenant
 
 //#region UnassignClientFromTenant
-async function unassignClientFromTenantExample(tenantId: TenantId) {
+async function unassignClientFromTenantExample(tenantId: TenantId, clientId: ClientId) {
   const camunda = createCamundaClient();
 
   await camunda.unassignClientFromTenant({
     tenantId,
-    clientId: 'my-service-account',
+    clientId,
   });
 }
 //#endregion UnassignClientFromTenant
 
 //#region AssignMappingRuleToTenant
-async function assignMappingRuleToTenantExample(tenantId: TenantId) {
+async function assignMappingRuleToTenantExample(tenantId: TenantId, mappingRuleId: MappingRuleId) {
   const camunda = createCamundaClient();
 
   await camunda.assignMappingRuleToTenant({
     tenantId,
-    mappingRuleId: 'rule-123',
+    mappingRuleId,
   });
 }
 //#endregion AssignMappingRuleToTenant
 
 //#region UnassignMappingRuleFromTenant
-async function unassignMappingRuleFromTenantExample(tenantId: TenantId) {
+async function unassignMappingRuleFromTenantExample(
+  tenantId: TenantId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignMappingRuleFromTenant({
     tenantId,
-    mappingRuleId: 'rule-123',
+    mappingRuleId,
   });
 }
 //#endregion UnassignMappingRuleFromTenant

@@ -66,7 +66,7 @@ Connectors expose additional HTTP(s) endpoints for handling incoming webhooks, w
 The Orchestration Cluster relies on a configured [secondary storage](/reference/glossary.md#secondary-storage) backend for indexing and search. Depending on your deployment and configuration, this backend can use a document-store backend ([Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch)) or an [RDBMS](/reference/glossary.md#rdbms) for supported scenarios.
 
 :::note
-Secondary storage is configurable. For RDBMS-based secondary storage, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
+Secondary storage is configurable. For backend trade-offs and production guidance, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). For RDBMS configuration details, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
 :::
 
 Components within the Orchestration Cluster communicate seamlessly, particularly:
@@ -85,7 +85,7 @@ Any of the following are just suggestions for the minimum viable setup, the sizi
 
 - Modern CPU: 2 cores
 - Memory: 4 GB RAM
-- Storage: 32 GB SSD (**1,000** IOPS recommended; avoid burstable disk types)
+- Storage: 32 GB SSD-backed, minimum 1,000 IOPS. HDD-backed volume types cannot meet Zeebe's Raft flush latency requirements and are not supported.
 
 Suggested instance types from cloud providers:
 

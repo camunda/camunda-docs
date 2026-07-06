@@ -130,6 +130,8 @@ provided adHocSubProcessInstanceKey.
 
 #### Example
 
+**Activate ad-hoc sub-process activities**
+
 ```ts
 async function activateAdHocSubProcessActivitiesExample(
   adHocSubProcessInstanceKey: ElementInstanceKey,
@@ -185,6 +187,8 @@ Iterate through all known partitions and activate jobs up to the requested maxim
 \}\>
 
 #### Example
+
+**Activate and process jobs**
 
 ```ts
 async function activateJobsExample() {
@@ -244,13 +248,18 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
 
 #### Example
 
+**Assign a client to a group**
+
 ```ts
-async function assignClientToGroupExample() {
+async function assignClientToGroupExample(
+  groupId: GroupId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignClientToGroup({
-    groupId: "engineering-team",
-    clientId: "my-service-account",
+    groupId,
+    clientId,
   });
 }
 ```
@@ -294,13 +303,18 @@ The client can then access tenant data and perform authorized actions.
 
 #### Example
 
+**Assign a client to a tenant**
+
 ```ts
-async function assignClientToTenantExample(tenantId: TenantId) {
+async function assignClientToTenantExample(
+  tenantId: TenantId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignClientToTenant({
     tenantId,
-    clientId: "my-service-account",
+    clientId,
   });
 }
 ```
@@ -344,13 +358,18 @@ Group members (users, clients) can then access tenant data and perform authorize
 
 #### Example
 
+**Assign a group to a tenant**
+
 ```ts
-async function assignGroupToTenantExample(tenantId: TenantId) {
+async function assignGroupToTenantExample(
+  tenantId: TenantId,
+  groupId: GroupId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignGroupToTenant({
     tenantId,
-    groupId: "engineering-team",
+    groupId,
   });
 }
 ```
@@ -373,9 +392,7 @@ assignMappingRuleToGroup(input, options?): CancelablePromise<void>;
 
 Assign a mapping rule to a group
 
-Assigns a mapping rule to a group.
-
--
+Assigns a mapping rule to a group. \*
 
 #### Parameters
 
@@ -393,13 +410,18 @@ Assigns a mapping rule to a group.
 
 #### Example
 
+**Assign a mapping rule to a group**
+
 ```ts
-async function assignMappingRuleToGroupExample() {
+async function assignMappingRuleToGroupExample(
+  groupId: GroupId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignMappingRuleToGroup({
-    groupId: "engineering-team",
-    mappingRuleId: "rule-123",
+    groupId,
+    mappingRuleId,
   });
 }
 ```
@@ -422,9 +444,7 @@ assignMappingRuleToTenant(input, options?): CancelablePromise<void>;
 
 Assign a mapping rule to a tenant
 
-Assign a single mapping rule to a specified tenant.
-
--
+Assign a single mapping rule to a specified tenant. \*
 
 #### Parameters
 
@@ -442,13 +462,18 @@ Assign a single mapping rule to a specified tenant.
 
 #### Example
 
+**Assign a mapping rule to a tenant**
+
 ```ts
-async function assignMappingRuleToTenantExample(tenantId: TenantId) {
+async function assignMappingRuleToTenantExample(
+  tenantId: TenantId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignMappingRuleToTenant({
     tenantId,
-    mappingRuleId: "rule-123",
+    mappingRuleId,
   });
 }
 ```
@@ -471,9 +496,7 @@ assignRoleToClient(input, options?): CancelablePromise<void>;
 
 Assign a role to a client
 
-Assigns the specified role to the client. The client will inherit the authorizations associated with this role.
-
--
+Assigns the specified role to the client. The client will inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -491,13 +514,15 @@ Assigns the specified role to the client. The client will inherit the authorizat
 
 #### Example
 
+**Assign a role to a client**
+
 ```ts
-async function assignRoleToClientExample() {
+async function assignRoleToClientExample(roleId: RoleId, clientId: ClientId) {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToClient({
-    roleId: "process-admin",
-    clientId: "my-service-account",
+    roleId,
+    clientId,
   });
 }
 ```
@@ -520,9 +545,7 @@ assignRoleToGroup(input, options?): CancelablePromise<void>;
 
 Assign a role to a group
 
-Assigns the specified role to the group. Every member of the group (user or client) will inherit the authorizations associated with this role.
-
--
+Assigns the specified role to the group. Every member of the group (user or client) will inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -540,13 +563,15 @@ Assigns the specified role to the group. Every member of the group (user or clie
 
 #### Example
 
+**Assign a role to a group**
+
 ```ts
-async function assignRoleToGroupExample() {
+async function assignRoleToGroupExample(roleId: RoleId, groupId: GroupId) {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToGroup({
-    roleId: "process-admin",
-    groupId: "engineering-team",
+    roleId,
+    groupId,
   });
 }
 ```
@@ -569,9 +594,7 @@ assignRoleToMappingRule(input, options?): CancelablePromise<void>;
 
 Assign a role to a mapping rule
 
-Assigns a role to a mapping rule.
-
--
+Assigns a role to a mapping rule. \*
 
 #### Parameters
 
@@ -589,13 +612,18 @@ Assigns a role to a mapping rule.
 
 #### Example
 
+**Assign a role to a mapping rule**
+
 ```ts
-async function assignRoleToMappingRuleExample() {
+async function assignRoleToMappingRuleExample(
+  roleId: RoleId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToMappingRule({
-    roleId: "process-admin",
-    mappingRuleId: "rule-123",
+    roleId,
+    mappingRuleId,
   });
 }
 ```
@@ -639,13 +667,15 @@ Users, Clients or Groups, that have the role assigned, will get access to the te
 
 #### Example
 
+**Assign a role to a tenant**
+
 ```ts
-async function assignRoleToTenantExample(tenantId: TenantId) {
+async function assignRoleToTenantExample(tenantId: TenantId, roleId: RoleId) {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToTenant({
     tenantId,
-    roleId: "process-admin",
+    roleId,
   });
 }
 ```
@@ -668,9 +698,7 @@ assignRoleToUser(input, options?): CancelablePromise<void>;
 
 Assign a role to a user
 
-Assigns the specified role to the user. The user will inherit the authorizations associated with this role.
-
--
+Assigns the specified role to the user. The user will inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -688,12 +716,14 @@ Assigns the specified role to the user. The user will inherit the authorizations
 
 #### Example
 
+**Assign a role to a user**
+
 ```ts
-async function assignRoleToUserExample(username: Username) {
+async function assignRoleToUserExample(roleId: RoleId, username: Username) {
   const camunda = createCamundaClient();
 
   await camunda.assignRoleToUser({
-    roleId: "process-admin",
+    roleId,
     username,
   });
 }
@@ -736,6 +766,8 @@ Assigns a user task with the given key to the given assignee. Assignment waits f
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Assign a user task**
 
 ```ts
 async function assignUserTaskExample(userTaskKey: UserTaskKey) {
@@ -788,12 +820,14 @@ Group members inherit the group authorizations, roles, and tenant assignments.
 
 #### Example
 
+**Assign a user to a group**
+
 ```ts
-async function assignUserToGroupExample(username: Username) {
+async function assignUserToGroupExample(groupId: GroupId, username: Username) {
   const camunda = createCamundaClient();
 
   await camunda.assignUserToGroup({
-    groupId: "engineering-team",
+    groupId,
     username,
   });
 }
@@ -817,9 +851,7 @@ assignUserToTenant(input, options?): CancelablePromise<void>;
 
 Assign a user to a tenant
 
-Assign a single user to a specified tenant. The user can then access tenant data and perform authorized actions.
-
--
+Assign a single user to a specified tenant. The user can then access tenant data and perform authorized actions. \*
 
 #### Parameters
 
@@ -836,6 +868,8 @@ Assign a single user to a specified tenant. The user can then access tenant data
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Assign a user to a tenant**
 
 ```ts
 async function assignUserToTenantExample(
@@ -869,9 +903,7 @@ broadcastSignal(input, options?): CancelablePromise<SignalBroadcastResult>;
 
 Broadcast signal
 
-Broadcasts a signal.
-
--
+Broadcasts a signal. \*
 
 #### Parameters
 
@@ -888,6 +920,8 @@ Broadcasts a signal.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SignalBroadcastResult`](../type-aliases/SignalBroadcastResult.md)\>
 
 #### Example
+
+**Broadcast a signal**
 
 ```ts
 async function broadcastSignalExample() {
@@ -945,6 +979,8 @@ This is done asynchronously, the progress can be tracked using the batch operati
 
 #### Example
 
+**Cancel a batch operation**
+
 ```ts
 async function cancelBatchOperationExample(
   batchOperationKey: BatchOperationKey
@@ -992,6 +1028,8 @@ Cancels a running process instance. As a cancellation includes more than just th
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Cancel a process instance**
 
 ```ts
 async function cancelProcessInstanceExample(
@@ -1051,6 +1089,8 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
 
 #### Example
+
+**Cancel process instances in batch**
 
 ```ts
 async function cancelProcessInstancesBatchOperationExample(
@@ -1130,6 +1170,8 @@ Complete a job with the given payload, which allows completing the associated se
 
 #### Example
 
+**Complete a job**
+
 ```ts
 async function completeJobExample(jobKey: JobKey) {
   const camunda = createCamundaClient();
@@ -1181,6 +1223,8 @@ Completes a user task with the given key. Completion waits for blocking task lis
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Complete a user task**
 
 ```ts
 async function completeUserTaskExample(userTaskKey: UserTaskKey) {
@@ -1255,6 +1299,8 @@ Use the publish message endpoint to send messages that can be buffered.
 
 #### Example
 
+**Correlate a message**
+
 ```ts
 async function correlateMessageExample() {
   const camunda = createCamundaClient();
@@ -1290,9 +1336,7 @@ createAdminUser(input, options?): CancelablePromise<UserCreateResult>;
 
 Create admin user
 
-Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
-
--
+Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role. \*
 
 #### Parameters
 
@@ -1309,6 +1353,8 @@ Creates a new user and assigns the admin role to it. This endpoint is only usabl
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserCreateResult`](../type-aliases/UserCreateResult.md)\>
 
 #### Example
+
+**Create an admin user**
 
 ```ts
 async function createAdminUserExample(username: Username) {
@@ -1335,6 +1381,132 @@ Setup
 
 ---
 
+### createAgentInstance()
+
+```ts
+createAgentInstance(input, options?): CancelablePromise<AgentInstanceCreationResult>;
+```
+
+Create agent instance
+
+Creates a new agent instance. The returned key identifies the instance and must
+be used in subsequent update and query calls.
+
+-
+
+#### Parameters
+
+##### input
+
+[`AgentInstanceCreationRequest`](../type-aliases/AgentInstanceCreationRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentInstanceCreationResult`](../type-aliases/AgentInstanceCreationResult.md)\>
+
+#### Example
+
+**Create an agent instance**
+
+```ts
+async function createAgentInstanceExample(
+  elementInstanceKey: ElementInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createAgentInstance({
+    elementInstanceKey,
+    definition: {
+      model: "gpt-4o",
+      provider: "openai",
+      systemPrompt: "You are a helpful assistant.",
+    },
+  });
+
+  console.log(`Created agent instance: ${result.agentInstanceKey}`);
+}
+```
+
+#### Operation Id
+
+createAgentInstance
+
+#### Tags
+
+Agent instance
+
+---
+
+### createAgentInstanceHistoryItem()
+
+```ts
+createAgentInstanceHistoryItem(input, options?): CancelablePromise<AgentInstanceHistoryItemCreationResult>;
+```
+
+Create agent instance history item
+
+Appends a single history item to an agent instance's conversation history.
+The created item has commitStatus PENDING until the job identified by jobLease
+completes successfully, at which point it transitions to COMMITTED. If the job
+fails or is superseded by a retry, the item is marked DISCARDED.
+
+-
+
+#### Parameters
+
+##### input
+
+[`createAgentInstanceHistoryItemInput`](../type-aliases/createAgentInstanceHistoryItemInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentInstanceHistoryItemCreationResult`](../type-aliases/AgentInstanceHistoryItemCreationResult.md)\>
+
+#### Example
+
+**Append an agent instance history item**
+
+```ts
+async function createAgentInstanceHistoryItemExample(
+  agentInstanceKey: AgentInstanceKey,
+  elementInstanceKey: ElementInstanceKey,
+  jobKey: JobKey,
+  jobLease: string
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.createAgentInstanceHistoryItem({
+    agentInstanceKey,
+    elementInstanceKey,
+    jobKey,
+    jobLease,
+    role: "ASSISTANT",
+    content: [{ contentType: "TEXT", text: "How can I help you today?" }],
+    producedAt: new Date().toISOString(),
+  });
+
+  console.log(`Created history item: ${result.historyItemKey}`);
+}
+```
+
+#### Operation Id
+
+createAgentInstanceHistoryItem
+
+#### Tags
+
+Agent instance
+
+---
+
 ### createAuthorization()
 
 ```ts
@@ -1343,9 +1515,7 @@ createAuthorization(input, options?): CancelablePromise<AuthorizationCreateResul
 
 Create authorization
 
-Create the authorization.
-
--
+Create the authorization. \*
 
 #### Parameters
 
@@ -1363,6 +1533,8 @@ Create the authorization.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuthorizationCreateResult`](../type-aliases/AuthorizationCreateResult.md)\>
 
 #### Example
+
+**Create an authorization**
 
 ```ts
 async function createAuthorizationExample() {
@@ -1398,7 +1570,8 @@ createDeployment(input, options?): CancelablePromise<ExtendedDeploymentResult>;
 
 Deploy resources
 
-Deploys one or more resources (e.g. processes, decision models, or forms).
+Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources, and generic files.
+A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA resources are stored as deployable generic resources in the engine.
 This is an atomic call, i.e. either all resources are deployed or none of them are.
 
 -
@@ -1420,6 +1593,8 @@ This is an atomic call, i.e. either all resources are deployed or none of them a
 Enriched deployment result with typed arrays (processes, decisions, decisionRequirements, forms, resources).
 
 #### Example
+
+**Deploy resources from files**
 
 ```ts
 async function deployResourcesFromFilesExample() {
@@ -1455,7 +1630,7 @@ Upload document
 
 Upload a document to the Camunda 8 cluster.
 
-Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
 
 -
 
@@ -1474,6 +1649,8 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DocumentReference`](../type-aliases/DocumentReference.md)\>
 
 #### Example
+
+**Upload a document**
 
 ```ts
 async function createDocumentExample() {
@@ -1510,7 +1687,7 @@ Create document link
 
 Create a link to a document in the Camunda 8 cluster.
 
-Note that this is currently supported for document stores of type: AWS, GCP
+Note that this is currently supported for document stores of type: AWS, Azure, GCP
 
 -
 
@@ -1529,6 +1706,8 @@ Note that this is currently supported for document stores of type: AWS, GCP
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DocumentLink`](../type-aliases/DocumentLink.md)\>
 
 #### Example
+
+**Create a document link**
 
 ```ts
 async function createDocumentLinkExample(documentId: DocumentId) {
@@ -1575,7 +1754,7 @@ In case of a multi-status response, the response body will contain a list of `Do
 each of which contains the file name of the document that failed to upload and the reason for the failure.
 The client can choose to retry the whole batch or individual documents based on the response.
 
-Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
 
 -
 
@@ -1594,6 +1773,8 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DocumentCreationBatchResponse`](../type-aliases/DocumentCreationBatchResponse.md)\>
 
 #### Example
+
+**Upload multiple documents**
 
 ```ts
 async function createDocumentsExample() {
@@ -1656,6 +1837,8 @@ repeats.
 
 #### Example
 
+**Create element instance variables**
+
 ```ts
 async function createElementInstanceVariablesExample(
   elementInstanceKey: ElementInstanceKey
@@ -1687,9 +1870,7 @@ createGlobalClusterVariable(input, options?): CancelablePromise<ClusterVariableR
 
 Create a global-scoped cluster variable
 
-Create a global-scoped cluster variable.
-
--
+Create a global-scoped cluster variable. \*
 
 #### Parameters
 
@@ -1707,12 +1888,14 @@ Create a global-scoped cluster variable.
 
 #### Example
 
+**Create a global cluster variable**
+
 ```ts
-async function createGlobalClusterVariableExample() {
+async function createGlobalClusterVariableExample(name: ClusterVariableName) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createGlobalClusterVariable({
-    name: "feature-flags",
+    name,
     value: { darkMode: true },
   });
 
@@ -1738,9 +1921,7 @@ createGlobalTaskListener(input, options?): CancelablePromise<GlobalTaskListenerR
 
 Create global user task listener
 
-Create a new global user task listener.
-
--
+Create a new global user task listener. \*
 
 #### Parameters
 
@@ -1757,6 +1938,8 @@ Create a new global user task listener.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GlobalTaskListenerResult`](../type-aliases/GlobalTaskListenerResult.md)\>
 
 #### Example
+
+**Create a global task listener**
 
 ```ts
 async function createGlobalTaskListenerExample(id: GlobalListenerId) {
@@ -1792,6 +1975,21 @@ Create group
 
 Create a new group.
 
+The supplied `groupId` is validated against `^[a-zA-Z0-9_~@.+-]+$`
+(max 256 characters) by `IdentifierValidator.validateId` in the
+runtime. This strict validation applies wherever the Groups API
+is available: in OIDC deployments that set
+`camunda.security.authentication.oidc.groupsClaim` the Groups
+API (including this endpoint) is disabled entirely, so group
+CRUD never sees externally-minted IdP IDs. The BYOG relaxation
+only loosens validation when a group is referenced _as a member_
+of a role or tenant (`assignRoleToGroup`,
+`assignGroupToTenant`); group CRUD itself always uses the strict
+default-id regex. The constraint is not advertised on the
+`GroupId` schema so that the same schema can be reused at
+member-reference sites without falsely rejecting
+externally-minted IdP group IDs there.
+
 -
 
 #### Parameters
@@ -1810,12 +2008,14 @@ Create a new group.
 
 #### Example
 
+**Create a group**
+
 ```ts
-async function createGroupExample() {
+async function createGroupExample(groupId: GroupId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createGroup({
-    groupId: "engineering-team",
+    groupId,
     name: "Engineering Team",
   });
 
@@ -1874,6 +2074,8 @@ Worker configuration
 
 #### Examples
 
+**Create a job worker**
+
 ```ts
 async function createJobWorkerExample() {
   const camunda = createCamundaClient();
@@ -1892,6 +2094,8 @@ async function createJobWorkerExample() {
   // worker.close();
 }
 ```
+
+**Job worker with error handling**
 
 ```ts
 async function jobWorkerWithErrorHandlingExample() {
@@ -1949,12 +2153,14 @@ Create a new mapping rule
 
 #### Example
 
+**Create a mapping rule**
+
 ```ts
-async function createMappingRuleExample() {
+async function createMappingRuleExample(mappingRuleId: MappingRuleId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createMappingRule({
-    mappingRuleId: "ldap-group-mapping",
+    mappingRuleId,
     name: "LDAP Group Mapping",
     claimName: "groups",
     claimValue: "engineering",
@@ -2008,6 +2214,8 @@ when awaitCompletion is enabled.
 
 #### Examples
 
+**By ID**
+
 ```ts
 async function createProcessInstanceByIdExample(
   processDefinitionId: ProcessDefinitionId
@@ -2025,6 +2233,8 @@ async function createProcessInstanceByIdExample(
   console.log(`Started process instance: ${result.processInstanceKey}`);
 }
 ```
+
+**By key**
 
 ```ts
 async function createProcessInstanceByKeyExample(
@@ -2063,9 +2273,7 @@ createRole(input, options?): CancelablePromise<RoleCreateResult>;
 
 Create role
 
-Create a new role.
-
--
+Create a new role. \*
 
 #### Parameters
 
@@ -2083,12 +2291,14 @@ Create a new role.
 
 #### Example
 
+**Create a role**
+
 ```ts
-async function createRoleExample() {
+async function createRoleExample(roleId: RoleId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createRole({
-    roleId: "process-admin",
+    roleId,
     name: "Process Admin",
   });
 
@@ -2114,9 +2324,7 @@ createTenant(input, options?): CancelablePromise<TenantCreateResult>;
 
 Create tenant
 
-Creates a new tenant.
-
--
+Creates a new tenant. \*
 
 #### Parameters
 
@@ -2133,6 +2341,8 @@ Creates a new tenant.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantCreateResult`](../type-aliases/TenantCreateResult.md)\>
 
 #### Example
+
+**Create a tenant**
 
 ```ts
 async function createTenantExample(tenantId: TenantId) {
@@ -2165,9 +2375,7 @@ createTenantClusterVariable(input, options?): CancelablePromise<ClusterVariableR
 
 Create a tenant-scoped cluster variable
 
-Create a new cluster variable for the given tenant.
-
--
+Create a new cluster variable for the given tenant. \*
 
 #### Parameters
 
@@ -2185,13 +2393,18 @@ Create a new cluster variable for the given tenant.
 
 #### Example
 
+**Create a tenant cluster variable**
+
 ```ts
-async function createTenantClusterVariableExample(tenantId: TenantId) {
+async function createTenantClusterVariableExample(
+  tenantId: TenantId,
+  name: ClusterVariableName
+) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createTenantClusterVariable({
     tenantId,
-    name: "config",
+    name,
     value: { region: "us-east-1" },
   });
 
@@ -2255,6 +2468,8 @@ Threaded worker configuration
 
 #### Example
 
+**Create a threaded job worker**
+
 ```ts
 const worker = client.createThreadedJobWorker({
   jobType: "cpu-heavy-task",
@@ -2274,9 +2489,7 @@ createUser(input, options?): CancelablePromise<UserCreateResult>;
 
 Create user
 
-Create a new user.
-
--
+Create a new user. \*
 
 #### Parameters
 
@@ -2293,6 +2506,8 @@ Create a new user.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserCreateResult`](../type-aliases/UserCreateResult.md)\>
 
 #### Example
+
+**Create a user**
 
 ```ts
 async function createUserExample(username: Username) {
@@ -2327,9 +2542,7 @@ deleteAuthorization(input, options?): CancelablePromise<void>;
 
 Delete authorization
 
-Deletes the authorization with the given key.
-
--
+Deletes the authorization with the given key. \*
 
 #### Parameters
 
@@ -2346,6 +2559,8 @@ Deletes the authorization with the given key.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Delete an authorization**
 
 ```ts
 async function deleteAuthorizationExample(authorizationKey: AuthorizationKey) {
@@ -2373,9 +2588,7 @@ deleteDecisionInstance(input, options?): CancelablePromise<void>;
 
 Delete decision instance
 
-Delete all associated decision evaluations based on provided key.
-
--
+Delete all associated decision evaluations based on provided key. \*
 
 #### Parameters
 
@@ -2392,6 +2605,8 @@ Delete all associated decision evaluations based on provided key.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Delete a decision instance**
 
 ```ts
 async function deleteDecisionInstanceExample(
@@ -2442,6 +2657,8 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 #### Example
 
+**Delete decision instances in batch**
+
 ```ts
 async function deleteDecisionInstancesBatchOperationExample() {
   const camunda = createCamundaClient();
@@ -2474,7 +2691,7 @@ Delete document
 
 Delete a document from the Camunda 8 cluster.
 
-Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
 
 -
 
@@ -2493,6 +2710,8 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Delete a document**
 
 ```ts
 async function deleteDocumentExample(documentId: DocumentId) {
@@ -2520,9 +2739,7 @@ deleteGlobalClusterVariable(input, options?): CancelablePromise<void>;
 
 Delete a global-scoped cluster variable
 
-Delete a global-scoped cluster variable.
-
--
+Delete a global-scoped cluster variable. \*
 
 #### Parameters
 
@@ -2540,11 +2757,13 @@ Delete a global-scoped cluster variable.
 
 #### Example
 
+**Delete a global cluster variable**
+
 ```ts
-async function deleteGlobalClusterVariableExample() {
+async function deleteGlobalClusterVariableExample(name: ClusterVariableName) {
   const camunda = createCamundaClient();
 
-  await camunda.deleteGlobalClusterVariable({ name: "feature-flags" });
+  await camunda.deleteGlobalClusterVariable({ name });
 }
 ```
 
@@ -2566,9 +2785,7 @@ deleteGlobalTaskListener(input, options?): CancelablePromise<void>;
 
 Delete global user task listener
 
-Deletes a global user task listener.
-
--
+Deletes a global user task listener. \*
 
 #### Parameters
 
@@ -2585,6 +2802,8 @@ Deletes a global user task listener.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Delete a global task listener**
 
 ```ts
 async function deleteGlobalTaskListenerExample(id: GlobalListenerId) {
@@ -2614,9 +2833,7 @@ deleteGroup(input, options?): CancelablePromise<void>;
 
 Delete group
 
-Deletes the group with the given ID.
-
--
+Deletes the group with the given ID. \*
 
 #### Parameters
 
@@ -2634,11 +2851,13 @@ Deletes the group with the given ID.
 
 #### Example
 
+**Delete a group**
+
 ```ts
-async function deleteGroupExample() {
+async function deleteGroupExample(groupId: GroupId) {
   const camunda = createCamundaClient();
 
-  await camunda.deleteGroup({ groupId: "engineering-team" });
+  await camunda.deleteGroup({ groupId });
 }
 ```
 
@@ -2680,11 +2899,13 @@ Deletes the mapping rule with the given ID.
 
 #### Example
 
+**Delete a mapping rule**
+
 ```ts
-async function deleteMappingRuleExample() {
+async function deleteMappingRuleExample(mappingRuleId: MappingRuleId) {
   const camunda = createCamundaClient();
 
-  await camunda.deleteMappingRule({ mappingRuleId: "ldap-group-mapping" });
+  await camunda.deleteMappingRule({ mappingRuleId });
 }
 ```
 
@@ -2706,9 +2927,7 @@ deleteProcessInstance(input, options?): CancelablePromise<void>;
 
 Delete process instance
 
-Deletes a process instance. Only instances that are completed or terminated can be deleted.
-
--
+Deletes a process instance. Only instances that are completed or terminated can be deleted. \*
 
 #### Parameters
 
@@ -2725,6 +2944,8 @@ Deletes a process instance. Only instances that are completed or terminated can 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Delete a process instance**
 
 ```ts
 async function deleteProcessInstanceExample(
@@ -2776,6 +2997,8 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 #### Example
 
+**Delete process instances in batch**
+
 ```ts
 async function deleteProcessInstancesBatchOperationExample(
   processDefinitionKey: ProcessDefinitionKey
@@ -2822,9 +3045,7 @@ historic data associated with a resource, set the `deleteHistory` flag in the re
 to `true`. The historic data is deleted asynchronously via a batch operation. The details of
 the created batch operation are included in the response. Note that history deletion is only
 supported for process resources; for other resource types this flag is ignored and no history
-will be deleted.
-
--
+will be deleted. \*
 
 #### Parameters
 
@@ -2841,6 +3062,8 @@ will be deleted.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DeleteResourceResponse`](../type-aliases/DeleteResourceResponse.md)\>
 
 #### Example
+
+**Delete a resource**
 
 ```ts
 async function deleteResourceExample(resourceKey: ProcessDefinitionKey) {
@@ -2871,9 +3094,7 @@ deleteRole(input, options?): CancelablePromise<void>;
 
 Delete role
 
-Deletes the role with the given ID.
-
--
+Deletes the role with the given ID. \*
 
 #### Parameters
 
@@ -2891,11 +3112,13 @@ Deletes the role with the given ID.
 
 #### Example
 
+**Delete a role**
+
 ```ts
-async function deleteRoleExample() {
+async function deleteRoleExample(roleId: RoleId) {
   const camunda = createCamundaClient();
 
-  await camunda.deleteRole({ roleId: "process-admin" });
+  await camunda.deleteRole({ roleId });
 }
 ```
 
@@ -2917,9 +3140,7 @@ deleteTenant(input, options?): CancelablePromise<void>;
 
 Delete tenant
 
-Deletes an existing tenant.
-
--
+Deletes an existing tenant. \*
 
 #### Parameters
 
@@ -2936,6 +3157,8 @@ Deletes an existing tenant.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Delete a tenant**
 
 ```ts
 async function deleteTenantExample(tenantId: TenantId) {
@@ -2963,9 +3186,7 @@ deleteTenantClusterVariable(input, options?): CancelablePromise<void>;
 
 Delete a tenant-scoped cluster variable
 
-Delete a tenant-scoped cluster variable.
-
--
+Delete a tenant-scoped cluster variable. \*
 
 #### Parameters
 
@@ -2983,13 +3204,18 @@ Delete a tenant-scoped cluster variable.
 
 #### Example
 
+**Delete a tenant cluster variable**
+
 ```ts
-async function deleteTenantClusterVariableExample(tenantId: TenantId) {
+async function deleteTenantClusterVariableExample(
+  tenantId: TenantId,
+  name: ClusterVariableName
+) {
   const camunda = createCamundaClient();
 
   await camunda.deleteTenantClusterVariable({
     tenantId,
-    name: "config",
+    name,
   });
 }
 ```
@@ -3012,9 +3238,7 @@ deleteUser(input, options?): CancelablePromise<void>;
 
 Delete user
 
-Deletes a user.
-
--
+Deletes a user. \*
 
 #### Parameters
 
@@ -3031,6 +3255,8 @@ Deletes a user.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Delete a user**
 
 ```ts
 async function deleteUserExample(username: Username) {
@@ -3128,6 +3354,8 @@ Multiple root-level conditional start events of the same process definition can 
 
 #### Example
 
+**Evaluate conditionals**
+
 ```ts
 async function evaluateConditionalsExample(tenantId: TenantId) {
   const camunda = createCamundaClient();
@@ -3183,6 +3411,8 @@ version of the decision is used.
 
 #### Examples
 
+**By ID**
+
 ```ts
 async function evaluateDecisionByIdExample(
   decisionDefinitionId: DecisionDefinitionId
@@ -3201,6 +3431,8 @@ async function evaluateDecisionByIdExample(
   console.log(`Output: ${result.output}`);
 }
 ```
+
+**By key**
 
 ```ts
 async function evaluateDecisionByKeyExample(
@@ -3238,7 +3470,10 @@ evaluateExpression(input, options?): CancelablePromise<ExpressionEvaluationResul
 
 Evaluate an expression
 
-Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
+Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
+cluster variables when a tenant ID is provided. Optionally, provide a `scopeKey` to make the
+variables of a specific process instance or element instance visible while evaluating the
+expression.
 
 -
 
@@ -3257,6 +3492,8 @@ Evaluates a FEEL expression and returns the result. Supports references to tenan
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ExpressionEvaluationResult`](../type-aliases/ExpressionEvaluationResult.md)\>
 
 #### Example
+
+**Evaluate an expression**
 
 ```ts
 async function evaluateExpressionExample() {
@@ -3309,6 +3546,8 @@ Mark the job as failed.
 
 #### Example
 
+**Fail a job with retry**
+
 ```ts
 async function failJobExample(jobKey: JobKey) {
   const camunda = createCamundaClient();
@@ -3344,6 +3583,69 @@ forceAuthRefresh(): Promise<string | undefined>;
 
 ---
 
+### getAgentInstance()
+
+```ts
+getAgentInstance(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AgentInstanceResult>;
+```
+
+Get agent instance
+
+Returns agent instance as JSON. \*
+
+#### Parameters
+
+##### input
+
+[`getAgentInstanceInput`](../type-aliases/getAgentInstanceInput.md)
+
+##### consistencyManagement
+
+[`getAgentInstanceConsistency`](../type-aliases/getAgentInstanceConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentInstanceResult`](../type-aliases/AgentInstanceResult.md)\>
+
+#### Example
+
+**Get an agent instance**
+
+```ts
+async function getAgentInstanceExample(agentInstanceKey: AgentInstanceKey) {
+  const camunda = createCamundaClient();
+
+  const instance = await camunda.getAgentInstance(
+    { agentInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Status: ${instance.status}`);
+  console.log(`Element: ${instance.elementId}`);
+}
+```
+
+#### Operation Id
+
+getAgentInstance
+
+#### Tags
+
+Agent instance
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### getAuditLog()
 
 ```ts
@@ -3355,9 +3657,7 @@ options?): CancelablePromise<AuditLogResult>;
 
 Get audit log
 
-Get an audit log entry by auditLogKey.
-
--
+Get an audit log entry by auditLogKey. \*
 
 #### Parameters
 
@@ -3378,6 +3678,8 @@ Get an audit log entry by auditLogKey.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuditLogResult`](../type-aliases/AuditLogResult.md)\>
 
 #### Example
+
+**Get an audit log entry**
 
 ```ts
 async function getAuditLogExample(auditLogKey: AuditLogKey) {
@@ -3414,9 +3716,7 @@ getAuthentication(options?): CancelablePromise<CamundaUserResult>;
 
 Get current user
 
-Retrieves the current authenticated user.
-
--
+Retrieves the current authenticated user. \*
 
 #### Parameters
 
@@ -3429,6 +3729,8 @@ Retrieves the current authenticated user.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`CamundaUserResult`](../type-aliases/CamundaUserResult.md)\>
 
 #### Example
+
+**Get authentication info**
 
 ```ts
 async function getAuthenticationExample() {
@@ -3473,9 +3775,7 @@ options?): CancelablePromise<AuthorizationResult>;
 
 Get authorization
 
-Get authorization by the given key.
-
--
+Get authorization by the given key. \*
 
 #### Parameters
 
@@ -3496,6 +3796,8 @@ Get authorization by the given key.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuthorizationResult`](../type-aliases/AuthorizationResult.md)\>
 
 #### Example
+
+**Get an authorization**
 
 ```ts
 async function getAuthorizationExample(authorizationKey: AuthorizationKey) {
@@ -3578,9 +3880,7 @@ options?): CancelablePromise<BatchOperationResponse>;
 
 Get batch operation
 
-Get batch operation by key.
-
--
+Get batch operation by key. \*
 
 #### Parameters
 
@@ -3601,6 +3901,8 @@ Get batch operation by key.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationResponse`](../type-aliases/BatchOperationResponse.md)\>
 
 #### Example
+
+**Get a batch operation**
 
 ```ts
 async function getBatchOperationExample(batchOperationKey: BatchOperationKey) {
@@ -3655,9 +3957,7 @@ options?): CancelablePromise<DecisionDefinitionResult>;
 
 Get decision definition
 
-Returns a decision definition by key.
-
--
+Returns a decision definition by key. \*
 
 #### Parameters
 
@@ -3678,6 +3978,8 @@ Returns a decision definition by key.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionDefinitionResult`](../type-aliases/DecisionDefinitionResult.md)\>
 
 #### Example
+
+**Get a decision definition**
 
 ```ts
 async function getDecisionDefinitionExample(
@@ -3720,9 +4022,7 @@ options?): CancelablePromise<string>;
 
 Get decision definition XML
 
-Returns decision definition as XML.
-
--
+Returns decision definition as XML. \*
 
 #### Parameters
 
@@ -3743,6 +4043,8 @@ Returns decision definition as XML.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>
 
 #### Example
+
+**Get decision definition XML**
 
 ```ts
 async function getDecisionDefinitionXmlExample(
@@ -3784,9 +4086,7 @@ options?): CancelablePromise<DecisionInstanceGetQueryResult>;
 
 Get decision instance
 
-Returns a decision instance.
-
--
+Returns a decision instance. \*
 
 #### Parameters
 
@@ -3807,6 +4107,8 @@ Returns a decision instance.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionInstanceGetQueryResult`](../type-aliases/DecisionInstanceGetQueryResult.md)\>
 
 #### Example
+
+**Get a decision instance**
 
 ```ts
 async function getDecisionInstanceExample(
@@ -3848,9 +4150,7 @@ options?): CancelablePromise<DecisionRequirementsResult>;
 
 Get decision requirements
 
-Returns Decision Requirements as JSON.
-
--
+Returns Decision Requirements as JSON. \*
 
 #### Parameters
 
@@ -3871,6 +4171,8 @@ Returns Decision Requirements as JSON.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionRequirementsResult`](../type-aliases/DecisionRequirementsResult.md)\>
 
 #### Example
+
+**Get decision requirements**
 
 ```ts
 async function getDecisionRequirementsExample(
@@ -3912,9 +4214,7 @@ options?): CancelablePromise<string>;
 
 Get decision requirements XML
 
-Returns decision requirements as XML.
-
--
+Returns decision requirements as XML. \*
 
 #### Parameters
 
@@ -3935,6 +4235,8 @@ Returns decision requirements as XML.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>
 
 #### Example
+
+**Get decision requirements XML**
 
 ```ts
 async function getDecisionRequirementsXmlExample(
@@ -3975,7 +4277,7 @@ Download document
 
 Download a document from the Camunda 8 cluster.
 
-Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-production), local (non-production)
 
 -
 
@@ -3994,6 +4296,8 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`Blob`\>
 
 #### Example
+
+**Download a document**
 
 ```ts
 async function getDocumentExample(documentId: DocumentId) {
@@ -4026,9 +4330,7 @@ options?): CancelablePromise<ElementInstanceResult>;
 
 Get element instance
 
-Returns element instance as JSON.
-
--
+Returns element instance as JSON. \*
 
 #### Parameters
 
@@ -4049,6 +4351,8 @@ Returns element instance as JSON.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ElementInstanceResult`](../type-aliases/ElementInstanceResult.md)\>
 
 #### Example
+
+**Get an element instance**
 
 ```ts
 async function getElementInstanceExample(
@@ -4093,6 +4397,72 @@ Internal accessor (read-only) for eventual consistency error mode.
 
 ---
 
+### getFormByKey()
+
+```ts
+getFormByKey(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<FormResult>;
+```
+
+Get form by key
+
+Get a form by its unique form key.
+
+-
+
+#### Parameters
+
+##### input
+
+[`getFormByKeyInput`](../type-aliases/getFormByKeyInput.md)
+
+##### consistencyManagement
+
+[`getFormByKeyConsistency`](../type-aliases/getFormByKeyConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`FormResult`](../type-aliases/FormResult.md)\>
+
+#### Example
+
+**Get a form by key**
+
+```ts
+async function getFormByKeyExample(formKey: FormKey) {
+  const camunda = createCamundaClient();
+
+  const form = await camunda.getFormByKey(
+    {
+      formKey,
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Form: ${form.formId}, version: ${form.version}`);
+}
+```
+
+#### Operation Id
+
+getFormByKey
+
+#### Tags
+
+Form
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### getGlobalClusterVariable()
 
 ```ts
@@ -4104,9 +4474,7 @@ options?): CancelablePromise<ClusterVariableResult>;
 
 Get a global-scoped cluster variable
 
-Get a global-scoped cluster variable.
-
--
+Get a global-scoped cluster variable. \*
 
 #### Parameters
 
@@ -4128,12 +4496,14 @@ Get a global-scoped cluster variable.
 
 #### Example
 
+**Get a global cluster variable**
+
 ```ts
-async function getGlobalClusterVariableExample() {
+async function getGlobalClusterVariableExample(name: ClusterVariableName) {
   const camunda = createCamundaClient();
 
   const variable = await camunda.getGlobalClusterVariable(
-    { name: "feature-flags" },
+    { name },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -4190,6 +4560,8 @@ Returns global aggregated counts for jobs. Filter by the creation time window (r
 
 #### Example
 
+**Get global job statistics**
+
 ```ts
 async function getGlobalJobStatisticsExample() {
   const camunda = createCamundaClient();
@@ -4231,9 +4603,7 @@ options?): CancelablePromise<GlobalTaskListenerResult>;
 
 Get global user task listener
 
-Get a global user task listener by its id.
-
--
+Get a global user task listener by its id. \*
 
 #### Parameters
 
@@ -4254,6 +4624,8 @@ Get a global user task listener by its id.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GlobalTaskListenerResult`](../type-aliases/GlobalTaskListenerResult.md)\>
 
 #### Example
+
+**Get a global task listener**
 
 ```ts
 async function getGlobalTaskListenerExample(id: GlobalListenerId) {
@@ -4293,9 +4665,7 @@ options?): CancelablePromise<GroupResult>;
 
 Get group
 
-Get a group by its ID.
-
--
+Get a group by its ID. \*
 
 #### Parameters
 
@@ -4317,12 +4687,14 @@ Get a group by its ID.
 
 #### Example
 
+**Get a group**
+
 ```ts
-async function getGroupExample() {
+async function getGroupExample(groupId: GroupId) {
   const camunda = createCamundaClient();
 
   const group = await camunda.getGroup(
-    { groupId: "engineering-team" },
+    { groupId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -4378,6 +4750,8 @@ Returns incident as JSON.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`IncidentResult`](../type-aliases/IncidentResult.md)\>
 
 #### Example
+
+**Get an incident**
 
 ```ts
 async function getIncidentExample(incidentKey: IncidentKey) {
@@ -4442,6 +4816,8 @@ Returns aggregated metrics per error for the given jobType.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`JobErrorStatisticsQueryResult`](../type-aliases/JobErrorStatisticsQueryResult.md)\>
 
 #### Example
+
+**Get job error statistics**
 
 ```ts
 async function getJobErrorStatisticsExample() {
@@ -4515,6 +4891,8 @@ Each item in the response corresponds to one time bucket of the requested resolu
 
 #### Example
 
+**Get job time series statistics**
+
 ```ts
 async function getJobTimeSeriesStatisticsExample() {
   const camunda = createCamundaClient();
@@ -4585,6 +4963,8 @@ Get statistics about jobs, grouped by job type.
 
 #### Example
 
+**Get job type statistics**
+
 ```ts
 async function getJobTypeStatisticsExample() {
   const camunda = createCamundaClient();
@@ -4649,6 +5029,8 @@ Get statistics about jobs, grouped by worker, for a given job type.
 
 #### Example
 
+**Get job worker statistics**
+
 ```ts
 async function getJobWorkerStatisticsExample() {
   const camunda = createCamundaClient();
@@ -4692,9 +5074,7 @@ getLicense(options?): CancelablePromise<LicenseResponse>;
 
 Get license status
 
-Obtains the status of the current Camunda license.
-
--
+Obtains the status of the current Camunda license. \*
 
 #### Parameters
 
@@ -4707,6 +5087,8 @@ Obtains the status of the current Camunda license.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`LicenseResponse`](../type-aliases/LicenseResponse.md)\>
 
 #### Example
+
+**Get license information**
 
 ```ts
 async function getLicenseExample() {
@@ -4763,12 +5145,14 @@ Gets the mapping rule with the given ID.
 
 #### Example
 
+**Get a mapping rule**
+
 ```ts
-async function getMappingRuleExample() {
+async function getMappingRuleExample(mappingRuleId: MappingRuleId) {
   const camunda = createCamundaClient();
 
   const rule = await camunda.getMappingRule(
-    { mappingRuleId: "ldap-group-mapping" },
+    { mappingRuleId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -4801,9 +5185,7 @@ options?): CancelablePromise<ProcessDefinitionResult>;
 
 Get process definition
 
-Returns process definition as JSON.
-
--
+Returns process definition as JSON. \*
 
 #### Parameters
 
@@ -4824,6 +5206,8 @@ Returns process definition as JSON.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionResult`](../type-aliases/ProcessDefinitionResult.md)\>
 
 #### Example
+
+**Get a process definition**
 
 ```ts
 async function getProcessDefinitionExample(
@@ -4891,6 +5275,8 @@ Get statistics about process instances, grouped by process definition and tenant
 
 #### Example
 
+**Get process definition instance statistics**
+
 ```ts
 async function getProcessDefinitionInstanceStatisticsExample() {
   const camunda = createCamundaClient();
@@ -4957,6 +5343,8 @@ The process definition ID must be provided as a required field in the request bo
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionInstanceVersionStatisticsQueryResult`](../type-aliases/ProcessDefinitionInstanceVersionStatisticsQueryResult.md)\>
 
 #### Example
+
+**Get version statistics**
 
 ```ts
 async function getProcessDefinitionInstanceVersionStatisticsExample(
@@ -5030,6 +5418,8 @@ Get message subscription statistics, grouped by process definition.
 
 #### Example
 
+**Get message subscription statistics**
+
 ```ts
 async function getProcessDefinitionMessageSubscriptionStatisticsExample() {
   const camunda = createCamundaClient();
@@ -5073,9 +5463,7 @@ options?): CancelablePromise<ProcessDefinitionElementStatisticsQueryResult>;
 
 Get process definition statistics
 
-Get statistics about elements in currently running process instances by process definition key and search filter.
-
--
+Get statistics about elements in currently running process instances by process definition key and search filter. \*
 
 #### Parameters
 
@@ -5096,6 +5484,8 @@ Get statistics about elements in currently running process instances by process 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionElementStatisticsQueryResult`](../type-aliases/ProcessDefinitionElementStatisticsQueryResult.md)\>
 
 #### Example
+
+**Get process definition element statistics**
 
 ```ts
 async function getProcessDefinitionStatisticsExample(
@@ -5139,9 +5529,7 @@ options?): CancelablePromise<string>;
 
 Get process definition XML
 
-Returns process definition as XML.
-
--
+Returns process definition as XML. \*
 
 #### Parameters
 
@@ -5162,6 +5550,8 @@ Returns process definition as XML.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>
 
 #### Example
+
+**Get process definition XML**
 
 ```ts
 async function getProcessDefinitionXmlExample(
@@ -5203,9 +5593,7 @@ options?): CancelablePromise<ProcessInstanceResult>;
 
 Get process instance
 
-Get the process instance by the process instance key.
-
--
+Get the process instance by the process instance key. \*
 
 #### Parameters
 
@@ -5226,6 +5614,8 @@ Get the process instance by the process instance key.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceResult`](../type-aliases/ProcessInstanceResult.md)\>
 
 #### Example
+
+**Get a process instance**
 
 ```ts
 async function getProcessInstanceExample(
@@ -5268,9 +5658,7 @@ options?): CancelablePromise<ProcessInstanceCallHierarchyEntry[]>;
 
 Get call hierarchy
 
-Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
-
--
+Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance. \*
 
 #### Parameters
 
@@ -5291,6 +5679,8 @@ Returns the call hierarchy for a given process instance, showing its ancestry up
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceCallHierarchyEntry`](../type-aliases/ProcessInstanceCallHierarchyEntry.md)[]\>
 
 #### Example
+
+**Get process instance call hierarchy**
 
 ```ts
 async function getProcessInstanceCallHierarchyExample(
@@ -5332,9 +5722,7 @@ options?): CancelablePromise<ProcessInstanceSequenceFlowsQueryResult>;
 
 Get sequence flows
 
-Get sequence flows taken by the process instance.
-
--
+Get sequence flows taken by the process instance. \*
 
 #### Parameters
 
@@ -5355,6 +5743,8 @@ Get sequence flows taken by the process instance.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceSequenceFlowsQueryResult`](../type-aliases/ProcessInstanceSequenceFlowsQueryResult.md)\>
 
 #### Example
+
+**Get process instance sequence flows**
 
 ```ts
 async function getProcessInstanceSequenceFlowsExample(
@@ -5398,9 +5788,7 @@ options?): CancelablePromise<ProcessInstanceElementStatisticsQueryResult>;
 
 Get element instance statistics
 
-Get statistics about elements by the process instance key.
-
--
+Get statistics about elements by the process instance key. \*
 
 #### Parameters
 
@@ -5421,6 +5809,8 @@ Get statistics about elements by the process instance key.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceElementStatisticsQueryResult`](../type-aliases/ProcessInstanceElementStatisticsQueryResult.md)\>
 
 #### Example
+
+**Get process instance statistics**
 
 ```ts
 async function getProcessInstanceStatisticsExample(
@@ -5489,6 +5879,8 @@ provided as a filter in the request body.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`IncidentProcessInstanceStatisticsByDefinitionQueryResult`](../type-aliases/IncidentProcessInstanceStatisticsByDefinitionQueryResult.md)\>
 
 #### Example
+
+**Get instance statistics by definition**
 
 ```ts
 async function getProcessInstanceStatisticsByDefinitionExample() {
@@ -5561,6 +5953,8 @@ grouped by incident error hash code.
 
 #### Example
 
+**Get instance statistics by error**
+
 ```ts
 async function getProcessInstanceStatisticsByErrorExample() {
   const camunda = createCamundaClient();
@@ -5595,14 +5989,19 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 ### getResource()
 
 ```ts
-getResource(input, options?): CancelablePromise<ResourceResult>;
+getResource(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ResourceResult>;
 ```
 
 Get resource
 
 Returns a deployed resource.
 :::info
-Currently, this endpoint only supports RPA resources.
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective APIs.
 :::
 
 -
@@ -5612,6 +6011,10 @@ Currently, this endpoint only supports RPA resources.
 ##### input
 
 [`getResourceInput`](../type-aliases/getResourceInput.md)
+
+##### consistencyManagement
+
+[`getResourceConsistency`](../type-aliases/getResourceConsistency.md)
 
 ##### options?
 
@@ -5623,13 +6026,18 @@ Currently, this endpoint only supports RPA resources.
 
 #### Example
 
+**Get a resource**
+
 ```ts
 async function getResourceExample(resourceKey: ProcessDefinitionKey) {
   const camunda = createCamundaClient();
 
-  const resource = await camunda.getResource({
-    resourceKey,
-  });
+  const resource = await camunda.getResource(
+    {
+      resourceKey,
+    },
+    { consistency: { waitUpToMs: 0 } }
+  );
 
   console.log(`Resource: ${resource.resourceName} (${resource.resourceId})`);
 }
@@ -5643,22 +6051,33 @@ getResource
 
 Resource
 
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
 ---
 
-### getResourceContent()
+### ~~getResourceContent()~~
 
 ```ts
-getResourceContent(input, options?): CancelablePromise<string>;
+getResourceContent(
+   input,
+   consistencyManagement,
+   options?): CancelablePromise<{
+[key: string]: unknown;
+}>;
 ```
 
-Get resource content
+Get RPA resource content (deprecated)
 
-Returns the content of a deployed resource.
+**Deprecated** — use `/resources/{resourceKey}/content/binary` instead, which supports all
+resource types and returns content as binary (octet-stream).
+
+Returns the content of a deployed RPA resource as JSON.
 :::info
-Currently, this endpoint only supports RPA resources.
+This endpoint only supports RPA resources. For generic resource content in binary format,
+use the `/resources/{resourceKey}/content/binary` endpoint.
 :::
-
--
 
 #### Parameters
 
@@ -5666,23 +6085,38 @@ Currently, this endpoint only supports RPA resources.
 
 [`getResourceContentInput`](../type-aliases/getResourceContentInput.md)
 
+##### consistencyManagement
+
+[`getResourceContentConsistency`](../type-aliases/getResourceContentConsistency.md)
+
 ##### options?
 
 [`OperationOptions`](../interfaces/OperationOptions.md)
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`string`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+\[`key`: `string`\]: `unknown`;
+\}\>
+
+#### Deprecated
+
+-
 
 #### Example
+
+**Get resource content**
 
 ```ts
 async function getResourceContentExample(resourceKey: ProcessDefinitionKey) {
   const camunda = createCamundaClient();
 
-  const content = await camunda.getResourceContent({
-    resourceKey,
-  });
+  const content = await camunda.getResourceContent(
+    {
+      resourceKey,
+    },
+    { consistency: { waitUpToMs: 0 } }
+  );
 
   console.log(`Content retrieved (type: ${typeof content})`);
 }
@@ -5695,6 +6129,83 @@ getResourceContent
 #### Tags
 
 Resource
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### getResourceContentBinary()
+
+```ts
+getResourceContentBinary(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<Blob>;
+```
+
+Get resource content as binary
+
+Returns the content of a deployed resource in binary format (octet-stream).
+:::info
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective APIs.
+:::
+
+-
+
+#### Parameters
+
+##### input
+
+[`getResourceContentBinaryInput`](../type-aliases/getResourceContentBinaryInput.md)
+
+##### consistencyManagement
+
+[`getResourceContentBinaryConsistency`](../type-aliases/getResourceContentBinaryConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`Blob`\>
+
+#### Example
+
+**Get resource content as binary**
+
+```ts
+async function getResourceContentBinaryExample(
+  resourceKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const content = await camunda.getResourceContentBinary(
+    {
+      resourceKey,
+    },
+    { consistency: { waitUpToMs: 0 } }
+  );
+
+  console.log(`Binary content retrieved (type: ${typeof content})`);
+}
+```
+
+#### Operation Id
+
+getResourceContentBinary
+
+#### Tags
+
+Resource
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
 
 ---
 
@@ -5709,9 +6220,7 @@ options?): CancelablePromise<RoleResult>;
 
 Get role
 
-Get a role by its ID.
-
--
+Get a role by its ID. \*
 
 #### Parameters
 
@@ -5733,12 +6242,14 @@ Get a role by its ID.
 
 #### Example
 
+**Get a role**
+
 ```ts
-async function getRoleExample() {
+async function getRoleExample(roleId: RoleId) {
   const camunda = createCamundaClient();
 
   const role = await camunda.getRole(
-    { roleId: "process-admin" },
+    { roleId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -5796,6 +6307,8 @@ Note that this endpoint will only return linked forms. This endpoint does not su
 
 #### Example
 
+**Get start process form**
+
 ```ts
 async function getStartProcessFormExample(
   processDefinitionKey: ProcessDefinitionKey
@@ -5835,9 +6348,7 @@ getStatus(options?): CancelablePromise<void>;
 
 Get cluster status
 
-Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
-
--
+Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader. \*
 
 #### Parameters
 
@@ -5850,6 +6361,8 @@ Checks the health status of the cluster by verifying if there's at least one par
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Check cluster status**
 
 ```ts
 async function getStatusExample() {
@@ -5899,6 +6412,8 @@ in future releases.
 
 #### Example
 
+**Get system configuration**
+
 ```ts
 async function getSystemConfigurationExample() {
   const camunda = createCamundaClient();
@@ -5930,9 +6445,7 @@ options?): CancelablePromise<TenantResult>;
 
 Get tenant
 
-Retrieves a single tenant by tenant ID.
-
--
+Retrieves a single tenant by tenant ID. \*
 
 #### Parameters
 
@@ -5953,6 +6466,8 @@ Retrieves a single tenant by tenant ID.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantResult`](../type-aliases/TenantResult.md)\>
 
 #### Example
+
+**Get a tenant**
 
 ```ts
 async function getTenantExample(tenantId: TenantId) {
@@ -5992,9 +6507,7 @@ options?): CancelablePromise<ClusterVariableResult>;
 
 Get a tenant-scoped cluster variable
 
-Get a tenant-scoped cluster variable.
-
--
+Get a tenant-scoped cluster variable. \*
 
 #### Parameters
 
@@ -6016,14 +6529,19 @@ Get a tenant-scoped cluster variable.
 
 #### Example
 
+**Get a tenant cluster variable**
+
 ```ts
-async function getTenantClusterVariableExample(tenantId: TenantId) {
+async function getTenantClusterVariableExample(
+  tenantId: TenantId,
+  name: ClusterVariableName
+) {
   const camunda = createCamundaClient();
 
   const variable = await camunda.getTenantClusterVariable(
     {
       tenantId,
-      name: "config",
+      name,
     },
     { consistency: { waitUpToMs: 5000 } }
   );
@@ -6054,9 +6572,7 @@ getTopology(options?): CancelablePromise<TopologyResponse>;
 
 Get cluster topology
 
-Obtains the current topology of the cluster the gateway is part of.
-
--
+Obtains the current topology of the cluster the gateway is part of. \*
 
 #### Parameters
 
@@ -6069,6 +6585,8 @@ Obtains the current topology of the cluster the gateway is part of.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TopologyResponse`](../type-aliases/TopologyResponse.md)\>
 
 #### Example
+
+**Get cluster topology**
 
 ```ts
 async function getTopologyExample() {
@@ -6105,9 +6623,7 @@ options?): CancelablePromise<UsageMetricsResponse>;
 
 Get usage metrics
 
-Retrieve the usage metrics based on given criteria.
-
--
+Retrieve the usage metrics based on given criteria. \*
 
 #### Parameters
 
@@ -6128,6 +6644,8 @@ Retrieve the usage metrics based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UsageMetricsResponse`](../type-aliases/UsageMetricsResponse.md)\>
 
 #### Example
+
+**Get usage metrics**
 
 ```ts
 async function getUsageMetricsExample() {
@@ -6165,18 +6683,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 getUser(
    input,
    consistencyManagement,
-   options?): CancelablePromise<{
-  email: string | null;
-  name: string | null;
-  username: Username;
-}>;
+options?): CancelablePromise<UserResult>;
 ```
 
 Get user
 
-Get a user by its username.
-
--
+Get a user by its username. \*
 
 #### Parameters
 
@@ -6194,13 +6706,11 @@ Get a user by its username.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`email`: `string` \| `null`;
-`name`: `string` \| `null`;
-`username`: [`Username`](../type-aliases/Username.md);
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserResult`](../type-aliases/UserResult.md)\>
 
 #### Example
+
+**Get a user**
 
 ```ts
 async function getUserExample(username: Username) {
@@ -6240,9 +6750,7 @@ options?): CancelablePromise<UserTaskResult>;
 
 Get user task
 
-Get the user task by the user task key.
-
--
+Get the user task by the user task key. \*
 
 #### Parameters
 
@@ -6263,6 +6771,8 @@ Get the user task by the user task key.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserTaskResult`](../type-aliases/UserTaskResult.md)\>
 
 #### Example
+
+**Get a user task**
 
 ```ts
 async function getUserTaskExample(userTaskKey: UserTaskKey) {
@@ -6327,6 +6837,8 @@ Note that this endpoint will only return linked forms. This endpoint does not su
 
 #### Example
 
+**Get a user task form**
+
 ```ts
 async function getUserTaskFormExample(userTaskKey: UserTaskKey) {
   const camunda = createCamundaClient();
@@ -6371,9 +6883,7 @@ Get a variable by its key.
 
 This endpoint returns both process-level and local (element-scoped) variables.
 The variable's scopeKey indicates whether it's a process-level variable or scoped to a
-specific element instance.
-
--
+specific element instance. \*
 
 #### Parameters
 
@@ -6394,6 +6904,8 @@ specific element instance.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`VariableResult`](../type-aliases/VariableResult.md)\>
 
 #### Example
+
+**Get a variable**
 
 ```ts
 async function getVariableExample(variableKey: VariableKey) {
@@ -6490,6 +7002,8 @@ latest process improvements.
 
 #### Example
 
+**Migrate a process instance**
+
 ```ts
 async function migrateProcessInstanceExample(
   processInstanceKey: ProcessInstanceKey,
@@ -6552,6 +7066,8 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
 
 #### Example
+
+**Migrate process instances in batch**
 
 ```ts
 async function migrateProcessInstancesBatchOperationExample(
@@ -6624,6 +7140,8 @@ For example, because an external system is not available or doesn't respond as e
 
 #### Example
 
+**Modify a process instance**
+
 ```ts
 async function modifyProcessInstanceExample(
   processInstanceKey: ProcessInstanceKey,
@@ -6682,6 +7200,8 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
 
 #### Example
+
+**Modify process instances in batch**
 
 ```ts
 async function modifyProcessInstancesBatchOperationExample(
@@ -6770,6 +7290,8 @@ in future releases.
 
 #### Example
 
+**Pin the cluster clock**
+
 ```ts
 async function pinClockExample() {
   const camunda = createCamundaClient();
@@ -6823,6 +7345,8 @@ Use the message correlation endpoint for such use cases.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`MessagePublicationResult`](../type-aliases/MessagePublicationResult.md)\>
 
 #### Example
+
+**Publish a message**
 
 ```ts
 async function publishMessageExample() {
@@ -6878,6 +7402,8 @@ in future releases.
 
 #### Example
 
+**Reset the cluster clock**
+
 ```ts
 async function resetClockExample() {
   const camunda = createCamundaClient();
@@ -6926,6 +7452,8 @@ to reset the job's retries, followed by this call.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Resolve an incident**
 
 ```ts
 async function resolveIncidentExample(incidentKey: IncidentKey) {
@@ -6976,6 +7504,8 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
 
 #### Example
 
+**Resolve incidents in batch**
+
 ```ts
 async function resolveIncidentsBatchOperationExample(
   processDefinitionKey: ProcessDefinitionKey
@@ -7010,9 +7540,7 @@ resolveProcessInstanceIncidents(input, options?): CancelablePromise<BatchOperati
 
 Resolve related incidents
 
-Creates a batch operation to resolve multiple incidents of a process instance.
-
--
+Creates a batch operation to resolve multiple incidents of a process instance. \*
 
 #### Parameters
 
@@ -7029,6 +7557,8 @@ Creates a batch operation to resolve multiple incidents of a process instance.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
 
 #### Example
+
+**Resolve process instance incidents**
 
 ```ts
 async function resolveProcessInstanceIncidentsExample(
@@ -7085,6 +7615,8 @@ This is done asynchronously, the progress can be tracked using the batch operati
 
 #### Example
 
+**Resume a batch operation**
+
 ```ts
 async function resumeBatchOperationExample(
   batchOperationKey: BatchOperationKey
@@ -7105,6 +7637,150 @@ Batch operation
 
 ---
 
+### searchAgentInstanceHistory()
+
+```ts
+searchAgentInstanceHistory(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AgentInstanceHistorySearchQueryResult>;
+```
+
+Search agent instance history
+
+Searches the conversation history of an agent instance. Committed items
+are returned by default.
+
+-
+
+#### Parameters
+
+##### input
+
+[`searchAgentInstanceHistoryInput`](../type-aliases/searchAgentInstanceHistoryInput.md)
+
+##### consistencyManagement
+
+[`searchAgentInstanceHistoryConsistency`](../type-aliases/searchAgentInstanceHistoryConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentInstanceHistorySearchQueryResult`](../type-aliases/AgentInstanceHistorySearchQueryResult.md)\>
+
+#### Example
+
+**Search agent instance history**
+
+```ts
+async function searchAgentInstanceHistoryExample(
+  agentInstanceKey: AgentInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchAgentInstanceHistory(
+    {
+      agentInstanceKey,
+      filter: { role: { $eq: "ASSISTANT" } },
+      sort: [{ field: "producedAt", order: "ASC" }],
+      page: { limit: 20 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const item of result.items ?? []) {
+    console.log(`${item.historyItemKey} (${item.role})`);
+  }
+  console.log(`Total: ${result.page.totalItems}`);
+}
+```
+
+#### Operation Id
+
+searchAgentInstanceHistory
+
+#### Tags
+
+Agent instance
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### searchAgentInstances()
+
+```ts
+searchAgentInstances(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AgentInstanceSearchQueryResult>;
+```
+
+Search agent instances
+
+Search for agent instances based on given criteria. \*
+
+#### Parameters
+
+##### input
+
+[`AgentInstanceSearchQuery`](../type-aliases/AgentInstanceSearchQuery.md)
+
+##### consistencyManagement
+
+[`searchAgentInstancesConsistency`](../type-aliases/searchAgentInstancesConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentInstanceSearchQueryResult`](../type-aliases/AgentInstanceSearchQueryResult.md)\>
+
+#### Example
+
+**Search agent instances**
+
+```ts
+async function searchAgentInstancesExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchAgentInstances(
+    {
+      filter: { status: { $eq: "IDLE" } },
+      sort: [{ field: "creationDate", order: "DESC" }],
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const instance of result.items ?? []) {
+    console.log(`${instance.agentInstanceKey}: ${instance.status}`);
+  }
+  console.log(`Total: ${result.page.totalItems}`);
+}
+```
+
+#### Operation Id
+
+searchAgentInstances
+
+#### Tags
+
+Agent instance
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### searchAuditLogs()
 
 ```ts
@@ -7116,9 +7792,7 @@ options?): CancelablePromise<AuditLogSearchQueryResult>;
 
 Search audit logs
 
-Search for audit logs based on given criteria.
-
--
+Search for audit logs based on given criteria. \*
 
 #### Parameters
 
@@ -7139,6 +7813,8 @@ Search for audit logs based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuditLogSearchQueryResult`](../type-aliases/AuditLogSearchQueryResult.md)\>
 
 #### Example
+
+**Search audit logs**
 
 ```ts
 async function searchAuditLogsExample() {
@@ -7182,9 +7858,7 @@ options?): CancelablePromise<AuthorizationSearchResult>;
 
 Search authorizations
 
-Search for authorizations based on given criteria.
-
--
+Search for authorizations based on given criteria. \*
 
 #### Parameters
 
@@ -7205,6 +7879,8 @@ Search for authorizations based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuthorizationSearchResult`](../type-aliases/AuthorizationSearchResult.md)\>
 
 #### Example
+
+**Search authorizations**
 
 ```ts
 async function searchAuthorizationsExample() {
@@ -7251,9 +7927,7 @@ options?): CancelablePromise<BatchOperationItemSearchQueryResult>;
 
 Search batch operation items
 
-Search for batch operation items based on given criteria.
-
--
+Search for batch operation items based on given criteria. \*
 
 #### Parameters
 
@@ -7274,6 +7948,8 @@ Search for batch operation items based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationItemSearchQueryResult`](../type-aliases/BatchOperationItemSearchQueryResult.md)\>
 
 #### Example
+
+**Search batch operation items**
 
 ```ts
 async function searchBatchOperationItemsExample() {
@@ -7317,9 +7993,7 @@ options?): CancelablePromise<BatchOperationSearchQueryResult>;
 
 Search batch operations
 
-Search for batch operations based on given criteria.
-
--
+Search for batch operations based on given criteria. \*
 
 #### Parameters
 
@@ -7340,6 +8014,8 @@ Search for batch operations based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationSearchQueryResult`](../type-aliases/BatchOperationSearchQueryResult.md)\>
 
 #### Example
+
+**Search batch operations**
 
 ```ts
 async function searchBatchOperationsExample() {
@@ -7380,14 +8056,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchClientsForGroup(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<GroupClientSearchResult>;
 ```
 
 Search group clients
 
-Search clients assigned to a group.
-
--
+Search clients assigned to a group. \*
 
 #### Parameters
 
@@ -7405,16 +8079,18 @@ Search clients assigned to a group.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GroupClientSearchResult`](../type-aliases/GroupClientSearchResult.md)\>
 
 #### Example
 
+**Search clients in a group**
+
 ```ts
-async function searchClientsForGroupExample() {
+async function searchClientsForGroupExample(groupId: GroupId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchClientsForGroup(
-    { groupId: "engineering-team" },
+    { groupId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -7444,14 +8120,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchClientsForRole(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<RoleClientSearchResult>;
 ```
 
 Search role clients
 
-Search clients with assigned role.
-
--
+Search clients with assigned role. \*
 
 #### Parameters
 
@@ -7469,16 +8143,18 @@ Search clients with assigned role.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RoleClientSearchResult`](../type-aliases/RoleClientSearchResult.md)\>
 
 #### Example
 
+**Search clients for a role**
+
 ```ts
-async function searchClientsForRoleExample() {
+async function searchClientsForRoleExample(roleId: RoleId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchClientsForRole(
-    { roleId: "process-admin" },
+    { roleId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -7508,14 +8184,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchClientsForTenant(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<TenantClientSearchResult>;
 ```
 
 Search clients for tenant
 
-Retrieves a filtered and sorted list of clients for a specified tenant.
-
--
+Retrieves a filtered and sorted list of clients for a specified tenant. \*
 
 #### Parameters
 
@@ -7533,9 +8207,11 @@ Retrieves a filtered and sorted list of clients for a specified tenant.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantClientSearchResult`](../type-aliases/TenantClientSearchResult.md)\>
 
 #### Example
+
+**Search clients for a tenant**
 
 ```ts
 async function searchClientsForTenantExample(tenantId: TenantId) {
@@ -7575,9 +8251,7 @@ searchClusterVariables(
 options?): CancelablePromise<ClusterVariableSearchQueryResult>;
 ```
 
-Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.
-
--
+Search for cluster variables based on given criteria. By default, long variable values in the response are truncated. \*
 
 #### Parameters
 
@@ -7598,6 +8272,8 @@ Search for cluster variables based on given criteria. By default, long variable 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterVariableSearchQueryResult`](../type-aliases/ClusterVariableSearchQueryResult.md)\>
 
 #### Example
+
+**Search cluster variables**
 
 ```ts
 async function searchClusterVariablesExample() {
@@ -7641,9 +8317,7 @@ options?): CancelablePromise<CorrelatedMessageSubscriptionSearchQueryResult>;
 
 Search correlated message subscriptions
 
-Search correlated message subscriptions based on given criteria.
-
--
+Search correlated message subscriptions based on given criteria. \*
 
 #### Parameters
 
@@ -7664,6 +8338,8 @@ Search correlated message subscriptions based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`CorrelatedMessageSubscriptionSearchQueryResult`](../type-aliases/CorrelatedMessageSubscriptionSearchQueryResult.md)\>
 
 #### Example
+
+**Search correlated message subscriptions**
 
 ```ts
 async function searchCorrelatedMessageSubscriptionsExample() {
@@ -7707,9 +8383,7 @@ options?): CancelablePromise<DecisionDefinitionSearchQueryResult>;
 
 Search decision definitions
 
-Search for decision definitions based on given criteria.
-
--
+Search for decision definitions based on given criteria. \*
 
 #### Parameters
 
@@ -7730,6 +8404,8 @@ Search for decision definitions based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionDefinitionSearchQueryResult`](../type-aliases/DecisionDefinitionSearchQueryResult.md)\>
 
 #### Example
+
+**Search decision definitions**
 
 ```ts
 async function searchDecisionDefinitionsExample(
@@ -7775,9 +8451,7 @@ options?): CancelablePromise<DecisionInstanceSearchQueryResult>;
 
 Search decision instances
 
-Search for decision instances based on given criteria.
-
--
+Search for decision instances based on given criteria. \*
 
 #### Parameters
 
@@ -7798,6 +8472,8 @@ Search for decision instances based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionInstanceSearchQueryResult`](../type-aliases/DecisionInstanceSearchQueryResult.md)\>
 
 #### Example
+
+**Search decision instances**
 
 ```ts
 async function searchDecisionInstancesExample() {
@@ -7843,9 +8519,7 @@ options?): CancelablePromise<DecisionRequirementsSearchQueryResult>;
 
 Search decision requirements
 
-Search for decision requirements based on given criteria.
-
--
+Search for decision requirements based on given criteria. \*
 
 #### Parameters
 
@@ -7866,6 +8540,8 @@ Search for decision requirements based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`DecisionRequirementsSearchQueryResult`](../type-aliases/DecisionRequirementsSearchQueryResult.md)\>
 
 #### Example
+
+**Search decision requirements**
 
 ```ts
 async function searchDecisionRequirementsExample() {
@@ -7941,6 +8617,8 @@ to the root element itself.
 
 #### Example
 
+**Search element instance incidents**
+
 ```ts
 async function searchElementInstanceIncidentsExample(
   elementInstanceKey: ElementInstanceKey
@@ -7983,9 +8661,7 @@ options?): CancelablePromise<ElementInstanceSearchQueryResult>;
 
 Search element instances
 
-Search for element instances based on given criteria.
-
--
+Search for element instances based on given criteria. \*
 
 #### Parameters
 
@@ -8006,6 +8682,8 @@ Search for element instances based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ElementInstanceSearchQueryResult`](../type-aliases/ElementInstanceSearchQueryResult.md)\>
 
 #### Example
+
+**Search element instances**
 
 ```ts
 async function searchElementInstancesExample(
@@ -8043,6 +8721,88 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### searchElementInstanceWaitStates()
+
+```ts
+searchElementInstanceWaitStates(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ElementInstanceWaitStateQueryResult>;
+```
+
+Search element instance wait states
+
+Returns the wait states for element instances matching the given filter.
+
+-
+
+#### Parameters
+
+##### input
+
+[`ElementInstanceWaitStateQuery`](../type-aliases/ElementInstanceWaitStateQuery.md)
+
+##### consistencyManagement
+
+[`searchElementInstanceWaitStatesConsistency`](../type-aliases/searchElementInstanceWaitStatesConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ElementInstanceWaitStateQueryResult`](../type-aliases/ElementInstanceWaitStateQueryResult.md)\>
+
+#### Example
+
+**Search element instance wait states**
+
+```ts
+async function searchElementInstanceWaitStatesExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchElementInstanceWaitStates(
+    {
+      filter: {
+        processInstanceKey,
+      },
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const waitState of result.items ?? []) {
+    const { details } = waitState;
+    let description: string;
+    if (details.waitStateType === "JOB") {
+      description = `waiting on job '${details.jobType}'`;
+    } else if (details.waitStateType === "MESSAGE") {
+      description = `waiting for message '${details.messageName}'`;
+    } else {
+      description = `waiting (${details.waitStateType})`;
+    }
+    console.log(`${waitState.elementId}: ${description}`);
+  }
+}
+```
+
+#### Operation Id
+
+searchElementInstanceWaitStates
+
+#### Tags
+
+Element instance
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### searchGlobalTaskListeners()
 
 ```ts
@@ -8054,9 +8814,7 @@ options?): CancelablePromise<GlobalTaskListenerSearchQueryResult>;
 
 Search global user task listeners
 
-Search for global user task listeners based on given criteria.
-
--
+Search for global user task listeners based on given criteria. \*
 
 #### Parameters
 
@@ -8077,6 +8835,8 @@ Search for global user task listeners based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GlobalTaskListenerSearchQueryResult`](../type-aliases/GlobalTaskListenerSearchQueryResult.md)\>
 
 #### Example
+
+**Search global task listeners**
 
 ```ts
 async function searchGlobalTaskListenersExample() {
@@ -8120,9 +8880,7 @@ options?): CancelablePromise<TenantGroupSearchResult>;
 
 Search groups for tenant
 
-Retrieves a filtered and sorted list of groups for a specified tenant.
-
--
+Retrieves a filtered and sorted list of groups for a specified tenant. \*
 
 #### Parameters
 
@@ -8143,6 +8901,8 @@ Retrieves a filtered and sorted list of groups for a specified tenant.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantGroupSearchResult`](../type-aliases/TenantGroupSearchResult.md)\>
 
 #### Example
+
+**Search groups for a tenant**
 
 ```ts
 async function searchGroupIdsForTenantExample(tenantId: TenantId) {
@@ -8184,9 +8944,7 @@ options?): CancelablePromise<GroupSearchQueryResult>;
 
 Search groups
 
-Search for groups based on given criteria.
-
--
+Search for groups based on given criteria. \*
 
 #### Parameters
 
@@ -8207,6 +8965,8 @@ Search for groups based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GroupSearchQueryResult`](../type-aliases/GroupSearchQueryResult.md)\>
 
 #### Example
+
+**Search groups**
 
 ```ts
 async function searchGroupsExample() {
@@ -8250,9 +9010,7 @@ options?): CancelablePromise<RoleGroupSearchResult>;
 
 Search role groups
 
-Search groups with assigned role.
-
--
+Search groups with assigned role. \*
 
 #### Parameters
 
@@ -8274,12 +9032,14 @@ Search groups with assigned role.
 
 #### Example
 
+**Search groups for a role**
+
 ```ts
-async function searchGroupsForRoleExample() {
+async function searchGroupsForRoleExample(roleId: RoleId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchGroupsForRole(
-    { roleId: "process-admin" },
+    { roleId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -8338,6 +9098,8 @@ Search for incidents based on given criteria.
 
 #### Example
 
+**Search incidents**
+
 ```ts
 async function searchIncidentsExample() {
   const camunda = createCamundaClient();
@@ -8385,9 +9147,7 @@ options?): CancelablePromise<JobSearchQueryResult>;
 
 Search jobs
 
-Search for jobs based on given criteria.
-
--
+Search for jobs based on given criteria. \*
 
 #### Parameters
 
@@ -8408,6 +9168,8 @@ Search for jobs based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`JobSearchQueryResult`](../type-aliases/JobSearchQueryResult.md)\>
 
 #### Example
+
+**Search jobs**
 
 ```ts
 async function searchJobsExample() {
@@ -8447,7 +9209,7 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchMappingRule(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<MappingRuleSearchQueryResult>;
 ```
 
 Search mapping rules
@@ -8472,9 +9234,11 @@ Search for mapping rules based on given criteria.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`MappingRuleSearchQueryResult`](../type-aliases/MappingRuleSearchQueryResult.md)\>
 
 #### Example
+
+**Search mapping rules**
 
 ```ts
 async function searchMappingRulesExample() {
@@ -8513,14 +9277,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchMappingRulesForGroup(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<GroupMappingRuleSearchResult>;
 ```
 
 Search group mapping rules
 
-Search mapping rules assigned to a group.
-
--
+Search mapping rules assigned to a group. \*
 
 #### Parameters
 
@@ -8538,16 +9300,18 @@ Search mapping rules assigned to a group.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GroupMappingRuleSearchResult`](../type-aliases/GroupMappingRuleSearchResult.md)\>
 
 #### Example
 
+**Search mapping rules for a group**
+
 ```ts
-async function searchMappingRulesForGroupExample() {
+async function searchMappingRulesForGroupExample(groupId: GroupId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchMappingRulesForGroup(
-    { groupId: "engineering-team" },
+    { groupId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -8577,14 +9341,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchMappingRulesForRole(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<RoleMappingRuleSearchResult>;
 ```
 
 Search role mapping rules
 
-Search mapping rules with assigned role.
-
--
+Search mapping rules with assigned role. \*
 
 #### Parameters
 
@@ -8602,16 +9364,18 @@ Search mapping rules with assigned role.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RoleMappingRuleSearchResult`](../type-aliases/RoleMappingRuleSearchResult.md)\>
 
 #### Example
 
+**Search mapping rules for a role**
+
 ```ts
-async function searchMappingRulesForRoleExample() {
+async function searchMappingRulesForRoleExample(roleId: RoleId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchMappingRulesForRole(
-    { roleId: "process-admin" },
+    { roleId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -8641,14 +9405,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchMappingRulesForTenant(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<TenantMappingRuleSearchResult>;
 ```
 
 Search mapping rules for tenant
 
-Retrieves a filtered and sorted list of MappingRules for a specified tenant.
-
--
+Retrieves a filtered and sorted list of MappingRules for a specified tenant. \*
 
 #### Parameters
 
@@ -8666,9 +9428,11 @@ Retrieves a filtered and sorted list of MappingRules for a specified tenant.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantMappingRuleSearchResult`](../type-aliases/TenantMappingRuleSearchResult.md)\>
 
 #### Example
+
+**Search mapping rules for a tenant**
 
 ```ts
 async function searchMappingRulesForTenantExample(tenantId: TenantId) {
@@ -8712,7 +9476,20 @@ Search message subscriptions
 
 Search for message subscriptions based on given criteria.
 
--
+By default, both start and intermediate event subscriptions are returned. Use the
+`messageSubscriptionType` filter to restrict results to a single type.
+
+**Version notes:**
+
+- Start event subscriptions are only captured for deployments made with 8.10 or later.
+- The `messageSubscriptionType` field is only populated for data created
+  with Camunda 8.10 or later. For pre-8.10 data, intermediate event entries have no
+  `messageSubscriptionType` value stored. For convenience, the API returns `PROCESS_EVENT`
+  as a default for such search results, though.
+- Searching for intermediate event subscriptions **including legacy data** can be achieved
+  by filtering for `messageSubscriptionType` not matching `START_EVENT`.
+
+*
 
 #### Parameters
 
@@ -8733,6 +9510,8 @@ Search for message subscriptions based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`MessageSubscriptionSearchQueryResult`](../type-aliases/MessageSubscriptionSearchQueryResult.md)\>
 
 #### Example
+
+**Search message subscriptions**
 
 ```ts
 async function searchMessageSubscriptionsExample() {
@@ -8776,9 +9555,7 @@ options?): CancelablePromise<ProcessDefinitionSearchQueryResult>;
 
 Search process definitions
 
-Search for process definitions based on given criteria.
-
--
+Search for process definitions based on given criteria. \*
 
 #### Parameters
 
@@ -8799,6 +9576,8 @@ Search for process definitions based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionSearchQueryResult`](../type-aliases/ProcessDefinitionSearchQueryResult.md)\>
 
 #### Example
+
+**Search process definitions**
 
 ```ts
 async function searchProcessDefinitionsExample() {
@@ -8873,6 +9652,8 @@ subprocesses or called processes under the root instance while excluding inciden
 
 #### Example
 
+**Search process instance incidents**
+
 ```ts
 async function searchProcessInstanceIncidentsExample(
   processInstanceKey: ProcessInstanceKey
@@ -8917,9 +9698,7 @@ options?): CancelablePromise<ProcessInstanceSearchQueryResult>;
 
 Search process instances
 
-Search for process instances based on given criteria.
-
--
+Search for process instances based on given criteria. \*
 
 #### Parameters
 
@@ -8940,6 +9719,8 @@ Search for process instances based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceSearchQueryResult`](../type-aliases/ProcessInstanceSearchQueryResult.md)\>
 
 #### Example
+
+**Search process instances**
 
 ```ts
 async function searchProcessInstancesExample(
@@ -8977,6 +9758,77 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### searchResources()
+
+```ts
+searchResources(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ResourceSearchQueryResult>;
+```
+
+Search resources
+
+Search for deployed resources based on given criteria.
+:::info
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective search APIs.
+:::
+
+-
+
+#### Parameters
+
+##### input
+
+[`ResourceSearchQuery`](../type-aliases/ResourceSearchQuery.md)
+
+##### consistencyManagement
+
+[`searchResourcesConsistency`](../type-aliases/searchResourcesConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ResourceSearchQueryResult`](../type-aliases/ResourceSearchQueryResult.md)\>
+
+#### Example
+
+**Search resources**
+
+```ts
+async function searchResourcesExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchResources(
+    { page: { limit: 10 } },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const resource of result.items ?? []) {
+    console.log(`Resource: ${resource.resourceName}`);
+  }
+}
+```
+
+#### Operation Id
+
+searchResources
+
+#### Tags
+
+Resource
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### searchRoles()
 
 ```ts
@@ -8988,9 +9840,7 @@ options?): CancelablePromise<RoleSearchQueryResult>;
 
 Search roles
 
-Search for roles based on given criteria.
-
--
+Search for roles based on given criteria. \*
 
 #### Parameters
 
@@ -9011,6 +9861,8 @@ Search for roles based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RoleSearchQueryResult`](../type-aliases/RoleSearchQueryResult.md)\>
 
 #### Example
+
+**Search roles**
 
 ```ts
 async function searchRolesExample() {
@@ -9049,14 +9901,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchRolesForGroup(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<GroupRoleSearchResult>;
 ```
 
 Search group roles
 
-Search roles assigned to a group.
-
--
+Search roles assigned to a group. \*
 
 #### Parameters
 
@@ -9074,16 +9924,18 @@ Search roles assigned to a group.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GroupRoleSearchResult`](../type-aliases/GroupRoleSearchResult.md)\>
 
 #### Example
 
+**Search roles for a group**
+
 ```ts
-async function searchRolesForGroupExample() {
+async function searchRolesForGroupExample(groupId: GroupId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchRolesForGroup(
-    { groupId: "engineering-team" },
+    { groupId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -9113,14 +9965,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchRolesForTenant(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<TenantRoleSearchResult>;
 ```
 
 Search roles for tenant
 
-Retrieves a filtered and sorted list of roles for a specified tenant.
-
--
+Retrieves a filtered and sorted list of roles for a specified tenant. \*
 
 #### Parameters
 
@@ -9138,9 +9988,11 @@ Retrieves a filtered and sorted list of roles for a specified tenant.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantRoleSearchResult`](../type-aliases/TenantRoleSearchResult.md)\>
 
 #### Example
+
+**Search roles for a tenant**
 
 ```ts
 async function searchRolesForTenantExample(tenantId: TenantId) {
@@ -9182,9 +10034,7 @@ options?): CancelablePromise<TenantSearchQueryResult>;
 
 Search tenants
 
-Retrieves a filtered and sorted list of tenants.
-
--
+Retrieves a filtered and sorted list of tenants. \*
 
 #### Parameters
 
@@ -9205,6 +10055,8 @@ Retrieves a filtered and sorted list of tenants.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantSearchQueryResult`](../type-aliases/TenantSearchQueryResult.md)\>
 
 #### Example
+
+**Search tenants**
 
 ```ts
 async function searchTenantsExample() {
@@ -9243,14 +10095,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchUsers(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<UserSearchResult>;
 ```
 
 Search users
 
-Search for users based on given criteria.
-
--
+Search for users based on given criteria. \*
 
 #### Parameters
 
@@ -9268,9 +10118,11 @@ Search for users based on given criteria.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserSearchResult`](../type-aliases/UserSearchResult.md)\>
 
 #### Example
+
+**Search users**
 
 ```ts
 async function searchUsersExample() {
@@ -9310,14 +10162,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchUsersForGroup(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<GroupUserSearchResult>;
 ```
 
 Search group users
 
-Search users assigned to a group.
-
--
+Search users assigned to a group. \*
 
 #### Parameters
 
@@ -9335,16 +10185,18 @@ Search users assigned to a group.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GroupUserSearchResult`](../type-aliases/GroupUserSearchResult.md)\>
 
 #### Example
 
+**Search users in a group**
+
 ```ts
-async function searchUsersForGroupExample() {
+async function searchUsersForGroupExample(groupId: GroupId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchUsersForGroup(
-    { groupId: "engineering-team" },
+    { groupId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -9374,14 +10226,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchUsersForRole(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<RoleUserSearchResult>;
 ```
 
 Search role users
 
-Search users with assigned role.
-
--
+Search users with assigned role. \*
 
 #### Parameters
 
@@ -9399,16 +10249,18 @@ Search users with assigned role.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RoleUserSearchResult`](../type-aliases/RoleUserSearchResult.md)\>
 
 #### Example
 
+**Search users for a role**
+
 ```ts
-async function searchUsersForRoleExample() {
+async function searchUsersForRoleExample(roleId: RoleId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.searchUsersForRole(
-    { roleId: "process-admin" },
+    { roleId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -9438,14 +10290,12 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 searchUsersForTenant(
    input,
    consistencyManagement,
-options?): CancelablePromise<SearchQueryResponse & object>;
+options?): CancelablePromise<TenantUserSearchResult>;
 ```
 
 Search users for tenant
 
-Retrieves a filtered and sorted list of users for a specified tenant.
-
--
+Retrieves a filtered and sorted list of users for a specified tenant. \*
 
 #### Parameters
 
@@ -9463,9 +10313,11 @@ Retrieves a filtered and sorted list of users for a specified tenant.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SearchQueryResponse`](../type-aliases/SearchQueryResponse.md) & `object`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantUserSearchResult`](../type-aliases/TenantUserSearchResult.md)\>
 
 #### Example
+
+**Search users for a tenant**
 
 ```ts
 async function searchUsersForTenantExample(tenantId: TenantId) {
@@ -9507,9 +10359,7 @@ options?): CancelablePromise<AuditLogSearchQueryResult>;
 
 Search user task audit logs
 
-Search for user task audit logs based on given criteria.
-
--
+Search for user task audit logs based on given criteria. \*
 
 #### Parameters
 
@@ -9530,6 +10380,8 @@ Search for user task audit logs based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuditLogSearchQueryResult`](../type-aliases/AuditLogSearchQueryResult.md)\>
 
 #### Example
+
+**Search user task audit logs**
 
 ```ts
 async function searchUserTaskAuditLogsExample(userTaskKey: UserTaskKey) {
@@ -9600,6 +10452,8 @@ truncated.
 
 #### Example
 
+**Search user task effective variables**
+
 ```ts
 async function searchUserTaskEffectiveVariablesExample(
   userTaskKey: UserTaskKey
@@ -9642,9 +10496,7 @@ options?): CancelablePromise<UserTaskSearchQueryResult>;
 
 Search user tasks
 
-Search for user tasks based on given criteria.
-
--
+Search for user tasks based on given criteria. \*
 
 #### Parameters
 
@@ -9665,6 +10517,8 @@ Search for user tasks based on given criteria.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserTaskSearchQueryResult`](../type-aliases/UserTaskSearchQueryResult.md)\>
 
 #### Example
+
+**Search user tasks**
 
 ```ts
 async function searchUserTasksExample() {
@@ -9740,6 +10594,8 @@ are truncated.
 
 #### Example
 
+**Search user task variables**
+
 ```ts
 async function searchUserTaskVariablesExample(userTaskKey: UserTaskKey) {
   const camunda = createCamundaClient();
@@ -9788,9 +10644,7 @@ include variables from parent scopes that would be visible through the scope hie
 Variables can be process-level (scoped to the process instance) or local (scoped to specific
 BPMN elements like tasks, subprocesses, etc.).
 
-By default, long variable values in the response are truncated.
-
--
+By default, long variable values in the response are truncated. \*
 
 #### Parameters
 
@@ -9811,6 +10665,8 @@ By default, long variable values in the response are truncated.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`VariableSearchQueryResult`](../type-aliases/VariableSearchQueryResult.md)\>
 
 #### Example
+
+**Search variables**
 
 ```ts
 async function searchVariablesExample(processInstanceKey: ProcessInstanceKey) {
@@ -9843,6 +10699,107 @@ Variable
 #### Consistency
 
 eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### searchVariablesAsDto()
+
+```ts
+searchVariablesAsDto<TSchema>(schema, options): CancelablePromise<VariableMap<TSchema>>;
+```
+
+Search for process variables and bind them to a Zod schema (the DTO).
+
+The schema's keys are the exact variable names to fetch; its shape drives validation. Only
+those declared variables are queried (via a `name $in [...]` filter), so memory stays bound
+by the DTO shape rather than the total number of variables on the instance. Results are
+paged internally until every declared variable is found or the result set is exhausted.
+
+Returns a [VariableMap](VariableMap.md) offering lenient access (`has` / `get`) and a strict
+`validate()` that parses the collected values against the schema — returning a fully-typed
+object or throwing a `ZodError` when a required variable is missing or malformed.
+
+#### Type Parameters
+
+##### TSchema
+
+`TSchema` _extends_ [`AnyVariableSchema`](../type-aliases/AnyVariableSchema.md)
+
+#### Parameters
+
+##### schema
+
+`TSchema`
+
+A Zod object schema declaring the variables to fetch.
+
+##### options
+
+Query scope. `processInstanceKey` is required; `scopeKey` narrows to a single
+element-instance scope, `tenantId` filters by tenant, and `pageSize` tunes the page limit.
+`consistency` controls eventual-consistency tolerance for the underlying `searchVariables`
+calls: it defaults to `{ waitUpToMs: 0 }` (no waiting), but a non-zero `waitUpToMs` makes the
+paging calls poll until the data is consistent, avoiding intermittent missing variables /
+`ZodError` on a freshly-updated instance.
+
+###### consistency?
+
+\{
+`pollIntervalMs?`: `number`;
+`waitUpToMs`: `number`;
+\}
+
+###### consistency.pollIntervalMs?
+
+`number`
+
+###### consistency.waitUpToMs
+
+`number`
+
+###### pageSize?
+
+`number`
+
+###### processInstanceKey
+
+[`ProcessInstanceKey`](../type-aliases/ProcessInstanceKey.md)
+
+###### scopeKey?
+
+[`ScopeKey`](../type-aliases/ScopeKey.md)
+
+###### tenantId?
+
+[`TenantId`](../type-aliases/TenantId.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`VariableMap`](VariableMap.md)\<`TSchema`\>\>
+
+#### Throws
+
+when a declared variable is found at more than one
+scope and no `scopeKey` was provided to disambiguate.
+
+#### Throws
+
+when a variable's value is not valid JSON.
+
+#### Example
+
+```ts
+import { z } from "zod";
+const OrderVariables = z.object({
+  orderId: z.string(),
+  amount: z.number().optional(),
+});
+const map = await client.searchVariablesAsDto(OrderVariables, {
+  processInstanceKey,
+});
+if (map.has("amount")) console.log(map.get("amount"));
+const order = map.validate(); // { orderId: string; amount?: number }
+```
 
 ---
 
@@ -9891,6 +10848,8 @@ This is done asynchronously, the progress can be tracked using the batch operati
 
 #### Example
 
+**Suspend a batch operation**
+
 ```ts
 async function suspendBatchOperationExample(
   batchOperationKey: BatchOperationKey
@@ -9938,6 +10897,8 @@ Reports a business error (i.e. non-technical) that occurs while processing a job
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Throw a job error**
 
 ```ts
 async function throwJobErrorExample(jobKey: JobKey) {
@@ -9990,13 +10951,18 @@ The client is removed as a group member, with associated authorizations, roles, 
 
 #### Example
 
+**Unassign a client from a group**
+
 ```ts
-async function unassignClientFromGroupExample() {
+async function unassignClientFromGroupExample(
+  groupId: GroupId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignClientFromGroup({
-    groupId: "engineering-team",
-    clientId: "my-service-account",
+    groupId,
+    clientId,
   });
 }
 ```
@@ -10040,13 +11006,18 @@ The client can no longer access tenant data.
 
 #### Example
 
+**Unassign a client from a tenant**
+
 ```ts
-async function unassignClientFromTenantExample(tenantId: TenantId) {
+async function unassignClientFromTenantExample(
+  tenantId: TenantId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignClientFromTenant({
     tenantId,
-    clientId: "my-service-account",
+    clientId,
   });
 }
 ```
@@ -10090,13 +11061,18 @@ Members of the group (users, clients) will no longer have access to the tenant's
 
 #### Example
 
+**Unassign a group from a tenant**
+
 ```ts
-async function unassignGroupFromTenantExample(tenantId: TenantId) {
+async function unassignGroupFromTenantExample(
+  tenantId: TenantId,
+  groupId: GroupId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignGroupFromTenant({
     tenantId,
-    groupId: "engineering-team",
+    groupId,
   });
 }
 ```
@@ -10119,9 +11095,7 @@ unassignMappingRuleFromGroup(input, options?): CancelablePromise<void>;
 
 Unassign a mapping rule from a group
 
-Unassigns a mapping rule from a group.
-
--
+Unassigns a mapping rule from a group. \*
 
 #### Parameters
 
@@ -10139,13 +11113,18 @@ Unassigns a mapping rule from a group.
 
 #### Example
 
+**Unassign a mapping rule from a group**
+
 ```ts
-async function unassignMappingRuleFromGroupExample() {
+async function unassignMappingRuleFromGroupExample(
+  groupId: GroupId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignMappingRuleFromGroup({
-    groupId: "engineering-team",
-    mappingRuleId: "rule-123",
+    groupId,
+    mappingRuleId,
   });
 }
 ```
@@ -10168,9 +11147,7 @@ unassignMappingRuleFromTenant(input, options?): CancelablePromise<void>;
 
 Unassign a mapping rule from a tenant
 
-Unassigns a single mapping rule from a specified tenant without deleting the rule.
-
--
+Unassigns a single mapping rule from a specified tenant without deleting the rule. \*
 
 #### Parameters
 
@@ -10188,13 +11165,18 @@ Unassigns a single mapping rule from a specified tenant without deleting the rul
 
 #### Example
 
+**Unassign a mapping rule from a tenant**
+
 ```ts
-async function unassignMappingRuleFromTenantExample(tenantId: TenantId) {
+async function unassignMappingRuleFromTenantExample(
+  tenantId: TenantId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignMappingRuleFromTenant({
     tenantId,
-    mappingRuleId: "rule-123",
+    mappingRuleId,
   });
 }
 ```
@@ -10217,9 +11199,7 @@ unassignRoleFromClient(input, options?): CancelablePromise<void>;
 
 Unassign a role from a client
 
-Unassigns the specified role from the client. The client will no longer inherit the authorizations associated with this role.
-
--
+Unassigns the specified role from the client. The client will no longer inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -10237,13 +11217,18 @@ Unassigns the specified role from the client. The client will no longer inherit 
 
 #### Example
 
+**Unassign a role from a client**
+
 ```ts
-async function unassignRoleFromClientExample() {
+async function unassignRoleFromClientExample(
+  roleId: RoleId,
+  clientId: ClientId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromClient({
-    roleId: "process-admin",
-    clientId: "my-service-account",
+    roleId,
+    clientId,
   });
 }
 ```
@@ -10266,9 +11251,7 @@ unassignRoleFromGroup(input, options?): CancelablePromise<void>;
 
 Unassign a role from a group
 
-Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role.
-
--
+Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -10286,13 +11269,15 @@ Unassigns the specified role from the group. All group members (user or client) 
 
 #### Example
 
+**Unassign a role from a group**
+
 ```ts
-async function unassignRoleFromGroupExample() {
+async function unassignRoleFromGroupExample(roleId: RoleId, groupId: GroupId) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromGroup({
-    roleId: "process-admin",
-    groupId: "engineering-team",
+    roleId,
+    groupId,
   });
 }
 ```
@@ -10315,9 +11300,7 @@ unassignRoleFromMappingRule(input, options?): CancelablePromise<void>;
 
 Unassign a role from a mapping rule
 
-Unassigns a role from a mapping rule.
-
--
+Unassigns a role from a mapping rule. \*
 
 #### Parameters
 
@@ -10335,13 +11318,18 @@ Unassigns a role from a mapping rule.
 
 #### Example
 
+**Unassign a role from a mapping rule**
+
 ```ts
-async function unassignRoleFromMappingRuleExample() {
+async function unassignRoleFromMappingRuleExample(
+  roleId: RoleId,
+  mappingRuleId: MappingRuleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromMappingRule({
-    roleId: "process-admin",
-    mappingRuleId: "rule-123",
+    roleId,
+    mappingRuleId,
   });
 }
 ```
@@ -10386,13 +11374,18 @@ tenant's data - unless they are assigned directly to the tenant.
 
 #### Example
 
+**Unassign a role from a tenant**
+
 ```ts
-async function unassignRoleFromTenantExample(tenantId: TenantId) {
+async function unassignRoleFromTenantExample(
+  tenantId: TenantId,
+  roleId: RoleId
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromTenant({
     tenantId,
-    roleId: "process-admin",
+    roleId,
   });
 }
 ```
@@ -10415,9 +11408,7 @@ unassignRoleFromUser(input, options?): CancelablePromise<void>;
 
 Unassign a role from a user
 
-Unassigns a role from a user. The user will no longer inherit the authorizations associated with this role.
-
--
+Unassigns a role from a user. The user will no longer inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -10435,12 +11426,14 @@ Unassigns a role from a user. The user will no longer inherit the authorizations
 
 #### Example
 
+**Unassign a role from a user**
+
 ```ts
-async function unassignRoleFromUserExample(username: Username) {
+async function unassignRoleFromUserExample(roleId: RoleId, username: Username) {
   const camunda = createCamundaClient();
 
   await camunda.unassignRoleFromUser({
-    roleId: "process-admin",
+    roleId,
     username,
   });
 }
@@ -10485,12 +11478,17 @@ The user is removed as a group member, with associated authorizations, roles, an
 
 #### Example
 
+**Unassign a user from a group**
+
 ```ts
-async function unassignUserFromGroupExample(username: Username) {
+async function unassignUserFromGroupExample(
+  groupId: GroupId,
+  username: Username
+) {
   const camunda = createCamundaClient();
 
   await camunda.unassignUserFromGroup({
-    groupId: "engineering-team",
+    groupId,
     username,
   });
 }
@@ -10534,6 +11532,8 @@ The user can no longer access tenant data.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Unassign a user from a tenant**
 
 ```ts
 async function unassignUserFromTenantExample(
@@ -10587,6 +11587,8 @@ Removes the assignee of a task with the given key. Unassignment waits for blocki
 
 #### Example
 
+**Unassign a user task**
+
 ```ts
 async function unassignUserTaskExample(userTaskKey: UserTaskKey) {
   const camunda = createCamundaClient();
@@ -10605,6 +11607,70 @@ User task
 
 ---
 
+### updateAgentInstance()
+
+```ts
+updateAgentInstance(input, options?): CancelablePromise<void>;
+```
+
+Update agent instance
+
+Updates the mutable fields of an agent instance: status, metric counters, and
+tools. Metric values are treated as deltas and applied immediately to the
+aggregate counters. Tool updates replace the existing tool list.
+
+-
+
+#### Parameters
+
+##### input
+
+[`updateAgentInstanceInput`](../type-aliases/updateAgentInstanceInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Update an agent instance**
+
+```ts
+async function updateAgentInstanceExample(
+  agentInstanceKey: AgentInstanceKey,
+  elementInstanceKey: ElementInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.updateAgentInstance({
+    agentInstanceKey,
+    elementInstanceKey,
+    status: "THINKING",
+    metrics: {
+      inputTokens: 150,
+      outputTokens: 50,
+      modelCalls: 1,
+    },
+  });
+
+  console.log(`Updated agent instance: ${agentInstanceKey}`);
+}
+```
+
+#### Operation Id
+
+updateAgentInstance
+
+#### Tags
+
+Agent instance
+
+---
+
 ### updateAuthorization()
 
 ```ts
@@ -10613,9 +11679,7 @@ updateAuthorization(input, options?): CancelablePromise<void>;
 
 Update authorization
 
-Update the authorization with the given key.
-
--
+Update the authorization with the given key. \*
 
 #### Parameters
 
@@ -10632,6 +11696,8 @@ Update the authorization with the given key.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Update an authorization**
 
 ```ts
 async function updateAuthorizationExample(authorizationKey: AuthorizationKey) {
@@ -10691,12 +11757,14 @@ The variable must exist, otherwise a 404 error is returned.
 
 #### Example
 
+**Update a global cluster variable**
+
 ```ts
-async function updateGlobalClusterVariableExample() {
+async function updateGlobalClusterVariableExample(name: ClusterVariableName) {
   const camunda = createCamundaClient();
 
   await camunda.updateGlobalClusterVariable({
-    name: "feature-flags",
+    name,
     value: { darkMode: false },
   });
 }
@@ -10720,9 +11788,7 @@ updateGlobalTaskListener(input, options?): CancelablePromise<GlobalTaskListenerR
 
 Update global user task listener
 
-Updates a global user task listener.
-
--
+Updates a global user task listener. \*
 
 #### Parameters
 
@@ -10739,6 +11805,8 @@ Updates a global user task listener.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`GlobalTaskListenerResult`](../type-aliases/GlobalTaskListenerResult.md)\>
 
 #### Example
+
+**Update a global task listener**
 
 ```ts
 async function updateGlobalTaskListenerExample(id: GlobalListenerId) {
@@ -10770,9 +11838,7 @@ updateGroup(input, options?): CancelablePromise<GroupUpdateResult>;
 
 Update group
 
-Update a group with the given ID.
-
--
+Update a group with the given ID. \*
 
 #### Parameters
 
@@ -10790,12 +11856,14 @@ Update a group with the given ID.
 
 #### Example
 
+**Update a group**
+
 ```ts
-async function updateGroupExample() {
+async function updateGroupExample(groupId: GroupId) {
   const camunda = createCamundaClient();
 
   await camunda.updateGroup({
-    groupId: "engineering-team",
+    groupId,
     name: "Engineering Team",
   });
 }
@@ -10819,9 +11887,7 @@ updateJob(input, options?): CancelablePromise<void>;
 
 Update job
 
-Update a job with the given key.
-
--
+Update a job with the given key. \*
 
 #### Parameters
 
@@ -10839,6 +11905,8 @@ Update a job with the given key.
 
 #### Example
 
+**Update a job**
+
 ```ts
 async function updateJobExample(jobKey: JobKey) {
   const camunda = createCamundaClient();
@@ -10853,6 +11921,64 @@ async function updateJobExample(jobKey: JobKey) {
 #### Operation Id
 
 updateJob
+
+#### Tags
+
+Job
+
+---
+
+### updateJobsBatchOperation()
+
+```ts
+updateJobsBatchOperation(input, options?): CancelablePromise<BatchOperationCreatedResult>;
+```
+
+Update jobs (batch)
+
+Creates a batch operation to update jobs matching the given filter. At least one changeset field must be non-null. This is done asynchronously; the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+-
+
+#### Parameters
+
+##### input
+
+[`JobBatchUpdateRequest`](../type-aliases/JobBatchUpdateRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+**Update jobs in batch**
+
+```ts
+async function updateJobsBatchOperationExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.updateJobsBatchOperation({
+    filter: {
+      type: "payment-processing",
+      hasFailedWithRetriesLeft: false,
+    },
+    changeset: {
+      retries: 3,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
+
+#### Operation Id
+
+updateJobsBatchOperation
 
 #### Tags
 
@@ -10888,12 +12014,14 @@ Update a mapping rule.
 
 #### Example
 
+**Update a mapping rule**
+
 ```ts
-async function updateMappingRuleExample() {
+async function updateMappingRuleExample(mappingRuleId: MappingRuleId) {
   const camunda = createCamundaClient();
 
   await camunda.updateMappingRule({
-    mappingRuleId: "ldap-group-mapping",
+    mappingRuleId,
     name: "LDAP Group Mapping",
     claimName: "groups",
     claimValue: "engineering-team",
@@ -10919,9 +12047,7 @@ updateRole(input, options?): CancelablePromise<RoleUpdateResult>;
 
 Update role
 
-Update a role with the given ID.
-
--
+Update a role with the given ID. \*
 
 #### Parameters
 
@@ -10939,12 +12065,14 @@ Update a role with the given ID.
 
 #### Example
 
+**Update a role**
+
 ```ts
-async function updateRoleExample() {
+async function updateRoleExample(roleId: RoleId) {
   const camunda = createCamundaClient();
 
   await camunda.updateRole({
-    roleId: "process-admin",
+    roleId,
     name: "Process Administrator",
   });
 }
@@ -10968,9 +12096,7 @@ updateTenant(input, options?): CancelablePromise<TenantUpdateResult>;
 
 Update tenant
 
-Updates an existing tenant.
-
--
+Updates an existing tenant. \*
 
 #### Parameters
 
@@ -10987,6 +12113,8 @@ Updates an existing tenant.
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TenantUpdateResult`](../type-aliases/TenantUpdateResult.md)\>
 
 #### Example
+
+**Update a tenant**
 
 ```ts
 async function updateTenantExample(tenantId: TenantId) {
@@ -11038,13 +12166,18 @@ The variable must exist, otherwise a 404 error is returned.
 
 #### Example
 
+**Update a tenant cluster variable**
+
 ```ts
-async function updateTenantClusterVariableExample(tenantId: TenantId) {
+async function updateTenantClusterVariableExample(
+  tenantId: TenantId,
+  name: ClusterVariableName
+) {
   const camunda = createCamundaClient();
 
   await camunda.updateTenantClusterVariable({
     tenantId,
-    name: "config",
+    name,
     value: { region: "eu-west-1" },
   });
 }
@@ -11063,18 +12196,12 @@ Cluster Variable
 ### updateUser()
 
 ```ts
-updateUser(input, options?): CancelablePromise<{
-  email: string | null;
-  name: string | null;
-  username: Username;
-}>;
+updateUser(input, options?): CancelablePromise<UserUpdateResult>;
 ```
 
 Update user
 
-Updates a user.
-
--
+Updates a user. \*
 
 #### Parameters
 
@@ -11088,13 +12215,11 @@ Updates a user.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
-`email`: `string` \| `null`;
-`name`: `string` \| `null`;
-`username`: [`Username`](../type-aliases/Username.md);
-\}\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`UserUpdateResult`](../type-aliases/UserUpdateResult.md)\>
 
 #### Example
+
+**Update a user**
 
 ```ts
 async function updateUserExample(username: Username) {
@@ -11145,6 +12270,8 @@ Update a user task with the given key. Updates wait for blocking task listeners 
 [`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
 
 #### Example
+
+**Update a user task**
 
 ```ts
 async function updateUserTaskExample(userTaskKey: UserTaskKey) {
